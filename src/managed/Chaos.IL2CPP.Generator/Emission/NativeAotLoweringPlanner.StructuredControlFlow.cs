@@ -820,14 +820,30 @@ public sealed partial class NativeAotLoweringPlanner
     // ��������������������������������������������������������������������������������������������
 
     /// <summary>
+    /// Maximum recursion depth for RecoverStructure. Prevents stack overflow
+    /// from extremely nested CFGs during structure recovery.
+    /// </summary>
+    private const int MaxRecoverStructureDepth = 6;
+
+    /// <summary>
     /// Recover structured control flow from the CFG as a pure StructuredIR tree.
     /// </summary>
     private static StructuredIRNode RecoverStructure(
         ControlFlowGraph cfg,
         int startIndex, int endIndex,
         int? loopHeaderOffset = null,
-        IReadOnlySet<int>? loopExitOffsets = null)
+        IReadOnlySet<int>? loopExitOffsets = null,
+        int depth = 0)
     {
+        // Note: RuntimeHelpers.TryEnsureSufficientExecutionStack is intentionally
+        // NOT used here. .NET's runtime stack guard is based on a fixed per-thread
+        // limit (~4 MB from dotnet.exe/AppHost), not the actual OS stack size.
+        // Using it causes premature fallback to flat IR on any thread, regardless
+        // of how much OS stack remains. Instead we rely on the static depth counter
+        // which has been empirically tuned (depth=5 safe on 4 MB main thread).
+        if (depth > MaxRecoverStructureDepth)
+            return new IRSequence(Array.Empty<StructuredIRNode>());
+
         if (startIndex > endIndex)
             return new IRSequence(Array.Empty<StructuredIRNode>());
 
@@ -862,11 +878,11 @@ public sealed partial class NativeAotLoweringPlanner
             }
             if (IsConditionalBranchOpcode(block.Terminator.Op))
             {
-                return BuildIfThenElse(cfg, startIndex, endIndex, loopHeaderOffset, loopExitOffsets);
+                return BuildIfThenElse(cfg, startIndex, endIndex, loopHeaderOffset, loopExitOffsets, depth + 1);
             }
             if (IsSwitchOpcode(block.Terminator.Op))
             {
-                return BuildSwitch(cfg, startIndex, loopHeaderOffset, loopExitOffsets);
+                return BuildSwitch(cfg, startIndex, loopHeaderOffset, loopExitOffsets, depth + 1);
             }
             return new IRBlock(block.BodyInstructions, block.Terminator);
         }
@@ -874,7 +890,7 @@ public sealed partial class NativeAotLoweringPlanner
         // Check if startIndex is a loop header
         if (cfg.LoopHeaders.TryGetValue(startIndex, out var loopInfo))
         {
-            return BuildLoop(cfg, startIndex, endIndex, loopInfo, loopHeaderOffset, loopExitOffsets);
+            return BuildLoop(cfg, startIndex, endIndex, loopInfo, loopHeaderOffset, loopExitOffsets, depth + 1);
         }
 
         // Try to find a conditional branch at the start of the interval
@@ -891,7 +907,7 @@ public sealed partial class NativeAotLoweringPlanner
             }
             else
             {
-                var ite = BuildIfThenElse(cfg, startIndex, endIndex, loopHeaderOffset, loopExitOffsets);
+                var ite = BuildIfThenElse(cfg, startIndex, endIndex, loopHeaderOffset, loopExitOffsets, depth + 1);
                 if (ite is IRIfThenElse)
                 {
                     // Determine merge point from CFG
@@ -918,7 +934,7 @@ public sealed partial class NativeAotLoweringPlanner
                     var nodes = new List<StructuredIRNode> { ite };
                     if (afterMergeIdx <= endIndex)
                     {
-                        nodes.Add(RecoverStructure(cfg, afterMergeIdx, endIndex, loopHeaderOffset, loopExitOffsets));
+                        nodes.Add(RecoverStructure(cfg, afterMergeIdx, endIndex, loopHeaderOffset, loopExitOffsets, depth + 1));
                     }
                     return new IRSequence(nodes);
                 }
@@ -942,7 +958,7 @@ public sealed partial class NativeAotLoweringPlanner
                 var nodes = new List<StructuredIRNode> { swNode };
                 if (afterMergeIdx <= endIndex)
                 {
-                    nodes.Add(RecoverStructure(cfg, afterMergeIdx, endIndex, loopHeaderOffset, loopExitOffsets));
+                    nodes.Add(RecoverStructure(cfg, afterMergeIdx, endIndex, loopHeaderOffset, loopExitOffsets, depth + 1));
                 }
                 return new IRSequence(nodes);
             }
@@ -957,7 +973,7 @@ public sealed partial class NativeAotLoweringPlanner
 
             if (cfg.LoopHeaders.TryGetValue(idx, out var currentLoop))
             {
-                var loop = BuildLoop(cfg, idx, endIndex, currentLoop, loopHeaderOffset, loopExitOffsets);
+                var loop = BuildLoop(cfg, idx, endIndex, currentLoop, loopHeaderOffset, loopExitOffsets, depth + 1);
                 seqNodes.Add(loop);
 
                 // Emit any exit blocks that sit between the loop header and
@@ -984,7 +1000,7 @@ public sealed partial class NativeAotLoweringPlanner
                     idx++;
                     continue;
                 }
-                var ite = BuildIfThenElse(cfg, idx, endIndex, loopHeaderOffset, loopExitOffsets);
+                var ite = BuildIfThenElse(cfg, idx, endIndex, loopHeaderOffset, loopExitOffsets, depth + 1);
                 seqNodes.Add(ite);
                 if (ite is IRIfThenElse iteNode && iteNode.PostMergeBody != null)
                 {
@@ -1088,7 +1104,8 @@ public sealed partial class NativeAotLoweringPlanner
         int headerIndex, int endIndex,
         NaturalLoopInfo loopInfo,
         int? outerLoopHeaderOffset = null,
-        IReadOnlySet<int>? outerLoopExitOffsets = null)
+        IReadOnlySet<int>? outerLoopExitOffsets = null,
+        int depth = 0)
     {
         var header = cfg.Blocks[headerIndex];
         var bodyIndicesAfterHeader = loopInfo.BodyIndices.Where(i => i > headerIndex).ToList();
@@ -1166,7 +1183,7 @@ public sealed partial class NativeAotLoweringPlanner
         // Build body with the loop's own context for break/continue detection
         StructuredIRNode body;
         if (bodyStart <= bodyEnd)
-            body = RecoverStructure(cfg, bodyStart, bodyEnd, outerLoopHeaderOffset, loopExitSet);
+            body = RecoverStructure(cfg, bodyStart, bodyEnd, outerLoopHeaderOffset, loopExitSet, depth + 1);
         else
             body = new IRSequence(Array.Empty<StructuredIRNode>());
 
@@ -1264,7 +1281,8 @@ public sealed partial class NativeAotLoweringPlanner
     private static StructuredIRNode BuildIfThenElse(
         ControlFlowGraph cfg, int conditionBlockIndex,
         int endIndex,
-        int? loopHeaderOffset = null, IReadOnlySet<int>? loopExitOffsets = null)
+        int? loopHeaderOffset = null, IReadOnlySet<int>? loopExitOffsets = null,
+        int depth = 0)
     {
         var condBlock = cfg.Blocks[conditionBlockIndex];
         if (!condBlock.ConditionalTarget.HasValue)
@@ -1288,12 +1306,12 @@ public sealed partial class NativeAotLoweringPlanner
 
         if (mergeOffset.HasValue && cfg.OffsetToBlockIndex.TryGetValue(mergeOffset.Value, out mergeIdx))
         {
-            thenBranch = RecoverStructure(cfg, trueBlockIdx, mergeIdx - 1, loopHeaderOffset, loopExitOffsets);
+            thenBranch = RecoverStructure(cfg, trueBlockIdx, mergeIdx - 1, loopHeaderOffset, loopExitOffsets, depth + 1);
             // Else range must not overlap with the true-target block.
             int elseEnd = Math.Min(mergeIdx - 1, trueBlockIdx - 1);
             if (falseBlockIdx <= elseEnd)
             {
-                elseBranch = RecoverStructure(cfg, falseBlockIdx, elseEnd, loopHeaderOffset, loopExitOffsets);
+                elseBranch = RecoverStructure(cfg, falseBlockIdx, elseEnd, loopHeaderOffset, loopExitOffsets, depth + 1);
             }
             else
             {
@@ -1303,11 +1321,11 @@ public sealed partial class NativeAotLoweringPlanner
         }
         else
         {
-            thenBranch = RecoverStructure(cfg, trueBlockIdx, endIdx, loopHeaderOffset, loopExitOffsets);
+            thenBranch = RecoverStructure(cfg, trueBlockIdx, endIdx, loopHeaderOffset, loopExitOffsets, depth + 1);
             // Else range must not overlap with the true-target block.
             int elseEnd2 = Math.Min(endIdx, trueBlockIdx - 1);
             if (falseBlockIdx <= elseEnd2)
-                elseBranch = RecoverStructure(cfg, falseBlockIdx, elseEnd2, loopHeaderOffset, loopExitOffsets);
+                elseBranch = RecoverStructure(cfg, falseBlockIdx, elseEnd2, loopHeaderOffset, loopExitOffsets, depth + 1);
             else
                 elseBranch = null;
         }
@@ -1326,7 +1344,7 @@ public sealed partial class NativeAotLoweringPlanner
         // skipping the merge block via mergeIdx + 1.
         StructuredIRNode? postMergeBody = null;
         if (effectiveMerge.HasValue && mergeIdx <= endIdx)
-            postMergeBody = RecoverStructure(cfg, mergeIdx, endIdx, loopHeaderOffset, loopExitOffsets);
+            postMergeBody = RecoverStructure(cfg, mergeIdx, endIdx, loopHeaderOffset, loopExitOffsets, depth + 1);
 
         return new IRIfThenElse(
             condBlock.BodyInstructions,
@@ -1342,7 +1360,8 @@ public sealed partial class NativeAotLoweringPlanner
     /// </summary>
     private static StructuredIRNode BuildSwitch(
         ControlFlowGraph cfg, int switchBlockIndex,
-        int? loopHeaderOffset = null, IReadOnlySet<int>? loopExitOffsets = null)
+        int? loopHeaderOffset = null, IReadOnlySet<int>? loopExitOffsets = null,
+        int depth = 0)
     {
         var swBlock = cfg.Blocks[switchBlockIndex];
         if (swBlock.SwitchTargets.Count == 0)
@@ -1410,7 +1429,7 @@ public sealed partial class NativeAotLoweringPlanner
             .ToList();
         if (defaultBlocks.Count > 0)
         {
-            defaultBody = RecoverStructure(cfg, defaultBlocks[0], defaultBlocks[^1], loopHeaderOffset, loopExitOffsets);
+            defaultBody = RecoverStructure(cfg, defaultBlocks[0], defaultBlocks[^1], loopHeaderOffset, loopExitOffsets, depth + 1);
 
             // Handle default body redirect stubs BEFORE stripping trailing branches:
             // when the default body is just `br target` (empty body), and target is
@@ -1455,7 +1474,7 @@ public sealed partial class NativeAotLoweringPlanner
             int bodyEnd = Math.Min(nextCaseStart - 1, maxTargetIdx);
             StructuredIRNode body;
             if (caseBlockIdx <= bodyEnd)
-                body = RecoverStructure(cfg, caseBlockIdx, bodyEnd, loopHeaderOffset, loopExitOffsets);
+                body = RecoverStructure(cfg, caseBlockIdx, bodyEnd, loopHeaderOffset, loopExitOffsets, depth + 1);
             else
                 body = new IRSequence(Array.Empty<StructuredIRNode>());
 

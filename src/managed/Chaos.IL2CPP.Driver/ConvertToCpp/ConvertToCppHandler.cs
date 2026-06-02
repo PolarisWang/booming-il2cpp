@@ -127,7 +127,27 @@ internal static class ConvertToCppHandler
 
             Console.Write("  [2/3] Emitting C++ (NativeAot, direct)...");
             var emitter = new FullAssemblyEmitter();
-            var emitResult = emitter.Emit(result, outputRoot, config.Mode, subjectMethods);
+            NativeAotResult emitResult;
+            try
+            {
+                emitResult = emitter.Emit(result, outputRoot, config.Mode, subjectMethods);
+            }
+            catch (OutOfMemoryException oom)
+            {
+                Console.Error.WriteLine($"\n  OUT OF MEMORY during C++ emission:");
+                Console.Error.WriteLine($"    {oom.Message}");
+                return 1;
+            }
+            catch (Exception ex)
+            {
+                Console.Error.WriteLine($"\n  ERROR during C++ emission:");
+                Console.Error.WriteLine($"    Type: {ex.GetType().FullName}");
+                Console.Error.WriteLine($"    Message: {ex.Message}");
+                Console.Error.WriteLine($"    Stack:");
+                foreach (var frame in ex.StackTrace?.Split('\n') ?? [])
+                    Console.Error.WriteLine($"      {frame.Trim()}");
+                return 1;
+            }
             Console.WriteLine($" done ({emitResult.GeneratedSources.Count} files)");
 
             // Write closure artifacts for debugging/reproducibility

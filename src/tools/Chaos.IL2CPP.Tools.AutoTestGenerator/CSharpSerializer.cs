@@ -25,21 +25,56 @@ public sealed class CSharpSerializer
     };
 
     /// <summary>
+    /// Convert a CLR type name to a fully qualified C# type reference (with namespace).
+    /// Unlike MapToCSharpType (which strips to short name), this preserves the full path
+    /// to avoid ambiguity when the same short name exists in multiple namespaces
+    /// (e.g. AssemblyHashAlgorithm in System.Reflection and System.Configuration.Assemblies).
+    /// Primitive types (int, string, etc.) are still mapped to their C# keywords.
+    /// </summary>
+    private static string ToQualifiedCSharpType(string typeName)
+    {
+        typeName = StripAssemblyQualification(typeName).Replace('+', '.');
+
+        // Handle pointer suffix '*' separately: strip, process base, re-add.
+        // This ensures "System.Void*" → "void*", not "System.Void*".
+        var pointerSuffix = "";
+        if (typeName.EndsWith("*"))
+        {
+            pointerSuffix = "*";
+            typeName = typeName[..^1].TrimEnd();
+        }
+
+        // Map the last segment to C# keyword if applicable, keeping the full path.
+        // e.g. "System.Int32" → "int", "System.Configuration.Assemblies.AssemblyHashAlgorithm" stays as-is.
+        var lastDot = typeName.LastIndexOf('.');
+        if (lastDot >= 0)
+        {
+            var shortName = typeName[(lastDot + 1)..];
+            var ns = typeName[..lastDot];
+            var mapped = KeywordMap(shortName);
+            // Preserve full path if not a primitive keyword
+            return (mapped != shortName ? mapped : typeName) + pointerSuffix;
+        }
+        return typeName + pointerSuffix;
+    }
+
+    /// <summary>
     /// Serialize a value to a C# expression. Returns null if the value cannot be serialized.
     /// </summary>
     public string? Serialize(string typeName, object? value)
     {
-        // Tier 1: null — use typed default() so overload resolution has type info
+        // Tier 1: null — use typed default() so overload resolution has type info.
+        // Use fully qualified type name to avoid ambiguity (e.g. AssemblyHashAlgorithm).
         if (value is null)
-            return $"default({ToCSharpTypeName(typeName)})!";
+            return $"default({ToQualifiedCSharpType(typeName)})!";
 
         // Tier 1: primitives
         if (PrimitiveTypeNames.Contains(typeName))
             return SerializePrimitive(typeName, value);
 
-        // Tier 1: enum
+        // Tier 1: enum — use qualified C# type name (handles CLR+ nested types)
         if (typeName is { Length: > 0 } && value.GetType().IsEnum)
-            return $"{typeName}.{value}";
+            return $"{ToQualifiedCSharpType(typeName)}.{value}";
 
         // Tier 1: string
         if (typeName == "System.String" && value is string strVal)
@@ -47,11 +82,11 @@ public sealed class CSharpSerializer
 
         // Tier 1: Type
         if (typeName == "System.Type" && value is Type t)
-            return $"typeof({t.FullName})";
+            return $"typeof({MapToCSharpType(t.FullName ?? t.Name)})";
 
-        // Unconstructable — default fallback
+        // Unconstructable — default fallback with fully qualified type name
         if (UnconstructableTypes.Contains(typeName))
-            return $"default({GetShortTypeName(typeName)})!";
+            return $"default({ToQualifiedCSharpType(typeName)})!";
 
         // Tier 2: try constructor-based serialization
         if (TrySerializeByConstructor(typeName, value, out var ctorExpr))
@@ -70,17 +105,16 @@ public sealed class CSharpSerializer
     /// </summary>
     public string FixtureCreateExpression(string typeName)
     {
-        // Strip generic arity for C#: "System.Collections.Generic.List`1" -> "List<byte>"
-        var csName = ToCSharpTypeName(typeName);
+        var csName = MapToCSharpType(typeName);
         return $"fixture.Create<{csName}>()";
     }
 
     /// <summary>
-    /// Generate a default(T) expression.
+    /// Generate a default(T) expression with fully qualified type name to avoid ambiguity.
     /// </summary>
     public string DefaultExpression(string typeName)
     {
-        var csName = ToCSharpTypeName(typeName);
+        var csName = ToQualifiedCSharpType(typeName);
         // Value types: default(T) is valid. Reference types: needs null-forgiving.
         if (IsValueType(typeName))
             return $"default({csName})";
@@ -309,9 +343,24 @@ public sealed class CSharpSerializer
         // Strip assembly qualification that may come from MLC's Type.FullName
         typeName = StripAssemblyQualification(typeName);
 
+        // Handle pointer suffix '*' separately: strip it, process the base type,
+        // then re-add.  This ensures "System.Void*" → "void*" (KeywordMap
+        // recognizes "Void" but not "Void*").
+        var pointerSuffix = "";
+        if (typeName.EndsWith("*"))
+        {
+            pointerSuffix = "*";
+            typeName = typeName[..^1].TrimEnd();
+        }
+
         // Use ToCSharpTypeName for full generic type name resolution including
         // nested types like "Dictionary<A,B>.Nested<C>" — it has depth-aware bracket matching.
-        return ToCSharpTypeName(typeName);
+        var result = ToCSharpTypeName(typeName);
+
+        // Convert CLR nested type separator '+' to C# '.' (e.g. "Outer+Inner" → "Outer.Inner").
+        // ToCSharpTypeName preserves '+' because it only strips the namespace (last segment after dot),
+        // leaving the CLR-format parent+child in the short name.
+        return result.Replace('+', '.') + pointerSuffix;
     }
 
     /// <summary>
@@ -399,12 +448,7 @@ public sealed class CSharpSerializer
         // that can't be constructed in C# test code. Skip before StripAssemblyQualification
         // since the latter replaces '+' with '.'.
         if (cleanType.Contains('+'))
-        {
-            var shortName = cleanType.Split('+')[^1];
-            var bt = shortName.IndexOf('`');
-            if (bt >= 0) shortName = shortName[..bt];
-            return $"/* TODO: nested type */ default({shortName})!";
-        }
+            return $"/* TODO: nested type */ default({MapToCSharpType(cleanType)})!";
 
         // Strip assembly qualification from generic type arguments.
         // Type.FullName produces e.g. "Type`1[[System.Int32, System.Private.CoreLib, Version=10.0.0.0, ...]]"

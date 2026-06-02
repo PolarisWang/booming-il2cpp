@@ -79,9 +79,7 @@ struct SubjectEntry {
 };
 
 static const SubjectEntry kSubjectEntries[] = {
-{% for s in subjects %}
-    { {{ s.index }}, "{{ s.subject_id }}", "{{ s.assembly_name }}", "{{ s.type_name }}", "{{ s.method_name }}", {{ if s.is_static }}true{{ else }}false{{ end }}, "{{ s.kind }}" },
-{% end %}
+{{ subject_entries_code }}
 };
 
 static const int kSubjectEntryCount_Generated = {{ subject_count }};

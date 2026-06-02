@@ -121,6 +121,21 @@ public sealed partial class NativeAotLoweringPlanner
 
     private StructuredSlotEmissionContext? _activeStructuredSlotContext;
 
+    /// <summary>
+    /// Maximum recursion depth for EmitStructuredIRNode. When the structured IR
+    /// tree exceeds this depth, the method falls back to PC-dispatch (linear)
+    /// emission instead of overflowing the thread stack with recursive calls.
+    /// 10,000 levels × ~200 bytes/frame ≈ 2 MB, well within an 8 MB worker stack.
+    /// </summary>
+    private const int MaxStructuredIRDepth = 10000;
+
+    /// <summary>
+    /// Tracks current recursion depth of EmitStructuredIRNode. Used instead of
+    /// RuntimeHelpers.TryEnsureSufficientExecutionStack() which may not work
+    /// reliably on threads created with a custom maxStackSize.
+    /// </summary>
+    private int _structuredIrDepth;
+
     private sealed class StructuredSlotEmissionContext
     {
         private int _depth;
@@ -447,6 +462,20 @@ public sealed partial class NativeAotLoweringPlanner
         AotCoreIrMethodArtifact method,
         string indentation)
     {
+        // Depth counter guard: prevents process-terminating StackOverflowException
+        // from recursive structured IR tree emission.  This is more reliable than
+        // RuntimeHelpers.TryEnsureSufficientExecutionStack() which may not work
+        // correctly on threads created with custom maxStackSize.
+        _structuredIrDepth++;
+        if (_structuredIrDepth > MaxStructuredIRDepth)
+        {
+            _structuredIrDepth--;
+            throw new InvalidOperationException(
+                $"Structured IR tree too deep ({_structuredIrDepth} levels) for method "
+                + $"'{SafeShortName(method)}'. Falling back to linear emission.");
+        }
+        try
+        {
         switch (node)
         {
             case IRBlock block:
@@ -502,6 +531,11 @@ public sealed partial class NativeAotLoweringPlanner
                 throw new NotSupportedException(
                     "StructuredIR: unknown node type '" + node.GetType().Name + "'");
         }
+            }
+            finally
+            {
+                _structuredIrDepth--;
+            }
     }
 
     // 鈹€鈹€ Block 鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€
@@ -1730,41 +1764,8 @@ public sealed partial class NativeAotLoweringPlanner
             // patterns; if we reach here the method has no structured EH shape
             // and will be emitted as normal CFG-structured code.
         }
-
         var cfg = BuildControlFlowGraph(instructions, offsets);
         bool reducible = cfg.IsReducible;
-        if (!reducible)
-        {
-            // Diagnose WHY reducible fails
-            var diag = new System.Text.StringBuilder();
-            diag.Append($"IRRED_DIAG: {SafeShortName(method)} blocks={cfg.Blocks.Count} loops={cfg.LoopHeaders.Count}");
-            for (int bi = 0; bi < cfg.Blocks.Count; bi++)
-            {
-                var b = cfg.Blocks[bi];
-                if (b.Terminator != null)
-                    diag.Append($" B{bi}({b.Terminator.Op})");
-                if (b.ConditionalTarget.HasValue)
-                {
-                    if (cfg.OffsetToBlockIndex.TryGetValue(b.ConditionalTarget.Value, out var ctIdx))
-                    {
-                        bool isBack = ctIdx < bi;
-                        bool isLoopHdr = cfg.LoopHeaders.ContainsKey(ctIdx);
-                        diag.Append($" cond->B{ctIdx}{(isBack?"[back]":"[fwd]")}{(isLoopHdr?"[loop]":"[!loop]")}");
-                    }
-                }
-                if (b.BranchTarget.HasValue)
-                {
-                    if (cfg.OffsetToBlockIndex.TryGetValue(b.BranchTarget.Value, out var btIdx))
-                    {
-                        bool isBack = btIdx < bi;
-                        bool isLoopHdr = cfg.LoopHeaders.ContainsKey(btIdx);
-                        diag.Append($" br->B{btIdx}{(isBack?"[back]":"[fwd]")}{(isLoopHdr?"[loop]":"[!loop]")}");
-                    }
-                }
-            }
-            Console.Error.WriteLine(diag.ToString());
-        }
-        Console.Error.WriteLine($"TRYBUILD: {SafeShortName(method)}, blocks={cfg.Blocks.Count}, loops={cfg.LoopHeaders.Count}, reducible={reducible}");
         if (!reducible)
         {
             var splitCfg = MakeCfgReducibleViaIntervalAnalysis(cfg);

@@ -62,6 +62,7 @@ class ChunkContext:
     native_config: str = "check"
     stage_timeout_seconds: int = 0
     resume: bool = False
+    skip_probe: bool = False
 
     @property
     def managed_dir(self) -> Path:
@@ -77,7 +78,7 @@ class ChunkContext:
 
     @property
     def subjects_dll_path(self) -> Path:
-        return self.managed_dir / f"{self.assembly}Subjects.dll"
+        return self.managed_dir / "CombinedSubjects.dll"
 
     @property
     def subjects_metadata_path(self) -> Path:

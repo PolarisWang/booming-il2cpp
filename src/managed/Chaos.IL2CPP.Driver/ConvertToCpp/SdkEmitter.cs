@@ -187,8 +187,27 @@ internal sealed class SdkEmitter
             }
         }
 
+        // ── Copy chaos/pal/*.h (platform abstraction layer) ─────────────
+        // Needed by: thread_state.h transitively from runtime_stubs.
+        // The PAL headers are in src/native/pal/chaos/pal/ but must be
+        // in the SDK's include/chaos/pal/ so that external-header transitive
+        // includes (from -external:I SDK include) resolve correctly.
+        var srcPal = Path.Combine(repoRoot, "src", "native", "pal");
+        var dstPal = Path.Combine(dstChaos, "pal");
+        Directory.CreateDirectory(dstPal);
+        if (Directory.Exists(srcPal))
+        {
+            foreach (var f in Directory.GetFiles(Path.Combine(srcPal, "chaos", "pal"), "*.h"))
+            {
+                File.Copy(f, Path.Combine(dstPal, Path.GetFileName(f)), overwrite: true);
+                count++;
+            }
+        }
+
         // ── Copy runtime-core *.h (top-level) ──────────────────────────────
         // Needed by: chaos_runtime_host.h, generated code
+        // IMPORTANT: thread_state.h is included here — its transitive dependency
+        // <chaos/pal/pal_sync.h> is now also part of the SDK (copied above).
         var runtimeCoreHeaders = new[]
         {
             "chaos_runtime_host.h", "runtime_core.h",
@@ -358,6 +377,84 @@ internal sealed class SdkEmitter
         {
             Console.WriteLine($"    WARN: profile_globals.cpp not found at {profileGlobalsSrc}");
         }
+
+        // ── Emit pal_time_stub.cpp for SDK test builds ─────────────────────
+        // datetime_stubs.cpp (copied above) calls chaos::il2cpp::pal::PalGetRealtimeNs(),
+        // which is defined in chaos_pal.lib.  Since chaos_pal.lib is not part of the
+        // SDK (only chaos_runtime_core.lib etc. are shipped), SDK-based test projects
+        // would get an unresolved external symbol.  This stub provides a local
+        // implementation using GetSystemTimeAsFileTime on Windows.
+        //
+        // Written directly to the SDK runtime_stubs/ directory (not copied from source)
+        // so the main runtime build is unaffected.
+        var palTimeStubDst = Path.Combine(dstRuntimeStubs, "pal_time_stub.cpp");
+        if (!File.Exists(palTimeStubDst))
+        {
+            File.WriteAllText(palTimeStubDst,
+                "// pal_time_stub.cpp — SDK-emitted PAL time stub for test builds.\n"
+                + "// Provides PalGetRealtimeNs() so datetime_stubs.cpp can link\n"
+                + "// without requiring chaos_pal.lib (not included in the SDK).\n"
+                + "#include <chaos/pal/pal_time.h>\n"
+                + "#ifndef WIN32_LEAN_AND_MEAN\n"
+                + "#define WIN32_LEAN_AND_MEAN\n"
+                + "#endif\n"
+                + "#include <windows.h>\n"
+                + "namespace chaos::il2cpp::pal {\n"
+                + "uint64_t PalGetRealtimeNs() noexcept {\n"
+                + "    FILETIME ft;\n"
+                + "    ::GetSystemTimeAsFileTime(&ft);\n"
+                + "    uint64_t t = (static_cast<uint64_t>(ft.dwHighDateTime) << 32)\n"
+                + "               | static_cast<uint64_t>(ft.dwLowDateTime);\n"
+                + "    constexpr uint64_t kFileTimeToUnixEpoch = 11644473600ULL * 10000000;\n"
+                + "    if (t >= kFileTimeToUnixEpoch) t -= kFileTimeToUnixEpoch;\n"
+                + "    return t * 100;\n"
+                + "}\n"
+                + "}\n");
+            Console.WriteLine($"    SDK runtime stubs: pal_time_stub.cpp emitted");
+        }
+
+        // ── Emit crt_stubs.cpp for MSVC 19.42+ CRT symbols ──
+        // The prebuilt chaos_runtime_core.lib was compiled with a newer MSVC (19.42+)
+        // that added internal CRT/STL symbols (e.g. _Thrd_sleep_for, __std_find_end_1)
+        // not available in older MSVC. This stub provides fallback implementations.
+        var crtStubsDst = Path.Combine(dstRuntimeStubs, "crt_stubs.cpp");
+        if (!File.Exists(crtStubsDst))
+        {
+            File.WriteAllText(crtStubsDst,
+                "// crt_stubs.cpp -- Stubs for MSVC 19.42+ CRT/STL symbols\n"
+                + "// referenced by prebuilt chaos_runtime_core.lib.\n"
+                + "#include <windows.h>\n"
+                + "#include <cstring>\n"
+                + "extern \"C\" int __cdecl _Thrd_sleep_for(const void* duration, void* remaining) {\n"
+                + "    const auto* ts = static_cast<const long*>(duration);\n"
+                + "    if (!ts) return -1;\n"
+                + "    DWORD ms = static_cast<DWORD>(ts[0] * 1000 + ts[1] / 1000000);\n"
+                + "    if (ms == 0 && (ts[0] > 0 || ts[1] > 0)) ms = 1;\n"
+                + "    Sleep(ms);\n"
+                + "    if (remaining) std::memset(remaining, 0, sizeof(long) * 2);\n"
+                + "    return 0;\n"
+                + "}\n"
+                + "extern \"C\" int __cdecl _Cnd_timedwait_for_unchecked(void*, void*, const void*) {\n"
+                + "    Sleep(1); return 0;\n"
+                + "}\n"
+                + "extern \"C\" const unsigned char* __cdecl __std_find_last_trivial_1(\n"
+                + "    const unsigned char* first, const unsigned char* last, unsigned char val) {\n"
+                + "    const unsigned char* it = last;\n"
+                + "    while (it != first) { --it; if (*it == val) return it; }\n"
+                + "    return last;\n"
+                + "}\n"
+                + "extern \"C\" const unsigned char* __cdecl __std_find_end_1(\n"
+                + "    const unsigned char* hf, const unsigned char* hl,\n"
+                + "    const unsigned char* nf, size_t nsz) {\n"
+                + "    if (nsz == 0 || (size_t)(hl - hf) < nsz) return hl;\n"
+                + "    const unsigned char* r = hl;\n"
+                + "    const unsigned char* he = hl - nsz + 1;\n"
+                + "    for (const unsigned char* it = hf; it < he; ++it)\n"
+                + "        if (std::memcmp(it, nf, nsz) == 0) r = it;\n"
+                + "    return r;\n"
+                + "}\n");
+            Console.WriteLine($"    SDK runtime stubs: crt_stubs.cpp emitted");
+        }
     }
 
     /// <summary>
@@ -406,6 +503,14 @@ internal sealed class SdkEmitter
                 if (File.Exists(sourcePath))
                 {
                     File.Copy(sourcePath, targetPath, overwrite: true);
+                    copiedCount++;
+                    continue;
+                }
+                // Fallback: flat lib/ layout (artifacts/presets/<preset>/lib/<name>.lib)
+                var flatPath = Path.Combine(nativeLibDir, "lib", targetName + ".lib");
+                if (File.Exists(flatPath))
+                {
+                    File.Copy(flatPath, targetPath, overwrite: true);
                     copiedCount++;
                     continue;
                 }

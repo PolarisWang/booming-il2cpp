@@ -77,9 +77,11 @@ extern "C" BenchmarkResult RunBenchmark(int entry_index, int iterations);
 extern "C" CHAOS_IL2CPP_INT32 RunHotpatchAll();
 extern "C" BenchmarkResult RunHotpatchBenchmark(int entry_index, int iterations);
 
+{{ if has_patch_data }}
 extern const uint8_t kPatchData[];
 extern const size_t kPatchDataSize;
 extern const char* const kPatchDataHostClassName;
+{{ end }}
 
 extern "C" void RunMicrobench();
 
@@ -105,6 +107,7 @@ static LONG CALLBACK JitVehHandler(PEXCEPTION_POINTERS ExceptionInfo) noexcept {
 #endif
 {{ end }}
 
+{{ if has_patch_data }}
 static chaos::il2cpp::runtime_core::PatchContext* ApplyHotpatchIfAvailable() {
     if (kPatchDataSize > 0u) {
         auto* patch_ctx = chaos::il2cpp::runtime_core::ApplyPatchFromMemory(
@@ -119,12 +122,16 @@ static chaos::il2cpp::runtime_core::PatchContext* ApplyHotpatchIfAvailable() {
     }
     return nullptr;
 }
+{{ else }}
+static chaos::il2cpp::runtime_core::PatchContext* ApplyHotpatchIfAvailable() {
+    return nullptr;
+}
+{{ end }}
 
 static int RunFactMode() {
-    const int kCount = kSubjectEntryCount;
+    const int kCount = kAotMethodCount;
     int passed_count = 0;
-    for (int si = 0; si < kCount; si++) {
-        int i = kSubjectSlotMap[si];
+    for (int i = 0; i < kCount; i++) {
         CHAOS_EH_TRY
             chaos::il2cpp::runtime_core::ChaosDispatchMethod(
                 GetHotpatchEntries(), kAotMethodCount, i, CHAOS_USE_DEFAULT_THUNKS);
@@ -134,18 +141,21 @@ static int RunFactMode() {
         CHAOS_EH_END
     }
     int failed_count = kCount - passed_count;
-    printf("Passed: %d/%d\n", passed_count, kSubjectEntryCount);
+    printf("Passed: %d/%d\n", passed_count, kAotMethodCount);
     std::fflush(stdout);
     return failed_count;
 }
 
 // ── --fact-json: per-method JSON output (R1+R2: value-level verification) ──
+// Iterates ALL AOT-compiled methods (kAotMethodCount) rather than just
+// kSubjectSlotMap entries, because the namespace-chunk pipeline compiles
+// the entire transitive closure without tagging subject wrapper methods
+// as Subject_N.  Methods that throw are caught by CHAOS_EH_TRY/CATCH.
 static int RunFactJsonMode() {
-    const int kCount = kSubjectEntryCount;
+    const int kCount = kAotMethodCount;
     printf("{\"factResults\":[");
     bool first = true;
-    for (int si = 0; si < kCount; si++) {
-        int i = kSubjectSlotMap[si];
+    for (int i = 0; i < kCount; i++) {
         CHAOS_IL2CPP_INT32 result = 0;
         bool caught = false;
         CHAOS_EH_TRY
@@ -156,7 +166,7 @@ static int RunFactJsonMode() {
         CHAOS_EH_END
         if (!first) printf(",");
         printf("{\"si\":%d,\"methodIndex\":%d,\"contractIndex\":%d,\"passed\":%s,\"exitCode\":%d}",
-               si, i, i, caught ? "false" : "true", caught ? -1 : (int)result);
+               i, i, i, caught ? "false" : "true", caught ? -1 : (int)result);
         first = false;
     }
     printf("]}\n");

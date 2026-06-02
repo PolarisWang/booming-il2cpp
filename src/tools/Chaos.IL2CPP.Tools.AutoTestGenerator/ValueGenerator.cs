@@ -43,6 +43,10 @@ public sealed class ValueGenerator
         ["System.Numerics.Complex"] = new[] { "default(System.Numerics.Complex)", "new System.Numerics.Complex(0, 0)", "new System.Numerics.Complex(1, 1)" },
         ["System.Int128"] = new[] { "default(System.Int128)", "(System.Int128)0", "(System.Int128)42" },
         ["System.UInt128"] = new[] { "default(System.UInt128)", "(System.UInt128)0", "(System.UInt128)42" },
+        ["System.DateOnly"] = new[] { "default(System.DateOnly)", "new System.DateOnly(2024, 1, 1)", "new System.DateOnly(2024, 12, 31)" },
+        ["System.TimeOnly"] = new[] { "default(System.TimeOnly)", "new System.TimeOnly(12, 0, 0)", "new System.TimeOnly(23, 59, 59)" },
+        ["System.Range"] = new[] { "System.Range.All", "new System.Range(0, 5)", "new System.Range(1, ^1)" },
+        ["System.Index"] = new[] { "System.Index.Start", "new System.Index(5)", "System.Index.End" },
     };
 
     // Known BCL delegate type short names (extracted by DllScanner.GetTypeName)
@@ -78,8 +82,14 @@ public sealed class ValueGenerator
         ["IFormatProvider"] = _ => "System.Globalization.CultureInfo.InvariantCulture",
         ["ISet"] = typeArgs => $"new System.Collections.Generic.HashSet<{typeArgs[0]}>()",
         ["IComparable"] = typeArgs => typeArgs.Length > 0
+            ? $"default({typeArgs[0]})"
+            : "default(System.Int32)",
+        ["Comparer"] = typeArgs => typeArgs.Length > 0
             ? $"System.Collections.Generic.Comparer<{typeArgs[0]}>.Default"
-            : "System.Collections.Comparer.Default",
+            : $"System.Collections.Generic.Comparer<System.Int32>.Default",
+        ["EqualityComparer"] = typeArgs => typeArgs.Length > 0
+            ? $"System.Collections.Generic.EqualityComparer<{typeArgs[0]}>.Default"
+            : $"System.Collections.Generic.EqualityComparer<System.Int32>.Default",
         ["IConvertible"] = _ => "42",
         ["IEnumerable"] = typeArgs => typeArgs.Length > 0
             ? $"System.Linq.Enumerable.Empty<{typeArgs[0]}>()"
@@ -88,6 +98,12 @@ public sealed class ValueGenerator
         ["Stream"] = _ => "System.IO.Stream.Null",
         ["TextReader"] = _ => "System.IO.TextReader.Null",
         ["TextWriter"] = _ => "System.IO.TextWriter.Null",
+        ["IProgress"] = typeArgs => $"new System.Progress<{typeArgs[0]}>(_ => {{ }})",
+        ["IAsyncEnumerable"] = typeArgs => $"System.Linq.AsyncEnumerable.Empty<{typeArgs[0]}>()",
+        ["IAsyncEnumerator"] = typeArgs => $"System.Linq.AsyncEnumerable.Empty<{typeArgs[0]}>().GetAsyncEnumerator()",
+        ["IProducerConsumerCollection"] = typeArgs => $"new System.Collections.Concurrent.ConcurrentBag<{typeArgs[0]}>()",
+        ["IBufferWriter"] = typeArgs => $"new System.Buffers.ArrayBufferWriter<{typeArgs[0]}>()",
+        ["IReadOnlySet"] = typeArgs => $"new System.Collections.Generic.HashSet<{typeArgs[0]}>()",
     };
 
     public ValueGenerator(CSharpSerializer serializer, AutoFixtureAllower? autoFixture = null)
@@ -282,16 +298,28 @@ public sealed class ValueGenerator
     /// Handles Predicate&lt;T&gt;, Action&lt;T...&gt;, Converter&lt;T,TResult&gt;,
     /// Comparison&lt;T&gt;, Func&lt;T...,TResult&gt;, EventHandler.
     /// </summary>
+    /// <summary>
+    /// Extract the short (unqualified) base name from a possibly-qualified type name.
+    /// "System.Collections.Generic.IList" → "IList", "IList" → "IList"
+    /// </summary>
+    private static string GetShortBaseName(string typeName)
+    {
+        var gaStart = typeName.IndexOf('<');
+        var baseName = gaStart >= 0 ? typeName[..gaStart] : typeName;
+        var lastDot = baseName.LastIndexOf('.');
+        return lastDot >= 0 ? baseName[(lastDot + 1)..] : baseName;
+    }
+
     private static bool TryGetDelegateExpression(string typeName, out string expr)
     {
         expr = null!;
 
-        var gaStart = typeName.IndexOf('<');
-        var baseName = gaStart >= 0 ? typeName[..gaStart] : typeName;
+        var baseName = GetShortBaseName(typeName);
 
         if (!DelegateTypeNames.Contains(baseName))
             return false;
 
+        var gaStart = typeName.IndexOf('<');
         string[] csTypeArgs;
         if (gaStart >= 0)
         {
@@ -361,12 +389,12 @@ public sealed class ValueGenerator
     {
         expr = null!;
 
-        var gaStart = typeName.IndexOf('<');
-        var baseName = gaStart >= 0 ? typeName[..gaStart] : typeName;
+        var baseName = GetShortBaseName(typeName);
 
         if (!SmartConstructibleInterfaces.Contains(baseName))
             return false;
 
+        var gaStart = typeName.IndexOf('<');
         string[] csTypeArgs;
         if (gaStart >= 0)
         {
@@ -408,12 +436,12 @@ public sealed class ValueGenerator
     {
         expr = null!;
 
-        var gaStart = typeName.IndexOf('<');
-        var baseName = gaStart >= 0 ? typeName[..gaStart] : typeName;
+        var baseName = GetShortBaseName(typeName);
 
         if (!NullGuardSafeDefaults.TryGetValue(baseName, out var factory))
             return false;
 
+        var gaStart = typeName.IndexOf('<');
         string[] csTypeArgs;
         if (gaStart >= 0)
         {

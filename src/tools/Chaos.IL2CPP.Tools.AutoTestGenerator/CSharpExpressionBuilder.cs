@@ -22,6 +22,100 @@ public sealed class CSharpExpressionBuilder
         ["System.Security.Cryptography.AsymmetricAlgorithm"] = "System.Security.Cryptography.RSA.Create()",
         ["System.Security.Cryptography.RSA"] = "System.Security.Cryptography.RSA.Create()",
         ["System.Security.Cryptography.SHA256"] = "System.Security.Cryptography.SHA256.Create()",
+        // XML abstract type factories
+        ["System.Xml.XmlReader"] = "System.Xml.XmlReader.Create(new System.IO.StringReader(\"<root/>\"))",
+        ["System.Xml.XmlWriter"] = "System.Xml.XmlWriter.Create(System.IO.Stream.Null)",
+        // IO stream/text factories
+        ["System.IO.Stream"] = "System.IO.Stream.Null",
+        ["System.IO.TextReader"] = "new System.IO.StringReader(\"\")",
+        ["System.IO.TextWriter"] = "new System.IO.StringWriter()",
+        // Dataflow block 类型 — new + lambda，避免 default(null) 抛 NRE
+        ["System.Threading.Tasks.Dataflow.ActionBlock<System.Int32>"] =
+            "new System.Threading.Tasks.Dataflow.ActionBlock<System.Int32>(_ => { })",
+        ["System.Threading.Tasks.Dataflow.BufferBlock<System.Int32>"] =
+            "new System.Threading.Tasks.Dataflow.BufferBlock<System.Int32>()",
+        ["System.Threading.Tasks.Dataflow.BroadcastBlock<System.Int32>"] =
+            "new System.Threading.Tasks.Dataflow.BroadcastBlock<System.Int32>(_ => _)",
+        ["System.Threading.Tasks.Dataflow.TransformBlock<System.Int32, System.Int32>"] =
+            "new System.Threading.Tasks.Dataflow.TransformBlock<System.Int32, System.Int32>(x => x)",
+        ["System.Threading.Tasks.Dataflow.TransformManyBlock<System.Int32, System.Int32>"] =
+            "new System.Threading.Tasks.Dataflow.TransformManyBlock<System.Int32, System.Int32>(x => System.Array.Empty<System.Int32>())",
+        ["System.Threading.Tasks.Dataflow.BatchBlock<System.Int32>"] =
+            "new System.Threading.Tasks.Dataflow.BatchBlock<System.Int32>(1)",
+        ["System.Threading.Tasks.Dataflow.BatchedJoinBlock<System.Int32, System.Int32>"] =
+            "new System.Threading.Tasks.Dataflow.BatchedJoinBlock<System.Int32, System.Int32>(1)",
+        ["System.Threading.Tasks.Dataflow.BatchedJoinBlock<System.Int32, System.Int32, System.Int32>"] =
+            "new System.Threading.Tasks.Dataflow.BatchedJoinBlock<System.Int32, System.Int32, System.Int32>(1)",
+        ["System.Threading.Tasks.Dataflow.JoinBlock<System.Int32, System.Int32>"] =
+            "new System.Threading.Tasks.Dataflow.JoinBlock<System.Int32, System.Int32>()",
+        ["System.Threading.Tasks.Dataflow.JoinBlock<System.Int32, System.Int32, System.Int32>"] =
+            "new System.Threading.Tasks.Dataflow.JoinBlock<System.Int32, System.Int32, System.Int32>()",
+        ["System.Threading.Tasks.Dataflow.WriteOnceBlock<System.Int32>"] =
+            "new System.Threading.Tasks.Dataflow.WriteOnceBlock<System.Int32>(_ => _)",
+        // IO.Pipelines
+        ["System.IO.Pipelines.Pipe"] = "new System.IO.Pipelines.Pipe()",
+        ["System.IO.Pipelines.PipeReader"] = "System.IO.Pipelines.PipeReader.Create(System.IO.Stream.Null)",
+        ["System.IO.Pipelines.PipeWriter"] = "System.IO.Pipelines.PipeWriter.Create(System.IO.Stream.Null)",
+        ["System.IO.Pipelines.PipeScheduler"] = "System.IO.Pipelines.PipeScheduler.Inline",
+        // System.Formats.Tar
+        ["System.Formats.Tar.TarReader"] = "new System.Formats.Tar.TarReader(System.IO.Stream.Null)",
+        ["System.Formats.Tar.TarWriter"] = "new System.Formats.Tar.TarWriter(System.IO.Stream.Null)",
+        // System.Net.Http
+        ["System.Net.Http.HttpClient"] = "new System.Net.Http.HttpClient()",
+        ["System.Net.Http.Headers.AuthenticationHeaderValue"] =
+            "new System.Net.Http.Headers.AuthenticationHeaderValue(\"Bearer\", \"token\")",
+        ["System.Net.Http.Headers.MediaTypeHeaderValue"] =
+            "new System.Net.Http.Headers.MediaTypeHeaderValue(\"application/json\")",
+        ["System.Net.Http.Headers.MediaTypeWithQualityHeaderValue"] =
+            "new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue(\"application/json\")",
+        ["System.Net.Http.Headers.ProductHeaderValue"] =
+            "new System.Net.Http.Headers.ProductHeaderValue(\"test\", \"1.0\")",
+        ["System.Net.Http.Headers.ProductInfoHeaderValue"] =
+            "new System.Net.Http.Headers.ProductInfoHeaderValue(\"test\", \"1.0\")",
+        ["System.Net.Http.Headers.CacheControlHeaderValue"] =
+            "new System.Net.Http.Headers.CacheControlHeaderValue()",
+        ["System.Net.Http.Headers.ContentDispositionHeaderValue"] =
+            "new System.Net.Http.Headers.ContentDispositionHeaderValue(\"attachment\")",
+        ["System.Net.Http.Headers.ContentRangeHeaderValue"] =
+            "new System.Net.Http.Headers.ContentRangeHeaderValue(0, 99, 100)",
+        ["System.Net.Http.Headers.EntityTagHeaderValue"] =
+            "new System.Net.Http.Headers.EntityTagHeaderValue(\"\\\"tag\\\"\")",
+        ["System.Net.Http.Headers.NameValueHeaderValue"] =
+            "new System.Net.Http.Headers.NameValueHeaderValue(\"name\", \"value\")",
+        ["System.Net.Http.Headers.NameValueWithParametersHeaderValue"] =
+            "new System.Net.Http.Headers.NameValueWithParametersHeaderValue(\"name\", \"value\")",
+        ["System.Net.Http.Headers.RangeConditionHeaderValue"] =
+            "new System.Net.Http.Headers.RangeConditionHeaderValue(new System.DateTime(2024, 1, 1))",
+        ["System.Net.Http.Headers.RangeHeaderValue"] =
+            "new System.Net.Http.Headers.RangeHeaderValue(0, 100)",
+        ["System.Net.Http.Headers.RetryConditionHeaderValue"] =
+            "new System.Net.Http.Headers.RetryConditionHeaderValue(new System.DateTime(2024, 1, 1))",
+        ["System.Net.Http.Headers.StringWithQualityHeaderValue"] =
+            "new System.Net.Http.Headers.StringWithQualityHeaderValue(\"en\", 0.5)",
+        ["System.Net.Http.Headers.TransferCodingHeaderValue"] =
+            "new System.Net.Http.Headers.TransferCodingHeaderValue(\"chunked\")",
+        ["System.Net.Http.Headers.TransferCodingWithQualityHeaderValue"] =
+            "new System.Net.Http.Headers.TransferCodingWithQualityHeaderValue(\"chunked\", 0.5)",
+        ["System.Net.Http.Headers.ViaHeaderValue"] =
+            "new System.Net.Http.Headers.ViaHeaderValue(\"1.1\", \"host\")",
+        ["System.Net.Http.Headers.WarningHeaderValue"] =
+            "new System.Net.Http.Headers.WarningHeaderValue(299, \"-\", \"\\\"warning\\\"\")",
+        // System.Text.Json
+        ["System.Text.Json.JsonSerializerOptions"] = "new System.Text.Json.JsonSerializerOptions()",
+        // System.Diagnostics.DiagnosticSource
+        ["System.Diagnostics.ActivitySource"] = "new System.Diagnostics.ActivitySource(\"test\")",
+        ["System.Diagnostics.ActivityListener"] = "new System.Diagnostics.ActivityListener()",
+        ["System.Diagnostics.DiagnosticListener"] = "new System.Diagnostics.DiagnosticListener(\"test\")",
+        ["System.Diagnostics.ActivityTagsCollection"] = "new System.Diagnostics.ActivityTagsCollection()",
+        ["System.Diagnostics.Metrics.Meter"] = "new System.Diagnostics.Metrics.Meter(\"test\")",
+        ["System.Diagnostics.Metrics.MeterListener"] = "new System.Diagnostics.Metrics.MeterListener()",
+        // System.Security.AccessControl
+        ["System.Security.AccessControl.RawSecurityDescriptor"] =
+            "new System.Security.AccessControl.RawSecurityDescriptor(\"\")",
+        ["System.Security.AccessControl.CommonSecurityDescriptor"] =
+            "new System.Security.AccessControl.CommonSecurityDescriptor(false, false, \"\")",
+        ["System.Security.Policy.Evidence"] = "new System.Security.Policy.Evidence()",
+        ["System.Security.Policy.EvidenceBase"] = "new System.Security.Policy.Evidence()",
     };
 
     /// <summary>
@@ -69,18 +163,24 @@ public sealed class CSharpExpressionBuilder
     public string GetInstanceExpression(string typeFullName, bool isStatic)
     {
         if (isStatic)
-            return $"global::{typeFullName}";
+            return $"global::{CSharpSerializer.StripAssemblyQualification(typeFullName)}";
 
         var csType = CSharpSerializer.MapToCSharpType(typeFullName);
 
         // Check known factory instances (Encoding.UTF8, string.Empty)
-        if (KnownInstances.TryGetValue(typeFullName, out var knownExpr))
+        if (KnownInstances.TryGetValue(csType, out var knownExpr))
             return knownExpr;
 
         // Check known type factories (collections, special constructors)
-        var factoryResult = TryBuildFactoryExpression(typeFullName, csType);
+        var factoryResult = TryBuildFactoryExpression(csType, csType);
         if (factoryResult is not null)
             return factoryResult;
+
+        // For types with namespace qualification (dots in the assembly-stripped name),
+        // use global:: prefix to guarantee resolution regardless of namespace context.
+        var qualified = CSharpSerializer.StripAssemblyQualification(typeFullName);
+        if (qualified.Contains('.'))
+            return $"default(global::{qualified.Replace('+', '.')})!";
 
         // Try to find a parameterless constructor via runtime reflection
         try
@@ -98,7 +198,7 @@ public sealed class CSharpExpressionBuilder
             // Best-effort — fall through to default
         }
 
-        return _serializer.DefaultExpression(typeFullName);
+        return _serializer.DefaultExpression(csType);
     }
 
     /// <summary>

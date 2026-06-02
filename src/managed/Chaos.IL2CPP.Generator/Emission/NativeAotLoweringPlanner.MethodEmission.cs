@@ -29,9 +29,11 @@ public sealed partial class NativeAotLoweringPlanner
         bool needsGenericContext = false)
 	{
         var paramSig = FormatAbiSlotParameterSignature(parameterAbis);
+        // C2860 on MSVC: 'void' cannot appear as a function parameter except for '(void)'.
+        // When there are no ABI slots but a generic context is needed, drop 'void' entirely.
         if (needsGenericContext)
         {
-            paramSig = string.IsNullOrEmpty(paramSig)
+            paramSig = string.IsNullOrEmpty(paramSig) || paramSig == "void" || paramSig == "void"
                 ? "CHAOS_IL2CPP_INTPTR chaos_generic_context"
                 : paramSig + ", CHAOS_IL2CPP_INTPTR chaos_generic_context";
         }
@@ -55,8 +57,13 @@ public sealed partial class NativeAotLoweringPlanner
 	{
 		var declarations = new List<string>();
 		var emittedStubSymbols = new HashSet<string>(StringComparer.Ordinal);
+		var emittedSymbols = new HashSet<string>(StringComparer.Ordinal);
 		foreach (AotCoreIrMethodArtifact reachableMethod in reachableMethods)
 		{
+			// Deduplicate by native symbol to avoid C2733 (extern "C" cannot be overloaded)
+			if (!emittedSymbols.Add(reachableMethod.NativeSymbol))
+				continue;
+
 			declarations.Add(FormatMethodDeclaration(reachableMethod, sharedContextSymbols));
 			string? text = TryGetInstantiationStubSymbol(reachableMethod);
 			if (!string.IsNullOrEmpty(text) && emittedStubSymbols.Add(text))
@@ -94,7 +101,7 @@ public sealed partial class NativeAotLoweringPlanner
 		string paramSig = FormatAbiSlotParameterSignature(methodAbiParameterSlots);
 		if (needsContext)
 		{
-			paramSig = string.IsNullOrEmpty(paramSig)
+			paramSig = string.IsNullOrEmpty(paramSig) || paramSig == "void"
 				? "CHAOS_IL2CPP_INTPTR chaos_generic_context"
 				: paramSig + ", CHAOS_IL2CPP_INTPTR chaos_generic_context";
 		}

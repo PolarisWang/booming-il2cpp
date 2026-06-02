@@ -118,9 +118,9 @@ public sealed class CppProjectEmitter
             foreach (var genDir in codegen.GeneratedDirs)
             {
                 foreach (var file in Directory.GetFiles(genDir, "*.cpp"))
-                    File.Copy(file, Path.Combine(subjectsDir, Path.GetFileName(file)), overwrite: true);
+                    CopyWithRetry(file, Path.Combine(subjectsDir, Path.GetFileName(file)), overwrite: true);
                 foreach (var file in Directory.GetFiles(genDir, "*.h"))
-                    File.Copy(file, Path.Combine(subjectsDir, Path.GetFileName(file)), overwrite: true);
+                    CopyWithRetry(file, Path.Combine(subjectsDir, Path.GetFileName(file)), overwrite: true);
             }
         }
 
@@ -155,13 +155,30 @@ public sealed class CppProjectEmitter
             verificationEnabled: verificationEnabled);
 
         // ── 4. Render templates → output files ──
+        // Verify subjects array integrity before rendering
+        if (model.ContainsKey("subjects") && model["subjects"] is Scriban.Runtime.ScriptArray sa)
+        {
+            int nullInArray = 0;
+            for (int i = 0; i < sa.Count; i++)
+            {
+                if (sa[i] is null)
+                {
+                    nullInArray++;
+                    Console.Error.WriteLine($"  [DIAG] subjects[{i}] is NULL");
+                }
+            }
+            Console.Error.WriteLine($"  [DIAG] subjects array: {sa.Count} entries, {nullInArray} null");
+        }
+        else
+        {
+            var typeName = model.ContainsKey("subjects") ? model["subjects"]?.GetType().FullName : "key-not-found";
+            Console.Error.WriteLine($"  [DIAG] subjects model key: {typeName}");
+        }
         RenderToFile("TestProject.RuntimeEntry.cpp.scriban", model, outputDir, "runtime-entry.cpp");
         RenderToFile("TestProject.Entry.cpp.scriban", model, outputDir, "entry.cpp");
         RenderToFile("TestProject.Entry.h.scriban", model, outputDir, "entry.h");
 
-        // Pipeline uses verification_dispatch.generated.cpp; standalone uses dispatch.cpp
-        var dispatchName = isPipeline ? "verification_dispatch.generated.cpp" : "dispatch.cpp";
-        RenderToFile("TestProject.Dispatch.cpp.scriban", model, outputDir, dispatchName);
+        RenderToFile("TestProject.Dispatch.cpp.scriban", model, outputDir, "verification_dispatch.generated.cpp");
 
         RenderToFile("TestProject.CMakeLists.txt.scriban", model, outputDir, "CMakeLists.txt");
         RenderToFile("TestProject.CMakePresets.json.scriban", model, outputDir, "CMakePresets.json");
@@ -180,6 +197,7 @@ public sealed class CppProjectEmitter
             File.WriteAllText(microbenchPath, microbenchStub);
         }
 
+
         // chaos-sdk cmake files
         var cmakeDir = Path.Combine(sdkDst, "cmake");
         Directory.CreateDirectory(cmakeDir);
@@ -197,7 +215,8 @@ public sealed class CppProjectEmitter
     public string? BuildProject(
         string projectDir,
         bool isJit = false,
-        string configTier = "check")
+        string configTier = "check",
+        string projectName = "entry")
     {
         var nativeDir = new DirectoryInfo(projectDir);
         if (!nativeDir.Exists)
@@ -245,8 +264,13 @@ public sealed class CppProjectEmitter
         }
         // Also check any per-assembly subdirectory with generated/ — these were
         // left by old pipeline and should not block the build.
+        // IMPORTANT: Exclude the codegen/ directory (which contains the SDK
+        // and is still needed for cmake find_package(chaos) to find chaos-config.cmake).
+        var codegenDir = Path.GetFullPath(Path.Combine(projectDir, "codegen"));
         foreach (var sub in nativeDir.GetDirectories())
         {
+            if (string.Equals(sub.FullName, codegenDir, StringComparison.OrdinalIgnoreCase))
+                continue;
             var genDir = new DirectoryInfo(Path.Combine(sub.FullName, "generated"));
             if (genDir.Exists && genDir.GetFiles("*.cpp", SearchOption.TopDirectoryOnly).Length > 0)
             {
@@ -316,14 +340,25 @@ public sealed class CppProjectEmitter
             }
         }
 
+        // Check whether VS environment variables are available.
+        // Ninja + MSVC requires INCLUDE/LIB/PATH to be set by VsDevCmd.bat at build time.
+        // When they are missing, fall back to the VS generator which embeds these paths
+        // in the .vcxproj files during cmake configure (no env vars needed at build time).
+        var vsInclude = Environment.GetEnvironmentVariable("INCLUDE");
+        var vsLib = Environment.GetEnvironmentVariable("LIB");
+        var vsEnvReady = !string.IsNullOrEmpty(vsInclude) && !string.IsNullOrEmpty(vsLib);
+
         var cmakeGeneratorArgs = new List<string>();
-        if (ninjaPath is not null)
+        if (ninjaPath is not null && vsEnvReady)
         {
-            cmakeGeneratorArgs.AddRange(["-G", "Ninja", "-DCMAKE_MAKE_PROGRAM=" + ninjaPath]);
+            cmakeGeneratorArgs.AddRange(["-G", "Ninja", "-DCMAKE_MAKE_PROGRAM=" + ninjaPath, "-DCMAKE_BUILD_TYPE=RelWithDebInfo"]);
         }
         else
         {
-            Console.Error.WriteLine($"  [build] Ninja not found, falling back to Visual Studio generator");
+            if (ninjaPath is not null && !vsEnvReady)
+                Console.Error.WriteLine($"  [build] VS env not ready (INCLUDE/LIB empty) — Ninja unavailable, using VS generator");
+            else
+                Console.Error.WriteLine($"  [build] Ninja not found, falling back to Visual Studio generator");
             cmakeGeneratorArgs.AddRange(["-G", "Visual Studio 17 2022", "-A", "x64"]);
         }
 
@@ -382,7 +417,7 @@ public sealed class CppProjectEmitter
                 Thread.Sleep(wait * 1000);
             }
 
-            var buildResult = RunProcess("cmake", ["--build", buildDir.FullName, "--config", "RelWithDebInfo", "--target", "chaos_entry"], timeoutMs: 300_000);
+            var buildResult = RunProcess("cmake", ["--build", buildDir.FullName, "--config", "RelWithDebInfo", "--target", projectName], timeoutMs: 300_000);
             if (buildResult.ExitCode == 0)
             {
                 buildOk = true;
@@ -400,10 +435,10 @@ public sealed class CppProjectEmitter
         // ── Step 3: Locate entry.exe ──
         var exeCandidates = new[]
         {
-            Path.Combine(buildDir.FullName, "RelWithDebInfo", "chaos_entry.exe"),
-            Path.Combine(buildDir.FullName, "Release", "chaos_entry.exe"),
-            Path.Combine(buildDir.FullName, "Debug", "chaos_entry.exe"),
-            Path.Combine(buildDir.FullName, "chaos_entry.exe"),
+            Path.Combine(buildDir.FullName, "RelWithDebInfo", $"{projectName}.exe"),
+            Path.Combine(buildDir.FullName, "Release", $"{projectName}.exe"),
+            Path.Combine(buildDir.FullName, "Debug", $"{projectName}.exe"),
+            Path.Combine(buildDir.FullName, $"{projectName}.exe"),
         };
         string? exePath = null;
         foreach (var c in exeCandidates)
@@ -417,7 +452,7 @@ public sealed class CppProjectEmitter
 
         if (exePath is null)
         {
-            Console.Error.WriteLine($"  [build] chaos_entry.exe not found in build output");
+            Console.Error.WriteLine($"  [build] {projectName}.exe not found in build output");
             return null;
         }
 
@@ -470,7 +505,9 @@ public sealed class CppProjectEmitter
         bool verificationEnabled = true)
     {
         Emit(outputDir, codegen, subjects, isJit, configTier, isWindows, projectRoot, codegenDir, sdkDir, verificationEnabled);
-        var exePath = BuildProject(outputDir, isJit, configTier);
+        var isPipeline = projectRoot is not null && codegenDir is not null;
+        var projectName = isPipeline ? "chaos_entry" : "entry";
+        var exePath = BuildProject(outputDir, isJit, configTier, projectName);
         if (exePath is not null)
         {
             CleanupGeneratedSources(outputDir, isJit);
@@ -610,5 +647,25 @@ public sealed class CppProjectEmitter
         var lines = output.Split(["\r\n", "\n"], StringSplitOptions.RemoveEmptyEntries);
         foreach (var line in lines.TakeLast(count))
             Console.Error.WriteLine($"      {line}");
+    }
+
+    /// <summary>
+    /// File.Copy with retry to handle transient locking (e.g. NativeCodegenValidator
+    /// in the Driver releases file handles asynchronously on Windows).
+    /// </summary>
+    private static void CopyWithRetry(string source, string dest, bool overwrite, int maxRetries = 5, int delayMs = 300)
+    {
+        for (int i = 0; ; i++)
+        {
+            try
+            {
+                File.Copy(source, dest, overwrite);
+                return;
+            }
+            catch (IOException) when (i < maxRetries - 1)
+            {
+                Thread.Sleep(delayMs);
+            }
+        }
     }
 }

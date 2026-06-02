@@ -437,9 +437,17 @@ public sealed partial class NativeAotLoweringPlanner
         IReadOnlyList<IReadOnlyList<int>> preds,
         List<BasicBlock> baseBlocks,
         Dictionary<int, int> baseOffsetMap,
-        Dictionary<int, NaturalLoopInfo> baseLoopHeaders)
+        Dictionary<int, NaturalLoopInfo> baseLoopHeaders,
+        int depth = 0)
     {
         if (splitTargets.Count == 0)
+            return originalCfg;
+
+        // Limit recursion depth to prevent stack overflow on highly complex CFGs.
+        // When the limit is exceeded, return the CFG as-is (irreducible); the caller
+        // (TryBuildStructuredMethodBody) falls back to BuildPcDispatchBody.
+        const int MaxSplitDepth = 8;
+        if (depth >= MaxSplitDepth)
             return originalCfg;
 
         int nextSynthOffset = -1;
@@ -569,7 +577,7 @@ public sealed partial class NativeAotLoweringPlanner
                         var round2Preds = ComputePredecessors(newBlocks);
                         return ApplyMultiNodeSplitting(
                             result, newSplitTargets, round2Preds,
-                            newBlocks, newOffsetMap, newLoopHeaders);
+                            newBlocks, newOffsetMap, newLoopHeaders, depth + 1);
                     }
                 }
             }

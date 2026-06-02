@@ -1,18 +1,9 @@
 // runtime-patchdata.cpp — Auto-generated
 // Provides kPatchData[], kPatchDataSize, kPatchDataHostClassName for hotpatch support.
+// Sentinel: no patch data (default state for verification builds).
 #include <cstddef>
 #include <cstdint>
 
-{% if has_patch_data %}
-// Real patch data: {{ patch_data_size }} bytes for {{ patch_data_host_class }}
-const uint8_t kPatchData[] = {
-    // patch data bytes would be emitted here by the patch data generator
-};
-const size_t kPatchDataSize = {{ patch_data_size }};
-const char* const kPatchDataHostClassName = "{{ patch_data_host_class }}";
-{% else %}
-// Sentinel: no patch data (default state)
 const uint8_t kPatchData[1] = { 0 };
 const size_t kPatchDataSize = 0;
 const char* const kPatchDataHostClassName = nullptr;
-{% end %}

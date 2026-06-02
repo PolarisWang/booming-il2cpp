@@ -145,13 +145,78 @@ public static class ManagedNaming
                 ToSymbolPart(method.Name),
             ]);
 
-        if (method.Parameters.Count == 0)
-            return baseSymbol;
+        var symbol = method.Parameters.Count > 0
+            ? $"{baseSymbol}_{string.Join("_", method.Parameters.Select(p => ToSymbolPart(NormalizeTypeForSymbol(p.Type))))}"
+            : baseSymbol;
 
-        var paramParts = method.Parameters
-            .Select(p => ToSymbolPart(p.Type));
-        return $"{baseSymbol}_{string.Join("_", paramParts)}";
+        // Operator overloads (op_Explicit, op_Implicit, etc.) can differ only by
+        // return type in C#. Append return type to produce unique C++ symbols.
+        if (method.Name.StartsWith("op_", StringComparison.Ordinal))
+            symbol += $"_{ToSymbolPart(method.ReturnType)}";
+
+        // Generic instantiations (SubjectId != DefinitionSubjectId) can collide
+        // with concrete overloads of the same name and parameter types.
+        // E.g. Assert.AreEqual<byte>(byte, byte) (generic instantiation) vs
+        // Assert.AreEqual(byte, byte) (concrete overload).
+        if (method.SubjectId != method.DefinitionSubjectId)
+            symbol += "__generic";
+
+        return symbol;
     }
+
+    /// <summary>
+    /// Normalize a managed type string so that array, byref, and pointer
+    /// annotations produce distinct C++ symbol parts.
+    ///
+    /// ToSymbolPart replaces non-alphanumeric characters with '_' then
+    /// trims leading/trailing '_', which collapses System.Byte[] and
+    /// System.Byte into the same token (System_Byte).  This method
+    /// replaces these annotations with explicit textual suffixes:
+    ///
+    ///   System.Byte[]  → System.Byte_array
+    ///   System.Byte[,] → System.Byte_array2d
+    ///   System.Byte&   → System.Byte_ref
+    ///   System.Byte*   → System.Byte_ptr
+    /// </summary>
+    private static string NormalizeTypeForSymbol(string typeName)
+    {
+        if (string.IsNullOrWhiteSpace(typeName))
+            return typeName;
+
+        // Process suffixes in order: [] → _array, [,] → _array2d, & → _ref, * → _ptr
+        // Each replacement is applied at most once (single pass, left-to-right would be
+        // fragile; instead find the trailing annotation region and replace).
+        var result = typeName;
+
+        // Array rank: replace [] with _array, [,] with _array2d, etc.
+        // Match [ and everything up to ] as a group.
+        var arrayMatch = s_arrayPattern.Match(result);
+        if (arrayMatch.Success)
+        {
+            var rank = arrayMatch.Groups[1].Value.Count(c => c == ',') + 1;
+            var suffix = rank switch
+            {
+                1 => "_array",
+                2 => "_array2d",
+                3 => "_array3d",
+                _ => $"_array{rank}d",
+            };
+            result = s_arrayPattern.Replace(result, suffix, 1);
+        }
+
+        // Byref: & → _ref
+        if (result.Length > 0 && result[^1] == '&')
+            result = result[..^1] + "_ref";
+
+        // Pointer: * → _ptr
+        if (result.Length > 0 && result[^1] == '*')
+            result = result[..^1] + "_ptr";
+
+        return result;
+    }
+
+    private static readonly System.Text.RegularExpressions.Regex s_arrayPattern =
+        new(@"\[,*\]", System.Text.RegularExpressions.RegexOptions.Compiled);
 
     public static string CreateInstantiationStubSymbol(InstantiationStubId instantiationStubId)
     {

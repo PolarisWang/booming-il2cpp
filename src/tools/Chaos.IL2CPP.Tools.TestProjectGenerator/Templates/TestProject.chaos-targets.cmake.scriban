@@ -39,6 +39,8 @@ target_link_libraries(chaos::runtime INTERFACE
     "${CHAOS_SDK_ROOT}/lib/${CMAKE_STATIC_LIBRARY_PREFIX}chaos_hot_update${CMAKE_STATIC_LIBRARY_SUFFIX}"
     "${CHAOS_SDK_ROOT}/lib/${CMAKE_STATIC_LIBRARY_PREFIX}chaos_eventpipe${CMAKE_STATIC_LIBRARY_SUFFIX}"
     "${CHAOS_SDK_ROOT}/lib/${CMAKE_STATIC_LIBRARY_PREFIX}chaos_debugger${CMAKE_STATIC_LIBRARY_SUFFIX}"
+    "$<$<CXX_COMPILER_ID:MSVC>:concrt.lib>"
+    "$<$<CXX_COMPILER_ID:MSVC>:msvcprt.lib>"
 )
 
 # chaos_jit is only needed in JIT mode — it references JIT-debug-contract symbols

@@ -1,4 +1,6 @@
-﻿namespace Chaos.IL2CPP.Contracts;
+﻿using System.Text;
+
+namespace Chaos.IL2CPP.Contracts;
 
 /// <summary>Code generation mode for the AOT/JIT switch.</summary>
 [Flags]
@@ -745,7 +747,14 @@ public sealed record NativeAotGeneratedSource
 {
     public required string RelativePath { get; init; }
 
-    public required string Contents { get; init; }
+    /// <summary>Content as a string. Large sources may use <see cref="ContentsBuilder"/>
+    /// instead to avoid the 2x memory overhead of ToString().</summary>
+    public string? Contents { get; init; }
+
+    /// <summary>Alternative to <see cref="Contents"/>: a StringBuilder holding the
+    /// source content.  When set, the emitter reads via <c>GetChunks()</c> to write
+    /// the file directly, avoiding a large-string copy on the LOH.</summary>
+    public System.Text.StringBuilder? ContentsBuilder { get; init; }
 }
 
 public sealed record NativeReferenceProofResult

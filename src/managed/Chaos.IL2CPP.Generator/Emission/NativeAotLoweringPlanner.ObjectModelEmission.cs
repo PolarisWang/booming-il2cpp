@@ -384,6 +384,9 @@ public sealed partial class NativeAotLoweringPlanner
 		// Sort each type's field list once.
 		foreach (var list in fieldsByDeclaringType.Values)
 			list.Sort(StringComparer.Ordinal);
+		// Store field data for shared header struct emission (BuildTypeDeclarationsCode).
+		_fieldsByDeclaringType = fieldsByDeclaringType;
+		_fieldTypeMap = fieldTypeMap;
 		int num = 2;
 		// Ensure System.String is always tracked (used in IsArrayStoreCompatible fast path)
 		TrackReferenceType("System.Private.CoreLib/System.String", null);
@@ -702,6 +705,8 @@ public sealed partial class NativeAotLoweringPlanner
 
 			num++;
 		}
+		// Capture boxed type subject IDs for shared header struct emission.
+		_boxedTypeSubjectIds = hashSet3.Count > 0 ? new HashSet<string>(hashSet3, StringComparer.Ordinal) : null;
 		var sortedHashSet3 = hashSet3.OrderBy<string, string>((string result) => result, StringComparer.Ordinal).ToArray();
 		// ── Emit missing interface type IDs for hashSet3 types ──────────────────────────────────────────
 		// hashSet3 types enter through Path B (Box/Unbox/UnboxAny scanning at
@@ -952,6 +957,8 @@ builder.AppendLine("bool chaos_is_array_store_compatible(const chaos_managed_arr
 		builder.AppendLine("    return false;");
 		builder.AppendLine("}");
 		builder.AppendLine();
+		// Capture reference type struct definitions for shared header (checkpoint start).
+		int refStructStart = builder.Length;
 		foreach (string typeSubjectId in GetReferenceTypeEmissionOrder(referenceTypeSubjectIds, referenceTypeBaseSubjectIds))
 		{
 			var ns = ManagedNaming.NormalizeSubjectIdAssembly(typeSubjectId);
@@ -1129,6 +1136,10 @@ builder.AppendLine("bool chaos_is_array_store_compatible(const chaos_managed_arr
 			builder.AppendLine("};");
 			builder.AppendLine();
 		}
+		// Move reference type struct definitions to shared header (avoid C2027 on non-page-0 TUs).
+		_referenceTypeStructCode = builder.ToString(refStructStart, builder.Length - refStructStart);
+		builder.Length = refStructStart;
+
 		// Value type struct definitions are now emitted into the shared header
 		// (BuildTypeDeclarationsCode) to avoid C2556/C2371. Types without managed
 		// fields (pure enums and _backing-only boxed types) use typedef only.
@@ -1165,6 +1176,8 @@ builder.AppendLine("bool chaos_is_array_store_compatible(const chaos_managed_arr
 			_valueTypeStructCode = vtBuilder.Length > 0 ? vtBuilder.ToString() : null;
 			_valueTypeStructSubjectIds = vtSubjectIds.Count > 0 ? vtSubjectIds : null;
 		}
+		// Capture boxed type struct definitions for shared header (checkpoint start).
+		int boxedStructStart = builder.Length;
 		foreach (string item10 in sortedHashSet3)
 		{
 			StringBuilder stringBuilder = builder;
@@ -1192,6 +1205,10 @@ builder.AppendLine("bool chaos_is_array_store_compatible(const chaos_managed_arr
 			builder.AppendLine("};");
 			builder.AppendLine();
 		}
+		// Move boxed type struct definitions to shared header (avoid C2027 on non-page-0 TUs).
+		_boxedTypeStructCode = builder.ToString(boxedStructStart, builder.Length - boxedStructStart);
+		builder.Length = boxedStructStart;
+
 		EmitObjectEqualityHelpers(builder, reachableMethods, referenceTypeSubjectIds, hashSet3);
 		EmitReflectionObjectHelpers(builder, reachableMethods, referenceTypeSubjectIds, hashSet3);
 		EmitExceptionMetadataHelpers(builder, reachableMethods);

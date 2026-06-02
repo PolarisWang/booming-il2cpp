@@ -4,13 +4,5 @@
   "generator": "Chaos.IL2CPP.Tools.TestProjectGenerator",
   "entryExecutable": "{{ project_name }}",
   "subjectCount": {{ subject_count }},
-  "subjects": [
-  {% for s in subjects %}
-    {
-      "index": {{ s.index }},
-      "kind": "{{ s.kind }}",
-      "subjectId": "{{ s.subject_id }}"
-    }{% if !for.last %},{% endif %}
-  {% endfor %}
-  ]
+  "subjects": {{ subject_metadata_json_code }}
 }
