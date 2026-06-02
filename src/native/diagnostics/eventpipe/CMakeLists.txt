@@ -18,7 +18,6 @@ add_library(chaos_eventpipe STATIC
     ep_protocol.h
     ep_platform.h
     ep_transport.h
-    ep_transport.cpp
     ep_event.h
     ep_event.cpp
     ep_gc_bridge.h
@@ -38,6 +37,12 @@ add_library(chaos_eventpipe STATIC
     ep_instance.h
     ep_instance.cpp
 )
+
+if(WIN32)
+    target_sources(chaos_eventpipe PRIVATE ep_transport_win32.cpp)
+else()
+    target_sources(chaos_eventpipe PRIVATE ep_transport_posix.cpp)
+endif()
 
 target_include_directories(chaos_eventpipe PUBLIC
     "${CMAKE_CURRENT_SOURCE_DIR}/.."          # eventpipe/... from diagnostics root
