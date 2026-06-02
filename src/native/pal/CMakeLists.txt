@@ -38,6 +38,49 @@ add_library(chaos_pal STATIC
     chaos/pal/pal_cache.h
     $<$<PLATFORM_ID:Windows>:pal_cache_win32.cpp>
     $<$<NOT:$<PLATFORM_ID:Windows>>:pal_cache_posix.cpp>
+    # ── Phase 3: Preemptive thread suspend (PAL consumer migration) ──
+    chaos/pal/pal_preempt.h
+    $<$<PLATFORM_ID:Windows>:pal_preempt_win32.cpp>
+    $<$<PLATFORM_ID:Linux>:pal_preempt_posix.cpp>
+    $<$<PLATFORM_ID:Darwin>:pal_preempt_apple.cpp>
+    $<$<PLATFORM_ID:Android>:pal_preempt_android.cpp>
+    # ── Track A: Domain heap abstraction ──────────────────────────────
+    chaos/pal/pal_heap.h
+    $<$<PLATFORM_ID:Windows>:pal_heap_win32.cpp>
+    $<$<NOT:$<PLATFORM_ID:Windows>>:pal_heap_posix.cpp>
+    # ── Track A: Low-memory monitor ───────────────────────────────────
+    chaos/pal/pal_low_mem.h
+    $<$<PLATFORM_ID:Windows>:pal_low_mem_win32.cpp>
+    $<$<PLATFORM_ID:Linux>:pal_low_mem_linux.cpp>
+    $<$<NOT:$<PLATFORM_ID:Windows,Linux>>:pal_low_mem_fallback.cpp>
+    # ── Track B: SEH-safe native call ─────────────────────────────────
+    chaos/pal/pal_eh.h
+    $<$<PLATFORM_ID:Windows>:pal_eh_win32.cpp>
+    $<$<NOT:$<PLATFORM_ID:Windows>>:pal_eh_posix.cpp>
+    # ── Track C: Wakeable queue (thread pool) ─────────────────────────
+    chaos/pal/pal_wakeable.h
+    $<$<PLATFORM_ID:Windows>:pal_wakeable_win32.cpp>
+    $<$<NOT:$<PLATFORM_ID:Windows>>:pal_wakeable_posix.cpp>
+    # ── Track 5: ETW abstraction ───────────────────────────────────────
+    chaos/pal/pal_etw.h
+    $<$<PLATFORM_ID:Windows>:pal_etw_win32.cpp>
+    $<$<NOT:$<PLATFORM_ID:Windows>>:pal_etw_posix.cpp>
+    # ── Track 7: Secure random bytes ───────────────────────────────────
+    chaos/pal/pal_random.h
+    $<$<PLATFORM_ID:Windows>:pal_random_win32.cpp>
+    $<$<NOT:$<PLATFORM_ID:Windows>>:pal_random_posix.cpp>
+    # ── Track 4: COM abstraction ─────────────────────────────────────────
+    chaos/pal/pal_com.h
+    $<$<PLATFORM_ID:Windows>:pal_com_win32.cpp>
+    $<$<NOT:$<PLATFORM_ID:Windows>>:pal_com_posix.cpp>
+    # ── Round 2: OS error/process/thread info ─────────────────────────────
+    chaos/pal/pal_error.h
+    $<$<PLATFORM_ID:Windows>:pal_error_win32.cpp>
+    $<$<NOT:$<PLATFORM_ID:Windows>>:pal_error_posix.cpp>
+    # ── Round 2: String encoding ──────────────────────────────────────────
+    chaos/pal/pal_encoding.h
+    $<$<PLATFORM_ID:Windows>:pal_encoding_win32.cpp>
+    $<$<NOT:$<PLATFORM_ID:Windows>>:pal_encoding_posix.cpp>
     )
 
 target_compile_features(chaos_pal PUBLIC cxx_std_17)
