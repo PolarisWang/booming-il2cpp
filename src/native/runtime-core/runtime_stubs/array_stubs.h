@@ -368,6 +368,40 @@ CHAOS_IL2CPP_FORCEINLINE CHAOS_IL2CPP_INTPTR ChaosArrayGetValue_Inline(CHAOS_IL2
     return accessor_get_elements(arr)[uindex];
 }
 
+// ── P4: Clear with small-clear fast path ─────────────────────────
+// For small arrays (≤64 bytes, 8 pointers), use inline stores instead
+// of memset to avoid function call overhead. Benchmarks use ≤4 elements
+// (32 bytes), where memset call overhead dominates (Clear: 194.1ns vs
+// .NET 8 123.7ns = 0.64x before optimization).
+CHAOS_IL2CPP_FORCEINLINE void ChaosArrayClear_Inline(CHAOS_IL2CPP_INTPTR array, CHAOS_IL2CPP_INT32 index, CHAOS_IL2CPP_INT32 count) noexcept
+{
+    if (array == 0 || count <= 0) return;
+    auto* arr = get_managed_array_mut(array);
+    if (index < 0) return;
+    auto uindex = static_cast<CHAOS_IL2CPP_UINTPTR>(index);
+    auto ucount = static_cast<CHAOS_IL2CPP_UINTPTR>(count);
+    if (uindex > static_cast<CHAOS_IL2CPP_UINTPTR>(arr->length) || ucount > (static_cast<CHAOS_IL2CPP_UINTPTR>(arr->length) - uindex)) return;
+
+    constexpr CHAOS_IL2CPP_SIZE kElemSize = sizeof(CHAOS_IL2CPP_INTPTR);
+    auto* dst = reinterpret_cast<CHAOS_IL2CPP_UINT8*>(accessor_get_elements(arr)) + uindex * kElemSize;
+    CHAOS_IL2CPP_SIZE bytes = ucount * kElemSize;
+
+    // Small-clear: inline stores avoid memset call overhead
+    if (CHAOS_IL2CPP_LIKELY(bytes <= 64)) {
+        // For very small clears (≤8 bytes), use a single store
+        if (bytes <= 8) {
+            CHAOS_IL2CPP_INTPTR zero = 0;
+            __builtin_memcpy(dst, &zero, bytes);
+            return;
+        }
+        // For medium clears (9-64 bytes), use __builtin_memset which the
+        // compiler expands to rep stosq or aligned vector stores when inlined.
+        __builtin_memset(dst, 0, bytes);
+        return;
+    }
+    std::memset(dst, 0, bytes);
+}
+
 // ── Array allocation helper (forceinline) ──────────────────────────
 // Centralizes the newarr allocation pattern emitted by codegen for EVERY
 // array creation site. Replaces ~10 lines of inline code with a single
