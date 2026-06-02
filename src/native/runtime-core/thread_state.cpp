@@ -330,11 +330,11 @@ void EnterPreemptiveMode() noexcept {
 }
 
 #if !defined(_WIN32) && !defined(_WIN64) && !defined(__APPLE__) && !defined(__ANDROID__)
-/// Signal handler for SIGUSR1: preemptive safepoint suspend.
+/// Signal handler for SIGUSR2: preemptive safepoint suspend.
 /// Runs in the target thread's context. Uses spin-wait because
 /// pthread_cond_wait is not async-signal-safe.
 static void SafepointSuspendHandler(int sig) {
-    if (sig != SIGUSR1) return;
+    if (sig != SIGUSR2) return;
     auto* thread = tls_this_thread;
     if (thread == nullptr) return;
 
@@ -348,7 +348,7 @@ static void SafepointSuspendHandler(int sig) {
     }
 }
 
-/// Install the SIGUSR1 handler for preemptive safepoint suspend.
+/// Install the SIGUSR2 handler for preemptive safepoint suspend.
 static std::atomic<bool> s_sigusr1_installed{false};
 static void InstallSafepointSignalHandler() noexcept {
     if (s_sigusr1_installed.load(std::memory_order_acquire)) return;
@@ -357,7 +357,7 @@ static void InstallSafepointSignalHandler() noexcept {
     sa.sa_handler = SafepointSuspendHandler;
     sigemptyset(&sa.sa_mask);
     sa.sa_flags = SA_RESTART | SA_NODEFER;
-    sigaction(SIGUSR1, &sa, nullptr);
+    sigaction(SIGUSR2, &sa, nullptr);
     s_sigusr1_installed.store(true, std::memory_order_release);
 }
 #endif
@@ -403,7 +403,7 @@ extern "C" uint32_t RequestGlobalSafepoint() noexcept {
                 {
                     ForbidSuspendScope forbid;
                     SafepointPoll();
-                    _mm_pause();
+                    CHAOS_IL2CPP_PAUSE_HINT();
                 }
                 expected = nullptr;
                 if (s_safepoint_owner.compare_exchange_strong(expected, self,
@@ -465,7 +465,7 @@ extern "C" uint32_t RequestGlobalSafepoint() noexcept {
             if (hard_timeout) break;  // force-release after hard timeout
 
             if (spin < kSpinYieldThreshold) {
-                _mm_pause();
+                CHAOS_IL2CPP_PAUSE_HINT();
             } else {
 #if defined(_WIN32) || defined(_WIN64)
                 Sleep(0);
@@ -518,9 +518,9 @@ extern "C" uint32_t RequestGlobalSafepoint() noexcept {
                                 CHAOS_IL2CPP_LOG_DEBUG("Safepoint",
                                     "APC queued for thread {0}", t->managed_id);
 #elif !defined(__APPLE__)
-                                // POSIX (non-iOS): send SIGUSR1 to force safepoint ack.
+                                // POSIX (non-iOS): send SIGUSR2 to force safepoint ack.
                                 InstallSafepointSignalHandler();
-                                pthread_kill(t->os_thread_id, SIGUSR1);
+                                pthread_kill(t->os_thread_id, SIGUSR2);
                                 t->preemptive_suspended.store(true, std::memory_order_release);
 #else
                                 // iOS: no force-suspend available. Log and continue.

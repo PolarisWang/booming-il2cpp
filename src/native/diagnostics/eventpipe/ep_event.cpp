@@ -10,9 +10,7 @@
 
 #include <cstring>
 
-#if !defined(_WIN32)
-#include <ctime>
-#endif
+#include <chaos/pal/pal_time.h>
 
 namespace chaos::il2cpp::diagnostics {
 
@@ -211,17 +209,8 @@ void EpEmitEvent(EpEventType event_type, const void* payload, uint32_t payload_s
     header.event_type = event_type;
     header.payload_size = payload_size;
 
-    // Timestamp.
-#if defined(_WIN32)
-    LARGE_INTEGER qpc;
-    QueryPerformanceCounter(&qpc);
-    header.timestamp = static_cast<uint64_t>(qpc.QuadPart);
-#else
-    struct timespec ts;
-    ::clock_gettime(CLOCK_MONOTONIC, &ts);
-    header.timestamp = static_cast<uint64_t>(ts.tv_sec) * 1000000000ULL
-                     + static_cast<uint64_t>(ts.tv_nsec);
-#endif
+    // Timestamp (uses PAL monotonic wall time).
+    header.timestamp = chaos::il2cpp::pal::PalGetWallTimeNs();
 
     // Check payload size against max.
     if (payload_size > kEpMaxPayloadSize) {

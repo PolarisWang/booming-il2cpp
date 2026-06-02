@@ -24,6 +24,10 @@
 
 #if defined(_WIN32) || defined(_WIN64)
     #include <windows.h>
+#elif defined(__linux__)
+    #include <sys/epoll.h>
+    #include <sys/eventfd.h>
+    #include <unistd.h>
 #endif
 
 namespace chaos::il2cpp::runtime_core::threading {
@@ -75,6 +79,11 @@ uint64_t GetProcessCpuTimeNs() noexcept {
 HANDLE                                    s_iocp_port = INVALID_HANDLE_VALUE;
 std::thread                               s_iocp_thread;
 std::atomic<int32_t>                      s_iocp_completions{0};
+#elif defined(__linux__)
+int                                       s_epoll_fd = -1;
+int                                       s_epoll_event_fd = -1;
+std::thread                               s_epoll_thread;
+std::atomic<int32_t>                      s_epoll_completions{0};
 #endif
 
 // ── Worker-local queue helpers ───────────────────────────────────────
@@ -276,6 +285,41 @@ void IOCPWorkerLoop() noexcept {
             s_iocp_completions.fetch_add(1, std::memory_order_relaxed);
             // ETW: I/O completion.
             ThreadPoolEventEmitIOCompletion(bytes_transferred);
+        }
+    }
+
+    UnregisterThread();
+}
+#elif defined(__linux__)
+void EpollWorkerLoop() noexcept {
+    int32_t tid = AllocateThreadId();
+    RegisterThread(tid, nullptr);
+    if (auto* mt = GetCurrentThread()) {
+        mt->is_threadpool = true;
+    }
+    EnterPreemptiveMode();
+
+    struct epoll_event events[8];
+    for (;;) {
+        int n = ::epoll_wait(s_epoll_fd, events, 8, -1);
+        if (s_shutdown.load(std::memory_order_acquire)) break;
+        if (n < 0) {
+            if (errno == EINTR) continue;
+            break;
+        }
+        for (int i = 0; i < n; i++) {
+            if (events[i].data.fd == s_epoll_event_fd) {
+                // Drain eventfd to clear the notification.
+                uint64_t val;
+                ::read(s_epoll_event_fd, &val, sizeof(val));
+                continue;
+            }
+            // Dispatch registered callback from epoll_event data.
+            if (events[i].data.ptr != nullptr) {
+                auto* cb = reinterpret_cast<void(*)(void*)>(events[i].data.ptr);
+                cb(nullptr);
+                s_epoll_completions.fetch_add(1, std::memory_order_relaxed);
+            }
         }
     }
 
@@ -651,6 +695,27 @@ void ThreadPoolInitialize() noexcept {
     if (s_iocp_port != INVALID_HANDLE_VALUE) {
         s_iocp_thread = std::thread(IOCPWorkerLoop);
     }
+#elif defined(__linux__)
+    s_epoll_fd = ::epoll_create1(EPOLL_CLOEXEC);
+    if (s_epoll_fd >= 0) {
+        s_epoll_event_fd = ::eventfd(0, EFD_CLOEXEC);
+        if (s_epoll_event_fd >= 0) {
+            struct epoll_event ev;
+            ev.events = EPOLLIN;
+            ev.data.fd = s_epoll_event_fd;
+            if (::epoll_ctl(s_epoll_fd, EPOLL_CTL_ADD, s_epoll_event_fd, &ev) == 0) {
+                s_epoll_thread = std::thread(EpollWorkerLoop);
+            } else {
+                ::close(s_epoll_event_fd);
+                s_epoll_event_fd = -1;
+                ::close(s_epoll_fd);
+                s_epoll_fd = -1;
+            }
+        } else {
+            ::close(s_epoll_fd);
+            s_epoll_fd = -1;
+        }
+    }
 #endif
 
     s_gate_thread = std::thread(GateThreadLoop);
@@ -673,6 +738,19 @@ void ThreadPoolShutdown() noexcept {
     if (s_iocp_port != INVALID_HANDLE_VALUE) {
         CloseHandle(s_iocp_port);
         s_iocp_port = INVALID_HANDLE_VALUE;
+    }
+#elif defined(__linux__)
+    if (s_epoll_event_fd >= 0) {
+        ::eventfd_write(s_epoll_event_fd, 1);
+    }
+    if (s_epoll_thread.joinable()) s_epoll_thread.join();
+    if (s_epoll_fd >= 0) {
+        ::close(s_epoll_fd);
+        s_epoll_fd = -1;
+    }
+    if (s_epoll_event_fd >= 0) {
+        ::close(s_epoll_event_fd);
+        s_epoll_event_fd = -1;
     }
 #endif
 
@@ -752,6 +830,8 @@ void ThreadPoolGateTick() noexcept {
 
 #if defined(_WIN32) || defined(_WIN64)
     completed += s_iocp_completions.exchange(0, std::memory_order_relaxed);
+#elif defined(__linux__)
+    completed += s_epoll_completions.exchange(0, std::memory_order_relaxed);
 #endif
 
     int32_t current = static_cast<int32_t>(s_workers.size());

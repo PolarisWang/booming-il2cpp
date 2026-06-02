@@ -14,7 +14,11 @@ namespace chaos::il2cpp::runtime_core {
 /// chaos_gc_collect() to reclaim memory before the OOM killer or pagefile
 /// pressure becomes critical.
 ///
-/// Other platforms: Start() is a no-op (stub).
+/// Linux: uses /proc/pressure/memory (PSI, Linux 4.20+) with poll(POLLPRI)
+/// to receive memory pressure notifications.  Threshold configured at 50ms
+/// stall in a 1-second monitoring window.
+///
+/// Unsupported platforms: Start() is a no-op (stub).
 class GcLowMemoryMonitor {
 public:
     GcLowMemoryMonitor() = default;
@@ -35,7 +39,8 @@ private:
 
     std::thread monitor_thread_;
     std::atomic<bool> shutdown_{false};
-    void* platform_supported_{nullptr};  // Stores the HANDLE* array (2 handles: low-memory notification + shutdown event).
+    void* platform_supported_{nullptr};  // Windows: HANDLE[2] (low-mem + shutdown).
+                                         // Linux:   int[3] (psi_fd + pipe_read + pipe_write).
 };
 
 /// Process-wide low-memory monitor instance.

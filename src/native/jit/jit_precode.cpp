@@ -51,7 +51,7 @@
 #include <cstring>
 #include <thread>
 
-#if !defined(_WIN32) && !defined(_WIN64)
+#if defined(__x86_64__)
   #include <immintrin.h>
 #endif
 

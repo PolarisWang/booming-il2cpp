@@ -43,6 +43,7 @@ target_include_directories(chaos_eventpipe PUBLIC
     "${CMAKE_CURRENT_SOURCE_DIR}/.."          # eventpipe/... from diagnostics root
     "${REPO_ROOT}/src/native/runtime-core"    # gc/gc_events.h
     "${REPO_ROOT}/src/native/common"          # chaos/native_types.h
+    "${REPO_ROOT}/src/native/pal"             # chaos/pal/pal_time.h
 )
 
 target_compile_options(chaos_eventpipe PRIVATE

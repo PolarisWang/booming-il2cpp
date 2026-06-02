@@ -10,12 +10,7 @@
 #include "com_platform.h"
 
 #ifndef CHAOS_SPIN_HINT
-#if defined(_M_ARM64) || defined(__aarch64__)
-#define CHAOS_SPIN_HINT() __yield()
-#else
-#include <immintrin.h>
-#define CHAOS_SPIN_HINT() _mm_pause()
-#endif
+#define CHAOS_SPIN_HINT() CHAOS_IL2CPP_PAUSE_HINT()
 #endif
 
 #include "marshal_internal.h"

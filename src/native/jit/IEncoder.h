@@ -248,6 +248,16 @@ public:
     virtual void EmitVfnmadd231pdRR(uint8_t acc, uint8_t src1, uint8_t src2) = 0;
     virtual void EmitVfnmsub231psRR(uint8_t acc, uint8_t src1, uint8_t src2) = 0;
     virtual void EmitVfnmsub231pdRR(uint8_t acc, uint8_t src1, uint8_t src2) = 0;
+
+    // ── ARM64-specific (stub on x64 — only called from #if __aarch64__) ──
+    /// Emit ADR Xreg, #imm (ARM64 PC-relative address, ±1MB range).
+    virtual void EmitAdr(uint8_t reg, int32_t imm) noexcept { (void)reg; (void)imm; }
+    /// Emit BR Xreg (ARM64 unconditional branch to register).
+    virtual void EmitBr(uint8_t reg) noexcept { (void)reg; }
+    /// Emit ADD Xdst, Xsrc, #imm (3-operand ADD immediate).
+    virtual void EmitAddRI(uint8_t dst, uint8_t src, int32_t imm) noexcept { (void)dst; (void)src; (void)imm; }
+    /// Emit STR Xdata, [Xbase, #imm] (scaled 8-byte store, imm in units of 8).
+    virtual void EmitStr64(uint8_t base, uint16_t scaled_offset, uint8_t data) noexcept { (void)base; (void)scaled_offset; (void)data; }
 };
 
 }  // namespace chaos::il2cpp::jit
