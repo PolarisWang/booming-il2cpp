@@ -12,6 +12,8 @@
 #include "ep_memorydomain_bridge.h"
 #include "ep_com_bridge.h"
 
+#include <chaos/pal/pal_error.h>
+
 #include <atomic>
 #include <mutex>
 
@@ -28,11 +30,7 @@ bool EpInitialize() noexcept {
     bool already = false;
     std::call_once(g_init_flag, [&already]() {
         // Get current process ID for pipe name.
-#if defined(_WIN32)
-        uint32_t pid = static_cast<uint32_t>(GetCurrentProcessId());
-#else
-        uint32_t pid = static_cast<uint32_t>(::getpid());
-#endif
+        uint32_t pid = static_cast<uint32_t>(chaos::il2cpp::pal::PalGetCurrentProcessId());
 
         // Initialize transport (named pipe server).
         if (!EpTransportInitialize(pid)) {

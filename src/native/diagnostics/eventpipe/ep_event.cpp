@@ -22,12 +22,8 @@ namespace {
 void SafeStrCpy(char* dst, const char* src, size_t dst_size) noexcept {
     if (dst_size == 0) return;
     if (src == nullptr) { dst[0] = '\0'; return; }
-#if defined(_WIN32)
-    strncpy_s(dst, dst_size, src, _TRUNCATE);
-#else
     ::strncpy(dst, src, dst_size);
     dst[dst_size - 1] = '\0';
-#endif
 }
 
 }  // anonymous namespace
