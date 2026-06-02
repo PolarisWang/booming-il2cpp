@@ -34,6 +34,10 @@ add_library(chaos_pal STATIC
     chaos/pal/pal_crash.h
     $<$<PLATFORM_ID:Windows>:pal_crash_win32.cpp>
     $<$<NOT:$<PLATFORM_ID:Windows>>:pal_crash_posix.cpp>
+    # ── Phase 6: Instruction cache coherency ─────────────────────────
+    chaos/pal/pal_cache.h
+    $<$<PLATFORM_ID:Windows>:pal_cache_win32.cpp>
+    $<$<NOT:$<PLATFORM_ID:Windows>>:pal_cache_posix.cpp>
     )
 
 target_compile_features(chaos_pal PUBLIC cxx_std_17)
