@@ -224,6 +224,9 @@ profiling_results/
 # ad-hoc build output directories
 build/snapshot-prover/
 
+# CMake preset build output directories
+build/linux-arm64-smoke/
+
 # Root-level CMake build output directories (CMAKE_BINARY_DIR at repo root)
 /codegen/
 /fuzz/
