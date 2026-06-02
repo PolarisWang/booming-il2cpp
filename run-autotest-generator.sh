@@ -22,11 +22,25 @@ KNOWN_DLLS["SystemTextRegularExpressions"]="$DOTNET_DIR/System.Text.RegularExpre
 KNOWN_DLLS["SystemIOCompression"]="$DOTNET_DIR/System.IO.Compression.dll"
 KNOWN_DLLS["SystemDataCommon"]="$DOTNET_DIR/System.Data.Common.dll"
 
-# Also support System.Threading.Tasks (usually empty forwarder)
-KNOWN_DLLS["SystemThreadingTasks"]="$DOTNET_DIR/System.Threading.Tasks.dll"
+# Proven high-yield DLLs
+KNOWN_DLLS["SystemTextJson"]="$DOTNET_DIR/System.Text.Json.dll"
+KNOWN_DLLS["SystemNetHttp"]="$DOTNET_DIR/System.Net.Http.dll"
+KNOWN_DLLS["SystemCollectionsImmutable"]="$DOTNET_DIR/System.Collections.Immutable.dll"
+KNOWN_DLLS["SystemLinq"]="$DOTNET_DIR/System.Linq.dll"
+KNOWN_DLLS["SystemCollectionsConcurrent"]="$DOTNET_DIR/System.Collections.Concurrent.dll"
 
-# System.Runtime.dll for types like Uri that are not in System.Private.CoreLib
-KNOWN_DLLS["SystemRuntime"]="$DOTNET_DIR/System.Runtime.dll"
+# Tier 1: Pure math/data processing DLLs (high expected deterministic yield)
+KNOWN_DLLS["SystemRuntimeNumerics"]="$DOTNET_DIR/System.Runtime.Numerics.dll"
+KNOWN_DLLS["SystemFormatsAsn1"]="$DOTNET_DIR/System.Formats.Asn1.dll"
+KNOWN_DLLS["SystemFormatsTar"]="$DOTNET_DIR/System.Formats.Tar.dll"
+KNOWN_DLLS["SystemThreadingChannels"]="$DOTNET_DIR/System.Threading.Channels.dll"
+KNOWN_DLLS["SystemReflectionMetadata"]="$DOTNET_DIR/System.Reflection.Metadata.dll"
+
+# Tier 2: Moderate expected yield
+KNOWN_DLLS["SystemIOPipelines"]="$DOTNET_DIR/System.IO.Pipelines.dll"
+KNOWN_DLLS["SystemLinqAsyncEnumerable"]="$DOTNET_DIR/System.Linq.AsyncEnumerable.dll"
+KNOWN_DLLS["SystemSecurityAccessControl"]="$DOTNET_DIR/System.Security.AccessControl.dll"
+KNOWN_DLLS["SystemDiagnosticsDiagnosticSource"]="$DOTNET_DIR/System.Diagnostics.DiagnosticSource.dll"
 
 # Individual high-value types from System.Private.CoreLib (non-generic)
 declare -A PRIVATE_TYPES

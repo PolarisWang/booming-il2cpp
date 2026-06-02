@@ -375,7 +375,7 @@ public sealed class TestEmitter
                 // Exception subjects generate Assert.Throws<T> — count as assertion
                 if (r.HasException && r.ExceptionType is not null) return true;
                 // Deterministic return value subjects generate Assert.AreEqual
-                return r is { IsDeterministic: true, IsVoid: false };
+                return r is { IsDeterministic: true, IsVoid: false, ReturnValueJson: not null };
             });
 
             if (anyAssertion)
