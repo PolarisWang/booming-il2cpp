@@ -292,7 +292,10 @@ public:
         EmitBl(buf_, offset);
     }
     void EmitCallRipRel(int32_t) override {
-        CHAOS_IL2CPP_FAIL();
+        // LDR X17, #0; BLR X17 — the imm19 is patched later by slot table
+        // emission in NativeCodeGenerator (jit_engine.cpp slot_table loop).
+        buf_.Emit32(0x58000011u);  // LDR X17, #0 (placeholder)
+        buf_.Emit32(0xD63F0220u);  // BLR X17
     }
     void EmitCallReg(uint8_t reg) override {
         EmitBlr(buf_, reg);

@@ -285,10 +285,32 @@ elseif(ROADMAP0_PRESET_TARGET STREQUAL "ios-arm64-packaging")
     add_subdirectory(tests/contracts/native/gc)
     add_subdirectory(tests/contracts/native/runtime-core)
     add_subdirectory(tests/contracts/native/common)
+
+    # ── ARM64 JIT encoder smoke test ──────────────────────────────────
+    message(STATUS "Checking arm64_jit_smoke_test.cpp...")
+    if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/tests/contracts/native/runtime-core/arm64_jit_smoke_test.cpp")
+        message(STATUS "Found arm64_jit_smoke_test.cpp, adding chaos_arm64_jit_smoke target")
+        add_executable(chaos_arm64_jit_smoke
+            tests/contracts/native/runtime-core/arm64_jit_smoke_test.cpp)
+        target_compile_features(chaos_arm64_jit_smoke PRIVATE cxx_std_17)
+        target_include_directories(chaos_arm64_jit_smoke PRIVATE
+            "${CMAKE_CURRENT_SOURCE_DIR}/src/native/jit"
+            "${CMAKE_CURRENT_SOURCE_DIR}/src/native/common"
+            "${CMAKE_CURRENT_SOURCE_DIR}/src/native/runtime-core"
+            "${CMAKE_CURRENT_SOURCE_DIR}/third_party/fmt/include")
+        target_link_libraries(chaos_arm64_jit_smoke PRIVATE chaos_jit)
+        set_target_properties(chaos_arm64_jit_smoke PROPERTIES
+            RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/../bin"
+            ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/../lib")
+    else()
+        message(STATUS "NOT FOUND: arm64_jit_smoke_test.cpp")
+    endif()
+
 elseif(ROADMAP0_PRESET_TARGET STREQUAL "linux-x64-packaging")
     add_compile_definitions(CHAOS_IL2CPP_TARGET_PLATFORM_LINUX=1)
     add_subdirectory(tests/integration/platform-hosts/linux-packaging)
 elseif(ROADMAP0_PRESET_TARGET STREQUAL "linux-arm64-smoke")
+    message(STATUS "ENTERED linux-arm64-smoke branch")
     add_compile_definitions(CHAOS_IL2CPP_TARGET_PLATFORM_LINUX=1)
     include(cmake/config-tier.cmake)
 
@@ -309,6 +331,92 @@ elseif(ROADMAP0_PRESET_TARGET STREQUAL "linux-arm64-smoke")
     add_subdirectory(tests/contracts/native/gc)
     add_subdirectory(tests/contracts/native/runtime-core)
     add_subdirectory(tests/contracts/native/common)
+
+    # ── ARM64 JIT encoder smoke test ──────────────────────────────────
+    message(STATUS "Checking arm64_jit_smoke_test.cpp...")
+    if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/tests/contracts/native/runtime-core/arm64_jit_smoke_test.cpp")
+        message(STATUS "Found arm64_jit_smoke_test.cpp, adding chaos_arm64_jit_smoke target")
+        add_executable(chaos_arm64_jit_smoke
+            tests/contracts/native/runtime-core/arm64_jit_smoke_test.cpp)
+        target_compile_features(chaos_arm64_jit_smoke PRIVATE cxx_std_17)
+        target_include_directories(chaos_arm64_jit_smoke PRIVATE
+            "${CMAKE_CURRENT_SOURCE_DIR}/src/native/jit"
+            "${CMAKE_CURRENT_SOURCE_DIR}/src/native/common"
+            "${CMAKE_CURRENT_SOURCE_DIR}/src/native/runtime-core"
+            "${CMAKE_CURRENT_SOURCE_DIR}/src/native/runtime-core/gc"
+            "${CMAKE_CURRENT_SOURCE_DIR}/src/native/runtime-core/runtime_stubs"
+            "${CMAKE_CURRENT_SOURCE_DIR}/src/native/interpreter"
+            "${CMAKE_CURRENT_SOURCE_DIR}/src/native/interpreter/generated"
+            "${CMAKE_CURRENT_SOURCE_DIR}/src/native/diagnostics"
+            "${CMAKE_CURRENT_SOURCE_DIR}/contracts/native/v0"
+            "${CMAKE_CURRENT_SOURCE_DIR}/third_party/fmt/include"
+            "${CMAKE_CURRENT_SOURCE_DIR}/third_party/unordered_dense/include")
+        target_link_libraries(chaos_arm64_jit_smoke PRIVATE
+            "-Wl,--start-group"
+            "${CMAKE_BINARY_DIR}/src/native/jit/libchaos_jit.a"
+            "${CMAKE_BINARY_DIR}/src/native/runtime-core/libchaos_runtime_core.a"
+            "${CMAKE_BINARY_DIR}/src/native/interpreter/libchaos_interpreter.a"
+            "${CMAKE_BINARY_DIR}/src/native/bootstrap/libchaos_bootstrap.a"
+            "${CMAKE_BINARY_DIR}/src/native/hot-update/libchaos_hot_update.a"
+            "${CMAKE_BINARY_DIR}/src/native/support/libchaos_support.a"
+            "${CMAKE_BINARY_DIR}/src/native/common/libchaos_common.a"
+            "${CMAKE_BINARY_DIR}/src/native/pal/libchaos_pal.a"
+            "${CMAKE_BINARY_DIR}/src/native/diagnostics/eventpipe/libchaos_eventpipe.a"
+            "${CMAKE_BINARY_DIR}/fmt_build/libchaos_fmt.a"
+            "-Wl,--end-group"
+            "-lnuma")
+        set_target_properties(chaos_arm64_jit_smoke PROPERTIES
+            RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/../bin"
+            ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/../lib")
+    else()
+        message(STATUS "NOT FOUND: arm64_jit_smoke_test.cpp")
+    endif()
+
+    # ── ARM64 JIT code execution test ───────────────────────────────────
+    message(STATUS "Checking arm64_jit_exec_test.cpp...")
+    if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/tests/contracts/native/runtime-core/arm64_jit_exec_test.cpp")
+        message(STATUS "Found arm64_jit_exec_test.cpp, adding chaos_arm64_jit_exec target")
+        add_executable(chaos_arm64_jit_exec
+            tests/contracts/native/runtime-core/arm64_jit_exec_test.cpp
+            src/native/jit/jit_helpers.cpp)
+        target_compile_features(chaos_arm64_jit_exec PRIVATE cxx_std_17)
+        target_include_directories(chaos_arm64_jit_exec PRIVATE
+            "${CMAKE_CURRENT_SOURCE_DIR}/src/native/jit"
+            "${CMAKE_CURRENT_SOURCE_DIR}/src/native/common"
+            "${CMAKE_CURRENT_SOURCE_DIR}/src/native/runtime-core"
+            "${CMAKE_CURRENT_SOURCE_DIR}/src/native/runtime-core/gc"
+            "${CMAKE_CURRENT_SOURCE_DIR}/src/native/runtime-core/runtime_stubs"
+            "${CMAKE_CURRENT_SOURCE_DIR}/src/native/interpreter"
+            "${CMAKE_CURRENT_SOURCE_DIR}/src/native/interpreter/generated"
+            "${CMAKE_CURRENT_SOURCE_DIR}/src/native/diagnostics"
+            "${CMAKE_CURRENT_SOURCE_DIR}/src/native/pal"
+            "${CMAKE_CURRENT_SOURCE_DIR}/contracts/native/v0"
+            "${CMAKE_CURRENT_SOURCE_DIR}/third_party/fmt/include"
+            "${CMAKE_CURRENT_SOURCE_DIR}/third_party/unordered_dense/include"
+            "${CMAKE_CURRENT_SOURCE_DIR}/testing/src/native/runtime-core/gc"
+            "${CMAKE_CURRENT_SOURCE_DIR}/testing")
+        target_link_libraries(chaos_arm64_jit_exec PRIVATE
+            "-Wl,--start-group"
+            "${CMAKE_BINARY_DIR}/src/native/jit/libchaos_jit.a"
+            "${CMAKE_BINARY_DIR}/src/native/runtime-core/libchaos_runtime_core.a"
+            "${CMAKE_BINARY_DIR}/src/native/interpreter/libchaos_interpreter.a"
+            "${CMAKE_BINARY_DIR}/src/native/bootstrap/libchaos_bootstrap.a"
+            "${CMAKE_BINARY_DIR}/src/native/hot-update/libchaos_hot_update.a"
+            "${CMAKE_BINARY_DIR}/src/native/support/libchaos_support.a"
+            "${CMAKE_BINARY_DIR}/src/native/common/libchaos_common.a"
+            "${CMAKE_BINARY_DIR}/src/native/pal/libchaos_pal.a"
+            "${CMAKE_BINARY_DIR}/src/native/diagnostics/eventpipe/libchaos_eventpipe.a"
+            "${CMAKE_BINARY_DIR}/fmt_build/libchaos_fmt.a"
+            "-Wl,--end-group"
+            "-lnuma")
+        set_target_properties(chaos_arm64_jit_exec PROPERTIES
+            RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/../bin"
+            ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/../lib")
+        target_compile_definitions(chaos_arm64_jit_exec PRIVATE
+            CHAOS_IL2CPP_LOG_LEVEL=3)
+    else()
+        message(STATUS "NOT FOUND: arm64_jit_exec_test.cpp")
+    endif()
 else()
     message(FATAL_ERROR "Unsupported ROADMAP0_PRESET_TARGET='${ROADMAP0_PRESET_TARGET}'")
 endif()

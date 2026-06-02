@@ -1489,7 +1489,12 @@ bool NativeCodeGenerator::EmitInstruction(const interpreter::RegisterInstruction
     case IROpCode::Br: {
         uint32_t target = instr.imm.branch_target;
         if (target < current_instr_index_) EmitSafepointPoll();
-        uint32_t patch_off = buf_.pos() + 1;
+        uint32_t patch_off
+#if defined(__aarch64__)
+            = buf_.pos();
+#else
+            = buf_.pos() + 1;
+#endif
         enc_.EmitJmpRel32(0);
         branch_patches_.push_back({patch_off, target});
         return true;

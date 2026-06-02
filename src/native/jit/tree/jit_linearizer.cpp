@@ -297,7 +297,7 @@ uint32_t Linearizer::LinearizeNode(
                              static_cast<uint8_t>(val_vreg), 0,
                              interpreter::kRegHasSrc1 | interpreter::kRegHasImm |
                              interpreter::kRegIsStore);
-        ri.imm.operand_index = node->operand_index;
+        ri.imm.operand_index = node->arg_count;
         out.push_back(ri);
         return 0;
     }

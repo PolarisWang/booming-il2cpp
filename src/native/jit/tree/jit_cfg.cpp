@@ -226,8 +226,10 @@ static void ComputeDominators(std::vector<CfgBlock>& blocks) noexcept {
     }
 
     // Step 5: Write idom back to CfgBlock (idom[w] = vertex ID)
+    // Only process reachable blocks (dfs_clock of them); unreachable
+    // blocks have vertex[i] == UINT32_MAX and must be skipped.
     blocks[0].idom = -1;  // entry
-    for (uint32_t i = 1; i < n; ++i) {
+    for (uint32_t i = 1; i < lt.dfs_clock; ++i) {
         uint32_t w = lt.vertex[i];
         blocks[w].idom = static_cast<int32_t>(lt.idom[w]);
     }

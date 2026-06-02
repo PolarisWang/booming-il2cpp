@@ -194,7 +194,7 @@ TreeBuildResult TreeBuilder::Build(const interpreter::RegisterInstruction* instr
             ExprNode* value = ri.has_src1() ? ResolveVReg(ri.src1_reg(), 0) : nullptr;
             node = AllocNode(kStLoc, kVoid, value);
             if (node) {
-                node->operand_index = ri.imm.operand_index;  // local vreg
+                node->arg_count = ri.imm.operand_index;  // local vreg (child1/arg_count slot — child1 unused for StLoc)
                 node->set_vn_id(vn_.GetOrCreate(VNKey::Leaf(kStLoc, ri.imm.operand_index)));
             }
             is_root = true;
