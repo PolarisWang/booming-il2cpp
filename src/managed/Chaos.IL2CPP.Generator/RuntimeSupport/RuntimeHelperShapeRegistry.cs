@@ -3827,16 +3827,32 @@ public sealed partial class NativeAotLoweringPlanner
                 }));
 
 
-            // === Array::Clear ===
-            registry.Register("System.Array", "Clear", ["System.Array", "System.Int32", "System.Int32"],
-                ShapeKind.SimpleForward, "ChaosArrayClear",
-                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[3]
+            // === Array::Clear (GenericShapeDescriptor for DirectNativeSymbol) ===
+            registry.RegisterGeneric(new GenericShapeDescriptor(
+                TypeDisplayNamePrefix: "System.Array",
+                MethodName: "Clear",
+                Resolver: static (planner, callee, typeArgs) =>
                 {
-                    CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
-                    CreateInt32AbiSlot(),
-                    CreateInt32AbiSlot(),
-                }), CreateVoidAbiSlot(),
-                new HashSet<int> { 0, 1, 2 });
+                    var paramTypes = GetMethodParameterTypesFromSubjectId(callee);
+                    if (paramTypes.Count != 3) return null;
+                    var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
+                    var src = RenderSimpleExternalRuntimeHelper("void", symbol,
+                        "CHAOS_IL2CPP_INTPTR chaos_arg_0, CHAOS_IL2CPP_INT32 chaos_arg_1, CHAOS_IL2CPP_INT32 chaos_arg_2",
+                    [
+                        "    ChaosArrayClear(chaos_arg_0, chaos_arg_1, chaos_arg_2);",
+                    ]);
+                    return new GenericShapeResolution(src, symbol,
+                        new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[3]
+                        {
+                            CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
+                            CreateInt32AbiSlot(),
+                            CreateInt32AbiSlot(),
+                        }),
+                        CreateVoidAbiSlot(),
+                        new HashSet<int> { 0, 1, 2 },
+                        DirectNativeSymbol: "ChaosArrayClear_Inline",
+                        DirectNativeHeader: "runtime_stubs/array_stubs.h");
+                }));
 
             // === Type::IsAssignableFrom ===
             registry.Register("System.Type", "IsAssignableFrom", ["System.Type"],

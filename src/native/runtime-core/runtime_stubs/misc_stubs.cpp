@@ -17,6 +17,7 @@
 #include "gc/gc_young_collector.h"
 #include "gc/gc_loh.h"
 #include "thread_state.h"
+#include "runtime_stubs/array_stubs.h"
 
 namespace chaos::il2cpp::runtime_core {
 extern "C" {
@@ -24,16 +25,7 @@ extern "C" {
 // ── Array operations ──
 void ChaosArrayClear(CHAOS_IL2CPP_INTPTR array, CHAOS_IL2CPP_INT32 index, CHAOS_IL2CPP_INT32 count) noexcept
 {
-    if (array == 0 || count <= 0) return;
-    auto* arr = get_managed_array_mut(array);
-    if (index < 0 || count < 0) return;
-    auto uindex = static_cast<CHAOS_IL2CPP_UINTPTR>(index);
-    auto ucount = static_cast<CHAOS_IL2CPP_UINTPTR>(count);
-    if (uindex > static_cast<CHAOS_IL2CPP_UINTPTR>(arr->length) || ucount > (static_cast<CHAOS_IL2CPP_UINTPTR>(arr->length) - uindex)) return;
-
-    std::memset(
-        reinterpret_cast<CHAOS_IL2CPP_UINT8*>(accessor_get_elements(arr)) + uindex * sizeof(void*),
-        0, ucount * sizeof(void*));
+    ::ChaosArrayClear_Inline(array, index, count);
 }
 
 CHAOS_IL2CPP_INT32 ChaosArrayGetLength(CHAOS_IL2CPP_INTPTR array, CHAOS_IL2CPP_INT32 dimension) noexcept
