@@ -130,6 +130,9 @@ enum SimdSubOperation : uint8_t {
     kSimdLoad      = 22,  // movdqa/movdqu from memory
     kSimdStore     = 23,  // movdqa/movdqu to memory
     kSimdZero      = 24,  // pxor-self (zero XMM)
+    kSimdMin       = 25,  // min (float: fmin, int: pmin)
+    kSimdMax       = 26,  // max (float: fmax, int: pmax)
+    kSimdDiv       = 27,  // div (float: divps/divpd; no packed int div)
 };
 
 // ── SIMD element type ──────────────────────────────────────────────────

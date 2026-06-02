@@ -171,6 +171,11 @@ inline void EmitAdd64Imm(CodeBuffer& buf, uint8_t rd, uint8_t rn, uint16_t imm12
     EmitArm64(buf, 0x91000000u | (static_cast<uint32_t>(imm12 & 0xFFF) << 10) | (rn << 5) | rd);
 }
 
+/// 64-bit ADD Rd, Rn, #imm12, LSL #12 (shifted immediate)
+inline void EmitAdd64ImmShift(CodeBuffer& buf, uint8_t rd, uint8_t rn, uint16_t imm12) noexcept {
+    EmitArm64(buf, 0x91400000u | (static_cast<uint32_t>(imm12 & 0xFFF) << 10) | (rn << 5) | rd);
+}
+
 /// 32-bit ADD Wd, Wn, #imm12
 inline void EmitAdd32Imm(CodeBuffer& buf, uint8_t rd, uint8_t rn, uint16_t imm12) noexcept {
     EmitArm64(buf, 0x11000000u | (static_cast<uint32_t>(imm12 & 0xFFF) << 10) | (rn << 5) | rd);
@@ -181,6 +186,11 @@ inline void EmitSub64Imm(CodeBuffer& buf, uint8_t rd, uint8_t rn, uint16_t imm12
     EmitArm64(buf, 0xD1000000u | (static_cast<uint32_t>(imm12 & 0xFFF) << 10) | (rn << 5) | rd);
 }
 
+/// 64-bit SUB Rd, Rn, #imm12, LSL #12 (shifted immediate)
+inline void EmitSub64ImmShift(CodeBuffer& buf, uint8_t rd, uint8_t rn, uint16_t imm12) noexcept {
+    EmitArm64(buf, 0xD1400000u | (static_cast<uint32_t>(imm12 & 0xFFF) << 10) | (rn << 5) | rd);
+}
+
 /// 32-bit SUB Wd, Wn, #imm12
 inline void EmitSub32Imm(CodeBuffer& buf, uint8_t rd, uint8_t rn, uint16_t imm12) noexcept {
     EmitArm64(buf, 0x51000000u | (static_cast<uint32_t>(imm12 & 0xFFF) << 10) | (rn << 5) | rd);
@@ -189,6 +199,11 @@ inline void EmitSub32Imm(CodeBuffer& buf, uint8_t rd, uint8_t rn, uint16_t imm12
 /// 64-bit CMP Rn, #imm12 (alias for SUBS XZR, Rn, #imm12)
 inline void EmitCmp64Imm(CodeBuffer& buf, uint8_t rn, uint16_t imm12) noexcept {
     EmitArm64(buf, 0xF1000000u | (static_cast<uint32_t>(imm12 & 0xFFF) << 10) | (rn << 5));
+}
+
+/// 64-bit CMP Rn, #imm12, LSL #12 (shifted immediate)
+inline void EmitCmp64ImmShift(CodeBuffer& buf, uint8_t rn, uint16_t imm12) noexcept {
+    EmitArm64(buf, 0xF1400000u | (static_cast<uint32_t>(imm12 & 0xFFF) << 10) | (rn << 5));
 }
 
 /// 32-bit CMP Wn, #imm12
@@ -459,9 +474,13 @@ inline void EmitCsel32(CodeBuffer& buf, uint8_t rd, uint8_t rn, uint8_t rm, uint
     EmitArm64(buf, 0x1A800000u | (rm << 16) | (cond << 12) | (rn << 5) | rd);
 }
 
-/// CSET Xd, cond (alias for CSEL Xd, XZR, XZR, inv(cond))
+/// CSET Xd, cond (alias for CSINC Xd, XZR, XZR, inv(cond))
 inline void EmitCset64(CodeBuffer& buf, uint8_t rd, uint8_t cond) noexcept {
-    EmitCsel64(buf, rd, 31, 31, cond ^ 1);
+    // CSINC Xd, XZR, XZR, inv(cond):
+    //   if cond: Xd = XZR     + 1 = 1   (CSINC adds 1 when condition is false)
+    //   else:    Xd = XZR           = 0
+    // Base 0x9A800400: bit 10 = 1 distinguishes CSINC (op2=10) from CSEL (op2=00)
+    EmitArm64(buf, 0x9A800400u | (31u << 16) | ((cond ^ 1) << 12) | (31u << 5) | rd);
 }
 
 // ═══════════════════════════════════════════════════════════════════════════
@@ -564,23 +583,23 @@ inline void EmitSxth(CodeBuffer& buf, uint8_t rd, uint8_t rn) noexcept {
 
 /// 64-bit scalar FADD Dd, Dn, Dm
 inline void EmitFadd64(CodeBuffer& buf, uint8_t rd, uint8_t rn, uint8_t rm) noexcept {
-    EmitArm64(buf, 0x1E603800u | (rm << 16) | (rn << 5) | rd);
+    EmitArm64(buf, 0x1E602800u | (rm << 16) | (rn << 5) | rd);
 }
 
 /// 32-bit scalar FADD Sd, Sn, Sm
 inline void EmitFadd32(CodeBuffer& buf, uint8_t rd, uint8_t rn, uint8_t rm) noexcept {
-    EmitArm64(buf, 0x1E203800u | (rm << 16) | (rn << 5) | rd);
+    EmitArm64(buf, 0x1E202800u | (rm << 16) | (rn << 5) | rd);
 }
 
 /// 64-bit FSUB Dd, Dn, Dm
 inline void EmitFsub64(CodeBuffer& buf, uint8_t rd, uint8_t rn, uint8_t rm) noexcept {
-    // FSUB = FADD with bit 20 set
-    EmitArm64(buf, 0x1E703800u | (rm << 16) | (rn << 5) | rd);
+    // FSUB base: bits 13:12 = 11, bit 20 = 0 (Rm field area)
+    EmitArm64(buf, 0x1E603800u | (rm << 16) | (rn << 5) | rd);
 }
 
 /// 32-bit FSUB Sd, Sn, Sm
 inline void EmitFsub32(CodeBuffer& buf, uint8_t rd, uint8_t rn, uint8_t rm) noexcept {
-    EmitArm64(buf, 0x1E303800u | (rm << 16) | (rn << 5) | rd);
+    EmitArm64(buf, 0x1E203800u | (rm << 16) | (rn << 5) | rd);
 }
 
 /// 64-bit FMUL Dd, Dn, Dm
@@ -861,6 +880,199 @@ inline void EmitDup2D(CodeBuffer& buf, uint8_t rd, uint8_t rn) noexcept {
     EmitArm64(buf, 0x4E030400u | (rn << 5) | rd);
 }
 
+// ── Integer SMIN/SMAX/UMIN/UMAX (3-same integer) ───────────────────────────
+
+/// SMIN Vd.16B, Vn.16B, Vm.16B (signed min, 16 × int8)
+inline void EmitSmin16B(CodeBuffer& buf, uint8_t rd, uint8_t rn, uint8_t rm) noexcept {
+    EmitArm64(buf, 0x4E206C00u | (rm << 16) | (rn << 5) | rd);
+}
+
+/// SMIN Vd.8H, Vn.8H, Vm.8H (signed min, 8 × int16)
+inline void EmitSmin8H(CodeBuffer& buf, uint8_t rd, uint8_t rn, uint8_t rm) noexcept {
+    EmitArm64(buf, 0x4E606C00u | (rm << 16) | (rn << 5) | rd);
+}
+
+/// SMIN Vd.4S, Vn.4S, Vm.4S (signed min, 4 × int32)
+inline void EmitSmin4S(CodeBuffer& buf, uint8_t rd, uint8_t rn, uint8_t rm) noexcept {
+    EmitArm64(buf, 0x4EA06C00u | (rm << 16) | (rn << 5) | rd);
+}
+
+/// SMAX Vd.16B, Vn.16B, Vm.16B (signed max, 16 × int8)
+inline void EmitSmax16B(CodeBuffer& buf, uint8_t rd, uint8_t rn, uint8_t rm) noexcept {
+    EmitArm64(buf, 0x4E206400u | (rm << 16) | (rn << 5) | rd);
+}
+
+/// SMAX Vd.8H, Vn.8H, Vm.8H (signed max, 8 × int16)
+inline void EmitSmax8H(CodeBuffer& buf, uint8_t rd, uint8_t rn, uint8_t rm) noexcept {
+    EmitArm64(buf, 0x4E606400u | (rm << 16) | (rn << 5) | rd);
+}
+
+/// SMAX Vd.4S, Vn.4S, Vm.4S (signed max, 4 × int32)
+inline void EmitSmax4S(CodeBuffer& buf, uint8_t rd, uint8_t rn, uint8_t rm) noexcept {
+    EmitArm64(buf, 0x4EA06400u | (rm << 16) | (rn << 5) | rd);
+}
+
+/// UMIN Vd.16B, Vn.16B, Vm.16B (unsigned min, 16 × uint8)
+inline void EmitUmin16B(CodeBuffer& buf, uint8_t rd, uint8_t rn, uint8_t rm) noexcept {
+    EmitArm64(buf, 0x6E206C00u | (rm << 16) | (rn << 5) | rd);
+}
+
+/// UMIN Vd.8H, Vn.8H, Vm.8H (unsigned min, 8 × uint16)
+inline void EmitUmin8H(CodeBuffer& buf, uint8_t rd, uint8_t rn, uint8_t rm) noexcept {
+    EmitArm64(buf, 0x6E606C00u | (rm << 16) | (rn << 5) | rd);
+}
+
+/// UMIN Vd.4S, Vn.4S, Vm.4S (unsigned min, 4 × uint32)
+inline void EmitUmin4S(CodeBuffer& buf, uint8_t rd, uint8_t rn, uint8_t rm) noexcept {
+    EmitArm64(buf, 0x6EA06C00u | (rm << 16) | (rn << 5) | rd);
+}
+
+/// UMAX Vd.16B, Vn.16B, Vm.16B (unsigned max, 16 × uint8)
+inline void EmitUmax16B(CodeBuffer& buf, uint8_t rd, uint8_t rn, uint8_t rm) noexcept {
+    EmitArm64(buf, 0x6E206400u | (rm << 16) | (rn << 5) | rd);
+}
+
+/// UMAX Vd.8H, Vn.8H, Vm.8H (unsigned max, 8 × uint16)
+inline void EmitUmax8H(CodeBuffer& buf, uint8_t rd, uint8_t rn, uint8_t rm) noexcept {
+    EmitArm64(buf, 0x6E606400u | (rm << 16) | (rn << 5) | rd);
+}
+
+/// UMAX Vd.4S, Vn.4S, Vm.4S (unsigned max, 4 × uint32)
+inline void EmitUmax4S(CodeBuffer& buf, uint8_t rd, uint8_t rn, uint8_t rm) noexcept {
+    EmitArm64(buf, 0x6EA06400u | (rm << 16) | (rn << 5) | rd);
+}
+
+// ── XTN / SQXTN (2-register misc, narrow) ───────────────────────────────────
+
+/// XTN Vd.8B, Vn.8H (narrow, extract low bytes from 8 × int16)
+inline void EmitXtn8B(CodeBuffer& buf, uint8_t rd, uint8_t rn) noexcept {
+    EmitArm64(buf, 0x0E212800u | (rn << 5) | rd);
+}
+
+/// XTN Vd.4H, Vn.4S (narrow, extract low halfwords from 4 × int32)
+inline void EmitXtn4H(CodeBuffer& buf, uint8_t rd, uint8_t rn) noexcept {
+    EmitArm64(buf, 0x0E612800u | (rn << 5) | rd);
+}
+
+/// XTN Vd.2S, Vn.2D (narrow, extract low words from 2 × int64)
+inline void EmitXtn2S(CodeBuffer& buf, uint8_t rd, uint8_t rn) noexcept {
+    EmitArm64(buf, 0x0EA12800u | (rn << 5) | rd);
+}
+
+/// SQXTN Vd.8B, Vn.8H (signed saturating narrow, 8 × int16 → 8 × int8)
+inline void EmitSqxtn8B(CodeBuffer& buf, uint8_t rd, uint8_t rn) noexcept {
+    EmitArm64(buf, 0x0E214800u | (rn << 5) | rd);
+}
+
+/// SQXTN Vd.4H, Vn.4S (signed saturating narrow, 4 × int32 → 4 × int16)
+inline void EmitSqxtn4H(CodeBuffer& buf, uint8_t rd, uint8_t rn) noexcept {
+    EmitArm64(buf, 0x0E614800u | (rn << 5) | rd);
+}
+
+/// SQXTN Vd.2S, Vn.2D (signed saturating narrow, 2 × int64 → 2 × int32)
+inline void EmitSqxtn2S(CodeBuffer& buf, uint8_t rd, uint8_t rn) noexcept {
+    EmitArm64(buf, 0x0EA14800u | (rn << 5) | rd);
+}
+
+// ── SMOV / UMOV (element extract to GPR) ────────────────────────────────────
+
+/// SMOV Wd, Vn.B[index] (signed byte to GPR, 32-bit)
+/// imm5 = 1 | (index << 1). Vn at bits[9:5], Rd at bits[4:0].
+inline void EmitSmovB(CodeBuffer& buf, uint8_t rd, uint8_t rn, uint8_t index) noexcept {
+    uint32_t imm5 = 1u | (static_cast<uint32_t>(index & 0xF) << 1);
+    EmitArm64(buf, 0x0E002C00u | (imm5 << 16) | (rn << 5) | rd);
+}
+
+/// SMOV Wd, Vn.H[index] (signed halfword to GPR, 32-bit)
+/// imm5 = 2 | (index << 2). Vn at bits[9:5], Rd at bits[4:0].
+inline void EmitSmovH(CodeBuffer& buf, uint8_t rd, uint8_t rn, uint8_t index) noexcept {
+    uint32_t imm5 = 2u | (static_cast<uint32_t>(index & 0x7) << 2);
+    EmitArm64(buf, 0x0E002C00u | (imm5 << 16) | (rn << 5) | rd);
+}
+
+/// SMOV Xd, Vn.S[index] (signed word to GPR, 64-bit)
+/// imm5 = 4 | (index << 3). Vn at bits[9:5], Rd at bits[4:0].
+inline void EmitSmovS(CodeBuffer& buf, uint8_t rd, uint8_t rn, uint8_t index) noexcept {
+    uint32_t imm5 = 4u | (static_cast<uint32_t>(index & 0x3) << 3);
+    EmitArm64(buf, 0x4E002C00u | (imm5 << 16) | (rn << 5) | rd);
+}
+
+/// UMOV Wd, Vn.B[index] (unsigned byte to GPR)
+inline void EmitUmovB(CodeBuffer& buf, uint8_t rd, uint8_t rn, uint8_t index) noexcept {
+    uint32_t imm5 = 1u | (static_cast<uint32_t>(index & 0xF) << 1);
+    EmitArm64(buf, 0x0E003C00u | (imm5 << 16) | (rn << 5) | rd);
+}
+
+/// UMOV Wd, Vn.H[index] (unsigned halfword to GPR)
+inline void EmitUmovH(CodeBuffer& buf, uint8_t rd, uint8_t rn, uint8_t index) noexcept {
+    uint32_t imm5 = 2u | (static_cast<uint32_t>(index & 0x7) << 2);
+    EmitArm64(buf, 0x0E003C00u | (imm5 << 16) | (rn << 5) | rd);
+}
+
+/// UMOV Wd, Vn.S[index] (unsigned word to GPR, alias MOV)
+inline void EmitUmovS(CodeBuffer& buf, uint8_t rd, uint8_t rn, uint8_t index) noexcept {
+    uint32_t imm5 = 4u | (static_cast<uint32_t>(index & 0x3) << 3);
+    EmitArm64(buf, 0x0E003C00u | (imm5 << 16) | (rn << 5) | rd);
+}
+
+/// UMOV Xd, Vn.D[index] (doubleword to GPR, alias MOV)
+inline void EmitUmovD(CodeBuffer& buf, uint8_t rd, uint8_t rn, uint8_t index) noexcept {
+    uint32_t imm5 = 8u | (static_cast<uint32_t>(index & 0x1) << 4);
+    EmitArm64(buf, 0x4E003C00u | (imm5 << 16) | (rn << 5) | rd);
+}
+
+// ── INS (insert scalar from GPR) ────────────────────────────────────────────
+//
+// INS encoding: element type + index encoded in imm5 at bits[20:16].
+// imm5 = (1 << size) | (index << (size+1)) where size: 0=B,1=H,2=S,3=D.
+// Rn (GPR source) at bits[9:5], Rd (V destination) at bits[4:0].
+
+/// INS Vd.B[index], Wn (insert byte from GPR)
+inline void EmitInsB(CodeBuffer& buf, uint8_t rd, uint8_t rn, uint8_t index) noexcept {
+    uint32_t imm5 = 1u | (static_cast<uint32_t>(index & 0xF) << 1);
+    EmitArm64(buf, 0x4E001C00u | (imm5 << 16) | (rn << 5) | rd);
+}
+
+/// INS Vd.H[index], Wn (insert halfword from GPR)
+inline void EmitInsH(CodeBuffer& buf, uint8_t rd, uint8_t rn, uint8_t index) noexcept {
+    uint32_t imm5 = 2u | (static_cast<uint32_t>(index & 0x7) << 2);
+    EmitArm64(buf, 0x4E001C00u | (imm5 << 16) | (rn << 5) | rd);
+}
+
+/// INS Vd.S[index], Wn (insert word from GPR)
+inline void EmitInsS(CodeBuffer& buf, uint8_t rd, uint8_t rn, uint8_t index) noexcept {
+    uint32_t imm5 = 4u | (static_cast<uint32_t>(index & 0x3) << 3);
+    EmitArm64(buf, 0x4E001C00u | (imm5 << 16) | (rn << 5) | rd);
+}
+
+/// INS Vd.D[index], Xn (insert doubleword from GPR)
+inline void EmitInsD(CodeBuffer& buf, uint8_t rd, uint8_t rn, uint8_t index) noexcept {
+    uint32_t imm5 = 8u | (static_cast<uint32_t>(index & 0x1) << 4);
+    EmitArm64(buf, 0x4E001C00u | (imm5 << 16) | (rn << 5) | rd);
+}
+
+// ── FRECPE / FRECPS (reciprocal estimate for FDIV approximation) ─────────────
+
+/// FRECPE Vd.4S, Vn.4S (reciprocal estimate, 4 × float32)
+inline void EmitFrecpe4S(CodeBuffer& buf, uint8_t rd, uint8_t rn) noexcept {
+    EmitArm64(buf, 0x4EA1D800u | (rn << 5) | rd);
+}
+
+/// FRECPE Vd.2D, Vn.2D (reciprocal estimate, 2 × float64)
+inline void EmitFrecpe2D(CodeBuffer& buf, uint8_t rd, uint8_t rn) noexcept {
+    EmitArm64(buf, 0x4EE1D800u | (rn << 5) | rd);
+}
+
+/// FRECPS Vd.4S, Vn.4S, Vm.4S (reciprocal step, 4 × float32)
+inline void EmitFrecps4S(CodeBuffer& buf, uint8_t rd, uint8_t rn, uint8_t rm) noexcept {
+    EmitArm64(buf, 0x4E20FC00u | (rm << 16) | (rn << 5) | rd);
+}
+
+/// FRECPS Vd.2D, Vn.2D, Vm.2D (reciprocal step, 2 × float64)
+inline void EmitFrecps2D(CodeBuffer& buf, uint8_t rd, uint8_t rn, uint8_t rm) noexcept {
+    EmitArm64(buf, 0x4E60FC00u | (rm << 16) | (rn << 5) | rd);
+}
+
 // ── Permute: ZIP / UZP / TRN ───────────────────────────────────────────────
 
 /// ZIP1 Vd.16B, Vn.16B, Vm.16B (interleave low halves)
@@ -913,6 +1125,21 @@ inline void EmitUzp2_16B(CodeBuffer& buf, uint8_t rd, uint8_t rn, uint8_t rm) no
     EmitArm64(buf, 0x4E005800u | (rm << 16) | (rn << 5) | rd);
 }
 
+/// UZP2 Vd.8H, Vn.8H, Vm.8H
+inline void EmitUzp2_8H(CodeBuffer& buf, uint8_t rd, uint8_t rn, uint8_t rm) noexcept {
+    EmitArm64(buf, 0x4E405800u | (rm << 16) | (rn << 5) | rd);
+}
+
+/// UZP2 Vd.4S, Vn.4S, Vm.4S
+inline void EmitUzp2_4S(CodeBuffer& buf, uint8_t rd, uint8_t rn, uint8_t rm) noexcept {
+    EmitArm64(buf, 0x4E805800u | (rm << 16) | (rn << 5) | rd);
+}
+
+/// UZP2 Vd.2D, Vn.2D, Vm.2D
+inline void EmitUzp2_2D(CodeBuffer& buf, uint8_t rd, uint8_t rn, uint8_t rm) noexcept {
+    EmitArm64(buf, 0x4EC05800u | (rm << 16) | (rn << 5) | rd);
+}
+
 /// UZP1 Vd.8H, Vn.8H, Vm.8H
 inline void EmitUzp1_8H(CodeBuffer& buf, uint8_t rd, uint8_t rn, uint8_t rm) noexcept {
     EmitArm64(buf, 0x4E401800u | (rm << 16) | (rn << 5) | rd);
@@ -936,6 +1163,21 @@ inline void EmitTrn1_16B(CodeBuffer& buf, uint8_t rd, uint8_t rn, uint8_t rm) no
 /// TRN2 Vd.16B, Vn.16B, Vm.16B (transpose high halves)
 inline void EmitTrn2_16B(CodeBuffer& buf, uint8_t rd, uint8_t rn, uint8_t rm) noexcept {
     EmitArm64(buf, 0x4E006800u | (rm << 16) | (rn << 5) | rd);
+}
+
+/// TRN2 Vd.8H, Vn.8H, Vm.8H
+inline void EmitTrn2_8H(CodeBuffer& buf, uint8_t rd, uint8_t rn, uint8_t rm) noexcept {
+    EmitArm64(buf, 0x4E406800u | (rm << 16) | (rn << 5) | rd);
+}
+
+/// TRN2 Vd.4S, Vn.4S, Vm.4S
+inline void EmitTrn2_4S(CodeBuffer& buf, uint8_t rd, uint8_t rn, uint8_t rm) noexcept {
+    EmitArm64(buf, 0x4E806800u | (rm << 16) | (rn << 5) | rd);
+}
+
+/// TRN2 Vd.2D, Vn.2D, Vm.2D
+inline void EmitTrn2_2D(CodeBuffer& buf, uint8_t rd, uint8_t rn, uint8_t rm) noexcept {
+    EmitArm64(buf, 0x4EC06800u | (rm << 16) | (rn << 5) | rd);
 }
 
 /// TRN1 Vd.8H, Vn.8H, Vm.8H
@@ -1124,6 +1366,36 @@ inline void EmitFneg4S(CodeBuffer& buf, uint8_t rd, uint8_t rn) noexcept {
 /// FNEG Vd.2D, Vn.2D (negate, 2×float64)
 inline void EmitFneg2D(CodeBuffer& buf, uint8_t rd, uint8_t rn) noexcept {
     EmitArm64(buf, 0x6EE0F800u | (rn << 5) | rd);
+}
+
+/// FABS Vd.4S, Vn.4S (absolute value, 4×float32)
+inline void EmitFabs4S(CodeBuffer& buf, uint8_t rd, uint8_t rn) noexcept {
+    EmitArm64(buf, 0x6EA0F800u | (rn << 5) | rd);
+}
+
+/// FABS Vd.2D, Vn.2D (absolute value, 2×float64)
+inline void EmitFabs2D(CodeBuffer& buf, uint8_t rd, uint8_t rn) noexcept {
+    EmitArm64(buf, 0x6EE0F800u | (rn << 5) | rd);
+}
+
+/// FMIN Vd.4S, Vn.4S, Vm.4S (float min, 4×float32)
+inline void EmitFmin4S(CodeBuffer& buf, uint8_t rd, uint8_t rn, uint8_t rm) noexcept {
+    EmitArm64(buf, 0x4EA0C400u | (rm << 16) | (rn << 5) | rd);
+}
+
+/// FMIN Vd.2D, Vn.2D, Vm.2D (float min, 2×float64)
+inline void EmitFmin2D(CodeBuffer& buf, uint8_t rd, uint8_t rn, uint8_t rm) noexcept {
+    EmitArm64(buf, 0x4EE0C400u | (rm << 16) | (rn << 5) | rd);
+}
+
+/// FMAX Vd.4S, Vn.4S, Vm.4S (float max, 4×float32)
+inline void EmitFmax4S(CodeBuffer& buf, uint8_t rd, uint8_t rn, uint8_t rm) noexcept {
+    EmitArm64(buf, 0x4E20C400u | (rm << 16) | (rn << 5) | rd);
+}
+
+/// FMAX Vd.2D, Vn.2D, Vm.2D (float max, 2×float64)
+inline void EmitFmax2D(CodeBuffer& buf, uint8_t rd, uint8_t rn, uint8_t rm) noexcept {
+    EmitArm64(buf, 0x4E60C400u | (rm << 16) | (rn << 5) | rd);
 }
 
 // ═══════════════════════════════════════════════════════════════════════════

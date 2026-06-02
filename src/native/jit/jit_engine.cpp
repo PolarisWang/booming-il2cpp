@@ -169,6 +169,15 @@ private:
     IEncoder& enc_;          // Interface reference to encoder_
     ISehHandler& seh_;
 
+    // Slot patch displacement offset within the call instruction placeholder.
+    // x64: call [rip+disp32] (FF 15 <dd dd dd dd>) — disp32 starts at byte 2.
+    // ARM64: LDR X17, #imm19 — imm19 field starts at byte 0 (bits [23:5]).
+#if defined(__aarch64__)
+    static constexpr uint32_t kSlotPatchDispOff = 0;
+#else
+    static constexpr uint32_t kSlotPatchDispOff = 2;
+#endif
+
     // When true, use quick JIT path: stack-only, no optimizer, no liveness, no deopt.
     bool is_tier0_ = false;
 
@@ -271,15 +280,16 @@ private:
     // Maps hot virtual registers to callee-saved GPRs.
     // Dirty-bit tracking avoids unnecessary stack writes.
 #if defined(__aarch64__)
-    // ARM64: X19-X23 (first 5 of 10 callee-saved GPRs)
-    static constexpr uint8_t kCacheableRegs[5] = {19, 20, 21, 22, 23};
+    // ARM64: X19-X28 (all 10 callee-saved GPRs)
+    static constexpr uint8_t kCacheableRegs[10] = {19, 20, 21, 22, 23, 24, 25, 26, 27, 28};
+    static constexpr uint32_t kMaxCacheRegs = 10;
     static constexpr uint32_t kPhysRegCount = 32;
 #else
     // x64: RDI, R12-R15
     static constexpr uint8_t kCacheableRegs[5] = {7, 12, 13, 14, 15};
+    static constexpr uint32_t kMaxCacheRegs = 5;
     static constexpr uint32_t kPhysRegCount = 16;
 #endif
-    static constexpr uint32_t kMaxCacheRegs = 5;
     static constexpr uint8_t kNotCached = 0xFF;
 
     // vreg → phys reg# (kNotCached if not cached)
@@ -302,7 +312,7 @@ private:
     GraphColoringResult gcr_;
     bool has_graph_coloring_ = false;
     // Callee-saved GPRs selected by graph coloring (subset of kCacheableRegs)
-    uint8_t callee_gpr_regs_[5];
+    uint8_t callee_gpr_regs_[kMaxCacheRegs];
     // phys reg → vreg (0xFF = not colored); indexed by physical register number
     uint8_t phys_to_colored_vreg_[kPhysRegCount];
     // Pointer to current callee-saved register list (callee_gpr_regs_ or kCacheableRegs)
@@ -317,11 +327,11 @@ private:
     // ── Prologue tracking (for .pdata/.xdata unwind info) ──────────────────
     // Byte offsets from function entry for each prologue instruction.
     // Set during prologue emission (lines ~2825-2833).
-    uint32_t prologue_push_offsets_[9]{};  // Offsets of push rbp/rbx/rsi/rdi up to 5 cached regs
+    uint32_t prologue_push_offsets_[14]{};  // Offsets: [0]=STP FP/LR, [4..13]=cache reg STPs
     uint32_t prologue_sub_rsp_offset_ = 0; // Offset of sub rsp, K
     uint32_t prologue_set_fpreg_offset_ = 0; // Offset of mov rbp, rsp
     uint32_t prologue_total_bytes_ = 0;    // Total prologue size in bytes
-    uint8_t push_reg_nums_[9]{};           // x64 register numbers in push order
+    uint8_t push_reg_nums_[11]{};           // Register numbers in push/STP order
     uint32_t num_push_regs_ = 0;           // Number of push regs (3 + num_cache_regs_)
     uint32_t prologue_sub_rsp_size_ = 0;   // K value in sub rsp, K
 
@@ -505,7 +515,7 @@ void NativeCodeGenerator::EmitSafepointPoll() noexcept {
 #endif
     uint32_t call_start = buf_.pos();
     enc_.EmitCallRipRel(0);
-    slot_patches_.push_back({call_start + 2, UINT32_MAX, reinterpret_cast<void*>(config_.safepoint_fn)});
+    slot_patches_.push_back({call_start + kSlotPatchDispOff, UINT32_MAX, reinterpret_cast<void*>(config_.safepoint_fn)});
     slot_count_used_++;
     uint32_t call_pos = call_start;
     call_sites_.push_back({UINT32_MAX, call_pos});
@@ -1137,7 +1147,7 @@ uint32_t NativeCodeGenerator::EmitRuntimeHelperCallImpl(void* target_fn) noexcep
     }
     uint32_t call_start = buf_.pos();
     enc_.EmitCallRipRel(0);
-    slot_patches_.push_back({call_start + 2, UINT32_MAX, target_fn});
+    slot_patches_.push_back({call_start + kSlotPatchDispOff, UINT32_MAX, target_fn});
     slot_count_used_++;
     if (has_graph_coloring_ && caller_colored_mask_) {
         uint64_t mask = caller_colored_mask_;
@@ -1922,7 +1932,7 @@ bool NativeCodeGenerator::EmitInstruction(const interpreter::RegisterInstruction
         // Matches RegisterExecute: float v = static_cast<float>(static_cast<int32_t>(gpr[src1]));
         LoadGpr(AT::kScratchA, instr.src1_reg());
         enc_.EmitMovsxd(AT::kScratchA, AT::kScratchA);           // movsxd rax, eax (sign-extend 32→64)
-        enc_.EmitCvtsi2ss(0, AT::kScratchA);            // cvtsi2ss xmm0, rax (int64→float)
+        enc_.EmitCvtsi2sd(0, AT::kScratchA);            // cvtsi2sd xmm0, rax (int64→double, full 64-bit slot)
         StoreFpr(0, instr.dst_reg());
         return true;
     }
@@ -2550,9 +2560,13 @@ bool NativeCodeGenerator::EmitInstruction(const interpreter::RegisterInstruction
         uint32_t call_start = buf_.pos();
         enc_.EmitCallRipRel(0);  // 6 bytes: FF 15 <disp32>
         uint32_t call_pos = call_start;
-        uint32_t slot_patch_offset = call_start + 2;  // disp32 starts at byte 2 of call [rip+disp32]
+        uint32_t slot_patch_offset = call_start + kSlotPatchDispOff;  // disp32 starts at byte 2 of call [rip+disp32]
         slot_patches_.push_back({slot_patch_offset, static_cast<uint32_t>(call_sites_.size()), target_fn});
         slot_count_used_++;
+#if defined(__aarch64__)
+        // ARM64 ABI returns values in X0, but StoreGpr below expects kScratchA (X9).
+        enc_.EmitMovRR(AT::kScratchA, 0);  // MOV X9, X0
+#endif
         // Post-call reload (same as EmitCallWithSpill postamble)
         if (has_graph_coloring_ && caller_colored_mask_) {
             uint64_t mask = caller_colored_mask_;
@@ -3924,9 +3938,13 @@ JitMethod* NativeCodeGenerator::Generate() noexcept {
     // produces garbage.  Done BEFORE colored-reg zeroing to use RDI as scratch.
     enc_.EmitXorZR(AT::kScratchA);
 #if defined(__aarch64__)
-    // ARM64: store X0 (zeroed above) to each GPR slot using STR X0, [SP, #off]
-    for (uint32_t i = 0; i < kGprCount; ++i) {
-        enc_.EmitStr64(AT::kStackReg, static_cast<uint16_t>((kGprFileOff + i * 8) / 8), AT::kScratchA);
+    // ARM64: zero GPR stack slots using STP XZR, XZR pairs (halves instruction
+    // count vs. STR-per-slot).  Each STP zeroes 2 × 8 = 16 bytes.
+    // kGprFileOff is always 0, so pairs cover [0, kGprCount * 8) in stride 16.
+    // Register 31 = XZR (zero register) for STP source; kARM64_SP = 31 = SP base.
+    for (uint32_t i = 0; i < kGprCount; i += 2) {
+        EmitStp64(buf_, 31, 31, kARM64_SP,
+                  static_cast<int32_t>((kGprFileOff + i * 8) / 16));
     }
 #else
     enc_.EmitLeaRM(kRDI, AT::kStackReg, static_cast<int32_t>(kGprFileOff));
@@ -3973,7 +3991,7 @@ JitMethod* NativeCodeGenerator::Generate() noexcept {
         enc_.EmitSubRI(AT::kStackReg, 32);  // shadow space for Win64 ABI
         uint32_t call_start = buf_.pos();
         enc_.EmitCallRipRel(0);
-        slot_patches_.push_back({call_start + 2, UINT32_MAX, reinterpret_cast<void*>(config_.cooperative_fn)});
+        slot_patches_.push_back({call_start + kSlotPatchDispOff, UINT32_MAX, reinterpret_cast<void*>(config_.cooperative_fn)});
         slot_count_used_++;
         uint32_t call_pos = call_start;
 #if !defined(__aarch64__)
@@ -4172,7 +4190,7 @@ JitMethod* NativeCodeGenerator::Generate() noexcept {
 #endif
         uint32_t call_start = buf_.pos();
         enc_.EmitCallRipRel(0);
-        slot_patches_.push_back({call_start + 2, UINT32_MAX, reinterpret_cast<void*>(config_.preemptive_fn)});
+        slot_patches_.push_back({call_start + kSlotPatchDispOff, UINT32_MAX, reinterpret_cast<void*>(config_.preemptive_fn)});
         slot_count_used_++;
         uint32_t call_pos = call_start;
 #if !defined(__aarch64__)
@@ -4219,7 +4237,7 @@ JitMethod* NativeCodeGenerator::Generate() noexcept {
         uint32_t cold_target = buf_.pos();
         uint32_t call_start = buf_.pos();
         enc_.EmitCallRipRel(0);
-        slot_patches_.push_back({call_start + 2, UINT32_MAX, reinterpret_cast<void*>(ChaosJitRaiseException)});
+        slot_patches_.push_back({call_start + kSlotPatchDispOff, UINT32_MAX, reinterpret_cast<void*>(ChaosJitRaiseException)});
         slot_count_used_++;
         uint32_t call_pos = call_start;
 #if defined(__aarch64__)
@@ -4410,7 +4428,7 @@ JitMethod* NativeCodeGenerator::Generate() noexcept {
             for (uint32_t si = 0; si < num_fpr_callee_; ++si) {
                 uint8_t xmm_reg = callee_xmm_regs_[si];
                 uint32_t fi = callee_xmm_fi_[si];
-                int32_t fpr_off = static_cast<int32_t>(kFprFileOff + fi * 8);
+                int32_t fpr_off = static_cast<int32_t>(kFprFileOff + fi * kFprSlotSize);
                 enc_.EmitMovSDRM(xmm_reg, AT::kStackReg, fpr_off);
                 // Duplicate to XMM save area so Ret/deopt_return epilogue can restore
                 int32_t save_off = static_cast<int32_t>(kFrameSize + frame_align_adj_ + si * 16);
@@ -4426,7 +4444,7 @@ JitMethod* NativeCodeGenerator::Generate() noexcept {
 #endif
                 uint32_t call_start = buf_.pos();
                 enc_.EmitCallRipRel(0);
-                slot_patches_.push_back({call_start + 2, UINT32_MAX, reinterpret_cast<void*>(config_.cooperative_fn)});
+                slot_patches_.push_back({call_start + kSlotPatchDispOff, UINT32_MAX, reinterpret_cast<void*>(config_.cooperative_fn)});
                 slot_count_used_++;
                 uint32_t call_pos = call_start;
 #if !defined(__aarch64__)
@@ -4496,11 +4514,23 @@ JitMethod* NativeCodeGenerator::Generate() noexcept {
         for (uint32_t si = 0; si < slot_patches_.size(); ++si) {
             auto& sp = slot_patches_[si];
             buf_.Emit64(reinterpret_cast<uint64_t>(sp.target_fn));
+#if defined(__aarch64__)
+            // ARM64: LDR X17, #imm19 — encode the PC-relative offset.
+            // LDR loads from PC + imm19*4, where PC = address of the LDR instruction.
+            int64_t ldr_addr = static_cast<int64_t>(sp.patch_offset);
+            int64_t slot_addr = static_cast<int64_t>(slot_table_offset + si * 8);
+            int64_t disp_bytes = slot_addr - ldr_addr;
+            int32_t imm19 = static_cast<int32_t>(disp_bytes / 4);
+            uint32_t instr = buf_.Load32(sp.patch_offset);
+            instr = (instr & 0xFF00001Fu) | ((static_cast<uint32_t>(imm19) & 0x7FFFFu) << 5);
+            buf_.Patch32(sp.patch_offset, instr);
+#else
             // Patch the RIP-relative displacement: slot_entry - (call_next_addr)
             uint32_t call_next = sp.patch_offset + 4;  // FF 15 <disp32> = 6 bytes
             int32_t disp = static_cast<int32_t>(
                 (slot_table_offset + si * 8) - call_next);
             buf_.Patch32(sp.patch_offset, static_cast<uint32_t>(disp));
+#endif
         }
     }
 
@@ -4994,6 +5024,10 @@ bool NativeCodeGenerator::EmitSimd(
             case 0:  enc_.EmitPabsbRR(xmm_src1, xmm_src1); break;
             case 1:  enc_.EmitPabswRR(xmm_src1, xmm_src1); break;
             case 2:  enc_.EmitPabsdRR(xmm_src1, xmm_src1); break;
+#if defined(__aarch64__)
+            case 4:  EmitFabs4S(buf_, xmm_src1, xmm_src1); break;
+            case 5:  EmitFabs2D(buf_, xmm_src1, xmm_src1); break;
+#endif
             default: return false;
             }
         }
@@ -5061,20 +5095,37 @@ bool NativeCodeGenerator::EmitSimd(
             if (kUseVexEncoding)
                 EmitVPextrbRR(buf_, AT::kScratchA, xmm_src1, static_cast<uint8_t>(simd_imm & 0xFF));
             else
+#if defined(__aarch64__)
+                EmitUmovB(buf_, AT::kScratchA, xmm_src1, static_cast<uint8_t>(simd_imm));
+#else
                 EmitPextrbRR(buf_, AT::kScratchA, xmm_src1, static_cast<uint8_t>(simd_imm & 0xFF));
+#endif
             break;
         case 1:
             if (kUseVexEncoding)
                 EmitVPextrwRR(buf_, AT::kScratchA, xmm_src1, static_cast<uint8_t>(simd_imm & 0xFF));
             else
+#if defined(__aarch64__)
+                EmitUmovH(buf_, AT::kScratchA, xmm_src1, static_cast<uint8_t>(simd_imm));
+#else
                 EmitPextrwRR(buf_, AT::kScratchA, xmm_src1, static_cast<uint8_t>(simd_imm & 0xFF));
+#endif
             break;
         case 2:
             if (kUseVexEncoding)
                 EmitVPextrdRR(buf_, AT::kScratchA, xmm_src1, static_cast<uint8_t>(simd_imm & 0xFF));
             else
+#if defined(__aarch64__)
+                EmitUmovS(buf_, AT::kScratchA, xmm_src1, static_cast<uint8_t>(simd_imm));
+#else
                 EmitPextrdRR(buf_, AT::kScratchA, xmm_src1, static_cast<uint8_t>(simd_imm & 0xFF));
+#endif
             break;
+#if defined(__aarch64__)
+        case 3:
+            EmitUmovD(buf_, AT::kScratchA, xmm_src1, static_cast<uint8_t>(simd_imm));
+            break;
+#endif
         default:
             return false;
         }
@@ -5093,20 +5144,37 @@ bool NativeCodeGenerator::EmitSimd(
             if (kUseVexEncoding)
                 EmitVPinsrbRR(buf_, xmm_src1, xmm_src1, AT::kScratchA, static_cast<uint8_t>(simd_imm & 0xFF));
             else
+#if defined(__aarch64__)
+                EmitInsB(buf_, xmm_src1, AT::kScratchA, static_cast<uint8_t>(simd_imm));
+#else
                 EmitPinsrbRR(buf_, xmm_src1, AT::kScratchA, static_cast<uint8_t>(simd_imm & 0xFF));
+#endif
             break;
         case 1:
             if (kUseVexEncoding)
                 EmitVPinsrwRR(buf_, xmm_src1, xmm_src1, AT::kScratchA, static_cast<uint8_t>(simd_imm & 0xFF));
             else
+#if defined(__aarch64__)
+                EmitInsH(buf_, xmm_src1, AT::kScratchA, static_cast<uint8_t>(simd_imm));
+#else
                 EmitPinsrwRR(buf_, xmm_src1, AT::kScratchA, static_cast<uint8_t>(simd_imm & 0xFF));
+#endif
             break;
         case 2:
             if (kUseVexEncoding)
                 EmitVPinsrdRR(buf_, xmm_src1, xmm_src1, AT::kScratchA, static_cast<uint8_t>(simd_imm & 0xFF));
             else
+#if defined(__aarch64__)
+                EmitInsS(buf_, xmm_src1, AT::kScratchA, static_cast<uint8_t>(simd_imm));
+#else
                 EmitPinsrdRR(buf_, xmm_src1, AT::kScratchA, static_cast<uint8_t>(simd_imm & 0xFF));
+#endif
             break;
+#if defined(__aarch64__)
+        case 3:
+            EmitInsD(buf_, xmm_src1, AT::kScratchA, static_cast<uint8_t>(simd_imm));
+            break;
+#endif
         default:
             return false;
         }
@@ -5162,6 +5230,78 @@ bool NativeCodeGenerator::EmitSimd(
         }
         return true;
     }
+
+    case 25:  // kSimdMin
+        if (kUseVexEncoding) {
+            switch (elem_type) {
+            case 4:  EmitVMinpsRR(buf_, xmm_dst, xmm_src1, xmm_src2); break;
+            case 5:  EmitVMinpdRR(buf_, xmm_dst, xmm_src1, xmm_src2); break;
+            default: return false;
+            }
+        } else {
+            switch (elem_type) {
+#if defined(__aarch64__)
+            case 4:  EmitFmin4S(buf_, xmm_src1, xmm_src1, xmm_src2); break;
+            case 5:  EmitFmin2D(buf_, xmm_src1, xmm_src1, xmm_src2); break;
+#endif
+            default: return false;
+            }
+        }
+        break;
+
+    case 26:  // kSimdMax
+        if (kUseVexEncoding) {
+            switch (elem_type) {
+            case 4:  EmitVMaxpsRR(buf_, xmm_dst, xmm_src1, xmm_src2); break;
+            case 5:  EmitVMaxpdRR(buf_, xmm_dst, xmm_src1, xmm_src2); break;
+            default: return false;
+            }
+        } else {
+            switch (elem_type) {
+#if defined(__aarch64__)
+            case 4:  EmitFmax4S(buf_, xmm_src1, xmm_src1, xmm_src2); break;
+            case 5:  EmitFmax2D(buf_, xmm_src1, xmm_src1, xmm_src2); break;
+#endif
+            default: return false;
+            }
+        }
+        break;
+
+    case 27:  // kSimdDiv
+        if (kUseVexEncoding) {
+            switch (elem_type) {
+            case 4:  EmitVDivpsRR(buf_, xmm_dst, xmm_src1, xmm_src2); break;
+            case 5:  EmitVDivpdRR(buf_, xmm_dst, xmm_src1, xmm_src2); break;
+            default: return false;
+            }
+        } else {
+#if defined(__aarch64__)
+            // ARM64 NEON has no packed FDIV.  Use Newton-Raphson reciprocal:
+            //   xmm_dst = FRECPE(denom)              → 1/denom (initial estimate)
+            //   xmm_src2 = FRECPS(denom, xmm_dst)     → 2 - denom * xmm_dst (refinement step)
+            //   xmm_dst = FMUL(xmm_dst, xmm_src2)     → refined reciprocal
+            //   xmm_src1 = FMUL(numer, xmm_dst)       → numer/denom in xmm_src1 (for StoreFpr)
+            switch (elem_type) {
+            case 4:  // float32x4
+                EmitFrecpe4S(buf_, xmm_dst, xmm_src2);
+                EmitFrecps4S(buf_, xmm_src2, xmm_src2, xmm_dst);
+                EmitFmul4S(buf_, xmm_dst, xmm_dst, xmm_src2);
+                EmitFmul4S(buf_, xmm_src1, xmm_src1, xmm_dst);
+                break;
+            case 5:  // float64x2
+                EmitFrecpe2D(buf_, xmm_dst, xmm_src2);
+                EmitFrecps2D(buf_, xmm_src2, xmm_src2, xmm_dst);
+                EmitFmul2D(buf_, xmm_dst, xmm_dst, xmm_src2);
+                EmitFmul2D(buf_, xmm_src1, xmm_src1, xmm_dst);
+                break;
+            default: return false;
+            }
+#else
+            // ARM64 NEON has no packed float division
+            return false;
+#endif
+        }
+        break;
 
     default:
         return false;  // unsupported SIMD operation

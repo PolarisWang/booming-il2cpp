@@ -33,6 +33,9 @@ private:
     void EmitAddRIDecomposed(uint8_t rd, uint8_t rn, int32_t imm) noexcept {
         if (static_cast<uint32_t>(imm) <= 4095) {
             EmitAdd64Imm(buf_, rd, rn, static_cast<uint16_t>(imm));
+        } else if ((static_cast<uint32_t>(imm) & 0xFFF) == 0 &&
+                   (static_cast<uint32_t>(imm) >> 12) <= 4095) {
+            EmitAdd64ImmShift(buf_, rd, rn, static_cast<uint16_t>(static_cast<uint32_t>(imm) >> 12));
         } else {
             EmitLoadImm64(buf_, kImmScratch, static_cast<uint64_t>(static_cast<int64_t>(imm)));
             EmitAdd64(buf_, rd, rn, kImmScratch);
@@ -41,6 +44,9 @@ private:
     void EmitSubRIDecomposed(uint8_t rd, uint8_t rn, int32_t imm) noexcept {
         if (static_cast<uint32_t>(imm) <= 4095) {
             EmitSub64Imm(buf_, rd, rn, static_cast<uint16_t>(imm));
+        } else if ((static_cast<uint32_t>(imm) & 0xFFF) == 0 &&
+                   (static_cast<uint32_t>(imm) >> 12) <= 4095) {
+            EmitSub64ImmShift(buf_, rd, rn, static_cast<uint16_t>(static_cast<uint32_t>(imm) >> 12));
         } else {
             EmitLoadImm64(buf_, kImmScratch, static_cast<uint64_t>(static_cast<int64_t>(imm)));
             EmitSub64(buf_, rd, rn, kImmScratch);
@@ -49,6 +55,9 @@ private:
     void EmitCmpRIDecomposed(uint8_t rn, int32_t imm) noexcept {
         if (static_cast<uint32_t>(imm) <= 4095) {
             EmitCmp64Imm(buf_, rn, static_cast<uint16_t>(imm));
+        } else if ((static_cast<uint32_t>(imm) & 0xFFF) == 0 &&
+                   (static_cast<uint32_t>(imm) >> 12) <= 4095) {
+            EmitCmp64ImmShift(buf_, rn, static_cast<uint16_t>(static_cast<uint32_t>(imm) >> 12));
         } else {
             EmitLoadImm64(buf_, kImmScratch, static_cast<uint64_t>(static_cast<int64_t>(imm)));
             EmitCmpRR(rn, kImmScratch);
@@ -57,6 +66,9 @@ private:
     void EmitLeaRMDecomposed(uint8_t dst, uint8_t base, int32_t disp) noexcept {
         if (static_cast<uint32_t>(disp) <= 4095) {
             EmitAdd64Imm(buf_, dst, base, static_cast<uint16_t>(disp));
+        } else if ((static_cast<uint32_t>(disp) & 0xFFF) == 0 &&
+                   (static_cast<uint32_t>(disp) >> 12) <= 4095) {
+            EmitAdd64ImmShift(buf_, dst, base, static_cast<uint16_t>(static_cast<uint32_t>(disp) >> 12));
         } else {
             EmitLoadImm64(buf_, kImmScratch, static_cast<uint64_t>(static_cast<int64_t>(disp)));
             EmitAdd64(buf_, dst, base, kImmScratch);
