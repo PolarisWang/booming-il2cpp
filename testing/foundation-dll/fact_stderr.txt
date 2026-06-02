@@ -1,6 +1,0 @@
-[2026-05-26T20:39:26][WARN][CRAG] young_collection_no_region
-[2026-05-26T20:39:26][INFO][NUMA] numa_init count=%d
-[2026-05-26T20:39:26][INFO][OldGen] init initial_pages=8 numa_nodes=1
-[2026-05-26T20:39:26][INFO][OldGen] emergency_reserve_allocated base=0x2364376154112 size=65536
-[2026-05-26T20:39:26][INFO][OldGen] init done base=0x2364345942016 pages=8
-[2026-05-26T20:39:26][INFO][GcLowMem] low-memory monitor started

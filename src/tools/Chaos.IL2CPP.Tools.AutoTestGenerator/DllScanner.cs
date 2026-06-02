@@ -180,6 +180,25 @@ public sealed class DllScanner
                 continue;
             }
 
+            // String-based ref struct detection: MLC's Type.IsByRefLike may not
+            // work for generic instantiations (e.g. ReadOnlySpan<char>), so we
+            // also check the base type name (without generic args or namespace).
+            if (!isRefStructReturn && !isVoid)
+            {
+                var rtBase = returnTypeName;
+                var gaIdx = rtBase.IndexOf('<');
+                if (gaIdx >= 0) rtBase = rtBase[..gaIdx];
+                var lastDot = rtBase.LastIndexOf('.');
+                if (lastDot >= 0) rtBase = rtBase[(lastDot + 1)..];
+                // Check both with and without backtick arity suffix
+                if (RefStructTypeNames.Contains(rtBase) ||
+                    RefStructTypeNames.Contains(rtBase + "`1"))
+                {
+                    Console.Error.WriteLine($"  [DEBUG] Ref struct return detected: {method.Name} -> {returnTypeName}");
+                    isRefStructReturn = true;
+                }
+            }
+
             signatures.Add(new MethodSignature(
                 method.Name,
                 targetType.FullName ?? typeFullName,
@@ -198,13 +217,19 @@ public sealed class DllScanner
 
     /// <summary>
     /// Scan all public types in the assembly that have public methods.
+    /// Optionally filter by namespace prefix (comma-separated).
     /// Returns one DllScanResult per type. Types with no public methods,
     /// enums, or types that fail to scan are skipped with a warning.
     /// </summary>
-    public IReadOnlyList<DllScanResult> ScanAll(string dllPath)
+    public IReadOnlyList<DllScanResult> ScanAll(string dllPath, string? namespaceFilter = null)
     {
         var results = new List<DllScanResult>();
         var types = ListPublicTypes(dllPath);
+
+        // Parse namespace filter: comma-separated prefixes (e.g. "System.IO,System.Text")
+        var nsFilters = string.IsNullOrEmpty(namespaceFilter)
+            ? null
+            : new HashSet<string>(namespaceFilter.Split(',', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries));
 
         Console.WriteLine($"  Scanning {types.Count} types...");
         int skipCount = 0;
@@ -216,6 +241,21 @@ public sealed class DllScanner
                 skipCount++;
                 continue;
             }
+
+            // Apply namespace filter: check if type namespace matches any filter prefix
+            if (nsFilters is not null)
+            {
+                var lastDot = typeName.LastIndexOf('.');
+                var ns = lastDot >= 0 ? typeName[..lastDot] : "";
+                var matches = nsFilters.Any(f => ns.StartsWith(f, StringComparison.Ordinal) ||
+                                                  (f.Length == 0 && ns.Length == 0));
+                if (!matches)
+                {
+                    skipCount++;
+                    continue;
+                }
+            }
+
             try
             {
                 var result = Scan(dllPath, typeName);
@@ -428,6 +468,16 @@ public sealed class DllScanner
             var defName = type.GetGenericTypeDefinition().Name;
             var backtick = defName.IndexOf('`');
             if (backtick >= 0) defName = defName[..backtick];
+
+            // For non-nested generic types, use FullName for consistency with
+            // the non-generic code path (line 515 returns type.FullName).
+            // This ensures Task`1 → "System.Threading.Tasks.Task" so downstream
+            // async detection (TestEmitter, ProbeEmitter) works correctly.
+            if (type.DeclaringType is null && type.GetGenericTypeDefinition().FullName is { } nsName)
+            {
+                var fb = nsName.IndexOf('`');
+                defName = fb >= 0 ? nsName[..fb].Replace('+', '.') : nsName.Replace('+', '.');
+            }
 
             // Nested types: include parent type name for C# qualification.
             // MLC may keep DeclaringType as the generic type definition even after
