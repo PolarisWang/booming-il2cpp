@@ -25,6 +25,8 @@ static int64_t FoldBinary(NodeKind kind, int64_t a, int64_t b) noexcept {
         case kAdd:   return a + b;
         case kSub:   return a - b;
         case kMul:   return a * b;
+        case kDiv:   return a / b;
+        case kRem:   return a % b;
         case kAnd:   return a & b;
         case kOr:    return a | b;
         case kXor:   return a ^ b;
@@ -93,12 +95,21 @@ ExprNode* ConstFoldMutator::PostVisit(ExprNode* node) noexcept {
         int64_t v;
         if (IsConstInt(node->child0, v)) {
             int64_t result = FoldUnary(k, v);
-            node->set_kind(kLdcI8);
-            node->type_tag = kInt64;
+            // kNot on a 32-bit input must truncate to 32 bits:
+            // e.g. ~0 = 0xFFFFFFFF, not 0xFFFFFFFFFFFFFFFF.
+            // The source node is still valid here (IsConstInt already
+            // read it), so check if the input is a 32-bit constant.
+            bool is_32bit_not = (k == kNot && node->child0 &&
+                                 node->child0->kind() == kLdcI4);
+            node->set_kind(is_32bit_not ? kLdcI4 : kLdcI8);
+            node->type_tag = is_32bit_not ? kInt32 : kInt64;
             node->child_count = 0;
-            node->child0 = nullptr;
+            node->child0 = nullptr;  // same union as i8/i4 — clear FIRST
             node->child1 = nullptr;
-            node->i8 = result;
+            if (is_32bit_not)
+                node->i4 = static_cast<int32_t>(result);
+            else
+                node->i8 = result;
         }
     }
 

@@ -46,6 +46,18 @@ static int g_tests = 0;
     }                                                                           \
 } while(0)
 
+// ── Hex dump for JIT code debugging ─────────────────────────────────────
+static void DumpCode(const void* code, uint32_t size) noexcept {
+    printf("    code bytes (%u):\n", size);
+    const uint8_t* p = static_cast<const uint8_t*>(code);
+    for (uint32_t i = 0; i < size && i < 512; i += 4) {
+        if (i + 4 <= size) {
+            uint32_t w_le = (uint32_t)p[i] | ((uint32_t)p[i+1] << 8) | ((uint32_t)p[i+2] << 16) | ((uint32_t)p[i+3] << 24);
+            printf("    %3u: %02x %02x %02x %02x  (LE=%08x)\n", i, p[i], p[i+1], p[i+2], p[i+3], w_le);
+        }
+    }
+}
+
 // ── IR instruction helpers (same as jit_native_test.cpp) ────────────────
 static uint64_t MakeHeader(IROpCode opc, uint8_t dst, uint8_t src1,
                            uint8_t src2, uint8_t flags) noexcept {
@@ -127,6 +139,44 @@ static RegisterInstruction InstrBrFalse(uint8_t src, uint32_t target) noexcept {
                            kRegHasSrc1 | kRegIsBranch | kRegHasImm);
     ri.imm.branch_target = target;
     return ri;
+}
+
+// ── Comparison branch helpers (src1, src2, target) ─────────────────────
+static RegisterInstruction InstrBeq(uint8_t s1, uint8_t s2, uint32_t t) noexcept {
+    RegisterInstruction ri;
+    ri.header = MakeHeader(IROpCode::Beq, 0, s1, s2,
+                           kRegHasSrc1 | kRegHasSrc2 | kRegIsBranch | kRegHasImm);
+    ri.imm.branch_target = t; return ri;
+}
+static RegisterInstruction InstrBne(uint8_t s1, uint8_t s2, uint32_t t) noexcept {
+    RegisterInstruction ri;
+    ri.header = MakeHeader(IROpCode::BneUn, 0, s1, s2,
+                           kRegHasSrc1 | kRegHasSrc2 | kRegIsBranch | kRegHasImm);
+    ri.imm.branch_target = t; return ri;
+}
+static RegisterInstruction InstrBlt(uint8_t s1, uint8_t s2, uint32_t t) noexcept {
+    RegisterInstruction ri;
+    ri.header = MakeHeader(IROpCode::Blt, 0, s1, s2,
+                           kRegHasSrc1 | kRegHasSrc2 | kRegIsBranch | kRegHasImm);
+    ri.imm.branch_target = t; return ri;
+}
+static RegisterInstruction InstrBgt(uint8_t s1, uint8_t s2, uint32_t t) noexcept {
+    RegisterInstruction ri;
+    ri.header = MakeHeader(IROpCode::Bgt, 0, s1, s2,
+                           kRegHasSrc1 | kRegHasSrc2 | kRegIsBranch | kRegHasImm);
+    ri.imm.branch_target = t; return ri;
+}
+static RegisterInstruction InstrBle(uint8_t s1, uint8_t s2, uint32_t t) noexcept {
+    RegisterInstruction ri;
+    ri.header = MakeHeader(IROpCode::Ble, 0, s1, s2,
+                           kRegHasSrc1 | kRegHasSrc2 | kRegIsBranch | kRegHasImm);
+    ri.imm.branch_target = t; return ri;
+}
+static RegisterInstruction InstrBge(uint8_t s1, uint8_t s2, uint32_t t) noexcept {
+    RegisterInstruction ri;
+    ri.header = MakeHeader(IROpCode::Bge, 0, s1, s2,
+                           kRegHasSrc1 | kRegHasSrc2 | kRegIsBranch | kRegHasImm);
+    ri.imm.branch_target = t; return ri;
 }
 
 // ── Execute native code and read return value ──────────────────────────
@@ -442,6 +492,305 @@ static void Test_BrFalse_Taken() {
     CHECK(result == 42, "BrFalse_Taken returned %" PRIu64 ", expected 42", result);
 }
 
+// ── Test: Beq with equal values (branch taken) ──────────────────────────
+static void Test_Beq_Taken() {
+    printf("\n── Test: Beq_Taken ──\n");
+    RegisterMethod rm;
+    // [0] LdcI4 42→v0 [1] LdcI4 42→v1 [2] Beq v0,v1→4 [3] Ret v0(shouldn't)
+    // [4] LdcI4 42→v2 [5] Ret v2
+    rm.instructions = {
+        InstrI4(IROpCode::LdcI4, 42, 0), InstrI4(IROpCode::LdcI4, 42, 1),
+        InstrBeq(0, 1, 4), InstrRet(0),
+        InstrI4(IROpCode::LdcI4, 42, 2), InstrRet(2),
+    };
+    rm.max_regs = 3;
+    if (!CanCompile(rm)) { printf("  SKIP: CanCompile returned false\n"); return; }
+    auto* nm = Compile(rm); if (!nm) { printf("  FAIL\n"); ++g_failures; return; }
+    CHECK(ExecuteNative(nm->code) == 42, "Beq_Taken");
+}
+static void Test_Beq_NotTaken() {
+    printf("\n── Test: Beq_NotTaken ──\n");
+    RegisterMethod rm;
+    rm.instructions = {
+        InstrI4(IROpCode::LdcI4, 42, 0), InstrI4(IROpCode::LdcI4, 43, 1),
+        InstrBeq(0, 1, 5), InstrI4(IROpCode::LdcI4, 42, 2), InstrRet(2),
+        InstrI4(IROpCode::LdcI4, 0, 3), InstrRet(3),
+    };
+    rm.max_regs = 4;
+    if (!CanCompile(rm)) { printf("  SKIP\n"); return; }
+    auto* nm = Compile(rm); if (!nm) { printf("  FAIL\n"); ++g_failures; return; }
+    CHECK(ExecuteNative(nm->code) == 42, "Beq_NotTaken");
+}
+
+// ── Test: Bne (not equal) ──────────────────────────────────────────────
+static void Test_Bne_Taken() {
+    printf("\n── Test: Bne_Taken ──\n");
+    RegisterMethod rm;
+    rm.instructions = {
+        InstrI4(IROpCode::LdcI4, 42, 0), InstrI4(IROpCode::LdcI4, 43, 1),
+        InstrBne(0, 1, 5), InstrI4(IROpCode::LdcI4, 0, 2), InstrRet(2),
+        InstrI4(IROpCode::LdcI4, 42, 3), InstrRet(3),
+    };
+    rm.max_regs = 4;
+    if (!CanCompile(rm)) { printf("  SKIP\n"); return; }
+    auto* nm = Compile(rm); if (!nm) { printf("  FAIL\n"); ++g_failures; return; }
+    CHECK(ExecuteNative(nm->code) == 42, "Bne_Taken");
+}
+static void Test_Bne_NotTaken() {
+    printf("\n── Test: Bne_NotTaken ──\n");
+    RegisterMethod rm;
+    rm.instructions = {
+        InstrI4(IROpCode::LdcI4, 42, 0), InstrI4(IROpCode::LdcI4, 42, 1),
+        InstrBne(0, 1, 5), InstrI4(IROpCode::LdcI4, 42, 2), InstrRet(2),
+        InstrI4(IROpCode::LdcI4, 0, 3), InstrRet(3),
+    };
+    rm.max_regs = 4;
+    if (!CanCompile(rm)) { printf("  SKIP\n"); return; }
+    auto* nm = Compile(rm); if (!nm) { printf("  FAIL\n"); ++g_failures; return; }
+    CHECK(ExecuteNative(nm->code) == 42, "Bne_NotTaken");
+}
+
+// ── Test: Blt (signed less than) ───────────────────────────────────────
+static void Test_Blt_Taken() {
+    printf("\n── Test: Blt_Taken ──\n");
+    RegisterMethod rm;
+    rm.instructions = {
+        InstrI4(IROpCode::LdcI4, 1, 0), InstrI4(IROpCode::LdcI4, 2, 1),
+        InstrBlt(0, 1, 5), InstrI4(IROpCode::LdcI4, 0, 2), InstrRet(2),
+        InstrI4(IROpCode::LdcI4, 42, 3), InstrRet(3),
+    };
+    rm.max_regs = 4;
+    if (!CanCompile(rm)) { printf("  SKIP\n"); return; }
+    auto* nm = Compile(rm); if (!nm) { printf("  FAIL\n"); ++g_failures; return; }
+    CHECK(ExecuteNative(nm->code) == 42, "Blt_Taken");
+}
+static void Test_Blt_NotTaken() {
+    printf("\n── Test: Blt_NotTaken ──\n");
+    RegisterMethod rm;
+    rm.instructions = {
+        InstrI4(IROpCode::LdcI4, 3, 0), InstrI4(IROpCode::LdcI4, 2, 1),
+        InstrBlt(0, 1, 5), InstrI4(IROpCode::LdcI4, 42, 2), InstrRet(2),
+        InstrI4(IROpCode::LdcI4, 0, 3), InstrRet(3),
+    };
+    rm.max_regs = 4;
+    if (!CanCompile(rm)) { printf("  SKIP\n"); return; }
+    auto* nm = Compile(rm); if (!nm) { printf("  FAIL\n"); ++g_failures; return; }
+    CHECK(ExecuteNative(nm->code) == 42, "Blt_NotTaken");
+}
+
+// ── Test: Bgt (signed greater than) ────────────────────────────────────
+static void Test_Bgt_Taken() {
+    printf("\n── Test: Bgt_Taken ──\n");
+    RegisterMethod rm;
+    rm.instructions = {
+        InstrI4(IROpCode::LdcI4, 2, 0), InstrI4(IROpCode::LdcI4, 1, 1),
+        InstrBgt(0, 1, 5), InstrI4(IROpCode::LdcI4, 0, 2), InstrRet(2),
+        InstrI4(IROpCode::LdcI4, 42, 3), InstrRet(3),
+    };
+    rm.max_regs = 4;
+    if (!CanCompile(rm)) { printf("  SKIP\n"); return; }
+    auto* nm = Compile(rm); if (!nm) { printf("  FAIL\n"); ++g_failures; return; }
+    CHECK(ExecuteNative(nm->code) == 42, "Bgt_Taken");
+}
+static void Test_Bgt_NotTaken() {
+    printf("\n── Test: Bgt_NotTaken ──\n");
+    RegisterMethod rm;
+    rm.instructions = {
+        InstrI4(IROpCode::LdcI4, 1, 0), InstrI4(IROpCode::LdcI4, 2, 1),
+        InstrBgt(0, 1, 5), InstrI4(IROpCode::LdcI4, 42, 2), InstrRet(2),
+        InstrI4(IROpCode::LdcI4, 0, 3), InstrRet(3),
+    };
+    rm.max_regs = 4;
+    if (!CanCompile(rm)) { printf("  SKIP\n"); return; }
+    auto* nm = Compile(rm); if (!nm) { printf("  FAIL\n"); ++g_failures; return; }
+    CHECK(ExecuteNative(nm->code) == 42, "Bgt_NotTaken");
+}
+
+// ── Test: Ble (signed less or equal) ───────────────────────────────────
+static void Test_Ble_Taken() {
+    printf("\n── Test: Ble_Taken ──\n");
+    RegisterMethod rm;
+    // 1 <= 2 → taken
+    rm.instructions = {
+        InstrI4(IROpCode::LdcI4, 1, 0), InstrI4(IROpCode::LdcI4, 2, 1),
+        InstrBle(0, 1, 5), InstrI4(IROpCode::LdcI4, 0, 2), InstrRet(2),
+        InstrI4(IROpCode::LdcI4, 42, 3), InstrRet(3),
+    };
+    rm.max_regs = 4;
+    if (!CanCompile(rm)) { printf("  SKIP\n"); return; }
+    auto* nm = Compile(rm); if (!nm) { printf("  FAIL\n"); ++g_failures; return; }
+    CHECK(ExecuteNative(nm->code) == 42, "Ble_Taken");
+}
+static void Test_Ble_NotTaken() {
+    printf("\n── Test: Ble_NotTaken ──\n");
+    RegisterMethod rm;
+    // 3 <= 2 → not taken
+    rm.instructions = {
+        InstrI4(IROpCode::LdcI4, 3, 0), InstrI4(IROpCode::LdcI4, 2, 1),
+        InstrBle(0, 1, 5), InstrI4(IROpCode::LdcI4, 42, 2), InstrRet(2),
+        InstrI4(IROpCode::LdcI4, 0, 3), InstrRet(3),
+    };
+    rm.max_regs = 4;
+    if (!CanCompile(rm)) { printf("  SKIP\n"); return; }
+    auto* nm = Compile(rm); if (!nm) { printf("  FAIL\n"); ++g_failures; return; }
+    CHECK(ExecuteNative(nm->code) == 42, "Ble_NotTaken");
+}
+
+// ── Test: Bge (signed greater or equal) ────────────────────────────────
+static void Test_Bge_Taken() {
+    printf("\n── Test: Bge_Taken ──\n");
+    RegisterMethod rm;
+    // 2 >= 1 → taken
+    rm.instructions = {
+        InstrI4(IROpCode::LdcI4, 2, 0), InstrI4(IROpCode::LdcI4, 1, 1),
+        InstrBge(0, 1, 5), InstrI4(IROpCode::LdcI4, 0, 2), InstrRet(2),
+        InstrI4(IROpCode::LdcI4, 42, 3), InstrRet(3),
+    };
+    rm.max_regs = 4;
+    if (!CanCompile(rm)) { printf("  SKIP\n"); return; }
+    auto* nm = Compile(rm); if (!nm) { printf("  FAIL\n"); ++g_failures; return; }
+    CHECK(ExecuteNative(nm->code) == 42, "Bge_Taken");
+}
+static void Test_Bge_NotTaken() {
+    printf("\n── Test: Bge_NotTaken ──\n");
+    RegisterMethod rm;
+    // 0 >= 1 → not taken
+    rm.instructions = {
+        InstrI4(IROpCode::LdcI4, 0, 0), InstrI4(IROpCode::LdcI4, 1, 1),
+        InstrBge(0, 1, 5), InstrI4(IROpCode::LdcI4, 42, 2), InstrRet(2),
+        InstrI4(IROpCode::LdcI4, 0, 3), InstrRet(3),
+    };
+    rm.max_regs = 4;
+    if (!CanCompile(rm)) { printf("  SKIP\n"); return; }
+    auto* nm = Compile(rm); if (!nm) { printf("  FAIL\n"); ++g_failures; return; }
+    CHECK(ExecuteNative(nm->code) == 42, "Bge_NotTaken");
+}
+
+// ── Test: Div (100 / 3 = 33) ───────────────────────────────────────────
+static void Test_Div_Ret() {
+    printf("\n── Test: Div_Ret ──\n");
+    RegisterMethod rm;
+    rm.instructions = {
+        InstrI4(IROpCode::LdcI4, 100, 0), InstrI4(IROpCode::LdcI4, 3, 1),
+        InstrBinary(IROpCode::Div, 2, 0, 1), InstrRet(2),
+    };
+    rm.max_regs = 3;
+    if (!CanCompile(rm)) { printf("  SKIP\n"); return; }
+    auto* nm = Compile(rm); if (!nm) { printf("  FAIL\n"); ++g_failures; return; }
+    DumpCode(nm->code, nm->code_size);
+    CHECK(ExecuteNative(nm->code) == 33, "Div_Ret");
+}
+
+// ── Test: Rem (100 % 3 = 1) ────────────────────────────────────────────
+static void Test_Rem_Ret() {
+    printf("\n── Test: Rem_Ret ──\n");
+    RegisterMethod rm;
+    rm.instructions = {
+        InstrI4(IROpCode::LdcI4, 100, 0), InstrI4(IROpCode::LdcI4, 3, 1),
+        InstrBinary(IROpCode::Rem, 2, 0, 1), InstrRet(2),
+    };
+    rm.max_regs = 3;
+    if (!CanCompile(rm)) { printf("  SKIP\n"); return; }
+    auto* nm = Compile(rm); if (!nm) { printf("  FAIL\n"); ++g_failures; return; }
+    DumpCode(nm->code, nm->code_size);
+    CHECK(ExecuteNative(nm->code) == 1, "Rem_Ret");
+}
+
+// ── Test: Neg (-42) ────────────────────────────────────────────────────
+static void Test_Neg_Ret() {
+    printf("\n── Test: Neg_Ret ──\n");
+    RegisterMethod rm;
+    rm.instructions = {
+        InstrI4(IROpCode::LdcI4, 42, 0),
+        InstrBinary(IROpCode::Neg, 1, 0, 0), InstrRet(1),
+    };
+    rm.max_regs = 2;
+    if (!CanCompile(rm)) { printf("  SKIP\n"); return; }
+    auto* nm = Compile(rm); if (!nm) { printf("  FAIL\n"); ++g_failures; return; }
+    CHECK(ExecuteNative(nm->code) == static_cast<uint64_t>(-42), "Neg_Ret returned 0x%lx, expected 0x%lx", ExecuteNative(nm->code), static_cast<uint64_t>(-42));
+}
+
+// ── Test: Not (~0 = 0xFFFFFFFF) ────────────────────────────────────────
+static void Test_Not_Ret() {
+    printf("\n── Test: Not_Ret ──\n");
+    RegisterMethod rm;
+    rm.instructions = {
+        InstrI4(IROpCode::LdcI4, 0, 0),
+        InstrBinary(IROpCode::Not, 1, 0, 0), InstrRet(1),
+    };
+    rm.max_regs = 2;
+    if (!CanCompile(rm)) { printf("  SKIP\n"); return; }
+    auto* nm = Compile(rm); if (!nm) { printf("  FAIL\n"); ++g_failures; return; }
+    DumpCode(nm->code, nm->code_size);
+    CHECK(ExecuteNative(nm->code) == 0xFFFFFFFFu, "Not_Ret returned 0x%lx, expected 0x%lx", ExecuteNative(nm->code), 0xFFFFFFFFu);
+}
+
+// ── Test: And ──────────────────────────────────────────────────────────
+static void Test_And_Ret() {
+    printf("\n── Test: And_Ret ──\n");
+    RegisterMethod rm;
+    rm.instructions = {
+        InstrI4(IROpCode::LdcI4, 0xFF, 0), InstrI4(IROpCode::LdcI4, 0x0F, 1),
+        InstrBinary(IROpCode::And, 2, 0, 1), InstrRet(2),
+    };
+    rm.max_regs = 3;
+    if (!CanCompile(rm)) { printf("  SKIP\n"); return; }
+    auto* nm = Compile(rm); if (!nm) { printf("  FAIL\n"); ++g_failures; return; }
+    CHECK(ExecuteNative(nm->code) == 0x0F, "And_Ret");
+}
+static void Test_Or_Ret() {
+    printf("\n── Test: Or_Ret ──\n");
+    RegisterMethod rm;
+    rm.instructions = {
+        InstrI4(IROpCode::LdcI4, 0xF0, 0), InstrI4(IROpCode::LdcI4, 0x0F, 1),
+        InstrBinary(IROpCode::Or, 2, 0, 1), InstrRet(2),
+    };
+    rm.max_regs = 3;
+    if (!CanCompile(rm)) { printf("  SKIP\n"); return; }
+    auto* nm = Compile(rm); if (!nm) { printf("  FAIL\n"); ++g_failures; return; }
+    CHECK(ExecuteNative(nm->code) == 0xFF, "Or_Ret");
+}
+static void Test_Xor_Ret() {
+    printf("\n── Test: Xor_Ret ──\n");
+    RegisterMethod rm;
+    rm.instructions = {
+        InstrI4(IROpCode::LdcI4, 0xFF, 0), InstrI4(IROpCode::LdcI4, 0x0F, 1),
+        InstrBinary(IROpCode::Xor, 2, 0, 1), InstrRet(2),
+    };
+    rm.max_regs = 3;
+    if (!CanCompile(rm)) { printf("  SKIP\n"); return; }
+    auto* nm = Compile(rm); if (!nm) { printf("  FAIL\n"); ++g_failures; return; }
+    CHECK(ExecuteNative(nm->code) == 0xF0, "Xor_Ret");
+}
+
+// ── Test: Shl (1 << 5 = 32) ────────────────────────────────────────────
+static void Test_Shl_Ret() {
+    printf("\n── Test: Shl_Ret ──\n");
+    RegisterMethod rm;
+    rm.instructions = {
+        InstrI4(IROpCode::LdcI4, 1, 0), InstrI4(IROpCode::LdcI4, 5, 1),
+        InstrBinary(IROpCode::Shl, 2, 0, 1), InstrRet(2),
+    };
+    rm.max_regs = 3;
+    if (!CanCompile(rm)) { printf("  SKIP\n"); return; }
+    auto* nm = Compile(rm); if (!nm) { printf("  FAIL\n"); ++g_failures; return; }
+    CHECK(ExecuteNative(nm->code) == 32, "Shl_Ret");
+}
+
+// ── Test: Shr (-64 >> 2 = -16 as arithmetic shift) ─────────────────────
+static void Test_Shr_Ret() {
+    printf("\n── Test: Shr_Ret ──\n");
+    RegisterMethod rm;
+    rm.instructions = {
+        InstrI4(IROpCode::LdcI4, -64, 0), InstrI4(IROpCode::LdcI4, 2, 1),
+        InstrBinary(IROpCode::Shr, 2, 0, 1), InstrRet(2),
+    };
+    rm.max_regs = 3;
+    if (!CanCompile(rm)) { printf("  SKIP\n"); return; }
+    auto* nm = Compile(rm); if (!nm) { printf("  FAIL\n"); ++g_failures; return; }
+    CHECK(ExecuteNative(nm->code) == static_cast<uint64_t>(static_cast<int64_t>(-16)), "Shr_Ret");
+}
+
 int main() {
     printf("ARM64 JIT Code Execution Test\n");
     printf("════════════════════════════\n");
@@ -459,6 +808,31 @@ int main() {
     Test_BrTrue_Taken();
     Test_BrTrue_NotTaken();
     Test_BrFalse_Taken();
+
+    // Comparison branch tests
+    Test_Beq_Taken();
+    Test_Beq_NotTaken();
+    Test_Bne_Taken();
+    Test_Bne_NotTaken();
+    Test_Blt_Taken();
+    Test_Blt_NotTaken();
+    Test_Bgt_Taken();
+    Test_Bgt_NotTaken();
+    Test_Ble_Taken();
+    Test_Ble_NotTaken();
+    Test_Bge_Taken();
+    Test_Bge_NotTaken();
+
+    // Arithmetic extended
+    Test_Div_Ret();
+    Test_Rem_Ret();
+    Test_Neg_Ret();
+    Test_Not_Ret();
+    Test_And_Ret();
+    Test_Or_Ret();
+    Test_Xor_Ret();
+    Test_Shl_Ret();
+    Test_Shr_Ret();
 
     printf("\n══ Results: %d / %d tests passed, %d failures ══\n",
            g_tests - g_failures, g_tests, g_failures);
