@@ -50,11 +50,12 @@ enum class IntrinsicId : uint8_t {
 
 // ── Intrinsic table entry ──────────────────────────────────────────────
 struct IntrinsicEntry {
-    uint32_t     method_token;   // callee metadata token to match
-    IntrinsicId  id;             // unique intrinsic identifier
-    NodeKind     target_kind;    // target NodeKind after replacement
-    uint8_t      arg_count;      // expected argument count
-    TypeTag      result_tag;     // result type tag
+    uint32_t     method_token;    // callee metadata token to match
+    IntrinsicId  id;              // unique intrinsic identifier
+    NodeKind     target_kind;     // target NodeKind after replacement
+    uint8_t      arg_count;       // expected argument count
+    TypeTag      result_tag;      // result type tag
+    uint8_t      simd_elem_type;  // SIMD element type (SimdElementType), for kSimd targets
 };
 
 // ── IntrinsicMutator — Tree IR pass ────────────────────────────────────
