@@ -1,6 +1,7 @@
 #include "code_buffer.h"
 
 #include <chaos/pal/pal_mem.h>
+#include <chaos/pal/pal_cache.h>
 
 #include <cstdlib>
 
@@ -102,6 +103,10 @@ void* CodeBuffer::Seal() noexcept {
     if (!ProtectPlatform(true)) {
         return nullptr;
     }
+
+    // Flush I-cache for the entire code range so ARM64 sees the newly written
+    // instructions.  No-op on x86 (hardware I-cache coherency).
+    chaos::il2cpp::pal::PalFlushInstructionCache(data_, pos_);
 
     // Transfer ownership to caller — reset internal state so ~CodeBuffer()
     // does not free the memory via FreePlatform().

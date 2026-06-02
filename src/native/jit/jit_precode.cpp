@@ -43,6 +43,7 @@
 #endif
 
 #include <chaos/pal/pal_mem.h>
+#include <chaos/pal/pal_cache.h>
 #include <chaos/eh.h>            // CHAOS_EH_TRY / CHAOS_EH_CATCH_BEGIN
 #include <generated_code_compat.h>  // chaos_managed_exception for CHAOS_EH_CATCH_BEGIN
 
@@ -244,6 +245,11 @@ void* PrecodeArena::AllocateJitTrampoline(JitPrecode* precode) noexcept {
 #endif
 
     pg.pos += kTrampolineSize;
+
+    // Flush I-cache so ARM64 sees the newly written trampoline instructions.
+    // No-op on x86 (hardware I-cache coherency).
+    chaos::il2cpp::pal::PalFlushInstructionCache(pg.base + offset, kTrampolineSize);
+
     return pg.base + offset;
 }
 

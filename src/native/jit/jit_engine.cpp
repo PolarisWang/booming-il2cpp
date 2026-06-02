@@ -1723,7 +1723,9 @@ bool NativeCodeGenerator::EmitInstruction(const interpreter::RegisterInstruction
         // Int64 opcodes (Conv_I8, ConvOvfI8): keep full 64-bit value.
         bool is_int32_op = (instr.op_code() != IROpCode::Conv_I8 && instr.op_code() != IROpCode::ConvOvfI8);
         if (is_int32_op) {
+#if !defined(__aarch64__)
             buf_.EmitByte(0x89); buf_.EmitByte(0xC0);  // mov eax, eax (zero-extend 32→64)
+#endif
         }
         StoreGpr(AT::kScratchA, instr.dst_reg());
         return true;
@@ -1735,7 +1737,9 @@ bool NativeCodeGenerator::EmitInstruction(const interpreter::RegisterInstruction
         // Check overflow: sign-extend 32-bit truncation back to 64-bit and compare.
         // If original ≠ sign-extend(truncate(original)), the value doesn't fit int32.
         enc_.EmitMovRR(AT::kScratchB, AT::kScratchA);           // rcx = rax (copy original)
+#if !defined(__aarch64__)
         buf_.EmitByte(0x89); buf_.EmitByte(0xC1);  // mov ecx, eax (truncate to 32-bit)
+#endif
         enc_.EmitMovsxd(AT::kScratchB, AT::kScratchB);           // movsxd rcx, ecx (sign-extend 32→64)
         enc_.EmitCmpRR(AT::kScratchA, AT::kScratchB);            // cmp rax, rcx
         {
@@ -1757,7 +1761,9 @@ bool NativeCodeGenerator::EmitInstruction(const interpreter::RegisterInstruction
         if (instr.op_code() == IROpCode::ConvOvfU4) {
             // Check value fits in uint32: truncate + compare
             enc_.EmitMovRR(AT::kScratchB, AT::kScratchA);
+#if !defined(__aarch64__)
             buf_.EmitByte(0x89); buf_.EmitByte(0xC1);  // mov ecx, eax (32-bit truncate)
+#endif
             enc_.EmitCmpRR(AT::kScratchA, AT::kScratchB);
             uint32_t jne_pos = buf_.pos();
             enc_.EmitJccRel32(kCC_NE, 0);
@@ -1807,7 +1813,9 @@ bool NativeCodeGenerator::EmitInstruction(const interpreter::RegisterInstruction
         // convert to double, store to FPR[dst].  Matches interpreter VM:
         //   double result = static_cast<double>(static_cast<uint32_t>(gpr[src1]));
         LoadGpr(AT::kScratchA, instr.src1_reg());
+#if !defined(__aarch64__)
         buf_.EmitByte(0x8B); buf_.EmitByte(0xC0);  // mov eax, eax (zero-extend 32→64)
+#endif
         enc_.EmitCvtsi2sd(0, AT::kScratchA);               // cvtsi2sd xmm0, rax
         StoreFpr(0, instr.dst_reg());
         return true;
