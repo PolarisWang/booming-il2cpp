@@ -1,6 +1,7 @@
 #include "gc_old_gen.h"
 
 #include <chaos/pal/pal_mem.h>
+#include <chaos/pal/pal_thread.h>
 #include <chaos/asan_interface.h>
 #include <chaos/log.h>
 #include <chaos/profile.h>
@@ -38,15 +39,7 @@
 #include <thread>
 #include <vector>
 
-#if defined(_WIN32) || defined(_WIN64)
-    #include <windows.h>
-    #include <intrin.h>
-    #define CHAOS_OLDGEN_SPIN_HINT()  _mm_pause()
-#elif defined(__aarch64__) || defined(_M_ARM64)
-    #define CHAOS_OLDGEN_SPIN_HINT()  __asm__ __volatile__("yield" ::: "memory")
-#else
-    #define CHAOS_OLDGEN_SPIN_HINT()  __builtin_ia32_pause()
-#endif
+#define CHAOS_OLDGEN_SPIN_HINT()  CHAOS_IL2CPP_PAUSE_HINT()
 
 // Overhead:  8 bytes (aligned to pointer size).
 static constexpr CHAOS_IL2CPP_SIZE kOldGenBlockHeaderSize = sizeof(void*);
@@ -70,13 +63,8 @@ static void* VirtualAllocPage(CHAOS_IL2CPP_SIZE size) {
     int numa_node = GcNumaNodeCount() > 1 ? GcNumaCurrentNode() : 0;
     auto* ptr = static_cast<OldGenPage*>(GcNumaVirtualAlloc(size, numa_node));
     if (ptr == nullptr) {
-#if defined(_WIN32) || defined(_WIN64)
-        CHAOS_IL2CPP_LOG_ERROR_M("OldGen", "VirtualAlloc failed size={0} err={1}",
-            static_cast<unsigned long long>(size), GetLastError());
-#else
-        CHAOS_IL2CPP_LOG_ERROR_M("OldGen", "mmap/GcNumaVirtualAlloc failed size={0}",
+        CHAOS_IL2CPP_LOG_ERROR_M("OldGen", "GcNumaVirtualAlloc failed size={0}",
             static_cast<unsigned long long>(size));
-#endif
     } else {
         ptr->numa_node = static_cast<int8_t>(numa_node);
     }
@@ -283,11 +271,9 @@ OldGenPage* MarkSweepOldGen::AllocatePage(CHAOS_IL2CPP_SIZE size, bool scanning,
             auto entry = page_pool_[pool_idx];
             page_pool_.erase(page_pool_.begin() + static_cast<ptrdiff_t>(pool_idx));
 
-#if defined(_WIN32) || defined(_WIN64)
             // Recommit the decommitted page.  PalVirtualDecommit in FreeRegion
             // releases physical pages but keeps the VA range reserved.
             chaos::il2cpp::pal::PalVirtualCommit(entry.page, entry.page_size);
-#endif
             auto* recycled = entry.page;
 
             // Re-initialize all header fields that were lost during decommit.
@@ -2198,24 +2184,13 @@ void MarkSweepOldGen::RelocateRoots(const std::vector<CompactPlanEntry>& entries
     // Scan the current thread's own stack conservatively.
     uintptr_t self_stack_limit;
     uintptr_t self_stack_base;
-#if defined(_WIN32) || defined(_WIN64)
-    auto* teb = reinterpret_cast<NT_TIB*>(__readgsqword(0x30));
-    self_stack_limit = reinterpret_cast<uintptr_t>(teb->StackLimit);
-    self_stack_base  = reinterpret_cast<uintptr_t>(teb->StackBase);
-#elif defined(__APPLE__)
-    self_stack_base   = reinterpret_cast<uintptr_t>(pthread_get_stackaddr_np(pthread_self()));
-    self_stack_limit  = self_stack_base - pthread_get_stacksize_np(pthread_self());
-#else
-    // Linux/Android: use pthread_getattr_np.
-    pthread_attr_t attr;
-    void* stack_addr;
-    size_t stack_size;
-    pthread_getattr_np(pthread_self(), &attr);
-    pthread_attr_getstack(&attr, &stack_addr, &stack_size);
-    pthread_attr_destroy(&attr);
-    self_stack_base   = reinterpret_cast<uintptr_t>(stack_addr) + stack_size;
-    self_stack_limit  = reinterpret_cast<uintptr_t>(stack_addr);
-#endif
+    {
+        void* base = nullptr;
+        void* limit = nullptr;
+        chaos::il2cpp::pal::PalGetStackBounds(base, limit);
+        self_stack_base  = reinterpret_cast<uintptr_t>(base);
+        self_stack_limit = reinterpret_cast<uintptr_t>(limit);
+    }
     uintptr_t self_aligned_start = (self_stack_limit + sizeof(void*) - 1)
         & ~static_cast<uintptr_t>(sizeof(void*) - 1);
     uintptr_t self_aligned_end   = self_stack_base

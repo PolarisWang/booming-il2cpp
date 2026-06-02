@@ -60,10 +60,6 @@ bool chaos::il2cpp::common::log_internal::g_log_use_stderr = false;
 #include <unordered_map>
 #include <vector>
 
-#if defined(_WIN32)
-#include <Windows.h>
-#endif
-
 // Bring common namespaces into scope for all sub-files in this TU.
 using namespace chaos::il2cpp::runtime_capability;
 using namespace chaos::il2cpp::marshal_abi;

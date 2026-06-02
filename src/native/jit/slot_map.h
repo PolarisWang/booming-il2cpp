@@ -13,11 +13,8 @@
 #include <cstdint>
 #include <vector>
 
+#include <chaos/pal/pal_mem.h>
 #include <chaos/unordered_dense.h>
-
-#if defined(_WIN32) || defined(_WIN64)
-#include <windows.h>
-#endif
 
 namespace chaos::il2cpp::jit {
 
@@ -59,7 +56,7 @@ public:
 
     /// Update all slot pointers for `callee_token` to `new_direct_ptr`.
     /// Called from the hotpatch callback (under HotpatchNameRegistry lock).
-    /// Slot tables are in RX code pages — uses VirtualProtect to temporarily
+    /// Slot tables are in RX code pages — uses PalVirtualProtect to temporarily
     /// enable writes. Protected region is per-page, so multiple slots on the
     /// same page are handled in one call.
     void UpdateAll(uint32_t callee_token, void* new_direct_ptr) noexcept {
@@ -69,16 +66,11 @@ public:
             if (entry.caller->call_site_slots &&
                 entry.slot_index < entry.caller->call_site_slot_count) {
                 void* addr = &entry.caller->call_site_slots[entry.slot_index];
-#if defined(_WIN32) || defined(_WIN64)
-                DWORD old_protect;
-                VirtualProtect(addr, sizeof(void*), PAGE_READWRITE, &old_protect);
+                chaos::il2cpp::pal::PalVirtualProtect(addr, sizeof(void*),
+                    chaos::il2cpp::pal::kPalMemReadWrite);
                 entry.caller->call_site_slots[entry.slot_index] = new_direct_ptr;
-                VirtualProtect(addr, sizeof(void*), old_protect, &old_protect);
-#else
-                // POSIX: use mprotect for PAGE_RW temporarily
-                // (implementation-specific page alignment handled by caller if needed)
-                entry.caller->call_site_slots[entry.slot_index] = new_direct_ptr;
-#endif
+                chaos::il2cpp::pal::PalVirtualProtect(addr, sizeof(void*),
+                    chaos::il2cpp::pal::kPalMemReadExec);
             }
         }
     }

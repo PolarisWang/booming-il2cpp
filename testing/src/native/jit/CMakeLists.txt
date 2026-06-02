@@ -47,6 +47,21 @@ target_compile_definitions(test_jit_il_smoke PRIVATE
     CHAOS_IL2CPP_JIT_TEST_ACTIVE=1
 )
 
+# S-1 — Codegen SIMD test
+# Tests SIMD IR instructions (SimdAdd/Sub/Mul/Min/Max/Div) through the
+# T4 JIT pipeline.  Validates the EmitSimd switch cases for all supported
+# element types and sub-operations.
+add_chaos_test(test_jit_simd
+    jit_simd_test.cpp
+    ../runtime-core/gc/gc_test_stubs.cpp
+    LIBS ${CHAOS_CODEGEN_LIBS}
+    LABELS "unit;jit"
+)
+target_compile_definitions(test_jit_simd PRIVATE
+    CHAOS_IL2CPP_JIT_TEST_ACTIVE=1
+)
+set_tests_properties(test_jit_simd PROPERTIES TIMEOUT 60)
+
 # B-1 — Codegen ABI contract test
 # Verifies codegen_bridge.h struct layouts, constants, and helpers.
 # gc_test_stubs.cpp provides stubs for external symbols normally supplied

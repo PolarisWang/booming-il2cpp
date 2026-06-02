@@ -10,243 +10,65 @@
 #include <mutex>
 #include <vector>
 
-#if defined(_WIN32)
-#include <Windows.h>
-#else
-#include <cstdlib>
+#include <chaos/pal/pal_heap.h>
 #include <chaos/pal/pal_mem.h>
-#endif
 
 namespace chaos::il2cpp::memory_domain {
+
+using chaos::il2cpp::pal::PalHeapCreate;
+using chaos::il2cpp::pal::PalHeapAlloc;
+using chaos::il2cpp::pal::PalHeapRealloc;
+using chaos::il2cpp::pal::PalHeapFree;
+using chaos::il2cpp::pal::PalHeapSize;
+using chaos::il2cpp::pal::PalHeapDestroy;
 
 // ======================================================================
 // SegregatedHeap — default heap strategy
 //
-// Each domain gets its own Win32 heap so that Destroy() releases all
-// memory in O(1) with no individual free calls.  On non-Windows
-// platforms we fall back to a simple wrapper around malloc/free (the
-// full segregated-heap semantic requires mmap / jemalloc extensions).
+// Uses PalHeapCreate for portable heap allocation (Win32 Heap API on
+// Windows, malloc/free on POSIX).  The Destroy() releases all memory
+// at once with no individual free calls.
 // ======================================================================
-
-#if defined(_WIN32)
 
 class SegregatedHeap final : public IDomainHeap {
 public:
-    SegregatedHeap() : heap_(::HeapCreate(0u, 0u, 0u)) {}
+    SegregatedHeap() : heap_(PalHeapCreate()) {}
     ~SegregatedHeap() override { Destroy(); }
 
     void* Allocate(CHAOS_IL2CPP_SIZE size) override {
-        if (heap_ == nullptr) return nullptr;
+        if (!heap_) return nullptr;
         if (!TrackAlloc(size)) return nullptr;
-        return ::HeapAlloc(heap_, 0u, size);
+        return PalHeapAlloc(heap_, size);
     }
 
     void* Reallocate(void* ptr, CHAOS_IL2CPP_SIZE new_size) override {
-        if (heap_ == nullptr) return nullptr;
-        // Untrack old size first.
+        if (!heap_) return nullptr;
         if (ptr != nullptr) {
-            CHAOS_IL2CPP_SIZE old_size = ::HeapSize(heap_, 0u, ptr);
-            if (old_size != static_cast<CHAOS_IL2CPP_SIZE>(-1)) {
-                TrackFree(old_size);
-            }
+            CHAOS_IL2CPP_SIZE old_size = PalHeapSize(heap_, ptr);
+            if (old_size > 0) TrackFree(old_size);
         }
         if (!TrackAlloc(new_size)) return nullptr;
-        return ::HeapReAlloc(heap_, 0u, ptr, new_size);
+        return PalHeapRealloc(heap_, ptr, new_size);
     }
 
     void Free(void* ptr) override {
         if (heap_ != nullptr && ptr != nullptr) {
-            CHAOS_IL2CPP_SIZE old_size = ::HeapSize(heap_, 0u, ptr);
-            if (old_size != static_cast<CHAOS_IL2CPP_SIZE>(-1)) {
-                TrackFree(old_size);
-            }
-            ::HeapFree(heap_, 0u, ptr);
+            CHAOS_IL2CPP_SIZE old_size = PalHeapSize(heap_, ptr);
+            if (old_size > 0) TrackFree(old_size);
+            PalHeapFree(heap_, ptr);
         }
     }
 
     void Destroy() override {
         if (heap_ != nullptr) {
-            ::HeapDestroy(heap_);
+            PalHeapDestroy(heap_);
             heap_ = nullptr;
         }
     }
 
 private:
-    HANDLE heap_;
+    void* heap_;
 };
-
-#else  // not _WIN32 — region-based allocator
-
-/// Minimum region size for the mmap-based SegregatedHeap.
-/// 64 KB = typical large page on many systems, balances fragmentation vs waste.
-static constexpr CHAOS_IL2CPP_SIZE kMmapRegionSize = 64 * 1024;
-
-class SegregatedHeap final : public IDomainHeap {
-public:
-    SegregatedHeap() {
-        AllocateNewRegion();
-    }
-
-    ~SegregatedHeap() override { Destroy(); }
-
-    void* Allocate(CHAOS_IL2CPP_SIZE size) override {
-        size = AlignUp(size, sizeof(void*));
-        if (!TrackAlloc(size)) return nullptr;
-
-        std::lock_guard<std::mutex> lock(region_mutex_);
-
-        // Try current region first.
-        if (current_ != nullptr &&
-            (current_pos_ + size) <= current_end_) {
-            void* ptr = reinterpret_cast<void*>(current_pos_);
-            current_pos_ += size;
-            return ptr;
-        }
-
-        // Large allocation: get a dedicated mmap region just for this block.
-        if (size > kMmapRegionSize / 2) {
-            CHAOS_IL2CPP_SIZE alloc_size = AlignUp(size, kMmapRegionSize);
-            void* ptr = MmapAlloc(alloc_size);
-            if (ptr == nullptr) return nullptr;
-            regions_.push_back({ptr, alloc_size});
-            return ptr;
-        }
-
-        // Need a fresh region.
-        if (!AllocateNewRegion()) return nullptr;
-
-        // Retry with the new region.
-        void* ptr = reinterpret_cast<void*>(current_pos_);
-        current_pos_ += size;
-        return ptr;
-    }
-
-    void* Reallocate(void* ptr, CHAOS_IL2CPP_SIZE new_size) override {
-        if (!TrackAlloc(new_size)) return nullptr;
-
-        std::lock_guard<std::mutex> lock(region_mutex_);
-
-        // If ptr is the last allocation in the current region, just extend.
-        if (ptr != nullptr && IsInCurrentRegion(ptr)) {
-            CHAOS_IL2CPP_SIZE needed = AlignUp(new_size, sizeof(void*));
-            if ((reinterpret_cast<CHAOS_IL2CPP_SIZE>(ptr) + needed) <= current_end_) {
-                current_pos_ = reinterpret_cast<CHAOS_IL2CPP_SIZE>(ptr) + needed;
-                return ptr;
-            }
-        }
-
-        // Generic fallback: alloc + copy + free.
-        void* new_ptr = AllocateLocked(new_size);
-        if (new_ptr == nullptr || ptr == nullptr) return new_ptr;
-        std::memcpy(new_ptr, ptr, new_size);
-        // Bump allocator: no individual free needed.
-        return new_ptr;
-    }
-
-    void Free(void* ptr) override {
-        (void)ptr;
-        // Bump allocator: individual free is a no-op.
-        // All memory released in Destroy() via bulk munmap.
-    }
-
-    void Destroy() override {
-        std::lock_guard<std::mutex> lock(region_mutex_);
-
-        CHAOS_IL2CPP_INT64 total = 0;
-        for (auto& r : regions_) {
-            if (r.ptr != nullptr) {
-                total += static_cast<CHAOS_IL2CPP_INT64>(r.size);
-                chaos::il2cpp::pal::PalVirtualFree(r.ptr, r.size);
-            }
-        }
-        // Subtract all tracked region sizes from usage (since we can't
-        // track individual bump-allocated blocks, use region total as
-        // a conservative estimate).
-        if (owner_ != nullptr) {
-            owner_->current_usage.fetch_sub(total, std::memory_order_relaxed);
-            // Saturating: if negative after subtract, reset to 0.
-            if (owner_->current_usage.load(std::memory_order_relaxed) < 0) {
-                owner_->current_usage.store(0, std::memory_order_relaxed);
-            }
-        }
-        regions_.clear();
-        current_ = nullptr;
-        current_pos_ = 0;
-        current_end_ = 0;
-    }
-
-private:
-    struct Region {
-        void* ptr;
-        CHAOS_IL2CPP_SIZE size;
-    };
-
-    std::mutex            region_mutex_;   ///< Serializes region metadata and bump-pointer access.
-    std::vector<Region>   regions_;
-
-    void*  current_     = nullptr;
-    CHAOS_IL2CPP_SIZE current_pos_  = 0;
-    CHAOS_IL2CPP_SIZE current_end_  = 0;
-
-    static CHAOS_IL2CPP_SIZE AlignUp(CHAOS_IL2CPP_SIZE size, CHAOS_IL2CPP_SIZE align) {
-        return (size + align - 1) & ~(align - 1);
-    }
-
-    static void* MmapAlloc(CHAOS_IL2CPP_SIZE size) {
-        return chaos::il2cpp::pal::PalVirtualAlloc(size);
-    }
-
-    void SetupCurrent(void* region, CHAOS_IL2CPP_SIZE size) {
-        current_ = region;
-        current_pos_ = reinterpret_cast<CHAOS_IL2CPP_SIZE>(current_);
-        current_end_ = current_pos_ + size;
-    }
-
-    bool AllocateNewRegion() {
-        // Must be called with region_mutex_ held.
-        CHAOS_IL2CPP_SIZE size = kMmapRegionSize;
-        void* ptr = MmapAlloc(size);
-        if (ptr == nullptr) return false;
-        SetupCurrent(ptr, size);
-        regions_.push_back({ptr, size});
-        return true;
-    }
-
-    bool IsInCurrentRegion(const void* ptr) const {
-        // Must be called with region_mutex_ held.
-        if (current_ == nullptr) return false;
-        CHAOS_IL2CPP_SIZE p = reinterpret_cast<CHAOS_IL2CPP_SIZE>(ptr);
-        CHAOS_IL2CPP_SIZE start = reinterpret_cast<CHAOS_IL2CPP_SIZE>(current_);
-        return p >= start && p < current_end_;
-    }
-
-    /// Allocate under the assumption that region_mutex_ is already held.
-    void* AllocateLocked(CHAOS_IL2CPP_SIZE size) {
-        size = AlignUp(size, sizeof(void*));
-        // Try current region first.
-        if (current_ != nullptr &&
-            (current_pos_ + size) <= current_end_) {
-            void* ptr = reinterpret_cast<void*>(current_pos_);
-            current_pos_ += size;
-            return ptr;
-        }
-        // Large allocation.
-        if (size > kMmapRegionSize / 2) {
-            CHAOS_IL2CPP_SIZE alloc_size = AlignUp(size, kMmapRegionSize);
-            void* ptr = MmapAlloc(alloc_size);
-            if (ptr == nullptr) return nullptr;
-            regions_.push_back({ptr, alloc_size});
-            return ptr;
-        }
-        // Fresh region.
-        if (!AllocateNewRegion()) return nullptr;
-        void* ptr = reinterpret_cast<void*>(current_pos_);
-        current_pos_ += size;
-        return ptr;
-    }
-};
-
-#endif
 
 // ======================================================================
 // Process-wide heap factory

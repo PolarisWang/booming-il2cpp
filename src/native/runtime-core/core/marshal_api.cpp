@@ -1,13 +1,12 @@
-#if defined(_WIN32)
-#include <objbase.h>   // CoCreateInstance, IUnknown, HRESULT, GUID
-#endif
-
 #include <atomic>
 #include <cstring>
 
 // CHAOS_SPIN_HINT is defined in runtime_core.cpp when compiled as Unity build.
 // Provide a local fallback for standalone TU compilation.
 #include "com_platform.h"
+
+#include <chaos/pal/pal_error.h>
+#include <chaos/pal/pal_encoding.h>
 
 #ifndef CHAOS_SPIN_HINT
 #define CHAOS_SPIN_HINT() CHAOS_IL2CPP_PAUSE_HINT()
@@ -194,33 +193,13 @@ CHAOS_IL2CPP_INTPTR MarshalStringToHGlobalAnsi(
     const auto utf8_bytes = static_cast<const char*>(static_cast<const void*>(hdr + 1));
     const auto byte_count = static_cast<int>(hdr->byte_count);
 
-#if defined(_WIN32)
-    // UTF-8 → UTF-16 → ANSI (CP_ACP)
-    int wide_needed = ::MultiByteToWideChar(CP_UTF8, 0, utf8_bytes, byte_count, nullptr, 0);
-    if (wide_needed <= 0) return 0;
-    auto* wide_buf = static_cast<wchar_t*>(_malloca(static_cast<CHAOS_IL2CPP_SIZE>(wide_needed + 1) * sizeof(wchar_t)));
-    ::MultiByteToWideChar(CP_UTF8, 0, utf8_bytes, byte_count, wide_buf, wide_needed);
-    wide_buf[wide_needed] = 0;
-
-    int ansi_needed = ::WideCharToMultiByte(CP_ACP, 0, wide_buf, wide_needed, nullptr, 0, nullptr, nullptr);
-    if (ansi_needed <= 0) { _freea(wide_buf); return 0; }
-
-    auto memory = AllocateMarshalBlock(runtime_state, static_cast<CHAOS_IL2CPP_SIZE>(ansi_needed) + 1u, MarshalAllocationKind::HGlobal);
-    if (memory == 0) { _freea(wide_buf); return 0; }
-    auto* ansi_target = reinterpret_cast<char*>(GetMarshalAllocationStorage(memory));
-    ::WideCharToMultiByte(CP_ACP, 0, wide_buf, wide_needed, ansi_target, ansi_needed, nullptr, nullptr);
-    ansi_target[ansi_needed] = '\0';
-    _freea(wide_buf);
-    return memory;
-#else
-    // Non-Windows: ACP ≈ UTF-8, pass through.
+    // ACP ≈ UTF-8, pass through.
     auto memory = AllocateMarshalBlock(runtime_state, static_cast<CHAOS_IL2CPP_SIZE>(byte_count) + 1u, MarshalAllocationKind::HGlobal);
     if (memory == 0) return 0;
     auto* target = reinterpret_cast<char*>(GetMarshalAllocationStorage(memory));
     if (byte_count > 0) { CHAOS_IL2CPP_MEMCPY(target, utf8_bytes, static_cast<CHAOS_IL2CPP_SIZE>(byte_count)); }
     target[byte_count] = '\0';
     return memory;
-#endif
 }
 
 CHAOS_IL2CPP_INTPTR MarshalStringToHGlobalUni(
@@ -373,17 +352,11 @@ CHAOS_IL2CPP_INT32 GetLastPInvokeError(ThreadState* ts) noexcept {
 }
 
 void ClearOsLastError() noexcept {
-#if defined(_WIN32)
-    ::SetLastError(0);
-#endif
+    chaos::il2cpp::pal::PalSetLastError(0);
 }
 
 CHAOS_IL2CPP_INT32 GetOsLastError() noexcept {
-#if defined(_WIN32)
-    return static_cast<CHAOS_IL2CPP_INT32>(::GetLastError());
-#else
-    return 0;
-#endif
+    return static_cast<CHAOS_IL2CPP_INT32>(chaos::il2cpp::pal::PalGetLastError());
 }
 
 // ICALL helper: Marshal.GetLastPInvokeError() / Marshal.GetLastWin32Error()
@@ -434,10 +407,14 @@ CHAOS_IL2CPP_INTPTR CHAOS_RUNTIME_ABI_CALL MarshalStringToBSTR(void* managed_str
     const auto byte_count = static_cast<int>(string_header->byte_count);
     // Convert managed UTF-8 string to UTF-16 for SysAllocString.
     const auto* utf8_data = reinterpret_cast<const char*>(string_header + 1);
-    int wide_needed = ::MultiByteToWideChar(CP_UTF8, 0, utf8_data, byte_count, nullptr, 0);
+    int wide_needed = chaos::il2cpp::pal::PalUtf8ToUtf16(
+        reinterpret_cast<const uint8_t*>(utf8_data), byte_count, nullptr, 0);
     if (wide_needed <= 0) return 0;
-    auto* wide_buf = static_cast<CHAOS_IL2CPP_UINT16*>(std::malloc(static_cast<CHAOS_IL2CPP_SIZE>(wide_needed + 1) * sizeof(CHAOS_IL2CPP_UINT16)));
-    ::MultiByteToWideChar(CP_UTF8, 0, utf8_data, byte_count, reinterpret_cast<wchar_t*>(wide_buf), wide_needed);
+    auto* wide_buf = static_cast<CHAOS_IL2CPP_UINT16*>(std::malloc(
+        static_cast<CHAOS_IL2CPP_SIZE>(wide_needed + 1) * sizeof(CHAOS_IL2CPP_UINT16)));
+    chaos::il2cpp::pal::PalUtf8ToUtf16(
+        reinterpret_cast<const uint8_t*>(utf8_data), byte_count,
+        wide_buf, wide_needed);
     wide_buf[wide_needed] = 0;
     auto result = com_platform::PlatformSysAllocString(wide_buf);
     std::free(wide_buf);
@@ -468,11 +445,7 @@ void* CHAOS_RUNTIME_ABI_CALL MarshalPtrToStringBSTR(CHAOS_IL2CPP_INTPTR bstr_ptr
 // ICALL: Marshal.FreeBSTR(IntPtr) → void
 void CHAOS_RUNTIME_ABI_CALL MarshalFreeBSTR(CHAOS_IL2CPP_INTPTR bstr_ptr) noexcept {
     if (bstr_ptr == 0) return;
-#if defined(_WIN32)
     com_platform::PlatformSysFreeString(reinterpret_cast<void*>(bstr_ptr));
-#else
-    (void)bstr_ptr;
-#endif
 }
 
 // ── COM apartment management ────────────────────────────────────────

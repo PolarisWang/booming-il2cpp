@@ -1,6 +1,7 @@
 #include "gc_heap.h"
 #include "gc_bgc_inline.h"
 #include "gc_root_change.h"
+#include <chaos/pal/pal_com.h>
 namespace chaos::il2cpp::runtime_core {
 
 // MSVC 14.44 cannot see anonymous-namespace symbols from other unity files.
@@ -596,23 +597,14 @@ bool GcIsPohPointer(const void* ptr) noexcept {
 }
 
 // ── COM apartment management ──────────────────────────────────────────
-// CoInitializeEx/CoUninitialize are declared in combaseapi.h, included
-// via Windows.h (already in scope from runtime_core.cpp unity build).
+// CoInitializeEx/CoUninitialize are abstracted via pal_com.h.
 
 CHAOS_IL2CPP_INT32 CoInitializeApartment(CHAOS_IL2CPP_INT32 apartment_type) noexcept {
-#if defined(_WIN32)
-    HRESULT hr = ::CoInitializeEx(nullptr, static_cast<DWORD>(apartment_type));
-    return static_cast<CHAOS_IL2CPP_INT32>(hr);
-#else
-    (void)apartment_type;
-    return 0;  // S_OK on non-Windows (no-op)
-#endif
+    return chaos::il2cpp::pal::PalComInitialize(apartment_type);
 }
 
 void CoUninitializeApartment() noexcept {
-#if defined(_WIN32)
-    ::CoUninitialize();
-#endif
+    chaos::il2cpp::pal::PalComUninitialize();
 }
 
 }  // namespace chaos::il2cpp::runtime_core

@@ -4,6 +4,7 @@
 
 #include <chaos/log.h>
 #include <chaos/native_types.h>
+#include <chaos/pal/pal_mem.h>
 
 #include <jit_demotion.h>
 #include <gc_events.h>
@@ -20,7 +21,6 @@ static_assert(sizeof(int32_t) == 4, "int32_t must be 4 bytes");
     #include <intrin.h> // _mm_pause()
   #endif
 #elif defined(__linux__)
-  #include <sys/mman.h> // munmap
   #include <sched.h>    // sched_yield
   // GCC unwinder .eh_frame registration — no header provides this on all GCC versions.
   extern "C" void __register_frame(const void*);
@@ -289,21 +289,8 @@ void WinSehHandler::ReclaimDemoted() noexcept {
     for (uint32_t i = 0; i < kMaxPendingFreeRegions; i++) {
         if (!pending_free_[i].active) continue;
 
-#if defined(_WIN64)
-        BOOL ok = VirtualFree(pending_free_[i].code_start, 0, MEM_RELEASE);
-        if (!ok) {
-            CHAOS_IL2CPP_LOG_DEBUG_M("codegen",
-                "ReclaimDemoted: VirtualFree({}, {}) failed (already freed?)",
-                pending_free_[i].code_start, pending_free_[i].code_size);
-        }
-#elif defined(__linux__)
-        int ret = munmap(pending_free_[i].code_start, pending_free_[i].code_size);
-        if (ret != 0) {
-            CHAOS_IL2CPP_LOG_DEBUG_M("codegen",
-                "ReclaimDemoted: munmap({}, {}) failed",
-                pending_free_[i].code_start, pending_free_[i].code_size);
-        }
-#endif
+        chaos::il2cpp::pal::PalVirtualFree(
+            pending_free_[i].code_start, pending_free_[i].code_size);
 
         pending_free_[i].active = false;
         pending_free_[i].code_start = nullptr;

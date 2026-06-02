@@ -5,6 +5,7 @@
 #include <chaos/profile.h>
 #include <chaos/pal/pal_sync.h>
 #include <chaos/pal/pal_thread.h>
+#include <chaos/pal/pal_preempt.h>
 
 #include "gc_region.h"
 #include "gc_root_scanner.h"
@@ -14,15 +15,6 @@
 #include "generated_code_compat.h"  // chaos_managed_exception for Thread.Abort throw
 
 #include "forbid_suspend.h"
-
-#if defined(_WIN32) || defined(_WIN64)
-    #include <windows.h>
-    #include <intrin.h>
-#else
-    #include <pthread.h>
-    #include <signal.h>
-    #include <sys/resource.h>
-#endif
 
 #include "../jit/jit_seh.h"    // FindNativeCodeByAddress for hybrid GC scanning
 #include "../jit/jit_method.h"     // JitMethod (slot_map_data for GcSlotMapV0)
@@ -45,6 +37,11 @@ using chaos::il2cpp::pal::PalEventSet;
 using chaos::il2cpp::pal::PalEventWait;
 using chaos::il2cpp::pal::PalGetCurrentThreadId;
 using chaos::il2cpp::pal::PalGetStackBounds;
+using chaos::il2cpp::pal::PalDuplicateCurrentThreadHandle;
+using chaos::il2cpp::pal::PalSetThreadPriority;
+using chaos::il2cpp::pal::PalPreemptInit;
+using chaos::il2cpp::pal::PalPreemptRequest;
+using chaos::il2cpp::pal::PalYield;
 
 // ── T4 frame layout constant (mirrors code_generator.cpp kFrameSize) ─
 // The T4 native prologue establishes:
@@ -76,34 +73,12 @@ std::atomic<int32_t> s_next_thread_id{kMainThreadId + 1};
 /// Map ManagedThreadPriority to OS thread priority.
 /// Called on RegisterThread and chaos_thread_set_priority.
 int32_t OsThreadPriorityFromManaged(ManagedThreadPriority pri) noexcept {
-#if defined(_WIN32) || defined(_WIN64)
-    switch (pri) {
-        case ManagedThreadPriority::Lowest:      return THREAD_PRIORITY_LOWEST;
-        case ManagedThreadPriority::BelowNormal: return THREAD_PRIORITY_BELOW_NORMAL;
-        case ManagedThreadPriority::Normal:      return THREAD_PRIORITY_NORMAL;
-        case ManagedThreadPriority::AboveNormal: return THREAD_PRIORITY_ABOVE_NORMAL;
-        case ManagedThreadPriority::Highest:     return THREAD_PRIORITY_HIGHEST;
-        default:                                 return THREAD_PRIORITY_NORMAL;
+    int level = static_cast<int>(pri);
+    if (!PalSetThreadPriority(level)) {
+        CHAOS_IL2CPP_LOG_WARN_M("Thread", "PalSetThreadPriority failed for level {0}", level);
     }
-#else
-    // POSIX: map managed priority to nice value (-20..19 for SCHED_OTHER).
-    // SCHED_OTHER only allows nice-based prioritization within the same
-    // scheduling policy; root privileges are NOT required for nice values.
-    int nice_value;
-    switch (pri) {
-        case ManagedThreadPriority::Lowest:      nice_value = 19;  break;
-        case ManagedThreadPriority::BelowNormal: nice_value = 10;  break;
-        case ManagedThreadPriority::AboveNormal: nice_value = -10; break;
-        case ManagedThreadPriority::Highest:     nice_value = -20; break;
-        case ManagedThreadPriority::Normal:
-        default:                                 nice_value = 0;   break;
-    }
-    errno = 0;
-    if (setpriority(PRIO_PROCESS, 0, nice_value) != 0 && errno != 0) {
-        CHAOS_IL2CPP_LOG_WARN_M("Thread", "setpriority failed: {0}", std::strerror(errno));
-    }
-    return nice_value;
-#endif
+    // Return the priority value for diagnostic purposes.
+    return level;
 }
 
 }  // anonymous namespace
@@ -121,14 +96,8 @@ void RegisterThread(int32_t managed_id, void* managed_obj) noexcept {
     // Store OS thread ID for signal-based preemptive suspend (Linux).
     thread->os_thread_id = PalGetCurrentThreadId();
 
-#if defined(_WIN32) || defined(_WIN64)
-    // Duplicate OS thread handle for APC-based safepoint fallback.
-    HANDLE hProcess = ::GetCurrentProcess();
-    HANDLE hThread  = ::GetCurrentThread();
-    ::DuplicateHandle(hProcess, hThread, hProcess, &hThread,
-                      THREAD_SET_CONTEXT, FALSE, 0);
-    thread->os_handle = hThread;
-#endif
+    // Duplicate OS thread handle for APC-based safepoint fallback (Windows).
+    thread->os_handle = PalDuplicateCurrentThreadHandle();
 
     // Capture stack bounds for conservative root scanning during full GC.
     PalGetStackBounds(thread->stack_base, thread->stack_limit);
@@ -329,52 +298,41 @@ void EnterPreemptiveMode() noexcept {
     thread->gc_mode.store(kGcModePreemptive, std::memory_order_release);
 }
 
-#if !defined(_WIN32) && !defined(_WIN64) && !defined(__APPLE__) && !defined(__ANDROID__)
-/// Signal handler for SIGUSR2: preemptive safepoint suspend.
-/// Runs in the target thread's context. Uses spin-wait because
-/// pthread_cond_wait is not async-signal-safe.
-static void SafepointSuspendHandler(int sig) {
-    if (sig != SIGUSR2) return;
+/// Unified preemptive suspend handler — called from Windows APC and
+/// POSIX SIGUSR2 signal context.  Acknowledges the safepoint and waits
+/// for release.
+///
+/// On POSIX: spin-waits (async-signal-safe; pthread_cond_wait is not).
+/// On Windows: event-waits via PalEvent (APC context permits it).
+static void PreemptiveSuspendHandler(uint64_t epoch) noexcept {
     auto* thread = tls_this_thread;
     if (thread == nullptr) return;
-
-    // Acknowledge safepoint (set suspend_ack to current suspend_seq).
-    uint32_t seq = thread->suspend_seq.load(std::memory_order_acquire);
-    thread->suspend_ack.store(seq, std::memory_order_release);
-
-    // Spin-wait until suspend_seq is cleared by ReleaseGlobalSafepoint.
-    while (thread->suspend_seq.load(std::memory_order_acquire) != 0) {
-        sched_yield();
-    }
-}
-
-/// Install the SIGUSR2 handler for preemptive safepoint suspend.
-static std::atomic<bool> s_sigusr1_installed{false};
-static void InstallSafepointSignalHandler() noexcept {
-    if (s_sigusr1_installed.load(std::memory_order_acquire)) return;
-    struct sigaction sa;
-    std::memset(&sa, 0, sizeof(sa));
-    sa.sa_handler = SafepointSuspendHandler;
-    sigemptyset(&sa.sa_mask);
-    sa.sa_flags = SA_RESTART | SA_NODEFER;
-    sigaction(SIGUSR2, &sa, nullptr);
-    s_sigusr1_installed.store(true, std::memory_order_release);
-}
-#endif
 
 #if defined(_WIN32) || defined(_WIN64)
-/// APC callback: runs in the target thread's context, forcing a suspended
-/// thread to acknowledge the safepoint and wait on suspend_event.
-static void __stdcall SuspendApf(ULONG_PTR param) {
-    auto* thread = tls_this_thread;
-    if (thread == nullptr) return;
-    uint32_t epoch = static_cast<uint32_t>(param);
     thread->suspend_ack.store(epoch, std::memory_order_release);
     if (thread->suspend_event != nullptr) {
         PalEventWait(thread->suspend_event, UINT64_MAX);
     }
-}
+#else
+    (void)epoch;
+    uint32_t seq = thread->suspend_seq.load(std::memory_order_acquire);
+    thread->suspend_ack.store(seq, std::memory_order_release);
+
+    // Spin-wait — signal context forbids condvar/synch primitives.
+    while (thread->suspend_seq.load(std::memory_order_acquire) != 0) {
+        PalYield();
+    }
 #endif
+}
+
+/// One-time initialization of the preemptive suspend subsystem.
+static std::atomic<bool> s_preempt_inited{false};
+static void EnsurePreemptInit() noexcept {
+    if (!s_preempt_inited.load(std::memory_order_acquire)) {
+        PalPreemptInit(PreemptiveSuspendHandler);
+        s_preempt_inited.store(true, std::memory_order_release);
+    }
+}
 
 extern "C" uint32_t RequestGlobalSafepoint() noexcept {
     // Support nesting: if the calling thread already holds the safepoint,
@@ -467,25 +425,19 @@ extern "C" uint32_t RequestGlobalSafepoint() noexcept {
             if (spin < kSpinYieldThreshold) {
                 CHAOS_IL2CPP_PAUSE_HINT();
             } else {
-#if defined(_WIN32) || defined(_WIN64)
-                Sleep(0);
-#else
-                std::this_thread::yield();
-#endif
+                PalYield();
                 // After yielding for ~100ms with no response, try APC fallback
                 // (Windows only — cooperative threads stuck in native code).
                 if (spin >= kSpinYieldThreshold + 100000) {
-#if defined(_WIN32) || defined(_WIN64)
                     EnumerateThreads([](ManagedThread* t) -> bool {
                         if (t->gc_mode.load(std::memory_order_acquire) == kGcModePreemptive)
                             return true;
                         if (t == tls_this_thread) return true;
                         if (t->suspend_ack.load(std::memory_order_acquire) != s_confirm_epoch) {
-                            ::QueueUserAPC(SuspendApf, t->os_handle, s_confirm_epoch);
+                            PalPreemptRequest(t->os_handle, t->os_thread_id, s_confirm_epoch);
                         }
                         return true;
                     });
-#endif
                     std::this_thread::sleep_for(std::chrono::microseconds(100));
                 }
 
@@ -502,33 +454,19 @@ extern "C" uint32_t RequestGlobalSafepoint() noexcept {
                             "attempting preemptive suspend",
                             s_remaining, elapsed_ns / 1000000);
 
+                        EnsurePreemptInit();
                         EnumerateThreads([](ManagedThread* t) -> bool {
                             if (t->gc_mode.load(std::memory_order_acquire) == kGcModePreemptive)
                                 return true;
                             if (t == tls_this_thread) return true;
                             if (t->suspend_ack.load(std::memory_order_acquire) != s_confirm_epoch) {
-#if defined(_WIN32) || defined(_WIN64)
-                                // Windows: QueueUserAPC is the safe fallback for
-                                // unresponsive threads — it runs in the target's
-                                // context when it enters an alertable wait.  Do NOT
-                                // use SuspendThread here: the thread may hold OS
-                                // locks (heap, loader, etc.) and suspension would
-                                // corrupt process state upon resume.
-                                ::QueueUserAPC(SuspendApf, t->os_handle, s_confirm_epoch);
-                                CHAOS_IL2CPP_LOG_DEBUG("Safepoint",
-                                    "APC queued for thread {0}", t->managed_id);
-#elif !defined(__APPLE__)
-                                // POSIX (non-iOS): send SIGUSR2 to force safepoint ack.
-                                InstallSafepointSignalHandler();
-                                pthread_kill(t->os_thread_id, SIGUSR2);
-                                t->preemptive_suspended.store(true, std::memory_order_release);
-#else
-                                // iOS: no force-suspend available. Log and continue.
-                                CHAOS_IL2CPP_LOG_WARN_M("Safepoint",
-                                    "thread {0} unresponsive, "
-                                    "cannot preemptively suspend on iOS",
-                                    t->managed_id);
-#endif
+                                if (PalPreemptRequest(t->os_handle, t->os_thread_id, s_confirm_epoch)) {
+                                    t->preemptive_suspended.store(true, std::memory_order_release);
+                                } else {
+                                    CHAOS_IL2CPP_LOG_WARN_M("Safepoint",
+                                        "thread {0} unresponsive, cannot preemptively suspend",
+                                        t->managed_id);
+                                }
                             }
                             return true;
                         });
