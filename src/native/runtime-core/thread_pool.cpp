@@ -7,6 +7,7 @@
 #include "runtime_stubs/threadpool_events.h"
 
 #include <chaos/pal/pal_time.h>
+#include <chaos/pal/pal_wakeable.h>
 
 #include <algorithm>
 #include <atomic>
@@ -22,17 +23,18 @@
 #include <vector>
 #include <algorithm>
 
-#if defined(_WIN32) || defined(_WIN64)
-    #include <windows.h>
-#elif defined(__linux__)
-    #include <sys/epoll.h>
-    #include <sys/eventfd.h>
-    #include <unistd.h>
-#endif
-
 namespace chaos::il2cpp::runtime_core::threading {
 
+using chaos::il2cpp::pal::PalWakeableCreate;
+using chaos::il2cpp::pal::PalWakeablePost;
+using chaos::il2cpp::pal::PalWakeableWait;
+using chaos::il2cpp::pal::PalWakeableDestroy;
+
 // ── Global thread pool state ──────────────────────────────────────────
+
+chaos::il2cpp::pal::PalWakeable*           s_wakeable_queue = nullptr;
+std::thread                               s_wakeable_thread;
+std::atomic<int32_t>                      s_wakeable_completions{0};
 
 namespace {
 
@@ -74,17 +76,6 @@ thread_local WorkerLocalQueue*            tls_worker_queue = nullptr;
 uint64_t GetProcessCpuTimeNs() noexcept {
     return chaos::il2cpp::pal::PalGetProcessCpuTimeNs();
 }
-
-#if defined(_WIN32) || defined(_WIN64)
-HANDLE                                    s_iocp_port = INVALID_HANDLE_VALUE;
-std::thread                               s_iocp_thread;
-std::atomic<int32_t>                      s_iocp_completions{0};
-#elif defined(__linux__)
-int                                       s_epoll_fd = -1;
-int                                       s_epoll_event_fd = -1;
-std::thread                               s_epoll_thread;
-std::atomic<int32_t>                      s_epoll_completions{0};
-#endif
 
 // ── Worker-local queue helpers ───────────────────────────────────────
 
@@ -260,8 +251,7 @@ void EnsureWorkerCount(int32_t desired) noexcept {
     }
 }
 
-#if defined(_WIN32) || defined(_WIN64)
-void IOCPWorkerLoop() noexcept {
+void WakeableWorkerLoop() noexcept {
     int32_t tid = AllocateThreadId();
     RegisterThread(tid, nullptr);
     if (auto* mt = GetCurrentThread()) {
@@ -270,62 +260,17 @@ void IOCPWorkerLoop() noexcept {
     EnterPreemptiveMode();
 
     for (;;) {
-        DWORD bytes_transferred = 0;
-        ULONG_PTR completion_key = 0;
-        OVERLAPPED* overlapped = nullptr;
-
-        BOOL ok = GetQueuedCompletionStatus(
-            s_iocp_port, &bytes_transferred, &completion_key, &overlapped, INFINITE);
-
+        int n = PalWakeableWait(s_wakeable_queue, -1);  // Infinite timeout.
         if (s_shutdown.load(std::memory_order_acquire)) break;
 
-        if (ok && completion_key != 0) {
-            auto* callback = reinterpret_cast<void(*)(void*)>(completion_key);
-            callback(overlapped);
-            s_iocp_completions.fetch_add(1, std::memory_order_relaxed);
-            // ETW: I/O completion.
-            ThreadPoolEventEmitIOCompletion(bytes_transferred);
+        if (n > 0) {
+            s_wakeable_completions.fetch_add(static_cast<int32_t>(n), std::memory_order_relaxed);
+            ThreadPoolEventEmitIOCompletion(0);
         }
     }
 
     UnregisterThread();
 }
-#elif defined(__linux__)
-void EpollWorkerLoop() noexcept {
-    int32_t tid = AllocateThreadId();
-    RegisterThread(tid, nullptr);
-    if (auto* mt = GetCurrentThread()) {
-        mt->is_threadpool = true;
-    }
-    EnterPreemptiveMode();
-
-    struct epoll_event events[8];
-    for (;;) {
-        int n = ::epoll_wait(s_epoll_fd, events, 8, -1);
-        if (s_shutdown.load(std::memory_order_acquire)) break;
-        if (n < 0) {
-            if (errno == EINTR) continue;
-            break;
-        }
-        for (int i = 0; i < n; i++) {
-            if (events[i].data.fd == s_epoll_event_fd) {
-                // Drain eventfd to clear the notification.
-                uint64_t val;
-                ::read(s_epoll_event_fd, &val, sizeof(val));
-                continue;
-            }
-            // Dispatch registered callback from epoll_event data.
-            if (events[i].data.ptr != nullptr) {
-                auto* cb = reinterpret_cast<void(*)(void*)>(events[i].data.ptr);
-                cb(nullptr);
-                s_epoll_completions.fetch_add(1, std::memory_order_relaxed);
-            }
-        }
-    }
-
-    UnregisterThread();
-}
-#endif
 
 void GateThreadLoop() noexcept {
     RegisterThread(AllocateThreadId(), nullptr);
@@ -690,33 +635,10 @@ void ThreadPoolInitialize() noexcept {
 
     EnsureWorkerCount(kThreadPoolMinWorkerCount);
 
-#if defined(_WIN32) || defined(_WIN64)
-    s_iocp_port = CreateIoCompletionPort(INVALID_HANDLE_VALUE, nullptr, 0, 1);
-    if (s_iocp_port != INVALID_HANDLE_VALUE) {
-        s_iocp_thread = std::thread(IOCPWorkerLoop);
+    s_wakeable_queue = PalWakeableCreate();
+    if (s_wakeable_queue != nullptr) {
+        s_wakeable_thread = std::thread(WakeableWorkerLoop);
     }
-#elif defined(__linux__)
-    s_epoll_fd = ::epoll_create1(EPOLL_CLOEXEC);
-    if (s_epoll_fd >= 0) {
-        s_epoll_event_fd = ::eventfd(0, EFD_CLOEXEC);
-        if (s_epoll_event_fd >= 0) {
-            struct epoll_event ev;
-            ev.events = EPOLLIN;
-            ev.data.fd = s_epoll_event_fd;
-            if (::epoll_ctl(s_epoll_fd, EPOLL_CTL_ADD, s_epoll_event_fd, &ev) == 0) {
-                s_epoll_thread = std::thread(EpollWorkerLoop);
-            } else {
-                ::close(s_epoll_event_fd);
-                s_epoll_event_fd = -1;
-                ::close(s_epoll_fd);
-                s_epoll_fd = -1;
-            }
-        } else {
-            ::close(s_epoll_fd);
-            s_epoll_fd = -1;
-        }
-    }
-#endif
 
     s_gate_thread = std::thread(GateThreadLoop);
 
@@ -730,29 +652,14 @@ void ThreadPoolShutdown() noexcept {
     s_shutdown.store(true, std::memory_order_release);
     s_work_available.notify_all();
 
-#if defined(_WIN32) || defined(_WIN64)
-    if (s_iocp_port != INVALID_HANDLE_VALUE) {
-        PostQueuedCompletionStatus(s_iocp_port, 0, 0, nullptr);
+    if (s_wakeable_queue != nullptr) {
+        PalWakeablePost(s_wakeable_queue, nullptr, nullptr);
     }
-    if (s_iocp_thread.joinable()) s_iocp_thread.join();
-    if (s_iocp_port != INVALID_HANDLE_VALUE) {
-        CloseHandle(s_iocp_port);
-        s_iocp_port = INVALID_HANDLE_VALUE;
+    if (s_wakeable_thread.joinable()) s_wakeable_thread.join();
+    if (s_wakeable_queue != nullptr) {
+        PalWakeableDestroy(s_wakeable_queue);
+        s_wakeable_queue = nullptr;
     }
-#elif defined(__linux__)
-    if (s_epoll_event_fd >= 0) {
-        ::eventfd_write(s_epoll_event_fd, 1);
-    }
-    if (s_epoll_thread.joinable()) s_epoll_thread.join();
-    if (s_epoll_fd >= 0) {
-        ::close(s_epoll_fd);
-        s_epoll_fd = -1;
-    }
-    if (s_epoll_event_fd >= 0) {
-        ::close(s_epoll_event_fd);
-        s_epoll_event_fd = -1;
-    }
-#endif
 
     {
         ForbidSuspendScope forbid;
@@ -827,12 +734,7 @@ void ThreadPoolQueueUserWorkItemUnsafe(void (*callback)(void*), void* context) n
 
 void ThreadPoolGateTick() noexcept {
     int32_t completed = s_completed_since_tick.exchange(0, std::memory_order_relaxed);
-
-#if defined(_WIN32) || defined(_WIN64)
-    completed += s_iocp_completions.exchange(0, std::memory_order_relaxed);
-#elif defined(__linux__)
-    completed += s_epoll_completions.exchange(0, std::memory_order_relaxed);
-#endif
+    completed += s_wakeable_completions.exchange(0, std::memory_order_relaxed);
 
     int32_t current = static_cast<int32_t>(s_workers.size());
     int32_t target;
@@ -875,15 +777,5 @@ void ThreadPoolGateTick() noexcept {
 int32_t ThreadPoolWorkerCount() noexcept {
     return static_cast<int32_t>(s_workers.size());
 }
-
-#if defined(_WIN32) || defined(_WIN64)
-void ThreadPoolInitializeIOCP() noexcept {
-    if (s_iocp_port == INVALID_HANDLE_VALUE) {
-        s_iocp_port = CreateIoCompletionPort(INVALID_HANDLE_VALUE, nullptr, 0, 1);
-    }
-}
-
-std::atomic<int32_t> g_iocp_completions{0};
-#endif
 
 }  // namespace chaos::il2cpp::runtime_core::threading

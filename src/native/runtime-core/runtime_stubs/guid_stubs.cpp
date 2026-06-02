@@ -2,16 +2,9 @@
 
 // guid_stubs.cpp — Guid stub implementations (real, not stubs)
 #include <chaos/native_types.h>
+#include <chaos/pal/pal_random.h>
 #include <cstdio>
 #include <cstring>
-
-#if defined(_WIN32)
-#include <Windows.h>
-#include <bcrypt.h>
-#pragma comment(lib, "bcrypt.lib")
-#else
-#include <cstdio>
-#endif
 
 #include "generated_code_compat.h"
 #include "runtime_stubs/stub_common.h"
@@ -262,25 +255,10 @@ CHAOS_IL2CPP_INTPTR ChaosGuidNewGuid(void) noexcept
     // Valid until the next ChaosGuidNewGuid call on the same thread.
     thread_local CHAOS_IL2CPP_UINT8 s_guid_buf[16];
 
-#if defined(_WIN32)
-    // BCryptGenRandom is a lightweight syscall, much faster than CoCreateGuid (COM).
-    if (BCryptGenRandom(nullptr, s_guid_buf, 16, BCRYPT_USE_SYSTEM_PREFERRED_RNG) < 0) {
+    if (!chaos::il2cpp::pal::PalRandomBytes(s_guid_buf, 16)) {
         std::memset(s_guid_buf, 0, 16);
     }
-#else
-    std::FILE* fp = std::fopen("/dev/urandom", "rb");
-    if (fp) {
-        size_t nread = std::fread(s_guid_buf, 1, 16, fp);
-        std::fclose(fp);
-        if (nread != 16) std::memset(s_guid_buf, 0, 16);
-    } else {
-        for (int i = 0; i < 4; ++i) {
-            uint32_t v = stub_xorshift32();
-            std::memcpy(s_guid_buf + i * 4, &v, 4);
-        }
-    }
-#endif
-    // Set UUID version 4 (random) and variant bits per RFC 4122
+
     s_guid_buf[6] = (s_guid_buf[6] & 0x0F) | 0x40;
     s_guid_buf[8] = (s_guid_buf[8] & 0x3F) | 0x80;
 

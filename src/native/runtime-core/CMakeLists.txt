@@ -159,7 +159,6 @@ add_library(chaos_runtime_core STATIC
     com_connection_point.h
     com_connection_point.cpp
     com_platform.h
-    com_platform.cpp
     com_factory.h
     com_factory.cpp
     com_typelib.h
@@ -256,13 +255,18 @@ endif()
 
 # Platform-specific sources
 if(WIN32)
-    target_sources(chaos_runtime_core PRIVATE gc/gc_numa_win.cpp)
+    target_sources(chaos_runtime_core PRIVATE
+        gc/gc_numa_win.cpp
+        runtime_stubs/mutex_stubs_win32.cpp)
 elseif(UNIX AND NOT APPLE AND NOT ANDROID)
     target_sources(chaos_runtime_core PRIVATE
         gc/gc_numa_linux.cpp
-        runtime_stubs/linux_platform_stubs.cpp)
+        runtime_stubs/linux_platform_stubs.cpp
+        runtime_stubs/mutex_stubs_posix.cpp)
 else()
-    target_sources(chaos_runtime_core PRIVATE gc/gc_numa_other.cpp)
+    target_sources(chaos_runtime_core PRIVATE
+        gc/gc_numa_other.cpp
+        runtime_stubs/mutex_stubs_posix.cpp)
 endif()
 target_include_directories(chaos_runtime_core PRIVATE
     "${REPO_ROOT}/src/native"

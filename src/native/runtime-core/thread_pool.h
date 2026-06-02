@@ -195,11 +195,6 @@ constexpr int32_t kThreadPoolMaxQueueDepth = 8192;
 /// Idle timeout before a worker thread exits (30 seconds).
 constexpr auto kThreadPoolIdleTimeout = std::chrono::seconds(30);
 
-#if defined(_WIN32) || defined(_WIN64)
-void ThreadPoolInitializeIOCP() noexcept;
-extern std::atomic<int32_t> g_iocp_completions;
-#endif
-
 }  // namespace chaos::il2cpp::runtime_core::threading
 
 #endif  // CHAOS_IL2CPP_THREAD_POOL_H_

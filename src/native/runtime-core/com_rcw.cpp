@@ -4,13 +4,9 @@
 #include <chaos/native_types.h>
 #include <chaos/unordered_dense.h>
 #include <chaos/log.h>
+#include <chaos/pal/pal_com.h>
 #include "com_rcw.h"
 #include "memory_domain.h"
-
-// On Windows, QueryInterface uses the real Windows GUID/IUnknown types.
-#if defined(_WIN32)
-#include <objbase.h>
-#endif
 
 namespace chaos::il2cpp::com_rcw {
 namespace {
@@ -52,12 +48,7 @@ ComRcwNative* FindOrCreateRcw(void* unknown_ptr) noexcept {
     }
 
     // AddRef the canonical IUnknown on first creation.
-#if defined(_WIN32)
-    if (unknown_ptr != nullptr) {
-        auto* vtbl = *static_cast<chaos::il2cpp::com_abi::IUnknownVtbl**>(unknown_ptr);
-        vtbl->AddRef(unknown_ptr);
-    }
-#endif
+    chaos::il2cpp::pal::PalComAddRef(unknown_ptr);
 
     s_rcw_table[unknown_ptr] = rcw;
     CHAOS_IL2CPP_LOG_DEBUG_M("COM", "Created RCW {0} for IUnknown {1}",
@@ -78,10 +69,7 @@ void ReleaseRcw(ComRcwNative* rcw) noexcept {
     for (CHAOS_IL2CPP_SIZE i = 0; i < rcw->cache_count; ++i) {
         auto& entry = rcw->interface_cache[i];
         if (entry.interface_ptr != nullptr) {
-#if defined(_WIN32)
-            auto* vtbl = *static_cast<chaos::il2cpp::com_abi::IUnknownVtbl**>(entry.interface_ptr);
-            vtbl->Release(entry.interface_ptr);
-#endif
+            chaos::il2cpp::pal::PalComRelease(entry.interface_ptr);
             entry.interface_ptr = nullptr;
         }
     }
@@ -90,12 +78,7 @@ void ReleaseRcw(ComRcwNative* rcw) noexcept {
     s_rcw_table.erase(rcw->identity_unknown);
 
     // Release the canonical IUnknown.
-#if defined(_WIN32)
-    if (rcw->identity_unknown != nullptr) {
-        auto* vtbl = *static_cast<chaos::il2cpp::com_abi::IUnknownVtbl**>(rcw->identity_unknown);
-        vtbl->Release(rcw->identity_unknown);
-    }
-#endif
+    chaos::il2cpp::pal::PalComRelease(rcw->identity_unknown);
 
     CHAOS_IL2CPP_LOG_DEBUG_M("COM", "Released RCW {0} for IUnknown {1}",
                               static_cast<void*>(rcw), rcw->identity_unknown);
@@ -116,14 +99,10 @@ void* QueryInterfaceCached(ComRcwNative* rcw, const void* iid_bytes) noexcept {
     }
 
     // Cache miss — call QueryInterface.
-#if defined(_WIN32)
-    GUID iid;
-    std::memcpy(&iid, iid_bytes, sizeof(GUID));
-
     void* result = nullptr;
-    auto* vtbl = *static_cast<chaos::il2cpp::com_abi::IUnknownVtbl**>(rcw->identity_unknown);
-    HRESULT hr = vtbl->QueryInterface(rcw->identity_unknown, &iid, &result);
-    if (FAILED(hr) || result == nullptr) return nullptr;
+    CHAOS_IL2CPP_INT32 hr = chaos::il2cpp::pal::PalComQueryInterface(
+        rcw->identity_unknown, iid_bytes, &result);
+    if (hr < 0 || result == nullptr) return nullptr;
 
     // Cache the result if there's room.
     if (rcw->cache_count < kMaxInterfaceCache) {
@@ -135,10 +114,6 @@ void* QueryInterfaceCached(ComRcwNative* rcw, const void* iid_bytes) noexcept {
     }
 
     return result;
-#else
-    (void)iid_bytes;
-    return nullptr;
-#endif
 }
 
 }  // namespace chaos::il2cpp::com_rcw

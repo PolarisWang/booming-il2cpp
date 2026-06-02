@@ -1,3 +1,5 @@
+#include <chaos/pal/pal_eh.h>
+
 namespace chaos::il2cpp::runtime_instantiation {
 
 } // namespace chaos::il2cpp::runtime_instantiation
@@ -119,31 +121,6 @@ CachedCallInfo PrecacheCallTarget(void* call_target) noexcept {
     return info;
 }
 
-// ── SEH-safe direct thunk call (separate function avoids C2712) ──────────
-// __try/__except cannot coexist with C++ object unwinding in MSVC, so the
-// raw AOT thunk call is isolated to this helper.
-// Uniform 8-arg AOT thunk signature matching fn(a0...a7) calling convention.
-using DirectFn = uint64_t (*)(uint64_t, uint64_t, uint64_t, uint64_t,
-                              uint64_t, uint64_t, uint64_t, uint64_t);
-
-#if defined(_WIN32)
-static uint64_t CallDirectFnSehSafe(
-    DirectFn fn,
-    uint64_t a0, uint64_t a1, uint64_t a2, uint64_t a3,
-    uint64_t a4, uint64_t a5, uint64_t a6, uint64_t a7,
-    bool* out_caught) noexcept
-{
-    uint64_t ret = 0;
-    __try {
-        ret = fn(a0, a1, a2, a3, a4, a5, a6, a7);
-    } __except(EXCEPTION_EXECUTE_HANDLER) {
-        *out_caught = true;
-    }
-    return ret;
-}
-#endif
-
-
 // ── InterpreterDispatchRaw ──────────────────────────────────────────────────
 // Optimized dispatch that skips the InterpreterValue[] round-trip.
 // Takes raw uint64_t values + ValueTag tags directly from FastFrame stack,
@@ -155,6 +132,9 @@ static uint64_t CallDirectFnSehSafe(
 //      ResolveParameterType + LayoutEngine queries on each call.
 //
 // Called by Handle_Call in fast_dispatch.cpp (Layer 4 optimization).
+
+using DirectFn = uint64_t (*)(uint64_t, uint64_t, uint64_t, uint64_t,
+                              uint64_t, uint64_t, uint64_t, uint64_t);
 
 RawDispatchResult InterpreterDispatchRaw(
     void*                               call_target,
@@ -304,15 +284,9 @@ RawDispatchResult InterpreterDispatchRaw(
             uint64_t a6 = (arg_count > 6) ? raw_args[6] : 0;
             uint64_t a7 = (arg_count > 7) ? raw_args[7] : 0;
             uint64_t ret_scalar = 0;
-            bool seh_caught = false;
-#if defined(_WIN32)
-            ret_scalar = CallDirectFnSehSafe(
+            bool seh_caught = chaos::il2cpp::pal::PalTryCallNoExcept(
                 reinterpret_cast<DirectFn>(cache_info->direct_ptr),
-                a0, a1, a2, a3, a4, a5, a6, a7, &seh_caught);
-#else
-            ret_scalar = reinterpret_cast<DirectFn>(cache_info->direct_ptr)(
-                a0, a1, a2, a3, a4, a5, a6, a7);
-#endif
+                a0, a1, a2, a3, a4, a5, a6, a7, ret_scalar);
             if (seh_caught) {
                 --ctx->recursion_depth;
                 result.threw_exception = true;

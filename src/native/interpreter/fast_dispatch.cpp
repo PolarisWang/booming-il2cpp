@@ -35,6 +35,7 @@ bool OptimizeToTier2(PatchMethod* pm) noexcept;
 #define CHAOS_IL2CPP_LOG_LEVEL 1  // WARN+ERROR visible; DEBUG/INFO compiled out for hot-path perf
 #include <chaos/log.h>
 #include <chaos/profile.h>
+#include <chaos/pal/pal_eh.h>
 #include <gc/gc_bgc_inline.h>
 #include <gc/gc_root_change.h>
 #include <gc/gc_helpers.h>
@@ -47,6 +48,8 @@ extern CHAOS_IL2CPP_VECTOR(InterpreterValue) g_static_fields;
 }
 
 namespace chaos::il2cpp::runtime_core {
+
+using chaos::il2cpp::pal::PalTryCallNoExcept;
 
 // ── TLS box object pool ──────────────────────────────────────────────
 // Avoids per-call malloc/free for Box/NewObj by reusing InterpreterObjects.
@@ -1030,17 +1033,12 @@ static void Handle_Call_DoAotDirect(FastFrame& frame,
     uint64_t a7 = (ac > 7) ? raw_args[7] : 0;
 
     uint64_t result = 0;
-#if defined(_WIN32)
-    __try {
-        result = fn(a0, a1, a2, a3, a4, a5, a6, a7);
-    } __except(EXCEPTION_EXECUTE_HANDLER) {
+    bool caught = PalTryCallNoExcept(fn, a0, a1, a2, a3, a4, a5, a6, a7, result);
+    if (caught) {
         frame.threw_exception = true;
         frame.pc = 9999;
         return;
     }
-#else
-    result = fn(a0, a1, a2, a3, a4, a5, a6, a7);
-#endif
 
     // Read ret_tag from CachedCallInfo.
     // ret_tag is pre-computed by the interpreter (not codegen) to match the
@@ -1083,17 +1081,12 @@ static void Handle_Call_DoMIC(FastFrame& frame,
     uint64_t a6 = (ac > 6) ? raw_args[6] : 0;
     uint64_t a7 = (ac > 7) ? raw_args[7] : 0;
     uint64_t result = 0;
-#if defined(_WIN32)
-    __try {
-        result = fn(a0, a1, a2, a3, a4, a5, a6, a7);
-    } __except(EXCEPTION_EXECUTE_HANDLER) {
+    bool caught = PalTryCallNoExcept(fn, a0, a1, a2, a3, a4, a5, a6, a7, result);
+    if (caught) {
         frame.threw_exception = true;
         frame.pc = 9999;
         return;
     }
-#else
-    result = fn(a0, a1, a2, a3, a4, a5, a6, a7);
-#endif
 
     // Push return value with cached tag.
     auto ret_tag = static_cast<uint8_t>(cache_info->ret_tag);
@@ -1205,17 +1198,12 @@ static void Handle_Call_DirectInline(FastFrame& frame, const interpreter::IRInst
     uint64_t a6 = (ac > 6) ? pop_buf[6] : 0;
     uint64_t a7 = (ac > 7) ? pop_buf[7] : 0;
     uint64_t result = 0;
-#if defined(_WIN32)
-    __try {
-        result = fn(a0, a1, a2, a3, a4, a5, a6, a7);
-    } __except(EXCEPTION_EXECUTE_HANDLER) {
+    bool caught = PalTryCallNoExcept(fn, a0, a1, a2, a3, a4, a5, a6, a7, result);
+    if (caught) {
         frame.threw_exception = true;
         frame.pc = 9999;
         return;
     }
-#else
-    result = fn(a0, a1, a2, a3, a4, a5, a6, a7);
-#endif
     uint8_t ret_tag = (instr.direct_ret_tag != 0xFF)
         ? instr.direct_ret_tag
         : static_cast<uint8_t>(interpreter::ValueTag::Int32);

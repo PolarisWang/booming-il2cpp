@@ -13,6 +13,7 @@
 #include <gc/gc_bgc_inline.h>
 #include <gc/gc_root_change.h>
 #include <gc/gc_helpers.h>
+#include <chaos/pal/pal_eh.h>
 
 #if CHAOS_IL2CPP_DEBUGGER
 #include <diagnostics/debugger/dbg_runtime.h>
@@ -35,33 +36,6 @@ static constexpr CHAOS_IL2CPP_UINT32 kMaxCallArgs = 8u;
 CHAOS_IL2CPP_VECTOR(InterpreterValue) g_static_fields;
 
 namespace {
-
-// ── SEH-safe AOT thunk call ────────────────────────────────────────────
-// Managed exceptions from AOT-compiled external runtime stubs are raised as
-// SEH exceptions (code 0xE0000001) on Windows.  C++ catch(chaos_managed_exception)
-// cannot intercept SEH exceptions, so we wrap the raw function pointer call
-// in __try/__except and convert to a C++ exception for propagation through
-// the interpreter's EH mechanism.
-// This helper is isolated to avoid MSVC C2712 (no __try in functions with
-// C++ object unwinding).
-#if defined(_WIN32)
-#define NOMINMAX
-#include <Windows.h>
-static uint64_t CallAotThunkSehSafe(uint64_t (*fn)(uint64_t, uint64_t, uint64_t, uint64_t,
-                                                     uint64_t, uint64_t, uint64_t, uint64_t),
-                                     uint64_t a0, uint64_t a1, uint64_t a2, uint64_t a3,
-                                     uint64_t a4, uint64_t a5, uint64_t a6, uint64_t a7,
-                                     bool* out_caught, uint64_t* out_exception_obj) noexcept
-{
-    uint64_t ret = 0;
-    __try {
-        ret = fn(a0, a1, a2, a3, a4, a5, a6, a7);
-    } __except(EXCEPTION_EXECUTE_HANDLER) {
-        *out_caught = true;
-    }
-    return ret;
-}
-#endif
 
 CHAOS_IL2CPP_INT32 ReadInt32(const InterpreterValue& value) {
     switch (value.tag) {
@@ -1059,20 +1033,13 @@ ExecutionResult InterpreterVM::Execute(const IRMethod& method, ExecutionFrame* f
                     uint64_t raw_ret = 0;
                     bool direct_fn_threw = false;
                     uint64_t direct_fn_exception_obj = 0;
-#if defined(_WIN32)
-                    raw_ret = CallAotThunkSehSafe(
+                    bool pal_caught = chaos::il2cpp::pal::PalTryCallNoExcept(
                         fn, raw_args[0], raw_args[1], raw_args[2], raw_args[3],
-                        raw_args[4], raw_args[5], raw_args[6], raw_args[7],
-                        &direct_fn_threw, &direct_fn_exception_obj);
-#else
-                    try {
-                        raw_ret = fn(raw_args[0], raw_args[1], raw_args[2], raw_args[3],
-                                     raw_args[4], raw_args[5], raw_args[6], raw_args[7]);
-                    } catch (const chaos_managed_exception& e) {
+                        raw_args[4], raw_args[5], raw_args[6], raw_args[7], raw_ret);
+                    if (pal_caught) {
                         direct_fn_threw = true;
-                        direct_fn_exception_obj = static_cast<uint64_t>(e.object_value);
+                        direct_fn_exception_obj = 0;
                     }
-#endif
 
                     // Build DispatchResult for SEH propagation.
                     {

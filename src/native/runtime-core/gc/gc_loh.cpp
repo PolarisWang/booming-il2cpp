@@ -9,11 +9,6 @@
 #include <chaos/pal/pal_mem.h>
 
 #include <cstdlib>
-#include <new>
-
-#if defined(_WIN32) || defined(_WIN64)
-    #include <windows.h>
-#endif
 
 namespace chaos::il2cpp::runtime_core {
 
@@ -269,25 +264,16 @@ CHAOS_IL2CPP_SIZE LargeObjectHeap::Sweep() {
             reinterpret_cast<uintptr_t>(excess) + sizeof(LohSegment),
             reinterpret_cast<uintptr_t>(excess) + sizeof(LohSegment) + excess->payload_size);
 
-        // DIAGNOSTIC: check if this address looks like a valid VirtualAlloc
+        // DIAGNOSTIC: check if this address looks like a valid allocation
         // before freeing. Prevents crash from double-free or invalid pointer.
-#if defined(_WIN32) || defined(_WIN64)
-        MEMORY_BASIC_INFORMATION mbi;
-        if (VirtualQuery(excess, &mbi, sizeof(mbi)) == sizeof(mbi) &&
-            mbi.State == MEM_COMMIT && mbi.AllocationBase == excess) {
+        if (chaos::il2cpp::pal::PalVirtualAllocIsValid(excess)) {
             FreeSegment(excess);
         } else {
             CHAOS_IL2CPP_LOG_WARN_M("LOH",
-                "sweep_skip_invalid_segment ptr={0} size={1} state={2}",
+                "sweep_skip_invalid_segment ptr={0} size={1}",
                 reinterpret_cast<void*>(excess),
-                static_cast<unsigned long long>(excess->payload_size),
-                static_cast<unsigned long>(mbi.State));
+                static_cast<unsigned long long>(excess->payload_size));
         }
-#else
-        // Linux/macOS: munmap is safe on any mapped address, and mmap'd
-        // segments are always valid here. Skip the VirtualQuery check.
-        FreeSegment(excess);
-#endif
     }
 
     return reclaimed;
