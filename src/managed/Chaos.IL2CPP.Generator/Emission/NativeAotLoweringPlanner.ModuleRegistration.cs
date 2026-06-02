@@ -514,18 +514,26 @@ public sealed partial class NativeAotLoweringPlanner
         // Emit method offset array
         if (methodOffsets != null)
             EmitOffsetArray(sb, "s_custom_attribute_method_offset", methodOffsets, (int)methodCount + 1);
+        else if (blobBytes.Length > 0)
+            EmitOffsetArray(sb, "s_custom_attribute_method_offset", [], (int)methodCount + 1);
 
         // Emit field offset array
         if (fieldOffsets != null)
             EmitOffsetArray(sb, "s_custom_attribute_field_offset", fieldOffsets, (int)fieldCount + 1);
+        else if (blobBytes.Length > 0)
+            EmitOffsetArray(sb, "s_custom_attribute_field_offset", [], (int)fieldCount + 1);
 
         // Emit property offset array
         if (propertyOffsets != null)
             EmitOffsetArray(sb, "s_custom_attribute_property_offset", propertyOffsets, (int)propertyCount + 1);
+        else if (blobBytes.Length > 0)
+            EmitOffsetArray(sb, "s_custom_attribute_property_offset", [], (int)propertyCount + 1);
 
         // Emit param offset array
         if (paramOffsets != null)
             EmitOffsetArray(sb, "s_custom_attribute_param_offset", paramOffsets, (int)paramCount + 1);
+        else if (blobBytes.Length > 0)
+            EmitOffsetArray(sb, "s_custom_attribute_param_offset", [], (int)paramCount + 1);
 
         // Emit count constants for ModuleDescriptor initialization
         sb.Append("static constexpr CHAOS_IL2CPP_UINT32 s_custom_attribute_method_count = ")

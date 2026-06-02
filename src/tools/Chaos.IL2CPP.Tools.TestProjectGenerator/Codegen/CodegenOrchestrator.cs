@@ -1,3 +1,4 @@
+using System.Text.Json;
 using Chaos.IL2CPP.Driver;
 
 namespace Chaos.IL2CPP.Tools.TestProjectGenerator.Codegen;
@@ -18,7 +19,10 @@ public sealed class CodegenOrchestrator
     /// <param name="assemblyPaths">Paths to managed DLLs to compile.</param>
     /// <param name="outputDir">Output directory for codegen artifacts (--sdk-out).</param>
     /// <param name="codegenMode">Codegen mode: "aot" or "jit".</param>
-    public CodegenResult Run(IReadOnlyList<string> assemblyPaths, string outputDir, string codegenMode = "aot")
+    /// <param name="subjectMethodIds">Optional list of managed SubjectIds to identify as subject entries.</param>
+    public CodegenResult Run(IReadOnlyList<string> assemblyPaths, string outputDir,
+        string codegenMode = "aot",
+        IReadOnlyList<string>? subjectMethodIds = null)
     {
         try
         {
@@ -45,6 +49,13 @@ public sealed class CodegenOrchestrator
 
             args.Add("--sdk-out");
             args.Add(Path.GetFullPath(outputDir));
+            // NOTE: --full-closure was previously disabled because the old family-based flow
+            // generated 49044 methods per family with incompatible function pointer types
+            // (C2440 in MSVC).  With the new namespace-chunk pipeline, each chunk contains
+            // ≤500 subject wrapper methods plus their transitive closure (~2000-3000 total
+            // methods). At this scale the typed dispatch table type incompatibility is
+            // manageable — the subject wrappers and the framework methods they call share
+            // compatible function pointer types.
             args.Add("--full-closure");
 
             if (codegenMode == "jit")
@@ -53,8 +64,33 @@ public sealed class CodegenOrchestrator
                 args.Add("jit");
             }
 
+            // ── Subject method IDs (--subject-methods) ──
+            // Pass the list of subject method SubjectIds to the Driver so that
+            // the generated dispatch entry code includes these in kSubjectSlotMap[].
+            // The Driver matches these against AotCoreIrMethodArtifact.SubjectId
+            // to identify which compiled methods are subject entries.
+            string? subjectMethodsPath = null;
+            if (subjectMethodIds is { Count: > 0 })
+            {
+                subjectMethodsPath = Path.Combine(Path.GetTempPath(),
+                    $"chaos_subject_methods_{Guid.NewGuid():N}.json");
+                var smJson = JsonSerializer.Serialize(new
+                {
+                    subjectMethods = subjectMethodIds
+                });
+                File.WriteAllText(subjectMethodsPath, smJson);
+                args.Add("--subject-methods");
+                args.Add(subjectMethodsPath);
+            }
+
             // Run ConvertToCppHandler directly — output goes to Console
             var exitCode = ConvertToCppHandler.Run([.. args]);
+
+            // Clean up temp subject methods file
+            if (subjectMethodsPath != null)
+            {
+                try { File.Delete(subjectMethodsPath); } catch { }
+            }
 
             if (exitCode != 0)
             {

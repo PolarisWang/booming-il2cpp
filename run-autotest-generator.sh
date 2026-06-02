@@ -42,6 +42,13 @@ KNOWN_DLLS["SystemLinqAsyncEnumerable"]="$DOTNET_DIR/System.Linq.AsyncEnumerable
 KNOWN_DLLS["SystemSecurityAccessControl"]="$DOTNET_DIR/System.Security.AccessControl.dll"
 KNOWN_DLLS["SystemDiagnosticsDiagnosticSource"]="$DOTNET_DIR/System.Diagnostics.DiagnosticSource.dll"
 
+# Tier 3: Specialized BCL DLLs (larger, more complex types)
+KNOWN_DLLS["SystemPrivateXml"]="$DOTNET_DIR/System.Private.Xml.dll"
+KNOWN_DLLS["SystemLinqExpressions"]="$DOTNET_DIR/System.Linq.Expressions.dll"
+KNOWN_DLLS["SystemComponentModelTypeConverter"]="$DOTNET_DIR/System.ComponentModel.TypeConverter.dll"
+KNOWN_DLLS["SystemReflectionEmit"]="$DOTNET_DIR/System.Reflection.Emit.dll"
+KNOWN_DLLS["SystemThreadingTasksDataflow"]="$DOTNET_DIR/System.Threading.Tasks.Dataflow.dll"
+
 # Individual high-value types from System.Private.CoreLib (non-generic)
 declare -A PRIVATE_TYPES
 PRIVATE_TYPES["String"]="System.String"
@@ -118,6 +125,7 @@ usage() {
     echo "  --list          List known DLLs"
     echo "  --private       Also generate core types from System.Private.CoreLib"
     echo "  --verify        Build all generated projects after generation"
+    echo "  --report        Aggregate coverage from output directory into SUMMARY.md"
     echo "  --no-clean      Don't clean existing output directories"
     echo "  --help          Show this help"
     exit 0
@@ -206,6 +214,7 @@ build_project() {
 DO_LIST=false
 DO_PRIVATE=false
 DO_VERIFY=false
+DO_REPORT=false
 DO_CLEAN=true
 SINGLE_DLL=""
 
@@ -215,6 +224,7 @@ while [ $# -gt 0 ]; do
         --list) DO_LIST=true; shift ;;
         --private) DO_PRIVATE=true; shift ;;
         --verify) DO_VERIFY=true; shift ;;
+        --report) DO_REPORT=true; shift ;;
         --no-clean) DO_CLEAN=false; shift ;;
         --help) usage ;;
         *) echo "Unknown option: $1"; usage ;;
@@ -275,6 +285,16 @@ if [ "$DO_VERIFY" = true ]; then
     done
     echo ""
     echo "Verify complete."
+fi
+
+# Generate coverage report
+if [ "$DO_REPORT" = true ]; then
+    echo ""
+    echo "═══════════════════════════════════════════════"
+    echo "  Generating coverage report..."
+    echo "═══════════════════════════════════════════════"
+    dotnet run --project "$TOOL_DIR" --no-build -- \
+        --report "$OUTPUT_DIR"
 fi
 
 echo ""

@@ -50,6 +50,20 @@ public sealed partial class NativeAotLoweringPlanner
             .OrderBy(g => g.Key, StringComparer.Ordinal)
             .ToList();
 
+        // Compute total method count AFTER deduplication (used by k_aot_method_count_value
+        // and kFunctionsFlat array sizing).  Dedup is applied per-type-group below, so we
+        // pre-compute the global count here by the same rule.
+        int totalDedupedCount = 0;
+        {
+            var globalDedupSet = new HashSet<string>(StringComparer.Ordinal);
+            foreach (var m in methodsForLowering)
+            {
+                if (!string.IsNullOrWhiteSpace(m.Identity?.DeclaringTypeSubjectId) &&
+                    globalDedupSet.Add(m.NativeSymbol))
+                    totalDedupedCount++;
+            }
+        }
+
         var typeGroupModels = new ScriptObject[typeGroups.Count];
         for (int gi = 0; gi < typeGroups.Count; gi++)
         {
@@ -61,8 +75,17 @@ public sealed partial class NativeAotLoweringPlanner
                 .OrderBy(m => m.SubjectId, StringComparer.Ordinal)
                 .ToArray();
 
+            // Deduplicate by native symbol: when two managed methods map to the
+            // same extern "C" symbol (e.g. overloads whose ABI slots collapse to
+            // identical parameter types), keep only the first occurrence.  Duplicates
+            // cause C2733 (extern "C" cannot be overloaded) and C2440 (function
+            // pointer type mismatch in the typed s_functions struct).
+            var emittedNativeSymbols = new HashSet<string>(StringComparer.Ordinal);
+            methods = methods.Where(m => emittedNativeSymbols.Add(m.NativeSymbol)).ToArray();
+
             var methodModels = new ScriptObject[methods.Length];
             var methodNameCounts = new Dictionary<string, int>(StringComparer.Ordinal);
+            var usedMethodNames = new HashSet<string>(StringComparer.Ordinal);
             for (int mi = 0; mi < methods.Length; mi++)
             {
                 var method = methods[mi];
@@ -78,6 +101,13 @@ public sealed partial class NativeAotLoweringPlanner
                 }
 
                 var rawMethodName = GetMethodName(method.SubjectId);
+                // Strip generic arity suffix (`1, `2, etc.) — the backtick-number
+                // suffix is a CLR metadata convention, not part of the method identity
+                // for C++ naming.  SanitizeCppIdentifier would turn `1 into _1,
+                // which collides with the method-name uniquification counter.
+                var backtickIdx = rawMethodName.IndexOf('`');
+                if (backtickIdx > 0)
+                    rawMethodName = rawMethodName[..backtickIdx];
                 // C++ member names cannot start with '.' (e.g. ".ctor", ".cctor")
                 // and must not contain special characters (e.g. '<', '>', '$', '|'
                 // from compiler-generated names like "<<Main>$>g__Add|0_0").
@@ -96,6 +126,20 @@ public sealed partial class NativeAotLoweringPlanner
                 else
                 {
                     methodNameCounts[safeMethodName] = 1;
+                }
+
+                // Guard against collisions between suffixed names and raw method
+                // names (e.g. raw "AreEqual_14" collides with the 15th AreEqual
+                // overload's suffixed "AreEqual_14").
+                if (!usedMethodNames.Add(safeMethodName))
+                {
+                    var collisionBase = safeMethodName;
+                    int disambiguator = 0;
+                    do
+                    {
+                        disambiguator++;
+                        safeMethodName = collisionBase + "_" + disambiguator;
+                    } while (!usedMethodNames.Add(safeMethodName));
                 }
 
                 methodModels[mi] = new ScriptObject
@@ -175,7 +219,7 @@ public sealed partial class NativeAotLoweringPlanner
         {
             ["type_groups"] = typeGroupModels,
             ["k_aot_method_count_type"] = "const int",
-            ["k_aot_method_count_value"] = methodsForLowering.Count,
+            ["k_aot_method_count_value"] = totalDedupedCount,
             ["value_type_typedefs"] = valueTypeTypedefs,
         };
     }

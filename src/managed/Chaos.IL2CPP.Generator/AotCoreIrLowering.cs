@@ -141,6 +141,9 @@ public sealed class AotCoreIrLowering
                 else if (typedInstruction.ConstrainedTypeSubjectId is not null)
                 {
                     Console.Error.WriteLine($"[constrained] MISS: {typedInstruction.ConstrainedTypeSubjectId} :: {typedInstruction.Callee} — typeInDict={managedTypes.ContainsKey(typedInstruction.ConstrainedTypeSubjectId)}");
+                    // Clear the constrained type so the C++ emitter does not try
+                    // to resolve a generic parameter (!0, !!0) as a concrete type.
+                    typedInstruction = typedInstruction with { ConstrainedTypeSubjectId = null };
                 }
 
                 var targetReference = ResolveTargetReference(
@@ -1799,6 +1802,12 @@ public sealed class AotCoreIrLowering
         // Object::GetHashCode). We construct the expected SubjectId directly —
         // no need to verify IsValueType since the C# compiler only emits constrained.
         // for value types; for reference types it emits plain callvirt.
+
+        // Reject generic parameter markers (!0, !!0) from F# or other sources.
+        // A generic parameter is not a concrete type and has no override to dispatch to.
+        if (constrainedTypeId.Contains('!'))
+            return null;
+
         return constrainedTypeId + "::" + slotSig;
     }
 }

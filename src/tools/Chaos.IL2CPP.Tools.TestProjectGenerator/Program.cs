@@ -538,17 +538,29 @@ public static class Program
         }
         Console.WriteLine($"        {subjects.Count} subjects from chunk '{metadata.ChunkSlug}'");
 
+        // Extract subject method IDs for the codegen orchestrator.
+        // These are the managed SubjectIds (e.g. "System.Private.CoreLib/System.Array::Copy:System.Void(...)")
+        // that the Driver's IsSubjectMethod will match against AOT Core IR SubjectIds.
+        var subjectMethodIds = metadata.Methods
+            .Select(m => m.MethodSubjectId)
+            .Where(id => !string.IsNullOrEmpty(id))
+            .Distinct(StringComparer.Ordinal)
+            .ToList();
+
         // Step 2: Run IL2CPP codegen
         Console.WriteLine("  [2/4] Running IL2CPP codegen...");
         var codegenBase = Path.Combine(outputDir, "codegen");
         var orchestrator = new Codegen.CodegenOrchestrator();
-        var codegenResult = orchestrator.Run([dllPath], codegenBase, "aot");
+        var codegenResult = orchestrator.Run([dllPath], codegenBase, "aot", subjectMethodIds);
 
         if (!codegenResult.Success)
             return Error($"Codegen failed: {codegenResult.Error}");
 
         // Resolve SDK directory
         var sdkDir = ResolveSdkDir(codegenBase);
+
+        // Auto-detect project root from DLL path
+        var projectRoot = DetectProjectRoot(dllPath);
 
         // Step 3: Emit C++ project
         Console.WriteLine("  [3/4] Emitting C++ project...");
@@ -558,7 +570,7 @@ public static class Program
         {
             emitter.Emit(outputDir, codegenResult, subjects,
                 isJit: false, configTier: configTier,
-                isWindows: true, projectRoot: null,
+                isWindows: true, projectRoot: projectRoot,
                 codegenDir: codegenBase, sdkDir: sdkDir);
             Console.WriteLine("        Sources written (source-only mode)");
             return 0;
@@ -566,7 +578,7 @@ public static class Program
 
         var exePath = emitter.GenerateAndBuild(outputDir, codegenResult, subjects,
             isJit: false, configTier: configTier,
-            isWindows: true, projectRoot: null,
+            isWindows: true, projectRoot: projectRoot,
             codegenDir: codegenBase, sdkDir: sdkDir);
 
         if (exePath is null)
@@ -775,17 +787,24 @@ public static class Program
     }
 
     /// <summary>
-    /// Walk up from a DLL path to find the repo root (looks for src/ directory).
+    /// Walk up from a DLL path to find the repo root (looks for src/managed/ or src/native/ directory).
+    /// Distinguishes the real repo root from a testing/src/ directory that may exist in the test tree.
     /// </summary>
     private static string? DetectProjectRoot(string assemblyPath)
     {
         var dir = new DirectoryInfo(Path.GetDirectoryName(Path.GetFullPath(assemblyPath))!);
+        string? best = null;
         while (dir is not null)
         {
-            if (Directory.Exists(Path.Combine(dir.FullName, "src")))
-                return dir.FullName.Replace("\\", "/");
+            var managedSrc = Path.Combine(dir.FullName, "src", "managed");
+            var nativeSrc = Path.Combine(dir.FullName, "src", "native");
+            if ((Directory.Exists(managedSrc) || Directory.Exists(nativeSrc)) &&
+                Directory.Exists(Path.Combine(dir.FullName, "src")))
+            {
+                best = dir.FullName;
+            }
             dir = dir.Parent;
         }
-        return null;
+        return best?.Replace("\\", "/");
     }
 }

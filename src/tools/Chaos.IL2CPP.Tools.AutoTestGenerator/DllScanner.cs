@@ -10,11 +10,20 @@ public sealed class DllScanner
         "ToString", "Equals", "GetHashCode", "Finalize", "MemberwiseClone", "GetType"
     };
 
-    // Methods that require infrastructure not available in isolated tests.
+    // Methods that require infrastructure not available in isolated tests,
+    // or are MLC interface-leaks that produce invalid C#.
     private static readonly HashSet<string> UnprobableMethods = new(StringComparer.Ordinal)
     {
-        "GetObjectData",       // requires SerializationInfo setup
-        "OnDeserialization",   // requires deserialization infrastructure
+        "GetObjectData",          // requires SerializationInfo setup
+        "OnDeserialization",      // requires deserialization infrastructure
+        "CompileToAssembly",      // uses RegexCompilationInfo (removed in .NET 10+)
+        "GetAlternateLookup",     // MLC leak from AlternateLookup nested type
+        "TryGetAlternateLookup",  // MLC leak from AlternateLookup nested type
+        "SetEntryAssembly",       // internal API not in reference assemblies
+        "StartDeserialization",   // returns DeserializationToken (internal type not in ref assemblies)
+        "Invoke",                 // MLC delegate leak: nested delegate Invoke flattened onto parent type
+        "BeginInvoke",            // MLC delegate leak: BeginInvoke from delegate pattern
+        "EndInvoke",              // MLC delegate leak: EndInvoke from delegate pattern
     };
 
     // Types that require complex infrastructure (e.g. JsonSerializerOptions) and
@@ -24,6 +33,51 @@ public sealed class DllScanner
         "System.Text.Json.Serialization.Metadata.JsonTypeInfo",
         "System.Text.Json.Serialization.Metadata.JsonPropertyInfo",
         "System.Text.Json.Serialization.Metadata.JsonParameterInfo",
+        // Types present in the implementation DLL but not in the target framework's reference assemblies.
+        // These cause CS0234 errors when the combined subjects project compiles against reference APIs.
+        "System.Buffers.StringSearchValuesHelper",
+        "System.Buffers.Text.Base64Url",
+        // Debugger types: Launch()/Break() interact with debugger UI and hang probes.
+        "System.Diagnostics.Debugger",
+        // BCL internal implementation types — public in System.Private.CoreLib
+        // but absent from reference assemblies, causing CS0234 at compile time.
+        "System.OrdinalComparer",
+        "System.CultureAwareComparer",
+        "System.UnitySerializationHolder",
+        // MLC-flattened nested types: MLC reports these as top-level public types
+        // but they're actually internal nested types inside Comparer<T> or
+        // EqualityComparer<T>.  They can't be referenced from C# as standalone types
+        // (CS0234: "type does not exist in namespace").
+        "System.Collections.Generic.ByteEqualityComparer",
+        "System.Collections.Generic.EnumEqualityComparer`1",
+        "System.Collections.Generic.GenericComparer`1",
+        "System.Collections.Generic.GenericEqualityComparer`1",
+        "System.Collections.Generic.NullableComparer`1",
+        "System.Collections.Generic.NullableEqualityComparer`1",
+        "System.Collections.Generic.ObjectComparer`1",
+        "System.Collections.Generic.ObjectEqualityComparer`1",
+        // Types in System.Private.CoreLib implementation that don't exist in
+        // reference assemblies (CS0234 in combined subjects DLL build).
+        "System.Collections.Generic.NonRandomizedStringEqualityComparer",
+        "System.Diagnostics.DebugProvider",
+        "System.Diagnostics.DiagnosticMethodInfo",
+        // MLC-exposed internal type: ListDictionaryInternal is an implementation detail
+        // absent from reference assemblies (CS0234).
+        "System.Collections.ListDictionaryInternal",
+        // Type forwarding mismatch: MLC resolves AssemblyHashAlgorithm as
+        // System.Configuration.Assemblies.AssemblyHashAlgorithm, but reference assemblies
+        // have it as System.Reflection.AssemblyHashAlgorithm (CS1503).
+        "System.Configuration.Assemblies.AssemblyHashAlgorithm",
+        // MLC-exposed internal type: DeserializationToken is returned by
+        // SerializationInfo.StartDeserialization() but doesn't exist in reference assemblies.
+        "System.Runtime.Serialization.DeserializationToken",
+        // MLC-exposed internal type aliases: Internal.Console and its nested Error type
+        // are internal implementation details in System.Private.CoreLib. MLC exposes
+        // them as public types in the "Internal" namespace, but "Internal" is not a
+        // real namespace in any reference assembly, causing CS0400 at compile time.
+        // Note: MLC uses "+" as nested type separator in FullName.
+        "Internal.Console",
+        "Internal.Console+Error",
     };
 
     public DllScanResult Scan(string dllPath, string typeFullName)
@@ -36,7 +90,16 @@ public sealed class DllScanner
         using var mlc = new MetadataLoadContext(resolver, "System.Private.CoreLib");
 
         var assembly = mlc.LoadFromAssemblyPath(fullPath);
+        return ScanInContext(mlc, assembly, assemblyName, typeFullName);
+    }
 
+    /// <summary>
+    /// Scan a single type using a pre-loaded MetadataLoadContext and Assembly.
+    /// Allows batch scanning (from ScanAll) to reuse one MLC across many types.
+    /// </summary>
+    private DllScanResult ScanInContext(
+        MetadataLoadContext mlc, Assembly assembly, string assemblyName, string typeFullName)
+    {
         // Read target framework from assembly metadata via MLC
         var tfm = "";
         try
@@ -50,12 +113,23 @@ public sealed class DllScanner
 
         // Fallback: detect from DLL path or SDK
         if (string.IsNullOrEmpty(tfm))
-            tfm = DetectTfm(dllPath);
+            tfm = DetectTfm(assembly.Location);
+
         var targetType = assembly.GetType(typeFullName);
         if (targetType is null)
             throw new InvalidOperationException(
                 $"Type '{typeFullName}' not found in assembly '{assemblyName}'. " +
                 $"Available types: {string.Join(", ", assembly.GetTypes().Take(20).Select(t => t.FullName))}");
+
+        // ── Skip interface types ──
+        // Interface methods (instance abstract, static virtual) cannot be invoked
+        // without a concrete implementation. Concretizing an interface like
+        // IFloatingPointIeee754<T> → IFloatingPointIeee754<double> would produce
+        // C# code that fails with CS8926 (static virtual member on non-type-param).
+        if (targetType.IsInterface)
+            throw new InvalidOperationException(
+                $"Interface type '{typeFullName}' is not supported. " +
+                "Interface methods cannot be invoked without a concrete implementation.");
 
         // ── Concretize generic type definitions (e.g. Stack`1 → Stack<int>) ──
         if (targetType.IsGenericTypeDefinition)
@@ -82,6 +156,13 @@ public sealed class DllScanner
             BindingFlags.Public | BindingFlags.Static |
             BindingFlags.Instance | BindingFlags.DeclaredOnly))
         {
+            // MLC sometimes leaks interface methods on closed generic types
+            // even with DeclaredOnly (e.g., List<int> appears to have MoveNext
+            // from List<int>.Enumerator). Skip methods whose declaring type
+            // is an interface — they can't be directly invoked on the target.
+            if (rawMethod.DeclaringType is not null && rawMethod.DeclaringType.IsInterface)
+                continue;
+
             // Skip property accessors and operator overloads
             if (rawMethod.IsSpecialName && (
                     rawMethod.Name.StartsWith("get_") ||
@@ -90,6 +171,143 @@ public sealed class DllScanner
                     rawMethod.Name.StartsWith("remove_") ||
                     rawMethod.Name.StartsWith("op_")))
                 continue;
+
+            // Skip CastUp/CastDown on Span/ReadOnlySpan — they require specific
+            // type hierarchy relationships (TDerived : T) that general concretization
+            // can't satisfy (e.g. CastUp<string> on ReadOnlySpan<int> — string doesn't
+            // derive from int).
+            if (rawMethod.Name is "CastUp" or "CastDown")
+            {
+                var dt = rawMethod.DeclaringType;
+                if (dt is not null && (
+                        dt.FullName is "System.Span`1" or "System.ReadOnlySpan`1" ||
+                        dt.Name is "Span`1" or "ReadOnlySpan`1"))
+                {
+                    skippedMethods.Add($"{rawMethod.Name} (Span type hierarchy)");
+                    continue;
+                }
+            }
+
+            // Skip interface-leaked enumerator methods on ref struct types.
+            // MLC sometimes leaks IEnumerator.MoveNext/Dispose/Reset onto
+            // types like Span<T>, ReadOnlySpan<T>, ArraySegment<T> that use
+            // a custom GetEnumerator pattern and have a direct MoveNext().
+            // Check by method name + parameterless pattern.
+            if (rawMethod.GetParameters().Length == 0 &&
+                (rawMethod.Name == "MoveNext" || rawMethod.Name == "Dispose" || rawMethod.Name == "Reset") &&
+                targetType.GetNestedTypes(BindingFlags.Public | BindingFlags.NonPublic)
+                    .Any(nt => nt.Name.Contains("Enumerator")))
+            {
+                skippedMethods.Add($"{rawMethod.Name} (enumerator leak - target has nested Enumerator type)");
+                continue;
+            }
+
+            if (rawMethod is { Name: "MoveNext" or "Reset" } &&
+                rawMethod.GetParameters().Length == 0)
+            {
+                // MoveNext/Reset with 0 params are NEVER legitimate methods on
+                // non-enumerator types.  MLC always projects them from an
+                // enumerator implementation onto the enclosing collection type
+                // (List<T>, Dictionary<TKey,TValue>, HashSet<T>, Queue<T>, etc.).
+                skippedMethods.Add($"{rawMethod.Name} (enumerator method projected by MLC)");
+                continue;
+            }
+            if (rawMethod is { Name: "Dispose" } && rawMethod.GetParameters().Length == 0)
+            {
+                // MLC leaks Enumerator.Dispose() onto generic collection types
+                // (List<T>, Dictionary<TKey,TValue>, HashSet<T>, Queue<T>) even
+                // with DeclaredOnly flag.  Skip parameterless Dispose() for these
+                // known affected types (they don't have Dispose() in reality).
+                if (targetType.IsGenericType)
+                {
+                    var defFull = targetType.GetGenericTypeDefinition().FullName;
+                    if (defFull is "System.Collections.Generic.List`1" or
+                        "System.Collections.Generic.Dictionary`2" or
+                        "System.Collections.Generic.HashSet`1" or
+                        "System.Collections.Generic.Queue`1" or
+                        "System.Collections.Generic.Stack`1" or
+                        "System.Collections.Generic.LinkedList`1")
+                    {
+                        skippedMethods.Add($"{rawMethod.Name} (enumerator leak on {targetType.Name})");
+                        continue;
+                    }
+                }
+                // Skip parameterless Dispose if the target type IS an Enumerator nested type
+                // (e.g. List<int>.Enumerator.Dispose). These are collection implementation
+                // details that produce useless benchmarks and cause CS1061 in combined builds.
+                if (targetType.Name.Contains("Enumerator"))
+                {
+                    skippedMethods.Add($"{rawMethod.Name} (enumerator type itself)");
+                    continue;
+                }
+                // Existing checks for interface/grandparent/declaring-type mismatch
+                if (rawMethod.DeclaringType is not null &&
+                    (rawMethod.DeclaringType.IsInterface ||
+                     rawMethod.DeclaringType.FullName is "System.Span`1" or "System.ReadOnlySpan`1" or "System.ArraySegment`1"))
+                {
+                    skippedMethods.Add($"{rawMethod.Name} (interface leak)");
+                    continue;
+                }
+                if (rawMethod.DeclaringType?.DeclaringType is { } grandParent)
+                {
+                    var gpFull = grandParent.IsGenericType
+                        ? grandParent.GetGenericTypeDefinition().FullName
+                        : grandParent.FullName;
+                    if (gpFull is "System.Span`1" or "System.ReadOnlySpan`1" or "System.ArraySegment`1")
+                    {
+                        skippedMethods.Add($"{rawMethod.Name} (nested enumerator leak)");
+                        continue;
+                    }
+                }
+                if (rawMethod.DeclaringType is not null && rawMethod.DeclaringType != targetType)
+                {
+                    skippedMethods.Add($"{rawMethod.Name} (MLC enumerator leak on {targetType.Name})");
+                    continue;
+                }
+            }
+
+            // Skip string.Trim/TrimStart/TrimEnd with ReadOnlySpan<char> parameter.
+            // MLC reports the ReadOnlySpan<char> overload but C# resolves to Trim(char),
+            // causing CS1503: "cannot convert from ReadOnlySpan<char> to char".
+            if (rawMethod.Name is "Trim" or "TrimStart" or "TrimEnd")
+            {
+                var hasSpanParam = rawMethod.GetParameters().Any(p =>
+                {
+                    var pt = p.ParameterType.IsByRef ? p.ParameterType.GetElementType()! : p.ParameterType;
+                    return (pt.FullName ?? pt.Name)?.Contains("ReadOnlySpan") == true;
+                });
+                if (hasSpanParam)
+                {
+                    skippedMethods.Add($"{rawMethod.Name} (ReadOnlySpan<char> overload)");
+                    continue;
+                }
+            }
+
+            // Skip CopyTo methods where the first parameter is a simple type array
+            // (e.g., int[]) rather than the expected collection element type array
+            // (e.g., KeyValuePair<TKey,TValue>[]). MLC leaks ICollection.CopyTo(Array, int)
+            // from non-generic interface and resolves Array to the wrong concrete type.
+            if (rawMethod.Name == "CopyTo" && rawMethod.GetParameters().Length == 2)
+            {
+                var pt0 = rawMethod.GetParameters()[0].ParameterType;
+                if (pt0.IsArray)
+                {
+                    var elemType = pt0.GetElementType();
+                    if (elemType is not null && !elemType.Name.Contains("KeyValuePair"))
+                    {
+                        skippedMethods.Add($"{rawMethod.Name} (ICollection non-generic leak: {elemType.Name}[])");
+                        continue;
+                    }
+                }
+            }
+
+            // Skip TrimExcess with parameters — the real API is parameterless.
+            // MLC leaks an internal TrimExcess(int capacity) overload.
+            if (rawMethod.Name == "TrimExcess" && rawMethod.GetParameters().Length > 0)
+            {
+                skippedMethods.Add($"{rawMethod.Name} (parameterized internal overload)");
+                continue;
+            }
 
             // Skip object inherited methods
             if (ObjectMethods.Contains(rawMethod.Name))
@@ -109,6 +327,14 @@ public sealed class DllScanner
             {
                 if (TryConcretizeGenericMethod(mlc, method, out var constructed))
                 {
+                    // Skip if concretization produced ref struct parameter types
+                    // (Span, ReadOnlySpan) that can't work as generic placeholders
+                    // and would produce invalid C# (e.g. Span<int>.MoveNext()).
+                    if (ConcretizedToRefStruct(constructed))
+                    {
+                        skippedMethods.Add($"{method.Name} (ref struct concretization)");
+                        continue;
+                    }
                     method = constructed;
                 }
                 else
@@ -159,6 +385,26 @@ public sealed class DllScanner
                     break;
                 }
 
+                // Skip methods with non-public parameter types (CS0122 in generated code)
+                var rawParamType = p.ParameterType.IsByRef
+                    ? p.ParameterType.GetElementType()!
+                    : p.ParameterType;
+                if (!rawParamType.IsGenericParameter && !rawParamType.IsVisible)
+                {
+                    skippedMethods.Add($"{method.Name} (internal parameter type: {paramTypeName})");
+                    parameters.Clear();
+                    break;
+                }
+
+                // Skip methods with parameter types that are known unprobable types
+                // (present in System.Private.CoreLib but absent from reference assemblies).
+                if (rawParamType.FullName is not null && UnprobableTypeNames.Contains(rawParamType.FullName))
+                {
+                    skippedMethods.Add($"{method.Name} (unprobable parameter type: {rawParamType.FullName})");
+                    parameters.Clear();
+                    break;
+                }
+
                 var isRefStruct = IsRefStructType(p.ParameterType);
                 parameters.Add(new MethodParameter(p.Name ?? $"p{parameters.Count}", paramTypeName, isOut, isRef, isRefStruct));
             }
@@ -180,6 +426,22 @@ public sealed class DllScanner
                 continue;
             }
 
+            // Skip methods with non-public return types (CS0122 in generated code)
+            if (!isVoid)
+            {
+                var rawReturnType = returnType.IsByRef ? returnType.GetElementType()! : returnType;
+                if (!rawReturnType.IsGenericParameter && !rawReturnType.IsVisible)
+                {
+                    skippedMethods.Add($"{method.Name} (internal return type: {returnTypeName})");
+                    continue;
+                }
+                if (rawReturnType.FullName is not null && UnprobableTypeNames.Contains(rawReturnType.FullName))
+                {
+                    skippedMethods.Add($"{method.Name} (unprobable return type: {rawReturnType.FullName})");
+                    continue;
+                }
+            }
+
             // String-based ref struct detection: MLC's Type.IsByRefLike may not
             // work for generic instantiations (e.g. ReadOnlySpan<char>), so we
             // also check the base type name (without generic args or namespace).
@@ -193,15 +455,12 @@ public sealed class DllScanner
                 // Check both with and without backtick arity suffix
                 if (RefStructTypeNames.Contains(rtBase) ||
                     RefStructTypeNames.Contains(rtBase + "`1"))
-                {
-                    Console.Error.WriteLine($"  [DEBUG] Ref struct return detected: {method.Name} -> {returnTypeName}");
                     isRefStructReturn = true;
-                }
             }
 
             signatures.Add(new MethodSignature(
                 method.Name,
-                targetType.FullName ?? typeFullName,
+                targetType.FullName is not null ? GetTypeName(targetType) : typeFullName,
                 returnTypeName,
                 method.IsStatic,
                 isVoid,
@@ -212,7 +471,10 @@ public sealed class DllScanner
             ));
         }
 
-        return new DllScanResult(assemblyName, typeFullName, signatures, skippedMethods, tfm);
+        return new DllScanResult(assemblyName,
+            CSharpSerializer.StripAssemblyQualification(typeFullName),
+            targetType.Namespace ?? string.Empty,
+            signatures, skippedMethods, tfm);
     }
 
     /// <summary>
@@ -224,7 +486,16 @@ public sealed class DllScanner
     public IReadOnlyList<DllScanResult> ScanAll(string dllPath, string? namespaceFilter = null)
     {
         var results = new List<DllScanResult>();
-        var types = ListPublicTypes(dllPath);
+        var fullPath = Path.GetFullPath(dllPath);
+        var assemblyName = Path.GetFileNameWithoutExtension(dllPath);
+
+        // Load assembly once — reuse the same MetadataLoadContext for all types
+        var probeDirs = GetProbeDirectories(fullPath);
+        var resolver = new AssemblyResolver(probeDirs);
+        using var mlc = new MetadataLoadContext(resolver, "System.Private.CoreLib");
+        var assembly = mlc.LoadFromAssemblyPath(fullPath);
+
+        var types = ListPublicTypesCore(assembly);
 
         // Parse namespace filter: comma-separated prefixes (e.g. "System.IO,System.Text")
         var nsFilters = string.IsNullOrEmpty(namespaceFilter)
@@ -247,7 +518,7 @@ public sealed class DllScanner
             {
                 var lastDot = typeName.LastIndexOf('.');
                 var ns = lastDot >= 0 ? typeName[..lastDot] : "";
-                var matches = nsFilters.Any(f => ns.StartsWith(f, StringComparison.Ordinal) ||
+                var matches = nsFilters.Any(f => string.Equals(ns, f, StringComparison.Ordinal) ||
                                                   (f.Length == 0 && ns.Length == 0));
                 if (!matches)
                 {
@@ -258,7 +529,7 @@ public sealed class DllScanner
 
             try
             {
-                var result = Scan(dllPath, typeName);
+                var result = ScanInContext(mlc, assembly, assemblyName, typeName);
                 if (result.Methods.Count > 0)
                     results.Add(result);
                 else
@@ -277,6 +548,8 @@ public sealed class DllScanner
 
     /// <summary>
     /// List all public types in the assembly with their public method counts.
+    /// Creates its own MetadataLoadContext. For batch operations, use
+    /// <see cref="ListPublicTypesCore"/> with a pre-loaded assembly.
     /// </summary>
     public List<(string FullName, int MethodCount)> ListPublicTypes(string dllPath)
     {
@@ -285,11 +558,20 @@ public sealed class DllScanner
         var resolver = new AssemblyResolver(probeDirs);
         using var mlc = new MetadataLoadContext(resolver, "System.Private.CoreLib");
         var assembly = mlc.LoadFromAssemblyPath(fullPath);
+        return ListPublicTypesCore(assembly);
+    }
+
+    /// <summary>
+    /// List all public types in a pre-loaded assembly with their public method counts.
+    /// Used by ScanAll to avoid redundant MetadataLoadContext creation.
+    /// </summary>
+    private static List<(string FullName, int MethodCount)> ListPublicTypesCore(Assembly assembly)
+    {
 
         var result = new List<(string, int)>();
         foreach (var t in assembly.GetTypes().OrderBy(t => t.FullName))
         {
-            if (!t.IsPublic && !t.IsNestedPublic) continue;
+            if (!t.IsVisible) continue;
             if (t.IsEnum) continue;
             if (t.FullName is not null && UnprobableTypeNames.Contains(t.FullName)) continue;
 
@@ -333,9 +615,8 @@ public sealed class DllScanner
 
                     if (hasValueTypeConstraint)
                     {
-                        concreteTypes[i] = constraints.Any(c => c.FullName == "System.Enum")
-                            ? LoadTypeInContext(mlc, "System.DayOfWeek") ?? LoadTypeInContext(mlc, "System.Int32")!
-                            : LoadTypeInContext(mlc, "System.Int32")!;
+                        concreteTypes[i] = LoadTypeInContext(mlc, SelectConcreteValueType(constraints))
+                                           ?? LoadTypeInContext(mlc, "System.Int32")!;
                     }
                     else if (attrs.HasFlag(GenericParameterAttributes.ReferenceTypeConstraint))
                     {
@@ -343,7 +624,9 @@ public sealed class DllScanner
                     }
                     else
                     {
-                        concreteTypes[i] = LoadTypeInContext(mlc, "System.Int32")!;
+                        concreteTypes[i] = ResolveInterfaceConstrainedType(mlc, gp, constraints)
+                                           ?? TryResolveClassConstrainedType(mlc, constraints)
+                                           ?? LoadTypeInContext(mlc, "System.Int32")!;
                     }
                 }
                 else if (attrs.HasFlag(GenericParameterAttributes.ReferenceTypeConstraint))
@@ -368,6 +651,134 @@ public sealed class DllScanner
     }
 
     /// <summary>
+    /// Map from open-generic interface FullName to a concrete type FullName used for
+    /// concretizing generic parameters constrained by those interfaces.
+    /// E.g. IList&lt;T&gt; → List&lt;Int32&gt; so that methods with "where T : IList&lt;int&gt;"
+    /// get T = List&lt;int&gt; instead of T = int (which doesn't implement IList).
+    /// </summary>
+    private static readonly Dictionary<string, string> InterfaceConcreteMap = new(StringComparer.Ordinal)
+    {
+        // Generic collection interfaces → List<T> as default
+        ["System.Collections.Generic.IList`1"] = "System.Collections.Generic.List`1",
+        ["System.Collections.Generic.ICollection`1"] = "System.Collections.Generic.List`1",
+        ["System.Collections.Generic.IEnumerable`1"] = "System.Collections.Generic.List`1",
+        ["System.Collections.Generic.IReadOnlyList`1"] = "System.Collections.Generic.List`1",
+        ["System.Collections.Generic.IReadOnlyCollection`1"] = "System.Collections.Generic.List`1",
+        ["System.Collections.Generic.ISet`1"] = "System.Collections.Generic.HashSet`1",
+        // Non-generic collection interfaces
+        ["System.Collections.IList"] = "System.Collections.ArrayList",
+        ["System.Collections.ICollection"] = "System.Collections.ArrayList",
+        ["System.Collections.IEnumerable"] = "System.Collections.ArrayList",
+        // Dictionary
+        ["System.Collections.Generic.IDictionary`2"] = "System.Collections.Generic.Dictionary`2",
+        ["System.Collections.Generic.IReadOnlyDictionary`2"] = "System.Collections.Generic.Dictionary`2",
+        // Comparison
+        ["System.IComparable`1"] = "System.Int32",
+        ["System.IEquatable`1"] = "System.Int32",
+        // Constrained generic parameters for comparers (used in BinarySearch, Sort, etc.)
+        ["System.Collections.Generic.IComparer`1"] = "System.Collections.Generic.Comparer`1",
+        ["System.Collections.Generic.IEqualityComparer`1"] = "System.Collections.Generic.EqualityComparer`1",
+        // Numeric interfaces (used in generic math / System.Numerics)
+        // These map directly to concrete value types that implement the interface.
+        ["System.Numerics.INumber`1"] = "System.Int32",
+        ["System.Numerics.INumberBase`1"] = "System.Int32",
+        ["System.Numerics.IBinaryInteger`1"] = "System.Int64",
+        ["System.Numerics.IBinaryNumber`1"] = "System.Int64",
+        ["System.Numerics.IFloatingPoint`1"] = "System.Double",
+        ["System.Numerics.IFloatingPointIeee754`1"] = "System.Double",
+        ["System.Numerics.IExponentialFunctions`1"] = "System.Double",
+        ["System.Numerics.ILogarithmicFunctions`1"] = "System.Double",
+        ["System.Numerics.ITrigonometricFunctions`1"] = "System.Double",
+        ["System.Numerics.IHyperbolicFunctions`1"] = "System.Double",
+        ["System.Numerics.IRootFunctions`1"] = "System.Double",
+        ["System.Numerics.IPowerFunctions`1"] = "System.Double",
+    };
+
+    /// <summary>
+    /// Try to find a concrete type that satisfies the interface constraints on a generic parameter.
+    /// Checks the interface constraints against InterfaceConcreteMap and (if needed) concretizes
+    /// the mapped type's own generic arguments with Int32. Returns null if no mapping found.
+    /// </summary>
+    private static Type? ResolveInterfaceConstrainedType(
+        MetadataLoadContext mlc, Type genericParameter, Type[] constraints)
+    {
+        foreach (var constraint in constraints)
+        {
+            if (!constraint.IsInterface) continue;
+
+            string? constraintFullName;
+            if (constraint.IsGenericType)
+            {
+                var gtd = constraint.GetGenericTypeDefinition();
+                constraintFullName = gtd.FullName;
+                // MLC returns empty FullName for cross-type-parameter constraints
+                // (e.g. IComparer<T> where T is another generic param).
+                // Reconstruct from Namespace.Name in that case.
+                if (string.IsNullOrEmpty(constraintFullName) && gtd.Namespace != null)
+                    constraintFullName = $"{gtd.Namespace}.{gtd.Name}";
+            }
+            else
+            {
+                constraintFullName = constraint.FullName;
+            }
+
+            if (string.IsNullOrEmpty(constraintFullName)) continue;
+
+            if (!InterfaceConcreteMap.TryGetValue(constraintFullName, out var concreteName))
+                continue;
+
+            // Load the concrete type (e.g. "System.Collections.Generic.List`1")
+            var concreteType = LoadTypeInContext(mlc, concreteName);
+            if (concreteType is null)
+                continue;
+
+            // If the concrete type itself is generic, concretize with Int32
+            if (concreteType.IsGenericTypeDefinition)
+            {
+                var concreteArgs = concreteType.GetGenericArguments();
+                var concreteArgTypes = new Type[concreteArgs.Length];
+                for (int j = 0; j < concreteArgs.Length; j++)
+                {
+                    concreteArgTypes[j] = LoadTypeInContext(mlc, "System.Int32")!;
+                }
+                try
+                {
+                    concreteType = concreteType.MakeGenericType(concreteArgTypes);
+                }
+                catch
+                {
+                    continue; // fallback to Int32
+                }
+            }
+
+            return concreteType;
+        }
+
+        return null;
+    }
+
+    /// <summary>
+    /// When a generic parameter has non-interface class-type constraints (e.g. "where T : Delegate"),
+    /// use the first such constraint as the concrete type.  This avoids concretizing to Int32
+    /// (which violates CS0315 for class-constrained parameters like TDelegate).
+    /// </summary>
+    private static Type? TryResolveClassConstrainedType(MetadataLoadContext mlc, Type[] constraints)
+    {
+        foreach (var constraint in constraints)
+        {
+            if (constraint.IsInterface) continue;
+            if (constraint.IsGenericParameter) continue;
+            var cn = constraint.FullName;
+            if (cn is null) continue;
+            // Skip special value type markers
+            if (cn is "System.ValueType" or "System.Enum") continue;
+            // Must be a class type → use it directly
+            return LoadTypeInContext(mlc, cn);
+        }
+        return null;
+    }
+
+    /// <summary>
     /// Try to concretize a generic type definition (e.g., Stack`1 → Stack&lt;System.Int32&gt;)
     /// by substituting common type arguments for its type-level generic parameters.
     /// Works within the MetadataLoadContext using the same heuristic as TryConcretizeGenericMethod.
@@ -379,6 +790,23 @@ public sealed class DllScanner
         {
             var genericParams = type.GetGenericArguments();
             if (genericParams.Length == 0) return false;
+
+            // Nested types of generic parents inherit parent type parameters.
+            // GetGenericArguments returns ALL args (parent + own), but our
+            // heuristic fills ALL with Int32/String, which creates a synthetic
+            // type like Dictionary<int,int,int> that doesn't compile.
+            // Skip concretization for nested generic types with their own params.
+            if (type.DeclaringType is { IsGenericType: true } declaringType)
+            {
+                var parentArity = declaringType.GetGenericArguments().Length;
+                if (genericParams.Length > parentArity)
+                {
+                    // This nested type adds its OWN type parameters beyond
+                    // inherited ones. Don't concretize — the generated C#
+                    // type name would be incorrect.
+                    return false;
+                }
+            }
 
             var concreteTypes = new Type[genericParams.Length];
 
@@ -395,9 +823,8 @@ public sealed class DllScanner
 
                     if (hasValueTypeConstraint)
                     {
-                        concreteTypes[i] = constraints.Any(c => c.FullName == "System.Enum")
-                            ? LoadTypeInContext(mlc, "System.DayOfWeek") ?? LoadTypeInContext(mlc, "System.Int32")!
-                            : LoadTypeInContext(mlc, "System.Int32")!;
+                        concreteTypes[i] = LoadTypeInContext(mlc, SelectConcreteValueType(constraints))
+                                           ?? LoadTypeInContext(mlc, "System.Int32")!;
                     }
                     else if (attrs.HasFlag(GenericParameterAttributes.ReferenceTypeConstraint))
                     {
@@ -405,7 +832,9 @@ public sealed class DllScanner
                     }
                     else
                     {
-                        concreteTypes[i] = LoadTypeInContext(mlc, "System.Int32")!;
+                        concreteTypes[i] = ResolveInterfaceConstrainedType(mlc, gp, constraints)
+                                           ?? TryResolveClassConstrainedType(mlc, constraints)
+                                           ?? LoadTypeInContext(mlc, "System.Int32")!;
                     }
                 }
                 else if (attrs.HasFlag(GenericParameterAttributes.ReferenceTypeConstraint))
@@ -427,6 +856,121 @@ public sealed class DllScanner
         {
             return false;
         }
+    }
+
+    /// <summary>
+    /// Pick a concrete type name for a ValueType-constrained generic parameter based on
+    /// its interface constraints.
+    ///   IFloatingPoint&lt;T&gt; / IFloatingPointIeee754&lt;T&gt;  → double
+    ///   IBinaryInteger&lt;T&gt; / IBinaryNumber&lt;T&gt;            → long
+    ///   INumber&lt;T&gt; / INumberBase&lt;T&gt; + operator ifaces   → int
+    ///   Enum                                                 → DayOfWeek
+    ///   default (IComparable, IEquatable, etc.)              → int
+    /// </summary>
+    private static string SelectConcreteValueType(Type[] constraints)
+    {
+        bool hasEnum = false;
+        foreach (var c in constraints)
+        {
+            if (c.FullName is "System.Enum") { hasEnum = true; continue; }
+            var name = c.Name;
+            var bt = name.IndexOf('`');
+            var baseName = bt >= 0 ? name[..bt] : name;
+            switch (baseName)
+            {
+                case "IFloatingPointIeee754":
+                case "IFloatingPoint":
+                    return "System.Double";
+                case "IBinaryInteger":
+                case "IBinaryNumber":
+                    return "System.Int64";
+                case "INumber":
+                case "INumberBase":
+                case "IAdditionOperators":
+                case "ISubtractionOperators":
+                case "IMultiplyOperators":
+                case "IDivisionOperators":
+                case "IModulusOperators":
+                case "IBitwiseOperators":
+                case "IShiftOperators":
+                case "IComparisonOperators":
+                case "IEqualityOperators":
+                case "IParsable":
+                case "ISpanParsable":
+                case "IFormattable":
+                case "ISpanFormattable":
+                case "IComparable":
+                case "IComparable`1":
+                case "IEquatable":
+                case "IEquatable`1":
+                case "IConvertible":
+                case "IMinMaxValue":
+                    return "System.Int32";
+            }
+        }
+        return hasEnum ? "System.DayOfWeek" : "System.Int32";
+    }
+
+    /// <summary>
+    /// Check if a concretized method involves ref struct types (Span, ReadOnlySpan)
+    /// as parameter or return types or declaring type.  Such methods produce invalid C#
+    /// because ref structs can't serve as generic type arguments, generating calls
+    /// like Span&lt;int&gt;.MoveNext().
+    /// </summary>
+    private static bool RefStructTypeName(string name) =>
+        name is "System.Span`1" or "System.ReadOnlySpan`1" or "System.ArraySegment`1"
+        || name.StartsWith("System.Span<") || name.StartsWith("System.ReadOnlySpan<") || name.StartsWith("System.ArraySegment<");
+
+    private static bool ConcretizedToRefStruct(MethodInfo method)
+    {
+        // Check parameters
+        foreach (var p in method.GetParameters())
+        {
+            var pt = p.ParameterType;
+            if (pt.IsByRef) pt = pt.GetElementType()!;
+            var name = pt.FullName ?? pt.Name;
+            if (RefStructTypeName(name)) return true;
+            // Check generic args of parameter type
+            if (pt.IsGenericType)
+            {
+                foreach (var ga in pt.GetGenericArguments())
+                {
+                    var gn = ga.FullName ?? ga.Name;
+                    if (RefStructTypeName(gn)) return true;
+                }
+            }
+        }
+        // Check return type
+        var rt = method.ReturnType;
+        var rn = rt.FullName ?? rt.Name;
+        if (RefStructTypeName(rn)) return true;
+        // Check declaring type — for MoveNext() on Span<T>.Enumerator, the
+        // declaring type is the nested enumerator type WITHIN the ref struct.
+        var dt = method.DeclaringType;
+        if (dt is not null)
+        {
+            var dn = dt.FullName ?? dt.Name;
+            if (RefStructTypeName(dn)) return true;
+            // Check if declaring type is nested inside a ref struct
+            for (var decl = dt.DeclaringType; decl is not null; decl = decl.DeclaringType)
+            {
+                var dn2 = decl.FullName ?? decl.Name;
+                if (RefStructTypeName(dn2)) return true;
+            }
+        }
+        // Also skip string.Trim(ReadOnlySpan<char>) — MLC picks the ReadOnlySpan<char>
+        // overload but C# resolves to Trim(char), causing CS1503.
+        if (method.Name is "Trim" or "TrimStart" or "TrimEnd")
+        {
+            foreach (var p in method.GetParameters())
+            {
+                var pt = p.ParameterType;
+                var fn = pt.FullName ?? pt.Name;
+                if (fn.Contains("ReadOnlySpan"))
+                    return true;
+            }
+        }
+        return false;
     }
 
     /// <summary>
@@ -507,6 +1051,24 @@ public sealed class DllScanner
             return $"{defName}<{args}>";
         }
 
+        // Handle array types: delegate to element type + append [].
+        // Must come before the FullName check because FullName for arrays of
+        // generic types uses CLR backtick notation (e.g.
+        // "KeyValuePair`2[[Int32],[Int32]][]") which is not valid C#.
+        if (type.IsArray)
+        {
+            var elType = type.GetElementType();
+            if (elType is not null)
+                return GetTypeName(elType) + "[]";
+        }
+
+        // Pointer types: GetTypeName(elementType) + "*".
+        // Must come before FullName check because MLC's FullName for
+        // System.Void* is "System.Void*" which gets mapped to "Void*" by
+        // KeywordMap — but C# only recognizes "void*", not "Void*" or "System.Void*".
+        if (type.IsPointer && type.GetElementType() is { } pointerElement)
+            return GetTypeName(pointerElement) + "*";
+
         // Unwrap ByRef types (ref/out params) before checking FullName,
         // because MLC may set FullName for ByRef types (including nested generic args)
         // and the FullName branch below would produce a mangled name.
@@ -524,9 +1086,15 @@ public sealed class DllScanner
                 // MLC may not populate DeclaringType for nested types
                 if (type.DeclaringType is not null)
                 {
-                    var parentCSharp = CSharpSerializer.MapToCSharpType(
-                        type.DeclaringType.FullName ?? type.DeclaringType.Name);
-                    return $"{parentCSharp}.{type.Name}";
+                    // Use parent's short name to avoid namespace prefix pollution.
+                    // MapToCSharpType would convert the FullName to a C# type name,
+                    // but downstream callers already call MapToCSharpType again,
+                    // so keeping the parent fully-qualified causes double-processing
+                    // that strips the parent prefix (e.g. "MemoryExtensions.").
+                    var parentFullName = type.DeclaringType.FullName ?? type.DeclaringType.Name;
+                    var parentDot = parentFullName.LastIndexOf('.');
+                    var parentShort = parentDot >= 0 ? parentFullName[(parentDot + 1)..] : parentFullName;
+                    return $"{parentShort}.{type.Name}";
                 }
                 // Fallback: extract parent short name for C# compatibility
                 // e.g. "System.Text.StringBuilder+AppendInterpolatedStringHandler"
@@ -805,6 +1373,7 @@ public sealed class DllScanner
 public sealed record DllScanResult(
     string AssemblyName,
     string TypeFullName,
+    string TypeNamespace,
     IReadOnlyList<MethodSignature> Methods,
     IReadOnlyList<string> SkippedMethods,
     string TargetFramework

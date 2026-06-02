@@ -353,6 +353,40 @@ public sealed partial class NativeAotLoweringPlanner
     private HashSet<string>? _valueTypeStructSubjectIds;
 
     /// <summary>
+    /// Per-type field lists captured during EmitObjectModelDeclarations. Used by
+    /// BuildTypeDeclarationsCode to emit complete reference type struct definitions
+    /// in the shared header, avoiding C2027 when non-page-0 TUs allocate types.
+    /// </summary>
+    private Dictionary<string, List<string>>? _fieldsByDeclaringType;
+
+    /// <summary>
+    /// Field type map captured during EmitObjectModelDeclarations. Maps each field
+    /// subject ID to its type subject ID, used for C++ type emission in struct defs.
+    /// </summary>
+    private Dictionary<string, string?>? _fieldTypeMap;
+
+    /// <summary>
+    /// Boxed type subject IDs captured during EmitObjectModelDeclarations. These are
+    /// types for which chaos_boxed_type_* struct definitions are needed in the shared
+    /// header (value types that appear as boxed heap allocations in managed code).
+    /// </summary>
+    private HashSet<string>? _boxedTypeSubjectIds;
+
+    /// <summary>
+    /// Complete reference type struct definitions captured during EmitObjectModelDeclarations
+    /// via the StringBuilder checkpoint technique. These go to the shared header instead of
+    /// page 0's object model to avoid C2027 on non-page-0 TUs.
+    /// </summary>
+    private string? _referenceTypeStructCode;
+
+    /// <summary>
+    /// Complete boxed type struct definitions captured during EmitObjectModelDeclarations
+    /// via the StringBuilder checkpoint technique. These go to the shared header instead of
+    /// page 0's object model to avoid C2027 on non-page-0 TUs.
+    /// </summary>
+    private string? _boxedTypeStructCode;
+
+    /// <summary>
     /// External runtime helper definitions captured during Create, used by
     /// BuildTypeDeclarationsCode to emit extern declarations in the shared header.
     /// </summary>
@@ -763,33 +797,23 @@ public sealed partial class NativeAotLoweringPlanner
         long _tPhase0 = 0, _tPhase1 = 0, _tPhase2 = 0, _tPhase3 = 0, _tPhase4 = 0, _tPhase5 = 0;
         long _tEnumCollect = 0, _tEnumMap = 0, _tStaticInit = 0, _tExtHelpers = 0, _tExtDispatch = 0, _tBridgeThunks = 0;
 
-        try
-        {
-            _tPhase0 = _sw.ElapsedMilliseconds;
-            Parallel.Invoke(
-                () => customAttributeSupport = BuildCustomAttributeSupportModel(
-                    methodsForLowering,
-                    supplementalMetadataTemplate),
-                () => assemblyReflectionSupport = BuildAssemblyReflectionSupportModel(
-                    methodsForLowering,
-                    supplementalMetadataTemplate),
-                () => reflectionMemberSupport = BuildReflectionMemberSupportModel(
-                    methodsForLowering,
-                    supplementalMetadataTemplate),
-                () => staticFieldDataSupport = BuildStaticFieldDataSupportModel(
-                    methodsForLowering,
-                    metadataRegistration));
-        }
-        catch (AggregateException ae)
-        {
-            // Rethrow the first inner exception preserving the original stack trace
-            // using ExceptionDispatchInfo so the root cause is debuggable.
-            if (ae.InnerExceptions.Count == 1)
-                ExceptionDispatchInfo.Capture(ae.InnerExceptions[0]).Throw();
-            throw new AggregateException(
-                "Parallel model build failed with multiple exceptions:",
-                ae.InnerExceptions);
-        }
+        _tPhase0 = _sw.ElapsedMilliseconds;
+        // NOTE: Sequential model building to avoid heap corruption (0xC000037D)
+        // observed with Parallel.Invoke on large method sets (51718 methods).
+        // TODO: Investigate root cause and re-enable parallel once identified.
+        customAttributeSupport = BuildCustomAttributeSupportModel(
+            methodsForLowering,
+            supplementalMetadataTemplate);
+        assemblyReflectionSupport = BuildAssemblyReflectionSupportModel(
+            methodsForLowering,
+            supplementalMetadataTemplate);
+        reflectionMemberSupport = BuildReflectionMemberSupportModel(
+            methodsForLowering,
+            supplementalMetadataTemplate);
+        staticFieldDataSupport = BuildStaticFieldDataSupportModel(
+            methodsForLowering,
+            metadataRegistration);
+
 
         _customAttributeSupport = customAttributeSupport!;
         _assemblyReflectionSupport = assemblyReflectionSupport!;
@@ -862,24 +886,26 @@ public sealed partial class NativeAotLoweringPlanner
 
         var methodDeclarations = BuildMethodDeclarations(methodsForLowering, _sharedContextSymbols, _stubNeedsContext);
         _methodDeclarations = methodDeclarations;
-        var methods = methodsForLowering
-            .Select(method =>
-            {
-                // Collect UnmanagedCallersOnly methods for reverse P/Invoke registration.
-                if (method.IsUnmanagedCallersOnly)
-                {
-                    _reversePInvokeEntries.Add((method.SubjectId, method.NativeSymbol));
-                }
-
-                return new NativeAotMethodTemplateModel
-                {
-                    SubjectId = method.SubjectId,
-                    MethodSource = aotReachableSubjectIds.Contains(method.SubjectId)
-                        ? BuildMethodSourceSafe(method)
-                        : BuildAotUnreachableMethodStub(method),
-                };
-            })
-            .ToList();
+        // ── Emit method bodies ──────────────────────────────────────────
+        // Deduplicate by NativeSymbol to prevent C2084 (duplicate function body)
+        // and C2733 (duplicate extern "C" symbol) when two managed methods map
+        // to the same extern "C" symbol (e.g. generic instantiations that collapse
+        // to the same ABI signature in subject-mode codegen).  Also skips entries
+        // with empty NativeSymbol (no usable body to emit).
+        IReadOnlyList<AotCoreIrMethodArtifact> emitMethods = methodsForLowering;
+        {
+            var seenNs = new HashSet<string>(StringComparer.Ordinal);
+            var filtered = new List<AotCoreIrMethodArtifact>(methodsForLowering.Count);
+            foreach (var m in methodsForLowering)
+                if (!string.IsNullOrWhiteSpace(m.NativeSymbol) && seenNs.Add(m.NativeSymbol))
+                    filtered.Add(m);
+            if (filtered.Count < methodsForLowering.Count)
+                emitMethods = filtered;
+        }
+        var allMethods = new List<NativeAotMethodTemplateModel>(emitMethods.Count);
+        for (int i = 0; i < emitMethods.Count; i++)
+            allMethods.Add(EmitOneMethod(emitMethods[i], aotReachableSubjectIds));
+        List<NativeAotMethodTemplateModel> methods = allMethods;
         _tPhase4 = _sw.ElapsedMilliseconds;
 
         // Capture pc-dispatch count from the static counter.
@@ -1196,6 +1222,8 @@ extern ""C"" CHAOS_IL2CPP_INT32 RunNativeAot(CHAOS_IL2CPP_INT32 entryIndex) {{
                 .Select(h => h!));
 
         _tPhase5 = _sw.ElapsedMilliseconds;
+        var gcMemBeforeToString = GC.GetTotalMemory(false);
+        var wbBeforeToString = System.Diagnostics.Process.GetCurrentProcess().WorkingSet64;
         Console.Error.WriteLine(
             $"[T] TIMING:assemble={_tPhase0}ms|" +
             $"parallel_models={_tPhase1 - _tPhase0}ms|" +
@@ -1209,13 +1237,45 @@ extern ""C"" CHAOS_IL2CPP_INT32 RunNativeAot(CHAOS_IL2CPP_INT32 entryIndex) {{
             $"object_model_emit={_tPhase3 - _tPhase2}ms|" +
             $"method_bodies={_tPhase4 - _tPhase3}ms|" +
             $"registration_dispatch={_tPhase5 - _tPhase4}ms|" +
-            $"total={_tPhase5}ms");
+            $"total={_tPhase5}ms|" +
+            $"gc_before_tostring={gcMemBeforeToString / (1024 * 1024)}MB|" +
+            $"ws_before_tostring={wbBeforeToString / (1024 * 1024)}MB");
+
+        // Store the ObjectModelCode as either a string (for Scriban path) or as
+        // a StringBuilder reference (for the direct builder path, avoiding a 3+ GB
+        // ToString() allocation that causes OutOfMemoryException on Large Object Heap).
+        const int ObjectModelCodeLargeThreshold = 200_000;
+        bool isObjectModelLarge = objectModelBuilder.Length > ObjectModelCodeLargeThreshold;
+
+        // For small ObjectModelCode, keep as string (Scriban compatibility).
+        // For large (>200K chars), pass the StringBuilder reference to avoid a
+        // 3+ GB string allocation that would OOM on the Large Object Heap.
+        StringBuilder? objectModelCodeBuilder;
+        string objectModelCode;
+        if (isObjectModelLarge)
+        {
+            objectModelCodeBuilder = objectModelBuilder;
+            objectModelCode = "";
+            objectModelBuilder.Length = 0;  // detach builder from this local
+        }
+        else
+        {
+            // TrimEnd is safe here — the string is under the threshold.
+            objectModelCode = objectModelBuilder.ToString().TrimEnd();
+            objectModelCodeBuilder = null;
+            objectModelBuilder.Length = 0;
+        }
+        // NOTE: .TrimEnd() is intentionally omitted despite potential trailing
+        // whitespace — it would allocate a second 3+ GB copy, doubling peak
+        // memory at the worst possible moment.  Trailing whitespace in generated
+        // C++ is harmless for the compiler.
 
         return new NativeAotTemplateModel
         {
             Includes = includes_,
-            ObjectModelCode = objectModelBuilder.ToString().TrimEnd(),
-            TypeDeclarationsCode = BuildTypeDeclarationsCode(),
+            ObjectModelCode = objectModelCode,
+            ObjectModelCodeBuilder = objectModelCodeBuilder,
+            TypeDeclarationsCode = BuildTypeDeclarationsCode(SanitizeCppIdentifier(loweringPlan.AssemblyName)),
             GenericRegistrationCode = genericRegistrationHelperCode,
             MethodDeclarations = methodDeclarations,
             Methods = methods,
@@ -1268,7 +1328,10 @@ extern ""C"" CHAOS_IL2CPP_INT32 RunNativeAot(CHAOS_IL2CPP_INT32 entryIndex) {{
     ///     (if interpolated string helpers are reachable)
     ///   - extern declarations for all chaos_external_runtime_* helpers
     /// </summary>
-    private string BuildTypeDeclarationsCode()
+    /// <param name="codegenNamespace">C++ namespace for the codegen (e.g. "CombinedSubjects").
+    /// Declarations are wrapped in `namespace chaos::il2cpp::codegen::{codegenNamespace}` to
+    /// match the definition namespace on page 0, avoiding linker unresolved externals.</param>
+    private string BuildTypeDeclarationsCode(string codegenNamespace)
     {
         if (_allEmittedTypeSubjectIds is not { Count: > 0 })
             return string.Empty;
@@ -1279,15 +1342,63 @@ extern ""C"" CHAOS_IL2CPP_INT32 RunNativeAot(CHAOS_IL2CPP_INT32 entryIndex) {{
         sb.AppendLine();
         sb.AppendLine("#include <chaos/native_types.h>");
         sb.AppendLine("#include <chaos/type_info.h>  // MethodTable, TypeInfoV0 (complete type)");
+        sb.AppendLine("#include \"generated_code_compat.h\"  // PureTypeHeader for delegate type definitions");
+        sb.AppendLine("#include \"ChaosGeneratedRuntimePrelude.h\"  // chaos_managed_array for array-compat checks");
         sb.AppendLine();
+
+        // chaos_valuetype_* definitions — these are opaque 32-bit value types in the
+        // managed ABI surface. Must come BEFORE boxed type struct definitions (below)
+        // because boxed types contain "chaos_valuetype_X value{};" and require complete
+        // value type structs.
+        // 1. Types with fields or _backing: emit struct definitions (from
+        //    _valueTypeStructCode) so sizeof and ABI are correct.
+        // 2. Types without fields (pure enums): emit typedef CHAOS_IL2CPP_INT32
+        //    for correct ABI (int32_t register passing, not empty-struct sizeof=1).
+        // Structs are NOT re-emitted in page file object model, avoiding C2556/C2371.
+        bool hasAnyForwardDeclarations = false;
+        var vtCode = _valueTypeStructCode;
+        if (vtCode is { Length: > 0 })
+        {
+            sb.Append(vtCode);
+            hasAnyForwardDeclarations = true;
+        }
+        // Emit typedef for remaining value types (enum-like, no struct definition).
+        if (_emittedValueTypeSubjectIds is { Count: > 0 })
+        {
+            HashSet<string>? structSubjectIds = _valueTypeStructSubjectIds;
+            foreach (var typeId in _emittedValueTypeSubjectIds.OrderBy(id => id, StringComparer.Ordinal))
+            {
+                if (structSubjectIds?.Contains(typeId) == true)
+                    continue; // already has struct definition above
+                sb.Append("typedef CHAOS_IL2CPP_INT32 ");
+                sb.Append(GetNativeValueTypeSymbol(typeId));
+                sb.AppendLine(";");
+            }
+            hasAnyForwardDeclarations = true;
+        }
+        if (hasAnyForwardDeclarations)
+            sb.AppendLine();
+
+        // ── Reference type struct definitions (complete) ──
+        // Emitted in the shared header so that non-page-0 TUs have complete types for
+        // CHAOS_IL2CPP_NEW_GC (sizeof), field access via reinterpret_cast, etc.
+        // Page 0 skips these struct definitions to avoid C2011 redefinition.
+        // Including these BEFORE the forward declaration loop below — C++ allows
+        // forward declarations after definitions, so the redundant forward decls
+        // in the loop are harmless.
+        if (_referenceTypeStructCode is { Length: > 0 })
+        {
+            sb.Append(_referenceTypeStructCode);
+        }
 
         // ── Struct forward declarations ──
         // Page files use reinterpret_cast<chaos_type_<id>*>(ptr),
         // reinterpret_cast<chaos_boxed_type_<id>*>(ptr), and
         // CHAOS_IL2CPP_NEW_GC(chaos_boxed_type_<id>, ...).
-        // The full struct definitions live only on page 0 (object model).
-        // Forward declarations here satisfy the compiler for pointer/cast usage.
-        bool hasAnyForwardDeclarations = false;
+        // For types in _boxedTypeSubjectIds we emit the complete struct definition
+        // in the shared header so that CHAOS_IL2CPP_NEW_GC compiles in page files.
+        // The object model section on page 0 skips these types to avoid C2011 redefinition.
+        bool hasAnyStructDeclarations = false;
         foreach (var typeId in _allEmittedTypeSubjectIds.OrderBy(id => id, StringComparer.Ordinal))
         {
             // Concrete delegate types (e.g. System.Action, System.Func<,>) need full
@@ -1320,47 +1431,65 @@ extern ""C"" CHAOS_IL2CPP_INT32 RunNativeAot(CHAOS_IL2CPP_INT32 entryIndex) {{
                 sb.AppendLine(";");
             }
 
-            sb.Append("struct ");
-            sb.Append(GetNativeBoxTypeSymbol(typeId));
-            sb.AppendLine(";");
-
-            hasAnyForwardDeclarations = true;
-        }
-        // chaos_valuetype_* definitions — these are opaque 32-bit value types in the
-        // managed ABI surface.
-        // 1. Types with fields or _backing: emit struct definitions (from
-        //    _valueTypeStructCode) so sizeof and ABI are correct.
-        // 2. Types without fields (pure enums): emit typedef CHAOS_IL2CPP_INT32
-        //    for correct ABI (int32_t register passing, not empty-struct sizeof=1).
-        // Structs are NOT re-emitted in page file object model, avoiding C2556/C2371.
-        var vtCode = _valueTypeStructCode;
-        if (vtCode is { Length: > 0 })
-        {
-            sb.Append(vtCode);
-            hasAnyForwardDeclarations = true;
-        }
-        // Emit typedef for remaining value types (enum-like, no struct definition).
-        if (_emittedValueTypeSubjectIds is { Count: > 0 })
-        {
-            HashSet<string>? structSubjectIds = _valueTypeStructSubjectIds;
-            foreach (var typeId in _emittedValueTypeSubjectIds.OrderBy(id => id, StringComparer.Ordinal))
+            // Boxed type: emit complete struct for types that appear as heap allocations
+            // (CHAOS_IL2CPP_NEW_GC) in codegen output, so page files can compile.
+            if (_boxedTypeSubjectIds?.Contains(typeId) == true)
             {
-                if (structSubjectIds?.Contains(typeId) == true)
-                    continue; // already has struct definition above
-                sb.Append("typedef CHAOS_IL2CPP_INT32 ");
-                sb.Append(GetNativeValueTypeSymbol(typeId));
+                sb.Append("struct ");
+                sb.Append(GetNativeBoxTypeSymbol(typeId));
+                sb.AppendLine(" {");
+                sb.AppendLine("    PureTypeHeader header{};");
+                if (IsStructuredValueTypeSubjectId(typeId))
+                {
+                    sb.Append("    ");
+                    sb.Append(GetNativeValueTypeSymbol(typeId));
+                    sb.AppendLine(" value{};");
+                }
+                else
+                {
+                    sb.AppendLine("    CHAOS_IL2CPP_INTPTR value = 0;");
+                }
+                sb.AppendLine("};");
+            }
+            else
+            {
+                sb.Append("struct ");
+                sb.Append(GetNativeBoxTypeSymbol(typeId));
                 sb.AppendLine(";");
             }
-            hasAnyForwardDeclarations = true;
+
+            hasAnyStructDeclarations = true;
         }
-        if (hasAnyForwardDeclarations)
+        if (hasAnyStructDeclarations)
             sb.AppendLine();
 
-        // ── MethodTable extern declarations ──
-        // Previously declared `extern TypeInfoV0 chaos_mt_X;` but the actual
-        // definition type is MethodTable. With <chaos/type_info.h> included
-        // above, MethodTable is a complete type and page files can call
-        // methods like AsTypeInfoHot() on these symbols.
+        // ── Hotpatch dispatch table (global scope) ──
+        // Must be at GLOBAL scope because HotpatchEntryV0 is a C typedef defined in
+        // codegen_bridge.h (global scope).  Page files include codegen_bridge.h before
+        // the shared header, so ::HotpatchEntryV0 is a complete type when the header
+        // is read.  If we forward-declared it inside the codegen namespace it would
+        // create an unrelated incomplete type, and sizeof would fail.
+        if (_nativeSymbolToDispatchSlot is { Count: > 0 })
+        {
+            sb.AppendLine("struct HotpatchEntryV0;");
+            sb.AppendLine("extern \"C\" HotpatchEntryV0 s_hotpatch_entries[];");
+            sb.AppendLine();
+        }
+
+        // ── Codegen namespace ──
+        // MethodTable definitions, static field variables, type ID constants, and
+        // runtime helper functions (chaos_string_materialize, chaos_is_array_store_compatible,
+        // chaos_default_interpolated_string_handler_*, chaos_external_runtime_*,
+        // ChaosReflectionSetExceptionMetadata_2params) are all defined inside
+        // `namespace chaos::il2cpp::codegen::{codegenNamespace}` on page 0.
+        // Their extern declarations MUST be in the same namespace to avoid LNK2001
+        // unresolved external symbols (the linker treats global-scope and namespace-scoped
+        // symbols as different entities).  HotpatchEntryV0 is excluded from this namespace
+        // block because it is a C typedef from codegen_bridge.h.
+        sb.Append("namespace chaos::il2cpp::codegen::");
+        sb.AppendLine(codegenNamespace);
+        sb.AppendLine("{");
+
         foreach (var typeId in _allEmittedTypeSubjectIds.OrderBy(id => id, StringComparer.Ordinal))
         {
             var symbol = GetNativeMethodTableSymbol(typeId);
@@ -1370,12 +1499,28 @@ extern ""C"" CHAOS_IL2CPP_INT32 RunNativeAot(CHAOS_IL2CPP_INT32 entryIndex) {{
         }
         sb.AppendLine();
 
-        // ── Interface type ID constants ──
+        // ── Static field extern declarations (inside codegen namespace) ──
+        // Declared as TU-scoped variables in the object model (page 0) with actual types
+        // determined by MapFieldTypeToCppType. Page files reference them by name and need
+        // extern declarations with matching types to compile without C2371 redefinition.
+        if (_staticFieldDeclarations is { Count: > 0 })
+        {
+            foreach (var kvp in _staticFieldDeclarations.OrderBy(k => k.Key, StringComparer.Ordinal))
+            {
+                var cppType = MapFieldTypeToCppType(kvp.Value);
+                sb.Append("extern ");
+                sb.Append(cppType);
+                sb.Append(' ');
+                sb.Append(GetNativeStaticFieldSymbol(kvp.Key));
+                sb.AppendLine(";");
+            }
+            sb.AppendLine();
+        }
+
+        // ── Interface type ID constants (inline constexpr, inside namespace) ──
         // Interface map arrays in page files reference chaos_type_id_* constants.
-        // Emit them in the shared header so all TUs can resolve cross-page references.
-        // Collect from both open-generic interface definitions (_interfaceTypeSubjectIds)
-        // and constructed generic interface types used in InterfaceMap entries
-        // (_referenceTypeImplementedInterfaceSubjectIds values).
+        // Emit as `inline constexpr` in the shared header so all TUs get their own
+        // compile-time constant with the same value.
         var allInterfaceTypeIds = new HashSet<string>(StringComparer.Ordinal);
         if (_interfaceTypeSubjectIds is { Count: > 0 })
         {
@@ -1403,11 +1548,10 @@ extern ""C"" CHAOS_IL2CPP_INT32 RunNativeAot(CHAOS_IL2CPP_INT32 entryIndex) {{
             sb.AppendLine();
         }
 
-        // ── Non-interface type ID extern declarations ──
-        // Page files reference chaos_type_id_* symbols for non-interface types
-        // (e.g. delegate type references in reinterpret_cast, array element types).
-        // These are defined in the object model (page 0); other pages need extern
-        // declarations to resolve cross-TU references.
+        // Non-interface type ID extern declarations
+        // These are `inline constexpr` in page 0's object model but need
+        // extern declarations in the shared header so page files can reference
+        // them without triggering "unused inline variable" or ODR issues.
         if (_allEmittedTypeSubjectIds is { Count: > 0 })
         {
             foreach (var typeId in _allEmittedTypeSubjectIds.OrderBy(id => id, StringComparer.Ordinal))
@@ -1421,19 +1565,13 @@ extern ""C"" CHAOS_IL2CPP_INT32 RunNativeAot(CHAOS_IL2CPP_INT32 entryIndex) {{
             sb.AppendLine();
         }
 
-        // ── Hotpatch dispatch table ──
-        // Page files access s_hotpatch_entries[] directly for dispatch.
-        // The array is defined in the hotpatch table section (module registration).
-        if (_nativeSymbolToDispatchSlot is { Count: > 0 })
-        {
-            sb.AppendLine("struct HotpatchEntryV0;");
-            sb.AppendLine("extern \"C\" HotpatchEntryV0 s_hotpatch_entries[];");
-            sb.AppendLine();
-        }
+        sb.AppendLine("} // namespace chaos::il2cpp::codegen::" + codegenNamespace);
+        sb.AppendLine();
 
-        // ── External runtime dispatch table ──
+        // ── External runtime dispatch table (global scope) ──
         // Bridge thunks in page files call through kChaosExternalRuntimeFnTable[idx].
         // The array is defined in the module registration section.
+        // This is `extern "C"` and must be at global scope.
         if (_bridgeImportThunks is { Count: > 0 } &&
             _bridgeImportThunks.Values.Any(t => t.ExternalRuntimeTableIndex >= 0))
         {
@@ -1441,21 +1579,10 @@ extern ""C"" CHAOS_IL2CPP_INT32 RunNativeAot(CHAOS_IL2CPP_INT32 entryIndex) {{
             sb.AppendLine();
         }
 
-        // ── Static field extern declarations ──
-        // Declared as TU-scoped variables in the object model (page 0). Page files
-        // reference them by name and need extern declarations to compile.
-        if (_staticFieldDeclarations is { Count: > 0 })
-        {
-            foreach (var kvp in _staticFieldDeclarations.OrderBy(k => k.Key, StringComparer.Ordinal))
-            {
-                sb.Append("extern CHAOS_IL2CPP_INTPTR ");
-                sb.Append(GetNativeStaticFieldSymbol(kvp.Key));
-                sb.AppendLine(";");
-            }
-            sb.AppendLine();
-        }
-
-        // ── Runtime helper function declarations ──
+        // ── Runtime helper function declarations (global scope) ──
+        // These functions are DEFINED in the native runtime library (not inside the
+        // codegen namespace), so their extern declarations MUST be at global scope
+        // to avoid LNK2001 unresolved external symbols.
 
         // chaos_string_materialize: conditionally emitted when string IDs exist
         if (_stringIdMapping is { Count: > 0 })
@@ -1479,9 +1606,14 @@ extern ""C"" CHAOS_IL2CPP_INT32 RunNativeAot(CHAOS_IL2CPP_INT32 entryIndex) {{
         sb.AppendLine("CHAOS_IL2CPP_INTPTR chaos_default_interpolated_string_handler_to_string_and_clear(CHAOS_IL2CPP_INTPTR chaos_handler_ref);");
         sb.AppendLine();
 
-        // chaos_external_runtime_*: emit extern declarations matching definitions
+        // ── chaos_external_runtime_* declarations (inside codegen namespace) ──
+        // These helpers are DEFINED on page 0 inside the codegen namespace, so their
+        // extern declarations MUST also be inside the namespace to match.
         if (_externalRuntimeHelpers is { Count: > 0 })
         {
+            sb.Append("namespace chaos::il2cpp::codegen::");
+            sb.AppendLine(codegenNamespace);
+            sb.AppendLine("{");
             foreach (var helper in _externalRuntimeHelpers)
             {
                 // Extract the first line of the source (the function signature)
@@ -1504,12 +1636,15 @@ extern ""C"" CHAOS_IL2CPP_INT32 RunNativeAot(CHAOS_IL2CPP_INT32 entryIndex) {{
                 sb.AppendLine(";");
             }
             sb.AppendLine();
+            sb.AppendLine("} // namespace chaos::il2cpp::codegen::" + codegenNamespace);
+            sb.AppendLine();
         }
 
-        // ── ChaosReflectionSetExceptionMetadata_2params ──
+        // ── ChaosReflectionSetExceptionMetadata_2params (global scope) ──
         // Called from ArgumentOutOfRangeException..ctor(string,string) in page
-        // files.  Declared in exception_api.cpp — page files need visibility.
+        // files.  Declared in exception_api.cpp in the runtime — at global scope.
         sb.AppendLine("void ChaosReflectionSetExceptionMetadata_2params(CHAOS_IL2CPP_INTPTR chaos_exception, CHAOS_IL2CPP_INTPTR chaos_message, CHAOS_IL2CPP_INTPTR chaos_param_name);");
+        sb.AppendLine();
 
         return sb.ToString();
     }
@@ -2168,6 +2303,28 @@ extern ""C"" CHAOS_IL2CPP_INT32 RunNativeAot(CHAOS_IL2CPP_INT32 entryIndex) {{
             Console.Error.WriteLine(msg);
             return BuildAotUnreachableMethodStub(method);
         }
+    }
+
+    /// <summary>
+    /// Emit one method's body, collecting reverse-P/Invoke entries as a side effect.
+    /// Extracted as a separate method to give the JIT a clear stack-cleanup boundary
+    /// (avoiding stack accumulation observed with Select().ToList() lambda closure).
+    /// </summary>
+    private NativeAotMethodTemplateModel EmitOneMethod(
+        AotCoreIrMethodArtifact method,
+        HashSet<string> aotReachableSubjectIds)
+    {
+        if (method.IsUnmanagedCallersOnly)
+            _reversePInvokeEntries.Add((method.SubjectId, method.NativeSymbol));
+
+        return new NativeAotMethodTemplateModel
+        {
+            SubjectId = method.SubjectId,
+            NativeSymbol = method.NativeSymbol,
+            MethodSource = aotReachableSubjectIds.Contains(method.SubjectId)
+                ? BuildMethodSourceSafe(method)
+                : BuildAotUnreachableMethodStub(method),
+        };
     }
 
     private string BuildMethodSource(AotCoreIrMethodArtifact method)
@@ -3611,12 +3768,58 @@ public sealed partial class NativeAotLoweringPlanner
             if (IsSubjectMethod(method.SubjectId))
             {
                 int subjectIdx = ExtractSubjectIndex(method.SubjectId);
+                if (subjectIdx < 0)
+                    subjectIdx = subjectEntries.Count; // sequential index for CombinedSubjects
                 subjectEntries.Add(new ScriptObject
                 {
                     ["subject_index"] = subjectIdx,
                     ["contract_index"] = subjectIdx,
                     ["method_index"] = i,
                 });
+            }
+        }
+
+        Console.Error.WriteLine($"[DISPATCH-DIAG] total methods: {methods.Count}, subject entries: {subjectEntries.Count}");
+        if (subjectEntries.Count > 0)
+        {
+            Console.Error.WriteLine($"[DISPATCH-DIAG] first subject entry: method_index={subjectEntries[0]["method_index"]}, subject_index={subjectEntries[0]["subject_index"]}");
+        }
+        else if (methods.Count > 0)
+        {
+            // Show assembly distribution
+            var assemblyCounts = methods
+                .Select(m => m.SubjectId?.Split('/').FirstOrDefault() ?? "?")
+                .GroupBy(a => a)
+                .OrderByDescending(g => g.Count())
+                .ToList();
+            Console.Error.WriteLine($"[DISPATCH-DIAG] method SubjectId assembly distribution:");
+            foreach (var g in assemblyCounts)
+                Console.Error.WriteLine($"  {g.Key}: {g.Count()}");
+            Console.Error.WriteLine($"[DISPATCH-DIAG] sample SubjectIds (first 5):");
+            for (int si = 0; si < Math.Min(5, methods.Count); si++)
+            {
+                bool isSubj = IsSubjectMethod(methods[si].SubjectId);
+                Console.Error.WriteLine($"  [{si}] subjectId={methods[si].SubjectId} isSubject={isSubj}");
+            }
+            // Check if ANY of the SubjectIds from the metadata match
+            if (_subjectMethodSubjectIds is { Count: > 0 })
+            {
+                var matchedIds = methods
+                    .Select(m => m.SubjectId)
+                    .Where(id => _subjectMethodSubjectIds.Contains(id))
+                    .ToList();
+                Console.Error.WriteLine($"[DISPATCH-DIAG] SubjectId matches from metadata: {matchedIds.Count}");
+                if (matchedIds.Count > 0)
+                {
+                    Console.Error.WriteLine($"[DISPATCH-DIAG] First match: {matchedIds[0]}");
+                }
+                else
+                {
+                    // Show one metadata SubjectId to compare
+                    var sampleMetaId = _subjectMethodSubjectIds.First();
+                    Console.Error.WriteLine($"[DISPATCH-DIAG] No matches. Sample metadata SubjectId: {sampleMetaId}");
+                    Console.Error.WriteLine($"[DISPATCH-DIAG] Sample AOT Core IR SubjectId: {methods[0].SubjectId}");
+                }
             }
         }
 
@@ -3719,6 +3922,10 @@ public sealed partial class NativeAotLoweringPlanner
             // method-signature format like "System.Convert::ToChar") don't match
             // the AOT core IR synthetic SubjectIds ("::Subject_0:System.Void()").
         }
+        // CombinedSubjects methods: any method from the subject-assembly DLL
+        // (assembly name "CombinedSubjects") is a subject method by definition.
+        if (subjectId.StartsWith("CombinedSubjects/", StringComparison.Ordinal))
+            return true;
         // Only match ::Subject_N (not ::CustomEntrySubject_N) for subject entries.
         // CustomEntrySubject_N are wrapper methods generated by the codegen, not
         // actual subject methods. Including them would inflate kSubjectEntryCount and
@@ -4455,6 +4662,16 @@ public sealed record NativeAotTemplateModel
 
     public required string ObjectModelCode { get; init; }
 
+/// <summary>
+/// Alternative to <see cref="ObjectModelCode"/>: a StringBuilder that holds the
+/// same content but avoids the 2x memory overhead of ToString().  When set,
+/// the emitter reads chunks via <c>GetChunks()</c> directly, eliminating the
+/// need to allocate a second 3+ GB string on the Large Object Heap.
+/// Only one of <see cref="ObjectModelCode"/> or <see cref="ObjectModelCodeBuilder"/>
+/// must be non-null.
+/// </summary>
+public StringBuilder? ObjectModelCodeBuilder { get; init; }
+
     public required IReadOnlyList<string> MethodDeclarations { get; init; }
 
     public required IReadOnlyList<NativeAotMethodTemplateModel> Methods { get; init; }
@@ -4556,6 +4773,8 @@ public sealed record NativeAotMethodTemplateModel
     public required string SubjectId { get; init; }
 
     public required string MethodSource { get; init; }
+
+    public string? NativeSymbol { get; init; }
 }
 
 

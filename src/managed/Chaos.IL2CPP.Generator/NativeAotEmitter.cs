@@ -231,19 +231,26 @@ public sealed class NativeAotEmitter
         bool includeRegistration,
         bool includeObjectModel)
     {
-        var objectModelSection = BuildObjectModelSection(templateModel);
         var methodSections = pageMethods
             .Select(BuildMethodSection)
             .ToArray();
 
-        // Include the shared header when NOT inlining the object model.
-        // Pages with inline TypeInfoV0 definitions are self-sufficient;
-        // pages without them need the shared header for extern type declarations,
-        // chaos_valuetype_* typedefs, and cross-TU function declarations.
-        // Including BOTH would cause ODR violations and bloat MSVC heap usage.
         var includes = new List<string>(templateModel.Includes);
-        if (!includeObjectModel)
-            includes.Insert(0, "\"native-aot.generated.header.h\"");
+
+        // ── Direct StringBuilder path for large ObjectModelCode ────────
+        // When ObjectModelCode exceeds ~200 KB (e.g. 50+ MB in subject mode),
+        // bypass Scriban entirely to avoid OOM from intermediary string copies.
+        // The Scriban translation unit template is a simple interleaving of
+        // sections with fixed C++ boilerplate — trivial to replicate with
+        // StringBuilder, and avoids the 2-3x memory multiplier from Scriban's
+        // TemplateContext + string copies of 80+ MB of content.
+        int objectModelLength = templateModel.ObjectModelCodeBuilder?.Length ?? templateModel.ObjectModelCode?.Length ?? 0;
+        if (includeObjectModel && objectModelLength > 200_000)
+        {
+            return BuildGeneratedPageDirect(templateModel, methodSections, includes, includeRegistration);
+        }
+
+        var objectModelSection = BuildObjectModelSection(templateModel);
 
         var model = new ScriptObject
         {
@@ -268,6 +275,150 @@ public sealed class NativeAotEmitter
             ["workload_abi"] = templateModel.WorkloadAbi,
         };
         return ScribanTemplateRenderer.RenderTemplate(NativeAotTemplateCatalog.GetTranslationUnitTemplate(), model);
+    }
+
+    /// <summary>
+    /// Shared skeleton for all page builders: includes, boilerplate, namespace,
+    /// and method declarations.  Returns a pre-sized StringBuilder ready for
+    /// page-specific content (object model, registration, method sections).
+    /// </summary>
+    private static StringBuilder BuildGeneratedPageSkeleton(
+        NativeAotTemplateModel templateModel,
+        List<string> includes,
+        bool includeRegistration)
+    {
+        int objectModelLength = templateModel.ObjectModelCodeBuilder?.Length
+                             ?? templateModel.ObjectModelCode?.Length
+                             ?? 0;
+        int estimatedSize = objectModelLength
+                          + (templateModel.ModuleRegistrationCode?.Length ?? 0)
+                          + (templateModel.GenericRegistrationCode?.Length ?? 0)
+                          + (templateModel.GlobalDeclarations?.Length ?? 0)
+                          + (includeRegistration ? templateModel.EntryFunctionCode?.Length ?? 0 : 0)
+                          + (templateModel.MethodDeclarations?.Sum(static d => d.Length + 1) ?? 0)
+                          + 51200;
+        var sb = new StringBuilder(Math.Max(estimatedSize, 8192));
+
+        // Includes
+        foreach (var include in includes)
+        {
+            sb.Append("#include ");
+            sb.Append(include);
+            sb.Append('\n');
+        }
+
+        sb.Append("#include \"native-aot.generated.header.h\"");
+        sb.Append("\n\n// Forward declaration for dispatch table entries (defined in runtime_stubs.cpp)\n");
+        sb.Append("extern \"C\" void InterpreterEntryDirect(\n");
+        sb.Append("    CHAOS_IL2CPP_UINTPTR method_key,\n");
+        sb.Append("    void*     args_buf,\n");
+        sb.Append("    void*     ret_buf) noexcept;\n");
+        sb.Append("\n#pragma warning(push)\n");
+        sb.Append("#pragma warning(disable: 4065 4244)\n");
+        sb.Append("\nnamespace chaos::il2cpp::codegen::");
+        sb.Append(templateModel.CodegenNamespace);
+        sb.Append(" {\n\n");
+        sb.Append("// Bring runtime_core and jit declarations into scope for unqualified lookup\n");
+        sb.Append("using namespace chaos::il2cpp::runtime_core;\n");
+        sb.Append("using namespace chaos::il2cpp::jit;\n\n");
+
+        // Method declarations — included only on page 0 (first page).
+        // Including them on every page multiplies memory by the page count,
+        // causing OOM when there are 1000+ pages for subject-mode chunks.
+        if (includeRegistration && templateModel.MethodDeclarations is { Count: > 0 })
+        {
+            foreach (var decl in templateModel.MethodDeclarations)
+            {
+                sb.Append(decl);
+                sb.Append('\n');
+            }
+            sb.Append('\n');
+        }
+
+        return sb;
+    }
+
+    /// <summary>
+    /// Build a complete translation unit page into a StringBuilder.  Used when the
+    /// ObjectModelCodeBuilder is available, avoiding the 2x memory overhead of
+    /// calling ToString() on a multi-GB StringBuilder — the page StringBuilder is
+    /// stored in <see cref="NativeAotGeneratedSource.ContentsBuilder"/> and written
+    /// to disk via <c>GetChunks()</c> without ever creating a single large string.
+    /// </summary>
+    private static StringBuilder BuildGeneratedPageToBuilder(
+        NativeAotTemplateModel templateModel,
+        string[] methodSections,
+        List<string> includes,
+        bool includeRegistration,
+        bool includeObjectModel)
+    {
+        var sb = BuildGeneratedPageSkeleton(templateModel, includes, includeRegistration);
+
+        // Object model code — the bulk of page 0 content
+        if (includeObjectModel)
+        {
+            if (templateModel.ObjectModelCodeBuilder is { } omBuilder)
+            {
+                foreach (var chunk in omBuilder.GetChunks())
+                    sb.Append(chunk.Span);
+            }
+            else
+            {
+                sb.Append(templateModel.ObjectModelCode);
+            }
+            sb.Append('\n');
+        }
+
+        // Module registration + generic registration (page 0 only)
+        if (includeRegistration)
+        {
+            sb.Append(templateModel.ModuleRegistrationCode);
+            sb.Append('\n');
+            sb.Append(templateModel.GenericRegistrationCode);
+            sb.Append('\n');
+        }
+
+        // Method sections
+        foreach (var section in methodSections)
+        {
+            sb.Append(section);
+            sb.Append("\n\n");
+        }
+
+        // Close namespace
+        sb.Append("\n}  // namespace chaos::il2cpp::codegen::");
+        sb.Append(templateModel.CodegenNamespace);
+        sb.Append('\n');
+        sb.Append("#pragma warning(pop)\n\n");
+
+        // Global declarations + entry function code (outside namespace)
+        sb.Append(templateModel.GlobalDeclarations);
+        if (includeRegistration)
+        {
+            sb.Append(templateModel.EntryFunctionCode);
+        }
+
+        return sb;
+    }
+
+    /// <summary>
+    /// Direct StringBuilder version of BuildGeneratedPage, used when the ObjectModelCode
+    /// is very large (e.g. 50+ MB for subject-mode coverage chunks). Builds the same
+    /// content as the Scriban template NativeAot.TranslationUnit.cpp.scriban but without
+    /// the memory overhead of Scriban's TemplateContext, string copies, and regex-based
+    /// NormalizeIndentation. This avoids OutOfMemoryException when processing hundreds
+    /// of methods with large object model/registration sections.
+    /// </summary>
+    private static string BuildGeneratedPageDirect(
+        NativeAotTemplateModel templateModel,
+        string[] methodSections,
+        List<string> includes,
+        bool includeRegistration)
+    {
+        var builder = BuildGeneratedPageToBuilder(
+            templateModel, methodSections, includes,
+            includeRegistration, includeObjectModel: true);
+        return builder.ToString().TrimEnd();
     }
 
     private static string BuildObjectModelSection(NativeAotTemplateModel templateModel)
@@ -341,9 +492,14 @@ public sealed class NativeAotEmitter
         // exceeds the threshold, create synthetic pages to split the output into
         // multiple translation units. This prevents oversized generated files
         // for test subjects with many methods (e.g. coverage subjects).
-        // When the plan explicitly sets pageSize to null, it means the planner
-        // intentionally opted out of paging — respect that decision.
-        if (pageSize.HasValue && pages is not { Count: > 0 } && templateModel.Methods.Count > autoPageSize)
+        // Note: the planner may set NativeAotPageSize to an artificially high value
+        // (999999) to effectively disable paging for non-subject codegen.  For
+        // pipeline subjects (e.g. 49086 methods in a numerics chunk), this value
+        // is never exceeded, so no paging is set up.  We force auto-paging here
+        // regardless of the planner's pageSize setting when the method count
+        // clearly exceeds the auto-page threshold, preventing OOM during Scriban
+        // template rendering of a single 200+ MB translation unit.
+        if (templateModel.Methods.Count > autoPageSize && pages is not { Count: > 0 })
         {
             int totalMethods = templateModel.Methods.Count;
             int pageCount = (totalMethods + autoPageSize - 1) / autoPageSize;
@@ -374,7 +530,10 @@ public sealed class NativeAotEmitter
             // Page 0 carries object model (TypeInfoV0 inline defs), method
             // declarations, module registration, and generic registration.
             // Each entry is optional — use empty string length when null.
-            int page0Overhead = (templateModel.ObjectModelCode?.Length ?? 0)
+            int objectModelLength = templateModel.ObjectModelCodeBuilder?.Length
+                                 ?? templateModel.ObjectModelCode?.Length
+                                 ?? 0;
+            int page0Overhead = objectModelLength
                               + (templateModel.MethodDeclarations?.Sum(d => d.Length) ?? 0)
                               + (templateModel.ModuleRegistrationCode?.Length ?? 0)
                               + (templateModel.GenericRegistrationCode?.Length ?? 0)
@@ -451,24 +610,49 @@ public sealed class NativeAotEmitter
                     };
                 }
 
-                // All pages get inline TypeInfoV0 definitions (includeObjectModel=true)
-                // because the shared header only has forward declarations of chaos_type_*
-                // which are insufficient for code that accesses type members directly.
-                // The shared header is NOT included (would duplicate definitions and
-                // bloat MSVC heap usage).
-                string content = BuildGeneratedPage(
-                    templateModel, pageMethods,
-                    includeRegistration: isFirstPage,
-                    includeObjectModel: true);
+                // Only page 0 includes inline TypeInfoV0 definitions (includeObjectModel=true).
+                // Subsequent pages rely on the shared header (native-aot.generated.header.h)
+                // for forward declarations and extern references to type symbols, avoiding
+                // multi-GB bloat from duplicating TypeInfoV0 definitions across hundreds of pages.
 
                 // Normalize page path to flat (no directory prefix) so cmake
                 // glob patterns match regardless of what the lowering plan uses.
                 var pageFileName = Path.GetFileName(page.Path.AsSpan());
-                sources.Add(new NativeAotGeneratedSource
+                string pageRelativePath = pageFileName.Length > 0 ? pageFileName.ToString() : page.Path;
+
+                // For page 0 with an ObjectModelCodeBuilder (large content), build
+                // directly into a StringBuilder and store as ContentsBuilder to avoid
+                // a 3+ GB ToString() copy on the Large Object Heap.
+                if (isFirstPage && templateModel.ObjectModelCodeBuilder is { } omBuilder)
                 {
-                    RelativePath = pageFileName.Length > 0 ? pageFileName.ToString() : page.Path,
-                    Contents = content,
-                });
+                    var methodSections = pageMethods
+                        .Select(BuildMethodSection)
+                        .ToArray();
+                    var includes = new List<string>(templateModel.Includes);
+                    // Page 0 includes inline TypeInfoV0 → no shared header needed
+                    var pageBuilder = BuildGeneratedPageToBuilder(
+                        templateModel, methodSections, includes,
+                        includeRegistration: true,
+                        includeObjectModel: true);
+                    sources.Add(new NativeAotGeneratedSource
+                    {
+                        RelativePath = pageRelativePath,
+                        Contents = "",
+                        ContentsBuilder = pageBuilder,
+                    });
+                }
+                else
+                {
+                    string content = BuildGeneratedPage(
+                        templateModel, pageMethods,
+                        includeRegistration: isFirstPage,
+                        includeObjectModel: isFirstPage);
+                    sources.Add(new NativeAotGeneratedSource
+                    {
+                        RelativePath = pageRelativePath,
+                        Contents = content,
+                    });
+                }
                 artifacts.Add(new NativeAotGeneratedArtifactRef
                 {
                     Kind = "generatedTranslationUnit",

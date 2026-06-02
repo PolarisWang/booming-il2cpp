@@ -9,6 +9,12 @@
 #include "gc_helpers.h"
 #include "cpu_features.h"
 
+// MSVC doesn't have __builtin_memcpy — use std::memcpy instead.
+#if defined(_MSC_VER)
+#include <cstring>
+#define __builtin_memcpy(dst, src, n) std::memcpy(dst, src, n)
+#endif
+
 // SSE2 is x86_64 baseline — always available, no runtime detection needed.
 #if defined(__x86_64__) || defined(_M_AMD64)
 #include <emmintrin.h>

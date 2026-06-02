@@ -1,4 +1,5 @@
 using System.Text;
+using System.Text;
 using Chaos.IL2CPP.Generator;
 using Chaos.IL2CPP.Contracts;
 using Chaos.IL2CPP.Diagnostics;
@@ -46,7 +47,18 @@ internal sealed class FullAssemblyEmitter
         {
             var targetPath = Path.Combine(outputRoot, source.RelativePath.Replace('/', Path.DirectorySeparatorChar));
             Directory.CreateDirectory(Path.GetDirectoryName(targetPath)!);
-            File.WriteAllText(targetPath, source.Contents, Encoding.UTF8);
+            if (source.ContentsBuilder is { } builder)
+            {
+                // ContentsBuilder avoids a ToString() call on multi-GB builders —
+                // write chunks directly to the file stream via GetChunks().
+                using var writer = new StreamWriter(targetPath, append: false, Encoding.UTF8);
+                foreach (var chunk in builder.GetChunks())
+                    writer.Write(chunk.Span);
+            }
+            else
+            {
+                File.WriteAllText(targetPath, source.Contents, Encoding.UTF8);
+            }
         }
 
         Console.WriteLine($"    emitted {emitResult.GeneratedSources.Count} files → {outputRoot}");

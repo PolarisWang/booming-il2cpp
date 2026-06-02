@@ -38,6 +38,8 @@ target_link_libraries(chaos::runtime INTERFACE
     "$<$<CXX_COMPILER_ID:MSVC>:${CHAOS_SDK_ROOT}/lib/chaos_eventpipe.lib>"
     "$<$<CXX_COMPILER_ID:MSVC>:${CHAOS_SDK_ROOT}/lib/chaos_jit.lib>"
     "$<$<CXX_COMPILER_ID:MSVC>:${CHAOS_SDK_ROOT}/lib/chaos_debugger.lib>"
+    "$<$<CXX_COMPILER_ID:MSVC>:concrt.lib>"
+    "$<$<CXX_COMPILER_ID:MSVC>:msvcprt.lib>"
 )
 
 if(CMAKE_SYSTEM_NAME STREQUAL "Linux")

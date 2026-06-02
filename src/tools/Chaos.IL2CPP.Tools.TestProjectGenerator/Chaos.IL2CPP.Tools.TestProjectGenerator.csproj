@@ -23,4 +23,14 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
+
+  <!-- Copy Scriban templates from Generator project to TPG output -->
+  <Target Name="CopyGeneratorTemplates" AfterTargets="Build">
+    <ItemGroup>
+      <_GeneratorTemplates Include="..\..\managed\Chaos.IL2CPP.Generator\Templates\**\*.scriban" />
+    </ItemGroup>
+    <Copy SourceFiles="@(_GeneratorTemplates)"
+          DestinationFolder="$(OutDir)Templates\%(RecursiveDir)"
+          SkipUnchangedFiles="true" />
+  </Target>
 </Project>

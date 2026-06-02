@@ -55,6 +55,12 @@ internal sealed class ProjectModelBuilder
         var subjectArray = new ScriptArray();
         foreach (var s in subjects)
         {
+            if (s is null)
+            {
+                Console.Error.WriteLine("  [WARN] Skipping null subject entry in model builder");
+                continue;
+            }
+
             // Resolve assembly_name to match codegen output directory.
             // The contract's assembly name (from methodSubjectIds) may not match
             // the actual codegen output directory (e.g. "NativeEntry" vs "Subjects").
@@ -101,6 +107,75 @@ internal sealed class ProjectModelBuilder
             subjectArray.Add(entry);
         }
         model["subjects"] = subjectArray;
+
+        // Generate kSubjectEntries C++ initializer in C# to avoid Scriban for-loop
+        // iteration bug where s.index produces "null object" for valid ScriptArray entries.
+        var entriesCode = new System.Text.StringBuilder();
+        for (int si = 0; si < subjectArray.Count; si++)
+        {
+            if (subjectArray[si] is ScriptObject so)
+            {
+                entriesCode.Append("    { ");
+                entriesCode.Append(so["index"]);
+                entriesCode.Append(", \"");
+                entriesCode.Append(so["subject_id"]);
+                entriesCode.Append("\", \"");
+                entriesCode.Append(so["assembly_name"]);
+                entriesCode.Append("\", \"");
+                entriesCode.Append(so["type_name"]);
+                entriesCode.Append("\", \"");
+                entriesCode.Append(so["method_name"]);
+                entriesCode.Append("\", ");
+                entriesCode.Append(so["is_static"]);
+                entriesCode.Append(", \"");
+                entriesCode.Append(so["kind"]);
+                entriesCode.Append("\" },\n");
+            }
+        }
+        model["subject_entries_code"] = entriesCode.ToString();
+
+        // Generate metadata JSON entries (avoids Scriban for-loop bug with ScriptObject arrays)
+        {
+            var metaEntries = new System.Text.StringBuilder();
+            metaEntries.AppendLine("[");
+            for (int si = 0; si < subjectArray.Count; si++)
+            {
+                if (subjectArray[si] is ScriptObject so)
+                {
+                    if (si > 0) metaEntries.AppendLine(",");
+                    metaEntries.Append("      { \"index\": ");
+                    metaEntries.Append(so["index"]);
+                    metaEntries.Append(", \"kind\": \"");
+                    metaEntries.Append(so["kind"]);
+                    metaEntries.Append("\", \"subjectId\": \"");
+                    metaEntries.Append(so["subject_id"]);
+                    metaEntries.Append("\" }");
+                }
+            }
+            metaEntries.AppendLine();
+            metaEntries.Append("    ]");
+            model["subject_metadata_json_code"] = metaEntries.ToString();
+        }
+
+        // Generate CMake include directories (deduplicated assembly names)
+        {
+            var cmakeDirs = new System.Text.StringBuilder();
+            var seen = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+            for (int si = 0; si < subjectArray.Count; si++)
+            {
+                if (subjectArray[si] is ScriptObject so)
+                {
+                    var asmName = so["assembly_name"]?.ToString() ?? "";
+                    if (seen.Add(asmName))
+                    {
+                        cmakeDirs.Append("    \"${CHAOS_CODEGEN_DIR}/");
+                        cmakeDirs.Append(asmName);
+                        cmakeDirs.AppendLine("/generated\"");
+                    }
+                }
+            }
+            model["subject_cmake_include_dirs_code"] = cmakeDirs.ToString();
+        }
 
         // ── Config tier defines ──
         var defines = new ScriptObject();

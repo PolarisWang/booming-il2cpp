@@ -1228,7 +1228,10 @@ public sealed partial class NativeAotLoweringPlanner
             if (instrs.Count == 0) continue;
 
             // Simulated eval stack: track which instruction index produced each slot
-            var producers = new int[128];
+            // Some methods (particularly large SIMD/vectorized code) can have very
+            // deep eval stacks.  Use a generous fixed-size buffer; skip methods whose
+            // eval stack exceeds it (these are unlikely to be simple enum→ToString).
+            var producers = new int[2048];
             int depth = 0;
 
             for (int i = 0; i < instrs.Count; i++)
@@ -1238,11 +1241,13 @@ public sealed partial class NativeAotLoweringPlanner
                 switch (instr.Op)
                 {
                     case "ldsfld":
+                        if (depth >= producers.Length) return;
                         producers[depth++] = i;
                         break;
 
                     case "ldc.i4":
                     case "ldc.i8":
+                        if (depth >= producers.Length) return;
                         producers[depth++] = i;
                         break;
 
@@ -1441,7 +1446,7 @@ public sealed partial class NativeAotLoweringPlanner
             if (instrs.Count == 0) continue;
             string? methodId = method.NativeSymbol;
 
-            var producers = new int[128];
+            var producers = new int[2048];
             int depth = 0;
 
             for (int i = 0; i < instrs.Count; i++)
@@ -1451,6 +1456,7 @@ public sealed partial class NativeAotLoweringPlanner
                 switch (instr.Op)
                 {
                     case "ldtoken":
+                        if (depth >= producers.Length) return;
                         producers[depth++] = i;
                         break;
 
@@ -1468,6 +1474,7 @@ public sealed partial class NativeAotLoweringPlanner
                     case "ldelema":
                     case "ldarga":
                     case "ldloca":
+                        if (depth >= producers.Length) return;
                         producers[depth++] = i;
                         break;
 
@@ -1491,7 +1498,7 @@ public sealed partial class NativeAotLoweringPlanner
                         break;
 
                     case "dup":
-                        if (depth > 0)
+                        if (depth > 0 && depth < producers.Length)
                         {
                             producers[depth] = producers[depth - 1];
                             depth++;

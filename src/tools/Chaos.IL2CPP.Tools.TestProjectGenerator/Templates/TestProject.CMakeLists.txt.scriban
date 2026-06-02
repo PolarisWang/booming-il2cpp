@@ -112,14 +112,13 @@ set(CHAOS_ENTRY_INCLUDES
     "${CHAOS_PROJECT_ROOT}/src/native/common"
     "${CHAOS_PROJECT_ROOT}/src/native/bootstrap"
     "${CHAOS_PROJECT_ROOT}/src/native"
+    "${CHAOS_PROJECT_ROOT}/src/native/pal"
     "${CHAOS_PROJECT_ROOT}/src/native/interpreter"
     "${CHAOS_PROJECT_ROOT}/src/native/interpreter/generated"
     "${CHAOS_PROJECT_ROOT}/src/native/support"
     "${CHAOS_PROJECT_ROOT}/src/native/hot-update"
     "${CHAOS_PROJECT_ROOT}/third_party/unordered_dense/include"
-{{ for s in subjects }}
-    "${CHAOS_CODEGEN_DIR}/{{ s.assembly_name }}/generated"
-{{ end }}
+{{ subject_cmake_include_dirs_code }}
     "${CMAKE_CURRENT_SOURCE_DIR}"
 {{ if is_jit }}
     "${CHAOS_PROJECT_ROOT}/src/native/jit"
