@@ -33,5 +33,6 @@
 #include <chaos/pal/pal_thread.h>
 #include <chaos/pal/pal_crash.h>
 #include <chaos/pal/pal_cache.h>
+#include <chaos/pal/pal_io.h>
 
 #endif  // CHAOS_IL2CPP_PAL_H_

@@ -1,4 +1,3 @@
-namespace chaos::il2cpp::runtime_core {
 // ── ReapplyInlining ──────────────────────────────────────────────────────────
 // Called from ApplyPatchFromMemory after all methods are pre-lowered and the
 // inlining map is fully populated.  Runs InlineLeafCallees on each method
@@ -6,6 +5,8 @@ namespace chaos::il2cpp::runtime_core {
 // pre-lowering pass (when callee IR was not yet available).
 // After re-inlining, re-runs register allocation (AllocateRegisters) and
 // caches the result in cached_reg_method.
+
+namespace chaos::il2cpp::runtime_core {
 
 // Forward declaration (defined in inlining.cpp)
 static void InlineLeafCallees(
@@ -90,4 +91,4 @@ void ReapplyInlining(PatchMethod* methods, uint32_t method_count) noexcept {
     }
 }
 
-}
+}  // namespace chaos::il2cpp::runtime_core

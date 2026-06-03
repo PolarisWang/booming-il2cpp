@@ -9,14 +9,7 @@
 #include <cstdio>
 #include <cstring>
 
-#if defined(_WIN32) || defined(_WIN64)
-    #ifndef WIN32_LEAN_AND_MEAN
-        #define WIN32_LEAN_AND_MEAN
-    #endif
-    #include <windows.h>
-    #include <io.h>
-    #include <fcntl.h>
-#endif
+#include <chaos/pal/pal_io.h>
 
 #include <string>
 
@@ -34,10 +27,7 @@ bool g_initialized = false;
 
 // On Windows, set stdin/stdout to binary mode to avoid CR/LF translation.
 void SetBinaryMode() noexcept {
-#if defined(_WIN32) || defined(_WIN64)
-    _setmode(_fileno(stdin), _O_BINARY);
-    _setmode(_fileno(stdout), _O_BINARY);
-#endif
+    chaos::il2cpp::pal::PalSetBinaryMode();
 }
 
 }  // anonymous namespace

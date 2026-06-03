@@ -78,4 +78,8 @@ bool PalVirtualAllocIsValid(const void* ptr) noexcept {
            mbi.AllocationBase == ptr;
 }
 
+bool PalCanJit() noexcept {
+    return true;  // Windows always supports executable memory allocation.
+}
+
 }  // namespace chaos::il2cpp::pal

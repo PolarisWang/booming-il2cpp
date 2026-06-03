@@ -1,0 +1,84 @@
+{
+  "family": "parser",
+  "assembly": "System.Net.ServerSentEvents",
+  "mode": "strict",
+  "timestamp": "2026-05-29T09:50:14",
+  "duration_ms": 2048,
+  "overall_status": "failed",
+  "stages": {
+    "preflight": {
+      "stage": "preflight",
+      "status": "passed",
+      "summary": "8 methods, 1 custom entries",
+      "details": {
+        "methodCount": 8,
+        "customMethodCount": 1,
+        "hasCustomEntryFile": false,
+        "customMethods": [
+          "System.Net.ServerSentEvents/System.Net.ServerSentEvents.SseParser::Create{T}:System.Net.ServerSentEvents.SseParser{T}(System.IO.Stream,System.Net.ServerSentEvents.SseItemParser{T})"
+        ]
+      },
+      "errors": [],
+      "duration_ms": 0
+    },
+    "codegen": {
+      "stage": "codegen",
+      "status": "failed",
+      "summary": "/home/debian/agent/booming-il2cpp/testing/foundation-dll/System.Net.ServerSentEvents/parser/managed/subjects/ParserSubjects.cs(10,18): error CS0234: 命名空间“System.Net”中不存在类型或命名空间名“ServerSentEvents”(是否缺少程序集引用?) [/home/debian/agent/booming-il2cpp/testing/foundation-dll/System.Net.ServerSentEvents/parser/managed/subjects/ParserSubjects.csproj]\n\n生成失败。\n\n/home/debian/agent/booming-il2cpp/testing/foundation-dll/System.Net.ServerSentEvents/parser/managed/subjects/ParserSubjects.cs(10,18): error CS0234: 命名空间“System.Net”中不存在类型或命名空间名“ServerSentEvents”(是否缺少程序集引用?) [/home/debian/agent/booming-il2cpp/testing/foundation-dll/System.Net.ServerSentEvents/parser/managed/subjects/ParserSubjects.csproj]\n    0 个警告\n    1 个错误\n\n已用时间 00:00:00.77\n",
+      "details": {
+        "steps": {
+          "build_subjects": "FAILED"
+        }
+      },
+      "errors": [],
+      "duration_ms": 2048
+    }
+  },
+  "coverage": {
+    "methodCoverage": 0.0,
+    "testedRate": 0.0,
+    "overall": 0.0
+  },
+  "dashboard": {
+    "interpreter": {},
+    "irTranslation": {
+      "totalMethods": 8,
+      "okCount": 0,
+      "failedCount": 8,
+      "overallIrExpansionRatio": 0,
+      "averageExpansionRatio": 0,
+      "maxExpansionRatio": 0,
+      "jitInstructionAvg": 0,
+      "aotInstructionAvg": 7.7,
+      "totalExternalRuntimeCalls": 0,
+      "totalVirtualDispatches": 0,
+      "totalBoxingOps": 0,
+      "topInstructionCategories": {
+        "external_runtime_call": 6
+      }
+    },
+    "performance": {},
+    "hotupdate": {},
+    "keyRatios": {
+      "nativeFasterRatio": 0,
+      "irExpansionRatio": 0,
+      "interpreterSlowdownFactor": 0,
+      "asmPassRate": 0.0
+    }
+  },
+  "regression": {
+    "benchmark": {
+      "status": "no_baseline",
+      "message": "Baseline auto-created from this run",
+      "currentMetrics": {
+        "totalMethods": 8,
+        "matchedCount": 0,
+        "nativeFasterCount": 0,
+        "managedFasterCount": 0,
+        "averageSpeedupPercent": 0.0
+      }
+    },
+    "hasRegression": false,
+    "regressions": []
+  }
+}

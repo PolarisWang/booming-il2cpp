@@ -1,6 +1,7 @@
 #include "fast_dispatch.h"
 
 #include <chaos/compiler_hints.h>
+#include <chaos/runtime/execution_config.h>
 
 #include "instantiation_engine.h"
 #include "vtable_registry.h"
@@ -50,6 +51,7 @@ extern CHAOS_IL2CPP_VECTOR(InterpreterValue) g_static_fields;
 namespace chaos::il2cpp::runtime_core {
 
 using chaos::il2cpp::pal::PalTryCallNoExcept;
+using chaos::il2cpp::runtime::kRuntimeConfig;
 
 // ── TLS box object pool ──────────────────────────────────────────────
 // Avoids per-call malloc/free for Box/NewObj by reusing InterpreterObjects.
@@ -2427,7 +2429,7 @@ static bool TryFastOsrPromotion(FastFrame& frame) noexcept {
                 auto* rm = static_cast<interpreter::RegisterMethod*>(pm->cached_optimized_reg_method);
                 if (rm == nullptr) rm = static_cast<interpreter::RegisterMethod*>(pm->cached_reg_method);
                 if (rm != nullptr && rm->instructions.size() > 0) {
-#ifdef CHAOS_IL2CPP_JIT_MODE
+                if constexpr (kRuntimeConfig.jit) {
                     chaos::il2cpp::jit::CompileConfig cfg;
                     cfg.enable_deopt = true;
                     cfg.enable_liveness = true;
@@ -2511,11 +2513,11 @@ static bool TryFastOsrPromotion(FastFrame& frame) noexcept {
                             pm->tier_state.store(PM::kOptimizedRegister, std::memory_order_release);
                         }
                     }
-#else
+                } else {
                     // JIT disabled — no native compilation in AOT-only builds.
                     // Set permanent skip so the tier-up path is never retried.
                     pm->tier_state.store(PM::kJitSkip, std::memory_order_release);
-#endif
+                }
                 }
             }
         }

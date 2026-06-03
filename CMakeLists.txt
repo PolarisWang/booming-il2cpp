@@ -297,6 +297,7 @@ elseif(ROADMAP0_PRESET_TARGET STREQUAL "ios-arm64-packaging")
             "${CMAKE_CURRENT_SOURCE_DIR}/src/native/jit"
             "${CMAKE_CURRENT_SOURCE_DIR}/src/native/common"
             "${CMAKE_CURRENT_SOURCE_DIR}/src/native/runtime-core"
+            "${CMAKE_CURRENT_SOURCE_DIR}/src/native/pal"
             "${CMAKE_CURRENT_SOURCE_DIR}/third_party/fmt/include")
         target_link_libraries(chaos_arm64_jit_smoke PRIVATE chaos_jit)
         set_target_properties(chaos_arm64_jit_smoke PROPERTIES
@@ -348,6 +349,7 @@ elseif(ROADMAP0_PRESET_TARGET STREQUAL "linux-arm64-smoke")
             "${CMAKE_CURRENT_SOURCE_DIR}/src/native/interpreter"
             "${CMAKE_CURRENT_SOURCE_DIR}/src/native/interpreter/generated"
             "${CMAKE_CURRENT_SOURCE_DIR}/src/native/diagnostics"
+            "${CMAKE_CURRENT_SOURCE_DIR}/src/native/pal"
             "${CMAKE_CURRENT_SOURCE_DIR}/contracts/native/v0"
             "${CMAKE_CURRENT_SOURCE_DIR}/third_party/fmt/include"
             "${CMAKE_CURRENT_SOURCE_DIR}/third_party/unordered_dense/include")

@@ -39,6 +39,7 @@ target_include_directories(chaos_debugger PUBLIC
 # Transitive includes for runtime-core headers (contract ABI headers).
 target_include_directories(chaos_debugger PRIVATE
     "${REPO_ROOT}/contracts/native/v0"        # runtime_abi.h, codegen_bridge.h
+    "${REPO_ROOT}/src/native/pal"             # chaos/pal/pal_io.h
     "${REPO_ROOT}/third_party/unordered_dense/include"  # ankerl/unordered_dense.h
     "${REPO_ROOT}/third_party/fmt/include"              # fmt/format.h
 )
