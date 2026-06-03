@@ -344,6 +344,11 @@ private:
     // .eh_frame DWARF CFI offset (Linux x64), 0 = not emitted.
     uint32_t eh_frame_offset_ = 0;
 
+    // Pointer to JitMethod::stale for HotUpdate inline PIC stale checking.
+    // Set during Generate() before instruction emission; read by EmitInstruction
+    // to embed the address as an immediate for runtime stale flag checks.
+    void* stale_flag_ptr_ = nullptr;
+
     // Error tracking: set by early-exit helpers; causes Generate() to return nullptr.
     bool failed_ = false;
 
@@ -2841,28 +2846,53 @@ bool NativeCodeGenerator::EmitInstruction(const interpreter::RegisterInstruction
                 if (instr.has_dst()) StoreGpr(AT::kScratchA, instr.dst_reg());
 
                 // Check ret_buf[0] for kDeoptMagic
-                enc_.EmitMovRM(AT::kScratchB, AT::kRetBuf, 0);
+                // kRetBuf may have been clobbered -- reload from stack save slot.
+                enc_.EmitMovRM(AT::kScratchC, AT::kFrameReg, -16);
+                enc_.EmitMovRM(AT::kScratchB, AT::kScratchC, 0);
                 enc_.EmitMovImm64(AT::kScratchA, kDeoptMagic);
                 enc_.EmitCmpRR(AT::kScratchA, AT::kScratchB);
                 uint32_t inline_jne_patch_off = buf_.pos() + 2;
-                enc_.EmitJccRel32(kCC_NE, 0);   // jne .slot_done
+                enc_.EmitJccRel32(kCC_NE, 0);   // jne .check_stale
 
                 // Deopt path: jump to common deopt trampoline
-                uint32_t inline_deopt_patch = buf_.pos() + 1;
-                enc_.EmitJmpRel32(0);
-                deopt_jump_patches_.push_back({inline_deopt_patch});
-
-                // .slot_done (normal return — skip deopt path)
-                uint32_t slot_done_off = buf_.pos();
                 {
-                    int32_t disp = static_cast<int32_t>(slot_done_off - (inline_jne_patch_off + 4));
-                    buf_.Patch32(inline_jne_patch_off, static_cast<uint32_t>(disp));
+                    uint32_t inline_deopt_patch = buf_.pos() + 1;
+                    enc_.EmitJmpRel32(0);
+                    deopt_jump_patches_.push_back({inline_deopt_patch});
                 }
+
+                // .check_stale — also check HotUpdate stale flag
+                {
+                    // Patch the jne from ret_buf check to land here (not stale → skip deopt)
+                    uint32_t check_stale_off = buf_.pos();
+                    int32_t disp = static_cast<int32_t>(check_stale_off - (inline_jne_patch_off + 4));
+                    buf_.Patch32(inline_jne_patch_off, static_cast<uint32_t>(disp));
+
+                    // Load stale flag (atomic<bool>, 0 or 1) from pre-computed pointer
+                    enc_.EmitMovImm64(AT::kScratchA, reinterpret_cast<uint64_t>(stale_flag_ptr_));
+                    enc_.EmitMovRM(AT::kScratchA, AT::kScratchA, 0);
+                    enc_.EmitTestRR(AT::kScratchA, AT::kScratchA);
+                    uint32_t stale_done_patch = buf_.pos() + 2;
+                    enc_.EmitJccRel32(kCC_E, 0);   // je .slot_done (not stale)
+
+                    // Stale: jump to common deopt trampoline
+                    uint32_t stale_deopt_patch = buf_.pos() + 1;
+                    enc_.EmitJmpRel32(0);
+                    deopt_jump_patches_.push_back({stale_deopt_patch});
+
+                    // .slot_done (normal return — skip deopt path)
+                    uint32_t slot_done_off = buf_.pos();
+                    {
+                        int32_t done_disp = static_cast<int32_t>(slot_done_off - (stale_done_patch + 4));
+                        buf_.Patch32(stale_done_patch, static_cast<uint32_t>(done_disp));
+                    }
+
+                }  // end check_stale + slot_done block
 
                 // Jump past C helper path
                 inline_done_jumps.push_back(buf_.pos());
                 enc_.EmitJmpRel32(0);  // jmp .done
-            }
+            }  // end for-loop body (slot si)
 
             // ── Patch all slot miss jumps ──
             // For slot si, the miss jump target is right after this slot's
@@ -2921,7 +2951,8 @@ bool NativeCodeGenerator::EmitInstruction(const interpreter::RegisterInstruction
         enc_.EmitMovMR(AT::kScratchB, 48, AT::kScratchA);   // has_dst
         enc_.EmitMovRIImm32(AT::kScratchA, static_cast<uint32_t>((instr.header >> 63) & 1));
         enc_.EmitMovMR(AT::kScratchB, 52, AT::kScratchA);   // is_instance_call
-        enc_.EmitMovMR(AT::kScratchB, 56, AT::kRetBuf);   // ret_buf
+        enc_.EmitMovRM(AT::kScratchC, AT::kFrameReg, -16);   // reload kRetBuf from stack save
+        enc_.EmitMovMR(AT::kScratchB, 56, AT::kScratchC);   // ret_buf = saved kRetBuf
 
         // call CodegenCallVirt
         uint32_t call_pos = buf_.pos();
@@ -2959,9 +2990,10 @@ bool NativeCodeGenerator::EmitInstruction(const interpreter::RegisterInstruction
             DeoptEntry entry; entry.native_offset = call_pos; entry.instr_pc = current_instr_index_; entry.num_values = n_vals; entry.values_offset = val_start;
             deopt_entries_.push_back(entry);
         }
-
-        // Check ret_buf[0] for kDeoptMagic
-        enc_.EmitMovRM(AT::kScratchB, AT::kRetBuf, 0);
+        // Check ret_buf[0] for kDeoptMagic.
+        // kRetBuf may have been clobbered -- reload from stack save slot.
+        enc_.EmitMovRM(AT::kScratchC, AT::kFrameReg, -16);
+        enc_.EmitMovRM(AT::kScratchB, AT::kScratchC, 0);
         enc_.EmitMovImm64(AT::kScratchA, kDeoptMagic);
         enc_.EmitCmpRR(AT::kScratchA, AT::kScratchB);
         uint32_t jne_patch_off = buf_.pos() + 2;
@@ -4222,6 +4254,14 @@ JitMethod* NativeCodeGenerator::Generate() noexcept {
     }
     std::fprintf(stderr, "DIAG-PASS: liveness analysis done\n");
 
+    // Pre-allocate JitMethod early so instruction emission can embed
+    // the address of its stale flag for HotUpdate inline PIC checking.
+    auto* nm = static_cast<JitMethod*>(CHAOS_IL2CPP_MALLOC(sizeof(JitMethod)));
+    if (nm == nullptr) return nullptr;
+    std::memset(nm, 0, sizeof(*nm));
+    ::new (nm) JitMethod();
+    stale_flag_ptr_ = &nm->stale;
+
     // Emit instructions
     for (uint32_t i = 0; i < n_instrs; ++i) {
         instr_offsets_[i] = buf_.pos();
@@ -4649,11 +4689,7 @@ JitMethod* NativeCodeGenerator::Generate() noexcept {
         "Compile: {} instrs, {} bytes code, {} call sites",
         n_instrs, code_bytes, call_sites_.size());
 
-    // Build JitMethod
-    auto* nm = static_cast<JitMethod*>(CHAOS_IL2CPP_MALLOC(sizeof(JitMethod)));
-    if (nm == nullptr) return nullptr;
-    std::memset(nm, 0, sizeof(*nm));
-    ::new (nm) JitMethod();
+    // Build JitMethod (pre-allocated as nm_ before instruction emission)
     nm->code = code;
     nm->code_size = code_bytes;
     nm->instr_count = n_instrs;
@@ -4764,7 +4800,7 @@ JitMethod* NativeCodeGenerator::Generate() noexcept {
 
     CHAOS_IL2CPP_LOG_INFO_M("codegen",
         "Generate: method compiled, code_size=%u, code=%p, slots=%u",
-        nm ? nm->code_size : 0, nm ? nm->code : nullptr,
+        nm->code_size, nm->code,
         slot_count_used_);
     return nm;
 }

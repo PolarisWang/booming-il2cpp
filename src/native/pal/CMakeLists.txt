@@ -81,6 +81,10 @@ add_library(chaos_pal STATIC
     chaos/pal/pal_encoding.h
     $<$<PLATFORM_ID:Windows>:pal_encoding_win32.cpp>
     $<$<NOT:$<PLATFORM_ID:Windows>>:pal_encoding_posix.cpp>
+    # ── I/O utilities ─────────────────────────────────────────────────────
+    chaos/pal/pal_io.h
+    $<$<PLATFORM_ID:Windows>:pal_io_win32.cpp>
+    $<$<NOT:$<PLATFORM_ID:Windows>>:pal_io_posix.cpp>
     )
 
 target_compile_features(chaos_pal PUBLIC cxx_std_17)

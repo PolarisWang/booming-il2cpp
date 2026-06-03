@@ -103,4 +103,12 @@ bool PalVirtualAllocIsValid(const void* /*ptr*/) noexcept {
     return true;  // POSIX: munmap is safe on any mapped address.
 }
 
+bool PalCanJit() noexcept {
+#if defined(CHAOS_IL2CPP_TARGET_PLATFORM_IOS)
+    return false;  // iOS W^X enforcement: no executable memory allocation.
+#else
+    return true;
+#endif
+}
+
 }  // namespace chaos::il2cpp::pal

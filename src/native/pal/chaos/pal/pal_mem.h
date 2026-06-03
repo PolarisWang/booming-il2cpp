@@ -71,6 +71,11 @@ size_t PalVirtualQuery(const void* addr, void* out_info, size_t info_size) noexc
 /// On POSIX: always returns true (munmap is safe on any mapped address).
 bool PalVirtualAllocIsValid(const void* ptr) noexcept;
 
+/// Returns true if the platform supports JIT compilation (i.e., allocating
+/// executable memory at runtime).  Returns false on iOS (W^X enforcement).
+/// Mac desktop and all other platforms return true.
+bool PalCanJit() noexcept;
+
 }  // namespace chaos::il2cpp::pal
 
 #endif  // CHAOS_IL2CPP_PAL_MEM_H_

@@ -173,8 +173,21 @@ add_library(chaos_runtime_core STATIC
     tier_manager.h
     tier_manager.cpp
     )
-target_compile_features(chaos_runtime_core PUBLIC cxx_std_17)
-target_compile_definitions(chaos_runtime_core PUBLIC NOMINMAX CHAOS_IL2CPP_HAS_TIER_MANAGER)
+# ── 执行引擎配置（编译时常量）─────────────────────────────────────
+# 选择 ExecutionConfig 平台配置，控制 JIT/AOT 引擎的激活状态。
+# 通过 -DCHAOS_IL2CPP_EXEC_PROFILE=desktop|mobile-release|test-only 设置。
+# 默认 desktop（开发调试全模式）。
+option(CHAOS_IL2CPP_EXEC_PROFILE "Execution engine profile: desktop|mobile-release|test-only" "desktop")
+if(CHAOS_IL2CPP_EXEC_PROFILE STREQUAL "mobile-release")
+    target_compile_definitions(chaos_runtime_core PUBLIC
+        CHAOS_IL2CPP_RUNTIME_CONFIG_FILE="runtime-config/mobile-release.h")
+elseif(CHAOS_IL2CPP_EXEC_PROFILE STREQUAL "test-only")
+    target_compile_definitions(chaos_runtime_core PUBLIC
+        CHAOS_IL2CPP_RUNTIME_CONFIG_FILE="runtime-config/test-only.h")
+else()
+    target_compile_definitions(chaos_runtime_core PUBLIC
+        CHAOS_IL2CPP_RUNTIME_CONFIG_FILE="runtime-config/desktop.h")
+endif()
 
 # ── GC feature selection (G-29: compile-time feature toggles) ──────
 #
@@ -240,7 +253,8 @@ target_include_directories(
         "${CMAKE_CURRENT_LIST_DIR}"
         "${CMAKE_CURRENT_LIST_DIR}/gc"
         "${CMAKE_CURRENT_LIST_DIR}/runtime_stubs"
-        "${REPO_ROOT}/third_party/unordered_dense/include")
+        "${REPO_ROOT}/third_party/unordered_dense/include"
+        "${REPO_ROOT}/cmake")
 
 target_link_libraries(chaos_runtime_core PUBLIC chaos_fmt chaos_common)
 if(WIN32)

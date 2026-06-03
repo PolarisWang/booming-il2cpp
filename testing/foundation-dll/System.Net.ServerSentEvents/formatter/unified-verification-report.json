@@ -1,0 +1,84 @@
+{
+  "family": "formatter",
+  "assembly": "System.Net.ServerSentEvents",
+  "mode": "strict",
+  "timestamp": "2026-05-29T09:50:09",
+  "duration_ms": 2417,
+  "overall_status": "failed",
+  "stages": {
+    "preflight": {
+      "stage": "preflight",
+      "status": "passed",
+      "summary": "2 methods, 1 custom entries",
+      "details": {
+        "methodCount": 2,
+        "customMethodCount": 1,
+        "hasCustomEntryFile": false,
+        "customMethods": [
+          "System.Net.ServerSentEvents/System.Net.ServerSentEvents.SseFormatter::WriteAsync{T}:System.Threading.Tasks.Task(System.Collections.Generic.IAsyncEnumerable{System.Net.ServerSentEvents.SseItem{T}},System.IO.Stream,System.Action{System.Net.ServerSentEvents.SseItem{T},System.Buffers.IBufferWriter{System.Byte}},System.Threading.CancellationToken)"
+        ]
+      },
+      "errors": [],
+      "duration_ms": 0
+    },
+    "codegen": {
+      "stage": "codegen",
+      "status": "failed",
+      "summary": "/home/debian/agent/booming-il2cpp/testing/foundation-dll/System.Net.ServerSentEvents/formatter/managed/subjects/FormatterSubjects.cs(11,18): error CS0234: 命名空间“System.Net”中不存在类型或命名空间名“ServerSentEvents”(是否缺少程序集引用?) [/home/debian/agent/booming-il2cpp/testing/foundation-dll/System.Net.ServerSentEvents/formatter/managed/subjects/FormatterSubjects.csproj]\n\n生成失败。\n\n/home/debian/agent/booming-il2cpp/testing/foundation-dll/System.Net.ServerSentEvents/formatter/managed/subjects/FormatterSubjects.cs(11,18): error CS0234: 命名空间“System.Net”中不存在类型或命名空间名“ServerSentEvents”(是否缺少程序集引用?) [/home/debian/agent/booming-il2cpp/testing/foundation-dll/System.Net.ServerSentEvents/formatter/managed/subjects/FormatterSubjects.csproj]\n    0 个警告\n    1 个错误\n\n已用时间 00:00:01.01\n",
+      "details": {
+        "steps": {
+          "build_subjects": "FAILED"
+        }
+      },
+      "errors": [],
+      "duration_ms": 2417
+    }
+  },
+  "coverage": {
+    "methodCoverage": 0.0,
+    "testedRate": 0.0,
+    "overall": 0.0
+  },
+  "dashboard": {
+    "interpreter": {},
+    "irTranslation": {
+      "totalMethods": 2,
+      "okCount": 0,
+      "failedCount": 2,
+      "overallIrExpansionRatio": 0,
+      "averageExpansionRatio": 0,
+      "maxExpansionRatio": 0,
+      "jitInstructionAvg": 0,
+      "aotInstructionAvg": 13.0,
+      "totalExternalRuntimeCalls": 0,
+      "totalVirtualDispatches": 0,
+      "totalBoxingOps": 0,
+      "topInstructionCategories": {
+        "external_runtime_call": 1
+      }
+    },
+    "performance": {},
+    "hotupdate": {},
+    "keyRatios": {
+      "nativeFasterRatio": 0,
+      "irExpansionRatio": 0,
+      "interpreterSlowdownFactor": 0,
+      "asmPassRate": 0.0
+    }
+  },
+  "regression": {
+    "benchmark": {
+      "status": "no_baseline",
+      "message": "Baseline auto-created from this run",
+      "currentMetrics": {
+        "totalMethods": 2,
+        "matchedCount": 0,
+        "nativeFasterCount": 0,
+        "managedFasterCount": 0,
+        "averageSpeedupPercent": 0.0
+      }
+    },
+    "hasRegression": false,
+    "regressions": []
+  }
+}

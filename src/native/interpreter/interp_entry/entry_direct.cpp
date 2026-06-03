@@ -18,11 +18,15 @@
 #include "register_vm_profiler.h"
 
 #include <chaos/log.h>
+#include <chaos/pal/pal_mem.h>
+#include <chaos/runtime/execution_config.h>
 
 #include <stdexcept>
 #include <vector>
 
 namespace chaos::il2cpp::runtime_core {
+
+using chaos::il2cpp::runtime::kRuntimeConfig;
 
 // Forward declaration of the interpreter frame scanner registration.
 void RegisterInterpFrameScanner() noexcept;
@@ -390,11 +394,12 @@ static void TryTierUpgrade(PatchMethod* patch_method, uint32_t call_count,
     }
 
     // T3→T4: Trigger native codegen (JIT)
-#ifdef CHAOS_IL2CPP_JIT_MODE
-    auto t4_tier = patch_method->tier_state.load(std::memory_order_acquire);
-    if (t4_tier == PatchMethod::kJitSkip) {
-        // Permanently skipped — never retry codegen
-    } else if (t4_tier == PatchMethod::kOptimizedRegister) {
+    if constexpr (kRuntimeConfig.jit) {
+        if (!chaos::il2cpp::pal::PalCanJit()) return;
+        auto t4_tier = patch_method->tier_state.load(std::memory_order_acquire);
+        if (t4_tier == PatchMethod::kJitSkip) {
+            // Permanently skipped — never retry codegen
+        } else if (t4_tier == PatchMethod::kOptimizedRegister) {
         uint32_t backoff_base = PatchMethod::kJitThreshold + patch_method->codegen_fail_count * 1000;
         if (call_count >= backoff_base) {
             uint32_t t4_expected = PatchMethod::kOptimizedRegister;
@@ -409,6 +414,35 @@ static void TryTierUpgrade(PatchMethod* patch_method, uint32_t call_count,
                     cfg.cooperative_fn = reinterpret_cast<void*>(&chaos::il2cpp::runtime_core::threading::EnterCooperativeMode);
                     cfg.preemptive_fn = reinterpret_cast<void*>(&chaos::il2cpp::runtime_core::threading::EnterPreemptiveMode);
                     cfg.pic_dispatch_data = patch_method->pic_dispatch_data;
+                    // Build per-instruction PIC data for inline monomorphic dispatch
+                    // Extracts the first (hottest) PIC slot from each PicDispatchChain and
+                    // populates a PerInstrPicData[] array indexed by instruction index.
+                    // When non-null, the JIT engine emits an inline type-check + direct call
+                    // for CallVirt instructions, bypassing the CodegenCallVirt C helper.
+                    cfg.per_instr_pic_count = patch_method->reg_ir_instr_count;
+                    if (cfg.pic_dispatch_data != nullptr && cfg.per_instr_pic_count > 0) {
+                        const auto* data_ptr = static_cast<const uint8_t*>(cfg.pic_dispatch_data);
+                        uint32_t chain_count = *reinterpret_cast<const uint32_t*>(data_ptr);
+                        const auto* chains = reinterpret_cast<const PicDispatchChain*>(
+                            data_ptr + sizeof(uint32_t));
+                        auto* pic_arr = static_cast<PerInstrPicData*>(
+                            std::calloc(cfg.per_instr_pic_count, sizeof(PerInstrPicData)));
+                        for (uint32_t ci = 0; ci < chain_count; ++ci) {
+                            uint32_t ii = chains[ci].instruction_idx;
+                            if (ii >= cfg.per_instr_pic_count) continue;
+                            auto& pd = pic_arr[ii];
+                            for (uint32_t s = 0; s < 3; ++s) {
+                                if (chains[ci].slots[s].type_token != 0 &&
+                                    chains[ci].slots[s].direct_fn != nullptr) {
+                                    pd.expected_type_tokens[s] = static_cast<uint32_t>(
+                                        chains[ci].slots[s].type_token);
+                                    pd.direct_fns[s] = chains[ci].slots[s].direct_fn;
+                                    pd.slot_count = s + 1;
+                                }
+                            }
+                        }
+                        cfg.per_instr_pic = pic_arr;
+                    }
                     cfg.dispatch_ctx = dispatch_ctx;
                     cfg.call_cache = patch_method->call_cache;
                     cfg.call_cache_count = patch_method->reg_ir_instr_count;
@@ -417,6 +451,10 @@ static void TryTierUpgrade(PatchMethod* patch_method, uint32_t call_count,
                     cfg.method_token = patch_method->token;
                     cfg.method_module_id = patch_method->module_id;
                     auto* nm = jit::Compile(*reg_m, cfg);
+                    if (cfg.per_instr_pic != nullptr) {
+                        std::free(const_cast<PerInstrPicData*>(cfg.per_instr_pic));
+                        cfg.per_instr_pic = nullptr;
+                    }
                     patch_method->cached_native_method = nm;
                     if (nm != nullptr) {
                         if (nm->slot_map_data != nullptr) {
@@ -443,9 +481,7 @@ static void TryTierUpgrade(PatchMethod* patch_method, uint32_t call_count,
             }
         }
     }
-#else
-    // JIT disabled: stay in optimized interpreter for all methods.
-#endif
+    }  // if constexpr (jit)
 }
 
 void InterpreterEntryDirect(
@@ -568,8 +604,7 @@ void InterpreterEntryDirect(
 
 
     // ── Step A: Native code path (T4) ────────────────────────────────
-    {
-#ifdef CHAOS_IL2CPP_JIT_MODE
+    if constexpr (kRuntimeConfig.jit) {
         auto t4_tier = patch_method->tier_state.load(std::memory_order_acquire);
         if (t4_tier >= PatchMethod::kJitted) {
             auto* nm = patch_method->cached_native_method;
@@ -600,8 +635,6 @@ void InterpreterEntryDirect(
                 }
             }
         }
-#else
-#endif
     }
     {
         auto* reg_m = static_cast<interpreter::RegisterMethod*>(

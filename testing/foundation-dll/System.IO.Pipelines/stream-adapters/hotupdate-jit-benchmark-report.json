@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.IO.Pipelines",
+  "familyId": "family/System.IO.Pipelines/stream/adapters",
+  "methodResults": [
+    {
+      "methodIndex": 0,
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.StreamPipeExtensions::CopyToAsync:System.Threading.Tasks.Task(System.IO.Stream,System.IO.Pipelines.PipeWriter,System.Threading.CancellationToken)",
+      "status": "failed",
+      "error": "{\"elapsedMilliseconds\":-1.0,\"error\":\"invalid index\"}\nGC|region|active=4|total_allocated=268435456\n[2026-05-29T09:49:56][DEBUG][GcLowMem] low-memory monitor: unsupported platform, skipping\n[2026-05-29T09:49:56][DEBUG][codegen] T4 signal handlers registered (SIGSEGV, SIGBUS, SIGUSR1)\n[2026-05-29T09:49:56][DEBUG][GcEvents] registered callback 0x5622df660d01 at slot 0\n[2026-05-29T09:49:56][DEBUG][codegen] T4 signal handlers registered (SIGSEGV, SIGBUS, SIGUSR1)\n[2026-05-29T09:49:56][DEBUG][GcEvents] registered callback 0x5622df660d01 at slot 1\n[2026-05-29T09:49:56][WARN][CRAG] slot_map_section_entry_size_mismatch: expected>=%u, got=%u\n"
+    }
+  ],
+  "summary": {
+    "totalMethods": 1,
+    "nonStubMethods": 0,
+    "averageSlowdownPercent": 0.0,
+    "slowdownFactor": 1.0,
+    "slowdownThresholdX": 50.0
+  }
+}
