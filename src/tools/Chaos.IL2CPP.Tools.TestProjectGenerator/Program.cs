@@ -708,6 +708,32 @@ public static class Program
             try { File.Delete(file); }
             catch { /* best-effort */ }
         }
+
+        // Clean stale generated page files from codegen/assembly/generated/
+        // directories. These survive cleanup because codegen/ is kept, but old
+        // page*.cpp files from previous runs (with different page counts) would
+        // be copied to subjects/ and compiled, causing C2065 errors for symbols
+        // that no longer exist in the current codegen output.
+        var codegenBase = Path.Combine(outputDir, "codegen");
+        if (Directory.Exists(codegenBase))
+        {
+            foreach (var assemblyDir in Directory.GetDirectories(codegenBase))
+            {
+                var genDir = Path.Combine(assemblyDir, "generated");
+                if (!Directory.Exists(genDir)) continue;
+                foreach (var stale in Directory.GetFiles(genDir, "native-aot.generated.page*.cpp"))
+                    TryDeleteFile(stale);
+                foreach (var stale in Directory.GetFiles(genDir, "native-aot.page-*.cpp"))
+                    TryDeleteFile(stale);
+            }
+        }
+    }
+
+    /// Best-effort file deletion (no-op if file is locked or missing).
+    private static void TryDeleteFile(string path)
+    {
+        try { File.Delete(path); }
+        catch { /* best-effort */ }
     }
 
     private static int RunEmit(string[] args)
