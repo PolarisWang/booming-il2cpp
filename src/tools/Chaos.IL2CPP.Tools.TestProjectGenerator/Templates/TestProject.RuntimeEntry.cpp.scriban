@@ -22,14 +22,9 @@
 #include <Windows.h>
 #endif
 
-// Define the log-output redirection flag declared extern in <chaos/log.h>.
-// The inline log_write() in log.h references g_log_use_stderr to decide
-// whether diagnostic log output goes to stdout or stderr.  The prebuilt
-// chaos_runtime_core.lib (SDK) does not currently export this symbol, so
-// we define it here in the entry point TU to satisfy the linker.
-namespace chaos { namespace il2cpp { namespace common { namespace log_internal {
-bool g_log_use_stderr = false;
-}}}}
+// g_log_use_stderr is now exported by the prebuilt chaos_runtime_core
+// library, so we do NOT define it here — doing so would cause a
+// multiple-definition linker error.
 
 #include <chaos/config.h>
 #include <chaos/native_types.h>
