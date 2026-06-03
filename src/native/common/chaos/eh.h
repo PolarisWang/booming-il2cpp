@@ -87,7 +87,7 @@
 // C++: RAII scope guard — runs _chaos_finally on scope exit (normal or exceptional).
 #define CHAOS_EH_TRY_FINALLY       { auto _chaos_finally_guard = \
                                        chaos::il2cpp::common::make_finally_guard(\
-                                           _chaos_finally)
+                                           _chaos_finally);
 #define CHAOS_EH_FINALLY_END       }
 
 #elif defined(CHAOS_IL2CPP_EH_WIN32_SEH)

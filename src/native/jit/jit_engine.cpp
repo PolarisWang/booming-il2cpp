@@ -1245,32 +1245,54 @@ void NativeCodeGenerator::EmitInlineDirtyCard(uint8_t obj_reg) noexcept {
     uint32_t seg_oob = buf_.pos();
     enc_.EmitJccRel32(kCC_AE, 0);           // JAE .pop_done (seg >= size → pop+done)
 
-    // ── Step 6: load g_card_l1[seg_idx] ────────────────────────────
-    // Format: g_card_l1 is unique_ptr<atomic<CardSegment*>[]>, so:
-    //   base = *(uintptr_t*)&g_card_l1  (the stored raw pointer)
-    //   seg  = *(CardSegment**)(base + seg_idx * 8)
-    buf_.EmitByte(0x53);                    // PUSH RBX (save seg_idx — using RBX since R11 is too hot)
-    // Wait — RBX is callee-saved, can't use.  Use R11 as temp.
-    // Actually, both RAX and R11 are scratch.  After g_card_l1_size
-    // check: RAX = size (no longer needed), R11 = seg_idx.
-    // Save seg_idx and load g_card_l1 pointer.
-    buf_.EmitByte(0x53);                    // PUSH RBX — actually this is wrong, RBX might be used
-    // Let me use a different approach: save seg_idx on stack (already there from earlier push)
-    // Actually [RSP] = seg_idx already, let me pop it into RDX instead.
-    // Wait, no — we POPped seg_idx into R11 above.
-    // After POP R11 and CMP, we're in the normal-path case.
-    // Stack: [RSP] = idx (from the first PUSH at compute_card)
+    // Step 6: load seg = g_card_l1[seg_idx]
+    // RAX = g_card_l1_size (dead).  R11 = seg_idx.  Stack: [RSP] = idx.
+    enc_.EmitMovImm64(AT::kScratchA, reinterpret_cast<uint64_t>(&g_card_l1));
+    enc_.EmitMovRM(AT::kScratchA, AT::kScratchA, 0);          // RAX = g_card_l1 raw ptr
+    // Manually encode MOV R11, [RAX + R11*8] - SIB addressing needed
+    // since EmitMovRM only supports [base+disp].  REX.W REX.R = 0x4C.
+    // Opcode 0x8B = MOV r64, r/m64.  ModRM: mod=00,reg=011(R11),rm=100(SIB).
+    // SIB: scale=11(8), index=011(R11), base=000(RAX).
+    buf_.EmitByte(0x4C);
+    buf_.EmitByte(0x8B);
+    buf_.EmitByte(0x1C);
+    buf_.EmitByte(0xDB);
 
-    // Hmm, I made an error in my stack accounting. Let me redo.
-    // At .compute_card: PUSH RAX(idx), PUSH RAX(seg_idx)
-    // Stack now: [RSP]=seg_idx, [RSP+8]=idx
-    // Then POP R11 (seg_idx) → stack: [RSP]=idx
-    // Then CMP R11, RAX and JAE
+    // Step 7: null-check segment pointer
+    // TEST R11,R11 -> ZF if null.  REX.W REX.B = 0x4D.
+    buf_.EmitByte(0x4D);
+    buf_.EmitByte(0x85);
+    buf_.EmitByte(0xDB);
+    uint32_t seg_null = buf_.pos();
+    enc_.EmitJccRel32(kCC_E, 0);            // JE .pop_done (seg is null)
 
-    // Now I need g_card_l1[seg_idx] where seg_idx is in R11.
-    // Let me use the stack for temp: push seg_idx back, load g_card_l1 pointer, pop seg_idx
-    buf_.EmitByte(0x53);                    // PUSH RBX — WRONG! Let me redo this whole function.
-    // I need to PUSH R11 (seg_idx) but R11 is > 7 so I need REX.B
+    // Step 8: seg->cards[card_idx] = 0xFF (unconditional)
+    buf_.EmitByte(0x58);                    // POP RAX (idx) -> stack clean
+    buf_.EmitByte(0x83);                    // AND r/m32, imm8 (32-bit ops zero-extend)
+    buf_.EmitByte(0xE0);                    // ModRM: mod=11, reg=4(/4 AND), rm=0(RAX)
+    buf_.EmitByte(0x7F);                    // imm8 = 127 -> RAX = card_idx
+    // MOV byte ptr [R11 + RAX], 0xFF via SIB
+    buf_.EmitByte(0x41);                    // REX.B (base=R11 in SIB)
+    buf_.EmitByte(0xC6);                    // MOV r/m8, imm8
+    buf_.EmitByte(0x04);                    // ModRM: mod=00, reg=0(/0), rm=SIB
+    buf_.EmitByte(0x03);                    // SIB: scale=1, index=RAX, base=R11
+    buf_.EmitByte(0xFF);                    // imm8 = 0xFF
+    uint32_t after_write = buf_.pos();
+    buf_.EmitByte(0xEB);                    // JMP rel8 (skip over .pop_done)
+    buf_.EmitByte(0x00);                    // placeholder, patched below
+
+    // .pop_done: pop idx, fall through to .done
+    uint32_t pop_done = buf_.pos();
+    buf_.Patch32(seg_oob + 2, pop_done - (seg_oob + 6));
+    buf_.Patch32(seg_null + 2, pop_done - (seg_null + 6));
+    buf_.EmitByte(0x58);                    // POP RAX (idx)
+
+    // .done: all paths converge
+    uint32_t done_pos = buf_.pos();
+    buf_.Patch32(done_1 + 2, done_pos - (done_1 + 6));
+    buf_.Patch32(done_2 + 2, done_pos - (done_2 + 6));
+    int8_t jmp_offset = static_cast<int8_t>(done_pos - (after_write + 2));
+    buf_.Patch8(after_write + 1, static_cast<uint8_t>(jmp_offset));
 }
 
 bool NativeCodeGenerator::EmitInstruction(const interpreter::RegisterInstruction& instr) noexcept {

@@ -30,6 +30,7 @@ target_compile_features(chaos::runtime INTERFACE
 target_link_libraries(chaos::runtime INTERFACE
     "$<$<CXX_COMPILER_ID:MSVC>:${CHAOS_SDK_ROOT}/lib/chaos_common.lib>"
     "$<$<CXX_COMPILER_ID:MSVC>:${CHAOS_SDK_ROOT}/lib/chaos_support.lib>"
+    "$<$<CXX_COMPILER_ID:MSVC>:${CHAOS_SDK_ROOT}/lib/chaos_pal.lib>"
     "$<$<CXX_COMPILER_ID:MSVC>:${CHAOS_SDK_ROOT}/lib/chaos_fmt.lib>"
     "$<$<CXX_COMPILER_ID:MSVC>:${CHAOS_SDK_ROOT}/lib/chaos_runtime_core.lib>"
     "$<$<CXX_COMPILER_ID:MSVC>:${CHAOS_SDK_ROOT}/lib/chaos_interpreter.lib>"
@@ -47,6 +48,7 @@ if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
       "-Wl,--start-group"
       "${CHAOS_SDK_ROOT}/lib/libchaos_common.a"
       "${CHAOS_SDK_ROOT}/lib/libchaos_support.a"
+      "${CHAOS_SDK_ROOT}/lib/libchaos_pal.a"
       "${CHAOS_SDK_ROOT}/lib/libchaos_fmt.a"
       "${CHAOS_SDK_ROOT}/lib/libchaos_runtime_core.a"
       "${CHAOS_SDK_ROOT}/lib/libchaos_interpreter.a"

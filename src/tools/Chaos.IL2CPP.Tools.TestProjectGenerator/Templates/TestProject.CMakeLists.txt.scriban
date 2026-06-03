@@ -88,6 +88,9 @@ list(REMOVE_ITEM CHAOS_RUNTIME_STUB_SOURCES
     "${CHAOS_SDK_DIR}/runtime_stubs/guid_stubs.cpp"
     "${CHAOS_SDK_DIR}/runtime_stubs/threading_stubs.cpp"
     "${CHAOS_SDK_DIR}/runtime_stubs/threadpool_events.cpp"
+    "${CHAOS_SDK_DIR}/runtime_stubs/crt_stubs.cpp"
+    "${CHAOS_SDK_DIR}/runtime_stubs/mutex_stubs_win32.cpp"
+    "${CHAOS_SDK_DIR}/runtime_stubs/pal_time_stub.cpp"
 )
 
 # PROFILE globals (compiled from source to avoid stale SDK lib dependency)
@@ -129,5 +132,8 @@ set(CHAOS_ENTRY_INCLUDES
 add_executable({{ project_name }} ${CHAOS_ENTRY_SOURCES})
 target_include_directories({{ project_name }} PRIVATE ${CHAOS_ENTRY_INCLUDES})
 target_compile_options({{ project_name }} PRIVATE ${CHAOS_EHA_FLAG})
-target_link_libraries({{ project_name }} PRIVATE chaos::runtime "${CHAOS_SDK_DIR}/lib/chaos_pal.lib")
+target_link_libraries({{ project_name }} PRIVATE chaos::runtime
+    "$<$<CXX_COMPILER_ID:MSVC>:${CHAOS_SDK_DIR}/lib/chaos_pal.lib>"
+    "$<$<NOT:$<CXX_COMPILER_ID:MSVC>>:${CHAOS_SDK_DIR}/lib/libchaos_pal.a>"
+)
 target_link_options({{ project_name }} PRIVATE ${CHAOS_FORCE_MULTIPLE})
