@@ -59,7 +59,7 @@ inline int32_t ChaosDispatchMethod(
     const HotpatchEntryV0* entries,
     int32_t count,
     int32_t index,
-    void (* const* thunks)() noexcept = nullptr) noexcept
+    void (* const* thunks)() noexcept = nullptr)
 {
     if (index < 0 || index >= count) return -1;
     auto& entry = entries[index];
@@ -138,7 +138,7 @@ inline int32_t ChaosDispatchMethodBench(
     const HotpatchEntryV0* entries,
     int32_t count,
     int32_t index,
-    void (* const* thunks)() noexcept = nullptr) noexcept
+    void (* const* thunks)() noexcept = nullptr)
 {
     if (index < 0 || index >= count) return -1;
     auto& entry = entries[index];
@@ -170,7 +170,7 @@ inline int32_t ChaosDispatchMethodBench(
 inline int32_t ChaosDispatchMethodBenchDirect(
     const HotpatchEntryV0* entries,
     int32_t count,
-    int32_t index) noexcept
+    int32_t index)
 {
     if (index < 0 || index >= count) return -1;
     auto& entry = entries[index];
@@ -214,7 +214,7 @@ inline int64_t ChaosDispatchMethodGetValue(
     const HotpatchEntryV0* entries,
     int32_t count,
     int32_t index,
-    void (* const* thunks)() noexcept = nullptr) noexcept
+    void (* const* thunks)() noexcept = nullptr)
 {
     if (index < 0 || index >= count) return INT64_MIN;
     auto& entry = entries[index];

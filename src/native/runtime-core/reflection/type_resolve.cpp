@@ -2,6 +2,8 @@
 // Type resolution
 // =====================================================================
 
+#include <chaos/type_info.h>
+
 extern "C" {
 namespace chaos::il2cpp::runtime_core {
 
@@ -177,6 +179,26 @@ CHAOS_IL2CPP_INTPTR ChaosReflectionGetTypeByName(
     }
 
     return 0;
+}
+
+// ── Stable ID → type descriptor (for TypeInfoHot* resolution) ────────────
+// Scans the dynamically registered external types (set up by codegen's
+// ChaosRegisterEnumGeneratedMetadata) and returns the type descriptor whose
+// computed stable_id matches.  Returns nullptr on no match.
+// Used by enum_resolve_meta in enum_stubs.cpp to handle TypeInfoHot* raw
+// pointers that don't carry codegen pseudo-handles or tagged handles.
+extern "C" const ReflectionQueryTypeDescriptor* ChaosFindExternalTypeDescByStableId(
+    CHAOS_IL2CPP_UINT64 stable_id) noexcept
+{
+    for (CHAOS_IL2CPP_UINT32 i = 0u; i < s_dynamicTypeCount; i++) {
+        auto* tdesc = s_dynamicTypes[i].type_desc;
+        if (tdesc != nullptr && tdesc->subject_id_utf8 != nullptr) {
+            if (chaos_compute_type_stable_id(tdesc->subject_id_utf8) == stable_id) {
+                return tdesc;
+            }
+        }
+    }
+    return nullptr;
 }
 
 }  // namespace chaos::il2cpp::runtime_core

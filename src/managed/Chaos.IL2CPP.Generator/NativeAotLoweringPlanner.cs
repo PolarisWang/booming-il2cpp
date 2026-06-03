@@ -3819,6 +3819,25 @@ public sealed partial class NativeAotLoweringPlanner
             }
         }
 
+        // Deduplicate subject entries by subject_index — each unique subject
+        // produces both a wrapper and the actual method body (2 entries) but
+        // the slot map should expose only one entry per subject (the wrapper).
+        // Keeping both causes the fact runner to iterate 2× expected subjects
+        // and the wrappers lack EH catch blocks, so noexcept violations in the
+        // actual method propagate to the fact runner's outer catch as abort().
+        var seenSubjectIndices = new HashSet<int>();
+        var deduped = new List<ScriptObject>(subjectEntries.Count);
+        foreach (var se in subjectEntries)
+        {
+            if (seenSubjectIndices.Add((int)se["subject_index"]))
+                deduped.Add(se);
+        }
+        if (deduped.Count < subjectEntries.Count)
+        {
+            Console.Error.WriteLine($"[SUBJECT-DEDUP] Removed {subjectEntries.Count - deduped.Count} duplicate subject entries (wrapper+actual → one per subject)");
+            subjectEntries = deduped;
+        }
+
         // Filter subject entries to only reference method indices that have
         // corresponding dispatch entries in s_hotpatch_entries[].
         // GetHotpatchableMethods() (used by BuildHotpatchTable) returns fewer
