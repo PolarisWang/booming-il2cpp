@@ -46,7 +46,8 @@ target_include_directories(
 target_link_libraries(
     chaos_interpreter
     PUBLIC
-        chaos_runtime_core)
+        chaos_runtime_core
+        chaos_jit)
 target_link_libraries(
     chaos_interpreter
     PRIVATE

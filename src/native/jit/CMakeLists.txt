@@ -25,8 +25,10 @@ target_compile_features(chaos_jit PUBLIC cxx_std_17)
 target_compile_options(chaos_jit PRIVATE $<$<CXX_COMPILER_ID:MSVC>:/utf-8>)
 
 # Propagate to consumers: they get this define so they can skip stubs for
-# symbols provided by jit_seh.cpp.
-target_compile_definitions(chaos_jit INTERFACE CHAOS_IL2CPP_HAS_T4_SEH_HANDLER=1)
+# symbols provided by jit_seh.cpp, and enable JIT tier-up (T3→T4).
+target_compile_definitions(chaos_jit INTERFACE
+    CHAOS_IL2CPP_HAS_T4_SEH_HANDLER=1
+    CHAOS_IL2CPP_JIT_MODE=1)
 
 target_include_directories(
     chaos_jit

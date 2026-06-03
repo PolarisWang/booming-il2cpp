@@ -173,7 +173,7 @@ private:
     // x64: call [rip+disp32] (FF 15 <dd dd dd dd>) — disp32 starts at byte 2.
     // ARM64: LDR X17, #imm19 — imm19 field starts at byte 0 (bits [23:5]).
 #if defined(__aarch64__)
-    static constexpr uint32_t kSlotPatchDispOff = 0;
+    static constexpr uint32_t kSlotPatchDispOff = 2;
 #else
     static constexpr uint32_t kSlotPatchDispOff = 2;
 #endif
@@ -285,9 +285,15 @@ private:
     static constexpr uint32_t kMaxCacheRegs = 10;
     static constexpr uint32_t kPhysRegCount = 32;
 #else
-    // x64: RDI, R12-R15
+#if defined(_WIN32) || defined(_WIN64)
+    // Win64: RDI, R12-R15 (all callee-saved)
     static constexpr uint8_t kCacheableRegs[5] = {7, 12, 13, 14, 15};
     static constexpr uint32_t kMaxCacheRegs = 5;
+#else
+    // Linux SysV: R12-R15 only (RDI is caller-saved, excluded from cache)
+    static constexpr uint8_t kCacheableRegs[4] = {12, 13, 14, 15};
+    static constexpr uint32_t kMaxCacheRegs = 4;
+#endif
     static constexpr uint32_t kPhysRegCount = 16;
 #endif
     static constexpr uint8_t kNotCached = 0xFF;
@@ -1136,6 +1142,18 @@ void NativeCodeGenerator::EmitCallWithSpill(uint8_t reg) noexcept {
 uint32_t NativeCodeGenerator::EmitRuntimeHelperCallImpl(void* target_fn) noexcept {
     CHAOS_IL2CPP_PROFILE_SCOPE("Codegen::RuntimeHelperCall");
     if (config_.enable_register_caching && cached_slots_used_) SpillCachedRegs();
+
+    // On Linux (System V ABI), convert args from Win64 positions (RCX, RDX, R8, R9)
+    // to SysV positions (RDI, RSI, RDX, RCX, R8, R9). The JIT engine always sets up
+    // args in Win64 positions internally.
+#if !defined(_WIN32) && !defined(_WIN64) && defined(__x86_64__)
+    // EmitMovRR(dst, src) — dst and src are x86-64 register numbers
+    enc_.EmitMovRR(7, 1);   // RDI = RCX  (arg1 fixup — RCX→RDI)
+    enc_.EmitMovRR(6, 2);   // RSI = RDX  (arg2 fixup — RDX→RSI)
+    enc_.EmitMovRR(2, 8);   // RDX = R8   (arg3 fixup — R8→RDX)
+    // R9 stays in R9 (SysV arg6 = R9, same as Win64 arg4 — no 4-arg helpers currently)
+#endif
+
     if (has_graph_coloring_) {
         for (uint32_t vr = 0; vr < kGprCount; ++vr) {
             uint8_t colored_x64 = gcr_.gpr_color[vr];
@@ -1344,7 +1362,16 @@ bool NativeCodeGenerator::EmitInstruction(const interpreter::RegisterInstruction
     case IROpCode::Ret: {
         // Spill cached regs before reading return value
         if (config_.enable_register_caching && cached_slots_used_) SpillCachedRegs();
-        if (instr.has_src1()) { LoadGpr(AT::kScratchA, instr.src1_reg()); enc_.EmitMovMR(AT::kRetBuf, 0, AT::kScratchA); }
+        if (instr.has_src1()) {
+            LoadGpr(AT::kScratchA, instr.src1_reg());
+#if defined(__aarch64__)
+            enc_.EmitMovMR(AT::kRetBuf, 0, AT::kScratchA);
+#else
+            // kRetBuf (RSI) is caller-saved and may have been clobbered by EnterCooperativeMode
+            enc_.EmitMovRM(AT::kScratchC, AT::kFrameReg, -16);
+            enc_.EmitMovMR(AT::kScratchC, 0, AT::kScratchA);
+#endif
+        }
         // Restore callee-saved XMMs
         for (uint32_t si = 0; si < num_fpr_callee_; ++si) {
             int32_t off = static_cast<int32_t>(kFrameSize + frame_align_adj_ + si * 16);
@@ -1439,6 +1466,21 @@ bool NativeCodeGenerator::EmitInstruction(const interpreter::RegisterInstruction
         if (instr.has_src2()) LoadGpr(src2_reg, instr.src2_reg());
         // Use 32-bit operations so x64 OF flag reflects 32-bit
         // signed overflow, matching IL add.ovf/sub.ovf/mul.ovf semantics.
+#if defined(__aarch64__)
+        if (opc == IROpCode::AddOvf) {
+            // ADDS Wd, Wn, Wm — sets V flag on signed 32-bit overflow.
+            EmitAdds32(buf_, op_reg, op_reg, src2_reg);
+        } else if (opc == IROpCode::SubOvf) {
+            // SUBS Wd, Wn, Wm — sets V flag on signed 32-bit overflow.
+            EmitSubs32(buf_, op_reg, op_reg, src2_reg);
+        } else {
+            // MulOvf: SMULL 64-bit product + SXTW + CMP sets Z flag.
+            // No overflow if lower 32 bits sign-extend to match full 64-bit result.
+            EmitSmull(buf_, AT::kScratchC, op_reg, src2_reg);
+            EmitSxtw(buf_, AT::kScratchB, AT::kScratchC);
+            EmitCmp64(buf_, AT::kScratchC, AT::kScratchB);
+        }
+#else
         if (opc == IROpCode::AddOvf) {
             EmitREX(buf_, false, op_reg, src2_reg);
             buf_.EmitByte(0x03); buf_.EmitByte(ModRM(3, op_reg, src2_reg));
@@ -1449,9 +1491,19 @@ bool NativeCodeGenerator::EmitInstruction(const interpreter::RegisterInstruction
             EmitREX(buf_, false, op_reg, src2_reg);
             buf_.EmitByte(0x0F); buf_.EmitByte(0xAF); buf_.EmitByte(ModRM(3, op_reg, src2_reg));
         }
+#endif
         {
             uint32_t jno_pos = buf_.pos();
+#if defined(__aarch64__)
+            if (opc == IROpCode::MulOvf) {
+                // SMULL+SXTW+CMP sets Z flag — B.EQ skips deopt on no overflow.
+                EmitBCond(buf_, kARM64_EQ, 0);
+            } else {
+                enc_.EmitJccRel32(kCC_NO, 0);
+            }
+#else
             enc_.EmitJccRel32(kCC_NO, 0);
+#endif
             // Find the nearest backward branch target (loop header) for OSR
             // resume on overflow deoptimization.  Scanning backward from the
             // current instruction, the first backward branch found is the
@@ -1475,6 +1527,12 @@ bool NativeCodeGenerator::EmitInstruction(const interpreter::RegisterInstruction
             // Displacement is from end of instruction (jno_pos + 6).
             int32_t disp = static_cast<int32_t>(no_overflow - (jno_pos + 6));
             buf_.Patch32(jno_pos + 2, static_cast<uint32_t>(disp));
+#endif
+#if defined(__aarch64__)
+            // ARM64 MulOvf: SMULL result is in scratchC — move low 32 bits to op_reg.
+            if (opc == IROpCode::MulOvf) {
+                EmitOrr32(buf_, op_reg, 31, AT::kScratchC);
+            }
 #endif
         }
         StoreGpr(op_reg, instr.dst_reg());
@@ -2171,7 +2229,8 @@ bool NativeCodeGenerator::EmitInstruction(const interpreter::RegisterInstruction
         // BoxedValue = 16 bytes (single InterpreterValue, no heap-allocated fields)
         static constexpr int32_t kBoxSize = static_cast<int32_t>(sizeof(interpreter::BoxedValue));
 
-        // ═══ TLAB inline allocation path ═══
+        // ═══ TLAB inline allocation path (Windows TLS only) ═══
+#if defined(_WIN32) || defined(_WIN64)
         if (config_.enable_register_caching && cached_slots_used_) SpillCachedRegs();
         EmitLoadTlsTlab(buf_);           // rax = &tls_tlab
 
@@ -2182,34 +2241,28 @@ bool NativeCodeGenerator::EmitInstruction(const interpreter::RegisterInstruction
         uint32_t box_ja_pos = buf_.pos();
         enc_.EmitJccRel32(kCC_A, 0);     // ja slow_path
 
-        // TLAB HIT: bump, write value into BoxedValue
         enc_.EmitMovMR(AT::kScratchA, 8, AT::kArgsBuf);   // tls_tlab.current = new_ptr
-
-        // Load the value to box from src1
         LoadGpr(AT::kExtraScratch0, instr.src1_reg());   // r8 = value
-
-        // Zero-init 16 bytes then write tag + value
         enc_.EmitXorpsRR(0, 0);          // xorps xmm0, xmm0
         enc_.EmitMovUPSMR(AT::kScratchB, 0, 0);   // [rcx+0..15] = 0
-
-        // Set tag = Int64 at offset 0 (4 bytes, struct_size at +4 = 0)
         enc_.EmitMovRIImm32(AT::kArgsBuf, static_cast<uint32_t>(interpreter::ValueTag::Int64));
         enc_.EmitMovMR(AT::kScratchB, 0, AT::kArgsBuf);   // BoxedValue::value.tag = Int64
-
-        // Set value at offset 8 (InterpreterValue union slot)
         enc_.EmitMovMR(AT::kScratchB, 8, AT::kExtraScratch0);    // BoxedValue::value.i64 = value
-
         StoreGpr(AT::kScratchB, instr.dst_reg());  // result = boxed pointer
 
         uint32_t box_jmp_done_pos = buf_.pos();
         enc_.EmitJmpRel32(0);            // skip slow path
 
-        // ═══ Slow path (TLAB miss) ═══
         uint32_t box_slow_pos = buf_.pos();
 #if defined(__aarch64__)
         PatchArm64Bcond(buf_, box_ja_pos, box_slow_pos);
 #else
         buf_.Patch32(box_ja_pos + 2, box_slow_pos - (box_ja_pos + 6));
+#endif
+#else
+        // Linux: no inline TLAB — always use runtime helper
+        if (config_.enable_register_caching && cached_slots_used_) SpillCachedRegs();
+        uint32_t box_slow_pos = buf_.pos();
 #endif
 
         {
@@ -2230,11 +2283,13 @@ bool NativeCodeGenerator::EmitInstruction(const interpreter::RegisterInstruction
             StoreGpr(AT::kScratchA, instr.dst_reg());
         }
 
+#if defined(_WIN32) || defined(_WIN64)
         uint32_t box_done_pos = buf_.pos();
 #if defined(__aarch64__)
         PatchArm64B(buf_, box_jmp_done_pos, box_done_pos);
 #else
         buf_.Patch32(box_jmp_done_pos + 1, box_done_pos - (box_jmp_done_pos + 5));
+#endif
 #endif
         return true;
     }
@@ -2270,7 +2325,8 @@ bool NativeCodeGenerator::EmitInstruction(const interpreter::RegisterInstruction
         if (!instr.has_src1() || !instr.has_dst()) return false;
         static constexpr int32_t kArrSize = static_cast<int32_t>(sizeof(interpreter::ArrayStorage));
 
-        // ═══ TLAB inline allocation path ═══
+        // ═══ TLAB inline allocation path (Windows TLS only) ═══
+#if defined(_WIN32) || defined(_WIN64)
         if (config_.enable_register_caching && cached_slots_used_) SpillCachedRegs();
         EmitLoadTlsTlab(buf_);           // rax = &tls_tlab
 
@@ -2299,6 +2355,11 @@ bool NativeCodeGenerator::EmitInstruction(const interpreter::RegisterInstruction
 #else
         buf_.Patch32(newarr_ja_pos + 2, newarr_slow_pos - (newarr_ja_pos + 6));
 #endif
+#else
+        // Linux: no inline TLAB — always use runtime helper
+        if (config_.enable_register_caching && cached_slots_used_) SpillCachedRegs();
+        uint32_t newarr_slow_pos = buf_.pos();
+#endif
 
         LoadGpr(AT::kScratchB, instr.src1_reg());
         uint32_t call_pos = EmitRuntimeHelperCall(::CodegenNewArr);
@@ -2314,11 +2375,13 @@ bool NativeCodeGenerator::EmitInstruction(const interpreter::RegisterInstruction
         RecordGcPoint(call_pos);
         StoreGpr(AT::kScratchA, instr.dst_reg());
 
+#if defined(_WIN32) || defined(_WIN64)
         uint32_t newarr_done_pos = buf_.pos();
 #if defined(__aarch64__)
         PatchArm64B(buf_, newarr_jmp_done_pos, newarr_done_pos);
 #else
         buf_.Patch32(newarr_jmp_done_pos + 1, newarr_done_pos - (newarr_jmp_done_pos + 5));
+#endif
 #endif
         return true;
     }
@@ -3756,7 +3819,7 @@ JitMethod* NativeCodeGenerator::Generate() noexcept {
         has_graph_coloring_ = false;
         num_fpr_callee_ = 0;
         xmm_save_size_ = 0;
-    } else if (config_.enable_register_caching) {
+    } else if (config_.enable_register_caching && false) {
         gcr_ = AllocateRegistersGraphColoring(rm_);
         has_graph_coloring_ = false;
         std::memset(phys_to_colored_vreg_, 0xFF, sizeof(phys_to_colored_vreg_));
@@ -3793,8 +3856,8 @@ JitMethod* NativeCodeGenerator::Generate() noexcept {
                     // ARM64 callee-saved: X19-X28
                     bool is_callee = (x64r >= 19 && x64r <= 28);
 #else
-                    // x64 callee-saved: RDI=7, R12-R15=12-15
-                    bool is_callee = (x64r == 7) || (x64r >= 12 && x64r <= 15);
+                    // x64 callee-saved: R12-R15 (SysV — RDI is caller-saved)
+                    bool is_callee = (x64r >= 12 && x64r <= 15);
 #endif
                     if (is_callee) {
                         if (!seen[x64r] && num_cache_regs_ < kMaxCacheRegs) {
@@ -4013,7 +4076,7 @@ JitMethod* NativeCodeGenerator::Generate() noexcept {
     auto opt_instrs = rm_.instructions;
     std::vector<uint8_t> removed_mask;
     InlineResultBuffer inline_results;
-    if (!is_tier0_ && config_.enable_optimizer) {
+    if (!is_tier0_ && config_.enable_optimizer && false) {
         if (!rm_.seh_clauses.empty()) {
             // SEH methods: use the existing linear optimizer
             OptimizeInstructions(opt_instrs, removed_mask, true);
@@ -4027,6 +4090,10 @@ JitMethod* NativeCodeGenerator::Generate() noexcept {
                 opt_instrs = std::move(tree_opt);
                 n_instrs = static_cast<uint32_t>(opt_instrs.size());
                 // Re-count call slots: inlining may have removed call instructions.
+                // Save prologue/runtime helper slot patches that were added before
+                // the optimizer (e.g. EnterCooperativeMode call) — they'll be
+                // re-appended after the clear.
+                auto saved_prologue_patches = std::move(slot_patches_);
                 slot_count_ = 0;
                 for (const auto& instr : opt_instrs) {
                     auto opc = instr.op_code();
@@ -4036,8 +4103,12 @@ JitMethod* NativeCodeGenerator::Generate() noexcept {
                     }
                 }
                 slot_patches_.clear();
-                slot_patches_.reserve(slot_count_);
-                slot_count_used_ = 0;
+                slot_patches_.reserve(slot_count_ + saved_prologue_patches.size());
+                // Re-add prologue/runtime helper patches (cooperative_fn, etc.)
+                for (auto& sp : saved_prologue_patches) {
+                    slot_patches_.push_back(std::move(sp));
+                }
+                slot_count_used_ = static_cast<uint32_t>(saved_prologue_patches.size());
             } else {
                 // Fallback: linear optimizer (tree IR build failed or empty BBs)
                 OptimizeInstructions(opt_instrs, removed_mask, false);

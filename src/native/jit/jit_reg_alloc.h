@@ -152,40 +152,53 @@ static constexpr uint32_t kFirstCalleeSavedVregColor = 8;
 static constexpr uint32_t kCalleeSavedVregColorCount = 8;
 #else
 // x64 available GPRs (9 registers):
-// Win64: RDI, R12-R15 callee-saved. R8-R11 caller-saved.
 // RBX(3)=args_buf, RBP(5)=frame, RSI(6)=ret_buf reserved.
 // RAX(0)/RCX(1)/RDX(2) excluded - implicitly clobbered by Div/Mul/Shift.
+// On Win64: RDI is callee-saved, R8-R11 caller-saved.
+// On Linux (SysV): RDI is caller-saved, R8-R11 caller-saved, R12-R15 callee-saved.
 // Color-to-physical mapping:
-//   Color 0 -> RDI  (callee)      Color 5 -> R12  (callee)
-//   Color 1 -> R8   (caller)      Color 6 -> R13  (callee)
-//   Color 2 -> R9   (caller)      Color 7 -> R14  (callee)
-//   Color 3 -> R10  (caller)      Color 8 -> R15  (callee)
+//   Color 0 -> RDI  (caller on Linux, callee on Win64)
+//   Color 1 -> R8   (caller)
+//   Color 2 -> R9   (caller)
+//   Color 3 -> R10  (caller)
 //   Color 4 -> R11  (caller)
+//   Color 5 -> R12  (callee)
+//   Color 6 -> R13  (callee)
+//   Color 7 -> R14  (callee)
+//   Color 8 -> R15  (callee)
 static constexpr uint8_t kPhysicalGprs[] = {
-     7,   // RDI - callee-saved
-     8,   // R8  - caller-saved
-     9,   // R9  - caller-saved
-    10,   // R10 - caller-saved
-    11,   // R11 - caller-saved
-    12,   // R12 - callee-saved
-    13,   // R13 - callee-saved
-    14,   // R14 - callee-saved
-    15,   // R15 - callee-saved
+     7,   // RDI
+     8,   // R8
+     9,   // R9
+    10,   // R10
+    11,   // R11
+    12,   // R12
+    13,   // R13
+    14,   // R14
+    15,   // R15
 };
 static constexpr uint32_t kNumColors = 9;
-static constexpr uint32_t kFirstCallerSavedColor = 1;
-static constexpr uint32_t kCallerSavedColorCount = 4;
-static constexpr uint32_t kFirstCalleeSavedColor = 5;
 static constexpr uint8_t kSpilled = 0xFF;
+
+// Win64: RDI callee-saved. Linux SysV: RDI caller-saved.
+// kFirstCallerSavedColor and kCallerSavedColorCount differ by platform.
+#if defined(_WIN32) || defined(_WIN64)
+static constexpr uint32_t kFirstCallerSavedColor = 1;  // R8-R11
+static constexpr uint32_t kCallerSavedColorCount = 4;
+static constexpr uint32_t kFirstCalleeSavedColor = 5;  // R12-R15
+#else
+// Linux SysV: RDI=caller-saved (color 0 joins caller group)
+static constexpr uint32_t kFirstCallerSavedColor = 0;  // RDI, R8-R11
+static constexpr uint32_t kCallerSavedColorCount = 5;
+static constexpr uint32_t kFirstCalleeSavedColor = 5;  // R12-R15
+#endif
 
 inline bool IsCallerSavedColor(uint32_t color_idx) noexcept {
     return color_idx >= kFirstCallerSavedColor &&
            color_idx < kFirstCallerSavedColor + kCallerSavedColorCount;
 }
 inline bool IsCalleeSavedColor(uint32_t color_idx) noexcept {
-    return color_idx == 0 ||
-           (color_idx >= kFirstCallerSavedColor + kCallerSavedColorCount &&
-            color_idx < kNumColors);
+    return color_idx >= kFirstCalleeSavedColor && color_idx < kNumColors;
 }
 
 // x64 XMM: 16 registers (XMM0-XMM15). XMM6-XMM15 callee-saved (Win64).
