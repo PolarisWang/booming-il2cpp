@@ -516,6 +516,13 @@ extern "C" const EnumMetadataTable* (*g_chaos_enum_dispatch_lookup)(CHAOS_IL2CPP
 extern "C" CHAOS_IL2CPP_INTPTR (*g_chaos_enum_tostring_dispatch_lookup)(
     CHAOS_IL2CPP_UINT32 fnv24, CHAOS_IL2CPP_INT64 value) noexcept = nullptr;
 
+// External type descriptor lookup by stable_id (defined in type_resolve.cpp).
+// Scans the dynamic external type registry for a type whose subject_id
+// hashes to the given stable_id.  Used by enum_resolve_meta to resolve
+// TypeInfoHot* raw pointers from AOT codegen.
+extern "C" const ReflectionQueryTypeDescriptor* ChaosFindExternalTypeDescByStableId(
+    CHAOS_IL2CPP_UINT64 stable_id) noexcept;
+
 /// Static dispatch table state for binary-search enum metadata lookup.
 /// Set by ChaosEnumRegisterDispatchTable and used by EnumDispatchLookup.
 static const EnumDispatchEntry* s_dispatch_entries = nullptr;
@@ -826,7 +833,7 @@ static const EnumMetadataTable* enum_resolve_meta(CHAOS_IL2CPP_INTPTR type_arg) 
     CHAOS_IL2CPP_PROFILE_SCOPE("enum_resolve_meta");
     // Use stable TypeInfoHandle as cache key to handle GC-moved Type objects
     CHAOS_IL2CPP_UINTPTR handle = enum_extract_type_handle(type_arg);
-    if (handle != 0 && handle == s_enum_meta_type_key) return s_enum_meta_cache;
+    if (handle != 0 && handle == s_enum_meta_type_key) { return s_enum_meta_cache; }
 
     // Negative cache: return nullptr immediately for types already confirmed
     // as non-enum (e.g. byte), skipping the expensive resolution chain entirely.
@@ -896,6 +903,53 @@ static const EnumMetadataTable* enum_resolve_meta(CHAOS_IL2CPP_INTPTR type_arg) 
                 s_enum_meta_cache = meta;
                 store_type_info_reverse_cache(type_arg, meta);
                 return meta;
+            }
+        }
+    }
+
+    // TypeInfoHot* raw pointer path: read stable_id at offset 16, then scan
+    // the external type registry (populated by codegen's `ChaosRegisterEnumGeneratedMetadata`)
+    // to find the matching type descriptor and its enum metadata table.
+    // This handles the AOT codegen case where Enum.Parse receives a raw
+    // TypeInfoHot* pointer (via AsTypeInfoHot<T>()) instead of a codegen
+    // pseudo-handle or tagged TypeInfoHandle.
+    if (type_arg != 0 && is_raw_heap_pointer(type_arg)) {
+        CHAOS_IL2CPP_UINT64 stable_id = 0;
+        std::memcpy(&stable_id,
+            reinterpret_cast<const void*>(static_cast<CHAOS_IL2CPP_UINTPTR>(type_arg) + 16),
+            sizeof(stable_id));
+        if (stable_id != 0) {
+            const auto* tdesc = ChaosFindExternalTypeDescByStableId(stable_id);
+            if (tdesc != nullptr && tdesc->subject_id_utf8 != nullptr) {
+                // Look up enum metadata via fnv24 from subject_id
+                uint32_t h = 2166136261u;
+                for (const char* s = tdesc->subject_id_utf8; *s; ++s) {
+                    h ^= static_cast<uint8_t>(*s);
+                    h *= 16777619u;
+                }
+                uint32_t fnv24 = h & 0xFFFFFFu;
+                const auto* meta = g_chaos_enum_dispatch_lookup
+                    ? g_chaos_enum_dispatch_lookup(fnv24)
+                    : nullptr;
+                if (meta == nullptr && g_chaos_resolve_enum_metadata_by_fnv24) {
+                    meta = g_chaos_resolve_enum_metadata_by_fnv24(fnv24);
+                }
+                if (meta != nullptr) {
+                    s_enum_meta_type_key = static_cast<CHAOS_IL2CPP_UINTPTR>(type_arg);
+                    s_enum_meta_cache = meta;
+                    store_type_info_reverse_cache(type_arg, meta);
+                    return meta;
+                }
+                // Also try g_chaos_resolve_enum_metadata by subject_id directly
+                if (meta == nullptr && g_chaos_resolve_enum_metadata) {
+                    meta = g_chaos_resolve_enum_metadata(tdesc->subject_id_utf8);
+                    if (meta != nullptr) {
+                        s_enum_meta_type_key = static_cast<CHAOS_IL2CPP_UINTPTR>(type_arg);
+                        s_enum_meta_cache = meta;
+                        store_type_info_reverse_cache(type_arg, meta);
+                        return meta;
+                    }
+                }
             }
         }
     }
