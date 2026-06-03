@@ -33,6 +33,16 @@
 #include <chaos/pal/pal_thread.h>
 #include <chaos/pal/pal_crash.h>
 #include <chaos/pal/pal_cache.h>
+#include <chaos/pal/pal_com.h>
+#include <chaos/pal/pal_eh.h>
+#include <chaos/pal/pal_encoding.h>
+#include <chaos/pal/pal_error.h>
+#include <chaos/pal/pal_etw.h>
+#include <chaos/pal/pal_heap.h>
 #include <chaos/pal/pal_io.h>
+#include <chaos/pal/pal_low_mem.h>
+#include <chaos/pal/pal_preempt.h>
+#include <chaos/pal/pal_random.h>
+#include <chaos/pal/pal_wakeable.h>
 
 #endif  // CHAOS_IL2CPP_PAL_H_
