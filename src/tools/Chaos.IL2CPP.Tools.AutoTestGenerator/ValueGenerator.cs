@@ -201,11 +201,6 @@ public sealed class ValueGenerator
                 collArgs[i] = $"new {csElemType}[2] {{ default({csElemType})!, default({csElemType})! }}";
                 hasCollection = true;
             }
-            else if (TryGetCollectionInterfaceExpression(t, out var populatedExpr))
-            {
-                collArgs[i] = populatedExpr;
-                hasCollection = true;
-            }
         }
         if (hasCollection)
             AddUnique(sets, usedSignatures, methodIndex, collArgs);
@@ -460,39 +455,90 @@ public sealed class ValueGenerator
     }
 
     /// <summary>
-    /// Generate a populated collection expression for collection-like interfaces.
-    /// Returns expressions like "new List&lt;int&gt; { default(int)!, default(int)! }"
-    /// so that methods see non-empty collections (vs. Array.Empty from smart set).
-    /// Supports IList&lt;T&gt;, ICollection&lt;T&gt;, IReadOnlyList&lt;T&gt;,
-    /// IReadOnlyCollection&lt;T&gt;, IDictionary&lt;K,V&gt;, IReadOnlyDictionary&lt;K,V&gt;.
+    /// Known integer value type full names for ResultToLong conversion.
     /// </summary>
-    private static bool TryGetCollectionInterfaceExpression(string typeName, out string expr)
+    private static readonly HashSet<string> IntegerTypeNames = new(StringComparer.Ordinal)
     {
-        expr = null!;
+        "System.Byte", "System.SByte",
+        "System.Int16", "System.UInt16",
+        "System.Int32", "System.UInt32",
+        "System.Int64", "System.UInt64",
+        "System.IntPtr", "System.UIntPtr",
+        "System.Int128", "System.UInt128",
+        "System.Char",
+    };
 
-        var gaStart = typeName.IndexOf('<');
-        if (gaStart < 0) return false;
+    /// <summary>
+    /// Generate C# expression to convert a method result to long for hotupdate comparison.
+    /// The expression is used at the end of [Fact][HotUpdate] Subject_N methods.
+    /// </summary>
+    /// <param name="returnTypeName">Full CLR type name (e.g. "System.Int32", "System.Void")</param>
+    /// <param name="varName">Variable name holding the method result (e.g. "result_42_0")</param>
+    public static string GetResultToLongExpression(string returnTypeName, string varName)
+    {
+        if (returnTypeName is "System.Void" or "void")
+            return "42L";
 
-        var baseName = typeName[..gaStart];
-        var argsPart = typeName[(gaStart + 1)..^1];
-        var csTypeArgs = CSharpSerializer.SplitGenericArgs(argsPart)
-            .Select(CSharpSerializer.ToCSharpTypeName)
-            .ToArray();
+        if (IntegerTypeNames.Contains(returnTypeName))
+            return $"(long)({varName})";
 
-        switch (baseName)
-        {
-            case "IList" or "ICollection" or "IReadOnlyList" or "IReadOnlyCollection"
-                when csTypeArgs.Length >= 1:
-                expr = $"new System.Collections.Generic.List<{csTypeArgs[0]}> {{ default({csTypeArgs[0]})!, default({csTypeArgs[0]})! }}";
-                return true;
+        if (returnTypeName == "System.Boolean")
+            return $"{varName} ? 1L : 0L";
 
-            case "IDictionary" or "IReadOnlyDictionary"
-                when csTypeArgs.Length >= 2:
-                expr = $"new System.Collections.Generic.Dictionary<{csTypeArgs[0]}, {csTypeArgs[1]}> {{ {{ default({csTypeArgs[0]})!, default({csTypeArgs[1]})! }} }}";
-                return true;
+        if (returnTypeName is "System.Single")
+            return $"BitConverter.SingleToInt32Bits({varName})";
 
-            default:
-                return false;
-        }
+        if (returnTypeName == "System.Double")
+            return $"BitConverter.DoubleToInt64Bits({varName})";
+
+        if (returnTypeName is "System.Decimal" or "System.Half")
+            return $"(long)({varName})";
+
+        // Enum types: cast via int to avoid invalid cast exceptions
+        if (IsEnumType(returnTypeName))
+            return $"(long)(int)({varName})";
+
+        // Pointer types (void*, int*, etc.): can't box via (object), use pointer comparison.
+        if (returnTypeName.EndsWith('*'))
+            return $"{varName} != null ? 1L : 0L";
+
+        // Reference types (string, object, arrays): 1 if non-null, 0 if null.
+        // Boxing via (object) then != null works for both reference types (null stays null)
+        // and value types (boxed value is always non-null), avoiding CS0019/CS0037.
+        return $"(object)({varName}) != null ? 1L : 0L";
+    }
+
+    /// <summary>
+    /// Generate C# expression for the PATCH version of a Subject_N return value.
+    /// The expression produces a DIFFERENT long value than the baseline
+    /// GetResultToLongExpression, so the native RunHotupdateMode can detect
+    /// that the patch was applied.
+    /// </summary>
+    public static string GetPatchReturnExpression(string returnTypeName, string varName)
+    {
+        if (returnTypeName is "System.Void" or "void")
+            return "142L";
+
+        if (IntegerTypeNames.Contains(returnTypeName))
+            return $"((long)({varName}) ^ 0xFF)";
+
+        if (returnTypeName == "System.Boolean")
+            return $"{varName} ? 0L : 1L";
+
+        if (returnTypeName is "System.Single")
+            return $"(BitConverter.SingleToInt32Bits({varName}) ^ 0xFFFF)";
+
+        if (returnTypeName == "System.Double")
+            return $"(BitConverter.DoubleToInt64Bits({varName}) ^ 0xFFFF)";
+
+        if (returnTypeName is "System.Decimal" or "System.Half")
+            return $"((long)({varName}) ^ 0xFF)";
+
+        if (IsEnumType(returnTypeName))
+            return $"((long)(int)({varName}) ^ 0xFF)";
+
+        // Reference types: flip null check.
+        // Boxing via (object) then != null avoids CS0019/CS0037 on value types.
+        return $"(object)({varName}) != null ? 0L : 1L";
     }
 }

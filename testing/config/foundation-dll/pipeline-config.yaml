@@ -1,9 +1,10 @@
 # Foundation DLL Verification Pipeline Configuration
 # Controls which stages run, resource limits, and runtime behavior.
 #
-# NOTE: This config is currently a reference document. The orchestrator
-# (family_verification_orchestrator.py) manages stages programmatically.
-# Future: load this config at orchestrator startup for dynamic control.
+# This config is consumed by chunk_pipeline.py via _load_pipeline_config().
+# Changes here take effect on next pipeline run.
+#
+# Stages not listed in timeouts use the orchestrator's default timeout (0 = no limit).
 
 pipeline:
   defaultMode: standard  # "standard" | "strict"

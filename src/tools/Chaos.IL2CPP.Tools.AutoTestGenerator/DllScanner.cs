@@ -24,6 +24,84 @@ public sealed class DllScanner
         "Invoke",                 // MLC delegate leak: nested delegate Invoke flattened onto parent type
         "BeginInvoke",            // MLC delegate leak: BeginInvoke from delegate pattern
         "EndInvoke",              // MLC delegate leak: EndInvoke from delegate pattern
+        // CS0315: concretized <int,int> doesn't satisfy the interface constraint on TAccessor
+        // (MemoryManager<TAccessor> / ICriticalNotifyCompletion).
+        "TryGetMemoryManager",
+        "AwaitUnsafeOnCompleted",
+        // CS1061: ILGenerator.MarkSequencePoint not in reference assemblies.
+        "MarkSequencePoint",
+        // CS0117: Task.WhenEach is a .NET 9 API not available in reference assemblies
+        // when building combined subjects DLL.
+        "WhenEach",
+        // CS1615: Marshal.WriteInt16(object, int, char) — MLC sees `object` param as
+        // `out` but the reference assembly disagrees (no `out` on that overload).
+        "WriteInt16",
+        // CS0315: concretized <int,int> doesn't satisfy INotifyCompletion / IAsyncStateMachine
+        // constraints on AsyncMethodBuilder.AwaitOnCompleted.
+        "AwaitOnCompleted",
+        // CS0117: RuntimeHelpers.Box(ref T, RuntimeTypeHandle) is a .NET 9 API
+        // not available in reference assemblies.
+        "Box",
+        // CS0117: RuntimeHelpers.SizeOf(RuntimeTypeHandle) is a .NET 9 API
+        // not available in reference assemblies.
+        "SizeOf",
+        // CS0315: Async*MethodBuilder.Start<TStateMachine>(ref TStateMachine)
+        // where TStateMachine : IAsyncStateMachine — concretization picks int
+        // which doesn't satisfy the constraint. Non-generic Start() methods
+        // (e.g. Task.Start()) are unaffected since concretization only applies
+        // to generic methods.
+        "Start",
+        // CS0315: AsyncIteratorMethodBuilder.MoveNext<TStateMachine>(ref TStateMachine)
+        // same constraint issue. Non-generic MoveNext() methods (e.g.
+        // IEnumerator.MoveNext()) are unaffected.
+        "MoveNext",
+        // CS1061: ModuleBuilder.DefineDocument was added in .NET 9, not
+        // available in .NET 8 reference assemblies (net8.0 fallback).
+        "DefineDocument",
+        // CS0117: .NET 9 Vector<T> SIMD APIs (AsVector4, AsPlane, etc.) not
+        // available in .NET 8 reference assemblies.
+        "AsVector4",
+        "AsVector4Unsafe",
+        "AsPlane",
+        "AsQuaternion",
+        "AsVector2",
+        "AsVector3",
+        // CS0019: Vector.Clamp/Normalize/Lerp etc return value type tuples that
+        // need the ValueTuple package which isn't always referenced.
+        "Clamp",
+        "Normalize",
+        "Lerp",
+        "Reflect",
+        "Abs",
+        "Min",
+        "Max",
+        "Sum",
+        "Distance",
+        "DistanceSquared",
+        "Dot",
+        "Transform",
+        // CS0117 + LNK2001: Vector.WidenLower/WidenUpper are .NET 9 APIs
+        // returning Vector<T> or ValueTuple<Vector<T>,Vector<T>>. The codegen
+        // doesn't emit MethodTable entries for these types when boxed.
+        "WidenLower",
+        "WidenUpper",
+        // CS0117 + LNK2001: Vector.Create<int>(int) is a .NET 9 API
+        // returning Vector<T>, same codegen limitation.
+        "Create",
+        "ToHexStringLower",
+        "TryToHexStringLower",
+        // Half math methods: probe detects JsonReaderException from System.Text.Json
+        // (not in reference assemblies, CS0234 in combined subjects build).
+        "Acosh",
+        "Ieee754Remainder",
+        "Log",
+        "Log10",
+        "Log2",
+        "ReciprocalEstimate",
+        "ReciprocalSqrtEstimate",
+        "RootN",
+        // MultiplyAddEstimate is a .NET 9 API not in .NET 8 (CS0117).
+        "MultiplyAddEstimate",
     };
 
     // Types that require complex infrastructure (e.g. JsonSerializerOptions) and
@@ -78,6 +156,45 @@ public sealed class DllScanner
         // Note: MLC uses "+" as nested type separator in FullName.
         "Internal.Console",
         "Internal.Console+Error",
+        // .NET 9 API not available in reference assemblies: Task.WhenEach
+        // returns IAsyncEnumerable<T> via the System.Linq.AsyncEnumerable helper type.
+        "System.Linq.AsyncEnumerable",
+        // .NET 9 compiler infrastructure types: PoolingAsyncValueTaskMethodBuilder
+        // is used internally by the compiler for async ValueTask methods but
+        // not available in .NET 8 reference assemblies (CS0234).
+        "System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder",
+        "System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1",
+        // Type whose methods reference System.Linq.AsyncEnumerable API (.NET 9) in
+        // expression-builder-generated code (CS0234 when building combined subjects DLL).
+        "System.Threading.Tasks.TaskAsyncEnumerableExtensions",
+        // NFloat is a .NET 8+ struct used for interop (maps to C float/double based on
+        // platform). Its ConvertToInteger / MultiplyAddEstimate are .NET 9 APIs not
+        // available in reference assemblies for the combined subjects DLL.
+        "System.Runtime.InteropServices.NFloat",
+        // ContractHelper.RaiseContractFailedEvent references ContractFailureKind enum
+        // which doesn't exist in reference assemblies (CS0246).
+        "System.Runtime.CompilerServices.ContractHelper",
+        // JsonReaderException is specific to System.Text.Json
+        "System.Text.Json.JsonReaderException",
+    };
+
+    // Marshaller type names that fail C# compilation when concretized.
+    // Checked against t.Name in ListPublicTypesCore because MLC's FullName
+    // format for these generic types doesn't reliably match backtick notation.
+    private static readonly HashSet<string> UnprobableMarshallerTypeNames = new(StringComparer.Ordinal)
+    {
+        "ArrayMarshaller",
+        "PointerArrayMarshaller",
+        "ReadOnlySpanMarshaller",
+        "SpanMarshaller",
+        "SafeHandleMarshaller",
+        "ConfiguredCancelableAsyncEnumerable",
+        // Generic awaitable types: methods like OnCompleted/UnsafeOnCompleted
+        // are on the nested awaiter, but the expression builder misattributes
+        // them to the awaitable. Only the generic versions (ConfiguredTaskAwaitable`1)
+        // cause this; the non-generic versions work fine.
+        "ConfiguredTaskAwaitable",
+        "ConfiguredValueTaskAwaitable",
     };
 
     public DllScanResult Scan(string dllPath, string typeFullName)
@@ -309,6 +426,20 @@ public sealed class DllScanner
                 continue;
             }
 
+            // Dictionary<K,V>.Contains: MLC leaks the explicit interface implementation
+            // ICollection<KeyValuePair<K,V>>.Contains(KVP) as a public "Contains" method,
+            // but it's not directly callable on a Dictionary reference without casting to
+            // the interface. The real public methods are ContainsKey and ContainsValue.
+            // Use typeFullName string check (not targetType.IsGenericType) because MLC
+            // may not reliably report IsGenericType for concretized types in batch scan.
+            if (rawMethod.Name == "Contains" &&
+                typeFullName.StartsWith("System.Collections.Generic.Dictionary<", StringComparison.Ordinal))
+            {
+                Console.Error.WriteLine($"  [SKIP] Contains (explicit interface impl on {typeFullName})");
+                skippedMethods.Add("Contains (explicit interface impl on Dictionary)");
+                continue;
+            }
+
             // Skip object inherited methods
             if (ObjectMethods.Contains(rawMethod.Name))
                 continue;
@@ -406,7 +537,13 @@ public sealed class DllScanner
                 }
 
                 var isRefStruct = IsRefStructType(p.ParameterType);
-                parameters.Add(new MethodParameter(p.Name ?? $"p{parameters.Count}", paramTypeName, isOut, isRef, isRefStruct));
+                if (isRefStruct)
+                {
+                    skippedMethods.Add($"{method.Name} (ref struct parameter: {paramTypeName})");
+                    parameters.Clear();
+                    break;
+                }
+                                parameters.Add(new MethodParameter(p.Name ?? $"p{parameters.Count}", paramTypeName, isOut, isRef, isRefStruct));
             }
 
             // If we broke out due to an incomplete type, skip to next method
@@ -440,6 +577,15 @@ public sealed class DllScanner
                     skippedMethods.Add($"{method.Name} (unprobable return type: {rawReturnType.FullName})");
                     continue;
                 }
+                // Skip methods returning types that trigger LNK2001 in the AOT codegen
+                // because the codegen doesn't emit MethodTable entries for these types
+                // when they appear in boxing contexts (e.g. GetResultToLongExpression).
+                // This includes Vector<T> specializations and ValueTuples of Vector<T>.
+                if (IsUnboxableType(rawReturnType))
+                {
+                    skippedMethods.Add($"{method.Name} (unboxable return type: {rawReturnType.FullName ?? returnTypeName})");
+                    continue;
+                }
             }
 
             // String-based ref struct detection: MLC's Type.IsByRefLike may not
@@ -456,6 +602,15 @@ public sealed class DllScanner
                 if (RefStructTypeNames.Contains(rtBase) ||
                     RefStructTypeNames.Contains(rtBase + "`1"))
                     isRefStructReturn = true;
+            }
+
+            // Skip methods returning ref struct types (Span<T>, ReadOnlySpan<T>,
+            // etc.) because GetResultToLongExpression boxes the return value via
+            // (object)(returnValue), which is illegal for ref structs (CS0030).
+            if (isRefStructReturn)
+            {
+                skippedMethods.Add($"{method.Name} (ref struct return type: {returnTypeName})");
+                continue;
             }
 
             signatures.Add(new MethodSignature(
@@ -574,6 +729,29 @@ public sealed class DllScanner
             if (!t.IsVisible) continue;
             if (t.IsEnum) continue;
             if (t.FullName is not null && UnprobableTypeNames.Contains(t.FullName)) continue;
+            // Skip GENERIC versions of marshaller/compiler-infrastructure types
+            // whose concretization with int produces invalid C#. Non-generic
+            // versions (e.g. ConfiguredTaskAwaitable without type params) are
+            // kept — only generic variants (ConfiguredTaskAwaitable`1) fail.
+            if (t.Name.Contains('`'))
+            {
+                var baseName = t.Name.AsSpan(0, t.Name.IndexOf('`')).ToString();
+                if (UnprobableMarshallerTypeNames.Contains(baseName))
+                    continue;
+            }
+            // Also check nested types inside generic containers, which MLC
+            // reports with FullName like "Container`1+Nested" but whose Name
+            // is just the simple nested name without backtick.
+            if (t.FullName is not null && !t.Name.Contains('`') && t.FullName.Contains('`'))
+            {
+                var btIdx = t.FullName.IndexOf('`');
+                var dotBefore = t.FullName.LastIndexOf('.', btIdx, btIdx);
+                var containerName = dotBefore > 0
+                    ? t.FullName[(dotBefore + 1)..btIdx]
+                    : t.FullName[..btIdx];
+                if (UnprobableMarshallerTypeNames.Contains(containerName))
+                    continue;
+            }
 
             var count = t.GetMethods(
                 BindingFlags.Public | BindingFlags.Static |
@@ -1113,8 +1291,24 @@ public sealed class DllScanner
         }
 
         // MetadataLoadContext sometimes loses FullName for constructed generics
-        // and their nested types. Fall back to Name.
+        // and their nested types. Fall back to Name, but preserve Namespace when available.
         var name = type.Name;
+        var ns = type.Namespace;
+        if (ns is { Length: > 0 } && !name.Contains(ns))
+            name = $"{ns}.{name}";
+
+        // If Namespace is also null, try to find the type by Name in loaded assemblies.
+        // MLC can lose Namespace for types from assemblies not directly loaded into
+        // the MLC context but referenced by the target assembly.
+        if (ns is null && type.FullName is null && type.Assembly is { } asm)
+        {
+            var asmQualified = type.AssemblyQualifiedName;
+            if (asmQualified is not null)
+            {
+                var comma = asmQualified.IndexOf(',');
+                if (comma > 0) name = asmQualified[..comma];
+            }
+        }
 
         // For nested types with no FullName (MLC limitation), qualify with parent name.
         // E.g. Dictionary<int,int>.Enumerator instead of bare "Enumerator".
@@ -1234,6 +1428,59 @@ public sealed class DllScanner
         if (t.FullName is not null) return false;  // has proper name
         // Name without FullName and not a generic type — MLC couldn't resolve it
         return t.Name.Contains('`') || char.IsUpper(t.Name[0]);
+    }
+
+    /// <summary>
+    /// Check if a return type triggers LNK2001 in the AOT codegen because the
+    /// codegen doesn't emit MethodTable entries when boxing these types.
+    /// Vector&lt;T&gt; specializations and ValueTuples containing Vector&lt;T&gt;
+    /// are the primary cases.
+    /// </summary>
+    private static bool IsUnboxableType(Type type)
+    {
+        try
+        {
+            var t = type.IsByRef ? type.GetElementType()! : type;
+            if (t.IsGenericParameter) return false;
+            if (t.FullName is null) return false;
+
+            // Vector<T>: any specialization (Vector<byte>, Vector<float>, etc.)
+            // NOTE: FullName for constructed generics includes generic args
+            // (e.g. "Vector`1[[System.Int32,...]]"), so extract the base name.
+            var baseName = t.FullName;
+            var bracketIdx = baseName.IndexOf("[");
+            if (bracketIdx >= 0) baseName = baseName.Substring(0, bracketIdx);
+            if (baseName == "System.Numerics.Vector`1")
+                return true;
+
+            // Non-generic System.Numerics struct types that cause LNK2001 when boxed
+            if (baseName is "System.Numerics.Vector2" or
+                "System.Numerics.Vector3" or
+                "System.Numerics.Vector4" or
+                "System.Numerics.Plane" or
+                "System.Numerics.Quaternion" or
+                "System.Numerics.Matrix3x2" or
+                "System.Numerics.Matrix4x4")
+                return true;
+
+            // ValueTuple types containing Vector<T>: check generic args
+            if (baseName.StartsWith("System.ValueTuple`"))
+            {
+                foreach (var ga in t.GetGenericArguments())
+                {
+                    if (IsUnboxableType(ga))
+                        return true;
+                }
+                // ValueTuple without unboxable types is fine
+                return false;
+            }
+
+            return false;
+        }
+        catch
+        {
+            return true; // conservative: skip if we can't inspect
+        }
     }
 
     /// <summary>

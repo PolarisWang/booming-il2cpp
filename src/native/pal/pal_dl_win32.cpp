@@ -8,6 +8,7 @@
 #include <windows.h>
 
 #include <cstring>
+#include <string>
 
 namespace chaos::il2cpp::pal {
 

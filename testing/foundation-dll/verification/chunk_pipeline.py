@@ -21,6 +21,7 @@ Usage:
 
 from __future__ import annotations
 
+import re
 import sys
 import time
 from pathlib import Path
@@ -30,6 +31,67 @@ _HERE = Path(__file__).resolve().parent  # verification/
 _FOUNDATION_DLL = _HERE.parent  # testing/foundation-dll/
 if str(_FOUNDATION_DLL) not in sys.path:
     sys.path.insert(0, str(_FOUNDATION_DLL))
+
+# Path to pipeline config YAML (kept as single source of truth)
+_PIPELINE_CONFIG_PATH = _FOUNDATION_DLL / "config" / "pipeline-config.yaml"
+
+
+def _load_pipeline_config() -> dict:
+    """Load pipeline configuration from YAML.
+
+    Uses a lightweight parser (no pyyaml dependency) since the config
+    uses only simple key:value and nested key:value mappings.
+    """
+    config: dict = {}
+    path = _PIPELINE_CONFIG_PATH
+    if not path.exists():
+        return config
+
+    text = path.read_text(encoding="utf-8")
+    current_section: str | None = None
+    timeouts: dict[str, int] = {}
+
+    for line in text.splitlines():
+        stripped = line.strip()
+        if not stripped or stripped.startswith("#"):
+            continue
+
+        # Top-level key: pipeline:
+        m = re.match(r"^(\w[\w-]*):", stripped)
+        if m and not stripped.startswith(" "):
+            current_section = m.group(1)
+            continue
+
+        # Nested key under pipeline:
+        if current_section == "pipeline":
+            m = re.match(r"^  (\w[\w-]*):\s*(.*)", stripped)
+            if m:
+                key, val = m.group(1), m.group(2).strip()
+                if val:
+                    # Scalar value
+                    if val.isdigit():
+                        config[key] = int(val)
+                    elif val.lower() in ("true", "false"):
+                        config[key] = val.lower() == "true"
+                    else:
+                        config[key] = val
+                else:
+                    # Section header (e.g. timeouts:, defaultStages:)
+                    current_subsection = key
+            continue
+
+        # timeouts subsection
+        if current_section == "pipeline" and current_subsection == "timeouts":
+            m = re.match(r"^    (\w[\w-]*):\s*(\d+)", stripped)
+            if m:
+                timeouts[m.group(1)] = int(m.group(2))
+
+    if timeouts:
+        config["timeouts"] = timeouts
+    return config
+
+
+_PIPELINE_CONFIG = _load_pipeline_config()
 
 
 def main():
@@ -46,8 +108,8 @@ def main():
                         help="Chunk slug to run (e.g. 'numerics')")
     parser.add_argument("--all-chunks", action="store_true",
                         help="Run all chunks for the assembly")
-    parser.add_argument("--stages", default="build,fact,coverage-audit",
-                        help="Comma-separated stages to run (default: build,fact,coverage-audit)")
+    parser.add_argument("--stages", default="build,fact,hotupdate,coverage-audit",
+                        help="Comma-separated stages to run (default: build,fact,hotupdate,coverage-audit)")
     parser.add_argument("--native-config", default="check",
                         choices=["check", "profile", "ship"],
                         help="Native build config (default: check)")
@@ -84,6 +146,7 @@ def main():
         "build": None,
         "fact": None,
         "benchmark": None,
+        "managed_benchmark": None,
         "hotupdate": None,
         "coverage-audit": None,
         "aggregate": None,
@@ -99,6 +162,7 @@ def main():
     from verification.stages.build import run_build
     from verification.stages.fact_chunk import run_fact_chunk
     from verification.stages.benchmark_chunk import run_benchmark_chunk
+    from verification.stages.managed_benchmark import run_managed_benchmark
     from verification.stages.hotupdate_chunk import run_hotupdate_chunk
     from verification.stages.coverage_audit import run_coverage_audit
     from verification.stages.aggregate import run_aggregate
@@ -107,6 +171,7 @@ def main():
         "build": run_build,
         "fact": run_fact_chunk,
         "benchmark": run_benchmark_chunk,
+        "managed_benchmark": run_managed_benchmark,
         "hotupdate": run_hotupdate_chunk,
         "coverage-audit": run_coverage_audit,
         "aggregate": run_aggregate,
@@ -115,6 +180,13 @@ def main():
     overall_start = time.perf_counter()
     overall_status = "passed"
 
+    # Use the config's stage timeout (look up benchmark first as most time-sensitive; fall back to any)
+    timeouts = _PIPELINE_CONFIG.get("timeouts", {})
+    stage_timeout_seconds = timeouts.get("benchmark",
+                           timeouts.get("codegen_aot",
+                           timeouts.get("fact_aot", 0)))
+    chunk_mode = _PIPELINE_CONFIG.get("defaultMode", "standard")
+
     for chunk_slug in chunks:
         chunk_dir = foundation_dir / "chunks" / chunk_slug
         ctx = ChunkContext(
@@ -122,9 +194,11 @@ def main():
             assembly=assembly,
             chunk_dir=chunk_dir,
             foundation_dir=foundation_dir,
+            mode=chunk_mode,
             native_config=args.native_config,
             verbose=args.verbose,
             skip_probe=args.skip_probe,
+            stage_timeout_seconds=stage_timeout_seconds,
         )
 
         print(f"\n{'='*60}")

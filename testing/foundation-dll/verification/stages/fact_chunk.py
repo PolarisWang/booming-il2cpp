@@ -73,31 +73,61 @@ def run_fact_chunk(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageRe
     passed = sum(1 for r in fact_results if r.get("passed"))
     total = len(fact_results)
 
+    # Read expected total from subjects.metadata.json for accurate comparison
+    expected_total = None
+    try:
+        meta_path = ctx.chunk_dir / "managed" / "subjects" / "subjects.metadata.json"
+        if meta_path.exists():
+            meta = json.loads(meta_path.read_text(encoding="utf-8"))
+            expected_total = meta.get("totalMethods")
+    except Exception:
+        pass
+
     # Save results to chunk results dir
     ctx.results_dir.mkdir(parents=True, exist_ok=True)
     result_path = ctx.results_dir / "fact.json"
+
+    # Determine effective total for status: use expected_total if available and larger
+    effective_total = expected_total if expected_total is not None else total
+
+    # Determine which subject index caused the crash (the unflushed one)
+    # If JSON is truncated (total < effective_total) and process crashed,
+    # the subject at index `total` (0-based) is the crash culprit.
+    crashed_index = (total if total < effective_total and r.returncode != 0
+                     and r.returncode != 0 else None)
+
     result_data = {
         "exitCode": r.returncode,
         "passed": passed,
         "total": total,
+        "expectedTotal": effective_total,
+        "crashedAtIndex": crashed_index,
+        "isPartial": total < effective_total,
         "results": fact_results,
         "stderr": stderr[:500] if stderr else "",
     }
     result_path.write_text(json.dumps(result_data, indent=2), encoding="utf-8")
 
-    status = "passed" if passed == total and total > 0 else "failed"
+    status = "failed"
     if total == 0:
-        if r.returncode == 0:
-            status = "skipped"
-        else:
-            status = "error"
+        status = "error"
+    elif total < effective_total or r.returncode != 0:
+        # Partial results — process crashed before completing all dispatches
+        status = "partial" if total > 0 else "error"
+    elif passed == total and total > 0:
+        status = "passed"
 
     duration_ms = int((time.perf_counter() - start) * 1000)
-    print(f"  [fact] {status}: {passed}/{total} passed ({duration_ms}ms)")
+    expected_str = f" (expected {effective_total})" if effective_total != total else ""
+    print(f"  [fact] {status}: {passed}/{total} passed{expected_str} ({duration_ms}ms)")
+
+    summary_detail = f"exit={r.returncode}"
+    if crashed_index is not None:
+        summary_detail += f", crash at subject index {crashed_index}"
 
     return StageResult(
         stage="fact", status=status,
-        summary=f"{status}: {passed}/{total} passed (exit={r.returncode})",
+        summary=f"{status}: {passed}/{total} passed ({summary_detail})",
         details=result_data,
         duration_ms=duration_ms,
     )

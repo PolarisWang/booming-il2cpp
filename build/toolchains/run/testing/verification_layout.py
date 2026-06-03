@@ -190,6 +190,21 @@ def raw_benchmark_records_path(repo_root: Path, owner_id: str) -> Path:
     return raw_benchmark_records_root(repo_root) / str(owner_id).strip() / "records.jsonl"
 
 
+def benchmark_builds_root(repo_root: Path) -> Path:
+    """Root directory for persistent per-case native build artifacts.
+
+    Each case gets its own subdirectory under this root so that
+    subsequent runs reuse intermediate build objects (incremental
+    compilation via cmake/ninja).
+    """
+    return repo_root / "artifact" / "verification" / "benchmark-builds"
+
+
+def benchmark_build_path(repo_root: Path, subject_id: str, case_id: str) -> Path:
+    """Return the persistent build directory for a specific benchmark case."""
+    return benchmark_builds_root(repo_root) / str(subject_id).strip() / str(case_id).strip()
+
+
 def raw_stress_records_root(repo_root: Path) -> Path:
     return repo_root / "artifact" / "verification" / "stress-records"
 

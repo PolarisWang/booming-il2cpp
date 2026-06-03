@@ -1,30 +1,28 @@
 #!/usr/bin/env python3
 """
-benchmark_compare.py — Generic benchmark regression detection for chaos-il2cpp tests.
+benchmark_compare.py — Unified benchmark regression detection for chaos-il2cpp tests.
 
-Supports three input formats:
-  1. Native [BENCH] lines from ctest stdout:  [BENCH] name: value_ns
-  2. Foundation-dll JSONL:                    JSON-per-line with metrics.elapsedMilliseconds
-  3. Batch JSON report:                       batch-report.json with elapsed_seconds per family
+Supports two comparison modes:
+
+Mode 1: Chronological (default) — compares current run vs historical baseline
+  Inputs: Native [BENCH] lines, foundation-dll JSONL, batch JSON reports
+  Threshold: %-based (5% warn, 15% fail)
+
+Mode 2: 3-way (cross-mode) — compares managed vs native vs interpreter
+  Inputs: Three JSON metric files (one per mode)
+  Threshold: ratio-based (native >= 2x managed, interpreter <= 50x managed)
+  Delegates to benchmark_comparison.py for core logic.
 
 Usage:
-  # Compare current run against baseline
+  # Chronological: compare current run against baseline
   python benchmark_compare.py --current results/benchmarks/current.jsonl
 
-  # Specify baseline explicitly
-  python benchmark_compare.py --current results/benchmarks/current.jsonl \\
-                              --baseline results/baselines/last-good.jsonl
-
-  # Update baseline after review
-  python benchmark_compare.py --current results/benchmarks/current.jsonl --update-baseline
-
-  # Parse native [BENCH] stdout
+  # Chronological: parse native [BENCH] stdout
   python benchmark_compare.py --bench-log test_output.txt
 
-Exit codes:
-  0 — PASS (all metrics within threshold)
-  1 — WARN (some metrics 5-15% regression)
-  2 — FAIL (some metrics >15% regression)
+  # 3-way: compare three modes
+  python benchmark_compare.py --comparison-mode 3way \
+      --managed managed_metrics.json --native native_metrics.json
 """
 
 import argparse
@@ -36,11 +34,24 @@ import sys
 from collections import defaultdict
 from pathlib import Path
 
-# Default thresholds
+# Default thresholds for chronological mode
 WARN_PCT = 5.0    # 5-15% regression → WARN
 FAIL_PCT = 15.0   # >15% regression → FAIL
 
 BASELINE_DIR = Path(__file__).resolve().parent.parent / "results" / "baselines"
+
+# Try importing 3-way comparison module (from toolchain)
+_3WAY_MODULE = None
+_3WAY_PATH = Path(__file__).resolve().parents[3] / "build" / "toolchains" / "run" / "testing" / "benchmark_comparison.py"
+if _3WAY_PATH.exists():
+    import importlib.util
+    _spec = importlib.util.spec_from_file_location("benchmark_comparison", _3WAY_PATH)
+    if _spec and _spec.loader:
+        _3WAY_MODULE = importlib.util.module_from_spec(_spec)
+        try:
+            _spec.loader.exec_module(_3WAY_MODULE)
+        except Exception:
+            _3WAY_MODULE = None
 
 
 # ── Parsers ─────────────────────────────────────────────────────────────
@@ -274,10 +285,70 @@ def print_report(results: list[dict], title: str = "Benchmark Comparison"):
     return failed, warned
 
 
+def _run_3way_comparison(args) -> None:
+    """Run 3-way cross-mode comparison via benchmark_comparison module."""
+    if _3WAY_MODULE is None:
+        print("ERROR: 3-way comparison module (benchmark_comparison.py) not found.", file=sys.stderr)
+        print(f"  Expected at: {_3WAY_PATH}", file=sys.stderr)
+        sys.exit(2)
+
+    def _load_metrics(path_str: str | None) -> dict | None:
+        if not path_str:
+            return None
+        path = Path(path_str)
+        if not path.exists():
+            print(f"ERROR: metrics file not found: {path}", file=sys.stderr)
+            sys.exit(2)
+        try:
+            return json.loads(path.read_text(encoding="utf-8"))
+        except (OSError, json.JSONDecodeError) as e:
+            print(f"ERROR: failed to parse {path}: {e}", file=sys.stderr)
+            sys.exit(2)
+
+    managed = _load_metrics(args.managed)
+    native = _load_metrics(args.native)
+    interpreter = _load_metrics(args.interpreter)
+
+    comparison = _3WAY_MODULE.compute_comparison(managed, native, interpreter)
+    verdict = _3WAY_MODULE.evaluate_targets(comparison)
+
+    print(f"\n{'='*60}")
+    print("  3-Way Benchmark Comparison")
+    print(f"{'='*60}")
+
+    native_speedup = comparison.get("nativeSpeedup")
+    interp_overhead = comparison.get("interpreterOverhead")
+    print(f"\n  Native speedup:     {native_speedup}" if native_speedup is not None else "\n  Native speedup:     no data")
+    print(f"  Interpreter overhead: {interp_overhead}" if interp_overhead is not None else "  Interpreter overhead: no data")
+
+    for key, v in verdict.get("verdicts", {}).items():
+        label = v.get("label", "?")
+        status = "PASS" if v.get("pass") else "FAIL" if v.get("pass") is False else "SKIP"
+        print(f"  [{status}] {key}: {label}")
+
+    overall = "PASS" if verdict.get("overallPass") else "FAIL"
+    print(f"\n  Overall: {overall}")
+    print(f"{'='*60}\n")
+
+    # Save baseline if requested
+    if args.update_baseline and _3WAY_MODULE:
+        subject = args.slug or "unknown"
+        _3WAY_MODULE.save_baseline(subject, comparison, verdict)
+        print(f"Baseline saved for '{subject}'")
+
+    sys.exit(0 if verdict.get("overallPass") else 1)
+
+
 def main():
     parser = argparse.ArgumentParser(
         description="Benchmark regression detection for chaos-il2cpp tests")
-    parser.add_argument("--current", help="Path to current run data")
+
+    # Comparison mode
+    parser.add_argument("--comparison-mode", choices=["chronological", "3way"], default="chronological",
+                        help="Comparison mode: chronological (default, vs baseline) or 3way (cross-mode)")
+
+    # Chronological mode args
+    parser.add_argument("--current", help="Path to current run data (chronological mode)")
     parser.add_argument("--baseline", help="Path to baseline data (auto-detected if omitted)")
     parser.add_argument("--update-baseline", action="store_true",
                         help="Save current data as new baseline")
@@ -289,8 +360,20 @@ def main():
                         help=f"Warn threshold %% (default: {WARN_PCT}%%)")
     parser.add_argument("--threshold-fail", type=float, default=FAIL_PCT,
                         help=f"Fail threshold %% (default: {FAIL_PCT}%%)")
+
+    # 3-way mode args
+    parser.add_argument("--managed", help="Path to managed metrics JSON (3-way mode)")
+    parser.add_argument("--native", help="Path to native metrics JSON (3-way mode)")
+    parser.add_argument("--interpreter", help="Path to interpreter metrics JSON (3-way mode)")
+
     args = parser.parse_args()
 
+    # Dispatch to 3-way mode
+    if args.comparison_mode == "3way":
+        _run_3way_comparison(args)
+        return  # unreachable
+
+    # Chronological mode (existing behavior)
     global WARN_PCT, FAIL_PCT
     WARN_PCT = args.threshold_warn
     FAIL_PCT = args.threshold_fail

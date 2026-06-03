@@ -829,6 +829,203 @@ PatchContext* ApplyPatchFromMemory(const void* data, size_t size,
     return ctx;
 }
 
+PatchContext* ApplyPatchFromMemoryEx(
+    const void* data, size_t size,
+    const char* host_type_ns,
+    const char* const* host_type_names,
+    const char* const* host_method_names,
+    int method_count) noexcept {
+    // Same validation as ApplyPatchFromMemory.
+    if (data == nullptr || size < sizeof(PatchDataHeader)) return nullptr;
+
+    auto* header = static_cast<const PatchDataHeader*>(data);
+    if (header->magic != PATCH_DATA_MAGIC) return nullptr;
+    if (header->version != 1 && header->version != 2 && header->version != 3) return nullptr;
+    uint32_t min_header = (header->version == 1) ? 112 :
+                          (header->version == 2) ? 124 : sizeof(PatchDataHeader);
+    if (header->header_size < min_header) return nullptr;
+
+    uint32_t expected_size = header->body_data_offset + header->body_data_size;
+    uint32_t ir_section_end = header->aot_core_ir_offset + header->aot_core_ir_size;
+    if (ir_section_end > expected_size)
+        expected_size = ir_section_end;
+    if (size < expected_size) return nullptr;
+
+    // Multi-module dependency validation (v3+).  Same checks as ApplyPatchFromMemory
+    // but passes host_type_ns/host_type_names/host_method_names/method_count for retry.
+    if (header->version >= 3 && header->dependency_count > 0)
+    {
+        auto& registry = GetHotpatchNameRegistry();
+        const auto* dep_entries = reinterpret_cast<const PatchDataDependency*>(
+            reinterpret_cast<const uint8_t*>(header) + header->dependency_offset);
+        bool all_deps_satisfied = true;
+
+        for (uint32_t di = 0; di < header->dependency_count; ++di)
+        {
+            const char* dep_name = PatchData_String(header, dep_entries[di].assembly_name_offset);
+            if (dep_name == nullptr || dep_name[0] == '\0')
+                continue;
+
+            bool found = false;
+            for (size_t mi = 0; mi < registry.ModuleCount(); ++mi)
+            {
+                const auto* mod = registry.GetModuleByIndex(mi);
+                if (mod != nullptr && mod->module_name != nullptr &&
+                    std::strcmp(mod->module_name, dep_name) == 0)
+                {
+                    found = true;
+                    break;
+                }
+            }
+
+            if (!found)
+            {
+                if (dep_entries[di].min_version == 0)
+                    continue;
+                all_deps_satisfied = false;
+                break;
+            }
+        }
+
+        if (!all_deps_satisfied)
+        {
+            auto* data_copy = static_cast<uint8_t*>(
+                memory_domain::DomainCurrentAllocateTagged(size));
+            if (data_copy == nullptr)
+                return nullptr;
+            std::memcpy(data_copy, data, size);
+            // Note: deferred patches for ApplyPatchFromMemoryEx are stored
+            // with nullptr host_type_name (not used).  host_type_ns and
+            // per-method arrays are NOT preserved across deferred retry.
+            // For v3+ multi-module patches that need namespace overrides,
+            // ApplyPatchFromMemoryEx would need deferred patch support.
+            // Current use case (v1 patches, no deps) is unaffected.
+            g_deferred_patches[reinterpret_cast<uintptr_t>(data_copy)] = DeferredPatchEntry{
+                data_copy, size, nullptr, host_method_names, 0, false
+            };
+            return nullptr;
+        }
+    }
+
+    auto* ctx = CreatePatchContext(header, size);
+    if (ctx == nullptr) return nullptr;
+
+    auto& registry = GetHotpatchNameRegistry();
+    auto* cache = ctx->metadata_cache;
+
+    bool has_per_method_overrides = method_count > 0
+        && (host_type_names != nullptr || host_method_names != nullptr);
+
+    uint32_t patched_count = 0;
+    uint32_t total = cache->MethodCount();
+    for (uint32_t i = 0; i < total; ++i) {
+        auto* method_entry = cache->GetMethodDef(i);
+        if (method_entry == nullptr) continue;
+        if (method_entry->body_size == 0) continue;
+
+        // Get metadata names from patch DLL.
+        const char* type_name = cache->GetTypeName(method_entry);
+        const char* type_ns = cache->GetTypeNamespace(method_entry);
+        const char* method_name = cache->GetString(method_entry->name_offset);
+        if (type_name == nullptr || method_name == nullptr) continue;
+
+        // Apply overrides: namespace (single), type name (per-method), method name (per-method).
+        const char* lookup_ns = (host_type_ns != nullptr) ? host_type_ns : type_ns;
+
+        const char* lookup_type;
+        if (has_per_method_overrides && i < static_cast<uint32_t>(method_count)
+            && host_type_names != nullptr && host_type_names[i] != nullptr) {
+            lookup_type = host_type_names[i];
+        } else {
+            lookup_type = type_name;
+        }
+
+        if (has_per_method_overrides && i < static_cast<uint32_t>(method_count)
+            && host_method_names != nullptr && host_method_names[i] != nullptr) {
+            method_name = host_method_names[i];
+        }
+
+        // Look up in HotpatchNameRegistry with all three overrides applied.
+        uint64_t lookup = registry.LookupMethod(lookup_ns, lookup_type, method_name);
+        if (lookup == 0) continue;
+
+        uint32_t module_id = ExtractModuleId(lookup);
+        uint32_t aot_token = ExtractToken(lookup);
+
+        uint32_t slot = registry.TokenToSlot(module_id, aot_token);
+        if (slot == ~0u) continue;
+
+        // Set up PatchMethod.
+        auto& patch_method = ctx->methods[patched_count];
+        patch_method.token = aot_token;
+        patch_method.module_id = module_id;
+        patch_method.aot_core_ir_json = cache->GetAotCoreIr(i);
+        patch_method.aot_core_ir_json_length = 0;
+
+        if (header->version >= 2) {
+            auto reg_ir = cache->GetRegisterIr(i);
+            if (reg_ir.data != nullptr) {
+                patch_method.reg_ir_data         = reg_ir.data;
+                patch_method.reg_ir_instr_count  = reg_ir.instr_count;
+                patch_method.reg_ir_seh_count    = reg_ir.seh_count;
+                patch_method.reg_ir_max_regs     = reg_ir.max_regs;
+            }
+        }
+
+        patch_method.metadata_cache = cache;
+
+        if (method_entry->signature_offset != 0) {
+            patch_method.signature_blob = static_cast<const uint8_t*>(
+                cache->GetBlob(method_entry->signature_offset));
+            if (patch_method.signature_blob != nullptr)
+                patch_method.signature_len = patch_method.signature_blob[0];
+        }
+
+        registry.SetPatchedBySlot(module_id, slot, true, &patch_method);
+
+        if (patch_method.keep_native) {
+            auto* entry = registry.GetDispatchEntryBySlot(module_id, slot);
+            if (entry != nullptr) {
+#if defined(_MSC_VER)
+                _InterlockedOr(reinterpret_cast<volatile long*>(&entry->flags),
+                               static_cast<long>(kHotpatchKeepNative));
+#else
+                __sync_fetch_and_or(reinterpret_cast<volatile uint32_t*>(&entry->flags),
+                                    static_cast<uint32_t>(kHotpatchKeepNative));
+#endif
+            }
+        }
+
+        ++patched_count;
+    }
+
+    ctx->method_count = patched_count;
+    {
+        const auto* bs = chaos::il2cpp::bootstrap::PeekBootstrapState();
+        if (bs != nullptr && bs->is_bootstrapped) {
+            const auto* bridge = chaos::il2cpp::bootstrap::GetCodegenBridgeV0();
+            if (bridge != nullptr && bs->aot_image_handle != 0) {
+                ctx->metadata_cache->SetAotBridge(bridge, bs->aot_image_handle);
+            }
+        }
+    }
+
+    for (uint32_t i = 0; i < patched_count; ++i) {
+        PatchMethodLowerIR(reinterpret_cast<uintptr_t>(&ctx->methods[i]));
+    }
+    for (uint32_t i = 0; i < patched_count; ++i) {
+        auto& pm = ctx->methods[i];
+        if (pm.token != 0)
+            cache->AddInliningTarget(pm.module_id, pm.token, &pm);
+    }
+    if (patched_count > 0)
+        ReapplyInlining(ctx->methods, patched_count);
+
+    g_patch_generation.fetch_add(1, std::memory_order_relaxed);
+
+    return ctx;
+}
+
 bool Unpatch(PatchContext* ctx) noexcept {
     if (ctx == nullptr) return false;
 

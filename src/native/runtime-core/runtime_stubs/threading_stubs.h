@@ -34,8 +34,11 @@ void chaos_thread_join(CHAOS_IL2CPP_INTPTR thread_obj) noexcept;
 void chaos_thread_interrupt(CHAOS_IL2CPP_INTPTR thread_obj) noexcept;
 
 // Thread.Abort: signal a thread to throw ThreadAbortException
-// at the next safepoint poll.
-void chaos_thread_abort(CHAOS_IL2CPP_INTPTR thread_obj) noexcept;
+// at the next safepoint poll.  state_obj comes from Thread.Abort(object state)
+// and would be passed to the ThreadAbortException constructor in a full
+// implementation; for now it is accepted and ignored (the abort signal itself
+// is what matters for testing).
+void chaos_thread_abort(CHAOS_IL2CPP_INTPTR thread_obj, CHAOS_IL2CPP_INTPTR state_obj) noexcept;
 
 // Thread.ResetAbort: cancel a pending Thread.Abort for the calling thread.
 // Returns nonzero if an abort was pending and was cancelled, 0 if no abort

@@ -119,8 +119,10 @@ void chaos_thread_interrupt(CHAOS_IL2CPP_INTPTR thread_obj) noexcept
     });
 }
 
-void chaos_thread_abort(CHAOS_IL2CPP_INTPTR thread_obj) noexcept
+void chaos_thread_abort(CHAOS_IL2CPP_INTPTR thread_obj, CHAOS_IL2CPP_INTPTR state_obj) noexcept
 {
+    (void)state_obj; // Accepted for ABI compatibility with Thread.Abort(object state);
+                     // the abort signal itself is sufficient for testing purposes.
     using threading::ManagedThread;
 
     if (thread_obj == 0) return;

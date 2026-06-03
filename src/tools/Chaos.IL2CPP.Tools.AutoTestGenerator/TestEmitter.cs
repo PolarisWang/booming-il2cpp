@@ -185,16 +185,29 @@ public sealed class TestEmitter
                     ? $"{preludeStr}"
                     : callStatement;
 
-                // ── [Fact] method ──
+                // ── [Fact][HotUpdate] method (merged, return long) ──
                 if (!skipFact)
                 {
                     sb.AppendLine();
                     sb.AppendLine("        [Fact]");
-                    sb.AppendLine($"        public void {methodSuffix}()");
+                    sb.AppendLine("        [HotUpdate]");
+                    sb.AppendLine($"        public long {methodSuffix}()");
                     sb.AppendLine("        {");
                     if (!string.IsNullOrEmpty(factCallStatement))
                         sb.AppendLine(factCallStatement);
                     AppendAssert(sb, mi, method, set, setResult, callExpr, method.HasRefParam);
+                    // Return long value for hotupdate semantic change detection.
+                    // Exception subjects and void methods return sentinel 42L.
+                    if (method.IsVoid || isPlainTask || hasException)
+                    {
+                        sb.AppendLine("            return 42L;");
+                    }
+                    else
+                    {
+                        var resultVar = $"result_{mi}_{set.SetIndex}";
+                        var returnExpr = ValueGenerator.GetResultToLongExpression(method.ReturnTypeName, resultVar);
+                        sb.AppendLine($"            return {returnExpr};");
+                    }
                     sb.AppendLine("        }");
                 }
 
@@ -211,23 +224,6 @@ public sealed class TestEmitter
                         sb.AppendLine($"            {benchCall};");
                     else
                         sb.AppendLine($"            _ = {benchCall};");
-                    sb.AppendLine("        }");
-                }
-
-                // ── [HotUpdate] method ──
-                // TODO: After initial call+assert, apply [Patch] method replacement and
-                // re-assert with the post-patch expected value. Requires integration with
-                // the hot-update patch loading infrastructure (patch descriptors, method
-                // replacement tokens). Current implementation matches [Fact] as a baseline.
-                if (!skipFact)
-                {
-                    sb.AppendLine();
-                    sb.AppendLine("        [HotUpdate]");
-                    sb.AppendLine($"        public void HotUpdate_{methodSuffix}()");
-                    sb.AppendLine("        {");
-                    if (!string.IsNullOrEmpty(factCallStatement))
-                        sb.AppendLine(factCallStatement);
-                    AppendAssert(sb, mi, method, set, setResult, callExpr, method.HasRefParam);
                     sb.AppendLine("        }");
                 }
             }
