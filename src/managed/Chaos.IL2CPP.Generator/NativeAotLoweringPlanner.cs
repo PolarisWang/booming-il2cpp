@@ -210,6 +210,12 @@ public sealed partial class NativeAotLoweringPlanner
 	private static readonly System.Collections.Concurrent.ConcurrentDictionary<string, string> _pseudoMetadataHandleCache =
 		new System.Collections.Concurrent.ConcurrentDictionary<string, string>(StringComparer.Ordinal);
 
+	// Tracks allocated pseudo-metadata handles to detect FNV-1a hash collisions.
+	// With ~10000 type entries in 25-bit hash space, collision probability is ~78%.
+	// When a collision is detected, the hash is incremented until a free slot is found.
+	private static readonly System.Collections.Concurrent.ConcurrentDictionary<uint, string> _usedPseudoMetadataHandles =
+		new System.Collections.Concurrent.ConcurrentDictionary<uint, string>();
+
 
     private IReadOnlyList<IGrouping<string, AotCoreIrMethodArtifact>> _methodsGroupedByDeclaringType =
         Array.Empty<IGrouping<string, AotCoreIrMethodArtifact>>();
@@ -530,6 +536,10 @@ public sealed partial class NativeAotLoweringPlanner
 
         if (!fullAssemblyMode)
             ArgumentNullException.ThrowIfNull(entryMethod);
+
+        // Clear per-run collision tracking for pseudo-metadata handles.
+        // Each codegen invocation (chunk) starts with a clean hash space.
+        _usedPseudoMetadataHandles.Clear();
 
         _codegenMode = mode;
         _subjectMethodSubjectIds = subjectMethods;
@@ -1204,6 +1214,10 @@ extern ""C"" CHAOS_IL2CPP_INT32 RunNativeAot(CHAOS_IL2CPP_INT32 entryIndex) {{
         // Enum runtime stubs — only needed when there are enum types in the closure.
         if (_enumTypeSubjectIds is { Count: > 0 })
             includes_.Add("\"enum_stubs.h\"");
+                                        // Async stubs (Task.Yield / YieldAwaitable) - always included;
+                                        // the header is tiny (~15 lines) and the stubs are only
+                                        // referenced when async yield methods are present.
+                                        includes_.Add("\"async_stubs.h\"");
         // Enum metadata header — only included when there are enum types in the closure.
         // Saves ~500 KB of C++ parsing per translation unit when no enums are present.
         if (!string.IsNullOrEmpty(enumMetaHeader))

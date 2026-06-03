@@ -33,24 +33,3 @@ extern "C" void* NativeDfnThunkArity1(void*, void*, void*, void*);
 extern "C" void* NativeDfnThunkArity2(void*, void*, void*, void*, void*);
 extern "C" void* NativeDfnThunkArity3(void*, void*, void*, void*, void*, void*);
 extern "C" void* NativeDfnThunkArity4(void*, void*, void*, void*, void*, void*, void*);
-
-// Delegate combine/remove forwarded to runtime-core for unified DelegateObject layout.
-// The runtime-core implementations use the invocation_list vector model and allocate
-// through old-gen (conservative GC scan), consistent with bridge-created delegates.
-
-CHAOS_IL2CPP_INTPTR chaos_delegate_combine(CHAOS_IL2CPP_INTPTR chaos_left_value, CHAOS_IL2CPP_INTPTR chaos_right_value)
-{
-    return chaos::il2cpp::runtime_core::DelegateCombine(chaos_left_value, chaos_right_value);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_delegate_remove(CHAOS_IL2CPP_INTPTR chaos_source_value, CHAOS_IL2CPP_INTPTR chaos_value_to_remove)
-{
-    return chaos::il2cpp::runtime_core::DelegateRemove(chaos_source_value, chaos_value_to_remove);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_delegate_create_multicast_like(
-    CHAOS_IL2CPP_INTPTR chaos_template_delegate_value,
-    const chaos_delegate_invocation_list& chaos_entries)
-{
-    return chaos::il2cpp::runtime_core::DelegateCreateMulticast(chaos_template_delegate_value, chaos_entries);
-}

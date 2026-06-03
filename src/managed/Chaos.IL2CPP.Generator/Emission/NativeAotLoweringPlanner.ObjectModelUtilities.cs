@@ -717,12 +717,33 @@ public sealed partial class NativeAotLoweringPlanner
 			num ^= c;
 			num *= 16777619;
 		}
-		uint num2 = num & 0xFFFFFF;
-		if (num2 == 0)
+		if (num == 0)
 		{
-			num2 = 1u;
+			num = 1u;
 		}
-		return prefix | num2;
+		uint handle = prefix | num;
+
+		// FNV-1a 32-bit produces collisions at ~78% probability with 10000 entries
+		// in 25-bit hash space (prefix occupies bits 25-27). Resolve by probing
+		// forward until a free slot is found. The ConcurrentDictionary ensures
+		// deterministic collision resolution across runs.
+		if (!_usedPseudoMetadataHandles.TryAdd(handle, subjectId))
+		{
+			uint lowMask = (1u << 25) - 1; // 0x01FFFFFF — bits below prefix
+			uint low = (handle & lowMask) + 1;
+			uint probe = prefix | (low & lowMask);
+			int maxIter = 1 << 25; // safety: full hash space probe
+			while (!_usedPseudoMetadataHandles.TryAdd(probe, subjectId) && maxIter-- > 0)
+			{
+				low = ((probe & lowMask) + 1) & lowMask;
+				if (low == 0) low = 1;
+				probe = prefix | low;
+			}
+			System.Console.Error.WriteLine($"[HASH-COLLISION] subjectId='{subjectId}' handle={handle}u → resolved to {probe}u (collided with '{_usedPseudoMetadataHandles[handle]}')");
+			handle = probe;
+		}
+
+		return handle;
 	}
 
 	private static string GetRuntimeTypeInfoExpression(string? subjectId)

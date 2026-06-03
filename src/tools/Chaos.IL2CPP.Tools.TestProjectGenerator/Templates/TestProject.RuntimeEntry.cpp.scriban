@@ -512,3 +512,21 @@ shutdown:
 #endif
     // unreachable
 }
+
+// ── Delegate stub forwarders ──────────────────────────────────────────────
+// Forward declarations from delegate_helpers.h (not included to avoid pulling
+// <core/delegate_object.h> and <vector> into this translation unit).
+namespace chaos::il2cpp::runtime_core {
+    std::intptr_t DelegateCombine(std::intptr_t left, std::intptr_t right);
+    std::intptr_t DelegateRemove(std::intptr_t source, std::intptr_t value_to_remove);
+}
+
+std::intptr_t chaos_delegate_combine(std::intptr_t left, std::intptr_t right) noexcept
+{
+    return chaos::il2cpp::runtime_core::DelegateCombine(left, right);
+}
+
+std::intptr_t chaos_delegate_remove(std::intptr_t source, std::intptr_t value) noexcept
+{
+    return chaos::il2cpp::runtime_core::DelegateRemove(source, value);
+}

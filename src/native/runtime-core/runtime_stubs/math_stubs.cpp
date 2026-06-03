@@ -9,14 +9,9 @@
 namespace chaos::il2cpp::runtime_core {
 extern "C" {
 
-CHAOS_IL2CPP_INT64 ChaosMathSqrt(CHAOS_IL2CPP_INT64 value) noexcept
+CHAOS_IL2CPP_FLOAT64 ChaosMathSqrt(CHAOS_IL2CPP_FLOAT64 value) noexcept
 {
-    double d;
-    CHAOS_IL2CPP_MEMCPY(&d, &value, sizeof(d));
-    d = CHAOS_IL2CPP_SQRT(d);
-    CHAOS_IL2CPP_INT64 result;
-    CHAOS_IL2CPP_MEMCPY(&result, &d, sizeof(result));
-    return result;
+    return CHAOS_IL2CPP_SQRT(value);
 }
 
 // ── Math real implementations ──

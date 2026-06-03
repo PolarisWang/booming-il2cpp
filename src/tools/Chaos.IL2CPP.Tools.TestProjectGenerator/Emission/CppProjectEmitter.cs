@@ -380,6 +380,19 @@ public sealed class CppProjectEmitter
         if (needsConfigure)
         {
             buildDir.Create();
+            // Remove stale cache to prevent "generator platform: x64 does not match platform used previously"
+            var oldCache = new FileInfo(Path.Combine(buildDir.FullName, "CMakeCache.txt"));
+            if (oldCache.Exists)
+            {
+                try { oldCache.Delete(); }
+                catch { /* best-effort */ }
+            }
+            var oldCmakeFiles = new DirectoryInfo(Path.Combine(buildDir.FullName, "CMakeFiles"));
+            if (oldCmakeFiles.Exists)
+            {
+                try { oldCmakeFiles.Delete(recursive: true); }
+                catch { /* best-effort */ }
+            }
             Console.Error.WriteLine($"  [build] cmake configure (fresh)...");
             bool configureOk = false;
             for (int attempt = 0; attempt < 3; attempt++)
