@@ -3851,7 +3851,7 @@ public sealed partial class NativeAotLoweringPlanner
                         CreateVoidAbiSlot(),
                         new HashSet<int> { 0, 1, 2 },
                         DirectNativeSymbol: "ChaosArrayClear_Inline",
-                        DirectNativeHeader: "runtime_stubs/array_stubs.h");
+                        DirectNativeHeader: "\"runtime_stubs/array_stubs.h\"");
                 }));
 
             // === Type::IsAssignableFrom ===
