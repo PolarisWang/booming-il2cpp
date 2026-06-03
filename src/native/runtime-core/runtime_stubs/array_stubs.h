@@ -238,12 +238,23 @@ CHAOS_IL2CPP_FORCEINLINE CHAOS_IL2CPP_INT32 LastIndexOf_Sse2(
 }
 #endif
 
+// Forward declarations for AVX2 dispatch functions (defined later in the
+// AVX2 block, but called by ChaosArrayIndexOf_Inline / LastIndexOf_Inline
+// which are defined before the AVX2 functions).
+inline CHAOS_IL2CPP_INT32 IndexOf_Avx2_Dispatch(
+    const CHAOS_IL2CPP_INTPTR* elements, CHAOS_IL2CPP_INTPTR len, CHAOS_IL2CPP_INTPTR value) noexcept;
+inline CHAOS_IL2CPP_INT32 LastIndexOf_Avx2_Dispatch(
+    const CHAOS_IL2CPP_INTPTR* elements, CHAOS_IL2CPP_INTPTR len, CHAOS_IL2CPP_INTPTR value) noexcept;
+
 CHAOS_IL2CPP_FORCEINLINE CHAOS_IL2CPP_INT32 ChaosArrayIndexOf_Inline(CHAOS_IL2CPP_INTPTR array, CHAOS_IL2CPP_INTPTR value) noexcept
 {
     if (array == 0) return -1;
     const auto* arr = get_managed_array(array);
     const auto* elements = accessor_get_elements(arr);
 #if defined(__x86_64__) || defined(_M_AMD64)
+    if (arr->length >= 4 && chaos::il2cpp::runtime_core::HasAvx2()) {
+        return IndexOf_Avx2_Dispatch(elements, arr->length, value);
+    }
     return IndexOf_Sse2(elements, arr->length, value);
 #else
     for (CHAOS_IL2CPP_INTPTR i = 0; i < arr->length; ++i) {
@@ -259,6 +270,9 @@ CHAOS_IL2CPP_FORCEINLINE CHAOS_IL2CPP_INT32 ChaosArrayLastIndexOf_Inline(CHAOS_I
     const auto* arr = get_managed_array(array);
     const auto* elements = accessor_get_elements(arr);
 #if defined(__x86_64__) || defined(_M_AMD64)
+    if (arr->length >= 4 && chaos::il2cpp::runtime_core::HasAvx2()) {
+        return LastIndexOf_Avx2_Dispatch(elements, arr->length, value);
+    }
     return LastIndexOf_Sse2(elements, arr->length, value);
 #else
     CHAOS_IL2CPP_INT32 i = static_cast<CHAOS_IL2CPP_INT32>(arr->length) - 1;
@@ -337,6 +351,56 @@ inline void Reverse_Avx2_Dispatch(
         ++i; --j;
     }
 }
+
+// ── AVX2-accelerated IndexOf / LastIndexOf (P4+) ────────────
+// 256-bit vectors process 4 × 64-bit pointers per iteration
+// (2x throughput vs SSE2's 2 per iteration). Runtime-dispatched
+// via HasAvx2() — GCC/Clang need target("avx2") attribute.
+CHAOS_IL2CPP_TARGET_AVX2
+inline CHAOS_IL2CPP_INT32 IndexOf_Avx2_Dispatch(
+    const CHAOS_IL2CPP_INTPTR* elements, CHAOS_IL2CPP_INTPTR len, CHAOS_IL2CPP_INTPTR value) noexcept
+{
+    const __m256i val = _mm256_set1_epi64x(static_cast<long long>(value));
+    CHAOS_IL2CPP_INTPTR i = 0;
+    for (; i + 3 < len; i += 4) {
+        const __m256i chunk = _mm256_loadu_si256(
+            reinterpret_cast<const __m256i*>(elements + i));
+        const __m256i cmp = _mm256_cmpeq_epi64(chunk, val);
+        const int mask = _mm256_movemask_pd(_mm256_castsi256_pd(cmp));
+        if (mask & 0x1) return static_cast<CHAOS_IL2CPP_INT32>(i);
+        if (mask & 0x2) return static_cast<CHAOS_IL2CPP_INT32>(i + 1);
+        if (mask & 0x4) return static_cast<CHAOS_IL2CPP_INT32>(i + 2);
+        if (mask & 0x8) return static_cast<CHAOS_IL2CPP_INT32>(i + 3);
+    }
+    for (; i < len; ++i) {
+        if (elements[i] == value) return static_cast<CHAOS_IL2CPP_INT32>(i);
+    }
+    return -1;
+}
+
+CHAOS_IL2CPP_TARGET_AVX2
+inline CHAOS_IL2CPP_INT32 LastIndexOf_Avx2_Dispatch(
+    const CHAOS_IL2CPP_INTPTR* elements, CHAOS_IL2CPP_INTPTR len, CHAOS_IL2CPP_INTPTR value) noexcept
+{
+    const __m256i val = _mm256_set1_epi64x(static_cast<long long>(value));
+    CHAOS_IL2CPP_INTPTR i = len;
+    while (i >= 4) {
+        i -= 4;
+        const __m256i chunk = _mm256_loadu_si256(
+            reinterpret_cast<const __m256i*>(elements + i));
+        const __m256i cmp = _mm256_cmpeq_epi64(chunk, val);
+        const int mask = _mm256_movemask_pd(_mm256_castsi256_pd(cmp));
+        if (mask & 0x8) return static_cast<CHAOS_IL2CPP_INT32>(i + 3);
+        if (mask & 0x4) return static_cast<CHAOS_IL2CPP_INT32>(i + 2);
+        if (mask & 0x2) return static_cast<CHAOS_IL2CPP_INT32>(i + 1);
+        if (mask & 0x1) return static_cast<CHAOS_IL2CPP_INT32>(i);
+    }
+    for (; i > 0; --i) {
+        if (elements[i - 1] == value) return static_cast<CHAOS_IL2CPP_INT32>(i - 1);
+    }
+    return -1;
+}
+
 #undef CHAOS_IL2CPP_TARGET_AVX2
 #endif
 

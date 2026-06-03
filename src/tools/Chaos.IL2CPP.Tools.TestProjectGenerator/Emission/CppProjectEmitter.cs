@@ -311,7 +311,7 @@ public sealed class CppProjectEmitter
         try
         {
             using var proc = new Process();
-            proc.StartInfo.FileName = "where";
+            proc.StartInfo.FileName = OperatingSystem.IsWindows() ? "where" : "which";
             proc.StartInfo.Arguments = "ninja";
             proc.StartInfo.RedirectStandardOutput = true;
             proc.StartInfo.UseShellExecute = false;
@@ -356,11 +356,19 @@ public sealed class CppProjectEmitter
         }
         else
         {
-            if (ninjaPath is not null && !vsEnvReady)
-                Console.Error.WriteLine($"  [build] VS env not ready (INCLUDE/LIB empty) — Ninja unavailable, using VS generator");
+            if (OperatingSystem.IsWindows())
+            {
+                if (ninjaPath is not null && !vsEnvReady)
+                    Console.Error.WriteLine($"  [build] VS env not ready (INCLUDE/LIB empty) — Ninja unavailable, using VS generator");
+                else
+                    Console.Error.WriteLine($"  [build] Ninja not found, falling back to Visual Studio generator");
+                cmakeGeneratorArgs.AddRange(["-G", "Visual Studio 17 2022", "-A", "x64"]);
+            }
             else
-                Console.Error.WriteLine($"  [build] Ninja not found, falling back to Visual Studio generator");
-            cmakeGeneratorArgs.AddRange(["-G", "Visual Studio 17 2022", "-A", "x64"]);
+            {
+                Console.Error.WriteLine($"  [build] Ninja not found, falling back to Unix Makefiles");
+                cmakeGeneratorArgs.AddRange(["-G", "Unix Makefiles"]);
+            }
         }
 
         cmakeGeneratorArgs.Add($"-DCHAOS_IL2CPP_CONFIG_TIER={configTier.ToLowerInvariant()}");
