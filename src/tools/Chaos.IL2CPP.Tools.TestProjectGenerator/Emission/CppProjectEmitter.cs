@@ -448,6 +448,11 @@ public sealed class CppProjectEmitter
             Path.Combine(buildDir.FullName, "Release", $"{projectName}.exe"),
             Path.Combine(buildDir.FullName, "Debug", $"{projectName}.exe"),
             Path.Combine(buildDir.FullName, $"{projectName}.exe"),
+            // Linux — no .exe extension
+            Path.Combine(buildDir.FullName, "RelWithDebInfo", projectName),
+            Path.Combine(buildDir.FullName, "Release", projectName),
+            Path.Combine(buildDir.FullName, "Debug", projectName),
+            Path.Combine(buildDir.FullName, projectName),
         };
         string? exePath = null;
         foreach (var c in exeCandidates)
@@ -461,7 +466,7 @@ public sealed class CppProjectEmitter
 
         if (exePath is null)
         {
-            Console.Error.WriteLine($"  [build] {projectName}.exe not found in build output");
+            Console.Error.WriteLine($"  [build] {projectName} not found in build output");
             return null;
         }
 

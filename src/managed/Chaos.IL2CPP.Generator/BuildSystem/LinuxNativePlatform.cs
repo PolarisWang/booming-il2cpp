@@ -57,6 +57,7 @@ public sealed class LinuxNativePlatform : INativePlatform
         var libsToBuild = new (string BuildSubdir, string LibName)[]
         {
             ("fmt", "libchaos_fmt.a"),
+            ("pal", "libchaos_pal.a"),
             ("common", "libchaos_common.a"),
             ("support", "libchaos_support.a"),
             ("interpreter", "libchaos_interpreter.a"),
@@ -92,6 +93,7 @@ public sealed class LinuxNativePlatform : INativePlatform
         // Escape backslashes in paths for CMake
         var fmtSrc = repoRoot + "/third_party/fmt";
         var unorderedDenseSrc = repoRoot + "/third_party/unordered_dense";
+        var palSrc = repoRoot + "/src/native/pal";
         var commonSrc = repoRoot + "/src/native/common";
         var supportSrc = repoRoot + "/src/native/support";
         var interpreterSrc = repoRoot + "/src/native/interpreter";
@@ -123,11 +125,16 @@ else()
   add_compile_definitions(CHAOS_IL2CPP_LOG_LEVEL=3)
 endif()
 
+# Tier manager: the real implementation (tier_manager.cpp) is compiled
+# alongside registration_globals.cpp; suppress the stub with this define.
+add_compile_definitions(CHAOS_IL2CPP_HAS_TIER_MANAGER=1)
+
 # Native libraries in dependency order:
-#   fmt → unordered_dense (header-only) → common → interpreter
+#   fmt → unordered_dense (header-only) → pal → common → interpreter
 #   → runtime-core → support → hot-update → jit → bootstrap
 add_subdirectory("{fmtSrc}" "{outputDir}/fmt")
 add_subdirectory("{unorderedDenseSrc}" "{outputDir}/unordered_dense")
+add_subdirectory("{palSrc}" "{outputDir}/pal")
 add_subdirectory("{commonSrc}" "{outputDir}/common")
 add_subdirectory("{interpreterSrc}" "{outputDir}/interpreter")
 add_subdirectory("{runtimeCoreSrc}" "{outputDir}/runtime_core")

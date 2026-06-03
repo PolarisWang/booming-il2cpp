@@ -39,6 +39,10 @@ endif()
 add_compile_definitions(CHAOS_IL2CPP_JIT_MODE)
 {{ end }}
 
+# Tier manager: real implementation from tier_manager.cpp is compiled into
+# the runtime library, so suppress the stub in registration_globals.cpp.
+add_compile_definitions(CHAOS_IL2CPP_HAS_TIER_MANAGER=1)
+
 # ── Verification toggle ──
 if(NOT DEFINED CHAOS_IL2CPP_VERIFICATION_ENABLED)
   set(CHAOS_IL2CPP_VERIFICATION_ENABLED "{{ verification_enabled }}")
@@ -80,20 +84,11 @@ list(REMOVE_ITEM CHAOS_NATIVE_STUBS
     "${CMAKE_CURRENT_SOURCE_DIR}/jit_stubs.cpp"
 )
 
-# Runtime stubs from the SDK (compiled from source to avoid stale lib)
-file(GLOB CHAOS_RUNTIME_STUB_SOURCES
-    "${CHAOS_SDK_DIR}/runtime_stubs/*.cpp"
-)
-list(REMOVE_ITEM CHAOS_RUNTIME_STUB_SOURCES
-    "${CHAOS_SDK_DIR}/runtime_stubs/guid_stubs.cpp"
-    "${CHAOS_SDK_DIR}/runtime_stubs/threading_stubs.cpp"
-    "${CHAOS_SDK_DIR}/runtime_stubs/threadpool_events.cpp"
-    "${CHAOS_SDK_DIR}/runtime_stubs/crt_stubs.cpp"
-    "${CHAOS_SDK_DIR}/runtime_stubs/mutex_stubs_win32.cpp"
-    "${CHAOS_SDK_DIR}/runtime_stubs/pal_time_stub.cpp"
-)
-
-# PROFILE globals (compiled from source to avoid stale SDK lib dependency)
+# Runtime stubs are provided by libchaos_runtime_core.a (built from source
+# on Linux, prebuilt on Windows).  Do NOT compile them locally — the SDK
+# library already contains these symbols and compiling them again causes
+# multiple-definition linker errors.
+# profile_globals.cpp is project-specific, so compile it from source.
 set(CHAOS_PROFILE_GLOBALS
     "${CHAOS_SDK_DIR}/runtime_stubs/profile_globals.cpp"
 )
@@ -103,7 +98,6 @@ set(CHAOS_ENTRY_SOURCES
     "runtime-patchdata.cpp"
     "verification_dispatch.generated.cpp"
     ${CHAOS_NATIVE_STUBS}
-    ${CHAOS_RUNTIME_STUB_SOURCES}
     ${CHAOS_PROFILE_GLOBALS}
     ${CHAOS_AOT_GENERATED_CPP}
 )
