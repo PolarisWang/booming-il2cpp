@@ -114,6 +114,14 @@ void PatchMethodLowerIR(uintptr_t method_key) noexcept;
 // Called from ApplyPatchFromMemory after the initial pre-lowering pass.
 void ReapplyInlining(PatchMethod* methods, uint32_t method_count) noexcept;
 
+// ── Eager JIT compilation of reg_ir methods ───────────────────
+// When JIT is enabled and the .patchdata carries pre-allocated
+// register IR (v2+), compile all methods eagerly during ApplyPatchFromMemory
+// so they run at native speed on first call.  Methods that already
+// have an AOT entry (keep_native) via dispatch table are skipped.
+// Implementation in eager_compile.cpp (interpreter links against JIT).
+void EagerCompilePatchMethods(PatchMethod* methods, uint32_t method_count) noexcept;
+
 }  // namespace chaos::il2cpp::runtime_core
 
 #endif  // CHAOS_IL2CPP_INTERPRETER_ENTRY_H_

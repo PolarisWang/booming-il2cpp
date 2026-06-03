@@ -37,3 +37,4 @@
 #include "interp_entry/patch_method_lower.cpp"
 #include "interp_entry/entry_direct.cpp"
 #include "interp_entry/reapply_inlining.cpp"
+#include "interp_entry/eager_compile.cpp"
