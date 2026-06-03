@@ -323,6 +323,10 @@ testing/foundation-dll/**/reports_generated/
 testing/foundation-dll/**/managed_test/
 testing/foundation-dll/**/benchmark/
 
+# Pipeline temp/staging artifacts
+testing/foundation-dll/**/_runtime_libs/
+testing/foundation-dll/**/native/_emit_tmp_*
+
 # Pipeline run data
 testing/foundation-dll/**/native/*-benchmark.json
 testing/foundation-dll/**/*.patchdata
