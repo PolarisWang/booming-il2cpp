@@ -33,4 +33,13 @@ bool PalPreemptRequest(void* os_handle, uint64_t /*os_thread_id*/,
                           static_cast<ULONG_PTR>(epoch)) != 0;
 }
 
+void PalPreemptiveSuspendAck(uint64_t epoch, PalEvent* suspend_event,
+                              std::atomic<uint32_t>* /*suspend_seq*/,
+                              std::atomic<uint32_t>* suspend_ack) noexcept {
+    suspend_ack->store(epoch, std::memory_order_release);
+    if (suspend_event != nullptr) {
+        PalEventWait(suspend_event, UINT64_MAX);
+    }
+}
+
 }  // namespace chaos::il2cpp::pal

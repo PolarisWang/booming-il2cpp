@@ -2,6 +2,9 @@
 
 #include <chaos/pal/pal_preempt.h>
 
+#include <chaos/pal/pal_sync.h>
+#include <chaos/pal/pal_thread.h>
+
 #include <atomic>
 #include <cstring>
 #include <signal.h>
@@ -43,6 +46,16 @@ bool PalPreemptRequest(void* /*os_handle*/, uint64_t os_thread_id,
                         uint64_t /*epoch*/) noexcept {
     if (os_thread_id == 0) return false;
     return ::pthread_kill(static_cast<pthread_t>(os_thread_id), SIGUSR2) == 0;
+}
+
+void PalPreemptiveSuspendAck(uint64_t /*epoch*/, PalEvent* /*suspend_event*/,
+                              std::atomic<uint32_t>* suspend_seq,
+                              std::atomic<uint32_t>* suspend_ack) noexcept {
+    uint32_t seq = suspend_seq->load(std::memory_order_acquire);
+    suspend_ack->store(seq, std::memory_order_release);
+    while (suspend_seq->load(std::memory_order_acquire) != 0) {
+        PalYield();
+    }
 }
 
 }  // namespace chaos::il2cpp::pal

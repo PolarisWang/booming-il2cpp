@@ -1,7 +1,10 @@
 // pal_preempt.h — Preemptive thread suspend abstraction
 #pragma once
 
+#include <atomic>
 #include <cstdint>
+
+#include <chaos/pal/pal_sync.h>
 
 namespace chaos::il2cpp::pal {
 
@@ -42,5 +45,18 @@ void PalPreemptInit(PalPreemptCallback callback) noexcept;
 ///                      callback reads from TLS on POSIX).
 /// @returns true if the request was delivered successfully.
 bool PalPreemptRequest(void* os_handle, uint64_t os_thread_id, uint64_t epoch) noexcept;
+
+/// Called by the preemptive suspend handler (target thread context) after
+/// acknowledging the suspend request.
+///
+/// On Windows: stores epoch to *suspend_ack, then blocks on suspend_event
+/// (PalEventWait).  APC context permits event wait.
+///
+/// On POSIX: stores suspend_seq's current value to *suspend_ack, then
+/// spin-waits with PalYield until *suspend_seq becomes 0.  Signal context
+/// forbids synchronization primitives, so a spin-loop is the only option.
+void PalPreemptiveSuspendAck(uint64_t epoch, PalEvent* suspend_event,
+                              std::atomic<uint32_t>* suspend_seq,
+                              std::atomic<uint32_t>* suspend_ack) noexcept;
 
 }  // namespace chaos::il2cpp::pal

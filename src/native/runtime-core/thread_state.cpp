@@ -308,21 +308,9 @@ static void PreemptiveSuspendHandler(uint64_t epoch) noexcept {
     auto* thread = tls_this_thread;
     if (thread == nullptr) return;
 
-#if defined(_WIN32) || defined(_WIN64)
-    thread->suspend_ack.store(epoch, std::memory_order_release);
-    if (thread->suspend_event != nullptr) {
-        PalEventWait(thread->suspend_event, UINT64_MAX);
-    }
-#else
-    (void)epoch;
-    uint32_t seq = thread->suspend_seq.load(std::memory_order_acquire);
-    thread->suspend_ack.store(seq, std::memory_order_release);
-
-    // Spin-wait — signal context forbids condvar/synch primitives.
-    while (thread->suspend_seq.load(std::memory_order_acquire) != 0) {
-        PalYield();
-    }
-#endif
+    chaos::il2cpp::pal::PalPreemptiveSuspendAck(
+        epoch, thread->suspend_event,
+        &thread->suspend_seq, &thread->suspend_ack);
 }
 
 /// One-time initialization of the preemptive suspend subsystem.
