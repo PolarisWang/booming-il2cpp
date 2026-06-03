@@ -462,6 +462,7 @@ static void TryTierUpgrade(PatchMethod* patch_method, uint32_t call_count,
                                 static_cast<const GcSlotMapV0*>(nm->slot_map_data));
                         }
                         chaos::il2cpp::jit::RegisterNativeCodeSection(nm->code, nm->code_size, nm, patch_method->token);
+                        patch_method->aot_entry = nm->code;
                     } else {
                         ++patch_method->codegen_fail_count;
                         if (patch_method->codegen_fail_count >= PatchMethod::kMaxCodegenFailures) {

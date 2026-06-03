@@ -759,6 +759,22 @@ PatchContext* ApplyPatchFromMemory(const void* data, size_t size,
                                     static_cast<uint32_t>(kHotpatchKeepNative));
 #endif
             }
+
+            // ── AOT entry for keep-native methods ────────────────────
+            // The original AOT code is valid for methods whose IL hasn't
+            // changed.  Capture it here so Step A0 dispatch can call it
+            // directly without tiering or deopt overhead.
+            // In JIT mode, direct_ptr may be a trampoline; use the
+            // OriginalAotPtrCallback to unwrap to the real AOT code.
+            if (entry != nullptr && patch_method.aot_entry == nullptr) {
+                auto original_cb = GetOriginalAotPtrCallback();
+                if (original_cb != nullptr) {
+                    patch_method.aot_entry = original_cb(entry);
+                }
+                if (patch_method.aot_entry == nullptr) {
+                    patch_method.aot_entry = entry->direct_ptr;
+                }
+            }
         }
 
         ++patched_count;
@@ -799,6 +815,13 @@ PatchContext* ApplyPatchFromMemory(const void* data, size_t size,
     if (patched_count > 0) {
         ReapplyInlining(ctx->methods, patched_count);
     }
+
+    // ── Phase 1.3: Eager JIT compilation ─────────────────────────────
+    // For methods with pre-allocated register IR (v2+ .patchdata) that
+    // don't already have an AOT entry, JIT-compile them eagerly so they
+    // run at native speed on first call via Step A0 dispatch.
+    // This is safe only after Phase 1.2 (inlining is complete).
+    EagerCompilePatchMethods(ctx->methods, patched_count);
 
     // Bump patch generation for CallVirt MIC cache invalidation.
     g_patch_generation.fetch_add(1, std::memory_order_relaxed);
