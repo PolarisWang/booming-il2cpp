@@ -603,6 +603,18 @@ void InterpreterEntryDirect(
 
 
 
+    // ── Step A0: AOT native code path ─────────────────────────────
+    // AOT code is pre-compiled — no tiering, no deopt needed.
+    if constexpr (kRuntimeConfig.aot) {
+        if (auto aot_entry = patch_method->aot_entry; aot_entry != nullptr) {
+            GetTierCounters().step_native.fetch_add(1, std::memory_order_relaxed);
+            using NativeEntry = void (*)(void*, void*);
+            auto native_entry = reinterpret_cast<NativeEntry>(aot_entry);
+            native_entry(args_buf, ret_buf);
+            return;
+        }
+    }
+
     // ── Step A: Native code path (T4) ────────────────────────────────
     if constexpr (kRuntimeConfig.jit) {
         auto t4_tier = patch_method->tier_state.load(std::memory_order_acquire);

@@ -39,6 +39,14 @@ struct PatchMethod {
     uint32_t        aot_core_ir_json_length = 0;          // JSON string length
     const uint8_t*  signature_blob  = nullptr;   // method signature blob
     uint32_t        signature_len   = 0;          // signature blob length
+
+    // ── AOT native code entry point ──────────────────────────────────
+    // Pre-compiled AOT code pointer. Set during patch method initialization.
+    // Non-null = AOT code is available — Step A dispatch calls it directly
+    // without tiering or deoptimization.  JIT-specific fields below are
+    // irrelevant when aot_entry is set.
+    void*           aot_entry       = nullptr;
+
     void*           cached_ir       = nullptr;   // cached IRMethod (lazy, null = not lowered)
     void*           cached_reg_method = nullptr; // cached RegisterMethod (register-allocated, lazy)
 
