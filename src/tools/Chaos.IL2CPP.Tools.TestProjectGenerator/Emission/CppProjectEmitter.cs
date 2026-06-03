@@ -112,9 +112,15 @@ public sealed class CppProjectEmitter
         // Flat layout: always copy .cpp and .h files to subjects/ under the
         // output directory. The CMakeLists.txt prefers this flat layout over
         // deep codegen tree paths to avoid MAX_PATH issues with MSVC.
+        // Clean subjects/ first to prevent stale page*.cpp files from previous
+        // codegen runs (with different page counts) from leaking into the build.
         {
             var subjectsDir = Path.Combine(outputDir, "subjects");
             Directory.CreateDirectory(subjectsDir);
+            foreach (var stale in Directory.GetFiles(subjectsDir, "*.cpp"))
+                TryDeleteFile(stale);
+            foreach (var stale in Directory.GetFiles(subjectsDir, "*.h"))
+                TryDeleteFile(stale);
             foreach (var genDir in codegen.GeneratedDirs)
             {
                 foreach (var file in Directory.GetFiles(genDir, "*.cpp"))
@@ -701,5 +707,12 @@ public sealed class CppProjectEmitter
                 Thread.Sleep(delayMs);
             }
         }
+    }
+
+    /// Best-effort file deletion (no-op if file is locked or missing).
+    private static void TryDeleteFile(string path)
+    {
+        try { File.Delete(path); }
+        catch { /* best-effort */ }
     }
 }
