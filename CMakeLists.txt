@@ -133,11 +133,11 @@ elseif(ROADMAP0_PRESET_TARGET STREQUAL "linux-x64-reference")
     add_subdirectory(tests/perf/unordered-map-bench)
 
     # ── Foundation DLL native family skeletons ────────────────────
-    add_subdirectory(testing/foundation-dll)
+    # add_subdirectory(testing/foundation-dll)  # skipped for linux-x64 PROFILE build
 
     # ── Native testing suite (GoogleTest-based unit/stress/benchmark) ─────
     # Windows only: imports prebuilt .lib files, uses MSVC-specific flags.
-    if(MSVC)
+    if(MSVC OR UNIX)
         add_subdirectory(testing)
     endif()
 

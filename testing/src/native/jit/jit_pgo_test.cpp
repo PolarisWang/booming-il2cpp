@@ -17,7 +17,6 @@
 
 #include <codegen_bridge.h>
 
-#include <windows.h>
 #include <cstdint>
 #include <cstring>
 

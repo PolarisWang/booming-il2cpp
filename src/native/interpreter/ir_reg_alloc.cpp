@@ -1018,7 +1018,7 @@ static void Reg_Ret(RegisterFrame& frame, const RegisterInstruction& instr) noex
     CHAOS_IL2CPP_PROFILE_SCOPE("Reg_Ret");
     if (instr.has_src1()) {
         uint8_t src = instr.src1_reg();
-        std::fprintf(stderr, "[diag:Ret] has_src1 src=%u\n", src);
+        // std::fprintf(stderr, "[diag:Ret] has_src1 src=%u\n", src);
         uint64_t rv = 0; uint8_t rt = 0;
         if (src < 64) {
             rv = frame.regs.gpr[src];
@@ -1027,7 +1027,7 @@ static void Reg_Ret(RegisterFrame& frame, const RegisterInstruction& instr) noex
             rv = frame.regs.fpr[src - 64];
             rt = frame.regs.fpr_tags[src - 64];
         } else {
-            std::fprintf(stderr, "[diag:Ret] OUT OF BOUNDS src=%u\n", src);
+            // std::fprintf(stderr, "[diag:Ret] OUT OF BOUNDS src=%u\n", src);
         }
         frame.has_ret = true;
         frame.ret_val = rv;

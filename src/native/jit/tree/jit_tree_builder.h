@@ -116,6 +116,11 @@ private:
     static constexpr uint32_t kMaxRoots = 128;
     ExprNode* roots_[kMaxRoots];
     uint32_t  root_count_ = 0;
+
+    // When true, Build() returns an empty result (triggers linear fallback).
+    // Set when the instruction stream contains operations that the tree IR
+    // builder doesn't yet support (StFld, StSFld, etc.).
+    bool has_unsupported_ = false;
 };
 
 /// Analyze instruction sequence to find basic block boundaries.

@@ -1,3 +1,4 @@
+#if defined(_WIN32)
 #include <windows.h>
 #include <dbghelp.h>
 #include <cstdio>
@@ -30,3 +31,4 @@ int main() {
     system("build/testing/jit/RelWithDebInfo/test_jit_mode.exe --gtest_filter=*Tier0CompilesAddMethod*");
     return 0;
 }
+#endif  // _WIN32

@@ -52,11 +52,11 @@ macro(add_chaos_imported_lib name subdir)
     if(NOT TARGET ${name})
         add_library(${name} STATIC IMPORTED GLOBAL)
         set_target_properties(${name} PROPERTIES
-            IMPORTED_LOCATION_DEBUG          "${CHAOS_NATIVE_DIR}/${subdir}/Debug/${name}.lib"
-            IMPORTED_LOCATION_RELEASE        "${CHAOS_NATIVE_DIR}/${subdir}/RelWithDebInfo/${name}.lib"
-            IMPORTED_LOCATION_RELWITHDEBINFO "${CHAOS_NATIVE_DIR}/${subdir}/RelWithDebInfo/${name}.lib"
-            IMPORTED_LOCATION_MINSIZEREL     "${CHAOS_NATIVE_DIR}/${subdir}/RelWithDebInfo/${name}.lib"
-            IMPORTED_LOCATION                "${CHAOS_NATIVE_DIR}/${subdir}/RelWithDebInfo/${name}.lib"
+            IMPORTED_LOCATION_DEBUG          "${CHAOS_NATIVE_DIR}/${subdir}/Debug/${name}${CMAKE_STATIC_LIBRARY_SUFFIX}"
+            IMPORTED_LOCATION_RELEASE        "${CHAOS_NATIVE_DIR}/${subdir}/RelWithDebInfo/${name}${CMAKE_STATIC_LIBRARY_SUFFIX}"
+            IMPORTED_LOCATION_RELWITHDEBINFO "${CHAOS_NATIVE_DIR}/${subdir}/RelWithDebInfo/${name}${CMAKE_STATIC_LIBRARY_SUFFIX}"
+            IMPORTED_LOCATION_MINSIZEREL     "${CHAOS_NATIVE_DIR}/${subdir}/RelWithDebInfo/${name}${CMAKE_STATIC_LIBRARY_SUFFIX}"
+            IMPORTED_LOCATION                "${CHAOS_NATIVE_DIR}/${subdir}/RelWithDebInfo/${name}${CMAKE_STATIC_LIBRARY_SUFFIX}"
         )
     endif()
 endmacro()
@@ -85,15 +85,21 @@ if(NOT TARGET chaos_fmt)
 endif()
 
 # Compiler settings
-add_compile_options(/utf-8 /GS- /W1)
+# Compiler settings (MSVC flags only — non-MSVC compilers don't recognize /utf-8, /GS-)
+add_compile_options("$<$<CXX_COMPILER_ID:MSVC>:/utf-8 /GS- /W1>")
 
 # Provide stubs for debug CRT symbols referenced by chaos prebuilt libraries
 set(CHAOS_CRT_STUBS "${CMAKE_CURRENT_SOURCE_DIR}/crt_stubs.cpp")
 
 if(USE_ASAN)
-    add_compile_options(/fsanitize=address)
-    add_link_options(/fsanitize=address /FORCE:MULTIPLE)
-    add_compile_definitions(_DISABLE_VECTOR_ANNOTATION _DISABLE_STRING_ANNOTATION)
+    if(MSVC)
+        add_compile_options(/fsanitize=address)
+        add_link_options(/fsanitize=address /FORCE:MULTIPLE)
+        add_compile_definitions(_DISABLE_VECTOR_ANNOTATION _DISABLE_STRING_ANNOTATION)
+    else()
+        add_compile_options(-fsanitize=address)
+        add_link_options(-fsanitize=address)
+    endif()
 
     # Locate the ASan runtime DLL for post-build copy.
     # MSVC places it alongside the toolchain binaries.
@@ -129,6 +135,12 @@ function(add_chaos_test name)
     target_include_directories(${name} PRIVATE ${CHAOS_INCLUDE_DIRS} ${ARG_INCLUDES})
     if(MSVC)
         target_link_options(${name} PRIVATE /FORCE:MULTIPLE)
+    else()
+        # Linux: allow duplicate TLS definitions from test stubs
+        target_link_options(${name} PRIVATE -Wl,--allow-multiple-definition)
+        # Force JitRecompileToTier1 to resolve circular dep between
+        # chaos_runtime_core (tier_manager) and chaos_jit (jit_precode)
+        target_link_options(${name} PRIVATE -Wl,--undefined=JitRecompileToTier1)
     endif()
     add_test(NAME ${name} COMMAND ${name})
     if(ARG_LABELS)

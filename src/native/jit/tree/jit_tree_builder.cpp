@@ -135,6 +135,7 @@ TreeBuildResult TreeBuilder::Build(const interpreter::RegisterInstruction* instr
     // Reset state
     arena_pos_ = arena_;
     root_count_ = 0;
+    has_unsupported_ = false;
     vn_.Clear();
     std::memset(vreg_to_node_, 0, sizeof(vreg_to_node_));
     std::memset(newarr_constant_size_, 0, sizeof(newarr_constant_size_));
@@ -199,13 +200,14 @@ TreeBuildResult TreeBuilder::Build(const interpreter::RegisterInstruction* instr
             }
             is_root = true;
         }
-        else if (opc == interpreter::IROpCode::StFld || opc == interpreter::IROpCode::StSFld) {
-            // Store field: root
-            ExprNode* obj  = ri.has_src1() ? ResolveVReg(ri.src1_reg(), 5) : nullptr;
-            ExprNode* val  = ri.has_src2() ? ResolveVReg(ri.src2_reg(), 0) : nullptr;
-            node = AllocNode(opc == interpreter::IROpCode::StSFld ? kStFld : kStFld, kVoid, obj, val);
-            if (node) node->field_offset = ri.imm.field_offset;
-            is_root = true;
+        else if (opc == interpreter::IROpCode::StFld || opc == interpreter::IROpCode::StSFld ||
+                 opc == interpreter::IROpCode::LdFld || opc == interpreter::IROpCode::LdSFld) {
+            // Field operations not supported in tree IR yet. The field_offset
+            // payload in ExprNode overlaps with child0/child1, causing pointer
+            // corruption. Abort so OptimizeWithTreeIR falls back to the linear
+            // optimizer, preserving original instructions unchanged.
+            has_unsupported_ = true;
+            break;
         }
         else if (opc == interpreter::IROpCode::Ret) {
             // Return: root with optional value child
@@ -342,6 +344,10 @@ TreeBuildResult TreeBuilder::Build(const interpreter::RegisterInstruction* instr
                 roots_[root_count_++] = node;
         }
     }
+
+    // Check for unsupported instructions (field ops, etc.) — abort the tree
+    // IR build so OptimizeWithTreeIR falls through to the linear optimizer.
+    if (has_unsupported_) return {};
 
     // Build result
     TreeBuildResult result;

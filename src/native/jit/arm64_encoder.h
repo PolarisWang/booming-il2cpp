@@ -121,6 +121,21 @@ inline void EmitMul32(CodeBuffer& buf, uint8_t rd, uint8_t rn, uint8_t rm) noexc
     EmitArm64(buf, 0x1B007C00u | (rm << 16) | (rn << 5) | rd);
 }
 
+/// 32-bit ADDS Wd, Wn, Wm (add setting flags — for AddOvf signed overflow check)
+inline void EmitAdds32(CodeBuffer& buf, uint8_t rd, uint8_t rn, uint8_t rm) noexcept {
+    EmitArm64(buf, 0x2B000000u | (rm << 16) | (rn << 5) | rd);
+}
+
+/// 32-bit SUBS Wd, Wn, Wm (subtract setting flags — for SubOvf signed overflow check)
+inline void EmitSubs32(CodeBuffer& buf, uint8_t rd, uint8_t rn, uint8_t rm) noexcept {
+    EmitArm64(buf, 0x6B000000u | (rm << 16) | (rn << 5) | rd);
+}
+
+/// SMULL Xd, Wn, Wm (signed 32→64 multiply — for MulOvf overflow detection)
+inline void EmitSmull(CodeBuffer& buf, uint8_t rd, uint8_t rn, uint8_t rm) noexcept {
+    EmitArm64(buf, 0x9B207C00u | (rm << 16) | (rn << 5) | rd);
+}
+
 /// 64-bit SDIV Rd, Rn, Rm
 inline void EmitSdiv64(CodeBuffer& buf, uint8_t rd, uint8_t rn, uint8_t rm) noexcept {
     EmitArm64(buf, 0x9AC00C00u | (rm << 16) | (rn << 5) | rd);
@@ -209,6 +224,11 @@ inline void EmitCmp64ImmShift(CodeBuffer& buf, uint8_t rn, uint16_t imm12) noexc
 /// 32-bit CMP Wn, #imm12
 inline void EmitCmp32Imm(CodeBuffer& buf, uint8_t rn, uint16_t imm12) noexcept {
     EmitArm64(buf, 0x71000000u | (static_cast<uint32_t>(imm12 & 0xFFF) << 10) | (rn << 5));
+}
+
+/// 64-bit CMP Xn, Xm (alias for SUBS XZR, Xn, Xm)
+inline void EmitCmp64(CodeBuffer& buf, uint8_t rn, uint8_t rm) noexcept {
+    EmitArm64(buf, 0xEB000000u | (rm << 16) | (rn << 5) | 31);
 }
 
 // ═══════════════════════════════════════════════════════════════════════════

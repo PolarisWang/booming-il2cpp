@@ -461,9 +461,7 @@ void InterpreterEntryDirect(
     if (method_key == 0) return;
     {
         auto* pm = reinterpret_cast<PatchMethod*>(method_key);
-        fprintf(stderr, "[DBG-PM] token=0x%x reg_ir=%p cached_ir=%p cached_reg=%p\n",
-                pm->token, (const void*)pm->reg_ir_data,
-                pm->cached_ir, pm->cached_reg_method);
+        // DBG-PM (removed)
     }
 
     CHAOS_IL2CPP_ASSERT(threading::tls_this_thread != nullptr

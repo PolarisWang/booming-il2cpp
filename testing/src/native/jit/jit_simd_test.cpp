@@ -18,10 +18,17 @@
 #include "jit_helpers.h"
 #include "ir_reg_alloc.h"
 
+#if defined(_WIN32)
 #include <windows.h>
 #include <cstdint>
 
 #include <codegen_bridge.h>
+#else
+#include <sys/mman.h>
+#include <cstdint>
+
+#include <codegen_bridge.h>
+#endif
 
 #include <gc_scheduler.h>
 #include <gc/gc_young_gen.h>
@@ -47,7 +54,12 @@ static void PrimeTlab() noexcept {
     static bool primed = false;
     if (!primed) {
         static constexpr size_t kTlabSize = 64 * 1024;
+#if defined(_WIN32)
         void* buf = VirtualAlloc(nullptr, kTlabSize, MEM_RESERVE | MEM_COMMIT, PAGE_READWRITE);
+#else
+        void* buf = mmap(nullptr, kTlabSize, PROT_READ | PROT_WRITE,
+                         MAP_PRIVATE | MAP_ANONYMOUS, -1, 0);
+#endif
         if (buf) {
             tls_tlab.start = static_cast<char*>(buf);
             tls_tlab.current = static_cast<char*>(buf);
