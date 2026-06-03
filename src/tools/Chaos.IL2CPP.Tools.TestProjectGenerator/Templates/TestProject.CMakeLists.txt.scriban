@@ -8,7 +8,7 @@ set(CMAKE_CXX_STANDARD 20)
 # ── Compiler settings ──
 # /EHa needed for catch(...) to intercept C++ exceptions thrown by generated code.
 if(MSVC)
-  add_compile_options(/utf-8 /GS- /FS)
+  add_compile_options(/utf-8 /GS- /FS /bigobj)
   set(CHAOS_EHA_FLAG "/EHa")
   set(CHAOS_FORCE_MULTIPLE /FORCE:MULTIPLE)
 else()
@@ -130,4 +130,7 @@ target_link_libraries({{ project_name }} PRIVATE chaos::runtime
     "$<$<CXX_COMPILER_ID:MSVC>:${CHAOS_SDK_DIR}/lib/chaos_pal.lib>"
     "$<$<NOT:$<CXX_COMPILER_ID:MSVC>>:${CHAOS_SDK_DIR}/lib/libchaos_pal.a>"
 )
+if(MSVC)
+  target_link_libraries({{ project_name }} PRIVATE bcrypt)
+endif()
 target_link_options({{ project_name }} PRIVATE ${CHAOS_FORCE_MULTIPLE})

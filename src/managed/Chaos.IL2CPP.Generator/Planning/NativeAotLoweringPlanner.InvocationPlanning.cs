@@ -912,10 +912,22 @@ public sealed partial class NativeAotLoweringPlanner
         // Priority: external runtime helper (via GenericShapeDescriptor/SimpleForward)
         // before instantiation stub symbol, so that Nullable<T> etc. stub definitions
         // resolve to chaos_external_runtime_* symbols rather than undefined chaos_stub_definition_*.
+        // When a registered helper is found, use its precise ABI carriers (ParameterAbis, ReturnAbi,
+        // RawArgumentIndices) so that double-typed helpers use Float64 carrier instead of NativeInt.
+        // This ensures correct ChaosLoadFloat64/ChaosStoreFloat64 marshalling at the call site —
+        // without it, implicit int64→double numeric conversion corrupts bitcast double values.
+        IReadOnlyList<AotCoreIrAbiSlotArtifact>? extParamAbis = null;
+        AotCoreIrAbiSlotArtifact? extReturnAbi = null;
+        IReadOnlySet<int>? extRawIndices = null;
+        string? extDirectNativeSymbol = null;
         if (!string.IsNullOrEmpty(calleeOrTarget) &&
-            TryCreateExternalRuntimeHelperDefinition(calleeOrTarget, out _))
+            TryCreateExternalRuntimeHelperDefinition(calleeOrTarget, out var helperDef))
         {
-            symbol = GetExternalRuntimeHelperSymbol(calleeOrTarget);
+            symbol = helperDef.TargetSymbol;
+            extParamAbis = helperDef.ParameterAbis;
+            extReturnAbi = helperDef.ReturnAbi;
+            extRawIndices = helperDef.RawArgumentIndices;
+            extDirectNativeSymbol = helperDef.DirectNativeSymbol;
         }
         else if (TryGetInstantiationStubSymbol(instruction.TargetReference?.InstantiationStubId) is { } stubSymbol)
         {
@@ -944,13 +956,14 @@ public sealed partial class NativeAotLoweringPlanner
 
         return new InvocationTarget(
             symbol,
-            CreateLegacyAbiParameterSlots(GetRequiredTargetParameterCount(instruction)),
-            CreateLegacyReturnAbiSlot(returnType2 ?? instruction.TargetReturnType),
-            EmptyRawArgumentIndices,
+            extParamAbis ?? CreateLegacyAbiParameterSlots(GetRequiredTargetParameterCount(instruction)),
+            extReturnAbi ?? CreateLegacyReturnAbiSlot(returnType2 ?? instruction.TargetReturnType),
+            extRawIndices ?? EmptyRawArgumentIndices,
             instruction.TargetReference?.OpenDefinitionSubjectId,
             instruction.TargetReference?.SharedGenericBodyId,
             instruction.TargetReference?.InstantiationStubId,
-            instruction.TargetReference?.RuntimeGenericContext);
+            instruction.TargetReference?.RuntimeGenericContext,
+            DirectNativeSymbol: extDirectNativeSymbol);
     }
 
     private InvocationTarget? TryResolveDirectInvocationTarget(string? callee)

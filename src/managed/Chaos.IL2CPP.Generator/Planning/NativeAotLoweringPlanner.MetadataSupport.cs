@@ -255,8 +255,12 @@ public sealed partial class NativeAotLoweringPlanner
         {
             if (!displayNameToSubjectId.TryGetValue(attributeDisplayName, out var attributeTypeSubjectId))
             {
-                throw new NotSupportedException(
-                    $"native-aot custom-attribute lookup could not resolve attribute type '{attributeDisplayName}' from closure metadata.");
+                // Attribute type not in closure metadata — skip this materialization
+                // rather than crashing. This can happen when a method references
+                // System.Attribute itself (the base class of all attributes) as a
+                // queried type, which is valid managed code but the closure does
+                // not include System.Attribute as a registered type.
+                continue;
             }
 
             queryAttributeTypeByCallee[callee] = attributeTypeSubjectId;

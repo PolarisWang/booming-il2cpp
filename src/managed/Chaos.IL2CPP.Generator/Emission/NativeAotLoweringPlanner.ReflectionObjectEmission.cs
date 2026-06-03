@@ -394,54 +394,28 @@ public sealed partial class NativeAotLoweringPlanner
 			builder.AppendLine();
 			builder.AppendLine("CHAOS_IL2CPP_INTPTR ChaosReflectionGetMethod_name_value_from_handle(CHAOS_IL2CPP_INTPTR chaos_method_handle) noexcept");
 			builder.AppendLine("{");
-			builder.AppendLine("    switch (chaos_method_handle)");
-			builder.AppendLine("    {");
 			foreach (ReflectionMemberMethodEntry methodEntry in _reflectionMemberSupport.MethodEntries)
 			{
-				stringBuilder = builder;
-				StringBuilder stringBuilder13 = stringBuilder;
-				handler = new StringBuilder.AppendInterpolatedStringHandler(14, 1, stringBuilder);
-				handler.AppendLiteral("        case ");
-				handler.AppendFormatted(GetMethodHandleLiteral(methodEntry.MethodSubjectId));
-				handler.AppendLiteral(":");
-				stringBuilder13.AppendLine(ref handler);
-				stringBuilder = builder;
-				StringBuilder stringBuilder14 = stringBuilder;
-				handler = new StringBuilder.AppendInterpolatedStringHandler(60, 1, stringBuilder);
-				handler.AppendLiteral("            return chaos_reflection_create_string_literal(");
-				handler.AppendFormatted(ToCppStringLiteral(methodEntry.MethodName));
-				handler.AppendLiteral(");");
-				stringBuilder14.AppendLine(ref handler);
+				builder.Append("    if (chaos_method_handle == ");
+				builder.Append(GetMethodHandleLiteral(methodEntry.MethodSubjectId));
+				builder.Append(") { return chaos_reflection_create_string_literal(");
+				builder.Append(ToCppStringLiteral(methodEntry.MethodName));
+				builder.AppendLine("); }");
 			}
-			builder.AppendLine("        default:");
-			builder.AppendLine("            return 0;");
-			builder.AppendLine("    }");
+			builder.AppendLine("    return 0;");
 			builder.AppendLine("}");
 			builder.AppendLine();
 			builder.AppendLine("CHAOS_IL2CPP_INT32 ChaosReflectionGetMethod_metadata_token_from_handle(CHAOS_IL2CPP_INTPTR chaos_method_handle) noexcept");
 			builder.AppendLine("{");
-			builder.AppendLine("    switch (chaos_method_handle)");
-			builder.AppendLine("    {");
 			foreach (ReflectionMemberMethodEntry methodEntry2 in _reflectionMemberSupport.MethodEntries)
 			{
-				stringBuilder = builder;
-				StringBuilder stringBuilder15 = stringBuilder;
-				handler = new StringBuilder.AppendInterpolatedStringHandler(14, 1, stringBuilder);
-				handler.AppendLiteral("        case ");
-				handler.AppendFormatted(GetMethodHandleLiteral(methodEntry2.MethodSubjectId));
-				handler.AppendLiteral(":");
-				stringBuilder15.AppendLine(ref handler);
-				stringBuilder = builder;
-				StringBuilder stringBuilder16 = stringBuilder;
-				handler = new StringBuilder.AppendInterpolatedStringHandler(20, 1, stringBuilder);
-				handler.AppendLiteral("            return ");
-				handler.AppendFormatted(methodEntry2.MetadataToken);
-				handler.AppendLiteral(";");
-				stringBuilder16.AppendLine(ref handler);
+				builder.Append("    if (chaos_method_handle == ");
+				builder.Append(GetMethodHandleLiteral(methodEntry2.MethodSubjectId));
+				builder.Append(") { return ");
+				builder.Append(methodEntry2.MetadataToken);
+				builder.AppendLine("; }");
 			}
-			builder.AppendLine("        default:");
-			builder.AppendLine("            return 0;");
-			builder.AppendLine("    }");
+			builder.AppendLine("    return 0;");
 			builder.AppendLine("}");
 			builder.AppendLine();
 			builder.AppendLine("CHAOS_IL2CPP_INTPTR ChaosReflectionGetDeclaringType_handle_from_type_handle(CHAOS_IL2CPP_INTPTR chaos_type_handle) noexcept");
@@ -1113,7 +1087,7 @@ public sealed partial class NativeAotLoweringPlanner
 				builder.AppendLine("                static_cast<CHAOS_IL2CPP_SIZE>(0));");
 				builder.AppendLine("    }");
 				builder.AppendLine("}");
-				builder.AppendLine();
+
 				builder.AppendLine("CHAOS_IL2CPP_INTPTR ChaosReflectionGetParameters(CHAOS_IL2CPP_INTPTR chaos_method_value)");
 				builder.AppendLine("{");
 				builder.AppendLine("    if (chaos_method_value == 0)");
@@ -1172,82 +1146,18 @@ public sealed partial class NativeAotLoweringPlanner
 				builder.AppendLine("        chaos_method_handle = chaos_method->runtime_method_handle;");
 				builder.AppendLine("    }");
 				builder.AppendLine();
-				builder.AppendLine("    switch (chaos_method_handle)");
-				builder.AppendLine("    {");
-				foreach (ReflectionMemberMethodEntry item8 in _reflectionMemberSupport.MethodEntries.OrderBy<ReflectionMemberMethodEntry, string>((ReflectionMemberMethodEntry entry) => entry.MethodSubjectId, StringComparer.Ordinal))
+				builder.AppendLine();
+				// Independent "if (match) { body; return result; }" — avoids MSVC C1061
+				var methodEntries = _reflectionMemberSupport.MethodEntries
+					.OrderBy(entry => entry.MethodSubjectId, StringComparer.Ordinal)
+					.ToList();
+				foreach (var entry in methodEntries)
 				{
-					stringBuilder = builder;
-					StringBuilder stringBuilder79 = stringBuilder;
-					handler = new StringBuilder.AppendInterpolatedStringHandler(14, 1, stringBuilder);
-					handler.AppendLiteral("        case ");
-					handler.AppendFormatted(GetMethodHandleLiteral(item8.MethodSubjectId));
-					handler.AppendLiteral(":");
-					stringBuilder79.AppendLine(ref handler);
-					builder.AppendLine("        {");
-					stringBuilder = builder;
-					StringBuilder stringBuilder80 = stringBuilder;
-					handler = new StringBuilder.AppendInterpolatedStringHandler(113, 2, stringBuilder);
-					handler.AppendLiteral("            const auto chaos_array_value = chaos_reflection_create_reference_array(");
-					handler.AppendFormatted(GetRuntimeTypeInfoExpression("System.Private.CoreLib/System.Reflection.ParameterInfo"));
-					handler.AppendLiteral(", static_cast<CHAOS_IL2CPP_SIZE>(");
-					handler.AppendFormatted(item8.ParameterNames.Count);
-					handler.AppendLiteral("));");
-					stringBuilder80.AppendLine(ref handler);
-					builder.AppendLine("            auto* chaos_array = reinterpret_cast<chaos_managed_array*>(chaos_array_value);");
-					for (int num3 = 0; num3 < item8.ParameterNames.Count; num3++)
-					{
-						string value2 = item8.ParameterNames[num3];
-						stringBuilder = builder;
-						StringBuilder stringBuilder81 = stringBuilder;
-						handler = new StringBuilder.AppendInterpolatedStringHandler(44, 2, stringBuilder);
-						handler.AppendLiteral("            auto* chaos_parameter_");
-						handler.AppendFormatted(num3);
-						handler.AppendLiteral(" = CHAOS_IL2CPP_NEW_GC(");
-						handler.AppendFormatted(GetNativeTypeSymbol("System.Private.CoreLib/System.Reflection.ParameterInfo"));
-						handler.AppendLiteral(", {});");
-						stringBuilder81.AppendLine(ref handler);
-						stringBuilder = builder;
-						StringBuilder stringBuilder82 = stringBuilder;
-						handler = new StringBuilder.AppendInterpolatedStringHandler(48, 2, stringBuilder);
-						handler.AppendLiteral("            chaos_parameter_");
-						handler.AppendFormatted(num3);
-						handler.AppendLiteral("->header.type_info = ");
-						handler.AppendFormatted(GetNativeTypeInfoSymbol("System.Private.CoreLib/System.Reflection.ParameterInfo"));
-						handler.AppendLiteral(";");
-						stringBuilder82.AppendLine(ref handler);
-						stringBuilder = builder;
-						StringBuilder stringBuilder83 = stringBuilder;
-						handler = new StringBuilder.AppendInterpolatedStringHandler(92, 2, stringBuilder);
-						handler.AppendLiteral("            chaos_parameter_");
-						handler.AppendFormatted(num3);
-						handler.AppendLiteral("->runtime_name_value = chaos_reflection_create_string_literal(");
-						handler.AppendFormatted(ToCppStringLiteral(value2));
-						handler.AppendLiteral(");");
-						stringBuilder83.AppendLine(ref handler);
-						stringBuilder = builder;
-						StringBuilder stringBuilder84 = stringBuilder;
-						handler = new StringBuilder.AppendInterpolatedStringHandler(88, 2, stringBuilder);
-						handler.AppendLiteral("            chaos_array_get_elements(chaos_array)[");
-						handler.AppendFormatted(num3);
-						handler.AppendLiteral("] = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_parameter_");
-						handler.AppendFormatted(num3);
-						handler.AppendLiteral(");");
-						stringBuilder84.AppendLine(ref handler);
-					}
-					builder.AppendLine("            return chaos_array_value;");
-					builder.AppendLine("        }");
+					EmitMethodParameterNameCase(builder, entry, "    if");
 				}
-				builder.AppendLine("        default:");
-				builder.AppendLine("            return chaos_reflection_create_reference_array(");
-				stringBuilder = builder;
-				StringBuilder stringBuilder85 = stringBuilder;
-				handler = new StringBuilder.AppendInterpolatedStringHandler(17, 1, stringBuilder);
-				handler.AppendLiteral("                ");
-				handler.AppendFormatted(GetRuntimeTypeInfoExpression("System.Private.CoreLib/System.Reflection.ParameterInfo"));
-				handler.AppendLiteral(",");
-				stringBuilder85.AppendLine(ref handler);
-				builder.AppendLine("                static_cast<CHAOS_IL2CPP_SIZE>(0));");
-				builder.AppendLine("    }");
+				builder.AppendLine("    return chaos_reflection_create_reference_array(");
+				EmitParameterInfoTypeInfo(builder);
+				builder.AppendLine("        static_cast<CHAOS_IL2CPP_SIZE>(0));");
 				builder.AppendLine("}");
 				builder.AppendLine();
 			}
@@ -1907,6 +1817,49 @@ public sealed partial class NativeAotLoweringPlanner
 		builder.AppendLine("    return ChaosGetCustomAttributeFromBlob(chaos_member_kind, chaos_member_handle, chaos_attribute_type_handle);");
 		builder.AppendLine("}");
 		builder.AppendLine("");
+	}
+
+	private void EmitMethodParameterNameCase(StringBuilder builder, ReflectionMemberMethodEntry entry, string condition)
+	{
+		builder.Append(condition)
+			.Append(" (chaos_method_handle == ")
+			.Append(GetMethodHandleLiteral(entry.MethodSubjectId))
+			.AppendLine(")");
+		builder.AppendLine("    {");
+		builder.Append("        const auto chaos_array_value = chaos_reflection_create_reference_array(")
+			.Append(GetRuntimeTypeInfoExpression("System.Private.CoreLib/System.Reflection.ParameterInfo"))
+			.Append(", static_cast<CHAOS_IL2CPP_SIZE>(")
+			.Append(entry.ParameterNames.Count)
+			.AppendLine("));");
+		builder.AppendLine("        auto* chaos_array = reinterpret_cast<chaos_managed_array*>(chaos_array_value);");
+		for (int i2 = 0; i2 < entry.ParameterNames.Count; i2++)
+		{
+			string value2 = entry.ParameterNames[i2];
+			builder.Append("        auto* chaos_parameter_").Append(i2)
+				.Append(" = CHAOS_IL2CPP_NEW_GC(")
+				.Append(GetNativeTypeSymbol("System.Private.CoreLib/System.Reflection.ParameterInfo"))
+				.AppendLine(", {});");
+			builder.Append("        chaos_parameter_").Append(i2)
+				.Append("->header.type_info = ")
+				.Append(GetNativeTypeInfoSymbol("System.Private.CoreLib/System.Reflection.ParameterInfo"))
+				.AppendLine(";");
+			builder.Append("        chaos_parameter_").Append(i2)
+				.Append("->runtime_name_value = chaos_reflection_create_string_literal(")
+				.Append(ToCppStringLiteral(value2))
+				.AppendLine(");");
+			builder.Append("        chaos_array_get_elements(chaos_array)[").Append(i2)
+				.Append("] = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_parameter_").Append(i2)
+				.AppendLine(");");
+		}
+		builder.AppendLine("        return chaos_array_value;");
+		builder.AppendLine("    }");
+	}
+
+	private void EmitParameterInfoTypeInfo(StringBuilder builder)
+	{
+		builder.Append("        ")
+			.Append(GetRuntimeTypeInfoExpression("System.Private.CoreLib/System.Reflection.ParameterInfo"))
+			.AppendLine(",");
 	}
 
 	private void EmitExceptionMetadataHelpers(StringBuilder builder, IReadOnlyList<AotCoreIrMethodArtifact> reachableMethods)

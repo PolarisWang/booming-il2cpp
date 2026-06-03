@@ -912,12 +912,27 @@ public sealed partial class NativeAotLoweringPlanner
                 EmptyRawArgumentIndices);
 
             // === GC.TryStartNoGCRegion — two overloads ===
-            registry.Register("System.GC", "TryStartNoGCRegion", ["System.Int64"],
-                ShapeKind.SimpleForward, "chaos_gc_try_start_no_gc_region",
-                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
-                    new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.Int64, TypeShape = AotCoreIrTypeShapeKind.ValueType }),
-                CreateInt32AbiSlot(),  // returns bool (0/1)
-                new HashSet<int> { 0 });
+            // 1-arg overload: native API requires a 2nd arg (disallow_full_blocking_gc = 0).
+            // Use GenericShapeDescriptor to inject the default parameter.
+            registry.RegisterGeneric(new GenericShapeDescriptor(
+                TypeDisplayNamePrefix: "System.GC",
+                MethodName: "TryStartNoGCRegion",
+                Resolver: static (planner, callee, typeArgs) =>
+                {
+                    var paramTypes = GetMethodParameterTypesFromSubjectId(callee);
+                    if (paramTypes.Count != 1) return null;
+                    var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
+                    var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INT32", symbol,
+                        "CHAOS_IL2CPP_INT64 chaos_arg_0",
+                    [
+                        "    return chaos_gc_try_start_no_gc_region(chaos_arg_0, 0);",
+                    ]);
+                    return new GenericShapeResolution(src, symbol,
+                        new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                            new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.Int64, TypeShape = AotCoreIrTypeShapeKind.ValueType }),
+                        CreateInt32AbiSlot(),
+                        new HashSet<int> { 0 });
+                }));
 
             registry.Register("System.GC", "TryStartNoGCRegion", ["System.Int64", "System.Boolean"],
                 ShapeKind.SimpleForward, "chaos_gc_try_start_no_gc_region",
@@ -2310,21 +2325,26 @@ public sealed partial class NativeAotLoweringPlanner
                 EmptyRawArgumentIndices);
 
             // === TimeSpan ===
-            registry.Register("System.TimeSpan", "FromMilliseconds", ["System.Double"],
-                ShapeKind.SimpleForward, "chaos::il2cpp::support::TimeSpanFromMilliseconds",
-                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
-                    new AotCoreIrAbiSlotArtifact
-                    {
-                        CarrierKindCode = AotCoreIrAbiCarrierKind.Float64,
-                        TypeShape = AotCoreIrTypeShapeKind.ValueType
-                    }),
-                new AotCoreIrAbiSlotArtifact
+            // FromMilliseconds: emit inline expression to avoid native dependency.
+            registry.RegisterGeneric(new GenericShapeDescriptor(
+                TypeDisplayNamePrefix: "System.TimeSpan",
+                MethodName: "FromMilliseconds",
+                Resolver: static (planner, callee, typeArgs) =>
                 {
-                    CarrierKindCode = AotCoreIrAbiCarrierKind.ValueTypeByValue,
-                    TypeSubjectId = "System.Private.CoreLib/System.TimeSpan",
-                    TypeShape = AotCoreIrTypeShapeKind.ValueType
-                },
-                new HashSet<int> { 0 });
+                    var paramTypes = GetMethodParameterTypesFromSubjectId(callee);
+                    if (paramTypes.Count != 1) return null;
+                    var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
+                    var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INT64", symbol,
+                        "double chaos_arg_0",
+                    [
+                        "    return static_cast<CHAOS_IL2CPP_INT64>(chaos_arg_0 * 10000.0);",
+                    ]);
+                    return new GenericShapeResolution(src, symbol,
+                        new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                            new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.Float64, TypeShape = AotCoreIrTypeShapeKind.ValueType }),
+                        new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.Int64, TypeShape = AotCoreIrTypeShapeKind.ValueType },
+                        new HashSet<int> { 0 });
+                }));
 
             // === Reflection: Type ===
             registry.Register("System.Type", "GetTypeFromHandle", ["System.RuntimeTypeHandle"],
@@ -3167,8 +3187,8 @@ public sealed partial class NativeAotLoweringPlanner
             registry.Register("System.Math", "Abs", ["System.Double"],
                 ShapeKind.SimpleForward, "ChaosMathAbsDouble",
                 new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
-                    new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.Int64, TypeShape = AotCoreIrTypeShapeKind.ValueType }),
-                new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.Int64, TypeShape = AotCoreIrTypeShapeKind.ValueType },
+                    new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.Float64, TypeShape = AotCoreIrTypeShapeKind.ValueType }),
+                new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.Float64, TypeShape = AotCoreIrTypeShapeKind.ValueType },
                 new HashSet<int> { 0 });
 
             // === Activator::CreateInstance with param array ===
@@ -3430,8 +3450,8 @@ public sealed partial class NativeAotLoweringPlanner
             registry.Register("System.Math", "Ceiling", ["System.Double"],
                 ShapeKind.SimpleForward, "ChaosMathCeiling",
                 new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
-                    new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.Int64, TypeShape = AotCoreIrTypeShapeKind.ValueType }),
-                new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.Int64, TypeShape = AotCoreIrTypeShapeKind.ValueType },
+                    new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.Float64, TypeShape = AotCoreIrTypeShapeKind.ValueType }),
+                new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.Float64, TypeShape = AotCoreIrTypeShapeKind.ValueType },
                 new HashSet<int> { 0 });
 
             // === Random::NextDouble ===
@@ -3884,8 +3904,8 @@ public sealed partial class NativeAotLoweringPlanner
             registry.Register("System.Math", "Floor", ["System.Double"],
                 ShapeKind.SimpleForward, "ChaosMathFloor",
                 new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
-                    new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.Int64, TypeShape = AotCoreIrTypeShapeKind.ValueType }),
-                new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.Int64, TypeShape = AotCoreIrTypeShapeKind.ValueType },
+                    new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.Float64, TypeShape = AotCoreIrTypeShapeKind.ValueType }),
+                new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.Float64, TypeShape = AotCoreIrTypeShapeKind.ValueType },
                 new HashSet<int> { 0 });
 
             // === Assembly::GetEntryAssembly ===
@@ -4106,18 +4126,18 @@ public sealed partial class NativeAotLoweringPlanner
             registry.Register("System.Math", "Round", ["System.Double"],
                 ShapeKind.SimpleForward, "ChaosMathRound",
                 new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
-                    new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.Int64, TypeShape = AotCoreIrTypeShapeKind.ValueType }),
-                new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.Int64, TypeShape = AotCoreIrTypeShapeKind.ValueType },
+                    new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.Float64, TypeShape = AotCoreIrTypeShapeKind.ValueType }),
+                new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.Float64, TypeShape = AotCoreIrTypeShapeKind.ValueType },
                 new HashSet<int> { 0 });
 
             registry.Register("System.Math", "Round", ["System.Double", "System.Int32"],
                 ShapeKind.SimpleForward, "ChaosMathRound2",
                 new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
                 {
-                    new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.Int64, TypeShape = AotCoreIrTypeShapeKind.ValueType },
+                    new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.Float64, TypeShape = AotCoreIrTypeShapeKind.ValueType },
                     CreateInt32AbiSlot(),
                 }),
-                new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.Int64, TypeShape = AotCoreIrTypeShapeKind.ValueType },
+                new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.Float64, TypeShape = AotCoreIrTypeShapeKind.ValueType },
                 new HashSet<int> { 0, 1 });
 
             // === Assembly::get_FullName ===
@@ -4625,10 +4645,10 @@ public sealed partial class NativeAotLoweringPlanner
                 ShapeKind.SimpleForward, "ChaosMathMaxDouble",
                 new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
                 {
-                    new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.Int64, TypeShape = AotCoreIrTypeShapeKind.ValueType },
-                    new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.Int64, TypeShape = AotCoreIrTypeShapeKind.ValueType },
+                    new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.Float64, TypeShape = AotCoreIrTypeShapeKind.ValueType },
+                    new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.Float64, TypeShape = AotCoreIrTypeShapeKind.ValueType },
                 }),
-                new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.Int64, TypeShape = AotCoreIrTypeShapeKind.ValueType },
+                new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.Float64, TypeShape = AotCoreIrTypeShapeKind.ValueType },
                 new HashSet<int> { 0, 1 });
 
             // === Assembly::get_Location ===
@@ -5060,10 +5080,10 @@ public sealed partial class NativeAotLoweringPlanner
                 ShapeKind.SimpleForward, "ChaosMathMinDouble",
                 new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
                 {
-                    new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.Int64, TypeShape = AotCoreIrTypeShapeKind.ValueType },
-                    new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.Int64, TypeShape = AotCoreIrTypeShapeKind.ValueType },
+                    new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.Float64, TypeShape = AotCoreIrTypeShapeKind.ValueType },
+                    new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.Float64, TypeShape = AotCoreIrTypeShapeKind.ValueType },
                 }),
-                new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.Int64, TypeShape = AotCoreIrTypeShapeKind.ValueType },
+                new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.Float64, TypeShape = AotCoreIrTypeShapeKind.ValueType },
                 new HashSet<int> { 0, 1 });
 
             // === Assembly::get_ImageRuntimeVersion ===
@@ -5231,8 +5251,8 @@ public sealed partial class NativeAotLoweringPlanner
             registry.Register("System.Math", "Sqrt", ["System.Double"],
                 ShapeKind.SimpleForward, "ChaosMathSqrt",
                 new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
-                    new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.Int64, TypeShape = AotCoreIrTypeShapeKind.ValueType }),
-                new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.Int64, TypeShape = AotCoreIrTypeShapeKind.ValueType },
+                    new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.Float64, TypeShape = AotCoreIrTypeShapeKind.ValueType }),
+                new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.Float64, TypeShape = AotCoreIrTypeShapeKind.ValueType },
                 new HashSet<int> { 0 });
 
             // === Assembly::GetTypes ===
@@ -5460,10 +5480,10 @@ public sealed partial class NativeAotLoweringPlanner
                 ShapeKind.SimpleForward, "ChaosMathPow",
                 new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
                 {
-                    new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.Int64, TypeShape = AotCoreIrTypeShapeKind.ValueType },
-                    new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.Int64, TypeShape = AotCoreIrTypeShapeKind.ValueType },
+                    new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.Float64, TypeShape = AotCoreIrTypeShapeKind.ValueType },
+                    new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.Float64, TypeShape = AotCoreIrTypeShapeKind.ValueType },
                 }),
-                new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.Int64, TypeShape = AotCoreIrTypeShapeKind.ValueType },
+                new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.Float64, TypeShape = AotCoreIrTypeShapeKind.ValueType },
                 new HashSet<int> { 0, 1 });
 
             // === HashCode::Combine<T,T> (GenericShapeDescriptor -- handles all instantiations) ===
@@ -5580,8 +5600,8 @@ public sealed partial class NativeAotLoweringPlanner
             registry.Register("System.Math", "Sin", ["System.Double"],
                 ShapeKind.SimpleForward, "ChaosMathSin",
                 new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
-                    new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.Int64, TypeShape = AotCoreIrTypeShapeKind.ValueType }),
-                new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.Int64, TypeShape = AotCoreIrTypeShapeKind.ValueType },
+                    new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.Float64, TypeShape = AotCoreIrTypeShapeKind.ValueType }),
+                new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.Float64, TypeShape = AotCoreIrTypeShapeKind.ValueType },
                 new HashSet<int> { 0 });
 
             // === TimeSpan::FromDays (SimpleForward stub) ===
@@ -6129,8 +6149,8 @@ public sealed partial class NativeAotLoweringPlanner
             registry.Register("System.Math", "Cos", ["System.Double"],
                 ShapeKind.SimpleForward, "ChaosMathCos",
                 new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
-                    new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.Int64, TypeShape = AotCoreIrTypeShapeKind.ValueType }),
-                new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.Int64, TypeShape = AotCoreIrTypeShapeKind.ValueType },
+                    new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.Float64, TypeShape = AotCoreIrTypeShapeKind.ValueType }),
+                new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.Float64, TypeShape = AotCoreIrTypeShapeKind.ValueType },
                 new HashSet<int> { 0 });
 
             // === System.Char::IsDigit (SimpleForward stub) ===
