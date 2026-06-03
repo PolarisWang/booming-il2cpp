@@ -183,6 +183,7 @@ public sealed class CppProjectEmitter
         RenderToFile("TestProject.CMakeLists.txt.scriban", model, outputDir, "CMakeLists.txt");
         RenderToFile("TestProject.CMakePresets.json.scriban", model, outputDir, "CMakePresets.json");
         RenderToFile("TestProject.RuntimePatchdata.cpp.scriban", model, outputDir, "runtime-patchdata.cpp");
+        RenderToFile("TestProject.PatchHostArrays.cpp.scriban", model, outputDir, "patch-host-arrays.cpp");
 
         // microbench.cpp stub (if not already present) — provides RunMicrobench() for --microbench mode
         var microbenchPath = Path.Combine(outputDir, "microbench.cpp");
@@ -531,11 +532,18 @@ public sealed class CppProjectEmitter
             "entry-aot.exe", // AOT backup — must survive JIT cleanup for restore
             "CMakeLists.txt",       // needed by hotupdate rebuild
             "CMakePresets.json",    // needed by hotupdate rebuild
+            "runtime-entry.cpp",             // needed by hotupdate cmake rebuild
+            "microbench.cpp",                // needed by hotupdate cmake rebuild
+            "runtime-patchdata.cpp",         // needed by hotupdate cmake rebuild
+            "verification_dispatch.generated.cpp", // needed by hotupdate cmake rebuild
+            "patch-host-arrays.cpp",         // needed by hotupdate cmake rebuild
         };
         var keepDirs = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
         {
             "build",
             "build_jit",
+            "codegen",      // SDK files (chaos-config.cmake, libs, headers) — kept for hotupdate CMake reconfigure
+            "subjects",     // Flat copy of codegen output (native-aot.generated.*, type-info-defs.*) — needed by linker
         };
 
         // Delete generated source files in the project root

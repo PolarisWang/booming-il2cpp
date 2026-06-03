@@ -1,3 +1,4 @@
+using System.Text;
 using System.Text.Json;
 using Chaos.IL2CPP.Tools.AutoTestGenerator;
 
@@ -13,6 +14,7 @@ if (args.Length < 2)
     Console.Error.WriteLine("  --emit-metadata <path>  Emit subjects.metadata.json for all-types mode");
     Console.Error.WriteLine("  --chunk-slug <slug>     Chunk slug for metadata (default: assembly name)");
     Console.Error.WriteLine("  --namespace-filter <ns1,ns2,...>  Filter by namespace prefix (for chunk builds)");
+    Console.Error.WriteLine("  --patch-mode  Generate patch subjects DLL (implies --skip-probe, returns .cs path)");
     return args is ["--report", ..] ? 0 : 1;
 }
 
@@ -26,6 +28,7 @@ string? namespaceFilter = null;
 bool listTypes = false;
 bool allTypes = false;
 bool skipProbe = false;
+bool patchMode = false;
 
 for (int i = 0; i < args.Length; i++)
 {
@@ -58,6 +61,10 @@ for (int i = 0; i < args.Length; i++)
         case "--all-types":
             allTypes = true;
             break;
+        case "--patch-mode":
+            patchMode = true;
+            skipProbe = true;  // patch mode implies skip probe
+            break;
     }
 }
 
@@ -74,6 +81,17 @@ if (reportIdx >= 0 && reportIdx + 1 < args.Length)
     Console.WriteLine(summary);
     Console.WriteLine($"[Output] {summaryPath}");
     return 0;
+}
+
+// ── Patch mode: generate patch subjects DLL ──
+if (patchMode)
+{
+    if (!allTypes)
+    {
+        Console.Error.WriteLine("ERROR: --patch-mode requires --all-types");
+        return 1;
+    }
+    return RunPatchMode(dllPath, namespaceFilter, outputDir);
 }
 
 // ── Known type-to-DLL mapping for types not in System.Runtime.dll ──
@@ -191,7 +209,15 @@ if (allTypes)
 
         // ── Phase 3: Probe (── skip-probe ──)
         var oneProbeResults = skipProbe
-            ? System.Array.Empty<ProbeResult>()
+            ? oneResult.Methods.Select((m, mi) => {
+                var subjectId = $"{oneResult.AssemblyName}/{oneResult.TypeFullName}::{m.Name}:{m.ReturnTypeName}({string.Join(",", m.Parameters.Select(p => p.TypeName))})";
+                var isVoid = m.ReturnTypeName is "System.Void" or "void";
+                return new ProbeResult(
+                    mi, 0, subjectId, isVoid, false, null,
+                    isVoid ? null : 0L, null, m.ReturnTypeName,
+                    true, null
+                );
+            }).ToList()
             : allProbeEmitter.Probe(
                 typeOutputDir, oneResult.AssemblyName, oneResult.TypeFullName,
                 oneResult.Methods, oneValueSets, dllPath, oneResult.TargetFramework);
@@ -246,6 +272,7 @@ if (allTypes)
         int globalIdx = 0;
         foreach (var scan in allScanResults)
         {
+            int mi = 0;
             foreach (var method in scan.Methods)
             {
                 var paramsStr = string.Join(",", method.Parameters.Select(p => p.TypeName));
@@ -258,12 +285,12 @@ if (allTypes)
                 {
                     if (pr.HasException)
                     {
-                        kind = "fact";
+                        kind = "hotupdate";
                         isBenchmark = false;
                     }
                     else if (pr.IsDeterministic && !pr.IsVoid)
                     {
-                        kind = "fact";
+                        kind = "hotupdate";
                         isBenchmark = false;
                     }
                     else
@@ -274,19 +301,44 @@ if (allTypes)
                 }
                 else
                 {
-                    // No probe result (probe build failed) — default to benchmark
                     kind = "benchmark";
                     isBenchmark = true;
                 }
 
-                methodEntries.Add(new SubjectMethodEntry(globalIdx, kind, subjectId));
-                if (isBenchmark)
-                    benchmarkMethodIndices.Add(globalIdx);
-                else
-                    customEntryIndices.Add(globalIdx);
-                globalIdx++;
+                // ── Generate per-value-set entries ──
+                var paramSuffix = string.Join("_", method.Parameters.Select(p =>
+                    SanitizePath(CSharpSerializer.MapToCSharpType(p.TypeName))));
+
+                int setCount;
+                try
+                {
+                    var tempSets = allValueGenerator.Generate(method, mi);
+                    setCount = tempSets.Count;
+                }
+                catch
+                {
+                    setCount = 1;
+                }
+
+                for (int si = 0; si < setCount; si++)
+                {
+                    var generatedMethodId = $"{SanitizePath(method.Name)}_{mi}_{paramSuffix}_{si}";
+
+                    methodEntries.Add(new SubjectMethodEntry(globalIdx, kind, subjectId, generatedMethodId));
+                    if (isBenchmark)
+                        benchmarkMethodIndices.Add(globalIdx);
+                    else
+                        customEntryIndices.Add(globalIdx);
+                    globalIdx++;
+                }
+
+                mi++;
             }
         }
+
+        // All fact subjects also have [HotUpdate] attribute — populate indices for TPG metadata
+        hotupdateMethodIndices.AddRange(customEntryIndices);
+        hotupdateMethodIndices.AddRange(benchmarkMethodIndices);
 
         var metadata = new SubjectsMetadata(
             SchemaVersion: 1,
@@ -295,7 +347,7 @@ if (allTypes)
             TotalMethods: globalIdx,
             CustomEntryIndices: customEntryIndices.Count > 0 ? customEntryIndices : null,
             BenchmarkMethodIndices: benchmarkMethodIndices.Count > 0 ? benchmarkMethodIndices : null,
-            HotupdateMethodIndices: null,
+            HotupdateMethodIndices: hotupdateMethodIndices.Count > 0 ? hotupdateMethodIndices : null,
             Methods: methodEntries);
 
         var metaJson = JsonSerializer.Serialize(metadata, new JsonSerializerOptions
@@ -456,7 +508,224 @@ static string? FindLatestFile(string searchRoot, string fileName)
 
 static string SanitizePath(string name)
 {
-    return name.Replace('.', '_').Replace('<', '_').Replace('>', '_').Replace('`', '_');
+    return name.Replace('.', '_').Replace('<', '_').Replace('>', '_').Replace('`', '_').Replace('[', '_').Replace(']', '_');
+}
+
+// ── Patch mode: generate patch subjects .cs file ──
+// Scans DLL, generates values, and emits a single .cs file with [HotUpdate] subject
+// methods using GetPatchReturnExpression for return values.
+// The pipeline compiles this into PatchSubjects.dll for PatchDataExtractor.
+static int RunPatchMode(string dllPath, string? namespaceFilter, string? outputDir)
+{
+    var assemblyName = Path.GetFileNameWithoutExtension(dllPath);
+    var baseOutput = outputDir ?? Path.GetFullPath(Path.Combine("output", assemblyName));
+
+    Console.WriteLine("╔══════════════════════════════════════════════════╗");
+    Console.WriteLine("║  Chaos IL2CPP AutoTestGenerator (PATCH MODE)   ║");
+    Console.WriteLine("╚══════════════════════════════════════════════════╝");
+    Console.WriteLine($"  DLL:  {dllPath}");
+    Console.WriteLine($"  Out:  {baseOutput}");
+    Console.WriteLine();
+
+    var scanner = new DllScanner();
+    Console.WriteLine("[Phase 1/3] Scanning DLL...");
+    IReadOnlyList<DllScanResult> scanResults;
+    try
+    {
+        scanResults = scanner.ScanAll(dllPath, namespaceFilter);
+    }
+    catch (Exception ex)
+    {
+        Console.Error.WriteLine($"ERROR: Scan failed: {ex.Message}");
+        return 1;
+    }
+
+    if (scanResults.Count == 0)
+    {
+        Console.WriteLine("No types found. Nothing to generate.");
+        return 0;
+    }
+
+    var serializer = new CSharpSerializer();
+    var expressionBuilder = new CSharpExpressionBuilder(serializer);
+    var autoFixture = new AutoFixtureAllower(serializer);
+    var valueGenerator = new ValueGenerator(serializer, autoFixture);
+
+    Console.WriteLine("[Phase 2/3] Generating values and emitting patch source...");
+    var sb = new StringBuilder();
+    sb.AppendLine("// Auto-generated patch subjects for hotupdate verification");
+    sb.AppendLine("// Each method matches baseline [HotUpdate] subject signature,");
+    sb.AppendLine("// but returns a transformed value for semantic change detection.");
+    sb.AppendLine("using System;");
+    sb.AppendLine("using System.Buffers;");
+    sb.AppendLine("using System.Collections.Generic;");
+    sb.AppendLine("using System.Globalization;");
+    sb.AppendLine("using System.Runtime.CompilerServices;");
+    sb.AppendLine("using System.Runtime.InteropServices;");
+    sb.AppendLine("using System.Text;");
+    sb.AppendLine("using Chaos.TestFramework;");
+    sb.AppendLine();
+
+    var patchClassName = SanitizePath(assemblyName) + "PatchSubjects";
+    sb.AppendLine($"namespace AutoGenerated.Patch");
+    sb.AppendLine("{");
+    sb.AppendLine($"    public sealed class {patchClassName}");
+    sb.AppendLine("    {");
+
+    int subjectIndex = 0;
+    int patchedCount = 0;
+
+    foreach (var scan in scanResults)
+    {
+        var typeValueSets = new List<IReadOnlyList<ValueSet>>();
+        foreach (var (method, mi) in scan.Methods.Select((m, i) => (m, i)))
+        {
+            var sets = valueGenerator.Generate(method, mi);
+            typeValueSets.Add(sets);
+        }
+
+        var typeProbeResults = System.Array.Empty<ProbeResult>(); // skip probe in patch mode
+
+        for (int mi = 0; mi < scan.Methods.Count; mi++)
+        {
+            var method = scan.Methods[mi];
+            var sets = typeValueSets[mi];
+
+            foreach (var set in sets)
+            {
+                var paramSuffix = string.Join("_", method.Parameters.Select(p =>
+                    SanitizePath(CSharpSerializer.MapToCSharpType(p.TypeName))));
+                var methodSuffix = $"{SanitizePath(method.Name)}_{mi}_{paramSuffix}_{set.SetIndex}";
+
+                // Build arg list with variable declarations for out/ref
+                var prelude = new List<string>();
+                var finalArgs = new List<string>();
+                int refVarCounter = 0;
+
+                for (int pi = 0; pi < method.Parameters.Count; pi++)
+                {
+                    var param = method.Parameters[pi];
+                    var argExpr = set.ArgumentExpressions[pi];
+
+                    if (param.IsOut || param.IsRef)
+                    {
+                        var baseTypeName = param.TypeName.EndsWith('&')
+                            ? param.TypeName[..^1].Trim()
+                            : param.TypeName;
+                        var csType = CSharpSerializer.MapToCSharpType(baseTypeName);
+
+                        // argExpr contains the fully-qualified type name (e.g. "default(System.Numerics.Matrix3x2)!")
+                        // Extract it to use for the variable declaration, since csType may lack namespace
+                        // when MLC can't resolve the type (CS0246).
+                        var declType = csType;
+                        if (!csType.Contains('.') && !csType.Contains('<') &&
+                            csType is not ("bool" or "byte" or "sbyte" or "short" or "ushort"
+                                or "int" or "uint" or "long" or "ulong" or "float" or "double"
+                                or "decimal" or "char" or "string" or "void" or "object"))
+                        {
+                            // Try to extract fully-qualified type from argExpr like "default(TypeName)!"
+                            var m = System.Text.RegularExpressions.Regex.Match(argExpr, @"default\(([^)]+)\)");
+                            if (m.Success && m.Groups[1].Value.Contains('.'))
+                                declType = m.Groups[1].Value;
+                        }
+
+                        var varName = $"__ref_{mi}_{set.SetIndex}_{refVarCounter++}";
+                        prelude.Add($"            {declType} {varName} = default;");
+                        finalArgs.Add(param.IsOut ? $"out {varName}" : $"ref {varName}");
+                    }
+                    else
+                    {
+                        finalArgs.Add(DisambiguateArg(param.TypeName, argExpr, serializer));
+                    }
+                }
+
+                var preludeStr = prelude.Count > 0
+                    ? string.Join("\n", prelude) + "\n"
+                    : "";
+
+                var argsStr = string.Join(", ", finalArgs);
+                var genericSuffix = method.GenericTypeArgs is { Count: > 0 }
+                    ? $"<{string.Join(", ", method.GenericTypeArgs.Select(CSharpSerializer.MapToCSharpType))}>"
+                    : "";
+
+                var instanceExpr = expressionBuilder.GetInstanceExpression(scan.TypeFullName, method.IsStatic);
+                var callExpr = $"{instanceExpr}.{method.Name}{genericSuffix}({argsStr})";
+
+                var rt = method.ReturnTypeName;
+                var isPlainTask = rt is "System.Threading.Tasks.Task" or "System.Threading.Tasks.ValueTask";
+                if (isPlainTask || rt.StartsWith("System.Threading.Tasks.Task<") ||
+                    rt.StartsWith("System.Threading.Tasks.ValueTask<"))
+                    callExpr += ".GetAwaiter().GetResult()";
+
+                var hasRefParam = method.HasRefParam;
+                var isVoid = method.IsVoid;
+
+                // For pure void methods (no ref params), skip — they have no [HotUpdate]
+                if (isVoid && !hasRefParam)
+                    continue;
+
+                // Emit patch subject method — same call+assert as baseline, different return
+                sb.AppendLine();
+                sb.AppendLine($"        public long Subject_{subjectIndex}_{methodSuffix}()");
+                sb.AppendLine("        {");
+
+                if (isVoid || isPlainTask)
+                {
+                    sb.AppendLine($"{preludeStr}            {callExpr};");
+                    if (hasRefParam)
+                    {
+                        // Assert out/ref values (same as baseline)
+                        // In patch mode we can't know the expected values, so skip
+                    }
+                    sb.AppendLine("            return 142L;");
+                }
+                else
+                {
+                    sb.AppendLine($"{preludeStr}            var result = {callExpr};");
+                    sb.AppendLine($"            return {ValueGenerator.GetPatchReturnExpression(method.ReturnTypeName, "result")};");
+                }
+
+                sb.AppendLine("        }");
+                patchedCount++;
+                subjectIndex++;
+            }
+        }
+    }
+
+    sb.AppendLine("    }");
+    sb.AppendLine("}");
+
+    // Write output
+    var patchDir = Path.Combine(baseOutput, "patch");
+    Directory.CreateDirectory(patchDir);
+    var csPath = Path.Combine(patchDir, $"{patchClassName}.cs");
+    File.WriteAllText(csPath, sb.ToString());
+    Console.WriteLine($"[Patch] {csPath}  ({patchedCount} patch subjects)");
+    Console.WriteLine($"[Output] {csPath}");
+
+    return 0;
+}
+
+// Helper for disambiguating arg casts (reused from TestEmitter pattern)
+static string DisambiguateArg(string paramType, string argExpr, CSharpSerializer serializer)
+{
+    if (argExpr == "null!")
+        return $"({CSharpSerializer.MapToCSharpType(paramType)})null!";
+
+    var castNeeded = new HashSet<string>(StringComparer.Ordinal)
+    {
+        "System.Boolean", "System.Byte", "System.SByte", "System.Int16", "System.UInt16",
+        "System.Int32", "System.UInt32", "System.Int64", "System.UInt64", "System.Single",
+        "System.Double", "System.Decimal", "System.Char",
+    };
+
+    if (!castNeeded.Contains(paramType)) return argExpr;
+    if (argExpr.Length == 0) return argExpr;
+    var first = argExpr[0];
+    if (!char.IsDigit(first) && first != '-' && first != '\"') return argExpr;
+    if (argExpr.StartsWith('(')) return argExpr;
+    var csType = CSharpSerializer.MapToCSharpType(paramType);
+    return $"({csType}){argExpr}";
 }
 
 // ── Subjects metadata records (mirrors TPG format for pipeline interop) ──
@@ -473,4 +742,5 @@ internal sealed record SubjectsMetadata(
 internal sealed record SubjectMethodEntry(
     int Index,
     string Kind,
-    string MethodSubjectId);
+    string MethodSubjectId,
+    string? GeneratedMethodId = null);

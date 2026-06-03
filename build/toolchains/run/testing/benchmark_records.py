@@ -4,13 +4,10 @@ Each benchmark run appends a single JSON record (one line) to:
     artifact/verification/benchmark-records/{subject_id}/records.jsonl
 
 Queries scan the file from the end to retrieve the most-recent record(s).
-File locking prevents concurrent-write corruption.
 """
 from __future__ import annotations
 
 import json
-import os
-import time
 from pathlib import Path
 from typing import Any
 
@@ -22,14 +19,6 @@ except ImportError:
     root = Path(__file__).resolve().parents[1]
     sys.path.insert(0, str(root))
     from testing import verification_layout as verification_layout_module
-
-# fcntl is Unix-only; on Windows we use a lock-file strategy instead
-try:
-    import fcntl as _fcntl
-    _HAS_FCNTL = True
-except ImportError:
-    _fcntl = None  # type: ignore[assignment]
-    _HAS_FCNTL = False
 
 
 # ---------------------------------------------------------------------------
@@ -45,10 +34,7 @@ def _records_path(repo_root: Path, subject_id: str) -> Path:
 # ---------------------------------------------------------------------------
 
 def append_record(repo_root: Path, record: dict[str, Any]) -> None:
-    """Append a single benchmark record to the subject's JSONL file.
-
-    Uses a file lock to prevent corruption from concurrent writers.
-    """
+    """Append a single benchmark record to the subject's JSONL file."""
     subject_id = str(record.get("subject") or "")
     if not subject_id:
         raise ValueError("record must have a 'subject' field")
@@ -58,41 +44,8 @@ def append_record(repo_root: Path, record: dict[str, Any]) -> None:
 
     line = json.dumps(record, ensure_ascii=False, separators=(",", ":")) + "\n"
 
-    # Platform-aware locking: use fcntl on Unix, fall back to a .lock file on Windows.
-    if os.name == "nt" or not _HAS_FCNTL:
-        _append_windows(path, line)
-    else:
-        _append_unix(path, line)
-
-
-def _append_windows(path: Path, line: str) -> None:
-    """Append with a simple retry+rename strategy on Windows (no fcntl)."""
-    lock_path = path.with_suffix(".lock")
-    for _ in range(20):
-        try:
-            # Exclusive creation of lock file
-            fd = os.open(str(lock_path), os.O_CREAT | os.O_EXCL | os.O_WRONLY)
-            os.close(fd)
-            break
-        except FileExistsError:
-            time.sleep(0.05)
-    try:
-        with open(path, "a", encoding="utf-8") as f:
-            f.write(line)
-    finally:
-        try:
-            lock_path.unlink(missing_ok=True)
-        except Exception:
-            pass
-
-
-def _append_unix(path: Path, line: str) -> None:
     with open(path, "a", encoding="utf-8") as f:
-        _fcntl.flock(f, _fcntl.LOCK_EX)  # type: ignore[union-attr]
-        try:
-            f.write(line)
-        finally:
-            _fcntl.flock(f, _fcntl.LOCK_UN)  # type: ignore[union-attr]
+        f.write(line)
 
 
 # ---------------------------------------------------------------------------

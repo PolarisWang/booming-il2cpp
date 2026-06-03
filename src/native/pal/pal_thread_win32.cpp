@@ -6,6 +6,7 @@
 #include <windows.h>
 #include <processthreadsapi.h>
 #include <intrin.h>
+#include <new>
 
 namespace chaos::il2cpp::pal {
 
@@ -13,14 +14,28 @@ struct PalThread {
     HANDLE handle;
 };
 
+// Thunk struct for CreateThread: wraps PalThreadProc + arg into a single pointer.
+// A captureless lambda or static function is needed because LPTHREAD_START_ROUTINE
+// is a plain function pointer (cannot hold captures).
+struct PalThreadStartArgs {
+    PalThreadProc proc;
+    void* arg;
+};
+
+static DWORD WINAPI PalThreadStartThunk(void* p) noexcept {
+    auto* a = static_cast<PalThreadStartArgs*>(p);
+    DWORD result = static_cast<DWORD>(reinterpret_cast<uintptr_t>(a->proc(a->arg)));
+    delete a;
+    return result;
+}
+
 PalThread* PalThreadCreate(PalThreadProc proc, void* arg) noexcept {
     auto* t = new (std::nothrow) PalThread();
     if (!t) return nullptr;
-    t->handle = ::CreateThread(nullptr, 0,
-        [](void* p) -> DWORD {
-            return static_cast<DWORD>(reinterpret_cast<uintptr_t>(proc(p)));
-        }, arg, 0, nullptr);
+    auto* args = new PalThreadStartArgs{proc, arg};
+    t->handle = ::CreateThread(nullptr, 0, PalThreadStartThunk, args, 0, nullptr);
     if (!t->handle) {
+        delete args;
         delete t;
         return nullptr;
     }
@@ -48,7 +63,7 @@ void PalYield() noexcept {
 }
 
 void PalGetStackBounds(void*& out_base, void*& out_limit) noexcept {
-    NT_TIB* tib = static_cast<NT_TIB*>(::__readgsqword(0x30));
+    NT_TIB* tib = reinterpret_cast<NT_TIB*>(::__readgsqword(0x30));
     out_base  = tib->StackBase;
     out_limit = tib->StackLimit;
 }

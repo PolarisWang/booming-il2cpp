@@ -480,6 +480,10 @@ internal sealed class SdkEmitter
             ("src/native/diagnostics/eventpipe", "chaos_eventpipe"),
             ("src/native/jit",           "chaos_jit"),
             ("src/native/diagnostics/debugger",  "chaos_debugger"),
+            // chaos_pal is intentionally excluded from the SDK; test builds
+            // provide PAL function stubs via pal_stubs.cpp.  Create an empty
+            // stub archive so the linker doesn't error on LNK1181.
+            ("src/native/pal",         "chaos_pal"),
         };
 
         int copiedCount = 0;

@@ -89,6 +89,14 @@ class ChunkContext:
         return self.native_dir / "entry.exe"
 
     @property
+    def patch_data_path(self) -> Path:
+        return self.native_dir / "patch.patchdata"
+
+    @property
+    def patch_subjects_dll_path(self) -> Path:
+        return self.chunk_dir / "managed" / "subjects" / "PatchSubjects.dll"
+
+    @property
     def dll_manifest_dir(self) -> Path:
         return self.foundation_dir / "_dll"
 

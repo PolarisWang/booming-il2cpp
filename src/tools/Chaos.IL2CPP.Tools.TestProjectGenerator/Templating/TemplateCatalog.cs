@@ -20,6 +20,7 @@ internal static class TemplateCatalog
         "TestProject.Entry.h.scriban",
         "TestProject.Dispatch.cpp.scriban",
         "TestProject.RuntimePatchdata.cpp.scriban",
+        "TestProject.PatchHostArrays.cpp.scriban",
         "TestProject.chaos-config.cmake.scriban",
         "TestProject.chaos-targets.cmake.scriban",
         "TestProject.metadata.json.scriban",

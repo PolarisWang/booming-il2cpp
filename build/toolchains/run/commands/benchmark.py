@@ -38,6 +38,47 @@ _BENCHMARK_MODE_FLAGS = {
 _ALL_BENCHMARK_MODE_FLAGS = sum(_BENCHMARK_MODE_FLAGS.values())
 _BENCHMARK_HOST_EXECUTE_PARAMETER_TYPES = ("System.Int32",)
 
+# Per-process cache mapping (subject_id, mode, stableId) → previous result.
+# Prevents redundant case re-runs (N+1) within a single benchmark session.
+_benchmark_case_run_cache: dict[tuple[str, str, str], dict[str, Any]] = {}
+
+# Native build directory management for incremental compilation
+def _get_benchmark_build_dir(repo_root: Path, subject_id: str, case_id: str = "default") -> Path:
+    """Return the persistent build directory for a benchmark case, creating it if needed."""
+    build_dir = verification_layout_module.benchmark_build_path(repo_root, subject_id, case_id)
+    build_dir.mkdir(parents=True, exist_ok=True)
+    return build_dir
+
+
+def _clean_stale_benchmark_builds(repo_root: Path, max_age_days: int = 7) -> int:
+    """Remove benchmark build directories older than max_age_days. Returns count removed."""
+    import shutil
+    import time
+
+    builds_root = verification_layout_module.benchmark_builds_root(repo_root)
+    if not builds_root.is_dir():
+        return 0
+
+    now = time.time()
+    cutoff = now - (max_age_days * 86400)
+    removed = 0
+
+    for subject_dir in builds_root.iterdir():
+        if not subject_dir.is_dir():
+            continue
+        for case_dir in subject_dir.iterdir():
+            if not case_dir.is_dir():
+                continue
+            mtime = case_dir.stat().st_mtime
+            if mtime < cutoff:
+                shutil.rmtree(case_dir, ignore_errors=True)
+                removed += 1
+
+    if removed:
+        print(f"  [build-cache] Cleaned {removed} stale build directories "
+              f"(>{max_age_days}d old)", file=sys.stderr)
+    return removed
+
 
 def _load(name: str, path: Path):
     spec = importlib.util.spec_from_file_location(name, path)
@@ -134,12 +175,19 @@ def _select_benchmark_matrix_id(
     mode: str,
     host_platform: str,
 ) -> str:
+    """Select the best-matching benchmark environment matrix for the given mode.
+
+    Logs the scoring of each candidate to stderr so the selection
+    is observable — essential for debugging untuned weights (H1).
+    """
     platform_key = _normalize_host_platform(host_platform)
     desired_terms = _mode_selection_terms(mode)
     expected_stage_kinds = set(_mode_stage_kinds(mode))
 
     best_matrix_id: str | None = None
     best_score = -1
+
+    print(f"  [matrix-select] mode={mode}, host={host_platform}", file=sys.stderr)
 
     for matrix in list(manifest.get("environmentMatrices") or []):
         matrix_payload = dict(matrix)
@@ -158,6 +206,7 @@ def _select_benchmark_matrix_id(
             mode=mode,
             host_platform=host_platform,
         ):
+            print(f"  [matrix-select]   {matrix_id}: skipped (no perf match)", file=sys.stderr)
             continue
 
         score = 0
@@ -174,9 +223,18 @@ def _select_benchmark_matrix_id(
         if "benchmark" in pipeline_id.lower():
             score += 1
 
+        print(f"  [matrix-select]   {matrix_id}: score={score}, pipeline={pipeline_id},"
+              f" profile={runtime_profile}", file=sys.stderr)
+
         if score > best_score:
             best_score = score
             best_matrix_id = matrix_id
+
+    assert best_matrix_id is not None, (
+        f"no {mode} benchmark matrix selected for subject "
+        f"'{manifest.get('subjectId') or '?'}'"
+    )
+    print(f"  [matrix-select] => selected {best_matrix_id} (score={best_score})", file=sys.stderr)
 
     if best_matrix_id:
         return best_matrix_id
@@ -576,38 +634,35 @@ def _run_subject_benchmark_pipeline(
     subjects_mod = subjects_module or _load("subjects", testing_root / "subjects.py")
     executor_mod = executor_module or _load("subject_executor", testing_root / "subject_executor.py")
 
-    try:
-        manifest = subjects_mod.load_subject_manifest(repo_root, subject_id)
-        matrix_id = _select_benchmark_matrix_id(manifest, mode=mode, host_platform=host_platform)
-        run_id = f"benchmark-{subject_id}-{mode}-{int(time.time())}"
-        if benchmark_case is None:
-            execution_result = executor_mod.execute_subject_matrix(
-                repo_root,
-                subject_id,
-                goal_id="perf.release",
-                matrix_id=matrix_id,
-                run_id=run_id,
-            )
-        else:
-            planner_mod = planner_module or _load("subject_planner", testing_root / "subject_planner.py")
-            workload_entry = str(benchmark_case.get("workloadEntry") or "")
-            plan = planner_mod.build_plan(
-                repo_root,
-                subject_id,
-                goal_id="perf.release",
-                matrix_id=matrix_id,
-                run_id=run_id,
-                source_entry=source_entry,
-                workload_entry=workload_entry,
-                entry_selection=_declared_benchmark_entry_selection(benchmark_case),
-            )
-            execution_result = executor_mod.execute_plan(
-                repo_root,
-                plan,
-                run_id=run_id,
-            )
-    except Exception as error:
-        return {"error": str(error)}
+    manifest = subjects_mod.load_subject_manifest(repo_root, subject_id)
+    matrix_id = _select_benchmark_matrix_id(manifest, mode=mode, host_platform=host_platform)
+    run_id = f"benchmark-{subject_id}-{mode}-{int(time.time())}"
+    if benchmark_case is None:
+        execution_result = executor_mod.execute_subject_matrix(
+            repo_root,
+            subject_id,
+            goal_id="perf.release",
+            matrix_id=matrix_id,
+            run_id=run_id,
+        )
+    else:
+        planner_mod = planner_module or _load("subject_planner", testing_root / "subject_planner.py")
+        workload_entry = str(benchmark_case.get("workloadEntry") or "")
+        plan = planner_mod.build_plan(
+            repo_root,
+            subject_id,
+            goal_id="perf.release",
+            matrix_id=matrix_id,
+            run_id=run_id,
+            source_entry=source_entry,
+            workload_entry=workload_entry,
+            entry_selection=_declared_benchmark_entry_selection(benchmark_case),
+        )
+        execution_result = executor_mod.execute_plan(
+            repo_root,
+            plan,
+            run_id=run_id,
+        )
 
     errors = [str(item) for item in list(execution_result.get("errors") or []) if str(item)]
     if errors:
@@ -641,6 +696,12 @@ def _run_native_benchmark_pipeline(
     benchmark_case: dict[str, Any] | None = None,
     source_entry: str | None = None,
 ) -> dict[str, Any]:
+    # Set persistent build root for native compilation workers.
+    # Each case gets its own directory so subsequent builds are incremental.
+    case_id = str(benchmark_case.get("stableId") or "default") if benchmark_case else "default"
+    build_dir = _get_benchmark_build_dir(repo_root, subject_id, case_id)
+    os.environ["CHAOS_IL2CPP_BENCHMARK_BUILD_ROOT"] = str(build_dir)
+
     resolved_source_entry = source_entry
     if benchmark_case is not None and not resolved_source_entry:
         testing_root = repo_root / "build" / "toolchains" / "run" / "testing"
@@ -724,39 +785,25 @@ def _run_native_benchmark_case_with_shared_build(
     subject_id: str,
     host_platform: str,
     benchmark_case: dict[str, Any],
-    build_manifest_path: str,
-    matrix_id: str,
-    base_run_id: str,
+    build_manifest_path: str = "",
+    matrix_id: str = "",
+    base_run_id: str = "",
     planner_module: Any | None = None,
     source_entry: str | None = None,
 ) -> dict[str, Any]:
-    testing_root = repo_root / "build" / "toolchains" / "run" / "testing"
-    planner_mod = planner_module or _load("subject_planner", testing_root / "subject_planner.py")
-    resolved_source_entry = source_entry or _declared_benchmark_host_source_entry(
-        repo_root,
-        subject_id,
-        matrix_id=matrix_id,
-        host_platform=host_platform,
-    )
-    run_id = f"{base_run_id}-{_benchmark_case_run_fragment(benchmark_case)}"
-    plan = planner_mod.build_plan(
-        repo_root,
-        subject_id,
-        goal_id="perf.release",
-        matrix_id=matrix_id,
-        run_id=run_id,
-        source_entry=resolved_source_entry,
-        workload_entry=str(benchmark_case.get("workloadEntry") or ""),
-        entry_selection=_declared_benchmark_entry_selection(benchmark_case),
-    )
-    runtime_stage = _runtime_stage_from_plan(
-        plan,
-        preferred_kind=_preferred_runtime_stage_kind("native"),
-    )
-    if runtime_stage is None:
-        return {"error": f"native benchmark plan did not produce a runtime stage for {subject_id}"}
+    """Run a single native benchmark case through the full pipeline.
 
-    return {"error": "native benchmark execution requires subject_workers module which has been removed"}
+    Note: shared-build reuse was provided by the subject_workers module which
+    has been removed. Each case now runs through _run_native_benchmark_pipeline
+    (per-case full build) as a fallback.
+    """
+    return _run_native_benchmark_pipeline(
+        repo_root=repo_root,
+        subject_id=subject_id,
+        host_platform=host_platform,
+        benchmark_case=benchmark_case,
+        source_entry=source_entry,
+    )
 
 
 def _run_native_declared_benchmark_records(
@@ -805,17 +852,6 @@ def _run_native_declared_benchmark_records(
     if "error" in summary_pipeline_result:
         return [summary_pipeline_result]
 
-    execution_result = dict(summary_pipeline_result.get("executionResult") or {})
-    build_manifest_path = ""
-    if len(native_cases) > 1:
-        build_manifest_path = _extract_stage_manifest_path(
-            execution_result,
-            bucket="build",
-            kind="build-target",
-        )
-        if not build_manifest_path:
-            return [{"error": f"native benchmark build did not produce a reusable build manifest for {subject_id}"}]
-
     results = [
         _append_benchmark_record(
             repo_root=repo_root,
@@ -840,8 +876,6 @@ def _run_native_declared_benchmark_records(
         ),
     ]
 
-    matrix_id = str(summary_pipeline_result.get("matrixId") or "")
-    base_run_id = str(summary_pipeline_result.get("runId") or f"benchmark-{subject_id}-native")
     summary_case_key = (
         str(summary_case.get("stableId") or ""),
         str(summary_case.get("alias") or ""),
@@ -859,10 +893,6 @@ def _run_native_declared_benchmark_records(
             subject_id=subject_id,
             host_platform=host_platform,
             benchmark_case=benchmark_case,
-            build_manifest_path=build_manifest_path,
-            matrix_id=matrix_id,
-            base_run_id=base_run_id,
-            planner_module=planner_module,
             source_entry=source_entry,
         )
         if "error" in case_pipeline_result:
@@ -905,6 +935,8 @@ def dispatch(args: list[str], repo_root: Path, host_platform: str) -> int:
     do_open = False
     do_status = False
     do_all = False
+    do_init_baseline = False
+    do_clean_builds = False
     output: str | None = None
 
     i = 0
@@ -924,10 +956,20 @@ def dispatch(args: list[str], repo_root: Path, host_platform: str) -> int:
             do_status = True; i += 1
         elif a == "--all":
             do_all = True; i += 1
+        elif a == "init-baseline":
+            do_init_baseline = True; i += 1
         elif a == "--output" and i + 1 < len(args):
             output = args[i + 1]; i += 2
+        elif a == "--clean-builds":
+            do_clean_builds = True; i += 1
         else:
             i += 1
+
+    # --clean-builds: remove stale build directories and exit
+    if do_clean_builds:
+        removed = _clean_stale_benchmark_builds(repo_root)
+        print(f"Removed {removed} stale benchmark build director{'y' if removed == 1 else 'ies'}")
+        return 0
 
     # 鈹€鈹€ status sub-command 鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€
     if do_status:
@@ -949,6 +991,63 @@ def dispatch(args: list[str], repo_root: Path, host_platform: str) -> int:
         return 0
 
     # 鈹€鈹€ record sub-command 鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€
+    
+    # init-baseline sub-command: snapshot latest records as baselines
+    if do_init_baseline:
+        comparison_mod = _load("benchmark_comparison", testing_root / "benchmark_comparison.py")
+        if subject_id:
+            sids = [subject_id]
+        elif do_all:
+            sids = records_mod.list_subjects_with_records(repo_root)
+        else:
+            sids = records_mod.list_subjects_with_records(repo_root)
+
+        if not sids:
+            print("ERROR: no benchmark records found. Run `run benchmark --subject <id> --record` first.")
+            return 2
+
+        baseline_count = 0
+        for sid in sids:
+            device_id = detector_mod.load_or_detect(repo_root).get("id", "unknown")
+            latest = records_mod.query_latest_all_modes(repo_root, sid, device_id)
+            managed = latest.get("managed")
+            native = latest.get("native")
+            interpreter = latest.get("interpreter")
+            if not any((managed, native, interpreter)):
+                print(f"  Skipping {sid}: no benchmark records found")
+                continue
+            comparison = comparison_mod.compute_comparison(
+                dict(managed.get("metrics") or {}) if managed else None,
+                dict(native.get("metrics") or {}) if native else None,
+                dict(interpreter.get("metrics") or {}) if interpreter else None,
+            )
+
+            # Cross-mode git commit consistency check
+            managed_commit = str((managed or {}).get("gitCommit") or "")
+            native_commit = str((native or {}).get("gitCommit") or "")
+            interp_commit = str((interpreter or {}).get("gitCommit") or "")
+            commits = {c for c in (managed_commit, native_commit, interp_commit) if c}
+            if len(commits) <= 1:
+                comparison["gitCommitVerified"] = True
+                comparison["gitCommit"] = next(iter(commits)) if commits else "unknown"
+            else:
+                print(f"  WARNING: {sid} benchmark records span multiple git commits:"
+                      f" managed={managed_commit}, native={native_commit},"
+                      f" interpreter={interp_commit}", file=sys.stderr)
+                comparison["gitCommitVerified"] = False
+                comparison["gitCommit"] = "mixed"
+
+            verdict = comparison_mod.evaluate_targets(comparison)
+            path = comparison_mod.save_baseline(sid, comparison, verdict)
+            print(f"  Baseline saved: {sid} -> {path}")
+            baseline_count += 1
+
+        if baseline_count == 0:
+            print("ERROR: no baselines created. No benchmark records found.")
+            return 2
+        print(f"\n{baseline_count} baseline(s) saved")
+        return 0
+
     if do_record:
         requested_modes = [mode] if mode else ["managed", "native", "interpreter"]
         subject_run_plan: list[tuple[str, list[str]]] = []
@@ -1032,6 +1131,15 @@ def dispatch(args: list[str], repo_root: Path, host_platform: str) -> int:
                     regression_found = True
 
                 for benchmark_case in supported_benchmark_cases:
+                    stable_id = str(benchmark_case.get("stableId") or "")
+                    cache_key = (sid, m, stable_id)
+
+                    # Lazily skip cases already covered by the summary run
+                    if cache_key in _benchmark_case_run_cache:
+                        print(f"  [cache] HIT {sid}/{m}/{stable_id} — skipping (covered by previous run)",
+                              file=sys.stderr)
+                        continue
+
                     case_result = _run_pipeline_and_record(
                         repo_root=repo_root,
                         subject_id=sid,
@@ -1041,6 +1149,7 @@ def dispatch(args: list[str], repo_root: Path, host_platform: str) -> int:
                         host_platform=host_platform,
                         benchmark_case=benchmark_case,
                     )
+                    _benchmark_case_run_cache[cache_key] = case_result
                     _print_result(sid, m, device, case_result)
                     if case_result.get("error"):
                         errors_found = True
@@ -1092,6 +1201,14 @@ def _run_pipeline_and_record(
         return {"error": f"subject not found: {subject_id}"}
 
     if mode == "native":
+        # Set persistent build root for incremental native compilation.
+        # Subprocess workers inherit this env var and compile into the
+        # per-case directory; subsequent runs of the same case reuse
+        # intermediate objects via cmake/ninja incremental build.
+        case_id = str(benchmark_case.get("stableId") or "default") if benchmark_case else "default"
+        build_dir = _get_benchmark_build_dir(repo_root, subject_id, case_id)
+        os.environ["CHAOS_IL2CPP_BENCHMARK_BUILD_ROOT"] = str(build_dir)
+
         native_kwargs = {
             "repo_root": repo_root,
             "subject_id": subject_id,
@@ -1163,11 +1280,8 @@ def _cmd_status(repo_root: Path, records_mod: Any, subject_id: str | None, do_al
 
     for sid in sids:
         print(f"\n{sid}")
-        # Latest per mode on any device
-        from benchmark_records import _records_path, _iter_jsonl_reverse
-        path = _records_path(repo_root, sid)
         seen: dict[str, Any] = {}
-        for rec in _iter_jsonl_reverse(path):
+        for rec in records_mod._iter_records_reverse(records_mod._records_path(repo_root, sid)):
             mode = rec.get("mode", "?")
             if mode not in seen:
                 seen[mode] = rec
@@ -1192,11 +1306,15 @@ Options:
   --dashboard [--open]         Generate HTML dashboard (optionally open in browser)
   --output <path>              Dashboard output path
   status [--subject <id>]      Show latest benchmark records
+  init-baseline [--subject <id>|--all]  Snapshot latest records as baseline
+  --clean-builds               Remove stale native build cache directories
 
 Examples:
   run benchmark --subject SolutionCorePack --mode native --record
   run benchmark --all --record
   run benchmark --dashboard --open
   run benchmark status --all
+  run benchmark init-baseline --all
+  run benchmark --clean-builds
 """)
 

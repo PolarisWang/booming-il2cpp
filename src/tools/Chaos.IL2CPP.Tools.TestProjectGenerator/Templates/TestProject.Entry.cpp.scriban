@@ -227,7 +227,33 @@ static int RunBenchmarkAllMode(int iterations) {
     return 0;
 }
 
-static int RunHotupdateMode() {
+// Load patch data from an external file (used by the verification pipeline).
+// Returns nullptr if path is nullptr or file cannot be opened.
+static chaos::il2cpp::runtime_core::PatchContext* ApplyHotpatchFromFile(const char* path) {
+    if (path == nullptr) return nullptr;
+    FILE* f = fopen(path, "rb");
+    if (!f) { std::fprintf(stderr, "WARN: cannot open patch data: %s\n", path); return nullptr; }
+    fseek(f, 0, SEEK_END);
+    long size = ftell(f);
+    rewind(f);
+    uint8_t* data = (uint8_t*)std::malloc(size > 0 ? size : 1);
+    if (!data) { fclose(f); return nullptr; }
+    size_t read_size = fread(data, 1, size, f);
+    fclose(f);
+    if (read_size == 0) { std::free(data); return nullptr; }
+    auto* ctx = chaos::il2cpp::runtime_core::ApplyPatchFromMemory(
+        data, read_size, nullptr);
+    std::free(data);
+    if (ctx == nullptr) {
+        std::fprintf(stderr, "WARN: ApplyPatchFromMemory returned null (no patches applied)\n");
+    } else {
+        std::fprintf(stderr, "INFO: Applied patches to %u methods from %s\n",
+                     static_cast<unsigned>(ctx->method_count), path);
+    }
+    return ctx;
+}
+
+static int RunHotupdateMode(const char* patchDataPath = nullptr) {
     const int kCount = kSubjectEntryCount;
     // Dynamic allocation to support arbitrary method counts
     auto baseline_ok = std::make_unique<bool[]>(kCount);
@@ -269,7 +295,7 @@ static int RunHotupdateMode() {
                si, caught ? "false" : "true", bv);
     }
     printf("],");
-    auto* patch_ctx = ApplyHotpatchIfAvailable();
+    auto* patch_ctx = patchDataPath ? ApplyHotpatchFromFile(patchDataPath) : ApplyHotpatchIfAvailable();
     int semantic_passed = 0;
     int semantic_changed_count = 0;
     printf("\"patchedFact\":[");
@@ -401,7 +427,14 @@ int main(int argc, char* argv[]) {
         goto shutdown;
     }
 
-    if (std::strcmp(argv[1], "--hotupdate") == 0) { ret = RunHotupdateMode(); goto shutdown; }
+    if (std::strcmp(argv[1], "--hotupdate") == 0) {
+        const char* patchDataPath = nullptr;
+        if (argc >= 4 && std::strcmp(argv[2], "--patch-data") == 0) {
+            patchDataPath = argv[3];
+        }
+        ret = RunHotupdateMode(patchDataPath);
+        goto shutdown;
+    }
 
     if (std::strcmp(argv[1], "--hotupdate-and-benchmark") == 0) {
         if (argc < 4) { printf("Usage: entry.exe --hotupdate-and-benchmark <index> <iterations>\n"); return 1; }

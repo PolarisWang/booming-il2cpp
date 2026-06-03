@@ -397,12 +397,12 @@ CHAOS_IL2CPP_FORCEINLINE void ChaosArrayClear_Inline(CHAOS_IL2CPP_INTPTR array, 
         // For very small clears (≤8 bytes), use a single store
         if (bytes <= 8) {
             CHAOS_IL2CPP_INTPTR zero = 0;
-            __builtin_memcpy(dst, &zero, bytes);
+            memcpy(dst, &zero, bytes);
             return;
         }
-        // For medium clears (9-64 bytes), use __builtin_memset which the
-        // compiler expands to rep stosq or aligned vector stores when inlined.
-        __builtin_memset(dst, 0, bytes);
+        // For medium clears (9-64 bytes), use memset which compilers
+        // expand to rep stosq or aligned vector stores when inlined.
+        memset(dst, 0, bytes);
         return;
     }
     std::memset(dst, 0, bytes);

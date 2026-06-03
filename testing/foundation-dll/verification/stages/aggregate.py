@@ -65,16 +65,32 @@ def run_aggregate(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageRes
         else:
             summary["fact"] = {"status": "no_results"}
 
-        # Benchmark results
+        # Benchmark results — collect both counts and performance metrics
         bench_path = results_dir / "benchmark.json"
         if bench_path.exists():
             bench_data = json.loads(bench_path.read_text(encoding="utf-8"))
-            results = bench_data.get("results", [])
-            method_count = bench_data.get("methodCount", len(results))
-            summary["benchmark"] = {
+            results_list = bench_data.get("results", [])
+            method_count = bench_data.get("methodCount", len(results_list))
+            chunk_benchmark = {
                 "methodCount": method_count,
                 "iterations": bench_data.get("iterations", 0),
             }
+            perf_summary = bench_data.get("summary", {})
+            if perf_summary:
+                for perf_key in ("meanDurationMs", "meanOpsPerSecond", "minDurationMs",
+                                 "maxDurationMs", "totalDurationMs", "totalAllocatedBytes",
+                                 "meanSampleCount", "totalOutliers",
+                                 "warmupRounds", "sampleRounds"):
+                    if perf_key in perf_summary:
+                        chunk_benchmark[perf_key] = perf_summary[perf_key]
+            # Collect per-method stddev/cv for aggregate CV computation
+            per_method_stats = bench_data.get("perMethodStats") or []
+            if per_method_stats:
+                cvs = [s.get("cv", 0) for s in per_method_stats if isinstance(s.get("cv"), (int, float))]
+                if cvs:
+                    chunk_benchmark["meanCv"] = sum(cvs) / len(cvs)
+                    chunk_benchmark["maxCv"] = max(cvs)
+            summary["benchmark"] = chunk_benchmark
             all_benchmark.append({
                 "chunk": slug,
                 **bench_data,
@@ -103,6 +119,25 @@ def run_aggregate(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageRes
     total_benchmarked = sum(s.get("benchmark", {}).get("methodCount", 0) for s in chunk_summaries)
     chunks_with_fact = sum(1 for s in chunk_summaries if "passed" in s.get("fact", {}))
 
+    # ── Compute aggregate benchmark performance ──
+    chunks_with_benchmark = [s.get("benchmark", {}) for s in chunk_summaries if "methodCount" in s.get("benchmark", {})]
+    total_benchmarked = sum(b.get("methodCount", 0) for b in chunks_with_benchmark)
+    aggregate_perf: dict[str, float] = {}
+    if chunks_with_benchmark:
+        duration_values = [b["meanDurationMs"] for b in chunks_with_benchmark if "meanDurationMs" in b]
+        ops_values = [b["meanOpsPerSecond"] for b in chunks_with_benchmark if "meanOpsPerSecond" in b]
+        if duration_values:
+            aggregate_perf["meanDurationMs"] = sum(duration_values) / len(duration_values)
+        if ops_values:
+            aggregate_perf["meanOpsPerSecond"] = sum(ops_values) / len(ops_values)
+        # Aggregate statistical QC (M1)
+        cv_values = [b["meanCv"] for b in chunks_with_benchmark if "meanCv" in b]
+        if cv_values:
+            aggregate_perf["aggregateMeanCv"] = sum(cv_values) / len(cv_values)
+        total_outliers = sum(b.get("totalOutliers", 0) for b in chunks_with_benchmark)
+        if total_outliers:
+            aggregate_perf["totalOutliers"] = total_outliers
+
     # ── Write reports ──
     latest_dir.mkdir(parents=True, exist_ok=True)
     history_dir.mkdir(parents=True, exist_ok=True)
@@ -126,6 +161,7 @@ def run_aggregate(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageRes
         "timestamp": time.strftime("%Y-%m-%dT%H:%M:%S"),
         "totalChunks": len(chunk_slugs),
         "totalBenchmarkedMethods": total_benchmarked,
+        "aggregatePerformance": aggregate_perf,
         "chunkSummaries": chunk_summaries,
     }
     (latest_dir / "benchmark-summary.json").write_text(
@@ -151,6 +187,7 @@ def run_aggregate(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageRes
             "chunksVerified": chunks_with_fact,
             "factPassRate": round(total_passed / total_fact * 100, 1) if total_fact else 0,
             "totalBenchmarkedMethods": total_benchmarked,
+            "aggregatePerformance": aggregate_perf,
         },
     }
     (latest_dir / "dashboard.json").write_text(

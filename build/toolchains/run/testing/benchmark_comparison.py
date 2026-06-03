@@ -2,10 +2,60 @@
 
 Computes ratios between managed / native / interpreter perf metrics and
 evaluates pass/fail against configurable performance targets.
+
+Also provides baseline persistence for regression detection across commits.
 """
 from __future__ import annotations
 
+import json
+from pathlib import Path
 from typing import Any
+
+# ---------------------------------------------------------------------------
+# Baseline storage paths
+# ---------------------------------------------------------------------------
+
+_BASELINE_DIR = Path(__file__).resolve().parent.parent / "artifact" / "verification" / "benchmark-baselines"
+
+
+def _ensure_baseline_dir() -> Path:
+    _BASELINE_DIR.mkdir(parents=True, exist_ok=True)
+    return _BASELINE_DIR
+
+
+def save_baseline(subject_id: str, comparison: dict[str, Any], verdict: dict[str, Any]) -> Path:
+    """Save comparison result as a baseline for the given subject."""
+    baseline_dir = _ensure_baseline_dir()
+    path = baseline_dir / f"{subject_id}.json"
+    data = {
+        "subjectId": subject_id,
+        "comparison": comparison,
+        "verdict": verdict,
+        "savedAt": __import__("datetime").datetime.now(
+            __import__("datetime").timezone.utc
+        ).isoformat().replace("+00:00", "Z"),
+    }
+    path.write_text(json.dumps(data, indent=2, ensure_ascii=False), encoding="utf-8")
+    return path
+
+
+def load_baseline(subject_id: str) -> dict[str, Any] | None:
+    """Load the most recent baseline for a subject, or None."""
+    path = _BASELINE_DIR / f"{subject_id}.json"
+    if not path.exists():
+        return None
+    try:
+        return json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        return None
+
+
+def list_baseline_subjects() -> list[str]:
+    """Return sorted list of subject IDs that have baselines."""
+    if not _BASELINE_DIR.is_dir():
+        return []
+    return sorted(p.stem for p in _BASELINE_DIR.iterdir() if p.suffix == ".json")
+
 
 # ---------------------------------------------------------------------------
 # Default performance targets

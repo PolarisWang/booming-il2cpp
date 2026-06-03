@@ -6,6 +6,10 @@
 // .NET semantics: Mutex.WaitOne returns when the mutex is acquired;
 // Mutex.ReleaseMutex releases ownership.  Named mutexes are visible
 // system-wide and can synchronize across processes.
+//
+// On Windows, this file is excluded from compilation by the CMakeLists.txt template.
+
+#if !defined(_WIN32)
 
 #include <chaos/native_types.h>
 #include "generated_code_compat.h"
@@ -238,3 +242,5 @@ CHAOS_IL2CPP_INT32 chaos_mutex_close(CHAOS_IL2CPP_INTPTR handle) noexcept
 
 }  // extern "C"
 }  // namespace chaos::il2cpp::runtime_core
+
+#endif  // !defined(_WIN32)

@@ -515,8 +515,9 @@ public sealed class CSharpSerializer
                 return cleanType switch
                 {
                     "System.Byte" => $"(byte){root.GetByte()}",
-                    "System.SByte" => $"(sbyte){root.GetSByte()}",
-                    "System.Int16" => $"(short){root.GetInt16()}",
+                    "System.SByte" => $"(sbyte)({root.GetSByte()})",
+                    "System.Int16" => $"(short)({root.GetInt16()})",
+                    "System.Half" => $"({MapToCSharpType(cleanType)})({root.GetDouble().ToString("R", CultureInfo.InvariantCulture)})",
                     "System.UInt16" => $"(ushort){root.GetUInt16()}",
                     "System.Int32" => root.GetInt32().ToString(),
                     "System.UInt32" => root.GetUInt32().ToString(),
@@ -531,7 +532,7 @@ public sealed class CSharpSerializer
             catch (Exception ex)
             {
                 // JSON number overflow or format mismatch — emit as fallback cast
-                return $"/* deserialize error: {ex.Message} */ ({cleanType}){root.GetRawText()}";
+                return $"/* deserialize error: {ex.Message} */ ({cleanType})({root.GetRawText()})";
             }
         }
 

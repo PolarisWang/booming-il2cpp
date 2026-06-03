@@ -90,7 +90,7 @@ void PalRwLockWriteLock(PalRwLock* rwl) noexcept {
 }
 
 void PalRwLockUnlock(PalRwLock* rwl) noexcept {
-    ::ReleaseSRWLock(reinterpret_cast<SRWLOCK*>(rwl));
+    ::ReleaseSRWLockExclusive(reinterpret_cast<SRWLOCK*>(rwl));
 }
 
 // ── Event ─────────────────────────────────────────────────────────────

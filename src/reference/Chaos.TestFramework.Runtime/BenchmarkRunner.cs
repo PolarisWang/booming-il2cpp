@@ -66,7 +66,9 @@ internal static class BenchmarkRunner
         }
 
         double ms = bestTicks / 10000.0;
-        double opsPerSec = iterations / (ms / 1000.0);
+        // Clamp zero elapsed to avoid division-by-zero producing Infinity
+        double safeMs = ms > 0 ? ms : 0.001;
+        double opsPerSec = iterations / (safeMs / 1000.0);
 
         return new
         {
