@@ -23,6 +23,8 @@
 
 #include <fmt/format.h>
 
+#include <chaos/pal/pal_time.h>
+
 // ============================================================================
 // Ring buffer implementation (internal)
 // ============================================================================
@@ -100,11 +102,7 @@ inline const char* cached_iso8601() {
         tls_last_ts_ms = now_ms;
         auto sec = static_cast<time_t>(now_ms / 1000);
         struct tm buf;
-#if defined(_WIN32)
-        localtime_s(&buf, &sec);
-#else
-        localtime_r(&sec, &buf);
-#endif
+        chaos::il2cpp::pal::PalLocalTime(&sec, &buf);
         std::strftime(tls_cached_timestamp, sizeof(tls_cached_timestamp),
                       "%Y-%m-%dT%H:%M:%S", &buf);
     }

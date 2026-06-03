@@ -5,6 +5,8 @@
 // Platform-independent wrappers for process CPU time and wall clock time.
 // ============================================================================
 
+#include <ctime>
+
 #include <chaos/pal/pal_types.h>
 
 namespace chaos::il2cpp::pal {
@@ -22,6 +24,18 @@ uint64_t PalGetProcessCpuTimeNs() noexcept;
 /// Monotonic wall clock time in nanoseconds since an unspecified epoch.
 /// Never goes backwards, suitable for interval measurement.
 uint64_t PalGetWallTimeNs() noexcept;
+
+/// Convert @a clock (time_t) to a thread-safe @a result (struct tm).
+/// Equivalent to localtime_r on POSIX, localtime_s on Win32.
+/// @param clock  Calendar time (UTC seconds since epoch).
+/// @param result  Output buffer (caller-allocated).
+inline void PalLocalTime(const time_t* clock, struct tm* result) noexcept {
+#if defined(_WIN32)
+    ::localtime_s(result, clock);
+#else
+    ::localtime_r(clock, result);
+#endif
+}
 
 }  // namespace chaos::il2cpp::pal
 

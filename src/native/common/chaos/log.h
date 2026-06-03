@@ -48,6 +48,7 @@
 
 #include <chaos/trace.h>
 #include <chaos/config.h>
+#include <chaos/pal/pal_time.h>
 #include <fmt/format.h>
 
 // ── Compile-time log level ──────────────────────────────────────────────────
@@ -86,11 +87,7 @@ inline const char* cached_log_timestamp() {
         s_last_ms = now_ms;
         auto sec = static_cast<time_t>(now_ms / 1000);
         struct tm buf;
-#if defined(_WIN32)
-        localtime_s(&buf, &sec);
-#else
-        localtime_r(&sec, &buf);
-#endif
+        chaos::il2cpp::pal::PalLocalTime(&sec, &buf);
         std::strftime(s_buf, sizeof(s_buf), "%Y-%m-%dT%H:%M:%S", &buf);
     }
     return s_buf;
