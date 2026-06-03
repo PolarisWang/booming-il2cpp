@@ -402,7 +402,6 @@ CHAOS_IL2CPP_INTPTR ChaosDestroyStructureByType(CHAOS_IL2CPP_INTPTR struct_ptr, 
 // ICALL: Marshal.StringToBSTR(string) → IntPtr
 CHAOS_IL2CPP_INTPTR CHAOS_RUNTIME_ABI_CALL MarshalStringToBSTR(void* managed_string) noexcept {
     if (managed_string == nullptr) return 0;
-#if defined(_WIN32)
     auto* string_header = static_cast<StringObjectHeader*>(managed_string);
     const auto byte_count = static_cast<int>(string_header->byte_count);
     // Convert managed UTF-8 string to UTF-16 for SysAllocString.
@@ -419,16 +418,11 @@ CHAOS_IL2CPP_INTPTR CHAOS_RUNTIME_ABI_CALL MarshalStringToBSTR(void* managed_str
     auto result = com_platform::PlatformSysAllocString(wide_buf);
     std::free(wide_buf);
     return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(result);
-#else
-    (void)managed_string;
-    return 0;
-#endif
 }
 
 // ICALL: Marshal.PtrToStringBSTR(IntPtr) → String
 void* CHAOS_RUNTIME_ABI_CALL MarshalPtrToStringBSTR(CHAOS_IL2CPP_INTPTR bstr_ptr) noexcept {
     if (bstr_ptr == 0) return nullptr;
-#if defined(_WIN32)
     auto length_chars = com_platform::PlatformSysStringLen(
         reinterpret_cast<void*>(bstr_ptr));
     if (length_chars <= 0) return nullptr;
@@ -437,9 +431,6 @@ void* CHAOS_RUNTIME_ABI_CALL MarshalPtrToStringBSTR(CHAOS_IL2CPP_INTPTR bstr_ptr
     auto* rs = ts ? ts->runtime_state : nullptr;
     if (rs == nullptr) return nullptr;
     return MarshalWideToString(rs, ts, wide_chars, length_chars);
-#else
-    return nullptr;
-#endif
 }
 
 // ICALL: Marshal.FreeBSTR(IntPtr) → void
