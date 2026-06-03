@@ -1256,7 +1256,11 @@ extern ""C"" CHAOS_IL2CPP_INT32 RunNativeAot(CHAOS_IL2CPP_INT32 entryIndex) {{
         {
             objectModelCodeBuilder = objectModelBuilder;
             objectModelCode = "";
-            objectModelBuilder.Length = 0;  // detach builder from this local
+            // NOTE: Intentionally NOT setting objectModelBuilder.Length = 0 here.
+            // objectModelCodeBuilder and objectModelBuilder reference the SAME
+            // StringBuilder instance. Clearing Length would destroy the content
+            // that the emitter (NativeAotEmitter) reads via GetChunks(), causing
+            // the entire object model section to vanish from generated output.
         }
         else
         {
@@ -1498,6 +1502,28 @@ extern ""C"" CHAOS_IL2CPP_INT32 RunNativeAot(CHAOS_IL2CPP_INT32 entryIndex) {{
             sb.AppendLine(";");
         }
         sb.AppendLine();
+
+        // ── VTable extern declarations (inside codegen namespace) ──
+        // Types with vtables defined in the object model (page 0) need extern
+        // declarations so that type-info-defs.generated.cpp (paged build) can
+        // reference them without C2065 undeclared identifier.
+        // Use _vtableLengths cross-referenced with _allEmittedTypeSubjectIds
+        // rather than _vtableTypes, since the latter may be null/empty in some
+        // code paths while _vtableLengths is the authoritative source.
+        if (_vtableLengths is { Count: > 0 } && _allEmittedTypeSubjectIds is { Count: > 0 })
+        {
+            foreach (var typeId in _allEmittedTypeSubjectIds.OrderBy(id => id, StringComparer.Ordinal))
+            {
+                if (_vtableLengths.TryGetValue(typeId, out int vtLen) && vtLen > 0)
+                {
+                    var symbol = GetNativeVTableSymbol(typeId);
+                    sb.Append("extern const void* ");
+                    sb.Append(symbol);
+                    sb.AppendLine("[];");
+                }
+            }
+            sb.AppendLine();
+        }
 
         // ── Static field extern declarations (inside codegen namespace) ──
         // Declared as TU-scoped variables in the object model (page 0) with actual types
@@ -3779,6 +3805,29 @@ public sealed partial class NativeAotLoweringPlanner
             }
         }
 
+        // Filter subject entries to only reference method indices that have
+        // corresponding dispatch entries in s_hotpatch_entries[].
+        // GetHotpatchableMethods() (used by BuildHotpatchTable) returns fewer
+        // entries than methodsForLowering — it excludes methods without IL bodies
+        // and deduplicates by NativeSymbol. Raw method indices from the
+        // methodsForLowering loop may exceed s_hotpatch_entries[] bounds, causing
+        // STATUS_ACCESS_VIOLATION when the hotupdate loop dispatches those subjects.
+        int actualEntryCount = HotpatchEntryCount;
+        if (actualEntryCount > 0 && subjectEntries.Count > 0)
+        {
+            var filtered = new List<ScriptObject>(subjectEntries.Count);
+            foreach (var se in subjectEntries)
+            {
+                if ((int)se["method_index"] < actualEntryCount)
+                    filtered.Add(se);
+            }
+            if (filtered.Count < subjectEntries.Count)
+            {
+                Console.Error.WriteLine($"[SUBJECT-FILTER] Removed {subjectEntries.Count - filtered.Count} subject(s) with method_index >= {actualEntryCount}");
+                subjectEntries = filtered;
+            }
+        }
+
         Console.Error.WriteLine($"[DISPATCH-DIAG] total methods: {methods.Count}, subject entries: {subjectEntries.Count}");
         if (subjectEntries.Count > 0)
         {
@@ -3914,22 +3963,16 @@ public sealed partial class NativeAotLoweringPlanner
     /// </summary>
     private bool IsSubjectMethod(string subjectId)
     {
-        if (_subjectMethodSubjectIds != null)
-        {
-            if (_subjectMethodSubjectIds.Contains(subjectId))
-                return true;
-            // Fall back to naming convention when --subject-methods IDs (which use
-            // method-signature format like "System.Convert::ToChar") don't match
-            // the AOT core IR synthetic SubjectIds ("::Subject_0:System.Void()").
-        }
-        // CombinedSubjects methods: any method from the subject-assembly DLL
-        // (assembly name "CombinedSubjects") is a subject method by definition.
+        // 1. Exact match against --subject-methods IDs (most specific).
+        if (_subjectMethodSubjectIds != null && _subjectMethodSubjectIds.Contains(subjectId))
+            return true;
+
+        // 2. CombinedSubjects methods: any method from the subject-assembly DLL
+        //    (assembly name "CombinedSubjects") is a subject method by definition.
         if (subjectId.StartsWith("CombinedSubjects/", StringComparison.Ordinal))
             return true;
-        // Only match ::Subject_N (not ::CustomEntrySubject_N) for subject entries.
-        // CustomEntrySubject_N are wrapper methods generated by the codegen, not
-        // actual subject methods. Including them would inflate kSubjectEntryCount and
-        // break the benchmark subject-index-to-method-index mapping.
+
+        // 3. Match ::Subject_N pattern (numbered subject wrappers).
         const string subjectPrefix = "::Subject_";
         int idx = subjectId.IndexOf(subjectPrefix, StringComparison.Ordinal);
         if (idx < 0) return false;

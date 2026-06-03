@@ -413,6 +413,18 @@ public sealed partial class NativeAotLoweringPlanner
 			if (!dt.Contains("[[")) continue;
 			TrackReferenceType(dt, null);
 		}
+		// Ensure hashSet3 reference types (Box/ldtoken) are tracked for vtable
+		// allocation. These types need VTableSlot[], chaos_vtable_*[], and
+		// VTableDescriptorV0 entries in the CodeRegistration, but may not
+		// have been captured by instruction scanning (e.g. auto-generated
+		// test types only referenced via typeof()/box in test code).
+		foreach (string id in hashSet3)
+		{
+			if (!valueTypeSubjectIds.Contains(id) && !referenceTypeSubjectIds.Contains(id))
+			{
+				TrackReferenceType(id, "System.Private.CoreLib/System.Object");
+			}
+		}
 		// Pre-compute types safe for stack allocation (no GC-ref fields, no finalizer).
 		_typesSafeForStackAllocation = ComputeTypesSafeForStackAllocation(
 			referenceTypeSubjectIds, valueTypeSubjectIds,
@@ -432,9 +444,18 @@ public sealed partial class NativeAotLoweringPlanner
 					methodsByDeclaringTypeVT[dt] = list = new List<AotCoreIrMethodArtifact>();
 				list.Add(method);
 			}
+			// Ensure hashSet3 value types are in valueTypeSubjectIds before sortedReferenceTypes
+			// filter (must precede the filter to prevent C2374 redefinition from dual emission).
+			foreach (string vtId in hashSet3)
+			{
+				if (IsStructuredValueTypeSubjectId(vtId) && !valueTypeSubjectIds.Contains(vtId))
+				{
+					valueTypeSubjectIds.Add(vtId);
+				}
+			}
 			int nextSlot = 0;
 			var sortedReferenceTypes = TopologicalSortReferenceTypes(referenceTypeSubjectIds, referenceTypeBaseSubjectIds)
-				.Where(id => !valueTypeSubjectIds.Contains(id) && !hashSet3.Contains(id))
+				.Where(id => !valueTypeSubjectIds.Contains(id))
 				.ToArray();
 			foreach (string typeId in sortedReferenceTypes)
 			{
@@ -745,6 +766,8 @@ public sealed partial class NativeAotLoweringPlanner
 		foreach (string item3 in sortedHashSet3)
 		{
 			ulong stableId = ComputeStableTypeId(item3);
+			if (!referenceTypeSubjectIds.Contains(item3))
+			{
 			// ── iface_map (InterfaceMapEntry array with vtable_offset) ──
 			bool hasIfaceMap = _referenceTypeImplementedInterfaceSubjectIds.TryGetValue(item3, out var ifaceSubjectIds) && ifaceSubjectIds.Count > 0;
 			string ifaceMapExpr;
@@ -786,7 +809,7 @@ public sealed partial class NativeAotLoweringPlanner
 				ifaceMapExpr = "nullptr";
 				ifaceCountExpr = "0";
 			}
-			if (!valueTypeSubjectIds.Contains(item3))
+			if (!valueTypeSubjectIds.Contains(item3) && !referenceTypeSubjectIds.Contains(item3))
 			{
 				StringBuilder stringBuilder = builder;
 				StringBuilder.AppendInterpolatedStringHandler handler = new StringBuilder.AppendInterpolatedStringHandler(28, 2, stringBuilder);
@@ -802,6 +825,7 @@ public sealed partial class NativeAotLoweringPlanner
 				handler.AppendFormatted(ifaceBitmap2.ToString());
 				handler.AppendLiteral("};");
 				stringBuilder.AppendLine(ref handler);
+			}
 			}
 			{
 				StringBuilder stringBuilder = builder;
