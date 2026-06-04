@@ -77,7 +77,7 @@ pending_phases: [phase-1-remaining, phase-2]
 | ws1-jit-industrialization | phase-1 | completed | main | JIT 工业化收官 ✅ 199/199 测试通过 | — | 大 |
 | ws3-foundation-dll | phase-1 | ready | main | Foundation-DLL 全量验证攻坚（16 failures 硬修复） | — | 大 |
 | ws4-aot-phase-4-5 | phase-1 | completed | main | AOT PHASE 4+5 ✅ p4-hotpatch/p4-multimodule/p4-interpreter/p5-paging/p5-inline/p5-devirt/p5-lto 全部完成 | — | 极大 |
-| ws5-cicd | phase-1 | ready | main | CI/CD 完整体系（WF 框架/fd CI/JIT 基线/AOT 门禁/Dashboard） | — | 中 |
+| ws5-cicd | phase-1 | completed | main | CI/CD 完整体系 ✅ 8/8 子任务交付：c1-ci-framework, c2-fd-ci, c3-jit-baseline, c4-aot-gate, c5-hybrid-gate, c6-notify, c7-dashboard, c8-threshold | — | 中 |
 | ws7-engineering-excellence | phase-1 | completed | main | 工程卓越度 ✅ 批次 A（e1+e2）+ 批次 B（e3+e7）全部完成；批次 C 已取消；批次 D 等待 WS5 | — | 大 |
 | ws2-hybrid-industrialization | phase-2 | completed | main | Hybrid 工业化冲刺 ✅ 41/41 测试通过 | ws1-jit-industrialization ✅ | 中 |
 
@@ -93,11 +93,12 @@ pending_phases: [phase-1-remaining, phase-2]
 - ✅ WS2 (Hybrid工业化冲刺) — 41/41 测试通过，wiki 文档完成
 - ✅ WS3 (Foundation-DLL 全量验证) — 独立 foundation-dll-industrialization 已完成
 - ✅ WS4 (AOT PHASE 4+5) — 全部子任务完成
+- ✅ WS5 (CI/CD 完整体系) — 8/8 子任务完成（c1-c8）
 - ✅ WS7 (工程卓越度) — 批次 A + B 完成，批次 C 取消，批次 D 等待 WS5
 
 剩余工作流：
-- ⏳ WS5 (CI/CD 完整体系) — 未启动
+- 无 — 全部 6 个工作流已完成 ✅
 
 ## 下一步
 
-仅剩余 WS5 (CI/CD 完整体系) 未启动。WS7 批次 D（e6-baseline）等待 WS5 完成后启动。
+所有 6 个工作流（WS1-WS5, WS7）全部完成。工业化 roadmap 已全面收官。

@@ -173,9 +173,9 @@ private:
     // x64: call [rip+disp32] (FF 15 <dd dd dd dd>) — disp32 starts at byte 2.
     // ARM64: LDR X17, #imm19 — imm19 field starts at byte 0 (bits [23:5]).
 #if defined(__aarch64__)
-    static constexpr uint32_t kSlotPatchDispOff = 2;
+    static constexpr uint32_t kSlotPatchDispOff = 0;  // ARM64 LDR X17, #imm19 starts at byte 0 (imm19 in bits [23:5])
 #else
-    static constexpr uint32_t kSlotPatchDispOff = 2;
+    static constexpr uint32_t kSlotPatchDispOff = 2;  // x64 call [rip+disp32]: FF 15 <dd dd dd dd>
 #endif
 
     // When true, use quick JIT path: stack-only, no optimizer, no liveness, no deopt.
@@ -756,7 +756,14 @@ void NativeCodeGenerator::EmitGprArithmetic(
     } else if (opc == IROpCode::Mul) {
         enc_.EmitImul32RR(op_reg, src2_reg);
     } else if (opc == IROpCode::Neg) {
+#if defined(__aarch64__)
+        // ARM64: 32-bit NEG (NEG Wd,Wm) doesn't zero-extend upper 32 bits of Xd,
+        // unlike x64 where 32-bit register destination always zero-extends to 64 bits.
+        // Use 64-bit NEG so the full register holds the sign-extended result.
+        enc_.EmitNeg(op_reg);
+#else
         enc_.EmitNeg32(op_reg);
+#endif
     } else if (opc == IROpCode::Div || opc == IROpCode::Rem) {
 #if defined(__aarch64__)
         // ARM64: SDIV 32-bit signed.  WscratchA = dividend, WscratchB = divisor (pre-loaded).
@@ -1312,7 +1319,13 @@ bool NativeCodeGenerator::EmitInstruction(const interpreter::RegisterInstruction
 
     case IROpCode::LdcI4: {
         if (!instr.has_dst()) return false;
+        // Load int32_t zero-extended to 64-bit, matching x64 mov r32,imm32
+        // and interpreter WRITE_REG semantics.
+#if defined(__aarch64__)
         enc_.EmitMovRIImm32(AT::kScratchA, static_cast<uint32_t>(instr.imm.i4));
+#else
+        enc_.EmitMovRIImm32(AT::kScratchA, static_cast<uint32_t>(instr.imm.i4));
+#endif
         StoreGpr(AT::kScratchA, instr.dst_reg());
         return true;
     }
@@ -1393,7 +1406,11 @@ bool NativeCodeGenerator::EmitInstruction(const interpreter::RegisterInstruction
         if (instr.has_src1()) {
             LoadGpr(AT::kScratchA, instr.src1_reg());
 #if defined(__aarch64__)
-            enc_.EmitMovMR(AT::kRetBuf, 0, AT::kScratchA);
+            // Load saved ABI ret_buf (X1) from [X29, #-16], saved right after
+            // MOV X29, SP in the prologue.  Write the return value through it
+            // (matching x64 saved-RSI reload in the Ret handler).
+            EmitLdur64(buf_, AT::kScratchC, AT::kFrameReg, -16);  // LDR XscratchC, [X29, #-16]
+            EmitStr64(buf_, AT::kScratchA, AT::kScratchC, 0);     // STR Xretval, [XscratchC]
 #else
             // kRetBuf (RSI) is caller-saved and may have been clobbered by EnterCooperativeMode
             enc_.EmitMovRM(AT::kScratchC, AT::kFrameReg, -16);
@@ -1408,8 +1425,9 @@ bool NativeCodeGenerator::EmitInstruction(const interpreter::RegisterInstruction
 #if defined(__aarch64__)
         enc_.EmitAddRI(AT::kStackReg, static_cast<int32_t>(kFrameSize + frame_align_adj_ + xmm_save_size_ + localloc_extra_));
         for (uint32_t slot = num_cache_regs_; slot > 0; --slot)
-            EmitLdp64Post(buf_, callee_saved_regs_[slot - 1], 31, kARM64_SP, 16);
-        EmitLdp64Post(buf_, AT::kFrameReg, 30, kARM64_SP, 16);
+            EmitLdp64Post(buf_, callee_saved_regs_[slot - 1], 0, kARM64_SP, 16);  // LDP Xreg, X0, [SP], #16 (X0=scratch, never XZR)
+        EmitLdp64Post(buf_, 1, 0, kARM64_SP, 16);  // LDP X1, X0, [SP], #16 (discard saved ABI ret_buf & scratch)
+        EmitLdp64Post(buf_, AT::kFrameReg, 30, kARM64_SP, 16);  // LDP X29, X30, [SP], #16
         enc_.EmitRet();
 #else
         enc_.EmitAddRI(AT::kStackReg, static_cast<int32_t>(kFrameSize + frame_align_adj_ + xmm_save_size_ + localloc_extra_));
@@ -2257,14 +2275,14 @@ bool NativeCodeGenerator::EmitInstruction(const interpreter::RegisterInstruction
         // BoxedValue = 16 bytes (single InterpreterValue, no heap-allocated fields)
         static constexpr int32_t kBoxSize = static_cast<int32_t>(sizeof(interpreter::BoxedValue));
 
-        // ═══ TLAB inline allocation path (Windows TLS only) ═══
-#if defined(_WIN32) || defined(_WIN64)
+        // ═══ TLAB inline allocation path (Windows TLS / ARM64 Linux TPIDR_EL0) ═══
+#if defined(_WIN32) || defined(_WIN64) || (defined(__linux__) && defined(__aarch64__))
         if (config_.enable_register_caching && cached_slots_used_) SpillCachedRegs();
-        EmitLoadTlsTlab(buf_);           // rax = &tls_tlab
+        EmitLoadTlsTlab(buf_);           // rax/x0 = &tls_tlab
 
-        enc_.EmitMovRM(AT::kScratchB, AT::kScratchA, 8);   // rcx = tls_tlab.current
-        enc_.EmitLeaRM(AT::kArgsBuf, AT::kScratchB, kBoxSize); // rbx = new current
-        enc_.EmitMovRM(AT::kScratchC, AT::kScratchA, 16);  // rdx = tls_tlab.end
+        enc_.EmitMovRM(AT::kScratchB, AT::kScratchA, 8);   // rcx/x1 = tls_tlab.current
+        enc_.EmitLeaRM(AT::kArgsBuf, AT::kScratchB, kBoxSize); // rbx/x6 = new current
+        enc_.EmitMovRM(AT::kScratchC, AT::kScratchA, 16);  // rdx/x2 = tls_tlab.end
         enc_.EmitCmpRR(AT::kArgsBuf, AT::kScratchC);
         uint32_t box_ja_pos = buf_.pos();
         enc_.EmitJccRel32(kCC_A, 0);     // ja slow_path
@@ -2311,7 +2329,7 @@ bool NativeCodeGenerator::EmitInstruction(const interpreter::RegisterInstruction
             StoreGpr(AT::kScratchA, instr.dst_reg());
         }
 
-#if defined(_WIN32) || defined(_WIN64)
+#if defined(_WIN32) || defined(_WIN64) || (defined(__linux__) && defined(__aarch64__))
         uint32_t box_done_pos = buf_.pos();
 #if defined(__aarch64__)
         PatchArm64B(buf_, box_jmp_done_pos, box_done_pos);
@@ -2353,14 +2371,14 @@ bool NativeCodeGenerator::EmitInstruction(const interpreter::RegisterInstruction
         if (!instr.has_src1() || !instr.has_dst()) return false;
         static constexpr int32_t kArrSize = static_cast<int32_t>(sizeof(interpreter::ArrayStorage));
 
-        // ═══ TLAB inline allocation path (Windows TLS only) ═══
-#if defined(_WIN32) || defined(_WIN64)
+        // ═══ TLAB inline allocation path (Windows TLS / ARM64 Linux TPIDR_EL0) ═══
+#if defined(_WIN32) || defined(_WIN64) || (defined(__linux__) && defined(__aarch64__))
         if (config_.enable_register_caching && cached_slots_used_) SpillCachedRegs();
-        EmitLoadTlsTlab(buf_);           // rax = &tls_tlab
+        EmitLoadTlsTlab(buf_);           // rax/x0 = &tls_tlab
 
-        enc_.EmitMovRM(AT::kScratchB, AT::kScratchA, 8);   // rcx = tls_tlab.current
-        enc_.EmitLeaRM(AT::kArgsBuf, AT::kScratchB, kArrSize); // rbx = new current
-        enc_.EmitMovRM(AT::kScratchC, AT::kScratchA, 16);  // rdx = tls_tlab.end
+        enc_.EmitMovRM(AT::kScratchB, AT::kScratchA, 8);   // rcx/x1 = tls_tlab.current
+        enc_.EmitLeaRM(AT::kArgsBuf, AT::kScratchB, kArrSize); // rbx/x6 = new current
+        enc_.EmitMovRM(AT::kScratchC, AT::kScratchA, 16);  // rdx/x2 = tls_tlab.end
         enc_.EmitCmpRR(AT::kArgsBuf, AT::kScratchC);
         uint32_t newarr_ja_pos = buf_.pos();
         enc_.EmitJccRel32(kCC_A, 0);     // ja slow_path
@@ -2384,7 +2402,7 @@ bool NativeCodeGenerator::EmitInstruction(const interpreter::RegisterInstruction
         buf_.Patch32(newarr_ja_pos + 2, newarr_slow_pos - (newarr_ja_pos + 6));
 #endif
 #else
-        // Linux: no inline TLAB — always use runtime helper
+        // Linux x64: no inline TLAB — always use runtime helper
         if (config_.enable_register_caching && cached_slots_used_) SpillCachedRegs();
         uint32_t newarr_slow_pos = buf_.pos();
 #endif
@@ -2403,7 +2421,7 @@ bool NativeCodeGenerator::EmitInstruction(const interpreter::RegisterInstruction
         RecordGcPoint(call_pos);
         StoreGpr(AT::kScratchA, instr.dst_reg());
 
-#if defined(_WIN32) || defined(_WIN64)
+#if defined(_WIN32) || defined(_WIN64) || (defined(__linux__) && defined(__aarch64__))
         uint32_t newarr_done_pos = buf_.pos();
 #if defined(__aarch64__)
         PatchArm64B(buf_, newarr_jmp_done_pos, newarr_done_pos);
@@ -3832,7 +3850,6 @@ static void OptimizeInstructions(
 
 JitMethod* NativeCodeGenerator::Generate() noexcept {
     CHAOS_IL2CPP_PROFILE_SCOPE("Codegen::Generate");
-    std::fprintf(stderr, "DIAG-PASS: Generate start\n"); std::fflush(stderr);
     uint32_t n_instrs = static_cast<uint32_t>(rm_.instructions.size());
     if (n_instrs == 0) return nullptr;
     instr_offsets_.resize(n_instrs, 0);
@@ -3866,7 +3883,6 @@ JitMethod* NativeCodeGenerator::Generate() noexcept {
     // Initialize cached TLS info for inline TLAB access
     InitTlsTlabInfo();
 
-    std::fprintf(stderr, "DIAG-PASS: pre-scan done (n_instrs=%u)\n", n_instrs);
 
     // ── Register allocation: Tier 0 skips entirely (stack-only) ───────────
     if (is_tier0_) {
@@ -3978,8 +3994,6 @@ JitMethod* NativeCodeGenerator::Generate() noexcept {
     } else {
         SelectCacheableRegs();
     }
-    std::fprintf(stderr, "DIAG-PASS: register alloc done (coloring=%d, cache=%u)\n",
-                 (int)has_graph_coloring_, num_cache_regs_);
 #if defined(__aarch64__)
     // ARM64: STP is always 16 bytes — frame_align_adj_ not needed.
     frame_align_adj_ = 0;
@@ -3994,15 +4008,20 @@ JitMethod* NativeCodeGenerator::Generate() noexcept {
 
     // Prologue — push/STP callee-saved regs, establish frame pointer
 #if defined(__aarch64__)
-    // ARM64 prologue: STP X29, X30 (FP+LR), MOV X29, SP, SUB SP, #N
+    // ARM64 prologue: STP X29, X30 (FP+LR), MOV X29, SP, save ABI ret_buf
+    // (X1) below FP/LR, then cacheable regs, then SUB SP, #N.
     prologue_push_offsets_[0] = buf_.pos();
     EmitStp64Pre(buf_, AT::kFrameReg, 30, kARM64_SP, -16);  // STP X29, X30, [SP, #-16]!
     prologue_set_fpreg_offset_ = buf_.pos();
-    enc_.EmitMovRR(AT::kFrameReg, AT::kStackReg);  // MOV X29, SP
+    enc_.EmitAddRI(AT::kFrameReg, AT::kStackReg, 0);  // MOV X29, SP
+    // Save ABI ret_buf (X1) at [X29-16] so Ret handler can write return value
+    // through it (matching x64 saved-RSI approach).  X29 stays at the saved
+    // X29/X30 pair (from the STP above); X1 sits one slot below at [X29-16].
+    EmitStp64Pre(buf_, 1, 0, kARM64_SP, -16);  // STP X1, X0, [SP, #-16]! (X0=scratch, never XZR)
     // Save additional callee-saved regs used for register caching (Phase 3+)
     for (uint32_t slot = 0; slot < num_cache_regs_; ++slot) {
         prologue_push_offsets_[4 + slot] = buf_.pos();
-        EmitStp64Pre(buf_, callee_saved_regs_[slot], 31, kARM64_SP, -16);  // STP Xreg, XZR, [SP, #-16]!
+        EmitStp64Pre(buf_, callee_saved_regs_[slot], 0, kARM64_SP, -16);  // STP Xreg, X0, [SP, #-16]! (X0=scratch, never XZR)
     }
     prologue_sub_rsp_offset_ = buf_.pos();
     prologue_sub_rsp_size_ = static_cast<uint32_t>(kFrameSize + frame_align_adj_ + xmm_save_size_ + localloc_extra_);
@@ -4019,7 +4038,7 @@ JitMethod* NativeCodeGenerator::Generate() noexcept {
     prologue_push_offsets_[0] = buf_.pos();
     enc_.EmitPush(AT::kFrameReg);
     prologue_set_fpreg_offset_ = buf_.pos();
-    enc_.EmitMovRR(AT::kFrameReg, AT::kStackReg);  // frame pointer chain for GC stack walking
+    enc_.EmitAddRI(AT::kFrameReg, AT::kStackReg, 0);  // frame pointer chain for GC stack walking
     prologue_push_offsets_[1] = buf_.pos();
     enc_.EmitPush(AT::kArgsBuf);
     prologue_push_offsets_[2] = buf_.pos();
@@ -4126,7 +4145,6 @@ JitMethod* NativeCodeGenerator::Generate() noexcept {
 
     // Bail out early if any emit above hit an OOM
     if (CheckFailed()) return nullptr;
-    std::fprintf(stderr, "DIAG-PASS: prologue + cooperative mode done\n");
 
     // ── Optimize instructions (tree IR pipeline + linear fallback) ──────
     // Creates a mutable copy of rm_.instructions for the optimizer.
@@ -4174,7 +4192,6 @@ JitMethod* NativeCodeGenerator::Generate() noexcept {
             }
         }
     }
-    std::fprintf(stderr, "DIAG-PASS: optimization done (n_instrs=%u)\n", n_instrs);
 
     // ── Liveness analysis for precise GC slot maps ─────────────────────────
     // Computes per-instruction live-in bitmasks used by RecordGcPoint() to
@@ -4279,7 +4296,6 @@ JitMethod* NativeCodeGenerator::Generate() noexcept {
             "Liveness computed for %u instructions, use_liveness=%d",
             n_instrs, (int)use_liveness_);
     }
-    std::fprintf(stderr, "DIAG-PASS: liveness analysis done\n");
 
     // Pre-allocate JitMethod early so instruction emission can embed
     // the address of its stale flag for HotUpdate inline PIC checking.
@@ -4307,7 +4323,6 @@ JitMethod* NativeCodeGenerator::Generate() noexcept {
         }
         PropagateTypes(instr);
     }
-    std::fprintf(stderr, "DIAG-PASS: instruction emission done\n");
 
     // Bail out if any instruction emit failed (OOM).
     if (CheckFailed()) return nullptr;
@@ -4346,7 +4361,8 @@ JitMethod* NativeCodeGenerator::Generate() noexcept {
 #if defined(__aarch64__)
     enc_.EmitAddRI(AT::kStackReg, static_cast<int32_t>(kFrameSize + frame_align_adj_ + xmm_save_size_ + localloc_extra_));
     for (uint32_t slot = num_cache_regs_; slot > 0; --slot)
-        EmitLdp64Post(buf_, callee_saved_regs_[slot - 1], 31, kARM64_SP, 16);  // LDP Xreg, XZR, [SP], #16
+        EmitLdp64Post(buf_, callee_saved_regs_[slot - 1], 0, kARM64_SP, 16);  // LDP Xreg, X0, [SP], #16 (X0=scratch, never XZR)
+    EmitLdp64Post(buf_, 1, 0, kARM64_SP, 16);  // LDP X1, X0, [SP], #16 (pop saved ret_buf)
     EmitLdp64Post(buf_, AT::kFrameReg, 30, kARM64_SP, 16);  // LDP X29, X30, [SP], #16
     enc_.EmitRet();
 #else
@@ -4360,7 +4376,6 @@ JitMethod* NativeCodeGenerator::Generate() noexcept {
     // Sentinel entry for instr_offsets_ — SEH clause end indices may point
     // one past the last instruction (exclusive-end convention).
     instr_offsets_.push_back(buf_.pos());
-    std::fprintf(stderr, "DIAG-PASS: epilogue done\n");
 
     // ── Cold section (Throw/Rethrow handlers) ────────────────────────────
     // Emitted after the epilogue so hot-path instructions stay contiguous
@@ -4389,7 +4404,6 @@ JitMethod* NativeCodeGenerator::Generate() noexcept {
 
     if (CheckFailed()) return nullptr;
     if (buf_.pos() == 0 || instr_offsets_.empty()) return nullptr;
-    std::fprintf(stderr, "DIAG-PASS: cold section done\n");
 
     // Resolve branches (including deopt jump patches)
     ResolveBranches();
@@ -4440,7 +4454,6 @@ JitMethod* NativeCodeGenerator::Generate() noexcept {
         // Overwrite count with actual emitted count (skipped malformed clauses)
         buf_.Patch32(seh_offset, emitted_count);
     }
-    std::fprintf(stderr, "DIAG-PASS: branch resolution + SEH done\n");
 
     // ── Emit .pdata/.xdata unwind info ──────────────────────────────────
     // Win64 RUNTIME_FUNCTION for OS stack unwinding (debugger, backtrace).
@@ -4495,9 +4508,9 @@ JitMethod* NativeCodeGenerator::Generate() noexcept {
             osr_entry = buf_.pos();
 #if defined(__aarch64__)
             EmitStp64Pre(buf_, AT::kFrameReg, 30, kARM64_SP, -16);  // STP X29, X30, [SP, #-16]!
-            enc_.EmitMovRR(AT::kFrameReg, AT::kStackReg);
+            enc_.EmitAddRI(AT::kFrameReg, AT::kStackReg, 0);
             for (uint32_t slot = 0; slot < num_cache_regs_; ++slot)
-                EmitStp64Pre(buf_, callee_saved_regs_[slot], 31, kARM64_SP, -16);  // STP Xreg, XZR, [SP, #-16]!
+                EmitStp64Pre(buf_, callee_saved_regs_[slot], 0, kARM64_SP, -16);  // STP Xreg, X0, [SP, #-16]! (X0=scratch, never XZR)
 #else
             enc_.EmitPush(AT::kFrameReg);
             enc_.EmitMovRR(AT::kFrameReg, AT::kStackReg);  // frame pointer chain
@@ -4700,6 +4713,7 @@ JitMethod* NativeCodeGenerator::Generate() noexcept {
 
         // 3. Emit JitDebugInfo header
         JitDebugInfo di;
+        debug_info_offset = buf_.pos();  // Record offset of the struct itself
         di.magic              = JitDebugInfo::kMagic;
         di.version            = JitDebugInfo::kVersion;
         di.code_size          = buf_.pos();
@@ -4709,16 +4723,12 @@ JitMethod* NativeCodeGenerator::Generate() noexcept {
         di.method_name_len    = static_cast<uint32_t>(name_len);
         buf_.EmitBytes(&di, sizeof(di));
     }
-    std::fprintf(stderr, "DIAG-PASS: debug info done\n");
 
     // Seal code buffer — returns nullptr on OOM or failure
     if (CheckFailed()) return nullptr;
     uint32_t code_bytes = buf_.pos();
-    std::fprintf(stderr, "DIAG-PASS: before buf_.Seal (code_bytes=%u)\n", code_bytes);
     void* code = buf_.Seal();
     if (code == nullptr) return nullptr;
-    std::fprintf(stderr, "DIAG-PASS: after buf_.Seal (code=%p)\n", code);
-    std::fprintf(stderr, "DIAG-PASS: JitMethod malloc phase start\n");
 
     CHAOS_IL2CPP_LOG_DEBUG_M("codegen",
         "Compile: {} instrs, {} bytes code, {} call sites",
@@ -4843,13 +4853,9 @@ JitMethod* NativeCodeGenerator::Generate() noexcept {
 JitMethod* Compile(
     const ::chaos::il2cpp::interpreter::RegisterMethod& rm,
     const CompileConfig& config) noexcept {
-    std::fprintf(stderr, "DIAG: Compile free fn enter (n_instrs=%zu)\n", rm.instructions.size()); std::fflush(stderr);
     if (rm.instructions.empty()) return nullptr;
-    std::fprintf(stderr, "DIAG: Compile before GetSehHandler\n"); std::fflush(stderr);
     ISehHandler& seh = GetSehHandler();
-    std::fprintf(stderr, "DIAG: Compile before NativeCodeGenerator ctor\n"); std::fflush(stderr);
     NativeCodeGenerator gen(rm, config, seh);
-    std::fprintf(stderr, "DIAG: Compile before gen.Generate\n"); std::fflush(stderr);
     return gen.Generate();
 }
 
@@ -4896,7 +4902,7 @@ JitMethod::~JitMethod() noexcept {
         runtime_function = nullptr;
     }
 #elif defined(__linux__)
-    if (eh_frame_offset > 0 && code != nullptr) {
+    if (eh_frame_registered && code != nullptr) {
         const void* eh_frame = static_cast<const uint8_t*>(code) + eh_frame_offset;
         __deregister_frame(eh_frame);
     }

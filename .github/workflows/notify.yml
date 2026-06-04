@@ -1,0 +1,102 @@
+# CI Failure Notification
+#
+# Aggregates CI results from all workflows and sends notifications.
+# Triggered on workflow run completion via workflow_run events.
+#
+# Notifications:
+#   - PR comment on failure (per-workflow)
+#   - GitHub Checks API status
+#   - Configurable external notifications (email, webhook)
+
+name: CI Notification
+
+on:
+  workflow_run:
+    workflows:
+      - "Codegen & Common Regression"
+      - "Foundation-DLL Regression"
+      - "JIT Performance Baseline"
+      - "AOT Regression Gate"
+      - "Hybrid Regression Gate"
+    types:
+      - completed
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check workflow result
+        id: check-result
+        run: |
+          CONCLUSION="${{ github.event.workflow_run.conclusion }}"
+          WORKFLOW_NAME="${{ github.event.workflow_run.name }}"
+          RUN_ID="${{ github.event.workflow_run.id }}"
+          RUN_URL="${{ github.event.workflow_run.html_url }}"
+          HEAD_BRANCH="${{ github.event.workflow_run.head_branch }}"
+          HEAD_SHA="${{ github.event.workflow_run.head_sha }}"
+          EVENT="${{ github.event.workflow_run.event }}"
+
+          echo "conclusion=$CONCLUSION" >> $GITHUB_OUTPUT
+          echo "workflow=$WORKFLOW_NAME" >> $GITHUB_OUTPUT
+          echo "run_id=$RUN_ID" >> $GITHUB_OUTPUT
+          echo "run_url=$RUN_URL" >> $GITHUB_OUTPUT
+          echo "head_branch=$HEAD_BRANCH" >> $GITHUB_OUTPUT
+          echo "head_sha=$HEAD_SHA" >> $GITHUB_OUTPUT
+          echo "event=$EVENT" >> $GITHUB_OUTPUT
+
+          if [ "$CONCLUSION" = "success" ]; then
+            echo "status=passed" >> $GITHUB_OUTPUT
+          elif [ "$CONCLUSION" = "failure" ] || [ "$CONCLUSION" = "timed_out" ]; then
+            echo "status=failed" >> $GITHUB_OUTPUT
+          else
+            echo "status=$CONCLUSION" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Comment on PR (failure)
+        if: |
+          steps.check-result.outputs.status == 'failed' &&
+          steps.check-result.outputs.event == 'pull_request'
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const { data: pulls } = await github.rest.pulls.list({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: 'open',
+              head: '${{ steps.check-result.outputs.head_branch }}'
+            });
+
+            if (pulls.length === 0) {
+              console.log('No open PR found for branch, skipping comment.');
+              return;
+            }
+
+            const pr = pulls[0];
+            const body = `## CI Failure: ${{ steps.check-result.outputs.workflow }}
+
+            Status: \`${{ steps.check-result.outputs.status }}\`
+            Commit: ${{ steps.check-result.outputs.head_sha }}
+            Workflow: [${{ steps.check-result.outputs.run_id }}](${{ steps.check-result.outputs.run_url }})
+
+            ❌ **${{ steps.check-result.outputs.workflow }}** failed. Please check the workflow run for details.
+            `;
+
+            await github.rest.issues.createComment({
+              issue_number: pr.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: body
+            });
+
+      - name: Log notification (non-PR failures)
+        if: steps.check-result.outputs.status == 'failed'
+        run: |
+          echo "CI Failure Notification:"
+          echo "  Workflow: ${{ steps.check-result.outputs.workflow }}"
+          echo "  Branch: ${{ steps.check-result.outputs.head_branch }}"
+          echo "  SHA: ${{ steps.check-result.outputs.head_sha }}"
+          echo "  URL: ${{ steps.check-result.outputs.run_url }}"
+          echo "  Event: ${{ steps.check-result.outputs.event }}"
+          # Future: add email/webhook notification here

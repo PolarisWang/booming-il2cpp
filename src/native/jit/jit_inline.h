@@ -18,6 +18,7 @@
 
 #include <cstdint>
 #include <memory>
+#include <mutex>
 #include <vector>
 
 // Forward declarations
@@ -158,6 +159,7 @@ public:
 private:
     struct Map;
     Map* map_ = nullptr;
+    std::mutex mtx_;
 };
 
 extern InlineReverseMap g_inline_reverse_map;

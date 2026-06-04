@@ -174,6 +174,7 @@ void LinuxSehHandler::RegisterCode(void* code_start, uint32_t code_size,
     if (nm->eh_frame_offset > 0) {
         const void* eh_frame = static_cast<const uint8_t*>(code_start) + nm->eh_frame_offset;
         __register_frame(eh_frame);
+        const_cast<JitMethod*>(nm)->eh_frame_registered = true;
         CHAOS_IL2CPP_LOG_DEBUG_M("codegen",
             "RegisterCode: registered .eh_frame at offset {}", nm->eh_frame_offset);
     }

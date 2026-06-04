@@ -241,13 +241,15 @@ public:
         EmitAsr64Imm(buf_, reg, reg, imm);
     }
     void EmitShlRCL(uint8_t reg) override {
-        EmitLsl64Var(buf_, reg, reg, reg);
+        // ARM64: shift by kScratchB (X1 = CL on x86). The shift count is always
+        // in register 1 (CL on x64, X1 on ARM64) — x86 convention.
+        EmitLsl64Var(buf_, reg, reg, 1);
     }
     void EmitShrRCL(uint8_t reg) override {
-        EmitLsr64Var(buf_, reg, reg, reg);
+        EmitLsr64Var(buf_, reg, reg, 1);
     }
     void EmitSarRCL(uint8_t reg) override {
-        EmitAsr64Var(buf_, reg, reg, reg);
+        EmitAsr64Var(buf_, reg, reg, 1);
     }
 
     // ── Comparison ───────────────────────────────────────────────────────
@@ -316,12 +318,12 @@ public:
         ::chaos::il2cpp::jit::EmitArm64(buf_, 0xD65F03C0u);  // RET X30 (LR)
     }
     void EmitPush(uint8_t reg) override {
-        // STP Xt, XZR, [SP, #-16]!  (pre-indexed store pair, dummy slot)
-        EmitStp64Pre(buf_, reg, 31, kARM64_SP, -16);
+        // STP Xt, X0, [SP, #-16]!  (pre-indexed store pair, X0=scratch, never XZR)
+        EmitStp64Pre(buf_, reg, 0, kARM64_SP, -16);
     }
     void EmitPop(uint8_t reg) override {
-        // LDP Xt, XZR, [SP], #16   (post-indexed load pair, discard dummy slot)
-        EmitLdp64Post(buf_, reg, 31, kARM64_SP, 16);
+        // LDP Xt, X0, [SP], #16   (post-indexed load pair, X0=scratch, never XZR)
+        EmitLdp64Post(buf_, reg, 0, kARM64_SP, 16);
     }
 
     // ── Sign extension ───────────────────────────────────────────────────

@@ -8,6 +8,7 @@
 #include "thread_state.h"
 #include "vtable_registry.h"  // ClearDomainPointers
 #include "hotpatch_table.h"   // GetHotpatchNameRegistry / ClearDomainDispatchEntries
+#include "gc_api.h"           // chaos_is_gc_pointer
 
 #include <chaos/log.h>
 
@@ -91,6 +92,8 @@ static CHAOS_IL2CPP_SIZE ScanAndClearCrossDomainRefs(CHAOS_IL2CPP_UINT32 domain_
         // Scan pointer-aligned slots in this card.
         for (uintptr_t slot = card_start; slot < card_end; slot += sizeof(void*)) {
             auto* ptr_slot = reinterpret_cast<void**>(slot);
+            // Skip non-GC slots (native memory with arbitrary bit patterns).
+            if (!chaos_is_gc_pointer(ptr_slot)) continue;
             void* val = *ptr_slot;
 
             // Check if the slot value points WITHIN the domain being unloaded.

@@ -276,23 +276,23 @@ static JitMethod* CompileFpr(RegisterMethod& rm) noexcept {
 //   kShadowSize = 0, kGprFileOff = 0, kFprSlotSize = 16
 static constexpr uint32_t kFprFileOff = kGPRegisters * 8;  // 64 * 8 = 512
 
-/// Execute JIT-compiled function and read GPR return value from [X4 + 0].
+/// Execute JIT-compiled function and read GPR return value from ret_buf.
 static uint64_t ExecuteNative(void* entry, uint64_t* args = nullptr) noexcept {
     uint64_t args_buf[8] = {};
+    uint64_t ret_buf[2] = {};
     if (args) std::memcpy(args_buf, args, 8 * sizeof(uint64_t));
     std::printf("    calling entry=%p\n", entry);
-    uint64_t result = 0;
     __asm__ volatile(
         "mov x0, %[args]\n\t"
-        "mov x1, x0\n\t"
+        "mov x1, %[retbuf]\n\t"
         "blr %[entry]\n\t"
-        "ldr %[res], [x4]\n\t"
-        : [res] "=r"(result)
-        : [entry] "r"(entry), [args] "r"(args_buf)
+        :
+        : [entry] "r"(entry), [args] "r"(args_buf), [retbuf] "r"(ret_buf)
         : "x0", "x1", "x2", "x3", "x4", "x5", "x6", "x7", "x8", "x9",
           "x10", "x11", "x12", "x13", "x14", "x15", "x16", "x17", "x30",
           "memory", "cc"
     );
+    uint64_t result = ret_buf[0];
     std::printf("    result=%" PRIu64 " (0x%" PRIx64 ")\n", result, result);
     return result;
 }

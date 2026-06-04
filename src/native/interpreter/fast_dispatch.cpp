@@ -1081,7 +1081,8 @@ static void Handle_Call_DoAotDirect(FastFrame& frame,
     }
 
     // Push return value with correct tag.
-    if (ret_tag != static_cast<uint8_t>(interpreter::ValueTag::Void)) {
+    if (ret_tag != static_cast<uint8_t>(interpreter::ValueTag::Void) &&
+        ret_tag != static_cast<uint8_t>(interpreter::ValueTag::Struct)) {
         frame.stack[frame.sp] = result;
         frame.stack_tags[frame.sp] = ret_tag;
         ++frame.sp;
@@ -1241,7 +1242,7 @@ static void Handle_Call_DirectInline(FastFrame& frame, const interpreter::IRInst
 }
 
 
-static void Handle_Call(FastFrame& frame, const interpreter::IRInstruction& instr) {
+static void Handle_Call(FastFrame& frame, const interpreter::IRInstruction& instr) noexcept {
     if (frame.sp < instr.arg_count) {
         frame.threw_exception = true; frame.pc = 9999; return;
     }
@@ -1398,15 +1399,16 @@ static void Handle_CallVirt(FastFrame& frame, const interpreter::IRInstruction& 
         auto& mic = cc[frame.pc];
 
         if (mic.ret_tag != 0xFF &&
-            mic.ret_tag != static_cast<uint8_t>(interpreter::ValueTag::Struct)) {
+            mic.ret_tag != static_cast<uint8_t>(interpreter::ValueTag::Struct) &&
+            pa.tags[0] == static_cast<uint8_t>(interpreter::ValueTag::ObjectRef)) {
             uint32_t receiver_token = static_cast<interpreter::InterpreterObject*>(
                 reinterpret_cast<void*>(pa.args[0]))->type_token;
 
-            // MIC read: relaxed load (benign race — all racers compute same value).
-            if (mic.mic_type_token.load(std::memory_order_relaxed) == receiver_token &&
-                mic.mic_dispatch_ptr.load(std::memory_order_relaxed) != nullptr &&
-                mic.mic_generation.load(std::memory_order_relaxed) ==
-                    g_patch_generation.load(std::memory_order_relaxed)) {
+            // MIC read: acquire load (synchronizes with generation release).
+            if (mic.mic_type_token.load(std::memory_order_acquire) == receiver_token &&
+                mic.mic_dispatch_ptr.load(std::memory_order_acquire) != nullptr &&
+                mic.mic_generation.load(std::memory_order_acquire) ==
+                    g_patch_generation.load(std::memory_order_acquire)) {
                 // MIC hit — call cached vtable entry directly with EH protection.
                 CHAOS_IL2CPP_PROFILE_SCOPE("Handle_CallVirt_MicHit");
                 using DirectFn = uint64_t (*)(uint64_t, uint64_t, uint64_t, uint64_t,
@@ -2372,11 +2374,11 @@ static void Handle_CallVirtConstrained(FastFrame& frame, const interpreter::IRIn
             uint32_t receiver_token = static_cast<interpreter::InterpreterObject*>(
                 reinterpret_cast<void*>(pa.args[0]))->type_token;
 
-            // MIC read: relaxed load (benign race — all racers compute same value).
-            if (mic.mic_type_token.load(std::memory_order_relaxed) == receiver_token &&
-                mic.mic_dispatch_ptr.load(std::memory_order_relaxed) != nullptr &&
-                mic.mic_generation.load(std::memory_order_relaxed) ==
-                    g_patch_generation.load(std::memory_order_relaxed)) {
+            // MIC read: acquire load (synchronizes with generation release).
+            if (mic.mic_type_token.load(std::memory_order_acquire) == receiver_token &&
+                mic.mic_dispatch_ptr.load(std::memory_order_acquire) != nullptr &&
+                mic.mic_generation.load(std::memory_order_acquire) ==
+                    g_patch_generation.load(std::memory_order_acquire)) {
                 // MIC hit — call cached vtable entry directly with EH protection.
                 CHAOS_IL2CPP_PROFILE_SCOPE("Handle_CallVirtConstrained_MicHit");
                 using DirectFn = uint64_t (*)(uint64_t, uint64_t, uint64_t, uint64_t,

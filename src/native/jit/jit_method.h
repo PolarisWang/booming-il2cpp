@@ -152,6 +152,12 @@ struct JitMethod {
     // for T4 frames.  Varies per-method with register caching.
     uint32_t      rbp_to_rsp_offset = 0;
 
+    // True when __register_frame has been called for this method's
+    // .eh_frame.  Guards __deregister_frame in the destructor so that
+    // JitMethod objects created via Compile() (without registering)
+    // don't trigger SIGABRT from deregistering an unregistered frame.
+    bool          eh_frame_registered = false;
+
     // ── Call-site slot table (for hotpatch-safe indirect calls) ──────────
     // Each entry is a void* in the RX code buffer, accessed via call [rip+off].
     // Updated by ReverseSlotMap::UpdateAll() during hotpatch.

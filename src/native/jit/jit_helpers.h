@@ -35,10 +35,11 @@ struct DeoptTlsState {
 
 extern thread_local DeoptTlsState g_jit_deopt_state;
 
-/// Emit inline x64 TLS access sequence to load &tls_tlab into RAX.
-/// Windows only — uses GS-segment TLS (__tls_index / __readgsqword).
-/// On Linux/Mac, inline TLAB access is not emitted.
-#if defined(_WIN32) || defined(_WIN64)
+/// Emit inline TLS access sequence to load &tls_tlab into kScratchA.
+/// Windows x64: uses GS-segment TLS (__tls_index / __readgsqword).
+/// Linux ARM64: uses MRS Xn, TPIDR_EL0 + ADD (__builtin_thread_pointer).
+/// On other platforms (Linux/Mac x64, etc.), inline TLAB access is not emitted.
+#if defined(_WIN32) || defined(_WIN64) || (defined(__linux__) && defined(__aarch64__))
 void EmitLoadTlsTlab(CodeBuffer& buf) noexcept;
 void InitTlsTlabInfo() noexcept;
 #else
