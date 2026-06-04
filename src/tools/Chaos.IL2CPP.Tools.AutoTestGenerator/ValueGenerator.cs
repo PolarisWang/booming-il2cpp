@@ -64,15 +64,35 @@ public sealed class ValueGenerator
     // Common interface/abstract types that need non-null expressions to avoid
     // ArgumentNullException. Maps base type name → factory(generic type args) → C# expression.
     // These are checked after delegate/array/interface handlers and before default(T).
+    //
+    // IMPORTANT: Non-generic interfaces (e.g. System.Collections.IList) have empty typeArgs.
+    // All factories MUST handle typeArgs.Length == 0 gracefully — don't access typeArgs[0]
+    // without checking length first, as that throws IndexOutOfRangeException and silently
+    // kills the entire method's value set generation.
     private static readonly Dictionary<string, Func<string[], string>> NullGuardSafeDefaults = new(StringComparer.Ordinal)
     {
-        ["IList"] = typeArgs => $"System.Array.Empty<{typeArgs[0]}>()",
-        ["ICollection"] = typeArgs => $"System.Array.Empty<{typeArgs[0]}>()",
-        ["IReadOnlyList"] = typeArgs => $"System.Array.Empty<{typeArgs[0]}>()",
-        ["IReadOnlyCollection"] = typeArgs => $"System.Array.Empty<{typeArgs[0]}>()",
-        ["IDictionary"] = typeArgs => $"new System.Collections.Generic.Dictionary<{typeArgs[0]}, {typeArgs[1]}>()",
-        ["IReadOnlyDictionary"] = typeArgs => $"new System.Collections.Generic.Dictionary<{typeArgs[0]}, {typeArgs[1]}>()",
-        ["IEnumerator"] = typeArgs => $"System.Linq.Enumerable.Empty<{typeArgs[0]}>().GetEnumerator()",
+        // Non-generic IList/ICollection → ArrayList is the canonical implementation
+        ["IList"] = typeArgs => typeArgs.Length > 0
+            ? $"System.Array.Empty<{typeArgs[0]}>()"
+            : "new System.Collections.ArrayList()",
+        ["ICollection"] = typeArgs => typeArgs.Length > 0
+            ? $"System.Array.Empty<{typeArgs[0]}>()"
+            : "new System.Collections.ArrayList()",
+        ["IReadOnlyList"] = typeArgs => typeArgs.Length > 0
+            ? $"System.Array.Empty<{typeArgs[0]}>()"
+            : "System.Array.Empty<object>()",
+        ["IReadOnlyCollection"] = typeArgs => typeArgs.Length > 0
+            ? $"System.Array.Empty<{typeArgs[0]}>()"
+            : "System.Array.Empty<object>()",
+        ["IDictionary"] = typeArgs => typeArgs.Length >= 2
+            ? $"new System.Collections.Generic.Dictionary<{typeArgs[0]}, {typeArgs[1]}>()"
+            : "new System.Collections.Hashtable()",
+        ["IReadOnlyDictionary"] = typeArgs => typeArgs.Length >= 2
+            ? $"new System.Collections.Generic.Dictionary<{typeArgs[0]}, {typeArgs[1]}>()"
+            : "new System.Collections.Hashtable()",
+        ["IEnumerator"] = typeArgs => typeArgs.Length > 0
+            ? $"System.Linq.Enumerable.Empty<{typeArgs[0]}>().GetEnumerator()"
+            : "new System.Collections.ArrayList().GetEnumerator()",
         ["IComparer"] = typeArgs => typeArgs.Length > 0
             ? $"System.Collections.Generic.Comparer<{typeArgs[0]}>.Default"
             : "System.Collections.Comparer.Default",
@@ -80,7 +100,9 @@ public sealed class ValueGenerator
             ? $"System.Collections.Generic.EqualityComparer<{typeArgs[0]}>.Default"
             : "System.Collections.EqualityComparer.Default",
         ["IFormatProvider"] = _ => "System.Globalization.CultureInfo.InvariantCulture",
-        ["ISet"] = typeArgs => $"new System.Collections.Generic.HashSet<{typeArgs[0]}>()",
+        ["ISet"] = typeArgs => typeArgs.Length > 0
+            ? $"new System.Collections.Generic.HashSet<{typeArgs[0]}>()"
+            : "new System.Collections.Generic.HashSet<object>()",
         ["IComparable"] = typeArgs => typeArgs.Length > 0
             ? $"default({typeArgs[0]})"
             : "default(System.Int32)",
@@ -94,16 +116,30 @@ public sealed class ValueGenerator
         ["IEnumerable"] = typeArgs => typeArgs.Length > 0
             ? $"System.Linq.Enumerable.Empty<{typeArgs[0]}>()"
             : "System.Linq.Enumerable.Empty<object>()",
-        ["IOrderedEnumerable"] = typeArgs => $"System.Linq.Enumerable.Empty<{typeArgs[0]}>().OrderBy(x => x)",
+        ["IOrderedEnumerable"] = typeArgs => typeArgs.Length > 0
+            ? $"System.Linq.Enumerable.Empty<{typeArgs[0]}>().OrderBy(x => x)"
+            : "System.Linq.Enumerable.Empty<object>().OrderBy(x => x)",
         ["Stream"] = _ => "System.IO.Stream.Null",
         ["TextReader"] = _ => "System.IO.TextReader.Null",
         ["TextWriter"] = _ => "System.IO.TextWriter.Null",
-        ["IProgress"] = typeArgs => $"new System.Progress<{typeArgs[0]}>(_ => {{ }})",
-        ["IAsyncEnumerable"] = typeArgs => $"System.Linq.AsyncEnumerable.Empty<{typeArgs[0]}>()",
-        ["IAsyncEnumerator"] = typeArgs => $"System.Linq.AsyncEnumerable.Empty<{typeArgs[0]}>().GetAsyncEnumerator()",
-        ["IProducerConsumerCollection"] = typeArgs => $"new System.Collections.Concurrent.ConcurrentBag<{typeArgs[0]}>()",
-        ["IBufferWriter"] = typeArgs => $"new System.Buffers.ArrayBufferWriter<{typeArgs[0]}>()",
-        ["IReadOnlySet"] = typeArgs => $"new System.Collections.Generic.HashSet<{typeArgs[0]}>()",
+        ["IProgress"] = typeArgs => typeArgs.Length > 0
+            ? $"new System.Progress<{typeArgs[0]}>(_ => {{ }})"
+            : "new System.Progress<object>(_ => { })",
+        ["IAsyncEnumerable"] = typeArgs => typeArgs.Length > 0
+            ? $"System.Linq.AsyncEnumerable.Empty<{typeArgs[0]}>()"
+            : "System.Linq.AsyncEnumerable.Empty<object>()",
+        ["IAsyncEnumerator"] = typeArgs => typeArgs.Length > 0
+            ? $"System.Linq.AsyncEnumerable.Empty<{typeArgs[0]}>().GetAsyncEnumerator()"
+            : "System.Linq.AsyncEnumerable.Empty<object>().GetAsyncEnumerator()",
+        ["IProducerConsumerCollection"] = typeArgs => typeArgs.Length > 0
+            ? $"new System.Collections.Concurrent.ConcurrentBag<{typeArgs[0]}>()"
+            : "new System.Collections.Concurrent.ConcurrentBag<object>()",
+        ["IBufferWriter"] = typeArgs => typeArgs.Length > 0
+            ? $"new System.Buffers.ArrayBufferWriter<{typeArgs[0]}>()"
+            : "new System.Buffers.ArrayBufferWriter<object>()",
+        ["IReadOnlySet"] = typeArgs => typeArgs.Length > 0
+            ? $"new System.Collections.Generic.HashSet<{typeArgs[0]}>()"
+            : "new System.Collections.Generic.HashSet<object>()",
     };
 
     public ValueGenerator(CSharpSerializer serializer, AutoFixtureAllower? autoFixture = null)
@@ -410,12 +446,15 @@ public sealed class ValueGenerator
         {
             "IEnumerable" when csTypeArgs.Length >= 1
                 => $"System.Linq.Enumerable.Empty<{csTypeArgs[0]}>()",
+            "IEnumerable" => "System.Linq.Enumerable.Empty<object>()",
 
             "IComparer" when csTypeArgs.Length >= 1
                 => $"System.Collections.Generic.Comparer<{csTypeArgs[0]}>.Default",
+            "IComparer" => "System.Collections.Comparer.Default",
 
             "IEqualityComparer" when csTypeArgs.Length >= 1
                 => $"System.Collections.Generic.EqualityComparer<{csTypeArgs[0]}>.Default",
+            "IEqualityComparer" => "System.Collections.EqualityComparer.Default",
 
             _ => null
         };
@@ -453,8 +492,20 @@ public sealed class ValueGenerator
             csTypeArgs = Array.Empty<string>();
         }
 
-        expr = factory(csTypeArgs);
-        return true;
+        try
+        {
+            expr = factory(csTypeArgs);
+            return true;
+        }
+        catch (Exception ex)
+        {
+            // Safety net: if a NullGuardSafeDefaults factory throws (e.g. IndexOutOfRange
+            // for unexpected type shape), fall back to default(T)!  instead of silently
+            // killing the entire method's value set generation.
+            Console.Error.WriteLine(
+                $"[WARN] NullGuardSafeDefaults factory failed for '{typeName}': {ex.Message}");
+            return false;
+        }
     }
 
     /// <summary>
