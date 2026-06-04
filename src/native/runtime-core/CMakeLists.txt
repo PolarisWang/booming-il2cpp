@@ -187,6 +187,11 @@ elseif(CHAOS_IL2CPP_EXEC_PROFILE STREQUAL "test-only")
 else()
     target_compile_definitions(chaos_runtime_core PUBLIC
         CHAOS_IL2CPP_RUNTIME_CONFIG_FILE="runtime-config/desktop.h")
+
+# tier_manager.cpp provides the real implementation of EnqueueJitRecompilation.
+# Suppress the stub in registration_globals.cpp to avoid multiple definition.
+target_compile_definitions(chaos_runtime_core PRIVATE
+    CHAOS_IL2CPP_HAS_TIER_MANAGER=1)
 endif()
 
 # ── GC feature selection (G-29: compile-time feature toggles) ──────

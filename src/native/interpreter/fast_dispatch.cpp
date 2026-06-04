@@ -321,7 +321,11 @@ static void Handle_LdcR8(FastFrame& frame, const interpreter::IRInstruction& ins
 
 static void Handle_LdStr(FastFrame& frame, const interpreter::IRInstruction& instr) noexcept {
     CHAOS_IL2CPP_PROFILE_SCOPE("Handle_LdStr");
-    frame.PushObj_NC(const_cast<char*>(instr.string_operand));
+    if (instr.string_operand != nullptr) {
+        frame.PushObj_NC(const_cast<char*>(instr.string_operand));
+    } else {
+        frame.PushNull_NC();
+    }
     ++frame.pc;
 }
 
@@ -667,6 +671,14 @@ static void Handle_Div(FastFrame& frame, const interpreter::IRInstruction&) noex
     AssertInt32Tag(frame, frame.sp - 2);
     int32_t r = static_cast<int32_t>(frame.stack[--frame.sp]);
     int32_t l = static_cast<int32_t>(frame.stack[--frame.sp]);
+    if (r == 0) { frame.threw_exception = true; frame.pc = 9999; return; }
+    // INT32_MIN / -1 overflows idiv on x86 (UB in C++ too).
+    // Push the wraparound result manually to avoid SIGFPE.
+    if (l == INT32_MIN && r == -1) {
+        frame.PushI32_NC(INT32_MIN);
+        ++frame.pc;
+        return;
+    }
     frame.PushI32_NC(l / r);
     ++frame.pc;
 }
@@ -678,6 +690,13 @@ static void Handle_Rem(FastFrame& frame, const interpreter::IRInstruction&) noex
     AssertInt32Tag(frame, frame.sp - 2);
     int32_t r = static_cast<int32_t>(frame.stack[--frame.sp]);
     int32_t l = static_cast<int32_t>(frame.stack[--frame.sp]);
+    if (r == 0) { frame.threw_exception = true; frame.pc = 9999; return; }
+    // INT32_MIN % -1 overflows idiv on x86 (UB in C++).  Result is 0.
+    if (l == INT32_MIN && r == -1) {
+        frame.PushI32_NC(0);
+        ++frame.pc;
+        return;
+    }
     frame.PushI32_NC(l % r);
     ++frame.pc;
 }
@@ -931,12 +950,16 @@ static void Handle_NewArr(FastFrame& frame, const interpreter::IRInstruction& in
                 arr->flat_element_tag = elem_info.value_tag;
                 arr->flat_length = len;
                 if (len > 0) {
-                    arr->flat_data = CHAOS_IL2CPP_DOMAIN_CURRENT_ALLOCATE(
-                        static_cast<size_t>(len) * elem_info.size);
+                    // Defensive overflow check: len * elem_info.size must fit in size_t.
+                    size_t alloc_size = static_cast<size_t>(len) * elem_info.size;
+                    if (elem_info.size > 0 && alloc_size / elem_info.size != static_cast<size_t>(len)) {
+                        frame.threw_exception = true; frame.pc = 9999; return;
+                    }
+                    arr->flat_data = CHAOS_IL2CPP_DOMAIN_CURRENT_ALLOCATE(alloc_size);
                     if (arr->flat_data == nullptr) {
                         frame.threw_exception = true; frame.pc = 9999; return;
                     }
-                    std::memset(arr->flat_data, 0, static_cast<size_t>(len) * elem_info.size);
+                    std::memset(arr->flat_data, 0, alloc_size);
                 }
                 frame.PushObj_NC(arr);
                 ++frame.pc;
@@ -1019,7 +1042,7 @@ static void Handle_StArg(FastFrame& frame, const interpreter::IRInstruction&) no
 
 static void Handle_Call_DoAotDirect(FastFrame& frame,
     const interpreter::IRInstruction& instr,
-    uint64_t* raw_args, uint8_t* raw_tags, uint32_t ac) noexcept
+    uint64_t* raw_args, uint8_t* raw_tags, uint32_t ac)
 {
     // Call via uniform 8-arg signature.
     using DirectFn = uint64_t (*)(uint64_t, uint64_t, uint64_t, uint64_t,
@@ -1069,7 +1092,7 @@ static void Handle_Call_DoAotDirect(FastFrame& frame,
 static void Handle_Call_DoMIC(FastFrame& frame,
     const interpreter::IRInstruction&,
     uint64_t* raw_args, uint8_t*, uint32_t ac,
-    const ri::CachedCallInfo* cache_info) noexcept
+    const ri::CachedCallInfo* cache_info)
 {
     using DirectFn = uint64_t (*)(uint64_t, uint64_t, uint64_t, uint64_t,
                                   uint64_t, uint64_t, uint64_t, uint64_t);
@@ -1104,7 +1127,7 @@ static void Handle_Call_DoMIC(FastFrame& frame,
 static void Handle_Call_DoRaw(FastFrame& frame,
     const interpreter::IRInstruction& instr,
     uint64_t* raw_args, uint8_t* raw_tags, uint32_t ac,
-    const ri::CachedCallInfo* cache_info) noexcept
+    const ri::CachedCallInfo* cache_info)
 {
     auto dret = ri::InterpreterDispatchRaw(
         instr.call_target, raw_args, raw_tags, ac,
@@ -1228,11 +1251,18 @@ static void Handle_Call(FastFrame& frame, const interpreter::IRInstruction& inst
 
     // ── Zero-arg fast path ─────────────────────────────────────────
     // Skip arg allocation + pop loop when there are no arguments.
-    // Direct function call with no args: just invoke and push return.
+    // Direct function call with no args: use PalTryCallNoExcept for EH protection.
     if (ac == 0 && instr.direct_fn != nullptr) {
-        using DirectFn0 = uint64_t (*)();
-        auto fn = reinterpret_cast<DirectFn0>(instr.direct_fn);
-        uint64_t result = fn();
+        using DirectFn = uint64_t (*)(uint64_t, uint64_t, uint64_t, uint64_t,
+                                      uint64_t, uint64_t, uint64_t, uint64_t);
+        auto fn = reinterpret_cast<DirectFn>(instr.direct_fn);
+        uint64_t result = 0;
+        bool caught = PalTryCallNoExcept(fn, 0, 0, 0, 0, 0, 0, 0, 0, result);
+        if (caught) {
+            frame.threw_exception = true;
+            frame.pc = 9999;
+            return;
+        }
         uint8_t ret_tag = (instr.direct_ret_tag != 0xFF)
             ? instr.direct_ret_tag
             : static_cast<uint8_t>(interpreter::ValueTag::Int32);
@@ -1344,21 +1374,9 @@ static void Handle_Unsupported(FastFrame& frame, const interpreter::IRInstructio
 // skipping the ~2200ns ResolveVirtualMethodPointer call.
 
 // Shared direct-call helper: calls fn_ptr with up to 8 raw uint64_t args.
-static uint64_t CallDirectVoidPtr(void* fn_ptr, const uint64_t* raw_args, uint32_t ac) noexcept {
-    using DirectFn = uint64_t (*)(uint64_t, uint64_t, uint64_t, uint64_t,
-                                  uint64_t, uint64_t, uint64_t, uint64_t);
-    auto fn = reinterpret_cast<DirectFn>(fn_ptr);
-    return fn(
-        (ac > 0) ? raw_args[0] : 0,
-        (ac > 1) ? raw_args[1] : 0,
-        (ac > 2) ? raw_args[2] : 0,
-        (ac > 3) ? raw_args[3] : 0,
-        (ac > 4) ? raw_args[4] : 0,
-        (ac > 5) ? raw_args[5] : 0,
-        (ac > 6) ? raw_args[6] : 0,
-        (ac > 7) ? raw_args[7] : 0);
-}
-
+// Note: Callers should use PalTryCallNoExcept directly for EH protection.
+// The MIC paths (Handle_CallVirt, Handle_CallVirtConstrained) inline their
+// own PalTryCallNoExcept calls instead of using this helper.
 static void Handle_CallVirt(FastFrame& frame, const interpreter::IRInstruction& instr) noexcept {
     CHAOS_IL2CPP_PROFILE_SCOPE("Handle_CallVirt");
     if (frame.sp < instr.arg_count) {
@@ -1389,10 +1407,27 @@ static void Handle_CallVirt(FastFrame& frame, const interpreter::IRInstruction& 
                 mic.mic_dispatch_ptr.load(std::memory_order_relaxed) != nullptr &&
                 mic.mic_generation.load(std::memory_order_relaxed) ==
                     g_patch_generation.load(std::memory_order_relaxed)) {
-                // MIC hit — call cached vtable entry directly.
+                // MIC hit — call cached vtable entry directly with EH protection.
                 CHAOS_IL2CPP_PROFILE_SCOPE("Handle_CallVirt_MicHit");
-                uint64_t result = CallDirectVoidPtr(
-                    mic.mic_dispatch_ptr.load(std::memory_order_relaxed), pa.args, ac);
+                using DirectFn = uint64_t (*)(uint64_t, uint64_t, uint64_t, uint64_t,
+                                              uint64_t, uint64_t, uint64_t, uint64_t);
+                auto fn = reinterpret_cast<DirectFn>(
+                    mic.mic_dispatch_ptr.load(std::memory_order_relaxed));
+                uint64_t a0 = (ac > 0) ? pa.args[0] : 0;
+                uint64_t a1 = (ac > 1) ? pa.args[1] : 0;
+                uint64_t a2 = (ac > 2) ? pa.args[2] : 0;
+                uint64_t a3 = (ac > 3) ? pa.args[3] : 0;
+                uint64_t a4 = (ac > 4) ? pa.args[4] : 0;
+                uint64_t a5 = (ac > 5) ? pa.args[5] : 0;
+                uint64_t a6 = (ac > 6) ? pa.args[6] : 0;
+                uint64_t a7 = (ac > 7) ? pa.args[7] : 0;
+                uint64_t result = 0;
+                bool caught = PalTryCallNoExcept(fn, a0, a1, a2, a3, a4, a5, a6, a7, result);
+                if (caught) {
+                    frame.threw_exception = true;
+                    frame.pc = 9999;
+                    return;
+                }
 
                 if (mic.ret_tag != static_cast<uint8_t>(interpreter::ValueTag::Void)) {
                     frame.stack[frame.sp] = result;
@@ -1418,14 +1453,32 @@ static void Handle_CallVirt(FastFrame& frame, const interpreter::IRInstruction& 
                         g_patch_generation.load(std::memory_order_relaxed),
                         std::memory_order_relaxed);
 
-                    uint64_t result = CallDirectVoidPtr(resolved, pa.args, ac);
+                    // Call the resolved entry with EH protection.
+                    using DirectFn = uint64_t (*)(uint64_t, uint64_t, uint64_t, uint64_t,
+                                                  uint64_t, uint64_t, uint64_t, uint64_t);
+                    auto fn = reinterpret_cast<DirectFn>(resolved);
+                    uint64_t a0 = (ac > 0) ? pa.args[0] : 0;
+                    uint64_t a1 = (ac > 1) ? pa.args[1] : 0;
+                    uint64_t a2 = (ac > 2) ? pa.args[2] : 0;
+                    uint64_t a3 = (ac > 3) ? pa.args[3] : 0;
+                    uint64_t a4 = (ac > 4) ? pa.args[4] : 0;
+                    uint64_t a5 = (ac > 5) ? pa.args[5] : 0;
+                    uint64_t a6 = (ac > 6) ? pa.args[6] : 0;
+                    uint64_t a7 = (ac > 7) ? pa.args[7] : 0;
+                    uint64_t result = 0;
+                    bool caught = PalTryCallNoExcept(fn, a0, a1, a2, a3, a4, a5, a6, a7, result);
+                    if (caught) {
+                        frame.threw_exception = true;
+                        frame.pc = 9999;
+                        return;
+                    }
 
                     if (mic.ret_tag != static_cast<uint8_t>(interpreter::ValueTag::Void)) {
                         frame.stack[frame.sp] = result;
                         frame.stack_tags[frame.sp] = mic.ret_tag;
                         ++frame.sp;
                     }
-    
+
                     ++frame.pc;
                     return;
                 }
@@ -1449,7 +1502,24 @@ static void Handle_CallVirt(FastFrame& frame, const interpreter::IRInstruction& 
             void* dfn = (mic.direct_ptr != nullptr) ? mic.direct_ptr : instr.direct_fn;
             if (dfn != nullptr && ac <= 8) {
                 CHAOS_IL2CPP_PROFILE_SCOPE("Handle_CallVirt_DirectFn");
-                uint64_t result = CallDirectVoidPtr(dfn, pa.args, ac);
+                using DirectFn = uint64_t (*)(uint64_t, uint64_t, uint64_t, uint64_t,
+                                              uint64_t, uint64_t, uint64_t, uint64_t);
+                auto fn = reinterpret_cast<DirectFn>(dfn);
+                uint64_t a0 = (ac > 0) ? pa.args[0] : 0;
+                uint64_t a1 = (ac > 1) ? pa.args[1] : 0;
+                uint64_t a2 = (ac > 2) ? pa.args[2] : 0;
+                uint64_t a3 = (ac > 3) ? pa.args[3] : 0;
+                uint64_t a4 = (ac > 4) ? pa.args[4] : 0;
+                uint64_t a5 = (ac > 5) ? pa.args[5] : 0;
+                uint64_t a6 = (ac > 6) ? pa.args[6] : 0;
+                uint64_t a7 = (ac > 7) ? pa.args[7] : 0;
+                uint64_t result = 0;
+                bool caught = PalTryCallNoExcept(fn, a0, a1, a2, a3, a4, a5, a6, a7, result);
+                if (caught) {
+                    frame.threw_exception = true;
+                    frame.pc = 9999;
+                    return;
+                }
                 if (mic.ret_tag != static_cast<uint8_t>(interpreter::ValueTag::Void)) {
                     frame.stack[frame.sp] = result;
                     frame.stack_tags[frame.sp] = mic.ret_tag;
@@ -1485,6 +1555,13 @@ static void Handle_Throw(FastFrame& frame, const interpreter::IRInstruction& ins
     // Pop the exception object from the stack.
     if (frame.sp == 0) { frame.threw_exception = true; frame.pc = 9999; return; }
     void* exc_obj = reinterpret_cast<void*>(frame.stack[--frame.sp]);
+
+    // throw null → NullReferenceException per ECMA-335 §4.21.
+    if (exc_obj == nullptr) {
+        frame.threw_exception = true;
+        frame.pc = 9999;
+        return;
+    }
 
     // Phase 1: Search for a matching catch handler (innermost first).
     if (frame.seh_clauses != nullptr && frame.seh_clause_count > 0) {
@@ -1566,6 +1643,7 @@ static void Handle_EndFinally(FastFrame& frame, const interpreter::IRInstruction
         const auto& catch_clause = frame.seh_clauses[static_cast<uint32_t>(frame.unwind_catch_clause)];
         frame.pc = static_cast<uint32_t>(catch_clause.handler_start_idx);
         // Push exception object onto stack for the catch handler.
+        if (frame.sp >= FastFrame::kMaxStack) { frame.threw_exception = true; frame.pc = 9999; return; }
         frame.stack[frame.sp] = reinterpret_cast<uint64_t>(frame.exception_obj_val);
         frame.stack_tags[frame.sp] = static_cast<uint8_t>(interpreter::ValueTag::ObjectRef);
         ++frame.sp;
@@ -1818,6 +1896,7 @@ static void Handle_DivUn(FastFrame& frame, const interpreter::IRInstruction&) no
     AssertInt32Tag(frame, frame.sp - 2);
     uint32_t r = static_cast<uint32_t>(frame.stack[--frame.sp]);
     uint32_t l = static_cast<uint32_t>(frame.stack[--frame.sp]);
+    if (r == 0) { frame.threw_exception = true; frame.pc = 9999; return; }
     frame.PushI32_NC(static_cast<int32_t>(l / r));
     ++frame.pc;
 }
@@ -1829,6 +1908,7 @@ static void Handle_RemUn(FastFrame& frame, const interpreter::IRInstruction&) no
     AssertInt32Tag(frame, frame.sp - 2);
     uint32_t r = static_cast<uint32_t>(frame.stack[--frame.sp]);
     uint32_t l = static_cast<uint32_t>(frame.stack[--frame.sp]);
+    if (r == 0) { frame.threw_exception = true; frame.pc = 9999; return; }
     frame.PushI32_NC(static_cast<int32_t>(l % r));
     ++frame.pc;
 }
@@ -1872,8 +1952,10 @@ static void Handle_StInd(FastFrame& frame, const interpreter::IRInstruction&) no
     uint64_t val = frame.stack[--frame.sp];
     void* ptr = reinterpret_cast<void*>(frame.stack[--frame.sp]);
     if (ptr != nullptr) {
-        using chaos::il2cpp::runtime_core::BgcSatbPreWriteBarrier;
-        BgcSatbPreWriteBarrier(reinterpret_cast<void**>(ptr));
+        if (chaos_is_gc_pointer(ptr)) {
+            using chaos::il2cpp::runtime_core::BgcSatbPreWriteBarrier;
+            BgcSatbPreWriteBarrier(reinterpret_cast<void**>(ptr));
+        }
         *static_cast<uint64_t*>(ptr) = val;
         chaos_gc_dirty_card(ptr);
     }
@@ -2056,21 +2138,187 @@ static void Handle_LdElemANoChk(FastFrame& frame, const interpreter::IRInstructi
     ++frame.pc;
 }
 
-static void Handle_CastClass(FastFrame& frame, const interpreter::IRInstruction&) noexcept {
-    // CastClass: null passthrough, non-null always succeeds in fast path.
-    // If the actual type check would fail, the managed code will throw later.
+static void Handle_CastClass(FastFrame& frame, const interpreter::IRInstruction& instr) noexcept {
     CHAOS_IL2CPP_PROFILE_SCOPE("Handle_CastClass");
     if (frame.sp < 1) { frame.threw_exception = true; frame.pc = 9999; return; }
-    // Keep the object on stack unchanged — CastClass is a type assertion.
+
+    uint8_t tag = frame.stack_tags[frame.sp - 1];
+    // Null → pass through.
+    if (tag == static_cast<uint8_t>(interpreter::ValueTag::Null)) {
+        ++frame.pc;
+        return;
+    }
+    // Non-object → pass through (CastClass on non-ref is a no-op).
+    if (tag != static_cast<uint8_t>(interpreter::ValueTag::ObjectRef)) {
+        ++frame.pc;
+        return;
+    }
+
+    // Target type token from IR builder (0 = no metadata available).
+    uint32_t target_type_token = static_cast<uint32_t>(instr.immediate_i4);
+    if (target_type_token == 0u) {
+        ++frame.pc;
+        return;
+    }
+
+    // Read object's type_token (first field of InterpreterObject).
+    void* raw_obj = reinterpret_cast<void*>(frame.stack[frame.sp - 1]);
+    if (raw_obj == nullptr) {
+        ++frame.pc;
+        return;
+    }
+    auto* obj = static_cast<interpreter::InterpreterObject*>(raw_obj);
+    uint32_t obj_type_token = obj->type_token;
+
+    // Walk inheritance chain (exact match → base types).
+    bool compatible = false;
+    uint32_t current_token = obj_type_token;
+    while (current_token != 0u) {
+        if (current_token == target_type_token) {
+            compatible = true;
+            break;
+        }
+        const auto* vtable = vr::TryGetTypeVTable(current_token);
+        if (vtable == nullptr) break;
+        current_token = vtable->base_token;
+    }
+
+    // Interface compatibility check.
+    if (!compatible) {
+        const auto* target_vtable = vr::TryGetTypeVTable(target_type_token);
+        if (target_vtable != nullptr &&
+            target_vtable->type_shape == chaos::il2cpp::common::chaos_type_shape_interface) {
+            uint64_t target_stable_id = target_vtable->stable_id;
+            uint32_t scan_token = obj_type_token;
+            while (scan_token != 0u && !compatible) {
+                const auto* scan_vtable = vr::TryGetTypeVTable(scan_token);
+                if (scan_vtable == nullptr) break;
+                // Check AOT iface_map.
+                if (scan_vtable->iface_map != nullptr && scan_vtable->iface_count > 0u) {
+                    const auto* entries = static_cast<const chaos::il2cpp::common::InterfaceMapEntry*>(
+                        scan_vtable->iface_map);
+                    for (uint32_t i = 0u; i < scan_vtable->iface_count; ++i) {
+                        if (entries[i].iface_stable_id == target_stable_id) {
+                            compatible = true;
+                            break;
+                        }
+                    }
+                }
+                // Check runtime_iface_map (hot-update additions).
+                if (!compatible && scan_vtable->runtime_iface_map != nullptr &&
+                    scan_vtable->runtime_iface_count > 0u) {
+                    const auto* rentries = static_cast<const chaos::il2cpp::common::InterfaceMapEntry*>(
+                        scan_vtable->runtime_iface_map);
+                    for (uint32_t i = 0u; i < scan_vtable->runtime_iface_count; ++i) {
+                        if (rentries[i].iface_stable_id == target_stable_id) {
+                            compatible = true;
+                            break;
+                        }
+                    }
+                }
+                scan_token = scan_vtable->base_token;
+            }
+        }
+    }
+
+    if (!compatible) {
+        frame.threw_exception = true;
+        frame.pc = 9999;
+        return;
+    }
+    // Object on stack unchanged — type assertion passed.
     ++frame.pc;
 }
 
-static void Handle_IsInst(FastFrame& frame, const interpreter::IRInstruction&) noexcept {
-    // IsInst: null returns null, non-null returns the object (passthrough).
-    // Like CastClass, the actual type check is deferred.
+static void Handle_IsInst(FastFrame& frame, const interpreter::IRInstruction& instr) noexcept {
     CHAOS_IL2CPP_PROFILE_SCOPE("Handle_IsInst");
     if (frame.sp < 1) { frame.threw_exception = true; frame.pc = 9999; return; }
-    // Keep the object on stack unchanged.
+
+    uint8_t tag = frame.stack_tags[frame.sp - 1];
+    // Null → return null.
+    if (tag == static_cast<uint8_t>(interpreter::ValueTag::Null)) {
+        frame.stack[frame.sp - 1] = 0;
+        frame.stack_tags[frame.sp - 1] = static_cast<uint8_t>(interpreter::ValueTag::Null);
+        ++frame.pc;
+        return;
+    }
+    // Non-object → return null.
+    if (tag != static_cast<uint8_t>(interpreter::ValueTag::ObjectRef)) {
+        frame.stack[frame.sp - 1] = 0;
+        frame.stack_tags[frame.sp - 1] = static_cast<uint8_t>(interpreter::ValueTag::Null);
+        ++frame.pc;
+        return;
+    }
+
+    uint32_t target_type_token = static_cast<uint32_t>(instr.immediate_i4);
+    if (target_type_token == 0u) {
+        ++frame.pc;
+        return;
+    }
+
+    void* raw_obj = reinterpret_cast<void*>(frame.stack[frame.sp - 1]);
+    if (raw_obj == nullptr) {
+        frame.stack[frame.sp - 1] = 0;
+        frame.stack_tags[frame.sp - 1] = static_cast<uint8_t>(interpreter::ValueTag::Null);
+        ++frame.pc;
+        return;
+    }
+    auto* obj = static_cast<interpreter::InterpreterObject*>(raw_obj);
+    uint32_t obj_type_token = obj->type_token;
+
+    bool compatible = false;
+    uint32_t current_token = obj_type_token;
+    while (current_token != 0u) {
+        if (current_token == target_type_token) {
+            compatible = true;
+            break;
+        }
+        const auto* vtable = vr::TryGetTypeVTable(current_token);
+        if (vtable == nullptr) break;
+        current_token = vtable->base_token;
+    }
+
+    if (!compatible) {
+        const auto* target_vtable = vr::TryGetTypeVTable(target_type_token);
+        if (target_vtable != nullptr &&
+            target_vtable->type_shape == chaos::il2cpp::common::chaos_type_shape_interface) {
+            uint64_t target_stable_id = target_vtable->stable_id;
+            uint32_t scan_token = obj_type_token;
+            while (scan_token != 0u && !compatible) {
+                const auto* scan_vtable = vr::TryGetTypeVTable(scan_token);
+                if (scan_vtable == nullptr) break;
+                if (scan_vtable->iface_map != nullptr && scan_vtable->iface_count > 0u) {
+                    const auto* entries = static_cast<const chaos::il2cpp::common::InterfaceMapEntry*>(
+                        scan_vtable->iface_map);
+                    for (uint32_t i = 0u; i < scan_vtable->iface_count; ++i) {
+                        if (entries[i].iface_stable_id == target_stable_id) {
+                            compatible = true;
+                            break;
+                        }
+                    }
+                }
+                if (!compatible && scan_vtable->runtime_iface_map != nullptr &&
+                    scan_vtable->runtime_iface_count > 0u) {
+                    const auto* rentries = static_cast<const chaos::il2cpp::common::InterfaceMapEntry*>(
+                        scan_vtable->runtime_iface_map);
+                    for (uint32_t i = 0u; i < scan_vtable->runtime_iface_count; ++i) {
+                        if (rentries[i].iface_stable_id == target_stable_id) {
+                            compatible = true;
+                            break;
+                        }
+                    }
+                }
+                scan_token = scan_vtable->base_token;
+            }
+        }
+    }
+
+    if (!compatible) {
+        // IsInst returns null on mismatch.
+        frame.stack[frame.sp - 1] = 0;
+        frame.stack_tags[frame.sp - 1] = static_cast<uint8_t>(interpreter::ValueTag::Null);
+    }
+    // On match: object on stack unchanged.
     ++frame.pc;
 }
 
@@ -2129,10 +2377,27 @@ static void Handle_CallVirtConstrained(FastFrame& frame, const interpreter::IRIn
                 mic.mic_dispatch_ptr.load(std::memory_order_relaxed) != nullptr &&
                 mic.mic_generation.load(std::memory_order_relaxed) ==
                     g_patch_generation.load(std::memory_order_relaxed)) {
-                // MIC hit — call cached vtable entry directly.
+                // MIC hit — call cached vtable entry directly with EH protection.
                 CHAOS_IL2CPP_PROFILE_SCOPE("Handle_CallVirtConstrained_MicHit");
-                uint64_t result = CallDirectVoidPtr(
-                    mic.mic_dispatch_ptr.load(std::memory_order_relaxed), pa.args, ac);
+                using DirectFn = uint64_t (*)(uint64_t, uint64_t, uint64_t, uint64_t,
+                                              uint64_t, uint64_t, uint64_t, uint64_t);
+                auto fn = reinterpret_cast<DirectFn>(
+                    mic.mic_dispatch_ptr.load(std::memory_order_relaxed));
+                uint64_t a0 = (ac > 0) ? pa.args[0] : 0;
+                uint64_t a1 = (ac > 1) ? pa.args[1] : 0;
+                uint64_t a2 = (ac > 2) ? pa.args[2] : 0;
+                uint64_t a3 = (ac > 3) ? pa.args[3] : 0;
+                uint64_t a4 = (ac > 4) ? pa.args[4] : 0;
+                uint64_t a5 = (ac > 5) ? pa.args[5] : 0;
+                uint64_t a6 = (ac > 6) ? pa.args[6] : 0;
+                uint64_t a7 = (ac > 7) ? pa.args[7] : 0;
+                uint64_t result = 0;
+                bool caught = PalTryCallNoExcept(fn, a0, a1, a2, a3, a4, a5, a6, a7, result);
+                if (caught) {
+                    frame.threw_exception = true;
+                    frame.pc = 9999;
+                    return;
+                }
 
                 if (mic.ret_tag != static_cast<uint8_t>(interpreter::ValueTag::Void)) {
                     frame.stack[frame.sp] = result;
@@ -2151,16 +2416,34 @@ static void Handle_CallVirtConstrained(FastFrame& frame, const interpreter::IRIn
                 void* resolved = vr::ResolveVirtualMethodPointer(
                     receiver_token, declared_method_token);
                 if (resolved != nullptr) {
+                    using DirectFn = uint64_t (*)(uint64_t, uint64_t, uint64_t, uint64_t,
+                                                  uint64_t, uint64_t, uint64_t, uint64_t);
                     mic.mic_dispatch_ptr.store(resolved, std::memory_order_relaxed);
                     mic.mic_type_token.store(receiver_token, std::memory_order_relaxed);
                     mic.mic_generation.store(
                         g_patch_generation.load(std::memory_order_relaxed),
                         std::memory_order_relaxed);
 
-                    uint64_t result = CallDirectVoidPtr(resolved, pa.args, ac);
+                    // Call resolved entry with EH protection.
+                    auto fn2 = reinterpret_cast<DirectFn>(resolved);
+                    uint64_t b0 = (ac > 0) ? pa.args[0] : 0;
+                    uint64_t b1 = (ac > 1) ? pa.args[1] : 0;
+                    uint64_t b2 = (ac > 2) ? pa.args[2] : 0;
+                    uint64_t b3 = (ac > 3) ? pa.args[3] : 0;
+                    uint64_t b4 = (ac > 4) ? pa.args[4] : 0;
+                    uint64_t b5 = (ac > 5) ? pa.args[5] : 0;
+                    uint64_t b6 = (ac > 6) ? pa.args[6] : 0;
+                    uint64_t b7 = (ac > 7) ? pa.args[7] : 0;
+                    uint64_t result2 = 0;
+                    bool caught2 = PalTryCallNoExcept(fn2, b0, b1, b2, b3, b4, b5, b6, b7, result2);
+                    if (caught2) {
+                        frame.threw_exception = true;
+                        frame.pc = 9999;
+                        return;
+                    }
 
                     if (mic.ret_tag != static_cast<uint8_t>(interpreter::ValueTag::Void)) {
-                        frame.stack[frame.sp] = result;
+                        frame.stack[frame.sp] = result2;
                         frame.stack_tags[frame.sp] = mic.ret_tag;
                         ++frame.sp;
                     }
@@ -2433,7 +2716,9 @@ static bool TryFastOsrPromotion(FastFrame& frame) noexcept {
                     chaos::il2cpp::jit::CompileConfig cfg;
                     cfg.enable_deopt = true;
                     cfg.enable_liveness = true;
-                    cfg.safepoint_fn = nullptr;
+                    cfg.safepoint_fn = reinterpret_cast<void*>(&threading::SafepointPoll);
+                    cfg.cooperative_fn = reinterpret_cast<void*>(&threading::EnterCooperativeMode);
+                    cfg.preemptive_fn = reinterpret_cast<void*>(&threading::EnterPreemptiveMode);
                     auto* nm = chaos::il2cpp::jit::Compile(*rm, cfg);
                     if (nm != nullptr) {
                         pm->cached_native_method = nm;

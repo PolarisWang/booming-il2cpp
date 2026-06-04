@@ -4,6 +4,7 @@
 #include "patch_loader.h"  // PatchMethod, PicDispatchChain, g_patch_generation
 
 #include "instantiation_engine.h"  // runtime-core: CachedCallInfo, InterpreterDispatchRaw
+#include <thread_state.h>  // SafepointPoll (for cfg.safepoint_fn assignment)
 namespace ri = chaos::il2cpp::runtime_instantiation;
 
 #include "jit_engine.h"  // Compile, JitMethod, CompileConfig
@@ -2402,7 +2403,8 @@ static void TryOsrPromotion(RegisterFrame& frame,
         chaos::il2cpp::jit::CompileConfig cfg;
         cfg.enable_deopt = true;
         cfg.enable_liveness = true;
-        cfg.safepoint_fn = nullptr;
+        cfg.safepoint_fn = reinterpret_cast<void*>
+            (&chaos::il2cpp::runtime_core::threading::SafepointPoll);
 
         auto* nm = chaos::il2cpp::jit::Compile(*rm, cfg);
         if (nm == nullptr) return;

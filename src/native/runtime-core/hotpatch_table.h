@@ -76,7 +76,17 @@ public:
 
     // ── Patch management ────────────────────────────────────────────
     // Module-scoped patch: set/unset patch on (module_id, slot) — O(1).
-    void SetPatchedBySlot(uint32_t module_id, uint32_t slot, bool patched, void* method_key) noexcept;
+    // @param domain_id  Domain owning this patch (0 = core domain, never unloaded).
+    //                    Only meaningful when patched=true; ignored when patched=false.
+    void SetPatchedBySlot(uint32_t module_id, uint32_t slot, bool patched, void* method_key,
+                           uint32_t domain_id = 0) noexcept;
+
+    /// Clear all dispatch entries belonging to the given domain.
+    /// Called during domain unload (STW phase) to prevent use-after-free
+    /// of PatchMethod pointers in the unloaded domain's heap.
+    /// @param domain_id  The domain whose dispatch entries should be cleared.
+    /// @return Number of entries cleared.
+    uint32_t ClearDomainDispatchEntries(uint32_t domain_id) noexcept;
 
     // Reverse lookup: slot index → metadata token. Linear scan, only
     // called during hotpatch (non-critical path).
@@ -90,6 +100,20 @@ private:
     // Populated during RegisterModule / RegisterAllModules.
     // Avoids O(modules × log(types)) per LookupMethod call.
     CHAOS_IL2CPP_UNORDERED_DENSE_MAP(CHAOS_IL2CPP_STRING, CHAOS_IL2CPP_UINT64) lookup_cache_;
+
+    // ── Per-domain patch tracking ────────────────────────────────────
+    // Flat vector of (domain_id, module_id, slot) triples for all patched
+    // dispatch entries. Populated when SetPatchedBySlot(patched=true) is
+    // called with domain_id > 0. On unpatch (patched=false), the matching
+    // entry is removed. On domain unload, ClearDomainDispatchEntries
+    // iterates and clears all entries belonging to the unloaded domain.
+    // Linear scan with O(n) per operation; n is typically <1000.
+    struct DomainPatchRecord {
+        uint32_t domain_id;
+        uint32_t module_id;
+        uint32_t slot;
+    };
+    std::vector<DomainPatchRecord> domain_patches_;
 
     // Build cache entries for one module (called from RegisterModule).
     void BuildLookupCacheForModule(const HotpatchModuleV0* mod, size_t module_index) noexcept;

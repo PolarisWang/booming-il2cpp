@@ -7,6 +7,7 @@
 
 #include <jit_demotion.h>
 #include <gc_events.h>
+#include <memory_domain.h>   // DomainId / CurrentDomain for JIT code domain tracking
 
 #include <atomic>
 #include <cstdint>
@@ -21,6 +22,31 @@
 // GCC unwinder .eh_frame registration — no header provides these on all GCC versions.
 extern "C" void __register_frame(const void*);
 extern "C" void __deregister_frame(const void*);
+
+// ── Saved previous signal handlers (for chain forwarding) ────────────────
+// JitSignalHandler handles SIGSEGV/SIGBUS for JIT code only. When the fault
+// is outside JIT code, the handler chains to the previously installed handler
+// (e.g., PalTryCallNoExcept's signal handler from pal_eh_posix.cpp).
+static struct sigaction s_prev_segv;
+static struct sigaction s_prev_bus;
+
+// ── ChainSignalToPrev — forward unhandled signal to previous handler ─────
+// Called from JitSignalHandler when the signal is not related to JIT code.
+// If sa_flags has SA_SIGINFO, calls sa_sigaction with full context.
+// Otherwise calls sa_handler for the simple handler case.
+// If the previous handler was SIG_DFL or SIG_IGN (nullptr for sa_handler),
+// does nothing — the OS default action applies (terminate for SIGSEGV).
+static void ChainSignalToPrev(int sig, siginfo_t* info, void* ucontext) noexcept {
+    struct sigaction* prev = (sig == SIGSEGV) ? &s_prev_segv : &s_prev_bus;
+    if (prev->sa_flags & SA_SIGINFO) {
+        if (prev->sa_sigaction != nullptr) {
+            prev->sa_sigaction(sig, info, ucontext);
+        }
+    } else if (prev->sa_handler != SIG_DFL && prev->sa_handler != SIG_IGN) {
+        prev->sa_handler(sig);
+    }
+    // SIG_DFL/SIG_IGN: implicit OS default.
+}
 
 // ── kSpinLimitHard — spinlock warning threshold
 static constexpr uint32_t kSpinLimitHard = 1024 * 1024;
@@ -50,10 +76,21 @@ static constexpr uint32_t kSehClauseEntrySize = 5 * sizeof(uint32_t);
 static constexpr uint32_t kJitGprFileOffset = 32;
 
 // ═══════════════════════════════════════════════════════════════════════════
-// Spinlock
+// Spinlock (reentrant)
 // ═══════════════════════════════════════════════════════════════════════════
 
+// Thread-local owner and recursion counter for reentrancy.
+// pthread_t is an opaque type; zero-initialized is not a valid thread ID
+// on any POSIX implementation, so g_lock_owner == {} means "not owned."
+static thread_local pthread_t g_lock_owner{};
+static thread_local uint32_t  g_lock_recursion = 0;
+
 void LinuxSehHandler::AcquireLock() noexcept {
+    pthread_t self = pthread_self();
+    if (pthread_equal(self, g_lock_owner)) {
+        g_lock_recursion++;
+        return;
+    }
     uint32_t spins = 0;
     while (lock_.exchange(1, std::memory_order_acquire) != 0) {
         if (++spins % 64 == 0) sched_yield();
@@ -63,9 +100,13 @@ void LinuxSehHandler::AcquireLock() noexcept {
             spins = 0;
         }
     }
+    g_lock_owner = self;
+    g_lock_recursion = 1;
 }
 
 void LinuxSehHandler::ReleaseLock() noexcept {
+    if (--g_lock_recursion > 0) return;
+    g_lock_owner = {};
     lock_.store(0, std::memory_order_release);
 }
 
@@ -116,6 +157,12 @@ void LinuxSehHandler::RegisterCode(void* code_start, uint32_t code_size,
         entries_[count_].code_size  = code_size;
         entries_[count_].nm         = nm;
         entries_[count_].patch_method_token = patch_method_token;
+        // Capture domain_id at JIT compilation time so DemoteByDomainId
+        // can find entries belonging to an unloaded domain.
+        {
+            auto* domain = chaos::il2cpp::memory_domain::CurrentDomain();
+            entries_[count_].domain_id = domain ? domain->domain_id : 0;
+        }
         count_++;
     }
 
@@ -196,6 +243,30 @@ uint32_t LinuxSehHandler::DemoteByToken(uint32_t method_token) noexcept {
         InvalidateLookupCache();
         CHAOS_IL2CPP_LOG_DEBUG_M("codegen",
             "DemoteByToken: token={} demoted {} entries", method_token, count);
+    }
+    return count;
+}
+
+uint32_t LinuxSehHandler::DemoteByDomainId(uint32_t domain_id) noexcept {
+    if (domain_id == 0) return 0;  // core domain, never unloaded
+    uint32_t count = 0;
+    {
+        JitRegistryLockGuard lock(this);
+        for (uint32_t i = 0; i < count_; i++) {
+            if (entries_[i].domain_id == domain_id &&
+                entries_[i].nm != nullptr) {
+                EnqueueDemotedCode(
+                    const_cast<void*>(entries_[i].code_start),
+                    entries_[i].code_size);
+                entries_[i].nm = nullptr;
+                count++;
+            }
+        }
+    }
+    if (count > 0) {
+        InvalidateLookupCache();
+        CHAOS_IL2CPP_LOG_INFO_M("codegen",
+            "DemoteByDomainId: domain={} demoted {} entries", domain_id, count);
     }
     return count;
 }
@@ -409,10 +480,15 @@ static void JitSignalHandler(int sig, siginfo_t* info, void* ucontext) noexcept 
 #endif
         );
 
-    if (code_addr == nullptr) return;
+	if (code_addr == nullptr) { ChainSignalToPrev(sig, info, ucontext); return; }
+        return;
 
     const JitMethod* nm = self.FindCodeByAddress(code_addr);
-    if (nm == nullptr || nm->seh_table_offset == 0) return;
+    if (nm == nullptr || nm->seh_table_offset == 0) {
+        // Not JIT code or no SEH table -- chain to previous handler
+        ChainSignalToPrev(sig, info, ucontext);
+        return;
+    }
 
     const uint8_t* code_base = static_cast<const uint8_t*>(nm->code);
     uint32_t code_offset = static_cast<uint32_t>(
@@ -457,7 +533,8 @@ static void JitSignalHandler(int sig, siginfo_t* info, void* ucontext) noexcept 
             g_jit_frame_rsp = nullptr;
             ResetUnwindState();
         }
-        return;  // No handler found — let the default handler deal with it.
+        ChainSignalToPrev(sig, info, ucontext);
+        return;
     }
 
     // Write exception object into all GPR register file slots (for managed throws).
@@ -626,8 +703,8 @@ void LinuxSehHandler::Initialize() noexcept {
     sa.sa_flags = SA_SIGINFO | SA_ONSTACK;
 
     // Hardware exceptions that may occur in T4 code.
-    sigaction(SIGSEGV, &sa, nullptr);
-    sigaction(SIGBUS,  &sa, nullptr);
+    sigaction(SIGSEGV, &sa, &s_prev_segv);
+    sigaction(SIGBUS,  &sa, &s_prev_bus);
 
     // Managed exceptions raised by T4 code (ChaosJitRaiseException).
     sigaction(kManagedExceptionSignal, &sa, nullptr);

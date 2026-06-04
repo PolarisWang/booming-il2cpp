@@ -90,7 +90,7 @@ inline int32_t ChaosDispatchMethod(
 inline int32_t ChaosDispatchMethodAll(
     const HotpatchEntryV0* entries,
     int32_t count,
-    void (* const* thunks)() noexcept = nullptr) noexcept
+    void (* const* thunks)() noexcept = nullptr)
 {
     int32_t failures = 0;
     for (int32_t i = 0; i < count; i++) {
@@ -109,7 +109,7 @@ inline int32_t ChaosDispatchMethodAll(
 // Each module's entries are dispatched individually; failures are summed.
 // Returns total failures across all modules.
 inline int32_t ChaosDispatchMethodAllModules(
-    void (* const* thunks)() noexcept = nullptr) noexcept
+    void (* const* thunks)() noexcept = nullptr)
 {
     int32_t failures = 0;
     auto& registry = GetHotpatchNameRegistry();

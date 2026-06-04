@@ -54,6 +54,14 @@ struct JitPrecode {
     void*                        trampoline = nullptr; // executable trampoline code
     void*                        original_direct_ptr = nullptr; // saved AOT code pointer
 
+    // ── RCU retire list (Tier 1 recompilation safety) ────────────────────
+    // JitRecompileToTier1 cannot delete precode->compiled immediately because
+    // other threads may still be executing the old compiled code.  Instead it
+    // moves the old JitMethod here.  On the NEXT recompilation of this method,
+    // the previously retired entry is freed — by then the old code is guaranteed
+    // to no longer be in use (grace period of one full recompilation cycle).
+    JitMethod* retired = nullptr;
+
     // ── PGO fields (only used when config.enable_pgo is true) ───────────────
     std::atomic<uint32_t> pgo_call_count{0};   // Call count for PGO-driven Tier 1 upgrade
     bool                  tier1_enqueued{false}; // True once Tier 1 recompilation is queued

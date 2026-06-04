@@ -657,6 +657,16 @@ PatchContext* ApplyPatchFromMemory(const void* data, size_t size,
     auto* cache = ctx->metadata_cache;
     HOTPATCH_DIAG("DIAG[APFM]: registry ready\n");
 
+    // Capture the current domain for dispatch-entry tracking.
+    // When this patch context belongs to a hot-update domain, the domain_id
+    // is recorded so ClearDomainDispatchEntries can find and clear these
+    // entries during domain unload.
+    uint32_t patch_domain_id = 0;
+    {
+        auto* md = memory_domain::CurrentDomain();
+        if (md != nullptr) patch_domain_id = md->domain_id;
+    }
+
     // Iterate MethodDef entries and patch each one.
     uint32_t patched_count = 0;
     HOTPATCH_DIAG("DIAG[APFM]: iterating %u methods\n",
@@ -741,7 +751,6 @@ PatchContext* ApplyPatchFromMemory(const void* data, size_t size,
         // Mark the dispatch entry as patched — module-scoped, no token collision.
         HOTPATCH_DIAG("DIAG[APFM]: calling SetPatchedBySlot module=%u slot=%u\n",
             static_cast<unsigned>(module_id), static_cast<unsigned>(slot));
-
         // Save original keep-native flag before SetPatchedBySlot clears it.
         // Phase 3 below restores the flag when keep_native==true, allowing
         // the dispatch entry to keep its kHotpatchKeepNative through the
@@ -753,7 +762,7 @@ PatchContext* ApplyPatchFromMemory(const void* data, size_t size,
             }
         }
 
-        registry.SetPatchedBySlot(module_id, slot, true, &patch_method);
+        registry.SetPatchedBySlot(module_id, slot, true, &patch_method, patch_domain_id);
         HOTPATCH_DIAG("DIAG[APFM]: SetPatchedBySlot OK\n");
 
         // ── Phase 3: DHE — re-set keep-native flag for unchanged methods ──
@@ -928,6 +937,12 @@ PatchContext* ApplyPatchFromMemoryEx(
     bool has_per_method_overrides = method_count > 0
         && (host_type_names != nullptr || host_method_names != nullptr);
 
+    uint32_t patch_domain_id_ex = 0;
+    {
+        auto* md = memory_domain::CurrentDomain();
+        if (md != nullptr) patch_domain_id_ex = md->domain_id;
+    }
+
     uint32_t patched_count = 0;
     uint32_t total = cache->MethodCount();
     for (uint32_t i = 0; i < total; ++i) {
@@ -1001,7 +1016,7 @@ PatchContext* ApplyPatchFromMemoryEx(
             }
         }
 
-        registry.SetPatchedBySlot(module_id, slot, true, &patch_method);
+        registry.SetPatchedBySlot(module_id, slot, true, &patch_method, patch_domain_id_ex);
 
         if (patch_method.keep_native) {
             auto* entry = registry.GetDispatchEntryBySlot(module_id, slot);

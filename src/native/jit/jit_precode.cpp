@@ -30,11 +30,13 @@
 #include <aot_core_ir_reader.h>  // DeserializeAotCoreIrMethod
 #include <hotpatch_table.h>      // GetHotpatchNameRegistry
 #include <ir_reg_alloc.h>        // AllocateRegisters
+#include "jit_seh.h"             // RegisterNativeCodeSection
 #include <jit_registration.h>    // JitEntry
 #include <jit_seh.h>             // RegisterNativeCodeSection
 #include <tier_manager.h>        // TierManager::EnqueueJitRecompilation
 #include <slot_map.h>            // ReverseSlotMap, g_reverse_slot_map
 #include <chaos/log.h>           // CHAOS_IL2CPP_LOG_ERROR_M
+#include <gc/gc_root_scanner.h>  // GcRegisterSlotMap
 
 #if defined(_WIN32) || defined(_WIN64)
   #define NOMINMAX
@@ -104,6 +106,12 @@ void PrecodeArena::EnsurePage() noexcept {
         auto& last = pages_.back();
         if (last.pos + kTrampolineSize <= last.capacity)
             return;  // room on current page
+
+        // ── Seal the full page to RX (W^X compliance) ─────────────
+        // This page is now full — no more trampolines will be written
+        // to it.  Seal to RX so it can only be executed, not modified.
+        chaos::il2cpp::pal::PalVirtualProtect(last.base, last.capacity,
+            chaos::il2cpp::pal::kPalMemReadExec);
     }
 
     // Allocate RW memory, then make it RWX for code emission.
@@ -425,9 +433,12 @@ extern "C" void* JitStubDispatchImpl(JitPrecode* precode) noexcept {
 
         precode->compiled = jit;
 
-        // Register JIT code for SEH unwind support — without this, crashes
-        // in JIT-compiled code will terminate the process (OS can't unwind
-        // through the JIT frame to find catch handlers).
+        // ── Register GC slot map and native code section ──────────
+        // So the GC can find managed pointers on the stack, and SEH
+        // can map fault addresses back to JITMethod for EH handling.
+        if (jit->gc_slot_map) {
+            chaos::il2cpp::runtime_core::GcRegisterSlotMap(jit->code, jit->gc_slot_map);
+        }
         chaos::il2cpp::jit::RegisterNativeCodeSection(jit->code, jit->code_size, jit);
 
         // Atomically patch the HotpatchEntryV0::direct_ptr so future calls
@@ -599,8 +610,12 @@ extern "C" void* JitRecompileToTier1(JitPrecode* precode) noexcept {
             "JitRecompileToTier1: Compile(Tier1) failed");
         return nullptr;
     }
-    // Free the Tier 0 JitMethod and install Tier 1
-    delete precode->compiled;
+    // ── Retire the old JitMethod (deferred free via RCU epoch) ──────
+    // Cannot delete immediately: another thread may be executing the old
+    // compiled code or accessing its metadata (slot map, deopt entries).
+    // Move to precode->retired for safe reclamation on the next cycle.
+    delete precode->retired;
+    precode->retired = precode->compiled;
     precode->compiled = jit;
     return jit->code;
 }

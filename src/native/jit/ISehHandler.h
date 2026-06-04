@@ -25,6 +25,13 @@ public:
     /// Demote all T4 code entries matching the given method_token.
     virtual uint32_t DemoteByToken(uint32_t method_token) noexcept = 0;
 
+    /// Demote all T4 code entries whose domain_id matches.
+    /// Called during domain unload to prevent the VEH/signal handler from
+    /// dispatching into JIT code belonging to the unloaded domain.
+    /// @param domain_id  The domain whose JIT entries should be demoted (0 = core, never unloaded).
+    /// @return Number of entries demoted.
+    virtual uint32_t DemoteByDomainId(uint32_t domain_id) noexcept = 0;
+
     /// Demote all T4 code entries whose call_sites reference the given method_token.
     virtual uint32_t DemoteByCallSiteToken(uint32_t method_token) noexcept = 0;
 
