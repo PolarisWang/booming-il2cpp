@@ -138,6 +138,32 @@ public:
     //   effective range = 50..100
     uint32_t GetAdaptiveT2Threshold() const noexcept;
 
+    // ── PromotionAction ─────────────────────────────────────────────────────
+    // Return value of EvaluateTierPromotion.  The caller executes the action
+    // appropriate for its context (entry_direct or FastExecute).
+    // The CAS transitions are handled inside EvaluateTierPromotion — callers
+    // must NOT re-CAS.
+    enum class PromotionAction {
+        kNoAction,              // no promotion needed
+        kPromoteToTier2,        // T1→T2 CAS won: caller must AllocateRegisters + store kRegisterMapped
+        kPromoteToTier3,        // T2→T3 CAS won: caller must EnqueueOptimization
+        kCompileToNative,       // T3→T4 CAS won: caller must Compile + set cached_native_method
+        kTransferToOsr,         // kJitted + OSR entry available: caller may OSR
+        kContinueInterpreting,  // kJitted, no OSR entry: caller continues executing
+    };
+
+    // ── EvaluateTierPromotion ──────────────────────────────────────────────
+    // Shared tier promotion decision function.
+    //
+    // Evaluates patch_method->tier_state + call_count to determine what
+    // promotion action (if any) is needed.  Handles all CAS transitions
+    // internally — the caller only executes the returned action.
+    //
+    // Idempotent: CAS ensures at most one caller wins each transition.
+    // Thread-safe: no mutex, all atomic operations.
+    static PromotionAction EvaluateTierPromotion(
+        chaos::il2cpp::runtime_core::PatchMethod* pm, uint32_t call_count) noexcept;
+
 private:
     TierManager() = default;
     ~TierManager() noexcept;
