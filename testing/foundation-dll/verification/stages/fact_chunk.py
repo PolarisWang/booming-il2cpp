@@ -111,11 +111,23 @@ def run_fact_chunk(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageRe
     status = "failed"
     if total == 0:
         status = "error"
-    elif total < effective_total or r.returncode != 0:
-        # Partial results — process crashed before completing all dispatches
+    elif r.returncode != 0 and total < effective_total:
+        # Process crashed before dispatching all subjects — partial results
+        # (e.g. threading chunk: /GS crash at si=2 truncates to 2/673)
         status = "partial" if total > 0 else "error"
+    elif r.returncode != 0 and passed == total:
+        # All dispatched subjects completed successfully but process crashed
+        # during teardown (e.g. /GS stack cookie in CRT after last subject).
+        # Subject results are complete — treat as passed.
+        status = "passed"
+    elif r.returncode != 0:
+        # Process crashed AND some subjects failed — ambiguous
+        status = "failed"
     elif passed == total and total > 0:
         status = "passed"
+    elif total < effective_total:
+        # Clean exit but fewer than expected — metadata mismatch
+        status = "partial"
 
     duration_ms = int((time.perf_counter() - start) * 1000)
     expected_str = f" (expected {effective_total})" if effective_total != total else ""

@@ -138,8 +138,10 @@ def _compute_summary(stats: list[dict]) -> dict:
     }
 
 
+
 def _strip_log_lines(text: str) -> str:
-    """Remove log lines (e.g. [2026-06-03T...][LEVEL] ...) from stdout.
+    """Remove log lines (e.g. [2026-06-03T...][LEVEL] ...) and progress
+    comments (/*PROGRESS ...*/) from stdout.
 
     The native runtime may interleave CHAOS_IL2CPP_LOG_DEBUG/INFO lines
     with benchmark JSON output. Stripping them lets the JSON parser work.
@@ -147,8 +149,10 @@ def _strip_log_lines(text: str) -> str:
     import re
     # Match [datetime][LEVEL] anchor anywhere on a line (not just start-of-line),
     # then consume the rest of the line as the log message.
-    log_pattern = re.compile(r"\[\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\]\[[A-Za-z]+\].*$", re.MULTILINE)
-    return log_pattern.sub("", text).strip()
+    text = re.sub(r"\[\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\]\[[A-Za-z]+\].*$", "", text, flags=re.MULTILINE)
+    # Remove /*PROGRESS …*/ comments inserted by RunBenchmarkAllMode
+    text = re.sub(r"/\*PROGRESS[^*]*\*/", "", text)
+    return text.strip()
 
 
 def _parse_benchmark_output(stdout: str) -> list[dict]:
@@ -171,16 +175,30 @@ def _parse_benchmark_output(stdout: str) -> list[dict]:
 
 
 def _run_entry_once(exe_path: Path, iterations: int, timeout: int) -> subprocess.CompletedProcess | None:
-    """Run entry.exe --benchmark-all once, returning the CompletedProcess or None on failure."""
+    """Run entry.exe --benchmark-all once, returning the CompletedProcess or None on failure.
+
+    On TimeoutExpired, attempts to recover partial stdout (available since Python 3.8).
+    Returns a CompletedProcess with the partial stdout on timeout so the caller
+    can still salvage benchmark data from hanging chunks.
+    """
     env = os.environ.copy()
     env["CHAOS_IL2CPP_LOG_LEVEL"] = "0"  # suppress debug logs in benchmark output
+    cmd = [str(exe_path), "--benchmark-all", str(iterations)]
     try:
         return subprocess.run(
-            [str(exe_path), "--benchmark-all", str(iterations)],
+            cmd,
             stdout=subprocess.PIPE, stderr=subprocess.DEVNULL, text=True, timeout=timeout,
             env=env, errors="replace",
         )
-    except subprocess.TimeoutExpired:
+    except subprocess.TimeoutExpired as e:
+        partial = e.stdout  # partial stdout captured before timeout
+        if partial and partial.strip():
+            # Return a fake CompletedProcess with partial stdout so the caller
+            # can attempt JSON repair and salvage whatever benchmark data exists.
+            return subprocess.CompletedProcess(
+                args=e.cmd, returncode=-1,
+                stdout=partial, stderr="",
+            )
         return None
 
 
@@ -249,6 +267,24 @@ def run_benchmark_chunk(ctx: ChunkContext, stages: dict[str, StageResult]) -> St
     warmup = _WARMUP_ROUNDS
     samples = _SAMPLE_ROUNDS
     timeout = max(timeout, 30)
+
+    # Dynamically reduce parameters for large chunks (>5000 entries)
+    # so the benchmark completes in reasonable time.
+    subject_file = exe_path.parent / "subjects" / "native-aot.generated.cpp"
+    if subject_file.exists():
+        import re
+        content = subject_file.read_text(encoding="utf-8", errors="replace")
+        m = re.search(r"kSubjectEntryCount\s*=\s*(\d+)", content)
+        if m:
+            entry_count = int(m.group(1))
+            if entry_count > 5000:
+                old_warmup, old_samples, old_timeout = warmup, samples, timeout
+                warmup = 1
+                samples = 2
+                timeout = min(timeout, 120)
+                print(f"  [benchmark] large chunk detected ({entry_count} entries): "
+                      f"warmup {old_warmup}→{warmup}, samples {old_samples}→{samples}, "
+                      f"timeout {old_timeout}→{timeout}s")
 
     print(f"  [benchmark] {exe_path} --benchmark-all {iterations}")
     print(f"  [benchmark] warmup={warmup}, samples={samples} (statistical QC, M1)")

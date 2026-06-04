@@ -741,6 +741,18 @@ PatchContext* ApplyPatchFromMemory(const void* data, size_t size,
         // Mark the dispatch entry as patched — module-scoped, no token collision.
         HOTPATCH_DIAG("DIAG[APFM]: calling SetPatchedBySlot module=%u slot=%u\n",
             static_cast<unsigned>(module_id), static_cast<unsigned>(slot));
+
+        // Save original keep-native flag before SetPatchedBySlot clears it.
+        // Phase 3 below restores the flag when keep_native==true, allowing
+        // the dispatch entry to keep its kHotpatchKeepNative through the
+        // patch/unpatch cycle so revert dispatch matches baseline behavior.
+        {
+            auto* orig_entry = registry.GetDispatchEntryBySlot(module_id, slot);
+            if (orig_entry && HotpatchShouldKeepNative(*orig_entry)) {
+                patch_method.keep_native = true;
+            }
+        }
+
         registry.SetPatchedBySlot(module_id, slot, true, &patch_method);
         HOTPATCH_DIAG("DIAG[APFM]: SetPatchedBySlot OK\n");
 
@@ -979,6 +991,14 @@ PatchContext* ApplyPatchFromMemoryEx(
                 cache->GetBlob(method_entry->signature_offset));
             if (patch_method.signature_blob != nullptr)
                 patch_method.signature_len = patch_method.signature_blob[0];
+        }
+
+        // Save original keep-native flag before SetPatchedBySlot clears it.
+        {
+            auto* orig_entry = registry.GetDispatchEntryBySlot(module_id, slot);
+            if (orig_entry && HotpatchShouldKeepNative(*orig_entry)) {
+                patch_method.keep_native = true;
+            }
         }
 
         registry.SetPatchedBySlot(module_id, slot, true, &patch_method);

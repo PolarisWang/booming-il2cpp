@@ -1,9 +1,183 @@
 {
   "schemaVersion": 1,
   "assemblyName": "System.Linq",
-  "generatedAt": "2026-06-02T02:03:28.885502+00:00",
+  "generatedAt": "2026-06-04T04:51:52.898449+00:00",
   "partitionStrategy": "namespace",
   "maxMethodsPerChunk": 500,
-  "totalChunks": 0,
-  "chunks": []
+  "totalChunks": 1,
+  "chunks": [
+    {
+      "slug": "global-ns",
+      "namespaces": [
+        "System.Linq"
+      ],
+      "methodCount": 41,
+      "methods": [
+        {
+          "methodSubjectId": "System.Linq/System.Linq.Enumerable::Average:System.Double(System.Collections.Generic.IEnumerable<System.Int32>)",
+          "index": 0
+        },
+        {
+          "methodSubjectId": "System.Linq/System.Linq.Enumerable::Average:System.Double(System.Collections.Generic.IEnumerable<System.Int64>)",
+          "index": 1
+        },
+        {
+          "methodSubjectId": "System.Linq/System.Linq.Enumerable::Average:System.Single(System.Collections.Generic.IEnumerable<System.Single>)",
+          "index": 2
+        },
+        {
+          "methodSubjectId": "System.Linq/System.Linq.Enumerable::Average:System.Double(System.Collections.Generic.IEnumerable<System.Double>)",
+          "index": 3
+        },
+        {
+          "methodSubjectId": "System.Linq/System.Linq.Enumerable::Average:System.Decimal(System.Collections.Generic.IEnumerable<System.Decimal>)",
+          "index": 4
+        },
+        {
+          "methodSubjectId": "System.Linq/System.Linq.Enumerable::Average:System.Nullable<System.Double>(System.Collections.Generic.IEnumerable<System.Nullable<System.Int32>>)",
+          "index": 5
+        },
+        {
+          "methodSubjectId": "System.Linq/System.Linq.Enumerable::Average:System.Nullable<System.Double>(System.Collections.Generic.IEnumerable<System.Nullable<System.Int64>>)",
+          "index": 6
+        },
+        {
+          "methodSubjectId": "System.Linq/System.Linq.Enumerable::Average:System.Nullable<System.Single>(System.Collections.Generic.IEnumerable<System.Nullable<System.Single>>)",
+          "index": 7
+        },
+        {
+          "methodSubjectId": "System.Linq/System.Linq.Enumerable::Average:System.Nullable<System.Double>(System.Collections.Generic.IEnumerable<System.Nullable<System.Double>>)",
+          "index": 8
+        },
+        {
+          "methodSubjectId": "System.Linq/System.Linq.Enumerable::Average:System.Nullable<System.Decimal>(System.Collections.Generic.IEnumerable<System.Nullable<System.Decimal>>)",
+          "index": 9
+        },
+        {
+          "methodSubjectId": "System.Linq/System.Linq.Enumerable::Max:System.Int32(System.Collections.Generic.IEnumerable<System.Int32>)",
+          "index": 10
+        },
+        {
+          "methodSubjectId": "System.Linq/System.Linq.Enumerable::Max:System.Int64(System.Collections.Generic.IEnumerable<System.Int64>)",
+          "index": 11
+        },
+        {
+          "methodSubjectId": "System.Linq/System.Linq.Enumerable::Max:System.Nullable<System.Int32>(System.Collections.Generic.IEnumerable<System.Nullable<System.Int32>>)",
+          "index": 12
+        },
+        {
+          "methodSubjectId": "System.Linq/System.Linq.Enumerable::Max:System.Nullable<System.Int64>(System.Collections.Generic.IEnumerable<System.Nullable<System.Int64>>)",
+          "index": 13
+        },
+        {
+          "methodSubjectId": "System.Linq/System.Linq.Enumerable::Max:System.Double(System.Collections.Generic.IEnumerable<System.Double>)",
+          "index": 14
+        },
+        {
+          "methodSubjectId": "System.Linq/System.Linq.Enumerable::Max:System.Nullable<System.Double>(System.Collections.Generic.IEnumerable<System.Nullable<System.Double>>)",
+          "index": 15
+        },
+        {
+          "methodSubjectId": "System.Linq/System.Linq.Enumerable::Max:System.Single(System.Collections.Generic.IEnumerable<System.Single>)",
+          "index": 16
+        },
+        {
+          "methodSubjectId": "System.Linq/System.Linq.Enumerable::Max:System.Nullable<System.Single>(System.Collections.Generic.IEnumerable<System.Nullable<System.Single>>)",
+          "index": 17
+        },
+        {
+          "methodSubjectId": "System.Linq/System.Linq.Enumerable::Max:System.Decimal(System.Collections.Generic.IEnumerable<System.Decimal>)",
+          "index": 18
+        },
+        {
+          "methodSubjectId": "System.Linq/System.Linq.Enumerable::Max:System.Nullable<System.Decimal>(System.Collections.Generic.IEnumerable<System.Nullable<System.Decimal>>)",
+          "index": 19
+        },
+        {
+          "methodSubjectId": "System.Linq/System.Linq.Enumerable::Min:System.Int32(System.Collections.Generic.IEnumerable<System.Int32>)",
+          "index": 20
+        },
+        {
+          "methodSubjectId": "System.Linq/System.Linq.Enumerable::Min:System.Int64(System.Collections.Generic.IEnumerable<System.Int64>)",
+          "index": 21
+        },
+        {
+          "methodSubjectId": "System.Linq/System.Linq.Enumerable::Min:System.Nullable<System.Int32>(System.Collections.Generic.IEnumerable<System.Nullable<System.Int32>>)",
+          "index": 22
+        },
+        {
+          "methodSubjectId": "System.Linq/System.Linq.Enumerable::Min:System.Nullable<System.Int64>(System.Collections.Generic.IEnumerable<System.Nullable<System.Int64>>)",
+          "index": 23
+        },
+        {
+          "methodSubjectId": "System.Linq/System.Linq.Enumerable::Min:System.Single(System.Collections.Generic.IEnumerable<System.Single>)",
+          "index": 24
+        },
+        {
+          "methodSubjectId": "System.Linq/System.Linq.Enumerable::Min:System.Nullable<System.Single>(System.Collections.Generic.IEnumerable<System.Nullable<System.Single>>)",
+          "index": 25
+        },
+        {
+          "methodSubjectId": "System.Linq/System.Linq.Enumerable::Min:System.Double(System.Collections.Generic.IEnumerable<System.Double>)",
+          "index": 26
+        },
+        {
+          "methodSubjectId": "System.Linq/System.Linq.Enumerable::Min:System.Nullable<System.Double>(System.Collections.Generic.IEnumerable<System.Nullable<System.Double>>)",
+          "index": 27
+        },
+        {
+          "methodSubjectId": "System.Linq/System.Linq.Enumerable::Min:System.Decimal(System.Collections.Generic.IEnumerable<System.Decimal>)",
+          "index": 28
+        },
+        {
+          "methodSubjectId": "System.Linq/System.Linq.Enumerable::Min:System.Nullable<System.Decimal>(System.Collections.Generic.IEnumerable<System.Nullable<System.Decimal>>)",
+          "index": 29
+        },
+        {
+          "methodSubjectId": "System.Linq/System.Linq.Enumerable::Range:System.Collections.Generic.IEnumerable<System.Int32>(System.Int32,System.Int32)",
+          "index": 30
+        },
+        {
+          "methodSubjectId": "System.Linq/System.Linq.Enumerable::Sum:System.Int32(System.Collections.Generic.IEnumerable<System.Int32>)",
+          "index": 31
+        },
+        {
+          "methodSubjectId": "System.Linq/System.Linq.Enumerable::Sum:System.Int64(System.Collections.Generic.IEnumerable<System.Int64>)",
+          "index": 32
+        },
+        {
+          "methodSubjectId": "System.Linq/System.Linq.Enumerable::Sum:System.Single(System.Collections.Generic.IEnumerable<System.Single>)",
+          "index": 33
+        },
+        {
+          "methodSubjectId": "System.Linq/System.Linq.Enumerable::Sum:System.Double(System.Collections.Generic.IEnumerable<System.Double>)",
+          "index": 34
+        },
+        {
+          "methodSubjectId": "System.Linq/System.Linq.Enumerable::Sum:System.Decimal(System.Collections.Generic.IEnumerable<System.Decimal>)",
+          "index": 35
+        },
+        {
+          "methodSubjectId": "System.Linq/System.Linq.Enumerable::Sum:System.Nullable<System.Int32>(System.Collections.Generic.IEnumerable<System.Nullable<System.Int32>>)",
+          "index": 36
+        },
+        {
+          "methodSubjectId": "System.Linq/System.Linq.Enumerable::Sum:System.Nullable<System.Int64>(System.Collections.Generic.IEnumerable<System.Nullable<System.Int64>>)",
+          "index": 37
+        },
+        {
+          "methodSubjectId": "System.Linq/System.Linq.Enumerable::Sum:System.Nullable<System.Single>(System.Collections.Generic.IEnumerable<System.Nullable<System.Single>>)",
+          "index": 38
+        },
+        {
+          "methodSubjectId": "System.Linq/System.Linq.Enumerable::Sum:System.Nullable<System.Double>(System.Collections.Generic.IEnumerable<System.Nullable<System.Double>>)",
+          "index": 39
+        },
+        {
+          "methodSubjectId": "System.Linq/System.Linq.Enumerable::Sum:System.Nullable<System.Decimal>(System.Collections.Generic.IEnumerable<System.Nullable<System.Decimal>>)",
+          "index": 40
+        }
+      ]
+    }
+  ]
 }

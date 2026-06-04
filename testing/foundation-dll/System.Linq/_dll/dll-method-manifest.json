@@ -1,8 +1,506 @@
 {
   "schemaVersion": 1,
   "assemblyName": "System.Linq",
-  "generatedAt": "2026-06-02T02:03:28.8657792Z",
-  "totalMethods": 0,
-  "methods": [],
-  "namespaces": {}
+  "generatedAt": "2026-06-04T04:51:52.8650807Z",
+  "totalMethods": 41,
+  "methods": [
+    {
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::Average:System.Double(System.Collections.Generic.IEnumerable<System.Int32>)",
+      "namespace": "System.Linq",
+      "declaringType": "System.Linq.Enumerable",
+      "methodName": "Average",
+      "returnType": "System.Double",
+      "parameters": [
+        "System.Collections.Generic.IEnumerable<System.Int32>"
+      ],
+      "visibility": "public",
+      "isStatic": true
+    },
+    {
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::Average:System.Double(System.Collections.Generic.IEnumerable<System.Int64>)",
+      "namespace": "System.Linq",
+      "declaringType": "System.Linq.Enumerable",
+      "methodName": "Average",
+      "returnType": "System.Double",
+      "parameters": [
+        "System.Collections.Generic.IEnumerable<System.Int64>"
+      ],
+      "visibility": "public",
+      "isStatic": true
+    },
+    {
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::Average:System.Single(System.Collections.Generic.IEnumerable<System.Single>)",
+      "namespace": "System.Linq",
+      "declaringType": "System.Linq.Enumerable",
+      "methodName": "Average",
+      "returnType": "System.Single",
+      "parameters": [
+        "System.Collections.Generic.IEnumerable<System.Single>"
+      ],
+      "visibility": "public",
+      "isStatic": true
+    },
+    {
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::Average:System.Double(System.Collections.Generic.IEnumerable<System.Double>)",
+      "namespace": "System.Linq",
+      "declaringType": "System.Linq.Enumerable",
+      "methodName": "Average",
+      "returnType": "System.Double",
+      "parameters": [
+        "System.Collections.Generic.IEnumerable<System.Double>"
+      ],
+      "visibility": "public",
+      "isStatic": true
+    },
+    {
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::Average:System.Decimal(System.Collections.Generic.IEnumerable<System.Decimal>)",
+      "namespace": "System.Linq",
+      "declaringType": "System.Linq.Enumerable",
+      "methodName": "Average",
+      "returnType": "System.Decimal",
+      "parameters": [
+        "System.Collections.Generic.IEnumerable<System.Decimal>"
+      ],
+      "visibility": "public",
+      "isStatic": true
+    },
+    {
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::Average:System.Nullable<System.Double>(System.Collections.Generic.IEnumerable<System.Nullable<System.Int32>>)",
+      "namespace": "System.Linq",
+      "declaringType": "System.Linq.Enumerable",
+      "methodName": "Average",
+      "returnType": "System.Nullable<System.Double>",
+      "parameters": [
+        "System.Collections.Generic.IEnumerable<System.Nullable<System.Int32>>"
+      ],
+      "visibility": "public",
+      "isStatic": true
+    },
+    {
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::Average:System.Nullable<System.Double>(System.Collections.Generic.IEnumerable<System.Nullable<System.Int64>>)",
+      "namespace": "System.Linq",
+      "declaringType": "System.Linq.Enumerable",
+      "methodName": "Average",
+      "returnType": "System.Nullable<System.Double>",
+      "parameters": [
+        "System.Collections.Generic.IEnumerable<System.Nullable<System.Int64>>"
+      ],
+      "visibility": "public",
+      "isStatic": true
+    },
+    {
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::Average:System.Nullable<System.Single>(System.Collections.Generic.IEnumerable<System.Nullable<System.Single>>)",
+      "namespace": "System.Linq",
+      "declaringType": "System.Linq.Enumerable",
+      "methodName": "Average",
+      "returnType": "System.Nullable<System.Single>",
+      "parameters": [
+        "System.Collections.Generic.IEnumerable<System.Nullable<System.Single>>"
+      ],
+      "visibility": "public",
+      "isStatic": true
+    },
+    {
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::Average:System.Nullable<System.Double>(System.Collections.Generic.IEnumerable<System.Nullable<System.Double>>)",
+      "namespace": "System.Linq",
+      "declaringType": "System.Linq.Enumerable",
+      "methodName": "Average",
+      "returnType": "System.Nullable<System.Double>",
+      "parameters": [
+        "System.Collections.Generic.IEnumerable<System.Nullable<System.Double>>"
+      ],
+      "visibility": "public",
+      "isStatic": true
+    },
+    {
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::Average:System.Nullable<System.Decimal>(System.Collections.Generic.IEnumerable<System.Nullable<System.Decimal>>)",
+      "namespace": "System.Linq",
+      "declaringType": "System.Linq.Enumerable",
+      "methodName": "Average",
+      "returnType": "System.Nullable<System.Decimal>",
+      "parameters": [
+        "System.Collections.Generic.IEnumerable<System.Nullable<System.Decimal>>"
+      ],
+      "visibility": "public",
+      "isStatic": true
+    },
+    {
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::Max:System.Int32(System.Collections.Generic.IEnumerable<System.Int32>)",
+      "namespace": "System.Linq",
+      "declaringType": "System.Linq.Enumerable",
+      "methodName": "Max",
+      "returnType": "System.Int32",
+      "parameters": [
+        "System.Collections.Generic.IEnumerable<System.Int32>"
+      ],
+      "visibility": "public",
+      "isStatic": true
+    },
+    {
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::Max:System.Int64(System.Collections.Generic.IEnumerable<System.Int64>)",
+      "namespace": "System.Linq",
+      "declaringType": "System.Linq.Enumerable",
+      "methodName": "Max",
+      "returnType": "System.Int64",
+      "parameters": [
+        "System.Collections.Generic.IEnumerable<System.Int64>"
+      ],
+      "visibility": "public",
+      "isStatic": true
+    },
+    {
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::Max:System.Nullable<System.Int32>(System.Collections.Generic.IEnumerable<System.Nullable<System.Int32>>)",
+      "namespace": "System.Linq",
+      "declaringType": "System.Linq.Enumerable",
+      "methodName": "Max",
+      "returnType": "System.Nullable<System.Int32>",
+      "parameters": [
+        "System.Collections.Generic.IEnumerable<System.Nullable<System.Int32>>"
+      ],
+      "visibility": "public",
+      "isStatic": true
+    },
+    {
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::Max:System.Nullable<System.Int64>(System.Collections.Generic.IEnumerable<System.Nullable<System.Int64>>)",
+      "namespace": "System.Linq",
+      "declaringType": "System.Linq.Enumerable",
+      "methodName": "Max",
+      "returnType": "System.Nullable<System.Int64>",
+      "parameters": [
+        "System.Collections.Generic.IEnumerable<System.Nullable<System.Int64>>"
+      ],
+      "visibility": "public",
+      "isStatic": true
+    },
+    {
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::Max:System.Double(System.Collections.Generic.IEnumerable<System.Double>)",
+      "namespace": "System.Linq",
+      "declaringType": "System.Linq.Enumerable",
+      "methodName": "Max",
+      "returnType": "System.Double",
+      "parameters": [
+        "System.Collections.Generic.IEnumerable<System.Double>"
+      ],
+      "visibility": "public",
+      "isStatic": true
+    },
+    {
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::Max:System.Nullable<System.Double>(System.Collections.Generic.IEnumerable<System.Nullable<System.Double>>)",
+      "namespace": "System.Linq",
+      "declaringType": "System.Linq.Enumerable",
+      "methodName": "Max",
+      "returnType": "System.Nullable<System.Double>",
+      "parameters": [
+        "System.Collections.Generic.IEnumerable<System.Nullable<System.Double>>"
+      ],
+      "visibility": "public",
+      "isStatic": true
+    },
+    {
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::Max:System.Single(System.Collections.Generic.IEnumerable<System.Single>)",
+      "namespace": "System.Linq",
+      "declaringType": "System.Linq.Enumerable",
+      "methodName": "Max",
+      "returnType": "System.Single",
+      "parameters": [
+        "System.Collections.Generic.IEnumerable<System.Single>"
+      ],
+      "visibility": "public",
+      "isStatic": true
+    },
+    {
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::Max:System.Nullable<System.Single>(System.Collections.Generic.IEnumerable<System.Nullable<System.Single>>)",
+      "namespace": "System.Linq",
+      "declaringType": "System.Linq.Enumerable",
+      "methodName": "Max",
+      "returnType": "System.Nullable<System.Single>",
+      "parameters": [
+        "System.Collections.Generic.IEnumerable<System.Nullable<System.Single>>"
+      ],
+      "visibility": "public",
+      "isStatic": true
+    },
+    {
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::Max:System.Decimal(System.Collections.Generic.IEnumerable<System.Decimal>)",
+      "namespace": "System.Linq",
+      "declaringType": "System.Linq.Enumerable",
+      "methodName": "Max",
+      "returnType": "System.Decimal",
+      "parameters": [
+        "System.Collections.Generic.IEnumerable<System.Decimal>"
+      ],
+      "visibility": "public",
+      "isStatic": true
+    },
+    {
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::Max:System.Nullable<System.Decimal>(System.Collections.Generic.IEnumerable<System.Nullable<System.Decimal>>)",
+      "namespace": "System.Linq",
+      "declaringType": "System.Linq.Enumerable",
+      "methodName": "Max",
+      "returnType": "System.Nullable<System.Decimal>",
+      "parameters": [
+        "System.Collections.Generic.IEnumerable<System.Nullable<System.Decimal>>"
+      ],
+      "visibility": "public",
+      "isStatic": true
+    },
+    {
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::Min:System.Int32(System.Collections.Generic.IEnumerable<System.Int32>)",
+      "namespace": "System.Linq",
+      "declaringType": "System.Linq.Enumerable",
+      "methodName": "Min",
+      "returnType": "System.Int32",
+      "parameters": [
+        "System.Collections.Generic.IEnumerable<System.Int32>"
+      ],
+      "visibility": "public",
+      "isStatic": true
+    },
+    {
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::Min:System.Int64(System.Collections.Generic.IEnumerable<System.Int64>)",
+      "namespace": "System.Linq",
+      "declaringType": "System.Linq.Enumerable",
+      "methodName": "Min",
+      "returnType": "System.Int64",
+      "parameters": [
+        "System.Collections.Generic.IEnumerable<System.Int64>"
+      ],
+      "visibility": "public",
+      "isStatic": true
+    },
+    {
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::Min:System.Nullable<System.Int32>(System.Collections.Generic.IEnumerable<System.Nullable<System.Int32>>)",
+      "namespace": "System.Linq",
+      "declaringType": "System.Linq.Enumerable",
+      "methodName": "Min",
+      "returnType": "System.Nullable<System.Int32>",
+      "parameters": [
+        "System.Collections.Generic.IEnumerable<System.Nullable<System.Int32>>"
+      ],
+      "visibility": "public",
+      "isStatic": true
+    },
+    {
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::Min:System.Nullable<System.Int64>(System.Collections.Generic.IEnumerable<System.Nullable<System.Int64>>)",
+      "namespace": "System.Linq",
+      "declaringType": "System.Linq.Enumerable",
+      "methodName": "Min",
+      "returnType": "System.Nullable<System.Int64>",
+      "parameters": [
+        "System.Collections.Generic.IEnumerable<System.Nullable<System.Int64>>"
+      ],
+      "visibility": "public",
+      "isStatic": true
+    },
+    {
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::Min:System.Single(System.Collections.Generic.IEnumerable<System.Single>)",
+      "namespace": "System.Linq",
+      "declaringType": "System.Linq.Enumerable",
+      "methodName": "Min",
+      "returnType": "System.Single",
+      "parameters": [
+        "System.Collections.Generic.IEnumerable<System.Single>"
+      ],
+      "visibility": "public",
+      "isStatic": true
+    },
+    {
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::Min:System.Nullable<System.Single>(System.Collections.Generic.IEnumerable<System.Nullable<System.Single>>)",
+      "namespace": "System.Linq",
+      "declaringType": "System.Linq.Enumerable",
+      "methodName": "Min",
+      "returnType": "System.Nullable<System.Single>",
+      "parameters": [
+        "System.Collections.Generic.IEnumerable<System.Nullable<System.Single>>"
+      ],
+      "visibility": "public",
+      "isStatic": true
+    },
+    {
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::Min:System.Double(System.Collections.Generic.IEnumerable<System.Double>)",
+      "namespace": "System.Linq",
+      "declaringType": "System.Linq.Enumerable",
+      "methodName": "Min",
+      "returnType": "System.Double",
+      "parameters": [
+        "System.Collections.Generic.IEnumerable<System.Double>"
+      ],
+      "visibility": "public",
+      "isStatic": true
+    },
+    {
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::Min:System.Nullable<System.Double>(System.Collections.Generic.IEnumerable<System.Nullable<System.Double>>)",
+      "namespace": "System.Linq",
+      "declaringType": "System.Linq.Enumerable",
+      "methodName": "Min",
+      "returnType": "System.Nullable<System.Double>",
+      "parameters": [
+        "System.Collections.Generic.IEnumerable<System.Nullable<System.Double>>"
+      ],
+      "visibility": "public",
+      "isStatic": true
+    },
+    {
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::Min:System.Decimal(System.Collections.Generic.IEnumerable<System.Decimal>)",
+      "namespace": "System.Linq",
+      "declaringType": "System.Linq.Enumerable",
+      "methodName": "Min",
+      "returnType": "System.Decimal",
+      "parameters": [
+        "System.Collections.Generic.IEnumerable<System.Decimal>"
+      ],
+      "visibility": "public",
+      "isStatic": true
+    },
+    {
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::Min:System.Nullable<System.Decimal>(System.Collections.Generic.IEnumerable<System.Nullable<System.Decimal>>)",
+      "namespace": "System.Linq",
+      "declaringType": "System.Linq.Enumerable",
+      "methodName": "Min",
+      "returnType": "System.Nullable<System.Decimal>",
+      "parameters": [
+        "System.Collections.Generic.IEnumerable<System.Nullable<System.Decimal>>"
+      ],
+      "visibility": "public",
+      "isStatic": true
+    },
+    {
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::Range:System.Collections.Generic.IEnumerable<System.Int32>(System.Int32,System.Int32)",
+      "namespace": "System.Linq",
+      "declaringType": "System.Linq.Enumerable",
+      "methodName": "Range",
+      "returnType": "System.Collections.Generic.IEnumerable<System.Int32>",
+      "parameters": [
+        "System.Int32",
+        "System.Int32"
+      ],
+      "visibility": "public",
+      "isStatic": true
+    },
+    {
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::Sum:System.Int32(System.Collections.Generic.IEnumerable<System.Int32>)",
+      "namespace": "System.Linq",
+      "declaringType": "System.Linq.Enumerable",
+      "methodName": "Sum",
+      "returnType": "System.Int32",
+      "parameters": [
+        "System.Collections.Generic.IEnumerable<System.Int32>"
+      ],
+      "visibility": "public",
+      "isStatic": true
+    },
+    {
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::Sum:System.Int64(System.Collections.Generic.IEnumerable<System.Int64>)",
+      "namespace": "System.Linq",
+      "declaringType": "System.Linq.Enumerable",
+      "methodName": "Sum",
+      "returnType": "System.Int64",
+      "parameters": [
+        "System.Collections.Generic.IEnumerable<System.Int64>"
+      ],
+      "visibility": "public",
+      "isStatic": true
+    },
+    {
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::Sum:System.Single(System.Collections.Generic.IEnumerable<System.Single>)",
+      "namespace": "System.Linq",
+      "declaringType": "System.Linq.Enumerable",
+      "methodName": "Sum",
+      "returnType": "System.Single",
+      "parameters": [
+        "System.Collections.Generic.IEnumerable<System.Single>"
+      ],
+      "visibility": "public",
+      "isStatic": true
+    },
+    {
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::Sum:System.Double(System.Collections.Generic.IEnumerable<System.Double>)",
+      "namespace": "System.Linq",
+      "declaringType": "System.Linq.Enumerable",
+      "methodName": "Sum",
+      "returnType": "System.Double",
+      "parameters": [
+        "System.Collections.Generic.IEnumerable<System.Double>"
+      ],
+      "visibility": "public",
+      "isStatic": true
+    },
+    {
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::Sum:System.Decimal(System.Collections.Generic.IEnumerable<System.Decimal>)",
+      "namespace": "System.Linq",
+      "declaringType": "System.Linq.Enumerable",
+      "methodName": "Sum",
+      "returnType": "System.Decimal",
+      "parameters": [
+        "System.Collections.Generic.IEnumerable<System.Decimal>"
+      ],
+      "visibility": "public",
+      "isStatic": true
+    },
+    {
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::Sum:System.Nullable<System.Int32>(System.Collections.Generic.IEnumerable<System.Nullable<System.Int32>>)",
+      "namespace": "System.Linq",
+      "declaringType": "System.Linq.Enumerable",
+      "methodName": "Sum",
+      "returnType": "System.Nullable<System.Int32>",
+      "parameters": [
+        "System.Collections.Generic.IEnumerable<System.Nullable<System.Int32>>"
+      ],
+      "visibility": "public",
+      "isStatic": true
+    },
+    {
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::Sum:System.Nullable<System.Int64>(System.Collections.Generic.IEnumerable<System.Nullable<System.Int64>>)",
+      "namespace": "System.Linq",
+      "declaringType": "System.Linq.Enumerable",
+      "methodName": "Sum",
+      "returnType": "System.Nullable<System.Int64>",
+      "parameters": [
+        "System.Collections.Generic.IEnumerable<System.Nullable<System.Int64>>"
+      ],
+      "visibility": "public",
+      "isStatic": true
+    },
+    {
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::Sum:System.Nullable<System.Single>(System.Collections.Generic.IEnumerable<System.Nullable<System.Single>>)",
+      "namespace": "System.Linq",
+      "declaringType": "System.Linq.Enumerable",
+      "methodName": "Sum",
+      "returnType": "System.Nullable<System.Single>",
+      "parameters": [
+        "System.Collections.Generic.IEnumerable<System.Nullable<System.Single>>"
+      ],
+      "visibility": "public",
+      "isStatic": true
+    },
+    {
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::Sum:System.Nullable<System.Double>(System.Collections.Generic.IEnumerable<System.Nullable<System.Double>>)",
+      "namespace": "System.Linq",
+      "declaringType": "System.Linq.Enumerable",
+      "methodName": "Sum",
+      "returnType": "System.Nullable<System.Double>",
+      "parameters": [
+        "System.Collections.Generic.IEnumerable<System.Nullable<System.Double>>"
+      ],
+      "visibility": "public",
+      "isStatic": true
+    },
+    {
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::Sum:System.Nullable<System.Decimal>(System.Collections.Generic.IEnumerable<System.Nullable<System.Decimal>>)",
+      "namespace": "System.Linq",
+      "declaringType": "System.Linq.Enumerable",
+      "methodName": "Sum",
+      "returnType": "System.Nullable<System.Decimal>",
+      "parameters": [
+        "System.Collections.Generic.IEnumerable<System.Nullable<System.Decimal>>"
+      ],
+      "visibility": "public",
+      "isStatic": true
+    }
+  ],
+  "namespaces": {
+    "System.Linq": {
+      "methodCount": 41
+    }
+  }
 }

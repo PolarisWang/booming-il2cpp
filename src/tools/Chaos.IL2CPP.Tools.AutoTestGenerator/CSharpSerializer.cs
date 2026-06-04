@@ -31,7 +31,7 @@ public sealed class CSharpSerializer
     /// (e.g. AssemblyHashAlgorithm in System.Reflection and System.Configuration.Assemblies).
     /// Primitive types (int, string, etc.) are still mapped to their C# keywords.
     /// </summary>
-    private static string ToQualifiedCSharpType(string typeName)
+    internal static string ToQualifiedCSharpType(string typeName)
     {
         typeName = StripAssemblyQualification(typeName).Replace('+', '.');
 

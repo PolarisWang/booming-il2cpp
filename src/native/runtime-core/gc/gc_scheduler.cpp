@@ -299,7 +299,7 @@ GcCollectionKind GcScheduler::DecideCollection() const noexcept {
 
     // 1. Full GC requested by another thread?
     if (full_gc_requested_.load(std::memory_order_acquire)) {
-        if (prefer_bgc && !bgc.IsBusy()) {
+        if (prefer_bgc && g_bgc_enabled && !bgc.IsBusy()) {
             return GcCollectionKind::FULL_BGC;
         }
         return GcCollectionKind::FULL;
@@ -308,7 +308,7 @@ GcCollectionKind GcScheduler::DecideCollection() const noexcept {
     // 2. Page count growth threshold exceeded?
     // Catches rapid page allocation bursts before the byte-based trigger reacts.
     if (page_count_growth_.load(std::memory_order_relaxed) >= kMaxPageGrowthThreshold) {
-        if (!bgc.IsBusy()) {
+        if (g_bgc_enabled && !bgc.IsBusy()) {
             return GcCollectionKind::FULL_BGC;
         }
         if (prefer_bgc) {
@@ -362,8 +362,7 @@ GcCollectionKind GcScheduler::DecideCollection() const noexcept {
         //   - BGC thread is running
         //   - BGC is not already busy with a cycle
         //   - This is not a forced full GC (emergency)
-        auto& bgc = BgcController::Instance();
-        if (!bgc.IsBusy()) {
+        if (g_bgc_enabled && !bgc.IsBusy()) {
             return GcCollectionKind::FULL_BGC;
         }
         // BGC is busy — in low-latency mode, wait for BGC rather than STW.
@@ -592,6 +591,7 @@ void GcScheduler::SignalFullGcComplete() noexcept {
 }
 
 bool GcScheduler::WaitForFullGcApproach(int32_t timeout_ms) noexcept {
+    if (!g_bgc_enabled) return false;
     std::unique_lock<std::mutex> lock(notification_mutex_);
     if (!fullgc_notification_enabled_.load(std::memory_order_acquire)) return false;
     fullgc_approach_signaled_ = false;
@@ -608,6 +608,7 @@ bool GcScheduler::WaitForFullGcApproach(int32_t timeout_ms) noexcept {
 }
 
 bool GcScheduler::WaitForFullGcComplete(int32_t timeout_ms) noexcept {
+    if (!g_bgc_enabled) return false;
     std::unique_lock<std::mutex> lock(notification_mutex_);
     if (!fullgc_notification_enabled_.load(std::memory_order_acquire)) return false;
     fullgc_complete_signaled_ = false;

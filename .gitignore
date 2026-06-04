@@ -295,7 +295,9 @@ build/vs2022/
 testing/foundation-dll/System.Private.CoreLib/exception-throw-diagnostics/codegen/generated/
 /testing/foundation-dll/System.Private.CoreLib/exception-throw-diagnostics/codegen/native-aot.methods.json
 
-# ── Foundation-DLL: intermediate build & codegen artifacts ──────────────
+# Stale build artifacts from old family-based pipeline (removed from tracking)
+/output_corelib/
+/output_test/
 
 # Codegen output (entirely generated, not source)
 testing/foundation-dll/**/codegen/

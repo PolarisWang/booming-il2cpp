@@ -23,8 +23,9 @@ def run_aggregate(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageRes
     start = time.perf_counter()
 
     foundation_dir = ctx.foundation_dir
-    chunks_dir = foundation_dir / "chunks"
-    reports_dir = foundation_dir / "_dll" / "reports"
+    assembly = ctx.assembly
+    chunks_dir = foundation_dir / assembly / "chunks"
+    reports_dir = foundation_dir / assembly / "_dll" / "reports"
     latest_dir = reports_dir / "latest"
     history_dir = reports_dir / "history"
 
