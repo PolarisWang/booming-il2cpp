@@ -58,6 +58,11 @@ def run_aggregate(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageRes
             summary["fact"] = {
                 "passed": fact_data.get("passed", 0),
                 "total": fact_data.get("total", 0),
+                "isShutdownAV": fact_data.get("isShutdownAV", False),
+                "valueSuspicious": fact_data.get("valueSuspicious", False),
+                "valueWarnings": fact_data.get("valueWarnings", 0),
+                "metaTotal": fact_data.get("metaTotal"),
+                "metaBenchmarkCount": fact_data.get("metaBenchmarkCount", 0),
             }
             all_fact.append({
                 "chunk": slug,
@@ -117,8 +122,26 @@ def run_aggregate(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageRes
     # ── Build aggregate metrics ──
     total_passed = sum(s.get("fact", {}).get("passed", 0) for s in chunk_summaries)
     total_fact = sum(s.get("fact", {}).get("total", 0) for s in chunk_summaries)
-    total_benchmarked = sum(s.get("benchmark", {}).get("methodCount", 0) for s in chunk_summaries)
-    chunks_with_fact = sum(1 for s in chunk_summaries if "passed" in s.get("fact", {}))
+    # Only count chunks that actually ran subjects (total > 0)
+    chunks_with_fact = sum(
+        1 for s in chunk_summaries
+        if s.get("fact", {}).get("total", 0) > 0
+    )
+    # Track chunks that had shutdown-AV or value warnings
+    chunks_with_shutdown_av = sum(
+        1 for s in chunk_summaries
+        if s.get("fact", {}).get("isShutdownAV", False)
+    )
+    chunks_with_value_warnings = sum(
+        1 for s in chunk_summaries
+        if s.get("fact", {}).get("valueSuspicious", False)
+    )
+    # Track chunks with metadata mismatch (total != metaTotal)
+    chunks_with_meta_mismatch = sum(
+        1 for s in chunk_summaries
+        if s.get("fact", {}).get("metaTotal") is not None
+        and s["fact"]["total"] != s["fact"]["metaTotal"]
+    )
 
     # ── Compute aggregate benchmark performance ──
     chunks_with_benchmark = [s.get("benchmark", {}) for s in chunk_summaries if "methodCount" in s.get("benchmark", {})]
@@ -149,6 +172,8 @@ def run_aggregate(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageRes
         "timestamp": time.strftime("%Y-%m-%dT%H:%M:%S"),
         "totalChunks": len(chunk_slugs),
         "chunksWithFacts": chunks_with_fact,
+        "chunksShutdownAV": chunks_with_shutdown_av,
+        "chunksWithValueWarnings": chunks_with_value_warnings,
         "totalPassed": total_passed,
         "totalFactMethods": total_fact,
         "chunkSummaries": chunk_summaries,
@@ -174,6 +199,9 @@ def run_aggregate(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageRes
         "timestamp": time.strftime("%Y-%m-%dT%H:%M:%S"),
         "totalChunks": len(chunk_slugs),
         "chunksWithResults": chunks_with_fact,
+        "chunksWithShutdownAV": chunks_with_shutdown_av,
+        "chunksWithValueWarnings": chunks_with_value_warnings,
+        "chunksWithMetaMismatch": chunks_with_meta_mismatch,
         "totalDeclaredMethods": total_fact,
     }
     (latest_dir / "coverage-audit.json").write_text(
@@ -186,6 +214,9 @@ def run_aggregate(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageRes
         "summary": {
             "chunks": len(chunk_slugs),
             "chunksVerified": chunks_with_fact,
+            "chunksShutdownAV": chunks_with_shutdown_av,
+            "chunksWithValueWarnings": chunks_with_value_warnings,
+            "chunksWithMetaMismatch": chunks_with_meta_mismatch,
             "factPassRate": round(total_passed / total_fact * 100, 1) if total_fact else 0,
             "totalBenchmarkedMethods": total_benchmarked,
             "aggregatePerformance": aggregate_perf,
@@ -207,6 +238,12 @@ def run_aggregate(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageRes
     duration_ms = int((time.perf_counter() - start) * 1000)
     print(f"  [aggregate] Reports written to {latest_dir}")
     print(f"  [aggregate] Fact: {total_passed}/{total_fact} passed across {chunks_with_fact} chunks")
+    if chunks_with_shutdown_av:
+        print(f"  [aggregate] Shutdown AV: {chunks_with_shutdown_av} chunk(s)")
+    if chunks_with_value_warnings:
+        print(f"  [aggregate] Value warnings: {chunks_with_value_warnings} chunk(s)")
+    if chunks_with_meta_mismatch:
+        print(f"  [aggregate] Metadata mismatches: {chunks_with_meta_mismatch} chunk(s)")
     print(f"  [aggregate] Benchmark: {total_benchmarked} methods")
     print(f"  [aggregate] Done ({duration_ms}ms)")
 

@@ -5,7 +5,7 @@
 //   (no args)            — fact: run all subject entries, print Passed: N/M
 //   --fact-json          — per-method JSON output (value-level verification)
 //   --benchmark N I      — benchmark method N for I iterations
-//   --benchmark-all I    — benchmark ALL methods for I iterations, aggregated JSON
+//   --benchmark-all I    — benchmark ALL methods for I iterations, per-line JSON
 //   --hotupdate          — hotpatch fact: baseline + apply + semantic-check + revert
 //   --hotupdate-and-benchmark N I — post-patch benchmark
 //   --microbench         — interpreter microbenchmarks
@@ -225,8 +225,8 @@ static int RunFactJsonMode() {
                 caught = true;
             }
             if (!first) printf(",");
-            printf("{\"si\":%d,\"methodIndex\":%d,\"contractIndex\":%d,\"passed\":%s,\"exitCode\":%d}",
-                   si, i, i, caught ? "false" : "true", caught ? -1 : (int)result);
+            printf("{\"si\":%d,\"methodIndex\":%d,\"contractIndex\":-1,\"passed\":%s,\"exitCode\":%d}",
+                   si, i, caught ? "false" : "true", caught ? -1 : (int)result);
             first = false;
         }
         printf("]}\n");
@@ -258,8 +258,8 @@ static int RunFactJsonMode() {
             caught = true;
         CHAOS_EH_END
         if (!first) printf(",");
-        printf("{\"si\":%d,\"methodIndex\":%d,\"contractIndex\":%d,\"passed\":%s,\"exitCode\":%d}",
-               si, i, i, caught ? "false" : "true", caught ? -1 : (int)result);
+        printf("{\"si\":%d,\"methodIndex\":%d,\"contractIndex\":-1,\"passed\":%s,\"exitCode\":%d}",
+               si, i, caught ? "false" : "true", caught ? -1 : (int)result);
         first = false;
     }
     printf("]}\n");
@@ -272,14 +272,22 @@ static int RunBenchmarkMode(int entry_index, int iterations) {
     CHAOS_IL2CPP_PROFILE_SCOPE("RunBenchmarkMode");
     auto result = RunBenchmark(entry_index, iterations);
     if (result.caught_exception) {
-        printf("{\"elapsedMilliseconds\":-1.0,\"error\":\"managed exception\"}\n");
+        printf("{\"elapsedMilliseconds\":-1.0,\"allocatedBytes\":%" PRId64 ",\"error\":\"managed exception\"}\n",
+               result.allocated_bytes);
+        std::fflush(stdout);
         return 1;
     }
     if (result.elapsed_ms < 0.0) {
         printf("{\"elapsedMilliseconds\":-1.0,\"error\":\"invalid index\"}\n");
+        std::fflush(stdout);
         return 1;
     }
-    double ns_per_op = (result.elapsed_ms * 1e6) / iterations;
+    if (result.elapsed_ms <= 0.0) {
+        printf("{\"elapsedMilliseconds\":%.3f,\"opsPerSecond\":0,\"iterations\":%d,\"allocatedBytes\":%" PRId64 "}\n",
+               result.elapsed_ms, iterations, result.allocated_bytes);
+        std::fflush(stdout);
+        return 0;
+    }
     double ops_per_sec = (iterations / result.elapsed_ms) * 1000.0;
     double alloc_per_op = static_cast<double>(result.allocated_bytes) / iterations;
     printf(
@@ -293,34 +301,31 @@ static int RunBenchmarkMode(int entry_index, int iterations) {
 }
 
 // ── --benchmark-all: benchmark ALL methods in one invocation ────────
-// Returns a JSON array with one entry per method, avoiding the overhead
-// of launching N separate entry.exe processes.
+// Returns per-line JSON: each method gets its own complete JSON line,
+// followed by a summary line.  Stray stderr log lines cannot pollute
+// the protocol stream since each line is independently parseable.
 static int RunBenchmarkAllMode(int iterations) {
     const int kCount = kSubjectEntryCount;
-    printf("{\"benchmarkAll\":[");
-    bool first = true;
     for (int si = 0; si < kCount; si++) {
         int i = kSubjectSlotMap[si];
         auto result = RunBenchmark(i, iterations);
-        if (!first) printf(",");
-        first = false;
         if (result.caught_exception) {
-            printf("{\"methodIndex\":%d,\"elapsedMilliseconds\":-1.0,\"error\":\"managed exception\"}", i);
+            printf("{\"methodIndex\":%d,\"elapsedMilliseconds\":-1.0,\"allocatedBytes\":%" PRId64 ",\"error\":\"managed exception\"}\n",
+                   i, result.allocated_bytes);
         } else if (result.elapsed_ms < 0.0) {
-            printf("{\"methodIndex\":%d,\"elapsedMilliseconds\":-1.0,\"error\":\"invalid index\"}", i);
+            printf("{\"methodIndex\":%d,\"elapsedMilliseconds\":-1.0,\"error\":\"invalid index\"}\n", i);
+        } else if (result.elapsed_ms <= 0.0) {
+            printf("{\"methodIndex\":%d,\"elapsedMilliseconds\":%.3f,\"opsPerSecond\":0,\"iterations\":%d,\"allocatedBytes\":%" PRId64 "}\n",
+                   i, result.elapsed_ms, iterations, result.allocated_bytes);
         } else {
             double ops_per_sec = (iterations / result.elapsed_ms) * 1000.0;
-            double alloc_per_op = static_cast<double>(result.allocated_bytes) / iterations;
-            printf(
-                "{\"methodIndex\":%d,\"elapsedMilliseconds\":%.3f,"
-                "\"opsPerSecond\":%.0f,\"iterations\":%d,"
-                "\"allocatedBytes\":%" PRId64 ",\"allocPerOp\":%.1f}",
-                i, result.elapsed_ms, ops_per_sec, iterations,
-                result.allocated_bytes, alloc_per_op);
+            printf("{\"methodIndex\":%d,\"elapsedMilliseconds\":%.3f,\"opsPerSecond\":%.0f,\"iterations\":%d,\"allocatedBytes\":%" PRId64 "}\n",
+                   i, result.elapsed_ms, ops_per_sec, iterations, result.allocated_bytes);
         }
+        fflush(stdout);
     }
-    printf("]}\n");
-    std::fflush(stdout);
+    printf("{\"summary\":{\"methodCount\":%d}}\n", kCount);
+    fflush(stdout);
     return 0;
 }
 
