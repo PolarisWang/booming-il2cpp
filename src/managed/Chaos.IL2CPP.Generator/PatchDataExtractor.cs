@@ -712,7 +712,7 @@ public sealed class PatchDataExtractor
             if (!name.StartsWith("Subject_", StringComparison.Ordinal))
                 continue;
 
-            int sentinel = 0xBEEF0000 | (subjectIndex & 0xFFFF);
+            int sentinel = (int)(0xBEEF0000U | (uint)(subjectIndex & 0xFFFF));
             var newBody = BuildSentinelBody(sentinel);
 
             // Sentinel body (7 bytes) must always fit within the original body.

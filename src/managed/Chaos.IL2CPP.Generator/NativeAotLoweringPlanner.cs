@@ -1048,11 +1048,11 @@ public sealed partial class NativeAotLoweringPlanner
         {
             globalDeclarations += "\n#ifdef CHAOS_IL2CPP_JIT_MODE\n";
             globalDeclarations += "\n" + BuildJitMethodRegistration(methodsForLowering, metadataRegistration);
-            var cgNs = SanitizeCppIdentifier(_assemblyName);
             globalDeclarations += $@"
+extern ""C"" const HotpatchModuleV0* chaos_il2cpp_aot_hotpatch_module;
 extern ""C"" void ChaosJitRegisterAll() {{
     // Register hotpatch module so GetDispatchEntry can resolve tokens → slots
-    chaos::il2cpp::runtime_core::RegisterHotpatchModule(&chaos::il2cpp::codegen::{cgNs}::s_hotpatch_module);
+    chaos::il2cpp::runtime_core::RegisterHotpatchModule(chaos_il2cpp_aot_hotpatch_module);
     RegisterJitEntryMethods(kChaosJitEntries, kChaosJitEntryCount);
 }}
 #endif

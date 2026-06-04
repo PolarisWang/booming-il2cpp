@@ -16,6 +16,7 @@ from __future__ import annotations
 import json
 import os
 import re
+import shutil
 import subprocess
 import sys
 import time
@@ -190,6 +191,55 @@ def _chaos_sdk_csproj() -> Path:
     """Path to Chaos.TestFramework.Sdk.csproj (used as ProjectReference)."""
     return (_REPO_ROOT / "src" / "reference" / "Chaos.TestFramework.Sdk"
             / "Chaos.TestFramework.Sdk.csproj")
+
+
+def _build_jit_entry(
+    tpg_dll: Path,
+    subjects_dll: Path,
+    metadata_path: Path,
+    native_dir: Path,
+) -> bool:
+    """Build JIT entry-jit.exe via TPG generate-dll --jit.
+
+    Returns True if JIT build succeeded, False otherwise.
+    JIT build failure does not block the pipeline.
+    """
+    # Use a separate output directory so JIT codegen doesn't clobber AOT artifacts
+    jit_output = native_dir.parent / "build_jit_output"
+    jit_output.mkdir(parents=True, exist_ok=True)
+
+    cmd = [
+        "dotnet", "exec", str(tpg_dll),
+        "generate-dll",
+        "--jit",
+        "--dll", str(subjects_dll),
+        "--metadata", str(metadata_path),
+        "--output", str(jit_output),
+        "--clean",
+    ]
+    try:
+        result = subprocess.run(cmd, capture_output=True, text=True, timeout=1800)
+    except subprocess.TimeoutExpired:
+        print(f"  [build] JIT entry build TIMEOUT — continuing")
+        return False
+
+    for line in result.stdout.splitlines():
+        print(f"      [jit] {line}")
+
+    if result.returncode != 0:
+        print(f"  [build] JIT entry build FAILED (rc={result.returncode}) — continuing")
+        for line in result.stderr.splitlines():
+            print(f"      [jit:err] {line}")
+        return False
+
+    jit_exe = jit_output / "entry-jit.exe"
+    if not jit_exe.exists():
+        print(f"  [build] JIT entry-jit.exe not found at {jit_exe} — continuing")
+        return False
+
+    shutil.copy2(jit_exe, native_dir / "entry-jit.exe")
+    print(f"  [build] JIT entry-jit.exe: {native_dir / 'entry-jit.exe'} ({jit_exe.stat().st_size} bytes)")
+    return True
 
 
 def run_build(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
@@ -518,6 +568,10 @@ def run_build(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
 
     duration_ms = int((time.perf_counter() - start) * 1000)
     print(f"  [build] entry.exe: {entry_exe}")
+
+    # -- 8. Build JIT entry (non-blocking) --
+    _build_jit_entry(tpg_dll, subjects_dll, metadata_path, ctx.native_dir)
+
     print(f"  [build] Done ({duration_ms}ms)")
 
     return StageResult(

@@ -480,6 +480,7 @@ public static class Program
         var configTier = "check";
         var sourceOnly = false;
         var clean = false;
+        var isJit = false;
 
         for (int i = 0; i < args.Length; i++)
         {
@@ -502,6 +503,9 @@ public static class Program
                     break;
                 case "--clean":
                     clean = true;
+                    break;
+                case "--jit":
+                    isJit = true;
                     break;
             }
         }
@@ -582,7 +586,7 @@ public static class Program
         Console.WriteLine("  [2/4] Running IL2CPP codegen...");
         var codegenBase = Path.Combine(outputDir, "codegen");
         var orchestrator = new Codegen.CodegenOrchestrator();
-        var codegenResult = orchestrator.Run([dllPath], codegenBase, "aot", subjectMethodIds);
+        var codegenResult = orchestrator.Run([dllPath], codegenBase, isJit ? "jit" : "aot", subjectMethodIds);
 
         if (!codegenResult.Success)
             return Error($"Codegen failed: {codegenResult.Error}");
@@ -600,7 +604,7 @@ public static class Program
         if (sourceOnly)
         {
             emitter.Emit(outputDir, codegenResult, subjects,
-                isJit: false, configTier: configTier,
+                isJit: isJit, configTier: configTier,
                 isWindows: true, projectRoot: projectRoot,
                 codegenDir: codegenBase, sdkDir: sdkDir);
             Console.WriteLine("        Sources written (source-only mode)");
@@ -608,7 +612,7 @@ public static class Program
         }
 
         var exePath = emitter.GenerateAndBuild(outputDir, codegenResult, subjects,
-            isJit: false, configTier: configTier,
+            isJit: isJit, configTier: configTier,
             isWindows: true, projectRoot: projectRoot,
             codegenDir: codegenBase, sdkDir: sdkDir);
 
