@@ -366,124 +366,122 @@ static void RegisterTier3CallbackFn() noexcept {
     });
 }
 
-// ── TryTierUpgrade — unified tier promotion check (Phase 1.3) ────────────
-// Called once per InterpreterEntryDirect invocation, before Step B/C branch.
-// Combines T1→T2, T2→T3, and T3→T4 (JIT) promotion into a single check,
-// eliminating the previous duplication across Step B and Step C.
-static void TryTierUpgrade(PatchMethod* patch_method, uint32_t call_count,
-                           runtime_instantiation::InterpreterDispatchContext* dispatch_ctx) noexcept {
-    auto tier = patch_method->tier_state.load(std::memory_order_acquire);
+// ── CompileAndCacheEntry (entry_direct) ─────────────────────────────────────
+// Compile a T3→T4 native method and cache it on the PatchMethod.
+// Called when EvaluateTierPromotion returns kCompileToNative.
+// Entry_direct-specific: populates PIC data, dispatch_ctx, call_cache,
+// arg_type_tags in the CompileConfig, and sets aot_entry = nm->code
+// for the Step A0 dispatch path.
+static void CompileAndCacheEntry(
+    PatchMethod* pm,
+    runtime_instantiation::InterpreterDispatchContext* dispatch_ctx) noexcept {
 
-    // T1→T2: Stack-interpreted → Register-mapped
-    if (tier == PatchMethod::kStackInterpreted && call_count >= TierManager::Get().GetAdaptiveT1Threshold()) {
-        uint32_t expected = PatchMethod::kStackInterpreted;
-        if (patch_method->tier_state.compare_exchange_strong(expected, PatchMethod::kRegisterLowering, std::memory_order_acq_rel)) {
-            OptimizeToTier2(patch_method);
-            patch_method->tier_state.store(PatchMethod::kRegisterMapped, std::memory_order_release);
+    auto* reg_m = static_cast<interpreter::RegisterMethod*>(pm->cached_optimized_reg_method);
+    if (reg_m == nullptr) reg_m = static_cast<interpreter::RegisterMethod*>(pm->cached_reg_method);
+    if (reg_m == nullptr || !jit::CanCompile(*reg_m)) {
+        ++pm->codegen_fail_count;
+        if (pm->codegen_fail_count >= PatchMethod::kMaxCodegenFailures) {
+            pm->tier_state.store(PatchMethod::kJitSkip, std::memory_order_release);
+        } else {
+            pm->tier_state.store(PatchMethod::kOptimizedRegister, std::memory_order_release);
         }
+        return;
     }
 
-    // T2→T3: Enqueue for background optimization
-    tier = patch_method->tier_state.load(std::memory_order_acquire);
-    if (tier == PatchMethod::kRegisterMapped && call_count >= TierManager::Get().GetAdaptiveT2Threshold()) {
-        uint32_t expected = PatchMethod::kRegisterMapped;
-        if (patch_method->tier_state.compare_exchange_strong(expected, PatchMethod::kOptimizeLowering, std::memory_order_acq_rel)) {
-            if (!TierManager::Get().EnqueueOptimization(patch_method)) {
-                patch_method->tier_state.store(PatchMethod::kRegisterMapped, std::memory_order_release);
-            }
-        }
-    }
-
-    // T3→T4: Trigger native codegen (JIT)
-    if constexpr (kRuntimeConfig.jit) {
-        if (!chaos::il2cpp::pal::PalCanJit()) return;
-        auto t4_tier = patch_method->tier_state.load(std::memory_order_acquire);
-        if (t4_tier == PatchMethod::kJitSkip) {
-            // Permanently skipped — never retry codegen
-        } else if (t4_tier == PatchMethod::kOptimizedRegister) {
-        uint32_t backoff_base = PatchMethod::kJitThreshold + patch_method->codegen_fail_count * 1000;
-        if (call_count >= backoff_base) {
-            uint32_t t4_expected = PatchMethod::kOptimizedRegister;
-            if (patch_method->tier_state.compare_exchange_strong(t4_expected, PatchMethod::kJitted, std::memory_order_acq_rel)) {
-                auto* reg_m = static_cast<interpreter::RegisterMethod*>(patch_method->cached_optimized_reg_method);
-                if (reg_m == nullptr) reg_m = static_cast<interpreter::RegisterMethod*>(patch_method->cached_reg_method);
-                if (reg_m != nullptr && jit::CanCompile(*reg_m)) {
-                    jit::CompileConfig cfg;
-                    cfg.enable_safepoint_polls = true;
-                    cfg.enable_liveness = true;
-                    cfg.safepoint_fn = reinterpret_cast<void*>(&chaos::il2cpp::runtime_core::threading::SafepointPoll);
-                    cfg.cooperative_fn = reinterpret_cast<void*>(&chaos::il2cpp::runtime_core::threading::EnterCooperativeMode);
-                    cfg.preemptive_fn = reinterpret_cast<void*>(&chaos::il2cpp::runtime_core::threading::EnterPreemptiveMode);
-                    cfg.pic_dispatch_data = patch_method->pic_dispatch_data;
-                    // Build per-instruction PIC data for inline monomorphic dispatch
-                    // Extracts the first (hottest) PIC slot from each PicDispatchChain and
-                    // populates a PerInstrPicData[] array indexed by instruction index.
-                    // When non-null, the JIT engine emits an inline type-check + direct call
-                    // for CallVirt instructions, bypassing the CodegenCallVirt C helper.
-                    cfg.per_instr_pic_count = patch_method->reg_ir_instr_count;
-                    if (cfg.pic_dispatch_data != nullptr && cfg.per_instr_pic_count > 0) {
-                        const auto* data_ptr = static_cast<const uint8_t*>(cfg.pic_dispatch_data);
-                        uint32_t chain_count = *reinterpret_cast<const uint32_t*>(data_ptr);
-                        const auto* chains = reinterpret_cast<const PicDispatchChain*>(
-                            data_ptr + sizeof(uint32_t));
-                        auto* pic_arr = static_cast<PerInstrPicData*>(
-                            std::calloc(cfg.per_instr_pic_count, sizeof(PerInstrPicData)));
-                        for (uint32_t ci = 0; ci < chain_count; ++ci) {
-                            uint32_t ii = chains[ci].instruction_idx;
-                            if (ii >= cfg.per_instr_pic_count) continue;
-                            auto& pd = pic_arr[ii];
-                            for (uint32_t s = 0; s < 3; ++s) {
-                                if (chains[ci].slots[s].type_token != 0 &&
-                                    chains[ci].slots[s].direct_fn != nullptr) {
-                                    pd.expected_type_tokens[s] = static_cast<uint32_t>(
-                                        chains[ci].slots[s].type_token);
-                                    pd.direct_fns[s] = chains[ci].slots[s].direct_fn;
-                                    pd.slot_count = s + 1;
-                                }
-                            }
-                        }
-                        cfg.per_instr_pic = pic_arr;
-                    }
-                    cfg.dispatch_ctx = dispatch_ctx;
-                    cfg.call_cache = patch_method->call_cache;
-                    cfg.call_cache_count = patch_method->reg_ir_instr_count;
-                    cfg.arg_type_tags = patch_method->cached_sig_valid ? patch_method->cached_arg_types : nullptr;
-                    cfg.arg_type_count = patch_method->cached_arg_count;
-                    cfg.method_token = patch_method->token;
-                    cfg.method_module_id = patch_method->module_id;
-                    auto* nm = jit::Compile(*reg_m, cfg);
-                    if (cfg.per_instr_pic != nullptr) {
-                        std::free(const_cast<PerInstrPicData*>(cfg.per_instr_pic));
-                        cfg.per_instr_pic = nullptr;
-                    }
-                    patch_method->cached_native_method = nm;
-                    if (nm != nullptr) {
-                        if (nm->slot_map_data != nullptr) {
-                            chaos::il2cpp::runtime_core::GcRegisterSlotMap(nm->code,
-                                static_cast<const GcSlotMapV0*>(nm->slot_map_data));
-                        }
-                        chaos::il2cpp::jit::RegisterNativeCodeSection(nm->code, nm->code_size, nm, patch_method->token);
-                        patch_method->aot_entry = nm->code;
-                    } else {
-                        ++patch_method->codegen_fail_count;
-                        if (patch_method->codegen_fail_count >= PatchMethod::kMaxCodegenFailures) {
-                            patch_method->tier_state.store(PatchMethod::kJitSkip, std::memory_order_release);
-                        } else {
-                            patch_method->tier_state.store(PatchMethod::kOptimizedRegister, std::memory_order_release);
-                        }
-                    }
-                } else {
-                    ++patch_method->codegen_fail_count;
-                    if (patch_method->codegen_fail_count >= PatchMethod::kMaxCodegenFailures) {
-                        patch_method->tier_state.store(PatchMethod::kJitSkip, std::memory_order_release);
-                    } else {
-                        patch_method->tier_state.store(PatchMethod::kOptimizedRegister, std::memory_order_release);
-                    }
+    jit::CompileConfig cfg;
+    cfg.enable_safepoint_polls = true;
+    cfg.enable_liveness = true;
+    cfg.safepoint_fn = reinterpret_cast<void*>(&chaos::il2cpp::runtime_core::threading::SafepointPoll);
+    cfg.cooperative_fn = reinterpret_cast<void*>(&chaos::il2cpp::runtime_core::threading::EnterCooperativeMode);
+    cfg.preemptive_fn = reinterpret_cast<void*>(&chaos::il2cpp::runtime_core::threading::EnterPreemptiveMode);
+    cfg.pic_dispatch_data = pm->pic_dispatch_data;
+    cfg.per_instr_pic_count = pm->reg_ir_instr_count;
+    if (cfg.pic_dispatch_data != nullptr && cfg.per_instr_pic_count > 0) {
+        const auto* data_ptr = static_cast<const uint8_t*>(cfg.pic_dispatch_data);
+        uint32_t chain_count = *reinterpret_cast<const uint32_t*>(data_ptr);
+        const auto* chains = reinterpret_cast<const PicDispatchChain*>(
+            data_ptr + sizeof(uint32_t));
+        auto* pic_arr = static_cast<PerInstrPicData*>(
+            std::calloc(cfg.per_instr_pic_count, sizeof(PerInstrPicData)));
+        for (uint32_t ci = 0; ci < chain_count; ++ci) {
+            uint32_t ii = chains[ci].instruction_idx;
+            if (ii >= cfg.per_instr_pic_count) continue;
+            auto& pd = pic_arr[ii];
+            for (uint32_t s = 0; s < 3; ++s) {
+                if (chains[ci].slots[s].type_token != 0 &&
+                    chains[ci].slots[s].direct_fn != nullptr) {
+                    pd.expected_type_tokens[s] = static_cast<uint32_t>(
+                        chains[ci].slots[s].type_token);
+                    pd.direct_fns[s] = chains[ci].slots[s].direct_fn;
+                    pd.slot_count = s + 1;
                 }
             }
         }
+        cfg.per_instr_pic = pic_arr;
     }
-    }  // if constexpr (jit)
+    cfg.dispatch_ctx = dispatch_ctx;
+    cfg.call_cache = pm->call_cache;
+    cfg.call_cache_count = pm->reg_ir_instr_count;
+    cfg.arg_type_tags = pm->cached_sig_valid ? pm->cached_arg_types : nullptr;
+    cfg.arg_type_count = pm->cached_arg_count;
+    cfg.method_token = pm->token;
+    cfg.method_module_id = pm->module_id;
+    auto* nm = jit::Compile(*reg_m, cfg);
+    if (cfg.per_instr_pic != nullptr) {
+        std::free(const_cast<PerInstrPicData*>(cfg.per_instr_pic));
+    }
+    pm->cached_native_method = nm;
+    if (nm != nullptr) {
+        if (nm->slot_map_data != nullptr) {
+            chaos::il2cpp::runtime_core::GcRegisterSlotMap(nm->code,
+                static_cast<const GcSlotMapV0*>(nm->slot_map_data));
+        }
+        chaos::il2cpp::jit::RegisterNativeCodeSection(nm->code, nm->code_size, nm, pm->token);
+        pm->aot_entry = nm->code;
+    } else {
+        ++pm->codegen_fail_count;
+        if (pm->codegen_fail_count >= PatchMethod::kMaxCodegenFailures) {
+            pm->tier_state.store(PatchMethod::kJitSkip, std::memory_order_release);
+        } else {
+            pm->tier_state.store(PatchMethod::kOptimizedRegister, std::memory_order_release);
+        }
+    }
+}
+
+// ── TryTierUpgrade — unified tier promotion check (Phase 1.3) ────────────
+// Called once per InterpreterEntryDirect invocation, before Step B/C branch.
+// Delegates all CAS + threshold decisions to EvaluateTierPromotion,
+// executes the returned action.
+static void TryTierUpgrade(PatchMethod* patch_method, uint32_t call_count,
+                           runtime_instantiation::InterpreterDispatchContext* dispatch_ctx) noexcept {
+    auto action = TierManager::EvaluateTierPromotion(patch_method, call_count);
+
+    switch (action) {
+    case TierManager::PromotionAction::kPromoteToTier2:
+        OptimizeToTier2(patch_method);
+        patch_method->tier_state.store(PatchMethod::kRegisterMapped, std::memory_order_release);
+        break;
+
+    case TierManager::PromotionAction::kPromoteToTier3:
+        if (!TierManager::Get().EnqueueOptimization(patch_method)) {
+            patch_method->tier_state.store(PatchMethod::kRegisterMapped, std::memory_order_release);
+        }
+        break;
+
+    case TierManager::PromotionAction::kCompileToNative:
+        if constexpr (kRuntimeConfig.jit) {
+            if (chaos::il2cpp::pal::PalCanJit()) {
+                CompileAndCacheEntry(patch_method, dispatch_ctx);
+                break;
+            }
+        }
+        // JIT not available — permanently skip so we never retry
+        patch_method->tier_state.store(PatchMethod::kJitSkip, std::memory_order_release);
+        break;
+
+    default:
+        break;
+    }
 }
 
 void InterpreterEntryDirect(

@@ -2668,146 +2668,127 @@ static void Handle_ConvOvfU8(FastFrame& frame, const interpreter::IRInstruction&
 // OSR loop threshold — matched to ir_reg_alloc.cpp kOsrLoopThreshold.
 static constexpr uint32_t kFastOsrLoopThreshold = 100;
 
+// ── CompileAndCacheOsr ────────────────────────────────────────────────────
+// T3→T4 native compilation for the FastExecute OSR fallback path.
+// Called when EvaluateTierPromotion returns kCompileToNative and the
+// entry_direct path did not already compile the method.
+static void CompileAndCacheOsr(FastFrame& frame) noexcept {
+    auto* pm = static_cast<chaos::il2cpp::runtime_core::PatchMethod*>(frame.patch_method);
+    using PM = chaos::il2cpp::runtime_core::PatchMethod;
+
+    auto* rm = static_cast<interpreter::RegisterMethod*>(pm->cached_optimized_reg_method);
+    if (rm == nullptr) rm = static_cast<interpreter::RegisterMethod*>(pm->cached_reg_method);
+    if (rm == nullptr || rm->instructions.size() == 0) {
+        ++pm->codegen_fail_count;
+        if (pm->codegen_fail_count >= PM::kMaxCodegenFailures) {
+            pm->tier_state.store(PM::kJitSkip, std::memory_order_release);
+        } else {
+            pm->tier_state.store(PM::kOptimizedRegister, std::memory_order_release);
+        }
+        return;
+    }
+
+    if constexpr (kRuntimeConfig.jit) {
+        chaos::il2cpp::jit::CompileConfig cfg;
+        cfg.enable_deopt = true;
+        cfg.enable_liveness = true;
+        cfg.safepoint_fn = reinterpret_cast<void*>(&threading::SafepointPoll);
+        cfg.cooperative_fn = reinterpret_cast<void*>(&threading::EnterCooperativeMode);
+        cfg.preemptive_fn = reinterpret_cast<void*>(&threading::EnterPreemptiveMode);
+        auto* nm = chaos::il2cpp::jit::Compile(*rm, cfg);
+        if (nm != nullptr) {
+            pm->cached_native_method = nm;
+            chaos::il2cpp::jit::RegisterNativeCodeSection(nm->code, nm->code_size, nm);
+        } else {
+            ++pm->codegen_fail_count;
+            if (pm->codegen_fail_count >= PM::kMaxCodegenFailures) {
+                pm->tier_state.store(PM::kJitSkip, std::memory_order_release);
+            } else {
+                pm->tier_state.store(PM::kOptimizedRegister, std::memory_order_release);
+            }
+        }
+    } else {
+        pm->tier_state.store(PM::kJitSkip, std::memory_order_release);
+    }
+}
+
 // ── TryFastOsrPromotion ─────────────────────────────────────────────────
 // Called from the FastExecute main loop when a hot backedge is detected.
-// Triggers tier upgrades (T1→T2, T2→T3, T3→T4) and, when T4 codegen
-// succeeds with an OSR entry point, performs full on-stack replacement
-// to transfer execution to native code mid-loop.
+// Delegates all CAS + threshold decisions to EvaluateTierPromotion,
+// then executes compile (kCompileToNative) or OSR (kTransferToOsr).
 //
 // Returns true if OSR took over execution (frame.pc set to sentinel),
 // false if the caller should continue FastExecute normally.
 static bool TryFastOsrPromotion(FastFrame& frame) noexcept {
     if (frame.patch_method == nullptr) return false;
     auto* pm = static_cast<chaos::il2cpp::runtime_core::PatchMethod*>(frame.patch_method);
-    using PM = chaos::il2cpp::runtime_core::PatchMethod;
 
     auto call_count = pm->call_count.load(std::memory_order_relaxed);
-    auto tier = pm->tier_state.load(std::memory_order_acquire);
+    auto action = TierManager::EvaluateTierPromotion(pm, call_count);
 
-    // ── T1→T2: Optimize to register IR ────────────────────────────────
-    if (tier == PM::kStackInterpreted && call_count >= TierManager::Get().GetAdaptiveT1Threshold()) {
-        uint32_t expected = PM::kStackInterpreted;
-        if (pm->tier_state.compare_exchange_strong(expected, PM::kRegisterLowering, std::memory_order_acq_rel)) {
-            OptimizeToTier2(pm);
-            pm->tier_state.store(PM::kRegisterMapped, std::memory_order_release);
-        }
-    }
+    switch (action) {
+    case TierManager::PromotionAction::kCompileToNative:
+        CompileAndCacheOsr(frame);
+        break;
 
-    // ── T2→T3: Enqueue for background optimization ────────────────────
-    tier = pm->tier_state.load(std::memory_order_acquire);
-    if (tier == PM::kRegisterMapped && call_count >= TierManager::Get().GetAdaptiveT2Threshold()) {
-        uint32_t expected = PM::kRegisterMapped;
-        if (pm->tier_state.compare_exchange_strong(expected, PM::kOptimizeLowering, std::memory_order_acq_rel)) {
-            if (!TierManager::Get().EnqueueOptimization(pm)) {
-                pm->tier_state.store(PM::kRegisterMapped, std::memory_order_release);
+    case TierManager::PromotionAction::kTransferToOsr: {
+        auto* nm = pm->cached_native_method;
+        auto* rm = static_cast<interpreter::RegisterMethod*>(pm->cached_optimized_reg_method);
+        if (rm == nullptr) rm = static_cast<interpreter::RegisterMethod*>(pm->cached_reg_method);
+        if (rm == nullptr || nm == nullptr) break;
+
+        if (frame.pc < static_cast<uint32_t>(rm->instructions.size()) &&
+            frame.pc < static_cast<uint32_t>(rm->stack_map.entries.size())) {
+
+            interpreter::OsrState osr;
+            interpreter::CaptureFastFrame(osr, frame);
+            frame.tracked_cnt = 0;
+
+            interpreter::RegisterFrame rf = {};
+            rf.patch_method = pm;
+            rf.args = frame.args;
+            rf.arg_count = frame.arg_count;
+            rf.dispatch_fn = frame.dispatch_fn;
+            rf.dispatch_ctx = frame.dispatch_ctx;
+            rf.call_cache = pm->call_cache;
+            rf.call_count = static_cast<uint32_t>(rm->instructions.size());
+            rf.seh_clauses = rm->seh_clauses.data();
+            rf.seh_clause_count = static_cast<uint32_t>(rm->seh_clauses.size());
+            rf.catch_handler_entries = rm->catch_handler_entries.data();
+            rf.catch_handler_count = static_cast<uint32_t>(rm->catch_handler_entries.size());
+            rf.pc = frame.pc;
+
+            const auto& stack_entry = rm->stack_map.entries[frame.pc];
+            interpreter::RestoreOsrToRegisterFrame(
+                osr, rf, stack_entry, frame.arg_count, frame.local_count);
+
+            chaos::il2cpp::jit::g_jit_deopt_state.osr_resume_pc = frame.pc;
+
+            for (uint32_t i = 0; i < osr.tracked_cnt &&
+                 i < interpreter::RegisterFrame::kMaxTracked; ++i) {
+                rf.tracked_objs[rf.tracked_cnt] = osr.tracked_objs[i];
+                rf.tracked_dtors[rf.tracked_cnt] = osr.tracked_dtors[i];
+                ++rf.tracked_cnt;
+            }
+            osr.tracked_cnt = 0;
+
+            bool reg_ok = interpreter::RegisterExecute(
+                rf, rm->instructions.data(),
+                static_cast<uint32_t>(rm->instructions.size()));
+
+            if (reg_ok) {
+                frame.has_ret = rf.has_ret;
+                frame.ret_val = rf.ret_val;
+                frame.ret_tag = rf.ret_tag;
+                frame.pc = 0xFFffFFffu;
+                return true;
             }
         }
+        break;
     }
 
-    // ── T3→T4: Trigger native codegen + optional OSR ──────────────────
-    tier = pm->tier_state.load(std::memory_order_acquire);
-    if (tier == PM::kOptimizedRegister) {
-        uint32_t backoff_base = PM::kJitThreshold + pm->codegen_fail_count * 1000;
-        if (call_count >= backoff_base) {
-            uint32_t t4_expected = PM::kOptimizedRegister;
-            if (pm->tier_state.compare_exchange_strong(t4_expected, PM::kJitted, std::memory_order_acq_rel)) {
-                auto* rm = static_cast<interpreter::RegisterMethod*>(pm->cached_optimized_reg_method);
-                if (rm == nullptr) rm = static_cast<interpreter::RegisterMethod*>(pm->cached_reg_method);
-                if (rm != nullptr && rm->instructions.size() > 0) {
-                if constexpr (kRuntimeConfig.jit) {
-                    chaos::il2cpp::jit::CompileConfig cfg;
-                    cfg.enable_deopt = true;
-                    cfg.enable_liveness = true;
-                    cfg.safepoint_fn = reinterpret_cast<void*>(&threading::SafepointPoll);
-                    cfg.cooperative_fn = reinterpret_cast<void*>(&threading::EnterCooperativeMode);
-                    cfg.preemptive_fn = reinterpret_cast<void*>(&threading::EnterPreemptiveMode);
-                    auto* nm = chaos::il2cpp::jit::Compile(*rm, cfg);
-                    if (nm != nullptr) {
-                        pm->cached_native_method = nm;
-                        chaos::il2cpp::jit::RegisterNativeCodeSection(nm->code, nm->code_size, nm);
-
-                        // OSR V2: If native code has an OSR entry, transfer
-                        // execution to native code with full frame state.
-                        if (nm->osr_entry_offset != 0 &&
-                            frame.pc < static_cast<uint32_t>(rm->instructions.size()) &&
-                            frame.pc < static_cast<uint32_t>(rm->stack_map.entries.size())) {
-
-                            // Capture FastFrame state into OsrState.
-                            interpreter::OsrState osr;
-                            interpreter::CaptureFastFrame(osr, frame);
-                            frame.tracked_cnt = 0;  // Ownership transferred to OsrState
-
-                            // Build RegisterFrame from captured state.
-                            interpreter::RegisterFrame rf = {};
-                            rf.patch_method = pm;
-                            rf.args = frame.args;
-                            rf.arg_count = frame.arg_count;
-                            rf.dispatch_fn = frame.dispatch_fn;
-                            rf.dispatch_ctx = frame.dispatch_ctx;
-                            rf.call_cache = pm->call_cache;
-                            rf.call_count = static_cast<uint32_t>(rm->instructions.size());
-                            rf.seh_clauses = rm->seh_clauses.data();
-                            rf.seh_clause_count = static_cast<uint32_t>(rm->seh_clauses.size());
-                            rf.catch_handler_entries = rm->catch_handler_entries.data();
-                            rf.catch_handler_count = static_cast<uint32_t>(rm->catch_handler_entries.size());
-                            rf.pc = frame.pc;  // Loop header PC (backedge target)
-
-                            // Restore captured state into RegisterFrame using
-                            // the stack map entry at the loop header PC.
-                            const auto& stack_entry = rm->stack_map.entries[frame.pc];
-                            interpreter::RestoreOsrToRegisterFrame(
-                                osr, rf, stack_entry, frame.arg_count, frame.local_count);
-
-                            // Set OSR resume PC to trigger OSR entry on
-                            // the next backward branch check in RegisterExecute.
-                            chaos::il2cpp::jit::g_jit_deopt_state.osr_resume_pc = frame.pc;
-
-                            // Transfer tracked objects from OsrState to RegisterFrame.
-                            for (uint32_t i = 0; i < osr.tracked_cnt && i < interpreter::RegisterFrame::kMaxTracked; ++i) {
-                                rf.tracked_objs[rf.tracked_cnt] = osr.tracked_objs[i];
-                                rf.tracked_dtors[rf.tracked_cnt] = osr.tracked_dtors[i];
-                                ++rf.tracked_cnt;
-                            }
-                            // Clear OsrState to prevent double-free on destructor.
-                            osr.tracked_cnt = 0;
-
-                            // Re-dispatch into RegisterExecute (which will
-                            // detect OSR entry and promote to native code).
-                            bool reg_ok = interpreter::RegisterExecute(
-                                rf, rm->instructions.data(),
-                                static_cast<uint32_t>(rm->instructions.size()));
-
-                            if (reg_ok) {
-                                frame.has_ret = rf.has_ret;
-                                frame.ret_val = rf.ret_val;
-                                frame.ret_tag = rf.ret_tag;
-                                frame.pc = 0xFFffFFffu;
-                                return true;  // OSR succeeded
-                            }
-                            // OSR failed — fall through to continue FastExecute.
-                            // FastFrame state was captured to OsrState but with
-                            // tracked_cnt=0 the pool Release won't double-free.
-                            // The OsrState destructor cleans up original tracked
-                            // objects. The caller (FastExecute loop) is at the
-                            // backedge target PC which is the loop header — the
-                            // loop will re-execute naturally.
-                        }
-                    } else {
-                        ++pm->codegen_fail_count;
-                        if (pm->codegen_fail_count >= PM::kMaxCodegenFailures) {
-                            pm->tier_state.store(PM::kJitSkip, std::memory_order_release);
-                        } else {
-                            pm->tier_state.store(PM::kOptimizedRegister, std::memory_order_release);
-                        }
-                    }
-                } else {
-                    // JIT disabled — no native compilation in AOT-only builds.
-                    // Set permanent skip so the tier-up path is never retried.
-                    pm->tier_state.store(PM::kJitSkip, std::memory_order_release);
-                }
-                }
-            }
-        }
+    default:
+        break;
     }
 
     return false;

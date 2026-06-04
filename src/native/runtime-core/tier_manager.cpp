@@ -324,4 +324,75 @@ uint32_t TierManager::GetAdaptiveT2Threshold() const noexcept {
     return 50 + adjustment;
 }
 
+// ── EvaluateTierPromotion ─────────────────────────────────────────────────
+//
+// Shared tier promotion decision function.  Called by both TryTierUpgrade
+// (entry_direct) and TryFastOsrPromotion (fast_dispatch) to eliminate
+// duplicated CAS + threshold logic.
+//
+// Handles all CAS transitions internally via acq_rel ordering.
+// The caller executes the returned action — no compilation happens here.
+
+TierManager::PromotionAction TierManager::EvaluateTierPromotion(
+    PatchMethod* pm, uint32_t call_count) noexcept {
+
+    // Step 1: read current tier state
+    auto tier = pm->tier_state.load(std::memory_order_acquire);
+
+    // Step 2: T1→T2 — stack-interpreted → register-lowering
+    if (tier == PatchMethod::kStackInterpreted &&
+        call_count >= GetAdaptiveT1Threshold()) {
+        uint32_t expected = PatchMethod::kStackInterpreted;
+        if (pm->tier_state.compare_exchange_strong(
+                expected, PatchMethod::kRegisterLowering,
+                std::memory_order_acq_rel)) {
+            return PromotionAction::kPromoteToTier2;
+        }
+        // CAS failed — another thread won, re-read for next check
+        tier = pm->tier_state.load(std::memory_order_acquire);
+    }
+
+    // Step 3: T2→T3 — register-mapped → background optimization
+    if (tier == PatchMethod::kRegisterMapped &&
+        call_count >= Get().GetAdaptiveT2Threshold()) {
+        uint32_t expected = PatchMethod::kRegisterMapped;
+        if (pm->tier_state.compare_exchange_strong(
+                expected, PatchMethod::kOptimizeLowering,
+                std::memory_order_acq_rel)) {
+            return PromotionAction::kPromoteToTier3;
+        }
+        tier = pm->tier_state.load(std::memory_order_acquire);
+    }
+
+    // Step 4: T3→T4 — optimized-register → native (JIT) with codegen backoff
+    if (tier == PatchMethod::kOptimizedRegister) {
+        uint32_t backoff_base = PatchMethod::kJitThreshold +
+                                pm->codegen_fail_count * 1000;
+        if (call_count >= backoff_base) {
+            uint32_t expected = PatchMethod::kOptimizedRegister;
+            if (pm->tier_state.compare_exchange_strong(
+                    expected, PatchMethod::kJitted,
+                    std::memory_order_acq_rel)) {
+                return PromotionAction::kCompileToNative;
+            }
+            // CAS failed — re-read for kJitted/kJitSkip check below
+            tier = pm->tier_state.load(std::memory_order_acquire);
+        }
+    }
+
+    // Step 5: already at native tier — check OSR availability
+    if (tier >= PatchMethod::kJitted) {
+        auto* nm = pm->cached_native_method;
+        if (nm != nullptr && nm->code != nullptr) {
+            if (nm->osr_entry_offset != 0) {
+                return PromotionAction::kTransferToOsr;
+            }
+            return PromotionAction::kContinueInterpreting;
+        }
+    }
+
+    // Step 6: no promotion needed
+    return PromotionAction::kNoAction;
+}
+
 }  // namespace chaos::il2cpp::runtime_core
