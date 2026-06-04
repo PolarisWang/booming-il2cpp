@@ -30,6 +30,7 @@
 #include <chaos/native_types.h>
 #include <chaos/profile.h>
 #include <runtime_core.h>
+#include <gc/gc_api.h>
 
 #include "chaos_runtime_host.h"
 
@@ -98,17 +99,49 @@ extern "C" const HotpatchModuleV0* chaos_il2cpp_aot_hotpatch_module;
 
 #if defined(_WIN32)
 #include <windows.h>
+//
+// VEH: log + skip crashes in JIT-code pages (MEM_PRIVATE VirtualAlloc).
+// This prevents chaos_codegen.dll's internal __except from catching the
+// crash (which itself crashes, burning ~10KB stack per event).  By handling
+// in the VEH, frame-based handlers (including chaos_codegen.dll's) never
+// fire, eliminating cumulative stack exhaustion from repeated null-deref
+// benchmark iterations.
+//
 static LONG CALLBACK JitVehHandler(PEXCEPTION_POINTERS ExceptionInfo) noexcept {
     auto* ctx = ExceptionInfo->ContextRecord;
+    auto* er = ExceptionInfo->ExceptionRecord;
+
+    // Log
     std::fprintf(stderr,
         "JIT CRASH: Code=0x%08lX RIP=0x%p RSP=0x%p"
-        " RAX=0x%p RBX=0x%p RCX=0x%p RDX=0x%p RSI=0x%p RDI=0x%p\n",
-        ExceptionInfo->ExceptionRecord->ExceptionCode,
+        " RAX=0x%p RBX=0x%p RCX=0x%p RDX=0x%p RSI=0x%p RDI=0x%p"
+        " R8=0x%p R9=0x%p R10=0x%p R11=0x%p R12=0x%p R13=0x%p R14=0x%p R15=0x%p"
+        " nprm=%lu\n",
+        er->ExceptionCode,
         (void*)ctx->Rip, (void*)ctx->Rsp,
         (void*)ctx->Rax, (void*)ctx->Rbx,
         (void*)ctx->Rcx, (void*)ctx->Rdx,
-        (void*)ctx->Rsi, (void*)ctx->Rdi);
+        (void*)ctx->Rsi, (void*)ctx->Rdi,
+        (void*)ctx->Rbp,
+        (void*)ctx->R8, (void*)ctx->R9,
+        (void*)ctx->R10, (void*)ctx->R11,
+        (void*)ctx->R12, (void*)ctx->R13,
+        (void*)ctx->R14, (void*)ctx->R15,
+        er->NumberParameters);
+    for (uint16_t i = 0; i < er->NumberParameters && i < 15; ++i) {
+        std::fprintf(stderr, "  param[%u]=0x%p\n", i, (void*)er->ExceptionInformation[i]);
+    }
     std::fflush(stderr);
+
+    // If RIP is in a MEM_PRIVATE page (JIT-code VirtualAlloc), skip the
+    // faulting instruction and continue execution.  This bypasses all
+    // frame-based handlers (including chaos_codegen.dll's crashing __except).
+    MEMORY_BASIC_INFORMATION mbi;
+    if (VirtualQuery(reinterpret_cast<LPCVOID>(ctx->Rip), &mbi, sizeof(mbi)) &&
+        mbi.State == MEM_COMMIT && mbi.Type == MEM_PRIVATE) {
+        ctx->Rip += 3;
+        return EXCEPTION_CONTINUE_EXECUTION;
+    }
     return EXCEPTION_CONTINUE_SEARCH;
 }
 #endif
@@ -269,33 +302,80 @@ static int RunFactJsonMode() {
 }
 
 static int RunBenchmarkMode(int entry_index, int iterations) {
-    CHAOS_IL2CPP_PROFILE_SCOPE("RunBenchmarkMode");
-    auto result = RunBenchmark(entry_index, iterations);
-    if (result.caught_exception) {
-        printf("{\"elapsedMilliseconds\":-1.0,\"allocatedBytes\":%" PRId64 ",\"error\":\"managed exception\"}\n",
-               result.allocated_bytes);
-        std::fflush(stdout);
-        return 1;
-    }
-    if (result.elapsed_ms < 0.0) {
+    auto* entries = GetHotpatchEntries();
+    if (entry_index < 0 || entry_index >= kAotMethodCount || !entries) {
         printf("{\"elapsedMilliseconds\":-1.0,\"error\":\"invalid index\"}\n");
         std::fflush(stdout);
         return 1;
     }
-    if (result.elapsed_ms <= 0.0) {
+
+    // Warmup: per-call crash protection
+    bool crashed = false;
+    for (int w = 0; w < 100; w++) {
+#if defined(_WIN32)
+        __try {
+            chaos::il2cpp::runtime_core::ChaosDispatchMethodBenchDirect(
+                entries, kAotMethodCount, entry_index);
+        } __except(EXCEPTION_EXECUTE_HANDLER) {
+            crashed = true;
+            break;
+        }
+#else
+        chaos::il2cpp::runtime_core::ChaosDispatchMethodBenchDirect(
+            entries, kAotMethodCount, entry_index);
+#endif
+    }
+
+    if (crashed) {
+        printf("{\"elapsedMilliseconds\":-1.0,\"allocatedBytes\":0,\"error\":\"managed exception\"}\n");
+        std::fflush(stdout);
+        return 1;
+    }
+
+    // Timing: per-call crash protection
+    chaos::il2cpp::runtime_core::chaos_gc_enter_no_gc_region();
+    auto alloc_before = chaos::il2cpp::runtime_core::chaos_gc_get_allocated_bytes_for_current_thread();
+    auto start = std::chrono::steady_clock::now();
+    for (int i = 0; i < iterations; i++) {
+#if defined(_WIN32)
+        __try {
+            chaos::il2cpp::runtime_core::ChaosDispatchMethodBenchDirect(
+                entries, kAotMethodCount, entry_index);
+        } __except(EXCEPTION_EXECUTE_HANDLER) {
+            crashed = true;
+            break;
+        }
+#else
+        chaos::il2cpp::runtime_core::ChaosDispatchMethodBenchDirect(
+            entries, kAotMethodCount, entry_index);
+#endif
+    }
+    auto end = std::chrono::steady_clock::now();
+    auto alloc_after = chaos::il2cpp::runtime_core::chaos_gc_get_allocated_bytes_for_current_thread();
+    chaos::il2cpp::runtime_core::chaos_gc_leave_no_gc_region();
+
+    if (crashed) {
+        printf("{\"elapsedMilliseconds\":-1.0,\"allocatedBytes\":%" PRId64 ",\"error\":\"managed exception\"}\n",
+               alloc_after - alloc_before);
+        std::fflush(stdout);
+        return 1;
+    }
+
+    double elapsed_ms = std::chrono::duration<double, std::milli>(end - start).count();
+    if (elapsed_ms <= 0.0) {
         printf("{\"elapsedMilliseconds\":%.3f,\"opsPerSecond\":0,\"iterations\":%d,\"allocatedBytes\":%" PRId64 "}\n",
-               result.elapsed_ms, iterations, result.allocated_bytes);
+               elapsed_ms, iterations, alloc_after - alloc_before);
         std::fflush(stdout);
         return 0;
     }
-    double ops_per_sec = (iterations / result.elapsed_ms) * 1000.0;
-    double alloc_per_op = static_cast<double>(result.allocated_bytes) / iterations;
+    double ops_per_sec = (iterations / elapsed_ms) * 1000.0;
+    double alloc_per_op = static_cast<double>(alloc_after - alloc_before) / iterations;
     printf(
         "{\"elapsedMilliseconds\":%.3f,\"calibratedMs\":%.3f,"
         "\"opsPerSecond\":%.0f,\"iterations\":%d,"
         "\"allocatedBytes\":%" PRId64 ",\"allocPerOp\":%.1f}\n",
-        result.elapsed_ms, result.elapsed_ms, ops_per_sec, iterations,
-        result.allocated_bytes, alloc_per_op);
+        elapsed_ms, elapsed_ms, ops_per_sec, iterations,
+        alloc_after - alloc_before, alloc_per_op);
     std::fflush(stdout);
     return 0;
 }
@@ -306,21 +386,64 @@ static int RunBenchmarkMode(int entry_index, int iterations) {
 // the protocol stream since each line is independently parseable.
 static int RunBenchmarkAllMode(int iterations) {
     const int kCount = kSubjectEntryCount;
+    auto* entries = GetHotpatchEntries();
     for (int si = 0; si < kCount; si++) {
         int i = kSubjectSlotMap[si];
-        auto result = RunBenchmark(i, iterations);
-        if (result.caught_exception) {
+
+        // Warmup: per-call crash protection
+        bool crashed = false;
+        for (int w = 0; w < 100; w++) {
+#if defined(_WIN32)
+            __try {
+                chaos::il2cpp::runtime_core::ChaosDispatchMethodBenchDirect(
+                    entries, kAotMethodCount, i);
+            } __except(EXCEPTION_EXECUTE_HANDLER) {
+                crashed = true;
+                break;
+            }
+#else
+            chaos::il2cpp::runtime_core::ChaosDispatchMethodBenchDirect(
+                entries, kAotMethodCount, i);
+#endif
+        }
+
+        if (crashed) {
+            printf("{\"methodIndex\":%d,\"elapsedMilliseconds\":-1.0,\"allocatedBytes\":0,\"error\":\"managed exception\"}\n",
+                   i);
+            fflush(stdout);
+            continue;
+        }
+
+        // Timing: per-call crash protection
+        chaos::il2cpp::runtime_core::chaos_gc_enter_no_gc_region();
+        auto alloc_before = chaos::il2cpp::runtime_core::chaos_gc_get_allocated_bytes_for_current_thread();
+        auto start = std::chrono::steady_clock::now();
+        for (int t = 0; t < iterations; t++) {
+#if defined(_WIN32)
+            __try {
+                chaos::il2cpp::runtime_core::ChaosDispatchMethodBenchDirect(
+                    entries, kAotMethodCount, i);
+            } __except(EXCEPTION_EXECUTE_HANDLER) {
+                crashed = true;
+                break;
+            }
+#else
+            chaos::il2cpp::runtime_core::ChaosDispatchMethodBenchDirect(
+                entries, kAotMethodCount, i);
+#endif
+        }
+        auto end = std::chrono::steady_clock::now();
+        auto alloc_after = chaos::il2cpp::runtime_core::chaos_gc_get_allocated_bytes_for_current_thread();
+        chaos::il2cpp::runtime_core::chaos_gc_leave_no_gc_region();
+
+        if (crashed) {
             printf("{\"methodIndex\":%d,\"elapsedMilliseconds\":-1.0,\"allocatedBytes\":%" PRId64 ",\"error\":\"managed exception\"}\n",
-                   i, result.allocated_bytes);
-        } else if (result.elapsed_ms < 0.0) {
-            printf("{\"methodIndex\":%d,\"elapsedMilliseconds\":-1.0,\"error\":\"invalid index\"}\n", i);
-        } else if (result.elapsed_ms <= 0.0) {
-            printf("{\"methodIndex\":%d,\"elapsedMilliseconds\":%.3f,\"opsPerSecond\":0,\"iterations\":%d,\"allocatedBytes\":%" PRId64 "}\n",
-                   i, result.elapsed_ms, iterations, result.allocated_bytes);
+                   i, alloc_after - alloc_before);
         } else {
-            double ops_per_sec = (iterations / result.elapsed_ms) * 1000.0;
-            printf("{\"methodIndex\":%d,\"elapsedMilliseconds\":%.3f,\"opsPerSecond\":%.0f,\"iterations\":%d,\"allocatedBytes\":%" PRId64 "}\n",
-                   i, result.elapsed_ms, ops_per_sec, iterations, result.allocated_bytes);
+            double elapsed_ms = std::chrono::duration<double, std::milli>(end - start).count();
+            double ops_per_sec = elapsed_ms > 0.0 ? (iterations / elapsed_ms) * 1000.0 : 0.0;
+            printf("{\"methodIndex\":%d,\"elapsedMilliseconds\":%.3f,\"opsPerSecond\":%.0f,\"iterations\":%d,\"allocatedBytes\":%lld}\n",
+                   i, elapsed_ms, ops_per_sec, iterations, (long long)(alloc_after - alloc_before));
         }
         fflush(stdout);
     }
@@ -334,20 +457,62 @@ static int RunBenchmarkAllMode(int iterations) {
 static int RunBenchmarkRangeMode(int iterations, int start_idx, int end_idx) {
     if (start_idx < 0) start_idx = 0;
     if (end_idx > kAotMethodCount) end_idx = kAotMethodCount;
+    auto* entries = GetHotpatchEntries();
     for (int i = start_idx; i < end_idx; i++) {
-        auto result = RunBenchmark(i, iterations);
-        if (result.caught_exception) {
+        // Warmup: per-call crash protection
+        bool crashed = false;
+        for (int w = 0; w < 100; w++) {
+#if defined(_WIN32)
+            __try {
+                chaos::il2cpp::runtime_core::ChaosDispatchMethodBenchDirect(
+                    entries, kAotMethodCount, i);
+            } __except(EXCEPTION_EXECUTE_HANDLER) {
+                crashed = true;
+                break;
+            }
+#else
+            chaos::il2cpp::runtime_core::ChaosDispatchMethodBenchDirect(
+                entries, kAotMethodCount, i);
+#endif
+        }
+
+        if (crashed) {
+            printf("{\"methodIndex\":%d,\"elapsedMilliseconds\":-1.0,\"allocatedBytes\":0,\"error\":\"managed exception\"}\n",
+                   i);
+            fflush(stdout);
+            continue;
+        }
+
+        // Timing: per-call crash protection
+        chaos::il2cpp::runtime_core::chaos_gc_enter_no_gc_region();
+        auto alloc_before = chaos::il2cpp::runtime_core::chaos_gc_get_allocated_bytes_for_current_thread();
+        auto start = std::chrono::steady_clock::now();
+        for (int t = 0; t < iterations; t++) {
+#if defined(_WIN32)
+            __try {
+                chaos::il2cpp::runtime_core::ChaosDispatchMethodBenchDirect(
+                    entries, kAotMethodCount, i);
+            } __except(EXCEPTION_EXECUTE_HANDLER) {
+                crashed = true;
+                break;
+            }
+#else
+            chaos::il2cpp::runtime_core::ChaosDispatchMethodBenchDirect(
+                entries, kAotMethodCount, i);
+#endif
+        }
+        auto end = std::chrono::steady_clock::now();
+        auto alloc_after = chaos::il2cpp::runtime_core::chaos_gc_get_allocated_bytes_for_current_thread();
+        chaos::il2cpp::runtime_core::chaos_gc_leave_no_gc_region();
+
+        if (crashed) {
             printf("{\"methodIndex\":%d,\"elapsedMilliseconds\":-1.0,\"allocatedBytes\":%" PRId64 ",\"error\":\"managed exception\"}\n",
-                   i, result.allocated_bytes);
-        } else if (result.elapsed_ms < 0.0) {
-            printf("{\"methodIndex\":%d,\"elapsedMilliseconds\":-1.0,\"error\":\"invalid index\"}\n", i);
-        } else if (result.elapsed_ms <= 0.0) {
-            printf("{\"methodIndex\":%d,\"elapsedMilliseconds\":%.3f,\"opsPerSecond\":0,\"iterations\":%d,\"allocatedBytes\":%" PRId64 "}\n",
-                   i, result.elapsed_ms, iterations, result.allocated_bytes);
+                   i, alloc_after - alloc_before);
         } else {
-            double ops_per_sec = (iterations / result.elapsed_ms) * 1000.0;
-            printf("{\"methodIndex\":%d,\"elapsedMilliseconds\":%.3f,\"opsPerSecond\":%.0f,\"iterations\":%d,\"allocatedBytes\":%" PRId64 "}\n",
-                   i, result.elapsed_ms, ops_per_sec, iterations, result.allocated_bytes);
+            double elapsed_ms = std::chrono::duration<double, std::milli>(end - start).count();
+            double ops_per_sec = elapsed_ms > 0.0 ? (iterations / elapsed_ms) * 1000.0 : 0.0;
+            printf("{\"methodIndex\":%d,\"elapsedMilliseconds\":%.3f,\"opsPerSecond\":%.0f,\"iterations\":%d,\"allocatedBytes\":%lld}\n",
+                   i, elapsed_ms, ops_per_sec, iterations, (long long)(alloc_after - alloc_before));
         }
         fflush(stdout);
     }
