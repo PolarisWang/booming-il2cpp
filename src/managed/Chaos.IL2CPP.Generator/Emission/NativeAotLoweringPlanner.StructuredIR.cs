@@ -206,7 +206,13 @@ public sealed partial class NativeAotLoweringPlanner
         private void EnsureSlotInfoCapacity(int required)
         {
             while (_slotInfo.Count < required)
+            {
                 _slotInfo.Add((FormatStructuredSlotName(_slotInfo.Count), SlotType.NativeInt));
+                // Any new entry is at a depth >= _slotInfo.Count, which must be within the
+                // declared slot range.  Update _peakIntDepth to ensure the declaration covers it.
+                if (_peakIntDepth < _slotInfo.Count)
+                    _peakIntDepth = _slotInfo.Count;
+            }
         }
 
         public void Discard(int count = 1)
@@ -222,6 +228,10 @@ public sealed partial class NativeAotLoweringPlanner
         public void RestoreDepth(int savedDepth)
         {
             _depth = savedDepth;
+            // Ensure slot entries exist for the restored depth and update peak tracking
+            // so that PopValue/PeekValue don't return slot names beyond the declared range.
+            EnsureSlotInfoCapacity(_depth);
+            _peakIntDepth = Math.Max(_peakIntDepth, _depth);
         }
     }
 

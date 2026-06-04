@@ -63,6 +63,7 @@ public sealed class TestEmitter
         sb.AppendLine("using System.Numerics;");
         sb.AppendLine("using System.Reflection;");
         sb.AppendLine("using System.Reflection.Emit;");
+        sb.AppendLine("using System.Reflection.Metadata;");
         sb.AppendLine("using System.Runtime.CompilerServices;");
         sb.AppendLine("using System.Runtime.InteropServices;");
         sb.AppendLine("using System.Runtime.Serialization;");
@@ -106,9 +107,10 @@ public sealed class TestEmitter
             var result = resultMap.GetValueOrDefault((mi, 0));
 
             var isPureVoid = method.IsVoid && !method.HasRefParam;
-
-            // For pure void methods: only [Benchmark], no [Fact] or [HotUpdate]
-            var skipFact = isPureVoid;
+            // Pure void methods: emit [Fact] if the probe provides coverage
+            // (exception → Assert.Throws, no exception → implicit "didn't crash" assertion).
+            // Skip [Fact] only if the probe produced no result at all.
+            var skipFact = isPureVoid && sets.All(s => resultMap.GetValueOrDefault((mi, s.SetIndex)) is null);
 
             foreach (var set in sets)
             {
@@ -378,7 +380,17 @@ public sealed class TestEmitter
             var isPureVoid = method.IsVoid && !method.HasRefParam;
             if (isPureVoid)
             {
-                benchOnly++;
+                // Pure void methods with probe results produce "no crash" or Assert.Throws assertions.
+                // Only benchOnly if the probe never ran (no result at all).
+                var anyUseful = sets.Any(s =>
+                {
+                    var r = resultMap.GetValueOrDefault((mi, s.SetIndex));
+                    return r is not null;
+                });
+                if (anyUseful)
+                    autoGen++;
+                else
+                    benchOnly++;
                 continue;
             }
 

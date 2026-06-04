@@ -199,13 +199,42 @@ static int RunBenchmarkMode(int entry_index, int iterations) {
     return 0;
 }
 
-// ── --benchmark-all: benchmark ALL methods in one invocation ────────
+// ── --benchmark-all: benchmark ALL subject methods ─────────────────
 static int RunBenchmarkAllMode(int iterations) {
     const int kCount = kSubjectEntryCount;
     printf("{\"benchmarkAll\":[");
     bool first = true;
     for (int si = 0; si < kCount; si++) {
         int i = kSubjectSlotMap[si];
+        auto result = RunBenchmark(i, iterations);
+        if (!first) printf(",");
+        first = false;
+        if (result.elapsed_ms < 0.0) {
+            printf("{\"methodIndex\":%d,\"elapsedMilliseconds\":-1.0,\"error\":\"invalid index\"}", i);
+        } else {
+            double ops_per_sec = (iterations / result.elapsed_ms) * 1000.0;
+            double alloc_per_op = static_cast<double>(result.allocated_bytes) / iterations;
+            printf(
+                "{\"methodIndex\":%d,\"elapsedMilliseconds\":%.3f,"
+                "\"opsPerSecond\":%.0f,\"iterations\":%d,"
+                "\"allocatedBytes\":%" PRId64 ",\"allocPerOp\":%.1f}",
+                i, result.elapsed_ms, ops_per_sec, iterations,
+                result.allocated_bytes, alloc_per_op);
+        }
+    }
+    printf("]}\n");
+    std::fflush(stdout);
+    return 0;
+}
+
+// ── --benchmark-range: benchmark a contiguous range of method table indices ─
+// First argument: start index (inclusive), Second argument: end index (exclusive)
+static int RunBenchmarkRangeMode(int iterations, int start_idx, int end_idx) {
+    if (start_idx < 0) start_idx = 0;
+    if (end_idx > kAotMethodCount) end_idx = kAotMethodCount;
+    printf("{\"benchmarkAll\":[");
+    bool first = true;
+    for (int i = start_idx; i < end_idx; i++) {
         auto result = RunBenchmark(i, iterations);
         if (!first) printf(",");
         first = false;
@@ -424,6 +453,12 @@ int main(int argc, char* argv[]) {
     if (std::strcmp(argv[1], "--benchmark-all") == 0) {
         if (argc < 3) { printf("Usage: entry.exe --benchmark-all <iterations>\n"); return 1; }
         ret = RunBenchmarkAllMode(std::atoi(argv[2]));
+        goto shutdown;
+    }
+
+    if (std::strcmp(argv[1], "--benchmark-range") == 0) {
+        if (argc < 5) { printf("Usage: entry.exe --benchmark-range <start> <end> <iterations>\n"); return 1; }
+        ret = RunBenchmarkRangeMode(std::atoi(argv[4]), std::atoi(argv[2]), std::atoi(argv[3]));
         goto shutdown;
     }
 

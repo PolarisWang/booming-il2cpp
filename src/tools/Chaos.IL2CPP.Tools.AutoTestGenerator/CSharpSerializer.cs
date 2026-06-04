@@ -343,13 +343,13 @@ public sealed class CSharpSerializer
         // Strip assembly qualification that may come from MLC's Type.FullName
         typeName = StripAssemblyQualification(typeName);
 
-        // Handle pointer suffix '*' separately: strip it, process the base type,
+        // Handle pointer suffix '*' separately: strip all, process the base type,
         // then re-add.  This ensures "System.Void*" → "void*" (KeywordMap
-        // recognizes "Void" but not "Void*").
+        // recognizes "Void" but not "Void*"), and "System.Void**" → "void**".
         var pointerSuffix = "";
-        if (typeName.EndsWith("*"))
+        while (typeName.EndsWith("*"))
         {
-            pointerSuffix = "*";
+            pointerSuffix += "*";
             typeName = typeName[..^1].TrimEnd();
         }
 

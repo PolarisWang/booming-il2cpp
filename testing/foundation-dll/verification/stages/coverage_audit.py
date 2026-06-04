@@ -78,10 +78,12 @@ def run_coverage_audit(ctx: ChunkContext, stages: dict[str, StageResult]) -> Sta
                 print(f"  [coverage-audit]   ... and {len(missing) - 10} more")
 
         if extra:
-            msg = f"{len(extra)} extra subjects not in chunk definition"
-            errors.append(msg)
+            # Extra subjects are harmless — they represent additional coverage
+            # beyond the declared chunk methods (e.g. void methods producing
+            # "no crash" assertions via A3). Report as info, not error.
+            print(f"  [coverage-audit]   {len(extra)} extra subjects not in chunk definition (OK)")
             for mid in sorted(extra)[:5]:
-                print(f"  [coverage-audit]   EXTRA: {mid}")
+                print(f"  [coverage-audit]     EXTRA: {mid}")
 
         coverage_pct = round(len(subject_method_ids) / len(chunk_method_ids) * 100, 1) if chunk_method_ids else 100.0
         print(f"  [coverage-audit] Coverage: {len(subject_method_ids)}/{len(chunk_method_ids)} ({coverage_pct}%)")
