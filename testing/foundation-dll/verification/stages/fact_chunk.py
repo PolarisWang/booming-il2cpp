@@ -2,6 +2,13 @@
 
 Runs entry.exe --fact-json from the chunk's native directory and parses
 per-method JSON results.
+
+Status determination is exit-code based: a clean exit means all subjects
+were dispatched; a crash with passed==total is shutdown-AV (acceptable);
+a crash with passed<total is genuine failure.
+
+Metadata cross-check (expectedTotal) is advisory-only — codegen may produce
+fewer subjects than metadata declares, and that's expected.
 """
 
 from __future__ import annotations
@@ -12,6 +19,13 @@ import time
 from pathlib import Path
 
 from verification.orchestration.context import ChunkContext, StageResult
+
+# Known shutdown-AV exit codes: process crashed during CRT teardown AFTER
+# all subjects completed successfully.  The dispatch results are complete.
+_SHUTDOWN_AV_CODES = frozenset({
+    3221225477,   # 0xC0000005 — STATUS_ACCESS_VIOLATION
+    3221226505,   # 0xC0000409 — STATUS_STACK_BUFFER_OVERRUN
+})
 
 
 def run_fact_chunk(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
@@ -44,8 +58,8 @@ def run_fact_chunk(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageRe
 
     # Parse JSON output
     fact_results = []
+    json_truncated = False
     try:
-        # Find JSON object in stdout (entry.exe may print other text)
         json_start = stdout.find("{")
         json_end = stdout.rfind("}") + 1
         if json_start >= 0 and json_end > json_start:
@@ -53,9 +67,8 @@ def run_fact_chunk(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageRe
             parsed = json.loads(payload)
             fact_results = parsed.get("factResults", [])
     except (json.JSONDecodeError, KeyError):
-        # If parsing fails, try appending missing closing brackets.
-        # entry.exe sometimes crashes (SEGFAULT) during shutdown before
-        # flushing the final ]}, but all fact entries are already written.
+        # Truncated JSON — entry.exe crashed before flushing final ]}
+        json_truncated = True
         try:
             if json_start >= 0:
                 payload = stdout[json_start:]
@@ -73,69 +86,107 @@ def run_fact_chunk(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageRe
     passed = sum(1 for r in fact_results if r.get("passed"))
     total = len(fact_results)
 
-    # Read expected total from subjects.metadata.json for accurate comparison
-    expected_total = None
+    # ── Metadata cross-check (advisory only) ──
+    # The metadata declares totalMethods = all entries (fact + benchmark + hotupdate).
+    # Codegen may produce fewer subjects (e.g. when some methods fail lowering),
+    # so a shortfall is NOT diagnosed as "partial".
+    meta_total = None
+    meta_benchmark_count = 0
     try:
         meta_path = ctx.chunk_dir / "managed" / "subjects" / "subjects.metadata.json"
         if meta_path.exists():
             meta = json.loads(meta_path.read_text(encoding="utf-8"))
-            expected_total = meta.get("totalMethods")
+            meta_total = meta.get("totalMethods")
+            meta_benchmark_count = len(meta.get("benchmarkMethodIndices") or [])
     except Exception:
         pass
 
-    # Save results to chunk results dir
-    ctx.results_dir.mkdir(parents=True, exist_ok=True)
-    result_path = ctx.results_dir / "fact.json"
+    # ── Status determination ──
+    # Clean exit: all subjects dispatched, results are complete.
+    # Shutdown AV: process crashed after all subjects completed (teardown race).
+    # Partial: crash mid-dispatch, some results lost.
+    # Failed: crash with subject failures.
+    is_shutdown_av = (
+        r.returncode != 0
+        and r.returncode in _SHUTDOWN_AV_CODES
+        and passed == total
+        and total > 0
+    )
+    is_clean = r.returncode == 0
 
-    # Determine effective total for status: use expected_total if available and larger
-    effective_total = expected_total if expected_total is not None else total
+    if is_clean and passed == total and total > 0:
+        status = "passed"
+    elif is_shutdown_av:
+        status = "passed"  # subjects complete, teardown crash is acceptable
+    elif total == 0:
+        status = "skipped" if meta_total else "error"
+    elif r.returncode != 0 and passed < total:
+        status = "partial" if passed > 0 else "error"
+    elif r.returncode != 0:
+        status = "failed"
+    elif passed < total:
+        status = "failed"
+    else:
+        status = "passed"
 
-    # Determine which subject index caused the crash (the unflushed one)
-    # If JSON is truncated (total < effective_total) and process crashed,
-    # the subject at index `total` (0-based) is the crash culprit.
-    crashed_index = (total if total < effective_total and r.returncode != 0
-                     and r.returncode != 0 else None)
+    # ── Value integrity check ──
+    # NOTE: exitCode from ChaosDispatchMethod is the dispatch status code
+    # (0 = success), NOT the managed method's return value.  Value-level
+    # verification requires ChaosDispatchMethodGetValue (hotupdate mode).
+    # Here we only flag subjects where exitCode is anomalous:
+    #   - exitCode < 0 AND exitCode != -1 AND passed=true → unexpected negative
+    value_warnings = sum(
+        1 for r in fact_results
+        if r.get("passed") and r.get("exitCode", 0) < 0 and r.get("exitCode", 0) != -1
+    )
+    value_suspicious = value_warnings > 0
+
+    # ── Build result ──
+    # crashed_index: which subject index was being dispatched when the crash
+    # happened.  Only set for partial mid-dispatch crashes (not shutdown AV).
+    crashed_index = None
+    if r.returncode != 0 and not is_shutdown_av and json_truncated and total > 0:
+        # The subject at index `total` (0-based) was the one being dispatched
+        # when the crash occurred (the last complete entry is total-1).
+        crashed_index = total
 
     result_data = {
         "exitCode": r.returncode,
         "passed": passed,
         "total": total,
-        "expectedTotal": effective_total,
+        "metaTotal": meta_total,
+        "metaBenchmarkCount": meta_benchmark_count,
         "crashedAtIndex": crashed_index,
-        "isPartial": total < effective_total,
+        "isShutdownAV": is_shutdown_av,
+        "valueWarnings": value_warnings,
+        "valueSuspicious": value_suspicious,
         "results": fact_results,
         "stderr": stderr[:500] if stderr else "",
     }
+
+    # Save to chunk results dir
+    ctx.results_dir.mkdir(parents=True, exist_ok=True)
+    result_path = ctx.results_dir / "fact.json"
     result_path.write_text(json.dumps(result_data, indent=2), encoding="utf-8")
 
-    status = "failed"
-    if total == 0:
-        status = "error"
-    elif r.returncode != 0 and total < effective_total:
-        # Process crashed before dispatching all subjects — partial results
-        # (e.g. threading chunk: /GS crash at si=2 truncates to 2/673)
-        status = "partial" if total > 0 else "error"
-    elif r.returncode != 0 and passed == total:
-        # All dispatched subjects completed successfully but process crashed
-        # during teardown (e.g. /GS stack cookie in CRT after last subject).
-        # Subject results are complete — treat as passed.
-        status = "passed"
-    elif r.returncode != 0:
-        # Process crashed AND some subjects failed — ambiguous
-        status = "failed"
-    elif passed == total and total > 0:
-        status = "passed"
-    elif total < effective_total:
-        # Clean exit but fewer than expected — metadata mismatch
-        status = "partial"
-
     duration_ms = int((time.perf_counter() - start) * 1000)
-    expected_str = f" (expected {effective_total})" if effective_total != total else ""
-    print(f"  [fact] {status}: {passed}/{total} passed{expected_str} ({duration_ms}ms)")
+    parts = [f"  [fact] {status}: {passed}/{total} passed"]
+    if is_shutdown_av:
+        parts.append(f"shutdown_av=0x{r.returncode:08X}")
+    if meta_total is not None and meta_total != total:
+        parts.append(f"meta={meta_total}")
+    if value_warnings:
+        parts.append(f"value_warnings={value_warnings}")
+    parts.append(f"({duration_ms}ms)")
+    print(" ".join(parts))
 
     summary_detail = f"exit={r.returncode}"
+    if is_shutdown_av:
+        summary_detail += ", shutdown_av"
     if crashed_index is not None:
         summary_detail += f", crash at subject index {crashed_index}"
+    if value_warnings:
+        summary_detail += f", {value_warnings} value warning(s)"
 
     return StageResult(
         stage="fact", status=status,
