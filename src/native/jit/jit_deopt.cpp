@@ -64,25 +64,23 @@ void DeoptRuntime::ReconstructRegisterFile(
     for (uint32_t i = 0; i < entry.num_values; ++i) {
         const auto& v = values[entry.values_offset + i];
         if (v.reg_index < 64) {
-            if (v.is_spilled) {
-                if (v.reg_index < 16) {
+            if (v.reg_index < 16) {
+                if (v.is_spilled) {
+                    out_regs[v.reg_index] = ctx.gpr[v.reg_index];
+                } else {
                     out_regs[v.reg_index] = ctx.gpr[v.reg_index];
                 }
-            } else {
-                if (v.reg_index < 16) {
-                    out_regs[v.reg_index] = ctx.gpr[v.reg_index];
+                if (gpr_tags != nullptr) {
+                    gpr_tags[v.reg_index] = v.value_tag;
                 }
-            }
-            if (gpr_tags != nullptr) {
-                gpr_tags[v.reg_index] = v.value_tag;
             }
         } else {
             uint32_t fpr_idx = v.reg_index - 64;
             if (fpr_idx < 16) {
                 fpr_file[fpr_idx] = ctx.fpr[fpr_idx];
-            }
-            if (fpr_tags != nullptr) {
-                fpr_tags[fpr_idx] = v.value_tag;
+                if (fpr_tags != nullptr) {
+                    fpr_tags[fpr_idx] = v.value_tag;
+                }
             }
         }
     }

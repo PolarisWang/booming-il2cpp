@@ -386,7 +386,7 @@ static JitMethod* SafeCompileWithCatch(const interpreter::RegisterMethod& ir,
 // This function is only for JitPrecode dispatch.
 extern "C" void* JitStubDispatchImpl(JitPrecode* precode) noexcept {
     // Fast relaxed check: already compiled?
-    uint32_t s = precode->state.load(std::memory_order_relaxed);
+    uint32_t s = precode->state.load(std::memory_order_acquire);
     if (s == kPrecodeCompiled) {
         // Hot-update stale check: if a callee was hotpatched after being inlined
         // into this method, the stale flag is set by InlineReverseMap.  Trigger
@@ -458,8 +458,9 @@ extern "C" void* JitStubDispatchImpl(JitPrecode* precode) noexcept {
 
     // CAS failed — someone else is compiling (or it's already done)
     if (expected == kPrecodeCompiling) {
-        // Spin-wait with pause/yield
+        // Spin-wait with pause/yield (bounded: ~1s timeout).
         int spins = 0;
+        constexpr int kSpinTimeout = 100000000;
         while (precode->state.load(std::memory_order_acquire) == kPrecodeCompiling) {
 #if defined(__aarch64__)
             __asm__ __volatile__("yield" ::: "memory");
@@ -468,7 +469,12 @@ extern "C" void* JitStubDispatchImpl(JitPrecode* precode) noexcept {
 #endif
             if (++spins > 1000) {
                 std::this_thread::yield();
-                spins = 0;
+                if (spins > kSpinTimeout + 1000) {
+                    // Compiler thread appears crashed (state stuck at Compiling).
+                    // Fail gracefully instead of spinning forever.
+                    return nullptr;
+                }
+                spins = 1000;  // keep yielding, don't reset
             }
         }
     }
@@ -610,11 +616,21 @@ extern "C" void* JitRecompileToTier1(JitPrecode* precode) noexcept {
             "JitRecompileToTier1: Compile(Tier1) failed");
         return nullptr;
     }
-    // ── Retire the old JitMethod (deferred free via RCU epoch) ──────
-    // Cannot delete immediately: another thread may be executing the old
+    // ── Retire the old JitMethod (deferred free via deferred-delete queue) ──
+    // Cannot delete immediately: another thread may still be executing the old
     // compiled code or accessing its metadata (slot map, deopt entries).
-    // Move to precode->retired for safe reclamation on the next cycle.
-    delete precode->retired;
+    // Push to a static deferred-delete queue instead.  The queue is drained
+    // periodically (every 1024 pushes) to bound memory growth.
+    if (precode->retired) {
+        static std::vector<JitMethod*> s_deferred_delete;
+        static size_t s_deferred_count = 0;
+        s_deferred_delete.push_back(precode->retired);
+        if (++s_deferred_count >= 1024) {
+            for (auto* p : s_deferred_delete) delete p;
+            s_deferred_delete.clear();
+            s_deferred_count = 0;
+        }
+    }
     precode->retired = precode->compiled;
     precode->compiled = jit;
     return jit->code;

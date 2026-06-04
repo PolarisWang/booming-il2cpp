@@ -347,7 +347,34 @@ void chaos::il2cpp::jit::EmitLoadTlsTlab(CodeBuffer& buf) noexcept {
     }
 }
 
-#endif  // _WIN32 || _WIN64
+#elif defined(__linux__) && defined(__aarch64__)
+
+void chaos::il2cpp::jit::InitTlsTlabInfo() noexcept {
+    if (g_cached_tls_tlab_offset != 0) return;  // already initialized
+
+    // On Linux ARM64, __builtin_thread_pointer() expands to:
+    //   MRS X0, TPIDR_EL0
+    // which returns the thread-pointer (TLS block base address).
+    uintptr_t tp = reinterpret_cast<uintptr_t>(__builtin_thread_pointer());
+    uintptr_t tls_tlab_addr = reinterpret_cast<uintptr_t>(
+        &chaos::il2cpp::runtime_core::tls_tlab);
+    g_cached_tls_tlab_offset = static_cast<uint32_t>(tls_tlab_addr - tp);
+}
+
+void chaos::il2cpp::jit::EmitLoadTlsTlab(CodeBuffer& buf) noexcept {
+    // MRS X0, TPIDR_EL0 — load thread pointer into X0 (kScratchA)
+    // Encoding: 0xD53BD040 + Rd (Rd=0 => 0xD53BD040)
+    buf.Emit32(0xD53BD040);
+
+    // ADD X0, X0, #offset — adjust to &tls_tlab
+    // 64-bit ADD immediate: 0x91000000 | (imm12 << 10) | (Rn << 5) | Rd
+    // Here Rn=Rd=0 (X0), so: 0x91000000 | (offset << 10)
+    if (g_cached_tls_tlab_offset != 0) {
+        buf.Emit32(0x91000000 | (g_cached_tls_tlab_offset << 10));
+    }
+}
+
+#endif  // _WIN32/WIN64 / __linux__+__aarch64__
 
 extern "C" void* CodegenBox(uint64_t value, uint8_t tag, uint32_t type_token) noexcept {
     CHAOS_IL2CPP_PROFILE_SCOPE("Codegen::Box");

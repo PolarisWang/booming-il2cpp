@@ -67,6 +67,11 @@ thread_local sigjmp_buf g_pal_try_jmp_buf;
 // The signal handler checks this before deciding to siglongjmp.
 thread_local bool g_pal_try_active = false;
 
+// Reentry counter: when > 1, we are already inside a protected region.
+// Skip sigsetjmp to avoid overwriting the outer context.  The inner
+// call executes directly — if it faults, the OUTER sigsetjmp catches it.
+thread_local int g_pal_try_reentry = 0;
+
 // ── Global saved previous signal handlers (installed once) ──────────────
 static struct sigaction s_prev_segv;
 static struct sigaction s_prev_bus;
@@ -132,16 +137,27 @@ bool PalTryCallNoExcept(uint64_t (*fn)(uint64_t, uint64_t, uint64_t, uint64_t,
     EnsureHandlerInstalled();
     EnsureAltStack();
 
+    ++g_pal_try_reentry;
+    if (g_pal_try_reentry > 1) {
+        // Nested call: skip sigsetjmp to preserve the outer context.
+        // If the inner call faults, the outer sigsetjmp/siglongjmp catches it.
+        out_result = fn(a0, a1, a2, a3, a4, a5, a6, a7);
+        --g_pal_try_reentry;
+        return false;
+    }
+
     g_pal_try_active = true;
     if (sigsetjmp(g_pal_try_jmp_buf, 1) == 0) {
         // Normal path: call the target function.
         out_result = fn(a0, a1, a2, a3, a4, a5, a6, a7);
         g_pal_try_active = false;
+        --g_pal_try_reentry;
         return false;
     }
 
     // Signal was caught and siglongjmp restored this context.
     g_pal_try_active = false;
+    --g_pal_try_reentry;
     return true;
 }
 

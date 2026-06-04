@@ -1,0 +1,152 @@
+# Foundation-DLL CI Regression
+#
+# Runs Foundation-DLL verification pipelines as CI.
+# PR trigger: smoke mode (key families only, fast feedback)
+# Push to main: full mode (all families, comprehensive verification)
+#
+# Uses the reusable ci-framework.yml for the base build,
+# then runs the foundation-dll pipeline on the compiled runtime.
+
+name: Foundation-DLL Regression
+
+on:
+  pull_request:
+    paths:
+      - 'src/native/**'
+      - 'src/managed/Chaos.IL2CPP.Generator/**'
+      - 'src/managed/Chaos.IL2CPP.MetadataWriter/**'
+      - 'testing/foundation-dll/**'
+      - 'testing/snapshots/**'
+      - 'contracts/native/v0/**'
+  push:
+    branches: [main]
+    paths:
+      - 'src/native/**'
+      - 'src/managed/Chaos.IL2CPP.Generator/**'
+      - 'src/managed/Chaos.IL2CPP.MetadataWriter/**'
+      - 'testing/foundation-dll/**'
+      - 'testing/snapshots/**'
+      - 'contracts/native/v0/**'
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: "Smoke (key families) or full (all families)"
+        default: smoke
+        type: choice
+        options:
+          - smoke
+          - full
+
+jobs:
+  foundation-dll:
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+          fetch-depth: 0
+
+      - name: Setup .NET 8 SDK
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: Setup MSBuild (Windows)
+        if: runner.os == 'Windows'
+        uses: microsoft/setup-msbuild@v2
+        with:
+          vs-version: '17.0'
+
+      - name: Restore .NET dependencies
+        run: |
+          dotnet restore src/managed/Chaos.IL2CPP.Generator/
+          dotnet restore tests/snapshots/Chaos.IL2CPP.CodeGen.SnapshotTests/
+
+      - name: Cache NuGet packages
+        uses: actions/cache@v4
+        with:
+          path: ~/.nuget/packages
+          key: nuget-fdci-${{ runner.os }}-${{ hashFiles('**/*.csproj') }}
+          restore-keys: nuget-fdci-${{ runner.os }}-
+
+      - name: Build Chaos.IL2CPP.Generator
+        run: dotnet build src/managed/Chaos.IL2CPP.Generator/ --configuration Release --no-restore
+
+      - name: Build Chaos.IL2CPP.Driver
+        run: dotnet build src/managed/Chaos.IL2CPP.Driver/ --configuration Release
+
+      - name: Run Snapshot Tests
+        run: dotnet test tests/snapshots/Chaos.IL2CPP.CodeGen.SnapshotTests/ --configuration Release --no-restore -v n
+
+      # Native build
+      - name: Configure CMake
+        shell: bash
+        run: |
+          if [ "$RUNNER_OS" = "Windows" ]; then
+            cmake -S . -B build/native -G "Visual Studio 17 2022" \
+              --toolchain build/toolchains/windows-x64-reference.cmake \
+              -DROADMAP0_PRESET_TARGET=windows-x64-reference
+          else
+            cmake -S . -B build/native -DCMAKE_BUILD_TYPE=RelWithDebInfo \
+              -DCHAOS_IL2CPP_CONFIG_TIER=debug
+          fi
+
+      - name: Build Native Libraries
+        run: cmake --build build/native --config RelWithDebInfo -j$(nproc 2>/dev/null || echo 4)
+
+      - name: Configure Native Tests
+        shell: bash
+        run: |
+          cd testing
+          cmake -S src/native -B artifacts/run/native-test-build -DCMAKE_BUILD_TYPE=RelWithDebInfo
+
+      - name: Build Native Tests
+        run: cmake --build testing/artifacts/run/native-test-build --config RelWithDebInfo -j$(nproc 2>/dev/null || echo 4)
+
+      # Foundation-DLL execution
+      - name: Determine CI Mode
+        id: ci-mode
+        shell: bash
+        run: |
+          if [ "${{ github.event_name }}" = "push" ] || [ "${{ github.event.inputs.mode }}" = "full" ]; then
+            echo "mode=full" >> $GITHUB_OUTPUT
+          else
+            echo "mode=smoke" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Run Foundation-DLL Pipeline
+        shell: bash
+        run: |
+          cd testing/foundation-dll
+          python verification/ci_smoke.py --mode=${{ steps.ci-mode.outputs.mode }}
+
+      - name: Upload Foundation-DLL Results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: foundation-dll-results-${{ matrix.os }}-${{ github.sha }}
+          path: testing/foundation-dll/results/
+
+      - name: Post PR Comment (on failure)
+        if: failure() && github.event_name == 'pull_request'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const output = `## Foundation-DLL Regression Failed
+
+            Mode: \`${{ steps.ci-mode.outputs.mode }}\`
+            Commit: ${{ github.sha }}
+
+            Check the [workflow run](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}) for details.
+            `;
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: output
+            });

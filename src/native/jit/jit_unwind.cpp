@@ -240,14 +240,16 @@ uint32_t EmitDwarfFde(CodeBuffer& buf, uint32_t cie_offset,
     buf.Emit32(static_cast<uint32_t>(pcrel_val));
     buf.Emit32(code_body_size);
 
-    // Post-prologue frame state (after STP X29, X30 + cache reg STPs):
+    // Post-prologue frame state (after STP X29, X30 + STP X1, X0 + cache reg STPs):
     //   CFA = X29 + 16
     //   X29 at CFA-16  (factored offset 2)
     //   LR  at CFA-8   (factored offset 1)
-    //   X19 at CFA-32  (factored offset 4) — first cache slot if any
-    //   X20 at CFA-48  (factored offset 6) — etc.
+    //   X1  at CFA-32  (not in push_reg_nums — caller-saved, omitted from unwind)
+    //   X19 at CFA-48  (factored offset 6) — first cache slot if any
+    //   X20 at CFA-64  (factored offset 8) — etc.
     //
-    // General formula for cache reg slot i: CFA - 16*(i+2), factored offset 2*(i+2)
+    // General formula for cache reg slot i (0-based): CFA - 16*(i+3), factored offset 2*(i+3)
+    // In the loop below, i is 1-based (skipping push_reg_nums[0]=X29), so formula is 2*(i+2).
 
     // DW_CFA_def_cfa(29, 16): CFA = X29 + 16
     buf.EmitByte(0x0C);
@@ -265,10 +267,12 @@ uint32_t EmitDwarfFde(CodeBuffer& buf, uint32_t cie_offset,
     // For each callee-saved GPR in prologue order:
     //   push_reg_nums[0] = X29 (already handled above)
     //   push_reg_nums[1..] = callee-saved regs (X19-X28)
-    //   Each at CFA - 16*(slot + 2), factored offset = 2*(slot + 2)
+    //   Each at CFA - 16*(slot + 3), factored offset = 2*(slot + 3)
+    //   (slot is 0-based; extra +1 accounts for the stack slot occupied by
+    //    X1 save at [X29-16], which is caller-saved and not in push_reg_nums)
     for (uint32_t i = 1; i < num_push_regs; ++i) {
         uint8_t dwarf_reg = push_reg_nums[i];  // ARM64: reg# == DWARF#
-        uint8_t factored = static_cast<uint8_t>(2 * (i + 1));  // slot i → CFA - 16*(i+1) → offset 2*(i+1)
+        uint8_t factored = static_cast<uint8_t>(2 * (i + 2));  // slot i → CFA - 16*(i+2) → offset 2*(i+2)
         buf.EmitByte(static_cast<uint8_t>(0x80 | dwarf_reg));
         buf.EmitByte(factored);
     }

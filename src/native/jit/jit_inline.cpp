@@ -142,10 +142,12 @@ InlineReverseMap::~InlineReverseMap() noexcept {
 }
 
 void InlineReverseMap::Add(uint32_t callee_token, JitMethod* caller) noexcept {
+    std::lock_guard<std::mutex> lock(mtx_);
     map_->entries.push_back({callee_token, caller});
 }
 
 void InlineReverseMap::RemoveAll(JitMethod* caller) noexcept {
+    std::lock_guard<std::mutex> lock(mtx_);
     auto& entries = map_->entries;
     for (size_t i = entries.size(); i > 0; --i) {
         if (entries[i - 1].second == caller) {
@@ -157,6 +159,7 @@ void InlineReverseMap::RemoveAll(JitMethod* caller) noexcept {
 
 uint32_t InlineReverseMap::InvalidateCallers(uint32_t callee_token,
                                                HotpatchEntryV0* /*callee_entry*/) noexcept {
+    std::lock_guard<std::mutex> lock(mtx_);
     uint32_t count = 0;
     auto& entries = map_->entries;
     for (size_t i = entries.size(); i > 0; --i) {

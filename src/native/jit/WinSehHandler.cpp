@@ -193,6 +193,7 @@ void WinSehHandler::RegisterCode(void* code_start, uint32_t code_size,
     if (nm->eh_frame_offset > 0) {
         const void* eh_frame = static_cast<const uint8_t*>(code_start) + nm->eh_frame_offset;
         __register_frame(eh_frame);
+        const_cast<JitMethod*>(nm)->eh_frame_registered = true;
         CHAOS_IL2CPP_LOG_DEBUG_M("codegen",
             "RegisterCode: registered .eh_frame at offset {}", nm->eh_frame_offset);
     }
@@ -225,10 +226,16 @@ const JitMethod* WinSehHandler::FindCodeByAddress(const void* address) noexcept 
     // Must verify the address is within the cached method's code range,
     // since multiple methods can share the same 4KB page and the cache
     // only stores the most recently looked-up JitMethod for that page.
+    // Read cache fields first, then check generation — this eliminates
+    // the TOCTOU window where UnregisterCode invalidates the cache
+    // after we read nm but before we check the generation.
+    auto* nm = g_jit_lookup_cache.nm;
+    uintptr_t cached_page = g_jit_lookup_cache.page_base;
+    uint32_t cached_gen = g_jit_lookup_cache.generation;
     uint32_t gen = lookup_generation_.load(std::memory_order_acquire);
-    if (g_jit_lookup_cache.nm != nullptr &&
-        g_jit_lookup_cache.page_base == page &&
-        g_jit_lookup_cache.generation == gen) {
+    if (nm != nullptr &&
+        cached_page == page &&
+        cached_gen == gen) {
         const auto* cached_start = static_cast<const uint8_t*>(g_jit_lookup_cache.nm->code);
         const auto* cached_end = cached_start + g_jit_lookup_cache.nm->code_size;
         const auto* addr_bytes = static_cast<const uint8_t*>(address);
@@ -416,7 +423,7 @@ ISehHandler& GetSehHandler() noexcept {
 //
 // The following functions are Windows-specific and guarded accordingly.
 // On non-Windows platforms, ChaosJitRaiseException is provided as a stub
-// that traps (since T4 codegen with SEH is not supported on POSIX).
+// that traps (since Windows VEH is not available on POSIX — use LinuxSehHandler instead).
 // ═══════════════════════════════════════════════════════════════════════════
 
 #if defined(_WIN32) || defined(_WIN64)

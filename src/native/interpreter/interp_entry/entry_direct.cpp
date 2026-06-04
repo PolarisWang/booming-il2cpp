@@ -11,6 +11,7 @@
 
 #include <codegen_bridge.h>
 #include <gc_root_scanner.h>
+#include <gc_transition.h>
 #include <patch_loader.h>
 
 #include <method_replacement.h>
@@ -625,7 +626,12 @@ void InterpreterEntryDirect(
                 GetTierCounters().step_native.fetch_add(1, std::memory_order_relaxed);
                 using NativeEntry = void (*)(void*, void*);
                 auto native_entry = reinterpret_cast<NativeEntry>(nm->code);
+                // JIT epilogue calls EnterPreemptiveMode, leaving thread in
+                // preemptive mode.  Wrap the call to restore cooperative mode
+                // for the interpreter dispatch loop (which asserts cooperative).
+                GC_TRANSITION_TO_PREEMPTIVE();
                 native_entry(args_buf, ret_buf);
+                GC_TRANSITION_TO_COOPERATIVE();
 
                 if (chaos::il2cpp::jit::g_jit_deopt_state.deopt_happened) {
                     GetTierCounters().deopt_t4.fetch_add(1, std::memory_order_relaxed);

@@ -503,38 +503,44 @@ inline void EmitCset64(CodeBuffer& buf, uint8_t rd, uint8_t cond) noexcept {
     EmitArm64(buf, 0x9A800400u | (31u << 16) | ((cond ^ 1) << 12) | (31u << 5) | rd);
 }
 
+/// CSET Wd, cond (32-bit, alias for CSINC Wd, WZR, WZR, inv(cond))
+inline void EmitCset32(CodeBuffer& buf, uint8_t rd, uint8_t cond) noexcept {
+    // sf=0 variant of CSINC: base 0x1A800400
+    EmitArm64(buf, 0x1A800400u | (31u << 16) | ((cond ^ 1) << 12) | (31u << 5) | rd);
+}
+
 // ═══════════════════════════════════════════════════════════════════════════
 // Shift (register)
 // ═══════════════════════════════════════════════════════════════════════════
 
 /// 64-bit LSL Xd, Xn, Xm (logical shift left by variable)
 inline void EmitLsl64Var(CodeBuffer& buf, uint8_t rd, uint8_t rn, uint8_t rm) noexcept {
-    EmitArm64(buf, 0x9A400000u | (rm << 16) | (rn << 5) | rd);  // LSLV
+    EmitArm64(buf, 0x9AC02000u | (rm << 16) | (rn << 5) | rd);  // LSLV
 }
 
 /// 32-bit LSL Wd, Wn, Wm
 inline void EmitLsl32Var(CodeBuffer& buf, uint8_t rd, uint8_t rn, uint8_t rm) noexcept {
-    EmitArm64(buf, 0x1A400000u | (rm << 16) | (rn << 5) | rd);  // LSLV
+    EmitArm64(buf, 0x1AC02000u | (rm << 16) | (rn << 5) | rd);  // LSLV
 }
 
 /// 64-bit LSR Xd, Xn, Xm (logical shift right by variable)
 inline void EmitLsr64Var(CodeBuffer& buf, uint8_t rd, uint8_t rn, uint8_t rm) noexcept {
-    EmitArm64(buf, 0x9A440000u | (rm << 16) | (rn << 5) | rd);  // LSRV
+    EmitArm64(buf, 0x9AC02400u | (rm << 16) | (rn << 5) | rd);  // LSRV
 }
 
 /// 32-bit LSR Wd, Wn, Wm
 inline void EmitLsr32Var(CodeBuffer& buf, uint8_t rd, uint8_t rn, uint8_t rm) noexcept {
-    EmitArm64(buf, 0x1A440000u | (rm << 16) | (rn << 5) | rd);  // LSRV
+    EmitArm64(buf, 0x1AC02400u | (rm << 16) | (rn << 5) | rd);  // LSRV
 }
 
 /// 64-bit ASR Xd, Xn, Xm (arithmetic shift right by variable)
 inline void EmitAsr64Var(CodeBuffer& buf, uint8_t rd, uint8_t rn, uint8_t rm) noexcept {
-    EmitArm64(buf, 0x9A480000u | (rm << 16) | (rn << 5) | rd);  // ASRV
+    EmitArm64(buf, 0x9AC02800u | (rm << 16) | (rn << 5) | rd);  // ASRV
 }
 
 /// 32-bit ASR Wd, Wn, Wm
 inline void EmitAsr32Var(CodeBuffer& buf, uint8_t rd, uint8_t rn, uint8_t rm) noexcept {
-    EmitArm64(buf, 0x1A480000u | (rm << 16) | (rn << 5) | rd);  // ASRV
+    EmitArm64(buf, 0x1AC02800u | (rm << 16) | (rn << 5) | rd);  // ASRV
 }
 
 // ═══════════════════════════════════════════════════════════════════════════
@@ -566,6 +572,26 @@ inline void EmitLsr64Imm(CodeBuffer& buf, uint8_t rd, uint8_t rn, uint8_t shift)
 /// 64-bit ASR Xd, Xn, #shift (0-63)
 inline void EmitAsr64Imm(CodeBuffer& buf, uint8_t rd, uint8_t rn, uint8_t shift) noexcept {
     EmitArm64(buf, 0x93400000u | (static_cast<uint32_t>(shift) << 16) | (0x3Fu << 10) | (rn << 5) | rd);
+}
+
+/// 32-bit LSL Wd, Wn, #shift (0-31)
+inline void EmitLsl32Imm(CodeBuffer& buf, uint8_t rd, uint8_t rn, uint8_t shift) noexcept {
+    // UBFM (32-bit): sf=0, N=0, opc=10 → 0x53000000
+    uint32_t immr = (32u - shift) & 0x1F;
+    uint32_t imms = (31u - shift) & 0x1F;
+    EmitArm64(buf, 0x53000000u | (immr << 16) | (imms << 10) | (rn << 5) | rd);
+}
+
+/// 32-bit LSR Wd, Wn, #shift (0-31)
+inline void EmitLsr32Imm(CodeBuffer& buf, uint8_t rd, uint8_t rn, uint8_t shift) noexcept {
+    // UBFM (32-bit): sf=0, N=0, opc=10 → 0x53000000
+    EmitArm64(buf, 0x53000000u | (static_cast<uint32_t>(shift) << 16) | (0x1Fu << 10) | (rn << 5) | rd);
+}
+
+/// 32-bit ASR Wd, Wn, #shift (0-31)
+inline void EmitAsr32Imm(CodeBuffer& buf, uint8_t rd, uint8_t rn, uint8_t shift) noexcept {
+    // SBFM (32-bit): sf=0, N=0, opc=00 → 0x13000000
+    EmitArm64(buf, 0x13000000u | (static_cast<uint32_t>(shift) << 16) | (0x1Fu << 10) | (rn << 5) | rd);
 }
 
 // ═══════════════════════════════════════════════════════════════════════════

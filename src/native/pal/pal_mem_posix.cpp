@@ -77,7 +77,10 @@ void PalGetMemoryStatus(PalMemoryStatus& out) noexcept {
                 char* val = line;
                 while (*val && *val != ':') ++val;
                 if (*val == ':') {
-                    long kb = std::atol(val + 1);
+                    errno = 0;
+                    char* end = nullptr;
+                    long kb = std::strtol(val + 1, &end, 10);
+                    if (end == val + 1 || errno == ERANGE) continue;
                     out.total_phys = static_cast<int64_t>(kb) * 1024;
                 }
             } else if (line[3] == 'A' && line[4] == 'v' && line[5] == 'a' && line[6] == 'i' && line[7] == 'l') {
@@ -85,7 +88,10 @@ void PalGetMemoryStatus(PalMemoryStatus& out) noexcept {
                 char* val = line;
                 while (*val && *val != ':') ++val;
                 if (*val == ':') {
-                    long kb = std::atol(val + 1);
+                    errno = 0;
+                    char* end = nullptr;
+                    long kb = std::strtol(val + 1, &end, 10);
+                    if (end == val + 1 || errno == ERANGE) continue;
                     out.avail_phys = static_cast<int64_t>(kb) * 1024;
                 }
             }
