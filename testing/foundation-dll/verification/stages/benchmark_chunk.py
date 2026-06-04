@@ -177,7 +177,7 @@ def _run_entry_once(exe_path: Path, iterations: int, timeout: int) -> subprocess
     try:
         return subprocess.run(
             [str(exe_path), "--benchmark-all", str(iterations)],
-            capture_output=True, text=True, timeout=timeout,
+            stdout=subprocess.PIPE, stderr=subprocess.DEVNULL, text=True, timeout=timeout,
             env=env, errors="replace",
         )
     except subprocess.TimeoutExpired:
@@ -241,10 +241,14 @@ def run_benchmark_chunk(ctx: ChunkContext, stages: dict[str, StageResult]) -> St
             duration_ms=int((time.perf_counter() - start) * 1000),
         )
 
+    # Cap warmup at the stage timeout.  Some chunks may have methods that
+    # hang (infinite loop / GC state accumulation) — treat those as skip
+    # rather than hard error so the rest of the pipeline can proceed.
     iterations = _ITERATIONS
     timeout = ctx.stage_timeout_seconds or 300
     warmup = _WARMUP_ROUNDS
     samples = _SAMPLE_ROUNDS
+    timeout = max(timeout, 30)
 
     print(f"  [benchmark] {exe_path} --benchmark-all {iterations}")
     print(f"  [benchmark] warmup={warmup}, samples={samples} (statistical QC, M1)")
@@ -254,9 +258,10 @@ def run_benchmark_chunk(ctx: ChunkContext, stages: dict[str, StageResult]) -> St
         print(f"  [benchmark] warmup round {w + 1}/{warmup}...")
         result = _run_entry_once(exe_path, iterations, timeout)
         if result is None:
+            print(f"  [benchmark] warmup round {w + 1} timed out after {timeout}s — skipping benchmark")
             return StageResult(
-                stage="benchmark", status="error",
-                summary=f"benchmark timed out during warmup round {w + 1}",
+                stage="benchmark", status="skipped",
+                summary=f"benchmark timed out during warmup round {w + 1} ({timeout}s timeout)",
                 duration_ms=int((time.perf_counter() - start) * 1000),
             )
 

@@ -1,0 +1,346 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Security.Claims",
+  "generatedAt": "2026-06-02T02:15:40.4670632Z",
+  "totalMethods": 28,
+  "methods": [
+    {
+      "methodSubjectId": "System.Security.Claims/System.Security.Claims.Claim::Clone:System.Security.Claims.Claim()",
+      "namespace": "System.Security.Claims",
+      "declaringType": "System.Security.Claims.Claim",
+      "methodName": "Clone",
+      "returnType": "System.Security.Claims.Claim",
+      "parameters": [],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Security.Claims/System.Security.Claims.Claim::Clone:System.Security.Claims.Claim(System.Security.Claims.ClaimsIdentity)",
+      "namespace": "System.Security.Claims",
+      "declaringType": "System.Security.Claims.Claim",
+      "methodName": "Clone",
+      "returnType": "System.Security.Claims.Claim",
+      "parameters": [
+        "System.Security.Claims.ClaimsIdentity"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Security.Claims/System.Security.Claims.Claim::WriteTo:System.Void(System.IO.BinaryWriter)",
+      "namespace": "System.Security.Claims",
+      "declaringType": "System.Security.Claims.Claim",
+      "methodName": "WriteTo",
+      "returnType": "System.Void",
+      "parameters": [
+        "System.IO.BinaryWriter"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Security.Claims/System.Security.Claims.ClaimsIdentity::AddClaim:System.Void(System.Security.Claims.Claim)",
+      "namespace": "System.Security.Claims",
+      "declaringType": "System.Security.Claims.ClaimsIdentity",
+      "methodName": "AddClaim",
+      "returnType": "System.Void",
+      "parameters": [
+        "System.Security.Claims.Claim"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Security.Claims/System.Security.Claims.ClaimsIdentity::AddClaims:System.Void(System.Collections.Generic.IEnumerable`1[[System.Security.Claims.Claim, System.Security.Claims, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a]])",
+      "namespace": "System.Security.Claims",
+      "declaringType": "System.Security.Claims.ClaimsIdentity",
+      "methodName": "AddClaims",
+      "returnType": "System.Void",
+      "parameters": [
+        "System.Collections.Generic.IEnumerable`1[[System.Security.Claims.Claim, System.Security.Claims, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a]]"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Security.Claims/System.Security.Claims.ClaimsIdentity::Clone:System.Security.Claims.ClaimsIdentity()",
+      "namespace": "System.Security.Claims",
+      "declaringType": "System.Security.Claims.ClaimsIdentity",
+      "methodName": "Clone",
+      "returnType": "System.Security.Claims.ClaimsIdentity",
+      "parameters": [],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Security.Claims/System.Security.Claims.ClaimsIdentity::FindAll:System.Collections.Generic.IEnumerable`1[[System.Security.Claims.Claim, System.Security.Claims, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a]](System.Predicate`1[[System.Security.Claims.Claim, System.Security.Claims, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a]])",
+      "namespace": "System.Security.Claims",
+      "declaringType": "System.Security.Claims.ClaimsIdentity",
+      "methodName": "FindAll",
+      "returnType": "System.Collections.Generic.IEnumerable`1[[System.Security.Claims.Claim, System.Security.Claims, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a]]",
+      "parameters": [
+        "System.Predicate`1[[System.Security.Claims.Claim, System.Security.Claims, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a]]"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Security.Claims/System.Security.Claims.ClaimsIdentity::FindAll:System.Collections.Generic.IEnumerable`1[[System.Security.Claims.Claim, System.Security.Claims, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a]](System.String)",
+      "namespace": "System.Security.Claims",
+      "declaringType": "System.Security.Claims.ClaimsIdentity",
+      "methodName": "FindAll",
+      "returnType": "System.Collections.Generic.IEnumerable`1[[System.Security.Claims.Claim, System.Security.Claims, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a]]",
+      "parameters": [
+        "System.String"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Security.Claims/System.Security.Claims.ClaimsIdentity::FindFirst:System.Security.Claims.Claim(System.Predicate`1[[System.Security.Claims.Claim, System.Security.Claims, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a]])",
+      "namespace": "System.Security.Claims",
+      "declaringType": "System.Security.Claims.ClaimsIdentity",
+      "methodName": "FindFirst",
+      "returnType": "System.Security.Claims.Claim",
+      "parameters": [
+        "System.Predicate`1[[System.Security.Claims.Claim, System.Security.Claims, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a]]"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Security.Claims/System.Security.Claims.ClaimsIdentity::FindFirst:System.Security.Claims.Claim(System.String)",
+      "namespace": "System.Security.Claims",
+      "declaringType": "System.Security.Claims.ClaimsIdentity",
+      "methodName": "FindFirst",
+      "returnType": "System.Security.Claims.Claim",
+      "parameters": [
+        "System.String"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Security.Claims/System.Security.Claims.ClaimsIdentity::HasClaim:System.Boolean(System.Predicate`1[[System.Security.Claims.Claim, System.Security.Claims, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a]])",
+      "namespace": "System.Security.Claims",
+      "declaringType": "System.Security.Claims.ClaimsIdentity",
+      "methodName": "HasClaim",
+      "returnType": "System.Boolean",
+      "parameters": [
+        "System.Predicate`1[[System.Security.Claims.Claim, System.Security.Claims, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a]]"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Security.Claims/System.Security.Claims.ClaimsIdentity::HasClaim:System.Boolean(System.String,System.String)",
+      "namespace": "System.Security.Claims",
+      "declaringType": "System.Security.Claims.ClaimsIdentity",
+      "methodName": "HasClaim",
+      "returnType": "System.Boolean",
+      "parameters": [
+        "System.String",
+        "System.String"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Security.Claims/System.Security.Claims.ClaimsIdentity::RemoveClaim:System.Void(System.Security.Claims.Claim)",
+      "namespace": "System.Security.Claims",
+      "declaringType": "System.Security.Claims.ClaimsIdentity",
+      "methodName": "RemoveClaim",
+      "returnType": "System.Void",
+      "parameters": [
+        "System.Security.Claims.Claim"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Security.Claims/System.Security.Claims.ClaimsIdentity::TryRemoveClaim:System.Boolean(System.Security.Claims.Claim)",
+      "namespace": "System.Security.Claims",
+      "declaringType": "System.Security.Claims.ClaimsIdentity",
+      "methodName": "TryRemoveClaim",
+      "returnType": "System.Boolean",
+      "parameters": [
+        "System.Security.Claims.Claim"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Security.Claims/System.Security.Claims.ClaimsIdentity::WriteTo:System.Void(System.IO.BinaryWriter)",
+      "namespace": "System.Security.Claims",
+      "declaringType": "System.Security.Claims.ClaimsIdentity",
+      "methodName": "WriteTo",
+      "returnType": "System.Void",
+      "parameters": [
+        "System.IO.BinaryWriter"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Security.Claims/System.Security.Claims.ClaimsPrincipal::AddIdentities:System.Void(System.Collections.Generic.IEnumerable`1[[System.Security.Claims.ClaimsIdentity, System.Security.Claims, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a]])",
+      "namespace": "System.Security.Claims",
+      "declaringType": "System.Security.Claims.ClaimsPrincipal",
+      "methodName": "AddIdentities",
+      "returnType": "System.Void",
+      "parameters": [
+        "System.Collections.Generic.IEnumerable`1[[System.Security.Claims.ClaimsIdentity, System.Security.Claims, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a]]"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Security.Claims/System.Security.Claims.ClaimsPrincipal::AddIdentity:System.Void(System.Security.Claims.ClaimsIdentity)",
+      "namespace": "System.Security.Claims",
+      "declaringType": "System.Security.Claims.ClaimsPrincipal",
+      "methodName": "AddIdentity",
+      "returnType": "System.Void",
+      "parameters": [
+        "System.Security.Claims.ClaimsIdentity"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Security.Claims/System.Security.Claims.ClaimsPrincipal::Clone:System.Security.Claims.ClaimsPrincipal()",
+      "namespace": "System.Security.Claims",
+      "declaringType": "System.Security.Claims.ClaimsPrincipal",
+      "methodName": "Clone",
+      "returnType": "System.Security.Claims.ClaimsPrincipal",
+      "parameters": [],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Security.Claims/System.Security.Claims.ClaimsPrincipal::FindAll:System.Collections.Generic.IEnumerable`1[[System.Security.Claims.Claim, System.Security.Claims, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a]](System.Predicate`1[[System.Security.Claims.Claim, System.Security.Claims, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a]])",
+      "namespace": "System.Security.Claims",
+      "declaringType": "System.Security.Claims.ClaimsPrincipal",
+      "methodName": "FindAll",
+      "returnType": "System.Collections.Generic.IEnumerable`1[[System.Security.Claims.Claim, System.Security.Claims, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a]]",
+      "parameters": [
+        "System.Predicate`1[[System.Security.Claims.Claim, System.Security.Claims, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a]]"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Security.Claims/System.Security.Claims.ClaimsPrincipal::FindAll:System.Collections.Generic.IEnumerable`1[[System.Security.Claims.Claim, System.Security.Claims, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a]](System.String)",
+      "namespace": "System.Security.Claims",
+      "declaringType": "System.Security.Claims.ClaimsPrincipal",
+      "methodName": "FindAll",
+      "returnType": "System.Collections.Generic.IEnumerable`1[[System.Security.Claims.Claim, System.Security.Claims, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a]]",
+      "parameters": [
+        "System.String"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Security.Claims/System.Security.Claims.ClaimsPrincipal::FindFirst:System.Security.Claims.Claim(System.Predicate`1[[System.Security.Claims.Claim, System.Security.Claims, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a]])",
+      "namespace": "System.Security.Claims",
+      "declaringType": "System.Security.Claims.ClaimsPrincipal",
+      "methodName": "FindFirst",
+      "returnType": "System.Security.Claims.Claim",
+      "parameters": [
+        "System.Predicate`1[[System.Security.Claims.Claim, System.Security.Claims, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a]]"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Security.Claims/System.Security.Claims.ClaimsPrincipal::FindFirst:System.Security.Claims.Claim(System.String)",
+      "namespace": "System.Security.Claims",
+      "declaringType": "System.Security.Claims.ClaimsPrincipal",
+      "methodName": "FindFirst",
+      "returnType": "System.Security.Claims.Claim",
+      "parameters": [
+        "System.String"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Security.Claims/System.Security.Claims.ClaimsPrincipal::HasClaim:System.Boolean(System.Predicate`1[[System.Security.Claims.Claim, System.Security.Claims, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a]])",
+      "namespace": "System.Security.Claims",
+      "declaringType": "System.Security.Claims.ClaimsPrincipal",
+      "methodName": "HasClaim",
+      "returnType": "System.Boolean",
+      "parameters": [
+        "System.Predicate`1[[System.Security.Claims.Claim, System.Security.Claims, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a]]"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Security.Claims/System.Security.Claims.ClaimsPrincipal::HasClaim:System.Boolean(System.String,System.String)",
+      "namespace": "System.Security.Claims",
+      "declaringType": "System.Security.Claims.ClaimsPrincipal",
+      "methodName": "HasClaim",
+      "returnType": "System.Boolean",
+      "parameters": [
+        "System.String",
+        "System.String"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Security.Claims/System.Security.Claims.ClaimsPrincipal::IsInRole:System.Boolean(System.String)",
+      "namespace": "System.Security.Claims",
+      "declaringType": "System.Security.Claims.ClaimsPrincipal",
+      "methodName": "IsInRole",
+      "returnType": "System.Boolean",
+      "parameters": [
+        "System.String"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Security.Claims/System.Security.Claims.ClaimsPrincipal::WriteTo:System.Void(System.IO.BinaryWriter)",
+      "namespace": "System.Security.Claims",
+      "declaringType": "System.Security.Claims.ClaimsPrincipal",
+      "methodName": "WriteTo",
+      "returnType": "System.Void",
+      "parameters": [
+        "System.IO.BinaryWriter"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Security.Claims/System.Security.Principal.GenericIdentity::Clone:System.Security.Claims.ClaimsIdentity()",
+      "namespace": "System.Security.Principal",
+      "declaringType": "System.Security.Principal.GenericIdentity",
+      "methodName": "Clone",
+      "returnType": "System.Security.Claims.ClaimsIdentity",
+      "parameters": [],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Security.Claims/System.Security.Principal.GenericPrincipal::IsInRole:System.Boolean(System.String)",
+      "namespace": "System.Security.Principal",
+      "declaringType": "System.Security.Principal.GenericPrincipal",
+      "methodName": "IsInRole",
+      "returnType": "System.Boolean",
+      "parameters": [
+        "System.String"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    }
+  ],
+  "namespaces": {
+    "System.Security.Claims": {
+      "methodCount": 26
+    },
+    "System.Security.Principal": {
+      "methodCount": 2
+    }
+  }
+}

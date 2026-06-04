@@ -1,0 +1,128 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.ObjectModel",
+  "generatedAt": "2026-06-02T02:04:59.037910+00:00",
+  "partitionStrategy": "namespace",
+  "maxMethodsPerChunk": 500,
+  "totalChunks": 1,
+  "chunks": [
+    {
+      "slug": "global-ns",
+      "namespaces": [
+        "System.Collections.Specialized",
+        "System.ComponentModel"
+      ],
+      "methodCount": 27,
+      "methods": [
+        {
+          "methodSubjectId": "System.ObjectModel/System.Collections.Specialized.NotifyCollectionChangedEventHandler::BeginInvoke:System.IAsyncResult(System.Object,System.Collections.Specialized.NotifyCollectionChangedEventArgs,System.AsyncCallback,System.Object)",
+          "index": 0
+        },
+        {
+          "methodSubjectId": "System.ObjectModel/System.Collections.Specialized.NotifyCollectionChangedEventHandler::EndInvoke:System.Void(System.IAsyncResult)",
+          "index": 1
+        },
+        {
+          "methodSubjectId": "System.ObjectModel/System.Collections.Specialized.NotifyCollectionChangedEventHandler::Invoke:System.Void(System.Object,System.Collections.Specialized.NotifyCollectionChangedEventArgs)",
+          "index": 2
+        },
+        {
+          "methodSubjectId": "System.ObjectModel/System.Collections.Specialized.ReadOnlyList::Add:System.Int32(System.Object)",
+          "index": 3
+        },
+        {
+          "methodSubjectId": "System.ObjectModel/System.Collections.Specialized.ReadOnlyList::Clear:System.Void()",
+          "index": 4
+        },
+        {
+          "methodSubjectId": "System.ObjectModel/System.Collections.Specialized.ReadOnlyList::Contains:System.Boolean(System.Object)",
+          "index": 5
+        },
+        {
+          "methodSubjectId": "System.ObjectModel/System.Collections.Specialized.ReadOnlyList::CopyTo:System.Void(System.Array,System.Int32)",
+          "index": 6
+        },
+        {
+          "methodSubjectId": "System.ObjectModel/System.Collections.Specialized.ReadOnlyList::GetEnumerator:System.Collections.IEnumerator()",
+          "index": 7
+        },
+        {
+          "methodSubjectId": "System.ObjectModel/System.Collections.Specialized.ReadOnlyList::IndexOf:System.Int32(System.Object)",
+          "index": 8
+        },
+        {
+          "methodSubjectId": "System.ObjectModel/System.Collections.Specialized.ReadOnlyList::Insert:System.Void(System.Int32,System.Object)",
+          "index": 9
+        },
+        {
+          "methodSubjectId": "System.ObjectModel/System.Collections.Specialized.ReadOnlyList::Remove:System.Void(System.Object)",
+          "index": 10
+        },
+        {
+          "methodSubjectId": "System.ObjectModel/System.Collections.Specialized.ReadOnlyList::RemoveAt:System.Void(System.Int32)",
+          "index": 11
+        },
+        {
+          "methodSubjectId": "System.ObjectModel/System.Collections.Specialized.SingleItemReadOnlyList::Add:System.Int32(System.Object)",
+          "index": 12
+        },
+        {
+          "methodSubjectId": "System.ObjectModel/System.Collections.Specialized.SingleItemReadOnlyList::Clear:System.Void()",
+          "index": 13
+        },
+        {
+          "methodSubjectId": "System.ObjectModel/System.Collections.Specialized.SingleItemReadOnlyList::Contains:System.Boolean(System.Object)",
+          "index": 14
+        },
+        {
+          "methodSubjectId": "System.ObjectModel/System.Collections.Specialized.SingleItemReadOnlyList::CopyTo:System.Void(System.Array,System.Int32)",
+          "index": 15
+        },
+        {
+          "methodSubjectId": "System.ObjectModel/System.Collections.Specialized.SingleItemReadOnlyList::GetEnumerator:System.Collections.IEnumerator()",
+          "index": 16
+        },
+        {
+          "methodSubjectId": "System.ObjectModel/System.Collections.Specialized.SingleItemReadOnlyList::IndexOf:System.Int32(System.Object)",
+          "index": 17
+        },
+        {
+          "methodSubjectId": "System.ObjectModel/System.Collections.Specialized.SingleItemReadOnlyList::Insert:System.Void(System.Int32,System.Object)",
+          "index": 18
+        },
+        {
+          "methodSubjectId": "System.ObjectModel/System.Collections.Specialized.SingleItemReadOnlyList::Remove:System.Void(System.Object)",
+          "index": 19
+        },
+        {
+          "methodSubjectId": "System.ObjectModel/System.Collections.Specialized.SingleItemReadOnlyList::RemoveAt:System.Void(System.Int32)",
+          "index": 20
+        },
+        {
+          "methodSubjectId": "System.ObjectModel/System.ComponentModel.PropertyChangedEventHandler::BeginInvoke:System.IAsyncResult(System.Object,System.ComponentModel.PropertyChangedEventArgs,System.AsyncCallback,System.Object)",
+          "index": 21
+        },
+        {
+          "methodSubjectId": "System.ObjectModel/System.ComponentModel.PropertyChangedEventHandler::EndInvoke:System.Void(System.IAsyncResult)",
+          "index": 22
+        },
+        {
+          "methodSubjectId": "System.ObjectModel/System.ComponentModel.PropertyChangedEventHandler::Invoke:System.Void(System.Object,System.ComponentModel.PropertyChangedEventArgs)",
+          "index": 23
+        },
+        {
+          "methodSubjectId": "System.ObjectModel/System.ComponentModel.PropertyChangingEventHandler::BeginInvoke:System.IAsyncResult(System.Object,System.ComponentModel.PropertyChangingEventArgs,System.AsyncCallback,System.Object)",
+          "index": 24
+        },
+        {
+          "methodSubjectId": "System.ObjectModel/System.ComponentModel.PropertyChangingEventHandler::EndInvoke:System.Void(System.IAsyncResult)",
+          "index": 25
+        },
+        {
+          "methodSubjectId": "System.ObjectModel/System.ComponentModel.PropertyChangingEventHandler::Invoke:System.Void(System.Object,System.ComponentModel.PropertyChangingEventArgs)",
+          "index": 26
+        }
+      ]
+    }
+  ]
+}

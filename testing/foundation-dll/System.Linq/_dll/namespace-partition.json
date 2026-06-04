@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Linq",
+  "generatedAt": "2026-06-02T02:03:28.885502+00:00",
+  "partitionStrategy": "namespace",
+  "maxMethodsPerChunk": 500,
+  "totalChunks": 0,
+  "chunks": []
+}

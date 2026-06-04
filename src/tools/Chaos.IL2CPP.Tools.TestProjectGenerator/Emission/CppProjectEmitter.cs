@@ -204,6 +204,67 @@ public sealed class CppProjectEmitter
             File.WriteAllText(microbenchPath, microbenchStub);
         }
 
+        // ChaosFindExternalTypeDescByStableId stub — the prebuilt chaos_runtime_core.lib
+        // in the SDK has enum_stubs.obj that references this function, but the lib was
+        // built without including type_resolve.cpp.  In test environments dynamic type
+        // registration is not used, so returning nullptr is always correct.
+        var externalTypeDescStubPath = Path.Combine(outputDir, "chaos_stub_ChaosFindExternalTypeDescByStableId.cpp");
+        if (!File.Exists(externalTypeDescStubPath))
+        {
+            File.WriteAllText(externalTypeDescStubPath,
+                "// Auto-generated stub for ChaosFindExternalTypeDescByStableId.\n"
+                + "// The real definition is in type_resolve.cpp (part of chaos_runtime_core.lib),\n"
+                + "// but the prebuilt SDK lib was built without this function.\n"
+                + "// In test environments dynamic type registration is not used,\n"
+                + "// so returning nullptr is always correct.\n"
+                + "#include \"enum_stubs.h\"\n"
+                + "struct ReflectionQueryTypeDescriptor;\n"
+                + "extern \"C\" const ReflectionQueryTypeDescriptor* ChaosFindExternalTypeDescByStableId(\n"
+                + "    uint64_t /*stable_id*/) noexcept { return nullptr; }\n");
+        }
+
+        // ApplyPatchFromMemoryEx/Unpatch stubs — patch_loader.cpp may not be included
+        // in the prebuilt chaos_runtime_core.lib shipped with the SDK.  Test environments
+        // don't use hotpatch, so returning nullptr / true is always correct.
+        var patchLoaderStubPath = Path.Combine(outputDir, "chaos_stub_patch_loader.cpp");
+        if (!File.Exists(patchLoaderStubPath))
+        {
+            File.WriteAllText(patchLoaderStubPath,
+                "// Auto-generated stubs for patch_loader functions.\n"
+                + "// The real definitions are in patch_loader.cpp (part of chaos_runtime_core.lib),\n"
+                + "// but the prebuilt SDK lib may not include this file.\n"
+                + "// Test environments don't use hotpatch, so stubs are sufficient.\n"
+                + "#include <cstdint>\n"
+                + "#include <cstddef>\n"
+                + "namespace chaos { namespace il2cpp { namespace runtime_core {\n"
+                + "struct PatchContext;\n"
+                + "PatchContext* ApplyPatchFromMemoryEx(const void*, size_t, const char*,\n"
+                + "    const char* const*, const char* const*, int) noexcept { return nullptr; }\n"
+                + "bool Unpatch(PatchContext*) noexcept { return true; }\n"
+                + "} } }\n");
+        }
+
+        // Async yield stubs — async_stubs.cpp is in the SDK runtime_stubs/ but is not
+        // compiled by the test project's CMakeLists.txt (only profile_globals.cpp is).
+        // The generated code for async methods (e.g. Task.Yield) references these symbols.
+        // Stubs return zero/success values sufficient for verification dispatch.
+        var asyncStubPath = Path.Combine(outputDir, "chaos_stub_async.cpp");
+        if (!File.Exists(asyncStubPath))
+        {
+            File.WriteAllText(asyncStubPath,
+                "// Auto-generated stubs for async runtime helpers.\n"
+                + "// The real implementations are in async_stubs.cpp (part of\n"
+                + "// chaos_runtime_core.lib) but the SDK prebuilt lib may not\n"
+                + "// include them.  Test entry points don't await, so stubs suffice.\n"
+                + "#include <chaos/native_types.h>\n"
+                + "extern \"C\" {\n"
+                + "CHAOS_IL2CPP_INTPTR chaos_async_yield_create(void) noexcept { return 0; }\n"
+                + "CHAOS_IL2CPP_INTPTR chaos_async_yield_get_awaiter(CHAOS_IL2CPP_INTPTR) noexcept { return 0; }\n"
+                + "CHAOS_IL2CPP_INT32 chaos_async_yield_get_is_completed(CHAOS_IL2CPP_INTPTR) noexcept { return 1; }\n"
+                + "void chaos_async_yield_get_result(CHAOS_IL2CPP_INTPTR) noexcept {}\n"
+                + "}\n");
+        }
+
 
         // chaos-sdk cmake files
         var cmakeDir = Path.Combine(sdkDst, "cmake");
