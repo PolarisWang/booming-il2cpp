@@ -17,17 +17,15 @@
 
 namespace chaos::il2cpp::runtime_core {
 
-using chaos::il2cpp::runtime::kRuntimeConfig;
-
 void EagerCompilePatchMethods(PatchMethod* methods, uint32_t method_count) noexcept {
-    if constexpr (!kRuntimeConfig.jit) return;
+#if CHAOS_IL2CPP_ENABLE_JIT
     if (methods == nullptr || method_count == 0) return;
 
     for (uint32_t i = 0; i < method_count; ++i) {
         auto& pm = methods[i];
 
         // Skip methods that already have a native code path.
-        if (pm.aot_entry != nullptr) continue;
+        if (pm.cached_native_method != nullptr) continue;
         if (pm.tier_state.load(std::memory_order_acquire) >= PatchMethod::kJitted) continue;
 
         // Need pre-allocated register IR — the JSON path (v1) is too slow
@@ -54,12 +52,15 @@ void EagerCompilePatchMethods(PatchMethod* methods, uint32_t method_count) noexc
         auto* nm = chaos::il2cpp::jit::Compile(*rm, cfg);
         if (nm == nullptr) continue;
 
-        // Cache as both JIT method and AOT entry so both dispatch paths
-        // (Step A0 and Step A) can use the generated code.
+        // Cache on PatchMethod and sync to dispatch entry so both
+        // Step A0 and Step A paths can use the generated code.
         pm.cached_native_method = nm;
-        pm.aot_entry = nm->code;
+        if (auto* entry = static_cast<HotpatchEntryV0*>(pm.dispatch_entry); entry != nullptr) {
+            entry->direct_ptr = nm->code;
+        }
         pm.tier_state.store(PatchMethod::kJitted, std::memory_order_release);
     }
+#endif
 }
 
 }  // namespace chaos::il2cpp::runtime_core

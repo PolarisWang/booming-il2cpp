@@ -116,20 +116,18 @@ void LinuxSehHandler::ReleaseLock() noexcept {
 
 void LinuxSehHandler::EnqueueDemotedCode(void* code_start, uint32_t code_size) noexcept {
     if (code_start == nullptr || code_size == 0) return;
-    for (uint32_t i = 0; i < kMaxPendingFreeRegions; i++) {
-        if (pending_free_[i].active && pending_free_[i].code_start == code_start) return;
+    for (auto& region : pending_free_) {
+        if (region.active && region.code_start == code_start) return;
     }
-    for (uint32_t i = 0; i < kMaxPendingFreeRegions; i++) {
-        if (!pending_free_[i].active) {
-            pending_free_[i].code_start = code_start;
-            pending_free_[i].code_size  = code_size;
-            pending_free_[i].active     = true;
-            pending_free_count_++;
+    for (auto& region : pending_free_) {
+        if (!region.active) {
+            region.code_start = code_start;
+            region.code_size  = code_size;
+            region.active     = true;
             return;
         }
     }
-    CHAOS_IL2CPP_LOG_WARN_M("codegen",
-        "pending-free table full ({} entries)", kMaxPendingFreeRegions);
+    pending_free_.push_back({code_start, code_size, true});
 }
 
 void LinuxSehHandler::InvalidateLookupCache() noexcept {
@@ -149,21 +147,16 @@ void LinuxSehHandler::RegisterCode(void* code_start, uint32_t code_size,
 
     {
         JitRegistryLockGuard lock(this);
-        if (count_ >= kMaxJitCodeEntries) {
-            CHAOS_IL2CPP_LOG_WARN_M("codegen", "RegisterCode: registry full ({})", kMaxJitCodeEntries);
-            return;
-        }
-        entries_[count_].code_start = code_start;
-        entries_[count_].code_size  = code_size;
-        entries_[count_].nm         = nm;
-        entries_[count_].patch_method_token = patch_method_token;
-        // Capture domain_id at JIT compilation time so DemoteByDomainId
-        // can find entries belonging to an unloaded domain.
+        JitCodeEntry entry;
+        entry.code_start = code_start;
+        entry.code_size  = code_size;
+        entry.nm         = nm;
+        entry.patch_method_token = patch_method_token;
         {
             auto* domain = chaos::il2cpp::memory_domain::CurrentDomain();
-            entries_[count_].domain_id = domain ? domain->domain_id : 0;
+            entry.domain_id = domain ? domain->domain_id : 0;
         }
-        count_++;
+        entries_.push_back(entry);
     }
 
     CHAOS_IL2CPP_LOG_DEBUG_M("codegen",
@@ -184,12 +177,15 @@ void LinuxSehHandler::UnregisterCode(void* code_start) noexcept {
     if (code_start == nullptr) return;
     {
         JitRegistryLockGuard lock(this);
-        for (uint32_t i = 0; i < count_; i++) {
-            if (entries_[i].code_start == code_start) {
+        for (auto& entry : entries_) {
+            if (entry.code_start == code_start) {
+                if (entry.nm != nullptr) {
+                    const_cast<JitMethod*>(entry.nm)->code_managed_externally = true;
+                }
                 EnqueueDemotedCode(
-                    const_cast<void*>(entries_[i].code_start),
-                    entries_[i].code_size);
-                entries_[i].nm = nullptr;
+                    const_cast<void*>(entry.code_start),
+                    entry.code_size);
+                entry.nm = nullptr;
                 break;
             }
         }
@@ -208,8 +204,7 @@ const JitMethod* LinuxSehHandler::FindCodeByAddress(const void* address) noexcep
         return g_jit_lookup_cache.nm;
     }
 
-    for (uint32_t i = 0; i < count_; i++) {
-        const auto& entry = entries_[i];
+    for (const auto& entry : entries_) {
         const uint8_t* start = static_cast<const uint8_t*>(entry.code_start);
         if (start == nullptr) continue;
         const uint8_t* end = start + entry.code_size;
@@ -229,13 +224,14 @@ uint32_t LinuxSehHandler::DemoteByToken(uint32_t method_token) noexcept {
     uint32_t count = 0;
     {
         JitRegistryLockGuard lock(this);
-        for (uint32_t i = 0; i < count_; i++) {
-            if (entries_[i].patch_method_token == method_token &&
-                entries_[i].nm != nullptr) {
+        for (auto& entry : entries_) {
+            if (entry.patch_method_token == method_token &&
+                entry.nm != nullptr) {
+                const_cast<JitMethod*>(entry.nm)->code_managed_externally = true;
                 EnqueueDemotedCode(
-                    const_cast<void*>(entries_[i].code_start),
-                    entries_[i].code_size);
-                entries_[i].nm = nullptr;
+                    const_cast<void*>(entry.code_start),
+                    entry.code_size);
+                entry.nm = nullptr;
                 count++;
             }
         }
@@ -253,13 +249,14 @@ uint32_t LinuxSehHandler::DemoteByDomainId(uint32_t domain_id) noexcept {
     uint32_t count = 0;
     {
         JitRegistryLockGuard lock(this);
-        for (uint32_t i = 0; i < count_; i++) {
-            if (entries_[i].domain_id == domain_id &&
-                entries_[i].nm != nullptr) {
+        for (auto& entry : entries_) {
+            if (entry.domain_id == domain_id &&
+                entry.nm != nullptr) {
+                const_cast<JitMethod*>(entry.nm)->code_managed_externally = true;
                 EnqueueDemotedCode(
-                    const_cast<void*>(entries_[i].code_start),
-                    entries_[i].code_size);
-                entries_[i].nm = nullptr;
+                    const_cast<void*>(entry.code_start),
+                    entry.code_size);
+                entry.nm = nullptr;
                 count++;
             }
         }
@@ -277,15 +274,16 @@ uint32_t LinuxSehHandler::DemoteByCallSiteToken(uint32_t method_token) noexcept 
     uint32_t count = 0;
     {
         JitRegistryLockGuard lock(this);
-        for (uint32_t i = 0; i < count_; i++) {
-            const auto* nm = entries_[i].nm;
+        for (auto& entry : entries_) {
+            const auto* nm = entry.nm;
             if (nm == nullptr) continue;
             for (uint32_t j = 0; j < nm->call_site_count; j++) {
                 if (nm->call_sites[j].method_token == method_token) {
+                    const_cast<JitMethod*>(nm)->code_managed_externally = true;
                     EnqueueDemotedCode(
-                        const_cast<void*>(entries_[i].code_start),
-                        entries_[i].code_size);
-                    entries_[i].nm = nullptr;
+                        const_cast<void*>(entry.code_start),
+                        entry.code_size);
+                    entry.nm = nullptr;
                     count++;
                     break;
                 }
@@ -301,19 +299,16 @@ uint32_t LinuxSehHandler::DemoteByCallSiteToken(uint32_t method_token) noexcept 
 }
 
 void LinuxSehHandler::ReclaimDemoted() noexcept {
-    for (uint32_t i = 0; i < kMaxPendingFreeRegions; i++) {
-        if (!pending_free_[i].active) continue;
-        int ret = munmap(pending_free_[i].code_start, pending_free_[i].code_size);
+    for (auto& region : pending_free_) {
+        if (!region.active) continue;
+        int ret = munmap(region.code_start, region.code_size);
         if (ret != 0) {
             CHAOS_IL2CPP_LOG_DEBUG_M("codegen",
                 "ReclaimDemoted: munmap({}, {}) failed",
-                pending_free_[i].code_start, pending_free_[i].code_size);
+                region.code_start, region.code_size);
         }
-        pending_free_[i].active = false;
-        pending_free_[i].code_start = nullptr;
-        pending_free_[i].code_size = 0;
     }
-    pending_free_count_ = 0;
+    pending_free_.clear();
 }
 
 // ═══════════════════════════════════════════════════════════════════════════
@@ -697,6 +692,9 @@ static void OnGcSafepoint(chaos::il2cpp::runtime_core::GcEvent /*event*/,
 }
 
 void LinuxSehHandler::Initialize() noexcept {
+    pending_free_.reserve(256);
+    entries_.reserve(4096);
+
     // Register signal handlers for T4 exception dispatch.
     struct sigaction sa;
     std::memset(&sa, 0, sizeof(sa));

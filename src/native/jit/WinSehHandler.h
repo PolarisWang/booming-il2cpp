@@ -6,6 +6,7 @@
 
 #include <atomic>
 #include <cstdint>
+#include <vector>
 
 namespace chaos::il2cpp::jit {
 
@@ -43,9 +44,8 @@ public:
 private:
     // ── T4 Code Registry ──────────────────────────────────────────────────
     // Maps code address ranges back to JitMethod for VEH lookup.
-    // Fixed-size array (no heap allocation in exception context).
+    // Dynamic vector (no fixed cap; reserve 4096 at init).
     // Thread-safe: entries are append-only, never removed.
-    static constexpr uint32_t kMaxJitCodeEntries = 2048;
 
     struct JitCodeEntry {
         const void*       code_start = nullptr;   // RX code entry point
@@ -55,8 +55,7 @@ private:
         uint32_t          domain_id  = 0;           // 0 = core domain (never unloaded)
     };
 
-    JitCodeEntry entries_[kMaxJitCodeEntries];
-    uint32_t    count_ = 0;
+    std::vector<JitCodeEntry> entries_;
     std::atomic<long> lock_{0};  // spinlock: 0=free, 1=locked
 
     // RAII guard is a friend so it can call AcquireLock/ReleaseLock.
@@ -65,7 +64,7 @@ private:
 
     // ── Pending Free Regions ────────────────────────────────────────────
     // When T4 code is demoted, we defer VirtualFree to the next GC safepoint.
-    static constexpr uint32_t kMaxPendingFreeRegions = 64;
+    // Dynamic vector (reserve 256 at init).
 
     struct PendingFreeRegion {
         void*    code_start = nullptr;
@@ -73,8 +72,7 @@ private:
         bool     active     = false;
     };
 
-    PendingFreeRegion pending_free_[kMaxPendingFreeRegions];
-    uint32_t          pending_free_count_ = 0;
+    std::vector<PendingFreeRegion> pending_free_;
 
     // ── Lookup Cache Generation ─────────────────────────────────────────
     // Global generation counter for TLS lookup cache invalidation.

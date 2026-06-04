@@ -22,7 +22,6 @@ extern CHAOS_IL2CPP_VECTOR(InterpreterValue) g_static_fields;
 
 namespace chaos::il2cpp::interpreter {
 
-using chaos::il2cpp::runtime::kRuntimeConfig;
 // ── Register Allocator ──────────────────────────────────────────────────
 // Linear-scan register allocator.  Walks IRMethod.instructions sequentially,
 // tracking a virtual evaluation stack (uint32_t[256] of virtual register
@@ -2398,8 +2397,8 @@ static void TryOsrPromotion(RegisterFrame& frame,
     auto* rm = static_cast<RegisterMethod*>(pm->cached_reg_method);
     if (rm == nullptr) return;
 
-    if constexpr (kRuntimeConfig.jit) {
-        // Generate native code with full deopt support.
+#if CHAOS_IL2CPP_ENABLE_JIT
+    // Generate native code with full deopt support.
         chaos::il2cpp::jit::CompileConfig cfg;
         cfg.enable_deopt = true;
         cfg.enable_liveness = true;
@@ -2439,7 +2438,7 @@ static void TryOsrPromotion(RegisterFrame& frame,
         pm->cached_native_method = nm;
         pm->tier_state.store(PM::kJitted, std::memory_order_release);
         chaos::il2cpp::jit::RegisterNativeCodeSection(nm->code, nm->code_size, nm);
-    }
+#endif
 }
 
 // ── RegisterExecute ─────────────────────────────────────────────────────
@@ -2464,10 +2463,17 @@ bool RegisterExecute(RegisterFrame& frame,
         // OSR: Detect hot loop backward branch — if the handler took a branch
         // and the target is an earlier instruction, it's a loop backedge.
         if (frame.pc != prev_pc + 1 && frame.pc < prev_pc) {
-            // After deoptimization from T4, use threshold=1 so the method
-            // re-enters native code on the very first backward branch.
-            uint32_t threshold = frame.osr_reenable ? 1 : kOsrLoopThreshold;
-            frame.osr_reenable = false;  // one-shot
+            // Phase B: OSR deopt backoff — after deoptimization, use exponential
+            // backoff on the loop threshold to avoid immediate OSR→deopt bounce.
+            // Each deopt doubles the iterations before OSR retry is attempted.
+            uint32_t threshold = kOsrLoopThreshold;
+            if (frame.osr_reenable) {
+                auto* pm = static_cast<chaos::il2cpp::runtime_core::PatchMethod*>(frame.patch_method);
+                threshold = (pm != nullptr && pm->deopt_count > 0)
+                    ? (kOsrLoopThreshold << std::min(pm->deopt_count, 5u))
+                    : 1u;
+                frame.osr_reenable = false;  // one-shot
+            }
             if (++loop_counter >= threshold) {
                 TryOsrPromotion(frame, instrs, instr_count);
                 if (frame.pc == 0xFFffFFffu) continue;  // OSR took over

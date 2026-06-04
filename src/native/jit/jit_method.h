@@ -188,6 +188,12 @@ struct JitMethod {
     /// callee is hotpatched after it was inlined into this method.  Checked
     /// in JitStubDispatchImpl — when true, triggers recompilation.
     std::atomic<bool> stale{false};
+
+    /// When true, the code memory is managed by the SEH handler's deferred
+    /// free path (EnqueueDemotedCode/ReclaimDemoted).  The ~JitMethod
+    /// destructor will NOT call PalVirtualFree on code — the SEH handler
+    /// owns the deallocation.
+    bool code_managed_externally = false;
 };
 
 }  // namespace chaos::il2cpp::jit

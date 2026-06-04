@@ -1,4 +1,5 @@
 #include "hotpatch_table.h"
+#include "patch_loader.h"  // PatchMethod
 
 #include <algorithm>
 #include <atomic>
@@ -304,6 +305,15 @@ void HotpatchNameRegistry::SetPatchedBySlot(uint32_t module_id, uint32_t slot, b
             if (original_ptr != nullptr && original_ptr != entry->direct_ptr) {
                 entry->direct_ptr = original_ptr;
             }
+        }
+
+        // Save original AOT pointer for deopt demotion recovery.
+        // This captures the correct AOT code address after Gap2 restore,
+        // before DP1-a may override direct_ptr with JIT code.  Phase A
+        // deopt demotion restores entry->direct_ptr from this field.
+        if (method_key != nullptr) {
+            auto* pm = static_cast<PatchMethod*>(method_key);
+            pm->original_aot_ptr = entry->direct_ptr;
         }
 
         // DP1-a: Try to transfer precode-compiled JitMethod ownership to the

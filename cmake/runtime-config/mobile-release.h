@@ -5,10 +5,5 @@
 // ============================================================================
 #pragma once
 
-#include <chaos/runtime/execution_config.h>
-
-namespace chaos::il2cpp::runtime {
-
-inline constexpr ExecutionConfig kRuntimeConfig{false, true, 0};
-
-}
+#define CHAOS_IL2CPP_ENABLE_JIT 0
+#define CHAOS_IL2CPP_ENABLE_AOT 1

@@ -554,10 +554,11 @@ static bool TransferPrecodeOwnership(HotpatchEntryV0* entry, void* method_key) n
 
     auto* pm = static_cast<chaos::il2cpp::runtime_core::PatchMethod*>(method_key);
     pm->cached_native_method = jit;
+    entry->direct_ptr = jit->code;
+    // Release store on tier_state (after direct_ptr write) ensures the
+    // direct_ptr write is visible to any thread that load-acquires tier_state.
     pm->tier_state.store(chaos::il2cpp::runtime_core::PatchMethod::kJitted,
                          std::memory_order_release);
-    pm->aot_entry = jit->code;
-    entry->direct_ptr = jit->code;
 
     // Remove from side-map so JitRecompileToTier1 skips this entry.
     g_precode_side_map.erase(it);
@@ -600,7 +601,6 @@ extern "C" void RegisterJitEntryMethods(const JitEntry* entries, uint32_t count)
         auto* precode = new JitPrecode();
         precode->ir = std::move(rm);
         precode->config = CompileConfig{};
-        precode->config.enable_optimizer = false;
 
         // Step 4: Look up the HotpatchEntryV0 for this method
         precode->entry = GetHotpatchNameRegistry().GetDispatchEntry(
