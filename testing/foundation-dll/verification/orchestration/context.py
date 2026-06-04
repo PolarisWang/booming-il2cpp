@@ -89,6 +89,10 @@ class ChunkContext:
         return self.native_dir / "entry.exe"
 
     @property
+    def entry_jit_exe_path(self) -> Path:
+        return self.native_dir / "entry-jit.exe"
+
+    @property
     def patch_data_path(self) -> Path:
         return self.native_dir / "patch.patchdata"
 
