@@ -114,6 +114,22 @@ public static class Assert
             Fail(message ?? $"Expected '{expected}', got '{actual}'");
     }
 
+    /// <summary>
+    /// Catch-all object overload for type mismatches in auto-generated probe code
+    /// (e.g., comparing a KeyValuePair return to a long-boxed actual).
+    /// Uses default(object) equality (reference + boxed value equality).
+    /// </summary>
+    [Conditional("VERIFY")]
+    public static void AreEqual(object? expected, object? actual, string? message = null)
+    {
+        if (!Equals(expected, actual))
+        {
+            var ex = expected?.ToString() ?? "null";
+            var ac = actual?.ToString() ?? "null";
+            Fail(message ?? $"Expected '{ex}', got '{ac}'");
+        }
+    }
+
     [Conditional("VERIFY")]
     public static void IsNull(object? value, string? message = null)
     {

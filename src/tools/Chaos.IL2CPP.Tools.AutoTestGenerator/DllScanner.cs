@@ -176,6 +176,9 @@ public sealed class DllScanner
         "System.Runtime.CompilerServices.ContractHelper",
         // JsonReaderException is specific to System.Text.Json
         "System.Text.Json.JsonReaderException",
+        // .NET 9 COM marshalling implementation types absent from reference assemblies.
+        "System.Runtime.InteropServices.Marshalling.ComVariantMarshaller",
+        "System.Runtime.InteropServices.Marshalling.ComVariant",
     };
 
     // Marshaller type names that fail C# compilation when concretized.
@@ -263,6 +266,31 @@ public sealed class DllScanner
                 throw new InvalidOperationException(
                     $"Cannot concretize generic type definition '{typeFullName}'. " +
                     "Generic type definitions are not directly supported.");
+            }
+        }
+
+        // ── Skip generic types where a type argument violates new() constraint ──
+        // Some constructed generic types in the assembly use abstract types as type
+        // arguments for generic parameters with 'new()' constraint (e.g.,
+        // ReferenceHandler<ReferenceResolver> where ReferenceResolver is abstract).
+        // C# requires all type arguments to satisfy constraints even for default(T)!.
+        if (targetType.IsGenericType && !targetType.IsGenericTypeDefinition)
+        {
+            var gtd = targetType.GetGenericTypeDefinition();
+            var genericArgs = targetType.GetGenericArguments();
+            var genericParams = gtd.GetGenericArguments();
+            for (int i = 0; i < genericParams.Length; i++)
+            {
+                var attrs = genericParams[i].GenericParameterAttributes;
+                if (attrs.HasFlag(GenericParameterAttributes.DefaultConstructorConstraint))
+                {
+                    if (genericArgs[i] is { IsAbstract: true, IsInterface: false })
+                    {
+                        throw new InvalidOperationException(
+                            $"Type '{typeFullName}' has new() constraint on type argument " +
+                            $"'{genericArgs[i].FullName}' which is abstract. Skipping.");
+                    }
+                }
             }
         }
 
@@ -802,9 +830,19 @@ public sealed class DllScanner
                     }
                     else
                     {
-                        concreteTypes[i] = ResolveInterfaceConstrainedType(mlc, gp, constraints)
-                                           ?? TryResolveClassConstrainedType(mlc, constraints)
-                                           ?? LoadTypeInContext(mlc, "System.Int32")!;
+                        var resolved = ResolveInterfaceConstrainedType(mlc, gp, constraints)
+                                       ?? TryResolveClassConstrainedType(mlc, constraints);
+                        if (resolved is not null)
+                        {
+                            concreteTypes[i] = resolved;
+                        }
+                        else
+                        {
+                            // Can't resolve any constraint — falling to Int32 would
+                            // produce CS0315 (e.g. int doesn't implement IDictionary).
+                            // Skip this method/type entirely.
+                            return false;
+                        }
                     }
                 }
                 else if (attrs.HasFlag(GenericParameterAttributes.ReferenceTypeConstraint))
@@ -946,12 +984,39 @@ public sealed class DllScanner
         {
             if (constraint.IsInterface) continue;
             if (constraint.IsGenericParameter) continue;
+
+            // Handle generic types with unresolved type parameters from other
+            // generic params (e.g., List<TElement> as a constraint on TCollection
+            // where TElement is another method generic param).  FullName is null
+            // for these, so concretize the GTD with Int32 → List<Int32>.
+            if (constraint.IsGenericType && constraint.ContainsGenericParameters)
+            {
+                var gtd = constraint.GetGenericTypeDefinition();
+                if (gtd is not null)
+                {
+                    var gtdParams = gtd.GetGenericArguments();
+                    var concreteArgs = new Type[gtdParams.Length];
+                    bool ok = true;
+                    for (int j = 0; j < gtdParams.Length; j++)
+                    {
+                        concreteArgs[j] = LoadTypeInContext(mlc, "System.Int32")!;
+                        if (concreteArgs[j] is null) { ok = false; break; }
+                    }
+                    if (ok)
+                    {
+                        try { return gtd.MakeGenericType(concreteArgs); }
+                        catch { /* fall through to FullName-based load */ }
+                    }
+                }
+            }
+
             var cn = constraint.FullName;
             if (cn is null) continue;
             // Skip special value type markers
             if (cn is "System.ValueType" or "System.Enum") continue;
             // Must be a class type → use it directly
-            return LoadTypeInContext(mlc, cn);
+            var loaded = LoadTypeInContext(mlc, cn);
+            if (loaded is not null) return loaded;
         }
         return null;
     }
@@ -1010,9 +1075,19 @@ public sealed class DllScanner
                     }
                     else
                     {
-                        concreteTypes[i] = ResolveInterfaceConstrainedType(mlc, gp, constraints)
-                                           ?? TryResolveClassConstrainedType(mlc, constraints)
-                                           ?? LoadTypeInContext(mlc, "System.Int32")!;
+                        var resolved = ResolveInterfaceConstrainedType(mlc, gp, constraints)
+                                       ?? TryResolveClassConstrainedType(mlc, constraints);
+                        if (resolved is not null)
+                        {
+                            concreteTypes[i] = resolved;
+                        }
+                        else
+                        {
+                            // Can't resolve any constraint — falling to Int32 would
+                            // produce CS0315 (e.g. int doesn't implement IDictionary).
+                            // Skip this method/type entirely.
+                            return false;
+                        }
                     }
                 }
                 else if (attrs.HasFlag(GenericParameterAttributes.ReferenceTypeConstraint))

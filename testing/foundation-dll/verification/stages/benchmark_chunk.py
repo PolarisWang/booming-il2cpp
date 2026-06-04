@@ -22,6 +22,8 @@ from typing import Any
 
 from verification.orchestration.context import ChunkContext, StageResult
 
+_RESULTS_BASE = Path(__file__).resolve().parent.parent / "results" / "foundation-dll"
+
 
 def _mean(values: Sequence[float]) -> float:
     return sum(values) / len(values)
@@ -137,7 +139,7 @@ def _compute_summary(stats: list[dict]) -> dict:
 def _parse_benchmark_lines(stdout: str) -> tuple[list[dict], dict]:
     """Parse line-by-line JSON benchmark output from entry.exe stdout.
 
-    Each method produces one complete JSON line ending with \\n.
+    Each method produces one complete JSON line ending with \n.
     The last line is {"summary":{...}}.
     Stray lines that aren't valid JSON are silently skipped.
     """
@@ -226,10 +228,9 @@ def _write_records_jsonl(
     summary: dict,
     ctx: ChunkContext,
     iterations: int,
+    technology: str = "chaos-aot",
 ):
     """Append unified-format records.jsonl alongside the chunk-local benchmark.json."""
-
-    # M1 fields: attach statistical QC metadata to the per-method records
     records_path = ctx.results_dir / "records.jsonl"
     now = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
 
@@ -237,6 +238,7 @@ def _write_records_jsonl(
         "runId": f"{ctx.assembly}-{ctx.slug}-benchmark-{int(time.time())}",
         "subject": f"{ctx.assembly}/{ctx.slug}",
         "mode": "native",
+        "technology": technology,
         "platform": "windows-x64",
         "device": {"id": "chunk-pipeline", "name": "chunk-pipeline"},
         "recordedAt": now,
@@ -276,25 +278,80 @@ def _get_entry_count(exe_path: Path) -> int:
     return int(m.group(1)) if m else 0
 
 
-def run_benchmark_chunk(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
-    """Benchmark stage: run chunk's entry.exe --benchmark-all N with adaptive settings."""
+def _read_benchmark_metadata(ctx: ChunkContext) -> list[dict]:
+    """Read subjects metadata for methodSubjectId resolution."""
+    metadata_path = ctx.subjects_metadata_path
+    if not metadata_path.exists():
+        return []
+    try:
+        metadata = json.loads(metadata_path.read_text(encoding="utf-8"))
+        return metadata.get("methods", [])
+    except (json.JSONDecodeError, IOError):
+        return []
+
+
+def _write_perf_store(
+    per_method_stats: list[dict],
+    ctx: ChunkContext,
+    technology: str,
+    metadata_methods: list[dict],
+    iterations: int,
+):
+    """Write benchmark-history.jsonl in dashboard-compatible format.
+
+    Format matches managed_benchmark.py's _write_perf_records() so that
+    dashboard._compute_benchmark_comparisons() can read chaos-aot/chaos-jit data.
+    """
+    now = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+    perf_path = _RESULTS_BASE / ctx.assembly / ctx.slug / "perf" / "benchmark-history.jsonl"
+    perf_path.parent.mkdir(parents=True, exist_ok=True)
+
+    # Determine append mode: check if AOT already wrote (JIT appends)
+    append = perf_path.exists()
+
+    with open(perf_path, "a" if append else "w", encoding="utf-8") as f:
+        for i, s in enumerate(per_method_stats):
+            elapsed_ms = s.get("meanDurationMs", 0)
+            ops = s.get("meanOpsPerSecond", 0)
+
+            method_subject_id = ""
+            if i < len(metadata_methods):
+                method_subject_id = metadata_methods[i].get("methodSubjectId", "")
+
+            record = {
+                "timestamp": now,
+                "slug": ctx.slug,
+                "technology": technology,
+                "methodSubjectId": method_subject_id,
+                "methodIndex": i,
+                "metrics": {
+                    "elapsedMilliseconds": elapsed_ms if elapsed_ms > 0 else 0.001,
+                    "opsPerSecond": ops,
+                },
+                "iterations": iterations,
+                "status": "completed",
+            }
+            f.write(json.dumps(record, ensure_ascii=False, separators=(",", ":")) + "\n")
+
+
+def _run_single_benchmark(
+    exe_path: Path,
+    technology: str,
+    ctx: ChunkContext,
+    timeout: int,
+    metadata_methods: list[dict],
+) -> dict | None:
+    """Run benchmark for a single technology (AOT or JIT).
+
+    Returns result dict with keys (per_method_stats, summary, iterations,
+    sample_rounds, method_count, tech_duration_ms) or None on failure.
+    """
     start = time.perf_counter()
-
-    exe_path = ctx.entry_exe_path
-    if not exe_path.exists():
-        return StageResult(
-            stage="benchmark", status="skipped",
-            summary=f"entry.exe not found, skipping benchmark",
-            duration_ms=int((time.perf_counter() - start) * 1000),
-        )
-
-    timeout = max(ctx.stage_timeout_seconds or 300, 30)
     entry_count = _get_entry_count(exe_path)
 
-    # Phase 0: Calibrate iteration count via probe run
-    print(f"  [benchmark] {exe_path} --benchmark-all (adaptive)")
+    print(f"  [benchmark] [{technology}] {exe_path} --benchmark-all (adaptive)")
     iterations = _calibrate_iterations(exe_path, timeout, entry_count)
-    print(f"  [benchmark] calibrated iterations={iterations}, entries={entry_count}, timeout={timeout}s")
+    print(f"  [benchmark] [{technology}] calibrated iterations={iterations}, entries={entry_count}")
 
     # Phase 1: Adaptive sampling rounds (3-10, early stop on CV < 5%)
     max_rounds = 10
@@ -302,17 +359,12 @@ def run_benchmark_chunk(ctx: ChunkContext, stages: dict[str, StageResult]) -> St
     all_rounds: list[list[dict]] = []
 
     for s in range(max_rounds):
-        print(f"  [benchmark] sampling round {s + 1}/{max_rounds}...")
+        print(f"  [benchmark] [{technology}] sampling round {s + 1}/{max_rounds}...")
         result = _run_entry_once(exe_path, iterations, timeout)
         if result is None:
-            # If we have partial data from previous rounds, use it
             if all_rounds:
                 break
-            return StageResult(
-                stage="benchmark", status="error",
-                summary=f"benchmark timed out during sampling round {s + 1}",
-                duration_ms=int((time.perf_counter() - start) * 1000),
-            )
+            return None
 
         parsed, _ = _parse_benchmark_lines(result.stdout or "")
         round_results: list[dict] = [dict(r) if isinstance(r, dict) else {} for r in parsed]
@@ -336,25 +388,11 @@ def run_benchmark_chunk(ctx: ChunkContext, stages: dict[str, StageResult]) -> St
             if cvs:
                 median_cv = sorted(cvs)[len(cvs) // 2]
                 if median_cv < 0.05:
-                    print(f"  [benchmark] early stop at round {s + 1} (median CV={median_cv:.4f} < 5%)")
+                    print(f"  [benchmark] [{technology}] early stop at round {s + 1} (median CV={median_cv:.4f} < 5%)")
                     break
 
     if not all_rounds or not all_rounds[0]:
-        ctx.results_dir.mkdir(parents=True, exist_ok=True)
-        result_path = ctx.results_dir / "benchmark.json"
-        result_path.write_text(
-            json.dumps({"exitCode": -1, "iterations": iterations, "methodCount": 0,
-                        "results": [], "summary": {}, "stderr": "no data",
-                        "sampleRounds": len(all_rounds)},
-                       indent=2),
-            encoding="utf-8",
-        )
-        duration_ms = int((time.perf_counter() - start) * 1000)
-        return StageResult(
-            stage="benchmark", status="error",
-            summary="no benchmark data returned",
-            duration_ms=duration_ms,
-        )
+        return None
 
     # Phase 2: Per-method statistical computation
     method_count = len(all_rounds[0])
@@ -384,11 +422,78 @@ def run_benchmark_chunk(ctx: ChunkContext, stages: dict[str, StageResult]) -> St
     # Phase 3: Aggregate summary
     summary = _compute_summary(per_method_stats)
 
-    # Phase 4: Write output files
+    tech_duration_ms = int((time.perf_counter() - start) * 1000)
+    print(f"  [benchmark] [{technology}] {method_count} methods "
+          f"({len(all_rounds)} samples, {tech_duration_ms}ms, {iterations} iterations)")
+
+    # Phase 4: Write perf store
+    _write_perf_store(per_method_stats, ctx, technology, metadata_methods, iterations)
+
+    return {
+        "per_method_stats": per_method_stats,
+        "summary": summary,
+        "iterations": iterations,
+        "sample_rounds": len(all_rounds),
+        "method_count": method_count,
+        "tech_duration_ms": tech_duration_ms,
+    }
+
+
+def run_benchmark_chunk(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
+    """Benchmark stage: run AOT and optionally JIT entry.exes with adaptive settings."""
+    start = time.perf_counter()
+    timeout = max(ctx.stage_timeout_seconds or 300, 30)
+    metadata_methods = _read_benchmark_metadata(ctx)
+
+    # Read technologies to benchmark
+    technologies: list[tuple[Path, str]] = []
+
+    # AOT: required
+    aot_exe = ctx.entry_exe_path
+    if aot_exe.exists():
+        technologies.append((aot_exe, "chaos-aot"))
+    else:
+        return StageResult(
+            stage="benchmark", status="skipped",
+            summary=f"entry.exe not found, skipping benchmark",
+            duration_ms=int((time.perf_counter() - start) * 1000),
+        )
+
+    # JIT: optional (only if entry-jit.exe was built)
+    jit_exe = ctx.entry_jit_exe_path
+    if jit_exe.exists():
+        technologies.append((jit_exe, "chaos-jit"))
+    else:
+        print(f"  [benchmark] entry-jit.exe not found, skipping chaos-jit benchmark")
+
+    # Run benchmarks for each technology
+    results: list[dict] = []
+    errors: list[str] = []
+    for exe_path, tech in technologies:
+        result = _run_single_benchmark(exe_path, tech, ctx, timeout, metadata_methods)
+        if result is None:
+            errors.append(f"{tech}: no data returned")
+            continue
+        results.append(result)
+
+    if not results:
+        return StageResult(
+            stage="benchmark", status="error",
+            summary="all benchmark technologies failed",
+            duration_ms=int((time.perf_counter() - start) * 1000),
+        )
+
+    # Write chunk-local output files from the primary (AOT) result
+    primary = results[0]
+    per_method_stats = primary["per_method_stats"]
+    summary = primary["summary"]
+    iterations = primary["iterations"]
+    method_count = primary["method_count"]
+    sample_rounds = primary["sample_rounds"]
+
     ctx.results_dir.mkdir(parents=True, exist_ok=True)
     result_path = ctx.results_dir / "benchmark.json"
 
-    # Build flat results array for backward compat (mean values)
     flat_results: list[dict] = []
     for method_idx, s in enumerate(per_method_stats):
         flat_results.append({
@@ -410,23 +515,28 @@ def run_benchmark_chunk(ctx: ChunkContext, stages: dict[str, StageResult]) -> St
         "results": flat_results,
         "summary": summary,
         "perMethodStats": per_method_stats,
-        "sampleRounds": len(all_rounds),
+        "sampleRounds": sample_rounds,
         "stderr": "",
+        "technologiesRun": [t for _, t in technologies],
     }
     result_path.write_text(json.dumps(result_data, indent=2), encoding="utf-8")
 
-    # Write unified-format records.jsonl
+    # Write unified-format records.jsonl from primary result
     _write_records_jsonl(per_method_stats, summary, ctx, iterations)
 
     status = "passed" if method_count > 0 else "error"
+    if errors:
+        status = "passed_with_errors" if status == "passed" else "error"
+
     duration_ms = int((time.perf_counter() - start) * 1000)
     print(f"  [benchmark] {status}: {method_count} methods "
-          f"({len(all_rounds)} samples, {duration_ms}ms, {iterations} iterations)")
+          f"({len(results)} technologies, {sample_rounds} samples, {duration_ms}ms, {iterations} iterations)")
 
     return StageResult(
         stage="benchmark", status=status,
-        summary=f"{status}: {method_count} methods, {len(all_rounds)} samples, "
-                f"{summary.get('totalOutliers', 0)} outliers removed",
+        summary=f"{status}: {method_count} methods, {len(results)} techs, "
+                f"{sample_rounds} samples, {summary.get('totalOutliers', 0)} outliers removed"
+                + (f"; errors: {'; '.join(errors[:2])}" if errors else ""),
         details=result_data,
         duration_ms=duration_ms,
     )

@@ -31,6 +31,7 @@
 #include <hotpatch_table.h>      // GetHotpatchNameRegistry
 #include <ir_reg_alloc.h>        // AllocateRegisters
 #include <jit_registration.h>    // JitEntry
+#include <jit_seh.h>             // RegisterNativeCodeSection
 #include <tier_manager.h>        // TierManager::EnqueueJitRecompilation
 #include <slot_map.h>            // ReverseSlotMap, g_reverse_slot_map
 #include <chaos/log.h>           // CHAOS_IL2CPP_LOG_ERROR_M
@@ -344,6 +345,11 @@ extern "C" void* JitStubDispatchImpl(JitPrecode* precode) noexcept {
 
         precode->compiled = jit;
 
+        // Register JIT code for SEH unwind support — without this, crashes
+        // in JIT-compiled code will terminate the process (OS can't unwind
+        // through the JIT frame to find catch handlers).
+        chaos::il2cpp::jit::RegisterNativeCodeSection(jit->code, jit->code_size, jit);
+
         // Atomically patch the HotpatchEntryV0::direct_ptr so future calls
         // skip the trampoline entirely and go straight to the compiled code.
         // Entry may be null in test scenarios; skip patching if so.
@@ -428,7 +434,7 @@ extern "C" void RegisterJitEntryMethods(const JitEntry* entries, uint32_t count)
         auto rm = AllocateRegisters(ir);
         if (rm.instructions.empty()) {
             CHAOS_IL2CPP_LOG_WARN_M("jit",
-                "RegisterJitEntryMethods: skipping token 0x%x (empty IR — keep AOT path)",
+                "RegisterJitEntryMethods: skipping token 0x{} (empty IR — keep AOT path)",
                 entry.token);
             continue;
         }
@@ -470,7 +476,7 @@ extern "C" void RegisterJitEntryMethods(const JitEntry* entries, uint32_t count)
             g_original_aot_map[static_cast<void*>(precode->entry)] = precode->original_direct_ptr;
         } else {
             CHAOS_IL2CPP_LOG_ERROR_M("jit",
-                "RegisterJitEntryMethods: failed for token 0x%x module %u",
+                "RegisterJitEntryMethods: failed for token 0x{:x} module {}",
                 entry.token, entry.module_id);
         }
     }
