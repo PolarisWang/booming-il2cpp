@@ -147,6 +147,7 @@ def main():
         "fact": None,
         "benchmark": None,
         "managed_benchmark": None,
+        "benchmark_report": None,
         "hotupdate": None,
         "coverage-audit": None,
         "aggregate": None,
@@ -164,6 +165,7 @@ def main():
     from verification.stages.benchmark_chunk import run_benchmark_chunk
     from verification.stages.managed_benchmark import run_managed_benchmark
     from verification.stages.hotupdate_chunk import run_hotupdate_chunk
+    from verification.stages.benchmark_report import run_benchmark_report
     from verification.stages.coverage_audit import run_coverage_audit
     from verification.stages.aggregate import run_aggregate
 
@@ -173,6 +175,7 @@ def main():
         "benchmark": run_benchmark_chunk,
         "managed_benchmark": run_managed_benchmark,
         "hotupdate": run_hotupdate_chunk,
+        "benchmark_report": run_benchmark_report,
         "coverage-audit": run_coverage_audit,
         "aggregate": run_aggregate,
     }
