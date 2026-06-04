@@ -256,6 +256,19 @@ def run_aggregate(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageRes
             },
         },
     }
+
+    # Read benchmark comparison summary if available
+    comparison_path = latest_dir / "comparison-summary.json"
+    if comparison_path.exists():
+        cs = json.loads(comparison_path.read_text(encoding="utf-8"))
+        dashboard["summary"]["benchmarkComparison"] = {
+            "methodsAnalyzed": cs.get("totalMethods", 0),
+            "methodsWithNet8": cs.get("methodsWithNet8", 0),
+            "chaosAotVsNet8": cs.get("aggregate", {}).get("chaosAotVsNet8Pct", {}),
+            "chaosJitVsNet8": cs.get("aggregate", {}).get("chaosJitVsNet8Pct", {}),
+            "net10VsNet8": cs.get("aggregate", {}).get("net10VsNet8Pct", {}),
+            "highValueMethods_betterThanNet8": cs.get("aggregate", {}).get("highValueMethods_betterThanNet8", 0),
+        }
     (latest_dir / "dashboard.json").write_text(
         json.dumps(dashboard, indent=2), encoding="utf-8")
 
