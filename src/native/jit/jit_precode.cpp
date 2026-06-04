@@ -61,6 +61,7 @@ namespace chaos::il2cpp::jit {
 // ── Constants ──────────────────────────────────────────────────────────
 static constexpr uint32_t kPageSize        = 64 * 1024;  // 64KB per RWX page
 static constexpr uint32_t kSharedEntrySize = 64;          // reserved
+static constexpr uint32_t kSharedEntryUnwindOffset = 40;  // UNWIND_INFO offset (must be 4-byte aligned for Win64)
 #if defined(__aarch64__)
 static constexpr uint32_t kTrampolineSize  = 16;          // LDR + BR + literal pool
 #else
@@ -84,8 +85,19 @@ PrecodeArena::~PrecodeArena() noexcept {
         if (pg.base) {
             chaos::il2cpp::pal::PalVirtualFree(pg.base, pg.capacity);
         }
+#if defined(_WIN64)
+        if (pg.runtime_function) {
+            std::free(pg.runtime_function);
+        }
+#endif
     }
 }
+
+// Forward declaration for RegisterPagePdata (defined after AllocateJitTrampoline).
+#if defined(_WIN64)
+static void RegisterPagePdata(uint8_t* page_base, void*& out_runtime_function,
+                               uint32_t entry_size) noexcept;
+#endif
 
 void PrecodeArena::EnsurePage() noexcept {
     if (!pages_.empty()) {
@@ -122,6 +134,13 @@ void PrecodeArena::EnsurePage() noexcept {
         std::memcpy(base, pages_[0].base, jit_entry_size_);
         pages_.back().pos = jit_entry_size_;
     }
+
+#if defined(_WIN64)
+    // Register .pdata for the shared entry so the OS can unwind through
+    // this non-leaf trampoline frame when JIT-compiled code crashes.
+    RegisterPagePdata(pages_.back().base, pages_.back().runtime_function,
+                      jit_entry_size_);
+#endif
 }
 
 void PrecodeArena::EmitJitSharedEntry() noexcept {
@@ -195,6 +214,38 @@ void PrecodeArena::EmitJitSharedEntry() noexcept {
     p[34] = 0x59;
     // jmp rax                 ; 0xFF 0xE0
     p[35] = 0xFF; p[36] = 0xE0;
+
+    // ── Padding to 4-byte alignment (offsets 37-39) ────────────────────
+    // Win64 requires UNWIND_INFO to be DWORD-aligned (4 bytes).
+    // Code ends at offset 36; pad to offset 40.
+    p[37] = 0xCC; p[38] = 0xCC; p[39] = 0xCC;
+
+    // ── UNWIND_INFO for .pdata registration (offsets 40-55) ─────────
+    // Required so the OS can unwind through this non-leaf trampoline
+    // when JIT-compiled code crashes.  Without .pdata, SEH unwind
+    // triggers STATUS_INVALID_CRUNTIME_PARAMETER recursion.
+    //
+    // Prologue (10 bytes):
+    //   push rcx       ; offset 0, 1 byte
+    //   push rdx       ; offset 1, 1 byte
+    //   push r8        ; offset 2, 2 bytes
+    //   push r9        ; offset 4, 2 bytes
+    //   sub rsp, 0x28  ; offset 6, 4 bytes
+    // Version=1, Flags=0, SizeOfProlog=10 bytes, 5 codes, no FP
+    p[40] = 0x01;              // version_flags
+    p[41] = 10;                // size_of_prolog (bytes: push rcx+rdx+r8+r9 + sub rsp,0x28 = 10)
+    p[42] = 5;                 // count_of_codes
+    p[43] = 0x00;              // frame_register=RSP, frame_offset=0
+
+    // 5 UNWIND_CODE entries (reverse prologue order, 2 bytes each):
+    p[44] = 6;  p[45] = 0x24;  // UWOP_ALLOC_SMALL(4):  sub rsp, 0x28
+    p[46] = 4;  p[47] = 0x09;  // UWOP_PUSH_NONVOL(9):  push r9
+    p[48] = 2;  p[49] = 0x08;  // UWOP_PUSH_NONVOL(8):  push r8
+    p[50] = 1;  p[51] = 0x02;  // UWOP_PUSH_NONVOL(2):  push rdx
+    p[52] = 0;  p[53] = 0x01;  // UWOP_PUSH_NONVOL(1):  push rcx
+
+    // Pad to 4-byte boundary (14 bytes → 2 pad)
+    p[54] = 0x00; p[55] = 0x00;
 #else
     // System V AMD64 calling convention: rdi = first arg, no shadow space
     // mov rdi, r10            ; 0x4C 0x89 0xD7 — first arg = precode ptr
@@ -253,6 +304,35 @@ void* PrecodeArena::AllocateJitTrampoline(JitPrecode* precode) noexcept {
 
     return pg.base + offset;
 }
+
+// ── RegisterPagePdata ────────────────────────────────────────────────────
+// Registers .pdata for the shared entry on a PrecodeArena RWX page.
+// This enables OS stack unwinding through the shared entry frame when a
+// JIT-compiled method crashes, preventing STATUS_INVALID_CRUNTIME_PARAMETER
+// recursion during SEH unwind.
+#if defined(_WIN64)
+static void RegisterPagePdata(uint8_t* page_base, void*& out_runtime_function,
+                               uint32_t entry_size) noexcept {
+    auto* rf = static_cast<PRUNTIME_FUNCTION>(
+        std::malloc(sizeof(IMAGE_RUNTIME_FUNCTION_ENTRY)));
+    if (!rf) {
+        CHAOS_IL2CPP_LOG_ERROR_M("jit", "RegisterPagePdata: malloc failed");
+        return;
+    }
+    rf->BeginAddress      = 0;
+    rf->EndAddress        = entry_size;
+    rf->UnwindInfoAddress = kSharedEntryUnwindOffset;
+    out_runtime_function  = rf;
+
+    if (!RtlAddFunctionTable(rf, 1, reinterpret_cast<DWORD64>(page_base))) {
+        CHAOS_IL2CPP_LOG_ERROR_M("jit",
+            "RegisterPagePdata: RtlAddFunctionTable FAILED for page={}", (void*)page_base);
+    } else {
+        CHAOS_IL2CPP_LOG_INFO_M("jit",
+            "RegisterPagePdata: .pdata registered for page={}, base={}", (void*)page_base, (void*)page_base);
+    }
+}
+#endif
 
 // ── CompileWithCatch ───────────────────────────────────────────────────
 // Wraps Compile() in SEH __try/__except so callers don't need C++ object

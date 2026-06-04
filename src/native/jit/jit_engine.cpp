@@ -286,9 +286,10 @@ private:
     static constexpr uint32_t kPhysRegCount = 32;
 #else
 #if defined(_WIN32) || defined(_WIN64)
-    // Win64: RDI, R12-R15 (all callee-saved)
-    static constexpr uint8_t kCacheableRegs[5] = {7, 12, 13, 14, 15};
-    static constexpr uint32_t kMaxCacheRegs = 5;
+    // Win64: R12-R15 (all callee-saved except RDI which is pushed
+    // explicitly in prologue for REP STOSQ zero-init)
+    static constexpr uint8_t kCacheableRegs[4] = {12, 13, 14, 15};
+    static constexpr uint32_t kMaxCacheRegs = 4;
 #else
     // Linux SysV: R12-R15 only (RDI is caller-saved, excluded from cache)
     static constexpr uint8_t kCacheableRegs[4] = {12, 13, 14, 15};
@@ -1047,7 +1048,7 @@ void NativeCodeGenerator::SelectCacheableRegs() noexcept {
     cached_dirty_mask_ = 0;
     num_cache_regs_ = 0;
 
-    // Select top-k vregs by frequency. Since kMaxCacheRegs is small (5), a
+    // Select top-k vregs by frequency. Since kMaxCacheRegs is small (4), a
     // simple linear selection is sufficient — no need for partial sort.
     for (uint32_t slot = 0; slot < kMaxCacheRegs; ++slot) {
         uint32_t best_vreg = kNotCached;
@@ -3983,8 +3984,12 @@ JitMethod* NativeCodeGenerator::Generate() noexcept {
     // ARM64: STP is always 16 bytes — frame_align_adj_ not needed.
     frame_align_adj_ = 0;
 #else
-    // x64: odd number of PUSH may require 8-byte pad for 16-byte stack alignment.
-    frame_align_adj_ = ((num_cache_regs_ + 1) % 2) * 8;
+    // x64: after CALL (RSP -= 8), each PUSH/N pushes by 8.
+    // Alignment: RSP_pre_call - 8 - 8*num_push_regs ≡ 0 (mod 16)
+    // → num_push_regs must be ODD for alignment.
+    // With 4 base pushes (rbp, rbx, rsi, rdi), num_push_regs = 4 + num_cache_regs_.
+    // So pad 8 when num_push_regs is EVEN → pad when num_cache_regs_ is even.
+    frame_align_adj_ = ((num_cache_regs_ + 4) % 2) * 8;
 #endif
 
     // Prologue — push/STP callee-saved regs, establish frame pointer
@@ -4445,12 +4450,20 @@ JitMethod* NativeCodeGenerator::Generate() noexcept {
     uint32_t code_body_size = buf_.pos();  // Function body ends before metadata
     bool has_seh = !rm_.seh_clauses.empty();
 #if defined(_WIN64)
+    // Pad to 4-byte alignment: Win64 requires UNWIND_INFO to be DWORD-aligned.
+    // The code body may end at any byte alignment; emit NOP padding to the
+    // next 4-byte boundary so the UNWIND_INFO starts aligned.
+    while (buf_.pos() % 4 != 0) {
+        buf_.EmitByte(0x90);  // NOP padding
+    }
     if (!is_tier0_ && prologue_total_bytes_ > 0 && num_push_regs_ > 0) {
         unwind_data_offset = EmitUnwindInfo(
             buf_, prologue_total_bytes_, prologue_sub_rsp_size_,
             num_push_regs_, push_reg_nums_, prologue_push_offsets_,
             prologue_sub_rsp_offset_, prologue_set_fpreg_offset_,
             has_seh);
+        if (unwind_data_offset > 0) {
+        }
     }
 #endif
 
