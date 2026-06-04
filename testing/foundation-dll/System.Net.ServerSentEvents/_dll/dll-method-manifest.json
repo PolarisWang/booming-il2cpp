@@ -1,0 +1,118 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Net.ServerSentEvents",
+  "generatedAt": "2026-06-02T02:15:39.2860052Z",
+  "totalMethods": 9,
+  "methods": [
+    {
+      "methodSubjectId": "System.Net.ServerSentEvents/System.Net.ArrayBuffer::Commit:System.Void(System.Int32)",
+      "namespace": "System.Net",
+      "declaringType": "System.Net.ArrayBuffer",
+      "methodName": "Commit",
+      "returnType": "System.Void",
+      "parameters": [
+        "System.Int32"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.ServerSentEvents/System.Net.ArrayBuffer::Discard:System.Void(System.Int32)",
+      "namespace": "System.Net",
+      "declaringType": "System.Net.ArrayBuffer",
+      "methodName": "Discard",
+      "returnType": "System.Void",
+      "parameters": [
+        "System.Int32"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.ServerSentEvents/System.Net.ArrayBuffer::Dispose:System.Void()",
+      "namespace": "System.Net",
+      "declaringType": "System.Net.ArrayBuffer",
+      "methodName": "Dispose",
+      "returnType": "System.Void",
+      "parameters": [],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.ServerSentEvents/System.Net.ArrayBuffer::EnsureAvailableSpace:System.Void(System.Int32)",
+      "namespace": "System.Net",
+      "declaringType": "System.Net.ArrayBuffer",
+      "methodName": "EnsureAvailableSpace",
+      "returnType": "System.Void",
+      "parameters": [
+        "System.Int32"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.ServerSentEvents/System.Net.ServerSentEvents.PooledByteBufferWriter::Advance:System.Void(System.Int32)",
+      "namespace": "System.Net.ServerSentEvents",
+      "declaringType": "System.Net.ServerSentEvents.PooledByteBufferWriter",
+      "methodName": "Advance",
+      "returnType": "System.Void",
+      "parameters": [
+        "System.Int32"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.ServerSentEvents/System.Net.ServerSentEvents.PooledByteBufferWriter::Dispose:System.Void()",
+      "namespace": "System.Net.ServerSentEvents",
+      "declaringType": "System.Net.ServerSentEvents.PooledByteBufferWriter",
+      "methodName": "Dispose",
+      "returnType": "System.Void",
+      "parameters": [],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.ServerSentEvents/System.Net.ServerSentEvents.PooledByteBufferWriter::GetMemory:System.Memory`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]](System.Int32)",
+      "namespace": "System.Net.ServerSentEvents",
+      "declaringType": "System.Net.ServerSentEvents.PooledByteBufferWriter",
+      "methodName": "GetMemory",
+      "returnType": "System.Memory`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+      "parameters": [
+        "System.Int32"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.ServerSentEvents/System.Net.ServerSentEvents.PooledByteBufferWriter::GetSpan:System.Span`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]](System.Int32)",
+      "namespace": "System.Net.ServerSentEvents",
+      "declaringType": "System.Net.ServerSentEvents.PooledByteBufferWriter",
+      "methodName": "GetSpan",
+      "returnType": "System.Span`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+      "parameters": [
+        "System.Int32"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.ServerSentEvents/System.Net.ServerSentEvents.PooledByteBufferWriter::Reset:System.Void()",
+      "namespace": "System.Net.ServerSentEvents",
+      "declaringType": "System.Net.ServerSentEvents.PooledByteBufferWriter",
+      "methodName": "Reset",
+      "returnType": "System.Void",
+      "parameters": [],
+      "visibility": "public",
+      "isStatic": false
+    }
+  ],
+  "namespaces": {
+    "System.Net": {
+      "methodCount": 4
+    },
+    "System.Net.ServerSentEvents": {
+      "methodCount": 5
+    }
+  }
+}

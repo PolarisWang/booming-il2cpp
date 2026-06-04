@@ -1,0 +1,283 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Runtime.InteropServices",
+  "generatedAt": "2026-06-02T02:15:39.6727739Z",
+  "totalMethods": 23,
+  "methods": [
+    {
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.ComAwareEventInfo::AddEventHandler:System.Void(System.Object,System.Delegate)",
+      "namespace": "System.Runtime.InteropServices",
+      "declaringType": "System.Runtime.InteropServices.ComAwareEventInfo",
+      "methodName": "AddEventHandler",
+      "returnType": "System.Void",
+      "parameters": [
+        "System.Object",
+        "System.Delegate"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.ComAwareEventInfo::GetAddMethod:System.Reflection.MethodInfo(System.Boolean)",
+      "namespace": "System.Runtime.InteropServices",
+      "declaringType": "System.Runtime.InteropServices.ComAwareEventInfo",
+      "methodName": "GetAddMethod",
+      "returnType": "System.Reflection.MethodInfo",
+      "parameters": [
+        "System.Boolean"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.ComAwareEventInfo::GetCustomAttributes:System.Object[](System.Type,System.Boolean)",
+      "namespace": "System.Runtime.InteropServices",
+      "declaringType": "System.Runtime.InteropServices.ComAwareEventInfo",
+      "methodName": "GetCustomAttributes",
+      "returnType": "System.Object[]",
+      "parameters": [
+        "System.Type",
+        "System.Boolean"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.ComAwareEventInfo::GetCustomAttributes:System.Object[](System.Boolean)",
+      "namespace": "System.Runtime.InteropServices",
+      "declaringType": "System.Runtime.InteropServices.ComAwareEventInfo",
+      "methodName": "GetCustomAttributes",
+      "returnType": "System.Object[]",
+      "parameters": [
+        "System.Boolean"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.ComAwareEventInfo::GetCustomAttributesData:System.Collections.Generic.IList`1[[System.Reflection.CustomAttributeData, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]()",
+      "namespace": "System.Runtime.InteropServices",
+      "declaringType": "System.Runtime.InteropServices.ComAwareEventInfo",
+      "methodName": "GetCustomAttributesData",
+      "returnType": "System.Collections.Generic.IList`1[[System.Reflection.CustomAttributeData, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+      "parameters": [],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.ComAwareEventInfo::GetOtherMethods:System.Reflection.MethodInfo[](System.Boolean)",
+      "namespace": "System.Runtime.InteropServices",
+      "declaringType": "System.Runtime.InteropServices.ComAwareEventInfo",
+      "methodName": "GetOtherMethods",
+      "returnType": "System.Reflection.MethodInfo[]",
+      "parameters": [
+        "System.Boolean"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.ComAwareEventInfo::GetRaiseMethod:System.Reflection.MethodInfo(System.Boolean)",
+      "namespace": "System.Runtime.InteropServices",
+      "declaringType": "System.Runtime.InteropServices.ComAwareEventInfo",
+      "methodName": "GetRaiseMethod",
+      "returnType": "System.Reflection.MethodInfo",
+      "parameters": [
+        "System.Boolean"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.ComAwareEventInfo::GetRemoveMethod:System.Reflection.MethodInfo(System.Boolean)",
+      "namespace": "System.Runtime.InteropServices",
+      "declaringType": "System.Runtime.InteropServices.ComAwareEventInfo",
+      "methodName": "GetRemoveMethod",
+      "returnType": "System.Reflection.MethodInfo",
+      "parameters": [
+        "System.Boolean"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.ComAwareEventInfo::IsDefined:System.Boolean(System.Type,System.Boolean)",
+      "namespace": "System.Runtime.InteropServices",
+      "declaringType": "System.Runtime.InteropServices.ComAwareEventInfo",
+      "methodName": "IsDefined",
+      "returnType": "System.Boolean",
+      "parameters": [
+        "System.Type",
+        "System.Boolean"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.ComAwareEventInfo::RemoveEventHandler:System.Void(System.Object,System.Delegate)",
+      "namespace": "System.Runtime.InteropServices",
+      "declaringType": "System.Runtime.InteropServices.ComAwareEventInfo",
+      "methodName": "RemoveEventHandler",
+      "returnType": "System.Void",
+      "parameters": [
+        "System.Object",
+        "System.Delegate"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.HandleCollector::Add:System.Void()",
+      "namespace": "System.Runtime.InteropServices",
+      "declaringType": "System.Runtime.InteropServices.HandleCollector",
+      "methodName": "Add",
+      "returnType": "System.Void",
+      "parameters": [],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.HandleCollector::Remove:System.Void()",
+      "namespace": "System.Runtime.InteropServices",
+      "declaringType": "System.Runtime.InteropServices.HandleCollector",
+      "methodName": "Remove",
+      "returnType": "System.Void",
+      "parameters": [],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshalling.ComImportInteropInterfaceDetailsStrategy::GetComExposedTypeDetails:System.Runtime.InteropServices.Marshalling.IComExposedDetails(System.RuntimeTypeHandle)",
+      "namespace": "System.Runtime.InteropServices.Marshalling",
+      "declaringType": "System.Runtime.InteropServices.Marshalling.ComImportInteropInterfaceDetailsStrategy",
+      "methodName": "GetComExposedTypeDetails",
+      "returnType": "System.Runtime.InteropServices.Marshalling.IComExposedDetails",
+      "parameters": [
+        "System.RuntimeTypeHandle"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshalling.ComImportInteropInterfaceDetailsStrategy::GetIUnknownDerivedDetails:System.Runtime.InteropServices.Marshalling.IIUnknownDerivedDetails(System.RuntimeTypeHandle)",
+      "namespace": "System.Runtime.InteropServices.Marshalling",
+      "declaringType": "System.Runtime.InteropServices.Marshalling.ComImportInteropInterfaceDetailsStrategy",
+      "methodName": "GetIUnknownDerivedDetails",
+      "returnType": "System.Runtime.InteropServices.Marshalling.IIUnknownDerivedDetails",
+      "parameters": [
+        "System.RuntimeTypeHandle"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshalling.ComObject::FinalRelease:System.Void()",
+      "namespace": "System.Runtime.InteropServices.Marshalling",
+      "declaringType": "System.Runtime.InteropServices.Marshalling.ComObject",
+      "methodName": "FinalRelease",
+      "returnType": "System.Void",
+      "parameters": [],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshalling.ComVariantMarshaller+RefPropagate::Free:System.Void()",
+      "namespace": "System.Runtime.InteropServices.Marshalling",
+      "declaringType": "System.Runtime.InteropServices.Marshalling.ComVariantMarshaller+RefPropagate",
+      "methodName": "Free",
+      "returnType": "System.Void",
+      "parameters": [],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshalling.ComVariantMarshaller+RefPropagate::FromManaged:System.Void(System.Object)",
+      "namespace": "System.Runtime.InteropServices.Marshalling",
+      "declaringType": "System.Runtime.InteropServices.Marshalling.ComVariantMarshaller+RefPropagate",
+      "methodName": "FromManaged",
+      "returnType": "System.Void",
+      "parameters": [
+        "System.Object"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshalling.ComVariantMarshaller+RefPropagate::FromUnmanaged:System.Void(System.Runtime.InteropServices.Marshalling.ComVariant)",
+      "namespace": "System.Runtime.InteropServices.Marshalling",
+      "declaringType": "System.Runtime.InteropServices.Marshalling.ComVariantMarshaller+RefPropagate",
+      "methodName": "FromUnmanaged",
+      "returnType": "System.Void",
+      "parameters": [
+        "System.Runtime.InteropServices.Marshalling.ComVariant"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshalling.ComVariantMarshaller+RefPropagate::ToManaged:System.Object()",
+      "namespace": "System.Runtime.InteropServices.Marshalling",
+      "declaringType": "System.Runtime.InteropServices.Marshalling.ComVariantMarshaller+RefPropagate",
+      "methodName": "ToManaged",
+      "returnType": "System.Object",
+      "parameters": [],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshalling.ComVariantMarshaller+RefPropagate::ToUnmanaged:System.Runtime.InteropServices.Marshalling.ComVariant()",
+      "namespace": "System.Runtime.InteropServices.Marshalling",
+      "declaringType": "System.Runtime.InteropServices.Marshalling.ComVariantMarshaller+RefPropagate",
+      "methodName": "ToUnmanaged",
+      "returnType": "System.Runtime.InteropServices.Marshalling.ComVariant",
+      "parameters": [],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshalling.DefaultIUnknownInterfaceDetailsStrategy::GetComExposedTypeDetails:System.Runtime.InteropServices.Marshalling.IComExposedDetails(System.RuntimeTypeHandle)",
+      "namespace": "System.Runtime.InteropServices.Marshalling",
+      "declaringType": "System.Runtime.InteropServices.Marshalling.DefaultIUnknownInterfaceDetailsStrategy",
+      "methodName": "GetComExposedTypeDetails",
+      "returnType": "System.Runtime.InteropServices.Marshalling.IComExposedDetails",
+      "parameters": [
+        "System.RuntimeTypeHandle"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshalling.DefaultIUnknownInterfaceDetailsStrategy::GetIUnknownDerivedDetails:System.Runtime.InteropServices.Marshalling.IIUnknownDerivedDetails(System.RuntimeTypeHandle)",
+      "namespace": "System.Runtime.InteropServices.Marshalling",
+      "declaringType": "System.Runtime.InteropServices.Marshalling.DefaultIUnknownInterfaceDetailsStrategy",
+      "methodName": "GetIUnknownDerivedDetails",
+      "returnType": "System.Runtime.InteropServices.Marshalling.IIUnknownDerivedDetails",
+      "parameters": [
+        "System.RuntimeTypeHandle"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshalling.VirtualMethodTableInfo::Deconstruct:System.Void(System.Void*&,System.Void**&)",
+      "namespace": "System.Runtime.InteropServices.Marshalling",
+      "declaringType": "System.Runtime.InteropServices.Marshalling.VirtualMethodTableInfo",
+      "methodName": "Deconstruct",
+      "returnType": "System.Void",
+      "parameters": [
+        "System.Void*&",
+        "System.Void**&"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    }
+  ],
+  "namespaces": {
+    "System.Runtime.InteropServices": {
+      "methodCount": 12
+    },
+    "System.Runtime.InteropServices.Marshalling": {
+      "methodCount": 11
+    }
+  }
+}

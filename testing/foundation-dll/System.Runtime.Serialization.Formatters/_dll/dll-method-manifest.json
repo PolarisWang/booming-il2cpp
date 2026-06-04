@@ -1,0 +1,651 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Runtime.Serialization.Formatters",
+  "generatedAt": "2026-06-02T02:15:40.0875829Z",
+  "totalMethods": 50,
+  "methods": [
+    {
+      "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.DeserializationEventHandler::Invoke:System.Void(System.Object)",
+      "namespace": "System.Runtime.Serialization",
+      "declaringType": "System.Runtime.Serialization.DeserializationEventHandler",
+      "methodName": "Invoke",
+      "returnType": "System.Void",
+      "parameters": [
+        "System.Object"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.FormatterConverter::Convert:System.Object(System.Object,System.Type)",
+      "namespace": "System.Runtime.Serialization",
+      "declaringType": "System.Runtime.Serialization.FormatterConverter",
+      "methodName": "Convert",
+      "returnType": "System.Object",
+      "parameters": [
+        "System.Object",
+        "System.Type"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.FormatterConverter::Convert:System.Object(System.Object,System.TypeCode)",
+      "namespace": "System.Runtime.Serialization",
+      "declaringType": "System.Runtime.Serialization.FormatterConverter",
+      "methodName": "Convert",
+      "returnType": "System.Object",
+      "parameters": [
+        "System.Object",
+        "System.TypeCode"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.FormatterConverter::ToBoolean:System.Boolean(System.Object)",
+      "namespace": "System.Runtime.Serialization",
+      "declaringType": "System.Runtime.Serialization.FormatterConverter",
+      "methodName": "ToBoolean",
+      "returnType": "System.Boolean",
+      "parameters": [
+        "System.Object"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.FormatterConverter::ToByte:System.Byte(System.Object)",
+      "namespace": "System.Runtime.Serialization",
+      "declaringType": "System.Runtime.Serialization.FormatterConverter",
+      "methodName": "ToByte",
+      "returnType": "System.Byte",
+      "parameters": [
+        "System.Object"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.FormatterConverter::ToChar:System.Char(System.Object)",
+      "namespace": "System.Runtime.Serialization",
+      "declaringType": "System.Runtime.Serialization.FormatterConverter",
+      "methodName": "ToChar",
+      "returnType": "System.Char",
+      "parameters": [
+        "System.Object"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.FormatterConverter::ToDateTime:System.DateTime(System.Object)",
+      "namespace": "System.Runtime.Serialization",
+      "declaringType": "System.Runtime.Serialization.FormatterConverter",
+      "methodName": "ToDateTime",
+      "returnType": "System.DateTime",
+      "parameters": [
+        "System.Object"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.FormatterConverter::ToDecimal:System.Decimal(System.Object)",
+      "namespace": "System.Runtime.Serialization",
+      "declaringType": "System.Runtime.Serialization.FormatterConverter",
+      "methodName": "ToDecimal",
+      "returnType": "System.Decimal",
+      "parameters": [
+        "System.Object"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.FormatterConverter::ToDouble:System.Double(System.Object)",
+      "namespace": "System.Runtime.Serialization",
+      "declaringType": "System.Runtime.Serialization.FormatterConverter",
+      "methodName": "ToDouble",
+      "returnType": "System.Double",
+      "parameters": [
+        "System.Object"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.FormatterConverter::ToInt16:System.Int16(System.Object)",
+      "namespace": "System.Runtime.Serialization",
+      "declaringType": "System.Runtime.Serialization.FormatterConverter",
+      "methodName": "ToInt16",
+      "returnType": "System.Int16",
+      "parameters": [
+        "System.Object"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.FormatterConverter::ToInt32:System.Int32(System.Object)",
+      "namespace": "System.Runtime.Serialization",
+      "declaringType": "System.Runtime.Serialization.FormatterConverter",
+      "methodName": "ToInt32",
+      "returnType": "System.Int32",
+      "parameters": [
+        "System.Object"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.FormatterConverter::ToInt64:System.Int64(System.Object)",
+      "namespace": "System.Runtime.Serialization",
+      "declaringType": "System.Runtime.Serialization.FormatterConverter",
+      "methodName": "ToInt64",
+      "returnType": "System.Int64",
+      "parameters": [
+        "System.Object"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.FormatterConverter::ToSByte:System.SByte(System.Object)",
+      "namespace": "System.Runtime.Serialization",
+      "declaringType": "System.Runtime.Serialization.FormatterConverter",
+      "methodName": "ToSByte",
+      "returnType": "System.SByte",
+      "parameters": [
+        "System.Object"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.FormatterConverter::ToSingle:System.Single(System.Object)",
+      "namespace": "System.Runtime.Serialization",
+      "declaringType": "System.Runtime.Serialization.FormatterConverter",
+      "methodName": "ToSingle",
+      "returnType": "System.Single",
+      "parameters": [
+        "System.Object"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.FormatterConverter::ToUInt16:System.UInt16(System.Object)",
+      "namespace": "System.Runtime.Serialization",
+      "declaringType": "System.Runtime.Serialization.FormatterConverter",
+      "methodName": "ToUInt16",
+      "returnType": "System.UInt16",
+      "parameters": [
+        "System.Object"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.FormatterConverter::ToUInt32:System.UInt32(System.Object)",
+      "namespace": "System.Runtime.Serialization",
+      "declaringType": "System.Runtime.Serialization.FormatterConverter",
+      "methodName": "ToUInt32",
+      "returnType": "System.UInt32",
+      "parameters": [
+        "System.Object"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.FormatterConverter::ToUInt64:System.UInt64(System.Object)",
+      "namespace": "System.Runtime.Serialization",
+      "declaringType": "System.Runtime.Serialization.FormatterConverter",
+      "methodName": "ToUInt64",
+      "returnType": "System.UInt64",
+      "parameters": [
+        "System.Object"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.Formatters.Binary.BinaryFormatter::Deserialize:System.Object(System.IO.Stream)",
+      "namespace": "System.Runtime.Serialization.Formatters.Binary",
+      "declaringType": "System.Runtime.Serialization.Formatters.Binary.BinaryFormatter",
+      "methodName": "Deserialize",
+      "returnType": "System.Object",
+      "parameters": [
+        "System.IO.Stream"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.Formatters.Binary.BinaryFormatter::Serialize:System.Void(System.IO.Stream,System.Object)",
+      "namespace": "System.Runtime.Serialization.Formatters.Binary",
+      "declaringType": "System.Runtime.Serialization.Formatters.Binary.BinaryFormatter",
+      "methodName": "Serialize",
+      "returnType": "System.Void",
+      "parameters": [
+        "System.IO.Stream",
+        "System.Object"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.ObjectIDGenerator::GetId:System.Int64(System.Object,System.Boolean&)",
+      "namespace": "System.Runtime.Serialization",
+      "declaringType": "System.Runtime.Serialization.ObjectIDGenerator",
+      "methodName": "GetId",
+      "returnType": "System.Int64",
+      "parameters": [
+        "System.Object",
+        "System.Boolean&"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.ObjectIDGenerator::HasId:System.Int64(System.Object,System.Boolean&)",
+      "namespace": "System.Runtime.Serialization",
+      "declaringType": "System.Runtime.Serialization.ObjectIDGenerator",
+      "methodName": "HasId",
+      "returnType": "System.Int64",
+      "parameters": [
+        "System.Object",
+        "System.Boolean&"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.ObjectManager::DoFixups:System.Void()",
+      "namespace": "System.Runtime.Serialization",
+      "declaringType": "System.Runtime.Serialization.ObjectManager",
+      "methodName": "DoFixups",
+      "returnType": "System.Void",
+      "parameters": [],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.ObjectManager::GetObject:System.Object(System.Int64)",
+      "namespace": "System.Runtime.Serialization",
+      "declaringType": "System.Runtime.Serialization.ObjectManager",
+      "methodName": "GetObject",
+      "returnType": "System.Object",
+      "parameters": [
+        "System.Int64"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.ObjectManager::RaiseDeserializationEvent:System.Void()",
+      "namespace": "System.Runtime.Serialization",
+      "declaringType": "System.Runtime.Serialization.ObjectManager",
+      "methodName": "RaiseDeserializationEvent",
+      "returnType": "System.Void",
+      "parameters": [],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.ObjectManager::RaiseOnDeserializingEvent:System.Void(System.Object)",
+      "namespace": "System.Runtime.Serialization",
+      "declaringType": "System.Runtime.Serialization.ObjectManager",
+      "methodName": "RaiseOnDeserializingEvent",
+      "returnType": "System.Void",
+      "parameters": [
+        "System.Object"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.ObjectManager::RecordArrayElementFixup:System.Void(System.Int64,System.Int32,System.Int64)",
+      "namespace": "System.Runtime.Serialization",
+      "declaringType": "System.Runtime.Serialization.ObjectManager",
+      "methodName": "RecordArrayElementFixup",
+      "returnType": "System.Void",
+      "parameters": [
+        "System.Int64",
+        "System.Int32",
+        "System.Int64"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.ObjectManager::RecordArrayElementFixup:System.Void(System.Int64,System.Int32[],System.Int64)",
+      "namespace": "System.Runtime.Serialization",
+      "declaringType": "System.Runtime.Serialization.ObjectManager",
+      "methodName": "RecordArrayElementFixup",
+      "returnType": "System.Void",
+      "parameters": [
+        "System.Int64",
+        "System.Int32[]",
+        "System.Int64"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.ObjectManager::RecordDelayedFixup:System.Void(System.Int64,System.String,System.Int64)",
+      "namespace": "System.Runtime.Serialization",
+      "declaringType": "System.Runtime.Serialization.ObjectManager",
+      "methodName": "RecordDelayedFixup",
+      "returnType": "System.Void",
+      "parameters": [
+        "System.Int64",
+        "System.String",
+        "System.Int64"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.ObjectManager::RecordFixup:System.Void(System.Int64,System.Reflection.MemberInfo,System.Int64)",
+      "namespace": "System.Runtime.Serialization",
+      "declaringType": "System.Runtime.Serialization.ObjectManager",
+      "methodName": "RecordFixup",
+      "returnType": "System.Void",
+      "parameters": [
+        "System.Int64",
+        "System.Reflection.MemberInfo",
+        "System.Int64"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.ObjectManager::RegisterObject:System.Void(System.Object,System.Int64)",
+      "namespace": "System.Runtime.Serialization",
+      "declaringType": "System.Runtime.Serialization.ObjectManager",
+      "methodName": "RegisterObject",
+      "returnType": "System.Void",
+      "parameters": [
+        "System.Object",
+        "System.Int64"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.ObjectManager::RegisterObject:System.Void(System.Object,System.Int64,System.Runtime.Serialization.SerializationInfo)",
+      "namespace": "System.Runtime.Serialization",
+      "declaringType": "System.Runtime.Serialization.ObjectManager",
+      "methodName": "RegisterObject",
+      "returnType": "System.Void",
+      "parameters": [
+        "System.Object",
+        "System.Int64",
+        "System.Runtime.Serialization.SerializationInfo"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.ObjectManager::RegisterObject:System.Void(System.Object,System.Int64,System.Runtime.Serialization.SerializationInfo,System.Int64,System.Reflection.MemberInfo)",
+      "namespace": "System.Runtime.Serialization",
+      "declaringType": "System.Runtime.Serialization.ObjectManager",
+      "methodName": "RegisterObject",
+      "returnType": "System.Void",
+      "parameters": [
+        "System.Object",
+        "System.Int64",
+        "System.Runtime.Serialization.SerializationInfo",
+        "System.Int64",
+        "System.Reflection.MemberInfo"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.ObjectManager::RegisterObject:System.Void(System.Object,System.Int64,System.Runtime.Serialization.SerializationInfo,System.Int64,System.Reflection.MemberInfo,System.Int32[])",
+      "namespace": "System.Runtime.Serialization",
+      "declaringType": "System.Runtime.Serialization.ObjectManager",
+      "methodName": "RegisterObject",
+      "returnType": "System.Void",
+      "parameters": [
+        "System.Object",
+        "System.Int64",
+        "System.Runtime.Serialization.SerializationInfo",
+        "System.Int64",
+        "System.Reflection.MemberInfo",
+        "System.Int32[]"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.SerializationEventHandler::BeginInvoke:System.IAsyncResult(System.Runtime.Serialization.StreamingContext,System.AsyncCallback,System.Object)",
+      "namespace": "System.Runtime.Serialization",
+      "declaringType": "System.Runtime.Serialization.SerializationEventHandler",
+      "methodName": "BeginInvoke",
+      "returnType": "System.IAsyncResult",
+      "parameters": [
+        "System.Runtime.Serialization.StreamingContext",
+        "System.AsyncCallback",
+        "System.Object"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.SerializationEventHandler::EndInvoke:System.Void(System.IAsyncResult)",
+      "namespace": "System.Runtime.Serialization",
+      "declaringType": "System.Runtime.Serialization.SerializationEventHandler",
+      "methodName": "EndInvoke",
+      "returnType": "System.Void",
+      "parameters": [
+        "System.IAsyncResult"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.SerializationEventHandler::Invoke:System.Void(System.Runtime.Serialization.StreamingContext)",
+      "namespace": "System.Runtime.Serialization",
+      "declaringType": "System.Runtime.Serialization.SerializationEventHandler",
+      "methodName": "Invoke",
+      "returnType": "System.Void",
+      "parameters": [
+        "System.Runtime.Serialization.StreamingContext"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.SerializationFieldInfo::GetCustomAttributes:System.Object[](System.Boolean)",
+      "namespace": "System.Runtime.Serialization",
+      "declaringType": "System.Runtime.Serialization.SerializationFieldInfo",
+      "methodName": "GetCustomAttributes",
+      "returnType": "System.Object[]",
+      "parameters": [
+        "System.Boolean"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.SerializationFieldInfo::GetCustomAttributes:System.Object[](System.Type,System.Boolean)",
+      "namespace": "System.Runtime.Serialization",
+      "declaringType": "System.Runtime.Serialization.SerializationFieldInfo",
+      "methodName": "GetCustomAttributes",
+      "returnType": "System.Object[]",
+      "parameters": [
+        "System.Type",
+        "System.Boolean"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.SerializationFieldInfo::GetValue:System.Object(System.Object)",
+      "namespace": "System.Runtime.Serialization",
+      "declaringType": "System.Runtime.Serialization.SerializationFieldInfo",
+      "methodName": "GetValue",
+      "returnType": "System.Object",
+      "parameters": [
+        "System.Object"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.SerializationFieldInfo::IsDefined:System.Boolean(System.Type,System.Boolean)",
+      "namespace": "System.Runtime.Serialization",
+      "declaringType": "System.Runtime.Serialization.SerializationFieldInfo",
+      "methodName": "IsDefined",
+      "returnType": "System.Boolean",
+      "parameters": [
+        "System.Type",
+        "System.Boolean"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.SerializationFieldInfo::SetValue:System.Void(System.Object,System.Object,System.Reflection.BindingFlags,System.Reflection.Binder,System.Globalization.CultureInfo)",
+      "namespace": "System.Runtime.Serialization",
+      "declaringType": "System.Runtime.Serialization.SerializationFieldInfo",
+      "methodName": "SetValue",
+      "returnType": "System.Void",
+      "parameters": [
+        "System.Object",
+        "System.Object",
+        "System.Reflection.BindingFlags",
+        "System.Reflection.Binder",
+        "System.Globalization.CultureInfo"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.SerializationObjectManager::RaiseOnSerializedEvent:System.Void()",
+      "namespace": "System.Runtime.Serialization",
+      "declaringType": "System.Runtime.Serialization.SerializationObjectManager",
+      "methodName": "RaiseOnSerializedEvent",
+      "returnType": "System.Void",
+      "parameters": [],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.SerializationObjectManager::RegisterObject:System.Void(System.Object)",
+      "namespace": "System.Runtime.Serialization",
+      "declaringType": "System.Runtime.Serialization.SerializationObjectManager",
+      "methodName": "RegisterObject",
+      "returnType": "System.Void",
+      "parameters": [
+        "System.Object"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.SurrogateForCyclicalReference::GetObjectData:System.Void(System.Object,System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)",
+      "namespace": "System.Runtime.Serialization",
+      "declaringType": "System.Runtime.Serialization.SurrogateForCyclicalReference",
+      "methodName": "GetObjectData",
+      "returnType": "System.Void",
+      "parameters": [
+        "System.Object",
+        "System.Runtime.Serialization.SerializationInfo",
+        "System.Runtime.Serialization.StreamingContext"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.SurrogateForCyclicalReference::SetObjectData:System.Object(System.Object,System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext,System.Runtime.Serialization.ISurrogateSelector)",
+      "namespace": "System.Runtime.Serialization",
+      "declaringType": "System.Runtime.Serialization.SurrogateForCyclicalReference",
+      "methodName": "SetObjectData",
+      "returnType": "System.Object",
+      "parameters": [
+        "System.Object",
+        "System.Runtime.Serialization.SerializationInfo",
+        "System.Runtime.Serialization.StreamingContext",
+        "System.Runtime.Serialization.ISurrogateSelector"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.SurrogateSelector::AddSurrogate:System.Void(System.Type,System.Runtime.Serialization.StreamingContext,System.Runtime.Serialization.ISerializationSurrogate)",
+      "namespace": "System.Runtime.Serialization",
+      "declaringType": "System.Runtime.Serialization.SurrogateSelector",
+      "methodName": "AddSurrogate",
+      "returnType": "System.Void",
+      "parameters": [
+        "System.Type",
+        "System.Runtime.Serialization.StreamingContext",
+        "System.Runtime.Serialization.ISerializationSurrogate"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.SurrogateSelector::ChainSelector:System.Void(System.Runtime.Serialization.ISurrogateSelector)",
+      "namespace": "System.Runtime.Serialization",
+      "declaringType": "System.Runtime.Serialization.SurrogateSelector",
+      "methodName": "ChainSelector",
+      "returnType": "System.Void",
+      "parameters": [
+        "System.Runtime.Serialization.ISurrogateSelector"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.SurrogateSelector::GetNextSelector:System.Runtime.Serialization.ISurrogateSelector()",
+      "namespace": "System.Runtime.Serialization",
+      "declaringType": "System.Runtime.Serialization.SurrogateSelector",
+      "methodName": "GetNextSelector",
+      "returnType": "System.Runtime.Serialization.ISurrogateSelector",
+      "parameters": [],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.SurrogateSelector::GetSurrogate:System.Runtime.Serialization.ISerializationSurrogate(System.Type,System.Runtime.Serialization.StreamingContext,System.Runtime.Serialization.ISurrogateSelector&)",
+      "namespace": "System.Runtime.Serialization",
+      "declaringType": "System.Runtime.Serialization.SurrogateSelector",
+      "methodName": "GetSurrogate",
+      "returnType": "System.Runtime.Serialization.ISerializationSurrogate",
+      "parameters": [
+        "System.Type",
+        "System.Runtime.Serialization.StreamingContext",
+        "System.Runtime.Serialization.ISurrogateSelector&"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.SurrogateSelector::RemoveSurrogate:System.Void(System.Type,System.Runtime.Serialization.StreamingContext)",
+      "namespace": "System.Runtime.Serialization",
+      "declaringType": "System.Runtime.Serialization.SurrogateSelector",
+      "methodName": "RemoveSurrogate",
+      "returnType": "System.Void",
+      "parameters": [
+        "System.Type",
+        "System.Runtime.Serialization.StreamingContext"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    }
+  ],
+  "namespaces": {
+    "System.Runtime.Serialization": {
+      "methodCount": 48
+    },
+    "System.Runtime.Serialization.Formatters.Binary": {
+      "methodCount": 2
+    }
+  }
+}

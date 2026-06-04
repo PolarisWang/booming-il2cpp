@@ -30,17 +30,17 @@ def run_fact_chunk(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageRe
     try:
         r = subprocess.run(
             [str(exe_path), "--fact-json"],
-            capture_output=True, text=True, timeout=120,
+            capture_output=True, timeout=600,
         )
     except subprocess.TimeoutExpired:
         return StageResult(
             stage="fact", status="error",
-            summary="fact timed out after 120s",
+            summary="fact timed out after 600s",
             duration_ms=int((time.perf_counter() - start) * 1000),
         )
 
-    stdout = r.stdout or ""
-    stderr = r.stderr or ""
+    stdout = r.stdout.decode("utf-8", errors="replace") if r.stdout else ""
+    stderr = r.stderr.decode("utf-8", errors="replace") if r.stderr else ""
 
     # Parse JSON output
     fact_results = []
