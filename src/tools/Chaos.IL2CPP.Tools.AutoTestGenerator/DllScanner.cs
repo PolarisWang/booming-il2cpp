@@ -102,6 +102,16 @@ public sealed class DllScanner
         "RootN",
         // MultiplyAddEstimate is a .NET 9 API not in .NET 8 (CS0117).
         "MultiplyAddEstimate",
+        // CS0117: TypeDescriptor.GetConverterFromRegisteredType/GetEventsFromRegisteredType/
+        // GetPropertiesFromRegisteredType are .NET 9+ APIs not available in reference
+        // assemblies (net8.0 fallback of combined subjects DLL).
+        "GetConverterFromRegisteredType",
+        "GetEventsFromRegisteredType",
+        "GetPropertiesFromRegisteredType",
+        // CS1061: GetArgument() is a .NET 9 API on expression tree types
+        // (ElementInit, IndexExpression, InvocationExpression, etc.) not
+        // available in net8.0 reference assemblies.
+        "GetArgument",
     };
 
     // Types that require complex infrastructure (e.g. JsonSerializerOptions) and
@@ -179,6 +189,11 @@ public sealed class DllScanner
         // .NET 9 COM marshalling implementation types absent from reference assemblies.
         "System.Runtime.InteropServices.Marshalling.ComVariantMarshaller",
         "System.Runtime.InteropServices.Marshalling.ComVariant",
+        // DLR internal implementation types: RuntimeOps and CallSiteOps are
+        // in System.Runtime.CompilerServices namespace but absent from reference
+        // assemblies (CS0234 when used as parameter/return types in combined subjects).
+        "System.Runtime.CompilerServices.RuntimeOps",
+        "System.Runtime.CompilerServices.CallSiteOps",
     };
 
     // Marshaller type names that fail C# compilation when concretized.

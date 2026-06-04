@@ -48,6 +48,7 @@ public sealed class TestEmitter
         sb.AppendLine("using System.Collections.Immutable;");
         sb.AppendLine("using System.Collections.ObjectModel;");
         sb.AppendLine("using System.ComponentModel;");
+        sb.AppendLine("using System.ComponentModel.Design;");
         sb.AppendLine("using System.Data;");
         sb.AppendLine("using System.Diagnostics;");
         sb.AppendLine("using System.Formats.Asn1;");
