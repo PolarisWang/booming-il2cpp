@@ -14,6 +14,7 @@
       "binaryDir": "artifacts/presets/debug",
       "cacheVariables": {
         "CHAOS_IL2CPP_CONFIG_TIER": "debug",
+        "CHAOS_IL2CPP_EXEC_PROFILE": "desktop",
         "CHAOS_IL2CPP_GC_BGC": "ON",
         "CHAOS_IL2CPP_GC_PARALLEL_MARK": "ON",
         "CHAOS_IL2CPP_GC_EVENTS": "ON",
@@ -29,6 +30,7 @@
       "binaryDir": "artifacts/presets/asan",
       "cacheVariables": {
         "CHAOS_IL2CPP_CONFIG_TIER": "debug",
+        "CHAOS_IL2CPP_EXEC_PROFILE": "desktop",
         "CMAKE_CXX_FLAGS": "/fsanitize=address /Zi /D_DISABLE_VECTOR_ANNOTATION /D_DISABLE_STRING_ANNOTATION",
         "CMAKE_EXE_LINKER_FLAGS": "/fsanitize=address",
         "CMAKE_SHARED_LINKER_FLAGS": "/fsanitize=address"
@@ -41,7 +43,8 @@
       "generator": "Visual Studio 17 2022",
       "binaryDir": "artifacts/presets/profile",
       "cacheVariables": {
-        "CHAOS_IL2CPP_CONFIG_TIER": "profile"
+        "CHAOS_IL2CPP_CONFIG_TIER": "profile",
+        "CHAOS_IL2CPP_EXEC_PROFILE": "desktop"
       }
     },
     {
@@ -51,7 +54,8 @@
       "generator": "Visual Studio 17 2022",
       "binaryDir": "artifacts/presets/ship",
       "cacheVariables": {
-        "CHAOS_IL2CPP_CONFIG_TIER": "ship"
+        "CHAOS_IL2CPP_CONFIG_TIER": "ship",
+        "CHAOS_IL2CPP_EXEC_PROFILE": "desktop"
       }
     },
     {
@@ -62,7 +66,8 @@
       "binaryDir": "artifacts/presets/windows-x64-reference",
       "toolchainFile": "build/toolchains/windows-x64-reference.cmake",
       "cacheVariables": {
-        "ROADMAP0_PRESET_TARGET": "windows-x64-reference"
+        "ROADMAP0_PRESET_TARGET": "windows-x64-reference",
+        "CHAOS_IL2CPP_EXEC_PROFILE": "desktop"
       }
     },
     {
@@ -73,7 +78,8 @@
       "binaryDir": "artifacts/presets/macos-reference",
       "toolchainFile": "build/toolchains/macos-reference.cmake",
       "cacheVariables": {
-        "ROADMAP0_PRESET_TARGET": "macos-reference"
+        "ROADMAP0_PRESET_TARGET": "macos-reference",
+        "CHAOS_IL2CPP_EXEC_PROFILE": "desktop"
       }
     },
     {
@@ -106,7 +112,8 @@
       "binaryDir": "artifacts/presets/linux-x64-packaging",
       "toolchainFile": "build/toolchains/linux-x64.cmake",
       "cacheVariables": {
-        "ROADMAP0_PRESET_TARGET": "linux-x64-packaging"
+        "ROADMAP0_PRESET_TARGET": "linux-x64-packaging",
+        "CHAOS_IL2CPP_EXEC_PROFILE": "desktop"
       }
     },
     {
@@ -117,7 +124,8 @@
       "binaryDir": "artifacts/presets/linux-arm64-native",
       "toolchainFile": "build/toolchains/linux-arm64-native.cmake",
       "cacheVariables": {
-        "ROADMAP0_PRESET_TARGET": "linux-arm64-native"
+        "ROADMAP0_PRESET_TARGET": "linux-arm64-native",
+        "CHAOS_IL2CPP_EXEC_PROFILE": "desktop"
       }
     },
     {
@@ -128,7 +136,8 @@
       "binaryDir": "artifacts/presets/linux-arm64-smoke",
       "toolchainFile": "build/toolchains/linux-arm64.cmake",
       "cacheVariables": {
-        "ROADMAP0_PRESET_TARGET": "linux-arm64-smoke"
+        "ROADMAP0_PRESET_TARGET": "linux-arm64-smoke",
+        "CHAOS_IL2CPP_EXEC_PROFILE": "desktop"
       }
     }
   ]

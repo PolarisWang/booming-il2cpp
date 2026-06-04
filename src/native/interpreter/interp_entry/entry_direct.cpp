@@ -673,6 +673,12 @@ void InterpreterEntryDirect(
 
     // ── Step A: JIT T4 native code path (preferred in hybrid mode) ───
     // JIT code may deopt — wrap with GC_TRANSITION + deopt handling.
+    // RAII guard ensures GC_TRANSITION_TO_COOPERATIVE runs even if
+    // native_entry throws (H1).  Double-LEAVE is idempotent.
+    struct GcTransitionGuard {
+        ~GcTransitionGuard() noexcept { GC_TRANSITION_TO_COOPERATIVE(); }
+    };
+
     if constexpr (kRuntimeConfig.jit) {
         auto t4_tier = patch_method->tier_state.load(std::memory_order_acquire);
         if (t4_tier >= PatchMethod::kJitted) {
@@ -682,6 +688,7 @@ void InterpreterEntryDirect(
                 using NativeEntry = void (*)(void*, void*);
                 auto native_entry = reinterpret_cast<NativeEntry>(nm->code);
                 GC_TRANSITION_TO_PREEMPTIVE();
+                GcTransitionGuard gc_guard;
                 native_entry(args_buf, ret_buf);
                 GC_TRANSITION_TO_COOPERATIVE();
 
@@ -696,6 +703,7 @@ void InterpreterEntryDirect(
                             chaos::il2cpp::jit::UnregisterNativeCodeSection(dnm->code);
                             chaos::il2cpp::runtime_core::GcUnregisterSlotMap(dnm->code);
                             patch_method->cached_native_method = nullptr;
+                            patch_method->aot_entry = nullptr;  // break C2 cycle: Step A0 would re-enter T4 code
                         }
                         patch_method->deopt_count = 0;
                     }
@@ -881,7 +889,16 @@ void InterpreterEntryDirect(
             std::memcpy(rf.regs.fpr, chaos::il2cpp::jit::g_jit_deopt_state.fpr_file, 32 * sizeof(double));
             std::memcpy(rf.regs.gpr_tags, chaos::il2cpp::jit::g_jit_deopt_state.gpr_tags, 64);
             std::memcpy(rf.regs.fpr_tags, chaos::il2cpp::jit::g_jit_deopt_state.fpr_tags, 32);
-            rf.pc = chaos::il2cpp::jit::g_jit_deopt_state.instr_pc;
+            // H3: bound-check deopt PC before assignment to prevent out-of-range
+            // access in RegisterExecute.  On mismatch, restart from PC 0.
+            auto deopt_pc = chaos::il2cpp::jit::g_jit_deopt_state.instr_pc;
+            if (CHAOS_IL2CPP_UNLIKELY(deopt_pc >= exec_instr_count)) {
+                CHAOS_IL2CPP_LOG_WARN_M("jit", "Step B: deopt PC %u out of bounds "
+                    "(max %u), restarting from PC 0", deopt_pc, exec_instr_count);
+                rf.pc = 0;
+            } else {
+                rf.pc = deopt_pc;
+            }
             rf.osr_reenable = true;  // trigger immediate OSR on first backedge
             chaos::il2cpp::jit::g_jit_deopt_state = {};
         }

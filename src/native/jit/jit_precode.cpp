@@ -33,6 +33,8 @@
 #include "jit_seh.h"             // RegisterNativeCodeSection
 #include <jit_registration.h>    // JitEntry
 #include <patch_loader.h>        // PatchMethod (full definition)
+
+#include <mutex>
 #include <tier_manager.h>        // TierManager::EnqueueJitRecompilation
 #include <slot_map.h>            // ReverseSlotMap, g_reverse_slot_map
 #include <chaos/log.h>           // CHAOS_IL2CPP_LOG_ERROR_M
@@ -388,10 +390,18 @@ extern "C" void* JitStubDispatchImpl(JitPrecode* precode) noexcept {
     // Fast relaxed check: already compiled?
     uint32_t s = precode->state.load(std::memory_order_acquire);
     if (s == kPrecodeCompiled) {
+        // After DP1-a transfer (TransferPrecodeOwnership), precode->compiled
+        // is null — the compiled JitMethod was handed off to the tier system.
+        // Return original AOT code as fallback.  The direct_ptr has been
+        // patched to JIT code, so this is only a race window.
+        if (!precode->compiled) {
+            return precode->original_direct_ptr;
+        }
+
         // Hot-update stale check: if a callee was hotpatched after being inlined
         // into this method, the stale flag is set by InlineReverseMap.  Trigger
         // recompilation by resetting state to kPrecodeUncompiled.
-        if (precode->compiled && precode->compiled->stale.exchange(false)) {
+        if (precode->compiled->stale.exchange(false)) {
             // CAS: Compiled → Uncompiled.  If another thread already grabbed
             // the recompilation slot, this CAS fails and we just re-read state.
             uint32_t expected_compiled = kPrecodeCompiled;
@@ -471,16 +481,24 @@ extern "C" void* JitStubDispatchImpl(JitPrecode* precode) noexcept {
                 std::this_thread::yield();
                 if (spins > kSpinTimeout + 1000) {
                     // Compiler thread appears crashed (state stuck at Compiling).
-                    // Fail gracefully instead of spinning forever.
-                    return nullptr;
+                    // Fall back to original AOT code instead of spinning forever.
+                    CHAOS_IL2CPP_LOG_WARN_M("jit",
+                        "JitStubDispatchImpl: spin-timeout on precode %p, "
+                        "falling back to AOT", static_cast<void*>(precode));
+                    return precode->original_direct_ptr;
                 }
                 spins = 1000;  // keep yielding, don't reset
             }
         }
     }
 
-    // State is now kPrecodeCompiled (or we'd have looped forever above)
-    return precode->compiled->code;
+    // State is now kPrecodeCompiled (or we'd have timed out above).
+    // After DP1-a transfer, precode->compiled may be null — fall back
+    // to original AOT code if so.
+    if (precode->compiled) {
+        return precode->compiled->code;
+    }
+    return precode->original_direct_ptr;
 }
 
 // ── PrecodeArena (file-level static, no MSVC thread-safe init guard) ──────
@@ -669,14 +687,19 @@ extern "C" void* JitRecompileToTier1(JitPrecode* precode) noexcept {
     // compiled code or accessing its metadata (slot map, deopt entries).
     // Push to a static deferred-delete queue instead.  The queue is drained
     // periodically (every 1024 pushes) to bound memory growth.
+    // M4: mutex-guarded for thread safety (TierManager background thread).
     if (precode->retired) {
         static std::vector<JitMethod*> s_deferred_delete;
         static size_t s_deferred_count = 0;
-        s_deferred_delete.push_back(precode->retired);
-        if (++s_deferred_count >= 1024) {
-            for (auto* p : s_deferred_delete) delete p;
-            s_deferred_delete.clear();
-            s_deferred_count = 0;
+        static std::mutex s_deferred_mutex;
+        {
+            std::lock_guard<std::mutex> lock(s_deferred_mutex);
+            s_deferred_delete.push_back(precode->retired);
+            if (++s_deferred_count >= 1024) {
+                for (auto* p : s_deferred_delete) delete p;
+                s_deferred_delete.clear();
+                s_deferred_count = 0;
+            }
         }
     }
     precode->retired = precode->compiled;
