@@ -98,6 +98,9 @@ uint32_t EmitUnwindInfo(
 RuntimeFunction* AllocRuntimeFunction(uint32_t unwind_info_offset,
                                       uint32_t code_size) noexcept;
 
+/// Debug: dump UNWIND_INFO bytes to stderr.
+void DebugDumpUnwindInfo(const CodeBuffer& buf, uint32_t unwind_start, uint32_t code_size) noexcept;
+
 /// Personality routine for managed exception dispatch across T4 frames (V2).
 /// Declared extern "C" for stable ABI. Defined in WinSehHandler.cpp.
 extern "C" void JitPersonalityRoutine();

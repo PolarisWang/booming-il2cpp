@@ -78,6 +78,7 @@ private:
         uint8_t* base;       // RWX virtual address
         uint32_t pos;        // next free offset
         uint32_t capacity;   // total page size
+        void*    runtime_function; // Win64 RUNTIME_FUNCTION[1] for the page's shared entry .pdata (heap-allocated, freed in ~PrecodeArena)
     };
 
     void EnsurePage() noexcept;

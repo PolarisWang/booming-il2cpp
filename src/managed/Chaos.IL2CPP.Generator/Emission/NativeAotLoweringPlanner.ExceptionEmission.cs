@@ -3610,7 +3610,7 @@ private void EmitLinearInitObj(StringBuilder builder, AotCoreIrInstructionArtifa
 		builder.AppendLine($"{indentation}            }}");
 		builder.AppendLine($"{indentation}            if (chaos_invocation_delegate->chaos_delegate_target == 0)");
 		builder.AppendLine($"{indentation}            {{");
-		builder.AppendLine($"{indentation}                const auto chaos_open_function = reinterpret_cast<{openFnType}>(chaos_invocation_delegate->chaos_delegate_method_ptr);");
+		builder.AppendLine($"{indentation}                auto chaos_open_function = reinterpret_cast<{openFnType}>(chaos_invocation_delegate->chaos_delegate_method_ptr);");
 		string openCall = "chaos_open_function(" + FormatAbiInvocationArgumentList(parameterAbis) + ")";
 		if (string.Equals(returnType, "void", StringComparison.Ordinal))
 		{
@@ -3623,7 +3623,7 @@ private void EmitLinearInitObj(StringBuilder builder, AotCoreIrInstructionArtifa
 		builder.AppendLine($"{indentation}            }}");
 		builder.AppendLine($"{indentation}            else");
 		builder.AppendLine($"{indentation}            {{");
-		builder.AppendLine($"{indentation}                const auto chaos_closed_function = reinterpret_cast<{closedFnType}>(chaos_invocation_delegate->chaos_delegate_method_ptr);");
+		builder.AppendLine($"{indentation}                auto chaos_closed_function = reinterpret_cast<{closedFnType}>(chaos_invocation_delegate->chaos_delegate_method_ptr);");
 		string closedCall = "chaos_closed_function(chaos_invocation_delegate->chaos_delegate_target" + ((parameterAbis.Count == 0) ? string.Empty : (", " + FormatAbiInvocationArgumentList(parameterAbis))) + ")";
 		string singleClosedCall = "chaos_closed_function(chaos_delegate->chaos_delegate_target" + ((parameterAbis.Count == 0) ? string.Empty : (", " + FormatAbiInvocationArgumentList(parameterAbis))) + ")";
 						if (string.Equals(returnType, "void", StringComparison.Ordinal))
@@ -3694,7 +3694,7 @@ private void EmitLinearInitObj(StringBuilder builder, AotCoreIrInstructionArtifa
 		}
 		builder.AppendLine($"{indentation}            if (chaos_delegate->chaos_delegate_target == 0)");
 		builder.AppendLine($"{indentation}            {{");
-		builder.AppendLine($"{indentation}                const auto chaos_open_function = reinterpret_cast<{openFnType}>(chaos_delegate->chaos_delegate_method_ptr);");
+		builder.AppendLine($"{indentation}                auto chaos_open_function = reinterpret_cast<{openFnType}>(chaos_delegate->chaos_delegate_method_ptr);");
 		if (string.Equals(returnType, "void", StringComparison.Ordinal))
 		{
 			builder.AppendLine($"{indentation}                {openCall};");
@@ -3706,7 +3706,7 @@ private void EmitLinearInitObj(StringBuilder builder, AotCoreIrInstructionArtifa
 		builder.AppendLine($"{indentation}            }}");
 		builder.AppendLine($"{indentation}            else");
 		builder.AppendLine($"{indentation}            {{");
-		builder.AppendLine($"{indentation}                const auto chaos_closed_function = reinterpret_cast<{closedFnType}>(chaos_delegate->chaos_delegate_method_ptr);");
+		builder.AppendLine($"{indentation}                auto chaos_closed_function = reinterpret_cast<{closedFnType}>(chaos_delegate->chaos_delegate_method_ptr);");
 		if (string.Equals(returnType, "void", StringComparison.Ordinal))
 		{
 			builder.AppendLine($"{indentation}                {singleClosedCall};");

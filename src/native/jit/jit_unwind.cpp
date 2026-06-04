@@ -36,7 +36,7 @@ uint32_t EmitUnwindInfo(
     // 1 or 2 UWOP_ALLOC_* for sub rsp, K
     uint32_t code_count = num_push_regs + 1;
 
-    bool alloc_small = (frame_sub_size <= (128u * 1024u)) &&
+    bool alloc_small = (frame_sub_size >= 8) && (frame_sub_size <= 128) &&
                        (frame_sub_size % 8 == 0);
     uint32_t alloc_code_count = alloc_small ? 1 : 2;
     code_count += alloc_code_count;
@@ -44,16 +44,25 @@ uint32_t EmitUnwindInfo(
     if (code_count > 255) code_count = 255;
 
     // ── Emit UNWIND_INFO header (4 bytes) ─────────────────────────────
-    uint8_t size_of_prolog = static_cast<uint8_t>((prologue_size + 15) / 16);
-    if (size_of_prolog == 0) size_of_prolog = 1;
+    // SizeOfProlog = 255 (max uint8_t).  This is safe because:
+    //   a) At crash time IP is always well past the prologue → the unwinder
+    //      enters "after prologue" mode and applies all codes unconditionally
+    //      without per-slot CodeOffset validation.
+    //   b) ALLOC_LARGE's 2nd slot stores the allocation size as raw data in
+    //      its "CodeOffset" byte.  A value < SizeOfProlog is required to pass
+    //      ntdll's internal validation pass; 255 accommodates any reasonable
+    //      single-byte allocation size value.
+    uint8_t size_of_prolog = 255;
 
     // Version=1, Flags=UNW_FLAG_EHANDLER if has_seh
     uint8_t flags = has_seh ? 0x01u : 0x00u;  // UNW_FLAG_EHANDLER = 0x01
     buf.EmitByte(static_cast<uint8_t>(1 | (flags << 3)));
     buf.EmitByte(size_of_prolog);
     buf.EmitByte(static_cast<uint8_t>(code_count));
-    // FrameRegister=5(RBP), FrameOffset=0
-    buf.EmitByte(static_cast<uint8_t>(5));
+    // FrameRegister=5(RBP), FrameOffset=1 (CFA = RBP + 16)
+    // After push rbp + mov rbp, rsp: RBP = caller_RSP - 16,
+    // so CFA (caller_RSP) = RBP + 16 = RBP + FrameOffset*16 → FrameOffset=1
+    buf.EmitByte(static_cast<uint8_t>((1 << 4) | 5));
 
     // ── Emit UNWIND_CODE entries (reverse prologue order) ─────────────
     // Prologue order (stack operations only):
@@ -69,8 +78,8 @@ uint32_t EmitUnwindInfo(
     //   2. push cached[N-1] ... push cached[0]
     //   3. push rsi
     //   4. push rbx
-    //   5. mov rbp, rsp (SET_FPREG)
-    //   6. push rbp
+    //   5. push rbp (PUSH_NONVOL — frame register)
+    //   6. mov rbp, rsp (SET_FPREG — MUST follow PUSH_NONVOL for frame register)
 
     // 1. sub rsp, K
     if (alloc_small) {
@@ -78,11 +87,11 @@ uint32_t EmitUnwindInfo(
         if (scale < 1) scale = 1;
         uint8_t op_info = static_cast<uint8_t>(scale - 1);
         buf.EmitByte(static_cast<uint8_t>(sub_rsp_offset));
-        buf.EmitByte(static_cast<uint8_t>((UWOP_ALLOC_SMALL << 4) | (op_info & 0x0F)));
+        buf.EmitByte(static_cast<uint8_t>((op_info << 4) | UWOP_ALLOC_SMALL));
     } else {
         uint32_t scaled = frame_sub_size / 8;
         buf.EmitByte(static_cast<uint8_t>(sub_rsp_offset));
-        buf.EmitByte(static_cast<uint8_t>((UWOP_ALLOC_LARGE << 4) | 0));
+        buf.EmitByte(static_cast<uint8_t>((1 << 4) | UWOP_ALLOC_LARGE));  // OpInfo=1: scaled by 8
         buf.EmitByte(static_cast<uint8_t>(scaled & 0xFF));
         buf.EmitByte(static_cast<uint8_t>((scaled >> 8) & 0xFF));
     }
@@ -91,16 +100,18 @@ uint32_t EmitUnwindInfo(
     // push_reg_nums[0] = rbp, [1] = rbx, [2] = rsi, [3+] = cached regs
     for (uint32_t i = num_push_regs - 1; i >= 1; --i) {
         buf.EmitByte(static_cast<uint8_t>(push_reg_offsets[i]));
-        buf.EmitByte(static_cast<uint8_t>((UWOP_PUSH_NONVOL << 4) | (push_reg_nums[i] & 0x0F)));
+        buf.EmitByte(static_cast<uint8_t>((push_reg_nums[i] << 4) | UWOP_PUSH_NONVOL));
     }
 
-    // 3. UWOP_SET_FPREG (mov rbp, rsp)
-    buf.EmitByte(static_cast<uint8_t>(set_fpreg_offset));
-    buf.EmitByte(static_cast<uint8_t>((UWOP_SET_FPREG << 4) | 0));
-
-    // 4. push rbp (index 0)
+    // 3. push rbp (index 0) — frame register push
     buf.EmitByte(static_cast<uint8_t>(push_reg_offsets[0]));
-    buf.EmitByte(static_cast<uint8_t>((UWOP_PUSH_NONVOL << 4) | (push_reg_nums[0] & 0x0F)));
+    buf.EmitByte(static_cast<uint8_t>((push_reg_nums[0] << 4) | UWOP_PUSH_NONVOL));
+
+    // 4. UWOP_SET_FPREG (mov rbp, rsp) — MUST immediately follow PUSH_NONVOL(rbp)
+    // per Win64 ABI: "the corresponding unwind code must immediately follow
+    //  the unwind code that establishes the frame pointer register push"
+    buf.EmitByte(static_cast<uint8_t>(set_fpreg_offset));
+    buf.EmitByte(static_cast<uint8_t>(UWOP_SET_FPREG));
 
     // ── Pad to 4-byte boundary ────────────────────────────────────────
     uint32_t code_bytes = code_count * 2;
@@ -129,6 +140,34 @@ uint32_t EmitUnwindInfo(
     }
 
     return unwind_start;
+}
+
+void DebugDumpUnwindInfo(const CodeBuffer& buf, uint32_t unwind_start, uint32_t code_size) noexcept {
+    const uint8_t* d = buf.Data();
+    if (!d) return;
+    uint32_t pos = unwind_start;
+    fprintf(stderr, "[unwind_dbg] UNWIND_INFO at offset=%u code_size=%u\n", unwind_start, code_size);
+    fprintf(stderr, "[unwind_dbg]   header[0]=0x%02X (ver_flags)\n", d[pos]);
+    fprintf(stderr, "[unwind_dbg]   header[1]=0x%02X (size_of_prolog)\n", d[pos+1]);
+    fprintf(stderr, "[unwind_dbg]   header[2]=0x%02X (count_of_codes)\n", d[pos+2]);
+    fprintf(stderr, "[unwind_dbg]   header[3]=0x%02X (fp_reg+offset)\n", d[pos+3]);
+    uint32_t code_count = d[pos+2];
+    for (uint32_t i = 0; i < code_count && i < 20; ++i) {
+        uint32_t off = pos + 4 + i*2;
+        fprintf(stderr, "[unwind_dbg]   code[%u] offset=%u op=0x%02X\n",
+                i, (unsigned)d[off], (unsigned)d[off+1]);
+    }
+    uint32_t code_bytes = code_count * 2;
+    uint32_t pad = (4 - (code_bytes % 4)) % 4;
+    uint32_t seh_offset = pos + 4 + code_bytes + pad;
+    fprintf(stderr, "[unwind_dbg]   code_bytes=%u pad=%u seh_at=%u\n", code_bytes, pad, seh_offset);
+    uint32_t flags = (d[pos] >> 3) & 0x1F;
+    if (flags & 0x01) {
+        uint32_t handler_rva;
+        memcpy(&handler_rva, d + seh_offset, sizeof(handler_rva));
+        fprintf(stderr, "[unwind_dbg]   SEH handler RVA=0x%08X\n", handler_rva);
+    }
+    fflush(stderr);
 }
 
 RuntimeFunction* AllocRuntimeFunction(uint32_t unwind_info_offset,
