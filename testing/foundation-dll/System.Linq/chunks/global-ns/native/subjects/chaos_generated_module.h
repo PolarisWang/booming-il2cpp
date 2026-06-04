@@ -93,36 +93,41 @@ struct Functions {
                     CHAOS_IL2CPP_INTPTR
         );
         void (*AreEqual_9)(
-                    CHAOS_IL2CPP_INT8, 
-                    CHAOS_IL2CPP_INT8, 
+                    CHAOS_IL2CPP_INTPTR, 
+                    CHAOS_IL2CPP_INTPTR, 
                     CHAOS_IL2CPP_INTPTR
         );
         void (*AreEqual_10)(
-                    float, 
-                    float, 
+                    CHAOS_IL2CPP_INT8, 
+                    CHAOS_IL2CPP_INT8, 
                     CHAOS_IL2CPP_INTPTR
         );
         void (*AreEqual_11)(
-                    CHAOS_IL2CPP_INTPTR, 
-                    CHAOS_IL2CPP_INTPTR, 
+                    float, 
+                    float, 
                     CHAOS_IL2CPP_INTPTR
         );
         void (*AreEqual_12)(
-                    CHAOS_IL2CPP_UINT16, 
-                    CHAOS_IL2CPP_UINT16, 
+                    CHAOS_IL2CPP_INTPTR, 
+                    CHAOS_IL2CPP_INTPTR, 
                     CHAOS_IL2CPP_INTPTR
         );
         void (*AreEqual_13)(
-                    CHAOS_IL2CPP_INTPTR, 
-                    CHAOS_IL2CPP_INTPTR, 
+                    CHAOS_IL2CPP_UINT16, 
+                    CHAOS_IL2CPP_UINT16, 
                     CHAOS_IL2CPP_INTPTR
         );
         void (*AreEqual_14)(
+                    CHAOS_IL2CPP_INTPTR, 
+                    CHAOS_IL2CPP_INTPTR, 
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*AreEqual_15)(
                     CHAOS_IL2CPP_UINT64, 
                     CHAOS_IL2CPP_UINT64, 
                     CHAOS_IL2CPP_INTPTR
         );
-        void (*AreEqual_15)(
+        void (*AreEqual_16)(
                     CHAOS_IL2CPP_INTPTR, 
                     CHAOS_IL2CPP_INTPTR, 
                     CHAOS_IL2CPP_INTPTR
@@ -2226,11 +2231,6 @@ struct Functions {
                     CHAOS_IL2CPP_INT32, 
                     CHAOS_IL2CPP_INT32
         );
-        CHAOS_IL2CPP_INT32 (*_Aggregate_0_IEnumerableint_System_Funcintintint_1_b__2_0)(
-                    CHAOS_IL2CPP_INTPTR, 
-                    CHAOS_IL2CPP_INT32, 
-                    CHAOS_IL2CPP_INT32
-        );
         CHAOS_IL2CPP_INT32 (*_Aggregate_1_IEnumerableint_int_System_Funcintintint_2_b__8_0)(
                     CHAOS_IL2CPP_INTPTR, 
                     CHAOS_IL2CPP_INT32, 
@@ -2250,26 +2250,6 @@ struct Functions {
                     CHAOS_IL2CPP_INT32
         );
         CHAOS_IL2CPP_INTPTR (*_Any_4_IEnumerableint_System_Funcintbool_1_b__22_0)(
-                    CHAOS_IL2CPP_INTPTR, 
-                    CHAOS_IL2CPP_INT32
-        );
-        CHAOS_IL2CPP_INT32 (*_Average_18_IEnumerableint_System_Funcintint_1_b__82_0)(
-                    CHAOS_IL2CPP_INTPTR, 
-                    CHAOS_IL2CPP_INT32
-        );
-        CHAOS_IL2CPP_INT64 (*_Average_19_IEnumerableint_System_Funcintlong_1_b__86_0)(
-                    CHAOS_IL2CPP_INTPTR, 
-                    CHAOS_IL2CPP_INT32
-        );
-        float (*_Average_20_IEnumerableint_System_Funcintfloat_1_b__90_0)(
-                    CHAOS_IL2CPP_INTPTR, 
-                    CHAOS_IL2CPP_INT32
-        );
-        double (*_Average_21_IEnumerableint_System_Funcintdouble_1_b__94_0)(
-                    CHAOS_IL2CPP_INTPTR, 
-                    CHAOS_IL2CPP_INT32
-        );
-        CHAOS_IL2CPP_INTPTR (*_Average_22_IEnumerableint_System_Funcintdecimal_1_b__98_0)(
                     CHAOS_IL2CPP_INTPTR, 
                     CHAOS_IL2CPP_INT32
         );
@@ -2795,10 +2775,6 @@ struct Functions {
                     CHAOS_IL2CPP_INTPTR, 
                     CHAOS_IL2CPP_INT32
         );
-        CHAOS_IL2CPP_INTPTR (*_First_58_IEnumerableint_System_Funcintbool_1_b__260_0)(
-                    CHAOS_IL2CPP_INTPTR, 
-                    CHAOS_IL2CPP_INT32
-        );
         CHAOS_IL2CPP_INT32 (*_GroupBy_63_IEnumerableint_System_Funcintint_1_b__284_0)(
                     CHAOS_IL2CPP_INTPTR, 
                     CHAOS_IL2CPP_INT32
@@ -2935,27 +2911,7 @@ struct Functions {
                     CHAOS_IL2CPP_INTPTR, 
                     CHAOS_IL2CPP_INT32
         );
-        CHAOS_IL2CPP_INTPTR (*_Last_81_IEnumerableint_System_Funcintbool_1_b__356_0)(
-                    CHAOS_IL2CPP_INTPTR, 
-                    CHAOS_IL2CPP_INT32
-        );
         CHAOS_IL2CPP_INTPTR (*_LongCount_40_IEnumerableint_System_Funcintbool_1_b__180_0)(
-                    CHAOS_IL2CPP_INTPTR, 
-                    CHAOS_IL2CPP_INT32
-        );
-        CHAOS_IL2CPP_INT32 (*_MaxBy_90_IEnumerableint_System_Funcintint_1_b__396_0)(
-                    CHAOS_IL2CPP_INTPTR, 
-                    CHAOS_IL2CPP_INT32
-        );
-        CHAOS_IL2CPP_INT32 (*_MaxBy_91_IEnumerableint_System_Funcintint_IComparerint_1_b__400_0)(
-                    CHAOS_IL2CPP_INTPTR, 
-                    CHAOS_IL2CPP_INT32
-        );
-        CHAOS_IL2CPP_INT32 (*_MinBy_92_IEnumerableint_System_Funcintint_1_b__404_0)(
-                    CHAOS_IL2CPP_INTPTR, 
-                    CHAOS_IL2CPP_INT32
-        );
-        CHAOS_IL2CPP_INT32 (*_MinBy_93_IEnumerableint_System_Funcintint_IComparerint_1_b__408_0)(
                     CHAOS_IL2CPP_INTPTR, 
                     CHAOS_IL2CPP_INT32
         );
@@ -3017,10 +2973,6 @@ struct Functions {
                     CHAOS_IL2CPP_INT32
         );
         CHAOS_IL2CPP_INTPTR (*_SingleOrDefault_123_IEnumerableint_System_Funcintbool_int_2_b__536_0)(
-                    CHAOS_IL2CPP_INTPTR, 
-                    CHAOS_IL2CPP_INT32
-        );
-        CHAOS_IL2CPP_INTPTR (*_Single_119_IEnumerableint_System_Funcintbool_1_b__516_0)(
                     CHAOS_IL2CPP_INTPTR, 
                     CHAOS_IL2CPP_INT32
         );
@@ -3187,11 +3139,6 @@ struct Functions {
         void (*ctor)(
                     CHAOS_IL2CPP_INTPTR
         );
-        CHAOS_IL2CPP_INT32 (*_ApplyResultSelector_2_System_FuncintIEnumerableintint_1_b__8_0)(
-                    CHAOS_IL2CPP_INTPTR, 
-                    CHAOS_IL2CPP_INT32, 
-                    CHAOS_IL2CPP_INTPTR
-        );
         CHAOS_IL2CPP_INT32 (*_Benchmark_ApplyResultSelector_2_System_FuncintIEnumerableintint_1_b__9_0)(
                     CHAOS_IL2CPP_INTPTR, 
                     CHAOS_IL2CPP_INT32, 
@@ -3317,8 +3264,8 @@ struct Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert {
         );
     }
     static inline void AreEqual_9(
-                CHAOS_IL2CPP_INT8 arg_0, 
-                CHAOS_IL2CPP_INT8 arg_1, 
+                CHAOS_IL2CPP_INTPTR arg_0, 
+                CHAOS_IL2CPP_INTPTR arg_1, 
                 CHAOS_IL2CPP_INTPTR arg_2
     ) {
         return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_Assert.AreEqual_9(
@@ -3328,8 +3275,8 @@ struct Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert {
         );
     }
     static inline void AreEqual_10(
-                float arg_0, 
-                float arg_1, 
+                CHAOS_IL2CPP_INT8 arg_0, 
+                CHAOS_IL2CPP_INT8 arg_1, 
                 CHAOS_IL2CPP_INTPTR arg_2
     ) {
         return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_Assert.AreEqual_10(
@@ -3339,8 +3286,8 @@ struct Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert {
         );
     }
     static inline void AreEqual_11(
-                CHAOS_IL2CPP_INTPTR arg_0, 
-                CHAOS_IL2CPP_INTPTR arg_1, 
+                float arg_0, 
+                float arg_1, 
                 CHAOS_IL2CPP_INTPTR arg_2
     ) {
         return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_Assert.AreEqual_11(
@@ -3350,8 +3297,8 @@ struct Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert {
         );
     }
     static inline void AreEqual_12(
-                CHAOS_IL2CPP_UINT16 arg_0, 
-                CHAOS_IL2CPP_UINT16 arg_1, 
+                CHAOS_IL2CPP_INTPTR arg_0, 
+                CHAOS_IL2CPP_INTPTR arg_1, 
                 CHAOS_IL2CPP_INTPTR arg_2
     ) {
         return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_Assert.AreEqual_12(
@@ -3361,8 +3308,8 @@ struct Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert {
         );
     }
     static inline void AreEqual_13(
-                CHAOS_IL2CPP_INTPTR arg_0, 
-                CHAOS_IL2CPP_INTPTR arg_1, 
+                CHAOS_IL2CPP_UINT16 arg_0, 
+                CHAOS_IL2CPP_UINT16 arg_1, 
                 CHAOS_IL2CPP_INTPTR arg_2
     ) {
         return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_Assert.AreEqual_13(
@@ -3372,8 +3319,8 @@ struct Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert {
         );
     }
     static inline void AreEqual_14(
-                CHAOS_IL2CPP_UINT64 arg_0, 
-                CHAOS_IL2CPP_UINT64 arg_1, 
+                CHAOS_IL2CPP_INTPTR arg_0, 
+                CHAOS_IL2CPP_INTPTR arg_1, 
                 CHAOS_IL2CPP_INTPTR arg_2
     ) {
         return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_Assert.AreEqual_14(
@@ -3383,11 +3330,22 @@ struct Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert {
         );
     }
     static inline void AreEqual_15(
+                CHAOS_IL2CPP_UINT64 arg_0, 
+                CHAOS_IL2CPP_UINT64 arg_1, 
+                CHAOS_IL2CPP_INTPTR arg_2
+    ) {
+        return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_Assert.AreEqual_15(
+                    arg_0, 
+                    arg_1, 
+                    arg_2
+        );
+    }
+    static inline void AreEqual_16(
                 CHAOS_IL2CPP_INTPTR arg_0, 
                 CHAOS_IL2CPP_INTPTR arg_1, 
                 CHAOS_IL2CPP_INTPTR arg_2
     ) {
-        return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_Assert.AreEqual_15(
+        return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_Assert.AreEqual_16(
                     arg_0, 
                     arg_1, 
                     arg_2
@@ -3475,7 +3433,7 @@ struct Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert {
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 27;
+    static constexpr int32_t MethodCount = 28;
 };
 
 struct Chaos_TestFramework_Sdk_Chaos_TestFramework_AssertionException {
@@ -7610,17 +7568,6 @@ struct CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___
                     arg_2
         );
     }
-    static inline CHAOS_IL2CPP_INT32 _Aggregate_0_IEnumerableint_System_Funcintintint_1_b__2_0(
-                CHAOS_IL2CPP_INTPTR arg_0, 
-                CHAOS_IL2CPP_INT32 arg_1, 
-                CHAOS_IL2CPP_INT32 arg_2
-    ) {
-        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._Aggregate_0_IEnumerableint_System_Funcintintint_1_b__2_0(
-                    arg_0, 
-                    arg_1, 
-                    arg_2
-        );
-    }
     static inline CHAOS_IL2CPP_INT32 _Aggregate_1_IEnumerableint_int_System_Funcintintint_2_b__8_0(
                 CHAOS_IL2CPP_INTPTR arg_0, 
                 CHAOS_IL2CPP_INT32 arg_1, 
@@ -7666,51 +7613,6 @@ struct CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___
                 CHAOS_IL2CPP_INT32 arg_1
     ) {
         return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._Any_4_IEnumerableint_System_Funcintbool_1_b__22_0(
-                    arg_0, 
-                    arg_1
-        );
-    }
-    static inline CHAOS_IL2CPP_INT32 _Average_18_IEnumerableint_System_Funcintint_1_b__82_0(
-                CHAOS_IL2CPP_INTPTR arg_0, 
-                CHAOS_IL2CPP_INT32 arg_1
-    ) {
-        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._Average_18_IEnumerableint_System_Funcintint_1_b__82_0(
-                    arg_0, 
-                    arg_1
-        );
-    }
-    static inline CHAOS_IL2CPP_INT64 _Average_19_IEnumerableint_System_Funcintlong_1_b__86_0(
-                CHAOS_IL2CPP_INTPTR arg_0, 
-                CHAOS_IL2CPP_INT32 arg_1
-    ) {
-        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._Average_19_IEnumerableint_System_Funcintlong_1_b__86_0(
-                    arg_0, 
-                    arg_1
-        );
-    }
-    static inline float _Average_20_IEnumerableint_System_Funcintfloat_1_b__90_0(
-                CHAOS_IL2CPP_INTPTR arg_0, 
-                CHAOS_IL2CPP_INT32 arg_1
-    ) {
-        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._Average_20_IEnumerableint_System_Funcintfloat_1_b__90_0(
-                    arg_0, 
-                    arg_1
-        );
-    }
-    static inline double _Average_21_IEnumerableint_System_Funcintdouble_1_b__94_0(
-                CHAOS_IL2CPP_INTPTR arg_0, 
-                CHAOS_IL2CPP_INT32 arg_1
-    ) {
-        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._Average_21_IEnumerableint_System_Funcintdouble_1_b__94_0(
-                    arg_0, 
-                    arg_1
-        );
-    }
-    static inline CHAOS_IL2CPP_INTPTR _Average_22_IEnumerableint_System_Funcintdecimal_1_b__98_0(
-                CHAOS_IL2CPP_INTPTR arg_0, 
-                CHAOS_IL2CPP_INT32 arg_1
-    ) {
-        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._Average_22_IEnumerableint_System_Funcintdecimal_1_b__98_0(
                     arg_0, 
                     arg_1
         );
@@ -8884,15 +8786,6 @@ struct CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___
                     arg_1
         );
     }
-    static inline CHAOS_IL2CPP_INTPTR _First_58_IEnumerableint_System_Funcintbool_1_b__260_0(
-                CHAOS_IL2CPP_INTPTR arg_0, 
-                CHAOS_IL2CPP_INT32 arg_1
-    ) {
-        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._First_58_IEnumerableint_System_Funcintbool_1_b__260_0(
-                    arg_0, 
-                    arg_1
-        );
-    }
     static inline CHAOS_IL2CPP_INT32 _GroupBy_63_IEnumerableint_System_Funcintint_1_b__284_0(
                 CHAOS_IL2CPP_INTPTR arg_0, 
                 CHAOS_IL2CPP_INT32 arg_1
@@ -9197,56 +9090,11 @@ struct CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___
                     arg_1
         );
     }
-    static inline CHAOS_IL2CPP_INTPTR _Last_81_IEnumerableint_System_Funcintbool_1_b__356_0(
-                CHAOS_IL2CPP_INTPTR arg_0, 
-                CHAOS_IL2CPP_INT32 arg_1
-    ) {
-        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._Last_81_IEnumerableint_System_Funcintbool_1_b__356_0(
-                    arg_0, 
-                    arg_1
-        );
-    }
     static inline CHAOS_IL2CPP_INTPTR _LongCount_40_IEnumerableint_System_Funcintbool_1_b__180_0(
                 CHAOS_IL2CPP_INTPTR arg_0, 
                 CHAOS_IL2CPP_INT32 arg_1
     ) {
         return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._LongCount_40_IEnumerableint_System_Funcintbool_1_b__180_0(
-                    arg_0, 
-                    arg_1
-        );
-    }
-    static inline CHAOS_IL2CPP_INT32 _MaxBy_90_IEnumerableint_System_Funcintint_1_b__396_0(
-                CHAOS_IL2CPP_INTPTR arg_0, 
-                CHAOS_IL2CPP_INT32 arg_1
-    ) {
-        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._MaxBy_90_IEnumerableint_System_Funcintint_1_b__396_0(
-                    arg_0, 
-                    arg_1
-        );
-    }
-    static inline CHAOS_IL2CPP_INT32 _MaxBy_91_IEnumerableint_System_Funcintint_IComparerint_1_b__400_0(
-                CHAOS_IL2CPP_INTPTR arg_0, 
-                CHAOS_IL2CPP_INT32 arg_1
-    ) {
-        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._MaxBy_91_IEnumerableint_System_Funcintint_IComparerint_1_b__400_0(
-                    arg_0, 
-                    arg_1
-        );
-    }
-    static inline CHAOS_IL2CPP_INT32 _MinBy_92_IEnumerableint_System_Funcintint_1_b__404_0(
-                CHAOS_IL2CPP_INTPTR arg_0, 
-                CHAOS_IL2CPP_INT32 arg_1
-    ) {
-        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._MinBy_92_IEnumerableint_System_Funcintint_1_b__404_0(
-                    arg_0, 
-                    arg_1
-        );
-    }
-    static inline CHAOS_IL2CPP_INT32 _MinBy_93_IEnumerableint_System_Funcintint_IComparerint_1_b__408_0(
-                CHAOS_IL2CPP_INTPTR arg_0, 
-                CHAOS_IL2CPP_INT32 arg_1
-    ) {
-        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._MinBy_93_IEnumerableint_System_Funcintint_IComparerint_1_b__408_0(
                     arg_0, 
                     arg_1
         );
@@ -9383,15 +9231,6 @@ struct CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___
                 CHAOS_IL2CPP_INT32 arg_1
     ) {
         return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._SingleOrDefault_123_IEnumerableint_System_Funcintbool_int_2_b__536_0(
-                    arg_0, 
-                    arg_1
-        );
-    }
-    static inline CHAOS_IL2CPP_INTPTR _Single_119_IEnumerableint_System_Funcintbool_1_b__516_0(
-                CHAOS_IL2CPP_INTPTR arg_0, 
-                CHAOS_IL2CPP_INT32 arg_1
-    ) {
-        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._Single_119_IEnumerableint_System_Funcintbool_1_b__516_0(
                     arg_0, 
                     arg_1
         );
@@ -9666,7 +9505,7 @@ struct CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 226;
+    static constexpr int32_t MethodCount = 213;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Linq_System_Linq_LookupSystem_Int32System_Int32Tests {
@@ -9754,17 +9593,6 @@ struct CombinedSubjects_AutoGenerated_System_Linq_System_Linq_LookupSystem_Int32
                     arg_0
         );
     }
-    static inline CHAOS_IL2CPP_INT32 _ApplyResultSelector_2_System_FuncintIEnumerableintint_1_b__8_0(
-                CHAOS_IL2CPP_INTPTR arg_0, 
-                CHAOS_IL2CPP_INT32 arg_1, 
-                CHAOS_IL2CPP_INTPTR arg_2
-    ) {
-        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_LookupSystem_Int32System_Int32Tests___c._ApplyResultSelector_2_System_FuncintIEnumerableintint_1_b__8_0(
-                    arg_0, 
-                    arg_1, 
-                    arg_2
-        );
-    }
     static inline CHAOS_IL2CPP_INT32 _Benchmark_ApplyResultSelector_2_System_FuncintIEnumerableintint_1_b__9_0(
                 CHAOS_IL2CPP_INTPTR arg_0, 
                 CHAOS_IL2CPP_INT32 arg_1, 
@@ -9777,7 +9605,7 @@ struct CombinedSubjects_AutoGenerated_System_Linq_System_Linq_LookupSystem_Int32
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 4;
+    static constexpr int32_t MethodCount = 3;
 };
 
 

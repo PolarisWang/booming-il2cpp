@@ -169,6 +169,26 @@ def run_aggregate(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageRes
         if total_outliers:
             aggregate_perf["totalOutliers"] = total_outliers
 
+    # ── Compute aggregate hotupdate metrics ──
+    chunks_with_patch_data = sum(
+        1 for s in chunk_summaries
+        if s.get("hotupdate", {}).get("patchDataUsed", False)
+    )
+    chunks_with_patch_failed = sum(
+        1 for s in chunk_summaries
+        if s.get("hotupdate", {}).get("patchFailed", False)
+    )
+    chunks_with_revert_failure = sum(
+        1 for s in chunk_summaries
+        if not s.get("hotupdate", {}).get("allRevert", True)
+    )
+    total_hu_passed = sum(
+        s.get("hotupdate", {}).get("passed", 0) for s in chunk_summaries
+    )
+    total_hu_failed = sum(
+        s.get("hotupdate", {}).get("failed", 0) for s in chunk_summaries
+    )
+
     # ── Write reports ──
     latest_dir.mkdir(parents=True, exist_ok=True)
     history_dir.mkdir(parents=True, exist_ok=True)
@@ -227,6 +247,13 @@ def run_aggregate(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageRes
             "factPassRate": round(total_passed / total_fact * 100, 1) if total_fact else 0,
             "totalBenchmarkedMethods": total_benchmarked,
             "aggregatePerformance": aggregate_perf,
+            "hotupdate": {
+                "chunksWithPatchData": chunks_with_patch_data,
+                "chunksPatchFailed": chunks_with_patch_failed,
+                "chunksWithRevertFailure": chunks_with_revert_failure,
+                "totalPassed": total_hu_passed,
+                "totalFailed": total_hu_failed,
+            },
         },
     }
     (latest_dir / "dashboard.json").write_text(

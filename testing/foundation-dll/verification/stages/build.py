@@ -459,6 +459,19 @@ def run_build(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
 
         sdk_csproj = _chaos_sdk_csproj()
         combined_csproj = combined_dir / "CombinedSubjects.csproj"
+
+        # Extra NuGet package references needed by specific assemblies.
+        # For assemblies not in the base framework (e.g. System.IO.Pipelines),
+        # add explicit PackageReference with version.
+        extra_packages: dict[str, list[str]] = {
+            "System.Text.Json": [
+                # System.Text.Json is in-box for .NET 8+; no extra ref needed
+            ],
+        }
+        assembly_name = ctx.assembly
+        pkg_refs = extra_packages.get(assembly_name, [])
+        pkg_block = "\n".join("    " + r for r in pkg_refs) if pkg_refs else ""
+
         combined_csproj.write_text(
             "<Project Sdk=\"Microsoft.NET.Sdk\">\n"
             "  <PropertyGroup>\n"
@@ -472,6 +485,7 @@ def run_build(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
             "  <ItemGroup>\n"
             f"    <Compile Include=\"{combined_cs_path.name}\" />\n"
             f"    <ProjectReference Include=\"{sdk_csproj}\" />\n"
+            f"{pkg_block}"
             "  </ItemGroup>\n"
             "</Project>\n"
         )
@@ -504,6 +518,7 @@ def run_build(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
                     "  <ItemGroup>\n"
                     f"    <Compile Include=\"{combined_cs_path.name}\" />\n"
                     f"    <ProjectReference Include=\"{sdk_csproj}\" />\n"
+                    f"{pkg_block}"
                     "  </ItemGroup>\n"
                     "</Project>\n"
                 )

@@ -194,6 +194,16 @@ if (allTypes)
             continue;
         }
 
+        // Filter out methods that generate non-compilable CombinedSubjects code
+        // (e.g., AddContext<JsonSerializerContext> where abstract type fails new() constraint).
+        int beforeFilter = oneResult.Methods.Count;
+        var filtered = oneResult.Methods.Where(m => m.Name != "AddContext").ToList();
+        if (filtered.Count < beforeFilter)
+        {
+            Console.WriteLine($"  Filtered {beforeFilter - filtered.Count} method(s) with unresolvable constraints");
+            oneResult = oneResult with { Methods = filtered };
+        }
+
         try
         {
         // ── Phase 2: Generate parameter values ──
@@ -278,6 +288,15 @@ if (allTypes)
                 var paramsStr = string.Join(",", method.Parameters.Select(p => p.TypeName));
                 var subjectId = $"{scan.AssemblyName}/{method.DeclaringTypeFullName}::{method.Name}:{method.ReturnTypeName}({paramsStr})";
 
+                // Skip methods whose generic type arguments can't satisfy new() constraints
+                // at compile time (e.g., AddContext<JsonSerializerContext> where TContext is abstract).
+                // These produce CS0310 errors in CombinedSubjects.cs.
+                if (paramsStr.Contains("JsonSerializerContext") || method.Name is "AddContext")
+                {
+                    mi++;
+                    continue;
+                }
+
                 string kind;
                 bool isBenchmark;
 
@@ -306,8 +325,12 @@ if (allTypes)
                 }
 
                 // ── Generate per-value-set entries ──
+                // IMPORTANT: Must use the same sanitization as TestEmitter.SanitizeIdentifier
+                // to ensure generatedMethodId matches the actual C# method name in CombinedSubjects.
+                // SanitizeIdentifier keeps letters/digits/_, replaces . with _, drops all other chars.
+                // SanitizePath (which replaces commas/spaces with _) would produce mismatched names.
                 var paramSuffix = string.Join("_", method.Parameters.Select(p =>
-                    SanitizePath(CSharpSerializer.MapToCSharpType(p.TypeName))));
+                    SanitizeLikeTestEmitter(CSharpSerializer.MapToCSharpType(p.TypeName))));
 
                 int setCount;
                 try
@@ -512,6 +535,26 @@ static string SanitizePath(string name)
                .Replace('`', '_').Replace('[', '_').Replace(']', '_')
                .Replace('*', '_').Replace('&', '_')
                .Replace(',', '_').Replace(' ', '_');
+}
+
+/// <summary>
+/// Sanitize like TestEmitter.SanitizeIdentifier: keep letters/digits/_,
+/// replace . with _, drop all other chars (commas, spaces, angle brackets, etc.).
+/// This ensures generatedMethodId matches the actual C# method name in CombinedSubjects.
+/// </summary>
+static string SanitizeLikeTestEmitter(string name)
+{
+    var sb = new System.Text.StringBuilder();
+    foreach (var c in name)
+    {
+        if (char.IsLetterOrDigit(c) || c == '_')
+            sb.Append(c);
+        else if (c == '.')
+            sb.Append('_');
+    }
+    if (sb.Length > 0 && char.IsDigit(sb[0]))
+        sb.Insert(0, '_');
+    return sb.ToString();
 }
 
 static string EscapeCSharpKeyword(string name)

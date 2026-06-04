@@ -4821,8 +4821,8 @@ JitMethod* NativeCodeGenerator::Generate() noexcept {
 #endif
 
     CHAOS_IL2CPP_LOG_INFO_M("codegen",
-        "Generate: method compiled, code_size=%u, code=%p, slots=%u",
-        nm->code_size, nm->code,
+        "Generate: method compiled, code_size={}, code={:p}, slots={}",
+        nm->code_size, static_cast<void*>(nm->code),
         slot_count_used_);
     return nm;
 }

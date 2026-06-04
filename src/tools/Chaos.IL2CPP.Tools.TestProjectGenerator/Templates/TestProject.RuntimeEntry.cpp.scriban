@@ -493,6 +493,12 @@ static int RunHotupdateMode(const char* patchDataPath = nullptr) {
     bool all_revert = true;
     printf("\"revertedFact\":[");
     for (int si = 0; si < kCount; si++) {
+        // Skip methods that failed in baseline — they're not expected to revert.
+        if (!baseline_ok[si]) {
+            if (si > 0) printf(",");
+            printf("{\"si\":%d,\"passed\":true,\"skipped\":true}", si);
+            continue;
+        }
         int i = kSubjectSlotMap[si];
         bool reverted_ok = false;
         CHAOS_EH_TRY

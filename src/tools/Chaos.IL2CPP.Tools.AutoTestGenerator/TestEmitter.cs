@@ -251,6 +251,9 @@ public sealed class TestEmitter
                 var exType = result.ExceptionType;
                 if (exType.Contains('+') || exType.StartsWith("System.Reflection"))
                     exType = "Exception";
+                // JsonReaderException is internal in .NET 9+; use public base class JsonException
+                if (exType == "System.Text.Json.JsonReaderException")
+                    exType = "System.Text.Json.JsonException";
                 sb.AppendLine($"            Assert.Throws<{exType}>(() => {callExpr});");
             }
             return;
@@ -406,7 +409,11 @@ public sealed class TestEmitter
     {
         if (string.IsNullOrEmpty(typeName)) return true;
         // Internal implementation types that can't be used in C# source
-        return typeName.StartsWith("System.Text.Json.Nodes.JsonValue", StringComparison.Ordinal);
+        return typeName.StartsWith("System.Text.Json.Nodes.JsonValue", StringComparison.Ordinal)
+            // System.Linq.EmptyLookup<TKey,TElement> is internal
+            || typeName.Contains("EmptyLookup", StringComparison.Ordinal)
+            // System.Collections.Frozen.EmptyFrozenSet is internal
+            || typeName.Contains("EmptyFrozenSet", StringComparison.Ordinal);
     }
 
     private static string SanitizeIdentifier(string name)

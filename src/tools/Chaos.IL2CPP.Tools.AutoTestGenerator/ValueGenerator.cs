@@ -126,11 +126,11 @@ public sealed class ValueGenerator
             ? $"new System.Progress<{typeArgs[0]}>(_ => {{ }})"
             : "new System.Progress<object>(_ => { })",
         ["IAsyncEnumerable"] = typeArgs => typeArgs.Length > 0
-            ? $"System.Linq.AsyncEnumerable.Empty<{typeArgs[0]}>()"
-            : "System.Linq.AsyncEnumerable.Empty<object>()",
+            ? $"default(System.Collections.Generic.IAsyncEnumerable<{typeArgs[0]}>)!"
+            : "default(System.Collections.Generic.IAsyncEnumerable<object>)!",
         ["IAsyncEnumerator"] = typeArgs => typeArgs.Length > 0
-            ? $"System.Linq.AsyncEnumerable.Empty<{typeArgs[0]}>().GetAsyncEnumerator()"
-            : "System.Linq.AsyncEnumerable.Empty<object>().GetAsyncEnumerator()",
+            ? $"default(System.Collections.Generic.IAsyncEnumerator<{typeArgs[0]}>)!"
+            : "default(System.Collections.Generic.IAsyncEnumerator<object>)!",
         ["IProducerConsumerCollection"] = typeArgs => typeArgs.Length > 0
             ? $"new System.Collections.Concurrent.ConcurrentBag<{typeArgs[0]}>()"
             : "new System.Collections.Concurrent.ConcurrentBag<object>()",

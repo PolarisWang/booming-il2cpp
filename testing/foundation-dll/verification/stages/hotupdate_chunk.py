@@ -178,6 +178,12 @@ def _build_patch_dll(patch_output: Path, patch_dll: Path, target_dll: Path | Non
             if line.startswith("using ") and line.endswith(";"):
                 usings.add(line)
 
+    # ATG output sometimes uses bare reflection type names (FieldInfo, MethodBase,
+    # CustomAttributeBuilder, etc.) without full qualification. Inject the essential
+    # usings so CombinedPatchSubjects.cs compiles regardless of chunk content.
+    usings.add("using System.Reflection;")
+    usings.add("using System.Reflection.Emit;")
+
     for pf in all_patch_files:
         text = pf.read_text(encoding="utf-8")
         lines = [l for l in text.splitlines()
