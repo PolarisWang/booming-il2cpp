@@ -161,13 +161,17 @@ def _parse_benchmark_lines(stdout: str) -> tuple[list[dict], dict]:
     return results, summary
 
 
-def _calibrate_iterations(exe_path: Path, timeout: int, entry_count: int = 0) -> int:
+def _calibrate_iterations(exe_path: Path, timeout: int, entry_count: int = 0,
+                          start_idx: int = 0, end_idx: int = 0) -> int:
     """Probe-run with 10 iterations, scale to target ~50ms total per method.
+
+    Pass start_idx/end_idx to use --benchmark-range for calibration;
+    otherwise falls back to --benchmark-all.
 
     For large chunks (>5000 entries), caps iterations at 10000 instead of 50000
     to keep total benchmark time reasonable.
     """
-    result = _run_entry_once(exe_path, 10, timeout)
+    result = _run_entry_once(exe_path, 10, timeout, start_idx=start_idx, end_idx=end_idx)
     if result is None or not result.stdout:
         return 1000  # fallback
 
@@ -195,8 +199,12 @@ def _calibrate_iterations(exe_path: Path, timeout: int, entry_count: int = 0) ->
     return min(iterations, cap)
 
 
-def _run_entry_once(exe_path: Path, iterations: int, timeout: int) -> subprocess.CompletedProcess | None:
-    """Run entry.exe --benchmark-all once, returning the CompletedProcess or None on failure.
+def _run_entry_once(exe_path: Path, iterations: int, timeout: int,
+                     start_idx: int = 0, end_idx: int = 0) -> subprocess.CompletedProcess | None:
+    """Run entry.exe benchmark once, returning the CompletedProcess or None on failure.
+
+    Uses --benchmark-range start end iterations when end_idx > start_idx,
+    otherwise falls back to --benchmark-all (subject-only mode).
 
     On TimeoutExpired, attempts to recover partial stdout (available since Python 3.8).
     Returns a CompletedProcess with the partial stdout on timeout so the caller
@@ -204,7 +212,10 @@ def _run_entry_once(exe_path: Path, iterations: int, timeout: int) -> subprocess
     """
     env = os.environ.copy()
     env["CHAOS_IL2CPP_LOG_LEVEL"] = "0"  # suppress debug logs in benchmark output
-    cmd = [str(exe_path), "--benchmark-all", str(iterations)]
+    if end_idx > start_idx:
+        cmd = [str(exe_path), "--benchmark-range", str(start_idx), str(end_idx), str(iterations)]
+    else:
+        cmd = [str(exe_path), "--benchmark-all", str(iterations)]
     try:
         return subprocess.run(
             cmd,
@@ -278,6 +289,44 @@ def _get_entry_count(exe_path: Path) -> int:
     return int(m.group(1)) if m else 0
 
 
+def _load_method_index_map(ctx: ChunkContext) -> dict[int, str] | None:
+    """Read native-aot.methods.json and build methodIndex → subjectId mapping.
+
+    Returns None if the manifest is not available or lacks subjectId fields.
+    """
+    manifest_path = ctx.chunk_dir / "native" / "codegen" / "generated" / "native-aot.methods.json"
+    if not manifest_path.exists():
+        return None
+
+    try:
+        manifest = json.loads(manifest_path.read_text(encoding="utf-8-sig"))
+        methods = manifest.get("methods", [])
+        if not methods or "subjectId" not in methods[0]:
+            return None
+
+        mapping: dict[int, str] = {}
+        for m in methods:
+            idx = m.get("index")
+            sid = m.get("subjectId", "")
+            if idx is not None and sid:
+                mapping[idx] = sid
+        return mapping
+    except (json.JSONDecodeError, KeyError, IndexError, IOError):
+        return None
+
+
+def _get_manifest_method_count(ctx: ChunkContext) -> int:
+    """Read total method count from native-aot.methods.json, or 0 if unavailable."""
+    manifest_path = ctx.chunk_dir / "native" / "codegen" / "generated" / "native-aot.methods.json"
+    if not manifest_path.exists():
+        return 0
+    try:
+        manifest = json.loads(manifest_path.read_text(encoding="utf-8-sig"))
+        return manifest.get("methodCount", 0)
+    except (json.JSONDecodeError, IOError):
+        return 0
+
+
 def _read_benchmark_metadata(ctx: ChunkContext) -> list[dict]:
     """Read subjects metadata for methodSubjectId resolution."""
     metadata_path = ctx.subjects_metadata_path
@@ -296,11 +345,14 @@ def _write_perf_store(
     technology: str,
     metadata_methods: list[dict],
     iterations: int,
+    method_index_to_subject_id: dict[int, str] | None = None,
+    benchmark_start_idx: int = 0,
 ):
     """Write benchmark-history.jsonl in dashboard-compatible format.
 
-    Format matches managed_benchmark.py's _write_perf_records() so that
-    dashboard._compute_benchmark_comparisons() can read chaos-aot/chaos-jit data.
+    When method_index_to_subject_id is provided, resolves methodSubjectId
+    from the method table index (benchmark_start_idx + position) using the
+    codegen manifest, rather than by position into metadata_methods.
     """
     now = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
     perf_path = _RESULTS_BASE / ctx.assembly / ctx.slug / "perf" / "benchmark-history.jsonl"
@@ -315,7 +367,12 @@ def _write_perf_store(
             ops = s.get("meanOpsPerSecond", 0)
 
             method_subject_id = ""
-            if i < len(metadata_methods):
+            if method_index_to_subject_id is not None:
+                # Use manifest-based mapping: method table index → subjectId
+                method_table_index = benchmark_start_idx + i
+                method_subject_id = method_index_to_subject_id.get(method_table_index, "")
+            elif i < len(metadata_methods):
+                # Fallback: position-based mapping into metadata
                 method_subject_id = metadata_methods[i].get("methodSubjectId", "")
 
             record = {
@@ -343,14 +400,30 @@ def _run_single_benchmark(
 ) -> dict | None:
     """Run benchmark for a single technology (AOT or JIT).
 
+    Uses the codegen manifest (native-aot.methods.json) when available to
+    benchmark ALL compiled methods with correct methodSubjectId mapping.
+    Falls back to subject-only --benchmark-all when manifest is unavailable.
+
     Returns result dict with keys (per_method_stats, summary, iterations,
     sample_rounds, method_count, tech_duration_ms) or None on failure.
     """
     start = time.perf_counter()
-    entry_count = _get_entry_count(exe_path)
 
-    print(f"  [benchmark] [{technology}] {exe_path} --benchmark-all (adaptive)")
-    iterations = _calibrate_iterations(exe_path, timeout, entry_count)
+    # Load method index → subjectId mapping from codegen manifest
+    method_index_to_subject_id = _load_method_index_map(ctx)
+    total_method_count = _get_manifest_method_count(ctx) if method_index_to_subject_id else 0
+
+    # Determine benchmark range
+    benchmark_start_idx = 0
+    benchmark_end_idx = total_method_count if method_index_to_subject_id else 0
+    use_range = benchmark_end_idx > benchmark_start_idx
+
+    entry_count = _get_entry_count(exe_path) if not use_range else benchmark_end_idx
+
+    mode_label = "--benchmark-range" if use_range else "--benchmark-all"
+    print(f"  [benchmark] [{technology}] {exe_path} {mode_label} 0..{benchmark_end_idx} (adaptive)")
+    iterations = _calibrate_iterations(exe_path, timeout, entry_count,
+                                       start_idx=benchmark_start_idx, end_idx=benchmark_end_idx)
     print(f"  [benchmark] [{technology}] calibrated iterations={iterations}, entries={entry_count}")
 
     # Phase 1: Adaptive sampling rounds (3-10, early stop on CV < 5%)
@@ -360,7 +433,8 @@ def _run_single_benchmark(
 
     for s in range(max_rounds):
         print(f"  [benchmark] [{technology}] sampling round {s + 1}/{max_rounds}...")
-        result = _run_entry_once(exe_path, iterations, timeout)
+        result = _run_entry_once(exe_path, iterations, timeout,
+                                  start_idx=benchmark_start_idx, end_idx=benchmark_end_idx)
         if result is None:
             if all_rounds:
                 break
@@ -427,7 +501,9 @@ def _run_single_benchmark(
           f"({len(all_rounds)} samples, {tech_duration_ms}ms, {iterations} iterations)")
 
     # Phase 4: Write perf store
-    _write_perf_store(per_method_stats, ctx, technology, metadata_methods, iterations)
+    _write_perf_store(per_method_stats, ctx, technology, metadata_methods, iterations,
+                      method_index_to_subject_id=method_index_to_subject_id,
+                      benchmark_start_idx=benchmark_start_idx)
 
     return {
         "per_method_stats": per_method_stats,

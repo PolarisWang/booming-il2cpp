@@ -157,6 +157,15 @@ _UNSAFE_BENCHMARK_PATTERNS: list[str] = [
     "StoreUnsafe",                     # writes 32B vector past a 4B stack slot — STATUS_ACCESS_VIOLATION
     "ArgIterator",                     # System.ArgIterator.GetNextArgType() — Internal CLR error (0x80131506)
     "RuntimeHelpers.CreateSpan",       # .NET runtime bug — CLR crash on all TFMs
+    "Environment.Exit",                # Environment.Exit(N) terminates the runner process immediately
+    "Environment.FailFast",            # Environment.FailFast terminates the runner process immediately
+    "Contract.Assert",                 # Contract.Assert(false) triggers FailFast — "Process terminated. Assumption failed."
+    "Contract.Assume",                 # Contract.Assume(false) also triggers FailFast
+    "Contract.Requires",               # Contract.Requires(false) throws ArgumentException at runtime
+    "Contract.Ensures",                # Contract.Ensures postconditions can fail at runtime
+    "Contract.Invariant",              # Contract.Invariant(false) can terminate the process
+    "Debug.Assert",                    # Debug.Assert(false) terminates on .NET Core in some configurations
+    "Debug.Fail",                      # Debug.Fail() always terminates the process with "Assertion failed."
 ]
 
 
@@ -262,7 +271,7 @@ def _build_combined_for_tfm(combined_csproj: Path, tfm: str, out_dir: Path) -> b
                     code = m.group(3)
                     if code in ("CS1503", "CS0117", "CS1061", "CS0103",
                                 "CS0234", "CS0426", "CS0305", "CS0161",
-                                "CS1501"):
+                                "CS1501", "CS0452"):
                         error_lines.add(int(m.group(1)))
 
             if not error_lines:

@@ -300,7 +300,7 @@ static int RunBenchmarkMode(int entry_index, int iterations) {
     return 0;
 }
 
-// ── --benchmark-all: benchmark ALL methods in one invocation ────────
+// ── --benchmark-all: benchmark ALL subject methods ─────────────────
 // Returns per-line JSON: each method gets its own complete JSON line,
 // followed by a summary line.  Stray stderr log lines cannot pollute
 // the protocol stream since each line is independently parseable.
@@ -325,6 +325,33 @@ static int RunBenchmarkAllMode(int iterations) {
         fflush(stdout);
     }
     printf("{\"summary\":{\"methodCount\":%d}}\n", kCount);
+    fflush(stdout);
+    return 0;
+}
+
+// ── --benchmark-range: benchmark a contiguous range of method table indices ─
+// First argument: start index (inclusive), Second argument: end index (exclusive)
+static int RunBenchmarkRangeMode(int iterations, int start_idx, int end_idx) {
+    if (start_idx < 0) start_idx = 0;
+    if (end_idx > kAotMethodCount) end_idx = kAotMethodCount;
+    for (int i = start_idx; i < end_idx; i++) {
+        auto result = RunBenchmark(i, iterations);
+        if (result.caught_exception) {
+            printf("{\"methodIndex\":%d,\"elapsedMilliseconds\":-1.0,\"allocatedBytes\":%" PRId64 ",\"error\":\"managed exception\"}\n",
+                   i, result.allocated_bytes);
+        } else if (result.elapsed_ms < 0.0) {
+            printf("{\"methodIndex\":%d,\"elapsedMilliseconds\":-1.0,\"error\":\"invalid index\"}\n", i);
+        } else if (result.elapsed_ms <= 0.0) {
+            printf("{\"methodIndex\":%d,\"elapsedMilliseconds\":%.3f,\"opsPerSecond\":0,\"iterations\":%d,\"allocatedBytes\":%" PRId64 "}\n",
+                   i, result.elapsed_ms, iterations, result.allocated_bytes);
+        } else {
+            double ops_per_sec = (iterations / result.elapsed_ms) * 1000.0;
+            printf("{\"methodIndex\":%d,\"elapsedMilliseconds\":%.3f,\"opsPerSecond\":%.0f,\"iterations\":%d,\"allocatedBytes\":%" PRId64 "}\n",
+                   i, result.elapsed_ms, ops_per_sec, iterations, result.allocated_bytes);
+        }
+        fflush(stdout);
+    }
+    printf("{\"summary\":{\"methodCount\":%d}}\n", end_idx - start_idx);
     fflush(stdout);
     return 0;
 }
@@ -642,6 +669,12 @@ int main(int argc, char* argv[]) {
     if (std::strcmp(argv[1], "--benchmark-all") == 0) {
         if (argc < 3) { printf("Usage: entry.exe --benchmark-all <iterations>\n"); return 1; }
         ret = RunBenchmarkAllMode(std::atoi(argv[2]));
+        goto shutdown;
+    }
+
+    if (std::strcmp(argv[1], "--benchmark-range") == 0) {
+        if (argc < 5) { printf("Usage: entry.exe --benchmark-range <start> <end> <iterations>\n"); return 1; }
+        ret = RunBenchmarkRangeMode(std::atoi(argv[4]), std::atoi(argv[2]), std::atoi(argv[3]));
         goto shutdown;
     }
 

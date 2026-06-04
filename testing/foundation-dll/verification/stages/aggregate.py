@@ -143,11 +143,16 @@ def run_aggregate(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageRes
         1 for s in chunk_summaries
         if s.get("fact", {}).get("valueSuspicious", False)
     )
-    # Track chunks with metadata mismatch (total != metaTotal)
+    # Track chunks with severe metadata mismatch (metaTotal >> total).
+    # Small gaps are expected: void methods (A3 "no crash" assertions) contribute
+    # to metaTotal but don't produce individual fact results.  Only flag when
+    # the gap exceeds 90% (indicating almost no subjects produce assertions).
     chunks_with_meta_mismatch = sum(
         1 for s in chunk_summaries
         if s.get("fact", {}).get("metaTotal") is not None
         and s["fact"]["total"] != s["fact"]["metaTotal"]
+        and s["fact"]["metaTotal"] > 0
+        and s["fact"]["total"] / s["fact"]["metaTotal"] < 0.1
     )
 
     # ── Compute aggregate benchmark performance ──

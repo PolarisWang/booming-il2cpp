@@ -1,15 +1,25 @@
 {
-  "assembly": "System.Linq",
-  "timestamp": "2026-06-04T12:53:08.363179",
-  "totalChunks": 1,
-  "totalPassed": 678,
-  "totalSubjects": 678,
-  "passRate": "100.00%",
-  "chunks": {
-    "global-ns": {
-      "status": "passed",
-      "passed": 678,
-      "total": 678
+  "assemblyName": "System.Linq",
+  "timestamp": "2026-06-04T17:54:33",
+  "summary": {
+    "chunks": 1,
+    "chunksVerified": 1,
+    "chunksShutdownAV": 0,
+    "chunksWithValueWarnings": 0,
+    "chunksWithMetaMismatch": 0,
+    "factPassRate": 100.0,
+    "totalBenchmarkedMethods": 337,
+    "aggregatePerformance": {
+      "meanDurationMs": 0.039149554896142434,
+      "meanOpsPerSecond": 289405006.63899106,
+      "aggregateMeanCv": 0.08914105044510386
+    },
+    "hotupdate": {
+      "chunksWithPatchData": 1,
+      "chunksPatchFailed": 0,
+      "chunksWithRevertFailure": 0,
+      "totalPassed": 337,
+      "totalFailed": 0
     }
   }
 }

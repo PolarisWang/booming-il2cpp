@@ -480,6 +480,7 @@ def run_build(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
             "    <ImplicitUsings>enable</ImplicitUsings>\n"
             "    <Nullable>enable</Nullable>\n"
             "    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>\n"
+            "    <NoWarn>$(NoWarn);SYSLIB0011</NoWarn>\n"
             "    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>\n"
             "  </PropertyGroup>\n"
             "  <ItemGroup>\n"

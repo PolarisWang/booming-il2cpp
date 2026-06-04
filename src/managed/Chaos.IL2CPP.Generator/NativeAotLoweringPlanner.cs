@@ -3985,6 +3985,7 @@ public sealed partial class NativeAotLoweringPlanner
             {
                 ["index"] = i,
                 ["nativeSymbol"] = method.NativeSymbol,
+                ["subjectId"] = method.SubjectId,
                 ["paramCount"] = ac + (isInstance ? 1 : 0),
                 ["params"] = paramsList,
                 ["isInstance"] = isInstance,

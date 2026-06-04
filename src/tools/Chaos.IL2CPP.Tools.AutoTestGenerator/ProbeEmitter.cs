@@ -93,6 +93,7 @@ public sealed class ProbeEmitter
         sb.AppendLine("using System.Numerics;");
         sb.AppendLine("using System.Reflection;");
         sb.AppendLine("using System.Reflection.Emit;");
+        sb.AppendLine("using System.Reflection.Metadata;");
         sb.AppendLine("using System.Runtime.CompilerServices;");
         sb.AppendLine("using System.Runtime.InteropServices;");
         sb.AppendLine("using System.Runtime.Serialization;");

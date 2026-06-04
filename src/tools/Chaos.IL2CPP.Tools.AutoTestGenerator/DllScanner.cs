@@ -481,6 +481,14 @@ public sealed class DllScanner
 
             var method = rawMethod;
 
+            // Skip methods on unprobable declaring types (e.g. ComVariantMarshaller
+            // or its nested types like ComVariantMarshaller+RefPropagate).
+            if (IsUnprobableType(method.DeclaringType))
+            {
+                skippedMethods.Add($"{method.Name} (unprobable declaring type: {method.DeclaringType?.FullName ?? "?"})");
+                continue;
+            }
+
             // Try to concretize generic methods
             if (method.ContainsGenericParameters)
             {
@@ -557,7 +565,8 @@ public sealed class DllScanner
 
                 // Skip methods with parameter types that are known unprobable types
                 // (present in System.Private.CoreLib but absent from reference assemblies).
-                if (rawParamType.FullName is not null && UnprobableTypeNames.Contains(rawParamType.FullName))
+                // Also checks nested type declaring chain (e.g. ComVariantMarshaller+RefPropagate).
+                if (IsUnprobableType(rawParamType))
                 {
                     skippedMethods.Add($"{method.Name} (unprobable parameter type: {rawParamType.FullName})");
                     parameters.Clear();
@@ -600,9 +609,9 @@ public sealed class DllScanner
                     skippedMethods.Add($"{method.Name} (internal return type: {returnTypeName})");
                     continue;
                 }
-                if (rawReturnType.FullName is not null && UnprobableTypeNames.Contains(rawReturnType.FullName))
+                if (IsUnprobableType(rawReturnType))
                 {
-                    skippedMethods.Add($"{method.Name} (unprobable return type: {rawReturnType.FullName})");
+                    skippedMethods.Add($"{method.Name} (unprobable return type: {rawReturnType.FullName ?? returnTypeName})");
                     continue;
                 }
                 // Skip methods returning types that trigger LNK2001 in the AOT codegen
@@ -756,7 +765,7 @@ public sealed class DllScanner
         {
             if (!t.IsVisible) continue;
             if (t.IsEnum) continue;
-            if (t.FullName is not null && UnprobableTypeNames.Contains(t.FullName)) continue;
+            if (IsUnprobableType(t)) continue;
             // Skip GENERIC versions of marshaller/compiler-infrastructure types
             // whose concretization with int produces invalid C#. Non-generic
             // versions (e.g. ConfiguredTaskAwaitable without type params) are
@@ -1556,6 +1565,39 @@ public sealed class DllScanner
         {
             return true; // conservative: skip if we can't inspect
         }
+    }
+
+    /// <summary>
+    /// Check if a type (or any type in its declaring type chain) is in UnprobableTypeNames.
+    /// Catches nested types like ComVariantMarshaller+RefPropagate whose parent is unprobable,
+    /// even though their own FullName ("...ComVariantMarshaller+RefPropagate") doesn't
+    /// directly match the set entry ("...ComVariantMarshaller").
+    /// </summary>
+    private static bool IsUnprobableType(Type type)
+    {
+        var current = type;
+        while (current is not null)
+        {
+            if (current.FullName is not null && UnprobableTypeNames.Contains(current.FullName))
+                return true;
+            current = current.DeclaringType;
+        }
+
+        // MLC can report nested types either as "Parent+Nested" (metadata format)
+        // or "Parent.Nested" (C# format) with no DeclaringType.  Check the FullName
+        // prefix against every UnprobableTypeNames entry.
+        if (type.FullName is not null)
+        {
+            foreach (var unprobable in UnprobableTypeNames)
+            {
+                if (type.FullName.StartsWith(unprobable, StringComparison.Ordinal) &&
+                    type.FullName.Length > unprobable.Length &&
+                    (type.FullName[unprobable.Length] == '.' || type.FullName[unprobable.Length] == '+'))
+                    return true;
+            }
+        }
+
+        return false;
     }
 
     /// <summary>
