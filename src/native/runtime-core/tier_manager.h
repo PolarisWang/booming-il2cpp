@@ -6,8 +6,8 @@
 // Phase 3 of the tiered compilation system.  Responsibilities:
 //   1. Module lifecycle tracking — register/unregister PatchMethod arrays
 //      so that DestroyPatchContext can safely free tier data.
-//   2. Background T2→T3 optimization queue — methods that exceed
-//      kRegisterMappedThreshold (50 calls) are enqueued for background promotion
+//   2. Background T2→T3 optimization queue — methods whose call count exceeds
+//      GetAdaptiveT2Threshold() (50–100) are enqueued for background promotion
 //      instead of blocking the calling thread.
 //   3. Memory budget enforcement — 64 MB cap on optimized IR.
 //   4. Statistics for diagnostics/benchmarking.
@@ -145,6 +145,7 @@ public:
     // must NOT re-CAS.
     enum class PromotionAction {
         kNoAction,              // no promotion needed
+        kQuickJit,              // T0→QuickJIT CAS won: caller must Quick JIT compile + store kQuickJitted
         kPromoteToTier2,        // T1→T2 CAS won: caller must AllocateRegisters + store kRegisterMapped
         kPromoteToTier3,        // T2→T3 CAS won: caller must EnqueueOptimization
         kCompileToNative,       // T3→T4 CAS won: caller must Compile + set cached_native_method
@@ -176,6 +177,10 @@ private:
     // Module tracking (mutex-protected)
     mutable std::mutex mutex_;
     CHAOS_IL2CPP_UNORDERED_DENSE_MAP_IDENTITY(uint32_t, ModuleTierData*) modules_;
+
+    // Token→PatchMethod* map for O(1) ResetMethodCallCount lookup
+    // (Issue #10: replaces linear scan across all modules).
+    CHAOS_IL2CPP_UNORDERED_DENSE_MAP_IDENTITY(uint32_t, PatchMethod*) token_map_;
 
     // Background thread
     std::thread                background_thread_;

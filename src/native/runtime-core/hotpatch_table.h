@@ -172,6 +172,20 @@ typedef void* (*OriginalAotPtrCallback)(HotpatchEntryV0* entry) noexcept;
 void SetOriginalAotPtrCallback(OriginalAotPtrCallback cb) noexcept;
 OriginalAotPtrCallback GetOriginalAotPtrCallback() noexcept;
 
+// ── JitPrecode ownership transfer (D+ DP1-a) ────────────────────────────────
+// Registered by RegisterJitEntryMethods.  When a hotpatch activates a method
+// that has already been compiled by the precode system, this callback
+// atomically transfers the compiled JitMethod ownership from precode to the
+// tier system.  Returns true if ownership was transferred (the method can
+// skip tier promotion and directly run at kJitted).  Returns false if no
+// transfer occurred (no JitPrecode, or not yet compiled).
+// Parameters: entry      — HotpatchEntryV0* for the method being patched
+//             method_key — opaque pointer (set by SetPatchedBySlot caller)
+//                          cast to PatchMethod* by the callback implementation
+typedef bool (*PrecodeTransferCallback)(HotpatchEntryV0* entry, void* method_key) noexcept;
+void SetPrecodeTransferCallback(PrecodeTransferCallback cb) noexcept;
+PrecodeTransferCallback GetPrecodeTransferCallback() noexcept;
+
 inline HotpatchEntryV0* HotpatchLookup(uint32_t module_id, uint32_t token) noexcept {
     return GetHotpatchNameRegistry().GetDispatchEntry(module_id, token);
 }

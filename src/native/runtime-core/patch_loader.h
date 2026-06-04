@@ -120,7 +120,8 @@ struct PatchMethod {
 
     // ── Tiered compilation state (Phase 1+) ──────────────────────────────
     // Tier state machine: 0=kStackInterpreted, 1=kRegisterLowering, 2=kRegisterMapped,
-    //                     3=kOptimizeLowering, 4=kOptimizedRegister, 5=kT5Unloaded.
+    //                     3=kOptimizeLowering, 4=kOptimizedRegister, 5=kQuickJitted,
+    //                     6=kT5Unloaded, 7=kJitted, 8=kJitSkip.
     // CAS-based transition, atomic with acquire/release ordering.
     mutable std::atomic<uint32_t> tier_state{0};
     static constexpr uint32_t kStackInterpreted        = 0;
@@ -128,16 +129,16 @@ struct PatchMethod {
     static constexpr uint32_t kRegisterMapped       = 2;
     static constexpr uint32_t kOptimizeLowering    = 3;
     static constexpr uint32_t kOptimizedRegister       = 4;
-    static constexpr uint32_t kT5Unloaded    = 5;
-    static constexpr uint32_t kJitted       = 6;
-    static constexpr uint32_t kJitSkip        = 7;  // permanent: JIT codegen failed too many times
+    static constexpr uint32_t kQuickJitted      = 5;   // Quick JIT compiled (no optimizer), running native
+    static constexpr uint32_t kT5Unloaded    = 6;
+    static constexpr uint32_t kJitted       = 7;       // Full JIT compiled (with optimizer), running native
+    static constexpr uint32_t kJitSkip        = 8;     // permanent: JIT codegen failed too many times
 
-    // Tier 1→2 transition threshold.
-    static constexpr uint32_t kStackInterpretedThreshold = 10;
-    // Tier 2→3 transition threshold (requires profile data).
-    static constexpr uint32_t kRegisterMappedThreshold = 10;
     // Tier 3→4 transition threshold (hot → very hot, native codegen).
     static constexpr uint32_t kJitThreshold = 50;
+
+    // Quick JIT threshold — first call triggers Quick JIT (immediate).
+    static constexpr uint32_t kQuickJitThreshold = 1;
 };
 
 // ── CallSiteProfile (PGO data collected during T2 execution) ──────────────

@@ -94,6 +94,13 @@ void TierManager::UnregisterModule(uint32_t module_id) noexcept {
         if (it == modules_.end()) return;
         data = it->second;
         modules_.erase(it);
+
+        // Remove all token_map_ entries belonging to this module.
+        for (uint32_t i = 0; i < data->method_count; ++i) {
+            if (data->methods[i] != nullptr) {
+                token_map_.erase(data->methods[i]->token);
+            }
+        }
     }
 
     if (data == nullptr) return;
@@ -108,24 +115,39 @@ ModuleTierData* TierManager::FindModuleData(uint32_t module_id) noexcept {
 }
 
 void TierManager::ResetMethodCallCount(uint32_t method_token) noexcept {
-    // Iterate all registered modules to find the PatchMethod with the
-    // matching method_token.  This is O(total_methods) in the worst case,
-    // but hotpatch registration is a rare operation so linear scan is fine.
     std::lock_guard<std::mutex> lock(mutex_);
+
+    // Fast path: token_map_ hit (subsequent calls after first population)
+    {
+        auto it = token_map_.find(method_token);
+        if (it != token_map_.end()) {
+            auto* pm = it->second;
+            pm->call_count.store(0, std::memory_order_release);
+            uint32_t tier = pm->tier_state.load(std::memory_order_acquire);
+            if (tier >= PatchMethod::kOptimizedRegister &&
+                tier != PatchMethod::kQuickJitted) {
+                pm->tier_state.store(PatchMethod::kStackInterpreted, std::memory_order_release);
+            }
+            return;
+        }
+    }
+
+    // Slow path: linear scan to find the method, then cache the mapping for
+    // subsequent lookups (Issue #10: amortized O(1) after first hit).
     for (auto& [id, data] : modules_) {
         (void)id;
         for (uint32_t i = 0; i < data->method_count; ++i) {
             if (data->methods[i] != nullptr &&
                 data->methods[i]->token == method_token) {
-                data->methods[i]->call_count.store(0, std::memory_order_release);
+                auto* pm = data->methods[i];
+                token_map_[method_token] = pm;
 
-                // Also reset the tier state so re-promotion can restart
-                // from T1Cold instead of being stuck at the current tier.
-                // Only reset if currently at T3Ready or T4Skip — don't
-                // interfere with in-progress promotion.
-                uint32_t tier = data->methods[i]->tier_state.load(std::memory_order_acquire);
-                if (tier >= PatchMethod::kOptimizedRegister) {
-                    data->methods[i]->tier_state.store(PatchMethod::kStackInterpreted, std::memory_order_release);
+                pm->call_count.store(0, std::memory_order_release);
+
+                uint32_t tier = pm->tier_state.load(std::memory_order_acquire);
+                if (tier >= PatchMethod::kOptimizedRegister &&
+                    tier != PatchMethod::kQuickJitted) {
+                    pm->tier_state.store(PatchMethod::kStackInterpreted, std::memory_order_release);
                 }
                 return;
             }
@@ -339,7 +361,38 @@ TierManager::PromotionAction TierManager::EvaluateTierPromotion(
     // Step 1: read current tier state
     auto tier = pm->tier_state.load(std::memory_order_acquire);
 
-    // Step 2: T1→T2 — stack-interpreted → register-lowering
+    // Step 2: T0→QuickJIT — immediately compile with no-optimizer for hotpatch
+    // methods.  Threshold is 1 so first call triggers Quick JIT.
+    if (tier == PatchMethod::kStackInterpreted &&
+        call_count >= PatchMethod::kQuickJitThreshold) {
+        uint32_t expected = PatchMethod::kStackInterpreted;
+        if (pm->tier_state.compare_exchange_strong(
+                expected, PatchMethod::kQuickJitted,
+                std::memory_order_acq_rel)) {
+            return PromotionAction::kQuickJit;
+        }
+        // CAS failed — another thread won, re-read for next check
+        tier = pm->tier_state.load(std::memory_order_acquire);
+    }
+
+    // Step 3: kQuickJitted→kJitted — Quick JIT already compiled, check if
+    // it's time for Full JIT (optimized compilation).
+    if (tier == PatchMethod::kQuickJitted) {
+        uint32_t backoff_base = PatchMethod::kJitThreshold +
+                                pm->codegen_fail_count * 1000;
+        if (call_count >= backoff_base) {
+            uint32_t expected = PatchMethod::kQuickJitted;
+            if (pm->tier_state.compare_exchange_strong(
+                    expected, PatchMethod::kJitted,
+                    std::memory_order_acq_rel)) {
+                return PromotionAction::kCompileToNative;
+            }
+            // CAS failed — re-read for next check
+            tier = pm->tier_state.load(std::memory_order_acquire);
+        }
+    }
+
+    // Step 4: T1→T2 — stack-interpreted → register-lowering
     if (tier == PatchMethod::kStackInterpreted &&
         call_count >= GetAdaptiveT1Threshold()) {
         uint32_t expected = PatchMethod::kStackInterpreted;
@@ -352,7 +405,7 @@ TierManager::PromotionAction TierManager::EvaluateTierPromotion(
         tier = pm->tier_state.load(std::memory_order_acquire);
     }
 
-    // Step 3: T2→T3 — register-mapped → background optimization
+    // Step 5: T2→T3 — register-mapped → background optimization
     if (tier == PatchMethod::kRegisterMapped &&
         call_count >= Get().GetAdaptiveT2Threshold()) {
         uint32_t expected = PatchMethod::kRegisterMapped;
@@ -364,7 +417,7 @@ TierManager::PromotionAction TierManager::EvaluateTierPromotion(
         tier = pm->tier_state.load(std::memory_order_acquire);
     }
 
-    // Step 4: T3→T4 — optimized-register → native (JIT) with codegen backoff
+    // Step 6: T3→T4 — optimized-register → native (JIT) with codegen backoff
     if (tier == PatchMethod::kOptimizedRegister) {
         uint32_t backoff_base = PatchMethod::kJitThreshold +
                                 pm->codegen_fail_count * 1000;
@@ -380,7 +433,7 @@ TierManager::PromotionAction TierManager::EvaluateTierPromotion(
         }
     }
 
-    // Step 5: already at native tier — check OSR availability
+    // Step 7: already at native tier — check OSR availability
     if (tier >= PatchMethod::kJitted) {
         auto* nm = pm->cached_native_method;
         if (nm != nullptr && nm->code != nullptr) {

@@ -10,7 +10,10 @@
 #include "IEncoder.h"
 #include "ISehHandler.h"
 #include "X64Encoder.h"
-#include "Arm64Encoder.h"
+#include "arm64_encoder.h"   // EmitFcmgt4S, EmitFcmeq4S, etc. — free-function API used on both x64 and ARM64
+#if defined(__aarch64__)
+#include "Arm64Encoder.h"    // Arm64Encoder class wrapper (IEncoder impl, only needed on ARM64)
+#endif
 
 #include <gc_root_scanner.h>
 #include <gc/gc_bgc.h>
