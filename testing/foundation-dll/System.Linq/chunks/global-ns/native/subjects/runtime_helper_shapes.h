@@ -165,6 +165,22 @@ enum ShapeId : CHAOS_IL2CPP_UINT32 {
     SHAPE_SYSTEM_MATH_ROUND_SYSTEM_DOUBLE_SYSTEM_INT32 = 0xFDEE4C3Eu,
     SHAPE_SYSTEM_MATH_SIN_SYSTEM_DOUBLE = 0x448A2335u,
     SHAPE_SYSTEM_MATH_SQRT_SYSTEM_DOUBLE = 0x2F5B83E9u,
+    SHAPE_SYSTEM_NUMERICS_BITOPERATIONS_CRC32C_SYSTEM_UINT32_SYSTEM_BYTE = 0x54F8A7DDu,
+    SHAPE_SYSTEM_NUMERICS_BITOPERATIONS_CRC32C_SYSTEM_UINT32_SYSTEM_UINT16 = 0x2E082C86u,
+    SHAPE_SYSTEM_NUMERICS_BITOPERATIONS_CRC32C_SYSTEM_UINT32_SYSTEM_UINT32 = 0xAC38CCB4u,
+    SHAPE_SYSTEM_NUMERICS_BITOPERATIONS_CRC32C_SYSTEM_UINT32_SYSTEM_UINT64 = 0x0F09D6ADu,
+    SHAPE_SYSTEM_NUMERICS_BITOPERATIONS_LEADINGZEROCOUNT_SYSTEM_UINT32 = 0x78806325u,
+    SHAPE_SYSTEM_NUMERICS_BITOPERATIONS_LEADINGZEROCOUNT_SYSTEM_UINT64 = 0x0C540300u,
+    SHAPE_SYSTEM_NUMERICS_BITOPERATIONS_POPCOUNT_SYSTEM_UINT32 = 0x43D1D06Au,
+    SHAPE_SYSTEM_NUMERICS_BITOPERATIONS_POPCOUNT_SYSTEM_UINT64 = 0x9E7130FFu,
+    SHAPE_SYSTEM_NUMERICS_BITOPERATIONS_ROTATELEFT_SYSTEM_UINT32_SYSTEM_INT32 = 0x94C5639Du,
+    SHAPE_SYSTEM_NUMERICS_BITOPERATIONS_ROTATELEFT_SYSTEM_UINT64_SYSTEM_INT32 = 0x6310298Au,
+    SHAPE_SYSTEM_NUMERICS_BITOPERATIONS_ROTATERIGHT_SYSTEM_UINT32_SYSTEM_INT32 = 0x2AAFEC56u,
+    SHAPE_SYSTEM_NUMERICS_BITOPERATIONS_ROTATERIGHT_SYSTEM_UINT64_SYSTEM_INT32 = 0x133AAA0Du,
+    SHAPE_SYSTEM_NUMERICS_BITOPERATIONS_ROUNDUPTOPOWEROF2_SYSTEM_UINT32 = 0xFCF758D4u,
+    SHAPE_SYSTEM_NUMERICS_BITOPERATIONS_ROUNDUPTOPOWEROF2_SYSTEM_UINT64 = 0x6105974Du,
+    SHAPE_SYSTEM_NUMERICS_BITOPERATIONS_TRAILINGZEROCOUNT_SYSTEM_UINT32 = 0xE3EE8BF9u,
+    SHAPE_SYSTEM_NUMERICS_BITOPERATIONS_TRAILINGZEROCOUNT_SYSTEM_UINT64 = 0xC0F02FD4u,
     SHAPE_SYSTEM_OBJECT_EQUALS_SYSTEM_OBJECT = 0xDD4F3B4Du,
     SHAPE_SYSTEM_OBJECT_EQUALS_SYSTEM_OBJECT_SYSTEM_OBJECT = 0x5D1C5493u,
     SHAPE_SYSTEM_OBJECT_GETHASHCODE = 0x2E696B79u,
@@ -346,7 +362,7 @@ enum ShapeId : CHAOS_IL2CPP_UINT32 {
     SHAPE_VOLATILE_READ_SYSTEM_INT32_ = 0x779CC9A5u,
     SHAPE_VOLATILE_WRITE_SYSTEM_INT32__SYSTEM_INT32 = 0x6556008Du,
 
-    SHAPE_COUNT = 332u,
+    SHAPE_COUNT = 348u,
 };
 
 // ---- Compile-time dispatch: NativeInt-returning shapes ----
@@ -663,6 +679,18 @@ CHAOS_IL2CPP_INTPTR DispatchNativeInt(Args... args) {
     else if constexpr (S == SHAPE_SYSTEM_MATH_SQRT_SYSTEM_DOUBLE) {
         return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
             ChaosMathSqrt(args...));
+    }
+    else if constexpr (S == SHAPE_SYSTEM_NUMERICS_BITOPERATIONS_ROTATELEFT_SYSTEM_UINT64_SYSTEM_INT32) {
+        return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+            ChaosBitOpsRotateLeft64(args...));
+    }
+    else if constexpr (S == SHAPE_SYSTEM_NUMERICS_BITOPERATIONS_ROTATERIGHT_SYSTEM_UINT64_SYSTEM_INT32) {
+        return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+            ChaosBitOpsRotateRight64(args...));
+    }
+    else if constexpr (S == SHAPE_SYSTEM_NUMERICS_BITOPERATIONS_ROUNDUPTOPOWEROF2_SYSTEM_UINT64) {
+        return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+            ChaosBitOpsRoundUpToPowerOf264(args...));
     }
     else if constexpr (S == SHAPE_SYSTEM_OBJECT_EQUALS_SYSTEM_OBJECT) {
         return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
@@ -1500,6 +1528,58 @@ CHAOS_IL2CPP_INT32 DispatchInt32(Args... args) {
         return static_cast<CHAOS_IL2CPP_INT32>(
             ChaosMathMinInt32(args...));
     }
+    else if constexpr (S == SHAPE_SYSTEM_NUMERICS_BITOPERATIONS_CRC32C_SYSTEM_UINT32_SYSTEM_BYTE) {
+        return static_cast<CHAOS_IL2CPP_INT32>(
+            ChaosBitOpsCrc32CByte(args...));
+    }
+    else if constexpr (S == SHAPE_SYSTEM_NUMERICS_BITOPERATIONS_CRC32C_SYSTEM_UINT32_SYSTEM_UINT16) {
+        return static_cast<CHAOS_IL2CPP_INT32>(
+            ChaosBitOpsCrc32CUInt16(args...));
+    }
+    else if constexpr (S == SHAPE_SYSTEM_NUMERICS_BITOPERATIONS_CRC32C_SYSTEM_UINT32_SYSTEM_UINT32) {
+        return static_cast<CHAOS_IL2CPP_INT32>(
+            ChaosBitOpsCrc32CUInt32(args...));
+    }
+    else if constexpr (S == SHAPE_SYSTEM_NUMERICS_BITOPERATIONS_CRC32C_SYSTEM_UINT32_SYSTEM_UINT64) {
+        return static_cast<CHAOS_IL2CPP_INT32>(
+            ChaosBitOpsCrc32CUInt64(args...));
+    }
+    else if constexpr (S == SHAPE_SYSTEM_NUMERICS_BITOPERATIONS_LEADINGZEROCOUNT_SYSTEM_UINT32) {
+        return static_cast<CHAOS_IL2CPP_INT32>(
+            ChaosBitOpsLeadingZeroCount32(args...));
+    }
+    else if constexpr (S == SHAPE_SYSTEM_NUMERICS_BITOPERATIONS_LEADINGZEROCOUNT_SYSTEM_UINT64) {
+        return static_cast<CHAOS_IL2CPP_INT32>(
+            ChaosBitOpsLeadingZeroCount64(args...));
+    }
+    else if constexpr (S == SHAPE_SYSTEM_NUMERICS_BITOPERATIONS_POPCOUNT_SYSTEM_UINT32) {
+        return static_cast<CHAOS_IL2CPP_INT32>(
+            ChaosBitOpsPopCount32(args...));
+    }
+    else if constexpr (S == SHAPE_SYSTEM_NUMERICS_BITOPERATIONS_POPCOUNT_SYSTEM_UINT64) {
+        return static_cast<CHAOS_IL2CPP_INT32>(
+            ChaosBitOpsPopCount64(args...));
+    }
+    else if constexpr (S == SHAPE_SYSTEM_NUMERICS_BITOPERATIONS_ROTATELEFT_SYSTEM_UINT32_SYSTEM_INT32) {
+        return static_cast<CHAOS_IL2CPP_INT32>(
+            ChaosBitOpsRotateLeft32(args...));
+    }
+    else if constexpr (S == SHAPE_SYSTEM_NUMERICS_BITOPERATIONS_ROTATERIGHT_SYSTEM_UINT32_SYSTEM_INT32) {
+        return static_cast<CHAOS_IL2CPP_INT32>(
+            ChaosBitOpsRotateRight32(args...));
+    }
+    else if constexpr (S == SHAPE_SYSTEM_NUMERICS_BITOPERATIONS_ROUNDUPTOPOWEROF2_SYSTEM_UINT32) {
+        return static_cast<CHAOS_IL2CPP_INT32>(
+            ChaosBitOpsRoundUpToPowerOf232(args...));
+    }
+    else if constexpr (S == SHAPE_SYSTEM_NUMERICS_BITOPERATIONS_TRAILINGZEROCOUNT_SYSTEM_UINT32) {
+        return static_cast<CHAOS_IL2CPP_INT32>(
+            ChaosBitOpsTrailingZeroCount32(args...));
+    }
+    else if constexpr (S == SHAPE_SYSTEM_NUMERICS_BITOPERATIONS_TRAILINGZEROCOUNT_SYSTEM_UINT64) {
+        return static_cast<CHAOS_IL2CPP_INT32>(
+            ChaosBitOpsTrailingZeroCount64(args...));
+    }
     else if constexpr (S == SHAPE_SYSTEM_OBJECT_GETHASHCODE) {
         return static_cast<CHAOS_IL2CPP_INT32>(
             ChaosObjectGetHashCode(args...));
@@ -1643,7 +1723,7 @@ extern ShapeRuntimeEntry g_runtime_shape_entries[kMaxRuntimeShapeEntries];
 extern CHAOS_IL2CPP_UINT32 g_runtime_shape_count;
 
 // ---- Compile-time completeness verification ----
-static_assert(SHAPE_COUNT == 332u,
+static_assert(SHAPE_COUNT == 348u,
     "Number of registered shapes changed. Regenerate this header from RuntimeHelperShapeRegistry.");
 
 #pragma pack(pop)

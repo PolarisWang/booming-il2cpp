@@ -96,6 +96,12 @@ set(CHAOS_PROFILE_GLOBALS
 set(CHAOS_ARRAY_STUBS
     "${CHAOS_SDK_DIR}/runtime_stubs/array_stubs.cpp"
 )
+set(CHAOS_MATH_STUBS
+    "${CHAOS_SDK_DIR}/runtime_stubs/math_stubs.cpp"
+)
+set(CHAOS_SIMD_STUBS
+    "${CHAOS_SDK_DIR}/runtime_stubs/simd_stubs.cpp"
+)
 
 set(CHAOS_ENTRY_SOURCES
     "runtime-entry.cpp"
@@ -104,6 +110,8 @@ set(CHAOS_ENTRY_SOURCES
     ${CHAOS_NATIVE_STUBS}
     ${CHAOS_PROFILE_GLOBALS}
     ${CHAOS_ARRAY_STUBS}
+    ${CHAOS_MATH_STUBS}
+    ${CHAOS_SIMD_STUBS}
     ${CHAOS_AOT_GENERATED_CPP}
 )
 

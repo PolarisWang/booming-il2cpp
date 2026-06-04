@@ -479,6 +479,7 @@ def run_build(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
             f"    <TargetFramework>{tfm}</TargetFramework>\n"
             "    <ImplicitUsings>enable</ImplicitUsings>\n"
             "    <Nullable>enable</Nullable>\n"
+            "    <DefineConstants>VERIFY</DefineConstants>\n"
             "    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>\n"
             "    <NoWarn>$(NoWarn);SYSLIB0011</NoWarn>\n"
             "    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>\n"

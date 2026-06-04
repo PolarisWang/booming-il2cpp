@@ -222,6 +222,8 @@ internal sealed class SdkEmitter
             "generated_code_compat.h", "string_table.h",
             "reflection_api.h", "reflection_metadata_impl.h",
             "arithmetic_chaos_bridge.h",
+            // SIMD: needed by InlineShape-generated expressions
+            "numerics_carriers.h", "vector_fixed_templates.h",
         };
         foreach (var h in runtimeCoreHeaders)
         {

@@ -563,6 +563,13 @@ public static class Program
             .ToDictionary(g => g.Key, g => g.Select(e => e.GeneratedMethodId!).ToList(),
                 StringComparer.Ordinal);
 
+        // Pre-compute set of benchmark subject IDs to avoid generating Benchmark_
+        // wrappers for methods whose probe reported an exception (those are
+        // marked as kind="hotupdate" in metadata, not kind="benchmark").
+        var benchmarkSubjectIds = new HashSet<string>(
+            metadata.Methods.Where(e => e.Kind == "benchmark").Select(e => e.MethodSubjectId),
+            StringComparer.Ordinal);
+
         var aotSubjectIds = new List<string>(metadata.Methods.Count * 2);
         foreach (var model in subjects)
         {
@@ -576,11 +583,15 @@ public static class Program
                 // Fact/HotUpdate wrapper: long return, no params
                 aotSubjectIds.Add($"{prefix}{genId}:System.Int64()");
                 // Benchmark wrapper: void return, Benchmark_ prefix, no params
-                aotSubjectIds.Add($"{prefix}Benchmark_{genId}:System.Void()");
+                // Only emit for methods whose probe did not report an exception
+                // (metadata kind == "benchmark"). Exception-throwing methods
+                // don't have meaningful benchmark wrappers.
+                if (benchmarkSubjectIds.Contains(model.SubjectId))
+                    aotSubjectIds.Add($"{prefix}Benchmark_{genId}:System.Void()");
             }
         }
         var subjectMethodIds = aotSubjectIds.Distinct(StringComparer.Ordinal).ToList();
-        Console.WriteLine($"        {subjectMethodIds.Count} AOT SubjectIds for codegen (from {subjects.Count} subjects x 2 variants)");
+        Console.WriteLine($"        {subjectMethodIds.Count} AOT SubjectIds for codegen (from {subjects.Count} subjects)");
 
         // Step 2: Run IL2CPP codegen
         Console.WriteLine("  [2/4] Running IL2CPP codegen...");

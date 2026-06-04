@@ -214,7 +214,8 @@ public sealed class TestEmitter
                     sb.AppendLine("        }");
                 }
 
-                // ── [Benchmark] method ──
+                // ── [Benchmark] method (skip if probe reported exception) ──
+                if (!hasException)
                 {
                     sb.AppendLine();
                     sb.AppendLine("        [Benchmark]");

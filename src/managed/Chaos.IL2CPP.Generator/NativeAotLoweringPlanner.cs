@@ -910,7 +910,17 @@ public sealed partial class NativeAotLoweringPlanner
                 if (!string.IsNullOrWhiteSpace(m.NativeSymbol) && seenNs.Add(m.NativeSymbol))
                     filtered.Add(m);
             if (filtered.Count < methodsForLowering.Count)
+            {
                 emitMethods = filtered;
+                int subjectDropped = 0;
+                var droppedSet = new HashSet<string>(methodsForLowering.Select(m => m.NativeSymbol!))
+                    .Except(filtered.Select(m => m.NativeSymbol!));
+                foreach (var m in methodsForLowering)
+                    if (IsSubjectMethod(m.SubjectId) && !filtered.Contains(m))
+                        subjectDropped++;
+                if (subjectDropped > 0)
+                    Console.Error.WriteLine($"[NS-DEDUP] Dropped {subjectDropped} subject method(s) of {methodsForLowering.Count - filtered.Count} total deduped");
+            }
         }
         var allMethods = new List<NativeAotMethodTemplateModel>(emitMethods.Count);
         for (int i = 0; i < emitMethods.Count; i++)
@@ -3785,6 +3795,43 @@ public sealed partial class NativeAotLoweringPlanner
 
         var methodEntries = new List<ScriptObject>(methods.Count);
         var subjectEntries = new List<ScriptObject>();
+
+        // ── Phase 1 diagnostic: SubjectId match rate ──
+        if (_subjectMethodSubjectIds is { Count: > 0 })
+        {
+            var subjectIdsInMethods = new HashSet<string>(methods.Select(m => m.SubjectId!),
+                StringComparer.Ordinal);
+            int matched = 0, missed = 0;
+            foreach (var sid in _subjectMethodSubjectIds)
+            {
+                if (subjectIdsInMethods.Contains(sid))
+                    matched++;
+                else
+                    missed++;
+            }
+            Console.Error.WriteLine($"[SUBJECT-MATCH] {matched} matched, {missed} missed " +
+                $"(out of {_subjectMethodSubjectIds.Count} subject-methods, " +
+                $"{methods.Count} methods in dispatch)");
+            if (missed > 0)
+            {
+                // Log first 10 missed SubjectIds as samples
+                int sampleCount = 0;
+                foreach (var sid in _subjectMethodSubjectIds)
+                {
+                    if (!subjectIdsInMethods.Contains(sid))
+                    {
+                        if (sampleCount < 10)
+                            Console.Error.WriteLine($"  [SUBJECT-MISS] {sid}");
+                        sampleCount++;
+                        if (sampleCount == 10)
+                        {
+                            Console.Error.WriteLine($"  [SUBJECT-MISS] ... and {missed - 10} more");
+                            break;
+                        }
+                    }
+                }
+            }
+        }
         for (int i = 0; i < methods.Count; i++)
         {
             var method = methods[i];

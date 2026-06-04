@@ -1302,6 +1302,62 @@ public sealed partial class NativeAotLoweringPlanner
                 CreateVoidAbiSlot(),
                 new HashSet<int> { 0, 1 });
 
+            // ═══════════════════════════════════════════════════════════════
+            // System.Buffers — InlineShape
+            // ═══════════════════════════════════════════════════════════════
+
+            static string? GetReverseEndiannessExpression(string cppType)
+            {
+                return cppType switch
+                {
+                    "CHAOS_IL2CPP_INT8" or "CHAOS_IL2CPP_UINT8" => "{0}",
+                    "CHAOS_IL2CPP_INT16" =>
+                        "static_cast<CHAOS_IL2CPP_INT16>((static_cast<CHAOS_IL2CPP_UINT16>({0}) << 8) | (static_cast<CHAOS_IL2CPP_UINT16>({0}) >> 8))",
+                    "CHAOS_IL2CPP_UINT16" =>
+                        "({0} << 8) | ({0} >> 8)",
+                    "CHAOS_IL2CPP_INT32" =>
+                        "static_cast<CHAOS_IL2CPP_INT32>((static_cast<CHAOS_IL2CPP_UINT32>({0}) << 24) | ((static_cast<CHAOS_IL2CPP_UINT32>({0}) & 0x0000FF00) << 8) | ((static_cast<CHAOS_IL2CPP_UINT32>({0}) >> 8) & 0x0000FF00) | (static_cast<CHAOS_IL2CPP_UINT32>({0}) >> 24))",
+                    "CHAOS_IL2CPP_UINT32" =>
+                        "({0} << 24) | (({0} & 0x0000FF00) << 8) | (({0} >> 8) & 0x0000FF00) | ({0} >> 24)",
+                    "CHAOS_IL2CPP_INT64" =>
+                        "static_cast<CHAOS_IL2CPP_INT64>([&]() -> CHAOS_IL2CPP_UINT64 { CHAOS_IL2CPP_UINT64 _v = static_cast<CHAOS_IL2CPP_UINT64>({0}); _v = (_v & 0x00000000FFFFFFFF) << 32 | (_v >> 32); _v = (_v & 0x0000FFFF0000FFFF) << 16 | ((_v >> 16) & 0x0000FFFF0000FFFF); _v = (_v & 0x00FF00FF00FF00FF) << 8 | ((_v >> 8) & 0x00FF00FF00FF00FF); return _v; }())",
+                    "CHAOS_IL2CPP_UINT64" =>
+                        "[&]() -> CHAOS_IL2CPP_UINT64 { CHAOS_IL2CPP_UINT64 _v = {0}; _v = (_v & 0x00000000FFFFFFFF) << 32 | (_v >> 32); _v = (_v & 0x0000FFFF0000FFFF) << 16 | ((_v >> 16) & 0x0000FFFF0000FFFF); _v = (_v & 0x00FF00FF00FF00FF) << 8 | ((_v >> 8) & 0x00FF00FF00FF00FF); return _v; }()",
+                    _ => null,
+                };
+            }
+
+            registry.RegisterInline(new InlineShapeDescriptor(
+                TypeDisplayNamePrefix: "System.Buffers.Binary.BinaryPrimitives",
+                MethodName: "ReverseEndianness",
+                Resolver: (callee, paramTypes) =>
+                {
+                    if (paramTypes.Count != 1) return null;
+                    var cppType = MapTypeArgToCppType(paramTypes[0]);
+                    if (cppType == null) return null;
+                    return GetReverseEndiannessExpression(cppType);
+                }));
+
+            // Base64.GetMaxEncodedToUtf8Length(int) → ((length + 2) / 3) * 4
+            registry.RegisterInline(new InlineShapeDescriptor(
+                TypeDisplayNamePrefix: "System.Buffers.Text.Base64",
+                MethodName: "GetMaxEncodedToUtf8Length",
+                Resolver: static (callee, paramTypes) =>
+                {
+                    if (paramTypes.Count != 1 || paramTypes[0] != "System.Int32") return null;
+                    return "(({0} + 2) / 3) * 4";
+                }));
+
+            // Base64.GetMaxDecodedFromUtf8Length(int) → (length / 4) * 3
+            registry.RegisterInline(new InlineShapeDescriptor(
+                TypeDisplayNamePrefix: "System.Buffers.Text.Base64",
+                MethodName: "GetMaxDecodedFromUtf8Length",
+                Resolver: static (callee, paramTypes) =>
+                {
+                    if (paramTypes.Count != 1 || paramTypes[0] != "System.Int32") return null;
+                    return "({0} / 4) * 3";
+                }));
+
             // === Array.Empty<T> (GenericShapeDescriptor -- resolves to ChaosArrayEmpty stub) ===
             // NOTE: Must be GenericShapeDescriptor, not SimpleForward, because the codegen
             // includes generic type args in the method name (e.g. "Empty<System.Byte>"),
@@ -3190,6 +3246,479 @@ public sealed partial class NativeAotLoweringPlanner
                     new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.Float64, TypeShape = AotCoreIrTypeShapeKind.ValueType }),
                 new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.Float64, TypeShape = AotCoreIrTypeShapeKind.ValueType },
                 new HashSet<int> { 0 });
+
+            // === System.Numerics::BitOperations (SimpleForward stubs) ===
+            registry.Register("System.Numerics.BitOperations", "PopCount", ["System.UInt32"],
+                ShapeKind.SimpleForward, "ChaosBitOpsPopCount32",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    CreateInt32AbiSlot()),
+                CreateInt32AbiSlot(),
+                new HashSet<int> { 0 });
+
+            registry.Register("System.Numerics.BitOperations", "PopCount", ["System.UInt64"],
+                ShapeKind.SimpleForward, "ChaosBitOpsPopCount64",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.UInt64, TypeShape = AotCoreIrTypeShapeKind.ValueType }),
+                CreateInt32AbiSlot(),
+                new HashSet<int> { 0 });
+
+            registry.Register("System.Numerics.BitOperations", "LeadingZeroCount", ["System.UInt32"],
+                ShapeKind.SimpleForward, "ChaosBitOpsLeadingZeroCount32",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    CreateInt32AbiSlot()),
+                CreateInt32AbiSlot(),
+                new HashSet<int> { 0 });
+
+            registry.Register("System.Numerics.BitOperations", "LeadingZeroCount", ["System.UInt64"],
+                ShapeKind.SimpleForward, "ChaosBitOpsLeadingZeroCount64",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.UInt64, TypeShape = AotCoreIrTypeShapeKind.ValueType }),
+                CreateInt32AbiSlot(),
+                new HashSet<int> { 0 });
+
+            registry.Register("System.Numerics.BitOperations", "TrailingZeroCount", ["System.UInt32"],
+                ShapeKind.SimpleForward, "ChaosBitOpsTrailingZeroCount32",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    CreateInt32AbiSlot()),
+                CreateInt32AbiSlot(),
+                new HashSet<int> { 0 });
+
+            registry.Register("System.Numerics.BitOperations", "TrailingZeroCount", ["System.UInt64"],
+                ShapeKind.SimpleForward, "ChaosBitOpsTrailingZeroCount64",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.UInt64, TypeShape = AotCoreIrTypeShapeKind.ValueType }),
+                CreateInt32AbiSlot(),
+                new HashSet<int> { 0 });
+
+            registry.Register("System.Numerics.BitOperations", "RotateLeft", ["System.UInt32", "System.Int32"],
+                ShapeKind.SimpleForward, "ChaosBitOpsRotateLeft32",
+                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
+                {
+                    CreateInt32AbiSlot(),
+                    CreateInt32AbiSlot(),
+                }),
+                CreateInt32AbiSlot(),
+                new HashSet<int> { 0, 1 });
+
+            registry.Register("System.Numerics.BitOperations", "RotateLeft", ["System.UInt64", "System.Int32"],
+                ShapeKind.SimpleForward, "ChaosBitOpsRotateLeft64",
+                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
+                {
+                    new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.UInt64, TypeShape = AotCoreIrTypeShapeKind.ValueType },
+                    CreateInt32AbiSlot(),
+                }),
+                new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.UInt64, TypeShape = AotCoreIrTypeShapeKind.ValueType },
+                new HashSet<int> { 0, 1 });
+
+            registry.Register("System.Numerics.BitOperations", "RotateRight", ["System.UInt32", "System.Int32"],
+                ShapeKind.SimpleForward, "ChaosBitOpsRotateRight32",
+                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
+                {
+                    CreateInt32AbiSlot(),
+                    CreateInt32AbiSlot(),
+                }),
+                CreateInt32AbiSlot(),
+                new HashSet<int> { 0, 1 });
+
+            registry.Register("System.Numerics.BitOperations", "RotateRight", ["System.UInt64", "System.Int32"],
+                ShapeKind.SimpleForward, "ChaosBitOpsRotateRight64",
+                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
+                {
+                    new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.UInt64, TypeShape = AotCoreIrTypeShapeKind.ValueType },
+                    CreateInt32AbiSlot(),
+                }),
+                new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.UInt64, TypeShape = AotCoreIrTypeShapeKind.ValueType },
+                new HashSet<int> { 0, 1 });
+
+            registry.Register("System.Numerics.BitOperations", "Crc32C", ["System.UInt32", "System.Byte"],
+                ShapeKind.SimpleForward, "ChaosBitOpsCrc32CByte",
+                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
+                {
+                    CreateInt32AbiSlot(),
+                    new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.UInt8, TypeShape = AotCoreIrTypeShapeKind.ValueType },
+                }),
+                CreateInt32AbiSlot(),
+                new HashSet<int> { 0, 1 });
+
+            registry.Register("System.Numerics.BitOperations", "Crc32C", ["System.UInt32", "System.UInt16"],
+                ShapeKind.SimpleForward, "ChaosBitOpsCrc32CUInt16",
+                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
+                {
+                    CreateInt32AbiSlot(),
+                    new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.UInt16, TypeShape = AotCoreIrTypeShapeKind.ValueType },
+                }),
+                CreateInt32AbiSlot(),
+                new HashSet<int> { 0, 1 });
+
+            registry.Register("System.Numerics.BitOperations", "Crc32C", ["System.UInt32", "System.UInt32"],
+                ShapeKind.SimpleForward, "ChaosBitOpsCrc32CUInt32",
+                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
+                {
+                    CreateInt32AbiSlot(),
+                    CreateInt32AbiSlot(),
+                }),
+                CreateInt32AbiSlot(),
+                new HashSet<int> { 0, 1 });
+
+            registry.Register("System.Numerics.BitOperations", "Crc32C", ["System.UInt32", "System.UInt64"],
+                ShapeKind.SimpleForward, "ChaosBitOpsCrc32CUInt64",
+                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
+                {
+                    CreateInt32AbiSlot(),
+                    new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.UInt64, TypeShape = AotCoreIrTypeShapeKind.ValueType },
+                }),
+                CreateInt32AbiSlot(),
+                new HashSet<int> { 0, 1 });
+
+            registry.Register("System.Numerics.BitOperations", "RoundUpToPowerOf2", ["System.UInt32"],
+                ShapeKind.SimpleForward, "ChaosBitOpsRoundUpToPowerOf232",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    CreateInt32AbiSlot()),
+                CreateInt32AbiSlot(),
+                new HashSet<int> { 0 });
+
+            registry.Register("System.Numerics.BitOperations", "RoundUpToPowerOf2", ["System.UInt64"],
+                ShapeKind.SimpleForward, "ChaosBitOpsRoundUpToPowerOf264",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.UInt64, TypeShape = AotCoreIrTypeShapeKind.ValueType }),
+                new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.UInt64, TypeShape = AotCoreIrTypeShapeKind.ValueType },
+                new HashSet<int> { 0 });
+
+            // === System.Numerics::BitOperations::IsPow2 (inline shape) ===
+            registry.RegisterInline(new InlineShapeDescriptor(
+                TypeDisplayNamePrefix: "System.Numerics.BitOperations",
+                MethodName: "IsPow2",
+                Resolver: static (callee, paramTypes) =>
+                {
+                    if (paramTypes.Count != 1) return null;
+                    // uint and ulong: same C++ expression works for both
+                    return "(({0} & ({0} - 1)) == 0 && {0} != 0)";
+                }));
+
+            // ═══════════════════════════════════════════════════════════════
+            // System.Runtime.Intrinsics.Vector128 / Vector256 — InlineShape
+            // ═══════════════════════════════════════════════════════════════
+            // Maps Vector128<T> and Vector256<T> methods to SIMD hardware
+            // intrinsic stubs (simd_stubs.h/simd_stubs.cpp) with lane-by-lane
+            // fallback via vector_fixed_templates.h.  Eliminates the generic
+            // managed dispatch overhead (~0.9ms → ~0.3µs per call) and replaces
+            // scalar lane loops with _mm_* / _mm256_* SSE/AVX instructions.
+            //
+            // Extracts the element type T from param types like
+            // "System.Runtime.Intrinsics.Vector128<System.Int32>" and maps it
+            // to the corresponding C++ scalar type for template instantiation.
+
+            static string? ExtractVectorElementType(string callee, IReadOnlyList<string> paramTypes)
+            {
+                // Try to extract from first Vector128<X> or Vector256<X> parameter
+                string? candidate = null;
+                for (var i = 0; i < paramTypes.Count; i++)
+                {
+                    var m = System.Text.RegularExpressions.Regex.Match(paramTypes[i], @"Vector(?:128|256)<([^>]+)>");
+                    if (m.Success)
+                    {
+                        candidate = m.Groups[1].Value;
+                        break;
+                    }
+                }
+                // Fall back to matching in the callee SubjectId
+                if (candidate == null)
+                {
+                    var m = System.Text.RegularExpressions.Regex.Match(callee, @"Vector(?:128|256)<([^>]+)>");
+                    if (m.Success) candidate = m.Groups[1].Value;
+                }
+                if (candidate == null || candidate.Contains('<')) return null;
+                return candidate;
+            }
+
+            static string? MapTypeArgToCppType(string typeArg)
+            {
+                return typeArg switch
+                {
+                    "System.Byte" => "CHAOS_IL2CPP_UINT8",
+                    "System.SByte" => "CHAOS_IL2CPP_INT8",
+                    "System.Int16" => "CHAOS_IL2CPP_INT16",
+                    "System.UInt16" => "CHAOS_IL2CPP_UINT16",
+                    "System.Int32" => "CHAOS_IL2CPP_INT32",
+                    "System.UInt32" => "CHAOS_IL2CPP_UINT32",
+                    "System.Int64" => "CHAOS_IL2CPP_INT64",
+                    "System.UInt64" => "CHAOS_IL2CPP_UINT64",
+                    "System.Single" => "float",
+                    "System.Double" => "double",
+                    "System.IntPtr" => "CHAOS_IL2CPP_NATIVE_INT",
+                    "System.UIntPtr" => "CHAOS_IL2CPP_NATIVE_UINT",
+                    _ => null,
+                };
+            }
+
+            static string? InferVectorCarrierType(string callee)
+            {
+                if (callee.Contains("Vector256")) return "RuntimeIntrinsicVector256Carrier";
+                return "RuntimeIntrinsicVector128Carrier"; // default for Vector128
+            }
+
+            static string? MakeVectorInlineExpression(string callee, IReadOnlyList<string> paramTypes,
+                string templateFn, bool requiresScalar)
+            {
+                var elemType = ExtractVectorElementType(callee, paramTypes);
+                if (elemType == null) return null;
+                var cppType = MapTypeArgToCppType(elemType);
+                if (cppType == null) return null;
+                var carrier = InferVectorCarrierType(callee);
+                if (carrier == null) return null;
+
+                // Phase 2: Check for SIMD hardware intrinsic stub first.
+                // When available, emits a direct call to the SIMD-optimized
+                // extern "C" function (defined in simd_stubs.h/simd_stubs.cpp).
+                // The stub uses _mm_* / _mm256_* SSE/AVX intrinsics instead of
+                // the lane-by-lane scalar fallback in vector_fixed_templates.h.
+                var simdStub = TryGetSimdStub(templateFn, carrier, requiresScalar ? cppType : null);
+                if (simdStub != null)
+                    return $"{simdStub}({{0}}, {{1}})";
+
+                // Fallback: inline C++ expression using vector_fixed_templates.h
+                const string ns = "chaos::il2cpp::vector_fixed::";
+                if (requiresScalar)
+                    return $"{ns}{templateFn}<{cppType}, {carrier}>({{0}}, {{1}})";
+                return $"{ns}{templateFn}<{carrier}>({{0}}, {{1}})";
+            }
+
+            // SIMD stub lookup: maps (templateFn, carrier, cppType) to the
+            // corresponding _mm_* / _mm256_* hardware intrinsic stub name.
+            // Returns null when no SIMD stub is available for the combo.
+            static string? TryGetSimdStub(string templateFn, string carrier, string? cppType)
+            {
+                // Bitwise operations are type-agnostic
+                if (templateFn == "VectorFixedBitwiseAnd")
+                    return carrier == "RuntimeIntrinsicVector128Carrier" ? "ChaosSimd_V128_And" :
+                           carrier == "RuntimeIntrinsicVector256Carrier" ? "ChaosSimd_V256_And" : null;
+                if (templateFn == "VectorFixedBitwiseOr")
+                    return carrier == "RuntimeIntrinsicVector128Carrier" ? "ChaosSimd_V128_Or" :
+                           carrier == "RuntimeIntrinsicVector256Carrier" ? "ChaosSimd_V256_Or" : null;
+                if (templateFn == "VectorFixedBitwiseXor")
+                    return carrier == "RuntimeIntrinsicVector128Carrier" ? "ChaosSimd_V128_Xor" :
+                           carrier == "RuntimeIntrinsicVector256Carrier" ? "ChaosSimd_V256_Xor" : null;
+
+                // Type-specific operations need both carrier and element type
+                if (cppType == null) return null;
+                var prefix = carrier == "RuntimeIntrinsicVector128Carrier" ? "V128" :
+                             carrier == "RuntimeIntrinsicVector256Carrier" ? "V256" : null;
+                if (prefix == null) return null;
+
+                var suffix = (templateFn, cppType) switch
+                {
+                    ("VectorFixedAdd", "CHAOS_IL2CPP_INT32") => "Add_I32",
+                    ("VectorFixedAdd", "float") => "Add_F32",
+                    ("VectorFixedAdd", "double") => "Add_F64",
+                    ("VectorFixedSubtract", "CHAOS_IL2CPP_INT32") => "Sub_I32",
+                    ("VectorFixedSubtract", "float") => "Sub_F32",
+                    ("VectorFixedSubtract", "double") => "Sub_F64",
+                    ("VectorFixedMultiply", "CHAOS_IL2CPP_INT32") => "Mul_I32",
+                    ("VectorFixedMultiply", "float") => "Mul_F32",
+                    ("VectorFixedMultiply", "double") => "Mul_F64",
+                    ("VectorFixedCompareEqual", "CHAOS_IL2CPP_INT32") => "CmpEq_I32",
+                    ("VectorFixedCompareEqual", "float") => "CmpEq_F32",
+                    ("VectorFixedShiftLeft", "CHAOS_IL2CPP_INT32") => "Shl_I32",
+                    _ => null,
+                };
+                return suffix != null ? $"ChaosSimd_{prefix}_{suffix}" : null;
+            }
+
+            // Helper: register a binary vector op for both Vector128 and Vector256.
+            // Uses MakeVectorInlineExpression directly (not captured variables) to avoid
+            // CS8820 (static lambda cannot capture local).
+            void RegisterVectorBinOp(string methodName, string templateFn, bool requiresScalar)
+            {
+                var fn = templateFn;
+                var rs = requiresScalar;
+                registry.RegisterInline(new InlineShapeDescriptor(
+                    TypeDisplayNamePrefix: "System.Runtime.Intrinsics.Vector128",
+                    MethodName: methodName,
+                    Resolver: (callee, paramTypes) =>
+                        MakeVectorInlineExpression(callee, paramTypes, fn, rs)));
+                registry.RegisterInline(new InlineShapeDescriptor(
+                    TypeDisplayNamePrefix: "System.Runtime.Intrinsics.Vector256",
+                    MethodName: methodName,
+                    Resolver: (callee, paramTypes) =>
+                        MakeVectorInlineExpression(callee, paramTypes, fn, rs)));
+            }
+
+            // Helper: register a unary vector op for both Vector128 and Vector256
+            void RegisterVectorUnaryOp(string methodName, string templateFn)
+            {
+                var fn = templateFn;
+                // Unary ops use {0} only
+                registry.RegisterInline(new InlineShapeDescriptor(
+                    TypeDisplayNamePrefix: "System.Runtime.Intrinsics.Vector128",
+                    MethodName: methodName,
+                    Resolver: (callee, paramTypes) =>
+                    {
+                        var elemType = ExtractVectorElementType(callee, paramTypes);
+                        if (elemType == null) return null;
+                        var cppType = MapTypeArgToCppType(elemType);
+                        if (cppType == null) return null;
+                        var carrier = InferVectorCarrierType(callee);
+                        if (carrier == null) return null;
+                        const string ns = "chaos::il2cpp::vector_fixed::";
+                        if (fn == "VectorFixedAbs" || fn == "VectorFixedNegate")
+                            return $"{ns}{fn}<{cppType}, {cppType}, {carrier}>({{0}})";
+                        return $"{ns}{fn}<{cppType}, {carrier}>({{0}})";
+                    }));
+                registry.RegisterInline(new InlineShapeDescriptor(
+                    TypeDisplayNamePrefix: "System.Runtime.Intrinsics.Vector256",
+                    MethodName: methodName,
+                    Resolver: (callee, paramTypes) =>
+                    {
+                        var elemType = ExtractVectorElementType(callee, paramTypes);
+                        if (elemType == null) return null;
+                        var cppType = MapTypeArgToCppType(elemType);
+                        if (cppType == null) return null;
+                        var carrier = InferVectorCarrierType(callee);
+                        if (carrier == null) return null;
+                        const string ns = "chaos::il2cpp::vector_fixed::";
+                        if (fn == "VectorFixedAbs" || fn == "VectorFixedNegate")
+                            return $"{ns}{fn}<{cppType}, {cppType}, {carrier}>({{0}})";
+                        return $"{ns}{fn}<{cppType}, {carrier}>({{0}})";
+                    }));
+            }
+
+            // ── Arithmetic ──
+            RegisterVectorBinOp("Add", "VectorFixedAdd", true);
+            RegisterVectorBinOp("Subtract", "VectorFixedSubtract", true);
+            RegisterVectorBinOp("Multiply", "VectorFixedMultiply", true);
+            RegisterVectorBinOp("Divide", "VectorFixedDivide", true);
+
+            // ── Bitwise (no scalar needed) ──
+            RegisterVectorBinOp("BitwiseAnd", "VectorFixedBitwiseAnd", false);
+            RegisterVectorBinOp("BitwiseOr", "VectorFixedBitwiseOr", false);
+            RegisterVectorBinOp("Xor", "VectorFixedBitwiseXor", false);
+            RegisterVectorBinOp("OnesComplement", "VectorFixedOnesComplement", false);
+            RegisterVectorBinOp("AndNot", "VectorFixedBitwiseAndNot", false);
+            RegisterVectorBinOp("ConditionalSelect", "VectorFixedBitwiseSelect", false);
+
+            // ── Comparison (returns mask vector) ──
+            RegisterVectorBinOp("Equals", "VectorFixedCompareEqual", true);
+            RegisterVectorBinOp("GreaterThan", "VectorFixedCompareGreaterThan", true);
+            RegisterVectorBinOp("LessThan", "VectorFixedCompareLessThan", true);
+            RegisterVectorBinOp("GreaterThanOrEqual", "VectorFixedCompareGreaterThanOrEqual", true);
+            RegisterVectorBinOp("LessThanOrEqual", "VectorFixedCompareLessThanOrEqual", true);
+
+            // ── Shift (scalar shift amount) ──
+            RegisterVectorBinOp("ShiftLeft", "VectorFixedShiftLeft", true);
+            RegisterVectorBinOp("ShiftRightLogical", "VectorFixedShiftRightLogical", true);
+            RegisterVectorBinOp("ShiftRightArithmetic", "VectorFixedShiftRightArithmetic", true);
+
+            // ── Unary math ──
+            RegisterVectorUnaryOp("Abs", "VectorFixedAbs");
+            RegisterVectorUnaryOp("Negate", "VectorFixedNegate");
+
+            // ── Min/Max ──
+            RegisterVectorBinOp("Min", "VectorFixedMin", true);
+            RegisterVectorBinOp("Max", "VectorFixedMax", true);
+
+            // ── Create ──
+            void RegisterVectorCreateZero()
+            {
+                // get_Zero: VectorFixedBroadcast<TScalar, TCarrier>(0)
+                foreach (var prefix in new[] { "System.Runtime.Intrinsics.Vector128", "System.Runtime.Intrinsics.Vector256" })
+                {
+                    registry.RegisterInline(new InlineShapeDescriptor(
+                        TypeDisplayNamePrefix: prefix,
+                        MethodName: "get_Zero",
+                        Resolver: static (callee, paramTypes) =>
+                        {
+                            var elemType = ExtractVectorElementType(callee, paramTypes);
+                            if (elemType == null) return null;
+                            var cppType = MapTypeArgToCppType(elemType);
+                            if (cppType == null) return null;
+                            var carrier = InferVectorCarrierType(callee);
+                            if (carrier == null) return null;
+                            return $"chaos::il2cpp::vector_fixed::VectorFixedBroadcast<{cppType}, {carrier}>(static_cast<{cppType}>(0))";
+                        }));
+                }
+            }
+            RegisterVectorCreateZero();
+
+            void RegisterVectorAllBitsSet()
+            {
+                foreach (var prefix in new[] { "System.Runtime.Intrinsics.Vector128", "System.Runtime.Intrinsics.Vector256" })
+                {
+                    registry.RegisterInline(new InlineShapeDescriptor(
+                        TypeDisplayNamePrefix: prefix,
+                        MethodName: "get_AllBitsSet",
+                        Resolver: static (callee, paramTypes) =>
+                        {
+                            var elemType = ExtractVectorElementType(callee, paramTypes);
+                            if (elemType == null) return null;
+                            var cppType = MapTypeArgToCppType(elemType);
+                            if (cppType == null) return null;
+                            var carrier = InferVectorCarrierType(callee);
+                            if (carrier == null) return null;
+                            return $"chaos::il2cpp::vector_fixed::VectorFixedBroadcast<{cppType}, {carrier}>(~static_cast<{cppType}>(0))";
+                        }));
+                }
+            }
+            RegisterVectorAllBitsSet();
+
+            // ── CreateScalar / CreateScalarUnsafe ──
+            void RegisterVectorCreateScalar()
+            {
+                foreach (var prefix in new[] { "System.Runtime.Intrinsics.Vector128", "System.Runtime.Intrinsics.Vector256" })
+                {
+                    foreach (var methodName in new[] { "CreateScalar", "CreateScalarUnsafe" })
+                    {
+                        registry.RegisterInline(new InlineShapeDescriptor(
+                            TypeDisplayNamePrefix: prefix,
+                            MethodName: methodName,
+                            Resolver: static (callee, paramTypes) =>
+                            {
+                                var elemType = ExtractVectorElementType(callee, paramTypes);
+                                if (elemType == null) return null;
+                                var cppType = MapTypeArgToCppType(elemType);
+                                if (cppType == null) return null;
+                                var carrier = InferVectorCarrierType(callee);
+                                if (carrier == null) return null;
+                                return $"chaos::il2cpp::vector_fixed::VectorFixedCreateScalar<{cppType}, {carrier}>({{0}})";
+                            }));
+                    }
+                }
+            }
+            RegisterVectorCreateScalar();
+
+            // ── GetElement / ToScalar ──
+            void RegisterVectorAccess()
+            {
+                foreach (var prefix in new[] { "System.Runtime.Intrinsics.Vector128", "System.Runtime.Intrinsics.Vector256" })
+                {
+                    registry.RegisterInline(new InlineShapeDescriptor(
+                        TypeDisplayNamePrefix: prefix,
+                        MethodName: "GetElement",
+                        Resolver: static (callee, paramTypes) =>
+                        {
+                            var elemType = ExtractVectorElementType(callee, paramTypes);
+                            if (elemType == null) return null;
+                            var cppType = MapTypeArgToCppType(elemType);
+                            if (cppType == null) return null;
+                            var carrier = InferVectorCarrierType(callee);
+                            if (carrier == null) return null;
+                            return $"chaos::il2cpp::vector_fixed::VectorFixedGetElement<{cppType}, {carrier}>({{0}}, {{1}})";
+                        }));
+                    registry.RegisterInline(new InlineShapeDescriptor(
+                        TypeDisplayNamePrefix: prefix,
+                        MethodName: "ToScalar",
+                        Resolver: static (callee, paramTypes) =>
+                        {
+                            var elemType = ExtractVectorElementType(callee, paramTypes);
+                            if (elemType == null) return null;
+                            var cppType = MapTypeArgToCppType(elemType);
+                            if (cppType == null) return null;
+                            var carrier = InferVectorCarrierType(callee);
+                            if (carrier == null) return null;
+                            return $"chaos::il2cpp::vector_fixed::VectorFixedGetElement<{cppType}, {carrier}>({{0}}, 0)";
+                        }));
+                }
+            }
+            RegisterVectorAccess();
 
             // === Activator::CreateInstance with param array ===
             registry.RegisterGeneric(new GenericShapeDescriptor(
@@ -6826,6 +7355,37 @@ public sealed partial class NativeAotLoweringPlanner
                 CreateNativeIntAbiSlot(),
                 new HashSet<int> { 0, 1 });
 
+            // ── Marshal simple ICALL stubs (compiled from runtime_stubs/interop_stubs.cpp) ──
+            registry.Register("System.Runtime.InteropServices.Marshal", "SetLastPInvokeError", ["System.Int32"],
+                ShapeKind.SimpleForward, "ChaosMarshalSetLastPInvokeError",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(CreateInt32AbiSlot()),
+                CreateVoidAbiSlot(),
+                new HashSet<int> { 0 });
+
+            registry.Register("System.Runtime.InteropServices.Marshal", "GetLastPInvokeError", [],
+                ShapeKind.SimpleForward, "ChaosMarshalGetLastPInvokeError",
+                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>([]),
+                CreateInt32AbiSlot(),
+                new HashSet<int>());
+
+            registry.Register("System.Runtime.InteropServices.Marshal", "GetExceptionCode", [],
+                ShapeKind.SimpleForward, "ChaosMarshalGetExceptionCode",
+                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>([]),
+                CreateInt32AbiSlot(),
+                new HashSet<int>());
+
+            registry.Register("System.Runtime.InteropServices.Marshal", "GetExceptionPointers", [],
+                ShapeKind.SimpleForward, "ChaosMarshalGetExceptionPointers",
+                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>([]),
+                CreateNativeIntAbiSlot(),
+                new HashSet<int>());
+
+            registry.Register("System.Runtime.InteropServices.Marshal", "AreComObjectsAvailableForCleanup", [],
+                ShapeKind.SimpleForward, "ChaosMarshalAreComObjectsAvailableForCleanup",
+                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>([]),
+                CreateInt32AbiSlot(),
+                new HashSet<int>());
+
             // ── Enum runtime stubs ─────────────────────────────────────────────
             registry.Register("System.Enum", "IsDefined", ["System.Type", "System.Object"],
                 ShapeKind.SimpleForward, "ChaosEnumIsDefined",
@@ -7237,86 +7797,232 @@ public sealed partial class NativeAotLoweringPlanner
                     return null;
                 }));
 
-            // ── Chaos.TestFramework.Assert inline shapes ──────────────────────
-            // These inline expansions replace Assert.AreEqual/IsTrue/IsNull etc.
-            // calls with C++ code that checks the condition and throws a managed
-            // exception on failure.  The exception is caught by the dispatch
-            // wrapper's catch(chaos_managed_exception&) block.
-            //
-            // Benchmark builds define CHAOS_IL2CPP_VERIFICATION_ENABLED=0, causing
-            // if constexpr to discard the assertion body at compile time — zero
-            // runtime overhead.
+		            // ── Globalization stubs (DirectNativeSymbol) ─────────────────────
+	            // These replace managed dispatch with direct native C function calls
+	            // for commonly-called globalization methods.  ASCII-range implementations
+	            // avoid the overhead of generic managed dispatch (~0.2ms → ~0.01ms).
 
-            // Assert.AreEqual(expected, actual) — all primitive-type overloads
-            registry.RegisterInline(new InlineShapeDescriptor(
-                TypeDisplayNamePrefix: "Chaos.TestFramework.Assert",
-                MethodName: "AreEqual",
-                Resolver: static (callee, paramTypes) =>
-                {
-                    if (paramTypes.Count < 2) return null;
-                    return """
-                        [&]() -> void { if constexpr (CHAOS_IL2CPP_VERIFICATION_ENABLED) { if (({0}) != ({1})) { throw chaos_managed_exception{}; } } }()
-                        """.Replace("\r\n", "\n").Trim();
-                }));
+	            // CharUnicodeInfo.GetNumericValue(char) → double
+	            registry.Register("System.Globalization.CharUnicodeInfo", "GetNumericValue", ["System.Char"],
+	                ShapeKind.SimpleForward, "ChaosCharUnicodeInfoGetNumericValue",
+	                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[1]
+	                {
+	                    CreateInt32AbiSlot(),
+	                }),
+	                new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.Float64, TypeShape = AotCoreIrTypeShapeKind.ValueType },
+	                new HashSet<int>());
 
-            // Assert.IsTrue(condition)
-            registry.RegisterInline(new InlineShapeDescriptor(
-                TypeDisplayNamePrefix: "Chaos.TestFramework.Assert",
-                MethodName: "IsTrue",
-                Resolver: static (callee, paramTypes) =>
-                {
-                    if (paramTypes.Count < 1) return null;
-                    return """
-                        [&]() -> void { if constexpr (CHAOS_IL2CPP_VERIFICATION_ENABLED) { if (!({0})) { throw chaos_managed_exception{}; } } }()
-                        """.Replace("\r\n", "\n").Trim();
-                }));
+	            // CharUnicodeInfo.GetDigitValue(char) → int
+	            registry.Register("System.Globalization.CharUnicodeInfo", "GetDigitValue", ["System.Char"],
+	                ShapeKind.SimpleForward, "ChaosCharUnicodeInfoGetDigitValue",
+	                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[1]
+	                {
+	                    CreateInt32AbiSlot(),
+	                }),
+	                CreateInt32AbiSlot(),
+	                new HashSet<int>());
 
-            // Assert.IsFalse(condition)
-            registry.RegisterInline(new InlineShapeDescriptor(
-                TypeDisplayNamePrefix: "Chaos.TestFramework.Assert",
-                MethodName: "IsFalse",
-                Resolver: static (callee, paramTypes) =>
-                {
-                    if (paramTypes.Count < 1) return null;
-                    return """
-                        [&]() -> void { if constexpr (CHAOS_IL2CPP_VERIFICATION_ENABLED) { if ({0}) { throw chaos_managed_exception{}; } } }()
-                        """.Replace("\r\n", "\n").Trim();
-                }));
+	            // CharUnicodeInfo.GetDecimalDigitValue(char) → int
+	            registry.Register("System.Globalization.CharUnicodeInfo", "GetDecimalDigitValue", ["System.Char"],
+	                ShapeKind.SimpleForward, "ChaosCharUnicodeInfoGetDecimalDigitValue",
+	                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[1]
+	                {
+	                    CreateInt32AbiSlot(),
+	                }),
+	                CreateInt32AbiSlot(),
+	                new HashSet<int>());
 
-            // Assert.IsNull(value)
-            registry.RegisterInline(new InlineShapeDescriptor(
-                TypeDisplayNamePrefix: "Chaos.TestFramework.Assert",
-                MethodName: "IsNull",
-                Resolver: static (callee, paramTypes) =>
-                {
-                    if (paramTypes.Count < 1) return null;
-                    return """
-                        [&]() -> void { if constexpr (CHAOS_IL2CPP_VERIFICATION_ENABLED) { if (({0}) != 0) { throw chaos_managed_exception{}; } } }()
-                        """.Replace("\r\n", "\n").Trim();
-                }));
+	            // CharUnicodeInfo.GetUnicodeCategory(char) → UnicodeCategory
+	            registry.Register("System.Globalization.CharUnicodeInfo", "GetUnicodeCategory", ["System.Char"],
+	                ShapeKind.SimpleForward, "ChaosCharUnicodeInfoGetUnicodeCategory",
+	                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[1]
+	                {
+	                    CreateInt32AbiSlot(),
+	                }),
+	                CreateInt32AbiSlot(),
+	                new HashSet<int>());
 
-            // Assert.IsNotNull(value)
-            registry.RegisterInline(new InlineShapeDescriptor(
-                TypeDisplayNamePrefix: "Chaos.TestFramework.Assert",
-                MethodName: "IsNotNull",
-                Resolver: static (callee, paramTypes) =>
-                {
-                    if (paramTypes.Count < 1) return null;
-                    return """
-                        [&]() -> void { if constexpr (CHAOS_IL2CPP_VERIFICATION_ENABLED) { if (({0}) == 0) { throw chaos_managed_exception{}; } } }()
-                        """.Replace("\r\n", "\n").Trim();
-                }));
+	            // CharUnicodeInfo.GetUnicodeCategory(int) → UnicodeCategory
+	            registry.Register("System.Globalization.CharUnicodeInfo", "GetUnicodeCategory", ["System.Int32"],
+	                ShapeKind.SimpleForward, "ChaosCharUnicodeInfoGetUnicodeCategory",
+	                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[1]
+	                {
+	                    CreateInt32AbiSlot(),
+	                }),
+	                CreateInt32AbiSlot(),
+	                new HashSet<int>());
 
-            // Assert.Fail(message) — always throws
-            registry.RegisterInline(new InlineShapeDescriptor(
-                TypeDisplayNamePrefix: "Chaos.TestFramework.Assert",
-                MethodName: "Fail",
-                Resolver: static (callee, paramTypes) =>
-                {
-                    return """
-                        [&]() -> void { if constexpr (CHAOS_IL2CPP_VERIFICATION_ENABLED) { throw chaos_managed_exception{}; } }()
-                        """.Replace("\r\n", "\n").Trim();
-                }));
+	            // CompareInfo.IsSortable(string) → bool
+	            registry.Register("System.Globalization.CompareInfo", "IsSortable", ["System.String"],
+	                ShapeKind.SimpleForward, "ChaosCompareInfoIsSortableString",
+	                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[1]
+	                {
+	                    CreateNativeIntAbiSlot("System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType),
+	                }),
+	                CreateInt32AbiSlot(),
+	                new HashSet<int> { 0 });
+
+	            // CompareInfo.IsSortable(char) → bool
+	            registry.Register("System.Globalization.CompareInfo", "IsSortable", ["System.Char"],
+	                ShapeKind.SimpleForward, "ChaosCompareInfoIsSortableInt",
+	                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[1]
+	                {
+	                    CreateInt32AbiSlot(),
+	                }),
+	                CreateInt32AbiSlot(),
+	                new HashSet<int>());
+
+	            // CompareInfo.IsSortable(System.Text.Rune) → bool
+	            registry.Register("System.Globalization.CompareInfo", "IsSortable", ["System.Text.Rune"],
+	                ShapeKind.SimpleForward, "ChaosCompareInfoIsSortableInt",
+	                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[1]
+	                {
+	                    CreateInt32AbiSlot(),
+	                }),
+	                CreateInt32AbiSlot(),
+	                new HashSet<int>());
+
+	            // DateTimeFormatInfo.GetInstance(IFormatProvider) → DateTimeFormatInfo
+	            registry.Register("System.Globalization.DateTimeFormatInfo", "GetInstance", ["System.IFormatProvider"],
+	                ShapeKind.SimpleForward, "ChaosDateTimeFormatInfoGetInstance",
+	                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[1]
+	                {
+	                    CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
+	                }),
+	                CreateNativeIntAbiSlot("System.Globalization.DateTimeFormatInfo", AotCoreIrTypeShapeKind.ReferenceType),
+	                new HashSet<int> { 0 });
+
+	            // CultureInfo.GetCultureInfo(string) → CultureInfo  (static)
+	            registry.Register("System.Globalization.CultureInfo", "GetCultureInfo", ["System.String"],
+	                ShapeKind.SimpleForward, "ChaosCultureGetCultureInfo",
+	                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[1]
+	                {
+	                    CreateNativeIntAbiSlot("System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType),
+	                }),
+	                CreateNativeIntAbiSlot("System.Globalization.CultureInfo", AotCoreIrTypeShapeKind.ReferenceType),
+	                new HashSet<int> { 0 });
+
+	            // CultureInfo.GetCultureInfo(string, bool) → CultureInfo (static)
+	            registry.Register("System.Globalization.CultureInfo", "GetCultureInfo", ["System.String", "System.Boolean"],
+	                ShapeKind.SimpleForward, "ChaosCultureGetCultureInfoBool",
+	                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
+	                {
+	                    CreateNativeIntAbiSlot("System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType),
+	                    CreateInt32AbiSlot(),  // bool → Int32 in unmanaged ABI
+	                }),
+	                CreateNativeIntAbiSlot("System.Globalization.CultureInfo", AotCoreIrTypeShapeKind.ReferenceType),
+	                new HashSet<int> { 0 });
+
+	            // CultureInfo.GetCultureInfoByIetfLanguageTag(string) → CultureInfo (static)
+	            registry.Register("System.Globalization.CultureInfo", "GetCultureInfoByIetfLanguageTag", ["System.String"],
+	                ShapeKind.SimpleForward, "ChaosCultureGetCultureInfoByIetfLanguageTag",
+	                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[1]
+	                {
+	                    CreateNativeIntAbiSlot("System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType),
+	                }),
+	                CreateNativeIntAbiSlot("System.Globalization.CultureInfo", AotCoreIrTypeShapeKind.ReferenceType),
+	                new HashSet<int> { 0 });
+
+	            // CultureInfo.CreateSpecificCulture(string) → CultureInfo (static)
+	            registry.Register("System.Globalization.CultureInfo", "CreateSpecificCulture", ["System.String"],
+	                ShapeKind.SimpleForward, "ChaosCultureCreateSpecificCulture",
+	                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[1]
+	                {
+	                    CreateNativeIntAbiSlot("System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType),
+	                }),
+	                CreateNativeIntAbiSlot("System.Globalization.CultureInfo", AotCoreIrTypeShapeKind.ReferenceType),
+	                new HashSet<int> { 0 });
+
+	            // CompareInfo.GetCompareInfo(string) → CompareInfo (static)
+	            registry.Register("System.Globalization.CompareInfo", "GetCompareInfo", ["System.String"],
+	                ShapeKind.SimpleForward, "ChaosCompareInfoGetCompareInfo",
+	                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[1]
+	                {
+	                    CreateNativeIntAbiSlot("System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType),
+	                }),
+	                CreateNativeIntAbiSlot("System.Globalization.CompareInfo", AotCoreIrTypeShapeKind.ReferenceType),
+	                new HashSet<int> { 0 });
+
+	            // ── Chaos.TestFramework.Assert inline shapes ──────────────────────
+	            // These inline expansions replace Assert.AreEqual/IsTrue/IsNull etc.
+	            // calls with C++ code that checks the condition and throws a managed
+	            // exception on failure.  The exception is caught by the dispatch
+	            // wrapper's catch(chaos_managed_exception&) block.
+	            //
+	            // The C# codegen always emits these assertion bodies.  The calling
+	            // test code simply does not invoke Assert methods in non-verification
+	            // builds, so the assertion code is dead-stripped by the C++ linker.
+
+	            // Assert.AreEqual(expected, actual) — all primitive-type overloads
+	            registry.RegisterInline(new InlineShapeDescriptor(
+	                TypeDisplayNamePrefix: "Chaos.TestFramework.Assert",
+	                MethodName: "AreEqual",
+	                Resolver: static (callee, paramTypes) =>
+	                {
+	                    if (paramTypes.Count < 2) return null;
+	                    return """
+	                        [&]() -> void { if (({0}) != ({1})) { throw chaos_managed_exception{}; } }()
+	                        """.Replace("\r\n", "\n").Trim();
+	                }));
+
+	            // Assert.IsTrue(condition)
+	            registry.RegisterInline(new InlineShapeDescriptor(
+	                TypeDisplayNamePrefix: "Chaos.TestFramework.Assert",
+	                MethodName: "IsTrue",
+	                Resolver: static (callee, paramTypes) =>
+	                {
+	                    if (paramTypes.Count < 1) return null;
+	                    return """
+	                        [&]() -> void { if (!({0})) { throw chaos_managed_exception{}; } }()
+	                        """.Replace("\r\n", "\n").Trim();
+	                }));
+
+	            // Assert.IsFalse(condition)
+	            registry.RegisterInline(new InlineShapeDescriptor(
+	                TypeDisplayNamePrefix: "Chaos.TestFramework.Assert",
+	                MethodName: "IsFalse",
+	                Resolver: static (callee, paramTypes) =>
+	                {
+	                    if (paramTypes.Count < 1) return null;
+	                    return """
+	                        [&]() -> void { if ({0}) { throw chaos_managed_exception{}; } }()
+	                        """.Replace("\r\n", "\n").Trim();
+	                }));
+
+	            // Assert.IsNull(value)
+	            registry.RegisterInline(new InlineShapeDescriptor(
+	                TypeDisplayNamePrefix: "Chaos.TestFramework.Assert",
+	                MethodName: "IsNull",
+	                Resolver: static (callee, paramTypes) =>
+	                {
+	                    if (paramTypes.Count < 1) return null;
+	                    return """
+	                        [&]() -> void { if (({0}) != 0) { throw chaos_managed_exception{}; } }()
+	                        """.Replace("\r\n", "\n").Trim();
+	                }));
+
+	            // Assert.IsNotNull(value)
+	            registry.RegisterInline(new InlineShapeDescriptor(
+	                TypeDisplayNamePrefix: "Chaos.TestFramework.Assert",
+	                MethodName: "IsNotNull",
+	                Resolver: static (callee, paramTypes) =>
+	                {
+	                    if (paramTypes.Count < 1) return null;
+	                    return """
+	                        [&]() -> void { if (({0}) == 0) { throw chaos_managed_exception{}; } }()
+	                        """.Replace("\r\n", "\n").Trim();
+	                }));
+
+	            // Assert.Fail(message) — always throws
+	            registry.RegisterInline(new InlineShapeDescriptor(
+	                TypeDisplayNamePrefix: "Chaos.TestFramework.Assert",
+	                MethodName: "Fail",
+	                Resolver: static (callee, paramTypes) =>
+	                {
+	                    return """
+	                        [&]() -> void { throw chaos_managed_exception{}; }()
+	                        """.Replace("\r\n", "\n").Trim();
+	                }));
 
             // Assert.Throws<T>(Action) — deferred to follow-up implementation.
             // Requires recognizing the callvirt Invoke delegate pattern and

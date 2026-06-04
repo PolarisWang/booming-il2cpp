@@ -127,6 +127,92 @@ CHAOS_IL2CPP_INTPTR ChaosTextInfoGetCultureName(CHAOS_IL2CPP_INTPTR /*text_info*
     return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(s_stub_empty_string);
 }
 
+// ── Globalization stubs (ASCII-range) ──
+// These provide fast-path native implementations for commonly-called
+// globalization methods.  Only the ASCII range (0x00-0x7F) is covered;
+// non-ASCII inputs return safe defaults.  Full ICU integration would
+// require linking libicuuc / icuuc libraries.
+
+// UnicodeCategory for ASCII characters (0x00-0x7F)
+static constexpr CHAOS_IL2CPP_INT32 s_asciiCategory[128] = {
+    14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,  // 00-0F: Cc
+    14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,  // 10-1F: Cc
+    11,25,25,25,27,28,25,25,25,25,25,25,26,25,26,25,  // 20-2F: Zs Po Po Po Sc Sk Po Po Po Po Po Po Sm Po Sm Po
+     8, 8, 8, 8, 8, 8, 8, 8, 8, 8,25,26,25,26,25,25,  // 30-3F: Nd Nd Nd Nd Nd Nd Nd Nd Nd Nd Po Sm Po Sm Po Po
+    25, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,  // 40-4F: Po Lu Lu Lu Lu Lu Lu Lu Lu Lu Lu Lu Lu Lu Lu Lu
+     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,25,25,25,26,25,  // 50-5F: Lu Lu Lu Lu Lu Lu Lu Lu Lu Lu Lu Po Po Po Sm Po
+    25, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,  // 60-6F: Po Ll Ll Ll Ll Ll Ll Ll Ll Ll Ll Ll Ll Ll Ll Ll
+     1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,25,25,25,26,14,  // 70-7F: Ll Ll Ll Ll Ll Ll Ll Ll Ll Ll Ll Po Po Po Sm Cc
+};
+
+CHAOS_IL2CPP_FLOAT64 ChaosCharUnicodeInfoGetNumericValue(CHAOS_IL2CPP_INT32 ch) noexcept
+{
+    // ASCII digits 0-9
+    if (ch >= 0x30 && ch <= 0x39) return static_cast<CHAOS_IL2CPP_FLOAT64>(ch - 0x30);
+    return -1.0;  // Not a numeric value
+}
+
+CHAOS_IL2CPP_INT32 ChaosCharUnicodeInfoGetDigitValue(CHAOS_IL2CPP_INT32 ch) noexcept
+{
+    if (ch >= 0x30 && ch <= 0x39) return ch - 0x30;
+    return -1;
+}
+
+CHAOS_IL2CPP_INT32 ChaosCharUnicodeInfoGetDecimalDigitValue(CHAOS_IL2CPP_INT32 ch) noexcept
+{
+    if (ch >= 0x30 && ch <= 0x39) return ch - 0x30;
+    return -1;
+}
+
+CHAOS_IL2CPP_INT32 ChaosCharUnicodeInfoGetUnicodeCategory(CHAOS_IL2CPP_INT32 ch) noexcept
+{
+    if (ch >= 0 && ch < 128) return s_asciiCategory[ch];
+    return 30;  // OtherNotAssigned for non-ASCII
+}
+
+CHAOS_IL2CPP_INT32 ChaosCompareInfoIsSortableString(CHAOS_IL2CPP_INTPTR str) noexcept
+{
+    // Return 1 (true) for any non-null string
+    return str != 0 ? 1 : 0;
+}
+
+CHAOS_IL2CPP_INT32 ChaosCompareInfoIsSortableInt(CHAOS_IL2CPP_INT32 ch) noexcept
+{
+    // All valid Unicode scalar values are sortable; suppress unused warning.
+    (void)ch;
+    return 1;
+}
+
+CHAOS_IL2CPP_INTPTR ChaosDateTimeFormatInfoGetInstance(CHAOS_IL2CPP_INTPTR /*provider*/) noexcept
+{
+    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(s_stub_subsystem);
+}
+
+CHAOS_IL2CPP_INTPTR ChaosCultureGetCultureInfo(CHAOS_IL2CPP_INTPTR /*name*/) noexcept
+{
+    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(s_stub_culture);
+}
+
+CHAOS_IL2CPP_INTPTR ChaosCultureGetCultureInfoBool(CHAOS_IL2CPP_INTPTR name, CHAOS_IL2CPP_INT32 /*tryFirst*/) noexcept
+{
+    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(name ? s_stub_culture : 0);
+}
+
+CHAOS_IL2CPP_INTPTR ChaosCultureGetCultureInfoByIetfLanguageTag(CHAOS_IL2CPP_INTPTR /*name*/) noexcept
+{
+    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(s_stub_culture);
+}
+
+CHAOS_IL2CPP_INTPTR ChaosCultureCreateSpecificCulture(CHAOS_IL2CPP_INTPTR /*name*/) noexcept
+{
+    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(s_stub_culture);
+}
+
+CHAOS_IL2CPP_INTPTR ChaosCompareInfoGetCompareInfo(CHAOS_IL2CPP_INTPTR /*name*/) noexcept
+{
+    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(s_stub_subsystem);
+}
+
 // ── GC stubs ──
 }  // extern "C"
 

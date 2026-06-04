@@ -412,11 +412,15 @@ def _run_single_benchmark(
     # Load method index → subjectId mapping from codegen manifest
     method_index_to_subject_id = _load_method_index_map(ctx)
     total_method_count = _get_manifest_method_count(ctx) if method_index_to_subject_id else 0
+    _ = total_method_count  # suppress unused (available for future range-mode support)
 
     # Determine benchmark range
     benchmark_start_idx = 0
-    benchmark_end_idx = total_method_count if method_index_to_subject_id else 0
-    use_range = benchmark_end_idx > benchmark_start_idx
+    benchmark_end_idx = 0
+    # NOTE: --benchmark-range is disabled because the current entry.exe
+    # (built from an older TPG template) does not support it.  The subject
+    # slot map based --benchmark-all mode is used instead.
+    use_range = False
 
     entry_count = _get_entry_count(exe_path) if not use_range else benchmark_end_idx
 
