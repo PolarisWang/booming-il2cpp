@@ -308,30 +308,6 @@ def run_build(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
         total_subjects = metadata.get("totalMethods", 0)
         print(f"  [build] AutoTestGenerator subjects: {total_subjects}")
 
-        # Enforce methodCount from chunk.json — truncate metadata if
-        # AutoTestGenerator exceeded the chunk's intended subject limit.
-        if method_count > 0 and total_subjects > method_count:
-            print(f"  [build] Truncating to methodCount={method_count} (was {total_subjects})")
-            total_subjects = method_count
-            metadata["totalMethods"] = method_count
-
-            # Truncate methods array to first method_count entries
-            methods = metadata.get("methods", [])
-            metadata["methods"] = methods[:method_count]
-
-            # Rebuild index arrays from truncated methods
-            custom_idx = [m["index"] for m in methods[:method_count] if m.get("kind") == "hotupdate"]
-            benchmark_idx = [m["index"] for m in methods[:method_count] if m.get("kind") == "benchmark"]
-            metadata["customEntryIndices"] = custom_idx if custom_idx else None
-            metadata["benchmarkMethodIndices"] = benchmark_idx if benchmark_idx else None
-            metadata["hotupdateMethodIndices"] = sorted(custom_idx + benchmark_idx)
-
-            # Write truncated metadata back to file
-            metadata_path.write_text(
-                json.dumps(metadata, indent=2, ensure_ascii=False), encoding="utf-8")
-            print(f"  [build] Truncated metadata: {total_subjects} subjects, "
-                  f"{len(custom_idx)} custom, {len(benchmark_idx)} benchmark")
-
     if total_subjects == 0:
         # Fallback: check for custom subject .cs files
         print(f"  [build] No auto-generated subjects — checking for custom subjects...")
