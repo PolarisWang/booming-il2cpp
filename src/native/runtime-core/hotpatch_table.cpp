@@ -260,6 +260,17 @@ OriginalAotPtrCallback GetOriginalAotPtrCallback() noexcept {
     return g_original_aot_cb;
 }
 
+// ── Precode transfer callback (D+ DP1-a) ────────────────────────────────────
+static PrecodeTransferCallback g_precode_transfer_cb = nullptr;
+
+void SetPrecodeTransferCallback(PrecodeTransferCallback cb) noexcept {
+    g_precode_transfer_cb = cb;
+}
+
+PrecodeTransferCallback GetPrecodeTransferCallback() noexcept {
+    return g_precode_transfer_cb;
+}
+
 void HotpatchNameRegistry::SetPatchedBySlot(uint32_t module_id, uint32_t slot, bool patched,
                                              void* method_key,
                                              uint32_t domain_id) noexcept {
@@ -277,6 +288,34 @@ void HotpatchNameRegistry::SetPatchedBySlot(uint32_t module_id, uint32_t slot, b
         uint32_t new_flags = (atomic_flags.load(std::memory_order_relaxed)
                               | kHotpatchActive) & ~kHotpatchKeepNative;
         atomic_flags.store(new_flags, std::memory_order_release);
+
+        // Gap2: If this entry has a JitPrecode (detected via the original AOT
+        // pointer callback), revert direct_ptr from the JIT trampoline/compiled
+        // code back to the original AOT code.  This prevents the precode system
+        // from independently compiling the method while the tier system manages
+        // it through PatchMethod + tier_state.  Without this fix, the precode
+        // (Quick JIT via RegisterJitEntryMethods) and the tier system (Full JIT
+        // T3→T4 promotion) could independently produce two compiled versions of
+        // the same method — a double compilation waste.
+        // See: docs/dev/in-progress/tier-promotion-unification/STATUS.md (Gap2)
+        auto* orig_cb = GetOriginalAotPtrCallback();
+        if (orig_cb != nullptr) {
+            void* original_ptr = orig_cb(entry);
+            if (original_ptr != nullptr && original_ptr != entry->direct_ptr) {
+                entry->direct_ptr = original_ptr;
+            }
+        }
+
+        // DP1-a: Try to transfer precode-compiled JitMethod ownership to the
+        // tier system.  If the precode has already compiled this method (Quick
+        // JIT), we transfer the JitMethod* to PatchMethod and set kJitted state,
+        // skipping the entire tier promotion path.  The transfer callback is
+        // registered by RegisterJitEntryMethods and lives in jit_precode.cpp.
+        // If transfer succeeds, direct_ptr is updated to point to the
+        // transferred code and the Gap2 revert above is overridden.
+        if (auto* transfer_cb = GetPrecodeTransferCallback(); transfer_cb != nullptr) {
+            transfer_cb(entry, method_key);
+        }
 
         // Track this patch for domain-unload cleanup.
         if (domain_id > 0) {

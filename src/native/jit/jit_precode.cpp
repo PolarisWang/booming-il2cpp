@@ -32,7 +32,7 @@
 #include <ir_reg_alloc.h>        // AllocateRegisters
 #include "jit_seh.h"             // RegisterNativeCodeSection
 #include <jit_registration.h>    // JitEntry
-#include <jit_seh.h>             // RegisterNativeCodeSection
+#include <patch_loader.h>        // PatchMethod (full definition)
 #include <tier_manager.h>        // TierManager::EnqueueJitRecompilation
 #include <slot_map.h>            // ReverseSlotMap, g_reverse_slot_map
 #include <chaos/log.h>           // CHAOS_IL2CPP_LOG_ERROR_M
@@ -505,6 +505,47 @@ static void* GetOriginalAotPtr(HotpatchEntryV0* entry) noexcept {
     return nullptr;
 }
 
+// ── JitPrecode side-map ──────────────────────────────────────────────────
+// Maps HotpatchEntryV0* → JitPrecode* for DP1-a ownership transfer.
+// Populated during RegisterJitEntryMethods.
+static CHAOS_IL2CPP_UNORDERED_DENSE_MAP_IDENTITY(void*, void*) g_precode_side_map;
+
+// DP1-a: Atomically transfer precode-compiled JitMethod ownership to the tier
+// system.  Called from SetPatchedBySlot when a method is hotpatch-activated.
+// Returns true if the transfer succeeded (method_key kJitted ready), false if
+// no transfer (no JitPrecode, not yet compiled, or keep-native).
+// Thread-safety: atomic exchange on precode->compiled ensures the precode
+// system loses ownership.  Precode's JitStubDispatchImpl will detect
+// precode->compiled == nullptr and fall back to original_direct_ptr.
+static bool TransferPrecodeOwnership(HotpatchEntryV0* entry, void* method_key) noexcept {
+    if (!entry || !method_key) return false;
+    auto it = g_precode_side_map.find(static_cast<void*>(entry));
+    if (it == g_precode_side_map.end()) return false;
+
+    auto* precode = static_cast<JitPrecode*>(it->second);
+    if (!precode) return false;
+
+    // acquire-load to synchronize with JitStubDispatchImpl's release store.
+    auto state = precode->state.load(std::memory_order_acquire);
+    if (state != kPrecodeCompiled) return false;  // not yet compiled
+
+    // Atomic exchange: take ownership of compiled JitMethod.
+    // compiled is a raw JitMethod* (not std::atomic), so use GCC __atomic_exchange_n.
+    auto* jit = __atomic_exchange_n(&precode->compiled, nullptr, __ATOMIC_ACQUIRE);
+    if (!jit) return false;  // another thread already took it
+
+    auto* pm = static_cast<chaos::il2cpp::runtime_core::PatchMethod*>(method_key);
+    pm->cached_native_method = jit;
+    pm->tier_state.store(chaos::il2cpp::runtime_core::PatchMethod::kJitted,
+                         std::memory_order_release);
+    pm->aot_entry = jit->code;
+    entry->direct_ptr = jit->code;
+
+    // Remove from side-map so JitRecompileToTier1 skips this entry.
+    g_precode_side_map.erase(it);
+    return true;
+}
+
 // ── RegisterJitEntryMethods ───────────────────────────────────────────────
 // Called once at startup (from runtime-entry.cpp) to register all methods
 // for JIT compilation via precode dispatch.  For each entry:
@@ -571,6 +612,8 @@ extern "C" void RegisterJitEntryMethods(const JitEntry* entries, uint32_t count)
             // Register in side-map so ResolveDirectFn can find the original
             // AOT pointer when resolving call targets during patch IR lowering.
             g_original_aot_map[static_cast<void*>(precode->entry)] = precode->original_direct_ptr;
+            // Register in precode side-map for DP1-a ownership transfer.
+            g_precode_side_map[static_cast<void*>(precode->entry)] = precode;
         } else {
             CHAOS_IL2CPP_LOG_ERROR_M("jit",
                 "RegisterJitEntryMethods: failed for token 0x{:x} module {}",
@@ -594,6 +637,11 @@ extern "C" void RegisterJitEntryMethods(const JitEntry* entries, uint32_t count)
     // patch IR lowering) gets the real AOT code pointer, not the JIT trampoline.
     // In AOT mode, this callback returns nullptr and entry->direct_ptr is used as-is.
     SetOriginalAotPtrCallback(GetOriginalAotPtr);
+
+    // Register the JitPrecode ownership transfer function for DP1-a.
+    // SetPatchedBySlot calls this to transfer precode-compiled JitMethod
+    // ownership to the tier system when a method is hotpatch-activated.
+    SetPrecodeTransferCallback(TransferPrecodeOwnership);
 }
 
 // ── JitRecompileToTier1 ─────────────────────────────────────────────────

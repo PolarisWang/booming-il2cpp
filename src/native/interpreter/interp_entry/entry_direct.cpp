@@ -448,7 +448,59 @@ static void CompileAndCacheEntry(
     }
 }
 
-// ── TryTierUpgrade — unified tier promotion check (Phase 1.3) ────────────
+// ── QuickJitAndCacheEntry — Quick JIT compilation (no optimizer) ───────────
+// Called from TryTierUpgrade when EvaluateTierPromotion returns kQuickJit.
+// Compiles with enable_optimizer=false for fast warmup.  The resulting
+// JitMethod is cached in cached_native_method and the entry point is set
+// as aot_entry + direct_ptr so subsequent calls go directly to native code.
+// Thread-safety: caller already won the CAS for kQuickJitted.
+static void QuickJitAndCacheEntry(
+    PatchMethod* pm,
+    runtime_instantiation::InterpreterDispatchContext* dispatch_ctx) noexcept {
+
+    auto* reg_m = static_cast<interpreter::RegisterMethod*>(pm->cached_reg_method);
+    if (reg_m == nullptr || reg_m->instructions.empty()) return;
+
+    jit::CompileConfig cfg;
+    cfg.enable_safepoint_polls = true;
+    cfg.enable_liveness = true;
+    cfg.safepoint_fn = reinterpret_cast<void*>(&chaos::il2cpp::runtime_core::threading::SafepointPoll);
+    cfg.cooperative_fn = reinterpret_cast<void*>(&chaos::il2cpp::runtime_core::threading::EnterCooperativeMode);
+    cfg.preemptive_fn = reinterpret_cast<void*>(&chaos::il2cpp::runtime_core::threading::EnterPreemptiveMode);
+    cfg.dispatch_ctx = dispatch_ctx;
+    cfg.call_cache = pm->call_cache;
+    cfg.call_cache_count = pm->reg_ir_instr_count;
+    cfg.arg_type_tags = pm->cached_sig_valid ? pm->cached_arg_types : nullptr;
+    cfg.arg_type_count = pm->cached_arg_count;
+    cfg.method_token = pm->token;
+    cfg.method_module_id = pm->module_id;
+    cfg.enable_optimizer = false;   // Quick JIT — skip optimizer
+    cfg.enable_pgo = false;         // No PGO for Quick JIT
+
+    auto* jit = jit::Compile(*reg_m, cfg);
+    pm->cached_native_method = jit;
+    if (jit != nullptr) {
+        if (jit->slot_map_data != nullptr) {
+            chaos::il2cpp::runtime_core::GcRegisterSlotMap(jit->code,
+                static_cast<const GcSlotMapV0*>(jit->slot_map_data));
+        }
+        chaos::il2cpp::jit::RegisterNativeCodeSection(jit->code, jit->code_size, jit, pm->token);
+        pm->aot_entry = jit->code;
+
+        // Atomically patch direct_ptr so subsequent dispatch goes straight to native.
+        // (Only if the dispatch entry still points to us — entry may have been unpatched.)
+        auto* entry = chaos::il2cpp::runtime_core::GetHotpatchNameRegistry()
+            .GetDispatchEntryBySlot(pm->module_id,
+                chaos::il2cpp::runtime_core::GetHotpatchNameRegistry().TokenToSlot(pm->module_id, pm->token));
+        if (entry != nullptr) {
+            entry->direct_ptr = jit->code;
+        }
+    } else {
+        ++pm->codegen_fail_count;
+        // Quick JIT failed — fall back to stack-interpreted, let normal tiering try later.
+        pm->tier_state.store(PatchMethod::kStackInterpreted, std::memory_order_release);
+    }
+}
 // Called once per InterpreterEntryDirect invocation, before Step B/C branch.
 // Delegates all CAS + threshold decisions to EvaluateTierPromotion,
 // executes the returned action.
@@ -457,6 +509,16 @@ static void TryTierUpgrade(PatchMethod* patch_method, uint32_t call_count,
     auto action = TierManager::EvaluateTierPromotion(patch_method, call_count);
 
     switch (action) {
+    case TierManager::PromotionAction::kQuickJit:
+        if constexpr (kRuntimeConfig.jit) {
+            if (chaos::il2cpp::pal::PalCanJit()) {
+                QuickJitAndCacheEntry(patch_method, dispatch_ctx);
+                break;
+            }
+        }
+        // JIT not available — stay at kStackInterpreted
+        break;
+
     case TierManager::PromotionAction::kPromoteToTier2:
         OptimizeToTier2(patch_method);
         patch_method->tier_state.store(PatchMethod::kRegisterMapped, std::memory_order_release);
@@ -576,8 +638,14 @@ void InterpreterEntryDirect(
     // ── Unified tier upgrade check (Phase 1.3) ─────────────────────────
     // Single call_count fetch + tier promotion check, done once per invocation
     // before the Step B/C branch, eliminating duplicated checks.
-    auto tier_call_count = patch_method->call_count.fetch_add(1, std::memory_order_relaxed) + 1;
-    {
+    //
+    // Issue #2 optimization: skip the atomic fetch_add entirely when the
+    // method is already at or beyond the final tier (kJitted).  At T4+ no
+    // tier promotion is possible, so the RMW is pure cache-coherency cost
+    // on the hot path.  Deopt-demoted methods (kJitSkip) also skip here
+    // since they won't re-enter the tier promotion flow.
+    if (patch_method->tier_state.load(std::memory_order_acquire) < PatchMethod::kJitted) {
+        auto tier_call_count = patch_method->call_count.fetch_add(1, std::memory_order_relaxed) + 1;
         auto* rs = GetCurrentRuntimeState();
         auto* ts = GetCurrentThreadState();
         runtime_instantiation::InterpreterDispatchContext tier_dispatch_ctx;
@@ -603,19 +671,8 @@ void InterpreterEntryDirect(
 
 
 
-    // ── Step A0: AOT native code path ─────────────────────────────
-    // AOT code is pre-compiled — no tiering, no deopt needed.
-    if constexpr (kRuntimeConfig.aot) {
-        if (auto aot_entry = patch_method->aot_entry; aot_entry != nullptr) {
-            GetTierCounters().step_native.fetch_add(1, std::memory_order_relaxed);
-            using NativeEntry = void (*)(void*, void*);
-            auto native_entry = reinterpret_cast<NativeEntry>(aot_entry);
-            native_entry(args_buf, ret_buf);
-            return;
-        }
-    }
-
-    // ── Step A: Native code path (T4) ────────────────────────────────
+    // ── Step A: JIT T4 native code path (preferred in hybrid mode) ───
+    // JIT code may deopt — wrap with GC_TRANSITION + deopt handling.
     if constexpr (kRuntimeConfig.jit) {
         auto t4_tier = patch_method->tier_state.load(std::memory_order_acquire);
         if (t4_tier >= PatchMethod::kJitted) {
@@ -624,9 +681,6 @@ void InterpreterEntryDirect(
                 GetTierCounters().step_native.fetch_add(1, std::memory_order_relaxed);
                 using NativeEntry = void (*)(void*, void*);
                 auto native_entry = reinterpret_cast<NativeEntry>(nm->code);
-                // JIT epilogue calls EnterPreemptiveMode, leaving thread in
-                // preemptive mode.  Wrap the call to restore cooperative mode
-                // for the interpreter dispatch loop (which asserts cooperative).
                 GC_TRANSITION_TO_PREEMPTIVE();
                 native_entry(args_buf, ret_buf);
                 GC_TRANSITION_TO_COOPERATIVE();
@@ -636,21 +690,51 @@ void InterpreterEntryDirect(
                     ++patch_method->deopt_count;
 
                     if (patch_method->deopt_count > PatchMethod::kMaxDeoptBeforeDemote) {
-                        // Permanently skip JIT: overflow/OSR deopts would recur on re-promotion.
                         patch_method->tier_state.store(PatchMethod::kJitSkip, std::memory_order_release);
-                        auto* nm = patch_method->cached_native_method;
-                        if (nm != nullptr) {
-                            chaos::il2cpp::jit::UnregisterNativeCodeSection(nm->code);
-                            chaos::il2cpp::runtime_core::GcUnregisterSlotMap(nm->code);
+                        auto* dnm = patch_method->cached_native_method;
+                        if (dnm != nullptr) {
+                            chaos::il2cpp::jit::UnregisterNativeCodeSection(dnm->code);
+                            chaos::il2cpp::runtime_core::GcUnregisterSlotMap(dnm->code);
                             patch_method->cached_native_method = nullptr;
                         }
                         patch_method->deopt_count = 0;
                     }
-                    // Fall through to RegisterExecute
+                    // Fall through to interpreter (deopt recovery)
                 } else {
                     return;
                 }
             }
+        }
+    }
+
+    // ── Step A-QuickJit: kQuickJitted native code path ──────────────
+    // Quick JIT has no optimizer transformations → no deopt possible,
+    // no GC_TRANSITION needed (code handles its own GC safepoints).
+    // Reload tier_state in case tier promotion (above) just promoted this
+    // method from kQuickJitted→kJitted — the stale t4_tier would miss it.
+    auto qj_tier = patch_method->tier_state.load(std::memory_order_acquire);
+    if (qj_tier == PatchMethod::kQuickJitted) {
+        if (auto aot_entry = patch_method->aot_entry; aot_entry != nullptr) {
+            GetTierCounters().step_native.fetch_add(1, std::memory_order_relaxed);
+            using NativeEntry = void (*)(void*, void*);
+            auto native_entry = reinterpret_cast<NativeEntry>(aot_entry);
+            native_entry(args_buf, ret_buf);
+            return;
+        }
+    }
+
+    // ── Step A0: AOT native code path (fallback in hybrid, primary in AOT-only) ──
+    // AOT code is pre-compiled — no tiering, no deopt needed.
+    // In AOT-only mode this is the only native path; in hybrid mode it serves
+    // as the fallback when T4 JIT code is not yet available or was demoted.
+    // No GC_TRANSITION wrapper — AOT code follows the GC contract.
+    if constexpr (kRuntimeConfig.aot) {
+        if (auto aot_entry = patch_method->aot_entry; aot_entry != nullptr) {
+            GetTierCounters().step_native.fetch_add(1, std::memory_order_relaxed);
+            using NativeEntry = void (*)(void*, void*);
+            auto native_entry = reinterpret_cast<NativeEntry>(aot_entry);
+            native_entry(args_buf, ret_buf);
+            return;
         }
     }
     {
