@@ -68,9 +68,11 @@ extern "C" BenchmarkResult RunBenchmark(int entry_index, int iterations) {
     if (entry_index < 0 || entry_index >= kAotMethodCount)
         return {-1.0, 0, false};
     auto* entries = GetHotpatchEntries();
-    // Warmup (may throw managed exception — caught via C++ EH)
+    // Warmup: at least 100 calls to prime caches / tier promotion
     try {
-        ChaosDispatchMethodBenchDirect(entries, kAotMethodCount, entry_index);
+        for (int w = 0; w < 100; w++) {
+            ChaosDispatchMethodBenchDirect(entries, kAotMethodCount, entry_index);
+        }
     } catch(...) {
         return {-1.0, 0, true};
     }
@@ -84,8 +86,9 @@ extern "C" BenchmarkResult RunBenchmark(int entry_index, int iterations) {
             ChaosDispatchMethodBenchDirect(entries, kAotMethodCount, entry_index);
         }
     } catch(...) {
+        auto alloc_after = chaos_gc_get_allocated_bytes_for_current_thread();
         chaos_gc_leave_no_gc_region();
-        return {-1.0, 0, true};
+        return {-1.0, alloc_after - alloc_before, true};
     }
     auto end = std::chrono::steady_clock::now();
     auto alloc_after = chaos_gc_get_allocated_bytes_for_current_thread();
@@ -126,9 +129,11 @@ extern "C" BenchmarkResult RunHotpatchBenchmark(int entry_index, int iterations)
     if (entry_index < 0 || entry_index >= kAotMethodCount)
         return {-1.0, 0, false};
     auto* entries = GetHotpatchEntries();
-    // Warmup (may throw managed exception — caught via C++ EH)
+    // Warmup: at least 100 calls to prime caches / tier promotion
     try {
-        ChaosDispatchMethodBenchDirect(entries, kAotMethodCount, entry_index);
+        for (int w = 0; w < 100; w++) {
+            ChaosDispatchMethodBenchDirect(entries, kAotMethodCount, entry_index);
+        }
     } catch(...) {
         return {-1.0, 0, true};
     }
@@ -141,8 +146,9 @@ extern "C" BenchmarkResult RunHotpatchBenchmark(int entry_index, int iterations)
             ChaosDispatchMethodBenchDirect(entries, kAotMethodCount, entry_index);
         }
     } catch(...) {
+        auto alloc_after = chaos_gc_get_allocated_bytes_for_current_thread();
         chaos_gc_leave_no_gc_region();
-        return {-1.0, 0, true};
+        return {-1.0, alloc_after - alloc_before, true};
     }
     auto end = std::chrono::steady_clock::now();
     auto alloc_after = chaos_gc_get_allocated_bytes_for_current_thread();

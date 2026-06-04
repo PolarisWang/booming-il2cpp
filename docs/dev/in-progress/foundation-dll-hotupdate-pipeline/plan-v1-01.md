@@ -1,246 +1,165 @@
-# Hotupdate Return-Value 全链路验证 实现计划
+# Hotupdate 验证管线修复 实现计划
 
-> **面向执行 Agent：** 按以下步骤顺序执行。步骤使用复选框跟踪。
+> **面向执行 Agent：** 使用 `dev-executing-plans` 执行本计划。步骤使用复选框（`- [ ]`）语法跟踪。
 
-**目标：** 实现 foundation-dll chunk pipeline 的 hotupdate 全链路验证：ATG return-value 统一 → patch DLL 生成 → PatchDataExtractor → 原生 ApplyPatchFromMemory → semantic change 检测
+**目标：** 修复 hotupdate 验证管线的 6 个验证正确性问题 + 5 个报告正确性问题。核心改动：PatchDataExtractor IL 重写（返回 sentinel）、Scriban 模板 SEH 包裹、Python 层修复。
+
+**架构：** 四层修改（PatchDataExtractor C# → Scriban C++ 模板 → Python 编排 → Python 聚合），各层职责独立，互不依赖。
+
+**技术栈：** C# (PatchDataExtractor), Scriban (C++ 模板), Python (编排/聚合)
+
+**架构审核模式：** critical（涉及 codegen 层 PatchDataExtractor + IL 操作）
+
+**结构告警重点：**
+- PatchDataExtractor 的 IL 重写逻辑必须与现有的 PE 元数据读取逻辑分离（职责清晰）
+- Scriban 模板改动需要保持向后兼容（不破坏已有的无-patch-data 路径）
+
+**权责图审核主题：**
+- PatchDataExtractor（C#）只负责 PE 元数据提取 + IL body 序列化 → 新增 IL 重写逻辑放在独立方法 `RewriteSubjectBodies()`
+- Scriban 模板（C++）负责生成 entry.cpp → SEH 包裹只改动 dispatch 循环体
+- Python 层只负责编排和报告 → 不引入新工具
+
+**AOT/IL2CPP/Test Governance Intake：**
+- capabilityFamily: hotupdate-verification
+- capabilityItem: hotupdate-fix-pipeline
+- ownerSubjectId: n/a
+- proofRequired: true
+- benchmarkRequired: false
+- hotupdateImpact: Proof
+- formalVerificationObjects: [PatchDataExtractor IL rewriting, runtime-entry.cpp SEH, hotupdate_chunk.py pass criterion]
+- requiredGates: build -> hotupdate
 
 **设计文档：** `docs/dev/in-progress/foundation-dll-hotupdate-pipeline/design-v1-01.md`
 
-**问题清零来源：** brainstorm 完成，用户问题已清零
+**问题清零来源：** brainstorm-approved user confirmation
 
-**架构审核模式：** normal
+**计划来源：** direct-plan
 
-**结构告警重点：** TestEmitter 中 [Fact] 和 [HotUpdate] 合并为一个方法体
+**预期知识沉淀：** n/a（修复不产生长期知识）
+
+**收尾约束：** 执行完成后必须进入"结构告警与架构审视 → 测试通过 → 归档 completed → 合并&提交"固定链路。
 
 ---
 
 ## 修改清单
 
-| 步骤 | 文件 | 改动 | 规模 |
-|------|------|------|------|
-| 1 | `ValueGenerator.cs` | 新增 `GetResultToLongExpression()` + `GetPatchReturnExpression()` | ~60 行 |
-| 2 | `TestEmitter.cs` | [Fact] + [HotUpdate] 合并，改为 `long` 返回，加 return 语句 | ~30 行 |
-| 3 | `Program.cs` | 填充 `hotupdateMethodIndices`，新增 `--patch-mode` flag | ~50 行 |
-| 4 | `RuntimeEntry.cpp.scriban` | 新增 `--patch-data` CLI + `ApplyHotpatchFromFile()` | ~40 行 |
-| 5 | `CppProjectEmitter.cs` / `Program.cs` (TPG) | 传递 `has_external_patch_data` 到 scriban 模型 | ~15 行 |
-| 6 | `ProjectModel.cs` (TPG) | 新增 `has_external_patch_data` 模型字段 | ~5 行 |
-| 7 | `hotupdate_chunk.py` | 重写：ATG patch pass + csc + PatchDataExtractor + 运行 | ~100 行 |
-| 8 | `context.py` | 新增 patch 相关路径字段 | ~10 行 |
-| 9 | `chunk_pipeline.py` | 默认 stages 加入 hotupdate | ~3 行 |
+| # | 文件 | 改动 | 解决的问题 |
+|---|------|------|-----------|
+| 1 | `src/managed/Chaos.IL2CPP.Generator/PatchDataExtractor.cs` | IL 重写：Subject_N body → ldc.i4 sentinel; ret | A1 (语义验证) |
+| 2 | `src/tools/Chaos.IL2CPP.Tools.TestProjectGenerator/Templates/TestProject.RuntimeEntry.cpp.scriban` | SEH 包裹 RunHotupdateMode 体 | A5 (AV 崩溃) |
+| 3 | `testing/foundation-dll/verification/stages/hotupdate_chunk.py` | B1/B3/B4/A6 四项修复 | JSON 恢复/状态语义/通过标准/降级告警 |
+| 4 | `testing/foundation-dll/verification/stages/aggregate.py` | 增加 hotupdate 字段传播 | B2 |
+
+不需要改：ATG（Program.cs / ValueGenerator / TestEmitter）
 
 ---
 
-## 步骤详解
+## Task 1：PatchDataExtractor IL 重写
 
-### Step 1: ValueGenerator.cs — ResultToLong + Patch 表达式
+**文件**: `src/managed/Chaos.IL2CPP.Generator/PatchDataExtractor.cs`
 
-新增两个静态方法：
+在 `Extract()` 方法的 `ReadBodyData()` 调用之后，增加独立重写方法。
 
-```csharp
-public static string GetResultToLongExpression(string returnTypeName, string varName)
-{
-    if (returnTypeName == "System.Void" || returnTypeName == "void")
-        return "42L";
-    if (IsIntegerType(returnTypeName))  // int, long, short, byte, sbyte, uint, ushort, nint, nuint, Int128, UInt128
-        return $"(long)({varName})";
-    if (returnTypeName == "System.Boolean")
-        return $"{varName} ? 1L : 0L";
-    if (returnTypeName == "System.Char")
-        return $"(long)({varName})";
-    if (returnTypeName == "System.Single")
-        return $"BitConverter.SingleToInt32Bits({varName})";
-    if (returnTypeName == "System.Double")
-        return $"BitConverter.DoubleToInt64Bits({varName})";
-    if (IsEnumType(returnTypeName))
-        return $"(long)(int)({varName})";
-    // Reference types / strings / arrays / objects
-    return $"{varName} != null ? 1L : 0L";
-}
-
-public static string GetPatchReturnExpression(string returnTypeName, string varName)
-{
-    var baseline = GetResultToLongExpression(returnTypeName, varName);
-    return returnTypeName switch
-    {
-        "System.Void" or "void" => "142L",
-        "System.Boolean" => $"{varName} ? 0L : 1L",
-        "System.Single" => $"BitConverter.SingleToInt32Bits({varName}) ^ 0xFFFF",
-        "System.Double" => $"BitConverter.DoubleToInt64Bits({varName}) ^ 0xFFFF",
-        _ when IsReferenceType(returnTypeName) => $"{varName} != null ? 0L : 1L",
-        _ => $"({baseline}) ^ 0xFF",  // 整数+枚举+char: XOR 0xFF
-    };
-}
+```
+原始 Subject_N wrapper IL: call real_method + 转换返回值 + ret
+重写后 IL (Tiny 格式, 7 字节): ldc.i4 <0xBEEF0000 | index> + ret
 ```
 
-### Step 2: TestEmitter.cs — 合并 [Fact] + [HotUpdate]
+关键点：
+- 识别 Subject_N 方法：MethodDefEntry.Name 以 "Subject_" 开头（从 StringHeap 读取）
+- Sentinel = `0xBEEF0000 | (subjectIndex & 0xFFFF)`
+- 7 字节 Tiny body 必然 <= 任何真实 IL body → 原地覆盖安全
+- 加 `Debug.Assert(newBody.Length <= md.BodySize)`
 
-当前结构：
+方法签名：
 ```csharp
-// [Fact] block
-if (!skipFact) {
-    sb.AppendLine("[Fact]");
-    sb.AppendLine($"public void {methodSuffix}() {{ ... assert ... }}");
-}
-
-// [HotUpdate] block (TODO, 当前是空壳)
-if (!skipFact) {
-    sb.AppendLine("[HotUpdate]");
-    sb.AppendLine($"public void HotUpdate_{methodSuffix}() {{ ... }}");
-}
+private void RewriteSubjectBodies(MethodDefEntry[] methodDefs, byte[] bodyData)
+private static byte[] BuildSentinelBody(int sentinel)
 ```
 
-改为：
-```csharp
-// 单个方法，两个 attribute，返回 long
-if (!skipFact) {
-    sb.AppendLine("[Fact]");
-    sb.AppendLine("[HotUpdate]");
-    sb.AppendLine($"public long {methodSuffix}()");
-    sb.AppendLine("{");
-    // ... call + assert（不变）...
-    // 新增 return 语句
-    sb.AppendLine(GetResultToLongExpression(returnTypeName, result_var_name));
-    sb.AppendLine("}");
-}
-```
+---
 
-对于纯 void 方法（无 ref 参数）：继续跳过，只生成 `[Benchmark]`（不变）。
+## Task 2：Scriban 模板 SEH 包裹
 
-需要关注的关键点：
-- 对于 `hasException` 的情况（Assert.Throws），不生成 return 语句（因为不会执行到）
-- 对于 `method.IsVoid || isPlainTask` 的情况，需要生成 sentinel return `42L`
+**文件**: `src/tools/Chaos.IL2CPP.Tools.TestProjectGenerator/Templates/TestProject.RuntimeEntry.cpp.scriban`
 
-### Step 3: Program.cs — metadata + --patch-mode
+在 `RunHotupdateMode` 函数体内外层包裹 `__try/__except`：
 
-**metadata 变更**：
-```csharp
-// 填充 hotupdateMethodIndices: 与 customEntryIndices 一致（所有 fact 也是 hotupdate）
-// 因为所有非 benchmark 的方法都同时有 [Fact] + [HotUpdate]
-var hotupdateMethodIndices = new List<int>(customEntryIndices);
-// ...
-HotupdateMethodIndices: hotupdateMethodIndices.Count > 0 ? hotupdateMethodIndices : null,
-```
-
-**--patch-mode 新增**：
-- CLI flag：`--patch-mode`
-- 同 --all-types 一样的扫描流程，但：
-  - 隐含 `--skip-probe`
-  - `--emit-metadata` 改为 `--emit-patch-metadata`
-  - 在 Phase 4 emit 时使用 `GetPatchReturnExpression` 替代 `GetResultToLongExpression`
-  - Subject 不生成 `[Fact]`/`[HotUpdate]` attribute（patch DLL 不需要）
-  - 输出文件命名加上 `.patch` 后缀
-
-### Step 4: RuntimeEntry.cpp.scriban — 外部 patch data 加载
-
-新增条件编译块：
 ```cpp
-{{ if has_external_patch_data }}
-static PatchContext* ApplyHotpatchFromFile(const char* path) {
-    FILE* f = fopen(path, "rb");
-    if (!f) { printf("ERROR: cannot open patch data: %s\n", path); return nullptr; }
-    fseek(f, 0, SEEK_END);
-    long size = ftell(f);
-    rewind(f);
-    uint8_t* data = (uint8_t*)malloc(size);
-    if (!data) { fclose(f); return nullptr; }
-    fread(data, 1, size, f);
-    fclose(f);
-    auto* ctx = chaos::il2cpp::runtime_core::ApplyPatchFromMemory(
-        data, static_cast<size_t>(size), nullptr);
-    free(data);
-    return ctx;
-}
-
-// 修改 RunHotupdateMode() 接受可选文件路径
-static int RunHotupdateMode(const char* patchDataPath) {
-    // ... 现有 baseline capture ...
-    PatchContext* patch_ctx = nullptr;
-    if (patchDataPath) {
-        patch_ctx = ApplyHotpatchFromFile(patchDataPath);
-    } else {
-        patch_ctx = ApplyHotpatchIfAvailable();
-    }
-    // ... 后续语义检测 + revert ...
-}
-{{ end }}
-```
-
-CLI 参数解析：
-```cpp
-if (strcmp(argv[1], "--hotupdate") == 0) {
-    const char* patchDataPath = nullptr;
-    if (argc >= 4 && strcmp(argv[2], "--patch-data") == 0) {
-        patchDataPath = argv[3];
-    }
-    return RunHotupdateMode(patchDataPath);
+__try {
+    // 整个 RunHotupdateMode 现有逻辑
+} __except (EXCEPTION_EXECUTE_HANDLER) {
+    fprintf(stderr, "[hotupdate] CRASH: exception code=0x%X\n", GetExceptionCode());
+    // 输出已收集的 partial JSON
 }
 ```
 
-### Step 5-6: TPG 模型传递
-
-`ProjectModel.cs` 新增 `has_external_patch_data` 字段（默认 false，hotupdate 构建时设为 true）。
-`CppProjectEmitter.cs` 将 `.patchdata` 路径传递给 scriban 模型。
-
-### Step 7: hotupdate_chunk.py
-
-```python
-def run_hotupdate_chunk(ctx, stages):
-    # 1. ATG --patch-mode
-    patch_dll = ctx.managed_dir / "PatchSubjects.dll"
-    run_autotestgen("--patch-mode", ...)
-    
-    # 2. csc compile
-    subprocess.run(["dotnet", "build", ...])
-    
-    # 3. PatchDataExtractor
-    patch_data = ctx.native_dir / "patch.patchdata"
-    subprocess.run(["dotnet", "exec", "PatchDataExtractor.dll",
-        "--dll", patch_dll, "--output", patch_data, "--subject-only"])
-    
-    # 4. Run entry.exe --hotupdate --patch-data
-    result = subprocess.run([ctx.entry_exe_path, "--hotupdate", "--patch-data", patch_data])
-    
-    # 5. Verify semantic + revert
-    ...
-```
-
-### Step 8: context.py
-
-```python
-@property
-def patch_subjects_dll_path(self) -> Path:
-    return self.managed_dir / "PatchSubjects.dll"
-
-@property
-def patch_data_path(self) -> Path:
-    return self.native_dir / "patch.patchdata"
-```
-
-### Step 9: chunk_pipeline.py
-
-```python
-parser.add_argument("--stages", default="build,fact,hotupdate,coverage-audit", ...)
-```
+需要读取模板文件确认 RunHotupdateMode 的精确位置。
 
 ---
 
-## 验证方式
+## Task 3：hotupdate_chunk.py 修复
 
-1. 单 chunk E2E（numerics）：
-   ```
-   python -m verification.chunk_pipeline --chunk numerics --stages build,fact,hotupdate
-   ```
-   预期：build passed → fact passed → hotupdate passed (allSemantic=true, allRevert=true)
+**文件**: `testing/foundation-dll/verification/stages/hotupdate_chunk.py`
 
-2. 验证 allSemantic=false 场景（故意传错 patch data）→ hotupdate failed
+### B1: JSON 截断完整性验证
+- 恢复后：比较 `totalMethods` vs `len(baselineFact)`
+- 不匹配时设置 `_truncated: true`
 
-3. 全量 chunks 验证：
+### B3: 区分 skipped 状态
+- `skipped_no_subjects` vs `skipped_all_failed`
+
+### B4: 统一 pass criterion
+- 去掉 `all_semantic` 硬性要求
+- 统一为 `failed == 0 && passed > 0 && all_revert`
+
+### A6: 补丁生成降级告警
+- `_patch_generation_attempted` 标记
+- `result_data["patchFailed"] = True`
+- 打印 WARNING
+
+---
+
+## Task 4：aggregate.py 字段传播
+
+**文件**: `testing/foundation-dll/verification/stages/aggregate.py`
+
+增加字段：`exitCode`, `patchDataUsed`, `patchFailed`, `truncated`, `assertFailed`, `semanticChangedCount`
+
+---
+
+## Task 5：验证
+
+1. **PatchDataExtractor 验证**: 用 system chunk 重建，检查 patch.patchdata
+   ```bash
+   python -m verification.chunk_pipeline --chunk system --stages build
    ```
-   python -m verification.chunk_pipeline --all-chunks
+
+2. **Hotupdate 验证**: system chunk hotupdate 应全通过
+   ```bash
+   python -m verification.chunk_pipeline --chunk system --stages hotupdate
+   ```
+
+3. **崩溃恢复验证**: system-5 应不再 kill entry.exe
+   ```bash
+   python -m verification.chunk_pipeline --chunk system-5 --stages hotupdate
+   ```
+
+4. **全量验证**:
+   ```bash
+   python -m verification.chunk_pipeline --all-chunks --stages build,hotupdate
    ```
 
 ---
 
-## 收尾约束
+## 执行顺序
 
-执行完成后：结构告警审视 → 测试通过 → 合并&提交
+```
+Task 1 (PatchDataExtractor) ──┐
+Task 2 (Scriban 模板) ────────┤
+Task 3 (hotupdate_chunk.py) ──┤──> 并行修改
+Task 4 (aggregate.py) ───────┤
+                               │
+                               v
+                         Task 5 (验证)
+```

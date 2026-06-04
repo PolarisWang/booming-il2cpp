@@ -151,6 +151,14 @@ public sealed class PatchDataExtractor
         // Read method bodies
         var bodyData = ReadBodyData(peReader, mr, methodDefs);
 
+        // ── IL Rewriting: Replace Subject_N method bodies with sentinel return ──
+        // The patch DLL's Subject_N wrappers are AOT-replaced by ApplyPatchFromMemoryEx
+        // during hotupdate.  To make semantic change detection deterministic, rewrite
+        // their IL to just "ldc.i4 <sentinel>; ret" — the patched runtime will return
+        // this sentinel, which differs from the baseline's real return value.
+        // Sentinel = 0xBEEF0000 | subjectIndex (guaranteed != any real encoding).
+        RewriteSubjectBodies(mr, methodDefs, bodyData);
+
         // Serialize
         Serialize(outputPath, stringHeap, blobHeap, userStringBytes,
             [.. asmRefs], [.. typeRefs], [.. typeDefs],
@@ -681,6 +689,70 @@ public sealed class PatchDataExtractor
     [StructLayout(LayoutKind.Sequential)]
     private struct PatchMemberRefEntry { public uint name_offset, signature_offset, parent_token, token; }
 #pragma warning restore CS0649
+
+    /// <summary>
+    /// Replace Subject_N method IL bodies with "ldc.i4 &lt;sentinel&gt;; ret" for
+    /// deterministic hotupdate semantic change detection.
+    /// Sentinel = 0xBEEF0000 | subjectIndex — guaranteed to differ from any
+    /// real return value produced by GetResultToLongExpression().
+    /// </summary>
+    private static void RewriteSubjectBodies(MetadataReader mr,
+        List<PatchMethodDefEntry> methodDefs, byte[] bodyData)
+    {
+        int subjectIndex = 0;
+        for (int i = 0; i < methodDefs.Count; i++)
+        {
+            var entry = methodDefs[i];
+            if (entry.token == 0) continue;
+            var mh = MetadataTokens.MethodDefinitionHandle((int)entry.token);
+            if (mh.IsNil) continue;
+            var md = mr.GetMethodDefinition(mh);
+            var name = mr.GetString(md.Name);
+
+            if (!name.StartsWith("Subject_", StringComparison.Ordinal))
+                continue;
+
+            int sentinel = 0xBEEF0000 | (subjectIndex & 0xFFFF);
+            var newBody = BuildSentinelBody(sentinel);
+
+            // Sentinel body (7 bytes) must always fit within the original body.
+            // In-place overwrite is safe since Tiny body < any real PE body.
+            System.Diagnostics.Debug.Assert(newBody.Length <= entry.body_size);
+            Array.Copy(newBody, 0, bodyData, entry.body_offset, newBody.Length);
+            entry.body_size = (uint)newBody.Length;
+            methodDefs[i] = entry;
+
+            subjectIndex++;
+        }
+
+        if (subjectIndex > 0)
+        {
+            Console.WriteLine($"      [patchdata] Rewrote {subjectIndex} Subject_N IL bodies to sentinel returns");
+        }
+    }
+
+    /// <summary>
+    /// Build a Tiny-format ECMA 335 method body: "ldc.i4 &lt;sentinel&gt;; ret" (7 bytes).
+    /// Tiny header: flags=0x02 | (codeSize &lt;&lt; 2)
+    /// ldc.i4: opcode 0x20 + 4-byte little-endian int32 (5 bytes)
+    /// ret: opcode 0x2A (1 byte)
+    /// </summary>
+    private static byte[] BuildSentinelBody(int sentinel)
+    {
+        const byte codeSize = 6; // ldc.i4(5) + ret(1)
+        var header = (byte)(0x02 | (codeSize << 2));
+
+        return
+        [
+            header,
+            0x20, // ldc.i4
+            (byte)(sentinel & 0xFF),
+            (byte)((sentinel >> 8) & 0xFF),
+            (byte)((sentinel >> 16) & 0xFF),
+            (byte)((sentinel >> 24) & 0xFF),
+            0x2A, // ret
+        ];
+    }
 
     /// <summary>
     /// Build the AotCoreIr JSON section from a serialized AotCoreIrArtifact JSON file.
