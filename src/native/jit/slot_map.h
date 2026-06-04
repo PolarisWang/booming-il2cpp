@@ -13,6 +13,7 @@
 #include <cstdint>
 #include <vector>
 
+#include <chaos/log.h>
 #include <chaos/pal/pal_mem.h>
 #include <chaos/unordered_dense.h>
 
@@ -69,8 +70,11 @@ public:
                 chaos::il2cpp::pal::PalVirtualProtect(addr, sizeof(void*),
                     chaos::il2cpp::pal::kPalMemReadWrite);
                 entry.caller->call_site_slots[entry.slot_index] = new_direct_ptr;
-                chaos::il2cpp::pal::PalVirtualProtect(addr, sizeof(void*),
-                    chaos::il2cpp::pal::kPalMemReadExec);
+                if (!chaos::il2cpp::pal::PalVirtualProtect(addr, sizeof(void*),
+                        chaos::il2cpp::pal::kPalMemReadExec)) {
+                    CHAOS_IL2CPP_LOG_ERROR_M("jit",
+                        "slot_map: failed to re-protect call slot to RX");
+                }
             }
         }
     }

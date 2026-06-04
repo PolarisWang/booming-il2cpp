@@ -35,7 +35,9 @@ struct TypeVTable {
     const void** vtable_array;         ///< Flat function-pointer array (for direct dispatch)
     CHAOS_IL2CPP_UINT32 vtable_length; ///< Length of vtable_array
     CHAOS_IL2CPP_UINT8  type_shape;   ///< 1=reference, 2=value, 3=interface (mirrors TypeInfoHot::type_shape)
-    uint8_t             _pad[3];      ///< Explicit padding to keep struct size aligned
+    uint8_t _owns_slots         : 1; ///< Set when slots was heap-allocated (may be freed)
+    uint8_t _owns_vtable_array  : 1; ///< Set when vtable_array was heap-allocated (may be freed)
+    uint8_t             _pad[2];      ///< Explicit padding to keep struct size aligned
     /// Optional interface map: describes which interfaces this type implements
     /// and where their methods live in the flat vtable_array.
     const void* iface_map;            ///< Pointer to array of InterfaceMapEntry (optional)
@@ -52,7 +54,7 @@ struct TypeVTable {
 /// Register a type vtable from a pre-constructed TypeVTable (bootstrap/test).
 /// The caller must keep `vtable` alive for the process lifetime.
 /// Duplicate registrations are silently ignored.
-bool RegisterTypeVTable(const TypeVTable* vtable);
+bool RegisterTypeVTable(const TypeVTable* vtable) noexcept;
 
 /// Register a vtable for a runtime-instantiated type (TypeInfoHandle-based).
 /// The type_token and stable_id are extracted from the handle.
@@ -60,7 +62,7 @@ bool RegisterRuntimeVTable(
     TypeInfoHandle               type,
     TypeInfoHandle               base_type,
     CHAOS_IL2CPP_UINT32         slot_count,
-    const VTableSlot*           slots);
+    const VTableSlot*           slots) noexcept;
 
 /// Register a flat vtable array (emitted by AOT codegen).
 /// Duplicate registrations are silently ignored.
@@ -93,13 +95,13 @@ CHAOS_IL2CPP_UINT32 chaos_find_interface_offset(
 /// Uses secondary token→stable_id index, then walks by base_stable_id.
 /// Also checks interface vtable map if base chain walk fails.
 void* ResolveVirtualMethodPointer(CHAOS_IL2CPP_UINT32 instance_type_token,
-                                  CHAOS_IL2CPP_UINT32 declared_method_token);
+                                  CHAOS_IL2CPP_UINT32 declared_method_token) noexcept;
 
 /// Look up TypeVTable by type_token (for interpreter CastClass/IsInst).
-const TypeVTable* TryGetTypeVTable(CHAOS_IL2CPP_UINT32 type_token);
+const TypeVTable* TryGetTypeVTable(CHAOS_IL2CPP_UINT32 type_token) noexcept;
 
 /// Look up TypeVTable by stable_id.
-const TypeVTable* TryGetTypeVTableByStableId(CHAOS_IL2CPP_UINT64 stable_id);
+const TypeVTable* TryGetTypeVTableByStableId(CHAOS_IL2CPP_UINT64 stable_id) noexcept;
 
 /// Flat vtable array lookup (for AOT codegen direct dispatch).
 const void** FindVTable(CHAOS_IL2CPP_UINT64 stable_id) noexcept;
@@ -116,7 +118,7 @@ const void** BuildRuntimeVTable(CHAOS_IL2CPP_UINT64 type_stable_id,
 /// Resolve a virtual method pointer using a TypeInfoHandle.
 void* ResolveVirtualMethodPointerByHandle(
     TypeInfoHandle               instance_type,
-    CHAOS_IL2CPP_UINT32         declared_method_token);
+    CHAOS_IL2CPP_UINT32         declared_method_token) noexcept;
 
 /// Register a codegen-emitted vtable descriptor during BootstrapRuntime.
 /// Populates both the TypeVTable index (by_type_token/by_stable_id) and
@@ -162,7 +164,7 @@ void UnregisterTypeVTable(CHAOS_IL2CPP_UINT32 type_token) noexcept;
 void UnregisterTypeVTableByStableId(CHAOS_IL2CPP_UINT64 stable_id) noexcept;
 
 /// Returns the number of registered vtables (for diagnostics).
-CHAOS_IL2CPP_UINT32 GetRegisteredVTableCount();
+CHAOS_IL2CPP_UINT32 GetRegisteredVTableCount() noexcept;
 
 /// Clear iface_map and vtable_array pointers for any TypeVTable entries
 /// that reference memory within the domain being unloaded.
@@ -170,7 +172,7 @@ CHAOS_IL2CPP_UINT32 GetRegisteredVTableCount();
 /// readers are active.  Nulled pointers prevent use-after-free when threads
 /// resume and the domain heap is destroyed.
 /// @param domain_id  The domain whose regions are being released.
-void ClearDomainPointers(CHAOS_IL2CPP_UINT32 domain_id);
+void ClearDomainPointers(CHAOS_IL2CPP_UINT32 domain_id) noexcept;
 
 }  // namespace chaos::il2cpp::vtable_registry
 

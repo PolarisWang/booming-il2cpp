@@ -3,9 +3,11 @@
 #include "gc_region.h"
 #include "gc_card_table.h"
 #include "gc_young_collector.h"
+#include "gc_bgc_inline.h"
 #include "memory_domain.h"
 #include "thread_state.h"
 #include "vtable_registry.h"  // ClearDomainPointers
+#include "hotpatch_table.h"   // GetHotpatchNameRegistry / ClearDomainDispatchEntries
 
 #include <chaos/log.h>
 
@@ -105,6 +107,10 @@ static CHAOS_IL2CPP_SIZE ScanAndClearCrossDomainRefs(CHAOS_IL2CPP_UINT32 domain_
                 // The slot points INTO the domain that is being unloaded.
                 // This is a core→domain dangling pointer — clear it to
                 // prevent use-after-free after the domain memory is released.
+                // SATB pre-write barrier: record the old value before
+                // overwriting, so BGC concurrent mark doesn't lose a live
+                // object that is only reachable through this slot.
+                BgcSatbPreWriteBarrier(ptr_slot);
                 *ptr_slot = nullptr;
                 refs_cleared++;
                 refs_found++;
@@ -158,6 +164,19 @@ DomainUnloadResult UnloadDomain(CHAOS_IL2CPP_UINT32 domain_id) {
     // that reference domain memory — prevents use-after-free when
     // threads resume and the domain heap is destroyed.
     vtable_registry::ClearDomainPointers(domain_id);
+
+    // Phase 2c: Clear hotpatch dispatch entries for this domain.
+    // During the STW window, clear all dispatch entries whose PatchMethod*
+    // (method_key) belongs to the unloaded domain.  This prevents
+    // use-after-free when threads resume and the domain heap is freed,
+    // since the dispatch path would otherwise read a stale method_key.
+    // Must happen before UnregisterMemoryDomain (Phase 4) where the
+    // domain heap is destroyed.
+    {
+        uint32_t dc = GetHotpatchNameRegistry().ClearDomainDispatchEntries(domain_id);
+        CHAOS_IL2CPP_LOG_DEBUG_M("CRAG", "unload_domain_dispatch_cleared id={0} count={1}",
+            domain_id, dc);
+    }
 
     // Phase 3: Release all regions owned by this domain.
     RegionManager::Instance().ReleaseDomainRegions(domain_id);

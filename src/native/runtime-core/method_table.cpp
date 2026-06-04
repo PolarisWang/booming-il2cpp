@@ -17,7 +17,7 @@ MethodTableOrigin  g_method_origins[kMethodTableSize] = {};
 
 // ── API ────────────────────────────────────────────────────────────────
 
-void InitializeMethodTable() {
+void InitializeMethodTable() noexcept {
     // Table is already zero-initialized by the loader (.bss).
     // This function exists as a hook for test harnesses that need to
     // reset the table without a full process reload.
@@ -36,7 +36,7 @@ void InitializeMethodTable() {
     }
 }
 
-bool WriteMethodTable(uint32_t index, void* fn_ptr, uint32_t module_gen) {
+bool WriteMethodTable(uint32_t index, void* fn_ptr, uint32_t module_gen) noexcept {
     if (index >= kMethodTableSize) {
         return false;
     }
@@ -49,7 +49,7 @@ bool WriteMethodTable(uint32_t index, void* fn_ptr, uint32_t module_gen) {
     return true;
 }
 
-void* ResolveMethodTable(uint32_t index) {
+void* ResolveMethodTable(uint32_t index) noexcept {
     CHAOS_IL2CPP_PROFILE_SCOPE("ResolveMethodTable");
     if (index >= kMethodTableSize) {
         return nullptr;
@@ -58,14 +58,19 @@ void* ResolveMethodTable(uint32_t index) {
     return g_method_table[index].fn_ptr.load(std::memory_order_acquire);
 }
 
-void ClearMethodTableByGeneration(uint32_t module_gen) {
+void ClearMethodTableByGeneration(uint32_t module_gen) noexcept {
     if (module_gen == kInvalidGeneration) {
         return;
     }
 
     for (uint32_t i = 0; i < kMethodTableSize; i++) {
         if (g_method_table[i].module_gen.load(std::memory_order_acquire) == module_gen) {
-            g_method_table[i].fn_ptr.store(nullptr, std::memory_order_relaxed);
+            // Release on fn_ptr ensures the null store is visible to any
+            // thread that subsequently loads fn_ptr with acquire, and prevents
+            // reordering such that module_gen (below) becomes visible first.
+            // Without this, a reader could see kInvalidGeneration yet still
+            // observe a non-null (now-dangling) fn_ptr.
+            g_method_table[i].fn_ptr.store(nullptr, std::memory_order_release);
             g_method_table[i].module_gen.store(kInvalidGeneration, std::memory_order_release);
         }
     }
@@ -73,7 +78,7 @@ void ClearMethodTableByGeneration(uint32_t module_gen) {
 
 // ── Origin tracking ────────────────────────────────────────────────────
 
-void SetMethodOrigin(uint32_t index, uint32_t module_id, uint32_t manifest_method_index) {
+void SetMethodOrigin(uint32_t index, uint32_t module_id, uint32_t manifest_method_index) noexcept {
     if (index >= kMethodTableSize) return;
     // Relaxed ordering: origins are published before the owning module is
     // made visible, so readers will only observe them after the module is
@@ -82,7 +87,7 @@ void SetMethodOrigin(uint32_t index, uint32_t module_id, uint32_t manifest_metho
     g_method_origins[index].manifest_method_index = manifest_method_index;
 }
 
-MethodTableOrigin GetMethodOrigin(uint32_t index) {
+MethodTableOrigin GetMethodOrigin(uint32_t index) noexcept {
     if (index >= kMethodTableSize) {
         return {runtime_core::kInvalidModuleId, 0};
     }
@@ -98,7 +103,7 @@ void* ResolveMethodTableWithAbiCheck(
     uint32_t index,
     uint8_t expected_return_carrier,
     const uint8_t* expected_param_carriers,
-    uint8_t expected_param_count)
+    uint8_t expected_param_count) noexcept
 {
     if (index >= kMethodTableSize) {
         return nullptr;

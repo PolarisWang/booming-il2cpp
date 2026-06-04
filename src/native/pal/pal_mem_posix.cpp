@@ -38,8 +38,7 @@ bool PalVirtualCommit(void* /*ptr*/, size_t /*size*/) noexcept {
 bool PalVirtualDecommit(void* ptr, size_t size) noexcept {
     // On POSIX we can madvise to hint that pages are not needed.
     // This is advisory only; the mapping remains valid.
-    ::madvise(ptr, size, MADV_DONTNEED);
-    return true;
+    return ::madvise(ptr, size, MADV_DONTNEED) == 0;
 }
 
 size_t PalGetPageSize() noexcept {
@@ -64,8 +63,8 @@ void* PalVirtualAllocLarge(size_t size) noexcept {
 }
 
 void PalGetMemoryStatus(PalMemoryStatus& out) noexcept {
-    out.total_phys = 0;
-    out.avail_phys = 0;
+    out.total_phys = -1;  // -1 indicates parsing failure / unknown
+    out.avail_phys = -1;
 
     FILE* f = ::fopen("/proc/meminfo", "r");
     if (!f) return;

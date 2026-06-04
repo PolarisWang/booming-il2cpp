@@ -35,6 +35,7 @@ public:
     void UnregisterCode(void* code_start) noexcept override;
     const JitMethod* FindCodeByAddress(const void* address) noexcept override;
     uint32_t DemoteByToken(uint32_t method_token) noexcept override;
+    uint32_t DemoteByDomainId(uint32_t domain_id) noexcept override;
     uint32_t DemoteByCallSiteToken(uint32_t method_token) noexcept override;
     void ReclaimDemoted() noexcept override;
     void Initialize() noexcept override;
@@ -51,6 +52,7 @@ private:
         uint32_t          code_size  = 0;          // bytes
         const JitMethod*  nm         = nullptr;
         uint32_t          patch_method_token = 0;  // PatchMethod token for hotpatch demotion
+        uint32_t          domain_id  = 0;           // 0 = core domain (never unloaded)
     };
 
     JitCodeEntry entries_[kMaxJitCodeEntries];

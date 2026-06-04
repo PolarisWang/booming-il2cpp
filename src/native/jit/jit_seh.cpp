@@ -17,6 +17,10 @@
 // GC event callbacks for deferred T4 code memory reclamation.
 #include <gc_events.h>
 
+// Memory domain events: DOMAIN_UNLOADED triggers JIT code demotion
+// for the unloaded domain's methods.
+#include <memory_domain_events.h>
+
 // JIT debug contract (for SOS extension — no-op if contract not linked).
 #include "jit/jit_debug_contract.h"
 
@@ -64,6 +68,10 @@ uint32_t DemoteJittedMethod(uint32_t method_token) noexcept {
     return GetSehHandler().DemoteByToken(method_token);
 }
 
+uint32_t DemoteJittedCodeByDomain(uint32_t domain_id) noexcept {
+    return GetSehHandler().DemoteByDomainId(domain_id);
+}
+
 uint32_t DemoteJittedCallSite(uint32_t method_token) noexcept {
     return GetSehHandler().DemoteByCallSiteToken(method_token);
 }
@@ -74,6 +82,24 @@ void ReclaimDemotedCode() noexcept {
 
 void RegisterJitSehHandler() noexcept {
     GetSehHandler().Initialize();
+
+    // Register DOMAIN_UNLOADED callback to demote JIT code belonging to
+    // the unloaded domain.  This prevents the VEH/signal handler from
+    // dispatching into JIT code that references freed domain metadata.
+    // Safe during STW: ReclaimDemoted is called inline.
+    memory_domain::MemoryDomainRegisterEventCallback(
+        [](memory_domain::MemoryDomainEvent event,
+           const memory_domain::MemoryDomainEventData* data,
+           void* /*user_data*/) noexcept {
+            if (event == memory_domain::MemoryDomainEvent::DOMAIN_UNLOADED) {
+                uint32_t demoted = GetSehHandler().DemoteByDomainId(data->domain_id);
+                if (demoted > 0) {
+                    // Inline reclamation is safe during STW (domain unload
+                    // holds the GC safepoint while the callback fires).
+                    GetSehHandler().ReclaimDemoted();
+                }
+            }
+        }, nullptr);
 
     // Prime the debug contract metadata registry pointer so SOS extension
     // can resolve method names via the unified registry interface.

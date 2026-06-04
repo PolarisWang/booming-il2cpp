@@ -8,6 +8,7 @@
 
 #include <jit_demotion.h>
 #include <gc_events.h>
+#include <memory_domain.h>
 
 // Static assertions for key structure layout consistency.
 static_assert(sizeof(uint32_t) == 4, "uint32_t must be 4 bytes");
@@ -51,11 +52,25 @@ static thread_local struct {
 
 #if defined(_MSC_VER)
 static thread_local uint32_t g_lock_owner_tid = 0;
+static thread_local uint32_t g_lock_recursion = 0;
+#elif defined(__linux__)
+static thread_local pthread_t g_lock_owner{};
+static thread_local uint32_t  g_lock_recursion = 0;
 #endif
 
 void WinSehHandler::AcquireLock() noexcept {
 #if defined(_MSC_VER)
     uint32_t tid = GetCurrentThreadId();
+    if (tid == g_lock_owner_tid) {
+        g_lock_recursion++;
+        return;
+    }
+#elif defined(__linux__)
+    pthread_t self = pthread_self();
+    if (pthread_equal(self, g_lock_owner)) {
+        g_lock_recursion++;
+        return;
+    }
 #endif
     uint32_t spins = 0;
     while (lock_.exchange(1, std::memory_order_acquire) != 0) {
@@ -73,12 +88,19 @@ void WinSehHandler::AcquireLock() noexcept {
     }
 #if defined(_MSC_VER)
     g_lock_owner_tid = tid;
+    g_lock_recursion = 1;
+#elif defined(__linux__)
+    g_lock_owner = self;
+    g_lock_recursion = 1;
 #endif
 }
 
 void WinSehHandler::ReleaseLock() noexcept {
+    if (--g_lock_recursion > 0) return;
 #if defined(_MSC_VER)
     g_lock_owner_tid = 0;
+#elif defined(__linux__)
+    g_lock_owner = {};
 #endif
     lock_.store(0, std::memory_order_release);
 }
@@ -144,6 +166,10 @@ void WinSehHandler::RegisterCode(void* code_start, uint32_t code_size,
         entries_[count_].code_size  = code_size;
         entries_[count_].nm         = nm;
         entries_[count_].patch_method_token = patch_method_token;
+        {
+            auto* domain = chaos::il2cpp::memory_domain::CurrentDomain();
+            entries_[count_].domain_id = domain ? domain->domain_id : 0;
+        }
         count_++;
     }
 
@@ -252,6 +278,31 @@ uint32_t WinSehHandler::DemoteByToken(uint32_t method_token) noexcept {
         InvalidateLookupCache();
         CHAOS_IL2CPP_LOG_DEBUG_M("codegen",
             "DemoteByToken: token={} demoted {} entries", method_token, count);
+    }
+    return count;
+}
+
+uint32_t WinSehHandler::DemoteByDomainId(uint32_t domain_id) noexcept {
+    if (domain_id == 0) return 0;  // core domain, never unloaded
+    uint32_t count = 0;
+    {
+        JitRegistryLockGuard lock(this);
+        for (uint32_t i = 0; i < count_; i++) {
+            if (entries_[i].domain_id == domain_id &&
+                entries_[i].nm != nullptr) {
+                EnqueueDemotedCode(
+                    const_cast<void*>(entries_[i].code_start),
+                    entries_[i].code_size);
+                entries_[i].nm = nullptr;
+                entries_[i].code_start = nullptr;
+                count++;
+            }
+        }
+    }
+    if (count > 0) {
+        InvalidateLookupCache();
+        CHAOS_IL2CPP_LOG_INFO_M("codegen",
+            "DemoteByDomainId: domain={} demoted {} entries", domain_id, count);
     }
     return count;
 }

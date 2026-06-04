@@ -8,6 +8,7 @@
 #include <osr_trigger.h>
 
 #include "ir_reg_alloc.h"
+#include <thread_state.h>  // SafepointPoll
 #include "patch_loader.h"
 #include "jit_engine.h"
 #include "jit_seh.h"
@@ -62,7 +63,8 @@ void TryOsrPromotion(RegisterFrame& frame,
         chaos::il2cpp::jit::CompileConfig cfg;
         cfg.enable_deopt = true;
         cfg.enable_liveness = true;
-        cfg.safepoint_fn = nullptr;
+        cfg.safepoint_fn = reinterpret_cast<void*>
+            (&chaos::il2cpp::runtime_core::threading::SafepointPoll);
 
         auto* nm = chaos::il2cpp::jit::Compile(*rm, cfg);
         if (nm == nullptr) return;

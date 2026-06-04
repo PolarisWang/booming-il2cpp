@@ -127,7 +127,7 @@ static thread_local IocState tls_ioc{};
 
 }  // namespace
 
-bool RegisterTypeVTable(const TypeVTable* vtable) {
+bool RegisterTypeVTable(const TypeVTable* vtable) noexcept {
     if (vtable == nullptr || vtable->type_token == 0u || vtable->slots == nullptr) {
         return false;
     }
@@ -187,7 +187,9 @@ void RegisterCodegenVTable(const void* desc) noexcept {
     tv->vtable_array   = vtd->vtable_array;
     tv->vtable_length  = vtd->vtable_length;
     tv->type_shape     = vtd->type_shape;
-    tv->_pad[0] = tv->_pad[1] = tv->_pad[2] = 0;
+    tv->_owns_slots        = 0;  // .rodata, not owned
+    tv->_owns_vtable_array = 0;  // .rodata, not owned
+    tv->_pad[0] = tv->_pad[1] = 0;
     tv->iface_map      = vtd->iface_map;
     tv->iface_count    = vtd->iface_count;
     tv->runtime_iface_map  = nullptr;
@@ -290,7 +292,9 @@ bool RegisterHotUpdateVTable(
     tv->vtable_array   = vtable_array;
     tv->vtable_length  = vtable_length;
     tv->type_shape     = type_shape;
-    tv->_pad[0] = tv->_pad[1] = tv->_pad[2] = 0;
+    tv->_owns_slots        = 1;  // heap-allocated
+    tv->_owns_vtable_array = (vtable_array != nullptr) ? 1 : 0;
+    tv->_pad[0] = tv->_pad[1] = 0;
     tv->iface_map      = nullptr;
     tv->iface_count    = 0u;
     tv->runtime_iface_map  = nullptr;
@@ -516,9 +520,9 @@ void UnregisterTypeVTable(CHAOS_IL2CPP_UINT32 type_token) noexcept {
 
     state.by_type_token.erase(it);
 
-    // Free heap-allocated memory.
-    if (tv->slots != nullptr) CHAOS_IL2CPP_FREE(const_cast<VTableSlot*>(tv->slots));
-    if (tv->vtable_array != nullptr) CHAOS_IL2CPP_FREE(const_cast<void**>(tv->vtable_array));
+    // Free heap-allocated memory (but not .rodata / caller-owned).
+    if (tv->slots != nullptr && tv->_owns_slots) CHAOS_IL2CPP_FREE(const_cast<VTableSlot*>(tv->slots));
+    if (tv->vtable_array != nullptr && tv->_owns_vtable_array) CHAOS_IL2CPP_FREE(const_cast<void**>(tv->vtable_array));
     if (tv->runtime_iface_map != nullptr) CHAOS_IL2CPP_FREE(const_cast<void*>(tv->runtime_iface_map));
     CHAOS_IL2CPP_FREE(const_cast<TypeVTable*>(tv));
 }
@@ -539,8 +543,8 @@ void UnregisterTypeVTableByStableId(CHAOS_IL2CPP_UINT64 stable_id) noexcept {
     state.flat_vtables.erase(stable_id);
     state.flat_lengths.erase(stable_id);
 
-    if (tv->slots != nullptr) CHAOS_IL2CPP_FREE(const_cast<VTableSlot*>(tv->slots));
-    if (tv->vtable_array != nullptr) CHAOS_IL2CPP_FREE(const_cast<void**>(tv->vtable_array));
+    if (tv->slots != nullptr && tv->_owns_slots) CHAOS_IL2CPP_FREE(const_cast<VTableSlot*>(tv->slots));
+    if (tv->vtable_array != nullptr && tv->_owns_vtable_array) CHAOS_IL2CPP_FREE(const_cast<void**>(tv->vtable_array));
     if (tv->runtime_iface_map != nullptr) CHAOS_IL2CPP_FREE(const_cast<void*>(tv->runtime_iface_map));
     CHAOS_IL2CPP_FREE(const_cast<TypeVTable*>(tv));
 }
@@ -549,7 +553,7 @@ bool RegisterRuntimeVTable(
     TypeInfoHandle               type,
     TypeInfoHandle               base_type,
     CHAOS_IL2CPP_UINT32         slot_count,
-    const VTableSlot*           slots)
+    const VTableSlot*           slots) noexcept
 {
     if (type == 0 || slots == nullptr || slot_count == 0u) {
         return false;
@@ -589,6 +593,10 @@ bool RegisterRuntimeVTable(
     vtable->slots       = slots;
     vtable->vtable_array    = nullptr;
     vtable->vtable_length   = 0u;
+    vtable->type_shape      = 0;
+    vtable->_owns_slots        = 0;
+    vtable->_owns_vtable_array = 0;
+    vtable->_pad[0] = vtable->_pad[1] = 0;
 
     auto& state = GetState();
     CHAOS_IL2CPP_UNIQUE_LOCK(CHAOS_IL2CPP_SHARED_MUTEX) lock(state.mutex);
@@ -602,7 +610,7 @@ bool RegisterRuntimeVTable(
     return true;
 }
 
-const TypeVTable* TryGetTypeVTable(CHAOS_IL2CPP_UINT32 type_token) {
+const TypeVTable* TryGetTypeVTable(CHAOS_IL2CPP_UINT32 type_token) noexcept {
     if (type_token == 0u) {
         return nullptr;
     }
@@ -617,7 +625,7 @@ const TypeVTable* TryGetTypeVTable(CHAOS_IL2CPP_UINT32 type_token) {
     return it->second;
 }
 
-const TypeVTable* TryGetTypeVTableByStableId(CHAOS_IL2CPP_UINT64 stable_id) {
+const TypeVTable* TryGetTypeVTableByStableId(CHAOS_IL2CPP_UINT64 stable_id) noexcept {
     if (stable_id == 0u) return nullptr;
     auto& state = GetState();
     CHAOS_IL2CPP_SHARED_LOCK(CHAOS_IL2CPP_SHARED_MUTEX) lock(state.mutex);
@@ -670,7 +678,7 @@ const void** BuildRuntimeVTable(CHAOS_IL2CPP_UINT64 type_stable_id,
 
 void* ResolveVirtualMethodPointer(
     CHAOS_IL2CPP_UINT32 instance_type_token,
-    CHAOS_IL2CPP_UINT32 declared_method_token) {
+    CHAOS_IL2CPP_UINT32 declared_method_token) noexcept {
     CHAOS_IL2CPP_PROFILE_SCOPE("ResolveVirtualMethodPointer");
     if (instance_type_token == 0u) {
         return nullptr;
@@ -820,7 +828,7 @@ cache_and_return:
 
 void* ResolveVirtualMethodPointerByHandle(
     TypeInfoHandle               instance_type,
-    CHAOS_IL2CPP_UINT32         declared_method_token)
+    CHAOS_IL2CPP_UINT32         declared_method_token) noexcept
 {
     if (instance_type == 0) return nullptr;
     const auto* desc = chaos::il2cpp::runtime_core::TryDecodeReflectionQueryTypeHandle(instance_type);
@@ -894,13 +902,13 @@ CHAOS_IL2CPP_UINT32 chaos_find_interface_offset(
     return CHAOS_IL2CPP_UINT32_MAX;
 }
 
-CHAOS_IL2CPP_UINT32 GetRegisteredVTableCount() {
+CHAOS_IL2CPP_UINT32 GetRegisteredVTableCount() noexcept {
     auto& state = GetState();
     CHAOS_IL2CPP_SHARED_LOCK(CHAOS_IL2CPP_SHARED_MUTEX) lock(state.mutex);
     return static_cast<CHAOS_IL2CPP_UINT32>(state.by_type_token.size());
 }
 
-void ClearDomainPointers(CHAOS_IL2CPP_UINT32 domain_id) {
+void ClearDomainPointers(CHAOS_IL2CPP_UINT32 domain_id) noexcept {
     if (domain_id == 0u) return;
 
     auto& state = GetState();

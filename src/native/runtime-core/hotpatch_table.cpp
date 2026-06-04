@@ -3,6 +3,7 @@
 #include <algorithm>
 #include <atomic>
 #include <cstring>
+#include <chaos/log.h>
 #if defined(_MSC_VER)
 #include <intrin.h>
 #else
@@ -260,23 +261,39 @@ OriginalAotPtrCallback GetOriginalAotPtrCallback() noexcept {
 }
 
 void HotpatchNameRegistry::SetPatchedBySlot(uint32_t module_id, uint32_t slot, bool patched,
-                                             void* method_key) noexcept {
+                                             void* method_key,
+                                             uint32_t domain_id) noexcept {
     HotpatchEntryV0* entry = GetDispatchEntryBySlot(module_id, slot);
     if (entry == nullptr) return;
 
     if (patched) {
         entry->method_key = reinterpret_cast<uintptr_t>(method_key);
-        // Clear kHotpatchKeepNative: patched method should route to interpreter,
-        // not keep running the AOT native thunk. Reader uses relaxed ordering
-        // for HotpatchShouldKeepNative, so relaxed clear is sufficient.
-        _InterlockedAnd(reinterpret_cast<volatile long*>(&entry->flags),
-                        static_cast<long>(~(static_cast<unsigned long>(kHotpatchKeepNative))));
-        // release: method_key visible before flags (reader uses acquire fence)
-        _InterlockedOr(reinterpret_cast<volatile long*>(&entry->flags), kHotpatchActive);
+        // Atomic flags transition: set kHotpatchActive + clear kHotpatchKeepNative
+        // in a single store to eliminate the TOCTOU window.  The old two-step
+        // (_InterlockedAnd then _InterlockedOr) left an intermediate state where
+        // neither bit was set, causing readers to fall through to the wrong path.
+        // Paired with acquire load in HotpatchIsActive (hotpatch_table.h).
+        auto& atomic_flags = *reinterpret_cast<std::atomic<uint32_t>*>(&entry->flags);
+        uint32_t new_flags = (atomic_flags.load(std::memory_order_relaxed)
+                              | kHotpatchActive) & ~kHotpatchKeepNative;
+        atomic_flags.store(new_flags, std::memory_order_release);
+
+        // Track this patch for domain-unload cleanup.
+        if (domain_id > 0) {
+            domain_patches_.push_back({domain_id, module_id, slot});
+        }
     } else {
         _InterlockedAnd(reinterpret_cast<volatile long*>(&entry->flags), ~kHotpatchActive);
         // release: method_key visible before flags (reader uses acquire fence)
         entry->method_key = 0;
+
+        // Remove from domain tracking (linear scan, small n).
+        for (auto it = domain_patches_.begin(); it != domain_patches_.end(); ++it) {
+            if (it->module_id == module_id && it->slot == slot) {
+                domain_patches_.erase(it);
+                break;
+            }
+        }
     }
 
     // Version bump: signals to JIT-compiled callers that the target may have changed.
@@ -292,6 +309,26 @@ void HotpatchNameRegistry::SetPatchedBySlot(uint32_t module_id, uint32_t slot, b
             g_slot_update_cb(token, entry->direct_ptr, entry);
         }
     }
+}
+
+uint32_t HotpatchNameRegistry::ClearDomainDispatchEntries(uint32_t domain_id) noexcept {
+    if (domain_id == 0) return 0;  // core domain, never unloaded
+    uint32_t count = 0;
+    for (auto it = domain_patches_.begin(); it != domain_patches_.end(); ) {
+        if (it->domain_id == domain_id) {
+            // Clear the dispatch entry: reset kHotpatchActive and method_key.
+            SetPatchedBySlot(it->module_id, it->slot, false, nullptr, 0);
+            it = domain_patches_.erase(it);
+            count++;
+        } else {
+            ++it;
+        }
+    }
+    if (count > 0) {
+        CHAOS_IL2CPP_LOG_INFO_M("codegen",
+            "ClearDomainDispatchEntries: domain={} cleared {} entries", domain_id, count);
+    }
+    return count;
 }
 
 // ── Global singleton ──────────────────────────────────────────────────

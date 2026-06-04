@@ -63,23 +63,23 @@ extern MethodTableOrigin g_method_origins[kMethodTableSize];
 // ── API ────────────────────────────────────────────────────────────────
 
 /// Initialize the entire method table and origins to zero.
-void InitializeMethodTable();
+void InitializeMethodTable() noexcept;
 
 /// Write a single method table entry.
-bool WriteMethodTable(uint32_t index, void* fn_ptr, uint32_t module_gen);
+bool WriteMethodTable(uint32_t index, void* fn_ptr, uint32_t module_gen) noexcept;
 
 /// Read a function pointer, or nullptr if uninitialized.
-void* ResolveMethodTable(uint32_t index);
+void* ResolveMethodTable(uint32_t index) noexcept;
 
 /// Clear all entries associated with a given module generation.
-void ClearMethodTableByGeneration(uint32_t module_gen);
+void ClearMethodTableByGeneration(uint32_t module_gen) noexcept;
 
 /// Record the ABI origin for a method table slot.
 /// Must be called after WriteMethodTable() for cross-DLL ABI validation to work.
-void SetMethodOrigin(uint32_t index, uint32_t module_id, uint32_t manifest_method_index);
+void SetMethodOrigin(uint32_t index, uint32_t module_id, uint32_t manifest_method_index) noexcept;
 
 /// Read the origin for a method table slot.
-MethodTableOrigin GetMethodOrigin(uint32_t index);
+MethodTableOrigin GetMethodOrigin(uint32_t index) noexcept;
 
 /// Resolve a method table entry AND validate the method's ABI signature against
 /// the owning module's manifest.  Returns the function pointer if valid, or
@@ -88,7 +88,7 @@ void* ResolveMethodTableWithAbiCheck(
     uint32_t index,
     uint8_t expected_return_carrier,
     const uint8_t* expected_param_carriers,
-    uint8_t expected_param_count);
+    uint8_t expected_param_count) noexcept;
 
 }  // namespace chaos::il2cpp::method_table
 

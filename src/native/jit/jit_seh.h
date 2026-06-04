@@ -126,6 +126,13 @@ uint32_t DemoteJittedMethod(uint32_t method_token) noexcept;
 /// Returns the number of entries demoted.
 uint32_t DemoteJittedCallSite(uint32_t method_token) noexcept;
 
+/// Demote all T4 code entries belonging to the given domain.
+/// Called during domain unload to prevent VEH/signal dispatching
+/// into JIT code that references freed domain metadata.
+/// @param domain_id  The domain whose JIT entries should be demoted.
+/// @return Number of entries demoted.
+uint32_t DemoteJittedCodeByDomain(uint32_t domain_id) noexcept;
+
 /// Free all demoted T4 code regions whose VirtualFree was deferred to the
 /// next GC safepoint.  Called from the GC event callback registered in
 /// RegisterJitSehHandler.  Exposed for testing and explicit reclamation.
