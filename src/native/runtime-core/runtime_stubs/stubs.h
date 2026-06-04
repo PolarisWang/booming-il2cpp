@@ -16,6 +16,10 @@
 // conflicts with Win32 API functions of the same name.
 #include "thread_state.h"
 
+// exception_stubs.h must be outside extern "C" because it defines
+// static inline functions using C++ casts (static_cast).
+#include "exception_stubs.h"
+
 extern "C" {
 
 #include "array_stubs.h"
@@ -29,7 +33,6 @@ extern "C" {
 #include "interlocked_stubs.h"
 #include "string_stubs.h"
 #include "stream_stubs.h"
-#include "exception_stubs.h"
 #include "object_stubs.h"
 #include "threading_stubs.h"
 #include "collection_stubs.h"

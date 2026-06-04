@@ -16,10 +16,27 @@
 #include <chrono>
 #include <cstdint>
 #include <cinttypes>
+#include <csignal>
+#include <csetjmp>
 
 #if defined(_WIN32)
 #define NOMINMAX
 #include <Windows.h>
+
+// CRT safety: suppress invalid parameter fast-fail and abort crash.
+// Some subject methods trigger CRT invalid parameter assertions
+// (e.g. memcpy(NULL, ...)) which would otherwise __fastfail with
+// STATUS_STACK_BUFFER_OVERRUN (0xC0000409) and kill the process.
+// For verification, we want graceful recovery via SEH + longjmp instead.
+static void DummyInvalidParameterHandler(
+    const wchar_t*, const wchar_t*, const wchar_t*, unsigned, uintptr_t) {}
+
+// Thread-local jmp_buf for SIGABRT recovery in the fact-json worker thread.
+// When abort() fires during a subject dispatch, the signal handler longjmps
+// back to the dispatch loop, which records the method as failed and continues
+// to the next subject.  This prevents abort -> _exit(3) from killing the
+// process mid-way through the verification suite.
+static thread_local jmp_buf t_abort_jmp;
 #endif
 
 // g_log_use_stderr is now exported by the prebuilt chaos_runtime_core
@@ -251,12 +268,29 @@ static int RunFactJsonMode() {
             int i = kSubjectSlotMap[si];
             CHAOS_IL2CPP_INT32 result = 0;
             bool caught = false;
-            __try {
-                result = chaos::il2cpp::runtime_core::ChaosDispatchMethod(
-                    GetHotpatchEntries(), kAotMethodCount, i, CHAOS_USE_DEFAULT_THUNKS);
-            } __except(EXCEPTION_EXECUTE_HANDLER) {
+
+            // Re-arm SIGABRT handler each iteration: MSVC signal() resets to
+            // SIG_DFL after delivery, so a second abort would otherwise call
+            // _exit(3) without going through longjmp.
+            signal(SIGABRT, [](int) {
+                longjmp(t_abort_jmp, 1);
+            });
+
+            // _setjmp _must_ be outside __try on x64 (MSVC restriction).
+            // If abort() fires, the SIGABRT handler longjmps here with
+            // value 1, and we record the method as caught.
+            if (_setjmp(t_abort_jmp) == 0) {
+                __try {
+                    result = chaos::il2cpp::runtime_core::ChaosDispatchMethod(
+                        GetHotpatchEntries(), kAotMethodCount, i, CHAOS_USE_DEFAULT_THUNKS);
+                } __except(EXCEPTION_EXECUTE_HANDLER) {
+                    caught = true;
+                }
+            } else {
+                // longjmp from SIGABRT handler — abort was called
                 caught = true;
             }
+
             if (!first) printf(",");
             printf("{\"si\":%d,\"methodIndex\":%d,\"contractIndex\":-1,\"passed\":%s,\"exitCode\":%d}",
                    si, i, caught ? "false" : "true", caught ? -1 : (int)result);
@@ -758,6 +792,31 @@ static int RunHotupdateBenchmarkMode(int entry_index, int iterations) {
 }
 
 int main(int argc, char* argv[]) {
+
+#if defined(_WIN32)
+    // Suppress CRT fast-fail: abort() and invalid parameter handlers on Win10+
+    // call __fastfail(STATUS_STACK_BUFFER_OVERRUN, 0xC0000409) which is
+    // non-continuable — the process dies even inside __try/__except.
+    // For verification we want subject methods to recover gracefully.
+#pragma warning(push)
+#pragma warning(disable: 4996)  // _set_abort_behavior is deprecated but still works
+    _set_abort_behavior(0, _WRITE_ABORT_MSG | _CALL_REPORTFAULT);
+#pragma warning(pop)
+    _set_invalid_parameter_handler(DummyInvalidParameterHandler);
+    _CrtSetReportMode(_CRT_ASSERT, 0);
+    _CrtSetReportMode(_CRT_WARN, 0);
+    _CrtSetReportMode(_CRT_ERROR, 0);
+    // Convert SIGABRT to longjmp so the fact-json worker thread can recover
+    // and continue to the next subject method instead of dying with _exit(3).
+    signal(SIGABRT, [](int) {
+        longjmp(t_abort_jmp, 1);
+    });
+    // Route CHAOS_IL2CPP_FAIL() through longjmp so the dispatch loop catches
+    // codegen-emitted fail stubs and runtime assertions gracefully.
+    ::chaos::il2cpp::common::g_chaos_fail_hook = []() {
+        longjmp(t_abort_jmp, 1);
+    };
+#endif
 
     // Redirect diagnostic log output to stderr so that machine-consumed
     // protocol output (benchmark JSON, fact results) on stdout stays clean.

@@ -62,6 +62,20 @@ CHAOS_IL2CPP_INTPTR ChaosTextInfoToLower(CHAOS_IL2CPP_INTPTR text_info, CHAOS_IL
 CHAOS_IL2CPP_INTPTR ChaosTextInfoToUpper(CHAOS_IL2CPP_INTPTR text_info, CHAOS_IL2CPP_INT32 c) noexcept;
 CHAOS_IL2CPP_INTPTR ChaosTextInfoGetCultureName(CHAOS_IL2CPP_INTPTR text_info) noexcept;
 
+// ── Globalization stubs ──
+CHAOS_IL2CPP_FLOAT64 ChaosCharUnicodeInfoGetNumericValue(CHAOS_IL2CPP_INT32 ch) noexcept;
+CHAOS_IL2CPP_INT32  ChaosCharUnicodeInfoGetDigitValue(CHAOS_IL2CPP_INT32 ch) noexcept;
+CHAOS_IL2CPP_INT32  ChaosCharUnicodeInfoGetDecimalDigitValue(CHAOS_IL2CPP_INT32 ch) noexcept;
+CHAOS_IL2CPP_INT32  ChaosCharUnicodeInfoGetUnicodeCategory(CHAOS_IL2CPP_INT32 ch) noexcept;
+CHAOS_IL2CPP_INT32  ChaosCompareInfoIsSortableString(CHAOS_IL2CPP_INTPTR str) noexcept;
+CHAOS_IL2CPP_INT32  ChaosCompareInfoIsSortableInt(CHAOS_IL2CPP_INT32 ch) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosDateTimeFormatInfoGetInstance(CHAOS_IL2CPP_INTPTR provider) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosCultureGetCultureInfo(CHAOS_IL2CPP_INTPTR name) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosCultureGetCultureInfoBool(CHAOS_IL2CPP_INTPTR name, CHAOS_IL2CPP_INT32 tryFirst) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosCultureGetCultureInfoByIetfLanguageTag(CHAOS_IL2CPP_INTPTR name) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosCultureCreateSpecificCulture(CHAOS_IL2CPP_INTPTR name) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosCompareInfoGetCompareInfo(CHAOS_IL2CPP_INTPTR name) noexcept;
+
 // GC
 extern "C" {
 void    ChaosGcCollect(CHAOS_IL2CPP_INT32 generation) noexcept;
