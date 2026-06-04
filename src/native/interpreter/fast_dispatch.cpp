@@ -51,7 +51,6 @@ extern CHAOS_IL2CPP_VECTOR(InterpreterValue) g_static_fields;
 namespace chaos::il2cpp::runtime_core {
 
 using chaos::il2cpp::pal::PalTryCallNoExcept;
-using chaos::il2cpp::runtime::kRuntimeConfig;
 
 // ── TLS box object pool ──────────────────────────────────────────────
 // Avoids per-call malloc/free for Box/NewObj by reusing InterpreterObjects.
@@ -1329,6 +1328,38 @@ static void Handle_Call(FastFrame& frame, const interpreter::IRInstruction& inst
         return;
     }
 
+    // ── JIT call-site cache refresh ──────────────────────────────────
+    // When MIC doesn't match (direct_ptr missing or is_patched), the
+    // callee may have been JIT-compiled since CachedCallInfo was populated
+    // during IR lowering. Re-check the dispatch entry to refresh the cache,
+    // enabling subsequent calls to hit the MIC path directly.
+    //
+    // This handles the JIT→JIT direct call optimization: after a patched
+    // method is eagerly JIT-compiled at patch load time, the dispatch entry's
+    // direct_ptr is updated to JIT code, but the per-call-site CachedCallInfo
+    // still has the stale is_patched=true. The re-check is cheap (~10ns via
+    // HotpatchLookupBySlot) and runs only once per call site per JIT
+    // compilation (on MIC miss).
+#if CHAOS_IL2CPP_ENABLE_JIT
+    if (cache_info != nullptr && cache_info->module_id != 0 &&
+        cache_info->slot != ~0u) {
+        auto* entry = chaos::il2cpp::runtime_core::HotpatchLookupBySlot(
+            cache_info->module_id, cache_info->slot);
+        if (entry != nullptr) {
+            // Acquire pairs with SetPatchedBySlot / JIT compile release.
+            std::atomic_thread_fence(std::memory_order_acquire);
+            if (entry->direct_ptr != nullptr &&
+                !chaos::il2cpp::runtime_core::HotpatchIsActive(*entry)) {
+                auto* mutable_ci = const_cast<ri::CachedCallInfo*>(cache_info);
+                mutable_ci->direct_ptr = entry->direct_ptr;
+                mutable_ci->is_patched = false;
+                Handle_Call_DoMIC(frame, instr, pa.args, pa.tags, ac, cache_info);
+                return;
+            }
+        }
+    }
+#endif
+
     // Raw dispatch fallback.
     Handle_Call_DoRaw(frame, instr, pa.args, pa.tags, ac, cache_info);
 }
@@ -2367,6 +2398,26 @@ static void Handle_CallVirtConstrained(FastFrame& frame, const interpreter::IRIn
             const auto* cc = static_cast<const ri::CachedCallInfo*>(frame.call_cache);
             if (cc[frame.pc].ret_tag != 0xFF) cache_info = &cc[frame.pc];
         }
+
+        // JIT call-site cache refresh (same as Handle_Call).
+#if CHAOS_IL2CPP_ENABLE_JIT
+        if (cache_info != nullptr && cache_info->module_id != 0 &&
+            cache_info->slot != ~0u) {
+            auto* entry = chaos::il2cpp::runtime_core::HotpatchLookupBySlot(
+                cache_info->module_id, cache_info->slot);
+            if (entry != nullptr) {
+                std::atomic_thread_fence(std::memory_order_acquire);
+                if (entry->direct_ptr != nullptr &&
+                    !chaos::il2cpp::runtime_core::HotpatchIsActive(*entry)) {
+                    auto* mutable_ci = const_cast<ri::CachedCallInfo*>(cache_info);
+                    mutable_ci->direct_ptr = entry->direct_ptr;
+                    mutable_ci->is_patched = false;
+                    Handle_Call_DoMIC(frame, instr, pa.args, pa.tags, ac, cache_info);
+                    return;
+                }
+            }
+        }
+#endif
         Handle_Call_DoRaw(frame, instr, pa.args, pa.tags, ac, cache_info);
         return;
     }
@@ -2697,7 +2748,7 @@ static void CompileAndCacheOsr(FastFrame& frame) noexcept {
         return;
     }
 
-    if constexpr (kRuntimeConfig.jit) {
+#if CHAOS_IL2CPP_ENABLE_JIT
         chaos::il2cpp::jit::CompileConfig cfg;
         cfg.enable_deopt = true;
         cfg.enable_liveness = true;
@@ -2716,9 +2767,9 @@ static void CompileAndCacheOsr(FastFrame& frame) noexcept {
                 pm->tier_state.store(PM::kOptimizedRegister, std::memory_order_release);
             }
         }
-    } else {
+#else
         pm->tier_state.store(PM::kJitSkip, std::memory_order_release);
-    }
+#endif
 }
 
 // ── TryFastOsrPromotion ─────────────────────────────────────────────────
@@ -3001,8 +3052,17 @@ bool FastExecute(FastFrame& frame,
         // OSR: Detect hot-loop backward branch — if the handler took a branch
         // and the target is an earlier instruction, it's a loop backedge.
         if (frame.pc < instr_count && frame.pc < prev_pc) {
-            uint32_t threshold = frame.osr_reenable ? 1 : kFastOsrLoopThreshold;
-            frame.osr_reenable = false;  // one-shot
+            // Phase B: OSR deopt backoff — after deoptimization, use exponential
+            // backoff on the loop threshold to avoid immediate OSR→deopt bounce.
+            // Each deopt doubles the iterations before OSR retry is attempted.
+            uint32_t threshold = kFastOsrLoopThreshold;
+            if (frame.osr_reenable) {
+                auto* pm = static_cast<chaos::il2cpp::runtime_core::PatchMethod*>(frame.patch_method);
+                threshold = (pm != nullptr && pm->deopt_count > 0)
+                    ? (kFastOsrLoopThreshold << std::min(pm->deopt_count, 5u))
+                    : 1u;
+                frame.osr_reenable = false;  // one-shot
+            }
             if (++frame.loop_counter >= threshold) {
                 if (TryFastOsrPromotion(frame)) continue;  // OSR took over
                 frame.loop_counter = 0;  // M3: reset on failure so counter doesn't saturate

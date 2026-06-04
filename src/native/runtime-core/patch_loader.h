@@ -40,15 +40,12 @@ struct PatchMethod {
     const uint8_t*  signature_blob  = nullptr;   // method signature blob
     uint32_t        signature_len   = 0;          // signature blob length
 
-    // ── AOT (or JIT) native code entry point ───────────────────────────
-    // Dual semantics (L1):
-    //   AOT-only mode → pre-compiled AOT code pointer, set during init.
-    //   JIT/hybrid mode → may hold QuickJIT code (set by DP1-a transfer
-    //     or precode path).  JIT code in this field skips GC_TRANSITION
-    //     (assumes self-managed GC contract).  When T4 code is available
-    //     this field's value is shadowed by the tier_state dispatch path.
-    //   Non-null = native code is available for Step A/A0 dispatch.
-    void*           aot_entry       = nullptr;
+    // ── Cached dispatch entry for O(1) native code dispatch ──────────
+    // Points to the HotpatchEntryV0 for this method.  Set during PatchMethod
+    // initialization in SetPatchedBySlot.  Used by Step A/A0 dispatch to
+    // read direct_ptr without registry lookup.  nullptr = no dispatch entry
+    // (e.g. non-hotpatchable method in test-only mode).
+    void*           dispatch_entry  = nullptr;   // HotpatchEntryV0*
 
     void*           cached_ir       = nullptr;   // cached IRMethod (lazy, null = not lowered)
     void*           cached_reg_method = nullptr; // cached RegisterMethod (register-allocated, lazy)
@@ -94,6 +91,13 @@ struct PatchMethod {
     // Populated during OptimizedRegister→JIT promotion. Set by Compile().
     mutable class chaos::il2cpp::jit::JitMethod* cached_native_method = nullptr;
 
+    // ── Original AOT function pointer for deopt demotion recovery ──────────
+    // Saved during SetPatchedBySlot after Gap2 restores entry->direct_ptr to
+    // the correct AOT code.  When deopt exceeds kMaxDeoptBeforeDemote, the
+    // demotion path restores entry->direct_ptr from this field so Step A0
+    // falls back to the real AOT code instead of calling demoted JIT code.
+    void*           original_aot_ptr    = nullptr;
+
     // ── OptimizedRegister→JIT codegen failure backoff ────────────────────
     mutable uint32_t    codegen_fail_count = 0;
     static constexpr uint32_t kMaxCodegenFailures = 5;
@@ -138,7 +142,7 @@ struct PatchMethod {
     static constexpr uint32_t kJitSkip        = 8;     // permanent: JIT codegen failed too many times
 
     // Tier 3→4 transition threshold (hot → very hot, native codegen).
-    static constexpr uint32_t kJitThreshold = 50;
+    static constexpr uint32_t kJitThreshold = 30;
 
     // Quick JIT threshold — first call triggers Quick JIT (immediate).
     static constexpr uint32_t kQuickJitThreshold = 1;

@@ -20,6 +20,7 @@
 #include <atomic>
 #include <cstdint>
 #include <cstring>
+#include <vector>
 
 #if defined(_WIN32) || defined(_WIN64)
   #define NOMINMAX
@@ -31,8 +32,6 @@ namespace chaos::il2cpp::jit {
 
 // ── Constants ─────────────────────────────────────────────────────────────────
 
-static constexpr uint32_t kMaxT4CodeEntries      = 2048;
-static constexpr uint32_t kMaxPendingFreeRegions  = 64;
 static constexpr uint32_t kSehClauseEntrySize     = 5 * sizeof(uint32_t);
 
 // ── Types ──────────────────────────────────────────────────────────────────
@@ -59,12 +58,10 @@ using T4UnwindState = JitUnwindState;
 // code path they are encapsulated in the class; here they are exposed so that
 // jit_seh_handler_test.cpp can set up and tear down state between tests.
 
-T4CodeEntry g_t4_code_entries[kMaxT4CodeEntries];
-uint32_t    g_t4_code_count = 0;
+std::vector<T4CodeEntry> g_t4_code_entries;
 long        g_t4_code_lock = 0;  // InterlockedExchange-compatible for tests
 
-PendingFreeRegion g_pending_free[kMaxPendingFreeRegions];
-uint32_t          g_pending_free_count = 0;
+std::vector<PendingFreeRegion> g_pending_free;
 
 uint32_t g_t4_lookup_generation = 1;
 
@@ -117,41 +114,37 @@ void EnqueueDemotedCode(void* code_start, uint32_t code_size) noexcept {
     if (code_start == nullptr || code_size == 0) return;
 
     // Deduplicate: if this exact address is already tracked, skip.
-    for (uint32_t i = 0; i < kMaxPendingFreeRegions; i++) {
-        if (g_pending_free[i].active && g_pending_free[i].code_start == code_start) {
+    for (auto& region : g_pending_free) {
+        if (region.active && region.code_start == code_start) return;
+    }
+
+    // Reuse an inactive slot, or add a new entry.
+    for (auto& region : g_pending_free) {
+        if (!region.active) {
+            region.code_start = code_start;
+            region.code_size  = code_size;
+            region.active     = true;
             return;
         }
     }
 
-    for (uint32_t i = 0; i < kMaxPendingFreeRegions; i++) {
-        if (!g_pending_free[i].active) {
-            g_pending_free[i].code_start = code_start;
-            g_pending_free[i].code_size  = code_size;
-            g_pending_free[i].active     = true;
-            g_pending_free_count++;
-            return;
-        }
-    }
+    g_pending_free.push_back({code_start, code_size, true});
 }
 
 // ── ReclaimDemotedCode ────────────────────────────────────────────────────────
 // Frees all demoted code regions in the pending-free table.
 
 void ReclaimDemotedCode() noexcept {
-    for (uint32_t i = 0; i < kMaxPendingFreeRegions; i++) {
-        if (!g_pending_free[i].active) continue;
+    for (auto& region : g_pending_free) {
+        if (!region.active) continue;
 
 #if defined(_WIN64)
-        VirtualFree(g_pending_free[i].code_start, 0, MEM_RELEASE);
+        VirtualFree(region.code_start, 0, MEM_RELEASE);
 #elif defined(__linux__)
-        munmap(g_pending_free[i].code_start, g_pending_free[i].code_size);
+        munmap(region.code_start, region.code_size);
 #endif
-
-        g_pending_free[i].active     = false;
-        g_pending_free[i].code_start = nullptr;
-        g_pending_free[i].code_size  = 0;
     }
-    g_pending_free_count = 0;
+    g_pending_free.clear();
 }
 
 // ── FindNativeCodeByAddress ───────────────────────────────────────────────────
@@ -176,8 +169,7 @@ const JitMethod* FindNativeCodeByAddress(const void* address) noexcept {
     }
 
     // Slow path: linear scan the registry.
-    for (uint32_t i = 0; i < g_t4_code_count; i++) {
-        const auto& entry = g_t4_code_entries[i];
+    for (const auto& entry : g_t4_code_entries) {
         const uint8_t* start = static_cast<const uint8_t*>(entry.code_start);
         if (start == nullptr) continue;
         const uint8_t* end  = start + entry.code_size;
@@ -200,15 +192,12 @@ void RegisterNativeCodeSection(void* code_start, uint32_t code_size,
     if (code_start == nullptr || code_size == 0 || nm == nullptr) return;
 
     AcquireCodeLock();
-    if (g_t4_code_count >= kMaxT4CodeEntries) {
-        ReleaseCodeLock();
-        return;
-    }
-    g_t4_code_entries[g_t4_code_count].code_start         = code_start;
-    g_t4_code_entries[g_t4_code_count].code_size          = code_size;
-    g_t4_code_entries[g_t4_code_count].nm                 = nm;
-    g_t4_code_entries[g_t4_code_count].patch_method_token = patch_method_token;
-    g_t4_code_count++;
+    T4CodeEntry entry;
+    entry.code_start         = code_start;
+    entry.code_size          = code_size;
+    entry.nm                 = nm;
+    entry.patch_method_token = patch_method_token;
+    g_t4_code_entries.push_back(entry);
     ReleaseCodeLock();
 }
 
@@ -218,12 +207,15 @@ void UnregisterNativeCodeSection(void* code_start) noexcept {
     if (code_start == nullptr) return;
 
     AcquireCodeLock();
-    for (uint32_t i = 0; i < g_t4_code_count; i++) {
-        if (g_t4_code_entries[i].code_start == code_start) {
-            EnqueueDemotedCode(const_cast<void*>(g_t4_code_entries[i].code_start),
-                               g_t4_code_entries[i].code_size);
-            g_t4_code_entries[i].nm         = nullptr;
-            g_t4_code_entries[i].code_start = nullptr;
+    for (auto& entry : g_t4_code_entries) {
+        if (entry.code_start == code_start) {
+            if (entry.nm != nullptr) {
+                const_cast<JitMethod*>(entry.nm)->code_managed_externally = true;
+            }
+            EnqueueDemotedCode(const_cast<void*>(entry.code_start),
+                               entry.code_size);
+            entry.nm         = nullptr;
+            entry.code_start = nullptr;
             break;
         }
     }
@@ -238,13 +230,14 @@ uint32_t DemoteJittedMethod(uint32_t method_token) noexcept {
     uint32_t count = 0;
 
     AcquireCodeLock();
-    for (uint32_t i = 0; i < g_t4_code_count; i++) {
-        if (g_t4_code_entries[i].patch_method_token == method_token &&
-            g_t4_code_entries[i].nm != nullptr) {
-            EnqueueDemotedCode(const_cast<void*>(g_t4_code_entries[i].code_start),
-                               g_t4_code_entries[i].code_size);
-            g_t4_code_entries[i].nm         = nullptr;
-            g_t4_code_entries[i].code_start = nullptr;
+    for (auto& entry : g_t4_code_entries) {
+        if (entry.patch_method_token == method_token &&
+            entry.nm != nullptr) {
+            const_cast<JitMethod*>(entry.nm)->code_managed_externally = true;
+            EnqueueDemotedCode(const_cast<void*>(entry.code_start),
+                               entry.code_size);
+            entry.nm         = nullptr;
+            entry.code_start = nullptr;
             count++;
         }
     }
@@ -263,15 +256,16 @@ uint32_t DemoteT4ByCallSiteToken(uint32_t method_token) noexcept {
     uint32_t count = 0;
 
     AcquireCodeLock();
-    for (uint32_t i = 0; i < g_t4_code_count; i++) {
-        const auto* nm = g_t4_code_entries[i].nm;
+    for (auto& entry : g_t4_code_entries) {
+        const auto* nm = entry.nm;
         if (nm == nullptr) continue;
         for (uint32_t j = 0; j < nm->call_site_count; j++) {
             if (nm->call_sites[j].method_token == method_token) {
-                EnqueueDemotedCode(const_cast<void*>(g_t4_code_entries[i].code_start),
-                                   g_t4_code_entries[i].code_size);
-                g_t4_code_entries[i].nm         = nullptr;
-                g_t4_code_entries[i].code_start = nullptr;
+                const_cast<JitMethod*>(nm)->code_managed_externally = true;
+                EnqueueDemotedCode(const_cast<void*>(entry.code_start),
+                                   entry.code_size);
+                entry.nm         = nullptr;
+                entry.code_start = nullptr;
                 count++;
                 break;
             }

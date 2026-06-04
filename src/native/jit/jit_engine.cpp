@@ -3893,7 +3893,7 @@ JitMethod* NativeCodeGenerator::Generate() noexcept {
         has_graph_coloring_ = false;
         num_fpr_callee_ = 0;
         xmm_save_size_ = 0;
-    } else if (config_.enable_register_caching && false) {
+    } else if (config_.enable_register_caching) {
         gcr_ = AllocateRegistersGraphColoring(rm_);
         has_graph_coloring_ = false;
         std::memset(phys_to_colored_vreg_, 0xFF, sizeof(phys_to_colored_vreg_));
@@ -4156,7 +4156,7 @@ JitMethod* NativeCodeGenerator::Generate() noexcept {
     auto opt_instrs = rm_.instructions;
     std::vector<uint8_t> removed_mask;
     InlineResultBuffer inline_results;
-    if (!is_tier0_ && config_.enable_optimizer && false) {
+    if (!is_tier0_ && config_.enable_optimizer) {
         if (!rm_.seh_clauses.empty()) {
             // SEH methods: use the existing linear optimizer
             OptimizeInstructions(opt_instrs, removed_mask, true);
@@ -4910,6 +4910,9 @@ JitMethod::~JitMethod() noexcept {
         __deregister_frame(eh_frame);
     }
 #endif
+    if (code != nullptr && !code_managed_externally) {
+        chaos::il2cpp::pal::PalVirtualFree(code, code_size);
+    }
     code = nullptr;
 }
 

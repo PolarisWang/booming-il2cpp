@@ -18,8 +18,6 @@
 
 namespace chaos::il2cpp::interpreter {
 
-using chaos::il2cpp::runtime::kRuntimeConfig;
-
 void TryOsrPromotion(RegisterFrame& frame,
                      const RegisterInstruction* instrs,
                      uint32_t instr_count) noexcept {
@@ -58,8 +56,8 @@ void TryOsrPromotion(RegisterFrame& frame,
     auto* rm = static_cast<RegisterMethod*>(pm->cached_reg_method);
     if (rm == nullptr) return;
 
-    if constexpr (kRuntimeConfig.jit) {
-        // Generate native code with full deopt support.
+#if CHAOS_IL2CPP_ENABLE_JIT
+    // Generate native code with full deopt support.
         chaos::il2cpp::jit::CompileConfig cfg;
         cfg.enable_deopt = true;
         cfg.enable_liveness = true;
@@ -99,7 +97,7 @@ void TryOsrPromotion(RegisterFrame& frame,
         pm->cached_native_method = nm;
         pm->tier_state.store(PM::kJitted, std::memory_order_release);
         chaos::il2cpp::jit::RegisterNativeCodeSection(nm->code, nm->code_size, nm);
-    }
+#endif
 }
 
 }  // namespace chaos::il2cpp::interpreter

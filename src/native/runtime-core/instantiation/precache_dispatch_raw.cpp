@@ -305,6 +305,29 @@ RawDispatchResult InterpreterDispatchRaw(
         // value_type_this: fall through to MethodInvoke
     }
 
+    // ── JIT call-site cache refresh (Phase 2) ─────────────────────────
+    // When MIC doesn't match (direct_ptr missing or is_patched), the callee
+    // may have been JIT-compiled since CachedCallInfo was populated during
+    // IR lowering. Re-check the dispatch entry and update the cache so
+    // subsequent calls from this call site hit the MIC path directly.
+    // This complements the same re-check in Handle_Call (fast_dispatch.cpp)
+    // and extends the benefit to the RegisterExecute path (ir_reg_alloc.cpp).
+#if CHAOS_IL2CPP_ENABLE_JIT
+    if (use_cache && (cache_info->direct_ptr == nullptr || cache_info->is_patched) &&
+        cache_info->module_id != 0 && cache_info->slot != ~0u) {
+        auto* entry = chaos::il2cpp::runtime_core::HotpatchLookupBySlot(
+            cache_info->module_id, cache_info->slot);
+        if (entry != nullptr) {
+            std::atomic_thread_fence(std::memory_order_acquire);
+            if (entry->direct_ptr != nullptr &&
+                !chaos::il2cpp::runtime_core::HotpatchIsActive(*entry)) {
+                const_cast<CachedCallInfo*>(cache_info)->direct_ptr = entry->direct_ptr;
+                const_cast<CachedCallInfo*>(cache_info)->is_patched = false;
+            }
+        }
+    }
+#endif
+
     // ── Call MethodInvoke ──
     uint64_t ret_scalar = 0;
     void*    ret_buf = &ret_scalar;

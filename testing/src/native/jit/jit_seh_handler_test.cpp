@@ -118,15 +118,9 @@ class T4SehHandlerTest : public ::testing::Test {
 protected:
     void SetUp() override {
         // ── Clear code registry ──────────────────────────────────────────
-        g_t4_code_count = 0;
-        for (uint32_t i = 0; i < kMaxT4CodeEntries; ++i) {
-            g_t4_code_entries[i] = T4CodeEntry{};
-        }
+        g_t4_code_entries.clear();
         // ── Clear pending-free table ─────────────────────────────────────
-        g_pending_free_count = 0;
-        for (uint32_t i = 0; i < kMaxPendingFreeRegions; ++i) {
-            g_pending_free[i] = PendingFreeRegion{};
-        }
+        g_pending_free.clear();
         // ── Reset lookup cache (generation bump forces cold miss) ────────
         InvalidateLookupCache();
         g_t4_lookup_cache = {};
@@ -141,14 +135,8 @@ protected:
 
     void TearDown() override {
         // Same cleanup as SetUp, ensuring no state leaks between tests.
-        g_t4_code_count = 0;
-        for (uint32_t i = 0; i < kMaxT4CodeEntries; ++i) {
-            g_t4_code_entries[i] = T4CodeEntry{};
-        }
-        g_pending_free_count = 0;
-        for (uint32_t i = 0; i < kMaxPendingFreeRegions; ++i) {
-            g_pending_free[i] = PendingFreeRegion{};
-        }
+        g_t4_code_entries.clear();
+        g_pending_free.clear();
         InvalidateLookupCache();
         g_t4_lookup_cache = {};
         g_t4_throw_ret_addr = nullptr;
@@ -271,15 +259,15 @@ TEST_F(T4SehHandlerTest, RegisterT4Code_RejectsNullParameters) {
 
     // nullptr code_start.
     RegisterNativeCodeSection(nullptr, 64, &nm);
-    EXPECT_EQ(g_t4_code_count, 0u);
+    EXPECT_EQ(g_t4_code_entries.size(), 0u);
 
     // zero code_size.
     RegisterNativeCodeSection(fake_code, 0, &nm);
-    EXPECT_EQ(g_t4_code_count, 0u);
+    EXPECT_EQ(g_t4_code_entries.size(), 0u);
 
     // nullptr JitMethod.
     RegisterNativeCodeSection(fake_code, 64, nullptr);
-    EXPECT_EQ(g_t4_code_count, 0u);
+    EXPECT_EQ(g_t4_code_entries.size(), 0u);
 }
 
 TEST_F(T4SehHandlerTest,
@@ -299,11 +287,11 @@ TEST_F(T4SehHandlerTest,
 
     // Verify the code was enqueued in the pending-free table.
     bool found = false;
-    for (uint32_t i = 0; i < kMaxPendingFreeRegions; ++i) {
-        if (g_pending_free[i].active &&
-            g_pending_free[i].code_start == fake_code) {
+    for (const auto& region : g_pending_free) {
+        if (region.active &&
+            region.code_start == fake_code) {
             found = true;
-            EXPECT_EQ(g_pending_free[i].code_size, sizeof(fake_code));
+            EXPECT_EQ(region.code_size, sizeof(fake_code));
             break;
         }
     }
@@ -312,21 +300,21 @@ TEST_F(T4SehHandlerTest,
 
 TEST_F(T4SehHandlerTest, UnregisterNativeCodeSection_NullCodeStartReturnsSafely) {
     // Should not crash or modify state.
-    uint32_t count_before = g_t4_code_count;
+    uint32_t count_before = static_cast<uint32_t>(g_t4_code_entries.size());
     UnregisterNativeCodeSection(nullptr);
-    EXPECT_EQ(g_t4_code_count, count_before);
+    EXPECT_EQ(g_t4_code_entries.size(), count_before);
 }
 
 TEST_F(T4SehHandlerTest, UnregisterNativeCodeSection_UnknownAddressReturnsSafely) {
     auto [code, nm] = RegisterFakeEntry(64);
     (void)nm;
-    uint32_t count_before = g_t4_code_count;
+    uint32_t count_before = static_cast<uint32_t>(g_t4_code_entries.size());
 
     uint8_t unknown[16] = {};
     UnregisterNativeCodeSection(unknown);
 
     // Registry should be unchanged.
-    EXPECT_EQ(g_t4_code_count, count_before);
+    EXPECT_EQ(g_t4_code_entries.size(), count_before);
     EXPECT_EQ(FindNativeCodeByAddress(code), nm);
 }
 
@@ -341,7 +329,7 @@ TEST_F(T4SehHandlerTest, DoubleRegisterSameAddressDoesNotCrash) {
 
     // Both entries exist; FindNativeCodeByAddress returns first match.
     EXPECT_NE(FindNativeCodeByAddress(fake_code), nullptr);
-    EXPECT_EQ(g_t4_code_count, 2u);
+    EXPECT_EQ(g_t4_code_entries.size(), 2u);
 }
 
 // ══════════════════════════════════════════════════════════════════════════════
@@ -357,7 +345,7 @@ TEST_F(T4SehHandlerTest,
 
     RegisterNativeCodeSection(nm.code, nm.code_size, &nm);
     UnregisterNativeCodeSection(fake_code);
-    uint32_t count_after_first = g_pending_free_count;
+    uint32_t count_after_first = static_cast<uint32_t>(g_pending_free.size());
 
     // Unregister again (second time through a different test path).
     // Since the entry's nm is already nullptr, UnregisterNativeCodeSection won't
@@ -366,7 +354,7 @@ TEST_F(T4SehHandlerTest,
     EnqueueDemotedCode(fake_code, sizeof(fake_code));
 
     // Count should not increase because the address is already tracked.
-    EXPECT_EQ(g_pending_free_count, count_after_first);
+    EXPECT_EQ(g_pending_free.size(), count_after_first);
 }
 
 TEST_F(T4SehHandlerTest, ReclaimDemotedCode_ClearsAllEntries) {
@@ -377,43 +365,38 @@ TEST_F(T4SehHandlerTest, ReclaimDemotedCode_ClearsAllEntries) {
     EnqueueDemotedCode(a, sizeof(a));
     EnqueueDemotedCode(b, sizeof(b));
     EnqueueDemotedCode(c, sizeof(c));
-    ASSERT_EQ(g_pending_free_count, 3u);
+    ASSERT_EQ(g_pending_free.size(), 3u);
 
     ReclaimDemotedCode();
 
-    // All entries should be inactive.
-    EXPECT_EQ(g_pending_free_count, 0u);
-    for (uint32_t i = 0; i < kMaxPendingFreeRegions; ++i) {
-        EXPECT_FALSE(g_pending_free[i].active);
-        EXPECT_EQ(g_pending_free[i].code_start, nullptr);
-        EXPECT_EQ(g_pending_free[i].code_size, 0u);
+    // All entries should be cleared.
+    EXPECT_EQ(g_pending_free.size(), 0u);
     }
 }
 
-TEST_F(T4SehHandlerTest, EnqueueDemotedCode_FullTableDoesNotCrash) {
-    // Fill the table.
-    std::vector<uint8_t> buf(kMaxPendingFreeRegions * 2);
-    for (uint32_t i = 0; i < kMaxPendingFreeRegions; ++i) {
+TEST_F(T4SehHandlerTest, EnqueueDemotedCode_LargeNumberOfRegionsWorks) {
+    // Register 65 entries — previously the fixed 64-entry table would overflow.
+    std::vector<uint8_t> buf(130);
+    for (uint32_t i = 0; i < 65; ++i) {
         EnqueueDemotedCode(&buf[i], 1);
     }
-    EXPECT_EQ(g_pending_free_count, kMaxPendingFreeRegions);
+    EXPECT_EQ(g_pending_free.size(), 65u);
 
-    // The next enqueue should log a warning and drop the entry (no crash).
+    // The next enqueue should also succeed (no crash).
     uint8_t extra = 0;
     EnqueueDemotedCode(&extra, 1);
-    // Count should not increase.
-    EXPECT_EQ(g_pending_free_count, kMaxPendingFreeRegions);
+    EXPECT_EQ(g_pending_free.size(), 66u);
 }
 
 TEST_F(T4SehHandlerTest, EnqueueDemotedCode_RejectsNullCodeStart) {
     EnqueueDemotedCode(nullptr, 64);
-    EXPECT_EQ(g_pending_free_count, 0u);
+    EXPECT_EQ(g_pending_free.size(), 0u);
 }
 
 TEST_F(T4SehHandlerTest, EnqueueDemotedCode_RejectsZeroSize) {
     uint8_t addr = 0;
     EnqueueDemotedCode(&addr, 0);
-    EXPECT_EQ(g_pending_free_count, 0u);
+    EXPECT_EQ(g_pending_free.size(), 0u);
 }
 
 // ══════════════════════════════════════════════════════════════════════════════
@@ -688,29 +671,27 @@ TEST_F(T4SehHandlerTest,
 // Edge Cases
 // ══════════════════════════════════════════════════════════════════════════════
 
-TEST_F(T4SehHandlerTest, RegistryFull_LogsWarningAndRejectsEntry) {
-    // Fill the registry to capacity.
+TEST_F(T4SehHandlerTest, RegistryGrowsDynamically) {
+    // Register 3000 entries (previously the fixed 2048-entry array would overflow).
     uint8_t dummy = 0;
     JitMethod dummy_nm;
     dummy_nm.code      = &dummy;
     dummy_nm.code_size = 1;
 
-    for (uint32_t i = 0; i < kMaxT4CodeEntries; ++i) {
-        // Each entry needs a unique address for lookup to distinguish them.
-        // We reuse the same address but RegisterNativeCodeSection appends regardless.
+    for (uint32_t i = 0; i < 3000; ++i) {
         RegisterNativeCodeSection(&dummy, 1, &dummy_nm, i);
     }
-    ASSERT_EQ(g_t4_code_count, kMaxT4CodeEntries);
+    ASSERT_EQ(g_t4_code_entries.size(), 3000u);
 
-    // One more should be rejected.
+    // One more should also succeed.
     uint8_t extra = 0xFF;
     JitMethod extra_nm;
     extra_nm.code      = &extra;
     extra_nm.code_size = 1;
     RegisterNativeCodeSection(&extra, 1, &extra_nm);
 
-    // Count should not increase.
-    EXPECT_EQ(g_t4_code_count, kMaxT4CodeEntries);
+    // Count should increase.
+    EXPECT_EQ(g_t4_code_entries.size(), 3001u);
 }
 
 TEST_F(T4SehHandlerTest,

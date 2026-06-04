@@ -781,19 +781,19 @@ PatchContext* ApplyPatchFromMemory(const void* data, size_t size,
 #endif
             }
 
-            // ── AOT entry for keep-native methods ────────────────────
-            // The original AOT code is valid for methods whose IL hasn't
-            // changed.  Capture it here so Step A0 dispatch can call it
-            // directly without tiering or deopt overhead.
-            // In JIT mode, direct_ptr may be a trampoline; use the
-            // OriginalAotPtrCallback to unwrap to the real AOT code.
-            if (entry != nullptr && patch_method.aot_entry == nullptr) {
+            // ── Cache dispatch entry for O(1) native code dispatch ──────
+            // Save the HotpatchEntryV0* for this method so Step A/A0 can
+            // read direct_ptr directly without registry lookup.
+            // When direct_ptr is a trampoline (pre-JIT), unwrap it via
+            // OriginalAotPtrCallback to get the real AOT code address.
+            if (entry != nullptr) {
+                patch_method.dispatch_entry = entry;
                 auto original_cb = GetOriginalAotPtrCallback();
                 if (original_cb != nullptr) {
-                    patch_method.aot_entry = original_cb(entry);
-                }
-                if (patch_method.aot_entry == nullptr) {
-                    patch_method.aot_entry = entry->direct_ptr;
+                    auto unwrapped = original_cb(entry);
+                    if (unwrapped != nullptr) {
+                        entry->direct_ptr = unwrapped;
+                    }
                 }
             }
         }
