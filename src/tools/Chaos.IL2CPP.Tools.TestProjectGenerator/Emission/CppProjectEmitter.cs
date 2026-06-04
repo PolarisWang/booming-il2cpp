@@ -630,6 +630,9 @@ public sealed class CppProjectEmitter
             "runtime-patchdata.cpp",         // needed by hotupdate cmake rebuild
             "verification_dispatch.generated.cpp", // needed by hotupdate cmake rebuild
             "patch-host-arrays.cpp",         // needed by hotupdate cmake rebuild
+            "chaos_stub_ChaosFindExternalTypeDescByStableId.cpp", // runtime stubs — needed by hotupdate cmake rebuild
+            "chaos_stub_patch_loader.cpp",   // runtime stubs
+            "chaos_stub_async.cpp",          // runtime stubs
         };
         var keepDirs = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
         {

@@ -254,8 +254,10 @@ public sealed class ValueGenerator
         // Try enum detection for types not in BoundaryValues
         if (IsEnumType(typeName))
         {
-            var csType = CSharpSerializer.MapToCSharpType(typeName);
-            return $"({csType})0";
+            // Use fully-qualified type name for the cast to avoid requiring 'using' directive.
+            // StripAssemblyQualification removes assembly suffix, '+'→'.' converts nested types.
+            var fullType = CSharpSerializer.StripAssemblyQualification(typeName.Replace('+', '.'));
+            return $"({fullType})0";
         }
 
         return _serializer.DefaultExpression(typeName);
@@ -368,8 +370,9 @@ public sealed class ValueGenerator
         if (!typeName.EndsWith("[]"))
             return false;
 
+        // Use fully-qualified element type to avoid requiring 'using' directives.
         var elementType = typeName[..^2];
-        var csElementType = CSharpSerializer.ToCSharpTypeName(elementType);
+        var csElementType = CSharpSerializer.ToQualifiedCSharpType(elementType);
         expr = $"System.Array.Empty<{csElementType}>()";
         return true;
     }
@@ -536,6 +539,10 @@ public sealed class ValueGenerator
 
         if (IsEnumType(returnTypeName))
             return $"((long)(int)({varName}) ^ 0xFF)";
+
+        // Pointer types (void*, int*, etc): cannot box to object, compare directly to null
+        if (returnTypeName.EndsWith('*'))
+            return $"{varName} != null ? 0L : 1L";
 
         // Reference types: flip null check.
         // Boxing via (object) then != null avoids CS0019/CS0037 on value types.

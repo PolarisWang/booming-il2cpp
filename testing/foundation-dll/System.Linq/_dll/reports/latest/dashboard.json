@@ -1,0 +1,15 @@
+{
+  "assembly": "System.Linq",
+  "timestamp": "2026-06-04T12:53:08.363179",
+  "totalChunks": 1,
+  "totalPassed": 678,
+  "totalSubjects": 678,
+  "passRate": "100.00%",
+  "chunks": {
+    "global-ns": {
+      "status": "passed",
+      "passed": 678,
+      "total": 678
+    }
+  }
+}

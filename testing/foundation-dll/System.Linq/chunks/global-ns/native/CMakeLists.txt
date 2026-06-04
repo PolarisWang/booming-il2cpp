@@ -2,7 +2,7 @@
 # DO NOT EDIT — regenerated on each generate
 
 cmake_minimum_required(VERSION 3.20)
-project({{ project_name }} CXX)
+project(chaos_entry CXX)
 set(CMAKE_CXX_STANDARD 20)
 
 # ── Compiler settings ──
@@ -19,25 +19,23 @@ endif()
 
 # ── Config tier ──
 if(NOT DEFINED CHAOS_IL2CPP_CONFIG_TIER)
-  set(CHAOS_IL2CPP_CONFIG_TIER "{{ config_tier }}")
+  set(CHAOS_IL2CPP_CONFIG_TIER "check")
 endif()
 if(CHAOS_IL2CPP_CONFIG_TIER STREQUAL "profile")
-  add_compile_definitions(CHAOS_IL2CPP_CONFIG_TIER={{ defines.config_tier_value }})
-  add_compile_definitions({{ defines.config_tier_macro }})
-  add_compile_definitions(CHAOS_IL2CPP_LOG_LEVEL={{ defines.log_level }})
+  add_compile_definitions(CHAOS_IL2CPP_CONFIG_TIER=CHAOS_IL2CPP_CONFIG_TIER_CHECK)
+  add_compile_definitions(CHAOS_IL2CPP_CONFIG_CHECK)
+  add_compile_definitions(CHAOS_IL2CPP_LOG_LEVEL=3)
 elseif(CHAOS_IL2CPP_CONFIG_TIER STREQUAL "ship")
-  add_compile_definitions(CHAOS_IL2CPP_CONFIG_TIER={{ defines.config_tier_value }})
-  add_compile_definitions({{ defines.config_tier_macro }})
-  add_compile_definitions(CHAOS_IL2CPP_LOG_LEVEL={{ defines.log_level }})
+  add_compile_definitions(CHAOS_IL2CPP_CONFIG_TIER=CHAOS_IL2CPP_CONFIG_TIER_CHECK)
+  add_compile_definitions(CHAOS_IL2CPP_CONFIG_CHECK)
+  add_compile_definitions(CHAOS_IL2CPP_LOG_LEVEL=3)
 else()
-  add_compile_definitions(CHAOS_IL2CPP_CONFIG_TIER={{ defines.config_tier_value }})
-  add_compile_definitions({{ defines.config_tier_macro }})
-  add_compile_definitions(CHAOS_IL2CPP_LOG_LEVEL={{ defines.log_level }})
+  add_compile_definitions(CHAOS_IL2CPP_CONFIG_TIER=CHAOS_IL2CPP_CONFIG_TIER_CHECK)
+  add_compile_definitions(CHAOS_IL2CPP_CONFIG_CHECK)
+  add_compile_definitions(CHAOS_IL2CPP_LOG_LEVEL=3)
 endif()
 
-{{ if is_jit }}
-add_compile_definitions(CHAOS_IL2CPP_JIT_MODE)
-{{ end }}
+
 
 # Tier manager: real implementation from tier_manager.cpp is compiled into
 # the runtime library, so suppress the stub in registration_globals.cpp.
@@ -45,14 +43,14 @@ add_compile_definitions(CHAOS_IL2CPP_HAS_TIER_MANAGER=1)
 
 # ── Verification toggle ──
 if(NOT DEFINED CHAOS_IL2CPP_VERIFICATION_ENABLED)
-  set(CHAOS_IL2CPP_VERIFICATION_ENABLED "{{ verification_enabled }}")
+  set(CHAOS_IL2CPP_VERIFICATION_ENABLED "1")
 endif()
 add_compile_definitions(CHAOS_IL2CPP_VERIFICATION_ENABLED=${CHAOS_IL2CPP_VERIFICATION_ENABLED})
 
 # ── Paths ──
-set(CHAOS_SDK_DIR "{{ sdk_dir }}")
-set(CHAOS_PROJECT_ROOT "{{ project_root }}")
-set(CHAOS_CODEGEN_DIR "{{ codegen_dir }}")
+set(CHAOS_SDK_DIR "D:/agent/booming-il2cpp/testing/foundation-dll/System.Linq/chunks/global-ns/native/codegen")
+set(CHAOS_PROJECT_ROOT "D:/agent/booming-il2cpp")
+set(CHAOS_CODEGEN_DIR "D:/agent/booming-il2cpp/testing/foundation-dll/System.Linq/chunks/global-ns/native/codegen")
 
 # Find chaos SDK — provides chaos::runtime (prebuilt libs + flags)
 find_package(chaos REQUIRED PATHS "${CHAOS_SDK_DIR}")
@@ -123,24 +121,23 @@ set(CHAOS_ENTRY_INCLUDES
     "${CHAOS_PROJECT_ROOT}/src/native/support"
     "${CHAOS_PROJECT_ROOT}/src/native/hot-update"
     "${CHAOS_PROJECT_ROOT}/third_party/unordered_dense/include"
-{{ subject_cmake_include_dirs_code }}
+    "${CHAOS_CODEGEN_DIR}/codegen/generated"
+
     "${CMAKE_CURRENT_SOURCE_DIR}"
-{{ if is_jit }}
-    "${CHAOS_PROJECT_ROOT}/src/native/jit"
-{{ end }}
+
 )
 
-add_executable({{ project_name }} ${CHAOS_ENTRY_SOURCES})
+add_executable(chaos_entry ${CHAOS_ENTRY_SOURCES})
 if(MSVC)
-  target_compile_options({{ project_name }} PRIVATE /GS-)
+  target_compile_options(chaos_entry PRIVATE /GS-)
 endif()
-target_include_directories({{ project_name }} PRIVATE ${CHAOS_ENTRY_INCLUDES})
-target_compile_options({{ project_name }} PRIVATE ${CHAOS_EHA_FLAG})
-target_link_libraries({{ project_name }} PRIVATE chaos::runtime
+target_include_directories(chaos_entry PRIVATE ${CHAOS_ENTRY_INCLUDES})
+target_compile_options(chaos_entry PRIVATE ${CHAOS_EHA_FLAG})
+target_link_libraries(chaos_entry PRIVATE chaos::runtime
     "$<$<CXX_COMPILER_ID:MSVC>:${CHAOS_SDK_DIR}/lib/chaos_pal.lib>"
     "$<$<NOT:$<CXX_COMPILER_ID:MSVC>>:${CHAOS_SDK_DIR}/lib/libchaos_pal.a>"
 )
 if(MSVC)
-  target_link_libraries({{ project_name }} PRIVATE bcrypt)
+  target_link_libraries(chaos_entry PRIVATE bcrypt)
 endif()
-target_link_options({{ project_name }} PRIVATE ${CHAOS_FORCE_MULTIPLE})
+target_link_options(chaos_entry PRIVATE ${CHAOS_FORCE_MULTIPLE})

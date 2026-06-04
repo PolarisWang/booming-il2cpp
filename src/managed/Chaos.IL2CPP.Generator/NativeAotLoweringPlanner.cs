@@ -1605,6 +1605,49 @@ extern ""C"" CHAOS_IL2CPP_INT32 RunNativeAot(CHAOS_IL2CPP_INT32 entryIndex) {{
             sb.AppendLine();
         }
 
+        // ── Span runtime helper declarations (inside codegen namespace) ──
+        // chaos_initialize_array_from_field_data_int32 and
+        // chaos_create_field_data_span_int32 are defined in the object model
+        // (SpanRuntimePrelude at BuildObjectModel line 864) when
+        // RuntimeHelpers.InitializeArray / CreateSpan are reachable.
+        // Page files that call these functions need extern declarations
+        // to compile without C3861.
+        if (_externalRuntimeHelpers?.Any(helper => IsSpanRuntimeHelperSubjectId(helper.SubjectId)) == true)
+        {
+            sb.AppendLine("extern void chaos_initialize_array_from_field_data_int32(CHAOS_IL2CPP_INTPTR chaos_array_value, CHAOS_IL2CPP_INTPTR chaos_field_handle);");
+            sb.AppendLine("extern CHAOS_IL2CPP_INTPTR chaos_create_field_data_span_int32(CHAOS_IL2CPP_INTPTR chaos_field_handle);");
+            sb.AppendLine();
+        }
+
+        // ── Runtime helper declarations (inside codegen namespace) ──
+        // These are DEFINED inside the codegen namespace on page 0 (in the object
+        // model section), so their extern declarations MUST also be inside the
+        // namespace to avoid LNK2019 from namespace-scoped vs global-scope mismatch.
+        // Unused declarations are harmless — the linker only resolves referenced symbols.
+
+        // chaos_string_materialize: conditionally emitted when string IDs exist
+        if (_stringIdMapping is { Count: > 0 })
+        {
+            sb.AppendLine("CHAOS_IL2CPP_INTPTR chaos_string_materialize(CHAOS_IL2CPP_INTPTR chaos_value) noexcept;");
+            sb.AppendLine();
+        }
+
+        // chaos_is_array_store_compatible: always emitted in object model
+        sb.AppendLine("bool chaos_is_array_store_compatible(const chaos_managed_array* chaos_array, CHAOS_IL2CPP_INTPTR chaos_value) noexcept;");
+        sb.AppendLine();
+
+        // ── DefaultInterpolatedStringHandler declarations (inside codegen namespace) ──
+        // These are defined inside the codegen namespace on page 0 (via
+        // EmitDelegateRuntimeSupportDefinitions).  Page files call them via unqualified
+        // lookup within the same namespace, so extern declarations must also be inside
+        // the namespace to avoid LNK2019 (namespace-scoped vs global-scope mismatch).
+        // Unused declarations are harmless — the linker only resolves referenced symbols.
+        sb.AppendLine("void chaos_default_interpolated_string_handler_reset(CHAOS_IL2CPP_INTPTR chaos_handler_ref, CHAOS_IL2CPP_INT32 chaos_literal_length, CHAOS_IL2CPP_INT32 chaos_trailing_count);");
+        sb.AppendLine("void chaos_default_interpolated_string_handler_append_string(CHAOS_IL2CPP_INTPTR chaos_handler_ref, CHAOS_IL2CPP_INTPTR chaos_string_value);");
+        sb.AppendLine("void chaos_default_interpolated_string_handler_append_int32(CHAOS_IL2CPP_INTPTR chaos_handler_ref, CHAOS_IL2CPP_INT32 chaos_value);");
+        sb.AppendLine("CHAOS_IL2CPP_INTPTR chaos_default_interpolated_string_handler_to_string_and_clear(CHAOS_IL2CPP_INTPTR chaos_handler_ref);");
+        sb.AppendLine();
+
         sb.AppendLine("} // namespace chaos::il2cpp::codegen::" + codegenNamespace);
         sb.AppendLine();
 
@@ -1623,28 +1666,6 @@ extern ""C"" CHAOS_IL2CPP_INT32 RunNativeAot(CHAOS_IL2CPP_INT32 entryIndex) {{
         // These functions are DEFINED in the native runtime library (not inside the
         // codegen namespace), so their extern declarations MUST be at global scope
         // to avoid LNK2001 unresolved external symbols.
-
-        // chaos_string_materialize: conditionally emitted when string IDs exist
-        if (_stringIdMapping is { Count: > 0 })
-        {
-            sb.AppendLine("CHAOS_IL2CPP_INTPTR chaos_string_materialize(CHAOS_IL2CPP_INTPTR chaos_value) noexcept;");
-            sb.AppendLine();
-        }
-
-        // chaos_is_array_store_compatible: always emitted in object model
-        sb.AppendLine("bool chaos_is_array_store_compatible(const chaos_managed_array* chaos_array, CHAOS_IL2CPP_INTPTR chaos_value) noexcept;");
-        sb.AppendLine();
-
-        // chaos_default_interpolated_string_handler_*: emitted unconditionally in the
-        // shared header. These are defined in the object model section (page 0) when the
-        // family uses DefaultInterpolatedStringHandler helpers. Unused extern function
-        // declarations are harmless — the linker only resolves symbols that are actually
-        // referenced from each translation unit.
-        sb.AppendLine("void chaos_default_interpolated_string_handler_reset(CHAOS_IL2CPP_INTPTR chaos_handler_ref, CHAOS_IL2CPP_INT32 chaos_literal_length, CHAOS_IL2CPP_INT32 chaos_trailing_count);");
-        sb.AppendLine("void chaos_default_interpolated_string_handler_append_string(CHAOS_IL2CPP_INTPTR chaos_handler_ref, CHAOS_IL2CPP_INTPTR chaos_string_value);");
-        sb.AppendLine("void chaos_default_interpolated_string_handler_append_int32(CHAOS_IL2CPP_INTPTR chaos_handler_ref, CHAOS_IL2CPP_INT32 chaos_value);");
-        sb.AppendLine("CHAOS_IL2CPP_INTPTR chaos_default_interpolated_string_handler_to_string_and_clear(CHAOS_IL2CPP_INTPTR chaos_handler_ref);");
-        sb.AppendLine();
 
         // ── chaos_external_runtime_* declarations (inside codegen namespace) ──
         // These helpers are DEFINED on page 0 inside the codegen namespace, so their
@@ -3807,9 +3828,10 @@ public sealed partial class NativeAotLoweringPlanner
 
             if (IsSubjectMethod(method.SubjectId))
             {
-                int subjectIdx = ExtractSubjectIndex(method.SubjectId);
+            int subjectIdx = ExtractSubjectIndex(method.SubjectId);
                 if (subjectIdx < 0)
                     subjectIdx = subjectEntries.Count; // sequential index for CombinedSubjects
+
                 subjectEntries.Add(new ScriptObject
                 {
                     ["subject_index"] = subjectIdx,
@@ -3992,18 +4014,39 @@ public sealed partial class NativeAotLoweringPlanner
     /// <summary>
     /// Check whether a method is a subject method.
     /// When _subjectMethodSubjectIds is set (from --subject-methods), uses set-based
-    /// lookup; otherwise falls back to naming convention (::Subject_N / ::CustomEntrySubject_N).
+    /// lookup first (most specific); falls back to naming conventions for chunks
+    /// where the constructed SubjectIds don't match AOT IR naming (e.g., when
+    /// AutoTestGenerator's generatedMethodId differs from actual C# method names).
     /// </summary>
     private bool IsSubjectMethod(string subjectId)
     {
-        // 1. Exact match against --subject-methods IDs (most specific).
-        if (_subjectMethodSubjectIds != null && _subjectMethodSubjectIds.Contains(subjectId))
-            return true;
+        // 0. Always exclude Benchmark_ wrappers — they call instance methods on
+        //    null `this` without NullReferenceException handling, causing native
+        //    crashes (STATUS_ACCESS_VIOLATION or STATUS_STACK_BUFFER_OVERRUN) in
+        //    AOT dispatch.  The corresponding [Fact] variant wraps the same call
+        //    in Assert.Throws<NullReferenceException> and is the correct
+        //    correctness-verification entry point.
+        if (subjectId.Contains("::Benchmark_", StringComparison.Ordinal))
+            return false;
+
+        // 1. When --subject-methods is provided, ONLY exact matches are valid.
+        //    The CombinedSubjects prefix fallback below would also capture SDK
+        //    infrastructure methods (Assert.AreEqual, ResultToLong, etc.) from
+        //    the CombinedSubjects assembly, inflating kSubjectEntryCount to
+        //    4000-5000 instead of the actual 200-300 Fact wrappers.
+        if (_subjectMethodSubjectIds != null)
+            return _subjectMethodSubjectIds.Contains(subjectId);
 
         // 2. CombinedSubjects methods: any method from the subject-assembly DLL
         //    (assembly name "CombinedSubjects") is a subject method by definition.
+        //    Exclude constructors (.ctor, .cctor) and closures (<...>) — these are
+        //    infrastructure methods generated by the compiler, not subject wrappers.
         if (subjectId.StartsWith("CombinedSubjects/", StringComparison.Ordinal))
+        {
+            if (subjectId.Contains(".ctor") || subjectId.Contains('<'))
+                return false;
             return true;
+        }
 
         // 3. Match ::Subject_N pattern (numbered subject wrappers).
         const string subjectPrefix = "::Subject_";
