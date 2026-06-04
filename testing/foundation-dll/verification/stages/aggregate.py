@@ -24,8 +24,8 @@ def run_aggregate(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageRes
 
     foundation_dir = ctx.foundation_dir
     assembly = ctx.assembly
-    chunks_dir = foundation_dir / assembly / "chunks"
-    reports_dir = foundation_dir / assembly / "_dll" / "reports"
+    chunks_dir = foundation_dir / "chunks"
+    reports_dir = foundation_dir / "_dll" / "reports"
     latest_dir = reports_dir / "latest"
     history_dir = reports_dir / "history"
 
@@ -113,6 +113,13 @@ def run_aggregate(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageRes
                 "failed": hu_data.get("failed", 0),
                 "allSemantic": hu_data.get("allSemantic", False),
                 "allRevert": hu_data.get("allRevert", False),
+                "exitCode": hu_data.get("exitCode", 0),
+                "patchDataUsed": hu_data.get("patchDataUsed", False),
+                "patchFailed": hu_data.get("patchFailed", False),
+                "truncated": hu_data.get("truncated", False),
+                "crash": hu_data.get("crash", False),
+                "assertFailed": hu_data.get("assertFailed", 0),
+                "semanticChangedCount": hu_data.get("semanticChangedCount", 0),
             }
         else:
             summary["hotupdate"] = {"status": "no_results"}

@@ -3,14 +3,16 @@
 Runs entry.exe --benchmark-all N from the chunk's native directory.
 Writes both chunk-local benchmark.json and unified-format records.jsonl.
 
-Statistical QC (M1): includes warmup iterations, multi-round sampling,
-per-method mean/stddev/CV, and IQR-based outlier removal.
+Format: line-by-line JSON (each method one complete JSON line, summary at end).
+Adaptive iteration: probe with 10 iterations, scale to ~50ms total per method.
+Adaptive sampling: 3-10 rounds, early stop when median CV < 5%.
 """
 from __future__ import annotations
 
 import json
 import math
 import os
+import re
 import subprocess
 import time
 from collections.abc import Sequence
@@ -19,10 +21,6 @@ from pathlib import Path
 from typing import Any
 
 from verification.orchestration.context import ChunkContext, StageResult
-
-_ITERATIONS = 1000  # default iterations per method
-_WARMUP_ROUNDS = 2  # warmup rounds before sampling (discarded)
-_SAMPLE_ROUNDS = 5  # sampling rounds for statistical QC
 
 
 def _mean(values: Sequence[float]) -> float:
@@ -133,45 +131,66 @@ def _compute_summary(stats: list[dict]) -> dict:
         "elapsedMilliseconds": sum(elapsed_means),
         "meanSampleCount": round(_mean(sample_sizes), 1) if sample_sizes else 0,
         "totalOutliers": total_outliers,
-        "warmupRounds": _WARMUP_ROUNDS,
-        "sampleRounds": _SAMPLE_ROUNDS,
     }
 
 
+def _parse_benchmark_lines(stdout: str) -> tuple[list[dict], dict]:
+    """Parse line-by-line JSON benchmark output from entry.exe stdout.
 
-def _strip_log_lines(text: str) -> str:
-    """Remove log lines (e.g. [2026-06-03T...][LEVEL] ...) and progress
-    comments (/*PROGRESS ...*/) from stdout.
-
-    The native runtime may interleave CHAOS_IL2CPP_LOG_DEBUG/INFO lines
-    with benchmark JSON output. Stripping them lets the JSON parser work.
+    Each method produces one complete JSON line ending with \\n.
+    The last line is {"summary":{...}}.
+    Stray lines that aren't valid JSON are silently skipped.
     """
-    import re
-    # Match [datetime][LEVEL] anchor anywhere on a line (not just start-of-line),
-    # then consume the rest of the line as the log message.
-    text = re.sub(r"\[\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\]\[[A-Za-z]+\].*$", "", text, flags=re.MULTILINE)
-    # Remove /*PROGRESS …*/ comments inserted by RunBenchmarkAllMode
-    text = re.sub(r"/\*PROGRESS[^*]*\*/", "", text)
-    return text.strip()
-
-
-def _parse_benchmark_output(stdout: str) -> list[dict]:
-    """Parse JSON benchmark output from entry.exe stdout."""
-    # Strip interleaved log lines first
-    clean = _strip_log_lines(stdout)
-    if not clean:
-        return []
-    # entry.exe may crash after the last method, truncating `]}`.
-    # Try normal parse first, then repair if needed.
-    for attempt in (clean, clean.rstrip() + "]}", clean.rstrip() + "\n]}"):
+    lines = stdout.strip().split('\n')
+    results = []
+    summary = {}
+    for line in lines:
+        line = line.strip()
+        if not line:
+            continue
         try:
-            parsed = json.loads(attempt)
-            break
+            obj = json.loads(line)
         except json.JSONDecodeError:
             continue
-    else:
-        return []
-    return parsed.get("benchmarkAll", [])
+        if 'summary' in obj:
+            summary = obj['summary']
+        else:
+            results.append(obj)
+    return results, summary
+
+
+def _calibrate_iterations(exe_path: Path, timeout: int, entry_count: int = 0) -> int:
+    """Probe-run with 10 iterations, scale to target ~50ms total per method.
+
+    For large chunks (>5000 entries), caps iterations at 10000 instead of 50000
+    to keep total benchmark time reasonable.
+    """
+    result = _run_entry_once(exe_path, 10, timeout)
+    if result is None or not result.stdout:
+        return 1000  # fallback
+
+    data, _ = _parse_benchmark_lines(result.stdout or "")
+    if not data:
+        return 1000  # fallback
+
+    # Collect positive elapsed times to estimate per-call cost
+    elapsed = [
+        float(r['elapsedMilliseconds']) for r in data
+        if isinstance(r.get('elapsedMilliseconds'), (int, float))
+        and r['elapsedMilliseconds'] > 0
+    ]
+    if not elapsed:
+        return 10000  # all very fast, use high default
+
+    # Per-call ms = median elapsed / 10 (probe iterations)
+    median_elapsed = sorted(elapsed)[len(elapsed) // 2]
+    per_call_ms = median_elapsed / 10.0
+    target_ms = 50.0
+    iterations = max(100, int(target_ms / max(per_call_ms, 0.001)))
+
+    # Cap: 50000 normally, 10000 for large chunks
+    cap = 10000 if entry_count > 5000 else 50000
+    return min(iterations, cap)
 
 
 def _run_entry_once(exe_path: Path, iterations: int, timeout: int) -> subprocess.CompletedProcess | None:
@@ -194,7 +213,7 @@ def _run_entry_once(exe_path: Path, iterations: int, timeout: int) -> subprocess
         partial = e.stdout  # partial stdout captured before timeout
         if partial and partial.strip():
             # Return a fake CompletedProcess with partial stdout so the caller
-            # can attempt JSON repair and salvage whatever benchmark data exists.
+            # can attempt to salvage whatever benchmark data exists.
             return subprocess.CompletedProcess(
                 args=e.cmd, returncode=-1,
                 stdout=partial, stderr="",
@@ -247,8 +266,18 @@ def _write_records_jsonl(
             f.write(json.dumps(method_record, ensure_ascii=False, separators=(",", ":")) + "\n")
 
 
+def _get_entry_count(exe_path: Path) -> int:
+    """Read kSubjectEntryCount from the generated native-aot.generated.cpp."""
+    subject_file = exe_path.parent / "subjects" / "native-aot.generated.cpp"
+    if not subject_file.exists():
+        return 0
+    content = subject_file.read_text(encoding="utf-8", errors="replace")
+    m = re.search(r"kSubjectEntryCount\s*=\s*(\d+)", content)
+    return int(m.group(1)) if m else 0
+
+
 def run_benchmark_chunk(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
-    """Benchmark stage: run chunk's entry.exe --benchmark-all N with statistical QC."""
+    """Benchmark stage: run chunk's entry.exe --benchmark-all N with adaptive settings."""
     start = time.perf_counter()
 
     exe_path = ctx.entry_exe_path
@@ -259,63 +288,56 @@ def run_benchmark_chunk(ctx: ChunkContext, stages: dict[str, StageResult]) -> St
             duration_ms=int((time.perf_counter() - start) * 1000),
         )
 
-    # Cap warmup at the stage timeout.  Some chunks may have methods that
-    # hang (infinite loop / GC state accumulation) — treat those as skip
-    # rather than hard error so the rest of the pipeline can proceed.
-    iterations = _ITERATIONS
-    timeout = ctx.stage_timeout_seconds or 300
-    warmup = _WARMUP_ROUNDS
-    samples = _SAMPLE_ROUNDS
-    timeout = max(timeout, 30)
+    timeout = max(ctx.stage_timeout_seconds or 300, 30)
+    entry_count = _get_entry_count(exe_path)
 
-    # Dynamically reduce parameters for large chunks (>5000 entries)
-    # so the benchmark completes in reasonable time.
-    subject_file = exe_path.parent / "subjects" / "native-aot.generated.cpp"
-    if subject_file.exists():
-        import re
-        content = subject_file.read_text(encoding="utf-8", errors="replace")
-        m = re.search(r"kSubjectEntryCount\s*=\s*(\d+)", content)
-        if m:
-            entry_count = int(m.group(1))
-            if entry_count > 5000:
-                old_warmup, old_samples, old_timeout = warmup, samples, timeout
-                warmup = 1
-                samples = 2
-                timeout = min(timeout, 120)
-                print(f"  [benchmark] large chunk detected ({entry_count} entries): "
-                      f"warmup {old_warmup}→{warmup}, samples {old_samples}→{samples}, "
-                      f"timeout {old_timeout}→{timeout}s")
+    # Phase 0: Calibrate iteration count via probe run
+    print(f"  [benchmark] {exe_path} --benchmark-all (adaptive)")
+    iterations = _calibrate_iterations(exe_path, timeout, entry_count)
+    print(f"  [benchmark] calibrated iterations={iterations}, entries={entry_count}, timeout={timeout}s")
 
-    print(f"  [benchmark] {exe_path} --benchmark-all {iterations}")
-    print(f"  [benchmark] warmup={warmup}, samples={samples} (statistical QC, M1)")
-
-    # Phase 1: Warmup — run without collecting metrics
-    for w in range(warmup):
-        print(f"  [benchmark] warmup round {w + 1}/{warmup}...")
-        result = _run_entry_once(exe_path, iterations, timeout)
-        if result is None:
-            print(f"  [benchmark] warmup round {w + 1} timed out after {timeout}s — skipping benchmark")
-            return StageResult(
-                stage="benchmark", status="skipped",
-                summary=f"benchmark timed out during warmup round {w + 1} ({timeout}s timeout)",
-                duration_ms=int((time.perf_counter() - start) * 1000),
-            )
-
-    # Phase 2: Sampling — collect metrics across multiple rounds
+    # Phase 1: Adaptive sampling rounds (3-10, early stop on CV < 5%)
+    max_rounds = 10
+    min_rounds = 3
     all_rounds: list[list[dict]] = []
-    for s in range(samples):
-        print(f"  [benchmark] sample round {s + 1}/{samples}...")
+
+    for s in range(max_rounds):
+        print(f"  [benchmark] sampling round {s + 1}/{max_rounds}...")
         result = _run_entry_once(exe_path, iterations, timeout)
         if result is None:
+            # If we have partial data from previous rounds, use it
+            if all_rounds:
+                break
             return StageResult(
                 stage="benchmark", status="error",
-                summary=f"benchmark timed out during sample round {s + 1}",
+                summary=f"benchmark timed out during sampling round {s + 1}",
                 duration_ms=int((time.perf_counter() - start) * 1000),
             )
 
-        parsed = _parse_benchmark_output(result.stdout or "")
+        parsed, _ = _parse_benchmark_lines(result.stdout or "")
         round_results: list[dict] = [dict(r) if isinstance(r, dict) else {} for r in parsed]
         all_rounds.append(round_results)
+
+        # Early stop: after reaching min_rounds, check median CV across last 3 rounds
+        if s >= min_rounds - 1 and len(all_rounds) >= 3:
+            num_methods = len(all_rounds[0])
+            cvs = []
+            for method_idx in range(num_methods):
+                elapsed = []
+                for rd in all_rounds[-3:]:
+                    if method_idx < len(rd):
+                        e = rd[method_idx].get('elapsedMilliseconds', 0)
+                        if isinstance(e, (int, float)) and e >= 0:
+                            elapsed.append(float(e))
+                if len(elapsed) >= 3:
+                    mean_e = _mean(elapsed)
+                    if mean_e > 0:
+                        cvs.append(_stddev(elapsed, mean_e) / mean_e)
+            if cvs:
+                median_cv = sorted(cvs)[len(cvs) // 2]
+                if median_cv < 0.05:
+                    print(f"  [benchmark] early stop at round {s + 1} (median CV={median_cv:.4f} < 5%)")
+                    break
 
     if not all_rounds or not all_rounds[0]:
         ctx.results_dir.mkdir(parents=True, exist_ok=True)
@@ -323,7 +345,7 @@ def run_benchmark_chunk(ctx: ChunkContext, stages: dict[str, StageResult]) -> St
         result_path.write_text(
             json.dumps({"exitCode": -1, "iterations": iterations, "methodCount": 0,
                         "results": [], "summary": {}, "stderr": "no data",
-                        "warmupRounds": warmup, "sampleRounds": samples},
+                        "sampleRounds": len(all_rounds)},
                        indent=2),
             encoding="utf-8",
         )
@@ -334,12 +356,11 @@ def run_benchmark_chunk(ctx: ChunkContext, stages: dict[str, StageResult]) -> St
             duration_ms=duration_ms,
         )
 
-    # Phase 3: Per-method statistical computation
+    # Phase 2: Per-method statistical computation
     method_count = len(all_rounds[0])
     per_method_stats: list[dict] = []
 
     for method_idx in range(method_count):
-        # Collect elapsed, ops, alloc across all sample rounds
         elapsed_samples: list[float] = []
         ops_samples: list[float] = []
         alloc_samples: list[float] = []
@@ -360,10 +381,10 @@ def run_benchmark_chunk(ctx: ChunkContext, stages: dict[str, StageResult]) -> St
         method_stats = _compute_per_method_stats(elapsed_samples, ops_samples, alloc_samples)
         per_method_stats.append(method_stats)
 
-    # Phase 4: Aggregate summary
+    # Phase 3: Aggregate summary
     summary = _compute_summary(per_method_stats)
 
-    # Phase 5: Write output files
+    # Phase 4: Write output files
     ctx.results_dir.mkdir(parents=True, exist_ok=True)
     result_path = ctx.results_dir / "benchmark.json"
 
@@ -389,8 +410,7 @@ def run_benchmark_chunk(ctx: ChunkContext, stages: dict[str, StageResult]) -> St
         "results": flat_results,
         "summary": summary,
         "perMethodStats": per_method_stats,
-        "warmupRounds": warmup,
-        "sampleRounds": samples,
+        "sampleRounds": len(all_rounds),
         "stderr": "",
     }
     result_path.write_text(json.dumps(result_data, indent=2), encoding="utf-8")
@@ -401,11 +421,11 @@ def run_benchmark_chunk(ctx: ChunkContext, stages: dict[str, StageResult]) -> St
     status = "passed" if method_count > 0 else "error"
     duration_ms = int((time.perf_counter() - start) * 1000)
     print(f"  [benchmark] {status}: {method_count} methods "
-          f"({samples} samples, {warmup} warmup, {duration_ms}ms)")
+          f"({len(all_rounds)} samples, {duration_ms}ms, {iterations} iterations)")
 
     return StageResult(
         stage="benchmark", status=status,
-        summary=f"{status}: {method_count} methods, {samples} samples, "
+        summary=f"{status}: {method_count} methods, {len(all_rounds)} samples, "
                 f"{summary.get('totalOutliers', 0)} outliers removed",
         details=result_data,
         duration_ms=duration_ms,

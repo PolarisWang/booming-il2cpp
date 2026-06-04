@@ -348,6 +348,13 @@ static int RunHotupdateMode(const char* patchDataPath = nullptr) {
     bool* baseline_ok = new bool[kCount]();
     bool* baseline_caught = new bool[kCount]();
     int64_t* baseline_value = new int64_t[kCount]();
+#if defined(_WIN32)
+    // Top-level SEH guard: if an access violation occurs during method dispatch
+    // (e.g. uninitialized runtime state, unresolved external dependency), catch
+    // it here so we can output partial JSON and diagnostic information rather
+    // than dying silently with exitCode 0xC0000005.
+    __try {
+#endif
     printf("\"baselineFact\":[");
     for (int si = 0; si < kCount; si++) {
         int i = kSubjectSlotMap[si];
@@ -508,6 +515,20 @@ static int RunHotupdateMode(const char* patchDataPath = nullptr) {
     printf("\"semanticChangedCount\":%d,", semantic_changed_count);
     printf("\"patchedAssertFailed\":%d}\n", patched_assert_failed);
     std::fflush(stdout);
+#if defined(_WIN32)
+    } __except(EXCEPTION_EXECUTE_HANDLER) {
+        std::fprintf(stderr, "[hotupdate] CRASH: RunHotupdateMode failed, exception code=0x%X\n",
+                     GetExceptionCode());
+        // Output partial JSON terminator so the Python pipeline can parse what
+        // was flushed before the crash rather than receiving empty/malformed data.
+        printf("\"_crash\":true}\n");
+        std::fflush(stdout);
+        delete[] baseline_ok;
+        delete[] baseline_caught;
+        delete[] baseline_value;
+        return 1;
+    }
+#endif
     delete[] baseline_ok;
     delete[] baseline_caught;
     delete[] baseline_value;
