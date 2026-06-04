@@ -55,6 +55,15 @@ public:
     void EmitAddRI(uint8_t dst, int32_t imm) override {
         ::chaos::il2cpp::jit::EmitAddRI(buf_, dst, imm);
     }
+    // 3-operand ADD: dst = src + imm. On x64 this is LEA (the IEncoder default
+    // is a no-op, but jit_engine.cpp calls this for frame pointer setup on all arches).
+    void EmitAddRI(uint8_t dst, uint8_t src, int32_t imm) noexcept override {
+        if (imm == 0) {
+            ::chaos::il2cpp::jit::EmitMovRR(buf_, dst, src);
+        } else {
+            ::chaos::il2cpp::jit::EmitLeaRM(buf_, dst, src, imm);
+        }
+    }
     void EmitAddMR(uint8_t base, int32_t disp, uint8_t src) override {
         ::chaos::il2cpp::jit::EmitAddMR(buf_, base, disp, src);
     }

@@ -40,11 +40,14 @@ struct PatchMethod {
     const uint8_t*  signature_blob  = nullptr;   // method signature blob
     uint32_t        signature_len   = 0;          // signature blob length
 
-    // ── AOT native code entry point ──────────────────────────────────
-    // Pre-compiled AOT code pointer. Set during patch method initialization.
-    // Non-null = AOT code is available — Step A dispatch calls it directly
-    // without tiering or deoptimization.  JIT-specific fields below are
-    // irrelevant when aot_entry is set.
+    // ── AOT (or JIT) native code entry point ───────────────────────────
+    // Dual semantics (L1):
+    //   AOT-only mode → pre-compiled AOT code pointer, set during init.
+    //   JIT/hybrid mode → may hold QuickJIT code (set by DP1-a transfer
+    //     or precode path).  JIT code in this field skips GC_TRANSITION
+    //     (assumes self-managed GC contract).  When T4 code is available
+    //     this field's value is shadowed by the tier_state dispatch path.
+    //   Non-null = native code is available for Step A/A0 dispatch.
     void*           aot_entry       = nullptr;
 
     void*           cached_ir       = nullptr;   // cached IRMethod (lazy, null = not lowered)

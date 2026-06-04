@@ -969,7 +969,14 @@ static void Handle_NewArr(FastFrame& frame, const interpreter::IRInstruction& in
     }
 
     // Fallback: reference-type or non-primitive array (existing behavior).
-    arr->elements.resize(len);
+    // resize() may throw std::bad_alloc; catch and convert to interpreter error.
+    try {
+        arr->elements.resize(len);
+    } catch (const std::exception&) {
+        frame.threw_exception = true;
+        frame.pc = 9999;
+        return;
+    }
     frame.PushObj_NC(arr);
     ++frame.pc;
 }
@@ -1146,8 +1153,10 @@ static void Handle_Call_DoRaw(FastFrame& frame,
     if (dret.has_value) {
         if (dret.tag == static_cast<uint8_t>(interpreter::ValueTag::Struct) &&
             dret.struct_data != nullptr) {
-            frame.stack[frame.sp] = reinterpret_cast<uint64_t>(dret.struct_data);
+            // Register TrackPool FIRST (M2) — close the allocation-to-tracking
+            // window so struct_data is never leaked.
             frame.TrackPool(dret.struct_data, [](void* p) noexcept { CHAOS_IL2CPP_DOMAIN_CURRENT_FREE(p); });
+            frame.stack[frame.sp] = reinterpret_cast<uint64_t>(dret.struct_data);
         } else {
             frame.stack[frame.sp] = dret.value;
         }
@@ -2996,6 +3005,7 @@ bool FastExecute(FastFrame& frame,
             frame.osr_reenable = false;  // one-shot
             if (++frame.loop_counter >= threshold) {
                 if (TryFastOsrPromotion(frame)) continue;  // OSR took over
+                frame.loop_counter = 0;  // M3: reset on failure so counter doesn't saturate
             }
         } else if (frame.pc == prev_pc + 1) {
             // Sequential execution — slowly decay loop_counter to prevent
