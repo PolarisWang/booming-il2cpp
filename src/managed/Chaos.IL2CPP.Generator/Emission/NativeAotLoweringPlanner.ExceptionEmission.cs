@@ -3575,8 +3575,11 @@ private void EmitLinearInitObj(StringBuilder builder, AotCoreIrInstructionArtifa
 				return;
 			}
 		default:
-			throw new NotSupportedException($"native-aot structured EH linear lowering does not support callvirt dispatch kind '{instruction.DispatchKindCode}'.");
-		}
+			// Unknown dispatch kind — fall back to external runtime dispatch
+			// instead of throwing (which would stub the entire method).
+			EmitLinearCallTarget(builder, instruction, indentation, enforceInstanceNullCheck: true);
+			return;
+	}
 	}
 
 	private void EmitLinearDelegateInvoke(StringBuilder builder, AotCoreIrInstructionArtifact instruction, string indentation)
