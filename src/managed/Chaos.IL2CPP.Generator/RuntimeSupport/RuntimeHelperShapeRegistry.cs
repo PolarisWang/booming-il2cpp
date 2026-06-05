@@ -3617,6 +3617,10 @@ public sealed partial class NativeAotLoweringPlanner
             static string? MakeVectorInlineExpression(string callee, IReadOnlyList<string> paramTypes,
                 string templateFn, bool requiresScalar)
             {
+                // DISABLED: AOT eval stack carries Vector128 as CHAOS_IL2CPP_INTPTR (8 bytes)
+                // but carrier types are 16-32 byte structs. ABI mismatch.
+                // TODO: Fix AOT codegen to support large value types on eval stack.
+                return null;
                 var elemType = ExtractVectorElementType(callee, paramTypes);
                 if (elemType == null) return null;
                 var cppType = MapTypeArgToCppType(elemType);
