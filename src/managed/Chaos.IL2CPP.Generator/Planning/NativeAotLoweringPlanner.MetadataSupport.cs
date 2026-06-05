@@ -292,17 +292,18 @@ public sealed partial class NativeAotLoweringPlanner
         {
             foreach (var instruction in method.Instructions)
             {
-                if (!TryParseAttributeGetterMethodSubjectId(instruction.Callee, out var attributeTypeSubjectId, out var memberName) ||
+                var callee = ManagedNaming.NormalizeSubjectIdAssembly(instruction.Callee);
+                if (!TryParseAttributeGetterMethodSubjectId(callee, out var attributeTypeSubjectId, out var memberName) ||
                     string.IsNullOrEmpty(attributeTypeSubjectId) ||
                     string.IsNullOrEmpty(memberName) ||
-                    _methodsBySubjectId.ContainsKey(instruction.Callee!) ||
+                    _methodsBySubjectId.ContainsKey(callee!) ||
                     !materializedAttributeTypes.Contains(attributeTypeSubjectId!))
                 {
                     continue;
                 }
 
                 var fieldSubjectId = ResolveAttributeStorageField(attributeTypeSubjectId!, memberName!);
-                syntheticGetterFieldByMethodSubjectId[ManagedNaming.NormalizeSubjectIdAssembly(instruction.Callee!)] = fieldSubjectId;
+                syntheticGetterFieldByMethodSubjectId[ManagedNaming.NormalizeSubjectIdAssembly(callee!)] = fieldSubjectId;
                 additionalReferenceTypes.Add(attributeTypeSubjectId!);
                 additionalInstanceFields.Add(fieldSubjectId);
             }

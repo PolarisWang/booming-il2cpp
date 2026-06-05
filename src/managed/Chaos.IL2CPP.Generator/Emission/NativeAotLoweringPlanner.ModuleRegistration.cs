@@ -164,7 +164,8 @@ public sealed partial class NativeAotLoweringPlanner
             foreach (var instruction in method.Instructions)
             {
                 if (!string.IsNullOrEmpty(instruction.Callee) &&
-                    _externalRuntimeSubjects.ContainsKey(instruction.Callee))
+                    _externalRuntimeSubjects.ContainsKey(
+                        ManagedNaming.NormalizeSubjectIdAssembly(instruction.Callee)))
                 {
                     methodsCallingExternal.Add(method.SubjectId);
                     break;

@@ -217,6 +217,11 @@ public sealed partial class NativeAotLoweringPlanner
                 if (string.IsNullOrEmpty(callee))
                     continue;
 
+                // Canonicalize assembly prefix so dispatch table keys match
+                // the normalized SubjectIds used by TryCreateExternalRuntimeHelperDefinition
+                // and the downstream helperSymbolBySubjectId lookup.
+                callee = ManagedNaming.NormalizeSubjectIdAssembly(callee);
+
                 // Already in method dictionary → direct call, no dispatch table needed
                 if (_methodsBySubjectId.ContainsKey(callee))
                     continue;
@@ -273,6 +278,10 @@ public sealed partial class NativeAotLoweringPlanner
                 string? callee = instruction.Callee ?? instruction.TargetReference?.SubjectId;
                 if (string.IsNullOrEmpty(callee))
                     continue;
+
+                // Canonicalize assembly prefix so dictionary keys match
+                // _externalRuntimeSubjects (normalized at CollectExternalRuntimeDispatchEntries).
+                callee = ManagedNaming.NormalizeSubjectIdAssembly(callee);
 
                 // Only consider callees in the external runtime dispatch table.
                 if (!_externalRuntimeSubjects.ContainsKey(callee))
@@ -881,6 +890,12 @@ if (!TryCreateExternalRuntimeHelperDefinition(targetSubjectId, out var helperDef
         // Try Callee first, then TargetReference SubjectId for generic instantiation calls
         // where Callee may be null but the closed-form SubjectId is in TargetReference.
         string? calleeOrTarget = instruction.Callee ?? instruction.TargetReference?.SubjectId;
+        if (!string.IsNullOrEmpty(calleeOrTarget))
+        {
+            // Canonicalize assembly prefix so dictionary lookups match normalized keys.
+            calleeOrTarget = ManagedNaming.NormalizeSubjectIdAssembly(calleeOrTarget);
+        }
+
         if (TryResolveDirectInvocationTarget(calleeOrTarget) is { } directInvocationTarget)
         {
             return directInvocationTarget;
@@ -890,7 +905,7 @@ if (!TryCreateExternalRuntimeHelperDefinition(targetSubjectId, out var helperDef
         // These are cross-assembly calls that would otherwise fall through to
         // chaos_external_runtime_* stubs — we dispatch via startup-time-resolved
         // function pointer table instead.
-        string? tableKey = instruction.Callee ?? instruction.TargetReference?.SubjectId;
+        string? tableKey = calleeOrTarget;
         if (!string.IsNullOrEmpty(tableKey) &&
             _externalRuntimeSubjects.TryGetValue(tableKey, out int tableIndex))
         {

@@ -2194,13 +2194,17 @@ extern ""C"" CHAOS_IL2CPP_INT32 RunNativeAot(CHAOS_IL2CPP_INT32 entryIndex) {{
         out string nativeSymbol)
     {
         string? callee = instruction.Callee ?? instruction.TargetReference?.SubjectId;
-        if (callee != null && _moduleSymbolTable.TryGetValue(callee, out nativeSymbol))
+        if (callee != null)
         {
-            // Only use the local symbol when the invocation target doesn't already
-            // have a DirectNativeSymbol (which is already optimized) and isn't
-            // going through the hotpatch path (handled earlier).
-            if (invocationTarget.DirectNativeSymbol == null)
-                return true;
+            callee = ManagedNaming.NormalizeSubjectIdAssembly(callee);
+            if (_moduleSymbolTable.TryGetValue(callee, out nativeSymbol))
+            {
+                // Only use the local symbol when the invocation target doesn't already
+                // have a DirectNativeSymbol (which is already optimized) and isn't
+                // going through the hotpatch path (handled earlier).
+                if (invocationTarget.DirectNativeSymbol == null)
+                    return true;
+            }
         }
         nativeSymbol = null!;
         return false;
@@ -2215,6 +2219,11 @@ extern ""C"" CHAOS_IL2CPP_INT32 RunNativeAot(CHAOS_IL2CPP_INT32 entryIndex) {{
         index = 0;
         if (string.IsNullOrEmpty(callee))
             return false;
+
+        // Canonicalize assembly prefix so cross-assembly detection works
+        // even when callee and _assemblyName use different aliases
+        // (e.g. "System.Runtime.InteropServices" vs "System.Private.CoreLib").
+        callee = ManagedNaming.NormalizeSubjectIdAssembly(callee);
 
         // Extract assembly name from callee SubjectId (format: "AssemblyName/Type::Method").
         int slashIndex = callee.IndexOf('/');
