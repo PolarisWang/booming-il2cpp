@@ -781,15 +781,44 @@ static int RunPatchMode(string dllPath, string? namespaceFilter, string? outputD
                     sb.AppendLine($"{preludeStr}            {callExpr};");
                     if (hasRefParam)
                     {
-                        // Assert out/ref values (same as baseline)
-                        // In patch mode we can't know the expected values, so skip
+                        // Encode ref/out values into the return so hotupdate can detect
+                        // semantic changes in ref/out parameters.  XOR each ref/out value
+                        // (cast to long) into the return sentinel.  If any ref/out value
+                        // differs between baseline and patch, the combined XOR changes.
+                        var refParts = new List<string>();
+                        for (int rvi = 0; rvi < refVarCounter; rvi++)
+                        {
+                            var vn = $"__ref_{mi}_{set.SetIndex}_{rvi}";
+                            refParts.Add($"((long)({vn}) ^ 0xFF)");
+                        }
+                        sb.AppendLine("            return " + string.Join(" ^ ", refParts) + ";");
                     }
-                    sb.AppendLine("            return 142L;");
+                    else
+                    {
+                        sb.AppendLine("            return 142L;");
+                    }
                 }
                 else
                 {
                     sb.AppendLine($"{preludeStr}            var result = {callExpr};");
-                    sb.AppendLine($"            return {ValueGenerator.GetPatchReturnExpression(method.ReturnTypeName, "result")};");
+                    // For non-void methods with ref/out params, XOR ref/out values into sentinel
+                    if (refVarCounter > 0)
+                    {
+                        var refParts = new List<string>
+                        {
+                            $"({ValueGenerator.GetPatchReturnExpression(method.ReturnTypeName, "result")})"
+                        };
+                        for (int rvi = 0; rvi < refVarCounter; rvi++)
+                        {
+                            var vn = $"__ref_{mi}_{set.SetIndex}_{rvi}";
+                            refParts.Add($"((long)({vn}) ^ 0xFF)");
+                        }
+                        sb.AppendLine("            return " + string.Join(" ^ ", refParts) + ";");
+                    }
+                    else
+                    {
+                        sb.AppendLine($"            return {ValueGenerator.GetPatchReturnExpression(method.ReturnTypeName, "result")};");
+                    }
                 }
 
                 sb.AppendLine("        }");
