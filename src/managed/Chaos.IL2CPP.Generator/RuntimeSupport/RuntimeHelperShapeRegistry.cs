@@ -462,7 +462,8 @@ public sealed partial class NativeAotLoweringPlanner
                     return new GenericShapeResolution(src, symbol,
                         Array.Empty<AotCoreIrAbiSlotArtifact>(),
                         CreateInt32AbiSlot(),
-                        EmptyRawArgumentIndices);
+                        EmptyRawArgumentIndices,
+                        DirectNativeSymbol: "ChaosMarshalGetLastPInvokeError");
                 }));
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "System.Runtime.InteropServices.Marshal",
@@ -508,7 +509,8 @@ public sealed partial class NativeAotLoweringPlanner
                     return new GenericShapeResolution(src, symbol,
                         Array.Empty<AotCoreIrAbiSlotArtifact>(),
                         CreateInt32AbiSlot(),
-                        EmptyRawArgumentIndices);
+                        EmptyRawArgumentIndices,
+                        DirectNativeSymbol: "ChaosMarshalGetExceptionCode");
                 }));
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "System.Runtime.InteropServices.Marshal",
@@ -522,7 +524,8 @@ public sealed partial class NativeAotLoweringPlanner
                     return new GenericShapeResolution(src, symbol,
                         Array.Empty<AotCoreIrAbiSlotArtifact>(),
                         CreateNativeIntAbiSlot(),
-                        EmptyRawArgumentIndices);
+                        EmptyRawArgumentIndices,
+                        DirectNativeSymbol: "ChaosMarshalAreComObjectsAvailableForCleanup");
                 }));
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "System.Runtime.InteropServices.Marshal",
@@ -623,7 +626,8 @@ public sealed partial class NativeAotLoweringPlanner
                     return new GenericShapeResolution(src, symbol,
                         Array.Empty<AotCoreIrAbiSlotArtifact>(),
                         CreateInt32AbiSlot(),
-                        EmptyRawArgumentIndices);
+                        EmptyRawArgumentIndices,
+                        DirectNativeSymbol: "ChaosMarshalGetLastPInvokeError");
                 }));
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "Marshal",
@@ -637,7 +641,8 @@ public sealed partial class NativeAotLoweringPlanner
                     return new GenericShapeResolution(src, symbol,
                         Array.Empty<AotCoreIrAbiSlotArtifact>(),
                         CreateInt32AbiSlot(),
-                        EmptyRawArgumentIndices);
+                        EmptyRawArgumentIndices,
+                        DirectNativeSymbol: "ChaosMarshalSetLastPInvokeError");
                 }));
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "Marshal",
@@ -667,7 +672,8 @@ public sealed partial class NativeAotLoweringPlanner
                     return new GenericShapeResolution(src, symbol,
                         Array.Empty<AotCoreIrAbiSlotArtifact>(),
                         CreateInt32AbiSlot(),
-                        EmptyRawArgumentIndices);
+                        EmptyRawArgumentIndices,
+                        DirectNativeSymbol: "ChaosMarshalGetExceptionCode");
                 }));
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "Marshal",
@@ -681,7 +687,8 @@ public sealed partial class NativeAotLoweringPlanner
                     return new GenericShapeResolution(src, symbol,
                         Array.Empty<AotCoreIrAbiSlotArtifact>(),
                         CreateNativeIntAbiSlot(),
-                        EmptyRawArgumentIndices);
+                        EmptyRawArgumentIndices,
+                        DirectNativeSymbol: "ChaosMarshalAreComObjectsAvailableForCleanup");
                 }));
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "Marshal",
