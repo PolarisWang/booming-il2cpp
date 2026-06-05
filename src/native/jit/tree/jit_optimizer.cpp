@@ -11,9 +11,10 @@
 //
 // P5 extension: when multiple basic blocks form natural loops, additional
 // post-passes run on the linearized instruction stream:
-//   a. LICM — hoist loop-invariant LdLen out of loops
-//   b. IV strength reduction — replace induction-variable mul with add
-//   c. Loop unrolling — replicate loop body for constant-trip-count loops
+//   a. Constant propagation — identify vregs with known constant values
+//   b. LICM — hoist loop-invariant arithmetic out of loops
+//   c. IV strength reduction — replace induction-variable mul with add
+//   d. Loop unrolling — replicate loop body for constant-trip-count loops
 
 #include "tree/jit_optimizer.h"
 #include "tree/jit_tree_builder.h"
@@ -61,12 +62,64 @@ static void BuildVRegDefBlocks(
     }
 }
 
-// ── LICM: hoist loop-invariant LdLen out of loops ─────────────────────
+// ── Helper: is this opcode pure arithmetic (safe for LICM hoisting)? ──
+// Pure arithmetic has no side effects, no exceptions, and depends only
+// on its src vregs.  Div/Rem/AddOvf are excluded (can throw).
+static bool IsPureArithmetic(interpreter::IROpCode opc) noexcept {
+    switch (opc) {
+        case interpreter::IROpCode::Add:
+        case interpreter::IROpCode::Sub:
+        case interpreter::IROpCode::Mul:
+        case interpreter::IROpCode::And:
+        case interpreter::IROpCode::Or:
+        case interpreter::IROpCode::Xor:
+        case interpreter::IROpCode::Shl:
+        case interpreter::IROpCode::Shr:
+        case interpreter::IROpCode::ShrUn:
+        case interpreter::IROpCode::Neg:
+        case interpreter::IROpCode::Not:
+        case interpreter::IROpCode::Ceq:
+        case interpreter::IROpCode::Clt:
+        case interpreter::IROpCode::Cgt:
+        case interpreter::IROpCode::CltUn:
+        case interpreter::IROpCode::CgtUn:
+        case interpreter::IROpCode::Conv_I4:
+        case interpreter::IROpCode::Conv_I8:
+        case interpreter::IROpCode::Conv_R4:
+        case interpreter::IROpCode::Conv_R8:
+        case interpreter::IROpCode::ConvRUn:
+        case interpreter::IROpCode::ConvI:
+        case interpreter::IROpCode::ConvU:
+        case interpreter::IROpCode::LdLen:
+            return true;
+        default:
+            return false;
+    }
+}
+
+// ── Helper: check if a vreg is loop-invariant ──────────────────────
+// Returns true if vreg's defining block is outside the loop.
+static bool IsLoopInvariantVReg(uint32_t vreg,
+                                 const std::vector<uint32_t>& vreg_def_blocks,
+                                 const NaturalLoop& loop) noexcept {
+    if (vreg >= vreg_def_blocks.size()) return false;
+    uint32_t def_block = vreg_def_blocks[vreg];
+    if (def_block == UINT32_MAX) return false;  // unknown → assume variant
+    for (uint32_t b : loop.blocks) {
+        if (b == def_block) return false;
+    }
+    return true;
+}
+
+// ── LICM: hoist loop-invariant pure arithmetic out of loops ────────
 //
-// Scans each loop's body blocks for LdLen instructions whose source vreg
-// is defined outside the loop.  For each such LdLen, creates a new vreg,
-// inserts a LdLen in the pre-header region, and replaces the in-loop LdLen
-// with a LdLoc that reads the hoisted value.
+// Scans each loop's body blocks for pure-arithmetic instructions whose
+// source vregs are all defined outside the loop.  For each such
+// instruction, creates a new vreg, emits the same opcode in the
+// pre-header region, and replaces the in-loop instruction with a LdLoc.
+//
+// Cascading: when an instruction is hoisted, its dst vreg becomes
+// loop-invariant for subsequent instructions in the same loop.
 //
 // Operates on the linearized output instruction stream.
 // bb_starts[i] = first instruction index in out_instrs belonging to BB i.
@@ -102,14 +155,13 @@ static void LicmHoist(
         uint32_t insert_point = bb_ends[pre_header];  // end of pre-header in out_instrs
 
         // Track hoisted replacements: original vreg → hoisted vreg
-        // (for LdLen dst, we track dst → new hoisted vreg)
         struct HoistInfo {
             uint32_t orig_dst_vreg;
             uint32_t hoisted_vreg;
         };
         std::vector<HoistInfo> hoisted;
 
-        // Scan each body block for LdLen instructions
+        // Scan each body block for hoistable instructions
         for (uint32_t bb_id : loop.blocks) {
             if (bb_id == header) continue;  // skip header (it may be the pre-header entry)
 
@@ -118,55 +170,64 @@ static void LicmHoist(
 
             for (uint32_t i = start; i < end; ++i) {
                 auto& ri = out_instrs[i];
-                if (ri.op_code() != interpreter::IROpCode::LdLen) continue;
-                if (!ri.has_src1()) continue;
+                if (!IsPureArithmetic(ri.op_code())) continue;
 
-                uint32_t src_vreg = ri.src1_reg();
-                uint32_t dst_vreg = ri.dst_reg();
+                // Count src vregs and check invariance for each
+                uint32_t src_count = 0;
+                bool all_srcs_invariant = true;
 
-                // Check if source vreg is defined outside the loop
-                if (src_vreg >= vreg_def_blocks.size()) continue;
-                uint32_t def_block = vreg_def_blocks[src_vreg];
-
-                bool is_invariant = true;
-                if (def_block != UINT32_MAX) {
-                    for (uint32_t b : loop.blocks) {
-                        if (b == def_block) {
-                            is_invariant = false;
-                            break;
+                if (ri.has_src1()) {
+                    src_count++;
+                    uint32_t src1 = ri.src1_reg();
+                    if (!IsLoopInvariantVReg(src1, vreg_def_blocks, loop)) {
+                        // Check cascading: was this vreg already hoisted?
+                        bool was_hoisted = false;
+                        for (const auto& h : hoisted) {
+                            if (h.orig_dst_vreg == src1) {
+                                was_hoisted = true;
+                                break;
+                            }
                         }
+                        if (!was_hoisted) all_srcs_invariant = false;
                     }
-                } else {
-                    // UINT32_MAX = unknown / live-in → assume invariant
-                    // (could be a parameter or global)
+                }
+                if (ri.has_src2()) {
+                    src_count++;
+                    uint32_t src2 = ri.src2_reg();
+                    if (!IsLoopInvariantVReg(src2, vreg_def_blocks, loop)) {
+                        bool was_hoisted = false;
+                        for (const auto& h : hoisted) {
+                            if (h.orig_dst_vreg == src2) {
+                                was_hoisted = true;
+                                break;
+                            }
+                        }
+                        if (!was_hoisted) all_srcs_invariant = false;
+                    }
                 }
 
-                if (!is_invariant) continue;
+                if (!all_srcs_invariant || src_count == 0) continue;
+                if (!ri.has_dst()) continue;
 
-                // Hoist: create new vreg, insert LdLen in pre-header
+                uint32_t dst_vreg = ri.dst_reg();
+
+                // Hoist: create new vreg, emit same opcode in pre-header
                 uint32_t new_vreg = next_vreg++;
 
-                // Build a new LdLen instruction
-                interpreter::RegisterInstruction hoisted_ri;
-                hoisted_ri.header = 0;
-                hoisted_ri.header |= static_cast<uint64_t>(interpreter::IROpCode::LdLen) & 0xFFFF;
-                hoisted_ri.header |= static_cast<uint64_t>(new_vreg) << 16;  // dst
-                hoisted_ri.header |= static_cast<uint64_t>(src_vreg) << 24;  // src1
-                hoisted_ri.header |= static_cast<uint64_t>(interpreter::kRegHasDst | interpreter::kRegHasSrc1) << 40;
-                hoisted_ri.imm.i4 = 0;
-                hoisted_ri.imm.i8 = 0;
+                // Build instruction for pre-header (same opcode, new dst vreg)
+                interpreter::RegisterInstruction hoisted_ri = ri;
+                // Remap dst to new_vreg
+                hoisted_ri.header = (hoisted_ri.header & ~(0xFFull << 16)) |
+                    (static_cast<uint64_t>(new_vreg) << 16);
 
-                // Insert at insert_point (shift existing instructions right)
+                // Insert at insert_point
                 out_instrs.insert(out_instrs.begin() + insert_point, hoisted_ri);
 
-                // Update bb_starts/bb_ends for all BBs after pre_header
-                // (we'll fix them up at the end)
-
-                // Replace in-loop LdLen with LdLoc reading the hoisted value
+                // Replace in-loop instruction with LdLoc reading hoisted value
                 ri.header = 0;
                 ri.header |= static_cast<uint64_t>(interpreter::IROpCode::LdLoc) & 0xFFFF;
                 ri.header |= static_cast<uint64_t>(dst_vreg) << 16;  // dst
-                ri.header |= static_cast<uint64_t>(new_vreg) << 24;  // src1 = hoisted vreg (as LdLoc operand)
+                ri.header |= static_cast<uint64_t>(new_vreg) << 24;  // src1 = hoisted vreg
                 ri.header |= static_cast<uint64_t>(interpreter::kRegHasDst | interpreter::kRegHasSrc1) << 40;
                 ri.imm.operand_index = new_vreg;
 
@@ -178,7 +239,7 @@ static void LicmHoist(
         }
 
         if (!hoisted.empty()) {
-            CHAOS_IL2CPP_LOG_DEBUG_M("jit", "LICM: hoisted %zu LdLen from loop header=%u",
+            CHAOS_IL2CPP_LOG_DEBUG_M("jit", "LICM: hoisted %zu instructions from loop header=%u",
                                    hoisted.size(), header);
         }
     }
@@ -589,6 +650,211 @@ static void UpdateBbRanges(
     (void)bb_count;
 }
 
+// ── Constant propagation pass ──────────────────────────────────────────
+//
+// Identifies vregs that hold known constant values (LdcI4/LdcI8) and
+// propagates them forward.  This enables more LICM hoisting (constant
+// vregs are trivially loop-invariant) and more folding in downstream
+// codegen passes.
+//
+// Phase 1: build const table — scan all instructions, record known
+// constants for each dst vreg.
+//
+// Phase 2: forward propagate — replace LdLoc with LdcI4/I8 when the
+// src vreg is known-constant; fold pure arithmetic with constant operands.
+// Repeats until no changes (typically 1-2 iterations).
+static bool ConstPropagate(
+    std::vector<interpreter::RegisterInstruction>& out_instrs,
+    uint32_t max_vreg) noexcept
+{
+    if (out_instrs.empty() || max_vreg == 0) return false;
+
+    enum ConstKind : uint8_t { kUnknown, kInt32, kInt64 };
+    struct ConstVal { ConstKind kind = kUnknown; int64_t value = 0; };
+
+    std::vector<ConstVal> const_vals(max_vreg);
+    bool any_propagated = false;
+
+    // Iterate until stable (typically 1-2 iterations)
+    for (uint32_t iter = 0; iter < 4; ++iter) {
+        // Reset const table each iteration (can't trust stale values
+        // after propagation changes instructions)
+        for (auto& cv : const_vals) cv = ConstVal{};
+
+        // Phase 1: scan all instructions, record constants
+        for (uint32_t i = 0; i < out_instrs.size(); ++i) {
+            const auto& ri = out_instrs[i];
+            if (!ri.has_dst()) continue;
+            uint32_t dst = ri.dst_reg();
+            if (dst >= max_vreg) continue;
+
+            switch (ri.op_code()) {
+            case interpreter::IROpCode::LdcI4:
+                const_vals[dst] = {kInt32, ri.imm.i4};
+                break;
+            case interpreter::IROpCode::LdcI8:
+                const_vals[dst] = {kInt64, ri.imm.i8};
+                break;
+            default:
+                // Any other defining instruction → not a known constant
+                const_vals[dst] = {};
+                break;
+            }
+        }
+
+        // Phase 2: propagate constants forward
+        bool changed = false;
+        for (uint32_t i = 0; i < out_instrs.size(); ++i) {
+            auto& ri = out_instrs[i];
+
+            // Case A: LdLoc → LdcI4/I8 when src vreg is known constant
+            if (ri.op_code() == interpreter::IROpCode::LdLoc && ri.has_src1()) {
+                uint32_t src = ri.src1_reg();
+                if (src >= max_vreg) continue;
+                const auto& cv = const_vals[src];
+                if (cv.kind == kInt32) {
+                    ri.header = (ri.header & ~(0xFFFFull)) |
+                        static_cast<uint64_t>(interpreter::IROpCode::LdcI4);
+                    ri.imm.i4 = static_cast<int32_t>(cv.value);
+                    const_vals[ri.dst_reg()] = cv;
+                    changed = true;
+                    any_propagated = true;
+                } else if (cv.kind == kInt64) {
+                    ri.header = (ri.header & ~(0xFFFFull)) |
+                        static_cast<uint64_t>(interpreter::IROpCode::LdcI8);
+                    ri.imm.i8 = cv.value;
+                    const_vals[ri.dst_reg()] = cv;
+                    changed = true;
+                    any_propagated = true;
+                }
+                continue;
+            }
+
+            // Case B: fold pure arithmetic with constant operands
+            if (!IsPureArithmetic(ri.op_code())) continue;
+            if (!ri.has_dst()) continue;
+            uint32_t dst = ri.dst_reg();
+            if (dst >= max_vreg) continue;
+
+            // Collect src values
+            bool has_src1 = ri.has_src1();
+            bool has_src2 = ri.has_src2();
+            uint32_t s1 = has_src1 ? ri.src1_reg() : 0;
+            uint32_t s2 = has_src2 ? ri.src2_reg() : 0;
+
+            int64_t v1 = 0, v2 = 0;
+            bool c1_known = false, c2_known = false;
+            ConstKind ck1 = kUnknown, ck2 = kUnknown;
+
+            if (has_src1 && s1 < max_vreg && const_vals[s1].kind != kUnknown) {
+                v1 = const_vals[s1].value;
+                c1_known = true;
+                ck1 = const_vals[s1].kind;
+            }
+            if (has_src2 && s2 < max_vreg && const_vals[s2].kind != kUnknown) {
+                v2 = const_vals[s2].value;
+                c2_known = true;
+                ck2 = const_vals[s2].kind;
+            }
+
+            // For binary ops: both srcs must be known
+            if (has_src1 && has_src2 && !(c1_known && c2_known)) continue;
+            // For unary ops (Neg, Not, Conv*): src1 must be known
+            if (has_src1 && !has_src2 && !c1_known) continue;
+
+            // Determine result type: i64 if either operand is i64
+            bool use_i64 = (ck1 == kInt64) || (ck2 == kInt64);
+
+            int64_t result = 0;
+            bool foldable = true;
+
+            switch (ri.op_code()) {
+            // Binary arithmetic
+            case interpreter::IROpCode::Add: result = v1 + v2; break;
+            case interpreter::IROpCode::Sub: result = v1 - v2; break;
+            case interpreter::IROpCode::Mul: result = v1 * v2; break;
+            case interpreter::IROpCode::And: result = v1 & v2; break;
+            case interpreter::IROpCode::Or:  result = v1 | v2; break;
+            case interpreter::IROpCode::Xor: result = v1 ^ v2; break;
+            case interpreter::IROpCode::Shl:
+                result = use_i64 ? (v1 << (v2 & 0x3F)) : (static_cast<int32_t>(v1) << (v2 & 0x1F));
+                break;
+            case interpreter::IROpCode::Shr:
+                result = use_i64 ? (v1 >> (v2 & 0x3F)) : (static_cast<int32_t>(v1) >> (v2 & 0x1F));
+                break;
+            case interpreter::IROpCode::ShrUn:
+                result = use_i64 ? (static_cast<uint64_t>(v1) >> (v2 & 0x3F))
+                                 : (static_cast<uint32_t>(static_cast<int32_t>(v1)) >> (v2 & 0x1F));
+                break;
+            case interpreter::IROpCode::Ceq:  result = (v1 == v2) ? 1 : 0; use_i64 = false; break;
+            case interpreter::IROpCode::Clt:  result = (v1 <  v2) ? 1 : 0; use_i64 = false; break;
+            case interpreter::IROpCode::Cgt:  result = (v1 >  v2) ? 1 : 0; use_i64 = false; break;
+            case interpreter::IROpCode::CltUn:
+                result = (static_cast<uint64_t>(v1) < static_cast<uint64_t>(v2)) ? 1 : 0;
+                use_i64 = false; break;
+            case interpreter::IROpCode::CgtUn:
+                result = (static_cast<uint64_t>(v1) > static_cast<uint64_t>(v2)) ? 1 : 0;
+                use_i64 = false; break;
+
+            // Unary
+            case interpreter::IROpCode::Neg: result = use_i64 ? -v1 : -static_cast<int32_t>(v1); break;
+            case interpreter::IROpCode::Not: result = use_i64 ? ~v1 : ~static_cast<int32_t>(v1); break;
+
+            // Conversions
+            case interpreter::IROpCode::Conv_I4: result = static_cast<int32_t>(v1); use_i64 = false; break;
+            case interpreter::IROpCode::Conv_I8: result = v1; use_i64 = true; break;
+            case interpreter::IROpCode::ConvI:
+                result = static_cast<int32_t>(v1);
+                use_i64 = false;
+                break;
+            case interpreter::IROpCode::ConvU:
+                result = static_cast<uint32_t>(v1);
+                use_i64 = false;
+                break;
+            case interpreter::IROpCode::ConvRUn:
+                // Fold to LdcI4 (the truncated int result)
+                result = static_cast<int32_t>(v1);
+                use_i64 = false;
+                break;
+
+            // LdLen — can't fold at linear level (runtime value)
+            case interpreter::IROpCode::LdLen:
+                foldable = false; break;
+
+            default:
+                foldable = false; break;
+            }
+
+            if (!foldable) continue;
+
+            // Replace with LdcI4 or LdcI8
+            if (use_i64) {
+                ri.header = (ri.header & ~(0xFFFFull)) |
+                    static_cast<uint64_t>(interpreter::IROpCode::LdcI8);
+                ri.imm.i8 = result;
+                const_vals[dst] = {kInt64, result};
+            } else {
+                ri.header = (ri.header & ~(0xFFFFull)) |
+                    static_cast<uint64_t>(interpreter::IROpCode::LdcI4);
+                ri.imm.i4 = static_cast<int32_t>(result);
+                const_vals[dst] = {kInt32, result};
+            }
+            // Clear src flags (LdcI4/I8 has no srcs)
+            ri.header &= ~(static_cast<uint64_t>(0xFF) << 24);  // clear src1
+            ri.header &= ~(static_cast<uint64_t>(0xFF) << 32);  // clear src2
+            ri.header &= ~(static_cast<uint64_t>(
+                interpreter::kRegHasSrc1 | interpreter::kRegHasSrc2) << 40);
+
+            changed = true;
+            any_propagated = true;
+        }
+
+        if (!changed) break;
+    }
+
+    return any_propagated;
+}
+
 // ── OptimizeWithTreeIR ─────────────────────────────────────────────────
 
 bool OptimizeWithTreeIR(
@@ -711,11 +977,15 @@ bool OptimizeWithTreeIR(
                 bb_ends[bi] = static_cast<uint32_t>(out_instrs.size());
         }
 
-        // Build vreg → defining block map
+        // Build vreg → defining block map (from original instrs, before
+        // const-prop and LICM modify out_instrs)
         std::vector<uint32_t> vreg_def_blocks;
         BuildVRegDefBlocks(instrs, bbs, max_vreg, vreg_def_blocks);
 
-        // 2a. LICM: hoist LdLen out of loops
+        // 0. Constant propagation (before LICM — enables more hoisting)
+        ConstPropagate(out_instrs, max_vreg);
+
+        // 2a. LICM: hoist loop-invariant arithmetic out of loops
         LicmHoist(out_instrs, bb_starts, bb_ends, loop_analysis,
                    vreg_def_blocks, max_vreg);
 
