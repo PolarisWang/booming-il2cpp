@@ -125,7 +125,7 @@ public sealed class EnumMetadataExtractorTests
         // Both enums should be emitted
         Assert.Contains("EnumA", result);
         Assert.Contains("EnumB", result);
-        Assert.Contains("case 0x", result); // switch-case by hash
+        Assert.Contains("ChaosEnumRegisterDispatchTable", result); // dispatch table registration
     }
 
     [Fact]
@@ -139,9 +139,9 @@ public sealed class EnumMetadataExtractorTests
                 new NativeAotLoweringPlanner.ReflectionMemberFieldEntry("TestModule.RegEnum", "Ok", 1, 0),
             });
 
-        Assert.Contains("_EnumMetadataRegistrar", result);
+        Assert.Contains("ChaosEnumRegisterDispatchTable", result);
         Assert.Contains("ChaosRegisterExternalType", result);
-        Assert.Contains("g_chaos_resolve_enum_metadata", result);
+        Assert.Contains("EnumDispatchEntry", result);
     }
 
     [Fact]
@@ -160,7 +160,7 @@ public sealed class EnumMetadataExtractorTests
             });
 
         // The test just checks that the output is well-formed
-        Assert.Contains("case 0x", result);
+        Assert.Contains("ChaosEnumRegisterDispatchTable", result);
         Assert.Contains("DN", result);
     }
 

@@ -288,6 +288,25 @@ static int RunFactMode() {
 
 	// ── FACT_CHECK macros ──
 	// Must be defined before RunFactJsonMode (uses them).
+// ── VEH handler for AOT fact dispatch ─────────────────────────────
+// Catches hardware exceptions (AV, stack overflow) during per-method
+// dispatch and longjmps to the _setjmp recovery point so the method
+// is marked as caught.  Managed C++ exceptions (0xE06D7363) are
+// ignored and propagate normally to Assert.Throws catch blocks.
+#if defined(_WIN32)
+static LONG CALLBACK FactVehHandler(PEXCEPTION_POINTERS ExceptionInfo) noexcept {
+    auto* er = ExceptionInfo->ExceptionRecord;
+    // Only catch hardware exceptions — let all other exceptions
+    // (including managed C++ exceptions 0xE06D7363) pass through.
+    if (er->ExceptionCode != STATUS_ACCESS_VIOLATION &&
+        er->ExceptionCode != STATUS_STACK_OVERFLOW)
+        return EXCEPTION_CONTINUE_SEARCH;
+    // Recover via longjmp to the per-method _setjmp point.
+    // t_abort_jmp is set by RunFactJsonMode before each dispatch.
+    longjmp(t_abort_jmp, 1);
+    return EXCEPTION_CONTINUE_SEARCH;  // unreachable
+}
+#endif
 	// ── --fact-json: per-method JSON output (R1+R2: value-level verification) ──
 // Iterates only subject entries (kSubjectEntryCount) via kSubjectSlotMap, not
 // all AOT-compiled methods (kAotMethodCount).  Closure/framework methods may
@@ -315,6 +334,7 @@ static int RunFactJsonMode() {
 
 #if defined(_WIN32)
     CHAOS_FACT_RESET();
+    void* g_fact_veh = AddVectoredExceptionHandler(1, FactVehHandler);
     // Use a worker thread with 300s timeout so a hanging dispatch (infinite
     // loop, deadlock) doesn't block the process forever.  On timeout the
     // process is killed; whatever was flushed to stdout is the partial result.
@@ -357,6 +377,7 @@ static int RunFactJsonMode() {
         printf("]}\n");
         std::fflush(stdout);
         CHAOS_FACT_CHECK();
+        RemoveVectoredExceptionHandler(g_fact_veh);
         return 0;
     }, nullptr, 0, nullptr);
 

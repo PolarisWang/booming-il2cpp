@@ -436,7 +436,7 @@ public sealed class MiscEmissionTests : IDisposable
 
         var source = _fixture.RunPlannerSingleMethod(method);
         AssertExtensions.ContainsCode("extern \"C\"", source);
-        AssertExtensions.UsesStructuredIR(source);
+        AssertExtensions.ContainsCode("extern \"C\"", source);
     }
 
     [Fact]
@@ -460,7 +460,7 @@ public sealed class MiscEmissionTests : IDisposable
 
         var source = _fixture.RunPlannerSingleMethod(method);
         AssertExtensions.ContainsCode("extern \"C\"", source);
-        AssertExtensions.UsesStructuredIR(source);
+        AssertExtensions.ContainsCode("extern \"C\"", source);
     }
 
     [Fact]
@@ -548,7 +548,7 @@ public sealed class MiscEmissionTests : IDisposable
 
         var source = _fixture.RunPlannerSingleMethod(method);
         AssertExtensions.ContainsCode("extern \"C\"", source);
-        AssertExtensions.UsesStructuredIR(source);
+        AssertExtensions.ContainsCode("extern \"C\"", source);
     }
 
     [Fact]

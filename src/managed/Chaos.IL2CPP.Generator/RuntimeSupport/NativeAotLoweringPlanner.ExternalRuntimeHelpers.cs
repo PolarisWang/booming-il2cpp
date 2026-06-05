@@ -114,7 +114,7 @@ public sealed partial class NativeAotLoweringPlanner
 			RenderSimpleExternalRuntimeHelper(returnType, symbol, parameterSignature, bodyLines),
 			entry.ParameterAbis, entry.ReturnAbi, entry.RawArgumentIndices ?? EmptyRawArgumentIndices,
 			entry.ReferencedStaticFieldSubjectIds,
-			DirectNativeSymbol: null);
+			DirectNativeSymbol: entry.NativeFnSymbol);
 	}
 
 }

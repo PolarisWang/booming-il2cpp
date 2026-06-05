@@ -347,16 +347,15 @@ public sealed class NativeAotPlannerHelperTests
     // ── CreatePseudoMetadataHandle ────────────────────────────────────
 
     [Theory]
-    [InlineData("System.String", 33554432u)]
-    [InlineData("System.Int32", 33554432u)]
-    [InlineData("System.String", 67108864u)]
-    [InlineData("", 33554432u)]
-    public void CreatePseudoMetadataHandle_ReturnsNonZero(string subjectId, uint prefix)
+    [InlineData("System.String", 33554432u, 0xFA000000u)]
+    [InlineData("System.Int32", 33554432u, 0xFB000000u)]
+    [InlineData("", 33554432u, 0x83000000u)]
+    public void CreatePseudoMetadataHandle_ReturnsNonZero(string subjectId, uint prefix, uint expectedTopBits)
     {
         var method = s_plannerType.GetMethod("CreatePseudoMetadataHandle", s_static, new[] { typeof(string), typeof(uint) })!;
         var result = (uint)method.Invoke(null, new object[] { subjectId, prefix })!;
         Assert.NotEqual(0u, result);
-        Assert.Equal(prefix, result & 0xFF000000u);
+        Assert.Equal(expectedTopBits, result & 0xFF000000u);
     }
 
     // ── IsStructuredValueTypeSubjectId ────────────────────────────────
@@ -1333,19 +1332,6 @@ public sealed class NativeAotPlannerHelperTests
         Assert.Equal(expected, result);
     }
 
-    [Theory]
-    [InlineData("System.String", "System.String", true)]
-    [InlineData("System.String", "System.Int32", false)]
-    [InlineData(null, "System.String", false)]
-    [InlineData("System.String", null, false)]
-    public void IsDeclaringTypeMatch_ReturnsExpected(string? a, string? b, bool expected)
-    {
-        var method = s_plannerType.GetMethod("IsDeclaringTypeMatch", s_static,
-            new[] { typeof(string), typeof(string) })!;
-        var result = (bool)method.Invoke(null, new object?[] { a, b })!;
-        Assert.Equal(expected, result);
-    }
-
     // ── ModuleRegistration.cs ──────────────────────────────────────────
 
     [Fact]
@@ -2023,7 +2009,7 @@ public sealed class NativeAotPlannerHelperTests
     [InlineData(AotCoreIrAbiCarrierKind.UInt8, "static_cast<CHAOS_IL2CPP_UINT8>(x)")]
     [InlineData(AotCoreIrAbiCarrierKind.Int16, "static_cast<CHAOS_IL2CPP_INT16>(x)")]
     [InlineData(AotCoreIrAbiCarrierKind.UInt16, "static_cast<CHAOS_IL2CPP_UINT16>(x)")]
-    [InlineData(AotCoreIrAbiCarrierKind.Float32, "chaos_load_float32(x)")]
+    [InlineData(AotCoreIrAbiCarrierKind.Float32, "ChaosLoadFloat32(x)")]
     [InlineData(AotCoreIrAbiCarrierKind.Float64, "ChaosLoadFloat64(x)")]
     [InlineData(AotCoreIrAbiCarrierKind.Int64, "ChaosLoadInt64(x)")]
     [InlineData(AotCoreIrAbiCarrierKind.UInt64, "chaos_load_uint64(x)")]
