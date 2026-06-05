@@ -113,6 +113,17 @@ public sealed class TestEmitter
             // Skip [Fact] only if the probe produced no result at all.
             var skipFact = isPureVoid && sets.All(s => resultMap.GetValueOrDefault((mi, s.SetIndex)) is null);
 
+            // ── Two-phase probe check for null-related exceptions ──────────
+            // Phase 1: Check if the method has ANY value set that produces a
+            // valid (non-exception) result.  If ALL value sets throw, then a
+            // Throws<NRE>/Throws<ANE> assertion is a false positive — the method
+            // is fundamentally broken in AOT, not specifically reacting to null.
+            var hasAnyValidSet = sets.Any(s =>
+            {
+                var r = resultMap.GetValueOrDefault((mi, s.SetIndex));
+                return r is { HasException: false };
+            });
+
             foreach (var set in sets)
             {
                 var setResult = resultMap.GetValueOrDefault((mi, set.SetIndex));
@@ -198,7 +209,7 @@ public sealed class TestEmitter
                     sb.AppendLine("        {");
                     if (!string.IsNullOrEmpty(factCallStatement))
                         sb.AppendLine(factCallStatement);
-                    AppendAssert(sb, mi, method, set, setResult, callExpr, method.HasRefParam);
+                    AppendAssert(sb, mi, method, set, setResult, callExpr, method.HasRefParam, hasAnyValidSet);
                     // Return long value for hotupdate semantic change detection.
                     // Exception subjects and void methods return sentinel 42L.
                     if (method.IsVoid || isPlainTask || hasException)
@@ -240,7 +251,7 @@ public sealed class TestEmitter
     }
 
     private void AppendAssert(StringBuilder sb, int mi, MethodSignature method, ValueSet set,
-        ProbeResult? result, string callExpr, bool hasRefParam)
+        ProbeResult? result, string callExpr, bool hasRefParam, bool hasAnyValidSet)
     {
         if (result is null) return;
 
@@ -249,10 +260,29 @@ public sealed class TestEmitter
             // Ref/out locals can't be captured in a lambda — skip Assert.Throws
             if (!hasRefParam)
             {
-                // Use the specific exception type from probe (e.g. ArgumentNullException)
-                // rather than the generic Exception, so assertion failures are more precise.
-                // Fall back to Exception if the type name looks non-public or unavailable.
                 var exType = result.ExceptionType;
+
+                // Two-phase probe: Phase 2 — skip null-related Throws assertions
+                // when the method has NO valid (non-exception) value sets.  This
+                // avoids false-positive passes: if ALL inputs (including non-null
+                // ones) crash with NRE/ANE, the method is fundamentally broken in
+                // AOT, and a Throws<NRE> test would pass by coincidence only.
+                if (!hasAnyValidSet)
+                {
+                    var nullRelated = exType == "System.NullReferenceException" ||
+                                      exType == "System.ArgumentNullException";
+                    if (nullRelated)
+                    {
+                        // Method is broken for all inputs — skip the Throws test.
+                        // Emit a smoke-test comment so the generated code still
+                        // documents this case without creating a false-positive pass.
+                        sb.AppendLine($"            // [smoke] {exType} thrown by {callExpr} (all value sets fail — skipping Throws)");
+                        return;
+                    }
+                }
+
+                // Use the specific exception type from probe (already in exType).
+                // Fall back to Exception if the type name looks non-public or unavailable.
                 if (exType.Contains('+') || exType.StartsWith("System.Reflection"))
                     exType = "Exception";
                 // JsonReaderException is internal in .NET 9+; use public base class JsonException

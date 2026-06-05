@@ -3276,6 +3276,14 @@ public sealed partial class NativeAotLoweringPlanner
                 CreateInt32AbiSlot(),
                 new HashSet<int> { 0 });
 
+            // ── Missing overload for LeadingZeroCount ──
+            registry.Register("System.Numerics.BitOperations", "LeadingZeroCount", ["System.UIntPtr"],
+                ShapeKind.SimpleForward, "ChaosBitOpsLeadingZeroCount64",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.UInt64, TypeShape = AotCoreIrTypeShapeKind.ValueType }),
+                CreateInt32AbiSlot(),
+                new HashSet<int> { 0 });
+
             registry.Register("System.Numerics.BitOperations", "TrailingZeroCount", ["System.UInt32"],
                 ShapeKind.SimpleForward, "ChaosBitOpsTrailingZeroCount32",
                 new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
@@ -3284,6 +3292,35 @@ public sealed partial class NativeAotLoweringPlanner
                 new HashSet<int> { 0 });
 
             registry.Register("System.Numerics.BitOperations", "TrailingZeroCount", ["System.UInt64"],
+                ShapeKind.SimpleForward, "ChaosBitOpsTrailingZeroCount64",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.UInt64, TypeShape = AotCoreIrTypeShapeKind.ValueType }),
+                CreateInt32AbiSlot(),
+                new HashSet<int> { 0 });
+
+            // ── Missing overloads for TrailingZeroCount ──
+            registry.Register("System.Numerics.BitOperations", "TrailingZeroCount", ["System.Int32"],
+                ShapeKind.SimpleForward, "ChaosBitOpsTrailingZeroCount32",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    CreateInt32AbiSlot()),
+                CreateInt32AbiSlot(),
+                new HashSet<int> { 0 });
+
+            registry.Register("System.Numerics.BitOperations", "TrailingZeroCount", ["System.Int64"],
+                ShapeKind.SimpleForward, "ChaosBitOpsTrailingZeroCount64",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.Int64, TypeShape = AotCoreIrTypeShapeKind.ValueType }),
+                CreateInt32AbiSlot(),
+                new HashSet<int> { 0 });
+
+            registry.Register("System.Numerics.BitOperations", "TrailingZeroCount", ["System.IntPtr"],
+                ShapeKind.SimpleForward, "ChaosBitOpsTrailingZeroCount64",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.Int64, TypeShape = AotCoreIrTypeShapeKind.ValueType }),
+                CreateInt32AbiSlot(),
+                new HashSet<int> { 0 });
+
+            registry.Register("System.Numerics.BitOperations", "TrailingZeroCount", ["System.UIntPtr"],
                 ShapeKind.SimpleForward, "ChaosBitOpsTrailingZeroCount64",
                 new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
                     new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.UInt64, TypeShape = AotCoreIrTypeShapeKind.ValueType }),
@@ -3378,6 +3415,14 @@ public sealed partial class NativeAotLoweringPlanner
                 new HashSet<int> { 0 });
 
             registry.Register("System.Numerics.BitOperations", "RoundUpToPowerOf2", ["System.UInt64"],
+                ShapeKind.SimpleForward, "ChaosBitOpsRoundUpToPowerOf264",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.UInt64, TypeShape = AotCoreIrTypeShapeKind.ValueType }),
+                new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.UInt64, TypeShape = AotCoreIrTypeShapeKind.ValueType },
+                new HashSet<int> { 0 });
+
+            // ── Missing overload for RoundUpToPowerOf2 ──
+            registry.Register("System.Numerics.BitOperations", "RoundUpToPowerOf2", ["System.UIntPtr"],
                 ShapeKind.SimpleForward, "ChaosBitOpsRoundUpToPowerOf264",
                 new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
                     new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.UInt64, TypeShape = AotCoreIrTypeShapeKind.ValueType }),
@@ -6625,6 +6670,32 @@ public sealed partial class NativeAotLoweringPlanner
                 CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
                 new HashSet<int> { 0 });
 
+            // === System.Net.WebUtility stubs (HtmlEncode/Decode, UrlEncode/Decode) ===
+            registry.Register("System.Net.WebUtility", "HtmlEncode", ["System.String"],
+                ShapeKind.SimpleForward, "ChaosWebUtilityHtmlEncode",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    CreateNativeIntAbiSlot("System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType)),
+                CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
+                new HashSet<int> { 0 });
+            registry.Register("System.Net.WebUtility", "HtmlDecode", ["System.String"],
+                ShapeKind.SimpleForward, "ChaosWebUtilityHtmlDecode",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    CreateNativeIntAbiSlot("System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType)),
+                CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
+                new HashSet<int> { 0 });
+            registry.Register("System.Net.WebUtility", "UrlEncode", ["System.String"],
+                ShapeKind.SimpleForward, "ChaosWebUtilityUrlEncode",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    CreateNativeIntAbiSlot("System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType)),
+                CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
+                new HashSet<int> { 0 });
+            registry.Register("System.Net.WebUtility", "UrlDecode", ["System.String"],
+                ShapeKind.SimpleForward, "ChaosWebUtilityUrlDecode",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    CreateNativeIntAbiSlot("System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType)),
+                CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
+                new HashSet<int> { 0 });
+
             // === System.Globalization.CultureInfo::get_TextInfo (SimpleForward stub) ===
             registry.Register("System.Globalization.CultureInfo", "get_TextInfo", [],
                 ShapeKind.SimpleForward, "ChaosCultureGetTextInfo",
@@ -7345,7 +7416,7 @@ public sealed partial class NativeAotLoweringPlanner
                 new HashSet<int> { 0, 1, 2, 3 });
 
             // ── COM CCW runtime helpers ─────────────────────────────────────────
-            registry.Register("System.Runtime.InteropServices.Marshal", "CreateCcw", ["System.IntPtr", "System.IntPtr"],
+            registry.Register("Marshal", "CreateCcw", ["System.IntPtr", "System.IntPtr"],
                 ShapeKind.SimpleForward, "MarshalCreateCcw",
                 new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
                 {
@@ -7356,31 +7427,31 @@ public sealed partial class NativeAotLoweringPlanner
                 new HashSet<int> { 0, 1 });
 
             // ── Marshal simple ICALL stubs (compiled from runtime_stubs/interop_stubs.cpp) ──
-            registry.Register("System.Runtime.InteropServices.Marshal", "SetLastPInvokeError", ["System.Int32"],
+            registry.Register("Marshal", "SetLastPInvokeError", ["System.Int32"],
                 ShapeKind.SimpleForward, "ChaosMarshalSetLastPInvokeError",
                 new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(CreateInt32AbiSlot()),
                 CreateVoidAbiSlot(),
                 new HashSet<int> { 0 });
 
-            registry.Register("System.Runtime.InteropServices.Marshal", "GetLastPInvokeError", [],
+            registry.Register("Marshal", "GetLastPInvokeError", [],
                 ShapeKind.SimpleForward, "ChaosMarshalGetLastPInvokeError",
                 new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>([]),
                 CreateInt32AbiSlot(),
                 new HashSet<int>());
 
-            registry.Register("System.Runtime.InteropServices.Marshal", "GetExceptionCode", [],
+            registry.Register("Marshal", "GetExceptionCode", [],
                 ShapeKind.SimpleForward, "ChaosMarshalGetExceptionCode",
                 new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>([]),
                 CreateInt32AbiSlot(),
                 new HashSet<int>());
 
-            registry.Register("System.Runtime.InteropServices.Marshal", "GetExceptionPointers", [],
+            registry.Register("Marshal", "GetExceptionPointers", [],
                 ShapeKind.SimpleForward, "ChaosMarshalGetExceptionPointers",
                 new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>([]),
                 CreateNativeIntAbiSlot(),
                 new HashSet<int>());
 
-            registry.Register("System.Runtime.InteropServices.Marshal", "AreComObjectsAvailableForCleanup", [],
+            registry.Register("Marshal", "AreComObjectsAvailableForCleanup", [],
                 ShapeKind.SimpleForward, "ChaosMarshalAreComObjectsAvailableForCleanup",
                 new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>([]),
                 CreateInt32AbiSlot(),

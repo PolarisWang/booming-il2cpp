@@ -40,5 +40,6 @@ extern "C" {
 #include "mutex_stubs.h"
 #include "enum_stubs.h"
 #include "async_stubs.h"
+#include "web_stubs.h"
 
 }  // extern "C"

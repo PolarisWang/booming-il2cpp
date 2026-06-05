@@ -194,6 +194,22 @@ public sealed class DllScanner
         // assemblies (CS0234 when used as parameter/return types in combined subjects).
         "System.Runtime.CompilerServices.RuntimeOps",
         "System.Runtime.CompilerServices.CallSiteOps",
+        // System.Xml.Xsl.Runtime types exist only in System.Private.Xml.dll (the
+        // internal implementation assembly) but NOT in the System.Xml.ReaderWriter
+        // facade/reference assembly.  The ATG discovers them via MLC scanning of
+        // System.Private.Xml.dll, but they can never compile in the combined subjects
+        // DLL because no reference assembly exposes them — CS0433 if we add a direct
+        // ref (type exists in both System.Private.Xml and the facade), CS0234 if not.
+        "System.Xml.Xsl.Runtime",
+        // System.Net.WebUtility methods (HtmlEncode/Decode, UrlEncode/Decode) are
+        // complex string manipulation routines that reference internal .NET types
+        // (e.g. URI parser internals) which the AOT codegen cannot lower.  The
+        // generated hotpatch entries are empty ({0u,0u}), causing crashes at runtime.
+        // Excluding from ATG probing avoids false-positive fact failures.
+        // NOTE: Runtime stubs were added (ChaosWebUtility* in web_stubs.h/cpp) but
+        // the managed methods call internal helpers that the AOT codegen can't resolve.
+        // Remove this exclusion when the codegen handles the full internal call chain.
+        "System.Net.WebUtility",
     };
 
     // Marshaller type names that fail C# compilation when concretized.

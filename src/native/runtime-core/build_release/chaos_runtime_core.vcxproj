@@ -78,7 +78,7 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>D:\agent\booming-il2cpp\contracts\native\v0;D:\agent\booming-il2cpp\src\native\common;D:\agent\booming-il2cpp\src\native\interpreter;D:\agent\booming-il2cpp\src\native\interpreter\generated;D:\agent\booming-il2cpp\src\native\runtime-core;D:\agent\booming-il2cpp\src\native\runtime-core\gc;D:\agent\booming-il2cpp\src\native\runtime-core\runtime_stubs;D:\agent\booming-il2cpp\src\native;D:\agent\booming-il2cpp\src\native\diagnostics;D:\agent\booming-il2cpp\third_party\fmt\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\agent\booming-il2cpp\contracts\native\v0;D:\agent\booming-il2cpp\src\native\common;D:\agent\booming-il2cpp\src\native\interpreter;D:\agent\booming-il2cpp\src\native\interpreter\generated;D:\agent\booming-il2cpp\src\native\runtime-core;D:\agent\booming-il2cpp\src\native\runtime-core\gc;D:\agent\booming-il2cpp\src\native\runtime-core\runtime_stubs;D:\agent\booming-il2cpp\third_party\unordered_dense\include;D:\agent\booming-il2cpp\cmake;D:\agent\booming-il2cpp\src\native;D:\agent\booming-il2cpp\src\native\diagnostics;D:\agent\booming-il2cpp\third_party\fmt\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions>%(AdditionalOptions) /utf-8 /FS</AdditionalOptions>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -92,15 +92,15 @@
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
       <UseFullPaths>false</UseFullPaths>
-      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NOMINMAX;CHAOS_IL2CPP_HAS_TIER_MANAGER;CHAOS_IL2CPP_GC_BGC=1;CHAOS_IL2CPP_GC_PARALLEL_MARK=1;CHAOS_IL2CPP_GC_EVENTS=1;CHAOS_IL2CPP_GC_LARGE_PAGES=1;CHAOS_IL2CPP_CONFIG_CHECK;CMAKE_INTDIR="Debug"</PreprocessorDefinitions>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;CHAOS_IL2CPP_RUNTIME_CONFIG_FILE="runtime-config/desktop.h";CHAOS_IL2CPP_HAS_TIER_MANAGER=1;CHAOS_IL2CPP_GC_BGC=1;CHAOS_IL2CPP_GC_PARALLEL_MARK=1;CHAOS_IL2CPP_GC_EVENTS=1;CHAOS_IL2CPP_GC_LARGE_PAGES=1;CHAOS_IL2CPP_CONFIG_CHECK;CMAKE_INTDIR="Debug"</PreprocessorDefinitions>
       <ObjectFileName>$(IntDir)</ObjectFileName>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_DEBUG;_WINDOWS;NOMINMAX;CHAOS_IL2CPP_HAS_TIER_MANAGER;CHAOS_IL2CPP_GC_BGC=1;CHAOS_IL2CPP_GC_PARALLEL_MARK=1;CHAOS_IL2CPP_GC_EVENTS=1;CHAOS_IL2CPP_GC_LARGE_PAGES=1;CHAOS_IL2CPP_CONFIG_CHECK;CMAKE_INTDIR=\"Debug\"</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>D:\agent\booming-il2cpp\contracts\native\v0;D:\agent\booming-il2cpp\src\native\common;D:\agent\booming-il2cpp\src\native\interpreter;D:\agent\booming-il2cpp\src\native\interpreter\generated;D:\agent\booming-il2cpp\src\native\runtime-core;D:\agent\booming-il2cpp\src\native\runtime-core\gc;D:\agent\booming-il2cpp\src\native\runtime-core\runtime_stubs;D:\agent\booming-il2cpp\src\native;D:\agent\booming-il2cpp\src\native\diagnostics;D:\agent\booming-il2cpp\third_party\fmt\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_DEBUG;_WINDOWS;CHAOS_IL2CPP_RUNTIME_CONFIG_FILE=\"runtime-config/desktop.h\";CHAOS_IL2CPP_HAS_TIER_MANAGER=1;CHAOS_IL2CPP_GC_BGC=1;CHAOS_IL2CPP_GC_PARALLEL_MARK=1;CHAOS_IL2CPP_GC_EVENTS=1;CHAOS_IL2CPP_GC_LARGE_PAGES=1;CHAOS_IL2CPP_CONFIG_CHECK;CMAKE_INTDIR=\"Debug\"</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>D:\agent\booming-il2cpp\contracts\native\v0;D:\agent\booming-il2cpp\src\native\common;D:\agent\booming-il2cpp\src\native\interpreter;D:\agent\booming-il2cpp\src\native\interpreter\generated;D:\agent\booming-il2cpp\src\native\runtime-core;D:\agent\booming-il2cpp\src\native\runtime-core\gc;D:\agent\booming-il2cpp\src\native\runtime-core\runtime_stubs;D:\agent\booming-il2cpp\third_party\unordered_dense\include;D:\agent\booming-il2cpp\cmake;D:\agent\booming-il2cpp\src\native;D:\agent\booming-il2cpp\src\native\diagnostics;D:\agent\booming-il2cpp\third_party\fmt\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>D:\agent\booming-il2cpp\contracts\native\v0;D:\agent\booming-il2cpp\src\native\common;D:\agent\booming-il2cpp\src\native\interpreter;D:\agent\booming-il2cpp\src\native\interpreter\generated;D:\agent\booming-il2cpp\src\native\runtime-core;D:\agent\booming-il2cpp\src\native\runtime-core\gc;D:\agent\booming-il2cpp\src\native\runtime-core\runtime_stubs;D:\agent\booming-il2cpp\src\native;D:\agent\booming-il2cpp\src\native\diagnostics;D:\agent\booming-il2cpp\third_party\fmt\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\agent\booming-il2cpp\contracts\native\v0;D:\agent\booming-il2cpp\src\native\common;D:\agent\booming-il2cpp\src\native\interpreter;D:\agent\booming-il2cpp\src\native\interpreter\generated;D:\agent\booming-il2cpp\src\native\runtime-core;D:\agent\booming-il2cpp\src\native\runtime-core\gc;D:\agent\booming-il2cpp\src\native\runtime-core\runtime_stubs;D:\agent\booming-il2cpp\third_party\unordered_dense\include;D:\agent\booming-il2cpp\cmake;D:\agent\booming-il2cpp\src\native;D:\agent\booming-il2cpp\src\native\diagnostics;D:\agent\booming-il2cpp\third_party\fmt\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -113,7 +113,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>D:\agent\booming-il2cpp\contracts\native\v0;D:\agent\booming-il2cpp\src\native\common;D:\agent\booming-il2cpp\src\native\interpreter;D:\agent\booming-il2cpp\src\native\interpreter\generated;D:\agent\booming-il2cpp\src\native\runtime-core;D:\agent\booming-il2cpp\src\native\runtime-core\gc;D:\agent\booming-il2cpp\src\native\runtime-core\runtime_stubs;D:\agent\booming-il2cpp\src\native;D:\agent\booming-il2cpp\src\native\diagnostics;D:\agent\booming-il2cpp\third_party\fmt\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\agent\booming-il2cpp\contracts\native\v0;D:\agent\booming-il2cpp\src\native\common;D:\agent\booming-il2cpp\src\native\interpreter;D:\agent\booming-il2cpp\src\native\interpreter\generated;D:\agent\booming-il2cpp\src\native\runtime-core;D:\agent\booming-il2cpp\src\native\runtime-core\gc;D:\agent\booming-il2cpp\src\native\runtime-core\runtime_stubs;D:\agent\booming-il2cpp\third_party\unordered_dense\include;D:\agent\booming-il2cpp\cmake;D:\agent\booming-il2cpp\src\native;D:\agent\booming-il2cpp\src\native\diagnostics;D:\agent\booming-il2cpp\third_party\fmt\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions>%(AdditionalOptions) /utf-8 /FS</AdditionalOptions>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <BufferSecurityCheck>false</BufferSecurityCheck>
@@ -125,17 +125,17 @@
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
       <UseFullPaths>false</UseFullPaths>
-      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;NOMINMAX;CHAOS_IL2CPP_HAS_TIER_MANAGER;CHAOS_IL2CPP_GC_BGC=1;CHAOS_IL2CPP_GC_PARALLEL_MARK=1;CHAOS_IL2CPP_GC_EVENTS=1;CHAOS_IL2CPP_GC_LARGE_PAGES=1;CHAOS_IL2CPP_CONFIG_CHECK;CMAKE_INTDIR="Release"</PreprocessorDefinitions>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;CHAOS_IL2CPP_RUNTIME_CONFIG_FILE="runtime-config/desktop.h";CHAOS_IL2CPP_HAS_TIER_MANAGER=1;CHAOS_IL2CPP_GC_BGC=1;CHAOS_IL2CPP_GC_PARALLEL_MARK=1;CHAOS_IL2CPP_GC_EVENTS=1;CHAOS_IL2CPP_GC_LARGE_PAGES=1;CHAOS_IL2CPP_CONFIG_CHECK;CMAKE_INTDIR="Release"</PreprocessorDefinitions>
       <ObjectFileName>$(IntDir)</ObjectFileName>
       <DebugInformationFormat>
       </DebugInformationFormat>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;NOMINMAX;CHAOS_IL2CPP_HAS_TIER_MANAGER;CHAOS_IL2CPP_GC_BGC=1;CHAOS_IL2CPP_GC_PARALLEL_MARK=1;CHAOS_IL2CPP_GC_EVENTS=1;CHAOS_IL2CPP_GC_LARGE_PAGES=1;CHAOS_IL2CPP_CONFIG_CHECK;CMAKE_INTDIR=\"Release\"</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>D:\agent\booming-il2cpp\contracts\native\v0;D:\agent\booming-il2cpp\src\native\common;D:\agent\booming-il2cpp\src\native\interpreter;D:\agent\booming-il2cpp\src\native\interpreter\generated;D:\agent\booming-il2cpp\src\native\runtime-core;D:\agent\booming-il2cpp\src\native\runtime-core\gc;D:\agent\booming-il2cpp\src\native\runtime-core\runtime_stubs;D:\agent\booming-il2cpp\src\native;D:\agent\booming-il2cpp\src\native\diagnostics;D:\agent\booming-il2cpp\third_party\fmt\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;CHAOS_IL2CPP_RUNTIME_CONFIG_FILE=\"runtime-config/desktop.h\";CHAOS_IL2CPP_HAS_TIER_MANAGER=1;CHAOS_IL2CPP_GC_BGC=1;CHAOS_IL2CPP_GC_PARALLEL_MARK=1;CHAOS_IL2CPP_GC_EVENTS=1;CHAOS_IL2CPP_GC_LARGE_PAGES=1;CHAOS_IL2CPP_CONFIG_CHECK;CMAKE_INTDIR=\"Release\"</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>D:\agent\booming-il2cpp\contracts\native\v0;D:\agent\booming-il2cpp\src\native\common;D:\agent\booming-il2cpp\src\native\interpreter;D:\agent\booming-il2cpp\src\native\interpreter\generated;D:\agent\booming-il2cpp\src\native\runtime-core;D:\agent\booming-il2cpp\src\native\runtime-core\gc;D:\agent\booming-il2cpp\src\native\runtime-core\runtime_stubs;D:\agent\booming-il2cpp\third_party\unordered_dense\include;D:\agent\booming-il2cpp\cmake;D:\agent\booming-il2cpp\src\native;D:\agent\booming-il2cpp\src\native\diagnostics;D:\agent\booming-il2cpp\third_party\fmt\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>D:\agent\booming-il2cpp\contracts\native\v0;D:\agent\booming-il2cpp\src\native\common;D:\agent\booming-il2cpp\src\native\interpreter;D:\agent\booming-il2cpp\src\native\interpreter\generated;D:\agent\booming-il2cpp\src\native\runtime-core;D:\agent\booming-il2cpp\src\native\runtime-core\gc;D:\agent\booming-il2cpp\src\native\runtime-core\runtime_stubs;D:\agent\booming-il2cpp\src\native;D:\agent\booming-il2cpp\src\native\diagnostics;D:\agent\booming-il2cpp\third_party\fmt\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\agent\booming-il2cpp\contracts\native\v0;D:\agent\booming-il2cpp\src\native\common;D:\agent\booming-il2cpp\src\native\interpreter;D:\agent\booming-il2cpp\src\native\interpreter\generated;D:\agent\booming-il2cpp\src\native\runtime-core;D:\agent\booming-il2cpp\src\native\runtime-core\gc;D:\agent\booming-il2cpp\src\native\runtime-core\runtime_stubs;D:\agent\booming-il2cpp\third_party\unordered_dense\include;D:\agent\booming-il2cpp\cmake;D:\agent\booming-il2cpp\src\native;D:\agent\booming-il2cpp\src\native\diagnostics;D:\agent\booming-il2cpp\third_party\fmt\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -148,7 +148,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>D:\agent\booming-il2cpp\contracts\native\v0;D:\agent\booming-il2cpp\src\native\common;D:\agent\booming-il2cpp\src\native\interpreter;D:\agent\booming-il2cpp\src\native\interpreter\generated;D:\agent\booming-il2cpp\src\native\runtime-core;D:\agent\booming-il2cpp\src\native\runtime-core\gc;D:\agent\booming-il2cpp\src\native\runtime-core\runtime_stubs;D:\agent\booming-il2cpp\src\native;D:\agent\booming-il2cpp\src\native\diagnostics;D:\agent\booming-il2cpp\third_party\fmt\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\agent\booming-il2cpp\contracts\native\v0;D:\agent\booming-il2cpp\src\native\common;D:\agent\booming-il2cpp\src\native\interpreter;D:\agent\booming-il2cpp\src\native\interpreter\generated;D:\agent\booming-il2cpp\src\native\runtime-core;D:\agent\booming-il2cpp\src\native\runtime-core\gc;D:\agent\booming-il2cpp\src\native\runtime-core\runtime_stubs;D:\agent\booming-il2cpp\third_party\unordered_dense\include;D:\agent\booming-il2cpp\cmake;D:\agent\booming-il2cpp\src\native;D:\agent\booming-il2cpp\src\native\diagnostics;D:\agent\booming-il2cpp\third_party\fmt\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions>%(AdditionalOptions) /utf-8 /FS</AdditionalOptions>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <BufferSecurityCheck>false</BufferSecurityCheck>
@@ -160,17 +160,17 @@
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
       <UseFullPaths>false</UseFullPaths>
-      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;NOMINMAX;CHAOS_IL2CPP_HAS_TIER_MANAGER;CHAOS_IL2CPP_GC_BGC=1;CHAOS_IL2CPP_GC_PARALLEL_MARK=1;CHAOS_IL2CPP_GC_EVENTS=1;CHAOS_IL2CPP_GC_LARGE_PAGES=1;CHAOS_IL2CPP_CONFIG_CHECK;CMAKE_INTDIR="MinSizeRel"</PreprocessorDefinitions>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;CHAOS_IL2CPP_RUNTIME_CONFIG_FILE="runtime-config/desktop.h";CHAOS_IL2CPP_HAS_TIER_MANAGER=1;CHAOS_IL2CPP_GC_BGC=1;CHAOS_IL2CPP_GC_PARALLEL_MARK=1;CHAOS_IL2CPP_GC_EVENTS=1;CHAOS_IL2CPP_GC_LARGE_PAGES=1;CHAOS_IL2CPP_CONFIG_CHECK;CMAKE_INTDIR="MinSizeRel"</PreprocessorDefinitions>
       <ObjectFileName>$(IntDir)</ObjectFileName>
       <DebugInformationFormat>
       </DebugInformationFormat>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;NOMINMAX;CHAOS_IL2CPP_HAS_TIER_MANAGER;CHAOS_IL2CPP_GC_BGC=1;CHAOS_IL2CPP_GC_PARALLEL_MARK=1;CHAOS_IL2CPP_GC_EVENTS=1;CHAOS_IL2CPP_GC_LARGE_PAGES=1;CHAOS_IL2CPP_CONFIG_CHECK;CMAKE_INTDIR=\"MinSizeRel\"</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>D:\agent\booming-il2cpp\contracts\native\v0;D:\agent\booming-il2cpp\src\native\common;D:\agent\booming-il2cpp\src\native\interpreter;D:\agent\booming-il2cpp\src\native\interpreter\generated;D:\agent\booming-il2cpp\src\native\runtime-core;D:\agent\booming-il2cpp\src\native\runtime-core\gc;D:\agent\booming-il2cpp\src\native\runtime-core\runtime_stubs;D:\agent\booming-il2cpp\src\native;D:\agent\booming-il2cpp\src\native\diagnostics;D:\agent\booming-il2cpp\third_party\fmt\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;CHAOS_IL2CPP_RUNTIME_CONFIG_FILE=\"runtime-config/desktop.h\";CHAOS_IL2CPP_HAS_TIER_MANAGER=1;CHAOS_IL2CPP_GC_BGC=1;CHAOS_IL2CPP_GC_PARALLEL_MARK=1;CHAOS_IL2CPP_GC_EVENTS=1;CHAOS_IL2CPP_GC_LARGE_PAGES=1;CHAOS_IL2CPP_CONFIG_CHECK;CMAKE_INTDIR=\"MinSizeRel\"</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>D:\agent\booming-il2cpp\contracts\native\v0;D:\agent\booming-il2cpp\src\native\common;D:\agent\booming-il2cpp\src\native\interpreter;D:\agent\booming-il2cpp\src\native\interpreter\generated;D:\agent\booming-il2cpp\src\native\runtime-core;D:\agent\booming-il2cpp\src\native\runtime-core\gc;D:\agent\booming-il2cpp\src\native\runtime-core\runtime_stubs;D:\agent\booming-il2cpp\third_party\unordered_dense\include;D:\agent\booming-il2cpp\cmake;D:\agent\booming-il2cpp\src\native;D:\agent\booming-il2cpp\src\native\diagnostics;D:\agent\booming-il2cpp\third_party\fmt\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>D:\agent\booming-il2cpp\contracts\native\v0;D:\agent\booming-il2cpp\src\native\common;D:\agent\booming-il2cpp\src\native\interpreter;D:\agent\booming-il2cpp\src\native\interpreter\generated;D:\agent\booming-il2cpp\src\native\runtime-core;D:\agent\booming-il2cpp\src\native\runtime-core\gc;D:\agent\booming-il2cpp\src\native\runtime-core\runtime_stubs;D:\agent\booming-il2cpp\src\native;D:\agent\booming-il2cpp\src\native\diagnostics;D:\agent\booming-il2cpp\third_party\fmt\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\agent\booming-il2cpp\contracts\native\v0;D:\agent\booming-il2cpp\src\native\common;D:\agent\booming-il2cpp\src\native\interpreter;D:\agent\booming-il2cpp\src\native\interpreter\generated;D:\agent\booming-il2cpp\src\native\runtime-core;D:\agent\booming-il2cpp\src\native\runtime-core\gc;D:\agent\booming-il2cpp\src\native\runtime-core\runtime_stubs;D:\agent\booming-il2cpp\third_party\unordered_dense\include;D:\agent\booming-il2cpp\cmake;D:\agent\booming-il2cpp\src\native;D:\agent\booming-il2cpp\src\native\diagnostics;D:\agent\booming-il2cpp\third_party\fmt\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -183,7 +183,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>D:\agent\booming-il2cpp\contracts\native\v0;D:\agent\booming-il2cpp\src\native\common;D:\agent\booming-il2cpp\src\native\interpreter;D:\agent\booming-il2cpp\src\native\interpreter\generated;D:\agent\booming-il2cpp\src\native\runtime-core;D:\agent\booming-il2cpp\src\native\runtime-core\gc;D:\agent\booming-il2cpp\src\native\runtime-core\runtime_stubs;D:\agent\booming-il2cpp\src\native;D:\agent\booming-il2cpp\src\native\diagnostics;D:\agent\booming-il2cpp\third_party\fmt\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\agent\booming-il2cpp\contracts\native\v0;D:\agent\booming-il2cpp\src\native\common;D:\agent\booming-il2cpp\src\native\interpreter;D:\agent\booming-il2cpp\src\native\interpreter\generated;D:\agent\booming-il2cpp\src\native\runtime-core;D:\agent\booming-il2cpp\src\native\runtime-core\gc;D:\agent\booming-il2cpp\src\native\runtime-core\runtime_stubs;D:\agent\booming-il2cpp\third_party\unordered_dense\include;D:\agent\booming-il2cpp\cmake;D:\agent\booming-il2cpp\src\native;D:\agent\booming-il2cpp\src\native\diagnostics;D:\agent\booming-il2cpp\third_party\fmt\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions>%(AdditionalOptions) /utf-8 /FS</AdditionalOptions>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <BufferSecurityCheck>false</BufferSecurityCheck>
@@ -196,15 +196,15 @@
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
       <UseFullPaths>false</UseFullPaths>
-      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;NOMINMAX;CHAOS_IL2CPP_HAS_TIER_MANAGER;CHAOS_IL2CPP_GC_BGC=1;CHAOS_IL2CPP_GC_PARALLEL_MARK=1;CHAOS_IL2CPP_GC_EVENTS=1;CHAOS_IL2CPP_GC_LARGE_PAGES=1;CHAOS_IL2CPP_CONFIG_CHECK;CMAKE_INTDIR="RelWithDebInfo"</PreprocessorDefinitions>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;CHAOS_IL2CPP_RUNTIME_CONFIG_FILE="runtime-config/desktop.h";CHAOS_IL2CPP_HAS_TIER_MANAGER=1;CHAOS_IL2CPP_GC_BGC=1;CHAOS_IL2CPP_GC_PARALLEL_MARK=1;CHAOS_IL2CPP_GC_EVENTS=1;CHAOS_IL2CPP_GC_LARGE_PAGES=1;CHAOS_IL2CPP_CONFIG_CHECK;CMAKE_INTDIR="RelWithDebInfo"</PreprocessorDefinitions>
       <ObjectFileName>$(IntDir)</ObjectFileName>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;NOMINMAX;CHAOS_IL2CPP_HAS_TIER_MANAGER;CHAOS_IL2CPP_GC_BGC=1;CHAOS_IL2CPP_GC_PARALLEL_MARK=1;CHAOS_IL2CPP_GC_EVENTS=1;CHAOS_IL2CPP_GC_LARGE_PAGES=1;CHAOS_IL2CPP_CONFIG_CHECK;CMAKE_INTDIR=\"RelWithDebInfo\"</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>D:\agent\booming-il2cpp\contracts\native\v0;D:\agent\booming-il2cpp\src\native\common;D:\agent\booming-il2cpp\src\native\interpreter;D:\agent\booming-il2cpp\src\native\interpreter\generated;D:\agent\booming-il2cpp\src\native\runtime-core;D:\agent\booming-il2cpp\src\native\runtime-core\gc;D:\agent\booming-il2cpp\src\native\runtime-core\runtime_stubs;D:\agent\booming-il2cpp\src\native;D:\agent\booming-il2cpp\src\native\diagnostics;D:\agent\booming-il2cpp\third_party\fmt\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;CHAOS_IL2CPP_RUNTIME_CONFIG_FILE=\"runtime-config/desktop.h\";CHAOS_IL2CPP_HAS_TIER_MANAGER=1;CHAOS_IL2CPP_GC_BGC=1;CHAOS_IL2CPP_GC_PARALLEL_MARK=1;CHAOS_IL2CPP_GC_EVENTS=1;CHAOS_IL2CPP_GC_LARGE_PAGES=1;CHAOS_IL2CPP_CONFIG_CHECK;CMAKE_INTDIR=\"RelWithDebInfo\"</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>D:\agent\booming-il2cpp\contracts\native\v0;D:\agent\booming-il2cpp\src\native\common;D:\agent\booming-il2cpp\src\native\interpreter;D:\agent\booming-il2cpp\src\native\interpreter\generated;D:\agent\booming-il2cpp\src\native\runtime-core;D:\agent\booming-il2cpp\src\native\runtime-core\gc;D:\agent\booming-il2cpp\src\native\runtime-core\runtime_stubs;D:\agent\booming-il2cpp\third_party\unordered_dense\include;D:\agent\booming-il2cpp\cmake;D:\agent\booming-il2cpp\src\native;D:\agent\booming-il2cpp\src\native\diagnostics;D:\agent\booming-il2cpp\third_party\fmt\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>D:\agent\booming-il2cpp\contracts\native\v0;D:\agent\booming-il2cpp\src\native\common;D:\agent\booming-il2cpp\src\native\interpreter;D:\agent\booming-il2cpp\src\native\interpreter\generated;D:\agent\booming-il2cpp\src\native\runtime-core;D:\agent\booming-il2cpp\src\native\runtime-core\gc;D:\agent\booming-il2cpp\src\native\runtime-core\runtime_stubs;D:\agent\booming-il2cpp\src\native;D:\agent\booming-il2cpp\src\native\diagnostics;D:\agent\booming-il2cpp\third_party\fmt\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\agent\booming-il2cpp\contracts\native\v0;D:\agent\booming-il2cpp\src\native\common;D:\agent\booming-il2cpp\src\native\interpreter;D:\agent\booming-il2cpp\src\native\interpreter\generated;D:\agent\booming-il2cpp\src\native\runtime-core;D:\agent\booming-il2cpp\src\native\runtime-core\gc;D:\agent\booming-il2cpp\src\native\runtime-core\runtime_stubs;D:\agent\booming-il2cpp\third_party\unordered_dense\include;D:\agent\booming-il2cpp\cmake;D:\agent\booming-il2cpp\src\native;D:\agent\booming-il2cpp\src\native\diagnostics;D:\agent\booming-il2cpp\third_party\fmt\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -296,7 +296,12 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClCompile Include="D:\agent\booming-il2cpp\src\native\runtime-core\runtime_stubs\array_stubs.cpp" />
     <ClCompile Include="D:\agent\booming-il2cpp\src\native\runtime-core\runtime_stubs\datetime_stubs.cpp" />
     <ClCompile Include="D:\agent\booming-il2cpp\src\native\runtime-core\runtime_stubs\char_stubs.cpp" />
-    <ClCompile Include="D:\agent\booming-il2cpp\src\native\runtime-core\runtime_stubs\guid_stubs.cpp" />
+    <ClCompile Include="D:\agent\booming-il2cpp\src\native\runtime-core\runtime_stubs\guid_stubs.cpp">
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">%(AdditionalOptions) -msse4.1</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(AdditionalOptions) -msse4.1</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">%(AdditionalOptions) -msse4.1</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">%(AdditionalOptions) -msse4.1</AdditionalOptions>
+    </ClCompile>
     <ClCompile Include="D:\agent\booming-il2cpp\src\native\runtime-core\runtime_stubs\enum_stubs.cpp" />
     <ClCompile Include="D:\agent\booming-il2cpp\src\native\runtime-core\runtime_stubs\random_stubs.cpp" />
     <ClCompile Include="D:\agent\booming-il2cpp\src\native\runtime-core\runtime_stubs\stream_stubs.cpp" />
@@ -343,7 +348,6 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClCompile Include="D:\agent\booming-il2cpp\src\native\runtime-core\aot_core_ir_reader.cpp" />
     <ClInclude Include="D:\agent\booming-il2cpp\src\native\runtime-core\aot_core_ir_reader.h" />
     <ClCompile Include="D:\agent\booming-il2cpp\src\native\runtime-core\core\delegate_helpers.cpp" />
-    <ClCompile Include="D:\agent\booming-il2cpp\src\native\runtime-core\core\delegate_thunks.cpp" />
     <ClInclude Include="D:\agent\booming-il2cpp\src\native\runtime-core\core\delegate_helpers.h" />
     <ClCompile Include="D:\agent\booming-il2cpp\src\native\runtime-core\method_table.cpp" />
     <ClInclude Include="D:\agent\booming-il2cpp\src\native\runtime-core\method_table.h" />
@@ -423,7 +427,6 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClInclude Include="D:\agent\booming-il2cpp\src\native\runtime-core\com_connection_point.h" />
     <ClCompile Include="D:\agent\booming-il2cpp\src\native\runtime-core\com_connection_point.cpp" />
     <ClInclude Include="D:\agent\booming-il2cpp\src\native\runtime-core\com_platform.h" />
-    <ClCompile Include="D:\agent\booming-il2cpp\src\native\runtime-core\com_platform.cpp" />
     <ClInclude Include="D:\agent\booming-il2cpp\src\native\runtime-core\com_factory.h" />
     <ClCompile Include="D:\agent\booming-il2cpp\src\native\runtime-core\com_factory.cpp" />
     <ClInclude Include="D:\agent\booming-il2cpp\src\native\runtime-core\com_typelib.h" />
@@ -438,6 +441,7 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClInclude Include="D:\agent\booming-il2cpp\src\native\runtime-core\tier_manager.h" />
     <ClCompile Include="D:\agent\booming-il2cpp\src\native\runtime-core\tier_manager.cpp" />
     <ClCompile Include="D:\agent\booming-il2cpp\src\native\runtime-core\gc\gc_numa_win.cpp" />
+    <ClCompile Include="D:\agent\booming-il2cpp\src\native\runtime-core\runtime_stubs\mutex_stubs_win32.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="D:\agent\booming-il2cpp\src\native\runtime-core\build_release\ZERO_CHECK.vcxproj">

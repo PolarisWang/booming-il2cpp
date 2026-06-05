@@ -3000,7 +3000,7 @@ private void EmitLinearInitObj(StringBuilder builder, AotCoreIrInstructionArtifa
 		{
 			// Consume the Action parameter from eval stack (keep balanced)
 			var actionExpr = ConsumeEvalStackValueExpression();
-			var targetSymbol = FindThrowsTargetMethod();
+			var (targetSymbol, isStaticTarget) = FindThrowsTargetMethod();
 			var indent = indentation;
 			if (targetSymbol == null)
 			{
@@ -3012,6 +3012,25 @@ private void EmitLinearInitObj(StringBuilder builder, AotCoreIrInstructionArtifa
 				builder.AppendLine($"{indent}}}");
 				return;
 			}
+
+			if (!isStaticTarget)
+			{
+				// Non-static target (e.g. DisplayClass lambda closure): the method
+				// takes the delegate target (DisplayClass instance) as the first
+				// argument. Extract it from the Action delegate and pass it through.
+				var actionNativeType = GetNativeTypeSymbol("System.Private.CoreLib/System.Action");
+				builder.AppendLine($"{indent}{{");
+				builder.AppendLine($"{indent}    try {{");
+				builder.AppendLine($"{indent}        auto* chaos_action = reinterpret_cast<{actionNativeType}*>({actionExpr});");
+				builder.AppendLine($"{indent}        {targetSymbol}(chaos_action->chaos_delegate_target);");
+				builder.AppendLine($"{indent}        throw chaos_managed_exception{{}};  // no exception — fail");
+				builder.AppendLine($"{indent}    }} catch (chaos_managed_exception&) {{");
+				builder.AppendLine($"{indent}        // expected exception was thrown — pass");
+				builder.AppendLine($"{indent}    }}");
+				builder.AppendLine($"{indent}}}");
+				return;
+			}
+
 			builder.AppendLine($"{indent}{{");
 			builder.AppendLine($"{indent}    try {{");
 			builder.AppendLine($"{indent}        {targetSymbol}();");
@@ -3025,13 +3044,15 @@ private void EmitLinearInitObj(StringBuilder builder, AotCoreIrInstructionArtifa
 		/// <summary>
 		/// Scan backward from current instruction to find the target method for Assert.Throws.
 		/// Looks for the pattern: ldnull + ldftn <method> + newobj Action::.ctor.
+		/// Returns (symbol, isStatic) — isStatic indicates whether the target method is
+		/// static (no implicit 'this' argument) vs. an instance method on a DisplayClass.
 		/// </summary>
-		private string? FindThrowsTargetMethod()
+		private (string? Symbol, bool IsStatic) FindThrowsTargetMethod()
 		{
 			var list = _linearInstructionList ?? _lookaheadInstructionList;
 			var idx = _linearInstructionList != null ? _linearInstructionIndex : _lookaheadInstructionIndex;
-			if (list == null || idx < 0) return null;
-			
+			if (list == null || idx < 0) return (null, true);
+
 			// Scan backward from idx-1 to find newobj Action::.ctor preceded by ldftn
 			for (int i = idx - 1; i >= 0; i--)
 			{
@@ -3047,14 +3068,23 @@ private void EmitLinearInitObj(StringBuilder builder, AotCoreIrInstructionArtifa
 						if (ldftnInstr.Callee != null &&
 						    _methodsBySubjectId.TryGetValue(ldftnInstr.Callee, out var targetMethod))
 						{
-							return TryGetInstantiationStubSymbol(targetMethod) ?? targetMethod.NativeSymbol;
+							return (TryGetInstantiationStubSymbol(targetMethod) ?? targetMethod.NativeSymbol, targetMethod.IsStatic);
 						}
 						if (!string.IsNullOrEmpty(ldftnInstr.TargetSymbol))
-							return ldftnInstr.TargetSymbol;
+						{
+						    // Lambda closure methods (DisplayClass + b__0 pattern) are instance
+						    // methods — they take the delegate target as their first argument.
+						    // Detect this pattern from the Callee SubjectId when the method
+						    // metadata is unavailable via _methodsBySubjectId.
+						    var callee = ldftnInstr.Callee ?? "";
+						    bool isLambdaClosure = callee.Contains("DisplayClass") &&
+						        callee.Contains("_b__");
+						    return (ldftnInstr.TargetSymbol, !isLambdaClosure);
+						}
 					}
 				}
 			}
-			return null;
+			return (null, true);
 		}
 
 	/// <summary>

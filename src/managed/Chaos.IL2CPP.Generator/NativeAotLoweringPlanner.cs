@@ -1228,6 +1228,9 @@ extern ""C"" CHAOS_IL2CPP_INT32 RunNativeAot(CHAOS_IL2CPP_INT32 entryIndex) {{
                                         // the header is tiny (~15 lines) and the stubs are only
                                         // referenced when async yield methods are present.
                                         includes_.Add("\"async_stubs.h\"");
+        // Exception stubs (ChaosInvokeAction) — needed by verification dispatch.
+        // Always included; the header is tiny and the inline function is zero-cost.
+        includes_.Add("\"exception_stubs.h\"");
         // Enum metadata header — only included when there are enum types in the closure.
         // Saves ~500 KB of C++ parsing per translation unit when no enums are present.
         if (!string.IsNullOrEmpty(enumMetaHeader))

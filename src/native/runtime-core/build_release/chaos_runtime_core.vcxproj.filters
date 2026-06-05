@@ -142,9 +142,6 @@
     <ClCompile Include="D:\agent\booming-il2cpp\src\native\runtime-core\core\delegate_helpers.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="D:\agent\booming-il2cpp\src\native\runtime-core\core\delegate_thunks.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="D:\agent\booming-il2cpp\src\native\runtime-core\method_table.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -250,9 +247,6 @@
     <ClCompile Include="D:\agent\booming-il2cpp\src\native\runtime-core\com_connection_point.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="D:\agent\booming-il2cpp\src\native\runtime-core\com_platform.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="D:\agent\booming-il2cpp\src\native\runtime-core\com_factory.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -275,6 +269,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="D:\agent\booming-il2cpp\src\native\runtime-core\gc\gc_numa_win.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\agent\booming-il2cpp\src\native\runtime-core\runtime_stubs\mutex_stubs_win32.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
