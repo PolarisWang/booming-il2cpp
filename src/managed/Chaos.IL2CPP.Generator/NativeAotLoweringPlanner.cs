@@ -1696,9 +1696,12 @@ extern ""C"" CHAOS_IL2CPP_INT32 RunNativeAot(CHAOS_IL2CPP_INT32 entryIndex) {{
             _bridgeImportThunks.Values.Any(t => t.ExternalRuntimeTableIndex >= 0))
         {
             sb.AppendLine("extern \"C\" void* kChaosExternalRuntimeFnTable[];");
-            sb.AppendLine("extern \"C\" int32_t kChaosExternalRuntimeCount;");
             sb.AppendLine();
         }
+        // Always declare kChaosExternalRuntimeCount for page files that use
+        // BS-5 external runtime table bounds checks (defined in main file).
+        sb.AppendLine("extern \"C\" int32_t kChaosExternalRuntimeCount;");
+        sb.AppendLine();
 
         // ── Runtime helper function declarations (global scope) ──
         // These functions are DEFINED in the native runtime library (not inside the
