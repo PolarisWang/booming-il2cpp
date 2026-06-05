@@ -97,6 +97,18 @@ extern "C" BenchmarkResult RunHotpatchBenchmark(int entry_index, int iterations)
 extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Reset();
 extern "C" CHAOS_IL2CPP_INT32 Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Complete();
 
+// Interop stub declarations (defined in interop_stubs.cpp from SDK runtime_stubs)
+extern "C" int ChaosMarshalGetLastPInvokeError() noexcept;
+extern "C" int ChaosMarshalGetHRForLastWin32Error() noexcept;
+extern "C" int ChaosMarshalGetExceptionCode() noexcept;
+extern "C" CHAOS_IL2CPP_INTPTR ChaosMarshalGetExceptionPointers() noexcept;
+extern "C" int ChaosMarshalAreComObjectsAvailableForCleanup() noexcept;
+
+// External runtime function table (populated by codegen, may have null entries)
+extern "C" void* kChaosExternalRuntimeFnTable[];
+extern "C" int32_t kChaosExternalRuntimeCount;
+extern "C" void* kChaosExternalRuntimeSubjects[];
+
 // Per-method host arrays for ApplyPatchFromMemoryEx (defined in patch-host-arrays.cpp).
 // Sentinel values when no patch data is embedded; replaced by the hotupdate pipeline
 // with real per-method mappings to enable name-based lookup in HotpatchNameRegistry.
@@ -906,6 +918,29 @@ int main(int argc, char* argv[]) {
         return 1;
     }
     ChaosRegisterGcLayouts();
+
+    // ── Register interop stub fallbacks in kChaosExternalRuntimeFnTable ──
+    // The codegen may not produce AOT stubs for all managed methods, leaving
+    // their external function table entries as nullptr.  Bridge thunks that
+    // call through null entries crash with AV.  Match known methods by
+    // SubjectId and populate with native interop stub implementations.
+    for (int32_t _i = 0; _i < kChaosExternalRuntimeCount; _i++) {
+        if (kChaosExternalRuntimeFnTable[_i] != nullptr) continue;
+        const char* _sid = static_cast<const char*>(kChaosExternalRuntimeSubjects[_i]);
+        if (_sid == nullptr) continue;
+        if (std::strstr(_sid, "::GetLastPInvokeError") != nullptr) {
+            kChaosExternalRuntimeFnTable[_i] = reinterpret_cast<void*>(ChaosMarshalGetLastPInvokeError);
+        } else if (std::strstr(_sid, "::GetHRForLastWin32Error") != nullptr) {
+            kChaosExternalRuntimeFnTable[_i] = reinterpret_cast<void*>(ChaosMarshalGetHRForLastWin32Error);
+        } else if (std::strstr(_sid, "::GetExceptionCode") != nullptr) {
+            kChaosExternalRuntimeFnTable[_i] = reinterpret_cast<void*>(ChaosMarshalGetExceptionCode);
+        } else if (std::strstr(_sid, "::GetExceptionPointers") != nullptr) {
+            kChaosExternalRuntimeFnTable[_i] = reinterpret_cast<void*>(ChaosMarshalGetExceptionPointers);
+        } else if (std::strstr(_sid, "::AreComObjectsAvailableForCleanup") != nullptr) {
+            kChaosExternalRuntimeFnTable[_i] = reinterpret_cast<void*>(ChaosMarshalAreComObjectsAvailableForCleanup);
+        }
+    }
+
 {{ if is_jit }}
 #if defined(_WIN32)
     AddVectoredExceptionHandler(1, JitVehHandler);
