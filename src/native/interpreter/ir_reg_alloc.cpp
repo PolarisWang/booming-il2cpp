@@ -128,6 +128,9 @@ RegisterMethod AllocateRegisters(const IRMethod& ir_method) noexcept {
         case IROpCode::Ceq: case IROpCode::Clt: case IROpCode::Cgt:
         case IROpCode::LdElem:    // array[index]
         case IROpCode::LdElemA:   // same as LdElem in interpreter (loads element value)
+        case IROpCode::LdElemNoChk:
+        case IROpCode::LdElemANoChk:
+        case IROpCode::Abs: case IROpCode::Min: case IROpCode::Max:
         {
             // Pop src2, src1
             if (virt_sp >= 2) {
@@ -142,6 +145,7 @@ RegisterMethod AllocateRegisters(const IRMethod& ir_method) noexcept {
 
         // ── Unary ops: pop 1, push 1 (Neg, Not, Conv_*) ──────────────
         case IROpCode::Neg: case IROpCode::Not:
+        case IROpCode::Popcnt: case IROpCode::Lzcnt:
         case IROpCode::Conv_I4: case IROpCode::Conv_I8:
         case IROpCode::Conv_R4: case IROpCode::Conv_R8:
         case IROpCode::ConvRUn: case IROpCode::ConvI: case IROpCode::ConvU:
@@ -240,7 +244,7 @@ RegisterMethod AllocateRegisters(const IRMethod& ir_method) noexcept {
         }
 
         // ── StFld: pop value, pop obj ──
-        case IROpCode::StFld:
+        case IROpCode::StFld: case IROpCode::StFldBarrier:
         {
             if (virt_sp >= 1) {
                 src1_reg = virt_stack[--virt_sp];  // value (top)
@@ -362,7 +366,7 @@ RegisterMethod AllocateRegisters(const IRMethod& ir_method) noexcept {
         }
 
         // ── StElem: pop value, pop index, pop array ──
-        case IROpCode::StElem:
+        case IROpCode::StElem: case IROpCode::StElemNoChk:
         {
             if (virt_sp >= 1) {
                 src1_reg = virt_stack[--virt_sp];  // value (top)
@@ -528,9 +532,9 @@ RegisterMethod AllocateRegisters(const IRMethod& ir_method) noexcept {
         case IROpCode::Switch:
             flags |= kRegIsBranch;
             break;
-        case IROpCode::StFld: case IROpCode::StSFld:
+        case IROpCode::StFld: case IROpCode::StSFld: case IROpCode::StFldBarrier:
         case IROpCode::StLoc: case IROpCode::StArg:
-        case IROpCode::StElem: case IROpCode::StInd: case IROpCode::StObj:
+        case IROpCode::StElem: case IROpCode::StElemNoChk: case IROpCode::StInd: case IROpCode::StObj:
         case IROpCode::InitObj: case IROpCode::Cpblk: case IROpCode::InitBlk:
             flags |= kRegIsStore;
             break;
@@ -554,6 +558,9 @@ RegisterMethod AllocateRegisters(const IRMethod& ir_method) noexcept {
         case IROpCode::LdInd: case IROpCode::StInd:
         case IROpCode::Switch: case IROpCode::LdObj: case IROpCode::StObj:
         case IROpCode::LdElem: case IROpCode::StElem: case IROpCode::LdElemA:
+        case IROpCode::LdElemNoChk: case IROpCode::StElemNoChk: case IROpCode::LdElemANoChk:
+        case IROpCode::Simd: case IROpCode::SimdFma:
+        case IROpCode::Popcnt: case IROpCode::Lzcnt:
         case IROpCode::Br: case IROpCode::BrTrue: case IROpCode::BrFalse:
         case IROpCode::Beq: case IROpCode::Blt: case IROpCode::Bgt:
         case IROpCode::Ble: case IROpCode::Bge: case IROpCode::Leave:
@@ -576,25 +583,26 @@ RegisterMethod AllocateRegisters(const IRMethod& ir_method) noexcept {
         ri.header = header;
 
         // ── Copy immediate payload ─────────────────────────────────────
-        // NOTE: imm is a union (8 bytes). Write order matters:
-        //   - 8-byte fields (i8, r8, ptr) overwrite ALL union bytes.
-        //   - 4-byte fields (i4, arg_count, operand_index, etc.) only
-        //     write bytes 0-3, leaving bytes 4-7 from the last 8-byte write.
+        // NOTE: imm is a union (8 bytes). Only write the field(s) relevant
+        // to this opcode. The union was zero-initialized at line 101, so
+        // unwritten bytes remain 0.
         //
-        // Strategy: write 8-byte fields BEFORE the final 4-byte i4 write,
-        // since i4 is the most commonly read field and must be last.
-
-        // 8-byte fields first (overwrite everything, typically 0).
-        ri.imm.i8       = ir.immediate_i8;
-        ri.imm.r8       = ir.immediate_r8;
-
-        // 4-byte fields that are typically 0 for most opcodes.
-        // arg_count is also stored in header bits for call opcodes.
-        ri.imm.arg_count = ir.arg_count;
-
-        // i4 last — this 4-byte write is the final value for bytes 0-3.
-        // Used by LdcI4 (constant), token/type info, and many opcodes.
-        ri.imm.i4       = ir.immediate_i4;
+        // LdcI8 / LdcR8: the 8-byte i8/r8 immediate is the ONLY field that
+        // matters. Skip all 4-byte writes (arg_count, i4) and the opposing
+        // 8-byte write to preserve the value.
+        if (ir.op_code == IROpCode::LdcI8) {
+            ri.imm.i8 = ir.immediate_i8;
+        } else if (ir.op_code == IROpCode::LdcR8) {
+            ri.imm.r8 = ir.immediate_r8;
+        } else {
+            // Generic path: write 8-byte fields first, then 4-byte.
+            // r8 is the last 8-byte write (overwrites i8 bytes 0-7).
+            // i4 is the last 4-byte write (final value for bytes 0-3).
+            ri.imm.i8       = ir.immediate_i8;
+            ri.imm.r8       = ir.immediate_r8;
+            ri.imm.arg_count = ir.arg_count;
+            ri.imm.i4       = ir.immediate_i4;
+        }
 
         // Opcode-specific fields (overwrite union after generic writes).
         if (ir.op_code == IROpCode::Switch) {
@@ -2307,7 +2315,9 @@ static void Reg_Break(RegisterFrame& frame, const RegisterInstruction& instr) no
     ++frame.pc;
 }
 
-// ── Dispatch table ──────────────────────────────────────────────────────
+// ── Dispatch table (MSVC fallback only) ─────────────────────────────────
+// GCC/Clang uses computed-goto dispatch inside RegisterExecute.
+#if !defined(__GNUC__) && !defined(__clang__)
 
 #define R(name) Reg_##name
 #define UNSUP Reg_Unsupported
@@ -2344,13 +2354,15 @@ static constexpr RegOpHandler kRegHandlers[100] = {
     /* 84 */ R(AddOvf),        /* 85 */ R(SubOvf),         /* 86 */ R(MulOvf),
     /* 87 */ R(ConvOvfI),      /* 88 */ R(ConvOvfI4),      /* 89 */ R(ConvOvfI8),
     /* 90 */ R(ConvOvfU),      /* 91 */ R(ConvOvfU4),      /* 92 */ R(ConvOvfU8),
-    /* 93 */ R(LdObj),         /* 94 */ R(StObj),          /* 95 */ R(LdElem),      // LdElemA maps to LdElem (same element load)
+    /* 93 */ R(LdObj),         /* 94 */ R(StObj),          /* 95 */ R(LdElem),      // LdElemA maps to LdElem
     /* 96 */ R(Cpblk),         /* 97 */ R(InitBlk),        /* 98 */ R(CallVirtConstrained),
     /* 99 */ R(Calli),
 };
 
 #undef R
 #undef UNSUP
+
+#endif  // !defined(__GNUC__) && !defined(__clang__) — MSVC dispatch table
 
 // ── OSR: hot loop → T4 native code promotion ──────────────────────────────
 // V1 "promote on re-entry": when RegisterExecute detects a hot loop backward
@@ -2442,11 +2454,143 @@ static void TryOsrPromotion(RegisterFrame& frame,
 }
 
 // ── RegisterExecute ─────────────────────────────────────────────────────
+//
+// GCC/Clang: computed-goto dispatch — eliminates indirect function-call overhead
+//            from the dispatch loop. Each label calls the handler directly.
+// MSVC:      function-pointer dispatch via kRegHandlers[100] table.
 
 bool RegisterExecute(RegisterFrame& frame,
                      const RegisterInstruction* instrs,
                      uint32_t instr_count) noexcept {
     frame.pc = 0;
+
+#if defined(__GNUC__) || defined(__clang__)
+    // ── Computed-goto dispatch (GCC/Clang) ─────────────────────────────
+    static const void* kRegDispatchTable[100] = {
+        &&op_LdcI4, &&op_LdcI8, &&op_LdcR4, &&op_LdcR8,
+        &&op_LdStr, &&op_LdNull, &&op_LdArg, &&op_LdLoc,
+        &&op_StLoc, &&op_StArg, &&op_LdFld, &&op_StFld,
+        &&op_LdSFld, &&op_StSFld, &&op_Call, &&op_CallVirt,
+        &&op_CallBridge, &&op_Br, &&op_BrTrue, &&op_BrFalse,
+        &&op_Beq, &&op_Blt, &&op_Bgt, &&op_Ble,
+        &&op_Bge, &&op_Add, &&op_Sub, &&op_Mul,
+        &&op_Div, &&op_Rem, &&op_Neg, &&op_Ceq,
+        &&op_Clt, &&op_Cgt, &&op_NewObj, &&op_Box,
+        &&op_Unbox, &&op_CastClass, &&op_IsInst,
+        &&op_Conv_I4, &&op_Conv_I8, &&op_Conv_R4, &&op_Conv_R8,
+        &&op_NewArr, &&op_LdElem, &&op_StElem, &&op_LdLen,
+        &&op_Pop, &&op_Throw, &&op_Rethrow, &&op_Leave,
+        &&op_EndFinally, &&op_EndFilter, &&op_Ret,
+        &&op_Dup, &&op_DivUn, &&op_RemUn,
+        &&op_And, &&op_Or, &&op_Xor, &&op_Not,
+        &&op_Shl, &&op_Shr, &&op_ShrUn,
+        &&op_ConvRUn, &&op_ConvI, &&op_ConvU,
+        &&op_LdInd, &&op_StInd,
+        &&op_Switch, &&op_LdToken, &&op_InitObj, &&op_SizeOf,
+        &&op_LdFtn, &&op_LdVirtFtn,
+        &&op_LdArgA, &&op_LdLocA, &&op_LocAlloc,
+        &&op_Break, &&op_BneUn, &&op_BgeUn,
+        &&op_BgtUn, &&op_BleUn, &&op_BltUn,
+        &&op_AddOvf, &&op_SubOvf, &&op_MulOvf,
+        &&op_ConvOvfI, &&op_ConvOvfI4, &&op_ConvOvfI8,
+        &&op_ConvOvfU, &&op_ConvOvfU4, &&op_ConvOvfU8,
+        &&op_LdObj, &&op_StObj, &&op_LdElem,  // LdElemA → LdElem
+        &&op_Cpblk, &&op_InitBlk, &&op_CallVirtConstrained,
+        &&op_Calli,
+    };
+
+    uint32_t loop_counter = 0;
+    uint32_t prev_pc = 0;
+
+    goto dispatch_loop;
+
+    // ── Dispatch loop top ────────────────────────────────────────────────
+dispatch_loop:
+    CHAOS_IL2CPP_PROFILE_SCOPE("RegisterExecute");
+    if (frame.pc >= instr_count) goto done;
+    prev_pc = frame.pc;
+    {
+        uint32_t op_val = static_cast<uint32_t>(instrs[prev_pc].op_code());
+        if (op_val > 99) { frame.threw_exception = true; goto done; }
+        goto* kRegDispatchTable[op_val];
+    }
+
+    // ── Post-handler: OSR check + exit detection ─────────────────────────
+dispatch_next:
+    // Check exit conditions set by handlers (Ret → 0xFFffFFffu, unhandled Throw → 9999).
+    if (frame.pc == 0xFFffFFffu) goto done;
+    if (frame.threw_exception && frame.pc == 9999) goto done;
+
+    // OSR: detect hot loop backward branch.
+    if (frame.pc < prev_pc) {
+        uint32_t threshold = kOsrLoopThreshold;
+        if (frame.osr_reenable) {
+            auto* pm = static_cast<chaos::il2cpp::runtime_core::PatchMethod*>(frame.patch_method);
+            threshold = (pm != nullptr && pm->deopt_count > 0)
+                ? (kOsrLoopThreshold << std::min(pm->deopt_count, 5u))
+                : 1u;
+            frame.osr_reenable = false;
+        }
+        if (++loop_counter >= threshold) {
+            TryOsrPromotion(frame, instrs, instr_count);
+            if (frame.pc == 0xFFffFFffu) goto done;  // OSR took over
+        }
+    }
+    goto dispatch_loop;
+
+    // ── Handler dispatch labels ──────────────────────────────────────────
+    // Each label calls the corresponding Reg_ handler function, then falls
+    // through to dispatch_next for OSR/exit checks.  This eliminates the
+    // indirect function-call dispatch overhead vs. the MSVC function-pointer
+    // path while keeping handler code in separate (testable) functions.
+
+#define CG_HANDLER(name)  op_##name: { Reg_##name(frame, instrs[prev_pc]); goto dispatch_next; }
+#define CG_EXIT(name)     op_##name: { Reg_##name(frame, instrs[prev_pc]); goto done; }
+
+    CG_HANDLER(LdcI4)           CG_HANDLER(LdcI8)           CG_HANDLER(LdcR4)
+    CG_HANDLER(LdcR8)           CG_HANDLER(LdStr)           CG_HANDLER(LdNull)
+    CG_HANDLER(LdArg)           CG_HANDLER(LdLoc)           CG_HANDLER(StLoc)
+    CG_HANDLER(StArg)           CG_HANDLER(LdFld)           CG_HANDLER(StFld)
+    CG_HANDLER(LdSFld)          CG_HANDLER(StSFld)          CG_HANDLER(Call)
+    CG_HANDLER(CallVirt)        CG_HANDLER(CallBridge)      CG_HANDLER(Br)
+    CG_HANDLER(BrTrue)          CG_HANDLER(BrFalse)         CG_HANDLER(Beq)
+    CG_HANDLER(Blt)             CG_HANDLER(Bgt)             CG_HANDLER(Ble)
+    CG_HANDLER(Bge)             CG_HANDLER(Add)             CG_HANDLER(Sub)
+    CG_HANDLER(Mul)             CG_HANDLER(Div)             CG_HANDLER(Rem)
+    CG_HANDLER(Neg)             CG_HANDLER(Ceq)             CG_HANDLER(Clt)
+    CG_HANDLER(Cgt)             CG_HANDLER(NewObj)          CG_HANDLER(Box)
+    CG_HANDLER(Unbox)           CG_HANDLER(CastClass)       CG_HANDLER(IsInst)
+    CG_HANDLER(Conv_I4)         CG_HANDLER(Conv_I8)         CG_HANDLER(Conv_R4)
+    CG_HANDLER(Conv_R8)         CG_HANDLER(NewArr)          CG_HANDLER(LdElem)
+    CG_HANDLER(StElem)          CG_HANDLER(LdLen)           CG_HANDLER(Pop)
+    CG_HANDLER(Throw)           CG_HANDLER(Rethrow)         CG_HANDLER(Leave)
+    CG_HANDLER(EndFinally)      CG_HANDLER(EndFilter)       CG_HANDLER(Ret)
+    CG_HANDLER(Dup)             CG_HANDLER(DivUn)           CG_HANDLER(RemUn)
+    CG_HANDLER(And)             CG_HANDLER(Or)              CG_HANDLER(Xor)
+    CG_HANDLER(Not)             CG_HANDLER(Shl)             CG_HANDLER(Shr)
+    CG_HANDLER(ShrUn)           CG_HANDLER(ConvRUn)         CG_HANDLER(ConvI)
+    CG_HANDLER(ConvU)           CG_HANDLER(LdInd)           CG_HANDLER(StInd)
+    CG_HANDLER(Switch)          CG_HANDLER(LdToken)         CG_HANDLER(InitObj)
+    CG_HANDLER(SizeOf)          CG_HANDLER(LdFtn)           CG_HANDLER(LdVirtFtn)
+    CG_HANDLER(LdArgA)          CG_HANDLER(LdLocA)          CG_HANDLER(LocAlloc)
+    CG_HANDLER(Break)           CG_HANDLER(BneUn)           CG_HANDLER(BgeUn)
+    CG_HANDLER(BgtUn)           CG_HANDLER(BleUn)           CG_HANDLER(BltUn)
+    CG_HANDLER(AddOvf)          CG_HANDLER(SubOvf)          CG_HANDLER(MulOvf)
+    CG_HANDLER(ConvOvfI)        CG_HANDLER(ConvOvfI4)       CG_HANDLER(ConvOvfI8)
+    CG_HANDLER(ConvOvfU)        CG_HANDLER(ConvOvfU4)       CG_HANDLER(ConvOvfU8)
+    CG_HANDLER(LdObj)           CG_HANDLER(StObj)
+    CG_HANDLER(Cpblk)           CG_HANDLER(InitBlk)         CG_HANDLER(CallVirtConstrained)
+    CG_HANDLER(Calli)
+
+#undef CG_HANDLER
+#undef CG_EXIT
+
+done:
+    frame.CleanupTracked();
+    return !frame.threw_exception;
+
+#else   // MSVC — function-pointer dispatch
+    // ── MSVC fallback: original function-pointer dispatch ──────────────
     uint32_t loop_counter = 0;
 
     while (frame.pc < instr_count) {
@@ -2460,23 +2604,19 @@ bool RegisterExecute(RegisterFrame& frame,
         uint32_t prev_pc = frame.pc;
         kRegHandlers[op_val](frame, instrs[frame.pc]);
 
-        // OSR: Detect hot loop backward branch — if the handler took a branch
-        // and the target is an earlier instruction, it's a loop backedge.
+        // OSR: Detect hot loop backward branch.
         if (frame.pc != prev_pc + 1 && frame.pc < prev_pc) {
-            // Phase B: OSR deopt backoff — after deoptimization, use exponential
-            // backoff on the loop threshold to avoid immediate OSR→deopt bounce.
-            // Each deopt doubles the iterations before OSR retry is attempted.
             uint32_t threshold = kOsrLoopThreshold;
             if (frame.osr_reenable) {
                 auto* pm = static_cast<chaos::il2cpp::runtime_core::PatchMethod*>(frame.patch_method);
                 threshold = (pm != nullptr && pm->deopt_count > 0)
                     ? (kOsrLoopThreshold << std::min(pm->deopt_count, 5u))
                     : 1u;
-                frame.osr_reenable = false;  // one-shot
+                frame.osr_reenable = false;
             }
             if (++loop_counter >= threshold) {
                 TryOsrPromotion(frame, instrs, instr_count);
-                if (frame.pc == 0xFFffFFffu) continue;  // OSR took over
+                if (frame.pc == 0xFFffFFffu) continue;
             }
         }
 
@@ -2493,6 +2633,7 @@ bool RegisterExecute(RegisterFrame& frame,
 
     frame.CleanupTracked();
     return true;
+#endif  // defined(__GNUC__) || defined(__clang__)
 }
 
 }  // namespace chaOS_IL2CPP_INTERPRETER_H_

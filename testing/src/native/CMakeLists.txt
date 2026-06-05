@@ -131,17 +131,25 @@ include(rtc)
 function(add_chaos_test name)
     cmake_parse_arguments(ARG "" "SANITIZE" "LIBS;INCLUDES;LABELS" ${ARGN})
     add_executable(${name} ${ARG_UNPARSED_ARGUMENTS})
-    target_link_libraries(${name} PRIVATE gtest_main ${ARG_LIBS})
-    target_include_directories(${name} PRIVATE ${CHAOS_INCLUDE_DIRS} ${ARG_INCLUDES})
     if(MSVC)
+        target_link_libraries(${name} PRIVATE gtest_main ${ARG_LIBS})
         target_link_options(${name} PRIVATE /FORCE:MULTIPLE)
     else()
-        # Linux: allow duplicate TLS definitions from test stubs
+        # Linux: wrap chaos static libs in --start-group/--end-group to resolve
+        # circular dependencies between chaos_interpreter, chaos_bootstrap,
+        # chaos_runtime_core, and chaos_debugger.
+        target_link_libraries(${name} PRIVATE
+            gtest_main
+            -Wl,--start-group
+            ${ARG_LIBS}
+            -Wl,--end-group)
+        # Allow duplicate TLS definitions from test stubs
         target_link_options(${name} PRIVATE -Wl,--allow-multiple-definition)
         # Force JitRecompileToTier1 to resolve circular dep between
         # chaos_runtime_core (tier_manager) and chaos_jit (jit_precode)
         target_link_options(${name} PRIVATE -Wl,--undefined=JitRecompileToTier1)
     endif()
+    target_include_directories(${name} PRIVATE ${CHAOS_INCLUDE_DIRS} ${ARG_INCLUDES})
     add_test(NAME ${name} COMMAND ${name})
     if(ARG_LABELS)
         set_tests_properties(${name} PROPERTIES LABELS "${ARG_LABELS}")

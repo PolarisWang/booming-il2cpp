@@ -81,8 +81,6 @@ static bool IsPureArithmetic(interpreter::IROpCode opc) noexcept {
         case interpreter::IROpCode::Ceq:
         case interpreter::IROpCode::Clt:
         case interpreter::IROpCode::Cgt:
-        case interpreter::IROpCode::CltUn:
-        case interpreter::IROpCode::CgtUn:
         case interpreter::IROpCode::Conv_I4:
         case interpreter::IROpCode::Conv_I8:
         case interpreter::IROpCode::Conv_R4:
@@ -789,12 +787,6 @@ static bool ConstPropagate(
             case interpreter::IROpCode::Ceq:  result = (v1 == v2) ? 1 : 0; use_i64 = false; break;
             case interpreter::IROpCode::Clt:  result = (v1 <  v2) ? 1 : 0; use_i64 = false; break;
             case interpreter::IROpCode::Cgt:  result = (v1 >  v2) ? 1 : 0; use_i64 = false; break;
-            case interpreter::IROpCode::CltUn:
-                result = (static_cast<uint64_t>(v1) < static_cast<uint64_t>(v2)) ? 1 : 0;
-                use_i64 = false; break;
-            case interpreter::IROpCode::CgtUn:
-                result = (static_cast<uint64_t>(v1) > static_cast<uint64_t>(v2)) ? 1 : 0;
-                use_i64 = false; break;
 
             // Unary
             case interpreter::IROpCode::Neg: result = use_i64 ? -v1 : -static_cast<int32_t>(v1); break;

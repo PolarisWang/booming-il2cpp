@@ -13,6 +13,7 @@
 #include "reflection_query_model.h"
 #include "fast_frame_pool.h"
 #include "fast_dispatch.h"
+#include "method_table.h"
 
 #include "bootstrap/bootstrap.h"
 

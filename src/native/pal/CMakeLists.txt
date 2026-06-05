@@ -12,8 +12,9 @@ add_library(chaos_pal STATIC
     $<$<PLATFORM_ID:Windows>:pal_time_win32.cpp>
     $<$<PLATFORM_ID:Linux>:pal_time_linux.cpp>
     $<$<PLATFORM_ID:Darwin>:pal_time_macos.cpp>
+    $<$<PLATFORM_ID:Android>:pal_time_android.cpp>
     # Fallback for platforms without specific time implementation
-    $<$<NOT:$<PLATFORM_ID:Windows,Linux,Darwin>>:pal_time_fallback.cpp>
+    $<$<NOT:$<PLATFORM_ID:Windows,Linux,Darwin,Android>>:pal_time_fallback.cpp>
     # ── Phase 2: Virtual memory ────────────────────────────────────
     chaos/pal/pal_mem.h
     $<$<PLATFORM_ID:Windows>:pal_mem_win32.cpp>
@@ -60,7 +61,8 @@ add_library(chaos_pal STATIC
     # ── Track C: Wakeable queue (thread pool) ─────────────────────────
     chaos/pal/pal_wakeable.h
     $<$<PLATFORM_ID:Windows>:pal_wakeable_win32.cpp>
-    $<$<NOT:$<PLATFORM_ID:Windows>>:pal_wakeable_posix.cpp>
+    $<$<PLATFORM_ID:Darwin>:pal_wakeable_apple.cpp>
+    $<$<NOT:$<PLATFORM_ID:Windows,Darwin>>:pal_wakeable_posix.cpp>
     # ── Track 5: ETW abstraction ───────────────────────────────────────
     chaos/pal/pal_etw.h
     $<$<PLATFORM_ID:Windows>:pal_etw_win32.cpp>

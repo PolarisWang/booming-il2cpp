@@ -145,6 +145,11 @@ public:
         : slot_idx_(-1)
         , start_cycles_(0) {
 #if CHAOS_IL2CPP_VM_PROFILER_ENABLED
+        // ARM64 not yet supported for VM profiler (no __rdtsc).
+        // Use CHAOS_IL2CPP_PROFILE_SCOPE instead for ARM64 profiling.
+        #if !defined(__x86_64__) && !defined(__i386__) && !defined(_M_AMD64)
+        #error "register_vm_profiler.h: CHAOS_IL2CPP_VM_PROFILER_ENABLED requires x86 RDTSC"
+        #endif
         if (method_key != 0) {
             slot_idx_ = g_vm_profiler.FindOrCreateSlot(method_key);
             start_cycles_ = __rdtsc();

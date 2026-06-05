@@ -7,8 +7,8 @@ namespace chaos::il2cpp::pal {
 
 /// Opaque handle for a wakeable wait queue.
 /// On Windows: backed by an IOCP (I/O Completion Port).
-/// On Linux: backed by epoll + eventfd.
-/// On Apple/Android: not supported (returns nullptr from Create).
+/// On Linux/Android: backed by epoll + eventfd.
+/// On Apple: backed by kqueue + EVFILT_USER.
 struct PalWakeable;
 
 /// Create a wakeable queue.

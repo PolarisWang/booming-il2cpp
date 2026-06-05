@@ -108,6 +108,12 @@ public enum InstructionOpCode : int
     Min = 101,
     Max = 102,
     StFldBarrier = 103,
+    LdElemNoChk = 104,
+    StElemNoChk = 105,
+    LdElemANoChk = 106,
+    Simd = 107,
+    Popcnt = 108,
+    Lzcnt = 109,
+    SimdFma = 110,
 }
 #pragma warning restore CS1591
-

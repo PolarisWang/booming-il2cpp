@@ -1,12 +1,15 @@
 #include "method_table.h"
 #include "module_registry.h"
 #include "abi_manifest.h"
+#include "hotpatch_table.h"
 
 #include <chaos/trace.h>
 #include <chaos/profile.h>
 
+#include <algorithm>
 #include <atomic>
 #include <cstring>
+#include <vector>
 
 namespace chaos::il2cpp::method_table {
 
@@ -135,6 +138,87 @@ void* ResolveMethodTableWithAbiCheck(
         expected_param_count);
 
     return (result == CHAOS_ABI_MANIFEST_OK) ? fn_ptr : nullptr;
+}
+
+// ── P1-B: Hotpatch-backed method table population ─────────────────────────
+
+/// Entry in the (module_id, slot) → method_table_index sorted mapping.
+/// Sorted by (module_id, slot) for O(log n) binary search.
+struct MtSlotMapping {
+    uint32_t module_id;
+    uint32_t slot;
+    uint32_t mt_index;  // index into g_method_table[]
+};
+
+/// Atomic counter for sequential method table index assignment.
+static std::atomic<uint32_t> g_next_mt_index{0};
+
+/// Sorted mapping: (module_id, slot) → mt_index.
+/// Populated during PopulateMethodTableFromHotpatch, read-only thereafter.
+static std::vector<MtSlotMapping> g_mt_slot_map;
+
+void PopulateMethodTableFromHotpatch() noexcept {
+    auto& registry = runtime_core::GetHotpatchNameRegistry();
+    size_t module_count = registry.ModuleCount();
+    if (module_count == 0) return;
+
+    // First pass: count total dispatch entries across all modules.
+    size_t total_entries = 0;
+    for (size_t mi = 0; mi < module_count; ++mi) {
+        const auto* mod = registry.GetModuleByIndex(mi);
+        if (mod != nullptr) {
+            total_entries += mod->entry_table_size;
+        }
+    }
+    if (total_entries == 0) return;
+
+    g_mt_slot_map.reserve(total_entries);
+
+    uint32_t gen = 0;  // module_gen = 0 for AOT root
+
+    // Second pass: assign sequential indices, write to method table,
+    // and build the reverse mapping.
+    for (size_t mi = 0; mi < module_count; ++mi) {
+        const auto* mod = registry.GetModuleByIndex(mi);
+        if (mod == nullptr || mod->entry_table == nullptr) continue;
+
+        for (uint32_t slot = 0; slot < mod->entry_table_size; ++slot) {
+            uint32_t mt_idx = g_next_mt_index.fetch_add(1, std::memory_order_relaxed);
+            void* fn_ptr = mod->entry_table[slot].direct_ptr;
+
+            WriteMethodTable(mt_idx, fn_ptr, gen);
+            g_mt_slot_map.push_back({static_cast<uint32_t>(mi), slot, mt_idx});
+        }
+    }
+
+    // Sort by (module_id, slot) for binary search.
+    std::sort(g_mt_slot_map.begin(), g_mt_slot_map.end(),
+        [](const MtSlotMapping& a, const MtSlotMapping& b) noexcept {
+            if (a.module_id != b.module_id) return a.module_id < b.module_id;
+            return a.slot < b.slot;
+        });
+
+    // PopulateMethodTableFromHotpatch: n modules, m entries populated.
+    // Logging skipped: method_table.cpp doesn't include <chaos/log.h>.
+}
+
+void* ResolveMethodTableByModuleSlot(uint32_t module_id, uint32_t slot) noexcept {
+    if (g_mt_slot_map.empty()) return nullptr;
+
+    // Binary search for (module_id, slot).
+    const MtSlotMapping key{module_id, slot, 0};
+    auto it = std::lower_bound(g_mt_slot_map.begin(), g_mt_slot_map.end(), key,
+        [](const MtSlotMapping& a, const MtSlotMapping& b) noexcept {
+            if (a.module_id != b.module_id) return a.module_id < b.module_id;
+            return a.slot < b.slot;
+        });
+
+    if (it != g_mt_slot_map.end() &&
+        it->module_id == module_id &&
+        it->slot == slot) {
+        return ResolveMethodTable(it->mt_index);
+    }
+    return nullptr;
 }
 
 }  // namespace chaos::il2cpp::method_table

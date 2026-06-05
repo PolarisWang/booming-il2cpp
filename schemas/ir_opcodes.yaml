@@ -756,3 +756,52 @@ opcodes:
     has_src: true
     operands: [field_offset, immediate_i4]
     description: Store field with inline GC write barrier (SATB pre-write + card mark)
+
+  - name: LdElemNoChk
+    value: 104
+    has_dst: true
+    has_src: true
+    operands: [immediate_i4]
+    description: Load array element without bounds/null check
+
+  - name: StElemNoChk
+    value: 105
+    has_dst: false
+    has_src: true
+    operands: [immediate_i4]
+    description: Store array element without bounds/null check
+
+  - name: LdElemANoChk
+    value: 106
+    has_dst: true
+    has_src: true
+    operands: [immediate_i4]
+    description: Load array element address without bounds/null check
+
+  - name: Simd
+    value: 107
+    has_dst: true
+    has_src: true
+    operands: [immediate_i4]
+    description: SIMD operation (sub-op + element type encoded in imm field)
+
+  - name: Popcnt
+    value: 108
+    has_dst: true
+    has_src: true
+    operands: []
+    description: Population count — dst = popcnt(src1)
+
+  - name: Lzcnt
+    value: 109
+    has_dst: true
+    has_src: true
+    operands: []
+    description: Leading zero count — dst = lzcnt(src1)
+
+  - name: SimdFma
+    value: 110
+    has_dst: true
+    has_src: true
+    operands: [immediate_i4]
+    description: FMA 3-operand fused multiply-add (src3 via kRegHasSrc3)

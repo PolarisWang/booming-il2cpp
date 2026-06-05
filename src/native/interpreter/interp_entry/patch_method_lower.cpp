@@ -126,6 +126,32 @@ void PatchMethodLowerIR(uintptr_t method_key) noexcept {
                         call_cache[i].is_struct_ret = false;
                         call_cache[i].struct_size = 0;
                     }
+
+                    // Phase 2.4: P1-B ResolveMethodTable fallback.
+                    // When PrecacheCallTarget found the method in HotpatchNameRegistry
+                    // (module_id + slot are valid) but the dispatch entry's direct_ptr
+                    // was null, try ResolveMethodTableByModuleSlot as an additional
+                    // resolution layer.  g_method_table[] is populated from ALL hotpatch
+                    // dispatch entries during BootstrapRuntime(), so it may contain
+                    // valid function pointers even when the individual dispatch entry
+                    // was null at PrecacheCallTarget time (e.g., due to population
+                    // timing differences between hotpatch dispatch tables and the
+                    // global method table).
+                    //
+                    // Non-virtual calls benefit most: the target is fixed at compile
+                    // time, and a valid method table entry eliminates the ~2000ns
+                    // MethodInvoke round-trip, replacing it with a ~30ns direct call.
+                    if (call_cache[i].direct_ptr == nullptr &&
+                        call_cache[i].ret_tag != 0xFF &&
+                        !call_cache[i].is_struct_ret &&
+                        call_cache[i].slot != ~0u) {
+                        void* fn = chaos::il2cpp::method_table::ResolveMethodTableByModuleSlot(
+                            call_cache[i].module_id, call_cache[i].slot);
+                        if (fn != nullptr) {
+                            call_cache[i].direct_ptr = fn;
+                            call_cache[i].is_patched = false;
+                        }
+                    }
                 } else if (instr.direct_fn != nullptr && instr.direct_ret_tag != 0xFF) {
                     // direct_fn with pre-computed return tag — fill CachedCallInfo
                     // so Handle_Call/InterpreterDispatchRaw can call the AOT thunk

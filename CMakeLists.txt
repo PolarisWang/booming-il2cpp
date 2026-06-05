@@ -331,6 +331,8 @@ elseif(ROADMAP0_PRESET_TARGET STREQUAL "linux-arm64-smoke")
     add_subdirectory(tests/contracts/native/gc)
     add_subdirectory(tests/contracts/native/runtime-core)
     add_subdirectory(tests/contracts/native/common)
+    add_subdirectory(tests/contracts/native/abi)
+    add_subdirectory(tests/contracts/native/interpreter)
 
     # ── ARM64 JIT encoder smoke test ──────────────────────────────────
     message(STATUS "Checking arm64_jit_smoke_test.cpp...")
