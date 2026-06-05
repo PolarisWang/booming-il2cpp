@@ -157,6 +157,20 @@ public sealed partial class NativeAotLoweringPlanner
 		}
 
 		IReadOnlyList<AotCoreIrInstructionArtifact> instructions = method.Instructions;
+
+		// Handle 0-instruction subject methods: emit simple return instead of throwing.
+		if (instructions.Count == 0)
+		{
+		    var returnType = MapAbiSlotReturnType(method.ReturnAbi);
+		    builder.AppendLine("// Managed method: " + ManagedNaming.GetMethodSubjectIdDisplayString(method.SubjectId));
+		    builder.AppendLine(FormatMethodDeclaration(method, _sharedContextSymbols).TrimEnd(';'));
+		    builder.AppendLine("{");
+		    if (!string.IsNullOrEmpty(returnType) && returnType != "void")
+		        builder.AppendLine("    return {};");
+		    builder.AppendLine("}");
+		    return;
+		}
+
 		ValidateInstructions(method, instructions);
 		IReadOnlyList<AotCoreIrAbiSlotArtifact> methodAbiParameterSlots = GetMethodAbiParameterSlots(method);
 		HashSet<int> offsets = new HashSet<int>(instructions.Count);
