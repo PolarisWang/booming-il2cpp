@@ -2,8 +2,8 @@
   "schemaVersion": 1,
   "assemblyName": "System.Collections",
   "chunkSlug": "global-ns",
-  "totalMethods": 22,
-  "factMethodCount": 14,
+  "totalMethods": 30,
+  "factMethodCount": 30,
   "customEntryIndices": [
     0,
     1,
@@ -26,7 +26,15 @@
     18,
     19,
     20,
-    21
+    21,
+    22,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29
   ],
   "benchmarkMethodIndices": [
     0,
@@ -50,7 +58,15 @@
     18,
     19,
     20,
-    21
+    21,
+    22,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29
   ],
   "hotupdateMethodIndices": [
     0,
@@ -96,7 +112,23 @@
     18,
     19,
     20,
-    21
+    21,
+    22,
+    22,
+    23,
+    23,
+    24,
+    24,
+    25,
+    25,
+    26,
+    26,
+    27,
+    27,
+    28,
+    28,
+    29,
+    29
   ],
   "methods": [
     {
@@ -230,6 +262,54 @@
       "kind": "fact",
       "methodSubjectId": "System.Collections/System.Collections.BitArray::GetEnumerator:System.Collections.IEnumerator()",
       "generatedMethodId": "GetEnumerator_13__0"
+    },
+    {
+      "index": 22,
+      "kind": "fact",
+      "methodSubjectId": "System.Collections/System.Collections.Generic.Stack`1::Push(!0)",
+      "generatedMethodId": "Push_0"
+    },
+    {
+      "index": 23,
+      "kind": "fact",
+      "methodSubjectId": "System.Collections/System.Collections.Generic.Stack`1::Pop(!0)",
+      "generatedMethodId": "PushPop_0"
+    },
+    {
+      "index": 24,
+      "kind": "fact",
+      "methodSubjectId": "System.Collections/System.Collections.Generic.Stack`1::Peek(!0)",
+      "generatedMethodId": "Peek_0"
+    },
+    {
+      "index": 25,
+      "kind": "fact",
+      "methodSubjectId": "System.Collections/System.Collections.Generic.Stack`1::get_Count:System.Int32()",
+      "generatedMethodId": "Count_0"
+    },
+    {
+      "index": 26,
+      "kind": "fact",
+      "methodSubjectId": "System.Collections/System.Collections.Generic.Stack`1::Clear:System.Void()",
+      "generatedMethodId": "Clear_0"
+    },
+    {
+      "index": 27,
+      "kind": "fact",
+      "methodSubjectId": "System.Collections/System.Collections.Generic.Stack`1::TryPop(!0&):System.Boolean(!0&)",
+      "generatedMethodId": "TryPop_0"
+    },
+    {
+      "index": 28,
+      "kind": "fact",
+      "methodSubjectId": "System.Collections/System.Collections.Generic.Stack`1::TryPop(!0&):System.Boolean(!0&)",
+      "generatedMethodId": "TryPopEmpty_0"
+    },
+    {
+      "index": 29,
+      "kind": "fact",
+      "methodSubjectId": "System.Collections/System.Collections.Generic.Stack`1::TryPeek(!0&):System.Boolean(!0&)",
+      "generatedMethodId": "TryPeek_0"
     }
   ]
 }

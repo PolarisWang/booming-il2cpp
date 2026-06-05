@@ -789,7 +789,13 @@ static int RunPatchMode(string dllPath, string? namespaceFilter, string? outputD
                         for (int rvi = 0; rvi < refVarCounter; rvi++)
                         {
                             var vn = $"__ref_{mi}_{set.SetIndex}_{rvi}";
-                            refParts.Add($"((long)({vn}) ^ 0xFF)");
+                            var paramType = method.Parameters.ElementAtOrDefault(rvi)?.TypeName ?? "object";
+                            // Only integer-compatible types can be cast to long directly.
+                            // For reference types, use null check as a safe sentinel.
+                            if (IsIntegerCompatibleType(paramType))
+                                refParts.Add($"((long)({vn}) ^ 0xFF)");
+                            else
+                                refParts.Add($"((object)({vn}) != null ? 1L : 0L)");
                         }
                         sb.AppendLine("            return " + string.Join(" ^ ", refParts) + ";");
                     }
@@ -811,7 +817,11 @@ static int RunPatchMode(string dllPath, string? namespaceFilter, string? outputD
                         for (int rvi = 0; rvi < refVarCounter; rvi++)
                         {
                             var vn = $"__ref_{mi}_{set.SetIndex}_{rvi}";
-                            refParts.Add($"((long)({vn}) ^ 0xFF)");
+                            var paramType = method.Parameters.ElementAtOrDefault(rvi)?.TypeName ?? "object";
+                            if (IsIntegerCompatibleType(paramType))
+                                refParts.Add($"((long)({vn}) ^ 0xFF)");
+                            else
+                                refParts.Add($"((object)({vn}) != null ? 1L : 0L)");
                         }
                         sb.AppendLine("            return " + string.Join(" ^ ", refParts) + ";");
                     }
@@ -840,6 +850,17 @@ static int RunPatchMode(string dllPath, string? namespaceFilter, string? outputD
     Console.WriteLine($"[Output] {csPath}");
 
     return 0;
+}
+
+static bool IsIntegerCompatibleType(string typeName)
+{
+    return typeName is "System.Boolean" or "System.Byte" or "System.SByte"
+        or "System.Int16" or "System.UInt16"
+        or "System.Int32" or "System.UInt32"
+        or "System.Int64" or "System.UInt64"
+        or "System.IntPtr" or "System.UIntPtr"
+        or "System.Char" or "System.Single" or "System.Double"
+        or "System.Decimal" or "System.Half";
 }
 
 // Helper for disambiguating arg casts (reused from TestEmitter pattern)
