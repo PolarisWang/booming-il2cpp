@@ -548,8 +548,8 @@ public sealed partial class NativeAotLoweringPlanner
                 "System.UInt64" => "CHAOS_IL2CPP_UINT64",
                 "System.Single" => "float",
                 "System.Double" => "double",
-                "System.IntPtr" => "CHAOS_IL2CPP_NATIVE_INT",
-                "System.UIntPtr" => "CHAOS_IL2CPP_NATIVE_UINT",
+                "System.IntPtr" => "CHAOS_IL2CPP_INTPTR",
+                "System.UIntPtr" => "CHAOS_IL2CPP_UINTPTR",
                 _ => null,
             };
         }
@@ -3641,8 +3641,8 @@ public sealed partial class NativeAotLoweringPlanner
                     "System.UInt64" => "CHAOS_IL2CPP_UINT64",
                     "System.Single" => "float",
                     "System.Double" => "double",
-                    "System.IntPtr" => "CHAOS_IL2CPP_NATIVE_INT",
-                    "System.UIntPtr" => "CHAOS_IL2CPP_NATIVE_UINT",
+                    "System.IntPtr" => "CHAOS_IL2CPP_INTPTR",
+                    "System.UIntPtr" => "CHAOS_IL2CPP_UINTPTR",
                     _ => null,
                 };
             }
