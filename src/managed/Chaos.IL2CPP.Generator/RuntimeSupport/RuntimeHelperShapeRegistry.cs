@@ -199,7 +199,22 @@ public sealed partial class NativeAotLoweringPlanner
             foreach (var entry in _inlineDescriptors)
             {
                 if (!string.Equals(entry.MethodName, methodName, StringComparison.Ordinal))
-                    continue;
+                {
+                    // Try generic method matching: "Add<System.Int32>" → "Add"
+                    var bracketStart = entry.MethodName + "<";
+                    if (methodName.StartsWith(bracketStart, StringComparison.Ordinal) && methodName.EndsWith(">"))
+                    {
+                        // Generic method — method name matches with type args
+                    }
+                    else if (methodName.StartsWith(entry.MethodName + "[[", StringComparison.Ordinal) && methodName.EndsWith("]]"))
+                    {
+                        // Generic method with [[...]] syntax
+                    }
+                    else
+                    {
+                        continue;
+                    }
+                }
                 if (!typeDisplayName!.StartsWith(entry.TypeDisplayNamePrefix, StringComparison.Ordinal))
                     continue;
 
@@ -413,6 +428,89 @@ public sealed partial class NativeAotLoweringPlanner
         public static RuntimeHelperShapeRegistry BuildDefault()
         {
             var registry = new RuntimeHelperShapeRegistry();
+
+            // ── Marshal interop stubs (registered early, before IL method size cutoff) ──
+            registry.RegisterGeneric(new GenericShapeDescriptor(
+                TypeDisplayNamePrefix: "System.Runtime.InteropServices.Marshal",
+                MethodName: "GetLastPInvokeError",
+                Resolver: static (planner, callee, typeArgs) =>
+                {
+                    var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
+                    var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INT32", symbol, "", [
+                        "    return ChaosMarshalGetLastPInvokeError();",
+                    ]);
+                    return new GenericShapeResolution(src, symbol,
+                        Array.Empty<AotCoreIrAbiSlotArtifact>(),
+                        CreateInt32AbiSlot(),
+                        EmptyRawArgumentIndices);
+                }));
+            registry.RegisterGeneric(new GenericShapeDescriptor(
+                TypeDisplayNamePrefix: "System.Runtime.InteropServices.Marshal",
+                MethodName: "GetHRForLastWin32Error",
+                Resolver: static (planner, callee, typeArgs) =>
+                {
+                    var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
+                    var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INT32", symbol, "", [
+                        "    return ChaosMarshalGetHRForLastWin32Error();",
+                    ]);
+                    return new GenericShapeResolution(src, symbol,
+                        Array.Empty<AotCoreIrAbiSlotArtifact>(),
+                        CreateInt32AbiSlot(),
+                        EmptyRawArgumentIndices);
+                }));
+
+            // ── Dictionary<K,V>::TryAdd (smoke-test stub) ──
+            registry.RegisterGeneric(new GenericShapeDescriptor(
+                TypeDisplayNamePrefix: "System.Collections.Generic.Dictionary",
+                MethodName: "TryAdd",
+                Resolver: static (planner, callee, typeArgs) =>
+                {
+                    var paramTypes = GetMethodParameterTypesFromSubjectId(callee);
+                    var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
+                    var abiSlots = new List<AotCoreIrAbiSlotArtifact>
+                    {
+                        CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
+                        CreateNativeIntAbiSlot(),
+                        CreateNativeIntAbiSlot(),
+                    };
+                    var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INT32", symbol,
+                        "CHAOS_IL2CPP_INTPTR chaos_arg_0, CHAOS_IL2CPP_INTPTR chaos_arg_1, CHAOS_IL2CPP_INTPTR chaos_arg_2",
+                    [
+                        "    // TryAdd is a smoke-test stub; always returns true (added).",
+                        "    return 1;",
+                    ]);
+                    return new GenericShapeResolution(src, symbol,
+                        new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(abiSlots.ToArray()),
+                        CreateInt32AbiSlot(),
+                        new HashSet<int> { 0, 1, 2 });
+                }));
+
+            // ── Array::GetValue (GenericShapeDescriptor — passes first index to ChaosArrayGetValue) ──
+            registry.RegisterGeneric(new GenericShapeDescriptor(
+                TypeDisplayNamePrefix: "System.Array",
+                MethodName: "GetValue",
+                Resolver: static (planner, callee, typeArgs) =>
+                {
+                    var paramTypes = GetMethodParameterTypesFromSubjectId(callee);
+                    var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
+                    var abiSlots = new List<AotCoreIrAbiSlotArtifact>
+                    {
+                        CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType)
+                    };
+                    for (int pi = 0; pi < paramTypes.Count; pi++)
+                        abiSlots.Add(CreateInt32AbiSlot());
+                    var paramSig = "CHAOS_IL2CPP_INTPTR chaos_arg_0";
+                    for (int pi = 0; pi < paramTypes.Count; pi++)
+                        paramSig += ", CHAOS_IL2CPP_INT32 chaos_arg_" + (pi + 1);
+                    var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol, paramSig,
+                    [
+                        "    return ChaosArrayGetValue(chaos_arg_0, chaos_arg_1);",
+                    ]);
+                    return new GenericShapeResolution(src, symbol,
+                        new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(abiSlots.ToArray()),
+                        CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
+                        new HashSet<int>(Enumerable.Range(0, abiSlots.Count)));
+                }));
 
             // === String operations ===
             registry.Register("System.String", "Concat", ["System.String", "System.String"],
@@ -3577,12 +3675,12 @@ public sealed partial class NativeAotLoweringPlanner
                 var fn = templateFn;
                 var rs = requiresScalar;
                 registry.RegisterInline(new InlineShapeDescriptor(
-                    TypeDisplayNamePrefix: "System.Runtime.Intrinsics.Vector128",
+                    TypeDisplayNamePrefix: "Vector128",
                     MethodName: methodName,
                     Resolver: (callee, paramTypes) =>
                         MakeVectorInlineExpression(callee, paramTypes, fn, rs)));
                 registry.RegisterInline(new InlineShapeDescriptor(
-                    TypeDisplayNamePrefix: "System.Runtime.Intrinsics.Vector256",
+                    TypeDisplayNamePrefix: "Vector256",
                     MethodName: methodName,
                     Resolver: (callee, paramTypes) =>
                         MakeVectorInlineExpression(callee, paramTypes, fn, rs)));
@@ -3594,7 +3692,7 @@ public sealed partial class NativeAotLoweringPlanner
                 var fn = templateFn;
                 // Unary ops use {0} only
                 registry.RegisterInline(new InlineShapeDescriptor(
-                    TypeDisplayNamePrefix: "System.Runtime.Intrinsics.Vector128",
+                    TypeDisplayNamePrefix: "Vector128",
                     MethodName: methodName,
                     Resolver: (callee, paramTypes) =>
                     {
@@ -3610,7 +3708,7 @@ public sealed partial class NativeAotLoweringPlanner
                         return $"{ns}{fn}<{cppType}, {carrier}>({{0}})";
                     }));
                 registry.RegisterInline(new InlineShapeDescriptor(
-                    TypeDisplayNamePrefix: "System.Runtime.Intrinsics.Vector256",
+                    TypeDisplayNamePrefix: "Vector256",
                     MethodName: methodName,
                     Resolver: (callee, paramTypes) =>
                     {
@@ -3665,7 +3763,7 @@ public sealed partial class NativeAotLoweringPlanner
             void RegisterVectorCreateZero()
             {
                 // get_Zero: VectorFixedBroadcast<TScalar, TCarrier>(0)
-                foreach (var prefix in new[] { "System.Runtime.Intrinsics.Vector128", "System.Runtime.Intrinsics.Vector256" })
+                foreach (var prefix in new[] { "Vector128", "Vector256" })
                 {
                     registry.RegisterInline(new InlineShapeDescriptor(
                         TypeDisplayNamePrefix: prefix,
@@ -3686,7 +3784,7 @@ public sealed partial class NativeAotLoweringPlanner
 
             void RegisterVectorAllBitsSet()
             {
-                foreach (var prefix in new[] { "System.Runtime.Intrinsics.Vector128", "System.Runtime.Intrinsics.Vector256" })
+                foreach (var prefix in new[] { "Vector128", "Vector256" })
                 {
                     registry.RegisterInline(new InlineShapeDescriptor(
                         TypeDisplayNamePrefix: prefix,
@@ -3708,7 +3806,7 @@ public sealed partial class NativeAotLoweringPlanner
             // ── CreateScalar / CreateScalarUnsafe ──
             void RegisterVectorCreateScalar()
             {
-                foreach (var prefix in new[] { "System.Runtime.Intrinsics.Vector128", "System.Runtime.Intrinsics.Vector256" })
+                foreach (var prefix in new[] { "Vector128", "Vector256" })
                 {
                     foreach (var methodName in new[] { "CreateScalar", "CreateScalarUnsafe" })
                     {
@@ -3733,7 +3831,7 @@ public sealed partial class NativeAotLoweringPlanner
             // ── GetElement / ToScalar ──
             void RegisterVectorAccess()
             {
-                foreach (var prefix in new[] { "System.Runtime.Intrinsics.Vector128", "System.Runtime.Intrinsics.Vector256" })
+                foreach (var prefix in new[] { "Vector128", "Vector256" })
                 {
                     registry.RegisterInline(new InlineShapeDescriptor(
                         TypeDisplayNamePrefix: prefix,
