@@ -3777,42 +3777,19 @@ public sealed partial class NativeAotLoweringPlanner
             }
 
             // Helper: register a unary vector op for both Vector128 and Vector256
+            // Uses MakeVectorInlineExpression for correct pointer-based ABI.
             void RegisterVectorUnaryOp(string methodName, string templateFn)
             {
-                var fn = templateFn;
-                // Unary ops use {0} only
                 registry.RegisterInline(new InlineShapeDescriptor(
                     TypeDisplayNamePrefix: "Vector128",
                     MethodName: methodName,
                     Resolver: (callee, paramTypes) =>
-                    {
-                        var elemType = ExtractVectorElementType(callee, paramTypes);
-                        if (elemType == null) return null;
-                        var cppType = MapTypeArgToCppType(elemType);
-                        if (cppType == null) return null;
-                        var carrier = InferVectorCarrierType(callee);
-                        if (carrier == null) return null;
-                        const string ns = "chaos::il2cpp::vector_fixed::";
-                        if (fn == "VectorFixedAbs" || fn == "VectorFixedNegate")
-                            return $"{ns}{fn}<{cppType}, {cppType}, {carrier}>({{0}})";
-                        return $"{ns}{fn}<{cppType}, {carrier}>({{0}})";
-                    }));
+                        MakeVectorInlineExpression(callee, paramTypes, templateFn, true)));
                 registry.RegisterInline(new InlineShapeDescriptor(
                     TypeDisplayNamePrefix: "Vector256",
                     MethodName: methodName,
                     Resolver: (callee, paramTypes) =>
-                    {
-                        var elemType = ExtractVectorElementType(callee, paramTypes);
-                        if (elemType == null) return null;
-                        var cppType = MapTypeArgToCppType(elemType);
-                        if (cppType == null) return null;
-                        var carrier = InferVectorCarrierType(callee);
-                        if (carrier == null) return null;
-                        const string ns = "chaos::il2cpp::vector_fixed::";
-                        if (fn == "VectorFixedAbs" || fn == "VectorFixedNegate")
-                            return $"{ns}{fn}<{cppType}, {cppType}, {carrier}>({{0}})";
-                        return $"{ns}{fn}<{cppType}, {carrier}>({{0}})";
-                    }));
+                        MakeVectorInlineExpression(callee, paramTypes, templateFn, true)));
             }
 
             // ── Arithmetic ──

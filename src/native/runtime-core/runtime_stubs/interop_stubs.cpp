@@ -21,12 +21,14 @@ extern "C" {
 void ChaosMarshalSetLastPInvokeError(CHAOS_IL2CPP_INT32 error) noexcept
 {
     auto* ts = GetCurrentThreadState();
+    if (ts == nullptr) return;
     SetLastPInvokeError(ts, error);
 }
 
 CHAOS_IL2CPP_INT32 ChaosMarshalGetLastPInvokeError(void) noexcept
 {
     auto* ts = GetCurrentThreadState();
+    if (ts == nullptr) return 0;
     return GetLastPInvokeError(ts);
 }
 
@@ -54,6 +56,7 @@ CHAOS_IL2CPP_INTPTR ChaosMarshalGetExceptionPointers(void) noexcept
 CHAOS_IL2CPP_INT32 ChaosMarshalGetHRForLastWin32Error(void) noexcept
 {
     auto* ts = GetCurrentThreadState();
+    if (ts == nullptr) return 0;
     auto error = GetLastPInvokeError(ts);
     return error <= 0 ? error : (error & 0x0000FFFF) | static_cast<CHAOS_IL2CPP_INT32>(0x80070000);
 }

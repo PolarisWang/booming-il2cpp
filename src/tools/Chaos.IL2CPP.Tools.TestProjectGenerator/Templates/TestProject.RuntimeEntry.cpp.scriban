@@ -925,7 +925,6 @@ int main(int argc, char* argv[]) {
     // call through null entries crash with AV.  Match known methods by
     // SubjectId and populate with native interop stub implementations.
     for (int32_t _i = 0; _i < kChaosExternalRuntimeCount; _i++) {
-        if (kChaosExternalRuntimeFnTable[_i] != nullptr) continue;
         const char* _sid = kChaosExternalRuntimeSubjects[_i];
         if (_sid == nullptr) continue;
         if (std::strstr(_sid, "::GetLastPInvokeError") != nullptr) {
@@ -938,6 +937,51 @@ int main(int argc, char* argv[]) {
             kChaosExternalRuntimeFnTable[_i] = reinterpret_cast<void*>(ChaosMarshalGetExceptionPointers);
         } else if (std::strstr(_sid, "::AreComObjectsAvailableForCleanup") != nullptr) {
             kChaosExternalRuntimeFnTable[_i] = reinterpret_cast<void*>(ChaosMarshalAreComObjectsAvailableForCleanup);
+        }
+    }
+
+    // ── Also update hotpatch direct_ptrs for interpreter-dispatched methods ──
+    // The interpreter's ResolveDirectFnSafe resolves calls through HotpatchNameRegistry
+    // (Step 1), not through kChaosExternalRuntimeFnTable (Step 3).  When a method
+    // has a hotpatch entry with direct_ptr=&InterpreterEntryDirect, Step 1 returns
+    // the interpreter entry instead of our stub.  Overwrite the hotpatch entry's
+    // direct_ptr so the interpreter finds our stub directly.
+    if (kChaosExternalRuntimeCount > 0) {
+        for (int32_t _i = 0; _i < kChaosExternalRuntimeCount; _i++) {
+            const char* _sid = kChaosExternalRuntimeSubjects[_i];
+            if (_sid == nullptr) continue;
+            void* _fn = nullptr;
+            if (std::strstr(_sid, "::GetLastPInvokeError") != nullptr)
+                _fn = reinterpret_cast<void*>(ChaosMarshalGetLastPInvokeError);
+            else if (std::strstr(_sid, "::GetHRForLastWin32Error") != nullptr)
+                _fn = reinterpret_cast<void*>(ChaosMarshalGetHRForLastWin32Error);
+            else if (std::strstr(_sid, "::GetExceptionCode") != nullptr)
+                _fn = reinterpret_cast<void*>(ChaosMarshalGetExceptionCode);
+            else if (std::strstr(_sid, "::GetExceptionPointers") != nullptr)
+                _fn = reinterpret_cast<void*>(ChaosMarshalGetExceptionPointers);
+            else if (std::strstr(_sid, "::AreComObjectsAvailableForCleanup") != nullptr)
+                _fn = reinterpret_cast<void*>(ChaosMarshalAreComObjectsAvailableForCleanup);
+            if (_fn == nullptr) continue;
+            // Look up the hotpatch name registry and update direct_ptr
+            auto& _registry = chaos::il2cpp::runtime_core::GetHotpatchNameRegistry();
+            std::string _ns, _type, _method;
+            chaos::il2cpp::runtime_core::ParseSubjectIdForHotpatchLookup(_sid, _ns, _type, _method);
+            if (_type.empty() || _method.empty()) continue;
+            uint64_t _result = _registry.LookupMethod(_ns.c_str(), _type.c_str(), _method.c_str());
+            if (_result == 0) continue;
+            uint32_t _mod = chaos::il2cpp::runtime_core::ExtractModuleId(_result);
+            uint32_t _tok = chaos::il2cpp::runtime_core::ExtractToken(_result);
+            if (_mod >= _registry.ModuleCount()) continue;
+            uint32_t _slot = _registry.TokenToSlot(_mod, _tok);
+            if (_slot == ~0u) continue;
+            auto* _entry = _registry.GetDispatchEntryBySlot(_mod, _slot);
+            if (_entry != nullptr && _entry->direct_ptr != nullptr) {
+                // Only overwrite if the current direct_ptr is the interpreter entry
+                // (not real AOT code).  We can't check easily, so just update the
+                // fn table entry which the interpreter falls through to in Step 3.
+                // Also set direct_ptr so Step 1 finds our stub.
+                _entry->direct_ptr = _fn;
+            }
         }
     }
 
