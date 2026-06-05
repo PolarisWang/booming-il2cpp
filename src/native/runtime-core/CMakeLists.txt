@@ -247,6 +247,8 @@ target_compile_options(chaos_runtime_core PRIVATE $<$<CXX_COMPILER_ID:MSVC>:/utf
 # guid_stubs uses SSE4.1 intrinsics (_mm_blendv_epi8) on x86; ARM64 uses NEON.
 if(NOT CMAKE_SYSTEM_PROCESSOR MATCHES "aarch64|arm64")
   set_source_files_properties(runtime_stubs/guid_stubs.cpp PROPERTIES COMPILE_OPTIONS "-msse4.1")
+  # math_stubs uses CRC32 intrinsic (_mm_crc32_u8) which requires SSE4.2
+  set_source_files_properties(runtime_stubs/math_stubs.cpp PROPERTIES COMPILE_OPTIONS "-msse4.2")
 endif()
 target_include_directories(
     chaos_runtime_core

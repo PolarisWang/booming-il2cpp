@@ -8,6 +8,7 @@
 #include "generic_context.h"
 #include "memory_domain.h"
 #include "metadata_interface.h"
+#include "method_table.h"
 #include "method_replacement.h"
 #include "reflection_query_model.h"
 #include "module_registry.h"
@@ -240,6 +241,14 @@ BridgeStatus CHAOS_RUNTIME_ABI_CALL BootstrapRuntime(void) {
         chaos::il2cpp::runtime_core::ModuleLifecycleManager::Get()->RegisterAotModuleData(
             chaos_il2cpp_aot_hotpatch_module,
             &aot_reg);
+
+        // P1-B: Populate global method table from hotpatch dispatch entries.
+        // Must happen AFTER RegisterAotModuleData (which registers modules with
+        // HotpatchNameRegistry) so PopulateMethodTableFromHotpatch can iterate
+        // all registered modules' dispatch tables.  This enables the
+        // ResolveMethodTableByModuleSlot fallback in patch_method_lower.cpp
+        // for non-virtual calls where PrecacheCallTarget's hotpath missed.
+        chaos::il2cpp::method_table::PopulateMethodTableFromHotpatch();
 
         // Register AOT method entries for runtime QueryAotMethod.
         if (aot_reg.method_aot_entry_count > 0u) {

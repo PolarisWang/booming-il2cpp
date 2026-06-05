@@ -27,6 +27,7 @@ set(CHAOS_CORE_LIBS
     chaos_common
     chaos_support
     chaos_fmt
+    chaos_debugger
 )
 
 add_chaos_test(test_interpreter_smoke
@@ -98,4 +99,18 @@ add_chaos_test(test_interpreter_stress
     interpreter_stress_test.cpp
     LIBS ${CHAOS_CORE_LIBS}
     LABELS "stress;interpreter"
+)
+
+# ── T5: Unit tests for osr_state.cpp and ir_reg_alloc.cpp ──────────────────
+
+add_chaos_test(test_osr_state
+    osr_state_test.cpp
+    LIBS ${CHAOS_CORE_LIBS}
+    LABELS "unit;interpreter"
+)
+
+add_chaos_test(test_ir_reg_alloc
+    ir_reg_alloc_test.cpp
+    LIBS ${CHAOS_CORE_LIBS}
+    LABELS "unit;interpreter"
 )

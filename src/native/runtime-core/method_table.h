@@ -3,6 +3,7 @@
 
 #include <atomic>
 #include <cstdint>
+#include <cstddef>
 
 namespace chaos::il2cpp::method_table {
 
@@ -89,6 +90,23 @@ void* ResolveMethodTableWithAbiCheck(
     uint8_t expected_return_carrier,
     const uint8_t* expected_param_carriers,
     uint8_t expected_param_count) noexcept;
+
+// ── P1-B: Hotpatch-backed method table population ─────────────────────────
+//
+// Populates g_method_table[] from all registered hotpatch dispatch entries,
+// assigning sequential global indices.  Builds a (module_id, slot) → mt_index
+// mapping that enables ResolveMethodTableByModuleSlot O(log n) fallback when
+// PrecacheCallTarget's hotpatch lookup succeeds (module_id+slot known) but
+// the dispatch entry's direct_ptr is null.
+//
+// Called once from BootstrapRuntime() after all AOT modules are registered.
+void PopulateMethodTableFromHotpatch() noexcept;
+
+/// Given a (module_id, slot) pair from PrecacheCallTarget / CachedCallInfo,
+/// binary-search the global mapping to find the method_table_index, then
+/// call ResolveMethodTable(index).  Returns the function pointer, or nullptr.
+/// Thread-safe (read-only after bootstrap).
+void* ResolveMethodTableByModuleSlot(uint32_t module_id, uint32_t slot) noexcept;
 
 }  // namespace chaos::il2cpp::method_table
 

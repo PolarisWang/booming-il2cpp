@@ -40,11 +40,15 @@
 #include <cstdio>
 #include <atomic>
 #include <new>
-#if defined(_MSC_VER)
+#if defined(_MSC_VER) && (defined(__x86_64__) || defined(_M_AMD64))
 #include <intrin.h>
 #pragma intrinsic(__rdtsc)
 #elif defined(__x86_64__) || defined(__i386__)
 #include <x86intrin.h>
+#elif defined(__aarch64__)
+// ARM64: use __builtin_readcyclecounter() from GCC/Clang
+// (maps to cntvct_el0 via mrs instruction)
+#include <sched.h>
 #endif
 
 // Expansion helper: ensures __LINE__ and other special macros expand
@@ -65,13 +69,23 @@
 // This is the offset of ProcessorNumber in the KPCR on x64 Windows.
 #if defined(_M_AMD64)
 #define CHAOS_IL2CPP_CURRENT_CORE()  static_cast<uint32_t>(__readgsdword(0x20))
-#elif defined(__x86_64__) || defined(__amd64__)
-// Linux x86_64: sched_getcpu() via vDSO (~20ns) is acceptable for a profiler.
+#elif defined(__x86_64__) || defined(__amd64__) || defined(__aarch64__)
+// Linux x86_64 / ARM64: sched_getcpu() via vDSO (~20ns) is acceptable for a profiler.
 // Constructor/destructor pair adds ~40ns — negligible compared to scope body.
 #include <sched.h>
 #define CHAOS_IL2CPP_CURRENT_CORE()  static_cast<uint32_t>(sched_getcpu())
 #else
 #error "profile.h: CHAOS_IL2CPP_CURRENT_CORE not implemented for this platform"
+#endif
+
+// ── Portable cycle counter ──────────────────────────────────
+#if defined(__aarch64__)
+// ARM64: __builtin_readcyclecounter() maps to cntvct_el0 (mrs instruction).
+#define CHAOS_IL2CPP_RDTSC()  __builtin_readcyclecounter()
+#elif defined(__x86_64__) || defined(__i386__) || defined(_M_AMD64)
+#define CHAOS_IL2CPP_RDTSC()  __rdtsc()
+#else
+#error "profile.h: CHAOS_IL2CPP_RDTSC not implemented for this platform"
 #endif
 
 namespace chaos::il2cpp::common {
@@ -221,7 +235,7 @@ class ProfileScope {
 public:
     explicit ProfileScope(const char* name) noexcept
         : slot_idx_(FindOrCreateSlot(name, g_tls_profile))
-        , start_(__rdtsc())
+        , start_(CHAOS_IL2CPP_RDTSC())
         , core_id_(CHAOS_IL2CPP_CURRENT_CORE()) {
         // Register this thread in the global registry on first use.
         if (g_tls_profile.registration_slot < 0) {
@@ -236,7 +250,7 @@ public:
         // deltas across cores can be wildly inaccurate (up to ms-level skew).
         if (CHAOS_IL2CPP_CURRENT_CORE() != core_id_) return;
 
-        uint64_t elapsed = __rdtsc() - start_;
+        uint64_t elapsed = CHAOS_IL2CPP_RDTSC() - start_;
         auto& slot = g_tls_profile.slots[slot_idx_];
         slot.total_cycles += elapsed;
         ++slot.call_count;

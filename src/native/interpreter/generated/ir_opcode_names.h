@@ -111,12 +111,18 @@ static constexpr const char* kIROpCodeNames[] = {
     "Min",
     "Max",
     "StFldBarrier",
+    "LdElemNoChk",
+    "StElemNoChk",
+    "LdElemANoChk",
+    "Simd",
+    "Popcnt",
+    "Lzcnt",
+    "SimdFma",
 };
 
-static_assert(sizeof(kIROpCodeNames) / sizeof(kIROpCodeNames[0]) == 103,
-              "kIROpCodeNames must cover all 99 opcodes");
+static_assert(sizeof(kIROpCodeNames) / sizeof(kIROpCodeNames[0]) == 111,
+              "kIROpCodeNames must cover all 111 opcodes");
 
 }  // namespace chaos::il2cpp::interpreter
 
 #endif  // CHAOS_IL2CPP_GENERATED_IR_OPCODE_NAMES_H_
-

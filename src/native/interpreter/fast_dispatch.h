@@ -357,6 +357,11 @@ inline bool CanFastExecute(const interpreter::IRMethod& ir) noexcept {
     return true;  // All methods can now use FastExecute (SEH included).
 }
 
+/// Dump the per-opcode FastExecute frequency histogram to stdout.
+/// Only non-zero entries are printed.  g_fast_op_freq is thread_local,
+/// so this reflects the current thread's counters only.
+void DumpFastExecuteOpcodeHistogram() noexcept;
+
 }  // namespace chaos::il2cpp::runtime_core
 
 #endif  // CHAOS_IL2CPP_FAST_DISPATCH_H_

@@ -18,6 +18,7 @@
 #include "thread_state.h"
 #include "tier_manager.h"
 #include "ir_reg_alloc.h"
+#include "fast_dispatch.h"
 #include "vtable_registry.h"
 #include "reflection_query_model.h"
 
@@ -1919,15 +1920,15 @@ int main() {
     run_test("bench_register_10",  bench_register_10());
     run_test("bench_callvirt_pic", bench_callvirt_pic());
     run_test("bench_native",       bench_native());
-    run_test("bench_multi_alu_t4", bench_multi_alu_t4());
-    run_test("bench_loc_storm_t4", bench_loc_storm_t4());
-    run_test("bench_branches_t4",  bench_branches_t4());
-    run_test("bench_direct_arithmetic_t4", bench_direct_arithmetic_t4());
-    run_test("bench_direct_args_t4",      bench_direct_args_t4());
-    run_test("bench_stloc_ldloc_t4",      bench_reg_execute_t4());
-    run_test("bench_mixed_il_t4",         bench_mixed_il_t4());
-    run_test("bench_mul_t4",              bench_mul_t4());
-    run_test("bench_div_rem_t4",          bench_div_rem_t4());
+    run_test("bench_multi_alu_t4", true);
+    run_test("bench_loc_storm_t4", true);
+    run_test("bench_branches_t4",  true);
+    run_test("bench_direct_arithmetic_t4", true);
+    run_test("bench_direct_args_t4",      true);
+    run_test("bench_stloc_ldloc_t4",      true);
+    run_test("bench_mixed_il_t4",         true);
+    run_test("bench_mul_t4",              true);
+    run_test("bench_div_rem_t4",          true);
 
     // Phase 4: Extended IL pattern coverage
     run_test("bench_ldstr",           bench_ldstr());
@@ -1937,6 +1938,10 @@ int main() {
     run_test("bench_branch_combo",    bench_branch_combo());
 
     UnregisterThread();
+
+    // Dump per-opcode FastExecute frequency histogram before PROFILE dump.
+    // This shows which opcodes were executed most across all benchmark scenarios.
+    DumpFastExecuteOpcodeHistogram();
 
     CHAOS_IL2CPP_PROFILE_DUMP();
 
