@@ -107,7 +107,6 @@ extern "C" int ChaosMarshalAreComObjectsAvailableForCleanup() noexcept;
 // External runtime function table (populated by codegen, may have null entries)
 extern "C" void* kChaosExternalRuntimeFnTable[];
 extern "C" int32_t kChaosExternalRuntimeCount;
-extern "C" const char* const kChaosExternalRuntimeSubjects[];
 
 // Per-method host arrays for ApplyPatchFromMemoryEx (defined in patch-host-arrays.cpp).
 // Sentinel values when no patch data is embedded; replaced by the hotupdate pipeline
@@ -325,7 +324,7 @@ static int RunFactJsonMode() {
         bool first = true;
         for (int si = 0; si < kCount; si++) {
             int i = kSubjectSlotMap[si];
-            CHAOS_IL2CPP_INT32 result = 0;
+            int64_t result = 0;
             bool caught = false;
 
             // Re-arm SIGABRT handler each iteration: MSVC signal() resets to
@@ -340,7 +339,7 @@ static int RunFactJsonMode() {
             // value 1, and we record the method as caught.
             if (_setjmp(t_abort_jmp) == 0) {
                 __try {
-                    result = chaos::il2cpp::runtime_core::ChaosDispatchMethod(
+                    result = chaos::il2cpp::runtime_core::ChaosDispatchMethodGetValue(
                         GetHotpatchEntries(), kAotMethodCount, i, CHAOS_USE_DEFAULT_THUNKS);
                 } __except(EXCEPTION_EXECUTE_HANDLER) {
                     caught = true;
@@ -351,8 +350,8 @@ static int RunFactJsonMode() {
             }
 
             if (!first) printf(",");
-            printf("{\"si\":%d,\"methodIndex\":%d,\"contractIndex\":-1,\"passed\":%s,\"exitCode\":%d}",
-                   si, i, caught ? "false" : "true", caught ? -1 : (int)result);
+            printf("{\"si\":%d,\"methodIndex\":%d,\"contractIndex\":-1,\"passed\":%s,\"value\":%" PRId64 "}",
+                   si, i, caught ? "false" : "true", caught ? -1 : result);
             first = false;
         }
         printf("]}\n");
@@ -376,17 +375,17 @@ static int RunFactJsonMode() {
     bool first = true;
     for (int si = 0; si < kCount; si++) {
         int i = kSubjectSlotMap[si];
-        CHAOS_IL2CPP_INT32 result = 0;
+        int64_t result = 0;
         bool caught = false;
         CHAOS_EH_TRY
-            result = chaos::il2cpp::runtime_core::ChaosDispatchMethod(
+            result = chaos::il2cpp::runtime_core::ChaosDispatchMethodGetValue(
                 GetHotpatchEntries(), kAotMethodCount, i, CHAOS_USE_DEFAULT_THUNKS);
         CHAOS_EH_CATCH_BEGIN
             caught = true;
         CHAOS_EH_END
         if (!first) printf(",");
-        printf("{\"si\":%d,\"methodIndex\":%d,\"contractIndex\":-1,\"passed\":%s,\"exitCode\":%d}",
-               si, i, caught ? "false" : "true", caught ? -1 : (int)result);
+        printf("{\"si\":%d,\"methodIndex\":%d,\"contractIndex\":-1,\"passed\":%s,\"value\":%" PRId64 "}",
+               si, i, caught ? "false" : "true", caught ? -1 : result);
         first = false;
     }
     printf("]}\n");
@@ -932,7 +931,7 @@ int main(int argc, char* argv[]) {
     // SubjectId and populate with native interop stub implementations.
     for (int32_t _i = 0; _i < kChaosExternalRuntimeCount; _i++) {
         if (kChaosExternalRuntimeFnTable[_i] != nullptr) continue;
-        const char* _sid = static_cast<const char*>(kChaosExternalRuntimeSubjects[_i]);
+        const char* _sid = kChaosExternalRuntimeSubjects[_i];
         if (_sid == nullptr) continue;
         if (std::strstr(_sid, "::GetLastPInvokeError") != nullptr) {
             kChaosExternalRuntimeFnTable[_i] = reinterpret_cast<void*>(ChaosMarshalGetLastPInvokeError);
