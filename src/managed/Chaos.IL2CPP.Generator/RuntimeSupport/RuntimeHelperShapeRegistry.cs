@@ -449,9 +449,6 @@ public sealed partial class NativeAotLoweringPlanner
         {
             var registry = new RuntimeHelperShapeRegistry();
 
-            // CACHE_BUSTER_MARKER_8u3k1  ← delete this line after verification
-            // CACHE_BUSTER_END_8u3k1
-
             // ── Marshal interop stubs (registered early, before IL method size cutoff) ──
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "System.Runtime.InteropServices.Marshal",
@@ -3670,6 +3667,11 @@ public sealed partial class NativeAotLoweringPlanner
                         static string? MakeVectorInlineExpression(string callee, IReadOnlyList<string> paramTypes,
                 string templateFn, bool requiresScalar)
             {
+                // DISABLED: AOT eval stack stores Vector128/256 as CHAOS_IL2CPP_INTPTR (pointer to
+                // 16/32-byte carrier), but template functions expect carrier by value. The InlineShape
+                // framework needs support for >8-byte value types on the eval stack.
+                // TODO: Enable when AOT codegen supports large value types on eval stack.
+                return null;
                 var elemType = ExtractVectorElementType(callee, paramTypes);
                 if (elemType == null) return null;
                 var cppType = MapTypeArgToCppType(elemType);
@@ -3683,7 +3685,10 @@ public sealed partial class NativeAotLoweringPlanner
                 // then heap-allocate a new carrier for the result and return its pointer.
                 const string ns = "chaos::il2cpp::vector_fixed::";
                 var tc = cppType + ", " + carrier;
-                string Deref(int i) => $"*reinterpret_cast<{carrier}*>({{{i}}})";
+                string Deref(int i) =>
+                    i < paramTypes.Count && (paramTypes[i].Contains("Vector128<") || paramTypes[i].Contains("Vector256<"))
+                        ? $"*reinterpret_cast<{carrier}*>({{{i}}})"
+                        : $"{{{i}}}";
 
                 // Check for SIMD hardware intrinsic stub first
                 var simdStub = TryGetSimdStub(templateFn, carrier, requiresScalar ? cppType : null);
@@ -3701,6 +3706,10 @@ public sealed partial class NativeAotLoweringPlanner
                 // VectorFixedBroadcast (get_Zero / AllBitsSet) — no vector params
                 if (templateFn == "VectorFixedBroadcast" && paramTypes.Count == 0)
                     return $"[&]() -> CHAOS_IL2CPP_INTPTR {{ auto __r = {ns}VectorFixedBroadcast<{tc}>(0); auto* __p = (decltype(__r)*)std::malloc(sizeof(__r)); *__p = __r; return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(__p); }}()";
+
+                // VectorFixedAbs / VectorFixedNegate need <TInputScalar, TOutputScalar, TCarrier>
+                if (templateFn == "VectorFixedAbs" || templateFn == "VectorFixedNegate")
+                    return $"[&]() -> CHAOS_IL2CPP_INTPTR {{ auto __r = {ns}{templateFn}<{cppType}, {cppType}, {carrier}>({Deref(0)}); auto* __p = (decltype(__r)*)std::malloc(sizeof(__r)); *__p = __r; return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(__p); }}()";
 
                 // VectorFixedCreateScalar — scalar param, returns carrier
                 if (templateFn == "VectorFixedCreateScalar" && paramTypes.Count == 1)
@@ -6202,38 +6211,6 @@ public sealed partial class NativeAotLoweringPlanner
                         new HashSet<int> { 0, 1, 2 });
                 }));
 
-            // === Marshal: GetLastPInvokeError / GetHRForLastWin32Error (SimpleForward to interop_stubs) ===
-            // Must use RegisterGeneric (not Register) because the codegen's type resolution
-            // uses assembly-qualified type names (e.g. System.Private.CoreLib/System.Runtime.InteropServices.Marshal).
-            registry.RegisterGeneric(new GenericShapeDescriptor(
-                TypeDisplayNamePrefix: "System.Runtime.InteropServices.Marshal",
-                MethodName: "GetLastPInvokeError",
-                Resolver: static (planner, callee, typeArgs) =>
-                {
-                    var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
-                    var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INT32", symbol, "", [
-                        "    return ChaosMarshalGetLastPInvokeError();",
-                    ]);
-                    return new GenericShapeResolution(src, symbol,
-                        Array.Empty<AotCoreIrAbiSlotArtifact>(),
-                        CreateInt32AbiSlot(),
-                        EmptyRawArgumentIndices);
-                }));
-            registry.RegisterGeneric(new GenericShapeDescriptor(
-                TypeDisplayNamePrefix: "System.Runtime.InteropServices.Marshal",
-                MethodName: "GetHRForLastWin32Error",
-                Resolver: static (planner, callee, typeArgs) =>
-                {
-                    var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
-                    var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INT32", symbol, "", [
-                        "    return ChaosMarshalGetHRForLastWin32Error();",
-                    ]);
-                    return new GenericShapeResolution(src, symbol,
-                        Array.Empty<AotCoreIrAbiSlotArtifact>(),
-                        CreateInt32AbiSlot(),
-                        EmptyRawArgumentIndices);
-                }));
-
             // === String::Replace (GenericShapeDescriptor -- calls ChaosStringReplace for 3-param overload) ===
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "System.String",
@@ -8495,3 +8472,4 @@ public sealed partial class NativeAotLoweringPlanner
     }
 }
 // Fri, Jun  5, 2026  9:36:53 PM
+// touch 1780668780
