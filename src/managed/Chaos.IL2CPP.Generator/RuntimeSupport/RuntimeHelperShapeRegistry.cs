@@ -7706,6 +7706,20 @@ public sealed partial class NativeAotLoweringPlanner
                 CreateNativeIntAbiSlot("System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType),
                 new HashSet<int> { 0 });
 
+            // ── Convert.ToXxx numeric→numeric inline shapes ──────────────────────
+            // These handle integer, float, char, bool input types and emit a direct
+            // static_cast at the call site, avoiding codegen fallback bugs.
+            RegisterConvertNumericInline(registry, "ToUInt16", "CHAOS_IL2CPP_UINT16");
+            RegisterConvertNumericInline(registry, "ToInt32", "CHAOS_IL2CPP_INT32");
+            RegisterConvertNumericInline(registry, "ToUInt32", "CHAOS_IL2CPP_UINT32");
+            RegisterConvertNumericInline(registry, "ToInt16", "CHAOS_IL2CPP_INT16");
+            RegisterConvertNumericInline(registry, "ToSByte", "CHAOS_IL2CPP_INT8");
+            RegisterConvertNumericInline(registry, "ToByte", "CHAOS_IL2CPP_UINT8");
+            RegisterConvertNumericInline(registry, "ToUInt64", "CHAOS_IL2CPP_UINT64");
+            RegisterConvertNumericInline(registry, "ToInt64", "CHAOS_IL2CPP_INT64");
+            RegisterConvertNumericInline(registry, "ToSingle", "CHAOS_IL2CPP_FLOAT32");
+            RegisterConvertNumericInline(registry, "ToDouble", "CHAOS_IL2CPP_FLOAT64");
+
             // ── System.Int32/Int64/Double::Parse stubs ─────────────────────────
             registry.Register("System.Int32", "Parse", ["System.String"],
                 ShapeKind.SimpleForward, "ChaosParseInt32",
