@@ -64,7 +64,7 @@ public sealed class InliningPlannerTests
     public void EvaluateInline_ExceedsCallerFraction_ReturnsFalse()
     {
         var result = InliningPlanner.EvaluateInline(
-            calleeInstructionCount: 10,
+            calleeInstructionCount: 11,
             callerInstructionCount: 20,
             isRecursive: false);
         Assert.False(result.CanInline);

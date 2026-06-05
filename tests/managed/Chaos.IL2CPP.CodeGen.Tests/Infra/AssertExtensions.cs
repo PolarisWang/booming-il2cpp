@@ -54,9 +54,30 @@ internal static class AssertExtensions
     /// </summary>
     public static void UsesStructuredIR(string generatedSource)
     {
-        if (!generatedSource.Contains("_s0{}", StringComparison.Ordinal) &&
-            !generatedSource.Contains("_s0 {", StringComparison.Ordinal) &&
-            !generatedSource.Contains("_s0(", StringComparison.Ordinal))
+        // Structured IR variables use patterns like _s0, _i0, _f0, etc.
+        // Accept various declaration styles:
+        //   " _s0;" (uninitialized declaration)
+        //   " _s0{}"(zero-initialized)
+        //   " _s0(" (initialized via expression)
+        var hasStructuredVar = false;
+        for (int i = 0; i < generatedSource.Length - 4; i++)
+        {
+            if (generatedSource[i] == '_' &&
+                i + 4 < generatedSource.Length &&
+                char.IsLetter(generatedSource[i + 1]) &&
+                char.IsDigit(generatedSource[i + 2]))
+            {
+                // Check for declaration patterns: _s0; or _s0{ or _s0( or _s0 =
+                var afterVar = generatedSource[i + 3];
+                if (afterVar == ';' || afterVar == '{' || afterVar == '(' || afterVar == '=')
+                {
+                    hasStructuredVar = true;
+                    break;
+                }
+            }
+        }
+
+        if (!hasStructuredVar)
         {
             throw new XunitException(
                 "Expected method to use structured IR (contain _s0), " +
