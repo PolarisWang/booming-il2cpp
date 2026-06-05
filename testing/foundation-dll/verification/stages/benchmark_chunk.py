@@ -606,6 +606,16 @@ def run_benchmark_chunk(ctx: ChunkContext, stages: dict[str, StageResult]) -> St
     # Write unified-format records.jsonl from primary result
     _write_records_jsonl(per_method_stats, summary, ctx, iterations)
 
+    # FP-12: Validate benchmark data minimum quality
+    if status == "passed" and method_count > 0:
+        zero_duration = sum(1 for m in per_method_stats if m.get("meanDurationMs", 0) <= 0)
+        if zero_duration == method_count:
+            status = "warning_no_valid_data"
+            print(f"  [benchmark] WARNING: all {method_count} methods returned zero/negative duration")
+        elif zero_duration > method_count * 0.5:
+            status = "warning_mostly_zero"
+            print(f"  [benchmark] WARNING: {zero_duration}/{method_count} methods returned zero/negative duration")
+
     status = "passed" if method_count > 0 else "error"
     if errors:
         status = "passed_with_errors" if status == "passed" else "error"
