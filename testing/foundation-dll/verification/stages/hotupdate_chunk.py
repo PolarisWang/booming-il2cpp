@@ -118,6 +118,12 @@ def _run_cmake_rebuild(native_dir: Path) -> bool:
         print(f'  [hotupdate] Build directory not found: {build_dir}')
         return False
 
+    # Reconfigure cmake to pick up any page file count changes (stale page files
+    # from previous codegen runs are cleaned by the TPG, but the cmake cache may
+    # still reference them).  The reconfigure re-evaluates file(GLOB ...) rules.
+    subprocess.run(['cmake', str(native_dir), '-B', str(build_dir)],
+        capture_output=True, text=True, timeout=120)
+
     result = subprocess.run(
         ['cmake', '--build', str(build_dir), '--config', 'RelWithDebInfo'],
         capture_output=True, text=True, timeout=300)

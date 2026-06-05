@@ -16,6 +16,9 @@ public sealed class CSharpExpressionBuilder
     {
         ["System.Text.Encoding"] = "Encoding.UTF8",
         ["System.String"] = "string.Empty",
+        // System.Array is abstract — default(Array) is null and causes NRE
+        // in AOT-generated code.  Use Array.Empty<int>() for a valid instance.
+        ["System.Array"] = "System.Array.Empty<int>()",
         // Crypto abstract type factories — .Create() returns concrete instances
         ["System.Security.Cryptography.HashAlgorithm"] = "System.Security.Cryptography.SHA256.Create()",
         ["System.Security.Cryptography.SymmetricAlgorithm"] = "System.Security.Cryptography.Aes.Create()",

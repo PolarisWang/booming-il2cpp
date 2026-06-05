@@ -643,6 +643,7 @@ static int RunPatchMode(string dllPath, string? namespaceFilter, string? outputD
     sb.AppendLine("using System.Data.Common;");
     sb.AppendLine("using System.Diagnostics;");
     sb.AppendLine("using System.Diagnostics.Metrics;");
+    sb.AppendLine("using System.Dynamic;");
     sb.AppendLine("using System.Globalization;");
     sb.AppendLine("using System.IO;");
     sb.AppendLine("using System.Linq;");

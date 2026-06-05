@@ -140,6 +140,10 @@ public sealed class ValueGenerator
         ["IReadOnlySet"] = typeArgs => typeArgs.Length > 0
             ? $"new System.Collections.Generic.HashSet<{typeArgs[0]}>()"
             : "new System.Collections.Generic.HashSet<object>()",
+        // System.Array is abstract — default(Array) is null and causes NRE when
+        // instance methods are called.  Use Array.Empty<int>() to get a valid
+        // non-null Array instance for probe subjects and verification tests.
+        ["Array"] = _ => "System.Array.Empty<int>()",
     };
 
     public ValueGenerator(CSharpSerializer serializer, AutoFixtureAllower? autoFixture = null)
