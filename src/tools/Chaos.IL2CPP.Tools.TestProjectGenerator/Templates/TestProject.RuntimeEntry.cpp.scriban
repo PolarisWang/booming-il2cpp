@@ -163,6 +163,12 @@ static LONG CALLBACK JitVehHandler(PEXCEPTION_POINTERS ExceptionInfo) noexcept {
     }
 
     // Log
+    // For ACCESS_VIOLATION in JIT code, fall through to __try/__except
+    // so benchmark loop skips the crashing method and continues.
+    if (er->ExceptionCode == STATUS_ACCESS_VIOLATION) {
+        return EXCEPTION_CONTINUE_SEARCH;
+    }
+
     std::fprintf(stderr,
         "JIT CRASH: Code=0x%08lX RIP=0x%p RSP=0x%p"
         " RAX=0x%p RBX=0x%p RCX=0x%p RDX=0x%p RSI=0x%p RDI=0x%p"
