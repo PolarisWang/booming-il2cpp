@@ -1,0 +1,129 @@
+{
+  "assemblyName": "System.Security.Cryptography",
+  "timestamp": "2026-06-05T09:28:21",
+  "totalChunks": 3,
+  "chunksWithFacts": 0,
+  "chunksShutdownAV": 0,
+  "chunksWithValueWarnings": 0,
+  "totalPassed": 0,
+  "totalFactMethods": 0,
+  "chunkSummaries": [
+    {
+      "slug": "security-cryptography",
+      "fact": {
+        "passed": 0,
+        "total": 0,
+        "isShutdownAV": false,
+        "valueSuspicious": false,
+        "valueWarnings": 0,
+        "metaTotal": 1307,
+        "metaBenchmarkCount": 1307
+      },
+      "benchmark": {
+        "methodCount": 257,
+        "iterations": 50000,
+        "meanDurationMs": 0.5716474708171206,
+        "meanOpsPerSecond": 306921626.6636363,
+        "minDurationMs": 0,
+        "maxDurationMs": 52.8631,
+        "totalDurationMs": 146.9134,
+        "totalAllocatedBytes": 67200000.0,
+        "meanSampleCount": 8.6,
+        "totalOutliers": 308,
+        "meanCv": 0.12658484584980237,
+        "maxCv": 0.468324
+      },
+      "hotupdate": {
+        "passed": 1221,
+        "failed": 0,
+        "allSemantic": false,
+        "allRevert": true,
+        "exitCode": 0,
+        "patchDataUsed": true,
+        "patchFailed": false,
+        "truncated": false,
+        "crash": false,
+        "assertFailed": 0,
+        "semanticChangedCount": 0
+      }
+    },
+    {
+      "slug": "security-cryptography-2",
+      "fact": {
+        "passed": 0,
+        "total": 0,
+        "isShutdownAV": false,
+        "valueSuspicious": false,
+        "valueWarnings": 0,
+        "metaTotal": 1307,
+        "metaBenchmarkCount": 1307
+      },
+      "benchmark": {
+        "methodCount": 257,
+        "iterations": 50000,
+        "meanDurationMs": 0.5799762645914397,
+        "meanOpsPerSecond": 295396304.8161417,
+        "minDurationMs": 0,
+        "maxDurationMs": 53.2035,
+        "totalDurationMs": 149.0539,
+        "totalAllocatedBytes": 67360000.0,
+        "meanSampleCount": 8.0,
+        "totalOutliers": 483,
+        "meanCv": 0.32288614173228347,
+        "maxCv": 2.524485
+      },
+      "hotupdate": {
+        "passed": 1221,
+        "failed": 0,
+        "allSemantic": false,
+        "allRevert": true,
+        "exitCode": 0,
+        "patchDataUsed": true,
+        "patchFailed": false,
+        "truncated": false,
+        "crash": false,
+        "assertFailed": 0,
+        "semanticChangedCount": 0
+      }
+    },
+    {
+      "slug": "system-security-cryptography-x509certificates",
+      "fact": {
+        "passed": 0,
+        "total": 0,
+        "isShutdownAV": false,
+        "valueSuspicious": false,
+        "valueWarnings": 0,
+        "metaTotal": 276,
+        "metaBenchmarkCount": 276
+      },
+      "benchmark": {
+        "methodCount": 330,
+        "iterations": 50000,
+        "meanDurationMs": 0.39977303030303024,
+        "meanOpsPerSecond": 317271253.83533746,
+        "minDurationMs": 0,
+        "maxDurationMs": 48.19,
+        "totalDurationMs": 131.9251,
+        "totalAllocatedBytes": 67200000.0,
+        "meanSampleCount": 3.0,
+        "totalOutliers": 0,
+        "meanCv": 0.056350064417177916,
+        "maxCv": 0.408263
+      },
+      "hotupdate": {
+        "passed": 236,
+        "failed": 0,
+        "allSemantic": false,
+        "allRevert": true,
+        "exitCode": 0,
+        "patchDataUsed": true,
+        "patchFailed": false,
+        "truncated": false,
+        "crash": false,
+        "assertFailed": 0,
+        "semanticChangedCount": 0
+      }
+    }
+  ]
+}

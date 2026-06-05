@@ -1,0 +1,2221 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Security.Cryptography",
+  "chunkSlug": "system-security-cryptography-x509certificates",
+  "totalMethods": 276,
+  "customEntryIndices": null,
+  "benchmarkMethodIndices": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29,
+    30,
+    31,
+    32,
+    33,
+    34,
+    35,
+    36,
+    37,
+    38,
+    39,
+    40,
+    41,
+    42,
+    43,
+    44,
+    45,
+    46,
+    47,
+    48,
+    49,
+    50,
+    51,
+    52,
+    53,
+    54,
+    55,
+    56,
+    57,
+    58,
+    59,
+    60,
+    61,
+    62,
+    63,
+    64,
+    65,
+    66,
+    67,
+    68,
+    69,
+    70,
+    71,
+    72,
+    73,
+    74,
+    75,
+    76,
+    77,
+    78,
+    79,
+    80,
+    81,
+    82,
+    83,
+    84,
+    85,
+    86,
+    87,
+    88,
+    89,
+    90,
+    91,
+    92,
+    93,
+    94,
+    95,
+    96,
+    97,
+    98,
+    99,
+    100,
+    101,
+    102,
+    103,
+    104,
+    105,
+    106,
+    107,
+    108,
+    109,
+    110,
+    111,
+    112,
+    113,
+    114,
+    115,
+    116,
+    117,
+    118,
+    119,
+    120,
+    121,
+    122,
+    123,
+    124,
+    125,
+    126,
+    127,
+    128,
+    129,
+    130,
+    131,
+    132,
+    133,
+    134,
+    135,
+    136,
+    137,
+    138,
+    139,
+    140,
+    141,
+    142,
+    143,
+    144,
+    145,
+    146,
+    147,
+    148,
+    149,
+    150,
+    151,
+    152,
+    153,
+    154,
+    155,
+    156,
+    157,
+    158,
+    159,
+    160,
+    161,
+    162,
+    163,
+    164,
+    165,
+    166,
+    167,
+    168,
+    169,
+    170,
+    171,
+    172,
+    173,
+    174,
+    175,
+    176,
+    177,
+    178,
+    179,
+    180,
+    181,
+    182,
+    183,
+    184,
+    185,
+    186,
+    187,
+    188,
+    189,
+    190,
+    191,
+    192,
+    193,
+    194,
+    195,
+    196,
+    197,
+    198,
+    199,
+    200,
+    201,
+    202,
+    203,
+    204,
+    205,
+    206,
+    207,
+    208,
+    209,
+    210,
+    211,
+    212,
+    213,
+    214,
+    215,
+    216,
+    217,
+    218,
+    219,
+    220,
+    221,
+    222,
+    223,
+    224,
+    225,
+    226,
+    227,
+    228,
+    229,
+    230,
+    231,
+    232,
+    233,
+    234,
+    235,
+    236,
+    237,
+    238,
+    239,
+    240,
+    241,
+    242,
+    243,
+    244,
+    245,
+    246,
+    247,
+    248,
+    249,
+    250,
+    251,
+    252,
+    253,
+    254,
+    255,
+    256,
+    257,
+    258,
+    259,
+    260,
+    261,
+    262,
+    263,
+    264,
+    265,
+    266,
+    267,
+    268,
+    269,
+    270,
+    271,
+    272,
+    273,
+    274,
+    275
+  ],
+  "hotupdateMethodIndices": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29,
+    30,
+    31,
+    32,
+    33,
+    34,
+    35,
+    36,
+    37,
+    38,
+    39,
+    40,
+    41,
+    42,
+    43,
+    44,
+    45,
+    46,
+    47,
+    48,
+    49,
+    50,
+    51,
+    52,
+    53,
+    54,
+    55,
+    56,
+    57,
+    58,
+    59,
+    60,
+    61,
+    62,
+    63,
+    64,
+    65,
+    66,
+    67,
+    68,
+    69,
+    70,
+    71,
+    72,
+    73,
+    74,
+    75,
+    76,
+    77,
+    78,
+    79,
+    80,
+    81,
+    82,
+    83,
+    84,
+    85,
+    86,
+    87,
+    88,
+    89,
+    90,
+    91,
+    92,
+    93,
+    94,
+    95,
+    96,
+    97,
+    98,
+    99,
+    100,
+    101,
+    102,
+    103,
+    104,
+    105,
+    106,
+    107,
+    108,
+    109,
+    110,
+    111,
+    112,
+    113,
+    114,
+    115,
+    116,
+    117,
+    118,
+    119,
+    120,
+    121,
+    122,
+    123,
+    124,
+    125,
+    126,
+    127,
+    128,
+    129,
+    130,
+    131,
+    132,
+    133,
+    134,
+    135,
+    136,
+    137,
+    138,
+    139,
+    140,
+    141,
+    142,
+    143,
+    144,
+    145,
+    146,
+    147,
+    148,
+    149,
+    150,
+    151,
+    152,
+    153,
+    154,
+    155,
+    156,
+    157,
+    158,
+    159,
+    160,
+    161,
+    162,
+    163,
+    164,
+    165,
+    166,
+    167,
+    168,
+    169,
+    170,
+    171,
+    172,
+    173,
+    174,
+    175,
+    176,
+    177,
+    178,
+    179,
+    180,
+    181,
+    182,
+    183,
+    184,
+    185,
+    186,
+    187,
+    188,
+    189,
+    190,
+    191,
+    192,
+    193,
+    194,
+    195,
+    196,
+    197,
+    198,
+    199,
+    200,
+    201,
+    202,
+    203,
+    204,
+    205,
+    206,
+    207,
+    208,
+    209,
+    210,
+    211,
+    212,
+    213,
+    214,
+    215,
+    216,
+    217,
+    218,
+    219,
+    220,
+    221,
+    222,
+    223,
+    224,
+    225,
+    226,
+    227,
+    228,
+    229,
+    230,
+    231,
+    232,
+    233,
+    234,
+    235,
+    236,
+    237,
+    238,
+    239,
+    240,
+    241,
+    242,
+    243,
+    244,
+    245,
+    246,
+    247,
+    248,
+    249,
+    250,
+    251,
+    252,
+    253,
+    254,
+    255,
+    256,
+    257,
+    258,
+    259,
+    260,
+    261,
+    262,
+    263,
+    264,
+    265,
+    266,
+    267,
+    268,
+    269,
+    270,
+    271,
+    272,
+    273,
+    274,
+    275
+  ],
+  "methods": [
+    {
+      "index": 0,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.CertificateRequest::CreateSigningRequest:System.Byte[]()",
+      "generatedMethodId": "CreateSigningRequest_0__0"
+    },
+    {
+      "index": 1,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.CertificateRequest::CreateSigningRequest:System.Byte[](System.Security.Cryptography.X509Certificates.X509SignatureGenerator)",
+      "generatedMethodId": "CreateSigningRequest_1_X509SignatureGenerator_0"
+    },
+    {
+      "index": 2,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.CertificateRequest::CreateSigningRequestPem:System.String()",
+      "generatedMethodId": "CreateSigningRequestPem_2__0"
+    },
+    {
+      "index": 3,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.CertificateRequest::CreateSigningRequestPem:System.String(System.Security.Cryptography.X509Certificates.X509SignatureGenerator)",
+      "generatedMethodId": "CreateSigningRequestPem_3_X509SignatureGenerator_0"
+    },
+    {
+      "index": 4,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.CertificateRequest::CreateSelfSigned:System.Security.Cryptography.X509Certificates.X509Certificate2(System.DateTimeOffset,System.DateTimeOffset)",
+      "generatedMethodId": "CreateSelfSigned_4_System_DateTimeOffset_System_DateTimeOffset_0"
+    },
+    {
+      "index": 5,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.CertificateRequest::LoadSigningRequestPem:System.Security.Cryptography.X509Certificates.CertificateRequest(System.String,System.Security.Cryptography.HashAlgorithmName,System.Security.Cryptography.X509Certificates.CertificateRequestLoadOptions,System.Security.Cryptography.RSASignaturePadding)",
+      "generatedMethodId": "LoadSigningRequestPem_5_string_HashAlgorithmName_CertificateRequestLoadOptions_RSASignaturePadding_0"
+    },
+    {
+      "index": 6,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.CertificateRequest::LoadSigningRequestPem:System.Security.Cryptography.X509Certificates.CertificateRequest(System.String,System.Security.Cryptography.HashAlgorithmName,System.Security.Cryptography.X509Certificates.CertificateRequestLoadOptions,System.Security.Cryptography.RSASignaturePadding)",
+      "generatedMethodId": "LoadSigningRequestPem_5_string_HashAlgorithmName_CertificateRequestLoadOptions_RSASignaturePadding_1"
+    },
+    {
+      "index": 7,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.CertificateRequest::LoadSigningRequest:System.Security.Cryptography.X509Certificates.CertificateRequest(System.Byte[],System.Security.Cryptography.HashAlgorithmName,System.Security.Cryptography.X509Certificates.CertificateRequestLoadOptions,System.Security.Cryptography.RSASignaturePadding)",
+      "generatedMethodId": "LoadSigningRequest_6_System_Byte_HashAlgorithmName_CertificateRequestLoadOptions_RSASignaturePadding_0"
+    },
+    {
+      "index": 8,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.CertificateRequest::LoadSigningRequest:System.Security.Cryptography.X509Certificates.CertificateRequest(System.Byte[],System.Security.Cryptography.HashAlgorithmName,System.Security.Cryptography.X509Certificates.CertificateRequestLoadOptions,System.Security.Cryptography.RSASignaturePadding)",
+      "generatedMethodId": "LoadSigningRequest_6_System_Byte_HashAlgorithmName_CertificateRequestLoadOptions_RSASignaturePadding_1"
+    },
+    {
+      "index": 9,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.CertificateRequest::LoadSigningRequest:System.Security.Cryptography.X509Certificates.CertificateRequest(System.Byte[],System.Security.Cryptography.HashAlgorithmName,System.Security.Cryptography.X509Certificates.CertificateRequestLoadOptions,System.Security.Cryptography.RSASignaturePadding)",
+      "generatedMethodId": "LoadSigningRequest_6_System_Byte_HashAlgorithmName_CertificateRequestLoadOptions_RSASignaturePadding_2"
+    },
+    {
+      "index": 10,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.CertificateRevocationListBuilder::AddEntry:System.Void(System.Security.Cryptography.X509Certificates.X509Certificate2,System.Nullable\u003CSystem.DateTimeOffset\u003E,System.Nullable\u003CSystem.Security.Cryptography.X509Certificates.X509RevocationReason\u003E)",
+      "generatedMethodId": "AddEntry_0_X509Certificate2_System_NullableSystem_DateTimeOffset_System_NullableX509RevocationReason_0"
+    },
+    {
+      "index": 11,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.CertificateRevocationListBuilder::AddEntry:System.Void(System.Byte[],System.Nullable\u003CSystem.DateTimeOffset\u003E,System.Nullable\u003CSystem.Security.Cryptography.X509Certificates.X509RevocationReason\u003E)",
+      "generatedMethodId": "AddEntry_1_System_Byte_System_NullableSystem_DateTimeOffset_System_NullableX509RevocationReason_0"
+    },
+    {
+      "index": 12,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.CertificateRevocationListBuilder::AddEntry:System.Void(System.Byte[],System.Nullable\u003CSystem.DateTimeOffset\u003E,System.Nullable\u003CSystem.Security.Cryptography.X509Certificates.X509RevocationReason\u003E)",
+      "generatedMethodId": "AddEntry_1_System_Byte_System_NullableSystem_DateTimeOffset_System_NullableX509RevocationReason_1"
+    },
+    {
+      "index": 13,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.CertificateRevocationListBuilder::AddEntry:System.Void(System.Byte[],System.Nullable\u003CSystem.DateTimeOffset\u003E,System.Nullable\u003CSystem.Security.Cryptography.X509Certificates.X509RevocationReason\u003E)",
+      "generatedMethodId": "AddEntry_1_System_Byte_System_NullableSystem_DateTimeOffset_System_NullableX509RevocationReason_2"
+    },
+    {
+      "index": 14,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.CertificateRevocationListBuilder::RemoveEntry:System.Boolean(System.Byte[])",
+      "generatedMethodId": "RemoveEntry_2_System_Byte_0"
+    },
+    {
+      "index": 15,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.CertificateRevocationListBuilder::RemoveEntry:System.Boolean(System.Byte[])",
+      "generatedMethodId": "RemoveEntry_2_System_Byte_1"
+    },
+    {
+      "index": 16,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.CertificateRevocationListBuilder::RemoveEntry:System.Boolean(System.Byte[])",
+      "generatedMethodId": "RemoveEntry_2_System_Byte_2"
+    },
+    {
+      "index": 17,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.CertificateRevocationListBuilder::Build:System.Byte[](System.Security.Cryptography.X509Certificates.X509Certificate2,System.Numerics.BigInteger,System.DateTimeOffset,System.Security.Cryptography.HashAlgorithmName,System.Security.Cryptography.RSASignaturePadding,System.Nullable\u003CSystem.DateTimeOffset\u003E)",
+      "generatedMethodId": "Build_3_X509Certificate2_BigInteger_System_DateTimeOffset_HashAlgorithmName_RSASignaturePadding_System_NullableSystem_DateTimeOffset_0"
+    },
+    {
+      "index": 18,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.CertificateRevocationListBuilder::Build:System.Byte[](System.Security.Cryptography.X509Certificates.X509Certificate2,System.Numerics.BigInteger,System.DateTimeOffset,System.Security.Cryptography.HashAlgorithmName,System.Security.Cryptography.RSASignaturePadding,System.Nullable\u003CSystem.DateTimeOffset\u003E)",
+      "generatedMethodId": "Build_3_X509Certificate2_BigInteger_System_DateTimeOffset_HashAlgorithmName_RSASignaturePadding_System_NullableSystem_DateTimeOffset_1"
+    },
+    {
+      "index": 19,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.CertificateRevocationListBuilder::Build:System.Byte[](System.Security.Cryptography.X509Certificates.X500DistinguishedName,System.Security.Cryptography.X509Certificates.X509SignatureGenerator,System.Numerics.BigInteger,System.DateTimeOffset,System.Security.Cryptography.HashAlgorithmName,System.Security.Cryptography.X509Certificates.X509AuthorityKeyIdentifierExtension,System.Nullable\u003CSystem.DateTimeOffset\u003E)",
+      "generatedMethodId": "Build_4_X500DistinguishedName_X509SignatureGenerator_BigInteger_System_DateTimeOffset_HashAlgorithmName_X509AuthorityKeyIdentifierExtension_System_NullableSystem_DateTimeOffset_0"
+    },
+    {
+      "index": 20,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.CertificateRevocationListBuilder::Build:System.Byte[](System.Security.Cryptography.X509Certificates.X500DistinguishedName,System.Security.Cryptography.X509Certificates.X509SignatureGenerator,System.Numerics.BigInteger,System.DateTimeOffset,System.Security.Cryptography.HashAlgorithmName,System.Security.Cryptography.X509Certificates.X509AuthorityKeyIdentifierExtension,System.Nullable\u003CSystem.DateTimeOffset\u003E)",
+      "generatedMethodId": "Build_4_X500DistinguishedName_X509SignatureGenerator_BigInteger_System_DateTimeOffset_HashAlgorithmName_X509AuthorityKeyIdentifierExtension_System_NullableSystem_DateTimeOffset_1"
+    },
+    {
+      "index": 21,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.CertificateRevocationListBuilder::BuildCrlDistributionPointExtension:System.Security.Cryptography.X509Certificates.X509Extension(System.Collections.Generic.IEnumerable\u003CSystem.String\u003E,System.Boolean)",
+      "generatedMethodId": "BuildCrlDistributionPointExtension_5_IEnumerablestring_bool_0"
+    },
+    {
+      "index": 22,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.CertificateRevocationListBuilder::BuildCrlDistributionPointExtension:System.Security.Cryptography.X509Certificates.X509Extension(System.Collections.Generic.IEnumerable\u003CSystem.String\u003E,System.Boolean)",
+      "generatedMethodId": "BuildCrlDistributionPointExtension_5_IEnumerablestring_bool_1"
+    },
+    {
+      "index": 23,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.CertificateRevocationListBuilder::BuildCrlDistributionPointExtension:System.Security.Cryptography.X509Certificates.X509Extension(System.Collections.Generic.IEnumerable\u003CSystem.String\u003E,System.Boolean)",
+      "generatedMethodId": "BuildCrlDistributionPointExtension_5_IEnumerablestring_bool_2"
+    },
+    {
+      "index": 24,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.CertificateRevocationListBuilder::Load:System.Security.Cryptography.X509Certificates.CertificateRevocationListBuilder(System.Byte[],System.Numerics.BigInteger)",
+      "generatedMethodId": "Load_6_System_Byte_BigInteger_0"
+    },
+    {
+      "index": 25,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.CertificateRevocationListBuilder::Load:System.Security.Cryptography.X509Certificates.CertificateRevocationListBuilder(System.Byte[],System.Numerics.BigInteger)",
+      "generatedMethodId": "Load_6_System_Byte_BigInteger_1"
+    },
+    {
+      "index": 26,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.CertificateRevocationListBuilder::Load:System.Security.Cryptography.X509Certificates.CertificateRevocationListBuilder(System.Byte[],System.Numerics.BigInteger)",
+      "generatedMethodId": "Load_6_System_Byte_BigInteger_2"
+    },
+    {
+      "index": 27,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.CertificateRevocationListBuilder::Load:System.Security.Cryptography.X509Certificates.CertificateRevocationListBuilder(System.Byte[],System.Numerics.BigInteger)",
+      "generatedMethodId": "Load_6_System_Byte_BigInteger_3"
+    },
+    {
+      "index": 28,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.CertificateRevocationListBuilder::LoadPem:System.Security.Cryptography.X509Certificates.CertificateRevocationListBuilder(System.String,System.Numerics.BigInteger)",
+      "generatedMethodId": "LoadPem_7_string_BigInteger_0"
+    },
+    {
+      "index": 29,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.CertificateRevocationListBuilder::LoadPem:System.Security.Cryptography.X509Certificates.CertificateRevocationListBuilder(System.String,System.Numerics.BigInteger)",
+      "generatedMethodId": "LoadPem_7_string_BigInteger_1"
+    },
+    {
+      "index": 30,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.CertificateRevocationListBuilder::LoadPem:System.Security.Cryptography.X509Certificates.CertificateRevocationListBuilder(System.String,System.Numerics.BigInteger)",
+      "generatedMethodId": "LoadPem_7_string_BigInteger_2"
+    },
+    {
+      "index": 31,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.DSACertificateExtensions::GetDSAPublicKey:System.Security.Cryptography.DSA(System.Security.Cryptography.X509Certificates.X509Certificate2)",
+      "generatedMethodId": "GetDSAPublicKey_0_X509Certificate2_0"
+    },
+    {
+      "index": 32,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.DSACertificateExtensions::GetDSAPrivateKey:System.Security.Cryptography.DSA(System.Security.Cryptography.X509Certificates.X509Certificate2)",
+      "generatedMethodId": "GetDSAPrivateKey_1_X509Certificate2_0"
+    },
+    {
+      "index": 33,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.DSACertificateExtensions::CopyWithPrivateKey:System.Security.Cryptography.X509Certificates.X509Certificate2(System.Security.Cryptography.X509Certificates.X509Certificate2,System.Security.Cryptography.DSA)",
+      "generatedMethodId": "CopyWithPrivateKey_2_X509Certificate2_DSA_0"
+    },
+    {
+      "index": 34,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.ECDsaCertificateExtensions::GetECDsaPublicKey:System.Security.Cryptography.ECDsa(System.Security.Cryptography.X509Certificates.X509Certificate2)",
+      "generatedMethodId": "GetECDsaPublicKey_0_X509Certificate2_0"
+    },
+    {
+      "index": 35,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.ECDsaCertificateExtensions::GetECDsaPrivateKey:System.Security.Cryptography.ECDsa(System.Security.Cryptography.X509Certificates.X509Certificate2)",
+      "generatedMethodId": "GetECDsaPrivateKey_1_X509Certificate2_0"
+    },
+    {
+      "index": 36,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.ECDsaCertificateExtensions::CopyWithPrivateKey:System.Security.Cryptography.X509Certificates.X509Certificate2(System.Security.Cryptography.X509Certificates.X509Certificate2,System.Security.Cryptography.ECDsa)",
+      "generatedMethodId": "CopyWithPrivateKey_2_X509Certificate2_ECDsa_0"
+    },
+    {
+      "index": 37,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.Pkcs12LoaderLimits::MakeReadOnly:System.Void()",
+      "generatedMethodId": "MakeReadOnly_0__0"
+    },
+    {
+      "index": 38,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.PublicKey::GetRSAPublicKey:System.Security.Cryptography.RSA()",
+      "generatedMethodId": "GetRSAPublicKey_0__0"
+    },
+    {
+      "index": 39,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.PublicKey::GetDSAPublicKey:System.Security.Cryptography.DSA()",
+      "generatedMethodId": "GetDSAPublicKey_1__0"
+    },
+    {
+      "index": 40,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.PublicKey::GetECDsaPublicKey:System.Security.Cryptography.ECDsa()",
+      "generatedMethodId": "GetECDsaPublicKey_2__0"
+    },
+    {
+      "index": 41,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.PublicKey::GetECDiffieHellmanPublicKey:System.Security.Cryptography.ECDiffieHellman()",
+      "generatedMethodId": "GetECDiffieHellmanPublicKey_3__0"
+    },
+    {
+      "index": 42,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.RSACertificateExtensions::GetRSAPublicKey:System.Security.Cryptography.RSA(System.Security.Cryptography.X509Certificates.X509Certificate2)",
+      "generatedMethodId": "GetRSAPublicKey_0_X509Certificate2_0"
+    },
+    {
+      "index": 43,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.RSACertificateExtensions::GetRSAPrivateKey:System.Security.Cryptography.RSA(System.Security.Cryptography.X509Certificates.X509Certificate2)",
+      "generatedMethodId": "GetRSAPrivateKey_1_X509Certificate2_0"
+    },
+    {
+      "index": 44,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.RSACertificateExtensions::CopyWithPrivateKey:System.Security.Cryptography.X509Certificates.X509Certificate2(System.Security.Cryptography.X509Certificates.X509Certificate2,System.Security.Cryptography.RSA)",
+      "generatedMethodId": "CopyWithPrivateKey_2_X509Certificate2_RSA_0"
+    },
+    {
+      "index": 45,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.SubjectAlternativeNameBuilder::AddEmailAddress:System.Void(System.String)",
+      "generatedMethodId": "AddEmailAddress_0_string_0"
+    },
+    {
+      "index": 46,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.SubjectAlternativeNameBuilder::AddEmailAddress:System.Void(System.String)",
+      "generatedMethodId": "AddEmailAddress_0_string_1"
+    },
+    {
+      "index": 47,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.SubjectAlternativeNameBuilder::AddDnsName:System.Void(System.String)",
+      "generatedMethodId": "AddDnsName_1_string_0"
+    },
+    {
+      "index": 48,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.SubjectAlternativeNameBuilder::AddDnsName:System.Void(System.String)",
+      "generatedMethodId": "AddDnsName_1_string_1"
+    },
+    {
+      "index": 49,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.SubjectAlternativeNameBuilder::AddUri:System.Void(System.Uri)",
+      "generatedMethodId": "AddUri_2_System_Uri_0"
+    },
+    {
+      "index": 50,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.SubjectAlternativeNameBuilder::AddIpAddress:System.Void(System.Net.IPAddress)",
+      "generatedMethodId": "AddIpAddress_3_IPAddress_0"
+    },
+    {
+      "index": 51,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.SubjectAlternativeNameBuilder::AddUserPrincipalName:System.Void(System.String)",
+      "generatedMethodId": "AddUserPrincipalName_4_string_0"
+    },
+    {
+      "index": 52,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.SubjectAlternativeNameBuilder::AddUserPrincipalName:System.Void(System.String)",
+      "generatedMethodId": "AddUserPrincipalName_4_string_1"
+    },
+    {
+      "index": 53,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.SubjectAlternativeNameBuilder::Build:System.Security.Cryptography.X509Certificates.X509Extension(System.Boolean)",
+      "generatedMethodId": "Build_5_bool_0"
+    },
+    {
+      "index": 54,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.SubjectAlternativeNameBuilder::Build:System.Security.Cryptography.X509Certificates.X509Extension(System.Boolean)",
+      "generatedMethodId": "Build_5_bool_1"
+    },
+    {
+      "index": 55,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X500DistinguishedName::Decode:System.String(System.Security.Cryptography.X509Certificates.X500DistinguishedNameFlags)",
+      "generatedMethodId": "Decode_0_X500DistinguishedNameFlags_0"
+    },
+    {
+      "index": 56,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X500DistinguishedName::Format:System.String(System.Boolean)",
+      "generatedMethodId": "Format_1_bool_0"
+    },
+    {
+      "index": 57,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X500DistinguishedName::Format:System.String(System.Boolean)",
+      "generatedMethodId": "Format_1_bool_1"
+    },
+    {
+      "index": 58,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X500DistinguishedName::EnumerateRelativeDistinguishedNames:System.Collections.Generic.IEnumerable\u003CSystem.Security.Cryptography.X509Certificates.X500RelativeDistinguishedName\u003E(System.Boolean)",
+      "generatedMethodId": "EnumerateRelativeDistinguishedNames_2_bool_0"
+    },
+    {
+      "index": 59,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X500DistinguishedName::EnumerateRelativeDistinguishedNames:System.Collections.Generic.IEnumerable\u003CSystem.Security.Cryptography.X509Certificates.X500RelativeDistinguishedName\u003E(System.Boolean)",
+      "generatedMethodId": "EnumerateRelativeDistinguishedNames_2_bool_1"
+    },
+    {
+      "index": 60,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X500DistinguishedNameBuilder::Add:System.Void(System.String,System.String,System.Nullable\u003CSystem.Formats.Asn1.UniversalTagNumber\u003E)",
+      "generatedMethodId": "Add_0_string_string_System_NullableUniversalTagNumber_0"
+    },
+    {
+      "index": 61,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X500DistinguishedNameBuilder::Add:System.Void(System.String,System.String,System.Nullable\u003CSystem.Formats.Asn1.UniversalTagNumber\u003E)",
+      "generatedMethodId": "Add_0_string_string_System_NullableUniversalTagNumber_1"
+    },
+    {
+      "index": 62,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X500DistinguishedNameBuilder::Add:System.Void(System.String,System.String,System.Nullable\u003CSystem.Formats.Asn1.UniversalTagNumber\u003E)",
+      "generatedMethodId": "Add_0_string_string_System_NullableUniversalTagNumber_2"
+    },
+    {
+      "index": 63,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X500DistinguishedNameBuilder::Add:System.Void(System.Security.Cryptography.Oid,System.String,System.Nullable\u003CSystem.Formats.Asn1.UniversalTagNumber\u003E)",
+      "generatedMethodId": "Add_1_Oid_string_System_NullableUniversalTagNumber_0"
+    },
+    {
+      "index": 64,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X500DistinguishedNameBuilder::Add:System.Void(System.Security.Cryptography.Oid,System.String,System.Nullable\u003CSystem.Formats.Asn1.UniversalTagNumber\u003E)",
+      "generatedMethodId": "Add_1_Oid_string_System_NullableUniversalTagNumber_1"
+    },
+    {
+      "index": 65,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X500DistinguishedNameBuilder::AddEmailAddress:System.Void(System.String)",
+      "generatedMethodId": "AddEmailAddress_2_string_0"
+    },
+    {
+      "index": 66,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X500DistinguishedNameBuilder::AddEmailAddress:System.Void(System.String)",
+      "generatedMethodId": "AddEmailAddress_2_string_1"
+    },
+    {
+      "index": 67,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X500DistinguishedNameBuilder::AddCommonName:System.Void(System.String)",
+      "generatedMethodId": "AddCommonName_3_string_0"
+    },
+    {
+      "index": 68,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X500DistinguishedNameBuilder::AddCommonName:System.Void(System.String)",
+      "generatedMethodId": "AddCommonName_3_string_1"
+    },
+    {
+      "index": 69,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X500DistinguishedNameBuilder::AddLocalityName:System.Void(System.String)",
+      "generatedMethodId": "AddLocalityName_4_string_0"
+    },
+    {
+      "index": 70,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X500DistinguishedNameBuilder::AddLocalityName:System.Void(System.String)",
+      "generatedMethodId": "AddLocalityName_4_string_1"
+    },
+    {
+      "index": 71,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X500DistinguishedNameBuilder::AddCountryOrRegion:System.Void(System.String)",
+      "generatedMethodId": "AddCountryOrRegion_5_string_0"
+    },
+    {
+      "index": 72,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X500DistinguishedNameBuilder::AddCountryOrRegion:System.Void(System.String)",
+      "generatedMethodId": "AddCountryOrRegion_5_string_1"
+    },
+    {
+      "index": 73,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X500DistinguishedNameBuilder::AddOrganizationName:System.Void(System.String)",
+      "generatedMethodId": "AddOrganizationName_6_string_0"
+    },
+    {
+      "index": 74,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X500DistinguishedNameBuilder::AddOrganizationName:System.Void(System.String)",
+      "generatedMethodId": "AddOrganizationName_6_string_1"
+    },
+    {
+      "index": 75,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X500DistinguishedNameBuilder::AddOrganizationalUnitName:System.Void(System.String)",
+      "generatedMethodId": "AddOrganizationalUnitName_7_string_0"
+    },
+    {
+      "index": 76,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X500DistinguishedNameBuilder::AddOrganizationalUnitName:System.Void(System.String)",
+      "generatedMethodId": "AddOrganizationalUnitName_7_string_1"
+    },
+    {
+      "index": 77,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X500DistinguishedNameBuilder::AddStateOrProvinceName:System.Void(System.String)",
+      "generatedMethodId": "AddStateOrProvinceName_8_string_0"
+    },
+    {
+      "index": 78,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X500DistinguishedNameBuilder::AddStateOrProvinceName:System.Void(System.String)",
+      "generatedMethodId": "AddStateOrProvinceName_8_string_1"
+    },
+    {
+      "index": 79,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X500DistinguishedNameBuilder::AddDomainComponent:System.Void(System.String)",
+      "generatedMethodId": "AddDomainComponent_9_string_0"
+    },
+    {
+      "index": 80,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X500DistinguishedNameBuilder::AddDomainComponent:System.Void(System.String)",
+      "generatedMethodId": "AddDomainComponent_9_string_1"
+    },
+    {
+      "index": 81,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X500DistinguishedNameBuilder::Build:System.Security.Cryptography.X509Certificates.X500DistinguishedName()",
+      "generatedMethodId": "Build_10__0"
+    },
+    {
+      "index": 82,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X500RelativeDistinguishedName::GetSingleElementType:System.Security.Cryptography.Oid()",
+      "generatedMethodId": "GetSingleElementType_0__0"
+    },
+    {
+      "index": 83,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X500RelativeDistinguishedName::GetSingleElementValue:System.String()",
+      "generatedMethodId": "GetSingleElementValue_1__0"
+    },
+    {
+      "index": 84,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509AuthorityInformationAccessExtension::CopyFrom:System.Void(System.Security.Cryptography.AsnEncodedData)",
+      "generatedMethodId": "CopyFrom_0_AsnEncodedData_0"
+    },
+    {
+      "index": 85,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509AuthorityInformationAccessExtension::EnumerateUris:System.Collections.Generic.IEnumerable\u003CSystem.String\u003E(System.String)",
+      "generatedMethodId": "EnumerateUris_1_string_0"
+    },
+    {
+      "index": 86,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509AuthorityInformationAccessExtension::EnumerateUris:System.Collections.Generic.IEnumerable\u003CSystem.String\u003E(System.String)",
+      "generatedMethodId": "EnumerateUris_1_string_1"
+    },
+    {
+      "index": 87,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509AuthorityInformationAccessExtension::EnumerateUris:System.Collections.Generic.IEnumerable\u003CSystem.String\u003E(System.Security.Cryptography.Oid)",
+      "generatedMethodId": "EnumerateUris_2_Oid_0"
+    },
+    {
+      "index": 88,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509AuthorityInformationAccessExtension::EnumerateCAIssuersUris:System.Collections.Generic.IEnumerable\u003CSystem.String\u003E()",
+      "generatedMethodId": "EnumerateCAIssuersUris_3__0"
+    },
+    {
+      "index": 89,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509AuthorityInformationAccessExtension::EnumerateOcspUris:System.Collections.Generic.IEnumerable\u003CSystem.String\u003E()",
+      "generatedMethodId": "EnumerateOcspUris_4__0"
+    },
+    {
+      "index": 90,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509AuthorityKeyIdentifierExtension::CopyFrom:System.Void(System.Security.Cryptography.AsnEncodedData)",
+      "generatedMethodId": "CopyFrom_0_AsnEncodedData_0"
+    },
+    {
+      "index": 91,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509AuthorityKeyIdentifierExtension::CreateFromSubjectKeyIdentifier:System.Security.Cryptography.X509Certificates.X509AuthorityKeyIdentifierExtension(System.Security.Cryptography.X509Certificates.X509SubjectKeyIdentifierExtension)",
+      "generatedMethodId": "CreateFromSubjectKeyIdentifier_1_X509SubjectKeyIdentifierExtension_0"
+    },
+    {
+      "index": 92,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509AuthorityKeyIdentifierExtension::CreateFromSubjectKeyIdentifier:System.Security.Cryptography.X509Certificates.X509AuthorityKeyIdentifierExtension(System.Byte[])",
+      "generatedMethodId": "CreateFromSubjectKeyIdentifier_2_System_Byte_0"
+    },
+    {
+      "index": 93,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509AuthorityKeyIdentifierExtension::CreateFromSubjectKeyIdentifier:System.Security.Cryptography.X509Certificates.X509AuthorityKeyIdentifierExtension(System.Byte[])",
+      "generatedMethodId": "CreateFromSubjectKeyIdentifier_2_System_Byte_1"
+    },
+    {
+      "index": 94,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509AuthorityKeyIdentifierExtension::CreateFromSubjectKeyIdentifier:System.Security.Cryptography.X509Certificates.X509AuthorityKeyIdentifierExtension(System.Byte[])",
+      "generatedMethodId": "CreateFromSubjectKeyIdentifier_2_System_Byte_2"
+    },
+    {
+      "index": 95,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509AuthorityKeyIdentifierExtension::CreateFromIssuerNameAndSerialNumber:System.Security.Cryptography.X509Certificates.X509AuthorityKeyIdentifierExtension(System.Security.Cryptography.X509Certificates.X500DistinguishedName,System.Byte[])",
+      "generatedMethodId": "CreateFromIssuerNameAndSerialNumber_3_X500DistinguishedName_System_Byte_0"
+    },
+    {
+      "index": 96,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509AuthorityKeyIdentifierExtension::CreateFromIssuerNameAndSerialNumber:System.Security.Cryptography.X509Certificates.X509AuthorityKeyIdentifierExtension(System.Security.Cryptography.X509Certificates.X500DistinguishedName,System.Byte[])",
+      "generatedMethodId": "CreateFromIssuerNameAndSerialNumber_3_X500DistinguishedName_System_Byte_1"
+    },
+    {
+      "index": 97,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509AuthorityKeyIdentifierExtension::CreateFromIssuerNameAndSerialNumber:System.Security.Cryptography.X509Certificates.X509AuthorityKeyIdentifierExtension(System.Security.Cryptography.X509Certificates.X500DistinguishedName,System.Byte[])",
+      "generatedMethodId": "CreateFromIssuerNameAndSerialNumber_3_X500DistinguishedName_System_Byte_2"
+    },
+    {
+      "index": 98,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509AuthorityKeyIdentifierExtension::CreateFromCertificate:System.Security.Cryptography.X509Certificates.X509AuthorityKeyIdentifierExtension(System.Security.Cryptography.X509Certificates.X509Certificate2,System.Boolean,System.Boolean)",
+      "generatedMethodId": "CreateFromCertificate_4_X509Certificate2_bool_bool_0"
+    },
+    {
+      "index": 99,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509AuthorityKeyIdentifierExtension::CreateFromCertificate:System.Security.Cryptography.X509Certificates.X509AuthorityKeyIdentifierExtension(System.Security.Cryptography.X509Certificates.X509Certificate2,System.Boolean,System.Boolean)",
+      "generatedMethodId": "CreateFromCertificate_4_X509Certificate2_bool_bool_1"
+    },
+    {
+      "index": 100,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509AuthorityKeyIdentifierExtension::CreateFromCertificate:System.Security.Cryptography.X509Certificates.X509AuthorityKeyIdentifierExtension(System.Security.Cryptography.X509Certificates.X509Certificate2,System.Boolean,System.Boolean)",
+      "generatedMethodId": "CreateFromCertificate_4_X509Certificate2_bool_bool_2"
+    },
+    {
+      "index": 101,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509BasicConstraintsExtension::CopyFrom:System.Void(System.Security.Cryptography.AsnEncodedData)",
+      "generatedMethodId": "CopyFrom_0_AsnEncodedData_0"
+    },
+    {
+      "index": 102,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509BasicConstraintsExtension::CreateForCertificateAuthority:System.Security.Cryptography.X509Certificates.X509BasicConstraintsExtension(System.Nullable\u003CSystem.Int32\u003E)",
+      "generatedMethodId": "CreateForCertificateAuthority_1_System_Nullableint_0"
+    },
+    {
+      "index": 103,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509BasicConstraintsExtension::CreateForEndEntity:System.Security.Cryptography.X509Certificates.X509BasicConstraintsExtension(System.Boolean)",
+      "generatedMethodId": "CreateForEndEntity_2_bool_0"
+    },
+    {
+      "index": 104,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509BasicConstraintsExtension::CreateForEndEntity:System.Security.Cryptography.X509Certificates.X509BasicConstraintsExtension(System.Boolean)",
+      "generatedMethodId": "CreateForEndEntity_2_bool_1"
+    },
+    {
+      "index": 105,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate::CreateFromCertFile:System.Security.Cryptography.X509Certificates.X509Certificate(System.String)",
+      "generatedMethodId": "CreateFromCertFile_0_string_0"
+    },
+    {
+      "index": 106,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate::CreateFromCertFile:System.Security.Cryptography.X509Certificates.X509Certificate(System.String)",
+      "generatedMethodId": "CreateFromCertFile_0_string_1"
+    },
+    {
+      "index": 107,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate::CreateFromSignedFile:System.Security.Cryptography.X509Certificates.X509Certificate(System.String)",
+      "generatedMethodId": "CreateFromSignedFile_1_string_0"
+    },
+    {
+      "index": 108,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate::CreateFromSignedFile:System.Security.Cryptography.X509Certificates.X509Certificate(System.String)",
+      "generatedMethodId": "CreateFromSignedFile_1_string_1"
+    },
+    {
+      "index": 109,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate::Dispose:System.Void()",
+      "generatedMethodId": "Dispose_2__0"
+    },
+    {
+      "index": 110,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate::Export:System.Byte[](System.Security.Cryptography.X509Certificates.X509ContentType)",
+      "generatedMethodId": "Export_3_X509ContentType_0"
+    },
+    {
+      "index": 111,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate::Export:System.Byte[](System.Security.Cryptography.X509Certificates.X509ContentType,System.String)",
+      "generatedMethodId": "Export_4_X509ContentType_string_0"
+    },
+    {
+      "index": 112,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate::Export:System.Byte[](System.Security.Cryptography.X509Certificates.X509ContentType,System.String)",
+      "generatedMethodId": "Export_4_X509ContentType_string_1"
+    },
+    {
+      "index": 113,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate::Export:System.Byte[](System.Security.Cryptography.X509Certificates.X509ContentType,System.Security.SecureString)",
+      "generatedMethodId": "Export_5_X509ContentType_SecureString_0"
+    },
+    {
+      "index": 114,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate::GetRawCertDataString:System.String()",
+      "generatedMethodId": "GetRawCertDataString_6__0"
+    },
+    {
+      "index": 115,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate::GetCertHash:System.Byte[]()",
+      "generatedMethodId": "GetCertHash_7__0"
+    },
+    {
+      "index": 116,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate::GetCertHash:System.Byte[](System.Security.Cryptography.HashAlgorithmName)",
+      "generatedMethodId": "GetCertHash_8_HashAlgorithmName_0"
+    },
+    {
+      "index": 117,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate::GetCertHashString:System.String()",
+      "generatedMethodId": "GetCertHashString_9__0"
+    },
+    {
+      "index": 118,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate::GetCertHashString:System.String(System.Security.Cryptography.HashAlgorithmName)",
+      "generatedMethodId": "GetCertHashString_10_HashAlgorithmName_0"
+    },
+    {
+      "index": 119,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate::GetEffectiveDateString:System.String()",
+      "generatedMethodId": "GetEffectiveDateString_11__0"
+    },
+    {
+      "index": 120,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate::GetExpirationDateString:System.String()",
+      "generatedMethodId": "GetExpirationDateString_12__0"
+    },
+    {
+      "index": 121,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate::GetFormat:System.String()",
+      "generatedMethodId": "GetFormat_13__0"
+    },
+    {
+      "index": 122,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate::GetPublicKeyString:System.String()",
+      "generatedMethodId": "GetPublicKeyString_14__0"
+    },
+    {
+      "index": 123,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate::GetRawCertData:System.Byte[]()",
+      "generatedMethodId": "GetRawCertData_15__0"
+    },
+    {
+      "index": 124,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate::GetKeyAlgorithm:System.String()",
+      "generatedMethodId": "GetKeyAlgorithm_16__0"
+    },
+    {
+      "index": 125,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate::GetKeyAlgorithmParameters:System.Byte[]()",
+      "generatedMethodId": "GetKeyAlgorithmParameters_17__0"
+    },
+    {
+      "index": 126,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate::GetKeyAlgorithmParametersString:System.String()",
+      "generatedMethodId": "GetKeyAlgorithmParametersString_18__0"
+    },
+    {
+      "index": 127,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate::GetPublicKey:System.Byte[]()",
+      "generatedMethodId": "GetPublicKey_19__0"
+    },
+    {
+      "index": 128,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate::GetSerialNumber:System.Byte[]()",
+      "generatedMethodId": "GetSerialNumber_20__0"
+    },
+    {
+      "index": 129,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate::GetSerialNumberString:System.String()",
+      "generatedMethodId": "GetSerialNumberString_21__0"
+    },
+    {
+      "index": 130,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate::GetName:System.String()",
+      "generatedMethodId": "GetName_22__0"
+    },
+    {
+      "index": 131,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate::GetIssuerName:System.String()",
+      "generatedMethodId": "GetIssuerName_23__0"
+    },
+    {
+      "index": 132,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate::Import:System.Void(System.Byte[])",
+      "generatedMethodId": "Import_24_System_Byte_0"
+    },
+    {
+      "index": 133,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate::Import:System.Void(System.Byte[])",
+      "generatedMethodId": "Import_24_System_Byte_1"
+    },
+    {
+      "index": 134,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate::Import:System.Void(System.Byte[])",
+      "generatedMethodId": "Import_24_System_Byte_2"
+    },
+    {
+      "index": 135,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate::Import:System.Void(System.Byte[],System.String,System.Security.Cryptography.X509Certificates.X509KeyStorageFlags)",
+      "generatedMethodId": "Import_25_System_Byte_string_X509KeyStorageFlags_0"
+    },
+    {
+      "index": 136,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate::Import:System.Void(System.Byte[],System.String,System.Security.Cryptography.X509Certificates.X509KeyStorageFlags)",
+      "generatedMethodId": "Import_25_System_Byte_string_X509KeyStorageFlags_1"
+    },
+    {
+      "index": 137,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate::Import:System.Void(System.Byte[],System.String,System.Security.Cryptography.X509Certificates.X509KeyStorageFlags)",
+      "generatedMethodId": "Import_25_System_Byte_string_X509KeyStorageFlags_2"
+    },
+    {
+      "index": 138,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate::Import:System.Void(System.Byte[],System.String,System.Security.Cryptography.X509Certificates.X509KeyStorageFlags)",
+      "generatedMethodId": "Import_25_System_Byte_string_X509KeyStorageFlags_3"
+    },
+    {
+      "index": 139,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate::Import:System.Void(System.Byte[],System.Security.SecureString,System.Security.Cryptography.X509Certificates.X509KeyStorageFlags)",
+      "generatedMethodId": "Import_26_System_Byte_SecureString_X509KeyStorageFlags_0"
+    },
+    {
+      "index": 140,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate::Import:System.Void(System.Byte[],System.Security.SecureString,System.Security.Cryptography.X509Certificates.X509KeyStorageFlags)",
+      "generatedMethodId": "Import_26_System_Byte_SecureString_X509KeyStorageFlags_1"
+    },
+    {
+      "index": 141,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate::Import:System.Void(System.Byte[],System.Security.SecureString,System.Security.Cryptography.X509Certificates.X509KeyStorageFlags)",
+      "generatedMethodId": "Import_26_System_Byte_SecureString_X509KeyStorageFlags_2"
+    },
+    {
+      "index": 142,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate::Import:System.Void(System.String)",
+      "generatedMethodId": "Import_27_string_0"
+    },
+    {
+      "index": 143,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate::Import:System.Void(System.String)",
+      "generatedMethodId": "Import_27_string_1"
+    },
+    {
+      "index": 144,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate::Import:System.Void(System.String,System.String,System.Security.Cryptography.X509Certificates.X509KeyStorageFlags)",
+      "generatedMethodId": "Import_28_string_string_X509KeyStorageFlags_0"
+    },
+    {
+      "index": 145,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate::Import:System.Void(System.String,System.String,System.Security.Cryptography.X509Certificates.X509KeyStorageFlags)",
+      "generatedMethodId": "Import_28_string_string_X509KeyStorageFlags_1"
+    },
+    {
+      "index": 146,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate::Import:System.Void(System.String,System.String,System.Security.Cryptography.X509Certificates.X509KeyStorageFlags)",
+      "generatedMethodId": "Import_28_string_string_X509KeyStorageFlags_2"
+    },
+    {
+      "index": 147,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate::Import:System.Void(System.String,System.Security.SecureString,System.Security.Cryptography.X509Certificates.X509KeyStorageFlags)",
+      "generatedMethodId": "Import_29_string_SecureString_X509KeyStorageFlags_0"
+    },
+    {
+      "index": 148,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate::Import:System.Void(System.String,System.Security.SecureString,System.Security.Cryptography.X509Certificates.X509KeyStorageFlags)",
+      "generatedMethodId": "Import_29_string_SecureString_X509KeyStorageFlags_1"
+    },
+    {
+      "index": 149,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate2::GetCertContentType:System.Security.Cryptography.X509Certificates.X509ContentType(System.Byte[])",
+      "generatedMethodId": "GetCertContentType_0_System_Byte_0"
+    },
+    {
+      "index": 150,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate2::GetCertContentType:System.Security.Cryptography.X509Certificates.X509ContentType(System.Byte[])",
+      "generatedMethodId": "GetCertContentType_0_System_Byte_1"
+    },
+    {
+      "index": 151,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate2::GetCertContentType:System.Security.Cryptography.X509Certificates.X509ContentType(System.Byte[])",
+      "generatedMethodId": "GetCertContentType_0_System_Byte_2"
+    },
+    {
+      "index": 152,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate2::GetCertContentType:System.Security.Cryptography.X509Certificates.X509ContentType(System.String)",
+      "generatedMethodId": "GetCertContentType_1_string_0"
+    },
+    {
+      "index": 153,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate2::GetCertContentType:System.Security.Cryptography.X509Certificates.X509ContentType(System.String)",
+      "generatedMethodId": "GetCertContentType_1_string_1"
+    },
+    {
+      "index": 154,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate2::GetNameInfo:System.String(System.Security.Cryptography.X509Certificates.X509NameType,System.Boolean)",
+      "generatedMethodId": "GetNameInfo_2_X509NameType_bool_0"
+    },
+    {
+      "index": 155,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate2::GetNameInfo:System.String(System.Security.Cryptography.X509Certificates.X509NameType,System.Boolean)",
+      "generatedMethodId": "GetNameInfo_2_X509NameType_bool_1"
+    },
+    {
+      "index": 156,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate2::Import:System.Void(System.Byte[])",
+      "generatedMethodId": "Import_3_System_Byte_0"
+    },
+    {
+      "index": 157,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate2::Import:System.Void(System.Byte[])",
+      "generatedMethodId": "Import_3_System_Byte_1"
+    },
+    {
+      "index": 158,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate2::Import:System.Void(System.Byte[])",
+      "generatedMethodId": "Import_3_System_Byte_2"
+    },
+    {
+      "index": 159,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate2::Import:System.Void(System.Byte[],System.String,System.Security.Cryptography.X509Certificates.X509KeyStorageFlags)",
+      "generatedMethodId": "Import_4_System_Byte_string_X509KeyStorageFlags_0"
+    },
+    {
+      "index": 160,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate2::Import:System.Void(System.Byte[],System.String,System.Security.Cryptography.X509Certificates.X509KeyStorageFlags)",
+      "generatedMethodId": "Import_4_System_Byte_string_X509KeyStorageFlags_1"
+    },
+    {
+      "index": 161,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate2::Import:System.Void(System.Byte[],System.String,System.Security.Cryptography.X509Certificates.X509KeyStorageFlags)",
+      "generatedMethodId": "Import_4_System_Byte_string_X509KeyStorageFlags_2"
+    },
+    {
+      "index": 162,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate2::Import:System.Void(System.Byte[],System.String,System.Security.Cryptography.X509Certificates.X509KeyStorageFlags)",
+      "generatedMethodId": "Import_4_System_Byte_string_X509KeyStorageFlags_3"
+    },
+    {
+      "index": 163,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate2::Import:System.Void(System.Byte[],System.Security.SecureString,System.Security.Cryptography.X509Certificates.X509KeyStorageFlags)",
+      "generatedMethodId": "Import_5_System_Byte_SecureString_X509KeyStorageFlags_0"
+    },
+    {
+      "index": 164,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate2::Import:System.Void(System.Byte[],System.Security.SecureString,System.Security.Cryptography.X509Certificates.X509KeyStorageFlags)",
+      "generatedMethodId": "Import_5_System_Byte_SecureString_X509KeyStorageFlags_1"
+    },
+    {
+      "index": 165,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate2::Import:System.Void(System.Byte[],System.Security.SecureString,System.Security.Cryptography.X509Certificates.X509KeyStorageFlags)",
+      "generatedMethodId": "Import_5_System_Byte_SecureString_X509KeyStorageFlags_2"
+    },
+    {
+      "index": 166,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate2::Import:System.Void(System.String)",
+      "generatedMethodId": "Import_6_string_0"
+    },
+    {
+      "index": 167,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate2::Import:System.Void(System.String)",
+      "generatedMethodId": "Import_6_string_1"
+    },
+    {
+      "index": 168,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate2::Import:System.Void(System.String,System.String,System.Security.Cryptography.X509Certificates.X509KeyStorageFlags)",
+      "generatedMethodId": "Import_7_string_string_X509KeyStorageFlags_0"
+    },
+    {
+      "index": 169,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate2::Import:System.Void(System.String,System.String,System.Security.Cryptography.X509Certificates.X509KeyStorageFlags)",
+      "generatedMethodId": "Import_7_string_string_X509KeyStorageFlags_1"
+    },
+    {
+      "index": 170,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate2::Import:System.Void(System.String,System.String,System.Security.Cryptography.X509Certificates.X509KeyStorageFlags)",
+      "generatedMethodId": "Import_7_string_string_X509KeyStorageFlags_2"
+    },
+    {
+      "index": 171,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate2::Import:System.Void(System.String,System.Security.SecureString,System.Security.Cryptography.X509Certificates.X509KeyStorageFlags)",
+      "generatedMethodId": "Import_8_string_SecureString_X509KeyStorageFlags_0"
+    },
+    {
+      "index": 172,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate2::Import:System.Void(System.String,System.Security.SecureString,System.Security.Cryptography.X509Certificates.X509KeyStorageFlags)",
+      "generatedMethodId": "Import_8_string_SecureString_X509KeyStorageFlags_1"
+    },
+    {
+      "index": 173,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate2::Verify:System.Boolean()",
+      "generatedMethodId": "Verify_9__0"
+    },
+    {
+      "index": 174,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate2::GetECDiffieHellmanPublicKey:System.Security.Cryptography.ECDiffieHellman()",
+      "generatedMethodId": "GetECDiffieHellmanPublicKey_10__0"
+    },
+    {
+      "index": 175,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate2::GetECDiffieHellmanPrivateKey:System.Security.Cryptography.ECDiffieHellman()",
+      "generatedMethodId": "GetECDiffieHellmanPrivateKey_11__0"
+    },
+    {
+      "index": 176,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate2::CopyWithPrivateKey:System.Security.Cryptography.X509Certificates.X509Certificate2(System.Security.Cryptography.ECDiffieHellman)",
+      "generatedMethodId": "CopyWithPrivateKey_12_ECDiffieHellman_0"
+    },
+    {
+      "index": 177,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate2::CreateFromPemFile:System.Security.Cryptography.X509Certificates.X509Certificate2(System.String,System.String)",
+      "generatedMethodId": "CreateFromPemFile_13_string_string_0"
+    },
+    {
+      "index": 178,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate2::CreateFromPemFile:System.Security.Cryptography.X509Certificates.X509Certificate2(System.String,System.String)",
+      "generatedMethodId": "CreateFromPemFile_13_string_string_1"
+    },
+    {
+      "index": 179,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate2::CreateFromPemFile:System.Security.Cryptography.X509Certificates.X509Certificate2(System.String,System.String)",
+      "generatedMethodId": "CreateFromPemFile_13_string_string_2"
+    },
+    {
+      "index": 180,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate2::ExportCertificatePem:System.String()",
+      "generatedMethodId": "ExportCertificatePem_14__0"
+    },
+    {
+      "index": 181,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate2::MatchesHostname:System.Boolean(System.String,System.Boolean,System.Boolean)",
+      "generatedMethodId": "MatchesHostname_15_string_bool_bool_0"
+    },
+    {
+      "index": 182,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate2::MatchesHostname:System.Boolean(System.String,System.Boolean,System.Boolean)",
+      "generatedMethodId": "MatchesHostname_15_string_bool_bool_1"
+    },
+    {
+      "index": 183,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate2::MatchesHostname:System.Boolean(System.String,System.Boolean,System.Boolean)",
+      "generatedMethodId": "MatchesHostname_15_string_bool_bool_2"
+    },
+    {
+      "index": 184,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate2::MatchesHostname:System.Boolean(System.String,System.Boolean,System.Boolean)",
+      "generatedMethodId": "MatchesHostname_15_string_bool_bool_3"
+    },
+    {
+      "index": 185,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate2Collection::Add:System.Int32(System.Security.Cryptography.X509Certificates.X509Certificate2)",
+      "generatedMethodId": "Add_0_X509Certificate2_0"
+    },
+    {
+      "index": 186,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate2Collection::AddRange:System.Void(System.Security.Cryptography.X509Certificates.X509Certificate2[])",
+      "generatedMethodId": "AddRange_1_X509Certificate2_0"
+    },
+    {
+      "index": 187,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate2Collection::AddRange:System.Void(System.Security.Cryptography.X509Certificates.X509Certificate2[])",
+      "generatedMethodId": "AddRange_1_X509Certificate2_1"
+    },
+    {
+      "index": 188,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate2Collection::AddRange:System.Void(System.Security.Cryptography.X509Certificates.X509Certificate2[])",
+      "generatedMethodId": "AddRange_1_X509Certificate2_2"
+    },
+    {
+      "index": 189,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate2Collection::AddRange:System.Void(System.Security.Cryptography.X509Certificates.X509Certificate2Collection)",
+      "generatedMethodId": "AddRange_2_X509Certificate2Collection_0"
+    },
+    {
+      "index": 190,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate2Collection::Contains:System.Boolean(System.Security.Cryptography.X509Certificates.X509Certificate2)",
+      "generatedMethodId": "Contains_3_X509Certificate2_0"
+    },
+    {
+      "index": 191,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate2Collection::Export:System.Byte[](System.Security.Cryptography.X509Certificates.X509ContentType)",
+      "generatedMethodId": "Export_4_X509ContentType_0"
+    },
+    {
+      "index": 192,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate2Collection::Export:System.Byte[](System.Security.Cryptography.X509Certificates.X509ContentType,System.String)",
+      "generatedMethodId": "Export_5_X509ContentType_string_0"
+    },
+    {
+      "index": 193,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate2Collection::Export:System.Byte[](System.Security.Cryptography.X509Certificates.X509ContentType,System.String)",
+      "generatedMethodId": "Export_5_X509ContentType_string_1"
+    },
+    {
+      "index": 194,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate2Collection::Find:System.Security.Cryptography.X509Certificates.X509Certificate2Collection(System.Security.Cryptography.X509Certificates.X509FindType,System.Object,System.Boolean)",
+      "generatedMethodId": "Find_6_X509FindType_object_bool_0"
+    },
+    {
+      "index": 195,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate2Collection::Find:System.Security.Cryptography.X509Certificates.X509Certificate2Collection(System.Security.Cryptography.X509Certificates.X509FindType,System.Object,System.Boolean)",
+      "generatedMethodId": "Find_6_X509FindType_object_bool_1"
+    },
+    {
+      "index": 196,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate2Collection::GetEnumerator:System.Security.Cryptography.X509Certificates.X509Certificate2Enumerator()",
+      "generatedMethodId": "GetEnumerator_7__0"
+    },
+    {
+      "index": 197,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate2Collection::Import:System.Void(System.Byte[])",
+      "generatedMethodId": "Import_8_System_Byte_0"
+    },
+    {
+      "index": 198,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate2Collection::Import:System.Void(System.Byte[])",
+      "generatedMethodId": "Import_8_System_Byte_1"
+    },
+    {
+      "index": 199,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate2Collection::Import:System.Void(System.Byte[])",
+      "generatedMethodId": "Import_8_System_Byte_2"
+    },
+    {
+      "index": 200,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate2Collection::Import:System.Void(System.Byte[],System.String,System.Security.Cryptography.X509Certificates.X509KeyStorageFlags)",
+      "generatedMethodId": "Import_9_System_Byte_string_X509KeyStorageFlags_0"
+    },
+    {
+      "index": 201,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate2Collection::Import:System.Void(System.Byte[],System.String,System.Security.Cryptography.X509Certificates.X509KeyStorageFlags)",
+      "generatedMethodId": "Import_9_System_Byte_string_X509KeyStorageFlags_1"
+    },
+    {
+      "index": 202,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate2Collection::Import:System.Void(System.Byte[],System.String,System.Security.Cryptography.X509Certificates.X509KeyStorageFlags)",
+      "generatedMethodId": "Import_9_System_Byte_string_X509KeyStorageFlags_2"
+    },
+    {
+      "index": 203,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate2Collection::Import:System.Void(System.Byte[],System.String,System.Security.Cryptography.X509Certificates.X509KeyStorageFlags)",
+      "generatedMethodId": "Import_9_System_Byte_string_X509KeyStorageFlags_3"
+    },
+    {
+      "index": 204,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate2Collection::Import:System.Void(System.String)",
+      "generatedMethodId": "Import_10_string_0"
+    },
+    {
+      "index": 205,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate2Collection::Import:System.Void(System.String)",
+      "generatedMethodId": "Import_10_string_1"
+    },
+    {
+      "index": 206,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate2Collection::Import:System.Void(System.String,System.String,System.Security.Cryptography.X509Certificates.X509KeyStorageFlags)",
+      "generatedMethodId": "Import_11_string_string_X509KeyStorageFlags_0"
+    },
+    {
+      "index": 207,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate2Collection::Import:System.Void(System.String,System.String,System.Security.Cryptography.X509Certificates.X509KeyStorageFlags)",
+      "generatedMethodId": "Import_11_string_string_X509KeyStorageFlags_1"
+    },
+    {
+      "index": 208,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate2Collection::Import:System.Void(System.String,System.String,System.Security.Cryptography.X509Certificates.X509KeyStorageFlags)",
+      "generatedMethodId": "Import_11_string_string_X509KeyStorageFlags_2"
+    },
+    {
+      "index": 209,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate2Collection::Insert:System.Void(System.Int32,System.Security.Cryptography.X509Certificates.X509Certificate2)",
+      "generatedMethodId": "Insert_12_int_X509Certificate2_0"
+    },
+    {
+      "index": 210,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate2Collection::Insert:System.Void(System.Int32,System.Security.Cryptography.X509Certificates.X509Certificate2)",
+      "generatedMethodId": "Insert_12_int_X509Certificate2_1"
+    },
+    {
+      "index": 211,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate2Collection::Remove:System.Void(System.Security.Cryptography.X509Certificates.X509Certificate2)",
+      "generatedMethodId": "Remove_13_X509Certificate2_0"
+    },
+    {
+      "index": 212,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate2Collection::RemoveRange:System.Void(System.Security.Cryptography.X509Certificates.X509Certificate2[])",
+      "generatedMethodId": "RemoveRange_14_X509Certificate2_0"
+    },
+    {
+      "index": 213,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate2Collection::RemoveRange:System.Void(System.Security.Cryptography.X509Certificates.X509Certificate2[])",
+      "generatedMethodId": "RemoveRange_14_X509Certificate2_1"
+    },
+    {
+      "index": 214,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate2Collection::RemoveRange:System.Void(System.Security.Cryptography.X509Certificates.X509Certificate2[])",
+      "generatedMethodId": "RemoveRange_14_X509Certificate2_2"
+    },
+    {
+      "index": 215,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate2Collection::RemoveRange:System.Void(System.Security.Cryptography.X509Certificates.X509Certificate2Collection)",
+      "generatedMethodId": "RemoveRange_15_X509Certificate2Collection_0"
+    },
+    {
+      "index": 216,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate2Collection::ImportFromPemFile:System.Void(System.String)",
+      "generatedMethodId": "ImportFromPemFile_16_string_0"
+    },
+    {
+      "index": 217,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate2Collection::ImportFromPemFile:System.Void(System.String)",
+      "generatedMethodId": "ImportFromPemFile_16_string_1"
+    },
+    {
+      "index": 218,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate2Collection::ExportPkcs7Pem:System.String()",
+      "generatedMethodId": "ExportPkcs7Pem_17__0"
+    },
+    {
+      "index": 219,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate2Collection::ExportCertificatePems:System.String()",
+      "generatedMethodId": "ExportCertificatePems_18__0"
+    },
+    {
+      "index": 220,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509CertificateCollection::Add:System.Int32(System.Security.Cryptography.X509Certificates.X509Certificate)",
+      "generatedMethodId": "Add_0_X509Certificate_0"
+    },
+    {
+      "index": 221,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509CertificateCollection::AddRange:System.Void(System.Security.Cryptography.X509Certificates.X509Certificate[])",
+      "generatedMethodId": "AddRange_1_X509Certificate_0"
+    },
+    {
+      "index": 222,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509CertificateCollection::AddRange:System.Void(System.Security.Cryptography.X509Certificates.X509Certificate[])",
+      "generatedMethodId": "AddRange_1_X509Certificate_1"
+    },
+    {
+      "index": 223,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509CertificateCollection::AddRange:System.Void(System.Security.Cryptography.X509Certificates.X509Certificate[])",
+      "generatedMethodId": "AddRange_1_X509Certificate_2"
+    },
+    {
+      "index": 224,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509CertificateCollection::AddRange:System.Void(System.Security.Cryptography.X509Certificates.X509CertificateCollection)",
+      "generatedMethodId": "AddRange_2_X509CertificateCollection_0"
+    },
+    {
+      "index": 225,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509CertificateCollection::Contains:System.Boolean(System.Security.Cryptography.X509Certificates.X509Certificate)",
+      "generatedMethodId": "Contains_3_X509Certificate_0"
+    },
+    {
+      "index": 226,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509CertificateCollection::GetEnumerator:X509CertificateCollection.X509CertificateEnumerator()",
+      "generatedMethodId": "GetEnumerator_4__0"
+    },
+    {
+      "index": 227,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509CertificateCollection::IndexOf:System.Int32(System.Security.Cryptography.X509Certificates.X509Certificate)",
+      "generatedMethodId": "IndexOf_5_X509Certificate_0"
+    },
+    {
+      "index": 228,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509CertificateCollection::Insert:System.Void(System.Int32,System.Security.Cryptography.X509Certificates.X509Certificate)",
+      "generatedMethodId": "Insert_6_int_X509Certificate_0"
+    },
+    {
+      "index": 229,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509CertificateCollection::Insert:System.Void(System.Int32,System.Security.Cryptography.X509Certificates.X509Certificate)",
+      "generatedMethodId": "Insert_6_int_X509Certificate_1"
+    },
+    {
+      "index": 230,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509CertificateCollection::Remove:System.Void(System.Security.Cryptography.X509Certificates.X509Certificate)",
+      "generatedMethodId": "Remove_7_X509Certificate_0"
+    },
+    {
+      "index": 231,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509CertificateLoader::LoadCertificate:System.Security.Cryptography.X509Certificates.X509Certificate2(System.Byte[])",
+      "generatedMethodId": "LoadCertificate_0_System_Byte_0"
+    },
+    {
+      "index": 232,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509CertificateLoader::LoadCertificate:System.Security.Cryptography.X509Certificates.X509Certificate2(System.Byte[])",
+      "generatedMethodId": "LoadCertificate_0_System_Byte_1"
+    },
+    {
+      "index": 233,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509CertificateLoader::LoadCertificate:System.Security.Cryptography.X509Certificates.X509Certificate2(System.Byte[])",
+      "generatedMethodId": "LoadCertificate_0_System_Byte_2"
+    },
+    {
+      "index": 234,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509CertificateLoader::LoadCertificateFromFile:System.Security.Cryptography.X509Certificates.X509Certificate2(System.String)",
+      "generatedMethodId": "LoadCertificateFromFile_1_string_0"
+    },
+    {
+      "index": 235,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509CertificateLoader::LoadCertificateFromFile:System.Security.Cryptography.X509Certificates.X509Certificate2(System.String)",
+      "generatedMethodId": "LoadCertificateFromFile_1_string_1"
+    },
+    {
+      "index": 236,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509CertificateLoader::LoadPkcs12:System.Security.Cryptography.X509Certificates.X509Certificate2(System.Byte[],System.String,System.Security.Cryptography.X509Certificates.X509KeyStorageFlags,System.Security.Cryptography.X509Certificates.Pkcs12LoaderLimits)",
+      "generatedMethodId": "LoadPkcs12_2_System_Byte_string_X509KeyStorageFlags_Pkcs12LoaderLimits_0"
+    },
+    {
+      "index": 237,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509CertificateLoader::LoadPkcs12:System.Security.Cryptography.X509Certificates.X509Certificate2(System.Byte[],System.String,System.Security.Cryptography.X509Certificates.X509KeyStorageFlags,System.Security.Cryptography.X509Certificates.Pkcs12LoaderLimits)",
+      "generatedMethodId": "LoadPkcs12_2_System_Byte_string_X509KeyStorageFlags_Pkcs12LoaderLimits_1"
+    },
+    {
+      "index": 238,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509CertificateLoader::LoadPkcs12:System.Security.Cryptography.X509Certificates.X509Certificate2(System.Byte[],System.String,System.Security.Cryptography.X509Certificates.X509KeyStorageFlags,System.Security.Cryptography.X509Certificates.Pkcs12LoaderLimits)",
+      "generatedMethodId": "LoadPkcs12_2_System_Byte_string_X509KeyStorageFlags_Pkcs12LoaderLimits_2"
+    },
+    {
+      "index": 239,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509CertificateLoader::LoadPkcs12:System.Security.Cryptography.X509Certificates.X509Certificate2(System.Byte[],System.String,System.Security.Cryptography.X509Certificates.X509KeyStorageFlags,System.Security.Cryptography.X509Certificates.Pkcs12LoaderLimits)",
+      "generatedMethodId": "LoadPkcs12_2_System_Byte_string_X509KeyStorageFlags_Pkcs12LoaderLimits_3"
+    },
+    {
+      "index": 240,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509CertificateLoader::LoadPkcs12FromFile:System.Security.Cryptography.X509Certificates.X509Certificate2(System.String,System.String,System.Security.Cryptography.X509Certificates.X509KeyStorageFlags,System.Security.Cryptography.X509Certificates.Pkcs12LoaderLimits)",
+      "generatedMethodId": "LoadPkcs12FromFile_3_string_string_X509KeyStorageFlags_Pkcs12LoaderLimits_0"
+    },
+    {
+      "index": 241,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509CertificateLoader::LoadPkcs12FromFile:System.Security.Cryptography.X509Certificates.X509Certificate2(System.String,System.String,System.Security.Cryptography.X509Certificates.X509KeyStorageFlags,System.Security.Cryptography.X509Certificates.Pkcs12LoaderLimits)",
+      "generatedMethodId": "LoadPkcs12FromFile_3_string_string_X509KeyStorageFlags_Pkcs12LoaderLimits_1"
+    },
+    {
+      "index": 242,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509CertificateLoader::LoadPkcs12FromFile:System.Security.Cryptography.X509Certificates.X509Certificate2(System.String,System.String,System.Security.Cryptography.X509Certificates.X509KeyStorageFlags,System.Security.Cryptography.X509Certificates.Pkcs12LoaderLimits)",
+      "generatedMethodId": "LoadPkcs12FromFile_3_string_string_X509KeyStorageFlags_Pkcs12LoaderLimits_2"
+    },
+    {
+      "index": 243,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509CertificateLoader::LoadPkcs12Collection:System.Security.Cryptography.X509Certificates.X509Certificate2Collection(System.Byte[],System.String,System.Security.Cryptography.X509Certificates.X509KeyStorageFlags,System.Security.Cryptography.X509Certificates.Pkcs12LoaderLimits)",
+      "generatedMethodId": "LoadPkcs12Collection_4_System_Byte_string_X509KeyStorageFlags_Pkcs12LoaderLimits_0"
+    },
+    {
+      "index": 244,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509CertificateLoader::LoadPkcs12Collection:System.Security.Cryptography.X509Certificates.X509Certificate2Collection(System.Byte[],System.String,System.Security.Cryptography.X509Certificates.X509KeyStorageFlags,System.Security.Cryptography.X509Certificates.Pkcs12LoaderLimits)",
+      "generatedMethodId": "LoadPkcs12Collection_4_System_Byte_string_X509KeyStorageFlags_Pkcs12LoaderLimits_1"
+    },
+    {
+      "index": 245,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509CertificateLoader::LoadPkcs12Collection:System.Security.Cryptography.X509Certificates.X509Certificate2Collection(System.Byte[],System.String,System.Security.Cryptography.X509Certificates.X509KeyStorageFlags,System.Security.Cryptography.X509Certificates.Pkcs12LoaderLimits)",
+      "generatedMethodId": "LoadPkcs12Collection_4_System_Byte_string_X509KeyStorageFlags_Pkcs12LoaderLimits_2"
+    },
+    {
+      "index": 246,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509CertificateLoader::LoadPkcs12Collection:System.Security.Cryptography.X509Certificates.X509Certificate2Collection(System.Byte[],System.String,System.Security.Cryptography.X509Certificates.X509KeyStorageFlags,System.Security.Cryptography.X509Certificates.Pkcs12LoaderLimits)",
+      "generatedMethodId": "LoadPkcs12Collection_4_System_Byte_string_X509KeyStorageFlags_Pkcs12LoaderLimits_3"
+    },
+    {
+      "index": 247,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509CertificateLoader::LoadPkcs12CollectionFromFile:System.Security.Cryptography.X509Certificates.X509Certificate2Collection(System.String,System.String,System.Security.Cryptography.X509Certificates.X509KeyStorageFlags,System.Security.Cryptography.X509Certificates.Pkcs12LoaderLimits)",
+      "generatedMethodId": "LoadPkcs12CollectionFromFile_5_string_string_X509KeyStorageFlags_Pkcs12LoaderLimits_0"
+    },
+    {
+      "index": 248,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509CertificateLoader::LoadPkcs12CollectionFromFile:System.Security.Cryptography.X509Certificates.X509Certificate2Collection(System.String,System.String,System.Security.Cryptography.X509Certificates.X509KeyStorageFlags,System.Security.Cryptography.X509Certificates.Pkcs12LoaderLimits)",
+      "generatedMethodId": "LoadPkcs12CollectionFromFile_5_string_string_X509KeyStorageFlags_Pkcs12LoaderLimits_1"
+    },
+    {
+      "index": 249,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509CertificateLoader::LoadPkcs12CollectionFromFile:System.Security.Cryptography.X509Certificates.X509Certificate2Collection(System.String,System.String,System.Security.Cryptography.X509Certificates.X509KeyStorageFlags,System.Security.Cryptography.X509Certificates.Pkcs12LoaderLimits)",
+      "generatedMethodId": "LoadPkcs12CollectionFromFile_5_string_string_X509KeyStorageFlags_Pkcs12LoaderLimits_2"
+    },
+    {
+      "index": 250,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Chain::Build:System.Boolean(System.Security.Cryptography.X509Certificates.X509Certificate2)",
+      "generatedMethodId": "Build_0_X509Certificate2_0"
+    },
+    {
+      "index": 251,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Chain::Dispose:System.Void()",
+      "generatedMethodId": "Dispose_1__0"
+    },
+    {
+      "index": 252,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509ChainElementCollection::GetEnumerator:System.Security.Cryptography.X509Certificates.X509ChainElementEnumerator()",
+      "generatedMethodId": "GetEnumerator_0__0"
+    },
+    {
+      "index": 253,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509ChainPolicy::Clone:System.Security.Cryptography.X509Certificates.X509ChainPolicy()",
+      "generatedMethodId": "Clone_0__0"
+    },
+    {
+      "index": 254,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509EnhancedKeyUsageExtension::CopyFrom:System.Void(System.Security.Cryptography.AsnEncodedData)",
+      "generatedMethodId": "CopyFrom_0_AsnEncodedData_0"
+    },
+    {
+      "index": 255,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Extension::CopyFrom:System.Void(System.Security.Cryptography.AsnEncodedData)",
+      "generatedMethodId": "CopyFrom_0_AsnEncodedData_0"
+    },
+    {
+      "index": 256,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509ExtensionCollection::Add:System.Int32(System.Security.Cryptography.X509Certificates.X509Extension)",
+      "generatedMethodId": "Add_0_X509Extension_0"
+    },
+    {
+      "index": 257,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509ExtensionCollection::GetEnumerator:System.Security.Cryptography.X509Certificates.X509ExtensionEnumerator()",
+      "generatedMethodId": "GetEnumerator_1__0"
+    },
+    {
+      "index": 258,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509KeyUsageExtension::CopyFrom:System.Void(System.Security.Cryptography.AsnEncodedData)",
+      "generatedMethodId": "CopyFrom_0_AsnEncodedData_0"
+    },
+    {
+      "index": 259,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509SignatureGenerator::GetSignatureAlgorithmIdentifier:System.Byte[](System.Security.Cryptography.HashAlgorithmName)",
+      "generatedMethodId": "GetSignatureAlgorithmIdentifier_0_HashAlgorithmName_0"
+    },
+    {
+      "index": 260,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509SignatureGenerator::SignData:System.Byte[](System.Byte[],System.Security.Cryptography.HashAlgorithmName)",
+      "generatedMethodId": "SignData_1_System_Byte_HashAlgorithmName_0"
+    },
+    {
+      "index": 261,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509SignatureGenerator::SignData:System.Byte[](System.Byte[],System.Security.Cryptography.HashAlgorithmName)",
+      "generatedMethodId": "SignData_1_System_Byte_HashAlgorithmName_1"
+    },
+    {
+      "index": 262,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509SignatureGenerator::SignData:System.Byte[](System.Byte[],System.Security.Cryptography.HashAlgorithmName)",
+      "generatedMethodId": "SignData_1_System_Byte_HashAlgorithmName_2"
+    },
+    {
+      "index": 263,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509SignatureGenerator::CreateForECDsa:System.Security.Cryptography.X509Certificates.X509SignatureGenerator(System.Security.Cryptography.ECDsa)",
+      "generatedMethodId": "CreateForECDsa_2_ECDsa_0"
+    },
+    {
+      "index": 264,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509SignatureGenerator::CreateForRSA:System.Security.Cryptography.X509Certificates.X509SignatureGenerator(System.Security.Cryptography.RSA,System.Security.Cryptography.RSASignaturePadding)",
+      "generatedMethodId": "CreateForRSA_3_RSA_RSASignaturePadding_0"
+    },
+    {
+      "index": 265,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Store::Open:System.Void(System.Security.Cryptography.X509Certificates.OpenFlags)",
+      "generatedMethodId": "Open_0_OpenFlags_0"
+    },
+    {
+      "index": 266,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Store::Add:System.Void(System.Security.Cryptography.X509Certificates.X509Certificate2)",
+      "generatedMethodId": "Add_1_X509Certificate2_0"
+    },
+    {
+      "index": 267,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Store::AddRange:System.Void(System.Security.Cryptography.X509Certificates.X509Certificate2Collection)",
+      "generatedMethodId": "AddRange_2_X509Certificate2Collection_0"
+    },
+    {
+      "index": 268,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Store::Remove:System.Void(System.Security.Cryptography.X509Certificates.X509Certificate2)",
+      "generatedMethodId": "Remove_3_X509Certificate2_0"
+    },
+    {
+      "index": 269,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Store::RemoveRange:System.Void(System.Security.Cryptography.X509Certificates.X509Certificate2Collection)",
+      "generatedMethodId": "RemoveRange_4_X509Certificate2Collection_0"
+    },
+    {
+      "index": 270,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Store::Dispose:System.Void()",
+      "generatedMethodId": "Dispose_5__0"
+    },
+    {
+      "index": 271,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Store::Close:System.Void()",
+      "generatedMethodId": "Close_6__0"
+    },
+    {
+      "index": 272,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509SubjectAlternativeNameExtension::CopyFrom:System.Void(System.Security.Cryptography.AsnEncodedData)",
+      "generatedMethodId": "CopyFrom_0_AsnEncodedData_0"
+    },
+    {
+      "index": 273,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509SubjectAlternativeNameExtension::EnumerateDnsNames:System.Collections.Generic.IEnumerable\u003CSystem.String\u003E()",
+      "generatedMethodId": "EnumerateDnsNames_1__0"
+    },
+    {
+      "index": 274,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509SubjectAlternativeNameExtension::EnumerateIPAddresses:System.Collections.Generic.IEnumerable\u003CSystem.Net.IPAddress\u003E()",
+      "generatedMethodId": "EnumerateIPAddresses_2__0"
+    },
+    {
+      "index": 275,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509SubjectKeyIdentifierExtension::CopyFrom:System.Void(System.Security.Cryptography.AsnEncodedData)",
+      "generatedMethodId": "CopyFrom_0_AsnEncodedData_0"
+    }
+  ]
+}

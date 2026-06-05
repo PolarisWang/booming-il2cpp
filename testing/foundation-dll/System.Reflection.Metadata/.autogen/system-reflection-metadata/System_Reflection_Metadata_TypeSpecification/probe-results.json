@@ -1,0 +1,41 @@
+[
+  {
+    "methodIndex": 0,
+    "setIndex": 0,
+    "subjectId": "System.Reflection.Metadata.TypeSpecification::DecodeSignature:System.Int32(System.Reflection.Metadata.ISignatureTypeProvider\u003CSystem.Int32,System.Int32\u003E,System.Int32)__Set0",
+    "isVoid": false,
+    "hasException": true,
+    "exceptionType": "System.ArgumentNullException",
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 0,
+    "setIndex": 1,
+    "subjectId": "System.Reflection.Metadata.TypeSpecification::DecodeSignature:System.Int32(System.Reflection.Metadata.ISignatureTypeProvider\u003CSystem.Int32,System.Int32\u003E,System.Int32)__Set1",
+    "isVoid": false,
+    "hasException": true,
+    "exceptionType": "System.ArgumentNullException",
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 1,
+    "setIndex": 1,
+    "subjectId": "System.Reflection.Metadata.TypeSpecification::GetCustomAttributes:System.Reflection.Metadata.CustomAttributeHandleCollection()__Set1",
+    "isVoid": false,
+    "hasException": true,
+    "exceptionType": "System.NullReferenceException",
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": null
+  }
+]

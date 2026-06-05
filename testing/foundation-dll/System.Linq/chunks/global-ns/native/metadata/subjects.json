@@ -1,0 +1,3065 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-06-04T16:39:24.7976967Z",
+  "generator": "Chaos.IL2CPP.Tools.TestProjectGenerator",
+  "entryExecutable": "entry",
+  "subjects": [
+    {
+      "index": 0,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::Aggregate:System.Int32(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32,System.Int32\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "Aggregate",
+      "isStatic": true
+    },
+    {
+      "index": 1,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::Aggregate:System.Int32(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32,System.Int32\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "Aggregate",
+      "isStatic": true
+    },
+    {
+      "index": 2,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::Aggregate:System.Int32(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Int32,System.Func\u003CSystem.Int32,System.Int32,System.Int32\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "Aggregate",
+      "isStatic": true
+    },
+    {
+      "index": 3,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::Aggregate:System.Int32(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Int32,System.Func\u003CSystem.Int32,System.Int32,System.Int32\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "Aggregate",
+      "isStatic": true
+    },
+    {
+      "index": 4,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::Aggregate:System.Int32(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Int32,System.Func\u003CSystem.Int32,System.Int32,System.Int32\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "Aggregate",
+      "isStatic": true
+    },
+    {
+      "index": 5,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::Aggregate:System.Int32(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Int32,System.Func\u003CSystem.Int32,System.Int32,System.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "Aggregate",
+      "isStatic": true
+    },
+    {
+      "index": 6,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::Aggregate:System.Int32(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Int32,System.Func\u003CSystem.Int32,System.Int32,System.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "Aggregate",
+      "isStatic": true
+    },
+    {
+      "index": 7,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::Aggregate:System.Int32(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Int32,System.Func\u003CSystem.Int32,System.Int32,System.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "Aggregate",
+      "isStatic": true
+    },
+    {
+      "index": 8,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::Any:System.Boolean(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "Any",
+      "isStatic": true
+    },
+    {
+      "index": 9,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::Any:System.Boolean(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "Any",
+      "isStatic": true
+    },
+    {
+      "index": 10,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::Any:System.Boolean(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Boolean\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "Any",
+      "isStatic": true
+    },
+    {
+      "index": 11,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::Any:System.Boolean(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Boolean\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "Any",
+      "isStatic": true
+    },
+    {
+      "index": 12,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::All:System.Boolean(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Boolean\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "All",
+      "isStatic": true
+    },
+    {
+      "index": 13,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::All:System.Boolean(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Boolean\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "All",
+      "isStatic": true
+    },
+    {
+      "index": 14,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::Append:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Int32)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "Append",
+      "isStatic": true
+    },
+    {
+      "index": 15,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::Append:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Int32)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "Append",
+      "isStatic": true
+    },
+    {
+      "index": 16,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::Append:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Int32)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "Append",
+      "isStatic": true
+    },
+    {
+      "index": 17,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::Prepend:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Int32)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "Prepend",
+      "isStatic": true
+    },
+    {
+      "index": 18,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::Prepend:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Int32)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "Prepend",
+      "isStatic": true
+    },
+    {
+      "index": 19,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::Prepend:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Int32)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "Prepend",
+      "isStatic": true
+    },
+    {
+      "index": 20,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::Average:System.Double(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "Average",
+      "isStatic": true
+    },
+    {
+      "index": 21,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::Average:System.Double(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "Average",
+      "isStatic": true
+    },
+    {
+      "index": 22,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::Average:System.Double(System.Collections.Generic.IEnumerable\u003CSystem.Int64\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "Average",
+      "isStatic": true
+    },
+    {
+      "index": 23,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::Average:System.Double(System.Collections.Generic.IEnumerable\u003CSystem.Int64\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "Average",
+      "isStatic": true
+    },
+    {
+      "index": 24,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::Average:System.Single(System.Collections.Generic.IEnumerable\u003CSystem.Single\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "Average",
+      "isStatic": true
+    },
+    {
+      "index": 25,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::Average:System.Single(System.Collections.Generic.IEnumerable\u003CSystem.Single\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "Average",
+      "isStatic": true
+    },
+    {
+      "index": 26,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::Average:System.Double(System.Collections.Generic.IEnumerable\u003CSystem.Double\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "Average",
+      "isStatic": true
+    },
+    {
+      "index": 27,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::Average:System.Double(System.Collections.Generic.IEnumerable\u003CSystem.Double\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "Average",
+      "isStatic": true
+    },
+    {
+      "index": 28,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::Average:System.Decimal(System.Collections.Generic.IEnumerable\u003CSystem.Decimal\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "Average",
+      "isStatic": true
+    },
+    {
+      "index": 29,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::Average:System.Decimal(System.Collections.Generic.IEnumerable\u003CSystem.Decimal\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "Average",
+      "isStatic": true
+    },
+    {
+      "index": 30,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::Average:System.Nullable\u003CSystem.Double\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Nullable\u003CSystem.Int32\u003E\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "Average",
+      "isStatic": true
+    },
+    {
+      "index": 31,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::Average:System.Nullable\u003CSystem.Double\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Nullable\u003CSystem.Int32\u003E\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "Average",
+      "isStatic": true
+    },
+    {
+      "index": 32,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::Average:System.Nullable\u003CSystem.Double\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Nullable\u003CSystem.Int64\u003E\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "Average",
+      "isStatic": true
+    },
+    {
+      "index": 33,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::Average:System.Nullable\u003CSystem.Double\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Nullable\u003CSystem.Int64\u003E\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "Average",
+      "isStatic": true
+    },
+    {
+      "index": 34,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::Average:System.Nullable\u003CSystem.Single\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Nullable\u003CSystem.Single\u003E\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "Average",
+      "isStatic": true
+    },
+    {
+      "index": 35,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::Average:System.Nullable\u003CSystem.Single\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Nullable\u003CSystem.Single\u003E\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "Average",
+      "isStatic": true
+    },
+    {
+      "index": 36,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::Average:System.Nullable\u003CSystem.Double\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Nullable\u003CSystem.Double\u003E\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "Average",
+      "isStatic": true
+    },
+    {
+      "index": 37,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::Average:System.Nullable\u003CSystem.Double\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Nullable\u003CSystem.Double\u003E\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "Average",
+      "isStatic": true
+    },
+    {
+      "index": 38,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::Average:System.Nullable\u003CSystem.Decimal\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Nullable\u003CSystem.Decimal\u003E\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "Average",
+      "isStatic": true
+    },
+    {
+      "index": 39,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::Average:System.Nullable\u003CSystem.Decimal\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Nullable\u003CSystem.Decimal\u003E\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "Average",
+      "isStatic": true
+    },
+    {
+      "index": 40,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::Average:System.Double(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "Average",
+      "isStatic": true
+    },
+    {
+      "index": 41,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::Average:System.Double(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "Average",
+      "isStatic": true
+    },
+    {
+      "index": 42,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::Average:System.Double(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int64\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "Average",
+      "isStatic": true
+    },
+    {
+      "index": 43,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::Average:System.Double(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int64\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "Average",
+      "isStatic": true
+    },
+    {
+      "index": 44,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::Average:System.Single(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Single\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "Average",
+      "isStatic": true
+    },
+    {
+      "index": 45,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::Average:System.Single(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Single\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "Average",
+      "isStatic": true
+    },
+    {
+      "index": 46,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::Average:System.Double(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Double\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "Average",
+      "isStatic": true
+    },
+    {
+      "index": 47,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::Average:System.Double(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Double\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "Average",
+      "isStatic": true
+    },
+    {
+      "index": 48,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::Average:System.Decimal(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Decimal\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "Average",
+      "isStatic": true
+    },
+    {
+      "index": 49,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::Average:System.Decimal(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Decimal\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "Average",
+      "isStatic": true
+    },
+    {
+      "index": 50,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::Average:System.Nullable\u003CSystem.Double\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Nullable\u003CSystem.Int32\u003E\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "Average",
+      "isStatic": true
+    },
+    {
+      "index": 51,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::Average:System.Nullable\u003CSystem.Double\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Nullable\u003CSystem.Int32\u003E\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "Average",
+      "isStatic": true
+    },
+    {
+      "index": 52,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::Average:System.Nullable\u003CSystem.Double\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Nullable\u003CSystem.Int64\u003E\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "Average",
+      "isStatic": true
+    },
+    {
+      "index": 53,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::Average:System.Nullable\u003CSystem.Double\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Nullable\u003CSystem.Int64\u003E\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "Average",
+      "isStatic": true
+    },
+    {
+      "index": 54,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::Average:System.Nullable\u003CSystem.Single\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Nullable\u003CSystem.Single\u003E\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "Average",
+      "isStatic": true
+    },
+    {
+      "index": 55,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::Average:System.Nullable\u003CSystem.Single\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Nullable\u003CSystem.Single\u003E\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "Average",
+      "isStatic": true
+    },
+    {
+      "index": 56,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::Average:System.Nullable\u003CSystem.Double\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Nullable\u003CSystem.Double\u003E\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "Average",
+      "isStatic": true
+    },
+    {
+      "index": 57,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::Average:System.Nullable\u003CSystem.Double\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Nullable\u003CSystem.Double\u003E\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "Average",
+      "isStatic": true
+    },
+    {
+      "index": 58,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::Average:System.Nullable\u003CSystem.Decimal\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Nullable\u003CSystem.Decimal\u003E\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "Average",
+      "isStatic": true
+    },
+    {
+      "index": 59,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::Average:System.Nullable\u003CSystem.Decimal\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Nullable\u003CSystem.Decimal\u003E\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "Average",
+      "isStatic": true
+    },
+    {
+      "index": 60,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::Cast:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.IEnumerable)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "Cast",
+      "isStatic": true
+    },
+    {
+      "index": 61,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::Cast:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.IEnumerable)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "Cast",
+      "isStatic": true
+    },
+    {
+      "index": 62,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::Chunk:System.Collections.Generic.IEnumerable\u003CSystem.Int32[]\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Int32)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "Chunk",
+      "isStatic": true
+    },
+    {
+      "index": 63,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::Chunk:System.Collections.Generic.IEnumerable\u003CSystem.Int32[]\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Int32)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "Chunk",
+      "isStatic": true
+    },
+    {
+      "index": 64,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::Chunk:System.Collections.Generic.IEnumerable\u003CSystem.Int32[]\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Int32)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "Chunk",
+      "isStatic": true
+    },
+    {
+      "index": 65,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::Concat:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "Concat",
+      "isStatic": true
+    },
+    {
+      "index": 66,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::Concat:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "Concat",
+      "isStatic": true
+    },
+    {
+      "index": 67,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::Contains:System.Boolean(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Int32)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "Contains",
+      "isStatic": true
+    },
+    {
+      "index": 68,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::Contains:System.Boolean(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Int32)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "Contains",
+      "isStatic": true
+    },
+    {
+      "index": 69,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::Contains:System.Boolean(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Int32)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "Contains",
+      "isStatic": true
+    },
+    {
+      "index": 70,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::Contains:System.Boolean(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Int32,System.Collections.Generic.IEqualityComparer\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "Contains",
+      "isStatic": true
+    },
+    {
+      "index": 71,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::Contains:System.Boolean(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Int32,System.Collections.Generic.IEqualityComparer\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "Contains",
+      "isStatic": true
+    },
+    {
+      "index": 72,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::Contains:System.Boolean(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Int32,System.Collections.Generic.IEqualityComparer\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "Contains",
+      "isStatic": true
+    },
+    {
+      "index": 73,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::AggregateBy:System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.Int32,System.Int32\u003E\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Int32,System.Func\u003CSystem.Int32,System.Int32,System.Int32\u003E,System.Collections.Generic.IEqualityComparer\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "AggregateBy",
+      "isStatic": true
+    },
+    {
+      "index": 74,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::AggregateBy:System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.Int32,System.Int32\u003E\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Int32,System.Func\u003CSystem.Int32,System.Int32,System.Int32\u003E,System.Collections.Generic.IEqualityComparer\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "AggregateBy",
+      "isStatic": true
+    },
+    {
+      "index": 75,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::AggregateBy:System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.Int32,System.Int32\u003E\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Int32,System.Func\u003CSystem.Int32,System.Int32,System.Int32\u003E,System.Collections.Generic.IEqualityComparer\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "AggregateBy",
+      "isStatic": true
+    },
+    {
+      "index": 76,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::AggregateBy:System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.Int32,System.Int32\u003E\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32,System.Int32\u003E,System.Collections.Generic.IEqualityComparer\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "AggregateBy",
+      "isStatic": true
+    },
+    {
+      "index": 77,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::AggregateBy:System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.Int32,System.Int32\u003E\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32,System.Int32\u003E,System.Collections.Generic.IEqualityComparer\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "AggregateBy",
+      "isStatic": true
+    },
+    {
+      "index": 78,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::CountBy:System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.Int32,System.Int32\u003E\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Collections.Generic.IEqualityComparer\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "CountBy",
+      "isStatic": true
+    },
+    {
+      "index": 79,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::CountBy:System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.Int32,System.Int32\u003E\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Collections.Generic.IEqualityComparer\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "CountBy",
+      "isStatic": true
+    },
+    {
+      "index": 80,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::Count:System.Int32(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "Count",
+      "isStatic": true
+    },
+    {
+      "index": 81,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::Count:System.Int32(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "Count",
+      "isStatic": true
+    },
+    {
+      "index": 82,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::Count:System.Int32(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Boolean\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "Count",
+      "isStatic": true
+    },
+    {
+      "index": 83,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::Count:System.Int32(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Boolean\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "Count",
+      "isStatic": true
+    },
+    {
+      "index": 84,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::TryGetNonEnumeratedCount:System.Boolean(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Int32)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "TryGetNonEnumeratedCount",
+      "isStatic": true
+    },
+    {
+      "index": 85,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::TryGetNonEnumeratedCount:System.Boolean(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Int32)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "TryGetNonEnumeratedCount",
+      "isStatic": true
+    },
+    {
+      "index": 86,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::TryGetNonEnumeratedCount:System.Boolean(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Int32)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "TryGetNonEnumeratedCount",
+      "isStatic": true
+    },
+    {
+      "index": 87,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::LongCount:System.Int64(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "LongCount",
+      "isStatic": true
+    },
+    {
+      "index": 88,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::LongCount:System.Int64(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "LongCount",
+      "isStatic": true
+    },
+    {
+      "index": 89,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::LongCount:System.Int64(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Boolean\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "LongCount",
+      "isStatic": true
+    },
+    {
+      "index": 90,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::LongCount:System.Int64(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Boolean\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "LongCount",
+      "isStatic": true
+    },
+    {
+      "index": 91,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::DefaultIfEmpty:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "DefaultIfEmpty",
+      "isStatic": true
+    },
+    {
+      "index": 92,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::DefaultIfEmpty:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "DefaultIfEmpty",
+      "isStatic": true
+    },
+    {
+      "index": 93,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::DefaultIfEmpty:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Int32)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "DefaultIfEmpty",
+      "isStatic": true
+    },
+    {
+      "index": 94,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::DefaultIfEmpty:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Int32)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "DefaultIfEmpty",
+      "isStatic": true
+    },
+    {
+      "index": 95,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::DefaultIfEmpty:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Int32)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "DefaultIfEmpty",
+      "isStatic": true
+    },
+    {
+      "index": 96,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::Distinct:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "Distinct",
+      "isStatic": true
+    },
+    {
+      "index": 97,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::Distinct:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "Distinct",
+      "isStatic": true
+    },
+    {
+      "index": 98,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::Distinct:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Collections.Generic.IEqualityComparer\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "Distinct",
+      "isStatic": true
+    },
+    {
+      "index": 99,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::Distinct:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Collections.Generic.IEqualityComparer\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "Distinct",
+      "isStatic": true
+    },
+    {
+      "index": 100,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::DistinctBy:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "DistinctBy",
+      "isStatic": true
+    },
+    {
+      "index": 101,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::DistinctBy:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "DistinctBy",
+      "isStatic": true
+    },
+    {
+      "index": 102,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::DistinctBy:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Collections.Generic.IEqualityComparer\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "DistinctBy",
+      "isStatic": true
+    },
+    {
+      "index": 103,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::DistinctBy:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Collections.Generic.IEqualityComparer\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "DistinctBy",
+      "isStatic": true
+    },
+    {
+      "index": 104,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::ElementAt:System.Int32(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Int32)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "ElementAt",
+      "isStatic": true
+    },
+    {
+      "index": 105,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::ElementAt:System.Int32(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Int32)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "ElementAt",
+      "isStatic": true
+    },
+    {
+      "index": 106,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::ElementAt:System.Int32(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Int32)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "ElementAt",
+      "isStatic": true
+    },
+    {
+      "index": 107,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::ElementAt:System.Int32(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Index)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "ElementAt",
+      "isStatic": true
+    },
+    {
+      "index": 108,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::ElementAt:System.Int32(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Index)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "ElementAt",
+      "isStatic": true
+    },
+    {
+      "index": 109,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::ElementAt:System.Int32(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Index)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "ElementAt",
+      "isStatic": true
+    },
+    {
+      "index": 110,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::ElementAtOrDefault:System.Int32(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Int32)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "ElementAtOrDefault",
+      "isStatic": true
+    },
+    {
+      "index": 111,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::ElementAtOrDefault:System.Int32(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Int32)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "ElementAtOrDefault",
+      "isStatic": true
+    },
+    {
+      "index": 112,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::ElementAtOrDefault:System.Int32(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Int32)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "ElementAtOrDefault",
+      "isStatic": true
+    },
+    {
+      "index": 113,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::ElementAtOrDefault:System.Int32(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Index)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "ElementAtOrDefault",
+      "isStatic": true
+    },
+    {
+      "index": 114,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::ElementAtOrDefault:System.Int32(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Index)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "ElementAtOrDefault",
+      "isStatic": true
+    },
+    {
+      "index": 115,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::ElementAtOrDefault:System.Int32(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Index)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "ElementAtOrDefault",
+      "isStatic": true
+    },
+    {
+      "index": 116,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::AsEnumerable:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "AsEnumerable",
+      "isStatic": true
+    },
+    {
+      "index": 117,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::AsEnumerable:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "AsEnumerable",
+      "isStatic": true
+    },
+    {
+      "index": 118,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::Empty:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E()",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "Empty",
+      "isStatic": true
+    },
+    {
+      "index": 119,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::Except:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "Except",
+      "isStatic": true
+    },
+    {
+      "index": 120,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::Except:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "Except",
+      "isStatic": true
+    },
+    {
+      "index": 121,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::Except:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Collections.Generic.IEqualityComparer\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "Except",
+      "isStatic": true
+    },
+    {
+      "index": 122,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::Except:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Collections.Generic.IEqualityComparer\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "Except",
+      "isStatic": true
+    },
+    {
+      "index": 123,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::ExceptBy:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "ExceptBy",
+      "isStatic": true
+    },
+    {
+      "index": 124,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::ExceptBy:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "ExceptBy",
+      "isStatic": true
+    },
+    {
+      "index": 125,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::ExceptBy:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Collections.Generic.IEqualityComparer\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "ExceptBy",
+      "isStatic": true
+    },
+    {
+      "index": 126,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::ExceptBy:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Collections.Generic.IEqualityComparer\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "ExceptBy",
+      "isStatic": true
+    },
+    {
+      "index": 127,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::First:System.Int32(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "First",
+      "isStatic": true
+    },
+    {
+      "index": 128,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::First:System.Int32(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "First",
+      "isStatic": true
+    },
+    {
+      "index": 129,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::First:System.Int32(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Boolean\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "First",
+      "isStatic": true
+    },
+    {
+      "index": 130,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::First:System.Int32(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Boolean\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "First",
+      "isStatic": true
+    },
+    {
+      "index": 131,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::FirstOrDefault:System.Int32(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "FirstOrDefault",
+      "isStatic": true
+    },
+    {
+      "index": 132,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::FirstOrDefault:System.Int32(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "FirstOrDefault",
+      "isStatic": true
+    },
+    {
+      "index": 133,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::FirstOrDefault:System.Int32(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Int32)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "FirstOrDefault",
+      "isStatic": true
+    },
+    {
+      "index": 134,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::FirstOrDefault:System.Int32(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Int32)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "FirstOrDefault",
+      "isStatic": true
+    },
+    {
+      "index": 135,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::FirstOrDefault:System.Int32(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Int32)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "FirstOrDefault",
+      "isStatic": true
+    },
+    {
+      "index": 136,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::FirstOrDefault:System.Int32(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Boolean\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "FirstOrDefault",
+      "isStatic": true
+    },
+    {
+      "index": 137,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::FirstOrDefault:System.Int32(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Boolean\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "FirstOrDefault",
+      "isStatic": true
+    },
+    {
+      "index": 138,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::FirstOrDefault:System.Int32(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Boolean\u003E,System.Int32)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "FirstOrDefault",
+      "isStatic": true
+    },
+    {
+      "index": 139,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::FirstOrDefault:System.Int32(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Boolean\u003E,System.Int32)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "FirstOrDefault",
+      "isStatic": true
+    },
+    {
+      "index": 140,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::FirstOrDefault:System.Int32(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Boolean\u003E,System.Int32)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "FirstOrDefault",
+      "isStatic": true
+    },
+    {
+      "index": 141,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::GroupBy:System.Collections.Generic.IEnumerable\u003CSystem.Linq.IGrouping\u003CSystem.Int32,System.Int32\u003E\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "GroupBy",
+      "isStatic": true
+    },
+    {
+      "index": 142,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::GroupBy:System.Collections.Generic.IEnumerable\u003CSystem.Linq.IGrouping\u003CSystem.Int32,System.Int32\u003E\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "GroupBy",
+      "isStatic": true
+    },
+    {
+      "index": 143,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::GroupBy:System.Collections.Generic.IEnumerable\u003CSystem.Linq.IGrouping\u003CSystem.Int32,System.Int32\u003E\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Collections.Generic.IEqualityComparer\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "GroupBy",
+      "isStatic": true
+    },
+    {
+      "index": 144,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::GroupBy:System.Collections.Generic.IEnumerable\u003CSystem.Linq.IGrouping\u003CSystem.Int32,System.Int32\u003E\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Collections.Generic.IEqualityComparer\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "GroupBy",
+      "isStatic": true
+    },
+    {
+      "index": 145,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::GroupBy:System.Collections.Generic.IEnumerable\u003CSystem.Linq.IGrouping\u003CSystem.Int32,System.Int32\u003E\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "GroupBy",
+      "isStatic": true
+    },
+    {
+      "index": 146,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::GroupBy:System.Collections.Generic.IEnumerable\u003CSystem.Linq.IGrouping\u003CSystem.Int32,System.Int32\u003E\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "GroupBy",
+      "isStatic": true
+    },
+    {
+      "index": 147,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::GroupBy:System.Collections.Generic.IEnumerable\u003CSystem.Linq.IGrouping\u003CSystem.Int32,System.Int32\u003E\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Collections.Generic.IEqualityComparer\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "GroupBy",
+      "isStatic": true
+    },
+    {
+      "index": 148,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::GroupBy:System.Collections.Generic.IEnumerable\u003CSystem.Linq.IGrouping\u003CSystem.Int32,System.Int32\u003E\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Collections.Generic.IEqualityComparer\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "GroupBy",
+      "isStatic": true
+    },
+    {
+      "index": 149,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::GroupBy:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Func\u003CSystem.Int32,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Int32\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "GroupBy",
+      "isStatic": true
+    },
+    {
+      "index": 150,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::GroupBy:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Func\u003CSystem.Int32,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Int32\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "GroupBy",
+      "isStatic": true
+    },
+    {
+      "index": 151,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::GroupBy:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Func\u003CSystem.Int32,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Int32\u003E,System.Collections.Generic.IEqualityComparer\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "GroupBy",
+      "isStatic": true
+    },
+    {
+      "index": 152,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::GroupBy:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Func\u003CSystem.Int32,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Int32\u003E,System.Collections.Generic.IEqualityComparer\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "GroupBy",
+      "isStatic": true
+    },
+    {
+      "index": 153,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::GroupBy:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Func\u003CSystem.Int32,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Int32\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "GroupBy",
+      "isStatic": true
+    },
+    {
+      "index": 154,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::GroupBy:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Func\u003CSystem.Int32,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Int32\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "GroupBy",
+      "isStatic": true
+    },
+    {
+      "index": 155,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::GroupBy:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Func\u003CSystem.Int32,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Int32\u003E,System.Collections.Generic.IEqualityComparer\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "GroupBy",
+      "isStatic": true
+    },
+    {
+      "index": 156,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::GroupBy:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Func\u003CSystem.Int32,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Int32\u003E,System.Collections.Generic.IEqualityComparer\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "GroupBy",
+      "isStatic": true
+    },
+    {
+      "index": 157,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::GroupJoin:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Func\u003CSystem.Int32,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Int32\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "GroupJoin",
+      "isStatic": true
+    },
+    {
+      "index": 158,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::GroupJoin:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Func\u003CSystem.Int32,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Int32\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "GroupJoin",
+      "isStatic": true
+    },
+    {
+      "index": 159,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::GroupJoin:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Func\u003CSystem.Int32,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Int32\u003E,System.Collections.Generic.IEqualityComparer\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "GroupJoin",
+      "isStatic": true
+    },
+    {
+      "index": 160,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::GroupJoin:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Func\u003CSystem.Int32,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Int32\u003E,System.Collections.Generic.IEqualityComparer\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "GroupJoin",
+      "isStatic": true
+    },
+    {
+      "index": 161,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::Index:System.Collections.Generic.IEnumerable\u003CSystem.ValueTuple\u003CSystem.Int32,System.Int32\u003E\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "Index",
+      "isStatic": true
+    },
+    {
+      "index": 162,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::Index:System.Collections.Generic.IEnumerable\u003CSystem.ValueTuple\u003CSystem.Int32,System.Int32\u003E\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "Index",
+      "isStatic": true
+    },
+    {
+      "index": 163,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::Intersect:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "Intersect",
+      "isStatic": true
+    },
+    {
+      "index": 164,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::Intersect:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "Intersect",
+      "isStatic": true
+    },
+    {
+      "index": 165,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::Intersect:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Collections.Generic.IEqualityComparer\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "Intersect",
+      "isStatic": true
+    },
+    {
+      "index": 166,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::Intersect:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Collections.Generic.IEqualityComparer\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "Intersect",
+      "isStatic": true
+    },
+    {
+      "index": 167,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::IntersectBy:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "IntersectBy",
+      "isStatic": true
+    },
+    {
+      "index": 168,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::IntersectBy:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "IntersectBy",
+      "isStatic": true
+    },
+    {
+      "index": 169,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::IntersectBy:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Collections.Generic.IEqualityComparer\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "IntersectBy",
+      "isStatic": true
+    },
+    {
+      "index": 170,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::IntersectBy:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Collections.Generic.IEqualityComparer\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "IntersectBy",
+      "isStatic": true
+    },
+    {
+      "index": 171,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::Join:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32,System.Int32\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "Join",
+      "isStatic": true
+    },
+    {
+      "index": 172,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::Join:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32,System.Int32\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "Join",
+      "isStatic": true
+    },
+    {
+      "index": 173,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::Join:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32,System.Int32\u003E,System.Collections.Generic.IEqualityComparer\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "Join",
+      "isStatic": true
+    },
+    {
+      "index": 174,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::Join:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32,System.Int32\u003E,System.Collections.Generic.IEqualityComparer\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "Join",
+      "isStatic": true
+    },
+    {
+      "index": 175,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::Last:System.Int32(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "Last",
+      "isStatic": true
+    },
+    {
+      "index": 176,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::Last:System.Int32(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "Last",
+      "isStatic": true
+    },
+    {
+      "index": 177,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::Last:System.Int32(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Boolean\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "Last",
+      "isStatic": true
+    },
+    {
+      "index": 178,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::Last:System.Int32(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Boolean\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "Last",
+      "isStatic": true
+    },
+    {
+      "index": 179,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::LastOrDefault:System.Int32(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "LastOrDefault",
+      "isStatic": true
+    },
+    {
+      "index": 180,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::LastOrDefault:System.Int32(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "LastOrDefault",
+      "isStatic": true
+    },
+    {
+      "index": 181,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::LastOrDefault:System.Int32(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Int32)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "LastOrDefault",
+      "isStatic": true
+    },
+    {
+      "index": 182,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::LastOrDefault:System.Int32(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Int32)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "LastOrDefault",
+      "isStatic": true
+    },
+    {
+      "index": 183,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::LastOrDefault:System.Int32(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Int32)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "LastOrDefault",
+      "isStatic": true
+    },
+    {
+      "index": 184,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::LastOrDefault:System.Int32(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Boolean\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "LastOrDefault",
+      "isStatic": true
+    },
+    {
+      "index": 185,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::LastOrDefault:System.Int32(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Boolean\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "LastOrDefault",
+      "isStatic": true
+    },
+    {
+      "index": 186,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::LastOrDefault:System.Int32(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Boolean\u003E,System.Int32)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "LastOrDefault",
+      "isStatic": true
+    },
+    {
+      "index": 187,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::LastOrDefault:System.Int32(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Boolean\u003E,System.Int32)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "LastOrDefault",
+      "isStatic": true
+    },
+    {
+      "index": 188,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::LastOrDefault:System.Int32(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Boolean\u003E,System.Int32)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "LastOrDefault",
+      "isStatic": true
+    },
+    {
+      "index": 189,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::ToLookup:System.Linq.ILookup\u003CSystem.Int32,System.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "ToLookup",
+      "isStatic": true
+    },
+    {
+      "index": 190,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::ToLookup:System.Linq.ILookup\u003CSystem.Int32,System.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "ToLookup",
+      "isStatic": true
+    },
+    {
+      "index": 191,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::ToLookup:System.Linq.ILookup\u003CSystem.Int32,System.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Collections.Generic.IEqualityComparer\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "ToLookup",
+      "isStatic": true
+    },
+    {
+      "index": 192,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::ToLookup:System.Linq.ILookup\u003CSystem.Int32,System.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Collections.Generic.IEqualityComparer\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "ToLookup",
+      "isStatic": true
+    },
+    {
+      "index": 193,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::ToLookup:System.Linq.ILookup\u003CSystem.Int32,System.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "ToLookup",
+      "isStatic": true
+    },
+    {
+      "index": 194,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::ToLookup:System.Linq.ILookup\u003CSystem.Int32,System.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "ToLookup",
+      "isStatic": true
+    },
+    {
+      "index": 195,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::ToLookup:System.Linq.ILookup\u003CSystem.Int32,System.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Collections.Generic.IEqualityComparer\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "ToLookup",
+      "isStatic": true
+    },
+    {
+      "index": 196,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::ToLookup:System.Linq.ILookup\u003CSystem.Int32,System.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Collections.Generic.IEqualityComparer\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "ToLookup",
+      "isStatic": true
+    },
+    {
+      "index": 197,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::MaxBy:System.Int32(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "MaxBy",
+      "isStatic": true
+    },
+    {
+      "index": 198,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::MaxBy:System.Int32(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "MaxBy",
+      "isStatic": true
+    },
+    {
+      "index": 199,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::MaxBy:System.Int32(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Collections.Generic.IComparer\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "MaxBy",
+      "isStatic": true
+    },
+    {
+      "index": 200,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::MaxBy:System.Int32(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Collections.Generic.IComparer\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "MaxBy",
+      "isStatic": true
+    },
+    {
+      "index": 201,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::MinBy:System.Int32(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "MinBy",
+      "isStatic": true
+    },
+    {
+      "index": 202,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::MinBy:System.Int32(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "MinBy",
+      "isStatic": true
+    },
+    {
+      "index": 203,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::MinBy:System.Int32(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Collections.Generic.IComparer\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "MinBy",
+      "isStatic": true
+    },
+    {
+      "index": 204,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::MinBy:System.Int32(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Collections.Generic.IComparer\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "MinBy",
+      "isStatic": true
+    },
+    {
+      "index": 205,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::OfType:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.IEnumerable)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "OfType",
+      "isStatic": true
+    },
+    {
+      "index": 206,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::OfType:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.IEnumerable)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "OfType",
+      "isStatic": true
+    },
+    {
+      "index": 207,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::Order:System.Linq.IOrderedEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "Order",
+      "isStatic": true
+    },
+    {
+      "index": 208,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::Order:System.Linq.IOrderedEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "Order",
+      "isStatic": true
+    },
+    {
+      "index": 209,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::Order:System.Linq.IOrderedEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Collections.Generic.IComparer\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "Order",
+      "isStatic": true
+    },
+    {
+      "index": 210,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::Order:System.Linq.IOrderedEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Collections.Generic.IComparer\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "Order",
+      "isStatic": true
+    },
+    {
+      "index": 211,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::OrderBy:System.Linq.IOrderedEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "OrderBy",
+      "isStatic": true
+    },
+    {
+      "index": 212,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::OrderBy:System.Linq.IOrderedEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "OrderBy",
+      "isStatic": true
+    },
+    {
+      "index": 213,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::OrderBy:System.Linq.IOrderedEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Collections.Generic.IComparer\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "OrderBy",
+      "isStatic": true
+    },
+    {
+      "index": 214,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::OrderBy:System.Linq.IOrderedEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Collections.Generic.IComparer\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "OrderBy",
+      "isStatic": true
+    },
+    {
+      "index": 215,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::OrderDescending:System.Linq.IOrderedEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "OrderDescending",
+      "isStatic": true
+    },
+    {
+      "index": 216,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::OrderDescending:System.Linq.IOrderedEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "OrderDescending",
+      "isStatic": true
+    },
+    {
+      "index": 217,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::OrderDescending:System.Linq.IOrderedEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Collections.Generic.IComparer\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "OrderDescending",
+      "isStatic": true
+    },
+    {
+      "index": 218,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::OrderDescending:System.Linq.IOrderedEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Collections.Generic.IComparer\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "OrderDescending",
+      "isStatic": true
+    },
+    {
+      "index": 219,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::OrderByDescending:System.Linq.IOrderedEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "OrderByDescending",
+      "isStatic": true
+    },
+    {
+      "index": 220,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::OrderByDescending:System.Linq.IOrderedEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "OrderByDescending",
+      "isStatic": true
+    },
+    {
+      "index": 221,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::OrderByDescending:System.Linq.IOrderedEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Collections.Generic.IComparer\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "OrderByDescending",
+      "isStatic": true
+    },
+    {
+      "index": 222,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::OrderByDescending:System.Linq.IOrderedEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Collections.Generic.IComparer\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "OrderByDescending",
+      "isStatic": true
+    },
+    {
+      "index": 223,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::ThenBy:System.Linq.IOrderedEnumerable\u003CSystem.Int32\u003E(System.Linq.IOrderedEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "ThenBy",
+      "isStatic": true
+    },
+    {
+      "index": 224,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::ThenBy:System.Linq.IOrderedEnumerable\u003CSystem.Int32\u003E(System.Linq.IOrderedEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "ThenBy",
+      "isStatic": true
+    },
+    {
+      "index": 225,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::ThenBy:System.Linq.IOrderedEnumerable\u003CSystem.Int32\u003E(System.Linq.IOrderedEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Collections.Generic.IComparer\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "ThenBy",
+      "isStatic": true
+    },
+    {
+      "index": 226,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::ThenBy:System.Linq.IOrderedEnumerable\u003CSystem.Int32\u003E(System.Linq.IOrderedEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Collections.Generic.IComparer\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "ThenBy",
+      "isStatic": true
+    },
+    {
+      "index": 227,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::ThenByDescending:System.Linq.IOrderedEnumerable\u003CSystem.Int32\u003E(System.Linq.IOrderedEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "ThenByDescending",
+      "isStatic": true
+    },
+    {
+      "index": 228,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::ThenByDescending:System.Linq.IOrderedEnumerable\u003CSystem.Int32\u003E(System.Linq.IOrderedEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "ThenByDescending",
+      "isStatic": true
+    },
+    {
+      "index": 229,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::ThenByDescending:System.Linq.IOrderedEnumerable\u003CSystem.Int32\u003E(System.Linq.IOrderedEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Collections.Generic.IComparer\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "ThenByDescending",
+      "isStatic": true
+    },
+    {
+      "index": 230,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::ThenByDescending:System.Linq.IOrderedEnumerable\u003CSystem.Int32\u003E(System.Linq.IOrderedEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Collections.Generic.IComparer\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "ThenByDescending",
+      "isStatic": true
+    },
+    {
+      "index": 231,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::Range:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Int32,System.Int32)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "Range",
+      "isStatic": true
+    },
+    {
+      "index": 232,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::Range:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Int32,System.Int32)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "Range",
+      "isStatic": true
+    },
+    {
+      "index": 233,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::Range:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Int32,System.Int32)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "Range",
+      "isStatic": true
+    },
+    {
+      "index": 234,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::Repeat:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Int32,System.Int32)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "Repeat",
+      "isStatic": true
+    },
+    {
+      "index": 235,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::Repeat:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Int32,System.Int32)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "Repeat",
+      "isStatic": true
+    },
+    {
+      "index": 236,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::Repeat:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Int32,System.Int32)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "Repeat",
+      "isStatic": true
+    },
+    {
+      "index": 237,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::Reverse:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "Reverse",
+      "isStatic": true
+    },
+    {
+      "index": 238,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::Reverse:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "Reverse",
+      "isStatic": true
+    },
+    {
+      "index": 239,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::Select:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "Select",
+      "isStatic": true
+    },
+    {
+      "index": 240,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::Select:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "Select",
+      "isStatic": true
+    },
+    {
+      "index": 241,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::Select:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32,System.Int32\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "Select",
+      "isStatic": true
+    },
+    {
+      "index": 242,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::Select:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32,System.Int32\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "Select",
+      "isStatic": true
+    },
+    {
+      "index": 243,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::SelectMany:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "SelectMany",
+      "isStatic": true
+    },
+    {
+      "index": 244,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::SelectMany:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "SelectMany",
+      "isStatic": true
+    },
+    {
+      "index": 245,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::SelectMany:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "SelectMany",
+      "isStatic": true
+    },
+    {
+      "index": 246,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::SelectMany:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "SelectMany",
+      "isStatic": true
+    },
+    {
+      "index": 247,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::SelectMany:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E\u003E,System.Func\u003CSystem.Int32,System.Int32,System.Int32\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "SelectMany",
+      "isStatic": true
+    },
+    {
+      "index": 248,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::SelectMany:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E\u003E,System.Func\u003CSystem.Int32,System.Int32,System.Int32\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "SelectMany",
+      "isStatic": true
+    },
+    {
+      "index": 249,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::SelectMany:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E\u003E,System.Func\u003CSystem.Int32,System.Int32,System.Int32\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "SelectMany",
+      "isStatic": true
+    },
+    {
+      "index": 250,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::SelectMany:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E\u003E,System.Func\u003CSystem.Int32,System.Int32,System.Int32\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "SelectMany",
+      "isStatic": true
+    },
+    {
+      "index": 251,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::SequenceEqual:System.Boolean(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "SequenceEqual",
+      "isStatic": true
+    },
+    {
+      "index": 252,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::SequenceEqual:System.Boolean(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "SequenceEqual",
+      "isStatic": true
+    },
+    {
+      "index": 253,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::SequenceEqual:System.Boolean(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Collections.Generic.IEqualityComparer\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "SequenceEqual",
+      "isStatic": true
+    },
+    {
+      "index": 254,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::SequenceEqual:System.Boolean(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Collections.Generic.IEqualityComparer\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "SequenceEqual",
+      "isStatic": true
+    },
+    {
+      "index": 255,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::Single:System.Int32(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "Single",
+      "isStatic": true
+    },
+    {
+      "index": 256,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::Single:System.Int32(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "Single",
+      "isStatic": true
+    },
+    {
+      "index": 257,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::Single:System.Int32(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Boolean\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "Single",
+      "isStatic": true
+    },
+    {
+      "index": 258,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::Single:System.Int32(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Boolean\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "Single",
+      "isStatic": true
+    },
+    {
+      "index": 259,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::SingleOrDefault:System.Int32(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "SingleOrDefault",
+      "isStatic": true
+    },
+    {
+      "index": 260,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::SingleOrDefault:System.Int32(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "SingleOrDefault",
+      "isStatic": true
+    },
+    {
+      "index": 261,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::SingleOrDefault:System.Int32(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Int32)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "SingleOrDefault",
+      "isStatic": true
+    },
+    {
+      "index": 262,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::SingleOrDefault:System.Int32(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Int32)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "SingleOrDefault",
+      "isStatic": true
+    },
+    {
+      "index": 263,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::SingleOrDefault:System.Int32(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Int32)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "SingleOrDefault",
+      "isStatic": true
+    },
+    {
+      "index": 264,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::SingleOrDefault:System.Int32(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Boolean\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "SingleOrDefault",
+      "isStatic": true
+    },
+    {
+      "index": 265,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::SingleOrDefault:System.Int32(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Boolean\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "SingleOrDefault",
+      "isStatic": true
+    },
+    {
+      "index": 266,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::SingleOrDefault:System.Int32(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Boolean\u003E,System.Int32)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "SingleOrDefault",
+      "isStatic": true
+    },
+    {
+      "index": 267,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::SingleOrDefault:System.Int32(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Boolean\u003E,System.Int32)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "SingleOrDefault",
+      "isStatic": true
+    },
+    {
+      "index": 268,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::SingleOrDefault:System.Int32(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Boolean\u003E,System.Int32)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "SingleOrDefault",
+      "isStatic": true
+    },
+    {
+      "index": 269,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::Skip:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Int32)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "Skip",
+      "isStatic": true
+    },
+    {
+      "index": 270,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::Skip:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Int32)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "Skip",
+      "isStatic": true
+    },
+    {
+      "index": 271,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::Skip:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Int32)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "Skip",
+      "isStatic": true
+    },
+    {
+      "index": 272,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::SkipWhile:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Boolean\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "SkipWhile",
+      "isStatic": true
+    },
+    {
+      "index": 273,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::SkipWhile:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Boolean\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "SkipWhile",
+      "isStatic": true
+    },
+    {
+      "index": 274,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::SkipWhile:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32,System.Boolean\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "SkipWhile",
+      "isStatic": true
+    },
+    {
+      "index": 275,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::SkipWhile:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32,System.Boolean\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "SkipWhile",
+      "isStatic": true
+    },
+    {
+      "index": 276,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::SkipLast:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Int32)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "SkipLast",
+      "isStatic": true
+    },
+    {
+      "index": 277,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::SkipLast:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Int32)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "SkipLast",
+      "isStatic": true
+    },
+    {
+      "index": 278,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::SkipLast:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Int32)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "SkipLast",
+      "isStatic": true
+    },
+    {
+      "index": 279,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::Take:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Int32)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "Take",
+      "isStatic": true
+    },
+    {
+      "index": 280,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::Take:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Int32)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "Take",
+      "isStatic": true
+    },
+    {
+      "index": 281,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::Take:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Int32)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "Take",
+      "isStatic": true
+    },
+    {
+      "index": 282,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::Take:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Range)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "Take",
+      "isStatic": true
+    },
+    {
+      "index": 283,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::Take:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Range)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "Take",
+      "isStatic": true
+    },
+    {
+      "index": 284,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::Take:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Range)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "Take",
+      "isStatic": true
+    },
+    {
+      "index": 285,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::TakeWhile:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Boolean\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "TakeWhile",
+      "isStatic": true
+    },
+    {
+      "index": 286,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::TakeWhile:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Boolean\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "TakeWhile",
+      "isStatic": true
+    },
+    {
+      "index": 287,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::TakeWhile:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32,System.Boolean\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "TakeWhile",
+      "isStatic": true
+    },
+    {
+      "index": 288,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::TakeWhile:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32,System.Boolean\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "TakeWhile",
+      "isStatic": true
+    },
+    {
+      "index": 289,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::TakeLast:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Int32)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "TakeLast",
+      "isStatic": true
+    },
+    {
+      "index": 290,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::TakeLast:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Int32)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "TakeLast",
+      "isStatic": true
+    },
+    {
+      "index": 291,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::TakeLast:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Int32)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "TakeLast",
+      "isStatic": true
+    },
+    {
+      "index": 292,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::ToArray:System.Int32[](System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "ToArray",
+      "isStatic": true
+    },
+    {
+      "index": 293,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::ToArray:System.Int32[](System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "ToArray",
+      "isStatic": true
+    },
+    {
+      "index": 294,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::ToList:System.Collections.Generic.List\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "ToList",
+      "isStatic": true
+    },
+    {
+      "index": 295,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::ToList:System.Collections.Generic.List\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "ToList",
+      "isStatic": true
+    },
+    {
+      "index": 296,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::ToDictionary:System.Collections.Generic.Dictionary\u003CSystem.Int32,System.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.Int32,System.Int32\u003E\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "ToDictionary",
+      "isStatic": true
+    },
+    {
+      "index": 297,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::ToDictionary:System.Collections.Generic.Dictionary\u003CSystem.Int32,System.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.Int32,System.Int32\u003E\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "ToDictionary",
+      "isStatic": true
+    },
+    {
+      "index": 298,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::ToDictionary:System.Collections.Generic.Dictionary\u003CSystem.Int32,System.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.Int32,System.Int32\u003E\u003E,System.Collections.Generic.IEqualityComparer\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "ToDictionary",
+      "isStatic": true
+    },
+    {
+      "index": 299,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::ToDictionary:System.Collections.Generic.Dictionary\u003CSystem.Int32,System.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.Int32,System.Int32\u003E\u003E,System.Collections.Generic.IEqualityComparer\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "ToDictionary",
+      "isStatic": true
+    },
+    {
+      "index": 300,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::ToDictionary:System.Collections.Generic.Dictionary\u003CSystem.Int32,System.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.ValueTuple\u003CSystem.Int32,System.Int32\u003E\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "ToDictionary",
+      "isStatic": true
+    },
+    {
+      "index": 301,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::ToDictionary:System.Collections.Generic.Dictionary\u003CSystem.Int32,System.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.ValueTuple\u003CSystem.Int32,System.Int32\u003E\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "ToDictionary",
+      "isStatic": true
+    },
+    {
+      "index": 302,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::ToDictionary:System.Collections.Generic.Dictionary\u003CSystem.Int32,System.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.ValueTuple\u003CSystem.Int32,System.Int32\u003E\u003E,System.Collections.Generic.IEqualityComparer\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "ToDictionary",
+      "isStatic": true
+    },
+    {
+      "index": 303,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::ToDictionary:System.Collections.Generic.Dictionary\u003CSystem.Int32,System.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.ValueTuple\u003CSystem.Int32,System.Int32\u003E\u003E,System.Collections.Generic.IEqualityComparer\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "ToDictionary",
+      "isStatic": true
+    },
+    {
+      "index": 304,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::ToDictionary:System.Collections.Generic.Dictionary\u003CSystem.Int32,System.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "ToDictionary",
+      "isStatic": true
+    },
+    {
+      "index": 305,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::ToDictionary:System.Collections.Generic.Dictionary\u003CSystem.Int32,System.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "ToDictionary",
+      "isStatic": true
+    },
+    {
+      "index": 306,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::ToDictionary:System.Collections.Generic.Dictionary\u003CSystem.Int32,System.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Collections.Generic.IEqualityComparer\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "ToDictionary",
+      "isStatic": true
+    },
+    {
+      "index": 307,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::ToDictionary:System.Collections.Generic.Dictionary\u003CSystem.Int32,System.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Collections.Generic.IEqualityComparer\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "ToDictionary",
+      "isStatic": true
+    },
+    {
+      "index": 308,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::ToDictionary:System.Collections.Generic.Dictionary\u003CSystem.Int32,System.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "ToDictionary",
+      "isStatic": true
+    },
+    {
+      "index": 309,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::ToDictionary:System.Collections.Generic.Dictionary\u003CSystem.Int32,System.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "ToDictionary",
+      "isStatic": true
+    },
+    {
+      "index": 310,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::ToDictionary:System.Collections.Generic.Dictionary\u003CSystem.Int32,System.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Collections.Generic.IEqualityComparer\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "ToDictionary",
+      "isStatic": true
+    },
+    {
+      "index": 311,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::ToDictionary:System.Collections.Generic.Dictionary\u003CSystem.Int32,System.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Collections.Generic.IEqualityComparer\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "ToDictionary",
+      "isStatic": true
+    },
+    {
+      "index": 312,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::ToHashSet:System.Collections.Generic.HashSet\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "ToHashSet",
+      "isStatic": true
+    },
+    {
+      "index": 313,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::ToHashSet:System.Collections.Generic.HashSet\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "ToHashSet",
+      "isStatic": true
+    },
+    {
+      "index": 314,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::ToHashSet:System.Collections.Generic.HashSet\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Collections.Generic.IEqualityComparer\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "ToHashSet",
+      "isStatic": true
+    },
+    {
+      "index": 315,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::ToHashSet:System.Collections.Generic.HashSet\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Collections.Generic.IEqualityComparer\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "ToHashSet",
+      "isStatic": true
+    },
+    {
+      "index": 316,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::Union:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "Union",
+      "isStatic": true
+    },
+    {
+      "index": 317,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::Union:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "Union",
+      "isStatic": true
+    },
+    {
+      "index": 318,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::Union:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Collections.Generic.IEqualityComparer\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "Union",
+      "isStatic": true
+    },
+    {
+      "index": 319,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::Union:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Collections.Generic.IEqualityComparer\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "Union",
+      "isStatic": true
+    },
+    {
+      "index": 320,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::UnionBy:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "UnionBy",
+      "isStatic": true
+    },
+    {
+      "index": 321,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::UnionBy:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "UnionBy",
+      "isStatic": true
+    },
+    {
+      "index": 322,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::UnionBy:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Collections.Generic.IEqualityComparer\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "UnionBy",
+      "isStatic": true
+    },
+    {
+      "index": 323,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::UnionBy:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Collections.Generic.IEqualityComparer\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "UnionBy",
+      "isStatic": true
+    },
+    {
+      "index": 324,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::Where:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Boolean\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "Where",
+      "isStatic": true
+    },
+    {
+      "index": 325,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::Where:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Boolean\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "Where",
+      "isStatic": true
+    },
+    {
+      "index": 326,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::Where:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32,System.Boolean\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "Where",
+      "isStatic": true
+    },
+    {
+      "index": 327,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::Where:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32,System.Boolean\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "Where",
+      "isStatic": true
+    },
+    {
+      "index": 328,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::Zip:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32,System.Int32\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "Zip",
+      "isStatic": true
+    },
+    {
+      "index": 329,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::Zip:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32,System.Int32\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "Zip",
+      "isStatic": true
+    },
+    {
+      "index": 330,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::Zip:System.Collections.Generic.IEnumerable\u003CSystem.ValueTuple\u003CSystem.Int32,System.Int32\u003E\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "Zip",
+      "isStatic": true
+    },
+    {
+      "index": 331,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::Zip:System.Collections.Generic.IEnumerable\u003CSystem.ValueTuple\u003CSystem.Int32,System.Int32\u003E\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "Zip",
+      "isStatic": true
+    },
+    {
+      "index": 332,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::Zip:System.Collections.Generic.IEnumerable\u003CSystem.ValueTuple\u003CSystem.Int32,System.Int32,System.Int32\u003E\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "Zip",
+      "isStatic": true
+    },
+    {
+      "index": 333,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Enumerable::Zip:System.Collections.Generic.IEnumerable\u003CSystem.ValueTuple\u003CSystem.Int32,System.Int32,System.Int32\u003E\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "Zip",
+      "isStatic": true
+    },
+    {
+      "index": 334,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Lookup\u003CSystem.Int32,System.Int32\u003E::Contains:System.Boolean(System.Int32)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Lookup\u003CSystem.Int32,System.Int32\u003E",
+      "methodName": "Contains",
+      "isStatic": true
+    },
+    {
+      "index": 335,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Lookup\u003CSystem.Int32,System.Int32\u003E::Contains:System.Boolean(System.Int32)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Lookup\u003CSystem.Int32,System.Int32\u003E",
+      "methodName": "Contains",
+      "isStatic": true
+    },
+    {
+      "index": 336,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Lookup\u003CSystem.Int32,System.Int32\u003E::GetEnumerator:System.Collections.Generic.IEnumerator\u003CSystem.Linq.IGrouping\u003CSystem.Int32,System.Int32\u003E\u003E()",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Lookup\u003CSystem.Int32,System.Int32\u003E",
+      "methodName": "GetEnumerator",
+      "isStatic": true
+    },
+    {
+      "index": 337,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Lookup\u003CSystem.Int32,System.Int32\u003E::ApplyResultSelector:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Func\u003CSystem.Int32,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Int32\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Lookup\u003CSystem.Int32,System.Int32\u003E",
+      "methodName": "ApplyResultSelector",
+      "isStatic": true
+    },
+    {
+      "index": 338,
+      "kind": "benchmark",
+      "subjectId": "System.Linq/System.Linq.Lookup\u003CSystem.Int32,System.Int32\u003E::ApplyResultSelector:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Func\u003CSystem.Int32,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Int32\u003E)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Lookup\u003CSystem.Int32,System.Int32\u003E",
+      "methodName": "ApplyResultSelector",
+      "isStatic": true
+    }
+  ],
+  "summary": {
+    "totalSubjects": 339,
+    "factCount": 0,
+    "benchmarkCount": 339,
+    "hotUpdateCount": 0
+  }
+}

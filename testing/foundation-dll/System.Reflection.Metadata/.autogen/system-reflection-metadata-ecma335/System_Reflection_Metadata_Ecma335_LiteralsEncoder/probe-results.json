@@ -1,0 +1,15 @@
+[
+  {
+    "methodIndex": 0,
+    "setIndex": 0,
+    "subjectId": "System.Reflection.Metadata.Ecma335.LiteralsEncoder::AddLiteral:System.Reflection.Metadata.Ecma335.LiteralEncoder()__Set0",
+    "isVoid": false,
+    "hasException": false,
+    "exceptionType": null,
+    "returnValue": -580670485,
+    "returnValueJson": "{\u0022Builder\u0022:null}",
+    "returnValueType": "System.Reflection.Metadata.Ecma335.LiteralEncoder",
+    "isDeterministic": true,
+    "outRefValues": null
+  }
+]

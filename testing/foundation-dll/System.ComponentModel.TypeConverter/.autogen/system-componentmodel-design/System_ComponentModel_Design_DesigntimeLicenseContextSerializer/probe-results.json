@@ -1,0 +1,41 @@
+[
+  {
+    "methodIndex": 0,
+    "setIndex": 0,
+    "subjectId": "System.ComponentModel.Design.DesigntimeLicenseContextSerializer::Serialize:System.Void(System.IO.Stream,System.String,System.ComponentModel.Design.DesigntimeLicenseContext)__Set0",
+    "isVoid": true,
+    "hasException": true,
+    "exceptionType": "System.ArgumentNullException",
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 0,
+    "setIndex": 1,
+    "subjectId": "System.ComponentModel.Design.DesigntimeLicenseContextSerializer::Serialize:System.Void(System.IO.Stream,System.String,System.ComponentModel.Design.DesigntimeLicenseContext)__Set1",
+    "isVoid": true,
+    "hasException": true,
+    "exceptionType": "System.ArgumentNullException",
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 0,
+    "setIndex": 2,
+    "subjectId": "System.ComponentModel.Design.DesigntimeLicenseContextSerializer::Serialize:System.Void(System.IO.Stream,System.String,System.ComponentModel.Design.DesigntimeLicenseContext)__Set2",
+    "isVoid": true,
+    "hasException": true,
+    "exceptionType": "System.ArgumentNullException",
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": null
+  }
+]

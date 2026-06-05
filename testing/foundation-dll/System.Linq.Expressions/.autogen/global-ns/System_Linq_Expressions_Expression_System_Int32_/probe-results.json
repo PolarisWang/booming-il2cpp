@@ -1,0 +1,80 @@
+[
+  {
+    "methodIndex": 0,
+    "setIndex": 0,
+    "subjectId": "System.Linq.Expressions.Expression\u003CSystem.Int32\u003E::Compile:System.Int32()__Set0",
+    "isVoid": false,
+    "hasException": true,
+    "exceptionType": "System.NullReferenceException",
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 1,
+    "setIndex": 0,
+    "subjectId": "System.Linq.Expressions.Expression\u003CSystem.Int32\u003E::Compile:System.Int32(System.Boolean)__Set0",
+    "isVoid": false,
+    "hasException": true,
+    "exceptionType": "System.NullReferenceException",
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 1,
+    "setIndex": 1,
+    "subjectId": "System.Linq.Expressions.Expression\u003CSystem.Int32\u003E::Compile:System.Int32(System.Boolean)__Set1",
+    "isVoid": false,
+    "hasException": true,
+    "exceptionType": "System.NullReferenceException",
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 2,
+    "setIndex": 0,
+    "subjectId": "System.Linq.Expressions.Expression\u003CSystem.Int32\u003E::Update:System.Linq.Expressions.Expression\u003CSystem.Int32\u003E(System.Linq.Expressions.Expression,System.Collections.Generic.IEnumerable\u003CSystem.Linq.Expressions.ParameterExpression\u003E)__Set0",
+    "isVoid": false,
+    "hasException": true,
+    "exceptionType": "System.NullReferenceException",
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 2,
+    "setIndex": 1,
+    "subjectId": "System.Linq.Expressions.Expression\u003CSystem.Int32\u003E::Update:System.Linq.Expressions.Expression\u003CSystem.Int32\u003E(System.Linq.Expressions.Expression,System.Collections.Generic.IEnumerable\u003CSystem.Linq.Expressions.ParameterExpression\u003E)__Set1",
+    "isVoid": false,
+    "hasException": true,
+    "exceptionType": "System.NullReferenceException",
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 3,
+    "setIndex": 0,
+    "subjectId": "System.Linq.Expressions.Expression\u003CSystem.Int32\u003E::Compile:System.Int32(System.Runtime.CompilerServices.DebugInfoGenerator)__Set0",
+    "isVoid": false,
+    "hasException": true,
+    "exceptionType": "System.NullReferenceException",
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": null
+  }
+]

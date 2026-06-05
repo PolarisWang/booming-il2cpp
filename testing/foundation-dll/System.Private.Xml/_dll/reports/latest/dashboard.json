@@ -1,0 +1,21 @@
+{
+  "assemblyName": "System.Private.Xml",
+  "timestamp": "2026-06-05T09:28:21",
+  "summary": {
+    "chunks": 5,
+    "chunksVerified": 4,
+    "chunksShutdownAV": 0,
+    "chunksWithValueWarnings": 0,
+    "chunksWithMetaMismatch": 0,
+    "factPassRate": 100.0,
+    "totalBenchmarkedMethods": 0,
+    "aggregatePerformance": {},
+    "hotupdate": {
+      "chunksWithPatchData": 0,
+      "chunksPatchFailed": 0,
+      "chunksWithRevertFailure": 0,
+      "totalPassed": 0,
+      "totalFailed": 0
+    }
+  }
+}

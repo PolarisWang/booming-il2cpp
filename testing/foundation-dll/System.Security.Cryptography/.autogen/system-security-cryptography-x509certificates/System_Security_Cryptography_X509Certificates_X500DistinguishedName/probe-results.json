@@ -1,0 +1,67 @@
+[
+  {
+    "methodIndex": 0,
+    "setIndex": 0,
+    "subjectId": "System.Security.Cryptography.X509Certificates.X500DistinguishedName::Decode:System.String(System.Security.Cryptography.X509Certificates.X500DistinguishedNameFlags)__Set0",
+    "isVoid": false,
+    "hasException": true,
+    "exceptionType": "System.NullReferenceException",
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 1,
+    "setIndex": 0,
+    "subjectId": "System.Security.Cryptography.X509Certificates.X500DistinguishedName::Format:System.String(System.Boolean)__Set0",
+    "isVoid": false,
+    "hasException": true,
+    "exceptionType": "System.NullReferenceException",
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 1,
+    "setIndex": 1,
+    "subjectId": "System.Security.Cryptography.X509Certificates.X500DistinguishedName::Format:System.String(System.Boolean)__Set1",
+    "isVoid": false,
+    "hasException": true,
+    "exceptionType": "System.NullReferenceException",
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 2,
+    "setIndex": 0,
+    "subjectId": "System.Security.Cryptography.X509Certificates.X500DistinguishedName::EnumerateRelativeDistinguishedNames:System.Collections.Generic.IEnumerable\u003CSystem.Security.Cryptography.X509Certificates.X500RelativeDistinguishedName\u003E(System.Boolean)__Set0",
+    "isVoid": false,
+    "hasException": true,
+    "exceptionType": "System.NullReferenceException",
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 2,
+    "setIndex": 1,
+    "subjectId": "System.Security.Cryptography.X509Certificates.X500DistinguishedName::EnumerateRelativeDistinguishedNames:System.Collections.Generic.IEnumerable\u003CSystem.Security.Cryptography.X509Certificates.X500RelativeDistinguishedName\u003E(System.Boolean)__Set1",
+    "isVoid": false,
+    "hasException": true,
+    "exceptionType": "System.NullReferenceException",
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": null
+  }
+]

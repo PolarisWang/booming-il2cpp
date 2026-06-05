@@ -1,0 +1,36 @@
+{
+  "date": "2026-06-04",
+  "assemblyName": "System.Formats.Asn1",
+  "chunks": [
+    {
+      "slug": "global-ns",
+      "fact": {
+        "status": "no_results"
+      },
+      "benchmark": {
+        "status": "no_results"
+      },
+      "hotupdate": {
+        "status": "no_results"
+      }
+    },
+    {
+      "slug": "system-formats-asn1",
+      "fact": {
+        "passed": 37,
+        "total": 37,
+        "isShutdownAV": false,
+        "valueSuspicious": false,
+        "valueWarnings": 0,
+        "metaTotal": 77,
+        "metaBenchmarkCount": 77
+      },
+      "benchmark": {
+        "status": "no_results"
+      },
+      "hotupdate": {
+        "status": "no_results"
+      }
+    }
+  ]
+}

@@ -1,0 +1,3501 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Data.Common",
+  "chunkSlug": "system-data-common",
+  "totalMethods": 436,
+  "customEntryIndices": null,
+  "benchmarkMethodIndices": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29,
+    30,
+    31,
+    32,
+    33,
+    34,
+    35,
+    36,
+    37,
+    38,
+    39,
+    40,
+    41,
+    42,
+    43,
+    44,
+    45,
+    46,
+    47,
+    48,
+    49,
+    50,
+    51,
+    52,
+    53,
+    54,
+    55,
+    56,
+    57,
+    58,
+    59,
+    60,
+    61,
+    62,
+    63,
+    64,
+    65,
+    66,
+    67,
+    68,
+    69,
+    70,
+    71,
+    72,
+    73,
+    74,
+    75,
+    76,
+    77,
+    78,
+    79,
+    80,
+    81,
+    82,
+    83,
+    84,
+    85,
+    86,
+    87,
+    88,
+    89,
+    90,
+    91,
+    92,
+    93,
+    94,
+    95,
+    96,
+    97,
+    98,
+    99,
+    100,
+    101,
+    102,
+    103,
+    104,
+    105,
+    106,
+    107,
+    108,
+    109,
+    110,
+    111,
+    112,
+    113,
+    114,
+    115,
+    116,
+    117,
+    118,
+    119,
+    120,
+    121,
+    122,
+    123,
+    124,
+    125,
+    126,
+    127,
+    128,
+    129,
+    130,
+    131,
+    132,
+    133,
+    134,
+    135,
+    136,
+    137,
+    138,
+    139,
+    140,
+    141,
+    142,
+    143,
+    144,
+    145,
+    146,
+    147,
+    148,
+    149,
+    150,
+    151,
+    152,
+    153,
+    154,
+    155,
+    156,
+    157,
+    158,
+    159,
+    160,
+    161,
+    162,
+    163,
+    164,
+    165,
+    166,
+    167,
+    168,
+    169,
+    170,
+    171,
+    172,
+    173,
+    174,
+    175,
+    176,
+    177,
+    178,
+    179,
+    180,
+    181,
+    182,
+    183,
+    184,
+    185,
+    186,
+    187,
+    188,
+    189,
+    190,
+    191,
+    192,
+    193,
+    194,
+    195,
+    196,
+    197,
+    198,
+    199,
+    200,
+    201,
+    202,
+    203,
+    204,
+    205,
+    206,
+    207,
+    208,
+    209,
+    210,
+    211,
+    212,
+    213,
+    214,
+    215,
+    216,
+    217,
+    218,
+    219,
+    220,
+    221,
+    222,
+    223,
+    224,
+    225,
+    226,
+    227,
+    228,
+    229,
+    230,
+    231,
+    232,
+    233,
+    234,
+    235,
+    236,
+    237,
+    238,
+    239,
+    240,
+    241,
+    242,
+    243,
+    244,
+    245,
+    246,
+    247,
+    248,
+    249,
+    250,
+    251,
+    252,
+    253,
+    254,
+    255,
+    256,
+    257,
+    258,
+    259,
+    260,
+    261,
+    262,
+    263,
+    264,
+    265,
+    266,
+    267,
+    268,
+    269,
+    270,
+    271,
+    272,
+    273,
+    274,
+    275,
+    276,
+    277,
+    278,
+    279,
+    280,
+    281,
+    282,
+    283,
+    284,
+    285,
+    286,
+    287,
+    288,
+    289,
+    290,
+    291,
+    292,
+    293,
+    294,
+    295,
+    296,
+    297,
+    298,
+    299,
+    300,
+    301,
+    302,
+    303,
+    304,
+    305,
+    306,
+    307,
+    308,
+    309,
+    310,
+    311,
+    312,
+    313,
+    314,
+    315,
+    316,
+    317,
+    318,
+    319,
+    320,
+    321,
+    322,
+    323,
+    324,
+    325,
+    326,
+    327,
+    328,
+    329,
+    330,
+    331,
+    332,
+    333,
+    334,
+    335,
+    336,
+    337,
+    338,
+    339,
+    340,
+    341,
+    342,
+    343,
+    344,
+    345,
+    346,
+    347,
+    348,
+    349,
+    350,
+    351,
+    352,
+    353,
+    354,
+    355,
+    356,
+    357,
+    358,
+    359,
+    360,
+    361,
+    362,
+    363,
+    364,
+    365,
+    366,
+    367,
+    368,
+    369,
+    370,
+    371,
+    372,
+    373,
+    374,
+    375,
+    376,
+    377,
+    378,
+    379,
+    380,
+    381,
+    382,
+    383,
+    384,
+    385,
+    386,
+    387,
+    388,
+    389,
+    390,
+    391,
+    392,
+    393,
+    394,
+    395,
+    396,
+    397,
+    398,
+    399,
+    400,
+    401,
+    402,
+    403,
+    404,
+    405,
+    406,
+    407,
+    408,
+    409,
+    410,
+    411,
+    412,
+    413,
+    414,
+    415,
+    416,
+    417,
+    418,
+    419,
+    420,
+    421,
+    422,
+    423,
+    424,
+    425,
+    426,
+    427,
+    428,
+    429,
+    430,
+    431,
+    432,
+    433,
+    434,
+    435
+  ],
+  "hotupdateMethodIndices": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29,
+    30,
+    31,
+    32,
+    33,
+    34,
+    35,
+    36,
+    37,
+    38,
+    39,
+    40,
+    41,
+    42,
+    43,
+    44,
+    45,
+    46,
+    47,
+    48,
+    49,
+    50,
+    51,
+    52,
+    53,
+    54,
+    55,
+    56,
+    57,
+    58,
+    59,
+    60,
+    61,
+    62,
+    63,
+    64,
+    65,
+    66,
+    67,
+    68,
+    69,
+    70,
+    71,
+    72,
+    73,
+    74,
+    75,
+    76,
+    77,
+    78,
+    79,
+    80,
+    81,
+    82,
+    83,
+    84,
+    85,
+    86,
+    87,
+    88,
+    89,
+    90,
+    91,
+    92,
+    93,
+    94,
+    95,
+    96,
+    97,
+    98,
+    99,
+    100,
+    101,
+    102,
+    103,
+    104,
+    105,
+    106,
+    107,
+    108,
+    109,
+    110,
+    111,
+    112,
+    113,
+    114,
+    115,
+    116,
+    117,
+    118,
+    119,
+    120,
+    121,
+    122,
+    123,
+    124,
+    125,
+    126,
+    127,
+    128,
+    129,
+    130,
+    131,
+    132,
+    133,
+    134,
+    135,
+    136,
+    137,
+    138,
+    139,
+    140,
+    141,
+    142,
+    143,
+    144,
+    145,
+    146,
+    147,
+    148,
+    149,
+    150,
+    151,
+    152,
+    153,
+    154,
+    155,
+    156,
+    157,
+    158,
+    159,
+    160,
+    161,
+    162,
+    163,
+    164,
+    165,
+    166,
+    167,
+    168,
+    169,
+    170,
+    171,
+    172,
+    173,
+    174,
+    175,
+    176,
+    177,
+    178,
+    179,
+    180,
+    181,
+    182,
+    183,
+    184,
+    185,
+    186,
+    187,
+    188,
+    189,
+    190,
+    191,
+    192,
+    193,
+    194,
+    195,
+    196,
+    197,
+    198,
+    199,
+    200,
+    201,
+    202,
+    203,
+    204,
+    205,
+    206,
+    207,
+    208,
+    209,
+    210,
+    211,
+    212,
+    213,
+    214,
+    215,
+    216,
+    217,
+    218,
+    219,
+    220,
+    221,
+    222,
+    223,
+    224,
+    225,
+    226,
+    227,
+    228,
+    229,
+    230,
+    231,
+    232,
+    233,
+    234,
+    235,
+    236,
+    237,
+    238,
+    239,
+    240,
+    241,
+    242,
+    243,
+    244,
+    245,
+    246,
+    247,
+    248,
+    249,
+    250,
+    251,
+    252,
+    253,
+    254,
+    255,
+    256,
+    257,
+    258,
+    259,
+    260,
+    261,
+    262,
+    263,
+    264,
+    265,
+    266,
+    267,
+    268,
+    269,
+    270,
+    271,
+    272,
+    273,
+    274,
+    275,
+    276,
+    277,
+    278,
+    279,
+    280,
+    281,
+    282,
+    283,
+    284,
+    285,
+    286,
+    287,
+    288,
+    289,
+    290,
+    291,
+    292,
+    293,
+    294,
+    295,
+    296,
+    297,
+    298,
+    299,
+    300,
+    301,
+    302,
+    303,
+    304,
+    305,
+    306,
+    307,
+    308,
+    309,
+    310,
+    311,
+    312,
+    313,
+    314,
+    315,
+    316,
+    317,
+    318,
+    319,
+    320,
+    321,
+    322,
+    323,
+    324,
+    325,
+    326,
+    327,
+    328,
+    329,
+    330,
+    331,
+    332,
+    333,
+    334,
+    335,
+    336,
+    337,
+    338,
+    339,
+    340,
+    341,
+    342,
+    343,
+    344,
+    345,
+    346,
+    347,
+    348,
+    349,
+    350,
+    351,
+    352,
+    353,
+    354,
+    355,
+    356,
+    357,
+    358,
+    359,
+    360,
+    361,
+    362,
+    363,
+    364,
+    365,
+    366,
+    367,
+    368,
+    369,
+    370,
+    371,
+    372,
+    373,
+    374,
+    375,
+    376,
+    377,
+    378,
+    379,
+    380,
+    381,
+    382,
+    383,
+    384,
+    385,
+    386,
+    387,
+    388,
+    389,
+    390,
+    391,
+    392,
+    393,
+    394,
+    395,
+    396,
+    397,
+    398,
+    399,
+    400,
+    401,
+    402,
+    403,
+    404,
+    405,
+    406,
+    407,
+    408,
+    409,
+    410,
+    411,
+    412,
+    413,
+    414,
+    415,
+    416,
+    417,
+    418,
+    419,
+    420,
+    421,
+    422,
+    423,
+    424,
+    425,
+    426,
+    427,
+    428,
+    429,
+    430,
+    431,
+    432,
+    433,
+    434,
+    435
+  ],
+  "methods": [
+    {
+      "index": 0,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DataAdapter::ShouldSerializeAcceptChangesDuringFill:System.Boolean()",
+      "generatedMethodId": "ShouldSerializeAcceptChangesDuringFill_0__0"
+    },
+    {
+      "index": 1,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DataAdapter::ResetFillLoadOption:System.Void()",
+      "generatedMethodId": "ResetFillLoadOption_1__0"
+    },
+    {
+      "index": 2,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DataAdapter::ShouldSerializeFillLoadOption:System.Boolean()",
+      "generatedMethodId": "ShouldSerializeFillLoadOption_2__0"
+    },
+    {
+      "index": 3,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DataAdapter::FillSchema:System.Data.DataTable[](System.Data.DataSet,System.Data.SchemaType)",
+      "generatedMethodId": "FillSchema_3_DataSet_SchemaType_0"
+    },
+    {
+      "index": 4,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DataAdapter::Fill:System.Int32(System.Data.DataSet)",
+      "generatedMethodId": "Fill_4_DataSet_0"
+    },
+    {
+      "index": 5,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DataAdapter::GetFillParameters:System.Data.IDataParameter[]()",
+      "generatedMethodId": "GetFillParameters_5__0"
+    },
+    {
+      "index": 6,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DataAdapter::Update:System.Int32(System.Data.DataSet)",
+      "generatedMethodId": "Update_6_DataSet_0"
+    },
+    {
+      "index": 7,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DataColumnMapping::GetDataColumnBySchemaAction:System.Data.DataColumn(System.Data.DataTable,System.Type,System.Data.MissingSchemaAction)",
+      "generatedMethodId": "GetDataColumnBySchemaAction_0_DataTable_System_Type_MissingSchemaAction_0"
+    },
+    {
+      "index": 8,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DataColumnMapping::GetDataColumnBySchemaAction:System.Data.DataColumn(System.String,System.String,System.Data.DataTable,System.Type,System.Data.MissingSchemaAction)",
+      "generatedMethodId": "GetDataColumnBySchemaAction_1_string_string_DataTable_System_Type_MissingSchemaAction_0"
+    },
+    {
+      "index": 9,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DataColumnMapping::GetDataColumnBySchemaAction:System.Data.DataColumn(System.String,System.String,System.Data.DataTable,System.Type,System.Data.MissingSchemaAction)",
+      "generatedMethodId": "GetDataColumnBySchemaAction_1_string_string_DataTable_System_Type_MissingSchemaAction_1"
+    },
+    {
+      "index": 10,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DataColumnMapping::GetDataColumnBySchemaAction:System.Data.DataColumn(System.String,System.String,System.Data.DataTable,System.Type,System.Data.MissingSchemaAction)",
+      "generatedMethodId": "GetDataColumnBySchemaAction_1_string_string_DataTable_System_Type_MissingSchemaAction_2"
+    },
+    {
+      "index": 11,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DataColumnMappingCollection::Add:System.Int32(System.Object)",
+      "generatedMethodId": "Add_0_object_0"
+    },
+    {
+      "index": 12,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DataColumnMappingCollection::Add:System.Data.Common.DataColumnMapping(System.String,System.String)",
+      "generatedMethodId": "Add_1_string_string_0"
+    },
+    {
+      "index": 13,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DataColumnMappingCollection::Add:System.Data.Common.DataColumnMapping(System.String,System.String)",
+      "generatedMethodId": "Add_1_string_string_1"
+    },
+    {
+      "index": 14,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DataColumnMappingCollection::Add:System.Data.Common.DataColumnMapping(System.String,System.String)",
+      "generatedMethodId": "Add_1_string_string_2"
+    },
+    {
+      "index": 15,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DataColumnMappingCollection::AddRange:System.Void(System.Data.Common.DataColumnMapping[])",
+      "generatedMethodId": "AddRange_2_DataColumnMapping_0"
+    },
+    {
+      "index": 16,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DataColumnMappingCollection::AddRange:System.Void(System.Data.Common.DataColumnMapping[])",
+      "generatedMethodId": "AddRange_2_DataColumnMapping_1"
+    },
+    {
+      "index": 17,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DataColumnMappingCollection::AddRange:System.Void(System.Data.Common.DataColumnMapping[])",
+      "generatedMethodId": "AddRange_2_DataColumnMapping_2"
+    },
+    {
+      "index": 18,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DataColumnMappingCollection::AddRange:System.Void(System.Array)",
+      "generatedMethodId": "AddRange_3_System_Array_0"
+    },
+    {
+      "index": 19,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DataColumnMappingCollection::Clear:System.Void()",
+      "generatedMethodId": "Clear_4__0"
+    },
+    {
+      "index": 20,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DataColumnMappingCollection::Contains:System.Boolean(System.String)",
+      "generatedMethodId": "Contains_5_string_0"
+    },
+    {
+      "index": 21,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DataColumnMappingCollection::Contains:System.Boolean(System.String)",
+      "generatedMethodId": "Contains_5_string_1"
+    },
+    {
+      "index": 22,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DataColumnMappingCollection::Contains:System.Boolean(System.Object)",
+      "generatedMethodId": "Contains_6_object_0"
+    },
+    {
+      "index": 23,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DataColumnMappingCollection::CopyTo:System.Void(System.Array,System.Int32)",
+      "generatedMethodId": "CopyTo_7_System_Array_int_0"
+    },
+    {
+      "index": 24,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DataColumnMappingCollection::CopyTo:System.Void(System.Array,System.Int32)",
+      "generatedMethodId": "CopyTo_7_System_Array_int_1"
+    },
+    {
+      "index": 25,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DataColumnMappingCollection::GetByDataSetColumn:System.Data.Common.DataColumnMapping(System.String)",
+      "generatedMethodId": "GetByDataSetColumn_8_string_0"
+    },
+    {
+      "index": 26,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DataColumnMappingCollection::GetByDataSetColumn:System.Data.Common.DataColumnMapping(System.String)",
+      "generatedMethodId": "GetByDataSetColumn_8_string_1"
+    },
+    {
+      "index": 27,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DataColumnMappingCollection::GetEnumerator:System.Collections.IEnumerator()",
+      "generatedMethodId": "GetEnumerator_9__0"
+    },
+    {
+      "index": 28,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DataColumnMappingCollection::IndexOf:System.Int32(System.Object)",
+      "generatedMethodId": "IndexOf_10_object_0"
+    },
+    {
+      "index": 29,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DataColumnMappingCollection::IndexOf:System.Int32(System.String)",
+      "generatedMethodId": "IndexOf_11_string_0"
+    },
+    {
+      "index": 30,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DataColumnMappingCollection::IndexOf:System.Int32(System.String)",
+      "generatedMethodId": "IndexOf_11_string_1"
+    },
+    {
+      "index": 31,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DataColumnMappingCollection::IndexOfDataSetColumn:System.Int32(System.String)",
+      "generatedMethodId": "IndexOfDataSetColumn_12_string_0"
+    },
+    {
+      "index": 32,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DataColumnMappingCollection::IndexOfDataSetColumn:System.Int32(System.String)",
+      "generatedMethodId": "IndexOfDataSetColumn_12_string_1"
+    },
+    {
+      "index": 33,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DataColumnMappingCollection::Insert:System.Void(System.Int32,System.Object)",
+      "generatedMethodId": "Insert_13_int_object_0"
+    },
+    {
+      "index": 34,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DataColumnMappingCollection::Insert:System.Void(System.Int32,System.Object)",
+      "generatedMethodId": "Insert_13_int_object_1"
+    },
+    {
+      "index": 35,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DataColumnMappingCollection::Insert:System.Void(System.Int32,System.Data.Common.DataColumnMapping)",
+      "generatedMethodId": "Insert_14_int_DataColumnMapping_0"
+    },
+    {
+      "index": 36,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DataColumnMappingCollection::Insert:System.Void(System.Int32,System.Data.Common.DataColumnMapping)",
+      "generatedMethodId": "Insert_14_int_DataColumnMapping_1"
+    },
+    {
+      "index": 37,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DataColumnMappingCollection::RemoveAt:System.Void(System.Int32)",
+      "generatedMethodId": "RemoveAt_15_int_0"
+    },
+    {
+      "index": 38,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DataColumnMappingCollection::RemoveAt:System.Void(System.Int32)",
+      "generatedMethodId": "RemoveAt_15_int_1"
+    },
+    {
+      "index": 39,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DataColumnMappingCollection::RemoveAt:System.Void(System.String)",
+      "generatedMethodId": "RemoveAt_16_string_0"
+    },
+    {
+      "index": 40,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DataColumnMappingCollection::RemoveAt:System.Void(System.String)",
+      "generatedMethodId": "RemoveAt_16_string_1"
+    },
+    {
+      "index": 41,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DataColumnMappingCollection::Remove:System.Void(System.Object)",
+      "generatedMethodId": "Remove_17_object_0"
+    },
+    {
+      "index": 42,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DataColumnMappingCollection::Remove:System.Void(System.Data.Common.DataColumnMapping)",
+      "generatedMethodId": "Remove_18_DataColumnMapping_0"
+    },
+    {
+      "index": 43,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DataColumnMappingCollection::GetDataColumn:System.Data.DataColumn(System.Data.Common.DataColumnMappingCollection,System.String,System.Type,System.Data.DataTable,System.Data.MissingMappingAction,System.Data.MissingSchemaAction)",
+      "generatedMethodId": "GetDataColumn_19_DataColumnMappingCollection_string_System_Type_DataTable_MissingMappingAction_MissingSchemaAction_0"
+    },
+    {
+      "index": 44,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DataColumnMappingCollection::GetDataColumn:System.Data.DataColumn(System.Data.Common.DataColumnMappingCollection,System.String,System.Type,System.Data.DataTable,System.Data.MissingMappingAction,System.Data.MissingSchemaAction)",
+      "generatedMethodId": "GetDataColumn_19_DataColumnMappingCollection_string_System_Type_DataTable_MissingMappingAction_MissingSchemaAction_1"
+    },
+    {
+      "index": 45,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DataColumnMappingCollection::GetColumnMappingBySchemaAction:System.Data.Common.DataColumnMapping(System.Data.Common.DataColumnMappingCollection,System.String,System.Data.MissingMappingAction)",
+      "generatedMethodId": "GetColumnMappingBySchemaAction_20_DataColumnMappingCollection_string_MissingMappingAction_0"
+    },
+    {
+      "index": 46,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DataColumnMappingCollection::GetColumnMappingBySchemaAction:System.Data.Common.DataColumnMapping(System.Data.Common.DataColumnMappingCollection,System.String,System.Data.MissingMappingAction)",
+      "generatedMethodId": "GetColumnMappingBySchemaAction_20_DataColumnMappingCollection_string_MissingMappingAction_1"
+    },
+    {
+      "index": 47,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DataTableMapping::GetDataColumn:System.Data.DataColumn(System.String,System.Type,System.Data.DataTable,System.Data.MissingMappingAction,System.Data.MissingSchemaAction)",
+      "generatedMethodId": "GetDataColumn_0_string_System_Type_DataTable_MissingMappingAction_MissingSchemaAction_0"
+    },
+    {
+      "index": 48,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DataTableMapping::GetDataColumn:System.Data.DataColumn(System.String,System.Type,System.Data.DataTable,System.Data.MissingMappingAction,System.Data.MissingSchemaAction)",
+      "generatedMethodId": "GetDataColumn_0_string_System_Type_DataTable_MissingMappingAction_MissingSchemaAction_1"
+    },
+    {
+      "index": 49,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DataTableMapping::GetColumnMappingBySchemaAction:System.Data.Common.DataColumnMapping(System.String,System.Data.MissingMappingAction)",
+      "generatedMethodId": "GetColumnMappingBySchemaAction_1_string_MissingMappingAction_0"
+    },
+    {
+      "index": 50,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DataTableMapping::GetColumnMappingBySchemaAction:System.Data.Common.DataColumnMapping(System.String,System.Data.MissingMappingAction)",
+      "generatedMethodId": "GetColumnMappingBySchemaAction_1_string_MissingMappingAction_1"
+    },
+    {
+      "index": 51,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DataTableMapping::GetDataTableBySchemaAction:System.Data.DataTable(System.Data.DataSet,System.Data.MissingSchemaAction)",
+      "generatedMethodId": "GetDataTableBySchemaAction_2_DataSet_MissingSchemaAction_0"
+    },
+    {
+      "index": 52,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DataTableMappingCollection::Add:System.Int32(System.Object)",
+      "generatedMethodId": "Add_0_object_0"
+    },
+    {
+      "index": 53,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DataTableMappingCollection::AddRange:System.Void(System.Data.Common.DataTableMapping[])",
+      "generatedMethodId": "AddRange_1_DataTableMapping_0"
+    },
+    {
+      "index": 54,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DataTableMappingCollection::AddRange:System.Void(System.Data.Common.DataTableMapping[])",
+      "generatedMethodId": "AddRange_1_DataTableMapping_1"
+    },
+    {
+      "index": 55,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DataTableMappingCollection::AddRange:System.Void(System.Data.Common.DataTableMapping[])",
+      "generatedMethodId": "AddRange_1_DataTableMapping_2"
+    },
+    {
+      "index": 56,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DataTableMappingCollection::AddRange:System.Void(System.Array)",
+      "generatedMethodId": "AddRange_2_System_Array_0"
+    },
+    {
+      "index": 57,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DataTableMappingCollection::Add:System.Data.Common.DataTableMapping(System.String,System.String)",
+      "generatedMethodId": "Add_3_string_string_0"
+    },
+    {
+      "index": 58,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DataTableMappingCollection::Add:System.Data.Common.DataTableMapping(System.String,System.String)",
+      "generatedMethodId": "Add_3_string_string_1"
+    },
+    {
+      "index": 59,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DataTableMappingCollection::Add:System.Data.Common.DataTableMapping(System.String,System.String)",
+      "generatedMethodId": "Add_3_string_string_2"
+    },
+    {
+      "index": 60,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DataTableMappingCollection::Clear:System.Void()",
+      "generatedMethodId": "Clear_4__0"
+    },
+    {
+      "index": 61,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DataTableMappingCollection::Contains:System.Boolean(System.String)",
+      "generatedMethodId": "Contains_5_string_0"
+    },
+    {
+      "index": 62,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DataTableMappingCollection::Contains:System.Boolean(System.String)",
+      "generatedMethodId": "Contains_5_string_1"
+    },
+    {
+      "index": 63,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DataTableMappingCollection::Contains:System.Boolean(System.Object)",
+      "generatedMethodId": "Contains_6_object_0"
+    },
+    {
+      "index": 64,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DataTableMappingCollection::CopyTo:System.Void(System.Array,System.Int32)",
+      "generatedMethodId": "CopyTo_7_System_Array_int_0"
+    },
+    {
+      "index": 65,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DataTableMappingCollection::CopyTo:System.Void(System.Array,System.Int32)",
+      "generatedMethodId": "CopyTo_7_System_Array_int_1"
+    },
+    {
+      "index": 66,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DataTableMappingCollection::GetByDataSetTable:System.Data.Common.DataTableMapping(System.String)",
+      "generatedMethodId": "GetByDataSetTable_8_string_0"
+    },
+    {
+      "index": 67,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DataTableMappingCollection::GetByDataSetTable:System.Data.Common.DataTableMapping(System.String)",
+      "generatedMethodId": "GetByDataSetTable_8_string_1"
+    },
+    {
+      "index": 68,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DataTableMappingCollection::GetEnumerator:System.Collections.IEnumerator()",
+      "generatedMethodId": "GetEnumerator_9__0"
+    },
+    {
+      "index": 69,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DataTableMappingCollection::IndexOf:System.Int32(System.Object)",
+      "generatedMethodId": "IndexOf_10_object_0"
+    },
+    {
+      "index": 70,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DataTableMappingCollection::IndexOf:System.Int32(System.String)",
+      "generatedMethodId": "IndexOf_11_string_0"
+    },
+    {
+      "index": 71,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DataTableMappingCollection::IndexOf:System.Int32(System.String)",
+      "generatedMethodId": "IndexOf_11_string_1"
+    },
+    {
+      "index": 72,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DataTableMappingCollection::IndexOfDataSetTable:System.Int32(System.String)",
+      "generatedMethodId": "IndexOfDataSetTable_12_string_0"
+    },
+    {
+      "index": 73,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DataTableMappingCollection::IndexOfDataSetTable:System.Int32(System.String)",
+      "generatedMethodId": "IndexOfDataSetTable_12_string_1"
+    },
+    {
+      "index": 74,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DataTableMappingCollection::Insert:System.Void(System.Int32,System.Object)",
+      "generatedMethodId": "Insert_13_int_object_0"
+    },
+    {
+      "index": 75,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DataTableMappingCollection::Insert:System.Void(System.Int32,System.Object)",
+      "generatedMethodId": "Insert_13_int_object_1"
+    },
+    {
+      "index": 76,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DataTableMappingCollection::Insert:System.Void(System.Int32,System.Data.Common.DataTableMapping)",
+      "generatedMethodId": "Insert_14_int_DataTableMapping_0"
+    },
+    {
+      "index": 77,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DataTableMappingCollection::Insert:System.Void(System.Int32,System.Data.Common.DataTableMapping)",
+      "generatedMethodId": "Insert_14_int_DataTableMapping_1"
+    },
+    {
+      "index": 78,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DataTableMappingCollection::RemoveAt:System.Void(System.Int32)",
+      "generatedMethodId": "RemoveAt_15_int_0"
+    },
+    {
+      "index": 79,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DataTableMappingCollection::RemoveAt:System.Void(System.Int32)",
+      "generatedMethodId": "RemoveAt_15_int_1"
+    },
+    {
+      "index": 80,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DataTableMappingCollection::RemoveAt:System.Void(System.String)",
+      "generatedMethodId": "RemoveAt_16_string_0"
+    },
+    {
+      "index": 81,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DataTableMappingCollection::RemoveAt:System.Void(System.String)",
+      "generatedMethodId": "RemoveAt_16_string_1"
+    },
+    {
+      "index": 82,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DataTableMappingCollection::Remove:System.Void(System.Object)",
+      "generatedMethodId": "Remove_17_object_0"
+    },
+    {
+      "index": 83,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DataTableMappingCollection::Remove:System.Void(System.Data.Common.DataTableMapping)",
+      "generatedMethodId": "Remove_18_DataTableMapping_0"
+    },
+    {
+      "index": 84,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DataTableMappingCollection::GetTableMappingBySchemaAction:System.Data.Common.DataTableMapping(System.Data.Common.DataTableMappingCollection,System.String,System.String,System.Data.MissingMappingAction)",
+      "generatedMethodId": "GetTableMappingBySchemaAction_19_DataTableMappingCollection_string_string_MissingMappingAction_0"
+    },
+    {
+      "index": 85,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DataTableMappingCollection::GetTableMappingBySchemaAction:System.Data.Common.DataTableMapping(System.Data.Common.DataTableMappingCollection,System.String,System.String,System.Data.MissingMappingAction)",
+      "generatedMethodId": "GetTableMappingBySchemaAction_19_DataTableMappingCollection_string_string_MissingMappingAction_1"
+    },
+    {
+      "index": 86,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DataTableMappingCollection::GetTableMappingBySchemaAction:System.Data.Common.DataTableMapping(System.Data.Common.DataTableMappingCollection,System.String,System.String,System.Data.MissingMappingAction)",
+      "generatedMethodId": "GetTableMappingBySchemaAction_19_DataTableMappingCollection_string_string_MissingMappingAction_2"
+    },
+    {
+      "index": 87,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbBatch::ExecuteReader:System.Data.Common.DbDataReader(System.Data.CommandBehavior)",
+      "generatedMethodId": "ExecuteReader_0_CommandBehavior_0"
+    },
+    {
+      "index": 88,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbBatch::ExecuteReaderAsync:System.Threading.Tasks.Task\u003CSystem.Data.Common.DbDataReader\u003E(System.Threading.CancellationToken)",
+      "generatedMethodId": "ExecuteReaderAsync_1_CancellationToken_0"
+    },
+    {
+      "index": 89,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbBatch::ExecuteReaderAsync:System.Threading.Tasks.Task\u003CSystem.Data.Common.DbDataReader\u003E(System.Data.CommandBehavior,System.Threading.CancellationToken)",
+      "generatedMethodId": "ExecuteReaderAsync_2_CommandBehavior_CancellationToken_0"
+    },
+    {
+      "index": 90,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbBatch::ExecuteNonQuery:System.Int32()",
+      "generatedMethodId": "ExecuteNonQuery_3__0"
+    },
+    {
+      "index": 91,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbBatch::ExecuteNonQueryAsync:System.Threading.Tasks.Task\u003CSystem.Int32\u003E(System.Threading.CancellationToken)",
+      "generatedMethodId": "ExecuteNonQueryAsync_4_CancellationToken_0"
+    },
+    {
+      "index": 92,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbBatch::ExecuteScalar:System.Object()",
+      "generatedMethodId": "ExecuteScalar_5__0"
+    },
+    {
+      "index": 93,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbBatch::ExecuteScalarAsync:System.Threading.Tasks.Task\u003CSystem.Object\u003E(System.Threading.CancellationToken)",
+      "generatedMethodId": "ExecuteScalarAsync_6_CancellationToken_0"
+    },
+    {
+      "index": 94,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbBatch::Prepare:System.Void()",
+      "generatedMethodId": "Prepare_7__0"
+    },
+    {
+      "index": 95,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbBatch::PrepareAsync:System.Threading.Tasks.Task(System.Threading.CancellationToken)",
+      "generatedMethodId": "PrepareAsync_8_CancellationToken_0"
+    },
+    {
+      "index": 96,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbBatch::Cancel:System.Void()",
+      "generatedMethodId": "Cancel_9__0"
+    },
+    {
+      "index": 97,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbBatch::CreateBatchCommand:System.Data.Common.DbBatchCommand()",
+      "generatedMethodId": "CreateBatchCommand_10__0"
+    },
+    {
+      "index": 98,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbBatch::Dispose:System.Void()",
+      "generatedMethodId": "Dispose_11__0"
+    },
+    {
+      "index": 99,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbBatch::DisposeAsync:System.Threading.Tasks.ValueTask()",
+      "generatedMethodId": "DisposeAsync_12__0"
+    },
+    {
+      "index": 100,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbBatchCommand::CreateParameter:System.Data.Common.DbParameter()",
+      "generatedMethodId": "CreateParameter_0__0"
+    },
+    {
+      "index": 101,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbBatchCommandCollection::GetEnumerator:System.Collections.Generic.IEnumerator\u003CSystem.Data.Common.DbBatchCommand\u003E()",
+      "generatedMethodId": "GetEnumerator_0__0"
+    },
+    {
+      "index": 102,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbBatchCommandCollection::Add:System.Void(System.Data.Common.DbBatchCommand)",
+      "generatedMethodId": "Add_1_DbBatchCommand_0"
+    },
+    {
+      "index": 103,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbBatchCommandCollection::Clear:System.Void()",
+      "generatedMethodId": "Clear_2__0"
+    },
+    {
+      "index": 104,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbBatchCommandCollection::Contains:System.Boolean(System.Data.Common.DbBatchCommand)",
+      "generatedMethodId": "Contains_3_DbBatchCommand_0"
+    },
+    {
+      "index": 105,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbBatchCommandCollection::Remove:System.Boolean(System.Data.Common.DbBatchCommand)",
+      "generatedMethodId": "Remove_4_DbBatchCommand_0"
+    },
+    {
+      "index": 106,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbBatchCommandCollection::IndexOf:System.Int32(System.Data.Common.DbBatchCommand)",
+      "generatedMethodId": "IndexOf_5_DbBatchCommand_0"
+    },
+    {
+      "index": 107,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbBatchCommandCollection::Insert:System.Void(System.Int32,System.Data.Common.DbBatchCommand)",
+      "generatedMethodId": "Insert_6_int_DbBatchCommand_0"
+    },
+    {
+      "index": 108,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbBatchCommandCollection::Insert:System.Void(System.Int32,System.Data.Common.DbBatchCommand)",
+      "generatedMethodId": "Insert_6_int_DbBatchCommand_1"
+    },
+    {
+      "index": 109,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbBatchCommandCollection::RemoveAt:System.Void(System.Int32)",
+      "generatedMethodId": "RemoveAt_7_int_0"
+    },
+    {
+      "index": 110,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbBatchCommandCollection::RemoveAt:System.Void(System.Int32)",
+      "generatedMethodId": "RemoveAt_7_int_1"
+    },
+    {
+      "index": 111,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbCommand::Cancel:System.Void()",
+      "generatedMethodId": "Cancel_0__0"
+    },
+    {
+      "index": 112,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbCommand::CreateParameter:System.Data.Common.DbParameter()",
+      "generatedMethodId": "CreateParameter_1__0"
+    },
+    {
+      "index": 113,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbCommand::ExecuteNonQuery:System.Int32()",
+      "generatedMethodId": "ExecuteNonQuery_2__0"
+    },
+    {
+      "index": 114,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbCommand::ExecuteReader:System.Data.Common.DbDataReader()",
+      "generatedMethodId": "ExecuteReader_3__0"
+    },
+    {
+      "index": 115,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbCommand::ExecuteReader:System.Data.Common.DbDataReader(System.Data.CommandBehavior)",
+      "generatedMethodId": "ExecuteReader_4_CommandBehavior_0"
+    },
+    {
+      "index": 116,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbCommand::ExecuteNonQueryAsync:System.Threading.Tasks.Task\u003CSystem.Int32\u003E()",
+      "generatedMethodId": "ExecuteNonQueryAsync_5__0"
+    },
+    {
+      "index": 117,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbCommand::ExecuteNonQueryAsync:System.Threading.Tasks.Task\u003CSystem.Int32\u003E(System.Threading.CancellationToken)",
+      "generatedMethodId": "ExecuteNonQueryAsync_6_CancellationToken_0"
+    },
+    {
+      "index": 118,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbCommand::ExecuteReaderAsync:System.Threading.Tasks.Task\u003CSystem.Data.Common.DbDataReader\u003E()",
+      "generatedMethodId": "ExecuteReaderAsync_7__0"
+    },
+    {
+      "index": 119,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbCommand::ExecuteReaderAsync:System.Threading.Tasks.Task\u003CSystem.Data.Common.DbDataReader\u003E(System.Threading.CancellationToken)",
+      "generatedMethodId": "ExecuteReaderAsync_8_CancellationToken_0"
+    },
+    {
+      "index": 120,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbCommand::ExecuteReaderAsync:System.Threading.Tasks.Task\u003CSystem.Data.Common.DbDataReader\u003E(System.Data.CommandBehavior)",
+      "generatedMethodId": "ExecuteReaderAsync_9_CommandBehavior_0"
+    },
+    {
+      "index": 121,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbCommand::ExecuteReaderAsync:System.Threading.Tasks.Task\u003CSystem.Data.Common.DbDataReader\u003E(System.Data.CommandBehavior,System.Threading.CancellationToken)",
+      "generatedMethodId": "ExecuteReaderAsync_10_CommandBehavior_CancellationToken_0"
+    },
+    {
+      "index": 122,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbCommand::ExecuteScalarAsync:System.Threading.Tasks.Task\u003CSystem.Object\u003E()",
+      "generatedMethodId": "ExecuteScalarAsync_11__0"
+    },
+    {
+      "index": 123,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbCommand::ExecuteScalarAsync:System.Threading.Tasks.Task\u003CSystem.Object\u003E(System.Threading.CancellationToken)",
+      "generatedMethodId": "ExecuteScalarAsync_12_CancellationToken_0"
+    },
+    {
+      "index": 124,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbCommand::ExecuteScalar:System.Object()",
+      "generatedMethodId": "ExecuteScalar_13__0"
+    },
+    {
+      "index": 125,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbCommand::Prepare:System.Void()",
+      "generatedMethodId": "Prepare_14__0"
+    },
+    {
+      "index": 126,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbCommand::PrepareAsync:System.Threading.Tasks.Task(System.Threading.CancellationToken)",
+      "generatedMethodId": "PrepareAsync_15_CancellationToken_0"
+    },
+    {
+      "index": 127,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbCommand::DisposeAsync:System.Threading.Tasks.ValueTask()",
+      "generatedMethodId": "DisposeAsync_16__0"
+    },
+    {
+      "index": 128,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbCommandBuilder::GetInsertCommand:System.Data.Common.DbCommand()",
+      "generatedMethodId": "GetInsertCommand_0__0"
+    },
+    {
+      "index": 129,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbCommandBuilder::GetInsertCommand:System.Data.Common.DbCommand(System.Boolean)",
+      "generatedMethodId": "GetInsertCommand_1_bool_0"
+    },
+    {
+      "index": 130,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbCommandBuilder::GetInsertCommand:System.Data.Common.DbCommand(System.Boolean)",
+      "generatedMethodId": "GetInsertCommand_1_bool_1"
+    },
+    {
+      "index": 131,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbCommandBuilder::GetUpdateCommand:System.Data.Common.DbCommand()",
+      "generatedMethodId": "GetUpdateCommand_2__0"
+    },
+    {
+      "index": 132,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbCommandBuilder::GetUpdateCommand:System.Data.Common.DbCommand(System.Boolean)",
+      "generatedMethodId": "GetUpdateCommand_3_bool_0"
+    },
+    {
+      "index": 133,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbCommandBuilder::GetUpdateCommand:System.Data.Common.DbCommand(System.Boolean)",
+      "generatedMethodId": "GetUpdateCommand_3_bool_1"
+    },
+    {
+      "index": 134,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbCommandBuilder::GetDeleteCommand:System.Data.Common.DbCommand()",
+      "generatedMethodId": "GetDeleteCommand_4__0"
+    },
+    {
+      "index": 135,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbCommandBuilder::GetDeleteCommand:System.Data.Common.DbCommand(System.Boolean)",
+      "generatedMethodId": "GetDeleteCommand_5_bool_0"
+    },
+    {
+      "index": 136,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbCommandBuilder::GetDeleteCommand:System.Data.Common.DbCommand(System.Boolean)",
+      "generatedMethodId": "GetDeleteCommand_5_bool_1"
+    },
+    {
+      "index": 137,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbCommandBuilder::QuoteIdentifier:System.String(System.String)",
+      "generatedMethodId": "QuoteIdentifier_6_string_0"
+    },
+    {
+      "index": 138,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbCommandBuilder::QuoteIdentifier:System.String(System.String)",
+      "generatedMethodId": "QuoteIdentifier_6_string_1"
+    },
+    {
+      "index": 139,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbCommandBuilder::RefreshSchema:System.Void()",
+      "generatedMethodId": "RefreshSchema_7__0"
+    },
+    {
+      "index": 140,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbCommandBuilder::UnquoteIdentifier:System.String(System.String)",
+      "generatedMethodId": "UnquoteIdentifier_8_string_0"
+    },
+    {
+      "index": 141,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbCommandBuilder::UnquoteIdentifier:System.String(System.String)",
+      "generatedMethodId": "UnquoteIdentifier_8_string_1"
+    },
+    {
+      "index": 142,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbConnection::BeginTransaction:System.Data.Common.DbTransaction()",
+      "generatedMethodId": "BeginTransaction_0__0"
+    },
+    {
+      "index": 143,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbConnection::BeginTransaction:System.Data.Common.DbTransaction(System.Data.IsolationLevel)",
+      "generatedMethodId": "BeginTransaction_1_IsolationLevel_0"
+    },
+    {
+      "index": 144,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbConnection::BeginTransactionAsync:System.Threading.Tasks.ValueTask\u003CSystem.Data.Common.DbTransaction\u003E(System.Threading.CancellationToken)",
+      "generatedMethodId": "BeginTransactionAsync_2_CancellationToken_0"
+    },
+    {
+      "index": 145,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbConnection::BeginTransactionAsync:System.Threading.Tasks.ValueTask\u003CSystem.Data.Common.DbTransaction\u003E(System.Data.IsolationLevel,System.Threading.CancellationToken)",
+      "generatedMethodId": "BeginTransactionAsync_3_IsolationLevel_CancellationToken_0"
+    },
+    {
+      "index": 146,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbConnection::Close:System.Void()",
+      "generatedMethodId": "Close_4__0"
+    },
+    {
+      "index": 147,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbConnection::CloseAsync:System.Threading.Tasks.Task()",
+      "generatedMethodId": "CloseAsync_5__0"
+    },
+    {
+      "index": 148,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbConnection::DisposeAsync:System.Threading.Tasks.ValueTask()",
+      "generatedMethodId": "DisposeAsync_6__0"
+    },
+    {
+      "index": 149,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbConnection::ChangeDatabase:System.Void(System.String)",
+      "generatedMethodId": "ChangeDatabase_7_string_0"
+    },
+    {
+      "index": 150,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbConnection::ChangeDatabase:System.Void(System.String)",
+      "generatedMethodId": "ChangeDatabase_7_string_1"
+    },
+    {
+      "index": 151,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbConnection::ChangeDatabaseAsync:System.Threading.Tasks.Task(System.String,System.Threading.CancellationToken)",
+      "generatedMethodId": "ChangeDatabaseAsync_8_string_CancellationToken_0"
+    },
+    {
+      "index": 152,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbConnection::ChangeDatabaseAsync:System.Threading.Tasks.Task(System.String,System.Threading.CancellationToken)",
+      "generatedMethodId": "ChangeDatabaseAsync_8_string_CancellationToken_1"
+    },
+    {
+      "index": 153,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbConnection::CreateBatch:System.Data.Common.DbBatch()",
+      "generatedMethodId": "CreateBatch_9__0"
+    },
+    {
+      "index": 154,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbConnection::CreateCommand:System.Data.Common.DbCommand()",
+      "generatedMethodId": "CreateCommand_10__0"
+    },
+    {
+      "index": 155,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbConnection::EnlistTransaction:System.Void(System.Transactions.Transaction)",
+      "generatedMethodId": "EnlistTransaction_11_Transaction_0"
+    },
+    {
+      "index": 156,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbConnection::GetSchema:System.Data.DataTable()",
+      "generatedMethodId": "GetSchema_12__0"
+    },
+    {
+      "index": 157,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbConnection::GetSchema:System.Data.DataTable(System.String)",
+      "generatedMethodId": "GetSchema_13_string_0"
+    },
+    {
+      "index": 158,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbConnection::GetSchema:System.Data.DataTable(System.String)",
+      "generatedMethodId": "GetSchema_13_string_1"
+    },
+    {
+      "index": 159,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbConnection::GetSchema:System.Data.DataTable(System.String,System.String[])",
+      "generatedMethodId": "GetSchema_14_string_System_String_0"
+    },
+    {
+      "index": 160,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbConnection::GetSchema:System.Data.DataTable(System.String,System.String[])",
+      "generatedMethodId": "GetSchema_14_string_System_String_1"
+    },
+    {
+      "index": 161,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbConnection::GetSchema:System.Data.DataTable(System.String,System.String[])",
+      "generatedMethodId": "GetSchema_14_string_System_String_2"
+    },
+    {
+      "index": 162,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbConnection::GetSchema:System.Data.DataTable(System.String,System.String[])",
+      "generatedMethodId": "GetSchema_14_string_System_String_3"
+    },
+    {
+      "index": 163,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbConnection::GetSchemaAsync:System.Threading.Tasks.Task\u003CSystem.Data.DataTable\u003E(System.Threading.CancellationToken)",
+      "generatedMethodId": "GetSchemaAsync_15_CancellationToken_0"
+    },
+    {
+      "index": 164,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbConnection::GetSchemaAsync:System.Threading.Tasks.Task\u003CSystem.Data.DataTable\u003E(System.String,System.Threading.CancellationToken)",
+      "generatedMethodId": "GetSchemaAsync_16_string_CancellationToken_0"
+    },
+    {
+      "index": 165,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbConnection::GetSchemaAsync:System.Threading.Tasks.Task\u003CSystem.Data.DataTable\u003E(System.String,System.Threading.CancellationToken)",
+      "generatedMethodId": "GetSchemaAsync_16_string_CancellationToken_1"
+    },
+    {
+      "index": 166,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbConnection::GetSchemaAsync:System.Threading.Tasks.Task\u003CSystem.Data.DataTable\u003E(System.String,System.String[],System.Threading.CancellationToken)",
+      "generatedMethodId": "GetSchemaAsync_17_string_System_String_CancellationToken_0"
+    },
+    {
+      "index": 167,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbConnection::GetSchemaAsync:System.Threading.Tasks.Task\u003CSystem.Data.DataTable\u003E(System.String,System.String[],System.Threading.CancellationToken)",
+      "generatedMethodId": "GetSchemaAsync_17_string_System_String_CancellationToken_1"
+    },
+    {
+      "index": 168,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbConnection::GetSchemaAsync:System.Threading.Tasks.Task\u003CSystem.Data.DataTable\u003E(System.String,System.String[],System.Threading.CancellationToken)",
+      "generatedMethodId": "GetSchemaAsync_17_string_System_String_CancellationToken_2"
+    },
+    {
+      "index": 169,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbConnection::GetSchemaAsync:System.Threading.Tasks.Task\u003CSystem.Data.DataTable\u003E(System.String,System.String[],System.Threading.CancellationToken)",
+      "generatedMethodId": "GetSchemaAsync_17_string_System_String_CancellationToken_3"
+    },
+    {
+      "index": 170,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbConnection::Open:System.Void()",
+      "generatedMethodId": "Open_18__0"
+    },
+    {
+      "index": 171,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbConnection::OpenAsync:System.Threading.Tasks.Task()",
+      "generatedMethodId": "OpenAsync_19__0"
+    },
+    {
+      "index": 172,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbConnection::OpenAsync:System.Threading.Tasks.Task(System.Threading.CancellationToken)",
+      "generatedMethodId": "OpenAsync_20_CancellationToken_0"
+    },
+    {
+      "index": 173,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbConnectionStringBuilder::Add:System.Void(System.String,System.Object)",
+      "generatedMethodId": "Add_0_string_object_0"
+    },
+    {
+      "index": 174,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbConnectionStringBuilder::Add:System.Void(System.String,System.Object)",
+      "generatedMethodId": "Add_0_string_object_1"
+    },
+    {
+      "index": 175,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbConnectionStringBuilder::AppendKeyValuePair:System.Void(System.Text.StringBuilder,System.String,System.String)",
+      "generatedMethodId": "AppendKeyValuePair_1_StringBuilder_string_string_0"
+    },
+    {
+      "index": 176,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbConnectionStringBuilder::AppendKeyValuePair:System.Void(System.Text.StringBuilder,System.String,System.String)",
+      "generatedMethodId": "AppendKeyValuePair_1_StringBuilder_string_string_1"
+    },
+    {
+      "index": 177,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbConnectionStringBuilder::AppendKeyValuePair:System.Void(System.Text.StringBuilder,System.String,System.String)",
+      "generatedMethodId": "AppendKeyValuePair_1_StringBuilder_string_string_2"
+    },
+    {
+      "index": 178,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbConnectionStringBuilder::AppendKeyValuePair:System.Void(System.Text.StringBuilder,System.String,System.String,System.Boolean)",
+      "generatedMethodId": "AppendKeyValuePair_2_StringBuilder_string_string_bool_0"
+    },
+    {
+      "index": 179,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbConnectionStringBuilder::AppendKeyValuePair:System.Void(System.Text.StringBuilder,System.String,System.String,System.Boolean)",
+      "generatedMethodId": "AppendKeyValuePair_2_StringBuilder_string_string_bool_1"
+    },
+    {
+      "index": 180,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbConnectionStringBuilder::AppendKeyValuePair:System.Void(System.Text.StringBuilder,System.String,System.String,System.Boolean)",
+      "generatedMethodId": "AppendKeyValuePair_2_StringBuilder_string_string_bool_2"
+    },
+    {
+      "index": 181,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbConnectionStringBuilder::Clear:System.Void()",
+      "generatedMethodId": "Clear_3__0"
+    },
+    {
+      "index": 182,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbConnectionStringBuilder::ContainsKey:System.Boolean(System.String)",
+      "generatedMethodId": "ContainsKey_4_string_0"
+    },
+    {
+      "index": 183,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbConnectionStringBuilder::ContainsKey:System.Boolean(System.String)",
+      "generatedMethodId": "ContainsKey_4_string_1"
+    },
+    {
+      "index": 184,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbConnectionStringBuilder::EquivalentTo:System.Boolean(System.Data.Common.DbConnectionStringBuilder)",
+      "generatedMethodId": "EquivalentTo_5_DbConnectionStringBuilder_0"
+    },
+    {
+      "index": 185,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbConnectionStringBuilder::Remove:System.Boolean(System.String)",
+      "generatedMethodId": "Remove_6_string_0"
+    },
+    {
+      "index": 186,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbConnectionStringBuilder::Remove:System.Boolean(System.String)",
+      "generatedMethodId": "Remove_6_string_1"
+    },
+    {
+      "index": 187,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbConnectionStringBuilder::ShouldSerialize:System.Boolean(System.String)",
+      "generatedMethodId": "ShouldSerialize_7_string_0"
+    },
+    {
+      "index": 188,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbConnectionStringBuilder::ShouldSerialize:System.Boolean(System.String)",
+      "generatedMethodId": "ShouldSerialize_7_string_1"
+    },
+    {
+      "index": 189,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbConnectionStringBuilder::TryGetValue:System.Boolean(System.String,System.Object)",
+      "generatedMethodId": "TryGetValue_8_string_object_0"
+    },
+    {
+      "index": 190,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbConnectionStringBuilder::TryGetValue:System.Boolean(System.String,System.Object)",
+      "generatedMethodId": "TryGetValue_8_string_object_1"
+    },
+    {
+      "index": 191,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbDataAdapter::FillSchema:System.Data.DataTable(System.Data.DataTable,System.Data.SchemaType)",
+      "generatedMethodId": "FillSchema_0_DataTable_SchemaType_0"
+    },
+    {
+      "index": 192,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbDataAdapter::FillSchema:System.Data.DataTable[](System.Data.DataSet,System.Data.SchemaType)",
+      "generatedMethodId": "FillSchema_1_DataSet_SchemaType_0"
+    },
+    {
+      "index": 193,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbDataAdapter::FillSchema:System.Data.DataTable[](System.Data.DataSet,System.Data.SchemaType,System.String)",
+      "generatedMethodId": "FillSchema_2_DataSet_SchemaType_string_0"
+    },
+    {
+      "index": 194,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbDataAdapter::FillSchema:System.Data.DataTable[](System.Data.DataSet,System.Data.SchemaType,System.String)",
+      "generatedMethodId": "FillSchema_2_DataSet_SchemaType_string_1"
+    },
+    {
+      "index": 195,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbDataAdapter::Fill:System.Int32(System.Data.DataSet)",
+      "generatedMethodId": "Fill_3_DataSet_0"
+    },
+    {
+      "index": 196,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbDataAdapter::Fill:System.Int32(System.Data.DataSet,System.String)",
+      "generatedMethodId": "Fill_4_DataSet_string_0"
+    },
+    {
+      "index": 197,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbDataAdapter::Fill:System.Int32(System.Data.DataSet,System.String)",
+      "generatedMethodId": "Fill_4_DataSet_string_1"
+    },
+    {
+      "index": 198,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbDataAdapter::Fill:System.Int32(System.Data.DataSet,System.Int32,System.Int32,System.String)",
+      "generatedMethodId": "Fill_5_DataSet_int_int_string_0"
+    },
+    {
+      "index": 199,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbDataAdapter::Fill:System.Int32(System.Data.DataSet,System.Int32,System.Int32,System.String)",
+      "generatedMethodId": "Fill_5_DataSet_int_int_string_1"
+    },
+    {
+      "index": 200,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbDataAdapter::Fill:System.Int32(System.Data.DataSet,System.Int32,System.Int32,System.String)",
+      "generatedMethodId": "Fill_5_DataSet_int_int_string_2"
+    },
+    {
+      "index": 201,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbDataAdapter::Fill:System.Int32(System.Data.DataTable)",
+      "generatedMethodId": "Fill_6_DataTable_0"
+    },
+    {
+      "index": 202,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbDataAdapter::Fill:System.Int32(System.Int32,System.Int32,System.Data.DataTable[])",
+      "generatedMethodId": "Fill_7_int_int_DataTable_0"
+    },
+    {
+      "index": 203,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbDataAdapter::Fill:System.Int32(System.Int32,System.Int32,System.Data.DataTable[])",
+      "generatedMethodId": "Fill_7_int_int_DataTable_1"
+    },
+    {
+      "index": 204,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbDataAdapter::Fill:System.Int32(System.Int32,System.Int32,System.Data.DataTable[])",
+      "generatedMethodId": "Fill_7_int_int_DataTable_2"
+    },
+    {
+      "index": 205,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbDataAdapter::Fill:System.Int32(System.Int32,System.Int32,System.Data.DataTable[])",
+      "generatedMethodId": "Fill_7_int_int_DataTable_3"
+    },
+    {
+      "index": 206,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbDataAdapter::Fill:System.Int32(System.Int32,System.Int32,System.Data.DataTable[])",
+      "generatedMethodId": "Fill_7_int_int_DataTable_4"
+    },
+    {
+      "index": 207,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbDataAdapter::GetFillParameters:System.Data.IDataParameter[]()",
+      "generatedMethodId": "GetFillParameters_8__0"
+    },
+    {
+      "index": 208,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbDataAdapter::Update:System.Int32(System.Data.DataSet)",
+      "generatedMethodId": "Update_9_DataSet_0"
+    },
+    {
+      "index": 209,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbDataAdapter::Update:System.Int32(System.Data.DataRow[])",
+      "generatedMethodId": "Update_10_DataRow_0"
+    },
+    {
+      "index": 210,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbDataAdapter::Update:System.Int32(System.Data.DataRow[])",
+      "generatedMethodId": "Update_10_DataRow_1"
+    },
+    {
+      "index": 211,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbDataAdapter::Update:System.Int32(System.Data.DataRow[])",
+      "generatedMethodId": "Update_10_DataRow_2"
+    },
+    {
+      "index": 212,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbDataAdapter::Update:System.Int32(System.Data.DataTable)",
+      "generatedMethodId": "Update_11_DataTable_0"
+    },
+    {
+      "index": 213,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbDataAdapter::Update:System.Int32(System.Data.DataSet,System.String)",
+      "generatedMethodId": "Update_12_DataSet_string_0"
+    },
+    {
+      "index": 214,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbDataAdapter::Update:System.Int32(System.Data.DataSet,System.String)",
+      "generatedMethodId": "Update_12_DataSet_string_1"
+    },
+    {
+      "index": 215,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbDataReader::Close:System.Void()",
+      "generatedMethodId": "Close_0__0"
+    },
+    {
+      "index": 216,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbDataReader::CloseAsync:System.Threading.Tasks.Task()",
+      "generatedMethodId": "CloseAsync_1__0"
+    },
+    {
+      "index": 217,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbDataReader::Dispose:System.Void()",
+      "generatedMethodId": "Dispose_2__0"
+    },
+    {
+      "index": 218,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbDataReader::DisposeAsync:System.Threading.Tasks.ValueTask()",
+      "generatedMethodId": "DisposeAsync_3__0"
+    },
+    {
+      "index": 219,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbDataReader::GetDataTypeName:System.String(System.Int32)",
+      "generatedMethodId": "GetDataTypeName_4_int_0"
+    },
+    {
+      "index": 220,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbDataReader::GetDataTypeName:System.String(System.Int32)",
+      "generatedMethodId": "GetDataTypeName_4_int_1"
+    },
+    {
+      "index": 221,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbDataReader::GetEnumerator:System.Collections.IEnumerator()",
+      "generatedMethodId": "GetEnumerator_5__0"
+    },
+    {
+      "index": 222,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbDataReader::GetFieldType:System.Type(System.Int32)",
+      "generatedMethodId": "GetFieldType_6_int_0"
+    },
+    {
+      "index": 223,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbDataReader::GetFieldType:System.Type(System.Int32)",
+      "generatedMethodId": "GetFieldType_6_int_1"
+    },
+    {
+      "index": 224,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbDataReader::GetName:System.String(System.Int32)",
+      "generatedMethodId": "GetName_7_int_0"
+    },
+    {
+      "index": 225,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbDataReader::GetName:System.String(System.Int32)",
+      "generatedMethodId": "GetName_7_int_1"
+    },
+    {
+      "index": 226,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbDataReader::GetOrdinal:System.Int32(System.String)",
+      "generatedMethodId": "GetOrdinal_8_string_0"
+    },
+    {
+      "index": 227,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbDataReader::GetOrdinal:System.Int32(System.String)",
+      "generatedMethodId": "GetOrdinal_8_string_1"
+    },
+    {
+      "index": 228,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbDataReader::GetSchemaTable:System.Data.DataTable()",
+      "generatedMethodId": "GetSchemaTable_9__0"
+    },
+    {
+      "index": 229,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbDataReader::GetSchemaTableAsync:System.Threading.Tasks.Task\u003CSystem.Data.DataTable\u003E(System.Threading.CancellationToken)",
+      "generatedMethodId": "GetSchemaTableAsync_10_CancellationToken_0"
+    },
+    {
+      "index": 230,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbDataReader::GetColumnSchemaAsync:System.Threading.Tasks.Task\u003CSystem.Collections.ObjectModel.ReadOnlyCollection\u003CSystem.Data.Common.DbColumn\u003E\u003E(System.Threading.CancellationToken)",
+      "generatedMethodId": "GetColumnSchemaAsync_11_CancellationToken_0"
+    },
+    {
+      "index": 231,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbDataReader::GetBoolean:System.Boolean(System.Int32)",
+      "generatedMethodId": "GetBoolean_12_int_0"
+    },
+    {
+      "index": 232,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbDataReader::GetBoolean:System.Boolean(System.Int32)",
+      "generatedMethodId": "GetBoolean_12_int_1"
+    },
+    {
+      "index": 233,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbDataReader::GetByte:System.Byte(System.Int32)",
+      "generatedMethodId": "GetByte_13_int_0"
+    },
+    {
+      "index": 234,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbDataReader::GetByte:System.Byte(System.Int32)",
+      "generatedMethodId": "GetByte_13_int_1"
+    },
+    {
+      "index": 235,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbDataReader::GetBytes:System.Int64(System.Int32,System.Int64,System.Byte[],System.Int32,System.Int32)",
+      "generatedMethodId": "GetBytes_14_int_long_System_Byte_int_int_0"
+    },
+    {
+      "index": 236,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbDataReader::GetBytes:System.Int64(System.Int32,System.Int64,System.Byte[],System.Int32,System.Int32)",
+      "generatedMethodId": "GetBytes_14_int_long_System_Byte_int_int_1"
+    },
+    {
+      "index": 237,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbDataReader::GetBytes:System.Int64(System.Int32,System.Int64,System.Byte[],System.Int32,System.Int32)",
+      "generatedMethodId": "GetBytes_14_int_long_System_Byte_int_int_2"
+    },
+    {
+      "index": 238,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbDataReader::GetBytes:System.Int64(System.Int32,System.Int64,System.Byte[],System.Int32,System.Int32)",
+      "generatedMethodId": "GetBytes_14_int_long_System_Byte_int_int_3"
+    },
+    {
+      "index": 239,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbDataReader::GetBytes:System.Int64(System.Int32,System.Int64,System.Byte[],System.Int32,System.Int32)",
+      "generatedMethodId": "GetBytes_14_int_long_System_Byte_int_int_4"
+    },
+    {
+      "index": 240,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbDataReader::GetChar:System.Char(System.Int32)",
+      "generatedMethodId": "GetChar_15_int_0"
+    },
+    {
+      "index": 241,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbDataReader::GetChar:System.Char(System.Int32)",
+      "generatedMethodId": "GetChar_15_int_1"
+    },
+    {
+      "index": 242,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbDataReader::GetChars:System.Int64(System.Int32,System.Int64,System.Char[],System.Int32,System.Int32)",
+      "generatedMethodId": "GetChars_16_int_long_System_Char_int_int_0"
+    },
+    {
+      "index": 243,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbDataReader::GetChars:System.Int64(System.Int32,System.Int64,System.Char[],System.Int32,System.Int32)",
+      "generatedMethodId": "GetChars_16_int_long_System_Char_int_int_1"
+    },
+    {
+      "index": 244,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbDataReader::GetChars:System.Int64(System.Int32,System.Int64,System.Char[],System.Int32,System.Int32)",
+      "generatedMethodId": "GetChars_16_int_long_System_Char_int_int_2"
+    },
+    {
+      "index": 245,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbDataReader::GetChars:System.Int64(System.Int32,System.Int64,System.Char[],System.Int32,System.Int32)",
+      "generatedMethodId": "GetChars_16_int_long_System_Char_int_int_3"
+    },
+    {
+      "index": 246,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbDataReader::GetChars:System.Int64(System.Int32,System.Int64,System.Char[],System.Int32,System.Int32)",
+      "generatedMethodId": "GetChars_16_int_long_System_Char_int_int_4"
+    },
+    {
+      "index": 247,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbDataReader::GetData:System.Data.Common.DbDataReader(System.Int32)",
+      "generatedMethodId": "GetData_17_int_0"
+    },
+    {
+      "index": 248,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbDataReader::GetData:System.Data.Common.DbDataReader(System.Int32)",
+      "generatedMethodId": "GetData_17_int_1"
+    },
+    {
+      "index": 249,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbDataReader::GetDateTime:System.DateTime(System.Int32)",
+      "generatedMethodId": "GetDateTime_18_int_0"
+    },
+    {
+      "index": 250,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbDataReader::GetDateTime:System.DateTime(System.Int32)",
+      "generatedMethodId": "GetDateTime_18_int_1"
+    },
+    {
+      "index": 251,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbDataReader::GetDecimal:System.Decimal(System.Int32)",
+      "generatedMethodId": "GetDecimal_19_int_0"
+    },
+    {
+      "index": 252,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbDataReader::GetDecimal:System.Decimal(System.Int32)",
+      "generatedMethodId": "GetDecimal_19_int_1"
+    },
+    {
+      "index": 253,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbDataReader::GetDouble:System.Double(System.Int32)",
+      "generatedMethodId": "GetDouble_20_int_0"
+    },
+    {
+      "index": 254,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbDataReader::GetDouble:System.Double(System.Int32)",
+      "generatedMethodId": "GetDouble_20_int_1"
+    },
+    {
+      "index": 255,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbDataReader::GetFloat:System.Single(System.Int32)",
+      "generatedMethodId": "GetFloat_21_int_0"
+    },
+    {
+      "index": 256,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbDataReader::GetFloat:System.Single(System.Int32)",
+      "generatedMethodId": "GetFloat_21_int_1"
+    },
+    {
+      "index": 257,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbDataReader::GetGuid:System.Guid(System.Int32)",
+      "generatedMethodId": "GetGuid_22_int_0"
+    },
+    {
+      "index": 258,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbDataReader::GetGuid:System.Guid(System.Int32)",
+      "generatedMethodId": "GetGuid_22_int_1"
+    },
+    {
+      "index": 259,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbDataReader::GetInt16:System.Int16(System.Int32)",
+      "generatedMethodId": "GetInt16_23_int_0"
+    },
+    {
+      "index": 260,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbDataReader::GetInt16:System.Int16(System.Int32)",
+      "generatedMethodId": "GetInt16_23_int_1"
+    },
+    {
+      "index": 261,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbDataReader::GetInt32:System.Int32(System.Int32)",
+      "generatedMethodId": "GetInt32_24_int_0"
+    },
+    {
+      "index": 262,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbDataReader::GetInt32:System.Int32(System.Int32)",
+      "generatedMethodId": "GetInt32_24_int_1"
+    },
+    {
+      "index": 263,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbDataReader::GetInt64:System.Int64(System.Int32)",
+      "generatedMethodId": "GetInt64_25_int_0"
+    },
+    {
+      "index": 264,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbDataReader::GetInt64:System.Int64(System.Int32)",
+      "generatedMethodId": "GetInt64_25_int_1"
+    },
+    {
+      "index": 265,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbDataReader::GetProviderSpecificFieldType:System.Type(System.Int32)",
+      "generatedMethodId": "GetProviderSpecificFieldType_26_int_0"
+    },
+    {
+      "index": 266,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbDataReader::GetProviderSpecificFieldType:System.Type(System.Int32)",
+      "generatedMethodId": "GetProviderSpecificFieldType_26_int_1"
+    },
+    {
+      "index": 267,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbDataReader::GetProviderSpecificValue:System.Object(System.Int32)",
+      "generatedMethodId": "GetProviderSpecificValue_27_int_0"
+    },
+    {
+      "index": 268,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbDataReader::GetProviderSpecificValue:System.Object(System.Int32)",
+      "generatedMethodId": "GetProviderSpecificValue_27_int_1"
+    },
+    {
+      "index": 269,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbDataReader::GetProviderSpecificValues:System.Int32(System.Object[])",
+      "generatedMethodId": "GetProviderSpecificValues_28_System_Object_0"
+    },
+    {
+      "index": 270,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbDataReader::GetProviderSpecificValues:System.Int32(System.Object[])",
+      "generatedMethodId": "GetProviderSpecificValues_28_System_Object_1"
+    },
+    {
+      "index": 271,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbDataReader::GetProviderSpecificValues:System.Int32(System.Object[])",
+      "generatedMethodId": "GetProviderSpecificValues_28_System_Object_2"
+    },
+    {
+      "index": 272,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbDataReader::GetString:System.String(System.Int32)",
+      "generatedMethodId": "GetString_29_int_0"
+    },
+    {
+      "index": 273,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbDataReader::GetString:System.String(System.Int32)",
+      "generatedMethodId": "GetString_29_int_1"
+    },
+    {
+      "index": 274,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbDataReader::GetStream:System.IO.Stream(System.Int32)",
+      "generatedMethodId": "GetStream_30_int_0"
+    },
+    {
+      "index": 275,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbDataReader::GetStream:System.IO.Stream(System.Int32)",
+      "generatedMethodId": "GetStream_30_int_1"
+    },
+    {
+      "index": 276,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbDataReader::GetTextReader:System.IO.TextReader(System.Int32)",
+      "generatedMethodId": "GetTextReader_31_int_0"
+    },
+    {
+      "index": 277,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbDataReader::GetTextReader:System.IO.TextReader(System.Int32)",
+      "generatedMethodId": "GetTextReader_31_int_1"
+    },
+    {
+      "index": 278,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbDataReader::GetValue:System.Object(System.Int32)",
+      "generatedMethodId": "GetValue_32_int_0"
+    },
+    {
+      "index": 279,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbDataReader::GetValue:System.Object(System.Int32)",
+      "generatedMethodId": "GetValue_32_int_1"
+    },
+    {
+      "index": 280,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbDataReader::GetFieldValue:System.Int32(System.Int32)",
+      "generatedMethodId": "GetFieldValue_33_int_0"
+    },
+    {
+      "index": 281,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbDataReader::GetFieldValue:System.Int32(System.Int32)",
+      "generatedMethodId": "GetFieldValue_33_int_1"
+    },
+    {
+      "index": 282,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbDataReader::GetFieldValueAsync:System.Threading.Tasks.Task\u003CSystem.Int32\u003E(System.Int32)",
+      "generatedMethodId": "GetFieldValueAsync_34_int_0"
+    },
+    {
+      "index": 283,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbDataReader::GetFieldValueAsync:System.Threading.Tasks.Task\u003CSystem.Int32\u003E(System.Int32)",
+      "generatedMethodId": "GetFieldValueAsync_34_int_1"
+    },
+    {
+      "index": 284,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbDataReader::GetFieldValueAsync:System.Threading.Tasks.Task\u003CSystem.Int32\u003E(System.Int32,System.Threading.CancellationToken)",
+      "generatedMethodId": "GetFieldValueAsync_35_int_CancellationToken_0"
+    },
+    {
+      "index": 285,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbDataReader::GetFieldValueAsync:System.Threading.Tasks.Task\u003CSystem.Int32\u003E(System.Int32,System.Threading.CancellationToken)",
+      "generatedMethodId": "GetFieldValueAsync_35_int_CancellationToken_1"
+    },
+    {
+      "index": 286,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbDataReader::GetValues:System.Int32(System.Object[])",
+      "generatedMethodId": "GetValues_36_System_Object_0"
+    },
+    {
+      "index": 287,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbDataReader::GetValues:System.Int32(System.Object[])",
+      "generatedMethodId": "GetValues_36_System_Object_1"
+    },
+    {
+      "index": 288,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbDataReader::GetValues:System.Int32(System.Object[])",
+      "generatedMethodId": "GetValues_36_System_Object_2"
+    },
+    {
+      "index": 289,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbDataReader::IsDBNull:System.Boolean(System.Int32)",
+      "generatedMethodId": "IsDBNull_37_int_0"
+    },
+    {
+      "index": 290,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbDataReader::IsDBNull:System.Boolean(System.Int32)",
+      "generatedMethodId": "IsDBNull_37_int_1"
+    },
+    {
+      "index": 291,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbDataReader::IsDBNullAsync:System.Threading.Tasks.Task\u003CSystem.Boolean\u003E(System.Int32)",
+      "generatedMethodId": "IsDBNullAsync_38_int_0"
+    },
+    {
+      "index": 292,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbDataReader::IsDBNullAsync:System.Threading.Tasks.Task\u003CSystem.Boolean\u003E(System.Int32)",
+      "generatedMethodId": "IsDBNullAsync_38_int_1"
+    },
+    {
+      "index": 293,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbDataReader::IsDBNullAsync:System.Threading.Tasks.Task\u003CSystem.Boolean\u003E(System.Int32,System.Threading.CancellationToken)",
+      "generatedMethodId": "IsDBNullAsync_39_int_CancellationToken_0"
+    },
+    {
+      "index": 294,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbDataReader::IsDBNullAsync:System.Threading.Tasks.Task\u003CSystem.Boolean\u003E(System.Int32,System.Threading.CancellationToken)",
+      "generatedMethodId": "IsDBNullAsync_39_int_CancellationToken_1"
+    },
+    {
+      "index": 295,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbDataReader::NextResult:System.Boolean()",
+      "generatedMethodId": "NextResult_40__0"
+    },
+    {
+      "index": 296,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbDataReader::Read:System.Boolean()",
+      "generatedMethodId": "Read_41__0"
+    },
+    {
+      "index": 297,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbDataReader::ReadAsync:System.Threading.Tasks.Task\u003CSystem.Boolean\u003E()",
+      "generatedMethodId": "ReadAsync_42__0"
+    },
+    {
+      "index": 298,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbDataReader::ReadAsync:System.Threading.Tasks.Task\u003CSystem.Boolean\u003E(System.Threading.CancellationToken)",
+      "generatedMethodId": "ReadAsync_43_CancellationToken_0"
+    },
+    {
+      "index": 299,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbDataReader::NextResultAsync:System.Threading.Tasks.Task\u003CSystem.Boolean\u003E()",
+      "generatedMethodId": "NextResultAsync_44__0"
+    },
+    {
+      "index": 300,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbDataReader::NextResultAsync:System.Threading.Tasks.Task\u003CSystem.Boolean\u003E(System.Threading.CancellationToken)",
+      "generatedMethodId": "NextResultAsync_45_CancellationToken_0"
+    },
+    {
+      "index": 301,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbDataReaderExtensions::GetColumnSchema:System.Collections.ObjectModel.ReadOnlyCollection\u003CSystem.Data.Common.DbColumn\u003E(System.Data.Common.DbDataReader)",
+      "generatedMethodId": "GetColumnSchema_0_DbDataReader_0"
+    },
+    {
+      "index": 302,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbDataReaderExtensions::CanGetColumnSchema:System.Boolean(System.Data.Common.DbDataReader)",
+      "generatedMethodId": "CanGetColumnSchema_1_DbDataReader_0"
+    },
+    {
+      "index": 303,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbDataRecord::GetBoolean:System.Boolean(System.Int32)",
+      "generatedMethodId": "GetBoolean_0_int_0"
+    },
+    {
+      "index": 304,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbDataRecord::GetBoolean:System.Boolean(System.Int32)",
+      "generatedMethodId": "GetBoolean_0_int_1"
+    },
+    {
+      "index": 305,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbDataRecord::GetByte:System.Byte(System.Int32)",
+      "generatedMethodId": "GetByte_1_int_0"
+    },
+    {
+      "index": 306,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbDataRecord::GetByte:System.Byte(System.Int32)",
+      "generatedMethodId": "GetByte_1_int_1"
+    },
+    {
+      "index": 307,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbDataRecord::GetBytes:System.Int64(System.Int32,System.Int64,System.Byte[],System.Int32,System.Int32)",
+      "generatedMethodId": "GetBytes_2_int_long_System_Byte_int_int_0"
+    },
+    {
+      "index": 308,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbDataRecord::GetBytes:System.Int64(System.Int32,System.Int64,System.Byte[],System.Int32,System.Int32)",
+      "generatedMethodId": "GetBytes_2_int_long_System_Byte_int_int_1"
+    },
+    {
+      "index": 309,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbDataRecord::GetBytes:System.Int64(System.Int32,System.Int64,System.Byte[],System.Int32,System.Int32)",
+      "generatedMethodId": "GetBytes_2_int_long_System_Byte_int_int_2"
+    },
+    {
+      "index": 310,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbDataRecord::GetBytes:System.Int64(System.Int32,System.Int64,System.Byte[],System.Int32,System.Int32)",
+      "generatedMethodId": "GetBytes_2_int_long_System_Byte_int_int_3"
+    },
+    {
+      "index": 311,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbDataRecord::GetBytes:System.Int64(System.Int32,System.Int64,System.Byte[],System.Int32,System.Int32)",
+      "generatedMethodId": "GetBytes_2_int_long_System_Byte_int_int_4"
+    },
+    {
+      "index": 312,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbDataRecord::GetChar:System.Char(System.Int32)",
+      "generatedMethodId": "GetChar_3_int_0"
+    },
+    {
+      "index": 313,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbDataRecord::GetChar:System.Char(System.Int32)",
+      "generatedMethodId": "GetChar_3_int_1"
+    },
+    {
+      "index": 314,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbDataRecord::GetChars:System.Int64(System.Int32,System.Int64,System.Char[],System.Int32,System.Int32)",
+      "generatedMethodId": "GetChars_4_int_long_System_Char_int_int_0"
+    },
+    {
+      "index": 315,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbDataRecord::GetChars:System.Int64(System.Int32,System.Int64,System.Char[],System.Int32,System.Int32)",
+      "generatedMethodId": "GetChars_4_int_long_System_Char_int_int_1"
+    },
+    {
+      "index": 316,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbDataRecord::GetChars:System.Int64(System.Int32,System.Int64,System.Char[],System.Int32,System.Int32)",
+      "generatedMethodId": "GetChars_4_int_long_System_Char_int_int_2"
+    },
+    {
+      "index": 317,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbDataRecord::GetChars:System.Int64(System.Int32,System.Int64,System.Char[],System.Int32,System.Int32)",
+      "generatedMethodId": "GetChars_4_int_long_System_Char_int_int_3"
+    },
+    {
+      "index": 318,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbDataRecord::GetChars:System.Int64(System.Int32,System.Int64,System.Char[],System.Int32,System.Int32)",
+      "generatedMethodId": "GetChars_4_int_long_System_Char_int_int_4"
+    },
+    {
+      "index": 319,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbDataRecord::GetData:System.Data.IDataReader(System.Int32)",
+      "generatedMethodId": "GetData_5_int_0"
+    },
+    {
+      "index": 320,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbDataRecord::GetData:System.Data.IDataReader(System.Int32)",
+      "generatedMethodId": "GetData_5_int_1"
+    },
+    {
+      "index": 321,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbDataRecord::GetDataTypeName:System.String(System.Int32)",
+      "generatedMethodId": "GetDataTypeName_6_int_0"
+    },
+    {
+      "index": 322,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbDataRecord::GetDataTypeName:System.String(System.Int32)",
+      "generatedMethodId": "GetDataTypeName_6_int_1"
+    },
+    {
+      "index": 323,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbDataRecord::GetDateTime:System.DateTime(System.Int32)",
+      "generatedMethodId": "GetDateTime_7_int_0"
+    },
+    {
+      "index": 324,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbDataRecord::GetDateTime:System.DateTime(System.Int32)",
+      "generatedMethodId": "GetDateTime_7_int_1"
+    },
+    {
+      "index": 325,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbDataRecord::GetDecimal:System.Decimal(System.Int32)",
+      "generatedMethodId": "GetDecimal_8_int_0"
+    },
+    {
+      "index": 326,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbDataRecord::GetDecimal:System.Decimal(System.Int32)",
+      "generatedMethodId": "GetDecimal_8_int_1"
+    },
+    {
+      "index": 327,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbDataRecord::GetDouble:System.Double(System.Int32)",
+      "generatedMethodId": "GetDouble_9_int_0"
+    },
+    {
+      "index": 328,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbDataRecord::GetDouble:System.Double(System.Int32)",
+      "generatedMethodId": "GetDouble_9_int_1"
+    },
+    {
+      "index": 329,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbDataRecord::GetFieldType:System.Type(System.Int32)",
+      "generatedMethodId": "GetFieldType_10_int_0"
+    },
+    {
+      "index": 330,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbDataRecord::GetFieldType:System.Type(System.Int32)",
+      "generatedMethodId": "GetFieldType_10_int_1"
+    },
+    {
+      "index": 331,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbDataRecord::GetFloat:System.Single(System.Int32)",
+      "generatedMethodId": "GetFloat_11_int_0"
+    },
+    {
+      "index": 332,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbDataRecord::GetFloat:System.Single(System.Int32)",
+      "generatedMethodId": "GetFloat_11_int_1"
+    },
+    {
+      "index": 333,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbDataRecord::GetGuid:System.Guid(System.Int32)",
+      "generatedMethodId": "GetGuid_12_int_0"
+    },
+    {
+      "index": 334,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbDataRecord::GetGuid:System.Guid(System.Int32)",
+      "generatedMethodId": "GetGuid_12_int_1"
+    },
+    {
+      "index": 335,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbDataRecord::GetInt16:System.Int16(System.Int32)",
+      "generatedMethodId": "GetInt16_13_int_0"
+    },
+    {
+      "index": 336,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbDataRecord::GetInt16:System.Int16(System.Int32)",
+      "generatedMethodId": "GetInt16_13_int_1"
+    },
+    {
+      "index": 337,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbDataRecord::GetInt32:System.Int32(System.Int32)",
+      "generatedMethodId": "GetInt32_14_int_0"
+    },
+    {
+      "index": 338,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbDataRecord::GetInt32:System.Int32(System.Int32)",
+      "generatedMethodId": "GetInt32_14_int_1"
+    },
+    {
+      "index": 339,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbDataRecord::GetInt64:System.Int64(System.Int32)",
+      "generatedMethodId": "GetInt64_15_int_0"
+    },
+    {
+      "index": 340,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbDataRecord::GetInt64:System.Int64(System.Int32)",
+      "generatedMethodId": "GetInt64_15_int_1"
+    },
+    {
+      "index": 341,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbDataRecord::GetName:System.String(System.Int32)",
+      "generatedMethodId": "GetName_16_int_0"
+    },
+    {
+      "index": 342,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbDataRecord::GetName:System.String(System.Int32)",
+      "generatedMethodId": "GetName_16_int_1"
+    },
+    {
+      "index": 343,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbDataRecord::GetOrdinal:System.Int32(System.String)",
+      "generatedMethodId": "GetOrdinal_17_string_0"
+    },
+    {
+      "index": 344,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbDataRecord::GetOrdinal:System.Int32(System.String)",
+      "generatedMethodId": "GetOrdinal_17_string_1"
+    },
+    {
+      "index": 345,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbDataRecord::GetString:System.String(System.Int32)",
+      "generatedMethodId": "GetString_18_int_0"
+    },
+    {
+      "index": 346,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbDataRecord::GetString:System.String(System.Int32)",
+      "generatedMethodId": "GetString_18_int_1"
+    },
+    {
+      "index": 347,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbDataRecord::GetValue:System.Object(System.Int32)",
+      "generatedMethodId": "GetValue_19_int_0"
+    },
+    {
+      "index": 348,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbDataRecord::GetValue:System.Object(System.Int32)",
+      "generatedMethodId": "GetValue_19_int_1"
+    },
+    {
+      "index": 349,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbDataRecord::GetValues:System.Int32(System.Object[])",
+      "generatedMethodId": "GetValues_20_System_Object_0"
+    },
+    {
+      "index": 350,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbDataRecord::GetValues:System.Int32(System.Object[])",
+      "generatedMethodId": "GetValues_20_System_Object_1"
+    },
+    {
+      "index": 351,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbDataRecord::GetValues:System.Int32(System.Object[])",
+      "generatedMethodId": "GetValues_20_System_Object_2"
+    },
+    {
+      "index": 352,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbDataRecord::IsDBNull:System.Boolean(System.Int32)",
+      "generatedMethodId": "IsDBNull_21_int_0"
+    },
+    {
+      "index": 353,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbDataRecord::IsDBNull:System.Boolean(System.Int32)",
+      "generatedMethodId": "IsDBNull_21_int_1"
+    },
+    {
+      "index": 354,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbDataSource::CreateConnection:System.Data.Common.DbConnection()",
+      "generatedMethodId": "CreateConnection_0__0"
+    },
+    {
+      "index": 355,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbDataSource::OpenConnection:System.Data.Common.DbConnection()",
+      "generatedMethodId": "OpenConnection_1__0"
+    },
+    {
+      "index": 356,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbDataSource::OpenConnectionAsync:System.Threading.Tasks.ValueTask\u003CSystem.Data.Common.DbConnection\u003E(System.Threading.CancellationToken)",
+      "generatedMethodId": "OpenConnectionAsync_2_CancellationToken_0"
+    },
+    {
+      "index": 357,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbDataSource::CreateCommand:System.Data.Common.DbCommand(System.String)",
+      "generatedMethodId": "CreateCommand_3_string_0"
+    },
+    {
+      "index": 358,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbDataSource::CreateCommand:System.Data.Common.DbCommand(System.String)",
+      "generatedMethodId": "CreateCommand_3_string_1"
+    },
+    {
+      "index": 359,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbDataSource::CreateBatch:System.Data.Common.DbBatch()",
+      "generatedMethodId": "CreateBatch_4__0"
+    },
+    {
+      "index": 360,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbDataSource::Dispose:System.Void()",
+      "generatedMethodId": "Dispose_5__0"
+    },
+    {
+      "index": 361,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbDataSource::DisposeAsync:System.Threading.Tasks.ValueTask()",
+      "generatedMethodId": "DisposeAsync_6__0"
+    },
+    {
+      "index": 362,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbDataSourceEnumerator::GetDataSources:System.Data.DataTable()",
+      "generatedMethodId": "GetDataSources_0__0"
+    },
+    {
+      "index": 363,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbParameter::ResetDbType:System.Void()",
+      "generatedMethodId": "ResetDbType_0__0"
+    },
+    {
+      "index": 364,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbParameterCollection::Add:System.Int32(System.Object)",
+      "generatedMethodId": "Add_0_object_0"
+    },
+    {
+      "index": 365,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbParameterCollection::AddRange:System.Void(System.Array)",
+      "generatedMethodId": "AddRange_1_System_Array_0"
+    },
+    {
+      "index": 366,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbParameterCollection::Contains:System.Boolean(System.Object)",
+      "generatedMethodId": "Contains_2_object_0"
+    },
+    {
+      "index": 367,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbParameterCollection::Contains:System.Boolean(System.String)",
+      "generatedMethodId": "Contains_3_string_0"
+    },
+    {
+      "index": 368,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbParameterCollection::Contains:System.Boolean(System.String)",
+      "generatedMethodId": "Contains_3_string_1"
+    },
+    {
+      "index": 369,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbParameterCollection::CopyTo:System.Void(System.Array,System.Int32)",
+      "generatedMethodId": "CopyTo_4_System_Array_int_0"
+    },
+    {
+      "index": 370,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbParameterCollection::CopyTo:System.Void(System.Array,System.Int32)",
+      "generatedMethodId": "CopyTo_4_System_Array_int_1"
+    },
+    {
+      "index": 371,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbParameterCollection::Clear:System.Void()",
+      "generatedMethodId": "Clear_5__0"
+    },
+    {
+      "index": 372,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbParameterCollection::GetEnumerator:System.Collections.IEnumerator()",
+      "generatedMethodId": "GetEnumerator_6__0"
+    },
+    {
+      "index": 373,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbParameterCollection::IndexOf:System.Int32(System.Object)",
+      "generatedMethodId": "IndexOf_7_object_0"
+    },
+    {
+      "index": 374,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbParameterCollection::IndexOf:System.Int32(System.String)",
+      "generatedMethodId": "IndexOf_8_string_0"
+    },
+    {
+      "index": 375,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbParameterCollection::IndexOf:System.Int32(System.String)",
+      "generatedMethodId": "IndexOf_8_string_1"
+    },
+    {
+      "index": 376,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbParameterCollection::Insert:System.Void(System.Int32,System.Object)",
+      "generatedMethodId": "Insert_9_int_object_0"
+    },
+    {
+      "index": 377,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbParameterCollection::Insert:System.Void(System.Int32,System.Object)",
+      "generatedMethodId": "Insert_9_int_object_1"
+    },
+    {
+      "index": 378,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbParameterCollection::Remove:System.Void(System.Object)",
+      "generatedMethodId": "Remove_10_object_0"
+    },
+    {
+      "index": 379,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbParameterCollection::RemoveAt:System.Void(System.Int32)",
+      "generatedMethodId": "RemoveAt_11_int_0"
+    },
+    {
+      "index": 380,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbParameterCollection::RemoveAt:System.Void(System.Int32)",
+      "generatedMethodId": "RemoveAt_11_int_1"
+    },
+    {
+      "index": 381,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbParameterCollection::RemoveAt:System.Void(System.String)",
+      "generatedMethodId": "RemoveAt_12_string_0"
+    },
+    {
+      "index": 382,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbParameterCollection::RemoveAt:System.Void(System.String)",
+      "generatedMethodId": "RemoveAt_12_string_1"
+    },
+    {
+      "index": 383,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbProviderFactories::TryGetFactory:System.Boolean(System.String,System.Data.Common.DbProviderFactory)",
+      "generatedMethodId": "TryGetFactory_0_string_DbProviderFactory_0"
+    },
+    {
+      "index": 384,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbProviderFactories::TryGetFactory:System.Boolean(System.String,System.Data.Common.DbProviderFactory)",
+      "generatedMethodId": "TryGetFactory_0_string_DbProviderFactory_1"
+    },
+    {
+      "index": 385,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbProviderFactories::GetFactory:System.Data.Common.DbProviderFactory(System.String)",
+      "generatedMethodId": "GetFactory_1_string_0"
+    },
+    {
+      "index": 386,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbProviderFactories::GetFactory:System.Data.Common.DbProviderFactory(System.String)",
+      "generatedMethodId": "GetFactory_1_string_1"
+    },
+    {
+      "index": 387,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbProviderFactories::GetFactory:System.Data.Common.DbProviderFactory(System.Data.DataRow)",
+      "generatedMethodId": "GetFactory_2_DataRow_0"
+    },
+    {
+      "index": 388,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbProviderFactories::GetFactory:System.Data.Common.DbProviderFactory(System.Data.Common.DbConnection)",
+      "generatedMethodId": "GetFactory_3_DbConnection_0"
+    },
+    {
+      "index": 389,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbProviderFactories::GetFactoryClasses:System.Data.DataTable()",
+      "generatedMethodId": "GetFactoryClasses_4__0"
+    },
+    {
+      "index": 390,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbProviderFactories::GetProviderInvariantNames:System.Collections.Generic.IEnumerable\u003CSystem.String\u003E()",
+      "generatedMethodId": "GetProviderInvariantNames_5__0"
+    },
+    {
+      "index": 391,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbProviderFactories::RegisterFactory:System.Void(System.String,System.String)",
+      "generatedMethodId": "RegisterFactory_6_string_string_0"
+    },
+    {
+      "index": 392,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbProviderFactories::RegisterFactory:System.Void(System.String,System.String)",
+      "generatedMethodId": "RegisterFactory_6_string_string_1"
+    },
+    {
+      "index": 393,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbProviderFactories::RegisterFactory:System.Void(System.String,System.String)",
+      "generatedMethodId": "RegisterFactory_6_string_string_2"
+    },
+    {
+      "index": 394,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbProviderFactories::RegisterFactory:System.Void(System.String,System.Type)",
+      "generatedMethodId": "RegisterFactory_7_string_System_Type_0"
+    },
+    {
+      "index": 395,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbProviderFactories::RegisterFactory:System.Void(System.String,System.Type)",
+      "generatedMethodId": "RegisterFactory_7_string_System_Type_1"
+    },
+    {
+      "index": 396,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbProviderFactories::RegisterFactory:System.Void(System.String,System.Data.Common.DbProviderFactory)",
+      "generatedMethodId": "RegisterFactory_8_string_DbProviderFactory_0"
+    },
+    {
+      "index": 397,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbProviderFactories::RegisterFactory:System.Void(System.String,System.Data.Common.DbProviderFactory)",
+      "generatedMethodId": "RegisterFactory_8_string_DbProviderFactory_1"
+    },
+    {
+      "index": 398,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbProviderFactories::UnregisterFactory:System.Boolean(System.String)",
+      "generatedMethodId": "UnregisterFactory_9_string_0"
+    },
+    {
+      "index": 399,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbProviderFactories::UnregisterFactory:System.Boolean(System.String)",
+      "generatedMethodId": "UnregisterFactory_9_string_1"
+    },
+    {
+      "index": 400,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbProviderFactory::CreateBatch:System.Data.Common.DbBatch()",
+      "generatedMethodId": "CreateBatch_0__0"
+    },
+    {
+      "index": 401,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbProviderFactory::CreateBatchCommand:System.Data.Common.DbBatchCommand()",
+      "generatedMethodId": "CreateBatchCommand_1__0"
+    },
+    {
+      "index": 402,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbProviderFactory::CreateCommand:System.Data.Common.DbCommand()",
+      "generatedMethodId": "CreateCommand_2__0"
+    },
+    {
+      "index": 403,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbProviderFactory::CreateCommandBuilder:System.Data.Common.DbCommandBuilder()",
+      "generatedMethodId": "CreateCommandBuilder_3__0"
+    },
+    {
+      "index": 404,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbProviderFactory::CreateConnection:System.Data.Common.DbConnection()",
+      "generatedMethodId": "CreateConnection_4__0"
+    },
+    {
+      "index": 405,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbProviderFactory::CreateConnectionStringBuilder:System.Data.Common.DbConnectionStringBuilder()",
+      "generatedMethodId": "CreateConnectionStringBuilder_5__0"
+    },
+    {
+      "index": 406,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbProviderFactory::CreateDataAdapter:System.Data.Common.DbDataAdapter()",
+      "generatedMethodId": "CreateDataAdapter_6__0"
+    },
+    {
+      "index": 407,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbProviderFactory::CreateParameter:System.Data.Common.DbParameter()",
+      "generatedMethodId": "CreateParameter_7__0"
+    },
+    {
+      "index": 408,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbProviderFactory::CreateDataSourceEnumerator:System.Data.Common.DbDataSourceEnumerator()",
+      "generatedMethodId": "CreateDataSourceEnumerator_8__0"
+    },
+    {
+      "index": 409,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbProviderFactory::CreateDataSource:System.Data.Common.DbDataSource(System.String)",
+      "generatedMethodId": "CreateDataSource_9_string_0"
+    },
+    {
+      "index": 410,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbProviderFactory::CreateDataSource:System.Data.Common.DbDataSource(System.String)",
+      "generatedMethodId": "CreateDataSource_9_string_1"
+    },
+    {
+      "index": 411,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbTransaction::Commit:System.Void()",
+      "generatedMethodId": "Commit_0__0"
+    },
+    {
+      "index": 412,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbTransaction::CommitAsync:System.Threading.Tasks.Task(System.Threading.CancellationToken)",
+      "generatedMethodId": "CommitAsync_1_CancellationToken_0"
+    },
+    {
+      "index": 413,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbTransaction::Dispose:System.Void()",
+      "generatedMethodId": "Dispose_2__0"
+    },
+    {
+      "index": 414,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbTransaction::DisposeAsync:System.Threading.Tasks.ValueTask()",
+      "generatedMethodId": "DisposeAsync_3__0"
+    },
+    {
+      "index": 415,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbTransaction::Rollback:System.Void()",
+      "generatedMethodId": "Rollback_4__0"
+    },
+    {
+      "index": 416,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbTransaction::RollbackAsync:System.Threading.Tasks.Task(System.Threading.CancellationToken)",
+      "generatedMethodId": "RollbackAsync_5_CancellationToken_0"
+    },
+    {
+      "index": 417,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbTransaction::SaveAsync:System.Threading.Tasks.Task(System.String,System.Threading.CancellationToken)",
+      "generatedMethodId": "SaveAsync_6_string_CancellationToken_0"
+    },
+    {
+      "index": 418,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbTransaction::SaveAsync:System.Threading.Tasks.Task(System.String,System.Threading.CancellationToken)",
+      "generatedMethodId": "SaveAsync_6_string_CancellationToken_1"
+    },
+    {
+      "index": 419,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbTransaction::RollbackAsync:System.Threading.Tasks.Task(System.String,System.Threading.CancellationToken)",
+      "generatedMethodId": "RollbackAsync_7_string_CancellationToken_0"
+    },
+    {
+      "index": 420,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbTransaction::RollbackAsync:System.Threading.Tasks.Task(System.String,System.Threading.CancellationToken)",
+      "generatedMethodId": "RollbackAsync_7_string_CancellationToken_1"
+    },
+    {
+      "index": 421,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbTransaction::ReleaseAsync:System.Threading.Tasks.Task(System.String,System.Threading.CancellationToken)",
+      "generatedMethodId": "ReleaseAsync_8_string_CancellationToken_0"
+    },
+    {
+      "index": 422,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbTransaction::ReleaseAsync:System.Threading.Tasks.Task(System.String,System.Threading.CancellationToken)",
+      "generatedMethodId": "ReleaseAsync_8_string_CancellationToken_1"
+    },
+    {
+      "index": 423,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbTransaction::Save:System.Void(System.String)",
+      "generatedMethodId": "Save_9_string_0"
+    },
+    {
+      "index": 424,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbTransaction::Save:System.Void(System.String)",
+      "generatedMethodId": "Save_9_string_1"
+    },
+    {
+      "index": 425,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbTransaction::Rollback:System.Void(System.String)",
+      "generatedMethodId": "Rollback_10_string_0"
+    },
+    {
+      "index": 426,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbTransaction::Rollback:System.Void(System.String)",
+      "generatedMethodId": "Rollback_10_string_1"
+    },
+    {
+      "index": 427,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbTransaction::Release:System.Void(System.String)",
+      "generatedMethodId": "Release_11_string_0"
+    },
+    {
+      "index": 428,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbTransaction::Release:System.Void(System.String)",
+      "generatedMethodId": "Release_11_string_1"
+    },
+    {
+      "index": 429,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.RowUpdatedEventArgs::CopyToRows:System.Void(System.Data.DataRow[])",
+      "generatedMethodId": "CopyToRows_0_DataRow_0"
+    },
+    {
+      "index": 430,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.RowUpdatedEventArgs::CopyToRows:System.Void(System.Data.DataRow[])",
+      "generatedMethodId": "CopyToRows_0_DataRow_1"
+    },
+    {
+      "index": 431,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.RowUpdatedEventArgs::CopyToRows:System.Void(System.Data.DataRow[])",
+      "generatedMethodId": "CopyToRows_0_DataRow_2"
+    },
+    {
+      "index": 432,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.RowUpdatedEventArgs::CopyToRows:System.Void(System.Data.DataRow[],System.Int32)",
+      "generatedMethodId": "CopyToRows_1_DataRow_int_0"
+    },
+    {
+      "index": 433,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.RowUpdatedEventArgs::CopyToRows:System.Void(System.Data.DataRow[],System.Int32)",
+      "generatedMethodId": "CopyToRows_1_DataRow_int_1"
+    },
+    {
+      "index": 434,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.RowUpdatedEventArgs::CopyToRows:System.Void(System.Data.DataRow[],System.Int32)",
+      "generatedMethodId": "CopyToRows_1_DataRow_int_2"
+    },
+    {
+      "index": 435,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Data.Common/System.Data.Common.RowUpdatedEventArgs::CopyToRows:System.Void(System.Data.DataRow[],System.Int32)",
+      "generatedMethodId": "CopyToRows_1_DataRow_int_3"
+    }
+  ]
+}

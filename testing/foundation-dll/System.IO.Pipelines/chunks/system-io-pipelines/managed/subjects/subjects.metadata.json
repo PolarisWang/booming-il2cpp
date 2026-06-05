@@ -1,0 +1,277 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.IO.Pipelines",
+  "chunkSlug": "system-io-pipelines",
+  "totalMethods": 33,
+  "customEntryIndices": null,
+  "benchmarkMethodIndices": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29,
+    30,
+    31,
+    32
+  ],
+  "hotupdateMethodIndices": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29,
+    30,
+    31,
+    32
+  ],
+  "methods": [
+    {
+      "index": 0,
+      "kind": "benchmark",
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeReader::TryRead:System.Boolean(System.IO.Pipelines.ReadResult)",
+      "generatedMethodId": "TryRead_0_ReadResult_0"
+    },
+    {
+      "index": 1,
+      "kind": "benchmark",
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeReader::ReadAsync:System.Threading.Tasks.ValueTask\u003CSystem.IO.Pipelines.ReadResult\u003E(System.Threading.CancellationToken)",
+      "generatedMethodId": "ReadAsync_1_CancellationToken_0"
+    },
+    {
+      "index": 2,
+      "kind": "benchmark",
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeReader::ReadAtLeastAsync:System.Threading.Tasks.ValueTask\u003CSystem.IO.Pipelines.ReadResult\u003E(System.Int32,System.Threading.CancellationToken)",
+      "generatedMethodId": "ReadAtLeastAsync_2_int_CancellationToken_0"
+    },
+    {
+      "index": 3,
+      "kind": "benchmark",
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeReader::ReadAtLeastAsync:System.Threading.Tasks.ValueTask\u003CSystem.IO.Pipelines.ReadResult\u003E(System.Int32,System.Threading.CancellationToken)",
+      "generatedMethodId": "ReadAtLeastAsync_2_int_CancellationToken_1"
+    },
+    {
+      "index": 4,
+      "kind": "benchmark",
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeReader::AdvanceTo:System.Void(System.SequencePosition)",
+      "generatedMethodId": "AdvanceTo_3_System_SequencePosition_0"
+    },
+    {
+      "index": 5,
+      "kind": "benchmark",
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeReader::AdvanceTo:System.Void(System.SequencePosition,System.SequencePosition)",
+      "generatedMethodId": "AdvanceTo_4_System_SequencePosition_System_SequencePosition_0"
+    },
+    {
+      "index": 6,
+      "kind": "benchmark",
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeReader::AsStream:System.IO.Stream(System.Boolean)",
+      "generatedMethodId": "AsStream_5_bool_0"
+    },
+    {
+      "index": 7,
+      "kind": "benchmark",
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeReader::AsStream:System.IO.Stream(System.Boolean)",
+      "generatedMethodId": "AsStream_5_bool_1"
+    },
+    {
+      "index": 8,
+      "kind": "benchmark",
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeReader::CancelPendingRead:System.Void()",
+      "generatedMethodId": "CancelPendingRead_6__0"
+    },
+    {
+      "index": 9,
+      "kind": "benchmark",
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeReader::Complete:System.Void(System.Exception)",
+      "generatedMethodId": "Complete_7_System_Exception_0"
+    },
+    {
+      "index": 10,
+      "kind": "benchmark",
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeReader::CompleteAsync:System.Threading.Tasks.ValueTask(System.Exception)",
+      "generatedMethodId": "CompleteAsync_8_System_Exception_0"
+    },
+    {
+      "index": 11,
+      "kind": "benchmark",
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeReader::OnWriterCompleted:System.Void(System.Action\u003CSystem.Exception,System.Object\u003E,System.Object)",
+      "generatedMethodId": "OnWriterCompleted_9_System_ActionSystem_Exceptionobject_object_0"
+    },
+    {
+      "index": 12,
+      "kind": "benchmark",
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeReader::OnWriterCompleted:System.Void(System.Action\u003CSystem.Exception,System.Object\u003E,System.Object)",
+      "generatedMethodId": "OnWriterCompleted_9_System_ActionSystem_Exceptionobject_object_1"
+    },
+    {
+      "index": 13,
+      "kind": "benchmark",
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeReader::CopyToAsync:System.Threading.Tasks.Task(System.IO.Pipelines.PipeWriter,System.Threading.CancellationToken)",
+      "generatedMethodId": "CopyToAsync_10_PipeWriter_CancellationToken_0"
+    },
+    {
+      "index": 14,
+      "kind": "benchmark",
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeReader::CopyToAsync:System.Threading.Tasks.Task(System.IO.Stream,System.Threading.CancellationToken)",
+      "generatedMethodId": "CopyToAsync_11_Stream_CancellationToken_0"
+    },
+    {
+      "index": 15,
+      "kind": "benchmark",
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeReader::CopyToAsync:System.Threading.Tasks.Task(System.IO.Stream,System.Threading.CancellationToken)",
+      "generatedMethodId": "CopyToAsync_11_Stream_CancellationToken_1"
+    },
+    {
+      "index": 16,
+      "kind": "benchmark",
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeScheduler::Schedule:System.Void(System.Action\u003CSystem.Object\u003E,System.Object)",
+      "generatedMethodId": "Schedule_0_System_Actionobject_object_0"
+    },
+    {
+      "index": 17,
+      "kind": "benchmark",
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeScheduler::Schedule:System.Void(System.Action\u003CSystem.Object\u003E,System.Object)",
+      "generatedMethodId": "Schedule_0_System_Actionobject_object_1"
+    },
+    {
+      "index": 18,
+      "kind": "benchmark",
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeWriter::Complete:System.Void(System.Exception)",
+      "generatedMethodId": "Complete_0_System_Exception_0"
+    },
+    {
+      "index": 19,
+      "kind": "benchmark",
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeWriter::CompleteAsync:System.Threading.Tasks.ValueTask(System.Exception)",
+      "generatedMethodId": "CompleteAsync_1_System_Exception_0"
+    },
+    {
+      "index": 20,
+      "kind": "benchmark",
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeWriter::CancelPendingFlush:System.Void()",
+      "generatedMethodId": "CancelPendingFlush_2__0"
+    },
+    {
+      "index": 21,
+      "kind": "benchmark",
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeWriter::OnReaderCompleted:System.Void(System.Action\u003CSystem.Exception,System.Object\u003E,System.Object)",
+      "generatedMethodId": "OnReaderCompleted_3_System_ActionSystem_Exceptionobject_object_0"
+    },
+    {
+      "index": 22,
+      "kind": "benchmark",
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeWriter::OnReaderCompleted:System.Void(System.Action\u003CSystem.Exception,System.Object\u003E,System.Object)",
+      "generatedMethodId": "OnReaderCompleted_3_System_ActionSystem_Exceptionobject_object_1"
+    },
+    {
+      "index": 23,
+      "kind": "benchmark",
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeWriter::FlushAsync:System.Threading.Tasks.ValueTask\u003CSystem.IO.Pipelines.FlushResult\u003E(System.Threading.CancellationToken)",
+      "generatedMethodId": "FlushAsync_4_CancellationToken_0"
+    },
+    {
+      "index": 24,
+      "kind": "benchmark",
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeWriter::Advance:System.Void(System.Int32)",
+      "generatedMethodId": "Advance_5_int_0"
+    },
+    {
+      "index": 25,
+      "kind": "benchmark",
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeWriter::Advance:System.Void(System.Int32)",
+      "generatedMethodId": "Advance_5_int_1"
+    },
+    {
+      "index": 26,
+      "kind": "benchmark",
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeWriter::GetMemory:System.Memory\u003CSystem.Byte\u003E(System.Int32)",
+      "generatedMethodId": "GetMemory_6_int_0"
+    },
+    {
+      "index": 27,
+      "kind": "benchmark",
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeWriter::GetMemory:System.Memory\u003CSystem.Byte\u003E(System.Int32)",
+      "generatedMethodId": "GetMemory_6_int_1"
+    },
+    {
+      "index": 28,
+      "kind": "benchmark",
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeWriter::AsStream:System.IO.Stream(System.Boolean)",
+      "generatedMethodId": "AsStream_7_bool_0"
+    },
+    {
+      "index": 29,
+      "kind": "benchmark",
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeWriter::AsStream:System.IO.Stream(System.Boolean)",
+      "generatedMethodId": "AsStream_7_bool_1"
+    },
+    {
+      "index": 30,
+      "kind": "benchmark",
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeWriter::WriteAsync:System.Threading.Tasks.ValueTask\u003CSystem.IO.Pipelines.FlushResult\u003E(System.ReadOnlyMemory\u003CSystem.Byte\u003E,System.Threading.CancellationToken)",
+      "generatedMethodId": "WriteAsync_8_System_ReadOnlyMemorybyte_CancellationToken_0"
+    },
+    {
+      "index": 31,
+      "kind": "benchmark",
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.StreamPipeExtensions::CopyToAsync:System.Threading.Tasks.Task(System.IO.Stream,System.IO.Pipelines.PipeWriter,System.Threading.CancellationToken)",
+      "generatedMethodId": "CopyToAsync_0_Stream_PipeWriter_CancellationToken_0"
+    },
+    {
+      "index": 32,
+      "kind": "benchmark",
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.StreamPipeExtensions::CopyToAsync:System.Threading.Tasks.Task(System.IO.Stream,System.IO.Pipelines.PipeWriter,System.Threading.CancellationToken)",
+      "generatedMethodId": "CopyToAsync_0_Stream_PipeWriter_CancellationToken_1"
+    }
+  ]
+}

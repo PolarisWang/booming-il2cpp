@@ -1,5 +1,7 @@
 namespace chaos::il2cpp::runtime_core {
 
+#include <cstring>
+
 // -- External Runtime Dispatch Table Resolution ----------------------------
 // Resolves subjectIds -> function pointers for the codegen-emitted
 // kChaosExternalRuntimeFnTable.  Uses the HotpatchNameRegistry which is
@@ -102,6 +104,28 @@ extern "C" void ChaosResolveExternalRuntimeFnTable() noexcept
         auto* entry = registry.GetDispatchEntryBySlot(module_index, slot);
         if (entry != nullptr && entry->direct_ptr != nullptr) {
             kChaosExternalRuntimeFnTable[i] = entry->direct_ptr;
+        }
+    }
+
+    // ── Fallback: hardcoded interop stubs for unresolvable entries ──
+    // The codegen may fail to produce AOT code for some managed methods,
+    // leaving their kChaosExternalRuntimeFnTable entry as nullptr.  Calling
+    // through a null entry causes AV.  Provide fallback implementations
+    // for well-known methods that have native stubs in interop_stubs.cpp.
+    extern "C" int ChaosMarshalGetHRForLastWin32Error() noexcept;
+    extern "C" int ChaosMarshalGetLastPInvokeError() noexcept;
+    extern void* kChaosExternalRuntimeSubjects[];
+    for (int32_t i = 0; i < kChaosExternalRuntimeCount; ++i) {
+        if (kChaosExternalRuntimeFnTable[i] != nullptr)
+            continue;
+        const char* sid = static_cast<const char*>(kChaosExternalRuntimeSubjects[i]);
+        if (sid == nullptr) continue;
+        if (std::strstr(sid, "::GetHRForLastWin32Error") != nullptr) {
+            kChaosExternalRuntimeFnTable[i] =
+                reinterpret_cast<void*>(ChaosMarshalGetHRForLastWin32Error);
+        } else if (std::strstr(sid, "::GetLastPInvokeError") != nullptr) {
+            kChaosExternalRuntimeFnTable[i] =
+                reinterpret_cast<void*>(ChaosMarshalGetLastPInvokeError);
         }
     }
 }

@@ -1,0 +1,31 @@
+# AutoTestGenerator: System.Reflection.Metadata.Ecma335.InstructionEncoder
+
+- Assembly: `System.Reflection.Metadata`
+- Type: `System.Reflection.Metadata.Ecma335.InstructionEncoder`
+
+## Coverage Summary
+
+| Metric | Value |
+|--------|-------|
+| Total Methods | 23 |
+| Auto-generated (Fact + Benchmark + HotUpdate) | 23 |
+| Benchmark-only (pure void / non-deterministic) | 0 |
+| Skipped (generic / unresolvable) | 0 |
+| Total Subjects | 35 |
+
+## Build
+
+```bash
+# Build with verification (Assert enabled)
+dotnet build -p:DefineConstants=VERIFY
+
+# Build for benchmark (Assert eliminated)
+dotnet build
+```
+
+## Run
+
+```bash
+# Run with verification
+dotnet run --project .
+```

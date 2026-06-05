@@ -1,0 +1,37 @@
+{
+  "assemblyName": "System.Net.ServerSentEvents",
+  "timestamp": "2026-06-05T09:28:18",
+  "totalChunks": 1,
+  "totalBenchmarkedMethods": 0,
+  "aggregatePerformance": {},
+  "chunkSummaries": [
+    {
+      "slug": "global-ns",
+      "fact": {
+        "passed": 5,
+        "total": 5,
+        "isShutdownAV": false,
+        "valueSuspicious": false,
+        "valueWarnings": 0,
+        "metaTotal": 6,
+        "metaBenchmarkCount": 6
+      },
+      "benchmark": {
+        "status": "no_results"
+      },
+      "hotupdate": {
+        "passed": 5,
+        "failed": 0,
+        "allSemantic": false,
+        "allRevert": true,
+        "exitCode": 0,
+        "patchDataUsed": false,
+        "patchFailed": true,
+        "truncated": false,
+        "crash": false,
+        "assertFailed": 0,
+        "semanticChangedCount": 0
+      }
+    }
+  ]
+}

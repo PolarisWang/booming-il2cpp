@@ -1,0 +1,37 @@
+{
+  "assemblyName": "System.Security.Principal.Windows",
+  "timestamp": "2026-06-05T09:28:19",
+  "totalChunks": 1,
+  "totalBenchmarkedMethods": 0,
+  "aggregatePerformance": {},
+  "chunkSummaries": [
+    {
+      "slug": "global-ns",
+      "fact": {
+        "passed": 29,
+        "total": 29,
+        "isShutdownAV": false,
+        "valueSuspicious": false,
+        "valueWarnings": 0,
+        "metaTotal": 42,
+        "metaBenchmarkCount": 42
+      },
+      "benchmark": {
+        "status": "no_results"
+      },
+      "hotupdate": {
+        "passed": 29,
+        "failed": 0,
+        "allSemantic": false,
+        "allRevert": true,
+        "exitCode": 0,
+        "patchDataUsed": true,
+        "patchFailed": false,
+        "truncated": false,
+        "crash": false,
+        "assertFailed": 0,
+        "semanticChangedCount": 0
+      }
+    }
+  ]
+}

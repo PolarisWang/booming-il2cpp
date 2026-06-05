@@ -1,0 +1,24 @@
+{
+  "date": "2026-06-04",
+  "assemblyName": "System.Runtime.InteropServices",
+  "chunks": [
+    {
+      "slug": "global-ns",
+      "fact": {
+        "passed": 31,
+        "total": 31,
+        "isShutdownAV": false,
+        "valueSuspicious": false,
+        "valueWarnings": 0,
+        "metaTotal": 38,
+        "metaBenchmarkCount": 38
+      },
+      "benchmark": {
+        "status": "no_results"
+      },
+      "hotupdate": {
+        "status": "no_results"
+      }
+    }
+  ]
+}

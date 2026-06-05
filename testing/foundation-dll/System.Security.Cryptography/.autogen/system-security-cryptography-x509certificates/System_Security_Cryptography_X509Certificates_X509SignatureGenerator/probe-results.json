@@ -1,0 +1,80 @@
+[
+  {
+    "methodIndex": 0,
+    "setIndex": 0,
+    "subjectId": "System.Security.Cryptography.X509Certificates.X509SignatureGenerator::GetSignatureAlgorithmIdentifier:System.Byte[](System.Security.Cryptography.HashAlgorithmName)__Set0",
+    "isVoid": false,
+    "hasException": true,
+    "exceptionType": "System.NullReferenceException",
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 1,
+    "setIndex": 0,
+    "subjectId": "System.Security.Cryptography.X509Certificates.X509SignatureGenerator::SignData:System.Byte[](System.Byte[],System.Security.Cryptography.HashAlgorithmName)__Set0",
+    "isVoid": false,
+    "hasException": true,
+    "exceptionType": "System.NullReferenceException",
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 1,
+    "setIndex": 1,
+    "subjectId": "System.Security.Cryptography.X509Certificates.X509SignatureGenerator::SignData:System.Byte[](System.Byte[],System.Security.Cryptography.HashAlgorithmName)__Set1",
+    "isVoid": false,
+    "hasException": true,
+    "exceptionType": "System.NullReferenceException",
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 1,
+    "setIndex": 2,
+    "subjectId": "System.Security.Cryptography.X509Certificates.X509SignatureGenerator::SignData:System.Byte[](System.Byte[],System.Security.Cryptography.HashAlgorithmName)__Set2",
+    "isVoid": false,
+    "hasException": true,
+    "exceptionType": "System.NullReferenceException",
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 2,
+    "setIndex": 0,
+    "subjectId": "System.Security.Cryptography.X509Certificates.X509SignatureGenerator::CreateForECDsa:System.Security.Cryptography.X509Certificates.X509SignatureGenerator(System.Security.Cryptography.ECDsa)__Set0",
+    "isVoid": false,
+    "hasException": true,
+    "exceptionType": "System.ArgumentNullException",
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 3,
+    "setIndex": 0,
+    "subjectId": "System.Security.Cryptography.X509Certificates.X509SignatureGenerator::CreateForRSA:System.Security.Cryptography.X509Certificates.X509SignatureGenerator(System.Security.Cryptography.RSA,System.Security.Cryptography.RSASignaturePadding)__Set0",
+    "isVoid": false,
+    "hasException": true,
+    "exceptionType": "System.ArgumentNullException",
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": null
+  }
+]

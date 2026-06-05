@@ -1,0 +1,381 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Security.Claims",
+  "chunkSlug": "global-ns",
+  "totalMethods": 46,
+  "customEntryIndices": null,
+  "benchmarkMethodIndices": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29,
+    30,
+    31,
+    32,
+    33,
+    34,
+    35,
+    36,
+    37,
+    38,
+    39,
+    40,
+    41,
+    42,
+    43,
+    44,
+    45
+  ],
+  "hotupdateMethodIndices": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29,
+    30,
+    31,
+    32,
+    33,
+    34,
+    35,
+    36,
+    37,
+    38,
+    39,
+    40,
+    41,
+    42,
+    43,
+    44,
+    45
+  ],
+  "methods": [
+    {
+      "index": 0,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Claims/System.Security.Claims.Claim::Clone:System.Security.Claims.Claim()",
+      "generatedMethodId": "Clone_0__0"
+    },
+    {
+      "index": 1,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Claims/System.Security.Claims.Claim::Clone:System.Security.Claims.Claim(System.Security.Claims.ClaimsIdentity)",
+      "generatedMethodId": "Clone_1_ClaimsIdentity_0"
+    },
+    {
+      "index": 2,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Claims/System.Security.Claims.Claim::WriteTo:System.Void(System.IO.BinaryWriter)",
+      "generatedMethodId": "WriteTo_2_BinaryWriter_0"
+    },
+    {
+      "index": 3,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Claims/System.Security.Claims.ClaimsIdentity::Clone:System.Security.Claims.ClaimsIdentity()",
+      "generatedMethodId": "Clone_0__0"
+    },
+    {
+      "index": 4,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Claims/System.Security.Claims.ClaimsIdentity::AddClaim:System.Void(System.Security.Claims.Claim)",
+      "generatedMethodId": "AddClaim_1_Claim_0"
+    },
+    {
+      "index": 5,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Claims/System.Security.Claims.ClaimsIdentity::AddClaims:System.Void(System.Collections.Generic.IEnumerable\u003CSystem.Security.Claims.Claim\u003E)",
+      "generatedMethodId": "AddClaims_2_IEnumerableClaim_0"
+    },
+    {
+      "index": 6,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Claims/System.Security.Claims.ClaimsIdentity::AddClaims:System.Void(System.Collections.Generic.IEnumerable\u003CSystem.Security.Claims.Claim\u003E)",
+      "generatedMethodId": "AddClaims_2_IEnumerableClaim_1"
+    },
+    {
+      "index": 7,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Claims/System.Security.Claims.ClaimsIdentity::TryRemoveClaim:System.Boolean(System.Security.Claims.Claim)",
+      "generatedMethodId": "TryRemoveClaim_3_Claim_0"
+    },
+    {
+      "index": 8,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Claims/System.Security.Claims.ClaimsIdentity::RemoveClaim:System.Void(System.Security.Claims.Claim)",
+      "generatedMethodId": "RemoveClaim_4_Claim_0"
+    },
+    {
+      "index": 9,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Claims/System.Security.Claims.ClaimsIdentity::FindAll:System.Collections.Generic.IEnumerable\u003CSystem.Security.Claims.Claim\u003E(System.Predicate\u003CSystem.Security.Claims.Claim\u003E)",
+      "generatedMethodId": "FindAll_5_System_PredicateClaim_0"
+    },
+    {
+      "index": 10,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Claims/System.Security.Claims.ClaimsIdentity::FindAll:System.Collections.Generic.IEnumerable\u003CSystem.Security.Claims.Claim\u003E(System.Predicate\u003CSystem.Security.Claims.Claim\u003E)",
+      "generatedMethodId": "FindAll_5_System_PredicateClaim_1"
+    },
+    {
+      "index": 11,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Claims/System.Security.Claims.ClaimsIdentity::FindAll:System.Collections.Generic.IEnumerable\u003CSystem.Security.Claims.Claim\u003E(System.String)",
+      "generatedMethodId": "FindAll_6_string_0"
+    },
+    {
+      "index": 12,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Claims/System.Security.Claims.ClaimsIdentity::FindAll:System.Collections.Generic.IEnumerable\u003CSystem.Security.Claims.Claim\u003E(System.String)",
+      "generatedMethodId": "FindAll_6_string_1"
+    },
+    {
+      "index": 13,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Claims/System.Security.Claims.ClaimsIdentity::FindFirst:System.Security.Claims.Claim(System.Predicate\u003CSystem.Security.Claims.Claim\u003E)",
+      "generatedMethodId": "FindFirst_7_System_PredicateClaim_0"
+    },
+    {
+      "index": 14,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Claims/System.Security.Claims.ClaimsIdentity::FindFirst:System.Security.Claims.Claim(System.Predicate\u003CSystem.Security.Claims.Claim\u003E)",
+      "generatedMethodId": "FindFirst_7_System_PredicateClaim_1"
+    },
+    {
+      "index": 15,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Claims/System.Security.Claims.ClaimsIdentity::FindFirst:System.Security.Claims.Claim(System.String)",
+      "generatedMethodId": "FindFirst_8_string_0"
+    },
+    {
+      "index": 16,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Claims/System.Security.Claims.ClaimsIdentity::FindFirst:System.Security.Claims.Claim(System.String)",
+      "generatedMethodId": "FindFirst_8_string_1"
+    },
+    {
+      "index": 17,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Claims/System.Security.Claims.ClaimsIdentity::HasClaim:System.Boolean(System.Predicate\u003CSystem.Security.Claims.Claim\u003E)",
+      "generatedMethodId": "HasClaim_9_System_PredicateClaim_0"
+    },
+    {
+      "index": 18,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Claims/System.Security.Claims.ClaimsIdentity::HasClaim:System.Boolean(System.Predicate\u003CSystem.Security.Claims.Claim\u003E)",
+      "generatedMethodId": "HasClaim_9_System_PredicateClaim_1"
+    },
+    {
+      "index": 19,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Claims/System.Security.Claims.ClaimsIdentity::HasClaim:System.Boolean(System.String,System.String)",
+      "generatedMethodId": "HasClaim_10_string_string_0"
+    },
+    {
+      "index": 20,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Claims/System.Security.Claims.ClaimsIdentity::HasClaim:System.Boolean(System.String,System.String)",
+      "generatedMethodId": "HasClaim_10_string_string_1"
+    },
+    {
+      "index": 21,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Claims/System.Security.Claims.ClaimsIdentity::HasClaim:System.Boolean(System.String,System.String)",
+      "generatedMethodId": "HasClaim_10_string_string_2"
+    },
+    {
+      "index": 22,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Claims/System.Security.Claims.ClaimsIdentity::WriteTo:System.Void(System.IO.BinaryWriter)",
+      "generatedMethodId": "WriteTo_11_BinaryWriter_0"
+    },
+    {
+      "index": 23,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Claims/System.Security.Claims.ClaimsPrincipal::AddIdentity:System.Void(System.Security.Claims.ClaimsIdentity)",
+      "generatedMethodId": "AddIdentity_0_ClaimsIdentity_0"
+    },
+    {
+      "index": 24,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Claims/System.Security.Claims.ClaimsPrincipal::AddIdentities:System.Void(System.Collections.Generic.IEnumerable\u003CSystem.Security.Claims.ClaimsIdentity\u003E)",
+      "generatedMethodId": "AddIdentities_1_IEnumerableClaimsIdentity_0"
+    },
+    {
+      "index": 25,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Claims/System.Security.Claims.ClaimsPrincipal::AddIdentities:System.Void(System.Collections.Generic.IEnumerable\u003CSystem.Security.Claims.ClaimsIdentity\u003E)",
+      "generatedMethodId": "AddIdentities_1_IEnumerableClaimsIdentity_1"
+    },
+    {
+      "index": 26,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Claims/System.Security.Claims.ClaimsPrincipal::Clone:System.Security.Claims.ClaimsPrincipal()",
+      "generatedMethodId": "Clone_2__0"
+    },
+    {
+      "index": 27,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Claims/System.Security.Claims.ClaimsPrincipal::FindAll:System.Collections.Generic.IEnumerable\u003CSystem.Security.Claims.Claim\u003E(System.Predicate\u003CSystem.Security.Claims.Claim\u003E)",
+      "generatedMethodId": "FindAll_3_System_PredicateClaim_0"
+    },
+    {
+      "index": 28,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Claims/System.Security.Claims.ClaimsPrincipal::FindAll:System.Collections.Generic.IEnumerable\u003CSystem.Security.Claims.Claim\u003E(System.Predicate\u003CSystem.Security.Claims.Claim\u003E)",
+      "generatedMethodId": "FindAll_3_System_PredicateClaim_1"
+    },
+    {
+      "index": 29,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Claims/System.Security.Claims.ClaimsPrincipal::FindAll:System.Collections.Generic.IEnumerable\u003CSystem.Security.Claims.Claim\u003E(System.String)",
+      "generatedMethodId": "FindAll_4_string_0"
+    },
+    {
+      "index": 30,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Claims/System.Security.Claims.ClaimsPrincipal::FindAll:System.Collections.Generic.IEnumerable\u003CSystem.Security.Claims.Claim\u003E(System.String)",
+      "generatedMethodId": "FindAll_4_string_1"
+    },
+    {
+      "index": 31,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Claims/System.Security.Claims.ClaimsPrincipal::FindFirst:System.Security.Claims.Claim(System.Predicate\u003CSystem.Security.Claims.Claim\u003E)",
+      "generatedMethodId": "FindFirst_5_System_PredicateClaim_0"
+    },
+    {
+      "index": 32,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Claims/System.Security.Claims.ClaimsPrincipal::FindFirst:System.Security.Claims.Claim(System.Predicate\u003CSystem.Security.Claims.Claim\u003E)",
+      "generatedMethodId": "FindFirst_5_System_PredicateClaim_1"
+    },
+    {
+      "index": 33,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Claims/System.Security.Claims.ClaimsPrincipal::FindFirst:System.Security.Claims.Claim(System.String)",
+      "generatedMethodId": "FindFirst_6_string_0"
+    },
+    {
+      "index": 34,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Claims/System.Security.Claims.ClaimsPrincipal::FindFirst:System.Security.Claims.Claim(System.String)",
+      "generatedMethodId": "FindFirst_6_string_1"
+    },
+    {
+      "index": 35,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Claims/System.Security.Claims.ClaimsPrincipal::HasClaim:System.Boolean(System.Predicate\u003CSystem.Security.Claims.Claim\u003E)",
+      "generatedMethodId": "HasClaim_7_System_PredicateClaim_0"
+    },
+    {
+      "index": 36,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Claims/System.Security.Claims.ClaimsPrincipal::HasClaim:System.Boolean(System.Predicate\u003CSystem.Security.Claims.Claim\u003E)",
+      "generatedMethodId": "HasClaim_7_System_PredicateClaim_1"
+    },
+    {
+      "index": 37,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Claims/System.Security.Claims.ClaimsPrincipal::HasClaim:System.Boolean(System.String,System.String)",
+      "generatedMethodId": "HasClaim_8_string_string_0"
+    },
+    {
+      "index": 38,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Claims/System.Security.Claims.ClaimsPrincipal::HasClaim:System.Boolean(System.String,System.String)",
+      "generatedMethodId": "HasClaim_8_string_string_1"
+    },
+    {
+      "index": 39,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Claims/System.Security.Claims.ClaimsPrincipal::HasClaim:System.Boolean(System.String,System.String)",
+      "generatedMethodId": "HasClaim_8_string_string_2"
+    },
+    {
+      "index": 40,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Claims/System.Security.Claims.ClaimsPrincipal::IsInRole:System.Boolean(System.String)",
+      "generatedMethodId": "IsInRole_9_string_0"
+    },
+    {
+      "index": 41,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Claims/System.Security.Claims.ClaimsPrincipal::IsInRole:System.Boolean(System.String)",
+      "generatedMethodId": "IsInRole_9_string_1"
+    },
+    {
+      "index": 42,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Claims/System.Security.Claims.ClaimsPrincipal::WriteTo:System.Void(System.IO.BinaryWriter)",
+      "generatedMethodId": "WriteTo_10_BinaryWriter_0"
+    },
+    {
+      "index": 43,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Claims/System.Security.Principal.GenericIdentity::Clone:System.Security.Claims.ClaimsIdentity()",
+      "generatedMethodId": "Clone_0__0"
+    },
+    {
+      "index": 44,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Claims/System.Security.Principal.GenericPrincipal::IsInRole:System.Boolean(System.String)",
+      "generatedMethodId": "IsInRole_0_string_0"
+    },
+    {
+      "index": 45,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Security.Claims/System.Security.Principal.GenericPrincipal::IsInRole:System.Boolean(System.String)",
+      "generatedMethodId": "IsInRole_0_string_1"
+    }
+  ]
+}

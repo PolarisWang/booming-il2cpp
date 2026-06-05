@@ -1,0 +1,51 @@
+{
+  "assemblyName": "System.Net.Sockets",
+  "timestamp": "2026-06-05T09:28:19",
+  "totalChunks": 1,
+  "chunksWithFacts": 1,
+  "chunksShutdownAV": 0,
+  "chunksWithValueWarnings": 0,
+  "totalPassed": 499,
+  "totalFactMethods": 499,
+  "chunkSummaries": [
+    {
+      "slug": "system-net-sockets",
+      "fact": {
+        "passed": 499,
+        "total": 499,
+        "isShutdownAV": false,
+        "valueSuspicious": false,
+        "valueWarnings": 0,
+        "metaTotal": 521,
+        "metaBenchmarkCount": 521
+      },
+      "benchmark": {
+        "methodCount": 428,
+        "iterations": 50000,
+        "meanDurationMs": 0.39094158878504676,
+        "meanOpsPerSecond": 315316821.7675236,
+        "minDurationMs": 0,
+        "maxDurationMs": 41.6226,
+        "totalDurationMs": 167.323,
+        "totalAllocatedBytes": 68000000.0,
+        "meanSampleCount": 5.1,
+        "totalOutliers": 366,
+        "meanCv": 0.09457167688679245,
+        "maxCv": 0.476485
+      },
+      "hotupdate": {
+        "passed": 500,
+        "failed": 0,
+        "allSemantic": false,
+        "allRevert": true,
+        "exitCode": 0,
+        "patchDataUsed": true,
+        "patchFailed": false,
+        "truncated": false,
+        "crash": false,
+        "assertFailed": 0,
+        "semanticChangedCount": 0
+      }
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "date": "2026-06-04",
+  "assemblyName": "System.Security.Claims",
+  "chunks": [
+    {
+      "slug": "global-ns",
+      "fact": {
+        "passed": 34,
+        "total": 34,
+        "isShutdownAV": false,
+        "valueSuspicious": false,
+        "valueWarnings": 0,
+        "metaTotal": 46,
+        "metaBenchmarkCount": 46
+      },
+      "benchmark": {
+        "status": "no_results"
+      },
+      "hotupdate": {
+        "status": "no_results"
+      }
+    }
+  ]
+}

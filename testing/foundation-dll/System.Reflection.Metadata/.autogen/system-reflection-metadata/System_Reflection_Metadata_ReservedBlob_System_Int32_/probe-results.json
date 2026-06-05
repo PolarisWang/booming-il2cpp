@@ -1,0 +1,15 @@
+[
+  {
+    "methodIndex": 0,
+    "setIndex": 0,
+    "subjectId": "System.Reflection.Metadata.ReservedBlob\u003CSystem.Int32\u003E::CreateWriter:System.Reflection.Metadata.BlobWriter()__Set0",
+    "isVoid": false,
+    "hasException": false,
+    "exceptionType": null,
+    "returnValue": -8211229,
+    "returnValueJson": "{\u0022Offset\u0022:0,\u0022Length\u0022:0,\u0022RemainingBytes\u0022:0,\u0022Blob\u0022:{\u0022Length\u0022:0,\u0022IsDefault\u0022:true}}",
+    "returnValueType": "System.Reflection.Metadata.BlobWriter",
+    "isDeterministic": true,
+    "outRefValues": null
+  }
+]

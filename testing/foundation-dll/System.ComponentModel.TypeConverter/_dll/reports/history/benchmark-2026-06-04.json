@@ -1,0 +1,60 @@
+{
+  "date": "2026-06-04",
+  "assemblyName": "System.ComponentModel.TypeConverter",
+  "chunks": [
+    {
+      "slug": "component-model",
+      "fact": {
+        "passed": 535,
+        "total": 535,
+        "isShutdownAV": false,
+        "valueSuspicious": false,
+        "valueWarnings": 0,
+        "metaTotal": 564,
+        "metaBenchmarkCount": 564
+      },
+      "benchmark": {
+        "status": "no_results"
+      },
+      "hotupdate": {
+        "status": "no_results"
+      }
+    },
+    {
+      "slug": "global-ns",
+      "fact": {
+        "passed": 74,
+        "total": 74,
+        "isShutdownAV": false,
+        "valueSuspicious": false,
+        "valueWarnings": 0,
+        "metaTotal": 80,
+        "metaBenchmarkCount": 80
+      },
+      "benchmark": {
+        "status": "no_results"
+      },
+      "hotupdate": {
+        "status": "no_results"
+      }
+    },
+    {
+      "slug": "system-componentmodel-design",
+      "fact": {
+        "passed": 23,
+        "total": 23,
+        "isShutdownAV": false,
+        "valueSuspicious": false,
+        "valueWarnings": 0,
+        "metaTotal": 38,
+        "metaBenchmarkCount": 38
+      },
+      "benchmark": {
+        "status": "no_results"
+      },
+      "hotupdate": {
+        "status": "no_results"
+      }
+    }
+  ]
+}

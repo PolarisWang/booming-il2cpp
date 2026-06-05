@@ -1,0 +1,973 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Private.Xml",
+  "chunkSlug": "system-xml-schema",
+  "totalMethods": 120,
+  "customEntryIndices": null,
+  "benchmarkMethodIndices": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29,
+    30,
+    31,
+    32,
+    33,
+    34,
+    35,
+    36,
+    37,
+    38,
+    39,
+    40,
+    41,
+    42,
+    43,
+    44,
+    45,
+    46,
+    47,
+    48,
+    49,
+    50,
+    51,
+    52,
+    53,
+    54,
+    55,
+    56,
+    57,
+    58,
+    59,
+    60,
+    61,
+    62,
+    63,
+    64,
+    65,
+    66,
+    67,
+    68,
+    69,
+    70,
+    71,
+    72,
+    73,
+    74,
+    75,
+    76,
+    77,
+    78,
+    79,
+    80,
+    81,
+    82,
+    83,
+    84,
+    85,
+    86,
+    87,
+    88,
+    89,
+    90,
+    91,
+    92,
+    93,
+    94,
+    95,
+    96,
+    97,
+    98,
+    99,
+    100,
+    101,
+    102,
+    103,
+    104,
+    105,
+    106,
+    107,
+    108,
+    109,
+    110,
+    111,
+    112,
+    113,
+    114,
+    115,
+    116,
+    117,
+    118,
+    119
+  ],
+  "hotupdateMethodIndices": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29,
+    30,
+    31,
+    32,
+    33,
+    34,
+    35,
+    36,
+    37,
+    38,
+    39,
+    40,
+    41,
+    42,
+    43,
+    44,
+    45,
+    46,
+    47,
+    48,
+    49,
+    50,
+    51,
+    52,
+    53,
+    54,
+    55,
+    56,
+    57,
+    58,
+    59,
+    60,
+    61,
+    62,
+    63,
+    64,
+    65,
+    66,
+    67,
+    68,
+    69,
+    70,
+    71,
+    72,
+    73,
+    74,
+    75,
+    76,
+    77,
+    78,
+    79,
+    80,
+    81,
+    82,
+    83,
+    84,
+    85,
+    86,
+    87,
+    88,
+    89,
+    90,
+    91,
+    92,
+    93,
+    94,
+    95,
+    96,
+    97,
+    98,
+    99,
+    100,
+    101,
+    102,
+    103,
+    104,
+    105,
+    106,
+    107,
+    108,
+    109,
+    110,
+    111,
+    112,
+    113,
+    114,
+    115,
+    116,
+    117,
+    118,
+    119
+  ],
+  "methods": [
+    {
+      "index": 0,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Resolvers.XmlPreloadedResolver::ResolveUri:System.Uri(System.Uri,System.String)",
+      "generatedMethodId": "ResolveUri_0_System_Uri_string_0"
+    },
+    {
+      "index": 1,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Resolvers.XmlPreloadedResolver::ResolveUri:System.Uri(System.Uri,System.String)",
+      "generatedMethodId": "ResolveUri_0_System_Uri_string_1"
+    },
+    {
+      "index": 2,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Resolvers.XmlPreloadedResolver::GetEntity:System.Object(System.Uri,System.String,System.Type)",
+      "generatedMethodId": "GetEntity_1_System_Uri_string_System_Type_0"
+    },
+    {
+      "index": 3,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Resolvers.XmlPreloadedResolver::GetEntity:System.Object(System.Uri,System.String,System.Type)",
+      "generatedMethodId": "GetEntity_1_System_Uri_string_System_Type_1"
+    },
+    {
+      "index": 4,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Resolvers.XmlPreloadedResolver::SupportsType:System.Boolean(System.Uri,System.Type)",
+      "generatedMethodId": "SupportsType_2_System_Uri_System_Type_0"
+    },
+    {
+      "index": 5,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Resolvers.XmlPreloadedResolver::Add:System.Void(System.Uri,System.Byte[])",
+      "generatedMethodId": "Add_3_System_Uri_System_Byte_0"
+    },
+    {
+      "index": 6,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Resolvers.XmlPreloadedResolver::Add:System.Void(System.Uri,System.Byte[])",
+      "generatedMethodId": "Add_3_System_Uri_System_Byte_1"
+    },
+    {
+      "index": 7,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Resolvers.XmlPreloadedResolver::Add:System.Void(System.Uri,System.Byte[])",
+      "generatedMethodId": "Add_3_System_Uri_System_Byte_2"
+    },
+    {
+      "index": 8,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Resolvers.XmlPreloadedResolver::Add:System.Void(System.Uri,System.Byte[],System.Int32,System.Int32)",
+      "generatedMethodId": "Add_4_System_Uri_System_Byte_int_int_0"
+    },
+    {
+      "index": 9,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Resolvers.XmlPreloadedResolver::Add:System.Void(System.Uri,System.Byte[],System.Int32,System.Int32)",
+      "generatedMethodId": "Add_4_System_Uri_System_Byte_int_int_1"
+    },
+    {
+      "index": 10,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Resolvers.XmlPreloadedResolver::Add:System.Void(System.Uri,System.Byte[],System.Int32,System.Int32)",
+      "generatedMethodId": "Add_4_System_Uri_System_Byte_int_int_2"
+    },
+    {
+      "index": 11,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Resolvers.XmlPreloadedResolver::Add:System.Void(System.Uri,System.Byte[],System.Int32,System.Int32)",
+      "generatedMethodId": "Add_4_System_Uri_System_Byte_int_int_3"
+    },
+    {
+      "index": 12,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Resolvers.XmlPreloadedResolver::Add:System.Void(System.Uri,System.IO.Stream)",
+      "generatedMethodId": "Add_5_System_Uri_Stream_0"
+    },
+    {
+      "index": 13,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Resolvers.XmlPreloadedResolver::Add:System.Void(System.Uri,System.IO.Stream)",
+      "generatedMethodId": "Add_5_System_Uri_Stream_1"
+    },
+    {
+      "index": 14,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Resolvers.XmlPreloadedResolver::Add:System.Void(System.Uri,System.String)",
+      "generatedMethodId": "Add_6_System_Uri_string_0"
+    },
+    {
+      "index": 15,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Resolvers.XmlPreloadedResolver::Add:System.Void(System.Uri,System.String)",
+      "generatedMethodId": "Add_6_System_Uri_string_1"
+    },
+    {
+      "index": 16,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Resolvers.XmlPreloadedResolver::Remove:System.Void(System.Uri)",
+      "generatedMethodId": "Remove_7_System_Uri_0"
+    },
+    {
+      "index": 17,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Resolvers.XmlPreloadedResolver::GetEntityAsync:System.Threading.Tasks.Task\u003CSystem.Object\u003E(System.Uri,System.String,System.Type)",
+      "generatedMethodId": "GetEntityAsync_8_System_Uri_string_System_Type_0"
+    },
+    {
+      "index": 18,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Resolvers.XmlPreloadedResolver::GetEntityAsync:System.Threading.Tasks.Task\u003CSystem.Object\u003E(System.Uri,System.String,System.Type)",
+      "generatedMethodId": "GetEntityAsync_8_System_Uri_string_System_Type_1"
+    },
+    {
+      "index": 19,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Schema.XmlAtomicValue::Clone:System.Xml.Schema.XmlAtomicValue()",
+      "generatedMethodId": "Clone_0__0"
+    },
+    {
+      "index": 20,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Schema.XmlAtomicValue::ValueAs:System.Object(System.Type,System.Xml.IXmlNamespaceResolver)",
+      "generatedMethodId": "ValueAs_1_System_Type_IXmlNamespaceResolver_0"
+    },
+    {
+      "index": 21,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Schema.XmlSchema::Read:System.Xml.Schema.XmlSchema(System.IO.TextReader,System.Xml.Schema.ValidationEventHandler)",
+      "generatedMethodId": "Read_0_TextReader_ValidationEventHandler_0"
+    },
+    {
+      "index": 22,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Schema.XmlSchema::Read:System.Xml.Schema.XmlSchema(System.IO.TextReader,System.Xml.Schema.ValidationEventHandler)",
+      "generatedMethodId": "Read_0_TextReader_ValidationEventHandler_1"
+    },
+    {
+      "index": 23,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Schema.XmlSchema::Read:System.Xml.Schema.XmlSchema(System.IO.Stream,System.Xml.Schema.ValidationEventHandler)",
+      "generatedMethodId": "Read_1_Stream_ValidationEventHandler_0"
+    },
+    {
+      "index": 24,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Schema.XmlSchema::Read:System.Xml.Schema.XmlSchema(System.IO.Stream,System.Xml.Schema.ValidationEventHandler)",
+      "generatedMethodId": "Read_1_Stream_ValidationEventHandler_1"
+    },
+    {
+      "index": 25,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Schema.XmlSchema::Read:System.Xml.Schema.XmlSchema(System.Xml.XmlReader,System.Xml.Schema.ValidationEventHandler)",
+      "generatedMethodId": "Read_2_XmlReader_ValidationEventHandler_0"
+    },
+    {
+      "index": 26,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Schema.XmlSchema::Write:System.Void(System.IO.Stream)",
+      "generatedMethodId": "Write_3_Stream_0"
+    },
+    {
+      "index": 27,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Schema.XmlSchema::Write:System.Void(System.IO.Stream)",
+      "generatedMethodId": "Write_3_Stream_1"
+    },
+    {
+      "index": 28,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Schema.XmlSchema::Write:System.Void(System.IO.Stream,System.Xml.XmlNamespaceManager)",
+      "generatedMethodId": "Write_4_Stream_XmlNamespaceManager_0"
+    },
+    {
+      "index": 29,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Schema.XmlSchema::Write:System.Void(System.IO.Stream,System.Xml.XmlNamespaceManager)",
+      "generatedMethodId": "Write_4_Stream_XmlNamespaceManager_1"
+    },
+    {
+      "index": 30,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Schema.XmlSchema::Write:System.Void(System.IO.TextWriter)",
+      "generatedMethodId": "Write_5_TextWriter_0"
+    },
+    {
+      "index": 31,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Schema.XmlSchema::Write:System.Void(System.IO.TextWriter)",
+      "generatedMethodId": "Write_5_TextWriter_1"
+    },
+    {
+      "index": 32,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Schema.XmlSchema::Write:System.Void(System.IO.TextWriter,System.Xml.XmlNamespaceManager)",
+      "generatedMethodId": "Write_6_TextWriter_XmlNamespaceManager_0"
+    },
+    {
+      "index": 33,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Schema.XmlSchema::Write:System.Void(System.IO.TextWriter,System.Xml.XmlNamespaceManager)",
+      "generatedMethodId": "Write_6_TextWriter_XmlNamespaceManager_1"
+    },
+    {
+      "index": 34,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Schema.XmlSchema::Write:System.Void(System.Xml.XmlWriter)",
+      "generatedMethodId": "Write_7_XmlWriter_0"
+    },
+    {
+      "index": 35,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Schema.XmlSchema::Write:System.Void(System.Xml.XmlWriter,System.Xml.XmlNamespaceManager)",
+      "generatedMethodId": "Write_8_XmlWriter_XmlNamespaceManager_0"
+    },
+    {
+      "index": 36,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Schema.XmlSchema::Compile:System.Void(System.Xml.Schema.ValidationEventHandler)",
+      "generatedMethodId": "Compile_9_ValidationEventHandler_0"
+    },
+    {
+      "index": 37,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Schema.XmlSchema::Compile:System.Void(System.Xml.Schema.ValidationEventHandler,System.Xml.XmlResolver)",
+      "generatedMethodId": "Compile_10_ValidationEventHandler_XmlResolver_0"
+    },
+    {
+      "index": 38,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Schema.XmlSchemaCollection::Add:System.Xml.Schema.XmlSchema(System.String,System.String)",
+      "generatedMethodId": "Add_0_string_string_0"
+    },
+    {
+      "index": 39,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Schema.XmlSchemaCollection::Add:System.Xml.Schema.XmlSchema(System.String,System.String)",
+      "generatedMethodId": "Add_0_string_string_1"
+    },
+    {
+      "index": 40,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Schema.XmlSchemaCollection::Add:System.Xml.Schema.XmlSchema(System.String,System.String)",
+      "generatedMethodId": "Add_0_string_string_2"
+    },
+    {
+      "index": 41,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Schema.XmlSchemaCollection::Add:System.Xml.Schema.XmlSchema(System.String,System.Xml.XmlReader)",
+      "generatedMethodId": "Add_1_string_XmlReader_0"
+    },
+    {
+      "index": 42,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Schema.XmlSchemaCollection::Add:System.Xml.Schema.XmlSchema(System.String,System.Xml.XmlReader)",
+      "generatedMethodId": "Add_1_string_XmlReader_1"
+    },
+    {
+      "index": 43,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Schema.XmlSchemaCollection::Add:System.Xml.Schema.XmlSchema(System.String,System.Xml.XmlReader,System.Xml.XmlResolver)",
+      "generatedMethodId": "Add_2_string_XmlReader_XmlResolver_0"
+    },
+    {
+      "index": 44,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Schema.XmlSchemaCollection::Add:System.Xml.Schema.XmlSchema(System.String,System.Xml.XmlReader,System.Xml.XmlResolver)",
+      "generatedMethodId": "Add_2_string_XmlReader_XmlResolver_1"
+    },
+    {
+      "index": 45,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Schema.XmlSchemaCollection::Add:System.Xml.Schema.XmlSchema(System.Xml.Schema.XmlSchema)",
+      "generatedMethodId": "Add_3_XmlSchema_0"
+    },
+    {
+      "index": 46,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Schema.XmlSchemaCollection::Add:System.Xml.Schema.XmlSchema(System.Xml.Schema.XmlSchema,System.Xml.XmlResolver)",
+      "generatedMethodId": "Add_4_XmlSchema_XmlResolver_0"
+    },
+    {
+      "index": 47,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Schema.XmlSchemaCollection::Add:System.Void(System.Xml.Schema.XmlSchemaCollection)",
+      "generatedMethodId": "Add_5_XmlSchemaCollection_0"
+    },
+    {
+      "index": 48,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Schema.XmlSchemaCollection::Contains:System.Boolean(System.Xml.Schema.XmlSchema)",
+      "generatedMethodId": "Contains_6_XmlSchema_0"
+    },
+    {
+      "index": 49,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Schema.XmlSchemaCollection::Contains:System.Boolean(System.String)",
+      "generatedMethodId": "Contains_7_string_0"
+    },
+    {
+      "index": 50,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Schema.XmlSchemaCollection::Contains:System.Boolean(System.String)",
+      "generatedMethodId": "Contains_7_string_1"
+    },
+    {
+      "index": 51,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Schema.XmlSchemaCollection::GetEnumerator:System.Xml.Schema.XmlSchemaCollectionEnumerator()",
+      "generatedMethodId": "GetEnumerator_8__0"
+    },
+    {
+      "index": 52,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Schema.XmlSchemaDatatype::ParseValue:System.Object(System.String,System.Xml.XmlNameTable,System.Xml.IXmlNamespaceResolver)",
+      "generatedMethodId": "ParseValue_0_string_XmlNameTable_IXmlNamespaceResolver_0"
+    },
+    {
+      "index": 53,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Schema.XmlSchemaDatatype::ParseValue:System.Object(System.String,System.Xml.XmlNameTable,System.Xml.IXmlNamespaceResolver)",
+      "generatedMethodId": "ParseValue_0_string_XmlNameTable_IXmlNamespaceResolver_1"
+    },
+    {
+      "index": 54,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Schema.XmlSchemaDatatype::ChangeType:System.Object(System.Object,System.Type)",
+      "generatedMethodId": "ChangeType_1_object_System_Type_0"
+    },
+    {
+      "index": 55,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Schema.XmlSchemaDatatype::ChangeType:System.Object(System.Object,System.Type,System.Xml.IXmlNamespaceResolver)",
+      "generatedMethodId": "ChangeType_2_object_System_Type_IXmlNamespaceResolver_0"
+    },
+    {
+      "index": 56,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Schema.XmlSchemaDatatype::IsDerivedFrom:System.Boolean(System.Xml.Schema.XmlSchemaDatatype)",
+      "generatedMethodId": "IsDerivedFrom_3_XmlSchemaDatatype_0"
+    },
+    {
+      "index": 57,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Schema.XmlSchemaInference::InferSchema:System.Xml.Schema.XmlSchemaSet(System.Xml.XmlReader)",
+      "generatedMethodId": "InferSchema_0_XmlReader_0"
+    },
+    {
+      "index": 58,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Schema.XmlSchemaInference::InferSchema:System.Xml.Schema.XmlSchemaSet(System.Xml.XmlReader,System.Xml.Schema.XmlSchemaSet)",
+      "generatedMethodId": "InferSchema_1_XmlReader_XmlSchemaSet_0"
+    },
+    {
+      "index": 59,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Schema.XmlSchemaObjectCollection::GetEnumerator:System.Xml.Schema.XmlSchemaObjectEnumerator()",
+      "generatedMethodId": "GetEnumerator_0__0"
+    },
+    {
+      "index": 60,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Schema.XmlSchemaObjectCollection::Add:System.Int32(System.Xml.Schema.XmlSchemaObject)",
+      "generatedMethodId": "Add_1_XmlSchemaObject_0"
+    },
+    {
+      "index": 61,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Schema.XmlSchemaObjectCollection::Insert:System.Void(System.Int32,System.Xml.Schema.XmlSchemaObject)",
+      "generatedMethodId": "Insert_2_int_XmlSchemaObject_0"
+    },
+    {
+      "index": 62,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Schema.XmlSchemaObjectCollection::Insert:System.Void(System.Int32,System.Xml.Schema.XmlSchemaObject)",
+      "generatedMethodId": "Insert_2_int_XmlSchemaObject_1"
+    },
+    {
+      "index": 63,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Schema.XmlSchemaObjectCollection::IndexOf:System.Int32(System.Xml.Schema.XmlSchemaObject)",
+      "generatedMethodId": "IndexOf_3_XmlSchemaObject_0"
+    },
+    {
+      "index": 64,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Schema.XmlSchemaObjectCollection::Contains:System.Boolean(System.Xml.Schema.XmlSchemaObject)",
+      "generatedMethodId": "Contains_4_XmlSchemaObject_0"
+    },
+    {
+      "index": 65,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Schema.XmlSchemaObjectCollection::Remove:System.Void(System.Xml.Schema.XmlSchemaObject)",
+      "generatedMethodId": "Remove_5_XmlSchemaObject_0"
+    },
+    {
+      "index": 66,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Schema.XmlSchemaObjectTable::Contains:System.Boolean(System.Xml.XmlQualifiedName)",
+      "generatedMethodId": "Contains_0_XmlQualifiedName_0"
+    },
+    {
+      "index": 67,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Schema.XmlSchemaObjectTable::GetEnumerator:System.Collections.IDictionaryEnumerator()",
+      "generatedMethodId": "GetEnumerator_1__0"
+    },
+    {
+      "index": 68,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Schema.XmlSchemaSet::Add:System.Xml.Schema.XmlSchema(System.String,System.String)",
+      "generatedMethodId": "Add_0_string_string_0"
+    },
+    {
+      "index": 69,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Schema.XmlSchemaSet::Add:System.Xml.Schema.XmlSchema(System.String,System.String)",
+      "generatedMethodId": "Add_0_string_string_1"
+    },
+    {
+      "index": 70,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Schema.XmlSchemaSet::Add:System.Xml.Schema.XmlSchema(System.String,System.String)",
+      "generatedMethodId": "Add_0_string_string_2"
+    },
+    {
+      "index": 71,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Schema.XmlSchemaSet::Add:System.Xml.Schema.XmlSchema(System.String,System.Xml.XmlReader)",
+      "generatedMethodId": "Add_1_string_XmlReader_0"
+    },
+    {
+      "index": 72,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Schema.XmlSchemaSet::Add:System.Xml.Schema.XmlSchema(System.String,System.Xml.XmlReader)",
+      "generatedMethodId": "Add_1_string_XmlReader_1"
+    },
+    {
+      "index": 73,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Schema.XmlSchemaSet::Add:System.Void(System.Xml.Schema.XmlSchemaSet)",
+      "generatedMethodId": "Add_2_XmlSchemaSet_0"
+    },
+    {
+      "index": 74,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Schema.XmlSchemaSet::Add:System.Xml.Schema.XmlSchema(System.Xml.Schema.XmlSchema)",
+      "generatedMethodId": "Add_3_XmlSchema_0"
+    },
+    {
+      "index": 75,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Schema.XmlSchemaSet::Remove:System.Xml.Schema.XmlSchema(System.Xml.Schema.XmlSchema)",
+      "generatedMethodId": "Remove_4_XmlSchema_0"
+    },
+    {
+      "index": 76,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Schema.XmlSchemaSet::RemoveRecursive:System.Boolean(System.Xml.Schema.XmlSchema)",
+      "generatedMethodId": "RemoveRecursive_5_XmlSchema_0"
+    },
+    {
+      "index": 77,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Schema.XmlSchemaSet::Contains:System.Boolean(System.String)",
+      "generatedMethodId": "Contains_6_string_0"
+    },
+    {
+      "index": 78,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Schema.XmlSchemaSet::Contains:System.Boolean(System.String)",
+      "generatedMethodId": "Contains_6_string_1"
+    },
+    {
+      "index": 79,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Schema.XmlSchemaSet::Contains:System.Boolean(System.Xml.Schema.XmlSchema)",
+      "generatedMethodId": "Contains_7_XmlSchema_0"
+    },
+    {
+      "index": 80,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Schema.XmlSchemaSet::Compile:System.Void()",
+      "generatedMethodId": "Compile_8__0"
+    },
+    {
+      "index": 81,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Schema.XmlSchemaSet::Reprocess:System.Xml.Schema.XmlSchema(System.Xml.Schema.XmlSchema)",
+      "generatedMethodId": "Reprocess_9_XmlSchema_0"
+    },
+    {
+      "index": 82,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Schema.XmlSchemaSet::Schemas:System.Collections.ICollection()",
+      "generatedMethodId": "Schemas_10__0"
+    },
+    {
+      "index": 83,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Schema.XmlSchemaSet::Schemas:System.Collections.ICollection(System.String)",
+      "generatedMethodId": "Schemas_11_string_0"
+    },
+    {
+      "index": 84,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Schema.XmlSchemaSet::Schemas:System.Collections.ICollection(System.String)",
+      "generatedMethodId": "Schemas_11_string_1"
+    },
+    {
+      "index": 85,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Schema.XmlSchemaType::GetBuiltInSimpleType:System.Xml.Schema.XmlSchemaSimpleType(System.Xml.XmlQualifiedName)",
+      "generatedMethodId": "GetBuiltInSimpleType_0_XmlQualifiedName_0"
+    },
+    {
+      "index": 86,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Schema.XmlSchemaType::GetBuiltInSimpleType:System.Xml.Schema.XmlSchemaSimpleType(System.Xml.Schema.XmlTypeCode)",
+      "generatedMethodId": "GetBuiltInSimpleType_1_XmlTypeCode_0"
+    },
+    {
+      "index": 87,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Schema.XmlSchemaType::GetBuiltInComplexType:System.Xml.Schema.XmlSchemaComplexType(System.Xml.Schema.XmlTypeCode)",
+      "generatedMethodId": "GetBuiltInComplexType_2_XmlTypeCode_0"
+    },
+    {
+      "index": 88,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Schema.XmlSchemaType::GetBuiltInComplexType:System.Xml.Schema.XmlSchemaComplexType(System.Xml.XmlQualifiedName)",
+      "generatedMethodId": "GetBuiltInComplexType_3_XmlQualifiedName_0"
+    },
+    {
+      "index": 89,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Schema.XmlSchemaType::IsDerivedFrom:System.Boolean(System.Xml.Schema.XmlSchemaType,System.Xml.Schema.XmlSchemaType,System.Xml.Schema.XmlSchemaDerivationMethod)",
+      "generatedMethodId": "IsDerivedFrom_4_XmlSchemaType_XmlSchemaType_XmlSchemaDerivationMethod_0"
+    },
+    {
+      "index": 90,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Schema.XmlSchemaValidator::AddSchema:System.Void(System.Xml.Schema.XmlSchema)",
+      "generatedMethodId": "AddSchema_0_XmlSchema_0"
+    },
+    {
+      "index": 91,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Schema.XmlSchemaValidator::Initialize:System.Void()",
+      "generatedMethodId": "Initialize_1__0"
+    },
+    {
+      "index": 92,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Schema.XmlSchemaValidator::Initialize:System.Void(System.Xml.Schema.XmlSchemaObject)",
+      "generatedMethodId": "Initialize_2_XmlSchemaObject_0"
+    },
+    {
+      "index": 93,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Schema.XmlSchemaValidator::ValidateElement:System.Void(System.String,System.String,System.Xml.Schema.XmlSchemaInfo)",
+      "generatedMethodId": "ValidateElement_3_string_string_XmlSchemaInfo_0"
+    },
+    {
+      "index": 94,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Schema.XmlSchemaValidator::ValidateElement:System.Void(System.String,System.String,System.Xml.Schema.XmlSchemaInfo)",
+      "generatedMethodId": "ValidateElement_3_string_string_XmlSchemaInfo_1"
+    },
+    {
+      "index": 95,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Schema.XmlSchemaValidator::ValidateElement:System.Void(System.String,System.String,System.Xml.Schema.XmlSchemaInfo)",
+      "generatedMethodId": "ValidateElement_3_string_string_XmlSchemaInfo_2"
+    },
+    {
+      "index": 96,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Schema.XmlSchemaValidator::ValidateElement:System.Void(System.String,System.String,System.Xml.Schema.XmlSchemaInfo,System.String,System.String,System.String,System.String)",
+      "generatedMethodId": "ValidateElement_4_string_string_XmlSchemaInfo_string_string_string_string_0"
+    },
+    {
+      "index": 97,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Schema.XmlSchemaValidator::ValidateElement:System.Void(System.String,System.String,System.Xml.Schema.XmlSchemaInfo,System.String,System.String,System.String,System.String)",
+      "generatedMethodId": "ValidateElement_4_string_string_XmlSchemaInfo_string_string_string_string_1"
+    },
+    {
+      "index": 98,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Schema.XmlSchemaValidator::ValidateElement:System.Void(System.String,System.String,System.Xml.Schema.XmlSchemaInfo,System.String,System.String,System.String,System.String)",
+      "generatedMethodId": "ValidateElement_4_string_string_XmlSchemaInfo_string_string_string_string_2"
+    },
+    {
+      "index": 99,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Schema.XmlSchemaValidator::ValidateAttribute:System.Object(System.String,System.String,System.String,System.Xml.Schema.XmlSchemaInfo)",
+      "generatedMethodId": "ValidateAttribute_5_string_string_string_XmlSchemaInfo_0"
+    },
+    {
+      "index": 100,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Schema.XmlSchemaValidator::ValidateAttribute:System.Object(System.String,System.String,System.String,System.Xml.Schema.XmlSchemaInfo)",
+      "generatedMethodId": "ValidateAttribute_5_string_string_string_XmlSchemaInfo_1"
+    },
+    {
+      "index": 101,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Schema.XmlSchemaValidator::ValidateAttribute:System.Object(System.String,System.String,System.String,System.Xml.Schema.XmlSchemaInfo)",
+      "generatedMethodId": "ValidateAttribute_5_string_string_string_XmlSchemaInfo_2"
+    },
+    {
+      "index": 102,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Schema.XmlSchemaValidator::ValidateAttribute:System.Object(System.String,System.String,System.String,System.Xml.Schema.XmlSchemaInfo)",
+      "generatedMethodId": "ValidateAttribute_5_string_string_string_XmlSchemaInfo_3"
+    },
+    {
+      "index": 103,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Schema.XmlSchemaValidator::ValidateAttribute:System.Object(System.String,System.String,System.Xml.Schema.XmlValueGetter,System.Xml.Schema.XmlSchemaInfo)",
+      "generatedMethodId": "ValidateAttribute_6_string_string_XmlValueGetter_XmlSchemaInfo_0"
+    },
+    {
+      "index": 104,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Schema.XmlSchemaValidator::ValidateAttribute:System.Object(System.String,System.String,System.Xml.Schema.XmlValueGetter,System.Xml.Schema.XmlSchemaInfo)",
+      "generatedMethodId": "ValidateAttribute_6_string_string_XmlValueGetter_XmlSchemaInfo_1"
+    },
+    {
+      "index": 105,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Schema.XmlSchemaValidator::ValidateAttribute:System.Object(System.String,System.String,System.Xml.Schema.XmlValueGetter,System.Xml.Schema.XmlSchemaInfo)",
+      "generatedMethodId": "ValidateAttribute_6_string_string_XmlValueGetter_XmlSchemaInfo_2"
+    },
+    {
+      "index": 106,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Schema.XmlSchemaValidator::GetUnspecifiedDefaultAttributes:System.Void(System.Collections.ArrayList)",
+      "generatedMethodId": "GetUnspecifiedDefaultAttributes_7_ArrayList_0"
+    },
+    {
+      "index": 107,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Schema.XmlSchemaValidator::ValidateEndOfAttributes:System.Void(System.Xml.Schema.XmlSchemaInfo)",
+      "generatedMethodId": "ValidateEndOfAttributes_8_XmlSchemaInfo_0"
+    },
+    {
+      "index": 108,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Schema.XmlSchemaValidator::ValidateText:System.Void(System.String)",
+      "generatedMethodId": "ValidateText_9_string_0"
+    },
+    {
+      "index": 109,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Schema.XmlSchemaValidator::ValidateText:System.Void(System.String)",
+      "generatedMethodId": "ValidateText_9_string_1"
+    },
+    {
+      "index": 110,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Schema.XmlSchemaValidator::ValidateText:System.Void(System.Xml.Schema.XmlValueGetter)",
+      "generatedMethodId": "ValidateText_10_XmlValueGetter_0"
+    },
+    {
+      "index": 111,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Schema.XmlSchemaValidator::ValidateWhitespace:System.Void(System.String)",
+      "generatedMethodId": "ValidateWhitespace_11_string_0"
+    },
+    {
+      "index": 112,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Schema.XmlSchemaValidator::ValidateWhitespace:System.Void(System.String)",
+      "generatedMethodId": "ValidateWhitespace_11_string_1"
+    },
+    {
+      "index": 113,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Schema.XmlSchemaValidator::ValidateWhitespace:System.Void(System.Xml.Schema.XmlValueGetter)",
+      "generatedMethodId": "ValidateWhitespace_12_XmlValueGetter_0"
+    },
+    {
+      "index": 114,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Schema.XmlSchemaValidator::ValidateEndElement:System.Object(System.Xml.Schema.XmlSchemaInfo)",
+      "generatedMethodId": "ValidateEndElement_13_XmlSchemaInfo_0"
+    },
+    {
+      "index": 115,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Schema.XmlSchemaValidator::ValidateEndElement:System.Object(System.Xml.Schema.XmlSchemaInfo,System.Object)",
+      "generatedMethodId": "ValidateEndElement_14_XmlSchemaInfo_object_0"
+    },
+    {
+      "index": 116,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Schema.XmlSchemaValidator::SkipToEndElement:System.Void(System.Xml.Schema.XmlSchemaInfo)",
+      "generatedMethodId": "SkipToEndElement_15_XmlSchemaInfo_0"
+    },
+    {
+      "index": 117,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Schema.XmlSchemaValidator::EndValidation:System.Void()",
+      "generatedMethodId": "EndValidation_16__0"
+    },
+    {
+      "index": 118,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Schema.XmlSchemaValidator::GetExpectedParticles:System.Xml.Schema.XmlSchemaParticle[]()",
+      "generatedMethodId": "GetExpectedParticles_17__0"
+    },
+    {
+      "index": 119,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Schema.XmlSchemaValidator::GetExpectedAttributes:System.Xml.Schema.XmlSchemaAttribute[]()",
+      "generatedMethodId": "GetExpectedAttributes_18__0"
+    }
+  ]
+}

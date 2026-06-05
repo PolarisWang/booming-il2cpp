@@ -1,0 +1,28 @@
+[
+  {
+    "methodIndex": 0,
+    "setIndex": 0,
+    "subjectId": "System.Text.Json.JsonEncodedText::Encode:System.Text.Json.JsonEncodedText(System.String,System.Text.Encodings.Web.JavaScriptEncoder)__Set0",
+    "isVoid": false,
+    "hasException": true,
+    "exceptionType": "System.ArgumentNullException",
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 0,
+    "setIndex": 1,
+    "subjectId": "System.Text.Json.JsonEncodedText::Encode:System.Text.Json.JsonEncodedText(System.String,System.Text.Encodings.Web.JavaScriptEncoder)__Set1",
+    "isVoid": false,
+    "hasException": true,
+    "exceptionType": "System.InvalidOperationException",
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": null
+  }
+]

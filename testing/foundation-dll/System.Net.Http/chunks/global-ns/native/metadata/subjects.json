@@ -1,0 +1,1085 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-06-04T17:07:03.1788561Z",
+  "generator": "Chaos.IL2CPP.Tools.TestProjectGenerator",
+  "entryExecutable": "entry",
+  "subjects": [
+    {
+      "index": 0,
+      "kind": "benchmark",
+      "subjectId": "System.Net.Http/System.Net.Http.Headers.AuthenticationHeaderValue::Parse:System.Net.Http.Headers.AuthenticationHeaderValue(System.String)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.Headers.AuthenticationHeaderValue",
+      "methodName": "Parse",
+      "isStatic": true
+    },
+    {
+      "index": 1,
+      "kind": "benchmark",
+      "subjectId": "System.Net.Http/System.Net.Http.Headers.AuthenticationHeaderValue::Parse:System.Net.Http.Headers.AuthenticationHeaderValue(System.String)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.Headers.AuthenticationHeaderValue",
+      "methodName": "Parse",
+      "isStatic": true
+    },
+    {
+      "index": 2,
+      "kind": "benchmark",
+      "subjectId": "System.Net.Http/System.Net.Http.Headers.AuthenticationHeaderValue::TryParse:System.Boolean(System.String,System.Net.Http.Headers.AuthenticationHeaderValue)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.Headers.AuthenticationHeaderValue",
+      "methodName": "TryParse",
+      "isStatic": true
+    },
+    {
+      "index": 3,
+      "kind": "benchmark",
+      "subjectId": "System.Net.Http/System.Net.Http.Headers.AuthenticationHeaderValue::TryParse:System.Boolean(System.String,System.Net.Http.Headers.AuthenticationHeaderValue)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.Headers.AuthenticationHeaderValue",
+      "methodName": "TryParse",
+      "isStatic": true
+    },
+    {
+      "index": 4,
+      "kind": "benchmark",
+      "subjectId": "System.Net.Http/System.Net.Http.Headers.CacheControlHeaderValue::Parse:System.Net.Http.Headers.CacheControlHeaderValue(System.String)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.Headers.CacheControlHeaderValue",
+      "methodName": "Parse",
+      "isStatic": true
+    },
+    {
+      "index": 5,
+      "kind": "benchmark",
+      "subjectId": "System.Net.Http/System.Net.Http.Headers.CacheControlHeaderValue::Parse:System.Net.Http.Headers.CacheControlHeaderValue(System.String)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.Headers.CacheControlHeaderValue",
+      "methodName": "Parse",
+      "isStatic": true
+    },
+    {
+      "index": 6,
+      "kind": "benchmark",
+      "subjectId": "System.Net.Http/System.Net.Http.Headers.CacheControlHeaderValue::TryParse:System.Boolean(System.String,System.Net.Http.Headers.CacheControlHeaderValue)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.Headers.CacheControlHeaderValue",
+      "methodName": "TryParse",
+      "isStatic": true
+    },
+    {
+      "index": 7,
+      "kind": "benchmark",
+      "subjectId": "System.Net.Http/System.Net.Http.Headers.CacheControlHeaderValue::TryParse:System.Boolean(System.String,System.Net.Http.Headers.CacheControlHeaderValue)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.Headers.CacheControlHeaderValue",
+      "methodName": "TryParse",
+      "isStatic": true
+    },
+    {
+      "index": 8,
+      "kind": "benchmark",
+      "subjectId": "System.Net.Http/System.Net.Http.Headers.ContentDispositionHeaderValue::Parse:System.Net.Http.Headers.ContentDispositionHeaderValue(System.String)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.Headers.ContentDispositionHeaderValue",
+      "methodName": "Parse",
+      "isStatic": true
+    },
+    {
+      "index": 9,
+      "kind": "benchmark",
+      "subjectId": "System.Net.Http/System.Net.Http.Headers.ContentDispositionHeaderValue::Parse:System.Net.Http.Headers.ContentDispositionHeaderValue(System.String)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.Headers.ContentDispositionHeaderValue",
+      "methodName": "Parse",
+      "isStatic": true
+    },
+    {
+      "index": 10,
+      "kind": "benchmark",
+      "subjectId": "System.Net.Http/System.Net.Http.Headers.ContentDispositionHeaderValue::TryParse:System.Boolean(System.String,System.Net.Http.Headers.ContentDispositionHeaderValue)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.Headers.ContentDispositionHeaderValue",
+      "methodName": "TryParse",
+      "isStatic": true
+    },
+    {
+      "index": 11,
+      "kind": "benchmark",
+      "subjectId": "System.Net.Http/System.Net.Http.Headers.ContentDispositionHeaderValue::TryParse:System.Boolean(System.String,System.Net.Http.Headers.ContentDispositionHeaderValue)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.Headers.ContentDispositionHeaderValue",
+      "methodName": "TryParse",
+      "isStatic": true
+    },
+    {
+      "index": 12,
+      "kind": "benchmark",
+      "subjectId": "System.Net.Http/System.Net.Http.Headers.ContentRangeHeaderValue::Parse:System.Net.Http.Headers.ContentRangeHeaderValue(System.String)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.Headers.ContentRangeHeaderValue",
+      "methodName": "Parse",
+      "isStatic": true
+    },
+    {
+      "index": 13,
+      "kind": "benchmark",
+      "subjectId": "System.Net.Http/System.Net.Http.Headers.ContentRangeHeaderValue::Parse:System.Net.Http.Headers.ContentRangeHeaderValue(System.String)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.Headers.ContentRangeHeaderValue",
+      "methodName": "Parse",
+      "isStatic": true
+    },
+    {
+      "index": 14,
+      "kind": "benchmark",
+      "subjectId": "System.Net.Http/System.Net.Http.Headers.ContentRangeHeaderValue::TryParse:System.Boolean(System.String,System.Net.Http.Headers.ContentRangeHeaderValue)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.Headers.ContentRangeHeaderValue",
+      "methodName": "TryParse",
+      "isStatic": true
+    },
+    {
+      "index": 15,
+      "kind": "benchmark",
+      "subjectId": "System.Net.Http/System.Net.Http.Headers.ContentRangeHeaderValue::TryParse:System.Boolean(System.String,System.Net.Http.Headers.ContentRangeHeaderValue)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.Headers.ContentRangeHeaderValue",
+      "methodName": "TryParse",
+      "isStatic": true
+    },
+    {
+      "index": 16,
+      "kind": "benchmark",
+      "subjectId": "System.Net.Http/System.Net.Http.Headers.EntityTagHeaderValue::Parse:System.Net.Http.Headers.EntityTagHeaderValue(System.String)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.Headers.EntityTagHeaderValue",
+      "methodName": "Parse",
+      "isStatic": true
+    },
+    {
+      "index": 17,
+      "kind": "benchmark",
+      "subjectId": "System.Net.Http/System.Net.Http.Headers.EntityTagHeaderValue::Parse:System.Net.Http.Headers.EntityTagHeaderValue(System.String)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.Headers.EntityTagHeaderValue",
+      "methodName": "Parse",
+      "isStatic": true
+    },
+    {
+      "index": 18,
+      "kind": "benchmark",
+      "subjectId": "System.Net.Http/System.Net.Http.Headers.EntityTagHeaderValue::TryParse:System.Boolean(System.String,System.Net.Http.Headers.EntityTagHeaderValue)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.Headers.EntityTagHeaderValue",
+      "methodName": "TryParse",
+      "isStatic": true
+    },
+    {
+      "index": 19,
+      "kind": "benchmark",
+      "subjectId": "System.Net.Http/System.Net.Http.Headers.EntityTagHeaderValue::TryParse:System.Boolean(System.String,System.Net.Http.Headers.EntityTagHeaderValue)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.Headers.EntityTagHeaderValue",
+      "methodName": "TryParse",
+      "isStatic": true
+    },
+    {
+      "index": 20,
+      "kind": "benchmark",
+      "subjectId": "System.Net.Http/System.Net.Http.Headers.HttpHeaders::Add:System.Void(System.String,System.String)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.Headers.HttpHeaders",
+      "methodName": "Add",
+      "isStatic": true
+    },
+    {
+      "index": 21,
+      "kind": "benchmark",
+      "subjectId": "System.Net.Http/System.Net.Http.Headers.HttpHeaders::Add:System.Void(System.String,System.String)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.Headers.HttpHeaders",
+      "methodName": "Add",
+      "isStatic": true
+    },
+    {
+      "index": 22,
+      "kind": "benchmark",
+      "subjectId": "System.Net.Http/System.Net.Http.Headers.HttpHeaders::Add:System.Void(System.String,System.String)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.Headers.HttpHeaders",
+      "methodName": "Add",
+      "isStatic": true
+    },
+    {
+      "index": 23,
+      "kind": "benchmark",
+      "subjectId": "System.Net.Http/System.Net.Http.Headers.HttpHeaders::Add:System.Void(System.String,System.Collections.Generic.IEnumerable\u003CSystem.String\u003E)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.Headers.HttpHeaders",
+      "methodName": "Add",
+      "isStatic": true
+    },
+    {
+      "index": 24,
+      "kind": "benchmark",
+      "subjectId": "System.Net.Http/System.Net.Http.Headers.HttpHeaders::Add:System.Void(System.String,System.Collections.Generic.IEnumerable\u003CSystem.String\u003E)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.Headers.HttpHeaders",
+      "methodName": "Add",
+      "isStatic": true
+    },
+    {
+      "index": 25,
+      "kind": "benchmark",
+      "subjectId": "System.Net.Http/System.Net.Http.Headers.HttpHeaders::Add:System.Void(System.String,System.Collections.Generic.IEnumerable\u003CSystem.String\u003E)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.Headers.HttpHeaders",
+      "methodName": "Add",
+      "isStatic": true
+    },
+    {
+      "index": 26,
+      "kind": "benchmark",
+      "subjectId": "System.Net.Http/System.Net.Http.Headers.HttpHeaders::TryAddWithoutValidation:System.Boolean(System.String,System.String)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.Headers.HttpHeaders",
+      "methodName": "TryAddWithoutValidation",
+      "isStatic": true
+    },
+    {
+      "index": 27,
+      "kind": "benchmark",
+      "subjectId": "System.Net.Http/System.Net.Http.Headers.HttpHeaders::TryAddWithoutValidation:System.Boolean(System.String,System.String)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.Headers.HttpHeaders",
+      "methodName": "TryAddWithoutValidation",
+      "isStatic": true
+    },
+    {
+      "index": 28,
+      "kind": "benchmark",
+      "subjectId": "System.Net.Http/System.Net.Http.Headers.HttpHeaders::TryAddWithoutValidation:System.Boolean(System.String,System.String)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.Headers.HttpHeaders",
+      "methodName": "TryAddWithoutValidation",
+      "isStatic": true
+    },
+    {
+      "index": 29,
+      "kind": "benchmark",
+      "subjectId": "System.Net.Http/System.Net.Http.Headers.HttpHeaders::TryAddWithoutValidation:System.Boolean(System.String,System.Collections.Generic.IEnumerable\u003CSystem.String\u003E)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.Headers.HttpHeaders",
+      "methodName": "TryAddWithoutValidation",
+      "isStatic": true
+    },
+    {
+      "index": 30,
+      "kind": "benchmark",
+      "subjectId": "System.Net.Http/System.Net.Http.Headers.HttpHeaders::TryAddWithoutValidation:System.Boolean(System.String,System.Collections.Generic.IEnumerable\u003CSystem.String\u003E)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.Headers.HttpHeaders",
+      "methodName": "TryAddWithoutValidation",
+      "isStatic": true
+    },
+    {
+      "index": 31,
+      "kind": "benchmark",
+      "subjectId": "System.Net.Http/System.Net.Http.Headers.HttpHeaders::TryAddWithoutValidation:System.Boolean(System.String,System.Collections.Generic.IEnumerable\u003CSystem.String\u003E)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.Headers.HttpHeaders",
+      "methodName": "TryAddWithoutValidation",
+      "isStatic": true
+    },
+    {
+      "index": 32,
+      "kind": "benchmark",
+      "subjectId": "System.Net.Http/System.Net.Http.Headers.HttpHeaders::GetValues:System.Collections.Generic.IEnumerable\u003CSystem.String\u003E(System.String)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.Headers.HttpHeaders",
+      "methodName": "GetValues",
+      "isStatic": true
+    },
+    {
+      "index": 33,
+      "kind": "benchmark",
+      "subjectId": "System.Net.Http/System.Net.Http.Headers.HttpHeaders::GetValues:System.Collections.Generic.IEnumerable\u003CSystem.String\u003E(System.String)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.Headers.HttpHeaders",
+      "methodName": "GetValues",
+      "isStatic": true
+    },
+    {
+      "index": 34,
+      "kind": "benchmark",
+      "subjectId": "System.Net.Http/System.Net.Http.Headers.HttpHeaders::TryGetValues:System.Boolean(System.String,System.Collections.Generic.IEnumerable\u003CSystem.String\u003E)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.Headers.HttpHeaders",
+      "methodName": "TryGetValues",
+      "isStatic": true
+    },
+    {
+      "index": 35,
+      "kind": "benchmark",
+      "subjectId": "System.Net.Http/System.Net.Http.Headers.HttpHeaders::TryGetValues:System.Boolean(System.String,System.Collections.Generic.IEnumerable\u003CSystem.String\u003E)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.Headers.HttpHeaders",
+      "methodName": "TryGetValues",
+      "isStatic": true
+    },
+    {
+      "index": 36,
+      "kind": "benchmark",
+      "subjectId": "System.Net.Http/System.Net.Http.Headers.HttpHeaders::TryGetValues:System.Boolean(System.String,System.Collections.Generic.IEnumerable\u003CSystem.String\u003E)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.Headers.HttpHeaders",
+      "methodName": "TryGetValues",
+      "isStatic": true
+    },
+    {
+      "index": 37,
+      "kind": "benchmark",
+      "subjectId": "System.Net.Http/System.Net.Http.Headers.HttpHeaders::Contains:System.Boolean(System.String)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.Headers.HttpHeaders",
+      "methodName": "Contains",
+      "isStatic": true
+    },
+    {
+      "index": 38,
+      "kind": "benchmark",
+      "subjectId": "System.Net.Http/System.Net.Http.Headers.HttpHeaders::Contains:System.Boolean(System.String)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.Headers.HttpHeaders",
+      "methodName": "Contains",
+      "isStatic": true
+    },
+    {
+      "index": 39,
+      "kind": "benchmark",
+      "subjectId": "System.Net.Http/System.Net.Http.Headers.HttpHeaders::GetEnumerator:System.Collections.Generic.IEnumerator\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Collections.Generic.IEnumerable\u003CSystem.String\u003E\u003E\u003E()",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.Headers.HttpHeaders",
+      "methodName": "GetEnumerator",
+      "isStatic": true
+    },
+    {
+      "index": 40,
+      "kind": "benchmark",
+      "subjectId": "System.Net.Http/System.Net.Http.Headers.HttpHeaders::Remove:System.Boolean(System.String)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.Headers.HttpHeaders",
+      "methodName": "Remove",
+      "isStatic": true
+    },
+    {
+      "index": 41,
+      "kind": "benchmark",
+      "subjectId": "System.Net.Http/System.Net.Http.Headers.HttpHeaders::Remove:System.Boolean(System.String)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.Headers.HttpHeaders",
+      "methodName": "Remove",
+      "isStatic": true
+    },
+    {
+      "index": 42,
+      "kind": "benchmark",
+      "subjectId": "System.Net.Http/System.Net.Http.Headers.HttpHeaders::Clear:System.Void()",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.Headers.HttpHeaders",
+      "methodName": "Clear",
+      "isStatic": true
+    },
+    {
+      "index": 43,
+      "kind": "benchmark",
+      "subjectId": "System.Net.Http/System.Net.Http.Headers.HttpHeadersNonValidated::Contains:System.Boolean(System.String)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.Headers.HttpHeadersNonValidated",
+      "methodName": "Contains",
+      "isStatic": true
+    },
+    {
+      "index": 44,
+      "kind": "benchmark",
+      "subjectId": "System.Net.Http/System.Net.Http.Headers.HttpHeadersNonValidated::Contains:System.Boolean(System.String)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.Headers.HttpHeadersNonValidated",
+      "methodName": "Contains",
+      "isStatic": true
+    },
+    {
+      "index": 45,
+      "kind": "benchmark",
+      "subjectId": "System.Net.Http/System.Net.Http.Headers.HttpHeadersNonValidated::TryGetValues:System.Boolean(System.String,System.Net.Http.Headers.HeaderStringValues)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.Headers.HttpHeadersNonValidated",
+      "methodName": "TryGetValues",
+      "isStatic": true
+    },
+    {
+      "index": 46,
+      "kind": "benchmark",
+      "subjectId": "System.Net.Http/System.Net.Http.Headers.HttpHeadersNonValidated::TryGetValues:System.Boolean(System.String,System.Net.Http.Headers.HeaderStringValues)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.Headers.HttpHeadersNonValidated",
+      "methodName": "TryGetValues",
+      "isStatic": true
+    },
+    {
+      "index": 47,
+      "kind": "benchmark",
+      "subjectId": "System.Net.Http/System.Net.Http.Headers.HttpHeaderValueCollection\u003CSystem.String\u003E::Add:System.Void(System.String)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.Headers.HttpHeaderValueCollection\u003CSystem.String\u003E",
+      "methodName": "Add",
+      "isStatic": true
+    },
+    {
+      "index": 48,
+      "kind": "benchmark",
+      "subjectId": "System.Net.Http/System.Net.Http.Headers.HttpHeaderValueCollection\u003CSystem.String\u003E::Add:System.Void(System.String)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.Headers.HttpHeaderValueCollection\u003CSystem.String\u003E",
+      "methodName": "Add",
+      "isStatic": true
+    },
+    {
+      "index": 49,
+      "kind": "benchmark",
+      "subjectId": "System.Net.Http/System.Net.Http.Headers.HttpHeaderValueCollection\u003CSystem.String\u003E::ParseAdd:System.Void(System.String)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.Headers.HttpHeaderValueCollection\u003CSystem.String\u003E",
+      "methodName": "ParseAdd",
+      "isStatic": true
+    },
+    {
+      "index": 50,
+      "kind": "benchmark",
+      "subjectId": "System.Net.Http/System.Net.Http.Headers.HttpHeaderValueCollection\u003CSystem.String\u003E::ParseAdd:System.Void(System.String)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.Headers.HttpHeaderValueCollection\u003CSystem.String\u003E",
+      "methodName": "ParseAdd",
+      "isStatic": true
+    },
+    {
+      "index": 51,
+      "kind": "benchmark",
+      "subjectId": "System.Net.Http/System.Net.Http.Headers.HttpHeaderValueCollection\u003CSystem.String\u003E::TryParseAdd:System.Boolean(System.String)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.Headers.HttpHeaderValueCollection\u003CSystem.String\u003E",
+      "methodName": "TryParseAdd",
+      "isStatic": true
+    },
+    {
+      "index": 52,
+      "kind": "benchmark",
+      "subjectId": "System.Net.Http/System.Net.Http.Headers.HttpHeaderValueCollection\u003CSystem.String\u003E::TryParseAdd:System.Boolean(System.String)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.Headers.HttpHeaderValueCollection\u003CSystem.String\u003E",
+      "methodName": "TryParseAdd",
+      "isStatic": true
+    },
+    {
+      "index": 53,
+      "kind": "benchmark",
+      "subjectId": "System.Net.Http/System.Net.Http.Headers.HttpHeaderValueCollection\u003CSystem.String\u003E::Clear:System.Void()",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.Headers.HttpHeaderValueCollection\u003CSystem.String\u003E",
+      "methodName": "Clear",
+      "isStatic": true
+    },
+    {
+      "index": 54,
+      "kind": "benchmark",
+      "subjectId": "System.Net.Http/System.Net.Http.Headers.HttpHeaderValueCollection\u003CSystem.String\u003E::Contains:System.Boolean(System.String)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.Headers.HttpHeaderValueCollection\u003CSystem.String\u003E",
+      "methodName": "Contains",
+      "isStatic": true
+    },
+    {
+      "index": 55,
+      "kind": "benchmark",
+      "subjectId": "System.Net.Http/System.Net.Http.Headers.HttpHeaderValueCollection\u003CSystem.String\u003E::Contains:System.Boolean(System.String)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.Headers.HttpHeaderValueCollection\u003CSystem.String\u003E",
+      "methodName": "Contains",
+      "isStatic": true
+    },
+    {
+      "index": 56,
+      "kind": "benchmark",
+      "subjectId": "System.Net.Http/System.Net.Http.Headers.HttpHeaderValueCollection\u003CSystem.String\u003E::Remove:System.Boolean(System.String)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.Headers.HttpHeaderValueCollection\u003CSystem.String\u003E",
+      "methodName": "Remove",
+      "isStatic": true
+    },
+    {
+      "index": 57,
+      "kind": "benchmark",
+      "subjectId": "System.Net.Http/System.Net.Http.Headers.HttpHeaderValueCollection\u003CSystem.String\u003E::Remove:System.Boolean(System.String)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.Headers.HttpHeaderValueCollection\u003CSystem.String\u003E",
+      "methodName": "Remove",
+      "isStatic": true
+    },
+    {
+      "index": 58,
+      "kind": "benchmark",
+      "subjectId": "System.Net.Http/System.Net.Http.Headers.HttpHeaderValueCollection\u003CSystem.String\u003E::GetEnumerator:System.Collections.Generic.IEnumerator\u003CSystem.String\u003E()",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.Headers.HttpHeaderValueCollection\u003CSystem.String\u003E",
+      "methodName": "GetEnumerator",
+      "isStatic": true
+    },
+    {
+      "index": 59,
+      "kind": "benchmark",
+      "subjectId": "System.Net.Http/System.Net.Http.Headers.MediaTypeHeaderValue::Parse:System.Net.Http.Headers.MediaTypeHeaderValue(System.String)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.Headers.MediaTypeHeaderValue",
+      "methodName": "Parse",
+      "isStatic": true
+    },
+    {
+      "index": 60,
+      "kind": "benchmark",
+      "subjectId": "System.Net.Http/System.Net.Http.Headers.MediaTypeHeaderValue::Parse:System.Net.Http.Headers.MediaTypeHeaderValue(System.String)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.Headers.MediaTypeHeaderValue",
+      "methodName": "Parse",
+      "isStatic": true
+    },
+    {
+      "index": 61,
+      "kind": "benchmark",
+      "subjectId": "System.Net.Http/System.Net.Http.Headers.MediaTypeHeaderValue::TryParse:System.Boolean(System.String,System.Net.Http.Headers.MediaTypeHeaderValue)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.Headers.MediaTypeHeaderValue",
+      "methodName": "TryParse",
+      "isStatic": true
+    },
+    {
+      "index": 62,
+      "kind": "benchmark",
+      "subjectId": "System.Net.Http/System.Net.Http.Headers.MediaTypeHeaderValue::TryParse:System.Boolean(System.String,System.Net.Http.Headers.MediaTypeHeaderValue)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.Headers.MediaTypeHeaderValue",
+      "methodName": "TryParse",
+      "isStatic": true
+    },
+    {
+      "index": 63,
+      "kind": "benchmark",
+      "subjectId": "System.Net.Http/System.Net.Http.Headers.MediaTypeWithQualityHeaderValue::Parse:System.Net.Http.Headers.MediaTypeWithQualityHeaderValue(System.String)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.Headers.MediaTypeWithQualityHeaderValue",
+      "methodName": "Parse",
+      "isStatic": true
+    },
+    {
+      "index": 64,
+      "kind": "benchmark",
+      "subjectId": "System.Net.Http/System.Net.Http.Headers.MediaTypeWithQualityHeaderValue::Parse:System.Net.Http.Headers.MediaTypeWithQualityHeaderValue(System.String)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.Headers.MediaTypeWithQualityHeaderValue",
+      "methodName": "Parse",
+      "isStatic": true
+    },
+    {
+      "index": 65,
+      "kind": "benchmark",
+      "subjectId": "System.Net.Http/System.Net.Http.Headers.MediaTypeWithQualityHeaderValue::TryParse:System.Boolean(System.String,System.Net.Http.Headers.MediaTypeWithQualityHeaderValue)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.Headers.MediaTypeWithQualityHeaderValue",
+      "methodName": "TryParse",
+      "isStatic": true
+    },
+    {
+      "index": 66,
+      "kind": "benchmark",
+      "subjectId": "System.Net.Http/System.Net.Http.Headers.MediaTypeWithQualityHeaderValue::TryParse:System.Boolean(System.String,System.Net.Http.Headers.MediaTypeWithQualityHeaderValue)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.Headers.MediaTypeWithQualityHeaderValue",
+      "methodName": "TryParse",
+      "isStatic": true
+    },
+    {
+      "index": 67,
+      "kind": "benchmark",
+      "subjectId": "System.Net.Http/System.Net.Http.Headers.NameValueHeaderValue::Parse:System.Net.Http.Headers.NameValueHeaderValue(System.String)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.Headers.NameValueHeaderValue",
+      "methodName": "Parse",
+      "isStatic": true
+    },
+    {
+      "index": 68,
+      "kind": "benchmark",
+      "subjectId": "System.Net.Http/System.Net.Http.Headers.NameValueHeaderValue::Parse:System.Net.Http.Headers.NameValueHeaderValue(System.String)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.Headers.NameValueHeaderValue",
+      "methodName": "Parse",
+      "isStatic": true
+    },
+    {
+      "index": 69,
+      "kind": "benchmark",
+      "subjectId": "System.Net.Http/System.Net.Http.Headers.NameValueHeaderValue::TryParse:System.Boolean(System.String,System.Net.Http.Headers.NameValueHeaderValue)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.Headers.NameValueHeaderValue",
+      "methodName": "TryParse",
+      "isStatic": true
+    },
+    {
+      "index": 70,
+      "kind": "benchmark",
+      "subjectId": "System.Net.Http/System.Net.Http.Headers.NameValueHeaderValue::TryParse:System.Boolean(System.String,System.Net.Http.Headers.NameValueHeaderValue)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.Headers.NameValueHeaderValue",
+      "methodName": "TryParse",
+      "isStatic": true
+    },
+    {
+      "index": 71,
+      "kind": "benchmark",
+      "subjectId": "System.Net.Http/System.Net.Http.Headers.NameValueWithParametersHeaderValue::Parse:System.Net.Http.Headers.NameValueWithParametersHeaderValue(System.String)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.Headers.NameValueWithParametersHeaderValue",
+      "methodName": "Parse",
+      "isStatic": true
+    },
+    {
+      "index": 72,
+      "kind": "benchmark",
+      "subjectId": "System.Net.Http/System.Net.Http.Headers.NameValueWithParametersHeaderValue::Parse:System.Net.Http.Headers.NameValueWithParametersHeaderValue(System.String)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.Headers.NameValueWithParametersHeaderValue",
+      "methodName": "Parse",
+      "isStatic": true
+    },
+    {
+      "index": 73,
+      "kind": "benchmark",
+      "subjectId": "System.Net.Http/System.Net.Http.Headers.NameValueWithParametersHeaderValue::TryParse:System.Boolean(System.String,System.Net.Http.Headers.NameValueWithParametersHeaderValue)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.Headers.NameValueWithParametersHeaderValue",
+      "methodName": "TryParse",
+      "isStatic": true
+    },
+    {
+      "index": 74,
+      "kind": "benchmark",
+      "subjectId": "System.Net.Http/System.Net.Http.Headers.NameValueWithParametersHeaderValue::TryParse:System.Boolean(System.String,System.Net.Http.Headers.NameValueWithParametersHeaderValue)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.Headers.NameValueWithParametersHeaderValue",
+      "methodName": "TryParse",
+      "isStatic": true
+    },
+    {
+      "index": 75,
+      "kind": "benchmark",
+      "subjectId": "System.Net.Http/System.Net.Http.Headers.ProductHeaderValue::Parse:System.Net.Http.Headers.ProductHeaderValue(System.String)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.Headers.ProductHeaderValue",
+      "methodName": "Parse",
+      "isStatic": true
+    },
+    {
+      "index": 76,
+      "kind": "benchmark",
+      "subjectId": "System.Net.Http/System.Net.Http.Headers.ProductHeaderValue::Parse:System.Net.Http.Headers.ProductHeaderValue(System.String)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.Headers.ProductHeaderValue",
+      "methodName": "Parse",
+      "isStatic": true
+    },
+    {
+      "index": 77,
+      "kind": "benchmark",
+      "subjectId": "System.Net.Http/System.Net.Http.Headers.ProductHeaderValue::TryParse:System.Boolean(System.String,System.Net.Http.Headers.ProductHeaderValue)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.Headers.ProductHeaderValue",
+      "methodName": "TryParse",
+      "isStatic": true
+    },
+    {
+      "index": 78,
+      "kind": "benchmark",
+      "subjectId": "System.Net.Http/System.Net.Http.Headers.ProductHeaderValue::TryParse:System.Boolean(System.String,System.Net.Http.Headers.ProductHeaderValue)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.Headers.ProductHeaderValue",
+      "methodName": "TryParse",
+      "isStatic": true
+    },
+    {
+      "index": 79,
+      "kind": "benchmark",
+      "subjectId": "System.Net.Http/System.Net.Http.Headers.ProductInfoHeaderValue::Parse:System.Net.Http.Headers.ProductInfoHeaderValue(System.String)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.Headers.ProductInfoHeaderValue",
+      "methodName": "Parse",
+      "isStatic": true
+    },
+    {
+      "index": 80,
+      "kind": "benchmark",
+      "subjectId": "System.Net.Http/System.Net.Http.Headers.ProductInfoHeaderValue::Parse:System.Net.Http.Headers.ProductInfoHeaderValue(System.String)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.Headers.ProductInfoHeaderValue",
+      "methodName": "Parse",
+      "isStatic": true
+    },
+    {
+      "index": 81,
+      "kind": "benchmark",
+      "subjectId": "System.Net.Http/System.Net.Http.Headers.ProductInfoHeaderValue::TryParse:System.Boolean(System.String,System.Net.Http.Headers.ProductInfoHeaderValue)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.Headers.ProductInfoHeaderValue",
+      "methodName": "TryParse",
+      "isStatic": true
+    },
+    {
+      "index": 82,
+      "kind": "benchmark",
+      "subjectId": "System.Net.Http/System.Net.Http.Headers.ProductInfoHeaderValue::TryParse:System.Boolean(System.String,System.Net.Http.Headers.ProductInfoHeaderValue)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.Headers.ProductInfoHeaderValue",
+      "methodName": "TryParse",
+      "isStatic": true
+    },
+    {
+      "index": 83,
+      "kind": "benchmark",
+      "subjectId": "System.Net.Http/System.Net.Http.Headers.RangeConditionHeaderValue::Parse:System.Net.Http.Headers.RangeConditionHeaderValue(System.String)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.Headers.RangeConditionHeaderValue",
+      "methodName": "Parse",
+      "isStatic": true
+    },
+    {
+      "index": 84,
+      "kind": "benchmark",
+      "subjectId": "System.Net.Http/System.Net.Http.Headers.RangeConditionHeaderValue::Parse:System.Net.Http.Headers.RangeConditionHeaderValue(System.String)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.Headers.RangeConditionHeaderValue",
+      "methodName": "Parse",
+      "isStatic": true
+    },
+    {
+      "index": 85,
+      "kind": "benchmark",
+      "subjectId": "System.Net.Http/System.Net.Http.Headers.RangeConditionHeaderValue::TryParse:System.Boolean(System.String,System.Net.Http.Headers.RangeConditionHeaderValue)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.Headers.RangeConditionHeaderValue",
+      "methodName": "TryParse",
+      "isStatic": true
+    },
+    {
+      "index": 86,
+      "kind": "benchmark",
+      "subjectId": "System.Net.Http/System.Net.Http.Headers.RangeConditionHeaderValue::TryParse:System.Boolean(System.String,System.Net.Http.Headers.RangeConditionHeaderValue)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.Headers.RangeConditionHeaderValue",
+      "methodName": "TryParse",
+      "isStatic": true
+    },
+    {
+      "index": 87,
+      "kind": "benchmark",
+      "subjectId": "System.Net.Http/System.Net.Http.Headers.RangeHeaderValue::Parse:System.Net.Http.Headers.RangeHeaderValue(System.String)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.Headers.RangeHeaderValue",
+      "methodName": "Parse",
+      "isStatic": true
+    },
+    {
+      "index": 88,
+      "kind": "benchmark",
+      "subjectId": "System.Net.Http/System.Net.Http.Headers.RangeHeaderValue::Parse:System.Net.Http.Headers.RangeHeaderValue(System.String)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.Headers.RangeHeaderValue",
+      "methodName": "Parse",
+      "isStatic": true
+    },
+    {
+      "index": 89,
+      "kind": "benchmark",
+      "subjectId": "System.Net.Http/System.Net.Http.Headers.RangeHeaderValue::TryParse:System.Boolean(System.String,System.Net.Http.Headers.RangeHeaderValue)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.Headers.RangeHeaderValue",
+      "methodName": "TryParse",
+      "isStatic": true
+    },
+    {
+      "index": 90,
+      "kind": "benchmark",
+      "subjectId": "System.Net.Http/System.Net.Http.Headers.RangeHeaderValue::TryParse:System.Boolean(System.String,System.Net.Http.Headers.RangeHeaderValue)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.Headers.RangeHeaderValue",
+      "methodName": "TryParse",
+      "isStatic": true
+    },
+    {
+      "index": 91,
+      "kind": "benchmark",
+      "subjectId": "System.Net.Http/System.Net.Http.Headers.RetryConditionHeaderValue::Parse:System.Net.Http.Headers.RetryConditionHeaderValue(System.String)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.Headers.RetryConditionHeaderValue",
+      "methodName": "Parse",
+      "isStatic": true
+    },
+    {
+      "index": 92,
+      "kind": "benchmark",
+      "subjectId": "System.Net.Http/System.Net.Http.Headers.RetryConditionHeaderValue::Parse:System.Net.Http.Headers.RetryConditionHeaderValue(System.String)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.Headers.RetryConditionHeaderValue",
+      "methodName": "Parse",
+      "isStatic": true
+    },
+    {
+      "index": 93,
+      "kind": "benchmark",
+      "subjectId": "System.Net.Http/System.Net.Http.Headers.RetryConditionHeaderValue::TryParse:System.Boolean(System.String,System.Net.Http.Headers.RetryConditionHeaderValue)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.Headers.RetryConditionHeaderValue",
+      "methodName": "TryParse",
+      "isStatic": true
+    },
+    {
+      "index": 94,
+      "kind": "benchmark",
+      "subjectId": "System.Net.Http/System.Net.Http.Headers.RetryConditionHeaderValue::TryParse:System.Boolean(System.String,System.Net.Http.Headers.RetryConditionHeaderValue)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.Headers.RetryConditionHeaderValue",
+      "methodName": "TryParse",
+      "isStatic": true
+    },
+    {
+      "index": 95,
+      "kind": "benchmark",
+      "subjectId": "System.Net.Http/System.Net.Http.Headers.StringWithQualityHeaderValue::Parse:System.Net.Http.Headers.StringWithQualityHeaderValue(System.String)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.Headers.StringWithQualityHeaderValue",
+      "methodName": "Parse",
+      "isStatic": true
+    },
+    {
+      "index": 96,
+      "kind": "benchmark",
+      "subjectId": "System.Net.Http/System.Net.Http.Headers.StringWithQualityHeaderValue::Parse:System.Net.Http.Headers.StringWithQualityHeaderValue(System.String)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.Headers.StringWithQualityHeaderValue",
+      "methodName": "Parse",
+      "isStatic": true
+    },
+    {
+      "index": 97,
+      "kind": "benchmark",
+      "subjectId": "System.Net.Http/System.Net.Http.Headers.StringWithQualityHeaderValue::TryParse:System.Boolean(System.String,System.Net.Http.Headers.StringWithQualityHeaderValue)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.Headers.StringWithQualityHeaderValue",
+      "methodName": "TryParse",
+      "isStatic": true
+    },
+    {
+      "index": 98,
+      "kind": "benchmark",
+      "subjectId": "System.Net.Http/System.Net.Http.Headers.StringWithQualityHeaderValue::TryParse:System.Boolean(System.String,System.Net.Http.Headers.StringWithQualityHeaderValue)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.Headers.StringWithQualityHeaderValue",
+      "methodName": "TryParse",
+      "isStatic": true
+    },
+    {
+      "index": 99,
+      "kind": "benchmark",
+      "subjectId": "System.Net.Http/System.Net.Http.Headers.TransferCodingHeaderValue::Parse:System.Net.Http.Headers.TransferCodingHeaderValue(System.String)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.Headers.TransferCodingHeaderValue",
+      "methodName": "Parse",
+      "isStatic": true
+    },
+    {
+      "index": 100,
+      "kind": "benchmark",
+      "subjectId": "System.Net.Http/System.Net.Http.Headers.TransferCodingHeaderValue::Parse:System.Net.Http.Headers.TransferCodingHeaderValue(System.String)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.Headers.TransferCodingHeaderValue",
+      "methodName": "Parse",
+      "isStatic": true
+    },
+    {
+      "index": 101,
+      "kind": "benchmark",
+      "subjectId": "System.Net.Http/System.Net.Http.Headers.TransferCodingHeaderValue::TryParse:System.Boolean(System.String,System.Net.Http.Headers.TransferCodingHeaderValue)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.Headers.TransferCodingHeaderValue",
+      "methodName": "TryParse",
+      "isStatic": true
+    },
+    {
+      "index": 102,
+      "kind": "benchmark",
+      "subjectId": "System.Net.Http/System.Net.Http.Headers.TransferCodingHeaderValue::TryParse:System.Boolean(System.String,System.Net.Http.Headers.TransferCodingHeaderValue)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.Headers.TransferCodingHeaderValue",
+      "methodName": "TryParse",
+      "isStatic": true
+    },
+    {
+      "index": 103,
+      "kind": "benchmark",
+      "subjectId": "System.Net.Http/System.Net.Http.Headers.TransferCodingWithQualityHeaderValue::Parse:System.Net.Http.Headers.TransferCodingWithQualityHeaderValue(System.String)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.Headers.TransferCodingWithQualityHeaderValue",
+      "methodName": "Parse",
+      "isStatic": true
+    },
+    {
+      "index": 104,
+      "kind": "benchmark",
+      "subjectId": "System.Net.Http/System.Net.Http.Headers.TransferCodingWithQualityHeaderValue::Parse:System.Net.Http.Headers.TransferCodingWithQualityHeaderValue(System.String)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.Headers.TransferCodingWithQualityHeaderValue",
+      "methodName": "Parse",
+      "isStatic": true
+    },
+    {
+      "index": 105,
+      "kind": "benchmark",
+      "subjectId": "System.Net.Http/System.Net.Http.Headers.TransferCodingWithQualityHeaderValue::TryParse:System.Boolean(System.String,System.Net.Http.Headers.TransferCodingWithQualityHeaderValue)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.Headers.TransferCodingWithQualityHeaderValue",
+      "methodName": "TryParse",
+      "isStatic": true
+    },
+    {
+      "index": 106,
+      "kind": "benchmark",
+      "subjectId": "System.Net.Http/System.Net.Http.Headers.TransferCodingWithQualityHeaderValue::TryParse:System.Boolean(System.String,System.Net.Http.Headers.TransferCodingWithQualityHeaderValue)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.Headers.TransferCodingWithQualityHeaderValue",
+      "methodName": "TryParse",
+      "isStatic": true
+    },
+    {
+      "index": 107,
+      "kind": "benchmark",
+      "subjectId": "System.Net.Http/System.Net.Http.Headers.ViaHeaderValue::Parse:System.Net.Http.Headers.ViaHeaderValue(System.String)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.Headers.ViaHeaderValue",
+      "methodName": "Parse",
+      "isStatic": true
+    },
+    {
+      "index": 108,
+      "kind": "benchmark",
+      "subjectId": "System.Net.Http/System.Net.Http.Headers.ViaHeaderValue::Parse:System.Net.Http.Headers.ViaHeaderValue(System.String)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.Headers.ViaHeaderValue",
+      "methodName": "Parse",
+      "isStatic": true
+    },
+    {
+      "index": 109,
+      "kind": "benchmark",
+      "subjectId": "System.Net.Http/System.Net.Http.Headers.ViaHeaderValue::TryParse:System.Boolean(System.String,System.Net.Http.Headers.ViaHeaderValue)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.Headers.ViaHeaderValue",
+      "methodName": "TryParse",
+      "isStatic": true
+    },
+    {
+      "index": 110,
+      "kind": "benchmark",
+      "subjectId": "System.Net.Http/System.Net.Http.Headers.ViaHeaderValue::TryParse:System.Boolean(System.String,System.Net.Http.Headers.ViaHeaderValue)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.Headers.ViaHeaderValue",
+      "methodName": "TryParse",
+      "isStatic": true
+    },
+    {
+      "index": 111,
+      "kind": "benchmark",
+      "subjectId": "System.Net.Http/System.Net.Http.Headers.WarningHeaderValue::Parse:System.Net.Http.Headers.WarningHeaderValue(System.String)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.Headers.WarningHeaderValue",
+      "methodName": "Parse",
+      "isStatic": true
+    },
+    {
+      "index": 112,
+      "kind": "benchmark",
+      "subjectId": "System.Net.Http/System.Net.Http.Headers.WarningHeaderValue::Parse:System.Net.Http.Headers.WarningHeaderValue(System.String)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.Headers.WarningHeaderValue",
+      "methodName": "Parse",
+      "isStatic": true
+    },
+    {
+      "index": 113,
+      "kind": "benchmark",
+      "subjectId": "System.Net.Http/System.Net.Http.Headers.WarningHeaderValue::TryParse:System.Boolean(System.String,System.Net.Http.Headers.WarningHeaderValue)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.Headers.WarningHeaderValue",
+      "methodName": "TryParse",
+      "isStatic": true
+    },
+    {
+      "index": 114,
+      "kind": "benchmark",
+      "subjectId": "System.Net.Http/System.Net.Http.Headers.WarningHeaderValue::TryParse:System.Boolean(System.String,System.Net.Http.Headers.WarningHeaderValue)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.Headers.WarningHeaderValue",
+      "methodName": "TryParse",
+      "isStatic": true
+    },
+    {
+      "index": 115,
+      "kind": "benchmark",
+      "subjectId": "System.Net.Http/System.Net.Http.Metrics.HttpMetricsEnrichmentContext::AddCustomTag:System.Void(System.String,System.Object)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.Metrics.HttpMetricsEnrichmentContext",
+      "methodName": "AddCustomTag",
+      "isStatic": true
+    },
+    {
+      "index": 116,
+      "kind": "benchmark",
+      "subjectId": "System.Net.Http/System.Net.Http.Metrics.HttpMetricsEnrichmentContext::AddCustomTag:System.Void(System.String,System.Object)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.Metrics.HttpMetricsEnrichmentContext",
+      "methodName": "AddCustomTag",
+      "isStatic": true
+    },
+    {
+      "index": 117,
+      "kind": "benchmark",
+      "subjectId": "System.Net.Http/System.Net.Http.Metrics.HttpMetricsEnrichmentContext::AddCallback:System.Void(System.Net.Http.HttpRequestMessage,System.Action\u003CSystem.Net.Http.Metrics.HttpMetricsEnrichmentContext\u003E)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.Metrics.HttpMetricsEnrichmentContext",
+      "methodName": "AddCallback",
+      "isStatic": true
+    },
+    {
+      "index": 118,
+      "kind": "benchmark",
+      "subjectId": "System.Net.Http/System.Net.Http.Metrics.HttpMetricsEnrichmentContext::AddCallback:System.Void(System.Net.Http.HttpRequestMessage,System.Action\u003CSystem.Net.Http.Metrics.HttpMetricsEnrichmentContext\u003E)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.Metrics.HttpMetricsEnrichmentContext",
+      "methodName": "AddCallback",
+      "isStatic": true
+    }
+  ],
+  "summary": {
+    "totalSubjects": 119,
+    "factCount": 0,
+    "benchmarkCount": 119,
+    "hotUpdateCount": 0
+  }
+}

@@ -1,0 +1,309 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Linq.Expressions",
+  "generatedAt": "2026-06-04T10:30:43.817087+00:00",
+  "partitionStrategy": "namespace",
+  "maxMethodsPerChunk": 500,
+  "totalChunks": 1,
+  "chunks": [
+    {
+      "slug": "global-ns",
+      "namespaces": [
+        "System.Dynamic",
+        "System.Linq.Expressions",
+        "System.Runtime.CompilerServices"
+      ],
+      "methodCount": 72,
+      "methods": [
+        {
+          "methodSubjectId": "System.Linq.Expressions/System.Dynamic.DynamicMetaObject::BindBinaryOperation:System.Dynamic.DynamicMetaObject(System.Dynamic.BinaryOperationBinder,System.Dynamic.DynamicMetaObject)",
+          "index": 0
+        },
+        {
+          "methodSubjectId": "System.Linq.Expressions/System.Dynamic.DynamicMetaObject::BindConvert:System.Dynamic.DynamicMetaObject(System.Dynamic.ConvertBinder)",
+          "index": 1
+        },
+        {
+          "methodSubjectId": "System.Linq.Expressions/System.Dynamic.DynamicMetaObject::BindCreateInstance:System.Dynamic.DynamicMetaObject(System.Dynamic.CreateInstanceBinder,System.Dynamic.DynamicMetaObject[])",
+          "index": 2
+        },
+        {
+          "methodSubjectId": "System.Linq.Expressions/System.Dynamic.DynamicMetaObject::BindDeleteIndex:System.Dynamic.DynamicMetaObject(System.Dynamic.DeleteIndexBinder,System.Dynamic.DynamicMetaObject[])",
+          "index": 3
+        },
+        {
+          "methodSubjectId": "System.Linq.Expressions/System.Dynamic.DynamicMetaObject::BindDeleteMember:System.Dynamic.DynamicMetaObject(System.Dynamic.DeleteMemberBinder)",
+          "index": 4
+        },
+        {
+          "methodSubjectId": "System.Linq.Expressions/System.Dynamic.DynamicMetaObject::BindGetIndex:System.Dynamic.DynamicMetaObject(System.Dynamic.GetIndexBinder,System.Dynamic.DynamicMetaObject[])",
+          "index": 5
+        },
+        {
+          "methodSubjectId": "System.Linq.Expressions/System.Dynamic.DynamicMetaObject::BindGetMember:System.Dynamic.DynamicMetaObject(System.Dynamic.GetMemberBinder)",
+          "index": 6
+        },
+        {
+          "methodSubjectId": "System.Linq.Expressions/System.Dynamic.DynamicMetaObject::BindInvoke:System.Dynamic.DynamicMetaObject(System.Dynamic.InvokeBinder,System.Dynamic.DynamicMetaObject[])",
+          "index": 7
+        },
+        {
+          "methodSubjectId": "System.Linq.Expressions/System.Dynamic.DynamicMetaObject::BindInvokeMember:System.Dynamic.DynamicMetaObject(System.Dynamic.InvokeMemberBinder,System.Dynamic.DynamicMetaObject[])",
+          "index": 8
+        },
+        {
+          "methodSubjectId": "System.Linq.Expressions/System.Dynamic.DynamicMetaObject::BindSetIndex:System.Dynamic.DynamicMetaObject(System.Dynamic.SetIndexBinder,System.Dynamic.DynamicMetaObject[],System.Dynamic.DynamicMetaObject)",
+          "index": 9
+        },
+        {
+          "methodSubjectId": "System.Linq.Expressions/System.Dynamic.DynamicMetaObject::BindSetMember:System.Dynamic.DynamicMetaObject(System.Dynamic.SetMemberBinder,System.Dynamic.DynamicMetaObject)",
+          "index": 10
+        },
+        {
+          "methodSubjectId": "System.Linq.Expressions/System.Dynamic.DynamicMetaObject::BindUnaryOperation:System.Dynamic.DynamicMetaObject(System.Dynamic.UnaryOperationBinder)",
+          "index": 11
+        },
+        {
+          "methodSubjectId": "System.Linq.Expressions/System.Dynamic.DynamicMetaObject::Create:System.Dynamic.DynamicMetaObject(System.Object,System.Linq.Expressions.Expression)",
+          "index": 12
+        },
+        {
+          "methodSubjectId": "System.Linq.Expressions/System.Dynamic.DynamicMetaObject::GetDynamicMemberNames:System.Collections.Generic.IEnumerable<System.String>()",
+          "index": 13
+        },
+        {
+          "methodSubjectId": "System.Linq.Expressions/System.Dynamic.DynamicObject::GetDynamicMemberNames:System.Collections.Generic.IEnumerable<System.String>()",
+          "index": 14
+        },
+        {
+          "methodSubjectId": "System.Linq.Expressions/System.Dynamic.DynamicObject::GetMetaObject:System.Dynamic.DynamicMetaObject(System.Linq.Expressions.Expression)",
+          "index": 15
+        },
+        {
+          "methodSubjectId": "System.Linq.Expressions/System.Dynamic.DynamicObject::TryBinaryOperation:System.Boolean(System.Dynamic.BinaryOperationBinder,System.Object,System.Object)",
+          "index": 16
+        },
+        {
+          "methodSubjectId": "System.Linq.Expressions/System.Dynamic.DynamicObject::TryConvert:System.Boolean(System.Dynamic.ConvertBinder,System.Object)",
+          "index": 17
+        },
+        {
+          "methodSubjectId": "System.Linq.Expressions/System.Dynamic.DynamicObject::TryCreateInstance:System.Boolean(System.Dynamic.CreateInstanceBinder,System.Object[],System.Object)",
+          "index": 18
+        },
+        {
+          "methodSubjectId": "System.Linq.Expressions/System.Dynamic.DynamicObject::TryDeleteIndex:System.Boolean(System.Dynamic.DeleteIndexBinder,System.Object[])",
+          "index": 19
+        },
+        {
+          "methodSubjectId": "System.Linq.Expressions/System.Dynamic.DynamicObject::TryDeleteMember:System.Boolean(System.Dynamic.DeleteMemberBinder)",
+          "index": 20
+        },
+        {
+          "methodSubjectId": "System.Linq.Expressions/System.Dynamic.DynamicObject::TryGetIndex:System.Boolean(System.Dynamic.GetIndexBinder,System.Object[],System.Object)",
+          "index": 21
+        },
+        {
+          "methodSubjectId": "System.Linq.Expressions/System.Dynamic.DynamicObject::TryGetMember:System.Boolean(System.Dynamic.GetMemberBinder,System.Object)",
+          "index": 22
+        },
+        {
+          "methodSubjectId": "System.Linq.Expressions/System.Dynamic.DynamicObject::TryInvoke:System.Boolean(System.Dynamic.InvokeBinder,System.Object[],System.Object)",
+          "index": 23
+        },
+        {
+          "methodSubjectId": "System.Linq.Expressions/System.Dynamic.DynamicObject::TryInvokeMember:System.Boolean(System.Dynamic.InvokeMemberBinder,System.Object[],System.Object)",
+          "index": 24
+        },
+        {
+          "methodSubjectId": "System.Linq.Expressions/System.Dynamic.DynamicObject::TrySetIndex:System.Boolean(System.Dynamic.SetIndexBinder,System.Object[],System.Object)",
+          "index": 25
+        },
+        {
+          "methodSubjectId": "System.Linq.Expressions/System.Dynamic.DynamicObject::TrySetMember:System.Boolean(System.Dynamic.SetMemberBinder,System.Object)",
+          "index": 26
+        },
+        {
+          "methodSubjectId": "System.Linq.Expressions/System.Dynamic.DynamicObject::TryUnaryOperation:System.Boolean(System.Dynamic.UnaryOperationBinder,System.Object)",
+          "index": 27
+        },
+        {
+          "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.BinaryExpression::Reduce:System.Linq.Expressions.Expression()",
+          "index": 28
+        },
+        {
+          "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.BinaryExpression::Update:System.Linq.Expressions.BinaryExpression(System.Linq.Expressions.Expression,System.Linq.Expressions.LambdaExpression,System.Linq.Expressions.Expression)",
+          "index": 29
+        },
+        {
+          "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.BlockExpression::Update:System.Linq.Expressions.BlockExpression(System.Collections.Generic.IEnumerable<System.Linq.Expressions.ParameterExpression>,System.Collections.Generic.IEnumerable<System.Linq.Expressions.Expression>)",
+          "index": 30
+        },
+        {
+          "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.CatchBlock::Update:System.Linq.Expressions.CatchBlock(System.Linq.Expressions.ParameterExpression,System.Linq.Expressions.Expression,System.Linq.Expressions.Expression)",
+          "index": 31
+        },
+        {
+          "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.ConditionalExpression::Update:System.Linq.Expressions.ConditionalExpression(System.Linq.Expressions.Expression,System.Linq.Expressions.Expression,System.Linq.Expressions.Expression)",
+          "index": 32
+        },
+        {
+          "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.DynamicExpression::Dynamic:System.Linq.Expressions.DynamicExpression(System.Runtime.CompilerServices.CallSiteBinder,System.Type,System.Collections.Generic.IEnumerable<System.Linq.Expressions.Expression>)",
+          "index": 33
+        },
+        {
+          "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.DynamicExpression::Dynamic:System.Linq.Expressions.DynamicExpression(System.Runtime.CompilerServices.CallSiteBinder,System.Type,System.Linq.Expressions.Expression)",
+          "index": 34
+        },
+        {
+          "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.DynamicExpression::Dynamic:System.Linq.Expressions.DynamicExpression(System.Runtime.CompilerServices.CallSiteBinder,System.Type,System.Linq.Expressions.Expression,System.Linq.Expressions.Expression)",
+          "index": 35
+        },
+        {
+          "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.DynamicExpression::Dynamic:System.Linq.Expressions.DynamicExpression(System.Runtime.CompilerServices.CallSiteBinder,System.Type,System.Linq.Expressions.Expression,System.Linq.Expressions.Expression,System.Linq.Expressions.Expression)",
+          "index": 36
+        },
+        {
+          "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.DynamicExpression::Dynamic:System.Linq.Expressions.DynamicExpression(System.Runtime.CompilerServices.CallSiteBinder,System.Type,System.Linq.Expressions.Expression,System.Linq.Expressions.Expression,System.Linq.Expressions.Expression,System.Linq.Expressions.Expression)",
+          "index": 37
+        },
+        {
+          "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.DynamicExpression::Dynamic:System.Linq.Expressions.DynamicExpression(System.Runtime.CompilerServices.CallSiteBinder,System.Type,System.Linq.Expressions.Expression[])",
+          "index": 38
+        },
+        {
+          "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.DynamicExpression::MakeDynamic:System.Linq.Expressions.DynamicExpression(System.Type,System.Runtime.CompilerServices.CallSiteBinder,System.Collections.Generic.IEnumerable<System.Linq.Expressions.Expression>)",
+          "index": 39
+        },
+        {
+          "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.DynamicExpression::MakeDynamic:System.Linq.Expressions.DynamicExpression(System.Type,System.Runtime.CompilerServices.CallSiteBinder,System.Linq.Expressions.Expression)",
+          "index": 40
+        },
+        {
+          "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.DynamicExpression::MakeDynamic:System.Linq.Expressions.DynamicExpression(System.Type,System.Runtime.CompilerServices.CallSiteBinder,System.Linq.Expressions.Expression,System.Linq.Expressions.Expression)",
+          "index": 41
+        },
+        {
+          "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.DynamicExpression::MakeDynamic:System.Linq.Expressions.DynamicExpression(System.Type,System.Runtime.CompilerServices.CallSiteBinder,System.Linq.Expressions.Expression,System.Linq.Expressions.Expression,System.Linq.Expressions.Expression)",
+          "index": 42
+        },
+        {
+          "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.DynamicExpression::MakeDynamic:System.Linq.Expressions.DynamicExpression(System.Type,System.Runtime.CompilerServices.CallSiteBinder,System.Linq.Expressions.Expression,System.Linq.Expressions.Expression,System.Linq.Expressions.Expression,System.Linq.Expressions.Expression)",
+          "index": 43
+        },
+        {
+          "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.DynamicExpression::MakeDynamic:System.Linq.Expressions.DynamicExpression(System.Type,System.Runtime.CompilerServices.CallSiteBinder,System.Linq.Expressions.Expression[])",
+          "index": 44
+        },
+        {
+          "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.DynamicExpression::Update:System.Linq.Expressions.DynamicExpression(System.Collections.Generic.IEnumerable<System.Linq.Expressions.Expression>)",
+          "index": 45
+        },
+        {
+          "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.ElementInit::Update:System.Linq.Expressions.ElementInit(System.Collections.Generic.IEnumerable<System.Linq.Expressions.Expression>)",
+          "index": 46
+        },
+        {
+          "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.GotoExpression::Update:System.Linq.Expressions.GotoExpression(System.Linq.Expressions.LabelTarget,System.Linq.Expressions.Expression)",
+          "index": 47
+        },
+        {
+          "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.IndexExpression::Update:System.Linq.Expressions.IndexExpression(System.Linq.Expressions.Expression,System.Collections.Generic.IEnumerable<System.Linq.Expressions.Expression>)",
+          "index": 48
+        },
+        {
+          "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.InvocationExpression::Update:System.Linq.Expressions.InvocationExpression(System.Linq.Expressions.Expression,System.Collections.Generic.IEnumerable<System.Linq.Expressions.Expression>)",
+          "index": 49
+        },
+        {
+          "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.LabelExpression::Update:System.Linq.Expressions.LabelExpression(System.Linq.Expressions.LabelTarget,System.Linq.Expressions.Expression)",
+          "index": 50
+        },
+        {
+          "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.ListInitExpression::Reduce:System.Linq.Expressions.Expression()",
+          "index": 51
+        },
+        {
+          "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.ListInitExpression::Update:System.Linq.Expressions.ListInitExpression(System.Linq.Expressions.NewExpression,System.Collections.Generic.IEnumerable<System.Linq.Expressions.ElementInit>)",
+          "index": 52
+        },
+        {
+          "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.LoopExpression::Update:System.Linq.Expressions.LoopExpression(System.Linq.Expressions.LabelTarget,System.Linq.Expressions.LabelTarget,System.Linq.Expressions.Expression)",
+          "index": 53
+        },
+        {
+          "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.MemberAssignment::Update:System.Linq.Expressions.MemberAssignment(System.Linq.Expressions.Expression)",
+          "index": 54
+        },
+        {
+          "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.MemberExpression::Update:System.Linq.Expressions.MemberExpression(System.Linq.Expressions.Expression)",
+          "index": 55
+        },
+        {
+          "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.MemberInitExpression::Reduce:System.Linq.Expressions.Expression()",
+          "index": 56
+        },
+        {
+          "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.MemberInitExpression::Update:System.Linq.Expressions.MemberInitExpression(System.Linq.Expressions.NewExpression,System.Collections.Generic.IEnumerable<System.Linq.Expressions.MemberBinding>)",
+          "index": 57
+        },
+        {
+          "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.MemberListBinding::Update:System.Linq.Expressions.MemberListBinding(System.Collections.Generic.IEnumerable<System.Linq.Expressions.ElementInit>)",
+          "index": 58
+        },
+        {
+          "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.MemberMemberBinding::Update:System.Linq.Expressions.MemberMemberBinding(System.Collections.Generic.IEnumerable<System.Linq.Expressions.MemberBinding>)",
+          "index": 59
+        },
+        {
+          "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.MethodCallExpression::Update:System.Linq.Expressions.MethodCallExpression(System.Linq.Expressions.Expression,System.Collections.Generic.IEnumerable<System.Linq.Expressions.Expression>)",
+          "index": 60
+        },
+        {
+          "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.NewArrayExpression::Update:System.Linq.Expressions.NewArrayExpression(System.Collections.Generic.IEnumerable<System.Linq.Expressions.Expression>)",
+          "index": 61
+        },
+        {
+          "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.NewExpression::Update:System.Linq.Expressions.NewExpression(System.Collections.Generic.IEnumerable<System.Linq.Expressions.Expression>)",
+          "index": 62
+        },
+        {
+          "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.RuntimeVariablesExpression::Update:System.Linq.Expressions.RuntimeVariablesExpression(System.Collections.Generic.IEnumerable<System.Linq.Expressions.ParameterExpression>)",
+          "index": 63
+        },
+        {
+          "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.SwitchCase::Update:System.Linq.Expressions.SwitchCase(System.Collections.Generic.IEnumerable<System.Linq.Expressions.Expression>,System.Linq.Expressions.Expression)",
+          "index": 64
+        },
+        {
+          "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.SwitchExpression::Update:System.Linq.Expressions.SwitchExpression(System.Linq.Expressions.Expression,System.Collections.Generic.IEnumerable<System.Linq.Expressions.SwitchCase>,System.Linq.Expressions.Expression)",
+          "index": 65
+        },
+        {
+          "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.TryExpression::Update:System.Linq.Expressions.TryExpression(System.Linq.Expressions.Expression,System.Collections.Generic.IEnumerable<System.Linq.Expressions.CatchBlock>,System.Linq.Expressions.Expression,System.Linq.Expressions.Expression)",
+          "index": 66
+        },
+        {
+          "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.TypeBinaryExpression::Update:System.Linq.Expressions.TypeBinaryExpression(System.Linq.Expressions.Expression)",
+          "index": 67
+        },
+        {
+          "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.UnaryExpression::Reduce:System.Linq.Expressions.Expression()",
+          "index": 68
+        },
+        {
+          "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.UnaryExpression::Update:System.Linq.Expressions.UnaryExpression(System.Linq.Expressions.Expression)",
+          "index": 69
+        },
+        {
+          "methodSubjectId": "System.Linq.Expressions/System.Runtime.CompilerServices.CallSite::Create:System.Runtime.CompilerServices.CallSite(System.Type,System.Runtime.CompilerServices.CallSiteBinder)",
+          "index": 70
+        },
+        {
+          "methodSubjectId": "System.Linq.Expressions/System.Runtime.CompilerServices.CallSiteHelpers::IsInternalFrame:System.Boolean(System.Reflection.MethodBase)",
+          "index": 71
+        }
+      ]
+    }
+  ]
+}

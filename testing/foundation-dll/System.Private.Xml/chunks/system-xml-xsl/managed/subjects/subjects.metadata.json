@@ -1,0 +1,1677 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Private.Xml",
+  "chunkSlug": "system-xml-xsl",
+  "totalMethods": 208,
+  "customEntryIndices": null,
+  "benchmarkMethodIndices": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29,
+    30,
+    31,
+    32,
+    33,
+    34,
+    35,
+    36,
+    37,
+    38,
+    39,
+    40,
+    41,
+    42,
+    43,
+    44,
+    45,
+    46,
+    47,
+    48,
+    49,
+    50,
+    51,
+    52,
+    53,
+    54,
+    55,
+    56,
+    57,
+    58,
+    59,
+    60,
+    61,
+    62,
+    63,
+    64,
+    65,
+    66,
+    67,
+    68,
+    69,
+    70,
+    71,
+    72,
+    73,
+    74,
+    75,
+    76,
+    77,
+    78,
+    79,
+    80,
+    81,
+    82,
+    83,
+    84,
+    85,
+    86,
+    87,
+    88,
+    89,
+    90,
+    91,
+    92,
+    93,
+    94,
+    95,
+    96,
+    97,
+    98,
+    99,
+    100,
+    101,
+    102,
+    103,
+    104,
+    105,
+    106,
+    107,
+    108,
+    109,
+    110,
+    111,
+    112,
+    113,
+    114,
+    115,
+    116,
+    117,
+    118,
+    119,
+    120,
+    121,
+    122,
+    123,
+    124,
+    125,
+    126,
+    127,
+    128,
+    129,
+    130,
+    131,
+    132,
+    133,
+    134,
+    135,
+    136,
+    137,
+    138,
+    139,
+    140,
+    141,
+    142,
+    143,
+    144,
+    145,
+    146,
+    147,
+    148,
+    149,
+    150,
+    151,
+    152,
+    153,
+    154,
+    155,
+    156,
+    157,
+    158,
+    159,
+    160,
+    161,
+    162,
+    163,
+    164,
+    165,
+    166,
+    167,
+    168,
+    169,
+    170,
+    171,
+    172,
+    173,
+    174,
+    175,
+    176,
+    177,
+    178,
+    179,
+    180,
+    181,
+    182,
+    183,
+    184,
+    185,
+    186,
+    187,
+    188,
+    189,
+    190,
+    191,
+    192,
+    193,
+    194,
+    195,
+    196,
+    197,
+    198,
+    199,
+    200,
+    201,
+    202,
+    203,
+    204,
+    205,
+    206,
+    207
+  ],
+  "hotupdateMethodIndices": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29,
+    30,
+    31,
+    32,
+    33,
+    34,
+    35,
+    36,
+    37,
+    38,
+    39,
+    40,
+    41,
+    42,
+    43,
+    44,
+    45,
+    46,
+    47,
+    48,
+    49,
+    50,
+    51,
+    52,
+    53,
+    54,
+    55,
+    56,
+    57,
+    58,
+    59,
+    60,
+    61,
+    62,
+    63,
+    64,
+    65,
+    66,
+    67,
+    68,
+    69,
+    70,
+    71,
+    72,
+    73,
+    74,
+    75,
+    76,
+    77,
+    78,
+    79,
+    80,
+    81,
+    82,
+    83,
+    84,
+    85,
+    86,
+    87,
+    88,
+    89,
+    90,
+    91,
+    92,
+    93,
+    94,
+    95,
+    96,
+    97,
+    98,
+    99,
+    100,
+    101,
+    102,
+    103,
+    104,
+    105,
+    106,
+    107,
+    108,
+    109,
+    110,
+    111,
+    112,
+    113,
+    114,
+    115,
+    116,
+    117,
+    118,
+    119,
+    120,
+    121,
+    122,
+    123,
+    124,
+    125,
+    126,
+    127,
+    128,
+    129,
+    130,
+    131,
+    132,
+    133,
+    134,
+    135,
+    136,
+    137,
+    138,
+    139,
+    140,
+    141,
+    142,
+    143,
+    144,
+    145,
+    146,
+    147,
+    148,
+    149,
+    150,
+    151,
+    152,
+    153,
+    154,
+    155,
+    156,
+    157,
+    158,
+    159,
+    160,
+    161,
+    162,
+    163,
+    164,
+    165,
+    166,
+    167,
+    168,
+    169,
+    170,
+    171,
+    172,
+    173,
+    174,
+    175,
+    176,
+    177,
+    178,
+    179,
+    180,
+    181,
+    182,
+    183,
+    184,
+    185,
+    186,
+    187,
+    188,
+    189,
+    190,
+    191,
+    192,
+    193,
+    194,
+    195,
+    196,
+    197,
+    198,
+    199,
+    200,
+    201,
+    202,
+    203,
+    204,
+    205,
+    206,
+    207
+  ],
+  "methods": [
+    {
+      "index": 0,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XPath.XPathDocument::CreateNavigator:System.Xml.XPath.XPathNavigator()",
+      "generatedMethodId": "CreateNavigator_0__0"
+    },
+    {
+      "index": 1,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XPath.XPathExpression::AddSort:System.Void(System.Object,System.Collections.IComparer)",
+      "generatedMethodId": "AddSort_0_object_IComparer_0"
+    },
+    {
+      "index": 2,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XPath.XPathExpression::AddSort:System.Void(System.Object,System.Collections.IComparer)",
+      "generatedMethodId": "AddSort_0_object_IComparer_1"
+    },
+    {
+      "index": 3,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XPath.XPathExpression::AddSort:System.Void(System.Object,System.Xml.XPath.XmlSortOrder,System.Xml.XPath.XmlCaseOrder,System.String,System.Xml.XPath.XmlDataType)",
+      "generatedMethodId": "AddSort_1_object_XmlSortOrder_XmlCaseOrder_string_XmlDataType_0"
+    },
+    {
+      "index": 4,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XPath.XPathExpression::Clone:System.Xml.XPath.XPathExpression()",
+      "generatedMethodId": "Clone_2__0"
+    },
+    {
+      "index": 5,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XPath.XPathExpression::SetContext:System.Void(System.Xml.XmlNamespaceManager)",
+      "generatedMethodId": "SetContext_3_XmlNamespaceManager_0"
+    },
+    {
+      "index": 6,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XPath.XPathExpression::SetContext:System.Void(System.Xml.IXmlNamespaceResolver)",
+      "generatedMethodId": "SetContext_4_IXmlNamespaceResolver_0"
+    },
+    {
+      "index": 7,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XPath.XPathExpression::Compile:System.Xml.XPath.XPathExpression(System.String)",
+      "generatedMethodId": "Compile_5_string_0"
+    },
+    {
+      "index": 8,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XPath.XPathExpression::Compile:System.Xml.XPath.XPathExpression(System.String)",
+      "generatedMethodId": "Compile_5_string_1"
+    },
+    {
+      "index": 9,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XPath.XPathExpression::Compile:System.Xml.XPath.XPathExpression(System.String,System.Xml.IXmlNamespaceResolver)",
+      "generatedMethodId": "Compile_6_string_IXmlNamespaceResolver_0"
+    },
+    {
+      "index": 10,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XPath.XPathExpression::Compile:System.Xml.XPath.XPathExpression(System.String,System.Xml.IXmlNamespaceResolver)",
+      "generatedMethodId": "Compile_6_string_IXmlNamespaceResolver_1"
+    },
+    {
+      "index": 11,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XPath.XPathItem::ValueAs:System.Object(System.Type)",
+      "generatedMethodId": "ValueAs_0_System_Type_0"
+    },
+    {
+      "index": 12,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XPath.XPathItem::ValueAs:System.Object(System.Type,System.Xml.IXmlNamespaceResolver)",
+      "generatedMethodId": "ValueAs_1_System_Type_IXmlNamespaceResolver_0"
+    },
+    {
+      "index": 13,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XPath.XPathNavigator::SetValue:System.Void(System.String)",
+      "generatedMethodId": "SetValue_0_string_0"
+    },
+    {
+      "index": 14,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XPath.XPathNavigator::SetValue:System.Void(System.String)",
+      "generatedMethodId": "SetValue_0_string_1"
+    },
+    {
+      "index": 15,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XPath.XPathNavigator::SetTypedValue:System.Void(System.Object)",
+      "generatedMethodId": "SetTypedValue_1_object_0"
+    },
+    {
+      "index": 16,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XPath.XPathNavigator::ValueAs:System.Object(System.Type,System.Xml.IXmlNamespaceResolver)",
+      "generatedMethodId": "ValueAs_2_System_Type_IXmlNamespaceResolver_0"
+    },
+    {
+      "index": 17,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XPath.XPathNavigator::CreateNavigator:System.Xml.XPath.XPathNavigator()",
+      "generatedMethodId": "CreateNavigator_3__0"
+    },
+    {
+      "index": 18,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XPath.XPathNavigator::LookupNamespace:System.String(System.String)",
+      "generatedMethodId": "LookupNamespace_4_string_0"
+    },
+    {
+      "index": 19,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XPath.XPathNavigator::LookupNamespace:System.String(System.String)",
+      "generatedMethodId": "LookupNamespace_4_string_1"
+    },
+    {
+      "index": 20,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XPath.XPathNavigator::LookupPrefix:System.String(System.String)",
+      "generatedMethodId": "LookupPrefix_5_string_0"
+    },
+    {
+      "index": 21,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XPath.XPathNavigator::LookupPrefix:System.String(System.String)",
+      "generatedMethodId": "LookupPrefix_5_string_1"
+    },
+    {
+      "index": 22,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XPath.XPathNavigator::GetNamespacesInScope:System.Collections.Generic.IDictionary\u003CSystem.String,System.String\u003E(System.Xml.XmlNamespaceScope)",
+      "generatedMethodId": "GetNamespacesInScope_6_XmlNamespaceScope_0"
+    },
+    {
+      "index": 23,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XPath.XPathNavigator::Clone:System.Xml.XPath.XPathNavigator()",
+      "generatedMethodId": "Clone_7__0"
+    },
+    {
+      "index": 24,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XPath.XPathNavigator::ReadSubtree:System.Xml.XmlReader()",
+      "generatedMethodId": "ReadSubtree_8__0"
+    },
+    {
+      "index": 25,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XPath.XPathNavigator::WriteSubtree:System.Void(System.Xml.XmlWriter)",
+      "generatedMethodId": "WriteSubtree_9_XmlWriter_0"
+    },
+    {
+      "index": 26,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XPath.XPathNavigator::GetAttribute:System.String(System.String,System.String)",
+      "generatedMethodId": "GetAttribute_10_string_string_0"
+    },
+    {
+      "index": 27,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XPath.XPathNavigator::GetAttribute:System.String(System.String,System.String)",
+      "generatedMethodId": "GetAttribute_10_string_string_1"
+    },
+    {
+      "index": 28,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XPath.XPathNavigator::GetAttribute:System.String(System.String,System.String)",
+      "generatedMethodId": "GetAttribute_10_string_string_2"
+    },
+    {
+      "index": 29,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XPath.XPathNavigator::MoveToAttribute:System.Boolean(System.String,System.String)",
+      "generatedMethodId": "MoveToAttribute_11_string_string_0"
+    },
+    {
+      "index": 30,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XPath.XPathNavigator::MoveToAttribute:System.Boolean(System.String,System.String)",
+      "generatedMethodId": "MoveToAttribute_11_string_string_1"
+    },
+    {
+      "index": 31,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XPath.XPathNavigator::MoveToAttribute:System.Boolean(System.String,System.String)",
+      "generatedMethodId": "MoveToAttribute_11_string_string_2"
+    },
+    {
+      "index": 32,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XPath.XPathNavigator::MoveToFirstAttribute:System.Boolean()",
+      "generatedMethodId": "MoveToFirstAttribute_12__0"
+    },
+    {
+      "index": 33,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XPath.XPathNavigator::MoveToNextAttribute:System.Boolean()",
+      "generatedMethodId": "MoveToNextAttribute_13__0"
+    },
+    {
+      "index": 34,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XPath.XPathNavigator::GetNamespace:System.String(System.String)",
+      "generatedMethodId": "GetNamespace_14_string_0"
+    },
+    {
+      "index": 35,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XPath.XPathNavigator::GetNamespace:System.String(System.String)",
+      "generatedMethodId": "GetNamespace_14_string_1"
+    },
+    {
+      "index": 36,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XPath.XPathNavigator::MoveToNamespace:System.Boolean(System.String)",
+      "generatedMethodId": "MoveToNamespace_15_string_0"
+    },
+    {
+      "index": 37,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XPath.XPathNavigator::MoveToNamespace:System.Boolean(System.String)",
+      "generatedMethodId": "MoveToNamespace_15_string_1"
+    },
+    {
+      "index": 38,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XPath.XPathNavigator::MoveToFirstNamespace:System.Boolean(System.Xml.XPath.XPathNamespaceScope)",
+      "generatedMethodId": "MoveToFirstNamespace_16_XPathNamespaceScope_0"
+    },
+    {
+      "index": 39,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XPath.XPathNavigator::MoveToNextNamespace:System.Boolean(System.Xml.XPath.XPathNamespaceScope)",
+      "generatedMethodId": "MoveToNextNamespace_17_XPathNamespaceScope_0"
+    },
+    {
+      "index": 40,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XPath.XPathNavigator::MoveToFirstNamespace:System.Boolean()",
+      "generatedMethodId": "MoveToFirstNamespace_18__0"
+    },
+    {
+      "index": 41,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XPath.XPathNavigator::MoveToNextNamespace:System.Boolean()",
+      "generatedMethodId": "MoveToNextNamespace_19__0"
+    },
+    {
+      "index": 42,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XPath.XPathNavigator::MoveToNext:System.Boolean()",
+      "generatedMethodId": "MoveToNext_20__0"
+    },
+    {
+      "index": 43,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XPath.XPathNavigator::MoveToPrevious:System.Boolean()",
+      "generatedMethodId": "MoveToPrevious_21__0"
+    },
+    {
+      "index": 44,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XPath.XPathNavigator::MoveToFirst:System.Boolean()",
+      "generatedMethodId": "MoveToFirst_22__0"
+    },
+    {
+      "index": 45,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XPath.XPathNavigator::MoveToFirstChild:System.Boolean()",
+      "generatedMethodId": "MoveToFirstChild_23__0"
+    },
+    {
+      "index": 46,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XPath.XPathNavigator::MoveToParent:System.Boolean()",
+      "generatedMethodId": "MoveToParent_24__0"
+    },
+    {
+      "index": 47,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XPath.XPathNavigator::MoveToRoot:System.Void()",
+      "generatedMethodId": "MoveToRoot_25__0"
+    },
+    {
+      "index": 48,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XPath.XPathNavigator::MoveTo:System.Boolean(System.Xml.XPath.XPathNavigator)",
+      "generatedMethodId": "MoveTo_26_XPathNavigator_0"
+    },
+    {
+      "index": 49,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XPath.XPathNavigator::MoveToId:System.Boolean(System.String)",
+      "generatedMethodId": "MoveToId_27_string_0"
+    },
+    {
+      "index": 50,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XPath.XPathNavigator::MoveToId:System.Boolean(System.String)",
+      "generatedMethodId": "MoveToId_27_string_1"
+    },
+    {
+      "index": 51,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XPath.XPathNavigator::MoveToChild:System.Boolean(System.String,System.String)",
+      "generatedMethodId": "MoveToChild_28_string_string_0"
+    },
+    {
+      "index": 52,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XPath.XPathNavigator::MoveToChild:System.Boolean(System.String,System.String)",
+      "generatedMethodId": "MoveToChild_28_string_string_1"
+    },
+    {
+      "index": 53,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XPath.XPathNavigator::MoveToChild:System.Boolean(System.String,System.String)",
+      "generatedMethodId": "MoveToChild_28_string_string_2"
+    },
+    {
+      "index": 54,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XPath.XPathNavigator::MoveToChild:System.Boolean(System.Xml.XPath.XPathNodeType)",
+      "generatedMethodId": "MoveToChild_29_XPathNodeType_0"
+    },
+    {
+      "index": 55,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XPath.XPathNavigator::MoveToFollowing:System.Boolean(System.String,System.String)",
+      "generatedMethodId": "MoveToFollowing_30_string_string_0"
+    },
+    {
+      "index": 56,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XPath.XPathNavigator::MoveToFollowing:System.Boolean(System.String,System.String)",
+      "generatedMethodId": "MoveToFollowing_30_string_string_1"
+    },
+    {
+      "index": 57,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XPath.XPathNavigator::MoveToFollowing:System.Boolean(System.String,System.String)",
+      "generatedMethodId": "MoveToFollowing_30_string_string_2"
+    },
+    {
+      "index": 58,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XPath.XPathNavigator::MoveToFollowing:System.Boolean(System.String,System.String,System.Xml.XPath.XPathNavigator)",
+      "generatedMethodId": "MoveToFollowing_31_string_string_XPathNavigator_0"
+    },
+    {
+      "index": 59,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XPath.XPathNavigator::MoveToFollowing:System.Boolean(System.String,System.String,System.Xml.XPath.XPathNavigator)",
+      "generatedMethodId": "MoveToFollowing_31_string_string_XPathNavigator_1"
+    },
+    {
+      "index": 60,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XPath.XPathNavigator::MoveToFollowing:System.Boolean(System.String,System.String,System.Xml.XPath.XPathNavigator)",
+      "generatedMethodId": "MoveToFollowing_31_string_string_XPathNavigator_2"
+    },
+    {
+      "index": 61,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XPath.XPathNavigator::MoveToFollowing:System.Boolean(System.Xml.XPath.XPathNodeType)",
+      "generatedMethodId": "MoveToFollowing_32_XPathNodeType_0"
+    },
+    {
+      "index": 62,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XPath.XPathNavigator::MoveToFollowing:System.Boolean(System.Xml.XPath.XPathNodeType,System.Xml.XPath.XPathNavigator)",
+      "generatedMethodId": "MoveToFollowing_33_XPathNodeType_XPathNavigator_0"
+    },
+    {
+      "index": 63,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XPath.XPathNavigator::MoveToNext:System.Boolean(System.String,System.String)",
+      "generatedMethodId": "MoveToNext_34_string_string_0"
+    },
+    {
+      "index": 64,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XPath.XPathNavigator::MoveToNext:System.Boolean(System.String,System.String)",
+      "generatedMethodId": "MoveToNext_34_string_string_1"
+    },
+    {
+      "index": 65,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XPath.XPathNavigator::MoveToNext:System.Boolean(System.String,System.String)",
+      "generatedMethodId": "MoveToNext_34_string_string_2"
+    },
+    {
+      "index": 66,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XPath.XPathNavigator::MoveToNext:System.Boolean(System.Xml.XPath.XPathNodeType)",
+      "generatedMethodId": "MoveToNext_35_XPathNodeType_0"
+    },
+    {
+      "index": 67,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XPath.XPathNavigator::IsSamePosition:System.Boolean(System.Xml.XPath.XPathNavigator)",
+      "generatedMethodId": "IsSamePosition_36_XPathNavigator_0"
+    },
+    {
+      "index": 68,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XPath.XPathNavigator::IsDescendant:System.Boolean(System.Xml.XPath.XPathNavigator)",
+      "generatedMethodId": "IsDescendant_37_XPathNavigator_0"
+    },
+    {
+      "index": 69,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XPath.XPathNavigator::ComparePosition:System.Xml.XmlNodeOrder(System.Xml.XPath.XPathNavigator)",
+      "generatedMethodId": "ComparePosition_38_XPathNavigator_0"
+    },
+    {
+      "index": 70,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XPath.XPathNavigator::CheckValidity:System.Boolean(System.Xml.Schema.XmlSchemaSet,System.Xml.Schema.ValidationEventHandler)",
+      "generatedMethodId": "CheckValidity_39_XmlSchemaSet_ValidationEventHandler_0"
+    },
+    {
+      "index": 71,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XPath.XPathNavigator::Compile:System.Xml.XPath.XPathExpression(System.String)",
+      "generatedMethodId": "Compile_40_string_0"
+    },
+    {
+      "index": 72,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XPath.XPathNavigator::Compile:System.Xml.XPath.XPathExpression(System.String)",
+      "generatedMethodId": "Compile_40_string_1"
+    },
+    {
+      "index": 73,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XPath.XPathNavigator::SelectSingleNode:System.Xml.XPath.XPathNavigator(System.String)",
+      "generatedMethodId": "SelectSingleNode_41_string_0"
+    },
+    {
+      "index": 74,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XPath.XPathNavigator::SelectSingleNode:System.Xml.XPath.XPathNavigator(System.String)",
+      "generatedMethodId": "SelectSingleNode_41_string_1"
+    },
+    {
+      "index": 75,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XPath.XPathNavigator::SelectSingleNode:System.Xml.XPath.XPathNavigator(System.String,System.Xml.IXmlNamespaceResolver)",
+      "generatedMethodId": "SelectSingleNode_42_string_IXmlNamespaceResolver_0"
+    },
+    {
+      "index": 76,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XPath.XPathNavigator::SelectSingleNode:System.Xml.XPath.XPathNavigator(System.String,System.Xml.IXmlNamespaceResolver)",
+      "generatedMethodId": "SelectSingleNode_42_string_IXmlNamespaceResolver_1"
+    },
+    {
+      "index": 77,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XPath.XPathNavigator::SelectSingleNode:System.Xml.XPath.XPathNavigator(System.Xml.XPath.XPathExpression)",
+      "generatedMethodId": "SelectSingleNode_43_XPathExpression_0"
+    },
+    {
+      "index": 78,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XPath.XPathNavigator::Select:System.Xml.XPath.XPathNodeIterator(System.String)",
+      "generatedMethodId": "Select_44_string_0"
+    },
+    {
+      "index": 79,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XPath.XPathNavigator::Select:System.Xml.XPath.XPathNodeIterator(System.String)",
+      "generatedMethodId": "Select_44_string_1"
+    },
+    {
+      "index": 80,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XPath.XPathNavigator::Select:System.Xml.XPath.XPathNodeIterator(System.String,System.Xml.IXmlNamespaceResolver)",
+      "generatedMethodId": "Select_45_string_IXmlNamespaceResolver_0"
+    },
+    {
+      "index": 81,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XPath.XPathNavigator::Select:System.Xml.XPath.XPathNodeIterator(System.String,System.Xml.IXmlNamespaceResolver)",
+      "generatedMethodId": "Select_45_string_IXmlNamespaceResolver_1"
+    },
+    {
+      "index": 82,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XPath.XPathNavigator::Select:System.Xml.XPath.XPathNodeIterator(System.Xml.XPath.XPathExpression)",
+      "generatedMethodId": "Select_46_XPathExpression_0"
+    },
+    {
+      "index": 83,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XPath.XPathNavigator::Evaluate:System.Object(System.String)",
+      "generatedMethodId": "Evaluate_47_string_0"
+    },
+    {
+      "index": 84,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XPath.XPathNavigator::Evaluate:System.Object(System.String)",
+      "generatedMethodId": "Evaluate_47_string_1"
+    },
+    {
+      "index": 85,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XPath.XPathNavigator::Evaluate:System.Object(System.String,System.Xml.IXmlNamespaceResolver)",
+      "generatedMethodId": "Evaluate_48_string_IXmlNamespaceResolver_0"
+    },
+    {
+      "index": 86,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XPath.XPathNavigator::Evaluate:System.Object(System.String,System.Xml.IXmlNamespaceResolver)",
+      "generatedMethodId": "Evaluate_48_string_IXmlNamespaceResolver_1"
+    },
+    {
+      "index": 87,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XPath.XPathNavigator::Evaluate:System.Object(System.Xml.XPath.XPathExpression)",
+      "generatedMethodId": "Evaluate_49_XPathExpression_0"
+    },
+    {
+      "index": 88,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XPath.XPathNavigator::Evaluate:System.Object(System.Xml.XPath.XPathExpression,System.Xml.XPath.XPathNodeIterator)",
+      "generatedMethodId": "Evaluate_50_XPathExpression_XPathNodeIterator_0"
+    },
+    {
+      "index": 89,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XPath.XPathNavigator::Matches:System.Boolean(System.Xml.XPath.XPathExpression)",
+      "generatedMethodId": "Matches_51_XPathExpression_0"
+    },
+    {
+      "index": 90,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XPath.XPathNavigator::Matches:System.Boolean(System.String)",
+      "generatedMethodId": "Matches_52_string_0"
+    },
+    {
+      "index": 91,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XPath.XPathNavigator::Matches:System.Boolean(System.String)",
+      "generatedMethodId": "Matches_52_string_1"
+    },
+    {
+      "index": 92,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XPath.XPathNavigator::SelectChildren:System.Xml.XPath.XPathNodeIterator(System.Xml.XPath.XPathNodeType)",
+      "generatedMethodId": "SelectChildren_53_XPathNodeType_0"
+    },
+    {
+      "index": 93,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XPath.XPathNavigator::SelectChildren:System.Xml.XPath.XPathNodeIterator(System.String,System.String)",
+      "generatedMethodId": "SelectChildren_54_string_string_0"
+    },
+    {
+      "index": 94,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XPath.XPathNavigator::SelectChildren:System.Xml.XPath.XPathNodeIterator(System.String,System.String)",
+      "generatedMethodId": "SelectChildren_54_string_string_1"
+    },
+    {
+      "index": 95,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XPath.XPathNavigator::SelectChildren:System.Xml.XPath.XPathNodeIterator(System.String,System.String)",
+      "generatedMethodId": "SelectChildren_54_string_string_2"
+    },
+    {
+      "index": 96,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XPath.XPathNavigator::SelectAncestors:System.Xml.XPath.XPathNodeIterator(System.Xml.XPath.XPathNodeType,System.Boolean)",
+      "generatedMethodId": "SelectAncestors_55_XPathNodeType_bool_0"
+    },
+    {
+      "index": 97,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XPath.XPathNavigator::SelectAncestors:System.Xml.XPath.XPathNodeIterator(System.Xml.XPath.XPathNodeType,System.Boolean)",
+      "generatedMethodId": "SelectAncestors_55_XPathNodeType_bool_1"
+    },
+    {
+      "index": 98,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XPath.XPathNavigator::SelectAncestors:System.Xml.XPath.XPathNodeIterator(System.String,System.String,System.Boolean)",
+      "generatedMethodId": "SelectAncestors_56_string_string_bool_0"
+    },
+    {
+      "index": 99,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XPath.XPathNavigator::SelectAncestors:System.Xml.XPath.XPathNodeIterator(System.String,System.String,System.Boolean)",
+      "generatedMethodId": "SelectAncestors_56_string_string_bool_1"
+    },
+    {
+      "index": 100,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XPath.XPathNavigator::SelectAncestors:System.Xml.XPath.XPathNodeIterator(System.String,System.String,System.Boolean)",
+      "generatedMethodId": "SelectAncestors_56_string_string_bool_2"
+    },
+    {
+      "index": 101,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XPath.XPathNavigator::SelectAncestors:System.Xml.XPath.XPathNodeIterator(System.String,System.String,System.Boolean)",
+      "generatedMethodId": "SelectAncestors_56_string_string_bool_3"
+    },
+    {
+      "index": 102,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XPath.XPathNavigator::SelectDescendants:System.Xml.XPath.XPathNodeIterator(System.Xml.XPath.XPathNodeType,System.Boolean)",
+      "generatedMethodId": "SelectDescendants_57_XPathNodeType_bool_0"
+    },
+    {
+      "index": 103,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XPath.XPathNavigator::SelectDescendants:System.Xml.XPath.XPathNodeIterator(System.Xml.XPath.XPathNodeType,System.Boolean)",
+      "generatedMethodId": "SelectDescendants_57_XPathNodeType_bool_1"
+    },
+    {
+      "index": 104,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XPath.XPathNavigator::SelectDescendants:System.Xml.XPath.XPathNodeIterator(System.String,System.String,System.Boolean)",
+      "generatedMethodId": "SelectDescendants_58_string_string_bool_0"
+    },
+    {
+      "index": 105,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XPath.XPathNavigator::SelectDescendants:System.Xml.XPath.XPathNodeIterator(System.String,System.String,System.Boolean)",
+      "generatedMethodId": "SelectDescendants_58_string_string_bool_1"
+    },
+    {
+      "index": 106,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XPath.XPathNavigator::SelectDescendants:System.Xml.XPath.XPathNodeIterator(System.String,System.String,System.Boolean)",
+      "generatedMethodId": "SelectDescendants_58_string_string_bool_2"
+    },
+    {
+      "index": 107,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XPath.XPathNavigator::SelectDescendants:System.Xml.XPath.XPathNodeIterator(System.String,System.String,System.Boolean)",
+      "generatedMethodId": "SelectDescendants_58_string_string_bool_3"
+    },
+    {
+      "index": 108,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XPath.XPathNavigator::PrependChild:System.Xml.XmlWriter()",
+      "generatedMethodId": "PrependChild_59__0"
+    },
+    {
+      "index": 109,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XPath.XPathNavigator::AppendChild:System.Xml.XmlWriter()",
+      "generatedMethodId": "AppendChild_60__0"
+    },
+    {
+      "index": 110,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XPath.XPathNavigator::InsertAfter:System.Xml.XmlWriter()",
+      "generatedMethodId": "InsertAfter_61__0"
+    },
+    {
+      "index": 111,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XPath.XPathNavigator::InsertBefore:System.Xml.XmlWriter()",
+      "generatedMethodId": "InsertBefore_62__0"
+    },
+    {
+      "index": 112,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XPath.XPathNavigator::CreateAttributes:System.Xml.XmlWriter()",
+      "generatedMethodId": "CreateAttributes_63__0"
+    },
+    {
+      "index": 113,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XPath.XPathNavigator::ReplaceRange:System.Xml.XmlWriter(System.Xml.XPath.XPathNavigator)",
+      "generatedMethodId": "ReplaceRange_64_XPathNavigator_0"
+    },
+    {
+      "index": 114,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XPath.XPathNavigator::ReplaceSelf:System.Void(System.String)",
+      "generatedMethodId": "ReplaceSelf_65_string_0"
+    },
+    {
+      "index": 115,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XPath.XPathNavigator::ReplaceSelf:System.Void(System.String)",
+      "generatedMethodId": "ReplaceSelf_65_string_1"
+    },
+    {
+      "index": 116,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XPath.XPathNavigator::ReplaceSelf:System.Void(System.Xml.XmlReader)",
+      "generatedMethodId": "ReplaceSelf_66_XmlReader_0"
+    },
+    {
+      "index": 117,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XPath.XPathNavigator::ReplaceSelf:System.Void(System.Xml.XPath.XPathNavigator)",
+      "generatedMethodId": "ReplaceSelf_67_XPathNavigator_0"
+    },
+    {
+      "index": 118,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XPath.XPathNavigator::AppendChild:System.Void(System.String)",
+      "generatedMethodId": "AppendChild_68_string_0"
+    },
+    {
+      "index": 119,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XPath.XPathNavigator::AppendChild:System.Void(System.String)",
+      "generatedMethodId": "AppendChild_68_string_1"
+    },
+    {
+      "index": 120,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XPath.XPathNavigator::AppendChild:System.Void(System.Xml.XmlReader)",
+      "generatedMethodId": "AppendChild_69_XmlReader_0"
+    },
+    {
+      "index": 121,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XPath.XPathNavigator::AppendChild:System.Void(System.Xml.XPath.XPathNavigator)",
+      "generatedMethodId": "AppendChild_70_XPathNavigator_0"
+    },
+    {
+      "index": 122,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XPath.XPathNavigator::PrependChild:System.Void(System.String)",
+      "generatedMethodId": "PrependChild_71_string_0"
+    },
+    {
+      "index": 123,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XPath.XPathNavigator::PrependChild:System.Void(System.String)",
+      "generatedMethodId": "PrependChild_71_string_1"
+    },
+    {
+      "index": 124,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XPath.XPathNavigator::PrependChild:System.Void(System.Xml.XmlReader)",
+      "generatedMethodId": "PrependChild_72_XmlReader_0"
+    },
+    {
+      "index": 125,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XPath.XPathNavigator::PrependChild:System.Void(System.Xml.XPath.XPathNavigator)",
+      "generatedMethodId": "PrependChild_73_XPathNavigator_0"
+    },
+    {
+      "index": 126,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XPath.XPathNavigator::InsertBefore:System.Void(System.String)",
+      "generatedMethodId": "InsertBefore_74_string_0"
+    },
+    {
+      "index": 127,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XPath.XPathNavigator::InsertBefore:System.Void(System.String)",
+      "generatedMethodId": "InsertBefore_74_string_1"
+    },
+    {
+      "index": 128,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XPath.XPathNavigator::InsertBefore:System.Void(System.Xml.XmlReader)",
+      "generatedMethodId": "InsertBefore_75_XmlReader_0"
+    },
+    {
+      "index": 129,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XPath.XPathNavigator::InsertBefore:System.Void(System.Xml.XPath.XPathNavigator)",
+      "generatedMethodId": "InsertBefore_76_XPathNavigator_0"
+    },
+    {
+      "index": 130,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XPath.XPathNavigator::InsertAfter:System.Void(System.String)",
+      "generatedMethodId": "InsertAfter_77_string_0"
+    },
+    {
+      "index": 131,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XPath.XPathNavigator::InsertAfter:System.Void(System.String)",
+      "generatedMethodId": "InsertAfter_77_string_1"
+    },
+    {
+      "index": 132,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XPath.XPathNavigator::InsertAfter:System.Void(System.Xml.XmlReader)",
+      "generatedMethodId": "InsertAfter_78_XmlReader_0"
+    },
+    {
+      "index": 133,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XPath.XPathNavigator::InsertAfter:System.Void(System.Xml.XPath.XPathNavigator)",
+      "generatedMethodId": "InsertAfter_79_XPathNavigator_0"
+    },
+    {
+      "index": 134,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XPath.XPathNavigator::DeleteRange:System.Void(System.Xml.XPath.XPathNavigator)",
+      "generatedMethodId": "DeleteRange_80_XPathNavigator_0"
+    },
+    {
+      "index": 135,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XPath.XPathNavigator::DeleteSelf:System.Void()",
+      "generatedMethodId": "DeleteSelf_81__0"
+    },
+    {
+      "index": 136,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XPath.XPathNavigator::PrependChildElement:System.Void(System.String,System.String,System.String,System.String)",
+      "generatedMethodId": "PrependChildElement_82_string_string_string_string_0"
+    },
+    {
+      "index": 137,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XPath.XPathNavigator::PrependChildElement:System.Void(System.String,System.String,System.String,System.String)",
+      "generatedMethodId": "PrependChildElement_82_string_string_string_string_1"
+    },
+    {
+      "index": 138,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XPath.XPathNavigator::PrependChildElement:System.Void(System.String,System.String,System.String,System.String)",
+      "generatedMethodId": "PrependChildElement_82_string_string_string_string_2"
+    },
+    {
+      "index": 139,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XPath.XPathNavigator::PrependChildElement:System.Void(System.String,System.String,System.String,System.String)",
+      "generatedMethodId": "PrependChildElement_82_string_string_string_string_3"
+    },
+    {
+      "index": 140,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XPath.XPathNavigator::AppendChildElement:System.Void(System.String,System.String,System.String,System.String)",
+      "generatedMethodId": "AppendChildElement_83_string_string_string_string_0"
+    },
+    {
+      "index": 141,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XPath.XPathNavigator::AppendChildElement:System.Void(System.String,System.String,System.String,System.String)",
+      "generatedMethodId": "AppendChildElement_83_string_string_string_string_1"
+    },
+    {
+      "index": 142,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XPath.XPathNavigator::AppendChildElement:System.Void(System.String,System.String,System.String,System.String)",
+      "generatedMethodId": "AppendChildElement_83_string_string_string_string_2"
+    },
+    {
+      "index": 143,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XPath.XPathNavigator::AppendChildElement:System.Void(System.String,System.String,System.String,System.String)",
+      "generatedMethodId": "AppendChildElement_83_string_string_string_string_3"
+    },
+    {
+      "index": 144,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XPath.XPathNavigator::InsertElementBefore:System.Void(System.String,System.String,System.String,System.String)",
+      "generatedMethodId": "InsertElementBefore_84_string_string_string_string_0"
+    },
+    {
+      "index": 145,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XPath.XPathNavigator::InsertElementBefore:System.Void(System.String,System.String,System.String,System.String)",
+      "generatedMethodId": "InsertElementBefore_84_string_string_string_string_1"
+    },
+    {
+      "index": 146,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XPath.XPathNavigator::InsertElementBefore:System.Void(System.String,System.String,System.String,System.String)",
+      "generatedMethodId": "InsertElementBefore_84_string_string_string_string_2"
+    },
+    {
+      "index": 147,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XPath.XPathNavigator::InsertElementBefore:System.Void(System.String,System.String,System.String,System.String)",
+      "generatedMethodId": "InsertElementBefore_84_string_string_string_string_3"
+    },
+    {
+      "index": 148,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XPath.XPathNavigator::InsertElementAfter:System.Void(System.String,System.String,System.String,System.String)",
+      "generatedMethodId": "InsertElementAfter_85_string_string_string_string_0"
+    },
+    {
+      "index": 149,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XPath.XPathNavigator::InsertElementAfter:System.Void(System.String,System.String,System.String,System.String)",
+      "generatedMethodId": "InsertElementAfter_85_string_string_string_string_1"
+    },
+    {
+      "index": 150,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XPath.XPathNavigator::InsertElementAfter:System.Void(System.String,System.String,System.String,System.String)",
+      "generatedMethodId": "InsertElementAfter_85_string_string_string_string_2"
+    },
+    {
+      "index": 151,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XPath.XPathNavigator::InsertElementAfter:System.Void(System.String,System.String,System.String,System.String)",
+      "generatedMethodId": "InsertElementAfter_85_string_string_string_string_3"
+    },
+    {
+      "index": 152,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XPath.XPathNavigator::CreateAttribute:System.Void(System.String,System.String,System.String,System.String)",
+      "generatedMethodId": "CreateAttribute_86_string_string_string_string_0"
+    },
+    {
+      "index": 153,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XPath.XPathNavigator::CreateAttribute:System.Void(System.String,System.String,System.String,System.String)",
+      "generatedMethodId": "CreateAttribute_86_string_string_string_string_1"
+    },
+    {
+      "index": 154,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XPath.XPathNavigator::CreateAttribute:System.Void(System.String,System.String,System.String,System.String)",
+      "generatedMethodId": "CreateAttribute_86_string_string_string_string_2"
+    },
+    {
+      "index": 155,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XPath.XPathNavigator::CreateAttribute:System.Void(System.String,System.String,System.String,System.String)",
+      "generatedMethodId": "CreateAttribute_86_string_string_string_string_3"
+    },
+    {
+      "index": 156,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XPath.XPathNodeIterator::Clone:System.Xml.XPath.XPathNodeIterator()",
+      "generatedMethodId": "Clone_0__0"
+    },
+    {
+      "index": 157,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XPath.XPathNodeIterator::GetEnumerator:System.Collections.IEnumerator()",
+      "generatedMethodId": "GetEnumerator_1__0"
+    },
+    {
+      "index": 158,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Xsl.XslCompiledTransform::Load:System.Void(System.Xml.XmlReader)",
+      "generatedMethodId": "Load_0_XmlReader_0"
+    },
+    {
+      "index": 159,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Xsl.XslCompiledTransform::Load:System.Void(System.Xml.XmlReader,System.Xml.Xsl.XsltSettings,System.Xml.XmlResolver)",
+      "generatedMethodId": "Load_1_XmlReader_XsltSettings_XmlResolver_0"
+    },
+    {
+      "index": 160,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Xsl.XslCompiledTransform::Load:System.Void(System.Xml.XPath.IXPathNavigable)",
+      "generatedMethodId": "Load_2_IXPathNavigable_0"
+    },
+    {
+      "index": 161,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Xsl.XslCompiledTransform::Load:System.Void(System.Xml.XPath.IXPathNavigable,System.Xml.Xsl.XsltSettings,System.Xml.XmlResolver)",
+      "generatedMethodId": "Load_3_IXPathNavigable_XsltSettings_XmlResolver_0"
+    },
+    {
+      "index": 162,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Xsl.XslCompiledTransform::Load:System.Void(System.String)",
+      "generatedMethodId": "Load_4_string_0"
+    },
+    {
+      "index": 163,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Xsl.XslCompiledTransform::Load:System.Void(System.String)",
+      "generatedMethodId": "Load_4_string_1"
+    },
+    {
+      "index": 164,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Xsl.XslCompiledTransform::Load:System.Void(System.String,System.Xml.Xsl.XsltSettings,System.Xml.XmlResolver)",
+      "generatedMethodId": "Load_5_string_XsltSettings_XmlResolver_0"
+    },
+    {
+      "index": 165,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Xsl.XslCompiledTransform::Load:System.Void(System.String,System.Xml.Xsl.XsltSettings,System.Xml.XmlResolver)",
+      "generatedMethodId": "Load_5_string_XsltSettings_XmlResolver_1"
+    },
+    {
+      "index": 166,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Xsl.XslCompiledTransform::Load:System.Void(System.Type)",
+      "generatedMethodId": "Load_6_System_Type_0"
+    },
+    {
+      "index": 167,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Xsl.XslCompiledTransform::Load:System.Void(System.Reflection.MethodInfo,System.Byte[],System.Type[])",
+      "generatedMethodId": "Load_7_MethodInfo_System_Byte_System_Type_0"
+    },
+    {
+      "index": 168,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Xsl.XslCompiledTransform::Load:System.Void(System.Reflection.MethodInfo,System.Byte[],System.Type[])",
+      "generatedMethodId": "Load_7_MethodInfo_System_Byte_System_Type_1"
+    },
+    {
+      "index": 169,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Xsl.XslCompiledTransform::Load:System.Void(System.Reflection.MethodInfo,System.Byte[],System.Type[])",
+      "generatedMethodId": "Load_7_MethodInfo_System_Byte_System_Type_2"
+    },
+    {
+      "index": 170,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Xsl.XsltArgumentList::GetParam:System.Object(System.String,System.String)",
+      "generatedMethodId": "GetParam_0_string_string_0"
+    },
+    {
+      "index": 171,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Xsl.XsltArgumentList::GetParam:System.Object(System.String,System.String)",
+      "generatedMethodId": "GetParam_0_string_string_1"
+    },
+    {
+      "index": 172,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Xsl.XsltArgumentList::GetParam:System.Object(System.String,System.String)",
+      "generatedMethodId": "GetParam_0_string_string_2"
+    },
+    {
+      "index": 173,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Xsl.XsltArgumentList::GetExtensionObject:System.Object(System.String)",
+      "generatedMethodId": "GetExtensionObject_1_string_0"
+    },
+    {
+      "index": 174,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Xsl.XsltArgumentList::GetExtensionObject:System.Object(System.String)",
+      "generatedMethodId": "GetExtensionObject_1_string_1"
+    },
+    {
+      "index": 175,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Xsl.XsltArgumentList::AddParam:System.Void(System.String,System.String,System.Object)",
+      "generatedMethodId": "AddParam_2_string_string_object_0"
+    },
+    {
+      "index": 176,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Xsl.XsltArgumentList::AddParam:System.Void(System.String,System.String,System.Object)",
+      "generatedMethodId": "AddParam_2_string_string_object_1"
+    },
+    {
+      "index": 177,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Xsl.XsltArgumentList::AddParam:System.Void(System.String,System.String,System.Object)",
+      "generatedMethodId": "AddParam_2_string_string_object_2"
+    },
+    {
+      "index": 178,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Xsl.XsltArgumentList::AddExtensionObject:System.Void(System.String,System.Object)",
+      "generatedMethodId": "AddExtensionObject_3_string_object_0"
+    },
+    {
+      "index": 179,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Xsl.XsltArgumentList::AddExtensionObject:System.Void(System.String,System.Object)",
+      "generatedMethodId": "AddExtensionObject_3_string_object_1"
+    },
+    {
+      "index": 180,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Xsl.XsltArgumentList::RemoveParam:System.Object(System.String,System.String)",
+      "generatedMethodId": "RemoveParam_4_string_string_0"
+    },
+    {
+      "index": 181,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Xsl.XsltArgumentList::RemoveParam:System.Object(System.String,System.String)",
+      "generatedMethodId": "RemoveParam_4_string_string_1"
+    },
+    {
+      "index": 182,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Xsl.XsltArgumentList::RemoveParam:System.Object(System.String,System.String)",
+      "generatedMethodId": "RemoveParam_4_string_string_2"
+    },
+    {
+      "index": 183,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Xsl.XsltArgumentList::RemoveExtensionObject:System.Object(System.String)",
+      "generatedMethodId": "RemoveExtensionObject_5_string_0"
+    },
+    {
+      "index": 184,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Xsl.XsltArgumentList::RemoveExtensionObject:System.Object(System.String)",
+      "generatedMethodId": "RemoveExtensionObject_5_string_1"
+    },
+    {
+      "index": 185,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Xsl.XsltArgumentList::Clear:System.Void()",
+      "generatedMethodId": "Clear_6__0"
+    },
+    {
+      "index": 186,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Xsl.XsltContext::ResolveVariable:System.Xml.Xsl.IXsltContextVariable(System.String,System.String)",
+      "generatedMethodId": "ResolveVariable_0_string_string_0"
+    },
+    {
+      "index": 187,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Xsl.XsltContext::ResolveVariable:System.Xml.Xsl.IXsltContextVariable(System.String,System.String)",
+      "generatedMethodId": "ResolveVariable_0_string_string_1"
+    },
+    {
+      "index": 188,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Xsl.XsltContext::ResolveVariable:System.Xml.Xsl.IXsltContextVariable(System.String,System.String)",
+      "generatedMethodId": "ResolveVariable_0_string_string_2"
+    },
+    {
+      "index": 189,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Xsl.XsltContext::ResolveFunction:System.Xml.Xsl.IXsltContextFunction(System.String,System.String,System.Xml.XPath.XPathResultType[])",
+      "generatedMethodId": "ResolveFunction_1_string_string_XPathResultType_0"
+    },
+    {
+      "index": 190,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Xsl.XsltContext::ResolveFunction:System.Xml.Xsl.IXsltContextFunction(System.String,System.String,System.Xml.XPath.XPathResultType[])",
+      "generatedMethodId": "ResolveFunction_1_string_string_XPathResultType_1"
+    },
+    {
+      "index": 191,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Xsl.XsltContext::ResolveFunction:System.Xml.Xsl.IXsltContextFunction(System.String,System.String,System.Xml.XPath.XPathResultType[])",
+      "generatedMethodId": "ResolveFunction_1_string_string_XPathResultType_2"
+    },
+    {
+      "index": 192,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Xsl.XsltContext::ResolveFunction:System.Xml.Xsl.IXsltContextFunction(System.String,System.String,System.Xml.XPath.XPathResultType[])",
+      "generatedMethodId": "ResolveFunction_1_string_string_XPathResultType_3"
+    },
+    {
+      "index": 193,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Xsl.XsltContext::ResolveFunction:System.Xml.Xsl.IXsltContextFunction(System.String,System.String,System.Xml.XPath.XPathResultType[])",
+      "generatedMethodId": "ResolveFunction_1_string_string_XPathResultType_4"
+    },
+    {
+      "index": 194,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Xsl.XsltContext::PreserveWhitespace:System.Boolean(System.Xml.XPath.XPathNavigator)",
+      "generatedMethodId": "PreserveWhitespace_2_XPathNavigator_0"
+    },
+    {
+      "index": 195,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Xsl.XsltContext::CompareDocument:System.Int32(System.String,System.String)",
+      "generatedMethodId": "CompareDocument_3_string_string_0"
+    },
+    {
+      "index": 196,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Xsl.XsltContext::CompareDocument:System.Int32(System.String,System.String)",
+      "generatedMethodId": "CompareDocument_3_string_string_1"
+    },
+    {
+      "index": 197,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Xsl.XsltContext::CompareDocument:System.Int32(System.String,System.String)",
+      "generatedMethodId": "CompareDocument_3_string_string_2"
+    },
+    {
+      "index": 198,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Xsl.XslTransform::Load:System.Void(System.Xml.XmlReader)",
+      "generatedMethodId": "Load_0_XmlReader_0"
+    },
+    {
+      "index": 199,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Xsl.XslTransform::Load:System.Void(System.Xml.XmlReader,System.Xml.XmlResolver)",
+      "generatedMethodId": "Load_1_XmlReader_XmlResolver_0"
+    },
+    {
+      "index": 200,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Xsl.XslTransform::Load:System.Void(System.Xml.XPath.IXPathNavigable)",
+      "generatedMethodId": "Load_2_IXPathNavigable_0"
+    },
+    {
+      "index": 201,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Xsl.XslTransform::Load:System.Void(System.Xml.XPath.IXPathNavigable,System.Xml.XmlResolver)",
+      "generatedMethodId": "Load_3_IXPathNavigable_XmlResolver_0"
+    },
+    {
+      "index": 202,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Xsl.XslTransform::Load:System.Void(System.Xml.XPath.XPathNavigator)",
+      "generatedMethodId": "Load_4_XPathNavigator_0"
+    },
+    {
+      "index": 203,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Xsl.XslTransform::Load:System.Void(System.Xml.XPath.XPathNavigator,System.Xml.XmlResolver)",
+      "generatedMethodId": "Load_5_XPathNavigator_XmlResolver_0"
+    },
+    {
+      "index": 204,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Xsl.XslTransform::Load:System.Void(System.String)",
+      "generatedMethodId": "Load_6_string_0"
+    },
+    {
+      "index": 205,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Xsl.XslTransform::Load:System.Void(System.String)",
+      "generatedMethodId": "Load_6_string_1"
+    },
+    {
+      "index": 206,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Xsl.XslTransform::Load:System.Void(System.String,System.Xml.XmlResolver)",
+      "generatedMethodId": "Load_7_string_XmlResolver_0"
+    },
+    {
+      "index": 207,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Xsl.XslTransform::Load:System.Void(System.String,System.Xml.XmlResolver)",
+      "generatedMethodId": "Load_7_string_XmlResolver_1"
+    }
+  ]
+}

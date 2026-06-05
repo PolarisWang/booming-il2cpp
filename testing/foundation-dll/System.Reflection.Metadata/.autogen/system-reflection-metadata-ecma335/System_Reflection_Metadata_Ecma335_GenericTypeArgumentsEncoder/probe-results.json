@@ -1,0 +1,15 @@
+[
+  {
+    "methodIndex": 0,
+    "setIndex": 0,
+    "subjectId": "System.Reflection.Metadata.Ecma335.GenericTypeArgumentsEncoder::AddArgument:System.Reflection.Metadata.Ecma335.SignatureTypeEncoder()__Set0",
+    "isVoid": false,
+    "hasException": false,
+    "exceptionType": null,
+    "returnValue": -1893611973,
+    "returnValueJson": "{\u0022Builder\u0022:null}",
+    "returnValueType": "System.Reflection.Metadata.Ecma335.SignatureTypeEncoder",
+    "isDeterministic": true,
+    "outRefValues": null
+  }
+]
