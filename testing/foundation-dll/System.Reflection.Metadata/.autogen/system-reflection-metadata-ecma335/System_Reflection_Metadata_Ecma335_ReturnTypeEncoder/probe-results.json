@@ -1,0 +1,67 @@
+[
+  {
+    "methodIndex": 0,
+    "setIndex": 0,
+    "subjectId": "System.Reflection.Metadata.Ecma335.ReturnTypeEncoder::CustomModifiers:System.Reflection.Metadata.Ecma335.CustomModifiersEncoder()__Set0",
+    "isVoid": false,
+    "hasException": false,
+    "exceptionType": null,
+    "returnValue": 288783461,
+    "returnValueJson": "{\u0022Builder\u0022:null}",
+    "returnValueType": "System.Reflection.Metadata.Ecma335.CustomModifiersEncoder",
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 1,
+    "setIndex": 0,
+    "subjectId": "System.Reflection.Metadata.Ecma335.ReturnTypeEncoder::Type:System.Reflection.Metadata.Ecma335.SignatureTypeEncoder(System.Boolean)__Set0",
+    "isVoid": false,
+    "hasException": false,
+    "exceptionType": null,
+    "returnValue": 279590865,
+    "returnValueJson": "{\u0022Builder\u0022:null}",
+    "returnValueType": "System.Reflection.Metadata.Ecma335.SignatureTypeEncoder",
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 1,
+    "setIndex": 1,
+    "subjectId": "System.Reflection.Metadata.Ecma335.ReturnTypeEncoder::Type:System.Reflection.Metadata.Ecma335.SignatureTypeEncoder(System.Boolean)__Set1",
+    "isVoid": false,
+    "hasException": false,
+    "exceptionType": null,
+    "returnValue": 279590865,
+    "returnValueJson": "{\u0022Builder\u0022:null}",
+    "returnValueType": "System.Reflection.Metadata.Ecma335.SignatureTypeEncoder",
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 2,
+    "setIndex": 2,
+    "subjectId": "System.Reflection.Metadata.Ecma335.ReturnTypeEncoder::TypedReference:System.Void()__Set2",
+    "isVoid": true,
+    "hasException": true,
+    "exceptionType": "System.NullReferenceException",
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 3,
+    "setIndex": 3,
+    "subjectId": "System.Reflection.Metadata.Ecma335.ReturnTypeEncoder::Void:System.Void()__Set3",
+    "isVoid": true,
+    "hasException": true,
+    "exceptionType": "System.NullReferenceException",
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": null
+  }
+]

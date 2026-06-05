@@ -1,0 +1,173 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Collections",
+  "generatedAt": "2026-06-04T10:30:44.0272823Z",
+  "totalMethods": 14,
+  "methods": [
+    {
+      "methodSubjectId": "System.Collections/System.Collections.BitArray::And:System.Collections.BitArray(System.Collections.BitArray)",
+      "namespace": "System.Collections",
+      "declaringType": "System.Collections.BitArray",
+      "methodName": "And",
+      "returnType": "System.Collections.BitArray",
+      "parameters": [
+        "System.Collections.BitArray"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Collections/System.Collections.BitArray::Clone:System.Object()",
+      "namespace": "System.Collections",
+      "declaringType": "System.Collections.BitArray",
+      "methodName": "Clone",
+      "returnType": "System.Object",
+      "parameters": [],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Collections/System.Collections.BitArray::CopyTo:System.Void(System.Array,System.Int32)",
+      "namespace": "System.Collections",
+      "declaringType": "System.Collections.BitArray",
+      "methodName": "CopyTo",
+      "returnType": "System.Void",
+      "parameters": [
+        "System.Array",
+        "System.Int32"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Collections/System.Collections.BitArray::Get:System.Boolean(System.Int32)",
+      "namespace": "System.Collections",
+      "declaringType": "System.Collections.BitArray",
+      "methodName": "Get",
+      "returnType": "System.Boolean",
+      "parameters": [
+        "System.Int32"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Collections/System.Collections.BitArray::GetEnumerator:System.Collections.IEnumerator()",
+      "namespace": "System.Collections",
+      "declaringType": "System.Collections.BitArray",
+      "methodName": "GetEnumerator",
+      "returnType": "System.Collections.IEnumerator",
+      "parameters": [],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Collections/System.Collections.BitArray::HasAllSet:System.Boolean()",
+      "namespace": "System.Collections",
+      "declaringType": "System.Collections.BitArray",
+      "methodName": "HasAllSet",
+      "returnType": "System.Boolean",
+      "parameters": [],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Collections/System.Collections.BitArray::HasAnySet:System.Boolean()",
+      "namespace": "System.Collections",
+      "declaringType": "System.Collections.BitArray",
+      "methodName": "HasAnySet",
+      "returnType": "System.Boolean",
+      "parameters": [],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Collections/System.Collections.BitArray::LeftShift:System.Collections.BitArray(System.Int32)",
+      "namespace": "System.Collections",
+      "declaringType": "System.Collections.BitArray",
+      "methodName": "LeftShift",
+      "returnType": "System.Collections.BitArray",
+      "parameters": [
+        "System.Int32"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Collections/System.Collections.BitArray::Not:System.Collections.BitArray()",
+      "namespace": "System.Collections",
+      "declaringType": "System.Collections.BitArray",
+      "methodName": "Not",
+      "returnType": "System.Collections.BitArray",
+      "parameters": [],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Collections/System.Collections.BitArray::Or:System.Collections.BitArray(System.Collections.BitArray)",
+      "namespace": "System.Collections",
+      "declaringType": "System.Collections.BitArray",
+      "methodName": "Or",
+      "returnType": "System.Collections.BitArray",
+      "parameters": [
+        "System.Collections.BitArray"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Collections/System.Collections.BitArray::RightShift:System.Collections.BitArray(System.Int32)",
+      "namespace": "System.Collections",
+      "declaringType": "System.Collections.BitArray",
+      "methodName": "RightShift",
+      "returnType": "System.Collections.BitArray",
+      "parameters": [
+        "System.Int32"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Collections/System.Collections.BitArray::Set:System.Void(System.Int32,System.Boolean)",
+      "namespace": "System.Collections",
+      "declaringType": "System.Collections.BitArray",
+      "methodName": "Set",
+      "returnType": "System.Void",
+      "parameters": [
+        "System.Int32",
+        "System.Boolean"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Collections/System.Collections.BitArray::SetAll:System.Void(System.Boolean)",
+      "namespace": "System.Collections",
+      "declaringType": "System.Collections.BitArray",
+      "methodName": "SetAll",
+      "returnType": "System.Void",
+      "parameters": [
+        "System.Boolean"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Collections/System.Collections.BitArray::Xor:System.Collections.BitArray(System.Collections.BitArray)",
+      "namespace": "System.Collections",
+      "declaringType": "System.Collections.BitArray",
+      "methodName": "Xor",
+      "returnType": "System.Collections.BitArray",
+      "parameters": [
+        "System.Collections.BitArray"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    }
+  ],
+  "namespaces": {
+    "System.Collections": {
+      "methodCount": 14
+    }
+  }
+}

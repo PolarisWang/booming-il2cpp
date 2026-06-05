@@ -1,0 +1,36 @@
+{
+  "date": "2026-06-04",
+  "assemblyName": "System.IO.Pipelines",
+  "chunks": [
+    {
+      "slug": "global-ns",
+      "fact": {
+        "status": "no_results"
+      },
+      "benchmark": {
+        "status": "no_results"
+      },
+      "hotupdate": {
+        "status": "no_results"
+      }
+    },
+    {
+      "slug": "system-io-pipelines",
+      "fact": {
+        "passed": 18,
+        "total": 18,
+        "isShutdownAV": false,
+        "valueSuspicious": false,
+        "valueWarnings": 0,
+        "metaTotal": 33,
+        "metaBenchmarkCount": 33
+      },
+      "benchmark": {
+        "status": "no_results"
+      },
+      "hotupdate": {
+        "status": "no_results"
+      }
+    }
+  ]
+}

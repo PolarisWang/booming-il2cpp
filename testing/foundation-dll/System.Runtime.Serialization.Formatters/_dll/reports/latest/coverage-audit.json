@@ -1,0 +1,10 @@
+{
+  "assemblyName": "System.Runtime.Serialization.Formatters",
+  "timestamp": "2026-06-05T09:28:18",
+  "totalChunks": 1,
+  "chunksWithResults": 1,
+  "chunksWithShutdownAV": 0,
+  "chunksWithValueWarnings": 0,
+  "chunksWithMetaMismatch": 1,
+  "totalDeclaredMethods": 40
+}

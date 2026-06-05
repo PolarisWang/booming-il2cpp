@@ -1,0 +1,80 @@
+[
+  {
+    "methodIndex": 0,
+    "setIndex": 0,
+    "subjectId": "System.Security.Cryptography.DES::IsWeakKey:System.Boolean(System.Byte[])__Set0",
+    "isVoid": false,
+    "hasException": true,
+    "exceptionType": "System.Security.Cryptography.CryptographicException",
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 0,
+    "setIndex": 1,
+    "subjectId": "System.Security.Cryptography.DES::IsWeakKey:System.Boolean(System.Byte[])__Set1",
+    "isVoid": false,
+    "hasException": true,
+    "exceptionType": "System.Security.Cryptography.CryptographicException",
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 0,
+    "setIndex": 2,
+    "subjectId": "System.Security.Cryptography.DES::IsWeakKey:System.Boolean(System.Byte[])__Set2",
+    "isVoid": false,
+    "hasException": true,
+    "exceptionType": "System.Security.Cryptography.CryptographicException",
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 1,
+    "setIndex": 0,
+    "subjectId": "System.Security.Cryptography.DES::IsSemiWeakKey:System.Boolean(System.Byte[])__Set0",
+    "isVoid": false,
+    "hasException": true,
+    "exceptionType": "System.Security.Cryptography.CryptographicException",
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 1,
+    "setIndex": 1,
+    "subjectId": "System.Security.Cryptography.DES::IsSemiWeakKey:System.Boolean(System.Byte[])__Set1",
+    "isVoid": false,
+    "hasException": true,
+    "exceptionType": "System.Security.Cryptography.CryptographicException",
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 1,
+    "setIndex": 2,
+    "subjectId": "System.Security.Cryptography.DES::IsSemiWeakKey:System.Boolean(System.Byte[])__Set2",
+    "isVoid": false,
+    "hasException": true,
+    "exceptionType": "System.Security.Cryptography.CryptographicException",
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": null
+  }
+]

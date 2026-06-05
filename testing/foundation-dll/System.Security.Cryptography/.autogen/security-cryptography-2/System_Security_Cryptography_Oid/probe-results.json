@@ -1,0 +1,54 @@
+[
+  {
+    "methodIndex": 0,
+    "setIndex": 0,
+    "subjectId": "System.Security.Cryptography.Oid::FromFriendlyName:System.Security.Cryptography.Oid(System.String,System.Security.Cryptography.OidGroup)__Set0",
+    "isVoid": false,
+    "hasException": true,
+    "exceptionType": "System.ArgumentNullException",
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 0,
+    "setIndex": 1,
+    "subjectId": "System.Security.Cryptography.Oid::FromFriendlyName:System.Security.Cryptography.Oid(System.String,System.Security.Cryptography.OidGroup)__Set1",
+    "isVoid": false,
+    "hasException": true,
+    "exceptionType": "System.Security.Cryptography.CryptographicException",
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 1,
+    "setIndex": 0,
+    "subjectId": "System.Security.Cryptography.Oid::FromOidValue:System.Security.Cryptography.Oid(System.String,System.Security.Cryptography.OidGroup)__Set0",
+    "isVoid": false,
+    "hasException": true,
+    "exceptionType": "System.ArgumentNullException",
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 1,
+    "setIndex": 1,
+    "subjectId": "System.Security.Cryptography.Oid::FromOidValue:System.Security.Cryptography.Oid(System.String,System.Security.Cryptography.OidGroup)__Set1",
+    "isVoid": false,
+    "hasException": true,
+    "exceptionType": "System.Security.Cryptography.CryptographicException",
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": null
+  }
+]

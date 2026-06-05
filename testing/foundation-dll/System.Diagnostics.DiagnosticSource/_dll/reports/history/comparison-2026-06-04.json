@@ -1,0 +1,41 @@
+{
+  "date": "2026-06-04",
+  "assemblyName": "System.Diagnostics.DiagnosticSource",
+  "aggregate": {
+    "net10VsNet8Pct": {
+      "mean": -30.04,
+      "median": -30.04,
+      "min": -30.04,
+      "max": -30.04,
+      "p25": -30.04,
+      "p75": -30.04
+    },
+    "highValueMethods_betterThanNet8": 0.0
+  },
+  "perChunk": [
+    {
+      "slug": "diagnostics",
+      "methodCount": 83,
+      "methodsWithNet8": 20,
+      "aggregate": {
+        "methodsBetterThanNet8": 0,
+        "net10VsNet8Pct": {
+          "mean": -30.04,
+          "median": -11.77,
+          "min": -96.15,
+          "max": 23.53,
+          "p25": -65.91,
+          "p75": 0.0
+        }
+      }
+    },
+    {
+      "slug": "global-ns",
+      "methodCount": 58,
+      "methodsWithNet8": 9,
+      "aggregate": {
+        "methodsBetterThanNet8": 0
+      }
+    }
+  ]
+}

@@ -2331,14 +2331,20 @@ extern ""C"" CHAOS_IL2CPP_INT32 RunNativeAot(CHAOS_IL2CPP_INT32 entryIndex) {{
         var paramList = FormatAbiSlotParameterSignature(paramAbis);
         var symbol = method.NativeSymbol;
 
-        // Phase A+B: detect subject methods (Subject_N / CustomEntrySubject_N) that
+        // Phase A+B: detect subject methods (Subject_N / CustomEntrySubject_N / CombinedSubjects) that
         // would silently produce empty stubs — WARNING at codegen time, FAIL at runtime.
         bool isSubjectMethod = method.SubjectId is not null &&
-            (method.SubjectId.Contains("::Subject_") || method.SubjectId.Contains("::CustomEntrySubject_"));
+            (method.SubjectId.Contains("::Subject_") || method.SubjectId.Contains("::CustomEntrySubject_")
+             || method.SubjectId.StartsWith("CombinedSubjects/", StringComparison.Ordinal));
 
         if (isSubjectMethod)
         {
             Console.Error.WriteLine($"[WARNING] Subject method '{method.SubjectId}' is AOT-unreachable — generated body will be empty. Add to --subject-methods or fix reachability.");
+        }
+        else
+        {
+            // Non-subject methods silently get return {}; stubs — log once for diagnostics.
+            Console.Error.WriteLine($"[STUB] Non-subject method '{method.SubjectId}' emitted as unreachable stub ({method.Instructions.Count} IL instructions)");
         }
 
         var builder = new StringBuilder();

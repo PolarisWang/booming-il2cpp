@@ -1,0 +1,1324 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Net.Http",
+  "generatedAt": "2026-06-04T09:59:28.9198431Z",
+  "totalMethods": 105,
+  "methods": [
+    {
+      "methodSubjectId": "System.Net.Http/System.Net.Http.Headers.AuthenticationHeaderValue::Parse:System.Net.Http.Headers.AuthenticationHeaderValue(System.String)",
+      "namespace": "System.Net.Http.Headers",
+      "declaringType": "System.Net.Http.Headers.AuthenticationHeaderValue",
+      "methodName": "Parse",
+      "returnType": "System.Net.Http.Headers.AuthenticationHeaderValue",
+      "parameters": [
+        "System.String"
+      ],
+      "visibility": "public",
+      "isStatic": true
+    },
+    {
+      "methodSubjectId": "System.Net.Http/System.Net.Http.Headers.AuthenticationHeaderValue::TryParse:System.Boolean(System.String,System.Net.Http.Headers.AuthenticationHeaderValue)",
+      "namespace": "System.Net.Http.Headers",
+      "declaringType": "System.Net.Http.Headers.AuthenticationHeaderValue",
+      "methodName": "TryParse",
+      "returnType": "System.Boolean",
+      "parameters": [
+        "System.String",
+        "System.Net.Http.Headers.AuthenticationHeaderValue"
+      ],
+      "visibility": "public",
+      "isStatic": true
+    },
+    {
+      "methodSubjectId": "System.Net.Http/System.Net.Http.Headers.CacheControlHeaderValue::Parse:System.Net.Http.Headers.CacheControlHeaderValue(System.String)",
+      "namespace": "System.Net.Http.Headers",
+      "declaringType": "System.Net.Http.Headers.CacheControlHeaderValue",
+      "methodName": "Parse",
+      "returnType": "System.Net.Http.Headers.CacheControlHeaderValue",
+      "parameters": [
+        "System.String"
+      ],
+      "visibility": "public",
+      "isStatic": true
+    },
+    {
+      "methodSubjectId": "System.Net.Http/System.Net.Http.Headers.CacheControlHeaderValue::TryParse:System.Boolean(System.String,System.Net.Http.Headers.CacheControlHeaderValue)",
+      "namespace": "System.Net.Http.Headers",
+      "declaringType": "System.Net.Http.Headers.CacheControlHeaderValue",
+      "methodName": "TryParse",
+      "returnType": "System.Boolean",
+      "parameters": [
+        "System.String",
+        "System.Net.Http.Headers.CacheControlHeaderValue"
+      ],
+      "visibility": "public",
+      "isStatic": true
+    },
+    {
+      "methodSubjectId": "System.Net.Http/System.Net.Http.Headers.ContentDispositionHeaderValue::Parse:System.Net.Http.Headers.ContentDispositionHeaderValue(System.String)",
+      "namespace": "System.Net.Http.Headers",
+      "declaringType": "System.Net.Http.Headers.ContentDispositionHeaderValue",
+      "methodName": "Parse",
+      "returnType": "System.Net.Http.Headers.ContentDispositionHeaderValue",
+      "parameters": [
+        "System.String"
+      ],
+      "visibility": "public",
+      "isStatic": true
+    },
+    {
+      "methodSubjectId": "System.Net.Http/System.Net.Http.Headers.ContentDispositionHeaderValue::TryParse:System.Boolean(System.String,System.Net.Http.Headers.ContentDispositionHeaderValue)",
+      "namespace": "System.Net.Http.Headers",
+      "declaringType": "System.Net.Http.Headers.ContentDispositionHeaderValue",
+      "methodName": "TryParse",
+      "returnType": "System.Boolean",
+      "parameters": [
+        "System.String",
+        "System.Net.Http.Headers.ContentDispositionHeaderValue"
+      ],
+      "visibility": "public",
+      "isStatic": true
+    },
+    {
+      "methodSubjectId": "System.Net.Http/System.Net.Http.Headers.ContentRangeHeaderValue::Parse:System.Net.Http.Headers.ContentRangeHeaderValue(System.String)",
+      "namespace": "System.Net.Http.Headers",
+      "declaringType": "System.Net.Http.Headers.ContentRangeHeaderValue",
+      "methodName": "Parse",
+      "returnType": "System.Net.Http.Headers.ContentRangeHeaderValue",
+      "parameters": [
+        "System.String"
+      ],
+      "visibility": "public",
+      "isStatic": true
+    },
+    {
+      "methodSubjectId": "System.Net.Http/System.Net.Http.Headers.ContentRangeHeaderValue::TryParse:System.Boolean(System.String,System.Net.Http.Headers.ContentRangeHeaderValue)",
+      "namespace": "System.Net.Http.Headers",
+      "declaringType": "System.Net.Http.Headers.ContentRangeHeaderValue",
+      "methodName": "TryParse",
+      "returnType": "System.Boolean",
+      "parameters": [
+        "System.String",
+        "System.Net.Http.Headers.ContentRangeHeaderValue"
+      ],
+      "visibility": "public",
+      "isStatic": true
+    },
+    {
+      "methodSubjectId": "System.Net.Http/System.Net.Http.Headers.EntityTagHeaderValue::Parse:System.Net.Http.Headers.EntityTagHeaderValue(System.String)",
+      "namespace": "System.Net.Http.Headers",
+      "declaringType": "System.Net.Http.Headers.EntityTagHeaderValue",
+      "methodName": "Parse",
+      "returnType": "System.Net.Http.Headers.EntityTagHeaderValue",
+      "parameters": [
+        "System.String"
+      ],
+      "visibility": "public",
+      "isStatic": true
+    },
+    {
+      "methodSubjectId": "System.Net.Http/System.Net.Http.Headers.EntityTagHeaderValue::TryParse:System.Boolean(System.String,System.Net.Http.Headers.EntityTagHeaderValue)",
+      "namespace": "System.Net.Http.Headers",
+      "declaringType": "System.Net.Http.Headers.EntityTagHeaderValue",
+      "methodName": "TryParse",
+      "returnType": "System.Boolean",
+      "parameters": [
+        "System.String",
+        "System.Net.Http.Headers.EntityTagHeaderValue"
+      ],
+      "visibility": "public",
+      "isStatic": true
+    },
+    {
+      "methodSubjectId": "System.Net.Http/System.Net.Http.Headers.HeaderStringValues::GetEnumerator:System.Net.Http.Headers.HeaderStringValues+Enumerator()",
+      "namespace": "System.Net.Http.Headers",
+      "declaringType": "System.Net.Http.Headers.HeaderStringValues",
+      "methodName": "GetEnumerator",
+      "returnType": "System.Net.Http.Headers.HeaderStringValues+Enumerator",
+      "parameters": [],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Http/System.Net.Http.Headers.HeaderStringValues+Enumerator::Dispose:System.Void()",
+      "namespace": "System.Net.Http.Headers",
+      "declaringType": "System.Net.Http.Headers.HeaderStringValues+Enumerator",
+      "methodName": "Dispose",
+      "returnType": "System.Void",
+      "parameters": [],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Http/System.Net.Http.Headers.HeaderStringValues+Enumerator::MoveNext:System.Boolean()",
+      "namespace": "System.Net.Http.Headers",
+      "declaringType": "System.Net.Http.Headers.HeaderStringValues+Enumerator",
+      "methodName": "MoveNext",
+      "returnType": "System.Boolean",
+      "parameters": [],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Http/System.Net.Http.Headers.HttpHeadersNonValidated::Contains:System.Boolean(System.String)",
+      "namespace": "System.Net.Http.Headers",
+      "declaringType": "System.Net.Http.Headers.HttpHeadersNonValidated",
+      "methodName": "Contains",
+      "returnType": "System.Boolean",
+      "parameters": [
+        "System.String"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Http/System.Net.Http.Headers.HttpHeadersNonValidated::GetEnumerator:System.Net.Http.Headers.HttpHeadersNonValidated+Enumerator()",
+      "namespace": "System.Net.Http.Headers",
+      "declaringType": "System.Net.Http.Headers.HttpHeadersNonValidated",
+      "methodName": "GetEnumerator",
+      "returnType": "System.Net.Http.Headers.HttpHeadersNonValidated+Enumerator",
+      "parameters": [],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Http/System.Net.Http.Headers.HttpHeadersNonValidated::TryGetValues:System.Boolean(System.String,System.Net.Http.Headers.HeaderStringValues)",
+      "namespace": "System.Net.Http.Headers",
+      "declaringType": "System.Net.Http.Headers.HttpHeadersNonValidated",
+      "methodName": "TryGetValues",
+      "returnType": "System.Boolean",
+      "parameters": [
+        "System.String",
+        "System.Net.Http.Headers.HeaderStringValues"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Http/System.Net.Http.Headers.HttpHeadersNonValidated+Enumerator::Dispose:System.Void()",
+      "namespace": "System.Net.Http.Headers",
+      "declaringType": "System.Net.Http.Headers.HttpHeadersNonValidated+Enumerator",
+      "methodName": "Dispose",
+      "returnType": "System.Void",
+      "parameters": [],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Http/System.Net.Http.Headers.HttpHeadersNonValidated+Enumerator::MoveNext:System.Boolean()",
+      "namespace": "System.Net.Http.Headers",
+      "declaringType": "System.Net.Http.Headers.HttpHeadersNonValidated+Enumerator",
+      "methodName": "MoveNext",
+      "returnType": "System.Boolean",
+      "parameters": [],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Http/System.Net.Http.Headers.MediaTypeHeaderValue::Parse:System.Net.Http.Headers.MediaTypeHeaderValue(System.String)",
+      "namespace": "System.Net.Http.Headers",
+      "declaringType": "System.Net.Http.Headers.MediaTypeHeaderValue",
+      "methodName": "Parse",
+      "returnType": "System.Net.Http.Headers.MediaTypeHeaderValue",
+      "parameters": [
+        "System.String"
+      ],
+      "visibility": "public",
+      "isStatic": true
+    },
+    {
+      "methodSubjectId": "System.Net.Http/System.Net.Http.Headers.MediaTypeHeaderValue::TryParse:System.Boolean(System.String,System.Net.Http.Headers.MediaTypeHeaderValue)",
+      "namespace": "System.Net.Http.Headers",
+      "declaringType": "System.Net.Http.Headers.MediaTypeHeaderValue",
+      "methodName": "TryParse",
+      "returnType": "System.Boolean",
+      "parameters": [
+        "System.String",
+        "System.Net.Http.Headers.MediaTypeHeaderValue"
+      ],
+      "visibility": "public",
+      "isStatic": true
+    },
+    {
+      "methodSubjectId": "System.Net.Http/System.Net.Http.Headers.MediaTypeWithQualityHeaderValue::Parse:System.Net.Http.Headers.MediaTypeWithQualityHeaderValue(System.String)",
+      "namespace": "System.Net.Http.Headers",
+      "declaringType": "System.Net.Http.Headers.MediaTypeWithQualityHeaderValue",
+      "methodName": "Parse",
+      "returnType": "System.Net.Http.Headers.MediaTypeWithQualityHeaderValue",
+      "parameters": [
+        "System.String"
+      ],
+      "visibility": "public",
+      "isStatic": true
+    },
+    {
+      "methodSubjectId": "System.Net.Http/System.Net.Http.Headers.MediaTypeWithQualityHeaderValue::TryParse:System.Boolean(System.String,System.Net.Http.Headers.MediaTypeWithQualityHeaderValue)",
+      "namespace": "System.Net.Http.Headers",
+      "declaringType": "System.Net.Http.Headers.MediaTypeWithQualityHeaderValue",
+      "methodName": "TryParse",
+      "returnType": "System.Boolean",
+      "parameters": [
+        "System.String",
+        "System.Net.Http.Headers.MediaTypeWithQualityHeaderValue"
+      ],
+      "visibility": "public",
+      "isStatic": true
+    },
+    {
+      "methodSubjectId": "System.Net.Http/System.Net.Http.Headers.NameValueHeaderValue::Parse:System.Net.Http.Headers.NameValueHeaderValue(System.String)",
+      "namespace": "System.Net.Http.Headers",
+      "declaringType": "System.Net.Http.Headers.NameValueHeaderValue",
+      "methodName": "Parse",
+      "returnType": "System.Net.Http.Headers.NameValueHeaderValue",
+      "parameters": [
+        "System.String"
+      ],
+      "visibility": "public",
+      "isStatic": true
+    },
+    {
+      "methodSubjectId": "System.Net.Http/System.Net.Http.Headers.NameValueHeaderValue::TryParse:System.Boolean(System.String,System.Net.Http.Headers.NameValueHeaderValue)",
+      "namespace": "System.Net.Http.Headers",
+      "declaringType": "System.Net.Http.Headers.NameValueHeaderValue",
+      "methodName": "TryParse",
+      "returnType": "System.Boolean",
+      "parameters": [
+        "System.String",
+        "System.Net.Http.Headers.NameValueHeaderValue"
+      ],
+      "visibility": "public",
+      "isStatic": true
+    },
+    {
+      "methodSubjectId": "System.Net.Http/System.Net.Http.Headers.NameValueWithParametersHeaderValue::Parse:System.Net.Http.Headers.NameValueWithParametersHeaderValue(System.String)",
+      "namespace": "System.Net.Http.Headers",
+      "declaringType": "System.Net.Http.Headers.NameValueWithParametersHeaderValue",
+      "methodName": "Parse",
+      "returnType": "System.Net.Http.Headers.NameValueWithParametersHeaderValue",
+      "parameters": [
+        "System.String"
+      ],
+      "visibility": "public",
+      "isStatic": true
+    },
+    {
+      "methodSubjectId": "System.Net.Http/System.Net.Http.Headers.NameValueWithParametersHeaderValue::TryParse:System.Boolean(System.String,System.Net.Http.Headers.NameValueWithParametersHeaderValue)",
+      "namespace": "System.Net.Http.Headers",
+      "declaringType": "System.Net.Http.Headers.NameValueWithParametersHeaderValue",
+      "methodName": "TryParse",
+      "returnType": "System.Boolean",
+      "parameters": [
+        "System.String",
+        "System.Net.Http.Headers.NameValueWithParametersHeaderValue"
+      ],
+      "visibility": "public",
+      "isStatic": true
+    },
+    {
+      "methodSubjectId": "System.Net.Http/System.Net.Http.Headers.ProductHeaderValue::Parse:System.Net.Http.Headers.ProductHeaderValue(System.String)",
+      "namespace": "System.Net.Http.Headers",
+      "declaringType": "System.Net.Http.Headers.ProductHeaderValue",
+      "methodName": "Parse",
+      "returnType": "System.Net.Http.Headers.ProductHeaderValue",
+      "parameters": [
+        "System.String"
+      ],
+      "visibility": "public",
+      "isStatic": true
+    },
+    {
+      "methodSubjectId": "System.Net.Http/System.Net.Http.Headers.ProductHeaderValue::TryParse:System.Boolean(System.String,System.Net.Http.Headers.ProductHeaderValue)",
+      "namespace": "System.Net.Http.Headers",
+      "declaringType": "System.Net.Http.Headers.ProductHeaderValue",
+      "methodName": "TryParse",
+      "returnType": "System.Boolean",
+      "parameters": [
+        "System.String",
+        "System.Net.Http.Headers.ProductHeaderValue"
+      ],
+      "visibility": "public",
+      "isStatic": true
+    },
+    {
+      "methodSubjectId": "System.Net.Http/System.Net.Http.Headers.ProductInfoHeaderValue::Parse:System.Net.Http.Headers.ProductInfoHeaderValue(System.String)",
+      "namespace": "System.Net.Http.Headers",
+      "declaringType": "System.Net.Http.Headers.ProductInfoHeaderValue",
+      "methodName": "Parse",
+      "returnType": "System.Net.Http.Headers.ProductInfoHeaderValue",
+      "parameters": [
+        "System.String"
+      ],
+      "visibility": "public",
+      "isStatic": true
+    },
+    {
+      "methodSubjectId": "System.Net.Http/System.Net.Http.Headers.ProductInfoHeaderValue::TryParse:System.Boolean(System.String,System.Net.Http.Headers.ProductInfoHeaderValue)",
+      "namespace": "System.Net.Http.Headers",
+      "declaringType": "System.Net.Http.Headers.ProductInfoHeaderValue",
+      "methodName": "TryParse",
+      "returnType": "System.Boolean",
+      "parameters": [
+        "System.String",
+        "System.Net.Http.Headers.ProductInfoHeaderValue"
+      ],
+      "visibility": "public",
+      "isStatic": true
+    },
+    {
+      "methodSubjectId": "System.Net.Http/System.Net.Http.Headers.RangeConditionHeaderValue::Parse:System.Net.Http.Headers.RangeConditionHeaderValue(System.String)",
+      "namespace": "System.Net.Http.Headers",
+      "declaringType": "System.Net.Http.Headers.RangeConditionHeaderValue",
+      "methodName": "Parse",
+      "returnType": "System.Net.Http.Headers.RangeConditionHeaderValue",
+      "parameters": [
+        "System.String"
+      ],
+      "visibility": "public",
+      "isStatic": true
+    },
+    {
+      "methodSubjectId": "System.Net.Http/System.Net.Http.Headers.RangeConditionHeaderValue::TryParse:System.Boolean(System.String,System.Net.Http.Headers.RangeConditionHeaderValue)",
+      "namespace": "System.Net.Http.Headers",
+      "declaringType": "System.Net.Http.Headers.RangeConditionHeaderValue",
+      "methodName": "TryParse",
+      "returnType": "System.Boolean",
+      "parameters": [
+        "System.String",
+        "System.Net.Http.Headers.RangeConditionHeaderValue"
+      ],
+      "visibility": "public",
+      "isStatic": true
+    },
+    {
+      "methodSubjectId": "System.Net.Http/System.Net.Http.Headers.RangeHeaderValue::Parse:System.Net.Http.Headers.RangeHeaderValue(System.String)",
+      "namespace": "System.Net.Http.Headers",
+      "declaringType": "System.Net.Http.Headers.RangeHeaderValue",
+      "methodName": "Parse",
+      "returnType": "System.Net.Http.Headers.RangeHeaderValue",
+      "parameters": [
+        "System.String"
+      ],
+      "visibility": "public",
+      "isStatic": true
+    },
+    {
+      "methodSubjectId": "System.Net.Http/System.Net.Http.Headers.RangeHeaderValue::TryParse:System.Boolean(System.String,System.Net.Http.Headers.RangeHeaderValue)",
+      "namespace": "System.Net.Http.Headers",
+      "declaringType": "System.Net.Http.Headers.RangeHeaderValue",
+      "methodName": "TryParse",
+      "returnType": "System.Boolean",
+      "parameters": [
+        "System.String",
+        "System.Net.Http.Headers.RangeHeaderValue"
+      ],
+      "visibility": "public",
+      "isStatic": true
+    },
+    {
+      "methodSubjectId": "System.Net.Http/System.Net.Http.Headers.RetryConditionHeaderValue::Parse:System.Net.Http.Headers.RetryConditionHeaderValue(System.String)",
+      "namespace": "System.Net.Http.Headers",
+      "declaringType": "System.Net.Http.Headers.RetryConditionHeaderValue",
+      "methodName": "Parse",
+      "returnType": "System.Net.Http.Headers.RetryConditionHeaderValue",
+      "parameters": [
+        "System.String"
+      ],
+      "visibility": "public",
+      "isStatic": true
+    },
+    {
+      "methodSubjectId": "System.Net.Http/System.Net.Http.Headers.RetryConditionHeaderValue::TryParse:System.Boolean(System.String,System.Net.Http.Headers.RetryConditionHeaderValue)",
+      "namespace": "System.Net.Http.Headers",
+      "declaringType": "System.Net.Http.Headers.RetryConditionHeaderValue",
+      "methodName": "TryParse",
+      "returnType": "System.Boolean",
+      "parameters": [
+        "System.String",
+        "System.Net.Http.Headers.RetryConditionHeaderValue"
+      ],
+      "visibility": "public",
+      "isStatic": true
+    },
+    {
+      "methodSubjectId": "System.Net.Http/System.Net.Http.Headers.StringWithQualityHeaderValue::Parse:System.Net.Http.Headers.StringWithQualityHeaderValue(System.String)",
+      "namespace": "System.Net.Http.Headers",
+      "declaringType": "System.Net.Http.Headers.StringWithQualityHeaderValue",
+      "methodName": "Parse",
+      "returnType": "System.Net.Http.Headers.StringWithQualityHeaderValue",
+      "parameters": [
+        "System.String"
+      ],
+      "visibility": "public",
+      "isStatic": true
+    },
+    {
+      "methodSubjectId": "System.Net.Http/System.Net.Http.Headers.StringWithQualityHeaderValue::TryParse:System.Boolean(System.String,System.Net.Http.Headers.StringWithQualityHeaderValue)",
+      "namespace": "System.Net.Http.Headers",
+      "declaringType": "System.Net.Http.Headers.StringWithQualityHeaderValue",
+      "methodName": "TryParse",
+      "returnType": "System.Boolean",
+      "parameters": [
+        "System.String",
+        "System.Net.Http.Headers.StringWithQualityHeaderValue"
+      ],
+      "visibility": "public",
+      "isStatic": true
+    },
+    {
+      "methodSubjectId": "System.Net.Http/System.Net.Http.Headers.TransferCodingHeaderValue::Parse:System.Net.Http.Headers.TransferCodingHeaderValue(System.String)",
+      "namespace": "System.Net.Http.Headers",
+      "declaringType": "System.Net.Http.Headers.TransferCodingHeaderValue",
+      "methodName": "Parse",
+      "returnType": "System.Net.Http.Headers.TransferCodingHeaderValue",
+      "parameters": [
+        "System.String"
+      ],
+      "visibility": "public",
+      "isStatic": true
+    },
+    {
+      "methodSubjectId": "System.Net.Http/System.Net.Http.Headers.TransferCodingHeaderValue::TryParse:System.Boolean(System.String,System.Net.Http.Headers.TransferCodingHeaderValue)",
+      "namespace": "System.Net.Http.Headers",
+      "declaringType": "System.Net.Http.Headers.TransferCodingHeaderValue",
+      "methodName": "TryParse",
+      "returnType": "System.Boolean",
+      "parameters": [
+        "System.String",
+        "System.Net.Http.Headers.TransferCodingHeaderValue"
+      ],
+      "visibility": "public",
+      "isStatic": true
+    },
+    {
+      "methodSubjectId": "System.Net.Http/System.Net.Http.Headers.TransferCodingWithQualityHeaderValue::Parse:System.Net.Http.Headers.TransferCodingWithQualityHeaderValue(System.String)",
+      "namespace": "System.Net.Http.Headers",
+      "declaringType": "System.Net.Http.Headers.TransferCodingWithQualityHeaderValue",
+      "methodName": "Parse",
+      "returnType": "System.Net.Http.Headers.TransferCodingWithQualityHeaderValue",
+      "parameters": [
+        "System.String"
+      ],
+      "visibility": "public",
+      "isStatic": true
+    },
+    {
+      "methodSubjectId": "System.Net.Http/System.Net.Http.Headers.TransferCodingWithQualityHeaderValue::TryParse:System.Boolean(System.String,System.Net.Http.Headers.TransferCodingWithQualityHeaderValue)",
+      "namespace": "System.Net.Http.Headers",
+      "declaringType": "System.Net.Http.Headers.TransferCodingWithQualityHeaderValue",
+      "methodName": "TryParse",
+      "returnType": "System.Boolean",
+      "parameters": [
+        "System.String",
+        "System.Net.Http.Headers.TransferCodingWithQualityHeaderValue"
+      ],
+      "visibility": "public",
+      "isStatic": true
+    },
+    {
+      "methodSubjectId": "System.Net.Http/System.Net.Http.Headers.ViaHeaderValue::Parse:System.Net.Http.Headers.ViaHeaderValue(System.String)",
+      "namespace": "System.Net.Http.Headers",
+      "declaringType": "System.Net.Http.Headers.ViaHeaderValue",
+      "methodName": "Parse",
+      "returnType": "System.Net.Http.Headers.ViaHeaderValue",
+      "parameters": [
+        "System.String"
+      ],
+      "visibility": "public",
+      "isStatic": true
+    },
+    {
+      "methodSubjectId": "System.Net.Http/System.Net.Http.Headers.ViaHeaderValue::TryParse:System.Boolean(System.String,System.Net.Http.Headers.ViaHeaderValue)",
+      "namespace": "System.Net.Http.Headers",
+      "declaringType": "System.Net.Http.Headers.ViaHeaderValue",
+      "methodName": "TryParse",
+      "returnType": "System.Boolean",
+      "parameters": [
+        "System.String",
+        "System.Net.Http.Headers.ViaHeaderValue"
+      ],
+      "visibility": "public",
+      "isStatic": true
+    },
+    {
+      "methodSubjectId": "System.Net.Http/System.Net.Http.Headers.WarningHeaderValue::Parse:System.Net.Http.Headers.WarningHeaderValue(System.String)",
+      "namespace": "System.Net.Http.Headers",
+      "declaringType": "System.Net.Http.Headers.WarningHeaderValue",
+      "methodName": "Parse",
+      "returnType": "System.Net.Http.Headers.WarningHeaderValue",
+      "parameters": [
+        "System.String"
+      ],
+      "visibility": "public",
+      "isStatic": true
+    },
+    {
+      "methodSubjectId": "System.Net.Http/System.Net.Http.Headers.WarningHeaderValue::TryParse:System.Boolean(System.String,System.Net.Http.Headers.WarningHeaderValue)",
+      "namespace": "System.Net.Http.Headers",
+      "declaringType": "System.Net.Http.Headers.WarningHeaderValue",
+      "methodName": "TryParse",
+      "returnType": "System.Boolean",
+      "parameters": [
+        "System.String",
+        "System.Net.Http.Headers.WarningHeaderValue"
+      ],
+      "visibility": "public",
+      "isStatic": true
+    },
+    {
+      "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::CancelPendingRequests:System.Void()",
+      "namespace": "System.Net.Http",
+      "declaringType": "System.Net.Http.HttpClient",
+      "methodName": "CancelPendingRequests",
+      "returnType": "System.Void",
+      "parameters": [],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::DeleteAsync:System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage>(System.String)",
+      "namespace": "System.Net.Http",
+      "declaringType": "System.Net.Http.HttpClient",
+      "methodName": "DeleteAsync",
+      "returnType": "System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage>",
+      "parameters": [
+        "System.String"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::DeleteAsync:System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage>(System.String,System.Threading.CancellationToken)",
+      "namespace": "System.Net.Http",
+      "declaringType": "System.Net.Http.HttpClient",
+      "methodName": "DeleteAsync",
+      "returnType": "System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage>",
+      "parameters": [
+        "System.String",
+        "System.Threading.CancellationToken"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::DeleteAsync:System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage>(System.Uri)",
+      "namespace": "System.Net.Http",
+      "declaringType": "System.Net.Http.HttpClient",
+      "methodName": "DeleteAsync",
+      "returnType": "System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage>",
+      "parameters": [
+        "System.Uri"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::DeleteAsync:System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage>(System.Uri,System.Threading.CancellationToken)",
+      "namespace": "System.Net.Http",
+      "declaringType": "System.Net.Http.HttpClient",
+      "methodName": "DeleteAsync",
+      "returnType": "System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage>",
+      "parameters": [
+        "System.Uri",
+        "System.Threading.CancellationToken"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::GetAsync:System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage>(System.String)",
+      "namespace": "System.Net.Http",
+      "declaringType": "System.Net.Http.HttpClient",
+      "methodName": "GetAsync",
+      "returnType": "System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage>",
+      "parameters": [
+        "System.String"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::GetAsync:System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage>(System.String,System.Net.Http.HttpCompletionOption)",
+      "namespace": "System.Net.Http",
+      "declaringType": "System.Net.Http.HttpClient",
+      "methodName": "GetAsync",
+      "returnType": "System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage>",
+      "parameters": [
+        "System.String",
+        "System.Net.Http.HttpCompletionOption"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::GetAsync:System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage>(System.String,System.Net.Http.HttpCompletionOption,System.Threading.CancellationToken)",
+      "namespace": "System.Net.Http",
+      "declaringType": "System.Net.Http.HttpClient",
+      "methodName": "GetAsync",
+      "returnType": "System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage>",
+      "parameters": [
+        "System.String",
+        "System.Net.Http.HttpCompletionOption",
+        "System.Threading.CancellationToken"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::GetAsync:System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage>(System.String,System.Threading.CancellationToken)",
+      "namespace": "System.Net.Http",
+      "declaringType": "System.Net.Http.HttpClient",
+      "methodName": "GetAsync",
+      "returnType": "System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage>",
+      "parameters": [
+        "System.String",
+        "System.Threading.CancellationToken"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::GetAsync:System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage>(System.Uri)",
+      "namespace": "System.Net.Http",
+      "declaringType": "System.Net.Http.HttpClient",
+      "methodName": "GetAsync",
+      "returnType": "System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage>",
+      "parameters": [
+        "System.Uri"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::GetAsync:System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage>(System.Uri,System.Net.Http.HttpCompletionOption)",
+      "namespace": "System.Net.Http",
+      "declaringType": "System.Net.Http.HttpClient",
+      "methodName": "GetAsync",
+      "returnType": "System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage>",
+      "parameters": [
+        "System.Uri",
+        "System.Net.Http.HttpCompletionOption"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::GetAsync:System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage>(System.Uri,System.Net.Http.HttpCompletionOption,System.Threading.CancellationToken)",
+      "namespace": "System.Net.Http",
+      "declaringType": "System.Net.Http.HttpClient",
+      "methodName": "GetAsync",
+      "returnType": "System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage>",
+      "parameters": [
+        "System.Uri",
+        "System.Net.Http.HttpCompletionOption",
+        "System.Threading.CancellationToken"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::GetAsync:System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage>(System.Uri,System.Threading.CancellationToken)",
+      "namespace": "System.Net.Http",
+      "declaringType": "System.Net.Http.HttpClient",
+      "methodName": "GetAsync",
+      "returnType": "System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage>",
+      "parameters": [
+        "System.Uri",
+        "System.Threading.CancellationToken"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::GetByteArrayAsync:System.Threading.Tasks.Task<System.Byte[]>(System.String)",
+      "namespace": "System.Net.Http",
+      "declaringType": "System.Net.Http.HttpClient",
+      "methodName": "GetByteArrayAsync",
+      "returnType": "System.Threading.Tasks.Task<System.Byte[]>",
+      "parameters": [
+        "System.String"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::GetByteArrayAsync:System.Threading.Tasks.Task<System.Byte[]>(System.String,System.Threading.CancellationToken)",
+      "namespace": "System.Net.Http",
+      "declaringType": "System.Net.Http.HttpClient",
+      "methodName": "GetByteArrayAsync",
+      "returnType": "System.Threading.Tasks.Task<System.Byte[]>",
+      "parameters": [
+        "System.String",
+        "System.Threading.CancellationToken"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::GetByteArrayAsync:System.Threading.Tasks.Task<System.Byte[]>(System.Uri)",
+      "namespace": "System.Net.Http",
+      "declaringType": "System.Net.Http.HttpClient",
+      "methodName": "GetByteArrayAsync",
+      "returnType": "System.Threading.Tasks.Task<System.Byte[]>",
+      "parameters": [
+        "System.Uri"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::GetByteArrayAsync:System.Threading.Tasks.Task<System.Byte[]>(System.Uri,System.Threading.CancellationToken)",
+      "namespace": "System.Net.Http",
+      "declaringType": "System.Net.Http.HttpClient",
+      "methodName": "GetByteArrayAsync",
+      "returnType": "System.Threading.Tasks.Task<System.Byte[]>",
+      "parameters": [
+        "System.Uri",
+        "System.Threading.CancellationToken"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::GetStreamAsync:System.Threading.Tasks.Task<System.IO.Stream>(System.String)",
+      "namespace": "System.Net.Http",
+      "declaringType": "System.Net.Http.HttpClient",
+      "methodName": "GetStreamAsync",
+      "returnType": "System.Threading.Tasks.Task<System.IO.Stream>",
+      "parameters": [
+        "System.String"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::GetStreamAsync:System.Threading.Tasks.Task<System.IO.Stream>(System.String,System.Threading.CancellationToken)",
+      "namespace": "System.Net.Http",
+      "declaringType": "System.Net.Http.HttpClient",
+      "methodName": "GetStreamAsync",
+      "returnType": "System.Threading.Tasks.Task<System.IO.Stream>",
+      "parameters": [
+        "System.String",
+        "System.Threading.CancellationToken"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::GetStreamAsync:System.Threading.Tasks.Task<System.IO.Stream>(System.Uri)",
+      "namespace": "System.Net.Http",
+      "declaringType": "System.Net.Http.HttpClient",
+      "methodName": "GetStreamAsync",
+      "returnType": "System.Threading.Tasks.Task<System.IO.Stream>",
+      "parameters": [
+        "System.Uri"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::GetStreamAsync:System.Threading.Tasks.Task<System.IO.Stream>(System.Uri,System.Threading.CancellationToken)",
+      "namespace": "System.Net.Http",
+      "declaringType": "System.Net.Http.HttpClient",
+      "methodName": "GetStreamAsync",
+      "returnType": "System.Threading.Tasks.Task<System.IO.Stream>",
+      "parameters": [
+        "System.Uri",
+        "System.Threading.CancellationToken"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::GetStringAsync:System.Threading.Tasks.Task<System.String>(System.String)",
+      "namespace": "System.Net.Http",
+      "declaringType": "System.Net.Http.HttpClient",
+      "methodName": "GetStringAsync",
+      "returnType": "System.Threading.Tasks.Task<System.String>",
+      "parameters": [
+        "System.String"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::GetStringAsync:System.Threading.Tasks.Task<System.String>(System.String,System.Threading.CancellationToken)",
+      "namespace": "System.Net.Http",
+      "declaringType": "System.Net.Http.HttpClient",
+      "methodName": "GetStringAsync",
+      "returnType": "System.Threading.Tasks.Task<System.String>",
+      "parameters": [
+        "System.String",
+        "System.Threading.CancellationToken"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::GetStringAsync:System.Threading.Tasks.Task<System.String>(System.Uri)",
+      "namespace": "System.Net.Http",
+      "declaringType": "System.Net.Http.HttpClient",
+      "methodName": "GetStringAsync",
+      "returnType": "System.Threading.Tasks.Task<System.String>",
+      "parameters": [
+        "System.Uri"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::GetStringAsync:System.Threading.Tasks.Task<System.String>(System.Uri,System.Threading.CancellationToken)",
+      "namespace": "System.Net.Http",
+      "declaringType": "System.Net.Http.HttpClient",
+      "methodName": "GetStringAsync",
+      "returnType": "System.Threading.Tasks.Task<System.String>",
+      "parameters": [
+        "System.Uri",
+        "System.Threading.CancellationToken"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::PatchAsync:System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage>(System.String,System.Net.Http.HttpContent)",
+      "namespace": "System.Net.Http",
+      "declaringType": "System.Net.Http.HttpClient",
+      "methodName": "PatchAsync",
+      "returnType": "System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage>",
+      "parameters": [
+        "System.String",
+        "System.Net.Http.HttpContent"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::PatchAsync:System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage>(System.String,System.Net.Http.HttpContent,System.Threading.CancellationToken)",
+      "namespace": "System.Net.Http",
+      "declaringType": "System.Net.Http.HttpClient",
+      "methodName": "PatchAsync",
+      "returnType": "System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage>",
+      "parameters": [
+        "System.String",
+        "System.Net.Http.HttpContent",
+        "System.Threading.CancellationToken"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::PatchAsync:System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage>(System.Uri,System.Net.Http.HttpContent)",
+      "namespace": "System.Net.Http",
+      "declaringType": "System.Net.Http.HttpClient",
+      "methodName": "PatchAsync",
+      "returnType": "System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage>",
+      "parameters": [
+        "System.Uri",
+        "System.Net.Http.HttpContent"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::PatchAsync:System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage>(System.Uri,System.Net.Http.HttpContent,System.Threading.CancellationToken)",
+      "namespace": "System.Net.Http",
+      "declaringType": "System.Net.Http.HttpClient",
+      "methodName": "PatchAsync",
+      "returnType": "System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage>",
+      "parameters": [
+        "System.Uri",
+        "System.Net.Http.HttpContent",
+        "System.Threading.CancellationToken"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::PostAsync:System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage>(System.String,System.Net.Http.HttpContent)",
+      "namespace": "System.Net.Http",
+      "declaringType": "System.Net.Http.HttpClient",
+      "methodName": "PostAsync",
+      "returnType": "System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage>",
+      "parameters": [
+        "System.String",
+        "System.Net.Http.HttpContent"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::PostAsync:System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage>(System.String,System.Net.Http.HttpContent,System.Threading.CancellationToken)",
+      "namespace": "System.Net.Http",
+      "declaringType": "System.Net.Http.HttpClient",
+      "methodName": "PostAsync",
+      "returnType": "System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage>",
+      "parameters": [
+        "System.String",
+        "System.Net.Http.HttpContent",
+        "System.Threading.CancellationToken"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::PostAsync:System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage>(System.Uri,System.Net.Http.HttpContent)",
+      "namespace": "System.Net.Http",
+      "declaringType": "System.Net.Http.HttpClient",
+      "methodName": "PostAsync",
+      "returnType": "System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage>",
+      "parameters": [
+        "System.Uri",
+        "System.Net.Http.HttpContent"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::PostAsync:System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage>(System.Uri,System.Net.Http.HttpContent,System.Threading.CancellationToken)",
+      "namespace": "System.Net.Http",
+      "declaringType": "System.Net.Http.HttpClient",
+      "methodName": "PostAsync",
+      "returnType": "System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage>",
+      "parameters": [
+        "System.Uri",
+        "System.Net.Http.HttpContent",
+        "System.Threading.CancellationToken"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::PutAsync:System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage>(System.String,System.Net.Http.HttpContent)",
+      "namespace": "System.Net.Http",
+      "declaringType": "System.Net.Http.HttpClient",
+      "methodName": "PutAsync",
+      "returnType": "System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage>",
+      "parameters": [
+        "System.String",
+        "System.Net.Http.HttpContent"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::PutAsync:System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage>(System.String,System.Net.Http.HttpContent,System.Threading.CancellationToken)",
+      "namespace": "System.Net.Http",
+      "declaringType": "System.Net.Http.HttpClient",
+      "methodName": "PutAsync",
+      "returnType": "System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage>",
+      "parameters": [
+        "System.String",
+        "System.Net.Http.HttpContent",
+        "System.Threading.CancellationToken"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::PutAsync:System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage>(System.Uri,System.Net.Http.HttpContent)",
+      "namespace": "System.Net.Http",
+      "declaringType": "System.Net.Http.HttpClient",
+      "methodName": "PutAsync",
+      "returnType": "System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage>",
+      "parameters": [
+        "System.Uri",
+        "System.Net.Http.HttpContent"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::PutAsync:System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage>(System.Uri,System.Net.Http.HttpContent,System.Threading.CancellationToken)",
+      "namespace": "System.Net.Http",
+      "declaringType": "System.Net.Http.HttpClient",
+      "methodName": "PutAsync",
+      "returnType": "System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage>",
+      "parameters": [
+        "System.Uri",
+        "System.Net.Http.HttpContent",
+        "System.Threading.CancellationToken"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::Send:System.Net.Http.HttpResponseMessage(System.Net.Http.HttpRequestMessage)",
+      "namespace": "System.Net.Http",
+      "declaringType": "System.Net.Http.HttpClient",
+      "methodName": "Send",
+      "returnType": "System.Net.Http.HttpResponseMessage",
+      "parameters": [
+        "System.Net.Http.HttpRequestMessage"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::Send:System.Net.Http.HttpResponseMessage(System.Net.Http.HttpRequestMessage,System.Net.Http.HttpCompletionOption)",
+      "namespace": "System.Net.Http",
+      "declaringType": "System.Net.Http.HttpClient",
+      "methodName": "Send",
+      "returnType": "System.Net.Http.HttpResponseMessage",
+      "parameters": [
+        "System.Net.Http.HttpRequestMessage",
+        "System.Net.Http.HttpCompletionOption"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::Send:System.Net.Http.HttpResponseMessage(System.Net.Http.HttpRequestMessage,System.Net.Http.HttpCompletionOption,System.Threading.CancellationToken)",
+      "namespace": "System.Net.Http",
+      "declaringType": "System.Net.Http.HttpClient",
+      "methodName": "Send",
+      "returnType": "System.Net.Http.HttpResponseMessage",
+      "parameters": [
+        "System.Net.Http.HttpRequestMessage",
+        "System.Net.Http.HttpCompletionOption",
+        "System.Threading.CancellationToken"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::Send:System.Net.Http.HttpResponseMessage(System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken)",
+      "namespace": "System.Net.Http",
+      "declaringType": "System.Net.Http.HttpClient",
+      "methodName": "Send",
+      "returnType": "System.Net.Http.HttpResponseMessage",
+      "parameters": [
+        "System.Net.Http.HttpRequestMessage",
+        "System.Threading.CancellationToken"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::SendAsync:System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage>(System.Net.Http.HttpRequestMessage)",
+      "namespace": "System.Net.Http",
+      "declaringType": "System.Net.Http.HttpClient",
+      "methodName": "SendAsync",
+      "returnType": "System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage>",
+      "parameters": [
+        "System.Net.Http.HttpRequestMessage"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::SendAsync:System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage>(System.Net.Http.HttpRequestMessage,System.Net.Http.HttpCompletionOption)",
+      "namespace": "System.Net.Http",
+      "declaringType": "System.Net.Http.HttpClient",
+      "methodName": "SendAsync",
+      "returnType": "System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage>",
+      "parameters": [
+        "System.Net.Http.HttpRequestMessage",
+        "System.Net.Http.HttpCompletionOption"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::SendAsync:System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage>(System.Net.Http.HttpRequestMessage,System.Net.Http.HttpCompletionOption,System.Threading.CancellationToken)",
+      "namespace": "System.Net.Http",
+      "declaringType": "System.Net.Http.HttpClient",
+      "methodName": "SendAsync",
+      "returnType": "System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage>",
+      "parameters": [
+        "System.Net.Http.HttpRequestMessage",
+        "System.Net.Http.HttpCompletionOption",
+        "System.Threading.CancellationToken"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::SendAsync:System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage>(System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken)",
+      "namespace": "System.Net.Http",
+      "declaringType": "System.Net.Http.HttpClient",
+      "methodName": "SendAsync",
+      "returnType": "System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage>",
+      "parameters": [
+        "System.Net.Http.HttpRequestMessage",
+        "System.Threading.CancellationToken"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Http/System.Net.Http.HttpMessageInvoker::Dispose:System.Void()",
+      "namespace": "System.Net.Http",
+      "declaringType": "System.Net.Http.HttpMessageInvoker",
+      "methodName": "Dispose",
+      "returnType": "System.Void",
+      "parameters": [],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Http/System.Net.Http.HttpMessageInvoker::Send:System.Net.Http.HttpResponseMessage(System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken)",
+      "namespace": "System.Net.Http",
+      "declaringType": "System.Net.Http.HttpMessageInvoker",
+      "methodName": "Send",
+      "returnType": "System.Net.Http.HttpResponseMessage",
+      "parameters": [
+        "System.Net.Http.HttpRequestMessage",
+        "System.Threading.CancellationToken"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Http/System.Net.Http.HttpMessageInvoker::SendAsync:System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage>(System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken)",
+      "namespace": "System.Net.Http",
+      "declaringType": "System.Net.Http.HttpMessageInvoker",
+      "methodName": "SendAsync",
+      "returnType": "System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage>",
+      "parameters": [
+        "System.Net.Http.HttpRequestMessage",
+        "System.Threading.CancellationToken"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Http/System.Net.Http.HttpMethod::Parse:System.Net.Http.HttpMethod(System.ReadOnlySpan<System.Char>)",
+      "namespace": "System.Net.Http",
+      "declaringType": "System.Net.Http.HttpMethod",
+      "methodName": "Parse",
+      "returnType": "System.Net.Http.HttpMethod",
+      "parameters": [
+        "System.ReadOnlySpan<System.Char>"
+      ],
+      "visibility": "public",
+      "isStatic": true
+    },
+    {
+      "methodSubjectId": "System.Net.Http/System.Net.Http.HttpRequestMessage::Dispose:System.Void()",
+      "namespace": "System.Net.Http",
+      "declaringType": "System.Net.Http.HttpRequestMessage",
+      "methodName": "Dispose",
+      "returnType": "System.Void",
+      "parameters": [],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Http/System.Net.Http.HttpResponseMessage::Dispose:System.Void()",
+      "namespace": "System.Net.Http",
+      "declaringType": "System.Net.Http.HttpResponseMessage",
+      "methodName": "Dispose",
+      "returnType": "System.Void",
+      "parameters": [],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Http/System.Net.Http.HttpResponseMessage::EnsureSuccessStatusCode:System.Net.Http.HttpResponseMessage()",
+      "namespace": "System.Net.Http",
+      "declaringType": "System.Net.Http.HttpResponseMessage",
+      "methodName": "EnsureSuccessStatusCode",
+      "returnType": "System.Net.Http.HttpResponseMessage",
+      "parameters": [],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Http/System.Net.Http.Metrics.HttpMetricsEnrichmentContext::AddCallback:System.Void(System.Net.Http.HttpRequestMessage,System.Action<System.Net.Http.Metrics.HttpMetricsEnrichmentContext>)",
+      "namespace": "System.Net.Http.Metrics",
+      "declaringType": "System.Net.Http.Metrics.HttpMetricsEnrichmentContext",
+      "methodName": "AddCallback",
+      "returnType": "System.Void",
+      "parameters": [
+        "System.Net.Http.HttpRequestMessage",
+        "System.Action<System.Net.Http.Metrics.HttpMetricsEnrichmentContext>"
+      ],
+      "visibility": "public",
+      "isStatic": true
+    },
+    {
+      "methodSubjectId": "System.Net.Http/System.Net.Http.Metrics.HttpMetricsEnrichmentContext::AddCustomTag:System.Void(System.String,System.Object)",
+      "namespace": "System.Net.Http.Metrics",
+      "declaringType": "System.Net.Http.Metrics.HttpMetricsEnrichmentContext",
+      "methodName": "AddCustomTag",
+      "returnType": "System.Void",
+      "parameters": [
+        "System.String",
+        "System.Object"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Http/System.Net.Http.MultipartContent::Add:System.Void(System.Net.Http.HttpContent)",
+      "namespace": "System.Net.Http",
+      "declaringType": "System.Net.Http.MultipartContent",
+      "methodName": "Add",
+      "returnType": "System.Void",
+      "parameters": [
+        "System.Net.Http.HttpContent"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Http/System.Net.Http.MultipartContent::GetEnumerator:System.Collections.Generic.IEnumerator<System.Net.Http.HttpContent>()",
+      "namespace": "System.Net.Http",
+      "declaringType": "System.Net.Http.MultipartContent",
+      "methodName": "GetEnumerator",
+      "returnType": "System.Collections.Generic.IEnumerator<System.Net.Http.HttpContent>",
+      "parameters": [],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Http/System.Net.Http.MultipartFormDataContent::Add:System.Void(System.Net.Http.HttpContent)",
+      "namespace": "System.Net.Http",
+      "declaringType": "System.Net.Http.MultipartFormDataContent",
+      "methodName": "Add",
+      "returnType": "System.Void",
+      "parameters": [
+        "System.Net.Http.HttpContent"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Http/System.Net.Http.MultipartFormDataContent::Add:System.Void(System.Net.Http.HttpContent,System.String)",
+      "namespace": "System.Net.Http",
+      "declaringType": "System.Net.Http.MultipartFormDataContent",
+      "methodName": "Add",
+      "returnType": "System.Void",
+      "parameters": [
+        "System.Net.Http.HttpContent",
+        "System.String"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Http/System.Net.Http.MultipartFormDataContent::Add:System.Void(System.Net.Http.HttpContent,System.String,System.String)",
+      "namespace": "System.Net.Http",
+      "declaringType": "System.Net.Http.MultipartFormDataContent",
+      "methodName": "Add",
+      "returnType": "System.Void",
+      "parameters": [
+        "System.Net.Http.HttpContent",
+        "System.String",
+        "System.String"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    }
+  ],
+  "namespaces": {
+    "System.Net.Http": {
+      "methodCount": 57
+    },
+    "System.Net.Http.Headers": {
+      "methodCount": 46
+    },
+    "System.Net.Http.Metrics": {
+      "methodCount": 2
+    }
+  }
+}

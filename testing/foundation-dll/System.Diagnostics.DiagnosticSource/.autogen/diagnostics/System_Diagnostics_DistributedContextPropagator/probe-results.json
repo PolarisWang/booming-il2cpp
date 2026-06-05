@@ -1,0 +1,93 @@
+[
+  {
+    "methodIndex": 0,
+    "setIndex": 0,
+    "subjectId": "System.Diagnostics.DistributedContextPropagator::Inject:System.Void(System.Diagnostics.Activity,System.Object,DistributedContextPropagator.PropagatorSetterCallback)__Set0",
+    "isVoid": true,
+    "hasException": true,
+    "exceptionType": "System.NullReferenceException",
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 1,
+    "setIndex": 0,
+    "subjectId": "System.Diagnostics.DistributedContextPropagator::ExtractTraceIdAndState:System.Void(System.Object,DistributedContextPropagator.PropagatorGetterCallback,System.String,System.String)__Set0",
+    "isVoid": true,
+    "hasException": true,
+    "exceptionType": "System.NullReferenceException",
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 1,
+    "setIndex": 1,
+    "subjectId": "System.Diagnostics.DistributedContextPropagator::ExtractTraceIdAndState:System.Void(System.Object,DistributedContextPropagator.PropagatorGetterCallback,System.String,System.String)__Set1",
+    "isVoid": true,
+    "hasException": true,
+    "exceptionType": "System.NullReferenceException",
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 2,
+    "setIndex": 0,
+    "subjectId": "System.Diagnostics.DistributedContextPropagator::ExtractBaggage:System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.String\u003E\u003E(System.Object,DistributedContextPropagator.PropagatorGetterCallback)__Set0",
+    "isVoid": false,
+    "hasException": true,
+    "exceptionType": "System.NullReferenceException",
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 3,
+    "setIndex": 3,
+    "subjectId": "System.Diagnostics.DistributedContextPropagator::CreateDefaultPropagator:System.Diagnostics.DistributedContextPropagator()__Set3",
+    "isVoid": false,
+    "hasException": false,
+    "exceptionType": null,
+    "returnValue": 6444509,
+    "returnValueJson": "{\u0022Fields\u0022:[\u0022traceparent\u0022,\u0022Request-Id\u0022,\u0022tracestate\u0022,\u0022baggage\u0022,\u0022Correlation-Context\u0022]}",
+    "returnValueType": "System.Diagnostics.LegacyPropagator",
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 4,
+    "setIndex": 4,
+    "subjectId": "System.Diagnostics.DistributedContextPropagator::CreatePassThroughPropagator:System.Diagnostics.DistributedContextPropagator()__Set4",
+    "isVoid": false,
+    "hasException": false,
+    "exceptionType": null,
+    "returnValue": 58000584,
+    "returnValueJson": "{\u0022Fields\u0022:[\u0022traceparent\u0022,\u0022Request-Id\u0022,\u0022tracestate\u0022,\u0022baggage\u0022,\u0022Correlation-Context\u0022]}",
+    "returnValueType": "System.Diagnostics.PassThroughPropagator",
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 5,
+    "setIndex": 5,
+    "subjectId": "System.Diagnostics.DistributedContextPropagator::CreateNoOutputPropagator:System.Diagnostics.DistributedContextPropagator()__Set5",
+    "isVoid": false,
+    "hasException": false,
+    "exceptionType": null,
+    "returnValue": 52243212,
+    "returnValueJson": "{\u0022Fields\u0022:[\u0022traceparent\u0022,\u0022Request-Id\u0022,\u0022tracestate\u0022,\u0022baggage\u0022,\u0022Correlation-Context\u0022]}",
+    "returnValueType": "System.Diagnostics.NoOutputPropagator",
+    "isDeterministic": true,
+    "outRefValues": null
+  }
+]

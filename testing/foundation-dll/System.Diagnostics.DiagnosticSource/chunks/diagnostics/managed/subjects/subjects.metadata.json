@@ -1,0 +1,1165 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Diagnostics.DiagnosticSource",
+  "chunkSlug": "diagnostics",
+  "totalMethods": 144,
+  "customEntryIndices": null,
+  "benchmarkMethodIndices": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29,
+    30,
+    31,
+    32,
+    33,
+    34,
+    35,
+    36,
+    37,
+    38,
+    39,
+    40,
+    41,
+    42,
+    43,
+    44,
+    45,
+    46,
+    47,
+    48,
+    49,
+    50,
+    51,
+    52,
+    53,
+    54,
+    55,
+    56,
+    57,
+    58,
+    59,
+    60,
+    61,
+    62,
+    63,
+    64,
+    65,
+    66,
+    67,
+    68,
+    69,
+    70,
+    71,
+    72,
+    73,
+    74,
+    75,
+    76,
+    77,
+    78,
+    79,
+    80,
+    81,
+    82,
+    83,
+    84,
+    85,
+    86,
+    87,
+    88,
+    89,
+    90,
+    91,
+    92,
+    93,
+    94,
+    95,
+    96,
+    97,
+    98,
+    99,
+    100,
+    101,
+    102,
+    103,
+    104,
+    105,
+    106,
+    107,
+    108,
+    109,
+    110,
+    111,
+    112,
+    113,
+    114,
+    115,
+    116,
+    117,
+    118,
+    119,
+    120,
+    121,
+    122,
+    123,
+    124,
+    125,
+    126,
+    127,
+    128,
+    129,
+    130,
+    131,
+    132,
+    133,
+    134,
+    135,
+    136,
+    137,
+    138,
+    139,
+    140,
+    141,
+    142,
+    143
+  ],
+  "hotupdateMethodIndices": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29,
+    30,
+    31,
+    32,
+    33,
+    34,
+    35,
+    36,
+    37,
+    38,
+    39,
+    40,
+    41,
+    42,
+    43,
+    44,
+    45,
+    46,
+    47,
+    48,
+    49,
+    50,
+    51,
+    52,
+    53,
+    54,
+    55,
+    56,
+    57,
+    58,
+    59,
+    60,
+    61,
+    62,
+    63,
+    64,
+    65,
+    66,
+    67,
+    68,
+    69,
+    70,
+    71,
+    72,
+    73,
+    74,
+    75,
+    76,
+    77,
+    78,
+    79,
+    80,
+    81,
+    82,
+    83,
+    84,
+    85,
+    86,
+    87,
+    88,
+    89,
+    90,
+    91,
+    92,
+    93,
+    94,
+    95,
+    96,
+    97,
+    98,
+    99,
+    100,
+    101,
+    102,
+    103,
+    104,
+    105,
+    106,
+    107,
+    108,
+    109,
+    110,
+    111,
+    112,
+    113,
+    114,
+    115,
+    116,
+    117,
+    118,
+    119,
+    120,
+    121,
+    122,
+    123,
+    124,
+    125,
+    126,
+    127,
+    128,
+    129,
+    130,
+    131,
+    132,
+    133,
+    134,
+    135,
+    136,
+    137,
+    138,
+    139,
+    140,
+    141,
+    142,
+    143
+  ],
+  "methods": [
+    {
+      "index": 0,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Activity::SetStatus:System.Diagnostics.Activity(System.Diagnostics.ActivityStatusCode,System.String)",
+      "generatedMethodId": "SetStatus_0_ActivityStatusCode_string_0"
+    },
+    {
+      "index": 1,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Activity::SetStatus:System.Diagnostics.Activity(System.Diagnostics.ActivityStatusCode,System.String)",
+      "generatedMethodId": "SetStatus_0_ActivityStatusCode_string_1"
+    },
+    {
+      "index": 2,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Activity::GetBaggageItem:System.String(System.String)",
+      "generatedMethodId": "GetBaggageItem_1_string_0"
+    },
+    {
+      "index": 3,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Activity::GetBaggageItem:System.String(System.String)",
+      "generatedMethodId": "GetBaggageItem_1_string_1"
+    },
+    {
+      "index": 4,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Activity::GetTagItem:System.Object(System.String)",
+      "generatedMethodId": "GetTagItem_2_string_0"
+    },
+    {
+      "index": 5,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Activity::GetTagItem:System.Object(System.String)",
+      "generatedMethodId": "GetTagItem_2_string_1"
+    },
+    {
+      "index": 6,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Activity::AddTag:System.Diagnostics.Activity(System.String,System.String)",
+      "generatedMethodId": "AddTag_3_string_string_0"
+    },
+    {
+      "index": 7,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Activity::AddTag:System.Diagnostics.Activity(System.String,System.String)",
+      "generatedMethodId": "AddTag_3_string_string_1"
+    },
+    {
+      "index": 8,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Activity::AddTag:System.Diagnostics.Activity(System.String,System.String)",
+      "generatedMethodId": "AddTag_3_string_string_2"
+    },
+    {
+      "index": 9,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Activity::AddTag:System.Diagnostics.Activity(System.String,System.Object)",
+      "generatedMethodId": "AddTag_4_string_object_0"
+    },
+    {
+      "index": 10,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Activity::AddTag:System.Diagnostics.Activity(System.String,System.Object)",
+      "generatedMethodId": "AddTag_4_string_object_1"
+    },
+    {
+      "index": 11,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Activity::SetTag:System.Diagnostics.Activity(System.String,System.Object)",
+      "generatedMethodId": "SetTag_5_string_object_0"
+    },
+    {
+      "index": 12,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Activity::SetTag:System.Diagnostics.Activity(System.String,System.Object)",
+      "generatedMethodId": "SetTag_5_string_object_1"
+    },
+    {
+      "index": 13,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Activity::AddEvent:System.Diagnostics.Activity(System.Diagnostics.ActivityEvent)",
+      "generatedMethodId": "AddEvent_6_ActivityEvent_0"
+    },
+    {
+      "index": 14,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Activity::AddException:System.Diagnostics.Activity(System.Exception,System.Diagnostics.TagList,System.DateTimeOffset)",
+      "generatedMethodId": "AddException_7_System_Exception_TagList_System_DateTimeOffset_0"
+    },
+    {
+      "index": 15,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Activity::AddLink:System.Diagnostics.Activity(System.Diagnostics.ActivityLink)",
+      "generatedMethodId": "AddLink_8_ActivityLink_0"
+    },
+    {
+      "index": 16,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Activity::AddBaggage:System.Diagnostics.Activity(System.String,System.String)",
+      "generatedMethodId": "AddBaggage_9_string_string_0"
+    },
+    {
+      "index": 17,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Activity::AddBaggage:System.Diagnostics.Activity(System.String,System.String)",
+      "generatedMethodId": "AddBaggage_9_string_string_1"
+    },
+    {
+      "index": 18,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Activity::AddBaggage:System.Diagnostics.Activity(System.String,System.String)",
+      "generatedMethodId": "AddBaggage_9_string_string_2"
+    },
+    {
+      "index": 19,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Activity::SetBaggage:System.Diagnostics.Activity(System.String,System.String)",
+      "generatedMethodId": "SetBaggage_10_string_string_0"
+    },
+    {
+      "index": 20,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Activity::SetBaggage:System.Diagnostics.Activity(System.String,System.String)",
+      "generatedMethodId": "SetBaggage_10_string_string_1"
+    },
+    {
+      "index": 21,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Activity::SetBaggage:System.Diagnostics.Activity(System.String,System.String)",
+      "generatedMethodId": "SetBaggage_10_string_string_2"
+    },
+    {
+      "index": 22,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Activity::SetParentId:System.Diagnostics.Activity(System.String)",
+      "generatedMethodId": "SetParentId_11_string_0"
+    },
+    {
+      "index": 23,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Activity::SetParentId:System.Diagnostics.Activity(System.String)",
+      "generatedMethodId": "SetParentId_11_string_1"
+    },
+    {
+      "index": 24,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Activity::SetParentId:System.Diagnostics.Activity(System.Diagnostics.ActivityTraceId,System.Diagnostics.ActivitySpanId,System.Diagnostics.ActivityTraceFlags)",
+      "generatedMethodId": "SetParentId_12_ActivityTraceId_ActivitySpanId_ActivityTraceFlags_0"
+    },
+    {
+      "index": 25,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Activity::SetStartTime:System.Diagnostics.Activity(System.DateTime)",
+      "generatedMethodId": "SetStartTime_13_System_DateTime_0"
+    },
+    {
+      "index": 26,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Activity::SetEndTime:System.Diagnostics.Activity(System.DateTime)",
+      "generatedMethodId": "SetEndTime_14_System_DateTime_0"
+    },
+    {
+      "index": 27,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Activity::Stop:System.Void()",
+      "generatedMethodId": "Stop_15__0"
+    },
+    {
+      "index": 28,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Activity::SetIdFormat:System.Diagnostics.Activity(System.Diagnostics.ActivityIdFormat)",
+      "generatedMethodId": "SetIdFormat_16_ActivityIdFormat_0"
+    },
+    {
+      "index": 29,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Activity::SetCustomProperty:System.Void(System.String,System.Object)",
+      "generatedMethodId": "SetCustomProperty_17_string_object_0"
+    },
+    {
+      "index": 30,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Activity::SetCustomProperty:System.Void(System.String,System.Object)",
+      "generatedMethodId": "SetCustomProperty_17_string_object_1"
+    },
+    {
+      "index": 31,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Activity::GetCustomProperty:System.Object(System.String)",
+      "generatedMethodId": "GetCustomProperty_18_string_0"
+    },
+    {
+      "index": 32,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Activity::GetCustomProperty:System.Object(System.String)",
+      "generatedMethodId": "GetCustomProperty_18_string_1"
+    },
+    {
+      "index": 33,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivityContext::TryParse:System.Boolean(System.String,System.String,System.Boolean,System.Diagnostics.ActivityContext)",
+      "generatedMethodId": "TryParse_0_string_string_bool_ActivityContext_0"
+    },
+    {
+      "index": 34,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivityContext::TryParse:System.Boolean(System.String,System.String,System.Boolean,System.Diagnostics.ActivityContext)",
+      "generatedMethodId": "TryParse_0_string_string_bool_ActivityContext_1"
+    },
+    {
+      "index": 35,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivityContext::TryParse:System.Boolean(System.String,System.String,System.Boolean,System.Diagnostics.ActivityContext)",
+      "generatedMethodId": "TryParse_0_string_string_bool_ActivityContext_2"
+    },
+    {
+      "index": 36,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivityContext::TryParse:System.Boolean(System.String,System.String,System.Boolean,System.Diagnostics.ActivityContext)",
+      "generatedMethodId": "TryParse_0_string_string_bool_ActivityContext_3"
+    },
+    {
+      "index": 37,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivityContext::TryParse:System.Boolean(System.String,System.String,System.Diagnostics.ActivityContext)",
+      "generatedMethodId": "TryParse_1_string_string_ActivityContext_0"
+    },
+    {
+      "index": 38,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivityContext::TryParse:System.Boolean(System.String,System.String,System.Diagnostics.ActivityContext)",
+      "generatedMethodId": "TryParse_1_string_string_ActivityContext_1"
+    },
+    {
+      "index": 39,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivityContext::TryParse:System.Boolean(System.String,System.String,System.Diagnostics.ActivityContext)",
+      "generatedMethodId": "TryParse_1_string_string_ActivityContext_2"
+    },
+    {
+      "index": 40,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivityContext::Parse:System.Diagnostics.ActivityContext(System.String,System.String)",
+      "generatedMethodId": "Parse_2_string_string_0"
+    },
+    {
+      "index": 41,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivityContext::Parse:System.Diagnostics.ActivityContext(System.String,System.String)",
+      "generatedMethodId": "Parse_2_string_string_1"
+    },
+    {
+      "index": 42,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivityContext::Parse:System.Diagnostics.ActivityContext(System.String,System.String)",
+      "generatedMethodId": "Parse_2_string_string_2"
+    },
+    {
+      "index": 43,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivityListener::Dispose:System.Void()",
+      "generatedMethodId": "Dispose_0__0"
+    },
+    {
+      "index": 44,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivitySource::HasListeners:System.Boolean()",
+      "generatedMethodId": "HasListeners_0__0"
+    },
+    {
+      "index": 45,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivitySource::CreateActivity:System.Diagnostics.Activity(System.String,System.Diagnostics.ActivityKind)",
+      "generatedMethodId": "CreateActivity_1_string_ActivityKind_0"
+    },
+    {
+      "index": 46,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivitySource::CreateActivity:System.Diagnostics.Activity(System.String,System.Diagnostics.ActivityKind)",
+      "generatedMethodId": "CreateActivity_1_string_ActivityKind_1"
+    },
+    {
+      "index": 47,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivitySource::CreateActivity:System.Diagnostics.Activity(System.String,System.Diagnostics.ActivityKind,System.Diagnostics.ActivityContext,System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E,System.Collections.Generic.IEnumerable\u003CSystem.Diagnostics.ActivityLink\u003E,System.Diagnostics.ActivityIdFormat)",
+      "generatedMethodId": "CreateActivity_2_string_ActivityKind_ActivityContext_IEnumerableKeyValuePairstringobject_IEnumerableActivityLink_ActivityIdFormat_0"
+    },
+    {
+      "index": 48,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivitySource::CreateActivity:System.Diagnostics.Activity(System.String,System.Diagnostics.ActivityKind,System.Diagnostics.ActivityContext,System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E,System.Collections.Generic.IEnumerable\u003CSystem.Diagnostics.ActivityLink\u003E,System.Diagnostics.ActivityIdFormat)",
+      "generatedMethodId": "CreateActivity_2_string_ActivityKind_ActivityContext_IEnumerableKeyValuePairstringobject_IEnumerableActivityLink_ActivityIdFormat_1"
+    },
+    {
+      "index": 49,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivitySource::CreateActivity:System.Diagnostics.Activity(System.String,System.Diagnostics.ActivityKind,System.Diagnostics.ActivityContext,System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E,System.Collections.Generic.IEnumerable\u003CSystem.Diagnostics.ActivityLink\u003E,System.Diagnostics.ActivityIdFormat)",
+      "generatedMethodId": "CreateActivity_2_string_ActivityKind_ActivityContext_IEnumerableKeyValuePairstringobject_IEnumerableActivityLink_ActivityIdFormat_2"
+    },
+    {
+      "index": 50,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivitySource::CreateActivity:System.Diagnostics.Activity(System.String,System.Diagnostics.ActivityKind,System.String,System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E,System.Collections.Generic.IEnumerable\u003CSystem.Diagnostics.ActivityLink\u003E,System.Diagnostics.ActivityIdFormat)",
+      "generatedMethodId": "CreateActivity_3_string_ActivityKind_string_IEnumerableKeyValuePairstringobject_IEnumerableActivityLink_ActivityIdFormat_0"
+    },
+    {
+      "index": 51,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivitySource::CreateActivity:System.Diagnostics.Activity(System.String,System.Diagnostics.ActivityKind,System.String,System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E,System.Collections.Generic.IEnumerable\u003CSystem.Diagnostics.ActivityLink\u003E,System.Diagnostics.ActivityIdFormat)",
+      "generatedMethodId": "CreateActivity_3_string_ActivityKind_string_IEnumerableKeyValuePairstringobject_IEnumerableActivityLink_ActivityIdFormat_1"
+    },
+    {
+      "index": 52,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivitySource::CreateActivity:System.Diagnostics.Activity(System.String,System.Diagnostics.ActivityKind,System.String,System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E,System.Collections.Generic.IEnumerable\u003CSystem.Diagnostics.ActivityLink\u003E,System.Diagnostics.ActivityIdFormat)",
+      "generatedMethodId": "CreateActivity_3_string_ActivityKind_string_IEnumerableKeyValuePairstringobject_IEnumerableActivityLink_ActivityIdFormat_2"
+    },
+    {
+      "index": 53,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivitySource::CreateActivity:System.Diagnostics.Activity(System.String,System.Diagnostics.ActivityKind,System.String,System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E,System.Collections.Generic.IEnumerable\u003CSystem.Diagnostics.ActivityLink\u003E,System.Diagnostics.ActivityIdFormat)",
+      "generatedMethodId": "CreateActivity_3_string_ActivityKind_string_IEnumerableKeyValuePairstringobject_IEnumerableActivityLink_ActivityIdFormat_3"
+    },
+    {
+      "index": 54,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivitySource::StartActivity:System.Diagnostics.Activity(System.String,System.Diagnostics.ActivityKind)",
+      "generatedMethodId": "StartActivity_4_string_ActivityKind_0"
+    },
+    {
+      "index": 55,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivitySource::StartActivity:System.Diagnostics.Activity(System.String,System.Diagnostics.ActivityKind)",
+      "generatedMethodId": "StartActivity_4_string_ActivityKind_1"
+    },
+    {
+      "index": 56,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivitySource::StartActivity:System.Diagnostics.Activity(System.String,System.Diagnostics.ActivityKind,System.Diagnostics.ActivityContext,System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E,System.Collections.Generic.IEnumerable\u003CSystem.Diagnostics.ActivityLink\u003E,System.DateTimeOffset)",
+      "generatedMethodId": "StartActivity_5_string_ActivityKind_ActivityContext_IEnumerableKeyValuePairstringobject_IEnumerableActivityLink_System_DateTimeOffset_0"
+    },
+    {
+      "index": 57,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivitySource::StartActivity:System.Diagnostics.Activity(System.String,System.Diagnostics.ActivityKind,System.Diagnostics.ActivityContext,System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E,System.Collections.Generic.IEnumerable\u003CSystem.Diagnostics.ActivityLink\u003E,System.DateTimeOffset)",
+      "generatedMethodId": "StartActivity_5_string_ActivityKind_ActivityContext_IEnumerableKeyValuePairstringobject_IEnumerableActivityLink_System_DateTimeOffset_1"
+    },
+    {
+      "index": 58,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivitySource::StartActivity:System.Diagnostics.Activity(System.String,System.Diagnostics.ActivityKind,System.Diagnostics.ActivityContext,System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E,System.Collections.Generic.IEnumerable\u003CSystem.Diagnostics.ActivityLink\u003E,System.DateTimeOffset)",
+      "generatedMethodId": "StartActivity_5_string_ActivityKind_ActivityContext_IEnumerableKeyValuePairstringobject_IEnumerableActivityLink_System_DateTimeOffset_2"
+    },
+    {
+      "index": 59,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivitySource::StartActivity:System.Diagnostics.Activity(System.String,System.Diagnostics.ActivityKind,System.String,System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E,System.Collections.Generic.IEnumerable\u003CSystem.Diagnostics.ActivityLink\u003E,System.DateTimeOffset)",
+      "generatedMethodId": "StartActivity_6_string_ActivityKind_string_IEnumerableKeyValuePairstringobject_IEnumerableActivityLink_System_DateTimeOffset_0"
+    },
+    {
+      "index": 60,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivitySource::StartActivity:System.Diagnostics.Activity(System.String,System.Diagnostics.ActivityKind,System.String,System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E,System.Collections.Generic.IEnumerable\u003CSystem.Diagnostics.ActivityLink\u003E,System.DateTimeOffset)",
+      "generatedMethodId": "StartActivity_6_string_ActivityKind_string_IEnumerableKeyValuePairstringobject_IEnumerableActivityLink_System_DateTimeOffset_1"
+    },
+    {
+      "index": 61,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivitySource::StartActivity:System.Diagnostics.Activity(System.String,System.Diagnostics.ActivityKind,System.String,System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E,System.Collections.Generic.IEnumerable\u003CSystem.Diagnostics.ActivityLink\u003E,System.DateTimeOffset)",
+      "generatedMethodId": "StartActivity_6_string_ActivityKind_string_IEnumerableKeyValuePairstringobject_IEnumerableActivityLink_System_DateTimeOffset_2"
+    },
+    {
+      "index": 62,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivitySource::StartActivity:System.Diagnostics.Activity(System.String,System.Diagnostics.ActivityKind,System.String,System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E,System.Collections.Generic.IEnumerable\u003CSystem.Diagnostics.ActivityLink\u003E,System.DateTimeOffset)",
+      "generatedMethodId": "StartActivity_6_string_ActivityKind_string_IEnumerableKeyValuePairstringobject_IEnumerableActivityLink_System_DateTimeOffset_3"
+    },
+    {
+      "index": 63,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivitySource::StartActivity:System.Diagnostics.Activity(System.Diagnostics.ActivityKind,System.Diagnostics.ActivityContext,System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E,System.Collections.Generic.IEnumerable\u003CSystem.Diagnostics.ActivityLink\u003E,System.DateTimeOffset,System.String)",
+      "generatedMethodId": "StartActivity_7_ActivityKind_ActivityContext_IEnumerableKeyValuePairstringobject_IEnumerableActivityLink_System_DateTimeOffset_string_0"
+    },
+    {
+      "index": 64,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivitySource::StartActivity:System.Diagnostics.Activity(System.Diagnostics.ActivityKind,System.Diagnostics.ActivityContext,System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E,System.Collections.Generic.IEnumerable\u003CSystem.Diagnostics.ActivityLink\u003E,System.DateTimeOffset,System.String)",
+      "generatedMethodId": "StartActivity_7_ActivityKind_ActivityContext_IEnumerableKeyValuePairstringobject_IEnumerableActivityLink_System_DateTimeOffset_string_1"
+    },
+    {
+      "index": 65,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivitySource::Dispose:System.Void()",
+      "generatedMethodId": "Dispose_8__0"
+    },
+    {
+      "index": 66,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivitySource::AddActivityListener:System.Void(System.Diagnostics.ActivityListener)",
+      "generatedMethodId": "AddActivityListener_9_ActivityListener_0"
+    },
+    {
+      "index": 67,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivitySpanId::CreateRandom:System.Diagnostics.ActivitySpanId()",
+      "generatedMethodId": "CreateRandom_0__0"
+    },
+    {
+      "index": 68,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivitySpanId::ToHexString:System.String()",
+      "generatedMethodId": "ToHexString_1__0"
+    },
+    {
+      "index": 69,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivityTagsCollection::Add:System.Void(System.String,System.Object)",
+      "generatedMethodId": "Add_0_string_object_0"
+    },
+    {
+      "index": 70,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivityTagsCollection::Add:System.Void(System.String,System.Object)",
+      "generatedMethodId": "Add_0_string_object_1"
+    },
+    {
+      "index": 71,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivityTagsCollection::Add:System.Void(System.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E)",
+      "generatedMethodId": "Add_1_KeyValuePairstringobject_0"
+    },
+    {
+      "index": 72,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivityTagsCollection::Clear:System.Void()",
+      "generatedMethodId": "Clear_2__0"
+    },
+    {
+      "index": 73,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivityTagsCollection::Contains:System.Boolean(System.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E)",
+      "generatedMethodId": "Contains_3_KeyValuePairstringobject_0"
+    },
+    {
+      "index": 74,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivityTagsCollection::ContainsKey:System.Boolean(System.String)",
+      "generatedMethodId": "ContainsKey_4_string_0"
+    },
+    {
+      "index": 75,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivityTagsCollection::ContainsKey:System.Boolean(System.String)",
+      "generatedMethodId": "ContainsKey_4_string_1"
+    },
+    {
+      "index": 76,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivityTagsCollection::CopyTo:System.Void(System.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E[],System.Int32)",
+      "generatedMethodId": "CopyTo_5_KeyValuePairstringobject_int_0"
+    },
+    {
+      "index": 77,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivityTagsCollection::CopyTo:System.Void(System.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E[],System.Int32)",
+      "generatedMethodId": "CopyTo_5_KeyValuePairstringobject_int_1"
+    },
+    {
+      "index": 78,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivityTagsCollection::CopyTo:System.Void(System.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E[],System.Int32)",
+      "generatedMethodId": "CopyTo_5_KeyValuePairstringobject_int_2"
+    },
+    {
+      "index": 79,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivityTagsCollection::CopyTo:System.Void(System.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E[],System.Int32)",
+      "generatedMethodId": "CopyTo_5_KeyValuePairstringobject_int_3"
+    },
+    {
+      "index": 80,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivityTagsCollection::Remove:System.Boolean(System.String)",
+      "generatedMethodId": "Remove_6_string_0"
+    },
+    {
+      "index": 81,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivityTagsCollection::Remove:System.Boolean(System.String)",
+      "generatedMethodId": "Remove_6_string_1"
+    },
+    {
+      "index": 82,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivityTagsCollection::Remove:System.Boolean(System.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E)",
+      "generatedMethodId": "Remove_7_KeyValuePairstringobject_0"
+    },
+    {
+      "index": 83,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivityTagsCollection::TryGetValue:System.Boolean(System.String,System.Object)",
+      "generatedMethodId": "TryGetValue_8_string_object_0"
+    },
+    {
+      "index": 84,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivityTagsCollection::TryGetValue:System.Boolean(System.String,System.Object)",
+      "generatedMethodId": "TryGetValue_8_string_object_1"
+    },
+    {
+      "index": 85,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivityTraceId::CreateRandom:System.Diagnostics.ActivityTraceId()",
+      "generatedMethodId": "CreateRandom_0__0"
+    },
+    {
+      "index": 86,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivityTraceId::ToHexString:System.String()",
+      "generatedMethodId": "ToHexString_1__0"
+    },
+    {
+      "index": 87,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.DiagnosticListener::OnActivityImport:System.Void(System.Diagnostics.Activity,System.Object)",
+      "generatedMethodId": "OnActivityImport_0_Activity_object_0"
+    },
+    {
+      "index": 88,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.DiagnosticListener::OnActivityExport:System.Void(System.Diagnostics.Activity,System.Object)",
+      "generatedMethodId": "OnActivityExport_1_Activity_object_0"
+    },
+    {
+      "index": 89,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.DiagnosticListener::Subscribe:System.IDisposable(System.IObserver\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E,System.Func\u003CSystem.String,System.Object,System.Object,System.Boolean\u003E,System.Action\u003CSystem.Diagnostics.Activity,System.Object\u003E,System.Action\u003CSystem.Diagnostics.Activity,System.Object\u003E)",
+      "generatedMethodId": "Subscribe_2_System_IObserverKeyValuePairstringobject_System_Funcstringobjectobjectbool_System_ActionActivityobject_System_ActionActivityobject_0"
+    },
+    {
+      "index": 90,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.DiagnosticListener::Subscribe:System.IDisposable(System.IObserver\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E,System.Func\u003CSystem.String,System.Object,System.Object,System.Boolean\u003E,System.Action\u003CSystem.Diagnostics.Activity,System.Object\u003E,System.Action\u003CSystem.Diagnostics.Activity,System.Object\u003E)",
+      "generatedMethodId": "Subscribe_2_System_IObserverKeyValuePairstringobject_System_Funcstringobjectobjectbool_System_ActionActivityobject_System_ActionActivityobject_1"
+    },
+    {
+      "index": 91,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.DiagnosticListener::Subscribe:System.IDisposable(System.IObserver\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E,System.Predicate\u003CSystem.String\u003E)",
+      "generatedMethodId": "Subscribe_3_System_IObserverKeyValuePairstringobject_System_Predicatestring_0"
+    },
+    {
+      "index": 92,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.DiagnosticListener::Subscribe:System.IDisposable(System.IObserver\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E,System.Predicate\u003CSystem.String\u003E)",
+      "generatedMethodId": "Subscribe_3_System_IObserverKeyValuePairstringobject_System_Predicatestring_1"
+    },
+    {
+      "index": 93,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.DiagnosticListener::Subscribe:System.IDisposable(System.IObserver\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E,System.Func\u003CSystem.String,System.Object,System.Object,System.Boolean\u003E)",
+      "generatedMethodId": "Subscribe_4_System_IObserverKeyValuePairstringobject_System_Funcstringobjectobjectbool_0"
+    },
+    {
+      "index": 94,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.DiagnosticListener::Subscribe:System.IDisposable(System.IObserver\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E,System.Func\u003CSystem.String,System.Object,System.Object,System.Boolean\u003E)",
+      "generatedMethodId": "Subscribe_4_System_IObserverKeyValuePairstringobject_System_Funcstringobjectobjectbool_1"
+    },
+    {
+      "index": 95,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.DiagnosticListener::Subscribe:System.IDisposable(System.IObserver\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E)",
+      "generatedMethodId": "Subscribe_5_System_IObserverKeyValuePairstringobject_0"
+    },
+    {
+      "index": 96,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.DiagnosticListener::Dispose:System.Void()",
+      "generatedMethodId": "Dispose_6__0"
+    },
+    {
+      "index": 97,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.DiagnosticListener::IsEnabled:System.Boolean()",
+      "generatedMethodId": "IsEnabled_7__0"
+    },
+    {
+      "index": 98,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.DiagnosticListener::IsEnabled:System.Boolean(System.String)",
+      "generatedMethodId": "IsEnabled_8_string_0"
+    },
+    {
+      "index": 99,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.DiagnosticListener::IsEnabled:System.Boolean(System.String)",
+      "generatedMethodId": "IsEnabled_8_string_1"
+    },
+    {
+      "index": 100,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.DiagnosticListener::IsEnabled:System.Boolean(System.String,System.Object,System.Object)",
+      "generatedMethodId": "IsEnabled_9_string_object_object_0"
+    },
+    {
+      "index": 101,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.DiagnosticListener::IsEnabled:System.Boolean(System.String,System.Object,System.Object)",
+      "generatedMethodId": "IsEnabled_9_string_object_object_1"
+    },
+    {
+      "index": 102,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.DiagnosticListener::Write:System.Void(System.String,System.Object)",
+      "generatedMethodId": "Write_10_string_object_0"
+    },
+    {
+      "index": 103,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.DiagnosticListener::Write:System.Void(System.String,System.Object)",
+      "generatedMethodId": "Write_10_string_object_1"
+    },
+    {
+      "index": 104,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.DiagnosticSource::Write:System.Void(System.String,System.Object)",
+      "generatedMethodId": "Write_0_string_object_0"
+    },
+    {
+      "index": 105,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.DiagnosticSource::Write:System.Void(System.String,System.Object)",
+      "generatedMethodId": "Write_0_string_object_1"
+    },
+    {
+      "index": 106,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.DiagnosticSource::Write:System.Void(System.String,System.Int32)",
+      "generatedMethodId": "Write_1_string_int_0"
+    },
+    {
+      "index": 107,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.DiagnosticSource::Write:System.Void(System.String,System.Int32)",
+      "generatedMethodId": "Write_1_string_int_1"
+    },
+    {
+      "index": 108,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.DiagnosticSource::Write:System.Void(System.String,System.Int32)",
+      "generatedMethodId": "Write_1_string_int_2"
+    },
+    {
+      "index": 109,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.DiagnosticSource::IsEnabled:System.Boolean(System.String)",
+      "generatedMethodId": "IsEnabled_2_string_0"
+    },
+    {
+      "index": 110,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.DiagnosticSource::IsEnabled:System.Boolean(System.String)",
+      "generatedMethodId": "IsEnabled_2_string_1"
+    },
+    {
+      "index": 111,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.DiagnosticSource::IsEnabled:System.Boolean(System.String,System.Object,System.Object)",
+      "generatedMethodId": "IsEnabled_3_string_object_object_0"
+    },
+    {
+      "index": 112,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.DiagnosticSource::IsEnabled:System.Boolean(System.String,System.Object,System.Object)",
+      "generatedMethodId": "IsEnabled_3_string_object_object_1"
+    },
+    {
+      "index": 113,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.DiagnosticSource::StartActivity:System.Diagnostics.Activity(System.Diagnostics.Activity,System.Object)",
+      "generatedMethodId": "StartActivity_4_Activity_object_0"
+    },
+    {
+      "index": 114,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.DiagnosticSource::StartActivity:System.Diagnostics.Activity(System.Diagnostics.Activity,System.Int32)",
+      "generatedMethodId": "StartActivity_5_Activity_int_0"
+    },
+    {
+      "index": 115,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.DiagnosticSource::StartActivity:System.Diagnostics.Activity(System.Diagnostics.Activity,System.Int32)",
+      "generatedMethodId": "StartActivity_5_Activity_int_1"
+    },
+    {
+      "index": 116,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.DiagnosticSource::StopActivity:System.Void(System.Diagnostics.Activity,System.Object)",
+      "generatedMethodId": "StopActivity_6_Activity_object_0"
+    },
+    {
+      "index": 117,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.DiagnosticSource::StopActivity:System.Void(System.Diagnostics.Activity,System.Int32)",
+      "generatedMethodId": "StopActivity_7_Activity_int_0"
+    },
+    {
+      "index": 118,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.DiagnosticSource::StopActivity:System.Void(System.Diagnostics.Activity,System.Int32)",
+      "generatedMethodId": "StopActivity_7_Activity_int_1"
+    },
+    {
+      "index": 119,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.DiagnosticSource::OnActivityImport:System.Void(System.Diagnostics.Activity,System.Object)",
+      "generatedMethodId": "OnActivityImport_8_Activity_object_0"
+    },
+    {
+      "index": 120,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.DiagnosticSource::OnActivityExport:System.Void(System.Diagnostics.Activity,System.Object)",
+      "generatedMethodId": "OnActivityExport_9_Activity_object_0"
+    },
+    {
+      "index": 121,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.DistributedContextPropagator::Inject:System.Void(System.Diagnostics.Activity,System.Object,DistributedContextPropagator.PropagatorSetterCallback)",
+      "generatedMethodId": "Inject_0_Activity_object_DistributedContextPropagator_PropagatorSetterCallback_0"
+    },
+    {
+      "index": 122,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.DistributedContextPropagator::ExtractTraceIdAndState:System.Void(System.Object,DistributedContextPropagator.PropagatorGetterCallback,System.String,System.String)",
+      "generatedMethodId": "ExtractTraceIdAndState_1_object_DistributedContextPropagator_PropagatorGetterCallback_string_string_0"
+    },
+    {
+      "index": 123,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.DistributedContextPropagator::ExtractTraceIdAndState:System.Void(System.Object,DistributedContextPropagator.PropagatorGetterCallback,System.String,System.String)",
+      "generatedMethodId": "ExtractTraceIdAndState_1_object_DistributedContextPropagator_PropagatorGetterCallback_string_string_1"
+    },
+    {
+      "index": 124,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.DistributedContextPropagator::ExtractBaggage:System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.String\u003E\u003E(System.Object,DistributedContextPropagator.PropagatorGetterCallback)",
+      "generatedMethodId": "ExtractBaggage_2_object_DistributedContextPropagator_PropagatorGetterCallback_0"
+    },
+    {
+      "index": 125,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.DistributedContextPropagator::CreateDefaultPropagator:System.Diagnostics.DistributedContextPropagator()",
+      "generatedMethodId": "CreateDefaultPropagator_3__0"
+    },
+    {
+      "index": 126,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.DistributedContextPropagator::CreatePassThroughPropagator:System.Diagnostics.DistributedContextPropagator()",
+      "generatedMethodId": "CreatePassThroughPropagator_4__0"
+    },
+    {
+      "index": 127,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.DistributedContextPropagator::CreateNoOutputPropagator:System.Diagnostics.DistributedContextPropagator()",
+      "generatedMethodId": "CreateNoOutputPropagator_5__0"
+    },
+    {
+      "index": 128,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.TagList::Add:System.Void(System.String,System.Object)",
+      "generatedMethodId": "Add_0_string_object_0"
+    },
+    {
+      "index": 129,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.TagList::Add:System.Void(System.String,System.Object)",
+      "generatedMethodId": "Add_0_string_object_1"
+    },
+    {
+      "index": 130,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.TagList::Add:System.Void(System.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E)",
+      "generatedMethodId": "Add_1_KeyValuePairstringobject_0"
+    },
+    {
+      "index": 131,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.TagList::CopyTo:System.Void(System.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E[],System.Int32)",
+      "generatedMethodId": "CopyTo_2_KeyValuePairstringobject_int_0"
+    },
+    {
+      "index": 132,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.TagList::CopyTo:System.Void(System.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E[],System.Int32)",
+      "generatedMethodId": "CopyTo_2_KeyValuePairstringobject_int_1"
+    },
+    {
+      "index": 133,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.TagList::CopyTo:System.Void(System.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E[],System.Int32)",
+      "generatedMethodId": "CopyTo_2_KeyValuePairstringobject_int_2"
+    },
+    {
+      "index": 134,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.TagList::CopyTo:System.Void(System.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E[],System.Int32)",
+      "generatedMethodId": "CopyTo_2_KeyValuePairstringobject_int_3"
+    },
+    {
+      "index": 135,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.TagList::Insert:System.Void(System.Int32,System.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E)",
+      "generatedMethodId": "Insert_3_int_KeyValuePairstringobject_0"
+    },
+    {
+      "index": 136,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.TagList::Insert:System.Void(System.Int32,System.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E)",
+      "generatedMethodId": "Insert_3_int_KeyValuePairstringobject_1"
+    },
+    {
+      "index": 137,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.TagList::RemoveAt:System.Void(System.Int32)",
+      "generatedMethodId": "RemoveAt_4_int_0"
+    },
+    {
+      "index": 138,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.TagList::RemoveAt:System.Void(System.Int32)",
+      "generatedMethodId": "RemoveAt_4_int_1"
+    },
+    {
+      "index": 139,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.TagList::Clear:System.Void()",
+      "generatedMethodId": "Clear_5__0"
+    },
+    {
+      "index": 140,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.TagList::Contains:System.Boolean(System.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E)",
+      "generatedMethodId": "Contains_6_KeyValuePairstringobject_0"
+    },
+    {
+      "index": 141,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.TagList::Remove:System.Boolean(System.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E)",
+      "generatedMethodId": "Remove_7_KeyValuePairstringobject_0"
+    },
+    {
+      "index": 142,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.TagList::GetEnumerator:System.Collections.Generic.IEnumerator\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E()",
+      "generatedMethodId": "GetEnumerator_8__0"
+    },
+    {
+      "index": 143,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.TagList::IndexOf:System.Int32(System.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E)",
+      "generatedMethodId": "IndexOf_9_KeyValuePairstringobject_0"
+    }
+  ]
+}

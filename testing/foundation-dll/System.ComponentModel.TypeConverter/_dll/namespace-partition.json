@@ -1,0 +1,1797 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.ComponentModel.TypeConverter",
+  "generatedAt": "2026-06-04T10:30:43.549088+00:00",
+  "partitionStrategy": "namespace",
+  "maxMethodsPerChunk": 500,
+  "totalChunks": 3,
+  "chunks": [
+    {
+      "slug": "component-model",
+      "namespaces": [
+        "System",
+        "System.ComponentModel"
+      ],
+      "methodCount": 333,
+      "methods": [
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.UriTypeConverter::CanConvertFrom:System.Boolean(System.ComponentModel.ITypeDescriptorContext,System.Type)",
+          "index": 0
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.UriTypeConverter::CanConvertTo:System.Boolean(System.ComponentModel.ITypeDescriptorContext,System.Type)",
+          "index": 1
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.UriTypeConverter::ConvertFrom:System.Object(System.ComponentModel.ITypeDescriptorContext,System.Globalization.CultureInfo,System.Object)",
+          "index": 2
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.UriTypeConverter::ConvertTo:System.Object(System.ComponentModel.ITypeDescriptorContext,System.Globalization.CultureInfo,System.Object,System.Type)",
+          "index": 3
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.UriTypeConverter::IsValid:System.Boolean(System.ComponentModel.ITypeDescriptorContext,System.Object)",
+          "index": 4
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.AddingNewEventHandler::BeginInvoke:System.IAsyncResult(System.Object,System.ComponentModel.AddingNewEventArgs,System.AsyncCallback,System.Object)",
+          "index": 5
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.AddingNewEventHandler::EndInvoke:System.Void(System.IAsyncResult)",
+          "index": 6
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.AddingNewEventHandler::Invoke:System.Void(System.Object,System.ComponentModel.AddingNewEventArgs)",
+          "index": 7
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.ArrayConverter::ConvertTo:System.Object(System.ComponentModel.ITypeDescriptorContext,System.Globalization.CultureInfo,System.Object,System.Type)",
+          "index": 8
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.ArrayConverter::GetProperties:System.ComponentModel.PropertyDescriptorCollection(System.ComponentModel.ITypeDescriptorContext,System.Object,System.Attribute[])",
+          "index": 9
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.ArrayConverter::GetPropertiesSupported:System.Boolean(System.ComponentModel.ITypeDescriptorContext)",
+          "index": 10
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.AttributeCollection::Contains:System.Boolean(System.Attribute)",
+          "index": 11
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.AttributeCollection::Contains:System.Boolean(System.Attribute[])",
+          "index": 12
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.AttributeCollection::CopyTo:System.Void(System.Array,System.Int32)",
+          "index": 13
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.AttributeCollection::FromExisting:System.ComponentModel.AttributeCollection(System.ComponentModel.AttributeCollection,System.Attribute[])",
+          "index": 14
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.AttributeCollection::GetEnumerator:System.Collections.IEnumerator()",
+          "index": 15
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.AttributeCollection::Matches:System.Boolean(System.Attribute)",
+          "index": 16
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.AttributeCollection::Matches:System.Boolean(System.Attribute[])",
+          "index": 17
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.BindableAttribute::IsDefaultAttribute:System.Boolean()",
+          "index": 18
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.BooleanConverter::CanConvertFrom:System.Boolean(System.ComponentModel.ITypeDescriptorContext,System.Type)",
+          "index": 19
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.BooleanConverter::ConvertFrom:System.Object(System.ComponentModel.ITypeDescriptorContext,System.Globalization.CultureInfo,System.Object)",
+          "index": 20
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.BooleanConverter::GetStandardValues:System.ComponentModel.TypeConverter+StandardValuesCollection(System.ComponentModel.ITypeDescriptorContext)",
+          "index": 21
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.BooleanConverter::GetStandardValuesExclusive:System.Boolean(System.ComponentModel.ITypeDescriptorContext)",
+          "index": 22
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.BooleanConverter::GetStandardValuesSupported:System.Boolean(System.ComponentModel.ITypeDescriptorContext)",
+          "index": 23
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.CancelEventHandler::BeginInvoke:System.IAsyncResult(System.Object,System.ComponentModel.CancelEventArgs,System.AsyncCallback,System.Object)",
+          "index": 24
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.CancelEventHandler::EndInvoke:System.Void(System.IAsyncResult)",
+          "index": 25
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.CancelEventHandler::Invoke:System.Void(System.Object,System.ComponentModel.CancelEventArgs)",
+          "index": 26
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.CharConverter::CanConvertFrom:System.Boolean(System.ComponentModel.ITypeDescriptorContext,System.Type)",
+          "index": 27
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.CharConverter::ConvertFrom:System.Object(System.ComponentModel.ITypeDescriptorContext,System.Globalization.CultureInfo,System.Object)",
+          "index": 28
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.CharConverter::ConvertTo:System.Object(System.ComponentModel.ITypeDescriptorContext,System.Globalization.CultureInfo,System.Object,System.Type)",
+          "index": 29
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.CollectionChangeEventHandler::BeginInvoke:System.IAsyncResult(System.Object,System.ComponentModel.CollectionChangeEventArgs,System.AsyncCallback,System.Object)",
+          "index": 30
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.CollectionChangeEventHandler::EndInvoke:System.Void(System.IAsyncResult)",
+          "index": 31
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.CollectionChangeEventHandler::Invoke:System.Void(System.Object,System.ComponentModel.CollectionChangeEventArgs)",
+          "index": 32
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.CollectionConverter::ConvertTo:System.Object(System.ComponentModel.ITypeDescriptorContext,System.Globalization.CultureInfo,System.Object,System.Type)",
+          "index": 33
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.CollectionConverter::GetProperties:System.ComponentModel.PropertyDescriptorCollection(System.ComponentModel.ITypeDescriptorContext,System.Object,System.Attribute[])",
+          "index": 34
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.ComponentConverter::GetProperties:System.ComponentModel.PropertyDescriptorCollection(System.ComponentModel.ITypeDescriptorContext,System.Object,System.Attribute[])",
+          "index": 35
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.ComponentConverter::GetPropertiesSupported:System.Boolean(System.ComponentModel.ITypeDescriptorContext)",
+          "index": 36
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.ComponentResourceManager::ApplyResources:System.Void(System.Object,System.String)",
+          "index": 37
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.ComponentResourceManager::ApplyResources:System.Void(System.Object,System.String,System.Globalization.CultureInfo)",
+          "index": 38
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.ComponentResourceManager::ApplyResourcesToRegisteredType:System.Void(System.Object,System.String,System.Globalization.CultureInfo)",
+          "index": 39
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Container::Add:System.Void(System.ComponentModel.IComponent)",
+          "index": 40
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Container::Add:System.Void(System.ComponentModel.IComponent,System.String)",
+          "index": 41
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Container::Dispose:System.Void()",
+          "index": 42
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Container::Remove:System.Void(System.ComponentModel.IComponent)",
+          "index": 43
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.CultureInfoConverter::CanConvertFrom:System.Boolean(System.ComponentModel.ITypeDescriptorContext,System.Type)",
+          "index": 44
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.CultureInfoConverter::CanConvertTo:System.Boolean(System.ComponentModel.ITypeDescriptorContext,System.Type)",
+          "index": 45
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.CultureInfoConverter::ConvertFrom:System.Object(System.ComponentModel.ITypeDescriptorContext,System.Globalization.CultureInfo,System.Object)",
+          "index": 46
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.CultureInfoConverter::ConvertTo:System.Object(System.ComponentModel.ITypeDescriptorContext,System.Globalization.CultureInfo,System.Object,System.Type)",
+          "index": 47
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.CultureInfoConverter::GetStandardValues:System.ComponentModel.TypeConverter+StandardValuesCollection(System.ComponentModel.ITypeDescriptorContext)",
+          "index": 48
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.CultureInfoConverter::GetStandardValuesExclusive:System.Boolean(System.ComponentModel.ITypeDescriptorContext)",
+          "index": 49
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.CultureInfoConverter::GetStandardValuesSupported:System.Boolean(System.ComponentModel.ITypeDescriptorContext)",
+          "index": 50
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.DataObjectAttribute::IsDefaultAttribute:System.Boolean()",
+          "index": 51
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.DataObjectMethodAttribute::Match:System.Boolean(System.Object)",
+          "index": 52
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.DateOnlyConverter::CanConvertFrom:System.Boolean(System.ComponentModel.ITypeDescriptorContext,System.Type)",
+          "index": 53
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.DateOnlyConverter::CanConvertTo:System.Boolean(System.ComponentModel.ITypeDescriptorContext,System.Type)",
+          "index": 54
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.DateOnlyConverter::ConvertFrom:System.Object(System.ComponentModel.ITypeDescriptorContext,System.Globalization.CultureInfo,System.Object)",
+          "index": 55
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.DateOnlyConverter::ConvertTo:System.Object(System.ComponentModel.ITypeDescriptorContext,System.Globalization.CultureInfo,System.Object,System.Type)",
+          "index": 56
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.DateTimeConverter::CanConvertFrom:System.Boolean(System.ComponentModel.ITypeDescriptorContext,System.Type)",
+          "index": 57
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.DateTimeConverter::CanConvertTo:System.Boolean(System.ComponentModel.ITypeDescriptorContext,System.Type)",
+          "index": 58
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.DateTimeConverter::ConvertFrom:System.Object(System.ComponentModel.ITypeDescriptorContext,System.Globalization.CultureInfo,System.Object)",
+          "index": 59
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.DateTimeConverter::ConvertTo:System.Object(System.ComponentModel.ITypeDescriptorContext,System.Globalization.CultureInfo,System.Object,System.Type)",
+          "index": 60
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.DateTimeOffsetConverter::CanConvertFrom:System.Boolean(System.ComponentModel.ITypeDescriptorContext,System.Type)",
+          "index": 61
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.DateTimeOffsetConverter::CanConvertTo:System.Boolean(System.ComponentModel.ITypeDescriptorContext,System.Type)",
+          "index": 62
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.DateTimeOffsetConverter::ConvertFrom:System.Object(System.ComponentModel.ITypeDescriptorContext,System.Globalization.CultureInfo,System.Object)",
+          "index": 63
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.DateTimeOffsetConverter::ConvertTo:System.Object(System.ComponentModel.ITypeDescriptorContext,System.Globalization.CultureInfo,System.Object,System.Type)",
+          "index": 64
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.DecimalConverter::CanConvertTo:System.Boolean(System.ComponentModel.ITypeDescriptorContext,System.Type)",
+          "index": 65
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.DecimalConverter::ConvertTo:System.Object(System.ComponentModel.ITypeDescriptorContext,System.Globalization.CultureInfo,System.Object,System.Type)",
+          "index": 66
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.DesignTimeVisibleAttribute::IsDefaultAttribute:System.Boolean()",
+          "index": 67
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.EnumConverter::CanConvertFrom:System.Boolean(System.ComponentModel.ITypeDescriptorContext,System.Type)",
+          "index": 68
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.EnumConverter::CanConvertTo:System.Boolean(System.ComponentModel.ITypeDescriptorContext,System.Type)",
+          "index": 69
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.EnumConverter::ConvertFrom:System.Object(System.ComponentModel.ITypeDescriptorContext,System.Globalization.CultureInfo,System.Object)",
+          "index": 70
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.EnumConverter::ConvertTo:System.Object(System.ComponentModel.ITypeDescriptorContext,System.Globalization.CultureInfo,System.Object,System.Type)",
+          "index": 71
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.EnumConverter::GetStandardValues:System.ComponentModel.TypeConverter+StandardValuesCollection(System.ComponentModel.ITypeDescriptorContext)",
+          "index": 72
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.EnumConverter::GetStandardValuesExclusive:System.Boolean(System.ComponentModel.ITypeDescriptorContext)",
+          "index": 73
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.EnumConverter::GetStandardValuesSupported:System.Boolean(System.ComponentModel.ITypeDescriptorContext)",
+          "index": 74
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.EnumConverter::IsValid:System.Boolean(System.ComponentModel.ITypeDescriptorContext,System.Object)",
+          "index": 75
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.EventDescriptorCollection::Add:System.Int32(System.ComponentModel.EventDescriptor)",
+          "index": 76
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.EventDescriptorCollection::Clear:System.Void()",
+          "index": 77
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.EventDescriptorCollection::Contains:System.Boolean(System.ComponentModel.EventDescriptor)",
+          "index": 78
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.EventDescriptorCollection::Find:System.ComponentModel.EventDescriptor(System.String,System.Boolean)",
+          "index": 79
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.EventDescriptorCollection::GetEnumerator:System.Collections.IEnumerator()",
+          "index": 80
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.EventDescriptorCollection::IndexOf:System.Int32(System.ComponentModel.EventDescriptor)",
+          "index": 81
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.EventDescriptorCollection::Insert:System.Void(System.Int32,System.ComponentModel.EventDescriptor)",
+          "index": 82
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.EventDescriptorCollection::Remove:System.Void(System.ComponentModel.EventDescriptor)",
+          "index": 83
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.EventDescriptorCollection::RemoveAt:System.Void(System.Int32)",
+          "index": 84
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.EventDescriptorCollection::Sort:System.ComponentModel.EventDescriptorCollection()",
+          "index": 85
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.EventDescriptorCollection::Sort:System.ComponentModel.EventDescriptorCollection(System.Collections.IComparer)",
+          "index": 86
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.EventDescriptorCollection::Sort:System.ComponentModel.EventDescriptorCollection(System.String[])",
+          "index": 87
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.EventDescriptorCollection::Sort:System.ComponentModel.EventDescriptorCollection(System.String[],System.Collections.IComparer)",
+          "index": 88
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.ExpandableObjectConverter::GetProperties:System.ComponentModel.PropertyDescriptorCollection(System.ComponentModel.ITypeDescriptorContext,System.Object,System.Attribute[])",
+          "index": 89
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.ExpandableObjectConverter::GetPropertiesSupported:System.Boolean(System.ComponentModel.ITypeDescriptorContext)",
+          "index": 90
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.ExtenderProvidedPropertyAttribute::IsDefaultAttribute:System.Boolean()",
+          "index": 91
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.GuidConverter::CanConvertFrom:System.Boolean(System.ComponentModel.ITypeDescriptorContext,System.Type)",
+          "index": 92
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.GuidConverter::CanConvertTo:System.Boolean(System.ComponentModel.ITypeDescriptorContext,System.Type)",
+          "index": 93
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.GuidConverter::ConvertFrom:System.Object(System.ComponentModel.ITypeDescriptorContext,System.Globalization.CultureInfo,System.Object)",
+          "index": 94
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.GuidConverter::ConvertTo:System.Object(System.ComponentModel.ITypeDescriptorContext,System.Globalization.CultureInfo,System.Object,System.Type)",
+          "index": 95
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.HandledEventHandler::BeginInvoke:System.IAsyncResult(System.Object,System.ComponentModel.HandledEventArgs,System.AsyncCallback,System.Object)",
+          "index": 96
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.HandledEventHandler::EndInvoke:System.Void(System.IAsyncResult)",
+          "index": 97
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.HandledEventHandler::Invoke:System.Void(System.Object,System.ComponentModel.HandledEventArgs)",
+          "index": 98
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.InheritanceAttribute::IsDefaultAttribute:System.Boolean()",
+          "index": 99
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.LicenseContext::GetSavedLicenseKey:System.String(System.Type,System.Reflection.Assembly)",
+          "index": 100
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.LicenseContext::GetService:System.Object(System.Type)",
+          "index": 101
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.LicenseContext::SetSavedLicenseKey:System.Void(System.Type,System.String)",
+          "index": 102
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.LicenseException::GetObjectData:System.Void(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)",
+          "index": 103
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.LicenseManager::CreateWithContext:System.Object(System.Type,System.ComponentModel.LicenseContext)",
+          "index": 104
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.LicenseManager::CreateWithContext:System.Object(System.Type,System.ComponentModel.LicenseContext,System.Object[])",
+          "index": 105
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.LicenseManager::IsLicensed:System.Boolean(System.Type)",
+          "index": 106
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.LicenseManager::IsValid:System.Boolean(System.Type)",
+          "index": 107
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.LicenseManager::IsValid:System.Boolean(System.Type,System.Object,System.ComponentModel.License)",
+          "index": 108
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.LicenseManager::LockContext:System.Void(System.Object)",
+          "index": 109
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.LicenseManager::UnlockContext:System.Void(System.Object)",
+          "index": 110
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.LicenseManager::Validate:System.Void(System.Type)",
+          "index": 111
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.LicenseManager::Validate:System.ComponentModel.License(System.Type,System.Object)",
+          "index": 112
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.LicFileLicenseProvider::GetLicense:System.ComponentModel.License(System.ComponentModel.LicenseContext,System.Type,System.Object,System.Boolean)",
+          "index": 113
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.ListBindableAttribute::IsDefaultAttribute:System.Boolean()",
+          "index": 114
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.ListChangedEventHandler::BeginInvoke:System.IAsyncResult(System.Object,System.ComponentModel.ListChangedEventArgs,System.AsyncCallback,System.Object)",
+          "index": 115
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.ListChangedEventHandler::EndInvoke:System.Void(System.IAsyncResult)",
+          "index": 116
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.ListChangedEventHandler::Invoke:System.Void(System.Object,System.ComponentModel.ListChangedEventArgs)",
+          "index": 117
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.ListSortDescriptionCollection::Contains:System.Boolean(System.Object)",
+          "index": 118
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.ListSortDescriptionCollection::CopyTo:System.Void(System.Array,System.Int32)",
+          "index": 119
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.ListSortDescriptionCollection::IndexOf:System.Int32(System.Object)",
+          "index": 120
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.MarshalByValueComponent::Dispose:System.Void()",
+          "index": 121
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.MarshalByValueComponent::GetService:System.Object(System.Type)",
+          "index": 122
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.MaskedTextProvider::Add:System.Boolean(System.Char)",
+          "index": 123
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.MaskedTextProvider::Add:System.Boolean(System.Char,System.Int32,System.ComponentModel.MaskedTextResultHint)",
+          "index": 124
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.MaskedTextProvider::Add:System.Boolean(System.String)",
+          "index": 125
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.MaskedTextProvider::Add:System.Boolean(System.String,System.Int32,System.ComponentModel.MaskedTextResultHint)",
+          "index": 126
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.MaskedTextProvider::Clear:System.Void()",
+          "index": 127
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.MaskedTextProvider::Clear:System.Void(System.ComponentModel.MaskedTextResultHint)",
+          "index": 128
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.MaskedTextProvider::Clone:System.Object()",
+          "index": 129
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.MaskedTextProvider::FindAssignedEditPositionFrom:System.Int32(System.Int32,System.Boolean)",
+          "index": 130
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.MaskedTextProvider::FindAssignedEditPositionInRange:System.Int32(System.Int32,System.Int32,System.Boolean)",
+          "index": 131
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.MaskedTextProvider::FindEditPositionFrom:System.Int32(System.Int32,System.Boolean)",
+          "index": 132
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.MaskedTextProvider::FindEditPositionInRange:System.Int32(System.Int32,System.Int32,System.Boolean)",
+          "index": 133
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.MaskedTextProvider::FindNonEditPositionFrom:System.Int32(System.Int32,System.Boolean)",
+          "index": 134
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.MaskedTextProvider::FindNonEditPositionInRange:System.Int32(System.Int32,System.Int32,System.Boolean)",
+          "index": 135
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.MaskedTextProvider::FindUnassignedEditPositionFrom:System.Int32(System.Int32,System.Boolean)",
+          "index": 136
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.MaskedTextProvider::FindUnassignedEditPositionInRange:System.Int32(System.Int32,System.Int32,System.Boolean)",
+          "index": 137
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.MaskedTextProvider::GetOperationResultFromHint:System.Boolean(System.ComponentModel.MaskedTextResultHint)",
+          "index": 138
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.MaskedTextProvider::InsertAt:System.Boolean(System.Char,System.Int32)",
+          "index": 139
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.MaskedTextProvider::InsertAt:System.Boolean(System.Char,System.Int32,System.Int32,System.ComponentModel.MaskedTextResultHint)",
+          "index": 140
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.MaskedTextProvider::InsertAt:System.Boolean(System.String,System.Int32)",
+          "index": 141
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.MaskedTextProvider::InsertAt:System.Boolean(System.String,System.Int32,System.Int32,System.ComponentModel.MaskedTextResultHint)",
+          "index": 142
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.MaskedTextProvider::IsAvailablePosition:System.Boolean(System.Int32)",
+          "index": 143
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.MaskedTextProvider::IsEditPosition:System.Boolean(System.Int32)",
+          "index": 144
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.MaskedTextProvider::IsValidInputChar:System.Boolean(System.Char)",
+          "index": 145
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.MaskedTextProvider::IsValidMaskChar:System.Boolean(System.Char)",
+          "index": 146
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.MaskedTextProvider::IsValidPasswordChar:System.Boolean(System.Char)",
+          "index": 147
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.MaskedTextProvider::Remove:System.Boolean()",
+          "index": 148
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.MaskedTextProvider::Remove:System.Boolean(System.Int32,System.ComponentModel.MaskedTextResultHint)",
+          "index": 149
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.MaskedTextProvider::RemoveAt:System.Boolean(System.Int32)",
+          "index": 150
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.MaskedTextProvider::RemoveAt:System.Boolean(System.Int32,System.Int32)",
+          "index": 151
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.MaskedTextProvider::RemoveAt:System.Boolean(System.Int32,System.Int32,System.Int32,System.ComponentModel.MaskedTextResultHint)",
+          "index": 152
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.MaskedTextProvider::Replace:System.Boolean(System.Char,System.Int32)",
+          "index": 153
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.MaskedTextProvider::Replace:System.Boolean(System.Char,System.Int32,System.Int32,System.Int32,System.ComponentModel.MaskedTextResultHint)",
+          "index": 154
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.MaskedTextProvider::Replace:System.Boolean(System.Char,System.Int32,System.Int32,System.ComponentModel.MaskedTextResultHint)",
+          "index": 155
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.MaskedTextProvider::Replace:System.Boolean(System.String,System.Int32)",
+          "index": 156
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.MaskedTextProvider::Replace:System.Boolean(System.String,System.Int32,System.Int32,System.Int32,System.ComponentModel.MaskedTextResultHint)",
+          "index": 157
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.MaskedTextProvider::Replace:System.Boolean(System.String,System.Int32,System.Int32,System.ComponentModel.MaskedTextResultHint)",
+          "index": 158
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.MaskedTextProvider::Set:System.Boolean(System.String)",
+          "index": 159
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.MaskedTextProvider::Set:System.Boolean(System.String,System.Int32,System.ComponentModel.MaskedTextResultHint)",
+          "index": 160
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.MaskedTextProvider::ToDisplayString:System.String()",
+          "index": 161
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.MaskedTextProvider::VerifyChar:System.Boolean(System.Char,System.Int32,System.ComponentModel.MaskedTextResultHint)",
+          "index": 162
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.MaskedTextProvider::VerifyEscapeChar:System.Boolean(System.Char,System.Int32)",
+          "index": 163
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.MaskedTextProvider::VerifyString:System.Boolean(System.String)",
+          "index": 164
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.MaskedTextProvider::VerifyString:System.Boolean(System.String,System.Int32,System.ComponentModel.MaskedTextResultHint)",
+          "index": 165
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.MultilineStringConverter::ConvertTo:System.Object(System.ComponentModel.ITypeDescriptorContext,System.Globalization.CultureInfo,System.Object,System.Type)",
+          "index": 166
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.MultilineStringConverter::GetProperties:System.ComponentModel.PropertyDescriptorCollection(System.ComponentModel.ITypeDescriptorContext,System.Object,System.Attribute[])",
+          "index": 167
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.MultilineStringConverter::GetPropertiesSupported:System.Boolean(System.ComponentModel.ITypeDescriptorContext)",
+          "index": 168
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.NullableConverter::CanConvertFrom:System.Boolean(System.ComponentModel.ITypeDescriptorContext,System.Type)",
+          "index": 169
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.NullableConverter::CanConvertTo:System.Boolean(System.ComponentModel.ITypeDescriptorContext,System.Type)",
+          "index": 170
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.NullableConverter::ConvertFrom:System.Object(System.ComponentModel.ITypeDescriptorContext,System.Globalization.CultureInfo,System.Object)",
+          "index": 171
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.NullableConverter::ConvertTo:System.Object(System.ComponentModel.ITypeDescriptorContext,System.Globalization.CultureInfo,System.Object,System.Type)",
+          "index": 172
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.NullableConverter::CreateInstance:System.Object(System.ComponentModel.ITypeDescriptorContext,System.Collections.IDictionary)",
+          "index": 173
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.NullableConverter::GetCreateInstanceSupported:System.Boolean(System.ComponentModel.ITypeDescriptorContext)",
+          "index": 174
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.NullableConverter::GetProperties:System.ComponentModel.PropertyDescriptorCollection(System.ComponentModel.ITypeDescriptorContext,System.Object,System.Attribute[])",
+          "index": 175
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.NullableConverter::GetPropertiesSupported:System.Boolean(System.ComponentModel.ITypeDescriptorContext)",
+          "index": 176
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.NullableConverter::GetStandardValues:System.ComponentModel.TypeConverter+StandardValuesCollection(System.ComponentModel.ITypeDescriptorContext)",
+          "index": 177
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.NullableConverter::GetStandardValuesExclusive:System.Boolean(System.ComponentModel.ITypeDescriptorContext)",
+          "index": 178
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.NullableConverter::GetStandardValuesSupported:System.Boolean(System.ComponentModel.ITypeDescriptorContext)",
+          "index": 179
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.NullableConverter::IsValid:System.Boolean(System.ComponentModel.ITypeDescriptorContext,System.Object)",
+          "index": 180
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.PasswordPropertyTextAttribute::IsDefaultAttribute:System.Boolean()",
+          "index": 181
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.PropertyDescriptorCollection::Add:System.Int32(System.ComponentModel.PropertyDescriptor)",
+          "index": 182
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.PropertyDescriptorCollection::Clear:System.Void()",
+          "index": 183
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.PropertyDescriptorCollection::Contains:System.Boolean(System.ComponentModel.PropertyDescriptor)",
+          "index": 184
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.PropertyDescriptorCollection::CopyTo:System.Void(System.Array,System.Int32)",
+          "index": 185
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.PropertyDescriptorCollection::Find:System.ComponentModel.PropertyDescriptor(System.String,System.Boolean)",
+          "index": 186
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.PropertyDescriptorCollection::GetEnumerator:System.Collections.IEnumerator()",
+          "index": 187
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.PropertyDescriptorCollection::IndexOf:System.Int32(System.ComponentModel.PropertyDescriptor)",
+          "index": 188
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.PropertyDescriptorCollection::Insert:System.Void(System.Int32,System.ComponentModel.PropertyDescriptor)",
+          "index": 189
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.PropertyDescriptorCollection::Remove:System.Void(System.ComponentModel.PropertyDescriptor)",
+          "index": 190
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.PropertyDescriptorCollection::RemoveAt:System.Void(System.Int32)",
+          "index": 191
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.PropertyDescriptorCollection::Sort:System.ComponentModel.PropertyDescriptorCollection()",
+          "index": 192
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.PropertyDescriptorCollection::Sort:System.ComponentModel.PropertyDescriptorCollection(System.Collections.IComparer)",
+          "index": 193
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.PropertyDescriptorCollection::Sort:System.ComponentModel.PropertyDescriptorCollection(System.String[])",
+          "index": 194
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.PropertyDescriptorCollection::Sort:System.ComponentModel.PropertyDescriptorCollection(System.String[],System.Collections.IComparer)",
+          "index": 195
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.RecommendedAsConfigurableAttribute::IsDefaultAttribute:System.Boolean()",
+          "index": 196
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.ReferenceConverter::CanConvertFrom:System.Boolean(System.ComponentModel.ITypeDescriptorContext,System.Type)",
+          "index": 197
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.ReferenceConverter::ConvertFrom:System.Object(System.ComponentModel.ITypeDescriptorContext,System.Globalization.CultureInfo,System.Object)",
+          "index": 198
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.ReferenceConverter::ConvertTo:System.Object(System.ComponentModel.ITypeDescriptorContext,System.Globalization.CultureInfo,System.Object,System.Type)",
+          "index": 199
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.ReferenceConverter::GetStandardValues:System.ComponentModel.TypeConverter+StandardValuesCollection(System.ComponentModel.ITypeDescriptorContext)",
+          "index": 200
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.ReferenceConverter::GetStandardValuesExclusive:System.Boolean(System.ComponentModel.ITypeDescriptorContext)",
+          "index": 201
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.ReferenceConverter::GetStandardValuesSupported:System.Boolean(System.ComponentModel.ITypeDescriptorContext)",
+          "index": 202
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.RefreshEventHandler::BeginInvoke:System.IAsyncResult(System.ComponentModel.RefreshEventArgs,System.AsyncCallback,System.Object)",
+          "index": 203
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.RefreshEventHandler::EndInvoke:System.Void(System.IAsyncResult)",
+          "index": 204
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.RefreshEventHandler::Invoke:System.Void(System.ComponentModel.RefreshEventArgs)",
+          "index": 205
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.RunInstallerAttribute::IsDefaultAttribute:System.Boolean()",
+          "index": 206
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.StringConverter::CanConvertFrom:System.Boolean(System.ComponentModel.ITypeDescriptorContext,System.Type)",
+          "index": 207
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.StringConverter::ConvertFrom:System.Object(System.ComponentModel.ITypeDescriptorContext,System.Globalization.CultureInfo,System.Object)",
+          "index": 208
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.SyntaxCheck::CheckMachineName:System.Boolean(System.String)",
+          "index": 209
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.SyntaxCheck::CheckPath:System.Boolean(System.String)",
+          "index": 210
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.SyntaxCheck::CheckRootedPath:System.Boolean(System.String)",
+          "index": 211
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.TimeOnlyConverter::CanConvertFrom:System.Boolean(System.ComponentModel.ITypeDescriptorContext,System.Type)",
+          "index": 212
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.TimeOnlyConverter::CanConvertTo:System.Boolean(System.ComponentModel.ITypeDescriptorContext,System.Type)",
+          "index": 213
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.TimeOnlyConverter::ConvertFrom:System.Object(System.ComponentModel.ITypeDescriptorContext,System.Globalization.CultureInfo,System.Object)",
+          "index": 214
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.TimeOnlyConverter::ConvertTo:System.Object(System.ComponentModel.ITypeDescriptorContext,System.Globalization.CultureInfo,System.Object,System.Type)",
+          "index": 215
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.TimeSpanConverter::CanConvertFrom:System.Boolean(System.ComponentModel.ITypeDescriptorContext,System.Type)",
+          "index": 216
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.TimeSpanConverter::CanConvertTo:System.Boolean(System.ComponentModel.ITypeDescriptorContext,System.Type)",
+          "index": 217
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.TimeSpanConverter::ConvertFrom:System.Object(System.ComponentModel.ITypeDescriptorContext,System.Globalization.CultureInfo,System.Object)",
+          "index": 218
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.TimeSpanConverter::ConvertTo:System.Object(System.ComponentModel.ITypeDescriptorContext,System.Globalization.CultureInfo,System.Object,System.Type)",
+          "index": 219
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.ToolboxItemAttribute::IsDefaultAttribute:System.Boolean()",
+          "index": 220
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.ToolboxItemFilterAttribute::Match:System.Boolean(System.Object)",
+          "index": 221
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.TypeConverter::CanConvertFrom:System.Boolean(System.ComponentModel.ITypeDescriptorContext,System.Type)",
+          "index": 222
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.TypeConverter::CanConvertFrom:System.Boolean(System.Type)",
+          "index": 223
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.TypeConverter::CanConvertTo:System.Boolean(System.ComponentModel.ITypeDescriptorContext,System.Type)",
+          "index": 224
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.TypeConverter::CanConvertTo:System.Boolean(System.Type)",
+          "index": 225
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.TypeConverter::ConvertFrom:System.Object(System.ComponentModel.ITypeDescriptorContext,System.Globalization.CultureInfo,System.Object)",
+          "index": 226
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.TypeConverter::ConvertFrom:System.Object(System.Object)",
+          "index": 227
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.TypeConverter::ConvertFromInvariantString:System.Object(System.ComponentModel.ITypeDescriptorContext,System.String)",
+          "index": 228
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.TypeConverter::ConvertFromInvariantString:System.Object(System.String)",
+          "index": 229
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.TypeConverter::ConvertFromString:System.Object(System.ComponentModel.ITypeDescriptorContext,System.Globalization.CultureInfo,System.String)",
+          "index": 230
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.TypeConverter::ConvertFromString:System.Object(System.ComponentModel.ITypeDescriptorContext,System.String)",
+          "index": 231
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.TypeConverter::ConvertFromString:System.Object(System.String)",
+          "index": 232
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.TypeConverter::ConvertTo:System.Object(System.ComponentModel.ITypeDescriptorContext,System.Globalization.CultureInfo,System.Object,System.Type)",
+          "index": 233
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.TypeConverter::ConvertTo:System.Object(System.Object,System.Type)",
+          "index": 234
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.TypeConverter::ConvertToInvariantString:System.String(System.ComponentModel.ITypeDescriptorContext,System.Object)",
+          "index": 235
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.TypeConverter::ConvertToInvariantString:System.String(System.Object)",
+          "index": 236
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.TypeConverter::ConvertToString:System.String(System.ComponentModel.ITypeDescriptorContext,System.Globalization.CultureInfo,System.Object)",
+          "index": 237
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.TypeConverter::ConvertToString:System.String(System.ComponentModel.ITypeDescriptorContext,System.Object)",
+          "index": 238
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.TypeConverter::ConvertToString:System.String(System.Object)",
+          "index": 239
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.TypeConverter::CreateInstance:System.Object(System.Collections.IDictionary)",
+          "index": 240
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.TypeConverter::CreateInstance:System.Object(System.ComponentModel.ITypeDescriptorContext,System.Collections.IDictionary)",
+          "index": 241
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.TypeConverter::GetCreateInstanceSupported:System.Boolean()",
+          "index": 242
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.TypeConverter::GetCreateInstanceSupported:System.Boolean(System.ComponentModel.ITypeDescriptorContext)",
+          "index": 243
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.TypeConverter::GetProperties:System.ComponentModel.PropertyDescriptorCollection(System.ComponentModel.ITypeDescriptorContext,System.Object)",
+          "index": 244
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.TypeConverter::GetProperties:System.ComponentModel.PropertyDescriptorCollection(System.ComponentModel.ITypeDescriptorContext,System.Object,System.Attribute[])",
+          "index": 245
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.TypeConverter::GetProperties:System.ComponentModel.PropertyDescriptorCollection(System.Object)",
+          "index": 246
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.TypeConverter::GetPropertiesSupported:System.Boolean()",
+          "index": 247
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.TypeConverter::GetPropertiesSupported:System.Boolean(System.ComponentModel.ITypeDescriptorContext)",
+          "index": 248
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.TypeConverter::GetStandardValues:System.Collections.ICollection()",
+          "index": 249
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.TypeConverter::GetStandardValues:System.ComponentModel.TypeConverter+StandardValuesCollection(System.ComponentModel.ITypeDescriptorContext)",
+          "index": 250
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.TypeConverter::GetStandardValuesExclusive:System.Boolean()",
+          "index": 251
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.TypeConverter::GetStandardValuesExclusive:System.Boolean(System.ComponentModel.ITypeDescriptorContext)",
+          "index": 252
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.TypeConverter::GetStandardValuesSupported:System.Boolean()",
+          "index": 253
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.TypeConverter::GetStandardValuesSupported:System.Boolean(System.ComponentModel.ITypeDescriptorContext)",
+          "index": 254
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.TypeConverter::IsValid:System.Boolean(System.ComponentModel.ITypeDescriptorContext,System.Object)",
+          "index": 255
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.TypeConverter::IsValid:System.Boolean(System.Object)",
+          "index": 256
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.TypeConverter+StandardValuesCollection::CopyTo:System.Void(System.Array,System.Int32)",
+          "index": 257
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.TypeConverter+StandardValuesCollection::GetEnumerator:System.Collections.IEnumerator()",
+          "index": 258
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.TypeDescriptor::AddAttributes:System.ComponentModel.TypeDescriptionProvider(System.Object,System.Attribute[])",
+          "index": 259
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.TypeDescriptor::AddAttributes:System.ComponentModel.TypeDescriptionProvider(System.Type,System.Attribute[])",
+          "index": 260
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.TypeDescriptor::AddEditorTable:System.Void(System.Type,System.Collections.Hashtable)",
+          "index": 261
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.TypeDescriptor::AddProvider:System.Void(System.ComponentModel.TypeDescriptionProvider,System.Object)",
+          "index": 262
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.TypeDescriptor::AddProvider:System.Void(System.ComponentModel.TypeDescriptionProvider,System.Type)",
+          "index": 263
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.TypeDescriptor::AddProviderTransparent:System.Void(System.ComponentModel.TypeDescriptionProvider,System.Object)",
+          "index": 264
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.TypeDescriptor::AddProviderTransparent:System.Void(System.ComponentModel.TypeDescriptionProvider,System.Type)",
+          "index": 265
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.TypeDescriptor::CreateAssociation:System.Void(System.Object,System.Object)",
+          "index": 266
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.TypeDescriptor::CreateDesigner:System.ComponentModel.Design.IDesigner(System.ComponentModel.IComponent,System.Type)",
+          "index": 267
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.TypeDescriptor::CreateEvent:System.ComponentModel.EventDescriptor(System.Type,System.ComponentModel.EventDescriptor,System.Attribute[])",
+          "index": 268
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.TypeDescriptor::CreateEvent:System.ComponentModel.EventDescriptor(System.Type,System.String,System.Type,System.Attribute[])",
+          "index": 269
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.TypeDescriptor::CreateInstance:System.Object(System.IServiceProvider,System.Type,System.Type[],System.Object[])",
+          "index": 270
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.TypeDescriptor::CreateProperty:System.ComponentModel.PropertyDescriptor(System.Type,System.ComponentModel.PropertyDescriptor,System.Attribute[])",
+          "index": 271
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.TypeDescriptor::CreateProperty:System.ComponentModel.PropertyDescriptor(System.Type,System.String,System.Type,System.Attribute[])",
+          "index": 272
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.TypeDescriptor::GetAssociation:System.Object(System.Type,System.Object)",
+          "index": 273
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.TypeDescriptor::GetAttributes:System.ComponentModel.AttributeCollection(System.Object)",
+          "index": 274
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.TypeDescriptor::GetAttributes:System.ComponentModel.AttributeCollection(System.Object,System.Boolean)",
+          "index": 275
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.TypeDescriptor::GetAttributes:System.ComponentModel.AttributeCollection(System.Type)",
+          "index": 276
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.TypeDescriptor::GetClassName:System.String(System.Object)",
+          "index": 277
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.TypeDescriptor::GetClassName:System.String(System.Object,System.Boolean)",
+          "index": 278
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.TypeDescriptor::GetClassName:System.String(System.Type)",
+          "index": 279
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.TypeDescriptor::GetComponentName:System.String(System.Object)",
+          "index": 280
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.TypeDescriptor::GetComponentName:System.String(System.Object,System.Boolean)",
+          "index": 281
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.TypeDescriptor::GetConverter:System.ComponentModel.TypeConverter(System.Object)",
+          "index": 282
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.TypeDescriptor::GetConverter:System.ComponentModel.TypeConverter(System.Object,System.Boolean)",
+          "index": 283
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.TypeDescriptor::GetConverter:System.ComponentModel.TypeConverter(System.Type)",
+          "index": 284
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.TypeDescriptor::GetConverterFromRegisteredType:System.ComponentModel.TypeConverter(System.Object)",
+          "index": 285
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.TypeDescriptor::GetConverterFromRegisteredType:System.ComponentModel.TypeConverter(System.Type)",
+          "index": 286
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.TypeDescriptor::GetDefaultEvent:System.ComponentModel.EventDescriptor(System.Object)",
+          "index": 287
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.TypeDescriptor::GetDefaultEvent:System.ComponentModel.EventDescriptor(System.Object,System.Boolean)",
+          "index": 288
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.TypeDescriptor::GetDefaultEvent:System.ComponentModel.EventDescriptor(System.Type)",
+          "index": 289
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.TypeDescriptor::GetDefaultProperty:System.ComponentModel.PropertyDescriptor(System.Object)",
+          "index": 290
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.TypeDescriptor::GetDefaultProperty:System.ComponentModel.PropertyDescriptor(System.Object,System.Boolean)",
+          "index": 291
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.TypeDescriptor::GetDefaultProperty:System.ComponentModel.PropertyDescriptor(System.Type)",
+          "index": 292
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.TypeDescriptor::GetEditor:System.Object(System.Object,System.Type)",
+          "index": 293
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.TypeDescriptor::GetEditor:System.Object(System.Object,System.Type,System.Boolean)",
+          "index": 294
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.TypeDescriptor::GetEditor:System.Object(System.Type,System.Type)",
+          "index": 295
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.TypeDescriptor::GetEvents:System.ComponentModel.EventDescriptorCollection(System.Object)",
+          "index": 296
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.TypeDescriptor::GetEvents:System.ComponentModel.EventDescriptorCollection(System.Object,System.Attribute[])",
+          "index": 297
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.TypeDescriptor::GetEvents:System.ComponentModel.EventDescriptorCollection(System.Object,System.Attribute[],System.Boolean)",
+          "index": 298
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.TypeDescriptor::GetEvents:System.ComponentModel.EventDescriptorCollection(System.Object,System.Boolean)",
+          "index": 299
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.TypeDescriptor::GetEvents:System.ComponentModel.EventDescriptorCollection(System.Type)",
+          "index": 300
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.TypeDescriptor::GetEvents:System.ComponentModel.EventDescriptorCollection(System.Type,System.Attribute[])",
+          "index": 301
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.TypeDescriptor::GetEventsFromRegisteredType:System.ComponentModel.EventDescriptorCollection(System.Type)",
+          "index": 302
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.TypeDescriptor::GetFullComponentName:System.String(System.Object)",
+          "index": 303
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.TypeDescriptor::GetProperties:System.ComponentModel.PropertyDescriptorCollection(System.Object)",
+          "index": 304
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.TypeDescriptor::GetProperties:System.ComponentModel.PropertyDescriptorCollection(System.Object,System.Attribute[])",
+          "index": 305
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.TypeDescriptor::GetProperties:System.ComponentModel.PropertyDescriptorCollection(System.Object,System.Attribute[],System.Boolean)",
+          "index": 306
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.TypeDescriptor::GetProperties:System.ComponentModel.PropertyDescriptorCollection(System.Object,System.Boolean)",
+          "index": 307
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.TypeDescriptor::GetProperties:System.ComponentModel.PropertyDescriptorCollection(System.Type)",
+          "index": 308
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.TypeDescriptor::GetProperties:System.ComponentModel.PropertyDescriptorCollection(System.Type,System.Attribute[])",
+          "index": 309
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.TypeDescriptor::GetPropertiesFromRegisteredType:System.ComponentModel.PropertyDescriptorCollection(System.Type)",
+          "index": 310
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.TypeDescriptor::GetPropertiesFromRegisteredType:System.ComponentModel.PropertyDescriptorCollection(System.Object)",
+          "index": 311
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.TypeDescriptor::GetProvider:System.ComponentModel.TypeDescriptionProvider(System.Object)",
+          "index": 312
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.TypeDescriptor::GetProvider:System.ComponentModel.TypeDescriptionProvider(System.Type)",
+          "index": 313
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.TypeDescriptor::GetReflectionType:System.Type(System.Object)",
+          "index": 314
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.TypeDescriptor::GetReflectionType:System.Type(System.Type)",
+          "index": 315
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.TypeDescriptor::Refresh:System.Void(System.Object)",
+          "index": 316
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.TypeDescriptor::Refresh:System.Void(System.Reflection.Assembly)",
+          "index": 317
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.TypeDescriptor::Refresh:System.Void(System.Reflection.Module)",
+          "index": 318
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.TypeDescriptor::Refresh:System.Void(System.Type)",
+          "index": 319
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.TypeDescriptor::RemoveAssociation:System.Void(System.Object,System.Object)",
+          "index": 320
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.TypeDescriptor::RemoveAssociations:System.Void(System.Object)",
+          "index": 321
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.TypeDescriptor::RemoveProvider:System.Void(System.ComponentModel.TypeDescriptionProvider,System.Object)",
+          "index": 322
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.TypeDescriptor::RemoveProvider:System.Void(System.ComponentModel.TypeDescriptionProvider,System.Type)",
+          "index": 323
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.TypeDescriptor::RemoveProviderTransparent:System.Void(System.ComponentModel.TypeDescriptionProvider,System.Object)",
+          "index": 324
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.TypeDescriptor::RemoveProviderTransparent:System.Void(System.ComponentModel.TypeDescriptionProvider,System.Type)",
+          "index": 325
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.TypeDescriptor::SortDescriptorArray:System.Void(System.Collections.IList)",
+          "index": 326
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.VersionConverter::CanConvertFrom:System.Boolean(System.ComponentModel.ITypeDescriptorContext,System.Type)",
+          "index": 327
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.VersionConverter::CanConvertTo:System.Boolean(System.ComponentModel.ITypeDescriptorContext,System.Type)",
+          "index": 328
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.VersionConverter::ConvertFrom:System.Object(System.ComponentModel.ITypeDescriptorContext,System.Globalization.CultureInfo,System.Object)",
+          "index": 329
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.VersionConverter::ConvertTo:System.Object(System.ComponentModel.ITypeDescriptorContext,System.Globalization.CultureInfo,System.Object,System.Type)",
+          "index": 330
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.VersionConverter::IsValid:System.Boolean(System.ComponentModel.ITypeDescriptorContext,System.Object)",
+          "index": 331
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.WarningException::GetObjectData:System.Void(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)",
+          "index": 332
+        }
+      ]
+    },
+    {
+      "slug": "system-componentmodel-design",
+      "namespaces": [
+        "System.ComponentModel.Design"
+      ],
+      "methodCount": 51,
+      "methods": [
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.ActiveDesignerEventHandler::BeginInvoke:System.IAsyncResult(System.Object,System.ComponentModel.Design.ActiveDesignerEventArgs,System.AsyncCallback,System.Object)",
+          "index": 0
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.ActiveDesignerEventHandler::EndInvoke:System.Void(System.IAsyncResult)",
+          "index": 1
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.ActiveDesignerEventHandler::Invoke:System.Void(System.Object,System.ComponentModel.Design.ActiveDesignerEventArgs)",
+          "index": 2
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.ComponentChangedEventHandler::BeginInvoke:System.IAsyncResult(System.Object,System.ComponentModel.Design.ComponentChangedEventArgs,System.AsyncCallback,System.Object)",
+          "index": 3
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.ComponentChangedEventHandler::EndInvoke:System.Void(System.IAsyncResult)",
+          "index": 4
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.ComponentChangedEventHandler::Invoke:System.Void(System.Object,System.ComponentModel.Design.ComponentChangedEventArgs)",
+          "index": 5
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.ComponentChangingEventHandler::BeginInvoke:System.IAsyncResult(System.Object,System.ComponentModel.Design.ComponentChangingEventArgs,System.AsyncCallback,System.Object)",
+          "index": 6
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.ComponentChangingEventHandler::EndInvoke:System.Void(System.IAsyncResult)",
+          "index": 7
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.ComponentChangingEventHandler::Invoke:System.Void(System.Object,System.ComponentModel.Design.ComponentChangingEventArgs)",
+          "index": 8
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.ComponentEventHandler::BeginInvoke:System.IAsyncResult(System.Object,System.ComponentModel.Design.ComponentEventArgs,System.AsyncCallback,System.Object)",
+          "index": 9
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.ComponentEventHandler::EndInvoke:System.Void(System.IAsyncResult)",
+          "index": 10
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.ComponentEventHandler::Invoke:System.Void(System.Object,System.ComponentModel.Design.ComponentEventArgs)",
+          "index": 11
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.ComponentRenameEventHandler::BeginInvoke:System.IAsyncResult(System.Object,System.ComponentModel.Design.ComponentRenameEventArgs,System.AsyncCallback,System.Object)",
+          "index": 12
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.ComponentRenameEventHandler::EndInvoke:System.Void(System.IAsyncResult)",
+          "index": 13
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.ComponentRenameEventHandler::Invoke:System.Void(System.Object,System.ComponentModel.Design.ComponentRenameEventArgs)",
+          "index": 14
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.DesignerCollection::GetEnumerator:System.Collections.IEnumerator()",
+          "index": 15
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.DesignerEventHandler::BeginInvoke:System.IAsyncResult(System.Object,System.ComponentModel.Design.DesignerEventArgs,System.AsyncCallback,System.Object)",
+          "index": 16
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.DesignerEventHandler::EndInvoke:System.Void(System.IAsyncResult)",
+          "index": 17
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.DesignerEventHandler::Invoke:System.Void(System.Object,System.ComponentModel.Design.DesignerEventArgs)",
+          "index": 18
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.DesignerOptionService+DesignerOptionCollection::CopyTo:System.Void(System.Array,System.Int32)",
+          "index": 19
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.DesignerOptionService+DesignerOptionCollection::GetEnumerator:System.Collections.IEnumerator()",
+          "index": 20
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.DesignerOptionService+DesignerOptionCollection::IndexOf:System.Int32(System.ComponentModel.Design.DesignerOptionService+DesignerOptionCollection)",
+          "index": 21
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.DesignerOptionService+DesignerOptionCollection::ShowDialog:System.Boolean()",
+          "index": 22
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.DesignerTransactionCloseEventHandler::BeginInvoke:System.IAsyncResult(System.Object,System.ComponentModel.Design.DesignerTransactionCloseEventArgs,System.AsyncCallback,System.Object)",
+          "index": 23
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.DesignerTransactionCloseEventHandler::EndInvoke:System.Void(System.IAsyncResult)",
+          "index": 24
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.DesignerTransactionCloseEventHandler::Invoke:System.Void(System.Object,System.ComponentModel.Design.DesignerTransactionCloseEventArgs)",
+          "index": 25
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.DesignerVerbCollection::Add:System.Int32(System.ComponentModel.Design.DesignerVerb)",
+          "index": 26
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.DesignerVerbCollection::AddRange:System.Void(System.ComponentModel.Design.DesignerVerbCollection)",
+          "index": 27
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.DesignerVerbCollection::AddRange:System.Void(System.ComponentModel.Design.DesignerVerb[])",
+          "index": 28
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.DesignerVerbCollection::Contains:System.Boolean(System.ComponentModel.Design.DesignerVerb)",
+          "index": 29
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.DesignerVerbCollection::CopyTo:System.Void(System.ComponentModel.Design.DesignerVerb[],System.Int32)",
+          "index": 30
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.DesignerVerbCollection::IndexOf:System.Int32(System.ComponentModel.Design.DesignerVerb)",
+          "index": 31
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.DesignerVerbCollection::Insert:System.Void(System.Int32,System.ComponentModel.Design.DesignerVerb)",
+          "index": 32
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.DesignerVerbCollection::Remove:System.Void(System.ComponentModel.Design.DesignerVerb)",
+          "index": 33
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.DesigntimeLicenseContext::GetSavedLicenseKey:System.String(System.Type,System.Reflection.Assembly)",
+          "index": 34
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.DesigntimeLicenseContext::SetSavedLicenseKey:System.Void(System.Type,System.String)",
+          "index": 35
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.DesigntimeLicenseContextSerializer::Serialize:System.Void(System.IO.Stream,System.String,System.ComponentModel.Design.DesigntimeLicenseContext)",
+          "index": 36
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.HelpKeywordAttribute::IsDefaultAttribute:System.Boolean()",
+          "index": 37
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.MenuCommand::Invoke:System.Void()",
+          "index": 38
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.MenuCommand::Invoke:System.Void(System.Object)",
+          "index": 39
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.ServiceContainer::AddService:System.Void(System.Type,System.ComponentModel.Design.ServiceCreatorCallback)",
+          "index": 40
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.ServiceContainer::AddService:System.Void(System.Type,System.ComponentModel.Design.ServiceCreatorCallback,System.Boolean)",
+          "index": 41
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.ServiceContainer::AddService:System.Void(System.Type,System.Object)",
+          "index": 42
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.ServiceContainer::AddService:System.Void(System.Type,System.Object,System.Boolean)",
+          "index": 43
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.ServiceContainer::Dispose:System.Void()",
+          "index": 44
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.ServiceContainer::GetService:System.Object(System.Type)",
+          "index": 45
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.ServiceContainer::RemoveService:System.Void(System.Type)",
+          "index": 46
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.ServiceContainer::RemoveService:System.Void(System.Type,System.Boolean)",
+          "index": 47
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.ServiceCreatorCallback::BeginInvoke:System.IAsyncResult(System.ComponentModel.Design.IServiceContainer,System.Type,System.AsyncCallback,System.Object)",
+          "index": 48
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.ServiceCreatorCallback::EndInvoke:System.Object(System.IAsyncResult)",
+          "index": 49
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.ServiceCreatorCallback::Invoke:System.Object(System.ComponentModel.Design.IServiceContainer,System.Type)",
+          "index": 50
+        }
+      ]
+    },
+    {
+      "slug": "global-ns",
+      "namespaces": [
+        "System.ComponentModel.Design.Serialization",
+        "System.Drawing",
+        "System.Security.Authentication.ExtendedProtection",
+        "System.Timers"
+      ],
+      "methodCount": 55,
+      "methods": [
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.Serialization.ContextStack::Append:System.Void(System.Object)",
+          "index": 0
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.Serialization.ContextStack::Pop:System.Object()",
+          "index": 1
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.Serialization.ContextStack::Push:System.Void(System.Object)",
+          "index": 2
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.Serialization.InstanceDescriptor::Invoke:System.Object()",
+          "index": 3
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.Serialization.ResolveNameEventHandler::BeginInvoke:System.IAsyncResult(System.Object,System.ComponentModel.Design.Serialization.ResolveNameEventArgs,System.AsyncCallback,System.Object)",
+          "index": 4
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.Serialization.ResolveNameEventHandler::EndInvoke:System.Void(System.IAsyncResult)",
+          "index": 5
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.Serialization.ResolveNameEventHandler::Invoke:System.Void(System.Object,System.ComponentModel.Design.Serialization.ResolveNameEventArgs)",
+          "index": 6
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.Drawing.ColorConverter::CanConvertFrom:System.Boolean(System.ComponentModel.ITypeDescriptorContext,System.Type)",
+          "index": 7
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.Drawing.ColorConverter::CanConvertTo:System.Boolean(System.ComponentModel.ITypeDescriptorContext,System.Type)",
+          "index": 8
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.Drawing.ColorConverter::ConvertFrom:System.Object(System.ComponentModel.ITypeDescriptorContext,System.Globalization.CultureInfo,System.Object)",
+          "index": 9
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.Drawing.ColorConverter::ConvertTo:System.Object(System.ComponentModel.ITypeDescriptorContext,System.Globalization.CultureInfo,System.Object,System.Type)",
+          "index": 10
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.Drawing.ColorConverter::GetStandardValues:System.ComponentModel.TypeConverter+StandardValuesCollection(System.ComponentModel.ITypeDescriptorContext)",
+          "index": 11
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.Drawing.ColorConverter::GetStandardValuesSupported:System.Boolean(System.ComponentModel.ITypeDescriptorContext)",
+          "index": 12
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.Drawing.PointConverter::CanConvertFrom:System.Boolean(System.ComponentModel.ITypeDescriptorContext,System.Type)",
+          "index": 13
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.Drawing.PointConverter::CanConvertTo:System.Boolean(System.ComponentModel.ITypeDescriptorContext,System.Type)",
+          "index": 14
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.Drawing.PointConverter::ConvertFrom:System.Object(System.ComponentModel.ITypeDescriptorContext,System.Globalization.CultureInfo,System.Object)",
+          "index": 15
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.Drawing.PointConverter::ConvertTo:System.Object(System.ComponentModel.ITypeDescriptorContext,System.Globalization.CultureInfo,System.Object,System.Type)",
+          "index": 16
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.Drawing.PointConverter::CreateInstance:System.Object(System.ComponentModel.ITypeDescriptorContext,System.Collections.IDictionary)",
+          "index": 17
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.Drawing.PointConverter::GetCreateInstanceSupported:System.Boolean(System.ComponentModel.ITypeDescriptorContext)",
+          "index": 18
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.Drawing.PointConverter::GetProperties:System.ComponentModel.PropertyDescriptorCollection(System.ComponentModel.ITypeDescriptorContext,System.Object,System.Attribute[])",
+          "index": 19
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.Drawing.PointConverter::GetPropertiesSupported:System.Boolean(System.ComponentModel.ITypeDescriptorContext)",
+          "index": 20
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.Drawing.RectangleConverter::CanConvertFrom:System.Boolean(System.ComponentModel.ITypeDescriptorContext,System.Type)",
+          "index": 21
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.Drawing.RectangleConverter::CanConvertTo:System.Boolean(System.ComponentModel.ITypeDescriptorContext,System.Type)",
+          "index": 22
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.Drawing.RectangleConverter::ConvertFrom:System.Object(System.ComponentModel.ITypeDescriptorContext,System.Globalization.CultureInfo,System.Object)",
+          "index": 23
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.Drawing.RectangleConverter::ConvertTo:System.Object(System.ComponentModel.ITypeDescriptorContext,System.Globalization.CultureInfo,System.Object,System.Type)",
+          "index": 24
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.Drawing.RectangleConverter::CreateInstance:System.Object(System.ComponentModel.ITypeDescriptorContext,System.Collections.IDictionary)",
+          "index": 25
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.Drawing.RectangleConverter::GetCreateInstanceSupported:System.Boolean(System.ComponentModel.ITypeDescriptorContext)",
+          "index": 26
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.Drawing.RectangleConverter::GetProperties:System.ComponentModel.PropertyDescriptorCollection(System.ComponentModel.ITypeDescriptorContext,System.Object,System.Attribute[])",
+          "index": 27
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.Drawing.RectangleConverter::GetPropertiesSupported:System.Boolean(System.ComponentModel.ITypeDescriptorContext)",
+          "index": 28
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.Drawing.SizeConverter::CanConvertFrom:System.Boolean(System.ComponentModel.ITypeDescriptorContext,System.Type)",
+          "index": 29
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.Drawing.SizeConverter::CanConvertTo:System.Boolean(System.ComponentModel.ITypeDescriptorContext,System.Type)",
+          "index": 30
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.Drawing.SizeConverter::ConvertFrom:System.Object(System.ComponentModel.ITypeDescriptorContext,System.Globalization.CultureInfo,System.Object)",
+          "index": 31
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.Drawing.SizeConverter::ConvertTo:System.Object(System.ComponentModel.ITypeDescriptorContext,System.Globalization.CultureInfo,System.Object,System.Type)",
+          "index": 32
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.Drawing.SizeConverter::CreateInstance:System.Object(System.ComponentModel.ITypeDescriptorContext,System.Collections.IDictionary)",
+          "index": 33
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.Drawing.SizeConverter::GetCreateInstanceSupported:System.Boolean(System.ComponentModel.ITypeDescriptorContext)",
+          "index": 34
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.Drawing.SizeConverter::GetProperties:System.ComponentModel.PropertyDescriptorCollection(System.ComponentModel.ITypeDescriptorContext,System.Object,System.Attribute[])",
+          "index": 35
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.Drawing.SizeConverter::GetPropertiesSupported:System.Boolean(System.ComponentModel.ITypeDescriptorContext)",
+          "index": 36
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.Drawing.SizeFConverter::CanConvertFrom:System.Boolean(System.ComponentModel.ITypeDescriptorContext,System.Type)",
+          "index": 37
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.Drawing.SizeFConverter::CanConvertTo:System.Boolean(System.ComponentModel.ITypeDescriptorContext,System.Type)",
+          "index": 38
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.Drawing.SizeFConverter::ConvertFrom:System.Object(System.ComponentModel.ITypeDescriptorContext,System.Globalization.CultureInfo,System.Object)",
+          "index": 39
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.Drawing.SizeFConverter::ConvertTo:System.Object(System.ComponentModel.ITypeDescriptorContext,System.Globalization.CultureInfo,System.Object,System.Type)",
+          "index": 40
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.Drawing.SizeFConverter::CreateInstance:System.Object(System.ComponentModel.ITypeDescriptorContext,System.Collections.IDictionary)",
+          "index": 41
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.Drawing.SizeFConverter::GetCreateInstanceSupported:System.Boolean(System.ComponentModel.ITypeDescriptorContext)",
+          "index": 42
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.Drawing.SizeFConverter::GetProperties:System.ComponentModel.PropertyDescriptorCollection(System.ComponentModel.ITypeDescriptorContext,System.Object,System.Attribute[])",
+          "index": 43
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.Drawing.SizeFConverter::GetPropertiesSupported:System.Boolean(System.ComponentModel.ITypeDescriptorContext)",
+          "index": 44
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.Security.Authentication.ExtendedProtection.ExtendedProtectionPolicyTypeConverter::CanConvertTo:System.Boolean(System.ComponentModel.ITypeDescriptorContext,System.Type)",
+          "index": 45
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.Security.Authentication.ExtendedProtection.ExtendedProtectionPolicyTypeConverter::ConvertTo:System.Object(System.ComponentModel.ITypeDescriptorContext,System.Globalization.CultureInfo,System.Object,System.Type)",
+          "index": 46
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.Timers.ElapsedEventHandler::BeginInvoke:System.IAsyncResult(System.Object,System.Timers.ElapsedEventArgs,System.AsyncCallback,System.Object)",
+          "index": 47
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.Timers.ElapsedEventHandler::EndInvoke:System.Void(System.IAsyncResult)",
+          "index": 48
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.Timers.ElapsedEventHandler::Invoke:System.Void(System.Object,System.Timers.ElapsedEventArgs)",
+          "index": 49
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.Timers.Timer::BeginInit:System.Void()",
+          "index": 50
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.Timers.Timer::Close:System.Void()",
+          "index": 51
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.Timers.Timer::EndInit:System.Void()",
+          "index": 52
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.Timers.Timer::Start:System.Void()",
+          "index": 53
+        },
+        {
+          "methodSubjectId": "System.ComponentModel.TypeConverter/System.Timers.Timer::Stop:System.Void()",
+          "index": 54
+        }
+      ]
+    }
+  ]
+}

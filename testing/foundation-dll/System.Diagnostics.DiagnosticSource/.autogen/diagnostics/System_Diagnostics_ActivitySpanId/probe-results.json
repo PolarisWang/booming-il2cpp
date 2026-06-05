@@ -1,0 +1,28 @@
+[
+  {
+    "methodIndex": 0,
+    "setIndex": 0,
+    "subjectId": "System.Diagnostics.ActivitySpanId::CreateRandom:System.Diagnostics.ActivitySpanId()__Set0",
+    "isVoid": false,
+    "hasException": false,
+    "exceptionType": null,
+    "returnValue": -714334379,
+    "returnValueJson": "{}",
+    "returnValueType": "System.Diagnostics.ActivitySpanId",
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 1,
+    "setIndex": 1,
+    "subjectId": "System.Diagnostics.ActivitySpanId::ToHexString:System.String()__Set1",
+    "isVoid": false,
+    "hasException": false,
+    "exceptionType": null,
+    "returnValue": 16,
+    "returnValueJson": "\u00220000000000000000\u0022",
+    "returnValueType": "System.String",
+    "isDeterministic": true,
+    "outRefValues": null
+  }
+]

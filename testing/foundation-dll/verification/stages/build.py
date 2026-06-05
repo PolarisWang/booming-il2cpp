@@ -205,6 +205,18 @@ def _build_jit_entry(
     Returns True if JIT build succeeded, False otherwise.
     JIT build failure does not block the pipeline.
     """
+    # ── Size check: skip JIT build for very large chunks ────────────
+    # The Windows PE32+ format has a 2GB image size limit. JIT-compiled
+    # code can be 10-20x larger than the generated C++ source. Chunks
+    # with >100MB of generated .cpp code produce JIT images >2GB.
+    # Skip the JIT build for those — AOT mode is unaffected.
+    codegen_cpp_total = sum(
+        f.stat().st_size for f in (native_dir / "codegen" / "generated").glob("*.cpp")
+    ) if (native_dir / "codegen" / "generated").exists() else 0
+    if codegen_cpp_total > 100 * 1024 * 1024:  # 100 MB
+        print(f"  [build] JIT build skipped: codegen output {codegen_cpp_total // (1024*1024)}MB")
+        print(f"  [build]   (PE32+ image size limit: 2GB)")
+        return False
     # Use a separate output directory so JIT codegen doesn't clobber AOT artifacts
     jit_output = native_dir.parent / "build_jit_output"
     jit_output.mkdir(parents=True, exist_ok=True)

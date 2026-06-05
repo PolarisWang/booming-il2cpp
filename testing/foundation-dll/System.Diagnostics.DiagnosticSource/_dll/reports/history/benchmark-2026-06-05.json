@@ -1,0 +1,84 @@
+{
+  "date": "2026-06-05",
+  "assemblyName": "System.Diagnostics.DiagnosticSource",
+  "chunks": [
+    {
+      "slug": "diagnostics",
+      "fact": {
+        "passed": 131,
+        "total": 131,
+        "isShutdownAV": false,
+        "valueSuspicious": false,
+        "valueWarnings": 0,
+        "metaTotal": 144,
+        "metaBenchmarkCount": 144
+      },
+      "benchmark": {
+        "methodCount": 182,
+        "iterations": 50000,
+        "meanDurationMs": 0.5094346153846154,
+        "meanOpsPerSecond": 277196737.7018994,
+        "minDurationMs": 0,
+        "maxDurationMs": 41.923,
+        "totalDurationMs": 92.7171,
+        "totalAllocatedBytes": 67733333.3,
+        "meanSampleCount": 2.9,
+        "totalOutliers": 0,
+        "meanCv": 0.06761323463687151,
+        "maxCv": 0.445301
+      },
+      "hotupdate": {
+        "passed": 131,
+        "failed": 0,
+        "allSemantic": false,
+        "allRevert": true,
+        "exitCode": 0,
+        "patchDataUsed": false,
+        "patchFailed": true,
+        "truncated": false,
+        "crash": false,
+        "assertFailed": 0,
+        "semanticChangedCount": 0
+      }
+    },
+    {
+      "slug": "global-ns",
+      "fact": {
+        "passed": 172,
+        "total": 172,
+        "isShutdownAV": false,
+        "valueSuspicious": false,
+        "valueWarnings": 0,
+        "metaTotal": 175,
+        "metaBenchmarkCount": 175
+      },
+      "benchmark": {
+        "methodCount": 192,
+        "iterations": 50000,
+        "meanDurationMs": 0.5138078125,
+        "meanOpsPerSecond": 274841959.3937766,
+        "minDurationMs": 0,
+        "maxDurationMs": 42.2203,
+        "totalDurationMs": 98.6511,
+        "totalAllocatedBytes": 68000000.0,
+        "meanSampleCount": 2.9,
+        "totalOutliers": 0,
+        "meanCv": 0.05981046808510638,
+        "maxCv": 0.383193
+      },
+      "hotupdate": {
+        "passed": 172,
+        "failed": 0,
+        "allSemantic": false,
+        "allRevert": true,
+        "exitCode": 0,
+        "patchDataUsed": false,
+        "patchFailed": true,
+        "truncated": false,
+        "crash": false,
+        "assertFailed": 0,
+        "semanticChangedCount": 0
+      }
+    }
+  ]
+}

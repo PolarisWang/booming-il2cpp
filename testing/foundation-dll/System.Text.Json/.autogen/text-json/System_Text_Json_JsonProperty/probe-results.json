@@ -1,0 +1,41 @@
+[
+  {
+    "methodIndex": 0,
+    "setIndex": 0,
+    "subjectId": "System.Text.Json.JsonProperty::NameEquals:System.Boolean(System.String)__Set0",
+    "isVoid": false,
+    "hasException": true,
+    "exceptionType": "System.InvalidOperationException",
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 0,
+    "setIndex": 1,
+    "subjectId": "System.Text.Json.JsonProperty::NameEquals:System.Boolean(System.String)__Set1",
+    "isVoid": false,
+    "hasException": true,
+    "exceptionType": "System.InvalidOperationException",
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 1,
+    "setIndex": 0,
+    "subjectId": "System.Text.Json.JsonProperty::WriteTo:System.Void(System.Text.Json.Utf8JsonWriter)__Set0",
+    "isVoid": true,
+    "hasException": true,
+    "exceptionType": "System.ArgumentNullException",
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": null
+  }
+]

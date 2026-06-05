@@ -1,0 +1,40 @@
+{
+  "assemblyName": "System.Linq.Expressions",
+  "timestamp": "2026-06-05T09:28:21",
+  "totalChunks": 1,
+  "chunksWithFacts": 1,
+  "chunksShutdownAV": 0,
+  "chunksWithValueWarnings": 0,
+  "totalPassed": 737,
+  "totalFactMethods": 737,
+  "chunkSummaries": [
+    {
+      "slug": "global-ns",
+      "fact": {
+        "passed": 737,
+        "total": 737,
+        "isShutdownAV": false,
+        "valueSuspicious": false,
+        "valueWarnings": 0,
+        "metaTotal": 752,
+        "metaBenchmarkCount": 752
+      },
+      "benchmark": {
+        "status": "no_results"
+      },
+      "hotupdate": {
+        "passed": 737,
+        "failed": 0,
+        "allSemantic": false,
+        "allRevert": true,
+        "exitCode": 0,
+        "patchDataUsed": false,
+        "patchFailed": true,
+        "truncated": false,
+        "crash": false,
+        "assertFailed": 0,
+        "semanticChangedCount": 0
+      }
+    }
+  ]
+}

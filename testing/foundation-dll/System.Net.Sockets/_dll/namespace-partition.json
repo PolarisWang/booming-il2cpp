@@ -1,0 +1,1103 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Net.Sockets",
+  "generatedAt": "2026-06-04T10:30:44.322086+00:00",
+  "partitionStrategy": "namespace",
+  "maxMethodsPerChunk": 500,
+  "totalChunks": 1,
+  "chunks": [
+    {
+      "slug": "system-net-sockets",
+      "namespaces": [
+        "System.Net.Sockets"
+      ],
+      "methodCount": 271,
+      "methods": [
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.NetworkStream::BeginRead:System.IAsyncResult(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)",
+          "index": 0
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.NetworkStream::BeginWrite:System.IAsyncResult(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)",
+          "index": 1
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.NetworkStream::Close:System.Void(System.Int32)",
+          "index": 2
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.NetworkStream::Close:System.Void(System.TimeSpan)",
+          "index": 3
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.NetworkStream::EndRead:System.Int32(System.IAsyncResult)",
+          "index": 4
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.NetworkStream::EndWrite:System.Void(System.IAsyncResult)",
+          "index": 5
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.NetworkStream::Flush:System.Void()",
+          "index": 6
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.NetworkStream::FlushAsync:System.Threading.Tasks.Task(System.Threading.CancellationToken)",
+          "index": 7
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.NetworkStream::Read:System.Int32(System.Byte[],System.Int32,System.Int32)",
+          "index": 8
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.NetworkStream::Read:System.Int32(System.Span<System.Byte>)",
+          "index": 9
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.NetworkStream::ReadAsync:System.Threading.Tasks.Task<System.Int32>(System.Byte[],System.Int32,System.Int32,System.Threading.CancellationToken)",
+          "index": 10
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.NetworkStream::ReadAsync:System.Threading.Tasks.ValueTask<System.Int32>(System.Memory<System.Byte>,System.Threading.CancellationToken)",
+          "index": 11
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.NetworkStream::ReadByte:System.Int32()",
+          "index": 12
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.NetworkStream::Seek:System.Int64(System.Int64,System.IO.SeekOrigin)",
+          "index": 13
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.NetworkStream::SetLength:System.Void(System.Int64)",
+          "index": 14
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.NetworkStream::Write:System.Void(System.Byte[],System.Int32,System.Int32)",
+          "index": 15
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.NetworkStream::Write:System.Void(System.ReadOnlySpan<System.Byte>)",
+          "index": 16
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.NetworkStream::WriteAsync:System.Threading.Tasks.Task(System.Byte[],System.Int32,System.Int32,System.Threading.CancellationToken)",
+          "index": 17
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.NetworkStream::WriteAsync:System.Threading.Tasks.ValueTask(System.ReadOnlyMemory<System.Byte>,System.Threading.CancellationToken)",
+          "index": 18
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.NetworkStream::WriteByte:System.Void(System.Byte)",
+          "index": 19
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Accept:System.Net.Sockets.Socket()",
+          "index": 20
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::AcceptAsync:System.Threading.Tasks.Task<System.Net.Sockets.Socket>()",
+          "index": 21
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::AcceptAsync:System.Threading.Tasks.Task<System.Net.Sockets.Socket>(System.Net.Sockets.Socket)",
+          "index": 22
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::AcceptAsync:System.Threading.Tasks.ValueTask<System.Net.Sockets.Socket>(System.Net.Sockets.Socket,System.Threading.CancellationToken)",
+          "index": 23
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::AcceptAsync:System.Boolean(System.Net.Sockets.SocketAsyncEventArgs)",
+          "index": 24
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::AcceptAsync:System.Threading.Tasks.ValueTask<System.Net.Sockets.Socket>(System.Threading.CancellationToken)",
+          "index": 25
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::BeginAccept:System.IAsyncResult(System.AsyncCallback,System.Object)",
+          "index": 26
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::BeginAccept:System.IAsyncResult(System.Int32,System.AsyncCallback,System.Object)",
+          "index": 27
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::BeginAccept:System.IAsyncResult(System.Net.Sockets.Socket,System.Int32,System.AsyncCallback,System.Object)",
+          "index": 28
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::BeginConnect:System.IAsyncResult(System.Net.EndPoint,System.AsyncCallback,System.Object)",
+          "index": 29
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::BeginConnect:System.IAsyncResult(System.Net.IPAddress,System.Int32,System.AsyncCallback,System.Object)",
+          "index": 30
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::BeginConnect:System.IAsyncResult(System.Net.IPAddress[],System.Int32,System.AsyncCallback,System.Object)",
+          "index": 31
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::BeginConnect:System.IAsyncResult(System.String,System.Int32,System.AsyncCallback,System.Object)",
+          "index": 32
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::BeginDisconnect:System.IAsyncResult(System.Boolean,System.AsyncCallback,System.Object)",
+          "index": 33
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::BeginReceive:System.IAsyncResult(System.Byte[],System.Int32,System.Int32,System.Net.Sockets.SocketFlags,System.AsyncCallback,System.Object)",
+          "index": 34
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::BeginReceive:System.IAsyncResult(System.Byte[],System.Int32,System.Int32,System.Net.Sockets.SocketFlags,System.Net.Sockets.SocketError,System.AsyncCallback,System.Object)",
+          "index": 35
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::BeginReceive:System.IAsyncResult(System.Collections.Generic.IList<System.ArraySegment<System.Byte>>,System.Net.Sockets.SocketFlags,System.AsyncCallback,System.Object)",
+          "index": 36
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::BeginReceive:System.IAsyncResult(System.Collections.Generic.IList<System.ArraySegment<System.Byte>>,System.Net.Sockets.SocketFlags,System.Net.Sockets.SocketError,System.AsyncCallback,System.Object)",
+          "index": 37
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::BeginReceiveFrom:System.IAsyncResult(System.Byte[],System.Int32,System.Int32,System.Net.Sockets.SocketFlags,System.Net.EndPoint,System.AsyncCallback,System.Object)",
+          "index": 38
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::BeginReceiveMessageFrom:System.IAsyncResult(System.Byte[],System.Int32,System.Int32,System.Net.Sockets.SocketFlags,System.Net.EndPoint,System.AsyncCallback,System.Object)",
+          "index": 39
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::BeginSend:System.IAsyncResult(System.Byte[],System.Int32,System.Int32,System.Net.Sockets.SocketFlags,System.AsyncCallback,System.Object)",
+          "index": 40
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::BeginSend:System.IAsyncResult(System.Byte[],System.Int32,System.Int32,System.Net.Sockets.SocketFlags,System.Net.Sockets.SocketError,System.AsyncCallback,System.Object)",
+          "index": 41
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::BeginSend:System.IAsyncResult(System.Collections.Generic.IList<System.ArraySegment<System.Byte>>,System.Net.Sockets.SocketFlags,System.AsyncCallback,System.Object)",
+          "index": 42
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::BeginSend:System.IAsyncResult(System.Collections.Generic.IList<System.ArraySegment<System.Byte>>,System.Net.Sockets.SocketFlags,System.Net.Sockets.SocketError,System.AsyncCallback,System.Object)",
+          "index": 43
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::BeginSendFile:System.IAsyncResult(System.String,System.AsyncCallback,System.Object)",
+          "index": 44
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::BeginSendFile:System.IAsyncResult(System.String,System.Byte[],System.Byte[],System.Net.Sockets.TransmitFileOptions,System.AsyncCallback,System.Object)",
+          "index": 45
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::BeginSendTo:System.IAsyncResult(System.Byte[],System.Int32,System.Int32,System.Net.Sockets.SocketFlags,System.Net.EndPoint,System.AsyncCallback,System.Object)",
+          "index": 46
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Bind:System.Void(System.Net.EndPoint)",
+          "index": 47
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::CancelConnectAsync:System.Void(System.Net.Sockets.SocketAsyncEventArgs)",
+          "index": 48
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Close:System.Void()",
+          "index": 49
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Close:System.Void(System.Int32)",
+          "index": 50
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Connect:System.Void(System.Net.EndPoint)",
+          "index": 51
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Connect:System.Void(System.Net.IPAddress,System.Int32)",
+          "index": 52
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Connect:System.Void(System.Net.IPAddress[],System.Int32)",
+          "index": 53
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Connect:System.Void(System.String,System.Int32)",
+          "index": 54
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::ConnectAsync:System.Threading.Tasks.Task(System.Net.EndPoint)",
+          "index": 55
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::ConnectAsync:System.Threading.Tasks.ValueTask(System.Net.EndPoint,System.Threading.CancellationToken)",
+          "index": 56
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::ConnectAsync:System.Threading.Tasks.Task(System.Net.IPAddress,System.Int32)",
+          "index": 57
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::ConnectAsync:System.Threading.Tasks.ValueTask(System.Net.IPAddress,System.Int32,System.Threading.CancellationToken)",
+          "index": 58
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::ConnectAsync:System.Threading.Tasks.Task(System.Net.IPAddress[],System.Int32)",
+          "index": 59
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::ConnectAsync:System.Threading.Tasks.ValueTask(System.Net.IPAddress[],System.Int32,System.Threading.CancellationToken)",
+          "index": 60
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::ConnectAsync:System.Boolean(System.Net.Sockets.SocketAsyncEventArgs)",
+          "index": 61
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::ConnectAsync:System.Boolean(System.Net.Sockets.SocketType,System.Net.Sockets.ProtocolType,System.Net.Sockets.SocketAsyncEventArgs)",
+          "index": 62
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::ConnectAsync:System.Threading.Tasks.Task(System.String,System.Int32)",
+          "index": 63
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::ConnectAsync:System.Threading.Tasks.ValueTask(System.String,System.Int32,System.Threading.CancellationToken)",
+          "index": 64
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Disconnect:System.Void(System.Boolean)",
+          "index": 65
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::DisconnectAsync:System.Threading.Tasks.ValueTask(System.Boolean,System.Threading.CancellationToken)",
+          "index": 66
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::DisconnectAsync:System.Boolean(System.Net.Sockets.SocketAsyncEventArgs)",
+          "index": 67
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Dispose:System.Void()",
+          "index": 68
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::DuplicateAndClose:System.Net.Sockets.SocketInformation(System.Int32)",
+          "index": 69
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::EndAccept:System.Net.Sockets.Socket(System.Byte[],System.IAsyncResult)",
+          "index": 70
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::EndAccept:System.Net.Sockets.Socket(System.Byte[],System.Int32,System.IAsyncResult)",
+          "index": 71
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::EndAccept:System.Net.Sockets.Socket(System.IAsyncResult)",
+          "index": 72
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::EndConnect:System.Void(System.IAsyncResult)",
+          "index": 73
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::EndDisconnect:System.Void(System.IAsyncResult)",
+          "index": 74
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::EndReceive:System.Int32(System.IAsyncResult)",
+          "index": 75
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::EndReceive:System.Int32(System.IAsyncResult,System.Net.Sockets.SocketError)",
+          "index": 76
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::EndReceiveFrom:System.Int32(System.IAsyncResult,System.Net.EndPoint)",
+          "index": 77
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::EndReceiveMessageFrom:System.Int32(System.IAsyncResult,System.Net.Sockets.SocketFlags,System.Net.EndPoint,System.Net.Sockets.IPPacketInformation)",
+          "index": 78
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::EndSend:System.Int32(System.IAsyncResult)",
+          "index": 79
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::EndSend:System.Int32(System.IAsyncResult,System.Net.Sockets.SocketError)",
+          "index": 80
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::EndSendFile:System.Void(System.IAsyncResult)",
+          "index": 81
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::EndSendTo:System.Int32(System.IAsyncResult)",
+          "index": 82
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::GetRawSocketOption:System.Int32(System.Int32,System.Int32,System.Span<System.Byte>)",
+          "index": 83
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::GetSocketOption:System.Object(System.Net.Sockets.SocketOptionLevel,System.Net.Sockets.SocketOptionName)",
+          "index": 84
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::GetSocketOption:System.Void(System.Net.Sockets.SocketOptionLevel,System.Net.Sockets.SocketOptionName,System.Byte[])",
+          "index": 85
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::GetSocketOption:System.Byte[](System.Net.Sockets.SocketOptionLevel,System.Net.Sockets.SocketOptionName,System.Int32)",
+          "index": 86
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::IOControl:System.Int32(System.Int32,System.Byte[],System.Byte[])",
+          "index": 87
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::IOControl:System.Int32(System.Net.Sockets.IOControlCode,System.Byte[],System.Byte[])",
+          "index": 88
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Listen:System.Void()",
+          "index": 89
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Listen:System.Void(System.Int32)",
+          "index": 90
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Poll:System.Boolean(System.Int32,System.Net.Sockets.SelectMode)",
+          "index": 91
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Poll:System.Boolean(System.TimeSpan,System.Net.Sockets.SelectMode)",
+          "index": 92
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Receive:System.Int32(System.Byte[])",
+          "index": 93
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Receive:System.Int32(System.Byte[],System.Int32,System.Int32,System.Net.Sockets.SocketFlags)",
+          "index": 94
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Receive:System.Int32(System.Byte[],System.Int32,System.Int32,System.Net.Sockets.SocketFlags,System.Net.Sockets.SocketError)",
+          "index": 95
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Receive:System.Int32(System.Byte[],System.Int32,System.Net.Sockets.SocketFlags)",
+          "index": 96
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Receive:System.Int32(System.Byte[],System.Net.Sockets.SocketFlags)",
+          "index": 97
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Receive:System.Int32(System.Collections.Generic.IList<System.ArraySegment<System.Byte>>)",
+          "index": 98
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Receive:System.Int32(System.Collections.Generic.IList<System.ArraySegment<System.Byte>>,System.Net.Sockets.SocketFlags)",
+          "index": 99
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Receive:System.Int32(System.Collections.Generic.IList<System.ArraySegment<System.Byte>>,System.Net.Sockets.SocketFlags,System.Net.Sockets.SocketError)",
+          "index": 100
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Receive:System.Int32(System.Span<System.Byte>)",
+          "index": 101
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Receive:System.Int32(System.Span<System.Byte>,System.Net.Sockets.SocketFlags)",
+          "index": 102
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Receive:System.Int32(System.Span<System.Byte>,System.Net.Sockets.SocketFlags,System.Net.Sockets.SocketError)",
+          "index": 103
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::ReceiveAsync:System.Threading.Tasks.Task<System.Int32>(System.ArraySegment<System.Byte>)",
+          "index": 104
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::ReceiveAsync:System.Threading.Tasks.Task<System.Int32>(System.ArraySegment<System.Byte>,System.Net.Sockets.SocketFlags)",
+          "index": 105
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::ReceiveAsync:System.Threading.Tasks.Task<System.Int32>(System.Collections.Generic.IList<System.ArraySegment<System.Byte>>)",
+          "index": 106
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::ReceiveAsync:System.Threading.Tasks.Task<System.Int32>(System.Collections.Generic.IList<System.ArraySegment<System.Byte>>,System.Net.Sockets.SocketFlags)",
+          "index": 107
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::ReceiveAsync:System.Threading.Tasks.ValueTask<System.Int32>(System.Memory<System.Byte>,System.Net.Sockets.SocketFlags,System.Threading.CancellationToken)",
+          "index": 108
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::ReceiveAsync:System.Threading.Tasks.ValueTask<System.Int32>(System.Memory<System.Byte>,System.Threading.CancellationToken)",
+          "index": 109
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::ReceiveAsync:System.Boolean(System.Net.Sockets.SocketAsyncEventArgs)",
+          "index": 110
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::ReceiveFrom:System.Int32(System.Byte[],System.Int32,System.Int32,System.Net.Sockets.SocketFlags,System.Net.EndPoint)",
+          "index": 111
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::ReceiveFrom:System.Int32(System.Byte[],System.Int32,System.Net.Sockets.SocketFlags,System.Net.EndPoint)",
+          "index": 112
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::ReceiveFrom:System.Int32(System.Byte[],System.Net.EndPoint)",
+          "index": 113
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::ReceiveFrom:System.Int32(System.Byte[],System.Net.Sockets.SocketFlags,System.Net.EndPoint)",
+          "index": 114
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::ReceiveFrom:System.Int32(System.Span<System.Byte>,System.Net.EndPoint)",
+          "index": 115
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::ReceiveFrom:System.Int32(System.Span<System.Byte>,System.Net.Sockets.SocketFlags,System.Net.EndPoint)",
+          "index": 116
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::ReceiveFrom:System.Int32(System.Span<System.Byte>,System.Net.Sockets.SocketFlags,System.Net.SocketAddress)",
+          "index": 117
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::ReceiveFromAsync:System.Threading.Tasks.Task<System.Net.Sockets.SocketReceiveFromResult>(System.ArraySegment<System.Byte>,System.Net.EndPoint)",
+          "index": 118
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::ReceiveFromAsync:System.Threading.Tasks.Task<System.Net.Sockets.SocketReceiveFromResult>(System.ArraySegment<System.Byte>,System.Net.Sockets.SocketFlags,System.Net.EndPoint)",
+          "index": 119
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::ReceiveFromAsync:System.Threading.Tasks.ValueTask<System.Net.Sockets.SocketReceiveFromResult>(System.Memory<System.Byte>,System.Net.EndPoint,System.Threading.CancellationToken)",
+          "index": 120
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::ReceiveFromAsync:System.Threading.Tasks.ValueTask<System.Net.Sockets.SocketReceiveFromResult>(System.Memory<System.Byte>,System.Net.Sockets.SocketFlags,System.Net.EndPoint,System.Threading.CancellationToken)",
+          "index": 121
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::ReceiveFromAsync:System.Threading.Tasks.ValueTask<System.Int32>(System.Memory<System.Byte>,System.Net.Sockets.SocketFlags,System.Net.SocketAddress,System.Threading.CancellationToken)",
+          "index": 122
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::ReceiveFromAsync:System.Boolean(System.Net.Sockets.SocketAsyncEventArgs)",
+          "index": 123
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::ReceiveMessageFrom:System.Int32(System.Byte[],System.Int32,System.Int32,System.Net.Sockets.SocketFlags,System.Net.EndPoint,System.Net.Sockets.IPPacketInformation)",
+          "index": 124
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::ReceiveMessageFrom:System.Int32(System.Span<System.Byte>,System.Net.Sockets.SocketFlags,System.Net.EndPoint,System.Net.Sockets.IPPacketInformation)",
+          "index": 125
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::ReceiveMessageFromAsync:System.Threading.Tasks.Task<System.Net.Sockets.SocketReceiveMessageFromResult>(System.ArraySegment<System.Byte>,System.Net.EndPoint)",
+          "index": 126
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::ReceiveMessageFromAsync:System.Threading.Tasks.Task<System.Net.Sockets.SocketReceiveMessageFromResult>(System.ArraySegment<System.Byte>,System.Net.Sockets.SocketFlags,System.Net.EndPoint)",
+          "index": 127
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::ReceiveMessageFromAsync:System.Threading.Tasks.ValueTask<System.Net.Sockets.SocketReceiveMessageFromResult>(System.Memory<System.Byte>,System.Net.EndPoint,System.Threading.CancellationToken)",
+          "index": 128
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::ReceiveMessageFromAsync:System.Threading.Tasks.ValueTask<System.Net.Sockets.SocketReceiveMessageFromResult>(System.Memory<System.Byte>,System.Net.Sockets.SocketFlags,System.Net.EndPoint,System.Threading.CancellationToken)",
+          "index": 129
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::ReceiveMessageFromAsync:System.Boolean(System.Net.Sockets.SocketAsyncEventArgs)",
+          "index": 130
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Select:System.Void(System.Collections.IList,System.Collections.IList,System.Collections.IList,System.Int32)",
+          "index": 131
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Select:System.Void(System.Collections.IList,System.Collections.IList,System.Collections.IList,System.TimeSpan)",
+          "index": 132
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Send:System.Int32(System.Byte[])",
+          "index": 133
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Send:System.Int32(System.Byte[],System.Int32,System.Int32,System.Net.Sockets.SocketFlags)",
+          "index": 134
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Send:System.Int32(System.Byte[],System.Int32,System.Int32,System.Net.Sockets.SocketFlags,System.Net.Sockets.SocketError)",
+          "index": 135
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Send:System.Int32(System.Byte[],System.Int32,System.Net.Sockets.SocketFlags)",
+          "index": 136
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Send:System.Int32(System.Byte[],System.Net.Sockets.SocketFlags)",
+          "index": 137
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Send:System.Int32(System.Collections.Generic.IList<System.ArraySegment<System.Byte>>)",
+          "index": 138
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Send:System.Int32(System.Collections.Generic.IList<System.ArraySegment<System.Byte>>,System.Net.Sockets.SocketFlags)",
+          "index": 139
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Send:System.Int32(System.Collections.Generic.IList<System.ArraySegment<System.Byte>>,System.Net.Sockets.SocketFlags,System.Net.Sockets.SocketError)",
+          "index": 140
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Send:System.Int32(System.ReadOnlySpan<System.Byte>)",
+          "index": 141
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Send:System.Int32(System.ReadOnlySpan<System.Byte>,System.Net.Sockets.SocketFlags)",
+          "index": 142
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Send:System.Int32(System.ReadOnlySpan<System.Byte>,System.Net.Sockets.SocketFlags,System.Net.Sockets.SocketError)",
+          "index": 143
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::SendAsync:System.Threading.Tasks.Task<System.Int32>(System.ArraySegment<System.Byte>)",
+          "index": 144
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::SendAsync:System.Threading.Tasks.Task<System.Int32>(System.ArraySegment<System.Byte>,System.Net.Sockets.SocketFlags)",
+          "index": 145
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::SendAsync:System.Threading.Tasks.Task<System.Int32>(System.Collections.Generic.IList<System.ArraySegment<System.Byte>>)",
+          "index": 146
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::SendAsync:System.Threading.Tasks.Task<System.Int32>(System.Collections.Generic.IList<System.ArraySegment<System.Byte>>,System.Net.Sockets.SocketFlags)",
+          "index": 147
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::SendAsync:System.Boolean(System.Net.Sockets.SocketAsyncEventArgs)",
+          "index": 148
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::SendAsync:System.Threading.Tasks.ValueTask<System.Int32>(System.ReadOnlyMemory<System.Byte>,System.Net.Sockets.SocketFlags,System.Threading.CancellationToken)",
+          "index": 149
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::SendAsync:System.Threading.Tasks.ValueTask<System.Int32>(System.ReadOnlyMemory<System.Byte>,System.Threading.CancellationToken)",
+          "index": 150
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::SendFile:System.Void(System.String)",
+          "index": 151
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::SendFile:System.Void(System.String,System.Byte[],System.Byte[],System.Net.Sockets.TransmitFileOptions)",
+          "index": 152
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::SendFile:System.Void(System.String,System.ReadOnlySpan<System.Byte>,System.ReadOnlySpan<System.Byte>,System.Net.Sockets.TransmitFileOptions)",
+          "index": 153
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::SendFileAsync:System.Threading.Tasks.ValueTask(System.String,System.ReadOnlyMemory<System.Byte>,System.ReadOnlyMemory<System.Byte>,System.Net.Sockets.TransmitFileOptions,System.Threading.CancellationToken)",
+          "index": 154
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::SendFileAsync:System.Threading.Tasks.ValueTask(System.String,System.Threading.CancellationToken)",
+          "index": 155
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::SendPacketsAsync:System.Boolean(System.Net.Sockets.SocketAsyncEventArgs)",
+          "index": 156
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::SendTo:System.Int32(System.Byte[],System.Int32,System.Int32,System.Net.Sockets.SocketFlags,System.Net.EndPoint)",
+          "index": 157
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::SendTo:System.Int32(System.Byte[],System.Int32,System.Net.Sockets.SocketFlags,System.Net.EndPoint)",
+          "index": 158
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::SendTo:System.Int32(System.Byte[],System.Net.EndPoint)",
+          "index": 159
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::SendTo:System.Int32(System.Byte[],System.Net.Sockets.SocketFlags,System.Net.EndPoint)",
+          "index": 160
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::SendTo:System.Int32(System.ReadOnlySpan<System.Byte>,System.Net.EndPoint)",
+          "index": 161
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::SendTo:System.Int32(System.ReadOnlySpan<System.Byte>,System.Net.Sockets.SocketFlags,System.Net.EndPoint)",
+          "index": 162
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::SendTo:System.Int32(System.ReadOnlySpan<System.Byte>,System.Net.Sockets.SocketFlags,System.Net.SocketAddress)",
+          "index": 163
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::SendToAsync:System.Threading.Tasks.Task<System.Int32>(System.ArraySegment<System.Byte>,System.Net.EndPoint)",
+          "index": 164
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::SendToAsync:System.Threading.Tasks.Task<System.Int32>(System.ArraySegment<System.Byte>,System.Net.Sockets.SocketFlags,System.Net.EndPoint)",
+          "index": 165
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::SendToAsync:System.Boolean(System.Net.Sockets.SocketAsyncEventArgs)",
+          "index": 166
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::SendToAsync:System.Threading.Tasks.ValueTask<System.Int32>(System.ReadOnlyMemory<System.Byte>,System.Net.EndPoint,System.Threading.CancellationToken)",
+          "index": 167
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::SendToAsync:System.Threading.Tasks.ValueTask<System.Int32>(System.ReadOnlyMemory<System.Byte>,System.Net.Sockets.SocketFlags,System.Net.EndPoint,System.Threading.CancellationToken)",
+          "index": 168
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::SendToAsync:System.Threading.Tasks.ValueTask<System.Int32>(System.ReadOnlyMemory<System.Byte>,System.Net.Sockets.SocketFlags,System.Net.SocketAddress,System.Threading.CancellationToken)",
+          "index": 169
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::SetIPProtectionLevel:System.Void(System.Net.Sockets.IPProtectionLevel)",
+          "index": 170
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::SetRawSocketOption:System.Void(System.Int32,System.Int32,System.ReadOnlySpan<System.Byte>)",
+          "index": 171
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::SetSocketOption:System.Void(System.Net.Sockets.SocketOptionLevel,System.Net.Sockets.SocketOptionName,System.Boolean)",
+          "index": 172
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::SetSocketOption:System.Void(System.Net.Sockets.SocketOptionLevel,System.Net.Sockets.SocketOptionName,System.Byte[])",
+          "index": 173
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::SetSocketOption:System.Void(System.Net.Sockets.SocketOptionLevel,System.Net.Sockets.SocketOptionName,System.Int32)",
+          "index": 174
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::SetSocketOption:System.Void(System.Net.Sockets.SocketOptionLevel,System.Net.Sockets.SocketOptionName,System.Object)",
+          "index": 175
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Shutdown:System.Void(System.Net.Sockets.SocketShutdown)",
+          "index": 176
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.SocketAsyncEventArgs::Dispose:System.Void()",
+          "index": 177
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.SocketAsyncEventArgs::SetBuffer:System.Void(System.Byte[],System.Int32,System.Int32)",
+          "index": 178
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.SocketAsyncEventArgs::SetBuffer:System.Void(System.Int32,System.Int32)",
+          "index": 179
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.SocketAsyncEventArgs::SetBuffer:System.Void(System.Memory<System.Byte>)",
+          "index": 180
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.SocketTaskExtensions::AcceptAsync:System.Threading.Tasks.Task<System.Net.Sockets.Socket>(System.Net.Sockets.Socket)",
+          "index": 181
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.SocketTaskExtensions::AcceptAsync:System.Threading.Tasks.Task<System.Net.Sockets.Socket>(System.Net.Sockets.Socket,System.Net.Sockets.Socket)",
+          "index": 182
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.SocketTaskExtensions::ConnectAsync:System.Threading.Tasks.Task(System.Net.Sockets.Socket,System.Net.EndPoint)",
+          "index": 183
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.SocketTaskExtensions::ConnectAsync:System.Threading.Tasks.ValueTask(System.Net.Sockets.Socket,System.Net.EndPoint,System.Threading.CancellationToken)",
+          "index": 184
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.SocketTaskExtensions::ConnectAsync:System.Threading.Tasks.Task(System.Net.Sockets.Socket,System.Net.IPAddress,System.Int32)",
+          "index": 185
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.SocketTaskExtensions::ConnectAsync:System.Threading.Tasks.ValueTask(System.Net.Sockets.Socket,System.Net.IPAddress,System.Int32,System.Threading.CancellationToken)",
+          "index": 186
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.SocketTaskExtensions::ConnectAsync:System.Threading.Tasks.Task(System.Net.Sockets.Socket,System.Net.IPAddress[],System.Int32)",
+          "index": 187
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.SocketTaskExtensions::ConnectAsync:System.Threading.Tasks.ValueTask(System.Net.Sockets.Socket,System.Net.IPAddress[],System.Int32,System.Threading.CancellationToken)",
+          "index": 188
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.SocketTaskExtensions::ConnectAsync:System.Threading.Tasks.Task(System.Net.Sockets.Socket,System.String,System.Int32)",
+          "index": 189
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.SocketTaskExtensions::ConnectAsync:System.Threading.Tasks.ValueTask(System.Net.Sockets.Socket,System.String,System.Int32,System.Threading.CancellationToken)",
+          "index": 190
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.SocketTaskExtensions::ReceiveAsync:System.Threading.Tasks.Task<System.Int32>(System.Net.Sockets.Socket,System.ArraySegment<System.Byte>,System.Net.Sockets.SocketFlags)",
+          "index": 191
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.SocketTaskExtensions::ReceiveAsync:System.Threading.Tasks.Task<System.Int32>(System.Net.Sockets.Socket,System.Collections.Generic.IList<System.ArraySegment<System.Byte>>,System.Net.Sockets.SocketFlags)",
+          "index": 192
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.SocketTaskExtensions::ReceiveAsync:System.Threading.Tasks.ValueTask<System.Int32>(System.Net.Sockets.Socket,System.Memory<System.Byte>,System.Net.Sockets.SocketFlags,System.Threading.CancellationToken)",
+          "index": 193
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.SocketTaskExtensions::ReceiveFromAsync:System.Threading.Tasks.Task<System.Net.Sockets.SocketReceiveFromResult>(System.Net.Sockets.Socket,System.ArraySegment<System.Byte>,System.Net.Sockets.SocketFlags,System.Net.EndPoint)",
+          "index": 194
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.SocketTaskExtensions::ReceiveMessageFromAsync:System.Threading.Tasks.Task<System.Net.Sockets.SocketReceiveMessageFromResult>(System.Net.Sockets.Socket,System.ArraySegment<System.Byte>,System.Net.Sockets.SocketFlags,System.Net.EndPoint)",
+          "index": 195
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.SocketTaskExtensions::SendAsync:System.Threading.Tasks.Task<System.Int32>(System.Net.Sockets.Socket,System.ArraySegment<System.Byte>,System.Net.Sockets.SocketFlags)",
+          "index": 196
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.SocketTaskExtensions::SendAsync:System.Threading.Tasks.Task<System.Int32>(System.Net.Sockets.Socket,System.Collections.Generic.IList<System.ArraySegment<System.Byte>>,System.Net.Sockets.SocketFlags)",
+          "index": 197
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.SocketTaskExtensions::SendAsync:System.Threading.Tasks.ValueTask<System.Int32>(System.Net.Sockets.Socket,System.ReadOnlyMemory<System.Byte>,System.Net.Sockets.SocketFlags,System.Threading.CancellationToken)",
+          "index": 198
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.SocketTaskExtensions::SendToAsync:System.Threading.Tasks.Task<System.Int32>(System.Net.Sockets.Socket,System.ArraySegment<System.Byte>,System.Net.Sockets.SocketFlags,System.Net.EndPoint)",
+          "index": 199
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.TcpClient::BeginConnect:System.IAsyncResult(System.Net.IPAddress,System.Int32,System.AsyncCallback,System.Object)",
+          "index": 200
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.TcpClient::BeginConnect:System.IAsyncResult(System.Net.IPAddress[],System.Int32,System.AsyncCallback,System.Object)",
+          "index": 201
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.TcpClient::BeginConnect:System.IAsyncResult(System.String,System.Int32,System.AsyncCallback,System.Object)",
+          "index": 202
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.TcpClient::Close:System.Void()",
+          "index": 203
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.TcpClient::Connect:System.Void(System.Net.IPAddress,System.Int32)",
+          "index": 204
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.TcpClient::Connect:System.Void(System.Net.IPAddress[],System.Int32)",
+          "index": 205
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.TcpClient::Connect:System.Void(System.Net.IPEndPoint)",
+          "index": 206
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.TcpClient::Connect:System.Void(System.String,System.Int32)",
+          "index": 207
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.TcpClient::ConnectAsync:System.Threading.Tasks.Task(System.Net.IPAddress,System.Int32)",
+          "index": 208
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.TcpClient::ConnectAsync:System.Threading.Tasks.ValueTask(System.Net.IPAddress,System.Int32,System.Threading.CancellationToken)",
+          "index": 209
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.TcpClient::ConnectAsync:System.Threading.Tasks.Task(System.Net.IPAddress[],System.Int32)",
+          "index": 210
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.TcpClient::ConnectAsync:System.Threading.Tasks.ValueTask(System.Net.IPAddress[],System.Int32,System.Threading.CancellationToken)",
+          "index": 211
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.TcpClient::ConnectAsync:System.Threading.Tasks.Task(System.Net.IPEndPoint)",
+          "index": 212
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.TcpClient::ConnectAsync:System.Threading.Tasks.ValueTask(System.Net.IPEndPoint,System.Threading.CancellationToken)",
+          "index": 213
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.TcpClient::ConnectAsync:System.Threading.Tasks.Task(System.String,System.Int32)",
+          "index": 214
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.TcpClient::ConnectAsync:System.Threading.Tasks.ValueTask(System.String,System.Int32,System.Threading.CancellationToken)",
+          "index": 215
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.TcpClient::Dispose:System.Void()",
+          "index": 216
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.TcpClient::EndConnect:System.Void(System.IAsyncResult)",
+          "index": 217
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.TcpClient::GetStream:System.Net.Sockets.NetworkStream()",
+          "index": 218
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.TcpListener::AcceptSocket:System.Net.Sockets.Socket()",
+          "index": 219
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.TcpListener::AcceptSocketAsync:System.Threading.Tasks.Task<System.Net.Sockets.Socket>()",
+          "index": 220
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.TcpListener::AcceptSocketAsync:System.Threading.Tasks.ValueTask<System.Net.Sockets.Socket>(System.Threading.CancellationToken)",
+          "index": 221
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.TcpListener::AcceptTcpClient:System.Net.Sockets.TcpClient()",
+          "index": 222
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.TcpListener::AcceptTcpClientAsync:System.Threading.Tasks.Task<System.Net.Sockets.TcpClient>()",
+          "index": 223
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.TcpListener::AcceptTcpClientAsync:System.Threading.Tasks.ValueTask<System.Net.Sockets.TcpClient>(System.Threading.CancellationToken)",
+          "index": 224
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.TcpListener::AllowNatTraversal:System.Void(System.Boolean)",
+          "index": 225
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.TcpListener::BeginAcceptSocket:System.IAsyncResult(System.AsyncCallback,System.Object)",
+          "index": 226
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.TcpListener::BeginAcceptTcpClient:System.IAsyncResult(System.AsyncCallback,System.Object)",
+          "index": 227
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.TcpListener::Create:System.Net.Sockets.TcpListener(System.Int32)",
+          "index": 228
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.TcpListener::Dispose:System.Void()",
+          "index": 229
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.TcpListener::EndAcceptSocket:System.Net.Sockets.Socket(System.IAsyncResult)",
+          "index": 230
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.TcpListener::EndAcceptTcpClient:System.Net.Sockets.TcpClient(System.IAsyncResult)",
+          "index": 231
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.TcpListener::Pending:System.Boolean()",
+          "index": 232
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.TcpListener::Start:System.Void()",
+          "index": 233
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.TcpListener::Start:System.Void(System.Int32)",
+          "index": 234
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.TcpListener::Stop:System.Void()",
+          "index": 235
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.UdpClient::AllowNatTraversal:System.Void(System.Boolean)",
+          "index": 236
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.UdpClient::BeginReceive:System.IAsyncResult(System.AsyncCallback,System.Object)",
+          "index": 237
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.UdpClient::BeginSend:System.IAsyncResult(System.Byte[],System.Int32,System.AsyncCallback,System.Object)",
+          "index": 238
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.UdpClient::BeginSend:System.IAsyncResult(System.Byte[],System.Int32,System.Net.IPEndPoint,System.AsyncCallback,System.Object)",
+          "index": 239
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.UdpClient::BeginSend:System.IAsyncResult(System.Byte[],System.Int32,System.String,System.Int32,System.AsyncCallback,System.Object)",
+          "index": 240
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.UdpClient::Close:System.Void()",
+          "index": 241
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.UdpClient::Connect:System.Void(System.Net.IPAddress,System.Int32)",
+          "index": 242
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.UdpClient::Connect:System.Void(System.Net.IPEndPoint)",
+          "index": 243
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.UdpClient::Connect:System.Void(System.String,System.Int32)",
+          "index": 244
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.UdpClient::Dispose:System.Void()",
+          "index": 245
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.UdpClient::DropMulticastGroup:System.Void(System.Net.IPAddress)",
+          "index": 246
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.UdpClient::DropMulticastGroup:System.Void(System.Net.IPAddress,System.Int32)",
+          "index": 247
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.UdpClient::EndReceive:System.Byte[](System.IAsyncResult,System.Net.IPEndPoint)",
+          "index": 248
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.UdpClient::EndSend:System.Int32(System.IAsyncResult)",
+          "index": 249
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.UdpClient::JoinMulticastGroup:System.Void(System.Int32,System.Net.IPAddress)",
+          "index": 250
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.UdpClient::JoinMulticastGroup:System.Void(System.Net.IPAddress)",
+          "index": 251
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.UdpClient::JoinMulticastGroup:System.Void(System.Net.IPAddress,System.Int32)",
+          "index": 252
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.UdpClient::JoinMulticastGroup:System.Void(System.Net.IPAddress,System.Net.IPAddress)",
+          "index": 253
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.UdpClient::Receive:System.Byte[](System.Net.IPEndPoint)",
+          "index": 254
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.UdpClient::ReceiveAsync:System.Threading.Tasks.Task<System.Net.Sockets.UdpReceiveResult>()",
+          "index": 255
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.UdpClient::ReceiveAsync:System.Threading.Tasks.ValueTask<System.Net.Sockets.UdpReceiveResult>(System.Threading.CancellationToken)",
+          "index": 256
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.UdpClient::Send:System.Int32(System.Byte[],System.Int32)",
+          "index": 257
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.UdpClient::Send:System.Int32(System.Byte[],System.Int32,System.Net.IPEndPoint)",
+          "index": 258
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.UdpClient::Send:System.Int32(System.Byte[],System.Int32,System.String,System.Int32)",
+          "index": 259
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.UdpClient::Send:System.Int32(System.ReadOnlySpan<System.Byte>)",
+          "index": 260
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.UdpClient::Send:System.Int32(System.ReadOnlySpan<System.Byte>,System.Net.IPEndPoint)",
+          "index": 261
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.UdpClient::Send:System.Int32(System.ReadOnlySpan<System.Byte>,System.String,System.Int32)",
+          "index": 262
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.UdpClient::SendAsync:System.Threading.Tasks.Task<System.Int32>(System.Byte[],System.Int32)",
+          "index": 263
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.UdpClient::SendAsync:System.Threading.Tasks.Task<System.Int32>(System.Byte[],System.Int32,System.Net.IPEndPoint)",
+          "index": 264
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.UdpClient::SendAsync:System.Threading.Tasks.Task<System.Int32>(System.Byte[],System.Int32,System.String,System.Int32)",
+          "index": 265
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.UdpClient::SendAsync:System.Threading.Tasks.ValueTask<System.Int32>(System.ReadOnlyMemory<System.Byte>,System.Net.IPEndPoint,System.Threading.CancellationToken)",
+          "index": 266
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.UdpClient::SendAsync:System.Threading.Tasks.ValueTask<System.Int32>(System.ReadOnlyMemory<System.Byte>,System.String,System.Int32,System.Threading.CancellationToken)",
+          "index": 267
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.UdpClient::SendAsync:System.Threading.Tasks.ValueTask<System.Int32>(System.ReadOnlyMemory<System.Byte>,System.Threading.CancellationToken)",
+          "index": 268
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.UnixDomainSocketEndPoint::Create:System.Net.EndPoint(System.Net.SocketAddress)",
+          "index": 269
+        },
+        {
+          "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.UnixDomainSocketEndPoint::Serialize:System.Net.SocketAddress()",
+          "index": 270
+        }
+      ]
+    }
+  ]
+}

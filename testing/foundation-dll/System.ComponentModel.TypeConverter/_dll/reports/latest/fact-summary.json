@@ -1,0 +1,96 @@
+{
+  "assemblyName": "System.ComponentModel.TypeConverter",
+  "timestamp": "2026-06-05T09:28:20",
+  "totalChunks": 3,
+  "chunksWithFacts": 3,
+  "chunksShutdownAV": 0,
+  "chunksWithValueWarnings": 0,
+  "totalPassed": 633,
+  "totalFactMethods": 633,
+  "chunkSummaries": [
+    {
+      "slug": "component-model",
+      "fact": {
+        "passed": 535,
+        "total": 535,
+        "isShutdownAV": false,
+        "valueSuspicious": false,
+        "valueWarnings": 0,
+        "metaTotal": 564,
+        "metaBenchmarkCount": 564
+      },
+      "benchmark": {
+        "status": "no_results"
+      },
+      "hotupdate": {
+        "passed": 536,
+        "failed": 0,
+        "allSemantic": false,
+        "allRevert": true,
+        "exitCode": 0,
+        "patchDataUsed": true,
+        "patchFailed": false,
+        "truncated": false,
+        "crash": false,
+        "assertFailed": 0,
+        "semanticChangedCount": 0
+      }
+    },
+    {
+      "slug": "global-ns",
+      "fact": {
+        "passed": 74,
+        "total": 74,
+        "isShutdownAV": false,
+        "valueSuspicious": false,
+        "valueWarnings": 0,
+        "metaTotal": 80,
+        "metaBenchmarkCount": 80
+      },
+      "benchmark": {
+        "status": "no_results"
+      },
+      "hotupdate": {
+        "passed": 74,
+        "failed": 0,
+        "allSemantic": false,
+        "allRevert": true,
+        "exitCode": 0,
+        "patchDataUsed": true,
+        "patchFailed": false,
+        "truncated": false,
+        "crash": false,
+        "assertFailed": 0,
+        "semanticChangedCount": 0
+      }
+    },
+    {
+      "slug": "system-componentmodel-design",
+      "fact": {
+        "passed": 24,
+        "total": 24,
+        "isShutdownAV": false,
+        "valueSuspicious": false,
+        "valueWarnings": 0,
+        "metaTotal": 38,
+        "metaBenchmarkCount": 38
+      },
+      "benchmark": {
+        "status": "no_results"
+      },
+      "hotupdate": {
+        "passed": 24,
+        "failed": 0,
+        "allSemantic": false,
+        "allRevert": true,
+        "exitCode": 0,
+        "patchDataUsed": true,
+        "patchFailed": false,
+        "truncated": false,
+        "crash": false,
+        "assertFailed": 0,
+        "semanticChangedCount": 0
+      }
+    }
+  ]
+}

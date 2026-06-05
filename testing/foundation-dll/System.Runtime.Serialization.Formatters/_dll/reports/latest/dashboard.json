@@ -1,0 +1,21 @@
+{
+  "assemblyName": "System.Runtime.Serialization.Formatters",
+  "timestamp": "2026-06-05T09:28:18",
+  "summary": {
+    "chunks": 1,
+    "chunksVerified": 1,
+    "chunksShutdownAV": 0,
+    "chunksWithValueWarnings": 0,
+    "chunksWithMetaMismatch": 1,
+    "factPassRate": 100.0,
+    "totalBenchmarkedMethods": 0,
+    "aggregatePerformance": {},
+    "hotupdate": {
+      "chunksWithPatchData": 0,
+      "chunksPatchFailed": 1,
+      "chunksWithRevertFailure": 0,
+      "totalPassed": 40,
+      "totalFailed": 0
+    }
+  }
+}

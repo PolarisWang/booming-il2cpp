@@ -1,0 +1,28 @@
+[
+  {
+    "methodIndex": 0,
+    "setIndex": 0,
+    "subjectId": "System.Reflection.Metadata.Ecma335.ArrayShapeEncoder::Shape:System.Void(System.Int32,System.Collections.Immutable.ImmutableArray\u003CSystem.Int32\u003E,System.Collections.Immutable.ImmutableArray\u003CSystem.Int32\u003E)__Set0",
+    "isVoid": true,
+    "hasException": true,
+    "exceptionType": "System.ArgumentOutOfRangeException",
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 0,
+    "setIndex": 1,
+    "subjectId": "System.Reflection.Metadata.Ecma335.ArrayShapeEncoder::Shape:System.Void(System.Int32,System.Collections.Immutable.ImmutableArray\u003CSystem.Int32\u003E,System.Collections.Immutable.ImmutableArray\u003CSystem.Int32\u003E)__Set1",
+    "isVoid": true,
+    "hasException": true,
+    "exceptionType": "System.ArgumentOutOfRangeException",
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": null
+  }
+]

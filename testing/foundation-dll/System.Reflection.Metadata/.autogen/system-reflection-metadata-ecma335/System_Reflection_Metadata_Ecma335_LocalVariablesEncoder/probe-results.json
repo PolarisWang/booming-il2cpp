@@ -1,0 +1,15 @@
+[
+  {
+    "methodIndex": 0,
+    "setIndex": 0,
+    "subjectId": "System.Reflection.Metadata.Ecma335.LocalVariablesEncoder::AddVariable:System.Reflection.Metadata.Ecma335.LocalVariableTypeEncoder()__Set0",
+    "isVoid": false,
+    "hasException": false,
+    "exceptionType": null,
+    "returnValue": 1341780718,
+    "returnValueJson": "{\u0022Builder\u0022:null}",
+    "returnValueType": "System.Reflection.Metadata.Ecma335.LocalVariableTypeEncoder",
+    "isDeterministic": true,
+    "outRefValues": null
+  }
+]

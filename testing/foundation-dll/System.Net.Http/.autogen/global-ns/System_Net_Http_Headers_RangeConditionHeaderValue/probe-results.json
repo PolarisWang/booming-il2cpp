@@ -1,0 +1,58 @@
+[
+  {
+    "methodIndex": 0,
+    "setIndex": 0,
+    "subjectId": "System.Net.Http.Headers.RangeConditionHeaderValue::Parse:System.Net.Http.Headers.RangeConditionHeaderValue(System.String)__Set0",
+    "isVoid": false,
+    "hasException": true,
+    "exceptionType": "System.FormatException",
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 0,
+    "setIndex": 1,
+    "subjectId": "System.Net.Http.Headers.RangeConditionHeaderValue::Parse:System.Net.Http.Headers.RangeConditionHeaderValue(System.String)__Set1",
+    "isVoid": false,
+    "hasException": true,
+    "exceptionType": "System.FormatException",
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 1,
+    "setIndex": 0,
+    "subjectId": "System.Net.Http.Headers.RangeConditionHeaderValue::TryParse:System.Boolean(System.String,System.Net.Http.Headers.RangeConditionHeaderValue)__Set0",
+    "isVoid": false,
+    "hasException": false,
+    "exceptionType": null,
+    "returnValue": 0,
+    "returnValueJson": "false",
+    "returnValueType": "System.Boolean",
+    "isDeterministic": true,
+    "outRefValues": [
+      "null"
+    ]
+  },
+  {
+    "methodIndex": 1,
+    "setIndex": 1,
+    "subjectId": "System.Net.Http.Headers.RangeConditionHeaderValue::TryParse:System.Boolean(System.String,System.Net.Http.Headers.RangeConditionHeaderValue)__Set1",
+    "isVoid": false,
+    "hasException": false,
+    "exceptionType": null,
+    "returnValue": 0,
+    "returnValueJson": "false",
+    "returnValueType": "System.Boolean",
+    "isDeterministic": true,
+    "outRefValues": [
+      "null"
+    ]
+  }
+]

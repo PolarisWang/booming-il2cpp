@@ -1,0 +1,80 @@
+[
+  {
+    "methodIndex": 0,
+    "setIndex": 0,
+    "subjectId": "System.Runtime.CompilerServices.CallSiteBinder::Bind:System.Linq.Expressions.Expression(System.Object[],System.Collections.ObjectModel.ReadOnlyCollection\u003CSystem.Linq.Expressions.ParameterExpression\u003E,System.Linq.Expressions.LabelTarget)__Set0",
+    "isVoid": false,
+    "hasException": true,
+    "exceptionType": "System.NullReferenceException",
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 0,
+    "setIndex": 1,
+    "subjectId": "System.Runtime.CompilerServices.CallSiteBinder::Bind:System.Linq.Expressions.Expression(System.Object[],System.Collections.ObjectModel.ReadOnlyCollection\u003CSystem.Linq.Expressions.ParameterExpression\u003E,System.Linq.Expressions.LabelTarget)__Set1",
+    "isVoid": false,
+    "hasException": true,
+    "exceptionType": "System.NullReferenceException",
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 0,
+    "setIndex": 2,
+    "subjectId": "System.Runtime.CompilerServices.CallSiteBinder::Bind:System.Linq.Expressions.Expression(System.Object[],System.Collections.ObjectModel.ReadOnlyCollection\u003CSystem.Linq.Expressions.ParameterExpression\u003E,System.Linq.Expressions.LabelTarget)__Set2",
+    "isVoid": false,
+    "hasException": true,
+    "exceptionType": "System.NullReferenceException",
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 1,
+    "setIndex": 0,
+    "subjectId": "System.Runtime.CompilerServices.CallSiteBinder::BindDelegate:System.String(System.Runtime.CompilerServices.CallSite\u003CSystem.String\u003E,System.Object[])__Set0",
+    "isVoid": false,
+    "hasException": true,
+    "exceptionType": "System.NullReferenceException",
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 1,
+    "setIndex": 1,
+    "subjectId": "System.Runtime.CompilerServices.CallSiteBinder::BindDelegate:System.String(System.Runtime.CompilerServices.CallSite\u003CSystem.String\u003E,System.Object[])__Set1",
+    "isVoid": false,
+    "hasException": true,
+    "exceptionType": "System.NullReferenceException",
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 1,
+    "setIndex": 2,
+    "subjectId": "System.Runtime.CompilerServices.CallSiteBinder::BindDelegate:System.String(System.Runtime.CompilerServices.CallSite\u003CSystem.String\u003E,System.Object[])__Set2",
+    "isVoid": false,
+    "hasException": true,
+    "exceptionType": "System.NullReferenceException",
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": null
+  }
+]

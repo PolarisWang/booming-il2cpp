@@ -1,0 +1,405 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Reflection.Metadata",
+  "chunkSlug": "global-ns",
+  "totalMethods": 49,
+  "customEntryIndices": null,
+  "benchmarkMethodIndices": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29,
+    30,
+    31,
+    32,
+    33,
+    34,
+    35,
+    36,
+    37,
+    38,
+    39,
+    40,
+    41,
+    42,
+    43,
+    44,
+    45,
+    46,
+    47,
+    48
+  ],
+  "hotupdateMethodIndices": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29,
+    30,
+    31,
+    32,
+    33,
+    34,
+    35,
+    36,
+    37,
+    38,
+    39,
+    40,
+    41,
+    42,
+    43,
+    44,
+    45,
+    46,
+    47,
+    48
+  ],
+  "methods": [
+    {
+      "index": 0,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.PortableExecutable.DebugDirectoryBuilder::AddEntry:System.Void(System.Reflection.PortableExecutable.DebugDirectoryEntryType,System.UInt32,System.UInt32)",
+      "generatedMethodId": "AddEntry_0_DebugDirectoryEntryType_uint_uint_0"
+    },
+    {
+      "index": 1,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.PortableExecutable.DebugDirectoryBuilder::AddEntry:System.Void(System.Reflection.PortableExecutable.DebugDirectoryEntryType,System.UInt32,System.UInt32)",
+      "generatedMethodId": "AddEntry_0_DebugDirectoryEntryType_uint_uint_1"
+    },
+    {
+      "index": 2,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.PortableExecutable.DebugDirectoryBuilder::AddEntry:System.Void(System.Reflection.PortableExecutable.DebugDirectoryEntryType,System.UInt32,System.UInt32)",
+      "generatedMethodId": "AddEntry_0_DebugDirectoryEntryType_uint_uint_2"
+    },
+    {
+      "index": 3,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.PortableExecutable.DebugDirectoryBuilder::AddEntry:System.Void(System.Reflection.PortableExecutable.DebugDirectoryEntryType,System.UInt32,System.UInt32,System.Int32,System.Action\u003CSystem.Reflection.Metadata.BlobBuilder,System.Int32\u003E)",
+      "generatedMethodId": "AddEntry_1_DebugDirectoryEntryType_uint_uint_int_System_ActionBlobBuilderint_0"
+    },
+    {
+      "index": 4,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.PortableExecutable.DebugDirectoryBuilder::AddEntry:System.Void(System.Reflection.PortableExecutable.DebugDirectoryEntryType,System.UInt32,System.UInt32,System.Int32,System.Action\u003CSystem.Reflection.Metadata.BlobBuilder,System.Int32\u003E)",
+      "generatedMethodId": "AddEntry_1_DebugDirectoryEntryType_uint_uint_int_System_ActionBlobBuilderint_1"
+    },
+    {
+      "index": 5,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.PortableExecutable.DebugDirectoryBuilder::AddEntry:System.Void(System.Reflection.PortableExecutable.DebugDirectoryEntryType,System.UInt32,System.UInt32,System.Int32,System.Action\u003CSystem.Reflection.Metadata.BlobBuilder,System.Int32\u003E)",
+      "generatedMethodId": "AddEntry_1_DebugDirectoryEntryType_uint_uint_int_System_ActionBlobBuilderint_2"
+    },
+    {
+      "index": 6,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.PortableExecutable.DebugDirectoryBuilder::AddEntry:System.Void(System.Reflection.PortableExecutable.DebugDirectoryEntryType,System.UInt32,System.UInt32,System.Int32,System.Action\u003CSystem.Reflection.Metadata.BlobBuilder,System.Int32\u003E)",
+      "generatedMethodId": "AddEntry_1_DebugDirectoryEntryType_uint_uint_int_System_ActionBlobBuilderint_3"
+    },
+    {
+      "index": 7,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.PortableExecutable.DebugDirectoryBuilder::AddCodeViewEntry:System.Void(System.String,System.Reflection.Metadata.BlobContentId,System.UInt16)",
+      "generatedMethodId": "AddCodeViewEntry_2_string_BlobContentId_ushort_0"
+    },
+    {
+      "index": 8,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.PortableExecutable.DebugDirectoryBuilder::AddCodeViewEntry:System.Void(System.String,System.Reflection.Metadata.BlobContentId,System.UInt16)",
+      "generatedMethodId": "AddCodeViewEntry_2_string_BlobContentId_ushort_1"
+    },
+    {
+      "index": 9,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.PortableExecutable.DebugDirectoryBuilder::AddCodeViewEntry:System.Void(System.String,System.Reflection.Metadata.BlobContentId,System.UInt16)",
+      "generatedMethodId": "AddCodeViewEntry_2_string_BlobContentId_ushort_2"
+    },
+    {
+      "index": 10,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.PortableExecutable.DebugDirectoryBuilder::AddCodeViewEntry:System.Void(System.String,System.Reflection.Metadata.BlobContentId,System.UInt16,System.Int32)",
+      "generatedMethodId": "AddCodeViewEntry_3_string_BlobContentId_ushort_int_0"
+    },
+    {
+      "index": 11,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.PortableExecutable.DebugDirectoryBuilder::AddCodeViewEntry:System.Void(System.String,System.Reflection.Metadata.BlobContentId,System.UInt16,System.Int32)",
+      "generatedMethodId": "AddCodeViewEntry_3_string_BlobContentId_ushort_int_1"
+    },
+    {
+      "index": 12,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.PortableExecutable.DebugDirectoryBuilder::AddCodeViewEntry:System.Void(System.String,System.Reflection.Metadata.BlobContentId,System.UInt16,System.Int32)",
+      "generatedMethodId": "AddCodeViewEntry_3_string_BlobContentId_ushort_int_2"
+    },
+    {
+      "index": 13,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.PortableExecutable.DebugDirectoryBuilder::AddReproducibleEntry:System.Void()",
+      "generatedMethodId": "AddReproducibleEntry_4__0"
+    },
+    {
+      "index": 14,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.PortableExecutable.DebugDirectoryBuilder::AddPdbChecksumEntry:System.Void(System.String,System.Collections.Immutable.ImmutableArray\u003CSystem.Byte\u003E)",
+      "generatedMethodId": "AddPdbChecksumEntry_5_string_ImmutableArraybyte_0"
+    },
+    {
+      "index": 15,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.PortableExecutable.DebugDirectoryBuilder::AddPdbChecksumEntry:System.Void(System.String,System.Collections.Immutable.ImmutableArray\u003CSystem.Byte\u003E)",
+      "generatedMethodId": "AddPdbChecksumEntry_5_string_ImmutableArraybyte_1"
+    },
+    {
+      "index": 16,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.PortableExecutable.DebugDirectoryBuilder::AddEmbeddedPortablePdbEntry:System.Void(System.Reflection.Metadata.BlobBuilder,System.UInt16)",
+      "generatedMethodId": "AddEmbeddedPortablePdbEntry_6_BlobBuilder_ushort_0"
+    },
+    {
+      "index": 17,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.PortableExecutable.DebugDirectoryBuilder::AddEmbeddedPortablePdbEntry:System.Void(System.Reflection.Metadata.BlobBuilder,System.UInt16)",
+      "generatedMethodId": "AddEmbeddedPortablePdbEntry_6_BlobBuilder_ushort_1"
+    },
+    {
+      "index": 18,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.PortableExecutable.ManagedPEBuilder::Sign:System.Void(System.Reflection.Metadata.BlobBuilder,System.Func\u003CSystem.Collections.Generic.IEnumerable\u003CSystem.Reflection.Metadata.Blob\u003E,System.Byte[]\u003E)",
+      "generatedMethodId": "Sign_0_BlobBuilder_System_FuncIEnumerableBlobSystem_Byte_0"
+    },
+    {
+      "index": 19,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.PortableExecutable.ManagedPEBuilder::Sign:System.Void(System.Reflection.Metadata.BlobBuilder,System.Func\u003CSystem.Collections.Generic.IEnumerable\u003CSystem.Reflection.Metadata.Blob\u003E,System.Byte[]\u003E)",
+      "generatedMethodId": "Sign_0_BlobBuilder_System_FuncIEnumerableBlobSystem_Byte_1"
+    },
+    {
+      "index": 20,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.PortableExecutable.PEBuilder::Serialize:System.Reflection.Metadata.BlobContentId(System.Reflection.Metadata.BlobBuilder)",
+      "generatedMethodId": "Serialize_0_BlobBuilder_0"
+    },
+    {
+      "index": 21,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.PortableExecutable.PEHeaderBuilder::CreateExecutableHeader:System.Reflection.PortableExecutable.PEHeaderBuilder()",
+      "generatedMethodId": "CreateExecutableHeader_0__0"
+    },
+    {
+      "index": 22,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.PortableExecutable.PEHeaderBuilder::CreateLibraryHeader:System.Reflection.PortableExecutable.PEHeaderBuilder()",
+      "generatedMethodId": "CreateLibraryHeader_1__0"
+    },
+    {
+      "index": 23,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.PortableExecutable.PEHeaders::TryGetDirectoryOffset:System.Boolean(System.Reflection.PortableExecutable.DirectoryEntry,System.Int32)",
+      "generatedMethodId": "TryGetDirectoryOffset_0_DirectoryEntry_int_0"
+    },
+    {
+      "index": 24,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.PortableExecutable.PEHeaders::TryGetDirectoryOffset:System.Boolean(System.Reflection.PortableExecutable.DirectoryEntry,System.Int32)",
+      "generatedMethodId": "TryGetDirectoryOffset_0_DirectoryEntry_int_1"
+    },
+    {
+      "index": 25,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.PortableExecutable.PEHeaders::GetContainingSectionIndex:System.Int32(System.Int32)",
+      "generatedMethodId": "GetContainingSectionIndex_1_int_0"
+    },
+    {
+      "index": 26,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.PortableExecutable.PEHeaders::GetContainingSectionIndex:System.Int32(System.Int32)",
+      "generatedMethodId": "GetContainingSectionIndex_1_int_1"
+    },
+    {
+      "index": 27,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.PortableExecutable.PEMemoryBlock::GetReader:System.Reflection.Metadata.BlobReader()",
+      "generatedMethodId": "GetReader_0__0"
+    },
+    {
+      "index": 28,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.PortableExecutable.PEMemoryBlock::GetReader:System.Reflection.Metadata.BlobReader(System.Int32,System.Int32)",
+      "generatedMethodId": "GetReader_1_int_int_0"
+    },
+    {
+      "index": 29,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.PortableExecutable.PEMemoryBlock::GetReader:System.Reflection.Metadata.BlobReader(System.Int32,System.Int32)",
+      "generatedMethodId": "GetReader_1_int_int_1"
+    },
+    {
+      "index": 30,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.PortableExecutable.PEMemoryBlock::GetReader:System.Reflection.Metadata.BlobReader(System.Int32,System.Int32)",
+      "generatedMethodId": "GetReader_1_int_int_2"
+    },
+    {
+      "index": 31,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.PortableExecutable.PEMemoryBlock::GetContent:System.Collections.Immutable.ImmutableArray\u003CSystem.Byte\u003E()",
+      "generatedMethodId": "GetContent_2__0"
+    },
+    {
+      "index": 32,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.PortableExecutable.PEMemoryBlock::GetContent:System.Collections.Immutable.ImmutableArray\u003CSystem.Byte\u003E(System.Int32,System.Int32)",
+      "generatedMethodId": "GetContent_3_int_int_0"
+    },
+    {
+      "index": 33,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.PortableExecutable.PEMemoryBlock::GetContent:System.Collections.Immutable.ImmutableArray\u003CSystem.Byte\u003E(System.Int32,System.Int32)",
+      "generatedMethodId": "GetContent_3_int_int_1"
+    },
+    {
+      "index": 34,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.PortableExecutable.PEMemoryBlock::GetContent:System.Collections.Immutable.ImmutableArray\u003CSystem.Byte\u003E(System.Int32,System.Int32)",
+      "generatedMethodId": "GetContent_3_int_int_2"
+    },
+    {
+      "index": 35,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.PortableExecutable.PEReader::Dispose:System.Void()",
+      "generatedMethodId": "Dispose_0__0"
+    },
+    {
+      "index": 36,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.PortableExecutable.PEReader::GetEntireImage:System.Reflection.PortableExecutable.PEMemoryBlock()",
+      "generatedMethodId": "GetEntireImage_1__0"
+    },
+    {
+      "index": 37,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.PortableExecutable.PEReader::GetMetadata:System.Reflection.PortableExecutable.PEMemoryBlock()",
+      "generatedMethodId": "GetMetadata_2__0"
+    },
+    {
+      "index": 38,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.PortableExecutable.PEReader::GetSectionData:System.Reflection.PortableExecutable.PEMemoryBlock(System.Int32)",
+      "generatedMethodId": "GetSectionData_3_int_0"
+    },
+    {
+      "index": 39,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.PortableExecutable.PEReader::GetSectionData:System.Reflection.PortableExecutable.PEMemoryBlock(System.Int32)",
+      "generatedMethodId": "GetSectionData_3_int_1"
+    },
+    {
+      "index": 40,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.PortableExecutable.PEReader::GetSectionData:System.Reflection.PortableExecutable.PEMemoryBlock(System.String)",
+      "generatedMethodId": "GetSectionData_4_string_0"
+    },
+    {
+      "index": 41,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.PortableExecutable.PEReader::GetSectionData:System.Reflection.PortableExecutable.PEMemoryBlock(System.String)",
+      "generatedMethodId": "GetSectionData_4_string_1"
+    },
+    {
+      "index": 42,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.PortableExecutable.PEReader::ReadDebugDirectory:System.Collections.Immutable.ImmutableArray\u003CSystem.Reflection.PortableExecutable.DebugDirectoryEntry\u003E()",
+      "generatedMethodId": "ReadDebugDirectory_5__0"
+    },
+    {
+      "index": 43,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.PortableExecutable.PEReader::ReadCodeViewDebugDirectoryData:System.Reflection.PortableExecutable.CodeViewDebugDirectoryData(System.Reflection.PortableExecutable.DebugDirectoryEntry)",
+      "generatedMethodId": "ReadCodeViewDebugDirectoryData_6_DebugDirectoryEntry_0"
+    },
+    {
+      "index": 44,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.PortableExecutable.PEReader::ReadPdbChecksumDebugDirectoryData:System.Reflection.PortableExecutable.PdbChecksumDebugDirectoryData(System.Reflection.PortableExecutable.DebugDirectoryEntry)",
+      "generatedMethodId": "ReadPdbChecksumDebugDirectoryData_7_DebugDirectoryEntry_0"
+    },
+    {
+      "index": 45,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.PortableExecutable.PEReader::TryOpenAssociatedPortablePdb:System.Boolean(System.String,System.Func\u003CSystem.String,System.IO.Stream\u003E,System.Reflection.Metadata.MetadataReaderProvider,System.String)",
+      "generatedMethodId": "TryOpenAssociatedPortablePdb_8_string_System_FuncstringStream_MetadataReaderProvider_string_0"
+    },
+    {
+      "index": 46,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.PortableExecutable.PEReader::TryOpenAssociatedPortablePdb:System.Boolean(System.String,System.Func\u003CSystem.String,System.IO.Stream\u003E,System.Reflection.Metadata.MetadataReaderProvider,System.String)",
+      "generatedMethodId": "TryOpenAssociatedPortablePdb_8_string_System_FuncstringStream_MetadataReaderProvider_string_1"
+    },
+    {
+      "index": 47,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.PortableExecutable.PEReader::TryOpenAssociatedPortablePdb:System.Boolean(System.String,System.Func\u003CSystem.String,System.IO.Stream\u003E,System.Reflection.Metadata.MetadataReaderProvider,System.String)",
+      "generatedMethodId": "TryOpenAssociatedPortablePdb_8_string_System_FuncstringStream_MetadataReaderProvider_string_2"
+    },
+    {
+      "index": 48,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.PortableExecutable.PEReader::ReadEmbeddedPortablePdbDebugDirectoryData:System.Reflection.Metadata.MetadataReaderProvider(System.Reflection.PortableExecutable.DebugDirectoryEntry)",
+      "generatedMethodId": "ReadEmbeddedPortablePdbDebugDirectoryData_9_DebugDirectoryEntry_0"
+    }
+  ]
+}

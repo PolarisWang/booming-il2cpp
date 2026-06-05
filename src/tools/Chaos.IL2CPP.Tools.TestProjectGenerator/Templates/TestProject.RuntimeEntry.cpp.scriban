@@ -132,6 +132,24 @@ static LONG CALLBACK JitVehHandler(PEXCEPTION_POINTERS ExceptionInfo) noexcept {
     auto* ctx = ExceptionInfo->ContextRecord;
     auto* er = ExceptionInfo->ExceptionRecord;
 
+    // Throttle: if the same RIP crashes repeatedly, the skip isn't working.
+    // Stop trying after N consecutive crashes at the same RIP to avoid
+    // infinite crash → skip → crash loops.
+    static void* s_last_rip = nullptr;
+    static int s_same_rip_count = 0;
+    if (s_last_rip == reinterpret_cast<void*>(ctx->Rip)) {
+        s_same_rip_count++;
+    } else {
+        s_last_rip = reinterpret_cast<void*>(ctx->Rip);
+        s_same_rip_count = 0;
+    }
+    if (s_same_rip_count >= 3) {
+        std::fprintf(stderr, "JIT ABORT: crash at RIP=%p repeated %d times — giving up\n",
+                     reinterpret_cast<void*>(ctx->Rip), s_same_rip_count);
+        std::fflush(stderr);
+        return EXCEPTION_CONTINUE_SEARCH;
+    }
+
     // Log
     std::fprintf(stderr,
         "JIT CRASH: Code=0x%08lX RIP=0x%p RSP=0x%p"

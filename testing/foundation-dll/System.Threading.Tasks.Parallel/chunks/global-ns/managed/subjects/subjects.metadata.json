@@ -1,0 +1,925 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Threading.Tasks.Parallel",
+  "chunkSlug": "global-ns",
+  "totalMethods": 114,
+  "customEntryIndices": null,
+  "benchmarkMethodIndices": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29,
+    30,
+    31,
+    32,
+    33,
+    34,
+    35,
+    36,
+    37,
+    38,
+    39,
+    40,
+    41,
+    42,
+    43,
+    44,
+    45,
+    46,
+    47,
+    48,
+    49,
+    50,
+    51,
+    52,
+    53,
+    54,
+    55,
+    56,
+    57,
+    58,
+    59,
+    60,
+    61,
+    62,
+    63,
+    64,
+    65,
+    66,
+    67,
+    68,
+    69,
+    70,
+    71,
+    72,
+    73,
+    74,
+    75,
+    76,
+    77,
+    78,
+    79,
+    80,
+    81,
+    82,
+    83,
+    84,
+    85,
+    86,
+    87,
+    88,
+    89,
+    90,
+    91,
+    92,
+    93,
+    94,
+    95,
+    96,
+    97,
+    98,
+    99,
+    100,
+    101,
+    102,
+    103,
+    104,
+    105,
+    106,
+    107,
+    108,
+    109,
+    110,
+    111,
+    112,
+    113
+  ],
+  "hotupdateMethodIndices": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29,
+    30,
+    31,
+    32,
+    33,
+    34,
+    35,
+    36,
+    37,
+    38,
+    39,
+    40,
+    41,
+    42,
+    43,
+    44,
+    45,
+    46,
+    47,
+    48,
+    49,
+    50,
+    51,
+    52,
+    53,
+    54,
+    55,
+    56,
+    57,
+    58,
+    59,
+    60,
+    61,
+    62,
+    63,
+    64,
+    65,
+    66,
+    67,
+    68,
+    69,
+    70,
+    71,
+    72,
+    73,
+    74,
+    75,
+    76,
+    77,
+    78,
+    79,
+    80,
+    81,
+    82,
+    83,
+    84,
+    85,
+    86,
+    87,
+    88,
+    89,
+    90,
+    91,
+    92,
+    93,
+    94,
+    95,
+    96,
+    97,
+    98,
+    99,
+    100,
+    101,
+    102,
+    103,
+    104,
+    105,
+    106,
+    107,
+    108,
+    109,
+    110,
+    111,
+    112,
+    113
+  ],
+  "methods": [
+    {
+      "index": 0,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For:System.Threading.Tasks.ParallelLoopResult(System.Int32,System.Int32,System.Action\u003CSystem.Int32\u003E)",
+      "generatedMethodId": "For_0_int_int_System_Actionint_0"
+    },
+    {
+      "index": 1,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For:System.Threading.Tasks.ParallelLoopResult(System.Int32,System.Int32,System.Action\u003CSystem.Int32\u003E)",
+      "generatedMethodId": "For_0_int_int_System_Actionint_1"
+    },
+    {
+      "index": 2,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For:System.Threading.Tasks.ParallelLoopResult(System.Int32,System.Int32,System.Action\u003CSystem.Int32\u003E)",
+      "generatedMethodId": "For_0_int_int_System_Actionint_2"
+    },
+    {
+      "index": 3,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For:System.Threading.Tasks.ParallelLoopResult(System.Int32,System.Int32,System.Action\u003CSystem.Int32\u003E)",
+      "generatedMethodId": "For_0_int_int_System_Actionint_3"
+    },
+    {
+      "index": 4,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For:System.Threading.Tasks.ParallelLoopResult(System.Int64,System.Int64,System.Action\u003CSystem.Int64\u003E)",
+      "generatedMethodId": "For_1_long_long_System_Actionlong_0"
+    },
+    {
+      "index": 5,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For:System.Threading.Tasks.ParallelLoopResult(System.Int64,System.Int64,System.Action\u003CSystem.Int64\u003E)",
+      "generatedMethodId": "For_1_long_long_System_Actionlong_1"
+    },
+    {
+      "index": 6,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For:System.Threading.Tasks.ParallelLoopResult(System.Int64,System.Int64,System.Action\u003CSystem.Int64\u003E)",
+      "generatedMethodId": "For_1_long_long_System_Actionlong_2"
+    },
+    {
+      "index": 7,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For:System.Threading.Tasks.ParallelLoopResult(System.Int64,System.Int64,System.Action\u003CSystem.Int64\u003E)",
+      "generatedMethodId": "For_1_long_long_System_Actionlong_3"
+    },
+    {
+      "index": 8,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For:System.Threading.Tasks.ParallelLoopResult(System.Int32,System.Int32,System.Threading.Tasks.ParallelOptions,System.Action\u003CSystem.Int32\u003E)",
+      "generatedMethodId": "For_2_int_int_ParallelOptions_System_Actionint_0"
+    },
+    {
+      "index": 9,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For:System.Threading.Tasks.ParallelLoopResult(System.Int32,System.Int32,System.Threading.Tasks.ParallelOptions,System.Action\u003CSystem.Int32\u003E)",
+      "generatedMethodId": "For_2_int_int_ParallelOptions_System_Actionint_1"
+    },
+    {
+      "index": 10,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For:System.Threading.Tasks.ParallelLoopResult(System.Int32,System.Int32,System.Threading.Tasks.ParallelOptions,System.Action\u003CSystem.Int32\u003E)",
+      "generatedMethodId": "For_2_int_int_ParallelOptions_System_Actionint_2"
+    },
+    {
+      "index": 11,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For:System.Threading.Tasks.ParallelLoopResult(System.Int32,System.Int32,System.Threading.Tasks.ParallelOptions,System.Action\u003CSystem.Int32\u003E)",
+      "generatedMethodId": "For_2_int_int_ParallelOptions_System_Actionint_3"
+    },
+    {
+      "index": 12,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For:System.Threading.Tasks.ParallelLoopResult(System.Int64,System.Int64,System.Threading.Tasks.ParallelOptions,System.Action\u003CSystem.Int64\u003E)",
+      "generatedMethodId": "For_3_long_long_ParallelOptions_System_Actionlong_0"
+    },
+    {
+      "index": 13,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For:System.Threading.Tasks.ParallelLoopResult(System.Int64,System.Int64,System.Threading.Tasks.ParallelOptions,System.Action\u003CSystem.Int64\u003E)",
+      "generatedMethodId": "For_3_long_long_ParallelOptions_System_Actionlong_1"
+    },
+    {
+      "index": 14,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For:System.Threading.Tasks.ParallelLoopResult(System.Int64,System.Int64,System.Threading.Tasks.ParallelOptions,System.Action\u003CSystem.Int64\u003E)",
+      "generatedMethodId": "For_3_long_long_ParallelOptions_System_Actionlong_2"
+    },
+    {
+      "index": 15,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For:System.Threading.Tasks.ParallelLoopResult(System.Int64,System.Int64,System.Threading.Tasks.ParallelOptions,System.Action\u003CSystem.Int64\u003E)",
+      "generatedMethodId": "For_3_long_long_ParallelOptions_System_Actionlong_3"
+    },
+    {
+      "index": 16,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For:System.Threading.Tasks.ParallelLoopResult(System.Int32,System.Int32,System.Action\u003CSystem.Int32,System.Threading.Tasks.ParallelLoopState\u003E)",
+      "generatedMethodId": "For_4_int_int_System_ActionintParallelLoopState_0"
+    },
+    {
+      "index": 17,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For:System.Threading.Tasks.ParallelLoopResult(System.Int32,System.Int32,System.Action\u003CSystem.Int32,System.Threading.Tasks.ParallelLoopState\u003E)",
+      "generatedMethodId": "For_4_int_int_System_ActionintParallelLoopState_1"
+    },
+    {
+      "index": 18,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For:System.Threading.Tasks.ParallelLoopResult(System.Int32,System.Int32,System.Action\u003CSystem.Int32,System.Threading.Tasks.ParallelLoopState\u003E)",
+      "generatedMethodId": "For_4_int_int_System_ActionintParallelLoopState_2"
+    },
+    {
+      "index": 19,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For:System.Threading.Tasks.ParallelLoopResult(System.Int32,System.Int32,System.Action\u003CSystem.Int32,System.Threading.Tasks.ParallelLoopState\u003E)",
+      "generatedMethodId": "For_4_int_int_System_ActionintParallelLoopState_3"
+    },
+    {
+      "index": 20,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For:System.Threading.Tasks.ParallelLoopResult(System.Int64,System.Int64,System.Action\u003CSystem.Int64,System.Threading.Tasks.ParallelLoopState\u003E)",
+      "generatedMethodId": "For_5_long_long_System_ActionlongParallelLoopState_0"
+    },
+    {
+      "index": 21,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For:System.Threading.Tasks.ParallelLoopResult(System.Int64,System.Int64,System.Action\u003CSystem.Int64,System.Threading.Tasks.ParallelLoopState\u003E)",
+      "generatedMethodId": "For_5_long_long_System_ActionlongParallelLoopState_1"
+    },
+    {
+      "index": 22,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For:System.Threading.Tasks.ParallelLoopResult(System.Int64,System.Int64,System.Action\u003CSystem.Int64,System.Threading.Tasks.ParallelLoopState\u003E)",
+      "generatedMethodId": "For_5_long_long_System_ActionlongParallelLoopState_2"
+    },
+    {
+      "index": 23,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For:System.Threading.Tasks.ParallelLoopResult(System.Int64,System.Int64,System.Action\u003CSystem.Int64,System.Threading.Tasks.ParallelLoopState\u003E)",
+      "generatedMethodId": "For_5_long_long_System_ActionlongParallelLoopState_3"
+    },
+    {
+      "index": 24,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For:System.Threading.Tasks.ParallelLoopResult(System.Int32,System.Int32,System.Threading.Tasks.ParallelOptions,System.Action\u003CSystem.Int32,System.Threading.Tasks.ParallelLoopState\u003E)",
+      "generatedMethodId": "For_6_int_int_ParallelOptions_System_ActionintParallelLoopState_0"
+    },
+    {
+      "index": 25,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For:System.Threading.Tasks.ParallelLoopResult(System.Int32,System.Int32,System.Threading.Tasks.ParallelOptions,System.Action\u003CSystem.Int32,System.Threading.Tasks.ParallelLoopState\u003E)",
+      "generatedMethodId": "For_6_int_int_ParallelOptions_System_ActionintParallelLoopState_1"
+    },
+    {
+      "index": 26,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For:System.Threading.Tasks.ParallelLoopResult(System.Int32,System.Int32,System.Threading.Tasks.ParallelOptions,System.Action\u003CSystem.Int32,System.Threading.Tasks.ParallelLoopState\u003E)",
+      "generatedMethodId": "For_6_int_int_ParallelOptions_System_ActionintParallelLoopState_2"
+    },
+    {
+      "index": 27,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For:System.Threading.Tasks.ParallelLoopResult(System.Int32,System.Int32,System.Threading.Tasks.ParallelOptions,System.Action\u003CSystem.Int32,System.Threading.Tasks.ParallelLoopState\u003E)",
+      "generatedMethodId": "For_6_int_int_ParallelOptions_System_ActionintParallelLoopState_3"
+    },
+    {
+      "index": 28,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For:System.Threading.Tasks.ParallelLoopResult(System.Int64,System.Int64,System.Threading.Tasks.ParallelOptions,System.Action\u003CSystem.Int64,System.Threading.Tasks.ParallelLoopState\u003E)",
+      "generatedMethodId": "For_7_long_long_ParallelOptions_System_ActionlongParallelLoopState_0"
+    },
+    {
+      "index": 29,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For:System.Threading.Tasks.ParallelLoopResult(System.Int64,System.Int64,System.Threading.Tasks.ParallelOptions,System.Action\u003CSystem.Int64,System.Threading.Tasks.ParallelLoopState\u003E)",
+      "generatedMethodId": "For_7_long_long_ParallelOptions_System_ActionlongParallelLoopState_1"
+    },
+    {
+      "index": 30,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For:System.Threading.Tasks.ParallelLoopResult(System.Int64,System.Int64,System.Threading.Tasks.ParallelOptions,System.Action\u003CSystem.Int64,System.Threading.Tasks.ParallelLoopState\u003E)",
+      "generatedMethodId": "For_7_long_long_ParallelOptions_System_ActionlongParallelLoopState_2"
+    },
+    {
+      "index": 31,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For:System.Threading.Tasks.ParallelLoopResult(System.Int64,System.Int64,System.Threading.Tasks.ParallelOptions,System.Action\u003CSystem.Int64,System.Threading.Tasks.ParallelLoopState\u003E)",
+      "generatedMethodId": "For_7_long_long_ParallelOptions_System_ActionlongParallelLoopState_3"
+    },
+    {
+      "index": 32,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For:System.Threading.Tasks.ParallelLoopResult(System.Int32,System.Int32,System.Func\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Threading.Tasks.ParallelLoopState,System.Int32,System.Int32\u003E,System.Action\u003CSystem.Int32\u003E)",
+      "generatedMethodId": "For_8_int_int_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_0"
+    },
+    {
+      "index": 33,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For:System.Threading.Tasks.ParallelLoopResult(System.Int32,System.Int32,System.Func\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Threading.Tasks.ParallelLoopState,System.Int32,System.Int32\u003E,System.Action\u003CSystem.Int32\u003E)",
+      "generatedMethodId": "For_8_int_int_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_1"
+    },
+    {
+      "index": 34,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For:System.Threading.Tasks.ParallelLoopResult(System.Int32,System.Int32,System.Func\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Threading.Tasks.ParallelLoopState,System.Int32,System.Int32\u003E,System.Action\u003CSystem.Int32\u003E)",
+      "generatedMethodId": "For_8_int_int_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_2"
+    },
+    {
+      "index": 35,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For:System.Threading.Tasks.ParallelLoopResult(System.Int32,System.Int32,System.Func\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Threading.Tasks.ParallelLoopState,System.Int32,System.Int32\u003E,System.Action\u003CSystem.Int32\u003E)",
+      "generatedMethodId": "For_8_int_int_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_3"
+    },
+    {
+      "index": 36,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For:System.Threading.Tasks.ParallelLoopResult(System.Int64,System.Int64,System.Func\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int64,System.Threading.Tasks.ParallelLoopState,System.Int32,System.Int32\u003E,System.Action\u003CSystem.Int32\u003E)",
+      "generatedMethodId": "For_9_long_long_System_Funcint_System_FunclongParallelLoopStateintint_System_Actionint_0"
+    },
+    {
+      "index": 37,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For:System.Threading.Tasks.ParallelLoopResult(System.Int64,System.Int64,System.Func\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int64,System.Threading.Tasks.ParallelLoopState,System.Int32,System.Int32\u003E,System.Action\u003CSystem.Int32\u003E)",
+      "generatedMethodId": "For_9_long_long_System_Funcint_System_FunclongParallelLoopStateintint_System_Actionint_1"
+    },
+    {
+      "index": 38,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For:System.Threading.Tasks.ParallelLoopResult(System.Int64,System.Int64,System.Func\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int64,System.Threading.Tasks.ParallelLoopState,System.Int32,System.Int32\u003E,System.Action\u003CSystem.Int32\u003E)",
+      "generatedMethodId": "For_9_long_long_System_Funcint_System_FunclongParallelLoopStateintint_System_Actionint_2"
+    },
+    {
+      "index": 39,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For:System.Threading.Tasks.ParallelLoopResult(System.Int64,System.Int64,System.Func\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int64,System.Threading.Tasks.ParallelLoopState,System.Int32,System.Int32\u003E,System.Action\u003CSystem.Int32\u003E)",
+      "generatedMethodId": "For_9_long_long_System_Funcint_System_FunclongParallelLoopStateintint_System_Actionint_3"
+    },
+    {
+      "index": 40,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For:System.Threading.Tasks.ParallelLoopResult(System.Int32,System.Int32,System.Threading.Tasks.ParallelOptions,System.Func\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Threading.Tasks.ParallelLoopState,System.Int32,System.Int32\u003E,System.Action\u003CSystem.Int32\u003E)",
+      "generatedMethodId": "For_10_int_int_ParallelOptions_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_0"
+    },
+    {
+      "index": 41,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For:System.Threading.Tasks.ParallelLoopResult(System.Int32,System.Int32,System.Threading.Tasks.ParallelOptions,System.Func\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Threading.Tasks.ParallelLoopState,System.Int32,System.Int32\u003E,System.Action\u003CSystem.Int32\u003E)",
+      "generatedMethodId": "For_10_int_int_ParallelOptions_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_1"
+    },
+    {
+      "index": 42,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For:System.Threading.Tasks.ParallelLoopResult(System.Int32,System.Int32,System.Threading.Tasks.ParallelOptions,System.Func\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Threading.Tasks.ParallelLoopState,System.Int32,System.Int32\u003E,System.Action\u003CSystem.Int32\u003E)",
+      "generatedMethodId": "For_10_int_int_ParallelOptions_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_2"
+    },
+    {
+      "index": 43,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For:System.Threading.Tasks.ParallelLoopResult(System.Int32,System.Int32,System.Threading.Tasks.ParallelOptions,System.Func\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Threading.Tasks.ParallelLoopState,System.Int32,System.Int32\u003E,System.Action\u003CSystem.Int32\u003E)",
+      "generatedMethodId": "For_10_int_int_ParallelOptions_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_3"
+    },
+    {
+      "index": 44,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For:System.Threading.Tasks.ParallelLoopResult(System.Int64,System.Int64,System.Threading.Tasks.ParallelOptions,System.Func\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int64,System.Threading.Tasks.ParallelLoopState,System.Int32,System.Int32\u003E,System.Action\u003CSystem.Int32\u003E)",
+      "generatedMethodId": "For_11_long_long_ParallelOptions_System_Funcint_System_FunclongParallelLoopStateintint_System_Actionint_0"
+    },
+    {
+      "index": 45,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For:System.Threading.Tasks.ParallelLoopResult(System.Int64,System.Int64,System.Threading.Tasks.ParallelOptions,System.Func\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int64,System.Threading.Tasks.ParallelLoopState,System.Int32,System.Int32\u003E,System.Action\u003CSystem.Int32\u003E)",
+      "generatedMethodId": "For_11_long_long_ParallelOptions_System_Funcint_System_FunclongParallelLoopStateintint_System_Actionint_1"
+    },
+    {
+      "index": 46,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For:System.Threading.Tasks.ParallelLoopResult(System.Int64,System.Int64,System.Threading.Tasks.ParallelOptions,System.Func\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int64,System.Threading.Tasks.ParallelLoopState,System.Int32,System.Int32\u003E,System.Action\u003CSystem.Int32\u003E)",
+      "generatedMethodId": "For_11_long_long_ParallelOptions_System_Funcint_System_FunclongParallelLoopStateintint_System_Actionint_2"
+    },
+    {
+      "index": 47,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For:System.Threading.Tasks.ParallelLoopResult(System.Int64,System.Int64,System.Threading.Tasks.ParallelOptions,System.Func\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int64,System.Threading.Tasks.ParallelLoopState,System.Int32,System.Int32\u003E,System.Action\u003CSystem.Int32\u003E)",
+      "generatedMethodId": "For_11_long_long_ParallelOptions_System_Funcint_System_FunclongParallelLoopStateintint_System_Actionint_3"
+    },
+    {
+      "index": 48,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach:System.Threading.Tasks.ParallelLoopResult(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Action\u003CSystem.Int32\u003E)",
+      "generatedMethodId": "ForEach_12_IEnumerableint_System_Actionint_0"
+    },
+    {
+      "index": 49,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach:System.Threading.Tasks.ParallelLoopResult(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Action\u003CSystem.Int32\u003E)",
+      "generatedMethodId": "ForEach_12_IEnumerableint_System_Actionint_1"
+    },
+    {
+      "index": 50,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach:System.Threading.Tasks.ParallelLoopResult(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Threading.Tasks.ParallelOptions,System.Action\u003CSystem.Int32\u003E)",
+      "generatedMethodId": "ForEach_13_IEnumerableint_ParallelOptions_System_Actionint_0"
+    },
+    {
+      "index": 51,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach:System.Threading.Tasks.ParallelLoopResult(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Threading.Tasks.ParallelOptions,System.Action\u003CSystem.Int32\u003E)",
+      "generatedMethodId": "ForEach_13_IEnumerableint_ParallelOptions_System_Actionint_1"
+    },
+    {
+      "index": 52,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach:System.Threading.Tasks.ParallelLoopResult(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Action\u003CSystem.Int32,System.Threading.Tasks.ParallelLoopState\u003E)",
+      "generatedMethodId": "ForEach_14_IEnumerableint_System_ActionintParallelLoopState_0"
+    },
+    {
+      "index": 53,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach:System.Threading.Tasks.ParallelLoopResult(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Action\u003CSystem.Int32,System.Threading.Tasks.ParallelLoopState\u003E)",
+      "generatedMethodId": "ForEach_14_IEnumerableint_System_ActionintParallelLoopState_1"
+    },
+    {
+      "index": 54,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach:System.Threading.Tasks.ParallelLoopResult(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Threading.Tasks.ParallelOptions,System.Action\u003CSystem.Int32,System.Threading.Tasks.ParallelLoopState\u003E)",
+      "generatedMethodId": "ForEach_15_IEnumerableint_ParallelOptions_System_ActionintParallelLoopState_0"
+    },
+    {
+      "index": 55,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach:System.Threading.Tasks.ParallelLoopResult(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Threading.Tasks.ParallelOptions,System.Action\u003CSystem.Int32,System.Threading.Tasks.ParallelLoopState\u003E)",
+      "generatedMethodId": "ForEach_15_IEnumerableint_ParallelOptions_System_ActionintParallelLoopState_1"
+    },
+    {
+      "index": 56,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach:System.Threading.Tasks.ParallelLoopResult(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Action\u003CSystem.Int32,System.Threading.Tasks.ParallelLoopState,System.Int64\u003E)",
+      "generatedMethodId": "ForEach_16_IEnumerableint_System_ActionintParallelLoopStatelong_0"
+    },
+    {
+      "index": 57,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach:System.Threading.Tasks.ParallelLoopResult(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Action\u003CSystem.Int32,System.Threading.Tasks.ParallelLoopState,System.Int64\u003E)",
+      "generatedMethodId": "ForEach_16_IEnumerableint_System_ActionintParallelLoopStatelong_1"
+    },
+    {
+      "index": 58,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach:System.Threading.Tasks.ParallelLoopResult(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Threading.Tasks.ParallelOptions,System.Action\u003CSystem.Int32,System.Threading.Tasks.ParallelLoopState,System.Int64\u003E)",
+      "generatedMethodId": "ForEach_17_IEnumerableint_ParallelOptions_System_ActionintParallelLoopStatelong_0"
+    },
+    {
+      "index": 59,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach:System.Threading.Tasks.ParallelLoopResult(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Threading.Tasks.ParallelOptions,System.Action\u003CSystem.Int32,System.Threading.Tasks.ParallelLoopState,System.Int64\u003E)",
+      "generatedMethodId": "ForEach_17_IEnumerableint_ParallelOptions_System_ActionintParallelLoopStatelong_1"
+    },
+    {
+      "index": 60,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach:System.Threading.Tasks.ParallelLoopResult(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Threading.Tasks.ParallelLoopState,System.Int32,System.Int32\u003E,System.Action\u003CSystem.Int32\u003E)",
+      "generatedMethodId": "ForEach_18_IEnumerableint_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_0"
+    },
+    {
+      "index": 61,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach:System.Threading.Tasks.ParallelLoopResult(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Threading.Tasks.ParallelLoopState,System.Int32,System.Int32\u003E,System.Action\u003CSystem.Int32\u003E)",
+      "generatedMethodId": "ForEach_18_IEnumerableint_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_1"
+    },
+    {
+      "index": 62,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach:System.Threading.Tasks.ParallelLoopResult(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Threading.Tasks.ParallelOptions,System.Func\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Threading.Tasks.ParallelLoopState,System.Int32,System.Int32\u003E,System.Action\u003CSystem.Int32\u003E)",
+      "generatedMethodId": "ForEach_19_IEnumerableint_ParallelOptions_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_0"
+    },
+    {
+      "index": 63,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach:System.Threading.Tasks.ParallelLoopResult(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Threading.Tasks.ParallelOptions,System.Func\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Threading.Tasks.ParallelLoopState,System.Int32,System.Int32\u003E,System.Action\u003CSystem.Int32\u003E)",
+      "generatedMethodId": "ForEach_19_IEnumerableint_ParallelOptions_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_1"
+    },
+    {
+      "index": 64,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach:System.Threading.Tasks.ParallelLoopResult(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Threading.Tasks.ParallelLoopState,System.Int64,System.Int32,System.Int32\u003E,System.Action\u003CSystem.Int32\u003E)",
+      "generatedMethodId": "ForEach_20_IEnumerableint_System_Funcint_System_FuncintParallelLoopStatelongintint_System_Actionint_0"
+    },
+    {
+      "index": 65,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach:System.Threading.Tasks.ParallelLoopResult(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Threading.Tasks.ParallelLoopState,System.Int64,System.Int32,System.Int32\u003E,System.Action\u003CSystem.Int32\u003E)",
+      "generatedMethodId": "ForEach_20_IEnumerableint_System_Funcint_System_FuncintParallelLoopStatelongintint_System_Actionint_1"
+    },
+    {
+      "index": 66,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach:System.Threading.Tasks.ParallelLoopResult(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Threading.Tasks.ParallelOptions,System.Func\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Threading.Tasks.ParallelLoopState,System.Int64,System.Int32,System.Int32\u003E,System.Action\u003CSystem.Int32\u003E)",
+      "generatedMethodId": "ForEach_21_IEnumerableint_ParallelOptions_System_Funcint_System_FuncintParallelLoopStatelongintint_System_Actionint_0"
+    },
+    {
+      "index": 67,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach:System.Threading.Tasks.ParallelLoopResult(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Threading.Tasks.ParallelOptions,System.Func\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Threading.Tasks.ParallelLoopState,System.Int64,System.Int32,System.Int32\u003E,System.Action\u003CSystem.Int32\u003E)",
+      "generatedMethodId": "ForEach_21_IEnumerableint_ParallelOptions_System_Funcint_System_FuncintParallelLoopStatelongintint_System_Actionint_1"
+    },
+    {
+      "index": 68,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach:System.Threading.Tasks.ParallelLoopResult(System.Collections.Concurrent.Partitioner\u003CSystem.Int32\u003E,System.Action\u003CSystem.Int32\u003E)",
+      "generatedMethodId": "ForEach_22_Partitionerint_System_Actionint_0"
+    },
+    {
+      "index": 69,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach:System.Threading.Tasks.ParallelLoopResult(System.Collections.Concurrent.Partitioner\u003CSystem.Int32\u003E,System.Action\u003CSystem.Int32\u003E)",
+      "generatedMethodId": "ForEach_22_Partitionerint_System_Actionint_1"
+    },
+    {
+      "index": 70,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach:System.Threading.Tasks.ParallelLoopResult(System.Collections.Concurrent.Partitioner\u003CSystem.Int32\u003E,System.Action\u003CSystem.Int32,System.Threading.Tasks.ParallelLoopState\u003E)",
+      "generatedMethodId": "ForEach_23_Partitionerint_System_ActionintParallelLoopState_0"
+    },
+    {
+      "index": 71,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach:System.Threading.Tasks.ParallelLoopResult(System.Collections.Concurrent.Partitioner\u003CSystem.Int32\u003E,System.Action\u003CSystem.Int32,System.Threading.Tasks.ParallelLoopState\u003E)",
+      "generatedMethodId": "ForEach_23_Partitionerint_System_ActionintParallelLoopState_1"
+    },
+    {
+      "index": 72,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach:System.Threading.Tasks.ParallelLoopResult(System.Collections.Concurrent.OrderablePartitioner\u003CSystem.Int32\u003E,System.Action\u003CSystem.Int32,System.Threading.Tasks.ParallelLoopState,System.Int64\u003E)",
+      "generatedMethodId": "ForEach_24_OrderablePartitionerint_System_ActionintParallelLoopStatelong_0"
+    },
+    {
+      "index": 73,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach:System.Threading.Tasks.ParallelLoopResult(System.Collections.Concurrent.OrderablePartitioner\u003CSystem.Int32\u003E,System.Action\u003CSystem.Int32,System.Threading.Tasks.ParallelLoopState,System.Int64\u003E)",
+      "generatedMethodId": "ForEach_24_OrderablePartitionerint_System_ActionintParallelLoopStatelong_1"
+    },
+    {
+      "index": 74,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach:System.Threading.Tasks.ParallelLoopResult(System.Collections.Concurrent.Partitioner\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Threading.Tasks.ParallelLoopState,System.Int32,System.Int32\u003E,System.Action\u003CSystem.Int32\u003E)",
+      "generatedMethodId": "ForEach_25_Partitionerint_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_0"
+    },
+    {
+      "index": 75,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach:System.Threading.Tasks.ParallelLoopResult(System.Collections.Concurrent.Partitioner\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Threading.Tasks.ParallelLoopState,System.Int32,System.Int32\u003E,System.Action\u003CSystem.Int32\u003E)",
+      "generatedMethodId": "ForEach_25_Partitionerint_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_1"
+    },
+    {
+      "index": 76,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach:System.Threading.Tasks.ParallelLoopResult(System.Collections.Concurrent.OrderablePartitioner\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Threading.Tasks.ParallelLoopState,System.Int64,System.Int32,System.Int32\u003E,System.Action\u003CSystem.Int32\u003E)",
+      "generatedMethodId": "ForEach_26_OrderablePartitionerint_System_Funcint_System_FuncintParallelLoopStatelongintint_System_Actionint_0"
+    },
+    {
+      "index": 77,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach:System.Threading.Tasks.ParallelLoopResult(System.Collections.Concurrent.OrderablePartitioner\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Threading.Tasks.ParallelLoopState,System.Int64,System.Int32,System.Int32\u003E,System.Action\u003CSystem.Int32\u003E)",
+      "generatedMethodId": "ForEach_26_OrderablePartitionerint_System_Funcint_System_FuncintParallelLoopStatelongintint_System_Actionint_1"
+    },
+    {
+      "index": 78,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach:System.Threading.Tasks.ParallelLoopResult(System.Collections.Concurrent.Partitioner\u003CSystem.Int32\u003E,System.Threading.Tasks.ParallelOptions,System.Action\u003CSystem.Int32\u003E)",
+      "generatedMethodId": "ForEach_27_Partitionerint_ParallelOptions_System_Actionint_0"
+    },
+    {
+      "index": 79,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach:System.Threading.Tasks.ParallelLoopResult(System.Collections.Concurrent.Partitioner\u003CSystem.Int32\u003E,System.Threading.Tasks.ParallelOptions,System.Action\u003CSystem.Int32\u003E)",
+      "generatedMethodId": "ForEach_27_Partitionerint_ParallelOptions_System_Actionint_1"
+    },
+    {
+      "index": 80,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach:System.Threading.Tasks.ParallelLoopResult(System.Collections.Concurrent.Partitioner\u003CSystem.Int32\u003E,System.Threading.Tasks.ParallelOptions,System.Action\u003CSystem.Int32,System.Threading.Tasks.ParallelLoopState\u003E)",
+      "generatedMethodId": "ForEach_28_Partitionerint_ParallelOptions_System_ActionintParallelLoopState_0"
+    },
+    {
+      "index": 81,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach:System.Threading.Tasks.ParallelLoopResult(System.Collections.Concurrent.Partitioner\u003CSystem.Int32\u003E,System.Threading.Tasks.ParallelOptions,System.Action\u003CSystem.Int32,System.Threading.Tasks.ParallelLoopState\u003E)",
+      "generatedMethodId": "ForEach_28_Partitionerint_ParallelOptions_System_ActionintParallelLoopState_1"
+    },
+    {
+      "index": 82,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach:System.Threading.Tasks.ParallelLoopResult(System.Collections.Concurrent.OrderablePartitioner\u003CSystem.Int32\u003E,System.Threading.Tasks.ParallelOptions,System.Action\u003CSystem.Int32,System.Threading.Tasks.ParallelLoopState,System.Int64\u003E)",
+      "generatedMethodId": "ForEach_29_OrderablePartitionerint_ParallelOptions_System_ActionintParallelLoopStatelong_0"
+    },
+    {
+      "index": 83,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach:System.Threading.Tasks.ParallelLoopResult(System.Collections.Concurrent.OrderablePartitioner\u003CSystem.Int32\u003E,System.Threading.Tasks.ParallelOptions,System.Action\u003CSystem.Int32,System.Threading.Tasks.ParallelLoopState,System.Int64\u003E)",
+      "generatedMethodId": "ForEach_29_OrderablePartitionerint_ParallelOptions_System_ActionintParallelLoopStatelong_1"
+    },
+    {
+      "index": 84,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach:System.Threading.Tasks.ParallelLoopResult(System.Collections.Concurrent.Partitioner\u003CSystem.Int32\u003E,System.Threading.Tasks.ParallelOptions,System.Func\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Threading.Tasks.ParallelLoopState,System.Int32,System.Int32\u003E,System.Action\u003CSystem.Int32\u003E)",
+      "generatedMethodId": "ForEach_30_Partitionerint_ParallelOptions_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_0"
+    },
+    {
+      "index": 85,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach:System.Threading.Tasks.ParallelLoopResult(System.Collections.Concurrent.Partitioner\u003CSystem.Int32\u003E,System.Threading.Tasks.ParallelOptions,System.Func\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Threading.Tasks.ParallelLoopState,System.Int32,System.Int32\u003E,System.Action\u003CSystem.Int32\u003E)",
+      "generatedMethodId": "ForEach_30_Partitionerint_ParallelOptions_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_1"
+    },
+    {
+      "index": 86,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach:System.Threading.Tasks.ParallelLoopResult(System.Collections.Concurrent.OrderablePartitioner\u003CSystem.Int32\u003E,System.Threading.Tasks.ParallelOptions,System.Func\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Threading.Tasks.ParallelLoopState,System.Int64,System.Int32,System.Int32\u003E,System.Action\u003CSystem.Int32\u003E)",
+      "generatedMethodId": "ForEach_31_OrderablePartitionerint_ParallelOptions_System_Funcint_System_FuncintParallelLoopStatelongintint_System_Actionint_0"
+    },
+    {
+      "index": 87,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach:System.Threading.Tasks.ParallelLoopResult(System.Collections.Concurrent.OrderablePartitioner\u003CSystem.Int32\u003E,System.Threading.Tasks.ParallelOptions,System.Func\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Threading.Tasks.ParallelLoopState,System.Int64,System.Int32,System.Int32\u003E,System.Action\u003CSystem.Int32\u003E)",
+      "generatedMethodId": "ForEach_31_OrderablePartitionerint_ParallelOptions_System_Funcint_System_FuncintParallelLoopStatelongintint_System_Actionint_1"
+    },
+    {
+      "index": 88,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForAsync:System.Threading.Tasks.Task(System.Int64,System.Int64,System.Func\u003CSystem.Int64,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask\u003E)",
+      "generatedMethodId": "ForAsync_32_long_long_System_FunclongCancellationTokenValueTask_0"
+    },
+    {
+      "index": 89,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForAsync:System.Threading.Tasks.Task(System.Int64,System.Int64,System.Func\u003CSystem.Int64,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask\u003E)",
+      "generatedMethodId": "ForAsync_32_long_long_System_FunclongCancellationTokenValueTask_1"
+    },
+    {
+      "index": 90,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForAsync:System.Threading.Tasks.Task(System.Int64,System.Int64,System.Func\u003CSystem.Int64,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask\u003E)",
+      "generatedMethodId": "ForAsync_32_long_long_System_FunclongCancellationTokenValueTask_2"
+    },
+    {
+      "index": 91,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForAsync:System.Threading.Tasks.Task(System.Int64,System.Int64,System.Func\u003CSystem.Int64,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask\u003E)",
+      "generatedMethodId": "ForAsync_32_long_long_System_FunclongCancellationTokenValueTask_3"
+    },
+    {
+      "index": 92,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForAsync:System.Threading.Tasks.Task(System.Int64,System.Int64,System.Threading.CancellationToken,System.Func\u003CSystem.Int64,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask\u003E)",
+      "generatedMethodId": "ForAsync_33_long_long_CancellationToken_System_FunclongCancellationTokenValueTask_0"
+    },
+    {
+      "index": 93,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForAsync:System.Threading.Tasks.Task(System.Int64,System.Int64,System.Threading.CancellationToken,System.Func\u003CSystem.Int64,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask\u003E)",
+      "generatedMethodId": "ForAsync_33_long_long_CancellationToken_System_FunclongCancellationTokenValueTask_1"
+    },
+    {
+      "index": 94,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForAsync:System.Threading.Tasks.Task(System.Int64,System.Int64,System.Threading.CancellationToken,System.Func\u003CSystem.Int64,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask\u003E)",
+      "generatedMethodId": "ForAsync_33_long_long_CancellationToken_System_FunclongCancellationTokenValueTask_2"
+    },
+    {
+      "index": 95,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForAsync:System.Threading.Tasks.Task(System.Int64,System.Int64,System.Threading.CancellationToken,System.Func\u003CSystem.Int64,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask\u003E)",
+      "generatedMethodId": "ForAsync_33_long_long_CancellationToken_System_FunclongCancellationTokenValueTask_3"
+    },
+    {
+      "index": 96,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForAsync:System.Threading.Tasks.Task(System.Int64,System.Int64,System.Threading.Tasks.ParallelOptions,System.Func\u003CSystem.Int64,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask\u003E)",
+      "generatedMethodId": "ForAsync_34_long_long_ParallelOptions_System_FunclongCancellationTokenValueTask_0"
+    },
+    {
+      "index": 97,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForAsync:System.Threading.Tasks.Task(System.Int64,System.Int64,System.Threading.Tasks.ParallelOptions,System.Func\u003CSystem.Int64,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask\u003E)",
+      "generatedMethodId": "ForAsync_34_long_long_ParallelOptions_System_FunclongCancellationTokenValueTask_1"
+    },
+    {
+      "index": 98,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForAsync:System.Threading.Tasks.Task(System.Int64,System.Int64,System.Threading.Tasks.ParallelOptions,System.Func\u003CSystem.Int64,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask\u003E)",
+      "generatedMethodId": "ForAsync_34_long_long_ParallelOptions_System_FunclongCancellationTokenValueTask_2"
+    },
+    {
+      "index": 99,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForAsync:System.Threading.Tasks.Task(System.Int64,System.Int64,System.Threading.Tasks.ParallelOptions,System.Func\u003CSystem.Int64,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask\u003E)",
+      "generatedMethodId": "ForAsync_34_long_long_ParallelOptions_System_FunclongCancellationTokenValueTask_3"
+    },
+    {
+      "index": 100,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEachAsync:System.Threading.Tasks.Task(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask\u003E)",
+      "generatedMethodId": "ForEachAsync_35_IEnumerableint_System_FuncintCancellationTokenValueTask_0"
+    },
+    {
+      "index": 101,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEachAsync:System.Threading.Tasks.Task(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask\u003E)",
+      "generatedMethodId": "ForEachAsync_35_IEnumerableint_System_FuncintCancellationTokenValueTask_1"
+    },
+    {
+      "index": 102,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEachAsync:System.Threading.Tasks.Task(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Threading.CancellationToken,System.Func\u003CSystem.Int32,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask\u003E)",
+      "generatedMethodId": "ForEachAsync_36_IEnumerableint_CancellationToken_System_FuncintCancellationTokenValueTask_0"
+    },
+    {
+      "index": 103,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEachAsync:System.Threading.Tasks.Task(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Threading.CancellationToken,System.Func\u003CSystem.Int32,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask\u003E)",
+      "generatedMethodId": "ForEachAsync_36_IEnumerableint_CancellationToken_System_FuncintCancellationTokenValueTask_1"
+    },
+    {
+      "index": 104,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEachAsync:System.Threading.Tasks.Task(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Threading.Tasks.ParallelOptions,System.Func\u003CSystem.Int32,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask\u003E)",
+      "generatedMethodId": "ForEachAsync_37_IEnumerableint_ParallelOptions_System_FuncintCancellationTokenValueTask_0"
+    },
+    {
+      "index": 105,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEachAsync:System.Threading.Tasks.Task(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Threading.Tasks.ParallelOptions,System.Func\u003CSystem.Int32,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask\u003E)",
+      "generatedMethodId": "ForEachAsync_37_IEnumerableint_ParallelOptions_System_FuncintCancellationTokenValueTask_1"
+    },
+    {
+      "index": 106,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEachAsync:System.Threading.Tasks.Task(System.Collections.Generic.IAsyncEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask\u003E)",
+      "generatedMethodId": "ForEachAsync_38_IAsyncEnumerableint_System_FuncintCancellationTokenValueTask_0"
+    },
+    {
+      "index": 107,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEachAsync:System.Threading.Tasks.Task(System.Collections.Generic.IAsyncEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask\u003E)",
+      "generatedMethodId": "ForEachAsync_38_IAsyncEnumerableint_System_FuncintCancellationTokenValueTask_1"
+    },
+    {
+      "index": 108,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEachAsync:System.Threading.Tasks.Task(System.Collections.Generic.IAsyncEnumerable\u003CSystem.Int32\u003E,System.Threading.CancellationToken,System.Func\u003CSystem.Int32,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask\u003E)",
+      "generatedMethodId": "ForEachAsync_39_IAsyncEnumerableint_CancellationToken_System_FuncintCancellationTokenValueTask_0"
+    },
+    {
+      "index": 109,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEachAsync:System.Threading.Tasks.Task(System.Collections.Generic.IAsyncEnumerable\u003CSystem.Int32\u003E,System.Threading.CancellationToken,System.Func\u003CSystem.Int32,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask\u003E)",
+      "generatedMethodId": "ForEachAsync_39_IAsyncEnumerableint_CancellationToken_System_FuncintCancellationTokenValueTask_1"
+    },
+    {
+      "index": 110,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEachAsync:System.Threading.Tasks.Task(System.Collections.Generic.IAsyncEnumerable\u003CSystem.Int32\u003E,System.Threading.Tasks.ParallelOptions,System.Func\u003CSystem.Int32,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask\u003E)",
+      "generatedMethodId": "ForEachAsync_40_IAsyncEnumerableint_ParallelOptions_System_FuncintCancellationTokenValueTask_0"
+    },
+    {
+      "index": 111,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEachAsync:System.Threading.Tasks.Task(System.Collections.Generic.IAsyncEnumerable\u003CSystem.Int32\u003E,System.Threading.Tasks.ParallelOptions,System.Func\u003CSystem.Int32,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask\u003E)",
+      "generatedMethodId": "ForEachAsync_40_IAsyncEnumerableint_ParallelOptions_System_FuncintCancellationTokenValueTask_1"
+    },
+    {
+      "index": 112,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelLoopState::Stop:System.Void()",
+      "generatedMethodId": "Stop_0__0"
+    },
+    {
+      "index": 113,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelLoopState::Break:System.Void()",
+      "generatedMethodId": "Break_1__0"
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+[
+  {
+    "methodIndex": 0,
+    "setIndex": 0,
+    "subjectId": "System.Reflection.PortableExecutable.PEHeaderBuilder::CreateExecutableHeader:System.Reflection.PortableExecutable.PEHeaderBuilder()__Set0",
+    "isVoid": false,
+    "hasException": false,
+    "exceptionType": null,
+    "returnValue": 42750725,
+    "returnValueJson": "{\u0022Machine\u0022:0,\u0022ImageCharacteristics\u0022:2,\u0022MajorLinkerVersion\u0022:48,\u0022MinorLinkerVersion\u0022:0,\u0022ImageBase\u0022:4194304,\u0022SectionAlignment\u0022:8192,\u0022FileAlignment\u0022:512,\u0022MajorOperatingSystemVersion\u0022:4,\u0022MinorOperatingSystemVersion\u0022:0,\u0022MajorImageVersion\u0022:0,\u0022MinorImageVersion\u0022:0,\u0022MajorSubsystemVersion\u0022:4,\u0022MinorSubsystemVersion\u0022:0,\u0022Subsystem\u0022:3,\u0022DllCharacteristics\u0022:34112,\u0022SizeOfStackReserve\u0022:1048576,\u0022SizeOfStackCommit\u0022:4096,\u0022SizeOfHeapReserve\u0022:1048576,\u0022SizeOfHeapCommit\u0022:4096}",
+    "returnValueType": "System.Reflection.PortableExecutable.PEHeaderBuilder",
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 1,
+    "setIndex": 1,
+    "subjectId": "System.Reflection.PortableExecutable.PEHeaderBuilder::CreateLibraryHeader:System.Reflection.PortableExecutable.PEHeaderBuilder()__Set1",
+    "isVoid": false,
+    "hasException": false,
+    "exceptionType": null,
+    "returnValue": 49212206,
+    "returnValueJson": "{\u0022Machine\u0022:0,\u0022ImageCharacteristics\u0022:8194,\u0022MajorLinkerVersion\u0022:48,\u0022MinorLinkerVersion\u0022:0,\u0022ImageBase\u0022:4194304,\u0022SectionAlignment\u0022:8192,\u0022FileAlignment\u0022:512,\u0022MajorOperatingSystemVersion\u0022:4,\u0022MinorOperatingSystemVersion\u0022:0,\u0022MajorImageVersion\u0022:0,\u0022MinorImageVersion\u0022:0,\u0022MajorSubsystemVersion\u0022:4,\u0022MinorSubsystemVersion\u0022:0,\u0022Subsystem\u0022:3,\u0022DllCharacteristics\u0022:34112,\u0022SizeOfStackReserve\u0022:1048576,\u0022SizeOfStackCommit\u0022:4096,\u0022SizeOfHeapReserve\u0022:1048576,\u0022SizeOfHeapCommit\u0022:4096}",
+    "returnValueType": "System.Reflection.PortableExecutable.PEHeaderBuilder",
+    "isDeterministic": true,
+    "outRefValues": null
+  }
+]

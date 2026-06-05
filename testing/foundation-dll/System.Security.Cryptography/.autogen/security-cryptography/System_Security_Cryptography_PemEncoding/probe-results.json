@@ -1,0 +1,41 @@
+[
+  {
+    "methodIndex": 0,
+    "setIndex": 0,
+    "subjectId": "System.Security.Cryptography.PemEncoding::GetEncodedSize:System.Int32(System.Int32,System.Int32)__Set0",
+    "isVoid": false,
+    "hasException": false,
+    "exceptionType": null,
+    "returnValue": 31,
+    "returnValueJson": "31",
+    "returnValueType": "System.Int32",
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 0,
+    "setIndex": 1,
+    "subjectId": "System.Security.Cryptography.PemEncoding::GetEncodedSize:System.Int32(System.Int32,System.Int32)__Set1",
+    "isVoid": false,
+    "hasException": false,
+    "exceptionType": null,
+    "returnValue": 31,
+    "returnValueJson": "31",
+    "returnValueType": "System.Int32",
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 0,
+    "setIndex": 2,
+    "subjectId": "System.Security.Cryptography.PemEncoding::GetEncodedSize:System.Int32(System.Int32,System.Int32)__Set2",
+    "isVoid": false,
+    "hasException": false,
+    "exceptionType": null,
+    "returnValue": 31,
+    "returnValueJson": "31",
+    "returnValueType": "System.Int32",
+    "isDeterministic": true,
+    "outRefValues": null
+  }
+]

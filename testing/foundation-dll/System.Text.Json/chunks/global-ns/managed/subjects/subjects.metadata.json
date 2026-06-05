@@ -1,0 +1,301 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Text.Json",
+  "chunkSlug": "global-ns",
+  "totalMethods": 36,
+  "customEntryIndices": null,
+  "benchmarkMethodIndices": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29,
+    30,
+    31,
+    32,
+    33,
+    34,
+    35
+  ],
+  "hotupdateMethodIndices": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29,
+    30,
+    31,
+    32,
+    33,
+    34,
+    35
+  ],
+  "methods": [
+    {
+      "index": 0,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.JsonMetadataServices::CreateArrayInfo:System.Text.Json.Serialization.Metadata.JsonTypeInfo\u003CSystem.Int32[]\u003E(System.Text.Json.JsonSerializerOptions,System.Text.Json.Serialization.Metadata.JsonCollectionInfoValues\u003CSystem.Int32[]\u003E)",
+      "generatedMethodId": "CreateArrayInfo_0_JsonSerializerOptions_JsonCollectionInfoValuesSystem_Int32_0"
+    },
+    {
+      "index": 1,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.JsonMetadataServices::CreateListInfo:System.Text.Json.Serialization.Metadata.JsonTypeInfo\u003CSystem.Collections.Generic.List\u003CSystem.Int32\u003E\u003E(System.Text.Json.JsonSerializerOptions,System.Text.Json.Serialization.Metadata.JsonCollectionInfoValues\u003CSystem.Collections.Generic.List\u003CSystem.Int32\u003E\u003E)",
+      "generatedMethodId": "CreateListInfo_1_JsonSerializerOptions_JsonCollectionInfoValuesListint_0"
+    },
+    {
+      "index": 2,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.JsonMetadataServices::CreateDictionaryInfo:System.Text.Json.Serialization.Metadata.JsonTypeInfo\u003CSystem.Collections.Generic.Dictionary\u003CSystem.Int32,System.Int32\u003E\u003E(System.Text.Json.JsonSerializerOptions,System.Text.Json.Serialization.Metadata.JsonCollectionInfoValues\u003CSystem.Collections.Generic.Dictionary\u003CSystem.Int32,System.Int32\u003E\u003E)",
+      "generatedMethodId": "CreateDictionaryInfo_2_JsonSerializerOptions_JsonCollectionInfoValuesDictionaryintint_0"
+    },
+    {
+      "index": 3,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.JsonMetadataServices::CreateImmutableDictionaryInfo:System.Text.Json.Serialization.Metadata.JsonTypeInfo\u003CSystem.Collections.Generic.Dictionary\u003CSystem.Int32,System.Int32\u003E\u003E(System.Text.Json.JsonSerializerOptions,System.Text.Json.Serialization.Metadata.JsonCollectionInfoValues\u003CSystem.Collections.Generic.Dictionary\u003CSystem.Int32,System.Int32\u003E\u003E,System.Func\u003CSystem.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.Int32,System.Int32\u003E\u003E,System.Collections.Generic.Dictionary\u003CSystem.Int32,System.Int32\u003E\u003E)",
+      "generatedMethodId": "CreateImmutableDictionaryInfo_3_JsonSerializerOptions_JsonCollectionInfoValuesDictionaryintint_System_FuncIEnumerableKeyValuePairintintDictionaryintint_0"
+    },
+    {
+      "index": 4,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.JsonMetadataServices::CreateImmutableDictionaryInfo:System.Text.Json.Serialization.Metadata.JsonTypeInfo\u003CSystem.Collections.Generic.Dictionary\u003CSystem.Int32,System.Int32\u003E\u003E(System.Text.Json.JsonSerializerOptions,System.Text.Json.Serialization.Metadata.JsonCollectionInfoValues\u003CSystem.Collections.Generic.Dictionary\u003CSystem.Int32,System.Int32\u003E\u003E,System.Func\u003CSystem.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.Int32,System.Int32\u003E\u003E,System.Collections.Generic.Dictionary\u003CSystem.Int32,System.Int32\u003E\u003E)",
+      "generatedMethodId": "CreateImmutableDictionaryInfo_3_JsonSerializerOptions_JsonCollectionInfoValuesDictionaryintint_System_FuncIEnumerableKeyValuePairintintDictionaryintint_1"
+    },
+    {
+      "index": 5,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.JsonMetadataServices::CreateIDictionaryInfo:System.Text.Json.Serialization.Metadata.JsonTypeInfo\u003CSystem.Collections.Generic.Dictionary\u003CSystem.Int32,System.Int32\u003E\u003E(System.Text.Json.JsonSerializerOptions,System.Text.Json.Serialization.Metadata.JsonCollectionInfoValues\u003CSystem.Collections.Generic.Dictionary\u003CSystem.Int32,System.Int32\u003E\u003E)",
+      "generatedMethodId": "CreateIDictionaryInfo_4_JsonSerializerOptions_JsonCollectionInfoValuesDictionaryintint_0"
+    },
+    {
+      "index": 6,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.JsonMetadataServices::CreateIReadOnlyDictionaryInfo:System.Text.Json.Serialization.Metadata.JsonTypeInfo\u003CSystem.Collections.Generic.Dictionary\u003CSystem.Int32,System.Int32\u003E\u003E(System.Text.Json.JsonSerializerOptions,System.Text.Json.Serialization.Metadata.JsonCollectionInfoValues\u003CSystem.Collections.Generic.Dictionary\u003CSystem.Int32,System.Int32\u003E\u003E)",
+      "generatedMethodId": "CreateIReadOnlyDictionaryInfo_5_JsonSerializerOptions_JsonCollectionInfoValuesDictionaryintint_0"
+    },
+    {
+      "index": 7,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.JsonMetadataServices::CreateImmutableEnumerableInfo:System.Text.Json.Serialization.Metadata.JsonTypeInfo\u003CSystem.Collections.Generic.List\u003CSystem.Int32\u003E\u003E(System.Text.Json.JsonSerializerOptions,System.Text.Json.Serialization.Metadata.JsonCollectionInfoValues\u003CSystem.Collections.Generic.List\u003CSystem.Int32\u003E\u003E,System.Func\u003CSystem.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Collections.Generic.List\u003CSystem.Int32\u003E\u003E)",
+      "generatedMethodId": "CreateImmutableEnumerableInfo_6_JsonSerializerOptions_JsonCollectionInfoValuesListint_System_FuncIEnumerableintListint_0"
+    },
+    {
+      "index": 8,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.JsonMetadataServices::CreateImmutableEnumerableInfo:System.Text.Json.Serialization.Metadata.JsonTypeInfo\u003CSystem.Collections.Generic.List\u003CSystem.Int32\u003E\u003E(System.Text.Json.JsonSerializerOptions,System.Text.Json.Serialization.Metadata.JsonCollectionInfoValues\u003CSystem.Collections.Generic.List\u003CSystem.Int32\u003E\u003E,System.Func\u003CSystem.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Collections.Generic.List\u003CSystem.Int32\u003E\u003E)",
+      "generatedMethodId": "CreateImmutableEnumerableInfo_6_JsonSerializerOptions_JsonCollectionInfoValuesListint_System_FuncIEnumerableintListint_1"
+    },
+    {
+      "index": 9,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.JsonMetadataServices::CreateIListInfo:System.Text.Json.Serialization.Metadata.JsonTypeInfo\u003CSystem.Collections.ArrayList\u003E(System.Text.Json.JsonSerializerOptions,System.Text.Json.Serialization.Metadata.JsonCollectionInfoValues\u003CSystem.Collections.ArrayList\u003E)",
+      "generatedMethodId": "CreateIListInfo_7_JsonSerializerOptions_JsonCollectionInfoValuesArrayList_0"
+    },
+    {
+      "index": 10,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.JsonMetadataServices::CreateIListInfo:System.Text.Json.Serialization.Metadata.JsonTypeInfo\u003CSystem.Collections.Generic.List\u003CSystem.Int32\u003E\u003E(System.Text.Json.JsonSerializerOptions,System.Text.Json.Serialization.Metadata.JsonCollectionInfoValues\u003CSystem.Collections.Generic.List\u003CSystem.Int32\u003E\u003E)",
+      "generatedMethodId": "CreateIListInfo_8_JsonSerializerOptions_JsonCollectionInfoValuesListint_0"
+    },
+    {
+      "index": 11,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.JsonMetadataServices::CreateISetInfo:System.Text.Json.Serialization.Metadata.JsonTypeInfo\u003CSystem.Collections.Generic.HashSet\u003CSystem.Int32\u003E\u003E(System.Text.Json.JsonSerializerOptions,System.Text.Json.Serialization.Metadata.JsonCollectionInfoValues\u003CSystem.Collections.Generic.HashSet\u003CSystem.Int32\u003E\u003E)",
+      "generatedMethodId": "CreateISetInfo_9_JsonSerializerOptions_JsonCollectionInfoValuesHashSetint_0"
+    },
+    {
+      "index": 12,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.JsonMetadataServices::CreateICollectionInfo:System.Text.Json.Serialization.Metadata.JsonTypeInfo\u003CSystem.Collections.Generic.List\u003CSystem.Int32\u003E\u003E(System.Text.Json.JsonSerializerOptions,System.Text.Json.Serialization.Metadata.JsonCollectionInfoValues\u003CSystem.Collections.Generic.List\u003CSystem.Int32\u003E\u003E)",
+      "generatedMethodId": "CreateICollectionInfo_10_JsonSerializerOptions_JsonCollectionInfoValuesListint_0"
+    },
+    {
+      "index": 13,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.JsonMetadataServices::CreateStackInfo:System.Text.Json.Serialization.Metadata.JsonTypeInfo\u003CSystem.Collections.Generic.Stack\u003CSystem.Int32\u003E\u003E(System.Text.Json.JsonSerializerOptions,System.Text.Json.Serialization.Metadata.JsonCollectionInfoValues\u003CSystem.Collections.Generic.Stack\u003CSystem.Int32\u003E\u003E)",
+      "generatedMethodId": "CreateStackInfo_11_JsonSerializerOptions_JsonCollectionInfoValuesStackint_0"
+    },
+    {
+      "index": 14,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.JsonMetadataServices::CreateQueueInfo:System.Text.Json.Serialization.Metadata.JsonTypeInfo\u003CSystem.Collections.Generic.Queue\u003CSystem.Int32\u003E\u003E(System.Text.Json.JsonSerializerOptions,System.Text.Json.Serialization.Metadata.JsonCollectionInfoValues\u003CSystem.Collections.Generic.Queue\u003CSystem.Int32\u003E\u003E)",
+      "generatedMethodId": "CreateQueueInfo_12_JsonSerializerOptions_JsonCollectionInfoValuesQueueint_0"
+    },
+    {
+      "index": 15,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.JsonMetadataServices::CreateConcurrentStackInfo:System.Text.Json.Serialization.Metadata.JsonTypeInfo\u003CSystem.Collections.Concurrent.ConcurrentStack\u003CSystem.Int32\u003E\u003E(System.Text.Json.JsonSerializerOptions,System.Text.Json.Serialization.Metadata.JsonCollectionInfoValues\u003CSystem.Collections.Concurrent.ConcurrentStack\u003CSystem.Int32\u003E\u003E)",
+      "generatedMethodId": "CreateConcurrentStackInfo_13_JsonSerializerOptions_JsonCollectionInfoValuesConcurrentStackint_0"
+    },
+    {
+      "index": 16,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.JsonMetadataServices::CreateConcurrentQueueInfo:System.Text.Json.Serialization.Metadata.JsonTypeInfo\u003CSystem.Collections.Concurrent.ConcurrentQueue\u003CSystem.Int32\u003E\u003E(System.Text.Json.JsonSerializerOptions,System.Text.Json.Serialization.Metadata.JsonCollectionInfoValues\u003CSystem.Collections.Concurrent.ConcurrentQueue\u003CSystem.Int32\u003E\u003E)",
+      "generatedMethodId": "CreateConcurrentQueueInfo_14_JsonSerializerOptions_JsonCollectionInfoValuesConcurrentQueueint_0"
+    },
+    {
+      "index": 17,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.JsonMetadataServices::CreateIEnumerableInfo:System.Text.Json.Serialization.Metadata.JsonTypeInfo\u003CSystem.Collections.Generic.List\u003CSystem.Int32\u003E\u003E(System.Text.Json.JsonSerializerOptions,System.Text.Json.Serialization.Metadata.JsonCollectionInfoValues\u003CSystem.Collections.Generic.List\u003CSystem.Int32\u003E\u003E)",
+      "generatedMethodId": "CreateIEnumerableInfo_15_JsonSerializerOptions_JsonCollectionInfoValuesListint_0"
+    },
+    {
+      "index": 18,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.JsonMetadataServices::CreateStackInfo:System.Text.Json.Serialization.Metadata.JsonTypeInfo\u003CSystem.Collections.ArrayList\u003E(System.Text.Json.JsonSerializerOptions,System.Text.Json.Serialization.Metadata.JsonCollectionInfoValues\u003CSystem.Collections.ArrayList\u003E,System.Action\u003CSystem.Collections.ArrayList,System.Object\u003E)",
+      "generatedMethodId": "CreateStackInfo_16_JsonSerializerOptions_JsonCollectionInfoValuesArrayList_System_ActionArrayListobject_0"
+    },
+    {
+      "index": 19,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.JsonMetadataServices::CreateStackInfo:System.Text.Json.Serialization.Metadata.JsonTypeInfo\u003CSystem.Collections.ArrayList\u003E(System.Text.Json.JsonSerializerOptions,System.Text.Json.Serialization.Metadata.JsonCollectionInfoValues\u003CSystem.Collections.ArrayList\u003E,System.Action\u003CSystem.Collections.ArrayList,System.Object\u003E)",
+      "generatedMethodId": "CreateStackInfo_16_JsonSerializerOptions_JsonCollectionInfoValuesArrayList_System_ActionArrayListobject_1"
+    },
+    {
+      "index": 20,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.JsonMetadataServices::CreateQueueInfo:System.Text.Json.Serialization.Metadata.JsonTypeInfo\u003CSystem.Collections.ArrayList\u003E(System.Text.Json.JsonSerializerOptions,System.Text.Json.Serialization.Metadata.JsonCollectionInfoValues\u003CSystem.Collections.ArrayList\u003E,System.Action\u003CSystem.Collections.ArrayList,System.Object\u003E)",
+      "generatedMethodId": "CreateQueueInfo_17_JsonSerializerOptions_JsonCollectionInfoValuesArrayList_System_ActionArrayListobject_0"
+    },
+    {
+      "index": 21,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.JsonMetadataServices::CreateQueueInfo:System.Text.Json.Serialization.Metadata.JsonTypeInfo\u003CSystem.Collections.ArrayList\u003E(System.Text.Json.JsonSerializerOptions,System.Text.Json.Serialization.Metadata.JsonCollectionInfoValues\u003CSystem.Collections.ArrayList\u003E,System.Action\u003CSystem.Collections.ArrayList,System.Object\u003E)",
+      "generatedMethodId": "CreateQueueInfo_17_JsonSerializerOptions_JsonCollectionInfoValuesArrayList_System_ActionArrayListobject_1"
+    },
+    {
+      "index": 22,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.JsonMetadataServices::CreateIEnumerableInfo:System.Text.Json.Serialization.Metadata.JsonTypeInfo\u003CSystem.Collections.ArrayList\u003E(System.Text.Json.JsonSerializerOptions,System.Text.Json.Serialization.Metadata.JsonCollectionInfoValues\u003CSystem.Collections.ArrayList\u003E)",
+      "generatedMethodId": "CreateIEnumerableInfo_18_JsonSerializerOptions_JsonCollectionInfoValuesArrayList_0"
+    },
+    {
+      "index": 23,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.JsonMetadataServices::CreateMemoryInfo:System.Text.Json.Serialization.Metadata.JsonTypeInfo\u003CSystem.Memory\u003CSystem.Int32\u003E\u003E(System.Text.Json.JsonSerializerOptions,System.Text.Json.Serialization.Metadata.JsonCollectionInfoValues\u003CSystem.Memory\u003CSystem.Int32\u003E\u003E)",
+      "generatedMethodId": "CreateMemoryInfo_19_JsonSerializerOptions_JsonCollectionInfoValuesSystem_Memoryint_0"
+    },
+    {
+      "index": 24,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.JsonMetadataServices::CreateReadOnlyMemoryInfo:System.Text.Json.Serialization.Metadata.JsonTypeInfo\u003CSystem.ReadOnlyMemory\u003CSystem.Int32\u003E\u003E(System.Text.Json.JsonSerializerOptions,System.Text.Json.Serialization.Metadata.JsonCollectionInfoValues\u003CSystem.ReadOnlyMemory\u003CSystem.Int32\u003E\u003E)",
+      "generatedMethodId": "CreateReadOnlyMemoryInfo_20_JsonSerializerOptions_JsonCollectionInfoValuesSystem_ReadOnlyMemoryint_0"
+    },
+    {
+      "index": 25,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.JsonMetadataServices::GetUnsupportedTypeConverter:System.Text.Json.Serialization.JsonConverter\u003CSystem.Int32\u003E()",
+      "generatedMethodId": "GetUnsupportedTypeConverter_21__0"
+    },
+    {
+      "index": 26,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.JsonMetadataServices::GetEnumConverter:System.Text.Json.Serialization.JsonConverter\u003CSystem.DayOfWeek\u003E(System.Text.Json.JsonSerializerOptions)",
+      "generatedMethodId": "GetEnumConverter_22_JsonSerializerOptions_0"
+    },
+    {
+      "index": 27,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.JsonMetadataServices::GetNullableConverter:System.Text.Json.Serialization.JsonConverter\u003CSystem.Nullable\u003CSystem.Int32\u003E\u003E(System.Text.Json.Serialization.Metadata.JsonTypeInfo\u003CSystem.Int32\u003E)",
+      "generatedMethodId": "GetNullableConverter_23_JsonTypeInfoint_0"
+    },
+    {
+      "index": 28,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.JsonMetadataServices::GetNullableConverter:System.Text.Json.Serialization.JsonConverter\u003CSystem.Nullable\u003CSystem.Int32\u003E\u003E(System.Text.Json.JsonSerializerOptions)",
+      "generatedMethodId": "GetNullableConverter_24_JsonSerializerOptions_0"
+    },
+    {
+      "index": 29,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.JsonMetadataServices::CreateObjectInfo:System.Text.Json.Serialization.Metadata.JsonTypeInfo\u003CSystem.Int32\u003E(System.Text.Json.JsonSerializerOptions,System.Text.Json.Serialization.Metadata.JsonObjectInfoValues\u003CSystem.Int32\u003E)",
+      "generatedMethodId": "CreateObjectInfo_25_JsonSerializerOptions_JsonObjectInfoValuesint_0"
+    },
+    {
+      "index": 30,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.JsonMetadataServices::CreateValueInfo:System.Text.Json.Serialization.Metadata.JsonTypeInfo\u003CSystem.Int32\u003E(System.Text.Json.JsonSerializerOptions,System.Text.Json.Serialization.JsonConverter)",
+      "generatedMethodId": "CreateValueInfo_26_JsonSerializerOptions_JsonConverter_0"
+    },
+    {
+      "index": 31,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.JsonTypeInfoResolver::Combine:System.Text.Json.Serialization.Metadata.IJsonTypeInfoResolver(System.Text.Json.Serialization.Metadata.IJsonTypeInfoResolver[])",
+      "generatedMethodId": "Combine_0_IJsonTypeInfoResolver_0"
+    },
+    {
+      "index": 32,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.JsonTypeInfoResolver::Combine:System.Text.Json.Serialization.Metadata.IJsonTypeInfoResolver(System.Text.Json.Serialization.Metadata.IJsonTypeInfoResolver[])",
+      "generatedMethodId": "Combine_0_IJsonTypeInfoResolver_1"
+    },
+    {
+      "index": 33,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.JsonTypeInfoResolver::Combine:System.Text.Json.Serialization.Metadata.IJsonTypeInfoResolver(System.Text.Json.Serialization.Metadata.IJsonTypeInfoResolver[])",
+      "generatedMethodId": "Combine_0_IJsonTypeInfoResolver_2"
+    },
+    {
+      "index": 34,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.JsonTypeInfoResolver::WithAddedModifier:System.Text.Json.Serialization.Metadata.IJsonTypeInfoResolver(System.Text.Json.Serialization.Metadata.IJsonTypeInfoResolver,System.Action\u003CSystem.Text.Json.Serialization.Metadata.JsonTypeInfo\u003E)",
+      "generatedMethodId": "WithAddedModifier_1_IJsonTypeInfoResolver_System_ActionJsonTypeInfo_0"
+    },
+    {
+      "index": 35,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.JsonTypeInfoResolver::WithAddedModifier:System.Text.Json.Serialization.Metadata.IJsonTypeInfoResolver(System.Text.Json.Serialization.Metadata.IJsonTypeInfoResolver,System.Action\u003CSystem.Text.Json.Serialization.Metadata.JsonTypeInfo\u003E)",
+      "generatedMethodId": "WithAddedModifier_1_IJsonTypeInfoResolver_System_ActionJsonTypeInfo_1"
+    }
+  ]
+}

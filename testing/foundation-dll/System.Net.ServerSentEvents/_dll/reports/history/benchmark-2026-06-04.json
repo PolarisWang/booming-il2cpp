@@ -1,0 +1,24 @@
+{
+  "date": "2026-06-04",
+  "assemblyName": "System.Net.ServerSentEvents",
+  "chunks": [
+    {
+      "slug": "global-ns",
+      "fact": {
+        "passed": 5,
+        "total": 5,
+        "isShutdownAV": false,
+        "valueSuspicious": false,
+        "valueWarnings": 0,
+        "metaTotal": 6,
+        "metaBenchmarkCount": 6
+      },
+      "benchmark": {
+        "status": "no_results"
+      },
+      "hotupdate": {
+        "status": "no_results"
+      }
+    }
+  ]
+}

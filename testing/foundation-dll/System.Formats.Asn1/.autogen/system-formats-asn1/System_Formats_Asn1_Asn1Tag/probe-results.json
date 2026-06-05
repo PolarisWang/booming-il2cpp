@@ -1,0 +1,54 @@
+[
+  {
+    "methodIndex": 0,
+    "setIndex": 0,
+    "subjectId": "System.Formats.Asn1.Asn1Tag::AsConstructed:System.Formats.Asn1.Asn1Tag()__Set0",
+    "isVoid": false,
+    "hasException": false,
+    "exceptionType": null,
+    "returnValue": 536870912,
+    "returnValueJson": "{\u0022TagClass\u0022:0,\u0022IsConstructed\u0022:true,\u0022TagValue\u0022:0}",
+    "returnValueType": "System.Formats.Asn1.Asn1Tag",
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 1,
+    "setIndex": 1,
+    "subjectId": "System.Formats.Asn1.Asn1Tag::AsPrimitive:System.Formats.Asn1.Asn1Tag()__Set1",
+    "isVoid": false,
+    "hasException": false,
+    "exceptionType": null,
+    "returnValue": 0,
+    "returnValueJson": "{\u0022TagClass\u0022:0,\u0022IsConstructed\u0022:false,\u0022TagValue\u0022:0}",
+    "returnValueType": "System.Formats.Asn1.Asn1Tag",
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 2,
+    "setIndex": 2,
+    "subjectId": "System.Formats.Asn1.Asn1Tag::CalculateEncodedSize:System.Int32()__Set2",
+    "isVoid": false,
+    "hasException": false,
+    "exceptionType": null,
+    "returnValue": 1,
+    "returnValueJson": "1",
+    "returnValueType": "System.Int32",
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 3,
+    "setIndex": 0,
+    "subjectId": "System.Formats.Asn1.Asn1Tag::HasSameClassAndValue:System.Boolean(System.Formats.Asn1.Asn1Tag)__Set0",
+    "isVoid": false,
+    "hasException": false,
+    "exceptionType": null,
+    "returnValue": 1,
+    "returnValueJson": "true",
+    "returnValueType": "System.Boolean",
+    "isDeterministic": true,
+    "outRefValues": null
+  }
+]

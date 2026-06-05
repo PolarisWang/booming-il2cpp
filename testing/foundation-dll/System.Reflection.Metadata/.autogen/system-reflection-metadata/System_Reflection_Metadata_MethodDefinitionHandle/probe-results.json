@@ -1,0 +1,15 @@
+[
+  {
+    "methodIndex": 0,
+    "setIndex": 0,
+    "subjectId": "System.Reflection.Metadata.MethodDefinitionHandle::ToDebugInformationHandle:System.Reflection.Metadata.MethodDebugInformationHandle()__Set0",
+    "isVoid": false,
+    "hasException": false,
+    "exceptionType": null,
+    "returnValue": 0,
+    "returnValueJson": "{\u0022IsNil\u0022:true}",
+    "returnValueType": "System.Reflection.Metadata.MethodDebugInformationHandle",
+    "isDeterministic": true,
+    "outRefValues": null
+  }
+]

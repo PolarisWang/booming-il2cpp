@@ -1,0 +1,41 @@
+[
+  {
+    "methodIndex": 0,
+    "setIndex": 0,
+    "subjectId": "System.Linq.Expressions.ListInitExpression::Reduce:System.Linq.Expressions.Expression()__Set0",
+    "isVoid": false,
+    "hasException": true,
+    "exceptionType": "System.NullReferenceException",
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 1,
+    "setIndex": 0,
+    "subjectId": "System.Linq.Expressions.ListInitExpression::Update:System.Linq.Expressions.ListInitExpression(System.Linq.Expressions.NewExpression,System.Collections.Generic.IEnumerable\u003CSystem.Linq.Expressions.ElementInit\u003E)__Set0",
+    "isVoid": false,
+    "hasException": true,
+    "exceptionType": "System.NullReferenceException",
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 1,
+    "setIndex": 1,
+    "subjectId": "System.Linq.Expressions.ListInitExpression::Update:System.Linq.Expressions.ListInitExpression(System.Linq.Expressions.NewExpression,System.Collections.Generic.IEnumerable\u003CSystem.Linq.Expressions.ElementInit\u003E)__Set1",
+    "isVoid": false,
+    "hasException": true,
+    "exceptionType": "System.NullReferenceException",
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": null
+  }
+]

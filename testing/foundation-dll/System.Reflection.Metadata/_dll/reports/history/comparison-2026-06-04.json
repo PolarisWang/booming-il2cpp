@@ -1,0 +1,65 @@
+{
+  "date": "2026-06-04",
+  "assemblyName": "System.Reflection.Metadata",
+  "aggregate": {
+    "net10VsNet8Pct": {
+      "mean": 4.41,
+      "median": 3.62,
+      "min": -6.12,
+      "max": 15.74,
+      "p25": -1.25,
+      "p75": 9.68
+    },
+    "highValueMethods_betterThanNet8": 0.0
+  },
+  "perChunk": [
+    {
+      "slug": "global-ns",
+      "methodCount": 27,
+      "methodsWithNet8": 6,
+      "aggregate": {
+        "methodsBetterThanNet8": 0,
+        "net10VsNet8Pct": {
+          "mean": 15.74,
+          "median": 19.42,
+          "min": -11.76,
+          "max": 40.0,
+          "p25": -7.55,
+          "p75": 37.77
+        }
+      }
+    },
+    {
+      "slug": "system-reflection-metadata",
+      "methodCount": 281,
+      "methodsWithNet8": 40,
+      "aggregate": {
+        "methodsBetterThanNet8": 0,
+        "net10VsNet8Pct": {
+          "mean": -6.12,
+          "median": 0.0,
+          "min": -170.0,
+          "max": 41.18,
+          "p25": -2.08,
+          "p75": 16.07
+        }
+      }
+    },
+    {
+      "slug": "system-reflection-metadata-ecma335",
+      "methodCount": 289,
+      "methodsWithNet8": 79,
+      "aggregate": {
+        "methodsBetterThanNet8": 0,
+        "net10VsNet8Pct": {
+          "mean": 3.62,
+          "median": 0.0,
+          "min": -185.71,
+          "max": 53.85,
+          "p25": 0.0,
+          "p75": 14.29
+        }
+      }
+    }
+  ]
+}
