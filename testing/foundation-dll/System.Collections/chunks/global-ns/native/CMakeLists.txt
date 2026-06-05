@@ -105,6 +105,9 @@ set(CHAOS_SIMD_STUBS
 set(CHAOS_MISC_STUBS
     "${CHAOS_SDK_DIR}/runtime_stubs/misc_stubs.cpp"
 )
+set(CHAOS_COLLECTION_STUBS
+    "${CHAOS_SDK_DIR}/runtime_stubs/collection_stubs.cpp"
+)
 set(CHAOS_INTEROP_STUBS
     "${CHAOS_SDK_DIR}/runtime_stubs/interop_stubs.cpp"
 )
@@ -127,6 +130,7 @@ set(CHAOS_ENTRY_SOURCES
     ${CHAOS_MATH_STUBS}
     ${CHAOS_SIMD_STUBS}
     ${CHAOS_MISC_STUBS}
+    ${CHAOS_COLLECTION_STUBS}
     ${CHAOS_INTEROP_STUBS}
     ${CHAOS_EXCEPTION_STUBS}
     ${CHAOS_HOTPATCH_TABLE}

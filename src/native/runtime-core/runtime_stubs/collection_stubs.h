@@ -45,4 +45,7 @@ CHAOS_IL2CPP_INT32 CollectionStackTryPop(CHAOS_IL2CPP_INTPTR handle, CHAOS_IL2CP
 CHAOS_IL2CPP_INT32 CollectionStackTryPeek(CHAOS_IL2CPP_INTPTR handle, CHAOS_IL2CPP_INTPTR* out_value) noexcept;
 void CollectionStackClear(CHAOS_IL2CPP_INTPTR handle) noexcept;
 
+// Comparer<T> helpers
+CHAOS_IL2CPP_INT32 CollectionComparerCompareInt32(CHAOS_IL2CPP_INT32 x, CHAOS_IL2CPP_INT32 y) noexcept;
+
 }  // extern "C"

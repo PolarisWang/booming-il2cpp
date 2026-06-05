@@ -8637,6 +8637,30 @@ public sealed partial class NativeAotLoweringPlanner
                 _ => 0,  // Custom delegate type — arity unknown from name alone
             };
         }
+
+        /// <summary>Register Convert.ToXxx inline shapes for all numeric value-type overloads.</summary>
+        private static void RegisterConvertNumericInline(RuntimeHelperShapeRegistry registry, string methodName, string cppCastType)
+        {
+            registry.RegisterInline(new InlineShapeDescriptor(
+                TypeDisplayNamePrefix: "System.Convert",
+                MethodName: methodName,
+                Resolver: (callee, paramTypes) =>
+                {
+                    if (paramTypes.Count != 1) return null;
+                    var pt = paramTypes[0];
+                    if (pt is "System.Byte" or "System.SByte" or "System.Int16" or "System.UInt16"
+                        or "System.Int32" or "System.UInt32" or "System.Int64" or "System.UInt64"
+                        or "System.Char" or "System.Single" or "System.Double")
+                    {
+                        return $"static_cast<{cppCastType}>({{0}})";
+                    }
+                    if (pt is "System.Boolean" or "System.DateTime")
+                    {
+                        return $"(chaos::il2cpp::runtime_core::chaos_raise_exception(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(nullptr)), static_cast<{cppCastType}>(0))";
+                    }
+                    return null;
+                }));
+        }
     }
 }
 // Fri, Jun  5, 2026  9:36:53 PM
