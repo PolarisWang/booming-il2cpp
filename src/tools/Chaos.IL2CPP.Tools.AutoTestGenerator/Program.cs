@@ -856,7 +856,7 @@ static int RunPatchMode(string dllPath, string? namespaceFilter, string? outputD
 
 static bool IsIntegerCompatibleType(string typeName)
 {
-    return typeName is "System.Boolean" or "System.Byte" or "System.SByte"
+    return typeName is "System.Byte" or "System.SByte"
         or "System.Int16" or "System.UInt16"
         or "System.Int32" or "System.UInt32"
         or "System.Int64" or "System.UInt64"
