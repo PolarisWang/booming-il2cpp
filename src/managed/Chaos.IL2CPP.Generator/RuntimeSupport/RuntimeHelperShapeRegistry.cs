@@ -195,6 +195,8 @@ public sealed partial class NativeAotLoweringPlanner
 
             var methodName = GetMethodNameFromSubjectId(callee);
             if (string.IsNullOrEmpty(methodName)) return false;
+            if (methodName == "GetHRForLastWin32Error" || methodName == "GetLastPInvokeError")
+                System.Console.Error.WriteLine($"[SHAPE_DEBUG] callee={callee} typeDisplayName={typeDisplayName} methodName={methodName}");
 
             foreach (var entry in _inlineDescriptors)
             {
@@ -246,6 +248,8 @@ public sealed partial class NativeAotLoweringPlanner
 
             var methodName = GetMethodNameFromSubjectId(callee);
             if (string.IsNullOrEmpty(methodName)) return false;
+            if (methodName == "GetHRForLastWin32Error" || methodName == "GetLastPInvokeError")
+                System.Console.Error.WriteLine($"[SHAPE_DEBUG] callee={callee} typeDisplayName={typeDisplayName} methodName={methodName}");
 
             foreach (var entry in _genericDescriptors)
             {
@@ -356,6 +360,8 @@ public sealed partial class NativeAotLoweringPlanner
 
             var methodName = GetMethodNameFromSubjectId(callee);
             if (string.IsNullOrEmpty(methodName)) return false;
+            if (methodName == "GetHRForLastWin32Error" || methodName == "GetLastPInvokeError")
+                System.Console.Error.WriteLine($"[SHAPE_DEBUG] callee={callee} typeDisplayName={typeDisplayName} methodName={methodName}");
 
             var paramTypes = GetMethodParameterTypesFromSubjectId(callee);
             var canonicalKey = BuildCanonicalKey(typeDisplayName!, methodName!, paramTypes);
