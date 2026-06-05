@@ -307,5 +307,56 @@ CHAOS_IL2CPP_FLOAT64 ChaosMathAtan2(CHAOS_IL2CPP_FLOAT64 y, CHAOS_IL2CPP_FLOAT64
     return std::atan2(y, x);
 }
 
+
+CHAOS_IL2CPP_FLOAT64 ChaosMathTruncate(CHAOS_IL2CPP_FLOAT64 x) noexcept
+{
+    return std::trunc(x);
+}
+
+CHAOS_IL2CPP_FLOAT64 ChaosMathRound2Params(CHAOS_IL2CPP_FLOAT64 x, CHAOS_IL2CPP_INT32 digits) noexcept
+{
+    double scale = std::pow(10.0, static_cast<double>(digits));
+    return std::round(x * scale) / scale;
+}
+
+CHAOS_IL2CPP_INT32 ChaosMathSignDouble(CHAOS_IL2CPP_FLOAT64 x) noexcept
+{
+    if (x > 0) return 1;
+    if (x < 0) return -1;
+    return 0;
+}
+
+CHAOS_IL2CPP_INT32 ChaosMathSignInt32(CHAOS_IL2CPP_INT32 x) noexcept
+{
+    if (x > 0) return 1;
+    if (x < 0) return -1;
+    return 0;
+}
+
+CHAOS_IL2CPP_FLOAT64 ChaosMathAcos(CHAOS_IL2CPP_FLOAT64 x) noexcept
+{
+    return std::acos(x);
+}
+
+CHAOS_IL2CPP_FLOAT64 ChaosMathAsin(CHAOS_IL2CPP_FLOAT64 x) noexcept
+{
+    return std::asin(x);
+}
+
+CHAOS_IL2CPP_FLOAT64 ChaosMathCosh(CHAOS_IL2CPP_FLOAT64 x) noexcept
+{
+    return std::cosh(x);
+}
+
+CHAOS_IL2CPP_FLOAT64 ChaosMathSinh(CHAOS_IL2CPP_FLOAT64 x) noexcept
+{
+    return std::sinh(x);
+}
+
+CHAOS_IL2CPP_FLOAT64 ChaosMathTanh(CHAOS_IL2CPP_FLOAT64 x) noexcept
+{
+    return std::tanh(x);
+}
+
 }  // extern "C"
 }  // namespace chaos::il2cpp::runtime_core

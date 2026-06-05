@@ -8523,4 +8523,79 @@ public sealed partial class NativeAotLoweringPlanner
                 }),
                 new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.Float64, TypeShape = AotCoreIrTypeShapeKind.ValueType },
                 new HashSet<int> { 0, 1 });
+
+            // === Math::Truncate (SimpleForward stub) ===
+            registry.Register("System.Math", "Truncate", ["System.Double"],
+                ShapeKind.SimpleForward, "ChaosMathTruncate",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.Float64, TypeShape = AotCoreIrTypeShapeKind.ValueType }),
+                new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.Float64, TypeShape = AotCoreIrTypeShapeKind.ValueType },
+                new HashSet<int> { 0 });
+
+            // === Math::Round(double, int) (SimpleForward stub) ===
+            registry.Register("System.Math", "Round", ["System.Double", "System.Int32"],
+                ShapeKind.SimpleForward, "ChaosMathRound2Params",
+                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
+                {
+                    new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.Float64, TypeShape = AotCoreIrTypeShapeKind.ValueType },
+                    new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.Int32, TypeShape = AotCoreIrTypeShapeKind.ValueType },
+                }),
+                new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.Float64, TypeShape = AotCoreIrTypeShapeKind.ValueType },
+                new HashSet<int> { 0, 1 });
+
+            // === Math::Sign(double) (SimpleForward stub) ===
+            registry.Register("System.Math", "Sign", ["System.Double"],
+                ShapeKind.SimpleForward, "ChaosMathSignDouble",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.Float64, TypeShape = AotCoreIrTypeShapeKind.ValueType }),
+                new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.Int32, TypeShape = AotCoreIrTypeShapeKind.ValueType },
+                new HashSet<int> { 0 });
+
+            // === Math::Sign(int) (SimpleForward stub) ===
+            registry.Register("System.Math", "Sign", ["System.Int32"],
+                ShapeKind.SimpleForward, "ChaosMathSignInt32",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.Int32, TypeShape = AotCoreIrTypeShapeKind.ValueType }),
+                new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.Int32, TypeShape = AotCoreIrTypeShapeKind.ValueType },
+                new HashSet<int> { 0 });
+
+            // === Math::Acos (SimpleForward stub) ===
+            registry.Register("System.Math", "Acos", ["System.Double"],
+                ShapeKind.SimpleForward, "ChaosMathAcos",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.Float64, TypeShape = AotCoreIrTypeShapeKind.ValueType }),
+                new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.Float64, TypeShape = AotCoreIrTypeShapeKind.ValueType },
+                new HashSet<int> { 0 });
+
+            // === Math::Asin (SimpleForward stub) ===
+            registry.Register("System.Math", "Asin", ["System.Double"],
+                ShapeKind.SimpleForward, "ChaosMathAsin",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.Float64, TypeShape = AotCoreIrTypeShapeKind.ValueType }),
+                new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.Float64, TypeShape = AotCoreIrTypeShapeKind.ValueType },
+                new HashSet<int> { 0 });
+
+            // === Math::Cosh (SimpleForward stub) ===
+            registry.Register("System.Math", "Cosh", ["System.Double"],
+                ShapeKind.SimpleForward, "ChaosMathCosh",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.Float64, TypeShape = AotCoreIrTypeShapeKind.ValueType }),
+                new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.Float64, TypeShape = AotCoreIrTypeShapeKind.ValueType },
+                new HashSet<int> { 0 });
+
+            // === Math::Sinh (SimpleForward stub) ===
+            registry.Register("System.Math", "Sinh", ["System.Double"],
+                ShapeKind.SimpleForward, "ChaosMathSinh",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.Float64, TypeShape = AotCoreIrTypeShapeKind.ValueType }),
+                new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.Float64, TypeShape = AotCoreIrTypeShapeKind.ValueType },
+                new HashSet<int> { 0 });
+
+            // === Math::Tanh (SimpleForward stub) ===
+            registry.Register("System.Math", "Tanh", ["System.Double"],
+                ShapeKind.SimpleForward, "ChaosMathTanh",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.Float64, TypeShape = AotCoreIrTypeShapeKind.ValueType }),
+                new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.Float64, TypeShape = AotCoreIrTypeShapeKind.ValueType },
+                new HashSet<int> { 0 });
             // === TimeSpan::FromDays
