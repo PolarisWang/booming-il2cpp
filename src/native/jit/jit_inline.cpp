@@ -6,6 +6,8 @@
 #include "jit_method.h"
 #include "jit_precode.h"
 
+#include "tree/jit_tree_builder.h"
+
 #include <cstdint>
 #include <vector>
 
@@ -57,14 +59,62 @@ TokenToPrecodeMap g_token_to_precode;
 // Heuristics evaluation: decides whether a call node should be inlined.
 
 InlineDecision EvaluateInline(
-    uint32_t /*callee_token*/,
+    uint32_t callee_token,
     uint32_t /*caller_depth*/,
-    bool     /*return_value_used*/,
-    const InlineConfig& /*cfg*/) noexcept
+    bool     return_value_used,
+    uint32_t loop_depth,
+    const InlineConfig& cfg) noexcept
 {
-    // Minimal stub: always reject inlining.  Full heuristics (callee size,
-    // loop depth, return value analysis) are added when inlining is enabled.
-    return InlineDecision{};
+    // Look up callee via global token-to-precode map.
+    JitPrecode* precode = g_token_to_precode.Lookup(callee_token);
+    if (precode == nullptr) {
+        InlineDecision d;
+        d.callee_token = callee_token;
+        return d;  // should_inline = false (callee not found)
+    }
+
+    const auto& callee_rm = precode->ir;
+
+    // Reject methods with SEH clauses (cannot inline try/catch/fault/finally).
+    if (!callee_rm.seh_clauses.empty()) {
+        InlineDecision d;
+        d.callee_token = callee_token;
+        return d;
+    }
+
+    // Reject empty methods.
+    uint32_t instr_count = static_cast<uint32_t>(callee_rm.instructions.size());
+    if (instr_count == 0) {
+        InlineDecision d;
+        d.callee_token = callee_token;
+        return d;
+    }
+
+    // Cost model: base = instruction count.
+    // Loop bonus: inlining inside loops is more valuable (reduces effective cost).
+    // Return-value bonus: eliminating call/ret overhead when result is consumed.
+    int32_t cost = static_cast<int32_t>(instr_count);
+    cost -= static_cast<int32_t>(loop_depth) * cfg.loop_bonus;
+    if (return_value_used) {
+        cost -= cfg.return_used_bonus;
+    }
+    if (cost < 1) cost = 1;
+
+    // Reject if cost exceeds threshold.
+    if (static_cast<uint32_t>(cost) > cfg.max_callee_nodes) {
+        InlineDecision d;
+        d.callee_token = callee_token;
+        return d;
+    }
+
+    // Accept: populate decision with callee metadata for TryInline.
+    InlineDecision d;
+    d.should_inline      = true;
+    d.callee_token       = callee_token;
+    d.callee_max_vreg    = callee_rm.max_regs;
+    d.callee_instr_count = instr_count;
+    d.callee_rm          = &callee_rm;
+    return d;
 }
 
 // ── Inliner ─────────────────────────────────────────────────────────────────
@@ -78,16 +128,141 @@ Inliner::Inliner(const InlineConfig& cfg,
     , new_max_vreg_(caller_max_vreg)
 {}
 
-bool Inliner::TryInline(InlineCandidate& /*candidate*/,
-                         tree::ExprNode** /*roots*/,
-                         uint32_t& /*root_count*/,
-                         uint32_t /*max_roots*/) noexcept
+// ── TryInline ──────────────────────────────────────────────────────────────────
+// Builds callee expression tree, remaps vregs, and grafts into caller's root set.
+
+// Recursive helper: visit all nodes in the callee tree and remap vregs.
+static void RemapCalleeVRegs(tree::ExprNode* node,
+                              uint32_t callee_max_vreg,
+                              uint32_t first_arg_vreg,
+                              uint32_t vreg_shift) noexcept {
+    if (!node) return;
+
+    auto k = node->kind();
+
+    // LdArg(i) → LdLoc(first_arg_vreg + i): callee argument loads become
+    // caller local loads from the corresponding argument vregs.
+    if (k == tree::kLdArg) {
+        node->set_kind(tree::kLdLoc);
+        node->operand_index = first_arg_vreg + node->operand_index;
+        return;  // leaf: no children to visit
+    }
+
+    // LdLoc(v) where v < callee_max_vreg: shift internal vregs.
+    if (k == tree::kLdLoc && node->operand_index < callee_max_vreg) {
+        node->operand_index += vreg_shift;
+        // fall through to visit children (though LdLoc is a leaf in practice)
+    }
+
+    // StLoc(l) where l < callee_max_vreg: shift store-target vregs.
+    // StLoc stores the local vreg in arg_count (child1 union slot).
+    if (k == tree::kStLoc && node->arg_count < callee_max_vreg) {
+        node->arg_count += vreg_shift;
+    }
+
+    // Recurse into children
+    if (node->child_count >= 1 && node->child0)
+        RemapCalleeVRegs(node->child0, callee_max_vreg, first_arg_vreg, vreg_shift);
+    if (node->child_count >= 2 && node->child1)
+        RemapCalleeVRegs(node->child1, callee_max_vreg, first_arg_vreg, vreg_shift);
+}
+
+bool Inliner::TryInline(InlineCandidate& candidate,
+                         tree::ExprNode** roots,
+                         uint32_t& root_count,
+                         uint32_t max_roots) noexcept
 {
-    // Minimal stub: no inline grafting performed.
-    // Full implementation builds callee tree via TreeBuilder, replaces the
-    // kCall node with the callee's return expression, appends side-effect
-    // roots, and remaps vregs to avoid caller/callee conflicts.
-    return false;
+    const InlineDecision& decision = candidate.decision;
+    if (!decision.should_inline) return false;
+    if (!decision.callee_rm) return false;
+
+    const auto& callee_rm = *decision.callee_rm;
+    uint32_t callee_instr_count = static_cast<uint32_t>(callee_rm.instructions.size());
+    if (callee_instr_count == 0) return false;
+
+    // Reject multi-BB callees (tree builder only handles single BBs).
+    auto bbs = tree::FindBasicBlocks(callee_rm.instructions.data(), callee_instr_count);
+    if (bbs.size() > 1) return false;
+
+    // Step 1: Build callee tree in a separate arena.
+    CalleeArena arena;
+    arena.builder = std::make_unique<tree::TreeBuilder>();
+    arena.result = arena.builder->Build(callee_rm, 0, callee_instr_count);
+    if (!arena.result.first_node || arena.result.root_count == 0)
+        return false;
+
+    // Step 2: VReg safety — must not collide with Linearizer kBaseVReg (64).
+    uint32_t callee_max_vreg = callee_rm.max_regs;
+    if (callee_max_vreg == 0) return false;
+    uint32_t vreg_shift = new_max_vreg_;
+    if (vreg_shift + callee_max_vreg > 64) return false;
+
+    // Step 3: Remap callee vregs. Walk all callee roots recursively.
+    for (uint32_t ri = 0; ri < arena.result.root_count; ++ri) {
+        RemapCalleeVRegs(arena.result.roots[ri],
+                          callee_max_vreg,
+                          candidate.first_arg_vreg,
+                          vreg_shift);
+    }
+
+    // Step 4: Identify return expression and side-effect roots.
+    // Return: first kReturn node with a child provides the replacement value.
+    // Side-effects: all non-kReturn roots are appended to the caller.
+    tree::ExprNode* return_expr = nullptr;
+    uint32_t side_effect_count = 0;
+
+    for (uint32_t ri = 0; ri < arena.result.root_count; ++ri) {
+        tree::ExprNode* root = arena.result.roots[ri];
+        if (!root) continue;
+        if (root->kind() == tree::kReturn) {
+            if (root->child0 && !return_expr)
+                return_expr = root->child0;
+            continue;
+        }
+        side_effect_count++;
+    }
+
+    // Step 5: Find the call node in roots[] and replace/remove it.
+    int32_t call_root_index = -1;
+    for (uint32_t ri = 0; ri < root_count; ++ri) {
+        if (roots[ri] == candidate.call_node) {
+            call_root_index = static_cast<int32_t>(ri);
+            break;
+        }
+    }
+    if (call_root_index < 0) return false;
+
+    if (return_expr) {
+        // Non-void call: replace kCall root with callee return expression.
+        roots[call_root_index] = return_expr;
+    } else {
+        // Void call: remove kCall root by shifting remaining roots left.
+        for (uint32_t ri = static_cast<uint32_t>(call_root_index); ri + 1 < root_count; ++ri) {
+            roots[ri] = roots[ri + 1];
+        }
+        root_count--;
+    }
+
+    // Step 6: Append callee side-effect roots to the caller's root set.
+    if (root_count + side_effect_count > max_roots) {
+        // Not enough room — revert the replacement.
+        roots[call_root_index] = candidate.call_node;
+        if (!return_expr) root_count++;
+        return false;
+    }
+
+    for (uint32_t ri = 0; ri < arena.result.root_count; ++ri) {
+        tree::ExprNode* root = arena.result.roots[ri];
+        if (!root) continue;
+        if (root->kind() == tree::kReturn) continue;
+        roots[root_count++] = root;
+    }
+
+    // Step 7: Update vreg high-water mark and preserve callee arena.
+    new_max_vreg_ = vreg_shift + callee_max_vreg;
+    callee_arenas_.push_back(std::move(arena));
+
+    return true;
 }
 
 uint32_t Inliner::InlineRoots(tree::ExprNode** roots,
@@ -105,12 +280,13 @@ uint32_t Inliner::InlineRoots(tree::ExprNode** roots,
 
         InlineCandidate candidate;
         candidate.call_node   = node;
-        candidate.callee_token = node->method_token;
-        candidate.first_arg_vreg = 0;
-        candidate.arg_count    = 0;
+        candidate.callee_token = node->call_method_token;
+        candidate.first_arg_vreg = node->call_arg0_vreg;
+        candidate.arg_count    = node->arg_count;
         candidate.decision     = EvaluateInline(candidate.callee_token,
                                                 inline_depth_,
-                                                false, cfg_);
+                                                candidate.arg_count > 0,
+                                                bb_loop_depth_, cfg_);
 
         if (TryInline(candidate, roots, root_count, max_roots)) {
             ++inlined;

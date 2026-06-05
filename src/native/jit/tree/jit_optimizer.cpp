@@ -621,6 +621,11 @@ bool OptimizeWithTreeIR(
         // Inline eligible kCall nodes
         if (enable_inlining) {
             Inliner inliner(InlineConfig{}, 0, max_vreg);
+            // Set loop nesting depth for loop-aware inline cost model
+            uint32_t bb_loop_depth = loop_analysis.blocks.empty()
+                                         ? 0
+                                         : loop_analysis.blocks[bi].loop_depth;
+            inliner.set_bb_loop_depth(bb_loop_depth);
             inliner.InlineRoots(result.roots, result.root_count, 128u);
             if (inliner.new_max_vreg() > max_vreg)
                 max_vreg = inliner.new_max_vreg();

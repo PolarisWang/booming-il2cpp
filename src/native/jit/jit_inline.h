@@ -72,6 +72,7 @@ InlineDecision EvaluateInline(
     uint32_t callee_token,
     uint32_t caller_depth,
     bool     return_value_used,
+    uint32_t loop_depth,
     const InlineConfig& cfg) noexcept;
 
 // ── Inliner ────────────────────────────────────────────────────────────────
@@ -100,6 +101,10 @@ public:
     uint32_t InlineRoots(tree::ExprNode** roots,
                          uint32_t& root_count,
                          uint32_t max_roots) noexcept;
+
+    /// Set loop nesting depth for the current basic block.
+    /// Used by EvaluateInline cost model to prioritize inlining inside loops.
+    void set_bb_loop_depth(uint32_t depth) noexcept { bb_loop_depth_ = depth; }
 
     /// Updated max_vreg after accounting for callee vreg shifts.
     /// Must be passed to Linearizer after inlining.
@@ -134,6 +139,7 @@ private:
 
     InlineConfig cfg_;
     uint32_t     inline_depth_;
+    uint32_t     bb_loop_depth_ = 0;
     uint32_t     new_max_vreg_ = 0;
     uint32_t     inlined_count_ = 0;
     InlineDecision inlined_decisions_[8];  // max inlines per BB
