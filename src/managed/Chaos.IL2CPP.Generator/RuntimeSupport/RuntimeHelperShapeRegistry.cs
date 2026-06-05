@@ -6021,16 +6021,36 @@ public sealed partial class NativeAotLoweringPlanner
                 }));
 
             // === Marshal: GetLastPInvokeError / GetHRForLastWin32Error (SimpleForward to interop_stubs) ===
-            registry.Register("System.Runtime.InteropServices.Marshal", "GetLastPInvokeError", [],
-                ShapeKind.SimpleForward, "ChaosMarshalGetLastPInvokeError",
-                Array.Empty<AotCoreIrAbiSlotArtifact>(),
-                CreateInt32AbiSlot(),
-                EmptyRawArgumentIndices);
-            registry.Register("System.Runtime.InteropServices.Marshal", "GetHRForLastWin32Error", [],
-                ShapeKind.SimpleForward, "ChaosMarshalGetHRForLastWin32Error",
-                Array.Empty<AotCoreIrAbiSlotArtifact>(),
-                CreateInt32AbiSlot(),
-                EmptyRawArgumentIndices);
+            // Must use RegisterGeneric (not Register) because the codegen's type resolution
+            // uses assembly-qualified type names (e.g. System.Private.CoreLib/System.Runtime.InteropServices.Marshal).
+            registry.RegisterGeneric(new GenericShapeDescriptor(
+                TypeDisplayNamePrefix: "System.Runtime.InteropServices.Marshal",
+                MethodName: "GetLastPInvokeError",
+                Resolver: static (planner, callee, typeArgs) =>
+                {
+                    var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
+                    var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INT32", symbol, "", [
+                        "    return ChaosMarshalGetLastPInvokeError();",
+                    ]);
+                    return new GenericShapeResolution(src, symbol,
+                        Array.Empty<AotCoreIrAbiSlotArtifact>(),
+                        CreateInt32AbiSlot(),
+                        EmptyRawArgumentIndices);
+                }));
+            registry.RegisterGeneric(new GenericShapeDescriptor(
+                TypeDisplayNamePrefix: "System.Runtime.InteropServices.Marshal",
+                MethodName: "GetHRForLastWin32Error",
+                Resolver: static (planner, callee, typeArgs) =>
+                {
+                    var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
+                    var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INT32", symbol, "", [
+                        "    return ChaosMarshalGetHRForLastWin32Error();",
+                    ]);
+                    return new GenericShapeResolution(src, symbol,
+                        Array.Empty<AotCoreIrAbiSlotArtifact>(),
+                        CreateInt32AbiSlot(),
+                        EmptyRawArgumentIndices);
+                }));
 
             // === String::Replace (GenericShapeDescriptor -- calls ChaosStringReplace for 3-param overload) ===
             registry.RegisterGeneric(new GenericShapeDescriptor(

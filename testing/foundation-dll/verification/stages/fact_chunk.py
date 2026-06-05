@@ -105,13 +105,17 @@ def run_fact_chunk(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageRe
     # The metadata declares totalMethods = all entries (fact + benchmark + hotupdate).
     # Codegen may produce fewer subjects (e.g. when some methods fail lowering),
     # so a shortfall is NOT diagnosed as "partial".
+    # factMethodCount = unique fact wrappers (not value sets) — a closer match to
+    # kSubjectEntryCount. Pipeline uses this for mismatch detection.
     meta_total = None
+    fact_method_count = None
     meta_benchmark_count = 0
     try:
         meta_path = ctx.chunk_dir / "managed" / "subjects" / "subjects.metadata.json"
         if meta_path.exists():
             meta = json.loads(meta_path.read_text(encoding="utf-8"))
             meta_total = meta.get("totalMethods")
+            fact_method_count = meta.get("factMethodCount") or meta_total
             meta_benchmark_count = len(meta.get("benchmarkMethodIndices") or [])
     except Exception:
         pass
@@ -170,6 +174,7 @@ def run_fact_chunk(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageRe
         "passed": passed,
         "total": total,
         "metaTotal": meta_total,
+        "factMethodCount": fact_method_count,
         "metaBenchmarkCount": meta_benchmark_count,
         "crashedAtIndex": crashed_index,
         "isShutdownAV": is_shutdown_av,

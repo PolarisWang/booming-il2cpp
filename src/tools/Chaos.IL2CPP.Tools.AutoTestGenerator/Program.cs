@@ -376,11 +376,22 @@ if (allTypes)
         hotupdateMethodIndices.AddRange(customEntryIndices);
         hotupdateMethodIndices.AddRange(benchmarkMethodIndices);
 
+        // FactMethodCount: count of unique fact subject IDs (not value sets).
+        // TotalMethods counts per-value-set entries (~500), while FactMethodCount
+        // counts unique wrapper methods (~99). Pipeline uses FactMethodCount for
+        // mismatch detection against kSubjectEntryCount.
+        var uniqueFactSubjectIds = methodEntries
+            .Where(e => !e.Kind.Contains("benchmark", StringComparison.OrdinalIgnoreCase))
+            .Select(e => e.MethodSubjectId)
+            .Distinct(StringComparer.Ordinal)
+            .Count();
+
         var metadata = new SubjectsMetadata(
             SchemaVersion: 1,
             AssemblyName: allAssemblyName,
             ChunkSlug: slug,
             TotalMethods: globalIdx,
+            FactMethodCount: uniqueFactSubjectIds,
             CustomEntryIndices: customEntryIndices.Count > 0 ? customEntryIndices : null,
             BenchmarkMethodIndices: benchmarkMethodIndices.Count > 0 ? benchmarkMethodIndices : null,
             HotupdateMethodIndices: hotupdateMethodIndices.Count > 0 ? hotupdateMethodIndices : null,
@@ -830,6 +841,7 @@ internal sealed record SubjectsMetadata(
     string AssemblyName,
     string ChunkSlug,
     int TotalMethods,
+    int FactMethodCount,
     IReadOnlyList<int>? CustomEntryIndices,
     IReadOnlyList<int>? BenchmarkMethodIndices,
     IReadOnlyList<int>? HotupdateMethodIndices,
