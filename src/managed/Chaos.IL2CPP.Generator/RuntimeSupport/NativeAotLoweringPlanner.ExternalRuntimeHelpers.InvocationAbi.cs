@@ -606,6 +606,16 @@ public sealed partial class NativeAotLoweringPlanner
 		};
 	}
 
+	private static AotCoreIrAbiSlotArtifact CreateInt64AbiSlot(string? typeSubjectId = null, AotCoreIrTypeShapeKind typeShape = (AotCoreIrTypeShapeKind)0)
+	{
+		return new AotCoreIrAbiSlotArtifact
+		{
+			CarrierKindCode = AotCoreIrAbiCarrierKind.Int64,
+			TypeSubjectId = typeSubjectId,
+			TypeShape = typeShape
+		};
+	}
+
 	private static string MapAbiSlotReturnType(AotCoreIrAbiSlotArtifact abiSlot)
 	{
 		return abiSlot.CarrierKindCode switch

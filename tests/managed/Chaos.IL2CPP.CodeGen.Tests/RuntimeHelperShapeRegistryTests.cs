@@ -688,4 +688,26 @@ public sealed class RuntimeHelperShapeRegistryTests
             Assert.Equal(methodName, descriptor!.MethodName);
         }
     }
+
+    [Fact]
+    public void BuildDefault_TryMatchGenericShape_ShortNameMarshal_Match()
+    {
+        var registry = NativeAotLoweringPlanner.RuntimeHelperShapeRegistry.BuildDefault();
+        var marshalMethods = new[]
+        {
+            ("System.Private.CoreLib/Marshal::GetLastPInvokeError():System.Int32", "GetLastPInvokeError"),
+            ("System.Private.CoreLib/Marshal::GetHRForLastWin32Error():System.Int32", "GetHRForLastWin32Error"),
+            ("System.Private.CoreLib/Marshal::SetLastPInvokeError:System.Void(System.Int32)", "SetLastPInvokeError"),
+            ("System.Private.CoreLib/Marshal::GetExceptionCode():System.Int32", "GetExceptionCode"),
+            ("System.Private.CoreLib/Marshal::GetExceptionPointers():System.IntPtr", "GetExceptionPointers"),
+            ("System.Private.CoreLib/Marshal::AreComObjectsAvailableForCleanup():System.Int32", "AreComObjectsAvailableForCleanup"),
+        };
+        foreach (var (callee, methodName) in marshalMethods)
+        {
+            Assert.True(
+                registry.TryMatchGenericShape(callee, out var descriptor, out _),
+                $"Short-name TryMatchGenericShape should match {methodName}");
+            Assert.Equal(methodName, descriptor!.MethodName);
+        }
+    }
 }
