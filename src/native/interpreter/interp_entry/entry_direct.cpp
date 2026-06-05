@@ -492,7 +492,7 @@ static void QuickJitAndCacheEntry(
     cfg.arg_type_count = pm->cached_arg_count;
     cfg.method_token = pm->token;
     cfg.method_module_id = pm->module_id;
-    cfg.enable_pgo = false;         // No PGO for Quick JIT
+    cfg.enable_pgo = true;          // PGO for Quick JIT -> Tier 1 upgrade
     if (reg_m->seh_clauses.empty()) {
         cfg.compile_tier = jit::CompileTier::kQuick;  // True Quick JIT: stack-only, no regalloc/liveness/deopt/SEH/unwind
     } else {
