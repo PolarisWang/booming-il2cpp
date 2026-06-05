@@ -4563,6 +4563,7 @@ JitMethod* NativeCodeGenerator::Generate() noexcept {
         EmitDwarfFde(buf_, cie_off, code_body_size,
                      num_push_regs_, push_reg_nums_);
         eh_frame_offset_ = cie_off;
+        buf_.Emit32(0);  // .eh_frame zero-length end marker
     }
 #endif
 
