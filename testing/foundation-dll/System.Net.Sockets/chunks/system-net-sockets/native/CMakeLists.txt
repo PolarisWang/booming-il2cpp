@@ -163,7 +163,13 @@ target_link_libraries(chaos_entry PRIVATE chaos::runtime
     "$<$<CXX_COMPILER_ID:MSVC>:${CHAOS_SDK_DIR}/lib/chaos_pal.lib>"
     "$<$<NOT:$<CXX_COMPILER_ID:MSVC>>:${CHAOS_SDK_DIR}/lib/libchaos_pal.a>"
 )
+# MSVC: chaos_hot_update.lib references SetPatchedBySlot from
+# chaos_runtime_core.lib. /WHOLEARCHIVE forces MSVC to include ALL
+# objects from the runtime core lib, not just those needed by the
+# first pass (MSVC processes static libs left-to-right without rescan).
 if(MSVC)
   target_link_libraries(chaos_entry PRIVATE bcrypt)
+  target_link_options(chaos_entry PRIVATE "/WHOLEARCHIVE:${CHAOS_SDK_DIR}/lib/chaos_runtime_core.lib")
+
 endif()
 target_link_options(chaos_entry PRIVATE ${CHAOS_FORCE_MULTIPLE})

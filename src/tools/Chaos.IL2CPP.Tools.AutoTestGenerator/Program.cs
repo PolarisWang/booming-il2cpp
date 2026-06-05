@@ -708,6 +708,7 @@ static int RunPatchMode(string dllPath, string? namespaceFilter, string? outputD
                 var prelude = new List<string>();
                 var finalArgs = new List<string>();
                 int refVarCounter = 0;
+                var refParamTypes = new List<string>(); // track types for XOR encoding
 
                 for (int pi = 0; pi < method.Parameters.Count; pi++)
                 {
@@ -720,6 +721,7 @@ static int RunPatchMode(string dllPath, string? namespaceFilter, string? outputD
                             ? param.TypeName[..^1].Trim()
                             : param.TypeName;
                         var csType = CSharpSerializer.MapToCSharpType(baseTypeName);
+                        refParamTypes.Add(baseTypeName);
 
                         // argExpr contains the fully-qualified type name (e.g. "default(System.Numerics.Matrix3x2)!")
                         // Extract it to use for the variable declaration, since csType may lack namespace
@@ -789,7 +791,7 @@ static int RunPatchMode(string dllPath, string? namespaceFilter, string? outputD
                         for (int rvi = 0; rvi < refVarCounter; rvi++)
                         {
                             var vn = $"__ref_{mi}_{set.SetIndex}_{rvi}";
-                            var paramType = method.Parameters.ElementAtOrDefault(rvi)?.TypeName ?? "object";
+                            var paramType = rvi < refParamTypes.Count ? refParamTypes[rvi] : "object";
                             // Only integer-compatible types can be cast to long directly.
                             // For reference types, use null check as a safe sentinel.
                             if (IsIntegerCompatibleType(paramType))
@@ -817,7 +819,7 @@ static int RunPatchMode(string dllPath, string? namespaceFilter, string? outputD
                         for (int rvi = 0; rvi < refVarCounter; rvi++)
                         {
                             var vn = $"__ref_{mi}_{set.SetIndex}_{rvi}";
-                            var paramType = method.Parameters.ElementAtOrDefault(rvi)?.TypeName ?? "object";
+                            var paramType = rvi < refParamTypes.Count ? refParamTypes[rvi] : "object";
                             if (IsIntegerCompatibleType(paramType))
                                 refParts.Add($"((long)({vn}) ^ 0xFF)");
                             else

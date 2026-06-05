@@ -3825,7 +3825,7 @@ public sealed partial class NativeAotLoweringPlanner
                 // 16/32-byte carrier), but template functions expect carrier by value. The InlineShape
                 // framework needs support for >8-byte value types on the eval stack.
                 // TODO: Enable when AOT codegen supports large value types on eval stack.
-                return null;
+                // return null;  -- ENABLED: inline shapes now deref pointer/heap-alloc
                 var elemType = ExtractVectorElementType(callee, paramTypes);
                 if (elemType == null) return null;
                 var cppType = MapTypeArgToCppType(elemType);
