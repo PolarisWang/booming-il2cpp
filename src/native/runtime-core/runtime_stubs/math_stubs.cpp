@@ -276,5 +276,36 @@ CHAOS_IL2CPP_UINT64 ChaosBitOpsRoundUpToPowerOf264(CHAOS_IL2CPP_UINT64 value) no
 #endif
 }
 
+
+CHAOS_IL2CPP_FLOAT64 ChaosMathExp(CHAOS_IL2CPP_FLOAT64 x) noexcept
+{
+    return std::exp(x);
+}
+
+CHAOS_IL2CPP_FLOAT64 ChaosMathLog(CHAOS_IL2CPP_FLOAT64 x) noexcept
+{
+    return std::log(x);
+}
+
+CHAOS_IL2CPP_FLOAT64 ChaosMathLog10(CHAOS_IL2CPP_FLOAT64 x) noexcept
+{
+    return std::log10(x);
+}
+
+CHAOS_IL2CPP_FLOAT64 ChaosMathTan(CHAOS_IL2CPP_FLOAT64 x) noexcept
+{
+    return std::tan(x);
+}
+
+CHAOS_IL2CPP_FLOAT64 ChaosMathAtan(CHAOS_IL2CPP_FLOAT64 x) noexcept
+{
+    return std::atan(x);
+}
+
+CHAOS_IL2CPP_FLOAT64 ChaosMathAtan2(CHAOS_IL2CPP_FLOAT64 y, CHAOS_IL2CPP_FLOAT64 x) noexcept
+{
+    return std::atan2(y, x);
+}
+
 }  // extern "C"
 }  // namespace chaos::il2cpp::runtime_core
