@@ -289,6 +289,9 @@ public sealed partial class NativeAotLoweringPlanner
                 }
                 if (!typeDisplayName!.StartsWith(entry.TypeDisplayNamePrefix, StringComparison.Ordinal))
                 {
+                    if (methodName == "GetHRForLastWin32Error" || methodName == "GetLastPInvokeError")
+                        System.Console.Error.WriteLine($"[SHAPE_DEBUG] typeDisplayName MISMATCH method={methodName} typeDisplayName=|{typeDisplayName}| TypeDisplayNamePrefix=|{entry.TypeDisplayNamePrefix}| entry.MethodName={entry.MethodName}");
+
                     // For generic type descriptors where the SubjectId uses <T> syntax (e.g. "Nullable<System.Int32>")
                     // but the descriptor registered with backtick syntax (e.g. "Nullable`1"):
                     // try matching by stripping the backtick arity suffix and checking for <...> brackets.
@@ -341,10 +344,15 @@ public sealed partial class NativeAotLoweringPlanner
 
                 // Non-generic descriptor match (no <...> brackets expected).
                 // The Resolver inspects the callee directly to confirm the overload.
+                if (methodName == "GetHRForLastWin32Error" || methodName == "GetLastPInvokeError")
+                    System.Console.Error.WriteLine($"[SHAPE_DEBUG] TryMatchGenericShape SUCCESS at non-generic fallthrough method={methodName} typeDisplayName=|{typeDisplayName}| prefix=|{entry.TypeDisplayNamePrefix}| genericPart=|{genericPart}|");
                 typeArgs = Array.Empty<string>();
                 descriptor = entry;
                 return true;
             }
+
+                if (methodName == "GetHRForLastWin32Error" || methodName == "GetLastPInvokeError")
+                    System.Console.Error.WriteLine($"[SHAPE_DEBUG] TryMatchGenericShape EXHAUSTED method={methodName} typeDisplayName=|{typeDisplayName}| _genericDescriptors.Count={_genericDescriptors.Count}");
 
             return false;
         }
@@ -366,6 +374,12 @@ public sealed partial class NativeAotLoweringPlanner
             var paramTypes = GetMethodParameterTypesFromSubjectId(callee);
             var canonicalKey = BuildCanonicalKey(typeDisplayName!, methodName!, paramTypes);
             var hash = Fnv1aHash(canonicalKey);
+
+            if (methodName == "GetHRForLastWin32Error" || methodName == "GetLastPInvokeError")
+            {
+                var found = _entriesByShapeId.TryGetValue(hash, out _);
+                System.Console.Error.WriteLine($"[SHAPE_DEBUG] TryMatchShape hash={hash} canonicalKey=|{canonicalKey}| found={found} entriesCount={_entriesByShapeId.Count}");
+            }
 
             return _entriesByShapeId.TryGetValue(hash, out entry);
         }
@@ -8480,3 +8494,4 @@ public sealed partial class NativeAotLoweringPlanner
         }
     }
 }
+// Fri, Jun  5, 2026  9:36:53 PM
