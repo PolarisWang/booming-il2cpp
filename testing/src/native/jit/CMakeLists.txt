@@ -214,3 +214,17 @@ target_compile_definitions(test_jit_debug_info PRIVATE
     CHAOS_IL2CPP_JIT_TEST_ACTIVE=1
 )
 set_tests_properties(test_jit_debug_info PROPERTIES TIMEOUT 30)
+
+# I-1 — Inlining infrastructure unit tests
+# Tests EvaluateInline heuristics (callee lookup, SEH rejection, cost model)
+# and end-to-end inline compilation through the JIT pipeline.
+add_chaos_test(test_jit_inline
+    jit_inline_test.cpp
+    ../runtime-core/gc/gc_test_stubs.cpp
+    LIBS ${CHAOS_CODEGEN_LIBS}
+    LABELS "unit;jit"
+)
+target_compile_definitions(test_jit_inline PRIVATE
+    CHAOS_IL2CPP_JIT_TEST_ACTIVE=1
+)
+set_tests_properties(test_jit_inline PROPERTIES TIMEOUT 30)
