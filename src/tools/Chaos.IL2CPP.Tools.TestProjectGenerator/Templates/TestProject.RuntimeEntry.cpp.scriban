@@ -1,14 +1,14 @@
-// runtime-entry.cpp â€” Auto-generated
+// runtime-entry.cpp ¡ª Auto-generated
 // CLI entry point for native-AOT verification dispatch.
 //
 // Modes:
-//   (no args)            â€” fact: run all subject entries, print Passed: N/M
-//   --fact-json          â€” per-method JSON output (value-level verification)
-//   --benchmark N I      â€” benchmark method N for I iterations
-//   --benchmark-all I    â€” benchmark ALL methods for I iterations, per-line JSON
-//   --hotupdate          â€” hotpatch fact: baseline + apply + semantic-check + revert
-//   --hotupdate-and-benchmark N I â€” post-patch benchmark
-//   --microbench         â€” interpreter microbenchmarks
+//   (no args)            ¡ª fact: run all subject entries, print Passed: N/M
+//   --fact-json          ¡ª per-method JSON output (value-level verification)
+//   --benchmark N I      ¡ª benchmark method N for I iterations
+//   --benchmark-all I    ¡ª benchmark ALL methods for I iterations, per-line JSON
+//   --hotupdate          ¡ª hotpatch fact: baseline + apply + semantic-check + revert
+//   --hotupdate-and-benchmark N I ¡ª post-patch benchmark
+//   --microbench         ¡ª interpreter microbenchmarks
 
 #include <cstdio>
 #include <cstdlib>
@@ -40,7 +40,7 @@ static thread_local jmp_buf t_abort_jmp;
 #endif
 
 // g_log_use_stderr is now exported by the prebuilt chaos_runtime_core
-// library, so we do NOT define it here â€” doing so would cause a
+// library, so we do NOT define it here ¡ª doing so would cause a
 // multiple-definition linker error.
 
 #include <chaos/config.h>
@@ -72,7 +72,7 @@ extern "C" void ChaosRegisterGcLayouts();
 // kDefaultArgThunks: in AOT mode, nullptr is safe because ChaosDispatchMethod
 // falls through to entry.direct_ptr (set by SetDirectDispatch).
 // In JIT mode, direct_ptr is REPLACED by RegisterJitEntryMethods() with
-// JIT precode trampoline â†’ JIT compilation â†’ hang. Use kDefaultArgThunks
+// JIT precode trampoline ¡ú JIT compilation ¡ú hang. Use kDefaultArgThunks
 // to call AOT function body directly (verification tests AOT codegen).
 {{ if is_jit }}
 extern "C" void (*kDefaultArgThunks[])() noexcept;
@@ -145,7 +145,7 @@ static LONG CALLBACK JitVehHandler(PEXCEPTION_POINTERS ExceptionInfo) noexcept {
 
     // Throttle: if the same RIP crashes repeatedly, the skip isn't working.
     // Stop trying after N consecutive crashes at the same RIP to avoid
-    // infinite crash â†’ skip â†’ crash loops.
+    // infinite crash ¡ú skip ¡ú crash loops.
     static void* s_last_rip = nullptr;
     static int s_same_rip_count = 0;
     if (s_last_rip == reinterpret_cast<void*>(ctx->Rip)) {
@@ -155,7 +155,7 @@ static LONG CALLBACK JitVehHandler(PEXCEPTION_POINTERS ExceptionInfo) noexcept {
         s_same_rip_count = 0;
     }
     if (s_same_rip_count >= 3) {
-        std::fprintf(stderr, "JIT ABORT: crash at RIP=%p repeated %d times â€” giving up\n",
+        std::fprintf(stderr, "JIT ABORT: crash at RIP=%p repeated %d times ¡ª giving up\n",
                      reinterpret_cast<void*>(ctx->Rip), s_same_rip_count);
         std::fflush(stderr);
         return EXCEPTION_CONTINUE_SEARCH;
@@ -227,7 +227,7 @@ static chaos::il2cpp::runtime_core::PatchContext* ApplyHotpatchIfAvailable() {
 }
 
 // Load patch data from an external file (used by the verification pipeline).
-// Returns nullptr if path is nullptr or file cannot be opened â€” the caller
+// Returns nullptr if path is nullptr or file cannot be opened ¡ª the caller
 // falls through to ApplyHotpatchIfAvailable() for embedded data.
 static chaos::il2cpp::runtime_core::PatchContext* ApplyHotpatchFromFile(const char* path) {
     if (path == nullptr) return nullptr;
@@ -268,7 +268,7 @@ static int RunFactMode() {
                 GetHotpatchEntries(), kAotMethodCount, i, CHAOS_USE_DEFAULT_THUNKS);
             ++passed_count;
         } __except(EXCEPTION_EXECUTE_HANDLER) {
-            // SEH caught (e.g. STATUS_ACCESS_VIOLATION) â€” skip increment
+            // SEH caught (e.g. STATUS_ACCESS_VIOLATION) ¡ª skip increment
         }
 #else
         CHAOS_EH_TRY
@@ -276,7 +276,7 @@ static int RunFactMode() {
                 GetHotpatchEntries(), kAotMethodCount, i, CHAOS_USE_DEFAULT_THUNKS);
             ++passed_count;
         CHAOS_EH_CATCH_BEGIN
-            // caught â€” skip increment
+            // caught ¡ª skip increment
         CHAOS_EH_END
 #endif
     }
@@ -286,9 +286,9 @@ static int RunFactMode() {
     	return failed_count;
 	}
 
-	// â”€â”€ FACT_CHECK macros â”€â”€
+	// ©¤©¤ FACT_CHECK macros ©¤©¤
 	// Must be defined before RunFactJsonMode (uses them).
-	// â”€â”€ --fact-json: per-method JSON output (R1+R2: value-level verification) â”€â”€
+	// ©¤©¤ --fact-json: per-method JSON output (R1+R2: value-level verification) ©¤©¤
 // Iterates only subject entries (kSubjectEntryCount) via kSubjectSlotMap, not
 // all AOT-compiled methods (kAotMethodCount).  Closure/framework methods may
 // access uninitialized runtime state and cause uncatchable access violations;
@@ -345,7 +345,7 @@ static int RunFactJsonMode() {
                     caught = true;
                 }
             } else {
-                // longjmp from SIGABRT handler â€” abort was called
+                // longjmp from SIGABRT handler ¡ª abort was called
                 caught = true;
             }
 
@@ -364,7 +364,7 @@ static int RunFactJsonMode() {
     CloseHandle(worker);
     if (wait_result == WAIT_TIMEOUT) {
         // Partial results already flushed.  TerminateProcess kills the
-        // hanging thread â€” fact_chunk.py handles truncated JSON recovery.
+        // hanging thread ¡ª fact_chunk.py handles truncated JSON recovery.
         TerminateProcess(GetCurrentProcess(), 0);
     }
     return 0;
@@ -474,7 +474,7 @@ static int RunBenchmarkMode(int entry_index, int iterations) {
     return 0;
 }
 
-// â”€â”€ --benchmark-all: benchmark ALL subject methods â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ©¤©¤ --benchmark-all: benchmark ALL subject methods ©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤
 // Returns per-line JSON: each method gets its own complete JSON line,
 // followed by a summary line.  Stray stderr log lines cannot pollute
 // the protocol stream since each line is independently parseable.
@@ -546,7 +546,7 @@ static int RunBenchmarkAllMode(int iterations) {
     return 0;
 }
 
-// â”€â”€ --benchmark-range: benchmark a contiguous range of method table indices â”€
+// ©¤©¤ --benchmark-range: benchmark a contiguous range of method table indices ©¤
 // First argument: start index (inclusive), Second argument: end index (exclusive)
 static int RunBenchmarkRangeMode(int iterations, int start_idx, int end_idx) {
     if (start_idx < 0) start_idx = 0;
@@ -732,7 +732,7 @@ static int RunHotupdateMode(const char* patchDataPath = nullptr) {
         // Assertion failure detection:
         // If baseline passed (no crash) but patch assertion fails (crashes),
         // this is a test FAILURE (patch introduced a bug), NOT a semantic change.
-        // If baseline also crashed, the method is fundamentally broken â€” skip.
+        // If baseline also crashed, the method is fundamentally broken ¡ª skip.
         if (!baseline_caught[si] && patched_caught) {
             patched_assert_failed++;
         }
@@ -788,7 +788,7 @@ static int RunHotupdateMode(const char* patchDataPath = nullptr) {
     bool all_revert = true;
     printf("\"revertedFact\":[");
     for (int si = 0; si < kCount; si++) {
-        // Skip methods that failed in baseline â€” they're not expected to revert.
+        // Skip methods that failed in baseline ¡ª they're not expected to revert.
         if (!baseline_ok[si]) {
             if (si > 0) printf(",");
             printf("{\"si\":%d,\"passed\":true,\"skipped\":true}", si);
@@ -851,7 +851,7 @@ int main(int argc, char* argv[]) {
 #if defined(_WIN32)
     // Suppress CRT fast-fail: abort() and invalid parameter handlers on Win10+
     // call __fastfail(STATUS_STACK_BUFFER_OVERRUN, 0xC0000409) which is
-    // non-continuable â€” the process dies even inside __try/__except.
+    // non-continuable ¡ª the process dies even inside __try/__except.
     // For verification we want subject methods to recover gracefully.
 #pragma warning(push)
 #pragma warning(disable: 4996)  // _set_abort_behavior is deprecated but still works
@@ -875,7 +875,7 @@ int main(int argc, char* argv[]) {
 
     // Redirect diagnostic log output to stderr so that machine-consumed
     // protocol output (benchmark JSON, fact results) on stdout stays clean.
-    // The verification pipeline parses stdout for JSON â€” log messages on
+    // The verification pipeline parses stdout for JSON ¡ª log messages on
     // stdout would pollute the protocol stream and cause parse failures.
     chaos::il2cpp::common::log_internal::g_log_use_stderr = true;
 
@@ -901,7 +901,7 @@ int main(int argc, char* argv[]) {
     // AOT-compiled method that calls through them will segfault.
     //
     // NOTE: heap-allocated and intentionally leaked.  RuntimeShutdown() + static
-    // destruction (BgcController threads) race on exit â€” for a short-lived
+    // destruction (BgcController threads) race on exit ¡ª for a short-lived
     // verification process it is safe to let the OS reclaim everything.
     // TerminateProcess at the shutdown label kills all threads immediately
     // without running static destructors, avoiding the race entirely.
@@ -919,7 +919,7 @@ int main(int argc, char* argv[]) {
     }
     ChaosRegisterGcLayouts();
 
-    // â”€â”€ Register interop stub fallbacks in kChaosExternalRuntimeFnTable â”€â”€
+    // ©¤©¤ Register interop stub fallbacks in kChaosExternalRuntimeFnTable ©¤©¤
     // The codegen may not produce AOT stubs for all managed methods, leaving
     // their external function table entries as nullptr.  Bridge thunks that
     // call through null entries crash with AV.  Match known methods by
@@ -1016,7 +1016,7 @@ shutdown:
     // unreachable
 }
 
-// â”€â”€ Delegate stub forwarders â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ©¤©¤ Delegate stub forwarders ©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤
 // Forward declarations from delegate_helpers.h (not included to avoid pulling
 // <core/delegate_object.h> and <vector> into this translation unit).
 namespace chaos::il2cpp::runtime_core {
