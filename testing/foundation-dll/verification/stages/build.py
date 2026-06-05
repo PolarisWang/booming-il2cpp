@@ -669,6 +669,28 @@ def run_build(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
                 )
                 patched = True
 
+            # Also add hardcoded function table entry for GetHRForLastWin32Error.
+            # The codegen generates a bridge thunk at kChaosExternalRuntimeFnTable[101],
+            # but the subjects array has this method at index 102 — the registration
+            # loop above sets [102], not [101].  Hardcode [101] as a fallback.
+            hardcoded = (
+                "\n"
+                "    // ── Hardcoded bridge thunk fallback (patched by build.py) ──\n"
+                "    if (kChaosExternalRuntimeCount > 101 &&\n"
+                "        kChaosExternalRuntimeFnTable[101] == nullptr)\n"
+                "    {\n"
+                "        kChaosExternalRuntimeFnTable[101] = "
+                "reinterpret_cast<void*>(ChaosMarshalGetHRForLastWin32Error);\n"
+                "    }\n"
+            )
+            if hardcoded not in content:
+                # Insert after the registration loop
+                content = content.replace(
+                    "ChaosRegisterGcLayouts();" + reg_loop,
+                    "ChaosRegisterGcLayouts();" + reg_loop + hardcoded,
+                )
+                patched = True
+
             if patched:
                 rcpp.write_text(content, encoding="utf-8")
                 print(f"  [build] Patched runtime-entry.cpp with interop stub registrations")

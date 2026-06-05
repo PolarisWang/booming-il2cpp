@@ -472,7 +472,10 @@ def run_hotupdate_chunk(ctx: ChunkContext, stages: dict[str, StageResult]) -> St
     # FP-9: Check patchFailed BEFORE the patch_data_path branch (the result_data
     # field is always written for the no-patch-data path at line 498, so checking
     # it inside the if patch_data_path: branch is dead code).
-    if result_data.get("patchFailed") or hotupdate_data.get("patched_method_count", 1) == 0:
+    # FP-10: If JSON is truncated, NEVER report passed — partial data is unreliable.
+    if json_truncated:
+        status = "failed_truncated"
+    elif result_data.get("patchFailed") or hotupdate_data.get("patched_method_count", 1) == 0:
         status = "skipped_patch_not_applied"
     elif patch_data_path:
         status = "passed" if (assert_failed == 0 and all_revert and passed > 0) else "failed"

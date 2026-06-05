@@ -1,4 +1,5 @@
 using System.Diagnostics.CodeAnalysis;
+using System.IO;
 using System.Text;
 using Chaos.IL2CPP.Contracts;
 using Scriban.Runtime;
