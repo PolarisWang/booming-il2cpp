@@ -335,7 +335,9 @@ static int RunFactJsonMode() {
 #if defined(_WIN32)
     CHAOS_FACT_RESET();
 {{ if is_jit }}
+{{ if is_jit }}
     void* g_fact_veh = AddVectoredExceptionHandler(1, FactVehHandler);
+{{ end }}
 {{ end }}
     // Use a worker thread with 300s timeout so a hanging dispatch (infinite
     // loop, deadlock) doesn't block the process forever.  On timeout the
