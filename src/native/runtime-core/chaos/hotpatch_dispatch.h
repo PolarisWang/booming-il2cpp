@@ -183,6 +183,9 @@ inline int32_t ChaosDispatchMethodBenchDirect(
     if (CHAOS_IL2CPP_LIKELY(HotpatchShouldKeepNative(entry))) {
         if (entry.direct_ptr) {
             reinterpret_cast<void(*)()>(entry.direct_ptr)();
+        } else {
+            CHAOS_IL2CPP_FAIL("Benchmark dispatch: direct_ptr is null for slot %d", index);
+            return -1;
         }
         return 0;
     }
