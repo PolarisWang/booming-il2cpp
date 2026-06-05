@@ -629,7 +629,7 @@ public sealed partial class NativeAotLoweringPlanner
         _sharedContextSymbols = BuildSharedContextSymbols();
 
         var methodsForLowering = fullAssemblyMode
-            ? CollectAllMethods(aotCoreIr)
+            ? CollectAllMethods(aotCoreIr, _subjectMethodSubjectIds)
             : CollectReachableMethods(aotCoreIr, entryMethod);
 
         // Ensure consistent ordering by numeric subject suffix where present,

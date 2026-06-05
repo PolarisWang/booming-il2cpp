@@ -40,15 +40,18 @@ public sealed partial class NativeAotLoweringPlanner
     /// assembly translation.
     /// </summary>
     private static IReadOnlyList<AotCoreIrMethodArtifact> CollectAllMethods(
-        AotCoreIrArtifact aotCoreIr)
+        AotCoreIrArtifact aotCoreIr,
+        HashSet<string>? preserveSubjectIds = null)
     {
         // Filter out methods without instructions (interface declarations, abstract stubs)
         // that cannot be emitted as AOT C++ code. CCW/COM interface methods like
         // ISimpleMath::Add enter the IR with 0 instructions and will crash the emitter.
         // P/Invoke (DllImport) methods also have 0 instructions but must be kept so that
         // EmitPInvokeMethod generates their extern "C" wrapper function definitions.
+        // Subject methods with 0 instructions are preserved (they get a simple return body).
         return aotCoreIr.Methods
-            .Where(m => m is { Instructions.Count: > 0 } or { IsPInvoke: true })
+            .Where(m => (m is { Instructions.Count: > 0 } or { IsPInvoke: true })
+                || (preserveSubjectIds?.Contains(m.SubjectId) == true))
             .OrderBy(m => ExtractNumericSortKey(m.SubjectId))
             .ThenBy(m => m.SubjectId, StringComparer.Ordinal)
             .ToList();
