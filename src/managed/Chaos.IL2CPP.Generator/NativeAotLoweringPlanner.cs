@@ -1050,6 +1050,13 @@ public sealed partial class NativeAotLoweringPlanner
             ? $"// extern \"C\" definition for link-time visibility from runtime-entry.cpp\nextern \"C\" const int kAotMethodCount = {methodCount};\n"
             : string.Empty;
 
+        // Emit kCodegenFailureCount as a C++ extern so the TPG can detect
+        // when methods were silently replaced with stubs during codegen.
+        if (CodegenFailureCount > 0)
+        {
+            globalDeclarations += $"// Codegen stub count — pipeline checks this\nextern \"C\" const int kCodegenFailureCount = {CodegenFailureCount};\n";
+        }
+
         // Always define ChaosJitRegisterAll so runtime-entry.cpp can call it unconditionally.
         // In JIT mode (guarded by CHAOS_IL2CPP_JIT_MODE), it registers all methods for
         // JIT dispatch via precode stubs.  In AOT mode it's always a no-op.
