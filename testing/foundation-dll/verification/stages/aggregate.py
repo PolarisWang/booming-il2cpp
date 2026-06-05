@@ -150,7 +150,7 @@ def run_aggregate(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageRes
     # Also emit a per-chunk advisory WARN for any gap >20%.
     chunks_with_meta_mismatch = 0
     for s in chunk_summaries:
-        meta = s.get("fact", {}).get("metaTotal")
+        meta = s.get("fact", {}).get("factMethodCount") or s.get("fact", {}).get("metaTotal")
         total = s.get("fact", {}).get("total")
         if meta is not None and meta > 0 and total is not None and total != meta:
             ratio = total / meta
@@ -158,7 +158,8 @@ def run_aggregate(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageRes
                 chunks_with_meta_mismatch += 1
             if ratio < 0.8:
                 chunk_slug = s.get("info", {}).get("slug", "?")
-                print(f"  [aggregate] WARN: {chunk_slug} fact total={total} < metaTotal={meta} (ratio={ratio:.0%})")
+                meta_label = "factMethodCount" if s.get("fact", {}).get("factMethodCount") else "metaTotal"
+                print(f"  [aggregate] WARN: {chunk_slug} fact total={total} < {meta_label}={meta} (ratio={ratio:.0%})")
 
     # ── Compute aggregate benchmark performance ──
     chunks_with_benchmark = [s.get("benchmark", {}) for s in chunk_summaries if "methodCount" in s.get("benchmark", {})]
