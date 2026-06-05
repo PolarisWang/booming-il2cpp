@@ -595,6 +595,127 @@ public sealed partial class NativeAotLoweringPlanner
             // Delegate remaining ~7700 registrations to a helper method
             // to stay within the CLR 64KB IL method size limit.
             RegisterCoreStubs(registry);
+            // ── System.Runtime.Intrinsics.Vector128<T> / Vector256<T> ─────────
+            // InlineShapeDescriptor registrations map vector operations to scalar
+            // fallback templates in vector_fixed_templates.h. Without these, every
+            // vector operation goes through generic managed dispatch (~0.9ms vs 0.006ms).
+
+            // Helper: extract type argument from Vector128`1[[System.XXX]] SubjectId
+            static string? ExtractTypeArgFromVectorSubjectId(string callee) {
+                var marker = "`1[[";
+                var idx2 = callee.IndexOf(marker, StringComparison.Ordinal);
+                if (idx2 < 0) return null;
+                var start = idx2 + marker.Length;
+                var end2 = callee.IndexOf("]]", start, StringComparison.Ordinal);
+                if (end2 < 0) return null;
+                return callee.Substring(start, end2 - start);
+            }
+            static string? MapTypeArgToCppType(string typeArg) {
+                return typeArg switch {
+                    "System.Byte" => "CHAOS_IL2CPP_UINT8",
+                    "System.SByte" => "CHAOS_IL2CPP_INT8",
+                    "System.Int16" => "CHAOS_IL2CPP_INT16",
+                    "System.UInt16" => "CHAOS_IL2CPP_UINT16",
+                    "System.Int32" => "CHAOS_IL2CPP_INT32",
+                    "System.UInt32" => "CHAOS_IL2CPP_UINT32",
+                    "System.Int64" => "CHAOS_IL2CPP_INT64",
+                    "System.UInt64" => "CHAOS_IL2CPP_UINT64",
+                    "System.Single" => "float",
+                    "System.Double" => "double",
+                    "System.IntPtr" => "CHAOS_IL2CPP_NATIVE_INT",
+                    "System.UIntPtr" => "CHAOS_IL2CPP_NATIVE_UINT",
+                    _ => null,
+                };
+            }
+            static string? InferVectorCarrierType(string callee, string cppType) {
+                if (cppType == null) return null;
+                if (callee.Contains("Vector128")) return $"chaos::il2cpp::numerics_carriers::RuntimeIntrinsicVector128Carrier<{cppType}>";
+                if (callee.Contains("Vector256")) return $"chaos::il2cpp::numerics_carriers::RuntimeIntrinsicVector256Carrier<{cppType}>";
+                return null;
+            }
+
+            // --- Binary arithmetic ---
+            RegisterInlineVectorOp("System.Runtime.Intrinsics.Vector128`1", "Add", "VectorFixedAdd");
+            RegisterInlineVectorOp("System.Runtime.Intrinsics.Vector256`1", "Add", "VectorFixedAdd");
+            RegisterInlineVectorOp("System.Runtime.Intrinsics.Vector128`1", "Subtract", "VectorFixedSubtract");
+            RegisterInlineVectorOp("System.Runtime.Intrinsics.Vector256`1", "Subtract", "VectorFixedSubtract");
+            RegisterInlineVectorOp("System.Runtime.Intrinsics.Vector128`1", "Multiply", "VectorFixedMultiply");
+            RegisterInlineVectorOp("System.Runtime.Intrinsics.Vector256`1", "Multiply", "VectorFixedMultiply");
+            RegisterInlineVectorOp("System.Runtime.Intrinsics.Vector128`1", "Divide", "VectorFixedDivide");
+            RegisterInlineVectorOp("System.Runtime.Intrinsics.Vector256`1", "Divide", "VectorFixedDivide");
+
+            // --- Bitwise ---
+            RegisterInlineVectorOp("System.Runtime.Intrinsics.Vector128`1", "BitwiseAnd", "VectorFixedBitwiseAnd");
+            RegisterInlineVectorOp("System.Runtime.Intrinsics.Vector256`1", "BitwiseAnd", "VectorFixedBitwiseAnd");
+            RegisterInlineVectorOp("System.Runtime.Intrinsics.Vector128`1", "BitwiseOr", "VectorFixedBitwiseOr");
+            RegisterInlineVectorOp("System.Runtime.Intrinsics.Vector256`1", "BitwiseOr", "VectorFixedBitwiseOr");
+            RegisterInlineVectorOp("System.Runtime.Intrinsics.Vector128`1", "Xor", "VectorFixedBitwiseXor");
+            RegisterInlineVectorOp("System.Runtime.Intrinsics.Vector256`1", "Xor", "VectorFixedBitwiseXor");
+            RegisterInlineVectorOp("System.Runtime.Intrinsics.Vector128`1", "OnesComplement", "VectorFixedOnesComplement");
+            RegisterInlineVectorOp("System.Runtime.Intrinsics.Vector256`1", "OnesComplement", "VectorFixedOnesComplement");
+
+            // --- Comparison ---
+            RegisterInlineVectorOp("System.Runtime.Intrinsics.Vector128`1", "Equals", "VectorFixedCompareEqual");
+            RegisterInlineVectorOp("System.Runtime.Intrinsics.Vector256`1", "Equals", "VectorFixedCompareEqual");
+            RegisterInlineVectorOp("System.Runtime.Intrinsics.Vector128`1", "GreaterThan", "VectorFixedCompareGreaterThan");
+            RegisterInlineVectorOp("System.Runtime.Intrinsics.Vector256`1", "GreaterThan", "VectorFixedCompareGreaterThan");
+            RegisterInlineVectorOp("System.Runtime.Intrinsics.Vector128`1", "LessThan", "VectorFixedCompareLessThan");
+            RegisterInlineVectorOp("System.Runtime.Intrinsics.Vector256`1", "LessThan", "VectorFixedCompareLessThan");
+
+            // --- Element access ---
+            RegisterInlineVectorOp("System.Runtime.Intrinsics.Vector128`1", "GetElement", "VectorFixedGetElement");
+            RegisterInlineVectorOp("System.Runtime.Intrinsics.Vector256`1", "GetElement", "VectorFixedGetElement");
+            RegisterInlineVectorOp("System.Runtime.Intrinsics.Vector128`1", "ToScalar", "VectorFixedGetElement", extraArgs: ", 0");
+            RegisterInlineVectorOp("System.Runtime.Intrinsics.Vector256`1", "ToScalar", "VectorFixedGetElement", extraArgs: ", 0");
+
+            // --- Shifts ---
+            RegisterInlineVectorOp("System.Runtime.Intrinsics.Vector128`1", "ShiftLeft", "VectorFixedShiftLeft");
+            RegisterInlineVectorOp("System.Runtime.Intrinsics.Vector256`1", "ShiftLeft", "VectorFixedShiftLeft");
+            RegisterInlineVectorOp("System.Runtime.Intrinsics.Vector128`1", "ShiftRightArithmetic", "VectorFixedShiftRightArithmetic");
+            RegisterInlineVectorOp("System.Runtime.Intrinsics.Vector256`1", "ShiftRightArithmetic", "VectorFixedShiftRightArithmetic");
+            RegisterInlineVectorOp("System.Runtime.Intrinsics.Vector128`1", "ShiftRightLogical", "VectorFixedShiftRightLogical");
+            RegisterInlineVectorOp("System.Runtime.Intrinsics.Vector256`1", "ShiftRightLogical", "VectorFixedShiftRightLogical");
+
+            // --- Math ---
+            RegisterInlineVectorOp("System.Runtime.Intrinsics.Vector128`1", "Abs", "VectorFixedAbs");
+            RegisterInlineVectorOp("System.Runtime.Intrinsics.Vector256`1", "Abs", "VectorFixedAbs");
+            RegisterInlineVectorOp("System.Runtime.Intrinsics.Vector128`1", "Negate", "VectorFixedNegate");
+            RegisterInlineVectorOp("System.Runtime.Intrinsics.Vector256`1", "Negate", "VectorFixedNegate");
+            RegisterInlineVectorOp("System.Runtime.Intrinsics.Vector128`1", "Min", "VectorFixedMin");
+            RegisterInlineVectorOp("System.Runtime.Intrinsics.Vector256`1", "Min", "VectorFixedMin");
+            RegisterInlineVectorOp("System.Runtime.Intrinsics.Vector128`1", "Max", "VectorFixedMax");
+            RegisterInlineVectorOp("System.Runtime.Intrinsics.Vector256`1", "Max", "VectorFixedMax");
+
+            // --- Creation ---
+            RegisterInlineVectorOp("System.Runtime.Intrinsics.Vector128`1", "get_Zero", "VectorFixedBroadcast", extraArgs: "0");
+            RegisterInlineVectorOp("System.Runtime.Intrinsics.Vector256`1", "get_Zero", "VectorFixedBroadcast", extraArgs: "0");
+            RegisterInlineVectorOp("System.Runtime.Intrinsics.Vector128`1", "get_AllBitsSet", "VectorFixedBroadcast", extraArgs: "static_cast<TScalar>(~0)");
+            RegisterInlineVectorOp("System.Runtime.Intrinsics.Vector256`1", "get_AllBitsSet", "VectorFixedBroadcast", extraArgs: "static_cast<TScalar>(~0)");
+            RegisterInlineVectorOp("System.Runtime.Intrinsics.Vector128`1", "CreateScalar", "VectorFixedCreateScalar");
+            RegisterInlineVectorOp("System.Runtime.Intrinsics.Vector256`1", "CreateScalar", "VectorFixedCreateScalar");
+            RegisterInlineVectorOp("System.Runtime.Intrinsics.Vector128`1", "op_Addition", "VectorFixedAdd");
+            RegisterInlineVectorOp("System.Runtime.Intrinsics.Vector256`1", "op_Addition", "VectorFixedAdd");
+            RegisterInlineVectorOp("System.Runtime.Intrinsics.Vector128`1", "op_Subtraction", "VectorFixedSubtract");
+            RegisterInlineVectorOp("System.Runtime.Intrinsics.Vector256`1", "op_Subtraction", "VectorFixedSubtract");
+            RegisterInlineVectorOp("System.Runtime.Intrinsics.Vector128`1", "op_Multiply", "VectorFixedMultiply");
+            RegisterInlineVectorOp("System.Runtime.Intrinsics.Vector256`1", "op_Multiply", "VectorFixedMultiply");
+            RegisterInlineVectorOp("System.Runtime.Intrinsics.Vector128`1", "op_Division", "VectorFixedDivide");
+            RegisterInlineVectorOp("System.Runtime.Intrinsics.Vector256`1", "op_Division", "VectorFixedDivide");
+            RegisterInlineVectorOp("System.Runtime.Intrinsics.Vector128`1", "op_BitwiseAnd", "VectorFixedBitwiseAnd");
+            RegisterInlineVectorOp("System.Runtime.Intrinsics.Vector256`1", "op_BitwiseAnd", "VectorFixedBitwiseAnd");
+            RegisterInlineVectorOp("System.Runtime.Intrinsics.Vector128`1", "op_BitwiseOr", "VectorFixedBitwiseOr");
+            RegisterInlineVectorOp("System.Runtime.Intrinsics.Vector256`1", "op_BitwiseOr", "VectorFixedBitwiseOr");
+            RegisterInlineVectorOp("System.Runtime.Intrinsics.Vector128`1", "op_ExclusiveOr", "VectorFixedBitwiseXor");
+            RegisterInlineVectorOp("System.Runtime.Intrinsics.Vector256`1", "op_ExclusiveOr", "VectorFixedBitwiseXor");
+            RegisterInlineVectorOp("System.Runtime.Intrinsics.Vector128`1", "op_OnesComplement", "VectorFixedOnesComplement");
+            RegisterInlineVectorOp("System.Runtime.Intrinsics.Vector256`1", "op_OnesComplement", "VectorFixedOnesComplement");
+            RegisterInlineVectorOp("System.Runtime.Intrinsics.Vector128`1", "op_Equality", "VectorFixedCompareEqual");
+            RegisterInlineVectorOp("System.Runtime.Intrinsics.Vector256`1", "op_Equality", "VectorFixedCompareEqual");
+            RegisterInlineVectorOp("System.Runtime.Intrinsics.Vector128`1", "op_GreaterThan", "VectorFixedCompareGreaterThan");
+            RegisterInlineVectorOp("System.Runtime.Intrinsics.Vector256`1", "op_GreaterThan", "VectorFixedCompareGreaterThan");
+            RegisterInlineVectorOp("System.Runtime.Intrinsics.Vector128`1", "op_LessThan", "VectorFixedCompareLessThan");
+            RegisterInlineVectorOp("System.Runtime.Intrinsics.Vector256`1", "op_LessThan", "VectorFixedCompareLessThan");
+
             return registry;
         }
 
