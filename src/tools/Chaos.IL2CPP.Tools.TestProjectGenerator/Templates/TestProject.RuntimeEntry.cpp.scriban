@@ -634,18 +634,26 @@ static int RunHotupdateMode(const char* patchDataPath = nullptr) {
     bool* baseline_ok = new bool[kCount]();
     bool* baseline_caught = new bool[kCount]();
     int64_t* baseline_value = new int64_t[kCount]();
-#if defined(_WIN32)
-    // Top-level SEH guard: if an access violation occurs during method dispatch
-    // (e.g. uninitialized runtime state, unresolved external dependency), catch
-    // it here so we can output partial JSON and diagnostic information rather
-    // than dying silently with exitCode 0xC0000005.
-    __try {
-#endif
-    printf("\"baselineFact\":[");
+    printf(""baselineFact":[");
     for (int si = 0; si < kCount; si++) {
         int i = kSubjectSlotMap[si];
         int64_t bv = 0;
         bool caught = false;
+#if defined(_WIN32)
+        // Per-method SEH guard: catch AV/C++ exceptions individually so a
+        // single method failure doesn't abort the entire hotupdate run.
+        __try {
+            CHAOS_EH_TRY
+                bv = chaos::il2cpp::runtime_core::ChaosDispatchMethodGetValue(
+                    GetHotpatchEntries(), kAotMethodCount, i, CHAOS_USE_DEFAULT_THUNKS);
+                baseline_ok[si] = true;
+            CHAOS_EH_CATCH_BEGIN
+                caught = true;
+            CHAOS_EH_END
+        } __except(EXCEPTION_EXECUTE_HANDLER) {
+            caught = true;
+        }
+#else
         CHAOS_EH_TRY
             bv = chaos::il2cpp::runtime_core::ChaosDispatchMethodGetValue(
                 GetHotpatchEntries(), kAotMethodCount, i, CHAOS_USE_DEFAULT_THUNKS);
@@ -653,6 +661,7 @@ static int RunHotupdateMode(const char* patchDataPath = nullptr) {
         CHAOS_EH_CATCH_BEGIN
             caught = true;
         CHAOS_EH_END
+#endif
         baseline_caught[si] = caught;
         baseline_value[si] = bv;
         if (si > 0) printf(",");
