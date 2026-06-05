@@ -145,18 +145,33 @@ void LinuxSehHandler::RegisterCode(void* code_start, uint32_t code_size,
                                     uint32_t patch_method_token) noexcept {
     if (code_start == nullptr || code_size == 0 || nm == nullptr) return;
 
+    JitCodeEntry entry;
+    entry.code_start = code_start;
+    entry.code_size  = code_size;
+    entry.nm         = nm;
+    entry.patch_method_token = patch_method_token;
+    {
+        auto* domain = chaos::il2cpp::memory_domain::CurrentDomain();
+        entry.domain_id = domain ? domain->domain_id : 0;
+    }
+
     {
         JitRegistryLockGuard lock(this);
-        JitCodeEntry entry;
-        entry.code_start = code_start;
-        entry.code_size  = code_size;
-        entry.nm         = nm;
-        entry.patch_method_token = patch_method_token;
-        {
-            auto* domain = chaos::il2cpp::memory_domain::CurrentDomain();
-            entry.domain_id = domain ? domain->domain_id : 0;
+        // Reuse stale entry: after UnregisterCode sets nm=nullptr, the entry
+        // remains in the vector. If a new RegisterCode arrives at the same
+        // address (e.g. a test reusing a heap allocation), update in-place
+        // so FindCodeByAddress doesn't find the stale nullptr entry first.
+        bool reused = false;
+        for (auto& existing : entries_) {
+            if (existing.code_start == code_start && existing.nm == nullptr) {
+                existing = entry;
+                reused = true;
+                break;
+            }
         }
-        entries_.push_back(entry);
+        if (!reused) {
+            entries_.push_back(entry);
+        }
     }
 
     CHAOS_IL2CPP_LOG_DEBUG_M("codegen",
