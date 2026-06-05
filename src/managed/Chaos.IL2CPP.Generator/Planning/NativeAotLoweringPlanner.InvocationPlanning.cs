@@ -223,12 +223,15 @@ public sealed partial class NativeAotLoweringPlanner
 
                 // ShapeRegistry/ExternalRuntimeHelper handles it → still register in
                 // the dispatch table so the interpreter's ResolveDirectFn can find it.
+                System.Console.Error.WriteLine($"[COLLECT_DEBUG] callee={callee} method={method.SubjectId}");
                 if (TryCreateExternalRuntimeHelperDefinition(callee, out _))
                 {
+                    System.Console.Error.WriteLine($"[COLLECT_DEBUG]   -> SHAPE FOUND for {callee}");
                     if (_externalRuntimeSubjects.TryAdd(callee, nextIndex))
                         nextIndex++;
                     continue;
                 }
+                System.Console.Error.WriteLine($"[COLLECT_DEBUG]   -> NO SHAPE for {callee}");
 
                 // Instantiation stub → has a definition, no table needed (same-assembly only).
                 // Cross-assembly generic methods don't have stub definitions in this compilation unit
