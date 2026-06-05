@@ -336,13 +336,16 @@ static int RunFactJsonMode() {
     CHAOS_FACT_RESET();
 {{ if is_jit }}
 {{ if is_jit }}
+{{ if is_jit }}
     void* g_fact_veh = AddVectoredExceptionHandler(1, FactVehHandler);
+{{ end }}
 {{ end }}
 {{ end }}
     // Use a worker thread with 300s timeout so a hanging dispatch (infinite
     // loop, deadlock) doesn't block the process forever.  On timeout the
     // process is killed; whatever was flushed to stdout is the partial result.
     HANDLE worker = CreateThread(nullptr, 4 * 1024 * 1024, [](LPVOID) -> DWORD {
+        void* g_fact_veh = AddVectoredExceptionHandler(1, FactVehHandler);
         const int kCount = kSubjectEntryCount;
         printf("{\"factResults\":[");
         bool first = true;
@@ -381,7 +384,9 @@ static int RunFactJsonMode() {
         printf("]}\n");
         std::fflush(stdout);
         CHAOS_FACT_CHECK();
-        RemoveVectoredExceptionHandler(g_veh);
+{{ if is_jit }}
+        RemoveVectoredExceptionHandler(g_fact_veh);
+{{ end }}
         return 0;
     }, nullptr, 0, nullptr);
 
