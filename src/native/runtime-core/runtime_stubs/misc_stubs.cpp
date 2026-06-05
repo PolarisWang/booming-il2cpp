@@ -48,6 +48,12 @@ CHAOS_IL2CPP_INT32 ChaosBufferByteLength(CHAOS_IL2CPP_INTPTR array) noexcept
     return static_cast<CHAOS_IL2CPP_INT32>(arr->length);
 }
 
+void ChaosBufferMemmove(CHAOS_IL2CPP_INTPTR dest, CHAOS_IL2CPP_INTPTR src, CHAOS_IL2CPP_SIZE count) noexcept
+{
+    if (count > 0 && dest != 0 && src != 0)
+        std::memmove(reinterpret_cast<void*>(dest), reinterpret_cast<void*>(src), count);
+}
+
 // ── Culture helpers (stub: return static non-null pointers) ──
 static constexpr CHAOS_IL2CPP_SIZE kStubObjectSize = 128;
 static CHAOS_IL2CPP_UINT8 s_stub_culture[kStubObjectSize]{};
