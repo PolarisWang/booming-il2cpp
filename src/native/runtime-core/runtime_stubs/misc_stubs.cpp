@@ -54,6 +54,22 @@ void ChaosBufferMemmove(CHAOS_IL2CPP_INTPTR dest, CHAOS_IL2CPP_INTPTR src, CHAOS
         std::memmove(reinterpret_cast<void*>(dest), reinterpret_cast<void*>(src), count);
 }
 
+void ChaosBufferMemoryCopy(CHAOS_IL2CPP_INTPTR source, CHAOS_IL2CPP_INTPTR dest, CHAOS_IL2CPP_INT64 /*dest_size*/, CHAOS_IL2CPP_INT64 src_bytes) noexcept
+{
+    if (src_bytes > 0 && dest != 0 && source != 0)
+        std::memmove(reinterpret_cast<void*>(dest), reinterpret_cast<void*>(source), static_cast<CHAOS_IL2CPP_SIZE>(src_bytes));
+}
+
+void ChaosBufferBlockCopy(CHAOS_IL2CPP_INTPTR src, CHAOS_IL2CPP_INT32 src_offset, CHAOS_IL2CPP_INTPTR dst, CHAOS_IL2CPP_INT32 dst_offset, CHAOS_IL2CPP_INT32 count) noexcept
+{
+    if (count <= 0 || src == 0 || dst == 0) return;
+    const auto* src_arr = get_managed_array(src);
+    auto* dst_arr = get_managed_array_mut(dst);
+    const auto* src_data = reinterpret_cast<const CHAOS_IL2CPP_UINT8*>(accessor_get_elements(src_arr));
+    auto* dst_data = reinterpret_cast<CHAOS_IL2CPP_UINT8*>(accessor_get_elements(dst_arr));
+    std::memmove(dst_data + dst_offset, src_data + src_offset, static_cast<CHAOS_IL2CPP_SIZE>(count));
+}
+
 // ── Culture helpers (stub: return static non-null pointers) ──
 static constexpr CHAOS_IL2CPP_SIZE kStubObjectSize = 128;
 static CHAOS_IL2CPP_UINT8 s_stub_culture[kStubObjectSize]{};

@@ -221,6 +221,19 @@
     "outRefValues": null
   },
   {
+    "methodIndex": 9,
+    "setIndex": 2,
+    "subjectId": "System.Collections.BitArray::CopyTo:System.Void(System.Array,System.Int32)__Set2",
+    "isVoid": true,
+    "hasException": true,
+    "exceptionType": "System.NullReferenceException",
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
     "methodIndex": 10,
     "setIndex": 10,
     "subjectId": "System.Collections.BitArray::HasAllSet:System.Boolean()__Set10",

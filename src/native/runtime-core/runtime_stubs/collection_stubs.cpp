@@ -11,6 +11,7 @@
 #include "runtime_stubs/stub_common.h"
 
 #include <vector>
+#include <deque>
 
 namespace chaos::il2cpp::runtime_core {
 extern "C" {
@@ -206,6 +207,168 @@ CHAOS_IL2CPP_INT32 CollectionHashSetRemove(CHAOS_IL2CPP_INTPTR handle, CHAOS_IL2
         }
     }
     return 0;
+}
+
+// ── Local storage for Queue<T> ──
+struct QueueRuntimeStorage {
+    std::deque<CHAOS_IL2CPP_INTPTR> items;
+};
+
+inline QueueRuntimeStorage* require_queue_storage(CHAOS_IL2CPP_INTPTR handle) {
+    if (handle == static_cast<CHAOS_IL2CPP_INTPTR>(0)) {
+        CHAOS_IL2CPP_ABORT();
+    }
+    auto* slot = reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(
+        reinterpret_cast<char*>(handle) + chaos::il2cpp::common::kNativeStorageSlotOffset);
+    if (*slot != 0) {
+        return reinterpret_cast<QueueRuntimeStorage*>(*slot);
+    }
+    auto* storage = new QueueRuntimeStorage();
+    *slot = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(storage);
+    return storage;
+}
+
+// ═══════════════════════════════════════════════════════════════
+// Queue<T> helpers
+// ═══════════════════════════════════════════════════════════════
+
+CHAOS_IL2CPP_INT32 CollectionQueueGetCount(CHAOS_IL2CPP_INTPTR handle) noexcept
+{
+    if (handle == 0) return 0;
+    auto* storage = require_queue_storage(handle);
+    return static_cast<CHAOS_IL2CPP_INT32>(storage->items.size());
+}
+
+void CollectionQueueEnqueue(CHAOS_IL2CPP_INTPTR handle, CHAOS_IL2CPP_INTPTR value) noexcept
+{
+    if (handle == 0) return;
+    auto* storage = require_queue_storage(handle);
+    storage->items.push_back(value);
+}
+
+CHAOS_IL2CPP_INTPTR CollectionQueueDequeue(CHAOS_IL2CPP_INTPTR handle) noexcept
+{
+    if (handle == 0) return 0;
+    auto* storage = require_queue_storage(handle);
+    if (storage->items.empty()) return 0;
+    auto value = storage->items.front();
+    storage->items.pop_front();
+    return value;
+}
+
+CHAOS_IL2CPP_INTPTR CollectionQueuePeek(CHAOS_IL2CPP_INTPTR handle) noexcept
+{
+    if (handle == 0) return 0;
+    auto* storage = require_queue_storage(handle);
+    if (storage->items.empty()) return 0;
+    return storage->items.front();
+}
+
+CHAOS_IL2CPP_INT32 CollectionQueueTryDequeue(CHAOS_IL2CPP_INTPTR handle, CHAOS_IL2CPP_INTPTR* out_value) noexcept
+{
+    if (handle == 0 || out_value == nullptr) return 0;
+    auto* storage = require_queue_storage(handle);
+    if (storage->items.empty()) return 0;
+    *out_value = storage->items.front();
+    storage->items.pop_front();
+    return 1;
+}
+
+CHAOS_IL2CPP_INT32 CollectionQueueTryPeek(CHAOS_IL2CPP_INTPTR handle, CHAOS_IL2CPP_INTPTR* out_value) noexcept
+{
+    if (handle == 0 || out_value == nullptr) return 0;
+    auto* storage = require_queue_storage(handle);
+    if (storage->items.empty()) return 0;
+    *out_value = storage->items.front();
+    return 1;
+}
+
+void CollectionQueueClear(CHAOS_IL2CPP_INTPTR handle) noexcept
+{
+    if (handle == 0) return;
+    auto* storage = require_queue_storage(handle);
+    storage->items.clear();
+}
+
+// ── Local storage for Stack<T> ──
+struct StackRuntimeStorage {
+    std::vector<CHAOS_IL2CPP_INTPTR> items;
+};
+
+inline StackRuntimeStorage* require_stack_storage(CHAOS_IL2CPP_INTPTR handle) {
+    if (handle == static_cast<CHAOS_IL2CPP_INTPTR>(0)) {
+        CHAOS_IL2CPP_ABORT();
+    }
+    auto* slot = reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(
+        reinterpret_cast<char*>(handle) + chaos::il2cpp::common::kNativeStorageSlotOffset);
+    if (*slot != 0) {
+        return reinterpret_cast<StackRuntimeStorage*>(*slot);
+    }
+    auto* storage = new StackRuntimeStorage();
+    *slot = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(storage);
+    return storage;
+}
+
+// ═══════════════════════════════════════════════════════════════
+// Stack<T> helpers
+// ═══════════════════════════════════════════════════════════════
+
+CHAOS_IL2CPP_INT32 CollectionStackGetCount(CHAOS_IL2CPP_INTPTR handle) noexcept
+{
+    if (handle == 0) return 0;
+    auto* storage = require_stack_storage(handle);
+    return static_cast<CHAOS_IL2CPP_INT32>(storage->items.size());
+}
+
+void CollectionStackPush(CHAOS_IL2CPP_INTPTR handle, CHAOS_IL2CPP_INTPTR value) noexcept
+{
+    if (handle == 0) return;
+    auto* storage = require_stack_storage(handle);
+    storage->items.push_back(value);
+}
+
+CHAOS_IL2CPP_INTPTR CollectionStackPop(CHAOS_IL2CPP_INTPTR handle) noexcept
+{
+    if (handle == 0) return 0;
+    auto* storage = require_stack_storage(handle);
+    if (storage->items.empty()) return 0;
+    auto value = storage->items.back();
+    storage->items.pop_back();
+    return value;
+}
+
+CHAOS_IL2CPP_INTPTR CollectionStackPeek(CHAOS_IL2CPP_INTPTR handle) noexcept
+{
+    if (handle == 0) return 0;
+    auto* storage = require_stack_storage(handle);
+    if (storage->items.empty()) return 0;
+    return storage->items.back();
+}
+
+CHAOS_IL2CPP_INT32 CollectionStackTryPop(CHAOS_IL2CPP_INTPTR handle, CHAOS_IL2CPP_INTPTR* out_value) noexcept
+{
+    if (handle == 0 || out_value == nullptr) return 0;
+    auto* storage = require_stack_storage(handle);
+    if (storage->items.empty()) return 0;
+    *out_value = storage->items.back();
+    storage->items.pop_back();
+    return 1;
+}
+
+CHAOS_IL2CPP_INT32 CollectionStackTryPeek(CHAOS_IL2CPP_INTPTR handle, CHAOS_IL2CPP_INTPTR* out_value) noexcept
+{
+    if (handle == 0 || out_value == nullptr) return 0;
+    auto* storage = require_stack_storage(handle);
+    if (storage->items.empty()) return 0;
+    *out_value = storage->items.back();
+    return 1;
+}
+
+void CollectionStackClear(CHAOS_IL2CPP_INTPTR handle) noexcept
+{
+    if (handle == 0) return;
+    auto* storage = require_stack_storage(handle);
+    storage->items.clear();
 }
 
 }  // extern "C"

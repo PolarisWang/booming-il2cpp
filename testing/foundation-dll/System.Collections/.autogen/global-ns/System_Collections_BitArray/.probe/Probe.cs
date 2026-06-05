@@ -245,6 +245,15 @@ public static class Probe
         {
             results.Add(new { MethodIndex = 9, SetIndex = 1, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
         }
+        try
+        {
+            default(global::System.Collections.BitArray)!.CopyTo(System.Array.Empty<int>(), default(int));
+            results.Add(new { MethodIndex = 9, SetIndex = 2, HasException = false, ExceptionType = (string?)null, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
+        }
+        catch (Exception ex)
+        {
+            results.Add(new { MethodIndex = 9, SetIndex = 2, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
+        }
         // --- HasAllSet ---
         try
         {

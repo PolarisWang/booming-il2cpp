@@ -27,4 +27,22 @@ CHAOS_IL2CPP_INT32 CollectionHashSetAdd(CHAOS_IL2CPP_INTPTR handle, CHAOS_IL2CPP
 CHAOS_IL2CPP_INT32 CollectionHashSetContains(CHAOS_IL2CPP_INTPTR handle, CHAOS_IL2CPP_INTPTR value) noexcept;
 CHAOS_IL2CPP_INT32 CollectionHashSetRemove(CHAOS_IL2CPP_INTPTR handle, CHAOS_IL2CPP_INTPTR value) noexcept;
 
+// Queue<T> helpers
+CHAOS_IL2CPP_INT32 CollectionQueueGetCount(CHAOS_IL2CPP_INTPTR handle) noexcept;
+void CollectionQueueEnqueue(CHAOS_IL2CPP_INTPTR handle, CHAOS_IL2CPP_INTPTR value) noexcept;
+CHAOS_IL2CPP_INTPTR CollectionQueueDequeue(CHAOS_IL2CPP_INTPTR handle) noexcept;
+CHAOS_IL2CPP_INTPTR CollectionQueuePeek(CHAOS_IL2CPP_INTPTR handle) noexcept;
+CHAOS_IL2CPP_INT32 CollectionQueueTryDequeue(CHAOS_IL2CPP_INTPTR handle, CHAOS_IL2CPP_INTPTR* out_value) noexcept;
+CHAOS_IL2CPP_INT32 CollectionQueueTryPeek(CHAOS_IL2CPP_INTPTR handle, CHAOS_IL2CPP_INTPTR* out_value) noexcept;
+void CollectionQueueClear(CHAOS_IL2CPP_INTPTR handle) noexcept;
+
+// Stack<T> helpers
+CHAOS_IL2CPP_INT32 CollectionStackGetCount(CHAOS_IL2CPP_INTPTR handle) noexcept;
+void CollectionStackPush(CHAOS_IL2CPP_INTPTR handle, CHAOS_IL2CPP_INTPTR value) noexcept;
+CHAOS_IL2CPP_INTPTR CollectionStackPop(CHAOS_IL2CPP_INTPTR handle) noexcept;
+CHAOS_IL2CPP_INTPTR CollectionStackPeek(CHAOS_IL2CPP_INTPTR handle) noexcept;
+CHAOS_IL2CPP_INT32 CollectionStackTryPop(CHAOS_IL2CPP_INTPTR handle, CHAOS_IL2CPP_INTPTR* out_value) noexcept;
+CHAOS_IL2CPP_INT32 CollectionStackTryPeek(CHAOS_IL2CPP_INTPTR handle, CHAOS_IL2CPP_INTPTR* out_value) noexcept;
+void CollectionStackClear(CHAOS_IL2CPP_INTPTR handle) noexcept;
+
 }  // extern "C"

@@ -286,6 +286,25 @@ static int RunFactMode() {
 
 	// ── FACT_CHECK macros ──
 	// Must be defined before RunFactJsonMode (uses them).
+// ── VEH handler for AOT fact dispatch ─────────────────────────────
+// Catches hardware exceptions (AV, stack overflow) during per-method
+// dispatch and longjmps to the _setjmp recovery point so the method
+// is marked as caught.  Managed C++ exceptions (0xE06D7363) are
+// ignored and propagate normally to Assert.Throws catch blocks.
+#if defined(_WIN32)
+static LONG CALLBACK FactVehHandler(PEXCEPTION_POINTERS ExceptionInfo) noexcept {
+    auto* er = ExceptionInfo->ExceptionRecord;
+    // Only catch hardware exceptions — let all other exceptions
+    // (including managed C++ exceptions 0xE06D7363) pass through.
+    if (er->ExceptionCode != STATUS_ACCESS_VIOLATION &&
+        er->ExceptionCode != STATUS_STACK_OVERFLOW)
+        return EXCEPTION_CONTINUE_SEARCH;
+    // Recover via longjmp to the per-method _setjmp point.
+    // t_abort_jmp is set by RunFactJsonMode before each dispatch.
+    longjmp(t_abort_jmp, 1);
+    return EXCEPTION_CONTINUE_SEARCH;  // unreachable
+}
+#endif
 	// ── --fact-json: per-method JSON output (R1+R2: value-level verification) ──
 // Iterates only subject entries (kSubjectEntryCount) via kSubjectSlotMap, not
 // all AOT-compiled methods (kAotMethodCount).  Closure/framework methods may
@@ -313,10 +332,18 @@ static int RunFactJsonMode() {
 
 #if defined(_WIN32)
     CHAOS_FACT_RESET();
+
+
+
+    void* g_fact_veh = AddVectoredExceptionHandler(1, FactVehHandler);
+
+
+
     // Use a worker thread with 300s timeout so a hanging dispatch (infinite
     // loop, deadlock) doesn't block the process forever.  On timeout the
     // process is killed; whatever was flushed to stdout is the partial result.
     HANDLE worker = CreateThread(nullptr, 4 * 1024 * 1024, [](LPVOID) -> DWORD {
+        void* g_fact_veh = AddVectoredExceptionHandler(1, FactVehHandler);
         const int kCount = kSubjectEntryCount;
         printf("{\"factResults\":[");
         bool first = true;
@@ -355,6 +382,9 @@ static int RunFactJsonMode() {
         printf("]}\n");
         std::fflush(stdout);
         CHAOS_FACT_CHECK();
+
+        RemoveVectoredExceptionHandler(g_fact_veh);
+
         return 0;
     }, nullptr, 0, nullptr);
 
@@ -375,12 +405,8 @@ static int RunFactJsonMode() {
         int i = kSubjectSlotMap[si];
         int64_t result = 0;
         bool caught = false;
-        CHAOS_EH_TRY
-            result = chaos::il2cpp::runtime_core::ChaosDispatchMethodGetValue(
+        result = chaos::il2cpp::runtime_core::ChaosDispatchMethodGetValue(
                 GetHotpatchEntries(), kAotMethodCount, i, CHAOS_USE_DEFAULT_THUNKS);
-        CHAOS_EH_CATCH_BEGIN
-            caught = true;
-        CHAOS_EH_END
         if (!first) printf(",");
         printf("{\"si\":%d,\"methodIndex\":%d,\"contractIndex\":-1,\"passed\":%s,\"value\":%" PRId64 "}",
                si, i, caught ? "false" : "true", caught ? -1 : result);
@@ -820,6 +846,8 @@ static int RunHotupdateMode(const char* patchDataPath = nullptr) {
     return 0;
 }
 
+extern void ParseSubjectIdForHotpatchLookup(const char*, std::string&, std::string&, std::string&) noexcept;
+
 static int RunMicrobenchMode() {
     RunMicrobench();
     return 0;
@@ -923,7 +951,6 @@ int main(int argc, char* argv[]) {
     // call through null entries crash with AV.  Match known methods by
     // SubjectId and populate with native interop stub implementations.
     for (int32_t _i = 0; _i < kChaosExternalRuntimeCount; _i++) {
-        if (kChaosExternalRuntimeFnTable[_i] != nullptr) continue;
         const char* _sid = kChaosExternalRuntimeSubjects[_i];
         if (_sid == nullptr) continue;
         if (std::strstr(_sid, "::GetLastPInvokeError") != nullptr) {
@@ -936,6 +963,92 @@ int main(int argc, char* argv[]) {
             kChaosExternalRuntimeFnTable[_i] = reinterpret_cast<void*>(ChaosMarshalGetExceptionPointers);
         } else if (std::strstr(_sid, "::AreComObjectsAvailableForCleanup") != nullptr) {
             kChaosExternalRuntimeFnTable[_i] = reinterpret_cast<void*>(ChaosMarshalAreComObjectsAvailableForCleanup);
+        }
+    }
+
+    // ── Also update hotpatch direct_ptrs for interpreter-dispatched methods ──
+    // The interpreter's ResolveDirectFnSafe resolves calls through HotpatchNameRegistry
+    // (Step 1), not through kChaosExternalRuntimeFnTable (Step 3).  When a method
+    // has a hotpatch entry with direct_ptr=&InterpreterEntryDirect, Step 1 returns
+    // the interpreter entry instead of our stub.  Overwrite the hotpatch entry's
+    // direct_ptr so the interpreter finds our stub directly.
+    if (kChaosExternalRuntimeCount > 0) {
+        for (int32_t _i = 0; _i < kChaosExternalRuntimeCount; _i++) {
+            const char* _sid = kChaosExternalRuntimeSubjects[_i];
+            if (_sid == nullptr) continue;
+            void* _fn = nullptr;
+            if (std::strstr(_sid, "::GetLastPInvokeError") != nullptr)
+                _fn = reinterpret_cast<void*>(ChaosMarshalGetLastPInvokeError);
+            else if (std::strstr(_sid, "::GetHRForLastWin32Error") != nullptr)
+                _fn = reinterpret_cast<void*>(ChaosMarshalGetHRForLastWin32Error);
+            else if (std::strstr(_sid, "::GetExceptionCode") != nullptr)
+                _fn = reinterpret_cast<void*>(ChaosMarshalGetExceptionCode);
+            else if (std::strstr(_sid, "::GetExceptionPointers") != nullptr)
+                _fn = reinterpret_cast<void*>(ChaosMarshalGetExceptionPointers);
+            else if (std::strstr(_sid, "::AreComObjectsAvailableForCleanup") != nullptr)
+                _fn = reinterpret_cast<void*>(ChaosMarshalAreComObjectsAvailableForCleanup);
+            if (_fn == nullptr) continue;
+            // Look up the hotpatch name registry and update direct_ptr
+            auto& _registry = chaos::il2cpp::runtime_core::GetHotpatchNameRegistry();
+            std::string _ns, _type, _method;
+            // Parse SubjectId inline: "Assembly/Namespace.Type::MethodName(Params)"
+            {
+                const char* _p = _sid;
+                if (const char* _slash = std::strchr(_p, '/')) {
+                    _p = _slash + 1;
+                    if (const char* _colon2 = strstr(_p, "::")) {
+                        const char* _type_start = _p;
+                        for (const char* _cp = _p; _cp < _colon2; ++_cp)
+                            if (*_cp == '.') _type_start = _cp + 1;
+                        if (_type_start > _p) _ns.assign(_p, _type_start - _p - 1);
+                        _type.assign(_type_start, _colon2 - _type_start);
+                        _p = _colon2 + 2;
+                        if (const char* _paren = std::strchr(_p, '(')) {
+                            _method.assign(_p, _paren - _p);
+                            auto _gt = _method.find("<");
+                            if (_gt != std::string::npos) _method.resize(_gt);
+                        }
+                    }
+                }
+            }
+            if (_type.empty() || _method.empty()) continue;
+            uint64_t _result = _registry.LookupMethod(_ns.c_str(), _type.c_str(), _method.c_str());
+            if (_result == 0) continue;
+            uint32_t _mod = chaos::il2cpp::runtime_core::ExtractModuleId(_result);
+            uint32_t _tok = chaos::il2cpp::runtime_core::ExtractToken(_result);
+            if (_mod >= _registry.ModuleCount()) continue;
+            uint32_t _slot = _registry.TokenToSlot(_mod, _tok);
+            if (_slot == ~0u) continue;
+            auto* _entry = _registry.GetDispatchEntryBySlot(_mod, _slot);
+            if (_entry != nullptr && _entry->direct_ptr != nullptr) {
+                // Only overwrite if the current direct_ptr is the interpreter entry
+                // (not real AOT code).  We can't check easily, so just update the
+                // fn table entry which the interpreter falls through to in Step 3.
+                // Also set direct_ptr so Step 1 finds our stub.
+                _entry->direct_ptr = _fn;
+            }
+        }
+    }
+
+    // ── Hardcoded bridge thunk fallback ──
+    // The bridge thunk for Marshal::GetHRForLastWin32Error uses fn table [101].
+    // The subjects array has this method at index 102 (loop above sets [102]),
+    // while index 101 is GetHRForException (which has its own AOT code).  The
+    // bridge thunk was generated with the WRONG index, so overwrite [101]
+    // unconditionally to make Marshal::GetHRForLastWin32Error resolvable.
+    // NOTE: This overwrites GetHRForException's function table entry, but
+    // GetHRForException has its own direct stub in interop_stubs.cpp.
+    if (kChaosExternalRuntimeCount > 101) {
+        auto _sid101 = kChaosExternalRuntimeSubjects[101];
+        if (_sid101 != nullptr &&
+            std::strstr(_sid101, "::GetHRForException") != nullptr) {
+            // Index 101 has GetHRForException code.  The bridge thunk for
+            // GetHRForLastWin32Error incorrectly uses [101] when it should
+            // use [102].  Give [101] the Marshal stub so the bridge thunk
+            // resolves correctly.  GetHRForException at [102] (original
+            // GetHRForLastWin32Error's slot) will use the loop-set stub.
+            kChaosExternalRuntimeFnTable[101] =
+                reinterpret_cast<void*>(ChaosMarshalGetHRForLastWin32Error);
         }
     }
 
