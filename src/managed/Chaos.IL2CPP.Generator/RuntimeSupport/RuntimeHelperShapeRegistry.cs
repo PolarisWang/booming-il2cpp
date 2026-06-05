@@ -3670,8 +3670,8 @@ public sealed partial class NativeAotLoweringPlanner
                 if (simdStub != null)
                 {
                     if (paramTypes.Count >= 2)
-                        return $"[&]() -> CHAOS_IL2CPP_INTPTR {{ auto __r = {simdStub}({Deref(0)}, {Deref(1)}); return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(::new auto(__r)); }}()";
-                    return $"[&]() -> CHAOS_IL2CPP_INTPTR {{ auto __r = {simdStub}({Deref(0)}); return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(::new auto(__r)); }}()";
+                        return $"[&]() -> CHAOS_IL2CPP_INTPTR {{ auto __r = {simdStub}({Deref(0)}, {Deref(1)}); auto* __p = (decltype(__r)*)std::malloc(sizeof(__r)); *__p = __r; return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(__p); }}()";
+                    return $"[&]() -> CHAOS_IL2CPP_INTPTR {{ auto __r = {simdStub}({Deref(0)}); auto* __p = (decltype(__r)*)std::malloc(sizeof(__r)); *__p = __r; return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(__p); }}()";
                 }
 
                 // VectorFixedGetElement returns a scalar, not a carrier
@@ -3680,26 +3680,34 @@ public sealed partial class NativeAotLoweringPlanner
 
                 // VectorFixedBroadcast (get_Zero / AllBitsSet) — no vector params
                 if (templateFn == "VectorFixedBroadcast" && paramTypes.Count == 0)
-                    return $"[&]() -> CHAOS_IL2CPP_INTPTR {{ auto __r = {ns}VectorFixedBroadcast<{tc}>(0); return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(::new auto(__r)); }}()";
+                    return $"[&]() -> CHAOS_IL2CPP_INTPTR {{ auto __r = {ns}VectorFixedBroadcast<{tc}>(0); auto* __p = (decltype(__r)*)std::malloc(sizeof(__r)); *__p = __r; return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(__p); }}()";
 
                 // VectorFixedCreateScalar — scalar param, returns carrier
                 if (templateFn == "VectorFixedCreateScalar" && paramTypes.Count == 1)
-                    return $"[&]() -> CHAOS_IL2CPP_INTPTR {{ auto __r = {ns}VectorFixedCreateScalar<{tc}>(static_cast<{cppType}>({{0}})); return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(::new auto(__r)); }}()";
+                    return $"[&]() -> CHAOS_IL2CPP_INTPTR {{ auto __r = {ns}VectorFixedCreateScalar<{tc}>(static_cast<{cppType}>({{0}})); auto* __p = (decltype(__r)*)std::malloc(sizeof(__r)); *__p = __r; return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(__p); }}()";
 
-                // Binary ops: deref both inputs, call function, heap-alloc result
+                // Binary ops: deref inputs (2 or 3), call function, heap-alloc result
+                if (paramTypes.Count >= 2 && paramTypes.Count <= 3)
+                {
+                    var argList = string.Join(", ", Enumerable.Range(0, paramTypes.Count).Select(i => Deref(i)));
+                    var fnCall = requiresScalar
+                        ? $"{ns}{templateFn}<{tc}>({argList})"
+                        : $"{ns}{templateFn}<{carrier}>({argList})";
+                    return $"[&]() -> CHAOS_IL2CPP_INTPTR {{ auto __r = {fnCall}; auto* __p = (decltype(__r)*)std::malloc(sizeof(__r)); *__p = __r; return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(__p); }}()";
+                }
                 if (paramTypes.Count >= 2)
                 {
                     var fnCall = requiresScalar
                         ? $"{ns}{templateFn}<{tc}>({Deref(0)}, {Deref(1)})"
                         : $"{ns}{templateFn}<{carrier}>({Deref(0)}, {Deref(1)})";
-                    return $"[&]() -> CHAOS_IL2CPP_INTPTR {{ auto __r = {fnCall}; return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(::new auto(__r)); }}()";
+                    return $"[&]() -> CHAOS_IL2CPP_INTPTR {{ auto __r = {fnCall}; auto* __p = (decltype(__r)*)std::malloc(sizeof(__r)); *__p = __r; return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(__p); }}()";
                 }
 
                 // Unary ops: deref input, call function, heap-alloc result
                 var unaryFnCall = requiresScalar
                     ? $"{ns}{templateFn}<{tc}>({Deref(0)})"
                     : $"{ns}{templateFn}<{carrier}>({Deref(0)})";
-                return $"[&]() -> CHAOS_IL2CPP_INTPTR {{ auto __r = {unaryFnCall}; return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(::new auto(__r)); }}()";
+                return $"[&]() -> CHAOS_IL2CPP_INTPTR {{ auto __r = {unaryFnCall}; auto* __p = (decltype(__r)*)std::malloc(sizeof(__r)); *__p = __r; return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(__p); }}()";
             }
 
             // SIMD stub lookup: maps (templateFn, carrier, cppType) to the
@@ -3897,7 +3905,7 @@ public sealed partial class NativeAotLoweringPlanner
                                 if (cppType == null) return null;
                                 var carrier = InferVectorCarrierType(callee);
                                 if (carrier == null) return null;
-                                return $"chaos::il2cpp::vector_fixed::VectorFixedCreateScalar<{cppType}, {carrier}>({{0}})";
+                                return $"[&]() -> CHAOS_IL2CPP_INTPTR {{ auto __r = chaos::il2cpp::vector_fixed::VectorFixedCreateScalar<{cppType}, {carrier}>(static_cast<{cppType}>({{0}})); auto* __p = (decltype(__r)*)std::malloc(sizeof(__r)); *__p = __r; return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(__p); }}()";
                             }));
                     }
                 }

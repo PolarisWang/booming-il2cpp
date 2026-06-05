@@ -42,5 +42,6 @@ extern "C" {
 #include "async_stubs.h"
 #include "web_stubs.h"
 #include "interop_stubs.h"
+#include "simd_stubs.h"
 
 }  // extern "C"
