@@ -3647,13 +3647,9 @@ public sealed partial class NativeAotLoweringPlanner
                 return "RuntimeIntrinsicVector128Carrier"; // default for Vector128
             }
 
-            static string? MakeVectorInlineExpression(string callee, IReadOnlyList<string> paramTypes,
+                        static string? MakeVectorInlineExpression(string callee, IReadOnlyList<string> paramTypes,
                 string templateFn, bool requiresScalar)
             {
-                // DISABLED: AOT eval stack carries Vector128 as CHAOS_IL2CPP_INTPTR (8 bytes)
-                // but carrier types are 16-32 byte structs. ABI mismatch.
-                // TODO: Fix AOT codegen to support large value types on eval stack.
-                return null;
                 var elemType = ExtractVectorElementType(callee, paramTypes);
                 if (elemType == null) return null;
                 var cppType = MapTypeArgToCppType(elemType);
@@ -3661,20 +3657,49 @@ public sealed partial class NativeAotLoweringPlanner
                 var carrier = InferVectorCarrierType(callee);
                 if (carrier == null) return null;
 
-                // Phase 2: Check for SIMD hardware intrinsic stub first.
-                // When available, emits a direct call to the SIMD-optimized
-                // extern "C" function (defined in simd_stubs.h/simd_stubs.cpp).
-                // The stub uses _mm_* / _mm256_* SSE/AVX intrinsics instead of
-                // the lane-by-lane scalar fallback in vector_fixed_templates.h.
+                // AOT eval stack stores Vector128/256 values as CHAOS_IL2CPP_INTPTR
+                // which points to a heap-allocated carrier struct (16 or 32 bytes).
+                // The InlineShape must dereference the pointer, call the function,
+                // then heap-allocate a new carrier for the result and return its pointer.
+                const string ns = "chaos::il2cpp::vector_fixed::";
+                var tc = cppType + ", " + carrier;
+                string Deref(int i) => $"*reinterpret_cast<{carrier}*>({{{i}}})";
+
+                // Check for SIMD hardware intrinsic stub first
                 var simdStub = TryGetSimdStub(templateFn, carrier, requiresScalar ? cppType : null);
                 if (simdStub != null)
-                    return $"{simdStub}({{0}}, {{1}})";
+                {
+                    if (paramTypes.Count >= 2)
+                        return $"[&]() -> CHAOS_IL2CPP_INTPTR {{ auto __r = {simdStub}({Deref(0)}, {Deref(1)}); return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(::new auto(__r)); }}()";
+                    return $"[&]() -> CHAOS_IL2CPP_INTPTR {{ auto __r = {simdStub}({Deref(0)}); return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(::new auto(__r)); }}()";
+                }
 
-                // Fallback: inline C++ expression using vector_fixed_templates.h
-                const string ns = "chaos::il2cpp::vector_fixed::";
-                if (requiresScalar)
-                    return $"{ns}{templateFn}<{cppType}, {carrier}>({{0}}, {{1}})";
-                return $"{ns}{templateFn}<{carrier}>({{0}}, {{1}})";
+                // VectorFixedGetElement returns a scalar, not a carrier
+                if (templateFn == "VectorFixedGetElement")
+                    return $"static_cast<CHAOS_IL2CPP_INTPTR>({ns}VectorFixedGetElement<{cppType}, {carrier}>({Deref(0)}, static_cast<CHAOS_IL2CPP_INT32>({{1}})))";
+
+                // VectorFixedBroadcast (get_Zero / AllBitsSet) — no vector params
+                if (templateFn == "VectorFixedBroadcast" && paramTypes.Count == 0)
+                    return $"[&]() -> CHAOS_IL2CPP_INTPTR {{ auto __r = {ns}VectorFixedBroadcast<{tc}>(0); return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(::new auto(__r)); }}()";
+
+                // VectorFixedCreateScalar — scalar param, returns carrier
+                if (templateFn == "VectorFixedCreateScalar" && paramTypes.Count == 1)
+                    return $"[&]() -> CHAOS_IL2CPP_INTPTR {{ auto __r = {ns}VectorFixedCreateScalar<{tc}>(static_cast<{cppType}>({{0}})); return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(::new auto(__r)); }}()";
+
+                // Binary ops: deref both inputs, call function, heap-alloc result
+                if (paramTypes.Count >= 2)
+                {
+                    var fnCall = requiresScalar
+                        ? $"{ns}{templateFn}<{tc}>({Deref(0)}, {Deref(1)})"
+                        : $"{ns}{templateFn}<{carrier}>({Deref(0)}, {Deref(1)})";
+                    return $"[&]() -> CHAOS_IL2CPP_INTPTR {{ auto __r = {fnCall}; return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(::new auto(__r)); }}()";
+                }
+
+                // Unary ops: deref input, call function, heap-alloc result
+                var unaryFnCall = requiresScalar
+                    ? $"{ns}{templateFn}<{tc}>({Deref(0)})"
+                    : $"{ns}{templateFn}<{carrier}>({Deref(0)})";
+                return $"[&]() -> CHAOS_IL2CPP_INTPTR {{ auto __r = {unaryFnCall}; return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(::new auto(__r)); }}()";
             }
 
             // SIMD stub lookup: maps (templateFn, carrier, cppType) to the
