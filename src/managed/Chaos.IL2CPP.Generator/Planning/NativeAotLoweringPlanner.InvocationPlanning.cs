@@ -385,7 +385,8 @@ public sealed partial class NativeAotLoweringPlanner
                     continue;
                 }
 
-                if (!TryCreateExternalRuntimeHelperDefinition(targetSubjectId, out var helperDefinition))
+                System.Console.Error.WriteLine($"[INVOCATION_DEBUG] TryCreateExternalRuntimeHelperDefinition targetSubjectId={targetSubjectId}");
+if (!TryCreateExternalRuntimeHelperDefinition(targetSubjectId, out var helperDefinition))
                 {
                     continue;
                 }
