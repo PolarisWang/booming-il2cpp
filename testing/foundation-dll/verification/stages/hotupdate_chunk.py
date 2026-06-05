@@ -470,14 +470,26 @@ def run_hotupdate_chunk(ctx: ChunkContext, stages: dict[str, StageResult]) -> St
     # - assert_failed > 0 means the patch introduced a crash in a previously-passing
     #   method — this is a genuine regression and should fail.
     if patch_data_path:
-        status = "passed" if (assert_failed == 0 and all_revert and passed > 0) else "failed"
+        # FP-9: When LookupMethod failed for ALL targets (patchFailed), patches were
+        # never applied — baseline + patched both ran the same unpatched code.
+        # This is NOT a real hotupdate verification pass.
+        if result_data.get("patchFailed") or hotupdate_data.get("patched_method_count", 1) == 0:
+            status = "skipped_patch_not_applied"
+        else:
+            status = "passed" if (assert_failed == 0 and all_revert and passed > 0) else "failed"
         if passed == 0:
             status = "failed"
     else:
-        status = "passed" if failed == 0 and passed > 0 else "failed"
-        if passed == 0 and r.returncode == 0:
-            # B3: Differentiate "no hotupdate subjects" vs "all methods silently failed"
+        # FP-10: Without patch data, hotupdate ran baseline+patched+revert on the
+        # SAME unpatched code. This tests nothing — report as skipped, not passed.
+        if _patch_generation_attempted:
+            status = "skipped_patch_failed"
+        elif passed > 0:
+            status = "skipped_no_patch"
+        elif passed == 0 and r.returncode == 0:
             status = "skipped_no_subjects"
+        else:
+            status = "passed" if failed == 0 and passed > 0 else "failed"
 
     # A6: Warn when patch data generation was attempted but failed
     if patch_data_path is None and _patch_generation_attempted:
