@@ -319,6 +319,11 @@ def run_hotupdate_chunk(ctx: ChunkContext, stages: dict[str, StageResult]) -> St
                         "--dll", str(patch_dll),
                         "--output", str(patch_data_path),
                     ]
+                    # FP-8: Pass subject indices to align sentinel values with baseline.
+                    hu_indices = metadata.get("hotupdateMethodIndices")
+                    if hu_indices:
+                        extract_cmd.extend(["--subject-indices", ",".join(str(i) for i in hu_indices)])
+                        extract_cmd.extend(["--subject-only"])
                     extract_result = subprocess.run(
                         extract_cmd, capture_output=True, text=True, timeout=120)
                     if extract_result.returncode == 0:

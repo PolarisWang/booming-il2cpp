@@ -797,6 +797,8 @@ public static class Program
     {
         string? dllPath = null;
         string? outputPath = null;
+        string? subjectIndices = null;
+        bool subjectOnly = false;
 
         for (int i = 0; i < args.Length; i++)
         {
@@ -807,6 +809,12 @@ public static class Program
                     break;
                 case "--output" when i + 1 < args.Length:
                     outputPath = Path.GetFullPath(args[++i]);
+                    break;
+                case "--subject-indices" when i + 1 < args.Length:
+                    subjectIndices = args[++i];
+                    break;
+                case "--subject-only":
+                    subjectOnly = true;
                     break;
             }
         }
@@ -822,7 +830,9 @@ public static class Program
         try
         {
             var extractor = new PatchDataExtractor();
-            extractor.Extract(dllPath, outputPath);
+            extractor.Extract(dllPath, outputPath,
+                subjectOnly: subjectOnly,
+                subjectIndices: subjectIndices);
             var size = new FileInfo(outputPath).Length;
             Console.WriteLine($"  [patchdata] Done: {size} bytes");
             return 0;
