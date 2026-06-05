@@ -83,6 +83,13 @@ void CollectionListAdd(CHAOS_IL2CPP_INTPTR handle, CHAOS_IL2CPP_INTPTR value) no
     storage->version++;
 }
 
+CHAOS_IL2CPP_INT32 CollectionListGetCount(CHAOS_IL2CPP_INTPTR handle) noexcept
+{
+    if (handle == 0) return 0;
+    auto* storage = require_list_storage(handle);
+    return static_cast<CHAOS_IL2CPP_INT32>(storage->items.size());
+}
+
 // ═══════════════════════════════════════════════════════════════
 // Dictionary<K,V> helpers
 // ═══════════════════════════════════════════════════════════════
