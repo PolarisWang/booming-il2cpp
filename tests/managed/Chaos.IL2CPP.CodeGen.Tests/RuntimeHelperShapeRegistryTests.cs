@@ -666,4 +666,26 @@ public sealed class RuntimeHelperShapeRegistryTests
         Assert.Contains("SHAPE_", header);
         Assert.NotEmpty(header);
     }
+
+    [Fact]
+    public void BuildDefault_TryMatchGenericShape_AllMarshalMethods_Match()
+    {
+        var registry = NativeAotLoweringPlanner.RuntimeHelperShapeRegistry.BuildDefault();
+        var marshalMethods = new[]
+        {
+            ("System.Private.CoreLib/System.Runtime.InteropServices.Marshal::GetLastPInvokeError():System.Int32", "GetLastPInvokeError"),
+            ("System.Private.CoreLib/System.Runtime.InteropServices.Marshal::GetHRForLastWin32Error():System.Int32", "GetHRForLastWin32Error"),
+            ("System.Private.CoreLib/System.Runtime.InteropServices.Marshal::SetLastPInvokeError:System.Void(System.Int32)", "SetLastPInvokeError"),
+            ("System.Private.CoreLib/System.Runtime.InteropServices.Marshal::GetExceptionCode():System.Int32", "GetExceptionCode"),
+            ("System.Private.CoreLib/System.Runtime.InteropServices.Marshal::GetExceptionPointers():System.IntPtr", "GetExceptionPointers"),
+            ("System.Private.CoreLib/System.Runtime.InteropServices.Marshal::AreComObjectsAvailableForCleanup():System.Int32", "AreComObjectsAvailableForCleanup"),
+        };
+        foreach (var (callee, methodName) in marshalMethods)
+        {
+            Assert.True(
+                registry.TryMatchGenericShape(callee, out var descriptor, out _),
+                $"TryMatchGenericShape should match {methodName}");
+            Assert.Equal(methodName, descriptor!.MethodName);
+        }
+    }
 }
