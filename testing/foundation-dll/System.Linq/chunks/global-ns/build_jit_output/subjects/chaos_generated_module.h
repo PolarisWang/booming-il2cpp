@@ -32,9 +32,11 @@ class ChaosRuntimeHost;
 
 // chaos_valuetype_* typedefs (opaque 32-bit managed value types)
 typedef CHAOS_IL2CPP_INT32 chaos_valuetype_Chaos_TestFramework_Sdk___0;
+typedef CHAOS_IL2CPP_INT32 chaos_valuetype_System_Private_CoreLib_System_Collections_Generic_KeyValuePair_System_Int32_System_Int32_;
 typedef CHAOS_IL2CPP_INT32 chaos_valuetype_System_Private_CoreLib_System_Nullable_System_Decimal_;
 typedef CHAOS_IL2CPP_INT32 chaos_valuetype_System_Private_CoreLib_System_Nullable_System_Double_;
 typedef CHAOS_IL2CPP_INT32 chaos_valuetype_System_Private_CoreLib_System_Nullable_System_Single_;
+typedef CHAOS_IL2CPP_INT32 chaos_valuetype_System_Private_CoreLib_System_ValueTuple_System_Int32_System_Int32_;
 
 
 
@@ -166,6 +168,18 @@ struct Functions {
                 void
         );
         void (*Throws)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*Throws_System_ArgumentNullException_)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*Throws_System_ArgumentOutOfRangeException_)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*Throws_System_InvalidOperationException_)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*Throws_System_NullReferenceException_)(
                     CHAOS_IL2CPP_INTPTR
         );
         CHAOS_IL2CPP_INT32 (*get_ExitCode)(
@@ -2209,6 +2223,12 @@ struct Functions {
         void (*ctor)(
                     CHAOS_IL2CPP_INTPTR
         );
+        void (*_AggregateBy_33_IEnumerableint_System_Funcintint_int_System_Funcintintint_IEqualityComparerint_0_b__146_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_AggregateBy_33_IEnumerableint_System_Funcintint_int_System_Funcintintint_IEqualityComparerint_1_b__148_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
         CHAOS_IL2CPP_INT32 (*_AggregateBy_33_IEnumerableint_System_Funcintint_int_System_Funcintintint_IEqualityComparerint_2_b__150_0)(
                     CHAOS_IL2CPP_INTPTR, 
                     CHAOS_IL2CPP_INT32
@@ -2217,6 +2237,9 @@ struct Functions {
                     CHAOS_IL2CPP_INTPTR, 
                     CHAOS_IL2CPP_INT32, 
                     CHAOS_IL2CPP_INT32
+        );
+        void (*_AggregateBy_34_IEnumerableint_System_Funcintint_System_Funcintint_System_Funcintintint_IEqualityComparerint_0_b__152_0)(
+                    CHAOS_IL2CPP_INTPTR
         );
         CHAOS_IL2CPP_INT32 (*_AggregateBy_34_IEnumerableint_System_Funcintint_System_Funcintint_System_Funcintintint_IEqualityComparerint_1_b__154_0)(
                     CHAOS_IL2CPP_INTPTR, 
@@ -2231,10 +2254,33 @@ struct Functions {
                     CHAOS_IL2CPP_INT32, 
                     CHAOS_IL2CPP_INT32
         );
+        void (*_Aggregate_0_IEnumerableint_System_Funcintintint_0_b__0_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Aggregate_0_IEnumerableint_System_Funcintintint_1_b__2_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        CHAOS_IL2CPP_INT32 (*_Aggregate_0_IEnumerableint_System_Funcintintint_1_b__2_1)(
+                    CHAOS_IL2CPP_INTPTR, 
+                    CHAOS_IL2CPP_INT32, 
+                    CHAOS_IL2CPP_INT32
+        );
+        void (*_Aggregate_1_IEnumerableint_int_System_Funcintintint_0_b__4_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Aggregate_1_IEnumerableint_int_System_Funcintintint_1_b__6_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
         CHAOS_IL2CPP_INT32 (*_Aggregate_1_IEnumerableint_int_System_Funcintintint_2_b__8_0)(
                     CHAOS_IL2CPP_INTPTR, 
                     CHAOS_IL2CPP_INT32, 
                     CHAOS_IL2CPP_INT32
+        );
+        void (*_Aggregate_2_IEnumerableint_int_System_Funcintintint_System_Funcintint_0_b__10_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Aggregate_2_IEnumerableint_int_System_Funcintintint_System_Funcintint_1_b__12_0)(
+                    CHAOS_IL2CPP_INTPTR
         );
         CHAOS_IL2CPP_INT32 (*_Aggregate_2_IEnumerableint_int_System_Funcintintint_System_Funcintint_2_b__14_0)(
                     CHAOS_IL2CPP_INTPTR, 
@@ -2245,33 +2291,158 @@ struct Functions {
                     CHAOS_IL2CPP_INTPTR, 
                     CHAOS_IL2CPP_INT32
         );
+        void (*_All_5_IEnumerableint_System_Funcintbool_0_b__24_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
         CHAOS_IL2CPP_INTPTR (*_All_5_IEnumerableint_System_Funcintbool_1_b__26_0)(
                     CHAOS_IL2CPP_INTPTR, 
                     CHAOS_IL2CPP_INT32
+        );
+        void (*_Any_3_IEnumerableint_0_b__16_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Any_4_IEnumerableint_System_Funcintbool_0_b__20_0)(
+                    CHAOS_IL2CPP_INTPTR
         );
         CHAOS_IL2CPP_INTPTR (*_Any_4_IEnumerableint_System_Funcintbool_1_b__22_0)(
                     CHAOS_IL2CPP_INTPTR, 
                     CHAOS_IL2CPP_INT32
         );
+        void (*_Append_6_IEnumerableint_int_0_b__28_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Append_6_IEnumerableint_int_1_b__30_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Average_10_IEnumerablefloat_0_b__48_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Average_10_IEnumerablefloat_1_b__50_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Average_11_IEnumerabledouble_0_b__52_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Average_11_IEnumerabledouble_1_b__54_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Average_12_IEnumerabledecimal_0_b__56_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Average_12_IEnumerabledecimal_1_b__58_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Average_13_IEnumerableSystem_Nullableint_0_b__60_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Average_14_IEnumerableSystem_Nullablelong_0_b__64_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Average_15_IEnumerableSystem_Nullablefloat_0_b__68_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Average_16_IEnumerableSystem_Nullabledouble_0_b__72_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Average_17_IEnumerableSystem_Nullabledecimal_0_b__76_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Average_18_IEnumerableint_System_Funcintint_0_b__80_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Average_18_IEnumerableint_System_Funcintint_1_b__82_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        CHAOS_IL2CPP_INT32 (*_Average_18_IEnumerableint_System_Funcintint_1_b__82_1)(
+                    CHAOS_IL2CPP_INTPTR, 
+                    CHAOS_IL2CPP_INT32
+        );
+        void (*_Average_19_IEnumerableint_System_Funcintlong_0_b__84_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Average_19_IEnumerableint_System_Funcintlong_1_b__86_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        CHAOS_IL2CPP_INT64 (*_Average_19_IEnumerableint_System_Funcintlong_1_b__86_1)(
+                    CHAOS_IL2CPP_INTPTR, 
+                    CHAOS_IL2CPP_INT32
+        );
+        void (*_Average_20_IEnumerableint_System_Funcintfloat_0_b__88_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Average_20_IEnumerableint_System_Funcintfloat_1_b__90_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        float (*_Average_20_IEnumerableint_System_Funcintfloat_1_b__90_1)(
+                    CHAOS_IL2CPP_INTPTR, 
+                    CHAOS_IL2CPP_INT32
+        );
+        void (*_Average_21_IEnumerableint_System_Funcintdouble_0_b__92_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Average_21_IEnumerableint_System_Funcintdouble_1_b__94_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        double (*_Average_21_IEnumerableint_System_Funcintdouble_1_b__94_1)(
+                    CHAOS_IL2CPP_INTPTR, 
+                    CHAOS_IL2CPP_INT32
+        );
+        void (*_Average_22_IEnumerableint_System_Funcintdecimal_0_b__96_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Average_22_IEnumerableint_System_Funcintdecimal_1_b__98_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        CHAOS_IL2CPP_INTPTR (*_Average_22_IEnumerableint_System_Funcintdecimal_1_b__98_1)(
+                    CHAOS_IL2CPP_INTPTR, 
+                    CHAOS_IL2CPP_INT32
+        );
+        void (*_Average_23_IEnumerableint_System_FuncintSystem_Nullableint_0_b__100_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
         CHAOS_IL2CPP_INTPTR (*_Average_23_IEnumerableint_System_FuncintSystem_Nullableint_1_b__102_0)(
                     CHAOS_IL2CPP_INTPTR, 
                     CHAOS_IL2CPP_INT32
+        );
+        void (*_Average_24_IEnumerableint_System_FuncintSystem_Nullablelong_0_b__104_0)(
+                    CHAOS_IL2CPP_INTPTR
         );
         CHAOS_IL2CPP_INTPTR (*_Average_24_IEnumerableint_System_FuncintSystem_Nullablelong_1_b__106_0)(
                     CHAOS_IL2CPP_INTPTR, 
                     CHAOS_IL2CPP_INT32
         );
+        void (*_Average_25_IEnumerableint_System_FuncintSystem_Nullablefloat_0_b__108_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
         CHAOS_IL2CPP_INTPTR (*_Average_25_IEnumerableint_System_FuncintSystem_Nullablefloat_1_b__110_0)(
                     CHAOS_IL2CPP_INTPTR, 
                     CHAOS_IL2CPP_INT32
+        );
+        void (*_Average_26_IEnumerableint_System_FuncintSystem_Nullabledouble_0_b__112_0)(
+                    CHAOS_IL2CPP_INTPTR
         );
         CHAOS_IL2CPP_INTPTR (*_Average_26_IEnumerableint_System_FuncintSystem_Nullabledouble_1_b__114_0)(
                     CHAOS_IL2CPP_INTPTR, 
                     CHAOS_IL2CPP_INT32
         );
+        void (*_Average_27_IEnumerableint_System_FuncintSystem_Nullabledecimal_0_b__116_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
         CHAOS_IL2CPP_INTPTR (*_Average_27_IEnumerableint_System_FuncintSystem_Nullabledecimal_1_b__118_0)(
                     CHAOS_IL2CPP_INTPTR, 
                     CHAOS_IL2CPP_INT32
+        );
+        void (*_Average_8_IEnumerableint_0_b__40_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Average_8_IEnumerableint_1_b__42_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Average_9_IEnumerablelong_0_b__44_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Average_9_IEnumerablelong_1_b__46_0)(
+                    CHAOS_IL2CPP_INTPTR
         );
         CHAOS_IL2CPP_INT32 (*_Benchmark_AggregateBy_33_IEnumerableint_System_Funcintint_int_System_Funcintintint_IEqualityComparerint_2_b__151_0)(
                     CHAOS_IL2CPP_INTPTR, 
@@ -2743,45 +2914,187 @@ struct Functions {
                     CHAOS_IL2CPP_INT32, 
                     CHAOS_IL2CPP_INT32
         );
+        void (*_Cast_28_IEnumerable_0_b__120_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Chunk_29_IEnumerableint_int_0_b__124_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Chunk_29_IEnumerableint_int_1_b__126_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Chunk_29_IEnumerableint_int_2_b__128_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Concat_30_IEnumerableint_IEnumerableint_0_b__130_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Contains_31_IEnumerableint_int_0_b__134_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Contains_31_IEnumerableint_int_1_b__136_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Contains_32_IEnumerableint_int_IEqualityComparerint_0_b__140_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Contains_32_IEnumerableint_int_IEqualityComparerint_1_b__142_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_CountBy_35_IEnumerableint_System_Funcintint_IEqualityComparerint_0_b__156_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
         CHAOS_IL2CPP_INT32 (*_CountBy_35_IEnumerableint_System_Funcintint_IEqualityComparerint_1_b__158_0)(
                     CHAOS_IL2CPP_INTPTR, 
                     CHAOS_IL2CPP_INT32
+        );
+        void (*_Count_36_IEnumerableint_0_b__160_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Count_37_IEnumerableint_System_Funcintbool_0_b__164_0)(
+                    CHAOS_IL2CPP_INTPTR
         );
         CHAOS_IL2CPP_INTPTR (*_Count_37_IEnumerableint_System_Funcintbool_1_b__166_0)(
                     CHAOS_IL2CPP_INTPTR, 
                     CHAOS_IL2CPP_INT32
         );
+        void (*_DefaultIfEmpty_41_IEnumerableint_0_b__182_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_DefaultIfEmpty_42_IEnumerableint_int_0_b__186_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_DefaultIfEmpty_42_IEnumerableint_int_1_b__188_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_DistinctBy_45_IEnumerableint_System_Funcintint_0_b__200_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
         CHAOS_IL2CPP_INT32 (*_DistinctBy_45_IEnumerableint_System_Funcintint_1_b__202_0)(
                     CHAOS_IL2CPP_INTPTR, 
                     CHAOS_IL2CPP_INT32
+        );
+        void (*_DistinctBy_46_IEnumerableint_System_Funcintint_IEqualityComparerint_0_b__204_0)(
+                    CHAOS_IL2CPP_INTPTR
         );
         CHAOS_IL2CPP_INT32 (*_DistinctBy_46_IEnumerableint_System_Funcintint_IEqualityComparerint_1_b__206_0)(
                     CHAOS_IL2CPP_INTPTR, 
                     CHAOS_IL2CPP_INT32
         );
+        void (*_Distinct_43_IEnumerableint_0_b__192_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Distinct_44_IEnumerableint_IEqualityComparerint_0_b__196_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_ElementAtOrDefault_49_IEnumerableint_int_0_b__220_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_ElementAtOrDefault_49_IEnumerableint_int_1_b__222_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_ElementAtOrDefault_50_IEnumerableint_System_Index_0_b__226_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_ElementAtOrDefault_50_IEnumerableint_System_Index_1_b__228_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_ElementAt_47_IEnumerableint_int_0_b__208_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_ElementAt_47_IEnumerableint_int_1_b__210_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_ElementAt_47_IEnumerableint_int_2_b__212_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_ElementAt_48_IEnumerableint_System_Index_0_b__214_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_ElementAt_48_IEnumerableint_System_Index_1_b__216_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_ElementAt_48_IEnumerableint_System_Index_2_b__218_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_ExceptBy_55_IEnumerableint_IEnumerableint_System_Funcintint_0_b__246_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
         CHAOS_IL2CPP_INT32 (*_ExceptBy_55_IEnumerableint_IEnumerableint_System_Funcintint_1_b__248_0)(
                     CHAOS_IL2CPP_INTPTR, 
                     CHAOS_IL2CPP_INT32
+        );
+        void (*_ExceptBy_56_IEnumerableint_IEnumerableint_System_Funcintint_IEqualityComparerint_0_b__250_0)(
+                    CHAOS_IL2CPP_INTPTR
         );
         CHAOS_IL2CPP_INT32 (*_ExceptBy_56_IEnumerableint_IEnumerableint_System_Funcintint_IEqualityComparerint_1_b__252_0)(
                     CHAOS_IL2CPP_INTPTR, 
                     CHAOS_IL2CPP_INT32
         );
+        void (*_Except_53_IEnumerableint_IEnumerableint_0_b__238_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Except_54_IEnumerableint_IEnumerableint_IEqualityComparerint_0_b__242_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_FirstOrDefault_59_IEnumerableint_0_b__262_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_FirstOrDefault_60_IEnumerableint_int_0_b__266_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_FirstOrDefault_60_IEnumerableint_int_1_b__268_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_FirstOrDefault_61_IEnumerableint_System_Funcintbool_0_b__272_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
         CHAOS_IL2CPP_INTPTR (*_FirstOrDefault_61_IEnumerableint_System_Funcintbool_1_b__274_0)(
                     CHAOS_IL2CPP_INTPTR, 
                     CHAOS_IL2CPP_INT32
+        );
+        void (*_FirstOrDefault_62_IEnumerableint_System_Funcintbool_int_0_b__276_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_FirstOrDefault_62_IEnumerableint_System_Funcintbool_int_1_b__278_0)(
+                    CHAOS_IL2CPP_INTPTR
         );
         CHAOS_IL2CPP_INTPTR (*_FirstOrDefault_62_IEnumerableint_System_Funcintbool_int_2_b__280_0)(
                     CHAOS_IL2CPP_INTPTR, 
                     CHAOS_IL2CPP_INT32
         );
+        void (*_First_57_IEnumerableint_0_b__254_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_First_57_IEnumerableint_1_b__256_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_First_58_IEnumerableint_System_Funcintbool_0_b__258_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_First_58_IEnumerableint_System_Funcintbool_1_b__260_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        CHAOS_IL2CPP_INTPTR (*_First_58_IEnumerableint_System_Funcintbool_1_b__260_1)(
+                    CHAOS_IL2CPP_INTPTR, 
+                    CHAOS_IL2CPP_INT32
+        );
+        void (*_GroupBy_63_IEnumerableint_System_Funcintint_0_b__282_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
         CHAOS_IL2CPP_INT32 (*_GroupBy_63_IEnumerableint_System_Funcintint_1_b__284_0)(
                     CHAOS_IL2CPP_INTPTR, 
                     CHAOS_IL2CPP_INT32
         );
+        void (*_GroupBy_64_IEnumerableint_System_Funcintint_IEqualityComparerint_0_b__286_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
         CHAOS_IL2CPP_INT32 (*_GroupBy_64_IEnumerableint_System_Funcintint_IEqualityComparerint_1_b__288_0)(
                     CHAOS_IL2CPP_INTPTR, 
                     CHAOS_IL2CPP_INT32
+        );
+        void (*_GroupBy_65_IEnumerableint_System_Funcintint_System_Funcintint_0_b__290_0)(
+                    CHAOS_IL2CPP_INTPTR
         );
         CHAOS_IL2CPP_INT32 (*_GroupBy_65_IEnumerableint_System_Funcintint_System_Funcintint_1_b__292_0)(
                     CHAOS_IL2CPP_INTPTR, 
@@ -2791,6 +3104,9 @@ struct Functions {
                     CHAOS_IL2CPP_INTPTR, 
                     CHAOS_IL2CPP_INT32
         );
+        void (*_GroupBy_66_IEnumerableint_System_Funcintint_System_Funcintint_IEqualityComparerint_0_b__294_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
         CHAOS_IL2CPP_INT32 (*_GroupBy_66_IEnumerableint_System_Funcintint_System_Funcintint_IEqualityComparerint_1_b__296_0)(
                     CHAOS_IL2CPP_INTPTR, 
                     CHAOS_IL2CPP_INT32
@@ -2798,6 +3114,9 @@ struct Functions {
         CHAOS_IL2CPP_INT32 (*_GroupBy_66_IEnumerableint_System_Funcintint_System_Funcintint_IEqualityComparerint_1_b__296_1)(
                     CHAOS_IL2CPP_INTPTR, 
                     CHAOS_IL2CPP_INT32
+        );
+        void (*_GroupBy_67_IEnumerableint_System_Funcintint_System_FuncintIEnumerableintint_0_b__298_0)(
+                    CHAOS_IL2CPP_INTPTR
         );
         CHAOS_IL2CPP_INT32 (*_GroupBy_67_IEnumerableint_System_Funcintint_System_FuncintIEnumerableintint_1_b__300_0)(
                     CHAOS_IL2CPP_INTPTR, 
@@ -2808,6 +3127,9 @@ struct Functions {
                     CHAOS_IL2CPP_INT32, 
                     CHAOS_IL2CPP_INTPTR
         );
+        void (*_GroupBy_68_IEnumerableint_System_Funcintint_System_FuncintIEnumerableintint_IEqualityComparerint_0_b__302_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
         CHAOS_IL2CPP_INT32 (*_GroupBy_68_IEnumerableint_System_Funcintint_System_FuncintIEnumerableintint_IEqualityComparerint_1_b__304_0)(
                     CHAOS_IL2CPP_INTPTR, 
                     CHAOS_IL2CPP_INT32
@@ -2815,6 +3137,9 @@ struct Functions {
         CHAOS_IL2CPP_INT32 (*_GroupBy_68_IEnumerableint_System_Funcintint_System_FuncintIEnumerableintint_IEqualityComparerint_1_b__304_1)(
                     CHAOS_IL2CPP_INTPTR, 
                     CHAOS_IL2CPP_INT32, 
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_GroupBy_69_IEnumerableint_System_Funcintint_System_Funcintint_System_FuncintIEnumerableintint_0_b__306_0)(
                     CHAOS_IL2CPP_INTPTR
         );
         CHAOS_IL2CPP_INT32 (*_GroupBy_69_IEnumerableint_System_Funcintint_System_Funcintint_System_FuncintIEnumerableintint_1_b__308_0)(
@@ -2830,6 +3155,9 @@ struct Functions {
                     CHAOS_IL2CPP_INT32, 
                     CHAOS_IL2CPP_INTPTR
         );
+        void (*_GroupBy_70_IEnumerableint_System_Funcintint_System_Funcintint_System_FuncintIEnumerableintint_IEqualityComparerint_0_b__310_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
         CHAOS_IL2CPP_INT32 (*_GroupBy_70_IEnumerableint_System_Funcintint_System_Funcintint_System_FuncintIEnumerableintint_IEqualityComparerint_1_b__312_0)(
                     CHAOS_IL2CPP_INTPTR, 
                     CHAOS_IL2CPP_INT32
@@ -2841,6 +3169,9 @@ struct Functions {
         CHAOS_IL2CPP_INT32 (*_GroupBy_70_IEnumerableint_System_Funcintint_System_Funcintint_System_FuncintIEnumerableintint_IEqualityComparerint_1_b__312_2)(
                     CHAOS_IL2CPP_INTPTR, 
                     CHAOS_IL2CPP_INT32, 
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_GroupJoin_71_IEnumerableint_IEnumerableint_System_Funcintint_System_Funcintint_System_FuncintIEnumerableintint_0_b__314_0)(
                     CHAOS_IL2CPP_INTPTR
         );
         CHAOS_IL2CPP_INT32 (*_GroupJoin_71_IEnumerableint_IEnumerableint_System_Funcintint_System_Funcintint_System_FuncintIEnumerableintint_1_b__316_0)(
@@ -2856,6 +3187,9 @@ struct Functions {
                     CHAOS_IL2CPP_INT32, 
                     CHAOS_IL2CPP_INTPTR
         );
+        void (*_GroupJoin_72_IEnumerableint_IEnumerableint_System_Funcintint_System_Funcintint_System_FuncintIEnumerableintint_IEqualityComparerint_0_b__318_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
         CHAOS_IL2CPP_INT32 (*_GroupJoin_72_IEnumerableint_IEnumerableint_System_Funcintint_System_Funcintint_System_FuncintIEnumerableintint_IEqualityComparerint_1_b__320_0)(
                     CHAOS_IL2CPP_INTPTR, 
                     CHAOS_IL2CPP_INT32
@@ -2869,13 +3203,31 @@ struct Functions {
                     CHAOS_IL2CPP_INT32, 
                     CHAOS_IL2CPP_INTPTR
         );
+        void (*_Index_73_IEnumerableint_0_b__322_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_IntersectBy_76_IEnumerableint_IEnumerableint_System_Funcintint_0_b__334_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
         CHAOS_IL2CPP_INT32 (*_IntersectBy_76_IEnumerableint_IEnumerableint_System_Funcintint_1_b__336_0)(
                     CHAOS_IL2CPP_INTPTR, 
                     CHAOS_IL2CPP_INT32
         );
+        void (*_IntersectBy_77_IEnumerableint_IEnumerableint_System_Funcintint_IEqualityComparerint_0_b__338_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
         CHAOS_IL2CPP_INT32 (*_IntersectBy_77_IEnumerableint_IEnumerableint_System_Funcintint_IEqualityComparerint_1_b__340_0)(
                     CHAOS_IL2CPP_INTPTR, 
                     CHAOS_IL2CPP_INT32
+        );
+        void (*_Intersect_74_IEnumerableint_IEnumerableint_0_b__326_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Intersect_75_IEnumerableint_IEnumerableint_IEqualityComparerint_0_b__330_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Join_78_IEnumerableint_IEnumerableint_System_Funcintint_System_Funcintint_System_Funcintintint_0_b__342_0)(
+                    CHAOS_IL2CPP_INTPTR
         );
         CHAOS_IL2CPP_INT32 (*_Join_78_IEnumerableint_IEnumerableint_System_Funcintint_System_Funcintint_System_Funcintintint_1_b__344_0)(
                     CHAOS_IL2CPP_INTPTR, 
@@ -2890,6 +3242,9 @@ struct Functions {
                     CHAOS_IL2CPP_INT32, 
                     CHAOS_IL2CPP_INT32
         );
+        void (*_Join_79_IEnumerableint_IEnumerableint_System_Funcintint_System_Funcintint_System_Funcintintint_IEqualityComparerint_0_b__346_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
         CHAOS_IL2CPP_INT32 (*_Join_79_IEnumerableint_IEnumerableint_System_Funcintint_System_Funcintint_System_Funcintintint_IEqualityComparerint_1_b__348_0)(
                     CHAOS_IL2CPP_INTPTR, 
                     CHAOS_IL2CPP_INT32
@@ -2903,42 +3258,167 @@ struct Functions {
                     CHAOS_IL2CPP_INT32, 
                     CHAOS_IL2CPP_INT32
         );
+        void (*_LastOrDefault_82_IEnumerableint_0_b__358_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_LastOrDefault_83_IEnumerableint_int_0_b__362_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_LastOrDefault_83_IEnumerableint_int_1_b__364_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_LastOrDefault_84_IEnumerableint_System_Funcintbool_0_b__368_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
         CHAOS_IL2CPP_INTPTR (*_LastOrDefault_84_IEnumerableint_System_Funcintbool_1_b__370_0)(
                     CHAOS_IL2CPP_INTPTR, 
                     CHAOS_IL2CPP_INT32
+        );
+        void (*_LastOrDefault_85_IEnumerableint_System_Funcintbool_int_0_b__372_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_LastOrDefault_85_IEnumerableint_System_Funcintbool_int_1_b__374_0)(
+                    CHAOS_IL2CPP_INTPTR
         );
         CHAOS_IL2CPP_INTPTR (*_LastOrDefault_85_IEnumerableint_System_Funcintbool_int_2_b__376_0)(
                     CHAOS_IL2CPP_INTPTR, 
                     CHAOS_IL2CPP_INT32
         );
+        void (*_Last_80_IEnumerableint_0_b__350_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Last_80_IEnumerableint_1_b__352_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Last_81_IEnumerableint_System_Funcintbool_0_b__354_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Last_81_IEnumerableint_System_Funcintbool_1_b__356_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        CHAOS_IL2CPP_INTPTR (*_Last_81_IEnumerableint_System_Funcintbool_1_b__356_1)(
+                    CHAOS_IL2CPP_INTPTR, 
+                    CHAOS_IL2CPP_INT32
+        );
+        void (*_LongCount_39_IEnumerableint_0_b__174_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_LongCount_40_IEnumerableint_System_Funcintbool_0_b__178_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
         CHAOS_IL2CPP_INTPTR (*_LongCount_40_IEnumerableint_System_Funcintbool_1_b__180_0)(
                     CHAOS_IL2CPP_INTPTR, 
                     CHAOS_IL2CPP_INT32
+        );
+        void (*_MaxBy_90_IEnumerableint_System_Funcintint_0_b__394_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_MaxBy_90_IEnumerableint_System_Funcintint_1_b__396_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        CHAOS_IL2CPP_INT32 (*_MaxBy_90_IEnumerableint_System_Funcintint_1_b__396_1)(
+                    CHAOS_IL2CPP_INTPTR, 
+                    CHAOS_IL2CPP_INT32
+        );
+        void (*_MaxBy_91_IEnumerableint_System_Funcintint_IComparerint_0_b__398_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_MaxBy_91_IEnumerableint_System_Funcintint_IComparerint_1_b__400_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        CHAOS_IL2CPP_INT32 (*_MaxBy_91_IEnumerableint_System_Funcintint_IComparerint_1_b__400_1)(
+                    CHAOS_IL2CPP_INTPTR, 
+                    CHAOS_IL2CPP_INT32
+        );
+        void (*_MinBy_92_IEnumerableint_System_Funcintint_0_b__402_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_MinBy_92_IEnumerableint_System_Funcintint_1_b__404_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        CHAOS_IL2CPP_INT32 (*_MinBy_92_IEnumerableint_System_Funcintint_1_b__404_1)(
+                    CHAOS_IL2CPP_INTPTR, 
+                    CHAOS_IL2CPP_INT32
+        );
+        void (*_MinBy_93_IEnumerableint_System_Funcintint_IComparerint_0_b__406_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_MinBy_93_IEnumerableint_System_Funcintint_IComparerint_1_b__408_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        CHAOS_IL2CPP_INT32 (*_MinBy_93_IEnumerableint_System_Funcintint_IComparerint_1_b__408_1)(
+                    CHAOS_IL2CPP_INTPTR, 
+                    CHAOS_IL2CPP_INT32
+        );
+        void (*_OfType_94_IEnumerable_0_b__410_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_OrderByDescending_101_IEnumerableint_System_Funcintint_0_b__438_0)(
+                    CHAOS_IL2CPP_INTPTR
         );
         CHAOS_IL2CPP_INT32 (*_OrderByDescending_101_IEnumerableint_System_Funcintint_1_b__440_0)(
                     CHAOS_IL2CPP_INTPTR, 
                     CHAOS_IL2CPP_INT32
         );
+        void (*_OrderByDescending_102_IEnumerableint_System_Funcintint_IComparerint_0_b__442_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
         CHAOS_IL2CPP_INT32 (*_OrderByDescending_102_IEnumerableint_System_Funcintint_IComparerint_1_b__444_0)(
                     CHAOS_IL2CPP_INTPTR, 
                     CHAOS_IL2CPP_INT32
+        );
+        void (*_OrderBy_97_IEnumerableint_System_Funcintint_0_b__422_0)(
+                    CHAOS_IL2CPP_INTPTR
         );
         CHAOS_IL2CPP_INT32 (*_OrderBy_97_IEnumerableint_System_Funcintint_1_b__424_0)(
                     CHAOS_IL2CPP_INTPTR, 
                     CHAOS_IL2CPP_INT32
         );
+        void (*_OrderBy_98_IEnumerableint_System_Funcintint_IComparerint_0_b__426_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
         CHAOS_IL2CPP_INT32 (*_OrderBy_98_IEnumerableint_System_Funcintint_IComparerint_1_b__428_0)(
                     CHAOS_IL2CPP_INTPTR, 
                     CHAOS_IL2CPP_INT32
+        );
+        void (*_OrderDescending_100_IEnumerableint_IComparerint_0_b__434_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_OrderDescending_99_IEnumerableint_0_b__430_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Order_95_IEnumerableint_0_b__414_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Order_96_IEnumerableint_IComparerint_0_b__418_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Prepend_7_IEnumerableint_int_0_b__34_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Prepend_7_IEnumerableint_int_1_b__36_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Reverse_109_IEnumerableint_0_b__474_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_SelectMany_112_IEnumerableint_System_FuncintIEnumerableint_0_b__486_0)(
+                    CHAOS_IL2CPP_INTPTR
         );
         CHAOS_IL2CPP_INTPTR (*_SelectMany_112_IEnumerableint_System_FuncintIEnumerableint_1_b__488_0)(
                     CHAOS_IL2CPP_INTPTR, 
                     CHAOS_IL2CPP_INT32
         );
+        void (*_SelectMany_113_IEnumerableint_System_FuncintintIEnumerableint_0_b__490_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
         CHAOS_IL2CPP_INTPTR (*_SelectMany_113_IEnumerableint_System_FuncintintIEnumerableint_1_b__492_0)(
                     CHAOS_IL2CPP_INTPTR, 
                     CHAOS_IL2CPP_INT32, 
                     CHAOS_IL2CPP_INT32
+        );
+        void (*_SelectMany_114_IEnumerableint_System_FuncintintIEnumerableint_System_Funcintintint_0_b__494_0)(
+                    CHAOS_IL2CPP_INTPTR
         );
         CHAOS_IL2CPP_INTPTR (*_SelectMany_114_IEnumerableint_System_FuncintintIEnumerableint_System_Funcintintint_1_b__496_0)(
                     CHAOS_IL2CPP_INTPTR, 
@@ -2950,6 +3430,9 @@ struct Functions {
                     CHAOS_IL2CPP_INT32, 
                     CHAOS_IL2CPP_INT32
         );
+        void (*_SelectMany_115_IEnumerableint_System_FuncintIEnumerableint_System_Funcintintint_0_b__498_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
         CHAOS_IL2CPP_INTPTR (*_SelectMany_115_IEnumerableint_System_FuncintIEnumerableint_System_Funcintintint_1_b__500_0)(
                     CHAOS_IL2CPP_INTPTR, 
                     CHAOS_IL2CPP_INT32
@@ -2959,40 +3442,131 @@ struct Functions {
                     CHAOS_IL2CPP_INT32, 
                     CHAOS_IL2CPP_INT32
         );
+        void (*_Select_110_IEnumerableint_System_Funcintint_0_b__478_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
         CHAOS_IL2CPP_INT32 (*_Select_110_IEnumerableint_System_Funcintint_1_b__480_0)(
                     CHAOS_IL2CPP_INTPTR, 
                     CHAOS_IL2CPP_INT32
+        );
+        void (*_Select_111_IEnumerableint_System_Funcintintint_0_b__482_0)(
+                    CHAOS_IL2CPP_INTPTR
         );
         CHAOS_IL2CPP_INT32 (*_Select_111_IEnumerableint_System_Funcintintint_1_b__484_0)(
                     CHAOS_IL2CPP_INTPTR, 
                     CHAOS_IL2CPP_INT32, 
                     CHAOS_IL2CPP_INT32
         );
+        void (*_SequenceEqual_116_IEnumerableint_IEnumerableint_0_b__502_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_SequenceEqual_117_IEnumerableint_IEnumerableint_IEqualityComparerint_0_b__506_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_SingleOrDefault_120_IEnumerableint_0_b__518_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_SingleOrDefault_121_IEnumerableint_int_0_b__522_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_SingleOrDefault_121_IEnumerableint_int_1_b__524_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_SingleOrDefault_122_IEnumerableint_System_Funcintbool_0_b__528_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
         CHAOS_IL2CPP_INTPTR (*_SingleOrDefault_122_IEnumerableint_System_Funcintbool_1_b__530_0)(
                     CHAOS_IL2CPP_INTPTR, 
                     CHAOS_IL2CPP_INT32
+        );
+        void (*_SingleOrDefault_123_IEnumerableint_System_Funcintbool_int_0_b__532_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_SingleOrDefault_123_IEnumerableint_System_Funcintbool_int_1_b__534_0)(
+                    CHAOS_IL2CPP_INTPTR
         );
         CHAOS_IL2CPP_INTPTR (*_SingleOrDefault_123_IEnumerableint_System_Funcintbool_int_2_b__536_0)(
                     CHAOS_IL2CPP_INTPTR, 
                     CHAOS_IL2CPP_INT32
         );
+        void (*_Single_118_IEnumerableint_0_b__510_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Single_118_IEnumerableint_1_b__512_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Single_119_IEnumerableint_System_Funcintbool_0_b__514_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Single_119_IEnumerableint_System_Funcintbool_1_b__516_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        CHAOS_IL2CPP_INTPTR (*_Single_119_IEnumerableint_System_Funcintbool_1_b__516_1)(
+                    CHAOS_IL2CPP_INTPTR, 
+                    CHAOS_IL2CPP_INT32
+        );
+        void (*_SkipLast_127_IEnumerableint_int_0_b__552_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_SkipLast_127_IEnumerableint_int_1_b__554_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_SkipWhile_125_IEnumerableint_System_Funcintbool_0_b__544_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
         CHAOS_IL2CPP_INTPTR (*_SkipWhile_125_IEnumerableint_System_Funcintbool_1_b__546_0)(
                     CHAOS_IL2CPP_INTPTR, 
                     CHAOS_IL2CPP_INT32
+        );
+        void (*_SkipWhile_126_IEnumerableint_System_Funcintintbool_0_b__548_0)(
+                    CHAOS_IL2CPP_INTPTR
         );
         CHAOS_IL2CPP_INTPTR (*_SkipWhile_126_IEnumerableint_System_Funcintintbool_1_b__550_0)(
                     CHAOS_IL2CPP_INTPTR, 
                     CHAOS_IL2CPP_INT32, 
                     CHAOS_IL2CPP_INT32
         );
+        void (*_Skip_124_IEnumerableint_int_0_b__538_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Skip_124_IEnumerableint_int_1_b__540_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_TakeLast_132_IEnumerableint_int_0_b__578_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_TakeLast_132_IEnumerableint_int_1_b__580_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_TakeWhile_130_IEnumerableint_System_Funcintbool_0_b__570_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
         CHAOS_IL2CPP_INTPTR (*_TakeWhile_130_IEnumerableint_System_Funcintbool_1_b__572_0)(
                     CHAOS_IL2CPP_INTPTR, 
                     CHAOS_IL2CPP_INT32
+        );
+        void (*_TakeWhile_131_IEnumerableint_System_Funcintintbool_0_b__574_0)(
+                    CHAOS_IL2CPP_INTPTR
         );
         CHAOS_IL2CPP_INTPTR (*_TakeWhile_131_IEnumerableint_System_Funcintintbool_1_b__576_0)(
                     CHAOS_IL2CPP_INTPTR, 
                     CHAOS_IL2CPP_INT32, 
                     CHAOS_IL2CPP_INT32
+        );
+        void (*_Take_128_IEnumerableint_int_0_b__558_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Take_128_IEnumerableint_int_1_b__560_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Take_129_IEnumerableint_System_Range_0_b__564_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Take_129_IEnumerableint_System_Range_1_b__566_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_ThenByDescending_105_IOrderedEnumerableint_System_Funcintint_0_b__454_0)(
+                    CHAOS_IL2CPP_INTPTR
         );
         CHAOS_IL2CPP_INT32 (*_ThenByDescending_105_IOrderedEnumerableint_System_Funcintint_1_b__456_0)(
                     CHAOS_IL2CPP_INTPTR, 
@@ -3002,6 +3576,9 @@ struct Functions {
                     CHAOS_IL2CPP_INTPTR, 
                     CHAOS_IL2CPP_INT32
         );
+        void (*_ThenByDescending_106_IOrderedEnumerableint_System_Funcintint_IComparerint_0_b__458_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
         CHAOS_IL2CPP_INT32 (*_ThenByDescending_106_IOrderedEnumerableint_System_Funcintint_IComparerint_1_b__460_0)(
                     CHAOS_IL2CPP_INTPTR, 
                     CHAOS_IL2CPP_INT32
@@ -3009,6 +3586,9 @@ struct Functions {
         CHAOS_IL2CPP_INT32 (*_ThenByDescending_106_IOrderedEnumerableint_System_Funcintint_IComparerint_1_b__460_1)(
                     CHAOS_IL2CPP_INTPTR, 
                     CHAOS_IL2CPP_INT32
+        );
+        void (*_ThenBy_103_IOrderedEnumerableint_System_Funcintint_0_b__446_0)(
+                    CHAOS_IL2CPP_INTPTR
         );
         CHAOS_IL2CPP_INT32 (*_ThenBy_103_IOrderedEnumerableint_System_Funcintint_1_b__448_0)(
                     CHAOS_IL2CPP_INTPTR, 
@@ -3018,6 +3598,9 @@ struct Functions {
                     CHAOS_IL2CPP_INTPTR, 
                     CHAOS_IL2CPP_INT32
         );
+        void (*_ThenBy_104_IOrderedEnumerableint_System_Funcintint_IComparerint_0_b__450_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
         CHAOS_IL2CPP_INT32 (*_ThenBy_104_IOrderedEnumerableint_System_Funcintint_IComparerint_1_b__452_0)(
                     CHAOS_IL2CPP_INTPTR, 
                     CHAOS_IL2CPP_INT32
@@ -3026,13 +3609,37 @@ struct Functions {
                     CHAOS_IL2CPP_INTPTR, 
                     CHAOS_IL2CPP_INT32
         );
+        void (*_ToArray_133_IEnumerableint_0_b__584_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_ToDictionary_135_IEnumerableKeyValuePairintint_0_b__592_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_ToDictionary_136_IEnumerableKeyValuePairintint_IEqualityComparerint_0_b__596_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_ToDictionary_137_IEnumerableSystem_ValueTupleintint_0_b__600_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_ToDictionary_138_IEnumerableSystem_ValueTupleintint_IEqualityComparerint_0_b__604_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_ToDictionary_139_IEnumerableint_System_Funcintint_0_b__608_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
         CHAOS_IL2CPP_INT32 (*_ToDictionary_139_IEnumerableint_System_Funcintint_1_b__610_0)(
                     CHAOS_IL2CPP_INTPTR, 
                     CHAOS_IL2CPP_INT32
         );
+        void (*_ToDictionary_140_IEnumerableint_System_Funcintint_IEqualityComparerint_0_b__612_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
         CHAOS_IL2CPP_INT32 (*_ToDictionary_140_IEnumerableint_System_Funcintint_IEqualityComparerint_1_b__614_0)(
                     CHAOS_IL2CPP_INTPTR, 
                     CHAOS_IL2CPP_INT32
+        );
+        void (*_ToDictionary_141_IEnumerableint_System_Funcintint_System_Funcintint_0_b__616_0)(
+                    CHAOS_IL2CPP_INTPTR
         );
         CHAOS_IL2CPP_INT32 (*_ToDictionary_141_IEnumerableint_System_Funcintint_System_Funcintint_1_b__618_0)(
                     CHAOS_IL2CPP_INTPTR, 
@@ -3042,6 +3649,9 @@ struct Functions {
                     CHAOS_IL2CPP_INTPTR, 
                     CHAOS_IL2CPP_INT32
         );
+        void (*_ToDictionary_142_IEnumerableint_System_Funcintint_System_Funcintint_IEqualityComparerint_0_b__620_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
         CHAOS_IL2CPP_INT32 (*_ToDictionary_142_IEnumerableint_System_Funcintint_System_Funcintint_IEqualityComparerint_1_b__622_0)(
                     CHAOS_IL2CPP_INTPTR, 
                     CHAOS_IL2CPP_INT32
@@ -3050,13 +3660,31 @@ struct Functions {
                     CHAOS_IL2CPP_INTPTR, 
                     CHAOS_IL2CPP_INT32
         );
+        void (*_ToHashSet_143_IEnumerableint_0_b__624_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_ToHashSet_144_IEnumerableint_IEqualityComparerint_0_b__628_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_ToList_134_IEnumerableint_0_b__588_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_ToLookup_86_IEnumerableint_System_Funcintint_0_b__378_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
         CHAOS_IL2CPP_INT32 (*_ToLookup_86_IEnumerableint_System_Funcintint_1_b__380_0)(
                     CHAOS_IL2CPP_INTPTR, 
                     CHAOS_IL2CPP_INT32
         );
+        void (*_ToLookup_87_IEnumerableint_System_Funcintint_IEqualityComparerint_0_b__382_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
         CHAOS_IL2CPP_INT32 (*_ToLookup_87_IEnumerableint_System_Funcintint_IEqualityComparerint_1_b__384_0)(
                     CHAOS_IL2CPP_INTPTR, 
                     CHAOS_IL2CPP_INT32
+        );
+        void (*_ToLookup_88_IEnumerableint_System_Funcintint_System_Funcintint_0_b__386_0)(
+                    CHAOS_IL2CPP_INTPTR
         );
         CHAOS_IL2CPP_INT32 (*_ToLookup_88_IEnumerableint_System_Funcintint_System_Funcintint_1_b__388_0)(
                     CHAOS_IL2CPP_INTPTR, 
@@ -3066,6 +3694,9 @@ struct Functions {
                     CHAOS_IL2CPP_INTPTR, 
                     CHAOS_IL2CPP_INT32
         );
+        void (*_ToLookup_89_IEnumerableint_System_Funcintint_System_Funcintint_IEqualityComparerint_0_b__390_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
         CHAOS_IL2CPP_INT32 (*_ToLookup_89_IEnumerableint_System_Funcintint_System_Funcintint_IEqualityComparerint_1_b__392_0)(
                     CHAOS_IL2CPP_INTPTR, 
                     CHAOS_IL2CPP_INT32
@@ -3074,29 +3705,72 @@ struct Functions {
                     CHAOS_IL2CPP_INTPTR, 
                     CHAOS_IL2CPP_INT32
         );
+        void (*_UnionBy_147_IEnumerableint_IEnumerableint_System_Funcintint_0_b__640_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
         CHAOS_IL2CPP_INT32 (*_UnionBy_147_IEnumerableint_IEnumerableint_System_Funcintint_1_b__642_0)(
                     CHAOS_IL2CPP_INTPTR, 
                     CHAOS_IL2CPP_INT32
+        );
+        void (*_UnionBy_148_IEnumerableint_IEnumerableint_System_Funcintint_IEqualityComparerint_0_b__644_0)(
+                    CHAOS_IL2CPP_INTPTR
         );
         CHAOS_IL2CPP_INT32 (*_UnionBy_148_IEnumerableint_IEnumerableint_System_Funcintint_IEqualityComparerint_1_b__646_0)(
                     CHAOS_IL2CPP_INTPTR, 
                     CHAOS_IL2CPP_INT32
         );
+        void (*_Union_145_IEnumerableint_IEnumerableint_0_b__632_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Union_146_IEnumerableint_IEnumerableint_IEqualityComparerint_0_b__636_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Where_149_IEnumerableint_System_Funcintbool_0_b__648_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
         CHAOS_IL2CPP_INTPTR (*_Where_149_IEnumerableint_System_Funcintbool_1_b__650_0)(
                     CHAOS_IL2CPP_INTPTR, 
                     CHAOS_IL2CPP_INT32
+        );
+        void (*_Where_150_IEnumerableint_System_Funcintintbool_0_b__652_0)(
+                    CHAOS_IL2CPP_INTPTR
         );
         CHAOS_IL2CPP_INTPTR (*_Where_150_IEnumerableint_System_Funcintintbool_1_b__654_0)(
                     CHAOS_IL2CPP_INTPTR, 
                     CHAOS_IL2CPP_INT32, 
                     CHAOS_IL2CPP_INT32
         );
+        void (*_Zip_151_IEnumerableint_IEnumerableint_System_Funcintintint_0_b__656_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
         CHAOS_IL2CPP_INT32 (*_Zip_151_IEnumerableint_IEnumerableint_System_Funcintintint_1_b__658_0)(
                     CHAOS_IL2CPP_INTPTR, 
                     CHAOS_IL2CPP_INT32, 
                     CHAOS_IL2CPP_INT32
         );
+        void (*_Zip_152_IEnumerableint_IEnumerableint_0_b__660_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Zip_153_IEnumerableint_IEnumerableint_IEnumerableint_0_b__664_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
     } combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c;
+    struct CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c__DisplayClass168_0_t {
+        void (*ctor)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_TryGetNonEnumeratedCount_38_IEnumerableint_int_0_b__0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+    } combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c__DisplayClass168_0;
+    struct CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c__DisplayClass170_0_t {
+        void (*ctor)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_TryGetNonEnumeratedCount_38_IEnumerableint_int_1_b__0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+    } combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c__DisplayClass170_0;
     struct CombinedSubjects_AutoGenerated_System_Linq_System_Linq_LookupSystem_Int32System_Int32Tests_t {
         void (*ctor)(
                     CHAOS_IL2CPP_INTPTR
@@ -3139,9 +3813,29 @@ struct Functions {
         void (*ctor)(
                     CHAOS_IL2CPP_INTPTR
         );
+        void (*_ApplyResultSelector_2_System_FuncintIEnumerableintint_0_b__6_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_ApplyResultSelector_2_System_FuncintIEnumerableintint_1_b__8_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        CHAOS_IL2CPP_INT32 (*_ApplyResultSelector_2_System_FuncintIEnumerableintint_1_b__8_1)(
+                    CHAOS_IL2CPP_INTPTR, 
+                    CHAOS_IL2CPP_INT32, 
+                    CHAOS_IL2CPP_INTPTR
+        );
         CHAOS_IL2CPP_INT32 (*_Benchmark_ApplyResultSelector_2_System_FuncintIEnumerableintint_1_b__9_0)(
                     CHAOS_IL2CPP_INTPTR, 
                     CHAOS_IL2CPP_INT32, 
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Contains_0_int_0_b__0_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Contains_0_int_1_b__2_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_GetEnumerator_1__1_b__4_0)(
                     CHAOS_IL2CPP_INTPTR
         );
     } combinedSubjects_AutoGenerated_System_Linq_System_Linq_LookupSystem_Int32System_Int32Tests___c;
@@ -3427,13 +4121,41 @@ struct Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert {
                     arg_0
         );
     }
+    static inline void Throws_System_ArgumentNullException_(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_Assert.Throws_System_ArgumentNullException_(
+                    arg_0
+        );
+    }
+    static inline void Throws_System_ArgumentOutOfRangeException_(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_Assert.Throws_System_ArgumentOutOfRangeException_(
+                    arg_0
+        );
+    }
+    static inline void Throws_System_InvalidOperationException_(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_Assert.Throws_System_InvalidOperationException_(
+                    arg_0
+        );
+    }
+    static inline void Throws_System_NullReferenceException_(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_Assert.Throws_System_NullReferenceException_(
+                    arg_0
+        );
+    }
     static inline CHAOS_IL2CPP_INT32 get_ExitCode(
     ) {
         return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_Assert.get_ExitCode(
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 28;
+    static constexpr int32_t MethodCount = 32;
 };
 
 struct Chaos_TestFramework_Sdk_Chaos_TestFramework_AssertionException {
@@ -7519,6 +8241,20 @@ struct CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___
                     arg_0
         );
     }
+    static inline void _AggregateBy_33_IEnumerableint_System_Funcintint_int_System_Funcintintint_IEqualityComparerint_0_b__146_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._AggregateBy_33_IEnumerableint_System_Funcintint_int_System_Funcintintint_IEqualityComparerint_0_b__146_0(
+                    arg_0
+        );
+    }
+    static inline void _AggregateBy_33_IEnumerableint_System_Funcintint_int_System_Funcintintint_IEqualityComparerint_1_b__148_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._AggregateBy_33_IEnumerableint_System_Funcintint_int_System_Funcintintint_IEqualityComparerint_1_b__148_0(
+                    arg_0
+        );
+    }
     static inline CHAOS_IL2CPP_INT32 _AggregateBy_33_IEnumerableint_System_Funcintint_int_System_Funcintintint_IEqualityComparerint_2_b__150_0(
                 CHAOS_IL2CPP_INTPTR arg_0, 
                 CHAOS_IL2CPP_INT32 arg_1
@@ -7537,6 +8273,13 @@ struct CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___
                     arg_0, 
                     arg_1, 
                     arg_2
+        );
+    }
+    static inline void _AggregateBy_34_IEnumerableint_System_Funcintint_System_Funcintint_System_Funcintintint_IEqualityComparerint_0_b__152_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._AggregateBy_34_IEnumerableint_System_Funcintint_System_Funcintint_System_Funcintintint_IEqualityComparerint_0_b__152_0(
+                    arg_0
         );
     }
     static inline CHAOS_IL2CPP_INT32 _AggregateBy_34_IEnumerableint_System_Funcintint_System_Funcintint_System_Funcintintint_IEqualityComparerint_1_b__154_0(
@@ -7568,6 +8311,45 @@ struct CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___
                     arg_2
         );
     }
+    static inline void _Aggregate_0_IEnumerableint_System_Funcintintint_0_b__0_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._Aggregate_0_IEnumerableint_System_Funcintintint_0_b__0_0(
+                    arg_0
+        );
+    }
+    static inline void _Aggregate_0_IEnumerableint_System_Funcintintint_1_b__2_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._Aggregate_0_IEnumerableint_System_Funcintintint_1_b__2_0(
+                    arg_0
+        );
+    }
+    static inline CHAOS_IL2CPP_INT32 _Aggregate_0_IEnumerableint_System_Funcintintint_1_b__2_1(
+                CHAOS_IL2CPP_INTPTR arg_0, 
+                CHAOS_IL2CPP_INT32 arg_1, 
+                CHAOS_IL2CPP_INT32 arg_2
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._Aggregate_0_IEnumerableint_System_Funcintintint_1_b__2_1(
+                    arg_0, 
+                    arg_1, 
+                    arg_2
+        );
+    }
+    static inline void _Aggregate_1_IEnumerableint_int_System_Funcintintint_0_b__4_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._Aggregate_1_IEnumerableint_int_System_Funcintintint_0_b__4_0(
+                    arg_0
+        );
+    }
+    static inline void _Aggregate_1_IEnumerableint_int_System_Funcintintint_1_b__6_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._Aggregate_1_IEnumerableint_int_System_Funcintintint_1_b__6_0(
+                    arg_0
+        );
+    }
     static inline CHAOS_IL2CPP_INT32 _Aggregate_1_IEnumerableint_int_System_Funcintintint_2_b__8_0(
                 CHAOS_IL2CPP_INTPTR arg_0, 
                 CHAOS_IL2CPP_INT32 arg_1, 
@@ -7577,6 +8359,20 @@ struct CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___
                     arg_0, 
                     arg_1, 
                     arg_2
+        );
+    }
+    static inline void _Aggregate_2_IEnumerableint_int_System_Funcintintint_System_Funcintint_0_b__10_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._Aggregate_2_IEnumerableint_int_System_Funcintintint_System_Funcintint_0_b__10_0(
+                    arg_0
+        );
+    }
+    static inline void _Aggregate_2_IEnumerableint_int_System_Funcintintint_System_Funcintint_1_b__12_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._Aggregate_2_IEnumerableint_int_System_Funcintintint_System_Funcintint_1_b__12_0(
+                    arg_0
         );
     }
     static inline CHAOS_IL2CPP_INT32 _Aggregate_2_IEnumerableint_int_System_Funcintintint_System_Funcintint_2_b__14_0(
@@ -7599,6 +8395,13 @@ struct CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___
                     arg_1
         );
     }
+    static inline void _All_5_IEnumerableint_System_Funcintbool_0_b__24_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._All_5_IEnumerableint_System_Funcintbool_0_b__24_0(
+                    arg_0
+        );
+    }
     static inline CHAOS_IL2CPP_INTPTR _All_5_IEnumerableint_System_Funcintbool_1_b__26_0(
                 CHAOS_IL2CPP_INTPTR arg_0, 
                 CHAOS_IL2CPP_INT32 arg_1
@@ -7606,6 +8409,20 @@ struct CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___
         return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._All_5_IEnumerableint_System_Funcintbool_1_b__26_0(
                     arg_0, 
                     arg_1
+        );
+    }
+    static inline void _Any_3_IEnumerableint_0_b__16_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._Any_3_IEnumerableint_0_b__16_0(
+                    arg_0
+        );
+    }
+    static inline void _Any_4_IEnumerableint_System_Funcintbool_0_b__20_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._Any_4_IEnumerableint_System_Funcintbool_0_b__20_0(
+                    arg_0
         );
     }
     static inline CHAOS_IL2CPP_INTPTR _Any_4_IEnumerableint_System_Funcintbool_1_b__22_0(
@@ -7617,6 +8434,219 @@ struct CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___
                     arg_1
         );
     }
+    static inline void _Append_6_IEnumerableint_int_0_b__28_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._Append_6_IEnumerableint_int_0_b__28_0(
+                    arg_0
+        );
+    }
+    static inline void _Append_6_IEnumerableint_int_1_b__30_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._Append_6_IEnumerableint_int_1_b__30_0(
+                    arg_0
+        );
+    }
+    static inline void _Average_10_IEnumerablefloat_0_b__48_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._Average_10_IEnumerablefloat_0_b__48_0(
+                    arg_0
+        );
+    }
+    static inline void _Average_10_IEnumerablefloat_1_b__50_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._Average_10_IEnumerablefloat_1_b__50_0(
+                    arg_0
+        );
+    }
+    static inline void _Average_11_IEnumerabledouble_0_b__52_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._Average_11_IEnumerabledouble_0_b__52_0(
+                    arg_0
+        );
+    }
+    static inline void _Average_11_IEnumerabledouble_1_b__54_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._Average_11_IEnumerabledouble_1_b__54_0(
+                    arg_0
+        );
+    }
+    static inline void _Average_12_IEnumerabledecimal_0_b__56_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._Average_12_IEnumerabledecimal_0_b__56_0(
+                    arg_0
+        );
+    }
+    static inline void _Average_12_IEnumerabledecimal_1_b__58_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._Average_12_IEnumerabledecimal_1_b__58_0(
+                    arg_0
+        );
+    }
+    static inline void _Average_13_IEnumerableSystem_Nullableint_0_b__60_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._Average_13_IEnumerableSystem_Nullableint_0_b__60_0(
+                    arg_0
+        );
+    }
+    static inline void _Average_14_IEnumerableSystem_Nullablelong_0_b__64_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._Average_14_IEnumerableSystem_Nullablelong_0_b__64_0(
+                    arg_0
+        );
+    }
+    static inline void _Average_15_IEnumerableSystem_Nullablefloat_0_b__68_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._Average_15_IEnumerableSystem_Nullablefloat_0_b__68_0(
+                    arg_0
+        );
+    }
+    static inline void _Average_16_IEnumerableSystem_Nullabledouble_0_b__72_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._Average_16_IEnumerableSystem_Nullabledouble_0_b__72_0(
+                    arg_0
+        );
+    }
+    static inline void _Average_17_IEnumerableSystem_Nullabledecimal_0_b__76_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._Average_17_IEnumerableSystem_Nullabledecimal_0_b__76_0(
+                    arg_0
+        );
+    }
+    static inline void _Average_18_IEnumerableint_System_Funcintint_0_b__80_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._Average_18_IEnumerableint_System_Funcintint_0_b__80_0(
+                    arg_0
+        );
+    }
+    static inline void _Average_18_IEnumerableint_System_Funcintint_1_b__82_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._Average_18_IEnumerableint_System_Funcintint_1_b__82_0(
+                    arg_0
+        );
+    }
+    static inline CHAOS_IL2CPP_INT32 _Average_18_IEnumerableint_System_Funcintint_1_b__82_1(
+                CHAOS_IL2CPP_INTPTR arg_0, 
+                CHAOS_IL2CPP_INT32 arg_1
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._Average_18_IEnumerableint_System_Funcintint_1_b__82_1(
+                    arg_0, 
+                    arg_1
+        );
+    }
+    static inline void _Average_19_IEnumerableint_System_Funcintlong_0_b__84_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._Average_19_IEnumerableint_System_Funcintlong_0_b__84_0(
+                    arg_0
+        );
+    }
+    static inline void _Average_19_IEnumerableint_System_Funcintlong_1_b__86_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._Average_19_IEnumerableint_System_Funcintlong_1_b__86_0(
+                    arg_0
+        );
+    }
+    static inline CHAOS_IL2CPP_INT64 _Average_19_IEnumerableint_System_Funcintlong_1_b__86_1(
+                CHAOS_IL2CPP_INTPTR arg_0, 
+                CHAOS_IL2CPP_INT32 arg_1
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._Average_19_IEnumerableint_System_Funcintlong_1_b__86_1(
+                    arg_0, 
+                    arg_1
+        );
+    }
+    static inline void _Average_20_IEnumerableint_System_Funcintfloat_0_b__88_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._Average_20_IEnumerableint_System_Funcintfloat_0_b__88_0(
+                    arg_0
+        );
+    }
+    static inline void _Average_20_IEnumerableint_System_Funcintfloat_1_b__90_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._Average_20_IEnumerableint_System_Funcintfloat_1_b__90_0(
+                    arg_0
+        );
+    }
+    static inline float _Average_20_IEnumerableint_System_Funcintfloat_1_b__90_1(
+                CHAOS_IL2CPP_INTPTR arg_0, 
+                CHAOS_IL2CPP_INT32 arg_1
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._Average_20_IEnumerableint_System_Funcintfloat_1_b__90_1(
+                    arg_0, 
+                    arg_1
+        );
+    }
+    static inline void _Average_21_IEnumerableint_System_Funcintdouble_0_b__92_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._Average_21_IEnumerableint_System_Funcintdouble_0_b__92_0(
+                    arg_0
+        );
+    }
+    static inline void _Average_21_IEnumerableint_System_Funcintdouble_1_b__94_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._Average_21_IEnumerableint_System_Funcintdouble_1_b__94_0(
+                    arg_0
+        );
+    }
+    static inline double _Average_21_IEnumerableint_System_Funcintdouble_1_b__94_1(
+                CHAOS_IL2CPP_INTPTR arg_0, 
+                CHAOS_IL2CPP_INT32 arg_1
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._Average_21_IEnumerableint_System_Funcintdouble_1_b__94_1(
+                    arg_0, 
+                    arg_1
+        );
+    }
+    static inline void _Average_22_IEnumerableint_System_Funcintdecimal_0_b__96_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._Average_22_IEnumerableint_System_Funcintdecimal_0_b__96_0(
+                    arg_0
+        );
+    }
+    static inline void _Average_22_IEnumerableint_System_Funcintdecimal_1_b__98_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._Average_22_IEnumerableint_System_Funcintdecimal_1_b__98_0(
+                    arg_0
+        );
+    }
+    static inline CHAOS_IL2CPP_INTPTR _Average_22_IEnumerableint_System_Funcintdecimal_1_b__98_1(
+                CHAOS_IL2CPP_INTPTR arg_0, 
+                CHAOS_IL2CPP_INT32 arg_1
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._Average_22_IEnumerableint_System_Funcintdecimal_1_b__98_1(
+                    arg_0, 
+                    arg_1
+        );
+    }
+    static inline void _Average_23_IEnumerableint_System_FuncintSystem_Nullableint_0_b__100_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._Average_23_IEnumerableint_System_FuncintSystem_Nullableint_0_b__100_0(
+                    arg_0
+        );
+    }
     static inline CHAOS_IL2CPP_INTPTR _Average_23_IEnumerableint_System_FuncintSystem_Nullableint_1_b__102_0(
                 CHAOS_IL2CPP_INTPTR arg_0, 
                 CHAOS_IL2CPP_INT32 arg_1
@@ -7624,6 +8654,13 @@ struct CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___
         return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._Average_23_IEnumerableint_System_FuncintSystem_Nullableint_1_b__102_0(
                     arg_0, 
                     arg_1
+        );
+    }
+    static inline void _Average_24_IEnumerableint_System_FuncintSystem_Nullablelong_0_b__104_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._Average_24_IEnumerableint_System_FuncintSystem_Nullablelong_0_b__104_0(
+                    arg_0
         );
     }
     static inline CHAOS_IL2CPP_INTPTR _Average_24_IEnumerableint_System_FuncintSystem_Nullablelong_1_b__106_0(
@@ -7635,6 +8672,13 @@ struct CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___
                     arg_1
         );
     }
+    static inline void _Average_25_IEnumerableint_System_FuncintSystem_Nullablefloat_0_b__108_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._Average_25_IEnumerableint_System_FuncintSystem_Nullablefloat_0_b__108_0(
+                    arg_0
+        );
+    }
     static inline CHAOS_IL2CPP_INTPTR _Average_25_IEnumerableint_System_FuncintSystem_Nullablefloat_1_b__110_0(
                 CHAOS_IL2CPP_INTPTR arg_0, 
                 CHAOS_IL2CPP_INT32 arg_1
@@ -7642,6 +8686,13 @@ struct CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___
         return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._Average_25_IEnumerableint_System_FuncintSystem_Nullablefloat_1_b__110_0(
                     arg_0, 
                     arg_1
+        );
+    }
+    static inline void _Average_26_IEnumerableint_System_FuncintSystem_Nullabledouble_0_b__112_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._Average_26_IEnumerableint_System_FuncintSystem_Nullabledouble_0_b__112_0(
+                    arg_0
         );
     }
     static inline CHAOS_IL2CPP_INTPTR _Average_26_IEnumerableint_System_FuncintSystem_Nullabledouble_1_b__114_0(
@@ -7653,6 +8704,13 @@ struct CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___
                     arg_1
         );
     }
+    static inline void _Average_27_IEnumerableint_System_FuncintSystem_Nullabledecimal_0_b__116_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._Average_27_IEnumerableint_System_FuncintSystem_Nullabledecimal_0_b__116_0(
+                    arg_0
+        );
+    }
     static inline CHAOS_IL2CPP_INTPTR _Average_27_IEnumerableint_System_FuncintSystem_Nullabledecimal_1_b__118_0(
                 CHAOS_IL2CPP_INTPTR arg_0, 
                 CHAOS_IL2CPP_INT32 arg_1
@@ -7660,6 +8718,34 @@ struct CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___
         return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._Average_27_IEnumerableint_System_FuncintSystem_Nullabledecimal_1_b__118_0(
                     arg_0, 
                     arg_1
+        );
+    }
+    static inline void _Average_8_IEnumerableint_0_b__40_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._Average_8_IEnumerableint_0_b__40_0(
+                    arg_0
+        );
+    }
+    static inline void _Average_8_IEnumerableint_1_b__42_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._Average_8_IEnumerableint_1_b__42_0(
+                    arg_0
+        );
+    }
+    static inline void _Average_9_IEnumerablelong_0_b__44_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._Average_9_IEnumerablelong_0_b__44_0(
+                    arg_0
+        );
+    }
+    static inline void _Average_9_IEnumerablelong_1_b__46_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._Average_9_IEnumerablelong_1_b__46_0(
+                    arg_0
         );
     }
     static inline CHAOS_IL2CPP_INT32 _Benchmark_AggregateBy_33_IEnumerableint_System_Funcintint_int_System_Funcintintint_IEqualityComparerint_2_b__151_0(
@@ -8714,6 +9800,76 @@ struct CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___
                     arg_2
         );
     }
+    static inline void _Cast_28_IEnumerable_0_b__120_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._Cast_28_IEnumerable_0_b__120_0(
+                    arg_0
+        );
+    }
+    static inline void _Chunk_29_IEnumerableint_int_0_b__124_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._Chunk_29_IEnumerableint_int_0_b__124_0(
+                    arg_0
+        );
+    }
+    static inline void _Chunk_29_IEnumerableint_int_1_b__126_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._Chunk_29_IEnumerableint_int_1_b__126_0(
+                    arg_0
+        );
+    }
+    static inline void _Chunk_29_IEnumerableint_int_2_b__128_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._Chunk_29_IEnumerableint_int_2_b__128_0(
+                    arg_0
+        );
+    }
+    static inline void _Concat_30_IEnumerableint_IEnumerableint_0_b__130_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._Concat_30_IEnumerableint_IEnumerableint_0_b__130_0(
+                    arg_0
+        );
+    }
+    static inline void _Contains_31_IEnumerableint_int_0_b__134_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._Contains_31_IEnumerableint_int_0_b__134_0(
+                    arg_0
+        );
+    }
+    static inline void _Contains_31_IEnumerableint_int_1_b__136_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._Contains_31_IEnumerableint_int_1_b__136_0(
+                    arg_0
+        );
+    }
+    static inline void _Contains_32_IEnumerableint_int_IEqualityComparerint_0_b__140_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._Contains_32_IEnumerableint_int_IEqualityComparerint_0_b__140_0(
+                    arg_0
+        );
+    }
+    static inline void _Contains_32_IEnumerableint_int_IEqualityComparerint_1_b__142_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._Contains_32_IEnumerableint_int_IEqualityComparerint_1_b__142_0(
+                    arg_0
+        );
+    }
+    static inline void _CountBy_35_IEnumerableint_System_Funcintint_IEqualityComparerint_0_b__156_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._CountBy_35_IEnumerableint_System_Funcintint_IEqualityComparerint_0_b__156_0(
+                    arg_0
+        );
+    }
     static inline CHAOS_IL2CPP_INT32 _CountBy_35_IEnumerableint_System_Funcintint_IEqualityComparerint_1_b__158_0(
                 CHAOS_IL2CPP_INTPTR arg_0, 
                 CHAOS_IL2CPP_INT32 arg_1
@@ -8721,6 +9877,20 @@ struct CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___
         return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._CountBy_35_IEnumerableint_System_Funcintint_IEqualityComparerint_1_b__158_0(
                     arg_0, 
                     arg_1
+        );
+    }
+    static inline void _Count_36_IEnumerableint_0_b__160_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._Count_36_IEnumerableint_0_b__160_0(
+                    arg_0
+        );
+    }
+    static inline void _Count_37_IEnumerableint_System_Funcintbool_0_b__164_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._Count_37_IEnumerableint_System_Funcintbool_0_b__164_0(
+                    arg_0
         );
     }
     static inline CHAOS_IL2CPP_INTPTR _Count_37_IEnumerableint_System_Funcintbool_1_b__166_0(
@@ -8732,6 +9902,34 @@ struct CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___
                     arg_1
         );
     }
+    static inline void _DefaultIfEmpty_41_IEnumerableint_0_b__182_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._DefaultIfEmpty_41_IEnumerableint_0_b__182_0(
+                    arg_0
+        );
+    }
+    static inline void _DefaultIfEmpty_42_IEnumerableint_int_0_b__186_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._DefaultIfEmpty_42_IEnumerableint_int_0_b__186_0(
+                    arg_0
+        );
+    }
+    static inline void _DefaultIfEmpty_42_IEnumerableint_int_1_b__188_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._DefaultIfEmpty_42_IEnumerableint_int_1_b__188_0(
+                    arg_0
+        );
+    }
+    static inline void _DistinctBy_45_IEnumerableint_System_Funcintint_0_b__200_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._DistinctBy_45_IEnumerableint_System_Funcintint_0_b__200_0(
+                    arg_0
+        );
+    }
     static inline CHAOS_IL2CPP_INT32 _DistinctBy_45_IEnumerableint_System_Funcintint_1_b__202_0(
                 CHAOS_IL2CPP_INTPTR arg_0, 
                 CHAOS_IL2CPP_INT32 arg_1
@@ -8739,6 +9937,13 @@ struct CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___
         return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._DistinctBy_45_IEnumerableint_System_Funcintint_1_b__202_0(
                     arg_0, 
                     arg_1
+        );
+    }
+    static inline void _DistinctBy_46_IEnumerableint_System_Funcintint_IEqualityComparerint_0_b__204_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._DistinctBy_46_IEnumerableint_System_Funcintint_IEqualityComparerint_0_b__204_0(
+                    arg_0
         );
     }
     static inline CHAOS_IL2CPP_INT32 _DistinctBy_46_IEnumerableint_System_Funcintint_IEqualityComparerint_1_b__206_0(
@@ -8750,6 +9955,97 @@ struct CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___
                     arg_1
         );
     }
+    static inline void _Distinct_43_IEnumerableint_0_b__192_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._Distinct_43_IEnumerableint_0_b__192_0(
+                    arg_0
+        );
+    }
+    static inline void _Distinct_44_IEnumerableint_IEqualityComparerint_0_b__196_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._Distinct_44_IEnumerableint_IEqualityComparerint_0_b__196_0(
+                    arg_0
+        );
+    }
+    static inline void _ElementAtOrDefault_49_IEnumerableint_int_0_b__220_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._ElementAtOrDefault_49_IEnumerableint_int_0_b__220_0(
+                    arg_0
+        );
+    }
+    static inline void _ElementAtOrDefault_49_IEnumerableint_int_1_b__222_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._ElementAtOrDefault_49_IEnumerableint_int_1_b__222_0(
+                    arg_0
+        );
+    }
+    static inline void _ElementAtOrDefault_50_IEnumerableint_System_Index_0_b__226_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._ElementAtOrDefault_50_IEnumerableint_System_Index_0_b__226_0(
+                    arg_0
+        );
+    }
+    static inline void _ElementAtOrDefault_50_IEnumerableint_System_Index_1_b__228_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._ElementAtOrDefault_50_IEnumerableint_System_Index_1_b__228_0(
+                    arg_0
+        );
+    }
+    static inline void _ElementAt_47_IEnumerableint_int_0_b__208_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._ElementAt_47_IEnumerableint_int_0_b__208_0(
+                    arg_0
+        );
+    }
+    static inline void _ElementAt_47_IEnumerableint_int_1_b__210_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._ElementAt_47_IEnumerableint_int_1_b__210_0(
+                    arg_0
+        );
+    }
+    static inline void _ElementAt_47_IEnumerableint_int_2_b__212_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._ElementAt_47_IEnumerableint_int_2_b__212_0(
+                    arg_0
+        );
+    }
+    static inline void _ElementAt_48_IEnumerableint_System_Index_0_b__214_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._ElementAt_48_IEnumerableint_System_Index_0_b__214_0(
+                    arg_0
+        );
+    }
+    static inline void _ElementAt_48_IEnumerableint_System_Index_1_b__216_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._ElementAt_48_IEnumerableint_System_Index_1_b__216_0(
+                    arg_0
+        );
+    }
+    static inline void _ElementAt_48_IEnumerableint_System_Index_2_b__218_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._ElementAt_48_IEnumerableint_System_Index_2_b__218_0(
+                    arg_0
+        );
+    }
+    static inline void _ExceptBy_55_IEnumerableint_IEnumerableint_System_Funcintint_0_b__246_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._ExceptBy_55_IEnumerableint_IEnumerableint_System_Funcintint_0_b__246_0(
+                    arg_0
+        );
+    }
     static inline CHAOS_IL2CPP_INT32 _ExceptBy_55_IEnumerableint_IEnumerableint_System_Funcintint_1_b__248_0(
                 CHAOS_IL2CPP_INTPTR arg_0, 
                 CHAOS_IL2CPP_INT32 arg_1
@@ -8757,6 +10053,13 @@ struct CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___
         return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._ExceptBy_55_IEnumerableint_IEnumerableint_System_Funcintint_1_b__248_0(
                     arg_0, 
                     arg_1
+        );
+    }
+    static inline void _ExceptBy_56_IEnumerableint_IEnumerableint_System_Funcintint_IEqualityComparerint_0_b__250_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._ExceptBy_56_IEnumerableint_IEnumerableint_System_Funcintint_IEqualityComparerint_0_b__250_0(
+                    arg_0
         );
     }
     static inline CHAOS_IL2CPP_INT32 _ExceptBy_56_IEnumerableint_IEnumerableint_System_Funcintint_IEqualityComparerint_1_b__252_0(
@@ -8768,6 +10071,48 @@ struct CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___
                     arg_1
         );
     }
+    static inline void _Except_53_IEnumerableint_IEnumerableint_0_b__238_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._Except_53_IEnumerableint_IEnumerableint_0_b__238_0(
+                    arg_0
+        );
+    }
+    static inline void _Except_54_IEnumerableint_IEnumerableint_IEqualityComparerint_0_b__242_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._Except_54_IEnumerableint_IEnumerableint_IEqualityComparerint_0_b__242_0(
+                    arg_0
+        );
+    }
+    static inline void _FirstOrDefault_59_IEnumerableint_0_b__262_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._FirstOrDefault_59_IEnumerableint_0_b__262_0(
+                    arg_0
+        );
+    }
+    static inline void _FirstOrDefault_60_IEnumerableint_int_0_b__266_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._FirstOrDefault_60_IEnumerableint_int_0_b__266_0(
+                    arg_0
+        );
+    }
+    static inline void _FirstOrDefault_60_IEnumerableint_int_1_b__268_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._FirstOrDefault_60_IEnumerableint_int_1_b__268_0(
+                    arg_0
+        );
+    }
+    static inline void _FirstOrDefault_61_IEnumerableint_System_Funcintbool_0_b__272_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._FirstOrDefault_61_IEnumerableint_System_Funcintbool_0_b__272_0(
+                    arg_0
+        );
+    }
     static inline CHAOS_IL2CPP_INTPTR _FirstOrDefault_61_IEnumerableint_System_Funcintbool_1_b__274_0(
                 CHAOS_IL2CPP_INTPTR arg_0, 
                 CHAOS_IL2CPP_INT32 arg_1
@@ -8775,6 +10120,20 @@ struct CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___
         return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._FirstOrDefault_61_IEnumerableint_System_Funcintbool_1_b__274_0(
                     arg_0, 
                     arg_1
+        );
+    }
+    static inline void _FirstOrDefault_62_IEnumerableint_System_Funcintbool_int_0_b__276_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._FirstOrDefault_62_IEnumerableint_System_Funcintbool_int_0_b__276_0(
+                    arg_0
+        );
+    }
+    static inline void _FirstOrDefault_62_IEnumerableint_System_Funcintbool_int_1_b__278_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._FirstOrDefault_62_IEnumerableint_System_Funcintbool_int_1_b__278_0(
+                    arg_0
         );
     }
     static inline CHAOS_IL2CPP_INTPTR _FirstOrDefault_62_IEnumerableint_System_Funcintbool_int_2_b__280_0(
@@ -8786,6 +10145,50 @@ struct CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___
                     arg_1
         );
     }
+    static inline void _First_57_IEnumerableint_0_b__254_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._First_57_IEnumerableint_0_b__254_0(
+                    arg_0
+        );
+    }
+    static inline void _First_57_IEnumerableint_1_b__256_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._First_57_IEnumerableint_1_b__256_0(
+                    arg_0
+        );
+    }
+    static inline void _First_58_IEnumerableint_System_Funcintbool_0_b__258_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._First_58_IEnumerableint_System_Funcintbool_0_b__258_0(
+                    arg_0
+        );
+    }
+    static inline void _First_58_IEnumerableint_System_Funcintbool_1_b__260_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._First_58_IEnumerableint_System_Funcintbool_1_b__260_0(
+                    arg_0
+        );
+    }
+    static inline CHAOS_IL2CPP_INTPTR _First_58_IEnumerableint_System_Funcintbool_1_b__260_1(
+                CHAOS_IL2CPP_INTPTR arg_0, 
+                CHAOS_IL2CPP_INT32 arg_1
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._First_58_IEnumerableint_System_Funcintbool_1_b__260_1(
+                    arg_0, 
+                    arg_1
+        );
+    }
+    static inline void _GroupBy_63_IEnumerableint_System_Funcintint_0_b__282_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._GroupBy_63_IEnumerableint_System_Funcintint_0_b__282_0(
+                    arg_0
+        );
+    }
     static inline CHAOS_IL2CPP_INT32 _GroupBy_63_IEnumerableint_System_Funcintint_1_b__284_0(
                 CHAOS_IL2CPP_INTPTR arg_0, 
                 CHAOS_IL2CPP_INT32 arg_1
@@ -8795,6 +10198,13 @@ struct CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___
                     arg_1
         );
     }
+    static inline void _GroupBy_64_IEnumerableint_System_Funcintint_IEqualityComparerint_0_b__286_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._GroupBy_64_IEnumerableint_System_Funcintint_IEqualityComparerint_0_b__286_0(
+                    arg_0
+        );
+    }
     static inline CHAOS_IL2CPP_INT32 _GroupBy_64_IEnumerableint_System_Funcintint_IEqualityComparerint_1_b__288_0(
                 CHAOS_IL2CPP_INTPTR arg_0, 
                 CHAOS_IL2CPP_INT32 arg_1
@@ -8802,6 +10212,13 @@ struct CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___
         return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._GroupBy_64_IEnumerableint_System_Funcintint_IEqualityComparerint_1_b__288_0(
                     arg_0, 
                     arg_1
+        );
+    }
+    static inline void _GroupBy_65_IEnumerableint_System_Funcintint_System_Funcintint_0_b__290_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._GroupBy_65_IEnumerableint_System_Funcintint_System_Funcintint_0_b__290_0(
+                    arg_0
         );
     }
     static inline CHAOS_IL2CPP_INT32 _GroupBy_65_IEnumerableint_System_Funcintint_System_Funcintint_1_b__292_0(
@@ -8822,6 +10239,13 @@ struct CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___
                     arg_1
         );
     }
+    static inline void _GroupBy_66_IEnumerableint_System_Funcintint_System_Funcintint_IEqualityComparerint_0_b__294_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._GroupBy_66_IEnumerableint_System_Funcintint_System_Funcintint_IEqualityComparerint_0_b__294_0(
+                    arg_0
+        );
+    }
     static inline CHAOS_IL2CPP_INT32 _GroupBy_66_IEnumerableint_System_Funcintint_System_Funcintint_IEqualityComparerint_1_b__296_0(
                 CHAOS_IL2CPP_INTPTR arg_0, 
                 CHAOS_IL2CPP_INT32 arg_1
@@ -8838,6 +10262,13 @@ struct CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___
         return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._GroupBy_66_IEnumerableint_System_Funcintint_System_Funcintint_IEqualityComparerint_1_b__296_1(
                     arg_0, 
                     arg_1
+        );
+    }
+    static inline void _GroupBy_67_IEnumerableint_System_Funcintint_System_FuncintIEnumerableintint_0_b__298_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._GroupBy_67_IEnumerableint_System_Funcintint_System_FuncintIEnumerableintint_0_b__298_0(
+                    arg_0
         );
     }
     static inline CHAOS_IL2CPP_INT32 _GroupBy_67_IEnumerableint_System_Funcintint_System_FuncintIEnumerableintint_1_b__300_0(
@@ -8860,6 +10291,13 @@ struct CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___
                     arg_2
         );
     }
+    static inline void _GroupBy_68_IEnumerableint_System_Funcintint_System_FuncintIEnumerableintint_IEqualityComparerint_0_b__302_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._GroupBy_68_IEnumerableint_System_Funcintint_System_FuncintIEnumerableintint_IEqualityComparerint_0_b__302_0(
+                    arg_0
+        );
+    }
     static inline CHAOS_IL2CPP_INT32 _GroupBy_68_IEnumerableint_System_Funcintint_System_FuncintIEnumerableintint_IEqualityComparerint_1_b__304_0(
                 CHAOS_IL2CPP_INTPTR arg_0, 
                 CHAOS_IL2CPP_INT32 arg_1
@@ -8878,6 +10316,13 @@ struct CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___
                     arg_0, 
                     arg_1, 
                     arg_2
+        );
+    }
+    static inline void _GroupBy_69_IEnumerableint_System_Funcintint_System_Funcintint_System_FuncintIEnumerableintint_0_b__306_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._GroupBy_69_IEnumerableint_System_Funcintint_System_Funcintint_System_FuncintIEnumerableintint_0_b__306_0(
+                    arg_0
         );
     }
     static inline CHAOS_IL2CPP_INT32 _GroupBy_69_IEnumerableint_System_Funcintint_System_Funcintint_System_FuncintIEnumerableintint_1_b__308_0(
@@ -8909,6 +10354,13 @@ struct CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___
                     arg_2
         );
     }
+    static inline void _GroupBy_70_IEnumerableint_System_Funcintint_System_Funcintint_System_FuncintIEnumerableintint_IEqualityComparerint_0_b__310_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._GroupBy_70_IEnumerableint_System_Funcintint_System_Funcintint_System_FuncintIEnumerableintint_IEqualityComparerint_0_b__310_0(
+                    arg_0
+        );
+    }
     static inline CHAOS_IL2CPP_INT32 _GroupBy_70_IEnumerableint_System_Funcintint_System_Funcintint_System_FuncintIEnumerableintint_IEqualityComparerint_1_b__312_0(
                 CHAOS_IL2CPP_INTPTR arg_0, 
                 CHAOS_IL2CPP_INT32 arg_1
@@ -8936,6 +10388,13 @@ struct CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___
                     arg_0, 
                     arg_1, 
                     arg_2
+        );
+    }
+    static inline void _GroupJoin_71_IEnumerableint_IEnumerableint_System_Funcintint_System_Funcintint_System_FuncintIEnumerableintint_0_b__314_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._GroupJoin_71_IEnumerableint_IEnumerableint_System_Funcintint_System_Funcintint_System_FuncintIEnumerableintint_0_b__314_0(
+                    arg_0
         );
     }
     static inline CHAOS_IL2CPP_INT32 _GroupJoin_71_IEnumerableint_IEnumerableint_System_Funcintint_System_Funcintint_System_FuncintIEnumerableintint_1_b__316_0(
@@ -8967,6 +10426,13 @@ struct CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___
                     arg_2
         );
     }
+    static inline void _GroupJoin_72_IEnumerableint_IEnumerableint_System_Funcintint_System_Funcintint_System_FuncintIEnumerableintint_IEqualityComparerint_0_b__318_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._GroupJoin_72_IEnumerableint_IEnumerableint_System_Funcintint_System_Funcintint_System_FuncintIEnumerableintint_IEqualityComparerint_0_b__318_0(
+                    arg_0
+        );
+    }
     static inline CHAOS_IL2CPP_INT32 _GroupJoin_72_IEnumerableint_IEnumerableint_System_Funcintint_System_Funcintint_System_FuncintIEnumerableintint_IEqualityComparerint_1_b__320_0(
                 CHAOS_IL2CPP_INTPTR arg_0, 
                 CHAOS_IL2CPP_INT32 arg_1
@@ -8996,6 +10462,20 @@ struct CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___
                     arg_2
         );
     }
+    static inline void _Index_73_IEnumerableint_0_b__322_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._Index_73_IEnumerableint_0_b__322_0(
+                    arg_0
+        );
+    }
+    static inline void _IntersectBy_76_IEnumerableint_IEnumerableint_System_Funcintint_0_b__334_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._IntersectBy_76_IEnumerableint_IEnumerableint_System_Funcintint_0_b__334_0(
+                    arg_0
+        );
+    }
     static inline CHAOS_IL2CPP_INT32 _IntersectBy_76_IEnumerableint_IEnumerableint_System_Funcintint_1_b__336_0(
                 CHAOS_IL2CPP_INTPTR arg_0, 
                 CHAOS_IL2CPP_INT32 arg_1
@@ -9005,6 +10485,13 @@ struct CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___
                     arg_1
         );
     }
+    static inline void _IntersectBy_77_IEnumerableint_IEnumerableint_System_Funcintint_IEqualityComparerint_0_b__338_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._IntersectBy_77_IEnumerableint_IEnumerableint_System_Funcintint_IEqualityComparerint_0_b__338_0(
+                    arg_0
+        );
+    }
     static inline CHAOS_IL2CPP_INT32 _IntersectBy_77_IEnumerableint_IEnumerableint_System_Funcintint_IEqualityComparerint_1_b__340_0(
                 CHAOS_IL2CPP_INTPTR arg_0, 
                 CHAOS_IL2CPP_INT32 arg_1
@@ -9012,6 +10499,27 @@ struct CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___
         return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._IntersectBy_77_IEnumerableint_IEnumerableint_System_Funcintint_IEqualityComparerint_1_b__340_0(
                     arg_0, 
                     arg_1
+        );
+    }
+    static inline void _Intersect_74_IEnumerableint_IEnumerableint_0_b__326_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._Intersect_74_IEnumerableint_IEnumerableint_0_b__326_0(
+                    arg_0
+        );
+    }
+    static inline void _Intersect_75_IEnumerableint_IEnumerableint_IEqualityComparerint_0_b__330_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._Intersect_75_IEnumerableint_IEnumerableint_IEqualityComparerint_0_b__330_0(
+                    arg_0
+        );
+    }
+    static inline void _Join_78_IEnumerableint_IEnumerableint_System_Funcintint_System_Funcintint_System_Funcintintint_0_b__342_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._Join_78_IEnumerableint_IEnumerableint_System_Funcintint_System_Funcintint_System_Funcintintint_0_b__342_0(
+                    arg_0
         );
     }
     static inline CHAOS_IL2CPP_INT32 _Join_78_IEnumerableint_IEnumerableint_System_Funcintint_System_Funcintint_System_Funcintintint_1_b__344_0(
@@ -9043,6 +10551,13 @@ struct CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___
                     arg_2
         );
     }
+    static inline void _Join_79_IEnumerableint_IEnumerableint_System_Funcintint_System_Funcintint_System_Funcintintint_IEqualityComparerint_0_b__346_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._Join_79_IEnumerableint_IEnumerableint_System_Funcintint_System_Funcintint_System_Funcintintint_IEqualityComparerint_0_b__346_0(
+                    arg_0
+        );
+    }
     static inline CHAOS_IL2CPP_INT32 _Join_79_IEnumerableint_IEnumerableint_System_Funcintint_System_Funcintint_System_Funcintintint_IEqualityComparerint_1_b__348_0(
                 CHAOS_IL2CPP_INTPTR arg_0, 
                 CHAOS_IL2CPP_INT32 arg_1
@@ -9072,6 +10587,34 @@ struct CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___
                     arg_2
         );
     }
+    static inline void _LastOrDefault_82_IEnumerableint_0_b__358_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._LastOrDefault_82_IEnumerableint_0_b__358_0(
+                    arg_0
+        );
+    }
+    static inline void _LastOrDefault_83_IEnumerableint_int_0_b__362_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._LastOrDefault_83_IEnumerableint_int_0_b__362_0(
+                    arg_0
+        );
+    }
+    static inline void _LastOrDefault_83_IEnumerableint_int_1_b__364_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._LastOrDefault_83_IEnumerableint_int_1_b__364_0(
+                    arg_0
+        );
+    }
+    static inline void _LastOrDefault_84_IEnumerableint_System_Funcintbool_0_b__368_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._LastOrDefault_84_IEnumerableint_System_Funcintbool_0_b__368_0(
+                    arg_0
+        );
+    }
     static inline CHAOS_IL2CPP_INTPTR _LastOrDefault_84_IEnumerableint_System_Funcintbool_1_b__370_0(
                 CHAOS_IL2CPP_INTPTR arg_0, 
                 CHAOS_IL2CPP_INT32 arg_1
@@ -9079,6 +10622,20 @@ struct CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___
         return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._LastOrDefault_84_IEnumerableint_System_Funcintbool_1_b__370_0(
                     arg_0, 
                     arg_1
+        );
+    }
+    static inline void _LastOrDefault_85_IEnumerableint_System_Funcintbool_int_0_b__372_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._LastOrDefault_85_IEnumerableint_System_Funcintbool_int_0_b__372_0(
+                    arg_0
+        );
+    }
+    static inline void _LastOrDefault_85_IEnumerableint_System_Funcintbool_int_1_b__374_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._LastOrDefault_85_IEnumerableint_System_Funcintbool_int_1_b__374_0(
+                    arg_0
         );
     }
     static inline CHAOS_IL2CPP_INTPTR _LastOrDefault_85_IEnumerableint_System_Funcintbool_int_2_b__376_0(
@@ -9090,6 +10647,57 @@ struct CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___
                     arg_1
         );
     }
+    static inline void _Last_80_IEnumerableint_0_b__350_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._Last_80_IEnumerableint_0_b__350_0(
+                    arg_0
+        );
+    }
+    static inline void _Last_80_IEnumerableint_1_b__352_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._Last_80_IEnumerableint_1_b__352_0(
+                    arg_0
+        );
+    }
+    static inline void _Last_81_IEnumerableint_System_Funcintbool_0_b__354_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._Last_81_IEnumerableint_System_Funcintbool_0_b__354_0(
+                    arg_0
+        );
+    }
+    static inline void _Last_81_IEnumerableint_System_Funcintbool_1_b__356_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._Last_81_IEnumerableint_System_Funcintbool_1_b__356_0(
+                    arg_0
+        );
+    }
+    static inline CHAOS_IL2CPP_INTPTR _Last_81_IEnumerableint_System_Funcintbool_1_b__356_1(
+                CHAOS_IL2CPP_INTPTR arg_0, 
+                CHAOS_IL2CPP_INT32 arg_1
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._Last_81_IEnumerableint_System_Funcintbool_1_b__356_1(
+                    arg_0, 
+                    arg_1
+        );
+    }
+    static inline void _LongCount_39_IEnumerableint_0_b__174_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._LongCount_39_IEnumerableint_0_b__174_0(
+                    arg_0
+        );
+    }
+    static inline void _LongCount_40_IEnumerableint_System_Funcintbool_0_b__178_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._LongCount_40_IEnumerableint_System_Funcintbool_0_b__178_0(
+                    arg_0
+        );
+    }
     static inline CHAOS_IL2CPP_INTPTR _LongCount_40_IEnumerableint_System_Funcintbool_1_b__180_0(
                 CHAOS_IL2CPP_INTPTR arg_0, 
                 CHAOS_IL2CPP_INT32 arg_1
@@ -9097,6 +10705,112 @@ struct CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___
         return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._LongCount_40_IEnumerableint_System_Funcintbool_1_b__180_0(
                     arg_0, 
                     arg_1
+        );
+    }
+    static inline void _MaxBy_90_IEnumerableint_System_Funcintint_0_b__394_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._MaxBy_90_IEnumerableint_System_Funcintint_0_b__394_0(
+                    arg_0
+        );
+    }
+    static inline void _MaxBy_90_IEnumerableint_System_Funcintint_1_b__396_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._MaxBy_90_IEnumerableint_System_Funcintint_1_b__396_0(
+                    arg_0
+        );
+    }
+    static inline CHAOS_IL2CPP_INT32 _MaxBy_90_IEnumerableint_System_Funcintint_1_b__396_1(
+                CHAOS_IL2CPP_INTPTR arg_0, 
+                CHAOS_IL2CPP_INT32 arg_1
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._MaxBy_90_IEnumerableint_System_Funcintint_1_b__396_1(
+                    arg_0, 
+                    arg_1
+        );
+    }
+    static inline void _MaxBy_91_IEnumerableint_System_Funcintint_IComparerint_0_b__398_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._MaxBy_91_IEnumerableint_System_Funcintint_IComparerint_0_b__398_0(
+                    arg_0
+        );
+    }
+    static inline void _MaxBy_91_IEnumerableint_System_Funcintint_IComparerint_1_b__400_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._MaxBy_91_IEnumerableint_System_Funcintint_IComparerint_1_b__400_0(
+                    arg_0
+        );
+    }
+    static inline CHAOS_IL2CPP_INT32 _MaxBy_91_IEnumerableint_System_Funcintint_IComparerint_1_b__400_1(
+                CHAOS_IL2CPP_INTPTR arg_0, 
+                CHAOS_IL2CPP_INT32 arg_1
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._MaxBy_91_IEnumerableint_System_Funcintint_IComparerint_1_b__400_1(
+                    arg_0, 
+                    arg_1
+        );
+    }
+    static inline void _MinBy_92_IEnumerableint_System_Funcintint_0_b__402_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._MinBy_92_IEnumerableint_System_Funcintint_0_b__402_0(
+                    arg_0
+        );
+    }
+    static inline void _MinBy_92_IEnumerableint_System_Funcintint_1_b__404_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._MinBy_92_IEnumerableint_System_Funcintint_1_b__404_0(
+                    arg_0
+        );
+    }
+    static inline CHAOS_IL2CPP_INT32 _MinBy_92_IEnumerableint_System_Funcintint_1_b__404_1(
+                CHAOS_IL2CPP_INTPTR arg_0, 
+                CHAOS_IL2CPP_INT32 arg_1
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._MinBy_92_IEnumerableint_System_Funcintint_1_b__404_1(
+                    arg_0, 
+                    arg_1
+        );
+    }
+    static inline void _MinBy_93_IEnumerableint_System_Funcintint_IComparerint_0_b__406_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._MinBy_93_IEnumerableint_System_Funcintint_IComparerint_0_b__406_0(
+                    arg_0
+        );
+    }
+    static inline void _MinBy_93_IEnumerableint_System_Funcintint_IComparerint_1_b__408_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._MinBy_93_IEnumerableint_System_Funcintint_IComparerint_1_b__408_0(
+                    arg_0
+        );
+    }
+    static inline CHAOS_IL2CPP_INT32 _MinBy_93_IEnumerableint_System_Funcintint_IComparerint_1_b__408_1(
+                CHAOS_IL2CPP_INTPTR arg_0, 
+                CHAOS_IL2CPP_INT32 arg_1
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._MinBy_93_IEnumerableint_System_Funcintint_IComparerint_1_b__408_1(
+                    arg_0, 
+                    arg_1
+        );
+    }
+    static inline void _OfType_94_IEnumerable_0_b__410_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._OfType_94_IEnumerable_0_b__410_0(
+                    arg_0
+        );
+    }
+    static inline void _OrderByDescending_101_IEnumerableint_System_Funcintint_0_b__438_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._OrderByDescending_101_IEnumerableint_System_Funcintint_0_b__438_0(
+                    arg_0
         );
     }
     static inline CHAOS_IL2CPP_INT32 _OrderByDescending_101_IEnumerableint_System_Funcintint_1_b__440_0(
@@ -9108,6 +10822,13 @@ struct CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___
                     arg_1
         );
     }
+    static inline void _OrderByDescending_102_IEnumerableint_System_Funcintint_IComparerint_0_b__442_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._OrderByDescending_102_IEnumerableint_System_Funcintint_IComparerint_0_b__442_0(
+                    arg_0
+        );
+    }
     static inline CHAOS_IL2CPP_INT32 _OrderByDescending_102_IEnumerableint_System_Funcintint_IComparerint_1_b__444_0(
                 CHAOS_IL2CPP_INTPTR arg_0, 
                 CHAOS_IL2CPP_INT32 arg_1
@@ -9115,6 +10836,13 @@ struct CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___
         return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._OrderByDescending_102_IEnumerableint_System_Funcintint_IComparerint_1_b__444_0(
                     arg_0, 
                     arg_1
+        );
+    }
+    static inline void _OrderBy_97_IEnumerableint_System_Funcintint_0_b__422_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._OrderBy_97_IEnumerableint_System_Funcintint_0_b__422_0(
+                    arg_0
         );
     }
     static inline CHAOS_IL2CPP_INT32 _OrderBy_97_IEnumerableint_System_Funcintint_1_b__424_0(
@@ -9126,6 +10854,13 @@ struct CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___
                     arg_1
         );
     }
+    static inline void _OrderBy_98_IEnumerableint_System_Funcintint_IComparerint_0_b__426_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._OrderBy_98_IEnumerableint_System_Funcintint_IComparerint_0_b__426_0(
+                    arg_0
+        );
+    }
     static inline CHAOS_IL2CPP_INT32 _OrderBy_98_IEnumerableint_System_Funcintint_IComparerint_1_b__428_0(
                 CHAOS_IL2CPP_INTPTR arg_0, 
                 CHAOS_IL2CPP_INT32 arg_1
@@ -9133,6 +10868,62 @@ struct CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___
         return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._OrderBy_98_IEnumerableint_System_Funcintint_IComparerint_1_b__428_0(
                     arg_0, 
                     arg_1
+        );
+    }
+    static inline void _OrderDescending_100_IEnumerableint_IComparerint_0_b__434_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._OrderDescending_100_IEnumerableint_IComparerint_0_b__434_0(
+                    arg_0
+        );
+    }
+    static inline void _OrderDescending_99_IEnumerableint_0_b__430_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._OrderDescending_99_IEnumerableint_0_b__430_0(
+                    arg_0
+        );
+    }
+    static inline void _Order_95_IEnumerableint_0_b__414_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._Order_95_IEnumerableint_0_b__414_0(
+                    arg_0
+        );
+    }
+    static inline void _Order_96_IEnumerableint_IComparerint_0_b__418_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._Order_96_IEnumerableint_IComparerint_0_b__418_0(
+                    arg_0
+        );
+    }
+    static inline void _Prepend_7_IEnumerableint_int_0_b__34_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._Prepend_7_IEnumerableint_int_0_b__34_0(
+                    arg_0
+        );
+    }
+    static inline void _Prepend_7_IEnumerableint_int_1_b__36_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._Prepend_7_IEnumerableint_int_1_b__36_0(
+                    arg_0
+        );
+    }
+    static inline void _Reverse_109_IEnumerableint_0_b__474_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._Reverse_109_IEnumerableint_0_b__474_0(
+                    arg_0
+        );
+    }
+    static inline void _SelectMany_112_IEnumerableint_System_FuncintIEnumerableint_0_b__486_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._SelectMany_112_IEnumerableint_System_FuncintIEnumerableint_0_b__486_0(
+                    arg_0
         );
     }
     static inline CHAOS_IL2CPP_INTPTR _SelectMany_112_IEnumerableint_System_FuncintIEnumerableint_1_b__488_0(
@@ -9144,6 +10935,13 @@ struct CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___
                     arg_1
         );
     }
+    static inline void _SelectMany_113_IEnumerableint_System_FuncintintIEnumerableint_0_b__490_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._SelectMany_113_IEnumerableint_System_FuncintintIEnumerableint_0_b__490_0(
+                    arg_0
+        );
+    }
     static inline CHAOS_IL2CPP_INTPTR _SelectMany_113_IEnumerableint_System_FuncintintIEnumerableint_1_b__492_0(
                 CHAOS_IL2CPP_INTPTR arg_0, 
                 CHAOS_IL2CPP_INT32 arg_1, 
@@ -9153,6 +10951,13 @@ struct CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___
                     arg_0, 
                     arg_1, 
                     arg_2
+        );
+    }
+    static inline void _SelectMany_114_IEnumerableint_System_FuncintintIEnumerableint_System_Funcintintint_0_b__494_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._SelectMany_114_IEnumerableint_System_FuncintintIEnumerableint_System_Funcintintint_0_b__494_0(
+                    arg_0
         );
     }
     static inline CHAOS_IL2CPP_INTPTR _SelectMany_114_IEnumerableint_System_FuncintintIEnumerableint_System_Funcintintint_1_b__496_0(
@@ -9177,6 +10982,13 @@ struct CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___
                     arg_2
         );
     }
+    static inline void _SelectMany_115_IEnumerableint_System_FuncintIEnumerableint_System_Funcintintint_0_b__498_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._SelectMany_115_IEnumerableint_System_FuncintIEnumerableint_System_Funcintintint_0_b__498_0(
+                    arg_0
+        );
+    }
     static inline CHAOS_IL2CPP_INTPTR _SelectMany_115_IEnumerableint_System_FuncintIEnumerableint_System_Funcintintint_1_b__500_0(
                 CHAOS_IL2CPP_INTPTR arg_0, 
                 CHAOS_IL2CPP_INT32 arg_1
@@ -9197,6 +11009,13 @@ struct CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___
                     arg_2
         );
     }
+    static inline void _Select_110_IEnumerableint_System_Funcintint_0_b__478_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._Select_110_IEnumerableint_System_Funcintint_0_b__478_0(
+                    arg_0
+        );
+    }
     static inline CHAOS_IL2CPP_INT32 _Select_110_IEnumerableint_System_Funcintint_1_b__480_0(
                 CHAOS_IL2CPP_INTPTR arg_0, 
                 CHAOS_IL2CPP_INT32 arg_1
@@ -9204,6 +11023,13 @@ struct CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___
         return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._Select_110_IEnumerableint_System_Funcintint_1_b__480_0(
                     arg_0, 
                     arg_1
+        );
+    }
+    static inline void _Select_111_IEnumerableint_System_Funcintintint_0_b__482_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._Select_111_IEnumerableint_System_Funcintintint_0_b__482_0(
+                    arg_0
         );
     }
     static inline CHAOS_IL2CPP_INT32 _Select_111_IEnumerableint_System_Funcintintint_1_b__484_0(
@@ -9217,6 +11043,48 @@ struct CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___
                     arg_2
         );
     }
+    static inline void _SequenceEqual_116_IEnumerableint_IEnumerableint_0_b__502_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._SequenceEqual_116_IEnumerableint_IEnumerableint_0_b__502_0(
+                    arg_0
+        );
+    }
+    static inline void _SequenceEqual_117_IEnumerableint_IEnumerableint_IEqualityComparerint_0_b__506_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._SequenceEqual_117_IEnumerableint_IEnumerableint_IEqualityComparerint_0_b__506_0(
+                    arg_0
+        );
+    }
+    static inline void _SingleOrDefault_120_IEnumerableint_0_b__518_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._SingleOrDefault_120_IEnumerableint_0_b__518_0(
+                    arg_0
+        );
+    }
+    static inline void _SingleOrDefault_121_IEnumerableint_int_0_b__522_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._SingleOrDefault_121_IEnumerableint_int_0_b__522_0(
+                    arg_0
+        );
+    }
+    static inline void _SingleOrDefault_121_IEnumerableint_int_1_b__524_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._SingleOrDefault_121_IEnumerableint_int_1_b__524_0(
+                    arg_0
+        );
+    }
+    static inline void _SingleOrDefault_122_IEnumerableint_System_Funcintbool_0_b__528_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._SingleOrDefault_122_IEnumerableint_System_Funcintbool_0_b__528_0(
+                    arg_0
+        );
+    }
     static inline CHAOS_IL2CPP_INTPTR _SingleOrDefault_122_IEnumerableint_System_Funcintbool_1_b__530_0(
                 CHAOS_IL2CPP_INTPTR arg_0, 
                 CHAOS_IL2CPP_INT32 arg_1
@@ -9224,6 +11092,20 @@ struct CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___
         return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._SingleOrDefault_122_IEnumerableint_System_Funcintbool_1_b__530_0(
                     arg_0, 
                     arg_1
+        );
+    }
+    static inline void _SingleOrDefault_123_IEnumerableint_System_Funcintbool_int_0_b__532_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._SingleOrDefault_123_IEnumerableint_System_Funcintbool_int_0_b__532_0(
+                    arg_0
+        );
+    }
+    static inline void _SingleOrDefault_123_IEnumerableint_System_Funcintbool_int_1_b__534_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._SingleOrDefault_123_IEnumerableint_System_Funcintbool_int_1_b__534_0(
+                    arg_0
         );
     }
     static inline CHAOS_IL2CPP_INTPTR _SingleOrDefault_123_IEnumerableint_System_Funcintbool_int_2_b__536_0(
@@ -9235,6 +11117,64 @@ struct CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___
                     arg_1
         );
     }
+    static inline void _Single_118_IEnumerableint_0_b__510_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._Single_118_IEnumerableint_0_b__510_0(
+                    arg_0
+        );
+    }
+    static inline void _Single_118_IEnumerableint_1_b__512_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._Single_118_IEnumerableint_1_b__512_0(
+                    arg_0
+        );
+    }
+    static inline void _Single_119_IEnumerableint_System_Funcintbool_0_b__514_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._Single_119_IEnumerableint_System_Funcintbool_0_b__514_0(
+                    arg_0
+        );
+    }
+    static inline void _Single_119_IEnumerableint_System_Funcintbool_1_b__516_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._Single_119_IEnumerableint_System_Funcintbool_1_b__516_0(
+                    arg_0
+        );
+    }
+    static inline CHAOS_IL2CPP_INTPTR _Single_119_IEnumerableint_System_Funcintbool_1_b__516_1(
+                CHAOS_IL2CPP_INTPTR arg_0, 
+                CHAOS_IL2CPP_INT32 arg_1
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._Single_119_IEnumerableint_System_Funcintbool_1_b__516_1(
+                    arg_0, 
+                    arg_1
+        );
+    }
+    static inline void _SkipLast_127_IEnumerableint_int_0_b__552_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._SkipLast_127_IEnumerableint_int_0_b__552_0(
+                    arg_0
+        );
+    }
+    static inline void _SkipLast_127_IEnumerableint_int_1_b__554_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._SkipLast_127_IEnumerableint_int_1_b__554_0(
+                    arg_0
+        );
+    }
+    static inline void _SkipWhile_125_IEnumerableint_System_Funcintbool_0_b__544_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._SkipWhile_125_IEnumerableint_System_Funcintbool_0_b__544_0(
+                    arg_0
+        );
+    }
     static inline CHAOS_IL2CPP_INTPTR _SkipWhile_125_IEnumerableint_System_Funcintbool_1_b__546_0(
                 CHAOS_IL2CPP_INTPTR arg_0, 
                 CHAOS_IL2CPP_INT32 arg_1
@@ -9242,6 +11182,13 @@ struct CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___
         return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._SkipWhile_125_IEnumerableint_System_Funcintbool_1_b__546_0(
                     arg_0, 
                     arg_1
+        );
+    }
+    static inline void _SkipWhile_126_IEnumerableint_System_Funcintintbool_0_b__548_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._SkipWhile_126_IEnumerableint_System_Funcintintbool_0_b__548_0(
+                    arg_0
         );
     }
     static inline CHAOS_IL2CPP_INTPTR _SkipWhile_126_IEnumerableint_System_Funcintintbool_1_b__550_0(
@@ -9255,6 +11202,41 @@ struct CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___
                     arg_2
         );
     }
+    static inline void _Skip_124_IEnumerableint_int_0_b__538_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._Skip_124_IEnumerableint_int_0_b__538_0(
+                    arg_0
+        );
+    }
+    static inline void _Skip_124_IEnumerableint_int_1_b__540_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._Skip_124_IEnumerableint_int_1_b__540_0(
+                    arg_0
+        );
+    }
+    static inline void _TakeLast_132_IEnumerableint_int_0_b__578_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._TakeLast_132_IEnumerableint_int_0_b__578_0(
+                    arg_0
+        );
+    }
+    static inline void _TakeLast_132_IEnumerableint_int_1_b__580_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._TakeLast_132_IEnumerableint_int_1_b__580_0(
+                    arg_0
+        );
+    }
+    static inline void _TakeWhile_130_IEnumerableint_System_Funcintbool_0_b__570_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._TakeWhile_130_IEnumerableint_System_Funcintbool_0_b__570_0(
+                    arg_0
+        );
+    }
     static inline CHAOS_IL2CPP_INTPTR _TakeWhile_130_IEnumerableint_System_Funcintbool_1_b__572_0(
                 CHAOS_IL2CPP_INTPTR arg_0, 
                 CHAOS_IL2CPP_INT32 arg_1
@@ -9262,6 +11244,13 @@ struct CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___
         return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._TakeWhile_130_IEnumerableint_System_Funcintbool_1_b__572_0(
                     arg_0, 
                     arg_1
+        );
+    }
+    static inline void _TakeWhile_131_IEnumerableint_System_Funcintintbool_0_b__574_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._TakeWhile_131_IEnumerableint_System_Funcintintbool_0_b__574_0(
+                    arg_0
         );
     }
     static inline CHAOS_IL2CPP_INTPTR _TakeWhile_131_IEnumerableint_System_Funcintintbool_1_b__576_0(
@@ -9273,6 +11262,41 @@ struct CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___
                     arg_0, 
                     arg_1, 
                     arg_2
+        );
+    }
+    static inline void _Take_128_IEnumerableint_int_0_b__558_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._Take_128_IEnumerableint_int_0_b__558_0(
+                    arg_0
+        );
+    }
+    static inline void _Take_128_IEnumerableint_int_1_b__560_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._Take_128_IEnumerableint_int_1_b__560_0(
+                    arg_0
+        );
+    }
+    static inline void _Take_129_IEnumerableint_System_Range_0_b__564_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._Take_129_IEnumerableint_System_Range_0_b__564_0(
+                    arg_0
+        );
+    }
+    static inline void _Take_129_IEnumerableint_System_Range_1_b__566_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._Take_129_IEnumerableint_System_Range_1_b__566_0(
+                    arg_0
+        );
+    }
+    static inline void _ThenByDescending_105_IOrderedEnumerableint_System_Funcintint_0_b__454_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._ThenByDescending_105_IOrderedEnumerableint_System_Funcintint_0_b__454_0(
+                    arg_0
         );
     }
     static inline CHAOS_IL2CPP_INT32 _ThenByDescending_105_IOrderedEnumerableint_System_Funcintint_1_b__456_0(
@@ -9293,6 +11317,13 @@ struct CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___
                     arg_1
         );
     }
+    static inline void _ThenByDescending_106_IOrderedEnumerableint_System_Funcintint_IComparerint_0_b__458_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._ThenByDescending_106_IOrderedEnumerableint_System_Funcintint_IComparerint_0_b__458_0(
+                    arg_0
+        );
+    }
     static inline CHAOS_IL2CPP_INT32 _ThenByDescending_106_IOrderedEnumerableint_System_Funcintint_IComparerint_1_b__460_0(
                 CHAOS_IL2CPP_INTPTR arg_0, 
                 CHAOS_IL2CPP_INT32 arg_1
@@ -9309,6 +11340,13 @@ struct CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___
         return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._ThenByDescending_106_IOrderedEnumerableint_System_Funcintint_IComparerint_1_b__460_1(
                     arg_0, 
                     arg_1
+        );
+    }
+    static inline void _ThenBy_103_IOrderedEnumerableint_System_Funcintint_0_b__446_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._ThenBy_103_IOrderedEnumerableint_System_Funcintint_0_b__446_0(
+                    arg_0
         );
     }
     static inline CHAOS_IL2CPP_INT32 _ThenBy_103_IOrderedEnumerableint_System_Funcintint_1_b__448_0(
@@ -9329,6 +11367,13 @@ struct CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___
                     arg_1
         );
     }
+    static inline void _ThenBy_104_IOrderedEnumerableint_System_Funcintint_IComparerint_0_b__450_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._ThenBy_104_IOrderedEnumerableint_System_Funcintint_IComparerint_0_b__450_0(
+                    arg_0
+        );
+    }
     static inline CHAOS_IL2CPP_INT32 _ThenBy_104_IOrderedEnumerableint_System_Funcintint_IComparerint_1_b__452_0(
                 CHAOS_IL2CPP_INTPTR arg_0, 
                 CHAOS_IL2CPP_INT32 arg_1
@@ -9347,6 +11392,48 @@ struct CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___
                     arg_1
         );
     }
+    static inline void _ToArray_133_IEnumerableint_0_b__584_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._ToArray_133_IEnumerableint_0_b__584_0(
+                    arg_0
+        );
+    }
+    static inline void _ToDictionary_135_IEnumerableKeyValuePairintint_0_b__592_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._ToDictionary_135_IEnumerableKeyValuePairintint_0_b__592_0(
+                    arg_0
+        );
+    }
+    static inline void _ToDictionary_136_IEnumerableKeyValuePairintint_IEqualityComparerint_0_b__596_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._ToDictionary_136_IEnumerableKeyValuePairintint_IEqualityComparerint_0_b__596_0(
+                    arg_0
+        );
+    }
+    static inline void _ToDictionary_137_IEnumerableSystem_ValueTupleintint_0_b__600_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._ToDictionary_137_IEnumerableSystem_ValueTupleintint_0_b__600_0(
+                    arg_0
+        );
+    }
+    static inline void _ToDictionary_138_IEnumerableSystem_ValueTupleintint_IEqualityComparerint_0_b__604_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._ToDictionary_138_IEnumerableSystem_ValueTupleintint_IEqualityComparerint_0_b__604_0(
+                    arg_0
+        );
+    }
+    static inline void _ToDictionary_139_IEnumerableint_System_Funcintint_0_b__608_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._ToDictionary_139_IEnumerableint_System_Funcintint_0_b__608_0(
+                    arg_0
+        );
+    }
     static inline CHAOS_IL2CPP_INT32 _ToDictionary_139_IEnumerableint_System_Funcintint_1_b__610_0(
                 CHAOS_IL2CPP_INTPTR arg_0, 
                 CHAOS_IL2CPP_INT32 arg_1
@@ -9356,6 +11443,13 @@ struct CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___
                     arg_1
         );
     }
+    static inline void _ToDictionary_140_IEnumerableint_System_Funcintint_IEqualityComparerint_0_b__612_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._ToDictionary_140_IEnumerableint_System_Funcintint_IEqualityComparerint_0_b__612_0(
+                    arg_0
+        );
+    }
     static inline CHAOS_IL2CPP_INT32 _ToDictionary_140_IEnumerableint_System_Funcintint_IEqualityComparerint_1_b__614_0(
                 CHAOS_IL2CPP_INTPTR arg_0, 
                 CHAOS_IL2CPP_INT32 arg_1
@@ -9363,6 +11457,13 @@ struct CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___
         return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._ToDictionary_140_IEnumerableint_System_Funcintint_IEqualityComparerint_1_b__614_0(
                     arg_0, 
                     arg_1
+        );
+    }
+    static inline void _ToDictionary_141_IEnumerableint_System_Funcintint_System_Funcintint_0_b__616_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._ToDictionary_141_IEnumerableint_System_Funcintint_System_Funcintint_0_b__616_0(
+                    arg_0
         );
     }
     static inline CHAOS_IL2CPP_INT32 _ToDictionary_141_IEnumerableint_System_Funcintint_System_Funcintint_1_b__618_0(
@@ -9383,6 +11484,13 @@ struct CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___
                     arg_1
         );
     }
+    static inline void _ToDictionary_142_IEnumerableint_System_Funcintint_System_Funcintint_IEqualityComparerint_0_b__620_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._ToDictionary_142_IEnumerableint_System_Funcintint_System_Funcintint_IEqualityComparerint_0_b__620_0(
+                    arg_0
+        );
+    }
     static inline CHAOS_IL2CPP_INT32 _ToDictionary_142_IEnumerableint_System_Funcintint_System_Funcintint_IEqualityComparerint_1_b__622_0(
                 CHAOS_IL2CPP_INTPTR arg_0, 
                 CHAOS_IL2CPP_INT32 arg_1
@@ -9401,6 +11509,34 @@ struct CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___
                     arg_1
         );
     }
+    static inline void _ToHashSet_143_IEnumerableint_0_b__624_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._ToHashSet_143_IEnumerableint_0_b__624_0(
+                    arg_0
+        );
+    }
+    static inline void _ToHashSet_144_IEnumerableint_IEqualityComparerint_0_b__628_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._ToHashSet_144_IEnumerableint_IEqualityComparerint_0_b__628_0(
+                    arg_0
+        );
+    }
+    static inline void _ToList_134_IEnumerableint_0_b__588_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._ToList_134_IEnumerableint_0_b__588_0(
+                    arg_0
+        );
+    }
+    static inline void _ToLookup_86_IEnumerableint_System_Funcintint_0_b__378_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._ToLookup_86_IEnumerableint_System_Funcintint_0_b__378_0(
+                    arg_0
+        );
+    }
     static inline CHAOS_IL2CPP_INT32 _ToLookup_86_IEnumerableint_System_Funcintint_1_b__380_0(
                 CHAOS_IL2CPP_INTPTR arg_0, 
                 CHAOS_IL2CPP_INT32 arg_1
@@ -9410,6 +11546,13 @@ struct CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___
                     arg_1
         );
     }
+    static inline void _ToLookup_87_IEnumerableint_System_Funcintint_IEqualityComparerint_0_b__382_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._ToLookup_87_IEnumerableint_System_Funcintint_IEqualityComparerint_0_b__382_0(
+                    arg_0
+        );
+    }
     static inline CHAOS_IL2CPP_INT32 _ToLookup_87_IEnumerableint_System_Funcintint_IEqualityComparerint_1_b__384_0(
                 CHAOS_IL2CPP_INTPTR arg_0, 
                 CHAOS_IL2CPP_INT32 arg_1
@@ -9417,6 +11560,13 @@ struct CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___
         return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._ToLookup_87_IEnumerableint_System_Funcintint_IEqualityComparerint_1_b__384_0(
                     arg_0, 
                     arg_1
+        );
+    }
+    static inline void _ToLookup_88_IEnumerableint_System_Funcintint_System_Funcintint_0_b__386_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._ToLookup_88_IEnumerableint_System_Funcintint_System_Funcintint_0_b__386_0(
+                    arg_0
         );
     }
     static inline CHAOS_IL2CPP_INT32 _ToLookup_88_IEnumerableint_System_Funcintint_System_Funcintint_1_b__388_0(
@@ -9437,6 +11587,13 @@ struct CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___
                     arg_1
         );
     }
+    static inline void _ToLookup_89_IEnumerableint_System_Funcintint_System_Funcintint_IEqualityComparerint_0_b__390_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._ToLookup_89_IEnumerableint_System_Funcintint_System_Funcintint_IEqualityComparerint_0_b__390_0(
+                    arg_0
+        );
+    }
     static inline CHAOS_IL2CPP_INT32 _ToLookup_89_IEnumerableint_System_Funcintint_System_Funcintint_IEqualityComparerint_1_b__392_0(
                 CHAOS_IL2CPP_INTPTR arg_0, 
                 CHAOS_IL2CPP_INT32 arg_1
@@ -9455,6 +11612,13 @@ struct CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___
                     arg_1
         );
     }
+    static inline void _UnionBy_147_IEnumerableint_IEnumerableint_System_Funcintint_0_b__640_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._UnionBy_147_IEnumerableint_IEnumerableint_System_Funcintint_0_b__640_0(
+                    arg_0
+        );
+    }
     static inline CHAOS_IL2CPP_INT32 _UnionBy_147_IEnumerableint_IEnumerableint_System_Funcintint_1_b__642_0(
                 CHAOS_IL2CPP_INTPTR arg_0, 
                 CHAOS_IL2CPP_INT32 arg_1
@@ -9462,6 +11626,13 @@ struct CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___
         return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._UnionBy_147_IEnumerableint_IEnumerableint_System_Funcintint_1_b__642_0(
                     arg_0, 
                     arg_1
+        );
+    }
+    static inline void _UnionBy_148_IEnumerableint_IEnumerableint_System_Funcintint_IEqualityComparerint_0_b__644_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._UnionBy_148_IEnumerableint_IEnumerableint_System_Funcintint_IEqualityComparerint_0_b__644_0(
+                    arg_0
         );
     }
     static inline CHAOS_IL2CPP_INT32 _UnionBy_148_IEnumerableint_IEnumerableint_System_Funcintint_IEqualityComparerint_1_b__646_0(
@@ -9473,6 +11644,27 @@ struct CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___
                     arg_1
         );
     }
+    static inline void _Union_145_IEnumerableint_IEnumerableint_0_b__632_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._Union_145_IEnumerableint_IEnumerableint_0_b__632_0(
+                    arg_0
+        );
+    }
+    static inline void _Union_146_IEnumerableint_IEnumerableint_IEqualityComparerint_0_b__636_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._Union_146_IEnumerableint_IEnumerableint_IEqualityComparerint_0_b__636_0(
+                    arg_0
+        );
+    }
+    static inline void _Where_149_IEnumerableint_System_Funcintbool_0_b__648_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._Where_149_IEnumerableint_System_Funcintbool_0_b__648_0(
+                    arg_0
+        );
+    }
     static inline CHAOS_IL2CPP_INTPTR _Where_149_IEnumerableint_System_Funcintbool_1_b__650_0(
                 CHAOS_IL2CPP_INTPTR arg_0, 
                 CHAOS_IL2CPP_INT32 arg_1
@@ -9480,6 +11672,13 @@ struct CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___
         return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._Where_149_IEnumerableint_System_Funcintbool_1_b__650_0(
                     arg_0, 
                     arg_1
+        );
+    }
+    static inline void _Where_150_IEnumerableint_System_Funcintintbool_0_b__652_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._Where_150_IEnumerableint_System_Funcintintbool_0_b__652_0(
+                    arg_0
         );
     }
     static inline CHAOS_IL2CPP_INTPTR _Where_150_IEnumerableint_System_Funcintintbool_1_b__654_0(
@@ -9493,6 +11692,13 @@ struct CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___
                     arg_2
         );
     }
+    static inline void _Zip_151_IEnumerableint_IEnumerableint_System_Funcintintint_0_b__656_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._Zip_151_IEnumerableint_IEnumerableint_System_Funcintintint_0_b__656_0(
+                    arg_0
+        );
+    }
     static inline CHAOS_IL2CPP_INT32 _Zip_151_IEnumerableint_IEnumerableint_System_Funcintintint_1_b__658_0(
                 CHAOS_IL2CPP_INTPTR arg_0, 
                 CHAOS_IL2CPP_INT32 arg_1, 
@@ -9504,8 +11710,60 @@ struct CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___
                     arg_2
         );
     }
+    static inline void _Zip_152_IEnumerableint_IEnumerableint_0_b__660_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._Zip_152_IEnumerableint_IEnumerableint_0_b__660_0(
+                    arg_0
+        );
+    }
+    static inline void _Zip_153_IEnumerableint_IEnumerableint_IEnumerableint_0_b__664_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c._Zip_153_IEnumerableint_IEnumerableint_IEnumerableint_0_b__664_0(
+                    arg_0
+        );
+    }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 213;
+    static constexpr int32_t MethodCount = 423;
+};
+
+struct CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c__DisplayClass168_0 {
+    static inline void ctor(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c__DisplayClass168_0.ctor(
+                    arg_0
+        );
+    }
+    static inline void _TryGetNonEnumeratedCount_38_IEnumerableint_int_0_b__0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c__DisplayClass168_0._TryGetNonEnumeratedCount_38_IEnumerableint_int_0_b__0(
+                    arg_0
+        );
+    }
+    /// Total number of AOT-compiled methods in this type.
+    static constexpr int32_t MethodCount = 2;
+};
+
+struct CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c__DisplayClass170_0 {
+    static inline void ctor(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c__DisplayClass170_0.ctor(
+                    arg_0
+        );
+    }
+    static inline void _TryGetNonEnumeratedCount_38_IEnumerableint_int_1_b__0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c__DisplayClass170_0._TryGetNonEnumeratedCount_38_IEnumerableint_int_1_b__0(
+                    arg_0
+        );
+    }
+    /// Total number of AOT-compiled methods in this type.
+    static constexpr int32_t MethodCount = 2;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Linq_System_Linq_LookupSystem_Int32System_Int32Tests {
@@ -9593,6 +11851,31 @@ struct CombinedSubjects_AutoGenerated_System_Linq_System_Linq_LookupSystem_Int32
                     arg_0
         );
     }
+    static inline void _ApplyResultSelector_2_System_FuncintIEnumerableintint_0_b__6_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_LookupSystem_Int32System_Int32Tests___c._ApplyResultSelector_2_System_FuncintIEnumerableintint_0_b__6_0(
+                    arg_0
+        );
+    }
+    static inline void _ApplyResultSelector_2_System_FuncintIEnumerableintint_1_b__8_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_LookupSystem_Int32System_Int32Tests___c._ApplyResultSelector_2_System_FuncintIEnumerableintint_1_b__8_0(
+                    arg_0
+        );
+    }
+    static inline CHAOS_IL2CPP_INT32 _ApplyResultSelector_2_System_FuncintIEnumerableintint_1_b__8_1(
+                CHAOS_IL2CPP_INTPTR arg_0, 
+                CHAOS_IL2CPP_INT32 arg_1, 
+                CHAOS_IL2CPP_INTPTR arg_2
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_LookupSystem_Int32System_Int32Tests___c._ApplyResultSelector_2_System_FuncintIEnumerableintint_1_b__8_1(
+                    arg_0, 
+                    arg_1, 
+                    arg_2
+        );
+    }
     static inline CHAOS_IL2CPP_INT32 _Benchmark_ApplyResultSelector_2_System_FuncintIEnumerableintint_1_b__9_0(
                 CHAOS_IL2CPP_INTPTR arg_0, 
                 CHAOS_IL2CPP_INT32 arg_1, 
@@ -9604,8 +11887,29 @@ struct CombinedSubjects_AutoGenerated_System_Linq_System_Linq_LookupSystem_Int32
                     arg_2
         );
     }
+    static inline void _Contains_0_int_0_b__0_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_LookupSystem_Int32System_Int32Tests___c._Contains_0_int_0_b__0_0(
+                    arg_0
+        );
+    }
+    static inline void _Contains_0_int_1_b__2_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_LookupSystem_Int32System_Int32Tests___c._Contains_0_int_1_b__2_0(
+                    arg_0
+        );
+    }
+    static inline void _GetEnumerator_1__1_b__4_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Linq_System_Linq_LookupSystem_Int32System_Int32Tests___c._GetEnumerator_1__1_b__4_0(
+                    arg_0
+        );
+    }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 3;
+    static constexpr int32_t MethodCount = 9;
 };
 
 

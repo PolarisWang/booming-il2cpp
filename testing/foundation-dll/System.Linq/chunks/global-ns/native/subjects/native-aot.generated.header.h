@@ -957,6 +957,8 @@ CHAOS_IL2CPP_INTPTR chaos_default_interpolated_string_handler_to_string_and_clea
 
 extern "C" void* kChaosExternalRuntimeFnTable[];
 
+extern "C" int32_t kChaosExternalRuntimeCount;
+
 namespace chaos::il2cpp::codegen::CombinedSubjects
 {
 extern CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Console_System_Console__get_Error_System_IO_TextWriter__(void) noexcept;

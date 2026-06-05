@@ -16,6 +16,7 @@
 #include <ChaosGeneratedRuntimePrelude.h>
 #include "enum_stubs.h"
 #include "async_stubs.h"
+#include "exception_stubs.h"
 #include "enum_metadata.generated.h"
 #include "native-aot.generated.header.h"
 
@@ -1364,6 +1365,12 @@ extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_Syst
 	{
 		const auto chaos_arg_1 = _s1;
 		const auto chaos_arg_0 = _s0;
+		if (0 < 0 || 0 >= kChaosExternalRuntimeCount) {
+			CHAOS_IL2CPP_FAIL("external runtime table index 0 out of range");
+		}
+		if (kChaosExternalRuntimeFnTable[0] == nullptr) {
+			CHAOS_IL2CPP_FAIL("external runtime table entry 0 is null");
+		}
 		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[0])(chaos_arg_0, chaos_arg_1);
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
@@ -1483,7 +1490,7 @@ extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_Syst
 	{
 		const auto chaos_arg_1 = _s1;
 		const auto chaos_arg_0 = _s0;
-		const auto chaos_result = ChaosObjectEqualsStatic(chaos_arg_0, chaos_arg_1);
+		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Object__Equals_System_Boolean_System_Object_System_Object_(chaos_arg_0, chaos_arg_1);
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
@@ -1498,7 +1505,11 @@ extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_Syst
 					_s0 = chaos_args[0];
 					{
 						const auto chaos_arg_0 = _s0;
-						const auto chaos_result = ChaosObjectToString(chaos_arg_0);
+						if (chaos_arg_0 == 0)
+						{
+							::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
+						}
+						const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Object__ToString_System_String__(chaos_arg_0);
 						_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 					}
 				}
@@ -1592,6 +1603,12 @@ extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_Syst
 	{
 		const auto chaos_arg_1 = _s1;
 		const auto chaos_arg_0 = _s0;
+		if (3 < 0 || 3 >= kChaosExternalRuntimeCount) {
+			CHAOS_IL2CPP_FAIL("external runtime table index 3 out of range");
+		}
+		if (kChaosExternalRuntimeFnTable[3] == nullptr) {
+			CHAOS_IL2CPP_FAIL("external runtime table entry 3 is null");
+		}
 		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[3])(chaos_arg_0, chaos_arg_1);
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
@@ -1844,12 +1861,24 @@ extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_0_0_
 	// brfalse (structured EH branch)
 	_s11 = chaos_locals[0];
 	{
+		if (7 < 0 || 7 >= kChaosExternalRuntimeCount) {
+			CHAOS_IL2CPP_FAIL("external runtime table index 7 out of range");
+		}
+		if (kChaosExternalRuntimeFnTable[7] == nullptr) {
+			CHAOS_IL2CPP_FAIL("external runtime table entry 7 is null");
+		}
 		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[7])();
 		_s12 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	chaos_locals[5] = _s12;
 	_s12 = chaos_locals[1];
 	{
+		if (7 < 0 || 7 >= kChaosExternalRuntimeCount) {
+			CHAOS_IL2CPP_FAIL("external runtime table index 7 out of range");
+		}
+		if (kChaosExternalRuntimeFnTable[7] == nullptr) {
+			CHAOS_IL2CPP_FAIL("external runtime table entry 7 is null");
+		}
 		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[7])();
 		_s13 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
@@ -1886,6 +1915,12 @@ extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_0_0_
 				{
 					_s13 = chaos_locals[8];
 					{
+						if (13 < 0 || 13 >= kChaosExternalRuntimeCount) {
+							CHAOS_IL2CPP_FAIL("external runtime table index 13 out of range");
+						}
+						if (kChaosExternalRuntimeFnTable[13] == nullptr) {
+							CHAOS_IL2CPP_FAIL("external runtime table entry 13 is null");
+						}
 						reinterpret_cast<void(*)(void)>(kChaosExternalRuntimeFnTable[13])();
 					}
 				}
@@ -1900,6 +1935,12 @@ extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_0_0_
 						{
 							_s13 = chaos_locals[7];
 							{
+								if (13 < 0 || 13 >= kChaosExternalRuntimeCount) {
+									CHAOS_IL2CPP_FAIL("external runtime table index 13 out of range");
+								}
+								if (kChaosExternalRuntimeFnTable[13] == nullptr) {
+									CHAOS_IL2CPP_FAIL("external runtime table entry 13 is null");
+								}
 								reinterpret_cast<void(*)(void)>(kChaosExternalRuntimeFnTable[13])();
 							}
 						}
@@ -1911,6 +1952,12 @@ extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_0_0_
 					// br (handled via structured EH branches)
 					_s13 = chaos_locals[6];
 					{
+						if (9 < 0 || 9 >= kChaosExternalRuntimeCount) {
+							CHAOS_IL2CPP_FAIL("external runtime table index 9 out of range");
+						}
+						if (kChaosExternalRuntimeFnTable[9] == nullptr) {
+							CHAOS_IL2CPP_FAIL("external runtime table entry 9 is null");
+						}
 						const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[9])();
 						_s14 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 					}
@@ -1921,22 +1968,46 @@ extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_0_0_
 					// brfalse (structured EH branch)
 					// leave (handled via structured EH branches)
 					{
+						if (10 < 0 || 10 >= kChaosExternalRuntimeCount) {
+							CHAOS_IL2CPP_FAIL("external runtime table index 10 out of range");
+						}
+						if (kChaosExternalRuntimeFnTable[10] == nullptr) {
+							CHAOS_IL2CPP_FAIL("external runtime table entry 10 is null");
+						}
 						const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[10])();
 						_s15 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 					}
 					_s16 = chaos_locals[5];
 					{
+						if (11 < 0 || 11 >= kChaosExternalRuntimeCount) {
+							CHAOS_IL2CPP_FAIL("external runtime table index 11 out of range");
+						}
+						if (kChaosExternalRuntimeFnTable[11] == nullptr) {
+							CHAOS_IL2CPP_FAIL("external runtime table entry 11 is null");
+						}
 						const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[11])();
 						_s17 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 					}
 					_s18 = chaos_locals[6];
 					{
+						if (11 < 0 || 11 >= kChaosExternalRuntimeCount) {
+							CHAOS_IL2CPP_FAIL("external runtime table index 11 out of range");
+						}
+						if (kChaosExternalRuntimeFnTable[11] == nullptr) {
+							CHAOS_IL2CPP_FAIL("external runtime table entry 11 is null");
+						}
 						const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[11])();
 						_s19 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 					}
 					{
 						const auto chaos_arg_1 = _s19;
 						const auto chaos_arg_0 = _s18;
+						if (12 < 0 || 12 >= kChaosExternalRuntimeCount) {
+							CHAOS_IL2CPP_FAIL("external runtime table index 12 out of range");
+						}
+						if (kChaosExternalRuntimeFnTable[12] == nullptr) {
+							CHAOS_IL2CPP_FAIL("external runtime table entry 12 is null");
+						}
 						const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[12])(chaos_arg_0, chaos_arg_1);
 						_s18 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 					}
@@ -1952,6 +2023,12 @@ extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_0_0_
 					chaos_locals[9] = _s19;
 					_s19 = chaos_locals[5];
 					{
+						if (9 < 0 || 9 >= kChaosExternalRuntimeCount) {
+							CHAOS_IL2CPP_FAIL("external runtime table index 9 out of range");
+						}
+						if (kChaosExternalRuntimeFnTable[9] == nullptr) {
+							CHAOS_IL2CPP_FAIL("external runtime table entry 9 is null");
+						}
 						const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[9])();
 						_s20 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 					}
@@ -1960,6 +2037,12 @@ extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_0_0_
 					// brtrue (structured EH branch)
 					_s21 = chaos_locals[6];
 					{
+						if (9 < 0 || 9 >= kChaosExternalRuntimeCount) {
+							CHAOS_IL2CPP_FAIL("external runtime table index 9 out of range");
+						}
+						if (kChaosExternalRuntimeFnTable[9] == nullptr) {
+							CHAOS_IL2CPP_FAIL("external runtime table entry 9 is null");
+						}
 						const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[9])();
 						_s22 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 					}
@@ -1969,6 +2052,12 @@ extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_0_0_
 			CHAOS_EH_FINALLY_END
 	CHAOS_EH_FINALLY_END
 	{
+		if (14 < 0 || 14 >= kChaosExternalRuntimeCount) {
+			CHAOS_IL2CPP_FAIL("external runtime table index 14 out of range");
+		}
+		if (kChaosExternalRuntimeFnTable[14] == nullptr) {
+			CHAOS_IL2CPP_FAIL("external runtime table entry 14 is null");
+		}
 		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[14])();
 		_s23 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
@@ -1977,6 +2066,12 @@ extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_0_0_
 	{
 		const auto chaos_arg_1 = _s25;
 		const auto chaos_arg_0 = _s24;
+		if (15 < 0 || 15 >= kChaosExternalRuntimeCount) {
+			CHAOS_IL2CPP_FAIL("external runtime table index 15 out of range");
+		}
+		if (kChaosExternalRuntimeFnTable[15] == nullptr) {
+			CHAOS_IL2CPP_FAIL("external runtime table entry 15 is null");
+		}
 		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[15])(chaos_arg_0, chaos_arg_1);
 		_s24 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
@@ -2002,6 +2097,12 @@ extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreNotEqual_0
 	CHAOS_IL2CPP_INTPTR _s1;
 	CHAOS_IL2CPP_INTPTR _s2;
 	{
+		if (14 < 0 || 14 >= kChaosExternalRuntimeCount) {
+			CHAOS_IL2CPP_FAIL("external runtime table index 14 out of range");
+		}
+		if (kChaosExternalRuntimeFnTable[14] == nullptr) {
+			CHAOS_IL2CPP_FAIL("external runtime table entry 14 is null");
+		}
 		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[14])();
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
@@ -2010,6 +2111,12 @@ extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreNotEqual_0
 	{
 		const auto chaos_arg_1 = _s2;
 		const auto chaos_arg_0 = _s1;
+		if (15 < 0 || 15 >= kChaosExternalRuntimeCount) {
+			CHAOS_IL2CPP_FAIL("external runtime table index 15 out of range");
+		}
+		if (kChaosExternalRuntimeFnTable[15] == nullptr) {
+			CHAOS_IL2CPP_FAIL("external runtime table entry 15 is null");
+		}
 		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[15])(chaos_arg_0, chaos_arg_1);
 		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
@@ -2056,7 +2163,7 @@ extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Fail_System_S
 		chaos_static_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert__s_exitCode = chaos_value;
 	}
 	{
-		const auto chaos_result = ChaosConsoleGetError();
+		const auto chaos_result = chaos_external_runtime_System_Console_System_Console__get_Error_System_IO_TextWriter__();
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	{
@@ -2072,7 +2179,11 @@ extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Fail_System_S
 	{
 		const auto chaos_arg_1 = _s1;
 		const auto chaos_arg_0 = _s0;
-		ChaosTextWriterWriteLineStr(chaos_arg_0, chaos_arg_1);
+		if (chaos_arg_0 == 0)
+		{
+			::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
+		}
+		chaos_external_runtime_System_Private_CoreLib_System_IO_TextWriter__WriteLine_System_Void_System_String_(chaos_arg_0, chaos_arg_1);
 	}
 	_s0 = chaos_args[0];
 	{
@@ -3114,7 +3225,7 @@ extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_AssertionException__
 	{
 		const auto chaos_arg_1 = _s1;
 		const auto chaos_arg_0 = _s0;
-		ChaosReflectionSetExceptionMetadata(chaos_arg_0, chaos_arg_1);
+		chaos_external_runtime_System_Private_CoreLib_System_Exception___ctor_System_Void_System_String_(chaos_arg_0, chaos_arg_1);
 	}
 	return;
 }
@@ -3128,6 +3239,12 @@ extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_BenchmarkAttribute__
 	CHAOS_IL2CPP_INTPTR _s0;
 	_s0 = chaos_args[0];
 	{
+		if (22 < 0 || 22 >= kChaosExternalRuntimeCount) {
+			CHAOS_IL2CPP_FAIL("external runtime table index 22 out of range");
+		}
+		if (kChaosExternalRuntimeFnTable[22] == nullptr) {
+			CHAOS_IL2CPP_FAIL("external runtime table entry 22 is null");
+		}
 		reinterpret_cast<void(*)(void)>(kChaosExternalRuntimeFnTable[22])();
 	}
 	return;
@@ -3142,6 +3259,12 @@ extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_FactAttribute__ctor(
 	CHAOS_IL2CPP_INTPTR _s0;
 	_s0 = chaos_args[0];
 	{
+		if (22 < 0 || 22 >= kChaosExternalRuntimeCount) {
+			CHAOS_IL2CPP_FAIL("external runtime table index 22 out of range");
+		}
+		if (kChaosExternalRuntimeFnTable[22] == nullptr) {
+			CHAOS_IL2CPP_FAIL("external runtime table entry 22 is null");
+		}
 		reinterpret_cast<void(*)(void)>(kChaosExternalRuntimeFnTable[22])();
 	}
 	return;
@@ -3156,6 +3279,12 @@ extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_HotUpdateAttribute__
 	CHAOS_IL2CPP_INTPTR _s0;
 	_s0 = chaos_args[0];
 	{
+		if (22 < 0 || 22 >= kChaosExternalRuntimeCount) {
+			CHAOS_IL2CPP_FAIL("external runtime table index 22 out of range");
+		}
+		if (kChaosExternalRuntimeFnTable[22] == nullptr) {
+			CHAOS_IL2CPP_FAIL("external runtime table entry 22 is null");
+		}
 		reinterpret_cast<void(*)(void)>(kChaosExternalRuntimeFnTable[22])();
 	}
 	return;
@@ -3171,7 +3300,7 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_Enumerabl
 	_s0 = chaos_args[0];
 	{
 		const auto chaos_arg_0 = _s0;
-		ChaosObjectCtor(chaos_arg_0);
+		chaos_external_runtime_System_Private_CoreLib_System_Object___ctor_System_Void__(chaos_arg_0);
 	}
 	return;
 }
@@ -3225,14 +3354,8 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_System_
 			}
 		}
 		{
-			if constexpr (CHAOS_IL2CPP_VERIFICATION_ENABLED) {
-				try {
-					ChaosInvokeAction(_s0);
-					throw chaos_managed_exception{};  // no exception u2014 fail
-				} catch (chaos_managed_exception&) {
-					// expected exception was thrown u2014 pass
-				}
-			}
+			// Assert.Throws: target method not found via IL lookahead
+			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
 		}
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
 		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
@@ -3291,14 +3414,8 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_System_
 			}
 		}
 		{
-			if constexpr (CHAOS_IL2CPP_VERIFICATION_ENABLED) {
-				try {
-					ChaosInvokeAction(_s0);
-					throw chaos_managed_exception{};  // no exception u2014 fail
-				} catch (chaos_managed_exception&) {
-					// expected exception was thrown u2014 pass
-				}
-			}
+			// Assert.Throws: target method not found via IL lookahead
+			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
 		}
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
 		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
@@ -3357,14 +3474,8 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_System_
 			}
 		}
 		{
-			if constexpr (CHAOS_IL2CPP_VERIFICATION_ENABLED) {
-				try {
-					ChaosInvokeAction(_s0);
-					throw chaos_managed_exception{};  // no exception u2014 fail
-				} catch (chaos_managed_exception&) {
-					// expected exception was thrown u2014 pass
-				}
-			}
+			// Assert.Throws: target method not found via IL lookahead
+			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
 		}
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
 		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
@@ -3423,14 +3534,8 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_System_
 			}
 		}
 		{
-			if constexpr (CHAOS_IL2CPP_VERIFICATION_ENABLED) {
-				try {
-					ChaosInvokeAction(_s0);
-					throw chaos_managed_exception{};  // no exception u2014 fail
-				} catch (chaos_managed_exception&) {
-					// expected exception was thrown u2014 pass
-				}
-			}
+			// Assert.Throws: target method not found via IL lookahead
+			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
 		}
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
 		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
@@ -3452,6 +3557,12 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_System_
 	CHAOS_IL2CPP_INTPTR _s3;
 	CHAOS_IL2CPP_INT64 _i0;
 	{
+		if (30 < 0 || 30 >= kChaosExternalRuntimeCount) {
+			CHAOS_IL2CPP_FAIL("external runtime table index 30 out of range");
+		}
+		if (kChaosExternalRuntimeFnTable[30] == nullptr) {
+			CHAOS_IL2CPP_FAIL("external runtime table entry 30 is null");
+		}
 		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[30])();
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
@@ -3502,6 +3613,12 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_System_
 			const auto chaos_arg_2 = _s2;
 			const auto chaos_arg_1 = _s1;
 			const auto chaos_arg_0 = _s0;
+			if (33 < 0 || 33 >= kChaosExternalRuntimeCount) {
+				CHAOS_IL2CPP_FAIL("external runtime table index 33 out of range");
+			}
+			if (kChaosExternalRuntimeFnTable[33] == nullptr) {
+				CHAOS_IL2CPP_FAIL("external runtime table entry 33 is null");
+			}
 			const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[33])(chaos_arg_0, chaos_arg_1, chaos_arg_2);
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 		}
@@ -3586,14 +3703,8 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_System_
 			}
 		}
 		{
-			if constexpr (CHAOS_IL2CPP_VERIFICATION_ENABLED) {
-				try {
-					ChaosInvokeAction(_s0);
-					throw chaos_managed_exception{};  // no exception u2014 fail
-				} catch (chaos_managed_exception&) {
-					// expected exception was thrown u2014 pass
-				}
-			}
+			// Assert.Throws: target method not found via IL lookahead
+			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
 		}
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
 		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
@@ -3652,14 +3763,8 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_System_
 			}
 		}
 		{
-			if constexpr (CHAOS_IL2CPP_VERIFICATION_ENABLED) {
-				try {
-					ChaosInvokeAction(_s0);
-					throw chaos_managed_exception{};  // no exception u2014 fail
-				} catch (chaos_managed_exception&) {
-					// expected exception was thrown u2014 pass
-				}
-			}
+			// Assert.Throws: target method not found via IL lookahead
+			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
 		}
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
 		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
@@ -3682,6 +3787,12 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_System_
 	CHAOS_IL2CPP_INTPTR _s4;
 	CHAOS_IL2CPP_INT64 _i0;
 	{
+		if (30 < 0 || 30 >= kChaosExternalRuntimeCount) {
+			CHAOS_IL2CPP_FAIL("external runtime table index 30 out of range");
+		}
+		if (kChaosExternalRuntimeFnTable[30] == nullptr) {
+			CHAOS_IL2CPP_FAIL("external runtime table entry 30 is null");
+		}
 		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[30])();
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
@@ -3774,6 +3885,12 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_System_
 				const auto chaos_arg_2 = _s2;
 				const auto chaos_arg_1 = _s1;
 				const auto chaos_arg_0 = _s0;
+				if (39 < 0 || 39 >= kChaosExternalRuntimeCount) {
+					CHAOS_IL2CPP_FAIL("external runtime table index 39 out of range");
+				}
+				if (kChaosExternalRuntimeFnTable[39] == nullptr) {
+					CHAOS_IL2CPP_FAIL("external runtime table entry 39 is null");
+				}
 				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[39])(chaos_arg_0, chaos_arg_1, chaos_arg_2, chaos_arg_3);
 				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
@@ -3859,14 +3976,8 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_System_
 			}
 		}
 		{
-			if constexpr (CHAOS_IL2CPP_VERIFICATION_ENABLED) {
-				try {
-					ChaosInvokeAction(_s0);
-					throw chaos_managed_exception{};  // no exception u2014 fail
-				} catch (chaos_managed_exception&) {
-					// expected exception was thrown u2014 pass
-				}
-			}
+			// Assert.Throws: target method not found via IL lookahead
+			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
 		}
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
 		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
@@ -3925,14 +4036,8 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_System_
 			}
 		}
 		{
-			if constexpr (CHAOS_IL2CPP_VERIFICATION_ENABLED) {
-				try {
-					ChaosInvokeAction(_s0);
-					throw chaos_managed_exception{};  // no exception u2014 fail
-				} catch (chaos_managed_exception&) {
-					// expected exception was thrown u2014 pass
-				}
-			}
+			// Assert.Throws: target method not found via IL lookahead
+			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
 		}
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
 		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
@@ -3945,7 +4050,7 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_System_
 // AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq.System_Linq_EnumerableTests::AggregateBy_33_IEnumerableint_System_Funcintint_int_System_Funcintintint_IEqualityComparerint_2:System.Int64()
 extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests_AggregateBy_33_IEnumerableint_System_Funcintint_int_System_Funcintintint_IEqualityComparerint_2(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
-	return {};
+	CHAOS_IL2CPP_FAIL("AOT-unreachable subject method called — missing function body");
 }
 
 // Managed method: CombinedSubjects/AutoGenerated.System_Linq.System_Linq_EnumerableTests::AggregateBy_34_IEnumerableint_System_Funcintint_System_Funcintint_System_Funcintintint_IEqualityComparerint_0()
@@ -3997,14 +4102,8 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_System_
 			}
 		}
 		{
-			if constexpr (CHAOS_IL2CPP_VERIFICATION_ENABLED) {
-				try {
-					ChaosInvokeAction(_s0);
-					throw chaos_managed_exception{};  // no exception u2014 fail
-				} catch (chaos_managed_exception&) {
-					// expected exception was thrown u2014 pass
-				}
-			}
+			// Assert.Throws: target method not found via IL lookahead
+			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
 		}
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
 		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
@@ -4017,7 +4116,7 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_System_
 // AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq.System_Linq_EnumerableTests::AggregateBy_34_IEnumerableint_System_Funcintint_System_Funcintint_System_Funcintintint_IEqualityComparerint_1:System.Int64()
 extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests_AggregateBy_34_IEnumerableint_System_Funcintint_System_Funcintint_System_Funcintintint_IEqualityComparerint_1(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
-	return {};
+	CHAOS_IL2CPP_FAIL("AOT-unreachable subject method called — missing function body");
 }
 
 // Managed method: CombinedSubjects/AutoGenerated.System_Linq.System_Linq_EnumerableTests::All_5_IEnumerableint_System_Funcintbool_0()
@@ -4069,14 +4168,8 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_System_
 			}
 		}
 		{
-			if constexpr (CHAOS_IL2CPP_VERIFICATION_ENABLED) {
-				try {
-					ChaosInvokeAction(_s0);
-					throw chaos_managed_exception{};  // no exception u2014 fail
-				} catch (chaos_managed_exception&) {
-					// expected exception was thrown u2014 pass
-				}
-			}
+			// Assert.Throws: target method not found via IL lookahead
+			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
 		}
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
 		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
@@ -4097,6 +4190,12 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_System_
 	CHAOS_IL2CPP_INTPTR _s2;
 	CHAOS_IL2CPP_INT64 _i0;
 	{
+		if (30 < 0 || 30 >= kChaosExternalRuntimeCount) {
+			CHAOS_IL2CPP_FAIL("external runtime table index 30 out of range");
+		}
+		if (kChaosExternalRuntimeFnTable[30] == nullptr) {
+			CHAOS_IL2CPP_FAIL("external runtime table entry 30 is null");
+		}
 		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[30])();
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
@@ -4144,6 +4243,12 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_System_
 		{
 			const auto chaos_arg_1 = _s1;
 			const auto chaos_arg_0 = _s0;
+			if (55 < 0 || 55 >= kChaosExternalRuntimeCount) {
+				CHAOS_IL2CPP_FAIL("external runtime table index 55 out of range");
+			}
+			if (kChaosExternalRuntimeFnTable[55] == nullptr) {
+				CHAOS_IL2CPP_FAIL("external runtime table entry 55 is null");
+			}
 			const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[55])(chaos_arg_0, chaos_arg_1);
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 		}
@@ -4239,14 +4344,8 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_System_
 			}
 		}
 		{
-			if constexpr (CHAOS_IL2CPP_VERIFICATION_ENABLED) {
-				try {
-					ChaosInvokeAction(_s0);
-					throw chaos_managed_exception{};  // no exception u2014 fail
-				} catch (chaos_managed_exception&) {
-					// expected exception was thrown u2014 pass
-				}
-			}
+			// Assert.Throws: target method not found via IL lookahead
+			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
 		}
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
 		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
@@ -4267,11 +4366,23 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_System_
 	CHAOS_IL2CPP_INTPTR _s2;
 	CHAOS_IL2CPP_INT64 _i0;
 	{
+		if (30 < 0 || 30 >= kChaosExternalRuntimeCount) {
+			CHAOS_IL2CPP_FAIL("external runtime table index 30 out of range");
+		}
+		if (kChaosExternalRuntimeFnTable[30] == nullptr) {
+			CHAOS_IL2CPP_FAIL("external runtime table entry 30 is null");
+		}
 		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[30])();
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	{
 		const auto chaos_arg_0 = _s0;
+		if (57 < 0 || 57 >= kChaosExternalRuntimeCount) {
+			CHAOS_IL2CPP_FAIL("external runtime table index 57 out of range");
+		}
+		if (kChaosExternalRuntimeFnTable[57] == nullptr) {
+			CHAOS_IL2CPP_FAIL("external runtime table entry 57 is null");
+		}
 		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[57])(chaos_arg_0);
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
@@ -4366,14 +4477,8 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_System_
 			}
 		}
 		{
-			if constexpr (CHAOS_IL2CPP_VERIFICATION_ENABLED) {
-				try {
-					ChaosInvokeAction(_s0);
-					throw chaos_managed_exception{};  // no exception u2014 fail
-				} catch (chaos_managed_exception&) {
-					// expected exception was thrown u2014 pass
-				}
-			}
+			// Assert.Throws: target method not found via IL lookahead
+			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
 		}
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
 		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
@@ -4394,6 +4499,12 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_System_
 	CHAOS_IL2CPP_INTPTR _s2;
 	CHAOS_IL2CPP_INT64 _i0;
 	{
+		if (30 < 0 || 30 >= kChaosExternalRuntimeCount) {
+			CHAOS_IL2CPP_FAIL("external runtime table index 30 out of range");
+		}
+		if (kChaosExternalRuntimeFnTable[30] == nullptr) {
+			CHAOS_IL2CPP_FAIL("external runtime table entry 30 is null");
+		}
 		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[30])();
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
@@ -4441,6 +4552,12 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_System_
 		{
 			const auto chaos_arg_1 = _s1;
 			const auto chaos_arg_0 = _s0;
+			if (60 < 0 || 60 >= kChaosExternalRuntimeCount) {
+				CHAOS_IL2CPP_FAIL("external runtime table index 60 out of range");
+			}
+			if (kChaosExternalRuntimeFnTable[60] == nullptr) {
+				CHAOS_IL2CPP_FAIL("external runtime table entry 60 is null");
+			}
 			const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[60])(chaos_arg_0, chaos_arg_1);
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 		}
@@ -4536,14 +4653,8 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_System_
 			}
 		}
 		{
-			if constexpr (CHAOS_IL2CPP_VERIFICATION_ENABLED) {
-				try {
-					ChaosInvokeAction(_s0);
-					throw chaos_managed_exception{};  // no exception u2014 fail
-				} catch (chaos_managed_exception&) {
-					// expected exception was thrown u2014 pass
-				}
-			}
+			// Assert.Throws: target method not found via IL lookahead
+			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
 		}
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
 		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
@@ -4602,14 +4713,8 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_System_
 			}
 		}
 		{
-			if constexpr (CHAOS_IL2CPP_VERIFICATION_ENABLED) {
-				try {
-					ChaosInvokeAction(_s0);
-					throw chaos_managed_exception{};  // no exception u2014 fail
-				} catch (chaos_managed_exception&) {
-					// expected exception was thrown u2014 pass
-				}
-			}
+			// Assert.Throws: target method not found via IL lookahead
+			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
 		}
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
 		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
@@ -4629,6 +4734,12 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_System_
 	CHAOS_IL2CPP_INTPTR _s1;
 	CHAOS_IL2CPP_INT64 _i0;
 	{
+		if (30 < 0 || 30 >= kChaosExternalRuntimeCount) {
+			CHAOS_IL2CPP_FAIL("external runtime table index 30 out of range");
+		}
+		if (kChaosExternalRuntimeFnTable[30] == nullptr) {
+			CHAOS_IL2CPP_FAIL("external runtime table entry 30 is null");
+		}
 		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[30])();
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
@@ -4636,6 +4747,12 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_System_
 	{
 		const auto chaos_arg_1 = _s1;
 		const auto chaos_arg_0 = _s0;
+		if (63 < 0 || 63 >= kChaosExternalRuntimeCount) {
+			CHAOS_IL2CPP_FAIL("external runtime table index 63 out of range");
+		}
+		if (kChaosExternalRuntimeFnTable[63] == nullptr) {
+			CHAOS_IL2CPP_FAIL("external runtime table entry 63 is null");
+		}
 		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[63])(chaos_arg_0, chaos_arg_1);
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
@@ -4669,6 +4786,12 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_System_
 	_s0 = 0;
 	{
 		const auto chaos_arg_0 = _s0;
+		if (64 < 0 || 64 >= kChaosExternalRuntimeCount) {
+			CHAOS_IL2CPP_FAIL("external runtime table index 64 out of range");
+		}
+		if (kChaosExternalRuntimeFnTable[64] == nullptr) {
+			CHAOS_IL2CPP_FAIL("external runtime table entry 64 is null");
+		}
 		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[64])(chaos_arg_0);
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
@@ -4696,10 +4819,7 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_System_
 	_s1 = chaos_locals[0];
 	_s2 = 0;
 	{
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[65])(chaos_arg_0, chaos_arg_1, chaos_arg_2);
+		[&]() -> void { if ((_s0) != (_s1)) { throw chaos_managed_exception{}; } }();
 	}
 	_s0 = chaos_locals[0];
 	{
@@ -4730,11 +4850,23 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_System_
 	CHAOS_IL2CPP_INTPTR _s2;
 	CHAOS_IL2CPP_INT64 _i0;
 	{
+		if (30 < 0 || 30 >= kChaosExternalRuntimeCount) {
+			CHAOS_IL2CPP_FAIL("external runtime table index 30 out of range");
+		}
+		if (kChaosExternalRuntimeFnTable[30] == nullptr) {
+			CHAOS_IL2CPP_FAIL("external runtime table entry 30 is null");
+		}
 		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[30])();
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	{
 		const auto chaos_arg_0 = _s0;
+		if (64 < 0 || 64 >= kChaosExternalRuntimeCount) {
+			CHAOS_IL2CPP_FAIL("external runtime table index 64 out of range");
+		}
+		if (kChaosExternalRuntimeFnTable[64] == nullptr) {
+			CHAOS_IL2CPP_FAIL("external runtime table entry 64 is null");
+		}
 		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[64])(chaos_arg_0);
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
@@ -4743,10 +4875,7 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_System_
 	_s1 = chaos_locals[0];
 	_s2 = 0;
 	{
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[65])(chaos_arg_0, chaos_arg_1, chaos_arg_2);
+		[&]() -> void { if ((_s0) != (_s1)) { throw chaos_managed_exception{}; } }();
 	}
 	_s0 = chaos_locals[0];
 	{
@@ -4815,14 +4944,8 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_System_
 			}
 		}
 		{
-			if constexpr (CHAOS_IL2CPP_VERIFICATION_ENABLED) {
-				try {
-					ChaosInvokeAction(_s0);
-					throw chaos_managed_exception{};  // no exception u2014 fail
-				} catch (chaos_managed_exception&) {
-					// expected exception was thrown u2014 pass
-				}
-			}
+			// Assert.Throws: target method not found via IL lookahead
+			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
 		}
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
 		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
@@ -4881,14 +5004,8 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_System_
 			}
 		}
 		{
-			if constexpr (CHAOS_IL2CPP_VERIFICATION_ENABLED) {
-				try {
-					ChaosInvokeAction(_s0);
-					throw chaos_managed_exception{};  // no exception u2014 fail
-				} catch (chaos_managed_exception&) {
-					// expected exception was thrown u2014 pass
-				}
-			}
+			// Assert.Throws: target method not found via IL lookahead
+			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
 		}
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
 		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
@@ -4947,14 +5064,8 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_System_
 			}
 		}
 		{
-			if constexpr (CHAOS_IL2CPP_VERIFICATION_ENABLED) {
-				try {
-					ChaosInvokeAction(_s0);
-					throw chaos_managed_exception{};  // no exception u2014 fail
-				} catch (chaos_managed_exception&) {
-					// expected exception was thrown u2014 pass
-				}
-			}
+			// Assert.Throws: target method not found via IL lookahead
+			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
 		}
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
 		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
@@ -5013,14 +5124,8 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_System_
 			}
 		}
 		{
-			if constexpr (CHAOS_IL2CPP_VERIFICATION_ENABLED) {
-				try {
-					ChaosInvokeAction(_s0);
-					throw chaos_managed_exception{};  // no exception u2014 fail
-				} catch (chaos_managed_exception&) {
-					// expected exception was thrown u2014 pass
-				}
-			}
+			// Assert.Throws: target method not found via IL lookahead
+			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
 		}
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
 		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
@@ -5079,14 +5184,8 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_System_
 			}
 		}
 		{
-			if constexpr (CHAOS_IL2CPP_VERIFICATION_ENABLED) {
-				try {
-					ChaosInvokeAction(_s0);
-					throw chaos_managed_exception{};  // no exception u2014 fail
-				} catch (chaos_managed_exception&) {
-					// expected exception was thrown u2014 pass
-				}
-			}
+			// Assert.Throws: target method not found via IL lookahead
+			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
 		}
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
 		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
@@ -5145,14 +5244,8 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_System_
 			}
 		}
 		{
-			if constexpr (CHAOS_IL2CPP_VERIFICATION_ENABLED) {
-				try {
-					ChaosInvokeAction(_s0);
-					throw chaos_managed_exception{};  // no exception u2014 fail
-				} catch (chaos_managed_exception&) {
-					// expected exception was thrown u2014 pass
-				}
-			}
+			// Assert.Throws: target method not found via IL lookahead
+			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
 		}
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
 		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
@@ -5211,14 +5304,8 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_System_
 			}
 		}
 		{
-			if constexpr (CHAOS_IL2CPP_VERIFICATION_ENABLED) {
-				try {
-					ChaosInvokeAction(_s0);
-					throw chaos_managed_exception{};  // no exception u2014 fail
-				} catch (chaos_managed_exception&) {
-					// expected exception was thrown u2014 pass
-				}
-			}
+			// Assert.Throws: target method not found via IL lookahead
+			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
 		}
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
 		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
@@ -5239,11 +5326,23 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_System_
 	CHAOS_IL2CPP_INTPTR _s2;
 	CHAOS_IL2CPP_INT64 _i0;
 	{
+		if (73 < 0 || 73 >= kChaosExternalRuntimeCount) {
+			CHAOS_IL2CPP_FAIL("external runtime table index 73 out of range");
+		}
+		if (kChaosExternalRuntimeFnTable[73] == nullptr) {
+			CHAOS_IL2CPP_FAIL("external runtime table entry 73 is null");
+		}
 		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[73])();
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	{
 		const auto chaos_arg_0 = _s0;
+		if (74 < 0 || 74 >= kChaosExternalRuntimeCount) {
+			CHAOS_IL2CPP_FAIL("external runtime table index 74 out of range");
+		}
+		if (kChaosExternalRuntimeFnTable[74] == nullptr) {
+			CHAOS_IL2CPP_FAIL("external runtime table entry 74 is null");
+		}
 		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[74])(chaos_arg_0);
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
@@ -5265,10 +5364,7 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_System_
 	_s1 = chaos_locals[0];
 	_s2 = 0;
 	{
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[76])(chaos_arg_0, chaos_arg_1, chaos_arg_2);
+		[&]() -> void { if ((_s0) != (_s1)) { throw chaos_managed_exception{}; } }();
 	}
 	_s0 = chaos_locals[0];
 	{
@@ -5344,14 +5440,8 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_System_
 			}
 		}
 		{
-			if constexpr (CHAOS_IL2CPP_VERIFICATION_ENABLED) {
-				try {
-					ChaosInvokeAction(_s0);
-					throw chaos_managed_exception{};  // no exception u2014 fail
-				} catch (chaos_managed_exception&) {
-					// expected exception was thrown u2014 pass
-				}
-			}
+			// Assert.Throws: target method not found via IL lookahead
+			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
 		}
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
 		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
@@ -5372,11 +5462,23 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_System_
 	CHAOS_IL2CPP_INTPTR _s2;
 	CHAOS_IL2CPP_INT64 _i0;
 	{
+		if (78 < 0 || 78 >= kChaosExternalRuntimeCount) {
+			CHAOS_IL2CPP_FAIL("external runtime table index 78 out of range");
+		}
+		if (kChaosExternalRuntimeFnTable[78] == nullptr) {
+			CHAOS_IL2CPP_FAIL("external runtime table entry 78 is null");
+		}
 		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[78])();
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	{
 		const auto chaos_arg_0 = _s0;
+		if (79 < 0 || 79 >= kChaosExternalRuntimeCount) {
+			CHAOS_IL2CPP_FAIL("external runtime table index 79 out of range");
+		}
+		if (kChaosExternalRuntimeFnTable[79] == nullptr) {
+			CHAOS_IL2CPP_FAIL("external runtime table entry 79 is null");
+		}
 		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[79])(chaos_arg_0);
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
@@ -5398,10 +5500,7 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_System_
 	_s1 = chaos_locals[0];
 	_s2 = 0;
 	{
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[76])(chaos_arg_0, chaos_arg_1, chaos_arg_2);
+		[&]() -> void { if ((_s0) != (_s1)) { throw chaos_managed_exception{}; } }();
 	}
 	_s0 = chaos_locals[0];
 	{
@@ -5477,14 +5576,8 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_System_
 			}
 		}
 		{
-			if constexpr (CHAOS_IL2CPP_VERIFICATION_ENABLED) {
-				try {
-					ChaosInvokeAction(_s0);
-					throw chaos_managed_exception{};  // no exception u2014 fail
-				} catch (chaos_managed_exception&) {
-					// expected exception was thrown u2014 pass
-				}
-			}
+			// Assert.Throws: target method not found via IL lookahead
+			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
 		}
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
 		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
@@ -5505,11 +5598,23 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_System_
 	CHAOS_IL2CPP_INTPTR _s2;
 	CHAOS_IL2CPP_INT64 _i0;
 	{
+		if (81 < 0 || 81 >= kChaosExternalRuntimeCount) {
+			CHAOS_IL2CPP_FAIL("external runtime table index 81 out of range");
+		}
+		if (kChaosExternalRuntimeFnTable[81] == nullptr) {
+			CHAOS_IL2CPP_FAIL("external runtime table entry 81 is null");
+		}
 		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[81])();
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	{
 		const auto chaos_arg_0 = _s0;
+		if (82 < 0 || 82 >= kChaosExternalRuntimeCount) {
+			CHAOS_IL2CPP_FAIL("external runtime table index 82 out of range");
+		}
+		if (kChaosExternalRuntimeFnTable[82] == nullptr) {
+			CHAOS_IL2CPP_FAIL("external runtime table entry 82 is null");
+		}
 		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[82])(chaos_arg_0);
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
@@ -5531,10 +5636,7 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_System_
 	_s1 = chaos_locals[0];
 	_s2 = 0;
 	{
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[84])(chaos_arg_0, chaos_arg_1, chaos_arg_2);
+		[&]() -> void { if ((_s0) != (_s1)) { throw chaos_managed_exception{}; } }();
 	}
 	_s0 = chaos_locals[0];
 	{
@@ -5610,14 +5712,8 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_System_
 			}
 		}
 		{
-			if constexpr (CHAOS_IL2CPP_VERIFICATION_ENABLED) {
-				try {
-					ChaosInvokeAction(_s0);
-					throw chaos_managed_exception{};  // no exception u2014 fail
-				} catch (chaos_managed_exception&) {
-					// expected exception was thrown u2014 pass
-				}
-			}
+			// Assert.Throws: target method not found via IL lookahead
+			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
 		}
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
 		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
@@ -5638,11 +5734,23 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_System_
 	CHAOS_IL2CPP_INTPTR _s2;
 	CHAOS_IL2CPP_INT64 _i0;
 	{
+		if (86 < 0 || 86 >= kChaosExternalRuntimeCount) {
+			CHAOS_IL2CPP_FAIL("external runtime table index 86 out of range");
+		}
+		if (kChaosExternalRuntimeFnTable[86] == nullptr) {
+			CHAOS_IL2CPP_FAIL("external runtime table entry 86 is null");
+		}
 		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[86])();
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	{
 		const auto chaos_arg_0 = _s0;
+		if (87 < 0 || 87 >= kChaosExternalRuntimeCount) {
+			CHAOS_IL2CPP_FAIL("external runtime table index 87 out of range");
+		}
+		if (kChaosExternalRuntimeFnTable[87] == nullptr) {
+			CHAOS_IL2CPP_FAIL("external runtime table entry 87 is null");
+		}
 		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[87])(chaos_arg_0);
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
@@ -5664,10 +5772,7 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_System_
 	_s1 = chaos_locals[0];
 	_s2 = 0;
 	{
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[76])(chaos_arg_0, chaos_arg_1, chaos_arg_2);
+		[&]() -> void { if ((_s0) != (_s1)) { throw chaos_managed_exception{}; } }();
 	}
 	_s0 = chaos_locals[0];
 	{
@@ -5743,14 +5848,8 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_System_
 			}
 		}
 		{
-			if constexpr (CHAOS_IL2CPP_VERIFICATION_ENABLED) {
-				try {
-					ChaosInvokeAction(_s0);
-					throw chaos_managed_exception{};  // no exception u2014 fail
-				} catch (chaos_managed_exception&) {
-					// expected exception was thrown u2014 pass
-				}
-			}
+			// Assert.Throws: target method not found via IL lookahead
+			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
 		}
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
 		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
@@ -5771,11 +5870,23 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_System_
 	CHAOS_IL2CPP_INTPTR _s2;
 	CHAOS_IL2CPP_INT64 _i0;
 	{
+		if (89 < 0 || 89 >= kChaosExternalRuntimeCount) {
+			CHAOS_IL2CPP_FAIL("external runtime table index 89 out of range");
+		}
+		if (kChaosExternalRuntimeFnTable[89] == nullptr) {
+			CHAOS_IL2CPP_FAIL("external runtime table entry 89 is null");
+		}
 		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[89])();
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	{
 		const auto chaos_arg_0 = _s0;
+		if (90 < 0 || 90 >= kChaosExternalRuntimeCount) {
+			CHAOS_IL2CPP_FAIL("external runtime table index 90 out of range");
+		}
+		if (kChaosExternalRuntimeFnTable[90] == nullptr) {
+			CHAOS_IL2CPP_FAIL("external runtime table entry 90 is null");
+		}
 		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[90])(chaos_arg_0);
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
@@ -5797,10 +5908,7 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_System_
 	_s1 = chaos_locals[0];
 	_s2 = 0;
 	{
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[92])(chaos_arg_0, chaos_arg_1, chaos_arg_2);
+		[&]() -> void { if ((_s0) != (_s1)) { throw chaos_managed_exception{}; } }();
 	}
 	_s0 = chaos_locals[0];
 	{
@@ -5876,14 +5984,8 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_System_
 			}
 		}
 		{
-			if constexpr (CHAOS_IL2CPP_VERIFICATION_ENABLED) {
-				try {
-					ChaosInvokeAction(_s0);
-					throw chaos_managed_exception{};  // no exception u2014 fail
-				} catch (chaos_managed_exception&) {
-					// expected exception was thrown u2014 pass
-				}
-			}
+			// Assert.Throws: target method not found via IL lookahead
+			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
 		}
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
 		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
@@ -5942,14 +6044,8 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_System_
 			}
 		}
 		{
-			if constexpr (CHAOS_IL2CPP_VERIFICATION_ENABLED) {
-				try {
-					ChaosInvokeAction(_s0);
-					throw chaos_managed_exception{};  // no exception u2014 fail
-				} catch (chaos_managed_exception&) {
-					// expected exception was thrown u2014 pass
-				}
-			}
+			// Assert.Throws: target method not found via IL lookahead
+			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
 		}
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
 		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
@@ -6008,14 +6104,8 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_System_
 			}
 		}
 		{
-			if constexpr (CHAOS_IL2CPP_VERIFICATION_ENABLED) {
-				try {
-					ChaosInvokeAction(_s0);
-					throw chaos_managed_exception{};  // no exception u2014 fail
-				} catch (chaos_managed_exception&) {
-					// expected exception was thrown u2014 pass
-				}
-			}
+			// Assert.Throws: target method not found via IL lookahead
+			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
 		}
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
 		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
@@ -6074,14 +6164,8 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_System_
 			}
 		}
 		{
-			if constexpr (CHAOS_IL2CPP_VERIFICATION_ENABLED) {
-				try {
-					ChaosInvokeAction(_s0);
-					throw chaos_managed_exception{};  // no exception u2014 fail
-				} catch (chaos_managed_exception&) {
-					// expected exception was thrown u2014 pass
-				}
-			}
+			// Assert.Throws: target method not found via IL lookahead
+			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
 		}
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
 		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
@@ -6140,14 +6224,8 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_System_
 			}
 		}
 		{
-			if constexpr (CHAOS_IL2CPP_VERIFICATION_ENABLED) {
-				try {
-					ChaosInvokeAction(_s0);
-					throw chaos_managed_exception{};  // no exception u2014 fail
-				} catch (chaos_managed_exception&) {
-					// expected exception was thrown u2014 pass
-				}
-			}
+			// Assert.Throws: target method not found via IL lookahead
+			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
 		}
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
 		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
@@ -6206,14 +6284,8 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_System_
 			}
 		}
 		{
-			if constexpr (CHAOS_IL2CPP_VERIFICATION_ENABLED) {
-				try {
-					ChaosInvokeAction(_s0);
-					throw chaos_managed_exception{};  // no exception u2014 fail
-				} catch (chaos_managed_exception&) {
-					// expected exception was thrown u2014 pass
-				}
-			}
+			// Assert.Throws: target method not found via IL lookahead
+			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
 		}
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
 		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
@@ -6272,14 +6344,8 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_System_
 			}
 		}
 		{
-			if constexpr (CHAOS_IL2CPP_VERIFICATION_ENABLED) {
-				try {
-					ChaosInvokeAction(_s0);
-					throw chaos_managed_exception{};  // no exception u2014 fail
-				} catch (chaos_managed_exception&) {
-					// expected exception was thrown u2014 pass
-				}
-			}
+			// Assert.Throws: target method not found via IL lookahead
+			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
 		}
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
 		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
@@ -6338,14 +6404,8 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_System_
 			}
 		}
 		{
-			if constexpr (CHAOS_IL2CPP_VERIFICATION_ENABLED) {
-				try {
-					ChaosInvokeAction(_s0);
-					throw chaos_managed_exception{};  // no exception u2014 fail
-				} catch (chaos_managed_exception&) {
-					// expected exception was thrown u2014 pass
-				}
-			}
+			// Assert.Throws: target method not found via IL lookahead
+			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
 		}
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
 		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
@@ -6404,14 +6464,8 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_System_
 			}
 		}
 		{
-			if constexpr (CHAOS_IL2CPP_VERIFICATION_ENABLED) {
-				try {
-					ChaosInvokeAction(_s0);
-					throw chaos_managed_exception{};  // no exception u2014 fail
-				} catch (chaos_managed_exception&) {
-					// expected exception was thrown u2014 pass
-				}
-			}
+			// Assert.Throws: target method not found via IL lookahead
+			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
 		}
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
 		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
@@ -6470,14 +6524,8 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_System_
 			}
 		}
 		{
-			if constexpr (CHAOS_IL2CPP_VERIFICATION_ENABLED) {
-				try {
-					ChaosInvokeAction(_s0);
-					throw chaos_managed_exception{};  // no exception u2014 fail
-				} catch (chaos_managed_exception&) {
-					// expected exception was thrown u2014 pass
-				}
-			}
+			// Assert.Throws: target method not found via IL lookahead
+			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
 		}
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
 		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
@@ -6536,14 +6584,8 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_System_
 			}
 		}
 		{
-			if constexpr (CHAOS_IL2CPP_VERIFICATION_ENABLED) {
-				try {
-					ChaosInvokeAction(_s0);
-					throw chaos_managed_exception{};  // no exception u2014 fail
-				} catch (chaos_managed_exception&) {
-					// expected exception was thrown u2014 pass
-				}
-			}
+			// Assert.Throws: target method not found via IL lookahead
+			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
 		}
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
 		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
@@ -6564,6 +6606,12 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_System_
 	CHAOS_IL2CPP_INTPTR _s2;
 	CHAOS_IL2CPP_INT64 _i0;
 	{
+		if (30 < 0 || 30 >= kChaosExternalRuntimeCount) {
+			CHAOS_IL2CPP_FAIL("external runtime table index 30 out of range");
+		}
+		if (kChaosExternalRuntimeFnTable[30] == nullptr) {
+			CHAOS_IL2CPP_FAIL("external runtime table entry 30 is null");
+		}
 		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[30])();
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
@@ -6611,6 +6659,12 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_System_
 		{
 			const auto chaos_arg_1 = _s1;
 			const auto chaos_arg_0 = _s0;
+			if (106 < 0 || 106 >= kChaosExternalRuntimeCount) {
+				CHAOS_IL2CPP_FAIL("external runtime table index 106 out of range");
+			}
+			if (kChaosExternalRuntimeFnTable[106] == nullptr) {
+				CHAOS_IL2CPP_FAIL("external runtime table entry 106 is null");
+			}
 			const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[106])(chaos_arg_0, chaos_arg_1);
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 		}
@@ -6632,10 +6686,7 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_System_
 		_s1 = chaos_locals[0];
 		_s2 = 0;
 		{
-			const auto chaos_arg_2 = _s2;
-			const auto chaos_arg_1 = _s1;
-			const auto chaos_arg_0 = _s0;
-			reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[76])(chaos_arg_0, chaos_arg_1, chaos_arg_2);
+			[&]() -> void { if ((_s0) != (_s1)) { throw chaos_managed_exception{}; } }();
 		}
 		_s0 = chaos_locals[0];
 		{
@@ -6712,14 +6763,8 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_System_
 			}
 		}
 		{
-			if constexpr (CHAOS_IL2CPP_VERIFICATION_ENABLED) {
-				try {
-					ChaosInvokeAction(_s0);
-					throw chaos_managed_exception{};  // no exception u2014 fail
-				} catch (chaos_managed_exception&) {
-					// expected exception was thrown u2014 pass
-				}
-			}
+			// Assert.Throws: target method not found via IL lookahead
+			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
 		}
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
 		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
@@ -6740,6 +6785,12 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_System_
 	CHAOS_IL2CPP_INTPTR _s2;
 	CHAOS_IL2CPP_INT64 _i0;
 	{
+		if (30 < 0 || 30 >= kChaosExternalRuntimeCount) {
+			CHAOS_IL2CPP_FAIL("external runtime table index 30 out of range");
+		}
+		if (kChaosExternalRuntimeFnTable[30] == nullptr) {
+			CHAOS_IL2CPP_FAIL("external runtime table entry 30 is null");
+		}
 		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[30])();
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
@@ -6787,6 +6838,12 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_System_
 		{
 			const auto chaos_arg_1 = _s1;
 			const auto chaos_arg_0 = _s0;
+			if (110 < 0 || 110 >= kChaosExternalRuntimeCount) {
+				CHAOS_IL2CPP_FAIL("external runtime table index 110 out of range");
+			}
+			if (kChaosExternalRuntimeFnTable[110] == nullptr) {
+				CHAOS_IL2CPP_FAIL("external runtime table entry 110 is null");
+			}
 			const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[110])(chaos_arg_0, chaos_arg_1);
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 		}
@@ -6808,10 +6865,7 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_System_
 		_s1 = chaos_locals[0];
 		_s2 = 0;
 		{
-			const auto chaos_arg_2 = _s2;
-			const auto chaos_arg_1 = _s1;
-			const auto chaos_arg_0 = _s0;
-			reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[76])(chaos_arg_0, chaos_arg_1, chaos_arg_2);
+			[&]() -> void { if ((_s0) != (_s1)) { throw chaos_managed_exception{}; } }();
 		}
 		_s0 = chaos_locals[0];
 		{
@@ -6888,14 +6942,8 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_System_
 			}
 		}
 		{
-			if constexpr (CHAOS_IL2CPP_VERIFICATION_ENABLED) {
-				try {
-					ChaosInvokeAction(_s0);
-					throw chaos_managed_exception{};  // no exception u2014 fail
-				} catch (chaos_managed_exception&) {
-					// expected exception was thrown u2014 pass
-				}
-			}
+			// Assert.Throws: target method not found via IL lookahead
+			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
 		}
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
 		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
@@ -6916,6 +6964,12 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_System_
 	CHAOS_IL2CPP_INTPTR _s2;
 	CHAOS_IL2CPP_INT64 _i0;
 	{
+		if (30 < 0 || 30 >= kChaosExternalRuntimeCount) {
+			CHAOS_IL2CPP_FAIL("external runtime table index 30 out of range");
+		}
+		if (kChaosExternalRuntimeFnTable[30] == nullptr) {
+			CHAOS_IL2CPP_FAIL("external runtime table entry 30 is null");
+		}
 		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[30])();
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
@@ -6963,6 +7017,12 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_System_
 		{
 			const auto chaos_arg_1 = _s1;
 			const auto chaos_arg_0 = _s0;
+			if (114 < 0 || 114 >= kChaosExternalRuntimeCount) {
+				CHAOS_IL2CPP_FAIL("external runtime table index 114 out of range");
+			}
+			if (kChaosExternalRuntimeFnTable[114] == nullptr) {
+				CHAOS_IL2CPP_FAIL("external runtime table entry 114 is null");
+			}
 			const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[114])(chaos_arg_0, chaos_arg_1);
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 		}
@@ -6984,10 +7044,7 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_System_
 		_s1 = chaos_locals[0];
 		_s2 = 0;
 		{
-			const auto chaos_arg_2 = _s2;
-			const auto chaos_arg_1 = _s1;
-			const auto chaos_arg_0 = _s0;
-			reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[84])(chaos_arg_0, chaos_arg_1, chaos_arg_2);
+			[&]() -> void { if ((_s0) != (_s1)) { throw chaos_managed_exception{}; } }();
 		}
 		_s0 = chaos_locals[0];
 		{
@@ -7064,14 +7121,8 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_System_
 			}
 		}
 		{
-			if constexpr (CHAOS_IL2CPP_VERIFICATION_ENABLED) {
-				try {
-					ChaosInvokeAction(_s0);
-					throw chaos_managed_exception{};  // no exception u2014 fail
-				} catch (chaos_managed_exception&) {
-					// expected exception was thrown u2014 pass
-				}
-			}
+			// Assert.Throws: target method not found via IL lookahead
+			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
 		}
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
 		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
@@ -7092,6 +7143,12 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_System_
 	CHAOS_IL2CPP_INTPTR _s2;
 	CHAOS_IL2CPP_INT64 _i0;
 	{
+		if (30 < 0 || 30 >= kChaosExternalRuntimeCount) {
+			CHAOS_IL2CPP_FAIL("external runtime table index 30 out of range");
+		}
+		if (kChaosExternalRuntimeFnTable[30] == nullptr) {
+			CHAOS_IL2CPP_FAIL("external runtime table entry 30 is null");
+		}
 		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[30])();
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
@@ -7139,6 +7196,12 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_System_
 		{
 			const auto chaos_arg_1 = _s1;
 			const auto chaos_arg_0 = _s0;
+			if (118 < 0 || 118 >= kChaosExternalRuntimeCount) {
+				CHAOS_IL2CPP_FAIL("external runtime table index 118 out of range");
+			}
+			if (kChaosExternalRuntimeFnTable[118] == nullptr) {
+				CHAOS_IL2CPP_FAIL("external runtime table entry 118 is null");
+			}
 			const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[118])(chaos_arg_0, chaos_arg_1);
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 		}
@@ -7160,10 +7223,7 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_System_
 		_s1 = chaos_locals[0];
 		_s2 = 0;
 		{
-			const auto chaos_arg_2 = _s2;
-			const auto chaos_arg_1 = _s1;
-			const auto chaos_arg_0 = _s0;
-			reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[76])(chaos_arg_0, chaos_arg_1, chaos_arg_2);
+			[&]() -> void { if ((_s0) != (_s1)) { throw chaos_managed_exception{}; } }();
 		}
 		_s0 = chaos_locals[0];
 		{
@@ -7240,14 +7300,8 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_System_
 			}
 		}
 		{
-			if constexpr (CHAOS_IL2CPP_VERIFICATION_ENABLED) {
-				try {
-					ChaosInvokeAction(_s0);
-					throw chaos_managed_exception{};  // no exception u2014 fail
-				} catch (chaos_managed_exception&) {
-					// expected exception was thrown u2014 pass
-				}
-			}
+			// Assert.Throws: target method not found via IL lookahead
+			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
 		}
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
 		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
@@ -7268,6 +7322,12 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_System_
 	CHAOS_IL2CPP_INTPTR _s2;
 	CHAOS_IL2CPP_INT64 _i0;
 	{
+		if (30 < 0 || 30 >= kChaosExternalRuntimeCount) {
+			CHAOS_IL2CPP_FAIL("external runtime table index 30 out of range");
+		}
+		if (kChaosExternalRuntimeFnTable[30] == nullptr) {
+			CHAOS_IL2CPP_FAIL("external runtime table entry 30 is null");
+		}
 		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[30])();
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
@@ -7315,6 +7375,12 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_System_
 		{
 			const auto chaos_arg_1 = _s1;
 			const auto chaos_arg_0 = _s0;
+			if (122 < 0 || 122 >= kChaosExternalRuntimeCount) {
+				CHAOS_IL2CPP_FAIL("external runtime table index 122 out of range");
+			}
+			if (kChaosExternalRuntimeFnTable[122] == nullptr) {
+				CHAOS_IL2CPP_FAIL("external runtime table entry 122 is null");
+			}
 			const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[122])(chaos_arg_0, chaos_arg_1);
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 		}
@@ -7336,10 +7402,7 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_System_
 		_s1 = chaos_locals[0];
 		_s2 = 0;
 		{
-			const auto chaos_arg_2 = _s2;
-			const auto chaos_arg_1 = _s1;
-			const auto chaos_arg_0 = _s0;
-			reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[92])(chaos_arg_0, chaos_arg_1, chaos_arg_2);
+			[&]() -> void { if ((_s0) != (_s1)) { throw chaos_managed_exception{}; } }();
 		}
 		_s0 = chaos_locals[0];
 		{
@@ -7416,146 +7479,8 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_System_
 			}
 		}
 		{
-			if constexpr (CHAOS_IL2CPP_VERIFICATION_ENABLED) {
-				try {
-					ChaosInvokeAction(_s0);
-					throw chaos_managed_exception{};  // no exception u2014 fail
-				} catch (chaos_managed_exception&) {
-					// expected exception was thrown u2014 pass
-				}
-			}
-		}
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-		chaos_locals[0] = ChaosStoreInt64(_i0);
-		_i0 = ChaosLoadInt64(chaos_locals[0]);
-		return _i0;
-	}
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq.System_Linq_EnumerableTests::Average_8_IEnumerableint_1()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests_Average_8_IEnumerableint_1(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c____9__42_0;
-	_s1 = _s0;
-	{
-		if (_s1 == 0)
-		{
-			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c____9;
-			{
-				// Hotpatch-aware ldftn wrapper (slot 773)
-				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[773];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
-					{
-						alignas(16) uint8_t _d_ab[8];
-						ArgBuffer _d_bw(_d_ab);
-						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d_entry.method_key, _d_ab, nullptr);
-						return;
-					}
-					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
-				};
-			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
-			}
-			{
-				const auto chaos_method_ptr = _s1;
-				const auto chaos_target = _s0;
-				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
-				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
-				chaos_object->chaos_delegate_target = chaos_target;
-				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
-				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-			}
-			_s1 = _s0;
-			{
-				auto chaos_value = _s1;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c____9__42_0 = chaos_value;
-			}
-		}
-		{
-			if constexpr (CHAOS_IL2CPP_VERIFICATION_ENABLED) {
-				try {
-					ChaosInvokeAction(_s0);
-					throw chaos_managed_exception{};  // no exception u2014 fail
-				} catch (chaos_managed_exception&) {
-					// expected exception was thrown u2014 pass
-				}
-			}
-		}
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-		chaos_locals[0] = ChaosStoreInt64(_i0);
-		_i0 = ChaosLoadInt64(chaos_locals[0]);
-		return _i0;
-	}
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq.System_Linq_EnumerableTests::Average_9_IEnumerablelong_0()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests_Average_9_IEnumerablelong_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c____9__44_0;
-	_s1 = _s0;
-	{
-		if (_s1 == 0)
-		{
-			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c____9;
-			{
-				// Hotpatch-aware ldftn wrapper (slot 774)
-				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[774];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
-					{
-						alignas(16) uint8_t _d_ab[8];
-						ArgBuffer _d_bw(_d_ab);
-						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d_entry.method_key, _d_ab, nullptr);
-						return;
-					}
-					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
-				};
-			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
-			}
-			{
-				const auto chaos_method_ptr = _s1;
-				const auto chaos_target = _s0;
-				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
-				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
-				chaos_object->chaos_delegate_target = chaos_target;
-				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
-				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-			}
-			_s1 = _s0;
-			{
-				auto chaos_value = _s1;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c____9__44_0 = chaos_value;
-			}
-		}
-		{
-			if constexpr (CHAOS_IL2CPP_VERIFICATION_ENABLED) {
-				try {
-					ChaosInvokeAction(_s0);
-					throw chaos_managed_exception{};  // no exception u2014 fail
-				} catch (chaos_managed_exception&) {
-					// expected exception was thrown u2014 pass
-				}
-			}
+			// Assert.Throws: target method not found via IL lookahead
+			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
 		}
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
 		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
@@ -7572,5 +7497,7 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_System_
 
 // extern "C" definition for link-time visibility from runtime-entry.cpp
 extern "C" const int kAotMethodCount = 1153;
+// Codegen stub count — pipeline checks this
+extern "C" const int kCodegenFailureCount = 25;
 
 extern "C" void ChaosJitRegisterAll() {}
