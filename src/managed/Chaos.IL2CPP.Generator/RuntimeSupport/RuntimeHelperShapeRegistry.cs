@@ -3934,7 +3934,7 @@ public sealed partial class NativeAotLoweringPlanner
                             if (cppType == null) return null;
                             var carrier = InferVectorCarrierType(callee);
                             if (carrier == null) return null;
-                            return $"chaos::il2cpp::vector_fixed::VectorFixedGetElement<{cppType}, {carrier}>({{0}}, {{1}})";
+                            return $"chaos::il2cpp::vector_fixed::VectorFixedGetElement<{cppType}, {carrier}>(*reinterpret_cast<{carrier}*>({{0}}), {{1}})";
                         }));
                     registry.RegisterInline(new InlineShapeDescriptor(
                         TypeDisplayNamePrefix: prefix,
