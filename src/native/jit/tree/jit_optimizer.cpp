@@ -408,7 +408,8 @@ static void UnrollLoops(
     const std::vector<uint32_t>& bb_starts,
     const std::vector<uint32_t>& bb_ends,
     const LoopAnalysis& analysis,
-    uint32_t& next_vreg) noexcept
+    uint32_t& next_vreg,
+    uint32_t unroll_factor = 4) noexcept
 {
     if (!analysis.has_loops) return;
 
@@ -425,10 +426,8 @@ static void UnrollLoops(
         if (body_len < 4) continue;  // too small to unroll
 
         // Identify the back-edge branch at the end of the header
-        // Look for Br, BrTrue, BrFalse, Beq, Blt, Bgt, Ble, Bge, etc.
-        // that targets a PC within the header range OR the same block
-        int32_t be_idx = -1;       // index of back-edge in out_instrs
-        uint32_t be_target = 0;    // branch target of back-edge
+        int32_t be_idx = -1;
+        uint32_t be_target = 0;
         bool is_cond_branch = false;
 
         for (int32_t i = static_cast<int32_t>(end) - 1; i >= static_cast<int32_t>(start); --i) {
@@ -442,10 +441,9 @@ static void UnrollLoops(
                     be_idx = i;
                     be_target = ri.imm.branch_target;
                     is_cond_branch = (oc != interpreter::IROpCode::Br);
-                    // Check if target is within the loop header (self-loop)
                     if (be_target >= start && be_target < end)
                         break;
-                    be_idx = -1;  // not a self-loop
+                    be_idx = -1;
                 }
             } else if (oc == interpreter::IROpCode::Blt ||
                        oc == interpreter::IROpCode::Ble ||
@@ -471,77 +469,109 @@ static void UnrollLoops(
         if (be_idx < 0) continue;
 
         // The body is from start to end, excluding back-edge instructions
-        // (the back-edge is the last instruction or last few instructions)
         uint32_t body_start = start;
         uint32_t body_end = static_cast<uint32_t>(be_idx);
 
         uint32_t body_instr_count = body_end - body_start;
         if (body_instr_count < 2) continue;
 
-        // For simplicity: unroll factor 2
-        // Copy body instructions with vreg remapping
-        // Map: original dst_vreg → new dst_vreg for copied instructions
-        // Track def → new_vreg so we can remap src uses within the copy
-        uint8_t vreg_map[256];  // original vreg → new vreg (0 = no remap)
-        std::fill_n(vreg_map, 256, 0);
+        // Safety: skip if total unrolled size exceeds threshold
+        // (200 instructions max after unrolling)
+        if (body_instr_count * unroll_factor > 200) continue;
 
-        // Remap dst_regs in the copy to fresh vregs
+        // Determine the effective max vreg referenced in the body
+        uint32_t body_max_vreg = 0;
         for (uint32_t i = body_start; i < body_end; ++i) {
             const auto& ri = out_instrs[i];
-            if (ri.has_dst()) {
-                uint8_t dst = ri.dst_reg();
-                if (dst > 0 && vreg_map[dst] == 0) {
-                    uint32_t new_vreg = next_vreg++;
-                    if (new_vreg < 256) {
-                        vreg_map[dst] = static_cast<uint8_t>(new_vreg);
+            if (ri.has_dst() && ri.dst_reg() > body_max_vreg)
+                body_max_vreg = ri.dst_reg();
+            if (ri.has_src1() && ri.src1_reg() > body_max_vreg)
+                body_max_vreg = ri.src1_reg();
+            if (ri.has_src2() && ri.src2_reg() > body_max_vreg)
+                body_max_vreg = ri.src2_reg();
+            uint32_t op = static_cast<uint32_t>(ri.imm.operand_index);
+            if (op > body_max_vreg)
+                body_max_vreg = op;
+        }
+        // +1 because vregs are 0-based
+        uint32_t map_size = body_max_vreg + 1;
+        if (map_size < 256) map_size = 256;
+
+        // Insert unrolled body copies before the back-edge branch
+        uint32_t copy_insert_point = static_cast<uint32_t>(be_idx);
+
+        for (uint32_t copy_num = 0; copy_num < unroll_factor - 1; ++copy_num) {
+            // Build fresh vreg map for this copy: original vreg → new vreg
+            // -1 means no remap (vreg stays the same)
+            std::vector<int32_t> vreg_map(map_size, -1);
+
+            // Remap dst_regs in the copy to fresh vregs
+            for (uint32_t i = body_start; i < body_end; ++i) {
+                const auto& ri = out_instrs[i];
+                if (ri.has_dst()) {
+                    uint8_t dst = ri.dst_reg();
+                    if (dst < map_size && vreg_map[dst] == -1) {
+                        vreg_map[dst] = static_cast<int32_t>(next_vreg++);
+                    }
+                }
+                // Also remap LdLoc operand_index if it references a def
+                if (ri.op_code() == interpreter::IROpCode::LdLoc ||
+                    ri.op_code() == interpreter::IROpCode::StLoc) {
+                    uint32_t op = static_cast<uint32_t>(ri.imm.operand_index);
+                    if (op < map_size && vreg_map[op] == -1) {
+                        vreg_map[op] = static_cast<int32_t>(next_vreg++);
                     }
                 }
             }
-        }
 
-        // Insert unrolled body copy before the back-edge branch
-        uint32_t copy_insert_point = static_cast<uint32_t>(be_idx);
+            // Copy body instructions with vreg remapping
+            for (uint32_t i = body_start; i < body_end; ++i) {
+                const auto& ri = out_instrs[i];
+                interpreter::RegisterInstruction copy_ri = ri;
 
-        for (uint32_t i = body_start; i < body_end; ++i) {
-            const auto& ri = out_instrs[i];
-            interpreter::RegisterInstruction copy_ri = ri;
+                // Remap dst
+                if (copy_ri.has_dst()) {
+                    uint8_t old_dst = copy_ri.dst_reg();
+                    int32_t new_dst = (old_dst < map_size) ? vreg_map[old_dst] : -1;
+                    if (new_dst > 0)
+                        copy_ri.header = (copy_ri.header & ~(0xFFull << 16)) |
+                            (static_cast<uint64_t>(static_cast<uint8_t>(new_dst)) << 16);
+                }
 
-            // Remap dst
-            if (copy_ri.has_dst()) {
-                uint8_t old_dst = copy_ri.dst_reg();
-                if (vreg_map[old_dst] != 0)
-                    copy_ri.header = (copy_ri.header & ~(0xFFull << 16)) |
-                        (static_cast<uint64_t>(vreg_map[old_dst]) << 16);
+                // Remap src1
+                if (copy_ri.has_src1()) {
+                    uint8_t old_src1 = copy_ri.src1_reg();
+                    int32_t new_src1 = (old_src1 < map_size) ? vreg_map[old_src1] : -1;
+                    if (new_src1 > 0)
+                        copy_ri.header = (copy_ri.header & ~(0xFFull << 24)) |
+                            (static_cast<uint64_t>(static_cast<uint8_t>(new_src1)) << 24);
+                }
+
+                // Remap src2
+                if (copy_ri.has_src2()) {
+                    uint8_t old_src2 = copy_ri.src2_reg();
+                    int32_t new_src2 = (old_src2 < map_size) ? vreg_map[old_src2] : -1;
+                    if (new_src2 > 0)
+                        copy_ri.header = (copy_ri.header & ~(0xFFull << 32)) |
+                            (static_cast<uint64_t>(static_cast<uint8_t>(new_src2)) << 32);
+                }
+
+                // Remap operand_index (LdLoc/StLoc vreg reference)
+                uint32_t old_op = static_cast<uint32_t>(copy_ri.imm.operand_index);
+                if (old_op < map_size) {
+                    int32_t new_op = vreg_map[old_op];
+                    if (new_op > 0)
+                        copy_ri.imm.operand_index = static_cast<uint32_t>(new_op);
+                }
+
+                out_instrs.insert(out_instrs.begin() + copy_insert_point, copy_ri);
+                copy_insert_point++;
             }
-
-            // Remap src1
-            if (copy_ri.has_src1()) {
-                uint8_t old_src1 = copy_ri.src1_reg();
-                if (vreg_map[old_src1] != 0)
-                    copy_ri.header = (copy_ri.header & ~(0xFFull << 24)) |
-                        (static_cast<uint64_t>(vreg_map[old_src1]) << 24);
-            }
-
-            // Remap src2
-            if (copy_ri.has_src2()) {
-                uint8_t old_src2 = copy_ri.src2_reg();
-                if (vreg_map[old_src2] != 0)
-                    copy_ri.header = (copy_ri.header & ~(0xFFull << 32)) |
-                        (static_cast<uint64_t>(vreg_map[old_src2]) << 32);
-            }
-
-            // Also remap operand_index if it's a LdLoc that refers to a remapped vreg
-            uint8_t old_op = static_cast<uint8_t>(copy_ri.imm.operand_index);
-            if (old_op != 0 && vreg_map[old_op] != 0)
-                copy_ri.imm.operand_index = vreg_map[old_op];
-
-            out_instrs.insert(out_instrs.begin() + copy_insert_point, copy_ri);
-            copy_insert_point++;
         }
 
         CHAOS_IL2CPP_LOG_DEBUG_M("jit",
-            "Unrolled loop: header=%u body=%u instrs factor=2 (trip count analysis not available)",
-            header, body_instr_count);
+            "Unrolled loop: header=%u body=%u instrs factor=%u (trip count analysis not available)",
+            header, body_instr_count, unroll_factor);
     }
 }
 
@@ -693,8 +723,18 @@ bool OptimizeWithTreeIR(
         IvStrengthReduce(out_instrs, bb_starts, bb_ends, loop_analysis,
                           max_vreg);
 
-        // 2c. Loop unrolling
-        UnrollLoops(out_instrs, bb_starts, bb_ends, loop_analysis, max_vreg);
+        // 2c. Loop unrolling (factor 4, or 8 for very small bodies)
+        {
+            uint32_t factor = 4;
+            // Estimate body size: scan loop headers for small bodies
+            for (const auto& l : loop_analysis.loops) {
+                if (l.blocks.size() == 1) {
+                    uint32_t est = bb_ends[l.header] - bb_starts[l.header];
+                    if (est < 8) { factor = 8; break; }
+                }
+            }
+            UnrollLoops(out_instrs, bb_starts, bb_ends, loop_analysis, max_vreg, factor);
+        }
     }
 
     return any_optimized;

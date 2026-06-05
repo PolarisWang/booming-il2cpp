@@ -366,6 +366,11 @@ private:
     // them after each runtime helper call.
     uint64_t caller_colored_mask_ = 0;
 
+    // Bitmask of FPR vregs colored to caller-saved XMM registers.
+    // Same strategy as caller_colored_mask_ but for XMM0-XMM5 on x64
+    // (V0-V7 on ARM64). EmitCallWithSpill reloads after each call.
+    uint64_t caller_fpr_colored_mask_ = 0;
+
     // LocAlloc: extra frame bytes (bump counter + reserve) when method uses LocAlloc.
     uint32_t localloc_extra_ = 0;
 
@@ -496,6 +501,11 @@ void NativeCodeGenerator::StoreFpr(uint8_t xmm_reg, uint32_t vreg) noexcept {
             if (colored_xmm != 0xFF) {
                 if (xmm_reg != colored_xmm)
                     enc_.EmitMovdqaRR(colored_xmm, xmm_reg);
+                // Caller-colored FPRs: write through to stack so the stack slot
+                // holds the correct value even if argument setup clobbers the
+                // colored register before EmitCallWithSpill's pre-call spill.
+                if (caller_fpr_colored_mask_ & (1ULL << fi))
+                    enc_.EmitMovdqaMR(AT::kStackReg, static_cast<int32_t>(FprOff(vreg)), colored_xmm);
                 return;
             }
         }
@@ -1137,6 +1147,16 @@ void NativeCodeGenerator::EmitCallWithSpill(uint8_t reg) noexcept {
                 enc_.EmitMovMR(AT::kStackReg, static_cast<int32_t>(GprOff(vr)), colored_x64);
             }
         }
+        // Spill colored FPRs (same logic: StoreFpr with graph coloring skips
+        // the stack write).  Caller-colored FPRs are excluded — StoreFpr
+        // already does write-through for them.
+        for (uint32_t fi = 0; fi < 32; ++fi) {
+            uint8_t colored_xmm = gcr_.fpr_color[fi];
+            if (colored_xmm != 0xFF) {
+                if (caller_fpr_colored_mask_ & (1ULL << fi)) continue;
+                enc_.EmitMovdqaMR(AT::kStackReg, static_cast<int32_t>(FprOff(kGprCount + fi)), colored_xmm);
+            }
+        }
     }
     enc_.EmitCallReg(reg);
     // Post-call reload: restore caller-saved colored vregs (R8-R11, colors 1-4)
@@ -1149,6 +1169,17 @@ void NativeCodeGenerator::EmitCallWithSpill(uint8_t reg) noexcept {
             if (mask & 1) {
                 uint8_t colored_x64 = gcr_.gpr_color[vr];
                 enc_.EmitMovRM(colored_x64, AT::kStackReg, static_cast<int32_t>(GprOff(vr)));
+            }
+            mask >>= 1;
+        }
+    }
+    // Post-call reload: restore caller-saved colored FPRs.
+    if (has_graph_coloring_ && caller_fpr_colored_mask_) {
+        uint64_t mask = caller_fpr_colored_mask_;
+        for (uint32_t fi = 0; mask; ++fi) {
+            if (mask & 1) {
+                uint8_t colored_xmm = gcr_.fpr_color[fi];
+                enc_.EmitMovdqaRM(colored_xmm, AT::kStackReg, static_cast<int32_t>(FprOff(kGprCount + fi)));
             }
             mask >>= 1;
         }
@@ -1178,6 +1209,14 @@ uint32_t NativeCodeGenerator::EmitRuntimeHelperCallImpl(void* target_fn) noexcep
                 enc_.EmitMovMR(AT::kStackReg, static_cast<int32_t>(GprOff(vr)), colored_x64);
             }
         }
+        // Spill colored FPRs (same logic: StoreFpr skips stack write).
+        for (uint32_t fi = 0; fi < 32; ++fi) {
+            uint8_t colored_xmm = gcr_.fpr_color[fi];
+            if (colored_xmm != 0xFF) {
+                if (caller_fpr_colored_mask_ & (1ULL << fi)) continue;
+                enc_.EmitMovdqaMR(AT::kStackReg, static_cast<int32_t>(FprOff(kGprCount + fi)), colored_xmm);
+            }
+        }
     }
     uint32_t call_start = buf_.pos();
     enc_.EmitCallRipRel(0);
@@ -1189,6 +1228,17 @@ uint32_t NativeCodeGenerator::EmitRuntimeHelperCallImpl(void* target_fn) noexcep
             if (mask & 1) {
                 uint8_t colored_x64 = gcr_.gpr_color[vr];
                 enc_.EmitMovRM(colored_x64, AT::kStackReg, static_cast<int32_t>(GprOff(vr)));
+            }
+            mask >>= 1;
+        }
+    }
+    // Post-call reload: restore caller-saved colored FPRs.
+    if (has_graph_coloring_ && caller_fpr_colored_mask_) {
+        uint64_t mask = caller_fpr_colored_mask_;
+        for (uint32_t fi = 0; mask; ++fi) {
+            if (mask & 1) {
+                uint8_t colored_xmm = gcr_.fpr_color[fi];
+                enc_.EmitMovdqaRM(colored_xmm, AT::kStackReg, static_cast<int32_t>(FprOff(kGprCount + fi)));
             }
             mask >>= 1;
         }
@@ -2666,6 +2716,14 @@ bool NativeCodeGenerator::EmitInstruction(const interpreter::RegisterInstruction
                     enc_.EmitMovMR(AT::kStackReg, static_cast<int32_t>(GprOff(vr)), colored_x64);
                 }
             }
+            // Spill colored FPRs (same logic: StoreFpr skips stack write).
+            for (uint32_t fi = 0; fi < 32; ++fi) {
+                uint8_t colored_xmm = gcr_.fpr_color[fi];
+                if (colored_xmm != 0xFF) {
+                    if (caller_fpr_colored_mask_ & (1ULL << fi)) continue;
+                    enc_.EmitMovdqaMR(AT::kStackReg, static_cast<int32_t>(FprOff(kGprCount + fi)), colored_xmm);
+                }
+            }
         }
         // Slot-based call: emit call [rip+0] placeholder, record SlotPatch.
         // The slot table is emitted after all instructions, before buf_.Seal().
@@ -2686,6 +2744,17 @@ bool NativeCodeGenerator::EmitInstruction(const interpreter::RegisterInstruction
                 if (mask & 1) {
                     uint8_t colored_x64 = gcr_.gpr_color[vr];
                     enc_.EmitMovRM(colored_x64, AT::kStackReg, static_cast<int32_t>(GprOff(vr)));
+                }
+                mask >>= 1;
+            }
+        }
+        // Post-call reload: restore caller-saved colored FPRs.
+        if (has_graph_coloring_ && caller_fpr_colored_mask_) {
+            uint64_t mask = caller_fpr_colored_mask_;
+            for (uint32_t fi = 0; mask; ++fi) {
+                if (mask & 1) {
+                    uint8_t colored_xmm = gcr_.fpr_color[fi];
+                    enc_.EmitMovdqaRM(colored_xmm, AT::kStackReg, static_cast<int32_t>(FprOff(kGprCount + fi)));
                 }
                 mask >>= 1;
             }
@@ -3374,7 +3443,7 @@ static void OptimizeInstructions(
         // (e2) Extended dead store: non-adjacent StLoc to same local (EBB-safe scan)
         if (opc == IROpCode::StLoc && ri.has_src1() && i > 0) {
             uint32_t local_idx = ri.imm.operand_index;
-            const uint32_t kMaxScan = 20;
+            const uint32_t kMaxScan = 50;
             for (uint32_t j = i; j > 0 && (i - j) < kMaxScan; --j) {
                 uint32_t idx = j - 1;
                 if (removed_mask[idx]) continue;
@@ -3505,7 +3574,7 @@ static void OptimizeInstructions(
             // (g3) Non-adjacent StLoc→LdLoc forwarding (single-use, EBB-safe)
             if (!removed_mask[i] && ldst < 64 && use_count[ldst] == 1 && i > 0) {
                 uint8_t local_vreg = ri.src1_reg();
-                const uint32_t kMaxScan = 20;
+                const uint32_t kMaxScan = 50;
                 // Scan backward for the defining StLoc
                 for (uint32_t j = i; j > 0 && (i - j) < kMaxScan; --j) {
                     uint32_t idx = j - 1;
@@ -3923,6 +3992,7 @@ JitMethod* NativeCodeGenerator::Generate() noexcept {
             num_cache_regs_ = 0;
             filtered_vreg_mask_ = 0;
             caller_colored_mask_ = 0;
+            caller_fpr_colored_mask_ = 0;
             for (uint32_t vr = 0; vr < kGprCount; ++vr) {
                 uint8_t x64r = gcr_.gpr_color[vr];
                 if (x64r != 0xFF) {
@@ -3986,7 +4056,10 @@ JitMethod* NativeCodeGenerator::Generate() noexcept {
                             gcr_.fpr_color[fi] = 0xFF;  // already claimed → spill
                         }
                     } else {
-                        gcr_.fpr_color[fi] = 0xFF;  // caller-saved → spill
+                        // Caller-saved FPR: keep the color assignment.
+                        // EmitCallWithSpill will reload from stack after each call.
+                        uint32_t fpr_vreg = fi;
+                        caller_fpr_colored_mask_ |= (1ULL << fpr_vreg);
                     }
                 }
             }
