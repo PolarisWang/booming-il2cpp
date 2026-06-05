@@ -41,5 +41,6 @@ extern "C" {
 #include "enum_stubs.h"
 #include "async_stubs.h"
 #include "web_stubs.h"
+#include "interop_stubs.h"
 
 }  // extern "C"

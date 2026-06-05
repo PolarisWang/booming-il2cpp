@@ -13,5 +13,8 @@ CHAOS_IL2CPP_INT32 ChaosMarshalGetLastPInvokeError(void) noexcept;
 CHAOS_IL2CPP_INT32 ChaosMarshalGetExceptionCode(void) noexcept;
 CHAOS_IL2CPP_INTPTR ChaosMarshalGetExceptionPointers(void) noexcept;
 
+// GetHRForLastWin32Error: converts last P/Invoke error to HRESULT
+CHAOS_IL2CPP_INT32 ChaosMarshalGetHRForLastWin32Error(void) noexcept;
+
 // COM cleanup check stub
 CHAOS_IL2CPP_INT32 ChaosMarshalAreComObjectsAvailableForCleanup(void) noexcept;
