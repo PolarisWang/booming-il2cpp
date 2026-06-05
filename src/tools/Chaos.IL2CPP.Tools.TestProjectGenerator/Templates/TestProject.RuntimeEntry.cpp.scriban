@@ -991,16 +991,16 @@ int main(int argc, char* argv[]) {
             // Parse SubjectId inline: "Assembly/Namespace.Type::MethodName(Params)"
             {
                 const char* _p = _sid;
-                if (const char* _slash = std::strchr(_p, "/")) {
+                if (const char* _slash = std::strchr(_p, '/')) {
                     _p = _slash + 1;
                     if (const char* _colon2 = strstr(_p, "::")) {
                         const char* _type_start = _p;
                         for (const char* _cp = _p; _cp < _colon2; ++_cp)
-                            if (*_cp == ".") _type_start = _cp + 1;
+                            if (*_cp == '.') _type_start = _cp + 1;
                         if (_type_start > _p) _ns.assign(_p, _type_start - _p - 1);
                         _type.assign(_type_start, _colon2 - _type_start);
                         _p = _colon2 + 2;
-                        if (const char* _paren = std::strchr(_p, "(")) {
+                        if (const char* _paren = std::strchr(_p, '(')) {
                             _method.assign(_p, _paren - _p);
                             auto _gt = _method.find("<");
                             if (_gt != std::string::npos) _method.resize(_gt);
