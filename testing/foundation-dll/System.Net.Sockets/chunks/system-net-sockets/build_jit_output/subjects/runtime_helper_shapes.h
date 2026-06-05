@@ -185,6 +185,10 @@ enum ShapeId : CHAOS_IL2CPP_UINT32 {
     SHAPE_SYSTEM_MATH_ROUND_SYSTEM_DOUBLE_SYSTEM_INT32 = 0xFDEE4C3Eu,
     SHAPE_SYSTEM_MATH_SIN_SYSTEM_DOUBLE = 0x448A2335u,
     SHAPE_SYSTEM_MATH_SQRT_SYSTEM_DOUBLE = 0x2F5B83E9u,
+    SHAPE_SYSTEM_NET_WEBUTILITY_HTMLDECODE_SYSTEM_STRING = 0x9B5606FBu,
+    SHAPE_SYSTEM_NET_WEBUTILITY_HTMLENCODE_SYSTEM_STRING = 0x423E555Fu,
+    SHAPE_SYSTEM_NET_WEBUTILITY_URLDECODE_SYSTEM_STRING = 0xA4F3B939u,
+    SHAPE_SYSTEM_NET_WEBUTILITY_URLENCODE_SYSTEM_STRING = 0x43891CB1u,
     SHAPE_SYSTEM_NUMERICS_BITOPERATIONS_CRC32C_SYSTEM_UINT32_SYSTEM_BYTE = 0x54F8A7DDu,
     SHAPE_SYSTEM_NUMERICS_BITOPERATIONS_CRC32C_SYSTEM_UINT32_SYSTEM_UINT16 = 0x2E082C86u,
     SHAPE_SYSTEM_NUMERICS_BITOPERATIONS_CRC32C_SYSTEM_UINT32_SYSTEM_UINT32 = 0xAC38CCB4u,
@@ -387,7 +391,7 @@ enum ShapeId : CHAOS_IL2CPP_UINT32 {
     SHAPE_VOLATILE_READ_SYSTEM_INT32_ = 0x779CC9A5u,
     SHAPE_VOLATILE_WRITE_SYSTEM_INT32__SYSTEM_INT32 = 0x6556008Du,
 
-    SHAPE_COUNT = 373u,
+    SHAPE_COUNT = 377u,
 };
 
 // ---- Compile-time dispatch: NativeInt-returning shapes ----
@@ -740,6 +744,22 @@ CHAOS_IL2CPP_INTPTR DispatchNativeInt(Args... args) {
     else if constexpr (S == SHAPE_SYSTEM_MATH_SQRT_SYSTEM_DOUBLE) {
         return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
             ChaosMathSqrt(args...));
+    }
+    else if constexpr (S == SHAPE_SYSTEM_NET_WEBUTILITY_HTMLDECODE_SYSTEM_STRING) {
+        return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+            ChaosWebUtilityHtmlDecode(args...));
+    }
+    else if constexpr (S == SHAPE_SYSTEM_NET_WEBUTILITY_HTMLENCODE_SYSTEM_STRING) {
+        return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+            ChaosWebUtilityHtmlEncode(args...));
+    }
+    else if constexpr (S == SHAPE_SYSTEM_NET_WEBUTILITY_URLDECODE_SYSTEM_STRING) {
+        return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+            ChaosWebUtilityUrlDecode(args...));
+    }
+    else if constexpr (S == SHAPE_SYSTEM_NET_WEBUTILITY_URLENCODE_SYSTEM_STRING) {
+        return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+            ChaosWebUtilityUrlEncode(args...));
     }
     else if constexpr (S == SHAPE_SYSTEM_NUMERICS_BITOPERATIONS_ROTATELEFT_SYSTEM_UINT64_SYSTEM_INT32) {
         return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
@@ -1847,7 +1867,7 @@ extern ShapeRuntimeEntry g_runtime_shape_entries[kMaxRuntimeShapeEntries];
 extern CHAOS_IL2CPP_UINT32 g_runtime_shape_count;
 
 // ---- Compile-time completeness verification ----
-static_assert(SHAPE_COUNT == 373u,
+static_assert(SHAPE_COUNT == 377u,
     "Number of registered shapes changed. Regenerate this header from RuntimeHelperShapeRegistry.");
 
 #pragma pack(pop)

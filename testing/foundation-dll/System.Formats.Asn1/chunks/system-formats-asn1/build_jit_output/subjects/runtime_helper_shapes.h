@@ -299,8 +299,6 @@ enum ShapeId : CHAOS_IL2CPP_UINT32 {
     SHAPE_SYSTEM_RUNTIME_INTEROPSERVICES_MARSHAL_CREATERCW_SYSTEM_INTPTR = 0x8A241412u,
     SHAPE_SYSTEM_RUNTIME_INTEROPSERVICES_MARSHAL_CUSTOMMARSHALERMANAGEDTONATIVE_SYSTEM_INTPTR_SYSTEM_INTPTR = 0x6F608E29u,
     SHAPE_SYSTEM_RUNTIME_INTEROPSERVICES_MARSHAL_CUSTOMMARSHALERNATIVETOMANAGED_SYSTEM_INTPTR_SYSTEM_INTPTR = 0x20C994A5u,
-    SHAPE_SYSTEM_RUNTIME_INTEROPSERVICES_MARSHAL_GETHRFORLASTWIN32ERROR = 0xF4D23258u,
-    SHAPE_SYSTEM_RUNTIME_INTEROPSERVICES_MARSHAL_GETLASTPINVOKEERROR = 0x169D5E92u,
     SHAPE_SYSTEM_RUNTIME_INTEROPSERVICES_MARSHAL_GETRCWUNKNOWN_SYSTEM_INTPTR = 0x5E278808u,
     SHAPE_SYSTEM_RUNTIME_INTEROPSERVICES_MARSHAL_RCWQUERYINTERFACE_SYSTEM_INTPTR_SYSTEM_INTPTR = 0x75E9F4DBu,
     SHAPE_SYSTEM_RUNTIME_INTEROPSERVICES_MARSHAL_RELEASERCW_SYSTEM_INTPTR = 0xA53F92ADu,
@@ -393,7 +391,7 @@ enum ShapeId : CHAOS_IL2CPP_UINT32 {
     SHAPE_VOLATILE_READ_SYSTEM_INT32_ = 0x779CC9A5u,
     SHAPE_VOLATILE_WRITE_SYSTEM_INT32__SYSTEM_INT32 = 0x6556008Du,
 
-    SHAPE_COUNT = 379u,
+    SHAPE_COUNT = 377u,
 };
 
 // ---- Compile-time dispatch: NativeInt-returning shapes ----
@@ -1790,14 +1788,6 @@ CHAOS_IL2CPP_INT32 DispatchInt32(Args... args) {
         return static_cast<CHAOS_IL2CPP_INT32>(
             MarshalCallDirectComMethod(args...));
     }
-    else if constexpr (S == SHAPE_SYSTEM_RUNTIME_INTEROPSERVICES_MARSHAL_GETHRFORLASTWIN32ERROR) {
-        return static_cast<CHAOS_IL2CPP_INT32>(
-            ChaosMarshalGetHRForLastWin32Error(args...));
-    }
-    else if constexpr (S == SHAPE_SYSTEM_RUNTIME_INTEROPSERVICES_MARSHAL_GETLASTPINVOKEERROR) {
-        return static_cast<CHAOS_IL2CPP_INT32>(
-            ChaosMarshalGetLastPInvokeError(args...));
-    }
     else if constexpr (S == SHAPE_SYSTEM_STRING_GET_LENGTH) {
         return static_cast<CHAOS_IL2CPP_INT32>(
             chaos_string_get_length(args...));
@@ -1877,7 +1867,7 @@ extern ShapeRuntimeEntry g_runtime_shape_entries[kMaxRuntimeShapeEntries];
 extern CHAOS_IL2CPP_UINT32 g_runtime_shape_count;
 
 // ---- Compile-time completeness verification ----
-static_assert(SHAPE_COUNT == 379u,
+static_assert(SHAPE_COUNT == 377u,
     "Number of registered shapes changed. Regenerate this header from RuntimeHelperShapeRegistry.");
 
 #pragma pack(pop)
