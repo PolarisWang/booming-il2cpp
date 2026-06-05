@@ -503,6 +503,9 @@ public sealed partial class NativeAotLoweringPlanner
     /// due to irreducible CFG (after interval analysis + node splitting).
     /// </summary>
     internal int PcDispatchCount;
+    internal int CodegenFailureCount;
+    internal Dictionary<string, int> CodegenFailureByType = new();
+    internal Dictionary<string, int> CodegenFailureByChunk = new();
 
     /// <summary>
     /// Maps unresolvable cross-assembly subjectId → index in kChaosExternalRuntimeFnTable.
@@ -1267,6 +1270,18 @@ extern ""C"" CHAOS_IL2CPP_INT32 RunNativeAot(CHAOS_IL2CPP_INT32 entryIndex) {{
             $"total={_tPhase5}ms|" +
             $"gc_before_tostring={gcMemBeforeToString / (1024 * 1024)}MB|" +
             $"ws_before_tostring={wbBeforeToString / (1024 * 1024)}MB");
+
+        // ── Codegen failure summary ──
+        if (CodegenFailureCount > 0)
+        {
+            Console.Error.WriteLine($"[CODGEN-FAIL] total={CodegenFailureCount} methods fell back to stubs");
+            Console.Error.WriteLine("[CODGEN-FAIL] by exception type:");
+            foreach (var kv in CodegenFailureByType.OrderByDescending(kv => kv.Value))
+                Console.Error.WriteLine($"  {kv.Value,5}x {kv.Key}");
+            Console.Error.WriteLine("[CODGEN-FAIL] by chunk (SubjectId prefix):");
+            foreach (var kv in CodegenFailureByChunk.OrderByDescending(kv => kv.Value))
+                Console.Error.WriteLine($"  {kv.Value,5}x {kv.Key}");
+        }
 
         // Store the ObjectModelCode as either a string (for Scriban path) or as
         // a StringBuilder reference (for the direct builder path, avoiding a 3+ GB
@@ -2375,6 +2390,19 @@ extern ""C"" CHAOS_IL2CPP_INT32 RunNativeAot(CHAOS_IL2CPP_INT32 entryIndex) {{
         {
             var msg = $"[codegen] WARNING: codegen failed for {method.SubjectId}, emitting stub. Root cause: {ex.GetType().Name}: {ex.Message}";
             Console.Error.WriteLine(msg);
+            CodegenFailureCount++;
+            var exType = ex.GetType().Name;
+            lock (CodegenFailureByType)
+            {
+                CodegenFailureByType.TryGetValue(exType, out var ct);
+                CodegenFailureByType[exType] = ct + 1;
+            }
+            var chunk = method.SubjectId?.Split('/').FirstOrDefault() ?? "unknown";
+            lock (CodegenFailureByChunk)
+            {
+                CodegenFailureByChunk.TryGetValue(chunk, out var cc);
+                CodegenFailureByChunk[chunk] = cc + 1;
+            }
             return BuildAotUnreachableMethodStub(method);
         }
     }
