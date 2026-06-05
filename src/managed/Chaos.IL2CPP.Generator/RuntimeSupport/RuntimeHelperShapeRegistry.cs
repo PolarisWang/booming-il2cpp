@@ -3676,7 +3676,7 @@ public sealed partial class NativeAotLoweringPlanner
 
                 // VectorFixedGetElement returns a scalar, not a carrier
                 if (templateFn == "VectorFixedGetElement")
-                    return $"static_cast<CHAOS_IL2CPP_INTPTR>({ns}VectorFixedGetElement<{cppType}, {carrier}>({Deref(0)}, static_cast<CHAOS_IL2CPP_INT32>({{1}})))";
+                    return $"static_cast<CHAOS_IL2CPP_INTPTR>({ns}VectorFixedGetElement<{cppType}, {carrier}>(*reinterpret_cast<{carrier}*>({{0}}), static_cast<CHAOS_IL2CPP_INT32>({{1}})))";
 
                 // VectorFixedBroadcast (get_Zero / AllBitsSet) — no vector params
                 if (templateFn == "VectorFixedBroadcast" && paramTypes.Count == 0)
@@ -3860,7 +3860,7 @@ public sealed partial class NativeAotLoweringPlanner
                             if (cppType == null) return null;
                             var carrier = InferVectorCarrierType(callee);
                             if (carrier == null) return null;
-                            return $"chaos::il2cpp::vector_fixed::VectorFixedBroadcast<{cppType}, {carrier}>(static_cast<{cppType}>(0))";
+                            return $"[&]() -> CHAOS_IL2CPP_INTPTR {{ auto __r = chaos::il2cpp::vector_fixed::VectorFixedBroadcast<{cppType}, {carrier}>(static_cast<{cppType}>(0)); auto* __p = (decltype(__r)*)std::malloc(sizeof(__r)); *__p = __r; return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(__p); }}()";
                         }));
                 }
             }
@@ -3881,7 +3881,7 @@ public sealed partial class NativeAotLoweringPlanner
                             if (cppType == null) return null;
                             var carrier = InferVectorCarrierType(callee);
                             if (carrier == null) return null;
-                            return $"chaos::il2cpp::vector_fixed::VectorFixedBroadcast<{cppType}, {carrier}>(~static_cast<{cppType}>(0))";
+                            return $"[&]() -> CHAOS_IL2CPP_INTPTR {{ auto __r = chaos::il2cpp::vector_fixed::VectorFixedBroadcast<{cppType}, {carrier}>(~static_cast<{cppType}>(0)); auto* __p = (decltype(__r)*)std::malloc(sizeof(__r)); *__p = __r; return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(__p); }}()";
                         }));
                 }
             }
@@ -3941,7 +3941,7 @@ public sealed partial class NativeAotLoweringPlanner
                             if (cppType == null) return null;
                             var carrier = InferVectorCarrierType(callee);
                             if (carrier == null) return null;
-                            return $"chaos::il2cpp::vector_fixed::VectorFixedGetElement<{cppType}, {carrier}>({{0}}, 0)";
+                            return $"chaos::il2cpp::vector_fixed::VectorFixedGetElement<{cppType}, {carrier}>(*reinterpret_cast<{carrier}*>({{0}}), 0)";
                         }));
                 }
             }
