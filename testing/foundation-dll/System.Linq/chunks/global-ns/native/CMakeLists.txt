@@ -102,6 +102,20 @@ set(CHAOS_MATH_STUBS
 set(CHAOS_SIMD_STUBS
     "${CHAOS_SDK_DIR}/runtime_stubs/simd_stubs.cpp"
 )
+set(CHAOS_MISC_STUBS
+    "${CHAOS_SDK_DIR}/runtime_stubs/misc_stubs.cpp"
+)
+set(CHAOS_INTEROP_STUBS
+    "${CHAOS_SDK_DIR}/runtime_stubs/interop_stubs.cpp"
+)
+set(CHAOS_EXCEPTION_STUBS
+    "${CHAOS_SDK_DIR}/runtime_stubs/exception_stubs.cpp"
+)
+# hotpatch_table.cpp — compiled locally so the entry has the latest
+# SetPatchedBySlot (the prebuilt chaos_runtime_core.lib may be stale).
+set(CHAOS_HOTPATCH_TABLE
+    "${CHAOS_PROJECT_ROOT}/src/native/runtime-core/hotpatch_table.cpp"
+)
 
 set(CHAOS_ENTRY_SOURCES
     "runtime-entry.cpp"
@@ -112,6 +126,10 @@ set(CHAOS_ENTRY_SOURCES
     ${CHAOS_ARRAY_STUBS}
     ${CHAOS_MATH_STUBS}
     ${CHAOS_SIMD_STUBS}
+    ${CHAOS_MISC_STUBS}
+    ${CHAOS_INTEROP_STUBS}
+    ${CHAOS_EXCEPTION_STUBS}
+    ${CHAOS_HOTPATCH_TABLE}
     ${CHAOS_AOT_GENERATED_CPP}
 )
 
@@ -145,7 +163,13 @@ target_link_libraries(chaos_entry PRIVATE chaos::runtime
     "$<$<CXX_COMPILER_ID:MSVC>:${CHAOS_SDK_DIR}/lib/chaos_pal.lib>"
     "$<$<NOT:$<CXX_COMPILER_ID:MSVC>>:${CHAOS_SDK_DIR}/lib/libchaos_pal.a>"
 )
+# MSVC: chaos_hot_update.lib references SetPatchedBySlot from
+# chaos_runtime_core.lib. /WHOLEARCHIVE forces MSVC to include ALL
+# objects from the runtime core lib, not just those needed by the
+# first pass (MSVC processes static libs left-to-right without rescan).
 if(MSVC)
   target_link_libraries(chaos_entry PRIVATE bcrypt)
+  target_link_options(chaos_entry PRIVATE "/WHOLEARCHIVE:${CHAOS_SDK_DIR}/lib/chaos_runtime_core.lib")
+
 endif()
 target_link_options(chaos_entry PRIVATE ${CHAOS_FORCE_MULTIPLE})

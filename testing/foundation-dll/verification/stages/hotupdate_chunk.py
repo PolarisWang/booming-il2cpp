@@ -446,7 +446,7 @@ def run_hotupdate_chunk(ctx: ChunkContext, stages: dict[str, StageResult]) -> St
     ctx.results_dir.mkdir(parents=True, exist_ok=True)
     result_path = ctx.results_dir / "hotupdate.json"
     result_data = {
-        "exitCode": r.returncode,
+        "exitCode": getattr(r, 'returncode', r.get('exitCode', 0)) if isinstance(r, dict) else r.returncode,
         "passed": passed,
         "failed": failed,
         "assertFailed": assert_failed,
@@ -493,7 +493,7 @@ def run_hotupdate_chunk(ctx: ChunkContext, stages: dict[str, StageResult]) -> St
             status = "skipped_patch_failed"
         elif passed > 0:
             status = "skipped_no_patch"
-        elif passed == 0 and r.returncode == 0:
+        elif passed == 0 and (r.returncode if hasattr(r, 'returncode') else r.get('exitCode', 0)) == 0:
             status = "skipped_no_subjects"
         else:
             status = "passed" if failed == 0 and passed > 0 else "failed"

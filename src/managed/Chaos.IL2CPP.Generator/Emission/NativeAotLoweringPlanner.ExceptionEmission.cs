@@ -2827,7 +2827,8 @@ private void EmitLinearInitObj(StringBuilder builder, AotCoreIrInstructionArtifa
 
 		InvocationTarget invocationTarget = ResolveDirectInvocationTarget(instruction);
 		// IL-level inlining: expand small callee bodies directly at call site.
-		if (invocationTarget.TargetSymbol != null)
+		// Skip if an InlineCppExpression is already set (higher priority shape expansion).
+		if (invocationTarget.TargetSymbol != null && invocationTarget.InlineCppExpression == null)
 		{
 			if (TryInlineAtCallSite(builder, instruction, invocationTarget, indentation))
 				return;

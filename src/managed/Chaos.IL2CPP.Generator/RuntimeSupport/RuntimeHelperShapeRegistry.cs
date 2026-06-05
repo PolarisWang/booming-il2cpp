@@ -432,6 +432,9 @@ public sealed partial class NativeAotLoweringPlanner
         {
             var registry = new RuntimeHelperShapeRegistry();
 
+            // CACHE_BUSTER_MARKER_8u3k1  ← delete this line after verification
+            // CACHE_BUSTER_END_8u3k1
+
             // ── Marshal interop stubs (registered early, before IL method size cutoff) ──
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "System.Runtime.InteropServices.Marshal",
@@ -515,6 +518,14 @@ public sealed partial class NativeAotLoweringPlanner
                         new HashSet<int>(Enumerable.Range(0, abiSlots.Count)));
                 }));
 
+            // Delegate remaining ~7700 registrations to a helper method
+            // to stay within the CLR 64KB IL method size limit.
+            RegisterCoreStubs(registry);
+            return registry;
+        }
+
+        private static void RegisterCoreStubs(RuntimeHelperShapeRegistry registry)
+        {
             // === String operations ===
             registry.Register("System.String", "Concat", ["System.String", "System.String"],
                 ShapeKind.SimpleForward, "ChaosReflectionConcatStringPairValues",
@@ -8255,7 +8266,7 @@ public sealed partial class NativeAotLoweringPlanner
             // Requires recognizing the callvirt Invoke delegate pattern and
             // emitting a direct try/catch with type check.
 
-            return registry;
+            return;
         }
 
         private static string GetTypeDisplayNameFromSubjectId(string subjectId)
