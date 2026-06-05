@@ -479,6 +479,66 @@ public sealed partial class NativeAotLoweringPlanner
                         EmptyRawArgumentIndices);
                 }));
 
+            // ── Marshal simple ICALL stubs (GenericShapeDescriptor for interop_stubs.cpp) ──
+            registry.RegisterGeneric(new GenericShapeDescriptor(
+                TypeDisplayNamePrefix: "System.Runtime.InteropServices.Marshal",
+                MethodName: "SetLastPInvokeError",
+                Resolver: static (planner, callee, typeArgs) =>
+                {
+                    var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
+                    var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_VOID", symbol,
+                        "CHAOS_IL2CPP_INT32 chaos_arg_0",
+                    [
+                        "    ChaosMarshalSetLastPInvokeError(chaos_arg_0);",
+                    ]);
+                    return new GenericShapeResolution(src, symbol,
+                        new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(CreateInt32AbiSlot()),
+                        CreateVoidAbiSlot(),
+                        new HashSet<int> { 0 });
+                }));
+            registry.RegisterGeneric(new GenericShapeDescriptor(
+                TypeDisplayNamePrefix: "System.Runtime.InteropServices.Marshal",
+                MethodName: "GetExceptionCode",
+                Resolver: static (planner, callee, typeArgs) =>
+                {
+                    var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
+                    var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INT32", symbol, "", [
+                        "    return ChaosMarshalGetExceptionCode();",
+                    ]);
+                    return new GenericShapeResolution(src, symbol,
+                        Array.Empty<AotCoreIrAbiSlotArtifact>(),
+                        CreateInt32AbiSlot(),
+                        EmptyRawArgumentIndices);
+                }));
+            registry.RegisterGeneric(new GenericShapeDescriptor(
+                TypeDisplayNamePrefix: "System.Runtime.InteropServices.Marshal",
+                MethodName: "GetExceptionPointers",
+                Resolver: static (planner, callee, typeArgs) =>
+                {
+                    var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
+                    var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol, "", [
+                        "    return ChaosMarshalGetExceptionPointers();",
+                    ]);
+                    return new GenericShapeResolution(src, symbol,
+                        Array.Empty<AotCoreIrAbiSlotArtifact>(),
+                        CreateNativeIntAbiSlot(),
+                        EmptyRawArgumentIndices);
+                }));
+            registry.RegisterGeneric(new GenericShapeDescriptor(
+                TypeDisplayNamePrefix: "System.Runtime.InteropServices.Marshal",
+                MethodName: "AreComObjectsAvailableForCleanup",
+                Resolver: static (planner, callee, typeArgs) =>
+                {
+                    var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
+                    var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INT32", symbol, "", [
+                        "    return ChaosMarshalAreComObjectsAvailableForCleanup();",
+                    ]);
+                    return new GenericShapeResolution(src, symbol,
+                        Array.Empty<AotCoreIrAbiSlotArtifact>(),
+                        CreateInt32AbiSlot(),
+                        EmptyRawArgumentIndices);
+                }));
+
             // ── Dictionary<K,V>::TryAdd (smoke-test stub) ──
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "System.Collections.Generic.Dictionary",

@@ -747,6 +747,22 @@ public sealed partial class NativeAotLoweringPlanner
                         forcedCount++;
                 }
             }
+            // Also force-include subject methods with 0 instructions. These are
+            // CombinedSubjects wrappers whose C# body was optimized away or whose
+            // compilation produced empty IL (e.g., methods with only Assert.Throws
+            // where the VERIFY-enabled body was reduced to nothing).  Without this,
+            // they get a CHAOS_IL2CPP_FAIL stub that aborts at runtime.
+            foreach (var m in methodsForLowering)
+            {
+                if (_subjectMethodSubjectIds.Contains(m.SubjectId) && m.Instructions.Count == 0)
+                {
+                    if (aotReachableSubjectIds.Add(m.SubjectId))
+                    {
+                        forcedCount++;
+                        Console.Error.WriteLine($"[SUBJECT-EMPTY] {m.SubjectId} has 0 IL instructions — will emit return-only body");
+                    }
+                }
+            }
             if (forcedCount > 0)
             {
                 Console.WriteLine($"[subject-methods] force-included {forcedCount} dispatch-visible method(s) into AOT reachable set");

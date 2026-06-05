@@ -334,7 +334,9 @@ static int RunFactJsonMode() {
 
 #if defined(_WIN32)
     CHAOS_FACT_RESET();
+{{ if is_jit }}
     void* g_fact_veh = AddVectoredExceptionHandler(1, FactVehHandler);
+{{ end }}
     // Use a worker thread with 300s timeout so a hanging dispatch (infinite
     // loop, deadlock) doesn't block the process forever.  On timeout the
     // process is killed; whatever was flushed to stdout is the partial result.
@@ -377,7 +379,7 @@ static int RunFactJsonMode() {
         printf("]}\n");
         std::fflush(stdout);
         CHAOS_FACT_CHECK();
-        RemoveVectoredExceptionHandler(g_fact_veh);
+        RemoveVectoredExceptionHandler(g_veh);
         return 0;
     }, nullptr, 0, nullptr);
 
@@ -839,6 +841,8 @@ static int RunHotupdateMode(const char* patchDataPath = nullptr) {
     return 0;
 }
 
+extern void ParseSubjectIdForHotpatchLookup(const char*, std::string&, std::string&, std::string&) noexcept;
+
 static int RunMicrobenchMode() {
     RunMicrobench();
     return 0;
@@ -982,7 +986,26 @@ int main(int argc, char* argv[]) {
             // Look up the hotpatch name registry and update direct_ptr
             auto& _registry = chaos::il2cpp::runtime_core::GetHotpatchNameRegistry();
             std::string _ns, _type, _method;
-            chaos::il2cpp::runtime_core::ParseSubjectIdForHotpatchLookup(_sid, _ns, _type, _method);
+            // Parse SubjectId inline: "Assembly/Namespace.Type::MethodName(Params)"
+            {
+                const char* _p = _sid;
+                if (const char* _slash = std::strchr(_p, "/")) {
+                    _p = _slash + 1;
+                    if (const char* _colon2 = strstr(_p, "::")) {
+                        const char* _type_start = _p;
+                        for (const char* _cp = _p; _cp < _colon2; ++_cp)
+                            if (*_cp == ".") _type_start = _cp + 1;
+                        if (_type_start > _p) _ns.assign(_p, _type_start - _p - 1);
+                        _type.assign(_type_start, _colon2 - _type_start);
+                        _p = _colon2 + 2;
+                        if (const char* _paren = std::strchr(_p, "(")) {
+                            _method.assign(_p, _paren - _p);
+                            auto _gt = _method.find("<");
+                            if (_gt != std::string::npos) _method.resize(_gt);
+                        }
+                    }
+                }
+            }
             if (_type.empty() || _method.empty()) continue;
             uint64_t _result = _registry.LookupMethod(_ns.c_str(), _type.c_str(), _method.c_str());
             if (_result == 0) continue;
