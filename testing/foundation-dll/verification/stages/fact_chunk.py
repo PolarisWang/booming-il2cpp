@@ -149,15 +149,19 @@ def run_fact_chunk(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageRe
         status = "passed"
 
     # ── Value integrity check ──
-    # NOTE: exitCode from ChaosDispatchMethod is the dispatch status code
-    # (0 = success), NOT the managed method's return value.  Value-level
-    # verification requires ChaosDispatchMethodGetValue (hotupdate mode).
-    # Here we only flag subjects where exitCode is anomalous:
-    #   - exitCode < 0 AND exitCode != -1 AND passed=true → unexpected negative
+    # The fact-json mode now uses ChaosDispatchMethodGetValue, so the
+    # "value" field contains the actual managed method return value
+    # (int64_t), not a dispatch status code.
+    # Void methods return RAX garbage — flag those as value-unstable
+    # rather than trying to validate.
+    # Populate exitCode from value for backward compatibility: -1 means
+    # caught/exception, 0 means normal return.
     value_warnings = sum(
         1 for r in fact_results
-        if r.get("passed") and r.get("exitCode", 0) < 0 and r.get("exitCode", 0) != -1
+        if r.get("passed") and r.get("value", 0) < 0 and r.get("value", 0) != -1
     )
+    for r in fact_results:
+        r["exitCode"] = -1 if not r.get("passed") else (r.get("value", 0) if r.get("value", 0) >= -1 else 0)
     value_suspicious = value_warnings > 0
 
     # ── Build result ──

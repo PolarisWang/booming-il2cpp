@@ -133,26 +133,26 @@ static int RunFactJsonMode() {
     bool first = true;
     for (int si = 0; si < kCount; si++) {
         int i = kSubjectSlotMap[si];
-        CHAOS_IL2CPP_INT32 result = 0;
+        int64_t result = 0;
         bool caught = false;
 {% if is_jit %}
         try {
-            result = chaos::il2cpp::runtime_core::ChaosDispatchMethod(
+            result = chaos::il2cpp::runtime_core::ChaosDispatchMethodGetValue(
                 GetHotpatchEntries(), kAotMethodCount, i, CHAOS_USE_DEFAULT_THUNKS);
         } catch(...) {
             caught = true;
         }
 {% else %}
         CHAOS_EH_TRY
-            result = chaos::il2cpp::runtime_core::ChaosDispatchMethod(
+            result = chaos::il2cpp::runtime_core::ChaosDispatchMethodGetValue(
                 GetHotpatchEntries(), kAotMethodCount, i, CHAOS_USE_DEFAULT_THUNKS);
         CHAOS_EH_CATCH_BEGIN
             caught = true;
         CHAOS_EH_END
 {% end %}
         if (!first) printf(",");
-        printf("{\"si\":%d,\"methodIndex\":%d,\"passed\":%s,\"exitCode\":%d}",
-               si, i, caught ? "false" : "true", caught ? -1 : (int)result);
+        printf("{\"si\":%d,\"methodIndex\":%d,\"passed\":%s,\"value\":%" PRId64 "}",
+               si, i, caught ? "false" : "true", caught ? -1 : result);
         first = false;
     }
     printf("]}\n");
