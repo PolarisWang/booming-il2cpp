@@ -2,10 +2,10 @@
 
 // exception_stubs.cpp — Exception helper stub implementations
 #include <chaos/native_types.h>
-#include "generated_code_compat.h"
+#include <chaos/type_info.h>
 #include <chaos/log.h>
-
-namespace chaos::il2cpp::runtime_core {
+#include "generated_code_compat.h"  // ThinLockableHeader
+#include "runtime_stubs/exception_stubs.h"
 
 CHAOS_IL2CPP_INTPTR ChaosExceptionGetBaseException(CHAOS_IL2CPP_INTPTR exc) noexcept
 {
@@ -34,4 +34,3 @@ CHAOS_IL2CPP_INTPTR ChaosRuntimewrappedGetWrappedException(CHAOS_IL2CPP_INTPTR e
     return exc;
 }
 
-}  // namespace chaos::il2cpp::runtime_core

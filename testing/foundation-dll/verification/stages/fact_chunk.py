@@ -86,6 +86,21 @@ def run_fact_chunk(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageRe
     passed = sum(1 for r in fact_results if r.get("passed"))
     total = len(fact_results)
 
+    # ── Parse assertion failure messages from stderr ──
+    # Assert.Fail() writes "[ASSERT FAIL] ..." to stderr for each failure.
+    # Map them to failing subjects by order (Nth stderr line = Nth failure).
+    assert_messages: list[str] = []
+    if stderr:
+        for line in stderr.splitlines():
+            if "[ASSERT FAIL]" in line:
+                msg = line[line.index("[ASSERT FAIL]") + 14:].strip()
+                assert_messages.append(msg)
+    fail_idx = 0
+    for r in fact_results:
+        if not r.get("passed") and fail_idx < len(assert_messages):
+            r["message"] = assert_messages[fail_idx]
+            fail_idx += 1
+
     # ── Metadata cross-check (advisory only) ──
     # The metadata declares totalMethods = all entries (fact + benchmark + hotupdate).
     # Codegen may produce fewer subjects (e.g. when some methods fail lowering),

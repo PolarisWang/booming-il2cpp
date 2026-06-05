@@ -48,6 +48,16 @@ CHAOS_IL2CPP_INTPTR ChaosMarshalGetExceptionPointers(void) noexcept
     return 0;
 }
 
+// ── GetHRForLastWin32Error ──────────────────────────────────
+// Converts the last P/Invoke error to an HRESULT.
+// .NET semantics: error <= 0 ? error : (error & 0x0000FFFF) | 0x80070000
+CHAOS_IL2CPP_INT32 ChaosMarshalGetHRForLastWin32Error(void) noexcept
+{
+    auto* ts = GetCurrentThreadState();
+    auto error = GetLastPInvokeError(ts);
+    return error <= 0 ? error : (error & 0x0000FFFF) | static_cast<CHAOS_IL2CPP_INT32>(0x80070000);
+}
+
 // ── COM cleanup check stub ────────────────────────────────────
 // The runtime has no COM-visible RCW tracking in AOT mode,
 // so no objects are pending cleanup.

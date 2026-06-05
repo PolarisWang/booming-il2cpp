@@ -93,6 +93,10 @@ extern "C" BenchmarkResult RunBenchmark(int entry_index, int iterations);
 extern "C" CHAOS_IL2CPP_INT32 RunHotpatchAll();
 extern "C" BenchmarkResult RunHotpatchBenchmark(int entry_index, int iterations);
 
+// Assert lifecycle functions (from Chaos.TestFramework.Sdk via external runtime table)
+extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Reset();
+extern "C" CHAOS_IL2CPP_INT32 Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Complete();
+
 // Per-method host arrays for ApplyPatchFromMemoryEx (defined in patch-host-arrays.cpp).
 // Sentinel values when no patch data is embedded; replaced by the hotupdate pipeline
 // with real per-method mappings to enable name-based lookup in HotpatchNameRegistry.
@@ -244,10 +248,12 @@ static int RunFactMode() {
     int failed_count = kCount - passed_count;
     printf("Passed: %d/%d\n", passed_count, kCount);
     std::fflush(stdout);
-    return failed_count;
-}
+    	return failed_count;
+	}
 
-// ── --fact-json: per-method JSON output (R1+R2: value-level verification) ──
+	// ── FACT_CHECK macros ──
+	// Must be defined before RunFactJsonMode (uses them).
+	// ── --fact-json: per-method JSON output (R1+R2: value-level verification) ──
 // Iterates only subject entries (kSubjectEntryCount) via kSubjectSlotMap, not
 // all AOT-compiled methods (kAotMethodCount).  Closure/framework methods may
 // access uninitialized runtime state and cause uncatchable access violations;
@@ -256,7 +262,24 @@ static int RunFactMode() {
 static int RunFactJsonMode() {
     const int kCount = kSubjectEntryCount;
 
+    // Reset the managed assertion state before the fact loop so that
+    // s_exitCode from previous runs is cleared.  After dispatch, check
+    // Complete() as a backstop for assertion failures that may not have
+    // propagated as C++ exceptions (e.g. codegen-inlined assertion paths).
+#ifndef CHAOS_IL2CPP_JIT_MODE
+#define CHAOS_FACT_RESET()   Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Reset()
+#define CHAOS_FACT_CHECK()   do { \
+    if (Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Complete() != 0) { \
+        std::fprintf(stderr, "[ASSERT] s_exitCode was non-zero after fact loop\n"); \
+    } \
+} while(0)
+#else
+#define CHAOS_FACT_RESET()   ((void)0)
+#define CHAOS_FACT_CHECK()   ((void)0)
+#endif
+
 #if defined(_WIN32)
+    CHAOS_FACT_RESET();
     // Use a worker thread with 300s timeout so a hanging dispatch (infinite
     // loop, deadlock) doesn't block the process forever.  On timeout the
     // process is killed; whatever was flushed to stdout is the partial result.
@@ -298,6 +321,7 @@ static int RunFactJsonMode() {
         }
         printf("]}\n");
         std::fflush(stdout);
+        CHAOS_FACT_CHECK();
         return 0;
     }, nullptr, 0, nullptr);
 
@@ -331,6 +355,7 @@ static int RunFactJsonMode() {
     }
     printf("]}\n");
     std::fflush(stdout);
+    CHAOS_FACT_CHECK();
     return 0;
 #endif
 }

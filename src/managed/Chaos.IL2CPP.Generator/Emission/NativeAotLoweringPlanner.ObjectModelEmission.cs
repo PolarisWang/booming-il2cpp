@@ -531,7 +531,7 @@ public sealed partial class NativeAotLoweringPlanner
 			{
 				StringBuilder stringBuilder = builder;
 				StringBuilder.AppendInterpolatedStringHandler handler = new StringBuilder.AppendInterpolatedStringHandler(28, 2, stringBuilder);
-				handler.AppendLiteral("inline MethodTable ");
+				handler.AppendLiteral("MethodTable ");
 				handler.AppendFormatted(GetNativeMethodTableSymbol(item3));
 				handler.AppendLiteral(" = {nullptr, nullptr, ");
 				handler.AppendFormatted(stableId.ToString() + "ULL");
@@ -676,7 +676,7 @@ public sealed partial class NativeAotLoweringPlanner
 					    flags |= 0x04; // kTypeInfoHasFinalizer
 				_vtableLengths.TryGetValue(item, out int vtLen);
 				// MethodTable = hot(32B) + warm(32B) flat initializer
-				handler.AppendLiteral("inline MethodTable ");
+				handler.AppendLiteral("MethodTable ");
 				handler.AppendFormatted(GetNativeMethodTableSymbol(item));
 				handler.AppendLiteral(" = {");
 				handler.AppendFormatted(parentExpr);
@@ -716,7 +716,7 @@ public sealed partial class NativeAotLoweringPlanner
 			{
 				StringBuilder stringBuilder = builder;
 				StringBuilder.AppendInterpolatedStringHandler handler = new StringBuilder.AppendInterpolatedStringHandler(28, 2, stringBuilder);
-				handler.AppendLiteral("inline MethodTable ");
+				handler.AppendLiteral("MethodTable ");
 				handler.AppendFormatted(GetNativeMethodTableSymbol(item2));
 				handler.AppendLiteral(" = {nullptr, nullptr, ");
 				handler.AppendFormatted(stableId.ToString() + "ULL");
@@ -813,7 +813,7 @@ public sealed partial class NativeAotLoweringPlanner
 			{
 				StringBuilder stringBuilder = builder;
 				StringBuilder.AppendInterpolatedStringHandler handler = new StringBuilder.AppendInterpolatedStringHandler(28, 2, stringBuilder);
-				handler.AppendLiteral("inline MethodTable ");
+				handler.AppendLiteral("MethodTable ");
 				handler.AppendFormatted(GetNativeMethodTableSymbol(item3));
 				handler.AppendLiteral(" = {nullptr, nullptr, ");
 				handler.AppendFormatted(stableId.ToString() + "ULL");
