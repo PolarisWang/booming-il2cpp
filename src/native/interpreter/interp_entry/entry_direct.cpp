@@ -587,7 +587,8 @@ void InterpreterEntryDirect(
     static std::once_flag g_interp_scanner_once;
     std::call_once(g_interp_scanner_once, RegisterInterpFrameScanner);
     if (method_key == 0) {
-        CHAOS_IL2CPP_LOG_WARN("InterpEntryDirect", "null method_key — caller dispatched without a valid patch method");
+        std::fprintf(stderr, "[INTERP-SILENT] null method_key\n");
+        std::fflush(stderr);
         return;
     }
     {
@@ -610,11 +611,13 @@ void InterpreterEntryDirect(
 
     auto* ir = static_cast<interpreter::IRMethod*>(patch_method->cached_ir);
     if (ir == nullptr) {
-        CHAOS_IL2CPP_LOG_WARN("InterpEntryDirect", "IR is null after lowering — method body unavailable");
+        std::fprintf(stderr, "[INTERP-SILENT] null IR after lowering for method_key=%p\n", reinterpret_cast<void*>(method_key));
+        std::fflush(stderr);
         return;
     }
     if (ir->instructions.empty()) {
-        CHAOS_IL2CPP_LOG_WARN("InterpEntryDirect", "IR has empty instructions — method body unavailable");
+        std::fprintf(stderr, "[INTERP-SILENT] empty IR instructions for method_key=%p\n", reinterpret_cast<void*>(method_key));
+        std::fflush(stderr);
         return;
     }
     const auto instr_count = ir->instructions.size();

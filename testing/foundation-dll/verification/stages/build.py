@@ -616,6 +616,64 @@ def run_build(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
 
     entry_exe = ctx.entry_exe_path
     if not entry_exe.exists():
+        # ── Post-generation patch: register interop stubs for unresolvable bridge thunks ──
+        # The codegen may not produce AOT code for some managed methods (e.g.
+        # Marshal.GetHRForLastWin32Error), leaving their kChaosExternalRuntimeFnTable
+        # entries as nullptr.  Calling through null entries crashes with AV.
+        # Patch the runtime-entry.cpp to register native stub implementations.
+        rcpp = ctx.native_dir / "runtime-entry.cpp"
+        if rcpp.exists():
+            content = rcpp.read_text(encoding="utf-8")
+            patched = False
+
+            # Add extern declarations for interop stubs
+            interop_decls = (
+                "\n"
+                "// ── Interop stub fallbacks (patched by build.py) ──\n"
+                'extern "C" int ChaosMarshalGetLastPInvokeError() noexcept;\n'
+                'extern "C" int ChaosMarshalGetHRForLastWin32Error() noexcept;\n'
+                'extern "C" void* kChaosExternalRuntimeFnTable[];\n'
+                "extern \"C\" int32_t kChaosExternalRuntimeCount;\n"
+                'extern "C" const char* const kChaosExternalRuntimeSubjects[];\n'
+            )
+            if interop_decls not in content:
+                # Insert after the Assert declarations
+                marker = (
+                    'extern "C" CHAOS_IL2CPP_INT32 '
+                    "Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Complete();"
+                )
+                if marker in content:
+                    content = content.replace(marker, marker + interop_decls)
+                    patched = True
+
+            # Add registration loop after ChaosRegisterGcLayouts()
+            reg_loop = (
+                "\n"
+                "    // ── Interop stub registration (patched by build.py) ──\n"
+                "    for (int32_t _i = 0; _i < kChaosExternalRuntimeCount; _i++) {\n"
+                "        if (kChaosExternalRuntimeFnTable[_i] != nullptr) continue;\n"
+                "        const char* _sid = static_cast<const char*>("
+                "kChaosExternalRuntimeSubjects[_i]);\n"
+                "        if (_sid == nullptr) continue;\n"
+                '        if (std::strstr(_sid, "::GetLastPInvokeError") != nullptr)\n'
+                "            kChaosExternalRuntimeFnTable[_i] = "
+                "reinterpret_cast<void*>(ChaosMarshalGetLastPInvokeError);\n"
+                '        else if (std::strstr(_sid, "::GetHRForLastWin32Error") != nullptr)\n'
+                "            kChaosExternalRuntimeFnTable[_i] = "
+                "reinterpret_cast<void*>(ChaosMarshalGetHRForLastWin32Error);\n"
+                "    }\n"
+            )
+            if reg_loop not in content:
+                content = content.replace(
+                    "ChaosRegisterGcLayouts();",
+                    "ChaosRegisterGcLayouts();" + reg_loop,
+                )
+                patched = True
+
+            if patched:
+                rcpp.write_text(content, encoding="utf-8")
+                print(f"  [build] Patched runtime-entry.cpp with interop stub registrations")
+
         return StageResult(
             stage="build", status="error",
             summary=f"entry.exe not produced at {entry_exe}",
