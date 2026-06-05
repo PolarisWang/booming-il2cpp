@@ -168,5 +168,8 @@ target_link_libraries({{ project_name }} PRIVATE chaos::runtime
 )
 if(MSVC)
   target_link_libraries({{ project_name }} PRIVATE bcrypt)
+{{ if is_jit }}
+  target_link_options({{ project_name }} PRIVATE /STACK:8388608)
+{{ end }}
 endif()
 target_link_options({{ project_name }} PRIVATE ${CHAOS_FORCE_MULTIPLE})
