@@ -46,6 +46,7 @@ CHAOS_IL2CPP_FORCEINLINE CHAOS_IL2CPP_FLOAT64 ChaosLoadFloat64(CHAOS_IL2CPP_INTP
 
 // Buffer
 CHAOS_IL2CPP_INT32  ChaosBufferByteLength(CHAOS_IL2CPP_INTPTR array) noexcept;
+void ChaosBufferMemmove(CHAOS_IL2CPP_INTPTR dest, CHAOS_IL2CPP_INTPTR src, CHAOS_IL2CPP_SIZE count) noexcept;
 
 // Culture
 CHAOS_IL2CPP_INTPTR ChaosCultureGetCurrent(void) noexcept;

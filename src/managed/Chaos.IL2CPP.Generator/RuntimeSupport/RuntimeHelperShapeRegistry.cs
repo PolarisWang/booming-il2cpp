@@ -3446,6 +3446,19 @@ public sealed partial class NativeAotLoweringPlanner
                 CreateInt32AbiSlot(),
                 new HashSet<int> { 0 });
 
+            // === Buffer::Memmove (SimpleForward stub) ===
+            registry.Register("System.Buffer", "Memmove", ["System.Void*", "System.Void*", "System.UIntPtr"],
+                ShapeKind.SimpleForward, "ChaosBufferMemmove",
+                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[3]
+                {
+                    CreateNativeIntAbiSlot(),
+                    CreateNativeIntAbiSlot(),
+                    CreateNativeIntAbiSlot(),
+                }),
+                CreateVoidAbiSlot(),
+                new HashSet<int> { 0, 1, 2 });
+new HashSet<int> { 0 });
+
             // === Exception::get_InnerException ===
             registry.Register("System.Exception", "get_InnerException", [],
                 ShapeKind.SimpleForward, "ChaosExceptionGetInnerException",
