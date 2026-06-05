@@ -5963,6 +5963,8 @@ public sealed partial class NativeAotLoweringPlanner
                 Resolver: static (planner, callee, typeArgs) =>
                 {
                     var paramTypes = GetMethodParameterTypesFromSubjectId(callee);
+                    if (paramTypes.Count > 1)
+                        return null; // multi-dimensional — not supported by ChaosArrayGetValue
                     var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
                     // Build ABI slots: array (native int) + N index params (each 32-bit)
                     var abiSlots = new List<AotCoreIrAbiSlotArtifact>

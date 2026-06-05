@@ -96,9 +96,9 @@ def run_fact_chunk(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageRe
                 msg = line[line.index("[ASSERT FAIL]") + 14:].strip()
                 assert_messages.append(msg)
     fail_idx = 0
-    for r in fact_results:
-        if not r.get("passed") and fail_idx < len(assert_messages):
-            r["message"] = assert_messages[fail_idx]
+    for fr in fact_results:
+        if not fr.get("passed") and fail_idx < len(assert_messages):
+            fr["message"] = assert_messages[fail_idx]
             fail_idx += 1
 
     # ── Metadata cross-check (advisory only) ──
