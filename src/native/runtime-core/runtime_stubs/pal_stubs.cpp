@@ -40,6 +40,7 @@ namespace chaos::il2cpp::pal {
 
 PalEtwProvider* PalEtwRegister(const uint8_t provider_id[16]) noexcept {
     (void)provider_id;
+    PAL_STUB_WARN(PalEtwRegister);
     return nullptr; // no-op: ETW not available in test builds
 }
 
@@ -57,6 +58,7 @@ bool PalEtwWrite(PalEtwProvider* provider, uint8_t event_id, uint8_t version,
                  const void* data, uint32_t data_len) noexcept {
     (void)provider; (void)event_id; (void)version; (void)channel;
     (void)level; (void)keyword; (void)data; (void)data_len;
+    PAL_STUB_WARN(PalEtwWrite);
     return true; // silently succeed
 }
 

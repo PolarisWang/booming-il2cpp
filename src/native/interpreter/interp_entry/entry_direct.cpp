@@ -586,7 +586,10 @@ void InterpreterEntryDirect(
     // Register the interpreter frame scanner for precise GC root scanning.
     static std::once_flag g_interp_scanner_once;
     std::call_once(g_interp_scanner_once, RegisterInterpFrameScanner);
-    if (method_key == 0) return;
+    if (method_key == 0) {
+        CHAOS_IL2CPP_LOG_WARN("InterpEntryDirect", "null method_key — caller dispatched without a valid patch method");
+        return;
+    }
     {
         auto* pm = reinterpret_cast<PatchMethod*>(method_key);
         // DBG-PM (removed)
@@ -606,8 +609,14 @@ void InterpreterEntryDirect(
       PatchMethodLowerIR(method_key); }
 
     auto* ir = static_cast<interpreter::IRMethod*>(patch_method->cached_ir);
-    if (ir == nullptr) return;
-    if (ir->instructions.empty()) return;
+    if (ir == nullptr) {
+        CHAOS_IL2CPP_LOG_WARN("InterpEntryDirect", "IR is null after lowering — method body unavailable");
+        return;
+    }
+    if (ir->instructions.empty()) {
+        CHAOS_IL2CPP_LOG_WARN("InterpEntryDirect", "IR has empty instructions — method body unavailable");
+        return;
+    }
     const auto instr_count = ir->instructions.size();
     // ── Binary IR fallback: placeholder cached_ir ─────────────────────
     // When the patch method uses pre-allocated register IR (v2+ binary

@@ -81,6 +81,9 @@ inline int32_t ChaosDispatchMethod(
     } else if (entry.direct_ptr) {
         // Direct AOT function body (no thunks / JIT codegen compatibility)
         reinterpret_cast<void(*)()>(entry.direct_ptr)();
+    } else {
+        CHAOS_IL2CPP_FAIL("No dispatch strategy available for slot %d", index);
+        return -1;
     }
     return 0;
 }
