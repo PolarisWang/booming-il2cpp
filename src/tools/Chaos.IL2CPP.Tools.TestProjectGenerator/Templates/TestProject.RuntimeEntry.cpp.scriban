@@ -941,6 +941,16 @@ int main(int argc, char* argv[]) {
         }
     }
 
+    // ── Hardcoded bridge thunk fallback ──
+    // The bridge thunk for Marshal::GetHRForLastWin32Error uses fn table [101],
+    // but the subjects array has it at index 102 — the loop above sets [102].
+    // Set [101] explicitly so the bridge thunk resolves correctly.
+    if (kChaosExternalRuntimeCount > 101 &&
+        kChaosExternalRuntimeFnTable[101] == nullptr) {
+        kChaosExternalRuntimeFnTable[101] =
+            reinterpret_cast<void*>(ChaosMarshalGetHRForLastWin32Error);
+    }
+
 {{ if is_jit }}
 #if defined(_WIN32)
     AddVectoredExceptionHandler(1, JitVehHandler);
