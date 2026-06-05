@@ -1,5 +1,4 @@
 using System.Diagnostics.CodeAnalysis;
-using System.IO;
 using System.Text;
 using Chaos.IL2CPP.Contracts;
 using Scriban.Runtime;
@@ -220,9 +219,7 @@ public sealed partial class NativeAotLoweringPlanner
                     continue;
 
                 var paramTypes = GetMethodParameterTypesFromSubjectId(callee);
-                Console.Error.WriteLine("DBG_ISHAPE: type=" + typeDisplayName + " mtd=" + methodName + " pfx=" + entry.TypeDisplayNamePrefix + " params=" + string.Join(",", paramTypes));
                 var result = entry.Resolver(callee, paramTypes);
-                Console.Error.WriteLine("DBG_ISHAPE:   result=" + (result ?? "null"));
                 if (result != null)
                 {
                     cppExpression = result;
@@ -525,6 +522,39 @@ public sealed partial class NativeAotLoweringPlanner
         }
 
         private static void RegisterCoreStubs(RuntimeHelperShapeRegistry registry)
+        {
+            RegisterCoreStubs_Part1(registry);
+            RegisterCoreStubs_Part2(registry);
+            RegisterCoreStubs_Part3(registry);
+        }
+
+        private static string? MapTypeArgToCppType(string typeArg)
+        {
+            return typeArg switch
+            {
+                "System.Byte" => "CHAOS_IL2CPP_UINT8",
+                "System.SByte" => "CHAOS_IL2CPP_INT8",
+                "System.Int16" => "CHAOS_IL2CPP_INT16",
+                "System.UInt16" => "CHAOS_IL2CPP_UINT16",
+                "System.Int32" => "CHAOS_IL2CPP_INT32",
+                "System.UInt32" => "CHAOS_IL2CPP_UINT32",
+                "System.Int64" => "CHAOS_IL2CPP_INT64",
+                "System.UInt64" => "CHAOS_IL2CPP_UINT64",
+                "System.Single" => "float",
+                "System.Double" => "double",
+                "System.IntPtr" => "CHAOS_IL2CPP_NATIVE_INT",
+                "System.UIntPtr" => "CHAOS_IL2CPP_NATIVE_UINT",
+                _ => null,
+            };
+        }
+
+        private static string InferVectorCarrierType(string callee)
+        {
+            if (callee.Contains("Vector256")) return "RuntimeIntrinsicVector256Carrier";
+            return "RuntimeIntrinsicVector128Carrier"; // default for Vector128
+        }
+
+        private static void RegisterCoreStubs_Part1(RuntimeHelperShapeRegistry registry)
         {
             // === String operations ===
             registry.Register("System.String", "Concat", ["System.String", "System.String"],
@@ -3228,7 +3258,10 @@ public sealed partial class NativeAotLoweringPlanner
                         CreateVoidAbiSlot(),
                         new HashSet<int>(Enumerable.Range(0, abiSlots.Count)));
                 }));
+        }
 
+        private static void RegisterCoreStubs_Part2(RuntimeHelperShapeRegistry registry)
+        {
             // === CustomAttributeExtensions.GetCustomAttribute ===
             registry.Register("System.Reflection.CustomAttributeExtensions", "GetCustomAttribute",
                 ["System.Reflection.Assembly", "System.Type"],
@@ -5615,7 +5648,10 @@ public sealed partial class NativeAotLoweringPlanner
                     TypeShape = AotCoreIrTypeShapeKind.ValueType
                 },
                 new HashSet<int> { 0 });
+        }
 
+        private static void RegisterCoreStubs_Part3(RuntimeHelperShapeRegistry registry)
+        {
             // === DateTime::AddHours (SimpleForward stub) ===
             registry.Register("System.DateTime", "AddHours", ["System.Double"],
                 ShapeKind.SimpleForward, "ChaosDateTimeAddHours",
