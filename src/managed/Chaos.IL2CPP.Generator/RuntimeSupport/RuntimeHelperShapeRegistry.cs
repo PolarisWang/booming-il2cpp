@@ -7138,17 +7138,6 @@ public sealed partial class NativeAotLoweringPlanner
                 new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.Float64, TypeShape = AotCoreIrTypeShapeKind.ValueType },
                 new HashSet<int> { 0 });
 
-            // === Math::Round(double, int) (SimpleForward stub) ===
-            registry.Register("System.Math", "Round", ["System.Double", "System.Int32"],
-                ShapeKind.SimpleForward, "ChaosMathRound2Params",
-                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
-                {
-                    new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.Float64, TypeShape = AotCoreIrTypeShapeKind.ValueType },
-                    new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.Int32, TypeShape = AotCoreIrTypeShapeKind.ValueType },
-                }),
-                new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.Float64, TypeShape = AotCoreIrTypeShapeKind.ValueType },
-                new HashSet<int> { 0, 1 });
-
             // === Math::Sign(double) (SimpleForward stub) ===
             registry.Register("System.Math", "Sign", ["System.Double"],
                 ShapeKind.SimpleForward, "ChaosMathSignDouble",
