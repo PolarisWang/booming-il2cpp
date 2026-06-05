@@ -717,7 +717,8 @@ public sealed class PatchDataExtractor
 
             // Sentinel body (7 bytes) must always fit within the original body.
             // In-place overwrite is safe since Tiny body < any real PE body.
-            System.Diagnostics.Debug.Assert(newBody.Length <= entry.body_size);
+            if (newBody.Length > entry.body_size)
+                throw new InvalidDataException($"Sentinel body ({newBody.Length} bytes) exceeds original body ({entry.body_size} bytes)");
             Array.Copy(newBody, 0, bodyData, entry.body_offset, newBody.Length);
             entry.body_size = (uint)newBody.Length;
             methodDefs[i] = entry;
@@ -865,14 +866,16 @@ public sealed class PatchDataExtractor
                         found.Contains("\"opCode\":0x7A") || // throw
                         found.Contains("\"opCode\":122"))    // throw (decimal)
                     {
-                        Console.WriteLine($"      [patchdata] WARNING: {key} has complex IR " +
-                            "(call/callvirt/newobj/throw) that may hang the interpreter");
+                        throw new InvalidDataException(
+                            $"ABORT: {key} has complex IR (call/callvirt/newobj/throw) that may hang the interpreter");
                     }
                     json = found;
                 }
             }
 
-            jsonList.Add(json != null ? Encoding.UTF8.GetBytes(json) : []);
+            jsonList.Add(json != null
+                ? Encoding.UTF8.GetBytes(json)
+                : throw new InvalidDataException($"AotCoreIr not found for method entry — cannot generate valid patch data"));
         }
 
         // Second pass: write index, then JSON strings with null terminators.
