@@ -1165,6 +1165,8 @@ extern ""C"" CHAOS_IL2CPP_INT32 RunNativeAot(CHAOS_IL2CPP_INT32 entryIndex) {{
             namespacePreamble.AppendLine("// Namespace-scoped extern declaration for kAotMethodCount.");
             namespacePreamble.AppendLine("// (Definition at file scope via globalDeclarations for runtime-entry.cpp link-time visibility.)");
             namespacePreamble.AppendLine("extern \"C\" const int kAotMethodCount;");
+            if (_externalRuntimeSubjects is { Count: > 0 })
+                namespacePreamble.AppendLine("extern \"C\" int32_t kChaosExternalRuntimeCount;");
         }
         moduleRegistrationCode = namespacePreamble.ToString() + moduleRegSb.ToString();
 
@@ -1694,6 +1696,7 @@ extern ""C"" CHAOS_IL2CPP_INT32 RunNativeAot(CHAOS_IL2CPP_INT32 entryIndex) {{
             _bridgeImportThunks.Values.Any(t => t.ExternalRuntimeTableIndex >= 0))
         {
             sb.AppendLine("extern \"C\" void* kChaosExternalRuntimeFnTable[];");
+            sb.AppendLine("extern \"C\" int32_t kChaosExternalRuntimeCount;");
             sb.AppendLine();
         }
 
