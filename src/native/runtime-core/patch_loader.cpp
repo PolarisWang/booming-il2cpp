@@ -974,7 +974,13 @@ PatchContext* ApplyPatchFromMemoryEx(
 
         // Look up in HotpatchNameRegistry with all three overrides applied.
         uint64_t lookup = registry.LookupMethod(lookup_ns, lookup_type, method_name);
-        if (lookup == 0) continue;
+        if (lookup == 0) {
+            HOTPATCH_DIAG("DIAG[APFM]: LookupMethod failed ns='%s' type='%s' method='%s'\n",
+                lookup_ns ? lookup_ns : "(null)",
+                lookup_type ? lookup_type : "(null)",
+                method_name ? method_name : "(null)");
+            continue;
+        }
 
         uint32_t module_id = ExtractModuleId(lookup);
         uint32_t aot_token = ExtractToken(lookup);
@@ -1035,6 +1041,9 @@ PatchContext* ApplyPatchFromMemoryEx(
     }
 
     ctx->method_count = patched_count;
+    if (patched_count == 0) {
+        HOTPATCH_DIAG("DIAG[APFM]: WARNING — 0 methods patched!\n");
+    }
     {
         const auto* bs = chaos::il2cpp::bootstrap::PeekBootstrapState();
         if (bs != nullptr && bs->is_bootstrapped) {

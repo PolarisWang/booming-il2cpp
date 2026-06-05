@@ -313,16 +313,19 @@ if (allTypes)
                         isBenchmark = false;
                     }
                     else
-                    {
-                        kind = "benchmark";
-                        isBenchmark = true;
-                    }
-                }
-                else
                 {
-                    kind = "benchmark";
-                    isBenchmark = true;
+                    // Deterministic void-returning subject: this is a Fact test,
+                    // NOT a benchmark. The kind field distinguishes fact/hotupdate/benchmark
+                    // for the pipeline's hotupdate subject selection logic.
+                    kind = "fact";
+                    isBenchmark = false;
                 }
+            }
+            else
+            {
+                kind = "fact";
+                isBenchmark = false;
+            }
 
                 // ── Generate per-value-set entries ──
                 // IMPORTANT: Must use the same sanitization as TestEmitter.SanitizeIdentifier
@@ -351,7 +354,17 @@ if (allTypes)
                     if (isBenchmark)
                         benchmarkMethodIndices.Add(globalIdx);
                     else
+                    {
                         customEntryIndices.Add(globalIdx);
+                        // For non-CoreLib assemblies, also mark fact subjects as
+                        // benchmarks so benchmark stages have data for these methods.
+                        // CoreLib is excluded because it has enough non-deterministic
+                        // methods (Vector/Intrinsics/Web) that already fill the
+                        // benchmark list — adding deterministic facts would double
+                        // the benchmark runtime with little added value.
+                        if (allAssemblyName != "System.Private.CoreLib")
+                            benchmarkMethodIndices.Add(globalIdx);
+                    }
                     globalIdx++;
                 }
 
@@ -621,11 +634,23 @@ static int RunPatchMode(string dllPath, string? namespaceFilter, string? outputD
     sb.AppendLine("// but returns a transformed value for semantic change detection.");
     sb.AppendLine("using System;");
     sb.AppendLine("using System.Buffers;");
+    sb.AppendLine("using System.Collections;");
+    sb.AppendLine("using System.Collections.Concurrent;");
     sb.AppendLine("using System.Collections.Generic;");
+    sb.AppendLine("using System.Data;");
+    sb.AppendLine("using System.Data.Common;");
     sb.AppendLine("using System.Globalization;");
+    sb.AppendLine("using System.IO;");
+    sb.AppendLine("using System.Linq;");
+    sb.AppendLine("using System.Net;");
+    sb.AppendLine("using System.Net.Sockets;");
+    sb.AppendLine("using System.Reflection;");
+    sb.AppendLine("using System.Reflection.Emit;");
     sb.AppendLine("using System.Runtime.CompilerServices;");
     sb.AppendLine("using System.Runtime.InteropServices;");
     sb.AppendLine("using System.Text;");
+    sb.AppendLine("using System.Text.Json;");
+    sb.AppendLine("using System.Text.Json.Serialization.Metadata;");
     sb.AppendLine("using Chaos.TestFramework;");
     sb.AppendLine();
 

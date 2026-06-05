@@ -198,6 +198,7 @@ def _build_jit_entry(
     subjects_dll: Path,
     metadata_path: Path,
     native_dir: Path,
+    native_config: str = "check",
 ) -> bool:
     """Build JIT entry-jit.exe via TPG generate-dll --jit.
 
@@ -215,6 +216,7 @@ def _build_jit_entry(
         "--dll", str(subjects_dll),
         "--metadata", str(metadata_path),
         "--output", str(jit_output),
+        "--config-tier", native_config,
         "--clean",
     ]
     try:
@@ -472,6 +474,27 @@ def run_build(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
         pkg_refs = extra_packages.get(assembly_name, [])
         pkg_block = "\n".join("    " + r for r in pkg_refs) if pkg_refs else ""
 
+        nowarn_extra = ""
+        combined_csproj.write_text(
+            "<Project Sdk=\"Microsoft.NET.Sdk\">\n"
+            "  <PropertyGroup>\n"
+            "    <OutputType>Library</OutputType>\n"
+            f"    <TargetFramework>{tfm}</TargetFramework>\n"
+            "    <ImplicitUsings>enable</ImplicitUsings>\n"
+            "    <Nullable>enable</Nullable>\n"
+            "    <DefineConstants>VERIFY</DefineConstants>\n"
+            "    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>\n"
+            "    <NoWarn>$(NoWarn);SYSLIB0011</NoWarn>\n"
+            "    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>\n"
+            "  </PropertyGroup>\n"
+            "  <ItemGroup>\n"
+            f"    <Compile Include=\"{combined_cs_path.name}\" />\n"
+            f"    <ProjectReference Include=\"{sdk_csproj}\" />\n"
+            f"{pkg_block}"
+            "  </ItemGroup>\n"
+            "</Project>\n"
+        )
+
         combined_csproj.write_text(
             "<Project Sdk=\"Microsoft.NET.Sdk\">\n"
             "  <PropertyGroup>\n"
@@ -514,7 +537,9 @@ def run_build(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
                     "    <TargetFramework>net8.0</TargetFramework>\n"
                     "    <ImplicitUsings>enable</ImplicitUsings>\n"
                     "    <Nullable>enable</Nullable>\n"
+                    "    <DefineConstants>VERIFY</DefineConstants>\n"
                     "    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>\n"
+                    "    <NoWarn>$(NoWarn);SYSLIB0011</NoWarn>\n"
                     "    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>\n"
                     "  </PropertyGroup>\n"
                     "  <ItemGroup>\n"
@@ -558,6 +583,7 @@ def run_build(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
         "--dll", str(subjects_dll),
         "--metadata", str(metadata_path),
         "--output", str(ctx.native_dir),
+        "--config-tier", ctx.native_config,
         "--clean",
     ]
     tpg_result = subprocess.run(tpg_cmd, capture_output=True, text=True, timeout=1800)
@@ -587,7 +613,7 @@ def run_build(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
     print(f"  [build] entry.exe: {entry_exe}")
 
     # -- 8. Build JIT entry (non-blocking) --
-    _build_jit_entry(tpg_dll, subjects_dll, metadata_path, ctx.native_dir)
+    _build_jit_entry(tpg_dll, subjects_dll, metadata_path, ctx.native_dir, ctx.native_config)
 
     print(f"  [build] Done ({duration_ms}ms)")
 

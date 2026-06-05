@@ -254,6 +254,7 @@ def _write_records_jsonl(
         "device": {"id": "chunk-pipeline", "name": "chunk-pipeline"},
         "recordedAt": now,
         "gitCommit": "unknown",
+        "nativeConfig": ctx.native_config,
         "metrics": summary,
     }
 
@@ -387,6 +388,7 @@ def _write_perf_store(
                 },
                 "iterations": iterations,
                 "status": "completed",
+                "nativeConfig": ctx.native_config,
             }
             f.write(json.dumps(record, ensure_ascii=False, separators=(",", ":")) + "\n")
 

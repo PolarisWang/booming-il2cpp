@@ -145,15 +145,20 @@ def run_aggregate(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageRes
     )
     # Track chunks with severe metadata mismatch (metaTotal >> total).
     # Small gaps are expected: void methods (A3 "no crash" assertions) contribute
-    # to metaTotal but don't produce individual fact results.  Only flag when
-    # the gap exceeds 90% (indicating almost no subjects produce assertions).
-    chunks_with_meta_mismatch = sum(
-        1 for s in chunk_summaries
-        if s.get("fact", {}).get("metaTotal") is not None
-        and s["fact"]["total"] != s["fact"]["metaTotal"]
-        and s["fact"]["metaTotal"] > 0
-        and s["fact"]["total"] / s["fact"]["metaTotal"] < 0.1
-    )
+    # to metaTotal but don't produce individual fact results.  Flag when
+    # the gap exceeds 50% (fewer than half of declared methods produce results).
+    # Also emit a per-chunk advisory WARN for any gap >20%.
+    chunks_with_meta_mismatch = 0
+    for s in chunk_summaries:
+        meta = s.get("fact", {}).get("metaTotal")
+        total = s.get("fact", {}).get("total")
+        if meta is not None and meta > 0 and total is not None and total != meta:
+            ratio = total / meta
+            if ratio < 0.5:
+                chunks_with_meta_mismatch += 1
+            if ratio < 0.8:
+                chunk_slug = s.get("info", {}).get("slug", "?")
+                print(f"  [aggregate] WARN: {chunk_slug} fact total={total} < metaTotal={meta} (ratio={ratio:.0%})")
 
     # ── Compute aggregate benchmark performance ──
     chunks_with_benchmark = [s.get("benchmark", {}) for s in chunk_summaries if "methodCount" in s.get("benchmark", {})]

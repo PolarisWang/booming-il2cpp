@@ -6,7 +6,6 @@
 #include <chaos/log.h>
 
 namespace chaos::il2cpp::runtime_core {
-extern "C" {
 
 CHAOS_IL2CPP_INTPTR ChaosExceptionGetBaseException(CHAOS_IL2CPP_INTPTR exc) noexcept
 {
@@ -35,5 +34,4 @@ CHAOS_IL2CPP_INTPTR ChaosRuntimewrappedGetWrappedException(CHAOS_IL2CPP_INTPTR e
     return exc;
 }
 
-}  // extern "C"
 }  // namespace chaos::il2cpp::runtime_core
