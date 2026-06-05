@@ -267,7 +267,7 @@ static int RunFactMode() {
             chaos::il2cpp::runtime_core::ChaosDispatchMethod(
                 GetHotpatchEntries(), kAotMethodCount, i, CHAOS_USE_DEFAULT_THUNKS);
             ++passed_count;
-        } __except((GetExceptionCode() == STATUS_ACCESS_VIOLATION || GetExceptionCode() == STATUS_STACK_OVERFLOW) ? EXCEPTION_EXECUTE_HANDLER : EXCEPTION_CONTINUE_SEARCH) {
+        } __except(EXCEPTION_EXECUTE_HANDLER) {
             // SEH caught (e.g. STATUS_ACCESS_VIOLATION) — skip increment
         }
 #else
@@ -341,7 +341,7 @@ static int RunFactJsonMode() {
                 __try {
                     result = chaos::il2cpp::runtime_core::ChaosDispatchMethodGetValue(
                         GetHotpatchEntries(), kAotMethodCount, i, CHAOS_USE_DEFAULT_THUNKS);
-                } __except((GetExceptionCode() == STATUS_ACCESS_VIOLATION || GetExceptionCode() == STATUS_STACK_OVERFLOW) ? EXCEPTION_EXECUTE_HANDLER : EXCEPTION_CONTINUE_SEARCH) {
+                } __except(EXCEPTION_EXECUTE_HANDLER) {
                     caught = true;
                 }
             } else {
@@ -377,12 +377,8 @@ static int RunFactJsonMode() {
         int i = kSubjectSlotMap[si];
         int64_t result = 0;
         bool caught = false;
-        CHAOS_EH_TRY
-            result = chaos::il2cpp::runtime_core::ChaosDispatchMethodGetValue(
+        result = chaos::il2cpp::runtime_core::ChaosDispatchMethodGetValue(
                 GetHotpatchEntries(), kAotMethodCount, i, CHAOS_USE_DEFAULT_THUNKS);
-        CHAOS_EH_CATCH_BEGIN
-            caught = true;
-        CHAOS_EH_END
         if (!first) printf(",");
         printf("{\"si\":%d,\"methodIndex\":%d,\"contractIndex\":-1,\"passed\":%s,\"value\":%" PRId64 "}",
                si, i, caught ? "false" : "true", caught ? -1 : result);
@@ -410,7 +406,7 @@ static int RunBenchmarkMode(int entry_index, int iterations) {
         __try {
             chaos::il2cpp::runtime_core::ChaosDispatchMethodBenchDirect(
                 entries, kAotMethodCount, entry_index);
-        } __except((GetExceptionCode() == STATUS_ACCESS_VIOLATION || GetExceptionCode() == STATUS_STACK_OVERFLOW) ? EXCEPTION_EXECUTE_HANDLER : EXCEPTION_CONTINUE_SEARCH) {
+        } __except(EXCEPTION_EXECUTE_HANDLER) {
             crashed = true;
             break;
         }
@@ -435,7 +431,7 @@ static int RunBenchmarkMode(int entry_index, int iterations) {
         __try {
             chaos::il2cpp::runtime_core::ChaosDispatchMethodBenchDirect(
                 entries, kAotMethodCount, entry_index);
-        } __except((GetExceptionCode() == STATUS_ACCESS_VIOLATION || GetExceptionCode() == STATUS_STACK_OVERFLOW) ? EXCEPTION_EXECUTE_HANDLER : EXCEPTION_CONTINUE_SEARCH) {
+        } __except(EXCEPTION_EXECUTE_HANDLER) {
             crashed = true;
             break;
         }
@@ -491,7 +487,7 @@ static int RunBenchmarkAllMode(int iterations) {
             __try {
                 chaos::il2cpp::runtime_core::ChaosDispatchMethodBenchDirect(
                     entries, kAotMethodCount, i);
-            } __except((GetExceptionCode() == STATUS_ACCESS_VIOLATION || GetExceptionCode() == STATUS_STACK_OVERFLOW) ? EXCEPTION_EXECUTE_HANDLER : EXCEPTION_CONTINUE_SEARCH) {
+            } __except(EXCEPTION_EXECUTE_HANDLER) {
                 crashed = true;
                 break;
             }
@@ -517,7 +513,7 @@ static int RunBenchmarkAllMode(int iterations) {
             __try {
                 chaos::il2cpp::runtime_core::ChaosDispatchMethodBenchDirect(
                     entries, kAotMethodCount, i);
-            } __except((GetExceptionCode() == STATUS_ACCESS_VIOLATION || GetExceptionCode() == STATUS_STACK_OVERFLOW) ? EXCEPTION_EXECUTE_HANDLER : EXCEPTION_CONTINUE_SEARCH) {
+            } __except(EXCEPTION_EXECUTE_HANDLER) {
                 crashed = true;
                 break;
             }
@@ -560,7 +556,7 @@ static int RunBenchmarkRangeMode(int iterations, int start_idx, int end_idx) {
             __try {
                 chaos::il2cpp::runtime_core::ChaosDispatchMethodBenchDirect(
                     entries, kAotMethodCount, i);
-            } __except((GetExceptionCode() == STATUS_ACCESS_VIOLATION || GetExceptionCode() == STATUS_STACK_OVERFLOW) ? EXCEPTION_EXECUTE_HANDLER : EXCEPTION_CONTINUE_SEARCH) {
+            } __except(EXCEPTION_EXECUTE_HANDLER) {
                 crashed = true;
                 break;
             }
@@ -586,7 +582,7 @@ static int RunBenchmarkRangeMode(int iterations, int start_idx, int end_idx) {
             __try {
                 chaos::il2cpp::runtime_core::ChaosDispatchMethodBenchDirect(
                     entries, kAotMethodCount, i);
-            } __except((GetExceptionCode() == STATUS_ACCESS_VIOLATION || GetExceptionCode() == STATUS_STACK_OVERFLOW) ? EXCEPTION_EXECUTE_HANDLER : EXCEPTION_CONTINUE_SEARCH) {
+            } __except(EXCEPTION_EXECUTE_HANDLER) {
                 crashed = true;
                 break;
             }
@@ -650,7 +646,7 @@ static int RunHotupdateMode(const char* patchDataPath = nullptr) {
             CHAOS_EH_CATCH_BEGIN
                 caught = true;
             CHAOS_EH_END
-        } __except((GetExceptionCode() == STATUS_ACCESS_VIOLATION || GetExceptionCode() == STATUS_STACK_OVERFLOW) ? EXCEPTION_EXECUTE_HANDLER : EXCEPTION_CONTINUE_SEARCH) {
+        } __except(EXCEPTION_EXECUTE_HANDLER) {
             caught = true;
         }
 #else
@@ -679,7 +675,7 @@ static int RunHotupdateMode(const char* patchDataPath = nullptr) {
 #if defined(_WIN32)
             __try {
                 result = RunBenchmark(i, g_benchmark_iterations);
-            } __except((GetExceptionCode() == STATUS_ACCESS_VIOLATION || GetExceptionCode() == STATUS_STACK_OVERFLOW) ? EXCEPTION_EXECUTE_HANDLER : EXCEPTION_CONTINUE_SEARCH) {
+            } __except(EXCEPTION_EXECUTE_HANDLER) {
                 crashed = true;
             }
 #else
@@ -753,7 +749,7 @@ static int RunHotupdateMode(const char* patchDataPath = nullptr) {
 #if defined(_WIN32)
             __try {
                 result = RunBenchmark(i, g_benchmark_iterations);
-            } __except((GetExceptionCode() == STATUS_ACCESS_VIOLATION || GetExceptionCode() == STATUS_STACK_OVERFLOW) ? EXCEPTION_EXECUTE_HANDLER : EXCEPTION_CONTINUE_SEARCH) {
+            } __except(EXCEPTION_EXECUTE_HANDLER) {
                 crashed = true;
             }
 #else
