@@ -848,7 +848,7 @@ public sealed class PatchDataExtractor
                     //
                     // In TestMode (CodegenMode.TestMode), this folding is skipped and the
                     // real AOT Core IR is emitted, enabling test-correctness validation.
-                    json = "{\"instructions\":[{\"opCode\":0,\"ilOffset\":0,\"operand\":24237},{\"opCode\":53,\"ilOffset\":1}]}";
+                    json = "{\"instructions\":[{\"opCode\":0,\"ilOffset\":0,\"operand\":0},{\"opCode\":53,\"ilOffset\":1}]}";
                 }
                 else if (aotIrLookup.TryGetValue(key, out var found))
                 {
