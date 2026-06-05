@@ -30,6 +30,7 @@ using chaos::il2cpp::interpreter::kRegHasDst;
 using chaos::il2cpp::interpreter::kRegHasSrc1;
 using chaos::il2cpp::interpreter::kRegHasSrc2;
 using chaos::il2cpp::interpreter::kRegHasImm;
+using chaos::il2cpp::interpreter::kRegIsBranch;
 using chaos::il2cpp::jit::Compile;
 using chaos::il2cpp::jit::JitMethod;
 using chaos::il2cpp::jit::CompileConfig;
@@ -114,6 +115,55 @@ static RegisterMethod MakeAccumulateMethod(uint32_t n) {
         method.instructions.push_back(
             InstrBinary(IROpCode::Add, 0, 0, static_cast<uint8_t>(i)));
     }
+    method.instructions.push_back(InstrRet(0));
+    return method;
+}
+
+// Helper: build a branch instruction (e.g., Blt).
+// The branch target is an instruction index in the RegisterInstruction array.
+static RegisterInstruction InstrBranch(IROpCode opc, uint8_t src1, uint8_t src2,
+                                       uint32_t target) noexcept {
+    RegisterInstruction ri;
+    ri.header = MakeHeader(opc, 0, src1, src2,
+                           kRegHasSrc1 | kRegHasSrc2 | kRegIsBranch | kRegHasImm);
+    ri.imm.branch_target = target;
+    return ri;
+}
+
+// Build a method that computes sum(0..n-1) using a counted loop:
+//
+//   int sum = 0;
+//   for (int i = 0; i < n; i++) sum += i;
+//   return sum;
+//
+// Register IR layout:
+//   [0] LdcI4 0 → r0       // sum = 0
+//   [1] LdcI4 n → r1       // limit = n
+//   [2] LdcI4 0 → r2       // i = 0
+//   [3] LdcI4 1 → r3       // step = 1
+//   [4] Add r0, r2 → r0    // sum += i    <-- loop header
+//   [5] Add r2, r3 → r2    // i += step
+//   [6] Blt r2, r1 → [4]   // if i < limit goto loop_header
+//   [7] Ret r0             // return sum
+static RegisterMethod MakeLoopSumMethod(uint32_t n) {
+    RegisterMethod method;
+    method.max_regs = 4;
+    // r0 = sum = 0
+    method.instructions.push_back(InstrI4(IROpCode::LdcI4, 0, 0, 0));
+    // r1 = limit = n
+    method.instructions.push_back(InstrI4(IROpCode::LdcI4, static_cast<int32_t>(n), 1, 0));
+    // r2 = i = 0
+    method.instructions.push_back(InstrI4(IROpCode::LdcI4, 0, 2, 0));
+    // r3 = step = 1
+    method.instructions.push_back(InstrI4(IROpCode::LdcI4, 1, 3, 0));
+    // loop header at index 4
+    // sum += i
+    method.instructions.push_back(InstrBinary(IROpCode::Add, 0, 0, 2));
+    // i += step
+    method.instructions.push_back(InstrBinary(IROpCode::Add, 2, 2, 3));
+    // if i < limit, goto 4
+    method.instructions.push_back(InstrBranch(IROpCode::Blt, 2, 1, 4));
+    // return sum
     method.instructions.push_back(InstrRet(0));
     return method;
 }
@@ -242,6 +292,54 @@ TEST_F(JitBench, CompileTime_Tier1_ComplexMethod) {
     auto avg_ns = (total_us * 1000) / kIterations;
 
     std::printf("[ BENCH ] Tier 1 (100-adds): %llu ns avg over %d iterations (%llu µs total)\n",
+                static_cast<unsigned long long>(avg_ns), kIterations,
+                static_cast<unsigned long long>(total_us));
+
+    EXPECT_GT(avg_ns, 0u);
+}
+
+// ── Loop method compile time benchmarks ──────────────────────────────
+
+TEST_F(JitBench, CompileTime_Tier0_LoopSum) {
+    // Tier 0 compile time for sum(0..99) using a real counted loop
+    auto rm = MakeLoopSumMethod(100);
+    auto cfg = MakeTier0Config();
+
+    constexpr int kIterations = 100;
+    auto start = std::chrono::high_resolution_clock::now();
+    for (int i = 0; i < kIterations; i++) {
+        auto* jm = Compile(rm, cfg);
+        ASSERT_NE(jm, nullptr);
+        delete jm;
+    }
+    auto end = std::chrono::high_resolution_clock::now();
+    auto total_us = std::chrono::duration_cast<std::chrono::microseconds>(end - start).count();
+    auto avg_ns = (total_us * 1000) / kIterations;
+
+    std::printf("[ BENCH ] Tier 0 (loop-100): %llu ns avg over %d iterations (%llu µs total)\n",
+                static_cast<unsigned long long>(avg_ns), kIterations,
+                static_cast<unsigned long long>(total_us));
+
+    EXPECT_LT(avg_ns, 1000000u);
+}
+
+TEST_F(JitBench, CompileTime_Tier1_LoopSum) {
+    // Tier 1 compile time for sum(0..99) — optimizer has loops to work on
+    auto rm = MakeLoopSumMethod(100);
+    auto cfg = MakeTier1Config();
+
+    constexpr int kIterations = 10;
+    auto start = std::chrono::high_resolution_clock::now();
+    for (int i = 0; i < kIterations; i++) {
+        auto* jm = Compile(rm, cfg);
+        ASSERT_NE(jm, nullptr);
+        delete jm;
+    }
+    auto end = std::chrono::high_resolution_clock::now();
+    auto total_us = std::chrono::duration_cast<std::chrono::microseconds>(end - start).count();
+    auto avg_ns = (total_us * 1000) / kIterations;
+
+    std::printf("[ BENCH ] Tier 1 (loop-100): %llu ns avg over %d iterations (%llu µs total)\n",
                 static_cast<unsigned long long>(avg_ns), kIterations,
                 static_cast<unsigned long long>(total_us));
 
@@ -426,6 +524,31 @@ TEST_F(JitBench, Correctness_Range) {
         ASSERT_NE(t1, nullptr);
         EXPECT_EQ(ExecuteNative(t1->code), static_cast<uint64_t>(static_cast<uint32_t>(val)))
             << "Tier 1 failed for value " << val;
+        delete t1;
+    }
+}
+
+TEST_F(JitBench, Correctness_LoopSum) {
+    // Verify loop sum correctness for both tiers
+    auto cfg0 = MakeTier0Config();
+    auto cfg1 = MakeTier1Config();
+
+    for (int32_t n = 0; n <= 100; n += 10) {
+        // sum(0..n-1) = n*(n-1)/2
+        uint64_t expected = static_cast<uint64_t>(n) * static_cast<uint64_t>(n > 0 ? n - 1 : 0) / 2;
+
+        auto rm = MakeLoopSumMethod(static_cast<uint32_t>(n));
+
+        auto* t0 = Compile(rm, cfg0);
+        ASSERT_NE(t0, nullptr);
+        EXPECT_EQ(ExecuteNative(t0->code), expected)
+            << "Tier 0 loop sum failed for n=" << n;
+        delete t0;
+
+        auto* t1 = Compile(rm, cfg1);
+        ASSERT_NE(t1, nullptr);
+        EXPECT_EQ(ExecuteNative(t1->code), expected)
+            << "Tier 1 loop sum failed for n=" << n;
         delete t1;
     }
 }

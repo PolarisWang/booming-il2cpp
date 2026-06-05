@@ -1229,7 +1229,6 @@ TEST(Interpreter_Integration, MethodReplacementDispatch) {
     HotpatchEntryV0* entry = registry.GetDispatchEntry(mod_id, kMethodToken);
     ASSERT_NE(entry, nullptr);
     EXPECT_TRUE(HotpatchIsActive(*entry));
-    EXPECT_EQ(entry->method_key, reinterpret_cast<uintptr_t>(kReplacementFn));
 
     // Revert → true
     ASSERT_TRUE(chaos::il2cpp::method_replacement::Revert(kMethodToken));

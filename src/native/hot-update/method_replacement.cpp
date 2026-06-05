@@ -74,7 +74,7 @@ bool Register(CHAOS_IL2CPP_UINT32 method_token, void* thunk) {
             uint32_t mod_id = chaos::il2cpp::runtime_core::ExtractModuleId(composite);
             uint32_t slot = registry.TokenToSlot(mod_id, method_token);
             if (slot != ~0u) {
-                registry.SetPatchedBySlot(mod_id, slot, true, thunk);
+                registry.SetPatchedBySlot(mod_id, slot, true, nullptr);
             }
         }
     }

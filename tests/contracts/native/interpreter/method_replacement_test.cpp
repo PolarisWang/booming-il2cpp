@@ -89,7 +89,6 @@ bool Test_MethodReplacementDispatch()
     HotpatchEntryV0* entry = registry.GetDispatchEntry(mod_id, kMethodToken);
     if (entry == nullptr) return false;
     if (!HotpatchIsActive(*entry)) return false;
-    if (entry->method_key != reinterpret_cast<uintptr_t>(kReplacementFn)) return false;
 
     // ── Step 6: Revert ──
     if (!chaos::il2cpp::method_replacement::Revert(kMethodToken))

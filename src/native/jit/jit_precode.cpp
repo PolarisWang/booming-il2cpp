@@ -601,6 +601,7 @@ extern "C" void RegisterJitEntryMethods(const JitEntry* entries, uint32_t count)
         auto* precode = new JitPrecode();
         precode->ir = std::move(rm);
         precode->config = CompileConfig{};
+        precode->config.enable_pgo = true;  // profile calls → trigger Tier 1 recompilation
 
         // Step 4: Look up the HotpatchEntryV0 for this method
         precode->entry = GetHotpatchNameRegistry().GetDispatchEntry(

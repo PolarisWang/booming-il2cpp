@@ -1037,7 +1037,18 @@ void NativeCodeGenerator::EmitDeoptSequence(uint32_t instr_pc, uint32_t osr_resu
         enc_.EmitAddRI(AT::kStackReg, 32);              // restore shadow space
     }
     enc_.EmitMovImm64(AT::kScratchA, kDeoptMagic);
-    enc_.EmitMovMR(AT::kRetBuf, 0, AT::kScratchA);
+    // kRetBuf (RSI/X4) was set to the local GPR file in the prologue, not the
+    // original ABI ret_buf from the caller.  Load the saved ret_buf from the
+    // stack frame ([kFrameReg - 16] = saved RSI on x64, saved X1 on ARM64)
+    // and write kDeoptMagic through it so ExecuteNative can read it.
+#if defined(__aarch64__)
+    // ARM64: saved ABI ret_buf (X1) at [X29 - 16].
+    EmitLdur64(buf_, AT::kScratchC, AT::kFrameReg, -16);
+    EmitStr64(buf_, AT::kScratchA, AT::kScratchC, 0);
+#else
+    enc_.EmitMovRM(AT::kScratchC, AT::kFrameReg, -16);
+    enc_.EmitMovMR(AT::kScratchC, 0, AT::kScratchA);
+#endif
     uint32_t patch_off = buf_.pos() + 1;
     enc_.EmitJmpRel32(0);
     deopt_jump_patches_.push_back({patch_off});
@@ -3164,25 +3175,25 @@ bool NativeCodeGenerator::EmitInstruction(const interpreter::RegisterInstruction
         // VEX 3-operand: acc = src1 * src2 + acc (231 form)
         switch (fma_op) {
         case 0: // kSimdFmaAdd
-            if (elem_type == 2) // kElemFloat → PS
+            if (elem_type == 4) // kElemFloat32 → PS
                 enc_.EmitVfmadd231psRR(xmm_acc, xmm_src1, xmm_src2);
-            else // kElemDouble → PD
+            else // kElemFloat64 → PD
                 enc_.EmitVfmadd231pdRR(xmm_acc, xmm_src1, xmm_src2);
             break;
         case 1: // kSimdFmaSub
-            if (elem_type == 2)
+            if (elem_type == 4)
                 enc_.EmitVfmsub231psRR(xmm_acc, xmm_src1, xmm_src2);
             else
                 enc_.EmitVfmsub231pdRR(xmm_acc, xmm_src1, xmm_src2);
             break;
         case 2: // kSimdFmaNegAdd (negate multiply-add: a * b - c)
-            if (elem_type == 2)
+            if (elem_type == 4)
                 enc_.EmitVfnmadd231psRR(xmm_acc, xmm_src1, xmm_src2);
             else
                 enc_.EmitVfnmadd231pdRR(xmm_acc, xmm_src1, xmm_src2);
             break;
         case 3: // kSimdFmaNegSub (negate multiply-sub: -(a * b) - c)
-            if (elem_type == 2)
+            if (elem_type == 4)
                 enc_.EmitVfnmsub231psRR(xmm_acc, xmm_src1, xmm_src2);
             else
                 enc_.EmitVfnmsub231pdRR(xmm_acc, xmm_src1, xmm_src2);
@@ -4019,9 +4030,18 @@ JitMethod* NativeCodeGenerator::Generate() noexcept {
                         }
                     } else {
                         // Caller-saved register.
-                        // Keep the color assignment.  EmitCallWithSpill
-                        // will reload these from stack after each call.
-                        caller_colored_mask_ |= (1ULL << vr);
+                        // Check for duplicate physical register (same issue as
+                        // callee-saved): the post-call reload iterates through
+                        // caller_colored_mask_ and reloads each vreg from its
+                        // stack slot — when two vregs share the same register,
+                        // the second reload overwrites the first, corrupting
+                        // the value for subsequent instructions that read it.
+                        if (!seen[x64r]) {
+                            seen[x64r] = true;
+                            caller_colored_mask_ |= (1ULL << vr);
+                        } else {
+                            gcr_.gpr_color[vr] = 0xFF;  // duplicate → stack spill
+                        }
                     }
                 }
             }
@@ -4205,7 +4225,9 @@ JitMethod* NativeCodeGenerator::Generate() noexcept {
     // after the frame is set up (stack walking works) but before the
     // first managed object access.
     if (config_.cooperative_fn != nullptr) {
+#if !defined(__aarch64__)
         enc_.EmitSubRI(AT::kStackReg, 32);  // shadow space for Win64 ABI
+#endif
         uint32_t call_start = buf_.pos();
         enc_.EmitCallRipRel(0);
         slot_patches_.push_back({call_start + kSlotPatchDispOff, UINT32_MAX, reinterpret_cast<void*>(config_.cooperative_fn)});
@@ -5108,7 +5130,15 @@ bool NativeCodeGenerator::EmitSimd(
         break;
     case 7:  // kSimdAndNot
         if (kUseVexEncoding) EmitVPandnRR(buf_, xmm_dst, xmm_src1, xmm_src2);
-        else enc_.EmitPandnRR(xmm_src1, xmm_src2);
+        else {
+#if defined(__aarch64__)
+            // BIC = rn & ~rm.  PANDN(src1, src2) = ~src1 & src2 = BIC(src2, src1).
+            // So BIC(xmm_src1, xmm_src2, xmm_src1) → xmm_src2 & ~xmm_src1.
+            EmitBic16B(buf_, xmm_src1, xmm_src2, xmm_src1);
+#else
+            enc_.EmitPandnRR(xmm_src1, xmm_src2);
+#endif
+        }
         break;
 
     // ── Compare (integer + float/double) ─────────────────────────────
@@ -5191,6 +5221,7 @@ bool NativeCodeGenerator::EmitSimd(
             default: return false;
             }
         } else {
+#if !defined(__aarch64__)
             switch (elem_type) {
             case 0:  EmitPunpcklbwRR(buf_, xmm_src1, xmm_src2); break;
             case 1:  EmitPunpcklwdRR(buf_, xmm_src1, xmm_src2); break;
@@ -5198,6 +5229,9 @@ bool NativeCodeGenerator::EmitSimd(
             case 3:  EmitPunpcklqdqRR(buf_, xmm_src1, xmm_src2); break;
             default: return false;
             }
+#else
+            return false;
+#endif
         }
         break;
 
@@ -5211,6 +5245,7 @@ bool NativeCodeGenerator::EmitSimd(
             default: return false;
             }
         } else {
+#if !defined(__aarch64__)
             switch (elem_type) {
             case 0:  EmitPunpckhbwRR(buf_, xmm_src1, xmm_src2); break;
             case 1:  EmitPunpckhwdRR(buf_, xmm_src1, xmm_src2); break;
@@ -5218,6 +5253,9 @@ bool NativeCodeGenerator::EmitSimd(
             case 3:  EmitPunpckhqdqRR(buf_, xmm_src1, xmm_src2); break;
             default: return false;
             }
+#else
+            return false;
+#endif
         }
         break;
 
@@ -5230,11 +5268,15 @@ bool NativeCodeGenerator::EmitSimd(
             default: return false;
             }
         } else {
+#if !defined(__aarch64__)
             switch (elem_type) {
             case 1:  EmitPacksswbRR(buf_, xmm_src1, xmm_src2); break;
             case 2:  EmitPackssdwRR(buf_, xmm_src1, xmm_src2); break;
             default: return false;
             }
+#else
+            return false;
+#endif
         }
         break;
 
@@ -5271,12 +5313,16 @@ bool NativeCodeGenerator::EmitSimd(
             default: return false;
             }
         } else {
+#if !defined(__aarch64__)
             switch (elem_type) {
             case 1:  EmitPsllwRR(buf_, xmm_src1, xmm_src2); break;
             case 2:  EmitPslldRR(buf_, xmm_src1, xmm_src2); break;
             case 3:  EmitPsllqRR(buf_, xmm_src1, xmm_src2); break;
             default: return false;
             }
+#else
+            return false;
+#endif
         }
         break;
 
@@ -5289,12 +5335,16 @@ bool NativeCodeGenerator::EmitSimd(
             default: return false;
             }
         } else {
+#if !defined(__aarch64__)
             switch (elem_type) {
             case 1:  EmitPsrlwRR(buf_, xmm_src1, xmm_src2); break;
             case 2:  EmitPsrldRR(buf_, xmm_src1, xmm_src2); break;
             case 3:  EmitPsrlqRR(buf_, xmm_src1, xmm_src2); break;
             default: return false;
             }
+#else
+            return false;
+#endif
         }
         break;
 
@@ -5306,11 +5356,15 @@ bool NativeCodeGenerator::EmitSimd(
             default: return false;
             }
         } else {
+#if !defined(__aarch64__)
             switch (elem_type) {
             case 1:  EmitPsrawRR(buf_, xmm_src1, xmm_src2); break;
             case 2:  EmitPsradRR(buf_, xmm_src1, xmm_src2); break;
             default: return false;
             }
+#else
+            return false;
+#endif
         }
         break;
 
@@ -5413,10 +5467,14 @@ bool NativeCodeGenerator::EmitSimd(
     // ── Move byte mask to GPR ───────────────────────────────────────
     case 21: {  // kSimdMoveMask
         if (elem_type != 0) return false;
+#if !defined(__aarch64__)
         if (kUseVexEncoding)
             EmitVPmovmskbRR(buf_, AT::kScratchA, xmm_src1);
         else
             EmitPmovmskbRR(buf_, AT::kScratchA, xmm_src1);
+#else
+        return false;
+#endif
         StoreGpr(AT::kScratchA, instr.dst_reg());
         return true;
     }
@@ -5462,6 +5520,7 @@ bool NativeCodeGenerator::EmitSimd(
     case 25:  // kSimdMin
         if (kUseVexEncoding) {
             switch (elem_type) {
+            // VEX integer SIMD min/max encoder functions not yet available (x64 future work).
             case 4:  EmitVMinpsRR(buf_, xmm_dst, xmm_src1, xmm_src2); break;
             case 5:  EmitVMinpdRR(buf_, xmm_dst, xmm_src1, xmm_src2); break;
             default: return false;
@@ -5469,6 +5528,9 @@ bool NativeCodeGenerator::EmitSimd(
         } else {
             switch (elem_type) {
 #if defined(__aarch64__)
+            case 0:  EmitSmin16B(buf_, xmm_src1, xmm_src1, xmm_src2); break;
+            case 1:  EmitSmin8H(buf_, xmm_src1, xmm_src1, xmm_src2); break;
+            case 2:  EmitSmin4S(buf_, xmm_src1, xmm_src1, xmm_src2); break;
             case 4:  EmitFmin4S(buf_, xmm_src1, xmm_src1, xmm_src2); break;
             case 5:  EmitFmin2D(buf_, xmm_src1, xmm_src1, xmm_src2); break;
 #endif
@@ -5480,6 +5542,7 @@ bool NativeCodeGenerator::EmitSimd(
     case 26:  // kSimdMax
         if (kUseVexEncoding) {
             switch (elem_type) {
+            // VEX integer SIMD min/max encoder functions not yet available (x64 future work).
             case 4:  EmitVMaxpsRR(buf_, xmm_dst, xmm_src1, xmm_src2); break;
             case 5:  EmitVMaxpdRR(buf_, xmm_dst, xmm_src1, xmm_src2); break;
             default: return false;
@@ -5487,6 +5550,9 @@ bool NativeCodeGenerator::EmitSimd(
         } else {
             switch (elem_type) {
 #if defined(__aarch64__)
+            case 0:  EmitSmax16B(buf_, xmm_src1, xmm_src1, xmm_src2); break;
+            case 1:  EmitSmax8H(buf_, xmm_src1, xmm_src1, xmm_src2); break;
+            case 2:  EmitSmax4S(buf_, xmm_src1, xmm_src1, xmm_src2); break;
             case 4:  EmitFmax4S(buf_, xmm_src1, xmm_src1, xmm_src2); break;
             case 5:  EmitFmax2D(buf_, xmm_src1, xmm_src1, xmm_src2); break;
 #endif

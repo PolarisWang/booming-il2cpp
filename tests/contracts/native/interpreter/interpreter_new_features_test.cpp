@@ -182,7 +182,7 @@ bool TestInterfaceCastClass()
     VTableSlot dummy_slot = { 1u, nullptr };
     VTableSlot obj_slots[1] = { dummy_slot };
     TypeVTable obj_vtable = {};
-    obj_vtable.type_token = 0x100u;
+    obj_vtable.type_token = 0x110u;
     obj_vtable.base_token = 0u;
     obj_vtable.slot_count = 1u;
     obj_vtable.slots = obj_slots;
@@ -210,7 +210,7 @@ bool TestInterfaceCastClass()
     IRInstruction ret; ret.op_code = IROpCode::Ret; method.instructions.push_back(ret);
 
     auto* storage = new InterpreterObject();
-    storage->type_token = 0x100u;
+    storage->type_token = 0x110u;
 
     ExecutionFrame frame;
     frame.arguments.push_back(InterpreterValue::from_obj(storage));
