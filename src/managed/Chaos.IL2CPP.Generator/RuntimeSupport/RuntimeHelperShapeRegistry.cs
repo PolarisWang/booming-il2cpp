@@ -219,7 +219,9 @@ public sealed partial class NativeAotLoweringPlanner
                     continue;
 
                 var paramTypes = GetMethodParameterTypesFromSubjectId(callee);
+                Console.Error.WriteLine("DBG_ISHAPE: type=" + typeDisplayName + " mtd=" + methodName + " pfx=" + entry.TypeDisplayNamePrefix + " params=" + string.Join(",", paramTypes));
                 var result = entry.Resolver(callee, paramTypes);
+                Console.Error.WriteLine("DBG_ISHAPE:   result=" + (result ?? "null"));
                 if (result != null)
                 {
                     cppExpression = result;
