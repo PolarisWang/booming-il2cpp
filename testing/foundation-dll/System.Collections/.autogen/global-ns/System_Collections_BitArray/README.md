@@ -11,7 +11,7 @@
 | Auto-generated (Fact + Benchmark + HotUpdate) | 14 |
 | Benchmark-only (pure void / non-deterministic) | 0 |
 | Skipped (generic / unresolvable) | 0 |
-| Total Subjects | 21 |
+| Total Subjects | 22 |
 
 ## Build
 

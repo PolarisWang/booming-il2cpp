@@ -358,4 +358,7 @@ CHAOS_IL2CPP_FLOAT64 ChaosMathTanh(CHAOS_IL2CPP_FLOAT64 x) noexcept
     return std::tanh(x);
 }
 
+}  // extern "C"
+}  // namespace chaos::il2cpp::runtime_core
+
 
