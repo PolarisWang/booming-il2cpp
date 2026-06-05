@@ -634,7 +634,6 @@ def run_build(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
                 'extern "C" int ChaosMarshalGetHRForLastWin32Error() noexcept;\n'
                 'extern "C" void* kChaosExternalRuntimeFnTable[];\n'
                 "extern \"C\" int32_t kChaosExternalRuntimeCount;\n"
-                'extern "C" const char* const kChaosExternalRuntimeSubjects[];\n'
             )
             if interop_decls not in content:
                 # Insert after the Assert declarations
