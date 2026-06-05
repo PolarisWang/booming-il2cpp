@@ -714,23 +714,27 @@ public sealed partial class NativeAotLoweringPlanner
 		MapAbiSlotReturnType(method.ReturnAbi);
 	}
 
-	private static void ValidateInstructions(AotCoreIrMethodArtifact entryMethod, IReadOnlyList<AotCoreIrInstructionArtifact> instructions)
-	{
-		if (instructions.Count == 0)
+		private static void ValidateInstructions(AotCoreIrMethodArtifact entryMethod, IReadOnlyList<AotCoreIrInstructionArtifact> instructions)
 		{
-			throw new InvalidOperationException("native-aot entry '" + entryMethod.SubjectId + "' does not contain instructions");
-		}
-		HashSet<int> hashSet = new HashSet<int>(instructions.Count);
-		foreach (AotCoreIrInstructionArtifact instruction in instructions)
-		{
-			int requiredIlOffset = GetRequiredIlOffset(instruction);
-			if (!hashSet.Add(requiredIlOffset))
+			if (instructions.Count == 0)
 			{
-				throw new InvalidOperationException($"native-aot entry '{entryMethod.SubjectId}' contains duplicate IL offset {requiredIlOffset}");
+				throw new InvalidOperationException("native-aot entry '" + entryMethod.SubjectId + "' does not contain instructions");
 			}
+			// Deduplicate by IL offset instead of throwing. Some CombinedSubjects wrappers
+			// (e.g., String::Concat) produce IL with duplicate offsets from overlapping
+			// C# compiler ranges — the duplicate is safe to skip.
+			// Deduplicate: create a new list skipping duplicates.
+			var deduped = new List<AotCoreIrInstructionArtifact>(instructions.Count);
+			var seen = new HashSet<int>(instructions.Count);
+			foreach (var instr in instructions)
+			{
+				if (seen.Add(GetRequiredIlOffset(instr)))
+					deduped.Add(instr);
+				else
+					Console.Error.WriteLine($"[IL-DEDUP] {entryMethod.SubjectId}: skip duplicate IL offset {GetRequiredIlOffset(instr)}");
+			}
+			instructions = deduped;
 		}
-	}
-
 	/// <summary>
 	/// Maps <see cref="System.Reflection.MethodImportAttributes"/> calling-convention bits
 	/// to a C++ calling-convention annotation string for the function pointer type.
