@@ -635,86 +635,18 @@ public sealed partial class NativeAotLoweringPlanner
             }
 
             // --- Binary arithmetic ---
-            RegisterInlineVectorOp("System.Runtime.Intrinsics.Vector128`1", "Add", "VectorFixedAdd");
-            RegisterInlineVectorOp("System.Runtime.Intrinsics.Vector256`1", "Add", "VectorFixedAdd");
-            RegisterInlineVectorOp("System.Runtime.Intrinsics.Vector128`1", "Subtract", "VectorFixedSubtract");
-            RegisterInlineVectorOp("System.Runtime.Intrinsics.Vector256`1", "Subtract", "VectorFixedSubtract");
-            RegisterInlineVectorOp("System.Runtime.Intrinsics.Vector128`1", "Multiply", "VectorFixedMultiply");
-            RegisterInlineVectorOp("System.Runtime.Intrinsics.Vector256`1", "Multiply", "VectorFixedMultiply");
-            RegisterInlineVectorOp("System.Runtime.Intrinsics.Vector128`1", "Divide", "VectorFixedDivide");
-            RegisterInlineVectorOp("System.Runtime.Intrinsics.Vector256`1", "Divide", "VectorFixedDivide");
 
             // --- Bitwise ---
-            RegisterInlineVectorOp("System.Runtime.Intrinsics.Vector128`1", "BitwiseAnd", "VectorFixedBitwiseAnd");
-            RegisterInlineVectorOp("System.Runtime.Intrinsics.Vector256`1", "BitwiseAnd", "VectorFixedBitwiseAnd");
-            RegisterInlineVectorOp("System.Runtime.Intrinsics.Vector128`1", "BitwiseOr", "VectorFixedBitwiseOr");
-            RegisterInlineVectorOp("System.Runtime.Intrinsics.Vector256`1", "BitwiseOr", "VectorFixedBitwiseOr");
-            RegisterInlineVectorOp("System.Runtime.Intrinsics.Vector128`1", "Xor", "VectorFixedBitwiseXor");
-            RegisterInlineVectorOp("System.Runtime.Intrinsics.Vector256`1", "Xor", "VectorFixedBitwiseXor");
-            RegisterInlineVectorOp("System.Runtime.Intrinsics.Vector128`1", "OnesComplement", "VectorFixedOnesComplement");
-            RegisterInlineVectorOp("System.Runtime.Intrinsics.Vector256`1", "OnesComplement", "VectorFixedOnesComplement");
 
             // --- Comparison ---
-            RegisterInlineVectorOp("System.Runtime.Intrinsics.Vector128`1", "Equals", "VectorFixedCompareEqual");
-            RegisterInlineVectorOp("System.Runtime.Intrinsics.Vector256`1", "Equals", "VectorFixedCompareEqual");
-            RegisterInlineVectorOp("System.Runtime.Intrinsics.Vector128`1", "GreaterThan", "VectorFixedCompareGreaterThan");
-            RegisterInlineVectorOp("System.Runtime.Intrinsics.Vector256`1", "GreaterThan", "VectorFixedCompareGreaterThan");
-            RegisterInlineVectorOp("System.Runtime.Intrinsics.Vector128`1", "LessThan", "VectorFixedCompareLessThan");
-            RegisterInlineVectorOp("System.Runtime.Intrinsics.Vector256`1", "LessThan", "VectorFixedCompareLessThan");
 
             // --- Element access ---
-            RegisterInlineVectorOp("System.Runtime.Intrinsics.Vector128`1", "GetElement", "VectorFixedGetElement");
-            RegisterInlineVectorOp("System.Runtime.Intrinsics.Vector256`1", "GetElement", "VectorFixedGetElement");
-            RegisterInlineVectorOp("System.Runtime.Intrinsics.Vector128`1", "ToScalar", "VectorFixedGetElement", extraArgs: ", 0");
-            RegisterInlineVectorOp("System.Runtime.Intrinsics.Vector256`1", "ToScalar", "VectorFixedGetElement", extraArgs: ", 0");
 
             // --- Shifts ---
-            RegisterInlineVectorOp("System.Runtime.Intrinsics.Vector128`1", "ShiftLeft", "VectorFixedShiftLeft");
-            RegisterInlineVectorOp("System.Runtime.Intrinsics.Vector256`1", "ShiftLeft", "VectorFixedShiftLeft");
-            RegisterInlineVectorOp("System.Runtime.Intrinsics.Vector128`1", "ShiftRightArithmetic", "VectorFixedShiftRightArithmetic");
-            RegisterInlineVectorOp("System.Runtime.Intrinsics.Vector256`1", "ShiftRightArithmetic", "VectorFixedShiftRightArithmetic");
-            RegisterInlineVectorOp("System.Runtime.Intrinsics.Vector128`1", "ShiftRightLogical", "VectorFixedShiftRightLogical");
-            RegisterInlineVectorOp("System.Runtime.Intrinsics.Vector256`1", "ShiftRightLogical", "VectorFixedShiftRightLogical");
 
             // --- Math ---
-            RegisterInlineVectorOp("System.Runtime.Intrinsics.Vector128`1", "Abs", "VectorFixedAbs");
-            RegisterInlineVectorOp("System.Runtime.Intrinsics.Vector256`1", "Abs", "VectorFixedAbs");
-            RegisterInlineVectorOp("System.Runtime.Intrinsics.Vector128`1", "Negate", "VectorFixedNegate");
-            RegisterInlineVectorOp("System.Runtime.Intrinsics.Vector256`1", "Negate", "VectorFixedNegate");
-            RegisterInlineVectorOp("System.Runtime.Intrinsics.Vector128`1", "Min", "VectorFixedMin");
-            RegisterInlineVectorOp("System.Runtime.Intrinsics.Vector256`1", "Min", "VectorFixedMin");
-            RegisterInlineVectorOp("System.Runtime.Intrinsics.Vector128`1", "Max", "VectorFixedMax");
-            RegisterInlineVectorOp("System.Runtime.Intrinsics.Vector256`1", "Max", "VectorFixedMax");
 
             // --- Creation ---
-            RegisterInlineVectorOp("System.Runtime.Intrinsics.Vector128`1", "get_Zero", "VectorFixedBroadcast", extraArgs: "0");
-            RegisterInlineVectorOp("System.Runtime.Intrinsics.Vector256`1", "get_Zero", "VectorFixedBroadcast", extraArgs: "0");
-            RegisterInlineVectorOp("System.Runtime.Intrinsics.Vector128`1", "get_AllBitsSet", "VectorFixedBroadcast", extraArgs: "static_cast<TScalar>(~0)");
-            RegisterInlineVectorOp("System.Runtime.Intrinsics.Vector256`1", "get_AllBitsSet", "VectorFixedBroadcast", extraArgs: "static_cast<TScalar>(~0)");
-            RegisterInlineVectorOp("System.Runtime.Intrinsics.Vector128`1", "CreateScalar", "VectorFixedCreateScalar");
-            RegisterInlineVectorOp("System.Runtime.Intrinsics.Vector256`1", "CreateScalar", "VectorFixedCreateScalar");
-            RegisterInlineVectorOp("System.Runtime.Intrinsics.Vector128`1", "op_Addition", "VectorFixedAdd");
-            RegisterInlineVectorOp("System.Runtime.Intrinsics.Vector256`1", "op_Addition", "VectorFixedAdd");
-            RegisterInlineVectorOp("System.Runtime.Intrinsics.Vector128`1", "op_Subtraction", "VectorFixedSubtract");
-            RegisterInlineVectorOp("System.Runtime.Intrinsics.Vector256`1", "op_Subtraction", "VectorFixedSubtract");
-            RegisterInlineVectorOp("System.Runtime.Intrinsics.Vector128`1", "op_Multiply", "VectorFixedMultiply");
-            RegisterInlineVectorOp("System.Runtime.Intrinsics.Vector256`1", "op_Multiply", "VectorFixedMultiply");
-            RegisterInlineVectorOp("System.Runtime.Intrinsics.Vector128`1", "op_Division", "VectorFixedDivide");
-            RegisterInlineVectorOp("System.Runtime.Intrinsics.Vector256`1", "op_Division", "VectorFixedDivide");
-            RegisterInlineVectorOp("System.Runtime.Intrinsics.Vector128`1", "op_BitwiseAnd", "VectorFixedBitwiseAnd");
-            RegisterInlineVectorOp("System.Runtime.Intrinsics.Vector256`1", "op_BitwiseAnd", "VectorFixedBitwiseAnd");
-            RegisterInlineVectorOp("System.Runtime.Intrinsics.Vector128`1", "op_BitwiseOr", "VectorFixedBitwiseOr");
-            RegisterInlineVectorOp("System.Runtime.Intrinsics.Vector256`1", "op_BitwiseOr", "VectorFixedBitwiseOr");
-            RegisterInlineVectorOp("System.Runtime.Intrinsics.Vector128`1", "op_ExclusiveOr", "VectorFixedBitwiseXor");
-            RegisterInlineVectorOp("System.Runtime.Intrinsics.Vector256`1", "op_ExclusiveOr", "VectorFixedBitwiseXor");
-            RegisterInlineVectorOp("System.Runtime.Intrinsics.Vector128`1", "op_OnesComplement", "VectorFixedOnesComplement");
-            RegisterInlineVectorOp("System.Runtime.Intrinsics.Vector256`1", "op_OnesComplement", "VectorFixedOnesComplement");
-            RegisterInlineVectorOp("System.Runtime.Intrinsics.Vector128`1", "op_Equality", "VectorFixedCompareEqual");
-            RegisterInlineVectorOp("System.Runtime.Intrinsics.Vector256`1", "op_Equality", "VectorFixedCompareEqual");
-            RegisterInlineVectorOp("System.Runtime.Intrinsics.Vector128`1", "op_GreaterThan", "VectorFixedCompareGreaterThan");
-            RegisterInlineVectorOp("System.Runtime.Intrinsics.Vector256`1", "op_GreaterThan", "VectorFixedCompareGreaterThan");
-            RegisterInlineVectorOp("System.Runtime.Intrinsics.Vector128`1", "op_LessThan", "VectorFixedCompareLessThan");
-            RegisterInlineVectorOp("System.Runtime.Intrinsics.Vector256`1", "op_LessThan", "VectorFixedCompareLessThan");
 
             return registry;
         }
@@ -7147,6 +7079,132 @@ public sealed partial class NativeAotLoweringPlanner
                     new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.Float64, TypeShape = AotCoreIrTypeShapeKind.ValueType }),
                 new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.Float64, TypeShape = AotCoreIrTypeShapeKind.ValueType },
                 new HashSet<int> { 0 });
+            // === Math::Exp (SimpleForward stub) ===
+            registry.Register("System.Math", "Exp", ["System.Double"],
+                ShapeKind.SimpleForward, "ChaosMathExp",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.Float64, TypeShape = AotCoreIrTypeShapeKind.ValueType }),
+                new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.Float64, TypeShape = AotCoreIrTypeShapeKind.ValueType },
+                new HashSet<int> { 0 });
+
+            // === Math::Log (SimpleForward stub) ===
+            registry.Register("System.Math", "Log", ["System.Double"],
+                ShapeKind.SimpleForward, "ChaosMathLog",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.Float64, TypeShape = AotCoreIrTypeShapeKind.ValueType }),
+                new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.Float64, TypeShape = AotCoreIrTypeShapeKind.ValueType },
+                new HashSet<int> { 0 });
+
+            // === Math::Log10 (SimpleForward stub) ===
+            registry.Register("System.Math", "Log10", ["System.Double"],
+                ShapeKind.SimpleForward, "ChaosMathLog10",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.Float64, TypeShape = AotCoreIrTypeShapeKind.ValueType }),
+                new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.Float64, TypeShape = AotCoreIrTypeShapeKind.ValueType },
+                new HashSet<int> { 0 });
+
+            // === Math::Tan (SimpleForward stub) ===
+            registry.Register("System.Math", "Tan", ["System.Double"],
+                ShapeKind.SimpleForward, "ChaosMathTan",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.Float64, TypeShape = AotCoreIrTypeShapeKind.ValueType }),
+                new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.Float64, TypeShape = AotCoreIrTypeShapeKind.ValueType },
+                new HashSet<int> { 0 });
+
+            // === Math::Atan (SimpleForward stub) ===
+            registry.Register("System.Math", "Atan", ["System.Double"],
+                ShapeKind.SimpleForward, "ChaosMathAtan",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.Float64, TypeShape = AotCoreIrTypeShapeKind.ValueType }),
+                new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.Float64, TypeShape = AotCoreIrTypeShapeKind.ValueType },
+                new HashSet<int> { 0 });
+
+            // === Math::Atan2 (SimpleForward stub) ===
+            registry.Register("System.Math", "Atan2", ["System.Double", "System.Double"],
+                ShapeKind.SimpleForward, "ChaosMathAtan2",
+                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
+                {
+                    new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.Float64, TypeShape = AotCoreIrTypeShapeKind.ValueType },
+                    new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.Float64, TypeShape = AotCoreIrTypeShapeKind.ValueType },
+                }),
+                new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.Float64, TypeShape = AotCoreIrTypeShapeKind.ValueType },
+                new HashSet<int> { 0, 1 });
+
+            // === Math::Truncate (SimpleForward stub) ===
+            registry.Register("System.Math", "Truncate", ["System.Double"],
+                ShapeKind.SimpleForward, "ChaosMathTruncate",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.Float64, TypeShape = AotCoreIrTypeShapeKind.ValueType }),
+                new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.Float64, TypeShape = AotCoreIrTypeShapeKind.ValueType },
+                new HashSet<int> { 0 });
+
+            // === Math::Round(double, int) (SimpleForward stub) ===
+            registry.Register("System.Math", "Round", ["System.Double", "System.Int32"],
+                ShapeKind.SimpleForward, "ChaosMathRound2Params",
+                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
+                {
+                    new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.Float64, TypeShape = AotCoreIrTypeShapeKind.ValueType },
+                    new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.Int32, TypeShape = AotCoreIrTypeShapeKind.ValueType },
+                }),
+                new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.Float64, TypeShape = AotCoreIrTypeShapeKind.ValueType },
+                new HashSet<int> { 0, 1 });
+
+            // === Math::Sign(double) (SimpleForward stub) ===
+            registry.Register("System.Math", "Sign", ["System.Double"],
+                ShapeKind.SimpleForward, "ChaosMathSignDouble",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.Float64, TypeShape = AotCoreIrTypeShapeKind.ValueType }),
+                new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.Int32, TypeShape = AotCoreIrTypeShapeKind.ValueType },
+                new HashSet<int> { 0 });
+
+            // === Math::Sign(int) (SimpleForward stub) ===
+            registry.Register("System.Math", "Sign", ["System.Int32"],
+                ShapeKind.SimpleForward, "ChaosMathSignInt32",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.Int32, TypeShape = AotCoreIrTypeShapeKind.ValueType }),
+                new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.Int32, TypeShape = AotCoreIrTypeShapeKind.ValueType },
+                new HashSet<int> { 0 });
+
+            // === Math::Acos (SimpleForward stub) ===
+            registry.Register("System.Math", "Acos", ["System.Double"],
+                ShapeKind.SimpleForward, "ChaosMathAcos",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.Float64, TypeShape = AotCoreIrTypeShapeKind.ValueType }),
+                new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.Float64, TypeShape = AotCoreIrTypeShapeKind.ValueType },
+                new HashSet<int> { 0 });
+
+            // === Math::Asin (SimpleForward stub) ===
+            registry.Register("System.Math", "Asin", ["System.Double"],
+                ShapeKind.SimpleForward, "ChaosMathAsin",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.Float64, TypeShape = AotCoreIrTypeShapeKind.ValueType }),
+                new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.Float64, TypeShape = AotCoreIrTypeShapeKind.ValueType },
+                new HashSet<int> { 0 });
+
+            // === Math::Cosh (SimpleForward stub) ===
+            registry.Register("System.Math", "Cosh", ["System.Double"],
+                ShapeKind.SimpleForward, "ChaosMathCosh",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.Float64, TypeShape = AotCoreIrTypeShapeKind.ValueType }),
+                new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.Float64, TypeShape = AotCoreIrTypeShapeKind.ValueType },
+                new HashSet<int> { 0 });
+
+            // === Math::Sinh (SimpleForward stub) ===
+            registry.Register("System.Math", "Sinh", ["System.Double"],
+                ShapeKind.SimpleForward, "ChaosMathSinh",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.Float64, TypeShape = AotCoreIrTypeShapeKind.ValueType }),
+                new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.Float64, TypeShape = AotCoreIrTypeShapeKind.ValueType },
+                new HashSet<int> { 0 });
+
+            // === Math::Tanh (SimpleForward stub) ===
+            registry.Register("System.Math", "Tanh", ["System.Double"],
+                ShapeKind.SimpleForward, "ChaosMathTanh",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.Float64, TypeShape = AotCoreIrTypeShapeKind.ValueType }),
+                new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.Float64, TypeShape = AotCoreIrTypeShapeKind.ValueType },
+                new HashSet<int> { 0 });
+
 
             // === System.Char::IsDigit (SimpleForward stub) ===
             registry.Register("System.Char", "IsDigit", ["System.Char"],
