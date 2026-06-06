@@ -4163,10 +4163,10 @@ private void EmitLinearInitObj(StringBuilder builder, AotCoreIrInstructionArtifa
 		string args = FormatAbiInvocationArgumentList(invocationTarget.ParameterAbis);
 		// BS-5: Validate external runtime table index before dispatch.
 		builder.AppendLine($"{indentation}    if ({idx} < 0 || {idx} >= kChaosExternalRuntimeCount) {{");
-		builder.AppendLine($@"{indentation}        CHAOS_IL2CPP_FAIL(""external runtime table index {idx} out of range"");");
+		builder.AppendLine($"{indentation}        CHAOS_IL2CPP_FAIL(); // external runtime table index {idx} out of range");
 		builder.AppendLine($"{indentation}    }}");
 		builder.AppendLine($"{indentation}    if (kChaosExternalRuntimeFnTable[{idx}] == nullptr) {{");
-		builder.AppendLine($@"{indentation}        CHAOS_IL2CPP_FAIL(""external runtime table entry {idx} is null"");");
+		builder.AppendLine($"{indentation}        CHAOS_IL2CPP_FAIL(); // external runtime table entry {idx} is null");
 		builder.AppendLine($"{indentation}    }}");
 		if (string.Equals(returnType, "void", StringComparison.Ordinal))
 		{

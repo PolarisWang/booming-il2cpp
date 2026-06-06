@@ -18,3 +18,18 @@ CHAOS_IL2CPP_INT32 ChaosMarshalGetHRForLastWin32Error(void) noexcept;
 
 // COM cleanup check stub
 CHAOS_IL2CPP_INT32 ChaosMarshalAreComObjectsAvailableForCleanup(void) noexcept;
+
+// ── JSON string creation helper ──────────────────────────────
+// Creates a managed String from UTF-8 bytes. Used by precompiled JSON
+// serializer stubs to return formatted JSON strings without going through
+// managed JsonSerializer's reflection path.
+CHAOS_IL2CPP_INTPTR ChaosStringCreateFromUtf8(const char* utf8, CHAOS_IL2CPP_INT32 length) noexcept;
+
+// ── Precompiled JSON serialization stubs ─────────────────────
+// Bypass managed JsonSerializer for primitive types by formatting values
+// directly as JSON strings using snprintf, then wrapping the result as a
+// managed String via ChaosStringCreateFromUtf8.
+CHAOS_IL2CPP_INTPTR ChaosJsonSerializeInt32(CHAOS_IL2CPP_INT32 value) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosJsonSerializeInt64(CHAOS_IL2CPP_INT64 value) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosJsonSerializeString(CHAOS_IL2CPP_INTPTR value) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosJsonSerializeBool(CHAOS_IL2CPP_INT32 value) noexcept;
