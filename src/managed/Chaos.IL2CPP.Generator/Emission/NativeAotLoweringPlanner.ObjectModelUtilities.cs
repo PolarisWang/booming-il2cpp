@@ -507,7 +507,9 @@ public sealed partial class NativeAotLoweringPlanner
 		}
 		if (num <= 0 || num2 <= num + 2)
 		{
-			throw new InvalidOperationException("failed to extract method name from subject id '" + subjectId + "'");
+			// Malformed SubjectId (likely from BridgeAOT). Return empty string
+			// instead of throwing — the caller can detect this and skip processing.
+			return string.Empty;
 		}
 		int num4 = num + 2;
 		return subjectId.Substring(num4, num2 - num4);
