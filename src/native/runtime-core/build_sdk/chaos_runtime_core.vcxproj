@@ -354,6 +354,7 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClInclude Include="D:\agent\booming-il2cpp\src\native\runtime-core\aot_core_ir_reader.h" />
     <ClCompile Include="D:\agent\booming-il2cpp\src\native\runtime-core\core\delegate_helpers.cpp" />
     <ClInclude Include="D:\agent\booming-il2cpp\src\native\runtime-core\core\delegate_helpers.h" />
+    <ClCompile Include="D:\agent\booming-il2cpp\src\native\runtime-core\core\object_creation.cpp" />
     <ClCompile Include="D:\agent\booming-il2cpp\src\native\runtime-core\method_table.cpp" />
     <ClInclude Include="D:\agent\booming-il2cpp\src\native\runtime-core\method_table.h" />
     <ClCompile Include="D:\agent\booming-il2cpp\src\native\runtime-core\reflection_api.cpp" />

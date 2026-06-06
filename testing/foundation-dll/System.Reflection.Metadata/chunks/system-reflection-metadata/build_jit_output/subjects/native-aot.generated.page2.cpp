@@ -1381,6 +1381,12 @@ extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_Syst
 	{
 		const auto chaos_arg_1 = _s1;
 		const auto chaos_arg_0 = _s0;
+		if (0 < 0 || 0 >= kChaosExternalRuntimeCount) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table index 0 out of range
+		}
+		if (kChaosExternalRuntimeFnTable[0] == nullptr) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table entry 0 is null
+		}
 		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[0])(chaos_arg_0, chaos_arg_1);
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
@@ -1500,7 +1506,7 @@ extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_Syst
 	{
 		const auto chaos_arg_1 = _s1;
 		const auto chaos_arg_0 = _s0;
-		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Object__Equals_System_Boolean_System_Object_System_Object_(chaos_arg_0, chaos_arg_1);
+		const auto chaos_result = ChaosObjectEqualsStatic(chaos_arg_0, chaos_arg_1);
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
@@ -1515,11 +1521,7 @@ extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_Syst
 					_s0 = chaos_args[0];
 					{
 						const auto chaos_arg_0 = _s0;
-						if (chaos_arg_0 == 0)
-						{
-							::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
-						}
-						const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Object__ToString_System_String__(chaos_arg_0);
+						const auto chaos_result = ChaosObjectToString(chaos_arg_0);
 						_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 					}
 				}
@@ -1613,6 +1615,12 @@ extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_Syst
 	{
 		const auto chaos_arg_1 = _s1;
 		const auto chaos_arg_0 = _s0;
+		if (3 < 0 || 3 >= kChaosExternalRuntimeCount) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table index 3 out of range
+		}
+		if (kChaosExternalRuntimeFnTable[3] == nullptr) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table entry 3 is null
+		}
 		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[3])(chaos_arg_0, chaos_arg_1);
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
@@ -1865,12 +1873,24 @@ extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_0_0_
 	// brfalse (structured EH branch)
 	_s11 = chaos_locals[0];
 	{
+		if (7 < 0 || 7 >= kChaosExternalRuntimeCount) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table index 7 out of range
+		}
+		if (kChaosExternalRuntimeFnTable[7] == nullptr) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table entry 7 is null
+		}
 		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[7])();
 		_s12 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	chaos_locals[5] = _s12;
 	_s12 = chaos_locals[1];
 	{
+		if (7 < 0 || 7 >= kChaosExternalRuntimeCount) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table index 7 out of range
+		}
+		if (kChaosExternalRuntimeFnTable[7] == nullptr) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table entry 7 is null
+		}
 		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[7])();
 		_s13 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
@@ -1907,6 +1927,12 @@ extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_0_0_
 				{
 					_s13 = chaos_locals[8];
 					{
+						if (13 < 0 || 13 >= kChaosExternalRuntimeCount) {
+							CHAOS_IL2CPP_FAIL(); // external runtime table index 13 out of range
+						}
+						if (kChaosExternalRuntimeFnTable[13] == nullptr) {
+							CHAOS_IL2CPP_FAIL(); // external runtime table entry 13 is null
+						}
 						reinterpret_cast<void(*)(void)>(kChaosExternalRuntimeFnTable[13])();
 					}
 				}
@@ -1921,6 +1947,12 @@ extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_0_0_
 						{
 							_s13 = chaos_locals[7];
 							{
+								if (13 < 0 || 13 >= kChaosExternalRuntimeCount) {
+									CHAOS_IL2CPP_FAIL(); // external runtime table index 13 out of range
+								}
+								if (kChaosExternalRuntimeFnTable[13] == nullptr) {
+									CHAOS_IL2CPP_FAIL(); // external runtime table entry 13 is null
+								}
 								reinterpret_cast<void(*)(void)>(kChaosExternalRuntimeFnTable[13])();
 							}
 						}
@@ -1932,6 +1964,12 @@ extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_0_0_
 					// br (handled via structured EH branches)
 					_s13 = chaos_locals[6];
 					{
+						if (9 < 0 || 9 >= kChaosExternalRuntimeCount) {
+							CHAOS_IL2CPP_FAIL(); // external runtime table index 9 out of range
+						}
+						if (kChaosExternalRuntimeFnTable[9] == nullptr) {
+							CHAOS_IL2CPP_FAIL(); // external runtime table entry 9 is null
+						}
 						const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[9])();
 						_s14 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 					}
@@ -1942,22 +1980,46 @@ extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_0_0_
 					// brfalse (structured EH branch)
 					// leave (handled via structured EH branches)
 					{
+						if (10 < 0 || 10 >= kChaosExternalRuntimeCount) {
+							CHAOS_IL2CPP_FAIL(); // external runtime table index 10 out of range
+						}
+						if (kChaosExternalRuntimeFnTable[10] == nullptr) {
+							CHAOS_IL2CPP_FAIL(); // external runtime table entry 10 is null
+						}
 						const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[10])();
 						_s15 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 					}
 					_s16 = chaos_locals[5];
 					{
+						if (11 < 0 || 11 >= kChaosExternalRuntimeCount) {
+							CHAOS_IL2CPP_FAIL(); // external runtime table index 11 out of range
+						}
+						if (kChaosExternalRuntimeFnTable[11] == nullptr) {
+							CHAOS_IL2CPP_FAIL(); // external runtime table entry 11 is null
+						}
 						const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[11])();
 						_s17 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 					}
 					_s18 = chaos_locals[6];
 					{
+						if (11 < 0 || 11 >= kChaosExternalRuntimeCount) {
+							CHAOS_IL2CPP_FAIL(); // external runtime table index 11 out of range
+						}
+						if (kChaosExternalRuntimeFnTable[11] == nullptr) {
+							CHAOS_IL2CPP_FAIL(); // external runtime table entry 11 is null
+						}
 						const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[11])();
 						_s19 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 					}
 					{
 						const auto chaos_arg_1 = _s19;
 						const auto chaos_arg_0 = _s18;
+						if (12 < 0 || 12 >= kChaosExternalRuntimeCount) {
+							CHAOS_IL2CPP_FAIL(); // external runtime table index 12 out of range
+						}
+						if (kChaosExternalRuntimeFnTable[12] == nullptr) {
+							CHAOS_IL2CPP_FAIL(); // external runtime table entry 12 is null
+						}
 						const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[12])(chaos_arg_0, chaos_arg_1);
 						_s18 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 					}
@@ -1973,6 +2035,12 @@ extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_0_0_
 					chaos_locals[9] = _s19;
 					_s19 = chaos_locals[5];
 					{
+						if (9 < 0 || 9 >= kChaosExternalRuntimeCount) {
+							CHAOS_IL2CPP_FAIL(); // external runtime table index 9 out of range
+						}
+						if (kChaosExternalRuntimeFnTable[9] == nullptr) {
+							CHAOS_IL2CPP_FAIL(); // external runtime table entry 9 is null
+						}
 						const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[9])();
 						_s20 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 					}
@@ -1981,6 +2049,12 @@ extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_0_0_
 					// brtrue (structured EH branch)
 					_s21 = chaos_locals[6];
 					{
+						if (9 < 0 || 9 >= kChaosExternalRuntimeCount) {
+							CHAOS_IL2CPP_FAIL(); // external runtime table index 9 out of range
+						}
+						if (kChaosExternalRuntimeFnTable[9] == nullptr) {
+							CHAOS_IL2CPP_FAIL(); // external runtime table entry 9 is null
+						}
 						const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[9])();
 						_s22 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 					}
@@ -1990,6 +2064,12 @@ extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_0_0_
 			CHAOS_EH_FINALLY_END
 	CHAOS_EH_FINALLY_END
 	{
+		if (14 < 0 || 14 >= kChaosExternalRuntimeCount) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table index 14 out of range
+		}
+		if (kChaosExternalRuntimeFnTable[14] == nullptr) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table entry 14 is null
+		}
 		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[14])();
 		_s23 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
@@ -1998,6 +2078,12 @@ extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_0_0_
 	{
 		const auto chaos_arg_1 = _s25;
 		const auto chaos_arg_0 = _s24;
+		if (15 < 0 || 15 >= kChaosExternalRuntimeCount) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table index 15 out of range
+		}
+		if (kChaosExternalRuntimeFnTable[15] == nullptr) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table entry 15 is null
+		}
 		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[15])(chaos_arg_0, chaos_arg_1);
 		_s24 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
@@ -2023,6 +2109,12 @@ extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreNotEqual_0
 	CHAOS_IL2CPP_INTPTR _s1;
 	CHAOS_IL2CPP_INTPTR _s2;
 	{
+		if (14 < 0 || 14 >= kChaosExternalRuntimeCount) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table index 14 out of range
+		}
+		if (kChaosExternalRuntimeFnTable[14] == nullptr) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table entry 14 is null
+		}
 		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[14])();
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
@@ -2031,6 +2123,12 @@ extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreNotEqual_0
 	{
 		const auto chaos_arg_1 = _s2;
 		const auto chaos_arg_0 = _s1;
+		if (15 < 0 || 15 >= kChaosExternalRuntimeCount) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table index 15 out of range
+		}
+		if (kChaosExternalRuntimeFnTable[15] == nullptr) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table entry 15 is null
+		}
 		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[15])(chaos_arg_0, chaos_arg_1);
 		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
@@ -2077,7 +2175,7 @@ extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Fail_System_S
 		chaos_static_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert__s_exitCode = chaos_value;
 	}
 	{
-		const auto chaos_result = chaos_external_runtime_System_Console_System_Console__get_Error_System_IO_TextWriter__();
+		const auto chaos_result = ChaosConsoleGetError();
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	{
@@ -2093,11 +2191,7 @@ extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Fail_System_S
 	{
 		const auto chaos_arg_1 = _s1;
 		const auto chaos_arg_0 = _s0;
-		if (chaos_arg_0 == 0)
-		{
-			::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
-		}
-		chaos_external_runtime_System_Private_CoreLib_System_IO_TextWriter__WriteLine_System_Void_System_String_(chaos_arg_0, chaos_arg_1);
+		ChaosTextWriterWriteLineStr(chaos_arg_0, chaos_arg_1);
 	}
 	_s0 = chaos_args[0];
 	{
@@ -3501,7 +3595,7 @@ extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_AssertionException__
 	{
 		const auto chaos_arg_1 = _s1;
 		const auto chaos_arg_0 = _s0;
-		chaos_external_runtime_System_Private_CoreLib_System_Exception___ctor_System_Void_System_String_(chaos_arg_0, chaos_arg_1);
+		ChaosReflectionSetExceptionMetadata(chaos_arg_0, chaos_arg_1);
 	}
 	return;
 }
@@ -3515,6 +3609,12 @@ extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_BenchmarkAttribute__
 	CHAOS_IL2CPP_INTPTR _s0;
 	_s0 = chaos_args[0];
 	{
+		if (22 < 0 || 22 >= kChaosExternalRuntimeCount) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table index 22 out of range
+		}
+		if (kChaosExternalRuntimeFnTable[22] == nullptr) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table entry 22 is null
+		}
 		reinterpret_cast<void(*)(void)>(kChaosExternalRuntimeFnTable[22])();
 	}
 	return;
@@ -3529,6 +3629,12 @@ extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_FactAttribute__ctor(
 	CHAOS_IL2CPP_INTPTR _s0;
 	_s0 = chaos_args[0];
 	{
+		if (22 < 0 || 22 >= kChaosExternalRuntimeCount) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table index 22 out of range
+		}
+		if (kChaosExternalRuntimeFnTable[22] == nullptr) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table entry 22 is null
+		}
 		reinterpret_cast<void(*)(void)>(kChaosExternalRuntimeFnTable[22])();
 	}
 	return;
@@ -3543,6 +3649,12 @@ extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_HotUpdateAttribute__
 	CHAOS_IL2CPP_INTPTR _s0;
 	_s0 = chaos_args[0];
 	{
+		if (22 < 0 || 22 >= kChaosExternalRuntimeCount) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table index 22 out of range
+		}
+		if (kChaosExternalRuntimeFnTable[22] == nullptr) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table entry 22 is null
+		}
 		reinterpret_cast<void(*)(void)>(kChaosExternalRuntimeFnTable[22])();
 	}
 	return;
@@ -3558,7 +3670,7 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System
 	_s0 = chaos_args[0];
 	{
 		const auto chaos_arg_0 = _s0;
-		chaos_external_runtime_System_Private_CoreLib_System_Object___ctor_System_Void__(chaos_arg_0);
+		ChaosObjectCtor(chaos_arg_0);
 	}
 	return;
 }
@@ -3586,6 +3698,12 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System
 		}
 	}
 	{
+		if (25 < 0 || 25 >= kChaosExternalRuntimeCount) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table index 25 out of range
+		}
+		if (kChaosExternalRuntimeFnTable[25] == nullptr) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table entry 25 is null
+		}
 		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[25])();
 		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
@@ -3615,6 +3733,12 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System
 		}
 	}
 	{
+		if (26 < 0 || 26 >= kChaosExternalRuntimeCount) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table index 26 out of range
+		}
+		if (kChaosExternalRuntimeFnTable[26] == nullptr) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table entry 26 is null
+		}
 		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[26])();
 		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
@@ -3644,6 +3768,12 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System
 		}
 	}
 	{
+		if (27 < 0 || 27 >= kChaosExternalRuntimeCount) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table index 27 out of range
+		}
+		if (kChaosExternalRuntimeFnTable[27] == nullptr) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table entry 27 is null
+		}
 		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[27])();
 		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
@@ -3860,7 +3990,7 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System
 	_s0 = chaos_args[0];
 	{
 		const auto chaos_arg_0 = _s0;
-		chaos_external_runtime_System_Private_CoreLib_System_Object___ctor_System_Void__(chaos_arg_0);
+		ChaosObjectCtor(chaos_arg_0);
 	}
 	return;
 }
@@ -3888,6 +4018,12 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System
 		}
 	}
 	{
+		if (25 < 0 || 25 >= kChaosExternalRuntimeCount) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table index 25 out of range
+		}
+		if (kChaosExternalRuntimeFnTable[25] == nullptr) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table entry 25 is null
+		}
 		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[25])();
 		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
@@ -3917,6 +4053,12 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System
 		}
 	}
 	{
+		if (26 < 0 || 26 >= kChaosExternalRuntimeCount) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table index 26 out of range
+		}
+		if (kChaosExternalRuntimeFnTable[26] == nullptr) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table entry 26 is null
+		}
 		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[26])();
 		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
@@ -3946,6 +4088,12 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System
 		}
 	}
 	{
+		if (27 < 0 || 27 >= kChaosExternalRuntimeCount) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table index 27 out of range
+		}
+		if (kChaosExternalRuntimeFnTable[27] == nullptr) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table entry 27 is null
+		}
 		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[27])();
 		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
@@ -3962,7 +4110,7 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System
 	_s0 = chaos_args[0];
 	{
 		const auto chaos_arg_0 = _s0;
-		chaos_external_runtime_System_Private_CoreLib_System_Object___ctor_System_Void__(chaos_arg_0);
+		ChaosObjectCtor(chaos_arg_0);
 	}
 	return;
 }
@@ -3990,6 +4138,12 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System
 		}
 	}
 	{
+		if (34 < 0 || 34 >= kChaosExternalRuntimeCount) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table index 34 out of range
+		}
+		if (kChaosExternalRuntimeFnTable[34] == nullptr) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table entry 34 is null
+		}
 		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[34])();
 		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
@@ -4086,7 +4240,7 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System
 	_s0 = chaos_args[0];
 	{
 		const auto chaos_arg_0 = _s0;
-		chaos_external_runtime_System_Private_CoreLib_System_Object___ctor_System_Void__(chaos_arg_0);
+		ChaosObjectCtor(chaos_arg_0);
 	}
 	return;
 }
@@ -4114,6 +4268,12 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System
 		}
 	}
 	{
+		if (34 < 0 || 34 >= kChaosExternalRuntimeCount) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table index 34 out of range
+		}
+		if (kChaosExternalRuntimeFnTable[34] == nullptr) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table entry 34 is null
+		}
 		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[34])();
 		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
@@ -4130,7 +4290,7 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System
 	_s0 = chaos_args[0];
 	{
 		const auto chaos_arg_0 = _s0;
-		chaos_external_runtime_System_Private_CoreLib_System_Object___ctor_System_Void__(chaos_arg_0);
+		ChaosObjectCtor(chaos_arg_0);
 	}
 	return;
 }
@@ -4145,6 +4305,12 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System
 	CHAOS_IL2CPP_INTPTR _s1;
 	_s0 = 0;
 	{
+		if (37 < 0 || 37 >= kChaosExternalRuntimeCount) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table index 37 out of range
+		}
+		if (kChaosExternalRuntimeFnTable[37] == nullptr) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table entry 37 is null
+		}
 		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[37])();
 		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
@@ -4241,7 +4407,7 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System
 	_s0 = chaos_args[0];
 	{
 		const auto chaos_arg_0 = _s0;
-		chaos_external_runtime_System_Private_CoreLib_System_Object___ctor_System_Void__(chaos_arg_0);
+		ChaosObjectCtor(chaos_arg_0);
 	}
 	return;
 }
@@ -4256,6 +4422,12 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System
 	CHAOS_IL2CPP_INTPTR _s1;
 	_s0 = 0;
 	{
+		if (37 < 0 || 37 >= kChaosExternalRuntimeCount) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table index 37 out of range
+		}
+		if (kChaosExternalRuntimeFnTable[37] == nullptr) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table entry 37 is null
+		}
 		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[37])();
 		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
@@ -4272,7 +4444,7 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System
 	_s0 = chaos_args[0];
 	{
 		const auto chaos_arg_0 = _s0;
-		chaos_external_runtime_System_Private_CoreLib_System_Object___ctor_System_Void__(chaos_arg_0);
+		ChaosObjectCtor(chaos_arg_0);
 	}
 	return;
 }
@@ -4300,6 +4472,12 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System
 		}
 	}
 	{
+		if (41 < 0 || 41 >= kChaosExternalRuntimeCount) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table index 41 out of range
+		}
+		if (kChaosExternalRuntimeFnTable[41] == nullptr) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table entry 41 is null
+		}
 		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[41])();
 		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
@@ -4329,6 +4507,12 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System
 		}
 	}
 	{
+		if (42 < 0 || 42 >= kChaosExternalRuntimeCount) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table index 42 out of range
+		}
+		if (kChaosExternalRuntimeFnTable[42] == nullptr) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table entry 42 is null
+		}
 		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[42])();
 		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
@@ -4485,7 +4669,7 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System
 	_s0 = chaos_args[0];
 	{
 		const auto chaos_arg_0 = _s0;
-		chaos_external_runtime_System_Private_CoreLib_System_Object___ctor_System_Void__(chaos_arg_0);
+		ChaosObjectCtor(chaos_arg_0);
 	}
 	return;
 }
@@ -4513,6 +4697,12 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System
 		}
 	}
 	{
+		if (41 < 0 || 41 >= kChaosExternalRuntimeCount) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table index 41 out of range
+		}
+		if (kChaosExternalRuntimeFnTable[41] == nullptr) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table entry 41 is null
+		}
 		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[41])();
 		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
@@ -4542,6 +4732,12 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System
 		}
 	}
 	{
+		if (42 < 0 || 42 >= kChaosExternalRuntimeCount) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table index 42 out of range
+		}
+		if (kChaosExternalRuntimeFnTable[42] == nullptr) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table entry 42 is null
+		}
 		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[42])();
 		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
@@ -4558,7 +4754,7 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System
 	_s0 = chaos_args[0];
 	{
 		const auto chaos_arg_0 = _s0;
-		chaos_external_runtime_System_Private_CoreLib_System_Object___ctor_System_Void__(chaos_arg_0);
+		ChaosObjectCtor(chaos_arg_0);
 	}
 	return;
 }
@@ -4575,6 +4771,12 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System
 	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
 	{
 		const auto chaos_arg_0 = _s1;
+		if (46 < 0 || 46 >= kChaosExternalRuntimeCount) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table index 46 out of range
+		}
+		if (kChaosExternalRuntimeFnTable[46] == nullptr) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table entry 46 is null
+		}
 		reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[46])(chaos_arg_0);
 	}
 	return;
@@ -4592,6 +4794,12 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System
 	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
 	{
 		const auto chaos_arg_0 = _s1;
+		if (46 < 0 || 46 >= kChaosExternalRuntimeCount) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table index 46 out of range
+		}
+		if (kChaosExternalRuntimeFnTable[46] == nullptr) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table entry 46 is null
+		}
 		reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[46])(chaos_arg_0);
 	}
 	return;
@@ -4606,6 +4814,12 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System
 	CHAOS_IL2CPP_INTPTR _s0;
 	_s0 = 0;
 	{
+		if (47 < 0 || 47 >= kChaosExternalRuntimeCount) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table index 47 out of range
+		}
+		if (kChaosExternalRuntimeFnTable[47] == nullptr) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table entry 47 is null
+		}
 		reinterpret_cast<void(*)(void)>(kChaosExternalRuntimeFnTable[47])();
 	}
 	return;
@@ -4623,6 +4837,12 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System
 	_s1 = 0;
 	{
 		const auto chaos_arg_0 = _s1;
+		if (48 < 0 || 48 >= kChaosExternalRuntimeCount) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table index 48 out of range
+		}
+		if (kChaosExternalRuntimeFnTable[48] == nullptr) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table entry 48 is null
+		}
 		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[48])(chaos_arg_0);
 		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
@@ -4641,6 +4861,12 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System
 	_s1 = 0;
 	{
 		const auto chaos_arg_0 = _s1;
+		if (49 < 0 || 49 >= kChaosExternalRuntimeCount) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table index 49 out of range
+		}
+		if (kChaosExternalRuntimeFnTable[49] == nullptr) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table entry 49 is null
+		}
 		reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[49])(chaos_arg_0);
 	}
 	return;
@@ -4658,6 +4884,12 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System
 	_s1 = 0;
 	{
 		const auto chaos_arg_0 = _s1;
+		if (50 < 0 || 50 >= kChaosExternalRuntimeCount) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table index 50 out of range
+		}
+		if (kChaosExternalRuntimeFnTable[50] == nullptr) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table entry 50 is null
+		}
 		reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[50])(chaos_arg_0);
 	}
 	return;
@@ -4675,6 +4907,12 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System
 	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
 	{
 		const auto chaos_arg_0 = _s1;
+		if (51 < 0 || 51 >= kChaosExternalRuntimeCount) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table index 51 out of range
+		}
+		if (kChaosExternalRuntimeFnTable[51] == nullptr) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table entry 51 is null
+		}
 		reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[51])(chaos_arg_0);
 	}
 	return;
@@ -4692,6 +4930,12 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System
 	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
 	{
 		const auto chaos_arg_0 = _s1;
+		if (51 < 0 || 51 >= kChaosExternalRuntimeCount) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table index 51 out of range
+		}
+		if (kChaosExternalRuntimeFnTable[51] == nullptr) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table entry 51 is null
+		}
 		reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[51])(chaos_arg_0);
 	}
 	return;
@@ -4709,6 +4953,12 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System
 	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
 	{
 		const auto chaos_arg_0 = _s1;
+		if (52 < 0 || 52 >= kChaosExternalRuntimeCount) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table index 52 out of range
+		}
+		if (kChaosExternalRuntimeFnTable[52] == nullptr) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table entry 52 is null
+		}
 		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[52])(chaos_arg_0);
 		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
@@ -4727,6 +4977,12 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System
 	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
 	{
 		const auto chaos_arg_0 = _s1;
+		if (52 < 0 || 52 >= kChaosExternalRuntimeCount) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table index 52 out of range
+		}
+		if (kChaosExternalRuntimeFnTable[52] == nullptr) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table entry 52 is null
+		}
 		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[52])(chaos_arg_0);
 		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
@@ -4743,6 +4999,12 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System
 	CHAOS_IL2CPP_INTPTR _s1;
 	_s0 = 0;
 	{
+		if (53 < 0 || 53 >= kChaosExternalRuntimeCount) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table index 53 out of range
+		}
+		if (kChaosExternalRuntimeFnTable[53] == nullptr) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table entry 53 is null
+		}
 		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[53])();
 		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
@@ -4764,6 +5026,12 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System
 	{
 		const auto chaos_arg_1 = _s2;
 		const auto chaos_arg_0 = _s1;
+		if (54 < 0 || 54 >= kChaosExternalRuntimeCount) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table index 54 out of range
+		}
+		if (kChaosExternalRuntimeFnTable[54] == nullptr) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table entry 54 is null
+		}
 		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[54])(chaos_arg_0, chaos_arg_1);
 		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
@@ -4785,6 +5053,12 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System
 	{
 		const auto chaos_arg_1 = _s2;
 		const auto chaos_arg_0 = _s1;
+		if (54 < 0 || 54 >= kChaosExternalRuntimeCount) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table index 54 out of range
+		}
+		if (kChaosExternalRuntimeFnTable[54] == nullptr) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table entry 54 is null
+		}
 		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[54])(chaos_arg_0, chaos_arg_1);
 		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
@@ -4806,6 +5080,12 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System
 	{
 		const auto chaos_arg_1 = _s2;
 		const auto chaos_arg_0 = _s1;
+		if (54 < 0 || 54 >= kChaosExternalRuntimeCount) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table index 54 out of range
+		}
+		if (kChaosExternalRuntimeFnTable[54] == nullptr) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table entry 54 is null
+		}
 		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[54])(chaos_arg_0, chaos_arg_1);
 		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
@@ -4822,6 +5102,12 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System
 	CHAOS_IL2CPP_INTPTR _s1;
 	_s0 = 0;
 	{
+		if (55 < 0 || 55 >= kChaosExternalRuntimeCount) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table index 55 out of range
+		}
+		if (kChaosExternalRuntimeFnTable[55] == nullptr) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table entry 55 is null
+		}
 		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[55])();
 		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
@@ -4843,6 +5129,12 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System
 	{
 		const auto chaos_arg_1 = _s2;
 		const auto chaos_arg_0 = _s1;
+		if (56 < 0 || 56 >= kChaosExternalRuntimeCount) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table index 56 out of range
+		}
+		if (kChaosExternalRuntimeFnTable[56] == nullptr) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table entry 56 is null
+		}
 		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[56])(chaos_arg_0, chaos_arg_1);
 		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
@@ -4864,6 +5156,12 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System
 	{
 		const auto chaos_arg_1 = _s2;
 		const auto chaos_arg_0 = _s1;
+		if (56 < 0 || 56 >= kChaosExternalRuntimeCount) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table index 56 out of range
+		}
+		if (kChaosExternalRuntimeFnTable[56] == nullptr) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table entry 56 is null
+		}
 		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[56])(chaos_arg_0, chaos_arg_1);
 		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
@@ -4885,6 +5183,12 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System
 	{
 		const auto chaos_arg_1 = _s2;
 		const auto chaos_arg_0 = _s1;
+		if (56 < 0 || 56 >= kChaosExternalRuntimeCount) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table index 56 out of range
+		}
+		if (kChaosExternalRuntimeFnTable[56] == nullptr) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table entry 56 is null
+		}
 		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[56])(chaos_arg_0, chaos_arg_1);
 		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
@@ -4906,6 +5210,12 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System
 	{
 		const auto chaos_arg_1 = _s2;
 		const auto chaos_arg_0 = _s1;
+		if (57 < 0 || 57 >= kChaosExternalRuntimeCount) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table index 57 out of range
+		}
+		if (kChaosExternalRuntimeFnTable[57] == nullptr) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table entry 57 is null
+		}
 		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[57])(chaos_arg_0, chaos_arg_1);
 		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
@@ -4927,6 +5237,12 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System
 	{
 		const auto chaos_arg_1 = _s2;
 		const auto chaos_arg_0 = _s1;
+		if (57 < 0 || 57 >= kChaosExternalRuntimeCount) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table index 57 out of range
+		}
+		if (kChaosExternalRuntimeFnTable[57] == nullptr) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table entry 57 is null
+		}
 		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[57])(chaos_arg_0, chaos_arg_1);
 		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
@@ -4948,6 +5264,12 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System
 	{
 		const auto chaos_arg_1 = _s2;
 		const auto chaos_arg_0 = _s1;
+		if (57 < 0 || 57 >= kChaosExternalRuntimeCount) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table index 57 out of range
+		}
+		if (kChaosExternalRuntimeFnTable[57] == nullptr) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table entry 57 is null
+		}
 		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[57])(chaos_arg_0, chaos_arg_1);
 		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
@@ -4966,6 +5288,12 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System
 	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
 	{
 		const auto chaos_arg_0 = _s1;
+		if (59 < 0 || 59 >= kChaosExternalRuntimeCount) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table index 59 out of range
+		}
+		if (kChaosExternalRuntimeFnTable[59] == nullptr) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table entry 59 is null
+		}
 		reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[59])(chaos_arg_0);
 	}
 	return;
@@ -4983,6 +5311,12 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System
 	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
 	{
 		const auto chaos_arg_0 = _s1;
+		if (59 < 0 || 59 >= kChaosExternalRuntimeCount) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table index 59 out of range
+		}
+		if (kChaosExternalRuntimeFnTable[59] == nullptr) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table entry 59 is null
+		}
 		reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[59])(chaos_arg_0);
 	}
 	return;
@@ -5000,6 +5334,12 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System
 	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
 	{
 		const auto chaos_arg_0 = _s1;
+		if (60 < 0 || 60 >= kChaosExternalRuntimeCount) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table index 60 out of range
+		}
+		if (kChaosExternalRuntimeFnTable[60] == nullptr) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table entry 60 is null
+		}
 		reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[60])(chaos_arg_0);
 	}
 	return;
@@ -5017,6 +5357,12 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System
 	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
 	{
 		const auto chaos_arg_0 = _s1;
+		if (60 < 0 || 60 >= kChaosExternalRuntimeCount) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table index 60 out of range
+		}
+		if (kChaosExternalRuntimeFnTable[60] == nullptr) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table entry 60 is null
+		}
 		reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[60])(chaos_arg_0);
 	}
 	return;
@@ -5037,6 +5383,12 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System
 	{
 		const auto chaos_arg_1 = _s2;
 		const auto chaos_arg_0 = _s1;
+		if (61 < 0 || 61 >= kChaosExternalRuntimeCount) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table index 61 out of range
+		}
+		if (kChaosExternalRuntimeFnTable[61] == nullptr) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table entry 61 is null
+		}
 		reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[61])(chaos_arg_0, chaos_arg_1);
 	}
 	return;
@@ -5057,6 +5409,12 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System
 	{
 		const auto chaos_arg_1 = _s2;
 		const auto chaos_arg_0 = _s1;
+		if (61 < 0 || 61 >= kChaosExternalRuntimeCount) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table index 61 out of range
+		}
+		if (kChaosExternalRuntimeFnTable[61] == nullptr) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table entry 61 is null
+		}
 		reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[61])(chaos_arg_0, chaos_arg_1);
 	}
 	return;
@@ -5077,6 +5435,12 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System
 	{
 		const auto chaos_arg_1 = _s2;
 		const auto chaos_arg_0 = _s1;
+		if (61 < 0 || 61 >= kChaosExternalRuntimeCount) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table index 61 out of range
+		}
+		if (kChaosExternalRuntimeFnTable[61] == nullptr) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table entry 61 is null
+		}
 		reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[61])(chaos_arg_0, chaos_arg_1);
 	}
 	return;
@@ -5098,6 +5462,12 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System
 	{
 		const auto chaos_arg_1 = _s2;
 		const auto chaos_arg_0 = _s1;
+		if (62 < 0 || 62 >= kChaosExternalRuntimeCount) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table index 62 out of range
+		}
+		if (kChaosExternalRuntimeFnTable[62] == nullptr) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table entry 62 is null
+		}
 		reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[62])(chaos_arg_0, chaos_arg_1);
 	}
 	return;
@@ -5119,6 +5489,12 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System
 	{
 		const auto chaos_arg_1 = _s2;
 		const auto chaos_arg_0 = _s1;
+		if (62 < 0 || 62 >= kChaosExternalRuntimeCount) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table index 62 out of range
+		}
+		if (kChaosExternalRuntimeFnTable[62] == nullptr) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table entry 62 is null
+		}
 		reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[62])(chaos_arg_0, chaos_arg_1);
 	}
 	return;
@@ -5149,6 +5525,12 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System
 	_s1 = chaos_locals[0];
 	{
 		const auto chaos_arg_0 = _s1;
+		if (64 < 0 || 64 >= kChaosExternalRuntimeCount) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table index 64 out of range
+		}
+		if (kChaosExternalRuntimeFnTable[64] == nullptr) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table entry 64 is null
+		}
 		reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[64])(chaos_arg_0);
 	}
 	return;
@@ -5185,6 +5567,12 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System
 		const auto chaos_arg_2 = _s3;
 		const auto chaos_arg_1 = _s2;
 		const auto chaos_arg_0 = _s1;
+		if (65 < 0 || 65 >= kChaosExternalRuntimeCount) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table index 65 out of range
+		}
+		if (kChaosExternalRuntimeFnTable[65] == nullptr) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table entry 65 is null
+		}
 		reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[65])(chaos_arg_0, chaos_arg_1, chaos_arg_2);
 	}
 	return;
@@ -5221,6 +5609,12 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System
 		const auto chaos_arg_2 = _s3;
 		const auto chaos_arg_1 = _s2;
 		const auto chaos_arg_0 = _s1;
+		if (65 < 0 || 65 >= kChaosExternalRuntimeCount) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table index 65 out of range
+		}
+		if (kChaosExternalRuntimeFnTable[65] == nullptr) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table entry 65 is null
+		}
 		reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[65])(chaos_arg_0, chaos_arg_1, chaos_arg_2);
 	}
 	return;
@@ -5257,6 +5651,12 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System
 		const auto chaos_arg_2 = _s3;
 		const auto chaos_arg_1 = _s2;
 		const auto chaos_arg_0 = _s1;
+		if (65 < 0 || 65 >= kChaosExternalRuntimeCount) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table index 65 out of range
+		}
+		if (kChaosExternalRuntimeFnTable[65] == nullptr) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table entry 65 is null
+		}
 		reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[65])(chaos_arg_0, chaos_arg_1, chaos_arg_2);
 	}
 	return;
@@ -5274,6 +5674,12 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System
 	_s1 = 0;
 	{
 		const auto chaos_arg_0 = _s1;
+		if (66 < 0 || 66 >= kChaosExternalRuntimeCount) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table index 66 out of range
+		}
+		if (kChaosExternalRuntimeFnTable[66] == nullptr) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table entry 66 is null
+		}
 		reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[66])(chaos_arg_0);
 	}
 	return;
@@ -5294,6 +5700,12 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System
 	}
 	{
 		const auto chaos_arg_0 = _s1;
+		if (66 < 0 || 66 >= kChaosExternalRuntimeCount) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table index 66 out of range
+		}
+		if (kChaosExternalRuntimeFnTable[66] == nullptr) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table entry 66 is null
+		}
 		reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[66])(chaos_arg_0);
 	}
 	return;
@@ -5312,6 +5724,12 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System
 	_s1 = ChaosArrayNew1D_Inline(&chaos_type_info_managed_array.hot, chaos_mt_System_Private_CoreLib_System_Byte.AsTypeInfoHot(), 1, _s1);
 	{
 		const auto chaos_arg_0 = _s1;
+		if (66 < 0 || 66 >= kChaosExternalRuntimeCount) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table index 66 out of range
+		}
+		if (kChaosExternalRuntimeFnTable[66] == nullptr) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table entry 66 is null
+		}
 		reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[66])(chaos_arg_0);
 	}
 	return;
@@ -5335,6 +5753,12 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System
 		const auto chaos_arg_2 = _s3;
 		const auto chaos_arg_1 = _s2;
 		const auto chaos_arg_0 = _s1;
+		if (69 < 0 || 69 >= kChaosExternalRuntimeCount) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table index 69 out of range
+		}
+		if (kChaosExternalRuntimeFnTable[69] == nullptr) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table entry 69 is null
+		}
 		reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[69])(chaos_arg_0, chaos_arg_1, chaos_arg_2);
 	}
 	return;
@@ -5358,6 +5782,12 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System
 		const auto chaos_arg_2 = _s3;
 		const auto chaos_arg_1 = _s2;
 		const auto chaos_arg_0 = _s1;
+		if (69 < 0 || 69 >= kChaosExternalRuntimeCount) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table index 69 out of range
+		}
+		if (kChaosExternalRuntimeFnTable[69] == nullptr) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table entry 69 is null
+		}
 		reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[69])(chaos_arg_0, chaos_arg_1, chaos_arg_2);
 	}
 	return;
@@ -5381,6 +5811,12 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System
 		const auto chaos_arg_2 = _s3;
 		const auto chaos_arg_1 = _s2;
 		const auto chaos_arg_0 = _s1;
+		if (69 < 0 || 69 >= kChaosExternalRuntimeCount) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table index 69 out of range
+		}
+		if (kChaosExternalRuntimeFnTable[69] == nullptr) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table entry 69 is null
+		}
 		reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[69])(chaos_arg_0, chaos_arg_1, chaos_arg_2);
 	}
 	return;
@@ -5407,6 +5843,12 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System
 		const auto chaos_arg_2 = _s3;
 		const auto chaos_arg_1 = _s2;
 		const auto chaos_arg_0 = _s1;
+		if (69 < 0 || 69 >= kChaosExternalRuntimeCount) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table index 69 out of range
+		}
+		if (kChaosExternalRuntimeFnTable[69] == nullptr) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table entry 69 is null
+		}
 		reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[69])(chaos_arg_0, chaos_arg_1, chaos_arg_2);
 	}
 	return;
@@ -5431,6 +5873,12 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System
 		const auto chaos_arg_2 = _s3;
 		const auto chaos_arg_1 = _s2;
 		const auto chaos_arg_0 = _s1;
+		if (69 < 0 || 69 >= kChaosExternalRuntimeCount) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table index 69 out of range
+		}
+		if (kChaosExternalRuntimeFnTable[69] == nullptr) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table entry 69 is null
+		}
 		reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[69])(chaos_arg_0, chaos_arg_1, chaos_arg_2);
 	}
 	return;
@@ -5448,6 +5896,12 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System
 	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
 	{
 		const auto chaos_arg_0 = _s1;
+		if (70 < 0 || 70 >= kChaosExternalRuntimeCount) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table index 70 out of range
+		}
+		if (kChaosExternalRuntimeFnTable[70] == nullptr) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table entry 70 is null
+		}
 		reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[70])(chaos_arg_0);
 	}
 	return;
@@ -5465,6 +5919,12 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System
 	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
 	{
 		const auto chaos_arg_0 = _s1;
+		if (70 < 0 || 70 >= kChaosExternalRuntimeCount) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table index 70 out of range
+		}
+		if (kChaosExternalRuntimeFnTable[70] == nullptr) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table entry 70 is null
+		}
 		reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[70])(chaos_arg_0);
 	}
 	return;
@@ -5482,6 +5942,12 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System
 	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
 	{
 		const auto chaos_arg_0 = _s1;
+		if (71 < 0 || 71 >= kChaosExternalRuntimeCount) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table index 71 out of range
+		}
+		if (kChaosExternalRuntimeFnTable[71] == nullptr) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table entry 71 is null
+		}
 		reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[71])(chaos_arg_0);
 	}
 	return;
@@ -5499,6 +5965,12 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System
 	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
 	{
 		const auto chaos_arg_0 = _s1;
+		if (71 < 0 || 71 >= kChaosExternalRuntimeCount) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table index 71 out of range
+		}
+		if (kChaosExternalRuntimeFnTable[71] == nullptr) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table entry 71 is null
+		}
 		reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[71])(chaos_arg_0);
 	}
 	return;
@@ -5516,6 +5988,12 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System
 	_s1 = 0;
 	{
 		const auto chaos_arg_0 = _s1;
+		if (72 < 0 || 72 >= kChaosExternalRuntimeCount) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table index 72 out of range
+		}
+		if (kChaosExternalRuntimeFnTable[72] == nullptr) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table entry 72 is null
+		}
 		reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[72])(chaos_arg_0);
 	}
 	return;
@@ -5533,6 +6011,12 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System
 	_s1 = 0;
 	{
 		const auto chaos_arg_0 = _s1;
+		if (73 < 0 || 73 >= kChaosExternalRuntimeCount) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table index 73 out of range
+		}
+		if (kChaosExternalRuntimeFnTable[73] == nullptr) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table entry 73 is null
+		}
 		reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[73])(chaos_arg_0);
 	}
 	return;
@@ -5550,6 +6034,12 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System
 	_s1 = chaos_static_System_Private_CoreLib_System_IO_Stream__Null;
 	{
 		const auto chaos_arg_0 = _s1;
+		if (73 < 0 || 73 >= kChaosExternalRuntimeCount) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table index 73 out of range
+		}
+		if (kChaosExternalRuntimeFnTable[73] == nullptr) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table entry 73 is null
+		}
 		reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[73])(chaos_arg_0);
 	}
 	return;
@@ -5580,6 +6070,12 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System
 	_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[0]);
 	{
 		const auto chaos_arg_0 = _s1;
+		if (75 < 0 || 75 >= kChaosExternalRuntimeCount) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table index 75 out of range
+		}
+		if (kChaosExternalRuntimeFnTable[75] == nullptr) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table entry 75 is null
+		}
 		reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[75])(chaos_arg_0);
 	}
 	return;
@@ -5597,6 +6093,12 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System
 	_s1 = 0;
 	{
 		const auto chaos_arg_0 = _s1;
+		if (76 < 0 || 76 >= kChaosExternalRuntimeCount) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table index 76 out of range
+		}
+		if (kChaosExternalRuntimeFnTable[76] == nullptr) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table entry 76 is null
+		}
 		reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[76])(chaos_arg_0);
 	}
 	return;
@@ -5627,6 +6129,12 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System
 	_s1 = chaos_locals[0];
 	{
 		const auto chaos_arg_0 = _s1;
+		if (78 < 0 || 78 >= kChaosExternalRuntimeCount) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table index 78 out of range
+		}
+		if (kChaosExternalRuntimeFnTable[78] == nullptr) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table entry 78 is null
+		}
 		reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[78])(chaos_arg_0);
 	}
 	return;
@@ -5644,6 +6152,12 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System
 	_s1 = chaos_static_System_Private_CoreLib_System_Decimal__Zero;
 	{
 		const auto chaos_arg_0 = _s1;
+		if (80 < 0 || 80 >= kChaosExternalRuntimeCount) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table index 80 out of range
+		}
+		if (kChaosExternalRuntimeFnTable[80] == nullptr) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table entry 80 is null
+		}
 		reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[80])(chaos_arg_0);
 	}
 	return;
@@ -5661,6 +6175,12 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System
 	_s1 = chaos_static_System_Private_CoreLib_System_Decimal__Zero;
 	{
 		const auto chaos_arg_0 = _s1;
+		if (80 < 0 || 80 >= kChaosExternalRuntimeCount) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table index 80 out of range
+		}
+		if (kChaosExternalRuntimeFnTable[80] == nullptr) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table entry 80 is null
+		}
 		reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[80])(chaos_arg_0);
 	}
 	return;
@@ -5679,6 +6199,12 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System
 	_d1 = 0;
 	{
 		const auto chaos_arg_0 = _d1;
+		if (81 < 0 || 81 >= kChaosExternalRuntimeCount) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table index 81 out of range
+		}
+		if (kChaosExternalRuntimeFnTable[81] == nullptr) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table entry 81 is null
+		}
 		reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[81])(chaos_arg_0);
 	}
 	return;
@@ -5697,6 +6223,12 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System
 	_d1 = 0;
 	{
 		const auto chaos_arg_0 = _d1;
+		if (81 < 0 || 81 >= kChaosExternalRuntimeCount) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table index 81 out of range
+		}
+		if (kChaosExternalRuntimeFnTable[81] == nullptr) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table entry 81 is null
+		}
 		reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[81])(chaos_arg_0);
 	}
 	return;
@@ -5727,6 +6259,12 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System
 	_s1 = chaos_locals[0];
 	{
 		const auto chaos_arg_0 = _s1;
+		if (83 < 0 || 83 >= kChaosExternalRuntimeCount) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table index 83 out of range
+		}
+		if (kChaosExternalRuntimeFnTable[83] == nullptr) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table entry 83 is null
+		}
 		reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[83])(chaos_arg_0);
 	}
 	return;
@@ -5744,6 +6282,12 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System
 	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
 	{
 		const auto chaos_arg_0 = _s1;
+		if (84 < 0 || 84 >= kChaosExternalRuntimeCount) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table index 84 out of range
+		}
+		if (kChaosExternalRuntimeFnTable[84] == nullptr) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table entry 84 is null
+		}
 		reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[84])(chaos_arg_0);
 	}
 	return;
@@ -5761,6 +6305,12 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System
 	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
 	{
 		const auto chaos_arg_0 = _s1;
+		if (84 < 0 || 84 >= kChaosExternalRuntimeCount) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table index 84 out of range
+		}
+		if (kChaosExternalRuntimeFnTable[84] == nullptr) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table entry 84 is null
+		}
 		reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[84])(chaos_arg_0);
 	}
 	return;
@@ -5778,6 +6328,12 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System
 	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
 	{
 		const auto chaos_arg_0 = _s1;
+		if (85 < 0 || 85 >= kChaosExternalRuntimeCount) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table index 85 out of range
+		}
+		if (kChaosExternalRuntimeFnTable[85] == nullptr) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table entry 85 is null
+		}
 		reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[85])(chaos_arg_0);
 	}
 	return;
@@ -5795,6 +6351,12 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System
 	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
 	{
 		const auto chaos_arg_0 = _s1;
+		if (85 < 0 || 85 >= kChaosExternalRuntimeCount) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table index 85 out of range
+		}
+		if (kChaosExternalRuntimeFnTable[85] == nullptr) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table entry 85 is null
+		}
 		reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[85])(chaos_arg_0);
 	}
 	return;
@@ -5812,6 +6374,12 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System
 	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
 	{
 		const auto chaos_arg_0 = _s1;
+		if (86 < 0 || 86 >= kChaosExternalRuntimeCount) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table index 86 out of range
+		}
+		if (kChaosExternalRuntimeFnTable[86] == nullptr) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table entry 86 is null
+		}
 		reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[86])(chaos_arg_0);
 	}
 	return;
@@ -5829,6 +6397,12 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System
 	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
 	{
 		const auto chaos_arg_0 = _s1;
+		if (86 < 0 || 86 >= kChaosExternalRuntimeCount) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table index 86 out of range
+		}
+		if (kChaosExternalRuntimeFnTable[86] == nullptr) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table entry 86 is null
+		}
 		reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[86])(chaos_arg_0);
 	}
 	return;
@@ -5849,6 +6423,12 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System
 	_i1 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s1));
 	{
 		const auto chaos_arg_0 = _i1;
+		if (87 < 0 || 87 >= kChaosExternalRuntimeCount) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table index 87 out of range
+		}
+		if (kChaosExternalRuntimeFnTable[87] == nullptr) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table entry 87 is null
+		}
 		reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[87])(chaos_arg_0);
 	}
 	return;
@@ -5869,6 +6449,12 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System
 	_i1 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s1));
 	{
 		const auto chaos_arg_0 = _i1;
+		if (87 < 0 || 87 >= kChaosExternalRuntimeCount) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table index 87 out of range
+		}
+		if (kChaosExternalRuntimeFnTable[87] == nullptr) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table entry 87 is null
+		}
 		reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[87])(chaos_arg_0);
 	}
 	return;
@@ -5889,6 +6475,12 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System
 	{
 		const auto chaos_arg_1 = _s2;
 		const auto chaos_arg_0 = _s1;
+		if (88 < 0 || 88 >= kChaosExternalRuntimeCount) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table index 88 out of range
+		}
+		if (kChaosExternalRuntimeFnTable[88] == nullptr) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table entry 88 is null
+		}
 		reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[88])(chaos_arg_0, chaos_arg_1);
 	}
 	return;
@@ -5909,6 +6501,12 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System
 	{
 		const auto chaos_arg_1 = _s2;
 		const auto chaos_arg_0 = _s1;
+		if (88 < 0 || 88 >= kChaosExternalRuntimeCount) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table index 88 out of range
+		}
+		if (kChaosExternalRuntimeFnTable[88] == nullptr) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table entry 88 is null
+		}
 		reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[88])(chaos_arg_0, chaos_arg_1);
 	}
 	return;
@@ -5929,6 +6527,12 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System
 	{
 		const auto chaos_arg_1 = _s2;
 		const auto chaos_arg_0 = _s1;
+		if (88 < 0 || 88 >= kChaosExternalRuntimeCount) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table index 88 out of range
+		}
+		if (kChaosExternalRuntimeFnTable[88] == nullptr) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table entry 88 is null
+		}
 		reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[88])(chaos_arg_0, chaos_arg_1);
 	}
 	return;
@@ -5946,6 +6550,12 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System
 	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
 	{
 		const auto chaos_arg_0 = _s1;
+		if (89 < 0 || 89 >= kChaosExternalRuntimeCount) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table index 89 out of range
+		}
+		if (kChaosExternalRuntimeFnTable[89] == nullptr) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table entry 89 is null
+		}
 		reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[89])(chaos_arg_0);
 	}
 	return;
@@ -5963,6 +6573,12 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System
 	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
 	{
 		const auto chaos_arg_0 = _s1;
+		if (89 < 0 || 89 >= kChaosExternalRuntimeCount) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table index 89 out of range
+		}
+		if (kChaosExternalRuntimeFnTable[89] == nullptr) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table entry 89 is null
+		}
 		reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[89])(chaos_arg_0);
 	}
 	return;
@@ -5980,6 +6596,12 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System
 	_s1 = 0;
 	{
 		const auto chaos_arg_0 = _s1;
+		if (90 < 0 || 90 >= kChaosExternalRuntimeCount) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table index 90 out of range
+		}
+		if (kChaosExternalRuntimeFnTable[90] == nullptr) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table entry 90 is null
+		}
 		reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[90])(chaos_arg_0);
 	}
 	return;
@@ -6003,6 +6625,12 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System
 	}
 	{
 		const auto chaos_arg_0 = _s1;
+		if (90 < 0 || 90 >= kChaosExternalRuntimeCount) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table index 90 out of range
+		}
+		if (kChaosExternalRuntimeFnTable[90] == nullptr) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table entry 90 is null
+		}
 		reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[90])(chaos_arg_0);
 	}
 	return;
@@ -6021,6 +6649,12 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System
 	_f1 = 0.0f;
 	{
 		const auto chaos_arg_0 = _f1;
+		if (91 < 0 || 91 >= kChaosExternalRuntimeCount) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table index 91 out of range
+		}
+		if (kChaosExternalRuntimeFnTable[91] == nullptr) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table entry 91 is null
+		}
 		reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[91])(chaos_arg_0);
 	}
 	return;
@@ -6039,6 +6673,12 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System
 	_f1 = 0.0f;
 	{
 		const auto chaos_arg_0 = _f1;
+		if (91 < 0 || 91 >= kChaosExternalRuntimeCount) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table index 91 out of range
+		}
+		if (kChaosExternalRuntimeFnTable[91] == nullptr) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table entry 91 is null
+		}
 		reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[91])(chaos_arg_0);
 	}
 	return;
@@ -6056,6 +6696,12 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System
 	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
 	{
 		const auto chaos_arg_0 = _s1;
+		if (92 < 0 || 92 >= kChaosExternalRuntimeCount) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table index 92 out of range
+		}
+		if (kChaosExternalRuntimeFnTable[92] == nullptr) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table entry 92 is null
+		}
 		reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[92])(chaos_arg_0);
 	}
 	return;
@@ -6073,6 +6719,12 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System
 	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
 	{
 		const auto chaos_arg_0 = _s1;
+		if (92 < 0 || 92 >= kChaosExternalRuntimeCount) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table index 92 out of range
+		}
+		if (kChaosExternalRuntimeFnTable[92] == nullptr) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table entry 92 is null
+		}
 		reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[92])(chaos_arg_0);
 	}
 	return;
@@ -6090,6 +6742,12 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System
 	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
 	{
 		const auto chaos_arg_0 = _s1;
+		if (93 < 0 || 93 >= kChaosExternalRuntimeCount) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table index 93 out of range
+		}
+		if (kChaosExternalRuntimeFnTable[93] == nullptr) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table entry 93 is null
+		}
 		reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[93])(chaos_arg_0);
 	}
 	return;
@@ -6107,6 +6765,12 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System
 	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
 	{
 		const auto chaos_arg_0 = _s1;
+		if (93 < 0 || 93 >= kChaosExternalRuntimeCount) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table index 93 out of range
+		}
+		if (kChaosExternalRuntimeFnTable[93] == nullptr) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table entry 93 is null
+		}
 		reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[93])(chaos_arg_0);
 	}
 	return;
@@ -6124,6 +6788,12 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System
 	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
 	{
 		const auto chaos_arg_0 = _s1;
+		if (94 < 0 || 94 >= kChaosExternalRuntimeCount) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table index 94 out of range
+		}
+		if (kChaosExternalRuntimeFnTable[94] == nullptr) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table entry 94 is null
+		}
 		reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[94])(chaos_arg_0);
 	}
 	return;
@@ -6141,6 +6811,12 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System
 	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
 	{
 		const auto chaos_arg_0 = _s1;
+		if (94 < 0 || 94 >= kChaosExternalRuntimeCount) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table index 94 out of range
+		}
+		if (kChaosExternalRuntimeFnTable[94] == nullptr) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table entry 94 is null
+		}
 		reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[94])(chaos_arg_0);
 	}
 	return;
@@ -6158,6 +6834,12 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System
 	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
 	{
 		const auto chaos_arg_0 = _s1;
+		if (95 < 0 || 95 >= kChaosExternalRuntimeCount) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table index 95 out of range
+		}
+		if (kChaosExternalRuntimeFnTable[95] == nullptr) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table entry 95 is null
+		}
 		reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[95])(chaos_arg_0);
 	}
 	return;
@@ -6175,6 +6857,12 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System
 	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
 	{
 		const auto chaos_arg_0 = _s1;
+		if (95 < 0 || 95 >= kChaosExternalRuntimeCount) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table index 95 out of range
+		}
+		if (kChaosExternalRuntimeFnTable[95] == nullptr) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table entry 95 is null
+		}
 		reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[95])(chaos_arg_0);
 	}
 	return;
@@ -6195,6 +6883,12 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System
 	_i1 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s1));
 	{
 		const auto chaos_arg_0 = _i1;
+		if (96 < 0 || 96 >= kChaosExternalRuntimeCount) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table index 96 out of range
+		}
+		if (kChaosExternalRuntimeFnTable[96] == nullptr) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table entry 96 is null
+		}
 		reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[96])(chaos_arg_0);
 	}
 	return;
@@ -6215,6 +6909,12 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System
 	_i1 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s1));
 	{
 		const auto chaos_arg_0 = _i1;
+		if (96 < 0 || 96 >= kChaosExternalRuntimeCount) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table index 96 out of range
+		}
+		if (kChaosExternalRuntimeFnTable[96] == nullptr) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table entry 96 is null
+		}
 		reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[96])(chaos_arg_0);
 	}
 	return;
@@ -6232,6 +6932,12 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System
 	_s1 = 0;
 	{
 		const auto chaos_arg_0 = _s1;
+		if (97 < 0 || 97 >= kChaosExternalRuntimeCount) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table index 97 out of range
+		}
+		if (kChaosExternalRuntimeFnTable[97] == nullptr) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table entry 97 is null
+		}
 		reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[97])(chaos_arg_0);
 	}
 	return;
@@ -6255,6 +6961,12 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System
 	}
 	{
 		const auto chaos_arg_0 = _s1;
+		if (97 < 0 || 97 >= kChaosExternalRuntimeCount) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table index 97 out of range
+		}
+		if (kChaosExternalRuntimeFnTable[97] == nullptr) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table entry 97 is null
+		}
 		reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[97])(chaos_arg_0);
 	}
 	return;
@@ -6272,6 +6984,12 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System
 	_s1 = 0;
 	{
 		const auto chaos_arg_0 = _s1;
+		if (98 < 0 || 98 >= kChaosExternalRuntimeCount) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table index 98 out of range
+		}
+		if (kChaosExternalRuntimeFnTable[98] == nullptr) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table entry 98 is null
+		}
 		reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[98])(chaos_arg_0);
 	}
 	return;
@@ -6292,6 +7010,12 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System
 	}
 	{
 		const auto chaos_arg_0 = _s1;
+		if (98 < 0 || 98 >= kChaosExternalRuntimeCount) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table index 98 out of range
+		}
+		if (kChaosExternalRuntimeFnTable[98] == nullptr) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table entry 98 is null
+		}
 		reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[98])(chaos_arg_0);
 	}
 	return;
@@ -6310,6 +7034,12 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System
 	_s1 = ChaosArrayNew1D_Inline(&chaos_type_info_managed_array.hot, chaos_mt_System_Private_CoreLib_System_Char.AsTypeInfoHot(), 1, _s1);
 	{
 		const auto chaos_arg_0 = _s1;
+		if (98 < 0 || 98 >= kChaosExternalRuntimeCount) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table index 98 out of range
+		}
+		if (kChaosExternalRuntimeFnTable[98] == nullptr) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table entry 98 is null
+		}
 		reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[98])(chaos_arg_0);
 	}
 	return;
@@ -6327,6 +7057,12 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System
 	_s1 = 0;
 	{
 		const auto chaos_arg_0 = _s1;
+		if (101 < 0 || 101 >= kChaosExternalRuntimeCount) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table index 101 out of range
+		}
+		if (kChaosExternalRuntimeFnTable[101] == nullptr) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table entry 101 is null
+		}
 		reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[101])(chaos_arg_0);
 	}
 	return;
@@ -6350,6 +7086,12 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System
 	}
 	{
 		const auto chaos_arg_0 = _s1;
+		if (101 < 0 || 101 >= kChaosExternalRuntimeCount) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table index 101 out of range
+		}
+		if (kChaosExternalRuntimeFnTable[101] == nullptr) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table entry 101 is null
+		}
 		reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[101])(chaos_arg_0);
 	}
 	return;
@@ -6370,6 +7112,12 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System
 	{
 		const auto chaos_arg_1 = _s2;
 		const auto chaos_arg_0 = _s1;
+		if (102 < 0 || 102 >= kChaosExternalRuntimeCount) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table index 102 out of range
+		}
+		if (kChaosExternalRuntimeFnTable[102] == nullptr) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table entry 102 is null
+		}
 		reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[102])(chaos_arg_0, chaos_arg_1);
 	}
 	return;
@@ -6396,6 +7144,12 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System
 	{
 		const auto chaos_arg_1 = _s2;
 		const auto chaos_arg_0 = _s1;
+		if (102 < 0 || 102 >= kChaosExternalRuntimeCount) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table index 102 out of range
+		}
+		if (kChaosExternalRuntimeFnTable[102] == nullptr) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table entry 102 is null
+		}
 		reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[102])(chaos_arg_0, chaos_arg_1);
 	}
 	return;
@@ -6416,6 +7170,12 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System
 	{
 		const auto chaos_arg_1 = _s2;
 		const auto chaos_arg_0 = _s1;
+		if (102 < 0 || 102 >= kChaosExternalRuntimeCount) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table index 102 out of range
+		}
+		if (kChaosExternalRuntimeFnTable[102] == nullptr) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table entry 102 is null
+		}
 		reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[102])(chaos_arg_0, chaos_arg_1);
 	}
 	return;
@@ -6435,6 +7195,12 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Reflection_M
 	_s1 = 0;
 	{
 		const auto chaos_arg_0 = _s1;
+		if (48 < 0 || 48 >= kChaosExternalRuntimeCount) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table index 48 out of range
+		}
+		if (kChaosExternalRuntimeFnTable[48] == nullptr) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table entry 48 is null
+		}
 		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[48])(chaos_arg_0);
 		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
@@ -6469,6 +7235,12 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Reflection_M
 	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
 	{
 		const auto chaos_arg_0 = _s1;
+		if (52 < 0 || 52 >= kChaosExternalRuntimeCount) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table index 52 out of range
+		}
+		if (kChaosExternalRuntimeFnTable[52] == nullptr) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table entry 52 is null
+		}
 		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[52])(chaos_arg_0);
 		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
@@ -6510,6 +7282,12 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Reflection_M
 	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
 	{
 		const auto chaos_arg_0 = _s1;
+		if (52 < 0 || 52 >= kChaosExternalRuntimeCount) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table index 52 out of range
+		}
+		if (kChaosExternalRuntimeFnTable[52] == nullptr) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table entry 52 is null
+		}
 		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[52])(chaos_arg_0);
 		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
@@ -6549,6 +7327,12 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Reflection_M
 	CHAOS_IL2CPP_INT64 _i1;
 	_s0 = 0;
 	{
+		if (53 < 0 || 53 >= kChaosExternalRuntimeCount) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table index 53 out of range
+		}
+		if (kChaosExternalRuntimeFnTable[53] == nullptr) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table entry 53 is null
+		}
 		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[53])();
 		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
@@ -6586,6 +7370,12 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Reflection_M
 	{
 		const auto chaos_arg_1 = _s2;
 		const auto chaos_arg_0 = _s1;
+		if (54 < 0 || 54 >= kChaosExternalRuntimeCount) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table index 54 out of range
+		}
+		if (kChaosExternalRuntimeFnTable[54] == nullptr) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table entry 54 is null
+		}
 		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[54])(chaos_arg_0, chaos_arg_1);
 		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
@@ -6623,6 +7413,12 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Reflection_M
 	{
 		const auto chaos_arg_1 = _s2;
 		const auto chaos_arg_0 = _s1;
+		if (54 < 0 || 54 >= kChaosExternalRuntimeCount) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table index 54 out of range
+		}
+		if (kChaosExternalRuntimeFnTable[54] == nullptr) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table entry 54 is null
+		}
 		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[54])(chaos_arg_0, chaos_arg_1);
 		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
@@ -6660,6 +7456,12 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Reflection_M
 	{
 		const auto chaos_arg_1 = _s2;
 		const auto chaos_arg_0 = _s1;
+		if (54 < 0 || 54 >= kChaosExternalRuntimeCount) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table index 54 out of range
+		}
+		if (kChaosExternalRuntimeFnTable[54] == nullptr) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table entry 54 is null
+		}
 		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[54])(chaos_arg_0, chaos_arg_1);
 		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
@@ -6692,6 +7494,12 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Reflection_M
 	CHAOS_IL2CPP_INT64 _i1;
 	_s0 = 0;
 	{
+		if (55 < 0 || 55 >= kChaosExternalRuntimeCount) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table index 55 out of range
+		}
+		if (kChaosExternalRuntimeFnTable[55] == nullptr) {
+			CHAOS_IL2CPP_FAIL(); // external runtime table entry 55 is null
+		}
 		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[55])();
 		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
@@ -6717,732 +7525,6 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Reflection_M
 		_i0 = ChaosLoadInt64(chaos_locals[1]);
 		return _i0;
 	}
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Reflection_Metadata.System_Reflection_Metadata_BlobBuilderTests::ToImmutableArray_5_int_int_0()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_BlobBuilderTests_ToImmutableArray_5_int_int_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INTPTR _s2;
-	CHAOS_IL2CPP_INT64 _i0;
-	CHAOS_IL2CPP_INT64 _i1;
-	_s0 = 0;
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	{
-		const auto chaos_arg_1 = _s2;
-		const auto chaos_arg_0 = _s1;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[56])(chaos_arg_0, chaos_arg_1);
-		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	{
-		const auto chaos_value = _s1;
-		auto* chaos_boxed = CHAOS_IL2CPP_NEW_GC(chaos_boxed_type_System_Collections_Immutable_ImmutableArray_System_Byte_, {});
-		chaos_boxed->header.type_info = chaos_mt_System_Collections_Immutable_ImmutableArray_System_Byte_.AsTypeInfoHot();
-		chaos_boxed->value = chaos_value;
-		_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_boxed);
-	}
-	{
-		if (_s1 != 0)
-		{
-			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			_i1 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s1));
-		}
-		else
-		{
-			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-			_i1 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(ChaosLoadInt64(_s1)));
-		}
-		chaos_locals[1] = ChaosStoreInt64(_s0);
-		_i0 = ChaosLoadInt64(chaos_locals[1]);
-		return _i0;
-	}
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Reflection_Metadata.System_Reflection_Metadata_BlobBuilderTests::ToImmutableArray_5_int_int_1()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_BlobBuilderTests_ToImmutableArray_5_int_int_1(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INTPTR _s2;
-	CHAOS_IL2CPP_INT64 _i0;
-	CHAOS_IL2CPP_INT64 _i1;
-	_s0 = 0;
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	{
-		const auto chaos_arg_1 = _s2;
-		const auto chaos_arg_0 = _s1;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[56])(chaos_arg_0, chaos_arg_1);
-		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	{
-		const auto chaos_value = _s1;
-		auto* chaos_boxed = CHAOS_IL2CPP_NEW_GC(chaos_boxed_type_System_Collections_Immutable_ImmutableArray_System_Byte_, {});
-		chaos_boxed->header.type_info = chaos_mt_System_Collections_Immutable_ImmutableArray_System_Byte_.AsTypeInfoHot();
-		chaos_boxed->value = chaos_value;
-		_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_boxed);
-	}
-	{
-		if (_s1 != 0)
-		{
-			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			_i1 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s1));
-		}
-		else
-		{
-			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-			_i1 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(ChaosLoadInt64(_s1)));
-		}
-		chaos_locals[1] = ChaosStoreInt64(_s0);
-		_i0 = ChaosLoadInt64(chaos_locals[1]);
-		return _i0;
-	}
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Reflection_Metadata.System_Reflection_Metadata_BlobBuilderTests::ToImmutableArray_5_int_int_2()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_BlobBuilderTests_ToImmutableArray_5_int_int_2(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INTPTR _s2;
-	CHAOS_IL2CPP_INT64 _i0;
-	CHAOS_IL2CPP_INT64 _i1;
-	_s0 = 0;
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	{
-		const auto chaos_arg_1 = _s2;
-		const auto chaos_arg_0 = _s1;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[56])(chaos_arg_0, chaos_arg_1);
-		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	{
-		const auto chaos_value = _s1;
-		auto* chaos_boxed = CHAOS_IL2CPP_NEW_GC(chaos_boxed_type_System_Collections_Immutable_ImmutableArray_System_Byte_, {});
-		chaos_boxed->header.type_info = chaos_mt_System_Collections_Immutable_ImmutableArray_System_Byte_.AsTypeInfoHot();
-		chaos_boxed->value = chaos_value;
-		_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_boxed);
-	}
-	{
-		if (_s1 != 0)
-		{
-			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			_i1 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s1));
-		}
-		else
-		{
-			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-			_i1 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(ChaosLoadInt64(_s1)));
-		}
-		chaos_locals[1] = ChaosStoreInt64(_s0);
-		_i0 = ChaosLoadInt64(chaos_locals[1]);
-		return _i0;
-	}
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Reflection_Metadata.System_Reflection_Metadata_BlobBuilderTests::TryWriteBytes_14_Stream_int_0()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_BlobBuilderTests_TryWriteBytes_14_Stream_int_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INTPTR _s2;
-	CHAOS_IL2CPP_INT64 _i0;
-	CHAOS_IL2CPP_INT64 _i1;
-	_s0 = 0;
-	_s1 = 0;
-	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	{
-		const auto chaos_arg_1 = _s2;
-		const auto chaos_arg_0 = _s1;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[57])(chaos_arg_0, chaos_arg_1);
-		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	chaos_locals[0] = _s1;
-	_s1 = chaos_locals[0];
-	_i1 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s1));
-	chaos_locals[1] = ChaosStoreInt64(_i1);
-	_i1 = ChaosLoadInt64(chaos_locals[1]);
-	return _i1;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Reflection_Metadata.System_Reflection_Metadata_BlobBuilderTests::TryWriteBytes_14_Stream_int_1()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_BlobBuilderTests_TryWriteBytes_14_Stream_int_1(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INTPTR _s2;
-	CHAOS_IL2CPP_INT64 _i0;
-	CHAOS_IL2CPP_INT64 _i1;
-	_s0 = 0;
-	_s1 = 0;
-	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	{
-		const auto chaos_arg_1 = _s2;
-		const auto chaos_arg_0 = _s1;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[57])(chaos_arg_0, chaos_arg_1);
-		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	chaos_locals[0] = _s1;
-	_s1 = chaos_locals[0];
-	_i1 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s1));
-	chaos_locals[1] = ChaosStoreInt64(_i1);
-	_i1 = ChaosLoadInt64(chaos_locals[1]);
-	return _i1;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Reflection_Metadata.System_Reflection_Metadata_BlobBuilderTests::TryWriteBytes_14_Stream_int_2()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_BlobBuilderTests_TryWriteBytes_14_Stream_int_2(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INTPTR _s2;
-	CHAOS_IL2CPP_INT64 _i0;
-	CHAOS_IL2CPP_INT64 _i1;
-	_s0 = 0;
-	_s1 = chaos_static_System_Private_CoreLib_System_IO_Stream__Null;
-	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	{
-		const auto chaos_arg_1 = _s2;
-		const auto chaos_arg_0 = _s1;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[57])(chaos_arg_0, chaos_arg_1);
-		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	chaos_locals[0] = _s1;
-	_s1 = chaos_locals[0];
-	_i1 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s1));
-	chaos_locals[1] = ChaosStoreInt64(_i1);
-	_i1 = ChaosLoadInt64(chaos_locals[1]);
-	return _i1;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Reflection_Metadata.System_Reflection_Metadata_BlobBuilderTests::WriteContentTo_7_BlobWriter_0()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_BlobBuilderTests_WriteContentTo_7_BlobWriter_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INT64 _i0;
-	CHAOS_IL2CPP_INT64 _i1;
-	_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[0]);
-	{
-		const auto chaos_address = _s0;
-		if ((chaos_address & chaos_managed_pointer_local_slot_tag) != 0)
-		{
-			auto* chaos_slot = reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(static_cast<CHAOS_IL2CPP_UINTPTR>(chaos_address & ~chaos_managed_pointer_local_slot_tag));
-			*chaos_slot = 0;
-		}
-		else
-		{
-			*reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(chaos_address) = 0;
-		}
-	}
-	_s0 = 0;
-	_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[0]);
-	{
-		const auto chaos_arg_0 = _s1;
-		reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[75])(chaos_arg_0);
-	}
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-	_i1 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s1));
-	chaos_locals[1] = ChaosStoreInt64(_i1);
-	_i1 = ChaosLoadInt64(chaos_locals[1]);
-	return _i1;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Reflection_Metadata.System_Reflection_Metadata_BlobContentIdTests::.ctor()
-extern "C" void CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_BlobContentIdTests__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	_s0 = chaos_args[0];
-	{
-		const auto chaos_arg_0 = _s0;
-		chaos_external_runtime_System_Private_CoreLib_System_Object___ctor_System_Void__(chaos_arg_0);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Reflection_Metadata.System_Reflection_Metadata_BlobContentIdTests::Benchmark_FromHash_0_ImmutableArraybyte_0()
-extern "C" void CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_BlobContentIdTests_Benchmark_FromHash_0_ImmutableArraybyte_0(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[0]);
-	{
-		const auto chaos_address = _s0;
-		if ((chaos_address & chaos_managed_pointer_local_slot_tag) != 0)
-		{
-			auto* chaos_slot = reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(static_cast<CHAOS_IL2CPP_UINTPTR>(chaos_address & ~chaos_managed_pointer_local_slot_tag));
-			*chaos_slot = 0;
-		}
-		else
-		{
-			*reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(chaos_address) = 0;
-		}
-	}
-	_s0 = chaos_locals[0];
-	{
-		const auto chaos_arg_0 = _s0;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[104])(chaos_arg_0);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Reflection_Metadata.System_Reflection_Metadata_BlobContentIdTests::Benchmark_FromHash_1_System_Byte_0()
-extern "C" void CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_BlobContentIdTests_Benchmark_FromHash_1_System_Byte_0(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	_s0 = 0;
-	{
-		const auto chaos_arg_0 = _s0;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[105])(chaos_arg_0);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Reflection_Metadata.System_Reflection_Metadata_BlobContentIdTests::Benchmark_FromHash_1_System_Byte_1()
-extern "C" void CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_BlobContentIdTests_Benchmark_FromHash_1_System_Byte_1(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	{
-		const auto chaos_result = ChaosArrayEmpty_Inline();
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	{
-		const auto chaos_arg_0 = _s0;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[105])(chaos_arg_0);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Reflection_Metadata.System_Reflection_Metadata_BlobContentIdTests::Benchmark_FromHash_1_System_Byte_2()
-extern "C" void CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_BlobContentIdTests_Benchmark_FromHash_1_System_Byte_2(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(2);
-	_s0 = ChaosArrayNew1D_Inline(&chaos_type_info_managed_array.hot, chaos_mt_System_Private_CoreLib_System_Byte.AsTypeInfoHot(), 1, _s0);
-	{
-		const auto chaos_arg_0 = _s0;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[105])(chaos_arg_0);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Reflection_Metadata.System_Reflection_Metadata_BlobContentIdTests::Benchmark_GetTimeBasedProvider_2__2()
-extern "C" void CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_BlobContentIdTests_Benchmark_GetTimeBasedProvider_2__2(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	{
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[106])();
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Reflection_Metadata.System_Reflection_Metadata_BlobContentIdTests::FromHash_0_ImmutableArraybyte_0()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_BlobContentIdTests_FromHash_0_ImmutableArraybyte_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_BlobContentIdTests___c____9__0_0;
-	_s1 = _s0;
-	{
-		if (_s1 == 0)
-		{
-			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_BlobContentIdTests___c____9;
-			{
-				// Hotpatch-aware ldftn wrapper (slot 194)
-				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[194];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
-					{
-						alignas(16) uint8_t _d_ab[8];
-						ArgBuffer _d_bw(_d_ab);
-						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d_entry.method_key, _d_ab, nullptr);
-						return;
-					}
-					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
-				};
-			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
-			}
-			{
-				const auto chaos_method_ptr = _s1;
-				const auto chaos_target = _s0;
-				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
-				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
-				chaos_object->chaos_delegate_target = chaos_target;
-				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
-				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-			}
-			_s1 = _s0;
-			{
-				auto chaos_value = _s1;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_BlobContentIdTests___c____9__0_0 = chaos_value;
-			}
-		}
-		{
-			// Assert.Throws: target method not found via IL lookahead
-			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
-		}
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-		chaos_locals[0] = ChaosStoreInt64(_i0);
-		_i0 = ChaosLoadInt64(chaos_locals[0]);
-		return _i0;
-	}
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Reflection_Metadata.System_Reflection_Metadata_BlobContentIdTests::FromHash_1_System_Byte_0()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_BlobContentIdTests_FromHash_1_System_Byte_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_BlobContentIdTests___c____9__2_0;
-	_s1 = _s0;
-	{
-		if (_s1 == 0)
-		{
-			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_BlobContentIdTests___c____9;
-			{
-				// Hotpatch-aware ldftn wrapper (slot 195)
-				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[195];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
-					{
-						alignas(16) uint8_t _d_ab[8];
-						ArgBuffer _d_bw(_d_ab);
-						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d_entry.method_key, _d_ab, nullptr);
-						return;
-					}
-					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
-				};
-			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
-			}
-			{
-				const auto chaos_method_ptr = _s1;
-				const auto chaos_target = _s0;
-				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
-				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
-				chaos_object->chaos_delegate_target = chaos_target;
-				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
-				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-			}
-			_s1 = _s0;
-			{
-				auto chaos_value = _s1;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_BlobContentIdTests___c____9__2_0 = chaos_value;
-			}
-		}
-		{
-			// Assert.Throws: target method not found via IL lookahead
-			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
-		}
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-		chaos_locals[0] = ChaosStoreInt64(_i0);
-		_i0 = ChaosLoadInt64(chaos_locals[0]);
-		return _i0;
-	}
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Reflection_Metadata.System_Reflection_Metadata_BlobContentIdTests::FromHash_1_System_Byte_1()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_BlobContentIdTests_FromHash_1_System_Byte_1(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_BlobContentIdTests___c____9__4_0;
-	_s1 = _s0;
-	{
-		if (_s1 == 0)
-		{
-			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_BlobContentIdTests___c____9;
-			{
-				// Hotpatch-aware ldftn wrapper (slot 196)
-				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[196];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
-					{
-						alignas(16) uint8_t _d_ab[8];
-						ArgBuffer _d_bw(_d_ab);
-						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d_entry.method_key, _d_ab, nullptr);
-						return;
-					}
-					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
-				};
-			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
-			}
-			{
-				const auto chaos_method_ptr = _s1;
-				const auto chaos_target = _s0;
-				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
-				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
-				chaos_object->chaos_delegate_target = chaos_target;
-				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
-				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-			}
-			_s1 = _s0;
-			{
-				auto chaos_value = _s1;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_BlobContentIdTests___c____9__4_0 = chaos_value;
-			}
-		}
-		{
-			// Assert.Throws: target method not found via IL lookahead
-			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
-		}
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-		chaos_locals[0] = ChaosStoreInt64(_i0);
-		_i0 = ChaosLoadInt64(chaos_locals[0]);
-		return _i0;
-	}
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Reflection_Metadata.System_Reflection_Metadata_BlobContentIdTests::FromHash_1_System_Byte_2()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_BlobContentIdTests_FromHash_1_System_Byte_2(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_BlobContentIdTests___c____9__6_0;
-	_s1 = _s0;
-	{
-		if (_s1 == 0)
-		{
-			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_BlobContentIdTests___c____9;
-			{
-				// Hotpatch-aware ldftn wrapper (slot 197)
-				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[197];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
-					{
-						alignas(16) uint8_t _d_ab[8];
-						ArgBuffer _d_bw(_d_ab);
-						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d_entry.method_key, _d_ab, nullptr);
-						return;
-					}
-					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
-				};
-			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
-			}
-			{
-				const auto chaos_method_ptr = _s1;
-				const auto chaos_target = _s0;
-				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
-				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
-				chaos_object->chaos_delegate_target = chaos_target;
-				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
-				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-			}
-			_s1 = _s0;
-			{
-				auto chaos_value = _s1;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_BlobContentIdTests___c____9__6_0 = chaos_value;
-			}
-		}
-		{
-			// Assert.Throws: target method not found via IL lookahead
-			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
-		}
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-		chaos_locals[0] = ChaosStoreInt64(_i0);
-		_i0 = ChaosLoadInt64(chaos_locals[0]);
-		return _i0;
-	}
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Reflection_Metadata.System_Reflection_Metadata_BlobContentIdTests::GetTimeBasedProvider_2__2()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_BlobContentIdTests_GetTimeBasedProvider_2__2(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_BlobContentIdTests___c____9__8_0;
-	_s1 = _s0;
-	{
-		if (_s1 == 0)
-		{
-			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_BlobContentIdTests___c____9;
-			{
-				// Hotpatch-aware ldftn wrapper (slot 198)
-				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[198];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
-					{
-						alignas(16) uint8_t _d_ab[8];
-						ArgBuffer _d_bw(_d_ab);
-						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d_entry.method_key, _d_ab, nullptr);
-						return;
-					}
-					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
-				};
-			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
-			}
-			{
-				const auto chaos_method_ptr = _s1;
-				const auto chaos_target = _s0;
-				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
-				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
-				chaos_object->chaos_delegate_target = chaos_target;
-				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
-				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-			}
-			_s1 = _s0;
-			{
-				auto chaos_value = _s1;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_BlobContentIdTests___c____9__8_0 = chaos_value;
-			}
-		}
-		{
-			// Assert.Throws: target method not found via IL lookahead
-			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
-		}
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-		chaos_locals[0] = ChaosStoreInt64(_i0);
-		_i0 = ChaosLoadInt64(chaos_locals[0]);
-		return _i0;
-	}
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Reflection_Metadata.System_Reflection_Metadata_BlobContentIdTests+<>c::.cctor()
-extern "C" void CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_BlobContentIdTests___c_cctor(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	{
-		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_BlobContentIdTests___c, {});
-		chaos_object->header.type_info = chaos_mt_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_BlobContentIdTests___c.AsTypeInfoHot();
-		CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_BlobContentIdTests___c__ctor(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object));
-		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-	}
-	{
-		auto chaos_value = _s0;
-		chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_BlobContentIdTests___c____9 = chaos_value;
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Reflection_Metadata.System_Reflection_Metadata_BlobContentIdTests+<>c::.ctor()
-extern "C" void CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_BlobContentIdTests___c__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	_s0 = chaos_args[0];
-	{
-		const auto chaos_arg_0 = _s0;
-		chaos_external_runtime_System_Private_CoreLib_System_Object___ctor_System_Void__(chaos_arg_0);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Reflection_Metadata.System_Reflection_Metadata_BlobContentIdTests+<>c::<FromHash_0_ImmutableArraybyte_0>b__0_0()
-extern "C" void CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_BlobContentIdTests___c_FromHash_0_ImmutableArraybyte_0_b__0_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[0]);
-	{
-		const auto chaos_address = _s0;
-		if ((chaos_address & chaos_managed_pointer_local_slot_tag) != 0)
-		{
-			auto* chaos_slot = reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(static_cast<CHAOS_IL2CPP_UINTPTR>(chaos_address & ~chaos_managed_pointer_local_slot_tag));
-			*chaos_slot = 0;
-		}
-		else
-		{
-			*reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(chaos_address) = 0;
-		}
-	}
-	_s0 = chaos_locals[0];
-	{
-		const auto chaos_arg_0 = _s0;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[104])(chaos_arg_0);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
 }
 
 

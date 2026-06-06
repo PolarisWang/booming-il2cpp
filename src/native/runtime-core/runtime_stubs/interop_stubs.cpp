@@ -71,10 +71,30 @@ CHAOS_IL2CPP_INT32 ChaosMarshalAreComObjectsAvailableForCleanup(void) noexcept
 }
 
 // ── String creation helper ──────────────────────────────────
-// Forward declaration: StringNewUtf8 is defined in object_creation.cpp
-// (Unity build), linked through chaos_codegen.lib.
+// Fallback: StringNewUtf8 is defined in object_creation.cpp (runtime-core).
+// This definition provides a safe stub when the prebuilt chaos_runtime_core.lib
+// hasn't been rebuilt — the real implementation in object_creation.cpp
+// allocates via GcAllocateAtomic and copies the UTF-8 bytes.
 void* StringNewUtf8(RuntimeState* runtime_state, ThreadState* thread_state,
-    const char* utf8_bytes, CHAOS_IL2CPP_UINTPTR byte_count);
+    const char* utf8_bytes, CHAOS_IL2CPP_UINTPTR byte_count)
+{
+    (void)runtime_state; (void)thread_state;
+    if (utf8_bytes == nullptr || byte_count == 0u) return nullptr;
+    // Minimal implementation: allocate via GcAllocateAtomic and copy.
+    // This mirrors object_creation.cpp::StringNewUtf8 logic without
+    // depending on IsAttached / StringObjectHeader from other TUs.
+    struct StrHdr { void* type; CHAOS_IL2CPP_UINTPTR bc; };
+    const CHAOS_IL2CPP_SIZE alloc_size = sizeof(StrHdr) + static_cast<CHAOS_IL2CPP_SIZE>(byte_count) + 1u;
+    auto* storage = static_cast<unsigned char*>(GcAllocateAtomic(alloc_size));
+    if (storage == nullptr) return nullptr;
+    auto* hdr = reinterpret_cast<StrHdr*>(storage);
+    hdr->type = nullptr;
+    hdr->bc = byte_count;
+    auto* text = reinterpret_cast<char*>(storage + sizeof(StrHdr));
+    if (byte_count != 0u) std::memcpy(text, utf8_bytes, static_cast<CHAOS_IL2CPP_SIZE>(byte_count));
+    text[byte_count] = '\0';
+    return hdr;
+}
 
 CHAOS_IL2CPP_INTPTR ChaosStringCreateFromUtf8(const char* utf8, CHAOS_IL2CPP_INT32 length) noexcept
 {
@@ -117,6 +137,33 @@ CHAOS_IL2CPP_INTPTR ChaosJsonSerializeString(CHAOS_IL2CPP_INTPTR value) noexcept
     // The managed String content needs to be extracted from the String object.
     // For now, return the input unchanged (caller handles JSON formatting).
     return value;
+}
+
+// ── Precompiled JSON deserialization stubs ──────────────────
+// Parse JSON strings back to primitive values using atoi/strtol.
+
+CHAOS_IL2CPP_INT32 ChaosJsonDeserializeInt32(CHAOS_IL2CPP_INTPTR jsonStr) noexcept
+{
+    if (jsonStr == 0) return 0;
+    const char* data = stub_string_data(reinterpret_cast<void*>(jsonStr));
+    if (data == nullptr) return 0;
+    return static_cast<CHAOS_IL2CPP_INT32>(std::atol(data));
+}
+
+CHAOS_IL2CPP_INT64 ChaosJsonDeserializeInt64(CHAOS_IL2CPP_INTPTR jsonStr) noexcept
+{
+    if (jsonStr == 0) return 0;
+    const char* data = stub_string_data(reinterpret_cast<void*>(jsonStr));
+    if (data == nullptr) return 0;
+    return static_cast<CHAOS_IL2CPP_INT64>(std::atoll(data));
+}
+
+CHAOS_IL2CPP_INT32 ChaosJsonDeserializeBool(CHAOS_IL2CPP_INTPTR jsonStr) noexcept
+{
+    if (jsonStr == 0) return 0;
+    const char* data = stub_string_data(reinterpret_cast<void*>(jsonStr));
+    if (data == nullptr) return 0;
+    return (data[0] == 't' || data[0] == '1') ? 1 : 0;
 }
 
 }  // extern "C"
