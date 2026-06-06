@@ -117,7 +117,10 @@ internal sealed class FullAssemblyEmitter
         }
         sb.AppendLine("    return nullptr;");
         sb.AppendLine("}");
-        sb.AppendLine("}");
+        sb.AppendLine();
+        sb.AppendLine("extern \"C\" void* (*ChaosBridgeRedirect)(const char*);");
+        sb.AppendLine("namespace { struct _BridgeReg { _BridgeReg() noexcept { ChaosBridgeRedirect = &ResolveBridge; } } _breg; }");
+        sb.AppendLine();
         return sb.ToString();
     }
 
