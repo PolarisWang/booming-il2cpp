@@ -176,6 +176,7 @@ struct chaos_type_System_Private_CoreLib_System_Type : public chaos_type_System_
     CHAOS_IL2CPP_INT32 runtime_metadata_token_value = 0;
 };
 
+
 struct chaos_type_Chaos_TestFramework_Sdk___0;
 struct chaos_boxed_type_Chaos_TestFramework_Sdk___0 {
     PureTypeHeader header{};
@@ -431,6 +432,8 @@ CHAOS_IL2CPP_INTPTR chaos_default_interpolated_string_handler_to_string_and_clea
 } // namespace chaos::il2cpp::codegen::CombinedSubjects
 
 extern "C" void* kChaosExternalRuntimeFnTable[];
+
+extern "C" int32_t kChaosExternalRuntimeCount;
 
 namespace chaos::il2cpp::codegen::CombinedSubjects
 {

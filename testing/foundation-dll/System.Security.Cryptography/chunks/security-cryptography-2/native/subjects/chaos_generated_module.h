@@ -32,6 +32,30 @@ class ChaosRuntimeHost;
 
 // chaos_valuetype_* typedefs (opaque 32-bit managed value types)
 typedef CHAOS_IL2CPP_INT32 chaos_valuetype_Chaos_TestFramework_Sdk___0;
+typedef CHAOS_IL2CPP_INT32 chaos_valuetype_CombinedSubjects__PrivateImplementationDetails___001D686DB504E20C792EAA07FE09224A45FF328E24A80072D04D16ABC5C2B5D2;
+typedef CHAOS_IL2CPP_INT32 chaos_valuetype_CombinedSubjects__PrivateImplementationDetails___0CFBF01C84FAB4E5344ABB5D837C123C4EE573A987BF536E197188590338F8D4;
+typedef CHAOS_IL2CPP_INT32 chaos_valuetype_CombinedSubjects__PrivateImplementationDetails___1C343036D67A5B9B5F1DEADD8B023B4B783FC92B8FCC92517ACE15C566720521;
+typedef CHAOS_IL2CPP_INT32 chaos_valuetype_CombinedSubjects__PrivateImplementationDetails___24B9055C69246706F8619F15AAB72925979B771882644E7BBB372EDCD37DE304;
+typedef CHAOS_IL2CPP_INT32 chaos_valuetype_CombinedSubjects__PrivateImplementationDetails___32D2AE03B8B636B73DE1709B6CF0C3880AE1B548510D4807FC0AD20FA04DB4A4;
+typedef CHAOS_IL2CPP_INT32 chaos_valuetype_CombinedSubjects__PrivateImplementationDetails___407FEB4A4B8303BAF4F84E29A209E0DCFD62E81F88C8EDB7675C5A95D90E5C90;
+typedef CHAOS_IL2CPP_INT32 chaos_valuetype_CombinedSubjects__PrivateImplementationDetails___4800FBFC4566EB02D1727A4B1C949CCBC7535C216A0766564C199308631B5DD6;
+typedef CHAOS_IL2CPP_INT32 chaos_valuetype_CombinedSubjects__PrivateImplementationDetails___488B4329DF99DACE80B4C50E073E6EB39E5198EE93A1F51C62AC3B19356E747C;
+typedef CHAOS_IL2CPP_INT32 chaos_valuetype_CombinedSubjects__PrivateImplementationDetails___533B8C444F951E83EFF7305E3807B66CE0005DE0A2D0A44873C130895A3BE6AA;
+typedef CHAOS_IL2CPP_INT32 chaos_valuetype_CombinedSubjects__PrivateImplementationDetails___5BDC74B9D1416F740F6037B2C6C5D4EDF2A346D830527135302252C92107037D;
+typedef CHAOS_IL2CPP_INT32 chaos_valuetype_CombinedSubjects__PrivateImplementationDetails___5DF6E0E2761359D30A8275058E299FCC0381534545F55CF43E41983F5D4C9456;
+typedef CHAOS_IL2CPP_INT32 chaos_valuetype_CombinedSubjects__PrivateImplementationDetails___648EB07B73F6EDBA340490178239727562B005589A00F25DFD5B22FE702BF3F0;
+typedef CHAOS_IL2CPP_INT32 chaos_valuetype_CombinedSubjects__PrivateImplementationDetails___65EDEDEE30ED896528AF7D1CA58311C4B6C73F00F187D14E6074FD8E4CDEA7F4;
+typedef CHAOS_IL2CPP_INT32 chaos_valuetype_CombinedSubjects__PrivateImplementationDetails___7D43B81AA0A4088B663E41DA4F587E21DA5CB023CD64064EA3711551BD2CAA89;
+typedef CHAOS_IL2CPP_INT32 chaos_valuetype_CombinedSubjects__PrivateImplementationDetails___91F8EE26CEA10781D036C27E66E95B8722174A9B9C78A7A88B9C5FB9579F1D38;
+typedef CHAOS_IL2CPP_INT32 chaos_valuetype_CombinedSubjects__PrivateImplementationDetails___A09941949DF508620D027C03AC12A3286382E745B9B17C656A98F7B5FB316918;
+typedef CHAOS_IL2CPP_INT32 chaos_valuetype_CombinedSubjects__PrivateImplementationDetails___B452C33202206672AFB35352A995095F186C8DC0BDE343EFAB3198D5D9D7FB4A;
+typedef CHAOS_IL2CPP_INT32 chaos_valuetype_CombinedSubjects__PrivateImplementationDetails___C7C4522A56245022151F347AC8EB8745A0C6A052B5E3DC09A935DBA740A1ECD3;
+typedef CHAOS_IL2CPP_INT32 chaos_valuetype_CombinedSubjects__PrivateImplementationDetails___E2E17543AE2573B10DC2547315170D6B35BA571445AC0188005E4E314070FBE2;
+typedef CHAOS_IL2CPP_INT32 chaos_valuetype_CombinedSubjects__PrivateImplementationDetails___ED59E83E776F0CAF91A6CDA28DEEF6E3B82EDD19C37F455C5342566AC97A261D;
+typedef CHAOS_IL2CPP_INT32 chaos_valuetype_CombinedSubjects__PrivateImplementationDetails___ED6F05B6150596F21C460439B0F74206E4AB3B9D202694888BE5822F7BA345E6;
+typedef CHAOS_IL2CPP_INT32 chaos_valuetype_CombinedSubjects__PrivateImplementationDetails___F06ED69DF6E1896529126C9DD2F159F0FF1E4468B1BE716B3D7AEE38F8C701DC;
+typedef CHAOS_IL2CPP_INT32 chaos_valuetype_CombinedSubjects__PrivateImplementationDetails___F54AFD13D27E53DD97A248512A6187637E5499827ED7BC55EF5E6C31195661DF;
+typedef CHAOS_IL2CPP_INT32 chaos_valuetype_CombinedSubjects__PrivateImplementationDetails___FCF2BF7E8F6FE4D1C7B4755B69955B1AC712D43B86CD17EFB2D92F256DC9FCE3;
 
 
 
@@ -165,6 +189,27 @@ struct Functions {
         void (*Throws)(
                     CHAOS_IL2CPP_INTPTR
         );
+        void (*Throws_System_ArgumentException_)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*Throws_System_ArgumentNullException_)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*Throws_System_ArgumentOutOfRangeException_)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*Throws_System_FormatException_)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*Throws_System_NullReferenceException_)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*Throws_System_PlatformNotSupportedException_)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*Throws_System_Security_Cryptography_CryptographicException_)(
+                    CHAOS_IL2CPP_INTPTR
+        );
         CHAOS_IL2CPP_INT32 (*get_ExitCode)(
                 void
         );
@@ -237,6 +282,35 @@ struct Functions {
                     CHAOS_IL2CPP_INTPTR
         );
     } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AesCcmTests;
+    struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AesCcmTests___c_t {
+        void (*cctor)(
+                void
+        );
+        void (*ctor)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Decrypt_1_System_Byte_System_Byte_System_Byte_System_Byte_System_Byte_0_b__6_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Decrypt_1_System_Byte_System_Byte_System_Byte_System_Byte_System_Byte_1_b__8_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Decrypt_1_System_Byte_System_Byte_System_Byte_System_Byte_System_Byte_2_b__10_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Dispose_2__2_b__12_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Encrypt_0_System_Byte_System_Byte_System_Byte_System_Byte_System_Byte_0_b__0_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Encrypt_0_System_Byte_System_Byte_System_Byte_System_Byte_System_Byte_1_b__2_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Encrypt_0_System_Byte_System_Byte_System_Byte_System_Byte_System_Byte_2_b__4_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+    } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AesCcmTests___c;
     struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AesCngTests_t {
         void (*ctor)(
                     CHAOS_IL2CPP_INTPTR
@@ -302,6 +376,44 @@ struct Functions {
                     CHAOS_IL2CPP_INTPTR
         );
     } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AesCngTests;
+    struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AesCngTests___c_t {
+        void (*cctor)(
+                void
+        );
+        void (*ctor)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_CreateDecryptor_0__0_b__0_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_CreateDecryptor_1_System_Byte_System_Byte_0_b__2_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_CreateDecryptor_1_System_Byte_System_Byte_1_b__4_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_CreateDecryptor_1_System_Byte_System_Byte_2_b__6_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_CreateEncryptor_2__2_b__8_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_CreateEncryptor_3_System_Byte_System_Byte_0_b__10_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_CreateEncryptor_3_System_Byte_System_Byte_1_b__12_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_CreateEncryptor_3_System_Byte_System_Byte_2_b__14_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_GenerateIV_5__5_b__18_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_GenerateKey_4__4_b__16_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+    } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AesCngTests___c;
     struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AesCryptoServiceProviderTests_t {
         void (*ctor)(
                     CHAOS_IL2CPP_INTPTR
@@ -367,6 +479,44 @@ struct Functions {
                     CHAOS_IL2CPP_INTPTR
         );
     } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AesCryptoServiceProviderTests;
+    struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AesCryptoServiceProviderTests___c_t {
+        void (*cctor)(
+                void
+        );
+        void (*ctor)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_CreateDecryptor_2__2_b__8_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_CreateDecryptor_3_System_Byte_System_Byte_0_b__10_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_CreateDecryptor_3_System_Byte_System_Byte_1_b__12_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_CreateDecryptor_3_System_Byte_System_Byte_2_b__14_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_CreateEncryptor_0__0_b__0_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_CreateEncryptor_1_System_Byte_System_Byte_0_b__2_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_CreateEncryptor_1_System_Byte_System_Byte_1_b__4_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_CreateEncryptor_1_System_Byte_System_Byte_2_b__6_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_GenerateIV_4__4_b__16_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_GenerateKey_5__5_b__18_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+    } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AesCryptoServiceProviderTests___c;
     struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AesGcmTests_t {
         void (*ctor)(
                     CHAOS_IL2CPP_INTPTR
@@ -414,6 +564,35 @@ struct Functions {
                     CHAOS_IL2CPP_INTPTR
         );
     } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AesGcmTests;
+    struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AesGcmTests___c_t {
+        void (*cctor)(
+                void
+        );
+        void (*ctor)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Decrypt_1_System_Byte_System_Byte_System_Byte_System_Byte_System_Byte_0_b__6_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Decrypt_1_System_Byte_System_Byte_System_Byte_System_Byte_System_Byte_1_b__8_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Decrypt_1_System_Byte_System_Byte_System_Byte_System_Byte_System_Byte_2_b__10_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Dispose_2__2_b__12_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Encrypt_0_System_Byte_System_Byte_System_Byte_System_Byte_System_Byte_0_b__0_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Encrypt_0_System_Byte_System_Byte_System_Byte_System_Byte_System_Byte_1_b__2_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Encrypt_0_System_Byte_System_Byte_System_Byte_System_Byte_System_Byte_2_b__4_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+    } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AesGcmTests___c;
     struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AesManagedTests_t {
         void (*ctor)(
                     CHAOS_IL2CPP_INTPTR
@@ -479,6 +658,44 @@ struct Functions {
                     CHAOS_IL2CPP_INTPTR
         );
     } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AesManagedTests;
+    struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AesManagedTests___c_t {
+        void (*cctor)(
+                void
+        );
+        void (*ctor)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_CreateDecryptor_2__2_b__8_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_CreateDecryptor_3_System_Byte_System_Byte_0_b__10_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_CreateDecryptor_3_System_Byte_System_Byte_1_b__12_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_CreateDecryptor_3_System_Byte_System_Byte_2_b__14_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_CreateEncryptor_0__0_b__0_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_CreateEncryptor_1_System_Byte_System_Byte_0_b__2_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_CreateEncryptor_1_System_Byte_System_Byte_1_b__4_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_CreateEncryptor_1_System_Byte_System_Byte_2_b__6_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_GenerateIV_4__4_b__16_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_GenerateKey_5__5_b__18_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+    } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AesManagedTests___c;
     struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AsnEncodedDataCollectionTests_t {
         void (*ctor)(
                     CHAOS_IL2CPP_INTPTR
@@ -502,6 +719,23 @@ struct Functions {
                     CHAOS_IL2CPP_INTPTR
         );
     } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AsnEncodedDataCollectionTests;
+    struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AsnEncodedDataCollectionTests___c_t {
+        void (*cctor)(
+                void
+        );
+        void (*ctor)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Add_0_AsnEncodedData_0_b__0_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_GetEnumerator_2__2_b__4_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Remove_1_AsnEncodedData_0_b__2_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+    } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AsnEncodedDataCollectionTests___c;
     struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AsnEncodedDataTests_t {
         void (*ctor)(
                     CHAOS_IL2CPP_INTPTR
@@ -525,6 +759,23 @@ struct Functions {
                     CHAOS_IL2CPP_INTPTR
         );
     } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AsnEncodedDataTests;
+    struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AsnEncodedDataTests___c_t {
+        void (*cctor)(
+                void
+        );
+        void (*ctor)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_CopyFrom_0_AsnEncodedData_0_b__0_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Format_1_bool_0_b__2_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Format_1_bool_1_b__4_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+    } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AsnEncodedDataTests___c;
     struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AsymmetricAlgorithmTests_t {
         void (*ctor)(
                     CHAOS_IL2CPP_INTPTR
@@ -590,6 +841,44 @@ struct Functions {
                     CHAOS_IL2CPP_INTPTR
         );
     } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AsymmetricAlgorithmTests;
+    struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AsymmetricAlgorithmTests___c_t {
+        void (*cctor)(
+                void
+        );
+        void (*ctor)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Clear_2__2_b__8_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Dispose_3__3_b__10_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_ExportPkcs8PrivateKeyPem_6__6_b__16_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_ExportPkcs8PrivateKey_4__4_b__12_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_ExportSubjectPublicKeyInfoPem_7__7_b__18_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_ExportSubjectPublicKeyInfo_5__5_b__14_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_FromXmlString_0_string_0_b__0_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_FromXmlString_0_string_1_b__2_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_ToXmlString_1_bool_0_b__4_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_ToXmlString_1_bool_1_b__6_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+    } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AsymmetricAlgorithmTests___c;
     struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AsymmetricKeyExchangeDeformatterTests_t {
         void (*ctor)(
                     CHAOS_IL2CPP_INTPTR
@@ -619,6 +908,26 @@ struct Functions {
                     CHAOS_IL2CPP_INTPTR
         );
     } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AsymmetricKeyExchangeDeformatterTests;
+    struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AsymmetricKeyExchangeDeformatterTests___c_t {
+        void (*cctor)(
+                void
+        );
+        void (*ctor)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_DecryptKeyExchange_1_System_Byte_0_b__2_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_DecryptKeyExchange_1_System_Byte_1_b__4_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_DecryptKeyExchange_1_System_Byte_2_b__6_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_SetKey_0_AsymmetricAlgorithm_0_b__0_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+    } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AsymmetricKeyExchangeDeformatterTests___c;
     struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AsymmetricKeyExchangeFormatterTests_t {
         void (*ctor)(
                     CHAOS_IL2CPP_INTPTR
@@ -666,6 +975,35 @@ struct Functions {
                     CHAOS_IL2CPP_INTPTR
         );
     } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AsymmetricKeyExchangeFormatterTests;
+    struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AsymmetricKeyExchangeFormatterTests___c_t {
+        void (*cctor)(
+                void
+        );
+        void (*ctor)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_CreateKeyExchange_1_System_Byte_0_b__2_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_CreateKeyExchange_1_System_Byte_1_b__4_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_CreateKeyExchange_1_System_Byte_2_b__6_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_CreateKeyExchange_2_System_Byte_System_Type_0_b__8_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_CreateKeyExchange_2_System_Byte_System_Type_1_b__10_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_CreateKeyExchange_2_System_Byte_System_Type_2_b__12_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_SetKey_0_AsymmetricAlgorithm_0_b__0_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+    } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AsymmetricKeyExchangeFormatterTests___c;
     struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AsymmetricSignatureDeformatterTests_t {
         void (*ctor)(
                     CHAOS_IL2CPP_INTPTR
@@ -725,6 +1063,41 @@ struct Functions {
                     CHAOS_IL2CPP_INTPTR
         );
     } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AsymmetricSignatureDeformatterTests;
+    struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AsymmetricSignatureDeformatterTests___c_t {
+        void (*cctor)(
+                void
+        );
+        void (*ctor)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_SetHashAlgorithm_1_string_0_b__2_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_SetHashAlgorithm_1_string_1_b__4_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_SetKey_0_AsymmetricAlgorithm_0_b__0_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_VerifySignature_2_HashAlgorithm_System_Byte_0_b__6_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_VerifySignature_2_HashAlgorithm_System_Byte_1_b__8_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_VerifySignature_2_HashAlgorithm_System_Byte_2_b__10_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_VerifySignature_3_System_Byte_System_Byte_0_b__12_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_VerifySignature_3_System_Byte_System_Byte_1_b__14_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_VerifySignature_3_System_Byte_System_Byte_2_b__16_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+    } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AsymmetricSignatureDeformatterTests___c;
     struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AsymmetricSignatureFormatterTests_t {
         void (*ctor)(
                     CHAOS_IL2CPP_INTPTR
@@ -772,6 +1145,35 @@ struct Functions {
                     CHAOS_IL2CPP_INTPTR
         );
     } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AsymmetricSignatureFormatterTests;
+    struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AsymmetricSignatureFormatterTests___c_t {
+        void (*cctor)(
+                void
+        );
+        void (*ctor)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_CreateSignature_2_HashAlgorithm_0_b__6_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_CreateSignature_3_System_Byte_0_b__8_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_CreateSignature_3_System_Byte_1_b__10_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_CreateSignature_3_System_Byte_2_b__12_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_SetHashAlgorithm_1_string_0_b__2_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_SetHashAlgorithm_1_string_1_b__4_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_SetKey_0_AsymmetricAlgorithm_0_b__0_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+    } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AsymmetricSignatureFormatterTests___c;
     struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ChaCha20Poly1305Tests_t {
         void (*ctor)(
                     CHAOS_IL2CPP_INTPTR
@@ -819,6 +1221,35 @@ struct Functions {
                     CHAOS_IL2CPP_INTPTR
         );
     } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ChaCha20Poly1305Tests;
+    struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ChaCha20Poly1305Tests___c_t {
+        void (*cctor)(
+                void
+        );
+        void (*ctor)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Decrypt_1_System_Byte_System_Byte_System_Byte_System_Byte_System_Byte_0_b__6_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Decrypt_1_System_Byte_System_Byte_System_Byte_System_Byte_System_Byte_1_b__8_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Decrypt_1_System_Byte_System_Byte_System_Byte_System_Byte_System_Byte_2_b__10_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Dispose_2__2_b__12_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Encrypt_0_System_Byte_System_Byte_System_Byte_System_Byte_System_Byte_0_b__0_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Encrypt_0_System_Byte_System_Byte_System_Byte_System_Byte_System_Byte_1_b__2_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Encrypt_0_System_Byte_System_Byte_System_Byte_System_Byte_System_Byte_2_b__4_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+    } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ChaCha20Poly1305Tests___c;
     struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CngKeyTests_t {
         void (*ctor)(
                     CHAOS_IL2CPP_INTPTR
@@ -986,6 +1417,92 @@ struct Functions {
                     CHAOS_IL2CPP_INTPTR
         );
     } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CngKeyTests;
+    struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CngKeyTests___c_t {
+        void (*cctor)(
+                void
+        );
+        void (*ctor)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Delete_1__1_b__2_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Dispose_0__0_b__0_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Exists_2_string_0_b__4_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Exists_3_string_CngProvider_0_b__8_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Exists_3_string_CngProvider_1_b__10_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Exists_4_string_CngProvider_CngKeyOpenOptions_0_b__12_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Exists_4_string_CngProvider_CngKeyOpenOptions_1_b__14_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Export_5_CngKeyBlobFormat_0_b__16_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_GetProperty_12_string_CngPropertyOptions_0_b__44_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_GetProperty_12_string_CngPropertyOptions_1_b__46_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_HasProperty_13_string_CngPropertyOptions_0_b__48_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_HasProperty_13_string_CngPropertyOptions_1_b__50_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Import_6_System_Byte_CngKeyBlobFormat_0_b__18_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Import_6_System_Byte_CngKeyBlobFormat_1_b__20_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Import_6_System_Byte_CngKeyBlobFormat_2_b__22_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Import_7_System_Byte_CngKeyBlobFormat_CngProvider_0_b__24_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Import_7_System_Byte_CngKeyBlobFormat_CngProvider_1_b__26_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Import_7_System_Byte_CngKeyBlobFormat_CngProvider_2_b__28_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Open_10_string_CngProvider_CngKeyOpenOptions_0_b__38_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Open_10_string_CngProvider_CngKeyOpenOptions_1_b__40_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Open_11_SafeNCryptKeyHandle_CngKeyHandleOpenOptions_0_b__42_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Open_8_string_0_b__30_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Open_8_string_1_b__32_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Open_9_string_CngProvider_0_b__34_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Open_9_string_CngProvider_1_b__36_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_SetProperty_14_CngProperty_0_b__52_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+    } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CngKeyTests___c;
     struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CngPropertyTests_t {
         void (*ctor)(
                     CHAOS_IL2CPP_INTPTR
@@ -1104,6 +1621,56 @@ struct Functions {
                     CHAOS_IL2CPP_INTPTR
         );
     } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptoConfigTests;
+    struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptoConfigTests___c_t {
+        void (*cctor)(
+                void
+        );
+        void (*ctor)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_AddAlgorithm_0_System_Type_System_String_0_b__0_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_AddAlgorithm_0_System_Type_System_String_1_b__2_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_AddAlgorithm_0_System_Type_System_String_2_b__4_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_AddOID_3_string_System_String_0_b__18_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_AddOID_3_string_System_String_1_b__20_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_AddOID_3_string_System_String_2_b__22_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_AddOID_3_string_System_String_3_b__24_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_CreateFromName_1_string_System_Object_0_b__6_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_CreateFromName_1_string_System_Object_2_b__10_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_CreateFromName_1_string_System_Object_3_b__12_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_CreateFromName_2_string_0_b__14_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_EncodeOID_5_string_0_b__30_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_EncodeOID_5_string_1_b__32_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_MapNameToOID_4_string_0_b__26_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+    } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptoConfigTests___c;
     struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptoStreamTests_t {
         void (*ctor)(
                     CHAOS_IL2CPP_INTPTR
@@ -1433,6 +2000,176 @@ struct Functions {
                     CHAOS_IL2CPP_INTPTR
         );
     } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptoStreamTests;
+    struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptoStreamTests___c_t {
+        void (*cctor)(
+                void
+        );
+        void (*ctor)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_BeginRead_8_System_Byte_int_int_System_AsyncCallback_object_0_b__30_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_BeginRead_8_System_Byte_int_int_System_AsyncCallback_object_1_b__32_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_BeginRead_8_System_Byte_int_int_System_AsyncCallback_object_2_b__34_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_BeginRead_8_System_Byte_int_int_System_AsyncCallback_object_3_b__36_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_BeginRead_8_System_Byte_int_int_System_AsyncCallback_object_4_b__38_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_BeginWrite_15_System_Byte_int_int_System_AsyncCallback_object_0_b__70_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_BeginWrite_15_System_Byte_int_int_System_AsyncCallback_object_1_b__72_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_BeginWrite_15_System_Byte_int_int_System_AsyncCallback_object_2_b__74_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_BeginWrite_15_System_Byte_int_int_System_AsyncCallback_object_3_b__76_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_BeginWrite_15_System_Byte_int_int_System_AsyncCallback_object_4_b__78_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Clear_20__20_b__104_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_CopyToAsync_19_Stream_int_CancellationToken_0_b__98_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_CopyToAsync_19_Stream_int_CancellationToken_1_b__100_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_CopyToAsync_19_Stream_int_CancellationToken_2_b__102_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_CopyTo_18_Stream_int_0_b__92_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_CopyTo_18_Stream_int_1_b__94_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_CopyTo_18_Stream_int_2_b__96_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_DisposeAsync_21__21_b__106_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_EndRead_9_System_IAsyncResult_0_b__40_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_EndWrite_16_System_IAsyncResult_0_b__80_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_FlushAsync_3_CancellationToken_0_b__6_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_FlushFinalBlockAsync_1_CancellationToken_0_b__2_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_FlushFinalBlock_0__0_b__0_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Flush_2__2_b__4_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_ReadAsync_6_System_Byte_int_int_CancellationToken_0_b__18_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_ReadAsync_6_System_Byte_int_int_CancellationToken_1_b__20_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_ReadAsync_6_System_Byte_int_int_CancellationToken_2_b__22_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_ReadAsync_6_System_Byte_int_int_CancellationToken_3_b__24_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_ReadAsync_6_System_Byte_int_int_CancellationToken_4_b__26_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_ReadAsync_7_System_Memorybyte_CancellationToken_0_b__28_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_ReadByte_10__10_b__42_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Read_12_System_Byte_int_int_0_b__48_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Read_12_System_Byte_int_int_1_b__50_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Read_12_System_Byte_int_int_2_b__52_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Read_12_System_Byte_int_int_3_b__54_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Read_12_System_Byte_int_int_4_b__56_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Seek_4_long_SeekOrigin_0_b__8_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Seek_4_long_SeekOrigin_1_b__10_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Seek_4_long_SeekOrigin_2_b__12_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_SetLength_5_long_0_b__14_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_SetLength_5_long_1_b__16_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_WriteAsync_13_System_Byte_int_int_CancellationToken_0_b__58_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_WriteAsync_13_System_Byte_int_int_CancellationToken_1_b__60_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_WriteAsync_13_System_Byte_int_int_CancellationToken_2_b__62_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_WriteAsync_13_System_Byte_int_int_CancellationToken_3_b__64_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_WriteAsync_13_System_Byte_int_int_CancellationToken_4_b__66_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_WriteAsync_14_System_ReadOnlyMemorybyte_CancellationToken_0_b__68_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_WriteByte_11_byte_0_b__44_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_WriteByte_11_byte_1_b__46_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Write_17_System_Byte_int_int_0_b__82_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Write_17_System_Byte_int_int_1_b__84_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Write_17_System_Byte_int_int_2_b__86_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Write_17_System_Byte_int_int_3_b__88_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Write_17_System_Byte_int_int_4_b__90_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+    } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptoStreamTests___c;
     struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptographicOperationsTests_t {
         void (*ctor)(
                     CHAOS_IL2CPP_INTPTR
@@ -1570,6 +2307,80 @@ struct Functions {
                     CHAOS_IL2CPP_INTPTR
         );
     } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptographicOperationsTests;
+    struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptographicOperationsTests___c_t {
+        void (*cctor)(
+                void
+        );
+        void (*ctor)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_HashDataAsync_2_HashAlgorithmName_Stream_System_Memorybyte_CancellationToken_0_b__10_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_HashDataAsync_2_HashAlgorithmName_Stream_System_Memorybyte_CancellationToken_1_b__12_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_HashDataAsync_3_HashAlgorithmName_Stream_CancellationToken_0_b__14_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_HashDataAsync_3_HashAlgorithmName_Stream_CancellationToken_1_b__16_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_HashData_0_HashAlgorithmName_System_Byte_0_b__0_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_HashData_0_HashAlgorithmName_System_Byte_1_b__2_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_HashData_0_HashAlgorithmName_System_Byte_2_b__4_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_HashData_1_HashAlgorithmName_Stream_0_b__6_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_HashData_1_HashAlgorithmName_Stream_1_b__8_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_HmacDataAsync_6_HashAlgorithmName_System_Byte_Stream_CancellationToken_0_b__30_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_HmacDataAsync_6_HashAlgorithmName_System_Byte_Stream_CancellationToken_1_b__32_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_HmacDataAsync_6_HashAlgorithmName_System_Byte_Stream_CancellationToken_2_b__34_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_HmacDataAsync_7_HashAlgorithmName_System_ReadOnlyMemorybyte_Stream_System_Memorybyte_CancellationToken_0_b__36_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_HmacDataAsync_7_HashAlgorithmName_System_ReadOnlyMemorybyte_Stream_System_Memorybyte_CancellationToken_1_b__38_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_HmacDataAsync_8_HashAlgorithmName_System_ReadOnlyMemorybyte_Stream_CancellationToken_0_b__40_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_HmacDataAsync_8_HashAlgorithmName_System_ReadOnlyMemorybyte_Stream_CancellationToken_1_b__42_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_HmacData_4_HashAlgorithmName_System_Byte_System_Byte_0_b__18_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_HmacData_4_HashAlgorithmName_System_Byte_System_Byte_1_b__20_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_HmacData_4_HashAlgorithmName_System_Byte_System_Byte_2_b__22_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_HmacData_5_HashAlgorithmName_System_Byte_Stream_0_b__24_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_HmacData_5_HashAlgorithmName_System_Byte_Stream_1_b__26_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_HmacData_5_HashAlgorithmName_System_Byte_Stream_2_b__28_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+    } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptographicOperationsTests___c;
     struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DESCryptoServiceProviderTests_t {
         void (*ctor)(
                     CHAOS_IL2CPP_INTPTR
@@ -1635,6 +2446,44 @@ struct Functions {
                     CHAOS_IL2CPP_INTPTR
         );
     } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DESCryptoServiceProviderTests;
+    struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DESCryptoServiceProviderTests___c_t {
+        void (*cctor)(
+                void
+        );
+        void (*ctor)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_CreateDecryptor_2__2_b__4_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_CreateDecryptor_3_System_Byte_System_Byte_0_b__6_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_CreateDecryptor_3_System_Byte_System_Byte_1_b__8_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_CreateDecryptor_3_System_Byte_System_Byte_2_b__10_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_CreateEncryptor_4__4_b__12_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_CreateEncryptor_5_System_Byte_System_Byte_0_b__14_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_CreateEncryptor_5_System_Byte_System_Byte_1_b__16_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_CreateEncryptor_5_System_Byte_System_Byte_2_b__18_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_GenerateIV_1__1_b__2_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_GenerateKey_0__0_b__0_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+    } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DESCryptoServiceProviderTests___c;
     struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DESTests_t {
         void (*ctor)(
                     CHAOS_IL2CPP_INTPTR
@@ -1676,6 +2525,32 @@ struct Functions {
                     CHAOS_IL2CPP_INTPTR
         );
     } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DESTests;
+    struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DESTests___c_t {
+        void (*cctor)(
+                void
+        );
+        void (*ctor)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_IsSemiWeakKey_1_System_Byte_0_b__6_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_IsSemiWeakKey_1_System_Byte_1_b__8_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_IsSemiWeakKey_1_System_Byte_2_b__10_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_IsWeakKey_0_System_Byte_0_b__0_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_IsWeakKey_0_System_Byte_1_b__2_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_IsWeakKey_0_System_Byte_2_b__4_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+    } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DESTests___c;
     struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSACngTests_t {
         void (*ctor)(
                     CHAOS_IL2CPP_INTPTR
@@ -1735,6 +2610,41 @@ struct Functions {
                     CHAOS_IL2CPP_INTPTR
         );
     } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSACngTests;
+    struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSACngTests___c_t {
+        void (*cctor)(
+                void
+        );
+        void (*ctor)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_CreateSignature_2_System_Byte_0_b__6_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_CreateSignature_2_System_Byte_1_b__8_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_CreateSignature_2_System_Byte_2_b__10_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_ExportParameters_1_bool_0_b__2_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_ExportParameters_1_bool_1_b__4_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_ImportParameters_0_DSAParameters_0_b__0_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_VerifySignature_3_System_Byte_System_Byte_0_b__12_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_VerifySignature_3_System_Byte_System_Byte_1_b__14_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_VerifySignature_3_System_Byte_System_Byte_2_b__16_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+    } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSACngTests___c;
     struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSACryptoServiceProviderTests_t {
         void (*ctor)(
                     CHAOS_IL2CPP_INTPTR
@@ -1950,6 +2860,119 @@ struct Functions {
                     CHAOS_IL2CPP_INTPTR
         );
     } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSACryptoServiceProviderTests;
+    struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSACryptoServiceProviderTests___c_t {
+        void (*cctor)(
+                void
+        );
+        void (*ctor)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_CreateSignature_8_System_Byte_0_b__42_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_CreateSignature_8_System_Byte_1_b__44_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_CreateSignature_8_System_Byte_2_b__46_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_ExportCspBlob_0_bool_0_b__0_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_ExportCspBlob_0_bool_1_b__2_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_ExportParameters_1_bool_0_b__4_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_ExportParameters_1_bool_1_b__6_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_ImportCspBlob_2_System_Byte_0_b__8_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_ImportCspBlob_2_System_Byte_1_b__10_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_ImportCspBlob_2_System_Byte_2_b__12_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_ImportParameters_3_DSAParameters_0_b__14_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_SignData_4_Stream_0_b__16_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_SignData_4_Stream_1_b__18_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_SignData_5_System_Byte_0_b__20_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_SignData_5_System_Byte_1_b__22_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_SignData_5_System_Byte_2_b__24_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_SignData_6_System_Byte_int_int_0_b__26_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_SignData_6_System_Byte_int_int_1_b__28_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_SignData_6_System_Byte_int_int_2_b__30_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_SignData_6_System_Byte_int_int_3_b__32_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_SignData_6_System_Byte_int_int_4_b__34_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_SignHash_10_System_Byte_string_0_b__54_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_SignHash_10_System_Byte_string_1_b__56_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_SignHash_10_System_Byte_string_2_b__58_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_SignHash_10_System_Byte_string_3_b__60_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_VerifyData_7_System_Byte_System_Byte_0_b__36_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_VerifyData_7_System_Byte_System_Byte_1_b__38_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_VerifyData_7_System_Byte_System_Byte_2_b__40_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_VerifyHash_11_System_Byte_string_System_Byte_0_b__62_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_VerifyHash_11_System_Byte_string_System_Byte_1_b__64_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_VerifyHash_11_System_Byte_string_System_Byte_2_b__66_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_VerifyHash_11_System_Byte_string_System_Byte_3_b__68_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_VerifySignature_9_System_Byte_System_Byte_0_b__48_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_VerifySignature_9_System_Byte_System_Byte_1_b__50_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_VerifySignature_9_System_Byte_System_Byte_2_b__52_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+    } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSACryptoServiceProviderTests___c;
     struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSAOpenSslTests_t {
         void (*ctor)(
                     CHAOS_IL2CPP_INTPTR
@@ -2015,6 +3038,44 @@ struct Functions {
                     CHAOS_IL2CPP_INTPTR
         );
     } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSAOpenSslTests;
+    struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSAOpenSslTests___c_t {
+        void (*cctor)(
+                void
+        );
+        void (*ctor)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_CreateSignature_1_System_Byte_0_b__2_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_CreateSignature_1_System_Byte_1_b__4_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_CreateSignature_1_System_Byte_2_b__6_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_DuplicateKeyHandle_0__0_b__0_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_ExportParameters_2_bool_0_b__8_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_ExportParameters_2_bool_1_b__10_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_ImportParameters_3_DSAParameters_0_b__12_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_VerifySignature_4_System_Byte_System_Byte_0_b__14_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_VerifySignature_4_System_Byte_System_Byte_1_b__16_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_VerifySignature_4_System_Byte_System_Byte_2_b__18_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+    } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSAOpenSslTests___c;
     struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSASignatureDeformatterTests_t {
         void (*ctor)(
                     CHAOS_IL2CPP_INTPTR
@@ -2056,6 +3117,32 @@ struct Functions {
                     CHAOS_IL2CPP_INTPTR
         );
     } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSASignatureDeformatterTests;
+    struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSASignatureDeformatterTests___c_t {
+        void (*cctor)(
+                void
+        );
+        void (*ctor)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_SetHashAlgorithm_1_string_0_b__2_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_SetHashAlgorithm_1_string_1_b__4_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_SetKey_0_AsymmetricAlgorithm_0_b__0_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_VerifySignature_2_System_Byte_System_Byte_0_b__6_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_VerifySignature_2_System_Byte_System_Byte_1_b__8_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_VerifySignature_2_System_Byte_System_Byte_2_b__10_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+    } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSASignatureDeformatterTests___c;
     struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSASignatureFormatterTests_t {
         void (*ctor)(
                     CHAOS_IL2CPP_INTPTR
@@ -2097,6 +3184,32 @@ struct Functions {
                     CHAOS_IL2CPP_INTPTR
         );
     } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSASignatureFormatterTests;
+    struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSASignatureFormatterTests___c_t {
+        void (*cctor)(
+                void
+        );
+        void (*ctor)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_CreateSignature_2_System_Byte_0_b__6_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_CreateSignature_2_System_Byte_1_b__8_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_CreateSignature_2_System_Byte_2_b__10_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_SetHashAlgorithm_1_string_0_b__2_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_SetHashAlgorithm_1_string_1_b__4_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_SetKey_0_AsymmetricAlgorithm_0_b__0_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+    } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSASignatureFormatterTests___c;
     struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSATests_t {
         void (*ctor)(
                     CHAOS_IL2CPP_INTPTR
@@ -2474,6 +3587,200 @@ struct Functions {
                     CHAOS_IL2CPP_INTPTR
         );
     } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSATests;
+    struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSATests___c_t {
+        void (*cctor)(
+                void
+        );
+        void (*ctor)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_CreateSignature_14_System_Byte_DSASignatureFormat_0_b__90_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_CreateSignature_14_System_Byte_DSASignatureFormat_1_b__92_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_CreateSignature_14_System_Byte_DSASignatureFormat_2_b__94_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_CreateSignature_2_System_Byte_0_b__6_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_CreateSignature_2_System_Byte_1_b__8_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_CreateSignature_2_System_Byte_2_b__10_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_ExportParameters_0_bool_0_b__0_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_ExportParameters_0_bool_1_b__2_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_FromXmlString_19_string_0_b__116_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_FromXmlString_19_string_1_b__118_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_GetMaxSignatureSize_18_DSASignatureFormat_0_b__114_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_ImportParameters_1_DSAParameters_0_b__4_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_SignData_4_System_Byte_HashAlgorithmName_0_b__18_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_SignData_4_System_Byte_HashAlgorithmName_1_b__20_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_SignData_4_System_Byte_HashAlgorithmName_2_b__22_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_SignData_5_System_Byte_HashAlgorithmName_DSASignatureFormat_0_b__24_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_SignData_5_System_Byte_HashAlgorithmName_DSASignatureFormat_1_b__26_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_SignData_5_System_Byte_HashAlgorithmName_DSASignatureFormat_2_b__28_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_SignData_6_System_Byte_int_int_HashAlgorithmName_0_b__30_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_SignData_6_System_Byte_int_int_HashAlgorithmName_1_b__32_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_SignData_6_System_Byte_int_int_HashAlgorithmName_2_b__34_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_SignData_6_System_Byte_int_int_HashAlgorithmName_3_b__36_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_SignData_6_System_Byte_int_int_HashAlgorithmName_4_b__38_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_SignData_7_System_Byte_int_int_HashAlgorithmName_DSASignatureFormat_0_b__40_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_SignData_7_System_Byte_int_int_HashAlgorithmName_DSASignatureFormat_1_b__42_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_SignData_7_System_Byte_int_int_HashAlgorithmName_DSASignatureFormat_2_b__44_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_SignData_7_System_Byte_int_int_HashAlgorithmName_DSASignatureFormat_3_b__46_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_SignData_7_System_Byte_int_int_HashAlgorithmName_DSASignatureFormat_4_b__48_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_SignData_8_Stream_HashAlgorithmName_0_b__50_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_SignData_8_Stream_HashAlgorithmName_1_b__52_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_SignData_9_Stream_HashAlgorithmName_DSASignatureFormat_0_b__54_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_SignData_9_Stream_HashAlgorithmName_DSASignatureFormat_1_b__56_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_ToXmlString_20_bool_0_b__120_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_ToXmlString_20_bool_1_b__122_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_VerifyData_10_System_Byte_System_Byte_HashAlgorithmName_0_b__58_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_VerifyData_10_System_Byte_System_Byte_HashAlgorithmName_1_b__60_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_VerifyData_10_System_Byte_System_Byte_HashAlgorithmName_2_b__62_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_VerifyData_11_System_Byte_int_int_System_Byte_HashAlgorithmName_0_b__64_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_VerifyData_11_System_Byte_int_int_System_Byte_HashAlgorithmName_1_b__66_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_VerifyData_11_System_Byte_int_int_System_Byte_HashAlgorithmName_2_b__68_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_VerifyData_11_System_Byte_int_int_System_Byte_HashAlgorithmName_3_b__70_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_VerifyData_11_System_Byte_int_int_System_Byte_HashAlgorithmName_4_b__72_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_VerifyData_12_System_Byte_int_int_System_Byte_HashAlgorithmName_DSASignatureFormat_0_b__74_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_VerifyData_12_System_Byte_int_int_System_Byte_HashAlgorithmName_DSASignatureFormat_1_b__76_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_VerifyData_12_System_Byte_int_int_System_Byte_HashAlgorithmName_DSASignatureFormat_2_b__78_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_VerifyData_12_System_Byte_int_int_System_Byte_HashAlgorithmName_DSASignatureFormat_3_b__80_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_VerifyData_12_System_Byte_int_int_System_Byte_HashAlgorithmName_DSASignatureFormat_4_b__82_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_VerifyData_13_Stream_System_Byte_HashAlgorithmName_0_b__84_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_VerifyData_13_Stream_System_Byte_HashAlgorithmName_1_b__86_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_VerifyData_13_Stream_System_Byte_HashAlgorithmName_2_b__88_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_VerifyData_15_System_Byte_System_Byte_HashAlgorithmName_DSASignatureFormat_0_b__96_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_VerifyData_15_System_Byte_System_Byte_HashAlgorithmName_DSASignatureFormat_1_b__98_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_VerifyData_15_System_Byte_System_Byte_HashAlgorithmName_DSASignatureFormat_2_b__100_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_VerifyData_16_Stream_System_Byte_HashAlgorithmName_DSASignatureFormat_0_b__102_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_VerifyData_16_Stream_System_Byte_HashAlgorithmName_DSASignatureFormat_1_b__104_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_VerifyData_16_Stream_System_Byte_HashAlgorithmName_DSASignatureFormat_2_b__106_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_VerifySignature_17_System_Byte_System_Byte_DSASignatureFormat_0_b__108_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_VerifySignature_17_System_Byte_System_Byte_DSASignatureFormat_1_b__110_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_VerifySignature_17_System_Byte_System_Byte_DSASignatureFormat_2_b__112_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_VerifySignature_3_System_Byte_System_Byte_0_b__12_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_VerifySignature_3_System_Byte_System_Byte_1_b__14_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_VerifySignature_3_System_Byte_System_Byte_2_b__16_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+    } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSATests___c;
     struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DeriveBytesTests_t {
         void (*ctor)(
                     CHAOS_IL2CPP_INTPTR
@@ -2497,6 +3804,23 @@ struct Functions {
                     CHAOS_IL2CPP_INTPTR
         );
     } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DeriveBytesTests;
+    struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DeriveBytesTests___c_t {
+        void (*cctor)(
+                void
+        );
+        void (*ctor)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Dispose_1__1_b__4_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_GetBytes_0_int_0_b__0_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_GetBytes_0_int_1_b__2_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+    } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DeriveBytesTests___c;
     struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECAlgorithmTests_t {
         void (*ctor)(
                     CHAOS_IL2CPP_INTPTR
@@ -2550,6 +3874,38 @@ struct Functions {
                     CHAOS_IL2CPP_INTPTR
         );
     } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECAlgorithmTests;
+    struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECAlgorithmTests___c_t {
+        void (*cctor)(
+                void
+        );
+        void (*ctor)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_ExportECPrivateKeyPem_5__5_b__14_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_ExportECPrivateKey_4__4_b__12_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_ExportExplicitParameters_1_bool_0_b__4_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_ExportExplicitParameters_1_bool_1_b__6_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_ExportParameters_0_bool_0_b__0_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_ExportParameters_0_bool_1_b__2_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_GenerateKey_3_ECCurve_0_b__10_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_ImportParameters_2_ECParameters_0_b__8_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+    } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECAlgorithmTests___c;
     struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECCurveTests_t {
         void (*ctor)(
                     CHAOS_IL2CPP_INTPTR
@@ -2591,6 +3947,29 @@ struct Functions {
                     CHAOS_IL2CPP_INTPTR
         );
     } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECCurveTests;
+    struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECCurveTests___c_t {
+        void (*cctor)(
+                void
+        );
+        void (*ctor)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_CreateFromFriendlyName_1_string_0_b__2_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_CreateFromFriendlyName_1_string_1_b__4_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_CreateFromOid_0_Oid_0_b__0_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_CreateFromValue_2_string_0_b__6_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_CreateFromValue_2_string_1_b__8_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+    } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECCurveTests___c;
     struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDiffieHellmanCngPublicKeyTests_t {
         void (*ctor)(
                     CHAOS_IL2CPP_INTPTR
@@ -2650,6 +4029,41 @@ struct Functions {
                     CHAOS_IL2CPP_INTPTR
         );
     } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDiffieHellmanCngPublicKeyTests;
+    struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDiffieHellmanCngPublicKeyTests___c_t {
+        void (*cctor)(
+                void
+        );
+        void (*ctor)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_ExportExplicitParameters_4__4_b__14_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_ExportParameters_5__5_b__16_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_FromByteArray_2_System_Byte_CngKeyBlobFormat_0_b__6_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_FromByteArray_2_System_Byte_CngKeyBlobFormat_1_b__8_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_FromByteArray_2_System_Byte_CngKeyBlobFormat_2_b__10_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_FromXmlString_1_string_0_b__2_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_FromXmlString_1_string_1_b__4_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Import_3__3_b__12_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_ToXmlString_0__0_b__0_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+    } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDiffieHellmanCngPublicKeyTests___c;
     struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDiffieHellmanCngTests_t {
         void (*ctor)(
                     CHAOS_IL2CPP_INTPTR
@@ -2793,6 +4207,83 @@ struct Functions {
                     CHAOS_IL2CPP_INTPTR
         );
     } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDiffieHellmanCngTests;
+    struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDiffieHellmanCngTests___c_t {
+        void (*cctor)(
+                void
+        );
+        void (*ctor)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_DeriveKeyFromHash_0_ECDiffieHellmanPublicKey_HashAlgorithmName_System_Byte_System_Byte_0_b__0_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_DeriveKeyFromHash_0_ECDiffieHellmanPublicKey_HashAlgorithmName_System_Byte_System_Byte_1_b__2_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_DeriveKeyFromHash_0_ECDiffieHellmanPublicKey_HashAlgorithmName_System_Byte_System_Byte_2_b__4_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_DeriveKeyFromHmac_1_ECDiffieHellmanPublicKey_HashAlgorithmName_System_Byte_System_Byte_System_Byte_0_b__6_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_DeriveKeyFromHmac_1_ECDiffieHellmanPublicKey_HashAlgorithmName_System_Byte_System_Byte_System_Byte_1_b__8_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_DeriveKeyFromHmac_1_ECDiffieHellmanPublicKey_HashAlgorithmName_System_Byte_System_Byte_System_Byte_2_b__10_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_DeriveKeyMaterial_7_ECDiffieHellmanPublicKey_0_b__30_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_DeriveKeyMaterial_8_CngKey_0_b__32_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_DeriveKeyTls_2_ECDiffieHellmanPublicKey_System_Byte_System_Byte_0_b__12_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_DeriveKeyTls_2_ECDiffieHellmanPublicKey_System_Byte_System_Byte_1_b__14_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_DeriveKeyTls_2_ECDiffieHellmanPublicKey_System_Byte_System_Byte_2_b__16_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_DeriveRawSecretAgreement_3_ECDiffieHellmanPublicKey_0_b__18_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_DeriveSecretAgreementHandle_10_CngKey_0_b__36_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_DeriveSecretAgreementHandle_9_ECDiffieHellmanPublicKey_0_b__34_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_ExportExplicitParameters_5_bool_0_b__22_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_ExportExplicitParameters_5_bool_1_b__24_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_ExportParameters_6_bool_0_b__26_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_ExportParameters_6_bool_1_b__28_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_FromXmlString_12_string_ECKeyXmlFormat_0_b__40_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_FromXmlString_12_string_ECKeyXmlFormat_1_b__42_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_GenerateKey_11_ECCurve_0_b__38_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_ImportParameters_4_ECParameters_0_b__20_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_ToXmlString_13_ECKeyXmlFormat_0_b__44_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+    } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDiffieHellmanCngTests___c;
     struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDiffieHellmanOpenSslTests_t {
         void (*ctor)(
                     CHAOS_IL2CPP_INTPTR
@@ -2822,6 +4313,26 @@ struct Functions {
                     CHAOS_IL2CPP_INTPTR
         );
     } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDiffieHellmanOpenSslTests;
+    struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDiffieHellmanOpenSslTests___c_t {
+        void (*cctor)(
+                void
+        );
+        void (*ctor)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_DuplicateKeyHandle_0__0_b__0_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_ExportParameters_1_bool_0_b__2_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_ExportParameters_1_bool_1_b__4_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_ImportParameters_2_ECParameters_0_b__6_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+    } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDiffieHellmanOpenSslTests___c;
     struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDiffieHellmanPublicKeyTests_t {
         void (*ctor)(
                     CHAOS_IL2CPP_INTPTR
@@ -2857,6 +4368,29 @@ struct Functions {
                     CHAOS_IL2CPP_INTPTR
         );
     } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDiffieHellmanPublicKeyTests;
+    struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDiffieHellmanPublicKeyTests___c_t {
+        void (*cctor)(
+                void
+        );
+        void (*ctor)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Dispose_0__0_b__0_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_ExportExplicitParameters_4__4_b__8_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_ExportParameters_3__3_b__6_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_ToByteArray_1__1_b__2_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_ToXmlString_2__2_b__4_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+    } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDiffieHellmanPublicKeyTests___c;
     struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDiffieHellmanTests_t {
         void (*ctor)(
                     CHAOS_IL2CPP_INTPTR
@@ -2976,6 +4510,71 @@ struct Functions {
                     CHAOS_IL2CPP_INTPTR
         );
     } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDiffieHellmanTests;
+    struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDiffieHellmanTests___c_t {
+        void (*cctor)(
+                void
+        );
+        void (*ctor)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_DeriveKeyFromHash_1_ECDiffieHellmanPublicKey_HashAlgorithmName_0_b__2_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_DeriveKeyFromHash_2_ECDiffieHellmanPublicKey_HashAlgorithmName_System_Byte_System_Byte_0_b__4_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_DeriveKeyFromHash_2_ECDiffieHellmanPublicKey_HashAlgorithmName_System_Byte_System_Byte_1_b__6_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_DeriveKeyFromHash_2_ECDiffieHellmanPublicKey_HashAlgorithmName_System_Byte_System_Byte_2_b__8_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_DeriveKeyFromHmac_3_ECDiffieHellmanPublicKey_HashAlgorithmName_System_Byte_0_b__10_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_DeriveKeyFromHmac_3_ECDiffieHellmanPublicKey_HashAlgorithmName_System_Byte_1_b__12_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_DeriveKeyFromHmac_3_ECDiffieHellmanPublicKey_HashAlgorithmName_System_Byte_2_b__14_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_DeriveKeyFromHmac_4_ECDiffieHellmanPublicKey_HashAlgorithmName_System_Byte_System_Byte_System_Byte_0_b__16_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_DeriveKeyFromHmac_4_ECDiffieHellmanPublicKey_HashAlgorithmName_System_Byte_System_Byte_System_Byte_1_b__18_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_DeriveKeyFromHmac_4_ECDiffieHellmanPublicKey_HashAlgorithmName_System_Byte_System_Byte_System_Byte_2_b__20_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_DeriveKeyMaterial_0_ECDiffieHellmanPublicKey_0_b__0_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_DeriveKeyTls_5_ECDiffieHellmanPublicKey_System_Byte_System_Byte_0_b__22_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_DeriveKeyTls_5_ECDiffieHellmanPublicKey_System_Byte_System_Byte_1_b__24_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_DeriveKeyTls_5_ECDiffieHellmanPublicKey_System_Byte_System_Byte_2_b__26_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_DeriveRawSecretAgreement_6_ECDiffieHellmanPublicKey_0_b__28_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_FromXmlString_7_string_0_b__30_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_FromXmlString_7_string_1_b__32_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_ToXmlString_8_bool_0_b__34_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_ToXmlString_8_bool_1_b__36_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+    } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDiffieHellmanTests___c;
     struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaCngTests_t {
         void (*ctor)(
                     CHAOS_IL2CPP_INTPTR
@@ -3197,6 +4796,122 @@ struct Functions {
                     CHAOS_IL2CPP_INTPTR
         );
     } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaCngTests;
+    struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaCngTests___c_t {
+        void (*cctor)(
+                void
+        );
+        void (*ctor)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_ExportExplicitParameters_1_bool_0_b__2_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_ExportExplicitParameters_1_bool_1_b__4_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_ExportParameters_2_bool_0_b__6_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_ExportParameters_2_bool_1_b__8_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_FromXmlString_5_string_ECKeyXmlFormat_0_b__22_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_FromXmlString_5_string_ECKeyXmlFormat_1_b__24_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_GenerateKey_13_ECCurve_0_b__70_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_ImportParameters_0_ECParameters_0_b__0_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_SignData_6_System_Byte_0_b__26_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_SignData_6_System_Byte_1_b__28_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_SignData_6_System_Byte_2_b__30_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_SignData_7_System_Byte_int_int_0_b__32_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_SignData_7_System_Byte_int_int_1_b__34_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_SignData_7_System_Byte_int_int_2_b__36_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_SignData_7_System_Byte_int_int_3_b__38_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_SignData_7_System_Byte_int_int_4_b__40_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_SignData_8_Stream_0_b__42_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_SignData_8_Stream_1_b__44_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_SignHash_3_System_Byte_0_b__10_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_SignHash_3_System_Byte_1_b__12_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_SignHash_3_System_Byte_2_b__14_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_ToXmlString_9_ECKeyXmlFormat_0_b__46_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_VerifyData_10_System_Byte_System_Byte_0_b__48_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_VerifyData_10_System_Byte_System_Byte_1_b__50_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_VerifyData_10_System_Byte_System_Byte_2_b__52_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_VerifyData_11_System_Byte_int_int_System_Byte_0_b__54_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_VerifyData_11_System_Byte_int_int_System_Byte_1_b__56_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_VerifyData_11_System_Byte_int_int_System_Byte_2_b__58_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_VerifyData_11_System_Byte_int_int_System_Byte_3_b__60_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_VerifyData_11_System_Byte_int_int_System_Byte_4_b__62_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_VerifyData_12_Stream_System_Byte_0_b__64_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_VerifyData_12_Stream_System_Byte_1_b__66_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_VerifyData_12_Stream_System_Byte_2_b__68_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_VerifyHash_4_System_Byte_System_Byte_0_b__16_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_VerifyHash_4_System_Byte_System_Byte_1_b__18_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_VerifyHash_4_System_Byte_System_Byte_2_b__20_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+    } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaCngTests___c;
     struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaOpenSslTests_t {
         void (*ctor)(
                     CHAOS_IL2CPP_INTPTR
@@ -3244,6 +4959,35 @@ struct Functions {
                     CHAOS_IL2CPP_INTPTR
         );
     } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaOpenSslTests;
+    struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaOpenSslTests___c_t {
+        void (*cctor)(
+                void
+        );
+        void (*ctor)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_DuplicateKeyHandle_0__0_b__0_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_SignHash_1_System_Byte_0_b__2_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_SignHash_1_System_Byte_1_b__4_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_SignHash_1_System_Byte_2_b__6_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_VerifyHash_2_System_Byte_System_Byte_0_b__8_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_VerifyHash_2_System_Byte_System_Byte_1_b__10_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_VerifyHash_2_System_Byte_System_Byte_2_b__12_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+    } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaOpenSslTests___c;
     struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaTests_t {
         void (*ctor)(
                     CHAOS_IL2CPP_INTPTR
@@ -3603,6 +5347,191 @@ struct Functions {
                     CHAOS_IL2CPP_INTPTR
         );
     } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaTests;
+    struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaTests___c_t {
+        void (*cctor)(
+                void
+        );
+        void (*ctor)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_FromXmlString_17_string_0_b__110_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_FromXmlString_17_string_1_b__112_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_GetMaxSignatureSize_16_DSASignatureFormat_0_b__108_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_SignData_0_System_Byte_HashAlgorithmName_0_b__0_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_SignData_0_System_Byte_HashAlgorithmName_1_b__2_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_SignData_0_System_Byte_HashAlgorithmName_2_b__4_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_SignData_1_System_Byte_int_int_HashAlgorithmName_0_b__6_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_SignData_1_System_Byte_int_int_HashAlgorithmName_1_b__8_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_SignData_1_System_Byte_int_int_HashAlgorithmName_2_b__10_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_SignData_1_System_Byte_int_int_HashAlgorithmName_3_b__12_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_SignData_1_System_Byte_int_int_HashAlgorithmName_4_b__14_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_SignData_2_System_Byte_int_int_HashAlgorithmName_DSASignatureFormat_0_b__16_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_SignData_2_System_Byte_int_int_HashAlgorithmName_DSASignatureFormat_1_b__18_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_SignData_2_System_Byte_int_int_HashAlgorithmName_DSASignatureFormat_2_b__20_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_SignData_2_System_Byte_int_int_HashAlgorithmName_DSASignatureFormat_3_b__22_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_SignData_2_System_Byte_int_int_HashAlgorithmName_DSASignatureFormat_4_b__24_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_SignData_3_System_Byte_HashAlgorithmName_DSASignatureFormat_0_b__26_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_SignData_3_System_Byte_HashAlgorithmName_DSASignatureFormat_1_b__28_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_SignData_3_System_Byte_HashAlgorithmName_DSASignatureFormat_2_b__30_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_SignData_4_Stream_HashAlgorithmName_DSASignatureFormat_0_b__32_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_SignData_4_Stream_HashAlgorithmName_DSASignatureFormat_1_b__34_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_SignData_6_Stream_HashAlgorithmName_0_b__42_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_SignData_6_Stream_HashAlgorithmName_1_b__44_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_SignHash_13_System_Byte_0_b__90_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_SignHash_13_System_Byte_1_b__92_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_SignHash_13_System_Byte_2_b__94_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_SignHash_5_System_Byte_DSASignatureFormat_0_b__36_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_SignHash_5_System_Byte_DSASignatureFormat_1_b__38_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_SignHash_5_System_Byte_DSASignatureFormat_2_b__40_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_ToXmlString_18_bool_0_b__114_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_ToXmlString_18_bool_1_b__116_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_VerifyData_10_System_Byte_System_Byte_HashAlgorithmName_DSASignatureFormat_0_b__72_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_VerifyData_10_System_Byte_System_Byte_HashAlgorithmName_DSASignatureFormat_1_b__74_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_VerifyData_10_System_Byte_System_Byte_HashAlgorithmName_DSASignatureFormat_2_b__76_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_VerifyData_11_Stream_System_Byte_HashAlgorithmName_0_b__78_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_VerifyData_11_Stream_System_Byte_HashAlgorithmName_1_b__80_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_VerifyData_11_Stream_System_Byte_HashAlgorithmName_2_b__82_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_VerifyData_12_Stream_System_Byte_HashAlgorithmName_DSASignatureFormat_0_b__84_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_VerifyData_12_Stream_System_Byte_HashAlgorithmName_DSASignatureFormat_1_b__86_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_VerifyData_12_Stream_System_Byte_HashAlgorithmName_DSASignatureFormat_2_b__88_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_VerifyData_7_System_Byte_System_Byte_HashAlgorithmName_0_b__46_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_VerifyData_7_System_Byte_System_Byte_HashAlgorithmName_1_b__48_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_VerifyData_7_System_Byte_System_Byte_HashAlgorithmName_2_b__50_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_VerifyData_8_System_Byte_int_int_System_Byte_HashAlgorithmName_0_b__52_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_VerifyData_8_System_Byte_int_int_System_Byte_HashAlgorithmName_1_b__54_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_VerifyData_8_System_Byte_int_int_System_Byte_HashAlgorithmName_2_b__56_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_VerifyData_8_System_Byte_int_int_System_Byte_HashAlgorithmName_3_b__58_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_VerifyData_8_System_Byte_int_int_System_Byte_HashAlgorithmName_4_b__60_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_VerifyData_9_System_Byte_int_int_System_Byte_HashAlgorithmName_DSASignatureFormat_0_b__62_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_VerifyData_9_System_Byte_int_int_System_Byte_HashAlgorithmName_DSASignatureFormat_1_b__64_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_VerifyData_9_System_Byte_int_int_System_Byte_HashAlgorithmName_DSASignatureFormat_2_b__66_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_VerifyData_9_System_Byte_int_int_System_Byte_HashAlgorithmName_DSASignatureFormat_3_b__68_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_VerifyData_9_System_Byte_int_int_System_Byte_HashAlgorithmName_DSASignatureFormat_4_b__70_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_VerifyHash_14_System_Byte_System_Byte_0_b__96_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_VerifyHash_14_System_Byte_System_Byte_1_b__98_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_VerifyHash_14_System_Byte_System_Byte_2_b__100_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_VerifyHash_15_System_Byte_System_Byte_DSASignatureFormat_0_b__102_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_VerifyHash_15_System_Byte_System_Byte_DSASignatureFormat_1_b__104_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_VerifyHash_15_System_Byte_System_Byte_DSASignatureFormat_2_b__106_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+    } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaTests___c;
     struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECParametersTests_t {
         void (*ctor)(
                     CHAOS_IL2CPP_INTPTR
@@ -3614,6 +5543,17 @@ struct Functions {
                     CHAOS_IL2CPP_INTPTR
         );
     } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECParametersTests;
+    struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECParametersTests___c_t {
+        void (*cctor)(
+                void
+        );
+        void (*ctor)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Validate_0__0_b__0_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+    } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECParametersTests___c;
     struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_FromBase64TransformTests_t {
         void (*ctor)(
                     CHAOS_IL2CPP_INTPTR
@@ -3691,6 +5631,50 @@ struct Functions {
                     CHAOS_IL2CPP_INTPTR
         );
     } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_FromBase64TransformTests;
+    struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_FromBase64TransformTests___c_t {
+        void (*cctor)(
+                void
+        );
+        void (*ctor)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Clear_2__2_b__20_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Dispose_3__3_b__22_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_TransformBlock_0_System_Byte_int_int_System_Byte_int_0_b__0_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_TransformBlock_0_System_Byte_int_int_System_Byte_int_1_b__2_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_TransformBlock_0_System_Byte_int_int_System_Byte_int_2_b__4_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_TransformBlock_0_System_Byte_int_int_System_Byte_int_3_b__6_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_TransformBlock_0_System_Byte_int_int_System_Byte_int_4_b__8_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_TransformFinalBlock_1_System_Byte_int_int_0_b__10_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_TransformFinalBlock_1_System_Byte_int_int_1_b__12_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_TransformFinalBlock_1_System_Byte_int_int_2_b__14_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_TransformFinalBlock_1_System_Byte_int_int_3_b__16_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_TransformFinalBlock_1_System_Byte_int_int_4_b__18_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+    } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_FromBase64TransformTests___c;
     struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HKDFTests_t {
         void (*ctor)(
                     CHAOS_IL2CPP_INTPTR
@@ -3762,6 +5746,47 @@ struct Functions {
                     CHAOS_IL2CPP_INTPTR
         );
     } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HKDFTests;
+    struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HKDFTests___c_t {
+        void (*cctor)(
+                void
+        );
+        void (*ctor)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_DeriveKey_2_HashAlgorithmName_System_Byte_int_System_Byte_System_Byte_0_b__14_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_DeriveKey_2_HashAlgorithmName_System_Byte_int_System_Byte_System_Byte_1_b__16_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_DeriveKey_2_HashAlgorithmName_System_Byte_int_System_Byte_System_Byte_2_b__18_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_DeriveKey_2_HashAlgorithmName_System_Byte_int_System_Byte_System_Byte_3_b__20_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Expand_1_HashAlgorithmName_System_Byte_int_System_Byte_0_b__6_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Expand_1_HashAlgorithmName_System_Byte_int_System_Byte_1_b__8_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Expand_1_HashAlgorithmName_System_Byte_int_System_Byte_2_b__10_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Expand_1_HashAlgorithmName_System_Byte_int_System_Byte_3_b__12_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Extract_0_HashAlgorithmName_System_Byte_System_Byte_0_b__0_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Extract_0_HashAlgorithmName_System_Byte_System_Byte_1_b__2_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Extract_0_HashAlgorithmName_System_Byte_System_Byte_2_b__4_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+    } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HKDFTests___c;
     struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACMD5Tests_t {
         void (*ctor)(
                     CHAOS_IL2CPP_INTPTR
@@ -3851,6 +5876,35 @@ struct Functions {
                     CHAOS_IL2CPP_INTPTR
         );
     } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACMD5Tests;
+    struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACMD5Tests___c_t {
+        void (*cctor)(
+                void
+        );
+        void (*ctor)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_HashDataAsync_3_System_ReadOnlyMemorybyte_Stream_CancellationToken_0_b__14_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_HashDataAsync_4_System_Byte_Stream_CancellationToken_0_b__18_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_HashDataAsync_5_System_ReadOnlyMemorybyte_Stream_System_Memorybyte_CancellationToken_0_b__24_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_HashDataAsync_5_System_ReadOnlyMemorybyte_Stream_System_Memorybyte_CancellationToken_1_b__26_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_HashData_1_System_Byte_System_Byte_0_b__2_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_HashData_2_System_Byte_Stream_0_b__8_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Initialize_0__0_b__0_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+    } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACMD5Tests___c;
     struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACSHA1Tests_t {
         void (*ctor)(
                     CHAOS_IL2CPP_INTPTR
@@ -3940,6 +5994,35 @@ struct Functions {
                     CHAOS_IL2CPP_INTPTR
         );
     } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACSHA1Tests;
+    struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACSHA1Tests___c_t {
+        void (*cctor)(
+                void
+        );
+        void (*ctor)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_HashDataAsync_3_System_ReadOnlyMemorybyte_Stream_CancellationToken_0_b__14_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_HashDataAsync_4_System_Byte_Stream_CancellationToken_0_b__18_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_HashDataAsync_5_System_ReadOnlyMemorybyte_Stream_System_Memorybyte_CancellationToken_0_b__24_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_HashDataAsync_5_System_ReadOnlyMemorybyte_Stream_System_Memorybyte_CancellationToken_1_b__26_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_HashData_1_System_Byte_System_Byte_0_b__2_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_HashData_2_System_Byte_Stream_0_b__8_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Initialize_0__0_b__0_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+    } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACSHA1Tests___c;
     struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACSHA256Tests_t {
         void (*ctor)(
                     CHAOS_IL2CPP_INTPTR
@@ -4029,6 +6112,35 @@ struct Functions {
                     CHAOS_IL2CPP_INTPTR
         );
     } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACSHA256Tests;
+    struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACSHA256Tests___c_t {
+        void (*cctor)(
+                void
+        );
+        void (*ctor)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_HashDataAsync_3_System_ReadOnlyMemorybyte_Stream_CancellationToken_0_b__14_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_HashDataAsync_4_System_Byte_Stream_CancellationToken_0_b__18_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_HashDataAsync_5_System_ReadOnlyMemorybyte_Stream_System_Memorybyte_CancellationToken_0_b__24_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_HashDataAsync_5_System_ReadOnlyMemorybyte_Stream_System_Memorybyte_CancellationToken_1_b__26_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_HashData_1_System_Byte_System_Byte_0_b__2_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_HashData_2_System_Byte_Stream_0_b__8_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Initialize_0__0_b__0_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+    } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACSHA256Tests___c;
     struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACSHA384Tests_t {
         void (*ctor)(
                     CHAOS_IL2CPP_INTPTR
@@ -4118,6 +6230,35 @@ struct Functions {
                     CHAOS_IL2CPP_INTPTR
         );
     } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACSHA384Tests;
+    struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACSHA384Tests___c_t {
+        void (*cctor)(
+                void
+        );
+        void (*ctor)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_HashDataAsync_3_System_ReadOnlyMemorybyte_Stream_CancellationToken_0_b__14_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_HashDataAsync_4_System_Byte_Stream_CancellationToken_0_b__18_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_HashDataAsync_5_System_ReadOnlyMemorybyte_Stream_System_Memorybyte_CancellationToken_0_b__24_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_HashDataAsync_5_System_ReadOnlyMemorybyte_Stream_System_Memorybyte_CancellationToken_1_b__26_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_HashData_1_System_Byte_System_Byte_0_b__2_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_HashData_2_System_Byte_Stream_0_b__8_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Initialize_0__0_b__0_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+    } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACSHA384Tests___c;
     struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACSHA3_256Tests_t {
         void (*ctor)(
                     CHAOS_IL2CPP_INTPTR
@@ -4207,6 +6348,35 @@ struct Functions {
                     CHAOS_IL2CPP_INTPTR
         );
     } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACSHA3_256Tests;
+    struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACSHA3_256Tests___c_t {
+        void (*cctor)(
+                void
+        );
+        void (*ctor)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_HashDataAsync_3_System_ReadOnlyMemorybyte_Stream_CancellationToken_0_b__14_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_HashDataAsync_4_System_Byte_Stream_CancellationToken_0_b__18_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_HashDataAsync_5_System_ReadOnlyMemorybyte_Stream_System_Memorybyte_CancellationToken_0_b__24_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_HashDataAsync_5_System_ReadOnlyMemorybyte_Stream_System_Memorybyte_CancellationToken_1_b__26_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_HashData_1_System_Byte_System_Byte_0_b__2_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_HashData_2_System_Byte_Stream_0_b__8_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Initialize_0__0_b__0_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+    } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACSHA3_256Tests___c;
     struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACSHA3_384Tests_t {
         void (*ctor)(
                     CHAOS_IL2CPP_INTPTR
@@ -4296,6 +6466,35 @@ struct Functions {
                     CHAOS_IL2CPP_INTPTR
         );
     } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACSHA3_384Tests;
+    struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACSHA3_384Tests___c_t {
+        void (*cctor)(
+                void
+        );
+        void (*ctor)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_HashDataAsync_3_System_ReadOnlyMemorybyte_Stream_CancellationToken_0_b__14_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_HashDataAsync_4_System_Byte_Stream_CancellationToken_0_b__18_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_HashDataAsync_5_System_ReadOnlyMemorybyte_Stream_System_Memorybyte_CancellationToken_0_b__24_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_HashDataAsync_5_System_ReadOnlyMemorybyte_Stream_System_Memorybyte_CancellationToken_1_b__26_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_HashData_1_System_Byte_System_Byte_0_b__2_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_HashData_2_System_Byte_Stream_0_b__8_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Initialize_0__0_b__0_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+    } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACSHA3_384Tests___c;
     struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACSHA3_512Tests_t {
         void (*ctor)(
                     CHAOS_IL2CPP_INTPTR
@@ -4385,6 +6584,35 @@ struct Functions {
                     CHAOS_IL2CPP_INTPTR
         );
     } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACSHA3_512Tests;
+    struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACSHA3_512Tests___c_t {
+        void (*cctor)(
+                void
+        );
+        void (*ctor)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_HashDataAsync_3_System_ReadOnlyMemorybyte_Stream_CancellationToken_0_b__14_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_HashDataAsync_4_System_Byte_Stream_CancellationToken_0_b__18_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_HashDataAsync_5_System_ReadOnlyMemorybyte_Stream_System_Memorybyte_CancellationToken_0_b__24_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_HashDataAsync_5_System_ReadOnlyMemorybyte_Stream_System_Memorybyte_CancellationToken_1_b__26_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_HashData_1_System_Byte_System_Byte_0_b__2_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_HashData_2_System_Byte_Stream_0_b__8_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Initialize_0__0_b__0_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+    } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACSHA3_512Tests___c;
     struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACSHA512Tests_t {
         void (*ctor)(
                     CHAOS_IL2CPP_INTPTR
@@ -4474,6 +6702,35 @@ struct Functions {
                     CHAOS_IL2CPP_INTPTR
         );
     } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACSHA512Tests;
+    struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACSHA512Tests___c_t {
+        void (*cctor)(
+                void
+        );
+        void (*ctor)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_HashDataAsync_3_System_ReadOnlyMemorybyte_Stream_CancellationToken_0_b__14_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_HashDataAsync_4_System_Byte_Stream_CancellationToken_0_b__18_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_HashDataAsync_5_System_ReadOnlyMemorybyte_Stream_System_Memorybyte_CancellationToken_0_b__24_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_HashDataAsync_5_System_ReadOnlyMemorybyte_Stream_System_Memorybyte_CancellationToken_1_b__26_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_HashData_1_System_Byte_System_Byte_0_b__2_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_HashData_2_System_Byte_Stream_0_b__8_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Initialize_0__0_b__0_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+    } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACSHA512Tests___c;
     struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACTests_t {
         void (*ctor)(
                     CHAOS_IL2CPP_INTPTR
@@ -4485,6 +6742,17 @@ struct Functions {
                     CHAOS_IL2CPP_INTPTR
         );
     } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACTests;
+    struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACTests___c_t {
+        void (*cctor)(
+                void
+        );
+        void (*ctor)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Initialize_0__0_b__0_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+    } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACTests___c;
     struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HashAlgorithmNameTests_t {
         void (*ctor)(
                     CHAOS_IL2CPP_INTPTR
@@ -4514,6 +6782,28 @@ struct Functions {
                     CHAOS_IL2CPP_INTPTR
         );
     } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HashAlgorithmNameTests;
+    struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HashAlgorithmNameTests___c_t {
+        void (*cctor)(
+                void
+        );
+        void (*ctor)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_FromOid_1_string_0_b__4_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_FromOid_1_string_1_b__6_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+    } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HashAlgorithmNameTests___c;
+    struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HashAlgorithmNameTests___c__DisplayClass0_0_t {
+        void (*ctor)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_TryFromOid_0_string_HashAlgorithmName_0_b__0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+    } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HashAlgorithmNameTests___c__DisplayClass0_0;
     struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HashAlgorithmTests_t {
         void (*ctor)(
                     CHAOS_IL2CPP_INTPTR
@@ -4669,6 +6959,89 @@ struct Functions {
                     CHAOS_IL2CPP_INTPTR
         );
     } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HashAlgorithmTests;
+    struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HashAlgorithmTests___c_t {
+        void (*cctor)(
+                void
+        );
+        void (*ctor)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Clear_5__5_b__26_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_ComputeHashAsync_3_Stream_CancellationToken_0_b__20_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_ComputeHashAsync_3_Stream_CancellationToken_1_b__22_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_ComputeHash_0_System_Byte_0_b__0_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_ComputeHash_0_System_Byte_1_b__2_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_ComputeHash_0_System_Byte_2_b__4_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_ComputeHash_1_System_Byte_int_int_0_b__6_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_ComputeHash_1_System_Byte_int_int_1_b__8_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_ComputeHash_1_System_Byte_int_int_2_b__10_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_ComputeHash_1_System_Byte_int_int_3_b__12_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_ComputeHash_1_System_Byte_int_int_4_b__14_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_ComputeHash_2_Stream_0_b__16_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_ComputeHash_2_Stream_1_b__18_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Dispose_4__4_b__24_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Initialize_8__8_b__48_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_TransformBlock_6_System_Byte_int_int_System_Byte_int_0_b__28_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_TransformBlock_6_System_Byte_int_int_System_Byte_int_1_b__30_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_TransformBlock_6_System_Byte_int_int_System_Byte_int_2_b__32_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_TransformBlock_6_System_Byte_int_int_System_Byte_int_3_b__34_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_TransformBlock_6_System_Byte_int_int_System_Byte_int_4_b__36_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_TransformFinalBlock_7_System_Byte_int_int_0_b__38_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_TransformFinalBlock_7_System_Byte_int_int_1_b__40_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_TransformFinalBlock_7_System_Byte_int_int_2_b__42_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_TransformFinalBlock_7_System_Byte_int_int_3_b__44_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_TransformFinalBlock_7_System_Byte_int_int_4_b__46_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+    } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HashAlgorithmTests___c;
     struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_IncrementalHashTests_t {
         void (*ctor)(
                     CHAOS_IL2CPP_INTPTR
@@ -4770,6 +7143,62 @@ struct Functions {
                     CHAOS_IL2CPP_INTPTR
         );
     } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_IncrementalHashTests;
+    struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_IncrementalHashTests___c_t {
+        void (*cctor)(
+                void
+        );
+        void (*ctor)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_AppendData_0_System_Byte_0_b__0_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_AppendData_0_System_Byte_1_b__2_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_AppendData_0_System_Byte_2_b__4_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_AppendData_1_System_Byte_int_int_0_b__6_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_AppendData_1_System_Byte_int_int_1_b__8_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_AppendData_1_System_Byte_int_int_2_b__10_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_AppendData_1_System_Byte_int_int_3_b__12_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_AppendData_1_System_Byte_int_int_4_b__14_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Clone_4__4_b__20_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_CreateHMAC_7_HashAlgorithmName_System_Byte_0_b__26_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_CreateHMAC_7_HashAlgorithmName_System_Byte_1_b__28_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_CreateHMAC_7_HashAlgorithmName_System_Byte_2_b__30_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_CreateHash_6_HashAlgorithmName_0_b__24_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Dispose_5__5_b__22_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_GetCurrentHash_3__3_b__18_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_GetHashAndReset_2__2_b__16_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+    } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_IncrementalHashTests___c;
     struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Kmac128Tests_t {
         void (*ctor)(
                     CHAOS_IL2CPP_INTPTR
@@ -4931,6 +7360,68 @@ struct Functions {
                     CHAOS_IL2CPP_INTPTR
         );
     } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Kmac128Tests;
+    struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Kmac128Tests___c_t {
+        void (*cctor)(
+                void
+        );
+        void (*ctor)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_AppendData_0_System_Byte_0_b__0_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_AppendData_0_System_Byte_1_b__2_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_AppendData_0_System_Byte_2_b__4_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Clone_3__3_b__14_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Dispose_4__4_b__16_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_GetCurrentHash_2_int_0_b__10_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_GetCurrentHash_2_int_1_b__12_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_GetHashAndReset_1_int_0_b__6_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_GetHashAndReset_1_int_1_b__8_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_HashDataAsync_7_System_Byte_Stream_int_System_Byte_CancellationToken_0_b__34_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_HashDataAsync_7_System_Byte_Stream_int_System_Byte_CancellationToken_1_b__36_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_HashDataAsync_8_System_ReadOnlyMemorybyte_Stream_int_System_ReadOnlyMemorybyte_CancellationToken_0_b__42_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_HashDataAsync_8_System_ReadOnlyMemorybyte_Stream_int_System_ReadOnlyMemorybyte_CancellationToken_1_b__44_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_HashDataAsync_9_System_ReadOnlyMemorybyte_Stream_System_Memorybyte_System_ReadOnlyMemorybyte_CancellationToken_0_b__48_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_HashData_5_System_Byte_System_Byte_int_System_Byte_0_b__18_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_HashData_5_System_Byte_System_Byte_int_System_Byte_1_b__20_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_HashData_6_System_Byte_Stream_int_System_Byte_0_b__26_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_HashData_6_System_Byte_Stream_int_System_Byte_1_b__28_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+    } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Kmac128Tests___c;
     struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Kmac256Tests_t {
         void (*ctor)(
                     CHAOS_IL2CPP_INTPTR
@@ -5092,6 +7583,68 @@ struct Functions {
                     CHAOS_IL2CPP_INTPTR
         );
     } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Kmac256Tests;
+    struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Kmac256Tests___c_t {
+        void (*cctor)(
+                void
+        );
+        void (*ctor)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_AppendData_0_System_Byte_0_b__0_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_AppendData_0_System_Byte_1_b__2_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_AppendData_0_System_Byte_2_b__4_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Clone_3__3_b__14_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Dispose_4__4_b__16_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_GetCurrentHash_2_int_0_b__10_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_GetCurrentHash_2_int_1_b__12_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_GetHashAndReset_1_int_0_b__6_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_GetHashAndReset_1_int_1_b__8_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_HashDataAsync_7_System_Byte_Stream_int_System_Byte_CancellationToken_0_b__34_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_HashDataAsync_7_System_Byte_Stream_int_System_Byte_CancellationToken_1_b__36_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_HashDataAsync_8_System_ReadOnlyMemorybyte_Stream_int_System_ReadOnlyMemorybyte_CancellationToken_0_b__42_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_HashDataAsync_8_System_ReadOnlyMemorybyte_Stream_int_System_ReadOnlyMemorybyte_CancellationToken_1_b__44_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_HashDataAsync_9_System_ReadOnlyMemorybyte_Stream_System_Memorybyte_System_ReadOnlyMemorybyte_CancellationToken_0_b__48_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_HashData_5_System_Byte_System_Byte_int_System_Byte_0_b__18_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_HashData_5_System_Byte_System_Byte_int_System_Byte_1_b__20_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_HashData_6_System_Byte_Stream_int_System_Byte_0_b__26_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_HashData_6_System_Byte_Stream_int_System_Byte_1_b__28_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+    } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Kmac256Tests___c;
     struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_KmacXof128Tests_t {
         void (*ctor)(
                     CHAOS_IL2CPP_INTPTR
@@ -5253,6 +7806,68 @@ struct Functions {
                     CHAOS_IL2CPP_INTPTR
         );
     } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_KmacXof128Tests;
+    struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_KmacXof128Tests___c_t {
+        void (*cctor)(
+                void
+        );
+        void (*ctor)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_AppendData_0_System_Byte_0_b__0_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_AppendData_0_System_Byte_1_b__2_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_AppendData_0_System_Byte_2_b__4_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Clone_3__3_b__14_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Dispose_4__4_b__16_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_GetCurrentHash_2_int_0_b__10_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_GetCurrentHash_2_int_1_b__12_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_GetHashAndReset_1_int_0_b__6_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_GetHashAndReset_1_int_1_b__8_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_HashDataAsync_7_System_Byte_Stream_int_System_Byte_CancellationToken_0_b__34_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_HashDataAsync_7_System_Byte_Stream_int_System_Byte_CancellationToken_1_b__36_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_HashDataAsync_8_System_ReadOnlyMemorybyte_Stream_int_System_ReadOnlyMemorybyte_CancellationToken_0_b__42_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_HashDataAsync_8_System_ReadOnlyMemorybyte_Stream_int_System_ReadOnlyMemorybyte_CancellationToken_1_b__44_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_HashDataAsync_9_System_ReadOnlyMemorybyte_Stream_System_Memorybyte_System_ReadOnlyMemorybyte_CancellationToken_0_b__48_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_HashData_5_System_Byte_System_Byte_int_System_Byte_0_b__18_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_HashData_5_System_Byte_System_Byte_int_System_Byte_1_b__20_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_HashData_6_System_Byte_Stream_int_System_Byte_0_b__26_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_HashData_6_System_Byte_Stream_int_System_Byte_1_b__28_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+    } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_KmacXof128Tests___c;
     struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_KmacXof256Tests_t {
         void (*ctor)(
                     CHAOS_IL2CPP_INTPTR
@@ -5414,6 +8029,68 @@ struct Functions {
                     CHAOS_IL2CPP_INTPTR
         );
     } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_KmacXof256Tests;
+    struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_KmacXof256Tests___c_t {
+        void (*cctor)(
+                void
+        );
+        void (*ctor)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_AppendData_0_System_Byte_0_b__0_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_AppendData_0_System_Byte_1_b__2_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_AppendData_0_System_Byte_2_b__4_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Clone_3__3_b__14_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Dispose_4__4_b__16_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_GetCurrentHash_2_int_0_b__10_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_GetCurrentHash_2_int_1_b__12_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_GetHashAndReset_1_int_0_b__6_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_GetHashAndReset_1_int_1_b__8_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_HashDataAsync_7_System_Byte_Stream_int_System_Byte_CancellationToken_0_b__34_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_HashDataAsync_7_System_Byte_Stream_int_System_Byte_CancellationToken_1_b__36_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_HashDataAsync_8_System_ReadOnlyMemorybyte_Stream_int_System_ReadOnlyMemorybyte_CancellationToken_0_b__42_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_HashDataAsync_8_System_ReadOnlyMemorybyte_Stream_int_System_ReadOnlyMemorybyte_CancellationToken_1_b__44_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_HashDataAsync_9_System_ReadOnlyMemorybyte_Stream_System_Memorybyte_System_ReadOnlyMemorybyte_CancellationToken_0_b__48_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_HashData_5_System_Byte_System_Byte_int_System_Byte_0_b__18_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_HashData_5_System_Byte_System_Byte_int_System_Byte_1_b__20_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_HashData_6_System_Byte_Stream_int_System_Byte_0_b__26_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_HashData_6_System_Byte_Stream_int_System_Byte_1_b__28_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+    } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_KmacXof256Tests___c;
     struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_MD5CryptoServiceProviderTests_t {
         void (*ctor)(
                     CHAOS_IL2CPP_INTPTR
@@ -5425,6 +8102,17 @@ struct Functions {
                     CHAOS_IL2CPP_INTPTR
         );
     } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_MD5CryptoServiceProviderTests;
+    struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_MD5CryptoServiceProviderTests___c_t {
+        void (*cctor)(
+                void
+        );
+        void (*ctor)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Initialize_0__0_b__0_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+    } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_MD5CryptoServiceProviderTests___c;
     struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_MD5Tests_t {
         void (*ctor)(
                     CHAOS_IL2CPP_INTPTR
@@ -5484,6 +8172,29 @@ struct Functions {
                     CHAOS_IL2CPP_INTPTR
         );
     } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_MD5Tests;
+    struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_MD5Tests___c_t {
+        void (*cctor)(
+                void
+        );
+        void (*ctor)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_HashDataAsync_2_Stream_CancellationToken_0_b__10_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_HashDataAsync_3_Stream_System_Memorybyte_CancellationToken_0_b__14_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_HashDataAsync_3_Stream_System_Memorybyte_CancellationToken_1_b__16_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_HashData_0_System_Byte_0_b__0_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_HashData_1_Stream_0_b__6_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+    } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_MD5Tests___c;
     struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_MaskGenerationMethodTests_t {
         void (*ctor)(
                     CHAOS_IL2CPP_INTPTR
@@ -5513,6 +8224,26 @@ struct Functions {
                     CHAOS_IL2CPP_INTPTR
         );
     } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_MaskGenerationMethodTests;
+    struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_MaskGenerationMethodTests___c_t {
+        void (*cctor)(
+                void
+        );
+        void (*ctor)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_GenerateMask_0_System_Byte_int_0_b__0_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_GenerateMask_0_System_Byte_int_1_b__2_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_GenerateMask_0_System_Byte_int_2_b__4_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_GenerateMask_0_System_Byte_int_3_b__6_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+    } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_MaskGenerationMethodTests___c;
     struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_OidCollectionTests_t {
         void (*ctor)(
                     CHAOS_IL2CPP_INTPTR
@@ -5530,6 +8261,20 @@ struct Functions {
                     CHAOS_IL2CPP_INTPTR
         );
     } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_OidCollectionTests;
+    struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_OidCollectionTests___c_t {
+        void (*cctor)(
+                void
+        );
+        void (*ctor)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Add_0_Oid_0_b__0_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_GetEnumerator_1__1_b__2_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+    } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_OidCollectionTests___c;
     struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_OidTests_t {
         void (*ctor)(
                     CHAOS_IL2CPP_INTPTR
@@ -5559,6 +8304,26 @@ struct Functions {
                     CHAOS_IL2CPP_INTPTR
         );
     } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_OidTests;
+    struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_OidTests___c_t {
+        void (*cctor)(
+                void
+        );
+        void (*ctor)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_FromFriendlyName_0_string_OidGroup_0_b__0_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_FromFriendlyName_0_string_OidGroup_1_b__2_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_FromOidValue_1_string_OidGroup_0_b__4_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_FromOidValue_1_string_OidGroup_1_b__6_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+    } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_OidTests___c;
     struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_PKCS1MaskGenerationMethodTests_t {
         void (*ctor)(
                     CHAOS_IL2CPP_INTPTR
@@ -5588,6 +8353,26 @@ struct Functions {
                     CHAOS_IL2CPP_INTPTR
         );
     } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_PKCS1MaskGenerationMethodTests;
+    struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_PKCS1MaskGenerationMethodTests___c_t {
+        void (*cctor)(
+                void
+        );
+        void (*ctor)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_GenerateMask_0_System_Byte_int_0_b__0_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_GenerateMask_0_System_Byte_int_1_b__2_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_GenerateMask_0_System_Byte_int_2_b__4_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_GenerateMask_0_System_Byte_int_3_b__6_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+    } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_PKCS1MaskGenerationMethodTests___c;
     struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_PasswordDeriveBytesTests_t {
         void (*ctor)(
                     CHAOS_IL2CPP_INTPTR
@@ -5641,6 +8426,38 @@ struct Functions {
                     CHAOS_IL2CPP_INTPTR
         );
     } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_PasswordDeriveBytesTests;
+    struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_PasswordDeriveBytesTests___c_t {
+        void (*cctor)(
+                void
+        );
+        void (*ctor)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_CryptDeriveKey_1_string_string_int_System_Byte_0_b__4_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_CryptDeriveKey_1_string_string_int_System_Byte_1_b__6_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_CryptDeriveKey_1_string_string_int_System_Byte_2_b__8_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_CryptDeriveKey_1_string_string_int_System_Byte_3_b__10_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_CryptDeriveKey_1_string_string_int_System_Byte_4_b__12_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_CryptDeriveKey_1_string_string_int_System_Byte_5_b__14_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_GetBytes_0_int_0_b__0_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_GetBytes_0_int_1_b__2_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+    } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_PasswordDeriveBytesTests___c;
     struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_PemEncodingTests_t {
         void (*ctor)(
                     CHAOS_IL2CPP_INTPTR
@@ -5717,6 +8534,38 @@ struct Functions {
                     CHAOS_IL2CPP_INTPTR
         );
     } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RC2CryptoServiceProviderTests;
+    struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RC2CryptoServiceProviderTests___c_t {
+        void (*cctor)(
+                void
+        );
+        void (*ctor)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_CreateDecryptor_1_System_Byte_System_Byte_0_b__6_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_CreateDecryptor_1_System_Byte_System_Byte_1_b__8_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_CreateDecryptor_1_System_Byte_System_Byte_2_b__10_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_CreateEncryptor_0_System_Byte_System_Byte_0_b__0_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_CreateEncryptor_0_System_Byte_System_Byte_1_b__2_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_CreateEncryptor_0_System_Byte_System_Byte_2_b__4_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_GenerateIV_3__3_b__14_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_GenerateKey_2__2_b__12_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+    } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RC2CryptoServiceProviderTests___c;
     struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RNGCryptoServiceProviderTests_t {
         void (*ctor)(
                     CHAOS_IL2CPP_INTPTR
@@ -5788,6 +8637,47 @@ struct Functions {
                     CHAOS_IL2CPP_INTPTR
         );
     } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RNGCryptoServiceProviderTests;
+    struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RNGCryptoServiceProviderTests___c_t {
+        void (*cctor)(
+                void
+        );
+        void (*ctor)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_GetBytes_0_System_Byte_0_b__0_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_GetBytes_0_System_Byte_1_b__2_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_GetBytes_0_System_Byte_2_b__4_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_GetBytes_1_System_Byte_int_int_0_b__6_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_GetBytes_1_System_Byte_int_int_1_b__8_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_GetBytes_1_System_Byte_int_int_2_b__10_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_GetBytes_1_System_Byte_int_int_3_b__12_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_GetBytes_1_System_Byte_int_int_4_b__14_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_GetNonZeroBytes_2_System_Byte_0_b__16_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_GetNonZeroBytes_2_System_Byte_1_b__18_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_GetNonZeroBytes_2_System_Byte_2_b__20_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+    } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RNGCryptoServiceProviderTests___c;
     struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSACngTests_t {
         void (*ctor)(
                     CHAOS_IL2CPP_INTPTR
@@ -5883,6 +8773,59 @@ struct Functions {
                     CHAOS_IL2CPP_INTPTR
         );
     } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSACngTests;
+    struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSACngTests___c_t {
+        void (*cctor)(
+                void
+        );
+        void (*ctor)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Decrypt_1_System_Byte_RSAEncryptionPadding_0_b__6_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Decrypt_1_System_Byte_RSAEncryptionPadding_1_b__8_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Decrypt_1_System_Byte_RSAEncryptionPadding_2_b__10_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Encrypt_0_System_Byte_RSAEncryptionPadding_0_b__0_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Encrypt_0_System_Byte_RSAEncryptionPadding_1_b__2_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Encrypt_0_System_Byte_RSAEncryptionPadding_2_b__4_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_ExportParameters_3_bool_0_b__14_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_ExportParameters_3_bool_1_b__16_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_ImportParameters_2_RSAParameters_0_b__12_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_SignHash_4_System_Byte_HashAlgorithmName_RSASignaturePadding_0_b__18_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_SignHash_4_System_Byte_HashAlgorithmName_RSASignaturePadding_1_b__20_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_SignHash_4_System_Byte_HashAlgorithmName_RSASignaturePadding_2_b__22_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_VerifyHash_5_System_Byte_System_Byte_HashAlgorithmName_RSASignaturePadding_0_b__24_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_VerifyHash_5_System_Byte_System_Byte_HashAlgorithmName_RSASignaturePadding_1_b__26_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_VerifyHash_5_System_Byte_System_Byte_HashAlgorithmName_RSASignaturePadding_2_b__28_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+    } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSACngTests___c;
     struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSACryptoServiceProviderTests_t {
         void (*ctor)(
                     CHAOS_IL2CPP_INTPTR
@@ -6218,6 +9161,179 @@ struct Functions {
                     CHAOS_IL2CPP_INTPTR
         );
     } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSACryptoServiceProviderTests;
+    struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSACryptoServiceProviderTests___c_t {
+        void (*cctor)(
+                void
+        );
+        void (*ctor)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_DecryptValue_1_System_Byte_0_b__8_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_DecryptValue_1_System_Byte_1_b__10_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_DecryptValue_1_System_Byte_2_b__12_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Decrypt_0_System_Byte_bool_0_b__0_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Decrypt_0_System_Byte_bool_1_b__2_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Decrypt_0_System_Byte_bool_2_b__4_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Decrypt_0_System_Byte_bool_3_b__6_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Decrypt_15_System_Byte_RSAEncryptionPadding_0_b__92_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Decrypt_15_System_Byte_RSAEncryptionPadding_1_b__94_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Decrypt_15_System_Byte_RSAEncryptionPadding_2_b__96_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_EncryptValue_3_System_Byte_0_b__22_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_EncryptValue_3_System_Byte_1_b__24_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_EncryptValue_3_System_Byte_2_b__26_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Encrypt_14_System_Byte_RSAEncryptionPadding_0_b__86_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Encrypt_14_System_Byte_RSAEncryptionPadding_1_b__88_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Encrypt_14_System_Byte_RSAEncryptionPadding_2_b__90_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Encrypt_2_System_Byte_bool_0_b__14_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Encrypt_2_System_Byte_bool_1_b__16_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Encrypt_2_System_Byte_bool_2_b__18_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Encrypt_2_System_Byte_bool_3_b__20_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_ExportCspBlob_4_bool_0_b__28_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_ExportCspBlob_4_bool_1_b__30_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_ExportParameters_5_bool_0_b__32_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_ExportParameters_5_bool_1_b__34_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_ImportCspBlob_6_System_Byte_0_b__36_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_ImportCspBlob_6_System_Byte_1_b__38_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_ImportCspBlob_6_System_Byte_2_b__40_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_ImportParameters_7_RSAParameters_0_b__42_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_SignData_10_Stream_object_0_b__60_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_SignData_10_Stream_object_1_b__62_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_SignData_8_System_Byte_int_int_object_0_b__44_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_SignData_8_System_Byte_int_int_object_1_b__46_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_SignData_8_System_Byte_int_int_object_2_b__48_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_SignData_8_System_Byte_int_int_object_3_b__50_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_SignData_8_System_Byte_int_int_object_4_b__52_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_SignData_9_System_Byte_object_0_b__54_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_SignData_9_System_Byte_object_1_b__56_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_SignData_9_System_Byte_object_2_b__58_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_SignHash_11_System_Byte_string_0_b__64_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_SignHash_11_System_Byte_string_1_b__66_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_SignHash_11_System_Byte_string_2_b__68_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_SignHash_11_System_Byte_string_3_b__70_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_SignHash_16_System_Byte_HashAlgorithmName_RSASignaturePadding_0_b__98_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_SignHash_16_System_Byte_HashAlgorithmName_RSASignaturePadding_1_b__100_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_SignHash_16_System_Byte_HashAlgorithmName_RSASignaturePadding_2_b__102_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_VerifyData_12_System_Byte_object_System_Byte_0_b__72_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_VerifyData_12_System_Byte_object_System_Byte_1_b__74_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_VerifyData_12_System_Byte_object_System_Byte_2_b__76_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_VerifyHash_13_System_Byte_string_System_Byte_0_b__78_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_VerifyHash_13_System_Byte_string_System_Byte_1_b__80_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_VerifyHash_13_System_Byte_string_System_Byte_2_b__82_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_VerifyHash_13_System_Byte_string_System_Byte_3_b__84_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_VerifyHash_17_System_Byte_System_Byte_HashAlgorithmName_RSASignaturePadding_0_b__104_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_VerifyHash_17_System_Byte_System_Byte_HashAlgorithmName_RSASignaturePadding_1_b__106_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_VerifyHash_17_System_Byte_System_Byte_HashAlgorithmName_RSASignaturePadding_2_b__108_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+    } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSACryptoServiceProviderTests___c;
     struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSAEncryptionPaddingTests_t {
         void (*ctor)(
                     CHAOS_IL2CPP_INTPTR
@@ -6229,6 +9345,17 @@ struct Functions {
                     CHAOS_IL2CPP_INTPTR
         );
     } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSAEncryptionPaddingTests;
+    struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSAEncryptionPaddingTests___c_t {
+        void (*cctor)(
+                void
+        );
+        void (*ctor)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_CreateOaep_0_HashAlgorithmName_0_b__0_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+    } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSAEncryptionPaddingTests___c;
     struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSAOAEPKeyExchangeDeformatterTests_t {
         void (*ctor)(
                     CHAOS_IL2CPP_INTPTR
@@ -6258,6 +9385,26 @@ struct Functions {
                     CHAOS_IL2CPP_INTPTR
         );
     } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSAOAEPKeyExchangeDeformatterTests;
+    struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSAOAEPKeyExchangeDeformatterTests___c_t {
+        void (*cctor)(
+                void
+        );
+        void (*ctor)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_DecryptKeyExchange_0_System_Byte_0_b__0_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_DecryptKeyExchange_0_System_Byte_1_b__2_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_DecryptKeyExchange_0_System_Byte_2_b__4_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_SetKey_1_AsymmetricAlgorithm_0_b__6_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+    } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSAOAEPKeyExchangeDeformatterTests___c;
     struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSAOAEPKeyExchangeFormatterTests_t {
         void (*ctor)(
                     CHAOS_IL2CPP_INTPTR
@@ -6305,6 +9452,35 @@ struct Functions {
                     CHAOS_IL2CPP_INTPTR
         );
     } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSAOAEPKeyExchangeFormatterTests;
+    struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSAOAEPKeyExchangeFormatterTests___c_t {
+        void (*cctor)(
+                void
+        );
+        void (*ctor)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_CreateKeyExchange_1_System_Byte_System_Type_0_b__2_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_CreateKeyExchange_1_System_Byte_System_Type_1_b__4_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_CreateKeyExchange_1_System_Byte_System_Type_2_b__6_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_CreateKeyExchange_2_System_Byte_0_b__8_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_CreateKeyExchange_2_System_Byte_1_b__10_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_CreateKeyExchange_2_System_Byte_2_b__12_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_SetKey_0_AsymmetricAlgorithm_0_b__0_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+    } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSAOAEPKeyExchangeFormatterTests___c;
     struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSAOpenSslTests_t {
         void (*ctor)(
                     CHAOS_IL2CPP_INTPTR
@@ -6334,6 +9510,26 @@ struct Functions {
                     CHAOS_IL2CPP_INTPTR
         );
     } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSAOpenSslTests;
+    struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSAOpenSslTests___c_t {
+        void (*cctor)(
+                void
+        );
+        void (*ctor)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_DuplicateKeyHandle_0__0_b__0_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_ExportParameters_1_bool_0_b__2_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_ExportParameters_1_bool_1_b__4_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_ImportParameters_2_RSAParameters_0_b__6_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+    } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSAOpenSslTests___c;
     struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSAPKCS1KeyExchangeDeformatterTests_t {
         void (*ctor)(
                     CHAOS_IL2CPP_INTPTR
@@ -6363,6 +9559,26 @@ struct Functions {
                     CHAOS_IL2CPP_INTPTR
         );
     } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSAPKCS1KeyExchangeDeformatterTests;
+    struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSAPKCS1KeyExchangeDeformatterTests___c_t {
+        void (*cctor)(
+                void
+        );
+        void (*ctor)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_DecryptKeyExchange_0_System_Byte_0_b__0_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_DecryptKeyExchange_0_System_Byte_1_b__2_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_DecryptKeyExchange_0_System_Byte_2_b__4_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_SetKey_1_AsymmetricAlgorithm_0_b__6_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+    } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSAPKCS1KeyExchangeDeformatterTests___c;
     struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSAPKCS1KeyExchangeFormatterTests_t {
         void (*ctor)(
                     CHAOS_IL2CPP_INTPTR
@@ -6410,6 +9626,35 @@ struct Functions {
                     CHAOS_IL2CPP_INTPTR
         );
     } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSAPKCS1KeyExchangeFormatterTests;
+    struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSAPKCS1KeyExchangeFormatterTests___c_t {
+        void (*cctor)(
+                void
+        );
+        void (*ctor)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_CreateKeyExchange_1_System_Byte_System_Type_0_b__2_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_CreateKeyExchange_1_System_Byte_System_Type_1_b__4_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_CreateKeyExchange_1_System_Byte_System_Type_2_b__6_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_CreateKeyExchange_2_System_Byte_0_b__8_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_CreateKeyExchange_2_System_Byte_1_b__10_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_CreateKeyExchange_2_System_Byte_2_b__12_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_SetKey_0_AsymmetricAlgorithm_0_b__0_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+    } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSAPKCS1KeyExchangeFormatterTests___c;
     struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSAPKCS1SignatureDeformatterTests_t {
         void (*ctor)(
                     CHAOS_IL2CPP_INTPTR
@@ -6451,6 +9696,32 @@ struct Functions {
                     CHAOS_IL2CPP_INTPTR
         );
     } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSAPKCS1SignatureDeformatterTests;
+    struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSAPKCS1SignatureDeformatterTests___c_t {
+        void (*cctor)(
+                void
+        );
+        void (*ctor)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_SetHashAlgorithm_1_string_0_b__2_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_SetHashAlgorithm_1_string_1_b__4_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_SetKey_0_AsymmetricAlgorithm_0_b__0_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_VerifySignature_2_System_Byte_System_Byte_0_b__6_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_VerifySignature_2_System_Byte_System_Byte_1_b__8_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_VerifySignature_2_System_Byte_System_Byte_2_b__10_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+    } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSAPKCS1SignatureDeformatterTests___c;
     struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSAPKCS1SignatureFormatterTests_t {
         void (*ctor)(
                     CHAOS_IL2CPP_INTPTR
@@ -6492,6 +9763,32 @@ struct Functions {
                     CHAOS_IL2CPP_INTPTR
         );
     } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSAPKCS1SignatureFormatterTests;
+    struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSAPKCS1SignatureFormatterTests___c_t {
+        void (*cctor)(
+                void
+        );
+        void (*ctor)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_CreateSignature_2_System_Byte_0_b__6_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_CreateSignature_2_System_Byte_1_b__8_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_CreateSignature_2_System_Byte_2_b__10_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_SetHashAlgorithm_1_string_0_b__2_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_SetHashAlgorithm_1_string_1_b__4_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_SetKey_0_AsymmetricAlgorithm_0_b__0_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+    } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSAPKCS1SignatureFormatterTests___c;
     struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSATests_t {
         void (*ctor)(
                     CHAOS_IL2CPP_INTPTR
@@ -6803,6 +10100,167 @@ struct Functions {
                     CHAOS_IL2CPP_INTPTR
         );
     } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSATests;
+    struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSATests___c_t {
+        void (*cctor)(
+                void
+        );
+        void (*ctor)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_DecryptValue_7_System_Byte_0_b__32_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_DecryptValue_7_System_Byte_1_b__34_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_DecryptValue_7_System_Byte_2_b__36_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Decrypt_4_System_Byte_RSAEncryptionPadding_0_b__14_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Decrypt_4_System_Byte_RSAEncryptionPadding_1_b__16_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Decrypt_4_System_Byte_RSAEncryptionPadding_2_b__18_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_EncryptValue_8_System_Byte_0_b__38_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_EncryptValue_8_System_Byte_1_b__40_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_EncryptValue_8_System_Byte_2_b__42_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Encrypt_3_System_Byte_RSAEncryptionPadding_0_b__8_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Encrypt_3_System_Byte_RSAEncryptionPadding_1_b__10_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Encrypt_3_System_Byte_RSAEncryptionPadding_2_b__12_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_ExportParameters_1_bool_0_b__2_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_ExportParameters_1_bool_1_b__4_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_ExportRSAPrivateKeyPem_17__17_b__90_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_ExportRSAPrivateKey_15__15_b__86_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_ExportRSAPublicKeyPem_18__18_b__92_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_ExportRSAPublicKey_16__16_b__88_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_FromXmlString_19_string_0_b__94_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_FromXmlString_19_string_1_b__96_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_GetMaxOutputSize_0__0_b__0_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_ImportParameters_2_RSAParameters_0_b__6_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_SignData_10_System_Byte_int_int_HashAlgorithmName_RSASignaturePadding_0_b__50_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_SignData_10_System_Byte_int_int_HashAlgorithmName_RSASignaturePadding_1_b__52_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_SignData_10_System_Byte_int_int_HashAlgorithmName_RSASignaturePadding_2_b__54_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_SignData_10_System_Byte_int_int_HashAlgorithmName_RSASignaturePadding_3_b__56_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_SignData_10_System_Byte_int_int_HashAlgorithmName_RSASignaturePadding_4_b__58_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_SignData_11_Stream_HashAlgorithmName_RSASignaturePadding_0_b__60_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_SignData_11_Stream_HashAlgorithmName_RSASignaturePadding_1_b__62_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_SignData_9_System_Byte_HashAlgorithmName_RSASignaturePadding_0_b__44_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_SignData_9_System_Byte_HashAlgorithmName_RSASignaturePadding_1_b__46_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_SignData_9_System_Byte_HashAlgorithmName_RSASignaturePadding_2_b__48_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_SignHash_5_System_Byte_HashAlgorithmName_RSASignaturePadding_0_b__20_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_SignHash_5_System_Byte_HashAlgorithmName_RSASignaturePadding_1_b__22_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_SignHash_5_System_Byte_HashAlgorithmName_RSASignaturePadding_2_b__24_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_ToXmlString_20_bool_0_b__98_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_ToXmlString_20_bool_1_b__100_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_VerifyData_12_System_Byte_System_Byte_HashAlgorithmName_RSASignaturePadding_0_b__64_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_VerifyData_12_System_Byte_System_Byte_HashAlgorithmName_RSASignaturePadding_1_b__66_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_VerifyData_12_System_Byte_System_Byte_HashAlgorithmName_RSASignaturePadding_2_b__68_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_VerifyData_13_System_Byte_int_int_System_Byte_HashAlgorithmName_RSASignaturePadding_0_b__70_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_VerifyData_13_System_Byte_int_int_System_Byte_HashAlgorithmName_RSASignaturePadding_1_b__72_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_VerifyData_13_System_Byte_int_int_System_Byte_HashAlgorithmName_RSASignaturePadding_2_b__74_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_VerifyData_13_System_Byte_int_int_System_Byte_HashAlgorithmName_RSASignaturePadding_3_b__76_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_VerifyData_13_System_Byte_int_int_System_Byte_HashAlgorithmName_RSASignaturePadding_4_b__78_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_VerifyData_14_Stream_System_Byte_HashAlgorithmName_RSASignaturePadding_0_b__80_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_VerifyData_14_Stream_System_Byte_HashAlgorithmName_RSASignaturePadding_1_b__82_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_VerifyData_14_Stream_System_Byte_HashAlgorithmName_RSASignaturePadding_2_b__84_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_VerifyHash_6_System_Byte_System_Byte_HashAlgorithmName_RSASignaturePadding_0_b__26_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_VerifyHash_6_System_Byte_System_Byte_HashAlgorithmName_RSASignaturePadding_1_b__28_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_VerifyHash_6_System_Byte_System_Byte_HashAlgorithmName_RSASignaturePadding_2_b__30_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+    } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSATests___c;
     struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RandomNumberGeneratorTests_t {
         void (*ctor)(
                     CHAOS_IL2CPP_INTPTR
@@ -6940,6 +10398,65 @@ struct Functions {
                     CHAOS_IL2CPP_INTPTR
         );
     } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RandomNumberGeneratorTests;
+    struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RandomNumberGeneratorTests___c_t {
+        void (*cctor)(
+                void
+        );
+        void (*ctor)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Dispose_0__0_b__0_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_GetBytes_1_System_Byte_0_b__2_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_GetBytes_1_System_Byte_1_b__4_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_GetBytes_1_System_Byte_2_b__6_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_GetBytes_2_System_Byte_int_int_0_b__8_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_GetBytes_2_System_Byte_int_int_1_b__10_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_GetBytes_2_System_Byte_int_int_2_b__12_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_GetBytes_2_System_Byte_int_int_3_b__14_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_GetBytes_2_System_Byte_int_int_4_b__16_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_GetInt32_4_int_int_0_b__24_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_GetInt32_4_int_int_1_b__26_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_GetInt32_4_int_int_2_b__28_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_GetInt32_5_int_0_b__30_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_GetInt32_5_int_1_b__32_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_GetNonZeroBytes_3_System_Byte_0_b__18_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_GetNonZeroBytes_3_System_Byte_1_b__20_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_GetNonZeroBytes_3_System_Byte_2_b__22_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+    } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RandomNumberGeneratorTests___c;
     struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Rfc2898DeriveBytesTests_t {
         void (*ctor)(
                     CHAOS_IL2CPP_INTPTR
@@ -7047,6 +10564,65 @@ struct Functions {
                     CHAOS_IL2CPP_INTPTR
         );
     } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Rfc2898DeriveBytesTests;
+    struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Rfc2898DeriveBytesTests___c_t {
+        void (*cctor)(
+                void
+        );
+        void (*ctor)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_CryptDeriveKey_1_string_string_int_System_Byte_0_b__4_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_CryptDeriveKey_1_string_string_int_System_Byte_1_b__6_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_CryptDeriveKey_1_string_string_int_System_Byte_2_b__8_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_CryptDeriveKey_1_string_string_int_System_Byte_3_b__10_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_CryptDeriveKey_1_string_string_int_System_Byte_4_b__12_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_CryptDeriveKey_1_string_string_int_System_Byte_5_b__14_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_GetBytes_0_int_0_b__0_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_GetBytes_0_int_1_b__2_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Pbkdf2_2_System_Byte_System_Byte_int_HashAlgorithmName_int_0_b__16_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Pbkdf2_2_System_Byte_System_Byte_int_HashAlgorithmName_int_1_b__18_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Pbkdf2_2_System_Byte_System_Byte_int_HashAlgorithmName_int_2_b__20_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Pbkdf2_2_System_Byte_System_Byte_int_HashAlgorithmName_int_3_b__22_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Pbkdf2_3_string_System_Byte_int_HashAlgorithmName_int_0_b__24_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Pbkdf2_3_string_System_Byte_int_HashAlgorithmName_int_1_b__26_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Pbkdf2_3_string_System_Byte_int_HashAlgorithmName_int_2_b__28_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Pbkdf2_3_string_System_Byte_int_HashAlgorithmName_int_3_b__30_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Pbkdf2_3_string_System_Byte_int_HashAlgorithmName_int_4_b__32_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+    } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Rfc2898DeriveBytesTests___c;
     struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RijndaelManagedTests_t {
         void (*ctor)(
                     CHAOS_IL2CPP_INTPTR
@@ -7112,6 +10688,44 @@ struct Functions {
                     CHAOS_IL2CPP_INTPTR
         );
     } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RijndaelManagedTests;
+    struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RijndaelManagedTests___c_t {
+        void (*cctor)(
+                void
+        );
+        void (*ctor)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_CreateDecryptor_2__2_b__8_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_CreateDecryptor_3_System_Byte_System_Byte_0_b__10_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_CreateDecryptor_3_System_Byte_System_Byte_1_b__12_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_CreateDecryptor_3_System_Byte_System_Byte_2_b__14_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_CreateEncryptor_0__0_b__0_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_CreateEncryptor_1_System_Byte_System_Byte_0_b__2_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_CreateEncryptor_1_System_Byte_System_Byte_1_b__4_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_CreateEncryptor_1_System_Byte_System_Byte_2_b__6_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_GenerateIV_4__4_b__16_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_GenerateKey_5__5_b__18_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+    } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RijndaelManagedTests___c;
     struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA1CryptoServiceProviderTests_t {
         void (*ctor)(
                     CHAOS_IL2CPP_INTPTR
@@ -7123,6 +10737,17 @@ struct Functions {
                     CHAOS_IL2CPP_INTPTR
         );
     } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA1CryptoServiceProviderTests;
+    struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA1CryptoServiceProviderTests___c_t {
+        void (*cctor)(
+                void
+        );
+        void (*ctor)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Initialize_0__0_b__0_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+    } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA1CryptoServiceProviderTests___c;
     struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA1ManagedTests_t {
         void (*ctor)(
                     CHAOS_IL2CPP_INTPTR
@@ -7134,6 +10759,17 @@ struct Functions {
                     CHAOS_IL2CPP_INTPTR
         );
     } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA1ManagedTests;
+    struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA1ManagedTests___c_t {
+        void (*cctor)(
+                void
+        );
+        void (*ctor)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Initialize_0__0_b__0_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+    } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA1ManagedTests___c;
     struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA1Tests_t {
         void (*ctor)(
                     CHAOS_IL2CPP_INTPTR
@@ -7193,6 +10829,29 @@ struct Functions {
                     CHAOS_IL2CPP_INTPTR
         );
     } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA1Tests;
+    struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA1Tests___c_t {
+        void (*cctor)(
+                void
+        );
+        void (*ctor)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_HashDataAsync_2_Stream_CancellationToken_0_b__10_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_HashDataAsync_3_Stream_System_Memorybyte_CancellationToken_0_b__14_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_HashDataAsync_3_Stream_System_Memorybyte_CancellationToken_1_b__16_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_HashData_0_System_Byte_0_b__0_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_HashData_1_Stream_0_b__6_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+    } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA1Tests___c;
     struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA256CryptoServiceProviderTests_t {
         void (*ctor)(
                     CHAOS_IL2CPP_INTPTR
@@ -7204,6 +10863,17 @@ struct Functions {
                     CHAOS_IL2CPP_INTPTR
         );
     } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA256CryptoServiceProviderTests;
+    struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA256CryptoServiceProviderTests___c_t {
+        void (*cctor)(
+                void
+        );
+        void (*ctor)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Initialize_0__0_b__0_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+    } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA256CryptoServiceProviderTests___c;
     struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA256ManagedTests_t {
         void (*ctor)(
                     CHAOS_IL2CPP_INTPTR
@@ -7215,6 +10885,17 @@ struct Functions {
                     CHAOS_IL2CPP_INTPTR
         );
     } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA256ManagedTests;
+    struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA256ManagedTests___c_t {
+        void (*cctor)(
+                void
+        );
+        void (*ctor)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Initialize_0__0_b__0_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+    } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA256ManagedTests___c;
     struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA256Tests_t {
         void (*ctor)(
                     CHAOS_IL2CPP_INTPTR
@@ -7274,6 +10955,29 @@ struct Functions {
                     CHAOS_IL2CPP_INTPTR
         );
     } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA256Tests;
+    struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA256Tests___c_t {
+        void (*cctor)(
+                void
+        );
+        void (*ctor)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_HashDataAsync_2_Stream_CancellationToken_0_b__10_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_HashDataAsync_3_Stream_System_Memorybyte_CancellationToken_0_b__14_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_HashDataAsync_3_Stream_System_Memorybyte_CancellationToken_1_b__16_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_HashData_0_System_Byte_0_b__0_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_HashData_1_Stream_0_b__6_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+    } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA256Tests___c;
     struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA384CryptoServiceProviderTests_t {
         void (*ctor)(
                     CHAOS_IL2CPP_INTPTR
@@ -7285,6 +10989,17 @@ struct Functions {
                     CHAOS_IL2CPP_INTPTR
         );
     } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA384CryptoServiceProviderTests;
+    struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA384CryptoServiceProviderTests___c_t {
+        void (*cctor)(
+                void
+        );
+        void (*ctor)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Initialize_0__0_b__0_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+    } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA384CryptoServiceProviderTests___c;
     struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA384ManagedTests_t {
         void (*ctor)(
                     CHAOS_IL2CPP_INTPTR
@@ -7296,6 +11011,17 @@ struct Functions {
                     CHAOS_IL2CPP_INTPTR
         );
     } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA384ManagedTests;
+    struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA384ManagedTests___c_t {
+        void (*cctor)(
+                void
+        );
+        void (*ctor)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Initialize_0__0_b__0_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+    } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA384ManagedTests___c;
     struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA384Tests_t {
         void (*ctor)(
                     CHAOS_IL2CPP_INTPTR
@@ -7355,6 +11081,29 @@ struct Functions {
                     CHAOS_IL2CPP_INTPTR
         );
     } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA384Tests;
+    struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA384Tests___c_t {
+        void (*cctor)(
+                void
+        );
+        void (*ctor)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_HashDataAsync_2_Stream_CancellationToken_0_b__10_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_HashDataAsync_3_Stream_System_Memorybyte_CancellationToken_0_b__14_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_HashDataAsync_3_Stream_System_Memorybyte_CancellationToken_1_b__16_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_HashData_0_System_Byte_0_b__0_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_HashData_1_Stream_0_b__6_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+    } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA384Tests___c;
     struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA3_256Tests_t {
         void (*ctor)(
                     CHAOS_IL2CPP_INTPTR
@@ -7414,6 +11163,29 @@ struct Functions {
                     CHAOS_IL2CPP_INTPTR
         );
     } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA3_256Tests;
+    struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA3_256Tests___c_t {
+        void (*cctor)(
+                void
+        );
+        void (*ctor)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_HashDataAsync_2_Stream_CancellationToken_0_b__10_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_HashDataAsync_3_Stream_System_Memorybyte_CancellationToken_0_b__14_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_HashDataAsync_3_Stream_System_Memorybyte_CancellationToken_1_b__16_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_HashData_0_System_Byte_0_b__0_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_HashData_1_Stream_0_b__6_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+    } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA3_256Tests___c;
     struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA3_384Tests_t {
         void (*ctor)(
                     CHAOS_IL2CPP_INTPTR
@@ -7473,6 +11245,29 @@ struct Functions {
                     CHAOS_IL2CPP_INTPTR
         );
     } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA3_384Tests;
+    struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA3_384Tests___c_t {
+        void (*cctor)(
+                void
+        );
+        void (*ctor)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_HashDataAsync_2_Stream_CancellationToken_0_b__10_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_HashDataAsync_3_Stream_System_Memorybyte_CancellationToken_0_b__14_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_HashDataAsync_3_Stream_System_Memorybyte_CancellationToken_1_b__16_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_HashData_0_System_Byte_0_b__0_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_HashData_1_Stream_0_b__6_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+    } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA3_384Tests___c;
     struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA3_512Tests_t {
         void (*ctor)(
                     CHAOS_IL2CPP_INTPTR
@@ -7532,6 +11327,29 @@ struct Functions {
                     CHAOS_IL2CPP_INTPTR
         );
     } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA3_512Tests;
+    struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA3_512Tests___c_t {
+        void (*cctor)(
+                void
+        );
+        void (*ctor)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_HashDataAsync_2_Stream_CancellationToken_0_b__10_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_HashDataAsync_3_Stream_System_Memorybyte_CancellationToken_0_b__14_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_HashDataAsync_3_Stream_System_Memorybyte_CancellationToken_1_b__16_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_HashData_0_System_Byte_0_b__0_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_HashData_1_Stream_0_b__6_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+    } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA3_512Tests___c;
     struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA512CryptoServiceProviderTests_t {
         void (*ctor)(
                     CHAOS_IL2CPP_INTPTR
@@ -7543,6 +11361,17 @@ struct Functions {
                     CHAOS_IL2CPP_INTPTR
         );
     } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA512CryptoServiceProviderTests;
+    struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA512CryptoServiceProviderTests___c_t {
+        void (*cctor)(
+                void
+        );
+        void (*ctor)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Initialize_0__0_b__0_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+    } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA512CryptoServiceProviderTests___c;
     struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA512ManagedTests_t {
         void (*ctor)(
                     CHAOS_IL2CPP_INTPTR
@@ -7554,6 +11383,17 @@ struct Functions {
                     CHAOS_IL2CPP_INTPTR
         );
     } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA512ManagedTests;
+    struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA512ManagedTests___c_t {
+        void (*cctor)(
+                void
+        );
+        void (*ctor)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Initialize_0__0_b__0_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+    } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA512ManagedTests___c;
     struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA512Tests_t {
         void (*ctor)(
                     CHAOS_IL2CPP_INTPTR
@@ -7613,6 +11453,29 @@ struct Functions {
                     CHAOS_IL2CPP_INTPTR
         );
     } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA512Tests;
+    struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA512Tests___c_t {
+        void (*cctor)(
+                void
+        );
+        void (*ctor)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_HashDataAsync_2_Stream_CancellationToken_0_b__10_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_HashDataAsync_3_Stream_System_Memorybyte_CancellationToken_0_b__14_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_HashDataAsync_3_Stream_System_Memorybyte_CancellationToken_1_b__16_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_HashData_0_System_Byte_0_b__0_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_HashData_1_Stream_0_b__6_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+    } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA512Tests___c;
     struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SP800108HmacCounterKdfTests_t {
         void (*ctor)(
                     CHAOS_IL2CPP_INTPTR
@@ -7714,6 +11577,62 @@ struct Functions {
                     CHAOS_IL2CPP_INTPTR
         );
     } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SP800108HmacCounterKdfTests;
+    struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SP800108HmacCounterKdfTests___c_t {
+        void (*cctor)(
+                void
+        );
+        void (*ctor)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_DeriveBytes_0_System_Byte_HashAlgorithmName_System_Byte_System_Byte_int_0_b__0_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_DeriveBytes_0_System_Byte_HashAlgorithmName_System_Byte_System_Byte_int_1_b__2_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_DeriveBytes_0_System_Byte_HashAlgorithmName_System_Byte_System_Byte_int_2_b__4_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_DeriveBytes_1_System_Byte_HashAlgorithmName_string_string_int_0_b__6_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_DeriveBytes_1_System_Byte_HashAlgorithmName_string_string_int_1_b__8_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_DeriveBytes_1_System_Byte_HashAlgorithmName_string_string_int_2_b__10_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_DeriveBytes_1_System_Byte_HashAlgorithmName_string_string_int_3_b__12_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_DeriveKey_2_System_Byte_System_Byte_int_0_b__14_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_DeriveKey_2_System_Byte_System_Byte_int_1_b__16_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_DeriveKey_2_System_Byte_System_Byte_int_2_b__18_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_DeriveKey_2_System_Byte_System_Byte_int_3_b__20_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_DeriveKey_3_string_string_int_0_b__22_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_DeriveKey_3_string_string_int_1_b__24_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_DeriveKey_3_string_string_int_2_b__26_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_DeriveKey_3_string_string_int_3_b__28_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Dispose_4__4_b__30_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+    } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SP800108HmacCounterKdfTests___c;
     struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SafeEvpPKeyHandleTests_t {
         void (*ctor)(
                     CHAOS_IL2CPP_INTPTR
@@ -7779,6 +11698,44 @@ struct Functions {
                     CHAOS_IL2CPP_INTPTR
         );
     } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SafeEvpPKeyHandleTests;
+    struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SafeEvpPKeyHandleTests___c_t {
+        void (*cctor)(
+                void
+        );
+        void (*ctor)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_DuplicateHandle_3__3_b__18_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_OpenKeyFromProvider_2_string_string_0_b__12_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_OpenKeyFromProvider_2_string_string_1_b__14_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_OpenKeyFromProvider_2_string_string_2_b__16_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_OpenPrivateKeyFromEngine_0_string_string_0_b__0_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_OpenPrivateKeyFromEngine_0_string_string_1_b__2_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_OpenPrivateKeyFromEngine_0_string_string_2_b__4_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_OpenPublicKeyFromEngine_1_string_string_0_b__6_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_OpenPublicKeyFromEngine_1_string_string_1_b__8_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_OpenPublicKeyFromEngine_1_string_string_2_b__10_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+    } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SafeEvpPKeyHandleTests___c;
     struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Shake128Tests_t {
         void (*ctor)(
                     CHAOS_IL2CPP_INTPTR
@@ -7922,6 +11879,68 @@ struct Functions {
                     CHAOS_IL2CPP_INTPTR
         );
     } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Shake128Tests;
+    struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Shake128Tests___c_t {
+        void (*cctor)(
+                void
+        );
+        void (*ctor)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_AppendData_0_System_Byte_0_b__0_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_AppendData_0_System_Byte_1_b__2_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_AppendData_0_System_Byte_2_b__4_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Clone_4__4_b__18_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Dispose_5__5_b__20_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_GetCurrentHash_2_int_0_b__10_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_GetCurrentHash_2_int_1_b__12_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_GetHashAndReset_1_int_0_b__6_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_GetHashAndReset_1_int_1_b__8_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_HashDataAsync_8_Stream_System_Memorybyte_CancellationToken_0_b__36_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_HashDataAsync_9_Stream_int_CancellationToken_0_b__40_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_HashDataAsync_9_Stream_int_CancellationToken_1_b__42_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_HashData_6_System_Byte_int_0_b__22_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_HashData_6_System_Byte_int_1_b__24_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_HashData_7_Stream_int_0_b__30_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_HashData_7_Stream_int_1_b__32_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Read_3_int_0_b__14_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Read_3_int_1_b__16_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+    } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Shake128Tests___c;
     struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Shake256Tests_t {
         void (*ctor)(
                     CHAOS_IL2CPP_INTPTR
@@ -8065,6 +12084,68 @@ struct Functions {
                     CHAOS_IL2CPP_INTPTR
         );
     } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Shake256Tests;
+    struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Shake256Tests___c_t {
+        void (*cctor)(
+                void
+        );
+        void (*ctor)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_AppendData_0_System_Byte_0_b__0_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_AppendData_0_System_Byte_1_b__2_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_AppendData_0_System_Byte_2_b__4_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Clone_4__4_b__18_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Dispose_5__5_b__20_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_GetCurrentHash_2_int_0_b__10_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_GetCurrentHash_2_int_1_b__12_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_GetHashAndReset_1_int_0_b__6_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_GetHashAndReset_1_int_1_b__8_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_HashDataAsync_8_Stream_System_Memorybyte_CancellationToken_0_b__36_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_HashDataAsync_9_Stream_int_CancellationToken_0_b__40_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_HashDataAsync_9_Stream_int_CancellationToken_1_b__42_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_HashData_6_System_Byte_int_0_b__22_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_HashData_6_System_Byte_int_1_b__24_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_HashData_7_Stream_int_0_b__30_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_HashData_7_Stream_int_1_b__32_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Read_3_int_0_b__14_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Read_3_int_1_b__16_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+    } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Shake256Tests___c;
     struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SignatureDescriptionTests_t {
         void (*ctor)(
                     CHAOS_IL2CPP_INTPTR
@@ -8088,6 +12169,23 @@ struct Functions {
                     CHAOS_IL2CPP_INTPTR
         );
     } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SignatureDescriptionTests;
+    struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SignatureDescriptionTests___c_t {
+        void (*cctor)(
+                void
+        );
+        void (*ctor)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_CreateDeformatter_0_AsymmetricAlgorithm_0_b__0_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_CreateDigest_2__2_b__4_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_CreateFormatter_1_AsymmetricAlgorithm_0_b__2_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+    } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SignatureDescriptionTests___c;
     struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SymmetricAlgorithmTests_t {
         void (*ctor)(
                     CHAOS_IL2CPP_INTPTR
@@ -8327,6 +12425,131 @@ struct Functions {
                     CHAOS_IL2CPP_INTPTR
         );
     } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SymmetricAlgorithmTests;
+    struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SymmetricAlgorithmTests___c_t {
+        void (*cctor)(
+                void
+        );
+        void (*ctor)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Clear_5__5_b__18_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_CreateDecryptor_0__0_b__0_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_CreateDecryptor_1_System_Byte_System_Byte_0_b__2_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_CreateDecryptor_1_System_Byte_System_Byte_1_b__4_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_CreateDecryptor_1_System_Byte_System_Byte_2_b__6_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_CreateEncryptor_2__2_b__8_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_CreateEncryptor_3_System_Byte_System_Byte_0_b__10_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_CreateEncryptor_3_System_Byte_System_Byte_1_b__12_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_CreateEncryptor_3_System_Byte_System_Byte_2_b__14_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_DecryptCbc_14_System_Byte_System_Byte_PaddingMode_0_b__54_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_DecryptCbc_14_System_Byte_System_Byte_PaddingMode_1_b__56_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_DecryptCbc_14_System_Byte_System_Byte_PaddingMode_2_b__58_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_DecryptCfb_16_System_Byte_System_Byte_PaddingMode_int_0_b__66_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_DecryptCfb_16_System_Byte_System_Byte_PaddingMode_int_1_b__68_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_DecryptCfb_16_System_Byte_System_Byte_PaddingMode_int_2_b__70_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_DecryptEcb_12_System_Byte_PaddingMode_0_b__42_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_DecryptEcb_12_System_Byte_PaddingMode_1_b__44_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_DecryptEcb_12_System_Byte_PaddingMode_2_b__46_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Dispose_4__4_b__16_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_EncryptCbc_15_System_Byte_System_Byte_PaddingMode_0_b__60_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_EncryptCbc_15_System_Byte_System_Byte_PaddingMode_1_b__62_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_EncryptCbc_15_System_Byte_System_Byte_PaddingMode_2_b__64_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_EncryptCfb_17_System_Byte_System_Byte_PaddingMode_int_0_b__72_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_EncryptCfb_17_System_Byte_System_Byte_PaddingMode_int_1_b__74_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_EncryptCfb_17_System_Byte_System_Byte_PaddingMode_int_2_b__76_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_EncryptEcb_13_System_Byte_PaddingMode_0_b__48_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_EncryptEcb_13_System_Byte_PaddingMode_1_b__50_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_EncryptEcb_13_System_Byte_PaddingMode_2_b__52_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_GenerateIV_6__6_b__20_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_GenerateKey_7__7_b__22_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_GetCiphertextLengthCbc_10_int_PaddingMode_0_b__32_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_GetCiphertextLengthCbc_10_int_PaddingMode_1_b__34_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_GetCiphertextLengthCfb_11_int_PaddingMode_int_0_b__36_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_GetCiphertextLengthCfb_11_int_PaddingMode_int_1_b__38_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_GetCiphertextLengthCfb_11_int_PaddingMode_int_2_b__40_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_GetCiphertextLengthEcb_9_int_PaddingMode_0_b__28_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_GetCiphertextLengthEcb_9_int_PaddingMode_1_b__30_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_ValidKeySize_8_int_0_b__24_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_ValidKeySize_8_int_1_b__26_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+    } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SymmetricAlgorithmTests___c;
     struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ToBase64TransformTests_t {
         void (*ctor)(
                     CHAOS_IL2CPP_INTPTR
@@ -8404,6 +12627,50 @@ struct Functions {
                     CHAOS_IL2CPP_INTPTR
         );
     } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ToBase64TransformTests;
+    struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ToBase64TransformTests___c_t {
+        void (*cctor)(
+                void
+        );
+        void (*ctor)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Clear_3__3_b__22_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_Dispose_2__2_b__20_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_TransformBlock_0_System_Byte_int_int_System_Byte_int_0_b__0_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_TransformBlock_0_System_Byte_int_int_System_Byte_int_1_b__2_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_TransformBlock_0_System_Byte_int_int_System_Byte_int_2_b__4_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_TransformBlock_0_System_Byte_int_int_System_Byte_int_3_b__6_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_TransformBlock_0_System_Byte_int_int_System_Byte_int_4_b__8_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_TransformFinalBlock_1_System_Byte_int_int_0_b__10_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_TransformFinalBlock_1_System_Byte_int_int_1_b__12_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_TransformFinalBlock_1_System_Byte_int_int_2_b__14_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_TransformFinalBlock_1_System_Byte_int_int_3_b__16_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_TransformFinalBlock_1_System_Byte_int_int_4_b__18_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+    } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ToBase64TransformTests___c;
     struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_TripleDESCngTests_t {
         void (*ctor)(
                     CHAOS_IL2CPP_INTPTR
@@ -8469,6 +12736,44 @@ struct Functions {
                     CHAOS_IL2CPP_INTPTR
         );
     } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_TripleDESCngTests;
+    struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_TripleDESCngTests___c_t {
+        void (*cctor)(
+                void
+        );
+        void (*ctor)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_CreateDecryptor_0__0_b__0_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_CreateDecryptor_1_System_Byte_System_Byte_0_b__2_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_CreateDecryptor_1_System_Byte_System_Byte_1_b__4_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_CreateDecryptor_1_System_Byte_System_Byte_2_b__6_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_CreateEncryptor_2__2_b__8_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_CreateEncryptor_3_System_Byte_System_Byte_0_b__10_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_CreateEncryptor_3_System_Byte_System_Byte_1_b__12_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_CreateEncryptor_3_System_Byte_System_Byte_2_b__14_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_GenerateIV_5__5_b__18_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_GenerateKey_4__4_b__16_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+    } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_TripleDESCngTests___c;
     struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_TripleDESCryptoServiceProviderTests_t {
         void (*ctor)(
                     CHAOS_IL2CPP_INTPTR
@@ -8534,6 +12839,44 @@ struct Functions {
                     CHAOS_IL2CPP_INTPTR
         );
     } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_TripleDESCryptoServiceProviderTests;
+    struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_TripleDESCryptoServiceProviderTests___c_t {
+        void (*cctor)(
+                void
+        );
+        void (*ctor)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_CreateDecryptor_1__1_b__2_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_CreateDecryptor_5_System_Byte_System_Byte_0_b__14_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_CreateDecryptor_5_System_Byte_System_Byte_1_b__16_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_CreateDecryptor_5_System_Byte_System_Byte_2_b__18_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_CreateEncryptor_0__0_b__0_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_CreateEncryptor_4_System_Byte_System_Byte_0_b__8_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_CreateEncryptor_4_System_Byte_System_Byte_1_b__10_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_CreateEncryptor_4_System_Byte_System_Byte_2_b__12_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_GenerateIV_2__2_b__4_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_GenerateKey_3__3_b__6_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+    } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_TripleDESCryptoServiceProviderTests___c;
     struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_TripleDESTests_t {
         void (*ctor)(
                     CHAOS_IL2CPP_INTPTR
@@ -8557,6 +12900,23 @@ struct Functions {
                     CHAOS_IL2CPP_INTPTR
         );
     } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_TripleDESTests;
+    struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_TripleDESTests___c_t {
+        void (*cctor)(
+                void
+        );
+        void (*ctor)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_IsWeakKey_0_System_Byte_0_b__0_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_IsWeakKey_0_System_Byte_1_b__2_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_IsWeakKey_0_System_Byte_2_b__4_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+    } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_TripleDESTests___c;
     int32_t method_count;
 };
 
@@ -8839,13 +13199,62 @@ struct Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert {
                     arg_0
         );
     }
+    static inline void Throws_System_ArgumentException_(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_Assert.Throws_System_ArgumentException_(
+                    arg_0
+        );
+    }
+    static inline void Throws_System_ArgumentNullException_(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_Assert.Throws_System_ArgumentNullException_(
+                    arg_0
+        );
+    }
+    static inline void Throws_System_ArgumentOutOfRangeException_(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_Assert.Throws_System_ArgumentOutOfRangeException_(
+                    arg_0
+        );
+    }
+    static inline void Throws_System_FormatException_(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_Assert.Throws_System_FormatException_(
+                    arg_0
+        );
+    }
+    static inline void Throws_System_NullReferenceException_(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_Assert.Throws_System_NullReferenceException_(
+                    arg_0
+        );
+    }
+    static inline void Throws_System_PlatformNotSupportedException_(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_Assert.Throws_System_PlatformNotSupportedException_(
+                    arg_0
+        );
+    }
+    static inline void Throws_System_Security_Cryptography_CryptographicException_(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_Assert.Throws_System_Security_Cryptography_CryptographicException_(
+                    arg_0
+        );
+    }
     static inline CHAOS_IL2CPP_INT32 get_ExitCode(
     ) {
         return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_Assert.get_ExitCode(
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 28;
+    static constexpr int32_t MethodCount = 35;
 };
 
 struct Chaos_TestFramework_Sdk_Chaos_TestFramework_AssertionException {
@@ -8994,6 +13403,72 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
     static constexpr int32_t MethodCount = 15;
 };
 
+struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AesCcmTests___c {
+    static inline void cctor(
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AesCcmTests___c.cctor(
+        );
+    }
+    static inline void ctor(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AesCcmTests___c.ctor(
+                    arg_0
+        );
+    }
+    static inline void _Decrypt_1_System_Byte_System_Byte_System_Byte_System_Byte_System_Byte_0_b__6_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AesCcmTests___c._Decrypt_1_System_Byte_System_Byte_System_Byte_System_Byte_System_Byte_0_b__6_0(
+                    arg_0
+        );
+    }
+    static inline void _Decrypt_1_System_Byte_System_Byte_System_Byte_System_Byte_System_Byte_1_b__8_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AesCcmTests___c._Decrypt_1_System_Byte_System_Byte_System_Byte_System_Byte_System_Byte_1_b__8_0(
+                    arg_0
+        );
+    }
+    static inline void _Decrypt_1_System_Byte_System_Byte_System_Byte_System_Byte_System_Byte_2_b__10_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AesCcmTests___c._Decrypt_1_System_Byte_System_Byte_System_Byte_System_Byte_System_Byte_2_b__10_0(
+                    arg_0
+        );
+    }
+    static inline void _Dispose_2__2_b__12_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AesCcmTests___c._Dispose_2__2_b__12_0(
+                    arg_0
+        );
+    }
+    static inline void _Encrypt_0_System_Byte_System_Byte_System_Byte_System_Byte_System_Byte_0_b__0_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AesCcmTests___c._Encrypt_0_System_Byte_System_Byte_System_Byte_System_Byte_System_Byte_0_b__0_0(
+                    arg_0
+        );
+    }
+    static inline void _Encrypt_0_System_Byte_System_Byte_System_Byte_System_Byte_System_Byte_1_b__2_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AesCcmTests___c._Encrypt_0_System_Byte_System_Byte_System_Byte_System_Byte_System_Byte_1_b__2_0(
+                    arg_0
+        );
+    }
+    static inline void _Encrypt_0_System_Byte_System_Byte_System_Byte_System_Byte_System_Byte_2_b__4_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AesCcmTests___c._Encrypt_0_System_Byte_System_Byte_System_Byte_System_Byte_System_Byte_2_b__4_0(
+                    arg_0
+        );
+    }
+    /// Total number of AOT-compiled methods in this type.
+    static constexpr int32_t MethodCount = 9;
+};
+
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AesCngTests {
     static inline void ctor(
                 CHAOS_IL2CPP_INTPTR arg_0
@@ -9124,6 +13599,93 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
     }
     /// Total number of AOT-compiled methods in this type.
     static constexpr int32_t MethodCount = 21;
+};
+
+struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AesCngTests___c {
+    static inline void cctor(
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AesCngTests___c.cctor(
+        );
+    }
+    static inline void ctor(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AesCngTests___c.ctor(
+                    arg_0
+        );
+    }
+    static inline void _CreateDecryptor_0__0_b__0_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AesCngTests___c._CreateDecryptor_0__0_b__0_0(
+                    arg_0
+        );
+    }
+    static inline void _CreateDecryptor_1_System_Byte_System_Byte_0_b__2_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AesCngTests___c._CreateDecryptor_1_System_Byte_System_Byte_0_b__2_0(
+                    arg_0
+        );
+    }
+    static inline void _CreateDecryptor_1_System_Byte_System_Byte_1_b__4_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AesCngTests___c._CreateDecryptor_1_System_Byte_System_Byte_1_b__4_0(
+                    arg_0
+        );
+    }
+    static inline void _CreateDecryptor_1_System_Byte_System_Byte_2_b__6_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AesCngTests___c._CreateDecryptor_1_System_Byte_System_Byte_2_b__6_0(
+                    arg_0
+        );
+    }
+    static inline void _CreateEncryptor_2__2_b__8_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AesCngTests___c._CreateEncryptor_2__2_b__8_0(
+                    arg_0
+        );
+    }
+    static inline void _CreateEncryptor_3_System_Byte_System_Byte_0_b__10_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AesCngTests___c._CreateEncryptor_3_System_Byte_System_Byte_0_b__10_0(
+                    arg_0
+        );
+    }
+    static inline void _CreateEncryptor_3_System_Byte_System_Byte_1_b__12_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AesCngTests___c._CreateEncryptor_3_System_Byte_System_Byte_1_b__12_0(
+                    arg_0
+        );
+    }
+    static inline void _CreateEncryptor_3_System_Byte_System_Byte_2_b__14_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AesCngTests___c._CreateEncryptor_3_System_Byte_System_Byte_2_b__14_0(
+                    arg_0
+        );
+    }
+    static inline void _GenerateIV_5__5_b__18_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AesCngTests___c._GenerateIV_5__5_b__18_0(
+                    arg_0
+        );
+    }
+    static inline void _GenerateKey_4__4_b__16_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AesCngTests___c._GenerateKey_4__4_b__16_0(
+                    arg_0
+        );
+    }
+    /// Total number of AOT-compiled methods in this type.
+    static constexpr int32_t MethodCount = 12;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AesCryptoServiceProviderTests {
@@ -9258,6 +13820,93 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
     static constexpr int32_t MethodCount = 21;
 };
 
+struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AesCryptoServiceProviderTests___c {
+    static inline void cctor(
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AesCryptoServiceProviderTests___c.cctor(
+        );
+    }
+    static inline void ctor(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AesCryptoServiceProviderTests___c.ctor(
+                    arg_0
+        );
+    }
+    static inline void _CreateDecryptor_2__2_b__8_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AesCryptoServiceProviderTests___c._CreateDecryptor_2__2_b__8_0(
+                    arg_0
+        );
+    }
+    static inline void _CreateDecryptor_3_System_Byte_System_Byte_0_b__10_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AesCryptoServiceProviderTests___c._CreateDecryptor_3_System_Byte_System_Byte_0_b__10_0(
+                    arg_0
+        );
+    }
+    static inline void _CreateDecryptor_3_System_Byte_System_Byte_1_b__12_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AesCryptoServiceProviderTests___c._CreateDecryptor_3_System_Byte_System_Byte_1_b__12_0(
+                    arg_0
+        );
+    }
+    static inline void _CreateDecryptor_3_System_Byte_System_Byte_2_b__14_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AesCryptoServiceProviderTests___c._CreateDecryptor_3_System_Byte_System_Byte_2_b__14_0(
+                    arg_0
+        );
+    }
+    static inline void _CreateEncryptor_0__0_b__0_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AesCryptoServiceProviderTests___c._CreateEncryptor_0__0_b__0_0(
+                    arg_0
+        );
+    }
+    static inline void _CreateEncryptor_1_System_Byte_System_Byte_0_b__2_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AesCryptoServiceProviderTests___c._CreateEncryptor_1_System_Byte_System_Byte_0_b__2_0(
+                    arg_0
+        );
+    }
+    static inline void _CreateEncryptor_1_System_Byte_System_Byte_1_b__4_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AesCryptoServiceProviderTests___c._CreateEncryptor_1_System_Byte_System_Byte_1_b__4_0(
+                    arg_0
+        );
+    }
+    static inline void _CreateEncryptor_1_System_Byte_System_Byte_2_b__6_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AesCryptoServiceProviderTests___c._CreateEncryptor_1_System_Byte_System_Byte_2_b__6_0(
+                    arg_0
+        );
+    }
+    static inline void _GenerateIV_4__4_b__16_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AesCryptoServiceProviderTests___c._GenerateIV_4__4_b__16_0(
+                    arg_0
+        );
+    }
+    static inline void _GenerateKey_5__5_b__18_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AesCryptoServiceProviderTests___c._GenerateKey_5__5_b__18_0(
+                    arg_0
+        );
+    }
+    /// Total number of AOT-compiled methods in this type.
+    static constexpr int32_t MethodCount = 12;
+};
+
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AesGcmTests {
     static inline void ctor(
                 CHAOS_IL2CPP_INTPTR arg_0
@@ -9352,6 +14001,72 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
     }
     /// Total number of AOT-compiled methods in this type.
     static constexpr int32_t MethodCount = 15;
+};
+
+struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AesGcmTests___c {
+    static inline void cctor(
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AesGcmTests___c.cctor(
+        );
+    }
+    static inline void ctor(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AesGcmTests___c.ctor(
+                    arg_0
+        );
+    }
+    static inline void _Decrypt_1_System_Byte_System_Byte_System_Byte_System_Byte_System_Byte_0_b__6_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AesGcmTests___c._Decrypt_1_System_Byte_System_Byte_System_Byte_System_Byte_System_Byte_0_b__6_0(
+                    arg_0
+        );
+    }
+    static inline void _Decrypt_1_System_Byte_System_Byte_System_Byte_System_Byte_System_Byte_1_b__8_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AesGcmTests___c._Decrypt_1_System_Byte_System_Byte_System_Byte_System_Byte_System_Byte_1_b__8_0(
+                    arg_0
+        );
+    }
+    static inline void _Decrypt_1_System_Byte_System_Byte_System_Byte_System_Byte_System_Byte_2_b__10_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AesGcmTests___c._Decrypt_1_System_Byte_System_Byte_System_Byte_System_Byte_System_Byte_2_b__10_0(
+                    arg_0
+        );
+    }
+    static inline void _Dispose_2__2_b__12_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AesGcmTests___c._Dispose_2__2_b__12_0(
+                    arg_0
+        );
+    }
+    static inline void _Encrypt_0_System_Byte_System_Byte_System_Byte_System_Byte_System_Byte_0_b__0_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AesGcmTests___c._Encrypt_0_System_Byte_System_Byte_System_Byte_System_Byte_System_Byte_0_b__0_0(
+                    arg_0
+        );
+    }
+    static inline void _Encrypt_0_System_Byte_System_Byte_System_Byte_System_Byte_System_Byte_1_b__2_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AesGcmTests___c._Encrypt_0_System_Byte_System_Byte_System_Byte_System_Byte_System_Byte_1_b__2_0(
+                    arg_0
+        );
+    }
+    static inline void _Encrypt_0_System_Byte_System_Byte_System_Byte_System_Byte_System_Byte_2_b__4_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AesGcmTests___c._Encrypt_0_System_Byte_System_Byte_System_Byte_System_Byte_System_Byte_2_b__4_0(
+                    arg_0
+        );
+    }
+    /// Total number of AOT-compiled methods in this type.
+    static constexpr int32_t MethodCount = 9;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AesManagedTests {
@@ -9486,6 +14201,93 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
     static constexpr int32_t MethodCount = 21;
 };
 
+struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AesManagedTests___c {
+    static inline void cctor(
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AesManagedTests___c.cctor(
+        );
+    }
+    static inline void ctor(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AesManagedTests___c.ctor(
+                    arg_0
+        );
+    }
+    static inline void _CreateDecryptor_2__2_b__8_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AesManagedTests___c._CreateDecryptor_2__2_b__8_0(
+                    arg_0
+        );
+    }
+    static inline void _CreateDecryptor_3_System_Byte_System_Byte_0_b__10_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AesManagedTests___c._CreateDecryptor_3_System_Byte_System_Byte_0_b__10_0(
+                    arg_0
+        );
+    }
+    static inline void _CreateDecryptor_3_System_Byte_System_Byte_1_b__12_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AesManagedTests___c._CreateDecryptor_3_System_Byte_System_Byte_1_b__12_0(
+                    arg_0
+        );
+    }
+    static inline void _CreateDecryptor_3_System_Byte_System_Byte_2_b__14_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AesManagedTests___c._CreateDecryptor_3_System_Byte_System_Byte_2_b__14_0(
+                    arg_0
+        );
+    }
+    static inline void _CreateEncryptor_0__0_b__0_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AesManagedTests___c._CreateEncryptor_0__0_b__0_0(
+                    arg_0
+        );
+    }
+    static inline void _CreateEncryptor_1_System_Byte_System_Byte_0_b__2_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AesManagedTests___c._CreateEncryptor_1_System_Byte_System_Byte_0_b__2_0(
+                    arg_0
+        );
+    }
+    static inline void _CreateEncryptor_1_System_Byte_System_Byte_1_b__4_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AesManagedTests___c._CreateEncryptor_1_System_Byte_System_Byte_1_b__4_0(
+                    arg_0
+        );
+    }
+    static inline void _CreateEncryptor_1_System_Byte_System_Byte_2_b__6_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AesManagedTests___c._CreateEncryptor_1_System_Byte_System_Byte_2_b__6_0(
+                    arg_0
+        );
+    }
+    static inline void _GenerateIV_4__4_b__16_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AesManagedTests___c._GenerateIV_4__4_b__16_0(
+                    arg_0
+        );
+    }
+    static inline void _GenerateKey_5__5_b__18_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AesManagedTests___c._GenerateKey_5__5_b__18_0(
+                    arg_0
+        );
+    }
+    /// Total number of AOT-compiled methods in this type.
+    static constexpr int32_t MethodCount = 12;
+};
+
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AsnEncodedDataCollectionTests {
     static inline void ctor(
                 CHAOS_IL2CPP_INTPTR arg_0
@@ -9534,6 +14336,44 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
     static constexpr int32_t MethodCount = 7;
 };
 
+struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AsnEncodedDataCollectionTests___c {
+    static inline void cctor(
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AsnEncodedDataCollectionTests___c.cctor(
+        );
+    }
+    static inline void ctor(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AsnEncodedDataCollectionTests___c.ctor(
+                    arg_0
+        );
+    }
+    static inline void _Add_0_AsnEncodedData_0_b__0_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AsnEncodedDataCollectionTests___c._Add_0_AsnEncodedData_0_b__0_0(
+                    arg_0
+        );
+    }
+    static inline void _GetEnumerator_2__2_b__4_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AsnEncodedDataCollectionTests___c._GetEnumerator_2__2_b__4_0(
+                    arg_0
+        );
+    }
+    static inline void _Remove_1_AsnEncodedData_0_b__2_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AsnEncodedDataCollectionTests___c._Remove_1_AsnEncodedData_0_b__2_0(
+                    arg_0
+        );
+    }
+    /// Total number of AOT-compiled methods in this type.
+    static constexpr int32_t MethodCount = 5;
+};
+
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AsnEncodedDataTests {
     static inline void ctor(
                 CHAOS_IL2CPP_INTPTR arg_0
@@ -9580,6 +14420,44 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
     }
     /// Total number of AOT-compiled methods in this type.
     static constexpr int32_t MethodCount = 7;
+};
+
+struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AsnEncodedDataTests___c {
+    static inline void cctor(
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AsnEncodedDataTests___c.cctor(
+        );
+    }
+    static inline void ctor(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AsnEncodedDataTests___c.ctor(
+                    arg_0
+        );
+    }
+    static inline void _CopyFrom_0_AsnEncodedData_0_b__0_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AsnEncodedDataTests___c._CopyFrom_0_AsnEncodedData_0_b__0_0(
+                    arg_0
+        );
+    }
+    static inline void _Format_1_bool_0_b__2_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AsnEncodedDataTests___c._Format_1_bool_0_b__2_0(
+                    arg_0
+        );
+    }
+    static inline void _Format_1_bool_1_b__4_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AsnEncodedDataTests___c._Format_1_bool_1_b__4_0(
+                    arg_0
+        );
+    }
+    /// Total number of AOT-compiled methods in this type.
+    static constexpr int32_t MethodCount = 5;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AsymmetricAlgorithmTests {
@@ -9714,6 +14592,93 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
     static constexpr int32_t MethodCount = 21;
 };
 
+struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AsymmetricAlgorithmTests___c {
+    static inline void cctor(
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AsymmetricAlgorithmTests___c.cctor(
+        );
+    }
+    static inline void ctor(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AsymmetricAlgorithmTests___c.ctor(
+                    arg_0
+        );
+    }
+    static inline void _Clear_2__2_b__8_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AsymmetricAlgorithmTests___c._Clear_2__2_b__8_0(
+                    arg_0
+        );
+    }
+    static inline void _Dispose_3__3_b__10_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AsymmetricAlgorithmTests___c._Dispose_3__3_b__10_0(
+                    arg_0
+        );
+    }
+    static inline void _ExportPkcs8PrivateKeyPem_6__6_b__16_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AsymmetricAlgorithmTests___c._ExportPkcs8PrivateKeyPem_6__6_b__16_0(
+                    arg_0
+        );
+    }
+    static inline void _ExportPkcs8PrivateKey_4__4_b__12_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AsymmetricAlgorithmTests___c._ExportPkcs8PrivateKey_4__4_b__12_0(
+                    arg_0
+        );
+    }
+    static inline void _ExportSubjectPublicKeyInfoPem_7__7_b__18_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AsymmetricAlgorithmTests___c._ExportSubjectPublicKeyInfoPem_7__7_b__18_0(
+                    arg_0
+        );
+    }
+    static inline void _ExportSubjectPublicKeyInfo_5__5_b__14_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AsymmetricAlgorithmTests___c._ExportSubjectPublicKeyInfo_5__5_b__14_0(
+                    arg_0
+        );
+    }
+    static inline void _FromXmlString_0_string_0_b__0_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AsymmetricAlgorithmTests___c._FromXmlString_0_string_0_b__0_0(
+                    arg_0
+        );
+    }
+    static inline void _FromXmlString_0_string_1_b__2_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AsymmetricAlgorithmTests___c._FromXmlString_0_string_1_b__2_0(
+                    arg_0
+        );
+    }
+    static inline void _ToXmlString_1_bool_0_b__4_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AsymmetricAlgorithmTests___c._ToXmlString_1_bool_0_b__4_0(
+                    arg_0
+        );
+    }
+    static inline void _ToXmlString_1_bool_1_b__6_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AsymmetricAlgorithmTests___c._ToXmlString_1_bool_1_b__6_0(
+                    arg_0
+        );
+    }
+    /// Total number of AOT-compiled methods in this type.
+    static constexpr int32_t MethodCount = 12;
+};
+
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AsymmetricKeyExchangeDeformatterTests {
     static inline void ctor(
                 CHAOS_IL2CPP_INTPTR arg_0
@@ -9772,6 +14737,51 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
     }
     /// Total number of AOT-compiled methods in this type.
     static constexpr int32_t MethodCount = 9;
+};
+
+struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AsymmetricKeyExchangeDeformatterTests___c {
+    static inline void cctor(
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AsymmetricKeyExchangeDeformatterTests___c.cctor(
+        );
+    }
+    static inline void ctor(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AsymmetricKeyExchangeDeformatterTests___c.ctor(
+                    arg_0
+        );
+    }
+    static inline void _DecryptKeyExchange_1_System_Byte_0_b__2_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AsymmetricKeyExchangeDeformatterTests___c._DecryptKeyExchange_1_System_Byte_0_b__2_0(
+                    arg_0
+        );
+    }
+    static inline void _DecryptKeyExchange_1_System_Byte_1_b__4_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AsymmetricKeyExchangeDeformatterTests___c._DecryptKeyExchange_1_System_Byte_1_b__4_0(
+                    arg_0
+        );
+    }
+    static inline void _DecryptKeyExchange_1_System_Byte_2_b__6_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AsymmetricKeyExchangeDeformatterTests___c._DecryptKeyExchange_1_System_Byte_2_b__6_0(
+                    arg_0
+        );
+    }
+    static inline void _SetKey_0_AsymmetricAlgorithm_0_b__0_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AsymmetricKeyExchangeDeformatterTests___c._SetKey_0_AsymmetricAlgorithm_0_b__0_0(
+                    arg_0
+        );
+    }
+    /// Total number of AOT-compiled methods in this type.
+    static constexpr int32_t MethodCount = 6;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AsymmetricKeyExchangeFormatterTests {
@@ -9868,6 +14878,72 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
     }
     /// Total number of AOT-compiled methods in this type.
     static constexpr int32_t MethodCount = 15;
+};
+
+struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AsymmetricKeyExchangeFormatterTests___c {
+    static inline void cctor(
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AsymmetricKeyExchangeFormatterTests___c.cctor(
+        );
+    }
+    static inline void ctor(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AsymmetricKeyExchangeFormatterTests___c.ctor(
+                    arg_0
+        );
+    }
+    static inline void _CreateKeyExchange_1_System_Byte_0_b__2_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AsymmetricKeyExchangeFormatterTests___c._CreateKeyExchange_1_System_Byte_0_b__2_0(
+                    arg_0
+        );
+    }
+    static inline void _CreateKeyExchange_1_System_Byte_1_b__4_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AsymmetricKeyExchangeFormatterTests___c._CreateKeyExchange_1_System_Byte_1_b__4_0(
+                    arg_0
+        );
+    }
+    static inline void _CreateKeyExchange_1_System_Byte_2_b__6_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AsymmetricKeyExchangeFormatterTests___c._CreateKeyExchange_1_System_Byte_2_b__6_0(
+                    arg_0
+        );
+    }
+    static inline void _CreateKeyExchange_2_System_Byte_System_Type_0_b__8_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AsymmetricKeyExchangeFormatterTests___c._CreateKeyExchange_2_System_Byte_System_Type_0_b__8_0(
+                    arg_0
+        );
+    }
+    static inline void _CreateKeyExchange_2_System_Byte_System_Type_1_b__10_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AsymmetricKeyExchangeFormatterTests___c._CreateKeyExchange_2_System_Byte_System_Type_1_b__10_0(
+                    arg_0
+        );
+    }
+    static inline void _CreateKeyExchange_2_System_Byte_System_Type_2_b__12_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AsymmetricKeyExchangeFormatterTests___c._CreateKeyExchange_2_System_Byte_System_Type_2_b__12_0(
+                    arg_0
+        );
+    }
+    static inline void _SetKey_0_AsymmetricAlgorithm_0_b__0_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AsymmetricKeyExchangeFormatterTests___c._SetKey_0_AsymmetricAlgorithm_0_b__0_0(
+                    arg_0
+        );
+    }
+    /// Total number of AOT-compiled methods in this type.
+    static constexpr int32_t MethodCount = 9;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AsymmetricSignatureDeformatterTests {
@@ -9990,6 +15066,86 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
     static constexpr int32_t MethodCount = 19;
 };
 
+struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AsymmetricSignatureDeformatterTests___c {
+    static inline void cctor(
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AsymmetricSignatureDeformatterTests___c.cctor(
+        );
+    }
+    static inline void ctor(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AsymmetricSignatureDeformatterTests___c.ctor(
+                    arg_0
+        );
+    }
+    static inline void _SetHashAlgorithm_1_string_0_b__2_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AsymmetricSignatureDeformatterTests___c._SetHashAlgorithm_1_string_0_b__2_0(
+                    arg_0
+        );
+    }
+    static inline void _SetHashAlgorithm_1_string_1_b__4_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AsymmetricSignatureDeformatterTests___c._SetHashAlgorithm_1_string_1_b__4_0(
+                    arg_0
+        );
+    }
+    static inline void _SetKey_0_AsymmetricAlgorithm_0_b__0_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AsymmetricSignatureDeformatterTests___c._SetKey_0_AsymmetricAlgorithm_0_b__0_0(
+                    arg_0
+        );
+    }
+    static inline void _VerifySignature_2_HashAlgorithm_System_Byte_0_b__6_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AsymmetricSignatureDeformatterTests___c._VerifySignature_2_HashAlgorithm_System_Byte_0_b__6_0(
+                    arg_0
+        );
+    }
+    static inline void _VerifySignature_2_HashAlgorithm_System_Byte_1_b__8_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AsymmetricSignatureDeformatterTests___c._VerifySignature_2_HashAlgorithm_System_Byte_1_b__8_0(
+                    arg_0
+        );
+    }
+    static inline void _VerifySignature_2_HashAlgorithm_System_Byte_2_b__10_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AsymmetricSignatureDeformatterTests___c._VerifySignature_2_HashAlgorithm_System_Byte_2_b__10_0(
+                    arg_0
+        );
+    }
+    static inline void _VerifySignature_3_System_Byte_System_Byte_0_b__12_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AsymmetricSignatureDeformatterTests___c._VerifySignature_3_System_Byte_System_Byte_0_b__12_0(
+                    arg_0
+        );
+    }
+    static inline void _VerifySignature_3_System_Byte_System_Byte_1_b__14_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AsymmetricSignatureDeformatterTests___c._VerifySignature_3_System_Byte_System_Byte_1_b__14_0(
+                    arg_0
+        );
+    }
+    static inline void _VerifySignature_3_System_Byte_System_Byte_2_b__16_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AsymmetricSignatureDeformatterTests___c._VerifySignature_3_System_Byte_System_Byte_2_b__16_0(
+                    arg_0
+        );
+    }
+    /// Total number of AOT-compiled methods in this type.
+    static constexpr int32_t MethodCount = 11;
+};
+
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AsymmetricSignatureFormatterTests {
     static inline void ctor(
                 CHAOS_IL2CPP_INTPTR arg_0
@@ -10086,6 +15242,72 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
     static constexpr int32_t MethodCount = 15;
 };
 
+struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AsymmetricSignatureFormatterTests___c {
+    static inline void cctor(
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AsymmetricSignatureFormatterTests___c.cctor(
+        );
+    }
+    static inline void ctor(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AsymmetricSignatureFormatterTests___c.ctor(
+                    arg_0
+        );
+    }
+    static inline void _CreateSignature_2_HashAlgorithm_0_b__6_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AsymmetricSignatureFormatterTests___c._CreateSignature_2_HashAlgorithm_0_b__6_0(
+                    arg_0
+        );
+    }
+    static inline void _CreateSignature_3_System_Byte_0_b__8_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AsymmetricSignatureFormatterTests___c._CreateSignature_3_System_Byte_0_b__8_0(
+                    arg_0
+        );
+    }
+    static inline void _CreateSignature_3_System_Byte_1_b__10_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AsymmetricSignatureFormatterTests___c._CreateSignature_3_System_Byte_1_b__10_0(
+                    arg_0
+        );
+    }
+    static inline void _CreateSignature_3_System_Byte_2_b__12_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AsymmetricSignatureFormatterTests___c._CreateSignature_3_System_Byte_2_b__12_0(
+                    arg_0
+        );
+    }
+    static inline void _SetHashAlgorithm_1_string_0_b__2_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AsymmetricSignatureFormatterTests___c._SetHashAlgorithm_1_string_0_b__2_0(
+                    arg_0
+        );
+    }
+    static inline void _SetHashAlgorithm_1_string_1_b__4_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AsymmetricSignatureFormatterTests___c._SetHashAlgorithm_1_string_1_b__4_0(
+                    arg_0
+        );
+    }
+    static inline void _SetKey_0_AsymmetricAlgorithm_0_b__0_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AsymmetricSignatureFormatterTests___c._SetKey_0_AsymmetricAlgorithm_0_b__0_0(
+                    arg_0
+        );
+    }
+    /// Total number of AOT-compiled methods in this type.
+    static constexpr int32_t MethodCount = 9;
+};
+
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ChaCha20Poly1305Tests {
     static inline void ctor(
                 CHAOS_IL2CPP_INTPTR arg_0
@@ -10180,6 +15402,72 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
     }
     /// Total number of AOT-compiled methods in this type.
     static constexpr int32_t MethodCount = 15;
+};
+
+struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ChaCha20Poly1305Tests___c {
+    static inline void cctor(
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ChaCha20Poly1305Tests___c.cctor(
+        );
+    }
+    static inline void ctor(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ChaCha20Poly1305Tests___c.ctor(
+                    arg_0
+        );
+    }
+    static inline void _Decrypt_1_System_Byte_System_Byte_System_Byte_System_Byte_System_Byte_0_b__6_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ChaCha20Poly1305Tests___c._Decrypt_1_System_Byte_System_Byte_System_Byte_System_Byte_System_Byte_0_b__6_0(
+                    arg_0
+        );
+    }
+    static inline void _Decrypt_1_System_Byte_System_Byte_System_Byte_System_Byte_System_Byte_1_b__8_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ChaCha20Poly1305Tests___c._Decrypt_1_System_Byte_System_Byte_System_Byte_System_Byte_System_Byte_1_b__8_0(
+                    arg_0
+        );
+    }
+    static inline void _Decrypt_1_System_Byte_System_Byte_System_Byte_System_Byte_System_Byte_2_b__10_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ChaCha20Poly1305Tests___c._Decrypt_1_System_Byte_System_Byte_System_Byte_System_Byte_System_Byte_2_b__10_0(
+                    arg_0
+        );
+    }
+    static inline void _Dispose_2__2_b__12_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ChaCha20Poly1305Tests___c._Dispose_2__2_b__12_0(
+                    arg_0
+        );
+    }
+    static inline void _Encrypt_0_System_Byte_System_Byte_System_Byte_System_Byte_System_Byte_0_b__0_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ChaCha20Poly1305Tests___c._Encrypt_0_System_Byte_System_Byte_System_Byte_System_Byte_System_Byte_0_b__0_0(
+                    arg_0
+        );
+    }
+    static inline void _Encrypt_0_System_Byte_System_Byte_System_Byte_System_Byte_System_Byte_1_b__2_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ChaCha20Poly1305Tests___c._Encrypt_0_System_Byte_System_Byte_System_Byte_System_Byte_System_Byte_1_b__2_0(
+                    arg_0
+        );
+    }
+    static inline void _Encrypt_0_System_Byte_System_Byte_System_Byte_System_Byte_System_Byte_2_b__4_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ChaCha20Poly1305Tests___c._Encrypt_0_System_Byte_System_Byte_System_Byte_System_Byte_System_Byte_2_b__4_0(
+                    arg_0
+        );
+    }
+    /// Total number of AOT-compiled methods in this type.
+    static constexpr int32_t MethodCount = 9;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CngKeyTests {
@@ -10518,6 +15806,205 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
     static constexpr int32_t MethodCount = 55;
 };
 
+struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CngKeyTests___c {
+    static inline void cctor(
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CngKeyTests___c.cctor(
+        );
+    }
+    static inline void ctor(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CngKeyTests___c.ctor(
+                    arg_0
+        );
+    }
+    static inline void _Delete_1__1_b__2_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CngKeyTests___c._Delete_1__1_b__2_0(
+                    arg_0
+        );
+    }
+    static inline void _Dispose_0__0_b__0_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CngKeyTests___c._Dispose_0__0_b__0_0(
+                    arg_0
+        );
+    }
+    static inline void _Exists_2_string_0_b__4_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CngKeyTests___c._Exists_2_string_0_b__4_0(
+                    arg_0
+        );
+    }
+    static inline void _Exists_3_string_CngProvider_0_b__8_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CngKeyTests___c._Exists_3_string_CngProvider_0_b__8_0(
+                    arg_0
+        );
+    }
+    static inline void _Exists_3_string_CngProvider_1_b__10_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CngKeyTests___c._Exists_3_string_CngProvider_1_b__10_0(
+                    arg_0
+        );
+    }
+    static inline void _Exists_4_string_CngProvider_CngKeyOpenOptions_0_b__12_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CngKeyTests___c._Exists_4_string_CngProvider_CngKeyOpenOptions_0_b__12_0(
+                    arg_0
+        );
+    }
+    static inline void _Exists_4_string_CngProvider_CngKeyOpenOptions_1_b__14_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CngKeyTests___c._Exists_4_string_CngProvider_CngKeyOpenOptions_1_b__14_0(
+                    arg_0
+        );
+    }
+    static inline void _Export_5_CngKeyBlobFormat_0_b__16_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CngKeyTests___c._Export_5_CngKeyBlobFormat_0_b__16_0(
+                    arg_0
+        );
+    }
+    static inline void _GetProperty_12_string_CngPropertyOptions_0_b__44_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CngKeyTests___c._GetProperty_12_string_CngPropertyOptions_0_b__44_0(
+                    arg_0
+        );
+    }
+    static inline void _GetProperty_12_string_CngPropertyOptions_1_b__46_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CngKeyTests___c._GetProperty_12_string_CngPropertyOptions_1_b__46_0(
+                    arg_0
+        );
+    }
+    static inline void _HasProperty_13_string_CngPropertyOptions_0_b__48_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CngKeyTests___c._HasProperty_13_string_CngPropertyOptions_0_b__48_0(
+                    arg_0
+        );
+    }
+    static inline void _HasProperty_13_string_CngPropertyOptions_1_b__50_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CngKeyTests___c._HasProperty_13_string_CngPropertyOptions_1_b__50_0(
+                    arg_0
+        );
+    }
+    static inline void _Import_6_System_Byte_CngKeyBlobFormat_0_b__18_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CngKeyTests___c._Import_6_System_Byte_CngKeyBlobFormat_0_b__18_0(
+                    arg_0
+        );
+    }
+    static inline void _Import_6_System_Byte_CngKeyBlobFormat_1_b__20_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CngKeyTests___c._Import_6_System_Byte_CngKeyBlobFormat_1_b__20_0(
+                    arg_0
+        );
+    }
+    static inline void _Import_6_System_Byte_CngKeyBlobFormat_2_b__22_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CngKeyTests___c._Import_6_System_Byte_CngKeyBlobFormat_2_b__22_0(
+                    arg_0
+        );
+    }
+    static inline void _Import_7_System_Byte_CngKeyBlobFormat_CngProvider_0_b__24_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CngKeyTests___c._Import_7_System_Byte_CngKeyBlobFormat_CngProvider_0_b__24_0(
+                    arg_0
+        );
+    }
+    static inline void _Import_7_System_Byte_CngKeyBlobFormat_CngProvider_1_b__26_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CngKeyTests___c._Import_7_System_Byte_CngKeyBlobFormat_CngProvider_1_b__26_0(
+                    arg_0
+        );
+    }
+    static inline void _Import_7_System_Byte_CngKeyBlobFormat_CngProvider_2_b__28_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CngKeyTests___c._Import_7_System_Byte_CngKeyBlobFormat_CngProvider_2_b__28_0(
+                    arg_0
+        );
+    }
+    static inline void _Open_10_string_CngProvider_CngKeyOpenOptions_0_b__38_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CngKeyTests___c._Open_10_string_CngProvider_CngKeyOpenOptions_0_b__38_0(
+                    arg_0
+        );
+    }
+    static inline void _Open_10_string_CngProvider_CngKeyOpenOptions_1_b__40_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CngKeyTests___c._Open_10_string_CngProvider_CngKeyOpenOptions_1_b__40_0(
+                    arg_0
+        );
+    }
+    static inline void _Open_11_SafeNCryptKeyHandle_CngKeyHandleOpenOptions_0_b__42_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CngKeyTests___c._Open_11_SafeNCryptKeyHandle_CngKeyHandleOpenOptions_0_b__42_0(
+                    arg_0
+        );
+    }
+    static inline void _Open_8_string_0_b__30_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CngKeyTests___c._Open_8_string_0_b__30_0(
+                    arg_0
+        );
+    }
+    static inline void _Open_8_string_1_b__32_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CngKeyTests___c._Open_8_string_1_b__32_0(
+                    arg_0
+        );
+    }
+    static inline void _Open_9_string_CngProvider_0_b__34_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CngKeyTests___c._Open_9_string_CngProvider_0_b__34_0(
+                    arg_0
+        );
+    }
+    static inline void _Open_9_string_CngProvider_1_b__36_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CngKeyTests___c._Open_9_string_CngProvider_1_b__36_0(
+                    arg_0
+        );
+    }
+    static inline void _SetProperty_14_CngProperty_0_b__52_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CngKeyTests___c._SetProperty_14_CngProperty_0_b__52_0(
+                    arg_0
+        );
+    }
+    /// Total number of AOT-compiled methods in this type.
+    static constexpr int32_t MethodCount = 28;
+};
+
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CngPropertyTests {
     static inline void ctor(
                 CHAOS_IL2CPP_INTPTR arg_0
@@ -10756,6 +16243,121 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
     }
     /// Total number of AOT-compiled methods in this type.
     static constexpr int32_t MethodCount = 35;
+};
+
+struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptoConfigTests___c {
+    static inline void cctor(
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptoConfigTests___c.cctor(
+        );
+    }
+    static inline void ctor(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptoConfigTests___c.ctor(
+                    arg_0
+        );
+    }
+    static inline void _AddAlgorithm_0_System_Type_System_String_0_b__0_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptoConfigTests___c._AddAlgorithm_0_System_Type_System_String_0_b__0_0(
+                    arg_0
+        );
+    }
+    static inline void _AddAlgorithm_0_System_Type_System_String_1_b__2_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptoConfigTests___c._AddAlgorithm_0_System_Type_System_String_1_b__2_0(
+                    arg_0
+        );
+    }
+    static inline void _AddAlgorithm_0_System_Type_System_String_2_b__4_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptoConfigTests___c._AddAlgorithm_0_System_Type_System_String_2_b__4_0(
+                    arg_0
+        );
+    }
+    static inline void _AddOID_3_string_System_String_0_b__18_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptoConfigTests___c._AddOID_3_string_System_String_0_b__18_0(
+                    arg_0
+        );
+    }
+    static inline void _AddOID_3_string_System_String_1_b__20_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptoConfigTests___c._AddOID_3_string_System_String_1_b__20_0(
+                    arg_0
+        );
+    }
+    static inline void _AddOID_3_string_System_String_2_b__22_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptoConfigTests___c._AddOID_3_string_System_String_2_b__22_0(
+                    arg_0
+        );
+    }
+    static inline void _AddOID_3_string_System_String_3_b__24_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptoConfigTests___c._AddOID_3_string_System_String_3_b__24_0(
+                    arg_0
+        );
+    }
+    static inline void _CreateFromName_1_string_System_Object_0_b__6_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptoConfigTests___c._CreateFromName_1_string_System_Object_0_b__6_0(
+                    arg_0
+        );
+    }
+    static inline void _CreateFromName_1_string_System_Object_2_b__10_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptoConfigTests___c._CreateFromName_1_string_System_Object_2_b__10_0(
+                    arg_0
+        );
+    }
+    static inline void _CreateFromName_1_string_System_Object_3_b__12_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptoConfigTests___c._CreateFromName_1_string_System_Object_3_b__12_0(
+                    arg_0
+        );
+    }
+    static inline void _CreateFromName_2_string_0_b__14_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptoConfigTests___c._CreateFromName_2_string_0_b__14_0(
+                    arg_0
+        );
+    }
+    static inline void _EncodeOID_5_string_0_b__30_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptoConfigTests___c._EncodeOID_5_string_0_b__30_0(
+                    arg_0
+        );
+    }
+    static inline void _EncodeOID_5_string_1_b__32_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptoConfigTests___c._EncodeOID_5_string_1_b__32_0(
+                    arg_0
+        );
+    }
+    static inline void _MapNameToOID_4_string_0_b__26_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptoConfigTests___c._MapNameToOID_4_string_0_b__26_0(
+                    arg_0
+        );
+    }
+    /// Total number of AOT-compiled methods in this type.
+    static constexpr int32_t MethodCount = 16;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptoStreamTests {
@@ -11418,6 +17020,401 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
     static constexpr int32_t MethodCount = 109;
 };
 
+struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptoStreamTests___c {
+    static inline void cctor(
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptoStreamTests___c.cctor(
+        );
+    }
+    static inline void ctor(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptoStreamTests___c.ctor(
+                    arg_0
+        );
+    }
+    static inline void _BeginRead_8_System_Byte_int_int_System_AsyncCallback_object_0_b__30_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptoStreamTests___c._BeginRead_8_System_Byte_int_int_System_AsyncCallback_object_0_b__30_0(
+                    arg_0
+        );
+    }
+    static inline void _BeginRead_8_System_Byte_int_int_System_AsyncCallback_object_1_b__32_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptoStreamTests___c._BeginRead_8_System_Byte_int_int_System_AsyncCallback_object_1_b__32_0(
+                    arg_0
+        );
+    }
+    static inline void _BeginRead_8_System_Byte_int_int_System_AsyncCallback_object_2_b__34_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptoStreamTests___c._BeginRead_8_System_Byte_int_int_System_AsyncCallback_object_2_b__34_0(
+                    arg_0
+        );
+    }
+    static inline void _BeginRead_8_System_Byte_int_int_System_AsyncCallback_object_3_b__36_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptoStreamTests___c._BeginRead_8_System_Byte_int_int_System_AsyncCallback_object_3_b__36_0(
+                    arg_0
+        );
+    }
+    static inline void _BeginRead_8_System_Byte_int_int_System_AsyncCallback_object_4_b__38_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptoStreamTests___c._BeginRead_8_System_Byte_int_int_System_AsyncCallback_object_4_b__38_0(
+                    arg_0
+        );
+    }
+    static inline void _BeginWrite_15_System_Byte_int_int_System_AsyncCallback_object_0_b__70_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptoStreamTests___c._BeginWrite_15_System_Byte_int_int_System_AsyncCallback_object_0_b__70_0(
+                    arg_0
+        );
+    }
+    static inline void _BeginWrite_15_System_Byte_int_int_System_AsyncCallback_object_1_b__72_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptoStreamTests___c._BeginWrite_15_System_Byte_int_int_System_AsyncCallback_object_1_b__72_0(
+                    arg_0
+        );
+    }
+    static inline void _BeginWrite_15_System_Byte_int_int_System_AsyncCallback_object_2_b__74_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptoStreamTests___c._BeginWrite_15_System_Byte_int_int_System_AsyncCallback_object_2_b__74_0(
+                    arg_0
+        );
+    }
+    static inline void _BeginWrite_15_System_Byte_int_int_System_AsyncCallback_object_3_b__76_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptoStreamTests___c._BeginWrite_15_System_Byte_int_int_System_AsyncCallback_object_3_b__76_0(
+                    arg_0
+        );
+    }
+    static inline void _BeginWrite_15_System_Byte_int_int_System_AsyncCallback_object_4_b__78_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptoStreamTests___c._BeginWrite_15_System_Byte_int_int_System_AsyncCallback_object_4_b__78_0(
+                    arg_0
+        );
+    }
+    static inline void _Clear_20__20_b__104_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptoStreamTests___c._Clear_20__20_b__104_0(
+                    arg_0
+        );
+    }
+    static inline void _CopyToAsync_19_Stream_int_CancellationToken_0_b__98_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptoStreamTests___c._CopyToAsync_19_Stream_int_CancellationToken_0_b__98_0(
+                    arg_0
+        );
+    }
+    static inline void _CopyToAsync_19_Stream_int_CancellationToken_1_b__100_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptoStreamTests___c._CopyToAsync_19_Stream_int_CancellationToken_1_b__100_0(
+                    arg_0
+        );
+    }
+    static inline void _CopyToAsync_19_Stream_int_CancellationToken_2_b__102_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptoStreamTests___c._CopyToAsync_19_Stream_int_CancellationToken_2_b__102_0(
+                    arg_0
+        );
+    }
+    static inline void _CopyTo_18_Stream_int_0_b__92_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptoStreamTests___c._CopyTo_18_Stream_int_0_b__92_0(
+                    arg_0
+        );
+    }
+    static inline void _CopyTo_18_Stream_int_1_b__94_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptoStreamTests___c._CopyTo_18_Stream_int_1_b__94_0(
+                    arg_0
+        );
+    }
+    static inline void _CopyTo_18_Stream_int_2_b__96_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptoStreamTests___c._CopyTo_18_Stream_int_2_b__96_0(
+                    arg_0
+        );
+    }
+    static inline void _DisposeAsync_21__21_b__106_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptoStreamTests___c._DisposeAsync_21__21_b__106_0(
+                    arg_0
+        );
+    }
+    static inline void _EndRead_9_System_IAsyncResult_0_b__40_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptoStreamTests___c._EndRead_9_System_IAsyncResult_0_b__40_0(
+                    arg_0
+        );
+    }
+    static inline void _EndWrite_16_System_IAsyncResult_0_b__80_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptoStreamTests___c._EndWrite_16_System_IAsyncResult_0_b__80_0(
+                    arg_0
+        );
+    }
+    static inline void _FlushAsync_3_CancellationToken_0_b__6_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptoStreamTests___c._FlushAsync_3_CancellationToken_0_b__6_0(
+                    arg_0
+        );
+    }
+    static inline void _FlushFinalBlockAsync_1_CancellationToken_0_b__2_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptoStreamTests___c._FlushFinalBlockAsync_1_CancellationToken_0_b__2_0(
+                    arg_0
+        );
+    }
+    static inline void _FlushFinalBlock_0__0_b__0_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptoStreamTests___c._FlushFinalBlock_0__0_b__0_0(
+                    arg_0
+        );
+    }
+    static inline void _Flush_2__2_b__4_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptoStreamTests___c._Flush_2__2_b__4_0(
+                    arg_0
+        );
+    }
+    static inline void _ReadAsync_6_System_Byte_int_int_CancellationToken_0_b__18_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptoStreamTests___c._ReadAsync_6_System_Byte_int_int_CancellationToken_0_b__18_0(
+                    arg_0
+        );
+    }
+    static inline void _ReadAsync_6_System_Byte_int_int_CancellationToken_1_b__20_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptoStreamTests___c._ReadAsync_6_System_Byte_int_int_CancellationToken_1_b__20_0(
+                    arg_0
+        );
+    }
+    static inline void _ReadAsync_6_System_Byte_int_int_CancellationToken_2_b__22_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptoStreamTests___c._ReadAsync_6_System_Byte_int_int_CancellationToken_2_b__22_0(
+                    arg_0
+        );
+    }
+    static inline void _ReadAsync_6_System_Byte_int_int_CancellationToken_3_b__24_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptoStreamTests___c._ReadAsync_6_System_Byte_int_int_CancellationToken_3_b__24_0(
+                    arg_0
+        );
+    }
+    static inline void _ReadAsync_6_System_Byte_int_int_CancellationToken_4_b__26_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptoStreamTests___c._ReadAsync_6_System_Byte_int_int_CancellationToken_4_b__26_0(
+                    arg_0
+        );
+    }
+    static inline void _ReadAsync_7_System_Memorybyte_CancellationToken_0_b__28_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptoStreamTests___c._ReadAsync_7_System_Memorybyte_CancellationToken_0_b__28_0(
+                    arg_0
+        );
+    }
+    static inline void _ReadByte_10__10_b__42_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptoStreamTests___c._ReadByte_10__10_b__42_0(
+                    arg_0
+        );
+    }
+    static inline void _Read_12_System_Byte_int_int_0_b__48_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptoStreamTests___c._Read_12_System_Byte_int_int_0_b__48_0(
+                    arg_0
+        );
+    }
+    static inline void _Read_12_System_Byte_int_int_1_b__50_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptoStreamTests___c._Read_12_System_Byte_int_int_1_b__50_0(
+                    arg_0
+        );
+    }
+    static inline void _Read_12_System_Byte_int_int_2_b__52_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptoStreamTests___c._Read_12_System_Byte_int_int_2_b__52_0(
+                    arg_0
+        );
+    }
+    static inline void _Read_12_System_Byte_int_int_3_b__54_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptoStreamTests___c._Read_12_System_Byte_int_int_3_b__54_0(
+                    arg_0
+        );
+    }
+    static inline void _Read_12_System_Byte_int_int_4_b__56_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptoStreamTests___c._Read_12_System_Byte_int_int_4_b__56_0(
+                    arg_0
+        );
+    }
+    static inline void _Seek_4_long_SeekOrigin_0_b__8_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptoStreamTests___c._Seek_4_long_SeekOrigin_0_b__8_0(
+                    arg_0
+        );
+    }
+    static inline void _Seek_4_long_SeekOrigin_1_b__10_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptoStreamTests___c._Seek_4_long_SeekOrigin_1_b__10_0(
+                    arg_0
+        );
+    }
+    static inline void _Seek_4_long_SeekOrigin_2_b__12_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptoStreamTests___c._Seek_4_long_SeekOrigin_2_b__12_0(
+                    arg_0
+        );
+    }
+    static inline void _SetLength_5_long_0_b__14_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptoStreamTests___c._SetLength_5_long_0_b__14_0(
+                    arg_0
+        );
+    }
+    static inline void _SetLength_5_long_1_b__16_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptoStreamTests___c._SetLength_5_long_1_b__16_0(
+                    arg_0
+        );
+    }
+    static inline void _WriteAsync_13_System_Byte_int_int_CancellationToken_0_b__58_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptoStreamTests___c._WriteAsync_13_System_Byte_int_int_CancellationToken_0_b__58_0(
+                    arg_0
+        );
+    }
+    static inline void _WriteAsync_13_System_Byte_int_int_CancellationToken_1_b__60_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptoStreamTests___c._WriteAsync_13_System_Byte_int_int_CancellationToken_1_b__60_0(
+                    arg_0
+        );
+    }
+    static inline void _WriteAsync_13_System_Byte_int_int_CancellationToken_2_b__62_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptoStreamTests___c._WriteAsync_13_System_Byte_int_int_CancellationToken_2_b__62_0(
+                    arg_0
+        );
+    }
+    static inline void _WriteAsync_13_System_Byte_int_int_CancellationToken_3_b__64_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptoStreamTests___c._WriteAsync_13_System_Byte_int_int_CancellationToken_3_b__64_0(
+                    arg_0
+        );
+    }
+    static inline void _WriteAsync_13_System_Byte_int_int_CancellationToken_4_b__66_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptoStreamTests___c._WriteAsync_13_System_Byte_int_int_CancellationToken_4_b__66_0(
+                    arg_0
+        );
+    }
+    static inline void _WriteAsync_14_System_ReadOnlyMemorybyte_CancellationToken_0_b__68_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptoStreamTests___c._WriteAsync_14_System_ReadOnlyMemorybyte_CancellationToken_0_b__68_0(
+                    arg_0
+        );
+    }
+    static inline void _WriteByte_11_byte_0_b__44_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptoStreamTests___c._WriteByte_11_byte_0_b__44_0(
+                    arg_0
+        );
+    }
+    static inline void _WriteByte_11_byte_1_b__46_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptoStreamTests___c._WriteByte_11_byte_1_b__46_0(
+                    arg_0
+        );
+    }
+    static inline void _Write_17_System_Byte_int_int_0_b__82_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptoStreamTests___c._Write_17_System_Byte_int_int_0_b__82_0(
+                    arg_0
+        );
+    }
+    static inline void _Write_17_System_Byte_int_int_1_b__84_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptoStreamTests___c._Write_17_System_Byte_int_int_1_b__84_0(
+                    arg_0
+        );
+    }
+    static inline void _Write_17_System_Byte_int_int_2_b__86_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptoStreamTests___c._Write_17_System_Byte_int_int_2_b__86_0(
+                    arg_0
+        );
+    }
+    static inline void _Write_17_System_Byte_int_int_3_b__88_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptoStreamTests___c._Write_17_System_Byte_int_int_3_b__88_0(
+                    arg_0
+        );
+    }
+    static inline void _Write_17_System_Byte_int_int_4_b__90_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptoStreamTests___c._Write_17_System_Byte_int_int_4_b__90_0(
+                    arg_0
+        );
+    }
+    /// Total number of AOT-compiled methods in this type.
+    static constexpr int32_t MethodCount = 56;
+};
+
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptographicOperationsTests {
     static inline void ctor(
                 CHAOS_IL2CPP_INTPTR arg_0
@@ -11694,6 +17691,177 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
     static constexpr int32_t MethodCount = 45;
 };
 
+struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptographicOperationsTests___c {
+    static inline void cctor(
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptographicOperationsTests___c.cctor(
+        );
+    }
+    static inline void ctor(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptographicOperationsTests___c.ctor(
+                    arg_0
+        );
+    }
+    static inline void _HashDataAsync_2_HashAlgorithmName_Stream_System_Memorybyte_CancellationToken_0_b__10_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptographicOperationsTests___c._HashDataAsync_2_HashAlgorithmName_Stream_System_Memorybyte_CancellationToken_0_b__10_0(
+                    arg_0
+        );
+    }
+    static inline void _HashDataAsync_2_HashAlgorithmName_Stream_System_Memorybyte_CancellationToken_1_b__12_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptographicOperationsTests___c._HashDataAsync_2_HashAlgorithmName_Stream_System_Memorybyte_CancellationToken_1_b__12_0(
+                    arg_0
+        );
+    }
+    static inline void _HashDataAsync_3_HashAlgorithmName_Stream_CancellationToken_0_b__14_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptographicOperationsTests___c._HashDataAsync_3_HashAlgorithmName_Stream_CancellationToken_0_b__14_0(
+                    arg_0
+        );
+    }
+    static inline void _HashDataAsync_3_HashAlgorithmName_Stream_CancellationToken_1_b__16_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptographicOperationsTests___c._HashDataAsync_3_HashAlgorithmName_Stream_CancellationToken_1_b__16_0(
+                    arg_0
+        );
+    }
+    static inline void _HashData_0_HashAlgorithmName_System_Byte_0_b__0_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptographicOperationsTests___c._HashData_0_HashAlgorithmName_System_Byte_0_b__0_0(
+                    arg_0
+        );
+    }
+    static inline void _HashData_0_HashAlgorithmName_System_Byte_1_b__2_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptographicOperationsTests___c._HashData_0_HashAlgorithmName_System_Byte_1_b__2_0(
+                    arg_0
+        );
+    }
+    static inline void _HashData_0_HashAlgorithmName_System_Byte_2_b__4_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptographicOperationsTests___c._HashData_0_HashAlgorithmName_System_Byte_2_b__4_0(
+                    arg_0
+        );
+    }
+    static inline void _HashData_1_HashAlgorithmName_Stream_0_b__6_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptographicOperationsTests___c._HashData_1_HashAlgorithmName_Stream_0_b__6_0(
+                    arg_0
+        );
+    }
+    static inline void _HashData_1_HashAlgorithmName_Stream_1_b__8_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptographicOperationsTests___c._HashData_1_HashAlgorithmName_Stream_1_b__8_0(
+                    arg_0
+        );
+    }
+    static inline void _HmacDataAsync_6_HashAlgorithmName_System_Byte_Stream_CancellationToken_0_b__30_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptographicOperationsTests___c._HmacDataAsync_6_HashAlgorithmName_System_Byte_Stream_CancellationToken_0_b__30_0(
+                    arg_0
+        );
+    }
+    static inline void _HmacDataAsync_6_HashAlgorithmName_System_Byte_Stream_CancellationToken_1_b__32_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptographicOperationsTests___c._HmacDataAsync_6_HashAlgorithmName_System_Byte_Stream_CancellationToken_1_b__32_0(
+                    arg_0
+        );
+    }
+    static inline void _HmacDataAsync_6_HashAlgorithmName_System_Byte_Stream_CancellationToken_2_b__34_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptographicOperationsTests___c._HmacDataAsync_6_HashAlgorithmName_System_Byte_Stream_CancellationToken_2_b__34_0(
+                    arg_0
+        );
+    }
+    static inline void _HmacDataAsync_7_HashAlgorithmName_System_ReadOnlyMemorybyte_Stream_System_Memorybyte_CancellationToken_0_b__36_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptographicOperationsTests___c._HmacDataAsync_7_HashAlgorithmName_System_ReadOnlyMemorybyte_Stream_System_Memorybyte_CancellationToken_0_b__36_0(
+                    arg_0
+        );
+    }
+    static inline void _HmacDataAsync_7_HashAlgorithmName_System_ReadOnlyMemorybyte_Stream_System_Memorybyte_CancellationToken_1_b__38_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptographicOperationsTests___c._HmacDataAsync_7_HashAlgorithmName_System_ReadOnlyMemorybyte_Stream_System_Memorybyte_CancellationToken_1_b__38_0(
+                    arg_0
+        );
+    }
+    static inline void _HmacDataAsync_8_HashAlgorithmName_System_ReadOnlyMemorybyte_Stream_CancellationToken_0_b__40_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptographicOperationsTests___c._HmacDataAsync_8_HashAlgorithmName_System_ReadOnlyMemorybyte_Stream_CancellationToken_0_b__40_0(
+                    arg_0
+        );
+    }
+    static inline void _HmacDataAsync_8_HashAlgorithmName_System_ReadOnlyMemorybyte_Stream_CancellationToken_1_b__42_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptographicOperationsTests___c._HmacDataAsync_8_HashAlgorithmName_System_ReadOnlyMemorybyte_Stream_CancellationToken_1_b__42_0(
+                    arg_0
+        );
+    }
+    static inline void _HmacData_4_HashAlgorithmName_System_Byte_System_Byte_0_b__18_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptographicOperationsTests___c._HmacData_4_HashAlgorithmName_System_Byte_System_Byte_0_b__18_0(
+                    arg_0
+        );
+    }
+    static inline void _HmacData_4_HashAlgorithmName_System_Byte_System_Byte_1_b__20_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptographicOperationsTests___c._HmacData_4_HashAlgorithmName_System_Byte_System_Byte_1_b__20_0(
+                    arg_0
+        );
+    }
+    static inline void _HmacData_4_HashAlgorithmName_System_Byte_System_Byte_2_b__22_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptographicOperationsTests___c._HmacData_4_HashAlgorithmName_System_Byte_System_Byte_2_b__22_0(
+                    arg_0
+        );
+    }
+    static inline void _HmacData_5_HashAlgorithmName_System_Byte_Stream_0_b__24_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptographicOperationsTests___c._HmacData_5_HashAlgorithmName_System_Byte_Stream_0_b__24_0(
+                    arg_0
+        );
+    }
+    static inline void _HmacData_5_HashAlgorithmName_System_Byte_Stream_1_b__26_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptographicOperationsTests___c._HmacData_5_HashAlgorithmName_System_Byte_Stream_1_b__26_0(
+                    arg_0
+        );
+    }
+    static inline void _HmacData_5_HashAlgorithmName_System_Byte_Stream_2_b__28_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptographicOperationsTests___c._HmacData_5_HashAlgorithmName_System_Byte_Stream_2_b__28_0(
+                    arg_0
+        );
+    }
+    /// Total number of AOT-compiled methods in this type.
+    static constexpr int32_t MethodCount = 24;
+};
+
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DESCryptoServiceProviderTests {
     static inline void ctor(
                 CHAOS_IL2CPP_INTPTR arg_0
@@ -11826,6 +17994,93 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
     static constexpr int32_t MethodCount = 21;
 };
 
+struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DESCryptoServiceProviderTests___c {
+    static inline void cctor(
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DESCryptoServiceProviderTests___c.cctor(
+        );
+    }
+    static inline void ctor(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DESCryptoServiceProviderTests___c.ctor(
+                    arg_0
+        );
+    }
+    static inline void _CreateDecryptor_2__2_b__4_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DESCryptoServiceProviderTests___c._CreateDecryptor_2__2_b__4_0(
+                    arg_0
+        );
+    }
+    static inline void _CreateDecryptor_3_System_Byte_System_Byte_0_b__6_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DESCryptoServiceProviderTests___c._CreateDecryptor_3_System_Byte_System_Byte_0_b__6_0(
+                    arg_0
+        );
+    }
+    static inline void _CreateDecryptor_3_System_Byte_System_Byte_1_b__8_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DESCryptoServiceProviderTests___c._CreateDecryptor_3_System_Byte_System_Byte_1_b__8_0(
+                    arg_0
+        );
+    }
+    static inline void _CreateDecryptor_3_System_Byte_System_Byte_2_b__10_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DESCryptoServiceProviderTests___c._CreateDecryptor_3_System_Byte_System_Byte_2_b__10_0(
+                    arg_0
+        );
+    }
+    static inline void _CreateEncryptor_4__4_b__12_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DESCryptoServiceProviderTests___c._CreateEncryptor_4__4_b__12_0(
+                    arg_0
+        );
+    }
+    static inline void _CreateEncryptor_5_System_Byte_System_Byte_0_b__14_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DESCryptoServiceProviderTests___c._CreateEncryptor_5_System_Byte_System_Byte_0_b__14_0(
+                    arg_0
+        );
+    }
+    static inline void _CreateEncryptor_5_System_Byte_System_Byte_1_b__16_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DESCryptoServiceProviderTests___c._CreateEncryptor_5_System_Byte_System_Byte_1_b__16_0(
+                    arg_0
+        );
+    }
+    static inline void _CreateEncryptor_5_System_Byte_System_Byte_2_b__18_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DESCryptoServiceProviderTests___c._CreateEncryptor_5_System_Byte_System_Byte_2_b__18_0(
+                    arg_0
+        );
+    }
+    static inline void _GenerateIV_1__1_b__2_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DESCryptoServiceProviderTests___c._GenerateIV_1__1_b__2_0(
+                    arg_0
+        );
+    }
+    static inline void _GenerateKey_0__0_b__0_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DESCryptoServiceProviderTests___c._GenerateKey_0__0_b__0_0(
+                    arg_0
+        );
+    }
+    /// Total number of AOT-compiled methods in this type.
+    static constexpr int32_t MethodCount = 12;
+};
+
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DESTests {
     static inline void ctor(
                 CHAOS_IL2CPP_INTPTR arg_0
@@ -11908,6 +18163,65 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
     }
     /// Total number of AOT-compiled methods in this type.
     static constexpr int32_t MethodCount = 13;
+};
+
+struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DESTests___c {
+    static inline void cctor(
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DESTests___c.cctor(
+        );
+    }
+    static inline void ctor(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DESTests___c.ctor(
+                    arg_0
+        );
+    }
+    static inline void _IsSemiWeakKey_1_System_Byte_0_b__6_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DESTests___c._IsSemiWeakKey_1_System_Byte_0_b__6_0(
+                    arg_0
+        );
+    }
+    static inline void _IsSemiWeakKey_1_System_Byte_1_b__8_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DESTests___c._IsSemiWeakKey_1_System_Byte_1_b__8_0(
+                    arg_0
+        );
+    }
+    static inline void _IsSemiWeakKey_1_System_Byte_2_b__10_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DESTests___c._IsSemiWeakKey_1_System_Byte_2_b__10_0(
+                    arg_0
+        );
+    }
+    static inline void _IsWeakKey_0_System_Byte_0_b__0_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DESTests___c._IsWeakKey_0_System_Byte_0_b__0_0(
+                    arg_0
+        );
+    }
+    static inline void _IsWeakKey_0_System_Byte_1_b__2_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DESTests___c._IsWeakKey_0_System_Byte_1_b__2_0(
+                    arg_0
+        );
+    }
+    static inline void _IsWeakKey_0_System_Byte_2_b__4_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DESTests___c._IsWeakKey_0_System_Byte_2_b__4_0(
+                    arg_0
+        );
+    }
+    /// Total number of AOT-compiled methods in this type.
+    static constexpr int32_t MethodCount = 8;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSACngTests {
@@ -12028,6 +18342,86 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
     }
     /// Total number of AOT-compiled methods in this type.
     static constexpr int32_t MethodCount = 19;
+};
+
+struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSACngTests___c {
+    static inline void cctor(
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSACngTests___c.cctor(
+        );
+    }
+    static inline void ctor(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSACngTests___c.ctor(
+                    arg_0
+        );
+    }
+    static inline void _CreateSignature_2_System_Byte_0_b__6_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSACngTests___c._CreateSignature_2_System_Byte_0_b__6_0(
+                    arg_0
+        );
+    }
+    static inline void _CreateSignature_2_System_Byte_1_b__8_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSACngTests___c._CreateSignature_2_System_Byte_1_b__8_0(
+                    arg_0
+        );
+    }
+    static inline void _CreateSignature_2_System_Byte_2_b__10_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSACngTests___c._CreateSignature_2_System_Byte_2_b__10_0(
+                    arg_0
+        );
+    }
+    static inline void _ExportParameters_1_bool_0_b__2_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSACngTests___c._ExportParameters_1_bool_0_b__2_0(
+                    arg_0
+        );
+    }
+    static inline void _ExportParameters_1_bool_1_b__4_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSACngTests___c._ExportParameters_1_bool_1_b__4_0(
+                    arg_0
+        );
+    }
+    static inline void _ImportParameters_0_DSAParameters_0_b__0_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSACngTests___c._ImportParameters_0_DSAParameters_0_b__0_0(
+                    arg_0
+        );
+    }
+    static inline void _VerifySignature_3_System_Byte_System_Byte_0_b__12_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSACngTests___c._VerifySignature_3_System_Byte_System_Byte_0_b__12_0(
+                    arg_0
+        );
+    }
+    static inline void _VerifySignature_3_System_Byte_System_Byte_1_b__14_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSACngTests___c._VerifySignature_3_System_Byte_System_Byte_1_b__14_0(
+                    arg_0
+        );
+    }
+    static inline void _VerifySignature_3_System_Byte_System_Byte_2_b__16_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSACngTests___c._VerifySignature_3_System_Byte_System_Byte_2_b__16_0(
+                    arg_0
+        );
+    }
+    /// Total number of AOT-compiled methods in this type.
+    static constexpr int32_t MethodCount = 11;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSACryptoServiceProviderTests {
@@ -12462,6 +18856,268 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
     static constexpr int32_t MethodCount = 71;
 };
 
+struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSACryptoServiceProviderTests___c {
+    static inline void cctor(
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSACryptoServiceProviderTests___c.cctor(
+        );
+    }
+    static inline void ctor(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSACryptoServiceProviderTests___c.ctor(
+                    arg_0
+        );
+    }
+    static inline void _CreateSignature_8_System_Byte_0_b__42_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSACryptoServiceProviderTests___c._CreateSignature_8_System_Byte_0_b__42_0(
+                    arg_0
+        );
+    }
+    static inline void _CreateSignature_8_System_Byte_1_b__44_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSACryptoServiceProviderTests___c._CreateSignature_8_System_Byte_1_b__44_0(
+                    arg_0
+        );
+    }
+    static inline void _CreateSignature_8_System_Byte_2_b__46_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSACryptoServiceProviderTests___c._CreateSignature_8_System_Byte_2_b__46_0(
+                    arg_0
+        );
+    }
+    static inline void _ExportCspBlob_0_bool_0_b__0_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSACryptoServiceProviderTests___c._ExportCspBlob_0_bool_0_b__0_0(
+                    arg_0
+        );
+    }
+    static inline void _ExportCspBlob_0_bool_1_b__2_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSACryptoServiceProviderTests___c._ExportCspBlob_0_bool_1_b__2_0(
+                    arg_0
+        );
+    }
+    static inline void _ExportParameters_1_bool_0_b__4_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSACryptoServiceProviderTests___c._ExportParameters_1_bool_0_b__4_0(
+                    arg_0
+        );
+    }
+    static inline void _ExportParameters_1_bool_1_b__6_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSACryptoServiceProviderTests___c._ExportParameters_1_bool_1_b__6_0(
+                    arg_0
+        );
+    }
+    static inline void _ImportCspBlob_2_System_Byte_0_b__8_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSACryptoServiceProviderTests___c._ImportCspBlob_2_System_Byte_0_b__8_0(
+                    arg_0
+        );
+    }
+    static inline void _ImportCspBlob_2_System_Byte_1_b__10_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSACryptoServiceProviderTests___c._ImportCspBlob_2_System_Byte_1_b__10_0(
+                    arg_0
+        );
+    }
+    static inline void _ImportCspBlob_2_System_Byte_2_b__12_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSACryptoServiceProviderTests___c._ImportCspBlob_2_System_Byte_2_b__12_0(
+                    arg_0
+        );
+    }
+    static inline void _ImportParameters_3_DSAParameters_0_b__14_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSACryptoServiceProviderTests___c._ImportParameters_3_DSAParameters_0_b__14_0(
+                    arg_0
+        );
+    }
+    static inline void _SignData_4_Stream_0_b__16_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSACryptoServiceProviderTests___c._SignData_4_Stream_0_b__16_0(
+                    arg_0
+        );
+    }
+    static inline void _SignData_4_Stream_1_b__18_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSACryptoServiceProviderTests___c._SignData_4_Stream_1_b__18_0(
+                    arg_0
+        );
+    }
+    static inline void _SignData_5_System_Byte_0_b__20_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSACryptoServiceProviderTests___c._SignData_5_System_Byte_0_b__20_0(
+                    arg_0
+        );
+    }
+    static inline void _SignData_5_System_Byte_1_b__22_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSACryptoServiceProviderTests___c._SignData_5_System_Byte_1_b__22_0(
+                    arg_0
+        );
+    }
+    static inline void _SignData_5_System_Byte_2_b__24_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSACryptoServiceProviderTests___c._SignData_5_System_Byte_2_b__24_0(
+                    arg_0
+        );
+    }
+    static inline void _SignData_6_System_Byte_int_int_0_b__26_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSACryptoServiceProviderTests___c._SignData_6_System_Byte_int_int_0_b__26_0(
+                    arg_0
+        );
+    }
+    static inline void _SignData_6_System_Byte_int_int_1_b__28_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSACryptoServiceProviderTests___c._SignData_6_System_Byte_int_int_1_b__28_0(
+                    arg_0
+        );
+    }
+    static inline void _SignData_6_System_Byte_int_int_2_b__30_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSACryptoServiceProviderTests___c._SignData_6_System_Byte_int_int_2_b__30_0(
+                    arg_0
+        );
+    }
+    static inline void _SignData_6_System_Byte_int_int_3_b__32_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSACryptoServiceProviderTests___c._SignData_6_System_Byte_int_int_3_b__32_0(
+                    arg_0
+        );
+    }
+    static inline void _SignData_6_System_Byte_int_int_4_b__34_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSACryptoServiceProviderTests___c._SignData_6_System_Byte_int_int_4_b__34_0(
+                    arg_0
+        );
+    }
+    static inline void _SignHash_10_System_Byte_string_0_b__54_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSACryptoServiceProviderTests___c._SignHash_10_System_Byte_string_0_b__54_0(
+                    arg_0
+        );
+    }
+    static inline void _SignHash_10_System_Byte_string_1_b__56_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSACryptoServiceProviderTests___c._SignHash_10_System_Byte_string_1_b__56_0(
+                    arg_0
+        );
+    }
+    static inline void _SignHash_10_System_Byte_string_2_b__58_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSACryptoServiceProviderTests___c._SignHash_10_System_Byte_string_2_b__58_0(
+                    arg_0
+        );
+    }
+    static inline void _SignHash_10_System_Byte_string_3_b__60_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSACryptoServiceProviderTests___c._SignHash_10_System_Byte_string_3_b__60_0(
+                    arg_0
+        );
+    }
+    static inline void _VerifyData_7_System_Byte_System_Byte_0_b__36_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSACryptoServiceProviderTests___c._VerifyData_7_System_Byte_System_Byte_0_b__36_0(
+                    arg_0
+        );
+    }
+    static inline void _VerifyData_7_System_Byte_System_Byte_1_b__38_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSACryptoServiceProviderTests___c._VerifyData_7_System_Byte_System_Byte_1_b__38_0(
+                    arg_0
+        );
+    }
+    static inline void _VerifyData_7_System_Byte_System_Byte_2_b__40_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSACryptoServiceProviderTests___c._VerifyData_7_System_Byte_System_Byte_2_b__40_0(
+                    arg_0
+        );
+    }
+    static inline void _VerifyHash_11_System_Byte_string_System_Byte_0_b__62_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSACryptoServiceProviderTests___c._VerifyHash_11_System_Byte_string_System_Byte_0_b__62_0(
+                    arg_0
+        );
+    }
+    static inline void _VerifyHash_11_System_Byte_string_System_Byte_1_b__64_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSACryptoServiceProviderTests___c._VerifyHash_11_System_Byte_string_System_Byte_1_b__64_0(
+                    arg_0
+        );
+    }
+    static inline void _VerifyHash_11_System_Byte_string_System_Byte_2_b__66_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSACryptoServiceProviderTests___c._VerifyHash_11_System_Byte_string_System_Byte_2_b__66_0(
+                    arg_0
+        );
+    }
+    static inline void _VerifyHash_11_System_Byte_string_System_Byte_3_b__68_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSACryptoServiceProviderTests___c._VerifyHash_11_System_Byte_string_System_Byte_3_b__68_0(
+                    arg_0
+        );
+    }
+    static inline void _VerifySignature_9_System_Byte_System_Byte_0_b__48_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSACryptoServiceProviderTests___c._VerifySignature_9_System_Byte_System_Byte_0_b__48_0(
+                    arg_0
+        );
+    }
+    static inline void _VerifySignature_9_System_Byte_System_Byte_1_b__50_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSACryptoServiceProviderTests___c._VerifySignature_9_System_Byte_System_Byte_1_b__50_0(
+                    arg_0
+        );
+    }
+    static inline void _VerifySignature_9_System_Byte_System_Byte_2_b__52_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSACryptoServiceProviderTests___c._VerifySignature_9_System_Byte_System_Byte_2_b__52_0(
+                    arg_0
+        );
+    }
+    /// Total number of AOT-compiled methods in this type.
+    static constexpr int32_t MethodCount = 37;
+};
+
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSAOpenSslTests {
     static inline void ctor(
                 CHAOS_IL2CPP_INTPTR arg_0
@@ -12594,6 +19250,93 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
     static constexpr int32_t MethodCount = 21;
 };
 
+struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSAOpenSslTests___c {
+    static inline void cctor(
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSAOpenSslTests___c.cctor(
+        );
+    }
+    static inline void ctor(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSAOpenSslTests___c.ctor(
+                    arg_0
+        );
+    }
+    static inline void _CreateSignature_1_System_Byte_0_b__2_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSAOpenSslTests___c._CreateSignature_1_System_Byte_0_b__2_0(
+                    arg_0
+        );
+    }
+    static inline void _CreateSignature_1_System_Byte_1_b__4_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSAOpenSslTests___c._CreateSignature_1_System_Byte_1_b__4_0(
+                    arg_0
+        );
+    }
+    static inline void _CreateSignature_1_System_Byte_2_b__6_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSAOpenSslTests___c._CreateSignature_1_System_Byte_2_b__6_0(
+                    arg_0
+        );
+    }
+    static inline void _DuplicateKeyHandle_0__0_b__0_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSAOpenSslTests___c._DuplicateKeyHandle_0__0_b__0_0(
+                    arg_0
+        );
+    }
+    static inline void _ExportParameters_2_bool_0_b__8_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSAOpenSslTests___c._ExportParameters_2_bool_0_b__8_0(
+                    arg_0
+        );
+    }
+    static inline void _ExportParameters_2_bool_1_b__10_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSAOpenSslTests___c._ExportParameters_2_bool_1_b__10_0(
+                    arg_0
+        );
+    }
+    static inline void _ImportParameters_3_DSAParameters_0_b__12_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSAOpenSslTests___c._ImportParameters_3_DSAParameters_0_b__12_0(
+                    arg_0
+        );
+    }
+    static inline void _VerifySignature_4_System_Byte_System_Byte_0_b__14_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSAOpenSslTests___c._VerifySignature_4_System_Byte_System_Byte_0_b__14_0(
+                    arg_0
+        );
+    }
+    static inline void _VerifySignature_4_System_Byte_System_Byte_1_b__16_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSAOpenSslTests___c._VerifySignature_4_System_Byte_System_Byte_1_b__16_0(
+                    arg_0
+        );
+    }
+    static inline void _VerifySignature_4_System_Byte_System_Byte_2_b__18_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSAOpenSslTests___c._VerifySignature_4_System_Byte_System_Byte_2_b__18_0(
+                    arg_0
+        );
+    }
+    /// Total number of AOT-compiled methods in this type.
+    static constexpr int32_t MethodCount = 12;
+};
+
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSASignatureDeformatterTests {
     static inline void ctor(
                 CHAOS_IL2CPP_INTPTR arg_0
@@ -12678,6 +19421,65 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
     static constexpr int32_t MethodCount = 13;
 };
 
+struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSASignatureDeformatterTests___c {
+    static inline void cctor(
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSASignatureDeformatterTests___c.cctor(
+        );
+    }
+    static inline void ctor(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSASignatureDeformatterTests___c.ctor(
+                    arg_0
+        );
+    }
+    static inline void _SetHashAlgorithm_1_string_0_b__2_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSASignatureDeformatterTests___c._SetHashAlgorithm_1_string_0_b__2_0(
+                    arg_0
+        );
+    }
+    static inline void _SetHashAlgorithm_1_string_1_b__4_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSASignatureDeformatterTests___c._SetHashAlgorithm_1_string_1_b__4_0(
+                    arg_0
+        );
+    }
+    static inline void _SetKey_0_AsymmetricAlgorithm_0_b__0_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSASignatureDeformatterTests___c._SetKey_0_AsymmetricAlgorithm_0_b__0_0(
+                    arg_0
+        );
+    }
+    static inline void _VerifySignature_2_System_Byte_System_Byte_0_b__6_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSASignatureDeformatterTests___c._VerifySignature_2_System_Byte_System_Byte_0_b__6_0(
+                    arg_0
+        );
+    }
+    static inline void _VerifySignature_2_System_Byte_System_Byte_1_b__8_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSASignatureDeformatterTests___c._VerifySignature_2_System_Byte_System_Byte_1_b__8_0(
+                    arg_0
+        );
+    }
+    static inline void _VerifySignature_2_System_Byte_System_Byte_2_b__10_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSASignatureDeformatterTests___c._VerifySignature_2_System_Byte_System_Byte_2_b__10_0(
+                    arg_0
+        );
+    }
+    /// Total number of AOT-compiled methods in this type.
+    static constexpr int32_t MethodCount = 8;
+};
+
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSASignatureFormatterTests {
     static inline void ctor(
                 CHAOS_IL2CPP_INTPTR arg_0
@@ -12760,6 +19562,65 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
     }
     /// Total number of AOT-compiled methods in this type.
     static constexpr int32_t MethodCount = 13;
+};
+
+struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSASignatureFormatterTests___c {
+    static inline void cctor(
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSASignatureFormatterTests___c.cctor(
+        );
+    }
+    static inline void ctor(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSASignatureFormatterTests___c.ctor(
+                    arg_0
+        );
+    }
+    static inline void _CreateSignature_2_System_Byte_0_b__6_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSASignatureFormatterTests___c._CreateSignature_2_System_Byte_0_b__6_0(
+                    arg_0
+        );
+    }
+    static inline void _CreateSignature_2_System_Byte_1_b__8_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSASignatureFormatterTests___c._CreateSignature_2_System_Byte_1_b__8_0(
+                    arg_0
+        );
+    }
+    static inline void _CreateSignature_2_System_Byte_2_b__10_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSASignatureFormatterTests___c._CreateSignature_2_System_Byte_2_b__10_0(
+                    arg_0
+        );
+    }
+    static inline void _SetHashAlgorithm_1_string_0_b__2_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSASignatureFormatterTests___c._SetHashAlgorithm_1_string_0_b__2_0(
+                    arg_0
+        );
+    }
+    static inline void _SetHashAlgorithm_1_string_1_b__4_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSASignatureFormatterTests___c._SetHashAlgorithm_1_string_1_b__4_0(
+                    arg_0
+        );
+    }
+    static inline void _SetKey_0_AsymmetricAlgorithm_0_b__0_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSASignatureFormatterTests___c._SetKey_0_AsymmetricAlgorithm_0_b__0_0(
+                    arg_0
+        );
+    }
+    /// Total number of AOT-compiled methods in this type.
+    static constexpr int32_t MethodCount = 8;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSATests {
@@ -13518,6 +20379,457 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
     static constexpr int32_t MethodCount = 125;
 };
 
+struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSATests___c {
+    static inline void cctor(
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSATests___c.cctor(
+        );
+    }
+    static inline void ctor(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSATests___c.ctor(
+                    arg_0
+        );
+    }
+    static inline void _CreateSignature_14_System_Byte_DSASignatureFormat_0_b__90_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSATests___c._CreateSignature_14_System_Byte_DSASignatureFormat_0_b__90_0(
+                    arg_0
+        );
+    }
+    static inline void _CreateSignature_14_System_Byte_DSASignatureFormat_1_b__92_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSATests___c._CreateSignature_14_System_Byte_DSASignatureFormat_1_b__92_0(
+                    arg_0
+        );
+    }
+    static inline void _CreateSignature_14_System_Byte_DSASignatureFormat_2_b__94_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSATests___c._CreateSignature_14_System_Byte_DSASignatureFormat_2_b__94_0(
+                    arg_0
+        );
+    }
+    static inline void _CreateSignature_2_System_Byte_0_b__6_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSATests___c._CreateSignature_2_System_Byte_0_b__6_0(
+                    arg_0
+        );
+    }
+    static inline void _CreateSignature_2_System_Byte_1_b__8_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSATests___c._CreateSignature_2_System_Byte_1_b__8_0(
+                    arg_0
+        );
+    }
+    static inline void _CreateSignature_2_System_Byte_2_b__10_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSATests___c._CreateSignature_2_System_Byte_2_b__10_0(
+                    arg_0
+        );
+    }
+    static inline void _ExportParameters_0_bool_0_b__0_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSATests___c._ExportParameters_0_bool_0_b__0_0(
+                    arg_0
+        );
+    }
+    static inline void _ExportParameters_0_bool_1_b__2_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSATests___c._ExportParameters_0_bool_1_b__2_0(
+                    arg_0
+        );
+    }
+    static inline void _FromXmlString_19_string_0_b__116_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSATests___c._FromXmlString_19_string_0_b__116_0(
+                    arg_0
+        );
+    }
+    static inline void _FromXmlString_19_string_1_b__118_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSATests___c._FromXmlString_19_string_1_b__118_0(
+                    arg_0
+        );
+    }
+    static inline void _GetMaxSignatureSize_18_DSASignatureFormat_0_b__114_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSATests___c._GetMaxSignatureSize_18_DSASignatureFormat_0_b__114_0(
+                    arg_0
+        );
+    }
+    static inline void _ImportParameters_1_DSAParameters_0_b__4_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSATests___c._ImportParameters_1_DSAParameters_0_b__4_0(
+                    arg_0
+        );
+    }
+    static inline void _SignData_4_System_Byte_HashAlgorithmName_0_b__18_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSATests___c._SignData_4_System_Byte_HashAlgorithmName_0_b__18_0(
+                    arg_0
+        );
+    }
+    static inline void _SignData_4_System_Byte_HashAlgorithmName_1_b__20_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSATests___c._SignData_4_System_Byte_HashAlgorithmName_1_b__20_0(
+                    arg_0
+        );
+    }
+    static inline void _SignData_4_System_Byte_HashAlgorithmName_2_b__22_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSATests___c._SignData_4_System_Byte_HashAlgorithmName_2_b__22_0(
+                    arg_0
+        );
+    }
+    static inline void _SignData_5_System_Byte_HashAlgorithmName_DSASignatureFormat_0_b__24_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSATests___c._SignData_5_System_Byte_HashAlgorithmName_DSASignatureFormat_0_b__24_0(
+                    arg_0
+        );
+    }
+    static inline void _SignData_5_System_Byte_HashAlgorithmName_DSASignatureFormat_1_b__26_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSATests___c._SignData_5_System_Byte_HashAlgorithmName_DSASignatureFormat_1_b__26_0(
+                    arg_0
+        );
+    }
+    static inline void _SignData_5_System_Byte_HashAlgorithmName_DSASignatureFormat_2_b__28_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSATests___c._SignData_5_System_Byte_HashAlgorithmName_DSASignatureFormat_2_b__28_0(
+                    arg_0
+        );
+    }
+    static inline void _SignData_6_System_Byte_int_int_HashAlgorithmName_0_b__30_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSATests___c._SignData_6_System_Byte_int_int_HashAlgorithmName_0_b__30_0(
+                    arg_0
+        );
+    }
+    static inline void _SignData_6_System_Byte_int_int_HashAlgorithmName_1_b__32_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSATests___c._SignData_6_System_Byte_int_int_HashAlgorithmName_1_b__32_0(
+                    arg_0
+        );
+    }
+    static inline void _SignData_6_System_Byte_int_int_HashAlgorithmName_2_b__34_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSATests___c._SignData_6_System_Byte_int_int_HashAlgorithmName_2_b__34_0(
+                    arg_0
+        );
+    }
+    static inline void _SignData_6_System_Byte_int_int_HashAlgorithmName_3_b__36_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSATests___c._SignData_6_System_Byte_int_int_HashAlgorithmName_3_b__36_0(
+                    arg_0
+        );
+    }
+    static inline void _SignData_6_System_Byte_int_int_HashAlgorithmName_4_b__38_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSATests___c._SignData_6_System_Byte_int_int_HashAlgorithmName_4_b__38_0(
+                    arg_0
+        );
+    }
+    static inline void _SignData_7_System_Byte_int_int_HashAlgorithmName_DSASignatureFormat_0_b__40_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSATests___c._SignData_7_System_Byte_int_int_HashAlgorithmName_DSASignatureFormat_0_b__40_0(
+                    arg_0
+        );
+    }
+    static inline void _SignData_7_System_Byte_int_int_HashAlgorithmName_DSASignatureFormat_1_b__42_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSATests___c._SignData_7_System_Byte_int_int_HashAlgorithmName_DSASignatureFormat_1_b__42_0(
+                    arg_0
+        );
+    }
+    static inline void _SignData_7_System_Byte_int_int_HashAlgorithmName_DSASignatureFormat_2_b__44_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSATests___c._SignData_7_System_Byte_int_int_HashAlgorithmName_DSASignatureFormat_2_b__44_0(
+                    arg_0
+        );
+    }
+    static inline void _SignData_7_System_Byte_int_int_HashAlgorithmName_DSASignatureFormat_3_b__46_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSATests___c._SignData_7_System_Byte_int_int_HashAlgorithmName_DSASignatureFormat_3_b__46_0(
+                    arg_0
+        );
+    }
+    static inline void _SignData_7_System_Byte_int_int_HashAlgorithmName_DSASignatureFormat_4_b__48_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSATests___c._SignData_7_System_Byte_int_int_HashAlgorithmName_DSASignatureFormat_4_b__48_0(
+                    arg_0
+        );
+    }
+    static inline void _SignData_8_Stream_HashAlgorithmName_0_b__50_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSATests___c._SignData_8_Stream_HashAlgorithmName_0_b__50_0(
+                    arg_0
+        );
+    }
+    static inline void _SignData_8_Stream_HashAlgorithmName_1_b__52_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSATests___c._SignData_8_Stream_HashAlgorithmName_1_b__52_0(
+                    arg_0
+        );
+    }
+    static inline void _SignData_9_Stream_HashAlgorithmName_DSASignatureFormat_0_b__54_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSATests___c._SignData_9_Stream_HashAlgorithmName_DSASignatureFormat_0_b__54_0(
+                    arg_0
+        );
+    }
+    static inline void _SignData_9_Stream_HashAlgorithmName_DSASignatureFormat_1_b__56_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSATests___c._SignData_9_Stream_HashAlgorithmName_DSASignatureFormat_1_b__56_0(
+                    arg_0
+        );
+    }
+    static inline void _ToXmlString_20_bool_0_b__120_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSATests___c._ToXmlString_20_bool_0_b__120_0(
+                    arg_0
+        );
+    }
+    static inline void _ToXmlString_20_bool_1_b__122_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSATests___c._ToXmlString_20_bool_1_b__122_0(
+                    arg_0
+        );
+    }
+    static inline void _VerifyData_10_System_Byte_System_Byte_HashAlgorithmName_0_b__58_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSATests___c._VerifyData_10_System_Byte_System_Byte_HashAlgorithmName_0_b__58_0(
+                    arg_0
+        );
+    }
+    static inline void _VerifyData_10_System_Byte_System_Byte_HashAlgorithmName_1_b__60_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSATests___c._VerifyData_10_System_Byte_System_Byte_HashAlgorithmName_1_b__60_0(
+                    arg_0
+        );
+    }
+    static inline void _VerifyData_10_System_Byte_System_Byte_HashAlgorithmName_2_b__62_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSATests___c._VerifyData_10_System_Byte_System_Byte_HashAlgorithmName_2_b__62_0(
+                    arg_0
+        );
+    }
+    static inline void _VerifyData_11_System_Byte_int_int_System_Byte_HashAlgorithmName_0_b__64_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSATests___c._VerifyData_11_System_Byte_int_int_System_Byte_HashAlgorithmName_0_b__64_0(
+                    arg_0
+        );
+    }
+    static inline void _VerifyData_11_System_Byte_int_int_System_Byte_HashAlgorithmName_1_b__66_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSATests___c._VerifyData_11_System_Byte_int_int_System_Byte_HashAlgorithmName_1_b__66_0(
+                    arg_0
+        );
+    }
+    static inline void _VerifyData_11_System_Byte_int_int_System_Byte_HashAlgorithmName_2_b__68_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSATests___c._VerifyData_11_System_Byte_int_int_System_Byte_HashAlgorithmName_2_b__68_0(
+                    arg_0
+        );
+    }
+    static inline void _VerifyData_11_System_Byte_int_int_System_Byte_HashAlgorithmName_3_b__70_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSATests___c._VerifyData_11_System_Byte_int_int_System_Byte_HashAlgorithmName_3_b__70_0(
+                    arg_0
+        );
+    }
+    static inline void _VerifyData_11_System_Byte_int_int_System_Byte_HashAlgorithmName_4_b__72_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSATests___c._VerifyData_11_System_Byte_int_int_System_Byte_HashAlgorithmName_4_b__72_0(
+                    arg_0
+        );
+    }
+    static inline void _VerifyData_12_System_Byte_int_int_System_Byte_HashAlgorithmName_DSASignatureFormat_0_b__74_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSATests___c._VerifyData_12_System_Byte_int_int_System_Byte_HashAlgorithmName_DSASignatureFormat_0_b__74_0(
+                    arg_0
+        );
+    }
+    static inline void _VerifyData_12_System_Byte_int_int_System_Byte_HashAlgorithmName_DSASignatureFormat_1_b__76_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSATests___c._VerifyData_12_System_Byte_int_int_System_Byte_HashAlgorithmName_DSASignatureFormat_1_b__76_0(
+                    arg_0
+        );
+    }
+    static inline void _VerifyData_12_System_Byte_int_int_System_Byte_HashAlgorithmName_DSASignatureFormat_2_b__78_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSATests___c._VerifyData_12_System_Byte_int_int_System_Byte_HashAlgorithmName_DSASignatureFormat_2_b__78_0(
+                    arg_0
+        );
+    }
+    static inline void _VerifyData_12_System_Byte_int_int_System_Byte_HashAlgorithmName_DSASignatureFormat_3_b__80_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSATests___c._VerifyData_12_System_Byte_int_int_System_Byte_HashAlgorithmName_DSASignatureFormat_3_b__80_0(
+                    arg_0
+        );
+    }
+    static inline void _VerifyData_12_System_Byte_int_int_System_Byte_HashAlgorithmName_DSASignatureFormat_4_b__82_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSATests___c._VerifyData_12_System_Byte_int_int_System_Byte_HashAlgorithmName_DSASignatureFormat_4_b__82_0(
+                    arg_0
+        );
+    }
+    static inline void _VerifyData_13_Stream_System_Byte_HashAlgorithmName_0_b__84_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSATests___c._VerifyData_13_Stream_System_Byte_HashAlgorithmName_0_b__84_0(
+                    arg_0
+        );
+    }
+    static inline void _VerifyData_13_Stream_System_Byte_HashAlgorithmName_1_b__86_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSATests___c._VerifyData_13_Stream_System_Byte_HashAlgorithmName_1_b__86_0(
+                    arg_0
+        );
+    }
+    static inline void _VerifyData_13_Stream_System_Byte_HashAlgorithmName_2_b__88_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSATests___c._VerifyData_13_Stream_System_Byte_HashAlgorithmName_2_b__88_0(
+                    arg_0
+        );
+    }
+    static inline void _VerifyData_15_System_Byte_System_Byte_HashAlgorithmName_DSASignatureFormat_0_b__96_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSATests___c._VerifyData_15_System_Byte_System_Byte_HashAlgorithmName_DSASignatureFormat_0_b__96_0(
+                    arg_0
+        );
+    }
+    static inline void _VerifyData_15_System_Byte_System_Byte_HashAlgorithmName_DSASignatureFormat_1_b__98_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSATests___c._VerifyData_15_System_Byte_System_Byte_HashAlgorithmName_DSASignatureFormat_1_b__98_0(
+                    arg_0
+        );
+    }
+    static inline void _VerifyData_15_System_Byte_System_Byte_HashAlgorithmName_DSASignatureFormat_2_b__100_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSATests___c._VerifyData_15_System_Byte_System_Byte_HashAlgorithmName_DSASignatureFormat_2_b__100_0(
+                    arg_0
+        );
+    }
+    static inline void _VerifyData_16_Stream_System_Byte_HashAlgorithmName_DSASignatureFormat_0_b__102_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSATests___c._VerifyData_16_Stream_System_Byte_HashAlgorithmName_DSASignatureFormat_0_b__102_0(
+                    arg_0
+        );
+    }
+    static inline void _VerifyData_16_Stream_System_Byte_HashAlgorithmName_DSASignatureFormat_1_b__104_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSATests___c._VerifyData_16_Stream_System_Byte_HashAlgorithmName_DSASignatureFormat_1_b__104_0(
+                    arg_0
+        );
+    }
+    static inline void _VerifyData_16_Stream_System_Byte_HashAlgorithmName_DSASignatureFormat_2_b__106_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSATests___c._VerifyData_16_Stream_System_Byte_HashAlgorithmName_DSASignatureFormat_2_b__106_0(
+                    arg_0
+        );
+    }
+    static inline void _VerifySignature_17_System_Byte_System_Byte_DSASignatureFormat_0_b__108_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSATests___c._VerifySignature_17_System_Byte_System_Byte_DSASignatureFormat_0_b__108_0(
+                    arg_0
+        );
+    }
+    static inline void _VerifySignature_17_System_Byte_System_Byte_DSASignatureFormat_1_b__110_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSATests___c._VerifySignature_17_System_Byte_System_Byte_DSASignatureFormat_1_b__110_0(
+                    arg_0
+        );
+    }
+    static inline void _VerifySignature_17_System_Byte_System_Byte_DSASignatureFormat_2_b__112_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSATests___c._VerifySignature_17_System_Byte_System_Byte_DSASignatureFormat_2_b__112_0(
+                    arg_0
+        );
+    }
+    static inline void _VerifySignature_3_System_Byte_System_Byte_0_b__12_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSATests___c._VerifySignature_3_System_Byte_System_Byte_0_b__12_0(
+                    arg_0
+        );
+    }
+    static inline void _VerifySignature_3_System_Byte_System_Byte_1_b__14_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSATests___c._VerifySignature_3_System_Byte_System_Byte_1_b__14_0(
+                    arg_0
+        );
+    }
+    static inline void _VerifySignature_3_System_Byte_System_Byte_2_b__16_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSATests___c._VerifySignature_3_System_Byte_System_Byte_2_b__16_0(
+                    arg_0
+        );
+    }
+    /// Total number of AOT-compiled methods in this type.
+    static constexpr int32_t MethodCount = 64;
+};
+
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DeriveBytesTests {
     static inline void ctor(
                 CHAOS_IL2CPP_INTPTR arg_0
@@ -13564,6 +20876,44 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
     }
     /// Total number of AOT-compiled methods in this type.
     static constexpr int32_t MethodCount = 7;
+};
+
+struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DeriveBytesTests___c {
+    static inline void cctor(
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DeriveBytesTests___c.cctor(
+        );
+    }
+    static inline void ctor(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DeriveBytesTests___c.ctor(
+                    arg_0
+        );
+    }
+    static inline void _Dispose_1__1_b__4_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DeriveBytesTests___c._Dispose_1__1_b__4_0(
+                    arg_0
+        );
+    }
+    static inline void _GetBytes_0_int_0_b__0_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DeriveBytesTests___c._GetBytes_0_int_0_b__0_0(
+                    arg_0
+        );
+    }
+    static inline void _GetBytes_0_int_1_b__2_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DeriveBytesTests___c._GetBytes_0_int_1_b__2_0(
+                    arg_0
+        );
+    }
+    /// Total number of AOT-compiled methods in this type.
+    static constexpr int32_t MethodCount = 5;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECAlgorithmTests {
@@ -13674,6 +21024,79 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
     static constexpr int32_t MethodCount = 17;
 };
 
+struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECAlgorithmTests___c {
+    static inline void cctor(
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECAlgorithmTests___c.cctor(
+        );
+    }
+    static inline void ctor(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECAlgorithmTests___c.ctor(
+                    arg_0
+        );
+    }
+    static inline void _ExportECPrivateKeyPem_5__5_b__14_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECAlgorithmTests___c._ExportECPrivateKeyPem_5__5_b__14_0(
+                    arg_0
+        );
+    }
+    static inline void _ExportECPrivateKey_4__4_b__12_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECAlgorithmTests___c._ExportECPrivateKey_4__4_b__12_0(
+                    arg_0
+        );
+    }
+    static inline void _ExportExplicitParameters_1_bool_0_b__4_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECAlgorithmTests___c._ExportExplicitParameters_1_bool_0_b__4_0(
+                    arg_0
+        );
+    }
+    static inline void _ExportExplicitParameters_1_bool_1_b__6_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECAlgorithmTests___c._ExportExplicitParameters_1_bool_1_b__6_0(
+                    arg_0
+        );
+    }
+    static inline void _ExportParameters_0_bool_0_b__0_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECAlgorithmTests___c._ExportParameters_0_bool_0_b__0_0(
+                    arg_0
+        );
+    }
+    static inline void _ExportParameters_0_bool_1_b__2_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECAlgorithmTests___c._ExportParameters_0_bool_1_b__2_0(
+                    arg_0
+        );
+    }
+    static inline void _GenerateKey_3_ECCurve_0_b__10_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECAlgorithmTests___c._GenerateKey_3_ECCurve_0_b__10_0(
+                    arg_0
+        );
+    }
+    static inline void _ImportParameters_2_ECParameters_0_b__8_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECAlgorithmTests___c._ImportParameters_2_ECParameters_0_b__8_0(
+                    arg_0
+        );
+    }
+    /// Total number of AOT-compiled methods in this type.
+    static constexpr int32_t MethodCount = 10;
+};
+
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECCurveTests {
     static inline void ctor(
                 CHAOS_IL2CPP_INTPTR arg_0
@@ -13756,6 +21179,58 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
     }
     /// Total number of AOT-compiled methods in this type.
     static constexpr int32_t MethodCount = 13;
+};
+
+struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECCurveTests___c {
+    static inline void cctor(
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECCurveTests___c.cctor(
+        );
+    }
+    static inline void ctor(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECCurveTests___c.ctor(
+                    arg_0
+        );
+    }
+    static inline void _CreateFromFriendlyName_1_string_0_b__2_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECCurveTests___c._CreateFromFriendlyName_1_string_0_b__2_0(
+                    arg_0
+        );
+    }
+    static inline void _CreateFromFriendlyName_1_string_1_b__4_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECCurveTests___c._CreateFromFriendlyName_1_string_1_b__4_0(
+                    arg_0
+        );
+    }
+    static inline void _CreateFromOid_0_Oid_0_b__0_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECCurveTests___c._CreateFromOid_0_Oid_0_b__0_0(
+                    arg_0
+        );
+    }
+    static inline void _CreateFromValue_2_string_0_b__6_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECCurveTests___c._CreateFromValue_2_string_0_b__6_0(
+                    arg_0
+        );
+    }
+    static inline void _CreateFromValue_2_string_1_b__8_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECCurveTests___c._CreateFromValue_2_string_1_b__8_0(
+                    arg_0
+        );
+    }
+    /// Total number of AOT-compiled methods in this type.
+    static constexpr int32_t MethodCount = 7;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDiffieHellmanCngPublicKeyTests {
@@ -13876,6 +21351,86 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
     }
     /// Total number of AOT-compiled methods in this type.
     static constexpr int32_t MethodCount = 19;
+};
+
+struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDiffieHellmanCngPublicKeyTests___c {
+    static inline void cctor(
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDiffieHellmanCngPublicKeyTests___c.cctor(
+        );
+    }
+    static inline void ctor(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDiffieHellmanCngPublicKeyTests___c.ctor(
+                    arg_0
+        );
+    }
+    static inline void _ExportExplicitParameters_4__4_b__14_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDiffieHellmanCngPublicKeyTests___c._ExportExplicitParameters_4__4_b__14_0(
+                    arg_0
+        );
+    }
+    static inline void _ExportParameters_5__5_b__16_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDiffieHellmanCngPublicKeyTests___c._ExportParameters_5__5_b__16_0(
+                    arg_0
+        );
+    }
+    static inline void _FromByteArray_2_System_Byte_CngKeyBlobFormat_0_b__6_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDiffieHellmanCngPublicKeyTests___c._FromByteArray_2_System_Byte_CngKeyBlobFormat_0_b__6_0(
+                    arg_0
+        );
+    }
+    static inline void _FromByteArray_2_System_Byte_CngKeyBlobFormat_1_b__8_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDiffieHellmanCngPublicKeyTests___c._FromByteArray_2_System_Byte_CngKeyBlobFormat_1_b__8_0(
+                    arg_0
+        );
+    }
+    static inline void _FromByteArray_2_System_Byte_CngKeyBlobFormat_2_b__10_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDiffieHellmanCngPublicKeyTests___c._FromByteArray_2_System_Byte_CngKeyBlobFormat_2_b__10_0(
+                    arg_0
+        );
+    }
+    static inline void _FromXmlString_1_string_0_b__2_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDiffieHellmanCngPublicKeyTests___c._FromXmlString_1_string_0_b__2_0(
+                    arg_0
+        );
+    }
+    static inline void _FromXmlString_1_string_1_b__4_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDiffieHellmanCngPublicKeyTests___c._FromXmlString_1_string_1_b__4_0(
+                    arg_0
+        );
+    }
+    static inline void _Import_3__3_b__12_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDiffieHellmanCngPublicKeyTests___c._Import_3__3_b__12_0(
+                    arg_0
+        );
+    }
+    static inline void _ToXmlString_0__0_b__0_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDiffieHellmanCngPublicKeyTests___c._ToXmlString_0__0_b__0_0(
+                    arg_0
+        );
+    }
+    /// Total number of AOT-compiled methods in this type.
+    static constexpr int32_t MethodCount = 11;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDiffieHellmanCngTests {
@@ -14166,6 +21721,184 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
     static constexpr int32_t MethodCount = 47;
 };
 
+struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDiffieHellmanCngTests___c {
+    static inline void cctor(
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDiffieHellmanCngTests___c.cctor(
+        );
+    }
+    static inline void ctor(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDiffieHellmanCngTests___c.ctor(
+                    arg_0
+        );
+    }
+    static inline void _DeriveKeyFromHash_0_ECDiffieHellmanPublicKey_HashAlgorithmName_System_Byte_System_Byte_0_b__0_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDiffieHellmanCngTests___c._DeriveKeyFromHash_0_ECDiffieHellmanPublicKey_HashAlgorithmName_System_Byte_System_Byte_0_b__0_0(
+                    arg_0
+        );
+    }
+    static inline void _DeriveKeyFromHash_0_ECDiffieHellmanPublicKey_HashAlgorithmName_System_Byte_System_Byte_1_b__2_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDiffieHellmanCngTests___c._DeriveKeyFromHash_0_ECDiffieHellmanPublicKey_HashAlgorithmName_System_Byte_System_Byte_1_b__2_0(
+                    arg_0
+        );
+    }
+    static inline void _DeriveKeyFromHash_0_ECDiffieHellmanPublicKey_HashAlgorithmName_System_Byte_System_Byte_2_b__4_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDiffieHellmanCngTests___c._DeriveKeyFromHash_0_ECDiffieHellmanPublicKey_HashAlgorithmName_System_Byte_System_Byte_2_b__4_0(
+                    arg_0
+        );
+    }
+    static inline void _DeriveKeyFromHmac_1_ECDiffieHellmanPublicKey_HashAlgorithmName_System_Byte_System_Byte_System_Byte_0_b__6_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDiffieHellmanCngTests___c._DeriveKeyFromHmac_1_ECDiffieHellmanPublicKey_HashAlgorithmName_System_Byte_System_Byte_System_Byte_0_b__6_0(
+                    arg_0
+        );
+    }
+    static inline void _DeriveKeyFromHmac_1_ECDiffieHellmanPublicKey_HashAlgorithmName_System_Byte_System_Byte_System_Byte_1_b__8_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDiffieHellmanCngTests___c._DeriveKeyFromHmac_1_ECDiffieHellmanPublicKey_HashAlgorithmName_System_Byte_System_Byte_System_Byte_1_b__8_0(
+                    arg_0
+        );
+    }
+    static inline void _DeriveKeyFromHmac_1_ECDiffieHellmanPublicKey_HashAlgorithmName_System_Byte_System_Byte_System_Byte_2_b__10_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDiffieHellmanCngTests___c._DeriveKeyFromHmac_1_ECDiffieHellmanPublicKey_HashAlgorithmName_System_Byte_System_Byte_System_Byte_2_b__10_0(
+                    arg_0
+        );
+    }
+    static inline void _DeriveKeyMaterial_7_ECDiffieHellmanPublicKey_0_b__30_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDiffieHellmanCngTests___c._DeriveKeyMaterial_7_ECDiffieHellmanPublicKey_0_b__30_0(
+                    arg_0
+        );
+    }
+    static inline void _DeriveKeyMaterial_8_CngKey_0_b__32_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDiffieHellmanCngTests___c._DeriveKeyMaterial_8_CngKey_0_b__32_0(
+                    arg_0
+        );
+    }
+    static inline void _DeriveKeyTls_2_ECDiffieHellmanPublicKey_System_Byte_System_Byte_0_b__12_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDiffieHellmanCngTests___c._DeriveKeyTls_2_ECDiffieHellmanPublicKey_System_Byte_System_Byte_0_b__12_0(
+                    arg_0
+        );
+    }
+    static inline void _DeriveKeyTls_2_ECDiffieHellmanPublicKey_System_Byte_System_Byte_1_b__14_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDiffieHellmanCngTests___c._DeriveKeyTls_2_ECDiffieHellmanPublicKey_System_Byte_System_Byte_1_b__14_0(
+                    arg_0
+        );
+    }
+    static inline void _DeriveKeyTls_2_ECDiffieHellmanPublicKey_System_Byte_System_Byte_2_b__16_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDiffieHellmanCngTests___c._DeriveKeyTls_2_ECDiffieHellmanPublicKey_System_Byte_System_Byte_2_b__16_0(
+                    arg_0
+        );
+    }
+    static inline void _DeriveRawSecretAgreement_3_ECDiffieHellmanPublicKey_0_b__18_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDiffieHellmanCngTests___c._DeriveRawSecretAgreement_3_ECDiffieHellmanPublicKey_0_b__18_0(
+                    arg_0
+        );
+    }
+    static inline void _DeriveSecretAgreementHandle_10_CngKey_0_b__36_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDiffieHellmanCngTests___c._DeriveSecretAgreementHandle_10_CngKey_0_b__36_0(
+                    arg_0
+        );
+    }
+    static inline void _DeriveSecretAgreementHandle_9_ECDiffieHellmanPublicKey_0_b__34_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDiffieHellmanCngTests___c._DeriveSecretAgreementHandle_9_ECDiffieHellmanPublicKey_0_b__34_0(
+                    arg_0
+        );
+    }
+    static inline void _ExportExplicitParameters_5_bool_0_b__22_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDiffieHellmanCngTests___c._ExportExplicitParameters_5_bool_0_b__22_0(
+                    arg_0
+        );
+    }
+    static inline void _ExportExplicitParameters_5_bool_1_b__24_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDiffieHellmanCngTests___c._ExportExplicitParameters_5_bool_1_b__24_0(
+                    arg_0
+        );
+    }
+    static inline void _ExportParameters_6_bool_0_b__26_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDiffieHellmanCngTests___c._ExportParameters_6_bool_0_b__26_0(
+                    arg_0
+        );
+    }
+    static inline void _ExportParameters_6_bool_1_b__28_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDiffieHellmanCngTests___c._ExportParameters_6_bool_1_b__28_0(
+                    arg_0
+        );
+    }
+    static inline void _FromXmlString_12_string_ECKeyXmlFormat_0_b__40_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDiffieHellmanCngTests___c._FromXmlString_12_string_ECKeyXmlFormat_0_b__40_0(
+                    arg_0
+        );
+    }
+    static inline void _FromXmlString_12_string_ECKeyXmlFormat_1_b__42_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDiffieHellmanCngTests___c._FromXmlString_12_string_ECKeyXmlFormat_1_b__42_0(
+                    arg_0
+        );
+    }
+    static inline void _GenerateKey_11_ECCurve_0_b__38_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDiffieHellmanCngTests___c._GenerateKey_11_ECCurve_0_b__38_0(
+                    arg_0
+        );
+    }
+    static inline void _ImportParameters_4_ECParameters_0_b__20_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDiffieHellmanCngTests___c._ImportParameters_4_ECParameters_0_b__20_0(
+                    arg_0
+        );
+    }
+    static inline void _ToXmlString_13_ECKeyXmlFormat_0_b__44_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDiffieHellmanCngTests___c._ToXmlString_13_ECKeyXmlFormat_0_b__44_0(
+                    arg_0
+        );
+    }
+    /// Total number of AOT-compiled methods in this type.
+    static constexpr int32_t MethodCount = 25;
+};
+
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDiffieHellmanOpenSslTests {
     static inline void ctor(
                 CHAOS_IL2CPP_INTPTR arg_0
@@ -14224,6 +21957,51 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
     }
     /// Total number of AOT-compiled methods in this type.
     static constexpr int32_t MethodCount = 9;
+};
+
+struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDiffieHellmanOpenSslTests___c {
+    static inline void cctor(
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDiffieHellmanOpenSslTests___c.cctor(
+        );
+    }
+    static inline void ctor(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDiffieHellmanOpenSslTests___c.ctor(
+                    arg_0
+        );
+    }
+    static inline void _DuplicateKeyHandle_0__0_b__0_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDiffieHellmanOpenSslTests___c._DuplicateKeyHandle_0__0_b__0_0(
+                    arg_0
+        );
+    }
+    static inline void _ExportParameters_1_bool_0_b__2_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDiffieHellmanOpenSslTests___c._ExportParameters_1_bool_0_b__2_0(
+                    arg_0
+        );
+    }
+    static inline void _ExportParameters_1_bool_1_b__4_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDiffieHellmanOpenSslTests___c._ExportParameters_1_bool_1_b__4_0(
+                    arg_0
+        );
+    }
+    static inline void _ImportParameters_2_ECParameters_0_b__6_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDiffieHellmanOpenSslTests___c._ImportParameters_2_ECParameters_0_b__6_0(
+                    arg_0
+        );
+    }
+    /// Total number of AOT-compiled methods in this type.
+    static constexpr int32_t MethodCount = 6;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDiffieHellmanPublicKeyTests {
@@ -14296,6 +22074,58 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
     }
     /// Total number of AOT-compiled methods in this type.
     static constexpr int32_t MethodCount = 11;
+};
+
+struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDiffieHellmanPublicKeyTests___c {
+    static inline void cctor(
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDiffieHellmanPublicKeyTests___c.cctor(
+        );
+    }
+    static inline void ctor(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDiffieHellmanPublicKeyTests___c.ctor(
+                    arg_0
+        );
+    }
+    static inline void _Dispose_0__0_b__0_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDiffieHellmanPublicKeyTests___c._Dispose_0__0_b__0_0(
+                    arg_0
+        );
+    }
+    static inline void _ExportExplicitParameters_4__4_b__8_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDiffieHellmanPublicKeyTests___c._ExportExplicitParameters_4__4_b__8_0(
+                    arg_0
+        );
+    }
+    static inline void _ExportParameters_3__3_b__6_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDiffieHellmanPublicKeyTests___c._ExportParameters_3__3_b__6_0(
+                    arg_0
+        );
+    }
+    static inline void _ToByteArray_1__1_b__2_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDiffieHellmanPublicKeyTests___c._ToByteArray_1__1_b__2_0(
+                    arg_0
+        );
+    }
+    static inline void _ToXmlString_2__2_b__4_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDiffieHellmanPublicKeyTests___c._ToXmlString_2__2_b__4_0(
+                    arg_0
+        );
+    }
+    /// Total number of AOT-compiled methods in this type.
+    static constexpr int32_t MethodCount = 7;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDiffieHellmanTests {
@@ -14536,6 +22366,156 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
     }
     /// Total number of AOT-compiled methods in this type.
     static constexpr int32_t MethodCount = 39;
+};
+
+struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDiffieHellmanTests___c {
+    static inline void cctor(
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDiffieHellmanTests___c.cctor(
+        );
+    }
+    static inline void ctor(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDiffieHellmanTests___c.ctor(
+                    arg_0
+        );
+    }
+    static inline void _DeriveKeyFromHash_1_ECDiffieHellmanPublicKey_HashAlgorithmName_0_b__2_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDiffieHellmanTests___c._DeriveKeyFromHash_1_ECDiffieHellmanPublicKey_HashAlgorithmName_0_b__2_0(
+                    arg_0
+        );
+    }
+    static inline void _DeriveKeyFromHash_2_ECDiffieHellmanPublicKey_HashAlgorithmName_System_Byte_System_Byte_0_b__4_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDiffieHellmanTests___c._DeriveKeyFromHash_2_ECDiffieHellmanPublicKey_HashAlgorithmName_System_Byte_System_Byte_0_b__4_0(
+                    arg_0
+        );
+    }
+    static inline void _DeriveKeyFromHash_2_ECDiffieHellmanPublicKey_HashAlgorithmName_System_Byte_System_Byte_1_b__6_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDiffieHellmanTests___c._DeriveKeyFromHash_2_ECDiffieHellmanPublicKey_HashAlgorithmName_System_Byte_System_Byte_1_b__6_0(
+                    arg_0
+        );
+    }
+    static inline void _DeriveKeyFromHash_2_ECDiffieHellmanPublicKey_HashAlgorithmName_System_Byte_System_Byte_2_b__8_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDiffieHellmanTests___c._DeriveKeyFromHash_2_ECDiffieHellmanPublicKey_HashAlgorithmName_System_Byte_System_Byte_2_b__8_0(
+                    arg_0
+        );
+    }
+    static inline void _DeriveKeyFromHmac_3_ECDiffieHellmanPublicKey_HashAlgorithmName_System_Byte_0_b__10_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDiffieHellmanTests___c._DeriveKeyFromHmac_3_ECDiffieHellmanPublicKey_HashAlgorithmName_System_Byte_0_b__10_0(
+                    arg_0
+        );
+    }
+    static inline void _DeriveKeyFromHmac_3_ECDiffieHellmanPublicKey_HashAlgorithmName_System_Byte_1_b__12_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDiffieHellmanTests___c._DeriveKeyFromHmac_3_ECDiffieHellmanPublicKey_HashAlgorithmName_System_Byte_1_b__12_0(
+                    arg_0
+        );
+    }
+    static inline void _DeriveKeyFromHmac_3_ECDiffieHellmanPublicKey_HashAlgorithmName_System_Byte_2_b__14_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDiffieHellmanTests___c._DeriveKeyFromHmac_3_ECDiffieHellmanPublicKey_HashAlgorithmName_System_Byte_2_b__14_0(
+                    arg_0
+        );
+    }
+    static inline void _DeriveKeyFromHmac_4_ECDiffieHellmanPublicKey_HashAlgorithmName_System_Byte_System_Byte_System_Byte_0_b__16_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDiffieHellmanTests___c._DeriveKeyFromHmac_4_ECDiffieHellmanPublicKey_HashAlgorithmName_System_Byte_System_Byte_System_Byte_0_b__16_0(
+                    arg_0
+        );
+    }
+    static inline void _DeriveKeyFromHmac_4_ECDiffieHellmanPublicKey_HashAlgorithmName_System_Byte_System_Byte_System_Byte_1_b__18_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDiffieHellmanTests___c._DeriveKeyFromHmac_4_ECDiffieHellmanPublicKey_HashAlgorithmName_System_Byte_System_Byte_System_Byte_1_b__18_0(
+                    arg_0
+        );
+    }
+    static inline void _DeriveKeyFromHmac_4_ECDiffieHellmanPublicKey_HashAlgorithmName_System_Byte_System_Byte_System_Byte_2_b__20_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDiffieHellmanTests___c._DeriveKeyFromHmac_4_ECDiffieHellmanPublicKey_HashAlgorithmName_System_Byte_System_Byte_System_Byte_2_b__20_0(
+                    arg_0
+        );
+    }
+    static inline void _DeriveKeyMaterial_0_ECDiffieHellmanPublicKey_0_b__0_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDiffieHellmanTests___c._DeriveKeyMaterial_0_ECDiffieHellmanPublicKey_0_b__0_0(
+                    arg_0
+        );
+    }
+    static inline void _DeriveKeyTls_5_ECDiffieHellmanPublicKey_System_Byte_System_Byte_0_b__22_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDiffieHellmanTests___c._DeriveKeyTls_5_ECDiffieHellmanPublicKey_System_Byte_System_Byte_0_b__22_0(
+                    arg_0
+        );
+    }
+    static inline void _DeriveKeyTls_5_ECDiffieHellmanPublicKey_System_Byte_System_Byte_1_b__24_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDiffieHellmanTests___c._DeriveKeyTls_5_ECDiffieHellmanPublicKey_System_Byte_System_Byte_1_b__24_0(
+                    arg_0
+        );
+    }
+    static inline void _DeriveKeyTls_5_ECDiffieHellmanPublicKey_System_Byte_System_Byte_2_b__26_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDiffieHellmanTests___c._DeriveKeyTls_5_ECDiffieHellmanPublicKey_System_Byte_System_Byte_2_b__26_0(
+                    arg_0
+        );
+    }
+    static inline void _DeriveRawSecretAgreement_6_ECDiffieHellmanPublicKey_0_b__28_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDiffieHellmanTests___c._DeriveRawSecretAgreement_6_ECDiffieHellmanPublicKey_0_b__28_0(
+                    arg_0
+        );
+    }
+    static inline void _FromXmlString_7_string_0_b__30_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDiffieHellmanTests___c._FromXmlString_7_string_0_b__30_0(
+                    arg_0
+        );
+    }
+    static inline void _FromXmlString_7_string_1_b__32_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDiffieHellmanTests___c._FromXmlString_7_string_1_b__32_0(
+                    arg_0
+        );
+    }
+    static inline void _ToXmlString_8_bool_0_b__34_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDiffieHellmanTests___c._ToXmlString_8_bool_0_b__34_0(
+                    arg_0
+        );
+    }
+    static inline void _ToXmlString_8_bool_1_b__36_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDiffieHellmanTests___c._ToXmlString_8_bool_1_b__36_0(
+                    arg_0
+        );
+    }
+    /// Total number of AOT-compiled methods in this type.
+    static constexpr int32_t MethodCount = 21;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaCngTests {
@@ -14982,6 +22962,275 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
     static constexpr int32_t MethodCount = 73;
 };
 
+struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaCngTests___c {
+    static inline void cctor(
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaCngTests___c.cctor(
+        );
+    }
+    static inline void ctor(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaCngTests___c.ctor(
+                    arg_0
+        );
+    }
+    static inline void _ExportExplicitParameters_1_bool_0_b__2_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaCngTests___c._ExportExplicitParameters_1_bool_0_b__2_0(
+                    arg_0
+        );
+    }
+    static inline void _ExportExplicitParameters_1_bool_1_b__4_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaCngTests___c._ExportExplicitParameters_1_bool_1_b__4_0(
+                    arg_0
+        );
+    }
+    static inline void _ExportParameters_2_bool_0_b__6_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaCngTests___c._ExportParameters_2_bool_0_b__6_0(
+                    arg_0
+        );
+    }
+    static inline void _ExportParameters_2_bool_1_b__8_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaCngTests___c._ExportParameters_2_bool_1_b__8_0(
+                    arg_0
+        );
+    }
+    static inline void _FromXmlString_5_string_ECKeyXmlFormat_0_b__22_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaCngTests___c._FromXmlString_5_string_ECKeyXmlFormat_0_b__22_0(
+                    arg_0
+        );
+    }
+    static inline void _FromXmlString_5_string_ECKeyXmlFormat_1_b__24_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaCngTests___c._FromXmlString_5_string_ECKeyXmlFormat_1_b__24_0(
+                    arg_0
+        );
+    }
+    static inline void _GenerateKey_13_ECCurve_0_b__70_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaCngTests___c._GenerateKey_13_ECCurve_0_b__70_0(
+                    arg_0
+        );
+    }
+    static inline void _ImportParameters_0_ECParameters_0_b__0_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaCngTests___c._ImportParameters_0_ECParameters_0_b__0_0(
+                    arg_0
+        );
+    }
+    static inline void _SignData_6_System_Byte_0_b__26_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaCngTests___c._SignData_6_System_Byte_0_b__26_0(
+                    arg_0
+        );
+    }
+    static inline void _SignData_6_System_Byte_1_b__28_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaCngTests___c._SignData_6_System_Byte_1_b__28_0(
+                    arg_0
+        );
+    }
+    static inline void _SignData_6_System_Byte_2_b__30_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaCngTests___c._SignData_6_System_Byte_2_b__30_0(
+                    arg_0
+        );
+    }
+    static inline void _SignData_7_System_Byte_int_int_0_b__32_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaCngTests___c._SignData_7_System_Byte_int_int_0_b__32_0(
+                    arg_0
+        );
+    }
+    static inline void _SignData_7_System_Byte_int_int_1_b__34_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaCngTests___c._SignData_7_System_Byte_int_int_1_b__34_0(
+                    arg_0
+        );
+    }
+    static inline void _SignData_7_System_Byte_int_int_2_b__36_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaCngTests___c._SignData_7_System_Byte_int_int_2_b__36_0(
+                    arg_0
+        );
+    }
+    static inline void _SignData_7_System_Byte_int_int_3_b__38_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaCngTests___c._SignData_7_System_Byte_int_int_3_b__38_0(
+                    arg_0
+        );
+    }
+    static inline void _SignData_7_System_Byte_int_int_4_b__40_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaCngTests___c._SignData_7_System_Byte_int_int_4_b__40_0(
+                    arg_0
+        );
+    }
+    static inline void _SignData_8_Stream_0_b__42_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaCngTests___c._SignData_8_Stream_0_b__42_0(
+                    arg_0
+        );
+    }
+    static inline void _SignData_8_Stream_1_b__44_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaCngTests___c._SignData_8_Stream_1_b__44_0(
+                    arg_0
+        );
+    }
+    static inline void _SignHash_3_System_Byte_0_b__10_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaCngTests___c._SignHash_3_System_Byte_0_b__10_0(
+                    arg_0
+        );
+    }
+    static inline void _SignHash_3_System_Byte_1_b__12_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaCngTests___c._SignHash_3_System_Byte_1_b__12_0(
+                    arg_0
+        );
+    }
+    static inline void _SignHash_3_System_Byte_2_b__14_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaCngTests___c._SignHash_3_System_Byte_2_b__14_0(
+                    arg_0
+        );
+    }
+    static inline void _ToXmlString_9_ECKeyXmlFormat_0_b__46_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaCngTests___c._ToXmlString_9_ECKeyXmlFormat_0_b__46_0(
+                    arg_0
+        );
+    }
+    static inline void _VerifyData_10_System_Byte_System_Byte_0_b__48_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaCngTests___c._VerifyData_10_System_Byte_System_Byte_0_b__48_0(
+                    arg_0
+        );
+    }
+    static inline void _VerifyData_10_System_Byte_System_Byte_1_b__50_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaCngTests___c._VerifyData_10_System_Byte_System_Byte_1_b__50_0(
+                    arg_0
+        );
+    }
+    static inline void _VerifyData_10_System_Byte_System_Byte_2_b__52_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaCngTests___c._VerifyData_10_System_Byte_System_Byte_2_b__52_0(
+                    arg_0
+        );
+    }
+    static inline void _VerifyData_11_System_Byte_int_int_System_Byte_0_b__54_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaCngTests___c._VerifyData_11_System_Byte_int_int_System_Byte_0_b__54_0(
+                    arg_0
+        );
+    }
+    static inline void _VerifyData_11_System_Byte_int_int_System_Byte_1_b__56_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaCngTests___c._VerifyData_11_System_Byte_int_int_System_Byte_1_b__56_0(
+                    arg_0
+        );
+    }
+    static inline void _VerifyData_11_System_Byte_int_int_System_Byte_2_b__58_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaCngTests___c._VerifyData_11_System_Byte_int_int_System_Byte_2_b__58_0(
+                    arg_0
+        );
+    }
+    static inline void _VerifyData_11_System_Byte_int_int_System_Byte_3_b__60_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaCngTests___c._VerifyData_11_System_Byte_int_int_System_Byte_3_b__60_0(
+                    arg_0
+        );
+    }
+    static inline void _VerifyData_11_System_Byte_int_int_System_Byte_4_b__62_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaCngTests___c._VerifyData_11_System_Byte_int_int_System_Byte_4_b__62_0(
+                    arg_0
+        );
+    }
+    static inline void _VerifyData_12_Stream_System_Byte_0_b__64_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaCngTests___c._VerifyData_12_Stream_System_Byte_0_b__64_0(
+                    arg_0
+        );
+    }
+    static inline void _VerifyData_12_Stream_System_Byte_1_b__66_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaCngTests___c._VerifyData_12_Stream_System_Byte_1_b__66_0(
+                    arg_0
+        );
+    }
+    static inline void _VerifyData_12_Stream_System_Byte_2_b__68_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaCngTests___c._VerifyData_12_Stream_System_Byte_2_b__68_0(
+                    arg_0
+        );
+    }
+    static inline void _VerifyHash_4_System_Byte_System_Byte_0_b__16_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaCngTests___c._VerifyHash_4_System_Byte_System_Byte_0_b__16_0(
+                    arg_0
+        );
+    }
+    static inline void _VerifyHash_4_System_Byte_System_Byte_1_b__18_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaCngTests___c._VerifyHash_4_System_Byte_System_Byte_1_b__18_0(
+                    arg_0
+        );
+    }
+    static inline void _VerifyHash_4_System_Byte_System_Byte_2_b__20_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaCngTests___c._VerifyHash_4_System_Byte_System_Byte_2_b__20_0(
+                    arg_0
+        );
+    }
+    /// Total number of AOT-compiled methods in this type.
+    static constexpr int32_t MethodCount = 38;
+};
+
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaOpenSslTests {
     static inline void ctor(
                 CHAOS_IL2CPP_INTPTR arg_0
@@ -15076,6 +23325,72 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
     }
     /// Total number of AOT-compiled methods in this type.
     static constexpr int32_t MethodCount = 15;
+};
+
+struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaOpenSslTests___c {
+    static inline void cctor(
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaOpenSslTests___c.cctor(
+        );
+    }
+    static inline void ctor(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaOpenSslTests___c.ctor(
+                    arg_0
+        );
+    }
+    static inline void _DuplicateKeyHandle_0__0_b__0_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaOpenSslTests___c._DuplicateKeyHandle_0__0_b__0_0(
+                    arg_0
+        );
+    }
+    static inline void _SignHash_1_System_Byte_0_b__2_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaOpenSslTests___c._SignHash_1_System_Byte_0_b__2_0(
+                    arg_0
+        );
+    }
+    static inline void _SignHash_1_System_Byte_1_b__4_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaOpenSslTests___c._SignHash_1_System_Byte_1_b__4_0(
+                    arg_0
+        );
+    }
+    static inline void _SignHash_1_System_Byte_2_b__6_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaOpenSslTests___c._SignHash_1_System_Byte_2_b__6_0(
+                    arg_0
+        );
+    }
+    static inline void _VerifyHash_2_System_Byte_System_Byte_0_b__8_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaOpenSslTests___c._VerifyHash_2_System_Byte_System_Byte_0_b__8_0(
+                    arg_0
+        );
+    }
+    static inline void _VerifyHash_2_System_Byte_System_Byte_1_b__10_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaOpenSslTests___c._VerifyHash_2_System_Byte_System_Byte_1_b__10_0(
+                    arg_0
+        );
+    }
+    static inline void _VerifyHash_2_System_Byte_System_Byte_2_b__12_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaOpenSslTests___c._VerifyHash_2_System_Byte_System_Byte_2_b__12_0(
+                    arg_0
+        );
+    }
+    /// Total number of AOT-compiled methods in this type.
+    static constexpr int32_t MethodCount = 9;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaTests {
@@ -15798,6 +24113,436 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
     static constexpr int32_t MethodCount = 119;
 };
 
+struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaTests___c {
+    static inline void cctor(
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaTests___c.cctor(
+        );
+    }
+    static inline void ctor(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaTests___c.ctor(
+                    arg_0
+        );
+    }
+    static inline void _FromXmlString_17_string_0_b__110_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaTests___c._FromXmlString_17_string_0_b__110_0(
+                    arg_0
+        );
+    }
+    static inline void _FromXmlString_17_string_1_b__112_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaTests___c._FromXmlString_17_string_1_b__112_0(
+                    arg_0
+        );
+    }
+    static inline void _GetMaxSignatureSize_16_DSASignatureFormat_0_b__108_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaTests___c._GetMaxSignatureSize_16_DSASignatureFormat_0_b__108_0(
+                    arg_0
+        );
+    }
+    static inline void _SignData_0_System_Byte_HashAlgorithmName_0_b__0_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaTests___c._SignData_0_System_Byte_HashAlgorithmName_0_b__0_0(
+                    arg_0
+        );
+    }
+    static inline void _SignData_0_System_Byte_HashAlgorithmName_1_b__2_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaTests___c._SignData_0_System_Byte_HashAlgorithmName_1_b__2_0(
+                    arg_0
+        );
+    }
+    static inline void _SignData_0_System_Byte_HashAlgorithmName_2_b__4_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaTests___c._SignData_0_System_Byte_HashAlgorithmName_2_b__4_0(
+                    arg_0
+        );
+    }
+    static inline void _SignData_1_System_Byte_int_int_HashAlgorithmName_0_b__6_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaTests___c._SignData_1_System_Byte_int_int_HashAlgorithmName_0_b__6_0(
+                    arg_0
+        );
+    }
+    static inline void _SignData_1_System_Byte_int_int_HashAlgorithmName_1_b__8_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaTests___c._SignData_1_System_Byte_int_int_HashAlgorithmName_1_b__8_0(
+                    arg_0
+        );
+    }
+    static inline void _SignData_1_System_Byte_int_int_HashAlgorithmName_2_b__10_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaTests___c._SignData_1_System_Byte_int_int_HashAlgorithmName_2_b__10_0(
+                    arg_0
+        );
+    }
+    static inline void _SignData_1_System_Byte_int_int_HashAlgorithmName_3_b__12_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaTests___c._SignData_1_System_Byte_int_int_HashAlgorithmName_3_b__12_0(
+                    arg_0
+        );
+    }
+    static inline void _SignData_1_System_Byte_int_int_HashAlgorithmName_4_b__14_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaTests___c._SignData_1_System_Byte_int_int_HashAlgorithmName_4_b__14_0(
+                    arg_0
+        );
+    }
+    static inline void _SignData_2_System_Byte_int_int_HashAlgorithmName_DSASignatureFormat_0_b__16_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaTests___c._SignData_2_System_Byte_int_int_HashAlgorithmName_DSASignatureFormat_0_b__16_0(
+                    arg_0
+        );
+    }
+    static inline void _SignData_2_System_Byte_int_int_HashAlgorithmName_DSASignatureFormat_1_b__18_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaTests___c._SignData_2_System_Byte_int_int_HashAlgorithmName_DSASignatureFormat_1_b__18_0(
+                    arg_0
+        );
+    }
+    static inline void _SignData_2_System_Byte_int_int_HashAlgorithmName_DSASignatureFormat_2_b__20_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaTests___c._SignData_2_System_Byte_int_int_HashAlgorithmName_DSASignatureFormat_2_b__20_0(
+                    arg_0
+        );
+    }
+    static inline void _SignData_2_System_Byte_int_int_HashAlgorithmName_DSASignatureFormat_3_b__22_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaTests___c._SignData_2_System_Byte_int_int_HashAlgorithmName_DSASignatureFormat_3_b__22_0(
+                    arg_0
+        );
+    }
+    static inline void _SignData_2_System_Byte_int_int_HashAlgorithmName_DSASignatureFormat_4_b__24_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaTests___c._SignData_2_System_Byte_int_int_HashAlgorithmName_DSASignatureFormat_4_b__24_0(
+                    arg_0
+        );
+    }
+    static inline void _SignData_3_System_Byte_HashAlgorithmName_DSASignatureFormat_0_b__26_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaTests___c._SignData_3_System_Byte_HashAlgorithmName_DSASignatureFormat_0_b__26_0(
+                    arg_0
+        );
+    }
+    static inline void _SignData_3_System_Byte_HashAlgorithmName_DSASignatureFormat_1_b__28_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaTests___c._SignData_3_System_Byte_HashAlgorithmName_DSASignatureFormat_1_b__28_0(
+                    arg_0
+        );
+    }
+    static inline void _SignData_3_System_Byte_HashAlgorithmName_DSASignatureFormat_2_b__30_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaTests___c._SignData_3_System_Byte_HashAlgorithmName_DSASignatureFormat_2_b__30_0(
+                    arg_0
+        );
+    }
+    static inline void _SignData_4_Stream_HashAlgorithmName_DSASignatureFormat_0_b__32_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaTests___c._SignData_4_Stream_HashAlgorithmName_DSASignatureFormat_0_b__32_0(
+                    arg_0
+        );
+    }
+    static inline void _SignData_4_Stream_HashAlgorithmName_DSASignatureFormat_1_b__34_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaTests___c._SignData_4_Stream_HashAlgorithmName_DSASignatureFormat_1_b__34_0(
+                    arg_0
+        );
+    }
+    static inline void _SignData_6_Stream_HashAlgorithmName_0_b__42_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaTests___c._SignData_6_Stream_HashAlgorithmName_0_b__42_0(
+                    arg_0
+        );
+    }
+    static inline void _SignData_6_Stream_HashAlgorithmName_1_b__44_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaTests___c._SignData_6_Stream_HashAlgorithmName_1_b__44_0(
+                    arg_0
+        );
+    }
+    static inline void _SignHash_13_System_Byte_0_b__90_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaTests___c._SignHash_13_System_Byte_0_b__90_0(
+                    arg_0
+        );
+    }
+    static inline void _SignHash_13_System_Byte_1_b__92_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaTests___c._SignHash_13_System_Byte_1_b__92_0(
+                    arg_0
+        );
+    }
+    static inline void _SignHash_13_System_Byte_2_b__94_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaTests___c._SignHash_13_System_Byte_2_b__94_0(
+                    arg_0
+        );
+    }
+    static inline void _SignHash_5_System_Byte_DSASignatureFormat_0_b__36_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaTests___c._SignHash_5_System_Byte_DSASignatureFormat_0_b__36_0(
+                    arg_0
+        );
+    }
+    static inline void _SignHash_5_System_Byte_DSASignatureFormat_1_b__38_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaTests___c._SignHash_5_System_Byte_DSASignatureFormat_1_b__38_0(
+                    arg_0
+        );
+    }
+    static inline void _SignHash_5_System_Byte_DSASignatureFormat_2_b__40_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaTests___c._SignHash_5_System_Byte_DSASignatureFormat_2_b__40_0(
+                    arg_0
+        );
+    }
+    static inline void _ToXmlString_18_bool_0_b__114_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaTests___c._ToXmlString_18_bool_0_b__114_0(
+                    arg_0
+        );
+    }
+    static inline void _ToXmlString_18_bool_1_b__116_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaTests___c._ToXmlString_18_bool_1_b__116_0(
+                    arg_0
+        );
+    }
+    static inline void _VerifyData_10_System_Byte_System_Byte_HashAlgorithmName_DSASignatureFormat_0_b__72_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaTests___c._VerifyData_10_System_Byte_System_Byte_HashAlgorithmName_DSASignatureFormat_0_b__72_0(
+                    arg_0
+        );
+    }
+    static inline void _VerifyData_10_System_Byte_System_Byte_HashAlgorithmName_DSASignatureFormat_1_b__74_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaTests___c._VerifyData_10_System_Byte_System_Byte_HashAlgorithmName_DSASignatureFormat_1_b__74_0(
+                    arg_0
+        );
+    }
+    static inline void _VerifyData_10_System_Byte_System_Byte_HashAlgorithmName_DSASignatureFormat_2_b__76_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaTests___c._VerifyData_10_System_Byte_System_Byte_HashAlgorithmName_DSASignatureFormat_2_b__76_0(
+                    arg_0
+        );
+    }
+    static inline void _VerifyData_11_Stream_System_Byte_HashAlgorithmName_0_b__78_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaTests___c._VerifyData_11_Stream_System_Byte_HashAlgorithmName_0_b__78_0(
+                    arg_0
+        );
+    }
+    static inline void _VerifyData_11_Stream_System_Byte_HashAlgorithmName_1_b__80_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaTests___c._VerifyData_11_Stream_System_Byte_HashAlgorithmName_1_b__80_0(
+                    arg_0
+        );
+    }
+    static inline void _VerifyData_11_Stream_System_Byte_HashAlgorithmName_2_b__82_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaTests___c._VerifyData_11_Stream_System_Byte_HashAlgorithmName_2_b__82_0(
+                    arg_0
+        );
+    }
+    static inline void _VerifyData_12_Stream_System_Byte_HashAlgorithmName_DSASignatureFormat_0_b__84_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaTests___c._VerifyData_12_Stream_System_Byte_HashAlgorithmName_DSASignatureFormat_0_b__84_0(
+                    arg_0
+        );
+    }
+    static inline void _VerifyData_12_Stream_System_Byte_HashAlgorithmName_DSASignatureFormat_1_b__86_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaTests___c._VerifyData_12_Stream_System_Byte_HashAlgorithmName_DSASignatureFormat_1_b__86_0(
+                    arg_0
+        );
+    }
+    static inline void _VerifyData_12_Stream_System_Byte_HashAlgorithmName_DSASignatureFormat_2_b__88_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaTests___c._VerifyData_12_Stream_System_Byte_HashAlgorithmName_DSASignatureFormat_2_b__88_0(
+                    arg_0
+        );
+    }
+    static inline void _VerifyData_7_System_Byte_System_Byte_HashAlgorithmName_0_b__46_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaTests___c._VerifyData_7_System_Byte_System_Byte_HashAlgorithmName_0_b__46_0(
+                    arg_0
+        );
+    }
+    static inline void _VerifyData_7_System_Byte_System_Byte_HashAlgorithmName_1_b__48_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaTests___c._VerifyData_7_System_Byte_System_Byte_HashAlgorithmName_1_b__48_0(
+                    arg_0
+        );
+    }
+    static inline void _VerifyData_7_System_Byte_System_Byte_HashAlgorithmName_2_b__50_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaTests___c._VerifyData_7_System_Byte_System_Byte_HashAlgorithmName_2_b__50_0(
+                    arg_0
+        );
+    }
+    static inline void _VerifyData_8_System_Byte_int_int_System_Byte_HashAlgorithmName_0_b__52_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaTests___c._VerifyData_8_System_Byte_int_int_System_Byte_HashAlgorithmName_0_b__52_0(
+                    arg_0
+        );
+    }
+    static inline void _VerifyData_8_System_Byte_int_int_System_Byte_HashAlgorithmName_1_b__54_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaTests___c._VerifyData_8_System_Byte_int_int_System_Byte_HashAlgorithmName_1_b__54_0(
+                    arg_0
+        );
+    }
+    static inline void _VerifyData_8_System_Byte_int_int_System_Byte_HashAlgorithmName_2_b__56_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaTests___c._VerifyData_8_System_Byte_int_int_System_Byte_HashAlgorithmName_2_b__56_0(
+                    arg_0
+        );
+    }
+    static inline void _VerifyData_8_System_Byte_int_int_System_Byte_HashAlgorithmName_3_b__58_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaTests___c._VerifyData_8_System_Byte_int_int_System_Byte_HashAlgorithmName_3_b__58_0(
+                    arg_0
+        );
+    }
+    static inline void _VerifyData_8_System_Byte_int_int_System_Byte_HashAlgorithmName_4_b__60_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaTests___c._VerifyData_8_System_Byte_int_int_System_Byte_HashAlgorithmName_4_b__60_0(
+                    arg_0
+        );
+    }
+    static inline void _VerifyData_9_System_Byte_int_int_System_Byte_HashAlgorithmName_DSASignatureFormat_0_b__62_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaTests___c._VerifyData_9_System_Byte_int_int_System_Byte_HashAlgorithmName_DSASignatureFormat_0_b__62_0(
+                    arg_0
+        );
+    }
+    static inline void _VerifyData_9_System_Byte_int_int_System_Byte_HashAlgorithmName_DSASignatureFormat_1_b__64_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaTests___c._VerifyData_9_System_Byte_int_int_System_Byte_HashAlgorithmName_DSASignatureFormat_1_b__64_0(
+                    arg_0
+        );
+    }
+    static inline void _VerifyData_9_System_Byte_int_int_System_Byte_HashAlgorithmName_DSASignatureFormat_2_b__66_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaTests___c._VerifyData_9_System_Byte_int_int_System_Byte_HashAlgorithmName_DSASignatureFormat_2_b__66_0(
+                    arg_0
+        );
+    }
+    static inline void _VerifyData_9_System_Byte_int_int_System_Byte_HashAlgorithmName_DSASignatureFormat_3_b__68_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaTests___c._VerifyData_9_System_Byte_int_int_System_Byte_HashAlgorithmName_DSASignatureFormat_3_b__68_0(
+                    arg_0
+        );
+    }
+    static inline void _VerifyData_9_System_Byte_int_int_System_Byte_HashAlgorithmName_DSASignatureFormat_4_b__70_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaTests___c._VerifyData_9_System_Byte_int_int_System_Byte_HashAlgorithmName_DSASignatureFormat_4_b__70_0(
+                    arg_0
+        );
+    }
+    static inline void _VerifyHash_14_System_Byte_System_Byte_0_b__96_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaTests___c._VerifyHash_14_System_Byte_System_Byte_0_b__96_0(
+                    arg_0
+        );
+    }
+    static inline void _VerifyHash_14_System_Byte_System_Byte_1_b__98_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaTests___c._VerifyHash_14_System_Byte_System_Byte_1_b__98_0(
+                    arg_0
+        );
+    }
+    static inline void _VerifyHash_14_System_Byte_System_Byte_2_b__100_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaTests___c._VerifyHash_14_System_Byte_System_Byte_2_b__100_0(
+                    arg_0
+        );
+    }
+    static inline void _VerifyHash_15_System_Byte_System_Byte_DSASignatureFormat_0_b__102_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaTests___c._VerifyHash_15_System_Byte_System_Byte_DSASignatureFormat_0_b__102_0(
+                    arg_0
+        );
+    }
+    static inline void _VerifyHash_15_System_Byte_System_Byte_DSASignatureFormat_1_b__104_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaTests___c._VerifyHash_15_System_Byte_System_Byte_DSASignatureFormat_1_b__104_0(
+                    arg_0
+        );
+    }
+    static inline void _VerifyHash_15_System_Byte_System_Byte_DSASignatureFormat_2_b__106_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaTests___c._VerifyHash_15_System_Byte_System_Byte_DSASignatureFormat_2_b__106_0(
+                    arg_0
+        );
+    }
+    /// Total number of AOT-compiled methods in this type.
+    static constexpr int32_t MethodCount = 61;
+};
+
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECParametersTests {
     static inline void ctor(
                 CHAOS_IL2CPP_INTPTR arg_0
@@ -15815,6 +24560,30 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
                 CHAOS_IL2CPP_INTPTR arg_0
     ) {
         return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECParametersTests.Validate_0__0(
+                    arg_0
+        );
+    }
+    /// Total number of AOT-compiled methods in this type.
+    static constexpr int32_t MethodCount = 3;
+};
+
+struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECParametersTests___c {
+    static inline void cctor(
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECParametersTests___c.cctor(
+        );
+    }
+    static inline void ctor(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECParametersTests___c.ctor(
+                    arg_0
+        );
+    }
+    static inline void _Validate_0__0_b__0_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECParametersTests___c._Validate_0__0_b__0_0(
                     arg_0
         );
     }
@@ -15978,6 +24747,107 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
     static constexpr int32_t MethodCount = 25;
 };
 
+struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_FromBase64TransformTests___c {
+    static inline void cctor(
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_FromBase64TransformTests___c.cctor(
+        );
+    }
+    static inline void ctor(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_FromBase64TransformTests___c.ctor(
+                    arg_0
+        );
+    }
+    static inline void _Clear_2__2_b__20_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_FromBase64TransformTests___c._Clear_2__2_b__20_0(
+                    arg_0
+        );
+    }
+    static inline void _Dispose_3__3_b__22_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_FromBase64TransformTests___c._Dispose_3__3_b__22_0(
+                    arg_0
+        );
+    }
+    static inline void _TransformBlock_0_System_Byte_int_int_System_Byte_int_0_b__0_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_FromBase64TransformTests___c._TransformBlock_0_System_Byte_int_int_System_Byte_int_0_b__0_0(
+                    arg_0
+        );
+    }
+    static inline void _TransformBlock_0_System_Byte_int_int_System_Byte_int_1_b__2_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_FromBase64TransformTests___c._TransformBlock_0_System_Byte_int_int_System_Byte_int_1_b__2_0(
+                    arg_0
+        );
+    }
+    static inline void _TransformBlock_0_System_Byte_int_int_System_Byte_int_2_b__4_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_FromBase64TransformTests___c._TransformBlock_0_System_Byte_int_int_System_Byte_int_2_b__4_0(
+                    arg_0
+        );
+    }
+    static inline void _TransformBlock_0_System_Byte_int_int_System_Byte_int_3_b__6_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_FromBase64TransformTests___c._TransformBlock_0_System_Byte_int_int_System_Byte_int_3_b__6_0(
+                    arg_0
+        );
+    }
+    static inline void _TransformBlock_0_System_Byte_int_int_System_Byte_int_4_b__8_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_FromBase64TransformTests___c._TransformBlock_0_System_Byte_int_int_System_Byte_int_4_b__8_0(
+                    arg_0
+        );
+    }
+    static inline void _TransformFinalBlock_1_System_Byte_int_int_0_b__10_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_FromBase64TransformTests___c._TransformFinalBlock_1_System_Byte_int_int_0_b__10_0(
+                    arg_0
+        );
+    }
+    static inline void _TransformFinalBlock_1_System_Byte_int_int_1_b__12_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_FromBase64TransformTests___c._TransformFinalBlock_1_System_Byte_int_int_1_b__12_0(
+                    arg_0
+        );
+    }
+    static inline void _TransformFinalBlock_1_System_Byte_int_int_2_b__14_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_FromBase64TransformTests___c._TransformFinalBlock_1_System_Byte_int_int_2_b__14_0(
+                    arg_0
+        );
+    }
+    static inline void _TransformFinalBlock_1_System_Byte_int_int_3_b__16_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_FromBase64TransformTests___c._TransformFinalBlock_1_System_Byte_int_int_3_b__16_0(
+                    arg_0
+        );
+    }
+    static inline void _TransformFinalBlock_1_System_Byte_int_int_4_b__18_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_FromBase64TransformTests___c._TransformFinalBlock_1_System_Byte_int_int_4_b__18_0(
+                    arg_0
+        );
+    }
+    /// Total number of AOT-compiled methods in this type.
+    static constexpr int32_t MethodCount = 14;
+};
+
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HKDFTests {
     static inline void ctor(
                 CHAOS_IL2CPP_INTPTR arg_0
@@ -16120,6 +24990,100 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
     }
     /// Total number of AOT-compiled methods in this type.
     static constexpr int32_t MethodCount = 23;
+};
+
+struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HKDFTests___c {
+    static inline void cctor(
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HKDFTests___c.cctor(
+        );
+    }
+    static inline void ctor(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HKDFTests___c.ctor(
+                    arg_0
+        );
+    }
+    static inline void _DeriveKey_2_HashAlgorithmName_System_Byte_int_System_Byte_System_Byte_0_b__14_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HKDFTests___c._DeriveKey_2_HashAlgorithmName_System_Byte_int_System_Byte_System_Byte_0_b__14_0(
+                    arg_0
+        );
+    }
+    static inline void _DeriveKey_2_HashAlgorithmName_System_Byte_int_System_Byte_System_Byte_1_b__16_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HKDFTests___c._DeriveKey_2_HashAlgorithmName_System_Byte_int_System_Byte_System_Byte_1_b__16_0(
+                    arg_0
+        );
+    }
+    static inline void _DeriveKey_2_HashAlgorithmName_System_Byte_int_System_Byte_System_Byte_2_b__18_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HKDFTests___c._DeriveKey_2_HashAlgorithmName_System_Byte_int_System_Byte_System_Byte_2_b__18_0(
+                    arg_0
+        );
+    }
+    static inline void _DeriveKey_2_HashAlgorithmName_System_Byte_int_System_Byte_System_Byte_3_b__20_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HKDFTests___c._DeriveKey_2_HashAlgorithmName_System_Byte_int_System_Byte_System_Byte_3_b__20_0(
+                    arg_0
+        );
+    }
+    static inline void _Expand_1_HashAlgorithmName_System_Byte_int_System_Byte_0_b__6_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HKDFTests___c._Expand_1_HashAlgorithmName_System_Byte_int_System_Byte_0_b__6_0(
+                    arg_0
+        );
+    }
+    static inline void _Expand_1_HashAlgorithmName_System_Byte_int_System_Byte_1_b__8_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HKDFTests___c._Expand_1_HashAlgorithmName_System_Byte_int_System_Byte_1_b__8_0(
+                    arg_0
+        );
+    }
+    static inline void _Expand_1_HashAlgorithmName_System_Byte_int_System_Byte_2_b__10_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HKDFTests___c._Expand_1_HashAlgorithmName_System_Byte_int_System_Byte_2_b__10_0(
+                    arg_0
+        );
+    }
+    static inline void _Expand_1_HashAlgorithmName_System_Byte_int_System_Byte_3_b__12_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HKDFTests___c._Expand_1_HashAlgorithmName_System_Byte_int_System_Byte_3_b__12_0(
+                    arg_0
+        );
+    }
+    static inline void _Extract_0_HashAlgorithmName_System_Byte_System_Byte_0_b__0_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HKDFTests___c._Extract_0_HashAlgorithmName_System_Byte_System_Byte_0_b__0_0(
+                    arg_0
+        );
+    }
+    static inline void _Extract_0_HashAlgorithmName_System_Byte_System_Byte_1_b__2_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HKDFTests___c._Extract_0_HashAlgorithmName_System_Byte_System_Byte_1_b__2_0(
+                    arg_0
+        );
+    }
+    static inline void _Extract_0_HashAlgorithmName_System_Byte_System_Byte_2_b__4_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HKDFTests___c._Extract_0_HashAlgorithmName_System_Byte_System_Byte_2_b__4_0(
+                    arg_0
+        );
+    }
+    /// Total number of AOT-compiled methods in this type.
+    static constexpr int32_t MethodCount = 13;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACMD5Tests {
@@ -16302,6 +25266,72 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
     static constexpr int32_t MethodCount = 29;
 };
 
+struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACMD5Tests___c {
+    static inline void cctor(
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACMD5Tests___c.cctor(
+        );
+    }
+    static inline void ctor(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACMD5Tests___c.ctor(
+                    arg_0
+        );
+    }
+    static inline void _HashDataAsync_3_System_ReadOnlyMemorybyte_Stream_CancellationToken_0_b__14_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACMD5Tests___c._HashDataAsync_3_System_ReadOnlyMemorybyte_Stream_CancellationToken_0_b__14_0(
+                    arg_0
+        );
+    }
+    static inline void _HashDataAsync_4_System_Byte_Stream_CancellationToken_0_b__18_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACMD5Tests___c._HashDataAsync_4_System_Byte_Stream_CancellationToken_0_b__18_0(
+                    arg_0
+        );
+    }
+    static inline void _HashDataAsync_5_System_ReadOnlyMemorybyte_Stream_System_Memorybyte_CancellationToken_0_b__24_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACMD5Tests___c._HashDataAsync_5_System_ReadOnlyMemorybyte_Stream_System_Memorybyte_CancellationToken_0_b__24_0(
+                    arg_0
+        );
+    }
+    static inline void _HashDataAsync_5_System_ReadOnlyMemorybyte_Stream_System_Memorybyte_CancellationToken_1_b__26_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACMD5Tests___c._HashDataAsync_5_System_ReadOnlyMemorybyte_Stream_System_Memorybyte_CancellationToken_1_b__26_0(
+                    arg_0
+        );
+    }
+    static inline void _HashData_1_System_Byte_System_Byte_0_b__2_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACMD5Tests___c._HashData_1_System_Byte_System_Byte_0_b__2_0(
+                    arg_0
+        );
+    }
+    static inline void _HashData_2_System_Byte_Stream_0_b__8_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACMD5Tests___c._HashData_2_System_Byte_Stream_0_b__8_0(
+                    arg_0
+        );
+    }
+    static inline void _Initialize_0__0_b__0_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACMD5Tests___c._Initialize_0__0_b__0_0(
+                    arg_0
+        );
+    }
+    /// Total number of AOT-compiled methods in this type.
+    static constexpr int32_t MethodCount = 9;
+};
+
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACSHA1Tests {
     static inline void ctor(
                 CHAOS_IL2CPP_INTPTR arg_0
@@ -16480,6 +25510,72 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
     }
     /// Total number of AOT-compiled methods in this type.
     static constexpr int32_t MethodCount = 29;
+};
+
+struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACSHA1Tests___c {
+    static inline void cctor(
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACSHA1Tests___c.cctor(
+        );
+    }
+    static inline void ctor(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACSHA1Tests___c.ctor(
+                    arg_0
+        );
+    }
+    static inline void _HashDataAsync_3_System_ReadOnlyMemorybyte_Stream_CancellationToken_0_b__14_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACSHA1Tests___c._HashDataAsync_3_System_ReadOnlyMemorybyte_Stream_CancellationToken_0_b__14_0(
+                    arg_0
+        );
+    }
+    static inline void _HashDataAsync_4_System_Byte_Stream_CancellationToken_0_b__18_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACSHA1Tests___c._HashDataAsync_4_System_Byte_Stream_CancellationToken_0_b__18_0(
+                    arg_0
+        );
+    }
+    static inline void _HashDataAsync_5_System_ReadOnlyMemorybyte_Stream_System_Memorybyte_CancellationToken_0_b__24_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACSHA1Tests___c._HashDataAsync_5_System_ReadOnlyMemorybyte_Stream_System_Memorybyte_CancellationToken_0_b__24_0(
+                    arg_0
+        );
+    }
+    static inline void _HashDataAsync_5_System_ReadOnlyMemorybyte_Stream_System_Memorybyte_CancellationToken_1_b__26_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACSHA1Tests___c._HashDataAsync_5_System_ReadOnlyMemorybyte_Stream_System_Memorybyte_CancellationToken_1_b__26_0(
+                    arg_0
+        );
+    }
+    static inline void _HashData_1_System_Byte_System_Byte_0_b__2_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACSHA1Tests___c._HashData_1_System_Byte_System_Byte_0_b__2_0(
+                    arg_0
+        );
+    }
+    static inline void _HashData_2_System_Byte_Stream_0_b__8_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACSHA1Tests___c._HashData_2_System_Byte_Stream_0_b__8_0(
+                    arg_0
+        );
+    }
+    static inline void _Initialize_0__0_b__0_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACSHA1Tests___c._Initialize_0__0_b__0_0(
+                    arg_0
+        );
+    }
+    /// Total number of AOT-compiled methods in this type.
+    static constexpr int32_t MethodCount = 9;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACSHA256Tests {
@@ -16662,6 +25758,72 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
     static constexpr int32_t MethodCount = 29;
 };
 
+struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACSHA256Tests___c {
+    static inline void cctor(
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACSHA256Tests___c.cctor(
+        );
+    }
+    static inline void ctor(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACSHA256Tests___c.ctor(
+                    arg_0
+        );
+    }
+    static inline void _HashDataAsync_3_System_ReadOnlyMemorybyte_Stream_CancellationToken_0_b__14_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACSHA256Tests___c._HashDataAsync_3_System_ReadOnlyMemorybyte_Stream_CancellationToken_0_b__14_0(
+                    arg_0
+        );
+    }
+    static inline void _HashDataAsync_4_System_Byte_Stream_CancellationToken_0_b__18_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACSHA256Tests___c._HashDataAsync_4_System_Byte_Stream_CancellationToken_0_b__18_0(
+                    arg_0
+        );
+    }
+    static inline void _HashDataAsync_5_System_ReadOnlyMemorybyte_Stream_System_Memorybyte_CancellationToken_0_b__24_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACSHA256Tests___c._HashDataAsync_5_System_ReadOnlyMemorybyte_Stream_System_Memorybyte_CancellationToken_0_b__24_0(
+                    arg_0
+        );
+    }
+    static inline void _HashDataAsync_5_System_ReadOnlyMemorybyte_Stream_System_Memorybyte_CancellationToken_1_b__26_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACSHA256Tests___c._HashDataAsync_5_System_ReadOnlyMemorybyte_Stream_System_Memorybyte_CancellationToken_1_b__26_0(
+                    arg_0
+        );
+    }
+    static inline void _HashData_1_System_Byte_System_Byte_0_b__2_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACSHA256Tests___c._HashData_1_System_Byte_System_Byte_0_b__2_0(
+                    arg_0
+        );
+    }
+    static inline void _HashData_2_System_Byte_Stream_0_b__8_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACSHA256Tests___c._HashData_2_System_Byte_Stream_0_b__8_0(
+                    arg_0
+        );
+    }
+    static inline void _Initialize_0__0_b__0_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACSHA256Tests___c._Initialize_0__0_b__0_0(
+                    arg_0
+        );
+    }
+    /// Total number of AOT-compiled methods in this type.
+    static constexpr int32_t MethodCount = 9;
+};
+
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACSHA384Tests {
     static inline void ctor(
                 CHAOS_IL2CPP_INTPTR arg_0
@@ -16840,6 +26002,72 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
     }
     /// Total number of AOT-compiled methods in this type.
     static constexpr int32_t MethodCount = 29;
+};
+
+struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACSHA384Tests___c {
+    static inline void cctor(
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACSHA384Tests___c.cctor(
+        );
+    }
+    static inline void ctor(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACSHA384Tests___c.ctor(
+                    arg_0
+        );
+    }
+    static inline void _HashDataAsync_3_System_ReadOnlyMemorybyte_Stream_CancellationToken_0_b__14_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACSHA384Tests___c._HashDataAsync_3_System_ReadOnlyMemorybyte_Stream_CancellationToken_0_b__14_0(
+                    arg_0
+        );
+    }
+    static inline void _HashDataAsync_4_System_Byte_Stream_CancellationToken_0_b__18_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACSHA384Tests___c._HashDataAsync_4_System_Byte_Stream_CancellationToken_0_b__18_0(
+                    arg_0
+        );
+    }
+    static inline void _HashDataAsync_5_System_ReadOnlyMemorybyte_Stream_System_Memorybyte_CancellationToken_0_b__24_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACSHA384Tests___c._HashDataAsync_5_System_ReadOnlyMemorybyte_Stream_System_Memorybyte_CancellationToken_0_b__24_0(
+                    arg_0
+        );
+    }
+    static inline void _HashDataAsync_5_System_ReadOnlyMemorybyte_Stream_System_Memorybyte_CancellationToken_1_b__26_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACSHA384Tests___c._HashDataAsync_5_System_ReadOnlyMemorybyte_Stream_System_Memorybyte_CancellationToken_1_b__26_0(
+                    arg_0
+        );
+    }
+    static inline void _HashData_1_System_Byte_System_Byte_0_b__2_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACSHA384Tests___c._HashData_1_System_Byte_System_Byte_0_b__2_0(
+                    arg_0
+        );
+    }
+    static inline void _HashData_2_System_Byte_Stream_0_b__8_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACSHA384Tests___c._HashData_2_System_Byte_Stream_0_b__8_0(
+                    arg_0
+        );
+    }
+    static inline void _Initialize_0__0_b__0_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACSHA384Tests___c._Initialize_0__0_b__0_0(
+                    arg_0
+        );
+    }
+    /// Total number of AOT-compiled methods in this type.
+    static constexpr int32_t MethodCount = 9;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACSHA3_256Tests {
@@ -17022,6 +26250,72 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
     static constexpr int32_t MethodCount = 29;
 };
 
+struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACSHA3_256Tests___c {
+    static inline void cctor(
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACSHA3_256Tests___c.cctor(
+        );
+    }
+    static inline void ctor(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACSHA3_256Tests___c.ctor(
+                    arg_0
+        );
+    }
+    static inline void _HashDataAsync_3_System_ReadOnlyMemorybyte_Stream_CancellationToken_0_b__14_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACSHA3_256Tests___c._HashDataAsync_3_System_ReadOnlyMemorybyte_Stream_CancellationToken_0_b__14_0(
+                    arg_0
+        );
+    }
+    static inline void _HashDataAsync_4_System_Byte_Stream_CancellationToken_0_b__18_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACSHA3_256Tests___c._HashDataAsync_4_System_Byte_Stream_CancellationToken_0_b__18_0(
+                    arg_0
+        );
+    }
+    static inline void _HashDataAsync_5_System_ReadOnlyMemorybyte_Stream_System_Memorybyte_CancellationToken_0_b__24_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACSHA3_256Tests___c._HashDataAsync_5_System_ReadOnlyMemorybyte_Stream_System_Memorybyte_CancellationToken_0_b__24_0(
+                    arg_0
+        );
+    }
+    static inline void _HashDataAsync_5_System_ReadOnlyMemorybyte_Stream_System_Memorybyte_CancellationToken_1_b__26_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACSHA3_256Tests___c._HashDataAsync_5_System_ReadOnlyMemorybyte_Stream_System_Memorybyte_CancellationToken_1_b__26_0(
+                    arg_0
+        );
+    }
+    static inline void _HashData_1_System_Byte_System_Byte_0_b__2_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACSHA3_256Tests___c._HashData_1_System_Byte_System_Byte_0_b__2_0(
+                    arg_0
+        );
+    }
+    static inline void _HashData_2_System_Byte_Stream_0_b__8_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACSHA3_256Tests___c._HashData_2_System_Byte_Stream_0_b__8_0(
+                    arg_0
+        );
+    }
+    static inline void _Initialize_0__0_b__0_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACSHA3_256Tests___c._Initialize_0__0_b__0_0(
+                    arg_0
+        );
+    }
+    /// Total number of AOT-compiled methods in this type.
+    static constexpr int32_t MethodCount = 9;
+};
+
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACSHA3_384Tests {
     static inline void ctor(
                 CHAOS_IL2CPP_INTPTR arg_0
@@ -17200,6 +26494,72 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
     }
     /// Total number of AOT-compiled methods in this type.
     static constexpr int32_t MethodCount = 29;
+};
+
+struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACSHA3_384Tests___c {
+    static inline void cctor(
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACSHA3_384Tests___c.cctor(
+        );
+    }
+    static inline void ctor(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACSHA3_384Tests___c.ctor(
+                    arg_0
+        );
+    }
+    static inline void _HashDataAsync_3_System_ReadOnlyMemorybyte_Stream_CancellationToken_0_b__14_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACSHA3_384Tests___c._HashDataAsync_3_System_ReadOnlyMemorybyte_Stream_CancellationToken_0_b__14_0(
+                    arg_0
+        );
+    }
+    static inline void _HashDataAsync_4_System_Byte_Stream_CancellationToken_0_b__18_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACSHA3_384Tests___c._HashDataAsync_4_System_Byte_Stream_CancellationToken_0_b__18_0(
+                    arg_0
+        );
+    }
+    static inline void _HashDataAsync_5_System_ReadOnlyMemorybyte_Stream_System_Memorybyte_CancellationToken_0_b__24_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACSHA3_384Tests___c._HashDataAsync_5_System_ReadOnlyMemorybyte_Stream_System_Memorybyte_CancellationToken_0_b__24_0(
+                    arg_0
+        );
+    }
+    static inline void _HashDataAsync_5_System_ReadOnlyMemorybyte_Stream_System_Memorybyte_CancellationToken_1_b__26_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACSHA3_384Tests___c._HashDataAsync_5_System_ReadOnlyMemorybyte_Stream_System_Memorybyte_CancellationToken_1_b__26_0(
+                    arg_0
+        );
+    }
+    static inline void _HashData_1_System_Byte_System_Byte_0_b__2_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACSHA3_384Tests___c._HashData_1_System_Byte_System_Byte_0_b__2_0(
+                    arg_0
+        );
+    }
+    static inline void _HashData_2_System_Byte_Stream_0_b__8_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACSHA3_384Tests___c._HashData_2_System_Byte_Stream_0_b__8_0(
+                    arg_0
+        );
+    }
+    static inline void _Initialize_0__0_b__0_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACSHA3_384Tests___c._Initialize_0__0_b__0_0(
+                    arg_0
+        );
+    }
+    /// Total number of AOT-compiled methods in this type.
+    static constexpr int32_t MethodCount = 9;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACSHA3_512Tests {
@@ -17382,6 +26742,72 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
     static constexpr int32_t MethodCount = 29;
 };
 
+struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACSHA3_512Tests___c {
+    static inline void cctor(
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACSHA3_512Tests___c.cctor(
+        );
+    }
+    static inline void ctor(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACSHA3_512Tests___c.ctor(
+                    arg_0
+        );
+    }
+    static inline void _HashDataAsync_3_System_ReadOnlyMemorybyte_Stream_CancellationToken_0_b__14_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACSHA3_512Tests___c._HashDataAsync_3_System_ReadOnlyMemorybyte_Stream_CancellationToken_0_b__14_0(
+                    arg_0
+        );
+    }
+    static inline void _HashDataAsync_4_System_Byte_Stream_CancellationToken_0_b__18_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACSHA3_512Tests___c._HashDataAsync_4_System_Byte_Stream_CancellationToken_0_b__18_0(
+                    arg_0
+        );
+    }
+    static inline void _HashDataAsync_5_System_ReadOnlyMemorybyte_Stream_System_Memorybyte_CancellationToken_0_b__24_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACSHA3_512Tests___c._HashDataAsync_5_System_ReadOnlyMemorybyte_Stream_System_Memorybyte_CancellationToken_0_b__24_0(
+                    arg_0
+        );
+    }
+    static inline void _HashDataAsync_5_System_ReadOnlyMemorybyte_Stream_System_Memorybyte_CancellationToken_1_b__26_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACSHA3_512Tests___c._HashDataAsync_5_System_ReadOnlyMemorybyte_Stream_System_Memorybyte_CancellationToken_1_b__26_0(
+                    arg_0
+        );
+    }
+    static inline void _HashData_1_System_Byte_System_Byte_0_b__2_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACSHA3_512Tests___c._HashData_1_System_Byte_System_Byte_0_b__2_0(
+                    arg_0
+        );
+    }
+    static inline void _HashData_2_System_Byte_Stream_0_b__8_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACSHA3_512Tests___c._HashData_2_System_Byte_Stream_0_b__8_0(
+                    arg_0
+        );
+    }
+    static inline void _Initialize_0__0_b__0_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACSHA3_512Tests___c._Initialize_0__0_b__0_0(
+                    arg_0
+        );
+    }
+    /// Total number of AOT-compiled methods in this type.
+    static constexpr int32_t MethodCount = 9;
+};
+
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACSHA512Tests {
     static inline void ctor(
                 CHAOS_IL2CPP_INTPTR arg_0
@@ -17562,6 +26988,72 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
     static constexpr int32_t MethodCount = 29;
 };
 
+struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACSHA512Tests___c {
+    static inline void cctor(
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACSHA512Tests___c.cctor(
+        );
+    }
+    static inline void ctor(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACSHA512Tests___c.ctor(
+                    arg_0
+        );
+    }
+    static inline void _HashDataAsync_3_System_ReadOnlyMemorybyte_Stream_CancellationToken_0_b__14_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACSHA512Tests___c._HashDataAsync_3_System_ReadOnlyMemorybyte_Stream_CancellationToken_0_b__14_0(
+                    arg_0
+        );
+    }
+    static inline void _HashDataAsync_4_System_Byte_Stream_CancellationToken_0_b__18_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACSHA512Tests___c._HashDataAsync_4_System_Byte_Stream_CancellationToken_0_b__18_0(
+                    arg_0
+        );
+    }
+    static inline void _HashDataAsync_5_System_ReadOnlyMemorybyte_Stream_System_Memorybyte_CancellationToken_0_b__24_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACSHA512Tests___c._HashDataAsync_5_System_ReadOnlyMemorybyte_Stream_System_Memorybyte_CancellationToken_0_b__24_0(
+                    arg_0
+        );
+    }
+    static inline void _HashDataAsync_5_System_ReadOnlyMemorybyte_Stream_System_Memorybyte_CancellationToken_1_b__26_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACSHA512Tests___c._HashDataAsync_5_System_ReadOnlyMemorybyte_Stream_System_Memorybyte_CancellationToken_1_b__26_0(
+                    arg_0
+        );
+    }
+    static inline void _HashData_1_System_Byte_System_Byte_0_b__2_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACSHA512Tests___c._HashData_1_System_Byte_System_Byte_0_b__2_0(
+                    arg_0
+        );
+    }
+    static inline void _HashData_2_System_Byte_Stream_0_b__8_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACSHA512Tests___c._HashData_2_System_Byte_Stream_0_b__8_0(
+                    arg_0
+        );
+    }
+    static inline void _Initialize_0__0_b__0_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACSHA512Tests___c._Initialize_0__0_b__0_0(
+                    arg_0
+        );
+    }
+    /// Total number of AOT-compiled methods in this type.
+    static constexpr int32_t MethodCount = 9;
+};
+
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACTests {
     static inline void ctor(
                 CHAOS_IL2CPP_INTPTR arg_0
@@ -17579,6 +27071,30 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
                 CHAOS_IL2CPP_INTPTR arg_0
     ) {
         return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACTests.Initialize_0__0(
+                    arg_0
+        );
+    }
+    /// Total number of AOT-compiled methods in this type.
+    static constexpr int32_t MethodCount = 3;
+};
+
+struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACTests___c {
+    static inline void cctor(
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACTests___c.cctor(
+        );
+    }
+    static inline void ctor(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACTests___c.ctor(
+                    arg_0
+        );
+    }
+    static inline void _Initialize_0__0_b__0_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACTests___c._Initialize_0__0_b__0_0(
                     arg_0
         );
     }
@@ -17644,6 +27160,56 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
     }
     /// Total number of AOT-compiled methods in this type.
     static constexpr int32_t MethodCount = 9;
+};
+
+struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HashAlgorithmNameTests___c {
+    static inline void cctor(
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HashAlgorithmNameTests___c.cctor(
+        );
+    }
+    static inline void ctor(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HashAlgorithmNameTests___c.ctor(
+                    arg_0
+        );
+    }
+    static inline void _FromOid_1_string_0_b__4_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HashAlgorithmNameTests___c._FromOid_1_string_0_b__4_0(
+                    arg_0
+        );
+    }
+    static inline void _FromOid_1_string_1_b__6_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HashAlgorithmNameTests___c._FromOid_1_string_1_b__6_0(
+                    arg_0
+        );
+    }
+    /// Total number of AOT-compiled methods in this type.
+    static constexpr int32_t MethodCount = 4;
+};
+
+struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HashAlgorithmNameTests___c__DisplayClass0_0 {
+    static inline void ctor(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HashAlgorithmNameTests___c__DisplayClass0_0.ctor(
+                    arg_0
+        );
+    }
+    static inline void _TryFromOid_0_string_HashAlgorithmName_0_b__0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HashAlgorithmNameTests___c__DisplayClass0_0._TryFromOid_0_string_HashAlgorithmName_0_b__0(
+                    arg_0
+        );
+    }
+    /// Total number of AOT-compiled methods in this type.
+    static constexpr int32_t MethodCount = 2;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HashAlgorithmTests {
@@ -17958,6 +27524,198 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
     static constexpr int32_t MethodCount = 51;
 };
 
+struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HashAlgorithmTests___c {
+    static inline void cctor(
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HashAlgorithmTests___c.cctor(
+        );
+    }
+    static inline void ctor(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HashAlgorithmTests___c.ctor(
+                    arg_0
+        );
+    }
+    static inline void _Clear_5__5_b__26_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HashAlgorithmTests___c._Clear_5__5_b__26_0(
+                    arg_0
+        );
+    }
+    static inline void _ComputeHashAsync_3_Stream_CancellationToken_0_b__20_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HashAlgorithmTests___c._ComputeHashAsync_3_Stream_CancellationToken_0_b__20_0(
+                    arg_0
+        );
+    }
+    static inline void _ComputeHashAsync_3_Stream_CancellationToken_1_b__22_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HashAlgorithmTests___c._ComputeHashAsync_3_Stream_CancellationToken_1_b__22_0(
+                    arg_0
+        );
+    }
+    static inline void _ComputeHash_0_System_Byte_0_b__0_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HashAlgorithmTests___c._ComputeHash_0_System_Byte_0_b__0_0(
+                    arg_0
+        );
+    }
+    static inline void _ComputeHash_0_System_Byte_1_b__2_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HashAlgorithmTests___c._ComputeHash_0_System_Byte_1_b__2_0(
+                    arg_0
+        );
+    }
+    static inline void _ComputeHash_0_System_Byte_2_b__4_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HashAlgorithmTests___c._ComputeHash_0_System_Byte_2_b__4_0(
+                    arg_0
+        );
+    }
+    static inline void _ComputeHash_1_System_Byte_int_int_0_b__6_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HashAlgorithmTests___c._ComputeHash_1_System_Byte_int_int_0_b__6_0(
+                    arg_0
+        );
+    }
+    static inline void _ComputeHash_1_System_Byte_int_int_1_b__8_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HashAlgorithmTests___c._ComputeHash_1_System_Byte_int_int_1_b__8_0(
+                    arg_0
+        );
+    }
+    static inline void _ComputeHash_1_System_Byte_int_int_2_b__10_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HashAlgorithmTests___c._ComputeHash_1_System_Byte_int_int_2_b__10_0(
+                    arg_0
+        );
+    }
+    static inline void _ComputeHash_1_System_Byte_int_int_3_b__12_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HashAlgorithmTests___c._ComputeHash_1_System_Byte_int_int_3_b__12_0(
+                    arg_0
+        );
+    }
+    static inline void _ComputeHash_1_System_Byte_int_int_4_b__14_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HashAlgorithmTests___c._ComputeHash_1_System_Byte_int_int_4_b__14_0(
+                    arg_0
+        );
+    }
+    static inline void _ComputeHash_2_Stream_0_b__16_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HashAlgorithmTests___c._ComputeHash_2_Stream_0_b__16_0(
+                    arg_0
+        );
+    }
+    static inline void _ComputeHash_2_Stream_1_b__18_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HashAlgorithmTests___c._ComputeHash_2_Stream_1_b__18_0(
+                    arg_0
+        );
+    }
+    static inline void _Dispose_4__4_b__24_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HashAlgorithmTests___c._Dispose_4__4_b__24_0(
+                    arg_0
+        );
+    }
+    static inline void _Initialize_8__8_b__48_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HashAlgorithmTests___c._Initialize_8__8_b__48_0(
+                    arg_0
+        );
+    }
+    static inline void _TransformBlock_6_System_Byte_int_int_System_Byte_int_0_b__28_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HashAlgorithmTests___c._TransformBlock_6_System_Byte_int_int_System_Byte_int_0_b__28_0(
+                    arg_0
+        );
+    }
+    static inline void _TransformBlock_6_System_Byte_int_int_System_Byte_int_1_b__30_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HashAlgorithmTests___c._TransformBlock_6_System_Byte_int_int_System_Byte_int_1_b__30_0(
+                    arg_0
+        );
+    }
+    static inline void _TransformBlock_6_System_Byte_int_int_System_Byte_int_2_b__32_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HashAlgorithmTests___c._TransformBlock_6_System_Byte_int_int_System_Byte_int_2_b__32_0(
+                    arg_0
+        );
+    }
+    static inline void _TransformBlock_6_System_Byte_int_int_System_Byte_int_3_b__34_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HashAlgorithmTests___c._TransformBlock_6_System_Byte_int_int_System_Byte_int_3_b__34_0(
+                    arg_0
+        );
+    }
+    static inline void _TransformBlock_6_System_Byte_int_int_System_Byte_int_4_b__36_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HashAlgorithmTests___c._TransformBlock_6_System_Byte_int_int_System_Byte_int_4_b__36_0(
+                    arg_0
+        );
+    }
+    static inline void _TransformFinalBlock_7_System_Byte_int_int_0_b__38_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HashAlgorithmTests___c._TransformFinalBlock_7_System_Byte_int_int_0_b__38_0(
+                    arg_0
+        );
+    }
+    static inline void _TransformFinalBlock_7_System_Byte_int_int_1_b__40_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HashAlgorithmTests___c._TransformFinalBlock_7_System_Byte_int_int_1_b__40_0(
+                    arg_0
+        );
+    }
+    static inline void _TransformFinalBlock_7_System_Byte_int_int_2_b__42_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HashAlgorithmTests___c._TransformFinalBlock_7_System_Byte_int_int_2_b__42_0(
+                    arg_0
+        );
+    }
+    static inline void _TransformFinalBlock_7_System_Byte_int_int_3_b__44_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HashAlgorithmTests___c._TransformFinalBlock_7_System_Byte_int_int_3_b__44_0(
+                    arg_0
+        );
+    }
+    static inline void _TransformFinalBlock_7_System_Byte_int_int_4_b__46_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HashAlgorithmTests___c._TransformFinalBlock_7_System_Byte_int_int_4_b__46_0(
+                    arg_0
+        );
+    }
+    /// Total number of AOT-compiled methods in this type.
+    static constexpr int32_t MethodCount = 27;
+};
+
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_IncrementalHashTests {
     static inline void ctor(
                 CHAOS_IL2CPP_INTPTR arg_0
@@ -18160,6 +27918,135 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
     }
     /// Total number of AOT-compiled methods in this type.
     static constexpr int32_t MethodCount = 33;
+};
+
+struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_IncrementalHashTests___c {
+    static inline void cctor(
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_IncrementalHashTests___c.cctor(
+        );
+    }
+    static inline void ctor(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_IncrementalHashTests___c.ctor(
+                    arg_0
+        );
+    }
+    static inline void _AppendData_0_System_Byte_0_b__0_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_IncrementalHashTests___c._AppendData_0_System_Byte_0_b__0_0(
+                    arg_0
+        );
+    }
+    static inline void _AppendData_0_System_Byte_1_b__2_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_IncrementalHashTests___c._AppendData_0_System_Byte_1_b__2_0(
+                    arg_0
+        );
+    }
+    static inline void _AppendData_0_System_Byte_2_b__4_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_IncrementalHashTests___c._AppendData_0_System_Byte_2_b__4_0(
+                    arg_0
+        );
+    }
+    static inline void _AppendData_1_System_Byte_int_int_0_b__6_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_IncrementalHashTests___c._AppendData_1_System_Byte_int_int_0_b__6_0(
+                    arg_0
+        );
+    }
+    static inline void _AppendData_1_System_Byte_int_int_1_b__8_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_IncrementalHashTests___c._AppendData_1_System_Byte_int_int_1_b__8_0(
+                    arg_0
+        );
+    }
+    static inline void _AppendData_1_System_Byte_int_int_2_b__10_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_IncrementalHashTests___c._AppendData_1_System_Byte_int_int_2_b__10_0(
+                    arg_0
+        );
+    }
+    static inline void _AppendData_1_System_Byte_int_int_3_b__12_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_IncrementalHashTests___c._AppendData_1_System_Byte_int_int_3_b__12_0(
+                    arg_0
+        );
+    }
+    static inline void _AppendData_1_System_Byte_int_int_4_b__14_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_IncrementalHashTests___c._AppendData_1_System_Byte_int_int_4_b__14_0(
+                    arg_0
+        );
+    }
+    static inline void _Clone_4__4_b__20_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_IncrementalHashTests___c._Clone_4__4_b__20_0(
+                    arg_0
+        );
+    }
+    static inline void _CreateHMAC_7_HashAlgorithmName_System_Byte_0_b__26_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_IncrementalHashTests___c._CreateHMAC_7_HashAlgorithmName_System_Byte_0_b__26_0(
+                    arg_0
+        );
+    }
+    static inline void _CreateHMAC_7_HashAlgorithmName_System_Byte_1_b__28_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_IncrementalHashTests___c._CreateHMAC_7_HashAlgorithmName_System_Byte_1_b__28_0(
+                    arg_0
+        );
+    }
+    static inline void _CreateHMAC_7_HashAlgorithmName_System_Byte_2_b__30_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_IncrementalHashTests___c._CreateHMAC_7_HashAlgorithmName_System_Byte_2_b__30_0(
+                    arg_0
+        );
+    }
+    static inline void _CreateHash_6_HashAlgorithmName_0_b__24_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_IncrementalHashTests___c._CreateHash_6_HashAlgorithmName_0_b__24_0(
+                    arg_0
+        );
+    }
+    static inline void _Dispose_5__5_b__22_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_IncrementalHashTests___c._Dispose_5__5_b__22_0(
+                    arg_0
+        );
+    }
+    static inline void _GetCurrentHash_3__3_b__18_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_IncrementalHashTests___c._GetCurrentHash_3__3_b__18_0(
+                    arg_0
+        );
+    }
+    static inline void _GetHashAndReset_2__2_b__16_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_IncrementalHashTests___c._GetHashAndReset_2__2_b__16_0(
+                    arg_0
+        );
+    }
+    /// Total number of AOT-compiled methods in this type.
+    static constexpr int32_t MethodCount = 18;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Kmac128Tests {
@@ -18486,6 +28373,149 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
     static constexpr int32_t MethodCount = 53;
 };
 
+struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Kmac128Tests___c {
+    static inline void cctor(
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Kmac128Tests___c.cctor(
+        );
+    }
+    static inline void ctor(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Kmac128Tests___c.ctor(
+                    arg_0
+        );
+    }
+    static inline void _AppendData_0_System_Byte_0_b__0_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Kmac128Tests___c._AppendData_0_System_Byte_0_b__0_0(
+                    arg_0
+        );
+    }
+    static inline void _AppendData_0_System_Byte_1_b__2_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Kmac128Tests___c._AppendData_0_System_Byte_1_b__2_0(
+                    arg_0
+        );
+    }
+    static inline void _AppendData_0_System_Byte_2_b__4_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Kmac128Tests___c._AppendData_0_System_Byte_2_b__4_0(
+                    arg_0
+        );
+    }
+    static inline void _Clone_3__3_b__14_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Kmac128Tests___c._Clone_3__3_b__14_0(
+                    arg_0
+        );
+    }
+    static inline void _Dispose_4__4_b__16_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Kmac128Tests___c._Dispose_4__4_b__16_0(
+                    arg_0
+        );
+    }
+    static inline void _GetCurrentHash_2_int_0_b__10_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Kmac128Tests___c._GetCurrentHash_2_int_0_b__10_0(
+                    arg_0
+        );
+    }
+    static inline void _GetCurrentHash_2_int_1_b__12_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Kmac128Tests___c._GetCurrentHash_2_int_1_b__12_0(
+                    arg_0
+        );
+    }
+    static inline void _GetHashAndReset_1_int_0_b__6_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Kmac128Tests___c._GetHashAndReset_1_int_0_b__6_0(
+                    arg_0
+        );
+    }
+    static inline void _GetHashAndReset_1_int_1_b__8_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Kmac128Tests___c._GetHashAndReset_1_int_1_b__8_0(
+                    arg_0
+        );
+    }
+    static inline void _HashDataAsync_7_System_Byte_Stream_int_System_Byte_CancellationToken_0_b__34_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Kmac128Tests___c._HashDataAsync_7_System_Byte_Stream_int_System_Byte_CancellationToken_0_b__34_0(
+                    arg_0
+        );
+    }
+    static inline void _HashDataAsync_7_System_Byte_Stream_int_System_Byte_CancellationToken_1_b__36_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Kmac128Tests___c._HashDataAsync_7_System_Byte_Stream_int_System_Byte_CancellationToken_1_b__36_0(
+                    arg_0
+        );
+    }
+    static inline void _HashDataAsync_8_System_ReadOnlyMemorybyte_Stream_int_System_ReadOnlyMemorybyte_CancellationToken_0_b__42_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Kmac128Tests___c._HashDataAsync_8_System_ReadOnlyMemorybyte_Stream_int_System_ReadOnlyMemorybyte_CancellationToken_0_b__42_0(
+                    arg_0
+        );
+    }
+    static inline void _HashDataAsync_8_System_ReadOnlyMemorybyte_Stream_int_System_ReadOnlyMemorybyte_CancellationToken_1_b__44_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Kmac128Tests___c._HashDataAsync_8_System_ReadOnlyMemorybyte_Stream_int_System_ReadOnlyMemorybyte_CancellationToken_1_b__44_0(
+                    arg_0
+        );
+    }
+    static inline void _HashDataAsync_9_System_ReadOnlyMemorybyte_Stream_System_Memorybyte_System_ReadOnlyMemorybyte_CancellationToken_0_b__48_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Kmac128Tests___c._HashDataAsync_9_System_ReadOnlyMemorybyte_Stream_System_Memorybyte_System_ReadOnlyMemorybyte_CancellationToken_0_b__48_0(
+                    arg_0
+        );
+    }
+    static inline void _HashData_5_System_Byte_System_Byte_int_System_Byte_0_b__18_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Kmac128Tests___c._HashData_5_System_Byte_System_Byte_int_System_Byte_0_b__18_0(
+                    arg_0
+        );
+    }
+    static inline void _HashData_5_System_Byte_System_Byte_int_System_Byte_1_b__20_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Kmac128Tests___c._HashData_5_System_Byte_System_Byte_int_System_Byte_1_b__20_0(
+                    arg_0
+        );
+    }
+    static inline void _HashData_6_System_Byte_Stream_int_System_Byte_0_b__26_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Kmac128Tests___c._HashData_6_System_Byte_Stream_int_System_Byte_0_b__26_0(
+                    arg_0
+        );
+    }
+    static inline void _HashData_6_System_Byte_Stream_int_System_Byte_1_b__28_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Kmac128Tests___c._HashData_6_System_Byte_Stream_int_System_Byte_1_b__28_0(
+                    arg_0
+        );
+    }
+    /// Total number of AOT-compiled methods in this type.
+    static constexpr int32_t MethodCount = 20;
+};
+
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Kmac256Tests {
     static inline void ctor(
                 CHAOS_IL2CPP_INTPTR arg_0
@@ -18808,6 +28838,149 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
     }
     /// Total number of AOT-compiled methods in this type.
     static constexpr int32_t MethodCount = 53;
+};
+
+struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Kmac256Tests___c {
+    static inline void cctor(
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Kmac256Tests___c.cctor(
+        );
+    }
+    static inline void ctor(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Kmac256Tests___c.ctor(
+                    arg_0
+        );
+    }
+    static inline void _AppendData_0_System_Byte_0_b__0_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Kmac256Tests___c._AppendData_0_System_Byte_0_b__0_0(
+                    arg_0
+        );
+    }
+    static inline void _AppendData_0_System_Byte_1_b__2_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Kmac256Tests___c._AppendData_0_System_Byte_1_b__2_0(
+                    arg_0
+        );
+    }
+    static inline void _AppendData_0_System_Byte_2_b__4_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Kmac256Tests___c._AppendData_0_System_Byte_2_b__4_0(
+                    arg_0
+        );
+    }
+    static inline void _Clone_3__3_b__14_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Kmac256Tests___c._Clone_3__3_b__14_0(
+                    arg_0
+        );
+    }
+    static inline void _Dispose_4__4_b__16_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Kmac256Tests___c._Dispose_4__4_b__16_0(
+                    arg_0
+        );
+    }
+    static inline void _GetCurrentHash_2_int_0_b__10_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Kmac256Tests___c._GetCurrentHash_2_int_0_b__10_0(
+                    arg_0
+        );
+    }
+    static inline void _GetCurrentHash_2_int_1_b__12_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Kmac256Tests___c._GetCurrentHash_2_int_1_b__12_0(
+                    arg_0
+        );
+    }
+    static inline void _GetHashAndReset_1_int_0_b__6_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Kmac256Tests___c._GetHashAndReset_1_int_0_b__6_0(
+                    arg_0
+        );
+    }
+    static inline void _GetHashAndReset_1_int_1_b__8_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Kmac256Tests___c._GetHashAndReset_1_int_1_b__8_0(
+                    arg_0
+        );
+    }
+    static inline void _HashDataAsync_7_System_Byte_Stream_int_System_Byte_CancellationToken_0_b__34_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Kmac256Tests___c._HashDataAsync_7_System_Byte_Stream_int_System_Byte_CancellationToken_0_b__34_0(
+                    arg_0
+        );
+    }
+    static inline void _HashDataAsync_7_System_Byte_Stream_int_System_Byte_CancellationToken_1_b__36_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Kmac256Tests___c._HashDataAsync_7_System_Byte_Stream_int_System_Byte_CancellationToken_1_b__36_0(
+                    arg_0
+        );
+    }
+    static inline void _HashDataAsync_8_System_ReadOnlyMemorybyte_Stream_int_System_ReadOnlyMemorybyte_CancellationToken_0_b__42_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Kmac256Tests___c._HashDataAsync_8_System_ReadOnlyMemorybyte_Stream_int_System_ReadOnlyMemorybyte_CancellationToken_0_b__42_0(
+                    arg_0
+        );
+    }
+    static inline void _HashDataAsync_8_System_ReadOnlyMemorybyte_Stream_int_System_ReadOnlyMemorybyte_CancellationToken_1_b__44_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Kmac256Tests___c._HashDataAsync_8_System_ReadOnlyMemorybyte_Stream_int_System_ReadOnlyMemorybyte_CancellationToken_1_b__44_0(
+                    arg_0
+        );
+    }
+    static inline void _HashDataAsync_9_System_ReadOnlyMemorybyte_Stream_System_Memorybyte_System_ReadOnlyMemorybyte_CancellationToken_0_b__48_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Kmac256Tests___c._HashDataAsync_9_System_ReadOnlyMemorybyte_Stream_System_Memorybyte_System_ReadOnlyMemorybyte_CancellationToken_0_b__48_0(
+                    arg_0
+        );
+    }
+    static inline void _HashData_5_System_Byte_System_Byte_int_System_Byte_0_b__18_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Kmac256Tests___c._HashData_5_System_Byte_System_Byte_int_System_Byte_0_b__18_0(
+                    arg_0
+        );
+    }
+    static inline void _HashData_5_System_Byte_System_Byte_int_System_Byte_1_b__20_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Kmac256Tests___c._HashData_5_System_Byte_System_Byte_int_System_Byte_1_b__20_0(
+                    arg_0
+        );
+    }
+    static inline void _HashData_6_System_Byte_Stream_int_System_Byte_0_b__26_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Kmac256Tests___c._HashData_6_System_Byte_Stream_int_System_Byte_0_b__26_0(
+                    arg_0
+        );
+    }
+    static inline void _HashData_6_System_Byte_Stream_int_System_Byte_1_b__28_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Kmac256Tests___c._HashData_6_System_Byte_Stream_int_System_Byte_1_b__28_0(
+                    arg_0
+        );
+    }
+    /// Total number of AOT-compiled methods in this type.
+    static constexpr int32_t MethodCount = 20;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_KmacXof128Tests {
@@ -19134,6 +29307,149 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
     static constexpr int32_t MethodCount = 53;
 };
 
+struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_KmacXof128Tests___c {
+    static inline void cctor(
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_KmacXof128Tests___c.cctor(
+        );
+    }
+    static inline void ctor(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_KmacXof128Tests___c.ctor(
+                    arg_0
+        );
+    }
+    static inline void _AppendData_0_System_Byte_0_b__0_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_KmacXof128Tests___c._AppendData_0_System_Byte_0_b__0_0(
+                    arg_0
+        );
+    }
+    static inline void _AppendData_0_System_Byte_1_b__2_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_KmacXof128Tests___c._AppendData_0_System_Byte_1_b__2_0(
+                    arg_0
+        );
+    }
+    static inline void _AppendData_0_System_Byte_2_b__4_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_KmacXof128Tests___c._AppendData_0_System_Byte_2_b__4_0(
+                    arg_0
+        );
+    }
+    static inline void _Clone_3__3_b__14_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_KmacXof128Tests___c._Clone_3__3_b__14_0(
+                    arg_0
+        );
+    }
+    static inline void _Dispose_4__4_b__16_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_KmacXof128Tests___c._Dispose_4__4_b__16_0(
+                    arg_0
+        );
+    }
+    static inline void _GetCurrentHash_2_int_0_b__10_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_KmacXof128Tests___c._GetCurrentHash_2_int_0_b__10_0(
+                    arg_0
+        );
+    }
+    static inline void _GetCurrentHash_2_int_1_b__12_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_KmacXof128Tests___c._GetCurrentHash_2_int_1_b__12_0(
+                    arg_0
+        );
+    }
+    static inline void _GetHashAndReset_1_int_0_b__6_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_KmacXof128Tests___c._GetHashAndReset_1_int_0_b__6_0(
+                    arg_0
+        );
+    }
+    static inline void _GetHashAndReset_1_int_1_b__8_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_KmacXof128Tests___c._GetHashAndReset_1_int_1_b__8_0(
+                    arg_0
+        );
+    }
+    static inline void _HashDataAsync_7_System_Byte_Stream_int_System_Byte_CancellationToken_0_b__34_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_KmacXof128Tests___c._HashDataAsync_7_System_Byte_Stream_int_System_Byte_CancellationToken_0_b__34_0(
+                    arg_0
+        );
+    }
+    static inline void _HashDataAsync_7_System_Byte_Stream_int_System_Byte_CancellationToken_1_b__36_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_KmacXof128Tests___c._HashDataAsync_7_System_Byte_Stream_int_System_Byte_CancellationToken_1_b__36_0(
+                    arg_0
+        );
+    }
+    static inline void _HashDataAsync_8_System_ReadOnlyMemorybyte_Stream_int_System_ReadOnlyMemorybyte_CancellationToken_0_b__42_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_KmacXof128Tests___c._HashDataAsync_8_System_ReadOnlyMemorybyte_Stream_int_System_ReadOnlyMemorybyte_CancellationToken_0_b__42_0(
+                    arg_0
+        );
+    }
+    static inline void _HashDataAsync_8_System_ReadOnlyMemorybyte_Stream_int_System_ReadOnlyMemorybyte_CancellationToken_1_b__44_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_KmacXof128Tests___c._HashDataAsync_8_System_ReadOnlyMemorybyte_Stream_int_System_ReadOnlyMemorybyte_CancellationToken_1_b__44_0(
+                    arg_0
+        );
+    }
+    static inline void _HashDataAsync_9_System_ReadOnlyMemorybyte_Stream_System_Memorybyte_System_ReadOnlyMemorybyte_CancellationToken_0_b__48_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_KmacXof128Tests___c._HashDataAsync_9_System_ReadOnlyMemorybyte_Stream_System_Memorybyte_System_ReadOnlyMemorybyte_CancellationToken_0_b__48_0(
+                    arg_0
+        );
+    }
+    static inline void _HashData_5_System_Byte_System_Byte_int_System_Byte_0_b__18_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_KmacXof128Tests___c._HashData_5_System_Byte_System_Byte_int_System_Byte_0_b__18_0(
+                    arg_0
+        );
+    }
+    static inline void _HashData_5_System_Byte_System_Byte_int_System_Byte_1_b__20_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_KmacXof128Tests___c._HashData_5_System_Byte_System_Byte_int_System_Byte_1_b__20_0(
+                    arg_0
+        );
+    }
+    static inline void _HashData_6_System_Byte_Stream_int_System_Byte_0_b__26_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_KmacXof128Tests___c._HashData_6_System_Byte_Stream_int_System_Byte_0_b__26_0(
+                    arg_0
+        );
+    }
+    static inline void _HashData_6_System_Byte_Stream_int_System_Byte_1_b__28_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_KmacXof128Tests___c._HashData_6_System_Byte_Stream_int_System_Byte_1_b__28_0(
+                    arg_0
+        );
+    }
+    /// Total number of AOT-compiled methods in this type.
+    static constexpr int32_t MethodCount = 20;
+};
+
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_KmacXof256Tests {
     static inline void ctor(
                 CHAOS_IL2CPP_INTPTR arg_0
@@ -19458,6 +29774,149 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
     static constexpr int32_t MethodCount = 53;
 };
 
+struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_KmacXof256Tests___c {
+    static inline void cctor(
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_KmacXof256Tests___c.cctor(
+        );
+    }
+    static inline void ctor(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_KmacXof256Tests___c.ctor(
+                    arg_0
+        );
+    }
+    static inline void _AppendData_0_System_Byte_0_b__0_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_KmacXof256Tests___c._AppendData_0_System_Byte_0_b__0_0(
+                    arg_0
+        );
+    }
+    static inline void _AppendData_0_System_Byte_1_b__2_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_KmacXof256Tests___c._AppendData_0_System_Byte_1_b__2_0(
+                    arg_0
+        );
+    }
+    static inline void _AppendData_0_System_Byte_2_b__4_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_KmacXof256Tests___c._AppendData_0_System_Byte_2_b__4_0(
+                    arg_0
+        );
+    }
+    static inline void _Clone_3__3_b__14_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_KmacXof256Tests___c._Clone_3__3_b__14_0(
+                    arg_0
+        );
+    }
+    static inline void _Dispose_4__4_b__16_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_KmacXof256Tests___c._Dispose_4__4_b__16_0(
+                    arg_0
+        );
+    }
+    static inline void _GetCurrentHash_2_int_0_b__10_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_KmacXof256Tests___c._GetCurrentHash_2_int_0_b__10_0(
+                    arg_0
+        );
+    }
+    static inline void _GetCurrentHash_2_int_1_b__12_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_KmacXof256Tests___c._GetCurrentHash_2_int_1_b__12_0(
+                    arg_0
+        );
+    }
+    static inline void _GetHashAndReset_1_int_0_b__6_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_KmacXof256Tests___c._GetHashAndReset_1_int_0_b__6_0(
+                    arg_0
+        );
+    }
+    static inline void _GetHashAndReset_1_int_1_b__8_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_KmacXof256Tests___c._GetHashAndReset_1_int_1_b__8_0(
+                    arg_0
+        );
+    }
+    static inline void _HashDataAsync_7_System_Byte_Stream_int_System_Byte_CancellationToken_0_b__34_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_KmacXof256Tests___c._HashDataAsync_7_System_Byte_Stream_int_System_Byte_CancellationToken_0_b__34_0(
+                    arg_0
+        );
+    }
+    static inline void _HashDataAsync_7_System_Byte_Stream_int_System_Byte_CancellationToken_1_b__36_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_KmacXof256Tests___c._HashDataAsync_7_System_Byte_Stream_int_System_Byte_CancellationToken_1_b__36_0(
+                    arg_0
+        );
+    }
+    static inline void _HashDataAsync_8_System_ReadOnlyMemorybyte_Stream_int_System_ReadOnlyMemorybyte_CancellationToken_0_b__42_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_KmacXof256Tests___c._HashDataAsync_8_System_ReadOnlyMemorybyte_Stream_int_System_ReadOnlyMemorybyte_CancellationToken_0_b__42_0(
+                    arg_0
+        );
+    }
+    static inline void _HashDataAsync_8_System_ReadOnlyMemorybyte_Stream_int_System_ReadOnlyMemorybyte_CancellationToken_1_b__44_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_KmacXof256Tests___c._HashDataAsync_8_System_ReadOnlyMemorybyte_Stream_int_System_ReadOnlyMemorybyte_CancellationToken_1_b__44_0(
+                    arg_0
+        );
+    }
+    static inline void _HashDataAsync_9_System_ReadOnlyMemorybyte_Stream_System_Memorybyte_System_ReadOnlyMemorybyte_CancellationToken_0_b__48_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_KmacXof256Tests___c._HashDataAsync_9_System_ReadOnlyMemorybyte_Stream_System_Memorybyte_System_ReadOnlyMemorybyte_CancellationToken_0_b__48_0(
+                    arg_0
+        );
+    }
+    static inline void _HashData_5_System_Byte_System_Byte_int_System_Byte_0_b__18_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_KmacXof256Tests___c._HashData_5_System_Byte_System_Byte_int_System_Byte_0_b__18_0(
+                    arg_0
+        );
+    }
+    static inline void _HashData_5_System_Byte_System_Byte_int_System_Byte_1_b__20_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_KmacXof256Tests___c._HashData_5_System_Byte_System_Byte_int_System_Byte_1_b__20_0(
+                    arg_0
+        );
+    }
+    static inline void _HashData_6_System_Byte_Stream_int_System_Byte_0_b__26_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_KmacXof256Tests___c._HashData_6_System_Byte_Stream_int_System_Byte_0_b__26_0(
+                    arg_0
+        );
+    }
+    static inline void _HashData_6_System_Byte_Stream_int_System_Byte_1_b__28_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_KmacXof256Tests___c._HashData_6_System_Byte_Stream_int_System_Byte_1_b__28_0(
+                    arg_0
+        );
+    }
+    /// Total number of AOT-compiled methods in this type.
+    static constexpr int32_t MethodCount = 20;
+};
+
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_MD5CryptoServiceProviderTests {
     static inline void ctor(
                 CHAOS_IL2CPP_INTPTR arg_0
@@ -19475,6 +29934,30 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
                 CHAOS_IL2CPP_INTPTR arg_0
     ) {
         return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_MD5CryptoServiceProviderTests.Initialize_0__0(
+                    arg_0
+        );
+    }
+    /// Total number of AOT-compiled methods in this type.
+    static constexpr int32_t MethodCount = 3;
+};
+
+struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_MD5CryptoServiceProviderTests___c {
+    static inline void cctor(
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_MD5CryptoServiceProviderTests___c.cctor(
+        );
+    }
+    static inline void ctor(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_MD5CryptoServiceProviderTests___c.ctor(
+                    arg_0
+        );
+    }
+    static inline void _Initialize_0__0_b__0_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_MD5CryptoServiceProviderTests___c._Initialize_0__0_b__0_0(
                     arg_0
         );
     }
@@ -19602,6 +30085,58 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
     static constexpr int32_t MethodCount = 19;
 };
 
+struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_MD5Tests___c {
+    static inline void cctor(
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_MD5Tests___c.cctor(
+        );
+    }
+    static inline void ctor(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_MD5Tests___c.ctor(
+                    arg_0
+        );
+    }
+    static inline void _HashDataAsync_2_Stream_CancellationToken_0_b__10_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_MD5Tests___c._HashDataAsync_2_Stream_CancellationToken_0_b__10_0(
+                    arg_0
+        );
+    }
+    static inline void _HashDataAsync_3_Stream_System_Memorybyte_CancellationToken_0_b__14_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_MD5Tests___c._HashDataAsync_3_Stream_System_Memorybyte_CancellationToken_0_b__14_0(
+                    arg_0
+        );
+    }
+    static inline void _HashDataAsync_3_Stream_System_Memorybyte_CancellationToken_1_b__16_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_MD5Tests___c._HashDataAsync_3_Stream_System_Memorybyte_CancellationToken_1_b__16_0(
+                    arg_0
+        );
+    }
+    static inline void _HashData_0_System_Byte_0_b__0_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_MD5Tests___c._HashData_0_System_Byte_0_b__0_0(
+                    arg_0
+        );
+    }
+    static inline void _HashData_1_Stream_0_b__6_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_MD5Tests___c._HashData_1_Stream_0_b__6_0(
+                    arg_0
+        );
+    }
+    /// Total number of AOT-compiled methods in this type.
+    static constexpr int32_t MethodCount = 7;
+};
+
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_MaskGenerationMethodTests {
     static inline void ctor(
                 CHAOS_IL2CPP_INTPTR arg_0
@@ -19662,6 +30197,51 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
     static constexpr int32_t MethodCount = 9;
 };
 
+struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_MaskGenerationMethodTests___c {
+    static inline void cctor(
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_MaskGenerationMethodTests___c.cctor(
+        );
+    }
+    static inline void ctor(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_MaskGenerationMethodTests___c.ctor(
+                    arg_0
+        );
+    }
+    static inline void _GenerateMask_0_System_Byte_int_0_b__0_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_MaskGenerationMethodTests___c._GenerateMask_0_System_Byte_int_0_b__0_0(
+                    arg_0
+        );
+    }
+    static inline void _GenerateMask_0_System_Byte_int_1_b__2_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_MaskGenerationMethodTests___c._GenerateMask_0_System_Byte_int_1_b__2_0(
+                    arg_0
+        );
+    }
+    static inline void _GenerateMask_0_System_Byte_int_2_b__4_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_MaskGenerationMethodTests___c._GenerateMask_0_System_Byte_int_2_b__4_0(
+                    arg_0
+        );
+    }
+    static inline void _GenerateMask_0_System_Byte_int_3_b__6_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_MaskGenerationMethodTests___c._GenerateMask_0_System_Byte_int_3_b__6_0(
+                    arg_0
+        );
+    }
+    /// Total number of AOT-compiled methods in this type.
+    static constexpr int32_t MethodCount = 6;
+};
+
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_OidCollectionTests {
     static inline void ctor(
                 CHAOS_IL2CPP_INTPTR arg_0
@@ -19696,6 +30276,37 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
     }
     /// Total number of AOT-compiled methods in this type.
     static constexpr int32_t MethodCount = 5;
+};
+
+struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_OidCollectionTests___c {
+    static inline void cctor(
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_OidCollectionTests___c.cctor(
+        );
+    }
+    static inline void ctor(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_OidCollectionTests___c.ctor(
+                    arg_0
+        );
+    }
+    static inline void _Add_0_Oid_0_b__0_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_OidCollectionTests___c._Add_0_Oid_0_b__0_0(
+                    arg_0
+        );
+    }
+    static inline void _GetEnumerator_1__1_b__2_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_OidCollectionTests___c._GetEnumerator_1__1_b__2_0(
+                    arg_0
+        );
+    }
+    /// Total number of AOT-compiled methods in this type.
+    static constexpr int32_t MethodCount = 4;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_OidTests {
@@ -19758,6 +30369,51 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
     static constexpr int32_t MethodCount = 9;
 };
 
+struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_OidTests___c {
+    static inline void cctor(
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_OidTests___c.cctor(
+        );
+    }
+    static inline void ctor(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_OidTests___c.ctor(
+                    arg_0
+        );
+    }
+    static inline void _FromFriendlyName_0_string_OidGroup_0_b__0_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_OidTests___c._FromFriendlyName_0_string_OidGroup_0_b__0_0(
+                    arg_0
+        );
+    }
+    static inline void _FromFriendlyName_0_string_OidGroup_1_b__2_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_OidTests___c._FromFriendlyName_0_string_OidGroup_1_b__2_0(
+                    arg_0
+        );
+    }
+    static inline void _FromOidValue_1_string_OidGroup_0_b__4_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_OidTests___c._FromOidValue_1_string_OidGroup_0_b__4_0(
+                    arg_0
+        );
+    }
+    static inline void _FromOidValue_1_string_OidGroup_1_b__6_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_OidTests___c._FromOidValue_1_string_OidGroup_1_b__6_0(
+                    arg_0
+        );
+    }
+    /// Total number of AOT-compiled methods in this type.
+    static constexpr int32_t MethodCount = 6;
+};
+
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_PKCS1MaskGenerationMethodTests {
     static inline void ctor(
                 CHAOS_IL2CPP_INTPTR arg_0
@@ -19816,6 +30472,51 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
     }
     /// Total number of AOT-compiled methods in this type.
     static constexpr int32_t MethodCount = 9;
+};
+
+struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_PKCS1MaskGenerationMethodTests___c {
+    static inline void cctor(
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_PKCS1MaskGenerationMethodTests___c.cctor(
+        );
+    }
+    static inline void ctor(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_PKCS1MaskGenerationMethodTests___c.ctor(
+                    arg_0
+        );
+    }
+    static inline void _GenerateMask_0_System_Byte_int_0_b__0_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_PKCS1MaskGenerationMethodTests___c._GenerateMask_0_System_Byte_int_0_b__0_0(
+                    arg_0
+        );
+    }
+    static inline void _GenerateMask_0_System_Byte_int_1_b__2_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_PKCS1MaskGenerationMethodTests___c._GenerateMask_0_System_Byte_int_1_b__2_0(
+                    arg_0
+        );
+    }
+    static inline void _GenerateMask_0_System_Byte_int_2_b__4_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_PKCS1MaskGenerationMethodTests___c._GenerateMask_0_System_Byte_int_2_b__4_0(
+                    arg_0
+        );
+    }
+    static inline void _GenerateMask_0_System_Byte_int_3_b__6_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_PKCS1MaskGenerationMethodTests___c._GenerateMask_0_System_Byte_int_3_b__6_0(
+                    arg_0
+        );
+    }
+    /// Total number of AOT-compiled methods in this type.
+    static constexpr int32_t MethodCount = 6;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_PasswordDeriveBytesTests {
@@ -19924,6 +30625,79 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
     }
     /// Total number of AOT-compiled methods in this type.
     static constexpr int32_t MethodCount = 17;
+};
+
+struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_PasswordDeriveBytesTests___c {
+    static inline void cctor(
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_PasswordDeriveBytesTests___c.cctor(
+        );
+    }
+    static inline void ctor(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_PasswordDeriveBytesTests___c.ctor(
+                    arg_0
+        );
+    }
+    static inline void _CryptDeriveKey_1_string_string_int_System_Byte_0_b__4_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_PasswordDeriveBytesTests___c._CryptDeriveKey_1_string_string_int_System_Byte_0_b__4_0(
+                    arg_0
+        );
+    }
+    static inline void _CryptDeriveKey_1_string_string_int_System_Byte_1_b__6_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_PasswordDeriveBytesTests___c._CryptDeriveKey_1_string_string_int_System_Byte_1_b__6_0(
+                    arg_0
+        );
+    }
+    static inline void _CryptDeriveKey_1_string_string_int_System_Byte_2_b__8_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_PasswordDeriveBytesTests___c._CryptDeriveKey_1_string_string_int_System_Byte_2_b__8_0(
+                    arg_0
+        );
+    }
+    static inline void _CryptDeriveKey_1_string_string_int_System_Byte_3_b__10_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_PasswordDeriveBytesTests___c._CryptDeriveKey_1_string_string_int_System_Byte_3_b__10_0(
+                    arg_0
+        );
+    }
+    static inline void _CryptDeriveKey_1_string_string_int_System_Byte_4_b__12_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_PasswordDeriveBytesTests___c._CryptDeriveKey_1_string_string_int_System_Byte_4_b__12_0(
+                    arg_0
+        );
+    }
+    static inline void _CryptDeriveKey_1_string_string_int_System_Byte_5_b__14_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_PasswordDeriveBytesTests___c._CryptDeriveKey_1_string_string_int_System_Byte_5_b__14_0(
+                    arg_0
+        );
+    }
+    static inline void _GetBytes_0_int_0_b__0_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_PasswordDeriveBytesTests___c._GetBytes_0_int_0_b__0_0(
+                    arg_0
+        );
+    }
+    static inline void _GetBytes_0_int_1_b__2_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_PasswordDeriveBytesTests___c._GetBytes_0_int_1_b__2_0(
+                    arg_0
+        );
+    }
+    /// Total number of AOT-compiled methods in this type.
+    static constexpr int32_t MethodCount = 10;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_PemEncodingTests {
@@ -20082,6 +30856,79 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
     static constexpr int32_t MethodCount = 17;
 };
 
+struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RC2CryptoServiceProviderTests___c {
+    static inline void cctor(
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RC2CryptoServiceProviderTests___c.cctor(
+        );
+    }
+    static inline void ctor(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RC2CryptoServiceProviderTests___c.ctor(
+                    arg_0
+        );
+    }
+    static inline void _CreateDecryptor_1_System_Byte_System_Byte_0_b__6_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RC2CryptoServiceProviderTests___c._CreateDecryptor_1_System_Byte_System_Byte_0_b__6_0(
+                    arg_0
+        );
+    }
+    static inline void _CreateDecryptor_1_System_Byte_System_Byte_1_b__8_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RC2CryptoServiceProviderTests___c._CreateDecryptor_1_System_Byte_System_Byte_1_b__8_0(
+                    arg_0
+        );
+    }
+    static inline void _CreateDecryptor_1_System_Byte_System_Byte_2_b__10_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RC2CryptoServiceProviderTests___c._CreateDecryptor_1_System_Byte_System_Byte_2_b__10_0(
+                    arg_0
+        );
+    }
+    static inline void _CreateEncryptor_0_System_Byte_System_Byte_0_b__0_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RC2CryptoServiceProviderTests___c._CreateEncryptor_0_System_Byte_System_Byte_0_b__0_0(
+                    arg_0
+        );
+    }
+    static inline void _CreateEncryptor_0_System_Byte_System_Byte_1_b__2_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RC2CryptoServiceProviderTests___c._CreateEncryptor_0_System_Byte_System_Byte_1_b__2_0(
+                    arg_0
+        );
+    }
+    static inline void _CreateEncryptor_0_System_Byte_System_Byte_2_b__4_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RC2CryptoServiceProviderTests___c._CreateEncryptor_0_System_Byte_System_Byte_2_b__4_0(
+                    arg_0
+        );
+    }
+    static inline void _GenerateIV_3__3_b__14_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RC2CryptoServiceProviderTests___c._GenerateIV_3__3_b__14_0(
+                    arg_0
+        );
+    }
+    static inline void _GenerateKey_2__2_b__12_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RC2CryptoServiceProviderTests___c._GenerateKey_2__2_b__12_0(
+                    arg_0
+        );
+    }
+    /// Total number of AOT-compiled methods in this type.
+    static constexpr int32_t MethodCount = 10;
+};
+
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RNGCryptoServiceProviderTests {
     static inline void ctor(
                 CHAOS_IL2CPP_INTPTR arg_0
@@ -20224,6 +31071,100 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
     }
     /// Total number of AOT-compiled methods in this type.
     static constexpr int32_t MethodCount = 23;
+};
+
+struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RNGCryptoServiceProviderTests___c {
+    static inline void cctor(
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RNGCryptoServiceProviderTests___c.cctor(
+        );
+    }
+    static inline void ctor(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RNGCryptoServiceProviderTests___c.ctor(
+                    arg_0
+        );
+    }
+    static inline void _GetBytes_0_System_Byte_0_b__0_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RNGCryptoServiceProviderTests___c._GetBytes_0_System_Byte_0_b__0_0(
+                    arg_0
+        );
+    }
+    static inline void _GetBytes_0_System_Byte_1_b__2_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RNGCryptoServiceProviderTests___c._GetBytes_0_System_Byte_1_b__2_0(
+                    arg_0
+        );
+    }
+    static inline void _GetBytes_0_System_Byte_2_b__4_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RNGCryptoServiceProviderTests___c._GetBytes_0_System_Byte_2_b__4_0(
+                    arg_0
+        );
+    }
+    static inline void _GetBytes_1_System_Byte_int_int_0_b__6_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RNGCryptoServiceProviderTests___c._GetBytes_1_System_Byte_int_int_0_b__6_0(
+                    arg_0
+        );
+    }
+    static inline void _GetBytes_1_System_Byte_int_int_1_b__8_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RNGCryptoServiceProviderTests___c._GetBytes_1_System_Byte_int_int_1_b__8_0(
+                    arg_0
+        );
+    }
+    static inline void _GetBytes_1_System_Byte_int_int_2_b__10_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RNGCryptoServiceProviderTests___c._GetBytes_1_System_Byte_int_int_2_b__10_0(
+                    arg_0
+        );
+    }
+    static inline void _GetBytes_1_System_Byte_int_int_3_b__12_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RNGCryptoServiceProviderTests___c._GetBytes_1_System_Byte_int_int_3_b__12_0(
+                    arg_0
+        );
+    }
+    static inline void _GetBytes_1_System_Byte_int_int_4_b__14_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RNGCryptoServiceProviderTests___c._GetBytes_1_System_Byte_int_int_4_b__14_0(
+                    arg_0
+        );
+    }
+    static inline void _GetNonZeroBytes_2_System_Byte_0_b__16_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RNGCryptoServiceProviderTests___c._GetNonZeroBytes_2_System_Byte_0_b__16_0(
+                    arg_0
+        );
+    }
+    static inline void _GetNonZeroBytes_2_System_Byte_1_b__18_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RNGCryptoServiceProviderTests___c._GetNonZeroBytes_2_System_Byte_1_b__18_0(
+                    arg_0
+        );
+    }
+    static inline void _GetNonZeroBytes_2_System_Byte_2_b__20_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RNGCryptoServiceProviderTests___c._GetNonZeroBytes_2_System_Byte_2_b__20_0(
+                    arg_0
+        );
+    }
+    /// Total number of AOT-compiled methods in this type.
+    static constexpr int32_t MethodCount = 13;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSACngTests {
@@ -20416,6 +31357,128 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
     }
     /// Total number of AOT-compiled methods in this type.
     static constexpr int32_t MethodCount = 31;
+};
+
+struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSACngTests___c {
+    static inline void cctor(
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSACngTests___c.cctor(
+        );
+    }
+    static inline void ctor(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSACngTests___c.ctor(
+                    arg_0
+        );
+    }
+    static inline void _Decrypt_1_System_Byte_RSAEncryptionPadding_0_b__6_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSACngTests___c._Decrypt_1_System_Byte_RSAEncryptionPadding_0_b__6_0(
+                    arg_0
+        );
+    }
+    static inline void _Decrypt_1_System_Byte_RSAEncryptionPadding_1_b__8_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSACngTests___c._Decrypt_1_System_Byte_RSAEncryptionPadding_1_b__8_0(
+                    arg_0
+        );
+    }
+    static inline void _Decrypt_1_System_Byte_RSAEncryptionPadding_2_b__10_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSACngTests___c._Decrypt_1_System_Byte_RSAEncryptionPadding_2_b__10_0(
+                    arg_0
+        );
+    }
+    static inline void _Encrypt_0_System_Byte_RSAEncryptionPadding_0_b__0_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSACngTests___c._Encrypt_0_System_Byte_RSAEncryptionPadding_0_b__0_0(
+                    arg_0
+        );
+    }
+    static inline void _Encrypt_0_System_Byte_RSAEncryptionPadding_1_b__2_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSACngTests___c._Encrypt_0_System_Byte_RSAEncryptionPadding_1_b__2_0(
+                    arg_0
+        );
+    }
+    static inline void _Encrypt_0_System_Byte_RSAEncryptionPadding_2_b__4_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSACngTests___c._Encrypt_0_System_Byte_RSAEncryptionPadding_2_b__4_0(
+                    arg_0
+        );
+    }
+    static inline void _ExportParameters_3_bool_0_b__14_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSACngTests___c._ExportParameters_3_bool_0_b__14_0(
+                    arg_0
+        );
+    }
+    static inline void _ExportParameters_3_bool_1_b__16_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSACngTests___c._ExportParameters_3_bool_1_b__16_0(
+                    arg_0
+        );
+    }
+    static inline void _ImportParameters_2_RSAParameters_0_b__12_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSACngTests___c._ImportParameters_2_RSAParameters_0_b__12_0(
+                    arg_0
+        );
+    }
+    static inline void _SignHash_4_System_Byte_HashAlgorithmName_RSASignaturePadding_0_b__18_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSACngTests___c._SignHash_4_System_Byte_HashAlgorithmName_RSASignaturePadding_0_b__18_0(
+                    arg_0
+        );
+    }
+    static inline void _SignHash_4_System_Byte_HashAlgorithmName_RSASignaturePadding_1_b__20_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSACngTests___c._SignHash_4_System_Byte_HashAlgorithmName_RSASignaturePadding_1_b__20_0(
+                    arg_0
+        );
+    }
+    static inline void _SignHash_4_System_Byte_HashAlgorithmName_RSASignaturePadding_2_b__22_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSACngTests___c._SignHash_4_System_Byte_HashAlgorithmName_RSASignaturePadding_2_b__22_0(
+                    arg_0
+        );
+    }
+    static inline void _VerifyHash_5_System_Byte_System_Byte_HashAlgorithmName_RSASignaturePadding_0_b__24_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSACngTests___c._VerifyHash_5_System_Byte_System_Byte_HashAlgorithmName_RSASignaturePadding_0_b__24_0(
+                    arg_0
+        );
+    }
+    static inline void _VerifyHash_5_System_Byte_System_Byte_HashAlgorithmName_RSASignaturePadding_1_b__26_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSACngTests___c._VerifyHash_5_System_Byte_System_Byte_HashAlgorithmName_RSASignaturePadding_1_b__26_0(
+                    arg_0
+        );
+    }
+    static inline void _VerifyHash_5_System_Byte_System_Byte_HashAlgorithmName_RSASignaturePadding_2_b__28_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSACngTests___c._VerifyHash_5_System_Byte_System_Byte_HashAlgorithmName_RSASignaturePadding_2_b__28_0(
+                    arg_0
+        );
+    }
+    /// Total number of AOT-compiled methods in this type.
+    static constexpr int32_t MethodCount = 17;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSACryptoServiceProviderTests {
@@ -21090,6 +32153,408 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
     static constexpr int32_t MethodCount = 111;
 };
 
+struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSACryptoServiceProviderTests___c {
+    static inline void cctor(
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSACryptoServiceProviderTests___c.cctor(
+        );
+    }
+    static inline void ctor(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSACryptoServiceProviderTests___c.ctor(
+                    arg_0
+        );
+    }
+    static inline void _DecryptValue_1_System_Byte_0_b__8_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSACryptoServiceProviderTests___c._DecryptValue_1_System_Byte_0_b__8_0(
+                    arg_0
+        );
+    }
+    static inline void _DecryptValue_1_System_Byte_1_b__10_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSACryptoServiceProviderTests___c._DecryptValue_1_System_Byte_1_b__10_0(
+                    arg_0
+        );
+    }
+    static inline void _DecryptValue_1_System_Byte_2_b__12_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSACryptoServiceProviderTests___c._DecryptValue_1_System_Byte_2_b__12_0(
+                    arg_0
+        );
+    }
+    static inline void _Decrypt_0_System_Byte_bool_0_b__0_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSACryptoServiceProviderTests___c._Decrypt_0_System_Byte_bool_0_b__0_0(
+                    arg_0
+        );
+    }
+    static inline void _Decrypt_0_System_Byte_bool_1_b__2_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSACryptoServiceProviderTests___c._Decrypt_0_System_Byte_bool_1_b__2_0(
+                    arg_0
+        );
+    }
+    static inline void _Decrypt_0_System_Byte_bool_2_b__4_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSACryptoServiceProviderTests___c._Decrypt_0_System_Byte_bool_2_b__4_0(
+                    arg_0
+        );
+    }
+    static inline void _Decrypt_0_System_Byte_bool_3_b__6_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSACryptoServiceProviderTests___c._Decrypt_0_System_Byte_bool_3_b__6_0(
+                    arg_0
+        );
+    }
+    static inline void _Decrypt_15_System_Byte_RSAEncryptionPadding_0_b__92_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSACryptoServiceProviderTests___c._Decrypt_15_System_Byte_RSAEncryptionPadding_0_b__92_0(
+                    arg_0
+        );
+    }
+    static inline void _Decrypt_15_System_Byte_RSAEncryptionPadding_1_b__94_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSACryptoServiceProviderTests___c._Decrypt_15_System_Byte_RSAEncryptionPadding_1_b__94_0(
+                    arg_0
+        );
+    }
+    static inline void _Decrypt_15_System_Byte_RSAEncryptionPadding_2_b__96_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSACryptoServiceProviderTests___c._Decrypt_15_System_Byte_RSAEncryptionPadding_2_b__96_0(
+                    arg_0
+        );
+    }
+    static inline void _EncryptValue_3_System_Byte_0_b__22_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSACryptoServiceProviderTests___c._EncryptValue_3_System_Byte_0_b__22_0(
+                    arg_0
+        );
+    }
+    static inline void _EncryptValue_3_System_Byte_1_b__24_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSACryptoServiceProviderTests___c._EncryptValue_3_System_Byte_1_b__24_0(
+                    arg_0
+        );
+    }
+    static inline void _EncryptValue_3_System_Byte_2_b__26_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSACryptoServiceProviderTests___c._EncryptValue_3_System_Byte_2_b__26_0(
+                    arg_0
+        );
+    }
+    static inline void _Encrypt_14_System_Byte_RSAEncryptionPadding_0_b__86_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSACryptoServiceProviderTests___c._Encrypt_14_System_Byte_RSAEncryptionPadding_0_b__86_0(
+                    arg_0
+        );
+    }
+    static inline void _Encrypt_14_System_Byte_RSAEncryptionPadding_1_b__88_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSACryptoServiceProviderTests___c._Encrypt_14_System_Byte_RSAEncryptionPadding_1_b__88_0(
+                    arg_0
+        );
+    }
+    static inline void _Encrypt_14_System_Byte_RSAEncryptionPadding_2_b__90_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSACryptoServiceProviderTests___c._Encrypt_14_System_Byte_RSAEncryptionPadding_2_b__90_0(
+                    arg_0
+        );
+    }
+    static inline void _Encrypt_2_System_Byte_bool_0_b__14_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSACryptoServiceProviderTests___c._Encrypt_2_System_Byte_bool_0_b__14_0(
+                    arg_0
+        );
+    }
+    static inline void _Encrypt_2_System_Byte_bool_1_b__16_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSACryptoServiceProviderTests___c._Encrypt_2_System_Byte_bool_1_b__16_0(
+                    arg_0
+        );
+    }
+    static inline void _Encrypt_2_System_Byte_bool_2_b__18_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSACryptoServiceProviderTests___c._Encrypt_2_System_Byte_bool_2_b__18_0(
+                    arg_0
+        );
+    }
+    static inline void _Encrypt_2_System_Byte_bool_3_b__20_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSACryptoServiceProviderTests___c._Encrypt_2_System_Byte_bool_3_b__20_0(
+                    arg_0
+        );
+    }
+    static inline void _ExportCspBlob_4_bool_0_b__28_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSACryptoServiceProviderTests___c._ExportCspBlob_4_bool_0_b__28_0(
+                    arg_0
+        );
+    }
+    static inline void _ExportCspBlob_4_bool_1_b__30_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSACryptoServiceProviderTests___c._ExportCspBlob_4_bool_1_b__30_0(
+                    arg_0
+        );
+    }
+    static inline void _ExportParameters_5_bool_0_b__32_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSACryptoServiceProviderTests___c._ExportParameters_5_bool_0_b__32_0(
+                    arg_0
+        );
+    }
+    static inline void _ExportParameters_5_bool_1_b__34_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSACryptoServiceProviderTests___c._ExportParameters_5_bool_1_b__34_0(
+                    arg_0
+        );
+    }
+    static inline void _ImportCspBlob_6_System_Byte_0_b__36_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSACryptoServiceProviderTests___c._ImportCspBlob_6_System_Byte_0_b__36_0(
+                    arg_0
+        );
+    }
+    static inline void _ImportCspBlob_6_System_Byte_1_b__38_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSACryptoServiceProviderTests___c._ImportCspBlob_6_System_Byte_1_b__38_0(
+                    arg_0
+        );
+    }
+    static inline void _ImportCspBlob_6_System_Byte_2_b__40_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSACryptoServiceProviderTests___c._ImportCspBlob_6_System_Byte_2_b__40_0(
+                    arg_0
+        );
+    }
+    static inline void _ImportParameters_7_RSAParameters_0_b__42_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSACryptoServiceProviderTests___c._ImportParameters_7_RSAParameters_0_b__42_0(
+                    arg_0
+        );
+    }
+    static inline void _SignData_10_Stream_object_0_b__60_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSACryptoServiceProviderTests___c._SignData_10_Stream_object_0_b__60_0(
+                    arg_0
+        );
+    }
+    static inline void _SignData_10_Stream_object_1_b__62_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSACryptoServiceProviderTests___c._SignData_10_Stream_object_1_b__62_0(
+                    arg_0
+        );
+    }
+    static inline void _SignData_8_System_Byte_int_int_object_0_b__44_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSACryptoServiceProviderTests___c._SignData_8_System_Byte_int_int_object_0_b__44_0(
+                    arg_0
+        );
+    }
+    static inline void _SignData_8_System_Byte_int_int_object_1_b__46_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSACryptoServiceProviderTests___c._SignData_8_System_Byte_int_int_object_1_b__46_0(
+                    arg_0
+        );
+    }
+    static inline void _SignData_8_System_Byte_int_int_object_2_b__48_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSACryptoServiceProviderTests___c._SignData_8_System_Byte_int_int_object_2_b__48_0(
+                    arg_0
+        );
+    }
+    static inline void _SignData_8_System_Byte_int_int_object_3_b__50_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSACryptoServiceProviderTests___c._SignData_8_System_Byte_int_int_object_3_b__50_0(
+                    arg_0
+        );
+    }
+    static inline void _SignData_8_System_Byte_int_int_object_4_b__52_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSACryptoServiceProviderTests___c._SignData_8_System_Byte_int_int_object_4_b__52_0(
+                    arg_0
+        );
+    }
+    static inline void _SignData_9_System_Byte_object_0_b__54_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSACryptoServiceProviderTests___c._SignData_9_System_Byte_object_0_b__54_0(
+                    arg_0
+        );
+    }
+    static inline void _SignData_9_System_Byte_object_1_b__56_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSACryptoServiceProviderTests___c._SignData_9_System_Byte_object_1_b__56_0(
+                    arg_0
+        );
+    }
+    static inline void _SignData_9_System_Byte_object_2_b__58_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSACryptoServiceProviderTests___c._SignData_9_System_Byte_object_2_b__58_0(
+                    arg_0
+        );
+    }
+    static inline void _SignHash_11_System_Byte_string_0_b__64_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSACryptoServiceProviderTests___c._SignHash_11_System_Byte_string_0_b__64_0(
+                    arg_0
+        );
+    }
+    static inline void _SignHash_11_System_Byte_string_1_b__66_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSACryptoServiceProviderTests___c._SignHash_11_System_Byte_string_1_b__66_0(
+                    arg_0
+        );
+    }
+    static inline void _SignHash_11_System_Byte_string_2_b__68_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSACryptoServiceProviderTests___c._SignHash_11_System_Byte_string_2_b__68_0(
+                    arg_0
+        );
+    }
+    static inline void _SignHash_11_System_Byte_string_3_b__70_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSACryptoServiceProviderTests___c._SignHash_11_System_Byte_string_3_b__70_0(
+                    arg_0
+        );
+    }
+    static inline void _SignHash_16_System_Byte_HashAlgorithmName_RSASignaturePadding_0_b__98_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSACryptoServiceProviderTests___c._SignHash_16_System_Byte_HashAlgorithmName_RSASignaturePadding_0_b__98_0(
+                    arg_0
+        );
+    }
+    static inline void _SignHash_16_System_Byte_HashAlgorithmName_RSASignaturePadding_1_b__100_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSACryptoServiceProviderTests___c._SignHash_16_System_Byte_HashAlgorithmName_RSASignaturePadding_1_b__100_0(
+                    arg_0
+        );
+    }
+    static inline void _SignHash_16_System_Byte_HashAlgorithmName_RSASignaturePadding_2_b__102_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSACryptoServiceProviderTests___c._SignHash_16_System_Byte_HashAlgorithmName_RSASignaturePadding_2_b__102_0(
+                    arg_0
+        );
+    }
+    static inline void _VerifyData_12_System_Byte_object_System_Byte_0_b__72_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSACryptoServiceProviderTests___c._VerifyData_12_System_Byte_object_System_Byte_0_b__72_0(
+                    arg_0
+        );
+    }
+    static inline void _VerifyData_12_System_Byte_object_System_Byte_1_b__74_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSACryptoServiceProviderTests___c._VerifyData_12_System_Byte_object_System_Byte_1_b__74_0(
+                    arg_0
+        );
+    }
+    static inline void _VerifyData_12_System_Byte_object_System_Byte_2_b__76_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSACryptoServiceProviderTests___c._VerifyData_12_System_Byte_object_System_Byte_2_b__76_0(
+                    arg_0
+        );
+    }
+    static inline void _VerifyHash_13_System_Byte_string_System_Byte_0_b__78_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSACryptoServiceProviderTests___c._VerifyHash_13_System_Byte_string_System_Byte_0_b__78_0(
+                    arg_0
+        );
+    }
+    static inline void _VerifyHash_13_System_Byte_string_System_Byte_1_b__80_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSACryptoServiceProviderTests___c._VerifyHash_13_System_Byte_string_System_Byte_1_b__80_0(
+                    arg_0
+        );
+    }
+    static inline void _VerifyHash_13_System_Byte_string_System_Byte_2_b__82_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSACryptoServiceProviderTests___c._VerifyHash_13_System_Byte_string_System_Byte_2_b__82_0(
+                    arg_0
+        );
+    }
+    static inline void _VerifyHash_13_System_Byte_string_System_Byte_3_b__84_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSACryptoServiceProviderTests___c._VerifyHash_13_System_Byte_string_System_Byte_3_b__84_0(
+                    arg_0
+        );
+    }
+    static inline void _VerifyHash_17_System_Byte_System_Byte_HashAlgorithmName_RSASignaturePadding_0_b__104_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSACryptoServiceProviderTests___c._VerifyHash_17_System_Byte_System_Byte_HashAlgorithmName_RSASignaturePadding_0_b__104_0(
+                    arg_0
+        );
+    }
+    static inline void _VerifyHash_17_System_Byte_System_Byte_HashAlgorithmName_RSASignaturePadding_1_b__106_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSACryptoServiceProviderTests___c._VerifyHash_17_System_Byte_System_Byte_HashAlgorithmName_RSASignaturePadding_1_b__106_0(
+                    arg_0
+        );
+    }
+    static inline void _VerifyHash_17_System_Byte_System_Byte_HashAlgorithmName_RSASignaturePadding_2_b__108_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSACryptoServiceProviderTests___c._VerifyHash_17_System_Byte_System_Byte_HashAlgorithmName_RSASignaturePadding_2_b__108_0(
+                    arg_0
+        );
+    }
+    /// Total number of AOT-compiled methods in this type.
+    static constexpr int32_t MethodCount = 57;
+};
+
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSAEncryptionPaddingTests {
     static inline void ctor(
                 CHAOS_IL2CPP_INTPTR arg_0
@@ -21107,6 +32572,30 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
                 CHAOS_IL2CPP_INTPTR arg_0
     ) {
         return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSAEncryptionPaddingTests.CreateOaep_0_HashAlgorithmName_0(
+                    arg_0
+        );
+    }
+    /// Total number of AOT-compiled methods in this type.
+    static constexpr int32_t MethodCount = 3;
+};
+
+struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSAEncryptionPaddingTests___c {
+    static inline void cctor(
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSAEncryptionPaddingTests___c.cctor(
+        );
+    }
+    static inline void ctor(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSAEncryptionPaddingTests___c.ctor(
+                    arg_0
+        );
+    }
+    static inline void _CreateOaep_0_HashAlgorithmName_0_b__0_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSAEncryptionPaddingTests___c._CreateOaep_0_HashAlgorithmName_0_b__0_0(
                     arg_0
         );
     }
@@ -21172,6 +32661,51 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
     }
     /// Total number of AOT-compiled methods in this type.
     static constexpr int32_t MethodCount = 9;
+};
+
+struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSAOAEPKeyExchangeDeformatterTests___c {
+    static inline void cctor(
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSAOAEPKeyExchangeDeformatterTests___c.cctor(
+        );
+    }
+    static inline void ctor(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSAOAEPKeyExchangeDeformatterTests___c.ctor(
+                    arg_0
+        );
+    }
+    static inline void _DecryptKeyExchange_0_System_Byte_0_b__0_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSAOAEPKeyExchangeDeformatterTests___c._DecryptKeyExchange_0_System_Byte_0_b__0_0(
+                    arg_0
+        );
+    }
+    static inline void _DecryptKeyExchange_0_System_Byte_1_b__2_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSAOAEPKeyExchangeDeformatterTests___c._DecryptKeyExchange_0_System_Byte_1_b__2_0(
+                    arg_0
+        );
+    }
+    static inline void _DecryptKeyExchange_0_System_Byte_2_b__4_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSAOAEPKeyExchangeDeformatterTests___c._DecryptKeyExchange_0_System_Byte_2_b__4_0(
+                    arg_0
+        );
+    }
+    static inline void _SetKey_1_AsymmetricAlgorithm_0_b__6_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSAOAEPKeyExchangeDeformatterTests___c._SetKey_1_AsymmetricAlgorithm_0_b__6_0(
+                    arg_0
+        );
+    }
+    /// Total number of AOT-compiled methods in this type.
+    static constexpr int32_t MethodCount = 6;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSAOAEPKeyExchangeFormatterTests {
@@ -21270,6 +32804,72 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
     static constexpr int32_t MethodCount = 15;
 };
 
+struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSAOAEPKeyExchangeFormatterTests___c {
+    static inline void cctor(
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSAOAEPKeyExchangeFormatterTests___c.cctor(
+        );
+    }
+    static inline void ctor(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSAOAEPKeyExchangeFormatterTests___c.ctor(
+                    arg_0
+        );
+    }
+    static inline void _CreateKeyExchange_1_System_Byte_System_Type_0_b__2_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSAOAEPKeyExchangeFormatterTests___c._CreateKeyExchange_1_System_Byte_System_Type_0_b__2_0(
+                    arg_0
+        );
+    }
+    static inline void _CreateKeyExchange_1_System_Byte_System_Type_1_b__4_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSAOAEPKeyExchangeFormatterTests___c._CreateKeyExchange_1_System_Byte_System_Type_1_b__4_0(
+                    arg_0
+        );
+    }
+    static inline void _CreateKeyExchange_1_System_Byte_System_Type_2_b__6_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSAOAEPKeyExchangeFormatterTests___c._CreateKeyExchange_1_System_Byte_System_Type_2_b__6_0(
+                    arg_0
+        );
+    }
+    static inline void _CreateKeyExchange_2_System_Byte_0_b__8_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSAOAEPKeyExchangeFormatterTests___c._CreateKeyExchange_2_System_Byte_0_b__8_0(
+                    arg_0
+        );
+    }
+    static inline void _CreateKeyExchange_2_System_Byte_1_b__10_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSAOAEPKeyExchangeFormatterTests___c._CreateKeyExchange_2_System_Byte_1_b__10_0(
+                    arg_0
+        );
+    }
+    static inline void _CreateKeyExchange_2_System_Byte_2_b__12_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSAOAEPKeyExchangeFormatterTests___c._CreateKeyExchange_2_System_Byte_2_b__12_0(
+                    arg_0
+        );
+    }
+    static inline void _SetKey_0_AsymmetricAlgorithm_0_b__0_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSAOAEPKeyExchangeFormatterTests___c._SetKey_0_AsymmetricAlgorithm_0_b__0_0(
+                    arg_0
+        );
+    }
+    /// Total number of AOT-compiled methods in this type.
+    static constexpr int32_t MethodCount = 9;
+};
+
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSAOpenSslTests {
     static inline void ctor(
                 CHAOS_IL2CPP_INTPTR arg_0
@@ -21330,6 +32930,51 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
     static constexpr int32_t MethodCount = 9;
 };
 
+struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSAOpenSslTests___c {
+    static inline void cctor(
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSAOpenSslTests___c.cctor(
+        );
+    }
+    static inline void ctor(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSAOpenSslTests___c.ctor(
+                    arg_0
+        );
+    }
+    static inline void _DuplicateKeyHandle_0__0_b__0_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSAOpenSslTests___c._DuplicateKeyHandle_0__0_b__0_0(
+                    arg_0
+        );
+    }
+    static inline void _ExportParameters_1_bool_0_b__2_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSAOpenSslTests___c._ExportParameters_1_bool_0_b__2_0(
+                    arg_0
+        );
+    }
+    static inline void _ExportParameters_1_bool_1_b__4_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSAOpenSslTests___c._ExportParameters_1_bool_1_b__4_0(
+                    arg_0
+        );
+    }
+    static inline void _ImportParameters_2_RSAParameters_0_b__6_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSAOpenSslTests___c._ImportParameters_2_RSAParameters_0_b__6_0(
+                    arg_0
+        );
+    }
+    /// Total number of AOT-compiled methods in this type.
+    static constexpr int32_t MethodCount = 6;
+};
+
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSAPKCS1KeyExchangeDeformatterTests {
     static inline void ctor(
                 CHAOS_IL2CPP_INTPTR arg_0
@@ -21388,6 +33033,51 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
     }
     /// Total number of AOT-compiled methods in this type.
     static constexpr int32_t MethodCount = 9;
+};
+
+struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSAPKCS1KeyExchangeDeformatterTests___c {
+    static inline void cctor(
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSAPKCS1KeyExchangeDeformatterTests___c.cctor(
+        );
+    }
+    static inline void ctor(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSAPKCS1KeyExchangeDeformatterTests___c.ctor(
+                    arg_0
+        );
+    }
+    static inline void _DecryptKeyExchange_0_System_Byte_0_b__0_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSAPKCS1KeyExchangeDeformatterTests___c._DecryptKeyExchange_0_System_Byte_0_b__0_0(
+                    arg_0
+        );
+    }
+    static inline void _DecryptKeyExchange_0_System_Byte_1_b__2_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSAPKCS1KeyExchangeDeformatterTests___c._DecryptKeyExchange_0_System_Byte_1_b__2_0(
+                    arg_0
+        );
+    }
+    static inline void _DecryptKeyExchange_0_System_Byte_2_b__4_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSAPKCS1KeyExchangeDeformatterTests___c._DecryptKeyExchange_0_System_Byte_2_b__4_0(
+                    arg_0
+        );
+    }
+    static inline void _SetKey_1_AsymmetricAlgorithm_0_b__6_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSAPKCS1KeyExchangeDeformatterTests___c._SetKey_1_AsymmetricAlgorithm_0_b__6_0(
+                    arg_0
+        );
+    }
+    /// Total number of AOT-compiled methods in this type.
+    static constexpr int32_t MethodCount = 6;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSAPKCS1KeyExchangeFormatterTests {
@@ -21486,6 +33176,72 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
     static constexpr int32_t MethodCount = 15;
 };
 
+struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSAPKCS1KeyExchangeFormatterTests___c {
+    static inline void cctor(
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSAPKCS1KeyExchangeFormatterTests___c.cctor(
+        );
+    }
+    static inline void ctor(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSAPKCS1KeyExchangeFormatterTests___c.ctor(
+                    arg_0
+        );
+    }
+    static inline void _CreateKeyExchange_1_System_Byte_System_Type_0_b__2_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSAPKCS1KeyExchangeFormatterTests___c._CreateKeyExchange_1_System_Byte_System_Type_0_b__2_0(
+                    arg_0
+        );
+    }
+    static inline void _CreateKeyExchange_1_System_Byte_System_Type_1_b__4_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSAPKCS1KeyExchangeFormatterTests___c._CreateKeyExchange_1_System_Byte_System_Type_1_b__4_0(
+                    arg_0
+        );
+    }
+    static inline void _CreateKeyExchange_1_System_Byte_System_Type_2_b__6_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSAPKCS1KeyExchangeFormatterTests___c._CreateKeyExchange_1_System_Byte_System_Type_2_b__6_0(
+                    arg_0
+        );
+    }
+    static inline void _CreateKeyExchange_2_System_Byte_0_b__8_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSAPKCS1KeyExchangeFormatterTests___c._CreateKeyExchange_2_System_Byte_0_b__8_0(
+                    arg_0
+        );
+    }
+    static inline void _CreateKeyExchange_2_System_Byte_1_b__10_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSAPKCS1KeyExchangeFormatterTests___c._CreateKeyExchange_2_System_Byte_1_b__10_0(
+                    arg_0
+        );
+    }
+    static inline void _CreateKeyExchange_2_System_Byte_2_b__12_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSAPKCS1KeyExchangeFormatterTests___c._CreateKeyExchange_2_System_Byte_2_b__12_0(
+                    arg_0
+        );
+    }
+    static inline void _SetKey_0_AsymmetricAlgorithm_0_b__0_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSAPKCS1KeyExchangeFormatterTests___c._SetKey_0_AsymmetricAlgorithm_0_b__0_0(
+                    arg_0
+        );
+    }
+    /// Total number of AOT-compiled methods in this type.
+    static constexpr int32_t MethodCount = 9;
+};
+
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSAPKCS1SignatureDeformatterTests {
     static inline void ctor(
                 CHAOS_IL2CPP_INTPTR arg_0
@@ -21570,6 +33326,65 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
     static constexpr int32_t MethodCount = 13;
 };
 
+struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSAPKCS1SignatureDeformatterTests___c {
+    static inline void cctor(
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSAPKCS1SignatureDeformatterTests___c.cctor(
+        );
+    }
+    static inline void ctor(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSAPKCS1SignatureDeformatterTests___c.ctor(
+                    arg_0
+        );
+    }
+    static inline void _SetHashAlgorithm_1_string_0_b__2_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSAPKCS1SignatureDeformatterTests___c._SetHashAlgorithm_1_string_0_b__2_0(
+                    arg_0
+        );
+    }
+    static inline void _SetHashAlgorithm_1_string_1_b__4_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSAPKCS1SignatureDeformatterTests___c._SetHashAlgorithm_1_string_1_b__4_0(
+                    arg_0
+        );
+    }
+    static inline void _SetKey_0_AsymmetricAlgorithm_0_b__0_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSAPKCS1SignatureDeformatterTests___c._SetKey_0_AsymmetricAlgorithm_0_b__0_0(
+                    arg_0
+        );
+    }
+    static inline void _VerifySignature_2_System_Byte_System_Byte_0_b__6_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSAPKCS1SignatureDeformatterTests___c._VerifySignature_2_System_Byte_System_Byte_0_b__6_0(
+                    arg_0
+        );
+    }
+    static inline void _VerifySignature_2_System_Byte_System_Byte_1_b__8_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSAPKCS1SignatureDeformatterTests___c._VerifySignature_2_System_Byte_System_Byte_1_b__8_0(
+                    arg_0
+        );
+    }
+    static inline void _VerifySignature_2_System_Byte_System_Byte_2_b__10_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSAPKCS1SignatureDeformatterTests___c._VerifySignature_2_System_Byte_System_Byte_2_b__10_0(
+                    arg_0
+        );
+    }
+    /// Total number of AOT-compiled methods in this type.
+    static constexpr int32_t MethodCount = 8;
+};
+
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSAPKCS1SignatureFormatterTests {
     static inline void ctor(
                 CHAOS_IL2CPP_INTPTR arg_0
@@ -21652,6 +33467,65 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
     }
     /// Total number of AOT-compiled methods in this type.
     static constexpr int32_t MethodCount = 13;
+};
+
+struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSAPKCS1SignatureFormatterTests___c {
+    static inline void cctor(
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSAPKCS1SignatureFormatterTests___c.cctor(
+        );
+    }
+    static inline void ctor(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSAPKCS1SignatureFormatterTests___c.ctor(
+                    arg_0
+        );
+    }
+    static inline void _CreateSignature_2_System_Byte_0_b__6_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSAPKCS1SignatureFormatterTests___c._CreateSignature_2_System_Byte_0_b__6_0(
+                    arg_0
+        );
+    }
+    static inline void _CreateSignature_2_System_Byte_1_b__8_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSAPKCS1SignatureFormatterTests___c._CreateSignature_2_System_Byte_1_b__8_0(
+                    arg_0
+        );
+    }
+    static inline void _CreateSignature_2_System_Byte_2_b__10_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSAPKCS1SignatureFormatterTests___c._CreateSignature_2_System_Byte_2_b__10_0(
+                    arg_0
+        );
+    }
+    static inline void _SetHashAlgorithm_1_string_0_b__2_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSAPKCS1SignatureFormatterTests___c._SetHashAlgorithm_1_string_0_b__2_0(
+                    arg_0
+        );
+    }
+    static inline void _SetHashAlgorithm_1_string_1_b__4_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSAPKCS1SignatureFormatterTests___c._SetHashAlgorithm_1_string_1_b__4_0(
+                    arg_0
+        );
+    }
+    static inline void _SetKey_0_AsymmetricAlgorithm_0_b__0_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSAPKCS1SignatureFormatterTests___c._SetKey_0_AsymmetricAlgorithm_0_b__0_0(
+                    arg_0
+        );
+    }
+    /// Total number of AOT-compiled methods in this type.
+    static constexpr int32_t MethodCount = 8;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSATests {
@@ -22278,6 +34152,380 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
     static constexpr int32_t MethodCount = 103;
 };
 
+struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSATests___c {
+    static inline void cctor(
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSATests___c.cctor(
+        );
+    }
+    static inline void ctor(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSATests___c.ctor(
+                    arg_0
+        );
+    }
+    static inline void _DecryptValue_7_System_Byte_0_b__32_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSATests___c._DecryptValue_7_System_Byte_0_b__32_0(
+                    arg_0
+        );
+    }
+    static inline void _DecryptValue_7_System_Byte_1_b__34_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSATests___c._DecryptValue_7_System_Byte_1_b__34_0(
+                    arg_0
+        );
+    }
+    static inline void _DecryptValue_7_System_Byte_2_b__36_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSATests___c._DecryptValue_7_System_Byte_2_b__36_0(
+                    arg_0
+        );
+    }
+    static inline void _Decrypt_4_System_Byte_RSAEncryptionPadding_0_b__14_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSATests___c._Decrypt_4_System_Byte_RSAEncryptionPadding_0_b__14_0(
+                    arg_0
+        );
+    }
+    static inline void _Decrypt_4_System_Byte_RSAEncryptionPadding_1_b__16_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSATests___c._Decrypt_4_System_Byte_RSAEncryptionPadding_1_b__16_0(
+                    arg_0
+        );
+    }
+    static inline void _Decrypt_4_System_Byte_RSAEncryptionPadding_2_b__18_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSATests___c._Decrypt_4_System_Byte_RSAEncryptionPadding_2_b__18_0(
+                    arg_0
+        );
+    }
+    static inline void _EncryptValue_8_System_Byte_0_b__38_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSATests___c._EncryptValue_8_System_Byte_0_b__38_0(
+                    arg_0
+        );
+    }
+    static inline void _EncryptValue_8_System_Byte_1_b__40_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSATests___c._EncryptValue_8_System_Byte_1_b__40_0(
+                    arg_0
+        );
+    }
+    static inline void _EncryptValue_8_System_Byte_2_b__42_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSATests___c._EncryptValue_8_System_Byte_2_b__42_0(
+                    arg_0
+        );
+    }
+    static inline void _Encrypt_3_System_Byte_RSAEncryptionPadding_0_b__8_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSATests___c._Encrypt_3_System_Byte_RSAEncryptionPadding_0_b__8_0(
+                    arg_0
+        );
+    }
+    static inline void _Encrypt_3_System_Byte_RSAEncryptionPadding_1_b__10_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSATests___c._Encrypt_3_System_Byte_RSAEncryptionPadding_1_b__10_0(
+                    arg_0
+        );
+    }
+    static inline void _Encrypt_3_System_Byte_RSAEncryptionPadding_2_b__12_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSATests___c._Encrypt_3_System_Byte_RSAEncryptionPadding_2_b__12_0(
+                    arg_0
+        );
+    }
+    static inline void _ExportParameters_1_bool_0_b__2_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSATests___c._ExportParameters_1_bool_0_b__2_0(
+                    arg_0
+        );
+    }
+    static inline void _ExportParameters_1_bool_1_b__4_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSATests___c._ExportParameters_1_bool_1_b__4_0(
+                    arg_0
+        );
+    }
+    static inline void _ExportRSAPrivateKeyPem_17__17_b__90_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSATests___c._ExportRSAPrivateKeyPem_17__17_b__90_0(
+                    arg_0
+        );
+    }
+    static inline void _ExportRSAPrivateKey_15__15_b__86_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSATests___c._ExportRSAPrivateKey_15__15_b__86_0(
+                    arg_0
+        );
+    }
+    static inline void _ExportRSAPublicKeyPem_18__18_b__92_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSATests___c._ExportRSAPublicKeyPem_18__18_b__92_0(
+                    arg_0
+        );
+    }
+    static inline void _ExportRSAPublicKey_16__16_b__88_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSATests___c._ExportRSAPublicKey_16__16_b__88_0(
+                    arg_0
+        );
+    }
+    static inline void _FromXmlString_19_string_0_b__94_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSATests___c._FromXmlString_19_string_0_b__94_0(
+                    arg_0
+        );
+    }
+    static inline void _FromXmlString_19_string_1_b__96_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSATests___c._FromXmlString_19_string_1_b__96_0(
+                    arg_0
+        );
+    }
+    static inline void _GetMaxOutputSize_0__0_b__0_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSATests___c._GetMaxOutputSize_0__0_b__0_0(
+                    arg_0
+        );
+    }
+    static inline void _ImportParameters_2_RSAParameters_0_b__6_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSATests___c._ImportParameters_2_RSAParameters_0_b__6_0(
+                    arg_0
+        );
+    }
+    static inline void _SignData_10_System_Byte_int_int_HashAlgorithmName_RSASignaturePadding_0_b__50_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSATests___c._SignData_10_System_Byte_int_int_HashAlgorithmName_RSASignaturePadding_0_b__50_0(
+                    arg_0
+        );
+    }
+    static inline void _SignData_10_System_Byte_int_int_HashAlgorithmName_RSASignaturePadding_1_b__52_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSATests___c._SignData_10_System_Byte_int_int_HashAlgorithmName_RSASignaturePadding_1_b__52_0(
+                    arg_0
+        );
+    }
+    static inline void _SignData_10_System_Byte_int_int_HashAlgorithmName_RSASignaturePadding_2_b__54_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSATests___c._SignData_10_System_Byte_int_int_HashAlgorithmName_RSASignaturePadding_2_b__54_0(
+                    arg_0
+        );
+    }
+    static inline void _SignData_10_System_Byte_int_int_HashAlgorithmName_RSASignaturePadding_3_b__56_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSATests___c._SignData_10_System_Byte_int_int_HashAlgorithmName_RSASignaturePadding_3_b__56_0(
+                    arg_0
+        );
+    }
+    static inline void _SignData_10_System_Byte_int_int_HashAlgorithmName_RSASignaturePadding_4_b__58_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSATests___c._SignData_10_System_Byte_int_int_HashAlgorithmName_RSASignaturePadding_4_b__58_0(
+                    arg_0
+        );
+    }
+    static inline void _SignData_11_Stream_HashAlgorithmName_RSASignaturePadding_0_b__60_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSATests___c._SignData_11_Stream_HashAlgorithmName_RSASignaturePadding_0_b__60_0(
+                    arg_0
+        );
+    }
+    static inline void _SignData_11_Stream_HashAlgorithmName_RSASignaturePadding_1_b__62_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSATests___c._SignData_11_Stream_HashAlgorithmName_RSASignaturePadding_1_b__62_0(
+                    arg_0
+        );
+    }
+    static inline void _SignData_9_System_Byte_HashAlgorithmName_RSASignaturePadding_0_b__44_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSATests___c._SignData_9_System_Byte_HashAlgorithmName_RSASignaturePadding_0_b__44_0(
+                    arg_0
+        );
+    }
+    static inline void _SignData_9_System_Byte_HashAlgorithmName_RSASignaturePadding_1_b__46_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSATests___c._SignData_9_System_Byte_HashAlgorithmName_RSASignaturePadding_1_b__46_0(
+                    arg_0
+        );
+    }
+    static inline void _SignData_9_System_Byte_HashAlgorithmName_RSASignaturePadding_2_b__48_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSATests___c._SignData_9_System_Byte_HashAlgorithmName_RSASignaturePadding_2_b__48_0(
+                    arg_0
+        );
+    }
+    static inline void _SignHash_5_System_Byte_HashAlgorithmName_RSASignaturePadding_0_b__20_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSATests___c._SignHash_5_System_Byte_HashAlgorithmName_RSASignaturePadding_0_b__20_0(
+                    arg_0
+        );
+    }
+    static inline void _SignHash_5_System_Byte_HashAlgorithmName_RSASignaturePadding_1_b__22_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSATests___c._SignHash_5_System_Byte_HashAlgorithmName_RSASignaturePadding_1_b__22_0(
+                    arg_0
+        );
+    }
+    static inline void _SignHash_5_System_Byte_HashAlgorithmName_RSASignaturePadding_2_b__24_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSATests___c._SignHash_5_System_Byte_HashAlgorithmName_RSASignaturePadding_2_b__24_0(
+                    arg_0
+        );
+    }
+    static inline void _ToXmlString_20_bool_0_b__98_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSATests___c._ToXmlString_20_bool_0_b__98_0(
+                    arg_0
+        );
+    }
+    static inline void _ToXmlString_20_bool_1_b__100_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSATests___c._ToXmlString_20_bool_1_b__100_0(
+                    arg_0
+        );
+    }
+    static inline void _VerifyData_12_System_Byte_System_Byte_HashAlgorithmName_RSASignaturePadding_0_b__64_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSATests___c._VerifyData_12_System_Byte_System_Byte_HashAlgorithmName_RSASignaturePadding_0_b__64_0(
+                    arg_0
+        );
+    }
+    static inline void _VerifyData_12_System_Byte_System_Byte_HashAlgorithmName_RSASignaturePadding_1_b__66_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSATests___c._VerifyData_12_System_Byte_System_Byte_HashAlgorithmName_RSASignaturePadding_1_b__66_0(
+                    arg_0
+        );
+    }
+    static inline void _VerifyData_12_System_Byte_System_Byte_HashAlgorithmName_RSASignaturePadding_2_b__68_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSATests___c._VerifyData_12_System_Byte_System_Byte_HashAlgorithmName_RSASignaturePadding_2_b__68_0(
+                    arg_0
+        );
+    }
+    static inline void _VerifyData_13_System_Byte_int_int_System_Byte_HashAlgorithmName_RSASignaturePadding_0_b__70_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSATests___c._VerifyData_13_System_Byte_int_int_System_Byte_HashAlgorithmName_RSASignaturePadding_0_b__70_0(
+                    arg_0
+        );
+    }
+    static inline void _VerifyData_13_System_Byte_int_int_System_Byte_HashAlgorithmName_RSASignaturePadding_1_b__72_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSATests___c._VerifyData_13_System_Byte_int_int_System_Byte_HashAlgorithmName_RSASignaturePadding_1_b__72_0(
+                    arg_0
+        );
+    }
+    static inline void _VerifyData_13_System_Byte_int_int_System_Byte_HashAlgorithmName_RSASignaturePadding_2_b__74_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSATests___c._VerifyData_13_System_Byte_int_int_System_Byte_HashAlgorithmName_RSASignaturePadding_2_b__74_0(
+                    arg_0
+        );
+    }
+    static inline void _VerifyData_13_System_Byte_int_int_System_Byte_HashAlgorithmName_RSASignaturePadding_3_b__76_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSATests___c._VerifyData_13_System_Byte_int_int_System_Byte_HashAlgorithmName_RSASignaturePadding_3_b__76_0(
+                    arg_0
+        );
+    }
+    static inline void _VerifyData_13_System_Byte_int_int_System_Byte_HashAlgorithmName_RSASignaturePadding_4_b__78_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSATests___c._VerifyData_13_System_Byte_int_int_System_Byte_HashAlgorithmName_RSASignaturePadding_4_b__78_0(
+                    arg_0
+        );
+    }
+    static inline void _VerifyData_14_Stream_System_Byte_HashAlgorithmName_RSASignaturePadding_0_b__80_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSATests___c._VerifyData_14_Stream_System_Byte_HashAlgorithmName_RSASignaturePadding_0_b__80_0(
+                    arg_0
+        );
+    }
+    static inline void _VerifyData_14_Stream_System_Byte_HashAlgorithmName_RSASignaturePadding_1_b__82_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSATests___c._VerifyData_14_Stream_System_Byte_HashAlgorithmName_RSASignaturePadding_1_b__82_0(
+                    arg_0
+        );
+    }
+    static inline void _VerifyData_14_Stream_System_Byte_HashAlgorithmName_RSASignaturePadding_2_b__84_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSATests___c._VerifyData_14_Stream_System_Byte_HashAlgorithmName_RSASignaturePadding_2_b__84_0(
+                    arg_0
+        );
+    }
+    static inline void _VerifyHash_6_System_Byte_System_Byte_HashAlgorithmName_RSASignaturePadding_0_b__26_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSATests___c._VerifyHash_6_System_Byte_System_Byte_HashAlgorithmName_RSASignaturePadding_0_b__26_0(
+                    arg_0
+        );
+    }
+    static inline void _VerifyHash_6_System_Byte_System_Byte_HashAlgorithmName_RSASignaturePadding_1_b__28_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSATests___c._VerifyHash_6_System_Byte_System_Byte_HashAlgorithmName_RSASignaturePadding_1_b__28_0(
+                    arg_0
+        );
+    }
+    static inline void _VerifyHash_6_System_Byte_System_Byte_HashAlgorithmName_RSASignaturePadding_2_b__30_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSATests___c._VerifyHash_6_System_Byte_System_Byte_HashAlgorithmName_RSASignaturePadding_2_b__30_0(
+                    arg_0
+        );
+    }
+    /// Total number of AOT-compiled methods in this type.
+    static constexpr int32_t MethodCount = 53;
+};
+
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RandomNumberGeneratorTests {
     static inline void ctor(
                 CHAOS_IL2CPP_INTPTR arg_0
@@ -22554,6 +34802,142 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
     static constexpr int32_t MethodCount = 45;
 };
 
+struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RandomNumberGeneratorTests___c {
+    static inline void cctor(
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RandomNumberGeneratorTests___c.cctor(
+        );
+    }
+    static inline void ctor(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RandomNumberGeneratorTests___c.ctor(
+                    arg_0
+        );
+    }
+    static inline void _Dispose_0__0_b__0_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RandomNumberGeneratorTests___c._Dispose_0__0_b__0_0(
+                    arg_0
+        );
+    }
+    static inline void _GetBytes_1_System_Byte_0_b__2_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RandomNumberGeneratorTests___c._GetBytes_1_System_Byte_0_b__2_0(
+                    arg_0
+        );
+    }
+    static inline void _GetBytes_1_System_Byte_1_b__4_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RandomNumberGeneratorTests___c._GetBytes_1_System_Byte_1_b__4_0(
+                    arg_0
+        );
+    }
+    static inline void _GetBytes_1_System_Byte_2_b__6_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RandomNumberGeneratorTests___c._GetBytes_1_System_Byte_2_b__6_0(
+                    arg_0
+        );
+    }
+    static inline void _GetBytes_2_System_Byte_int_int_0_b__8_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RandomNumberGeneratorTests___c._GetBytes_2_System_Byte_int_int_0_b__8_0(
+                    arg_0
+        );
+    }
+    static inline void _GetBytes_2_System_Byte_int_int_1_b__10_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RandomNumberGeneratorTests___c._GetBytes_2_System_Byte_int_int_1_b__10_0(
+                    arg_0
+        );
+    }
+    static inline void _GetBytes_2_System_Byte_int_int_2_b__12_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RandomNumberGeneratorTests___c._GetBytes_2_System_Byte_int_int_2_b__12_0(
+                    arg_0
+        );
+    }
+    static inline void _GetBytes_2_System_Byte_int_int_3_b__14_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RandomNumberGeneratorTests___c._GetBytes_2_System_Byte_int_int_3_b__14_0(
+                    arg_0
+        );
+    }
+    static inline void _GetBytes_2_System_Byte_int_int_4_b__16_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RandomNumberGeneratorTests___c._GetBytes_2_System_Byte_int_int_4_b__16_0(
+                    arg_0
+        );
+    }
+    static inline void _GetInt32_4_int_int_0_b__24_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RandomNumberGeneratorTests___c._GetInt32_4_int_int_0_b__24_0(
+                    arg_0
+        );
+    }
+    static inline void _GetInt32_4_int_int_1_b__26_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RandomNumberGeneratorTests___c._GetInt32_4_int_int_1_b__26_0(
+                    arg_0
+        );
+    }
+    static inline void _GetInt32_4_int_int_2_b__28_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RandomNumberGeneratorTests___c._GetInt32_4_int_int_2_b__28_0(
+                    arg_0
+        );
+    }
+    static inline void _GetInt32_5_int_0_b__30_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RandomNumberGeneratorTests___c._GetInt32_5_int_0_b__30_0(
+                    arg_0
+        );
+    }
+    static inline void _GetInt32_5_int_1_b__32_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RandomNumberGeneratorTests___c._GetInt32_5_int_1_b__32_0(
+                    arg_0
+        );
+    }
+    static inline void _GetNonZeroBytes_3_System_Byte_0_b__18_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RandomNumberGeneratorTests___c._GetNonZeroBytes_3_System_Byte_0_b__18_0(
+                    arg_0
+        );
+    }
+    static inline void _GetNonZeroBytes_3_System_Byte_1_b__20_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RandomNumberGeneratorTests___c._GetNonZeroBytes_3_System_Byte_1_b__20_0(
+                    arg_0
+        );
+    }
+    static inline void _GetNonZeroBytes_3_System_Byte_2_b__22_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RandomNumberGeneratorTests___c._GetNonZeroBytes_3_System_Byte_2_b__22_0(
+                    arg_0
+        );
+    }
+    /// Total number of AOT-compiled methods in this type.
+    static constexpr int32_t MethodCount = 19;
+};
+
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Rfc2898DeriveBytesTests {
     static inline void ctor(
                 CHAOS_IL2CPP_INTPTR arg_0
@@ -22770,6 +35154,142 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
     static constexpr int32_t MethodCount = 35;
 };
 
+struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Rfc2898DeriveBytesTests___c {
+    static inline void cctor(
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Rfc2898DeriveBytesTests___c.cctor(
+        );
+    }
+    static inline void ctor(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Rfc2898DeriveBytesTests___c.ctor(
+                    arg_0
+        );
+    }
+    static inline void _CryptDeriveKey_1_string_string_int_System_Byte_0_b__4_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Rfc2898DeriveBytesTests___c._CryptDeriveKey_1_string_string_int_System_Byte_0_b__4_0(
+                    arg_0
+        );
+    }
+    static inline void _CryptDeriveKey_1_string_string_int_System_Byte_1_b__6_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Rfc2898DeriveBytesTests___c._CryptDeriveKey_1_string_string_int_System_Byte_1_b__6_0(
+                    arg_0
+        );
+    }
+    static inline void _CryptDeriveKey_1_string_string_int_System_Byte_2_b__8_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Rfc2898DeriveBytesTests___c._CryptDeriveKey_1_string_string_int_System_Byte_2_b__8_0(
+                    arg_0
+        );
+    }
+    static inline void _CryptDeriveKey_1_string_string_int_System_Byte_3_b__10_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Rfc2898DeriveBytesTests___c._CryptDeriveKey_1_string_string_int_System_Byte_3_b__10_0(
+                    arg_0
+        );
+    }
+    static inline void _CryptDeriveKey_1_string_string_int_System_Byte_4_b__12_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Rfc2898DeriveBytesTests___c._CryptDeriveKey_1_string_string_int_System_Byte_4_b__12_0(
+                    arg_0
+        );
+    }
+    static inline void _CryptDeriveKey_1_string_string_int_System_Byte_5_b__14_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Rfc2898DeriveBytesTests___c._CryptDeriveKey_1_string_string_int_System_Byte_5_b__14_0(
+                    arg_0
+        );
+    }
+    static inline void _GetBytes_0_int_0_b__0_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Rfc2898DeriveBytesTests___c._GetBytes_0_int_0_b__0_0(
+                    arg_0
+        );
+    }
+    static inline void _GetBytes_0_int_1_b__2_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Rfc2898DeriveBytesTests___c._GetBytes_0_int_1_b__2_0(
+                    arg_0
+        );
+    }
+    static inline void _Pbkdf2_2_System_Byte_System_Byte_int_HashAlgorithmName_int_0_b__16_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Rfc2898DeriveBytesTests___c._Pbkdf2_2_System_Byte_System_Byte_int_HashAlgorithmName_int_0_b__16_0(
+                    arg_0
+        );
+    }
+    static inline void _Pbkdf2_2_System_Byte_System_Byte_int_HashAlgorithmName_int_1_b__18_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Rfc2898DeriveBytesTests___c._Pbkdf2_2_System_Byte_System_Byte_int_HashAlgorithmName_int_1_b__18_0(
+                    arg_0
+        );
+    }
+    static inline void _Pbkdf2_2_System_Byte_System_Byte_int_HashAlgorithmName_int_2_b__20_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Rfc2898DeriveBytesTests___c._Pbkdf2_2_System_Byte_System_Byte_int_HashAlgorithmName_int_2_b__20_0(
+                    arg_0
+        );
+    }
+    static inline void _Pbkdf2_2_System_Byte_System_Byte_int_HashAlgorithmName_int_3_b__22_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Rfc2898DeriveBytesTests___c._Pbkdf2_2_System_Byte_System_Byte_int_HashAlgorithmName_int_3_b__22_0(
+                    arg_0
+        );
+    }
+    static inline void _Pbkdf2_3_string_System_Byte_int_HashAlgorithmName_int_0_b__24_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Rfc2898DeriveBytesTests___c._Pbkdf2_3_string_System_Byte_int_HashAlgorithmName_int_0_b__24_0(
+                    arg_0
+        );
+    }
+    static inline void _Pbkdf2_3_string_System_Byte_int_HashAlgorithmName_int_1_b__26_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Rfc2898DeriveBytesTests___c._Pbkdf2_3_string_System_Byte_int_HashAlgorithmName_int_1_b__26_0(
+                    arg_0
+        );
+    }
+    static inline void _Pbkdf2_3_string_System_Byte_int_HashAlgorithmName_int_2_b__28_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Rfc2898DeriveBytesTests___c._Pbkdf2_3_string_System_Byte_int_HashAlgorithmName_int_2_b__28_0(
+                    arg_0
+        );
+    }
+    static inline void _Pbkdf2_3_string_System_Byte_int_HashAlgorithmName_int_3_b__30_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Rfc2898DeriveBytesTests___c._Pbkdf2_3_string_System_Byte_int_HashAlgorithmName_int_3_b__30_0(
+                    arg_0
+        );
+    }
+    static inline void _Pbkdf2_3_string_System_Byte_int_HashAlgorithmName_int_4_b__32_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Rfc2898DeriveBytesTests___c._Pbkdf2_3_string_System_Byte_int_HashAlgorithmName_int_4_b__32_0(
+                    arg_0
+        );
+    }
+    /// Total number of AOT-compiled methods in this type.
+    static constexpr int32_t MethodCount = 19;
+};
+
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RijndaelManagedTests {
     static inline void ctor(
                 CHAOS_IL2CPP_INTPTR arg_0
@@ -22902,6 +35422,93 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
     static constexpr int32_t MethodCount = 21;
 };
 
+struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RijndaelManagedTests___c {
+    static inline void cctor(
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RijndaelManagedTests___c.cctor(
+        );
+    }
+    static inline void ctor(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RijndaelManagedTests___c.ctor(
+                    arg_0
+        );
+    }
+    static inline void _CreateDecryptor_2__2_b__8_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RijndaelManagedTests___c._CreateDecryptor_2__2_b__8_0(
+                    arg_0
+        );
+    }
+    static inline void _CreateDecryptor_3_System_Byte_System_Byte_0_b__10_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RijndaelManagedTests___c._CreateDecryptor_3_System_Byte_System_Byte_0_b__10_0(
+                    arg_0
+        );
+    }
+    static inline void _CreateDecryptor_3_System_Byte_System_Byte_1_b__12_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RijndaelManagedTests___c._CreateDecryptor_3_System_Byte_System_Byte_1_b__12_0(
+                    arg_0
+        );
+    }
+    static inline void _CreateDecryptor_3_System_Byte_System_Byte_2_b__14_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RijndaelManagedTests___c._CreateDecryptor_3_System_Byte_System_Byte_2_b__14_0(
+                    arg_0
+        );
+    }
+    static inline void _CreateEncryptor_0__0_b__0_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RijndaelManagedTests___c._CreateEncryptor_0__0_b__0_0(
+                    arg_0
+        );
+    }
+    static inline void _CreateEncryptor_1_System_Byte_System_Byte_0_b__2_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RijndaelManagedTests___c._CreateEncryptor_1_System_Byte_System_Byte_0_b__2_0(
+                    arg_0
+        );
+    }
+    static inline void _CreateEncryptor_1_System_Byte_System_Byte_1_b__4_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RijndaelManagedTests___c._CreateEncryptor_1_System_Byte_System_Byte_1_b__4_0(
+                    arg_0
+        );
+    }
+    static inline void _CreateEncryptor_1_System_Byte_System_Byte_2_b__6_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RijndaelManagedTests___c._CreateEncryptor_1_System_Byte_System_Byte_2_b__6_0(
+                    arg_0
+        );
+    }
+    static inline void _GenerateIV_4__4_b__16_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RijndaelManagedTests___c._GenerateIV_4__4_b__16_0(
+                    arg_0
+        );
+    }
+    static inline void _GenerateKey_5__5_b__18_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RijndaelManagedTests___c._GenerateKey_5__5_b__18_0(
+                    arg_0
+        );
+    }
+    /// Total number of AOT-compiled methods in this type.
+    static constexpr int32_t MethodCount = 12;
+};
+
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA1CryptoServiceProviderTests {
     static inline void ctor(
                 CHAOS_IL2CPP_INTPTR arg_0
@@ -22926,6 +35533,30 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
     static constexpr int32_t MethodCount = 3;
 };
 
+struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA1CryptoServiceProviderTests___c {
+    static inline void cctor(
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA1CryptoServiceProviderTests___c.cctor(
+        );
+    }
+    static inline void ctor(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA1CryptoServiceProviderTests___c.ctor(
+                    arg_0
+        );
+    }
+    static inline void _Initialize_0__0_b__0_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA1CryptoServiceProviderTests___c._Initialize_0__0_b__0_0(
+                    arg_0
+        );
+    }
+    /// Total number of AOT-compiled methods in this type.
+    static constexpr int32_t MethodCount = 3;
+};
+
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA1ManagedTests {
     static inline void ctor(
                 CHAOS_IL2CPP_INTPTR arg_0
@@ -22943,6 +35574,30 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
                 CHAOS_IL2CPP_INTPTR arg_0
     ) {
         return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA1ManagedTests.Initialize_0__0(
+                    arg_0
+        );
+    }
+    /// Total number of AOT-compiled methods in this type.
+    static constexpr int32_t MethodCount = 3;
+};
+
+struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA1ManagedTests___c {
+    static inline void cctor(
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA1ManagedTests___c.cctor(
+        );
+    }
+    static inline void ctor(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA1ManagedTests___c.ctor(
+                    arg_0
+        );
+    }
+    static inline void _Initialize_0__0_b__0_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA1ManagedTests___c._Initialize_0__0_b__0_0(
                     arg_0
         );
     }
@@ -23070,6 +35725,58 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
     static constexpr int32_t MethodCount = 19;
 };
 
+struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA1Tests___c {
+    static inline void cctor(
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA1Tests___c.cctor(
+        );
+    }
+    static inline void ctor(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA1Tests___c.ctor(
+                    arg_0
+        );
+    }
+    static inline void _HashDataAsync_2_Stream_CancellationToken_0_b__10_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA1Tests___c._HashDataAsync_2_Stream_CancellationToken_0_b__10_0(
+                    arg_0
+        );
+    }
+    static inline void _HashDataAsync_3_Stream_System_Memorybyte_CancellationToken_0_b__14_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA1Tests___c._HashDataAsync_3_Stream_System_Memorybyte_CancellationToken_0_b__14_0(
+                    arg_0
+        );
+    }
+    static inline void _HashDataAsync_3_Stream_System_Memorybyte_CancellationToken_1_b__16_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA1Tests___c._HashDataAsync_3_Stream_System_Memorybyte_CancellationToken_1_b__16_0(
+                    arg_0
+        );
+    }
+    static inline void _HashData_0_System_Byte_0_b__0_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA1Tests___c._HashData_0_System_Byte_0_b__0_0(
+                    arg_0
+        );
+    }
+    static inline void _HashData_1_Stream_0_b__6_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA1Tests___c._HashData_1_Stream_0_b__6_0(
+                    arg_0
+        );
+    }
+    /// Total number of AOT-compiled methods in this type.
+    static constexpr int32_t MethodCount = 7;
+};
+
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA256CryptoServiceProviderTests {
     static inline void ctor(
                 CHAOS_IL2CPP_INTPTR arg_0
@@ -23094,6 +35801,30 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
     static constexpr int32_t MethodCount = 3;
 };
 
+struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA256CryptoServiceProviderTests___c {
+    static inline void cctor(
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA256CryptoServiceProviderTests___c.cctor(
+        );
+    }
+    static inline void ctor(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA256CryptoServiceProviderTests___c.ctor(
+                    arg_0
+        );
+    }
+    static inline void _Initialize_0__0_b__0_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA256CryptoServiceProviderTests___c._Initialize_0__0_b__0_0(
+                    arg_0
+        );
+    }
+    /// Total number of AOT-compiled methods in this type.
+    static constexpr int32_t MethodCount = 3;
+};
+
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA256ManagedTests {
     static inline void ctor(
                 CHAOS_IL2CPP_INTPTR arg_0
@@ -23111,6 +35842,30 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
                 CHAOS_IL2CPP_INTPTR arg_0
     ) {
         return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA256ManagedTests.Initialize_0__0(
+                    arg_0
+        );
+    }
+    /// Total number of AOT-compiled methods in this type.
+    static constexpr int32_t MethodCount = 3;
+};
+
+struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA256ManagedTests___c {
+    static inline void cctor(
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA256ManagedTests___c.cctor(
+        );
+    }
+    static inline void ctor(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA256ManagedTests___c.ctor(
+                    arg_0
+        );
+    }
+    static inline void _Initialize_0__0_b__0_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA256ManagedTests___c._Initialize_0__0_b__0_0(
                     arg_0
         );
     }
@@ -23238,6 +35993,58 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
     static constexpr int32_t MethodCount = 19;
 };
 
+struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA256Tests___c {
+    static inline void cctor(
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA256Tests___c.cctor(
+        );
+    }
+    static inline void ctor(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA256Tests___c.ctor(
+                    arg_0
+        );
+    }
+    static inline void _HashDataAsync_2_Stream_CancellationToken_0_b__10_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA256Tests___c._HashDataAsync_2_Stream_CancellationToken_0_b__10_0(
+                    arg_0
+        );
+    }
+    static inline void _HashDataAsync_3_Stream_System_Memorybyte_CancellationToken_0_b__14_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA256Tests___c._HashDataAsync_3_Stream_System_Memorybyte_CancellationToken_0_b__14_0(
+                    arg_0
+        );
+    }
+    static inline void _HashDataAsync_3_Stream_System_Memorybyte_CancellationToken_1_b__16_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA256Tests___c._HashDataAsync_3_Stream_System_Memorybyte_CancellationToken_1_b__16_0(
+                    arg_0
+        );
+    }
+    static inline void _HashData_0_System_Byte_0_b__0_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA256Tests___c._HashData_0_System_Byte_0_b__0_0(
+                    arg_0
+        );
+    }
+    static inline void _HashData_1_Stream_0_b__6_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA256Tests___c._HashData_1_Stream_0_b__6_0(
+                    arg_0
+        );
+    }
+    /// Total number of AOT-compiled methods in this type.
+    static constexpr int32_t MethodCount = 7;
+};
+
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA384CryptoServiceProviderTests {
     static inline void ctor(
                 CHAOS_IL2CPP_INTPTR arg_0
@@ -23262,6 +36069,30 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
     static constexpr int32_t MethodCount = 3;
 };
 
+struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA384CryptoServiceProviderTests___c {
+    static inline void cctor(
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA384CryptoServiceProviderTests___c.cctor(
+        );
+    }
+    static inline void ctor(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA384CryptoServiceProviderTests___c.ctor(
+                    arg_0
+        );
+    }
+    static inline void _Initialize_0__0_b__0_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA384CryptoServiceProviderTests___c._Initialize_0__0_b__0_0(
+                    arg_0
+        );
+    }
+    /// Total number of AOT-compiled methods in this type.
+    static constexpr int32_t MethodCount = 3;
+};
+
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA384ManagedTests {
     static inline void ctor(
                 CHAOS_IL2CPP_INTPTR arg_0
@@ -23279,6 +36110,30 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
                 CHAOS_IL2CPP_INTPTR arg_0
     ) {
         return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA384ManagedTests.Initialize_0__0(
+                    arg_0
+        );
+    }
+    /// Total number of AOT-compiled methods in this type.
+    static constexpr int32_t MethodCount = 3;
+};
+
+struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA384ManagedTests___c {
+    static inline void cctor(
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA384ManagedTests___c.cctor(
+        );
+    }
+    static inline void ctor(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA384ManagedTests___c.ctor(
+                    arg_0
+        );
+    }
+    static inline void _Initialize_0__0_b__0_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA384ManagedTests___c._Initialize_0__0_b__0_0(
                     arg_0
         );
     }
@@ -23406,6 +36261,58 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
     static constexpr int32_t MethodCount = 19;
 };
 
+struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA384Tests___c {
+    static inline void cctor(
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA384Tests___c.cctor(
+        );
+    }
+    static inline void ctor(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA384Tests___c.ctor(
+                    arg_0
+        );
+    }
+    static inline void _HashDataAsync_2_Stream_CancellationToken_0_b__10_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA384Tests___c._HashDataAsync_2_Stream_CancellationToken_0_b__10_0(
+                    arg_0
+        );
+    }
+    static inline void _HashDataAsync_3_Stream_System_Memorybyte_CancellationToken_0_b__14_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA384Tests___c._HashDataAsync_3_Stream_System_Memorybyte_CancellationToken_0_b__14_0(
+                    arg_0
+        );
+    }
+    static inline void _HashDataAsync_3_Stream_System_Memorybyte_CancellationToken_1_b__16_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA384Tests___c._HashDataAsync_3_Stream_System_Memorybyte_CancellationToken_1_b__16_0(
+                    arg_0
+        );
+    }
+    static inline void _HashData_0_System_Byte_0_b__0_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA384Tests___c._HashData_0_System_Byte_0_b__0_0(
+                    arg_0
+        );
+    }
+    static inline void _HashData_1_Stream_0_b__6_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA384Tests___c._HashData_1_Stream_0_b__6_0(
+                    arg_0
+        );
+    }
+    /// Total number of AOT-compiled methods in this type.
+    static constexpr int32_t MethodCount = 7;
+};
+
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA3_256Tests {
     static inline void ctor(
                 CHAOS_IL2CPP_INTPTR arg_0
@@ -23524,6 +36431,58 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
     }
     /// Total number of AOT-compiled methods in this type.
     static constexpr int32_t MethodCount = 19;
+};
+
+struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA3_256Tests___c {
+    static inline void cctor(
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA3_256Tests___c.cctor(
+        );
+    }
+    static inline void ctor(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA3_256Tests___c.ctor(
+                    arg_0
+        );
+    }
+    static inline void _HashDataAsync_2_Stream_CancellationToken_0_b__10_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA3_256Tests___c._HashDataAsync_2_Stream_CancellationToken_0_b__10_0(
+                    arg_0
+        );
+    }
+    static inline void _HashDataAsync_3_Stream_System_Memorybyte_CancellationToken_0_b__14_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA3_256Tests___c._HashDataAsync_3_Stream_System_Memorybyte_CancellationToken_0_b__14_0(
+                    arg_0
+        );
+    }
+    static inline void _HashDataAsync_3_Stream_System_Memorybyte_CancellationToken_1_b__16_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA3_256Tests___c._HashDataAsync_3_Stream_System_Memorybyte_CancellationToken_1_b__16_0(
+                    arg_0
+        );
+    }
+    static inline void _HashData_0_System_Byte_0_b__0_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA3_256Tests___c._HashData_0_System_Byte_0_b__0_0(
+                    arg_0
+        );
+    }
+    static inline void _HashData_1_Stream_0_b__6_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA3_256Tests___c._HashData_1_Stream_0_b__6_0(
+                    arg_0
+        );
+    }
+    /// Total number of AOT-compiled methods in this type.
+    static constexpr int32_t MethodCount = 7;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA3_384Tests {
@@ -23646,6 +36605,58 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
     static constexpr int32_t MethodCount = 19;
 };
 
+struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA3_384Tests___c {
+    static inline void cctor(
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA3_384Tests___c.cctor(
+        );
+    }
+    static inline void ctor(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA3_384Tests___c.ctor(
+                    arg_0
+        );
+    }
+    static inline void _HashDataAsync_2_Stream_CancellationToken_0_b__10_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA3_384Tests___c._HashDataAsync_2_Stream_CancellationToken_0_b__10_0(
+                    arg_0
+        );
+    }
+    static inline void _HashDataAsync_3_Stream_System_Memorybyte_CancellationToken_0_b__14_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA3_384Tests___c._HashDataAsync_3_Stream_System_Memorybyte_CancellationToken_0_b__14_0(
+                    arg_0
+        );
+    }
+    static inline void _HashDataAsync_3_Stream_System_Memorybyte_CancellationToken_1_b__16_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA3_384Tests___c._HashDataAsync_3_Stream_System_Memorybyte_CancellationToken_1_b__16_0(
+                    arg_0
+        );
+    }
+    static inline void _HashData_0_System_Byte_0_b__0_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA3_384Tests___c._HashData_0_System_Byte_0_b__0_0(
+                    arg_0
+        );
+    }
+    static inline void _HashData_1_Stream_0_b__6_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA3_384Tests___c._HashData_1_Stream_0_b__6_0(
+                    arg_0
+        );
+    }
+    /// Total number of AOT-compiled methods in this type.
+    static constexpr int32_t MethodCount = 7;
+};
+
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA3_512Tests {
     static inline void ctor(
                 CHAOS_IL2CPP_INTPTR arg_0
@@ -23766,6 +36777,58 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
     static constexpr int32_t MethodCount = 19;
 };
 
+struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA3_512Tests___c {
+    static inline void cctor(
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA3_512Tests___c.cctor(
+        );
+    }
+    static inline void ctor(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA3_512Tests___c.ctor(
+                    arg_0
+        );
+    }
+    static inline void _HashDataAsync_2_Stream_CancellationToken_0_b__10_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA3_512Tests___c._HashDataAsync_2_Stream_CancellationToken_0_b__10_0(
+                    arg_0
+        );
+    }
+    static inline void _HashDataAsync_3_Stream_System_Memorybyte_CancellationToken_0_b__14_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA3_512Tests___c._HashDataAsync_3_Stream_System_Memorybyte_CancellationToken_0_b__14_0(
+                    arg_0
+        );
+    }
+    static inline void _HashDataAsync_3_Stream_System_Memorybyte_CancellationToken_1_b__16_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA3_512Tests___c._HashDataAsync_3_Stream_System_Memorybyte_CancellationToken_1_b__16_0(
+                    arg_0
+        );
+    }
+    static inline void _HashData_0_System_Byte_0_b__0_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA3_512Tests___c._HashData_0_System_Byte_0_b__0_0(
+                    arg_0
+        );
+    }
+    static inline void _HashData_1_Stream_0_b__6_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA3_512Tests___c._HashData_1_Stream_0_b__6_0(
+                    arg_0
+        );
+    }
+    /// Total number of AOT-compiled methods in this type.
+    static constexpr int32_t MethodCount = 7;
+};
+
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA512CryptoServiceProviderTests {
     static inline void ctor(
                 CHAOS_IL2CPP_INTPTR arg_0
@@ -23790,6 +36853,30 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
     static constexpr int32_t MethodCount = 3;
 };
 
+struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA512CryptoServiceProviderTests___c {
+    static inline void cctor(
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA512CryptoServiceProviderTests___c.cctor(
+        );
+    }
+    static inline void ctor(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA512CryptoServiceProviderTests___c.ctor(
+                    arg_0
+        );
+    }
+    static inline void _Initialize_0__0_b__0_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA512CryptoServiceProviderTests___c._Initialize_0__0_b__0_0(
+                    arg_0
+        );
+    }
+    /// Total number of AOT-compiled methods in this type.
+    static constexpr int32_t MethodCount = 3;
+};
+
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA512ManagedTests {
     static inline void ctor(
                 CHAOS_IL2CPP_INTPTR arg_0
@@ -23807,6 +36894,30 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
                 CHAOS_IL2CPP_INTPTR arg_0
     ) {
         return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA512ManagedTests.Initialize_0__0(
+                    arg_0
+        );
+    }
+    /// Total number of AOT-compiled methods in this type.
+    static constexpr int32_t MethodCount = 3;
+};
+
+struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA512ManagedTests___c {
+    static inline void cctor(
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA512ManagedTests___c.cctor(
+        );
+    }
+    static inline void ctor(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA512ManagedTests___c.ctor(
+                    arg_0
+        );
+    }
+    static inline void _Initialize_0__0_b__0_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA512ManagedTests___c._Initialize_0__0_b__0_0(
                     arg_0
         );
     }
@@ -23932,6 +37043,58 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
     }
     /// Total number of AOT-compiled methods in this type.
     static constexpr int32_t MethodCount = 19;
+};
+
+struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA512Tests___c {
+    static inline void cctor(
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA512Tests___c.cctor(
+        );
+    }
+    static inline void ctor(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA512Tests___c.ctor(
+                    arg_0
+        );
+    }
+    static inline void _HashDataAsync_2_Stream_CancellationToken_0_b__10_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA512Tests___c._HashDataAsync_2_Stream_CancellationToken_0_b__10_0(
+                    arg_0
+        );
+    }
+    static inline void _HashDataAsync_3_Stream_System_Memorybyte_CancellationToken_0_b__14_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA512Tests___c._HashDataAsync_3_Stream_System_Memorybyte_CancellationToken_0_b__14_0(
+                    arg_0
+        );
+    }
+    static inline void _HashDataAsync_3_Stream_System_Memorybyte_CancellationToken_1_b__16_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA512Tests___c._HashDataAsync_3_Stream_System_Memorybyte_CancellationToken_1_b__16_0(
+                    arg_0
+        );
+    }
+    static inline void _HashData_0_System_Byte_0_b__0_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA512Tests___c._HashData_0_System_Byte_0_b__0_0(
+                    arg_0
+        );
+    }
+    static inline void _HashData_1_Stream_0_b__6_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA512Tests___c._HashData_1_Stream_0_b__6_0(
+                    arg_0
+        );
+    }
+    /// Total number of AOT-compiled methods in this type.
+    static constexpr int32_t MethodCount = 7;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SP800108HmacCounterKdfTests {
@@ -24138,6 +37301,135 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
     static constexpr int32_t MethodCount = 33;
 };
 
+struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SP800108HmacCounterKdfTests___c {
+    static inline void cctor(
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SP800108HmacCounterKdfTests___c.cctor(
+        );
+    }
+    static inline void ctor(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SP800108HmacCounterKdfTests___c.ctor(
+                    arg_0
+        );
+    }
+    static inline void _DeriveBytes_0_System_Byte_HashAlgorithmName_System_Byte_System_Byte_int_0_b__0_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SP800108HmacCounterKdfTests___c._DeriveBytes_0_System_Byte_HashAlgorithmName_System_Byte_System_Byte_int_0_b__0_0(
+                    arg_0
+        );
+    }
+    static inline void _DeriveBytes_0_System_Byte_HashAlgorithmName_System_Byte_System_Byte_int_1_b__2_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SP800108HmacCounterKdfTests___c._DeriveBytes_0_System_Byte_HashAlgorithmName_System_Byte_System_Byte_int_1_b__2_0(
+                    arg_0
+        );
+    }
+    static inline void _DeriveBytes_0_System_Byte_HashAlgorithmName_System_Byte_System_Byte_int_2_b__4_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SP800108HmacCounterKdfTests___c._DeriveBytes_0_System_Byte_HashAlgorithmName_System_Byte_System_Byte_int_2_b__4_0(
+                    arg_0
+        );
+    }
+    static inline void _DeriveBytes_1_System_Byte_HashAlgorithmName_string_string_int_0_b__6_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SP800108HmacCounterKdfTests___c._DeriveBytes_1_System_Byte_HashAlgorithmName_string_string_int_0_b__6_0(
+                    arg_0
+        );
+    }
+    static inline void _DeriveBytes_1_System_Byte_HashAlgorithmName_string_string_int_1_b__8_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SP800108HmacCounterKdfTests___c._DeriveBytes_1_System_Byte_HashAlgorithmName_string_string_int_1_b__8_0(
+                    arg_0
+        );
+    }
+    static inline void _DeriveBytes_1_System_Byte_HashAlgorithmName_string_string_int_2_b__10_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SP800108HmacCounterKdfTests___c._DeriveBytes_1_System_Byte_HashAlgorithmName_string_string_int_2_b__10_0(
+                    arg_0
+        );
+    }
+    static inline void _DeriveBytes_1_System_Byte_HashAlgorithmName_string_string_int_3_b__12_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SP800108HmacCounterKdfTests___c._DeriveBytes_1_System_Byte_HashAlgorithmName_string_string_int_3_b__12_0(
+                    arg_0
+        );
+    }
+    static inline void _DeriveKey_2_System_Byte_System_Byte_int_0_b__14_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SP800108HmacCounterKdfTests___c._DeriveKey_2_System_Byte_System_Byte_int_0_b__14_0(
+                    arg_0
+        );
+    }
+    static inline void _DeriveKey_2_System_Byte_System_Byte_int_1_b__16_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SP800108HmacCounterKdfTests___c._DeriveKey_2_System_Byte_System_Byte_int_1_b__16_0(
+                    arg_0
+        );
+    }
+    static inline void _DeriveKey_2_System_Byte_System_Byte_int_2_b__18_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SP800108HmacCounterKdfTests___c._DeriveKey_2_System_Byte_System_Byte_int_2_b__18_0(
+                    arg_0
+        );
+    }
+    static inline void _DeriveKey_2_System_Byte_System_Byte_int_3_b__20_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SP800108HmacCounterKdfTests___c._DeriveKey_2_System_Byte_System_Byte_int_3_b__20_0(
+                    arg_0
+        );
+    }
+    static inline void _DeriveKey_3_string_string_int_0_b__22_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SP800108HmacCounterKdfTests___c._DeriveKey_3_string_string_int_0_b__22_0(
+                    arg_0
+        );
+    }
+    static inline void _DeriveKey_3_string_string_int_1_b__24_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SP800108HmacCounterKdfTests___c._DeriveKey_3_string_string_int_1_b__24_0(
+                    arg_0
+        );
+    }
+    static inline void _DeriveKey_3_string_string_int_2_b__26_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SP800108HmacCounterKdfTests___c._DeriveKey_3_string_string_int_2_b__26_0(
+                    arg_0
+        );
+    }
+    static inline void _DeriveKey_3_string_string_int_3_b__28_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SP800108HmacCounterKdfTests___c._DeriveKey_3_string_string_int_3_b__28_0(
+                    arg_0
+        );
+    }
+    static inline void _Dispose_4__4_b__30_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SP800108HmacCounterKdfTests___c._Dispose_4__4_b__30_0(
+                    arg_0
+        );
+    }
+    /// Total number of AOT-compiled methods in this type.
+    static constexpr int32_t MethodCount = 18;
+};
+
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SafeEvpPKeyHandleTests {
     static inline void ctor(
                 CHAOS_IL2CPP_INTPTR arg_0
@@ -24268,6 +37560,93 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
     }
     /// Total number of AOT-compiled methods in this type.
     static constexpr int32_t MethodCount = 21;
+};
+
+struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SafeEvpPKeyHandleTests___c {
+    static inline void cctor(
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SafeEvpPKeyHandleTests___c.cctor(
+        );
+    }
+    static inline void ctor(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SafeEvpPKeyHandleTests___c.ctor(
+                    arg_0
+        );
+    }
+    static inline void _DuplicateHandle_3__3_b__18_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SafeEvpPKeyHandleTests___c._DuplicateHandle_3__3_b__18_0(
+                    arg_0
+        );
+    }
+    static inline void _OpenKeyFromProvider_2_string_string_0_b__12_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SafeEvpPKeyHandleTests___c._OpenKeyFromProvider_2_string_string_0_b__12_0(
+                    arg_0
+        );
+    }
+    static inline void _OpenKeyFromProvider_2_string_string_1_b__14_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SafeEvpPKeyHandleTests___c._OpenKeyFromProvider_2_string_string_1_b__14_0(
+                    arg_0
+        );
+    }
+    static inline void _OpenKeyFromProvider_2_string_string_2_b__16_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SafeEvpPKeyHandleTests___c._OpenKeyFromProvider_2_string_string_2_b__16_0(
+                    arg_0
+        );
+    }
+    static inline void _OpenPrivateKeyFromEngine_0_string_string_0_b__0_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SafeEvpPKeyHandleTests___c._OpenPrivateKeyFromEngine_0_string_string_0_b__0_0(
+                    arg_0
+        );
+    }
+    static inline void _OpenPrivateKeyFromEngine_0_string_string_1_b__2_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SafeEvpPKeyHandleTests___c._OpenPrivateKeyFromEngine_0_string_string_1_b__2_0(
+                    arg_0
+        );
+    }
+    static inline void _OpenPrivateKeyFromEngine_0_string_string_2_b__4_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SafeEvpPKeyHandleTests___c._OpenPrivateKeyFromEngine_0_string_string_2_b__4_0(
+                    arg_0
+        );
+    }
+    static inline void _OpenPublicKeyFromEngine_1_string_string_0_b__6_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SafeEvpPKeyHandleTests___c._OpenPublicKeyFromEngine_1_string_string_0_b__6_0(
+                    arg_0
+        );
+    }
+    static inline void _OpenPublicKeyFromEngine_1_string_string_1_b__8_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SafeEvpPKeyHandleTests___c._OpenPublicKeyFromEngine_1_string_string_1_b__8_0(
+                    arg_0
+        );
+    }
+    static inline void _OpenPublicKeyFromEngine_1_string_string_2_b__10_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SafeEvpPKeyHandleTests___c._OpenPublicKeyFromEngine_1_string_string_2_b__10_0(
+                    arg_0
+        );
+    }
+    /// Total number of AOT-compiled methods in this type.
+    static constexpr int32_t MethodCount = 12;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Shake128Tests {
@@ -24558,6 +37937,149 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
     static constexpr int32_t MethodCount = 47;
 };
 
+struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Shake128Tests___c {
+    static inline void cctor(
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Shake128Tests___c.cctor(
+        );
+    }
+    static inline void ctor(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Shake128Tests___c.ctor(
+                    arg_0
+        );
+    }
+    static inline void _AppendData_0_System_Byte_0_b__0_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Shake128Tests___c._AppendData_0_System_Byte_0_b__0_0(
+                    arg_0
+        );
+    }
+    static inline void _AppendData_0_System_Byte_1_b__2_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Shake128Tests___c._AppendData_0_System_Byte_1_b__2_0(
+                    arg_0
+        );
+    }
+    static inline void _AppendData_0_System_Byte_2_b__4_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Shake128Tests___c._AppendData_0_System_Byte_2_b__4_0(
+                    arg_0
+        );
+    }
+    static inline void _Clone_4__4_b__18_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Shake128Tests___c._Clone_4__4_b__18_0(
+                    arg_0
+        );
+    }
+    static inline void _Dispose_5__5_b__20_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Shake128Tests___c._Dispose_5__5_b__20_0(
+                    arg_0
+        );
+    }
+    static inline void _GetCurrentHash_2_int_0_b__10_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Shake128Tests___c._GetCurrentHash_2_int_0_b__10_0(
+                    arg_0
+        );
+    }
+    static inline void _GetCurrentHash_2_int_1_b__12_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Shake128Tests___c._GetCurrentHash_2_int_1_b__12_0(
+                    arg_0
+        );
+    }
+    static inline void _GetHashAndReset_1_int_0_b__6_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Shake128Tests___c._GetHashAndReset_1_int_0_b__6_0(
+                    arg_0
+        );
+    }
+    static inline void _GetHashAndReset_1_int_1_b__8_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Shake128Tests___c._GetHashAndReset_1_int_1_b__8_0(
+                    arg_0
+        );
+    }
+    static inline void _HashDataAsync_8_Stream_System_Memorybyte_CancellationToken_0_b__36_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Shake128Tests___c._HashDataAsync_8_Stream_System_Memorybyte_CancellationToken_0_b__36_0(
+                    arg_0
+        );
+    }
+    static inline void _HashDataAsync_9_Stream_int_CancellationToken_0_b__40_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Shake128Tests___c._HashDataAsync_9_Stream_int_CancellationToken_0_b__40_0(
+                    arg_0
+        );
+    }
+    static inline void _HashDataAsync_9_Stream_int_CancellationToken_1_b__42_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Shake128Tests___c._HashDataAsync_9_Stream_int_CancellationToken_1_b__42_0(
+                    arg_0
+        );
+    }
+    static inline void _HashData_6_System_Byte_int_0_b__22_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Shake128Tests___c._HashData_6_System_Byte_int_0_b__22_0(
+                    arg_0
+        );
+    }
+    static inline void _HashData_6_System_Byte_int_1_b__24_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Shake128Tests___c._HashData_6_System_Byte_int_1_b__24_0(
+                    arg_0
+        );
+    }
+    static inline void _HashData_7_Stream_int_0_b__30_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Shake128Tests___c._HashData_7_Stream_int_0_b__30_0(
+                    arg_0
+        );
+    }
+    static inline void _HashData_7_Stream_int_1_b__32_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Shake128Tests___c._HashData_7_Stream_int_1_b__32_0(
+                    arg_0
+        );
+    }
+    static inline void _Read_3_int_0_b__14_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Shake128Tests___c._Read_3_int_0_b__14_0(
+                    arg_0
+        );
+    }
+    static inline void _Read_3_int_1_b__16_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Shake128Tests___c._Read_3_int_1_b__16_0(
+                    arg_0
+        );
+    }
+    /// Total number of AOT-compiled methods in this type.
+    static constexpr int32_t MethodCount = 20;
+};
+
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Shake256Tests {
     static inline void ctor(
                 CHAOS_IL2CPP_INTPTR arg_0
@@ -24846,6 +38368,149 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
     static constexpr int32_t MethodCount = 47;
 };
 
+struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Shake256Tests___c {
+    static inline void cctor(
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Shake256Tests___c.cctor(
+        );
+    }
+    static inline void ctor(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Shake256Tests___c.ctor(
+                    arg_0
+        );
+    }
+    static inline void _AppendData_0_System_Byte_0_b__0_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Shake256Tests___c._AppendData_0_System_Byte_0_b__0_0(
+                    arg_0
+        );
+    }
+    static inline void _AppendData_0_System_Byte_1_b__2_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Shake256Tests___c._AppendData_0_System_Byte_1_b__2_0(
+                    arg_0
+        );
+    }
+    static inline void _AppendData_0_System_Byte_2_b__4_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Shake256Tests___c._AppendData_0_System_Byte_2_b__4_0(
+                    arg_0
+        );
+    }
+    static inline void _Clone_4__4_b__18_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Shake256Tests___c._Clone_4__4_b__18_0(
+                    arg_0
+        );
+    }
+    static inline void _Dispose_5__5_b__20_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Shake256Tests___c._Dispose_5__5_b__20_0(
+                    arg_0
+        );
+    }
+    static inline void _GetCurrentHash_2_int_0_b__10_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Shake256Tests___c._GetCurrentHash_2_int_0_b__10_0(
+                    arg_0
+        );
+    }
+    static inline void _GetCurrentHash_2_int_1_b__12_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Shake256Tests___c._GetCurrentHash_2_int_1_b__12_0(
+                    arg_0
+        );
+    }
+    static inline void _GetHashAndReset_1_int_0_b__6_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Shake256Tests___c._GetHashAndReset_1_int_0_b__6_0(
+                    arg_0
+        );
+    }
+    static inline void _GetHashAndReset_1_int_1_b__8_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Shake256Tests___c._GetHashAndReset_1_int_1_b__8_0(
+                    arg_0
+        );
+    }
+    static inline void _HashDataAsync_8_Stream_System_Memorybyte_CancellationToken_0_b__36_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Shake256Tests___c._HashDataAsync_8_Stream_System_Memorybyte_CancellationToken_0_b__36_0(
+                    arg_0
+        );
+    }
+    static inline void _HashDataAsync_9_Stream_int_CancellationToken_0_b__40_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Shake256Tests___c._HashDataAsync_9_Stream_int_CancellationToken_0_b__40_0(
+                    arg_0
+        );
+    }
+    static inline void _HashDataAsync_9_Stream_int_CancellationToken_1_b__42_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Shake256Tests___c._HashDataAsync_9_Stream_int_CancellationToken_1_b__42_0(
+                    arg_0
+        );
+    }
+    static inline void _HashData_6_System_Byte_int_0_b__22_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Shake256Tests___c._HashData_6_System_Byte_int_0_b__22_0(
+                    arg_0
+        );
+    }
+    static inline void _HashData_6_System_Byte_int_1_b__24_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Shake256Tests___c._HashData_6_System_Byte_int_1_b__24_0(
+                    arg_0
+        );
+    }
+    static inline void _HashData_7_Stream_int_0_b__30_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Shake256Tests___c._HashData_7_Stream_int_0_b__30_0(
+                    arg_0
+        );
+    }
+    static inline void _HashData_7_Stream_int_1_b__32_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Shake256Tests___c._HashData_7_Stream_int_1_b__32_0(
+                    arg_0
+        );
+    }
+    static inline void _Read_3_int_0_b__14_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Shake256Tests___c._Read_3_int_0_b__14_0(
+                    arg_0
+        );
+    }
+    static inline void _Read_3_int_1_b__16_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Shake256Tests___c._Read_3_int_1_b__16_0(
+                    arg_0
+        );
+    }
+    /// Total number of AOT-compiled methods in this type.
+    static constexpr int32_t MethodCount = 20;
+};
+
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SignatureDescriptionTests {
     static inline void ctor(
                 CHAOS_IL2CPP_INTPTR arg_0
@@ -24892,6 +38557,44 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
     }
     /// Total number of AOT-compiled methods in this type.
     static constexpr int32_t MethodCount = 7;
+};
+
+struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SignatureDescriptionTests___c {
+    static inline void cctor(
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SignatureDescriptionTests___c.cctor(
+        );
+    }
+    static inline void ctor(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SignatureDescriptionTests___c.ctor(
+                    arg_0
+        );
+    }
+    static inline void _CreateDeformatter_0_AsymmetricAlgorithm_0_b__0_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SignatureDescriptionTests___c._CreateDeformatter_0_AsymmetricAlgorithm_0_b__0_0(
+                    arg_0
+        );
+    }
+    static inline void _CreateDigest_2__2_b__4_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SignatureDescriptionTests___c._CreateDigest_2__2_b__4_0(
+                    arg_0
+        );
+    }
+    static inline void _CreateFormatter_1_AsymmetricAlgorithm_0_b__2_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SignatureDescriptionTests___c._CreateFormatter_1_AsymmetricAlgorithm_0_b__2_0(
+                    arg_0
+        );
+    }
+    /// Total number of AOT-compiled methods in this type.
+    static constexpr int32_t MethodCount = 5;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SymmetricAlgorithmTests {
@@ -25374,6 +39077,296 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
     static constexpr int32_t MethodCount = 79;
 };
 
+struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SymmetricAlgorithmTests___c {
+    static inline void cctor(
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SymmetricAlgorithmTests___c.cctor(
+        );
+    }
+    static inline void ctor(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SymmetricAlgorithmTests___c.ctor(
+                    arg_0
+        );
+    }
+    static inline void _Clear_5__5_b__18_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SymmetricAlgorithmTests___c._Clear_5__5_b__18_0(
+                    arg_0
+        );
+    }
+    static inline void _CreateDecryptor_0__0_b__0_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SymmetricAlgorithmTests___c._CreateDecryptor_0__0_b__0_0(
+                    arg_0
+        );
+    }
+    static inline void _CreateDecryptor_1_System_Byte_System_Byte_0_b__2_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SymmetricAlgorithmTests___c._CreateDecryptor_1_System_Byte_System_Byte_0_b__2_0(
+                    arg_0
+        );
+    }
+    static inline void _CreateDecryptor_1_System_Byte_System_Byte_1_b__4_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SymmetricAlgorithmTests___c._CreateDecryptor_1_System_Byte_System_Byte_1_b__4_0(
+                    arg_0
+        );
+    }
+    static inline void _CreateDecryptor_1_System_Byte_System_Byte_2_b__6_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SymmetricAlgorithmTests___c._CreateDecryptor_1_System_Byte_System_Byte_2_b__6_0(
+                    arg_0
+        );
+    }
+    static inline void _CreateEncryptor_2__2_b__8_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SymmetricAlgorithmTests___c._CreateEncryptor_2__2_b__8_0(
+                    arg_0
+        );
+    }
+    static inline void _CreateEncryptor_3_System_Byte_System_Byte_0_b__10_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SymmetricAlgorithmTests___c._CreateEncryptor_3_System_Byte_System_Byte_0_b__10_0(
+                    arg_0
+        );
+    }
+    static inline void _CreateEncryptor_3_System_Byte_System_Byte_1_b__12_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SymmetricAlgorithmTests___c._CreateEncryptor_3_System_Byte_System_Byte_1_b__12_0(
+                    arg_0
+        );
+    }
+    static inline void _CreateEncryptor_3_System_Byte_System_Byte_2_b__14_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SymmetricAlgorithmTests___c._CreateEncryptor_3_System_Byte_System_Byte_2_b__14_0(
+                    arg_0
+        );
+    }
+    static inline void _DecryptCbc_14_System_Byte_System_Byte_PaddingMode_0_b__54_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SymmetricAlgorithmTests___c._DecryptCbc_14_System_Byte_System_Byte_PaddingMode_0_b__54_0(
+                    arg_0
+        );
+    }
+    static inline void _DecryptCbc_14_System_Byte_System_Byte_PaddingMode_1_b__56_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SymmetricAlgorithmTests___c._DecryptCbc_14_System_Byte_System_Byte_PaddingMode_1_b__56_0(
+                    arg_0
+        );
+    }
+    static inline void _DecryptCbc_14_System_Byte_System_Byte_PaddingMode_2_b__58_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SymmetricAlgorithmTests___c._DecryptCbc_14_System_Byte_System_Byte_PaddingMode_2_b__58_0(
+                    arg_0
+        );
+    }
+    static inline void _DecryptCfb_16_System_Byte_System_Byte_PaddingMode_int_0_b__66_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SymmetricAlgorithmTests___c._DecryptCfb_16_System_Byte_System_Byte_PaddingMode_int_0_b__66_0(
+                    arg_0
+        );
+    }
+    static inline void _DecryptCfb_16_System_Byte_System_Byte_PaddingMode_int_1_b__68_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SymmetricAlgorithmTests___c._DecryptCfb_16_System_Byte_System_Byte_PaddingMode_int_1_b__68_0(
+                    arg_0
+        );
+    }
+    static inline void _DecryptCfb_16_System_Byte_System_Byte_PaddingMode_int_2_b__70_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SymmetricAlgorithmTests___c._DecryptCfb_16_System_Byte_System_Byte_PaddingMode_int_2_b__70_0(
+                    arg_0
+        );
+    }
+    static inline void _DecryptEcb_12_System_Byte_PaddingMode_0_b__42_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SymmetricAlgorithmTests___c._DecryptEcb_12_System_Byte_PaddingMode_0_b__42_0(
+                    arg_0
+        );
+    }
+    static inline void _DecryptEcb_12_System_Byte_PaddingMode_1_b__44_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SymmetricAlgorithmTests___c._DecryptEcb_12_System_Byte_PaddingMode_1_b__44_0(
+                    arg_0
+        );
+    }
+    static inline void _DecryptEcb_12_System_Byte_PaddingMode_2_b__46_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SymmetricAlgorithmTests___c._DecryptEcb_12_System_Byte_PaddingMode_2_b__46_0(
+                    arg_0
+        );
+    }
+    static inline void _Dispose_4__4_b__16_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SymmetricAlgorithmTests___c._Dispose_4__4_b__16_0(
+                    arg_0
+        );
+    }
+    static inline void _EncryptCbc_15_System_Byte_System_Byte_PaddingMode_0_b__60_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SymmetricAlgorithmTests___c._EncryptCbc_15_System_Byte_System_Byte_PaddingMode_0_b__60_0(
+                    arg_0
+        );
+    }
+    static inline void _EncryptCbc_15_System_Byte_System_Byte_PaddingMode_1_b__62_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SymmetricAlgorithmTests___c._EncryptCbc_15_System_Byte_System_Byte_PaddingMode_1_b__62_0(
+                    arg_0
+        );
+    }
+    static inline void _EncryptCbc_15_System_Byte_System_Byte_PaddingMode_2_b__64_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SymmetricAlgorithmTests___c._EncryptCbc_15_System_Byte_System_Byte_PaddingMode_2_b__64_0(
+                    arg_0
+        );
+    }
+    static inline void _EncryptCfb_17_System_Byte_System_Byte_PaddingMode_int_0_b__72_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SymmetricAlgorithmTests___c._EncryptCfb_17_System_Byte_System_Byte_PaddingMode_int_0_b__72_0(
+                    arg_0
+        );
+    }
+    static inline void _EncryptCfb_17_System_Byte_System_Byte_PaddingMode_int_1_b__74_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SymmetricAlgorithmTests___c._EncryptCfb_17_System_Byte_System_Byte_PaddingMode_int_1_b__74_0(
+                    arg_0
+        );
+    }
+    static inline void _EncryptCfb_17_System_Byte_System_Byte_PaddingMode_int_2_b__76_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SymmetricAlgorithmTests___c._EncryptCfb_17_System_Byte_System_Byte_PaddingMode_int_2_b__76_0(
+                    arg_0
+        );
+    }
+    static inline void _EncryptEcb_13_System_Byte_PaddingMode_0_b__48_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SymmetricAlgorithmTests___c._EncryptEcb_13_System_Byte_PaddingMode_0_b__48_0(
+                    arg_0
+        );
+    }
+    static inline void _EncryptEcb_13_System_Byte_PaddingMode_1_b__50_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SymmetricAlgorithmTests___c._EncryptEcb_13_System_Byte_PaddingMode_1_b__50_0(
+                    arg_0
+        );
+    }
+    static inline void _EncryptEcb_13_System_Byte_PaddingMode_2_b__52_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SymmetricAlgorithmTests___c._EncryptEcb_13_System_Byte_PaddingMode_2_b__52_0(
+                    arg_0
+        );
+    }
+    static inline void _GenerateIV_6__6_b__20_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SymmetricAlgorithmTests___c._GenerateIV_6__6_b__20_0(
+                    arg_0
+        );
+    }
+    static inline void _GenerateKey_7__7_b__22_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SymmetricAlgorithmTests___c._GenerateKey_7__7_b__22_0(
+                    arg_0
+        );
+    }
+    static inline void _GetCiphertextLengthCbc_10_int_PaddingMode_0_b__32_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SymmetricAlgorithmTests___c._GetCiphertextLengthCbc_10_int_PaddingMode_0_b__32_0(
+                    arg_0
+        );
+    }
+    static inline void _GetCiphertextLengthCbc_10_int_PaddingMode_1_b__34_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SymmetricAlgorithmTests___c._GetCiphertextLengthCbc_10_int_PaddingMode_1_b__34_0(
+                    arg_0
+        );
+    }
+    static inline void _GetCiphertextLengthCfb_11_int_PaddingMode_int_0_b__36_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SymmetricAlgorithmTests___c._GetCiphertextLengthCfb_11_int_PaddingMode_int_0_b__36_0(
+                    arg_0
+        );
+    }
+    static inline void _GetCiphertextLengthCfb_11_int_PaddingMode_int_1_b__38_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SymmetricAlgorithmTests___c._GetCiphertextLengthCfb_11_int_PaddingMode_int_1_b__38_0(
+                    arg_0
+        );
+    }
+    static inline void _GetCiphertextLengthCfb_11_int_PaddingMode_int_2_b__40_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SymmetricAlgorithmTests___c._GetCiphertextLengthCfb_11_int_PaddingMode_int_2_b__40_0(
+                    arg_0
+        );
+    }
+    static inline void _GetCiphertextLengthEcb_9_int_PaddingMode_0_b__28_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SymmetricAlgorithmTests___c._GetCiphertextLengthEcb_9_int_PaddingMode_0_b__28_0(
+                    arg_0
+        );
+    }
+    static inline void _GetCiphertextLengthEcb_9_int_PaddingMode_1_b__30_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SymmetricAlgorithmTests___c._GetCiphertextLengthEcb_9_int_PaddingMode_1_b__30_0(
+                    arg_0
+        );
+    }
+    static inline void _ValidKeySize_8_int_0_b__24_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SymmetricAlgorithmTests___c._ValidKeySize_8_int_0_b__24_0(
+                    arg_0
+        );
+    }
+    static inline void _ValidKeySize_8_int_1_b__26_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SymmetricAlgorithmTests___c._ValidKeySize_8_int_1_b__26_0(
+                    arg_0
+        );
+    }
+    /// Total number of AOT-compiled methods in this type.
+    static constexpr int32_t MethodCount = 41;
+};
+
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ToBase64TransformTests {
     static inline void ctor(
                 CHAOS_IL2CPP_INTPTR arg_0
@@ -25530,6 +39523,107 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
     static constexpr int32_t MethodCount = 25;
 };
 
+struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ToBase64TransformTests___c {
+    static inline void cctor(
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ToBase64TransformTests___c.cctor(
+        );
+    }
+    static inline void ctor(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ToBase64TransformTests___c.ctor(
+                    arg_0
+        );
+    }
+    static inline void _Clear_3__3_b__22_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ToBase64TransformTests___c._Clear_3__3_b__22_0(
+                    arg_0
+        );
+    }
+    static inline void _Dispose_2__2_b__20_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ToBase64TransformTests___c._Dispose_2__2_b__20_0(
+                    arg_0
+        );
+    }
+    static inline void _TransformBlock_0_System_Byte_int_int_System_Byte_int_0_b__0_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ToBase64TransformTests___c._TransformBlock_0_System_Byte_int_int_System_Byte_int_0_b__0_0(
+                    arg_0
+        );
+    }
+    static inline void _TransformBlock_0_System_Byte_int_int_System_Byte_int_1_b__2_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ToBase64TransformTests___c._TransformBlock_0_System_Byte_int_int_System_Byte_int_1_b__2_0(
+                    arg_0
+        );
+    }
+    static inline void _TransformBlock_0_System_Byte_int_int_System_Byte_int_2_b__4_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ToBase64TransformTests___c._TransformBlock_0_System_Byte_int_int_System_Byte_int_2_b__4_0(
+                    arg_0
+        );
+    }
+    static inline void _TransformBlock_0_System_Byte_int_int_System_Byte_int_3_b__6_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ToBase64TransformTests___c._TransformBlock_0_System_Byte_int_int_System_Byte_int_3_b__6_0(
+                    arg_0
+        );
+    }
+    static inline void _TransformBlock_0_System_Byte_int_int_System_Byte_int_4_b__8_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ToBase64TransformTests___c._TransformBlock_0_System_Byte_int_int_System_Byte_int_4_b__8_0(
+                    arg_0
+        );
+    }
+    static inline void _TransformFinalBlock_1_System_Byte_int_int_0_b__10_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ToBase64TransformTests___c._TransformFinalBlock_1_System_Byte_int_int_0_b__10_0(
+                    arg_0
+        );
+    }
+    static inline void _TransformFinalBlock_1_System_Byte_int_int_1_b__12_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ToBase64TransformTests___c._TransformFinalBlock_1_System_Byte_int_int_1_b__12_0(
+                    arg_0
+        );
+    }
+    static inline void _TransformFinalBlock_1_System_Byte_int_int_2_b__14_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ToBase64TransformTests___c._TransformFinalBlock_1_System_Byte_int_int_2_b__14_0(
+                    arg_0
+        );
+    }
+    static inline void _TransformFinalBlock_1_System_Byte_int_int_3_b__16_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ToBase64TransformTests___c._TransformFinalBlock_1_System_Byte_int_int_3_b__16_0(
+                    arg_0
+        );
+    }
+    static inline void _TransformFinalBlock_1_System_Byte_int_int_4_b__18_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ToBase64TransformTests___c._TransformFinalBlock_1_System_Byte_int_int_4_b__18_0(
+                    arg_0
+        );
+    }
+    /// Total number of AOT-compiled methods in this type.
+    static constexpr int32_t MethodCount = 14;
+};
+
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_TripleDESCngTests {
     static inline void ctor(
                 CHAOS_IL2CPP_INTPTR arg_0
@@ -25660,6 +39754,93 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
     }
     /// Total number of AOT-compiled methods in this type.
     static constexpr int32_t MethodCount = 21;
+};
+
+struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_TripleDESCngTests___c {
+    static inline void cctor(
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_TripleDESCngTests___c.cctor(
+        );
+    }
+    static inline void ctor(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_TripleDESCngTests___c.ctor(
+                    arg_0
+        );
+    }
+    static inline void _CreateDecryptor_0__0_b__0_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_TripleDESCngTests___c._CreateDecryptor_0__0_b__0_0(
+                    arg_0
+        );
+    }
+    static inline void _CreateDecryptor_1_System_Byte_System_Byte_0_b__2_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_TripleDESCngTests___c._CreateDecryptor_1_System_Byte_System_Byte_0_b__2_0(
+                    arg_0
+        );
+    }
+    static inline void _CreateDecryptor_1_System_Byte_System_Byte_1_b__4_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_TripleDESCngTests___c._CreateDecryptor_1_System_Byte_System_Byte_1_b__4_0(
+                    arg_0
+        );
+    }
+    static inline void _CreateDecryptor_1_System_Byte_System_Byte_2_b__6_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_TripleDESCngTests___c._CreateDecryptor_1_System_Byte_System_Byte_2_b__6_0(
+                    arg_0
+        );
+    }
+    static inline void _CreateEncryptor_2__2_b__8_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_TripleDESCngTests___c._CreateEncryptor_2__2_b__8_0(
+                    arg_0
+        );
+    }
+    static inline void _CreateEncryptor_3_System_Byte_System_Byte_0_b__10_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_TripleDESCngTests___c._CreateEncryptor_3_System_Byte_System_Byte_0_b__10_0(
+                    arg_0
+        );
+    }
+    static inline void _CreateEncryptor_3_System_Byte_System_Byte_1_b__12_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_TripleDESCngTests___c._CreateEncryptor_3_System_Byte_System_Byte_1_b__12_0(
+                    arg_0
+        );
+    }
+    static inline void _CreateEncryptor_3_System_Byte_System_Byte_2_b__14_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_TripleDESCngTests___c._CreateEncryptor_3_System_Byte_System_Byte_2_b__14_0(
+                    arg_0
+        );
+    }
+    static inline void _GenerateIV_5__5_b__18_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_TripleDESCngTests___c._GenerateIV_5__5_b__18_0(
+                    arg_0
+        );
+    }
+    static inline void _GenerateKey_4__4_b__16_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_TripleDESCngTests___c._GenerateKey_4__4_b__16_0(
+                    arg_0
+        );
+    }
+    /// Total number of AOT-compiled methods in this type.
+    static constexpr int32_t MethodCount = 12;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_TripleDESCryptoServiceProviderTests {
@@ -25794,6 +39975,93 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
     static constexpr int32_t MethodCount = 21;
 };
 
+struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_TripleDESCryptoServiceProviderTests___c {
+    static inline void cctor(
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_TripleDESCryptoServiceProviderTests___c.cctor(
+        );
+    }
+    static inline void ctor(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_TripleDESCryptoServiceProviderTests___c.ctor(
+                    arg_0
+        );
+    }
+    static inline void _CreateDecryptor_1__1_b__2_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_TripleDESCryptoServiceProviderTests___c._CreateDecryptor_1__1_b__2_0(
+                    arg_0
+        );
+    }
+    static inline void _CreateDecryptor_5_System_Byte_System_Byte_0_b__14_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_TripleDESCryptoServiceProviderTests___c._CreateDecryptor_5_System_Byte_System_Byte_0_b__14_0(
+                    arg_0
+        );
+    }
+    static inline void _CreateDecryptor_5_System_Byte_System_Byte_1_b__16_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_TripleDESCryptoServiceProviderTests___c._CreateDecryptor_5_System_Byte_System_Byte_1_b__16_0(
+                    arg_0
+        );
+    }
+    static inline void _CreateDecryptor_5_System_Byte_System_Byte_2_b__18_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_TripleDESCryptoServiceProviderTests___c._CreateDecryptor_5_System_Byte_System_Byte_2_b__18_0(
+                    arg_0
+        );
+    }
+    static inline void _CreateEncryptor_0__0_b__0_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_TripleDESCryptoServiceProviderTests___c._CreateEncryptor_0__0_b__0_0(
+                    arg_0
+        );
+    }
+    static inline void _CreateEncryptor_4_System_Byte_System_Byte_0_b__8_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_TripleDESCryptoServiceProviderTests___c._CreateEncryptor_4_System_Byte_System_Byte_0_b__8_0(
+                    arg_0
+        );
+    }
+    static inline void _CreateEncryptor_4_System_Byte_System_Byte_1_b__10_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_TripleDESCryptoServiceProviderTests___c._CreateEncryptor_4_System_Byte_System_Byte_1_b__10_0(
+                    arg_0
+        );
+    }
+    static inline void _CreateEncryptor_4_System_Byte_System_Byte_2_b__12_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_TripleDESCryptoServiceProviderTests___c._CreateEncryptor_4_System_Byte_System_Byte_2_b__12_0(
+                    arg_0
+        );
+    }
+    static inline void _GenerateIV_2__2_b__4_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_TripleDESCryptoServiceProviderTests___c._GenerateIV_2__2_b__4_0(
+                    arg_0
+        );
+    }
+    static inline void _GenerateKey_3__3_b__6_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_TripleDESCryptoServiceProviderTests___c._GenerateKey_3__3_b__6_0(
+                    arg_0
+        );
+    }
+    /// Total number of AOT-compiled methods in this type.
+    static constexpr int32_t MethodCount = 12;
+};
+
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_TripleDESTests {
     static inline void ctor(
                 CHAOS_IL2CPP_INTPTR arg_0
@@ -25840,6 +40108,44 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
     }
     /// Total number of AOT-compiled methods in this type.
     static constexpr int32_t MethodCount = 7;
+};
+
+struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_TripleDESTests___c {
+    static inline void cctor(
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_TripleDESTests___c.cctor(
+        );
+    }
+    static inline void ctor(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_TripleDESTests___c.ctor(
+                    arg_0
+        );
+    }
+    static inline void _IsWeakKey_0_System_Byte_0_b__0_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_TripleDESTests___c._IsWeakKey_0_System_Byte_0_b__0_0(
+                    arg_0
+        );
+    }
+    static inline void _IsWeakKey_0_System_Byte_1_b__2_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_TripleDESTests___c._IsWeakKey_0_System_Byte_1_b__2_0(
+                    arg_0
+        );
+    }
+    static inline void _IsWeakKey_0_System_Byte_2_b__4_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_TripleDESTests___c._IsWeakKey_0_System_Byte_2_b__4_0(
+                    arg_0
+        );
+    }
+    /// Total number of AOT-compiled methods in this type.
+    static constexpr int32_t MethodCount = 5;
 };
 
 

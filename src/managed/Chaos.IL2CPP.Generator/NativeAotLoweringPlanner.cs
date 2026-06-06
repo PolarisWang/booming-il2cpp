@@ -377,6 +377,7 @@ public sealed partial class NativeAotLoweringPlanner
     /// header (value types that appear as boxed heap allocations in managed code).
     /// </summary>
     private HashSet<string>? _boxedTypeSubjectIds;
+    private HashSet<string>? _seenStructSymbols;
 
     /// <summary>
     /// Complete reference type struct definitions captured during EmitObjectModelDeclarations
@@ -1484,8 +1485,12 @@ extern ""C"" CHAOS_IL2CPP_INT32 RunNativeAot(CHAOS_IL2CPP_INT32 entryIndex) {{
         // in the loop are harmless.
         if (_referenceTypeStructCode is { Length: > 0 })
         {
-            sb.Append(_referenceTypeStructCode);
+            sb.Append(DeduplicateStructDefs(_referenceTypeStructCode));
         }
+
+        // Track seen chaos_type_ symbols to prevent duplicate definitions from
+        // FSharp.Core type forwarding in the inline loop below.
+        _seenStructSymbols ??= CollectStructSymbols(_referenceTypeStructCode);
 
         // ── Struct forward declarations ──
         // Page files use reinterpret_cast<chaos_type_<id>*>(ptr),
@@ -1531,21 +1536,25 @@ extern ""C"" CHAOS_IL2CPP_INT32 RunNativeAot(CHAOS_IL2CPP_INT32 entryIndex) {{
             // (CHAOS_IL2CPP_NEW_GC) in codegen output, so page files can compile.
             if (_boxedTypeSubjectIds?.Contains(typeId) == true)
             {
-                sb.Append("struct ");
-                sb.Append(GetNativeBoxTypeSymbol(typeId));
-                sb.AppendLine(" {");
-                sb.AppendLine("    PureTypeHeader header{};");
-                if (IsStructuredValueTypeSubjectId(typeId))
+                var boxSym = GetNativeBoxTypeSymbol(typeId);
+                if (_seenStructSymbols is null || _seenStructSymbols.Add(boxSym))
                 {
-                    sb.Append("    ");
-                    sb.Append(GetNativeValueTypeSymbol(typeId));
-                    sb.AppendLine(" value{};");
+                    sb.Append("struct ");
+                    sb.Append(boxSym);
+                    sb.AppendLine(" {");
+                    sb.AppendLine("    PureTypeHeader header{};");
+                    if (IsStructuredValueTypeSubjectId(typeId))
+                    {
+                        sb.Append("    ");
+                        sb.Append(GetNativeValueTypeSymbol(typeId));
+                        sb.AppendLine(" value{};");
+                    }
+                    else
+                    {
+                        sb.AppendLine("    CHAOS_IL2CPP_INTPTR value = 0;");
+                    }
+                    sb.AppendLine("};");
                 }
-                else
-                {
-                    sb.AppendLine("    CHAOS_IL2CPP_INTPTR value = 0;");
-                }
-                sb.AppendLine("};");
             }
             else
             {
@@ -1790,6 +1799,71 @@ extern ""C"" CHAOS_IL2CPP_INT32 RunNativeAot(CHAOS_IL2CPP_INT32 entryIndex) {{
         sb.AppendLine();
 
         return sb.ToString();
+    }
+
+    /// <summary>Remove duplicate struct/boxed-type definitions from C++ code.
+    /// FSharp.Core type forwarding may produce the same chaos_type_* symbol
+    /// from different SubjectIds. Keeps the first definition, removes subsequent
+    /// ones along with their body lines.</summary>
+    private static string DeduplicateStructDefs(string code)
+    {
+        var seen = new HashSet<string>(StringComparer.Ordinal);
+        var result = new System.Text.StringBuilder(code.Length);
+        int brace = 0; bool skip = false;
+
+        foreach (var line in code.Split('\n'))
+        {
+            var t = line.Trim();
+
+            if (brace == 0 && (t.StartsWith("struct chaos_type_", StringComparison.Ordinal) ||
+                               t.StartsWith("struct chaos_boxed_type_", StringComparison.Ordinal)))
+            {
+                var prefixLen = t.StartsWith("struct chaos_boxed_type_")
+                    ? "struct chaos_boxed_type_".Length : "struct chaos_type_".Length;
+                var end = t.IndexOfAny(new[] { ' ', ':' }, prefixLen);
+                var sym = end >= 0 ? t[prefixLen..end] : t[prefixLen..];
+                if (!seen.Add(sym))
+                {
+                    skip = true;
+                    brace = t.Contains('{') ? 1 : 0;
+                    continue;
+                }
+            }
+
+            if (skip)
+            {
+                foreach (char c in line) { if (c == '{') brace++; if (c == '}') brace--; }
+                if (brace > 0) continue;
+                skip = false; brace = 0;
+                continue;
+            }
+
+            result.AppendLine(line);
+        }
+        return result.ToString();
+    }
+
+    /// <summary>Collect all chaos_type_ / chaos_boxed_type_ symbols from a struct definition string.
+    /// Used to seed _seenStructSymbols so the inline loop doesn't re-emit struct definitions
+    /// that were already emitted via _referenceTypeStructCode.</summary>
+    private static HashSet<string> CollectStructSymbols(string? code)
+    {
+        var symbols = new HashSet<string>(StringComparer.Ordinal);
+        if (string.IsNullOrEmpty(code)) return symbols;
+        foreach (var line in code.Split('\n'))
+        {
+            var t = line.Trim();
+            if (t.StartsWith("struct chaos_type_", StringComparison.Ordinal) ||
+                t.StartsWith("struct chaos_boxed_type_", StringComparison.Ordinal))
+            {
+                var prefixLen = t.StartsWith("struct chaos_boxed_type_")
+                    ? "struct chaos_boxed_type_".Length : "struct chaos_type_".Length;
+                var end = t.IndexOfAny(new[] { ' ', ':' }, prefixLen);
+                var sym = end >= 0 ? t[prefixLen..end] : t[prefixLen..];
+                symbols.Add(sym);
+            }
+        }
+        return symbols;
     }
 
     private static string BuildEntryBridgeArguments(AotCoreIrMethodArtifact entryMethod)

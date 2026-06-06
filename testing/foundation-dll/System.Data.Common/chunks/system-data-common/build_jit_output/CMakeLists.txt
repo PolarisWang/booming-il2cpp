@@ -8,7 +8,7 @@ set(CMAKE_CXX_STANDARD 20)
 # ── Compiler settings ──
 # /EHa needed for catch(...) to intercept C++ exceptions thrown by generated code.
 if(MSVC)
-  add_compile_options(/utf-8 /GS- /FS /bigobj)
+  add_compile_options(/utf-8 /GS- /FS /bigobj /wd4716)
   set(CHAOS_EHA_FLAG "/EHa")
   set(CHAOS_FORCE_MULTIPLE /FORCE:MULTIPLE)
 else()
@@ -25,14 +25,17 @@ if(CHAOS_IL2CPP_CONFIG_TIER STREQUAL "profile")
   add_compile_definitions(CHAOS_IL2CPP_CONFIG_TIER=CHAOS_IL2CPP_CONFIG_TIER_CHECK)
   add_compile_definitions(CHAOS_IL2CPP_CONFIG_CHECK)
   add_compile_definitions(CHAOS_IL2CPP_LOG_LEVEL=3)
+  add_compile_definitions(CHAOS_IL2CPP_RUNTIME_CONFIG_FILE="runtime-config/mobile-release.h")
 elseif(CHAOS_IL2CPP_CONFIG_TIER STREQUAL "ship")
   add_compile_definitions(CHAOS_IL2CPP_CONFIG_TIER=CHAOS_IL2CPP_CONFIG_TIER_CHECK)
   add_compile_definitions(CHAOS_IL2CPP_CONFIG_CHECK)
   add_compile_definitions(CHAOS_IL2CPP_LOG_LEVEL=3)
+  add_compile_definitions(CHAOS_IL2CPP_RUNTIME_CONFIG_FILE="runtime-config/desktop.h")
 else()
   add_compile_definitions(CHAOS_IL2CPP_CONFIG_TIER=CHAOS_IL2CPP_CONFIG_TIER_CHECK)
   add_compile_definitions(CHAOS_IL2CPP_CONFIG_CHECK)
   add_compile_definitions(CHAOS_IL2CPP_LOG_LEVEL=3)
+  add_compile_definitions(CHAOS_IL2CPP_RUNTIME_CONFIG_FILE="runtime-config/test-only.h")
 endif()
 
 
@@ -65,6 +68,10 @@ file(GLOB CHAOS_CODEGEN_NATIVE_CPP
     "${CHAOS_CODEGEN_DIR}/*Subjects/generated/native-aot.generated.cpp"
     "${CHAOS_CODEGEN_DIR}/*Subjects/generated/native-aot.page-*.cpp"
     "${CHAOS_CODEGEN_DIR}/*Subjects/generated/chaos_generated_module.cpp"
+    # Flat layout fallback: codegen writes directly to codegen/generated/
+    "${CHAOS_CODEGEN_DIR}/generated/native-aot.generated.cpp"
+    "${CHAOS_CODEGEN_DIR}/generated/native-aot.page-*.cpp"
+    "${CHAOS_CODEGEN_DIR}/generated/chaos_generated_module.cpp"
 )
 
 if(CHAOS_CODEGEN_FLAT_CPP)
@@ -118,6 +125,12 @@ set(CHAOS_EXCEPTION_STUBS
 set(CHAOS_HOTPATCH_TABLE
     "${CHAOS_PROJECT_ROOT}/src/native/runtime-core/hotpatch_table.cpp"
 )
+# eager_compile.cpp — required by patch_loader.obj in chaos_runtime_core.lib
+# but defined in the interpreter project.  Compile locally since the prebuilt
+# chaos_interpreter.lib may be stale (EagerCompilePatchMethods).
+set(CHAOS_EAGER_COMPILE
+    "${CHAOS_PROJECT_ROOT}/src/native/interpreter/interp_entry/eager_compile.cpp"
+)
 
 set(CHAOS_ENTRY_SOURCES
     "runtime-entry.cpp"
@@ -132,6 +145,7 @@ set(CHAOS_ENTRY_SOURCES
     ${CHAOS_INTEROP_STUBS}
     ${CHAOS_EXCEPTION_STUBS}
     ${CHAOS_HOTPATCH_TABLE}
+    ${CHAOS_EAGER_COMPILE}
     ${CHAOS_AOT_GENERATED_CPP}
 )
 
@@ -152,9 +166,12 @@ set(CHAOS_ENTRY_INCLUDES
     "${CHAOS_CODEGEN_DIR}/codegen/generated"
 
     "${CMAKE_CURRENT_SOURCE_DIR}"
-
+    # JIT headers needed by eager_compile.cpp (compiled for all builds
+    # since the prebuilt chaos_interpreter.lib may be stale).
     "${CHAOS_PROJECT_ROOT}/src/native/jit"
-
+    # codegen/generated — needed for enum_metadata.generated.h and other
+    # generated headers that aren't copied to subjects/ by TPG's flat layout.
+    "${CHAOS_CODEGEN_DIR}/generated"
 )
 
 add_executable(chaos_entry ${CHAOS_ENTRY_SOURCES})
@@ -167,7 +184,15 @@ target_link_libraries(chaos_entry PRIVATE chaos::runtime
     "$<$<CXX_COMPILER_ID:MSVC>:${CHAOS_SDK_DIR}/lib/chaos_pal.lib>"
     "$<$<NOT:$<CXX_COMPILER_ID:MSVC>>:${CHAOS_SDK_DIR}/lib/libchaos_pal.a>"
 )
+# MSVC: chaos_hot_update.lib references SetPatchedBySlot from
+# chaos_runtime_core.lib. /WHOLEARCHIVE forces MSVC to include ALL
+# objects from the runtime core lib, not just those needed by the
+# first pass (MSVC processes static libs left-to-right without rescan).
 if(MSVC)
   target_link_libraries(chaos_entry PRIVATE bcrypt)
+  target_link_options(chaos_entry PRIVATE "/WHOLEARCHIVE:${CHAOS_SDK_DIR}/lib/chaos_runtime_core.lib")
+
+  target_link_options(chaos_entry PRIVATE /STACK:8388608)
+
 endif()
 target_link_options(chaos_entry PRIVATE ${CHAOS_FORCE_MULTIPLE})

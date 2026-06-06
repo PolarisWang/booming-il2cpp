@@ -19990,6 +19990,56 @@ CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_String_
     return ChaosReflectionConcatStringPairValues(chaos_arg_0, chaos_arg_1);
 }
 
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_JsonSerializer__Deserialize_System_Int32__System_Int32_JsonDocument_JsonSerializerOptions_(CHAOS_IL2CPP_INTPTR chaos_arg_0) noexcept
+{
+    return static_cast<CHAOS_IL2CPP_INTPTR>(ChaosJsonDeserializeInt32(chaos_arg_0));
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_JsonSerializer__Deserialize_System_Int32__System_Int32_JsonDocument_System_Text_Json_Serialization_Metadata_JsonTypeInfo_System_Int32__(CHAOS_IL2CPP_INTPTR chaos_arg_0) noexcept
+{
+    return static_cast<CHAOS_IL2CPP_INTPTR>(ChaosJsonDeserializeInt32(chaos_arg_0));
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_JsonSerializer__Deserialize_System_Int32__System_Int32_JsonElement_JsonSerializerOptions_(CHAOS_IL2CPP_INTPTR chaos_arg_0) noexcept
+{
+    return static_cast<CHAOS_IL2CPP_INTPTR>(ChaosJsonDeserializeInt32(chaos_arg_0));
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_JsonSerializer__Deserialize_System_Int32__System_Int32_JsonElement_System_Text_Json_Serialization_Metadata_JsonTypeInfo_System_Int32__(CHAOS_IL2CPP_INTPTR chaos_arg_0) noexcept
+{
+    return static_cast<CHAOS_IL2CPP_INTPTR>(ChaosJsonDeserializeInt32(chaos_arg_0));
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_JsonSerializer__Deserialize_System_Int32__System_Int32_System_IO_Stream_JsonSerializerOptions_(CHAOS_IL2CPP_INTPTR chaos_arg_0) noexcept
+{
+    return static_cast<CHAOS_IL2CPP_INTPTR>(ChaosJsonDeserializeInt32(chaos_arg_0));
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_JsonSerializer__Deserialize_System_Int32__System_Int32_System_IO_Stream_System_Text_Json_Serialization_Metadata_JsonTypeInfo_System_Int32__(CHAOS_IL2CPP_INTPTR chaos_arg_0) noexcept
+{
+    return static_cast<CHAOS_IL2CPP_INTPTR>(ChaosJsonDeserializeInt32(chaos_arg_0));
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_JsonSerializer__Deserialize_System_Int32__System_Int32_System_String_JsonSerializerOptions_(CHAOS_IL2CPP_INTPTR chaos_arg_0) noexcept
+{
+    return static_cast<CHAOS_IL2CPP_INTPTR>(ChaosJsonDeserializeInt32(chaos_arg_0));
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_JsonSerializer__Deserialize_System_Int32__System_Int32_System_String_System_Text_Json_Serialization_Metadata_JsonTypeInfo_System_Int32__(CHAOS_IL2CPP_INTPTR chaos_arg_0) noexcept
+{
+    return static_cast<CHAOS_IL2CPP_INTPTR>(ChaosJsonDeserializeInt32(chaos_arg_0));
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_JsonSerializer__Deserialize_System_Int32__System_Int32_System_Text_Json_Nodes_JsonNode_JsonSerializerOptions_(CHAOS_IL2CPP_INTPTR chaos_arg_0) noexcept
+{
+    return static_cast<CHAOS_IL2CPP_INTPTR>(ChaosJsonDeserializeInt32(chaos_arg_0));
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_JsonSerializer__Deserialize_System_Int32__System_Int32_System_Text_Json_Nodes_JsonNode_System_Text_Json_Serialization_Metadata_JsonTypeInfo_System_Int32__(CHAOS_IL2CPP_INTPTR chaos_arg_0) noexcept
+{
+    return static_cast<CHAOS_IL2CPP_INTPTR>(ChaosJsonDeserializeInt32(chaos_arg_0));
+}
+
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_JsonSerializer__Serialize_System_Int32__System_String_System_Int32_JsonSerializerOptions_(CHAOS_IL2CPP_INTPTR chaos_arg_0) noexcept
 {
     return ChaosJsonSerializeInt32(chaos_arg_0);
@@ -25949,25 +25999,25 @@ extern "C" void* kChaosExternalRuntimeFnTable[620] = {
     nullptr,
     nullptr,
     nullptr,
+    reinterpret_cast<void*>(&chaos_external_runtime_System_Text_Json_JsonSerializer__Deserialize_System_Int32__System_Int32_JsonDocument_JsonSerializerOptions_),
+    nullptr,
+    reinterpret_cast<void*>(&chaos_external_runtime_System_Text_Json_JsonSerializer__Deserialize_System_Int32__System_Int32_System_Text_Json_Nodes_JsonNode_System_Text_Json_Serialization_Metadata_JsonTypeInfo_System_Int32__),
+    nullptr,
+    reinterpret_cast<void*>(&chaos_external_runtime_System_Text_Json_JsonSerializer__Deserialize_System_Int32__System_Int32_JsonDocument_System_Text_Json_Serialization_Metadata_JsonTypeInfo_System_Int32__),
+    reinterpret_cast<void*>(&chaos_external_runtime_System_Text_Json_JsonSerializer__Deserialize_System_Int32__System_Int32_System_IO_Stream_JsonSerializerOptions_),
+    nullptr,
+    reinterpret_cast<void*>(&chaos_external_runtime_System_Text_Json_JsonSerializer__Deserialize_System_Int32__System_Int32_System_IO_Stream_System_Text_Json_Serialization_Metadata_JsonTypeInfo_System_Int32__),
     nullptr,
     nullptr,
+    reinterpret_cast<void*>(&chaos_external_runtime_System_Text_Json_JsonSerializer__Deserialize_System_Int32__System_Int32_System_String_JsonSerializerOptions_),
     nullptr,
+    reinterpret_cast<void*>(&chaos_external_runtime_System_Text_Json_JsonSerializer__Deserialize_System_Int32__System_Int32_System_String_System_Text_Json_Serialization_Metadata_JsonTypeInfo_System_Int32__),
     nullptr,
+    reinterpret_cast<void*>(&chaos_external_runtime_System_Text_Json_JsonSerializer__Deserialize_System_Int32__System_Int32_JsonElement_JsonSerializerOptions_),
     nullptr,
+    reinterpret_cast<void*>(&chaos_external_runtime_System_Text_Json_JsonSerializer__Deserialize_System_Int32__System_Int32_JsonElement_System_Text_Json_Serialization_Metadata_JsonTypeInfo_System_Int32__),
     nullptr,
-    nullptr,
-    nullptr,
-    nullptr,
-    nullptr,
-    nullptr,
-    nullptr,
-    nullptr,
-    nullptr,
-    nullptr,
-    nullptr,
-    nullptr,
-    nullptr,
-    nullptr,
+    reinterpret_cast<void*>(&chaos_external_runtime_System_Text_Json_JsonSerializer__Deserialize_System_Int32__System_Int32_System_Text_Json_Nodes_JsonNode_JsonSerializerOptions_),
     nullptr,
     nullptr,
     nullptr,
@@ -27116,31 +27166,31 @@ static void (*kMethodTable[821])() = {
 // Instance methods receive a sentinel this-pointer so they don't crash on null.
 static CHAOS_IL2CPP_UINT8 __g_null_instance = 0;
 extern "C" void (*kDefaultArgThunks[821])() = {
-    []() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kMethodTable[0])(0,0,chaos_make_string_id_value(6601085983368743141ULL));},
-    []() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kMethodTable[1])(0,0,chaos_make_string_id_value(6601085983368743141ULL));},
-    []() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kMethodTable[2])(0,0,chaos_make_string_id_value(6601085983368743141ULL));},
-    []() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kMethodTable[3])(0,0,chaos_make_string_id_value(6601085983368743141ULL));},
-    []() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kMethodTable[4])(0,0,chaos_make_string_id_value(6601085983368743141ULL));},
-    []() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kMethodTable[5])(0,0,chaos_make_string_id_value(6601085983368743141ULL));},
-    []() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kMethodTable[6])(0,0,chaos_make_string_id_value(6601085983368743141ULL));},
-    []() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kMethodTable[7])(0,0,chaos_make_string_id_value(6601085983368743141ULL));},
-    []() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kMethodTable[8])(0,0,chaos_make_string_id_value(6601085983368743141ULL));},
-    []() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kMethodTable[9])(0,0,chaos_make_string_id_value(6601085983368743141ULL));},
-    []() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kMethodTable[10])(0,0,chaos_make_string_id_value(6601085983368743141ULL));},
-    []() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kMethodTable[11])(0,0,chaos_make_string_id_value(6601085983368743141ULL));},
-    []() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kMethodTable[12])(chaos_make_string_id_value(6601085983368743141ULL),chaos_make_string_id_value(6601085983368743141ULL),chaos_make_string_id_value(6601085983368743141ULL));},
-    []() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kMethodTable[13])(0,0,chaos_make_string_id_value(6601085983368743141ULL));},
-    []() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kMethodTable[14])(0,0,chaos_make_string_id_value(6601085983368743141ULL));},
-    []() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kMethodTable[15])(0,0,chaos_make_string_id_value(6601085983368743141ULL));},
-    []() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kMethodTable[16])(0,0,chaos_make_string_id_value(6601085983368743141ULL));},
-    []() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kMethodTable[17])(0,0,chaos_make_string_id_value(6601085983368743141ULL));},
+    []() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kMethodTable[0])(0,0,chaos_make_string_id_value(1342797903967929121ULL));},
+    []() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kMethodTable[1])(0,0,chaos_make_string_id_value(1342797903967929121ULL));},
+    []() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kMethodTable[2])(0,0,chaos_make_string_id_value(1342797903967929121ULL));},
+    []() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kMethodTable[3])(0,0,chaos_make_string_id_value(1342797903967929121ULL));},
+    []() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kMethodTable[4])(0,0,chaos_make_string_id_value(1342797903967929121ULL));},
+    []() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kMethodTable[5])(0,0,chaos_make_string_id_value(1342797903967929121ULL));},
+    []() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kMethodTable[6])(0,0,chaos_make_string_id_value(1342797903967929121ULL));},
+    []() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kMethodTable[7])(0,0,chaos_make_string_id_value(1342797903967929121ULL));},
+    []() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kMethodTable[8])(0,0,chaos_make_string_id_value(1342797903967929121ULL));},
+    []() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kMethodTable[9])(0,0,chaos_make_string_id_value(1342797903967929121ULL));},
+    []() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kMethodTable[10])(0,0,chaos_make_string_id_value(1342797903967929121ULL));},
+    []() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kMethodTable[11])(0,0,chaos_make_string_id_value(1342797903967929121ULL));},
+    []() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kMethodTable[12])(chaos_make_string_id_value(1342797903967929121ULL),chaos_make_string_id_value(1342797903967929121ULL),chaos_make_string_id_value(1342797903967929121ULL));},
+    []() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kMethodTable[13])(0,0,chaos_make_string_id_value(1342797903967929121ULL));},
+    []() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kMethodTable[14])(0,0,chaos_make_string_id_value(1342797903967929121ULL));},
+    []() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kMethodTable[15])(0,0,chaos_make_string_id_value(1342797903967929121ULL));},
+    []() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kMethodTable[16])(0,0,chaos_make_string_id_value(1342797903967929121ULL));},
+    []() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kMethodTable[17])(0,0,chaos_make_string_id_value(1342797903967929121ULL));},
     []() {kMethodTable[18]();},
-    []() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[19])(chaos_make_string_id_value(6601085983368743141ULL));},
+    []() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[19])(chaos_make_string_id_value(1342797903967929121ULL));},
     []() {kMethodTable[20]();},
-    []() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kMethodTable[21])(0,chaos_make_string_id_value(6601085983368743141ULL));},
-    []() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kMethodTable[22])(0,chaos_make_string_id_value(6601085983368743141ULL));},
-    []() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kMethodTable[23])(0,chaos_make_string_id_value(6601085983368743141ULL));},
-    []() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kMethodTable[24])(0,chaos_make_string_id_value(6601085983368743141ULL));},
+    []() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kMethodTable[21])(0,chaos_make_string_id_value(1342797903967929121ULL));},
+    []() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kMethodTable[22])(0,chaos_make_string_id_value(1342797903967929121ULL));},
+    []() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kMethodTable[23])(0,chaos_make_string_id_value(1342797903967929121ULL));},
+    []() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kMethodTable[24])(0,chaos_make_string_id_value(1342797903967929121ULL));},
     []() {kMethodTable[25]();},
     []() {kMethodTable[26]();},
     []() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[27])(0);},
@@ -27150,7 +27200,7 @@ extern "C" void (*kDefaultArgThunks[821])() = {
     []() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[31])(0);},
     []() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[32])(0);},
     []() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[33])(0);},
-    []() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kMethodTable[34])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance),chaos_make_string_id_value(6601085983368743141ULL));},
+    []() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kMethodTable[34])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance),chaos_make_string_id_value(1342797903967929121ULL));},
     []() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[35])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
     []() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[36])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
     []() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[37])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
@@ -42965,45 +43015,45 @@ extern "C" void chaos_bridge_thunk_283(void)
     reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[292])();
 }
 
-// Bridge/import thunk for: System.Text.Json/JsonSerializer::Deserialize<System.Int32>:System.Int32(JsonDocument,JsonSerializerOptions)
-extern "C" CHAOS_IL2CPP_INT32 chaos_bridge_thunk_284(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-    auto result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[293])(chaos_fn_arg_0, chaos_fn_arg_1);
-    return result;
-}
-
 // Bridge/import thunk for: System.Text.Json/JsonSerializer::Deserialize:System.Object(JsonDocument,System.Type,JsonSerializerOptions)
-extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_285(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2)
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_284(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2)
 {
     auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[294])(chaos_fn_arg_0, chaos_fn_arg_1, chaos_fn_arg_2);
     return result;
 }
 
-// Bridge/import thunk for: System.Text.Json/JsonSerializer::Deserialize<System.Int32>:System.Int32(System.Text.Json.Nodes.JsonNode,System.Text.Json.Serialization.Metadata.JsonTypeInfo<System.Int32>)
-extern "C" CHAOS_IL2CPP_INT32 chaos_bridge_thunk_286(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-    auto result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[295])(chaos_fn_arg_0, chaos_fn_arg_1);
-    return result;
-}
-
 // Bridge/import thunk for: System.Text.Json/JsonSerializer::Deserialize:System.Object(System.Text.Json.Nodes.JsonNode,System.Type,System.Text.Json.Serialization.JsonSerializerContext)
-extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_287(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2)
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_285(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2)
 {
     auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[296])(chaos_fn_arg_0, chaos_fn_arg_1, chaos_fn_arg_2);
     return result;
 }
 
-// Bridge/import thunk for: System.Text.Json/JsonSerializer::Deserialize<System.Int32>:System.Int32(JsonDocument,System.Text.Json.Serialization.Metadata.JsonTypeInfo<System.Int32>)
-extern "C" CHAOS_IL2CPP_INT32 chaos_bridge_thunk_288(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
+// Bridge/import thunk for: System.Text.Json/JsonSerializer::Deserialize:System.Object(System.IO.Stream,System.Type,JsonSerializerOptions)
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_286(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2)
 {
-    auto result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[297])(chaos_fn_arg_0, chaos_fn_arg_1);
+    auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[299])(chaos_fn_arg_0, chaos_fn_arg_1, chaos_fn_arg_2);
     return result;
 }
 
-// Bridge/import thunk for: System.Text.Json/JsonSerializer::Deserialize<System.Int32>:System.Int32(System.IO.Stream,JsonSerializerOptions)
-extern "C" CHAOS_IL2CPP_INT32 chaos_bridge_thunk_289(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
+// Bridge/import thunk for: System.Text.Json/JsonSerializer::Deserialize:System.Object(JsonDocument,System.Type,System.Text.Json.Serialization.JsonSerializerContext)
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_287(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2)
 {
-    auto result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[298])(chaos_fn_arg_0, chaos_fn_arg_1);
+    auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[301])(chaos_fn_arg_0, chaos_fn_arg_1, chaos_fn_arg_2);
+    return result;
+}
+
+// Bridge/import thunk for: System.Text.Json/JsonSerializer::Deserialize:System.Object(System.IO.Stream,System.Type,System.Text.Json.Serialization.JsonSerializerContext)
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_288(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2)
+{
+    auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[302])(chaos_fn_arg_0, chaos_fn_arg_1, chaos_fn_arg_2);
+    return result;
+}
+
+// Bridge/import thunk for: System.Text.Json/JsonSerializer::Deserialize:System.Object(System.String,System.Type,JsonSerializerOptions)
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_289(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2)
+{
+    auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[304])(chaos_fn_arg_0, chaos_fn_arg_1, chaos_fn_arg_2);
     return result;
 }
 
@@ -43013,73 +43063,73 @@ extern "C" void chaos_bridge_thunk_29(void)
     reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[36])();
 }
 
-// Bridge/import thunk for: System.Text.Json/JsonSerializer::Deserialize:System.Object(System.IO.Stream,System.Type,JsonSerializerOptions)
-extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_290(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2)
-{
-    auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[299])(chaos_fn_arg_0, chaos_fn_arg_1, chaos_fn_arg_2);
-    return result;
-}
-
-// Bridge/import thunk for: System.Text.Json/JsonSerializer::Deserialize<System.Int32>:System.Int32(System.IO.Stream,System.Text.Json.Serialization.Metadata.JsonTypeInfo<System.Int32>)
-extern "C" CHAOS_IL2CPP_INT32 chaos_bridge_thunk_291(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-    auto result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[300])(chaos_fn_arg_0, chaos_fn_arg_1);
-    return result;
-}
-
-// Bridge/import thunk for: System.Text.Json/JsonSerializer::Deserialize:System.Object(JsonDocument,System.Type,System.Text.Json.Serialization.JsonSerializerContext)
-extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_292(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2)
-{
-    auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[301])(chaos_fn_arg_0, chaos_fn_arg_1, chaos_fn_arg_2);
-    return result;
-}
-
-// Bridge/import thunk for: System.Text.Json/JsonSerializer::Deserialize:System.Object(System.IO.Stream,System.Type,System.Text.Json.Serialization.JsonSerializerContext)
-extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_293(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2)
-{
-    auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[302])(chaos_fn_arg_0, chaos_fn_arg_1, chaos_fn_arg_2);
-    return result;
-}
-
-// Bridge/import thunk for: System.Text.Json/JsonSerializer::Deserialize<System.Int32>:System.Int32(System.String,JsonSerializerOptions)
-extern "C" CHAOS_IL2CPP_INT32 chaos_bridge_thunk_294(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-    auto result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[303])(chaos_fn_arg_0, chaos_fn_arg_1);
-    return result;
-}
-
-// Bridge/import thunk for: System.Text.Json/JsonSerializer::Deserialize:System.Object(System.String,System.Type,JsonSerializerOptions)
-extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_295(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2)
-{
-    auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[304])(chaos_fn_arg_0, chaos_fn_arg_1, chaos_fn_arg_2);
-    return result;
-}
-
-// Bridge/import thunk for: System.Text.Json/JsonSerializer::Deserialize<System.Int32>:System.Int32(System.String,System.Text.Json.Serialization.Metadata.JsonTypeInfo<System.Int32>)
-extern "C" CHAOS_IL2CPP_INT32 chaos_bridge_thunk_296(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-    auto result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[305])(chaos_fn_arg_0, chaos_fn_arg_1);
-    return result;
-}
-
 // Bridge/import thunk for: System.Text.Json/JsonSerializer::Deserialize:System.Object(System.String,System.Type,System.Text.Json.Serialization.JsonSerializerContext)
-extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_297(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2)
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_290(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2)
 {
     auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[306])(chaos_fn_arg_0, chaos_fn_arg_1, chaos_fn_arg_2);
     return result;
 }
 
-// Bridge/import thunk for: System.Text.Json/JsonSerializer::Deserialize<System.Int32>:System.Int32(JsonElement,JsonSerializerOptions)
-extern "C" CHAOS_IL2CPP_INT32 chaos_bridge_thunk_298(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
+// Bridge/import thunk for: System.Text.Json/JsonSerializer::Deserialize:System.Object(JsonElement,System.Type,JsonSerializerOptions)
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_291(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2)
 {
-    auto result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[307])(chaos_fn_arg_0, chaos_fn_arg_1);
+    auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[308])(chaos_fn_arg_0, chaos_fn_arg_1, chaos_fn_arg_2);
     return result;
 }
 
-// Bridge/import thunk for: System.Text.Json/JsonSerializer::Deserialize:System.Object(JsonElement,System.Type,JsonSerializerOptions)
-extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_299(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2)
+// Bridge/import thunk for: System.Text.Json/JsonSerializer::Deserialize:System.Object(JsonElement,System.Type,System.Text.Json.Serialization.JsonSerializerContext)
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_292(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2)
 {
-    auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[308])(chaos_fn_arg_0, chaos_fn_arg_1, chaos_fn_arg_2);
+    auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[310])(chaos_fn_arg_0, chaos_fn_arg_1, chaos_fn_arg_2);
+    return result;
+}
+
+// Bridge/import thunk for: System.Text.Json/JsonSerializer::Deserialize:System.Object(System.Text.Json.Nodes.JsonNode,System.Type,JsonSerializerOptions)
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_293(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2)
+{
+    auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[312])(chaos_fn_arg_0, chaos_fn_arg_1, chaos_fn_arg_2);
+    return result;
+}
+
+// Bridge/import thunk for: System.Text.Json/JsonSerializer::DeserializeAsync<System.Int32>:System.Threading.Tasks.ValueTask<System.Int32>(System.IO.Stream,JsonSerializerOptions,System.Threading.CancellationToken)
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_294(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2)
+{
+    auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[313])(chaos_fn_arg_0, chaos_fn_arg_1, chaos_fn_arg_2);
+    return result;
+}
+
+// Bridge/import thunk for: System.Private.CoreLib/System.Threading.Tasks.ValueTask<System.Int32>::GetAwaiter:System.Runtime.CompilerServices.ValueTaskAwaiter<System.Int32>()
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_295(void)
+{
+    auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)()>(kChaosExternalRuntimeFnTable[314])();
+    return result;
+}
+
+// Bridge/import thunk for: System.Private.CoreLib/System.Runtime.CompilerServices.ValueTaskAwaiter<System.Int32>::GetResult:System.Int32()
+extern "C" CHAOS_IL2CPP_INT32 chaos_bridge_thunk_296(void)
+{
+    auto result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)()>(kChaosExternalRuntimeFnTable[315])();
+    return result;
+}
+
+// Bridge/import thunk for: System.Text.Json/JsonSerializer::DeserializeAsync:System.Threading.Tasks.ValueTask<System.Object>(System.IO.Stream,System.Type,JsonSerializerOptions,System.Threading.CancellationToken)
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_297(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2, CHAOS_IL2CPP_INTPTR chaos_fn_arg_3)
+{
+    auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[316])(chaos_fn_arg_0, chaos_fn_arg_1, chaos_fn_arg_2, chaos_fn_arg_3);
+    return result;
+}
+
+// Bridge/import thunk for: System.Private.CoreLib/System.Threading.Tasks.ValueTask<System.Object>::GetAwaiter:System.Runtime.CompilerServices.ValueTaskAwaiter<System.Object>()
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_298(void)
+{
+    auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)()>(kChaosExternalRuntimeFnTable[317])();
+    return result;
+}
+
+// Bridge/import thunk for: System.Private.CoreLib/System.Runtime.CompilerServices.ValueTaskAwaiter<System.Object>::GetResult:System.Object()
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_299(void)
+{
+    auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)()>(kChaosExternalRuntimeFnTable[318])();
     return result;
 }
 
@@ -43095,73 +43145,71 @@ extern "C" void chaos_bridge_thunk_30(void)
     reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[37])();
 }
 
-// Bridge/import thunk for: System.Text.Json/JsonSerializer::Deserialize<System.Int32>:System.Int32(JsonElement,System.Text.Json.Serialization.Metadata.JsonTypeInfo<System.Int32>)
-extern "C" CHAOS_IL2CPP_INT32 chaos_bridge_thunk_300(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
+// Bridge/import thunk for: System.Text.Json/JsonSerializer::DeserializeAsync<System.Int32>:System.Threading.Tasks.ValueTask<System.Int32>(System.IO.Stream,System.Text.Json.Serialization.Metadata.JsonTypeInfo<System.Int32>,System.Threading.CancellationToken)
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_300(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2)
 {
-    auto result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[309])(chaos_fn_arg_0, chaos_fn_arg_1);
+    auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[319])(chaos_fn_arg_0, chaos_fn_arg_1, chaos_fn_arg_2);
     return result;
 }
 
-// Bridge/import thunk for: System.Text.Json/JsonSerializer::Deserialize:System.Object(JsonElement,System.Type,System.Text.Json.Serialization.JsonSerializerContext)
-extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_301(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2)
+// Bridge/import thunk for: System.Text.Json/JsonSerializer::DeserializeAsync:System.Threading.Tasks.ValueTask<System.Object>(System.IO.Stream,System.Type,System.Text.Json.Serialization.JsonSerializerContext,System.Threading.CancellationToken)
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_301(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2, CHAOS_IL2CPP_INTPTR chaos_fn_arg_3)
 {
-    auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[310])(chaos_fn_arg_0, chaos_fn_arg_1, chaos_fn_arg_2);
+    auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[320])(chaos_fn_arg_0, chaos_fn_arg_1, chaos_fn_arg_2, chaos_fn_arg_3);
     return result;
 }
 
-// Bridge/import thunk for: System.Text.Json/JsonSerializer::Deserialize<System.Int32>:System.Int32(System.Text.Json.Nodes.JsonNode,JsonSerializerOptions)
-extern "C" CHAOS_IL2CPP_INT32 chaos_bridge_thunk_302(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
+// Bridge/import thunk for: System.Text.Json/JsonSerializer::DeserializeAsyncEnumerable<System.Int32>:System.Collections.Generic.IAsyncEnumerable<System.Int32>(System.IO.Stream,JsonSerializerOptions,System.Threading.CancellationToken)
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_302(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2)
 {
-    auto result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[311])(chaos_fn_arg_0, chaos_fn_arg_1);
+    auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[321])(chaos_fn_arg_0, chaos_fn_arg_1, chaos_fn_arg_2);
     return result;
 }
 
-// Bridge/import thunk for: System.Text.Json/JsonSerializer::Deserialize:System.Object(System.Text.Json.Nodes.JsonNode,System.Type,JsonSerializerOptions)
-extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_303(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2)
+// Bridge/import thunk for: System.Text.Json/JsonSerializer::DeserializeAsyncEnumerable<System.Int32>:System.Collections.Generic.IAsyncEnumerable<System.Int32>(System.IO.Stream,System.Boolean,JsonSerializerOptions,System.Threading.CancellationToken)
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_303(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2, CHAOS_IL2CPP_INTPTR chaos_fn_arg_3)
 {
-    auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[312])(chaos_fn_arg_0, chaos_fn_arg_1, chaos_fn_arg_2);
+    auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[322])(chaos_fn_arg_0, chaos_fn_arg_1, chaos_fn_arg_2, chaos_fn_arg_3);
     return result;
 }
 
-// Bridge/import thunk for: System.Text.Json/JsonSerializer::DeserializeAsync<System.Int32>:System.Threading.Tasks.ValueTask<System.Int32>(System.IO.Stream,JsonSerializerOptions,System.Threading.CancellationToken)
+// Bridge/import thunk for: System.Text.Json/JsonSerializer::DeserializeAsyncEnumerable<System.Int32>:System.Collections.Generic.IAsyncEnumerable<System.Int32>(System.IO.Stream,System.Text.Json.Serialization.Metadata.JsonTypeInfo<System.Int32>,System.Threading.CancellationToken)
 extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_304(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2)
 {
-    auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[313])(chaos_fn_arg_0, chaos_fn_arg_1, chaos_fn_arg_2);
+    auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[323])(chaos_fn_arg_0, chaos_fn_arg_1, chaos_fn_arg_2);
     return result;
 }
 
-// Bridge/import thunk for: System.Private.CoreLib/System.Threading.Tasks.ValueTask<System.Int32>::GetAwaiter:System.Runtime.CompilerServices.ValueTaskAwaiter<System.Int32>()
-extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_305(void)
+// Bridge/import thunk for: System.Text.Json/JsonSerializer::DeserializeAsyncEnumerable<System.Int32>:System.Collections.Generic.IAsyncEnumerable<System.Int32>(System.IO.Stream,System.Text.Json.Serialization.Metadata.JsonTypeInfo<System.Int32>,System.Boolean,System.Threading.CancellationToken)
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_305(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2, CHAOS_IL2CPP_INTPTR chaos_fn_arg_3)
 {
-    auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)()>(kChaosExternalRuntimeFnTable[314])();
+    auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[324])(chaos_fn_arg_0, chaos_fn_arg_1, chaos_fn_arg_2, chaos_fn_arg_3);
     return result;
 }
 
-// Bridge/import thunk for: System.Private.CoreLib/System.Runtime.CompilerServices.ValueTaskAwaiter<System.Int32>::GetResult:System.Int32()
-extern "C" CHAOS_IL2CPP_INT32 chaos_bridge_thunk_306(void)
+// Bridge/import thunk for: System.Text.Json/JsonSerializer::Serialize:System.Void(System.IO.Stream,System.Object,System.Type,JsonSerializerOptions)
+extern "C" void chaos_bridge_thunk_306(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2, CHAOS_IL2CPP_INTPTR chaos_fn_arg_3)
 {
-    auto result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)()>(kChaosExternalRuntimeFnTable[315])();
+    reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[325])(chaos_fn_arg_0, chaos_fn_arg_1, chaos_fn_arg_2, chaos_fn_arg_3);
+}
+
+// Bridge/import thunk for: System.Text.Json/JsonSerializer::Serialize:System.Void(System.IO.Stream,System.Object,System.Type,System.Text.Json.Serialization.JsonSerializerContext)
+extern "C" void chaos_bridge_thunk_307(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2, CHAOS_IL2CPP_INTPTR chaos_fn_arg_3)
+{
+    reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[327])(chaos_fn_arg_0, chaos_fn_arg_1, chaos_fn_arg_2, chaos_fn_arg_3);
+}
+
+// Bridge/import thunk for: System.Text.Json/JsonSerializer::Serialize:System.String(System.Object,System.Type,JsonSerializerOptions)
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_308(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2)
+{
+    auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[328])(chaos_fn_arg_0, chaos_fn_arg_1, chaos_fn_arg_2);
     return result;
 }
 
-// Bridge/import thunk for: System.Text.Json/JsonSerializer::DeserializeAsync:System.Threading.Tasks.ValueTask<System.Object>(System.IO.Stream,System.Type,JsonSerializerOptions,System.Threading.CancellationToken)
-extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_307(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2, CHAOS_IL2CPP_INTPTR chaos_fn_arg_3)
+// Bridge/import thunk for: System.Text.Json/JsonSerializer::Serialize:System.String(System.Object,System.Type,System.Text.Json.Serialization.JsonSerializerContext)
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_309(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2)
 {
-    auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[316])(chaos_fn_arg_0, chaos_fn_arg_1, chaos_fn_arg_2, chaos_fn_arg_3);
-    return result;
-}
-
-// Bridge/import thunk for: System.Private.CoreLib/System.Threading.Tasks.ValueTask<System.Object>::GetAwaiter:System.Runtime.CompilerServices.ValueTaskAwaiter<System.Object>()
-extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_308(void)
-{
-    auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)()>(kChaosExternalRuntimeFnTable[317])();
-    return result;
-}
-
-// Bridge/import thunk for: System.Private.CoreLib/System.Runtime.CompilerServices.ValueTaskAwaiter<System.Object>::GetResult:System.Object()
-extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_309(void)
-{
-    auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)()>(kChaosExternalRuntimeFnTable[318])();
+    auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[330])(chaos_fn_arg_0, chaos_fn_arg_1, chaos_fn_arg_2);
     return result;
 }
 
@@ -43171,71 +43219,71 @@ extern "C" void chaos_bridge_thunk_31(void)
     reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[38])();
 }
 
-// Bridge/import thunk for: System.Text.Json/JsonSerializer::DeserializeAsync<System.Int32>:System.Threading.Tasks.ValueTask<System.Int32>(System.IO.Stream,System.Text.Json.Serialization.Metadata.JsonTypeInfo<System.Int32>,System.Threading.CancellationToken)
-extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_310(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2)
+// Bridge/import thunk for: System.Text.Json/JsonSerializer::Serialize:System.Void(Utf8JsonWriter,System.Object,System.Type,JsonSerializerOptions)
+extern "C" void chaos_bridge_thunk_310(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2, CHAOS_IL2CPP_INTPTR chaos_fn_arg_3)
 {
-    auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[319])(chaos_fn_arg_0, chaos_fn_arg_1, chaos_fn_arg_2);
+    reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[332])(chaos_fn_arg_0, chaos_fn_arg_1, chaos_fn_arg_2, chaos_fn_arg_3);
+}
+
+// Bridge/import thunk for: System.Text.Json/JsonSerializer::Serialize:System.Void(Utf8JsonWriter,System.Object,System.Type,System.Text.Json.Serialization.JsonSerializerContext)
+extern "C" void chaos_bridge_thunk_311(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2, CHAOS_IL2CPP_INTPTR chaos_fn_arg_3)
+{
+    reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[334])(chaos_fn_arg_0, chaos_fn_arg_1, chaos_fn_arg_2, chaos_fn_arg_3);
+}
+
+// Bridge/import thunk for: System.Text.Json/JsonSerializer::SerializeAsync:System.Threading.Tasks.Task(System.IO.Stream,System.Object,System.Type,JsonSerializerOptions,System.Threading.CancellationToken)
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_312(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2, CHAOS_IL2CPP_INTPTR chaos_fn_arg_3, CHAOS_IL2CPP_INTPTR chaos_fn_arg_4)
+{
+    auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[335])(chaos_fn_arg_0, chaos_fn_arg_1, chaos_fn_arg_2, chaos_fn_arg_3, chaos_fn_arg_4);
     return result;
 }
 
-// Bridge/import thunk for: System.Text.Json/JsonSerializer::DeserializeAsync:System.Threading.Tasks.ValueTask<System.Object>(System.IO.Stream,System.Type,System.Text.Json.Serialization.JsonSerializerContext,System.Threading.CancellationToken)
-extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_311(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2, CHAOS_IL2CPP_INTPTR chaos_fn_arg_3)
-{
-    auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[320])(chaos_fn_arg_0, chaos_fn_arg_1, chaos_fn_arg_2, chaos_fn_arg_3);
-    return result;
-}
-
-// Bridge/import thunk for: System.Text.Json/JsonSerializer::DeserializeAsyncEnumerable<System.Int32>:System.Collections.Generic.IAsyncEnumerable<System.Int32>(System.IO.Stream,JsonSerializerOptions,System.Threading.CancellationToken)
-extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_312(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2)
-{
-    auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[321])(chaos_fn_arg_0, chaos_fn_arg_1, chaos_fn_arg_2);
-    return result;
-}
-
-// Bridge/import thunk for: System.Text.Json/JsonSerializer::DeserializeAsyncEnumerable<System.Int32>:System.Collections.Generic.IAsyncEnumerable<System.Int32>(System.IO.Stream,System.Boolean,JsonSerializerOptions,System.Threading.CancellationToken)
+// Bridge/import thunk for: System.Text.Json/JsonSerializer::SerializeAsync<System.Int32>:System.Threading.Tasks.Task(System.IO.Stream,System.Int32,System.Text.Json.Serialization.Metadata.JsonTypeInfo<System.Int32>,System.Threading.CancellationToken)
 extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_313(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2, CHAOS_IL2CPP_INTPTR chaos_fn_arg_3)
 {
-    auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[322])(chaos_fn_arg_0, chaos_fn_arg_1, chaos_fn_arg_2, chaos_fn_arg_3);
+    auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[336])(chaos_fn_arg_0, chaos_fn_arg_1, chaos_fn_arg_2, chaos_fn_arg_3);
     return result;
 }
 
-// Bridge/import thunk for: System.Text.Json/JsonSerializer::DeserializeAsyncEnumerable<System.Int32>:System.Collections.Generic.IAsyncEnumerable<System.Int32>(System.IO.Stream,System.Text.Json.Serialization.Metadata.JsonTypeInfo<System.Int32>,System.Threading.CancellationToken)
-extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_314(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2)
+// Bridge/import thunk for: System.Text.Json/JsonSerializer::SerializeAsync:System.Threading.Tasks.Task(System.IO.Stream,System.Object,System.Type,System.Text.Json.Serialization.JsonSerializerContext,System.Threading.CancellationToken)
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_314(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2, CHAOS_IL2CPP_INTPTR chaos_fn_arg_3, CHAOS_IL2CPP_INTPTR chaos_fn_arg_4)
 {
-    auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[323])(chaos_fn_arg_0, chaos_fn_arg_1, chaos_fn_arg_2);
+    auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[337])(chaos_fn_arg_0, chaos_fn_arg_1, chaos_fn_arg_2, chaos_fn_arg_3, chaos_fn_arg_4);
     return result;
 }
 
-// Bridge/import thunk for: System.Text.Json/JsonSerializer::DeserializeAsyncEnumerable<System.Int32>:System.Collections.Generic.IAsyncEnumerable<System.Int32>(System.IO.Stream,System.Text.Json.Serialization.Metadata.JsonTypeInfo<System.Int32>,System.Boolean,System.Threading.CancellationToken)
+// Bridge/import thunk for: System.Text.Json/JsonSerializer::SerializeAsync<System.Int32>:System.Threading.Tasks.Task(PipeWriter,System.Int32,System.Text.Json.Serialization.Metadata.JsonTypeInfo<System.Int32>,System.Threading.CancellationToken)
 extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_315(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2, CHAOS_IL2CPP_INTPTR chaos_fn_arg_3)
 {
-    auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[324])(chaos_fn_arg_0, chaos_fn_arg_1, chaos_fn_arg_2, chaos_fn_arg_3);
+    auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[338])(chaos_fn_arg_0, chaos_fn_arg_1, chaos_fn_arg_2, chaos_fn_arg_3);
     return result;
 }
 
-// Bridge/import thunk for: System.Text.Json/JsonSerializer::Serialize:System.Void(System.IO.Stream,System.Object,System.Type,JsonSerializerOptions)
-extern "C" void chaos_bridge_thunk_316(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2, CHAOS_IL2CPP_INTPTR chaos_fn_arg_3)
+// Bridge/import thunk for: System.Text.Json/JsonSerializer::SerializeAsync<System.Int32>:System.Threading.Tasks.Task(PipeWriter,System.Int32,JsonSerializerOptions,System.Threading.CancellationToken)
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_316(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2, CHAOS_IL2CPP_INTPTR chaos_fn_arg_3)
 {
-    reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[325])(chaos_fn_arg_0, chaos_fn_arg_1, chaos_fn_arg_2, chaos_fn_arg_3);
-}
-
-// Bridge/import thunk for: System.Text.Json/JsonSerializer::Serialize:System.Void(System.IO.Stream,System.Object,System.Type,System.Text.Json.Serialization.JsonSerializerContext)
-extern "C" void chaos_bridge_thunk_317(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2, CHAOS_IL2CPP_INTPTR chaos_fn_arg_3)
-{
-    reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[327])(chaos_fn_arg_0, chaos_fn_arg_1, chaos_fn_arg_2, chaos_fn_arg_3);
-}
-
-// Bridge/import thunk for: System.Text.Json/JsonSerializer::Serialize:System.String(System.Object,System.Type,JsonSerializerOptions)
-extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_318(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2)
-{
-    auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[328])(chaos_fn_arg_0, chaos_fn_arg_1, chaos_fn_arg_2);
+    auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[339])(chaos_fn_arg_0, chaos_fn_arg_1, chaos_fn_arg_2, chaos_fn_arg_3);
     return result;
 }
 
-// Bridge/import thunk for: System.Text.Json/JsonSerializer::Serialize:System.String(System.Object,System.Type,System.Text.Json.Serialization.JsonSerializerContext)
+// Bridge/import thunk for: System.Text.Json/JsonSerializer::SerializeAsync:System.Threading.Tasks.Task(PipeWriter,System.Object,System.Type,System.Text.Json.Serialization.JsonSerializerContext,System.Threading.CancellationToken)
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_317(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2, CHAOS_IL2CPP_INTPTR chaos_fn_arg_3, CHAOS_IL2CPP_INTPTR chaos_fn_arg_4)
+{
+    auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[340])(chaos_fn_arg_0, chaos_fn_arg_1, chaos_fn_arg_2, chaos_fn_arg_3, chaos_fn_arg_4);
+    return result;
+}
+
+// Bridge/import thunk for: System.Text.Json/JsonSerializer::SerializeAsync:System.Threading.Tasks.Task(PipeWriter,System.Object,System.Type,JsonSerializerOptions,System.Threading.CancellationToken)
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_318(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2, CHAOS_IL2CPP_INTPTR chaos_fn_arg_3, CHAOS_IL2CPP_INTPTR chaos_fn_arg_4)
+{
+    auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[341])(chaos_fn_arg_0, chaos_fn_arg_1, chaos_fn_arg_2, chaos_fn_arg_3, chaos_fn_arg_4);
+    return result;
+}
+
+// Bridge/import thunk for: System.Text.Json/JsonSerializer::SerializeToDocument:JsonDocument(System.Object,System.Type,JsonSerializerOptions)
 extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_319(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2)
 {
-    auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[330])(chaos_fn_arg_0, chaos_fn_arg_1, chaos_fn_arg_2);
+    auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[342])(chaos_fn_arg_0, chaos_fn_arg_1, chaos_fn_arg_2);
     return result;
 }
 
@@ -43245,71 +43293,73 @@ extern "C" void chaos_bridge_thunk_32(void)
     reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[39])();
 }
 
-// Bridge/import thunk for: System.Text.Json/JsonSerializer::Serialize:System.Void(Utf8JsonWriter,System.Object,System.Type,JsonSerializerOptions)
-extern "C" void chaos_bridge_thunk_320(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2, CHAOS_IL2CPP_INTPTR chaos_fn_arg_3)
+// Bridge/import thunk for: System.Text.Json/JsonSerializer::SerializeToDocument<System.Int32>:JsonDocument(System.Int32,System.Text.Json.Serialization.Metadata.JsonTypeInfo<System.Int32>)
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_320(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
 {
-    reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[332])(chaos_fn_arg_0, chaos_fn_arg_1, chaos_fn_arg_2, chaos_fn_arg_3);
-}
-
-// Bridge/import thunk for: System.Text.Json/JsonSerializer::Serialize:System.Void(Utf8JsonWriter,System.Object,System.Type,System.Text.Json.Serialization.JsonSerializerContext)
-extern "C" void chaos_bridge_thunk_321(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2, CHAOS_IL2CPP_INTPTR chaos_fn_arg_3)
-{
-    reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[334])(chaos_fn_arg_0, chaos_fn_arg_1, chaos_fn_arg_2, chaos_fn_arg_3);
-}
-
-// Bridge/import thunk for: System.Text.Json/JsonSerializer::SerializeAsync:System.Threading.Tasks.Task(System.IO.Stream,System.Object,System.Type,JsonSerializerOptions,System.Threading.CancellationToken)
-extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_322(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2, CHAOS_IL2CPP_INTPTR chaos_fn_arg_3, CHAOS_IL2CPP_INTPTR chaos_fn_arg_4)
-{
-    auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[335])(chaos_fn_arg_0, chaos_fn_arg_1, chaos_fn_arg_2, chaos_fn_arg_3, chaos_fn_arg_4);
+    auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[343])(chaos_fn_arg_0, chaos_fn_arg_1);
     return result;
 }
 
-// Bridge/import thunk for: System.Text.Json/JsonSerializer::SerializeAsync<System.Int32>:System.Threading.Tasks.Task(System.IO.Stream,System.Int32,System.Text.Json.Serialization.Metadata.JsonTypeInfo<System.Int32>,System.Threading.CancellationToken)
-extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_323(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2, CHAOS_IL2CPP_INTPTR chaos_fn_arg_3)
+// Bridge/import thunk for: System.Text.Json/JsonSerializer::SerializeToDocument:JsonDocument(System.Object,System.Type,System.Text.Json.Serialization.JsonSerializerContext)
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_321(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2)
 {
-    auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[336])(chaos_fn_arg_0, chaos_fn_arg_1, chaos_fn_arg_2, chaos_fn_arg_3);
+    auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[344])(chaos_fn_arg_0, chaos_fn_arg_1, chaos_fn_arg_2);
     return result;
 }
 
-// Bridge/import thunk for: System.Text.Json/JsonSerializer::SerializeAsync:System.Threading.Tasks.Task(System.IO.Stream,System.Object,System.Type,System.Text.Json.Serialization.JsonSerializerContext,System.Threading.CancellationToken)
-extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_324(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2, CHAOS_IL2CPP_INTPTR chaos_fn_arg_3, CHAOS_IL2CPP_INTPTR chaos_fn_arg_4)
+// Bridge/import thunk for: System.Text.Json/JsonSerializer::SerializeToElement:JsonElement(System.Object,System.Type,JsonSerializerOptions)
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_322(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2)
 {
-    auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[337])(chaos_fn_arg_0, chaos_fn_arg_1, chaos_fn_arg_2, chaos_fn_arg_3, chaos_fn_arg_4);
+    auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[345])(chaos_fn_arg_0, chaos_fn_arg_1, chaos_fn_arg_2);
     return result;
 }
 
-// Bridge/import thunk for: System.Text.Json/JsonSerializer::SerializeAsync<System.Int32>:System.Threading.Tasks.Task(PipeWriter,System.Int32,System.Text.Json.Serialization.Metadata.JsonTypeInfo<System.Int32>,System.Threading.CancellationToken)
-extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_325(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2, CHAOS_IL2CPP_INTPTR chaos_fn_arg_3)
+// Bridge/import thunk for: System.Text.Json/JsonSerializer::SerializeToElement<System.Int32>:JsonElement(System.Int32,System.Text.Json.Serialization.Metadata.JsonTypeInfo<System.Int32>)
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_323(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
 {
-    auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[338])(chaos_fn_arg_0, chaos_fn_arg_1, chaos_fn_arg_2, chaos_fn_arg_3);
+    auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[346])(chaos_fn_arg_0, chaos_fn_arg_1);
     return result;
 }
 
-// Bridge/import thunk for: System.Text.Json/JsonSerializer::SerializeAsync<System.Int32>:System.Threading.Tasks.Task(PipeWriter,System.Int32,JsonSerializerOptions,System.Threading.CancellationToken)
-extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_326(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2, CHAOS_IL2CPP_INTPTR chaos_fn_arg_3)
+// Bridge/import thunk for: System.Text.Json/JsonSerializer::SerializeToElement:JsonElement(System.Object,System.Type,System.Text.Json.Serialization.JsonSerializerContext)
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_324(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2)
 {
-    auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[339])(chaos_fn_arg_0, chaos_fn_arg_1, chaos_fn_arg_2, chaos_fn_arg_3);
+    auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[347])(chaos_fn_arg_0, chaos_fn_arg_1, chaos_fn_arg_2);
     return result;
 }
 
-// Bridge/import thunk for: System.Text.Json/JsonSerializer::SerializeAsync:System.Threading.Tasks.Task(PipeWriter,System.Object,System.Type,System.Text.Json.Serialization.JsonSerializerContext,System.Threading.CancellationToken)
-extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_327(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2, CHAOS_IL2CPP_INTPTR chaos_fn_arg_3, CHAOS_IL2CPP_INTPTR chaos_fn_arg_4)
+// Bridge/import thunk for: System.Text.Json/JsonSerializer::SerializeToNode:System.Text.Json.Nodes.JsonNode(System.Object,System.Type,JsonSerializerOptions)
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_325(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2)
 {
-    auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[340])(chaos_fn_arg_0, chaos_fn_arg_1, chaos_fn_arg_2, chaos_fn_arg_3, chaos_fn_arg_4);
+    auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[348])(chaos_fn_arg_0, chaos_fn_arg_1, chaos_fn_arg_2);
     return result;
 }
 
-// Bridge/import thunk for: System.Text.Json/JsonSerializer::SerializeAsync:System.Threading.Tasks.Task(PipeWriter,System.Object,System.Type,JsonSerializerOptions,System.Threading.CancellationToken)
-extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_328(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2, CHAOS_IL2CPP_INTPTR chaos_fn_arg_3, CHAOS_IL2CPP_INTPTR chaos_fn_arg_4)
+// Bridge/import thunk for: System.Text.Json/JsonSerializer::SerializeToNode<System.Int32>:System.Text.Json.Nodes.JsonNode(System.Int32,System.Text.Json.Serialization.Metadata.JsonTypeInfo<System.Int32>)
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_326(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
 {
-    auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[341])(chaos_fn_arg_0, chaos_fn_arg_1, chaos_fn_arg_2, chaos_fn_arg_3, chaos_fn_arg_4);
+    auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[349])(chaos_fn_arg_0, chaos_fn_arg_1);
     return result;
 }
 
-// Bridge/import thunk for: System.Text.Json/JsonSerializer::SerializeToDocument:JsonDocument(System.Object,System.Type,JsonSerializerOptions)
-extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_329(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2)
+// Bridge/import thunk for: System.Text.Json/JsonSerializer::SerializeToNode:System.Text.Json.Nodes.JsonNode(System.Object,System.Type,System.Text.Json.Serialization.JsonSerializerContext)
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_327(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2)
 {
-    auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[342])(chaos_fn_arg_0, chaos_fn_arg_1, chaos_fn_arg_2);
+    auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[350])(chaos_fn_arg_0, chaos_fn_arg_1, chaos_fn_arg_2);
+    return result;
+}
+
+// Bridge/import thunk for: System.Text.Json/JsonSerializer::SerializeToUtf8Bytes:System.Byte[](System.Object,System.Type,JsonSerializerOptions)
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_328(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2)
+{
+    auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[351])(chaos_fn_arg_0, chaos_fn_arg_1, chaos_fn_arg_2);
+    return result;
+}
+
+// Bridge/import thunk for: System.Text.Json/JsonSerializer::SerializeToUtf8Bytes<System.Int32>:System.Byte[](System.Int32,System.Text.Json.Serialization.Metadata.JsonTypeInfo<System.Int32>)
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_329(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
+{
+    auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[352])(chaos_fn_arg_0, chaos_fn_arg_1);
     return result;
 }
 
@@ -43320,74 +43370,67 @@ extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_33(CHAOS_IL2CPP_INTPTR chaos_f
     return result;
 }
 
-// Bridge/import thunk for: System.Text.Json/JsonSerializer::SerializeToDocument<System.Int32>:JsonDocument(System.Int32,System.Text.Json.Serialization.Metadata.JsonTypeInfo<System.Int32>)
-extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_330(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
+// Bridge/import thunk for: System.Text.Json/JsonSerializer::SerializeToUtf8Bytes:System.Byte[](System.Object,System.Type,System.Text.Json.Serialization.JsonSerializerContext)
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_330(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2)
 {
-    auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[343])(chaos_fn_arg_0, chaos_fn_arg_1);
+    auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[353])(chaos_fn_arg_0, chaos_fn_arg_1, chaos_fn_arg_2);
     return result;
 }
 
-// Bridge/import thunk for: System.Text.Json/JsonSerializer::SerializeToDocument:JsonDocument(System.Object,System.Type,System.Text.Json.Serialization.JsonSerializerContext)
-extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_331(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2)
+// Bridge/import thunk for: System.Text.Json/Utf8JsonReader
+extern "C" void chaos_bridge_thunk_331(void)
 {
-    auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[344])(chaos_fn_arg_0, chaos_fn_arg_1, chaos_fn_arg_2);
+    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[354])();
+}
+
+// Bridge/import thunk for: System.Text.Json/Utf8JsonReader::Read:System.Boolean()
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_332(void)
+{
+    auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)()>(kChaosExternalRuntimeFnTable[355])();
     return result;
 }
 
-// Bridge/import thunk for: System.Text.Json/JsonSerializer::SerializeToElement:JsonElement(System.Object,System.Type,JsonSerializerOptions)
-extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_332(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2)
+// Bridge/import thunk for: System.Text.Json/Utf8JsonReader::TrySkip:System.Boolean()
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_333(void)
 {
-    auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[345])(chaos_fn_arg_0, chaos_fn_arg_1, chaos_fn_arg_2);
+    auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)()>(kChaosExternalRuntimeFnTable[356])();
     return result;
 }
 
-// Bridge/import thunk for: System.Text.Json/JsonSerializer::SerializeToElement<System.Int32>:JsonElement(System.Int32,System.Text.Json.Serialization.Metadata.JsonTypeInfo<System.Int32>)
-extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_333(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
+// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonReaderTests+<>c::<>9__9_0
+extern "C" void chaos_bridge_thunk_334(void)
 {
-    auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[346])(chaos_fn_arg_0, chaos_fn_arg_1);
-    return result;
+    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[357])();
 }
 
-// Bridge/import thunk for: System.Text.Json/JsonSerializer::SerializeToElement:JsonElement(System.Object,System.Type,System.Text.Json.Serialization.JsonSerializerContext)
-extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_334(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2)
+// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonReaderTests+<>c::<>9
+extern "C" void chaos_bridge_thunk_335(void)
 {
-    auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[347])(chaos_fn_arg_0, chaos_fn_arg_1, chaos_fn_arg_2);
-    return result;
+    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[358])();
 }
 
-// Bridge/import thunk for: System.Text.Json/JsonSerializer::SerializeToNode:System.Text.Json.Nodes.JsonNode(System.Object,System.Type,JsonSerializerOptions)
-extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_335(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2)
+// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonReaderTests+<>c::<>9__11_0
+extern "C" void chaos_bridge_thunk_336(void)
 {
-    auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[348])(chaos_fn_arg_0, chaos_fn_arg_1, chaos_fn_arg_2);
-    return result;
+    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[359])();
 }
 
-// Bridge/import thunk for: System.Text.Json/JsonSerializer::SerializeToNode<System.Int32>:System.Text.Json.Nodes.JsonNode(System.Int32,System.Text.Json.Serialization.Metadata.JsonTypeInfo<System.Int32>)
-extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_336(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
+// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonReaderTests+<>c::<>9__10_0
+extern "C" void chaos_bridge_thunk_337(void)
 {
-    auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[349])(chaos_fn_arg_0, chaos_fn_arg_1);
-    return result;
+    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[360])();
 }
 
-// Bridge/import thunk for: System.Text.Json/JsonSerializer::SerializeToNode:System.Text.Json.Nodes.JsonNode(System.Object,System.Type,System.Text.Json.Serialization.JsonSerializerContext)
-extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_337(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2)
+// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonReaderTests+<>c::<>9__8_0
+extern "C" void chaos_bridge_thunk_338(void)
 {
-    auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[350])(chaos_fn_arg_0, chaos_fn_arg_1, chaos_fn_arg_2);
-    return result;
+    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[361])();
 }
 
-// Bridge/import thunk for: System.Text.Json/JsonSerializer::SerializeToUtf8Bytes:System.Byte[](System.Object,System.Type,JsonSerializerOptions)
-extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_338(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2)
+// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonReaderTests+<>c::<>9__22_0
+extern "C" void chaos_bridge_thunk_339(void)
 {
-    auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[351])(chaos_fn_arg_0, chaos_fn_arg_1, chaos_fn_arg_2);
-    return result;
-}
-
-// Bridge/import thunk for: System.Text.Json/JsonSerializer::SerializeToUtf8Bytes<System.Int32>:System.Byte[](System.Int32,System.Text.Json.Serialization.Metadata.JsonTypeInfo<System.Int32>)
-extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_339(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-    auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[352])(chaos_fn_arg_0, chaos_fn_arg_1);
-    return result;
+    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[362])();
 }
 
 // Bridge/import thunk for: System.Memory/System.Buffers.ReadOnlySequence<System.Byte>
@@ -43396,67 +43439,64 @@ extern "C" void chaos_bridge_thunk_34(void)
     reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[41])();
 }
 
-// Bridge/import thunk for: System.Text.Json/JsonSerializer::SerializeToUtf8Bytes:System.Byte[](System.Object,System.Type,System.Text.Json.Serialization.JsonSerializerContext)
-extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_340(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2)
+// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonReaderTests+<>c::<>9__23_0
+extern "C" void chaos_bridge_thunk_340(void)
 {
-    auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[353])(chaos_fn_arg_0, chaos_fn_arg_1, chaos_fn_arg_2);
-    return result;
+    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[363])();
 }
 
-// Bridge/import thunk for: System.Text.Json/Utf8JsonReader
+// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonReaderTests+<>c::<>9__21_0
 extern "C" void chaos_bridge_thunk_341(void)
 {
-    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[354])();
+    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[364])();
 }
 
-// Bridge/import thunk for: System.Text.Json/Utf8JsonReader::Read:System.Boolean()
-extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_342(void)
+// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonReaderTests+<>c::<>9__20_0
+extern "C" void chaos_bridge_thunk_342(void)
 {
-    auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)()>(kChaosExternalRuntimeFnTable[355])();
-    return result;
+    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[365])();
 }
 
-// Bridge/import thunk for: System.Text.Json/Utf8JsonReader::TrySkip:System.Boolean()
-extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_343(void)
+// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonReaderTests+<>c::<>9__24_0
+extern "C" void chaos_bridge_thunk_343(void)
 {
-    auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)()>(kChaosExternalRuntimeFnTable[356])();
-    return result;
+    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[366])();
 }
 
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonReaderTests+<>c::<>9__9_0
+// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonReaderTests+<>c::<>9__13_0
 extern "C" void chaos_bridge_thunk_344(void)
 {
-    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[357])();
+    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[367])();
 }
 
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonReaderTests+<>c::<>9
+// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonReaderTests+<>c::<>9__14_0
 extern "C" void chaos_bridge_thunk_345(void)
 {
-    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[358])();
+    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[368])();
 }
 
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonReaderTests+<>c::<>9__11_0
+// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonReaderTests+<>c::<>9__15_0
 extern "C" void chaos_bridge_thunk_346(void)
 {
-    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[359])();
+    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[369])();
 }
 
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonReaderTests+<>c::<>9__10_0
+// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonReaderTests+<>c::<>9__12_0
 extern "C" void chaos_bridge_thunk_347(void)
 {
-    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[360])();
+    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[370])();
 }
 
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonReaderTests+<>c::<>9__8_0
+// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonReaderTests+<>c::<>9__19_0
 extern "C" void chaos_bridge_thunk_348(void)
 {
-    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[361])();
+    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[371])();
 }
 
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonReaderTests+<>c::<>9__22_0
+// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonReaderTests+<>c::<>9__7_0
 extern "C" void chaos_bridge_thunk_349(void)
 {
-    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[362])();
+    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[372])();
 }
 
 // Bridge/import thunk for: System.Text.Json/JsonDocument::Parse:JsonDocument(System.Buffers.ReadOnlySequence<System.Byte>,JsonDocumentOptions)
@@ -43466,64 +43506,64 @@ extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_35(CHAOS_IL2CPP_INTPTR chaos_f
     return result;
 }
 
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonReaderTests+<>c::<>9__23_0
+// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonReaderTests+<>c::<>9__16_0
 extern "C" void chaos_bridge_thunk_350(void)
 {
-    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[363])();
+    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[373])();
 }
 
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonReaderTests+<>c::<>9__21_0
+// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonReaderTests+<>c::<>9__17_0
 extern "C" void chaos_bridge_thunk_351(void)
 {
-    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[364])();
+    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[374])();
 }
 
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonReaderTests+<>c::<>9__20_0
+// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonReaderTests+<>c::<>9__18_0
 extern "C" void chaos_bridge_thunk_352(void)
 {
-    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[365])();
+    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[375])();
 }
 
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonReaderTests+<>c::<>9__24_0
+// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonReaderTests+<>c::<>9__2_0
 extern "C" void chaos_bridge_thunk_353(void)
 {
-    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[366])();
+    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[376])();
 }
 
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonReaderTests+<>c::<>9__13_0
+// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonReaderTests+<>c__DisplayClass28_0::__ref_23_0_0
 extern "C" void chaos_bridge_thunk_354(void)
 {
-    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[367])();
+    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[377])();
 }
 
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonReaderTests+<>c::<>9__14_0
+// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonReaderTests+<>c__DisplayClass29_0::__ref_23_1_0
 extern "C" void chaos_bridge_thunk_355(void)
 {
-    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[368])();
+    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[378])();
 }
 
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonReaderTests+<>c::<>9__15_0
+// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonReaderTests+<>c__DisplayClass25_0::__ref_22_0_0
 extern "C" void chaos_bridge_thunk_356(void)
 {
-    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[369])();
+    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[379])();
 }
 
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonReaderTests+<>c::<>9__12_0
+// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonReaderTests+<>c__DisplayClass26_0::__ref_22_1_0
 extern "C" void chaos_bridge_thunk_357(void)
 {
-    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[370])();
+    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[380])();
 }
 
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonReaderTests+<>c::<>9__19_0
+// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonReaderTests+<>c__DisplayClass27_0::__ref_22_2_0
 extern "C" void chaos_bridge_thunk_358(void)
 {
-    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[371])();
+    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[381])();
 }
 
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonReaderTests+<>c::<>9__7_0
+// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonReaderTests+<>c__DisplayClass50_0::__ref_34_0_0
 extern "C" void chaos_bridge_thunk_359(void)
 {
-    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[372])();
+    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[382])();
 }
 
 // Bridge/import thunk for: System.Text.Json/JsonDocument::Parse:JsonDocument(System.IO.Stream,JsonDocumentOptions)
@@ -43533,64 +43573,64 @@ extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_36(CHAOS_IL2CPP_INTPTR chaos_f
     return result;
 }
 
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonReaderTests+<>c::<>9__16_0
+// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonReaderTests+<>c__DisplayClass51_0::__ref_35_0_0
 extern "C" void chaos_bridge_thunk_360(void)
 {
-    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[373])();
+    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[383])();
 }
 
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonReaderTests+<>c::<>9__17_0
+// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonReaderTests+<>c__DisplayClass48_0::__ref_33_0_0
 extern "C" void chaos_bridge_thunk_361(void)
 {
-    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[374])();
+    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[384])();
 }
 
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonReaderTests+<>c::<>9__18_0
+// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonReaderTests+<>c__DisplayClass49_0::__ref_33_1_0
 extern "C" void chaos_bridge_thunk_362(void)
 {
-    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[375])();
+    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[385])();
 }
 
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonReaderTests+<>c::<>9__2_0
+// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonReaderTests+<>c__DisplayClass46_0::__ref_32_0_0
 extern "C" void chaos_bridge_thunk_363(void)
 {
-    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[376])();
+    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[386])();
 }
 
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonReaderTests+<>c__DisplayClass28_0::__ref_23_0_0
+// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonReaderTests+<>c__DisplayClass47_0::__ref_32_1_0
 extern "C" void chaos_bridge_thunk_364(void)
 {
-    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[377])();
+    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[387])();
 }
 
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonReaderTests+<>c__DisplayClass29_0::__ref_23_1_0
+// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonReaderTests+<>c__DisplayClass52_0::__ref_36_0_0
 extern "C" void chaos_bridge_thunk_365(void)
 {
-    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[378])();
+    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[388])();
 }
 
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonReaderTests+<>c__DisplayClass25_0::__ref_22_0_0
+// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonReaderTests+<>c__DisplayClass32_0::__ref_25_0_0
 extern "C" void chaos_bridge_thunk_366(void)
 {
-    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[379])();
+    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[389])();
 }
 
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonReaderTests+<>c__DisplayClass26_0::__ref_22_1_0
+// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonReaderTests+<>c__DisplayClass33_0::__ref_25_1_0
 extern "C" void chaos_bridge_thunk_367(void)
 {
-    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[380])();
+    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[390])();
 }
 
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonReaderTests+<>c__DisplayClass27_0::__ref_22_2_0
+// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonReaderTests+<>c__DisplayClass34_0::__ref_26_0_0
 extern "C" void chaos_bridge_thunk_368(void)
 {
-    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[381])();
+    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[391])();
 }
 
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonReaderTests+<>c__DisplayClass50_0::__ref_34_0_0
+// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonReaderTests+<>c__DisplayClass35_0::__ref_26_1_0
 extern "C" void chaos_bridge_thunk_369(void)
 {
-    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[382])();
+    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[392])();
 }
 
 // Bridge/import thunk for: System.Private.CoreLib/System.IO.Stream::Null
@@ -43599,64 +43639,64 @@ extern "C" void chaos_bridge_thunk_37(void)
     reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[44])();
 }
 
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonReaderTests+<>c__DisplayClass51_0::__ref_35_0_0
+// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonReaderTests+<>c__DisplayClass36_0::__ref_27_0_0
 extern "C" void chaos_bridge_thunk_370(void)
 {
-    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[383])();
+    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[393])();
 }
 
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonReaderTests+<>c__DisplayClass48_0::__ref_33_0_0
+// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonReaderTests+<>c__DisplayClass37_0::__ref_27_1_0
 extern "C" void chaos_bridge_thunk_371(void)
 {
-    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[384])();
+    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[394])();
 }
 
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonReaderTests+<>c__DisplayClass49_0::__ref_33_1_0
+// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonReaderTests+<>c__DisplayClass30_0::__ref_24_0_0
 extern "C" void chaos_bridge_thunk_372(void)
 {
-    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[385])();
+    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[395])();
 }
 
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonReaderTests+<>c__DisplayClass46_0::__ref_32_0_0
+// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonReaderTests+<>c__DisplayClass31_0::__ref_24_1_0
 extern "C" void chaos_bridge_thunk_373(void)
 {
-    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[386])();
+    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[396])();
 }
 
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonReaderTests+<>c__DisplayClass47_0::__ref_32_1_0
+// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonReaderTests+<>c__DisplayClass44_0::__ref_31_0_0
 extern "C" void chaos_bridge_thunk_374(void)
 {
-    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[387])();
+    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[397])();
 }
 
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonReaderTests+<>c__DisplayClass52_0::__ref_36_0_0
+// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonReaderTests+<>c__DisplayClass45_0::__ref_31_1_0
 extern "C" void chaos_bridge_thunk_375(void)
 {
-    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[388])();
+    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[398])();
 }
 
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonReaderTests+<>c__DisplayClass32_0::__ref_25_0_0
+// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonReaderTests+<>c__DisplayClass38_0::__ref_28_0_0
 extern "C" void chaos_bridge_thunk_376(void)
 {
-    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[389])();
+    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[399])();
 }
 
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonReaderTests+<>c__DisplayClass33_0::__ref_25_1_0
+// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonReaderTests+<>c__DisplayClass39_0::__ref_28_1_0
 extern "C" void chaos_bridge_thunk_377(void)
 {
-    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[390])();
+    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[400])();
 }
 
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonReaderTests+<>c__DisplayClass34_0::__ref_26_0_0
+// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonReaderTests+<>c__DisplayClass40_0::__ref_29_0_0
 extern "C" void chaos_bridge_thunk_378(void)
 {
-    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[391])();
+    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[401])();
 }
 
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonReaderTests+<>c__DisplayClass35_0::__ref_26_1_0
+// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonReaderTests+<>c__DisplayClass41_0::__ref_29_1_0
 extern "C" void chaos_bridge_thunk_379(void)
 {
-    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[392])();
+    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[402])();
 }
 
 // Bridge/import thunk for: System.Private.CoreLib/System.ReadOnlyMemory<System.Char>
@@ -43665,64 +43705,70 @@ extern "C" void chaos_bridge_thunk_38(void)
     reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[45])();
 }
 
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonReaderTests+<>c__DisplayClass36_0::__ref_27_0_0
+// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonReaderTests+<>c__DisplayClass42_0::__ref_30_0_0
 extern "C" void chaos_bridge_thunk_380(void)
 {
-    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[393])();
+    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[403])();
 }
 
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonReaderTests+<>c__DisplayClass37_0::__ref_27_1_0
+// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonReaderTests+<>c__DisplayClass43_0::__ref_30_1_0
 extern "C" void chaos_bridge_thunk_381(void)
 {
-    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[394])();
+    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[404])();
 }
 
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonReaderTests+<>c__DisplayClass30_0::__ref_24_0_0
+// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonReaderTests+<>c::<>9__5_0
 extern "C" void chaos_bridge_thunk_382(void)
 {
-    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[395])();
+    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[405])();
 }
 
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonReaderTests+<>c__DisplayClass31_0::__ref_24_1_0
+// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonReaderTests+<>c::<>9__6_0
 extern "C" void chaos_bridge_thunk_383(void)
 {
-    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[396])();
+    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[406])();
 }
 
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonReaderTests+<>c__DisplayClass44_0::__ref_31_0_0
-extern "C" void chaos_bridge_thunk_384(void)
+// Bridge/import thunk for: System.Text.Json/Utf8JsonReader::TryGetBytesFromBase64:System.Boolean(System.Byte[]&)
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_384(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
-    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[397])();
+    auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[407])(chaos_fn_arg_0);
+    return result;
 }
 
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonReaderTests+<>c__DisplayClass45_0::__ref_31_1_0
-extern "C" void chaos_bridge_thunk_385(void)
+// Bridge/import thunk for: System.Text.Json/Utf8JsonReader::TryGetByte:System.Boolean(System.Byte&)
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_385(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
-    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[398])();
+    auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[408])(chaos_fn_arg_0);
+    return result;
 }
 
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonReaderTests+<>c__DisplayClass38_0::__ref_28_0_0
-extern "C" void chaos_bridge_thunk_386(void)
+// Bridge/import thunk for: System.Text.Json/Utf8JsonReader::TryGetSByte:System.Boolean(System.SByte&)
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_386(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
-    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[399])();
+    auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[409])(chaos_fn_arg_0);
+    return result;
 }
 
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonReaderTests+<>c__DisplayClass39_0::__ref_28_1_0
-extern "C" void chaos_bridge_thunk_387(void)
+// Bridge/import thunk for: System.Text.Json/Utf8JsonReader::TryGetInt16:System.Boolean(System.Int16&)
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_387(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
-    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[400])();
+    auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[410])(chaos_fn_arg_0);
+    return result;
 }
 
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonReaderTests+<>c__DisplayClass40_0::__ref_29_0_0
-extern "C" void chaos_bridge_thunk_388(void)
+// Bridge/import thunk for: System.Text.Json/Utf8JsonReader::TryGetInt32:System.Boolean(System.Int32&)
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_388(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
-    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[401])();
+    auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[411])(chaos_fn_arg_0);
+    return result;
 }
 
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonReaderTests+<>c__DisplayClass41_0::__ref_29_1_0
-extern "C" void chaos_bridge_thunk_389(void)
+// Bridge/import thunk for: System.Text.Json/Utf8JsonReader::TryGetInt64:System.Boolean(System.Int64&)
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_389(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
-    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[402])();
+    auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[412])(chaos_fn_arg_0);
+    return result;
 }
 
 // Bridge/import thunk for: System.Text.Json/JsonDocument::Parse:JsonDocument(System.ReadOnlyMemory<System.Char>,JsonDocumentOptions)
@@ -43732,69 +43778,73 @@ extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_39(CHAOS_IL2CPP_INTPTR chaos_f
     return result;
 }
 
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonReaderTests+<>c__DisplayClass42_0::__ref_30_0_0
-extern "C" void chaos_bridge_thunk_390(void)
+// Bridge/import thunk for: System.Text.Json/Utf8JsonReader::TryGetUInt16:System.Boolean(System.UInt16&)
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_390(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
-    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[403])();
+    auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[413])(chaos_fn_arg_0);
+    return result;
 }
 
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonReaderTests+<>c__DisplayClass43_0::__ref_30_1_0
-extern "C" void chaos_bridge_thunk_391(void)
+// Bridge/import thunk for: System.Text.Json/Utf8JsonReader::TryGetUInt32:System.Boolean(System.UInt32&)
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_391(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
-    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[404])();
+    auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[414])(chaos_fn_arg_0);
+    return result;
 }
 
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonReaderTests+<>c::<>9__5_0
-extern "C" void chaos_bridge_thunk_392(void)
+// Bridge/import thunk for: System.Text.Json/Utf8JsonReader::TryGetUInt64:System.Boolean(System.UInt64&)
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_392(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
-    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[405])();
+    auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[415])(chaos_fn_arg_0);
+    return result;
 }
 
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonReaderTests+<>c::<>9__6_0
-extern "C" void chaos_bridge_thunk_393(void)
+// Bridge/import thunk for: System.Text.Json/Utf8JsonReader::TryGetSingle:System.Boolean(System.Single&)
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_393(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
-    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[406])();
+    auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[416])(chaos_fn_arg_0);
+    return result;
 }
 
-// Bridge/import thunk for: System.Text.Json/Utf8JsonReader::TryGetBytesFromBase64:System.Boolean(System.Byte[]&)
+// Bridge/import thunk for: System.Text.Json/Utf8JsonReader::TryGetDouble:System.Boolean(System.Double&)
 extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_394(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
-    auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[407])(chaos_fn_arg_0);
+    auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[417])(chaos_fn_arg_0);
     return result;
 }
 
-// Bridge/import thunk for: System.Text.Json/Utf8JsonReader::TryGetByte:System.Boolean(System.Byte&)
+// Bridge/import thunk for: System.Text.Json/Utf8JsonReader::TryGetDecimal:System.Boolean(System.Decimal&)
 extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_395(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
-    auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[408])(chaos_fn_arg_0);
+    auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[418])(chaos_fn_arg_0);
     return result;
 }
 
-// Bridge/import thunk for: System.Text.Json/Utf8JsonReader::TryGetSByte:System.Boolean(System.SByte&)
+// Bridge/import thunk for: System.Text.Json/Utf8JsonReader::TryGetDateTime:System.Boolean(System.DateTime&)
 extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_396(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
-    auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[409])(chaos_fn_arg_0);
+    auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[419])(chaos_fn_arg_0);
     return result;
 }
 
-// Bridge/import thunk for: System.Text.Json/Utf8JsonReader::TryGetInt16:System.Boolean(System.Int16&)
+// Bridge/import thunk for: System.Text.Json/Utf8JsonReader::TryGetDateTimeOffset:System.Boolean(System.DateTimeOffset&)
 extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_397(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
-    auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[410])(chaos_fn_arg_0);
+    auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[420])(chaos_fn_arg_0);
     return result;
 }
 
-// Bridge/import thunk for: System.Text.Json/Utf8JsonReader::TryGetInt32:System.Boolean(System.Int32&)
+// Bridge/import thunk for: System.Text.Json/Utf8JsonReader::TryGetGuid:System.Boolean(System.Guid&)
 extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_398(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
-    auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[411])(chaos_fn_arg_0);
+    auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[421])(chaos_fn_arg_0);
     return result;
 }
 
-// Bridge/import thunk for: System.Text.Json/Utf8JsonReader::TryGetInt64:System.Boolean(System.Int64&)
-extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_399(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+// Bridge/import thunk for: System.Text.Json/Utf8JsonReader::GetBoolean:System.Boolean()
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_399(void)
 {
-    auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[412])(chaos_fn_arg_0);
+    auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)()>(kChaosExternalRuntimeFnTable[422])();
     return result;
 }
 
@@ -43811,73 +43861,73 @@ extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_40(CHAOS_IL2CPP_INTPTR chaos_f
     return result;
 }
 
-// Bridge/import thunk for: System.Text.Json/Utf8JsonReader::TryGetUInt16:System.Boolean(System.UInt16&)
-extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_400(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+// Bridge/import thunk for: System.Text.Json/Utf8JsonReader::GetByte:System.Byte()
+extern "C" CHAOS_IL2CPP_UINT8 chaos_bridge_thunk_400(void)
 {
-    auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[413])(chaos_fn_arg_0);
+    auto result = reinterpret_cast<CHAOS_IL2CPP_UINT8(*)()>(kChaosExternalRuntimeFnTable[423])();
     return result;
 }
 
-// Bridge/import thunk for: System.Text.Json/Utf8JsonReader::TryGetUInt32:System.Boolean(System.UInt32&)
-extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_401(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+// Bridge/import thunk for: System.Text.Json/Utf8JsonReader::GetBytesFromBase64:System.Byte[]()
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_401(void)
 {
-    auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[414])(chaos_fn_arg_0);
+    auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)()>(kChaosExternalRuntimeFnTable[424])();
     return result;
 }
 
-// Bridge/import thunk for: System.Text.Json/Utf8JsonReader::TryGetUInt64:System.Boolean(System.UInt64&)
-extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_402(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+// Bridge/import thunk for: System.Text.Json/Utf8JsonReader::GetComment:System.String()
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_402(void)
 {
-    auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[415])(chaos_fn_arg_0);
+    auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)()>(kChaosExternalRuntimeFnTable[425])();
     return result;
 }
 
-// Bridge/import thunk for: System.Text.Json/Utf8JsonReader::TryGetSingle:System.Boolean(System.Single&)
-extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_403(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+// Bridge/import thunk for: System.Text.Json/Utf8JsonReader::GetDateTime:System.DateTime()
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_403(void)
 {
-    auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[416])(chaos_fn_arg_0);
+    auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)()>(kChaosExternalRuntimeFnTable[426])();
     return result;
 }
 
-// Bridge/import thunk for: System.Text.Json/Utf8JsonReader::TryGetDouble:System.Boolean(System.Double&)
-extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_404(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+// Bridge/import thunk for: System.Text.Json/Utf8JsonReader::GetDateTimeOffset:System.DateTimeOffset()
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_404(void)
 {
-    auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[417])(chaos_fn_arg_0);
+    auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)()>(kChaosExternalRuntimeFnTable[427])();
     return result;
 }
 
-// Bridge/import thunk for: System.Text.Json/Utf8JsonReader::TryGetDecimal:System.Boolean(System.Decimal&)
-extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_405(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+// Bridge/import thunk for: System.Text.Json/Utf8JsonReader::GetDecimal:System.Decimal()
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_405(void)
 {
-    auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[418])(chaos_fn_arg_0);
+    auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)()>(kChaosExternalRuntimeFnTable[428])();
     return result;
 }
 
-// Bridge/import thunk for: System.Text.Json/Utf8JsonReader::TryGetDateTime:System.Boolean(System.DateTime&)
-extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_406(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+// Bridge/import thunk for: System.Text.Json/Utf8JsonReader::GetDouble:System.Double()
+extern "C" double chaos_bridge_thunk_406(void)
 {
-    auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[419])(chaos_fn_arg_0);
+    auto result = reinterpret_cast<double(*)()>(kChaosExternalRuntimeFnTable[429])();
     return result;
 }
 
-// Bridge/import thunk for: System.Text.Json/Utf8JsonReader::TryGetDateTimeOffset:System.Boolean(System.DateTimeOffset&)
-extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_407(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+// Bridge/import thunk for: System.Text.Json/Utf8JsonReader::GetGuid:System.Guid()
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_407(void)
 {
-    auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[420])(chaos_fn_arg_0);
+    auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)()>(kChaosExternalRuntimeFnTable[430])();
     return result;
 }
 
-// Bridge/import thunk for: System.Text.Json/Utf8JsonReader::TryGetGuid:System.Boolean(System.Guid&)
-extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_408(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+// Bridge/import thunk for: System.Text.Json/Utf8JsonReader::GetInt16:System.Int16()
+extern "C" CHAOS_IL2CPP_INT16 chaos_bridge_thunk_408(void)
 {
-    auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[421])(chaos_fn_arg_0);
+    auto result = reinterpret_cast<CHAOS_IL2CPP_INT16(*)()>(kChaosExternalRuntimeFnTable[431])();
     return result;
 }
 
-// Bridge/import thunk for: System.Text.Json/Utf8JsonReader::GetBoolean:System.Boolean()
-extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_409(void)
+// Bridge/import thunk for: System.Text.Json/Utf8JsonReader::GetInt32:System.Int32()
+extern "C" CHAOS_IL2CPP_INT32 chaos_bridge_thunk_409(void)
 {
-    auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)()>(kChaosExternalRuntimeFnTable[422])();
+    auto result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)()>(kChaosExternalRuntimeFnTable[432])();
     return result;
 }
 
@@ -43887,74 +43937,72 @@ extern "C" void chaos_bridge_thunk_41(void)
     reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[48])();
 }
 
-// Bridge/import thunk for: System.Text.Json/Utf8JsonReader::GetByte:System.Byte()
-extern "C" CHAOS_IL2CPP_UINT8 chaos_bridge_thunk_410(void)
+// Bridge/import thunk for: System.Text.Json/Utf8JsonReader::GetInt64:System.Int64()
+extern "C" CHAOS_IL2CPP_INT64 chaos_bridge_thunk_410(void)
 {
-    auto result = reinterpret_cast<CHAOS_IL2CPP_UINT8(*)()>(kChaosExternalRuntimeFnTable[423])();
+    auto result = reinterpret_cast<CHAOS_IL2CPP_INT64(*)()>(kChaosExternalRuntimeFnTable[433])();
     return result;
 }
 
-// Bridge/import thunk for: System.Text.Json/Utf8JsonReader::GetBytesFromBase64:System.Byte[]()
-extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_411(void)
+// Bridge/import thunk for: System.Text.Json/Utf8JsonReader::GetSByte:System.SByte()
+extern "C" CHAOS_IL2CPP_INT8 chaos_bridge_thunk_411(void)
 {
-    auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)()>(kChaosExternalRuntimeFnTable[424])();
+    auto result = reinterpret_cast<CHAOS_IL2CPP_INT8(*)()>(kChaosExternalRuntimeFnTable[434])();
     return result;
 }
 
-// Bridge/import thunk for: System.Text.Json/Utf8JsonReader::GetComment:System.String()
-extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_412(void)
+// Bridge/import thunk for: System.Text.Json/Utf8JsonReader::GetSingle:System.Single()
+extern "C" float chaos_bridge_thunk_412(void)
 {
-    auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)()>(kChaosExternalRuntimeFnTable[425])();
+    auto result = reinterpret_cast<float(*)()>(kChaosExternalRuntimeFnTable[435])();
     return result;
 }
 
-// Bridge/import thunk for: System.Text.Json/Utf8JsonReader::GetDateTime:System.DateTime()
+// Bridge/import thunk for: System.Text.Json/Utf8JsonReader::GetString:System.String()
 extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_413(void)
 {
-    auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)()>(kChaosExternalRuntimeFnTable[426])();
+    auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)()>(kChaosExternalRuntimeFnTable[436])();
     return result;
 }
 
-// Bridge/import thunk for: System.Text.Json/Utf8JsonReader::GetDateTimeOffset:System.DateTimeOffset()
-extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_414(void)
+// Bridge/import thunk for: System.Text.Json/Utf8JsonReader::GetUInt16:System.UInt16()
+extern "C" CHAOS_IL2CPP_UINT16 chaos_bridge_thunk_414(void)
 {
-    auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)()>(kChaosExternalRuntimeFnTable[427])();
+    auto result = reinterpret_cast<CHAOS_IL2CPP_UINT16(*)()>(kChaosExternalRuntimeFnTable[437])();
     return result;
 }
 
-// Bridge/import thunk for: System.Text.Json/Utf8JsonReader::GetDecimal:System.Decimal()
-extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_415(void)
+// Bridge/import thunk for: System.Text.Json/Utf8JsonReader::GetUInt32:System.UInt32()
+extern "C" CHAOS_IL2CPP_INT32 chaos_bridge_thunk_415(void)
 {
-    auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)()>(kChaosExternalRuntimeFnTable[428])();
+    auto result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)()>(kChaosExternalRuntimeFnTable[438])();
     return result;
 }
 
-// Bridge/import thunk for: System.Text.Json/Utf8JsonReader::GetDouble:System.Double()
-extern "C" double chaos_bridge_thunk_416(void)
+// Bridge/import thunk for: System.Text.Json/Utf8JsonReader::GetUInt64:System.UInt64()
+extern "C" CHAOS_IL2CPP_UINT64 chaos_bridge_thunk_416(void)
 {
-    auto result = reinterpret_cast<double(*)()>(kChaosExternalRuntimeFnTable[429])();
+    auto result = reinterpret_cast<CHAOS_IL2CPP_UINT64(*)()>(kChaosExternalRuntimeFnTable[439])();
     return result;
 }
 
-// Bridge/import thunk for: System.Text.Json/Utf8JsonReader::GetGuid:System.Guid()
-extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_417(void)
+// Bridge/import thunk for: System.Text.Json/Utf8JsonReader::Skip:System.Void()
+extern "C" void chaos_bridge_thunk_417(void)
 {
-    auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)()>(kChaosExternalRuntimeFnTable[430])();
+    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[440])();
+}
+
+// Bridge/import thunk for: System.Text.Json/Utf8JsonReader::ValueTextEquals:System.Boolean(System.String)
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_418(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+    auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[441])(chaos_fn_arg_0);
     return result;
 }
 
-// Bridge/import thunk for: System.Text.Json/Utf8JsonReader::GetInt16:System.Int16()
-extern "C" CHAOS_IL2CPP_INT16 chaos_bridge_thunk_418(void)
+// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__5_0
+extern "C" void chaos_bridge_thunk_419(void)
 {
-    auto result = reinterpret_cast<CHAOS_IL2CPP_INT16(*)()>(kChaosExternalRuntimeFnTable[431])();
-    return result;
-}
-
-// Bridge/import thunk for: System.Text.Json/Utf8JsonReader::GetInt32:System.Int32()
-extern "C" CHAOS_IL2CPP_INT32 chaos_bridge_thunk_419(void)
-{
-    auto result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)()>(kChaosExternalRuntimeFnTable[432])();
-    return result;
+    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[442])();
 }
 
 // Bridge/import thunk for: System.Text.Json/JsonDocument::ParseAsync:System.Threading.Tasks.Task<JsonDocument>(System.IO.Stream,JsonDocumentOptions,System.Threading.CancellationToken)
@@ -43964,72 +44012,64 @@ extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_42(CHAOS_IL2CPP_INTPTR chaos_f
     return result;
 }
 
-// Bridge/import thunk for: System.Text.Json/Utf8JsonReader::GetInt64:System.Int64()
-extern "C" CHAOS_IL2CPP_INT64 chaos_bridge_thunk_420(void)
+// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9
+extern "C" void chaos_bridge_thunk_420(void)
 {
-    auto result = reinterpret_cast<CHAOS_IL2CPP_INT64(*)()>(kChaosExternalRuntimeFnTable[433])();
-    return result;
+    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[443])();
 }
 
-// Bridge/import thunk for: System.Text.Json/Utf8JsonReader::GetSByte:System.SByte()
-extern "C" CHAOS_IL2CPP_INT8 chaos_bridge_thunk_421(void)
+// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__6_0
+extern "C" void chaos_bridge_thunk_421(void)
 {
-    auto result = reinterpret_cast<CHAOS_IL2CPP_INT8(*)()>(kChaosExternalRuntimeFnTable[434])();
-    return result;
+    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[444])();
 }
 
-// Bridge/import thunk for: System.Text.Json/Utf8JsonReader::GetSingle:System.Single()
-extern "C" float chaos_bridge_thunk_422(void)
+// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__4_0
+extern "C" void chaos_bridge_thunk_422(void)
 {
-    auto result = reinterpret_cast<float(*)()>(kChaosExternalRuntimeFnTable[435])();
-    return result;
+    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[445])();
 }
 
-// Bridge/import thunk for: System.Text.Json/Utf8JsonReader::GetString:System.String()
-extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_423(void)
+// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__7_0
+extern "C" void chaos_bridge_thunk_423(void)
 {
-    auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)()>(kChaosExternalRuntimeFnTable[436])();
-    return result;
+    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[446])();
 }
 
-// Bridge/import thunk for: System.Text.Json/Utf8JsonReader::GetUInt16:System.UInt16()
-extern "C" CHAOS_IL2CPP_UINT16 chaos_bridge_thunk_424(void)
+// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__0_0
+extern "C" void chaos_bridge_thunk_424(void)
 {
-    auto result = reinterpret_cast<CHAOS_IL2CPP_UINT16(*)()>(kChaosExternalRuntimeFnTable[437])();
-    return result;
+    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[447])();
 }
 
-// Bridge/import thunk for: System.Text.Json/Utf8JsonReader::GetUInt32:System.UInt32()
-extern "C" CHAOS_IL2CPP_INT32 chaos_bridge_thunk_425(void)
+// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__1_0
+extern "C" void chaos_bridge_thunk_425(void)
 {
-    auto result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)()>(kChaosExternalRuntimeFnTable[438])();
-    return result;
+    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[448])();
 }
 
-// Bridge/import thunk for: System.Text.Json/Utf8JsonReader::GetUInt64:System.UInt64()
-extern "C" CHAOS_IL2CPP_UINT64 chaos_bridge_thunk_426(void)
+// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__2_0
+extern "C" void chaos_bridge_thunk_426(void)
 {
-    auto result = reinterpret_cast<CHAOS_IL2CPP_UINT64(*)()>(kChaosExternalRuntimeFnTable[439])();
-    return result;
+    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[449])();
 }
 
-// Bridge/import thunk for: System.Text.Json/Utf8JsonReader::Skip:System.Void()
+// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__3_0
 extern "C" void chaos_bridge_thunk_427(void)
 {
-    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[440])();
+    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[450])();
 }
 
-// Bridge/import thunk for: System.Text.Json/Utf8JsonReader::ValueTextEquals:System.Boolean(System.String)
-extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_428(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__45_0
+extern "C" void chaos_bridge_thunk_428(void)
 {
-    auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[441])(chaos_fn_arg_0);
-    return result;
+    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[451])();
 }
 
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__5_0
+// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__46_0
 extern "C" void chaos_bridge_thunk_429(void)
 {
-    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[442])();
+    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[452])();
 }
 
 // Bridge/import thunk for: System.Private.CoreLib/System.Threading.Tasks.Task<JsonDocument>::GetAwaiter:System.Runtime.CompilerServices.TaskAwaiter<JsonDocument>()
@@ -44039,64 +44079,64 @@ extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_43(void)
     return result;
 }
 
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9
+// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__47_0
 extern "C" void chaos_bridge_thunk_430(void)
 {
-    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[443])();
+    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[453])();
 }
 
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__6_0
+// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__48_0
 extern "C" void chaos_bridge_thunk_431(void)
 {
-    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[444])();
+    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[454])();
 }
 
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__4_0
+// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__49_0
 extern "C" void chaos_bridge_thunk_432(void)
 {
-    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[445])();
+    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[455])();
 }
 
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__7_0
+// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__93_0
 extern "C" void chaos_bridge_thunk_433(void)
 {
-    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[446])();
+    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[456])();
 }
 
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__0_0
+// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__94_0
 extern "C" void chaos_bridge_thunk_434(void)
 {
-    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[447])();
+    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[457])();
 }
 
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__1_0
+// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__81_0
 extern "C" void chaos_bridge_thunk_435(void)
 {
-    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[448])();
+    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[458])();
 }
 
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__2_0
+// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__82_0
 extern "C" void chaos_bridge_thunk_436(void)
 {
-    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[449])();
+    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[459])();
 }
 
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__3_0
+// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__16_0
 extern "C" void chaos_bridge_thunk_437(void)
 {
-    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[450])();
+    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[460])();
 }
 
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__45_0
+// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__17_0
 extern "C" void chaos_bridge_thunk_438(void)
 {
-    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[451])();
+    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[461])();
 }
 
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__46_0
+// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__42_0
 extern "C" void chaos_bridge_thunk_439(void)
 {
-    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[452])();
+    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[462])();
 }
 
 // Bridge/import thunk for: System.Private.CoreLib/System.Runtime.CompilerServices.TaskAwaiter<JsonDocument>::GetResult:JsonDocument()
@@ -44106,64 +44146,64 @@ extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_44(void)
     return result;
 }
 
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__47_0
+// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__43_0
 extern "C" void chaos_bridge_thunk_440(void)
 {
-    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[453])();
+    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[463])();
 }
 
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__48_0
+// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__44_0
 extern "C" void chaos_bridge_thunk_441(void)
 {
-    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[454])();
+    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[464])();
 }
 
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__49_0
+// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__92_0
 extern "C" void chaos_bridge_thunk_442(void)
 {
-    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[455])();
+    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[465])();
 }
 
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__93_0
+// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__24_0
 extern "C" void chaos_bridge_thunk_443(void)
 {
-    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[456])();
+    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[466])();
 }
 
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__94_0
+// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__25_0
 extern "C" void chaos_bridge_thunk_444(void)
 {
-    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[457])();
+    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[467])();
 }
 
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__81_0
+// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__26_0
 extern "C" void chaos_bridge_thunk_445(void)
 {
-    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[458])();
+    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[468])();
 }
 
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__82_0
+// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__27_0
 extern "C" void chaos_bridge_thunk_446(void)
 {
-    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[459])();
+    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[469])();
 }
 
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__16_0
+// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__28_0
 extern "C" void chaos_bridge_thunk_447(void)
 {
-    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[460])();
+    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[470])();
 }
 
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__17_0
+// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__29_0
 extern "C" void chaos_bridge_thunk_448(void)
 {
-    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[461])();
+    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[471])();
 }
 
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__42_0
+// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__30_0
 extern "C" void chaos_bridge_thunk_449(void)
 {
-    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[462])();
+    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[472])();
 }
 
 // Bridge/import thunk for: System.Text.Json/JsonDocument::WriteTo:System.Void(Utf8JsonWriter)
@@ -44172,64 +44212,64 @@ extern "C" void chaos_bridge_thunk_45(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
     reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[52])(chaos_fn_arg_0);
 }
 
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__43_0
+// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__31_0
 extern "C" void chaos_bridge_thunk_450(void)
 {
-    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[463])();
+    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[473])();
 }
 
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__44_0
+// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__32_0
 extern "C" void chaos_bridge_thunk_451(void)
 {
-    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[464])();
+    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[474])();
 }
 
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__92_0
+// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__33_0
 extern "C" void chaos_bridge_thunk_452(void)
 {
-    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[465])();
+    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[475])();
 }
 
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__24_0
+// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__34_0
 extern "C" void chaos_bridge_thunk_453(void)
 {
-    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[466])();
+    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[476])();
 }
 
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__25_0
+// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__35_0
 extern "C" void chaos_bridge_thunk_454(void)
 {
-    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[467])();
+    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[477])();
 }
 
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__26_0
+// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__36_0
 extern "C" void chaos_bridge_thunk_455(void)
 {
-    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[468])();
+    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[478])();
 }
 
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__27_0
+// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__37_0
 extern "C" void chaos_bridge_thunk_456(void)
 {
-    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[469])();
+    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[479])();
 }
 
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__28_0
+// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__38_0
 extern "C" void chaos_bridge_thunk_457(void)
 {
-    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[470])();
+    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[480])();
 }
 
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__29_0
+// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__50_0
 extern "C" void chaos_bridge_thunk_458(void)
 {
-    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[471])();
+    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[481])();
 }
 
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__30_0
+// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__51_0
 extern "C" void chaos_bridge_thunk_459(void)
 {
-    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[472])();
+    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[482])();
 }
 
 // Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonElementTests+<>c::<>9__56_0
@@ -44238,64 +44278,64 @@ extern "C" void chaos_bridge_thunk_46(void)
     reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[53])();
 }
 
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__31_0
+// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__52_0
 extern "C" void chaos_bridge_thunk_460(void)
 {
-    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[473])();
+    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[483])();
 }
 
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__32_0
+// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__53_0
 extern "C" void chaos_bridge_thunk_461(void)
 {
-    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[474])();
+    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[484])();
 }
 
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__33_0
+// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__54_0
 extern "C" void chaos_bridge_thunk_462(void)
 {
-    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[475])();
+    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[485])();
 }
 
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__34_0
+// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__55_0
 extern "C" void chaos_bridge_thunk_463(void)
 {
-    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[476])();
+    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[486])();
 }
 
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__35_0
+// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__56_0
 extern "C" void chaos_bridge_thunk_464(void)
 {
-    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[477])();
+    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[487])();
 }
 
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__36_0
+// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__57_0
 extern "C" void chaos_bridge_thunk_465(void)
 {
-    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[478])();
+    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[488])();
 }
 
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__37_0
+// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__58_0
 extern "C" void chaos_bridge_thunk_466(void)
 {
-    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[479])();
+    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[489])();
 }
 
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__38_0
+// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__59_0
 extern "C" void chaos_bridge_thunk_467(void)
 {
-    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[480])();
+    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[490])();
 }
 
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__50_0
+// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__71_0
 extern "C" void chaos_bridge_thunk_468(void)
 {
-    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[481])();
+    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[491])();
 }
 
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__51_0
+// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__72_0
 extern "C" void chaos_bridge_thunk_469(void)
 {
-    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[482])();
+    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[492])();
 }
 
 // Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonElementTests+<>c::<>9
@@ -44304,64 +44344,64 @@ extern "C" void chaos_bridge_thunk_47(void)
     reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[54])();
 }
 
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__52_0
+// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__73_0
 extern "C" void chaos_bridge_thunk_470(void)
 {
-    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[483])();
+    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[493])();
 }
 
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__53_0
+// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__74_0
 extern "C" void chaos_bridge_thunk_471(void)
 {
-    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[484])();
+    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[494])();
 }
 
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__54_0
+// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__75_0
 extern "C" void chaos_bridge_thunk_472(void)
 {
-    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[485])();
+    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[495])();
 }
 
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__55_0
+// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__76_0
 extern "C" void chaos_bridge_thunk_473(void)
 {
-    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[486])();
+    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[496])();
 }
 
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__56_0
+// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__77_0
 extern "C" void chaos_bridge_thunk_474(void)
 {
-    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[487])();
+    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[497])();
 }
 
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__57_0
+// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__78_0
 extern "C" void chaos_bridge_thunk_475(void)
 {
-    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[488])();
+    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[498])();
 }
 
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__58_0
+// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__79_0
 extern "C" void chaos_bridge_thunk_476(void)
 {
-    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[489])();
+    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[499])();
 }
 
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__59_0
+// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__80_0
 extern "C" void chaos_bridge_thunk_477(void)
 {
-    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[490])();
+    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[500])();
 }
 
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__71_0
+// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__85_0
 extern "C" void chaos_bridge_thunk_478(void)
 {
-    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[491])();
+    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[501])();
 }
 
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__72_0
+// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__86_0
 extern "C" void chaos_bridge_thunk_479(void)
 {
-    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[492])();
+    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[502])();
 }
 
 // Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonElementTests+<>c::<>9__52_0
@@ -44370,64 +44410,64 @@ extern "C" void chaos_bridge_thunk_48(void)
     reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[55])();
 }
 
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__73_0
+// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__87_0
 extern "C" void chaos_bridge_thunk_480(void)
 {
-    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[493])();
+    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[503])();
 }
 
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__74_0
+// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__88_0
 extern "C" void chaos_bridge_thunk_481(void)
 {
-    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[494])();
+    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[504])();
 }
 
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__75_0
+// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__89_0
 extern "C" void chaos_bridge_thunk_482(void)
 {
-    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[495])();
+    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[505])();
 }
 
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__76_0
+// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__90_0
 extern "C" void chaos_bridge_thunk_483(void)
 {
-    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[496])();
+    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[506])();
 }
 
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__77_0
+// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__100_0
 extern "C" void chaos_bridge_thunk_484(void)
 {
-    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[497])();
+    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[507])();
 }
 
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__78_0
+// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__101_0
 extern "C" void chaos_bridge_thunk_485(void)
 {
-    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[498])();
+    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[508])();
 }
 
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__79_0
+// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__102_0
 extern "C" void chaos_bridge_thunk_486(void)
 {
-    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[499])();
+    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[509])();
 }
 
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__80_0
+// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__103_0
 extern "C" void chaos_bridge_thunk_487(void)
 {
-    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[500])();
+    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[510])();
 }
 
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__85_0
+// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__107_0
 extern "C" void chaos_bridge_thunk_488(void)
 {
-    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[501])();
+    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[511])();
 }
 
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__86_0
+// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__108_0
 extern "C" void chaos_bridge_thunk_489(void)
 {
-    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[502])();
+    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[512])();
 }
 
 // Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonElementTests+<>c::<>9__0_0
@@ -44436,64 +44476,64 @@ extern "C" void chaos_bridge_thunk_49(void)
     reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[56])();
 }
 
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__87_0
+// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__109_0
 extern "C" void chaos_bridge_thunk_490(void)
 {
-    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[503])();
+    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[513])();
 }
 
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__88_0
+// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__110_0
 extern "C" void chaos_bridge_thunk_491(void)
 {
-    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[504])();
+    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[514])();
 }
 
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__89_0
+// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__60_0
 extern "C" void chaos_bridge_thunk_492(void)
 {
-    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[505])();
+    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[515])();
 }
 
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__90_0
+// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__61_0
 extern "C" void chaos_bridge_thunk_493(void)
 {
-    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[506])();
+    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[516])();
 }
 
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__100_0
+// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__62_0
 extern "C" void chaos_bridge_thunk_494(void)
 {
-    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[507])();
+    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[517])();
 }
 
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__101_0
+// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__95_0
 extern "C" void chaos_bridge_thunk_495(void)
 {
-    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[508])();
+    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[518])();
 }
 
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__102_0
+// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__96_0
 extern "C" void chaos_bridge_thunk_496(void)
 {
-    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[509])();
+    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[519])();
 }
 
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__103_0
+// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__97_0
 extern "C" void chaos_bridge_thunk_497(void)
 {
-    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[510])();
+    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[520])();
 }
 
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__107_0
+// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__98_0
 extern "C" void chaos_bridge_thunk_498(void)
 {
-    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[511])();
+    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[521])();
 }
 
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__108_0
+// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__99_0
 extern "C" void chaos_bridge_thunk_499(void)
 {
-    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[512])();
+    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[522])();
 }
 
 // Bridge/import thunk for: System.Private.CoreLib/System.Collections.IEnumerable::GetEnumerator:System.Collections.IEnumerator()
@@ -44509,64 +44549,64 @@ extern "C" void chaos_bridge_thunk_50(void)
     reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[57])();
 }
 
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__109_0
+// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__12_0
 extern "C" void chaos_bridge_thunk_500(void)
 {
-    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[513])();
+    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[523])();
 }
 
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__110_0
+// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__13_0
 extern "C" void chaos_bridge_thunk_501(void)
 {
-    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[514])();
+    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[524])();
 }
 
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__60_0
+// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__8_0
 extern "C" void chaos_bridge_thunk_502(void)
 {
-    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[515])();
+    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[525])();
 }
 
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__61_0
+// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__10_0
 extern "C" void chaos_bridge_thunk_503(void)
 {
-    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[516])();
+    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[526])();
 }
 
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__62_0
+// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__14_0
 extern "C" void chaos_bridge_thunk_504(void)
 {
-    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[517])();
+    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[527])();
 }
 
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__95_0
+// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__15_0
 extern "C" void chaos_bridge_thunk_505(void)
 {
-    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[518])();
+    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[528])();
 }
 
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__96_0
+// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__9_0
 extern "C" void chaos_bridge_thunk_506(void)
 {
-    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[519])();
+    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[529])();
 }
 
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__97_0
+// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__11_0
 extern "C" void chaos_bridge_thunk_507(void)
 {
-    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[520])();
+    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[530])();
 }
 
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__98_0
+// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__18_0
 extern "C" void chaos_bridge_thunk_508(void)
 {
-    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[521])();
+    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[531])();
 }
 
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__99_0
+// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__19_0
 extern "C" void chaos_bridge_thunk_509(void)
 {
-    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[522])();
+    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[532])();
 }
 
 // Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonElementTests+<>c::<>9__17_0
@@ -44575,64 +44615,64 @@ extern "C" void chaos_bridge_thunk_51(void)
     reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[58])();
 }
 
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__12_0
+// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__20_0
 extern "C" void chaos_bridge_thunk_510(void)
 {
-    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[523])();
+    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[533])();
 }
 
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__13_0
+// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__21_0
 extern "C" void chaos_bridge_thunk_511(void)
 {
-    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[524])();
+    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[534])();
 }
 
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__8_0
+// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__22_0
 extern "C" void chaos_bridge_thunk_512(void)
 {
-    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[525])();
+    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[535])();
 }
 
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__10_0
+// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__23_0
 extern "C" void chaos_bridge_thunk_513(void)
 {
-    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[526])();
+    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[536])();
 }
 
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__14_0
+// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__39_0
 extern "C" void chaos_bridge_thunk_514(void)
 {
-    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[527])();
+    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[537])();
 }
 
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__15_0
+// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__40_0
 extern "C" void chaos_bridge_thunk_515(void)
 {
-    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[528])();
+    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[538])();
 }
 
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__9_0
+// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__41_0
 extern "C" void chaos_bridge_thunk_516(void)
 {
-    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[529])();
+    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[539])();
 }
 
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__11_0
+// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__63_0
 extern "C" void chaos_bridge_thunk_517(void)
 {
-    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[530])();
+    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[540])();
 }
 
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__18_0
+// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__64_0
 extern "C" void chaos_bridge_thunk_518(void)
 {
-    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[531])();
+    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[541])();
 }
 
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__19_0
+// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__65_0
 extern "C" void chaos_bridge_thunk_519(void)
 {
-    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[532])();
+    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[542])();
 }
 
 // Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonElementTests+<>c::<>9__11_0
@@ -44641,64 +44681,64 @@ extern "C" void chaos_bridge_thunk_52(void)
     reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[59])();
 }
 
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__20_0
+// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__66_0
 extern "C" void chaos_bridge_thunk_520(void)
 {
-    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[533])();
+    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[543])();
 }
 
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__21_0
+// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__67_0
 extern "C" void chaos_bridge_thunk_521(void)
 {
-    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[534])();
+    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[544])();
 }
 
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__22_0
+// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__68_0
 extern "C" void chaos_bridge_thunk_522(void)
 {
-    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[535])();
+    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[545])();
 }
 
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__23_0
+// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__69_0
 extern "C" void chaos_bridge_thunk_523(void)
 {
-    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[536])();
+    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[546])();
 }
 
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__39_0
+// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__70_0
 extern "C" void chaos_bridge_thunk_524(void)
 {
-    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[537])();
+    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[547])();
 }
 
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__40_0
+// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__83_0
 extern "C" void chaos_bridge_thunk_525(void)
 {
-    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[538])();
+    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[548])();
 }
 
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__41_0
+// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__84_0
 extern "C" void chaos_bridge_thunk_526(void)
 {
-    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[539])();
+    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[549])();
 }
 
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__63_0
+// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__91_0
 extern "C" void chaos_bridge_thunk_527(void)
 {
-    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[540])();
+    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[550])();
 }
 
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__64_0
+// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__104_0
 extern "C" void chaos_bridge_thunk_528(void)
 {
-    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[541])();
+    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[551])();
 }
 
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__65_0
+// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__105_0
 extern "C" void chaos_bridge_thunk_529(void)
 {
-    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[542])();
+    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[552])();
 }
 
 // Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonElementTests+<>c::<>9__46_0
@@ -44707,64 +44747,67 @@ extern "C" void chaos_bridge_thunk_53(void)
     reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[60])();
 }
 
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__66_0
+// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__106_0
 extern "C" void chaos_bridge_thunk_530(void)
 {
-    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[543])();
+    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[553])();
 }
 
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__67_0
+// Bridge/import thunk for: System.Text.Json/Utf8JsonWriter::Dispose:System.Void()
 extern "C" void chaos_bridge_thunk_531(void)
 {
-    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[544])();
+    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[554])();
 }
 
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__68_0
-extern "C" void chaos_bridge_thunk_532(void)
+// Bridge/import thunk for: System.Text.Json/Utf8JsonWriter::DisposeAsync:System.Threading.Tasks.ValueTask()
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_532(void)
 {
-    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[545])();
+    auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)()>(kChaosExternalRuntimeFnTable[555])();
+    return result;
 }
 
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__69_0
-extern "C" void chaos_bridge_thunk_533(void)
+// Bridge/import thunk for: System.Private.CoreLib/System.Threading.Tasks.ValueTask::GetAwaiter:System.Runtime.CompilerServices.ValueTaskAwaiter()
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_533(void)
 {
-    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[546])();
+    auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)()>(kChaosExternalRuntimeFnTable[556])();
+    return result;
 }
 
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__70_0
+// Bridge/import thunk for: System.Private.CoreLib/System.Runtime.CompilerServices.ValueTaskAwaiter::GetResult:System.Void()
 extern "C" void chaos_bridge_thunk_534(void)
 {
-    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[547])();
+    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[557])();
 }
 
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__83_0
+// Bridge/import thunk for: System.Text.Json/Utf8JsonWriter::Flush:System.Void()
 extern "C" void chaos_bridge_thunk_535(void)
 {
-    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[548])();
+    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[558])();
 }
 
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__84_0
-extern "C" void chaos_bridge_thunk_536(void)
+// Bridge/import thunk for: System.Text.Json/Utf8JsonWriter::FlushAsync:System.Threading.Tasks.Task(System.Threading.CancellationToken)
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_536(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
-    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[549])();
+    auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[559])(chaos_fn_arg_0);
+    return result;
 }
 
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__91_0
-extern "C" void chaos_bridge_thunk_537(void)
+// Bridge/import thunk for: System.Text.Json/Utf8JsonWriter::Reset:System.Void(System.IO.Stream)
+extern "C" void chaos_bridge_thunk_537(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
-    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[550])();
+    reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[560])(chaos_fn_arg_0);
 }
 
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__104_0
-extern "C" void chaos_bridge_thunk_538(void)
+// Bridge/import thunk for: System.Text.Json/Utf8JsonWriter::Reset:System.Void(System.Buffers.IBufferWriter<System.Byte>)
+extern "C" void chaos_bridge_thunk_538(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
-    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[551])();
+    reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[561])(chaos_fn_arg_0);
 }
 
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__105_0
+// Bridge/import thunk for: System.Memory/System.Buffers.ArrayBufferWriter<System.Byte>::.ctor:System.Void()
 extern "C" void chaos_bridge_thunk_539(void)
 {
-    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[552])();
+    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[562])();
 }
 
 // Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonElementTests+<>c::<>9__48_0
@@ -44773,67 +44816,64 @@ extern "C" void chaos_bridge_thunk_54(void)
     reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[61])();
 }
 
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__106_0
+// Bridge/import thunk for: System.Text.Json/JsonEncodedText
 extern "C" void chaos_bridge_thunk_540(void)
 {
-    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[553])();
+    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[563])();
 }
 
-// Bridge/import thunk for: System.Text.Json/Utf8JsonWriter::Dispose:System.Void()
-extern "C" void chaos_bridge_thunk_541(void)
+// Bridge/import thunk for: System.Text.Json/Utf8JsonWriter::WriteBoolean:System.Void(JsonEncodedText,System.Boolean)
+extern "C" void chaos_bridge_thunk_541(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
 {
-    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[554])();
+    reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[564])(chaos_fn_arg_0, chaos_fn_arg_1);
 }
 
-// Bridge/import thunk for: System.Text.Json/Utf8JsonWriter::DisposeAsync:System.Threading.Tasks.ValueTask()
-extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_542(void)
+// Bridge/import thunk for: System.Text.Json/Utf8JsonWriter::WriteBoolean:System.Void(System.String,System.Boolean)
+extern "C" void chaos_bridge_thunk_542(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
 {
-    auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)()>(kChaosExternalRuntimeFnTable[555])();
-    return result;
+    reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[565])(chaos_fn_arg_0, chaos_fn_arg_1);
 }
 
-// Bridge/import thunk for: System.Private.CoreLib/System.Threading.Tasks.ValueTask::GetAwaiter:System.Runtime.CompilerServices.ValueTaskAwaiter()
-extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_543(void)
+// Bridge/import thunk for: System.Text.Json/Utf8JsonWriter::WriteBooleanValue:System.Void(System.Boolean)
+extern "C" void chaos_bridge_thunk_543(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
-    auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)()>(kChaosExternalRuntimeFnTable[556])();
-    return result;
+    reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[566])(chaos_fn_arg_0);
 }
 
-// Bridge/import thunk for: System.Private.CoreLib/System.Runtime.CompilerServices.ValueTaskAwaiter::GetResult:System.Void()
-extern "C" void chaos_bridge_thunk_544(void)
+// Bridge/import thunk for: System.Text.Json/Utf8JsonWriter::WriteCommentValue:System.Void(System.String)
+extern "C" void chaos_bridge_thunk_544(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
-    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[557])();
+    reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[567])(chaos_fn_arg_0);
 }
 
-// Bridge/import thunk for: System.Text.Json/Utf8JsonWriter::Flush:System.Void()
+// Bridge/import thunk for: System.Text.Json/Utf8JsonWriter::WriteEndArray:System.Void()
 extern "C" void chaos_bridge_thunk_545(void)
 {
-    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[558])();
+    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[568])();
 }
 
-// Bridge/import thunk for: System.Text.Json/Utf8JsonWriter::FlushAsync:System.Threading.Tasks.Task(System.Threading.CancellationToken)
-extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_546(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+// Bridge/import thunk for: System.Text.Json/Utf8JsonWriter::WriteEndObject:System.Void()
+extern "C" void chaos_bridge_thunk_546(void)
 {
-    auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[559])(chaos_fn_arg_0);
-    return result;
+    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[569])();
 }
 
-// Bridge/import thunk for: System.Text.Json/Utf8JsonWriter::Reset:System.Void(System.IO.Stream)
+// Bridge/import thunk for: System.Text.Json/Utf8JsonWriter::WriteNull:System.Void(JsonEncodedText)
 extern "C" void chaos_bridge_thunk_547(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
-    reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[560])(chaos_fn_arg_0);
+    reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[570])(chaos_fn_arg_0);
 }
 
-// Bridge/import thunk for: System.Text.Json/Utf8JsonWriter::Reset:System.Void(System.Buffers.IBufferWriter<System.Byte>)
+// Bridge/import thunk for: System.Text.Json/Utf8JsonWriter::WriteNull:System.Void(System.String)
 extern "C" void chaos_bridge_thunk_548(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
-    reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[561])(chaos_fn_arg_0);
+    reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[571])(chaos_fn_arg_0);
 }
 
-// Bridge/import thunk for: System.Memory/System.Buffers.ArrayBufferWriter<System.Byte>::.ctor:System.Void()
+// Bridge/import thunk for: System.Text.Json/Utf8JsonWriter::WriteNullValue:System.Void()
 extern "C" void chaos_bridge_thunk_549(void)
 {
-    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[562])();
+    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[572])();
 }
 
 // Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonElementTests+<>c::<>9__44_0
@@ -44842,64 +44882,64 @@ extern "C" void chaos_bridge_thunk_55(void)
     reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[62])();
 }
 
-// Bridge/import thunk for: System.Text.Json/JsonEncodedText
+// Bridge/import thunk for: System.Private.CoreLib/System.Decimal::Zero
 extern "C" void chaos_bridge_thunk_550(void)
 {
-    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[563])();
+    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[573])();
 }
 
-// Bridge/import thunk for: System.Text.Json/Utf8JsonWriter::WriteBoolean:System.Void(JsonEncodedText,System.Boolean)
+// Bridge/import thunk for: System.Text.Json/Utf8JsonWriter::WriteNumber:System.Void(JsonEncodedText,System.Decimal)
 extern "C" void chaos_bridge_thunk_551(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
 {
-    reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[564])(chaos_fn_arg_0, chaos_fn_arg_1);
+    reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[574])(chaos_fn_arg_0, chaos_fn_arg_1);
 }
 
-// Bridge/import thunk for: System.Text.Json/Utf8JsonWriter::WriteBoolean:System.Void(System.String,System.Boolean)
+// Bridge/import thunk for: System.Text.Json/Utf8JsonWriter::WriteNumber:System.Void(System.String,System.Decimal)
 extern "C" void chaos_bridge_thunk_552(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
 {
-    reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[565])(chaos_fn_arg_0, chaos_fn_arg_1);
+    reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[575])(chaos_fn_arg_0, chaos_fn_arg_1);
 }
 
-// Bridge/import thunk for: System.Text.Json/Utf8JsonWriter::WriteBooleanValue:System.Void(System.Boolean)
-extern "C" void chaos_bridge_thunk_553(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+// Bridge/import thunk for: System.Text.Json/Utf8JsonWriter::WriteNumber:System.Void(JsonEncodedText,System.Double)
+extern "C" void chaos_bridge_thunk_553(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
 {
-    reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[566])(chaos_fn_arg_0);
+    reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[576])(chaos_fn_arg_0, chaos_fn_arg_1);
 }
 
-// Bridge/import thunk for: System.Text.Json/Utf8JsonWriter::WriteCommentValue:System.Void(System.String)
-extern "C" void chaos_bridge_thunk_554(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+// Bridge/import thunk for: System.Text.Json/Utf8JsonWriter::WriteNumber:System.Void(System.String,System.Double)
+extern "C" void chaos_bridge_thunk_554(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
 {
-    reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[567])(chaos_fn_arg_0);
+    reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[577])(chaos_fn_arg_0, chaos_fn_arg_1);
 }
 
-// Bridge/import thunk for: System.Text.Json/Utf8JsonWriter::WriteEndArray:System.Void()
-extern "C" void chaos_bridge_thunk_555(void)
+// Bridge/import thunk for: System.Text.Json/Utf8JsonWriter::WriteNumber:System.Void(JsonEncodedText,System.Single)
+extern "C" void chaos_bridge_thunk_555(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
 {
-    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[568])();
+    reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[578])(chaos_fn_arg_0, chaos_fn_arg_1);
 }
 
-// Bridge/import thunk for: System.Text.Json/Utf8JsonWriter::WriteEndObject:System.Void()
-extern "C" void chaos_bridge_thunk_556(void)
+// Bridge/import thunk for: System.Text.Json/Utf8JsonWriter::WriteNumber:System.Void(System.String,System.Single)
+extern "C" void chaos_bridge_thunk_556(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
 {
-    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[569])();
+    reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[579])(chaos_fn_arg_0, chaos_fn_arg_1);
 }
 
-// Bridge/import thunk for: System.Text.Json/Utf8JsonWriter::WriteNull:System.Void(JsonEncodedText)
-extern "C" void chaos_bridge_thunk_557(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+// Bridge/import thunk for: System.Text.Json/Utf8JsonWriter::WriteNumber:System.Void(JsonEncodedText,System.Int64)
+extern "C" void chaos_bridge_thunk_557(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
 {
-    reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[570])(chaos_fn_arg_0);
+    reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[580])(chaos_fn_arg_0, chaos_fn_arg_1);
 }
 
-// Bridge/import thunk for: System.Text.Json/Utf8JsonWriter::WriteNull:System.Void(System.String)
-extern "C" void chaos_bridge_thunk_558(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+// Bridge/import thunk for: System.Text.Json/Utf8JsonWriter::WriteNumber:System.Void(System.String,System.Int64)
+extern "C" void chaos_bridge_thunk_558(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
 {
-    reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[571])(chaos_fn_arg_0);
+    reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[581])(chaos_fn_arg_0, chaos_fn_arg_1);
 }
 
-// Bridge/import thunk for: System.Text.Json/Utf8JsonWriter::WriteNullValue:System.Void()
-extern "C" void chaos_bridge_thunk_559(void)
+// Bridge/import thunk for: System.Text.Json/Utf8JsonWriter::WriteNumber:System.Void(JsonEncodedText,System.Int32)
+extern "C" void chaos_bridge_thunk_559(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
 {
-    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[572])();
+    reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[582])(chaos_fn_arg_0, chaos_fn_arg_1);
 }
 
 // Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonElementTests+<>c::<>9__38_0
@@ -44908,64 +44948,64 @@ extern "C" void chaos_bridge_thunk_56(void)
     reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[63])();
 }
 
-// Bridge/import thunk for: System.Private.CoreLib/System.Decimal::Zero
-extern "C" void chaos_bridge_thunk_560(void)
+// Bridge/import thunk for: System.Text.Json/Utf8JsonWriter::WriteNumber:System.Void(System.String,System.Int32)
+extern "C" void chaos_bridge_thunk_560(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
 {
-    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[573])();
+    reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[583])(chaos_fn_arg_0, chaos_fn_arg_1);
 }
 
-// Bridge/import thunk for: System.Text.Json/Utf8JsonWriter::WriteNumber:System.Void(JsonEncodedText,System.Decimal)
+// Bridge/import thunk for: System.Text.Json/Utf8JsonWriter::WriteNumber:System.Void(JsonEncodedText,System.UInt64)
 extern "C" void chaos_bridge_thunk_561(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
 {
-    reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[574])(chaos_fn_arg_0, chaos_fn_arg_1);
+    reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[584])(chaos_fn_arg_0, chaos_fn_arg_1);
 }
 
-// Bridge/import thunk for: System.Text.Json/Utf8JsonWriter::WriteNumber:System.Void(System.String,System.Decimal)
+// Bridge/import thunk for: System.Text.Json/Utf8JsonWriter::WriteNumber:System.Void(System.String,System.UInt64)
 extern "C" void chaos_bridge_thunk_562(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
 {
-    reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[575])(chaos_fn_arg_0, chaos_fn_arg_1);
+    reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[585])(chaos_fn_arg_0, chaos_fn_arg_1);
 }
 
-// Bridge/import thunk for: System.Text.Json/Utf8JsonWriter::WriteNumber:System.Void(JsonEncodedText,System.Double)
+// Bridge/import thunk for: System.Text.Json/Utf8JsonWriter::WriteNumber:System.Void(JsonEncodedText,System.UInt32)
 extern "C" void chaos_bridge_thunk_563(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
 {
-    reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[576])(chaos_fn_arg_0, chaos_fn_arg_1);
+    reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[586])(chaos_fn_arg_0, chaos_fn_arg_1);
 }
 
-// Bridge/import thunk for: System.Text.Json/Utf8JsonWriter::WriteNumber:System.Void(System.String,System.Double)
+// Bridge/import thunk for: System.Text.Json/Utf8JsonWriter::WriteNumber:System.Void(System.String,System.UInt32)
 extern "C" void chaos_bridge_thunk_564(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
 {
-    reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[577])(chaos_fn_arg_0, chaos_fn_arg_1);
+    reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[587])(chaos_fn_arg_0, chaos_fn_arg_1);
 }
 
-// Bridge/import thunk for: System.Text.Json/Utf8JsonWriter::WriteNumber:System.Void(JsonEncodedText,System.Single)
-extern "C" void chaos_bridge_thunk_565(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
+// Bridge/import thunk for: System.Text.Json/Utf8JsonWriter::WriteNumberValue:System.Void(System.Decimal)
+extern "C" void chaos_bridge_thunk_565(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
-    reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[578])(chaos_fn_arg_0, chaos_fn_arg_1);
+    reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[588])(chaos_fn_arg_0);
 }
 
-// Bridge/import thunk for: System.Text.Json/Utf8JsonWriter::WriteNumber:System.Void(System.String,System.Single)
-extern "C" void chaos_bridge_thunk_566(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
+// Bridge/import thunk for: System.Text.Json/Utf8JsonWriter::WriteNumberValue:System.Void(System.Double)
+extern "C" void chaos_bridge_thunk_566(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
-    reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[579])(chaos_fn_arg_0, chaos_fn_arg_1);
+    reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[589])(chaos_fn_arg_0);
 }
 
-// Bridge/import thunk for: System.Text.Json/Utf8JsonWriter::WriteNumber:System.Void(JsonEncodedText,System.Int64)
-extern "C" void chaos_bridge_thunk_567(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
+// Bridge/import thunk for: System.Text.Json/Utf8JsonWriter::WriteNumberValue:System.Void(System.Single)
+extern "C" void chaos_bridge_thunk_567(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
-    reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[580])(chaos_fn_arg_0, chaos_fn_arg_1);
+    reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[590])(chaos_fn_arg_0);
 }
 
-// Bridge/import thunk for: System.Text.Json/Utf8JsonWriter::WriteNumber:System.Void(System.String,System.Int64)
-extern "C" void chaos_bridge_thunk_568(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
+// Bridge/import thunk for: System.Text.Json/Utf8JsonWriter::WriteNumberValue:System.Void(System.Int32)
+extern "C" void chaos_bridge_thunk_568(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
-    reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[581])(chaos_fn_arg_0, chaos_fn_arg_1);
+    reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[591])(chaos_fn_arg_0);
 }
 
-// Bridge/import thunk for: System.Text.Json/Utf8JsonWriter::WriteNumber:System.Void(JsonEncodedText,System.Int32)
-extern "C" void chaos_bridge_thunk_569(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
+// Bridge/import thunk for: System.Text.Json/Utf8JsonWriter::WriteNumberValue:System.Void(System.Int64)
+extern "C" void chaos_bridge_thunk_569(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
-    reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[582])(chaos_fn_arg_0, chaos_fn_arg_1);
+    reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[592])(chaos_fn_arg_0);
 }
 
 // Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonElementTests+<>c::<>9__50_0
@@ -44974,64 +45014,64 @@ extern "C" void chaos_bridge_thunk_57(void)
     reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[64])();
 }
 
-// Bridge/import thunk for: System.Text.Json/Utf8JsonWriter::WriteNumber:System.Void(System.String,System.Int32)
-extern "C" void chaos_bridge_thunk_570(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
+// Bridge/import thunk for: System.Text.Json/Utf8JsonWriter::WriteNumberValue:System.Void(System.UInt32)
+extern "C" void chaos_bridge_thunk_570(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
-    reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[583])(chaos_fn_arg_0, chaos_fn_arg_1);
+    reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[593])(chaos_fn_arg_0);
 }
 
-// Bridge/import thunk for: System.Text.Json/Utf8JsonWriter::WriteNumber:System.Void(JsonEncodedText,System.UInt64)
-extern "C" void chaos_bridge_thunk_571(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
+// Bridge/import thunk for: System.Text.Json/Utf8JsonWriter::WriteNumberValue:System.Void(System.UInt64)
+extern "C" void chaos_bridge_thunk_571(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
-    reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[584])(chaos_fn_arg_0, chaos_fn_arg_1);
+    reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[594])(chaos_fn_arg_0);
 }
 
-// Bridge/import thunk for: System.Text.Json/Utf8JsonWriter::WriteNumber:System.Void(System.String,System.UInt64)
-extern "C" void chaos_bridge_thunk_572(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
+// Bridge/import thunk for: System.Text.Json/Utf8JsonWriter::WritePropertyName:System.Void(JsonEncodedText)
+extern "C" void chaos_bridge_thunk_572(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
-    reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[585])(chaos_fn_arg_0, chaos_fn_arg_1);
+    reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[595])(chaos_fn_arg_0);
 }
 
-// Bridge/import thunk for: System.Text.Json/Utf8JsonWriter::WriteNumber:System.Void(JsonEncodedText,System.UInt32)
-extern "C" void chaos_bridge_thunk_573(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
+// Bridge/import thunk for: System.Text.Json/Utf8JsonWriter::WritePropertyName:System.Void(System.String)
+extern "C" void chaos_bridge_thunk_573(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
-    reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[586])(chaos_fn_arg_0, chaos_fn_arg_1);
+    reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[596])(chaos_fn_arg_0);
 }
 
-// Bridge/import thunk for: System.Text.Json/Utf8JsonWriter::WriteNumber:System.Void(System.String,System.UInt32)
+// Bridge/import thunk for: System.Text.Json/Utf8JsonWriter::WriteRawValue:System.Void(System.String,System.Boolean)
 extern "C" void chaos_bridge_thunk_574(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
 {
-    reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[587])(chaos_fn_arg_0, chaos_fn_arg_1);
+    reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[597])(chaos_fn_arg_0, chaos_fn_arg_1);
 }
 
-// Bridge/import thunk for: System.Text.Json/Utf8JsonWriter::WriteNumberValue:System.Void(System.Decimal)
-extern "C" void chaos_bridge_thunk_575(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+// Bridge/import thunk for: System.Text.Json/Utf8JsonWriter::WriteRawValue:System.Void(System.Buffers.ReadOnlySequence<System.Byte>,System.Boolean)
+extern "C" void chaos_bridge_thunk_575(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
 {
-    reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[588])(chaos_fn_arg_0);
+    reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[598])(chaos_fn_arg_0, chaos_fn_arg_1);
 }
 
-// Bridge/import thunk for: System.Text.Json/Utf8JsonWriter::WriteNumberValue:System.Void(System.Double)
+// Bridge/import thunk for: System.Text.Json/Utf8JsonWriter::WriteStartArray:System.Void(System.String)
 extern "C" void chaos_bridge_thunk_576(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
-    reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[589])(chaos_fn_arg_0);
+    reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[599])(chaos_fn_arg_0);
 }
 
-// Bridge/import thunk for: System.Text.Json/Utf8JsonWriter::WriteNumberValue:System.Void(System.Single)
-extern "C" void chaos_bridge_thunk_577(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+// Bridge/import thunk for: System.Text.Json/Utf8JsonWriter::WriteStartArray:System.Void()
+extern "C" void chaos_bridge_thunk_577(void)
 {
-    reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[590])(chaos_fn_arg_0);
+    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[600])();
 }
 
-// Bridge/import thunk for: System.Text.Json/Utf8JsonWriter::WriteNumberValue:System.Void(System.Int32)
+// Bridge/import thunk for: System.Text.Json/Utf8JsonWriter::WriteStartArray:System.Void(JsonEncodedText)
 extern "C" void chaos_bridge_thunk_578(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
-    reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[591])(chaos_fn_arg_0);
+    reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[601])(chaos_fn_arg_0);
 }
 
-// Bridge/import thunk for: System.Text.Json/Utf8JsonWriter::WriteNumberValue:System.Void(System.Int64)
+// Bridge/import thunk for: System.Text.Json/Utf8JsonWriter::WriteStartObject:System.Void(System.String)
 extern "C" void chaos_bridge_thunk_579(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
-    reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[592])(chaos_fn_arg_0);
+    reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[602])(chaos_fn_arg_0);
 }
 
 // Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonElementTests+<>c::<>9__20_0
@@ -45040,64 +45080,64 @@ extern "C" void chaos_bridge_thunk_58(void)
     reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[65])();
 }
 
-// Bridge/import thunk for: System.Text.Json/Utf8JsonWriter::WriteNumberValue:System.Void(System.UInt32)
-extern "C" void chaos_bridge_thunk_580(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+// Bridge/import thunk for: System.Text.Json/Utf8JsonWriter::WriteStartObject:System.Void()
+extern "C" void chaos_bridge_thunk_580(void)
 {
-    reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[593])(chaos_fn_arg_0);
+    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[603])();
 }
 
-// Bridge/import thunk for: System.Text.Json/Utf8JsonWriter::WriteNumberValue:System.Void(System.UInt64)
+// Bridge/import thunk for: System.Text.Json/Utf8JsonWriter::WriteStartObject:System.Void(JsonEncodedText)
 extern "C" void chaos_bridge_thunk_581(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
-    reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[594])(chaos_fn_arg_0);
+    reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[604])(chaos_fn_arg_0);
 }
 
-// Bridge/import thunk for: System.Text.Json/Utf8JsonWriter::WritePropertyName:System.Void(JsonEncodedText)
-extern "C" void chaos_bridge_thunk_582(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+// Bridge/import thunk for: System.Text.Json/Utf8JsonWriter::WriteString:System.Void(JsonEncodedText,System.DateTime)
+extern "C" void chaos_bridge_thunk_582(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
 {
-    reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[595])(chaos_fn_arg_0);
+    reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[605])(chaos_fn_arg_0, chaos_fn_arg_1);
 }
 
-// Bridge/import thunk for: System.Text.Json/Utf8JsonWriter::WritePropertyName:System.Void(System.String)
-extern "C" void chaos_bridge_thunk_583(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+// Bridge/import thunk for: System.Text.Json/Utf8JsonWriter::WriteString:System.Void(System.String,System.DateTime)
+extern "C" void chaos_bridge_thunk_583(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
 {
-    reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[596])(chaos_fn_arg_0);
+    reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[606])(chaos_fn_arg_0, chaos_fn_arg_1);
 }
 
-// Bridge/import thunk for: System.Text.Json/Utf8JsonWriter::WriteRawValue:System.Void(System.String,System.Boolean)
+// Bridge/import thunk for: System.Text.Json/Utf8JsonWriter::WriteString:System.Void(JsonEncodedText,System.DateTimeOffset)
 extern "C" void chaos_bridge_thunk_584(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
 {
-    reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[597])(chaos_fn_arg_0, chaos_fn_arg_1);
+    reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[607])(chaos_fn_arg_0, chaos_fn_arg_1);
 }
 
-// Bridge/import thunk for: System.Text.Json/Utf8JsonWriter::WriteRawValue:System.Void(System.Buffers.ReadOnlySequence<System.Byte>,System.Boolean)
+// Bridge/import thunk for: System.Text.Json/Utf8JsonWriter::WriteString:System.Void(System.String,System.DateTimeOffset)
 extern "C" void chaos_bridge_thunk_585(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
 {
-    reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[598])(chaos_fn_arg_0, chaos_fn_arg_1);
+    reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[608])(chaos_fn_arg_0, chaos_fn_arg_1);
 }
 
-// Bridge/import thunk for: System.Text.Json/Utf8JsonWriter::WriteStartArray:System.Void(System.String)
-extern "C" void chaos_bridge_thunk_586(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+// Bridge/import thunk for: System.Text.Json/Utf8JsonWriter::WriteString:System.Void(JsonEncodedText,System.Guid)
+extern "C" void chaos_bridge_thunk_586(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
 {
-    reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[599])(chaos_fn_arg_0);
+    reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[609])(chaos_fn_arg_0, chaos_fn_arg_1);
 }
 
-// Bridge/import thunk for: System.Text.Json/Utf8JsonWriter::WriteStartArray:System.Void()
-extern "C" void chaos_bridge_thunk_587(void)
+// Bridge/import thunk for: System.Text.Json/Utf8JsonWriter::WriteString:System.Void(System.String,System.Guid)
+extern "C" void chaos_bridge_thunk_587(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
 {
-    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[600])();
+    reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[610])(chaos_fn_arg_0, chaos_fn_arg_1);
 }
 
-// Bridge/import thunk for: System.Text.Json/Utf8JsonWriter::WriteStartArray:System.Void(JsonEncodedText)
-extern "C" void chaos_bridge_thunk_588(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+// Bridge/import thunk for: System.Text.Json/Utf8JsonWriter::WriteString:System.Void(JsonEncodedText,JsonEncodedText)
+extern "C" void chaos_bridge_thunk_588(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
 {
-    reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[601])(chaos_fn_arg_0);
+    reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[611])(chaos_fn_arg_0, chaos_fn_arg_1);
 }
 
-// Bridge/import thunk for: System.Text.Json/Utf8JsonWriter::WriteStartObject:System.Void(System.String)
-extern "C" void chaos_bridge_thunk_589(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+// Bridge/import thunk for: System.Text.Json/Utf8JsonWriter::WriteString:System.Void(System.String,JsonEncodedText)
+extern "C" void chaos_bridge_thunk_589(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
 {
-    reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[602])(chaos_fn_arg_0);
+    reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[612])(chaos_fn_arg_0, chaos_fn_arg_1);
 }
 
 // Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonElementTests+<>c::<>9__26_0
@@ -45106,64 +45146,46 @@ extern "C" void chaos_bridge_thunk_59(void)
     reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[66])();
 }
 
-// Bridge/import thunk for: System.Text.Json/Utf8JsonWriter::WriteStartObject:System.Void()
-extern "C" void chaos_bridge_thunk_590(void)
+// Bridge/import thunk for: System.Text.Json/Utf8JsonWriter::WriteString:System.Void(System.String,System.String)
+extern "C" void chaos_bridge_thunk_590(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
 {
-    reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[603])();
+    reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[613])(chaos_fn_arg_0, chaos_fn_arg_1);
 }
 
-// Bridge/import thunk for: System.Text.Json/Utf8JsonWriter::WriteStartObject:System.Void(JsonEncodedText)
-extern "C" void chaos_bridge_thunk_591(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+// Bridge/import thunk for: System.Text.Json/Utf8JsonWriter::WriteString:System.Void(JsonEncodedText,System.String)
+extern "C" void chaos_bridge_thunk_591(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
 {
-    reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[604])(chaos_fn_arg_0);
+    reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[614])(chaos_fn_arg_0, chaos_fn_arg_1);
 }
 
-// Bridge/import thunk for: System.Text.Json/Utf8JsonWriter::WriteString:System.Void(JsonEncodedText,System.DateTime)
-extern "C" void chaos_bridge_thunk_592(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
+// Bridge/import thunk for: System.Text.Json/Utf8JsonWriter::WriteStringValue:System.Void(System.DateTime)
+extern "C" void chaos_bridge_thunk_592(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
-    reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[605])(chaos_fn_arg_0, chaos_fn_arg_1);
+    reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[615])(chaos_fn_arg_0);
 }
 
-// Bridge/import thunk for: System.Text.Json/Utf8JsonWriter::WriteString:System.Void(System.String,System.DateTime)
-extern "C" void chaos_bridge_thunk_593(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
+// Bridge/import thunk for: System.Text.Json/Utf8JsonWriter::WriteStringValue:System.Void(System.DateTimeOffset)
+extern "C" void chaos_bridge_thunk_593(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
-    reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[606])(chaos_fn_arg_0, chaos_fn_arg_1);
+    reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[616])(chaos_fn_arg_0);
 }
 
-// Bridge/import thunk for: System.Text.Json/Utf8JsonWriter::WriteString:System.Void(JsonEncodedText,System.DateTimeOffset)
-extern "C" void chaos_bridge_thunk_594(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
+// Bridge/import thunk for: System.Text.Json/Utf8JsonWriter::WriteStringValue:System.Void(System.Guid)
+extern "C" void chaos_bridge_thunk_594(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
-    reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[607])(chaos_fn_arg_0, chaos_fn_arg_1);
+    reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[617])(chaos_fn_arg_0);
 }
 
-// Bridge/import thunk for: System.Text.Json/Utf8JsonWriter::WriteString:System.Void(System.String,System.DateTimeOffset)
-extern "C" void chaos_bridge_thunk_595(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
+// Bridge/import thunk for: System.Text.Json/Utf8JsonWriter::WriteStringValue:System.Void(JsonEncodedText)
+extern "C" void chaos_bridge_thunk_595(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
-    reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[608])(chaos_fn_arg_0, chaos_fn_arg_1);
+    reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[618])(chaos_fn_arg_0);
 }
 
-// Bridge/import thunk for: System.Text.Json/Utf8JsonWriter::WriteString:System.Void(JsonEncodedText,System.Guid)
-extern "C" void chaos_bridge_thunk_596(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
+// Bridge/import thunk for: System.Text.Json/Utf8JsonWriter::WriteStringValue:System.Void(System.String)
+extern "C" void chaos_bridge_thunk_596(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
-    reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[609])(chaos_fn_arg_0, chaos_fn_arg_1);
-}
-
-// Bridge/import thunk for: System.Text.Json/Utf8JsonWriter::WriteString:System.Void(System.String,System.Guid)
-extern "C" void chaos_bridge_thunk_597(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-    reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[610])(chaos_fn_arg_0, chaos_fn_arg_1);
-}
-
-// Bridge/import thunk for: System.Text.Json/Utf8JsonWriter::WriteString:System.Void(JsonEncodedText,JsonEncodedText)
-extern "C" void chaos_bridge_thunk_598(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-    reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[611])(chaos_fn_arg_0, chaos_fn_arg_1);
-}
-
-// Bridge/import thunk for: System.Text.Json/Utf8JsonWriter::WriteString:System.Void(System.String,JsonEncodedText)
-extern "C" void chaos_bridge_thunk_599(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-    reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[612])(chaos_fn_arg_0, chaos_fn_arg_1);
+    reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[619])(chaos_fn_arg_0);
 }
 
 // Bridge/import thunk for: System.Private.CoreLib/System.IDisposable
@@ -45176,48 +45198,6 @@ extern "C" void chaos_bridge_thunk_6(void)
 extern "C" void chaos_bridge_thunk_60(void)
 {
     reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[67])();
-}
-
-// Bridge/import thunk for: System.Text.Json/Utf8JsonWriter::WriteString:System.Void(System.String,System.String)
-extern "C" void chaos_bridge_thunk_600(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-    reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[613])(chaos_fn_arg_0, chaos_fn_arg_1);
-}
-
-// Bridge/import thunk for: System.Text.Json/Utf8JsonWriter::WriteString:System.Void(JsonEncodedText,System.String)
-extern "C" void chaos_bridge_thunk_601(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-    reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[614])(chaos_fn_arg_0, chaos_fn_arg_1);
-}
-
-// Bridge/import thunk for: System.Text.Json/Utf8JsonWriter::WriteStringValue:System.Void(System.DateTime)
-extern "C" void chaos_bridge_thunk_602(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-    reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[615])(chaos_fn_arg_0);
-}
-
-// Bridge/import thunk for: System.Text.Json/Utf8JsonWriter::WriteStringValue:System.Void(System.DateTimeOffset)
-extern "C" void chaos_bridge_thunk_603(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-    reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[616])(chaos_fn_arg_0);
-}
-
-// Bridge/import thunk for: System.Text.Json/Utf8JsonWriter::WriteStringValue:System.Void(System.Guid)
-extern "C" void chaos_bridge_thunk_604(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-    reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[617])(chaos_fn_arg_0);
-}
-
-// Bridge/import thunk for: System.Text.Json/Utf8JsonWriter::WriteStringValue:System.Void(JsonEncodedText)
-extern "C" void chaos_bridge_thunk_605(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-    reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[618])(chaos_fn_arg_0);
-}
-
-// Bridge/import thunk for: System.Text.Json/Utf8JsonWriter::WriteStringValue:System.Void(System.String)
-extern "C" void chaos_bridge_thunk_606(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-    reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[619])(chaos_fn_arg_0);
 }
 
 // Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonElementTests+<>c::<>9__2_0

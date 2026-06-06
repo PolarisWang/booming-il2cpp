@@ -1772,6 +1772,7 @@ extern const ::chaos::il2cpp::runtime_core::ReflectionQueryImageDescriptor kRefl
 // Namespace-scoped extern declaration for kAotMethodCount.
 // (Definition at file scope via globalDeclarations for runtime-entry.cpp link-time visibility.)
 extern "C" const int kAotMethodCount;
+extern "C" int32_t kChaosExternalRuntimeCount;
 // ── ABI manifest ──────────────────────────────────────────────
 // Single contiguous struct: header + entries + params in same object
 // so CHAOS_ABI_MANIFEST_ENTRIES/CHAOS_ABI_MANIFEST_PARAMETERS find them by offset.
@@ -3745,12 +3746,12 @@ extern "C" const char* kChaosExternalRuntimeSubjects[156] = {
 	"System.Private.CoreLib/System.Collections.IEnumerable::GetEnumerator:System.Collections.IEnumerator()",
 	"System.Private.CoreLib/System.IDisposable",
 	"System.Private.CoreLib/System.Collections.IEnumerator::MoveNext:System.Boolean()",
-	"System.Collections/System.Collections.Generic.EqualityComparer<System.Object>::get_Default:System.Collections.Generic.EqualityComparer<System.Object>()",
+	"System.Private.CoreLib/System.Collections.Generic.EqualityComparer<System.Object>::get_Default:System.Collections.Generic.EqualityComparer<System.Object>()",
 	"System.Private.CoreLib/System.Collections.IEnumerator::get_Current:System.Object()",
-	"System.Collections/System.Collections.Generic.EqualityComparer<System.Object>::Equals:System.Boolean(System.Object,System.Object)",
+	"System.Private.CoreLib/System.Collections.Generic.EqualityComparer<System.Object>::Equals:System.Boolean(System.Object,System.Object)",
 	"System.Private.CoreLib/System.IDisposable::Dispose:System.Void()",
-	"System.Collections/System.Collections.Generic.EqualityComparer<!!0>::get_Default:System.Collections.Generic.EqualityComparer<!!0>()",
-	"System.Collections/System.Collections.Generic.EqualityComparer<!!0>::Equals:System.Boolean(!!0,!!0)",
+	"System.Private.CoreLib/System.Collections.Generic.EqualityComparer<!!0>::get_Default:System.Collections.Generic.EqualityComparer<!!0>()",
+	"System.Private.CoreLib/System.Collections.Generic.EqualityComparer<!!0>::Equals:System.Boolean(!!0,!!0)",
 	"Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::s_exitCode",
 	"System.Console/System.Console::get_Error:System.IO.TextWriter()",
 	"System.Private.CoreLib/System.String::Concat:System.String(System.String,System.String)",
@@ -9853,7 +9854,7 @@ extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_1(CHAOS_IL2CPP_INTPTR chaos_fn
 	return result;
 }
 
-// Bridge/import thunk for: System.Collections/System.Collections.Generic.EqualityComparer<System.Object>::Equals:System.Boolean(System.Object,System.Object)
+// Bridge/import thunk for: System.Private.CoreLib/System.Collections.Generic.EqualityComparer<System.Object>::Equals:System.Boolean(System.Object,System.Object)
 extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_10(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
 {
 	auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[12])(chaos_fn_arg_0, chaos_fn_arg_1);
@@ -9986,7 +9987,7 @@ extern "C" void chaos_bridge_thunk_119(void)
 	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[127])();
 }
 
-// Bridge/import thunk for: System.Collections/System.Collections.Generic.EqualityComparer<!!0>::get_Default:System.Collections.Generic.EqualityComparer<!!0>()
+// Bridge/import thunk for: System.Private.CoreLib/System.Collections.Generic.EqualityComparer<!!0>::get_Default:System.Collections.Generic.EqualityComparer<!!0>()
 extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_12(void)
 {
 	auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)()>(kChaosExternalRuntimeFnTable[14])();
@@ -10053,7 +10054,7 @@ extern "C" void chaos_bridge_thunk_129(void)
 	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[137])();
 }
 
-// Bridge/import thunk for: System.Collections/System.Collections.Generic.EqualityComparer<!!0>::Equals:System.Boolean(!!0,!!0)
+// Bridge/import thunk for: System.Private.CoreLib/System.Collections.Generic.EqualityComparer<!!0>::Equals:System.Boolean(!!0,!!0)
 extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_13(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
 {
 	auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[15])(chaos_fn_arg_0, chaos_fn_arg_1);
@@ -10614,7 +10615,7 @@ extern "C" void chaos_bridge_thunk_79(void)
 	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[86])();
 }
 
-// Bridge/import thunk for: System.Collections/System.Collections.Generic.EqualityComparer<System.Object>::get_Default:System.Collections.Generic.EqualityComparer<System.Object>()
+// Bridge/import thunk for: System.Private.CoreLib/System.Collections.Generic.EqualityComparer<System.Object>::get_Default:System.Collections.Generic.EqualityComparer<System.Object>()
 extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_8(void)
 {
 	auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)()>(kChaosExternalRuntimeFnTable[10])();

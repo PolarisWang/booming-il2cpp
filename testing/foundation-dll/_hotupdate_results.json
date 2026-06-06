@@ -1,0 +1,131 @@
+{
+  "System.Collections": {
+    "status": "passed",
+    "detail": "<<< + [passed] passed: 16 passed, assert_failed=0, semantic_changed=0",
+    "duration_s": 76
+  },
+  "System.Collections.Immutable": {
+    "status": "passed",
+    "detail": "<<< + [passed] passed: 31 passed, assert_failed=0, semantic_changed=0",
+    "duration_s": 71
+  },
+  "System.ComponentModel.TypeConverter": {
+    "status": "skipped",
+    "detail": "<<< ? [skipped_patch_not_applied] skipped_patch_not_applied: 74 passed, assert_failed=0, semantic_changed=0",
+    "duration_s": 317
+  },
+  "System.Data.Common": {
+    "status": "passed",
+    "detail": "<<< + [passed] passed: 21 passed, assert_failed=0, semantic_changed=0",
+    "duration_s": 504
+  },
+  "System.Diagnostics.DiagnosticSource": {
+    "status": "passed",
+    "detail": "<<< + [passed] passed: 172 passed, assert_failed=0, semantic_changed=0",
+    "duration_s": 267
+  },
+  "System.Formats.Asn1": {
+    "status": "passed",
+    "detail": "<<< + [passed] passed: 38 passed, assert_failed=0, semantic_changed=0",
+    "duration_s": 96
+  },
+  "System.IO.Compression.Brotli": {
+    "status": "passed",
+    "detail": "<<< + [passed] passed: 33 passed, assert_failed=0, semantic_changed=0",
+    "duration_s": 76
+  },
+  "System.IO.Pipelines": {
+    "status": "passed",
+    "detail": "<<< + [passed] passed: 19 passed, assert_failed=0, semantic_changed=0",
+    "duration_s": 69
+  },
+  "System.Linq": {
+    "status": "skipped",
+    "detail": "<<< ? [skipped_patch_not_applied] skipped_patch_not_applied: 283 passed, assert_failed=0, semantic_changed=0",
+    "duration_s": 57
+  },
+  "System.Linq.Expressions": {
+    "status": "passed",
+    "detail": "<<< + [passed] passed: 732 passed, assert_failed=0, semantic_changed=0",
+    "duration_s": 292
+  },
+  "System.Net.Http": {
+    "status": "skipped",
+    "detail": "<<< ? [skipped_patch_not_applied] skipped_patch_not_applied: 109 passed, assert_failed=0, semantic_changed=0",
+    "duration_s": 88
+  },
+  "System.Net.ServerSentEvents": {
+    "status": "skipped",
+    "detail": "<<< ? [skipped_patch_not_applied] skipped_patch_not_applied: 6 passed, assert_failed=0, semantic_changed=0",
+    "duration_s": 44
+  },
+  "System.Net.Sockets": {
+    "status": "skipped",
+    "detail": "<<< ? [skipped_patch_not_applied] skipped_patch_not_applied: 500 passed, assert_failed=0, semantic_changed=0",
+    "duration_s": 48
+  },
+  "System.ObjectModel": {
+    "status": "skipped",
+    "detail": "<<< ? [skipped] entry.exe not found, skipping hotupdate",
+    "duration_s": 0
+  },
+  "System.Private.CoreLib": {
+    "status": "timeout",
+    "detail": ">900s"
+  },
+  "System.Private.Xml": {
+    "status": "skipped",
+    "detail": "<<< ? [skipped] entry.exe not found, skipping hotupdate",
+    "duration_s": 206
+  },
+  "System.Reflection.Metadata": {
+    "status": "passed",
+    "detail": "<<< + [passed] passed: 233 passed, assert_failed=0, semantic_changed=0",
+    "duration_s": 129
+  },
+  "System.Runtime.InteropServices": {
+    "status": "unknown",
+    "detail": "",
+    "duration_s": 47
+  },
+  "System.Runtime.Intrinsics": {
+    "status": "skipped",
+    "detail": "<<< ? [skipped] entry.exe not found, skipping hotupdate",
+    "duration_s": 1
+  },
+  "System.Runtime.Serialization.Formatters": {
+    "status": "unknown",
+    "detail": "",
+    "duration_s": 15
+  },
+  "System.Security.Claims": {
+    "status": "unknown",
+    "detail": "",
+    "duration_s": 46
+  },
+  "System.Security.Cryptography": {
+    "status": "unknown",
+    "detail": "",
+    "duration_s": 11
+  },
+  "System.Security.Principal.Windows": {
+    "status": "unknown",
+    "detail": "",
+    "duration_s": 4
+  },
+  "System.Text.Json": {
+    "status": "unknown",
+    "detail": "",
+    "duration_s": 4
+  },
+  "System.Threading.Tasks.Parallel": {
+    "status": "unknown",
+    "detail": "",
+    "duration_s": 4
+  },
+  "System.Xml.ReaderWriter": {
+    "status": "skipped",
+    "detail": "<<< ? [skipped] entry.exe not found, skipping hotupdate",
+    "duration_s": 1
+  }
+}

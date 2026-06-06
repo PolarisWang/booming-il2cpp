@@ -2651,10 +2651,10 @@ extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_Syst
 		const auto chaos_arg_1 = _s1;
 		const auto chaos_arg_0 = _s0;
 		if (0 < 0 || 0 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL("external runtime table index 0 out of range");
+			CHAOS_IL2CPP_FAIL(); // external runtime table index 0 out of range
 		}
 		if (kChaosExternalRuntimeFnTable[0] == nullptr) {
-			CHAOS_IL2CPP_FAIL("external runtime table entry 0 is null");
+			CHAOS_IL2CPP_FAIL(); // external runtime table entry 0 is null
 		}
 		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[0])(chaos_arg_0, chaos_arg_1);
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
@@ -2885,10 +2885,10 @@ extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_Syst
 		const auto chaos_arg_1 = _s1;
 		const auto chaos_arg_0 = _s0;
 		if (3 < 0 || 3 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL("external runtime table index 3 out of range");
+			CHAOS_IL2CPP_FAIL(); // external runtime table index 3 out of range
 		}
 		if (kChaosExternalRuntimeFnTable[3] == nullptr) {
-			CHAOS_IL2CPP_FAIL("external runtime table entry 3 is null");
+			CHAOS_IL2CPP_FAIL(); // external runtime table entry 3 is null
 		}
 		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[3])(chaos_arg_0, chaos_arg_1);
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
@@ -3143,10 +3143,10 @@ extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_0_0_
 	_s11 = chaos_locals[0];
 	{
 		if (7 < 0 || 7 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL("external runtime table index 7 out of range");
+			CHAOS_IL2CPP_FAIL(); // external runtime table index 7 out of range
 		}
 		if (kChaosExternalRuntimeFnTable[7] == nullptr) {
-			CHAOS_IL2CPP_FAIL("external runtime table entry 7 is null");
+			CHAOS_IL2CPP_FAIL(); // external runtime table entry 7 is null
 		}
 		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[7])();
 		_s12 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
@@ -3155,10 +3155,10 @@ extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_0_0_
 	_s12 = chaos_locals[1];
 	{
 		if (7 < 0 || 7 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL("external runtime table index 7 out of range");
+			CHAOS_IL2CPP_FAIL(); // external runtime table index 7 out of range
 		}
 		if (kChaosExternalRuntimeFnTable[7] == nullptr) {
-			CHAOS_IL2CPP_FAIL("external runtime table entry 7 is null");
+			CHAOS_IL2CPP_FAIL(); // external runtime table entry 7 is null
 		}
 		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[7])();
 		_s13 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
@@ -3197,10 +3197,10 @@ extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_0_0_
 					_s13 = chaos_locals[8];
 					{
 						if (13 < 0 || 13 >= kChaosExternalRuntimeCount) {
-							CHAOS_IL2CPP_FAIL("external runtime table index 13 out of range");
+							CHAOS_IL2CPP_FAIL(); // external runtime table index 13 out of range
 						}
 						if (kChaosExternalRuntimeFnTable[13] == nullptr) {
-							CHAOS_IL2CPP_FAIL("external runtime table entry 13 is null");
+							CHAOS_IL2CPP_FAIL(); // external runtime table entry 13 is null
 						}
 						reinterpret_cast<void(*)(void)>(kChaosExternalRuntimeFnTable[13])();
 					}
@@ -3217,10 +3217,10 @@ extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_0_0_
 							_s13 = chaos_locals[7];
 							{
 								if (13 < 0 || 13 >= kChaosExternalRuntimeCount) {
-									CHAOS_IL2CPP_FAIL("external runtime table index 13 out of range");
+									CHAOS_IL2CPP_FAIL(); // external runtime table index 13 out of range
 								}
 								if (kChaosExternalRuntimeFnTable[13] == nullptr) {
-									CHAOS_IL2CPP_FAIL("external runtime table entry 13 is null");
+									CHAOS_IL2CPP_FAIL(); // external runtime table entry 13 is null
 								}
 								reinterpret_cast<void(*)(void)>(kChaosExternalRuntimeFnTable[13])();
 							}
@@ -3234,10 +3234,10 @@ extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_0_0_
 					_s13 = chaos_locals[6];
 					{
 						if (9 < 0 || 9 >= kChaosExternalRuntimeCount) {
-							CHAOS_IL2CPP_FAIL("external runtime table index 9 out of range");
+							CHAOS_IL2CPP_FAIL(); // external runtime table index 9 out of range
 						}
 						if (kChaosExternalRuntimeFnTable[9] == nullptr) {
-							CHAOS_IL2CPP_FAIL("external runtime table entry 9 is null");
+							CHAOS_IL2CPP_FAIL(); // external runtime table entry 9 is null
 						}
 						const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[9])();
 						_s14 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
@@ -3250,10 +3250,10 @@ extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_0_0_
 					// leave (handled via structured EH branches)
 					{
 						if (10 < 0 || 10 >= kChaosExternalRuntimeCount) {
-							CHAOS_IL2CPP_FAIL("external runtime table index 10 out of range");
+							CHAOS_IL2CPP_FAIL(); // external runtime table index 10 out of range
 						}
 						if (kChaosExternalRuntimeFnTable[10] == nullptr) {
-							CHAOS_IL2CPP_FAIL("external runtime table entry 10 is null");
+							CHAOS_IL2CPP_FAIL(); // external runtime table entry 10 is null
 						}
 						const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[10])();
 						_s15 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
@@ -3261,10 +3261,10 @@ extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_0_0_
 					_s16 = chaos_locals[5];
 					{
 						if (11 < 0 || 11 >= kChaosExternalRuntimeCount) {
-							CHAOS_IL2CPP_FAIL("external runtime table index 11 out of range");
+							CHAOS_IL2CPP_FAIL(); // external runtime table index 11 out of range
 						}
 						if (kChaosExternalRuntimeFnTable[11] == nullptr) {
-							CHAOS_IL2CPP_FAIL("external runtime table entry 11 is null");
+							CHAOS_IL2CPP_FAIL(); // external runtime table entry 11 is null
 						}
 						const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[11])();
 						_s17 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
@@ -3272,10 +3272,10 @@ extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_0_0_
 					_s18 = chaos_locals[6];
 					{
 						if (11 < 0 || 11 >= kChaosExternalRuntimeCount) {
-							CHAOS_IL2CPP_FAIL("external runtime table index 11 out of range");
+							CHAOS_IL2CPP_FAIL(); // external runtime table index 11 out of range
 						}
 						if (kChaosExternalRuntimeFnTable[11] == nullptr) {
-							CHAOS_IL2CPP_FAIL("external runtime table entry 11 is null");
+							CHAOS_IL2CPP_FAIL(); // external runtime table entry 11 is null
 						}
 						const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[11])();
 						_s19 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
@@ -3284,10 +3284,10 @@ extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_0_0_
 						const auto chaos_arg_1 = _s19;
 						const auto chaos_arg_0 = _s18;
 						if (12 < 0 || 12 >= kChaosExternalRuntimeCount) {
-							CHAOS_IL2CPP_FAIL("external runtime table index 12 out of range");
+							CHAOS_IL2CPP_FAIL(); // external runtime table index 12 out of range
 						}
 						if (kChaosExternalRuntimeFnTable[12] == nullptr) {
-							CHAOS_IL2CPP_FAIL("external runtime table entry 12 is null");
+							CHAOS_IL2CPP_FAIL(); // external runtime table entry 12 is null
 						}
 						const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[12])(chaos_arg_0, chaos_arg_1);
 						_s18 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
@@ -3305,10 +3305,10 @@ extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_0_0_
 					_s19 = chaos_locals[5];
 					{
 						if (9 < 0 || 9 >= kChaosExternalRuntimeCount) {
-							CHAOS_IL2CPP_FAIL("external runtime table index 9 out of range");
+							CHAOS_IL2CPP_FAIL(); // external runtime table index 9 out of range
 						}
 						if (kChaosExternalRuntimeFnTable[9] == nullptr) {
-							CHAOS_IL2CPP_FAIL("external runtime table entry 9 is null");
+							CHAOS_IL2CPP_FAIL(); // external runtime table entry 9 is null
 						}
 						const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[9])();
 						_s20 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
@@ -3319,10 +3319,10 @@ extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_0_0_
 					_s21 = chaos_locals[6];
 					{
 						if (9 < 0 || 9 >= kChaosExternalRuntimeCount) {
-							CHAOS_IL2CPP_FAIL("external runtime table index 9 out of range");
+							CHAOS_IL2CPP_FAIL(); // external runtime table index 9 out of range
 						}
 						if (kChaosExternalRuntimeFnTable[9] == nullptr) {
-							CHAOS_IL2CPP_FAIL("external runtime table entry 9 is null");
+							CHAOS_IL2CPP_FAIL(); // external runtime table entry 9 is null
 						}
 						const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[9])();
 						_s22 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
@@ -3334,10 +3334,10 @@ extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_0_0_
 	CHAOS_EH_FINALLY_END
 	{
 		if (14 < 0 || 14 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL("external runtime table index 14 out of range");
+			CHAOS_IL2CPP_FAIL(); // external runtime table index 14 out of range
 		}
 		if (kChaosExternalRuntimeFnTable[14] == nullptr) {
-			CHAOS_IL2CPP_FAIL("external runtime table entry 14 is null");
+			CHAOS_IL2CPP_FAIL(); // external runtime table entry 14 is null
 		}
 		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[14])();
 		_s23 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
@@ -3348,10 +3348,10 @@ extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_0_0_
 		const auto chaos_arg_1 = _s25;
 		const auto chaos_arg_0 = _s24;
 		if (15 < 0 || 15 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL("external runtime table index 15 out of range");
+			CHAOS_IL2CPP_FAIL(); // external runtime table index 15 out of range
 		}
 		if (kChaosExternalRuntimeFnTable[15] == nullptr) {
-			CHAOS_IL2CPP_FAIL("external runtime table entry 15 is null");
+			CHAOS_IL2CPP_FAIL(); // external runtime table entry 15 is null
 		}
 		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[15])(chaos_arg_0, chaos_arg_1);
 		_s24 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
@@ -3379,10 +3379,10 @@ extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreNotEqual_0
 	CHAOS_IL2CPP_INTPTR _s2;
 	{
 		if (14 < 0 || 14 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL("external runtime table index 14 out of range");
+			CHAOS_IL2CPP_FAIL(); // external runtime table index 14 out of range
 		}
 		if (kChaosExternalRuntimeFnTable[14] == nullptr) {
-			CHAOS_IL2CPP_FAIL("external runtime table entry 14 is null");
+			CHAOS_IL2CPP_FAIL(); // external runtime table entry 14 is null
 		}
 		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[14])();
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
@@ -3393,10 +3393,10 @@ extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreNotEqual_0
 		const auto chaos_arg_1 = _s2;
 		const auto chaos_arg_0 = _s1;
 		if (15 < 0 || 15 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL("external runtime table index 15 out of range");
+			CHAOS_IL2CPP_FAIL(); // external runtime table index 15 out of range
 		}
 		if (kChaosExternalRuntimeFnTable[15] == nullptr) {
-			CHAOS_IL2CPP_FAIL("external runtime table entry 15 is null");
+			CHAOS_IL2CPP_FAIL(); // external runtime table entry 15 is null
 		}
 		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[15])(chaos_arg_0, chaos_arg_1);
 		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
@@ -3793,10 +3793,10 @@ extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_BenchmarkAttribute__
 	_s0 = chaos_args[0];
 	{
 		if (22 < 0 || 22 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL("external runtime table index 22 out of range");
+			CHAOS_IL2CPP_FAIL(); // external runtime table index 22 out of range
 		}
 		if (kChaosExternalRuntimeFnTable[22] == nullptr) {
-			CHAOS_IL2CPP_FAIL("external runtime table entry 22 is null");
+			CHAOS_IL2CPP_FAIL(); // external runtime table entry 22 is null
 		}
 		reinterpret_cast<void(*)(void)>(kChaosExternalRuntimeFnTable[22])();
 	}
@@ -3813,10 +3813,10 @@ extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_FactAttribute__ctor(
 	_s0 = chaos_args[0];
 	{
 		if (22 < 0 || 22 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL("external runtime table index 22 out of range");
+			CHAOS_IL2CPP_FAIL(); // external runtime table index 22 out of range
 		}
 		if (kChaosExternalRuntimeFnTable[22] == nullptr) {
-			CHAOS_IL2CPP_FAIL("external runtime table entry 22 is null");
+			CHAOS_IL2CPP_FAIL(); // external runtime table entry 22 is null
 		}
 		reinterpret_cast<void(*)(void)>(kChaosExternalRuntimeFnTable[22])();
 	}
@@ -3833,10 +3833,10 @@ extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_HotUpdateAttribute__
 	_s0 = chaos_args[0];
 	{
 		if (22 < 0 || 22 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL("external runtime table index 22 out of range");
+			CHAOS_IL2CPP_FAIL(); // external runtime table index 22 out of range
 		}
 		if (kChaosExternalRuntimeFnTable[22] == nullptr) {
-			CHAOS_IL2CPP_FAIL("external runtime table entry 22 is null");
+			CHAOS_IL2CPP_FAIL(); // external runtime table entry 22 is null
 		}
 		reinterpret_cast<void(*)(void)>(kChaosExternalRuntimeFnTable[22])();
 	}

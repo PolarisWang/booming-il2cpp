@@ -664,8 +664,6 @@ static int RunHotupdateMode(const char* patchDataPath = nullptr) {
         int64_t bv = 0;
         bool caught = false;
 #if defined(_WIN32)
-        // Per-method SEH guard: catch AV/C++ exceptions individually so a
-        // single method failure doesn't abort the entire hotupdate run.
         __try {
             CHAOS_EH_TRY
                 bv = chaos::il2cpp::runtime_core::ChaosDispatchMethodGetValue(
@@ -742,12 +740,25 @@ static int RunHotupdateMode(const char* patchDataPath = nullptr) {
         int i = kSubjectSlotMap[si];
         int64_t patched_value = 0;
         bool patched_caught = false;
+#if defined(_WIN32)
+        __try {
+            CHAOS_EH_TRY
+                patched_value = chaos::il2cpp::runtime_core::ChaosDispatchMethodGetValue(
+                    GetHotpatchEntries(), kAotMethodCount, i, CHAOS_USE_DEFAULT_THUNKS);
+            CHAOS_EH_CATCH_BEGIN
+                patched_caught = true;
+            CHAOS_EH_END
+        } __except(EXCEPTION_EXECUTE_HANDLER) {
+            patched_caught = true;
+        }
+#else
         CHAOS_EH_TRY
             patched_value = chaos::il2cpp::runtime_core::ChaosDispatchMethodGetValue(
                 GetHotpatchEntries(), kAotMethodCount, i, CHAOS_USE_DEFAULT_THUNKS);
         CHAOS_EH_CATCH_BEGIN
             patched_caught = true;
         CHAOS_EH_END
+#endif
         if (semantic_passed > 0) printf(",");
         printf("{\"si\":%d,\"passed\":%s,\"value\":%" PRId64 "}",
                si, patched_caught ? "false" : "true",
@@ -820,6 +831,19 @@ static int RunHotupdateMode(const char* patchDataPath = nullptr) {
         }
         int i = kSubjectSlotMap[si];
         bool reverted_ok = false;
+#if defined(_WIN32)
+        __try {
+            CHAOS_EH_TRY
+                chaos::il2cpp::runtime_core::ChaosDispatchMethod(
+                    GetHotpatchEntries(), kAotMethodCount, i, CHAOS_USE_DEFAULT_THUNKS);
+                reverted_ok = true;
+            CHAOS_EH_CATCH_BEGIN
+                all_revert = false;
+            CHAOS_EH_END
+        } __except(EXCEPTION_EXECUTE_HANDLER) {
+            all_revert = false;
+        }
+#else
         CHAOS_EH_TRY
             chaos::il2cpp::runtime_core::ChaosDispatchMethod(
                 GetHotpatchEntries(), kAotMethodCount, i, CHAOS_USE_DEFAULT_THUNKS);
@@ -827,6 +851,7 @@ static int RunHotupdateMode(const char* patchDataPath = nullptr) {
         CHAOS_EH_CATCH_BEGIN
             all_revert = false;
         CHAOS_EH_END
+#endif
         if (si > 0) printf(",");
         printf("{\"si\":%d,\"passed\":%s}", si, reverted_ok ? "true" : "false");
     }

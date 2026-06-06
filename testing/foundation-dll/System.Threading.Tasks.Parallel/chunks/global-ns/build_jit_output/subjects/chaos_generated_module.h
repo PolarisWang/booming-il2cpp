@@ -166,6 +166,9 @@ struct Functions {
         void (*Throws)(
                     CHAOS_IL2CPP_INTPTR
         );
+        void (*Throws_System_ArgumentNullException_)(
+                    CHAOS_IL2CPP_INTPTR
+        );
         CHAOS_IL2CPP_INT32 (*get_ExitCode)(
                 void
         );
@@ -1187,9 +1190,27 @@ struct Functions {
                     CHAOS_IL2CPP_INTPTR, 
                     CHAOS_IL2CPP_INT32
         );
+        void (*_ForAsync_32_long_long_System_FunclongCancellationTokenValueTask_0_b__176_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_ForAsync_32_long_long_System_FunclongCancellationTokenValueTask_1_b__178_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_ForAsync_32_long_long_System_FunclongCancellationTokenValueTask_2_b__180_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
         CHAOS_IL2CPP_INTPTR (*_ForAsync_32_long_long_System_FunclongCancellationTokenValueTask_3_b__182_0)(
                     CHAOS_IL2CPP_INTPTR, 
                     CHAOS_IL2CPP_INT64, 
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_ForAsync_33_long_long_CancellationToken_System_FunclongCancellationTokenValueTask_0_b__184_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_ForAsync_33_long_long_CancellationToken_System_FunclongCancellationTokenValueTask_1_b__186_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_ForAsync_33_long_long_CancellationToken_System_FunclongCancellationTokenValueTask_2_b__188_0)(
                     CHAOS_IL2CPP_INTPTR
         );
         CHAOS_IL2CPP_INTPTR (*_ForAsync_33_long_long_CancellationToken_System_FunclongCancellationTokenValueTask_3_b__190_0)(
@@ -1197,9 +1218,32 @@ struct Functions {
                     CHAOS_IL2CPP_INT64, 
                     CHAOS_IL2CPP_INTPTR
         );
+        void (*_ForAsync_34_long_long_ParallelOptions_System_FunclongCancellationTokenValueTask_0_b__192_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_ForAsync_34_long_long_ParallelOptions_System_FunclongCancellationTokenValueTask_1_b__194_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_ForAsync_34_long_long_ParallelOptions_System_FunclongCancellationTokenValueTask_2_b__196_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_ForAsync_34_long_long_ParallelOptions_System_FunclongCancellationTokenValueTask_3_b__198_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        CHAOS_IL2CPP_INTPTR (*_ForAsync_34_long_long_ParallelOptions_System_FunclongCancellationTokenValueTask_3_b__198_1)(
+                    CHAOS_IL2CPP_INTPTR, 
+                    CHAOS_IL2CPP_INT64, 
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_ForEachAsync_35_IEnumerableint_System_FuncintCancellationTokenValueTask_0_b__200_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
         CHAOS_IL2CPP_INTPTR (*_ForEachAsync_35_IEnumerableint_System_FuncintCancellationTokenValueTask_1_b__202_0)(
                     CHAOS_IL2CPP_INTPTR, 
                     CHAOS_IL2CPP_INT32, 
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_ForEachAsync_36_IEnumerableint_CancellationToken_System_FuncintCancellationTokenValueTask_0_b__204_0)(
                     CHAOS_IL2CPP_INTPTR
         );
         CHAOS_IL2CPP_INTPTR (*_ForEachAsync_36_IEnumerableint_CancellationToken_System_FuncintCancellationTokenValueTask_1_b__206_0)(
@@ -1207,13 +1251,87 @@ struct Functions {
                     CHAOS_IL2CPP_INT32, 
                     CHAOS_IL2CPP_INTPTR
         );
+        void (*_ForEachAsync_37_IEnumerableint_ParallelOptions_System_FuncintCancellationTokenValueTask_0_b__208_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_ForEachAsync_37_IEnumerableint_ParallelOptions_System_FuncintCancellationTokenValueTask_1_b__210_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        CHAOS_IL2CPP_INTPTR (*_ForEachAsync_37_IEnumerableint_ParallelOptions_System_FuncintCancellationTokenValueTask_1_b__210_1)(
+                    CHAOS_IL2CPP_INTPTR, 
+                    CHAOS_IL2CPP_INT32, 
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_ForEachAsync_38_IAsyncEnumerableint_System_FuncintCancellationTokenValueTask_0_b__212_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_ForEachAsync_38_IAsyncEnumerableint_System_FuncintCancellationTokenValueTask_1_b__214_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        CHAOS_IL2CPP_INTPTR (*_ForEachAsync_38_IAsyncEnumerableint_System_FuncintCancellationTokenValueTask_1_b__214_1)(
+                    CHAOS_IL2CPP_INTPTR, 
+                    CHAOS_IL2CPP_INT32, 
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_ForEachAsync_39_IAsyncEnumerableint_CancellationToken_System_FuncintCancellationTokenValueTask_0_b__216_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_ForEachAsync_39_IAsyncEnumerableint_CancellationToken_System_FuncintCancellationTokenValueTask_1_b__218_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        CHAOS_IL2CPP_INTPTR (*_ForEachAsync_39_IAsyncEnumerableint_CancellationToken_System_FuncintCancellationTokenValueTask_1_b__218_1)(
+                    CHAOS_IL2CPP_INTPTR, 
+                    CHAOS_IL2CPP_INT32, 
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_ForEachAsync_40_IAsyncEnumerableint_ParallelOptions_System_FuncintCancellationTokenValueTask_0_b__220_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_ForEachAsync_40_IAsyncEnumerableint_ParallelOptions_System_FuncintCancellationTokenValueTask_1_b__222_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        CHAOS_IL2CPP_INTPTR (*_ForEachAsync_40_IAsyncEnumerableint_ParallelOptions_System_FuncintCancellationTokenValueTask_1_b__222_1)(
+                    CHAOS_IL2CPP_INTPTR, 
+                    CHAOS_IL2CPP_INT32, 
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_ForEach_12_IEnumerableint_System_Actionint_0_b__96_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
         void (*_ForEach_12_IEnumerableint_System_Actionint_1_b__98_0)(
                     CHAOS_IL2CPP_INTPTR, 
                     CHAOS_IL2CPP_INT32
         );
+        void (*_ForEach_13_IEnumerableint_ParallelOptions_System_Actionint_0_b__100_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_ForEach_13_IEnumerableint_ParallelOptions_System_Actionint_1_b__102_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_ForEach_13_IEnumerableint_ParallelOptions_System_Actionint_1_b__102_1)(
+                    CHAOS_IL2CPP_INTPTR, 
+                    CHAOS_IL2CPP_INT32
+        );
+        void (*_ForEach_14_IEnumerableint_System_ActionintParallelLoopState_0_b__104_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
         void (*_ForEach_14_IEnumerableint_System_ActionintParallelLoopState_1_b__106_0)(
                     CHAOS_IL2CPP_INTPTR, 
                     CHAOS_IL2CPP_INT32, 
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_ForEach_15_IEnumerableint_ParallelOptions_System_ActionintParallelLoopState_0_b__108_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_ForEach_15_IEnumerableint_ParallelOptions_System_ActionintParallelLoopState_1_b__110_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_ForEach_15_IEnumerableint_ParallelOptions_System_ActionintParallelLoopState_1_b__110_1)(
+                    CHAOS_IL2CPP_INTPTR, 
+                    CHAOS_IL2CPP_INT32, 
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_ForEach_16_IEnumerableint_System_ActionintParallelLoopStatelong_0_b__112_0)(
                     CHAOS_IL2CPP_INTPTR
         );
         void (*_ForEach_16_IEnumerableint_System_ActionintParallelLoopStatelong_1_b__114_0)(
@@ -1221,6 +1339,21 @@ struct Functions {
                     CHAOS_IL2CPP_INT32, 
                     CHAOS_IL2CPP_INTPTR, 
                     CHAOS_IL2CPP_INT64
+        );
+        void (*_ForEach_17_IEnumerableint_ParallelOptions_System_ActionintParallelLoopStatelong_0_b__116_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_ForEach_17_IEnumerableint_ParallelOptions_System_ActionintParallelLoopStatelong_1_b__118_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_ForEach_17_IEnumerableint_ParallelOptions_System_ActionintParallelLoopStatelong_1_b__118_1)(
+                    CHAOS_IL2CPP_INTPTR, 
+                    CHAOS_IL2CPP_INT32, 
+                    CHAOS_IL2CPP_INTPTR, 
+                    CHAOS_IL2CPP_INT64
+        );
+        void (*_ForEach_18_IEnumerableint_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_0_b__120_0)(
+                    CHAOS_IL2CPP_INTPTR
         );
         CHAOS_IL2CPP_INT32 (*_ForEach_18_IEnumerableint_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_1_b__122_0)(
                     CHAOS_IL2CPP_INTPTR
@@ -1234,6 +1367,28 @@ struct Functions {
         void (*_ForEach_18_IEnumerableint_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_1_b__122_2)(
                     CHAOS_IL2CPP_INTPTR, 
                     CHAOS_IL2CPP_INT32
+        );
+        void (*_ForEach_19_IEnumerableint_ParallelOptions_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_0_b__124_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_ForEach_19_IEnumerableint_ParallelOptions_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_1_b__126_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        CHAOS_IL2CPP_INT32 (*_ForEach_19_IEnumerableint_ParallelOptions_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_1_b__126_1)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        CHAOS_IL2CPP_INT32 (*_ForEach_19_IEnumerableint_ParallelOptions_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_1_b__126_2)(
+                    CHAOS_IL2CPP_INTPTR, 
+                    CHAOS_IL2CPP_INT32, 
+                    CHAOS_IL2CPP_INTPTR, 
+                    CHAOS_IL2CPP_INT32
+        );
+        void (*_ForEach_19_IEnumerableint_ParallelOptions_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_1_b__126_3)(
+                    CHAOS_IL2CPP_INTPTR, 
+                    CHAOS_IL2CPP_INT32
+        );
+        void (*_ForEach_20_IEnumerableint_System_Funcint_System_FuncintParallelLoopStatelongintint_System_Actionint_0_b__128_0)(
+                    CHAOS_IL2CPP_INTPTR
         );
         CHAOS_IL2CPP_INT32 (*_ForEach_20_IEnumerableint_System_Funcint_System_FuncintParallelLoopStatelongintint_System_Actionint_1_b__130_0)(
                     CHAOS_IL2CPP_INTPTR
@@ -1249,22 +1404,347 @@ struct Functions {
                     CHAOS_IL2CPP_INTPTR, 
                     CHAOS_IL2CPP_INT32
         );
+        void (*_ForEach_21_IEnumerableint_ParallelOptions_System_Funcint_System_FuncintParallelLoopStatelongintint_System_Actionint_0_b__132_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_ForEach_21_IEnumerableint_ParallelOptions_System_Funcint_System_FuncintParallelLoopStatelongintint_System_Actionint_1_b__134_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        CHAOS_IL2CPP_INT32 (*_ForEach_21_IEnumerableint_ParallelOptions_System_Funcint_System_FuncintParallelLoopStatelongintint_System_Actionint_1_b__134_1)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        CHAOS_IL2CPP_INT32 (*_ForEach_21_IEnumerableint_ParallelOptions_System_Funcint_System_FuncintParallelLoopStatelongintint_System_Actionint_1_b__134_2)(
+                    CHAOS_IL2CPP_INTPTR, 
+                    CHAOS_IL2CPP_INT32, 
+                    CHAOS_IL2CPP_INTPTR, 
+                    CHAOS_IL2CPP_INT64, 
+                    CHAOS_IL2CPP_INT32
+        );
+        void (*_ForEach_21_IEnumerableint_ParallelOptions_System_Funcint_System_FuncintParallelLoopStatelongintint_System_Actionint_1_b__134_3)(
+                    CHAOS_IL2CPP_INTPTR, 
+                    CHAOS_IL2CPP_INT32
+        );
+        void (*_ForEach_22_Partitionerint_System_Actionint_0_b__136_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_ForEach_22_Partitionerint_System_Actionint_1_b__138_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_ForEach_22_Partitionerint_System_Actionint_1_b__138_1)(
+                    CHAOS_IL2CPP_INTPTR, 
+                    CHAOS_IL2CPP_INT32
+        );
+        void (*_ForEach_23_Partitionerint_System_ActionintParallelLoopState_0_b__140_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_ForEach_23_Partitionerint_System_ActionintParallelLoopState_1_b__142_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_ForEach_23_Partitionerint_System_ActionintParallelLoopState_1_b__142_1)(
+                    CHAOS_IL2CPP_INTPTR, 
+                    CHAOS_IL2CPP_INT32, 
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_ForEach_24_OrderablePartitionerint_System_ActionintParallelLoopStatelong_0_b__144_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_ForEach_24_OrderablePartitionerint_System_ActionintParallelLoopStatelong_1_b__146_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_ForEach_24_OrderablePartitionerint_System_ActionintParallelLoopStatelong_1_b__146_1)(
+                    CHAOS_IL2CPP_INTPTR, 
+                    CHAOS_IL2CPP_INT32, 
+                    CHAOS_IL2CPP_INTPTR, 
+                    CHAOS_IL2CPP_INT64
+        );
+        void (*_ForEach_25_Partitionerint_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_0_b__148_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_ForEach_25_Partitionerint_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_1_b__150_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        CHAOS_IL2CPP_INT32 (*_ForEach_25_Partitionerint_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_1_b__150_1)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        CHAOS_IL2CPP_INT32 (*_ForEach_25_Partitionerint_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_1_b__150_2)(
+                    CHAOS_IL2CPP_INTPTR, 
+                    CHAOS_IL2CPP_INT32, 
+                    CHAOS_IL2CPP_INTPTR, 
+                    CHAOS_IL2CPP_INT32
+        );
+        void (*_ForEach_25_Partitionerint_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_1_b__150_3)(
+                    CHAOS_IL2CPP_INTPTR, 
+                    CHAOS_IL2CPP_INT32
+        );
+        void (*_ForEach_26_OrderablePartitionerint_System_Funcint_System_FuncintParallelLoopStatelongintint_System_Actionint_0_b__152_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_ForEach_26_OrderablePartitionerint_System_Funcint_System_FuncintParallelLoopStatelongintint_System_Actionint_1_b__154_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        CHAOS_IL2CPP_INT32 (*_ForEach_26_OrderablePartitionerint_System_Funcint_System_FuncintParallelLoopStatelongintint_System_Actionint_1_b__154_1)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        CHAOS_IL2CPP_INT32 (*_ForEach_26_OrderablePartitionerint_System_Funcint_System_FuncintParallelLoopStatelongintint_System_Actionint_1_b__154_2)(
+                    CHAOS_IL2CPP_INTPTR, 
+                    CHAOS_IL2CPP_INT32, 
+                    CHAOS_IL2CPP_INTPTR, 
+                    CHAOS_IL2CPP_INT64, 
+                    CHAOS_IL2CPP_INT32
+        );
+        void (*_ForEach_26_OrderablePartitionerint_System_Funcint_System_FuncintParallelLoopStatelongintint_System_Actionint_1_b__154_3)(
+                    CHAOS_IL2CPP_INTPTR, 
+                    CHAOS_IL2CPP_INT32
+        );
+        void (*_ForEach_27_Partitionerint_ParallelOptions_System_Actionint_0_b__156_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_ForEach_27_Partitionerint_ParallelOptions_System_Actionint_1_b__158_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_ForEach_27_Partitionerint_ParallelOptions_System_Actionint_1_b__158_1)(
+                    CHAOS_IL2CPP_INTPTR, 
+                    CHAOS_IL2CPP_INT32
+        );
+        void (*_ForEach_28_Partitionerint_ParallelOptions_System_ActionintParallelLoopState_0_b__160_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_ForEach_28_Partitionerint_ParallelOptions_System_ActionintParallelLoopState_1_b__162_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_ForEach_28_Partitionerint_ParallelOptions_System_ActionintParallelLoopState_1_b__162_1)(
+                    CHAOS_IL2CPP_INTPTR, 
+                    CHAOS_IL2CPP_INT32, 
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_ForEach_29_OrderablePartitionerint_ParallelOptions_System_ActionintParallelLoopStatelong_0_b__164_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_ForEach_29_OrderablePartitionerint_ParallelOptions_System_ActionintParallelLoopStatelong_1_b__166_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_ForEach_29_OrderablePartitionerint_ParallelOptions_System_ActionintParallelLoopStatelong_1_b__166_1)(
+                    CHAOS_IL2CPP_INTPTR, 
+                    CHAOS_IL2CPP_INT32, 
+                    CHAOS_IL2CPP_INTPTR, 
+                    CHAOS_IL2CPP_INT64
+        );
+        void (*_ForEach_30_Partitionerint_ParallelOptions_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_0_b__168_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_ForEach_30_Partitionerint_ParallelOptions_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_1_b__170_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        CHAOS_IL2CPP_INT32 (*_ForEach_30_Partitionerint_ParallelOptions_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_1_b__170_1)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        CHAOS_IL2CPP_INT32 (*_ForEach_30_Partitionerint_ParallelOptions_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_1_b__170_2)(
+                    CHAOS_IL2CPP_INTPTR, 
+                    CHAOS_IL2CPP_INT32, 
+                    CHAOS_IL2CPP_INTPTR, 
+                    CHAOS_IL2CPP_INT32
+        );
+        void (*_ForEach_30_Partitionerint_ParallelOptions_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_1_b__170_3)(
+                    CHAOS_IL2CPP_INTPTR, 
+                    CHAOS_IL2CPP_INT32
+        );
+        void (*_ForEach_31_OrderablePartitionerint_ParallelOptions_System_Funcint_System_FuncintParallelLoopStatelongintint_System_Actionint_0_b__172_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_ForEach_31_OrderablePartitionerint_ParallelOptions_System_Funcint_System_FuncintParallelLoopStatelongintint_System_Actionint_1_b__174_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        CHAOS_IL2CPP_INT32 (*_ForEach_31_OrderablePartitionerint_ParallelOptions_System_Funcint_System_FuncintParallelLoopStatelongintint_System_Actionint_1_b__174_1)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        CHAOS_IL2CPP_INT32 (*_ForEach_31_OrderablePartitionerint_ParallelOptions_System_Funcint_System_FuncintParallelLoopStatelongintint_System_Actionint_1_b__174_2)(
+                    CHAOS_IL2CPP_INTPTR, 
+                    CHAOS_IL2CPP_INT32, 
+                    CHAOS_IL2CPP_INTPTR, 
+                    CHAOS_IL2CPP_INT64, 
+                    CHAOS_IL2CPP_INT32
+        );
+        void (*_ForEach_31_OrderablePartitionerint_ParallelOptions_System_Funcint_System_FuncintParallelLoopStatelongintint_System_Actionint_1_b__174_3)(
+                    CHAOS_IL2CPP_INTPTR, 
+                    CHAOS_IL2CPP_INT32
+        );
+        void (*_For_0_int_int_System_Actionint_0_b__0_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_For_0_int_int_System_Actionint_1_b__2_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_For_0_int_int_System_Actionint_2_b__4_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
         void (*_For_0_int_int_System_Actionint_3_b__6_0)(
                     CHAOS_IL2CPP_INTPTR, 
                     CHAOS_IL2CPP_INT32
         );
+        void (*_For_10_int_int_ParallelOptions_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_0_b__80_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_For_10_int_int_ParallelOptions_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_1_b__82_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_For_10_int_int_ParallelOptions_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_2_b__84_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_For_10_int_int_ParallelOptions_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_3_b__86_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        CHAOS_IL2CPP_INT32 (*_For_10_int_int_ParallelOptions_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_3_b__86_1)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        CHAOS_IL2CPP_INT32 (*_For_10_int_int_ParallelOptions_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_3_b__86_2)(
+                    CHAOS_IL2CPP_INTPTR, 
+                    CHAOS_IL2CPP_INT32, 
+                    CHAOS_IL2CPP_INTPTR, 
+                    CHAOS_IL2CPP_INT32
+        );
+        void (*_For_10_int_int_ParallelOptions_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_3_b__86_3)(
+                    CHAOS_IL2CPP_INTPTR, 
+                    CHAOS_IL2CPP_INT32
+        );
+        void (*_For_11_long_long_ParallelOptions_System_Funcint_System_FunclongParallelLoopStateintint_System_Actionint_0_b__88_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_For_11_long_long_ParallelOptions_System_Funcint_System_FunclongParallelLoopStateintint_System_Actionint_1_b__90_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_For_11_long_long_ParallelOptions_System_Funcint_System_FunclongParallelLoopStateintint_System_Actionint_2_b__92_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_For_11_long_long_ParallelOptions_System_Funcint_System_FunclongParallelLoopStateintint_System_Actionint_3_b__94_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        CHAOS_IL2CPP_INT32 (*_For_11_long_long_ParallelOptions_System_Funcint_System_FunclongParallelLoopStateintint_System_Actionint_3_b__94_1)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        CHAOS_IL2CPP_INT32 (*_For_11_long_long_ParallelOptions_System_Funcint_System_FunclongParallelLoopStateintint_System_Actionint_3_b__94_2)(
+                    CHAOS_IL2CPP_INTPTR, 
+                    CHAOS_IL2CPP_INT64, 
+                    CHAOS_IL2CPP_INTPTR, 
+                    CHAOS_IL2CPP_INT32
+        );
+        void (*_For_11_long_long_ParallelOptions_System_Funcint_System_FunclongParallelLoopStateintint_System_Actionint_3_b__94_3)(
+                    CHAOS_IL2CPP_INTPTR, 
+                    CHAOS_IL2CPP_INT32
+        );
+        void (*_For_1_long_long_System_Actionlong_0_b__8_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_For_1_long_long_System_Actionlong_1_b__10_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_For_1_long_long_System_Actionlong_2_b__12_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
         void (*_For_1_long_long_System_Actionlong_3_b__14_0)(
                     CHAOS_IL2CPP_INTPTR, 
                     CHAOS_IL2CPP_INT64
+        );
+        void (*_For_2_int_int_ParallelOptions_System_Actionint_0_b__16_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_For_2_int_int_ParallelOptions_System_Actionint_1_b__18_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_For_2_int_int_ParallelOptions_System_Actionint_2_b__20_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_For_2_int_int_ParallelOptions_System_Actionint_3_b__22_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_For_2_int_int_ParallelOptions_System_Actionint_3_b__22_1)(
+                    CHAOS_IL2CPP_INTPTR, 
+                    CHAOS_IL2CPP_INT32
+        );
+        void (*_For_3_long_long_ParallelOptions_System_Actionlong_0_b__24_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_For_3_long_long_ParallelOptions_System_Actionlong_1_b__26_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_For_3_long_long_ParallelOptions_System_Actionlong_2_b__28_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_For_3_long_long_ParallelOptions_System_Actionlong_3_b__30_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_For_3_long_long_ParallelOptions_System_Actionlong_3_b__30_1)(
+                    CHAOS_IL2CPP_INTPTR, 
+                    CHAOS_IL2CPP_INT64
+        );
+        void (*_For_4_int_int_System_ActionintParallelLoopState_0_b__32_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_For_4_int_int_System_ActionintParallelLoopState_1_b__34_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_For_4_int_int_System_ActionintParallelLoopState_2_b__36_0)(
+                    CHAOS_IL2CPP_INTPTR
         );
         void (*_For_4_int_int_System_ActionintParallelLoopState_3_b__38_0)(
                     CHAOS_IL2CPP_INTPTR, 
                     CHAOS_IL2CPP_INT32, 
                     CHAOS_IL2CPP_INTPTR
         );
+        void (*_For_5_long_long_System_ActionlongParallelLoopState_0_b__40_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_For_5_long_long_System_ActionlongParallelLoopState_1_b__42_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_For_5_long_long_System_ActionlongParallelLoopState_2_b__44_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
         void (*_For_5_long_long_System_ActionlongParallelLoopState_3_b__46_0)(
                     CHAOS_IL2CPP_INTPTR, 
                     CHAOS_IL2CPP_INT64, 
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_For_6_int_int_ParallelOptions_System_ActionintParallelLoopState_0_b__48_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_For_6_int_int_ParallelOptions_System_ActionintParallelLoopState_1_b__50_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_For_6_int_int_ParallelOptions_System_ActionintParallelLoopState_2_b__52_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_For_6_int_int_ParallelOptions_System_ActionintParallelLoopState_3_b__54_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_For_6_int_int_ParallelOptions_System_ActionintParallelLoopState_3_b__54_1)(
+                    CHAOS_IL2CPP_INTPTR, 
+                    CHAOS_IL2CPP_INT32, 
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_For_7_long_long_ParallelOptions_System_ActionlongParallelLoopState_0_b__56_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_For_7_long_long_ParallelOptions_System_ActionlongParallelLoopState_1_b__58_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_For_7_long_long_ParallelOptions_System_ActionlongParallelLoopState_2_b__60_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_For_7_long_long_ParallelOptions_System_ActionlongParallelLoopState_3_b__62_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_For_7_long_long_ParallelOptions_System_ActionlongParallelLoopState_3_b__62_1)(
+                    CHAOS_IL2CPP_INTPTR, 
+                    CHAOS_IL2CPP_INT64, 
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_For_8_int_int_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_0_b__64_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_For_8_int_int_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_1_b__66_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_For_8_int_int_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_2_b__68_0)(
                     CHAOS_IL2CPP_INTPTR
         );
         CHAOS_IL2CPP_INT32 (*_For_8_int_int_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_3_b__70_0)(
@@ -1279,6 +1759,15 @@ struct Functions {
         void (*_For_8_int_int_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_3_b__70_2)(
                     CHAOS_IL2CPP_INTPTR, 
                     CHAOS_IL2CPP_INT32
+        );
+        void (*_For_9_long_long_System_Funcint_System_FunclongParallelLoopStateintint_System_Actionint_0_b__72_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_For_9_long_long_System_Funcint_System_FunclongParallelLoopStateintint_System_Actionint_1_b__74_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*_For_9_long_long_System_Funcint_System_FunclongParallelLoopStateintint_System_Actionint_2_b__76_0)(
+                    CHAOS_IL2CPP_INTPTR
         );
         CHAOS_IL2CPP_INT32 (*_For_9_long_long_System_Funcint_System_FunclongParallelLoopStateintint_System_Actionint_3_b__78_0)(
                     CHAOS_IL2CPP_INTPTR
@@ -1576,13 +2065,20 @@ struct Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert {
                     arg_0
         );
     }
+    static inline void Throws_System_ArgumentNullException_(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_Assert.Throws_System_ArgumentNullException_(
+                    arg_0
+        );
+    }
     static inline CHAOS_IL2CPP_INT32 get_ExitCode(
     ) {
         return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_Assert.get_ExitCode(
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 28;
+    static constexpr int32_t MethodCount = 29;
 };
 
 struct Chaos_TestFramework_Sdk_Chaos_TestFramework_AssertionException {
@@ -3693,6 +4189,27 @@ struct CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Thr
                     arg_1
         );
     }
+    static inline void _ForAsync_32_long_long_System_FunclongCancellationTokenValueTask_0_b__176_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c._ForAsync_32_long_long_System_FunclongCancellationTokenValueTask_0_b__176_0(
+                    arg_0
+        );
+    }
+    static inline void _ForAsync_32_long_long_System_FunclongCancellationTokenValueTask_1_b__178_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c._ForAsync_32_long_long_System_FunclongCancellationTokenValueTask_1_b__178_0(
+                    arg_0
+        );
+    }
+    static inline void _ForAsync_32_long_long_System_FunclongCancellationTokenValueTask_2_b__180_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c._ForAsync_32_long_long_System_FunclongCancellationTokenValueTask_2_b__180_0(
+                    arg_0
+        );
+    }
     static inline CHAOS_IL2CPP_INTPTR _ForAsync_32_long_long_System_FunclongCancellationTokenValueTask_3_b__182_0(
                 CHAOS_IL2CPP_INTPTR arg_0, 
                 CHAOS_IL2CPP_INT64 arg_1, 
@@ -3702,6 +4219,27 @@ struct CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Thr
                     arg_0, 
                     arg_1, 
                     arg_2
+        );
+    }
+    static inline void _ForAsync_33_long_long_CancellationToken_System_FunclongCancellationTokenValueTask_0_b__184_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c._ForAsync_33_long_long_CancellationToken_System_FunclongCancellationTokenValueTask_0_b__184_0(
+                    arg_0
+        );
+    }
+    static inline void _ForAsync_33_long_long_CancellationToken_System_FunclongCancellationTokenValueTask_1_b__186_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c._ForAsync_33_long_long_CancellationToken_System_FunclongCancellationTokenValueTask_1_b__186_0(
+                    arg_0
+        );
+    }
+    static inline void _ForAsync_33_long_long_CancellationToken_System_FunclongCancellationTokenValueTask_2_b__188_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c._ForAsync_33_long_long_CancellationToken_System_FunclongCancellationTokenValueTask_2_b__188_0(
+                    arg_0
         );
     }
     static inline CHAOS_IL2CPP_INTPTR _ForAsync_33_long_long_CancellationToken_System_FunclongCancellationTokenValueTask_3_b__190_0(
@@ -3715,6 +4253,52 @@ struct CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Thr
                     arg_2
         );
     }
+    static inline void _ForAsync_34_long_long_ParallelOptions_System_FunclongCancellationTokenValueTask_0_b__192_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c._ForAsync_34_long_long_ParallelOptions_System_FunclongCancellationTokenValueTask_0_b__192_0(
+                    arg_0
+        );
+    }
+    static inline void _ForAsync_34_long_long_ParallelOptions_System_FunclongCancellationTokenValueTask_1_b__194_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c._ForAsync_34_long_long_ParallelOptions_System_FunclongCancellationTokenValueTask_1_b__194_0(
+                    arg_0
+        );
+    }
+    static inline void _ForAsync_34_long_long_ParallelOptions_System_FunclongCancellationTokenValueTask_2_b__196_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c._ForAsync_34_long_long_ParallelOptions_System_FunclongCancellationTokenValueTask_2_b__196_0(
+                    arg_0
+        );
+    }
+    static inline void _ForAsync_34_long_long_ParallelOptions_System_FunclongCancellationTokenValueTask_3_b__198_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c._ForAsync_34_long_long_ParallelOptions_System_FunclongCancellationTokenValueTask_3_b__198_0(
+                    arg_0
+        );
+    }
+    static inline CHAOS_IL2CPP_INTPTR _ForAsync_34_long_long_ParallelOptions_System_FunclongCancellationTokenValueTask_3_b__198_1(
+                CHAOS_IL2CPP_INTPTR arg_0, 
+                CHAOS_IL2CPP_INT64 arg_1, 
+                CHAOS_IL2CPP_INTPTR arg_2
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c._ForAsync_34_long_long_ParallelOptions_System_FunclongCancellationTokenValueTask_3_b__198_1(
+                    arg_0, 
+                    arg_1, 
+                    arg_2
+        );
+    }
+    static inline void _ForEachAsync_35_IEnumerableint_System_FuncintCancellationTokenValueTask_0_b__200_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c._ForEachAsync_35_IEnumerableint_System_FuncintCancellationTokenValueTask_0_b__200_0(
+                    arg_0
+        );
+    }
     static inline CHAOS_IL2CPP_INTPTR _ForEachAsync_35_IEnumerableint_System_FuncintCancellationTokenValueTask_1_b__202_0(
                 CHAOS_IL2CPP_INTPTR arg_0, 
                 CHAOS_IL2CPP_INT32 arg_1, 
@@ -3724,6 +4308,13 @@ struct CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Thr
                     arg_0, 
                     arg_1, 
                     arg_2
+        );
+    }
+    static inline void _ForEachAsync_36_IEnumerableint_CancellationToken_System_FuncintCancellationTokenValueTask_0_b__204_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c._ForEachAsync_36_IEnumerableint_CancellationToken_System_FuncintCancellationTokenValueTask_0_b__204_0(
+                    arg_0
         );
     }
     static inline CHAOS_IL2CPP_INTPTR _ForEachAsync_36_IEnumerableint_CancellationToken_System_FuncintCancellationTokenValueTask_1_b__206_0(
@@ -3737,6 +4328,113 @@ struct CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Thr
                     arg_2
         );
     }
+    static inline void _ForEachAsync_37_IEnumerableint_ParallelOptions_System_FuncintCancellationTokenValueTask_0_b__208_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c._ForEachAsync_37_IEnumerableint_ParallelOptions_System_FuncintCancellationTokenValueTask_0_b__208_0(
+                    arg_0
+        );
+    }
+    static inline void _ForEachAsync_37_IEnumerableint_ParallelOptions_System_FuncintCancellationTokenValueTask_1_b__210_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c._ForEachAsync_37_IEnumerableint_ParallelOptions_System_FuncintCancellationTokenValueTask_1_b__210_0(
+                    arg_0
+        );
+    }
+    static inline CHAOS_IL2CPP_INTPTR _ForEachAsync_37_IEnumerableint_ParallelOptions_System_FuncintCancellationTokenValueTask_1_b__210_1(
+                CHAOS_IL2CPP_INTPTR arg_0, 
+                CHAOS_IL2CPP_INT32 arg_1, 
+                CHAOS_IL2CPP_INTPTR arg_2
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c._ForEachAsync_37_IEnumerableint_ParallelOptions_System_FuncintCancellationTokenValueTask_1_b__210_1(
+                    arg_0, 
+                    arg_1, 
+                    arg_2
+        );
+    }
+    static inline void _ForEachAsync_38_IAsyncEnumerableint_System_FuncintCancellationTokenValueTask_0_b__212_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c._ForEachAsync_38_IAsyncEnumerableint_System_FuncintCancellationTokenValueTask_0_b__212_0(
+                    arg_0
+        );
+    }
+    static inline void _ForEachAsync_38_IAsyncEnumerableint_System_FuncintCancellationTokenValueTask_1_b__214_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c._ForEachAsync_38_IAsyncEnumerableint_System_FuncintCancellationTokenValueTask_1_b__214_0(
+                    arg_0
+        );
+    }
+    static inline CHAOS_IL2CPP_INTPTR _ForEachAsync_38_IAsyncEnumerableint_System_FuncintCancellationTokenValueTask_1_b__214_1(
+                CHAOS_IL2CPP_INTPTR arg_0, 
+                CHAOS_IL2CPP_INT32 arg_1, 
+                CHAOS_IL2CPP_INTPTR arg_2
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c._ForEachAsync_38_IAsyncEnumerableint_System_FuncintCancellationTokenValueTask_1_b__214_1(
+                    arg_0, 
+                    arg_1, 
+                    arg_2
+        );
+    }
+    static inline void _ForEachAsync_39_IAsyncEnumerableint_CancellationToken_System_FuncintCancellationTokenValueTask_0_b__216_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c._ForEachAsync_39_IAsyncEnumerableint_CancellationToken_System_FuncintCancellationTokenValueTask_0_b__216_0(
+                    arg_0
+        );
+    }
+    static inline void _ForEachAsync_39_IAsyncEnumerableint_CancellationToken_System_FuncintCancellationTokenValueTask_1_b__218_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c._ForEachAsync_39_IAsyncEnumerableint_CancellationToken_System_FuncintCancellationTokenValueTask_1_b__218_0(
+                    arg_0
+        );
+    }
+    static inline CHAOS_IL2CPP_INTPTR _ForEachAsync_39_IAsyncEnumerableint_CancellationToken_System_FuncintCancellationTokenValueTask_1_b__218_1(
+                CHAOS_IL2CPP_INTPTR arg_0, 
+                CHAOS_IL2CPP_INT32 arg_1, 
+                CHAOS_IL2CPP_INTPTR arg_2
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c._ForEachAsync_39_IAsyncEnumerableint_CancellationToken_System_FuncintCancellationTokenValueTask_1_b__218_1(
+                    arg_0, 
+                    arg_1, 
+                    arg_2
+        );
+    }
+    static inline void _ForEachAsync_40_IAsyncEnumerableint_ParallelOptions_System_FuncintCancellationTokenValueTask_0_b__220_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c._ForEachAsync_40_IAsyncEnumerableint_ParallelOptions_System_FuncintCancellationTokenValueTask_0_b__220_0(
+                    arg_0
+        );
+    }
+    static inline void _ForEachAsync_40_IAsyncEnumerableint_ParallelOptions_System_FuncintCancellationTokenValueTask_1_b__222_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c._ForEachAsync_40_IAsyncEnumerableint_ParallelOptions_System_FuncintCancellationTokenValueTask_1_b__222_0(
+                    arg_0
+        );
+    }
+    static inline CHAOS_IL2CPP_INTPTR _ForEachAsync_40_IAsyncEnumerableint_ParallelOptions_System_FuncintCancellationTokenValueTask_1_b__222_1(
+                CHAOS_IL2CPP_INTPTR arg_0, 
+                CHAOS_IL2CPP_INT32 arg_1, 
+                CHAOS_IL2CPP_INTPTR arg_2
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c._ForEachAsync_40_IAsyncEnumerableint_ParallelOptions_System_FuncintCancellationTokenValueTask_1_b__222_1(
+                    arg_0, 
+                    arg_1, 
+                    arg_2
+        );
+    }
+    static inline void _ForEach_12_IEnumerableint_System_Actionint_0_b__96_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c._ForEach_12_IEnumerableint_System_Actionint_0_b__96_0(
+                    arg_0
+        );
+    }
     static inline void _ForEach_12_IEnumerableint_System_Actionint_1_b__98_0(
                 CHAOS_IL2CPP_INTPTR arg_0, 
                 CHAOS_IL2CPP_INT32 arg_1
@@ -3744,6 +4442,36 @@ struct CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Thr
         return kFunctions.combinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c._ForEach_12_IEnumerableint_System_Actionint_1_b__98_0(
                     arg_0, 
                     arg_1
+        );
+    }
+    static inline void _ForEach_13_IEnumerableint_ParallelOptions_System_Actionint_0_b__100_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c._ForEach_13_IEnumerableint_ParallelOptions_System_Actionint_0_b__100_0(
+                    arg_0
+        );
+    }
+    static inline void _ForEach_13_IEnumerableint_ParallelOptions_System_Actionint_1_b__102_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c._ForEach_13_IEnumerableint_ParallelOptions_System_Actionint_1_b__102_0(
+                    arg_0
+        );
+    }
+    static inline void _ForEach_13_IEnumerableint_ParallelOptions_System_Actionint_1_b__102_1(
+                CHAOS_IL2CPP_INTPTR arg_0, 
+                CHAOS_IL2CPP_INT32 arg_1
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c._ForEach_13_IEnumerableint_ParallelOptions_System_Actionint_1_b__102_1(
+                    arg_0, 
+                    arg_1
+        );
+    }
+    static inline void _ForEach_14_IEnumerableint_System_ActionintParallelLoopState_0_b__104_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c._ForEach_14_IEnumerableint_System_ActionintParallelLoopState_0_b__104_0(
+                    arg_0
         );
     }
     static inline void _ForEach_14_IEnumerableint_System_ActionintParallelLoopState_1_b__106_0(
@@ -3757,6 +4485,38 @@ struct CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Thr
                     arg_2
         );
     }
+    static inline void _ForEach_15_IEnumerableint_ParallelOptions_System_ActionintParallelLoopState_0_b__108_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c._ForEach_15_IEnumerableint_ParallelOptions_System_ActionintParallelLoopState_0_b__108_0(
+                    arg_0
+        );
+    }
+    static inline void _ForEach_15_IEnumerableint_ParallelOptions_System_ActionintParallelLoopState_1_b__110_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c._ForEach_15_IEnumerableint_ParallelOptions_System_ActionintParallelLoopState_1_b__110_0(
+                    arg_0
+        );
+    }
+    static inline void _ForEach_15_IEnumerableint_ParallelOptions_System_ActionintParallelLoopState_1_b__110_1(
+                CHAOS_IL2CPP_INTPTR arg_0, 
+                CHAOS_IL2CPP_INT32 arg_1, 
+                CHAOS_IL2CPP_INTPTR arg_2
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c._ForEach_15_IEnumerableint_ParallelOptions_System_ActionintParallelLoopState_1_b__110_1(
+                    arg_0, 
+                    arg_1, 
+                    arg_2
+        );
+    }
+    static inline void _ForEach_16_IEnumerableint_System_ActionintParallelLoopStatelong_0_b__112_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c._ForEach_16_IEnumerableint_System_ActionintParallelLoopStatelong_0_b__112_0(
+                    arg_0
+        );
+    }
     static inline void _ForEach_16_IEnumerableint_System_ActionintParallelLoopStatelong_1_b__114_0(
                 CHAOS_IL2CPP_INTPTR arg_0, 
                 CHAOS_IL2CPP_INT32 arg_1, 
@@ -3768,6 +4528,40 @@ struct CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Thr
                     arg_1, 
                     arg_2, 
                     arg_3
+        );
+    }
+    static inline void _ForEach_17_IEnumerableint_ParallelOptions_System_ActionintParallelLoopStatelong_0_b__116_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c._ForEach_17_IEnumerableint_ParallelOptions_System_ActionintParallelLoopStatelong_0_b__116_0(
+                    arg_0
+        );
+    }
+    static inline void _ForEach_17_IEnumerableint_ParallelOptions_System_ActionintParallelLoopStatelong_1_b__118_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c._ForEach_17_IEnumerableint_ParallelOptions_System_ActionintParallelLoopStatelong_1_b__118_0(
+                    arg_0
+        );
+    }
+    static inline void _ForEach_17_IEnumerableint_ParallelOptions_System_ActionintParallelLoopStatelong_1_b__118_1(
+                CHAOS_IL2CPP_INTPTR arg_0, 
+                CHAOS_IL2CPP_INT32 arg_1, 
+                CHAOS_IL2CPP_INTPTR arg_2, 
+                CHAOS_IL2CPP_INT64 arg_3
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c._ForEach_17_IEnumerableint_ParallelOptions_System_ActionintParallelLoopStatelong_1_b__118_1(
+                    arg_0, 
+                    arg_1, 
+                    arg_2, 
+                    arg_3
+        );
+    }
+    static inline void _ForEach_18_IEnumerableint_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_0_b__120_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c._ForEach_18_IEnumerableint_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_0_b__120_0(
+                    arg_0
         );
     }
     static inline CHAOS_IL2CPP_INT32 _ForEach_18_IEnumerableint_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_1_b__122_0(
@@ -3797,6 +4591,56 @@ struct CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Thr
         return kFunctions.combinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c._ForEach_18_IEnumerableint_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_1_b__122_2(
                     arg_0, 
                     arg_1
+        );
+    }
+    static inline void _ForEach_19_IEnumerableint_ParallelOptions_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_0_b__124_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c._ForEach_19_IEnumerableint_ParallelOptions_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_0_b__124_0(
+                    arg_0
+        );
+    }
+    static inline void _ForEach_19_IEnumerableint_ParallelOptions_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_1_b__126_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c._ForEach_19_IEnumerableint_ParallelOptions_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_1_b__126_0(
+                    arg_0
+        );
+    }
+    static inline CHAOS_IL2CPP_INT32 _ForEach_19_IEnumerableint_ParallelOptions_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_1_b__126_1(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c._ForEach_19_IEnumerableint_ParallelOptions_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_1_b__126_1(
+                    arg_0
+        );
+    }
+    static inline CHAOS_IL2CPP_INT32 _ForEach_19_IEnumerableint_ParallelOptions_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_1_b__126_2(
+                CHAOS_IL2CPP_INTPTR arg_0, 
+                CHAOS_IL2CPP_INT32 arg_1, 
+                CHAOS_IL2CPP_INTPTR arg_2, 
+                CHAOS_IL2CPP_INT32 arg_3
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c._ForEach_19_IEnumerableint_ParallelOptions_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_1_b__126_2(
+                    arg_0, 
+                    arg_1, 
+                    arg_2, 
+                    arg_3
+        );
+    }
+    static inline void _ForEach_19_IEnumerableint_ParallelOptions_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_1_b__126_3(
+                CHAOS_IL2CPP_INTPTR arg_0, 
+                CHAOS_IL2CPP_INT32 arg_1
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c._ForEach_19_IEnumerableint_ParallelOptions_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_1_b__126_3(
+                    arg_0, 
+                    arg_1
+        );
+    }
+    static inline void _ForEach_20_IEnumerableint_System_Funcint_System_FuncintParallelLoopStatelongintint_System_Actionint_0_b__128_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c._ForEach_20_IEnumerableint_System_Funcint_System_FuncintParallelLoopStatelongintint_System_Actionint_0_b__128_0(
+                    arg_0
         );
     }
     static inline CHAOS_IL2CPP_INT32 _ForEach_20_IEnumerableint_System_Funcint_System_FuncintParallelLoopStatelongintint_System_Actionint_1_b__130_0(
@@ -3830,6 +4674,398 @@ struct CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Thr
                     arg_1
         );
     }
+    static inline void _ForEach_21_IEnumerableint_ParallelOptions_System_Funcint_System_FuncintParallelLoopStatelongintint_System_Actionint_0_b__132_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c._ForEach_21_IEnumerableint_ParallelOptions_System_Funcint_System_FuncintParallelLoopStatelongintint_System_Actionint_0_b__132_0(
+                    arg_0
+        );
+    }
+    static inline void _ForEach_21_IEnumerableint_ParallelOptions_System_Funcint_System_FuncintParallelLoopStatelongintint_System_Actionint_1_b__134_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c._ForEach_21_IEnumerableint_ParallelOptions_System_Funcint_System_FuncintParallelLoopStatelongintint_System_Actionint_1_b__134_0(
+                    arg_0
+        );
+    }
+    static inline CHAOS_IL2CPP_INT32 _ForEach_21_IEnumerableint_ParallelOptions_System_Funcint_System_FuncintParallelLoopStatelongintint_System_Actionint_1_b__134_1(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c._ForEach_21_IEnumerableint_ParallelOptions_System_Funcint_System_FuncintParallelLoopStatelongintint_System_Actionint_1_b__134_1(
+                    arg_0
+        );
+    }
+    static inline CHAOS_IL2CPP_INT32 _ForEach_21_IEnumerableint_ParallelOptions_System_Funcint_System_FuncintParallelLoopStatelongintint_System_Actionint_1_b__134_2(
+                CHAOS_IL2CPP_INTPTR arg_0, 
+                CHAOS_IL2CPP_INT32 arg_1, 
+                CHAOS_IL2CPP_INTPTR arg_2, 
+                CHAOS_IL2CPP_INT64 arg_3, 
+                CHAOS_IL2CPP_INT32 arg_4
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c._ForEach_21_IEnumerableint_ParallelOptions_System_Funcint_System_FuncintParallelLoopStatelongintint_System_Actionint_1_b__134_2(
+                    arg_0, 
+                    arg_1, 
+                    arg_2, 
+                    arg_3, 
+                    arg_4
+        );
+    }
+    static inline void _ForEach_21_IEnumerableint_ParallelOptions_System_Funcint_System_FuncintParallelLoopStatelongintint_System_Actionint_1_b__134_3(
+                CHAOS_IL2CPP_INTPTR arg_0, 
+                CHAOS_IL2CPP_INT32 arg_1
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c._ForEach_21_IEnumerableint_ParallelOptions_System_Funcint_System_FuncintParallelLoopStatelongintint_System_Actionint_1_b__134_3(
+                    arg_0, 
+                    arg_1
+        );
+    }
+    static inline void _ForEach_22_Partitionerint_System_Actionint_0_b__136_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c._ForEach_22_Partitionerint_System_Actionint_0_b__136_0(
+                    arg_0
+        );
+    }
+    static inline void _ForEach_22_Partitionerint_System_Actionint_1_b__138_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c._ForEach_22_Partitionerint_System_Actionint_1_b__138_0(
+                    arg_0
+        );
+    }
+    static inline void _ForEach_22_Partitionerint_System_Actionint_1_b__138_1(
+                CHAOS_IL2CPP_INTPTR arg_0, 
+                CHAOS_IL2CPP_INT32 arg_1
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c._ForEach_22_Partitionerint_System_Actionint_1_b__138_1(
+                    arg_0, 
+                    arg_1
+        );
+    }
+    static inline void _ForEach_23_Partitionerint_System_ActionintParallelLoopState_0_b__140_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c._ForEach_23_Partitionerint_System_ActionintParallelLoopState_0_b__140_0(
+                    arg_0
+        );
+    }
+    static inline void _ForEach_23_Partitionerint_System_ActionintParallelLoopState_1_b__142_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c._ForEach_23_Partitionerint_System_ActionintParallelLoopState_1_b__142_0(
+                    arg_0
+        );
+    }
+    static inline void _ForEach_23_Partitionerint_System_ActionintParallelLoopState_1_b__142_1(
+                CHAOS_IL2CPP_INTPTR arg_0, 
+                CHAOS_IL2CPP_INT32 arg_1, 
+                CHAOS_IL2CPP_INTPTR arg_2
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c._ForEach_23_Partitionerint_System_ActionintParallelLoopState_1_b__142_1(
+                    arg_0, 
+                    arg_1, 
+                    arg_2
+        );
+    }
+    static inline void _ForEach_24_OrderablePartitionerint_System_ActionintParallelLoopStatelong_0_b__144_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c._ForEach_24_OrderablePartitionerint_System_ActionintParallelLoopStatelong_0_b__144_0(
+                    arg_0
+        );
+    }
+    static inline void _ForEach_24_OrderablePartitionerint_System_ActionintParallelLoopStatelong_1_b__146_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c._ForEach_24_OrderablePartitionerint_System_ActionintParallelLoopStatelong_1_b__146_0(
+                    arg_0
+        );
+    }
+    static inline void _ForEach_24_OrderablePartitionerint_System_ActionintParallelLoopStatelong_1_b__146_1(
+                CHAOS_IL2CPP_INTPTR arg_0, 
+                CHAOS_IL2CPP_INT32 arg_1, 
+                CHAOS_IL2CPP_INTPTR arg_2, 
+                CHAOS_IL2CPP_INT64 arg_3
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c._ForEach_24_OrderablePartitionerint_System_ActionintParallelLoopStatelong_1_b__146_1(
+                    arg_0, 
+                    arg_1, 
+                    arg_2, 
+                    arg_3
+        );
+    }
+    static inline void _ForEach_25_Partitionerint_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_0_b__148_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c._ForEach_25_Partitionerint_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_0_b__148_0(
+                    arg_0
+        );
+    }
+    static inline void _ForEach_25_Partitionerint_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_1_b__150_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c._ForEach_25_Partitionerint_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_1_b__150_0(
+                    arg_0
+        );
+    }
+    static inline CHAOS_IL2CPP_INT32 _ForEach_25_Partitionerint_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_1_b__150_1(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c._ForEach_25_Partitionerint_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_1_b__150_1(
+                    arg_0
+        );
+    }
+    static inline CHAOS_IL2CPP_INT32 _ForEach_25_Partitionerint_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_1_b__150_2(
+                CHAOS_IL2CPP_INTPTR arg_0, 
+                CHAOS_IL2CPP_INT32 arg_1, 
+                CHAOS_IL2CPP_INTPTR arg_2, 
+                CHAOS_IL2CPP_INT32 arg_3
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c._ForEach_25_Partitionerint_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_1_b__150_2(
+                    arg_0, 
+                    arg_1, 
+                    arg_2, 
+                    arg_3
+        );
+    }
+    static inline void _ForEach_25_Partitionerint_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_1_b__150_3(
+                CHAOS_IL2CPP_INTPTR arg_0, 
+                CHAOS_IL2CPP_INT32 arg_1
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c._ForEach_25_Partitionerint_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_1_b__150_3(
+                    arg_0, 
+                    arg_1
+        );
+    }
+    static inline void _ForEach_26_OrderablePartitionerint_System_Funcint_System_FuncintParallelLoopStatelongintint_System_Actionint_0_b__152_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c._ForEach_26_OrderablePartitionerint_System_Funcint_System_FuncintParallelLoopStatelongintint_System_Actionint_0_b__152_0(
+                    arg_0
+        );
+    }
+    static inline void _ForEach_26_OrderablePartitionerint_System_Funcint_System_FuncintParallelLoopStatelongintint_System_Actionint_1_b__154_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c._ForEach_26_OrderablePartitionerint_System_Funcint_System_FuncintParallelLoopStatelongintint_System_Actionint_1_b__154_0(
+                    arg_0
+        );
+    }
+    static inline CHAOS_IL2CPP_INT32 _ForEach_26_OrderablePartitionerint_System_Funcint_System_FuncintParallelLoopStatelongintint_System_Actionint_1_b__154_1(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c._ForEach_26_OrderablePartitionerint_System_Funcint_System_FuncintParallelLoopStatelongintint_System_Actionint_1_b__154_1(
+                    arg_0
+        );
+    }
+    static inline CHAOS_IL2CPP_INT32 _ForEach_26_OrderablePartitionerint_System_Funcint_System_FuncintParallelLoopStatelongintint_System_Actionint_1_b__154_2(
+                CHAOS_IL2CPP_INTPTR arg_0, 
+                CHAOS_IL2CPP_INT32 arg_1, 
+                CHAOS_IL2CPP_INTPTR arg_2, 
+                CHAOS_IL2CPP_INT64 arg_3, 
+                CHAOS_IL2CPP_INT32 arg_4
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c._ForEach_26_OrderablePartitionerint_System_Funcint_System_FuncintParallelLoopStatelongintint_System_Actionint_1_b__154_2(
+                    arg_0, 
+                    arg_1, 
+                    arg_2, 
+                    arg_3, 
+                    arg_4
+        );
+    }
+    static inline void _ForEach_26_OrderablePartitionerint_System_Funcint_System_FuncintParallelLoopStatelongintint_System_Actionint_1_b__154_3(
+                CHAOS_IL2CPP_INTPTR arg_0, 
+                CHAOS_IL2CPP_INT32 arg_1
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c._ForEach_26_OrderablePartitionerint_System_Funcint_System_FuncintParallelLoopStatelongintint_System_Actionint_1_b__154_3(
+                    arg_0, 
+                    arg_1
+        );
+    }
+    static inline void _ForEach_27_Partitionerint_ParallelOptions_System_Actionint_0_b__156_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c._ForEach_27_Partitionerint_ParallelOptions_System_Actionint_0_b__156_0(
+                    arg_0
+        );
+    }
+    static inline void _ForEach_27_Partitionerint_ParallelOptions_System_Actionint_1_b__158_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c._ForEach_27_Partitionerint_ParallelOptions_System_Actionint_1_b__158_0(
+                    arg_0
+        );
+    }
+    static inline void _ForEach_27_Partitionerint_ParallelOptions_System_Actionint_1_b__158_1(
+                CHAOS_IL2CPP_INTPTR arg_0, 
+                CHAOS_IL2CPP_INT32 arg_1
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c._ForEach_27_Partitionerint_ParallelOptions_System_Actionint_1_b__158_1(
+                    arg_0, 
+                    arg_1
+        );
+    }
+    static inline void _ForEach_28_Partitionerint_ParallelOptions_System_ActionintParallelLoopState_0_b__160_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c._ForEach_28_Partitionerint_ParallelOptions_System_ActionintParallelLoopState_0_b__160_0(
+                    arg_0
+        );
+    }
+    static inline void _ForEach_28_Partitionerint_ParallelOptions_System_ActionintParallelLoopState_1_b__162_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c._ForEach_28_Partitionerint_ParallelOptions_System_ActionintParallelLoopState_1_b__162_0(
+                    arg_0
+        );
+    }
+    static inline void _ForEach_28_Partitionerint_ParallelOptions_System_ActionintParallelLoopState_1_b__162_1(
+                CHAOS_IL2CPP_INTPTR arg_0, 
+                CHAOS_IL2CPP_INT32 arg_1, 
+                CHAOS_IL2CPP_INTPTR arg_2
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c._ForEach_28_Partitionerint_ParallelOptions_System_ActionintParallelLoopState_1_b__162_1(
+                    arg_0, 
+                    arg_1, 
+                    arg_2
+        );
+    }
+    static inline void _ForEach_29_OrderablePartitionerint_ParallelOptions_System_ActionintParallelLoopStatelong_0_b__164_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c._ForEach_29_OrderablePartitionerint_ParallelOptions_System_ActionintParallelLoopStatelong_0_b__164_0(
+                    arg_0
+        );
+    }
+    static inline void _ForEach_29_OrderablePartitionerint_ParallelOptions_System_ActionintParallelLoopStatelong_1_b__166_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c._ForEach_29_OrderablePartitionerint_ParallelOptions_System_ActionintParallelLoopStatelong_1_b__166_0(
+                    arg_0
+        );
+    }
+    static inline void _ForEach_29_OrderablePartitionerint_ParallelOptions_System_ActionintParallelLoopStatelong_1_b__166_1(
+                CHAOS_IL2CPP_INTPTR arg_0, 
+                CHAOS_IL2CPP_INT32 arg_1, 
+                CHAOS_IL2CPP_INTPTR arg_2, 
+                CHAOS_IL2CPP_INT64 arg_3
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c._ForEach_29_OrderablePartitionerint_ParallelOptions_System_ActionintParallelLoopStatelong_1_b__166_1(
+                    arg_0, 
+                    arg_1, 
+                    arg_2, 
+                    arg_3
+        );
+    }
+    static inline void _ForEach_30_Partitionerint_ParallelOptions_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_0_b__168_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c._ForEach_30_Partitionerint_ParallelOptions_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_0_b__168_0(
+                    arg_0
+        );
+    }
+    static inline void _ForEach_30_Partitionerint_ParallelOptions_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_1_b__170_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c._ForEach_30_Partitionerint_ParallelOptions_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_1_b__170_0(
+                    arg_0
+        );
+    }
+    static inline CHAOS_IL2CPP_INT32 _ForEach_30_Partitionerint_ParallelOptions_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_1_b__170_1(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c._ForEach_30_Partitionerint_ParallelOptions_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_1_b__170_1(
+                    arg_0
+        );
+    }
+    static inline CHAOS_IL2CPP_INT32 _ForEach_30_Partitionerint_ParallelOptions_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_1_b__170_2(
+                CHAOS_IL2CPP_INTPTR arg_0, 
+                CHAOS_IL2CPP_INT32 arg_1, 
+                CHAOS_IL2CPP_INTPTR arg_2, 
+                CHAOS_IL2CPP_INT32 arg_3
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c._ForEach_30_Partitionerint_ParallelOptions_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_1_b__170_2(
+                    arg_0, 
+                    arg_1, 
+                    arg_2, 
+                    arg_3
+        );
+    }
+    static inline void _ForEach_30_Partitionerint_ParallelOptions_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_1_b__170_3(
+                CHAOS_IL2CPP_INTPTR arg_0, 
+                CHAOS_IL2CPP_INT32 arg_1
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c._ForEach_30_Partitionerint_ParallelOptions_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_1_b__170_3(
+                    arg_0, 
+                    arg_1
+        );
+    }
+    static inline void _ForEach_31_OrderablePartitionerint_ParallelOptions_System_Funcint_System_FuncintParallelLoopStatelongintint_System_Actionint_0_b__172_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c._ForEach_31_OrderablePartitionerint_ParallelOptions_System_Funcint_System_FuncintParallelLoopStatelongintint_System_Actionint_0_b__172_0(
+                    arg_0
+        );
+    }
+    static inline void _ForEach_31_OrderablePartitionerint_ParallelOptions_System_Funcint_System_FuncintParallelLoopStatelongintint_System_Actionint_1_b__174_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c._ForEach_31_OrderablePartitionerint_ParallelOptions_System_Funcint_System_FuncintParallelLoopStatelongintint_System_Actionint_1_b__174_0(
+                    arg_0
+        );
+    }
+    static inline CHAOS_IL2CPP_INT32 _ForEach_31_OrderablePartitionerint_ParallelOptions_System_Funcint_System_FuncintParallelLoopStatelongintint_System_Actionint_1_b__174_1(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c._ForEach_31_OrderablePartitionerint_ParallelOptions_System_Funcint_System_FuncintParallelLoopStatelongintint_System_Actionint_1_b__174_1(
+                    arg_0
+        );
+    }
+    static inline CHAOS_IL2CPP_INT32 _ForEach_31_OrderablePartitionerint_ParallelOptions_System_Funcint_System_FuncintParallelLoopStatelongintint_System_Actionint_1_b__174_2(
+                CHAOS_IL2CPP_INTPTR arg_0, 
+                CHAOS_IL2CPP_INT32 arg_1, 
+                CHAOS_IL2CPP_INTPTR arg_2, 
+                CHAOS_IL2CPP_INT64 arg_3, 
+                CHAOS_IL2CPP_INT32 arg_4
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c._ForEach_31_OrderablePartitionerint_ParallelOptions_System_Funcint_System_FuncintParallelLoopStatelongintint_System_Actionint_1_b__174_2(
+                    arg_0, 
+                    arg_1, 
+                    arg_2, 
+                    arg_3, 
+                    arg_4
+        );
+    }
+    static inline void _ForEach_31_OrderablePartitionerint_ParallelOptions_System_Funcint_System_FuncintParallelLoopStatelongintint_System_Actionint_1_b__174_3(
+                CHAOS_IL2CPP_INTPTR arg_0, 
+                CHAOS_IL2CPP_INT32 arg_1
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c._ForEach_31_OrderablePartitionerint_ParallelOptions_System_Funcint_System_FuncintParallelLoopStatelongintint_System_Actionint_1_b__174_3(
+                    arg_0, 
+                    arg_1
+        );
+    }
+    static inline void _For_0_int_int_System_Actionint_0_b__0_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c._For_0_int_int_System_Actionint_0_b__0_0(
+                    arg_0
+        );
+    }
+    static inline void _For_0_int_int_System_Actionint_1_b__2_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c._For_0_int_int_System_Actionint_1_b__2_0(
+                    arg_0
+        );
+    }
+    static inline void _For_0_int_int_System_Actionint_2_b__4_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c._For_0_int_int_System_Actionint_2_b__4_0(
+                    arg_0
+        );
+    }
     static inline void _For_0_int_int_System_Actionint_3_b__6_0(
                 CHAOS_IL2CPP_INTPTR arg_0, 
                 CHAOS_IL2CPP_INT32 arg_1
@@ -3839,6 +5075,141 @@ struct CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Thr
                     arg_1
         );
     }
+    static inline void _For_10_int_int_ParallelOptions_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_0_b__80_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c._For_10_int_int_ParallelOptions_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_0_b__80_0(
+                    arg_0
+        );
+    }
+    static inline void _For_10_int_int_ParallelOptions_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_1_b__82_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c._For_10_int_int_ParallelOptions_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_1_b__82_0(
+                    arg_0
+        );
+    }
+    static inline void _For_10_int_int_ParallelOptions_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_2_b__84_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c._For_10_int_int_ParallelOptions_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_2_b__84_0(
+                    arg_0
+        );
+    }
+    static inline void _For_10_int_int_ParallelOptions_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_3_b__86_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c._For_10_int_int_ParallelOptions_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_3_b__86_0(
+                    arg_0
+        );
+    }
+    static inline CHAOS_IL2CPP_INT32 _For_10_int_int_ParallelOptions_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_3_b__86_1(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c._For_10_int_int_ParallelOptions_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_3_b__86_1(
+                    arg_0
+        );
+    }
+    static inline CHAOS_IL2CPP_INT32 _For_10_int_int_ParallelOptions_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_3_b__86_2(
+                CHAOS_IL2CPP_INTPTR arg_0, 
+                CHAOS_IL2CPP_INT32 arg_1, 
+                CHAOS_IL2CPP_INTPTR arg_2, 
+                CHAOS_IL2CPP_INT32 arg_3
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c._For_10_int_int_ParallelOptions_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_3_b__86_2(
+                    arg_0, 
+                    arg_1, 
+                    arg_2, 
+                    arg_3
+        );
+    }
+    static inline void _For_10_int_int_ParallelOptions_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_3_b__86_3(
+                CHAOS_IL2CPP_INTPTR arg_0, 
+                CHAOS_IL2CPP_INT32 arg_1
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c._For_10_int_int_ParallelOptions_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_3_b__86_3(
+                    arg_0, 
+                    arg_1
+        );
+    }
+    static inline void _For_11_long_long_ParallelOptions_System_Funcint_System_FunclongParallelLoopStateintint_System_Actionint_0_b__88_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c._For_11_long_long_ParallelOptions_System_Funcint_System_FunclongParallelLoopStateintint_System_Actionint_0_b__88_0(
+                    arg_0
+        );
+    }
+    static inline void _For_11_long_long_ParallelOptions_System_Funcint_System_FunclongParallelLoopStateintint_System_Actionint_1_b__90_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c._For_11_long_long_ParallelOptions_System_Funcint_System_FunclongParallelLoopStateintint_System_Actionint_1_b__90_0(
+                    arg_0
+        );
+    }
+    static inline void _For_11_long_long_ParallelOptions_System_Funcint_System_FunclongParallelLoopStateintint_System_Actionint_2_b__92_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c._For_11_long_long_ParallelOptions_System_Funcint_System_FunclongParallelLoopStateintint_System_Actionint_2_b__92_0(
+                    arg_0
+        );
+    }
+    static inline void _For_11_long_long_ParallelOptions_System_Funcint_System_FunclongParallelLoopStateintint_System_Actionint_3_b__94_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c._For_11_long_long_ParallelOptions_System_Funcint_System_FunclongParallelLoopStateintint_System_Actionint_3_b__94_0(
+                    arg_0
+        );
+    }
+    static inline CHAOS_IL2CPP_INT32 _For_11_long_long_ParallelOptions_System_Funcint_System_FunclongParallelLoopStateintint_System_Actionint_3_b__94_1(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c._For_11_long_long_ParallelOptions_System_Funcint_System_FunclongParallelLoopStateintint_System_Actionint_3_b__94_1(
+                    arg_0
+        );
+    }
+    static inline CHAOS_IL2CPP_INT32 _For_11_long_long_ParallelOptions_System_Funcint_System_FunclongParallelLoopStateintint_System_Actionint_3_b__94_2(
+                CHAOS_IL2CPP_INTPTR arg_0, 
+                CHAOS_IL2CPP_INT64 arg_1, 
+                CHAOS_IL2CPP_INTPTR arg_2, 
+                CHAOS_IL2CPP_INT32 arg_3
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c._For_11_long_long_ParallelOptions_System_Funcint_System_FunclongParallelLoopStateintint_System_Actionint_3_b__94_2(
+                    arg_0, 
+                    arg_1, 
+                    arg_2, 
+                    arg_3
+        );
+    }
+    static inline void _For_11_long_long_ParallelOptions_System_Funcint_System_FunclongParallelLoopStateintint_System_Actionint_3_b__94_3(
+                CHAOS_IL2CPP_INTPTR arg_0, 
+                CHAOS_IL2CPP_INT32 arg_1
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c._For_11_long_long_ParallelOptions_System_Funcint_System_FunclongParallelLoopStateintint_System_Actionint_3_b__94_3(
+                    arg_0, 
+                    arg_1
+        );
+    }
+    static inline void _For_1_long_long_System_Actionlong_0_b__8_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c._For_1_long_long_System_Actionlong_0_b__8_0(
+                    arg_0
+        );
+    }
+    static inline void _For_1_long_long_System_Actionlong_1_b__10_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c._For_1_long_long_System_Actionlong_1_b__10_0(
+                    arg_0
+        );
+    }
+    static inline void _For_1_long_long_System_Actionlong_2_b__12_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c._For_1_long_long_System_Actionlong_2_b__12_0(
+                    arg_0
+        );
+    }
     static inline void _For_1_long_long_System_Actionlong_3_b__14_0(
                 CHAOS_IL2CPP_INTPTR arg_0, 
                 CHAOS_IL2CPP_INT64 arg_1
@@ -3846,6 +5217,101 @@ struct CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Thr
         return kFunctions.combinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c._For_1_long_long_System_Actionlong_3_b__14_0(
                     arg_0, 
                     arg_1
+        );
+    }
+    static inline void _For_2_int_int_ParallelOptions_System_Actionint_0_b__16_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c._For_2_int_int_ParallelOptions_System_Actionint_0_b__16_0(
+                    arg_0
+        );
+    }
+    static inline void _For_2_int_int_ParallelOptions_System_Actionint_1_b__18_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c._For_2_int_int_ParallelOptions_System_Actionint_1_b__18_0(
+                    arg_0
+        );
+    }
+    static inline void _For_2_int_int_ParallelOptions_System_Actionint_2_b__20_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c._For_2_int_int_ParallelOptions_System_Actionint_2_b__20_0(
+                    arg_0
+        );
+    }
+    static inline void _For_2_int_int_ParallelOptions_System_Actionint_3_b__22_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c._For_2_int_int_ParallelOptions_System_Actionint_3_b__22_0(
+                    arg_0
+        );
+    }
+    static inline void _For_2_int_int_ParallelOptions_System_Actionint_3_b__22_1(
+                CHAOS_IL2CPP_INTPTR arg_0, 
+                CHAOS_IL2CPP_INT32 arg_1
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c._For_2_int_int_ParallelOptions_System_Actionint_3_b__22_1(
+                    arg_0, 
+                    arg_1
+        );
+    }
+    static inline void _For_3_long_long_ParallelOptions_System_Actionlong_0_b__24_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c._For_3_long_long_ParallelOptions_System_Actionlong_0_b__24_0(
+                    arg_0
+        );
+    }
+    static inline void _For_3_long_long_ParallelOptions_System_Actionlong_1_b__26_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c._For_3_long_long_ParallelOptions_System_Actionlong_1_b__26_0(
+                    arg_0
+        );
+    }
+    static inline void _For_3_long_long_ParallelOptions_System_Actionlong_2_b__28_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c._For_3_long_long_ParallelOptions_System_Actionlong_2_b__28_0(
+                    arg_0
+        );
+    }
+    static inline void _For_3_long_long_ParallelOptions_System_Actionlong_3_b__30_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c._For_3_long_long_ParallelOptions_System_Actionlong_3_b__30_0(
+                    arg_0
+        );
+    }
+    static inline void _For_3_long_long_ParallelOptions_System_Actionlong_3_b__30_1(
+                CHAOS_IL2CPP_INTPTR arg_0, 
+                CHAOS_IL2CPP_INT64 arg_1
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c._For_3_long_long_ParallelOptions_System_Actionlong_3_b__30_1(
+                    arg_0, 
+                    arg_1
+        );
+    }
+    static inline void _For_4_int_int_System_ActionintParallelLoopState_0_b__32_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c._For_4_int_int_System_ActionintParallelLoopState_0_b__32_0(
+                    arg_0
+        );
+    }
+    static inline void _For_4_int_int_System_ActionintParallelLoopState_1_b__34_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c._For_4_int_int_System_ActionintParallelLoopState_1_b__34_0(
+                    arg_0
+        );
+    }
+    static inline void _For_4_int_int_System_ActionintParallelLoopState_2_b__36_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c._For_4_int_int_System_ActionintParallelLoopState_2_b__36_0(
+                    arg_0
         );
     }
     static inline void _For_4_int_int_System_ActionintParallelLoopState_3_b__38_0(
@@ -3859,6 +5325,27 @@ struct CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Thr
                     arg_2
         );
     }
+    static inline void _For_5_long_long_System_ActionlongParallelLoopState_0_b__40_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c._For_5_long_long_System_ActionlongParallelLoopState_0_b__40_0(
+                    arg_0
+        );
+    }
+    static inline void _For_5_long_long_System_ActionlongParallelLoopState_1_b__42_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c._For_5_long_long_System_ActionlongParallelLoopState_1_b__42_0(
+                    arg_0
+        );
+    }
+    static inline void _For_5_long_long_System_ActionlongParallelLoopState_2_b__44_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c._For_5_long_long_System_ActionlongParallelLoopState_2_b__44_0(
+                    arg_0
+        );
+    }
     static inline void _For_5_long_long_System_ActionlongParallelLoopState_3_b__46_0(
                 CHAOS_IL2CPP_INTPTR arg_0, 
                 CHAOS_IL2CPP_INT64 arg_1, 
@@ -3868,6 +5355,105 @@ struct CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Thr
                     arg_0, 
                     arg_1, 
                     arg_2
+        );
+    }
+    static inline void _For_6_int_int_ParallelOptions_System_ActionintParallelLoopState_0_b__48_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c._For_6_int_int_ParallelOptions_System_ActionintParallelLoopState_0_b__48_0(
+                    arg_0
+        );
+    }
+    static inline void _For_6_int_int_ParallelOptions_System_ActionintParallelLoopState_1_b__50_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c._For_6_int_int_ParallelOptions_System_ActionintParallelLoopState_1_b__50_0(
+                    arg_0
+        );
+    }
+    static inline void _For_6_int_int_ParallelOptions_System_ActionintParallelLoopState_2_b__52_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c._For_6_int_int_ParallelOptions_System_ActionintParallelLoopState_2_b__52_0(
+                    arg_0
+        );
+    }
+    static inline void _For_6_int_int_ParallelOptions_System_ActionintParallelLoopState_3_b__54_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c._For_6_int_int_ParallelOptions_System_ActionintParallelLoopState_3_b__54_0(
+                    arg_0
+        );
+    }
+    static inline void _For_6_int_int_ParallelOptions_System_ActionintParallelLoopState_3_b__54_1(
+                CHAOS_IL2CPP_INTPTR arg_0, 
+                CHAOS_IL2CPP_INT32 arg_1, 
+                CHAOS_IL2CPP_INTPTR arg_2
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c._For_6_int_int_ParallelOptions_System_ActionintParallelLoopState_3_b__54_1(
+                    arg_0, 
+                    arg_1, 
+                    arg_2
+        );
+    }
+    static inline void _For_7_long_long_ParallelOptions_System_ActionlongParallelLoopState_0_b__56_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c._For_7_long_long_ParallelOptions_System_ActionlongParallelLoopState_0_b__56_0(
+                    arg_0
+        );
+    }
+    static inline void _For_7_long_long_ParallelOptions_System_ActionlongParallelLoopState_1_b__58_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c._For_7_long_long_ParallelOptions_System_ActionlongParallelLoopState_1_b__58_0(
+                    arg_0
+        );
+    }
+    static inline void _For_7_long_long_ParallelOptions_System_ActionlongParallelLoopState_2_b__60_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c._For_7_long_long_ParallelOptions_System_ActionlongParallelLoopState_2_b__60_0(
+                    arg_0
+        );
+    }
+    static inline void _For_7_long_long_ParallelOptions_System_ActionlongParallelLoopState_3_b__62_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c._For_7_long_long_ParallelOptions_System_ActionlongParallelLoopState_3_b__62_0(
+                    arg_0
+        );
+    }
+    static inline void _For_7_long_long_ParallelOptions_System_ActionlongParallelLoopState_3_b__62_1(
+                CHAOS_IL2CPP_INTPTR arg_0, 
+                CHAOS_IL2CPP_INT64 arg_1, 
+                CHAOS_IL2CPP_INTPTR arg_2
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c._For_7_long_long_ParallelOptions_System_ActionlongParallelLoopState_3_b__62_1(
+                    arg_0, 
+                    arg_1, 
+                    arg_2
+        );
+    }
+    static inline void _For_8_int_int_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_0_b__64_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c._For_8_int_int_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_0_b__64_0(
+                    arg_0
+        );
+    }
+    static inline void _For_8_int_int_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_1_b__66_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c._For_8_int_int_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_1_b__66_0(
+                    arg_0
+        );
+    }
+    static inline void _For_8_int_int_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_2_b__68_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c._For_8_int_int_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_2_b__68_0(
+                    arg_0
         );
     }
     static inline CHAOS_IL2CPP_INT32 _For_8_int_int_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_3_b__70_0(
@@ -3897,6 +5483,27 @@ struct CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Thr
         return kFunctions.combinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c._For_8_int_int_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_3_b__70_2(
                     arg_0, 
                     arg_1
+        );
+    }
+    static inline void _For_9_long_long_System_Funcint_System_FunclongParallelLoopStateintint_System_Actionint_0_b__72_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c._For_9_long_long_System_Funcint_System_FunclongParallelLoopStateintint_System_Actionint_0_b__72_0(
+                    arg_0
+        );
+    }
+    static inline void _For_9_long_long_System_Funcint_System_FunclongParallelLoopStateintint_System_Actionint_1_b__74_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c._For_9_long_long_System_Funcint_System_FunclongParallelLoopStateintint_System_Actionint_1_b__74_0(
+                    arg_0
+        );
+    }
+    static inline void _For_9_long_long_System_Funcint_System_FunclongParallelLoopStateintint_System_Actionint_2_b__76_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c._For_9_long_long_System_Funcint_System_FunclongParallelLoopStateintint_System_Actionint_2_b__76_0(
+                    arg_0
         );
     }
     static inline CHAOS_IL2CPP_INT32 _For_9_long_long_System_Funcint_System_FunclongParallelLoopStateintint_System_Actionint_3_b__78_0(
@@ -3929,7 +5536,7 @@ struct CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Thr
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 90;
+    static constexpr int32_t MethodCount = 229;
 };
 
 

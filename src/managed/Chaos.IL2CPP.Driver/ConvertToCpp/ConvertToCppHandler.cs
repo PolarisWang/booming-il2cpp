@@ -210,7 +210,7 @@ internal static class ConvertToCppHandler
             {
                 var asmOutput = result.OutputRootPath;
                 var asmEmitter = new FullAssemblyEmitter();
-                var asmEmitResult = asmEmitter.Emit(result, asmOutput, config.Mode, subjectMethods, result.BridgeRedirectMap);
+                var asmEmitResult = asmEmitter.Emit(result, asmOutput, config.Mode, subjectMethods, result.BridgeRedirectMap, result.BridgeCompiledMethods);
                 totalFiles += asmEmitResult.GeneratedSources.Count;
                 emitResults.Add(asmEmitResult);
             }
