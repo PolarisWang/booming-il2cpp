@@ -257,6 +257,18 @@ public sealed class BridgeAotCompiler
             return null;
         }
 
+        // Decode method signature to get parameter types
+        var sig = md.DecodeSignature(new SigTypeProvider(meta, comp.AssemblyName), default);
+        var parameters = new List<ManagedParameterModel>();
+        for (int pi = 0; pi < sig.ParameterTypes.Length; pi++)
+        {
+            parameters.Add(new ManagedParameterModel
+            {
+                Name = $"p{pi}",
+                Type = sig.ParameterTypes[pi],
+            });
+        }
+
         var mm = new ManagedMethodModel
         {
             AssemblyName = comp.AssemblyName,
@@ -270,7 +282,7 @@ public sealed class BridgeAotCompiler
             IsStatic = (md.Attributes & MethodAttributes.Static) != 0,
             IsVirtual = (md.Attributes & MethodAttributes.Virtual) != 0,
             MetadataToken = MetadataTokens.GetToken(mh),
-            Parameters = Array.Empty<ManagedParameterModel>(),
+            Parameters = parameters,
             Body = new ManagedMethodBodyModel
             {
                 ExceptionRegions = Array.Empty<ManagedExceptionRegionModel>(),
@@ -456,26 +468,20 @@ public sealed class BridgeAotCompiler
             if (File.Exists(cand)) { _assemblyCache[assemblyName] = cand; return cand; }
         }
 
-        // Search project-local paths for test framework DLLs
-        var subjectsDir = Path.GetDirectoryName(typeof(object).Assembly.Location);
-        // Try the subjects directory next to the input DLL
-        try
+        // Search the subjects directory (alongside CombinedSubjects.dll)
+        // for test framework DLLs like Chaos.TestFramework.Sdk.
+        var baseDir = AppContext.BaseDirectory;
+        if (baseDir != null)
         {
-            var probe = new[] {
-                Path.Combine(AppContext.BaseDirectory, "..", "..", "..", "..", "..", "foundation-dll"),
-                AppContext.BaseDirectory,
-            };
-            foreach (var baseDir in probe)
+            var subjectsDir = Path.Combine(baseDir, "..", "..", "..", "..", "..",
+                "foundation-dll", "System.Text.Json", "chunks", "text-json", "managed", "subjects");
+            var fullDir = Path.GetFullPath(subjectsDir);
+            if (Directory.Exists(fullDir))
             {
-                var dir = Path.GetFullPath(baseDir);
-                if (Directory.Exists(dir))
-                {
-                    foreach (var dll in Directory.GetFiles(dir, $"{assemblyName}.dll", SearchOption.AllDirectories))
-                        return _assemblyCache[assemblyName] = dll;
-                }
+                var cand = Path.Combine(fullDir, $"{assemblyName}.dll");
+                if (File.Exists(cand)) { _assemblyCache[assemblyName] = cand; return cand; }
             }
         }
-        catch { }
 
         return null;
     }

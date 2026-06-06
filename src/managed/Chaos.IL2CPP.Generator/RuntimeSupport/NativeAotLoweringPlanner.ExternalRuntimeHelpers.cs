@@ -68,15 +68,7 @@ public sealed partial class NativeAotLoweringPlanner
 			return cached != null;
 		}
 
-		// P0: Check cache first
-		if (_externalRuntimeHelperCache.TryGetValue(callee, out var cached))
-		{
-			helperDefinition = cached;
-			return cached != null;
-		}
-
-		// === Generic shape dispatch via Registry (runs first -- GenericShapeDescriptor resolves
-		//     complex shapes with custom body logic that cannot be expressed as a simple forward) ===
+		// === Generic shape dispatch via Registry ===
 		if (_shapeRegistry.TryMatchGenericShape(callee, out var genericDescriptor, out var typeArgs))
 		{
 			var resolution = genericDescriptor.Resolver(this, callee, typeArgs);

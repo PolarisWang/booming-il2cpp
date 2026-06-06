@@ -95,20 +95,11 @@ internal static class IlBytecodeDecoder
                             continue;
                         }
                         // Resolve field SubjectId for field-bearing instructions (ldfld, stsfld, etc.)
+                        // Store in Reference for informational purposes only — the actual
+                        // field access is handled by the emitter via the instruction opcode.
                         if (IsFieldInstruction(name))
                         {
-                            var fieldId = ResolveToken(reader, assemblyName, token);
-                            list.Add(new ManagedInstructionModel
-                            {
-                                Op = name, Operand = token, IlOffset = baseOffset + start,
-                                Reference = new ManagedInstructionReference
-                                {
-                                    AssemblyName = assemblyName,
-                                    SubjectKind = "field",
-                                    SubjectId = fieldId.SubjectId,
-                                },
-                            });
-                            continue;
+                            operand = token; break;
                         }
                         operand = token; break;
                     }

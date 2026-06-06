@@ -213,7 +213,6 @@ public sealed partial class NativeAotLoweringPlanner
     {
         int nextIndex = _externalRuntimeSubjects.Count;
         var _seenCallees = new HashSet<string>(StringComparer.Ordinal);
-        var _seenCallees = new HashSet<string>(StringComparer.Ordinal);
         foreach (var method in reachableMethods)
         {
             foreach (var instruction in method.Instructions)
@@ -282,6 +281,7 @@ public sealed partial class NativeAotLoweringPlanner
         IReadOnlyList<AotCoreIrMethodArtifact> reachableMethods)
     {
         _bridgeImportThunks ??= new Dictionary<string, BridgeImportThunkDefinition>(StringComparer.Ordinal);
+        var _seenCallees = new HashSet<string>(StringComparer.Ordinal);
 
         foreach (var method in reachableMethods)
         {
