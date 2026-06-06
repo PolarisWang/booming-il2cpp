@@ -82,6 +82,16 @@ else()
   set(CHAOS_AOT_GENERATED_CPP ${CHAOS_CODEGEN_NATIVE_CPP})
 endif()
 
+# Exclude stale bridge redirect stubs (BridgeAOT disabled — causes LNK2019)
+list(REMOVE_ITEM CHAOS_AOT_GENERATED_CPP
+    "${CHAOS_CODEGEN_DIR}/generated/bridge-redirect.generated.cpp"
+    "${CHAOS_CODEGEN_DIR}/generated/chaos_register_bridge_redirects.generated.cpp"
+    "${CHAOS_CODEGEN_DIR}/*Subjects/generated/bridge-redirect.generated.cpp"
+    "${CHAOS_CODEGEN_DIR}/*Subjects/generated/chaos_register_bridge_redirects.generated.cpp"
+    "${CMAKE_CURRENT_SOURCE_DIR}/subjects/bridge-redirect.generated.cpp"
+    "${CMAKE_CURRENT_SOURCE_DIR}/subjects/chaos_register_bridge_redirects.generated.cpp"
+)
+
 # Native stubs in this directory (exclude TPG-generated and entry files)
 file(GLOB CHAOS_NATIVE_STUBS "*.cpp")
 list(REMOVE_ITEM CHAOS_NATIVE_STUBS
