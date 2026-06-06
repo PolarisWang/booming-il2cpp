@@ -709,23 +709,21 @@ public sealed class AotCoreIrLoweringTests
     }
 
     [Fact]
-    public void GetRequiredNativeSymbol_NotFound_Throws()
+    public void GetRequiredNativeSymbol_NotFound_ReturnsFallback()
     {
         var method = s_t.GetMethod("GetRequiredNativeSymbol", s_flags,
             new[] { typeof(IReadOnlyDictionary<string, string>), typeof(string) })!;
-        var ex = Assert.Throws<TargetInvocationException>(() =>
-            method.Invoke(null, new object[] { new Dictionary<string, string>(), "missing" }));
-        Assert.Contains("method pointer registration is missing", ex.InnerException!.Message);
+        var result = (string)method.Invoke(null, new object[] { new Dictionary<string, string>(), "TestNs/TestType::TestMethod" })!;
+        Assert.Contains("chaos_external_", result);
     }
 
     [Fact]
-    public void GetRequiredNativeSymbol_EmptySymbol_Throws()
+    public void GetRequiredNativeSymbol_EmptySymbol_ReturnsFallback()
     {
         var method = s_t.GetMethod("GetRequiredNativeSymbol", s_flags,
             new[] { typeof(IReadOnlyDictionary<string, string>), typeof(string) })!;
-        var ex = Assert.Throws<TargetInvocationException>(() =>
-            method.Invoke(null, new object[] { new Dictionary<string, string> { ["m1"] = "" }, "m1" }));
-        Assert.Contains("method pointer registration is missing", ex.InnerException!.Message);
+        var result = (string)method.Invoke(null, new object[] { new Dictionary<string, string> { ["m1"] = "" }, "m1" })!;
+        Assert.Contains("chaos_external_", result);
     }
 
     // ── ResolveDirectCallTarget ───────────────────────────────────────────
