@@ -80,14 +80,23 @@ internal sealed class FullAssemblyEmitter
 
         sb.AppendLine("#include <cstring>");
         sb.AppendLine("#include <cstdint>");
-        sb.AppendLine("#include <chaos/chaos.h>");
-        sb.AppendLine("#include <chaos/string_table.h>");
-        sb.AppendLine("#include <gc/gc_layout.h>");
+        sb.AppendLine("#include <cstddef>");
         sb.AppendLine();
+        sb.AppendLine("using CHAOS_IL2CPP_INT32 = int32_t;");
+        sb.AppendLine("using CHAOS_IL2CPP_UINT32 = uint32_t;");
+        sb.AppendLine("using CHAOS_IL2CPP_INT64 = int64_t;");
+        sb.AppendLine("using CHAOS_IL2CPP_INTPTR = intptr_t;");
+        sb.AppendLine("using CHAOS_IL2CPP_FLOAT32 = float;");
+        sb.AppendLine("using CHAOS_IL2CPP_FLOAT64 = double;");
+        sb.AppendLine("#define CHAOS_IL2CPP_STRING_ID(s) reinterpret_cast<CHAOS_IL2CPP_INTPTR>(s)");
         sb.AppendLine("extern \"C\" int32_t kChaosExternalRuntimeCount;");
         sb.AppendLine("extern \"C\" void* kChaosExternalRuntimeFnTable[];");
         sb.AppendLine("extern \"C\" const char* kChaosExternalRuntimeSubjects[];");
         sb.AppendLine("extern \"C\" void* ResolveBridge(const char* subjectId) noexcept;");
+        sb.AppendLine("#ifdef _MSC_VER");
+        sb.AppendLine("#pragma warning(push)");
+        sb.AppendLine("#pragma warning(disable: 2362 4702) // goto skipping init");
+        sb.AppendLine("#endif");
         sb.AppendLine();
 
         // Emit real function bodies for bridge-compiled methods

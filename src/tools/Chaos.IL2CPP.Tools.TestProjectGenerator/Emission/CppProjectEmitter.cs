@@ -144,19 +144,6 @@ public sealed class CppProjectEmitter
                         CopyWithRetry(file, Path.Combine(subjectsDir, Path.GetFileName(file)), overwrite: true);
                 }
             }
-            // Remove stale bridge redirect stubs from BOTH subjects/ and
-            // codegen/generated/.  These reference chaos_bridge_* symbols that
-            // are never defined (BridgeAOT disabled), causing LNK2019.
-            var bridgeRedirectFiles = new[] { "bridge-redirect.generated.cpp", "chaos_register_bridge_redirects.generated.cpp" };
-            foreach (var bf in bridgeRedirectFiles)
-            {
-                foreach (var dir in new[] { subjectsDir, Path.Combine(outputDir, "codegen", "generated") })
-                {
-                    if (dir is null) continue;
-                    var path = Path.Combine(dir, bf);
-                    if (File.Exists(path)) TryDeleteFile(path);
-                }
-            }
         }
 
         // ── 3. Resolve codegen assembly names ──
