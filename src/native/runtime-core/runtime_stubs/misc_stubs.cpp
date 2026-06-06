@@ -18,6 +18,7 @@
 #include "gc/gc_loh.h"
 #include "thread_state.h"
 #include "runtime_stubs/array_stubs.h"
+#include "runtime_stubs/unicode_tables.generated.h"
 
 namespace chaos::il2cpp::runtime_core {
 extern "C" {
@@ -134,13 +135,31 @@ CHAOS_IL2CPP_INTPTR ChaosCultureGetTextInfo(CHAOS_IL2CPP_INTPTR /*culture*/) noe
 
 CHAOS_IL2CPP_INTPTR ChaosTextInfoToLower(CHAOS_IL2CPP_INTPTR /*text_info*/, CHAOS_IL2CPP_INT32 c) noexcept
 {
-    if (c >= 0x41 && c <= 0x5A) return static_cast<CHAOS_IL2CPP_INTPTR>(c + 0x20);
+    if (c < 0 || c > 0xFFFF) return static_cast<CHAOS_IL2CPP_INTPTR>(c);
+    auto cp = static_cast<CHAOS_IL2CPP_UINT16>(c);
+    // ASCII fast path: A-Z → a-z
+    if (cp >= 0x41 && cp <= 0x5A)
+        return static_cast<CHAOS_IL2CPP_INTPTR>(cp + 32);
+    // Unicode uppercase→lowercase via case table
+    for (CHAOS_IL2CPP_INT32 i = 0; i < kUnicodeUppercaseRangeCount; i++) {
+        if (cp >= kUnicodeUppercaseRanges[i].start && cp <= kUnicodeUppercaseRanges[i].end)
+            return static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(cp) + kUnicodeUppercaseRanges[i].delta);
+    }
     return static_cast<CHAOS_IL2CPP_INTPTR>(c);
 }
 
 CHAOS_IL2CPP_INTPTR ChaosTextInfoToUpper(CHAOS_IL2CPP_INTPTR /*text_info*/, CHAOS_IL2CPP_INT32 c) noexcept
 {
-    if (c >= 0x61 && c <= 0x7A) return static_cast<CHAOS_IL2CPP_INTPTR>(c - 0x20);
+    if (c < 0 || c > 0xFFFF) return static_cast<CHAOS_IL2CPP_INTPTR>(c);
+    auto cp = static_cast<CHAOS_IL2CPP_UINT16>(c);
+    // ASCII fast path: a-z → A-Z
+    if (cp >= 0x61 && cp <= 0x7A)
+        return static_cast<CHAOS_IL2CPP_INTPTR>(cp - 32);
+    // Unicode lowercase→uppercase via case table
+    for (CHAOS_IL2CPP_INT32 i = 0; i < kUnicodeLowercaseRangeCount; i++) {
+        if (cp >= kUnicodeLowercaseRanges[i].start && cp <= kUnicodeLowercaseRanges[i].end)
+            return static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(cp) - kUnicodeLowercaseRanges[i].delta);
+    }
     return static_cast<CHAOS_IL2CPP_INTPTR>(c);
 }
 
@@ -169,27 +188,52 @@ static constexpr CHAOS_IL2CPP_INT32 s_asciiCategory[128] = {
 
 CHAOS_IL2CPP_FLOAT64 ChaosCharUnicodeInfoGetNumericValue(CHAOS_IL2CPP_INT32 ch) noexcept
 {
-    // ASCII digits 0-9
-    if (ch >= 0x30 && ch <= 0x39) return static_cast<CHAOS_IL2CPP_FLOAT64>(ch - 0x30);
-    return -1.0;  // Not a numeric value
+    if (ch < 0 || ch > 0xFFFF) return -1.0;
+    auto cp = static_cast<CHAOS_IL2CPP_UINT16>(ch);
+    // Check decimal digit table first (faster)
+    for (CHAOS_IL2CPP_INT32 i = 0; i < kUnicodeDecimalDigitCount; i++) {
+        if (kUnicodeDecimalDigitTable[i].codepoint == cp)
+            return static_cast<CHAOS_IL2CPP_FLOAT64>(kUnicodeDecimalDigitTable[i].value);
+    }
+    // Check numeric value table
+    for (CHAOS_IL2CPP_INT32 i = 0; i < kUnicodeNumericCount; i++) {
+        if (kUnicodeNumericTable[i].codepoint == cp)
+            return static_cast<CHAOS_IL2CPP_FLOAT64>(kUnicodeNumericTable[i].value);
+    }
+    return -1.0;
 }
 
 CHAOS_IL2CPP_INT32 ChaosCharUnicodeInfoGetDigitValue(CHAOS_IL2CPP_INT32 ch) noexcept
 {
-    if (ch >= 0x30 && ch <= 0x39) return ch - 0x30;
+    if (ch < 0 || ch > 0xFFFF) return -1;
+    auto cp = static_cast<CHAOS_IL2CPP_UINT16>(ch);
+    for (CHAOS_IL2CPP_INT32 i = 0; i < kUnicodeDecimalDigitCount; i++) {
+        if (kUnicodeDecimalDigitTable[i].codepoint == cp)
+            return static_cast<CHAOS_IL2CPP_INT32>(kUnicodeDecimalDigitTable[i].value);
+    }
     return -1;
 }
 
 CHAOS_IL2CPP_INT32 ChaosCharUnicodeInfoGetDecimalDigitValue(CHAOS_IL2CPP_INT32 ch) noexcept
 {
-    if (ch >= 0x30 && ch <= 0x39) return ch - 0x30;
+    if (ch < 0 || ch > 0xFFFF) return -1;
+    auto cp = static_cast<CHAOS_IL2CPP_UINT16>(ch);
+    for (CHAOS_IL2CPP_INT32 i = 0; i < kUnicodeDecimalDigitCount; i++) {
+        if (kUnicodeDecimalDigitTable[i].codepoint == cp)
+            return static_cast<CHAOS_IL2CPP_INT32>(kUnicodeDecimalDigitTable[i].value);
+    }
     return -1;
 }
 
 CHAOS_IL2CPP_INT32 ChaosCharUnicodeInfoGetUnicodeCategory(CHAOS_IL2CPP_INT32 ch) noexcept
 {
-    if (ch >= 0 && ch < 128) return s_asciiCategory[ch];
-    return 30;  // OtherNotAssigned for non-ASCII
+    if (ch < 0 || ch > 0xFFFF) return 29;  // UnicodeCategory.OtherNotAssigned
+    auto cp = static_cast<CHAOS_IL2CPP_UINT16>(ch);
+    for (CHAOS_IL2CPP_INT32 i = 0; i < kUnicodeCategoryRangeCount; i++) {
+        if (cp >= kUnicodeCategoryRanges[i].start && cp <= kUnicodeCategoryRanges[i].end)
+            return static_cast<CHAOS_IL2CPP_INT32>(kUnicodeCategoryRanges[i].category);
+    }
+    return 29;
 }
 
 CHAOS_IL2CPP_INT32 ChaosCompareInfoIsSortableString(CHAOS_IL2CPP_INTPTR str) noexcept
