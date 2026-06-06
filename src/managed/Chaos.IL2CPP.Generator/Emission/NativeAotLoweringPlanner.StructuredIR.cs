@@ -2278,13 +2278,9 @@ public sealed partial class NativeAotLoweringPlanner
             // between partition boundaries (the target instruction is in
             // a different partition).  Emit the instructions as a flat
             // sequence instead of dropping them silently.
-            Console.Error.WriteLine(
-                $"TRACE:EMIT exception-partition-fallback " +
-                $"instructions={instructions.Count} blocks={cfg.Blocks.Count} " +
-                $"firstOp={instructions[0].Op} lastOp={instructions[^1].Op}");
+            // TRACE:EMIT disabled — was flooding stderr
             if (instructions.Count >= 3)
-                Console.Error.WriteLine(
-                    $"TRACE:EMIT   ops={instructions[0].Op},{instructions[1].Op},{instructions[2].Op},...");
+                // TRACE:EMIT disabled
             return EmitExceptionPartitionFallback(instructions);
         }
 
@@ -2610,13 +2606,7 @@ public sealed partial class NativeAotLoweringPlanner
         else
             Interlocked.Increment(ref s_structuredMethodCount);
 
-        System.Console.Error.WriteLine(
-            $"TRACE:EMIT method={SafeShortName(method)} " +
-            $"kind={kind} " +
-            $"instr={instrCount} " +
-            $"blocks={blocks} " +
-            $"loops={loops} " +
-            $"exceptions={exceptionRegions}");
+        // TRACE:EMIT disabled — was flooding stderr
     }
 
     private static void LogIrreducibleMethod(
