@@ -1,4 +1,4 @@
-﻿using Chaos.IL2CPP.Contracts;
+using Chaos.IL2CPP.Contracts;
 
 namespace Chaos.IL2CPP.Generator;
 
@@ -212,6 +212,7 @@ public sealed partial class NativeAotLoweringPlanner
         IReadOnlyList<AotCoreIrMethodArtifact> reachableMethods)
     {
         int nextIndex = _externalRuntimeSubjects.Count;
+        var _seenCallees = new HashSet<string>(StringComparer.Ordinal);
         foreach (var method in reachableMethods)
         {
             foreach (var instruction in method.Instructions)
@@ -224,6 +225,9 @@ public sealed partial class NativeAotLoweringPlanner
                 // the normalized SubjectIds used by TryCreateExternalRuntimeHelperDefinition
                 // and the downstream helperSymbolBySubjectId lookup.
                 callee = ManagedNaming.NormalizeSubjectIdAssembly(callee);
+
+                if (!_seenCallees.Add(callee))
+                    continue;
 
                 // Already in method dictionary → direct call, no dispatch table needed
                 if (_methodsBySubjectId.ContainsKey(callee))
