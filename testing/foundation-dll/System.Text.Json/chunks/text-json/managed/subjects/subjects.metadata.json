@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "assemblyName": "System.Text.Json",
   "chunkSlug": "text-json",
-  "totalMethods": 329,
+  "totalMethods": 278,
   "customEntryIndices": null,
   "benchmarkMethodIndices": [
     0,
@@ -282,58 +282,7 @@
     274,
     275,
     276,
-    277,
-    278,
-    279,
-    280,
-    281,
-    282,
-    283,
-    284,
-    285,
-    286,
-    287,
-    288,
-    289,
-    290,
-    291,
-    292,
-    293,
-    294,
-    295,
-    296,
-    297,
-    298,
-    299,
-    300,
-    301,
-    302,
-    303,
-    304,
-    305,
-    306,
-    307,
-    308,
-    309,
-    310,
-    311,
-    312,
-    313,
-    314,
-    315,
-    316,
-    317,
-    318,
-    319,
-    320,
-    321,
-    322,
-    323,
-    324,
-    325,
-    326,
-    327,
-    328
+    277
   ],
   "hotupdateMethodIndices": [
     0,
@@ -682,13 +631,13 @@
     {
       "index": 2,
       "kind": "benchmark",
-      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonDocument::Parse:System.Text.Json.JsonDocument(System.ReadOnlyMemory\u003CSystem.Byte\u003E,System.Text.Json.JsonDocumentOptions)",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonDocument::Parse:System.Text.Json.JsonDocument(System.ReadOnlyMemory<System.Byte>,System.Text.Json.JsonDocumentOptions)",
       "generatedMethodId": "Parse_2_System_ReadOnlyMemorybyte_JsonDocumentOptions_0"
     },
     {
       "index": 3,
       "kind": "benchmark",
-      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonDocument::Parse:System.Text.Json.JsonDocument(System.Buffers.ReadOnlySequence\u003CSystem.Byte\u003E,System.Text.Json.JsonDocumentOptions)",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonDocument::Parse:System.Text.Json.JsonDocument(System.Buffers.ReadOnlySequence<System.Byte>,System.Text.Json.JsonDocumentOptions)",
       "generatedMethodId": "Parse_3_ReadOnlySequencebyte_JsonDocumentOptions_0"
     },
     {
@@ -706,19 +655,19 @@
     {
       "index": 6,
       "kind": "benchmark",
-      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonDocument::ParseAsync:System.Threading.Tasks.Task\u003CSystem.Text.Json.JsonDocument\u003E(System.IO.Stream,System.Text.Json.JsonDocumentOptions,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonDocument::ParseAsync:System.Threading.Tasks.Task<System.Text.Json.JsonDocument>(System.IO.Stream,System.Text.Json.JsonDocumentOptions,System.Threading.CancellationToken)",
       "generatedMethodId": "ParseAsync_5_Stream_JsonDocumentOptions_CancellationToken_0"
     },
     {
       "index": 7,
       "kind": "benchmark",
-      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonDocument::ParseAsync:System.Threading.Tasks.Task\u003CSystem.Text.Json.JsonDocument\u003E(System.IO.Stream,System.Text.Json.JsonDocumentOptions,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonDocument::ParseAsync:System.Threading.Tasks.Task<System.Text.Json.JsonDocument>(System.IO.Stream,System.Text.Json.JsonDocumentOptions,System.Threading.CancellationToken)",
       "generatedMethodId": "ParseAsync_5_Stream_JsonDocumentOptions_CancellationToken_1"
     },
     {
       "index": 8,
       "kind": "benchmark",
-      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonDocument::Parse:System.Text.Json.JsonDocument(System.ReadOnlyMemory\u003CSystem.Char\u003E,System.Text.Json.JsonDocumentOptions)",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonDocument::Parse:System.Text.Json.JsonDocument(System.ReadOnlyMemory<System.Char>,System.Text.Json.JsonDocumentOptions)",
       "generatedMethodId": "Parse_6_System_ReadOnlyMemorychar_JsonDocumentOptions_0"
     },
     {
@@ -1132,7 +1081,7 @@
     {
       "index": 77,
       "kind": "benchmark",
-      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::Deserialize:System.Int32(System.Text.Json.JsonDocument,System.Text.Json.Serialization.Metadata.JsonTypeInfo\u003CSystem.Int32\u003E)",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::Deserialize:System.Int32(System.Text.Json.JsonDocument,System.Text.Json.Serialization.Metadata.JsonTypeInfo<System.Int32>)",
       "generatedMethodId": "Deserialize_2_JsonDocument_JsonTypeInfoint_0"
     },
     {
@@ -1150,7 +1099,7 @@
     {
       "index": 80,
       "kind": "benchmark",
-      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::Deserialize:System.Int32(System.Text.Json.JsonElement,System.Text.Json.Serialization.Metadata.JsonTypeInfo\u003CSystem.Int32\u003E)",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::Deserialize:System.Int32(System.Text.Json.JsonElement,System.Text.Json.Serialization.Metadata.JsonTypeInfo<System.Int32>)",
       "generatedMethodId": "Deserialize_6_JsonElement_JsonTypeInfoint_0"
     },
     {
@@ -1168,7 +1117,7 @@
     {
       "index": 83,
       "kind": "benchmark",
-      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::Deserialize:System.Int32(System.Text.Json.Nodes.JsonNode,System.Text.Json.Serialization.Metadata.JsonTypeInfo\u003CSystem.Int32\u003E)",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::Deserialize:System.Int32(System.Text.Json.Nodes.JsonNode,System.Text.Json.Serialization.Metadata.JsonTypeInfo<System.Int32>)",
       "generatedMethodId": "Deserialize_10_JsonNode_JsonTypeInfoint_0"
     },
     {
@@ -1192,13 +1141,13 @@
     {
       "index": 87,
       "kind": "benchmark",
-      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::SerializeToDocument:System.Text.Json.JsonDocument(System.Int32,System.Text.Json.Serialization.Metadata.JsonTypeInfo\u003CSystem.Int32\u003E)",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::SerializeToDocument:System.Text.Json.JsonDocument(System.Int32,System.Text.Json.Serialization.Metadata.JsonTypeInfo<System.Int32>)",
       "generatedMethodId": "SerializeToDocument_14_int_JsonTypeInfoint_0"
     },
     {
       "index": 88,
       "kind": "benchmark",
-      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::SerializeToDocument:System.Text.Json.JsonDocument(System.Int32,System.Text.Json.Serialization.Metadata.JsonTypeInfo\u003CSystem.Int32\u003E)",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::SerializeToDocument:System.Text.Json.JsonDocument(System.Int32,System.Text.Json.Serialization.Metadata.JsonTypeInfo<System.Int32>)",
       "generatedMethodId": "SerializeToDocument_14_int_JsonTypeInfoint_1"
     },
     {
@@ -1222,13 +1171,13 @@
     {
       "index": 92,
       "kind": "benchmark",
-      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::SerializeToElement:System.Text.Json.JsonElement(System.Int32,System.Text.Json.Serialization.Metadata.JsonTypeInfo\u003CSystem.Int32\u003E)",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::SerializeToElement:System.Text.Json.JsonElement(System.Int32,System.Text.Json.Serialization.Metadata.JsonTypeInfo<System.Int32>)",
       "generatedMethodId": "SerializeToElement_18_int_JsonTypeInfoint_0"
     },
     {
       "index": 93,
       "kind": "benchmark",
-      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::SerializeToElement:System.Text.Json.JsonElement(System.Int32,System.Text.Json.Serialization.Metadata.JsonTypeInfo\u003CSystem.Int32\u003E)",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::SerializeToElement:System.Text.Json.JsonElement(System.Int32,System.Text.Json.Serialization.Metadata.JsonTypeInfo<System.Int32>)",
       "generatedMethodId": "SerializeToElement_18_int_JsonTypeInfoint_1"
     },
     {
@@ -1252,25 +1201,25 @@
     {
       "index": 97,
       "kind": "benchmark",
-      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::SerializeToNode:System.Text.Json.Nodes.JsonNode(System.Int32,System.Text.Json.Serialization.Metadata.JsonTypeInfo\u003CSystem.Int32\u003E)",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::SerializeToNode:System.Text.Json.Nodes.JsonNode(System.Int32,System.Text.Json.Serialization.Metadata.JsonTypeInfo<System.Int32>)",
       "generatedMethodId": "SerializeToNode_22_int_JsonTypeInfoint_0"
     },
     {
       "index": 98,
       "kind": "benchmark",
-      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::SerializeToNode:System.Text.Json.Nodes.JsonNode(System.Int32,System.Text.Json.Serialization.Metadata.JsonTypeInfo\u003CSystem.Int32\u003E)",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::SerializeToNode:System.Text.Json.Nodes.JsonNode(System.Int32,System.Text.Json.Serialization.Metadata.JsonTypeInfo<System.Int32>)",
       "generatedMethodId": "SerializeToNode_22_int_JsonTypeInfoint_1"
     },
     {
       "index": 99,
       "kind": "benchmark",
-      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::DeserializeAsync:System.Threading.Tasks.ValueTask\u003CSystem.Int32\u003E(System.IO.Stream,System.Text.Json.JsonSerializerOptions,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::DeserializeAsync:System.Threading.Tasks.ValueTask<System.Int32>(System.IO.Stream,System.Text.Json.JsonSerializerOptions,System.Threading.CancellationToken)",
       "generatedMethodId": "DeserializeAsync_24_Stream_JsonSerializerOptions_CancellationToken_0"
     },
     {
       "index": 100,
       "kind": "benchmark",
-      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::DeserializeAsync:System.Threading.Tasks.ValueTask\u003CSystem.Int32\u003E(System.IO.Stream,System.Text.Json.JsonSerializerOptions,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::DeserializeAsync:System.Threading.Tasks.ValueTask<System.Int32>(System.IO.Stream,System.Text.Json.JsonSerializerOptions,System.Threading.CancellationToken)",
       "generatedMethodId": "DeserializeAsync_24_Stream_JsonSerializerOptions_CancellationToken_1"
     },
     {
@@ -1288,13 +1237,13 @@
     {
       "index": 103,
       "kind": "benchmark",
-      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::DeserializeAsync:System.Threading.Tasks.ValueTask\u003CSystem.Object\u003E(System.IO.Stream,System.Type,System.Text.Json.JsonSerializerOptions,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::DeserializeAsync:System.Threading.Tasks.ValueTask<System.Object>(System.IO.Stream,System.Type,System.Text.Json.JsonSerializerOptions,System.Threading.CancellationToken)",
       "generatedMethodId": "DeserializeAsync_26_Stream_System_Type_JsonSerializerOptions_CancellationToken_0"
     },
     {
       "index": 104,
       "kind": "benchmark",
-      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::DeserializeAsync:System.Threading.Tasks.ValueTask\u003CSystem.Object\u003E(System.IO.Stream,System.Type,System.Text.Json.JsonSerializerOptions,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::DeserializeAsync:System.Threading.Tasks.ValueTask<System.Object>(System.IO.Stream,System.Type,System.Text.Json.JsonSerializerOptions,System.Threading.CancellationToken)",
       "generatedMethodId": "DeserializeAsync_26_Stream_System_Type_JsonSerializerOptions_CancellationToken_1"
     },
     {
@@ -1312,85 +1261,85 @@
     {
       "index": 107,
       "kind": "benchmark",
-      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::DeserializeAsync:System.Threading.Tasks.ValueTask\u003CSystem.Int32\u003E(System.IO.Stream,System.Text.Json.Serialization.Metadata.JsonTypeInfo\u003CSystem.Int32\u003E,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::DeserializeAsync:System.Threading.Tasks.ValueTask<System.Int32>(System.IO.Stream,System.Text.Json.Serialization.Metadata.JsonTypeInfo<System.Int32>,System.Threading.CancellationToken)",
       "generatedMethodId": "DeserializeAsync_28_Stream_JsonTypeInfoint_CancellationToken_0"
     },
     {
       "index": 108,
       "kind": "benchmark",
-      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::DeserializeAsync:System.Threading.Tasks.ValueTask\u003CSystem.Int32\u003E(System.IO.Stream,System.Text.Json.Serialization.Metadata.JsonTypeInfo\u003CSystem.Int32\u003E,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::DeserializeAsync:System.Threading.Tasks.ValueTask<System.Int32>(System.IO.Stream,System.Text.Json.Serialization.Metadata.JsonTypeInfo<System.Int32>,System.Threading.CancellationToken)",
       "generatedMethodId": "DeserializeAsync_28_Stream_JsonTypeInfoint_CancellationToken_1"
     },
     {
       "index": 109,
       "kind": "benchmark",
-      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::Deserialize:System.Int32(System.IO.Stream,System.Text.Json.Serialization.Metadata.JsonTypeInfo\u003CSystem.Int32\u003E)",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::Deserialize:System.Int32(System.IO.Stream,System.Text.Json.Serialization.Metadata.JsonTypeInfo<System.Int32>)",
       "generatedMethodId": "Deserialize_29_Stream_JsonTypeInfoint_0"
     },
     {
       "index": 110,
       "kind": "benchmark",
-      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::Deserialize:System.Int32(System.IO.Stream,System.Text.Json.Serialization.Metadata.JsonTypeInfo\u003CSystem.Int32\u003E)",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::Deserialize:System.Int32(System.IO.Stream,System.Text.Json.Serialization.Metadata.JsonTypeInfo<System.Int32>)",
       "generatedMethodId": "Deserialize_29_Stream_JsonTypeInfoint_1"
     },
     {
       "index": 111,
       "kind": "benchmark",
-      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::DeserializeAsyncEnumerable:System.Collections.Generic.IAsyncEnumerable\u003CSystem.Int32\u003E(System.IO.Stream,System.Text.Json.JsonSerializerOptions,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::DeserializeAsyncEnumerable:System.Collections.Generic.IAsyncEnumerable<System.Int32>(System.IO.Stream,System.Text.Json.JsonSerializerOptions,System.Threading.CancellationToken)",
       "generatedMethodId": "DeserializeAsyncEnumerable_32_Stream_JsonSerializerOptions_CancellationToken_0"
     },
     {
       "index": 112,
       "kind": "benchmark",
-      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::DeserializeAsyncEnumerable:System.Collections.Generic.IAsyncEnumerable\u003CSystem.Int32\u003E(System.IO.Stream,System.Text.Json.JsonSerializerOptions,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::DeserializeAsyncEnumerable:System.Collections.Generic.IAsyncEnumerable<System.Int32>(System.IO.Stream,System.Text.Json.JsonSerializerOptions,System.Threading.CancellationToken)",
       "generatedMethodId": "DeserializeAsyncEnumerable_32_Stream_JsonSerializerOptions_CancellationToken_1"
     },
     {
       "index": 113,
       "kind": "benchmark",
-      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::DeserializeAsyncEnumerable:System.Collections.Generic.IAsyncEnumerable\u003CSystem.Int32\u003E(System.IO.Stream,System.Boolean,System.Text.Json.JsonSerializerOptions,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::DeserializeAsyncEnumerable:System.Collections.Generic.IAsyncEnumerable<System.Int32>(System.IO.Stream,System.Boolean,System.Text.Json.JsonSerializerOptions,System.Threading.CancellationToken)",
       "generatedMethodId": "DeserializeAsyncEnumerable_33_Stream_bool_JsonSerializerOptions_CancellationToken_0"
     },
     {
       "index": 114,
       "kind": "benchmark",
-      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::DeserializeAsyncEnumerable:System.Collections.Generic.IAsyncEnumerable\u003CSystem.Int32\u003E(System.IO.Stream,System.Boolean,System.Text.Json.JsonSerializerOptions,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::DeserializeAsyncEnumerable:System.Collections.Generic.IAsyncEnumerable<System.Int32>(System.IO.Stream,System.Boolean,System.Text.Json.JsonSerializerOptions,System.Threading.CancellationToken)",
       "generatedMethodId": "DeserializeAsyncEnumerable_33_Stream_bool_JsonSerializerOptions_CancellationToken_1"
     },
     {
       "index": 115,
       "kind": "benchmark",
-      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::DeserializeAsyncEnumerable:System.Collections.Generic.IAsyncEnumerable\u003CSystem.Int32\u003E(System.IO.Stream,System.Boolean,System.Text.Json.JsonSerializerOptions,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::DeserializeAsyncEnumerable:System.Collections.Generic.IAsyncEnumerable<System.Int32>(System.IO.Stream,System.Boolean,System.Text.Json.JsonSerializerOptions,System.Threading.CancellationToken)",
       "generatedMethodId": "DeserializeAsyncEnumerable_33_Stream_bool_JsonSerializerOptions_CancellationToken_2"
     },
     {
       "index": 116,
       "kind": "benchmark",
-      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::DeserializeAsyncEnumerable:System.Collections.Generic.IAsyncEnumerable\u003CSystem.Int32\u003E(System.IO.Stream,System.Text.Json.Serialization.Metadata.JsonTypeInfo\u003CSystem.Int32\u003E,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::DeserializeAsyncEnumerable:System.Collections.Generic.IAsyncEnumerable<System.Int32>(System.IO.Stream,System.Text.Json.Serialization.Metadata.JsonTypeInfo<System.Int32>,System.Threading.CancellationToken)",
       "generatedMethodId": "DeserializeAsyncEnumerable_34_Stream_JsonTypeInfoint_CancellationToken_0"
     },
     {
       "index": 117,
       "kind": "benchmark",
-      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::DeserializeAsyncEnumerable:System.Collections.Generic.IAsyncEnumerable\u003CSystem.Int32\u003E(System.IO.Stream,System.Text.Json.Serialization.Metadata.JsonTypeInfo\u003CSystem.Int32\u003E,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::DeserializeAsyncEnumerable:System.Collections.Generic.IAsyncEnumerable<System.Int32>(System.IO.Stream,System.Text.Json.Serialization.Metadata.JsonTypeInfo<System.Int32>,System.Threading.CancellationToken)",
       "generatedMethodId": "DeserializeAsyncEnumerable_34_Stream_JsonTypeInfoint_CancellationToken_1"
     },
     {
       "index": 118,
       "kind": "benchmark",
-      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::DeserializeAsyncEnumerable:System.Collections.Generic.IAsyncEnumerable\u003CSystem.Int32\u003E(System.IO.Stream,System.Text.Json.Serialization.Metadata.JsonTypeInfo\u003CSystem.Int32\u003E,System.Boolean,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::DeserializeAsyncEnumerable:System.Collections.Generic.IAsyncEnumerable<System.Int32>(System.IO.Stream,System.Text.Json.Serialization.Metadata.JsonTypeInfo<System.Int32>,System.Boolean,System.Threading.CancellationToken)",
       "generatedMethodId": "DeserializeAsyncEnumerable_35_Stream_JsonTypeInfoint_bool_CancellationToken_0"
     },
     {
       "index": 119,
       "kind": "benchmark",
-      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::DeserializeAsyncEnumerable:System.Collections.Generic.IAsyncEnumerable\u003CSystem.Int32\u003E(System.IO.Stream,System.Text.Json.Serialization.Metadata.JsonTypeInfo\u003CSystem.Int32\u003E,System.Boolean,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::DeserializeAsyncEnumerable:System.Collections.Generic.IAsyncEnumerable<System.Int32>(System.IO.Stream,System.Text.Json.Serialization.Metadata.JsonTypeInfo<System.Int32>,System.Boolean,System.Threading.CancellationToken)",
       "generatedMethodId": "DeserializeAsyncEnumerable_35_Stream_JsonTypeInfoint_bool_CancellationToken_1"
     },
     {
       "index": 120,
       "kind": "benchmark",
-      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::DeserializeAsyncEnumerable:System.Collections.Generic.IAsyncEnumerable\u003CSystem.Int32\u003E(System.IO.Stream,System.Text.Json.Serialization.Metadata.JsonTypeInfo\u003CSystem.Int32\u003E,System.Boolean,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::DeserializeAsyncEnumerable:System.Collections.Generic.IAsyncEnumerable<System.Int32>(System.IO.Stream,System.Text.Json.Serialization.Metadata.JsonTypeInfo<System.Int32>,System.Boolean,System.Threading.CancellationToken)",
       "generatedMethodId": "DeserializeAsyncEnumerable_35_Stream_JsonTypeInfoint_bool_CancellationToken_2"
     },
     {
@@ -1420,13 +1369,13 @@
     {
       "index": 125,
       "kind": "benchmark",
-      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::Deserialize:System.Int32(System.String,System.Text.Json.Serialization.Metadata.JsonTypeInfo\u003CSystem.Int32\u003E)",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::Deserialize:System.Int32(System.String,System.Text.Json.Serialization.Metadata.JsonTypeInfo<System.Int32>)",
       "generatedMethodId": "Deserialize_38_string_JsonTypeInfoint_0"
     },
     {
       "index": 126,
       "kind": "benchmark",
-      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::Deserialize:System.Int32(System.String,System.Text.Json.Serialization.Metadata.JsonTypeInfo\u003CSystem.Int32\u003E)",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::Deserialize:System.Int32(System.String,System.Text.Json.Serialization.Metadata.JsonTypeInfo<System.Int32>)",
       "generatedMethodId": "Deserialize_38_string_JsonTypeInfoint_1"
     },
     {
@@ -1450,13 +1399,13 @@
     {
       "index": 130,
       "kind": "benchmark",
-      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::SerializeToUtf8Bytes:System.Byte[](System.Int32,System.Text.Json.Serialization.Metadata.JsonTypeInfo\u003CSystem.Int32\u003E)",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::SerializeToUtf8Bytes:System.Byte[](System.Int32,System.Text.Json.Serialization.Metadata.JsonTypeInfo<System.Int32>)",
       "generatedMethodId": "SerializeToUtf8Bytes_42_int_JsonTypeInfoint_0"
     },
     {
       "index": 131,
       "kind": "benchmark",
-      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::SerializeToUtf8Bytes:System.Byte[](System.Int32,System.Text.Json.Serialization.Metadata.JsonTypeInfo\u003CSystem.Int32\u003E)",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::SerializeToUtf8Bytes:System.Byte[](System.Int32,System.Text.Json.Serialization.Metadata.JsonTypeInfo<System.Int32>)",
       "generatedMethodId": "SerializeToUtf8Bytes_42_int_JsonTypeInfoint_1"
     },
     {
@@ -1522,37 +1471,37 @@
     {
       "index": 142,
       "kind": "benchmark",
-      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::SerializeAsync:System.Threading.Tasks.Task(System.IO.Stream,System.Int32,System.Text.Json.Serialization.Metadata.JsonTypeInfo\u003CSystem.Int32\u003E,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::SerializeAsync:System.Threading.Tasks.Task(System.IO.Stream,System.Int32,System.Text.Json.Serialization.Metadata.JsonTypeInfo<System.Int32>,System.Threading.CancellationToken)",
       "generatedMethodId": "SerializeAsync_48_Stream_int_JsonTypeInfoint_CancellationToken_0"
     },
     {
       "index": 143,
       "kind": "benchmark",
-      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::SerializeAsync:System.Threading.Tasks.Task(System.IO.Stream,System.Int32,System.Text.Json.Serialization.Metadata.JsonTypeInfo\u003CSystem.Int32\u003E,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::SerializeAsync:System.Threading.Tasks.Task(System.IO.Stream,System.Int32,System.Text.Json.Serialization.Metadata.JsonTypeInfo<System.Int32>,System.Threading.CancellationToken)",
       "generatedMethodId": "SerializeAsync_48_Stream_int_JsonTypeInfoint_CancellationToken_1"
     },
     {
       "index": 144,
       "kind": "benchmark",
-      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::SerializeAsync:System.Threading.Tasks.Task(System.IO.Stream,System.Int32,System.Text.Json.Serialization.Metadata.JsonTypeInfo\u003CSystem.Int32\u003E,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::SerializeAsync:System.Threading.Tasks.Task(System.IO.Stream,System.Int32,System.Text.Json.Serialization.Metadata.JsonTypeInfo<System.Int32>,System.Threading.CancellationToken)",
       "generatedMethodId": "SerializeAsync_48_Stream_int_JsonTypeInfoint_CancellationToken_2"
     },
     {
       "index": 145,
       "kind": "benchmark",
-      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::Serialize:System.Void(System.IO.Stream,System.Int32,System.Text.Json.Serialization.Metadata.JsonTypeInfo\u003CSystem.Int32\u003E)",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::Serialize:System.Void(System.IO.Stream,System.Int32,System.Text.Json.Serialization.Metadata.JsonTypeInfo<System.Int32>)",
       "generatedMethodId": "Serialize_49_Stream_int_JsonTypeInfoint_0"
     },
     {
       "index": 146,
       "kind": "benchmark",
-      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::Serialize:System.Void(System.IO.Stream,System.Int32,System.Text.Json.Serialization.Metadata.JsonTypeInfo\u003CSystem.Int32\u003E)",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::Serialize:System.Void(System.IO.Stream,System.Int32,System.Text.Json.Serialization.Metadata.JsonTypeInfo<System.Int32>)",
       "generatedMethodId": "Serialize_49_Stream_int_JsonTypeInfoint_1"
     },
     {
       "index": 147,
       "kind": "benchmark",
-      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::Serialize:System.Void(System.IO.Stream,System.Int32,System.Text.Json.Serialization.Metadata.JsonTypeInfo\u003CSystem.Int32\u003E)",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::Serialize:System.Void(System.IO.Stream,System.Int32,System.Text.Json.Serialization.Metadata.JsonTypeInfo<System.Int32>)",
       "generatedMethodId": "Serialize_49_Stream_int_JsonTypeInfoint_2"
     },
     {
@@ -1576,25 +1525,25 @@
     {
       "index": 151,
       "kind": "benchmark",
-      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::Serialize:System.String(System.Int32,System.Text.Json.Serialization.Metadata.JsonTypeInfo\u003CSystem.Int32\u003E)",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::Serialize:System.String(System.Int32,System.Text.Json.Serialization.Metadata.JsonTypeInfo<System.Int32>)",
       "generatedMethodId": "Serialize_54_int_JsonTypeInfoint_0"
     },
     {
       "index": 152,
       "kind": "benchmark",
-      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::Serialize:System.String(System.Int32,System.Text.Json.Serialization.Metadata.JsonTypeInfo\u003CSystem.Int32\u003E)",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::Serialize:System.String(System.Int32,System.Text.Json.Serialization.Metadata.JsonTypeInfo<System.Int32>)",
       "generatedMethodId": "Serialize_54_int_JsonTypeInfoint_1"
     },
     {
       "index": 153,
       "kind": "benchmark",
-      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::SerializeAsync:System.Threading.Tasks.Task(System.IO.Pipelines.PipeWriter,System.Int32,System.Text.Json.Serialization.Metadata.JsonTypeInfo\u003CSystem.Int32\u003E,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::SerializeAsync:System.Threading.Tasks.Task(System.IO.Pipelines.PipeWriter,System.Int32,System.Text.Json.Serialization.Metadata.JsonTypeInfo<System.Int32>,System.Threading.CancellationToken)",
       "generatedMethodId": "SerializeAsync_56_PipeWriter_int_JsonTypeInfoint_CancellationToken_0"
     },
     {
       "index": 154,
       "kind": "benchmark",
-      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::SerializeAsync:System.Threading.Tasks.Task(System.IO.Pipelines.PipeWriter,System.Int32,System.Text.Json.Serialization.Metadata.JsonTypeInfo\u003CSystem.Int32\u003E,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::SerializeAsync:System.Threading.Tasks.Task(System.IO.Pipelines.PipeWriter,System.Int32,System.Text.Json.Serialization.Metadata.JsonTypeInfo<System.Int32>,System.Threading.CancellationToken)",
       "generatedMethodId": "SerializeAsync_56_PipeWriter_int_JsonTypeInfoint_CancellationToken_1"
     },
     {
@@ -1636,13 +1585,13 @@
     {
       "index": 161,
       "kind": "benchmark",
-      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::Serialize:System.Void(System.Text.Json.Utf8JsonWriter,System.Int32,System.Text.Json.Serialization.Metadata.JsonTypeInfo\u003CSystem.Int32\u003E)",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::Serialize:System.Void(System.Text.Json.Utf8JsonWriter,System.Int32,System.Text.Json.Serialization.Metadata.JsonTypeInfo<System.Int32>)",
       "generatedMethodId": "Serialize_62_Utf8JsonWriter_int_JsonTypeInfoint_0"
     },
     {
       "index": 162,
       "kind": "benchmark",
-      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::Serialize:System.Void(System.Text.Json.Utf8JsonWriter,System.Int32,System.Text.Json.Serialization.Metadata.JsonTypeInfo\u003CSystem.Int32\u003E)",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::Serialize:System.Void(System.Text.Json.Utf8JsonWriter,System.Int32,System.Text.Json.Serialization.Metadata.JsonTypeInfo<System.Int32>)",
       "generatedMethodId": "Serialize_62_Utf8JsonWriter_int_JsonTypeInfoint_1"
     },
     {
@@ -1990,13 +1939,13 @@
     {
       "index": 220,
       "kind": "benchmark",
-      "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::Reset:System.Void(System.Buffers.IBufferWriter\u003CSystem.Byte\u003E)",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::Reset:System.Void(System.Buffers.IBufferWriter<System.Byte>)",
       "generatedMethodId": "Reset_1_IBufferWriterbyte_0"
     },
     {
       "index": 221,
       "kind": "benchmark",
-      "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::Reset:System.Void(System.Buffers.IBufferWriter\u003CSystem.Byte\u003E)",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::Reset:System.Void(System.Buffers.IBufferWriter<System.Byte>)",
       "generatedMethodId": "Reset_1_IBufferWriterbyte_1"
     },
     {
@@ -2566,13 +2515,13 @@
     {
       "index": 316,
       "kind": "benchmark",
-      "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteRawValue:System.Void(System.Buffers.ReadOnlySequence\u003CSystem.Byte\u003E,System.Boolean)",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteRawValue:System.Void(System.Buffers.ReadOnlySequence<System.Byte>,System.Boolean)",
       "generatedMethodId": "WriteRawValue_54_ReadOnlySequencebyte_bool_0"
     },
     {
       "index": 317,
       "kind": "benchmark",
-      "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteRawValue:System.Void(System.Buffers.ReadOnlySequence\u003CSystem.Byte\u003E,System.Boolean)",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteRawValue:System.Void(System.Buffers.ReadOnlySequence<System.Byte>,System.Boolean)",
       "generatedMethodId": "WriteRawValue_54_ReadOnlySequencebyte_bool_1"
     },
     {
