@@ -94,7 +94,10 @@ public sealed partial class NativeAotLoweringPlanner
 	// NativeInt (plain integer-as-pointer).  Consumers (conv.i4,
 	// ceq, etc.) use this to emit ChaosLoadFloat32/ChaosLoadFloat64
 	// before operating on the value.
-	private enum SlotType : byte { NativeInt, Int64, Float32, Float64 }
+	private enum SlotType : byte { NativeInt, Int64, Float32, Float64, WideValue }
+
+	/// <summary>Number of CHAOS_IL2CPP_INTPTR slots consumed by one WideValue.</summary>
+	private const int WideValueSlotCount = 2;
 
 	private readonly Stack<SlotType> _structuredSlotTypes = new();
 
