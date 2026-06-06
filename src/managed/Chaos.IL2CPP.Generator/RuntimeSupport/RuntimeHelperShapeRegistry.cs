@@ -8634,7 +8634,20 @@ public sealed partial class NativeAotLoweringPlanner
             return parenIndex >= 0 ? afterSeparator[..parenIndex] : afterSeparator;
         }
 
+        // P3: cache for SubjectId -> parameter types (parsing is pure)
+        private static readonly Dictionary<string, IReadOnlyList<string>> s_methodParamTypeCache
+            = new(StringComparer.Ordinal);
+
         private static IReadOnlyList<string> GetMethodParameterTypesFromSubjectId(string subjectId)
+        {
+            if (s_methodParamTypeCache.TryGetValue(subjectId, out var cached))
+                return cached;
+            var result = GetMethodParameterTypesFromSubjectIdImpl(subjectId);
+            s_methodParamTypeCache[subjectId] = result;
+            return result;
+        }
+
+        private static IReadOnlyList<string> GetMethodParameterTypesFromSubjectIdImpl(string subjectId)
         {
             var parenOpen = subjectId.IndexOf('(');
             var parenClose = subjectId.LastIndexOf(')');

@@ -1046,7 +1046,20 @@ public sealed partial class NativeReferenceProofEmitter
         return subjectId[(methodSeparatorIndex + 2)..methodEndIndex];
     }
 
+    // P3: cache for SubjectId -> parameter types
+    private static readonly Dictionary<string, IReadOnlyList<string>> s_refProofParamTypeCache
+        = new(StringComparer.Ordinal);
+
     private static IReadOnlyList<string> GetMethodParameterTypesFromSubjectId(string subjectId)
+    {
+        if (s_refProofParamTypeCache.TryGetValue(subjectId, out var cached))
+            return cached;
+        var result = GetMethodParameterTypesFromSubjectIdImpl(subjectId);
+        s_refProofParamTypeCache[subjectId] = result;
+        return result;
+    }
+
+    private static IReadOnlyList<string> GetMethodParameterTypesFromSubjectIdImpl(string subjectId)
     {
         var startIndex = subjectId.IndexOf('(', StringComparison.Ordinal);
         var endIndex = subjectId.LastIndexOf(')');

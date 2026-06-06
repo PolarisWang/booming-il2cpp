@@ -980,6 +980,7 @@ public sealed partial class NativeAotLoweringPlanner
         for (int i = 0; i < emitMethods.Count; i++)
             allMethods.Add(EmitOneMethod(emitMethods[i], aotReachableSubjectIds));
         List<NativeAotMethodTemplateModel> methods = allMethods;
+
         _tPhase4 = _sw.ElapsedMilliseconds;
 
         // Capture pc-dispatch count from the static counter.
@@ -1384,7 +1385,7 @@ extern ""C"" CHAOS_IL2CPP_INT32 RunNativeAot(CHAOS_IL2CPP_INT32 entryIndex) {{
             TypeDeclarationsCode = BuildTypeDeclarationsCode(SanitizeCppIdentifier(loweringPlan.AssemblyName)),
             GenericRegistrationCode = genericRegistrationHelperCode,
             MethodDeclarations = methodDeclarations,
-            Methods = methods,
+            Methods = allMethods,
             EntrySubjectId = loweringPlan.EntrySubjectId,
             EntrySymbol = loweringPlan.EntrySymbol,
             EntryNativeSymbol = entryMethod.NativeSymbol,
