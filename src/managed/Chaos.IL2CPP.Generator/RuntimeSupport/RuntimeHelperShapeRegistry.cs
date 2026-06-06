@@ -542,7 +542,13 @@ public sealed partial class NativeAotLoweringPlanner
                         EmptyRawArgumentIndices);
                 }));
 
-            // ── Dictionary<K,V>::TryAdd (smoke-test stub) ──
+
+
+            // [JSON-SERIALIZE DISABLED] RegisterJsonSerialize calls require
+            // StringNewUtf8 from chaos_runtime_core.lib which is not yet
+            // exported from the prebuilt SDK.  Uncomment when SDK is rebuilt.
+            // See NativeAotLoweringPlanner for the helper function.
+// ── Dictionary<K,V>::TryAdd (smoke-test stub) ──
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "System.Collections.Generic.Dictionary",
                 MethodName: "TryAdd",

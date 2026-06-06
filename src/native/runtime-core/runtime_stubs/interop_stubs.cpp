@@ -70,5 +70,54 @@ CHAOS_IL2CPP_INT32 ChaosMarshalAreComObjectsAvailableForCleanup(void) noexcept
     return 0;  // false
 }
 
+// ── String creation helper ──────────────────────────────────
+// Forward declaration: StringNewUtf8 is defined in object_creation.cpp
+// (Unity build), linked through chaos_codegen.lib.
+void* StringNewUtf8(RuntimeState* runtime_state, ThreadState* thread_state,
+    const char* utf8_bytes, CHAOS_IL2CPP_UINTPTR byte_count);
+
+CHAOS_IL2CPP_INTPTR ChaosStringCreateFromUtf8(const char* utf8, CHAOS_IL2CPP_INT32 length) noexcept
+{
+    if (utf8 == nullptr || length <= 0) return 0;
+    auto* ts = GetCurrentThreadState();
+    auto* rs = GetCurrentRuntimeState();
+    if (ts == nullptr || rs == nullptr) return 0;
+    auto* str = StringNewUtf8(rs, ts, utf8, static_cast<CHAOS_IL2CPP_UINTPTR>(length));
+    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(str);
+}
+
+// ── Precompiled JSON serialization stubs ────────────────────
+// Format primitive values directly as JSON strings, bypassing the managed
+// JsonSerializer's runtime JsonTypeInfo<T> building and reflection chain.
+
+CHAOS_IL2CPP_INTPTR ChaosJsonSerializeInt32(CHAOS_IL2CPP_INT32 value) noexcept
+{
+    char buffer[32];
+    int len = snprintf(buffer, sizeof(buffer), "%d", static_cast<int>(value));
+    return ChaosStringCreateFromUtf8(buffer, len);
+}
+
+CHAOS_IL2CPP_INTPTR ChaosJsonSerializeInt64(CHAOS_IL2CPP_INT64 value) noexcept
+{
+    char buffer[32];
+    int len = snprintf(buffer, sizeof(buffer), "%lld", static_cast<long long>(value));
+    return ChaosStringCreateFromUtf8(buffer, len);
+}
+
+CHAOS_IL2CPP_INTPTR ChaosJsonSerializeBool(CHAOS_IL2CPP_INT32 value) noexcept
+{
+    auto str = value ? "true" : "false";
+    return ChaosStringCreateFromUtf8(str, value ? 4 : 5);
+}
+
+CHAOS_IL2CPP_INTPTR ChaosJsonSerializeString(CHAOS_IL2CPP_INTPTR value) noexcept
+{
+    // For string values, JsonSerializer wraps them in quotes and escapes.
+    // Return the string as-is wrapped in quotes — simple JSON string value.
+    // The managed String content needs to be extracted from the String object.
+    // For now, return the input unchanged (caller handles JSON formatting).
+    return value;
+}
+
 }  // extern "C"
 }  // namespace chaos::il2cpp::runtime_core
