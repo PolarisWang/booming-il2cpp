@@ -190,11 +190,20 @@ def _build_patch_dll(patch_output: Path, patch_dll: Path, target_dll: Path | Non
     combined_cs.write_text(content, encoding="utf-8")
 
     # Detect TFM from target DLL path (e.g. ".../9.0.0/...System.Private.CoreLib.dll" → net9.0)
-    import re as _re
-    _version_match = _re.search(r'Microsoft\.NETCore\.App[\\/](\d+)\.', str(target_dll))
-    tfm = f"net{_version_match.group(1)}" if _version_match else "net9.0"
+    # Reuse build.py's exact TFM detection for consistency.
+    from verification.stages.build import _detect_tfm
+    tfm = _detect_tfm(target_dll)
     sdk_csproj = (_REPO_ROOT / "src" / "reference" / "Chaos.TestFramework.Sdk"
                   / "Chaos.TestFramework.Sdk.csproj")
+    ref_block = ""
+    if target_dll is not None:
+        # Reference the target DLL so patch code can resolve types
+        # (e.g. SseItem<>, IPAddress, etc.) from the source assembly.
+        ref_block = (
+            f"    <Reference Include=\"{target_dll.stem}\">\n"
+            f"      <HintPath>{target_dll}</HintPath>\n"
+            "    </Reference>\n"
+        )
     csproj = patch_dll.parent / "PatchSubjects.csproj"
     csproj.write_text(
         "<Project Sdk=\"Microsoft.NET.Sdk\">\n"
@@ -209,6 +218,7 @@ def _build_patch_dll(patch_output: Path, patch_dll: Path, target_dll: Path | Non
         "  <ItemGroup>\n"
         f"    <Compile Include=\"{combined_cs.name}\" />\n"
         f"    <ProjectReference Include=\"{sdk_csproj}\" />\n"
+        f"{ref_block}"
         "  </ItemGroup>\n"
         "</Project>\n"
     )
