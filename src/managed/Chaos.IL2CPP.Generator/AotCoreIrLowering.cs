@@ -4,6 +4,39 @@ namespace Chaos.IL2CPP.Generator;
 
 public sealed class AotCoreIrLowering
 {
+    // Cache: pre-built AotCoreIrInstructionArtifact for simple stack-only instructions.
+    // These have no callee, no reference, no constraints — purely stack manipulation.
+    // Created once and cloned with updated IlOffset to avoid per-instruction allocation overhead.
+    private static readonly Dictionary<string, AotCoreIrInstructionArtifact> s_simpleInstructionCache = new(32)
+    {
+        ["nop"] = new() { Op = "nop", OpCode = InstructionOpCode.LdcI4, IlOffset = 0 },
+        ["ldnull"] = new() { Op = "ldnull", OpCode = InstructionOpCode.LdNull, IlOffset = 0 },
+        ["dup"] = new() { Op = "dup", IlOffset = 0 },
+        ["pop"] = new() { Op = "pop", IlOffset = 0 },
+        ["ret"] = new() { Op = "ret", IlOffset = 0  },
+        ["ldarg.0"] = new() { Op = "ldarg.0", OpCode = InstructionOpCode.LdArg, IlOffset = 0 },
+        ["ldarg.1"] = new() { Op = "ldarg.1", OpCode = InstructionOpCode.LdArg, IlOffset = 0 },
+        ["ldarg.2"] = new() { Op = "ldarg.2", OpCode = InstructionOpCode.LdArg, IlOffset = 0 },
+        ["ldarg.3"] = new() { Op = "ldarg.3", OpCode = InstructionOpCode.LdArg, IlOffset = 0 },
+        ["ldloc.0"] = new() { Op = "ldloc.0", OpCode = InstructionOpCode.LdLoc, IlOffset = 0 },
+        ["ldloc.1"] = new() { Op = "ldloc.1", OpCode = InstructionOpCode.LdLoc, IlOffset = 0 },
+        ["ldloc.2"] = new() { Op = "ldloc.2", OpCode = InstructionOpCode.LdLoc, IlOffset = 0 },
+        ["ldloc.3"] = new() { Op = "ldloc.3", OpCode = InstructionOpCode.LdLoc, IlOffset = 0 },
+        ["stloc.0"] = new() { Op = "stloc.0", OpCode = InstructionOpCode.StLoc, IlOffset = 0 },
+        ["stloc.1"] = new() { Op = "stloc.1", OpCode = InstructionOpCode.StLoc, IlOffset = 0 },
+        ["stloc.2"] = new() { Op = "stloc.2", OpCode = InstructionOpCode.StLoc, IlOffset = 0 },
+        ["stloc.3"] = new() { Op = "stloc.3", OpCode = InstructionOpCode.StLoc, IlOffset = 0 },
+        ["ldc.i4.m1"] = new() { Op = "ldc.i4.m1", OpCode = InstructionOpCode.LdcI4, IlOffset = 0 },
+        ["ldc.i4.0"] = new() { Op = "ldc.i4.0", OpCode = InstructionOpCode.LdcI4, IlOffset = 0 },
+        ["ldc.i4.1"] = new() { Op = "ldc.i4.1", OpCode = InstructionOpCode.LdcI4, IlOffset = 0 },
+        ["ldc.i4.2"] = new() { Op = "ldc.i4.2", OpCode = InstructionOpCode.LdcI4, IlOffset = 0 },
+        ["ldc.i4.3"] = new() { Op = "ldc.i4.3", OpCode = InstructionOpCode.LdcI4, IlOffset = 0 },
+        ["ldc.i4.4"] = new() { Op = "ldc.i4.4", OpCode = InstructionOpCode.LdcI4, IlOffset = 0 },
+        ["ldc.i4.5"] = new() { Op = "ldc.i4.5", OpCode = InstructionOpCode.LdcI4, IlOffset = 0 },
+        ["ldc.i4.6"] = new() { Op = "ldc.i4.6", OpCode = InstructionOpCode.LdcI4, IlOffset = 0 },
+        ["ldc.i4.7"] = new() { Op = "ldc.i4.7", OpCode = InstructionOpCode.LdcI4, IlOffset = 0 },
+        ["ldc.i4.8"] = new() { Op = "ldc.i4.8", OpCode = InstructionOpCode.LdcI4, IlOffset = 0 },
+    };
     public AotCoreIrArtifact Create(
         LinkedWorldModel linkedWorld,
         TypedIlIrArtifact typedIl,
@@ -108,6 +141,15 @@ public sealed class AotCoreIrLowering
                                ?? (instructions.Count == 0
                                    ? 0
                                    : instructions[^1].IlOffset + 1);
+
+                // Fast path: simple stack-only instructions with no callee/constraints.
+                // Skip ResolveDirectCallTarget, constrained override, target reference,
+                // and ComImport detection — none of these apply to simple instructions.
+                if (s_simpleInstructionCache.TryGetValue(typedInstruction.Op, out var cachedSimple))
+                {
+                    instructions.Add(cachedSimple with { IlOffset = ilOffset });
+                    continue;
+                }
 
                 var directCallTarget = ResolveDirectCallTarget(typedInstruction, managedMethods, targetSymbols);
 
@@ -987,6 +1029,19 @@ public sealed class AotCoreIrLowering
             managedType.IsValueType &&
             RequiresValueTypeByValueCarrier(managedType))
         {
+            // x64 ABI: value types > 16 bytes must be passed by reference
+            // (hidden pointer). Both Windows x64 and System V AMD64 use this.
+            var abiSize = GetValueTypeNativeSizeForAbi(managedType);
+            if (abiSize > 16)
+            {
+                return new AotCoreIrAbiSlotArtifact
+                {
+                    CarrierKindCode = AotCoreIrAbiCarrierKind.ByRefToValueType,
+                    TypeSubjectId = managedType.SubjectId,
+                    TypeShape = AotCoreIrTypeShapeKind.ValueType,
+                };
+            }
+
             return new AotCoreIrAbiSlotArtifact
             {
                 CarrierKindCode = AotCoreIrAbiCarrierKind.ValueTypeByValue,
@@ -1026,6 +1081,43 @@ public sealed class AotCoreIrLowering
         var subjectId = ManagedNaming.NormalizeSubjectIdAssembly(managedType.SubjectId);
         return !string.Equals(subjectId, "System.Private.CoreLib/System.Int32", StringComparison.Ordinal) &&
                !subjectId.StartsWith("System.Private.CoreLib/System.", StringComparison.Ordinal);
+    }
+
+    /// <summary>
+    /// Estimate native size (bytes) of a value type for ABI decision purposes.
+    /// Returns 0 for unknown types (caller falls back to pass-by-value).
+    /// The x64 ABI threshold for pass-by-reference is > 16 bytes.
+    /// </summary>
+    private static int GetValueTypeNativeSizeForAbi(ManagedTypeModel managedType)
+    {
+        var sid = managedType.SubjectId;
+        if (string.IsNullOrEmpty(sid)) return 0;
+
+        // System.Numerics large types from System.Numerics.Vectors
+        if (sid.Contains("System.Numerics.Matrix4x4", StringComparison.Ordinal)) return 64;
+        if (sid.Contains("System.Numerics.Matrix3x2", StringComparison.Ordinal)) return 24;
+
+        // Vector<T> — size depends on element type
+        // SubjectId: "...Vector`1<System.Int32>" → 32 bytes on x64
+        if (sid.Contains("System.Numerics.Vector`1<", StringComparison.Ordinal))
+        {
+            var elStart = sid.IndexOf('<', StringComparison.Ordinal);
+            var elEnd = sid.LastIndexOf('>');
+            if (elStart > 0 && elEnd > elStart)
+            {
+                var elType = sid[(elStart + 1)..elEnd];
+                // 4-byte elements (int, uint, float) → 32 bytes (Vector256 on x64)
+                if (elType.Contains("System.Int32") || elType.Contains("System.UInt32") ||
+                    elType.Contains("System.Single")) return 32;
+                // 8-byte elements (long, ulong, double) → 64 bytes (Vector512)
+                if (elType.Contains("System.Int64") || elType.Contains("System.UInt64") ||
+                    elType.Contains("System.Double")) return 64;
+                // 1/2-byte elements → 16 bytes (Vector64)
+                return 16;
+            }
+        }
+
+        return 0; // Unknown — caller falls back to pass-by-value
     }
 
     private static string GetRequiredNativeSymbol(

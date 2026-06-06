@@ -524,6 +524,19 @@ public sealed partial class NativeAotLoweringPlanner
         = new(StringComparer.Ordinal);
 
     /// <summary>
+    /// Cache for ManagedNaming.NormalizeSubjectIdAssembly — SubjectId assembly prefix
+    /// normalization is pure (same input → same output), caching avoids repeated parsing.
+    /// </summary>
+    private readonly Dictionary<string, string> _normalizedSubjectIdCache = new(StringComparer.Ordinal);
+
+    private string NormalizeSubjectIdAssemblyCached(string subjectId)
+    {
+        if (_normalizedSubjectIdCache.TryGetValue(subjectId, out var cached))
+            return cached;
+        return _normalizedSubjectIdCache[subjectId] = ManagedNaming.NormalizeSubjectIdAssembly(subjectId);
+    }
+
+    /// <summary>
     /// Bridge/import thunks: C++ wrapper functions for calls crossing the managed/native
     /// boundary. Populated by <see cref="CollectBridgeImportThunks"/> and emitted after
     /// all method bodies in Create.

@@ -11,26 +11,26 @@ public sealed partial class NativeAotLoweringPlanner
     {
         var ordered = new List<AotCoreIrMethodArtifact>();
         var visited = new HashSet<string>(StringComparer.Ordinal);
+        var queue = new Queue<AotCoreIrMethodArtifact>();
+        queue.Enqueue(entryMethod);
+        visited.Add(entryMethod.SubjectId);
 
-        void Visit(AotCoreIrMethodArtifact method)
+        while (queue.Count > 0)
         {
-            if (!visited.Add(method.SubjectId))
-            {
-                return;
-            }
+            var method = queue.Dequeue();
 
             foreach (var instruction in method.Instructions)
             {
                 foreach (var reachableMethod in ResolveReachableMethods(instruction))
                 {
-                    Visit(reachableMethod);
+                    if (visited.Add(reachableMethod.SubjectId))
+                        queue.Enqueue(reachableMethod);
                 }
             }
 
             ordered.Add(method);
         }
 
-        Visit(entryMethod);
         return ordered;
     }
 
@@ -224,7 +224,7 @@ public sealed partial class NativeAotLoweringPlanner
                 // Canonicalize assembly prefix so dispatch table keys match
                 // the normalized SubjectIds used by TryCreateExternalRuntimeHelperDefinition
                 // and the downstream helperSymbolBySubjectId lookup.
-                callee = ManagedNaming.NormalizeSubjectIdAssembly(callee);
+                callee = NormalizeSubjectIdAssemblyCached(callee);
 
                 // P0: skip already-processed callees
                 if (!_seenCallees.Add(callee))
@@ -293,7 +293,7 @@ public sealed partial class NativeAotLoweringPlanner
 
                 // Canonicalize assembly prefix so dictionary keys match
                 // _externalRuntimeSubjects (normalized at CollectExternalRuntimeDispatchEntries).
-                callee = ManagedNaming.NormalizeSubjectIdAssembly(callee);
+                callee = NormalizeSubjectIdAssemblyCached(callee);
 
                 // P0: skip already-processed callees
                 if (!_seenCallees.Add(callee))
@@ -909,7 +909,7 @@ if (!TryCreateExternalRuntimeHelperDefinition(targetSubjectId, out var helperDef
         if (!string.IsNullOrEmpty(calleeOrTarget))
         {
             // Canonicalize assembly prefix so dictionary lookups match normalized keys.
-            calleeOrTarget = ManagedNaming.NormalizeSubjectIdAssembly(calleeOrTarget);
+            calleeOrTarget = NormalizeSubjectIdAssemblyCached(calleeOrTarget);
         }
 
         if (TryResolveDirectInvocationTarget(calleeOrTarget) is { } directInvocationTarget)
