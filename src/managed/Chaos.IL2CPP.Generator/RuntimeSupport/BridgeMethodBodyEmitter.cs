@@ -550,6 +550,17 @@ public static class BridgeMethodBodyEmitter
         }
 
         // Normal call
+        // Bridge-to-bridge: Direct dispatch via chaos_bridge_ symbol
+        if (redirectMap != null && !string.IsNullOrEmpty(callee) && redirectMap.TryGetValue(callee, out var bridgeSymbol))
+        {
+            var allArgs = string.Join(", ", args);
+            var tmp = Tmp();
+            sb.AppendLine($"{ind}{{ extern \"C\" void {bridgeSymbol}(); {bridgeSymbol}({allArgs}); }}");
+            sb.AppendLine($"{ind}CHAOS_IL2CPP_INTPTR {tmp} = 0;");
+            stack.Add(tmp);
+            return;
+        }
+        // Direct dispatch via TargetSymbol (set by AotCoreIrLowering)
         if (inst.DispatchKindCode == HybridDispatchKind.Direct && !string.IsNullOrEmpty(ts))
         {
             // Direct dispatch to chaos_bridge_ symbol

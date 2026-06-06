@@ -137,7 +137,6 @@ internal sealed class FullAssemblyEmitter
         sb.AppendLine("    struct BridgeRegistrar {");
         sb.AppendLine("        BridgeRegistrar() noexcept {");
         sb.AppendLine("            for (int32_t i = 0; i < kChaosExternalRuntimeCount; i++) {");
-        sb.AppendLine("                if (kChaosExternalRuntimeFnTable[i] != nullptr) continue;");
         sb.AppendLine("                const auto* sub = kChaosExternalRuntimeSubjects[i];");
         sb.AppendLine("                if (sub == nullptr) continue;");
         sb.AppendLine("                auto* fn = ResolveBridge(sub);");
