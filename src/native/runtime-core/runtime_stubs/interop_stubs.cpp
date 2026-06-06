@@ -166,5 +166,35 @@ CHAOS_IL2CPP_INT32 ChaosJsonDeserializeBool(CHAOS_IL2CPP_INTPTR jsonStr) noexcep
     return (data[0] == 't' || data[0] == '1') ? 1 : 0;
 }
 
+// ═══════════════════════════════════════════════════════════════
+// AnsiStringMarshaller stubs
+// ═══════════════════════════════════════════════════════════════
+// Uses engine_binding.h functions (already included).
+// These are compiled from source in the test project's SDK.
+
+CHAOS_IL2CPP_INTPTR ChaosAnsiStringMarshallerConvertToUnmanaged(CHAOS_IL2CPP_INTPTR str) noexcept
+{
+    auto* rs = GetCurrentRuntimeState();
+    auto* ts = GetCurrentThreadState();
+    if (rs == nullptr || ts == nullptr) return 0;
+    return MarshalStringToCoTaskMemUtf8(rs, ts, reinterpret_cast<void*>(str));
+}
+
+CHAOS_IL2CPP_INTPTR ChaosAnsiStringMarshallerConvertToManaged(CHAOS_IL2CPP_INTPTR native) noexcept
+{
+    auto* rs = GetCurrentRuntimeState();
+    auto* ts = GetCurrentThreadState();
+    if (rs == nullptr || ts == nullptr) return 0;
+    auto* result = MarshalPtrToStringUtf8(rs, ts, native, -1, false);
+    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(result);
+}
+
+void ChaosAnsiStringMarshallerFree(CHAOS_IL2CPP_INTPTR native) noexcept
+{
+    auto* rs = GetCurrentRuntimeState();
+    if (rs == nullptr) return;
+    MarshalFreeCoTaskMem(rs, native);
+}
+
 }  // extern "C"
 }  // namespace chaos::il2cpp::runtime_core

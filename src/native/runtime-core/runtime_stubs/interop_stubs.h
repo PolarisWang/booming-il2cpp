@@ -39,3 +39,10 @@ CHAOS_IL2CPP_INTPTR ChaosJsonSerializeBool(CHAOS_IL2CPP_INT32 value) noexcept;
 CHAOS_IL2CPP_INT32 ChaosJsonDeserializeInt32(CHAOS_IL2CPP_INTPTR jsonStr) noexcept;
 CHAOS_IL2CPP_INT64 ChaosJsonDeserializeInt64(CHAOS_IL2CPP_INTPTR jsonStr) noexcept;
 CHAOS_IL2CPP_INT32 ChaosJsonDeserializeBool(CHAOS_IL2CPP_INTPTR jsonStr) noexcept;
+
+// ── AnsiStringMarshaller stubs ───────────────────────────────
+// Source-generated marshalling for [DllImport] with CharSet.Ansi.
+// Implementations delegate to the runtime's CoTaskMem UTF-8 helpers.
+CHAOS_IL2CPP_INTPTR ChaosAnsiStringMarshallerConvertToUnmanaged(CHAOS_IL2CPP_INTPTR str) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosAnsiStringMarshallerConvertToManaged(CHAOS_IL2CPP_INTPTR native) noexcept;
+void ChaosAnsiStringMarshallerFree(CHAOS_IL2CPP_INTPTR native) noexcept;

@@ -712,7 +712,7 @@ public sealed partial class NativeAotLoweringPlanner
                         Array.Empty<AotCoreIrAbiSlotArtifact>(),
                         CreateInt32AbiSlot(),
                         EmptyRawArgumentIndices,
-                        DirectNativeSymbol: "ChaosMarshalSetLastPInvokeError");
+                        DirectNativeSymbol: "ChaosMarshalGetHRForLastWin32Error");
                 }));
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "Marshal",
@@ -7416,6 +7416,31 @@ public sealed partial class NativeAotLoweringPlanner
                         new HashSet<int> { 0 });
                 }));
 
+            // ── AnsiStringMarshaller stubs ──────────────────────────────────────
+            // Source-generated marshalling for [DllImport] CharSet.Ansi.
+            registry.Register("System.Runtime.InteropServices.Marshalling.AnsiStringMarshaller",
+                "ConvertToUnmanaged", ["System.String"],
+                ShapeKind.SimpleForward, "ChaosAnsiStringMarshallerConvertToUnmanaged",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    CreateNativeIntAbiSlot("System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType)),
+                CreateNativeIntAbiSlot(),
+                new HashSet<int> { 0 });
+
+            registry.Register("System.Runtime.InteropServices.Marshalling.AnsiStringMarshaller",
+                "ConvertToManaged", ["System.Byte*"],
+                ShapeKind.SimpleForward, "ChaosAnsiStringMarshallerConvertToManaged",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    CreateNativeIntAbiSlot()),
+                CreateNativeIntAbiSlot("System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType),
+                new HashSet<int> { 0 });
+
+            registry.Register("System.Runtime.InteropServices.Marshalling.AnsiStringMarshaller",
+                "Free", ["System.Byte*"],
+                ShapeKind.SimpleForward, "ChaosAnsiStringMarshallerFree",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    CreateNativeIntAbiSlot()),
+                CreateVoidAbiSlot(),
+                new HashSet<int> { 0 });
 
             // === BCL token stubs (Option C: value type as NativeInt token, primitives return 0) ===
             // These let the pipeline complete without lowering BCL methods.
