@@ -68,6 +68,9 @@ extern "C" const CodeRegistrationV0 chaos_codegen_code_registration;
 extern "C" const MetadataRegistrationV0 chaos_codegen_metadata_registration;
 extern "C" const CodegenRegistrationOptionsV0 chaos_codegen_options;
 extern "C" void ChaosRegisterGcLayouts();
+// Bridge redirect pointer — defined in bridge-redirect.generated.cpp when
+// BridgeAOT is active.  Default to nullptr for AOT-only builds.
+extern "C" void* (*ChaosBridgeRedirect)(const char* subjectId) = nullptr;
 
 // kDefaultArgThunks: in AOT mode, nullptr is safe because ChaosDispatchMethod
 // falls through to entry.direct_ptr (set by SetDirectDispatch).
