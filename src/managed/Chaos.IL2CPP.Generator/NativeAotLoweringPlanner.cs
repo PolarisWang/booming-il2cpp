@@ -4488,7 +4488,7 @@ public sealed partial class NativeAotLoweringPlanner
                 uint methodFlags = (mToken > 0 && typeMethodAttrs != null && typeMethodAttrs.TryGetValue(mToken, out var mf)) ? mf : 0u;
                 return new
                 {
-                    metadata_token_hex = mToken > 0 ? "0x" + mToken.ToString("X8") : "0u",
+                    metadata_token_hex = mToken > 0 ? "0x" + mToken.ToString("X8") : "0",
                     subject_id_literal = EscapeCppStringLiteral(m.Artifact.SubjectId),
                     method_name_literal = EscapeCppStringLiteral(methodName),
                     return_type_literal = EscapeCppStringLiteral(returnType),
@@ -4500,7 +4500,7 @@ public sealed partial class NativeAotLoweringPlanner
             var fieldEntries = typeFieldMap.TryGetValue(typeSubjectId, out var tFields)
                 ? tFields.Select(f => new
                 {
-                    metadata_token_hex = f.Token > 0 ? "0x" + f.Token.ToString("X8") : "0u",
+                    metadata_token_hex = f.Token > 0 ? "0x" + f.Token.ToString("X8") : "0",
                     subject_id_literal = EscapeCppStringLiteral(f.SubjectId),
                     name_literal = EscapeCppStringLiteral(f.Name),
                     type_literal = EscapeCppStringLiteral(f.Type),
@@ -4520,7 +4520,7 @@ public sealed partial class NativeAotLoweringPlanner
 
             typeGroups.Add(new
             {
-                metadata_token_hex = typeToken > 0 ? "0x" + typeToken.ToString("X8") : "0u",
+                metadata_token_hex = typeToken > 0 ? "0x" + typeToken.ToString("X8") : "0",
                 safe_name = safeName,
                 method_count = methodsInType.Count,
                 subject_id_literal = EscapeCppStringLiteral(typeSubjectId),
