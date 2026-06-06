@@ -229,7 +229,7 @@ public sealed partial class NativeAotLoweringPlanner
 			evalStackSize = Math.Max(evalStackSize, slotContext.MaxIntSlots);
 		if (usesStructuredSlots && slotContext != null)
 		{
-			EmitStructuredSlotDeclarations(builder, slotContext.MaxIntSlots, slotContext.MaxFloat64Slots, slotContext.MaxFloat32Slots, slotContext.MaxInt64Slots, slotContext.MaxWideSlots, "	");
+			EmitStructuredSlotDeclarations(builder, slotContext.MaxIntSlots + 2, slotContext.MaxFloat64Slots, slotContext.MaxFloat32Slots, slotContext.MaxInt64Slots + 2, slotContext.MaxWideSlots, "	");
 			if (slotContext.FloatLocalSlots is { Count: > 0 })
 			{
 				foreach (var (slot, type) in slotContext.FloatLocalSlots.OrderBy(kv => kv.Key))
