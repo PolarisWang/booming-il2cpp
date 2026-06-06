@@ -1,5 +1,4 @@
 using System;
-using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Diagnostics;
@@ -506,8 +505,8 @@ public sealed partial class NativeAotLoweringPlanner
     /// </summary>
     internal int PcDispatchCount;
     internal int CodegenFailureCount;
-    internal System.Collections.Concurrent.ConcurrentDictionary<string, int> CodegenFailureByType = new();
-    internal System.Collections.Concurrent.ConcurrentDictionary<string, int> CodegenFailureByChunk = new();
+    internal Dictionary<string, int> CodegenFailureByType = new();
+    internal Dictionary<string, int> CodegenFailureByChunk = new();
 
     /// <summary>
     /// Maps unresolvable cross-assembly subjectId → index in kChaosExternalRuntimeFnTable.
@@ -977,11 +976,10 @@ public sealed partial class NativeAotLoweringPlanner
                     Console.Error.WriteLine($"[NS-DEDUP] Dropped {subjectDropped} subject method(s) of {methodsForLowering.Count - filtered.Count} total deduped");
             }
         }
-        var allMethods = new System.Collections.Concurrent.ConcurrentBag<NativeAotMethodTemplateModel>();
-        Parallel.For(0, emitMethods.Count, new ParallelOptions { MaxDegreeOfParallelism = Environment.ProcessorCount }, i => {
+        var allMethods = new List<NativeAotMethodTemplateModel>(emitMethods.Count);
+        for (int i = 0; i < emitMethods.Count; i++)
             allMethods.Add(EmitOneMethod(emitMethods[i], aotReachableSubjectIds));
-        });
-        var methods = allMethods.OrderBy(m => m.SubjectId, StringComparer.Ordinal).ToList();
+        List<NativeAotMethodTemplateModel> methods = allMethods;
 
         _tPhase4 = _sw.ElapsedMilliseconds;
 
@@ -1387,7 +1385,7 @@ extern ""C"" CHAOS_IL2CPP_INT32 RunNativeAot(CHAOS_IL2CPP_INT32 entryIndex) {{
             TypeDeclarationsCode = BuildTypeDeclarationsCode(SanitizeCppIdentifier(loweringPlan.AssemblyName)),
             GenericRegistrationCode = genericRegistrationHelperCode,
             MethodDeclarations = methodDeclarations,
-            Methods = methods,
+            Methods = allMethods,
             EntrySubjectId = loweringPlan.EntrySubjectId,
             EntrySymbol = loweringPlan.EntrySymbol,
             EntryNativeSymbol = entryMethod.NativeSymbol,
@@ -2545,11 +2543,19 @@ extern ""C"" CHAOS_IL2CPP_INT32 RunNativeAot(CHAOS_IL2CPP_INT32 entryIndex) {{
         {
             var msg = $"[codegen] WARNING: codegen failed for {method.SubjectId}, emitting stub. Root cause: {ex.GetType().Name}: {ex.Message}";
             Console.Error.WriteLine(msg);
-            System.Threading.Interlocked.Increment(ref CodegenFailureCount);
+            CodegenFailureCount++;
             var exType = ex.GetType().Name;
-            CodegenFailureByType.AddOrUpdate(exType, 1, (_, c) => c + 1);
+            lock (CodegenFailureByType)
+            {
+                CodegenFailureByType.TryGetValue(exType, out var ct);
+                CodegenFailureByType[exType] = ct + 1;
+            }
             var chunk = method.SubjectId?.Split('/').FirstOrDefault() ?? "unknown";
-            CodegenFailureByChunk.AddOrUpdate(chunk, 1, (_, c) => c + 1);
+            lock (CodegenFailureByChunk)
+            {
+                CodegenFailureByChunk.TryGetValue(chunk, out var cc);
+                CodegenFailureByChunk[chunk] = cc + 1;
+            }
             return BuildAotUnreachableMethodStub(method);
         }
     }
