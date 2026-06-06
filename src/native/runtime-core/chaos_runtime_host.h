@@ -219,8 +219,10 @@ private:
     /// Fill remaining null external runtime table entries with safe stubs
     /// so generated code does not crash on null pointers.
     static void FillExternalRuntimeStubs() {
+        int bridgeCount = 0;
+        std::fprintf(stderr, "[BRIDGE-AOT] FillExternalRuntimeStubs: count=%d, redirect=%p\n",
+            kChaosExternalRuntimeCount, (void*)ChaosBridgeRedirect);
         for (int32_t i = 0; i < kChaosExternalRuntimeCount; i++) {
-            if (kChaosExternalRuntimeFnTable[i] != nullptr) continue;
             const char* sub = kChaosExternalRuntimeSubjects[i];
             if (sub == nullptr || sub[0] == '\0') continue;
 
@@ -232,6 +234,7 @@ private:
             if (ChaosBridgeRedirect) {
                 if (auto* bridgeFn = ChaosBridgeRedirect(sub)) {
                     kChaosExternalRuntimeFnTable[i] = bridgeFn;
+                    bridgeCount++;
                     continue;
                 }
             }
@@ -307,6 +310,8 @@ private:
                 });
             }
         }
+        if (bridgeCount > 0)
+            std::fprintf(stderr, "[BRIDGE-AOT] FillExternalRuntimeStubs: %d bridge entries registered\n", bridgeCount);
     }
 };
 
