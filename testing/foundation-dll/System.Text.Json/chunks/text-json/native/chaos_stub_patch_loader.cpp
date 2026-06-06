@@ -8,9 +8,5 @@ namespace chaos { namespace il2cpp { namespace runtime_core {
 struct PatchContext;
 PatchContext* ApplyPatchFromMemoryEx(const void*, size_t, const char*,
     const char* const*, const char* const*, int) noexcept { return nullptr; }
-
-// ChaosBridgeRedirect hook — bridge-redirect.generated.cpp sets this
-// to &ResolveBridge at startup. Default nullptr = no bridge redirect.
-extern "C" void* (*ChaosBridgeRedirect)(const char*) = nullptr;
 bool Unpatch(PatchContext*) noexcept { return true; }
 } } }

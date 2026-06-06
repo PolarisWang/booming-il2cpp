@@ -16,158 +16,6 @@ extern "C" const int kAotMethodCount;
 
 
 // extern "C" function declarations for all AOT-compiled methods
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Boolean_System_Boolean_System_String(
-            CHAOS_IL2CPP_INTPTR, 
-            CHAOS_IL2CPP_INTPTR, 
-            CHAOS_IL2CPP_INTPTR
-);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Byte_System_Byte_System_String(
-            CHAOS_IL2CPP_UINT8, 
-            CHAOS_IL2CPP_UINT8, 
-            CHAOS_IL2CPP_INTPTR
-);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Byte_array_System_Byte_array_System_String(
-            CHAOS_IL2CPP_INTPTR, 
-            CHAOS_IL2CPP_INTPTR, 
-            CHAOS_IL2CPP_INTPTR
-);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Char_System_Char_System_String(
-            CHAOS_IL2CPP_INTPTR, 
-            CHAOS_IL2CPP_INTPTR, 
-            CHAOS_IL2CPP_INTPTR
-);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Decimal_System_Decimal_System_String(
-            CHAOS_IL2CPP_INTPTR, 
-            CHAOS_IL2CPP_INTPTR, 
-            CHAOS_IL2CPP_INTPTR
-);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Double_System_Double_System_String(
-            double, 
-            double, 
-            CHAOS_IL2CPP_INTPTR
-);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Int16_System_Int16_System_String(
-            CHAOS_IL2CPP_INT16, 
-            CHAOS_IL2CPP_INT16, 
-            CHAOS_IL2CPP_INTPTR
-);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Int32_System_Int32_System_String(
-            CHAOS_IL2CPP_INT32, 
-            CHAOS_IL2CPP_INT32, 
-            CHAOS_IL2CPP_INTPTR
-);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Int64_System_Int64_System_String(
-            CHAOS_IL2CPP_INT64, 
-            CHAOS_IL2CPP_INT64, 
-            CHAOS_IL2CPP_INTPTR
-);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Object_System_Object_System_String(
-            CHAOS_IL2CPP_INTPTR, 
-            CHAOS_IL2CPP_INTPTR, 
-            CHAOS_IL2CPP_INTPTR
-);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_SByte_System_SByte_System_String(
-            CHAOS_IL2CPP_INT8, 
-            CHAOS_IL2CPP_INT8, 
-            CHAOS_IL2CPP_INTPTR
-);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Single_System_Single_System_String(
-            float, 
-            float, 
-            CHAOS_IL2CPP_INTPTR
-);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_String_System_String_System_String(
-            CHAOS_IL2CPP_INTPTR, 
-            CHAOS_IL2CPP_INTPTR, 
-            CHAOS_IL2CPP_INTPTR
-);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_UInt16_System_UInt16_System_String(
-            CHAOS_IL2CPP_UINT16, 
-            CHAOS_IL2CPP_UINT16, 
-            CHAOS_IL2CPP_INTPTR
-);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_UInt32_System_UInt32_System_String(
-            CHAOS_IL2CPP_INTPTR, 
-            CHAOS_IL2CPP_INTPTR, 
-            CHAOS_IL2CPP_INTPTR
-);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_UInt64_System_UInt64_System_String(
-            CHAOS_IL2CPP_UINT64, 
-            CHAOS_IL2CPP_UINT64, 
-            CHAOS_IL2CPP_INTPTR
-);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_0_0_System_String(
-            CHAOS_IL2CPP_INTPTR, 
-            CHAOS_IL2CPP_INTPTR, 
-            CHAOS_IL2CPP_INTPTR
-);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreNotEqual_0_0_System_String(
-            CHAOS_IL2CPP_INTPTR, 
-            CHAOS_IL2CPP_INTPTR, 
-            CHAOS_IL2CPP_INTPTR
-);
-extern "C" CHAOS_IL2CPP_INT32 Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Complete(
-        void
-);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Fail_System_String(
-            CHAOS_IL2CPP_INTPTR
-);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_IsFalse_System_Boolean_System_String(
-            CHAOS_IL2CPP_INTPTR, 
-            CHAOS_IL2CPP_INTPTR
-);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_IsNotNull_System_Object_System_String(
-            CHAOS_IL2CPP_INTPTR, 
-            CHAOS_IL2CPP_INTPTR
-);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_IsNull_System_Object_System_String(
-            CHAOS_IL2CPP_INTPTR, 
-            CHAOS_IL2CPP_INTPTR
-);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_IsTrue_System_Boolean_System_String(
-            CHAOS_IL2CPP_INTPTR, 
-            CHAOS_IL2CPP_INTPTR
-);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_RecordFailure(
-        void
-);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Reset(
-        void
-);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Throws_System_Action(
-            CHAOS_IL2CPP_INTPTR
-);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Throws_JsonException_System_Action__generic(
-            CHAOS_IL2CPP_INTPTR
-);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Throws_System_ArgumentNullException_System_Action__generic(
-            CHAOS_IL2CPP_INTPTR
-);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Throws_System_InvalidOperationException_System_Action__generic(
-            CHAOS_IL2CPP_INTPTR
-);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Throws_System_NotSupportedException_System_Action__generic(
-            CHAOS_IL2CPP_INTPTR
-);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Throws_System_NullReferenceException_System_Action__generic(
-            CHAOS_IL2CPP_INTPTR
-);
-extern "C" CHAOS_IL2CPP_INT32 Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_get_ExitCode(
-        void
-);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_AssertionException__ctor_System_String(
-            CHAOS_IL2CPP_INTPTR, 
-            CHAOS_IL2CPP_INTPTR
-);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_BenchmarkAttribute__ctor(
-            CHAOS_IL2CPP_INTPTR
-);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_FactAttribute__ctor(
-            CHAOS_IL2CPP_INTPTR
-);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_HotUpdateAttribute__ctor(
-            CHAOS_IL2CPP_INTPTR
-);
 extern "C" void CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonDocumentTests__ctor(
             CHAOS_IL2CPP_INTPTR
 );
@@ -2517,59 +2365,492 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json
 extern "C" void CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_Utf8JsonWriterTests___c_WriteString_39_JsonEncodedText_string_1_b__70_0(
             CHAOS_IL2CPP_INTPTR
 );
+extern "C" void chaos_bridge_0__ctor_DA31580D(
+            CHAOS_IL2CPP_INTPTR
+);
+extern "C" void chaos_bridge_141_GetResult_E8398FC8(
+            CHAOS_IL2CPP_INTPTR
+);
+extern "C" CHAOS_IL2CPP_INT32 chaos_bridge_66_GetResult_1CB058B5(
+            CHAOS_IL2CPP_INTPTR
+);
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_70_GetResult_67FB55DE(
+            CHAOS_IL2CPP_INTPTR
+);
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_9_GetAwaiter_C029999E(
+            CHAOS_IL2CPP_INTPTR
+);
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_18_GetAwaiter_F3423D3B(
+            CHAOS_IL2CPP_INTPTR
+);
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_140_GetAwaiter_1EB14700(
+            CHAOS_IL2CPP_INTPTR
+);
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_65_GetAwaiter_FB5DC740(
+            CHAOS_IL2CPP_INTPTR
+);
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_69_GetAwaiter_93F46D7F(
+            CHAOS_IL2CPP_INTPTR
+);
+extern "C" void chaos_bridge_12_Dispose_CB85E661(
+            CHAOS_IL2CPP_INTPTR
+);
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_15_Parse_3279CE1A(
+        void
+);
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_16_Parse_225C2001(
+        void
+);
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_14_Parse_8CB0ED96(
+        void
+);
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_19_Parse_581BE216(
+        void
+);
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_20_Parse_6EBF0A53(
+        void
+);
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_17_ParseAsync_7C016739(
+        void
+);
+extern "C" void chaos_bridge_13_WriteTo_C29D3117(
+            CHAOS_IL2CPP_INTPTR
+);
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_22_GetBoolean_56B23856(
+            CHAOS_IL2CPP_INTPTR
+);
+extern "C" CHAOS_IL2CPP_UINT8 chaos_bridge_25_GetByte_6977C001(
+            CHAOS_IL2CPP_INTPTR
+);
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_23_GetBytesFromBase64_C8873089(
+            CHAOS_IL2CPP_INTPTR
+);
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_35_GetDateTime_D7CB995C(
+            CHAOS_IL2CPP_INTPTR
+);
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_36_GetDateTimeOffset_78270FBD(
+            CHAOS_IL2CPP_INTPTR
+);
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_34_GetDecimal_FB8793EE(
+            CHAOS_IL2CPP_INTPTR
+);
+extern "C" double chaos_bridge_32_GetDouble_85178AC5(
+            CHAOS_IL2CPP_INTPTR
+);
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_37_GetGuid_C2081CEC(
+            CHAOS_IL2CPP_INTPTR
+);
+extern "C" CHAOS_IL2CPP_INT16 chaos_bridge_26_GetInt16_B45456E6(
+            CHAOS_IL2CPP_INTPTR
+);
+extern "C" CHAOS_IL2CPP_INT32 chaos_bridge_28_GetInt32_5056D1D0(
+            CHAOS_IL2CPP_INTPTR
+);
+extern "C" CHAOS_IL2CPP_INT64 chaos_bridge_30_GetInt64_88DAFFD8(
+            CHAOS_IL2CPP_INTPTR
+);
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_21_GetProperty_B5A71D2B(
+            CHAOS_IL2CPP_INTPTR
+);
+extern "C" CHAOS_IL2CPP_INT8 chaos_bridge_24_GetSByte_E77FE6FC(
+            CHAOS_IL2CPP_INTPTR
+);
+extern "C" float chaos_bridge_33_GetSingle_788EFB37(
+            CHAOS_IL2CPP_INTPTR
+);
+extern "C" CHAOS_IL2CPP_UINT16 chaos_bridge_27_GetUInt16_5557A95B(
+            CHAOS_IL2CPP_INTPTR
+);
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_29_GetUInt32_6D8FB30(
+            CHAOS_IL2CPP_INTPTR
+);
+extern "C" CHAOS_IL2CPP_UINT64 chaos_bridge_31_GetUInt64_936FC948(
+            CHAOS_IL2CPP_INTPTR
+);
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_39_TryGetProperty_9788ABD1(
+            CHAOS_IL2CPP_INTPTR
+);
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_38_ValueEquals_D3CB5B89(
+            CHAOS_IL2CPP_INTPTR
+);
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_40_Encode_88D73B2E(
+        void
+);
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_41_NameEquals_B2E216A(
+            CHAOS_IL2CPP_INTPTR
+);
+extern "C" void chaos_bridge_42_WriteTo_4D83871D(
+            CHAOS_IL2CPP_INTPTR
+);
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_44_Deserialize_56361279(
+        void
+);
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_46_Deserialize_CA9E3578(
+        void
+);
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_48_Deserialize_8265A920(
+        void
+);
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_50_Deserialize_77FD3E03(
+        void
+);
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_71_Deserialize_DAB79D23(
+        void
+);
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_75_Deserialize_67D43EA2(
+        void
+);
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_81_Deserialize_9B173F55(
+        void
+);
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_83_Deserialize_17ABC81C(
+        void
+);
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_52_Deserialize_BFCBC1D5(
+        void
+);
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_54_Deserialize_B79C364(
+        void
+);
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_2_Deserialize_JsonDocument__330FF27F(
+        void
+);
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_4_Deserialize_JsonElement__5A4BBFE(
+        void
+);
+extern "C" CHAOS_IL2CPP_INT32 chaos_bridge_43_Deserialize_System_Int32__46AB0D0F(
+        void
+);
+extern "C" CHAOS_IL2CPP_INT32 chaos_bridge_45_Deserialize_System_Int32__3F2624B7(
+        void
+);
+extern "C" CHAOS_IL2CPP_INT32 chaos_bridge_47_Deserialize_System_Int32__9AC463BA(
+        void
+);
+extern "C" CHAOS_IL2CPP_INT32 chaos_bridge_49_Deserialize_System_Int32__316E91F1(
+        void
+);
+extern "C" CHAOS_IL2CPP_INT32 chaos_bridge_67_Deserialize_System_Int32__2D993147(
+        void
+);
+extern "C" CHAOS_IL2CPP_INT32 chaos_bridge_73_Deserialize_System_Int32__B5A0A629(
+        void
+);
+extern "C" CHAOS_IL2CPP_INT32 chaos_bridge_80_Deserialize_System_Int32__DF0DFB9C(
+        void
+);
+extern "C" CHAOS_IL2CPP_INT32 chaos_bridge_82_Deserialize_System_Int32__93BB85C4(
+        void
+);
+extern "C" CHAOS_IL2CPP_INT32 chaos_bridge_51_Deserialize_System_Int32__FE1468B1(
+        void
+);
+extern "C" CHAOS_IL2CPP_INT32 chaos_bridge_53_Deserialize_System_Int32__C784555B(
+        void
+);
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_68_DeserializeAsync_E697D20D(
+        void
+);
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_74_DeserializeAsync_5D3F5E76(
+        void
+);
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_64_DeserializeAsync_System_Int32__F0E727A8(
+        void
+);
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_72_DeserializeAsync_System_Int32__61DBE53A(
+        void
+);
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_76_DeserializeAsyncEnumerable_System_Int32__F0C0E37C(
+        void
+);
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_77_DeserializeAsyncEnumerable_System_Int32__56F62938(
+        void
+);
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_79_DeserializeAsyncEnumerable_System_Int32__5260B399(
+        void
+);
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_78_DeserializeAsyncEnumerable_System_Int32__BDB1B678(
+        void
+);
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_93_Serialize_502626E5(
+        void
+);
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_95_Serialize_78D7C264(
+        void
+);
+extern "C" void chaos_bridge_88_Serialize_7628F55D(
+        void
+);
+extern "C" void chaos_bridge_92_Serialize_546B5C08(
+        void
+);
+extern "C" void chaos_bridge_101_Serialize_11CA6FE9(
+        void
+);
+extern "C" void chaos_bridge_103_Serialize_4A5BCC9E(
+        void
+);
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_11_Serialize_System_Int32__7592DCBC(
+        void
+);
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_94_Serialize_System_Int32__73864990(
+        void
+);
+extern "C" void chaos_bridge_10_Serialize_System_Int32__4CD7B67(
+        void
+);
+extern "C" void chaos_bridge_90_Serialize_System_Int32__9B42C812(
+        void
+);
+extern "C" void chaos_bridge_100_Serialize_System_Int32__1014A2A7(
+        void
+);
+extern "C" void chaos_bridge_102_Serialize_System_Int32__E52E3BC6(
+        void
+);
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_99_SerializeAsync_8B64E629(
+        void
+);
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_98_SerializeAsync_7762FEC7(
+        void
+);
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_87_SerializeAsync_476AF6BD(
+        void
+);
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_91_SerializeAsync_ED52D512(
+        void
+);
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_97_SerializeAsync_System_Int32__4D06B902(
+        void
+);
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_96_SerializeAsync_System_Int32__1D18F99(
+        void
+);
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_8_SerializeAsync_System_Int32__A96D0B7D(
+        void
+);
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_89_SerializeAsync_System_Int32__AB2084B1(
+        void
+);
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_55_SerializeToDocument_69212A57(
+        void
+);
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_57_SerializeToDocument_9C5D43D6(
+        void
+);
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_1_SerializeToDocument_System_Int32__D480429C(
+        void
+);
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_56_SerializeToDocument_System_Int32__1524B8D7(
+        void
+);
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_58_SerializeToElement_644E0FE8(
+        void
+);
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_60_SerializeToElement_ED9676AE(
+        void
+);
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_3_SerializeToElement_System_Int32__2E81ABB5(
+        void
+);
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_59_SerializeToElement_System_Int32__79CBF2BC(
+        void
+);
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_61_SerializeToNode_5BFD7353(
+        void
+);
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_63_SerializeToNode_AFA4230D(
+        void
+);
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_5_SerializeToNode_System_Int32__4086D249(
+        void
+);
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_62_SerializeToNode_System_Int32__DA06455A(
+        void
+);
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_84_SerializeToUtf8Bytes_D58B0B6F(
+        void
+);
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_86_SerializeToUtf8Bytes_411CFF90(
+        void
+);
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_7_SerializeToUtf8Bytes_System_Int32__A7973AC8(
+        void
+);
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_85_SerializeToUtf8Bytes_System_Int32__9E992F3B(
+        void
+);
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_6_op_Implicit_DFAFE69F(
+        void
+);
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_107_GetBoolean_EC990124(
+            CHAOS_IL2CPP_INTPTR
+);
+extern "C" CHAOS_IL2CPP_UINT8 chaos_bridge_109_GetByte_B0C2E3E8(
+            CHAOS_IL2CPP_INTPTR
+);
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_108_GetBytesFromBase64_37869A8A(
+            CHAOS_IL2CPP_INTPTR
+);
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_106_GetComment_13ACDE6D(
+            CHAOS_IL2CPP_INTPTR
+);
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_120_GetDateTime_3EB589EC(
+            CHAOS_IL2CPP_INTPTR
+);
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_121_GetDateTimeOffset_189C2944(
+            CHAOS_IL2CPP_INTPTR
+);
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_119_GetDecimal_61E5663E(
+            CHAOS_IL2CPP_INTPTR
+);
+extern "C" double chaos_bridge_118_GetDouble_4B6692FC(
+            CHAOS_IL2CPP_INTPTR
+);
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_122_GetGuid_51903765(
+            CHAOS_IL2CPP_INTPTR
+);
+extern "C" CHAOS_IL2CPP_INT16 chaos_bridge_111_GetInt16_13CDC2CE(
+            CHAOS_IL2CPP_INTPTR
+);
+extern "C" CHAOS_IL2CPP_INT32 chaos_bridge_112_GetInt32_A803500(
+            CHAOS_IL2CPP_INTPTR
+);
+extern "C" CHAOS_IL2CPP_INT64 chaos_bridge_113_GetInt64_8754176D(
+            CHAOS_IL2CPP_INTPTR
+);
+extern "C" CHAOS_IL2CPP_INT8 chaos_bridge_110_GetSByte_A2D517DA(
+            CHAOS_IL2CPP_INTPTR
+);
+extern "C" float chaos_bridge_117_GetSingle_B754C666(
+            CHAOS_IL2CPP_INTPTR
+);
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_105_GetString_BD4F616B(
+            CHAOS_IL2CPP_INTPTR
+);
+extern "C" CHAOS_IL2CPP_UINT16 chaos_bridge_114_GetUInt16_C735F7E4(
+            CHAOS_IL2CPP_INTPTR
+);
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_115_GetUInt32_8DF8EB2E(
+            CHAOS_IL2CPP_INTPTR
+);
+extern "C" CHAOS_IL2CPP_UINT64 chaos_bridge_116_GetUInt64_2F7499B2(
+            CHAOS_IL2CPP_INTPTR
+);
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_124_TryGetByte_AD3B5C86(
+            CHAOS_IL2CPP_INTPTR
+);
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_123_TryGetBytesFromBase64_D1AA75BF(
+            CHAOS_IL2CPP_INTPTR
+);
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_135_TryGetDateTime_FD709E60(
+            CHAOS_IL2CPP_INTPTR
+);
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_136_TryGetDateTimeOffset_7ECC1FAD(
+            CHAOS_IL2CPP_INTPTR
+);
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_134_TryGetDecimal_12617098(
+            CHAOS_IL2CPP_INTPTR
+);
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_133_TryGetDouble_293E3576(
+            CHAOS_IL2CPP_INTPTR
+);
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_137_TryGetGuid_E7932F6B(
+            CHAOS_IL2CPP_INTPTR
+);
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_126_TryGetInt16_4DD81879(
+            CHAOS_IL2CPP_INTPTR
+);
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_127_TryGetInt32_7586D149(
+            CHAOS_IL2CPP_INTPTR
+);
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_128_TryGetInt64_E563597A(
+            CHAOS_IL2CPP_INTPTR
+);
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_125_TryGetSByte_AE019319(
+            CHAOS_IL2CPP_INTPTR
+);
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_132_TryGetSingle_5EDFD360(
+            CHAOS_IL2CPP_INTPTR
+);
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_129_TryGetUInt16_8A6CA338(
+            CHAOS_IL2CPP_INTPTR
+);
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_130_TryGetUInt32_EE4B84B6(
+            CHAOS_IL2CPP_INTPTR
+);
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_131_TryGetUInt64_5DF8360E(
+            CHAOS_IL2CPP_INTPTR
+);
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_104_ValueTextEquals_68C8F3F7(
+            CHAOS_IL2CPP_INTPTR
+);
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_139_DisposeAsync_911E6D1A(
+            CHAOS_IL2CPP_INTPTR
+);
+extern "C" void chaos_bridge_138_Flush_C24754E7(
+            CHAOS_IL2CPP_INTPTR
+);
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_142_FlushAsync_4E8E2282(
+            CHAOS_IL2CPP_INTPTR
+);
+extern "C" void chaos_bridge_145_WriteCommentValue_D7CC1A10(
+            CHAOS_IL2CPP_INTPTR
+);
+extern "C" void chaos_bridge_148_WriteNumberValue_7098783F(
+            CHAOS_IL2CPP_INTPTR
+);
+extern "C" void chaos_bridge_149_WriteNumberValue_3E5344FC(
+            CHAOS_IL2CPP_INTPTR
+);
+extern "C" void chaos_bridge_154_WriteNumberValue_B9FE6E4A(
+            CHAOS_IL2CPP_INTPTR
+);
+extern "C" void chaos_bridge_155_WriteNumberValue_907E9A4D(
+            CHAOS_IL2CPP_INTPTR
+);
+extern "C" void chaos_bridge_150_WriteNumberValue_E3AC2D8C(
+            CHAOS_IL2CPP_INTPTR
+);
+extern "C" void chaos_bridge_158_WriteNumberValue_86474A9B(
+            CHAOS_IL2CPP_INTPTR
+);
+extern "C" void chaos_bridge_159_WriteNumberValue_9A450E5D(
+            CHAOS_IL2CPP_INTPTR
+);
+extern "C" void chaos_bridge_143_WritePropertyName_B8C28456(
+            CHAOS_IL2CPP_INTPTR
+);
+extern "C" void chaos_bridge_144_WritePropertyName_231F8E22(
+            CHAOS_IL2CPP_INTPTR
+);
+extern "C" void chaos_bridge_153_WriteRawValue_4E4C7DFE(
+            CHAOS_IL2CPP_INTPTR
+);
+extern "C" void chaos_bridge_152_WriteRawValue_290949DD(
+            CHAOS_IL2CPP_INTPTR
+);
+extern "C" void chaos_bridge_156_WriteStringValue_80FF96BC(
+            CHAOS_IL2CPP_INTPTR
+);
+extern "C" void chaos_bridge_146_WriteStringValue_9710D2CC(
+            CHAOS_IL2CPP_INTPTR
+);
+extern "C" void chaos_bridge_147_WriteStringValue_AD56A75C(
+            CHAOS_IL2CPP_INTPTR
+);
+extern "C" void chaos_bridge_151_WriteStringValue_601A1499(
+            CHAOS_IL2CPP_INTPTR
+);
+extern "C" void chaos_bridge_157_WriteStringValue_65D1AF05(
+            CHAOS_IL2CPP_INTPTR
+);
 
 // ═══════════════════════════════════════════════════════════════════════════
 // Typed Dispatch Table — wires extern "C" native symbols into typed pointers
 // ═══════════════════════════════════════════════════════════════════════════
 
 static const Functions s_functions = {
-    {
-        &Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Boolean_System_Boolean_System_String,
-        &Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Byte_System_Byte_System_String,
-        &Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Byte_array_System_Byte_array_System_String,
-        &Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Char_System_Char_System_String,
-        &Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Decimal_System_Decimal_System_String,
-        &Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Double_System_Double_System_String,
-        &Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Int16_System_Int16_System_String,
-        &Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Int32_System_Int32_System_String,
-        &Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Int64_System_Int64_System_String,
-        &Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Object_System_Object_System_String,
-        &Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_SByte_System_SByte_System_String,
-        &Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Single_System_Single_System_String,
-        &Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_String_System_String_System_String,
-        &Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_UInt16_System_UInt16_System_String,
-        &Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_UInt32_System_UInt32_System_String,
-        &Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_UInt64_System_UInt64_System_String,
-        &Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_0_0_System_String,
-        &Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreNotEqual_0_0_System_String,
-        &Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Complete,
-        &Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Fail_System_String,
-        &Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_IsFalse_System_Boolean_System_String,
-        &Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_IsNotNull_System_Object_System_String,
-        &Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_IsNull_System_Object_System_String,
-        &Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_IsTrue_System_Boolean_System_String,
-        &Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_RecordFailure,
-        &Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Reset,
-        &Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Throws_System_Action,
-        &Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Throws_JsonException_System_Action__generic,
-        &Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Throws_System_ArgumentNullException_System_Action__generic,
-        &Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Throws_System_InvalidOperationException_System_Action__generic,
-        &Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Throws_System_NotSupportedException_System_Action__generic,
-        &Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Throws_System_NullReferenceException_System_Action__generic,
-        &Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_get_ExitCode,
-    },
-    {
-        &Chaos_TestFramework_Sdk_Chaos_TestFramework_AssertionException__ctor_System_String,
-    },
-    {
-        &Chaos_TestFramework_Sdk_Chaos_TestFramework_BenchmarkAttribute__ctor,
-    },
-    {
-        &Chaos_TestFramework_Sdk_Chaos_TestFramework_FactAttribute__ctor,
-    },
-    {
-        &Chaos_TestFramework_Sdk_Chaos_TestFramework_HotUpdateAttribute__ctor,
-    },
     {
         &CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonDocumentTests__ctor,
         &CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonDocumentTests_Dispose_0__0,
@@ -3505,7 +3786,201 @@ static const Functions s_functions = {
         &CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_Utf8JsonWriterTests___c_WriteString_39_JsonEncodedText_string_0_b__69_0,
         &CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_Utf8JsonWriterTests___c_WriteString_39_JsonEncodedText_string_1_b__70_0,
     },
-    820,
+    {
+        &chaos_bridge_0__ctor_DA31580D,
+    },
+    {
+        &chaos_bridge_141_GetResult_E8398FC8,
+    },
+    {
+        &chaos_bridge_66_GetResult_1CB058B5,
+    },
+    {
+        &chaos_bridge_70_GetResult_67FB55DE,
+    },
+    {
+        &chaos_bridge_9_GetAwaiter_C029999E,
+    },
+    {
+        &chaos_bridge_18_GetAwaiter_F3423D3B,
+    },
+    {
+        &chaos_bridge_140_GetAwaiter_1EB14700,
+    },
+    {
+        &chaos_bridge_65_GetAwaiter_FB5DC740,
+    },
+    {
+        &chaos_bridge_69_GetAwaiter_93F46D7F,
+    },
+    {
+        &chaos_bridge_12_Dispose_CB85E661,
+        &chaos_bridge_15_Parse_3279CE1A,
+        &chaos_bridge_16_Parse_225C2001,
+        &chaos_bridge_14_Parse_8CB0ED96,
+        &chaos_bridge_19_Parse_581BE216,
+        &chaos_bridge_20_Parse_6EBF0A53,
+        &chaos_bridge_17_ParseAsync_7C016739,
+        &chaos_bridge_13_WriteTo_C29D3117,
+    },
+    {
+        &chaos_bridge_22_GetBoolean_56B23856,
+        &chaos_bridge_25_GetByte_6977C001,
+        &chaos_bridge_23_GetBytesFromBase64_C8873089,
+        &chaos_bridge_35_GetDateTime_D7CB995C,
+        &chaos_bridge_36_GetDateTimeOffset_78270FBD,
+        &chaos_bridge_34_GetDecimal_FB8793EE,
+        &chaos_bridge_32_GetDouble_85178AC5,
+        &chaos_bridge_37_GetGuid_C2081CEC,
+        &chaos_bridge_26_GetInt16_B45456E6,
+        &chaos_bridge_28_GetInt32_5056D1D0,
+        &chaos_bridge_30_GetInt64_88DAFFD8,
+        &chaos_bridge_21_GetProperty_B5A71D2B,
+        &chaos_bridge_24_GetSByte_E77FE6FC,
+        &chaos_bridge_33_GetSingle_788EFB37,
+        &chaos_bridge_27_GetUInt16_5557A95B,
+        &chaos_bridge_29_GetUInt32_6D8FB30,
+        &chaos_bridge_31_GetUInt64_936FC948,
+        &chaos_bridge_39_TryGetProperty_9788ABD1,
+        &chaos_bridge_38_ValueEquals_D3CB5B89,
+    },
+    {
+        &chaos_bridge_40_Encode_88D73B2E,
+    },
+    {
+        &chaos_bridge_41_NameEquals_B2E216A,
+        &chaos_bridge_42_WriteTo_4D83871D,
+    },
+    {
+        &chaos_bridge_44_Deserialize_56361279,
+        &chaos_bridge_46_Deserialize_CA9E3578,
+        &chaos_bridge_48_Deserialize_8265A920,
+        &chaos_bridge_50_Deserialize_77FD3E03,
+        &chaos_bridge_71_Deserialize_DAB79D23,
+        &chaos_bridge_75_Deserialize_67D43EA2,
+        &chaos_bridge_81_Deserialize_9B173F55,
+        &chaos_bridge_83_Deserialize_17ABC81C,
+        &chaos_bridge_52_Deserialize_BFCBC1D5,
+        &chaos_bridge_54_Deserialize_B79C364,
+        &chaos_bridge_2_Deserialize_JsonDocument__330FF27F,
+        &chaos_bridge_4_Deserialize_JsonElement__5A4BBFE,
+        &chaos_bridge_43_Deserialize_System_Int32__46AB0D0F,
+        &chaos_bridge_45_Deserialize_System_Int32__3F2624B7,
+        &chaos_bridge_47_Deserialize_System_Int32__9AC463BA,
+        &chaos_bridge_49_Deserialize_System_Int32__316E91F1,
+        &chaos_bridge_67_Deserialize_System_Int32__2D993147,
+        &chaos_bridge_73_Deserialize_System_Int32__B5A0A629,
+        &chaos_bridge_80_Deserialize_System_Int32__DF0DFB9C,
+        &chaos_bridge_82_Deserialize_System_Int32__93BB85C4,
+        &chaos_bridge_51_Deserialize_System_Int32__FE1468B1,
+        &chaos_bridge_53_Deserialize_System_Int32__C784555B,
+        &chaos_bridge_68_DeserializeAsync_E697D20D,
+        &chaos_bridge_74_DeserializeAsync_5D3F5E76,
+        &chaos_bridge_64_DeserializeAsync_System_Int32__F0E727A8,
+        &chaos_bridge_72_DeserializeAsync_System_Int32__61DBE53A,
+        &chaos_bridge_76_DeserializeAsyncEnumerable_System_Int32__F0C0E37C,
+        &chaos_bridge_77_DeserializeAsyncEnumerable_System_Int32__56F62938,
+        &chaos_bridge_79_DeserializeAsyncEnumerable_System_Int32__5260B399,
+        &chaos_bridge_78_DeserializeAsyncEnumerable_System_Int32__BDB1B678,
+        &chaos_bridge_93_Serialize_502626E5,
+        &chaos_bridge_95_Serialize_78D7C264,
+        &chaos_bridge_88_Serialize_7628F55D,
+        &chaos_bridge_92_Serialize_546B5C08,
+        &chaos_bridge_101_Serialize_11CA6FE9,
+        &chaos_bridge_103_Serialize_4A5BCC9E,
+        &chaos_bridge_11_Serialize_System_Int32__7592DCBC,
+        &chaos_bridge_94_Serialize_System_Int32__73864990,
+        &chaos_bridge_10_Serialize_System_Int32__4CD7B67,
+        &chaos_bridge_90_Serialize_System_Int32__9B42C812,
+        &chaos_bridge_100_Serialize_System_Int32__1014A2A7,
+        &chaos_bridge_102_Serialize_System_Int32__E52E3BC6,
+        &chaos_bridge_99_SerializeAsync_8B64E629,
+        &chaos_bridge_98_SerializeAsync_7762FEC7,
+        &chaos_bridge_87_SerializeAsync_476AF6BD,
+        &chaos_bridge_91_SerializeAsync_ED52D512,
+        &chaos_bridge_97_SerializeAsync_System_Int32__4D06B902,
+        &chaos_bridge_96_SerializeAsync_System_Int32__1D18F99,
+        &chaos_bridge_8_SerializeAsync_System_Int32__A96D0B7D,
+        &chaos_bridge_89_SerializeAsync_System_Int32__AB2084B1,
+        &chaos_bridge_55_SerializeToDocument_69212A57,
+        &chaos_bridge_57_SerializeToDocument_9C5D43D6,
+        &chaos_bridge_1_SerializeToDocument_System_Int32__D480429C,
+        &chaos_bridge_56_SerializeToDocument_System_Int32__1524B8D7,
+        &chaos_bridge_58_SerializeToElement_644E0FE8,
+        &chaos_bridge_60_SerializeToElement_ED9676AE,
+        &chaos_bridge_3_SerializeToElement_System_Int32__2E81ABB5,
+        &chaos_bridge_59_SerializeToElement_System_Int32__79CBF2BC,
+        &chaos_bridge_61_SerializeToNode_5BFD7353,
+        &chaos_bridge_63_SerializeToNode_AFA4230D,
+        &chaos_bridge_5_SerializeToNode_System_Int32__4086D249,
+        &chaos_bridge_62_SerializeToNode_System_Int32__DA06455A,
+        &chaos_bridge_84_SerializeToUtf8Bytes_D58B0B6F,
+        &chaos_bridge_86_SerializeToUtf8Bytes_411CFF90,
+        &chaos_bridge_7_SerializeToUtf8Bytes_System_Int32__A7973AC8,
+        &chaos_bridge_85_SerializeToUtf8Bytes_System_Int32__9E992F3B,
+    },
+    {
+        &chaos_bridge_6_op_Implicit_DFAFE69F,
+    },
+    {
+        &chaos_bridge_107_GetBoolean_EC990124,
+        &chaos_bridge_109_GetByte_B0C2E3E8,
+        &chaos_bridge_108_GetBytesFromBase64_37869A8A,
+        &chaos_bridge_106_GetComment_13ACDE6D,
+        &chaos_bridge_120_GetDateTime_3EB589EC,
+        &chaos_bridge_121_GetDateTimeOffset_189C2944,
+        &chaos_bridge_119_GetDecimal_61E5663E,
+        &chaos_bridge_118_GetDouble_4B6692FC,
+        &chaos_bridge_122_GetGuid_51903765,
+        &chaos_bridge_111_GetInt16_13CDC2CE,
+        &chaos_bridge_112_GetInt32_A803500,
+        &chaos_bridge_113_GetInt64_8754176D,
+        &chaos_bridge_110_GetSByte_A2D517DA,
+        &chaos_bridge_117_GetSingle_B754C666,
+        &chaos_bridge_105_GetString_BD4F616B,
+        &chaos_bridge_114_GetUInt16_C735F7E4,
+        &chaos_bridge_115_GetUInt32_8DF8EB2E,
+        &chaos_bridge_116_GetUInt64_2F7499B2,
+        &chaos_bridge_124_TryGetByte_AD3B5C86,
+        &chaos_bridge_123_TryGetBytesFromBase64_D1AA75BF,
+        &chaos_bridge_135_TryGetDateTime_FD709E60,
+        &chaos_bridge_136_TryGetDateTimeOffset_7ECC1FAD,
+        &chaos_bridge_134_TryGetDecimal_12617098,
+        &chaos_bridge_133_TryGetDouble_293E3576,
+        &chaos_bridge_137_TryGetGuid_E7932F6B,
+        &chaos_bridge_126_TryGetInt16_4DD81879,
+        &chaos_bridge_127_TryGetInt32_7586D149,
+        &chaos_bridge_128_TryGetInt64_E563597A,
+        &chaos_bridge_125_TryGetSByte_AE019319,
+        &chaos_bridge_132_TryGetSingle_5EDFD360,
+        &chaos_bridge_129_TryGetUInt16_8A6CA338,
+        &chaos_bridge_130_TryGetUInt32_EE4B84B6,
+        &chaos_bridge_131_TryGetUInt64_5DF8360E,
+        &chaos_bridge_104_ValueTextEquals_68C8F3F7,
+    },
+    {
+        &chaos_bridge_139_DisposeAsync_911E6D1A,
+        &chaos_bridge_138_Flush_C24754E7,
+        &chaos_bridge_142_FlushAsync_4E8E2282,
+        &chaos_bridge_145_WriteCommentValue_D7CC1A10,
+        &chaos_bridge_148_WriteNumberValue_7098783F,
+        &chaos_bridge_149_WriteNumberValue_3E5344FC,
+        &chaos_bridge_154_WriteNumberValue_B9FE6E4A,
+        &chaos_bridge_155_WriteNumberValue_907E9A4D,
+        &chaos_bridge_150_WriteNumberValue_E3AC2D8C,
+        &chaos_bridge_158_WriteNumberValue_86474A9B,
+        &chaos_bridge_159_WriteNumberValue_9A450E5D,
+        &chaos_bridge_143_WritePropertyName_B8C28456,
+        &chaos_bridge_144_WritePropertyName_231F8E22,
+        &chaos_bridge_153_WriteRawValue_4E4C7DFE,
+        &chaos_bridge_152_WriteRawValue_290949DD,
+        &chaos_bridge_156_WriteStringValue_80FF96BC,
+        &chaos_bridge_146_WriteStringValue_9710D2CC,
+        &chaos_bridge_147_WriteStringValue_AD56A75C,
+        &chaos_bridge_151_WriteStringValue_601A1499,
+        &chaos_bridge_157_WriteStringValue_65D1AF05,
+    },
+    943,
 };
 
 const Functions kFunctions = s_functions;
@@ -3513,45 +3988,8 @@ const Functions kFunctions = s_functions;
 // Flat function pointer array for indexed dispatch (benchmarking).
 // Avoids fragile reinterpret_cast<void* const*>(&kFunctions) which depends on
 // struct layout uniformity across sub-struct members.
-extern "C" void* kFunctionsFlat[820];
-void* kFunctionsFlat[820] = {
-    reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Boolean_System_Boolean_System_String),
-    reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Byte_System_Byte_System_String),
-    reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Byte_array_System_Byte_array_System_String),
-    reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Char_System_Char_System_String),
-    reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Decimal_System_Decimal_System_String),
-    reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Double_System_Double_System_String),
-    reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Int16_System_Int16_System_String),
-    reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Int32_System_Int32_System_String),
-    reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Int64_System_Int64_System_String),
-    reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Object_System_Object_System_String),
-    reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_SByte_System_SByte_System_String),
-    reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Single_System_Single_System_String),
-    reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_String_System_String_System_String),
-    reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_UInt16_System_UInt16_System_String),
-    reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_UInt32_System_UInt32_System_String),
-    reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_UInt64_System_UInt64_System_String),
-    reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_0_0_System_String),
-    reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreNotEqual_0_0_System_String),
-    reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Complete),
-    reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Fail_System_String),
-    reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_IsFalse_System_Boolean_System_String),
-    reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_IsNotNull_System_Object_System_String),
-    reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_IsNull_System_Object_System_String),
-    reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_IsTrue_System_Boolean_System_String),
-    reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_RecordFailure),
-    reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Reset),
-    reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Throws_System_Action),
-    reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Throws_JsonException_System_Action__generic),
-    reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Throws_System_ArgumentNullException_System_Action__generic),
-    reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Throws_System_InvalidOperationException_System_Action__generic),
-    reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Throws_System_NotSupportedException_System_Action__generic),
-    reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Throws_System_NullReferenceException_System_Action__generic),
-    reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_get_ExitCode),
-    reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_AssertionException__ctor_System_String),
-    reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_BenchmarkAttribute__ctor),
-    reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_FactAttribute__ctor),
-    reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_HotUpdateAttribute__ctor),
+extern "C" void* kFunctionsFlat[943];
+void* kFunctionsFlat[943] = {
     reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonDocumentTests__ctor),
     reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonDocumentTests_Dispose_0__0),
     reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonDocumentTests_ParseAsync_5_Stream_JsonDocumentOptions_CancellationToken_0),
@@ -4335,6 +4773,166 @@ void* kFunctionsFlat[820] = {
     reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_Utf8JsonWriterTests___c_WriteString_38_string_string_2_b__68_0),
     reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_Utf8JsonWriterTests___c_WriteString_39_JsonEncodedText_string_0_b__69_0),
     reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_Utf8JsonWriterTests___c_WriteString_39_JsonEncodedText_string_1_b__70_0),
+    reinterpret_cast<void*>(&chaos_bridge_0__ctor_DA31580D),
+    reinterpret_cast<void*>(&chaos_bridge_141_GetResult_E8398FC8),
+    reinterpret_cast<void*>(&chaos_bridge_66_GetResult_1CB058B5),
+    reinterpret_cast<void*>(&chaos_bridge_70_GetResult_67FB55DE),
+    reinterpret_cast<void*>(&chaos_bridge_9_GetAwaiter_C029999E),
+    reinterpret_cast<void*>(&chaos_bridge_18_GetAwaiter_F3423D3B),
+    reinterpret_cast<void*>(&chaos_bridge_140_GetAwaiter_1EB14700),
+    reinterpret_cast<void*>(&chaos_bridge_65_GetAwaiter_FB5DC740),
+    reinterpret_cast<void*>(&chaos_bridge_69_GetAwaiter_93F46D7F),
+    reinterpret_cast<void*>(&chaos_bridge_12_Dispose_CB85E661),
+    reinterpret_cast<void*>(&chaos_bridge_15_Parse_3279CE1A),
+    reinterpret_cast<void*>(&chaos_bridge_16_Parse_225C2001),
+    reinterpret_cast<void*>(&chaos_bridge_14_Parse_8CB0ED96),
+    reinterpret_cast<void*>(&chaos_bridge_19_Parse_581BE216),
+    reinterpret_cast<void*>(&chaos_bridge_20_Parse_6EBF0A53),
+    reinterpret_cast<void*>(&chaos_bridge_17_ParseAsync_7C016739),
+    reinterpret_cast<void*>(&chaos_bridge_13_WriteTo_C29D3117),
+    reinterpret_cast<void*>(&chaos_bridge_22_GetBoolean_56B23856),
+    reinterpret_cast<void*>(&chaos_bridge_25_GetByte_6977C001),
+    reinterpret_cast<void*>(&chaos_bridge_23_GetBytesFromBase64_C8873089),
+    reinterpret_cast<void*>(&chaos_bridge_35_GetDateTime_D7CB995C),
+    reinterpret_cast<void*>(&chaos_bridge_36_GetDateTimeOffset_78270FBD),
+    reinterpret_cast<void*>(&chaos_bridge_34_GetDecimal_FB8793EE),
+    reinterpret_cast<void*>(&chaos_bridge_32_GetDouble_85178AC5),
+    reinterpret_cast<void*>(&chaos_bridge_37_GetGuid_C2081CEC),
+    reinterpret_cast<void*>(&chaos_bridge_26_GetInt16_B45456E6),
+    reinterpret_cast<void*>(&chaos_bridge_28_GetInt32_5056D1D0),
+    reinterpret_cast<void*>(&chaos_bridge_30_GetInt64_88DAFFD8),
+    reinterpret_cast<void*>(&chaos_bridge_21_GetProperty_B5A71D2B),
+    reinterpret_cast<void*>(&chaos_bridge_24_GetSByte_E77FE6FC),
+    reinterpret_cast<void*>(&chaos_bridge_33_GetSingle_788EFB37),
+    reinterpret_cast<void*>(&chaos_bridge_27_GetUInt16_5557A95B),
+    reinterpret_cast<void*>(&chaos_bridge_29_GetUInt32_6D8FB30),
+    reinterpret_cast<void*>(&chaos_bridge_31_GetUInt64_936FC948),
+    reinterpret_cast<void*>(&chaos_bridge_39_TryGetProperty_9788ABD1),
+    reinterpret_cast<void*>(&chaos_bridge_38_ValueEquals_D3CB5B89),
+    reinterpret_cast<void*>(&chaos_bridge_40_Encode_88D73B2E),
+    reinterpret_cast<void*>(&chaos_bridge_41_NameEquals_B2E216A),
+    reinterpret_cast<void*>(&chaos_bridge_42_WriteTo_4D83871D),
+    reinterpret_cast<void*>(&chaos_bridge_44_Deserialize_56361279),
+    reinterpret_cast<void*>(&chaos_bridge_46_Deserialize_CA9E3578),
+    reinterpret_cast<void*>(&chaos_bridge_48_Deserialize_8265A920),
+    reinterpret_cast<void*>(&chaos_bridge_50_Deserialize_77FD3E03),
+    reinterpret_cast<void*>(&chaos_bridge_71_Deserialize_DAB79D23),
+    reinterpret_cast<void*>(&chaos_bridge_75_Deserialize_67D43EA2),
+    reinterpret_cast<void*>(&chaos_bridge_81_Deserialize_9B173F55),
+    reinterpret_cast<void*>(&chaos_bridge_83_Deserialize_17ABC81C),
+    reinterpret_cast<void*>(&chaos_bridge_52_Deserialize_BFCBC1D5),
+    reinterpret_cast<void*>(&chaos_bridge_54_Deserialize_B79C364),
+    reinterpret_cast<void*>(&chaos_bridge_2_Deserialize_JsonDocument__330FF27F),
+    reinterpret_cast<void*>(&chaos_bridge_4_Deserialize_JsonElement__5A4BBFE),
+    reinterpret_cast<void*>(&chaos_bridge_43_Deserialize_System_Int32__46AB0D0F),
+    reinterpret_cast<void*>(&chaos_bridge_45_Deserialize_System_Int32__3F2624B7),
+    reinterpret_cast<void*>(&chaos_bridge_47_Deserialize_System_Int32__9AC463BA),
+    reinterpret_cast<void*>(&chaos_bridge_49_Deserialize_System_Int32__316E91F1),
+    reinterpret_cast<void*>(&chaos_bridge_67_Deserialize_System_Int32__2D993147),
+    reinterpret_cast<void*>(&chaos_bridge_73_Deserialize_System_Int32__B5A0A629),
+    reinterpret_cast<void*>(&chaos_bridge_80_Deserialize_System_Int32__DF0DFB9C),
+    reinterpret_cast<void*>(&chaos_bridge_82_Deserialize_System_Int32__93BB85C4),
+    reinterpret_cast<void*>(&chaos_bridge_51_Deserialize_System_Int32__FE1468B1),
+    reinterpret_cast<void*>(&chaos_bridge_53_Deserialize_System_Int32__C784555B),
+    reinterpret_cast<void*>(&chaos_bridge_68_DeserializeAsync_E697D20D),
+    reinterpret_cast<void*>(&chaos_bridge_74_DeserializeAsync_5D3F5E76),
+    reinterpret_cast<void*>(&chaos_bridge_64_DeserializeAsync_System_Int32__F0E727A8),
+    reinterpret_cast<void*>(&chaos_bridge_72_DeserializeAsync_System_Int32__61DBE53A),
+    reinterpret_cast<void*>(&chaos_bridge_76_DeserializeAsyncEnumerable_System_Int32__F0C0E37C),
+    reinterpret_cast<void*>(&chaos_bridge_77_DeserializeAsyncEnumerable_System_Int32__56F62938),
+    reinterpret_cast<void*>(&chaos_bridge_79_DeserializeAsyncEnumerable_System_Int32__5260B399),
+    reinterpret_cast<void*>(&chaos_bridge_78_DeserializeAsyncEnumerable_System_Int32__BDB1B678),
+    reinterpret_cast<void*>(&chaos_bridge_93_Serialize_502626E5),
+    reinterpret_cast<void*>(&chaos_bridge_95_Serialize_78D7C264),
+    reinterpret_cast<void*>(&chaos_bridge_88_Serialize_7628F55D),
+    reinterpret_cast<void*>(&chaos_bridge_92_Serialize_546B5C08),
+    reinterpret_cast<void*>(&chaos_bridge_101_Serialize_11CA6FE9),
+    reinterpret_cast<void*>(&chaos_bridge_103_Serialize_4A5BCC9E),
+    reinterpret_cast<void*>(&chaos_bridge_11_Serialize_System_Int32__7592DCBC),
+    reinterpret_cast<void*>(&chaos_bridge_94_Serialize_System_Int32__73864990),
+    reinterpret_cast<void*>(&chaos_bridge_10_Serialize_System_Int32__4CD7B67),
+    reinterpret_cast<void*>(&chaos_bridge_90_Serialize_System_Int32__9B42C812),
+    reinterpret_cast<void*>(&chaos_bridge_100_Serialize_System_Int32__1014A2A7),
+    reinterpret_cast<void*>(&chaos_bridge_102_Serialize_System_Int32__E52E3BC6),
+    reinterpret_cast<void*>(&chaos_bridge_99_SerializeAsync_8B64E629),
+    reinterpret_cast<void*>(&chaos_bridge_98_SerializeAsync_7762FEC7),
+    reinterpret_cast<void*>(&chaos_bridge_87_SerializeAsync_476AF6BD),
+    reinterpret_cast<void*>(&chaos_bridge_91_SerializeAsync_ED52D512),
+    reinterpret_cast<void*>(&chaos_bridge_97_SerializeAsync_System_Int32__4D06B902),
+    reinterpret_cast<void*>(&chaos_bridge_96_SerializeAsync_System_Int32__1D18F99),
+    reinterpret_cast<void*>(&chaos_bridge_8_SerializeAsync_System_Int32__A96D0B7D),
+    reinterpret_cast<void*>(&chaos_bridge_89_SerializeAsync_System_Int32__AB2084B1),
+    reinterpret_cast<void*>(&chaos_bridge_55_SerializeToDocument_69212A57),
+    reinterpret_cast<void*>(&chaos_bridge_57_SerializeToDocument_9C5D43D6),
+    reinterpret_cast<void*>(&chaos_bridge_1_SerializeToDocument_System_Int32__D480429C),
+    reinterpret_cast<void*>(&chaos_bridge_56_SerializeToDocument_System_Int32__1524B8D7),
+    reinterpret_cast<void*>(&chaos_bridge_58_SerializeToElement_644E0FE8),
+    reinterpret_cast<void*>(&chaos_bridge_60_SerializeToElement_ED9676AE),
+    reinterpret_cast<void*>(&chaos_bridge_3_SerializeToElement_System_Int32__2E81ABB5),
+    reinterpret_cast<void*>(&chaos_bridge_59_SerializeToElement_System_Int32__79CBF2BC),
+    reinterpret_cast<void*>(&chaos_bridge_61_SerializeToNode_5BFD7353),
+    reinterpret_cast<void*>(&chaos_bridge_63_SerializeToNode_AFA4230D),
+    reinterpret_cast<void*>(&chaos_bridge_5_SerializeToNode_System_Int32__4086D249),
+    reinterpret_cast<void*>(&chaos_bridge_62_SerializeToNode_System_Int32__DA06455A),
+    reinterpret_cast<void*>(&chaos_bridge_84_SerializeToUtf8Bytes_D58B0B6F),
+    reinterpret_cast<void*>(&chaos_bridge_86_SerializeToUtf8Bytes_411CFF90),
+    reinterpret_cast<void*>(&chaos_bridge_7_SerializeToUtf8Bytes_System_Int32__A7973AC8),
+    reinterpret_cast<void*>(&chaos_bridge_85_SerializeToUtf8Bytes_System_Int32__9E992F3B),
+    reinterpret_cast<void*>(&chaos_bridge_6_op_Implicit_DFAFE69F),
+    reinterpret_cast<void*>(&chaos_bridge_107_GetBoolean_EC990124),
+    reinterpret_cast<void*>(&chaos_bridge_109_GetByte_B0C2E3E8),
+    reinterpret_cast<void*>(&chaos_bridge_108_GetBytesFromBase64_37869A8A),
+    reinterpret_cast<void*>(&chaos_bridge_106_GetComment_13ACDE6D),
+    reinterpret_cast<void*>(&chaos_bridge_120_GetDateTime_3EB589EC),
+    reinterpret_cast<void*>(&chaos_bridge_121_GetDateTimeOffset_189C2944),
+    reinterpret_cast<void*>(&chaos_bridge_119_GetDecimal_61E5663E),
+    reinterpret_cast<void*>(&chaos_bridge_118_GetDouble_4B6692FC),
+    reinterpret_cast<void*>(&chaos_bridge_122_GetGuid_51903765),
+    reinterpret_cast<void*>(&chaos_bridge_111_GetInt16_13CDC2CE),
+    reinterpret_cast<void*>(&chaos_bridge_112_GetInt32_A803500),
+    reinterpret_cast<void*>(&chaos_bridge_113_GetInt64_8754176D),
+    reinterpret_cast<void*>(&chaos_bridge_110_GetSByte_A2D517DA),
+    reinterpret_cast<void*>(&chaos_bridge_117_GetSingle_B754C666),
+    reinterpret_cast<void*>(&chaos_bridge_105_GetString_BD4F616B),
+    reinterpret_cast<void*>(&chaos_bridge_114_GetUInt16_C735F7E4),
+    reinterpret_cast<void*>(&chaos_bridge_115_GetUInt32_8DF8EB2E),
+    reinterpret_cast<void*>(&chaos_bridge_116_GetUInt64_2F7499B2),
+    reinterpret_cast<void*>(&chaos_bridge_124_TryGetByte_AD3B5C86),
+    reinterpret_cast<void*>(&chaos_bridge_123_TryGetBytesFromBase64_D1AA75BF),
+    reinterpret_cast<void*>(&chaos_bridge_135_TryGetDateTime_FD709E60),
+    reinterpret_cast<void*>(&chaos_bridge_136_TryGetDateTimeOffset_7ECC1FAD),
+    reinterpret_cast<void*>(&chaos_bridge_134_TryGetDecimal_12617098),
+    reinterpret_cast<void*>(&chaos_bridge_133_TryGetDouble_293E3576),
+    reinterpret_cast<void*>(&chaos_bridge_137_TryGetGuid_E7932F6B),
+    reinterpret_cast<void*>(&chaos_bridge_126_TryGetInt16_4DD81879),
+    reinterpret_cast<void*>(&chaos_bridge_127_TryGetInt32_7586D149),
+    reinterpret_cast<void*>(&chaos_bridge_128_TryGetInt64_E563597A),
+    reinterpret_cast<void*>(&chaos_bridge_125_TryGetSByte_AE019319),
+    reinterpret_cast<void*>(&chaos_bridge_132_TryGetSingle_5EDFD360),
+    reinterpret_cast<void*>(&chaos_bridge_129_TryGetUInt16_8A6CA338),
+    reinterpret_cast<void*>(&chaos_bridge_130_TryGetUInt32_EE4B84B6),
+    reinterpret_cast<void*>(&chaos_bridge_131_TryGetUInt64_5DF8360E),
+    reinterpret_cast<void*>(&chaos_bridge_104_ValueTextEquals_68C8F3F7),
+    reinterpret_cast<void*>(&chaos_bridge_139_DisposeAsync_911E6D1A),
+    reinterpret_cast<void*>(&chaos_bridge_138_Flush_C24754E7),
+    reinterpret_cast<void*>(&chaos_bridge_142_FlushAsync_4E8E2282),
+    reinterpret_cast<void*>(&chaos_bridge_145_WriteCommentValue_D7CC1A10),
+    reinterpret_cast<void*>(&chaos_bridge_148_WriteNumberValue_7098783F),
+    reinterpret_cast<void*>(&chaos_bridge_149_WriteNumberValue_3E5344FC),
+    reinterpret_cast<void*>(&chaos_bridge_154_WriteNumberValue_B9FE6E4A),
+    reinterpret_cast<void*>(&chaos_bridge_155_WriteNumberValue_907E9A4D),
+    reinterpret_cast<void*>(&chaos_bridge_150_WriteNumberValue_E3AC2D8C),
+    reinterpret_cast<void*>(&chaos_bridge_158_WriteNumberValue_86474A9B),
+    reinterpret_cast<void*>(&chaos_bridge_159_WriteNumberValue_9A450E5D),
+    reinterpret_cast<void*>(&chaos_bridge_143_WritePropertyName_B8C28456),
+    reinterpret_cast<void*>(&chaos_bridge_144_WritePropertyName_231F8E22),
+    reinterpret_cast<void*>(&chaos_bridge_153_WriteRawValue_4E4C7DFE),
+    reinterpret_cast<void*>(&chaos_bridge_152_WriteRawValue_290949DD),
+    reinterpret_cast<void*>(&chaos_bridge_156_WriteStringValue_80FF96BC),
+    reinterpret_cast<void*>(&chaos_bridge_146_WriteStringValue_9710D2CC),
+    reinterpret_cast<void*>(&chaos_bridge_147_WriteStringValue_AD56A75C),
+    reinterpret_cast<void*>(&chaos_bridge_151_WriteStringValue_601A1499),
+    reinterpret_cast<void*>(&chaos_bridge_157_WriteStringValue_65D1AF05),
 };
 
 

@@ -51,6 +51,8 @@ class ChunkContext:
         native_config: Native build config — "check", "profile", or "ship".
         stage_timeout_seconds: Per-stage max wall-clock time (0 = no timeout).
         resume: Skip already-passed stages from previous run.
+        assembly_dirs: List of assembly search directories for codegen --assembly-dir.
+                       Populated from pipeline-config.yaml by the pipeline orchestrator.
     """
     slug: str
     assembly: str
@@ -63,6 +65,7 @@ class ChunkContext:
     stage_timeout_seconds: int = 0
     resume: bool = False
     skip_probe: bool = False
+    assembly_dirs: list[str] = field(default_factory=list)
 
     @property
     def managed_dir(self) -> Path:

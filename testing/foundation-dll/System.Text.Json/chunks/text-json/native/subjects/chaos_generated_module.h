@@ -31,7 +31,6 @@
 class ChaosRuntimeHost;
 
 // chaos_valuetype_* typedefs (opaque 32-bit managed value types)
-typedef CHAOS_IL2CPP_INT32 chaos_valuetype_Chaos_TestFramework_Sdk___0;
 typedef CHAOS_IL2CPP_INT32 chaos_valuetype_System_Text_Json_JsonElement;
 
 
@@ -44,168 +43,6 @@ typedef CHAOS_IL2CPP_INT32 chaos_valuetype_System_Text_Json_JsonElement;
 // codegen.  Each group's section is a constexpr aggregate so the compiler can
 // inline through the table when the address is known at compile time (LTO).
 struct Functions {
-    struct Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_t {
-        void (*AreEqual)(
-                    CHAOS_IL2CPP_INTPTR, 
-                    CHAOS_IL2CPP_INTPTR, 
-                    CHAOS_IL2CPP_INTPTR
-        );
-        void (*AreEqual_1)(
-                    CHAOS_IL2CPP_UINT8, 
-                    CHAOS_IL2CPP_UINT8, 
-                    CHAOS_IL2CPP_INTPTR
-        );
-        void (*AreEqual_2)(
-                    CHAOS_IL2CPP_INTPTR, 
-                    CHAOS_IL2CPP_INTPTR, 
-                    CHAOS_IL2CPP_INTPTR
-        );
-        void (*AreEqual_3)(
-                    CHAOS_IL2CPP_INTPTR, 
-                    CHAOS_IL2CPP_INTPTR, 
-                    CHAOS_IL2CPP_INTPTR
-        );
-        void (*AreEqual_4)(
-                    CHAOS_IL2CPP_INTPTR, 
-                    CHAOS_IL2CPP_INTPTR, 
-                    CHAOS_IL2CPP_INTPTR
-        );
-        void (*AreEqual_5)(
-                    double, 
-                    double, 
-                    CHAOS_IL2CPP_INTPTR
-        );
-        void (*AreEqual_6)(
-                    CHAOS_IL2CPP_INT16, 
-                    CHAOS_IL2CPP_INT16, 
-                    CHAOS_IL2CPP_INTPTR
-        );
-        void (*AreEqual_7)(
-                    CHAOS_IL2CPP_INT32, 
-                    CHAOS_IL2CPP_INT32, 
-                    CHAOS_IL2CPP_INTPTR
-        );
-        void (*AreEqual_8)(
-                    CHAOS_IL2CPP_INT64, 
-                    CHAOS_IL2CPP_INT64, 
-                    CHAOS_IL2CPP_INTPTR
-        );
-        void (*AreEqual_9)(
-                    CHAOS_IL2CPP_INTPTR, 
-                    CHAOS_IL2CPP_INTPTR, 
-                    CHAOS_IL2CPP_INTPTR
-        );
-        void (*AreEqual_10)(
-                    CHAOS_IL2CPP_INT8, 
-                    CHAOS_IL2CPP_INT8, 
-                    CHAOS_IL2CPP_INTPTR
-        );
-        void (*AreEqual_11)(
-                    float, 
-                    float, 
-                    CHAOS_IL2CPP_INTPTR
-        );
-        void (*AreEqual_12)(
-                    CHAOS_IL2CPP_INTPTR, 
-                    CHAOS_IL2CPP_INTPTR, 
-                    CHAOS_IL2CPP_INTPTR
-        );
-        void (*AreEqual_13)(
-                    CHAOS_IL2CPP_UINT16, 
-                    CHAOS_IL2CPP_UINT16, 
-                    CHAOS_IL2CPP_INTPTR
-        );
-        void (*AreEqual_14)(
-                    CHAOS_IL2CPP_INTPTR, 
-                    CHAOS_IL2CPP_INTPTR, 
-                    CHAOS_IL2CPP_INTPTR
-        );
-        void (*AreEqual_15)(
-                    CHAOS_IL2CPP_UINT64, 
-                    CHAOS_IL2CPP_UINT64, 
-                    CHAOS_IL2CPP_INTPTR
-        );
-        void (*AreEqual_16)(
-                    CHAOS_IL2CPP_INTPTR, 
-                    CHAOS_IL2CPP_INTPTR, 
-                    CHAOS_IL2CPP_INTPTR
-        );
-        void (*AreNotEqual)(
-                    CHAOS_IL2CPP_INTPTR, 
-                    CHAOS_IL2CPP_INTPTR, 
-                    CHAOS_IL2CPP_INTPTR
-        );
-        CHAOS_IL2CPP_INT32 (*Complete)(
-                void
-        );
-        void (*Fail)(
-                    CHAOS_IL2CPP_INTPTR
-        );
-        void (*IsFalse)(
-                    CHAOS_IL2CPP_INTPTR, 
-                    CHAOS_IL2CPP_INTPTR
-        );
-        void (*IsNotNull)(
-                    CHAOS_IL2CPP_INTPTR, 
-                    CHAOS_IL2CPP_INTPTR
-        );
-        void (*IsNull)(
-                    CHAOS_IL2CPP_INTPTR, 
-                    CHAOS_IL2CPP_INTPTR
-        );
-        void (*IsTrue)(
-                    CHAOS_IL2CPP_INTPTR, 
-                    CHAOS_IL2CPP_INTPTR
-        );
-        void (*RecordFailure)(
-                void
-        );
-        void (*Reset)(
-                void
-        );
-        void (*Throws)(
-                    CHAOS_IL2CPP_INTPTR
-        );
-        void (*Throws_JsonException_)(
-                    CHAOS_IL2CPP_INTPTR
-        );
-        void (*Throws_System_ArgumentNullException_)(
-                    CHAOS_IL2CPP_INTPTR
-        );
-        void (*Throws_System_InvalidOperationException_)(
-                    CHAOS_IL2CPP_INTPTR
-        );
-        void (*Throws_System_NotSupportedException_)(
-                    CHAOS_IL2CPP_INTPTR
-        );
-        void (*Throws_System_NullReferenceException_)(
-                    CHAOS_IL2CPP_INTPTR
-        );
-        CHAOS_IL2CPP_INT32 (*get_ExitCode)(
-                void
-        );
-    } chaos_TestFramework_Sdk_Chaos_TestFramework_Assert;
-    struct Chaos_TestFramework_Sdk_Chaos_TestFramework_AssertionException_t {
-        void (*ctor)(
-                    CHAOS_IL2CPP_INTPTR, 
-                    CHAOS_IL2CPP_INTPTR
-        );
-    } chaos_TestFramework_Sdk_Chaos_TestFramework_AssertionException;
-    struct Chaos_TestFramework_Sdk_Chaos_TestFramework_BenchmarkAttribute_t {
-        void (*ctor)(
-                    CHAOS_IL2CPP_INTPTR
-        );
-    } chaos_TestFramework_Sdk_Chaos_TestFramework_BenchmarkAttribute;
-    struct Chaos_TestFramework_Sdk_Chaos_TestFramework_FactAttribute_t {
-        void (*ctor)(
-                    CHAOS_IL2CPP_INTPTR
-        );
-    } chaos_TestFramework_Sdk_Chaos_TestFramework_FactAttribute;
-    struct Chaos_TestFramework_Sdk_Chaos_TestFramework_HotUpdateAttribute_t {
-        void (*ctor)(
-                    CHAOS_IL2CPP_INTPTR
-        );
-    } chaos_TestFramework_Sdk_Chaos_TestFramework_HotUpdateAttribute;
     struct CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonDocumentTests_t {
         void (*ctor)(
                     CHAOS_IL2CPP_INTPTR
@@ -2707,6 +2544,520 @@ struct Functions {
                     CHAOS_IL2CPP_INTPTR
         );
     } combinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_Utf8JsonWriterTests___c;
+    struct System_Private_CoreLib_System_Object_t {
+        void (*ctor)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+    } system_Private_CoreLib_System_Object;
+    struct System_Private_CoreLib_System_Runtime_CompilerServices_ValueTaskAwaiter_t {
+        void (*GetResult)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+    } system_Private_CoreLib_System_Runtime_CompilerServices_ValueTaskAwaiter;
+    struct System_Private_CoreLib_System_Runtime_CompilerServices_ValueTaskAwaiter_System_Int32__t {
+        CHAOS_IL2CPP_INT32 (*GetResult)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+    } system_Private_CoreLib_System_Runtime_CompilerServices_ValueTaskAwaiter_System_Int32_;
+    struct System_Private_CoreLib_System_Runtime_CompilerServices_ValueTaskAwaiter_System_Object__t {
+        CHAOS_IL2CPP_INTPTR (*GetResult)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+    } system_Private_CoreLib_System_Runtime_CompilerServices_ValueTaskAwaiter_System_Object_;
+    struct System_Private_CoreLib_System_Threading_Tasks_Task_t {
+        CHAOS_IL2CPP_INTPTR (*GetAwaiter)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+    } system_Private_CoreLib_System_Threading_Tasks_Task;
+    struct System_Private_CoreLib_System_Threading_Tasks_Task_JsonDocument__t {
+        CHAOS_IL2CPP_INTPTR (*GetAwaiter)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+    } system_Private_CoreLib_System_Threading_Tasks_Task_JsonDocument_;
+    struct System_Private_CoreLib_System_Threading_Tasks_ValueTask_t {
+        CHAOS_IL2CPP_INTPTR (*GetAwaiter)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+    } system_Private_CoreLib_System_Threading_Tasks_ValueTask;
+    struct System_Private_CoreLib_System_Threading_Tasks_ValueTask_System_Int32__t {
+        CHAOS_IL2CPP_INTPTR (*GetAwaiter)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+    } system_Private_CoreLib_System_Threading_Tasks_ValueTask_System_Int32_;
+    struct System_Private_CoreLib_System_Threading_Tasks_ValueTask_System_Object__t {
+        CHAOS_IL2CPP_INTPTR (*GetAwaiter)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+    } system_Private_CoreLib_System_Threading_Tasks_ValueTask_System_Object_;
+    struct System_Text_Json_JsonDocument_t {
+        void (*Dispose)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        CHAOS_IL2CPP_INTPTR (*Parse)(
+                void
+        );
+        CHAOS_IL2CPP_INTPTR (*Parse_1)(
+                void
+        );
+        CHAOS_IL2CPP_INTPTR (*Parse_2)(
+                void
+        );
+        CHAOS_IL2CPP_INTPTR (*Parse_3)(
+                void
+        );
+        CHAOS_IL2CPP_INTPTR (*Parse_4)(
+                void
+        );
+        CHAOS_IL2CPP_INTPTR (*ParseAsync)(
+                void
+        );
+        void (*WriteTo)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+    } system_Text_Json_JsonDocument;
+    struct System_Text_Json_JsonElement_t {
+        CHAOS_IL2CPP_INTPTR (*GetBoolean)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        CHAOS_IL2CPP_UINT8 (*GetByte)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        CHAOS_IL2CPP_INTPTR (*GetBytesFromBase64)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        CHAOS_IL2CPP_INTPTR (*GetDateTime)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        CHAOS_IL2CPP_INTPTR (*GetDateTimeOffset)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        CHAOS_IL2CPP_INTPTR (*GetDecimal)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        double (*GetDouble)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        CHAOS_IL2CPP_INTPTR (*GetGuid)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        CHAOS_IL2CPP_INT16 (*GetInt16)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        CHAOS_IL2CPP_INT32 (*GetInt32)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        CHAOS_IL2CPP_INT64 (*GetInt64)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        CHAOS_IL2CPP_INTPTR (*GetProperty)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        CHAOS_IL2CPP_INT8 (*GetSByte)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        float (*GetSingle)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        CHAOS_IL2CPP_UINT16 (*GetUInt16)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        CHAOS_IL2CPP_INTPTR (*GetUInt32)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        CHAOS_IL2CPP_UINT64 (*GetUInt64)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        CHAOS_IL2CPP_INTPTR (*TryGetProperty)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        CHAOS_IL2CPP_INTPTR (*ValueEquals)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+    } system_Text_Json_JsonElement;
+    struct System_Text_Json_JsonEncodedText_t {
+        CHAOS_IL2CPP_INTPTR (*Encode)(
+                void
+        );
+    } system_Text_Json_JsonEncodedText;
+    struct System_Text_Json_JsonProperty_t {
+        CHAOS_IL2CPP_INTPTR (*NameEquals)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*WriteTo)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+    } system_Text_Json_JsonProperty;
+    struct System_Text_Json_JsonSerializer_t {
+        CHAOS_IL2CPP_INTPTR (*Deserialize)(
+                void
+        );
+        CHAOS_IL2CPP_INTPTR (*Deserialize_1)(
+                void
+        );
+        CHAOS_IL2CPP_INTPTR (*Deserialize_2)(
+                void
+        );
+        CHAOS_IL2CPP_INTPTR (*Deserialize_3)(
+                void
+        );
+        CHAOS_IL2CPP_INTPTR (*Deserialize_4)(
+                void
+        );
+        CHAOS_IL2CPP_INTPTR (*Deserialize_5)(
+                void
+        );
+        CHAOS_IL2CPP_INTPTR (*Deserialize_6)(
+                void
+        );
+        CHAOS_IL2CPP_INTPTR (*Deserialize_7)(
+                void
+        );
+        CHAOS_IL2CPP_INTPTR (*Deserialize_8)(
+                void
+        );
+        CHAOS_IL2CPP_INTPTR (*Deserialize_9)(
+                void
+        );
+        CHAOS_IL2CPP_INTPTR (*Deserialize_JsonDocument_)(
+                void
+        );
+        CHAOS_IL2CPP_INTPTR (*Deserialize_JsonElement_)(
+                void
+        );
+        CHAOS_IL2CPP_INT32 (*Deserialize_System_Int32_)(
+                void
+        );
+        CHAOS_IL2CPP_INT32 (*Deserialize_System_Int32__1)(
+                void
+        );
+        CHAOS_IL2CPP_INT32 (*Deserialize_System_Int32__2)(
+                void
+        );
+        CHAOS_IL2CPP_INT32 (*Deserialize_System_Int32__3)(
+                void
+        );
+        CHAOS_IL2CPP_INT32 (*Deserialize_System_Int32__4)(
+                void
+        );
+        CHAOS_IL2CPP_INT32 (*Deserialize_System_Int32__5)(
+                void
+        );
+        CHAOS_IL2CPP_INT32 (*Deserialize_System_Int32__6)(
+                void
+        );
+        CHAOS_IL2CPP_INT32 (*Deserialize_System_Int32__7)(
+                void
+        );
+        CHAOS_IL2CPP_INT32 (*Deserialize_System_Int32__8)(
+                void
+        );
+        CHAOS_IL2CPP_INT32 (*Deserialize_System_Int32__9)(
+                void
+        );
+        CHAOS_IL2CPP_INTPTR (*DeserializeAsync)(
+                void
+        );
+        CHAOS_IL2CPP_INTPTR (*DeserializeAsync_1)(
+                void
+        );
+        CHAOS_IL2CPP_INTPTR (*DeserializeAsync_System_Int32_)(
+                void
+        );
+        CHAOS_IL2CPP_INTPTR (*DeserializeAsync_System_Int32__1)(
+                void
+        );
+        CHAOS_IL2CPP_INTPTR (*DeserializeAsyncEnumerable_System_Int32_)(
+                void
+        );
+        CHAOS_IL2CPP_INTPTR (*DeserializeAsyncEnumerable_System_Int32__1)(
+                void
+        );
+        CHAOS_IL2CPP_INTPTR (*DeserializeAsyncEnumerable_System_Int32__2)(
+                void
+        );
+        CHAOS_IL2CPP_INTPTR (*DeserializeAsyncEnumerable_System_Int32__3)(
+                void
+        );
+        CHAOS_IL2CPP_INTPTR (*Serialize)(
+                void
+        );
+        CHAOS_IL2CPP_INTPTR (*Serialize_1)(
+                void
+        );
+        void (*Serialize_2)(
+                void
+        );
+        void (*Serialize_3)(
+                void
+        );
+        void (*Serialize_4)(
+                void
+        );
+        void (*Serialize_5)(
+                void
+        );
+        CHAOS_IL2CPP_INTPTR (*Serialize_System_Int32_)(
+                void
+        );
+        CHAOS_IL2CPP_INTPTR (*Serialize_System_Int32__1)(
+                void
+        );
+        void (*Serialize_System_Int32__2)(
+                void
+        );
+        void (*Serialize_System_Int32__3)(
+                void
+        );
+        void (*Serialize_System_Int32__4)(
+                void
+        );
+        void (*Serialize_System_Int32__5)(
+                void
+        );
+        CHAOS_IL2CPP_INTPTR (*SerializeAsync)(
+                void
+        );
+        CHAOS_IL2CPP_INTPTR (*SerializeAsync_1)(
+                void
+        );
+        CHAOS_IL2CPP_INTPTR (*SerializeAsync_2)(
+                void
+        );
+        CHAOS_IL2CPP_INTPTR (*SerializeAsync_3)(
+                void
+        );
+        CHAOS_IL2CPP_INTPTR (*SerializeAsync_System_Int32_)(
+                void
+        );
+        CHAOS_IL2CPP_INTPTR (*SerializeAsync_System_Int32__1)(
+                void
+        );
+        CHAOS_IL2CPP_INTPTR (*SerializeAsync_System_Int32__2)(
+                void
+        );
+        CHAOS_IL2CPP_INTPTR (*SerializeAsync_System_Int32__3)(
+                void
+        );
+        CHAOS_IL2CPP_INTPTR (*SerializeToDocument)(
+                void
+        );
+        CHAOS_IL2CPP_INTPTR (*SerializeToDocument_1)(
+                void
+        );
+        CHAOS_IL2CPP_INTPTR (*SerializeToDocument_System_Int32_)(
+                void
+        );
+        CHAOS_IL2CPP_INTPTR (*SerializeToDocument_System_Int32__1)(
+                void
+        );
+        CHAOS_IL2CPP_INTPTR (*SerializeToElement)(
+                void
+        );
+        CHAOS_IL2CPP_INTPTR (*SerializeToElement_1)(
+                void
+        );
+        CHAOS_IL2CPP_INTPTR (*SerializeToElement_System_Int32_)(
+                void
+        );
+        CHAOS_IL2CPP_INTPTR (*SerializeToElement_System_Int32__1)(
+                void
+        );
+        CHAOS_IL2CPP_INTPTR (*SerializeToNode)(
+                void
+        );
+        CHAOS_IL2CPP_INTPTR (*SerializeToNode_1)(
+                void
+        );
+        CHAOS_IL2CPP_INTPTR (*SerializeToNode_System_Int32_)(
+                void
+        );
+        CHAOS_IL2CPP_INTPTR (*SerializeToNode_System_Int32__1)(
+                void
+        );
+        CHAOS_IL2CPP_INTPTR (*SerializeToUtf8Bytes)(
+                void
+        );
+        CHAOS_IL2CPP_INTPTR (*SerializeToUtf8Bytes_1)(
+                void
+        );
+        CHAOS_IL2CPP_INTPTR (*SerializeToUtf8Bytes_System_Int32_)(
+                void
+        );
+        CHAOS_IL2CPP_INTPTR (*SerializeToUtf8Bytes_System_Int32__1)(
+                void
+        );
+    } system_Text_Json_JsonSerializer;
+    struct System_Text_Json_System_Text_Json_Nodes_JsonNode_t {
+        CHAOS_IL2CPP_INTPTR (*op_Implicit)(
+                void
+        );
+    } system_Text_Json_System_Text_Json_Nodes_JsonNode;
+    struct System_Text_Json_Utf8JsonReader_t {
+        CHAOS_IL2CPP_INTPTR (*GetBoolean)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        CHAOS_IL2CPP_UINT8 (*GetByte)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        CHAOS_IL2CPP_INTPTR (*GetBytesFromBase64)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        CHAOS_IL2CPP_INTPTR (*GetComment)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        CHAOS_IL2CPP_INTPTR (*GetDateTime)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        CHAOS_IL2CPP_INTPTR (*GetDateTimeOffset)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        CHAOS_IL2CPP_INTPTR (*GetDecimal)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        double (*GetDouble)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        CHAOS_IL2CPP_INTPTR (*GetGuid)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        CHAOS_IL2CPP_INT16 (*GetInt16)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        CHAOS_IL2CPP_INT32 (*GetInt32)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        CHAOS_IL2CPP_INT64 (*GetInt64)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        CHAOS_IL2CPP_INT8 (*GetSByte)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        float (*GetSingle)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        CHAOS_IL2CPP_INTPTR (*GetString)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        CHAOS_IL2CPP_UINT16 (*GetUInt16)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        CHAOS_IL2CPP_INTPTR (*GetUInt32)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        CHAOS_IL2CPP_UINT64 (*GetUInt64)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        CHAOS_IL2CPP_INTPTR (*TryGetByte)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        CHAOS_IL2CPP_INTPTR (*TryGetBytesFromBase64)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        CHAOS_IL2CPP_INTPTR (*TryGetDateTime)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        CHAOS_IL2CPP_INTPTR (*TryGetDateTimeOffset)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        CHAOS_IL2CPP_INTPTR (*TryGetDecimal)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        CHAOS_IL2CPP_INTPTR (*TryGetDouble)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        CHAOS_IL2CPP_INTPTR (*TryGetGuid)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        CHAOS_IL2CPP_INTPTR (*TryGetInt16)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        CHAOS_IL2CPP_INTPTR (*TryGetInt32)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        CHAOS_IL2CPP_INTPTR (*TryGetInt64)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        CHAOS_IL2CPP_INTPTR (*TryGetSByte)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        CHAOS_IL2CPP_INTPTR (*TryGetSingle)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        CHAOS_IL2CPP_INTPTR (*TryGetUInt16)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        CHAOS_IL2CPP_INTPTR (*TryGetUInt32)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        CHAOS_IL2CPP_INTPTR (*TryGetUInt64)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        CHAOS_IL2CPP_INTPTR (*ValueTextEquals)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+    } system_Text_Json_Utf8JsonReader;
+    struct System_Text_Json_Utf8JsonWriter_t {
+        CHAOS_IL2CPP_INTPTR (*DisposeAsync)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*Flush)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        CHAOS_IL2CPP_INTPTR (*FlushAsync)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*WriteCommentValue)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*WriteNumberValue)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*WriteNumberValue_1)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*WriteNumberValue_2)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*WriteNumberValue_3)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*WriteNumberValue_4)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*WriteNumberValue_5)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*WriteNumberValue_6)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*WritePropertyName)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*WritePropertyName_1)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*WriteRawValue)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*WriteRawValue_1)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*WriteStringValue)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*WriteStringValue_1)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*WriteStringValue_2)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*WriteStringValue_3)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*WriteStringValue_4)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+    } system_Text_Json_Utf8JsonWriter;
     int32_t method_count;
 };
 
@@ -2724,364 +3075,6 @@ extern "C" void* kFunctionsFlat[];
 // These provide type-safe invocation without exposing the raw function table.
 // Compiler inlines through the table when LTO is enabled.
 // ═══════════════════════════════════════════════════════════════════════════
-
-struct Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert {
-    static inline void AreEqual(
-                CHAOS_IL2CPP_INTPTR arg_0, 
-                CHAOS_IL2CPP_INTPTR arg_1, 
-                CHAOS_IL2CPP_INTPTR arg_2
-    ) {
-        return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_Assert.AreEqual(
-                    arg_0, 
-                    arg_1, 
-                    arg_2
-        );
-    }
-    static inline void AreEqual_1(
-                CHAOS_IL2CPP_UINT8 arg_0, 
-                CHAOS_IL2CPP_UINT8 arg_1, 
-                CHAOS_IL2CPP_INTPTR arg_2
-    ) {
-        return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_Assert.AreEqual_1(
-                    arg_0, 
-                    arg_1, 
-                    arg_2
-        );
-    }
-    static inline void AreEqual_2(
-                CHAOS_IL2CPP_INTPTR arg_0, 
-                CHAOS_IL2CPP_INTPTR arg_1, 
-                CHAOS_IL2CPP_INTPTR arg_2
-    ) {
-        return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_Assert.AreEqual_2(
-                    arg_0, 
-                    arg_1, 
-                    arg_2
-        );
-    }
-    static inline void AreEqual_3(
-                CHAOS_IL2CPP_INTPTR arg_0, 
-                CHAOS_IL2CPP_INTPTR arg_1, 
-                CHAOS_IL2CPP_INTPTR arg_2
-    ) {
-        return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_Assert.AreEqual_3(
-                    arg_0, 
-                    arg_1, 
-                    arg_2
-        );
-    }
-    static inline void AreEqual_4(
-                CHAOS_IL2CPP_INTPTR arg_0, 
-                CHAOS_IL2CPP_INTPTR arg_1, 
-                CHAOS_IL2CPP_INTPTR arg_2
-    ) {
-        return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_Assert.AreEqual_4(
-                    arg_0, 
-                    arg_1, 
-                    arg_2
-        );
-    }
-    static inline void AreEqual_5(
-                double arg_0, 
-                double arg_1, 
-                CHAOS_IL2CPP_INTPTR arg_2
-    ) {
-        return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_Assert.AreEqual_5(
-                    arg_0, 
-                    arg_1, 
-                    arg_2
-        );
-    }
-    static inline void AreEqual_6(
-                CHAOS_IL2CPP_INT16 arg_0, 
-                CHAOS_IL2CPP_INT16 arg_1, 
-                CHAOS_IL2CPP_INTPTR arg_2
-    ) {
-        return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_Assert.AreEqual_6(
-                    arg_0, 
-                    arg_1, 
-                    arg_2
-        );
-    }
-    static inline void AreEqual_7(
-                CHAOS_IL2CPP_INT32 arg_0, 
-                CHAOS_IL2CPP_INT32 arg_1, 
-                CHAOS_IL2CPP_INTPTR arg_2
-    ) {
-        return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_Assert.AreEqual_7(
-                    arg_0, 
-                    arg_1, 
-                    arg_2
-        );
-    }
-    static inline void AreEqual_8(
-                CHAOS_IL2CPP_INT64 arg_0, 
-                CHAOS_IL2CPP_INT64 arg_1, 
-                CHAOS_IL2CPP_INTPTR arg_2
-    ) {
-        return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_Assert.AreEqual_8(
-                    arg_0, 
-                    arg_1, 
-                    arg_2
-        );
-    }
-    static inline void AreEqual_9(
-                CHAOS_IL2CPP_INTPTR arg_0, 
-                CHAOS_IL2CPP_INTPTR arg_1, 
-                CHAOS_IL2CPP_INTPTR arg_2
-    ) {
-        return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_Assert.AreEqual_9(
-                    arg_0, 
-                    arg_1, 
-                    arg_2
-        );
-    }
-    static inline void AreEqual_10(
-                CHAOS_IL2CPP_INT8 arg_0, 
-                CHAOS_IL2CPP_INT8 arg_1, 
-                CHAOS_IL2CPP_INTPTR arg_2
-    ) {
-        return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_Assert.AreEqual_10(
-                    arg_0, 
-                    arg_1, 
-                    arg_2
-        );
-    }
-    static inline void AreEqual_11(
-                float arg_0, 
-                float arg_1, 
-                CHAOS_IL2CPP_INTPTR arg_2
-    ) {
-        return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_Assert.AreEqual_11(
-                    arg_0, 
-                    arg_1, 
-                    arg_2
-        );
-    }
-    static inline void AreEqual_12(
-                CHAOS_IL2CPP_INTPTR arg_0, 
-                CHAOS_IL2CPP_INTPTR arg_1, 
-                CHAOS_IL2CPP_INTPTR arg_2
-    ) {
-        return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_Assert.AreEqual_12(
-                    arg_0, 
-                    arg_1, 
-                    arg_2
-        );
-    }
-    static inline void AreEqual_13(
-                CHAOS_IL2CPP_UINT16 arg_0, 
-                CHAOS_IL2CPP_UINT16 arg_1, 
-                CHAOS_IL2CPP_INTPTR arg_2
-    ) {
-        return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_Assert.AreEqual_13(
-                    arg_0, 
-                    arg_1, 
-                    arg_2
-        );
-    }
-    static inline void AreEqual_14(
-                CHAOS_IL2CPP_INTPTR arg_0, 
-                CHAOS_IL2CPP_INTPTR arg_1, 
-                CHAOS_IL2CPP_INTPTR arg_2
-    ) {
-        return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_Assert.AreEqual_14(
-                    arg_0, 
-                    arg_1, 
-                    arg_2
-        );
-    }
-    static inline void AreEqual_15(
-                CHAOS_IL2CPP_UINT64 arg_0, 
-                CHAOS_IL2CPP_UINT64 arg_1, 
-                CHAOS_IL2CPP_INTPTR arg_2
-    ) {
-        return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_Assert.AreEqual_15(
-                    arg_0, 
-                    arg_1, 
-                    arg_2
-        );
-    }
-    static inline void AreEqual_16(
-                CHAOS_IL2CPP_INTPTR arg_0, 
-                CHAOS_IL2CPP_INTPTR arg_1, 
-                CHAOS_IL2CPP_INTPTR arg_2
-    ) {
-        return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_Assert.AreEqual_16(
-                    arg_0, 
-                    arg_1, 
-                    arg_2
-        );
-    }
-    static inline void AreNotEqual(
-                CHAOS_IL2CPP_INTPTR arg_0, 
-                CHAOS_IL2CPP_INTPTR arg_1, 
-                CHAOS_IL2CPP_INTPTR arg_2
-    ) {
-        return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_Assert.AreNotEqual(
-                    arg_0, 
-                    arg_1, 
-                    arg_2
-        );
-    }
-    static inline CHAOS_IL2CPP_INT32 Complete(
-    ) {
-        return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_Assert.Complete(
-        );
-    }
-    static inline void Fail(
-                CHAOS_IL2CPP_INTPTR arg_0
-    ) {
-        return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_Assert.Fail(
-                    arg_0
-        );
-    }
-    static inline void IsFalse(
-                CHAOS_IL2CPP_INTPTR arg_0, 
-                CHAOS_IL2CPP_INTPTR arg_1
-    ) {
-        return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_Assert.IsFalse(
-                    arg_0, 
-                    arg_1
-        );
-    }
-    static inline void IsNotNull(
-                CHAOS_IL2CPP_INTPTR arg_0, 
-                CHAOS_IL2CPP_INTPTR arg_1
-    ) {
-        return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_Assert.IsNotNull(
-                    arg_0, 
-                    arg_1
-        );
-    }
-    static inline void IsNull(
-                CHAOS_IL2CPP_INTPTR arg_0, 
-                CHAOS_IL2CPP_INTPTR arg_1
-    ) {
-        return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_Assert.IsNull(
-                    arg_0, 
-                    arg_1
-        );
-    }
-    static inline void IsTrue(
-                CHAOS_IL2CPP_INTPTR arg_0, 
-                CHAOS_IL2CPP_INTPTR arg_1
-    ) {
-        return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_Assert.IsTrue(
-                    arg_0, 
-                    arg_1
-        );
-    }
-    static inline void RecordFailure(
-    ) {
-        return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_Assert.RecordFailure(
-        );
-    }
-    static inline void Reset(
-    ) {
-        return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_Assert.Reset(
-        );
-    }
-    static inline void Throws(
-                CHAOS_IL2CPP_INTPTR arg_0
-    ) {
-        return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_Assert.Throws(
-                    arg_0
-        );
-    }
-    static inline void Throws_JsonException_(
-                CHAOS_IL2CPP_INTPTR arg_0
-    ) {
-        return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_Assert.Throws_JsonException_(
-                    arg_0
-        );
-    }
-    static inline void Throws_System_ArgumentNullException_(
-                CHAOS_IL2CPP_INTPTR arg_0
-    ) {
-        return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_Assert.Throws_System_ArgumentNullException_(
-                    arg_0
-        );
-    }
-    static inline void Throws_System_InvalidOperationException_(
-                CHAOS_IL2CPP_INTPTR arg_0
-    ) {
-        return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_Assert.Throws_System_InvalidOperationException_(
-                    arg_0
-        );
-    }
-    static inline void Throws_System_NotSupportedException_(
-                CHAOS_IL2CPP_INTPTR arg_0
-    ) {
-        return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_Assert.Throws_System_NotSupportedException_(
-                    arg_0
-        );
-    }
-    static inline void Throws_System_NullReferenceException_(
-                CHAOS_IL2CPP_INTPTR arg_0
-    ) {
-        return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_Assert.Throws_System_NullReferenceException_(
-                    arg_0
-        );
-    }
-    static inline CHAOS_IL2CPP_INT32 get_ExitCode(
-    ) {
-        return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_Assert.get_ExitCode(
-        );
-    }
-    /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 33;
-};
-
-struct Chaos_TestFramework_Sdk_Chaos_TestFramework_AssertionException {
-    static inline void ctor(
-                CHAOS_IL2CPP_INTPTR arg_0, 
-                CHAOS_IL2CPP_INTPTR arg_1
-    ) {
-        return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_AssertionException.ctor(
-                    arg_0, 
-                    arg_1
-        );
-    }
-    /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 1;
-};
-
-struct Chaos_TestFramework_Sdk_Chaos_TestFramework_BenchmarkAttribute {
-    static inline void ctor(
-                CHAOS_IL2CPP_INTPTR arg_0
-    ) {
-        return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_BenchmarkAttribute.ctor(
-                    arg_0
-        );
-    }
-    /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 1;
-};
-
-struct Chaos_TestFramework_Sdk_Chaos_TestFramework_FactAttribute {
-    static inline void ctor(
-                CHAOS_IL2CPP_INTPTR arg_0
-    ) {
-        return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_FactAttribute.ctor(
-                    arg_0
-        );
-    }
-    /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 1;
-};
-
-struct Chaos_TestFramework_Sdk_Chaos_TestFramework_HotUpdateAttribute {
-    static inline void ctor(
-                CHAOS_IL2CPP_INTPTR arg_0
-    ) {
-        return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_HotUpdateAttribute.ctor(
-                    arg_0
-        );
-    }
-    /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 1;
-};
 
 struct CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonDocumentTests {
     static inline void ctor(
@@ -8896,6 +8889,1063 @@ struct CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_Utf8Json
     }
     /// Total number of AOT-compiled methods in this type.
     static constexpr int32_t MethodCount = 113;
+};
+
+struct System_Private_CoreLib_System_Object {
+    static inline void ctor(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.system_Private_CoreLib_System_Object.ctor(
+                    arg_0
+        );
+    }
+    /// Total number of AOT-compiled methods in this type.
+    static constexpr int32_t MethodCount = 1;
+};
+
+struct System_Private_CoreLib_System_Runtime_CompilerServices_ValueTaskAwaiter {
+    static inline void GetResult(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.system_Private_CoreLib_System_Runtime_CompilerServices_ValueTaskAwaiter.GetResult(
+                    arg_0
+        );
+    }
+    /// Total number of AOT-compiled methods in this type.
+    static constexpr int32_t MethodCount = 1;
+};
+
+struct System_Private_CoreLib_System_Runtime_CompilerServices_ValueTaskAwaiter_System_Int32_ {
+    static inline CHAOS_IL2CPP_INT32 GetResult(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.system_Private_CoreLib_System_Runtime_CompilerServices_ValueTaskAwaiter_System_Int32_.GetResult(
+                    arg_0
+        );
+    }
+    /// Total number of AOT-compiled methods in this type.
+    static constexpr int32_t MethodCount = 1;
+};
+
+struct System_Private_CoreLib_System_Runtime_CompilerServices_ValueTaskAwaiter_System_Object_ {
+    static inline CHAOS_IL2CPP_INTPTR GetResult(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.system_Private_CoreLib_System_Runtime_CompilerServices_ValueTaskAwaiter_System_Object_.GetResult(
+                    arg_0
+        );
+    }
+    /// Total number of AOT-compiled methods in this type.
+    static constexpr int32_t MethodCount = 1;
+};
+
+struct System_Private_CoreLib_System_Threading_Tasks_Task {
+    static inline CHAOS_IL2CPP_INTPTR GetAwaiter(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.system_Private_CoreLib_System_Threading_Tasks_Task.GetAwaiter(
+                    arg_0
+        );
+    }
+    /// Total number of AOT-compiled methods in this type.
+    static constexpr int32_t MethodCount = 1;
+};
+
+struct System_Private_CoreLib_System_Threading_Tasks_Task_JsonDocument_ {
+    static inline CHAOS_IL2CPP_INTPTR GetAwaiter(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.system_Private_CoreLib_System_Threading_Tasks_Task_JsonDocument_.GetAwaiter(
+                    arg_0
+        );
+    }
+    /// Total number of AOT-compiled methods in this type.
+    static constexpr int32_t MethodCount = 1;
+};
+
+struct System_Private_CoreLib_System_Threading_Tasks_ValueTask {
+    static inline CHAOS_IL2CPP_INTPTR GetAwaiter(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.system_Private_CoreLib_System_Threading_Tasks_ValueTask.GetAwaiter(
+                    arg_0
+        );
+    }
+    /// Total number of AOT-compiled methods in this type.
+    static constexpr int32_t MethodCount = 1;
+};
+
+struct System_Private_CoreLib_System_Threading_Tasks_ValueTask_System_Int32_ {
+    static inline CHAOS_IL2CPP_INTPTR GetAwaiter(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.system_Private_CoreLib_System_Threading_Tasks_ValueTask_System_Int32_.GetAwaiter(
+                    arg_0
+        );
+    }
+    /// Total number of AOT-compiled methods in this type.
+    static constexpr int32_t MethodCount = 1;
+};
+
+struct System_Private_CoreLib_System_Threading_Tasks_ValueTask_System_Object_ {
+    static inline CHAOS_IL2CPP_INTPTR GetAwaiter(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.system_Private_CoreLib_System_Threading_Tasks_ValueTask_System_Object_.GetAwaiter(
+                    arg_0
+        );
+    }
+    /// Total number of AOT-compiled methods in this type.
+    static constexpr int32_t MethodCount = 1;
+};
+
+struct System_Text_Json_JsonDocument {
+    static inline void Dispose(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.system_Text_Json_JsonDocument.Dispose(
+                    arg_0
+        );
+    }
+    static inline CHAOS_IL2CPP_INTPTR Parse(
+    ) {
+        return kFunctions.system_Text_Json_JsonDocument.Parse(
+        );
+    }
+    static inline CHAOS_IL2CPP_INTPTR Parse_1(
+    ) {
+        return kFunctions.system_Text_Json_JsonDocument.Parse_1(
+        );
+    }
+    static inline CHAOS_IL2CPP_INTPTR Parse_2(
+    ) {
+        return kFunctions.system_Text_Json_JsonDocument.Parse_2(
+        );
+    }
+    static inline CHAOS_IL2CPP_INTPTR Parse_3(
+    ) {
+        return kFunctions.system_Text_Json_JsonDocument.Parse_3(
+        );
+    }
+    static inline CHAOS_IL2CPP_INTPTR Parse_4(
+    ) {
+        return kFunctions.system_Text_Json_JsonDocument.Parse_4(
+        );
+    }
+    static inline CHAOS_IL2CPP_INTPTR ParseAsync(
+    ) {
+        return kFunctions.system_Text_Json_JsonDocument.ParseAsync(
+        );
+    }
+    static inline void WriteTo(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.system_Text_Json_JsonDocument.WriteTo(
+                    arg_0
+        );
+    }
+    /// Total number of AOT-compiled methods in this type.
+    static constexpr int32_t MethodCount = 8;
+};
+
+struct System_Text_Json_JsonElement {
+    static inline CHAOS_IL2CPP_INTPTR GetBoolean(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.system_Text_Json_JsonElement.GetBoolean(
+                    arg_0
+        );
+    }
+    static inline CHAOS_IL2CPP_UINT8 GetByte(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.system_Text_Json_JsonElement.GetByte(
+                    arg_0
+        );
+    }
+    static inline CHAOS_IL2CPP_INTPTR GetBytesFromBase64(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.system_Text_Json_JsonElement.GetBytesFromBase64(
+                    arg_0
+        );
+    }
+    static inline CHAOS_IL2CPP_INTPTR GetDateTime(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.system_Text_Json_JsonElement.GetDateTime(
+                    arg_0
+        );
+    }
+    static inline CHAOS_IL2CPP_INTPTR GetDateTimeOffset(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.system_Text_Json_JsonElement.GetDateTimeOffset(
+                    arg_0
+        );
+    }
+    static inline CHAOS_IL2CPP_INTPTR GetDecimal(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.system_Text_Json_JsonElement.GetDecimal(
+                    arg_0
+        );
+    }
+    static inline double GetDouble(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.system_Text_Json_JsonElement.GetDouble(
+                    arg_0
+        );
+    }
+    static inline CHAOS_IL2CPP_INTPTR GetGuid(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.system_Text_Json_JsonElement.GetGuid(
+                    arg_0
+        );
+    }
+    static inline CHAOS_IL2CPP_INT16 GetInt16(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.system_Text_Json_JsonElement.GetInt16(
+                    arg_0
+        );
+    }
+    static inline CHAOS_IL2CPP_INT32 GetInt32(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.system_Text_Json_JsonElement.GetInt32(
+                    arg_0
+        );
+    }
+    static inline CHAOS_IL2CPP_INT64 GetInt64(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.system_Text_Json_JsonElement.GetInt64(
+                    arg_0
+        );
+    }
+    static inline CHAOS_IL2CPP_INTPTR GetProperty(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.system_Text_Json_JsonElement.GetProperty(
+                    arg_0
+        );
+    }
+    static inline CHAOS_IL2CPP_INT8 GetSByte(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.system_Text_Json_JsonElement.GetSByte(
+                    arg_0
+        );
+    }
+    static inline float GetSingle(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.system_Text_Json_JsonElement.GetSingle(
+                    arg_0
+        );
+    }
+    static inline CHAOS_IL2CPP_UINT16 GetUInt16(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.system_Text_Json_JsonElement.GetUInt16(
+                    arg_0
+        );
+    }
+    static inline CHAOS_IL2CPP_INTPTR GetUInt32(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.system_Text_Json_JsonElement.GetUInt32(
+                    arg_0
+        );
+    }
+    static inline CHAOS_IL2CPP_UINT64 GetUInt64(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.system_Text_Json_JsonElement.GetUInt64(
+                    arg_0
+        );
+    }
+    static inline CHAOS_IL2CPP_INTPTR TryGetProperty(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.system_Text_Json_JsonElement.TryGetProperty(
+                    arg_0
+        );
+    }
+    static inline CHAOS_IL2CPP_INTPTR ValueEquals(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.system_Text_Json_JsonElement.ValueEquals(
+                    arg_0
+        );
+    }
+    /// Total number of AOT-compiled methods in this type.
+    static constexpr int32_t MethodCount = 19;
+};
+
+struct System_Text_Json_JsonEncodedText {
+    static inline CHAOS_IL2CPP_INTPTR Encode(
+    ) {
+        return kFunctions.system_Text_Json_JsonEncodedText.Encode(
+        );
+    }
+    /// Total number of AOT-compiled methods in this type.
+    static constexpr int32_t MethodCount = 1;
+};
+
+struct System_Text_Json_JsonProperty {
+    static inline CHAOS_IL2CPP_INTPTR NameEquals(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.system_Text_Json_JsonProperty.NameEquals(
+                    arg_0
+        );
+    }
+    static inline void WriteTo(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.system_Text_Json_JsonProperty.WriteTo(
+                    arg_0
+        );
+    }
+    /// Total number of AOT-compiled methods in this type.
+    static constexpr int32_t MethodCount = 2;
+};
+
+struct System_Text_Json_JsonSerializer {
+    static inline CHAOS_IL2CPP_INTPTR Deserialize(
+    ) {
+        return kFunctions.system_Text_Json_JsonSerializer.Deserialize(
+        );
+    }
+    static inline CHAOS_IL2CPP_INTPTR Deserialize_1(
+    ) {
+        return kFunctions.system_Text_Json_JsonSerializer.Deserialize_1(
+        );
+    }
+    static inline CHAOS_IL2CPP_INTPTR Deserialize_2(
+    ) {
+        return kFunctions.system_Text_Json_JsonSerializer.Deserialize_2(
+        );
+    }
+    static inline CHAOS_IL2CPP_INTPTR Deserialize_3(
+    ) {
+        return kFunctions.system_Text_Json_JsonSerializer.Deserialize_3(
+        );
+    }
+    static inline CHAOS_IL2CPP_INTPTR Deserialize_4(
+    ) {
+        return kFunctions.system_Text_Json_JsonSerializer.Deserialize_4(
+        );
+    }
+    static inline CHAOS_IL2CPP_INTPTR Deserialize_5(
+    ) {
+        return kFunctions.system_Text_Json_JsonSerializer.Deserialize_5(
+        );
+    }
+    static inline CHAOS_IL2CPP_INTPTR Deserialize_6(
+    ) {
+        return kFunctions.system_Text_Json_JsonSerializer.Deserialize_6(
+        );
+    }
+    static inline CHAOS_IL2CPP_INTPTR Deserialize_7(
+    ) {
+        return kFunctions.system_Text_Json_JsonSerializer.Deserialize_7(
+        );
+    }
+    static inline CHAOS_IL2CPP_INTPTR Deserialize_8(
+    ) {
+        return kFunctions.system_Text_Json_JsonSerializer.Deserialize_8(
+        );
+    }
+    static inline CHAOS_IL2CPP_INTPTR Deserialize_9(
+    ) {
+        return kFunctions.system_Text_Json_JsonSerializer.Deserialize_9(
+        );
+    }
+    static inline CHAOS_IL2CPP_INTPTR Deserialize_JsonDocument_(
+    ) {
+        return kFunctions.system_Text_Json_JsonSerializer.Deserialize_JsonDocument_(
+        );
+    }
+    static inline CHAOS_IL2CPP_INTPTR Deserialize_JsonElement_(
+    ) {
+        return kFunctions.system_Text_Json_JsonSerializer.Deserialize_JsonElement_(
+        );
+    }
+    static inline CHAOS_IL2CPP_INT32 Deserialize_System_Int32_(
+    ) {
+        return kFunctions.system_Text_Json_JsonSerializer.Deserialize_System_Int32_(
+        );
+    }
+    static inline CHAOS_IL2CPP_INT32 Deserialize_System_Int32__1(
+    ) {
+        return kFunctions.system_Text_Json_JsonSerializer.Deserialize_System_Int32__1(
+        );
+    }
+    static inline CHAOS_IL2CPP_INT32 Deserialize_System_Int32__2(
+    ) {
+        return kFunctions.system_Text_Json_JsonSerializer.Deserialize_System_Int32__2(
+        );
+    }
+    static inline CHAOS_IL2CPP_INT32 Deserialize_System_Int32__3(
+    ) {
+        return kFunctions.system_Text_Json_JsonSerializer.Deserialize_System_Int32__3(
+        );
+    }
+    static inline CHAOS_IL2CPP_INT32 Deserialize_System_Int32__4(
+    ) {
+        return kFunctions.system_Text_Json_JsonSerializer.Deserialize_System_Int32__4(
+        );
+    }
+    static inline CHAOS_IL2CPP_INT32 Deserialize_System_Int32__5(
+    ) {
+        return kFunctions.system_Text_Json_JsonSerializer.Deserialize_System_Int32__5(
+        );
+    }
+    static inline CHAOS_IL2CPP_INT32 Deserialize_System_Int32__6(
+    ) {
+        return kFunctions.system_Text_Json_JsonSerializer.Deserialize_System_Int32__6(
+        );
+    }
+    static inline CHAOS_IL2CPP_INT32 Deserialize_System_Int32__7(
+    ) {
+        return kFunctions.system_Text_Json_JsonSerializer.Deserialize_System_Int32__7(
+        );
+    }
+    static inline CHAOS_IL2CPP_INT32 Deserialize_System_Int32__8(
+    ) {
+        return kFunctions.system_Text_Json_JsonSerializer.Deserialize_System_Int32__8(
+        );
+    }
+    static inline CHAOS_IL2CPP_INT32 Deserialize_System_Int32__9(
+    ) {
+        return kFunctions.system_Text_Json_JsonSerializer.Deserialize_System_Int32__9(
+        );
+    }
+    static inline CHAOS_IL2CPP_INTPTR DeserializeAsync(
+    ) {
+        return kFunctions.system_Text_Json_JsonSerializer.DeserializeAsync(
+        );
+    }
+    static inline CHAOS_IL2CPP_INTPTR DeserializeAsync_1(
+    ) {
+        return kFunctions.system_Text_Json_JsonSerializer.DeserializeAsync_1(
+        );
+    }
+    static inline CHAOS_IL2CPP_INTPTR DeserializeAsync_System_Int32_(
+    ) {
+        return kFunctions.system_Text_Json_JsonSerializer.DeserializeAsync_System_Int32_(
+        );
+    }
+    static inline CHAOS_IL2CPP_INTPTR DeserializeAsync_System_Int32__1(
+    ) {
+        return kFunctions.system_Text_Json_JsonSerializer.DeserializeAsync_System_Int32__1(
+        );
+    }
+    static inline CHAOS_IL2CPP_INTPTR DeserializeAsyncEnumerable_System_Int32_(
+    ) {
+        return kFunctions.system_Text_Json_JsonSerializer.DeserializeAsyncEnumerable_System_Int32_(
+        );
+    }
+    static inline CHAOS_IL2CPP_INTPTR DeserializeAsyncEnumerable_System_Int32__1(
+    ) {
+        return kFunctions.system_Text_Json_JsonSerializer.DeserializeAsyncEnumerable_System_Int32__1(
+        );
+    }
+    static inline CHAOS_IL2CPP_INTPTR DeserializeAsyncEnumerable_System_Int32__2(
+    ) {
+        return kFunctions.system_Text_Json_JsonSerializer.DeserializeAsyncEnumerable_System_Int32__2(
+        );
+    }
+    static inline CHAOS_IL2CPP_INTPTR DeserializeAsyncEnumerable_System_Int32__3(
+    ) {
+        return kFunctions.system_Text_Json_JsonSerializer.DeserializeAsyncEnumerable_System_Int32__3(
+        );
+    }
+    static inline CHAOS_IL2CPP_INTPTR Serialize(
+    ) {
+        return kFunctions.system_Text_Json_JsonSerializer.Serialize(
+        );
+    }
+    static inline CHAOS_IL2CPP_INTPTR Serialize_1(
+    ) {
+        return kFunctions.system_Text_Json_JsonSerializer.Serialize_1(
+        );
+    }
+    static inline void Serialize_2(
+    ) {
+        return kFunctions.system_Text_Json_JsonSerializer.Serialize_2(
+        );
+    }
+    static inline void Serialize_3(
+    ) {
+        return kFunctions.system_Text_Json_JsonSerializer.Serialize_3(
+        );
+    }
+    static inline void Serialize_4(
+    ) {
+        return kFunctions.system_Text_Json_JsonSerializer.Serialize_4(
+        );
+    }
+    static inline void Serialize_5(
+    ) {
+        return kFunctions.system_Text_Json_JsonSerializer.Serialize_5(
+        );
+    }
+    static inline CHAOS_IL2CPP_INTPTR Serialize_System_Int32_(
+    ) {
+        return kFunctions.system_Text_Json_JsonSerializer.Serialize_System_Int32_(
+        );
+    }
+    static inline CHAOS_IL2CPP_INTPTR Serialize_System_Int32__1(
+    ) {
+        return kFunctions.system_Text_Json_JsonSerializer.Serialize_System_Int32__1(
+        );
+    }
+    static inline void Serialize_System_Int32__2(
+    ) {
+        return kFunctions.system_Text_Json_JsonSerializer.Serialize_System_Int32__2(
+        );
+    }
+    static inline void Serialize_System_Int32__3(
+    ) {
+        return kFunctions.system_Text_Json_JsonSerializer.Serialize_System_Int32__3(
+        );
+    }
+    static inline void Serialize_System_Int32__4(
+    ) {
+        return kFunctions.system_Text_Json_JsonSerializer.Serialize_System_Int32__4(
+        );
+    }
+    static inline void Serialize_System_Int32__5(
+    ) {
+        return kFunctions.system_Text_Json_JsonSerializer.Serialize_System_Int32__5(
+        );
+    }
+    static inline CHAOS_IL2CPP_INTPTR SerializeAsync(
+    ) {
+        return kFunctions.system_Text_Json_JsonSerializer.SerializeAsync(
+        );
+    }
+    static inline CHAOS_IL2CPP_INTPTR SerializeAsync_1(
+    ) {
+        return kFunctions.system_Text_Json_JsonSerializer.SerializeAsync_1(
+        );
+    }
+    static inline CHAOS_IL2CPP_INTPTR SerializeAsync_2(
+    ) {
+        return kFunctions.system_Text_Json_JsonSerializer.SerializeAsync_2(
+        );
+    }
+    static inline CHAOS_IL2CPP_INTPTR SerializeAsync_3(
+    ) {
+        return kFunctions.system_Text_Json_JsonSerializer.SerializeAsync_3(
+        );
+    }
+    static inline CHAOS_IL2CPP_INTPTR SerializeAsync_System_Int32_(
+    ) {
+        return kFunctions.system_Text_Json_JsonSerializer.SerializeAsync_System_Int32_(
+        );
+    }
+    static inline CHAOS_IL2CPP_INTPTR SerializeAsync_System_Int32__1(
+    ) {
+        return kFunctions.system_Text_Json_JsonSerializer.SerializeAsync_System_Int32__1(
+        );
+    }
+    static inline CHAOS_IL2CPP_INTPTR SerializeAsync_System_Int32__2(
+    ) {
+        return kFunctions.system_Text_Json_JsonSerializer.SerializeAsync_System_Int32__2(
+        );
+    }
+    static inline CHAOS_IL2CPP_INTPTR SerializeAsync_System_Int32__3(
+    ) {
+        return kFunctions.system_Text_Json_JsonSerializer.SerializeAsync_System_Int32__3(
+        );
+    }
+    static inline CHAOS_IL2CPP_INTPTR SerializeToDocument(
+    ) {
+        return kFunctions.system_Text_Json_JsonSerializer.SerializeToDocument(
+        );
+    }
+    static inline CHAOS_IL2CPP_INTPTR SerializeToDocument_1(
+    ) {
+        return kFunctions.system_Text_Json_JsonSerializer.SerializeToDocument_1(
+        );
+    }
+    static inline CHAOS_IL2CPP_INTPTR SerializeToDocument_System_Int32_(
+    ) {
+        return kFunctions.system_Text_Json_JsonSerializer.SerializeToDocument_System_Int32_(
+        );
+    }
+    static inline CHAOS_IL2CPP_INTPTR SerializeToDocument_System_Int32__1(
+    ) {
+        return kFunctions.system_Text_Json_JsonSerializer.SerializeToDocument_System_Int32__1(
+        );
+    }
+    static inline CHAOS_IL2CPP_INTPTR SerializeToElement(
+    ) {
+        return kFunctions.system_Text_Json_JsonSerializer.SerializeToElement(
+        );
+    }
+    static inline CHAOS_IL2CPP_INTPTR SerializeToElement_1(
+    ) {
+        return kFunctions.system_Text_Json_JsonSerializer.SerializeToElement_1(
+        );
+    }
+    static inline CHAOS_IL2CPP_INTPTR SerializeToElement_System_Int32_(
+    ) {
+        return kFunctions.system_Text_Json_JsonSerializer.SerializeToElement_System_Int32_(
+        );
+    }
+    static inline CHAOS_IL2CPP_INTPTR SerializeToElement_System_Int32__1(
+    ) {
+        return kFunctions.system_Text_Json_JsonSerializer.SerializeToElement_System_Int32__1(
+        );
+    }
+    static inline CHAOS_IL2CPP_INTPTR SerializeToNode(
+    ) {
+        return kFunctions.system_Text_Json_JsonSerializer.SerializeToNode(
+        );
+    }
+    static inline CHAOS_IL2CPP_INTPTR SerializeToNode_1(
+    ) {
+        return kFunctions.system_Text_Json_JsonSerializer.SerializeToNode_1(
+        );
+    }
+    static inline CHAOS_IL2CPP_INTPTR SerializeToNode_System_Int32_(
+    ) {
+        return kFunctions.system_Text_Json_JsonSerializer.SerializeToNode_System_Int32_(
+        );
+    }
+    static inline CHAOS_IL2CPP_INTPTR SerializeToNode_System_Int32__1(
+    ) {
+        return kFunctions.system_Text_Json_JsonSerializer.SerializeToNode_System_Int32__1(
+        );
+    }
+    static inline CHAOS_IL2CPP_INTPTR SerializeToUtf8Bytes(
+    ) {
+        return kFunctions.system_Text_Json_JsonSerializer.SerializeToUtf8Bytes(
+        );
+    }
+    static inline CHAOS_IL2CPP_INTPTR SerializeToUtf8Bytes_1(
+    ) {
+        return kFunctions.system_Text_Json_JsonSerializer.SerializeToUtf8Bytes_1(
+        );
+    }
+    static inline CHAOS_IL2CPP_INTPTR SerializeToUtf8Bytes_System_Int32_(
+    ) {
+        return kFunctions.system_Text_Json_JsonSerializer.SerializeToUtf8Bytes_System_Int32_(
+        );
+    }
+    static inline CHAOS_IL2CPP_INTPTR SerializeToUtf8Bytes_System_Int32__1(
+    ) {
+        return kFunctions.system_Text_Json_JsonSerializer.SerializeToUtf8Bytes_System_Int32__1(
+        );
+    }
+    /// Total number of AOT-compiled methods in this type.
+    static constexpr int32_t MethodCount = 66;
+};
+
+struct System_Text_Json_System_Text_Json_Nodes_JsonNode {
+    static inline CHAOS_IL2CPP_INTPTR op_Implicit(
+    ) {
+        return kFunctions.system_Text_Json_System_Text_Json_Nodes_JsonNode.op_Implicit(
+        );
+    }
+    /// Total number of AOT-compiled methods in this type.
+    static constexpr int32_t MethodCount = 1;
+};
+
+struct System_Text_Json_Utf8JsonReader {
+    static inline CHAOS_IL2CPP_INTPTR GetBoolean(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.system_Text_Json_Utf8JsonReader.GetBoolean(
+                    arg_0
+        );
+    }
+    static inline CHAOS_IL2CPP_UINT8 GetByte(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.system_Text_Json_Utf8JsonReader.GetByte(
+                    arg_0
+        );
+    }
+    static inline CHAOS_IL2CPP_INTPTR GetBytesFromBase64(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.system_Text_Json_Utf8JsonReader.GetBytesFromBase64(
+                    arg_0
+        );
+    }
+    static inline CHAOS_IL2CPP_INTPTR GetComment(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.system_Text_Json_Utf8JsonReader.GetComment(
+                    arg_0
+        );
+    }
+    static inline CHAOS_IL2CPP_INTPTR GetDateTime(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.system_Text_Json_Utf8JsonReader.GetDateTime(
+                    arg_0
+        );
+    }
+    static inline CHAOS_IL2CPP_INTPTR GetDateTimeOffset(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.system_Text_Json_Utf8JsonReader.GetDateTimeOffset(
+                    arg_0
+        );
+    }
+    static inline CHAOS_IL2CPP_INTPTR GetDecimal(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.system_Text_Json_Utf8JsonReader.GetDecimal(
+                    arg_0
+        );
+    }
+    static inline double GetDouble(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.system_Text_Json_Utf8JsonReader.GetDouble(
+                    arg_0
+        );
+    }
+    static inline CHAOS_IL2CPP_INTPTR GetGuid(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.system_Text_Json_Utf8JsonReader.GetGuid(
+                    arg_0
+        );
+    }
+    static inline CHAOS_IL2CPP_INT16 GetInt16(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.system_Text_Json_Utf8JsonReader.GetInt16(
+                    arg_0
+        );
+    }
+    static inline CHAOS_IL2CPP_INT32 GetInt32(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.system_Text_Json_Utf8JsonReader.GetInt32(
+                    arg_0
+        );
+    }
+    static inline CHAOS_IL2CPP_INT64 GetInt64(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.system_Text_Json_Utf8JsonReader.GetInt64(
+                    arg_0
+        );
+    }
+    static inline CHAOS_IL2CPP_INT8 GetSByte(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.system_Text_Json_Utf8JsonReader.GetSByte(
+                    arg_0
+        );
+    }
+    static inline float GetSingle(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.system_Text_Json_Utf8JsonReader.GetSingle(
+                    arg_0
+        );
+    }
+    static inline CHAOS_IL2CPP_INTPTR GetString(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.system_Text_Json_Utf8JsonReader.GetString(
+                    arg_0
+        );
+    }
+    static inline CHAOS_IL2CPP_UINT16 GetUInt16(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.system_Text_Json_Utf8JsonReader.GetUInt16(
+                    arg_0
+        );
+    }
+    static inline CHAOS_IL2CPP_INTPTR GetUInt32(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.system_Text_Json_Utf8JsonReader.GetUInt32(
+                    arg_0
+        );
+    }
+    static inline CHAOS_IL2CPP_UINT64 GetUInt64(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.system_Text_Json_Utf8JsonReader.GetUInt64(
+                    arg_0
+        );
+    }
+    static inline CHAOS_IL2CPP_INTPTR TryGetByte(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.system_Text_Json_Utf8JsonReader.TryGetByte(
+                    arg_0
+        );
+    }
+    static inline CHAOS_IL2CPP_INTPTR TryGetBytesFromBase64(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.system_Text_Json_Utf8JsonReader.TryGetBytesFromBase64(
+                    arg_0
+        );
+    }
+    static inline CHAOS_IL2CPP_INTPTR TryGetDateTime(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.system_Text_Json_Utf8JsonReader.TryGetDateTime(
+                    arg_0
+        );
+    }
+    static inline CHAOS_IL2CPP_INTPTR TryGetDateTimeOffset(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.system_Text_Json_Utf8JsonReader.TryGetDateTimeOffset(
+                    arg_0
+        );
+    }
+    static inline CHAOS_IL2CPP_INTPTR TryGetDecimal(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.system_Text_Json_Utf8JsonReader.TryGetDecimal(
+                    arg_0
+        );
+    }
+    static inline CHAOS_IL2CPP_INTPTR TryGetDouble(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.system_Text_Json_Utf8JsonReader.TryGetDouble(
+                    arg_0
+        );
+    }
+    static inline CHAOS_IL2CPP_INTPTR TryGetGuid(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.system_Text_Json_Utf8JsonReader.TryGetGuid(
+                    arg_0
+        );
+    }
+    static inline CHAOS_IL2CPP_INTPTR TryGetInt16(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.system_Text_Json_Utf8JsonReader.TryGetInt16(
+                    arg_0
+        );
+    }
+    static inline CHAOS_IL2CPP_INTPTR TryGetInt32(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.system_Text_Json_Utf8JsonReader.TryGetInt32(
+                    arg_0
+        );
+    }
+    static inline CHAOS_IL2CPP_INTPTR TryGetInt64(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.system_Text_Json_Utf8JsonReader.TryGetInt64(
+                    arg_0
+        );
+    }
+    static inline CHAOS_IL2CPP_INTPTR TryGetSByte(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.system_Text_Json_Utf8JsonReader.TryGetSByte(
+                    arg_0
+        );
+    }
+    static inline CHAOS_IL2CPP_INTPTR TryGetSingle(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.system_Text_Json_Utf8JsonReader.TryGetSingle(
+                    arg_0
+        );
+    }
+    static inline CHAOS_IL2CPP_INTPTR TryGetUInt16(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.system_Text_Json_Utf8JsonReader.TryGetUInt16(
+                    arg_0
+        );
+    }
+    static inline CHAOS_IL2CPP_INTPTR TryGetUInt32(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.system_Text_Json_Utf8JsonReader.TryGetUInt32(
+                    arg_0
+        );
+    }
+    static inline CHAOS_IL2CPP_INTPTR TryGetUInt64(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.system_Text_Json_Utf8JsonReader.TryGetUInt64(
+                    arg_0
+        );
+    }
+    static inline CHAOS_IL2CPP_INTPTR ValueTextEquals(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.system_Text_Json_Utf8JsonReader.ValueTextEquals(
+                    arg_0
+        );
+    }
+    /// Total number of AOT-compiled methods in this type.
+    static constexpr int32_t MethodCount = 34;
+};
+
+struct System_Text_Json_Utf8JsonWriter {
+    static inline CHAOS_IL2CPP_INTPTR DisposeAsync(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.system_Text_Json_Utf8JsonWriter.DisposeAsync(
+                    arg_0
+        );
+    }
+    static inline void Flush(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.system_Text_Json_Utf8JsonWriter.Flush(
+                    arg_0
+        );
+    }
+    static inline CHAOS_IL2CPP_INTPTR FlushAsync(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.system_Text_Json_Utf8JsonWriter.FlushAsync(
+                    arg_0
+        );
+    }
+    static inline void WriteCommentValue(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.system_Text_Json_Utf8JsonWriter.WriteCommentValue(
+                    arg_0
+        );
+    }
+    static inline void WriteNumberValue(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.system_Text_Json_Utf8JsonWriter.WriteNumberValue(
+                    arg_0
+        );
+    }
+    static inline void WriteNumberValue_1(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.system_Text_Json_Utf8JsonWriter.WriteNumberValue_1(
+                    arg_0
+        );
+    }
+    static inline void WriteNumberValue_2(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.system_Text_Json_Utf8JsonWriter.WriteNumberValue_2(
+                    arg_0
+        );
+    }
+    static inline void WriteNumberValue_3(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.system_Text_Json_Utf8JsonWriter.WriteNumberValue_3(
+                    arg_0
+        );
+    }
+    static inline void WriteNumberValue_4(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.system_Text_Json_Utf8JsonWriter.WriteNumberValue_4(
+                    arg_0
+        );
+    }
+    static inline void WriteNumberValue_5(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.system_Text_Json_Utf8JsonWriter.WriteNumberValue_5(
+                    arg_0
+        );
+    }
+    static inline void WriteNumberValue_6(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.system_Text_Json_Utf8JsonWriter.WriteNumberValue_6(
+                    arg_0
+        );
+    }
+    static inline void WritePropertyName(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.system_Text_Json_Utf8JsonWriter.WritePropertyName(
+                    arg_0
+        );
+    }
+    static inline void WritePropertyName_1(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.system_Text_Json_Utf8JsonWriter.WritePropertyName_1(
+                    arg_0
+        );
+    }
+    static inline void WriteRawValue(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.system_Text_Json_Utf8JsonWriter.WriteRawValue(
+                    arg_0
+        );
+    }
+    static inline void WriteRawValue_1(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.system_Text_Json_Utf8JsonWriter.WriteRawValue_1(
+                    arg_0
+        );
+    }
+    static inline void WriteStringValue(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.system_Text_Json_Utf8JsonWriter.WriteStringValue(
+                    arg_0
+        );
+    }
+    static inline void WriteStringValue_1(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.system_Text_Json_Utf8JsonWriter.WriteStringValue_1(
+                    arg_0
+        );
+    }
+    static inline void WriteStringValue_2(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.system_Text_Json_Utf8JsonWriter.WriteStringValue_2(
+                    arg_0
+        );
+    }
+    static inline void WriteStringValue_3(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.system_Text_Json_Utf8JsonWriter.WriteStringValue_3(
+                    arg_0
+        );
+    }
+    static inline void WriteStringValue_4(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.system_Text_Json_Utf8JsonWriter.WriteStringValue_4(
+                    arg_0
+        );
+    }
+    /// Total number of AOT-compiled methods in this type.
+    static constexpr int32_t MethodCount = 20;
 };
 
 

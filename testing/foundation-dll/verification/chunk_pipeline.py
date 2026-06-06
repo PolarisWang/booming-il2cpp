@@ -192,6 +192,21 @@ def main():
 
     for chunk_slug in chunks:
         chunk_dir = foundation_dir / "chunks" / chunk_slug
+        # Read assembly dirs from pipeline-config.yaml for this chunk
+        chunk_cfg = (_PIPELINE_CONFIG.get('chunks') or {}).get(chunk_slug, {})
+        assembly_dirs_str = (chunk_cfg.get('assemblyDirs') or '').strip()
+        assembly_dirs = []
+        if assembly_dirs_str:
+            for d in assembly_dirs_str.split(';'):
+                d = d.strip()
+                if not d:
+                    continue
+                resolved = Path(d)
+                if not resolved.is_absolute():
+                    resolved = foundation_dir / d
+                if resolved.is_dir():
+                    assembly_dirs.append(str(resolved))
+
         ctx = ChunkContext(
             slug=chunk_slug,
             assembly=assembly,
@@ -202,6 +217,7 @@ def main():
             verbose=args.verbose,
             skip_probe=args.skip_probe,
             stage_timeout_seconds=stage_timeout_seconds,
+            assembly_dirs=assembly_dirs,
         )
 
         print(f"\n{'='*60}")

@@ -515,6 +515,15 @@ public sealed partial class NativeAotLoweringPlanner
     private readonly Dictionary<string, int> _externalRuntimeSubjects = new(StringComparer.Ordinal);
 
     /// <summary>
+    /// Cache for TryCreateExternalRuntimeHelperDefinition results (P0 optimization).
+    /// External runtime helper definitions are pure functions of the normalized subjectId;
+    /// caching avoids redundant shape registry matching when the same callee is called
+    /// from multiple methods.
+    /// </summary>
+    private readonly Dictionary<string, ExternalRuntimeHelperDefinition?> _externalRuntimeHelperCache
+        = new(StringComparer.Ordinal);
+
+    /// <summary>
     /// Bridge/import thunks: C++ wrapper functions for calls crossing the managed/native
     /// boundary. Populated by <see cref="CollectBridgeImportThunks"/> and emitted after
     /// all method bodies in Create.

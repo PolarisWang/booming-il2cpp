@@ -54,22 +54,26 @@ public sealed class CodeGenStage
             TypeCapabilities = BuildCodeRegistrationTypeCapabilities(metadataWriterOutput.MetadataRegistration),
         };
         var aotCoreIr = new AotCoreIrLowering().Create(linkedWorld, typedIl, codeRegistration);
-        // Phase L2: Bridge method AOT compilation (post-processing).
-        // Compiles cross-assembly callees and generates redirect table + stubs.
-        var bridgeCompiler = new BridgeAotCompiler(linkedWorld, codeRegistration);
-        var (bridgeRedirectMap, bridgeCompiledMethods) = bridgeCompiler.CompileBridgedMethods(aotCoreIr);
 
         var genericInstantiationDemandGraph = linkedWorld.GenericInstantiationDemandGraph
             ?? new GenericInstantiationDemandGraphModel
             {
                 Demands = [],
             };
+
+        // Build generic capability matrix BEFORE adding bridge methods
+        // (bridge methods would produce conflicting generic authority observations).
         var genericCapabilityMatrix = new GenericCapabilityMatrixBuilder().Build(
             ResolveOwnerSubjectId(request.InputAssemblyPath, linkedWorld.Assembly.Name),
             linkedWorld.EntryPointSubjectId,
             genericInstantiationDemandGraph,
             aotCoreIr,
             metadataWriterOutput.SupplementalMetadataTemplate);
+
+        // Phase L2: Bridge method AOT compilation & integration.
+        var bridgeCompiler = new BridgeAotCompiler(linkedWorld, codeRegistration);
+        var (bridgeAotCoreIr, bridgeRedirectMap) = bridgeCompiler.CompileAndIntegrate(aotCoreIr);
+        aotCoreIr = bridgeAotCoreIr;
         NativeReferenceLoweringPlanArtifact nativeReferenceLoweringPlan;
         if (linkedWorld.FullAssemblyClosure && string.IsNullOrWhiteSpace(linkedWorld.EntryPointSubjectId))
         {
@@ -144,7 +148,6 @@ public sealed class CodeGenStage
             NativeAotLoweringPlan = nativeAotLoweringPlan,
             ClosureManifest = closureManifest,
             BridgeRedirectMap = bridgeRedirectMap.Count > 0 ? bridgeRedirectMap : null,
-            BridgeCompiledMethods = bridgeCompiledMethods.Count > 0 ? bridgeCompiledMethods : null,
         });
         }
         catch (Exception ex)

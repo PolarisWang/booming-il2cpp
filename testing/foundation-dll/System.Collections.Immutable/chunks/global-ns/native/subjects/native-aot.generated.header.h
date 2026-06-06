@@ -170,6 +170,7 @@ struct chaos_type_System_Private_CoreLib_System_Type : public chaos_type_System_
     CHAOS_IL2CPP_INT32 runtime_metadata_token_value = 0;
 };
 
+
 struct chaos_type_Chaos_TestFramework_Sdk___0;
 struct chaos_boxed_type_Chaos_TestFramework_Sdk___0 {
     PureTypeHeader header{};

@@ -598,6 +598,11 @@ def run_build(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
         "--config-tier", ctx.native_config,
         "--clean",
     ]
+
+    # Pass assembly dirs from pipeline-config.yaml (populated by chunk_pipeline.py)
+    for ad in ctx.assembly_dirs:
+        tpg_cmd.extend(['--assembly-dir', ad])
+        print(f"  [build] assembly-dir: {ad}")
     tpg_result = subprocess.run(tpg_cmd, capture_output=True, text=True, timeout=1800)
 
     for line in tpg_result.stdout.splitlines():

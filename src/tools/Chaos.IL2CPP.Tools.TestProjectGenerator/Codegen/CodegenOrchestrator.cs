@@ -20,9 +20,14 @@ public sealed class CodegenOrchestrator
     /// <param name="outputDir">Output directory for codegen artifacts (--sdk-out).</param>
     /// <param name="codegenMode">Codegen mode: "aot" or "jit".</param>
     /// <param name="subjectMethodIds">Optional list of managed SubjectIds to identify as subject entries.</param>
+    /// <param name="assemblyDirs">Optional list of assembly search directories.
+    /// Passed as --assembly-dir to ConvertToCppHandler for --full-closure resolution.
+    /// When null or empty, only the subjects DLL itself is loaded (D5 default).
+    /// Use for game engine scenarios where non-runtime DLLs are needed.</param>
     public CodegenResult Run(IReadOnlyList<string> assemblyPaths, string outputDir,
         string codegenMode = "aot",
-        IReadOnlyList<string>? subjectMethodIds = null)
+        IReadOnlyList<string>? subjectMethodIds = null,
+        IReadOnlyList<string>? assemblyDirs = null)
     {
         try
         {
@@ -36,15 +41,24 @@ public sealed class CodegenOrchestrator
                 args.Add(Path.GetFullPath(dll));
             }
 
-            var probeDirs = assemblyPaths
-                .Select(Path.GetDirectoryName)
-                .OfType<string>()
-                .Distinct();
-
-            foreach (var dir in probeDirs)
+            // Pass explicitly-configured assembly directories (from pipeline-config.yaml).
+            // These are used by --full-closure to find cross-assembly type definitions.
+            // By default (assemblyDirs null/empty), only the subjects DLL is loaded —
+            // this prevents NuGet transitive dependencies (FSharp.Core, xunit) from
+            // bloating the AOT IR. For game engine scenarios with 200+ DLLs, list
+            // game engine directories here.
+            if (assemblyDirs is { Count: > 0 })
             {
-                args.Add("--assembly-dir");
-                args.Add(Path.GetFullPath(dir));
+                foreach (var dir in assemblyDirs)
+                {
+                    if (string.IsNullOrWhiteSpace(dir)) continue;
+                    var fullPath = Path.GetFullPath(dir);
+                    if (Directory.Exists(fullPath))
+                    {
+                        args.Add("--assembly-dir");
+                        args.Add(fullPath);
+                    }
+                }
             }
 
             args.Add("--sdk-out");

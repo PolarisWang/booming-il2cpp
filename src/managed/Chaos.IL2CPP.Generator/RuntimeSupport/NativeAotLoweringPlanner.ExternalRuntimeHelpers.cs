@@ -61,6 +61,13 @@ public sealed partial class NativeAotLoweringPlanner
 		// Canonicalize assembly prefix so matching is assembly-agnostic
 		callee = ManagedNaming.NormalizeSubjectIdAssembly(callee);
 
+		// P0: Check cache first
+		if (_externalRuntimeHelperCache.TryGetValue(callee, out var cached))
+		{
+			helperDefinition = cached;
+			return cached != null;
+		}
+
 		// === Generic shape dispatch via Registry (runs first -- GenericShapeDescriptor resolves
 		//     complex shapes with custom body logic that cannot be expressed as a simple forward) ===
 		if (_shapeRegistry.TryMatchGenericShape(callee, out var genericDescriptor, out var typeArgs))

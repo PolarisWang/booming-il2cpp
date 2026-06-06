@@ -28,19 +28,24 @@ public sealed class BridgeAotCompiler
     }
 
     /// <summary>
-    /// Compile bridged callees with unique chaos_bridge_ symbols.
-    /// Returns both a redirect map (subjectId → symbol) and compiled method
-    /// artifacts (for Phase 1c body emission via BridgeMethodBodyEmitter).
+    /// Compile bridged callees and integrate them into the AOT IR.
+    /// Bridge methods get unique chaos_bridge_ symbols, their instructions are
+    /// patched for Direct/ExternalRuntime dispatch, and they're added to
+    /// aotCoreIr.Methods so the main emitter generates real function bodies.
+    /// Returns the updated AotCoreIrArtifact and a redirect map.
     /// </summary>
-    public (Dictionary<string, string> RedirectMap, List<AotCoreIrMethodArtifact> CompiledMethods) CompileBridgedMethods(
+    public (AotCoreIrArtifact UpdatedIr, Dictionary<string, string> RedirectMap) CompileAndIntegrate(
         AotCoreIrArtifact aotCoreIr)
     {
         var seen = new HashSet<string>(StringComparer.Ordinal);
         var redirectMap = new Dictionary<string, string>(StringComparer.Ordinal);
-        var compiledMethods = new List<AotCoreIrMethodArtifact>();
+        var calleeToMethod = new Dictionary<string, AotCoreIrMethodArtifact>(StringComparer.Ordinal);
         int okCount = 0, failCount = 0;
 
-        foreach (var method in aotCoreIr.Methods)
+        // Phase 1: Compile bridged callees — scan only ORIGINAL subject methods,
+        // NOT bridge methods (which would transitively expand to thousands).
+        var originalSubjectMethods = aotCoreIr.Methods.Where(m => !m.NativeSymbol.StartsWith("chaos_bridge_", StringComparison.Ordinal)).ToList();
+        foreach (var method in originalSubjectMethods)
         {
             foreach (var instr in method.Instructions ?? [])
             {
@@ -56,9 +61,18 @@ public sealed class BridgeAotCompiler
                     if (cm != null)
                     {
                         var bridgeSymbol = $"chaos_bridge_{_bridgeCounter++}_{ExtractMethodNameForSymbol(callee)}_{(uint)callee.GetHashCode():X4}";
-                        cm = cm with { NativeSymbol = bridgeSymbol };
+                        // Clear shared generic flags: bridge methods are closed-form instantiations
+                        // that don't need the runtime generic context parameter. Without this, the
+                        // emitter generates dual declarations (with and without generic_context),
+                        // causing C2733.
+                        cm = cm with
+                        {
+                            NativeSymbol = bridgeSymbol,
+                            OpenDefinitionSubjectId = null,
+                            SharedGenericBodyId = null,
+                        };
                         redirectMap[callee] = bridgeSymbol;
-                        compiledMethods.Add(cm);
+                        calleeToMethod[callee] = cm;
                         okCount++;
                     }
                     else { failCount++; }
@@ -71,8 +85,35 @@ public sealed class BridgeAotCompiler
             }
         }
 
-        Console.Error.WriteLine($"[BRIDGE-AOT] Compiled: {okCount} OK, {failCount} FAIL — {redirectMap.Count} redirects");
-        return (redirectMap, compiledMethods);
+        if (calleeToMethod.Count == 0)
+        {
+            Console.Error.WriteLine($"[BRIDGE-AOT] No methods compiled — {okCount} OK, {failCount} FAIL");
+            return (aotCoreIr, redirectMap);
+        }
+
+        // Phase 2: Patch bridge methods' instructions
+        // Bridge-to-bridge callee → Direct dispatch (chaos_bridge_ symbol)
+        // Other callee → ExternalRuntime dispatch (resolved by planner's dispatch table)
+        var compiledList = new List<AotCoreIrMethodArtifact>();
+        foreach (var kvp in calleeToMethod)
+        {
+            var compiled = kvp.Value;
+            var patchedInstrs = compiled.Instructions
+                .Select(instr =>
+                {
+                    if (string.IsNullOrEmpty(instr.Callee)) return instr;
+                    if (redirectMap.TryGetValue(instr.Callee, out var targetSymbol))
+                        return instr with { DispatchKindCode = HybridDispatchKind.Direct, TargetSymbol = targetSymbol };
+                    return instr with { DispatchKindCode = HybridDispatchKind.ExternalRuntime };
+                })
+                .ToList();
+            compiledList.Add(compiled with { Instructions = patchedInstrs });
+        }
+
+        // Phase 3: Add bridge methods to AOT IR (main emitter generates real bodies)
+        var updatedMethods = aotCoreIr.Methods.Concat(compiledList).ToList();
+        Console.Error.WriteLine($"[BRIDGE-AOT] Integrated: {okCount} OK, {failCount} FAIL — added {compiledList.Count} methods");
+        return (aotCoreIr with { Methods = updatedMethods }, redirectMap);
     }
 
     private static string ExtractMethodNameForSymbol(string subjectId)
@@ -301,8 +342,21 @@ public sealed class BridgeAotCompiler
     private static IReadOnlyDictionary<string, GenericInstantiationDemandModel> BuildGenericDemandLookup(
         GenericInstantiationDemandGraphModel? graph)
     {
-        if (graph?.Demands == null) return new Dictionary<string, GenericInstantiationDemandModel>();
-        return graph.Demands.ToDictionary(d => d.SubjectId, d => d, StringComparer.Ordinal);
+        var genericDemandLookup = new Dictionary<string, GenericInstantiationDemandModel>(StringComparer.Ordinal);
+        if (graph?.Demands is not { Count: > 0 } demands)
+            return genericDemandLookup;
+
+        // Multiple assemblies may demand the same generic instantiation.
+        // All entries for the same SubjectId produce the same
+        // RuntimeGenericContextArtifact — keep the first.
+        foreach (var demand in demands)
+        {
+            if (genericDemandLookup.ContainsKey(demand.SubjectId))
+                continue;
+            genericDemandLookup[demand.SubjectId] = demand;
+        }
+
+        return genericDemandLookup;
     }
 
     // ── SubjectId parsing ─────────────────────────────────────

@@ -1,68 +1,68 @@
 {
   "System.Collections": {
-    "status": "passed",
-    "detail": "<<< + [passed] passed: 16 passed, assert_failed=0, semantic_changed=0",
-    "duration_s": 76
+    "status": "skipped",
+    "detail": "<<< ? [skipped_patch_not_applied] skipped_patch_not_applied: 16 passed, assert_failed=0, semantic_changed=0",
+    "duration_s": 97
   },
   "System.Collections.Immutable": {
-    "status": "passed",
-    "detail": "<<< + [passed] passed: 31 passed, assert_failed=0, semantic_changed=0",
-    "duration_s": 71
+    "status": "skipped",
+    "detail": "<<< ? [skipped_patch_not_applied] skipped_patch_not_applied: 31 passed, assert_failed=0, semantic_changed=0",
+    "duration_s": 102
   },
   "System.ComponentModel.TypeConverter": {
     "status": "skipped",
     "detail": "<<< ? [skipped_patch_not_applied] skipped_patch_not_applied: 74 passed, assert_failed=0, semantic_changed=0",
-    "duration_s": 317
+    "duration_s": 414
   },
   "System.Data.Common": {
     "status": "passed",
     "detail": "<<< + [passed] passed: 21 passed, assert_failed=0, semantic_changed=0",
-    "duration_s": 504
+    "duration_s": 621
   },
   "System.Diagnostics.DiagnosticSource": {
     "status": "passed",
     "detail": "<<< + [passed] passed: 172 passed, assert_failed=0, semantic_changed=0",
-    "duration_s": 267
+    "duration_s": 192
   },
   "System.Formats.Asn1": {
     "status": "passed",
     "detail": "<<< + [passed] passed: 38 passed, assert_failed=0, semantic_changed=0",
-    "duration_s": 96
+    "duration_s": 79
   },
   "System.IO.Compression.Brotli": {
     "status": "passed",
     "detail": "<<< + [passed] passed: 33 passed, assert_failed=0, semantic_changed=0",
-    "duration_s": 76
+    "duration_s": 79
   },
   "System.IO.Pipelines": {
     "status": "passed",
     "detail": "<<< + [passed] passed: 19 passed, assert_failed=0, semantic_changed=0",
-    "duration_s": 69
+    "duration_s": 65
   },
   "System.Linq": {
-    "status": "skipped",
-    "detail": "<<< ? [skipped_patch_not_applied] skipped_patch_not_applied: 283 passed, assert_failed=0, semantic_changed=0",
-    "duration_s": 57
+    "status": "passed",
+    "detail": "<<< + [passed] passed: 283 passed, assert_failed=0, semantic_changed=0",
+    "duration_s": 126
   },
   "System.Linq.Expressions": {
     "status": "passed",
-    "detail": "<<< + [passed] passed: 732 passed, assert_failed=0, semantic_changed=0",
-    "duration_s": 292
+    "detail": "<<< + [passed] passed: 737 passed, assert_failed=0, semantic_changed=0",
+    "duration_s": 199
   },
   "System.Net.Http": {
-    "status": "skipped",
-    "detail": "<<< ? [skipped_patch_not_applied] skipped_patch_not_applied: 109 passed, assert_failed=0, semantic_changed=0",
-    "duration_s": 88
+    "status": "passed",
+    "detail": "<<< + [passed] passed: 109 passed, assert_failed=0, semantic_changed=0",
+    "duration_s": 191
   },
   "System.Net.ServerSentEvents": {
-    "status": "skipped",
-    "detail": "<<< ? [skipped_patch_not_applied] skipped_patch_not_applied: 6 passed, assert_failed=0, semantic_changed=0",
-    "duration_s": 44
+    "status": "passed",
+    "detail": "<<< + [passed] passed: 6 passed, assert_failed=0, semantic_changed=0",
+    "duration_s": 66
   },
   "System.Net.Sockets": {
-    "status": "skipped",
-    "detail": "<<< ? [skipped_patch_not_applied] skipped_patch_not_applied: 500 passed, assert_failed=0, semantic_changed=0",
-    "duration_s": 48
+    "status": "passed",
+    "detail": "<<< + [passed] passed: 500 passed, assert_failed=0, semantic_changed=0",
+    "duration_s": 171
   },
   "System.ObjectModel": {
     "status": "skipped",
@@ -76,56 +76,56 @@
   "System.Private.Xml": {
     "status": "skipped",
     "detail": "<<< ? [skipped] entry.exe not found, skipping hotupdate",
-    "duration_s": 206
+    "duration_s": 183
   },
   "System.Reflection.Metadata": {
     "status": "passed",
-    "detail": "<<< + [passed] passed: 233 passed, assert_failed=0, semantic_changed=0",
-    "duration_s": 129
+    "detail": "<<< + [passed] passed: 41 passed, assert_failed=0, semantic_changed=0",
+    "duration_s": 258
   },
   "System.Runtime.InteropServices": {
-    "status": "unknown",
-    "detail": "",
-    "duration_s": 47
+    "status": "skipped",
+    "detail": "<<< ? [skipped_patch_not_applied] skipped_patch_not_applied: 29 passed, assert_failed=0, semantic_changed=0",
+    "duration_s": 41
   },
   "System.Runtime.Intrinsics": {
     "status": "skipped",
     "detail": "<<< ? [skipped] entry.exe not found, skipping hotupdate",
-    "duration_s": 1
+    "duration_s": 0
   },
   "System.Runtime.Serialization.Formatters": {
-    "status": "unknown",
-    "detail": "",
-    "duration_s": 15
+    "status": "skipped",
+    "detail": "<<< ? [skipped_patch_not_applied] skipped_patch_not_applied: 41 passed, assert_failed=0, semantic_changed=0",
+    "duration_s": 44
   },
   "System.Security.Claims": {
-    "status": "unknown",
-    "detail": "",
-    "duration_s": 46
+    "status": "skipped",
+    "detail": "<<< ? [skipped_patch_not_applied] skipped_patch_not_applied: 35 passed, assert_failed=0, semantic_changed=0",
+    "duration_s": 44
   },
   "System.Security.Cryptography": {
-    "status": "unknown",
-    "detail": "",
-    "duration_s": 11
+    "status": "passed",
+    "detail": "<<< + [passed] passed: 237 passed, assert_failed=0, semantic_changed=0",
+    "duration_s": 768
   },
   "System.Security.Principal.Windows": {
-    "status": "unknown",
-    "detail": "",
-    "duration_s": 4
+    "status": "passed",
+    "detail": "<<< + [passed] passed: 30 passed, assert_failed=0, semantic_changed=0",
+    "duration_s": 83
   },
   "System.Text.Json": {
-    "status": "unknown",
-    "detail": "",
-    "duration_s": 4
+    "status": "passed",
+    "detail": "<<< + [passed] passed: 35 passed, assert_failed=0, semantic_changed=0",
+    "duration_s": 243
   },
   "System.Threading.Tasks.Parallel": {
-    "status": "unknown",
-    "detail": "",
-    "duration_s": 4
+    "status": "passed",
+    "detail": "<<< + [passed] passed: 112 passed, assert_failed=0, semantic_changed=0",
+    "duration_s": 89
   },
   "System.Xml.ReaderWriter": {
     "status": "skipped",
     "detail": "<<< ? [skipped] entry.exe not found, skipping hotupdate",
-    "duration_s": 1
+    "duration_s": 0
   }
 }

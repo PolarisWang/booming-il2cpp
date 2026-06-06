@@ -130,7 +130,7 @@ internal static class ConvertToCppHandler
             NativeAotResult emitResult;
             try
             {
-                emitResult = emitter.Emit(result, outputRoot, config.Mode, subjectMethods, result.BridgeRedirectMap, result.BridgeCompiledMethods);
+                emitResult = emitter.Emit(result, outputRoot, config.Mode, subjectMethods, result.BridgeRedirectMap);
             }
             catch (OutOfMemoryException oom)
             {
@@ -210,7 +210,7 @@ internal static class ConvertToCppHandler
             {
                 var asmOutput = result.OutputRootPath;
                 var asmEmitter = new FullAssemblyEmitter();
-                var asmEmitResult = asmEmitter.Emit(result, asmOutput, config.Mode, subjectMethods, result.BridgeRedirectMap, result.BridgeCompiledMethods);
+                var asmEmitResult = asmEmitter.Emit(result, asmOutput, config.Mode, subjectMethods, result.BridgeRedirectMap);
                 totalFiles += asmEmitResult.GeneratedSources.Count;
                 emitResults.Add(asmEmitResult);
             }

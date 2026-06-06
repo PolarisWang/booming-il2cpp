@@ -64,10 +64,12 @@ find_package(chaos REQUIRED PATHS "${CHAOS_SDK_DIR}")
 file(GLOB CHAOS_CODEGEN_FLAT_CPP "${CMAKE_CURRENT_SOURCE_DIR}/subjects/*.cpp")
 file(GLOB CHAOS_CODEGEN_NATIVE_CPP
     "${CHAOS_CODEGEN_DIR}/*Subjects/generated/native-aot.generated.cpp"
+    "${CHAOS_CODEGEN_DIR}/*Subjects/generated/native-aot.generated.page*.cpp"
     "${CHAOS_CODEGEN_DIR}/*Subjects/generated/native-aot.page-*.cpp"
     "${CHAOS_CODEGEN_DIR}/*Subjects/generated/chaos_generated_module.cpp"
     # Flat layout fallback: codegen writes directly to codegen/generated/
     "${CHAOS_CODEGEN_DIR}/generated/native-aot.generated.cpp"
+    "${CHAOS_CODEGEN_DIR}/generated/native-aot.generated.page*.cpp"
     "${CHAOS_CODEGEN_DIR}/generated/native-aot.page-*.cpp"
     "${CHAOS_CODEGEN_DIR}/generated/chaos_generated_module.cpp"
 )
@@ -129,6 +131,11 @@ set(CHAOS_HOTPATCH_TABLE
 set(CHAOS_EAGER_COMPILE
     "${CHAOS_PROJECT_ROOT}/src/native/interpreter/interp_entry/eager_compile.cpp"
 )
+# method_replacement.cpp — the prebuilt chaos_hot_update.lib may be stale
+# (SetPatchedBySlot signature changed — domain_id parameter added).
+set(CHAOS_METHOD_REPLACEMENT
+    "${CHAOS_PROJECT_ROOT}/src/native/hot-update/method_replacement.cpp"
+)
 
 set(CHAOS_ENTRY_SOURCES
     "runtime-entry.cpp"
@@ -144,6 +151,7 @@ set(CHAOS_ENTRY_SOURCES
     ${CHAOS_EXCEPTION_STUBS}
     ${CHAOS_HOTPATCH_TABLE}
     ${CHAOS_EAGER_COMPILE}
+    ${CHAOS_METHOD_REPLACEMENT}
     ${CHAOS_AOT_GENERATED_CPP}
 )
 

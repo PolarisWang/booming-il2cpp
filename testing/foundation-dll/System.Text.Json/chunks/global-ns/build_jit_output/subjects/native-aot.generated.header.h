@@ -132,6 +132,7 @@ struct chaos_type_System_Text_Json_System_Text_Json_Serialization_Metadata_IJson
     ThinLockableHeader header{};
 };
 
+
 struct chaos_type_Chaos_TestFramework_Sdk___0;
 struct chaos_boxed_type_Chaos_TestFramework_Sdk___0 {
     PureTypeHeader header{};
@@ -347,6 +348,8 @@ CHAOS_IL2CPP_INTPTR chaos_default_interpolated_string_handler_to_string_and_clea
 } // namespace chaos::il2cpp::codegen::CombinedSubjects
 
 extern "C" void* kChaosExternalRuntimeFnTable[];
+
+extern "C" int32_t kChaosExternalRuntimeCount;
 
 namespace chaos::il2cpp::codegen::CombinedSubjects
 {

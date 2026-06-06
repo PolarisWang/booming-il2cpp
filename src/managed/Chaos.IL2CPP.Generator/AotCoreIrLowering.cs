@@ -121,7 +121,6 @@ public sealed class AotCoreIrLowering
                 var constrainedOverrideSubjectId = ResolveConstrainedValueTypeOverride(typedInstruction);
                 if (constrainedOverrideSubjectId is not null)
                 {
-                    Console.Error.WriteLine($"[constrained] {typedInstruction.ConstrainedTypeSubjectId} :: {typedInstruction.Callee} -> {constrainedOverrideSubjectId}");
                     typedInstruction = typedInstruction with { Callee = constrainedOverrideSubjectId, DispatchKindCode = HybridDispatchKind.Direct };
                     directCallTarget = ResolveDirectCallTarget(typedInstruction, managedMethods, targetSymbols);
 
@@ -140,7 +139,6 @@ public sealed class AotCoreIrLowering
                 }
                 else if (typedInstruction.ConstrainedTypeSubjectId is not null)
                 {
-                    Console.Error.WriteLine($"[constrained] MISS: {typedInstruction.ConstrainedTypeSubjectId} :: {typedInstruction.Callee} — typeInDict={managedTypes.ContainsKey(typedInstruction.ConstrainedTypeSubjectId)}");
                     // Clear the constrained type so the C++ emitter does not try
                     // to resolve a generic parameter (!0, !!0) as a concrete type.
                     typedInstruction = typedInstruction with { ConstrainedTypeSubjectId = null };
@@ -510,10 +508,62 @@ public sealed class AotCoreIrLowering
                     genericDemandLookup);
 
             default:
+                // Many IL opcodes (ldarg.*, ldloc.*, stloc.*, ldind.*, stind.*,
+                // conv.*, arithmetic, branch, etc.) don't involve type/field/method
+                // references. Silently return null instead of warning for these.
+                if (IsSimpleOpcode(typedInstruction.Op))
+                    return null;
+
                 System.Console.Error.WriteLine(
                     $"[warning] AotCoreIrLowering: unknown opcode '{typedInstruction.Op}' in ResolveTargetReference, returning null reference.");
                 return null;
         }
+    }
+
+    /// <summary>
+    /// Returns true for IL opcodes that don't involve type/field/method references
+    /// and thus don't need a TargetReference. These are "simple" instructions
+    /// (load/store, arithmetic, conversion, branch, etc.).
+    /// </summary>
+    private static bool IsSimpleOpcode(string op)
+    {
+        // ldarg.0, ldarg.1, ldarg.s, etc.
+        if (op.StartsWith("ldarg", StringComparison.Ordinal)) return true;
+        // ldloc.0, ldloc.s, ldloca.s, etc.
+        if (op.StartsWith("ldloc", StringComparison.Ordinal)) return true;
+        // stloc.0, stloc.s, etc.
+        if (op.StartsWith("stloc", StringComparison.Ordinal)) return true;
+        // ldind.i, ldind.i4, stind.i, stind.ref, etc.
+        if (op.StartsWith("ldind", StringComparison.Ordinal)) return true;
+        if (op.StartsWith("stind", StringComparison.Ordinal)) return true;
+        // conv.i4, conv.ovf.i4.un, conv.r8, etc.
+        if (op.StartsWith("conv.", StringComparison.Ordinal)) return true;
+        if (string.Equals(op, "conv", StringComparison.Ordinal)) return true;
+        // ldc.i4, ldc.i8, ldc.r4, ldc.r8
+        if (op.StartsWith("ldc.", StringComparison.Ordinal)) return true;
+        // br, br.s, brfalse, brtrue, beq, bge, bgt, ble, blt, bne, etc.
+        if (op.StartsWith("br", StringComparison.Ordinal)) return true;
+        if (op.StartsWith("beq", StringComparison.Ordinal)) return true;
+        if (op.StartsWith("bge", StringComparison.Ordinal)) return true;
+        if (op.StartsWith("bgt", StringComparison.Ordinal)) return true;
+        if (op.StartsWith("ble", StringComparison.Ordinal)) return true;
+        if (op.StartsWith("blt", StringComparison.Ordinal)) return true;
+        if (op.StartsWith("bne", StringComparison.Ordinal)) return true;
+        // Arithmetic
+        switch (op)
+        {
+            case "add": case "sub": case "mul": case "div": case "rem":
+            case "and": case "or": case "xor": case "not":
+            case "neg": case "shl": case "shr":
+            case "ceq": case "cgt": case "clt":
+            case "add.ovf": case "sub.ovf": case "mul.ovf":
+            case "ldnull": case "dup": case "pop": case "ret":
+            case "nop": case "throw": case "rethrow":
+            case "ldlen": case "ldc.i4": case "ldc.i8":
+            case "localloc":
+                return true;
+        }
+        return false;
     }
 
     private static AotCoreIrRuntimeServiceKind? ResolveRuntimeServiceKind(TypedIlInstructionArtifact instruction)
@@ -611,6 +661,7 @@ public sealed class AotCoreIrLowering
             "conv.ovf.i1" => InstructionOpCode.ConvOvfI4,
             "conv.ovf.i2" => InstructionOpCode.ConvOvfI4,
             "conv.ovf.i4" => InstructionOpCode.ConvOvfI4,
+            "conv.ovf.i4.un" => InstructionOpCode.ConvOvfI4,
             "conv.ovf.i8" => InstructionOpCode.ConvOvfI8,
             "conv.ovf.u" => InstructionOpCode.ConvOvfU,
             "conv.ovf.u.un" => InstructionOpCode.ConvOvfU,
@@ -639,7 +690,22 @@ public sealed class AotCoreIrLowering
             "isinst" => InstructionOpCode.IsInst,
             "ldarg" => InstructionOpCode.LdArg,
             "ldarga" => InstructionOpCode.LdArgA,
+            "ldarg.0" => InstructionOpCode.LdArg,
+            "ldarg.1" => InstructionOpCode.LdArg,
+            "ldarg.2" => InstructionOpCode.LdArg,
+            "ldarg.3" => InstructionOpCode.LdArg,
+            "ldarg.s" => InstructionOpCode.LdArg,
             "ldc.i4" => InstructionOpCode.LdcI4,
+            "ldc.i4.s" => InstructionOpCode.LdcI4,
+            "ldc.i4.0" => InstructionOpCode.LdcI4,
+            "ldc.i4.1" => InstructionOpCode.LdcI4,
+            "ldc.i4.2" => InstructionOpCode.LdcI4,
+            "ldc.i4.3" => InstructionOpCode.LdcI4,
+            "ldc.i4.4" => InstructionOpCode.LdcI4,
+            "ldc.i4.5" => InstructionOpCode.LdcI4,
+            "ldc.i4.6" => InstructionOpCode.LdcI4,
+            "ldc.i4.7" => InstructionOpCode.LdcI4,
+            "ldc.i4.8" => InstructionOpCode.LdcI4,
             "ldc.i8" => InstructionOpCode.LdcI8,
             "ldc.r4" => InstructionOpCode.LdcR4,
             "ldc.r8" => InstructionOpCode.LdcR8,
@@ -650,6 +716,7 @@ public sealed class AotCoreIrLowering
             "ldflda" => InstructionOpCode.LdFld,
             "ldftn" => InstructionOpCode.LdFtn,
             "ldind" => InstructionOpCode.LdInd,
+            "ldind.i" => InstructionOpCode.LdInd,
             "ldind.i1" => InstructionOpCode.LdInd,
             "ldind.i2" => InstructionOpCode.LdInd,
             "ldind.i4" => InstructionOpCode.LdInd,
@@ -662,6 +729,7 @@ public sealed class AotCoreIrLowering
             "ldind.ref" => InstructionOpCode.LdInd,
             "ldlen" => InstructionOpCode.LdLen,
             "ldloc" => InstructionOpCode.LdLoc,
+            "ldloc.s" => InstructionOpCode.LdLoc,
             "ldloca" => InstructionOpCode.LdLocA,
             "ldnull" => InstructionOpCode.LdNull,
             "ldobj" => InstructionOpCode.LdObj,
@@ -695,6 +763,7 @@ public sealed class AotCoreIrLowering
             "stelem.ref" => InstructionOpCode.StElem,
             "stfld" => InstructionOpCode.StFld,
             "stind" => InstructionOpCode.StInd,
+            "stind.i" => InstructionOpCode.StInd,
             "stind.i1" => InstructionOpCode.StInd,
             "stind.i2" => InstructionOpCode.StInd,
             "stind.i4" => InstructionOpCode.StInd,
@@ -703,6 +772,7 @@ public sealed class AotCoreIrLowering
             "stind.r8" => InstructionOpCode.StInd,
             "stind.ref" => InstructionOpCode.StInd,
             "stloc" => InstructionOpCode.StLoc,
+            "stloc.s" => InstructionOpCode.StLoc,
             "stobj" => InstructionOpCode.StObj,
             "stsfld" => InstructionOpCode.StSFld,
             "sub" => InstructionOpCode.Sub,
@@ -712,12 +782,17 @@ public sealed class AotCoreIrLowering
             "unbox" => InstructionOpCode.Unbox,
             "unbox.any" => InstructionOpCode.Unbox,
             "xor" => InstructionOpCode.Xor,
-            _ => UnknownOpWarning(op),
+            _ => MapUnknownOp(op),
         };
     }
 
-    private static InstructionOpCode? UnknownOpWarning(string op)
+    private static InstructionOpCode? MapUnknownOp(string op)
     {
+        // Many IL opcodes (short forms like brtrue.s, ldc.i4.0, etc.) don't have
+        // explicit entries in the switch. Silently return null if the opcode is
+        // a "simple" opcode that doesn't need special handling.
+        if (IsSimpleOpcode(op))
+            return null;
         System.Console.Error.WriteLine($"[warning] AotCoreIrLowering: unknown opcode '{op}' during lowering.");
         return null;
     }
