@@ -14,6 +14,7 @@
 #include <jit_engine.h>       // Compile, CompileConfig
 #include <jit_method.h>       // JitMethod
 #include <chaos/runtime/execution_config.h>
+#include "interpreter_entry.h" // PatchMethod forward declaration
 
 namespace chaos::il2cpp::runtime_core {
 
