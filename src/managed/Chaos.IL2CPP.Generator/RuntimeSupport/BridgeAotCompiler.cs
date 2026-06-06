@@ -41,6 +41,9 @@ public sealed class BridgeAotCompiler
                 if (!seen.Add(callee)) continue;
                 if (callee.Contains("<>c__DisplayClass") || callee.Contains("<>9__")) continue;
 
+                // Diagnostic: count ALL unique callees
+                Console.Error.WriteLine($"[BRIDGE-AOT] SCANALL: {callee}");
+
                 try
                 {
                     var cm = CompileSingleMethod(callee);
@@ -86,7 +89,7 @@ public sealed class BridgeAotCompiler
             DeclaringTypeSubjectId = comp.DeclaringTypeSubjectId,
             DeclaringTypeDisplayName = comp.DeclaringTypeName,
             Name = comp.MethodName,
-            ReturnType = "System.Void",
+            ReturnType = comp.ReturnType,
             SubjectId = subjectId,
             DefinitionSubjectId = subjectId,
             Signature = $"({string.Join(",", comp.ParameterTypes)})",
@@ -117,7 +120,10 @@ public sealed class BridgeAotCompiler
         var mMethods = _linkedWorld.Methods.ToDictionary(m => m.SubjectId, StringComparer.Ordinal);
         var genericDemand = BuildGenericDemandLookup(_linkedWorld.GenericInstantiationDemandGraph);
 
-        return AotCoreIrLowering.TryCreateMethod(mm, tm, mTypes, mFields, mMethods, targetSymbols, genericDemand);
+        var result = AotCoreIrLowering.TryCreateMethod(mm, tm, mTypes, mFields, mMethods, targetSymbols, genericDemand);
+        if (result == null)
+            Console.Error.WriteLine($"[BRIDGE-AOT] NULL: {subjectId} — TryCreateMethod returned null");
+        return result;
     }
 
     private static TypedIlMethodArtifact ToTypedIl(ManagedMethodModel method)
@@ -167,7 +173,7 @@ public sealed class BridgeAotCompiler
     // ── SubjectId parsing ─────────────────────────────────────
     private sealed record SubjectIdComponents(
         string AssemblyName, string DeclaringTypeSubjectId, string DeclaringTypeName,
-        string MethodName, List<string> ParameterTypes);
+        string MethodName, string ReturnType, List<string> ParameterTypes);
 
     private static SubjectIdComponents? ParseSubjectId(string subjectId)
     {
@@ -184,9 +190,13 @@ public sealed class BridgeAotCompiler
         var colon = after.IndexOf(':', StringComparison.Ordinal);
         var mEnd = colon >= 0 && colon < paren ? colon : paren;
         var mName = after[..mEnd];
+        // Extract return type if present (MethodName:ReturnType format)
+        var retType = "System.Void";
+        if (mEnd < paren && after[mEnd] == ':')
+            retType = after[(mEnd + 1)..paren];
         var pPart = after[(paren + 1)..^1];
         var pTypes = string.IsNullOrWhiteSpace(pPart) ? new List<string>() : pPart.Split(',').Select(p => p.Trim()).ToList();
-        return new SubjectIdComponents(asm, $"{asm}/{type}", type, mName, pTypes);
+        return new SubjectIdComponents(asm, $"{asm}/{type}", type, mName, retType, pTypes);
     }
 
     // ── Method definition matching ────────────────────────────

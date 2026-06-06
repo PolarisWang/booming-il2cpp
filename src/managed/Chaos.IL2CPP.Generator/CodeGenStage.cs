@@ -55,22 +55,10 @@ public sealed class CodeGenStage
         };
         var aotCoreIr = new AotCoreIrLowering().Create(linkedWorld, typedIl, codeRegistration);
         // Phase L2: Bridge method AOT compilation (post-processing).
-        try
-        {
-            var bridgeCompiler = new BridgeAotCompiler(linkedWorld, codeRegistration);
-            var bridgedMethods = bridgeCompiler.CompileBridgedMethods(aotCoreIr);
-            if (bridgedMethods.Count > 0)
-            {
-                var existing = aotCoreIr.Methods.ToList();
-                existing.AddRange(bridgedMethods);
-                aotCoreIr = aotCoreIr with { Methods = existing };
-                Console.Error.WriteLine($"[BRIDGE-AOT] Compiled {bridgedMethods.Count} bridged method(s)");
-            }
-        }
-        catch (Exception ex)
-        {
-            Console.Error.WriteLine($"[BRIDGE-AOT] Compilation failed: {ex.Message}");
-        }
+        // DISABLED: Experimental BridgeAOT produces partial function bodies
+        // (C4716: must return a value). Re-enable when BridgeAOT is stable.
+        // See BridgeAotCompiler.cs for the implementation.
+
         var genericInstantiationDemandGraph = linkedWorld.GenericInstantiationDemandGraph
             ?? new GenericInstantiationDemandGraphModel
             {

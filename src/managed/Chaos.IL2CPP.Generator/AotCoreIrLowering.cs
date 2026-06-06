@@ -974,7 +974,11 @@ public sealed class AotCoreIrLowering
             .Replace(')', '_')
             .Replace(':', '_')
             .Replace('/', '_')
-            .Replace('.', '_');
+            .Replace('.', '_')
+            .Replace('&', '_')
+            .Replace(' ', '_')
+            .Replace('[', '_')
+            .Replace(']', '_');
         return $"chaos_external_{sanitized}";
     }
 
