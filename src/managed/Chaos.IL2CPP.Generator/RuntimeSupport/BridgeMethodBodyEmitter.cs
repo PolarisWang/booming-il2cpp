@@ -517,8 +517,13 @@ public static class BridgeMethodBodyEmitter
         if (isNewObj)
         {
             var tmp = Tmp();
+            // Extract type SubjectId from constructor Callee (e.g. "System.Private.CoreLib/System.Exception::.ctor...")
+            var typeSid = !string.IsNullOrEmpty(callee) && callee.Contains("::")
+                ? callee[..callee.IndexOf("::", StringComparison.Ordinal)]
+                : "";
+            var typeHash = typeSid.Length > 0 ? HashSubjectId(typeSid) : 0u;
             sb.AppendLine($"{ind}CHAOS_IL2CPP_INTPTR {tmp} = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(" +
-                "chaos::il2cpp::runtime_core::ObjectNew(0));");
+                $"chaos::il2cpp::runtime_core::ObjectNew({typeHash}u));");
 
             if (!string.IsNullOrEmpty(callee) || !string.IsNullOrEmpty(ts))
             {
