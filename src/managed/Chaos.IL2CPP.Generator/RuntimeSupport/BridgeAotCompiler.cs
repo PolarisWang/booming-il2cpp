@@ -292,6 +292,7 @@ public sealed class BridgeAotCompiler
                     Op = i.Op,
                     Operand = i.Operand,
                     Callee = i.Callee,
+                    Reference = i.Reference,
                 }).ToList(),
             }).ToList(),
         };

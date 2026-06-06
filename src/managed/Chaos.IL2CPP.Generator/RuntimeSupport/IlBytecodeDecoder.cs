@@ -78,6 +78,22 @@ internal static class IlBytecodeDecoder
                             });
                             continue;
                         }
+                        // Resolve type SubjectId for type-bearing instructions (box, newarr, isinst)
+                        if (IsTypeInstruction(name))
+                        {
+                            var typeId = ResolveTypeToken(reader, assemblyName, token);
+                            list.Add(new ManagedInstructionModel
+                            {
+                                Op = name, Operand = token, IlOffset = baseOffset + start,
+                                Reference = new ManagedInstructionReference
+                                {
+                                    AssemblyName = assemblyName,
+                                    SubjectKind = "type",
+                                    SubjectId = typeId,
+                                },
+                            });
+                            continue;
+                        }
                         operand = token; break;
                     }
                     operand = token; break;
@@ -140,6 +156,32 @@ internal static class IlBytecodeDecoder
     enum Op : byte { None, BrT, ShortBrT, I, ShortI, I8, R, ShortR, V, ShortV, String, Field, Method, Type, Tok, Sig, Switch }
 
     static bool IsMethodInstruction(string op) => op is "call" or "callvirt" or "newobj" or "ldftn" or "ldvirtftn";
+    static bool IsTypeInstruction(string op) => op is "box" or "newarr" or "isinst" or "castclass" or "unbox" or "unbox.any";
+
+    private static string ResolveTypeToken(MetadataReader reader, string assemblyName, int token)
+    {
+        var handle = MetadataTokens.Handle(token);
+        switch (handle.Kind)
+        {
+            case HandleKind.TypeDefinition:
+            {
+                var td = reader.GetTypeDefinition((TypeDefinitionHandle)handle);
+                var ns = reader.GetString(td.Namespace);
+                var name = reader.GetString(td.Name);
+                return $"{assemblyName}/{(string.IsNullOrEmpty(ns) ? name : $"{ns}.{name}")}";
+            }
+            case HandleKind.TypeReference:
+            {
+                var tr = reader.GetTypeReference((TypeReferenceHandle)handle);
+                var ns = reader.GetString(tr.Namespace);
+                var name = reader.GetString(tr.Name);
+                return $"{assemblyName}/{(string.IsNullOrEmpty(ns) ? name : $"{ns}.{name}")}";
+            }
+            default:
+                return $"<{handle.Kind}:0x{token:X8}>";
+        }
+    }
+
     private sealed record TokenResult(string SubjectId);
 
     private static TokenResult ResolveToken(MetadataReader reader, string assemblyName, int token)
