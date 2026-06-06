@@ -544,11 +544,75 @@ public sealed partial class NativeAotLoweringPlanner
 
 
 
-            // [JSON-SERIALIZE DISABLED] RegisterJsonSerialize calls require
-            // StringNewUtf8 from chaos_runtime_core.lib which is not yet
-            // exported from the prebuilt SDK.  Uncomment when SDK is rebuilt.
-            // See NativeAotLoweringPlanner for the helper function.
-// ── Dictionary<K,V>::TryAdd (smoke-test stub) ──
+            // Helper: register a precompiled JsonSerializer::Serialize<T> stub.
+            void RegisterJsonSerialize(string typeArg, string nativeFn)
+            {
+                var fn = nativeFn;
+                registry.RegisterGeneric(new GenericShapeDescriptor(
+                    TypeDisplayNamePrefix: "JsonSerializer",
+                    MethodName: "Serialize",
+                    Resolver: (planner, callee, typeArgs) =>
+                    {
+                        var t = typeArgs != null && typeArgs.Count > 0 ? typeArgs[0] : null;
+                        if (!string.Equals(t, typeArg, StringComparison.Ordinal)) return null;
+                        var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
+                        var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol,
+                            "CHAOS_IL2CPP_INTPTR chaos_arg_0",
+                            new[] { $"    return {fn}(chaos_arg_0);" });
+                        return new GenericShapeResolution(src, symbol,
+                            new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(CreateNativeIntAbiSlot()),
+                            CreateNativeIntAbiSlot(),
+                            new HashSet<int> { 0 },
+                            DirectNativeSymbol: fn);
+                    }));
+            }
+
+            // Helper: register a precompiled JsonSerializer::Deserialize<T> stub.
+            void RegisterJsonDeserialize(string typeArg, string nativeFn)
+            {
+                var fn = nativeFn;
+                registry.RegisterGeneric(new GenericShapeDescriptor(
+                    TypeDisplayNamePrefix: "JsonSerializer",
+                    MethodName: "Deserialize",
+                    Resolver: (planner, callee, typeArgs) =>
+                    {
+                        var t = typeArgs != null && typeArgs.Count > 0 ? typeArgs[0] : null;
+                        if (!string.Equals(t, typeArg, StringComparison.Ordinal)) return null;
+                        var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
+                        var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol,
+                            "CHAOS_IL2CPP_INTPTR chaos_arg_0",
+                            new[] { $"    return static_cast<CHAOS_IL2CPP_INTPTR>({fn}(chaos_arg_0));" });
+                        return new GenericShapeResolution(src, symbol,
+                            new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(CreateNativeIntAbiSlot()),
+                            CreateNativeIntAbiSlot(),
+                            new HashSet<int> { 0 },
+                            DirectNativeSymbol: fn);
+                    }));
+            }
+
+            // ── System.Text.Json.JsonSerializer stubs (PrecompiledJsonTypeInfo) ──
+            // Pre-compiled primitive type serialization that bypasses managed
+            // JsonSerializer's runtime JsonTypeInfo<T> building and reflection.
+            // Native stubs in interop_stubs.cpp format values directly via snprintf.
+
+            // Primitives: format via snprintf → ChaosStringCreateFromUtf8
+            RegisterJsonSerialize("System.Int32", "ChaosJsonSerializeInt32");
+            RegisterJsonSerialize("System.Int64", "ChaosJsonSerializeInt64");
+            RegisterJsonSerialize("System.Int16", "ChaosJsonSerializeInt32");
+            RegisterJsonSerialize("System.Byte", "ChaosJsonSerializeInt32");
+            RegisterJsonSerialize("System.SByte", "ChaosJsonSerializeInt32");
+            RegisterJsonSerialize("System.UInt16", "ChaosJsonSerializeInt32");
+            RegisterJsonSerialize("System.UInt32", "ChaosJsonSerializeInt64");
+            RegisterJsonSerialize("System.UInt64", "ChaosJsonSerializeInt64");
+            RegisterJsonSerialize("System.Boolean", "ChaosJsonSerializeBool");
+            RegisterJsonSerialize("System.String", "ChaosJsonSerializeString");
+
+            // ── Deserialize<T> stubs ──
+            RegisterJsonDeserialize("System.Int32", "ChaosJsonDeserializeInt32");
+            RegisterJsonDeserialize("System.Int64", "ChaosJsonDeserializeInt64");
+            RegisterJsonDeserialize("System.Boolean", "ChaosJsonDeserializeBool");
+
+            // ── Dictionary<K,V>::TryAdd (smoke-test stub) ──
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "System.Collections.Generic.Dictionary",
                 MethodName: "TryAdd",
