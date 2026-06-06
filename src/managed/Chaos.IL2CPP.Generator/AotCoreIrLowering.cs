@@ -67,7 +67,7 @@ public sealed class AotCoreIrLowering
         };
     }
 
-    private static AotCoreIrMethodArtifact? TryCreateMethod(
+    internal static AotCoreIrMethodArtifact? TryCreateMethod(
         ManagedMethodModel method,
         TypedIlMethodArtifact typedMethod,
         IReadOnlyDictionary<string, ManagedTypeModel> managedTypes,
