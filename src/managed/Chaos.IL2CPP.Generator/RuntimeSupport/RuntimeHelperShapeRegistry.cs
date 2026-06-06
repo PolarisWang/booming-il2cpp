@@ -8377,6 +8377,28 @@ public sealed partial class NativeAotLoweringPlanner
 	                CreateInt32AbiSlot(),
 	                new HashSet<int>());
 
+	            // CharUnicodeInfo.GetDigitValue(string, int) → int
+	            registry.Register("System.Globalization.CharUnicodeInfo", "GetDigitValue", ["System.String", "System.Int32"],
+	                ShapeKind.SimpleForward, "ChaosCharUnicodeInfoGetDigitValueString",
+	                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
+	                {
+	                    CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
+	                    CreateInt32AbiSlot(),
+	                }),
+	                CreateInt32AbiSlot(),
+	                new HashSet<int> { 0, 1 });
+
+	            // CharUnicodeInfo.GetNumericValue(string, int) → double
+	            registry.Register("System.Globalization.CharUnicodeInfo", "GetNumericValue", ["System.String", "System.Int32"],
+	                ShapeKind.SimpleForward, "ChaosCharUnicodeInfoGetNumericValueString",
+	                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
+	                {
+	                    CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
+	                    CreateInt32AbiSlot(),
+	                }),
+	                new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.Float64, TypeShape = AotCoreIrTypeShapeKind.ValueType },
+	                new HashSet<int> { 0, 1 });
+
 	            // CharUnicodeInfo.GetDecimalDigitValue(char) → int
 	            registry.Register("System.Globalization.CharUnicodeInfo", "GetDecimalDigitValue", ["System.Char"],
 	                ShapeKind.SimpleForward, "ChaosCharUnicodeInfoGetDecimalDigitValue",

@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using System.Reflection.Metadata;
+using System.Reflection.Metadata.Ecma335;
 using Chaos.IL2CPP.Contracts;
 
 namespace Chaos.IL2CPP.Generator;
@@ -12,6 +14,19 @@ namespace Chaos.IL2CPP.Generator;
 internal static class IlBytecodeDecoder
 {
     public static IReadOnlyList<ManagedInstructionModel> Decode(byte[] ilBytes, int baseOffset = 0)
+        => DecodeInternal(ilBytes, null, null, baseOffset);
+
+    /// <summary>
+    /// Decode IL with metadata token resolution. When a MetadataReader is provided,
+    /// method/field/type tokens in call/callvirt/newobj/ldfld/stfld instructions are
+    /// resolved to SubjectId strings and set as the Callee property.
+    /// </summary>
+    public static IReadOnlyList<ManagedInstructionModel> DecodeWithMetadata(
+        byte[] ilBytes, MetadataReader reader, string assemblyName, int baseOffset = 0)
+        => DecodeInternal(ilBytes, reader, assemblyName, baseOffset);
+
+    private static IReadOnlyList<ManagedInstructionModel> DecodeInternal(
+        byte[] ilBytes, MetadataReader? reader, string? assemblyName, int baseOffset)
     {
         var list = new List<ManagedInstructionModel>();
         int o = 0;
@@ -34,7 +49,18 @@ internal static class IlBytecodeDecoder
                 case Op.ShortR: operand = BitConverter.ToSingle(ilBytes, o); o += 4; break;
                 case Op.R: operand = BitConverter.ToDouble(ilBytes, o); o += 8; break;
                 case Op.Method: case Op.Field: case Op.Type: case Op.String: case Op.Tok: case Op.Sig:
-                    operand = ReadI4(ilBytes, ref o); break;
+                    int token = ReadI4(ilBytes, ref o);
+                    if (reader != null && !string.IsNullOrEmpty(assemblyName))
+                    {
+                        var resolved = ResolveToken(reader, assemblyName, token);
+                        list.Add(new ManagedInstructionModel
+                        {
+                            Op = name, Operand = token, IlOffset = baseOffset + start,
+                            Callee = resolved.SubjectId,
+                        });
+                        continue; // already added to list
+                    }
+                    operand = token; break;
                 case Op.Switch:
                     int n = ReadI4(ilBytes, ref o);
                     var t = new int[n];
@@ -92,4 +118,110 @@ internal static class IlBytecodeDecoder
     }
 
     enum Op : byte { None, BrT, ShortBrT, I, ShortI, I8, R, ShortR, V, ShortV, String, Field, Method, Type, Tok, Sig, Switch }
+
+    // ── Token resolution ──────────────────────────────────────
+    private sealed record TokenResult(string SubjectId);
+
+    private static TokenResult ResolveToken(MetadataReader reader, string assemblyName, int token)
+    {
+        var handle = MetadataTokens.Handle(token);
+        switch (handle.Kind)
+        {
+            case HandleKind.MethodDefinition:
+                return ResolveMethodDef(reader, assemblyName, (MethodDefinitionHandle)handle);
+            case HandleKind.MemberReference:
+                return ResolveMemberRef(reader, assemblyName, (MemberReferenceHandle)handle);
+            case HandleKind.MethodSpecification:
+                return ResolveMethodSpec(reader, assemblyName, (MethodSpecificationHandle)handle);
+            default:
+                return new TokenResult($"<{handle.Kind}:0x{token:X8}>");
+        }
+    }
+
+    private static TokenResult ResolveMethodDef(MetadataReader reader, string assemblyName, MethodDefinitionHandle h)
+    {
+        var md = reader.GetMethodDefinition(h);
+        var typeName = GetTypeFullName(reader, md.GetDeclaringType());
+        var methodName = reader.GetString(md.Name);
+        var sig = md.DecodeSignature(new DummySigProvider(), default);
+        var paramSig = string.Join(",", sig.ParameterTypes.ToArray());
+        return new TokenResult($"{assemblyName}/{typeName}::{methodName}({paramSig})");
+    }
+
+    private static TokenResult ResolveMemberRef(MetadataReader reader, string assemblyName, MemberReferenceHandle h)
+    {
+        var mr = reader.GetMemberReference(h);
+        var methodName = reader.GetString(mr.Name);
+        var typeName = ResolveTypeFromParent(reader, mr.Parent);
+        var sig = mr.DecodeMethodSignature(new DummySigProvider(), default);
+        var paramSig = string.Join(",", sig.ParameterTypes.ToArray());
+        return new TokenResult($"{assemblyName}/{typeName}::{methodName}({paramSig})");
+    }
+
+    private static TokenResult ResolveMethodSpec(MetadataReader reader, string assemblyName, MethodSpecificationHandle h)
+    {
+        var ms = reader.GetMethodSpecification(h);
+        // MethodSpec wraps a method + generic args. Resolve the underlying method first.
+        var genericMethod = ResolveToken(reader, assemblyName, MetadataTokens.GetToken(ms.Method));
+        return genericMethod;
+    }
+
+    private static string GetTypeFullName(MetadataReader reader, TypeDefinitionHandle h)
+    {
+        var td = reader.GetTypeDefinition(h);
+        var ns = reader.GetString(td.Namespace);
+        var name = reader.GetString(td.Name);
+        return string.IsNullOrEmpty(ns) ? name : $"{ns}.{name}";
+    }
+
+    private static string ResolveTypeFromParent(MetadataReader reader, EntityHandle parent)
+    {
+        if (parent.Kind == HandleKind.TypeDefinition)
+        {
+            var td = reader.GetTypeDefinition((TypeDefinitionHandle)parent);
+            var ns = reader.GetString(td.Namespace);
+            var name = reader.GetString(td.Name);
+            return string.IsNullOrEmpty(ns) ? name : $"{ns}.{name}";
+        }
+        if (parent.Kind == HandleKind.TypeReference)
+        {
+            var tr = reader.GetTypeReference((TypeReferenceHandle)parent);
+            var ns = reader.GetString(tr.Namespace);
+            var name = reader.GetString(tr.Name);
+            return string.IsNullOrEmpty(ns) ? name : $"{ns}.{name}";
+        }
+        return "<unknown>";
+    }
+
+    /// <summary>Minimal signature type provider that returns type name strings.</summary>
+    private sealed class DummySigProvider : ISignatureTypeProvider<string, object?>
+    {
+        public string GetPrimitiveType(PrimitiveTypeCode t) => t switch
+        {
+            PrimitiveTypeCode.Boolean => "System.Boolean", PrimitiveTypeCode.Byte => "System.Byte",
+            PrimitiveTypeCode.Int32 => "System.Int32", PrimitiveTypeCode.Int64 => "System.Int64",
+            PrimitiveTypeCode.Single => "System.Single", PrimitiveTypeCode.Double => "System.Double",
+            PrimitiveTypeCode.String => "System.String", PrimitiveTypeCode.Void => "System.Void",
+            _ => t.ToString(),
+        };
+        public string GetTypeFromDefinition(MetadataReader r, TypeDefinitionHandle h, byte k) => GetTypeFullName(r, h);
+        public string GetTypeFromReference(MetadataReader r, TypeReferenceHandle h, byte k)
+        {
+            var tr = r.GetTypeReference(h);
+            var ns = r.GetString(tr.Namespace);
+            var name = r.GetString(tr.Name);
+            return string.IsNullOrEmpty(ns) ? name : $"{ns}.{name}";
+        }
+        public string GetSZArrayType(string e) => $"{e}[]";
+        public string GetArrayType(string e, ArrayShape s) => $"{e}[{new string(',', s.Rank - 1)}]";
+        public string GetByReferenceType(string e) => $"{e}&";
+        public string GetPointerType(string e) => $"{e}*";
+        public string GetPinnedType(string e) => e;
+        public string GetGenericInstantiation(string g, System.Collections.Immutable.ImmutableArray<string> a) => g;
+        public string GetGenericMethodParameter(object? c, int i) => $"!!{i}";
+        public string GetGenericTypeParameter(object? c, int i) => $"!{i}";
+        public string GetFunctionPointerType(MethodSignature<string> s) => "fnptr";
+        public string GetModifiedType(string m, string u, bool r) => u;
+        public string GetTypeFromSpecification(MetadataReader r, object? c, TypeSpecificationHandle h, byte k) => "spec";
+    }
 }

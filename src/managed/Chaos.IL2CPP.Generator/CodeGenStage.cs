@@ -54,6 +54,23 @@ public sealed class CodeGenStage
             TypeCapabilities = BuildCodeRegistrationTypeCapabilities(metadataWriterOutput.MetadataRegistration),
         };
         var aotCoreIr = new AotCoreIrLowering().Create(linkedWorld, typedIl, codeRegistration);
+        // Phase L2: Bridge method AOT compilation (post-processing).
+        try
+        {
+            var bridgeCompiler = new BridgeAotCompiler(linkedWorld, codeRegistration);
+            var bridgedMethods = bridgeCompiler.CompileBridgedMethods(aotCoreIr);
+            if (bridgedMethods.Count > 0)
+            {
+                var existing = aotCoreIr.Methods.ToList();
+                existing.AddRange(bridgedMethods);
+                aotCoreIr = aotCoreIr with { Methods = existing };
+                Console.Error.WriteLine($"[BRIDGE-AOT] Compiled {bridgedMethods.Count} bridged method(s)");
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.Error.WriteLine($"[BRIDGE-AOT] Compilation failed: {ex.Message}");
+        }
         var genericInstantiationDemandGraph = linkedWorld.GenericInstantiationDemandGraph
             ?? new GenericInstantiationDemandGraphModel
             {

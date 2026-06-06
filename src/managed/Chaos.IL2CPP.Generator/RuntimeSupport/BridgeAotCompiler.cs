@@ -74,10 +74,11 @@ public sealed class BridgeAotCompiler
         if (rva == 0) return null;
         var body = peReader.GetMethodBody(rva);
         var ilBytes = body.GetILBytes();
-        var ilInstrs = IlBytecodeDecoder.Decode(ilBytes);
 
         var comp = ParseSubjectId(subjectId);
         if (comp == null) return null;
+
+        var ilInstrs = IlBytecodeDecoder.DecodeWithMetadata(ilBytes, meta, comp.AssemblyName);
 
         var mm = new ManagedMethodModel
         {
