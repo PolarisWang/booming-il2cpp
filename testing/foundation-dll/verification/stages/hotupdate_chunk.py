@@ -118,6 +118,11 @@ def _run_cmake_rebuild(native_dir: Path) -> bool:
         print(f'  [hotupdate] Build directory not found: {build_dir}')
         return False
 
+    # Remove stale bridge redirect stubs that cause LNK2019
+    for stale in ("bridge-redirect.generated.cpp", "chaos_register_bridge_redirects.generated.cpp"):
+        for subj_file in (native_dir / "subjects").glob(stale):
+            subj_file.unlink(missing_ok=True)
+
     # Reconfigure cmake to pick up any page file count changes (stale page files
     # from previous codegen runs are cleaned by the TPG, but the cmake cache may
     # still reference them).  The reconfigure re-evaluates file(GLOB ...) rules.
@@ -213,6 +218,7 @@ def _build_patch_dll(patch_output: Path, patch_dll: Path, target_dll: Path | Non
         "    <ImplicitUsings>enable</ImplicitUsings>\n"
         "    <Nullable>enable</Nullable>\n"
         "    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>\n"
+        "    <NoWarn>$(NoWarn);SYSLIB0011</NoWarn>\n"
         "    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>\n"
         "  </PropertyGroup>\n"
         "  <ItemGroup>\n"

@@ -122,6 +122,12 @@ set(CHAOS_EXCEPTION_STUBS
 set(CHAOS_HOTPATCH_TABLE
     "${CHAOS_PROJECT_ROOT}/src/native/runtime-core/hotpatch_table.cpp"
 )
+# eager_compile.cpp — required by patch_loader.obj in chaos_runtime_core.lib
+# but defined in the interpreter project.  Compile locally since the prebuilt
+# chaos_interpreter.lib may be stale (EagerCompilePatchMethods).
+set(CHAOS_EAGER_COMPILE
+    "${CHAOS_PROJECT_ROOT}/src/native/interpreter/interp_entry/eager_compile.cpp"
+)
 
 set(CHAOS_ENTRY_SOURCES
     "runtime-entry.cpp"
@@ -136,6 +142,7 @@ set(CHAOS_ENTRY_SOURCES
     ${CHAOS_INTEROP_STUBS}
     ${CHAOS_EXCEPTION_STUBS}
     ${CHAOS_HOTPATCH_TABLE}
+    ${CHAOS_EAGER_COMPILE}
     ${CHAOS_AOT_GENERATED_CPP}
 )
 
@@ -155,9 +162,9 @@ set(CHAOS_ENTRY_INCLUDES
     "${CHAOS_PROJECT_ROOT}/third_party/unordered_dense/include"
 {{ subject_cmake_include_dirs_code }}
     "${CMAKE_CURRENT_SOURCE_DIR}"
-{{ if is_jit }}
+    # JIT headers needed by eager_compile.cpp (compiled for all builds
+    # since the prebuilt chaos_interpreter.lib may be stale).
     "${CHAOS_PROJECT_ROOT}/src/native/jit"
-{{ end }}
 )
 
 add_executable({{ project_name }} ${CHAOS_ENTRY_SOURCES})
