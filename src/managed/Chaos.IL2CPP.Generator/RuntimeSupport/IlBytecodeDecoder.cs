@@ -52,13 +52,33 @@ internal static class IlBytecodeDecoder
                     int token = ReadI4(ilBytes, ref o);
                     if (reader != null && !string.IsNullOrEmpty(assemblyName))
                     {
-                        var resolved = ResolveToken(reader, assemblyName, token);
-                        list.Add(new ManagedInstructionModel
+                        // ldstr: resolve token to actual string value
+                        if (string.Equals(name, "ldstr", StringComparison.Ordinal))
                         {
-                            Op = name, Operand = token, IlOffset = baseOffset + start,
-                            Callee = resolved.SubjectId,
-                        });
-                        continue; // already added to list
+                            var ush = MetadataTokens.Handle(token);
+                            if (ush.Kind == HandleKind.UserString)
+                            {
+                                var userString = reader.GetUserString((UserStringHandle)ush);
+                                list.Add(new ManagedInstructionModel
+                                {
+                                    Op = name, Operand = userString ?? "", IlOffset = baseOffset + start,
+                                });
+                                continue;
+                            }
+                        }
+                        // Only resolve Callee for method-bearing instructions (call, callvirt, newobj, ldftn)
+                        // Field/type/string tokens set Operand only — Callee would cause emitter errors.
+                        if (IsMethodInstruction(name))
+                        {
+                            var resolved = ResolveToken(reader, assemblyName, token);
+                            list.Add(new ManagedInstructionModel
+                            {
+                                Op = name, Operand = token, IlOffset = baseOffset + start,
+                                Callee = resolved.SubjectId,
+                            });
+                            continue;
+                        }
+                        operand = token; break;
                     }
                     operand = token; break;
                 case Op.Switch:
@@ -119,7 +139,7 @@ internal static class IlBytecodeDecoder
 
     enum Op : byte { None, BrT, ShortBrT, I, ShortI, I8, R, ShortR, V, ShortV, String, Field, Method, Type, Tok, Sig, Switch }
 
-    // ── Token resolution ──────────────────────────────────────
+    static bool IsMethodInstruction(string op) => op is "call" or "callvirt" or "newobj" or "ldftn" or "ldvirtftn";
     private sealed record TokenResult(string SubjectId);
 
     private static TokenResult ResolveToken(MetadataReader reader, string assemblyName, int token)
@@ -144,8 +164,11 @@ internal static class IlBytecodeDecoder
         var typeName = GetTypeFullName(reader, md.GetDeclaringType());
         var methodName = reader.GetString(md.Name);
         var sig = md.DecodeSignature(new DummySigProvider(), default);
-        var paramSig = string.Join(",", sig.ParameterTypes.ToArray());
-        return new TokenResult($"{assemblyName}/{typeName}::{methodName}({paramSig})");
+        var returnType = sig.ReturnType;
+        var paramTypes = sig.ParameterTypes.ToArray();
+        var declaringTypeSubjectId = $"{assemblyName}/{typeName}";
+        var sid = ManagedNaming.CreateMethodSubjectId(declaringTypeSubjectId, methodName, returnType, paramTypes);
+        return new TokenResult(sid);
     }
 
     private static TokenResult ResolveMemberRef(MetadataReader reader, string assemblyName, MemberReferenceHandle h)
@@ -154,8 +177,11 @@ internal static class IlBytecodeDecoder
         var methodName = reader.GetString(mr.Name);
         var typeName = ResolveTypeFromParent(reader, mr.Parent);
         var sig = mr.DecodeMethodSignature(new DummySigProvider(), default);
-        var paramSig = string.Join(",", sig.ParameterTypes.ToArray());
-        return new TokenResult($"{assemblyName}/{typeName}::{methodName}({paramSig})");
+        var returnType = sig.ReturnType;
+        var paramTypes = sig.ParameterTypes.ToArray();
+        var declaringTypeSubjectId = $"{assemblyName}/{typeName}";
+        var sid = ManagedNaming.CreateMethodSubjectId(declaringTypeSubjectId, methodName, returnType, paramTypes);
+        return new TokenResult(sid);
     }
 
     private static TokenResult ResolveMethodSpec(MetadataReader reader, string assemblyName, MethodSpecificationHandle h)

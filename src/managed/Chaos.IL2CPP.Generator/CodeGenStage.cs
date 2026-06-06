@@ -55,9 +55,9 @@ public sealed class CodeGenStage
         };
         var aotCoreIr = new AotCoreIrLowering().Create(linkedWorld, typedIl, codeRegistration);
         // Phase L2: Bridge method AOT compilation (post-processing).
-        // DISABLED: Experimental BridgeAOT produces partial function bodies
-        // (C4716: must return a value). Re-enable when BridgeAOT is stable.
-        // See BridgeAotCompiler.cs for the implementation.
+        // Compiles cross-assembly callees and generates redirect table + stubs.
+        var bridgeCompiler = new BridgeAotCompiler(linkedWorld, codeRegistration);
+        var (bridgeRedirectMap, bridgeCompiledMethods) = bridgeCompiler.CompileBridgedMethods(aotCoreIr);
 
         var genericInstantiationDemandGraph = linkedWorld.GenericInstantiationDemandGraph
             ?? new GenericInstantiationDemandGraphModel
@@ -143,6 +143,8 @@ public sealed class CodeGenStage
             NativeReferenceLoweringPlan = nativeReferenceLoweringPlan,
             NativeAotLoweringPlan = nativeAotLoweringPlan,
             ClosureManifest = closureManifest,
+            BridgeRedirectMap = bridgeRedirectMap.Count > 0 ? bridgeRedirectMap : null,
+            BridgeCompiledMethods = bridgeCompiledMethods.Count > 0 ? bridgeCompiledMethods : null,
         });
         }
         catch (Exception ex)

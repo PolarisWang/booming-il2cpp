@@ -29,21 +29,15 @@ public sealed class BridgeAotCompiler
 
     /// <summary>
     /// Compile bridged callees with unique chaos_bridge_ symbols.
-    /// Returns a redirect map only (no AotCoreIr modification).
-    /// Phase 1c emits bodies via stubs in bridge-redirect.generated.cpp.
-    /// Phase 2 registration is in chaos_register_bridge_redirects.generated.cpp.
+    /// Returns both a redirect map (subjectId → symbol) and compiled method
+    /// artifacts (for Phase 1c body emission via BridgeMethodBodyEmitter).
     /// </summary>
-    public Dictionary<string, string> CompileBridgedMethods(AotCoreIrArtifact aotCoreIr)
+    public (Dictionary<string, string> RedirectMap, List<AotCoreIrMethodArtifact> CompiledMethods) CompileBridgedMethods(
+        AotCoreIrArtifact aotCoreIr)
     {
-        // DISABLED: BridgeAOT produces incomplete stubs that cause
-        // LNK2019 (chaos_bridge_* unresolved externals).  The redirect
-        // table generation in FullAssemblyEmitter depends on this map
-        // being populated — with an empty map no redirect stubs are
-        // emitted, avoiding the linker errors.
-        return new Dictionary<string, string>();
-#pragma warning disable 0162 // unreachable code (preserved for re-enable)
         var seen = new HashSet<string>(StringComparer.Ordinal);
         var redirectMap = new Dictionary<string, string>(StringComparer.Ordinal);
+        var compiledMethods = new List<AotCoreIrMethodArtifact>();
         int okCount = 0, failCount = 0;
 
         foreach (var method in aotCoreIr.Methods)
@@ -62,7 +56,9 @@ public sealed class BridgeAotCompiler
                     if (cm != null)
                     {
                         var bridgeSymbol = $"chaos_bridge_{_bridgeCounter++}_{ExtractMethodNameForSymbol(callee)}_{(uint)callee.GetHashCode():X4}";
+                        cm = cm with { NativeSymbol = bridgeSymbol };
                         redirectMap[callee] = bridgeSymbol;
+                        compiledMethods.Add(cm);
                         okCount++;
                     }
                     else { failCount++; }
@@ -76,7 +72,7 @@ public sealed class BridgeAotCompiler
         }
 
         Console.Error.WriteLine($"[BRIDGE-AOT] Compiled: {okCount} OK, {failCount} FAIL — {redirectMap.Count} redirects");
-        return redirectMap;
+        return (redirectMap, compiledMethods);
     }
 
     private static string ExtractMethodNameForSymbol(string subjectId)
@@ -113,18 +109,112 @@ public sealed class BridgeAotCompiler
         var meta = peReader.GetMetadataReader();
 
         var mh = FindMethodDefinition(meta, subjectId);
+        // Fallback: some SubjectIds use the wrong assembly prefix (e.g. System.Collections
+        // instead of System.Private.CoreLib for EqualityComparer<T>). Try corelib.
+        if (mh == null && !string.Equals(asmName, "System.Private.CoreLib", StringComparison.Ordinal))
+        {
+            var corelibDll = ResolveAssemblyPath("System.Private.CoreLib");
+            if (corelibDll != null && !string.Equals(corelibDll, dllPath, StringComparison.OrdinalIgnoreCase))
+            {
+                using var cs = File.OpenRead(corelibDll);
+                using var cpr = new PEReader(cs);
+                var cm = cpr.GetMetadataReader();
+                mh = FindMethodDefinition(cm, subjectId);
+                if (mh != null)
+                {
+                    try
+                    {
+                        var cmd = cm.GetMethodDefinition(mh.Value);
+                        if (cmd.RelativeVirtualAddress != 0)
+                        {
+                            var cbody = cpr.GetMethodBody(cmd.RelativeVirtualAddress);
+                            var cil = cbody.GetILBytes();
+                            if (cil.Length > 0)
+                                return CompileFromBody(cil, cm, subjectId, asmName, cmd, mh.Value);
+                        }
+                    }
+                    catch
+                    {
+                        // Abstract/runtime method with no readable IL body
+                        mh = null;
+                    }
+                }
+            }
+        }
+
         if (mh == null) { Console.Error.WriteLine($"[BRIDGE-AOT] NULL: {subjectId} — FindMethodDefinition failed"); return null; }
 
         var md = meta.GetMethodDefinition(mh.Value);
-        var rva = md.RelativeVirtualAddress;
+        int rva;
+        try
+        {
+            rva = md.RelativeVirtualAddress;
+        }
+        catch
+        {
+            // Handle invalid in main assembly — retry with corelib fallback
+            Console.Error.WriteLine($"[BRIDGE-AOT] RETRY: {subjectId} — MethodDefinitionHandle invalid in {asmName}, retrying corelib");
+            if (!string.Equals(asmName, "System.Private.CoreLib", StringComparison.Ordinal))
+            {
+                var corelibDll = ResolveAssemblyPath("System.Private.CoreLib");
+                if (corelibDll != null && !string.Equals(corelibDll, dllPath, StringComparison.OrdinalIgnoreCase))
+                {
+                    using var cs = File.OpenRead(corelibDll);
+                    using var cpr = new PEReader(cs);
+                    var cm = cpr.GetMetadataReader();
+                    var cmh = FindMethodDefinition(cm, subjectId);
+                    if (cmh != null)
+                    {
+                        try
+                        {
+                            var cmd = cm.GetMethodDefinition(cmh.Value);
+                            if (cmd.RelativeVirtualAddress != 0)
+                            {
+                                var cbody = cpr.GetMethodBody(cmd.RelativeVirtualAddress);
+                                var cil = cbody.GetILBytes();
+                                if (cil.Length > 0)
+                                    return CompileFromBody(cil, cm, subjectId, asmName, cmd, cmh.Value);
+                            }
+                        }
+                        catch { }
+                    }
+                }
+            }
+            Console.Error.WriteLine($"[BRIDGE-AOT] NULL: {subjectId} — MethodDefinitionHandle invalid in assembly");
+            return null;
+        }
         if (rva == 0) { Console.Error.WriteLine($"[BRIDGE-AOT] NULL: {subjectId} — RVA is 0 (no IL body)"); return null; }
-        var body = peReader.GetMethodBody(rva);
-        var ilBytes = body.GetILBytes();
+        byte[] ilBytes;
+        try
+        {
+            var body = peReader.GetMethodBody(rva);
+            ilBytes = body.GetILBytes();
+        }
+        catch
+        {
+            Console.Error.WriteLine($"[BRIDGE-AOT] NULL: {subjectId} — IL body unreadable at RVA 0x{rva:X}");
+            return null;
+        }
 
+        return CompileFromBody(ilBytes, meta, subjectId, asmName, md, mh.Value);
+    }
+
+    private AotCoreIrMethodArtifact? CompileFromBody(byte[] ilBytes, MetadataReader meta,
+        string subjectId, string asmName, MethodDefinition md, MethodDefinitionHandle mh)
+    {
         var comp = ParseSubjectId(subjectId);
         if (comp == null) { Console.Error.WriteLine($"[BRIDGE-AOT] NULL: {subjectId} — ParseSubjectId failed"); return null; }
 
-        var ilInstrs = IlBytecodeDecoder.DecodeWithMetadata(ilBytes, meta, comp.AssemblyName);
+        IReadOnlyList<ManagedInstructionModel> ilInstrs;
+        try
+        {
+            ilInstrs = IlBytecodeDecoder.DecodeWithMetadata(ilBytes, meta, comp.AssemblyName);
+        }
+        catch
+        {
+            Console.Error.WriteLine($"[BRIDGE-AOT] NULL: {subjectId} — IL decode failed ({ilBytes.Length} bytes)");
+            return null;
+        }
 
         var mm = new ManagedMethodModel
         {
@@ -138,7 +228,7 @@ public sealed class BridgeAotCompiler
             Signature = $"({string.Join(",", comp.ParameterTypes)})",
             IsStatic = (md.Attributes & MethodAttributes.Static) != 0,
             IsVirtual = (md.Attributes & MethodAttributes.Virtual) != 0,
-            MetadataToken = MetadataTokens.GetToken(mh.Value),
+            MetadataToken = MetadataTokens.GetToken(mh),
             Parameters = Array.Empty<ManagedParameterModel>(),
             Body = new ManagedMethodBodyModel
             {
@@ -247,8 +337,7 @@ public sealed class BridgeAotCompiler
     private static MethodDefinitionHandle? FindMethodDefinition(MetadataReader reader, string subjectId)
     {
         var comp = ParseSubjectId(subjectId);
-        if (comp == null) return null;
-        // Strip generic suffix from type name (e.g. "Task<JsonDocument>" -> "Task")
+        if (comp == null) { Console.Error.WriteLine($"[BRIDGE-AOT] NULL: {subjectId} - ParseSubjectId failed"); return null; }
         var searchTypeName = comp.DeclaringTypeName;
         var genericBracketType = searchTypeName.IndexOf('<', StringComparison.Ordinal);
         if (genericBracketType > 0)
@@ -258,7 +347,6 @@ public sealed class BridgeAotCompiler
         {
             var md = reader.GetMethodDefinition(mh);
             var mdName = reader.GetString(md.Name);
-            // Strip generic suffix from SubjectId method name (e.g. "SerializeToDocument<System.Int32>" -> "SerializeToDocument")
             var searchName = comp.MethodName;
             var genericBracket = searchName.IndexOf('<', StringComparison.Ordinal);
             if (genericBracket > 0)
@@ -267,20 +355,29 @@ public sealed class BridgeAotCompiler
             var td = reader.GetTypeDefinition(md.GetDeclaringType());
             var ns = reader.GetString(td.Namespace);
             var tn = reader.GetString(td.Name);
+            var backtick = tn.IndexOf('`', StringComparison.Ordinal);
+            if (backtick > 0) tn = tn[..backtick];
             var ftn = string.IsNullOrEmpty(ns) ? tn : $"{ns}.{tn}";
-            // SubjectId may use short type name (e.g. "JsonElement" instead of "System.Text.Json.JsonElement")
-            // or include generic arguments (e.g. "Task<JsonDocument>" instead of "Task").
-            // Match against the base type name (without generic args) and with/without namespace.
             if (!string.Equals(ftn, searchTypeName, StringComparison.Ordinal) &&
                 !string.Equals(tn, searchTypeName, StringComparison.Ordinal) &&
                 !ftn.EndsWith("." + searchTypeName, StringComparison.Ordinal))
                 continue;
-            var sig = md.DecodeSignature(new SigTypeProvider(reader, comp.AssemblyName), default);
-            // Prefer exact parameter count match, but accept first matching name+type
-            // (AutoTestGenerator may reflect a different .NET version with different API surface)
-            if (sig.ParameterTypes.Length == comp.ParameterTypes.Count)
-                return mh;
-            fallback ??= mh;
+            try
+            {
+                var sig = md.DecodeSignature(new SigTypeProvider(reader, comp.AssemblyName), default);
+                if (sig.ParameterTypes.Length == comp.ParameterTypes.Count)
+                {
+                    if (md.RelativeVirtualAddress != 0)
+                        return mh;
+                    fallback ??= mh;
+                    continue;
+                }
+                fallback ??= mh;
+            }
+            catch
+            {
+                // Signature decode failed (generic params like !!0) - skip this method
+            }
         }
         return fallback;
     }
@@ -295,12 +392,36 @@ public sealed class BridgeAotCompiler
     private string? ResolveAssemblyPath(string assemblyName)
     {
         if (_assemblyCache.TryGetValue(assemblyName, out var c)) return c;
+
+        // Search runtime directory first
         var rd = Path.GetDirectoryName(typeof(object).Assembly.Location);
         if (rd != null)
         {
             var cand = Path.Combine(rd, $"{assemblyName}.dll");
             if (File.Exists(cand)) { _assemblyCache[assemblyName] = cand; return cand; }
         }
+
+        // Search project-local paths for test framework DLLs
+        var subjectsDir = Path.GetDirectoryName(typeof(object).Assembly.Location);
+        // Try the subjects directory next to the input DLL
+        try
+        {
+            var probe = new[] {
+                Path.Combine(AppContext.BaseDirectory, "..", "..", "..", "..", "..", "foundation-dll"),
+                AppContext.BaseDirectory,
+            };
+            foreach (var baseDir in probe)
+            {
+                var dir = Path.GetFullPath(baseDir);
+                if (Directory.Exists(dir))
+                {
+                    foreach (var dll in Directory.GetFiles(dir, $"{assemblyName}.dll", SearchOption.AllDirectories))
+                        return _assemblyCache[assemblyName] = dll;
+                }
+            }
+        }
+        catch { }
+
         return null;
     }
 
