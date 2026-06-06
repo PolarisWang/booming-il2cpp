@@ -140,10 +140,13 @@ CHAOS_IL2CPP_INTPTR ChaosTextInfoToLower(CHAOS_IL2CPP_INTPTR /*text_info*/, CHAO
     // ASCII fast path: A-Z → a-z
     if (cp >= 0x41 && cp <= 0x5A)
         return static_cast<CHAOS_IL2CPP_INTPTR>(cp + 32);
-    // Unicode uppercase→lowercase via case table
-    for (CHAOS_IL2CPP_INT32 i = 0; i < kUnicodeUppercaseRangeCount; i++) {
-        if (cp >= kUnicodeUppercaseRanges[i].start && cp <= kUnicodeUppercaseRanges[i].end)
-            return static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(cp) + kUnicodeUppercaseRanges[i].delta);
+    // Binary search on uppercase case table
+    CHAOS_IL2CPP_INT32 lo = 0, hi = kUnicodeUppercaseRangeCount;
+    while (lo < hi) {
+        CHAOS_IL2CPP_INT32 mid = (lo + hi) >> 1;
+        if (cp < kUnicodeUppercaseRanges[mid].start) { hi = mid; continue; }
+        if (cp > kUnicodeUppercaseRanges[mid].end) { lo = mid + 1; continue; }
+        return static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(cp) + kUnicodeUppercaseRanges[mid].delta);
     }
     return static_cast<CHAOS_IL2CPP_INTPTR>(c);
 }
@@ -155,10 +158,13 @@ CHAOS_IL2CPP_INTPTR ChaosTextInfoToUpper(CHAOS_IL2CPP_INTPTR /*text_info*/, CHAO
     // ASCII fast path: a-z → A-Z
     if (cp >= 0x61 && cp <= 0x7A)
         return static_cast<CHAOS_IL2CPP_INTPTR>(cp - 32);
-    // Unicode lowercase→uppercase via case table
-    for (CHAOS_IL2CPP_INT32 i = 0; i < kUnicodeLowercaseRangeCount; i++) {
-        if (cp >= kUnicodeLowercaseRanges[i].start && cp <= kUnicodeLowercaseRanges[i].end)
-            return static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(cp) - kUnicodeLowercaseRanges[i].delta);
+    // Binary search on lowercase case table
+    CHAOS_IL2CPP_INT32 lo = 0, hi = kUnicodeLowercaseRangeCount;
+    while (lo < hi) {
+        CHAOS_IL2CPP_INT32 mid = (lo + hi) >> 1;
+        if (cp < kUnicodeLowercaseRanges[mid].start) { hi = mid; continue; }
+        if (cp > kUnicodeLowercaseRanges[mid].end) { lo = mid + 1; continue; }
+        return static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(cp) - kUnicodeLowercaseRanges[mid].delta);
     }
     return static_cast<CHAOS_IL2CPP_INTPTR>(c);
 }
@@ -229,9 +235,13 @@ CHAOS_IL2CPP_INT32 ChaosCharUnicodeInfoGetUnicodeCategory(CHAOS_IL2CPP_INT32 ch)
 {
     if (ch < 0 || ch > 0xFFFF) return 29;  // UnicodeCategory.OtherNotAssigned
     auto cp = static_cast<CHAOS_IL2CPP_UINT16>(ch);
-    for (CHAOS_IL2CPP_INT32 i = 0; i < kUnicodeCategoryRangeCount; i++) {
-        if (cp >= kUnicodeCategoryRanges[i].start && cp <= kUnicodeCategoryRanges[i].end)
-            return static_cast<CHAOS_IL2CPP_INT32>(kUnicodeCategoryRanges[i].category);
+    // Binary search on sorted range table
+    CHAOS_IL2CPP_INT32 lo = 0, hi = kUnicodeCategoryRangeCount;
+    while (lo < hi) {
+        CHAOS_IL2CPP_INT32 mid = (lo + hi) >> 1;
+        if (cp < kUnicodeCategoryRanges[mid].start) { hi = mid; continue; }
+        if (cp > kUnicodeCategoryRanges[mid].end) { lo = mid + 1; continue; }
+        return static_cast<CHAOS_IL2CPP_INT32>(kUnicodeCategoryRanges[mid].category);
     }
     return 29;
 }
