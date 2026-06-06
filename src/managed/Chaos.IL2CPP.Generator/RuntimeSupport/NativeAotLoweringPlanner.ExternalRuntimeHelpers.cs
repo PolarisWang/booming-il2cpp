@@ -61,6 +61,13 @@ public sealed partial class NativeAotLoweringPlanner
 		// Canonicalize assembly prefix so matching is assembly-agnostic
 		callee = ManagedNaming.NormalizeSubjectIdAssembly(callee);
 
+		// Check cache first (P0)
+		if (_externalRuntimeHelperCache.TryGetValue(callee, out var cached))
+		{
+			helperDefinition = cached;
+			return cached != null;
+		}
+
 		// P0: Check cache first
 		if (_externalRuntimeHelperCache.TryGetValue(callee, out var cached))
 		{
@@ -85,7 +92,8 @@ public sealed partial class NativeAotLoweringPlanner
 					resolution.ReferencedStaticFieldSubjectIds,
 					DirectNativeSymbol: resolution.DirectNativeSymbol,
 					DirectNativeHeader: resolution.DirectNativeHeader);
-				return true;
+									_externalRuntimeHelperCache[callee] = helperDefinition;
+					return true;
 			}
 		}
 
@@ -94,14 +102,17 @@ public sealed partial class NativeAotLoweringPlanner
 			shapeEntry.Kind == RuntimeHelperShapeRegistry.ShapeKind.SimpleForward)
 		{
 			helperDefinition = CreateDefinitionFromShapeEntry(callee, shapeEntry);
-			return true;
+								_externalRuntimeHelperCache[callee] = helperDefinition;
+					return true;
 		}
 
 		if (TryCreateCustomAttributeRuntimeHelperDefinition(callee, out helperDefinition))
 		{
-			return true;
+								_externalRuntimeHelperCache[callee] = helperDefinition;
+					return true;
 		}
-		return false;
+					_externalRuntimeHelperCache[callee] = null;
+			return false;
 	}
 
 	private ExternalRuntimeHelperDefinition CreateDefinitionFromShapeEntry(

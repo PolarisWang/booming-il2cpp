@@ -213,6 +213,7 @@ public sealed partial class NativeAotLoweringPlanner
     {
         int nextIndex = _externalRuntimeSubjects.Count;
         var _seenCallees = new HashSet<string>(StringComparer.Ordinal);
+        var _seenCallees = new HashSet<string>(StringComparer.Ordinal);
         foreach (var method in reachableMethods)
         {
             foreach (var instruction in method.Instructions)
@@ -225,6 +226,10 @@ public sealed partial class NativeAotLoweringPlanner
                 // the normalized SubjectIds used by TryCreateExternalRuntimeHelperDefinition
                 // and the downstream helperSymbolBySubjectId lookup.
                 callee = ManagedNaming.NormalizeSubjectIdAssembly(callee);
+
+                // P0: skip already-processed callees
+                if (!_seenCallees.Add(callee))
+                    continue;
 
                 if (!_seenCallees.Add(callee))
                     continue;
@@ -289,6 +294,10 @@ public sealed partial class NativeAotLoweringPlanner
                 // Canonicalize assembly prefix so dictionary keys match
                 // _externalRuntimeSubjects (normalized at CollectExternalRuntimeDispatchEntries).
                 callee = ManagedNaming.NormalizeSubjectIdAssembly(callee);
+
+                // P0: skip already-processed callees
+                if (!_seenCallees.Add(callee))
+                    continue;
 
                 // Only consider callees in the external runtime dispatch table.
                 if (!_externalRuntimeSubjects.ContainsKey(callee))
