@@ -192,20 +192,34 @@ static constexpr CHAOS_IL2CPP_INT32 s_asciiCategory[128] = {
      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,25,25,25,26,14,  // 70-7F: Ll Ll Ll Ll Ll Ll Ll Ll Ll Ll Ll Po Po Po Sm Cc
 };
 
+}  // extern "C" — close before template (C2894: templates cannot have C linkage)
+
+template<typename TEntry, typename TVal>
+static inline CHAOS_IL2CPP_INT32 LookupEntryBinary(const TEntry* table, CHAOS_IL2CPP_INT32 count, CHAOS_IL2CPP_UINT16 cp, TVal& out_val) noexcept
+{
+    CHAOS_IL2CPP_INT32 lo = 0, hi = count;
+    while (lo < hi) {
+        CHAOS_IL2CPP_INT32 mid = (lo + hi) >> 1;
+        if (cp < table[mid].codepoint) { hi = mid; continue; }
+        if (cp > table[mid].codepoint) { lo = mid + 1; continue; }
+        out_val = table[mid].value;
+        return 1;
+    }
+    return 0;
+}
+
+// Reopen extern "C" for function implementations using the template above.
+extern "C" {
+
 CHAOS_IL2CPP_FLOAT64 ChaosCharUnicodeInfoGetNumericValue(CHAOS_IL2CPP_INT32 ch) noexcept
 {
     if (ch < 0 || ch > 0xFFFF) return -1.0;
     auto cp = static_cast<CHAOS_IL2CPP_UINT16>(ch);
-    // Check decimal digit table first (faster)
-    for (CHAOS_IL2CPP_INT32 i = 0; i < kUnicodeDecimalDigitCount; i++) {
-        if (kUnicodeDecimalDigitTable[i].codepoint == cp)
-            return static_cast<CHAOS_IL2CPP_FLOAT64>(kUnicodeDecimalDigitTable[i].value);
-    }
-    // Check numeric value table
-    for (CHAOS_IL2CPP_INT32 i = 0; i < kUnicodeNumericCount; i++) {
-        if (kUnicodeNumericTable[i].codepoint == cp)
-            return static_cast<CHAOS_IL2CPP_FLOAT64>(kUnicodeNumericTable[i].value);
-    }
+    float val;
+    if (LookupEntryBinary(kUnicodeDecimalDigitTable, kUnicodeDecimalDigitCount, cp, val))
+        return static_cast<CHAOS_IL2CPP_FLOAT64>(val);
+    if (LookupEntryBinary(kUnicodeNumericTable, kUnicodeNumericCount, cp, val))
+        return static_cast<CHAOS_IL2CPP_FLOAT64>(val);
     return -1.0;
 }
 
@@ -213,22 +227,16 @@ CHAOS_IL2CPP_INT32 ChaosCharUnicodeInfoGetDigitValue(CHAOS_IL2CPP_INT32 ch) noex
 {
     if (ch < 0 || ch > 0xFFFF) return -1;
     auto cp = static_cast<CHAOS_IL2CPP_UINT16>(ch);
-    for (CHAOS_IL2CPP_INT32 i = 0; i < kUnicodeDecimalDigitCount; i++) {
-        if (kUnicodeDecimalDigitTable[i].codepoint == cp)
-            return static_cast<CHAOS_IL2CPP_INT32>(kUnicodeDecimalDigitTable[i].value);
-    }
-    return -1;
+    float val;
+    return LookupEntryBinary(kUnicodeDecimalDigitTable, kUnicodeDecimalDigitCount, cp, val) ? static_cast<CHAOS_IL2CPP_INT32>(val) : -1;
 }
 
 CHAOS_IL2CPP_INT32 ChaosCharUnicodeInfoGetDecimalDigitValue(CHAOS_IL2CPP_INT32 ch) noexcept
 {
     if (ch < 0 || ch > 0xFFFF) return -1;
     auto cp = static_cast<CHAOS_IL2CPP_UINT16>(ch);
-    for (CHAOS_IL2CPP_INT32 i = 0; i < kUnicodeDecimalDigitCount; i++) {
-        if (kUnicodeDecimalDigitTable[i].codepoint == cp)
-            return static_cast<CHAOS_IL2CPP_INT32>(kUnicodeDecimalDigitTable[i].value);
-    }
-    return -1;
+    float val;
+    return LookupEntryBinary(kUnicodeDecimalDigitTable, kUnicodeDecimalDigitCount, cp, val) ? static_cast<CHAOS_IL2CPP_INT32>(val) : -1;
 }
 
 CHAOS_IL2CPP_INT32 ChaosCharUnicodeInfoGetUnicodeCategory(CHAOS_IL2CPP_INT32 ch) noexcept
