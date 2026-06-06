@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "assemblyName": "System.Text.Json",
   "chunkSlug": "text-json",
-  "totalMethods": 326,
+  "totalMethods": 329,
   "customEntryIndices": null,
   "benchmarkMethodIndices": [
     0,
@@ -279,7 +279,10 @@
     271,
     272,
     273,
-    274
+    274,
+    275,
+    276,
+    277
   ],
   "hotupdateMethodIndices": [
     0,
@@ -1223,1348 +1226,1366 @@
       "index": 101,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::Deserialize:System.Int32(System.IO.Stream,System.Text.Json.JsonSerializerOptions)",
-      "generatedMethodId": "Deserialize_25_Stream_JsonSerializerOptions_1"
+      "generatedMethodId": "Deserialize_25_Stream_JsonSerializerOptions_0"
     },
     {
       "index": 102,
       "kind": "benchmark",
-      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::DeserializeAsync:System.Threading.Tasks.ValueTask<System.Object>(System.IO.Stream,System.Type,System.Text.Json.JsonSerializerOptions,System.Threading.CancellationToken)",
-      "generatedMethodId": "DeserializeAsync_26_Stream_System_Type_JsonSerializerOptions_CancellationToken_0"
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::Deserialize:System.Int32(System.IO.Stream,System.Text.Json.JsonSerializerOptions)",
+      "generatedMethodId": "Deserialize_25_Stream_JsonSerializerOptions_1"
     },
     {
       "index": 103,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::DeserializeAsync:System.Threading.Tasks.ValueTask<System.Object>(System.IO.Stream,System.Type,System.Text.Json.JsonSerializerOptions,System.Threading.CancellationToken)",
-      "generatedMethodId": "DeserializeAsync_26_Stream_System_Type_JsonSerializerOptions_CancellationToken_1"
+      "generatedMethodId": "DeserializeAsync_26_Stream_System_Type_JsonSerializerOptions_CancellationToken_0"
     },
     {
       "index": 104,
       "kind": "benchmark",
-      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::Deserialize:System.Object(System.IO.Stream,System.Type,System.Text.Json.JsonSerializerOptions)",
-      "generatedMethodId": "Deserialize_27_Stream_System_Type_JsonSerializerOptions_0"
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::DeserializeAsync:System.Threading.Tasks.ValueTask<System.Object>(System.IO.Stream,System.Type,System.Text.Json.JsonSerializerOptions,System.Threading.CancellationToken)",
+      "generatedMethodId": "DeserializeAsync_26_Stream_System_Type_JsonSerializerOptions_CancellationToken_1"
     },
     {
       "index": 105,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::Deserialize:System.Object(System.IO.Stream,System.Type,System.Text.Json.JsonSerializerOptions)",
-      "generatedMethodId": "Deserialize_27_Stream_System_Type_JsonSerializerOptions_1"
+      "generatedMethodId": "Deserialize_27_Stream_System_Type_JsonSerializerOptions_0"
     },
     {
       "index": 106,
       "kind": "benchmark",
-      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::DeserializeAsync:System.Threading.Tasks.ValueTask<System.Int32>(System.IO.Stream,System.Text.Json.Serialization.Metadata.JsonTypeInfo<System.Int32>,System.Threading.CancellationToken)",
-      "generatedMethodId": "DeserializeAsync_28_Stream_JsonTypeInfoint_CancellationToken_0"
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::Deserialize:System.Object(System.IO.Stream,System.Type,System.Text.Json.JsonSerializerOptions)",
+      "generatedMethodId": "Deserialize_27_Stream_System_Type_JsonSerializerOptions_1"
     },
     {
       "index": 107,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::DeserializeAsync:System.Threading.Tasks.ValueTask<System.Int32>(System.IO.Stream,System.Text.Json.Serialization.Metadata.JsonTypeInfo<System.Int32>,System.Threading.CancellationToken)",
-      "generatedMethodId": "DeserializeAsync_28_Stream_JsonTypeInfoint_CancellationToken_1"
+      "generatedMethodId": "DeserializeAsync_28_Stream_JsonTypeInfoint_CancellationToken_0"
     },
     {
       "index": 108,
       "kind": "benchmark",
-      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::Deserialize:System.Int32(System.IO.Stream,System.Text.Json.Serialization.Metadata.JsonTypeInfo<System.Int32>)",
-      "generatedMethodId": "Deserialize_29_Stream_JsonTypeInfoint_0"
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::DeserializeAsync:System.Threading.Tasks.ValueTask<System.Int32>(System.IO.Stream,System.Text.Json.Serialization.Metadata.JsonTypeInfo<System.Int32>,System.Threading.CancellationToken)",
+      "generatedMethodId": "DeserializeAsync_28_Stream_JsonTypeInfoint_CancellationToken_1"
     },
     {
       "index": 109,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::Deserialize:System.Int32(System.IO.Stream,System.Text.Json.Serialization.Metadata.JsonTypeInfo<System.Int32>)",
-      "generatedMethodId": "Deserialize_29_Stream_JsonTypeInfoint_1"
+      "generatedMethodId": "Deserialize_29_Stream_JsonTypeInfoint_0"
     },
     {
       "index": 110,
       "kind": "benchmark",
-      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::DeserializeAsyncEnumerable:System.Collections.Generic.IAsyncEnumerable<System.Int32>(System.IO.Stream,System.Text.Json.JsonSerializerOptions,System.Threading.CancellationToken)",
-      "generatedMethodId": "DeserializeAsyncEnumerable_32_Stream_JsonSerializerOptions_CancellationToken_0"
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::Deserialize:System.Int32(System.IO.Stream,System.Text.Json.Serialization.Metadata.JsonTypeInfo<System.Int32>)",
+      "generatedMethodId": "Deserialize_29_Stream_JsonTypeInfoint_1"
     },
     {
       "index": 111,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::DeserializeAsyncEnumerable:System.Collections.Generic.IAsyncEnumerable<System.Int32>(System.IO.Stream,System.Text.Json.JsonSerializerOptions,System.Threading.CancellationToken)",
-      "generatedMethodId": "DeserializeAsyncEnumerable_32_Stream_JsonSerializerOptions_CancellationToken_1"
+      "generatedMethodId": "DeserializeAsyncEnumerable_32_Stream_JsonSerializerOptions_CancellationToken_0"
     },
     {
       "index": 112,
       "kind": "benchmark",
-      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::DeserializeAsyncEnumerable:System.Collections.Generic.IAsyncEnumerable<System.Int32>(System.IO.Stream,System.Boolean,System.Text.Json.JsonSerializerOptions,System.Threading.CancellationToken)",
-      "generatedMethodId": "DeserializeAsyncEnumerable_33_Stream_bool_JsonSerializerOptions_CancellationToken_0"
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::DeserializeAsyncEnumerable:System.Collections.Generic.IAsyncEnumerable<System.Int32>(System.IO.Stream,System.Text.Json.JsonSerializerOptions,System.Threading.CancellationToken)",
+      "generatedMethodId": "DeserializeAsyncEnumerable_32_Stream_JsonSerializerOptions_CancellationToken_1"
     },
     {
       "index": 113,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::DeserializeAsyncEnumerable:System.Collections.Generic.IAsyncEnumerable<System.Int32>(System.IO.Stream,System.Boolean,System.Text.Json.JsonSerializerOptions,System.Threading.CancellationToken)",
-      "generatedMethodId": "DeserializeAsyncEnumerable_33_Stream_bool_JsonSerializerOptions_CancellationToken_1"
+      "generatedMethodId": "DeserializeAsyncEnumerable_33_Stream_bool_JsonSerializerOptions_CancellationToken_0"
     },
     {
       "index": 114,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::DeserializeAsyncEnumerable:System.Collections.Generic.IAsyncEnumerable<System.Int32>(System.IO.Stream,System.Boolean,System.Text.Json.JsonSerializerOptions,System.Threading.CancellationToken)",
-      "generatedMethodId": "DeserializeAsyncEnumerable_33_Stream_bool_JsonSerializerOptions_CancellationToken_2"
+      "generatedMethodId": "DeserializeAsyncEnumerable_33_Stream_bool_JsonSerializerOptions_CancellationToken_1"
     },
     {
       "index": 115,
       "kind": "benchmark",
-      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::DeserializeAsyncEnumerable:System.Collections.Generic.IAsyncEnumerable<System.Int32>(System.IO.Stream,System.Text.Json.Serialization.Metadata.JsonTypeInfo<System.Int32>,System.Threading.CancellationToken)",
-      "generatedMethodId": "DeserializeAsyncEnumerable_34_Stream_JsonTypeInfoint_CancellationToken_0"
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::DeserializeAsyncEnumerable:System.Collections.Generic.IAsyncEnumerable<System.Int32>(System.IO.Stream,System.Boolean,System.Text.Json.JsonSerializerOptions,System.Threading.CancellationToken)",
+      "generatedMethodId": "DeserializeAsyncEnumerable_33_Stream_bool_JsonSerializerOptions_CancellationToken_2"
     },
     {
       "index": 116,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::DeserializeAsyncEnumerable:System.Collections.Generic.IAsyncEnumerable<System.Int32>(System.IO.Stream,System.Text.Json.Serialization.Metadata.JsonTypeInfo<System.Int32>,System.Threading.CancellationToken)",
-      "generatedMethodId": "DeserializeAsyncEnumerable_34_Stream_JsonTypeInfoint_CancellationToken_1"
+      "generatedMethodId": "DeserializeAsyncEnumerable_34_Stream_JsonTypeInfoint_CancellationToken_0"
     },
     {
       "index": 117,
       "kind": "benchmark",
-      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::DeserializeAsyncEnumerable:System.Collections.Generic.IAsyncEnumerable<System.Int32>(System.IO.Stream,System.Text.Json.Serialization.Metadata.JsonTypeInfo<System.Int32>,System.Boolean,System.Threading.CancellationToken)",
-      "generatedMethodId": "DeserializeAsyncEnumerable_35_Stream_JsonTypeInfoint_bool_CancellationToken_0"
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::DeserializeAsyncEnumerable:System.Collections.Generic.IAsyncEnumerable<System.Int32>(System.IO.Stream,System.Text.Json.Serialization.Metadata.JsonTypeInfo<System.Int32>,System.Threading.CancellationToken)",
+      "generatedMethodId": "DeserializeAsyncEnumerable_34_Stream_JsonTypeInfoint_CancellationToken_1"
     },
     {
       "index": 118,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::DeserializeAsyncEnumerable:System.Collections.Generic.IAsyncEnumerable<System.Int32>(System.IO.Stream,System.Text.Json.Serialization.Metadata.JsonTypeInfo<System.Int32>,System.Boolean,System.Threading.CancellationToken)",
-      "generatedMethodId": "DeserializeAsyncEnumerable_35_Stream_JsonTypeInfoint_bool_CancellationToken_1"
+      "generatedMethodId": "DeserializeAsyncEnumerable_35_Stream_JsonTypeInfoint_bool_CancellationToken_0"
     },
     {
       "index": 119,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::DeserializeAsyncEnumerable:System.Collections.Generic.IAsyncEnumerable<System.Int32>(System.IO.Stream,System.Text.Json.Serialization.Metadata.JsonTypeInfo<System.Int32>,System.Boolean,System.Threading.CancellationToken)",
-      "generatedMethodId": "DeserializeAsyncEnumerable_35_Stream_JsonTypeInfoint_bool_CancellationToken_2"
+      "generatedMethodId": "DeserializeAsyncEnumerable_35_Stream_JsonTypeInfoint_bool_CancellationToken_1"
     },
     {
       "index": 120,
       "kind": "benchmark",
-      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::Deserialize:System.Int32(System.String,System.Text.Json.JsonSerializerOptions)",
-      "generatedMethodId": "Deserialize_36_string_JsonSerializerOptions_0"
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::DeserializeAsyncEnumerable:System.Collections.Generic.IAsyncEnumerable<System.Int32>(System.IO.Stream,System.Text.Json.Serialization.Metadata.JsonTypeInfo<System.Int32>,System.Boolean,System.Threading.CancellationToken)",
+      "generatedMethodId": "DeserializeAsyncEnumerable_35_Stream_JsonTypeInfoint_bool_CancellationToken_2"
     },
     {
       "index": 121,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::Deserialize:System.Int32(System.String,System.Text.Json.JsonSerializerOptions)",
-      "generatedMethodId": "Deserialize_36_string_JsonSerializerOptions_1"
+      "generatedMethodId": "Deserialize_36_string_JsonSerializerOptions_0"
     },
     {
       "index": 122,
       "kind": "benchmark",
-      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::Deserialize:System.Object(System.String,System.Type,System.Text.Json.JsonSerializerOptions)",
-      "generatedMethodId": "Deserialize_37_string_System_Type_JsonSerializerOptions_0"
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::Deserialize:System.Int32(System.String,System.Text.Json.JsonSerializerOptions)",
+      "generatedMethodId": "Deserialize_36_string_JsonSerializerOptions_1"
     },
     {
       "index": 123,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::Deserialize:System.Object(System.String,System.Type,System.Text.Json.JsonSerializerOptions)",
-      "generatedMethodId": "Deserialize_37_string_System_Type_JsonSerializerOptions_1"
+      "generatedMethodId": "Deserialize_37_string_System_Type_JsonSerializerOptions_0"
     },
     {
       "index": 124,
       "kind": "benchmark",
-      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::Deserialize:System.Int32(System.String,System.Text.Json.Serialization.Metadata.JsonTypeInfo<System.Int32>)",
-      "generatedMethodId": "Deserialize_38_string_JsonTypeInfoint_0"
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::Deserialize:System.Object(System.String,System.Type,System.Text.Json.JsonSerializerOptions)",
+      "generatedMethodId": "Deserialize_37_string_System_Type_JsonSerializerOptions_1"
     },
     {
       "index": 125,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::Deserialize:System.Int32(System.String,System.Text.Json.Serialization.Metadata.JsonTypeInfo<System.Int32>)",
-      "generatedMethodId": "Deserialize_38_string_JsonTypeInfoint_1"
+      "generatedMethodId": "Deserialize_38_string_JsonTypeInfoint_0"
     },
     {
       "index": 126,
       "kind": "benchmark",
-      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::SerializeToUtf8Bytes:System.Byte[](System.Int32,System.Text.Json.JsonSerializerOptions)",
-      "generatedMethodId": "SerializeToUtf8Bytes_40_int_JsonSerializerOptions_0"
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::Deserialize:System.Int32(System.String,System.Text.Json.Serialization.Metadata.JsonTypeInfo<System.Int32>)",
+      "generatedMethodId": "Deserialize_38_string_JsonTypeInfoint_1"
     },
     {
       "index": 127,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::SerializeToUtf8Bytes:System.Byte[](System.Int32,System.Text.Json.JsonSerializerOptions)",
-      "generatedMethodId": "SerializeToUtf8Bytes_40_int_JsonSerializerOptions_1"
+      "generatedMethodId": "SerializeToUtf8Bytes_40_int_JsonSerializerOptions_0"
     },
     {
       "index": 128,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::SerializeToUtf8Bytes:System.Byte[](System.Int32,System.Text.Json.JsonSerializerOptions)",
+      "generatedMethodId": "SerializeToUtf8Bytes_40_int_JsonSerializerOptions_1"
+    },
+    {
+      "index": 129,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::SerializeToUtf8Bytes:System.Byte[](System.Object,System.Type,System.Text.Json.JsonSerializerOptions)",
       "generatedMethodId": "SerializeToUtf8Bytes_41_object_System_Type_JsonSerializerOptions_0"
     },
     {
-      "index": 129,
+      "index": 130,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::SerializeToUtf8Bytes:System.Byte[](System.Int32,System.Text.Json.Serialization.Metadata.JsonTypeInfo<System.Int32>)",
       "generatedMethodId": "SerializeToUtf8Bytes_42_int_JsonTypeInfoint_0"
     },
     {
-      "index": 130,
+      "index": 131,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::SerializeToUtf8Bytes:System.Byte[](System.Int32,System.Text.Json.Serialization.Metadata.JsonTypeInfo<System.Int32>)",
       "generatedMethodId": "SerializeToUtf8Bytes_42_int_JsonTypeInfoint_1"
     },
     {
-      "index": 131,
+      "index": 132,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::SerializeAsync:System.Threading.Tasks.Task(System.IO.Stream,System.Int32,System.Text.Json.JsonSerializerOptions,System.Threading.CancellationToken)",
       "generatedMethodId": "SerializeAsync_44_Stream_int_JsonSerializerOptions_CancellationToken_0"
     },
     {
-      "index": 132,
+      "index": 133,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::SerializeAsync:System.Threading.Tasks.Task(System.IO.Stream,System.Int32,System.Text.Json.JsonSerializerOptions,System.Threading.CancellationToken)",
       "generatedMethodId": "SerializeAsync_44_Stream_int_JsonSerializerOptions_CancellationToken_1"
     },
     {
-      "index": 133,
+      "index": 134,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::SerializeAsync:System.Threading.Tasks.Task(System.IO.Stream,System.Int32,System.Text.Json.JsonSerializerOptions,System.Threading.CancellationToken)",
       "generatedMethodId": "SerializeAsync_44_Stream_int_JsonSerializerOptions_CancellationToken_2"
     },
     {
-      "index": 134,
+      "index": 135,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::Serialize:System.Void(System.IO.Stream,System.Int32,System.Text.Json.JsonSerializerOptions)",
       "generatedMethodId": "Serialize_45_Stream_int_JsonSerializerOptions_0"
     },
     {
-      "index": 135,
+      "index": 136,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::Serialize:System.Void(System.IO.Stream,System.Int32,System.Text.Json.JsonSerializerOptions)",
       "generatedMethodId": "Serialize_45_Stream_int_JsonSerializerOptions_1"
     },
     {
-      "index": 136,
+      "index": 137,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::Serialize:System.Void(System.IO.Stream,System.Int32,System.Text.Json.JsonSerializerOptions)",
       "generatedMethodId": "Serialize_45_Stream_int_JsonSerializerOptions_2"
     },
     {
-      "index": 137,
+      "index": 138,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::SerializeAsync:System.Threading.Tasks.Task(System.IO.Stream,System.Object,System.Type,System.Text.Json.JsonSerializerOptions,System.Threading.CancellationToken)",
       "generatedMethodId": "SerializeAsync_46_Stream_object_System_Type_JsonSerializerOptions_CancellationToken_0"
     },
     {
-      "index": 138,
+      "index": 139,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::SerializeAsync:System.Threading.Tasks.Task(System.IO.Stream,System.Object,System.Type,System.Text.Json.JsonSerializerOptions,System.Threading.CancellationToken)",
+      "generatedMethodId": "SerializeAsync_46_Stream_object_System_Type_JsonSerializerOptions_CancellationToken_1"
+    },
+    {
+      "index": 140,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::Serialize:System.Void(System.IO.Stream,System.Object,System.Type,System.Text.Json.JsonSerializerOptions)",
       "generatedMethodId": "Serialize_47_Stream_object_System_Type_JsonSerializerOptions_0"
     },
     {
-      "index": 139,
+      "index": 141,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::Serialize:System.Void(System.IO.Stream,System.Object,System.Type,System.Text.Json.JsonSerializerOptions)",
       "generatedMethodId": "Serialize_47_Stream_object_System_Type_JsonSerializerOptions_1"
     },
     {
-      "index": 140,
+      "index": 142,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::SerializeAsync:System.Threading.Tasks.Task(System.IO.Stream,System.Int32,System.Text.Json.Serialization.Metadata.JsonTypeInfo<System.Int32>,System.Threading.CancellationToken)",
       "generatedMethodId": "SerializeAsync_48_Stream_int_JsonTypeInfoint_CancellationToken_0"
     },
     {
-      "index": 141,
+      "index": 143,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::SerializeAsync:System.Threading.Tasks.Task(System.IO.Stream,System.Int32,System.Text.Json.Serialization.Metadata.JsonTypeInfo<System.Int32>,System.Threading.CancellationToken)",
       "generatedMethodId": "SerializeAsync_48_Stream_int_JsonTypeInfoint_CancellationToken_1"
     },
     {
-      "index": 142,
+      "index": 144,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::SerializeAsync:System.Threading.Tasks.Task(System.IO.Stream,System.Int32,System.Text.Json.Serialization.Metadata.JsonTypeInfo<System.Int32>,System.Threading.CancellationToken)",
       "generatedMethodId": "SerializeAsync_48_Stream_int_JsonTypeInfoint_CancellationToken_2"
     },
     {
-      "index": 143,
+      "index": 145,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::Serialize:System.Void(System.IO.Stream,System.Int32,System.Text.Json.Serialization.Metadata.JsonTypeInfo<System.Int32>)",
       "generatedMethodId": "Serialize_49_Stream_int_JsonTypeInfoint_0"
     },
     {
-      "index": 144,
+      "index": 146,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::Serialize:System.Void(System.IO.Stream,System.Int32,System.Text.Json.Serialization.Metadata.JsonTypeInfo<System.Int32>)",
       "generatedMethodId": "Serialize_49_Stream_int_JsonTypeInfoint_1"
     },
     {
-      "index": 145,
+      "index": 147,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::Serialize:System.Void(System.IO.Stream,System.Int32,System.Text.Json.Serialization.Metadata.JsonTypeInfo<System.Int32>)",
       "generatedMethodId": "Serialize_49_Stream_int_JsonTypeInfoint_2"
     },
     {
-      "index": 146,
+      "index": 148,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::Serialize:System.String(System.Int32,System.Text.Json.JsonSerializerOptions)",
       "generatedMethodId": "Serialize_52_int_JsonSerializerOptions_0"
     },
     {
-      "index": 147,
+      "index": 149,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::Serialize:System.String(System.Int32,System.Text.Json.JsonSerializerOptions)",
       "generatedMethodId": "Serialize_52_int_JsonSerializerOptions_1"
     },
     {
-      "index": 148,
+      "index": 150,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::Serialize:System.String(System.Object,System.Type,System.Text.Json.JsonSerializerOptions)",
       "generatedMethodId": "Serialize_53_object_System_Type_JsonSerializerOptions_0"
     },
     {
-      "index": 149,
+      "index": 151,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::Serialize:System.String(System.Int32,System.Text.Json.Serialization.Metadata.JsonTypeInfo<System.Int32>)",
       "generatedMethodId": "Serialize_54_int_JsonTypeInfoint_0"
     },
     {
-      "index": 150,
+      "index": 152,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::Serialize:System.String(System.Int32,System.Text.Json.Serialization.Metadata.JsonTypeInfo<System.Int32>)",
       "generatedMethodId": "Serialize_54_int_JsonTypeInfoint_1"
     },
     {
-      "index": 151,
+      "index": 153,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::SerializeAsync:System.Threading.Tasks.Task(System.IO.Pipelines.PipeWriter,System.Int32,System.Text.Json.Serialization.Metadata.JsonTypeInfo<System.Int32>,System.Threading.CancellationToken)",
       "generatedMethodId": "SerializeAsync_56_PipeWriter_int_JsonTypeInfoint_CancellationToken_0"
     },
     {
-      "index": 152,
+      "index": 154,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::SerializeAsync:System.Threading.Tasks.Task(System.IO.Pipelines.PipeWriter,System.Int32,System.Text.Json.Serialization.Metadata.JsonTypeInfo<System.Int32>,System.Threading.CancellationToken)",
       "generatedMethodId": "SerializeAsync_56_PipeWriter_int_JsonTypeInfoint_CancellationToken_1"
     },
     {
-      "index": 153,
+      "index": 155,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::SerializeAsync:System.Threading.Tasks.Task(System.IO.Pipelines.PipeWriter,System.Int32,System.Text.Json.JsonSerializerOptions,System.Threading.CancellationToken)",
       "generatedMethodId": "SerializeAsync_57_PipeWriter_int_JsonSerializerOptions_CancellationToken_0"
     },
     {
-      "index": 154,
+      "index": 156,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::SerializeAsync:System.Threading.Tasks.Task(System.IO.Pipelines.PipeWriter,System.Int32,System.Text.Json.JsonSerializerOptions,System.Threading.CancellationToken)",
       "generatedMethodId": "SerializeAsync_57_PipeWriter_int_JsonSerializerOptions_CancellationToken_1"
     },
     {
-      "index": 155,
+      "index": 157,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::SerializeAsync:System.Threading.Tasks.Task(System.IO.Pipelines.PipeWriter,System.Object,System.Type,System.Text.Json.JsonSerializerOptions,System.Threading.CancellationToken)",
       "generatedMethodId": "SerializeAsync_59_PipeWriter_object_System_Type_JsonSerializerOptions_CancellationToken_0"
     },
     {
-      "index": 156,
+      "index": 158,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::Serialize:System.Void(System.Text.Json.Utf8JsonWriter,System.Int32,System.Text.Json.JsonSerializerOptions)",
       "generatedMethodId": "Serialize_60_Utf8JsonWriter_int_JsonSerializerOptions_0"
     },
     {
-      "index": 157,
+      "index": 159,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::Serialize:System.Void(System.Text.Json.Utf8JsonWriter,System.Int32,System.Text.Json.JsonSerializerOptions)",
       "generatedMethodId": "Serialize_60_Utf8JsonWriter_int_JsonSerializerOptions_1"
     },
     {
-      "index": 158,
+      "index": 160,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::Serialize:System.Void(System.Text.Json.Utf8JsonWriter,System.Object,System.Type,System.Text.Json.JsonSerializerOptions)",
       "generatedMethodId": "Serialize_61_Utf8JsonWriter_object_System_Type_JsonSerializerOptions_0"
     },
     {
-      "index": 159,
+      "index": 161,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::Serialize:System.Void(System.Text.Json.Utf8JsonWriter,System.Int32,System.Text.Json.Serialization.Metadata.JsonTypeInfo<System.Int32>)",
       "generatedMethodId": "Serialize_62_Utf8JsonWriter_int_JsonTypeInfoint_0"
     },
     {
-      "index": 160,
+      "index": 162,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::Serialize:System.Void(System.Text.Json.Utf8JsonWriter,System.Int32,System.Text.Json.Serialization.Metadata.JsonTypeInfo<System.Int32>)",
       "generatedMethodId": "Serialize_62_Utf8JsonWriter_int_JsonTypeInfoint_1"
     },
     {
-      "index": 161,
+      "index": 163,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializerOptions::GetConverter:System.Text.Json.Serialization.JsonConverter(System.Type)",
       "generatedMethodId": "GetConverter_0_System_Type_0"
     },
     {
-      "index": 162,
+      "index": 164,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializerOptions::MakeReadOnly:System.Void()",
       "generatedMethodId": "MakeReadOnly_2__0"
     },
     {
-      "index": 163,
+      "index": 165,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializerOptions::MakeReadOnly:System.Void(System.Boolean)",
       "generatedMethodId": "MakeReadOnly_3_bool_0"
     },
     {
-      "index": 164,
+      "index": 166,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializerOptions::MakeReadOnly:System.Void(System.Boolean)",
       "generatedMethodId": "MakeReadOnly_3_bool_1"
     },
     {
-      "index": 165,
+      "index": 167,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonReader::Read:System.Boolean()",
       "generatedMethodId": "Read_0__0"
     },
     {
-      "index": 166,
+      "index": 168,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonReader::Skip:System.Void()",
       "generatedMethodId": "Skip_1__0"
     },
     {
-      "index": 167,
+      "index": 169,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonReader::TrySkip:System.Boolean()",
       "generatedMethodId": "TrySkip_2__0"
     },
     {
-      "index": 168,
+      "index": 170,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonReader::ValueTextEquals:System.Boolean(System.String)",
       "generatedMethodId": "ValueTextEquals_3_string_0"
     },
     {
-      "index": 169,
+      "index": 171,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonReader::ValueTextEquals:System.Boolean(System.String)",
       "generatedMethodId": "ValueTextEquals_3_string_1"
     },
     {
-      "index": 170,
+      "index": 172,
+      "kind": "benchmark",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonReader::GetString:System.String()",
+      "generatedMethodId": "GetString_4__0"
+    },
+    {
+      "index": 173,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonReader::GetComment:System.String()",
       "generatedMethodId": "GetComment_5__0"
     },
     {
-      "index": 171,
+      "index": 174,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonReader::GetBoolean:System.Boolean()",
       "generatedMethodId": "GetBoolean_6__0"
     },
     {
-      "index": 172,
+      "index": 175,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonReader::GetBytesFromBase64:System.Byte[]()",
       "generatedMethodId": "GetBytesFromBase64_7__0"
     },
     {
-      "index": 173,
+      "index": 176,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonReader::GetByte:System.Byte()",
       "generatedMethodId": "GetByte_8__0"
     },
     {
-      "index": 174,
+      "index": 177,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonReader::GetSByte:System.SByte()",
       "generatedMethodId": "GetSByte_9__0"
     },
     {
-      "index": 175,
+      "index": 178,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonReader::GetInt16:System.Int16()",
       "generatedMethodId": "GetInt16_10__0"
     },
     {
-      "index": 176,
+      "index": 179,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonReader::GetInt32:System.Int32()",
       "generatedMethodId": "GetInt32_11__0"
     },
     {
-      "index": 177,
+      "index": 180,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonReader::GetInt64:System.Int64()",
       "generatedMethodId": "GetInt64_12__0"
     },
     {
-      "index": 178,
+      "index": 181,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonReader::GetUInt16:System.UInt16()",
       "generatedMethodId": "GetUInt16_13__0"
     },
     {
-      "index": 179,
+      "index": 182,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonReader::GetUInt32:System.UInt32()",
       "generatedMethodId": "GetUInt32_14__0"
     },
     {
-      "index": 180,
+      "index": 183,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonReader::GetUInt64:System.UInt64()",
       "generatedMethodId": "GetUInt64_15__0"
     },
     {
-      "index": 181,
+      "index": 184,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonReader::GetSingle:System.Single()",
       "generatedMethodId": "GetSingle_16__0"
     },
     {
-      "index": 182,
+      "index": 185,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonReader::GetDouble:System.Double()",
       "generatedMethodId": "GetDouble_17__0"
     },
     {
-      "index": 183,
+      "index": 186,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonReader::GetDecimal:System.Decimal()",
       "generatedMethodId": "GetDecimal_18__0"
     },
     {
-      "index": 184,
+      "index": 187,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonReader::GetDateTime:System.DateTime()",
       "generatedMethodId": "GetDateTime_19__0"
     },
     {
-      "index": 185,
+      "index": 188,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonReader::GetDateTimeOffset:System.DateTimeOffset()",
       "generatedMethodId": "GetDateTimeOffset_20__0"
     },
     {
-      "index": 186,
+      "index": 189,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonReader::GetGuid:System.Guid()",
       "generatedMethodId": "GetGuid_21__0"
     },
     {
-      "index": 187,
+      "index": 190,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonReader::TryGetBytesFromBase64:System.Boolean(System.Byte[])",
       "generatedMethodId": "TryGetBytesFromBase64_22_System_Byte_0"
     },
     {
-      "index": 188,
+      "index": 191,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonReader::TryGetBytesFromBase64:System.Boolean(System.Byte[])",
       "generatedMethodId": "TryGetBytesFromBase64_22_System_Byte_1"
     },
     {
-      "index": 189,
+      "index": 192,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonReader::TryGetBytesFromBase64:System.Boolean(System.Byte[])",
       "generatedMethodId": "TryGetBytesFromBase64_22_System_Byte_2"
     },
     {
-      "index": 190,
+      "index": 193,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonReader::TryGetByte:System.Boolean(System.Byte)",
       "generatedMethodId": "TryGetByte_23_byte_0"
     },
     {
-      "index": 191,
+      "index": 194,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonReader::TryGetByte:System.Boolean(System.Byte)",
       "generatedMethodId": "TryGetByte_23_byte_1"
     },
     {
-      "index": 192,
+      "index": 195,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonReader::TryGetSByte:System.Boolean(System.SByte)",
       "generatedMethodId": "TryGetSByte_24_sbyte_0"
     },
     {
-      "index": 193,
+      "index": 196,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonReader::TryGetSByte:System.Boolean(System.SByte)",
       "generatedMethodId": "TryGetSByte_24_sbyte_1"
     },
     {
-      "index": 194,
+      "index": 197,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonReader::TryGetInt16:System.Boolean(System.Int16)",
       "generatedMethodId": "TryGetInt16_25_short_0"
     },
     {
-      "index": 195,
+      "index": 198,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonReader::TryGetInt16:System.Boolean(System.Int16)",
       "generatedMethodId": "TryGetInt16_25_short_1"
     },
     {
-      "index": 196,
+      "index": 199,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonReader::TryGetInt32:System.Boolean(System.Int32)",
       "generatedMethodId": "TryGetInt32_26_int_0"
     },
     {
-      "index": 197,
+      "index": 200,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonReader::TryGetInt32:System.Boolean(System.Int32)",
       "generatedMethodId": "TryGetInt32_26_int_1"
     },
     {
-      "index": 198,
+      "index": 201,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonReader::TryGetInt64:System.Boolean(System.Int64)",
       "generatedMethodId": "TryGetInt64_27_long_0"
     },
     {
-      "index": 199,
+      "index": 202,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonReader::TryGetInt64:System.Boolean(System.Int64)",
       "generatedMethodId": "TryGetInt64_27_long_1"
     },
     {
-      "index": 200,
+      "index": 203,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonReader::TryGetUInt16:System.Boolean(System.UInt16)",
       "generatedMethodId": "TryGetUInt16_28_ushort_0"
     },
     {
-      "index": 201,
+      "index": 204,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonReader::TryGetUInt16:System.Boolean(System.UInt16)",
       "generatedMethodId": "TryGetUInt16_28_ushort_1"
     },
     {
-      "index": 202,
+      "index": 205,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonReader::TryGetUInt32:System.Boolean(System.UInt32)",
       "generatedMethodId": "TryGetUInt32_29_uint_0"
     },
     {
-      "index": 203,
+      "index": 206,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonReader::TryGetUInt32:System.Boolean(System.UInt32)",
       "generatedMethodId": "TryGetUInt32_29_uint_1"
     },
     {
-      "index": 204,
+      "index": 207,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonReader::TryGetUInt64:System.Boolean(System.UInt64)",
       "generatedMethodId": "TryGetUInt64_30_ulong_0"
     },
     {
-      "index": 205,
+      "index": 208,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonReader::TryGetUInt64:System.Boolean(System.UInt64)",
       "generatedMethodId": "TryGetUInt64_30_ulong_1"
     },
     {
-      "index": 206,
+      "index": 209,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonReader::TryGetSingle:System.Boolean(System.Single)",
       "generatedMethodId": "TryGetSingle_31_float_0"
     },
     {
-      "index": 207,
+      "index": 210,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonReader::TryGetSingle:System.Boolean(System.Single)",
       "generatedMethodId": "TryGetSingle_31_float_1"
     },
     {
-      "index": 208,
+      "index": 211,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonReader::TryGetDouble:System.Boolean(System.Double)",
       "generatedMethodId": "TryGetDouble_32_double_0"
     },
     {
-      "index": 209,
+      "index": 212,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonReader::TryGetDouble:System.Boolean(System.Double)",
       "generatedMethodId": "TryGetDouble_32_double_1"
     },
     {
-      "index": 210,
+      "index": 213,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonReader::TryGetDecimal:System.Boolean(System.Decimal)",
       "generatedMethodId": "TryGetDecimal_33_decimal_0"
     },
     {
-      "index": 211,
+      "index": 214,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonReader::TryGetDecimal:System.Boolean(System.Decimal)",
       "generatedMethodId": "TryGetDecimal_33_decimal_1"
     },
     {
-      "index": 212,
+      "index": 215,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonReader::TryGetDateTime:System.Boolean(System.DateTime)",
       "generatedMethodId": "TryGetDateTime_34_System_DateTime_0"
     },
     {
-      "index": 213,
+      "index": 216,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonReader::TryGetDateTimeOffset:System.Boolean(System.DateTimeOffset)",
       "generatedMethodId": "TryGetDateTimeOffset_35_System_DateTimeOffset_0"
     },
     {
-      "index": 214,
+      "index": 217,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonReader::TryGetGuid:System.Boolean(System.Guid)",
       "generatedMethodId": "TryGetGuid_36_System_Guid_0"
     },
     {
-      "index": 215,
+      "index": 218,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::Reset:System.Void(System.IO.Stream)",
       "generatedMethodId": "Reset_0_Stream_0"
     },
     {
-      "index": 216,
+      "index": 219,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::Reset:System.Void(System.IO.Stream)",
       "generatedMethodId": "Reset_0_Stream_1"
     },
     {
-      "index": 217,
+      "index": 220,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::Reset:System.Void(System.Buffers.IBufferWriter<System.Byte>)",
       "generatedMethodId": "Reset_1_IBufferWriterbyte_0"
     },
     {
-      "index": 218,
+      "index": 221,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::Reset:System.Void(System.Buffers.IBufferWriter<System.Byte>)",
       "generatedMethodId": "Reset_1_IBufferWriterbyte_1"
     },
     {
-      "index": 219,
+      "index": 222,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::Flush:System.Void()",
       "generatedMethodId": "Flush_2__0"
     },
     {
-      "index": 220,
+      "index": 223,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::Dispose:System.Void()",
       "generatedMethodId": "Dispose_3__0"
     },
     {
-      "index": 221,
+      "index": 224,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::DisposeAsync:System.Threading.Tasks.ValueTask()",
       "generatedMethodId": "DisposeAsync_4__0"
     },
     {
-      "index": 222,
+      "index": 225,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::FlushAsync:System.Threading.Tasks.Task(System.Threading.CancellationToken)",
       "generatedMethodId": "FlushAsync_5_CancellationToken_0"
     },
     {
-      "index": 223,
+      "index": 226,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteStartArray:System.Void()",
       "generatedMethodId": "WriteStartArray_6__0"
     },
     {
-      "index": 224,
+      "index": 227,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteStartObject:System.Void()",
       "generatedMethodId": "WriteStartObject_7__0"
     },
     {
-      "index": 225,
+      "index": 228,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteStartArray:System.Void(System.Text.Json.JsonEncodedText)",
       "generatedMethodId": "WriteStartArray_8_JsonEncodedText_0"
     },
     {
-      "index": 226,
+      "index": 229,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteStartObject:System.Void(System.Text.Json.JsonEncodedText)",
       "generatedMethodId": "WriteStartObject_9_JsonEncodedText_0"
     },
     {
-      "index": 227,
+      "index": 230,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteStartArray:System.Void(System.String)",
       "generatedMethodId": "WriteStartArray_10_string_0"
     },
     {
-      "index": 228,
+      "index": 231,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteStartArray:System.Void(System.String)",
       "generatedMethodId": "WriteStartArray_10_string_1"
     },
     {
-      "index": 229,
+      "index": 232,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteStartObject:System.Void(System.String)",
       "generatedMethodId": "WriteStartObject_11_string_0"
     },
     {
-      "index": 230,
+      "index": 233,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteStartObject:System.Void(System.String)",
       "generatedMethodId": "WriteStartObject_11_string_1"
     },
     {
-      "index": 231,
+      "index": 234,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteEndArray:System.Void()",
       "generatedMethodId": "WriteEndArray_12__0"
     },
     {
-      "index": 232,
+      "index": 235,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteEndObject:System.Void()",
       "generatedMethodId": "WriteEndObject_13__0"
     },
     {
-      "index": 233,
+      "index": 236,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteString:System.Void(System.Text.Json.JsonEncodedText,System.DateTime)",
       "generatedMethodId": "WriteString_14_JsonEncodedText_System_DateTime_0"
     },
     {
-      "index": 234,
+      "index": 237,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteString:System.Void(System.String,System.DateTime)",
       "generatedMethodId": "WriteString_15_string_System_DateTime_0"
     },
     {
-      "index": 235,
+      "index": 238,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteString:System.Void(System.String,System.DateTime)",
       "generatedMethodId": "WriteString_15_string_System_DateTime_1"
     },
     {
-      "index": 236,
+      "index": 239,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteString:System.Void(System.Text.Json.JsonEncodedText,System.DateTimeOffset)",
       "generatedMethodId": "WriteString_16_JsonEncodedText_System_DateTimeOffset_0"
     },
     {
-      "index": 237,
+      "index": 240,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteString:System.Void(System.String,System.DateTimeOffset)",
       "generatedMethodId": "WriteString_17_string_System_DateTimeOffset_0"
     },
     {
-      "index": 238,
+      "index": 241,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteString:System.Void(System.String,System.DateTimeOffset)",
       "generatedMethodId": "WriteString_17_string_System_DateTimeOffset_1"
     },
     {
-      "index": 239,
+      "index": 242,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteNumber:System.Void(System.Text.Json.JsonEncodedText,System.Decimal)",
       "generatedMethodId": "WriteNumber_18_JsonEncodedText_decimal_0"
     },
     {
-      "index": 240,
+      "index": 243,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteNumber:System.Void(System.Text.Json.JsonEncodedText,System.Decimal)",
       "generatedMethodId": "WriteNumber_18_JsonEncodedText_decimal_1"
     },
     {
-      "index": 241,
+      "index": 244,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteNumber:System.Void(System.String,System.Decimal)",
       "generatedMethodId": "WriteNumber_19_string_decimal_0"
     },
     {
-      "index": 242,
+      "index": 245,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteNumber:System.Void(System.String,System.Decimal)",
       "generatedMethodId": "WriteNumber_19_string_decimal_1"
     },
     {
-      "index": 243,
+      "index": 246,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteNumber:System.Void(System.String,System.Decimal)",
       "generatedMethodId": "WriteNumber_19_string_decimal_2"
     },
     {
-      "index": 244,
+      "index": 247,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteNumber:System.Void(System.Text.Json.JsonEncodedText,System.Double)",
       "generatedMethodId": "WriteNumber_20_JsonEncodedText_double_0"
     },
     {
-      "index": 245,
+      "index": 248,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteNumber:System.Void(System.Text.Json.JsonEncodedText,System.Double)",
       "generatedMethodId": "WriteNumber_20_JsonEncodedText_double_1"
     },
     {
-      "index": 246,
+      "index": 249,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteNumber:System.Void(System.String,System.Double)",
       "generatedMethodId": "WriteNumber_21_string_double_0"
     },
     {
-      "index": 247,
+      "index": 250,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteNumber:System.Void(System.String,System.Double)",
       "generatedMethodId": "WriteNumber_21_string_double_1"
     },
     {
-      "index": 248,
+      "index": 251,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteNumber:System.Void(System.String,System.Double)",
       "generatedMethodId": "WriteNumber_21_string_double_2"
     },
     {
-      "index": 249,
+      "index": 252,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteNumber:System.Void(System.Text.Json.JsonEncodedText,System.Single)",
       "generatedMethodId": "WriteNumber_22_JsonEncodedText_float_0"
     },
     {
-      "index": 250,
+      "index": 253,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteNumber:System.Void(System.Text.Json.JsonEncodedText,System.Single)",
       "generatedMethodId": "WriteNumber_22_JsonEncodedText_float_1"
     },
     {
-      "index": 251,
+      "index": 254,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteNumber:System.Void(System.String,System.Single)",
       "generatedMethodId": "WriteNumber_23_string_float_0"
     },
     {
-      "index": 252,
+      "index": 255,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteNumber:System.Void(System.String,System.Single)",
       "generatedMethodId": "WriteNumber_23_string_float_1"
     },
     {
-      "index": 253,
+      "index": 256,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteNumber:System.Void(System.String,System.Single)",
       "generatedMethodId": "WriteNumber_23_string_float_2"
     },
     {
-      "index": 254,
+      "index": 257,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteString:System.Void(System.Text.Json.JsonEncodedText,System.Guid)",
       "generatedMethodId": "WriteString_24_JsonEncodedText_System_Guid_0"
     },
     {
-      "index": 255,
+      "index": 258,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteString:System.Void(System.String,System.Guid)",
       "generatedMethodId": "WriteString_25_string_System_Guid_0"
     },
     {
-      "index": 256,
+      "index": 259,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteString:System.Void(System.String,System.Guid)",
       "generatedMethodId": "WriteString_25_string_System_Guid_1"
     },
     {
-      "index": 257,
+      "index": 260,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteNull:System.Void(System.Text.Json.JsonEncodedText)",
       "generatedMethodId": "WriteNull_26_JsonEncodedText_0"
     },
     {
-      "index": 258,
+      "index": 261,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteNull:System.Void(System.String)",
       "generatedMethodId": "WriteNull_27_string_0"
     },
     {
-      "index": 259,
+      "index": 262,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteNull:System.Void(System.String)",
       "generatedMethodId": "WriteNull_27_string_1"
     },
     {
-      "index": 260,
+      "index": 263,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteBoolean:System.Void(System.Text.Json.JsonEncodedText,System.Boolean)",
       "generatedMethodId": "WriteBoolean_28_JsonEncodedText_bool_0"
     },
     {
-      "index": 261,
+      "index": 264,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteBoolean:System.Void(System.Text.Json.JsonEncodedText,System.Boolean)",
       "generatedMethodId": "WriteBoolean_28_JsonEncodedText_bool_1"
     },
     {
-      "index": 262,
+      "index": 265,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteBoolean:System.Void(System.String,System.Boolean)",
       "generatedMethodId": "WriteBoolean_29_string_bool_0"
     },
     {
-      "index": 263,
+      "index": 266,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteBoolean:System.Void(System.String,System.Boolean)",
       "generatedMethodId": "WriteBoolean_29_string_bool_1"
     },
     {
-      "index": 264,
+      "index": 267,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteBoolean:System.Void(System.String,System.Boolean)",
       "generatedMethodId": "WriteBoolean_29_string_bool_2"
     },
     {
-      "index": 265,
+      "index": 268,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteNumber:System.Void(System.Text.Json.JsonEncodedText,System.Int64)",
       "generatedMethodId": "WriteNumber_30_JsonEncodedText_long_0"
     },
     {
-      "index": 266,
+      "index": 269,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteNumber:System.Void(System.Text.Json.JsonEncodedText,System.Int64)",
       "generatedMethodId": "WriteNumber_30_JsonEncodedText_long_1"
     },
     {
-      "index": 267,
+      "index": 270,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteNumber:System.Void(System.String,System.Int64)",
       "generatedMethodId": "WriteNumber_31_string_long_0"
     },
     {
-      "index": 268,
+      "index": 271,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteNumber:System.Void(System.String,System.Int64)",
       "generatedMethodId": "WriteNumber_31_string_long_1"
     },
     {
-      "index": 269,
+      "index": 272,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteNumber:System.Void(System.String,System.Int64)",
       "generatedMethodId": "WriteNumber_31_string_long_2"
     },
     {
-      "index": 270,
+      "index": 273,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteNumber:System.Void(System.Text.Json.JsonEncodedText,System.Int32)",
       "generatedMethodId": "WriteNumber_32_JsonEncodedText_int_0"
     },
     {
-      "index": 271,
+      "index": 274,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteNumber:System.Void(System.Text.Json.JsonEncodedText,System.Int32)",
       "generatedMethodId": "WriteNumber_32_JsonEncodedText_int_1"
     },
     {
-      "index": 272,
+      "index": 275,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteNumber:System.Void(System.String,System.Int32)",
       "generatedMethodId": "WriteNumber_33_string_int_0"
     },
     {
-      "index": 273,
+      "index": 276,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteNumber:System.Void(System.String,System.Int32)",
       "generatedMethodId": "WriteNumber_33_string_int_1"
     },
     {
-      "index": 274,
+      "index": 277,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteNumber:System.Void(System.String,System.Int32)",
       "generatedMethodId": "WriteNumber_33_string_int_2"
     },
     {
-      "index": 275,
+      "index": 278,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WritePropertyName:System.Void(System.Text.Json.JsonEncodedText)",
       "generatedMethodId": "WritePropertyName_34_JsonEncodedText_0"
     },
     {
-      "index": 276,
+      "index": 279,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WritePropertyName:System.Void(System.String)",
       "generatedMethodId": "WritePropertyName_35_string_0"
     },
     {
-      "index": 277,
+      "index": 280,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WritePropertyName:System.Void(System.String)",
       "generatedMethodId": "WritePropertyName_35_string_1"
     },
     {
-      "index": 278,
+      "index": 281,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteString:System.Void(System.Text.Json.JsonEncodedText,System.Text.Json.JsonEncodedText)",
       "generatedMethodId": "WriteString_36_JsonEncodedText_JsonEncodedText_0"
     },
     {
-      "index": 279,
+      "index": 282,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteString:System.Void(System.String,System.Text.Json.JsonEncodedText)",
       "generatedMethodId": "WriteString_37_string_JsonEncodedText_0"
     },
     {
-      "index": 280,
+      "index": 283,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteString:System.Void(System.String,System.Text.Json.JsonEncodedText)",
       "generatedMethodId": "WriteString_37_string_JsonEncodedText_1"
     },
     {
-      "index": 281,
+      "index": 284,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteString:System.Void(System.String,System.String)",
       "generatedMethodId": "WriteString_38_string_string_0"
     },
     {
-      "index": 282,
+      "index": 285,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteString:System.Void(System.String,System.String)",
       "generatedMethodId": "WriteString_38_string_string_1"
     },
     {
-      "index": 283,
+      "index": 286,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteString:System.Void(System.String,System.String)",
       "generatedMethodId": "WriteString_38_string_string_2"
     },
     {
-      "index": 284,
+      "index": 287,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteString:System.Void(System.Text.Json.JsonEncodedText,System.String)",
       "generatedMethodId": "WriteString_39_JsonEncodedText_string_0"
     },
     {
-      "index": 285,
+      "index": 288,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteString:System.Void(System.Text.Json.JsonEncodedText,System.String)",
       "generatedMethodId": "WriteString_39_JsonEncodedText_string_1"
     },
     {
-      "index": 286,
+      "index": 289,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteNumber:System.Void(System.Text.Json.JsonEncodedText,System.UInt64)",
       "generatedMethodId": "WriteNumber_40_JsonEncodedText_ulong_0"
     },
     {
-      "index": 287,
+      "index": 290,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteNumber:System.Void(System.Text.Json.JsonEncodedText,System.UInt64)",
       "generatedMethodId": "WriteNumber_40_JsonEncodedText_ulong_1"
     },
     {
-      "index": 288,
+      "index": 291,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteNumber:System.Void(System.String,System.UInt64)",
       "generatedMethodId": "WriteNumber_41_string_ulong_0"
     },
     {
-      "index": 289,
+      "index": 292,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteNumber:System.Void(System.String,System.UInt64)",
       "generatedMethodId": "WriteNumber_41_string_ulong_1"
     },
     {
-      "index": 290,
+      "index": 293,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteNumber:System.Void(System.String,System.UInt64)",
       "generatedMethodId": "WriteNumber_41_string_ulong_2"
     },
     {
-      "index": 291,
+      "index": 294,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteNumber:System.Void(System.Text.Json.JsonEncodedText,System.UInt32)",
       "generatedMethodId": "WriteNumber_42_JsonEncodedText_uint_0"
     },
     {
-      "index": 292,
+      "index": 295,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteNumber:System.Void(System.Text.Json.JsonEncodedText,System.UInt32)",
       "generatedMethodId": "WriteNumber_42_JsonEncodedText_uint_1"
     },
     {
-      "index": 293,
+      "index": 296,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteNumber:System.Void(System.String,System.UInt32)",
       "generatedMethodId": "WriteNumber_43_string_uint_0"
     },
     {
-      "index": 294,
+      "index": 297,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteNumber:System.Void(System.String,System.UInt32)",
       "generatedMethodId": "WriteNumber_43_string_uint_1"
     },
     {
-      "index": 295,
+      "index": 298,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteNumber:System.Void(System.String,System.UInt32)",
       "generatedMethodId": "WriteNumber_43_string_uint_2"
     },
     {
-      "index": 296,
+      "index": 299,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteCommentValue:System.Void(System.String)",
       "generatedMethodId": "WriteCommentValue_44_string_0"
     },
     {
-      "index": 297,
+      "index": 300,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteCommentValue:System.Void(System.String)",
       "generatedMethodId": "WriteCommentValue_44_string_1"
     },
     {
-      "index": 298,
+      "index": 301,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteStringValue:System.Void(System.DateTime)",
       "generatedMethodId": "WriteStringValue_45_System_DateTime_0"
     },
     {
-      "index": 299,
+      "index": 302,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteStringValue:System.Void(System.DateTimeOffset)",
       "generatedMethodId": "WriteStringValue_46_System_DateTimeOffset_0"
     },
     {
-      "index": 300,
+      "index": 303,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteNumberValue:System.Void(System.Decimal)",
       "generatedMethodId": "WriteNumberValue_47_decimal_0"
     },
     {
-      "index": 301,
+      "index": 304,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteNumberValue:System.Void(System.Decimal)",
       "generatedMethodId": "WriteNumberValue_47_decimal_1"
     },
     {
-      "index": 302,
+      "index": 305,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteNumberValue:System.Void(System.Double)",
       "generatedMethodId": "WriteNumberValue_48_double_0"
     },
     {
-      "index": 303,
+      "index": 306,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteNumberValue:System.Void(System.Double)",
       "generatedMethodId": "WriteNumberValue_48_double_1"
     },
     {
-      "index": 304,
+      "index": 307,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteNumberValue:System.Void(System.Single)",
       "generatedMethodId": "WriteNumberValue_49_float_0"
     },
     {
-      "index": 305,
+      "index": 308,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteNumberValue:System.Void(System.Single)",
       "generatedMethodId": "WriteNumberValue_49_float_1"
     },
     {
-      "index": 306,
+      "index": 309,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteStringValue:System.Void(System.Guid)",
       "generatedMethodId": "WriteStringValue_50_System_Guid_0"
     },
     {
-      "index": 307,
+      "index": 310,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteNullValue:System.Void()",
       "generatedMethodId": "WriteNullValue_51__0"
     },
     {
-      "index": 308,
+      "index": 311,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteBooleanValue:System.Void(System.Boolean)",
       "generatedMethodId": "WriteBooleanValue_52_bool_0"
     },
     {
-      "index": 309,
+      "index": 312,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteBooleanValue:System.Void(System.Boolean)",
       "generatedMethodId": "WriteBooleanValue_52_bool_1"
     },
     {
-      "index": 310,
+      "index": 313,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteRawValue:System.Void(System.String,System.Boolean)",
       "generatedMethodId": "WriteRawValue_53_string_bool_0"
     },
     {
-      "index": 311,
+      "index": 314,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteRawValue:System.Void(System.String,System.Boolean)",
       "generatedMethodId": "WriteRawValue_53_string_bool_1"
     },
     {
-      "index": 312,
+      "index": 315,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteRawValue:System.Void(System.String,System.Boolean)",
       "generatedMethodId": "WriteRawValue_53_string_bool_2"
     },
     {
-      "index": 313,
+      "index": 316,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteRawValue:System.Void(System.Buffers.ReadOnlySequence<System.Byte>,System.Boolean)",
       "generatedMethodId": "WriteRawValue_54_ReadOnlySequencebyte_bool_0"
     },
     {
-      "index": 314,
+      "index": 317,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteRawValue:System.Void(System.Buffers.ReadOnlySequence<System.Byte>,System.Boolean)",
       "generatedMethodId": "WriteRawValue_54_ReadOnlySequencebyte_bool_1"
     },
     {
-      "index": 315,
+      "index": 318,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteNumberValue:System.Void(System.Int32)",
       "generatedMethodId": "WriteNumberValue_55_int_0"
     },
     {
-      "index": 316,
+      "index": 319,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteNumberValue:System.Void(System.Int32)",
       "generatedMethodId": "WriteNumberValue_55_int_1"
     },
     {
-      "index": 317,
+      "index": 320,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteNumberValue:System.Void(System.Int64)",
       "generatedMethodId": "WriteNumberValue_56_long_0"
     },
     {
-      "index": 318,
+      "index": 321,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteNumberValue:System.Void(System.Int64)",
       "generatedMethodId": "WriteNumberValue_56_long_1"
     },
     {
-      "index": 319,
+      "index": 322,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteStringValue:System.Void(System.Text.Json.JsonEncodedText)",
       "generatedMethodId": "WriteStringValue_57_JsonEncodedText_0"
     },
     {
-      "index": 320,
+      "index": 323,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteStringValue:System.Void(System.String)",
       "generatedMethodId": "WriteStringValue_58_string_0"
     },
     {
-      "index": 321,
+      "index": 324,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteStringValue:System.Void(System.String)",
       "generatedMethodId": "WriteStringValue_58_string_1"
     },
     {
-      "index": 322,
+      "index": 325,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteNumberValue:System.Void(System.UInt32)",
       "generatedMethodId": "WriteNumberValue_59_uint_0"
     },
     {
-      "index": 323,
+      "index": 326,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteNumberValue:System.Void(System.UInt32)",
       "generatedMethodId": "WriteNumberValue_59_uint_1"
     },
     {
-      "index": 324,
+      "index": 327,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteNumberValue:System.Void(System.UInt64)",
       "generatedMethodId": "WriteNumberValue_60_ulong_0"
     },
     {
-      "index": 325,
+      "index": 328,
       "kind": "benchmark",
       "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteNumberValue:System.Void(System.UInt64)",
       "generatedMethodId": "WriteNumberValue_60_ulong_1"
