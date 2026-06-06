@@ -276,6 +276,18 @@ CHAOS_IL2CPP_UINT64 ChaosBitOpsRoundUpToPowerOf264(CHAOS_IL2CPP_UINT64 value) no
 #endif
 }
 
+// ═══════════════════════════════════════════════════════════════
+// IsPow2 stubs
+// ═══════════════════════════════════════════════════════════════
+CHAOS_IL2CPP_INT32 ChaosBitOpsIsPow232(CHAOS_IL2CPP_UINT32 value) noexcept
+{
+    return value != 0 && (value & (value - 1)) == 0 ? 1 : 0;
+}
+
+CHAOS_IL2CPP_INT32 ChaosBitOpsIsPow264(CHAOS_IL2CPP_UINT64 value) noexcept
+{
+    return value != 0 && (value & (value - 1)) == 0 ? 1 : 0;
+}
 
 CHAOS_IL2CPP_FLOAT64 ChaosMathExp(CHAOS_IL2CPP_FLOAT64 x) noexcept
 {
