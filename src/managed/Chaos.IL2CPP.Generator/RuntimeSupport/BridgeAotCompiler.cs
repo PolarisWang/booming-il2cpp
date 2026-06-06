@@ -468,18 +468,23 @@ public sealed class BridgeAotCompiler
             if (File.Exists(cand)) { _assemblyCache[assemblyName] = cand; return cand; }
         }
 
-        // Search the subjects directory (alongside CombinedSubjects.dll)
-        // for test framework DLLs like Chaos.TestFramework.Sdk.
+        // Search the subjects directory alongside CombinedSubjects.dll for test framework DLLs.
         var baseDir = AppContext.BaseDirectory;
         if (baseDir != null)
         {
-            var subjectsDir = Path.Combine(baseDir, "..", "..", "..", "..", "..",
-                "foundation-dll", "System.Text.Json", "chunks", "text-json", "managed", "subjects");
-            var fullDir = Path.GetFullPath(subjectsDir);
-            if (Directory.Exists(fullDir))
+            // Try multiple relative paths from the TPG output directory
+            // (src/tools/Chaos.IL2CPP.Tools.TestProjectGenerator/bin/Debug/net8.0/)
+            foreach (var relPath in new[] {
+                Path.Combine("..", "..", "..", "..", "..", "..", "testing", "foundation-dll", "System.Text.Json", "chunks", "text-json", "managed", "subjects"),
+                Path.Combine("..", "..", "..", "..", "..", "testing", "foundation-dll", "System.Text.Json", "chunks", "text-json", "managed", "subjects"),
+            })
             {
-                var cand = Path.Combine(fullDir, $"{assemblyName}.dll");
-                if (File.Exists(cand)) { _assemblyCache[assemblyName] = cand; return cand; }
+                var fullDir = Path.GetFullPath(Path.Combine(baseDir, relPath));
+                if (Directory.Exists(fullDir))
+                {
+                    var cand = Path.Combine(fullDir, $"{assemblyName}.dll");
+                    if (File.Exists(cand)) { _assemblyCache[assemblyName] = cand; return cand; }
+                }
             }
         }
 
