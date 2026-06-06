@@ -271,20 +271,18 @@ public static class BridgeMethodBodyEmitter
             else if (op == "ldfld")
             {
                 var obj = Pop(stack);
-                var fieldId = inst.Callee ?? "";
+                var fieldId = inst.Reference?.SubjectId ?? inst.Callee ?? "";
                 var tmp = Tmp();
-                // Instance field read using field SubjectId hash for offset (simplified)
-                var fieldHash = fieldId.Length > 0 ? $"_fld{HashSubjectId(fieldId):X4}" : "";
+                var fieldHash = fieldId.Length > 0 ? $"_fld_{HashSubjectId(fieldId):X4}" : "";
                 sb.AppendLine($"{ind}CHAOS_IL2CPP_INTPTR {tmp} = *reinterpret_cast<CHAOS_IL2CPP_INTPTR*>({obj}){fieldHash};");
                 stack.Add(tmp);
             }
             // ── ldsfld ──
             else if (op == "ldsfld")
             {
-                var fieldId = inst.Callee ?? "";
+                var fieldId = inst.Reference?.SubjectId ?? inst.Callee ?? "";
                 var fieldHash = fieldId.Length > 0 ? $"_sfld_{HashSubjectId(fieldId):X4}" : "";
                 var tmp = Tmp();
-                // Static field via extern global (filled at runtime by registration)
                 sb.AppendLine($"{ind}extern CHAOS_IL2CPP_INTPTR {fieldHash};");
                 sb.AppendLine($"{ind}CHAOS_IL2CPP_INTPTR {tmp} = {fieldHash};");
                 stack.Add(tmp);
@@ -293,7 +291,7 @@ public static class BridgeMethodBodyEmitter
             else if (op == "stfld")
             {
                 var val = Pop(stack); var obj = Pop(stack);
-                var fieldId = inst.Callee ?? "";
+                var fieldId = inst.Reference?.SubjectId ?? inst.Callee ?? "";
                 var fieldHash = fieldId.Length > 0 ? $"_fld_{HashSubjectId(fieldId):X4}" : "";
                 sb.AppendLine($"{ind}*reinterpret_cast<CHAOS_IL2CPP_INTPTR*>({obj}){fieldHash} = {val};");
             }

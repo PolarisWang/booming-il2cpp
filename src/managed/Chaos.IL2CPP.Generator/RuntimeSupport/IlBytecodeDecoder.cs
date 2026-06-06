@@ -94,6 +94,22 @@ internal static class IlBytecodeDecoder
                             });
                             continue;
                         }
+                        // Resolve field SubjectId for field-bearing instructions (ldfld, stsfld, etc.)
+                        if (IsFieldInstruction(name))
+                        {
+                            var fieldId = ResolveToken(reader, assemblyName, token);
+                            list.Add(new ManagedInstructionModel
+                            {
+                                Op = name, Operand = token, IlOffset = baseOffset + start,
+                                Reference = new ManagedInstructionReference
+                                {
+                                    AssemblyName = assemblyName,
+                                    SubjectKind = "field",
+                                    SubjectId = fieldId.SubjectId,
+                                },
+                            });
+                            continue;
+                        }
                         operand = token; break;
                     }
                     operand = token; break;
@@ -157,6 +173,7 @@ internal static class IlBytecodeDecoder
 
     static bool IsMethodInstruction(string op) => op is "call" or "callvirt" or "newobj" or "ldftn" or "ldvirtftn";
     static bool IsTypeInstruction(string op) => op is "box" or "newarr" or "isinst" or "castclass" or "unbox" or "unbox.any";
+    static bool IsFieldInstruction(string op) => op is "ldfld" or "stfld" or "ldsfld" or "stsfld" or "ldflda";
 
     private static string ResolveTypeToken(MetadataReader reader, string assemblyName, int token)
     {
