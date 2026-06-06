@@ -202,12 +202,16 @@ def _build_patch_dll(patch_output: Path, patch_dll: Path, target_dll: Path | Non
                   / "Chaos.TestFramework.Sdk.csproj")
     ref_block = ""
     if target_dll is not None:
-        # Reference the target DLL so patch code can resolve types
-        # (e.g. SseItem<>, IPAddress, etc.) from the source assembly.
-        ref_block = (
-            f"    <Reference Include=\"{target_dll.stem}\">\n"
-            f"      <HintPath>{target_dll}</HintPath>\n"
-            "    </Reference>\n"
+        # Don't reference System.Private.CoreLib — it's already implicitly
+        # referenced by the SDK's TFM.  Adding an explicit <Reference> to
+        # it causes CS0518 (predefined type 'System.Int64' not found).
+        if target_dll.stem != "System.Private.CoreLib":
+            # Reference the target DLL so patch code can resolve types
+            # (e.g. SseItem<>, IPAddress, etc.) from the source assembly.
+            ref_block = (
+                f"    <Reference Include=\"{target_dll.stem}\">\n"
+                f"      <HintPath>{target_dll}</HintPath>\n"
+                "    </Reference>\n"
         )
     csproj = patch_dll.parent / "PatchSubjects.csproj"
     csproj.write_text(
