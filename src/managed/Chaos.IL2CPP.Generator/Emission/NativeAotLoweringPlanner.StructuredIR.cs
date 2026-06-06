@@ -139,6 +139,7 @@ public sealed partial class NativeAotLoweringPlanner
     private sealed class StructuredSlotEmissionContext
     {
         private int _depth;
+        private int _peakWideDepth;
         private int _peakIntDepth;
         private int _peakFloat64Depth;
         private int _peakFloat32Depth;
@@ -149,6 +150,7 @@ public sealed partial class NativeAotLoweringPlanner
         public int Depth => _depth;
         public int MaxIntSlots => _peakIntDepth;
         public int MaxFloat64Slots => _peakFloat64Depth;
+        public int MaxWideSlots => _peakWideDepth;
         public int MaxFloat32Slots => _peakFloat32Depth;
         public int MaxInt64Slots => _peakInt64Depth;
 
@@ -161,6 +163,7 @@ public sealed partial class NativeAotLoweringPlanner
                 SlotType.Float64 => FormatDoubleSlotName(_depth),
                 SlotType.Float32 => FormatFloatSlotName(_depth),
                 SlotType.Int64 => FormatInt64SlotName(_depth),
+                SlotType.WideValue => FormatWideSlotName(_peakWideDepth),
                 _ => FormatStructuredSlotName(_depth),
             };
             // Track peak depth per type (depth+1 because depth is pre-push)
@@ -168,13 +171,29 @@ public sealed partial class NativeAotLoweringPlanner
             if (type == SlotType.Float64) _peakFloat64Depth = Math.Max(_peakFloat64Depth, newDepth);
             else if (type == SlotType.Float32) _peakFloat32Depth = Math.Max(_peakFloat32Depth, newDepth);
             else if (type == SlotType.Int64) _peakInt64Depth = Math.Max(_peakInt64Depth, newDepth);
+            else if (type == SlotType.WideValue) _peakWideDepth = Math.Max(_peakWideDepth, _peakWideDepth + 1);
             else _peakIntDepth = Math.Max(_peakIntDepth, newDepth);
 
-            if (_depth < _slotInfo.Count)
-                _slotInfo[_depth] = (slotName, type);
+            if (type == SlotType.WideValue)
+            {
+                // WideValue uses WideValueSlotCount consecutive NativeInt slots
+                for (int i = 0; i < WideValueSlotCount; i++)
+                {
+                    if (_depth < _slotInfo.Count)
+                        _slotInfo[_depth] = (FormatStructuredSlotName(_depth), SlotType.NativeInt);
+                    else
+                        _slotInfo.Add((FormatStructuredSlotName(_depth), SlotType.NativeInt));
+                    _depth++;
+                }
+            }
             else
-                _slotInfo.Add((slotName, type));
-            _depth++;
+            {
+                if (_depth < _slotInfo.Count)
+                    _slotInfo[_depth] = (slotName, type);
+                else
+                    _slotInfo.Add((slotName, type));
+                _depth++;
+            }
             return slotName;
         }
 
@@ -238,6 +257,7 @@ public sealed partial class NativeAotLoweringPlanner
     private static string FormatStructuredSlotName(int slotIndex) => $"_s{slotIndex}";
     private static string FormatDoubleSlotName(int slotIndex) => $"_d{slotIndex}";
     private static string FormatFloatSlotName(int slotIndex) => $"_f{slotIndex}";
+    private static string FormatWideSlotName(int slotIndex) => $"_w{slotIndex}";
     private static string FormatInt64SlotName(int slotIndex) => $"_i{slotIndex}";
 
     private void EmitStructuredMethodReturn(StringBuilder builder, AotCoreIrAbiSlotArtifact returnAbi, string indentation)
@@ -351,7 +371,7 @@ public sealed partial class NativeAotLoweringPlanner
         _activeStructuredSlotContext.Discard(count);
     }
 
-    private static void EmitStructuredSlotDeclarations(StringBuilder builder, int maxIntSlots, int maxFloat64Slots, int maxFloat32Slots, int maxInt64Slots, string indentation)
+    private static void EmitStructuredSlotDeclarations(StringBuilder builder, int maxIntSlots, int maxFloat64Slots, int maxFloat32Slots, int maxInt64Slots, int maxWideSlots, string indentation)
     {
         for (int i = 0; i < maxIntSlots; i++)
             builder.AppendLine($"{indentation}CHAOS_IL2CPP_INTPTR {FormatStructuredSlotName(i)};");
@@ -361,6 +381,8 @@ public sealed partial class NativeAotLoweringPlanner
             builder.AppendLine($"{indentation}float {FormatFloatSlotName(i)};");
         for (int i = 0; i < maxInt64Slots; i++)
             builder.AppendLine($"{indentation}CHAOS_IL2CPP_INT64 {FormatInt64SlotName(i)};");
+        for (int i = 0; i < maxWideSlots; i++)
+            builder.AppendLine($"{indentation}alignas(16) uint8_t {FormatWideSlotName(i)}[16];");
     }
 
     // 鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€
