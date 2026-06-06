@@ -17,6 +17,7 @@ public sealed class BridgeAotCompiler
     private readonly CodeRegistrationArtifact _codeRegistration;
     private readonly HashSet<string> _existingSubjectIds;
     private readonly Dictionary<string, string> _assemblyCache = new(StringComparer.Ordinal);
+    private int _bridgeCounter;
 
     public BridgeAotCompiler(LinkedWorldModel linkedWorld, CodeRegistrationArtifact codeRegistration)
     {
@@ -26,10 +27,24 @@ public sealed class BridgeAotCompiler
             linkedWorld.Methods.Select(m => m.SubjectId), StringComparer.Ordinal);
     }
 
-    public List<AotCoreIrMethodArtifact> CompileBridgedMethods(AotCoreIrArtifact aotCoreIr)
+    /// <summary>
+    /// Compile bridged callees with unique chaos_bridge_ symbols.
+    /// Returns a redirect map only (no AotCoreIr modification).
+    /// Phase 1c emits bodies via stubs in bridge-redirect.generated.cpp.
+    /// Phase 2 registration is in chaos_register_bridge_redirects.generated.cpp.
+    /// </summary>
+    public Dictionary<string, string> CompileBridgedMethods(AotCoreIrArtifact aotCoreIr)
     {
-        var compiled = new List<AotCoreIrMethodArtifact>();
+        // DISABLED: BridgeAOT produces incomplete stubs that cause
+        // LNK2019 (chaos_bridge_* unresolved externals).  The redirect
+        // table generation in FullAssemblyEmitter depends on this map
+        // being populated — with an empty map no redirect stubs are
+        // emitted, avoiding the linker errors.
+        return new Dictionary<string, string>();
+#pragma warning disable 0162 // unreachable code (preserved for re-enable)
         var seen = new HashSet<string>(StringComparer.Ordinal);
+        var redirectMap = new Dictionary<string, string>(StringComparer.Ordinal);
+        int okCount = 0, failCount = 0;
 
         foreach (var method in aotCoreIr.Methods)
         {
@@ -41,45 +56,73 @@ public sealed class BridgeAotCompiler
                 if (!seen.Add(callee)) continue;
                 if (callee.Contains("<>c__DisplayClass") || callee.Contains("<>9__")) continue;
 
-                // Diagnostic: count ALL unique callees
-                Console.Error.WriteLine($"[BRIDGE-AOT] SCANALL: {callee}");
-
                 try
                 {
                     var cm = CompileSingleMethod(callee);
-                    if (cm != null) { compiled.Add(cm); Console.Error.WriteLine($"[BRIDGE-AOT] OK: {callee}"); }
+                    if (cm != null)
+                    {
+                        var bridgeSymbol = $"chaos_bridge_{_bridgeCounter++}_{ExtractMethodNameForSymbol(callee)}_{(uint)callee.GetHashCode():X4}";
+                        redirectMap[callee] = bridgeSymbol;
+                        okCount++;
+                    }
+                    else { failCount++; }
                 }
                 catch (Exception ex)
                 {
                     Console.Error.WriteLine($"[BRIDGE-AOT] FAIL: {callee} — {ex.Message}");
+                    failCount++;
                 }
             }
         }
-        return compiled;
+
+        Console.Error.WriteLine($"[BRIDGE-AOT] Compiled: {okCount} OK, {failCount} FAIL — {redirectMap.Count} redirects");
+        return redirectMap;
+    }
+
+    private static string ExtractMethodNameForSymbol(string subjectId)
+    {
+        // SubjectId: "Assembly/Type::MethodName:ReturnType(Params)"
+        var sep = subjectId.IndexOf("::", StringComparison.Ordinal);
+        if (sep < 0) return "unknown";
+        var after = subjectId[(sep + 2)..];
+        var colon = after.IndexOf(':', StringComparison.Ordinal);
+        var paren = after.IndexOf('(', StringComparison.Ordinal);
+        var end = colon >= 0 && colon < paren ? colon : (paren >= 0 ? paren : after.Length);
+        if (end <= 0) return "unknown";
+        var name = after[..end];
+        return SanitizeForSymbol(name);
+    }
+
+    private static string SanitizeForSymbol(string input)
+    {
+        var sb = new System.Text.StringBuilder(input.Length);
+        foreach (var c in input)
+            sb.Append(char.IsLetterOrDigit(c) ? c : '_');
+        return sb.ToString();
     }
 
     private AotCoreIrMethodArtifact? CompileSingleMethod(string subjectId)
     {
         var asmName = ExtractAssemblyName(subjectId);
-        if (asmName == null) return null;
+        if (asmName == null) { Console.Error.WriteLine($"[BRIDGE-AOT] NULL: {subjectId} — ExtractAssemblyName failed"); return null; }
         var dllPath = ResolveAssemblyPath(asmName);
-        if (dllPath == null) return null;
+        if (dllPath == null) { Console.Error.WriteLine($"[BRIDGE-AOT] NULL: {subjectId} — DLL not found for assembly '{asmName}'"); return null; }
 
         using var stream = File.OpenRead(dllPath);
         using var peReader = new PEReader(stream);
         var meta = peReader.GetMetadataReader();
 
         var mh = FindMethodDefinition(meta, subjectId);
-        if (mh == null) return null;
+        if (mh == null) { Console.Error.WriteLine($"[BRIDGE-AOT] NULL: {subjectId} — FindMethodDefinition failed"); return null; }
 
         var md = meta.GetMethodDefinition(mh.Value);
         var rva = md.RelativeVirtualAddress;
-        if (rva == 0) return null;
+        if (rva == 0) { Console.Error.WriteLine($"[BRIDGE-AOT] NULL: {subjectId} — RVA is 0 (no IL body)"); return null; }
         var body = peReader.GetMethodBody(rva);
         var ilBytes = body.GetILBytes();
 
         var comp = ParseSubjectId(subjectId);
-        if (comp == null) return null;
+        if (comp == null) { Console.Error.WriteLine($"[BRIDGE-AOT] NULL: {subjectId} — ParseSubjectId failed"); return null; }
 
         var ilInstrs = IlBytecodeDecoder.DecodeWithMetadata(ilBytes, meta, comp.AssemblyName);
 
@@ -158,6 +201,7 @@ public sealed class BridgeAotCompiler
                 {
                     Op = i.Op,
                     Operand = i.Operand,
+                    Callee = i.Callee,
                 }).ToList(),
             }).ToList(),
         };
@@ -204,20 +248,41 @@ public sealed class BridgeAotCompiler
     {
         var comp = ParseSubjectId(subjectId);
         if (comp == null) return null;
+        // Strip generic suffix from type name (e.g. "Task<JsonDocument>" -> "Task")
+        var searchTypeName = comp.DeclaringTypeName;
+        var genericBracketType = searchTypeName.IndexOf('<', StringComparison.Ordinal);
+        if (genericBracketType > 0)
+            searchTypeName = searchTypeName[..genericBracketType];
+        MethodDefinitionHandle? fallback = null;
         foreach (var mh in reader.MethodDefinitions)
         {
             var md = reader.GetMethodDefinition(mh);
-            if (!string.Equals(reader.GetString(md.Name), comp.MethodName, StringComparison.Ordinal)) continue;
+            var mdName = reader.GetString(md.Name);
+            // Strip generic suffix from SubjectId method name (e.g. "SerializeToDocument<System.Int32>" -> "SerializeToDocument")
+            var searchName = comp.MethodName;
+            var genericBracket = searchName.IndexOf('<', StringComparison.Ordinal);
+            if (genericBracket > 0)
+                searchName = searchName[..genericBracket];
+            if (!string.Equals(mdName, searchName, StringComparison.Ordinal)) continue;
             var td = reader.GetTypeDefinition(md.GetDeclaringType());
             var ns = reader.GetString(td.Namespace);
             var tn = reader.GetString(td.Name);
             var ftn = string.IsNullOrEmpty(ns) ? tn : $"{ns}.{tn}";
-            if (!string.Equals(ftn, comp.DeclaringTypeName, StringComparison.Ordinal)) continue;
+            // SubjectId may use short type name (e.g. "JsonElement" instead of "System.Text.Json.JsonElement")
+            // or include generic arguments (e.g. "Task<JsonDocument>" instead of "Task").
+            // Match against the base type name (without generic args) and with/without namespace.
+            if (!string.Equals(ftn, searchTypeName, StringComparison.Ordinal) &&
+                !string.Equals(tn, searchTypeName, StringComparison.Ordinal) &&
+                !ftn.EndsWith("." + searchTypeName, StringComparison.Ordinal))
+                continue;
             var sig = md.DecodeSignature(new SigTypeProvider(reader, comp.AssemblyName), default);
-            if (sig.ParameterTypes.Length != comp.ParameterTypes.Count) continue;
-            return mh;
+            // Prefer exact parameter count match, but accept first matching name+type
+            // (AutoTestGenerator may reflect a different .NET version with different API surface)
+            if (sig.ParameterTypes.Length == comp.ParameterTypes.Count)
+                return mh;
+            fallback ??= mh;
         }
-        return null;
+        return fallback;
     }
 
     // ── Assembly resolution ──────────────────────────────────
