@@ -47,6 +47,11 @@ extern "C" void* kChaosExternalRuntimeFnTable[];
 extern "C" const char* kChaosExternalRuntimeSubjects[];
 extern "C" int32_t kChaosExternalRuntimeCount;
 
+// ── ResolveBridge function pointer ───────────────────────────────
+// bridge-redirect.generated.cpp sets this to the real ResolveBridge.
+// Weak default (nullptr): no bridge redirect available.
+extern "C" void* (*ChaosBridgeRedirect)(const char* subjectId);
+
 // ── ChaosJitRegisterAll forward declaration ────────────────────────────────
 // Generated code defines this (no-op in AOT mode, registers JIT entries in JIT
 // mode).  Declared here so the host can call it unconditionally.
@@ -221,6 +226,15 @@ private:
 
             // Types (no "::" — just a type name like System.Int32) are not callable.
             if (std::strstr(sub, "::") == nullptr) continue;
+
+            // Phase 2: Check bridge redirect table. If a bridge-compiled version
+            // exists, use it instead of the interpreter fallback.
+            if (ChaosBridgeRedirect) {
+                if (auto* bridgeFn = ChaosBridgeRedirect(sub)) {
+                    kChaosExternalRuntimeFnTable[i] = bridgeFn;
+                    continue;
+                }
+            }
 
             // Known managed GC methods — wire real runtime implementations.
             if (std::strstr(sub, "System.GC::Collect:")) {
