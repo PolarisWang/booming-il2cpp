@@ -121,12 +121,28 @@ public sealed class CppProjectEmitter
                 TryDeleteFile(stale);
             foreach (var stale in Directory.GetFiles(subjectsDir, "*.h"))
                 TryDeleteFile(stale);
+            // Copy from GeneratedDirs first, then fallback to resolved codegen dir /generated/
+            bool copiedAny = false;
             foreach (var genDir in codegen.GeneratedDirs)
             {
+                copiedAny = true;
                 foreach (var file in Directory.GetFiles(genDir, "*.cpp"))
                     CopyWithRetry(file, Path.Combine(subjectsDir, Path.GetFileName(file)), overwrite: true);
                 foreach (var file in Directory.GetFiles(genDir, "*.h"))
                     CopyWithRetry(file, Path.Combine(subjectsDir, Path.GetFileName(file)), overwrite: true);
+            }
+            // Fallback: if GeneratedDirs didn't detect the codegen output (flat layout),
+            // copy directly from the codegen directory's generated/ subfolder.
+            if (!copiedAny)
+            {
+                var fallbackGen = Path.Combine(outputDir, "codegen", "generated");
+                if (Directory.Exists(fallbackGen))
+                {
+                    foreach (var file in Directory.GetFiles(fallbackGen, "*.cpp"))
+                        CopyWithRetry(file, Path.Combine(subjectsDir, Path.GetFileName(file)), overwrite: true);
+                    foreach (var file in Directory.GetFiles(fallbackGen, "*.h"))
+                        CopyWithRetry(file, Path.Combine(subjectsDir, Path.GetFileName(file)), overwrite: true);
+                }
             }
         }
 
