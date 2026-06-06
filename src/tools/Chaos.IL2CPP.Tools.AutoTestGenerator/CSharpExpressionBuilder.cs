@@ -119,6 +119,13 @@ public sealed class CSharpExpressionBuilder
             "new System.Security.AccessControl.CommonSecurityDescriptor(false, false, \"\")",
         ["System.Security.Policy.Evidence"] = "new System.Security.Policy.Evidence()",
         ["System.Security.Policy.EvidenceBase"] = "new System.Security.Policy.Evidence()",
+        // Globalization types — abstract/default(Calendar)! causes NRE
+        ["System.Globalization.Calendar"] = "new System.Globalization.GregorianCalendar()",
+        ["System.Globalization.CompareInfo"] = "System.Globalization.CultureInfo.InvariantCulture.CompareInfo",
+        ["System.Globalization.DateTimeFormatInfo"] = "System.Globalization.CultureInfo.InvariantCulture.DateTimeFormat",
+        ["System.Globalization.CultureInfo"] = "System.Globalization.CultureInfo.InvariantCulture",
+        ["System.Globalization.EastAsianLunisolarCalendar"] = "new System.Globalization.ChineseLunisolarCalendar()",
+        ["System.Globalization.ChineseLunisolarCalendar"] = "new System.Globalization.ChineseLunisolarCalendar()",
     };
 
     /// <summary>

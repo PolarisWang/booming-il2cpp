@@ -660,8 +660,6 @@ static int RunPatchMode(string dllPath, string? namespaceFilter, string? outputD
     sb.AppendLine("using System.Linq;");
     sb.AppendLine("using System.Linq.Expressions;");
     sb.AppendLine("using System.Net;");
-    sb.AppendLine("using System.Net.Http;");
-    sb.AppendLine("using System.Net.ServerSentEvents;");
     sb.AppendLine("using System.Net.Sockets;");
     sb.AppendLine("using System.Reflection;");
     sb.AppendLine("using System.Reflection.Emit;");
@@ -673,6 +671,10 @@ static int RunPatchMode(string dllPath, string? namespaceFilter, string? outputD
     sb.AppendLine("using System.Text.Json;");
     sb.AppendLine("using System.Text.Json.Serialization.Metadata;");
     sb.AppendLine("using Chaos.TestFramework;");
+
+    // Assembly-specific using directives (resolves types not in standard .NET)
+    if (string.Equals(assemblyName, "System.Net.ServerSentEvents", StringComparison.Ordinal))
+        sb.AppendLine("using System.Net.ServerSentEvents;");
     sb.AppendLine();
 
     var patchClassName = SanitizePath(assemblyName) + "PatchSubjects";

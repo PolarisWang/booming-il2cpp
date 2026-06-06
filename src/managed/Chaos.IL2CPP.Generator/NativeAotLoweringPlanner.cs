@@ -868,6 +868,31 @@ public sealed partial class NativeAotLoweringPlanner
         var objectModelBuilder = new StringBuilder(65536);
         EmitRuntimePrelude(objectModelBuilder, externalRuntimeHelpers, _staticFieldDataSupport);
         EmitObjectModelDeclarations(objectModelBuilder, methodsForLowering, externalRuntimeHelpers, metadataRegistration);
+        // Collect static field references from hotpatchable methods not in methodsForLowering.
+        // These methods appear in the hotpatch dispatch table but are not emitted as AOT code.
+        // Without extern declarations for their referenced static fields, the linker fails with
+        // C2065 (undefined symbol) when page files reference chaos_static_* symbols.
+        var loweredIds = new HashSet<string>(StringComparer.Ordinal);
+        foreach (var m in methodsForLowering)
+            if (m.SubjectId is { Length: > 0 } sid)
+                loweredIds.Add(sid);
+        foreach (var hotpatchMethod in GetHotpatchableMethods())
+        {
+            if (!loweredIds.Contains(hotpatchMethod.SubjectId))
+            {
+                if (hotpatchMethod.Instructions is null) continue;
+                foreach (var instr in hotpatchMethod.Instructions)
+                {
+                    if (instr?.TargetReference is { } targetRef &&
+                        targetRef.FieldTypeSubjectId is { Length: > 0 } ftsid &&
+                        !string.IsNullOrEmpty(targetRef.SubjectId))
+                    {
+                        _staticFieldDeclarations ??= new Dictionary<string, string?>(StringComparer.Ordinal);
+                        _staticFieldDeclarations.TryAdd(targetRef.SubjectId, ftsid);
+                    }
+                }
+            }
+        }
         // Phase 0: Collect ModuleRegistry Tier 0 type data from PE metadata
         CollectModuleTypeData(closureManifest.InputAssemblyPath);
         // Phase 1 string-id table via Scriban
