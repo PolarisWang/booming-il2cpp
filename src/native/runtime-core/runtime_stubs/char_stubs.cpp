@@ -75,7 +75,9 @@ CHAOS_IL2CPP_INT32 ChaosCharUnicodeInfoGetUnicodeCategory(CHAOS_IL2CPP_INT32 c) 
 // ═══════════════════════════════════════════════════════════════
 // ═══════════════════════════════════════════════════════════════
 // Binary search helper for sorted entry tables (codepoint → value)
+// (outside extern "C" — templates cannot have C linkage)
 // ═══════════════════════════════════════════════════════════════
+}  // extern "C"
 template<typename TEntry, typename TVal>
 static inline CHAOS_IL2CPP_INT32 LookupEntryBinary(const TEntry* table, CHAOS_IL2CPP_INT32 count, CHAOS_IL2CPP_UINT16 cp, TVal& out_val) noexcept
 {
@@ -90,6 +92,7 @@ static inline CHAOS_IL2CPP_INT32 LookupEntryBinary(const TEntry* table, CHAOS_IL
     return 0;
 }
 
+extern "C" {
 // ═══════════════════════════════════════════════════════════════
 // CharUnicodeInfo.GetNumericValue(char) — returns double as bits
 // ═══════════════════════════════════════════════════════════════
