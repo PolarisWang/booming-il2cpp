@@ -11,6 +11,7 @@
 #include "gc_region.h"
 #include "gc_stats.h"
 #include "gc_stress.h"
+#include "profile_stats.h"
 
 namespace chaos::il2cpp::runtime_core {
 namespace {
@@ -45,7 +46,12 @@ void* GcAllocateProfiled(CHAOS_IL2CPP_SIZE size) {
     }
 
     void* ptr = NurseryAllocate(size);
-    if (ptr) GcRecordAlloc(size, size > kMaxTlabAlloc);
+    if (ptr) {
+        GcRecordAlloc(size, size > kMaxTlabAlloc);
+        ProfileRecordNurseryAlloc(static_cast<int64_t>(size));
+        ProfileRecordAllocCount();
+        ProfileRecordFastPath();
+    }
     return ptr;
 }
 
@@ -60,7 +66,12 @@ void* GcAllocateAtomicProfiled(CHAOS_IL2CPP_SIZE size) {
     }
 
     void* ptr = NurseryAllocateAtomic(size);
-    if (ptr) GcRecordAlloc(size, size > kMaxTlabAlloc);
+    if (ptr) {
+        GcRecordAlloc(size, size > kMaxTlabAlloc);
+        ProfileRecordNurseryAlloc(static_cast<int64_t>(size));
+        ProfileRecordAllocCount();
+        ProfileRecordFastPath();
+    }
     return ptr;
 }
 
