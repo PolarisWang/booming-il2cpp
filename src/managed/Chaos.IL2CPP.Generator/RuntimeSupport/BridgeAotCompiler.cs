@@ -13,6 +13,12 @@ namespace Chaos.IL2CPP.Generator;
 
 public sealed class BridgeAotCompiler
 {
+    // Limit bridge-compiled callees to prevent heap corruption (0xC000037D)
+    // on large chunks. Small chunks compile all callees; large chunks cap
+    // at this limit to stay within the emitter's memory budget.
+    private const int MaxBridgeCallees = 50;
+    private int _bridgeCalleeCount;
+
     private readonly LinkedWorldModel _linkedWorld;
     private readonly CodeRegistrationArtifact _codeRegistration;
     private readonly HashSet<string> _existingSubjectIds;
@@ -37,9 +43,6 @@ public sealed class BridgeAotCompiler
     public (AotCoreIrArtifact UpdatedIr, Dictionary<string, string> RedirectMap) CompileAndIntegrate(
         AotCoreIrArtifact aotCoreIr)
     {
-        // LCAC: BridgeAOT disabled
-        return (aotCoreIr, new Dictionary<string, string>());
-#pragma warning disable 0162
         var seen = new HashSet<string>(StringComparer.Ordinal);
         var redirectMap = new Dictionary<string, string>(StringComparer.Ordinal);
         var calleeToMethod = new Dictionary<string, AotCoreIrMethodArtifact>(StringComparer.Ordinal);
@@ -58,6 +61,9 @@ public sealed class BridgeAotCompiler
                 if (!seen.Add(callee)) continue;
                 if (callee.Contains("<>c__DisplayClass") || callee.Contains("<>9__") || callee.Contains("<>c::", StringComparison.Ordinal)) continue;
                 if (callee.Contains("/<unknown>::", StringComparison.Ordinal) || callee.Contains("ThrowHelper::", StringComparison.Ordinal)) continue;
+                // Cap bridge callee count to prevent memory exhaustion on large chunks.
+                if (_bridgeCalleeCount >= MaxBridgeCallees) continue;
+                _bridgeCalleeCount++;
 
                 try
                 {
