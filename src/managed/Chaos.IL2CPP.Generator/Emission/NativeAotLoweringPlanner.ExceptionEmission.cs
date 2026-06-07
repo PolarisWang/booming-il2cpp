@@ -3118,7 +3118,9 @@ private void EmitLinearInitObj(StringBuilder builder, AotCoreIrInstructionArtifa
 
 		// Budget check via InliningPlanner
 		bool isRecursive = string.Equals(calleeMethod.NativeSymbol, _currentMethodNativeSymbol, StringComparison.Ordinal);
-		var candidate = InliningPlanner.EvaluateInline(calleeMethod.Instructions.Count, _currentMethodArtifact.Instructions.Count, isRecursive);
+		try
+		{
+		    var candidate = InliningPlanner.EvaluateInline(calleeMethod.Instructions.Count, _currentMethodArtifact.Instructions.Count, isRecursive);
 		if (!candidate.CanInline) return false;
 
 		// Multi-BB support: scan callee instructions to find branch targets and count basic blocks.
@@ -3339,6 +3341,15 @@ private void EmitLinearInitObj(StringBuilder builder, AotCoreIrInstructionArtifa
 		}
 		builder.AppendLine($"{indentation}}}");
 		return true;
+		}
+		catch (Exception ex) when (ex is InvalidOperationException or NotSupportedException or NullReferenceException)
+		{
+		    // Inlining failed — the callee method has unsupported IL patterns
+		    // (e.g., structured slot underflow, newobj without metadata) or the
+		    // inline depth exceeded what the structured emitter can handle.
+		    // Fall through to non-inlined dispatch.
+		    return false;
+		}
 	}
 
 	/// <summary>Try to inline the callee method identified by the invocation target.</summary>
@@ -4020,6 +4031,15 @@ private void EmitLinearInitObj(StringBuilder builder, AotCoreIrInstructionArtifa
 
 	private void EmitLinearResolvedInvocation(StringBuilder builder, string targetSymbol, IReadOnlyList<AotCoreIrAbiSlotArtifact> parameterAbis, AotCoreIrAbiSlotArtifact returnAbi, IReadOnlySet<int> rawArgumentIndices, string indentation, bool enforceInstanceNullCheck)
 	{
+			// Auto-declare chaos_external_runtime_ symbols at point of use
+			// to avoid C3861 errors when the generated header misses a declaration.
+			if (targetSymbol.StartsWith("chaos_external_runtime_", StringComparison.Ordinal))
+			{
+				string _declSig = MapAbiSlotReturnType(returnAbi);
+				string _declParams = FormatAbiSlotParameterTypes(parameterAbis);
+				string _declParamsClean = _declParams == "void" ? "" : _declParams;
+				builder.AppendLine($"extern \"C\" {_declSig} {targetSymbol}({_declParamsClean});");
+			}
 		string a = MapAbiSlotReturnType(returnAbi);
 		StringBuilder stringBuilder = builder;
 		StringBuilder stringBuilder2 = stringBuilder;
