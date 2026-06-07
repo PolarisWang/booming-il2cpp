@@ -1800,6 +1800,19 @@ extern ""C"" CHAOS_IL2CPP_INT32 RunNativeAot(CHAOS_IL2CPP_INT32 entryIndex) {{
             sb.AppendLine();
         }
 
+        // ── Type initialization function extern declarations ──
+        // chaos_ensure_type_initialized_* functions are defined on page 0 but
+        // called from page files for types with non-empty static constructors.
+        // Emit extern declarations so page files compile without C3861.
+        foreach (var typeId in _allEmittedTypeSubjectIds ?? [])
+        {
+            sb.Append("extern \"C\" void ");
+            sb.Append(GetNativeTypeInitializationFunctionSymbol(typeId));
+            sb.AppendLine("(void);");
+        }
+        if (_allEmittedTypeSubjectIds is { Count: > 0 })
+            sb.AppendLine();
+
         // ── Span runtime helper declarations (inside codegen namespace) ──
         // chaos_initialize_array_from_field_data_int32 and
         // chaos_create_field_data_span_int32 are defined in the object model
