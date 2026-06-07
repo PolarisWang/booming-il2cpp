@@ -21,6 +21,22 @@ endif()
 if(NOT DEFINED CHAOS_IL2CPP_CONFIG_TIER)
   set(CHAOS_IL2CPP_CONFIG_TIER "check")
 endif()
+
+# ── Hephaestus Lib: pre-compiled framework cache ──
+# When CHAOS_HEPHAESTUS_DIR is set, link against pre-compiled static libraries
+# from previously-cached builds.  This avoids recompiling the IL2CPP codegen
+# output for core assemblies (System.Private.CoreLib, System.Runtime, etc.)
+# across chunks.
+# The cache is managed by the HephaestusCache in the Python verification pipeline.
+# If the variable is not set, the build proceeds as normal.
+if(DEFINED CHAOS_HEPHAESTUS_DIR AND EXISTS "${CHAOS_HEPHAESTUS_DIR}")
+  message(STATUS "Hephaestus Lib: ${CHAOS_HEPHAESTUS_DIR}")
+  file(GLOB CHAOS_HEPHAESTUS_LIBS "${CHAOS_HEPHAESTUS_DIR}/*.lib" "${CHAOS_HEPHAESTUS_DIR}/*.a")
+  if(CHAOS_HEPHAESTUS_LIBS)
+    list(APPEND CHAOS_ENTRY_SOURCES ${CHAOS_HEPHAESTUS_LIBS})
+    message(STATUS "Hephaestus Lib: ${CHAOS_HEPHAESTUS_LIBS}")
+  endif()
+endif()
 if(CHAOS_IL2CPP_CONFIG_TIER STREQUAL "profile")
   add_compile_definitions(CHAOS_IL2CPP_CONFIG_TIER=CHAOS_IL2CPP_CONFIG_TIER_CHECK)
   add_compile_definitions(CHAOS_IL2CPP_CONFIG_CHECK)
@@ -111,6 +127,9 @@ set(CHAOS_MATH_STUBS
 set(CHAOS_SIMD_STUBS
     "${CHAOS_SDK_DIR}/runtime_stubs/simd_stubs.cpp"
 )
+set(CHAOS_CHAR_STUBS
+    "${CHAOS_SDK_DIR}/runtime_stubs/char_stubs.cpp"
+)
 set(CHAOS_MISC_STUBS
     "${CHAOS_SDK_DIR}/runtime_stubs/misc_stubs.cpp"
 )
@@ -146,6 +165,7 @@ set(CHAOS_ENTRY_SOURCES
     ${CHAOS_ARRAY_STUBS}
     ${CHAOS_MATH_STUBS}
     ${CHAOS_SIMD_STUBS}
+    ${CHAOS_CHAR_STUBS}
     ${CHAOS_MISC_STUBS}
     ${CHAOS_INTEROP_STUBS}
     ${CHAOS_EXCEPTION_STUBS}

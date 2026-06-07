@@ -145,7 +145,6 @@ public sealed class CodeGenStage
             NativeReferenceLoweringPlan = nativeReferenceLoweringPlan,
             NativeAotLoweringPlan = nativeAotLoweringPlan,
             ClosureManifest = closureManifest,
-            BridgeRedirectMap = null,
         });
         }
         catch (Exception ex)

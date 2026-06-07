@@ -16,146 +16,6 @@ extern "C" const int kAotMethodCount;
 
 
 // extern "C" function declarations for all AOT-compiled methods
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Boolean_System_Boolean_System_String(
-            CHAOS_IL2CPP_INTPTR, 
-            CHAOS_IL2CPP_INTPTR, 
-            CHAOS_IL2CPP_INTPTR
-);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Byte_System_Byte_System_String(
-            CHAOS_IL2CPP_UINT8, 
-            CHAOS_IL2CPP_UINT8, 
-            CHAOS_IL2CPP_INTPTR
-);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Byte_array_System_Byte_array_System_String(
-            CHAOS_IL2CPP_INTPTR, 
-            CHAOS_IL2CPP_INTPTR, 
-            CHAOS_IL2CPP_INTPTR
-);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Char_System_Char_System_String(
-            CHAOS_IL2CPP_INTPTR, 
-            CHAOS_IL2CPP_INTPTR, 
-            CHAOS_IL2CPP_INTPTR
-);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Decimal_System_Decimal_System_String(
-            CHAOS_IL2CPP_INTPTR, 
-            CHAOS_IL2CPP_INTPTR, 
-            CHAOS_IL2CPP_INTPTR
-);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Double_System_Double_System_String(
-            double, 
-            double, 
-            CHAOS_IL2CPP_INTPTR
-);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Int16_System_Int16_System_String(
-            CHAOS_IL2CPP_INT16, 
-            CHAOS_IL2CPP_INT16, 
-            CHAOS_IL2CPP_INTPTR
-);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Int32_System_Int32_System_String(
-            CHAOS_IL2CPP_INT32, 
-            CHAOS_IL2CPP_INT32, 
-            CHAOS_IL2CPP_INTPTR
-);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Int64_System_Int64_System_String(
-            CHAOS_IL2CPP_INT64, 
-            CHAOS_IL2CPP_INT64, 
-            CHAOS_IL2CPP_INTPTR
-);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Object_System_Object_System_String(
-            CHAOS_IL2CPP_INTPTR, 
-            CHAOS_IL2CPP_INTPTR, 
-            CHAOS_IL2CPP_INTPTR
-);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_SByte_System_SByte_System_String(
-            CHAOS_IL2CPP_INT8, 
-            CHAOS_IL2CPP_INT8, 
-            CHAOS_IL2CPP_INTPTR
-);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Single_System_Single_System_String(
-            float, 
-            float, 
-            CHAOS_IL2CPP_INTPTR
-);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_String_System_String_System_String(
-            CHAOS_IL2CPP_INTPTR, 
-            CHAOS_IL2CPP_INTPTR, 
-            CHAOS_IL2CPP_INTPTR
-);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_UInt16_System_UInt16_System_String(
-            CHAOS_IL2CPP_UINT16, 
-            CHAOS_IL2CPP_UINT16, 
-            CHAOS_IL2CPP_INTPTR
-);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_UInt32_System_UInt32_System_String(
-            CHAOS_IL2CPP_INTPTR, 
-            CHAOS_IL2CPP_INTPTR, 
-            CHAOS_IL2CPP_INTPTR
-);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_UInt64_System_UInt64_System_String(
-            CHAOS_IL2CPP_UINT64, 
-            CHAOS_IL2CPP_UINT64, 
-            CHAOS_IL2CPP_INTPTR
-);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_0_0_System_String(
-            CHAOS_IL2CPP_INTPTR, 
-            CHAOS_IL2CPP_INTPTR, 
-            CHAOS_IL2CPP_INTPTR
-);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreNotEqual_0_0_System_String(
-            CHAOS_IL2CPP_INTPTR, 
-            CHAOS_IL2CPP_INTPTR, 
-            CHAOS_IL2CPP_INTPTR
-);
-extern "C" CHAOS_IL2CPP_INT32 Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Complete(
-        void
-);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Fail_System_String(
-            CHAOS_IL2CPP_INTPTR
-);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_IsFalse_System_Boolean_System_String(
-            CHAOS_IL2CPP_INTPTR, 
-            CHAOS_IL2CPP_INTPTR
-);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_IsNotNull_System_Object_System_String(
-            CHAOS_IL2CPP_INTPTR, 
-            CHAOS_IL2CPP_INTPTR
-);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_IsNull_System_Object_System_String(
-            CHAOS_IL2CPP_INTPTR, 
-            CHAOS_IL2CPP_INTPTR
-);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_IsTrue_System_Boolean_System_String(
-            CHAOS_IL2CPP_INTPTR, 
-            CHAOS_IL2CPP_INTPTR
-);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_RecordFailure(
-        void
-);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Reset(
-        void
-);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Throws_System_Action(
-            CHAOS_IL2CPP_INTPTR
-);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Throws_System_NullReferenceException_System_Action__generic(
-            CHAOS_IL2CPP_INTPTR
-);
-extern "C" CHAOS_IL2CPP_INT32 Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_get_ExitCode(
-        void
-);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_AssertionException__ctor_System_String(
-            CHAOS_IL2CPP_INTPTR, 
-            CHAOS_IL2CPP_INTPTR
-);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_BenchmarkAttribute__ctor(
-            CHAOS_IL2CPP_INTPTR
-);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_FactAttribute__ctor(
-            CHAOS_IL2CPP_INTPTR
-);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_HotUpdateAttribute__ctor(
-            CHAOS_IL2CPP_INTPTR
-);
 extern "C" void CombinedSubjects_AutoGenerated_System_Data_Common_System_Xml_XmlDataDocumentTests__ctor(
             CHAOS_IL2CPP_INTPTR
 );
@@ -361,49 +221,6 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Data_Common_System_Xml_Xml
 
 static const Functions s_functions = {
     {
-        &Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Boolean_System_Boolean_System_String,
-        &Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Byte_System_Byte_System_String,
-        &Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Byte_array_System_Byte_array_System_String,
-        &Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Char_System_Char_System_String,
-        &Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Decimal_System_Decimal_System_String,
-        &Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Double_System_Double_System_String,
-        &Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Int16_System_Int16_System_String,
-        &Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Int32_System_Int32_System_String,
-        &Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Int64_System_Int64_System_String,
-        &Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Object_System_Object_System_String,
-        &Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_SByte_System_SByte_System_String,
-        &Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Single_System_Single_System_String,
-        &Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_String_System_String_System_String,
-        &Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_UInt16_System_UInt16_System_String,
-        &Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_UInt32_System_UInt32_System_String,
-        &Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_UInt64_System_UInt64_System_String,
-        &Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_0_0_System_String,
-        &Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreNotEqual_0_0_System_String,
-        &Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Complete,
-        &Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Fail_System_String,
-        &Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_IsFalse_System_Boolean_System_String,
-        &Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_IsNotNull_System_Object_System_String,
-        &Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_IsNull_System_Object_System_String,
-        &Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_IsTrue_System_Boolean_System_String,
-        &Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_RecordFailure,
-        &Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Reset,
-        &Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Throws_System_Action,
-        &Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Throws_System_NullReferenceException_System_Action__generic,
-        &Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_get_ExitCode,
-    },
-    {
-        &Chaos_TestFramework_Sdk_Chaos_TestFramework_AssertionException__ctor_System_String,
-    },
-    {
-        &Chaos_TestFramework_Sdk_Chaos_TestFramework_BenchmarkAttribute__ctor,
-    },
-    {
-        &Chaos_TestFramework_Sdk_Chaos_TestFramework_FactAttribute__ctor,
-    },
-    {
-        &Chaos_TestFramework_Sdk_Chaos_TestFramework_HotUpdateAttribute__ctor,
-    },
-    {
         &CombinedSubjects_AutoGenerated_System_Data_Common_System_Xml_XmlDataDocumentTests__ctor,
         &CombinedSubjects_AutoGenerated_System_Data_Common_System_Xml_XmlDataDocumentTests_Benchmark_CloneNode_4_bool_0,
         &CombinedSubjects_AutoGenerated_System_Data_Common_System_Xml_XmlDataDocumentTests_Benchmark_CloneNode_4_bool_1,
@@ -473,7 +290,7 @@ static const Functions s_functions = {
         &CombinedSubjects_AutoGenerated_System_Data_Common_System_Xml_XmlDataDocumentTests___c_Load_7_TextReader_1_b__30_0,
         &CombinedSubjects_AutoGenerated_System_Data_Common_System_Xml_XmlDataDocumentTests___c_Load_8_XmlReader_0_b__32_0,
     },
-    99,
+    66,
 };
 
 const Functions kFunctions = s_functions;
@@ -481,41 +298,8 @@ const Functions kFunctions = s_functions;
 // Flat function pointer array for indexed dispatch (benchmarking).
 // Avoids fragile reinterpret_cast<void* const*>(&kFunctions) which depends on
 // struct layout uniformity across sub-struct members.
-extern "C" void* kFunctionsFlat[99];
-void* kFunctionsFlat[99] = {
-    reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Boolean_System_Boolean_System_String),
-    reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Byte_System_Byte_System_String),
-    reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Byte_array_System_Byte_array_System_String),
-    reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Char_System_Char_System_String),
-    reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Decimal_System_Decimal_System_String),
-    reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Double_System_Double_System_String),
-    reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Int16_System_Int16_System_String),
-    reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Int32_System_Int32_System_String),
-    reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Int64_System_Int64_System_String),
-    reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Object_System_Object_System_String),
-    reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_SByte_System_SByte_System_String),
-    reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Single_System_Single_System_String),
-    reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_String_System_String_System_String),
-    reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_UInt16_System_UInt16_System_String),
-    reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_UInt32_System_UInt32_System_String),
-    reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_UInt64_System_UInt64_System_String),
-    reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_0_0_System_String),
-    reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreNotEqual_0_0_System_String),
-    reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Complete),
-    reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Fail_System_String),
-    reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_IsFalse_System_Boolean_System_String),
-    reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_IsNotNull_System_Object_System_String),
-    reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_IsNull_System_Object_System_String),
-    reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_IsTrue_System_Boolean_System_String),
-    reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_RecordFailure),
-    reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Reset),
-    reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Throws_System_Action),
-    reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Throws_System_NullReferenceException_System_Action__generic),
-    reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_get_ExitCode),
-    reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_AssertionException__ctor_System_String),
-    reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_BenchmarkAttribute__ctor),
-    reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_FactAttribute__ctor),
-    reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_HotUpdateAttribute__ctor),
+extern "C" void* kFunctionsFlat[66];
+void* kFunctionsFlat[66] = {
     reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Data_Common_System_Xml_XmlDataDocumentTests__ctor),
     reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Data_Common_System_Xml_XmlDataDocumentTests_Benchmark_CloneNode_4_bool_0),
     reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Data_Common_System_Xml_XmlDataDocumentTests_Benchmark_CloneNode_4_bool_1),

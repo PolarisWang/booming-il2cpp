@@ -19,6 +19,8 @@ pipeline:
   chunks:
     numerics:
       assemblyDirs: ""
+    global-ns:
+      assemblyDirs: "chunks/global-ns/managed/subjects"
 
   # Timeouts in seconds for specific stages
   timeouts:

@@ -1,0 +1,203 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-06-07T12:33:53.7492864Z",
+  "generator": "Chaos.IL2CPP.Tools.TestProjectGenerator",
+  "entryExecutable": "entry",
+  "subjects": [
+    {
+      "index": 0,
+      "kind": "benchmark",
+      "subjectId": "System.Data.Common/System.Xml.XmlDataDocument::CreateElement:System.Xml.XmlElement(System.String,System.String,System.String)",
+      "assemblyName": "System.Data.Common",
+      "typeName": "System.Xml.XmlDataDocument",
+      "methodName": "CreateElement",
+      "isStatic": true
+    },
+    {
+      "index": 1,
+      "kind": "benchmark",
+      "subjectId": "System.Data.Common/System.Xml.XmlDataDocument::CreateElement:System.Xml.XmlElement(System.String,System.String,System.String)",
+      "assemblyName": "System.Data.Common",
+      "typeName": "System.Xml.XmlDataDocument",
+      "methodName": "CreateElement",
+      "isStatic": true
+    },
+    {
+      "index": 2,
+      "kind": "benchmark",
+      "subjectId": "System.Data.Common/System.Xml.XmlDataDocument::CreateElement:System.Xml.XmlElement(System.String,System.String,System.String)",
+      "assemblyName": "System.Data.Common",
+      "typeName": "System.Xml.XmlDataDocument",
+      "methodName": "CreateElement",
+      "isStatic": true
+    },
+    {
+      "index": 3,
+      "kind": "benchmark",
+      "subjectId": "System.Data.Common/System.Xml.XmlDataDocument::CreateElement:System.Xml.XmlElement(System.String,System.String,System.String)",
+      "assemblyName": "System.Data.Common",
+      "typeName": "System.Xml.XmlDataDocument",
+      "methodName": "CreateElement",
+      "isStatic": true
+    },
+    {
+      "index": 4,
+      "kind": "benchmark",
+      "subjectId": "System.Data.Common/System.Xml.XmlDataDocument::CreateEntityReference:System.Xml.XmlEntityReference(System.String)",
+      "assemblyName": "System.Data.Common",
+      "typeName": "System.Xml.XmlDataDocument",
+      "methodName": "CreateEntityReference",
+      "isStatic": true
+    },
+    {
+      "index": 5,
+      "kind": "benchmark",
+      "subjectId": "System.Data.Common/System.Xml.XmlDataDocument::CreateEntityReference:System.Xml.XmlEntityReference(System.String)",
+      "assemblyName": "System.Data.Common",
+      "typeName": "System.Xml.XmlDataDocument",
+      "methodName": "CreateEntityReference",
+      "isStatic": true
+    },
+    {
+      "index": 6,
+      "kind": "benchmark",
+      "subjectId": "System.Data.Common/System.Xml.XmlDataDocument::GetRowFromElement:System.Data.DataRow(System.Xml.XmlElement)",
+      "assemblyName": "System.Data.Common",
+      "typeName": "System.Xml.XmlDataDocument",
+      "methodName": "GetRowFromElement",
+      "isStatic": true
+    },
+    {
+      "index": 7,
+      "kind": "benchmark",
+      "subjectId": "System.Data.Common/System.Xml.XmlDataDocument::GetElementFromRow:System.Xml.XmlElement(System.Data.DataRow)",
+      "assemblyName": "System.Data.Common",
+      "typeName": "System.Xml.XmlDataDocument",
+      "methodName": "GetElementFromRow",
+      "isStatic": true
+    },
+    {
+      "index": 8,
+      "kind": "benchmark",
+      "subjectId": "System.Data.Common/System.Xml.XmlDataDocument::CloneNode:System.Xml.XmlNode(System.Boolean)",
+      "assemblyName": "System.Data.Common",
+      "typeName": "System.Xml.XmlDataDocument",
+      "methodName": "CloneNode",
+      "isStatic": true
+    },
+    {
+      "index": 9,
+      "kind": "benchmark",
+      "subjectId": "System.Data.Common/System.Xml.XmlDataDocument::CloneNode:System.Xml.XmlNode(System.Boolean)",
+      "assemblyName": "System.Data.Common",
+      "typeName": "System.Xml.XmlDataDocument",
+      "methodName": "CloneNode",
+      "isStatic": true
+    },
+    {
+      "index": 10,
+      "kind": "benchmark",
+      "subjectId": "System.Data.Common/System.Xml.XmlDataDocument::Load:System.Void(System.String)",
+      "assemblyName": "System.Data.Common",
+      "typeName": "System.Xml.XmlDataDocument",
+      "methodName": "Load",
+      "isStatic": true
+    },
+    {
+      "index": 11,
+      "kind": "benchmark",
+      "subjectId": "System.Data.Common/System.Xml.XmlDataDocument::Load:System.Void(System.String)",
+      "assemblyName": "System.Data.Common",
+      "typeName": "System.Xml.XmlDataDocument",
+      "methodName": "Load",
+      "isStatic": true
+    },
+    {
+      "index": 12,
+      "kind": "benchmark",
+      "subjectId": "System.Data.Common/System.Xml.XmlDataDocument::Load:System.Void(System.IO.Stream)",
+      "assemblyName": "System.Data.Common",
+      "typeName": "System.Xml.XmlDataDocument",
+      "methodName": "Load",
+      "isStatic": true
+    },
+    {
+      "index": 13,
+      "kind": "benchmark",
+      "subjectId": "System.Data.Common/System.Xml.XmlDataDocument::Load:System.Void(System.IO.Stream)",
+      "assemblyName": "System.Data.Common",
+      "typeName": "System.Xml.XmlDataDocument",
+      "methodName": "Load",
+      "isStatic": true
+    },
+    {
+      "index": 14,
+      "kind": "benchmark",
+      "subjectId": "System.Data.Common/System.Xml.XmlDataDocument::Load:System.Void(System.IO.TextReader)",
+      "assemblyName": "System.Data.Common",
+      "typeName": "System.Xml.XmlDataDocument",
+      "methodName": "Load",
+      "isStatic": true
+    },
+    {
+      "index": 15,
+      "kind": "benchmark",
+      "subjectId": "System.Data.Common/System.Xml.XmlDataDocument::Load:System.Void(System.IO.TextReader)",
+      "assemblyName": "System.Data.Common",
+      "typeName": "System.Xml.XmlDataDocument",
+      "methodName": "Load",
+      "isStatic": true
+    },
+    {
+      "index": 16,
+      "kind": "benchmark",
+      "subjectId": "System.Data.Common/System.Xml.XmlDataDocument::Load:System.Void(System.Xml.XmlReader)",
+      "assemblyName": "System.Data.Common",
+      "typeName": "System.Xml.XmlDataDocument",
+      "methodName": "Load",
+      "isStatic": true
+    },
+    {
+      "index": 17,
+      "kind": "benchmark",
+      "subjectId": "System.Data.Common/System.Xml.XmlDataDocument::GetElementById:System.Xml.XmlElement(System.String)",
+      "assemblyName": "System.Data.Common",
+      "typeName": "System.Xml.XmlDataDocument",
+      "methodName": "GetElementById",
+      "isStatic": true
+    },
+    {
+      "index": 18,
+      "kind": "benchmark",
+      "subjectId": "System.Data.Common/System.Xml.XmlDataDocument::GetElementById:System.Xml.XmlElement(System.String)",
+      "assemblyName": "System.Data.Common",
+      "typeName": "System.Xml.XmlDataDocument",
+      "methodName": "GetElementById",
+      "isStatic": true
+    },
+    {
+      "index": 19,
+      "kind": "benchmark",
+      "subjectId": "System.Data.Common/System.Xml.XmlDataDocument::GetElementsByTagName:System.Xml.XmlNodeList(System.String)",
+      "assemblyName": "System.Data.Common",
+      "typeName": "System.Xml.XmlDataDocument",
+      "methodName": "GetElementsByTagName",
+      "isStatic": true
+    },
+    {
+      "index": 20,
+      "kind": "benchmark",
+      "subjectId": "System.Data.Common/System.Xml.XmlDataDocument::GetElementsByTagName:System.Xml.XmlNodeList(System.String)",
+      "assemblyName": "System.Data.Common",
+      "typeName": "System.Xml.XmlDataDocument",
+      "methodName": "GetElementsByTagName",
+      "isStatic": true
+    }
+  ],
+  "summary": {
+    "totalSubjects": 21,
+    "factCount": 0,
+    "benchmarkCount": 21,
+    "hotUpdateCount": 0
+  }
+}

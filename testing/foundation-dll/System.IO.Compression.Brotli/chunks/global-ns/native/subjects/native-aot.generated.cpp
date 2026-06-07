@@ -14,6 +14,7 @@
 #include <gc/gc_bgc_inline.h>
 #include <gc/gc_card_table.h>
 #include <ChaosGeneratedRuntimePrelude.h>
+#include "runtime_stubs/misc_stubs.h"
 #include "enum_stubs.h"
 #include "async_stubs.h"
 #include "exception_stubs.h"
@@ -35,40 +36,6 @@ namespace chaos::il2cpp::codegen::CombinedSubjects {
 using namespace chaos::il2cpp::runtime_core;
 using namespace chaos::il2cpp::jit;
 
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Boolean_System_Boolean_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Byte_System_Byte_System_String(CHAOS_IL2CPP_UINT8 chaos_fn_arg_0, CHAOS_IL2CPP_UINT8 chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Byte_array_System_Byte_array_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Char_System_Char_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Decimal_System_Decimal_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Double_System_Double_System_String(double chaos_fn_arg_0, double chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Int16_System_Int16_System_String(CHAOS_IL2CPP_INT16 chaos_fn_arg_0, CHAOS_IL2CPP_INT16 chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Int32_System_Int32_System_String(CHAOS_IL2CPP_INT32 chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Int64_System_Int64_System_String(CHAOS_IL2CPP_INT64 chaos_fn_arg_0, CHAOS_IL2CPP_INT64 chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Object_System_Object_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_SByte_System_SByte_System_String(CHAOS_IL2CPP_INT8 chaos_fn_arg_0, CHAOS_IL2CPP_INT8 chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Single_System_Single_System_String(float chaos_fn_arg_0, float chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_String_System_String_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_UInt16_System_UInt16_System_String(CHAOS_IL2CPP_UINT16 chaos_fn_arg_0, CHAOS_IL2CPP_UINT16 chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_UInt32_System_UInt32_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_UInt64_System_UInt64_System_String(CHAOS_IL2CPP_UINT64 chaos_fn_arg_0, CHAOS_IL2CPP_UINT64 chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_0_0_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreNotEqual_0_0_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
-extern "C" CHAOS_IL2CPP_INT32 Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Complete(void);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Fail_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
-extern "C" CHAOS_IL2CPP_INT32 Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_get_ExitCode(void);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_IsFalse_System_Boolean_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_IsNotNull_System_Object_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_IsNull_System_Object_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_IsTrue_System_Boolean_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_RecordFailure(void);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Reset(void);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Throws_System_Action(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Throws_System_NullReferenceException_System_Action__generic(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
-extern "C" void chaos_stub_definition_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert__Throws_System_Void_System_Action__type____method__System_NullReferenceException(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_AssertionException__ctor_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_BenchmarkAttribute__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_FactAttribute__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_HotUpdateAttribute__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
 extern "C" void CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliDecoderTests__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
 extern "C" void CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliDecoderTests_Benchmark_Dispose_0__0(void);
 extern "C" void CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliEncoderTests__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
@@ -197,14 +164,7 @@ extern "C" void CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_Syst
 // Runtime prelude dependencies included at translation unit level
 
 
-MethodTable chaos_mt_Chaos_TestFramework_Sdk___0 = {nullptr, nullptr, 12016523716365422726ULL, 0u, 32, 2, 0, nullptr, nullptr, 0, 0, 0, 0};
-inline constexpr CHAOS_IL2CPP_UINT64 chaos_type_id_Chaos_TestFramework_Sdk___0 = static_cast<CHAOS_IL2CPP_UINT64>(12016523716365422726ULL);
 // ── Virtual method table arrays ──
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_AssertionException__ctor_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1);
-const void* chaos_vtable_Chaos_TestFramework_Sdk_Chaos_TestFramework_AssertionException[] =
-{
-	reinterpret_cast<void*>(Chaos_TestFramework_Sdk_Chaos_TestFramework_AssertionException__ctor_System_String),
-};
 extern "C" void CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
 extern "C" void CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_0_b__45_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
 extern "C" void CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_1_b__47_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
@@ -242,7 +202,6 @@ extern "C" void CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_Syst
 extern "C" void CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_WriteAsync_5_System_ReadOnlyMemorybyte_CancellationToken_0_b__28_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
 const void* chaos_vtable_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c[] =
 {
-	nullptr,
 	reinterpret_cast<void*>(CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c__ctor),
 	reinterpret_cast<void*>(CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_0_b__45_0),
 	reinterpret_cast<void*>(CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_1_b__47_0),
@@ -279,15 +238,9 @@ const void* chaos_vtable_CombinedSubjects_AutoGenerated_System_IO_Compression_Br
 	reinterpret_cast<void*>(CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_WriteAsync_4_System_Byte_int_int_CancellationToken_4_b__26_0),
 	reinterpret_cast<void*>(CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_WriteAsync_5_System_ReadOnlyMemorybyte_CancellationToken_0_b__28_0),
 };
-MethodTable chaos_mt_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert = {nullptr, nullptr, 3469195832277345062ULL, 0u, 32, 1, 1, nullptr, nullptr, 0, 0, 0};
-inline constexpr CHAOS_IL2CPP_UINT64 chaos_type_id_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert = static_cast<CHAOS_IL2CPP_UINT64>(3469195832277345062ULL);
-MethodTable chaos_mt_System_Private_CoreLib_System_Exception = {nullptr, nullptr, 10972282733316558392ULL, 0u, 32, 1, 1, nullptr, nullptr, 0, 0, 0};
-inline constexpr CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_Exception = static_cast<CHAOS_IL2CPP_UINT64>(10972282733316558392ULL);
-MethodTable chaos_mt_Chaos_TestFramework_Sdk_Chaos_TestFramework_AssertionException = {reinterpret_cast<const MethodTable*>(&chaos_mt_System_Private_CoreLib_System_Exception), chaos_vtable_Chaos_TestFramework_Sdk_Chaos_TestFramework_AssertionException, 8951892653230046377ULL, 1u, 32, 1, 1, nullptr, nullptr, 0, 0, 0};
-inline constexpr CHAOS_IL2CPP_UINT64 chaos_type_id_Chaos_TestFramework_Sdk_Chaos_TestFramework_AssertionException = static_cast<CHAOS_IL2CPP_UINT64>(8951892653230046377ULL);
 MethodTable chaos_mt_System_Private_CoreLib_System_Object = {nullptr, nullptr, 15228727185366376748ULL, 0u, 32, 1, 1, nullptr, nullptr, 0, 0, 0};
 inline constexpr CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_Object = static_cast<CHAOS_IL2CPP_UINT64>(15228727185366376748ULL);
-MethodTable chaos_mt_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c = {reinterpret_cast<const MethodTable*>(&chaos_mt_System_Private_CoreLib_System_Object), chaos_vtable_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c, 692616651328340837ULL, 36u, 32, 1, 1, nullptr, nullptr, 0, 0, 0};
+MethodTable chaos_mt_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c = {reinterpret_cast<const MethodTable*>(&chaos_mt_System_Private_CoreLib_System_Object), chaos_vtable_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c, 692616651328340837ULL, 35u, 32, 1, 1, nullptr, nullptr, 0, 0, 0};
 inline constexpr CHAOS_IL2CPP_UINT64 chaos_type_id_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c = static_cast<CHAOS_IL2CPP_UINT64>(692616651328340837ULL);
 MethodTable chaos_mt_System_Private_CoreLib_System_Delegate = {reinterpret_cast<const MethodTable*>(&chaos_mt_System_Private_CoreLib_System_Object), nullptr, 7451128447593600616ULL, 0u, 32, 1, 1, nullptr, nullptr, 0, 0, 0};
 inline constexpr CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_Delegate = static_cast<CHAOS_IL2CPP_UINT64>(7451128447593600616ULL);
@@ -297,10 +250,6 @@ MethodTable chaos_mt_System_Private_CoreLib_System_Action = {reinterpret_cast<co
 inline constexpr CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_Action = static_cast<CHAOS_IL2CPP_UINT64>(14722794505377461205ULL);
 MethodTable chaos_mt_System_Private_CoreLib_System_Byte = {nullptr, nullptr, 3217969471912086765ULL, 0u, 32, 1, 1, nullptr, nullptr, 0, 0, 0};
 inline constexpr CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_Byte = static_cast<CHAOS_IL2CPP_UINT64>(3217969471912086765ULL);
-MethodTable chaos_mt_System_Private_CoreLib_System_Collections_IEnumerable = {nullptr, nullptr, 16749028324345562163ULL, 0u, 32, 1, 1, nullptr, nullptr, 0, 0, 0};
-inline constexpr CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_Collections_IEnumerable = static_cast<CHAOS_IL2CPP_UINT64>(16749028324345562163ULL);
-MethodTable chaos_mt_System_Private_CoreLib_System_IDisposable = {nullptr, nullptr, 13420242832086098868ULL, 0u, 32, 1, 1, nullptr, nullptr, 0, 0, 0};
-inline constexpr CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_IDisposable = static_cast<CHAOS_IL2CPP_UINT64>(13420242832086098868ULL);
 MethodTable chaos_mt_System_Private_CoreLib_System_Reflection_Assembly = {nullptr, nullptr, 5474029880995115448ULL, 0u, 32, 1, 1, nullptr, nullptr, 0, 0, 0};
 inline constexpr CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_Reflection_Assembly = static_cast<CHAOS_IL2CPP_UINT64>(5474029880995115448ULL);
 MethodTable chaos_mt_System_Private_CoreLib_System_Reflection_AssemblyName = {nullptr, nullptr, 17082367815459723707ULL, 0u, 32, 1, 1, nullptr, nullptr, 0, 0, 0};
@@ -317,51 +266,44 @@ MethodTable chaos_mt_System_Private_CoreLib_System_String = {nullptr, nullptr, 1
 inline constexpr CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_String = static_cast<CHAOS_IL2CPP_UINT64>(1782325859292956794ULL);
 MethodTable chaos_mt_System_Private_CoreLib_System_Type = {reinterpret_cast<const MethodTable*>(&chaos_mt_System_Private_CoreLib_System_Object), nullptr, 3222174513575444759ULL, 0u, 32, 1, 1, nullptr, nullptr, 0, 0, 0};
 inline constexpr CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_Type = static_cast<CHAOS_IL2CPP_UINT64>(3222174513575444759ULL);
-inline constexpr CHAOS_IL2CPP_UINT64 chaos_boxed_type_id_Chaos_TestFramework_Sdk___0 = static_cast<CHAOS_IL2CPP_UINT64>(12016523716365422726ULL);
-
-static const ::chaos::il2cpp::vtable_registry::VTableSlot kSlots_Chaos_TestFramework_Sdk_Chaos_TestFramework_AssertionException[] =
-{
-	{ 0x00000031u, reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_AssertionException__ctor_System_String) },
-};
 
 static const ::chaos::il2cpp::vtable_registry::VTableSlot kSlots_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c[] =
 {
-	{ 0u, nullptr },
-	{ 0x000000AAu, reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c__ctor) },
-	{ 0x000000BDu, reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_0_b__45_0) },
-	{ 0x000000BEu, reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_1_b__47_0) },
-	{ 0x000000BFu, reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_2_b__49_0) },
-	{ 0x000000C0u, reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_3_b__51_0) },
-	{ 0x000000C1u, reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_4_b__53_0) },
-	{ 0x000000ABu, reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_0_b__7_0) },
-	{ 0x000000ACu, reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_1_b__9_0) },
-	{ 0x000000ADu, reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_2_b__11_0) },
-	{ 0x000000AEu, reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_3_b__13_0) },
-	{ 0x000000AFu, reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_4_b__15_0) },
-	{ 0x000000C9u, reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_DisposeAsync_14__14_b__69_0) },
-	{ 0x000000C2u, reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_EndRead_11_System_IAsyncResult_0_b__55_0) },
-	{ 0x000000B6u, reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_FlushAsync_7_CancellationToken_0_b__31_0) },
-	{ 0x000000C3u, reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_ReadAsync_12_System_Byte_int_int_CancellationToken_0_b__57_0) },
-	{ 0x000000C4u, reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_ReadAsync_12_System_Byte_int_int_CancellationToken_1_b__59_0) },
-	{ 0x000000C5u, reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_ReadAsync_12_System_Byte_int_int_CancellationToken_2_b__61_0) },
-	{ 0x000000C6u, reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_ReadAsync_12_System_Byte_int_int_CancellationToken_3_b__63_0) },
-	{ 0x000000C7u, reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_ReadAsync_12_System_Byte_int_int_CancellationToken_4_b__65_0) },
-	{ 0x000000C8u, reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_ReadAsync_13_System_Memorybyte_CancellationToken_0_b__67_0) },
-	{ 0x000000BCu, reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_ReadByte_9__9_b__43_0) },
-	{ 0x000000B7u, reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_Read_8_System_Byte_int_int_0_b__33_0) },
-	{ 0x000000B8u, reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_Read_8_System_Byte_int_int_1_b__35_0) },
-	{ 0x000000B9u, reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_Read_8_System_Byte_int_int_2_b__37_0) },
-	{ 0x000000BAu, reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_Read_8_System_Byte_int_int_3_b__39_0) },
-	{ 0x000000BBu, reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_Read_8_System_Byte_int_int_4_b__41_0) },
-	{ 0x000000CAu, reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_Seek_15_long_SeekOrigin_0_b__71_0) },
-	{ 0x000000CBu, reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_Seek_15_long_SeekOrigin_1_b__73_0) },
-	{ 0x000000CCu, reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_Seek_15_long_SeekOrigin_2_b__75_0) },
-	{ 0x000000B0u, reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_WriteAsync_4_System_Byte_int_int_CancellationToken_0_b__18_0) },
-	{ 0x000000B1u, reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_WriteAsync_4_System_Byte_int_int_CancellationToken_1_b__20_0) },
-	{ 0x000000B2u, reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_WriteAsync_4_System_Byte_int_int_CancellationToken_2_b__22_0) },
-	{ 0x000000B3u, reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_WriteAsync_4_System_Byte_int_int_CancellationToken_3_b__24_0) },
-	{ 0x000000B4u, reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_WriteAsync_4_System_Byte_int_int_CancellationToken_4_b__26_0) },
-	{ 0x000000B5u, reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_WriteAsync_5_System_ReadOnlyMemorybyte_CancellationToken_0_b__28_0) },
+	{ 0x00000081u, reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c__ctor) },
+	{ 0x00000094u, reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_0_b__45_0) },
+	{ 0x00000095u, reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_1_b__47_0) },
+	{ 0x00000096u, reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_2_b__49_0) },
+	{ 0x00000097u, reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_3_b__51_0) },
+	{ 0x00000098u, reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_4_b__53_0) },
+	{ 0x00000082u, reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_0_b__7_0) },
+	{ 0x00000083u, reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_1_b__9_0) },
+	{ 0x00000084u, reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_2_b__11_0) },
+	{ 0x00000085u, reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_3_b__13_0) },
+	{ 0x00000086u, reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_4_b__15_0) },
+	{ 0x000000A0u, reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_DisposeAsync_14__14_b__69_0) },
+	{ 0x00000099u, reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_EndRead_11_System_IAsyncResult_0_b__55_0) },
+	{ 0x0000008Du, reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_FlushAsync_7_CancellationToken_0_b__31_0) },
+	{ 0x0000009Au, reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_ReadAsync_12_System_Byte_int_int_CancellationToken_0_b__57_0) },
+	{ 0x0000009Bu, reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_ReadAsync_12_System_Byte_int_int_CancellationToken_1_b__59_0) },
+	{ 0x0000009Cu, reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_ReadAsync_12_System_Byte_int_int_CancellationToken_2_b__61_0) },
+	{ 0x0000009Du, reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_ReadAsync_12_System_Byte_int_int_CancellationToken_3_b__63_0) },
+	{ 0x0000009Eu, reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_ReadAsync_12_System_Byte_int_int_CancellationToken_4_b__65_0) },
+	{ 0x0000009Fu, reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_ReadAsync_13_System_Memorybyte_CancellationToken_0_b__67_0) },
+	{ 0x00000093u, reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_ReadByte_9__9_b__43_0) },
+	{ 0x0000008Eu, reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_Read_8_System_Byte_int_int_0_b__33_0) },
+	{ 0x0000008Fu, reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_Read_8_System_Byte_int_int_1_b__35_0) },
+	{ 0x00000090u, reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_Read_8_System_Byte_int_int_2_b__37_0) },
+	{ 0x00000091u, reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_Read_8_System_Byte_int_int_3_b__39_0) },
+	{ 0x00000092u, reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_Read_8_System_Byte_int_int_4_b__41_0) },
+	{ 0x000000A1u, reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_Seek_15_long_SeekOrigin_0_b__71_0) },
+	{ 0x000000A2u, reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_Seek_15_long_SeekOrigin_1_b__73_0) },
+	{ 0x000000A3u, reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_Seek_15_long_SeekOrigin_2_b__75_0) },
+	{ 0x00000087u, reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_WriteAsync_4_System_Byte_int_int_CancellationToken_0_b__18_0) },
+	{ 0x00000088u, reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_WriteAsync_4_System_Byte_int_int_CancellationToken_1_b__20_0) },
+	{ 0x00000089u, reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_WriteAsync_4_System_Byte_int_int_CancellationToken_2_b__22_0) },
+	{ 0x0000008Au, reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_WriteAsync_4_System_Byte_int_int_CancellationToken_3_b__24_0) },
+	{ 0x0000008Bu, reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_WriteAsync_4_System_Byte_int_int_CancellationToken_4_b__26_0) },
+	{ 0x0000008Cu, reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_WriteAsync_5_System_ReadOnlyMemorybyte_CancellationToken_0_b__28_0) },
 };
 
 bool chaos_is_array_store_compatible(const chaos_managed_array* chaos_array, CHAOS_IL2CPP_INTPTR chaos_value) noexcept
@@ -397,123 +339,8 @@ bool chaos_is_array_store_compatible(const chaos_managed_array* chaos_array, CHA
 	return false;
 }
 
-const char* chaos_reflection_get_string_utf8(CHAOS_IL2CPP_INTPTR chaos_string_value) noexcept
-{
-	if (chaos_string_value == 0)
-	{
-		return nullptr;
-	}
-
-	if (chaos_is_string_id(chaos_string_value))
-	{
-		const auto chaos_view = chaos::il2cpp::string_table::Resolve(
-			chaos_extract_string_id(chaos_string_value));
-		return chaos_view.utf8_data;
-	}
-
-	auto* chaos_string = reinterpret_cast<chaos_type_System_Private_CoreLib_System_String*>(chaos_string_value);
-	return chaos_string->utf8_data;
-}
-
-CHAOS_IL2CPP_INTPTR chaos_reflection_create_string_utf8_copy(const char* chaos_utf8_data, CHAOS_IL2CPP_SIZE chaos_length)
-{
-	if (chaos_utf8_data == nullptr)
-	{
-		return 0;
-	}
-
-	const auto chaos_id = chaos::il2cpp::string_table::Intern(
-		chaos_utf8_data, static_cast<CHAOS_IL2CPP_UINT32>(chaos_length));
-	return chaos_make_string_id_value(chaos_id);
-}
-
-CHAOS_IL2CPP_INTPTR ChaosReflectionConcatStringPairValues(CHAOS_IL2CPP_INTPTR chaos_left_string_value, CHAOS_IL2CPP_INTPTR chaos_right_string_value)
-{
-	const auto chaos_left_length =
-		chaos_left_string_value == 0
-			? static_cast<CHAOS_IL2CPP_SIZE>(0)
-			: chaos_is_string_id(chaos_left_string_value)
-				? static_cast<CHAOS_IL2CPP_SIZE>(chaos::il2cpp::string_table::Resolve(
-					chaos_extract_string_id(chaos_left_string_value)).byte_count)
-				: static_cast<CHAOS_IL2CPP_SIZE>(reinterpret_cast<chaos_type_System_Private_CoreLib_System_String*>(chaos_left_string_value)->length);
-	const auto chaos_right_length =
-		chaos_right_string_value == 0
-			? static_cast<CHAOS_IL2CPP_SIZE>(0)
-			: chaos_is_string_id(chaos_right_string_value)
-				? static_cast<CHAOS_IL2CPP_SIZE>(chaos::il2cpp::string_table::Resolve(
-					chaos_extract_string_id(chaos_right_string_value)).byte_count)
-				: static_cast<CHAOS_IL2CPP_SIZE>(reinterpret_cast<chaos_type_System_Private_CoreLib_System_String*>(chaos_right_string_value)->length);
-	const char* chaos_left_utf8 = chaos_reflection_get_string_utf8(chaos_left_string_value);
-	const char* chaos_right_utf8 = chaos_reflection_get_string_utf8(chaos_right_string_value);
-	if ((chaos_left_string_value != 0 && chaos_left_utf8 == nullptr && chaos_left_length != 0) ||
-		(chaos_right_string_value != 0 && chaos_right_utf8 == nullptr && chaos_right_length != 0))
-	{
-		CHAOS_IL2CPP_FAIL();
-	}
-
-	const auto chaos_combined_length = chaos_left_length + chaos_right_length;
-	auto* chaos_raw = static_cast<char*>(
-		chaos::il2cpp::runtime_core::GcAllocateAtomic(
-			sizeof(chaos_type_System_Private_CoreLib_System_String) + chaos_combined_length + 1));
-	auto* chaos_str = reinterpret_cast<chaos_type_System_Private_CoreLib_System_String*>(chaos_raw);
-	chaos_str->header.type_info = chaos_mt_System_Private_CoreLib_System_String.AsTypeInfoHot();
-	chaos_str->length = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_combined_length);
-	chaos_str->string_id = 0;
-	chaos_str->utf8_data = chaos_raw + sizeof(chaos_type_System_Private_CoreLib_System_String);
-
-	if (chaos_left_length != 0)
-	{
-		CHAOS_IL2CPP_MEMCPY(const_cast<char*>(chaos_str->utf8_data), chaos_left_utf8, chaos_left_length);
-	}
-	if (chaos_right_length != 0)
-	{
-		CHAOS_IL2CPP_MEMCPY(const_cast<char*>(chaos_str->utf8_data + chaos_left_length), chaos_right_utf8, chaos_right_length);
-	}
-	const_cast<char*>(chaos_str->utf8_data)[chaos_combined_length] = '\0';
-
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_str);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_reflection_create_string_literal(const char* chaos_utf8_data)
-{
-	if (chaos_utf8_data == nullptr)
-	{
-		return 0;
-	}
-
-	return chaos_reflection_create_string_utf8_copy(chaos_utf8_data, CHAOS_IL2CPP_STRLEN(chaos_utf8_data));
-}
-
-
-CHAOS_IL2CPP_INTPTR chaos_string_materialize(CHAOS_IL2CPP_INTPTR chaos_value) noexcept
-{
-	if (chaos_value == 0)
-	{
-		return 0;
-	}
-
-	if (!chaos_is_string_id(chaos_value))
-	{
-		return chaos_value;
-	}
-
-	const auto chaos_id = chaos_extract_string_id(chaos_value);
-	const auto chaos_view = chaos::il2cpp::string_table::Resolve(chaos_id);
-
-	auto* chaos_string = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_String, {});
-	chaos_string->header.type_info = chaos_mt_System_Private_CoreLib_System_String.AsTypeInfoHot();
-	chaos_string->length = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_view.byte_count);
-	auto* owned_utf8 = static_cast<char*>(chaos::il2cpp::runtime_core::GcAllocateAtomic(chaos_view.byte_count + 1));
-	CHAOS_IL2CPP_MEMCPY(owned_utf8, chaos_view.utf8_data, chaos_view.byte_count);
-	owned_utf8[chaos_view.byte_count] = '\0';
-	chaos_string->utf8_data = owned_utf8;
-	chaos_string->string_id = chaos_id;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_string);
-}
-
 
 // ── GcTypeLayout pointer offset arrays (computed via offsetof) ──
-static constexpr uint16_t kGcOffsets_chaos_type_System_Private_CoreLib_System_Exception[] = {static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Exception, _message)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Exception, _innerException)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Exception, _stackTrace))};
 static constexpr uint16_t kGcOffsets_chaos_type_System_Private_CoreLib_System_Delegate[] = {static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Delegate, chaos_delegate_target)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Delegate, chaos_delegate_invocation_list))};
 static constexpr uint16_t kGcOffsets_chaos_type_System_Private_CoreLib_System_MulticastDelegate[] = {static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_MulticastDelegate, chaos_delegate_target)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_MulticastDelegate, chaos_delegate_invocation_list))};
 static constexpr uint16_t kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_Assembly[] = {static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_Assembly, runtime_assembly_name_value))};
@@ -531,18 +358,12 @@ extern "C" void ChaosRegisterGcLayouts() {
 		static_cast<uint16_t>(sizeof(CHAOS_IL2CPP_INTPTR)),
 		static_cast<uint16_t>(offsetof(chaos_managed_array, length)));
 
-	registry.Register(12016523716365422726ULL, sizeof(chaos_type_Chaos_TestFramework_Sdk___0), nullptr, 0);
-	registry.Register(3469195832277345062ULL, sizeof(chaos_type_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert), nullptr, 0);
-	registry.Register(10972282733316558392ULL, sizeof(chaos_type_System_Private_CoreLib_System_Exception), kGcOffsets_chaos_type_System_Private_CoreLib_System_Exception, 3);
-	registry.Register(8951892653230046377ULL, sizeof(chaos_type_Chaos_TestFramework_Sdk_Chaos_TestFramework_AssertionException), nullptr, 0);
 	registry.Register(15228727185366376748ULL, sizeof(chaos_type_System_Private_CoreLib_System_Object), nullptr, 0);
 	registry.Register(692616651328340837ULL, sizeof(chaos_type_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c), nullptr, 0);
 	registry.Register(7451128447593600616ULL, sizeof(chaos_type_System_Private_CoreLib_System_Delegate), kGcOffsets_chaos_type_System_Private_CoreLib_System_Delegate, 2);
 	registry.Register(6681393039041505440ULL, sizeof(chaos_type_System_Private_CoreLib_System_MulticastDelegate), kGcOffsets_chaos_type_System_Private_CoreLib_System_MulticastDelegate, 2);
 	registry.Register(14722794505377461205ULL, sizeof(chaos_type_System_Private_CoreLib_System_Action), nullptr, 0);
 	registry.Register(3217969471912086765ULL, sizeof(chaos_type_System_Private_CoreLib_System_Byte), nullptr, 0);
-	registry.Register(16749028324345562163ULL, sizeof(chaos_type_System_Private_CoreLib_System_Collections_IEnumerable), nullptr, 0);
-	registry.Register(13420242832086098868ULL, sizeof(chaos_type_System_Private_CoreLib_System_IDisposable), nullptr, 0);
 	registry.Register(5474029880995115448ULL, sizeof(chaos_type_System_Private_CoreLib_System_Reflection_Assembly), kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_Assembly, 1);
 	registry.Register(17082367815459723707ULL, sizeof(chaos_type_System_Private_CoreLib_System_Reflection_AssemblyName), kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_AssemblyName, 1);
 	registry.Register(4197398748135124456ULL, sizeof(chaos_type_System_Private_CoreLib_System_Reflection_MethodBase), nullptr, 0);
@@ -553,18 +374,12 @@ extern "C" void ChaosRegisterGcLayouts() {
 	registry.Register(3222174513575444759ULL, sizeof(chaos_type_System_Private_CoreLib_System_Type), kGcOffsets_chaos_type_System_Private_CoreLib_System_Type, 2);
 
 	// Register MethodTable address ranges for IsValidTypeInfoPointer.
-	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_Chaos_TestFramework_Sdk___0), reinterpret_cast<uintptr_t>(&chaos_mt_Chaos_TestFramework_Sdk___0) + sizeof(chaos_mt_Chaos_TestFramework_Sdk___0));
-	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert), reinterpret_cast<uintptr_t>(&chaos_mt_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert) + sizeof(chaos_mt_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert));
-	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Exception), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Exception) + sizeof(chaos_mt_System_Private_CoreLib_System_Exception));
-	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_Chaos_TestFramework_Sdk_Chaos_TestFramework_AssertionException), reinterpret_cast<uintptr_t>(&chaos_mt_Chaos_TestFramework_Sdk_Chaos_TestFramework_AssertionException) + sizeof(chaos_mt_Chaos_TestFramework_Sdk_Chaos_TestFramework_AssertionException));
 	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Object), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Object) + sizeof(chaos_mt_System_Private_CoreLib_System_Object));
 	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c), reinterpret_cast<uintptr_t>(&chaos_mt_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c) + sizeof(chaos_mt_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c));
 	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Delegate), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Delegate) + sizeof(chaos_mt_System_Private_CoreLib_System_Delegate));
 	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_MulticastDelegate), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_MulticastDelegate) + sizeof(chaos_mt_System_Private_CoreLib_System_MulticastDelegate));
 	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Action), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Action) + sizeof(chaos_mt_System_Private_CoreLib_System_Action));
 	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Byte), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Byte) + sizeof(chaos_mt_System_Private_CoreLib_System_Byte));
-	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Collections_IEnumerable), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Collections_IEnumerable) + sizeof(chaos_mt_System_Private_CoreLib_System_Collections_IEnumerable));
-	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_IDisposable), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_IDisposable) + sizeof(chaos_mt_System_Private_CoreLib_System_IDisposable));
 	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_Assembly), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_Assembly) + sizeof(chaos_mt_System_Private_CoreLib_System_Reflection_Assembly));
 	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_AssemblyName), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_AssemblyName) + sizeof(chaos_mt_System_Private_CoreLib_System_Reflection_AssemblyName));
 	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_MethodBase), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_MethodBase) + sizeof(chaos_mt_System_Private_CoreLib_System_Reflection_MethodBase));
@@ -575,7 +390,6 @@ extern "C" void ChaosRegisterGcLayouts() {
 	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Type), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Type) + sizeof(chaos_mt_System_Private_CoreLib_System_Type));
 }
 
-CHAOS_IL2CPP_INT32 chaos_static_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert__s_exitCode = 0;
 CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c____9 = 0;
 CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c____9__11_0 = 0;
 CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c____9__13_0 = 0;
@@ -612,27 +426,550 @@ CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_IO_Compre
 CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c____9__7_0 = 0;
 CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c____9__9_0 = 0;
 
-
-	// AOT-baked string table: sorted by StringId for binary search at runtime.
-	constexpr chaos::il2cpp::string_table::StringEntry chaos_aot_string_entries[] = {
-		{ 1342797903967929121U, "[ASSERT FAIL] ", 14u },
-		{ 6601085983368743141U, "null", 4u },
-	};
-
-	constexpr CHAOS_IL2CPP_UINT32 chaos_aot_string_entry_count = sizeof(chaos_aot_string_entries) / sizeof(chaos_aot_string_entries[0]);
-
-	// Register the AOT-baked string table with the runtime before any code uses it.
-	static const CHAOS_IL2CPP_UINT32 s_aot_string_table_registered = []()
-	{
-		::chaos::il2cpp::string_table::InitializeFromAot(
-			chaos_aot_string_entries,
-			chaos_aot_string_entry_count);
-		return 0u;
-	}();
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Console_System_Console__get_Error_System_IO_TextWriter__(void) noexcept
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert__AreEqual_System_Void_System_Int32_System_Int32_System_String_() noexcept
 {
-	return ChaosConsoleGetError();
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert__Throws_System_NullReferenceException__System_Void_System_Action_() noexcept
+{
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c___BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_0_b__45_0_System_Void__() noexcept
+{
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c___BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_1_b__47_0_System_Void__() noexcept
+{
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c___BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_2_b__49_0_System_Void__() noexcept
+{
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c___BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_3_b__51_0_System_Void__() noexcept
+{
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c___BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_4_b__53_0_System_Void__() noexcept
+{
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c___BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_0_b__7_0_System_Void__() noexcept
+{
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c___BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_1_b__9_0_System_Void__() noexcept
+{
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c___BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_2_b__11_0_System_Void__() noexcept
+{
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c___BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_3_b__13_0_System_Void__() noexcept
+{
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c___BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_4_b__15_0_System_Void__() noexcept
+{
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c___DisposeAsync_14__14_b__69_0_System_Void__() noexcept
+{
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c___EndRead_11_System_IAsyncResult_0_b__55_0_System_Void__() noexcept
+{
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c___FlushAsync_7_CancellationToken_0_b__31_0_System_Void__() noexcept
+{
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c___ReadAsync_12_System_Byte_int_int_CancellationToken_0_b__57_0_System_Void__() noexcept
+{
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c___ReadAsync_12_System_Byte_int_int_CancellationToken_1_b__59_0_System_Void__() noexcept
+{
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c___ReadAsync_12_System_Byte_int_int_CancellationToken_2_b__61_0_System_Void__() noexcept
+{
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c___ReadAsync_12_System_Byte_int_int_CancellationToken_3_b__63_0_System_Void__() noexcept
+{
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c___ReadAsync_12_System_Byte_int_int_CancellationToken_4_b__65_0_System_Void__() noexcept
+{
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c___ReadAsync_13_System_Memorybyte_CancellationToken_0_b__67_0_System_Void__() noexcept
+{
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c___ReadByte_9__9_b__43_0_System_Void__() noexcept
+{
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c___Read_8_System_Byte_int_int_0_b__33_0_System_Void__() noexcept
+{
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c___Read_8_System_Byte_int_int_1_b__35_0_System_Void__() noexcept
+{
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c___Read_8_System_Byte_int_int_2_b__37_0_System_Void__() noexcept
+{
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c___Read_8_System_Byte_int_int_3_b__39_0_System_Void__() noexcept
+{
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c___Read_8_System_Byte_int_int_4_b__41_0_System_Void__() noexcept
+{
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c___Seek_15_long_SeekOrigin_0_b__71_0_System_Void__() noexcept
+{
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c___Seek_15_long_SeekOrigin_1_b__73_0_System_Void__() noexcept
+{
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c___Seek_15_long_SeekOrigin_2_b__75_0_System_Void__() noexcept
+{
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c___WriteAsync_4_System_Byte_int_int_CancellationToken_0_b__18_0_System_Void__() noexcept
+{
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c___WriteAsync_4_System_Byte_int_int_CancellationToken_1_b__20_0_System_Void__() noexcept
+{
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c___WriteAsync_4_System_Byte_int_int_CancellationToken_2_b__22_0_System_Void__() noexcept
+{
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c___WriteAsync_4_System_Byte_int_int_CancellationToken_3_b__24_0_System_Void__() noexcept
+{
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c___WriteAsync_4_System_Byte_int_int_CancellationToken_4_b__26_0_System_Void__() noexcept
+{
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c___WriteAsync_5_System_ReadOnlyMemorybyte_CancellationToken_0_b__28_0_System_Void__() noexcept
+{
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c____9() noexcept
+{
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c____9__11_0() noexcept
+{
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c____9__13_0() noexcept
+{
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c____9__15_0() noexcept
+{
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c____9__18_0() noexcept
+{
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c____9__20_0() noexcept
+{
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c____9__22_0() noexcept
+{
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c____9__24_0() noexcept
+{
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c____9__26_0() noexcept
+{
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c____9__28_0() noexcept
+{
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c____9__31_0() noexcept
+{
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c____9__33_0() noexcept
+{
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c____9__35_0() noexcept
+{
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c____9__37_0() noexcept
+{
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c____9__39_0() noexcept
+{
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c____9__41_0() noexcept
+{
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c____9__43_0() noexcept
+{
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c____9__45_0() noexcept
+{
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c____9__47_0() noexcept
+{
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c____9__49_0() noexcept
+{
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c____9__51_0() noexcept
+{
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c____9__53_0() noexcept
+{
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c____9__55_0() noexcept
+{
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c____9__57_0() noexcept
+{
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c____9__59_0() noexcept
+{
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c____9__61_0() noexcept
+{
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c____9__63_0() noexcept
+{
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c____9__65_0() noexcept
+{
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c____9__67_0() noexcept
+{
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c____9__69_0() noexcept
+{
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c____9__71_0() noexcept
+{
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c____9__73_0() noexcept
+{
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c____9__75_0() noexcept
+{
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c____9__7_0() noexcept
+{
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c____9__9_0() noexcept
+{
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c___ctor_System_Void__() noexcept
+{
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_IO_Compression_Brotli_System_IO_Compression_BrotliDecoder() noexcept
+{
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_IO_Compression_Brotli_System_IO_Compression_BrotliDecoder__Dispose_System_Void__() noexcept
+{
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_IO_Compression_Brotli_System_IO_Compression_BrotliEncoder() noexcept
+{
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_IO_Compression_Brotli_System_IO_Compression_BrotliEncoder__Dispose_System_Void__() noexcept
+{
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_IO_Compression_Brotli_System_IO_Compression_BrotliEncoder__GetMaxCompressedLength_System_Int32_System_Int32_() noexcept
+{
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Action___ctor_System_Void_System_Object_System_IntPtr_() noexcept
+{
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Array__Empty_System_Byte__System_Byte____() noexcept
@@ -640,9 +977,53 @@ CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Array__
 	return ChaosArrayEmpty();
 }
 
-void chaos_external_runtime_System_Private_CoreLib_System_Exception___ctor_System_Void_System_String_(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1) noexcept
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Byte() noexcept
 {
-	ChaosReflectionSetExceptionMetadata(chaos_fn_arg_0, chaos_fn_arg_1);
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_IO_Stream__BeginRead_System_IAsyncResult_System_Byte___System_Int32_System_Int32_System_AsyncCallback_System_Object_() noexcept
+{
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_IO_Stream__BeginWrite_System_IAsyncResult_System_Byte___System_Int32_System_Int32_System_AsyncCallback_System_Object_() noexcept
+{
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_IO_Stream__DisposeAsync_System_Threading_Tasks_ValueTask__() noexcept
+{
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_IO_Stream__EndRead_System_Int32_System_IAsyncResult_() noexcept
+{
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_IO_Stream__EndWrite_System_Void_System_IAsyncResult_() noexcept
+{
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_IO_Stream__FlushAsync_System_Threading_Tasks_Task_System_Threading_CancellationToken_() noexcept
+{
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
 }
 
 void chaos_external_runtime_System_Private_CoreLib_System_IO_Stream__Flush_System_Void__(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) noexcept
@@ -650,9 +1031,37 @@ void chaos_external_runtime_System_Private_CoreLib_System_IO_Stream__Flush_Syste
 	ChaosStreamFlush(chaos_fn_arg_0);
 }
 
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_IO_Stream__ReadAsync_System_Threading_Tasks_Task_System_Int32__System_Byte___System_Int32_System_Int32_System_Threading_CancellationToken_() noexcept
+{
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_IO_Stream__ReadAsync_System_Threading_Tasks_ValueTask_System_Int32__System_Memory_System_Byte__System_Threading_CancellationToken_() noexcept
+{
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_IO_Stream__ReadByte_System_Int32__() noexcept
+{
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+}
+
 CHAOS_IL2CPP_INT32 chaos_external_runtime_System_Private_CoreLib_System_IO_Stream__Read_System_Int32_System_Byte___System_Int32_System_Int32_(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INT32 chaos_fn_arg_2, CHAOS_IL2CPP_INT32 chaos_fn_arg_3) noexcept
 {
 	return ChaosStreamRead(chaos_fn_arg_0, chaos_fn_arg_1, chaos_fn_arg_2, chaos_fn_arg_3);
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_IO_Stream__Seek_System_Int64_System_Int64_System_IO_SeekOrigin_() noexcept
+{
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
 }
 
 void chaos_external_runtime_System_Private_CoreLib_System_IO_Stream__SetLength_System_Void_System_Int64_(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT64 chaos_fn_arg_1) noexcept
@@ -660,24 +1069,37 @@ void chaos_external_runtime_System_Private_CoreLib_System_IO_Stream__SetLength_S
 	ChaosStreamSetLength(chaos_fn_arg_0, chaos_fn_arg_1);
 }
 
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_IO_Stream__WriteAsync_System_Threading_Tasks_Task_System_Byte___System_Int32_System_Int32_System_Threading_CancellationToken_() noexcept
+{
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_IO_Stream__WriteAsync_System_Threading_Tasks_ValueTask_System_ReadOnlyMemory_System_Byte__System_Threading_CancellationToken_() noexcept
+{
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_IO_Stream__WriteByte_System_Void_System_Byte_() noexcept
+{
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+}
+
 void chaos_external_runtime_System_Private_CoreLib_System_IO_Stream__Write_System_Void_System_Byte___System_Int32_System_Int32_(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INT32 chaos_fn_arg_2, CHAOS_IL2CPP_INT32 chaos_fn_arg_3) noexcept
 {
 	ChaosStreamWrite(chaos_fn_arg_0, chaos_fn_arg_1, chaos_fn_arg_2, chaos_fn_arg_3);
 }
 
-void chaos_external_runtime_System_Private_CoreLib_System_IO_TextWriter__WriteLine_System_Void_System_String_(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1) noexcept
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Memory_System_Byte_() noexcept
 {
-	ChaosTextWriterWriteLineStr(chaos_fn_arg_0, chaos_fn_arg_1);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Object__Equals_System_Boolean_System_Object_System_Object_(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1) noexcept
-{
-	return ChaosObjectEqualsStatic(chaos_fn_arg_0, chaos_fn_arg_1);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Object__ToString_System_String__(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) noexcept
-{
-	return ChaosObjectToString(chaos_fn_arg_0);
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
 }
 
 void chaos_external_runtime_System_Private_CoreLib_System_Object___ctor_System_Void__(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) noexcept
@@ -685,9 +1107,74 @@ void chaos_external_runtime_System_Private_CoreLib_System_Object___ctor_System_V
 	ChaosObjectCtor(chaos_fn_arg_0);
 }
 
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_String__Concat_System_String_System_String_System_String_(CHAOS_IL2CPP_INTPTR chaos_arg_0, CHAOS_IL2CPP_INTPTR chaos_arg_1) noexcept
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_ReadOnlyMemory_System_Byte_() noexcept
 {
-	return ChaosReflectionConcatStringPairValues(chaos_arg_0, chaos_arg_1);
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Runtime_CompilerServices_TaskAwaiter_System_Int32___GetResult_System_Int32__() noexcept
+{
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Runtime_CompilerServices_TaskAwaiter__GetResult_System_Void__() noexcept
+{
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Runtime_CompilerServices_ValueTaskAwaiter_System_Int32___GetResult_System_Int32__() noexcept
+{
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Runtime_CompilerServices_ValueTaskAwaiter__GetResult_System_Void__() noexcept
+{
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Threading_CancellationToken() noexcept
+{
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Threading_Tasks_Task_System_Int32___GetAwaiter_System_Runtime_CompilerServices_TaskAwaiter_System_Int32___() noexcept
+{
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Threading_Tasks_Task__GetAwaiter_System_Runtime_CompilerServices_TaskAwaiter__() noexcept
+{
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Threading_Tasks_ValueTask_System_Int32___GetAwaiter_System_Runtime_CompilerServices_ValueTaskAwaiter_System_Int32___() noexcept
+{
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Threading_Tasks_ValueTask__GetAwaiter_System_Runtime_CompilerServices_ValueTaskAwaiter__() noexcept
+{
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
 }
 
 static constexpr CHAOS_IL2CPP_UINT32 kGenericTypeArgTokens[1] = { 0 };
@@ -708,221 +1195,152 @@ extern const ::chaos::il2cpp::runtime_core::ReflectionQueryImageDescriptor kRefl
 // Namespace-scoped extern declaration for kAotMethodCount.
 // (Definition at file scope via globalDeclarations for runtime-entry.cpp link-time visibility.)
 extern "C" const int kAotMethodCount;
-extern "C" int32_t kChaosExternalRuntimeCount;
 // ── ABI manifest ──────────────────────────────────────────────
 // Single contiguous struct: header + entries + params in same object
 // so CHAOS_ABI_MANIFEST_ENTRIES/CHAOS_ABI_MANIFEST_PARAMETERS find them by offset.
 
 // Param offset prefix-sum: [i] = cumulative parameter count before method i
-static constexpr CHAOS_IL2CPP_UINT32 s_abi_manifest_prefix_sum[159] = {
+static constexpr CHAOS_IL2CPP_UINT32 s_abi_manifest_prefix_sum[125] = {
 	0u,
-	3u,
-	6u,
-	9u,
-	12u,
-	15u,
-	18u,
-	21u,
-	24u,
-	27u,
-	30u,
-	33u,
-	36u,
-	39u,
-	42u,
-	45u,
-	48u,
-	51u,
-	54u,
-	54u,
-	55u,
-	55u,
-	57u,
-	59u,
-	61u,
-	63u,
-	63u,
-	63u,
-	64u,
-	65u,
-	66u,
-	67u,
-	67u,
-	67u,
-	67u,
-	67u,
-	67u,
-	67u,
-	67u,
-	67u,
-	67u,
-	67u,
-	67u,
-	67u,
-	67u,
-	67u,
-	67u,
-	67u,
-	67u,
-	67u,
-	67u,
-	67u,
-	67u,
-	67u,
-	67u,
-	67u,
-	67u,
-	67u,
-	67u,
-	67u,
-	67u,
-	67u,
-	67u,
-	67u,
-	67u,
-	67u,
-	67u,
-	67u,
-	67u,
-	67u,
-	67u,
-	67u,
-	67u,
-	67u,
-	67u,
-	67u,
-	67u,
-	67u,
-	67u,
-	67u,
-	67u,
-	67u,
-	67u,
-	67u,
-	67u,
-	67u,
-	67u,
-	67u,
-	67u,
-	67u,
-	67u,
-	67u,
-	67u,
-	67u,
-	67u,
-	67u,
-	67u,
-	67u,
-	67u,
-	67u,
-	67u,
-	67u,
-	67u,
-	67u,
-	67u,
-	67u,
-	67u,
-	67u,
-	67u,
-	67u,
-	67u,
-	67u,
-	67u,
-	67u,
-	67u,
-	67u,
-	67u,
-	67u,
-	67u,
-	67u,
-	67u,
-	67u,
-	67u,
-	67u,
-	67u,
-	67u,
-	67u,
-	67u,
-	67u,
-	67u,
-	67u,
-	67u,
-	67u,
-	67u,
-	67u,
-	67u,
-	67u,
-	67u,
-	67u,
-	67u,
-	67u,
-	67u,
-	67u,
-	67u,
-	67u,
-	67u,
-	67u,
-	67u,
-	67u,
-	67u,
-	67u,
-	67u,
-	67u,
-	67u,
-	67u,
-	67u,
-	67u,
-	67u,
-	67u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
 };
 
 static constexpr struct {
 	::ChaosAbiManifestV0 header;
-	::ChaosAbiMethodEntryV0 entries[158];
-	CHAOS_IL2CPP_UINT8 params[67];
+	::ChaosAbiMethodEntryV0 entries[124];
+	CHAOS_IL2CPP_UINT8 params[1];
 } s_abi_manifest_storage = {
 	{
 		CHAOS_ABI_MANIFEST_VERSION,
-		158u,
-		67u,
-		1028416738u,  // FNV-1a over entries+params
+		124u,
+		0u,
+		1473485893u,  // FNV-1a over entries+params
 		s_abi_manifest_prefix_sum  // O(1) prefix-sum
 	},
 	{
-		{ 0u, 3u },  // Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Boolean_System_Boolean_System_String
-		{ 0u, 3u },  // Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Byte_System_Byte_System_String
-		{ 0u, 3u },  // Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Byte_array_System_Byte_array_System_String
-		{ 0u, 3u },  // Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Char_System_Char_System_String
-		{ 0u, 3u },  // Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Decimal_System_Decimal_System_String
-		{ 0u, 3u },  // Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Double_System_Double_System_String
-		{ 0u, 3u },  // Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Int16_System_Int16_System_String
-		{ 0u, 3u },  // Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Int32_System_Int32_System_String
-		{ 0u, 3u },  // Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Int64_System_Int64_System_String
-		{ 0u, 3u },  // Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Object_System_Object_System_String
-		{ 0u, 3u },  // Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_SByte_System_SByte_System_String
-		{ 0u, 3u },  // Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Single_System_Single_System_String
-		{ 0u, 3u },  // Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_String_System_String_System_String
-		{ 0u, 3u },  // Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_UInt16_System_UInt16_System_String
-		{ 0u, 3u },  // Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_UInt32_System_UInt32_System_String
-		{ 0u, 3u },  // Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_UInt64_System_UInt64_System_String
-		{ 0u, 3u },  // Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_0_0_System_String
-		{ 0u, 3u },  // Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreNotEqual_0_0_System_String
-		{ 1u, 0u },  // Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Complete
-		{ 0u, 1u },  // Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Fail_System_String
-		{ 1u, 0u },  // Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_get_ExitCode
-		{ 0u, 2u },  // Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_IsFalse_System_Boolean_System_String
-		{ 0u, 2u },  // Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_IsNotNull_System_Object_System_String
-		{ 0u, 2u },  // Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_IsNull_System_Object_System_String
-		{ 0u, 2u },  // Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_IsTrue_System_Boolean_System_String
-		{ 0u, 0u },  // Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_RecordFailure
-		{ 0u, 0u },  // Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Reset
-		{ 0u, 1u },  // Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Throws_System_Action
-		{ 0u, 1u },  // Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Throws_System_Action
-		{ 0u, 1u },  // Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Throws_System_NullReferenceException_System_Action__generic
-		{ 0u, 1u },  // Chaos_TestFramework_Sdk_Chaos_TestFramework_AssertionException__ctor_System_String
-		{ 0u, 0u },  // Chaos_TestFramework_Sdk_Chaos_TestFramework_BenchmarkAttribute__ctor
-		{ 0u, 0u },  // Chaos_TestFramework_Sdk_Chaos_TestFramework_FactAttribute__ctor
-		{ 0u, 0u },  // Chaos_TestFramework_Sdk_Chaos_TestFramework_HotUpdateAttribute__ctor
 		{ 0u, 0u },  // CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliDecoderTests__ctor
 		{ 0u, 0u },  // CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliDecoderTests_Benchmark_Dispose_0__0
 		{ 0u, 0u },  // CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliEncoderTests__ctor
@@ -1049,73 +1467,6 @@ static constexpr struct {
 		{ 0u, 0u },  // CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_WriteAsync_5_System_ReadOnlyMemorybyte_CancellationToken_0_b__28_0
 	},
 	{
-		2u,
-		2u,
-		2u,
-		5u,
-		5u,
-		2u,
-		2u,
-		2u,
-		2u,
-		2u,
-		2u,
-		2u,
-		2u,
-		2u,
-		2u,
-		9u,
-		9u,
-		2u,
-		6u,
-		6u,
-		2u,
-		1u,
-		1u,
-		2u,
-		10u,
-		10u,
-		2u,
-		2u,
-		2u,
-		2u,
-		4u,
-		4u,
-		2u,
-		8u,
-		8u,
-		2u,
-		2u,
-		2u,
-		2u,
-		7u,
-		7u,
-		2u,
-		2u,
-		2u,
-		2u,
-		11u,
-		11u,
-		2u,
-		2u,
-		2u,
-		2u,
-		2u,
-		2u,
-		2u,
-		2u,
-		2u,
-		2u,
-		2u,
-		2u,
-		2u,
-		2u,
-		2u,
-		2u,
-		2u,
-		2u,
-		2u,
-		2u,
 	},
 };
 static const ::ChaosAbiManifestV0* const s_abi_manifest =
@@ -1217,338 +1568,267 @@ static const ::ChaosAbiManifestV0* const s_abi_manifest =
 		::chaos::il2cpp::runtime_core::RegisterModule("CombinedSubjects", &s_native_aot_module);
 // ── Hotpatch name index + dispatch table ────────────────────
 // Method name index entries
-static constexpr HotpatchMethodEntryV0 s_hotpatch_methods[157] = {
-	{ ".ctor", 0x00000032u, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliDecoderTests
-	{ "Benchmark_Dispose_0__0", 0x00000030u, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliDecoderTests
-	{ ".ctor", 0x0000003Eu, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliEncoderTests
-	{ "Benchmark_Dispose_0__0", 0x00000034u, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliEncoderTests
-	{ "Benchmark_GetMaxCompressedLength_1_int_0", 0x00000038u, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliEncoderTests
-	{ "Benchmark_GetMaxCompressedLength_1_int_1", 0x0000003Cu, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliEncoderTests
-	{ "GetMaxCompressedLength_1_int_0", 0x00000036u, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliEncoderTests
-	{ "GetMaxCompressedLength_1_int_1", 0x0000003Au, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliEncoderTests
-	{ ".ctor", 0x000000A8u, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests
-	{ "BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_0", 0x00000086u, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests
-	{ "BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_1", 0x00000088u, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests
-	{ "BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_2", 0x0000008Au, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests
-	{ "BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_3", 0x0000008Cu, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests
-	{ "BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_4", 0x0000008Eu, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests
-	{ "BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_0", 0x0000004Eu, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests
-	{ "BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_1", 0x00000052u, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests
-	{ "BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_2", 0x00000056u, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests
-	{ "BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_3", 0x0000005Au, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests
-	{ "BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_4", 0x0000005Eu, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests
-	{ "Benchmark_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_0", 0x00000087u, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests
-	{ "Benchmark_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_1", 0x00000089u, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests
-	{ "Benchmark_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_2", 0x0000008Bu, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests
-	{ "Benchmark_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_3", 0x0000008Du, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests
-	{ "Benchmark_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_4", 0x0000008Fu, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests
-	{ "Benchmark_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_0", 0x00000050u, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests
-	{ "Benchmark_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_1", 0x00000054u, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests
-	{ "Benchmark_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_2", 0x00000058u, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests
-	{ "Benchmark_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_3", 0x0000005Cu, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests
-	{ "Benchmark_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_4", 0x00000060u, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests
-	{ "Benchmark_DisposeAsync_14__14", 0x0000009Fu, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests
-	{ "Benchmark_EndRead_11_System_IAsyncResult_0", 0x00000091u, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests
-	{ "Benchmark_EndWrite_3_System_IAsyncResult_0", 0x00000062u, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests
-	{ "Benchmark_Flush_6__6", 0x00000077u, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests
-	{ "Benchmark_FlushAsync_7_CancellationToken_0", 0x00000079u, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests
-	{ "Benchmark_Read_8_System_Byte_int_int_0", 0x0000007Bu, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests
-	{ "Benchmark_Read_8_System_Byte_int_int_1", 0x0000007Du, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests
-	{ "Benchmark_Read_8_System_Byte_int_int_2", 0x0000007Fu, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests
-	{ "Benchmark_Read_8_System_Byte_int_int_3", 0x00000081u, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests
-	{ "Benchmark_Read_8_System_Byte_int_int_4", 0x00000083u, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests
-	{ "Benchmark_ReadAsync_12_System_Byte_int_int_CancellationToken_0", 0x00000093u, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests
-	{ "Benchmark_ReadAsync_12_System_Byte_int_int_CancellationToken_1", 0x00000095u, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests
-	{ "Benchmark_ReadAsync_12_System_Byte_int_int_CancellationToken_2", 0x00000097u, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests
-	{ "Benchmark_ReadAsync_12_System_Byte_int_int_CancellationToken_3", 0x00000099u, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests
-	{ "Benchmark_ReadAsync_12_System_Byte_int_int_CancellationToken_4", 0x0000009Bu, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests
-	{ "Benchmark_ReadAsync_13_System_Memorybyte_CancellationToken_0", 0x0000009Du, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests
-	{ "Benchmark_ReadByte_9__9", 0x00000085u, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests
-	{ "Benchmark_Seek_15_long_SeekOrigin_0", 0x000000A1u, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests
-	{ "Benchmark_Seek_15_long_SeekOrigin_1", 0x000000A3u, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests
-	{ "Benchmark_Seek_15_long_SeekOrigin_2", 0x000000A5u, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests
-	{ "Benchmark_SetLength_16_long_0", 0x000000A6u, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests
-	{ "Benchmark_SetLength_16_long_1", 0x000000A7u, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests
-	{ "Benchmark_Write_0_System_Byte_int_int_0", 0x00000040u, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests
-	{ "Benchmark_Write_0_System_Byte_int_int_1", 0x00000042u, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests
-	{ "Benchmark_Write_0_System_Byte_int_int_2", 0x00000044u, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests
-	{ "Benchmark_Write_0_System_Byte_int_int_3", 0x00000046u, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests
-	{ "Benchmark_Write_0_System_Byte_int_int_4", 0x00000048u, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests
-	{ "Benchmark_WriteAsync_4_System_Byte_int_int_CancellationToken_0", 0x00000066u, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests
-	{ "Benchmark_WriteAsync_4_System_Byte_int_int_CancellationToken_1", 0x0000006Au, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests
-	{ "Benchmark_WriteAsync_4_System_Byte_int_int_CancellationToken_2", 0x0000006Eu, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests
-	{ "Benchmark_WriteAsync_4_System_Byte_int_int_CancellationToken_3", 0x00000072u, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests
-	{ "Benchmark_WriteAsync_4_System_Byte_int_int_CancellationToken_4", 0x00000074u, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests
-	{ "Benchmark_WriteAsync_5_System_ReadOnlyMemorybyte_CancellationToken_0", 0x00000076u, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests
-	{ "Benchmark_WriteByte_1_byte_0", 0x0000004Au, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests
-	{ "Benchmark_WriteByte_1_byte_1", 0x0000004Cu, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests
-	{ "DisposeAsync_14__14", 0x0000009Eu, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests
-	{ "EndRead_11_System_IAsyncResult_0", 0x00000090u, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests
-	{ "FlushAsync_7_CancellationToken_0", 0x00000078u, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests
-	{ "Read_8_System_Byte_int_int_0", 0x0000007Au, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests
-	{ "Read_8_System_Byte_int_int_1", 0x0000007Cu, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests
-	{ "Read_8_System_Byte_int_int_2", 0x0000007Eu, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests
-	{ "Read_8_System_Byte_int_int_3", 0x00000080u, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests
-	{ "Read_8_System_Byte_int_int_4", 0x00000082u, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests
-	{ "ReadAsync_12_System_Byte_int_int_CancellationToken_0", 0x00000092u, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests
-	{ "ReadAsync_12_System_Byte_int_int_CancellationToken_1", 0x00000094u, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests
-	{ "ReadAsync_12_System_Byte_int_int_CancellationToken_2", 0x00000096u, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests
-	{ "ReadAsync_12_System_Byte_int_int_CancellationToken_3", 0x00000098u, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests
-	{ "ReadAsync_12_System_Byte_int_int_CancellationToken_4", 0x0000009Au, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests
-	{ "ReadAsync_13_System_Memorybyte_CancellationToken_0", 0x0000009Cu, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests
-	{ "ReadByte_9__9", 0x00000084u, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests
-	{ "Seek_15_long_SeekOrigin_0", 0x000000A0u, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests
-	{ "Seek_15_long_SeekOrigin_1", 0x000000A2u, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests
-	{ "Seek_15_long_SeekOrigin_2", 0x000000A4u, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests
-	{ "WriteAsync_4_System_Byte_int_int_CancellationToken_0", 0x00000064u, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests
-	{ "WriteAsync_4_System_Byte_int_int_CancellationToken_1", 0x00000068u, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests
-	{ "WriteAsync_4_System_Byte_int_int_CancellationToken_2", 0x0000006Cu, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests
-	{ "WriteAsync_4_System_Byte_int_int_CancellationToken_3", 0x00000070u, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests
-	{ "WriteAsync_4_System_Byte_int_int_CancellationToken_4", 0x00000073u, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests
-	{ "WriteAsync_5_System_ReadOnlyMemorybyte_CancellationToken_0", 0x00000075u, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests
-	{ ".cctor", 0x000000A9u, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c
-	{ ".ctor", 0x000000AAu, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c
-	{ "<BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_0>b__45_0", 0x000000BDu, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c
-	{ "<BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_1>b__47_0", 0x000000BEu, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c
-	{ "<BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_2>b__49_0", 0x000000BFu, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c
-	{ "<BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_3>b__51_0", 0x000000C0u, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c
-	{ "<BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_4>b__53_0", 0x000000C1u, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c
-	{ "<BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_0>b__7_0", 0x000000ABu, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c
-	{ "<BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_1>b__9_0", 0x000000ACu, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c
-	{ "<BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_2>b__11_0", 0x000000ADu, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c
-	{ "<BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_3>b__13_0", 0x000000AEu, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c
-	{ "<BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_4>b__15_0", 0x000000AFu, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c
-	{ "<DisposeAsync_14__14>b__69_0", 0x000000C9u, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c
-	{ "<EndRead_11_System_IAsyncResult_0>b__55_0", 0x000000C2u, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c
-	{ "<FlushAsync_7_CancellationToken_0>b__31_0", 0x000000B6u, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c
-	{ "<Read_8_System_Byte_int_int_0>b__33_0", 0x000000B7u, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c
-	{ "<Read_8_System_Byte_int_int_1>b__35_0", 0x000000B8u, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c
-	{ "<Read_8_System_Byte_int_int_2>b__37_0", 0x000000B9u, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c
-	{ "<Read_8_System_Byte_int_int_3>b__39_0", 0x000000BAu, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c
-	{ "<Read_8_System_Byte_int_int_4>b__41_0", 0x000000BBu, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c
-	{ "<ReadAsync_12_System_Byte_int_int_CancellationToken_0>b__57_0", 0x000000C3u, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c
-	{ "<ReadAsync_12_System_Byte_int_int_CancellationToken_1>b__59_0", 0x000000C4u, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c
-	{ "<ReadAsync_12_System_Byte_int_int_CancellationToken_2>b__61_0", 0x000000C5u, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c
-	{ "<ReadAsync_12_System_Byte_int_int_CancellationToken_3>b__63_0", 0x000000C6u, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c
-	{ "<ReadAsync_12_System_Byte_int_int_CancellationToken_4>b__65_0", 0x000000C7u, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c
-	{ "<ReadAsync_13_System_Memorybyte_CancellationToken_0>b__67_0", 0x000000C8u, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c
-	{ "<ReadByte_9__9>b__43_0", 0x000000BCu, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c
-	{ "<Seek_15_long_SeekOrigin_0>b__71_0", 0x000000CAu, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c
-	{ "<Seek_15_long_SeekOrigin_1>b__73_0", 0x000000CBu, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c
-	{ "<Seek_15_long_SeekOrigin_2>b__75_0", 0x000000CCu, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c
-	{ "<WriteAsync_4_System_Byte_int_int_CancellationToken_0>b__18_0", 0x000000B0u, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c
-	{ "<WriteAsync_4_System_Byte_int_int_CancellationToken_1>b__20_0", 0x000000B1u, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c
-	{ "<WriteAsync_4_System_Byte_int_int_CancellationToken_2>b__22_0", 0x000000B2u, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c
-	{ "<WriteAsync_4_System_Byte_int_int_CancellationToken_3>b__24_0", 0x000000B3u, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c
-	{ "<WriteAsync_4_System_Byte_int_int_CancellationToken_4>b__26_0", 0x000000B4u, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c
-	{ "<WriteAsync_5_System_ReadOnlyMemorybyte_CancellationToken_0>b__28_0", 0x000000B5u, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c
-	{ "AreEqual", 0x0000004Du, 3u },  // Chaos.TestFramework.Assert
-	{ "AreEqual", 0x00000047u, 3u },  // Chaos.TestFramework.Assert
-	{ "AreEqual", 0x00000067u, 3u },  // Chaos.TestFramework.Assert
-	{ "AreEqual", 0x0000004Bu, 3u },  // Chaos.TestFramework.Assert
-	{ "AreEqual", 0x00000053u, 3u },  // Chaos.TestFramework.Assert
-	{ "AreEqual", 0x00000051u, 3u },  // Chaos.TestFramework.Assert
-	{ "AreEqual", 0x00000043u, 3u },  // Chaos.TestFramework.Assert
-	{ "AreEqual", 0x0000003Bu, 3u },  // Chaos.TestFramework.Assert
-	{ "AreEqual", 0x0000003Fu, 3u },  // Chaos.TestFramework.Assert
-	{ "AreEqual", 0x00000057u, 3u },  // Chaos.TestFramework.Assert
-	{ "AreEqual", 0x00000049u, 3u },  // Chaos.TestFramework.Assert
-	{ "AreEqual", 0x0000004Fu, 3u },  // Chaos.TestFramework.Assert
-	{ "AreEqual", 0x00000055u, 3u },  // Chaos.TestFramework.Assert
-	{ "AreEqual", 0x00000045u, 3u },  // Chaos.TestFramework.Assert
-	{ "AreEqual", 0x0000003Du, 3u },  // Chaos.TestFramework.Assert
-	{ "AreEqual", 0x00000041u, 3u },  // Chaos.TestFramework.Assert
-	{ "AreEqual`1", 0x00000065u, 3u },  // Chaos.TestFramework.Assert
-	{ "AreNotEqual`1", 0x00000069u, 3u },  // Chaos.TestFramework.Assert
-	{ "Complete", 0x00000037u, 0u },  // Chaos.TestFramework.Assert
-	{ "Fail", 0x0000006Bu, 1u },  // Chaos.TestFramework.Assert
-	{ "get_ExitCode", 0x00000039u, 0u },  // Chaos.TestFramework.Assert
-	{ "IsFalse", 0x0000005Fu, 2u },  // Chaos.TestFramework.Assert
-	{ "IsNotNull", 0x0000005Bu, 2u },  // Chaos.TestFramework.Assert
-	{ "IsNull", 0x00000059u, 2u },  // Chaos.TestFramework.Assert
-	{ "IsTrue", 0x0000005Du, 2u },  // Chaos.TestFramework.Assert
-	{ "RecordFailure", 0x00000035u, 0u },  // Chaos.TestFramework.Assert
-	{ "Reset", 0x00000033u, 0u },  // Chaos.TestFramework.Assert
-	{ "Throws", 0x00000061u, 1u },  // Chaos.TestFramework.Assert
-	{ "Throws<System.NullReferenceException>", 0x000000CDu, 1u },  // Chaos.TestFramework.Assert
-	{ ".ctor", 0x00000031u, 1u },  // Chaos.TestFramework.AssertionException
-	{ ".ctor", 0x0000006Du, 0u },  // Chaos.TestFramework.BenchmarkAttribute
-	{ ".ctor", 0x0000006Fu, 0u },  // Chaos.TestFramework.FactAttribute
-	{ ".ctor", 0x00000071u, 0u },  // Chaos.TestFramework.HotUpdateAttribute
+static constexpr HotpatchMethodEntryV0 s_hotpatch_methods[124] = {
+	{ ".ctor", 0x00000029u, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliDecoderTests
+	{ "Benchmark_Dispose_0__0", 0x00000028u, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliDecoderTests
+	{ ".ctor", 0x0000002Fu, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliEncoderTests
+	{ "Benchmark_Dispose_0__0", 0x0000002Au, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliEncoderTests
+	{ "Benchmark_GetMaxCompressedLength_1_int_0", 0x0000002Cu, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliEncoderTests
+	{ "Benchmark_GetMaxCompressedLength_1_int_1", 0x0000002Eu, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliEncoderTests
+	{ "GetMaxCompressedLength_1_int_0", 0x0000002Bu, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliEncoderTests
+	{ "GetMaxCompressedLength_1_int_1", 0x0000002Du, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliEncoderTests
+	{ ".ctor", 0x0000007Fu, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests
+	{ "BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_0", 0x0000005Du, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests
+	{ "BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_1", 0x0000005Fu, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests
+	{ "BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_2", 0x00000061u, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests
+	{ "BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_3", 0x00000063u, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests
+	{ "BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_4", 0x00000065u, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests
+	{ "BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_0", 0x00000037u, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests
+	{ "BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_1", 0x00000039u, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests
+	{ "BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_2", 0x0000003Bu, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests
+	{ "BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_3", 0x0000003Du, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests
+	{ "BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_4", 0x0000003Fu, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests
+	{ "Benchmark_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_0", 0x0000005Eu, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests
+	{ "Benchmark_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_1", 0x00000060u, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests
+	{ "Benchmark_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_2", 0x00000062u, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests
+	{ "Benchmark_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_3", 0x00000064u, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests
+	{ "Benchmark_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_4", 0x00000066u, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests
+	{ "Benchmark_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_0", 0x00000038u, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests
+	{ "Benchmark_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_1", 0x0000003Au, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests
+	{ "Benchmark_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_2", 0x0000003Cu, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests
+	{ "Benchmark_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_3", 0x0000003Eu, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests
+	{ "Benchmark_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_4", 0x00000040u, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests
+	{ "Benchmark_DisposeAsync_14__14", 0x00000076u, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests
+	{ "Benchmark_EndRead_11_System_IAsyncResult_0", 0x00000068u, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests
+	{ "Benchmark_EndWrite_3_System_IAsyncResult_0", 0x00000041u, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests
+	{ "Benchmark_Flush_6__6", 0x0000004Eu, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests
+	{ "Benchmark_FlushAsync_7_CancellationToken_0", 0x00000050u, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests
+	{ "Benchmark_Read_8_System_Byte_int_int_0", 0x00000052u, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests
+	{ "Benchmark_Read_8_System_Byte_int_int_1", 0x00000054u, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests
+	{ "Benchmark_Read_8_System_Byte_int_int_2", 0x00000056u, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests
+	{ "Benchmark_Read_8_System_Byte_int_int_3", 0x00000058u, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests
+	{ "Benchmark_Read_8_System_Byte_int_int_4", 0x0000005Au, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests
+	{ "Benchmark_ReadAsync_12_System_Byte_int_int_CancellationToken_0", 0x0000006Au, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests
+	{ "Benchmark_ReadAsync_12_System_Byte_int_int_CancellationToken_1", 0x0000006Cu, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests
+	{ "Benchmark_ReadAsync_12_System_Byte_int_int_CancellationToken_2", 0x0000006Eu, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests
+	{ "Benchmark_ReadAsync_12_System_Byte_int_int_CancellationToken_3", 0x00000070u, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests
+	{ "Benchmark_ReadAsync_12_System_Byte_int_int_CancellationToken_4", 0x00000072u, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests
+	{ "Benchmark_ReadAsync_13_System_Memorybyte_CancellationToken_0", 0x00000074u, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests
+	{ "Benchmark_ReadByte_9__9", 0x0000005Cu, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests
+	{ "Benchmark_Seek_15_long_SeekOrigin_0", 0x00000078u, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests
+	{ "Benchmark_Seek_15_long_SeekOrigin_1", 0x0000007Au, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests
+	{ "Benchmark_Seek_15_long_SeekOrigin_2", 0x0000007Cu, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests
+	{ "Benchmark_SetLength_16_long_0", 0x0000007Du, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests
+	{ "Benchmark_SetLength_16_long_1", 0x0000007Eu, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests
+	{ "Benchmark_Write_0_System_Byte_int_int_0", 0x00000030u, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests
+	{ "Benchmark_Write_0_System_Byte_int_int_1", 0x00000031u, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests
+	{ "Benchmark_Write_0_System_Byte_int_int_2", 0x00000032u, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests
+	{ "Benchmark_Write_0_System_Byte_int_int_3", 0x00000033u, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests
+	{ "Benchmark_Write_0_System_Byte_int_int_4", 0x00000034u, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests
+	{ "Benchmark_WriteAsync_4_System_Byte_int_int_CancellationToken_0", 0x00000043u, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests
+	{ "Benchmark_WriteAsync_4_System_Byte_int_int_CancellationToken_1", 0x00000045u, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests
+	{ "Benchmark_WriteAsync_4_System_Byte_int_int_CancellationToken_2", 0x00000047u, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests
+	{ "Benchmark_WriteAsync_4_System_Byte_int_int_CancellationToken_3", 0x00000049u, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests
+	{ "Benchmark_WriteAsync_4_System_Byte_int_int_CancellationToken_4", 0x0000004Bu, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests
+	{ "Benchmark_WriteAsync_5_System_ReadOnlyMemorybyte_CancellationToken_0", 0x0000004Du, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests
+	{ "Benchmark_WriteByte_1_byte_0", 0x00000035u, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests
+	{ "Benchmark_WriteByte_1_byte_1", 0x00000036u, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests
+	{ "DisposeAsync_14__14", 0x00000075u, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests
+	{ "EndRead_11_System_IAsyncResult_0", 0x00000067u, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests
+	{ "FlushAsync_7_CancellationToken_0", 0x0000004Fu, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests
+	{ "Read_8_System_Byte_int_int_0", 0x00000051u, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests
+	{ "Read_8_System_Byte_int_int_1", 0x00000053u, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests
+	{ "Read_8_System_Byte_int_int_2", 0x00000055u, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests
+	{ "Read_8_System_Byte_int_int_3", 0x00000057u, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests
+	{ "Read_8_System_Byte_int_int_4", 0x00000059u, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests
+	{ "ReadAsync_12_System_Byte_int_int_CancellationToken_0", 0x00000069u, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests
+	{ "ReadAsync_12_System_Byte_int_int_CancellationToken_1", 0x0000006Bu, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests
+	{ "ReadAsync_12_System_Byte_int_int_CancellationToken_2", 0x0000006Du, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests
+	{ "ReadAsync_12_System_Byte_int_int_CancellationToken_3", 0x0000006Fu, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests
+	{ "ReadAsync_12_System_Byte_int_int_CancellationToken_4", 0x00000071u, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests
+	{ "ReadAsync_13_System_Memorybyte_CancellationToken_0", 0x00000073u, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests
+	{ "ReadByte_9__9", 0x0000005Bu, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests
+	{ "Seek_15_long_SeekOrigin_0", 0x00000077u, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests
+	{ "Seek_15_long_SeekOrigin_1", 0x00000079u, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests
+	{ "Seek_15_long_SeekOrigin_2", 0x0000007Bu, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests
+	{ "WriteAsync_4_System_Byte_int_int_CancellationToken_0", 0x00000042u, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests
+	{ "WriteAsync_4_System_Byte_int_int_CancellationToken_1", 0x00000044u, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests
+	{ "WriteAsync_4_System_Byte_int_int_CancellationToken_2", 0x00000046u, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests
+	{ "WriteAsync_4_System_Byte_int_int_CancellationToken_3", 0x00000048u, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests
+	{ "WriteAsync_4_System_Byte_int_int_CancellationToken_4", 0x0000004Au, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests
+	{ "WriteAsync_5_System_ReadOnlyMemorybyte_CancellationToken_0", 0x0000004Cu, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests
+	{ ".cctor", 0x00000080u, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c
+	{ ".ctor", 0x00000081u, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c
+	{ "<BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_0>b__45_0", 0x00000094u, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c
+	{ "<BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_1>b__47_0", 0x00000095u, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c
+	{ "<BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_2>b__49_0", 0x00000096u, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c
+	{ "<BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_3>b__51_0", 0x00000097u, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c
+	{ "<BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_4>b__53_0", 0x00000098u, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c
+	{ "<BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_0>b__7_0", 0x00000082u, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c
+	{ "<BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_1>b__9_0", 0x00000083u, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c
+	{ "<BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_2>b__11_0", 0x00000084u, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c
+	{ "<BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_3>b__13_0", 0x00000085u, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c
+	{ "<BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_4>b__15_0", 0x00000086u, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c
+	{ "<DisposeAsync_14__14>b__69_0", 0x000000A0u, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c
+	{ "<EndRead_11_System_IAsyncResult_0>b__55_0", 0x00000099u, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c
+	{ "<FlushAsync_7_CancellationToken_0>b__31_0", 0x0000008Du, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c
+	{ "<Read_8_System_Byte_int_int_0>b__33_0", 0x0000008Eu, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c
+	{ "<Read_8_System_Byte_int_int_1>b__35_0", 0x0000008Fu, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c
+	{ "<Read_8_System_Byte_int_int_2>b__37_0", 0x00000090u, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c
+	{ "<Read_8_System_Byte_int_int_3>b__39_0", 0x00000091u, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c
+	{ "<Read_8_System_Byte_int_int_4>b__41_0", 0x00000092u, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c
+	{ "<ReadAsync_12_System_Byte_int_int_CancellationToken_0>b__57_0", 0x0000009Au, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c
+	{ "<ReadAsync_12_System_Byte_int_int_CancellationToken_1>b__59_0", 0x0000009Bu, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c
+	{ "<ReadAsync_12_System_Byte_int_int_CancellationToken_2>b__61_0", 0x0000009Cu, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c
+	{ "<ReadAsync_12_System_Byte_int_int_CancellationToken_3>b__63_0", 0x0000009Du, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c
+	{ "<ReadAsync_12_System_Byte_int_int_CancellationToken_4>b__65_0", 0x0000009Eu, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c
+	{ "<ReadAsync_13_System_Memorybyte_CancellationToken_0>b__67_0", 0x0000009Fu, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c
+	{ "<ReadByte_9__9>b__43_0", 0x00000093u, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c
+	{ "<Seek_15_long_SeekOrigin_0>b__71_0", 0x000000A1u, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c
+	{ "<Seek_15_long_SeekOrigin_1>b__73_0", 0x000000A2u, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c
+	{ "<Seek_15_long_SeekOrigin_2>b__75_0", 0x000000A3u, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c
+	{ "<WriteAsync_4_System_Byte_int_int_CancellationToken_0>b__18_0", 0x00000087u, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c
+	{ "<WriteAsync_4_System_Byte_int_int_CancellationToken_1>b__20_0", 0x00000088u, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c
+	{ "<WriteAsync_4_System_Byte_int_int_CancellationToken_2>b__22_0", 0x00000089u, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c
+	{ "<WriteAsync_4_System_Byte_int_int_CancellationToken_3>b__24_0", 0x0000008Au, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c
+	{ "<WriteAsync_4_System_Byte_int_int_CancellationToken_4>b__26_0", 0x0000008Bu, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c
+	{ "<WriteAsync_5_System_ReadOnlyMemorybyte_CancellationToken_0>b__28_0", 0x0000008Cu, 0u },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c
 };
 
 // Type name index entries (namespace, short_name)
-static constexpr HotpatchTypeEntryV0 s_hotpatch_types[9] = {
+static constexpr HotpatchTypeEntryV0 s_hotpatch_types[4] = {
 	{ "AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliDecoderTests", "AutoGenerated.System_IO_Compression_Brotli", 0u, 2u },
 	{ "AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliEncoderTests", "AutoGenerated.System_IO_Compression_Brotli", 2u, 6u },
 	{ "AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests", "AutoGenerated.System_IO_Compression_Brotli", 8u, 80u },
 	{ "AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c", "AutoGenerated.System_IO_Compression_Brotli", 88u, 36u },
-	{ "Chaos.TestFramework.Assert", "Chaos.TestFramework", 124u, 29u },
-	{ "Chaos.TestFramework.AssertionException", "Chaos.TestFramework", 153u, 1u },
-	{ "Chaos.TestFramework.BenchmarkAttribute", "Chaos.TestFramework", 154u, 1u },
-	{ "Chaos.TestFramework.FactAttribute", "Chaos.TestFramework", 155u, 1u },
-	{ "Chaos.TestFramework.HotUpdateAttribute", "Chaos.TestFramework", 156u, 1u },
 };
 
 // Token→Slot mapping (sorted by token for binary search)
-static constexpr HotpatchSlotEntryV0 s_hotpatch_slots[157] = {
-	{ 0x00000030u, 34u },
-	{ 0x00000031u, 29u },
-	{ 0x00000032u, 33u },
-	{ 0x00000033u, 26u },
-	{ 0x00000034u, 36u },
-	{ 0x00000035u, 25u },
-	{ 0x00000036u, 39u },
-	{ 0x00000037u, 18u },
-	{ 0x00000038u, 37u },
-	{ 0x00000039u, 20u },
-	{ 0x0000003Au, 40u },
-	{ 0x0000003Bu, 7u },
-	{ 0x0000003Cu, 38u },
-	{ 0x0000003Du, 14u },
-	{ 0x0000003Eu, 35u },
-	{ 0x0000003Fu, 8u },
-	{ 0x00000040u, 84u },
-	{ 0x00000041u, 15u },
-	{ 0x00000042u, 85u },
-	{ 0x00000043u, 6u },
-	{ 0x00000044u, 86u },
-	{ 0x00000045u, 13u },
-	{ 0x00000046u, 87u },
-	{ 0x00000047u, 1u },
-	{ 0x00000048u, 88u },
-	{ 0x00000049u, 10u },
-	{ 0x0000004Au, 95u },
-	{ 0x0000004Bu, 3u },
-	{ 0x0000004Cu, 96u },
-	{ 0x0000004Du, 0u },
-	{ 0x0000004Eu, 47u },
-	{ 0x0000004Fu, 11u },
-	{ 0x00000050u, 57u },
-	{ 0x00000051u, 5u },
-	{ 0x00000052u, 48u },
-	{ 0x00000053u, 4u },
-	{ 0x00000054u, 58u },
-	{ 0x00000055u, 12u },
-	{ 0x00000056u, 49u },
-	{ 0x00000057u, 9u },
-	{ 0x00000058u, 59u },
-	{ 0x00000059u, 23u },
-	{ 0x0000005Au, 50u },
-	{ 0x0000005Bu, 22u },
-	{ 0x0000005Cu, 60u },
-	{ 0x0000005Du, 24u },
-	{ 0x0000005Eu, 51u },
-	{ 0x0000005Fu, 21u },
-	{ 0x00000060u, 61u },
-	{ 0x00000061u, 27u },
-	{ 0x00000062u, 64u },
-	{ 0x00000064u, 115u },
-	{ 0x00000065u, 16u },
-	{ 0x00000066u, 89u },
-	{ 0x00000067u, 2u },
-	{ 0x00000068u, 116u },
-	{ 0x00000069u, 17u },
-	{ 0x0000006Au, 90u },
-	{ 0x0000006Bu, 19u },
-	{ 0x0000006Cu, 117u },
-	{ 0x0000006Du, 30u },
-	{ 0x0000006Eu, 91u },
-	{ 0x0000006Fu, 31u },
-	{ 0x00000070u, 118u },
-	{ 0x00000071u, 32u },
-	{ 0x00000072u, 92u },
-	{ 0x00000073u, 119u },
-	{ 0x00000074u, 93u },
-	{ 0x00000075u, 120u },
-	{ 0x00000076u, 94u },
-	{ 0x00000077u, 65u },
-	{ 0x00000078u, 99u },
-	{ 0x00000079u, 66u },
-	{ 0x0000007Au, 100u },
-	{ 0x0000007Bu, 67u },
-	{ 0x0000007Cu, 101u },
-	{ 0x0000007Du, 68u },
-	{ 0x0000007Eu, 102u },
-	{ 0x0000007Fu, 69u },
-	{ 0x00000080u, 103u },
-	{ 0x00000081u, 70u },
-	{ 0x00000082u, 104u },
-	{ 0x00000083u, 71u },
-	{ 0x00000084u, 111u },
-	{ 0x00000085u, 78u },
-	{ 0x00000086u, 42u },
-	{ 0x00000087u, 52u },
-	{ 0x00000088u, 43u },
-	{ 0x00000089u, 53u },
-	{ 0x0000008Au, 44u },
-	{ 0x0000008Bu, 54u },
-	{ 0x0000008Cu, 45u },
-	{ 0x0000008Du, 55u },
-	{ 0x0000008Eu, 46u },
-	{ 0x0000008Fu, 56u },
-	{ 0x00000090u, 98u },
-	{ 0x00000091u, 63u },
-	{ 0x00000092u, 105u },
-	{ 0x00000093u, 72u },
-	{ 0x00000094u, 106u },
-	{ 0x00000095u, 73u },
-	{ 0x00000096u, 107u },
-	{ 0x00000097u, 74u },
-	{ 0x00000098u, 108u },
-	{ 0x00000099u, 75u },
-	{ 0x0000009Au, 109u },
-	{ 0x0000009Bu, 76u },
+static constexpr HotpatchSlotEntryV0 s_hotpatch_slots[124] = {
+	{ 0x00000028u, 1u },
+	{ 0x00000029u, 0u },
+	{ 0x0000002Au, 3u },
+	{ 0x0000002Bu, 6u },
+	{ 0x0000002Cu, 4u },
+	{ 0x0000002Du, 7u },
+	{ 0x0000002Eu, 5u },
+	{ 0x0000002Fu, 2u },
+	{ 0x00000030u, 51u },
+	{ 0x00000031u, 52u },
+	{ 0x00000032u, 53u },
+	{ 0x00000033u, 54u },
+	{ 0x00000034u, 55u },
+	{ 0x00000035u, 62u },
+	{ 0x00000036u, 63u },
+	{ 0x00000037u, 14u },
+	{ 0x00000038u, 24u },
+	{ 0x00000039u, 15u },
+	{ 0x0000003Au, 25u },
+	{ 0x0000003Bu, 16u },
+	{ 0x0000003Cu, 26u },
+	{ 0x0000003Du, 17u },
+	{ 0x0000003Eu, 27u },
+	{ 0x0000003Fu, 18u },
+	{ 0x00000040u, 28u },
+	{ 0x00000041u, 31u },
+	{ 0x00000042u, 82u },
+	{ 0x00000043u, 56u },
+	{ 0x00000044u, 83u },
+	{ 0x00000045u, 57u },
+	{ 0x00000046u, 84u },
+	{ 0x00000047u, 58u },
+	{ 0x00000048u, 85u },
+	{ 0x00000049u, 59u },
+	{ 0x0000004Au, 86u },
+	{ 0x0000004Bu, 60u },
+	{ 0x0000004Cu, 87u },
+	{ 0x0000004Du, 61u },
+	{ 0x0000004Eu, 32u },
+	{ 0x0000004Fu, 66u },
+	{ 0x00000050u, 33u },
+	{ 0x00000051u, 67u },
+	{ 0x00000052u, 34u },
+	{ 0x00000053u, 68u },
+	{ 0x00000054u, 35u },
+	{ 0x00000055u, 69u },
+	{ 0x00000056u, 36u },
+	{ 0x00000057u, 70u },
+	{ 0x00000058u, 37u },
+	{ 0x00000059u, 71u },
+	{ 0x0000005Au, 38u },
+	{ 0x0000005Bu, 78u },
+	{ 0x0000005Cu, 45u },
+	{ 0x0000005Du, 9u },
+	{ 0x0000005Eu, 19u },
+	{ 0x0000005Fu, 10u },
+	{ 0x00000060u, 20u },
+	{ 0x00000061u, 11u },
+	{ 0x00000062u, 21u },
+	{ 0x00000063u, 12u },
+	{ 0x00000064u, 22u },
+	{ 0x00000065u, 13u },
+	{ 0x00000066u, 23u },
+	{ 0x00000067u, 65u },
+	{ 0x00000068u, 30u },
+	{ 0x00000069u, 72u },
+	{ 0x0000006Au, 39u },
+	{ 0x0000006Bu, 73u },
+	{ 0x0000006Cu, 40u },
+	{ 0x0000006Du, 74u },
+	{ 0x0000006Eu, 41u },
+	{ 0x0000006Fu, 75u },
+	{ 0x00000070u, 42u },
+	{ 0x00000071u, 76u },
+	{ 0x00000072u, 43u },
+	{ 0x00000073u, 77u },
+	{ 0x00000074u, 44u },
+	{ 0x00000075u, 64u },
+	{ 0x00000076u, 29u },
+	{ 0x00000077u, 79u },
+	{ 0x00000078u, 46u },
+	{ 0x00000079u, 80u },
+	{ 0x0000007Au, 47u },
+	{ 0x0000007Bu, 81u },
+	{ 0x0000007Cu, 48u },
+	{ 0x0000007Du, 49u },
+	{ 0x0000007Eu, 50u },
+	{ 0x0000007Fu, 8u },
+	{ 0x00000080u, 88u },
+	{ 0x00000081u, 89u },
+	{ 0x00000082u, 95u },
+	{ 0x00000083u, 96u },
+	{ 0x00000084u, 97u },
+	{ 0x00000085u, 98u },
+	{ 0x00000086u, 99u },
+	{ 0x00000087u, 118u },
+	{ 0x00000088u, 119u },
+	{ 0x00000089u, 120u },
+	{ 0x0000008Au, 121u },
+	{ 0x0000008Bu, 122u },
+	{ 0x0000008Cu, 123u },
+	{ 0x0000008Du, 102u },
+	{ 0x0000008Eu, 103u },
+	{ 0x0000008Fu, 104u },
+	{ 0x00000090u, 105u },
+	{ 0x00000091u, 106u },
+	{ 0x00000092u, 107u },
+	{ 0x00000093u, 114u },
+	{ 0x00000094u, 90u },
+	{ 0x00000095u, 91u },
+	{ 0x00000096u, 92u },
+	{ 0x00000097u, 93u },
+	{ 0x00000098u, 94u },
+	{ 0x00000099u, 101u },
+	{ 0x0000009Au, 108u },
+	{ 0x0000009Bu, 109u },
 	{ 0x0000009Cu, 110u },
-	{ 0x0000009Du, 77u },
-	{ 0x0000009Eu, 97u },
-	{ 0x0000009Fu, 62u },
-	{ 0x000000A0u, 112u },
-	{ 0x000000A1u, 79u },
-	{ 0x000000A2u, 113u },
-	{ 0x000000A3u, 80u },
-	{ 0x000000A4u, 114u },
-	{ 0x000000A5u, 81u },
-	{ 0x000000A6u, 82u },
-	{ 0x000000A7u, 83u },
-	{ 0x000000A8u, 41u },
-	{ 0x000000A9u, 121u },
-	{ 0x000000AAu, 122u },
-	{ 0x000000ABu, 128u },
-	{ 0x000000ACu, 129u },
-	{ 0x000000ADu, 130u },
-	{ 0x000000AEu, 131u },
-	{ 0x000000AFu, 132u },
-	{ 0x000000B0u, 151u },
-	{ 0x000000B1u, 152u },
-	{ 0x000000B2u, 153u },
-	{ 0x000000B3u, 154u },
-	{ 0x000000B4u, 155u },
-	{ 0x000000B5u, 156u },
-	{ 0x000000B6u, 135u },
-	{ 0x000000B7u, 136u },
-	{ 0x000000B8u, 137u },
-	{ 0x000000B9u, 138u },
-	{ 0x000000BAu, 139u },
-	{ 0x000000BBu, 140u },
-	{ 0x000000BCu, 147u },
-	{ 0x000000BDu, 123u },
-	{ 0x000000BEu, 124u },
-	{ 0x000000BFu, 125u },
-	{ 0x000000C0u, 126u },
-	{ 0x000000C1u, 127u },
-	{ 0x000000C2u, 134u },
-	{ 0x000000C3u, 141u },
-	{ 0x000000C4u, 142u },
-	{ 0x000000C5u, 143u },
-	{ 0x000000C6u, 144u },
-	{ 0x000000C7u, 145u },
-	{ 0x000000C8u, 146u },
-	{ 0x000000C9u, 133u },
-	{ 0x000000CAu, 148u },
-	{ 0x000000CBu, 149u },
-	{ 0x000000CCu, 150u },
-	{ 0x000000CDu, 28u },
+	{ 0x0000009Du, 111u },
+	{ 0x0000009Eu, 112u },
+	{ 0x0000009Fu, 113u },
+	{ 0x000000A0u, 100u },
+	{ 0x000000A1u, 115u },
+	{ 0x000000A2u, 116u },
+	{ 0x000000A3u, 117u },
 };
 
 // Dispatch table (function pointers)
@@ -1557,386 +1837,158 @@ static constexpr HotpatchSlotEntryV0 s_hotpatch_slots[157] = {
 // TU (verification_dispatch.generated.cpp) can access this array via
 // GetHotpatchEntries(). Without external linkage, the linker cannot resolve
 // the symbol across translation units.
-extern "C" HotpatchEntryV0 s_hotpatch_entries[157] = {
-	{ reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Boolean_System_Boolean_System_String), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // Chaos.TestFramework.Assert::AreEqual
-	{ reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Byte_System_Byte_System_String), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // Chaos.TestFramework.Assert::AreEqual
-	{ reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Byte_array_System_Byte_array_System_String), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // Chaos.TestFramework.Assert::AreEqual
-	{ reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Char_System_Char_System_String), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // Chaos.TestFramework.Assert::AreEqual
-	{ reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Decimal_System_Decimal_System_String), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // Chaos.TestFramework.Assert::AreEqual
-	{ reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Double_System_Double_System_String), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // Chaos.TestFramework.Assert::AreEqual
-	{ reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Int16_System_Int16_System_String), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // Chaos.TestFramework.Assert::AreEqual
-	{ reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Int32_System_Int32_System_String), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // Chaos.TestFramework.Assert::AreEqual
-	{ reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Int64_System_Int64_System_String), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // Chaos.TestFramework.Assert::AreEqual
-	{ reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Object_System_Object_System_String), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // Chaos.TestFramework.Assert::AreEqual
-	{ reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_SByte_System_SByte_System_String), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // Chaos.TestFramework.Assert::AreEqual
-	{ reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Single_System_Single_System_String), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // Chaos.TestFramework.Assert::AreEqual
-	{ reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_String_System_String_System_String), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // Chaos.TestFramework.Assert::AreEqual
-	{ reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_UInt16_System_UInt16_System_String), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // Chaos.TestFramework.Assert::AreEqual
-	{ reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_UInt32_System_UInt32_System_String), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // Chaos.TestFramework.Assert::AreEqual
-	{ reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_UInt64_System_UInt64_System_String), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // Chaos.TestFramework.Assert::AreEqual
-	{ reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_0_0_System_String), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // Chaos.TestFramework.Assert::AreEqual`1
-	{ reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreNotEqual_0_0_System_String), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // Chaos.TestFramework.Assert::AreNotEqual`1
-	{ reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Complete), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // Chaos.TestFramework.Assert::Complete
-	{ reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Fail_System_String), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // Chaos.TestFramework.Assert::Fail
-	{ reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_get_ExitCode), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // Chaos.TestFramework.Assert::get_ExitCode
-	{ reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_IsFalse_System_Boolean_System_String), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // Chaos.TestFramework.Assert::IsFalse
-	{ reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_IsNotNull_System_Object_System_String), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // Chaos.TestFramework.Assert::IsNotNull
-	{ reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_IsNull_System_Object_System_String), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // Chaos.TestFramework.Assert::IsNull
-	{ reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_IsTrue_System_Boolean_System_String), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // Chaos.TestFramework.Assert::IsTrue
-	{ reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_RecordFailure), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // Chaos.TestFramework.Assert::RecordFailure
-	{ reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Reset), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // Chaos.TestFramework.Assert::Reset
-	{ reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Throws_System_Action), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // Chaos.TestFramework.Assert::Throws
-	{ reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Throws_System_NullReferenceException_System_Action__generic), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // Chaos.TestFramework.Assert::Throws<System.NullReferenceException>
-	{ reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_AssertionException__ctor_System_String), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // Chaos.TestFramework.AssertionException::.ctor
-	{ reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_BenchmarkAttribute__ctor), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // Chaos.TestFramework.BenchmarkAttribute::.ctor
-	{ reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_FactAttribute__ctor), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // Chaos.TestFramework.FactAttribute::.ctor
-	{ reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_HotUpdateAttribute__ctor), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // Chaos.TestFramework.HotUpdateAttribute::.ctor
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliDecoderTests__ctor), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliDecoderTests::.ctor
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliDecoderTests_Benchmark_Dispose_0__0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliDecoderTests::Benchmark_Dispose_0__0
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliEncoderTests__ctor), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliEncoderTests::.ctor
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliEncoderTests_Benchmark_Dispose_0__0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliEncoderTests::Benchmark_Dispose_0__0
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliEncoderTests_Benchmark_GetMaxCompressedLength_1_int_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliEncoderTests::Benchmark_GetMaxCompressedLength_1_int_0
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliEncoderTests_Benchmark_GetMaxCompressedLength_1_int_1), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliEncoderTests::Benchmark_GetMaxCompressedLength_1_int_1
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliEncoderTests_GetMaxCompressedLength_1_int_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliEncoderTests::GetMaxCompressedLength_1_int_0
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliEncoderTests_GetMaxCompressedLength_1_int_1), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliEncoderTests::GetMaxCompressedLength_1_int_1
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests__ctor), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::.ctor
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_0
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_1), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_1
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_2), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_2
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_3), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_3
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_4), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_4
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_0
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_1), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_1
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_2), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_2
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_3), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_3
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_4), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_4
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_0
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_1), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_1
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_2), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_2
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_3), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_3
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_4), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_4
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_0
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_1), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_1
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_2), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_2
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_3), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_3
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_4), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_4
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_DisposeAsync_14__14), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_DisposeAsync_14__14
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_EndRead_11_System_IAsyncResult_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_EndRead_11_System_IAsyncResult_0
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_EndWrite_3_System_IAsyncResult_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_EndWrite_3_System_IAsyncResult_0
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_Flush_6__6), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_Flush_6__6
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_FlushAsync_7_CancellationToken_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_FlushAsync_7_CancellationToken_0
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_Read_8_System_Byte_int_int_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_Read_8_System_Byte_int_int_0
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_Read_8_System_Byte_int_int_1), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_Read_8_System_Byte_int_int_1
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_Read_8_System_Byte_int_int_2), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_Read_8_System_Byte_int_int_2
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_Read_8_System_Byte_int_int_3), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_Read_8_System_Byte_int_int_3
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_Read_8_System_Byte_int_int_4), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_Read_8_System_Byte_int_int_4
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_ReadAsync_12_System_Byte_int_int_CancellationToken_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_ReadAsync_12_System_Byte_int_int_CancellationToken_0
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_ReadAsync_12_System_Byte_int_int_CancellationToken_1), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_ReadAsync_12_System_Byte_int_int_CancellationToken_1
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_ReadAsync_12_System_Byte_int_int_CancellationToken_2), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_ReadAsync_12_System_Byte_int_int_CancellationToken_2
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_ReadAsync_12_System_Byte_int_int_CancellationToken_3), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_ReadAsync_12_System_Byte_int_int_CancellationToken_3
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_ReadAsync_12_System_Byte_int_int_CancellationToken_4), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_ReadAsync_12_System_Byte_int_int_CancellationToken_4
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_ReadAsync_13_System_Memorybyte_CancellationToken_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_ReadAsync_13_System_Memorybyte_CancellationToken_0
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_ReadByte_9__9), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_ReadByte_9__9
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_Seek_15_long_SeekOrigin_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_Seek_15_long_SeekOrigin_0
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_Seek_15_long_SeekOrigin_1), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_Seek_15_long_SeekOrigin_1
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_Seek_15_long_SeekOrigin_2), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_Seek_15_long_SeekOrigin_2
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_SetLength_16_long_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_SetLength_16_long_0
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_SetLength_16_long_1), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_SetLength_16_long_1
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_Write_0_System_Byte_int_int_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_Write_0_System_Byte_int_int_0
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_Write_0_System_Byte_int_int_1), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_Write_0_System_Byte_int_int_1
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_Write_0_System_Byte_int_int_2), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_Write_0_System_Byte_int_int_2
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_Write_0_System_Byte_int_int_3), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_Write_0_System_Byte_int_int_3
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_Write_0_System_Byte_int_int_4), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_Write_0_System_Byte_int_int_4
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_WriteAsync_4_System_Byte_int_int_CancellationToken_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_WriteAsync_4_System_Byte_int_int_CancellationToken_0
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_WriteAsync_4_System_Byte_int_int_CancellationToken_1), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_WriteAsync_4_System_Byte_int_int_CancellationToken_1
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_WriteAsync_4_System_Byte_int_int_CancellationToken_2), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_WriteAsync_4_System_Byte_int_int_CancellationToken_2
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_WriteAsync_4_System_Byte_int_int_CancellationToken_3), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_WriteAsync_4_System_Byte_int_int_CancellationToken_3
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_WriteAsync_4_System_Byte_int_int_CancellationToken_4), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_WriteAsync_4_System_Byte_int_int_CancellationToken_4
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_WriteAsync_5_System_ReadOnlyMemorybyte_CancellationToken_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_WriteAsync_5_System_ReadOnlyMemorybyte_CancellationToken_0
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_WriteByte_1_byte_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_WriteByte_1_byte_0
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_WriteByte_1_byte_1), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_WriteByte_1_byte_1
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_DisposeAsync_14__14), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::DisposeAsync_14__14
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_EndRead_11_System_IAsyncResult_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::EndRead_11_System_IAsyncResult_0
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_FlushAsync_7_CancellationToken_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::FlushAsync_7_CancellationToken_0
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Read_8_System_Byte_int_int_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Read_8_System_Byte_int_int_0
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Read_8_System_Byte_int_int_1), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Read_8_System_Byte_int_int_1
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Read_8_System_Byte_int_int_2), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Read_8_System_Byte_int_int_2
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Read_8_System_Byte_int_int_3), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Read_8_System_Byte_int_int_3
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Read_8_System_Byte_int_int_4), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Read_8_System_Byte_int_int_4
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_ReadAsync_12_System_Byte_int_int_CancellationToken_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::ReadAsync_12_System_Byte_int_int_CancellationToken_0
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_ReadAsync_12_System_Byte_int_int_CancellationToken_1), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::ReadAsync_12_System_Byte_int_int_CancellationToken_1
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_ReadAsync_12_System_Byte_int_int_CancellationToken_2), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::ReadAsync_12_System_Byte_int_int_CancellationToken_2
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_ReadAsync_12_System_Byte_int_int_CancellationToken_3), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::ReadAsync_12_System_Byte_int_int_CancellationToken_3
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_ReadAsync_12_System_Byte_int_int_CancellationToken_4), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::ReadAsync_12_System_Byte_int_int_CancellationToken_4
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_ReadAsync_13_System_Memorybyte_CancellationToken_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::ReadAsync_13_System_Memorybyte_CancellationToken_0
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_ReadByte_9__9), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::ReadByte_9__9
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Seek_15_long_SeekOrigin_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Seek_15_long_SeekOrigin_0
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Seek_15_long_SeekOrigin_1), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Seek_15_long_SeekOrigin_1
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Seek_15_long_SeekOrigin_2), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Seek_15_long_SeekOrigin_2
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_WriteAsync_4_System_Byte_int_int_CancellationToken_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::WriteAsync_4_System_Byte_int_int_CancellationToken_0
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_WriteAsync_4_System_Byte_int_int_CancellationToken_1), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::WriteAsync_4_System_Byte_int_int_CancellationToken_1
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_WriteAsync_4_System_Byte_int_int_CancellationToken_2), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::WriteAsync_4_System_Byte_int_int_CancellationToken_2
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_WriteAsync_4_System_Byte_int_int_CancellationToken_3), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::WriteAsync_4_System_Byte_int_int_CancellationToken_3
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_WriteAsync_4_System_Byte_int_int_CancellationToken_4), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::WriteAsync_4_System_Byte_int_int_CancellationToken_4
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_WriteAsync_5_System_ReadOnlyMemorybyte_CancellationToken_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::WriteAsync_5_System_ReadOnlyMemorybyte_CancellationToken_0
+extern "C" HotpatchEntryV0 s_hotpatch_entries[124] = {
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliDecoderTests__ctor), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliDecoderTests::.ctor
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliDecoderTests_Benchmark_Dispose_0__0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliDecoderTests::Benchmark_Dispose_0__0
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliEncoderTests__ctor), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliEncoderTests::.ctor
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliEncoderTests_Benchmark_Dispose_0__0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliEncoderTests::Benchmark_Dispose_0__0
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliEncoderTests_Benchmark_GetMaxCompressedLength_1_int_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliEncoderTests::Benchmark_GetMaxCompressedLength_1_int_0
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliEncoderTests_Benchmark_GetMaxCompressedLength_1_int_1), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliEncoderTests::Benchmark_GetMaxCompressedLength_1_int_1
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliEncoderTests_GetMaxCompressedLength_1_int_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliEncoderTests::GetMaxCompressedLength_1_int_0
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliEncoderTests_GetMaxCompressedLength_1_int_1), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliEncoderTests::GetMaxCompressedLength_1_int_1
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests__ctor), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::.ctor
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_0
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_1), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_1
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_2), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_2
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_3), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_3
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_4), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_4
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_0
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_1), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_1
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_2), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_2
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_3), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_3
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_4), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_4
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_0
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_1), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_1
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_2), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_2
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_3), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_3
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_4), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_4
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_0
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_1), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_1
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_2), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_2
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_3), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_3
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_4), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_4
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_DisposeAsync_14__14), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_DisposeAsync_14__14
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_EndRead_11_System_IAsyncResult_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_EndRead_11_System_IAsyncResult_0
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_EndWrite_3_System_IAsyncResult_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_EndWrite_3_System_IAsyncResult_0
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_Flush_6__6), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_Flush_6__6
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_FlushAsync_7_CancellationToken_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_FlushAsync_7_CancellationToken_0
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_Read_8_System_Byte_int_int_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_Read_8_System_Byte_int_int_0
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_Read_8_System_Byte_int_int_1), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_Read_8_System_Byte_int_int_1
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_Read_8_System_Byte_int_int_2), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_Read_8_System_Byte_int_int_2
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_Read_8_System_Byte_int_int_3), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_Read_8_System_Byte_int_int_3
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_Read_8_System_Byte_int_int_4), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_Read_8_System_Byte_int_int_4
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_ReadAsync_12_System_Byte_int_int_CancellationToken_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_ReadAsync_12_System_Byte_int_int_CancellationToken_0
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_ReadAsync_12_System_Byte_int_int_CancellationToken_1), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_ReadAsync_12_System_Byte_int_int_CancellationToken_1
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_ReadAsync_12_System_Byte_int_int_CancellationToken_2), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_ReadAsync_12_System_Byte_int_int_CancellationToken_2
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_ReadAsync_12_System_Byte_int_int_CancellationToken_3), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_ReadAsync_12_System_Byte_int_int_CancellationToken_3
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_ReadAsync_12_System_Byte_int_int_CancellationToken_4), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_ReadAsync_12_System_Byte_int_int_CancellationToken_4
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_ReadAsync_13_System_Memorybyte_CancellationToken_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_ReadAsync_13_System_Memorybyte_CancellationToken_0
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_ReadByte_9__9), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_ReadByte_9__9
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_Seek_15_long_SeekOrigin_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_Seek_15_long_SeekOrigin_0
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_Seek_15_long_SeekOrigin_1), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_Seek_15_long_SeekOrigin_1
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_Seek_15_long_SeekOrigin_2), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_Seek_15_long_SeekOrigin_2
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_SetLength_16_long_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_SetLength_16_long_0
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_SetLength_16_long_1), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_SetLength_16_long_1
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_Write_0_System_Byte_int_int_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_Write_0_System_Byte_int_int_0
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_Write_0_System_Byte_int_int_1), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_Write_0_System_Byte_int_int_1
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_Write_0_System_Byte_int_int_2), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_Write_0_System_Byte_int_int_2
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_Write_0_System_Byte_int_int_3), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_Write_0_System_Byte_int_int_3
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_Write_0_System_Byte_int_int_4), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_Write_0_System_Byte_int_int_4
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_WriteAsync_4_System_Byte_int_int_CancellationToken_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_WriteAsync_4_System_Byte_int_int_CancellationToken_0
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_WriteAsync_4_System_Byte_int_int_CancellationToken_1), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_WriteAsync_4_System_Byte_int_int_CancellationToken_1
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_WriteAsync_4_System_Byte_int_int_CancellationToken_2), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_WriteAsync_4_System_Byte_int_int_CancellationToken_2
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_WriteAsync_4_System_Byte_int_int_CancellationToken_3), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_WriteAsync_4_System_Byte_int_int_CancellationToken_3
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_WriteAsync_4_System_Byte_int_int_CancellationToken_4), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_WriteAsync_4_System_Byte_int_int_CancellationToken_4
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_WriteAsync_5_System_ReadOnlyMemorybyte_CancellationToken_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_WriteAsync_5_System_ReadOnlyMemorybyte_CancellationToken_0
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_WriteByte_1_byte_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_WriteByte_1_byte_0
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_WriteByte_1_byte_1), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_WriteByte_1_byte_1
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_DisposeAsync_14__14), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::DisposeAsync_14__14
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_EndRead_11_System_IAsyncResult_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::EndRead_11_System_IAsyncResult_0
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_FlushAsync_7_CancellationToken_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::FlushAsync_7_CancellationToken_0
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Read_8_System_Byte_int_int_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Read_8_System_Byte_int_int_0
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Read_8_System_Byte_int_int_1), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Read_8_System_Byte_int_int_1
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Read_8_System_Byte_int_int_2), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Read_8_System_Byte_int_int_2
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Read_8_System_Byte_int_int_3), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Read_8_System_Byte_int_int_3
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Read_8_System_Byte_int_int_4), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Read_8_System_Byte_int_int_4
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_ReadAsync_12_System_Byte_int_int_CancellationToken_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::ReadAsync_12_System_Byte_int_int_CancellationToken_0
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_ReadAsync_12_System_Byte_int_int_CancellationToken_1), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::ReadAsync_12_System_Byte_int_int_CancellationToken_1
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_ReadAsync_12_System_Byte_int_int_CancellationToken_2), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::ReadAsync_12_System_Byte_int_int_CancellationToken_2
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_ReadAsync_12_System_Byte_int_int_CancellationToken_3), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::ReadAsync_12_System_Byte_int_int_CancellationToken_3
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_ReadAsync_12_System_Byte_int_int_CancellationToken_4), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::ReadAsync_12_System_Byte_int_int_CancellationToken_4
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_ReadAsync_13_System_Memorybyte_CancellationToken_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::ReadAsync_13_System_Memorybyte_CancellationToken_0
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_ReadByte_9__9), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::ReadByte_9__9
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Seek_15_long_SeekOrigin_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Seek_15_long_SeekOrigin_0
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Seek_15_long_SeekOrigin_1), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Seek_15_long_SeekOrigin_1
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Seek_15_long_SeekOrigin_2), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Seek_15_long_SeekOrigin_2
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_WriteAsync_4_System_Byte_int_int_CancellationToken_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::WriteAsync_4_System_Byte_int_int_CancellationToken_0
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_WriteAsync_4_System_Byte_int_int_CancellationToken_1), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::WriteAsync_4_System_Byte_int_int_CancellationToken_1
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_WriteAsync_4_System_Byte_int_int_CancellationToken_2), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::WriteAsync_4_System_Byte_int_int_CancellationToken_2
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_WriteAsync_4_System_Byte_int_int_CancellationToken_3), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::WriteAsync_4_System_Byte_int_int_CancellationToken_3
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_WriteAsync_4_System_Byte_int_int_CancellationToken_4), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::WriteAsync_4_System_Byte_int_int_CancellationToken_4
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_WriteAsync_5_System_ReadOnlyMemorybyte_CancellationToken_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::WriteAsync_5_System_ReadOnlyMemorybyte_CancellationToken_0
 	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_cctor), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::.cctor
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c__ctor), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::.ctor
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_0_b__45_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_0>b__45_0
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_1_b__47_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_1>b__47_0
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_2_b__49_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_2>b__49_0
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_3_b__51_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_3>b__51_0
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_4_b__53_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_4>b__53_0
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_0_b__7_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_0>b__7_0
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_1_b__9_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_1>b__9_0
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_2_b__11_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_2>b__11_0
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_3_b__13_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_3>b__13_0
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_4_b__15_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_4>b__15_0
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_DisposeAsync_14__14_b__69_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<DisposeAsync_14__14>b__69_0
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_EndRead_11_System_IAsyncResult_0_b__55_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<EndRead_11_System_IAsyncResult_0>b__55_0
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_FlushAsync_7_CancellationToken_0_b__31_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<FlushAsync_7_CancellationToken_0>b__31_0
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_Read_8_System_Byte_int_int_0_b__33_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<Read_8_System_Byte_int_int_0>b__33_0
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_Read_8_System_Byte_int_int_1_b__35_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<Read_8_System_Byte_int_int_1>b__35_0
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_Read_8_System_Byte_int_int_2_b__37_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<Read_8_System_Byte_int_int_2>b__37_0
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_Read_8_System_Byte_int_int_3_b__39_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<Read_8_System_Byte_int_int_3>b__39_0
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_Read_8_System_Byte_int_int_4_b__41_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<Read_8_System_Byte_int_int_4>b__41_0
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_ReadAsync_12_System_Byte_int_int_CancellationToken_0_b__57_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<ReadAsync_12_System_Byte_int_int_CancellationToken_0>b__57_0
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_ReadAsync_12_System_Byte_int_int_CancellationToken_1_b__59_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<ReadAsync_12_System_Byte_int_int_CancellationToken_1>b__59_0
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_ReadAsync_12_System_Byte_int_int_CancellationToken_2_b__61_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<ReadAsync_12_System_Byte_int_int_CancellationToken_2>b__61_0
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_ReadAsync_12_System_Byte_int_int_CancellationToken_3_b__63_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<ReadAsync_12_System_Byte_int_int_CancellationToken_3>b__63_0
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_ReadAsync_12_System_Byte_int_int_CancellationToken_4_b__65_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<ReadAsync_12_System_Byte_int_int_CancellationToken_4>b__65_0
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_ReadAsync_13_System_Memorybyte_CancellationToken_0_b__67_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<ReadAsync_13_System_Memorybyte_CancellationToken_0>b__67_0
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_ReadByte_9__9_b__43_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<ReadByte_9__9>b__43_0
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_Seek_15_long_SeekOrigin_0_b__71_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<Seek_15_long_SeekOrigin_0>b__71_0
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_Seek_15_long_SeekOrigin_1_b__73_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<Seek_15_long_SeekOrigin_1>b__73_0
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_Seek_15_long_SeekOrigin_2_b__75_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<Seek_15_long_SeekOrigin_2>b__75_0
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_WriteAsync_4_System_Byte_int_int_CancellationToken_0_b__18_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<WriteAsync_4_System_Byte_int_int_CancellationToken_0>b__18_0
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_WriteAsync_4_System_Byte_int_int_CancellationToken_1_b__20_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<WriteAsync_4_System_Byte_int_int_CancellationToken_1>b__20_0
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_WriteAsync_4_System_Byte_int_int_CancellationToken_2_b__22_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<WriteAsync_4_System_Byte_int_int_CancellationToken_2>b__22_0
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_WriteAsync_4_System_Byte_int_int_CancellationToken_3_b__24_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<WriteAsync_4_System_Byte_int_int_CancellationToken_3>b__24_0
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_WriteAsync_4_System_Byte_int_int_CancellationToken_4_b__26_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<WriteAsync_4_System_Byte_int_int_CancellationToken_4>b__26_0
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_WriteAsync_5_System_ReadOnlyMemorybyte_CancellationToken_0_b__28_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<WriteAsync_5_System_ReadOnlyMemorybyte_CancellationToken_0>b__28_0
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c__ctor), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::.ctor
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_0_b__45_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_0>b__45_0
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_1_b__47_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_1>b__47_0
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_2_b__49_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_2>b__49_0
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_3_b__51_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_3>b__51_0
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_4_b__53_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_4>b__53_0
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_0_b__7_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_0>b__7_0
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_1_b__9_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_1>b__9_0
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_2_b__11_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_2>b__11_0
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_3_b__13_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_3>b__13_0
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_4_b__15_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_4>b__15_0
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_DisposeAsync_14__14_b__69_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<DisposeAsync_14__14>b__69_0
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_EndRead_11_System_IAsyncResult_0_b__55_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<EndRead_11_System_IAsyncResult_0>b__55_0
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_FlushAsync_7_CancellationToken_0_b__31_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<FlushAsync_7_CancellationToken_0>b__31_0
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_Read_8_System_Byte_int_int_0_b__33_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<Read_8_System_Byte_int_int_0>b__33_0
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_Read_8_System_Byte_int_int_1_b__35_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<Read_8_System_Byte_int_int_1>b__35_0
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_Read_8_System_Byte_int_int_2_b__37_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<Read_8_System_Byte_int_int_2>b__37_0
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_Read_8_System_Byte_int_int_3_b__39_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<Read_8_System_Byte_int_int_3>b__39_0
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_Read_8_System_Byte_int_int_4_b__41_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<Read_8_System_Byte_int_int_4>b__41_0
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_ReadAsync_12_System_Byte_int_int_CancellationToken_0_b__57_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<ReadAsync_12_System_Byte_int_int_CancellationToken_0>b__57_0
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_ReadAsync_12_System_Byte_int_int_CancellationToken_1_b__59_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<ReadAsync_12_System_Byte_int_int_CancellationToken_1>b__59_0
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_ReadAsync_12_System_Byte_int_int_CancellationToken_2_b__61_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<ReadAsync_12_System_Byte_int_int_CancellationToken_2>b__61_0
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_ReadAsync_12_System_Byte_int_int_CancellationToken_3_b__63_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<ReadAsync_12_System_Byte_int_int_CancellationToken_3>b__63_0
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_ReadAsync_12_System_Byte_int_int_CancellationToken_4_b__65_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<ReadAsync_12_System_Byte_int_int_CancellationToken_4>b__65_0
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_ReadAsync_13_System_Memorybyte_CancellationToken_0_b__67_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<ReadAsync_13_System_Memorybyte_CancellationToken_0>b__67_0
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_ReadByte_9__9_b__43_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<ReadByte_9__9>b__43_0
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_Seek_15_long_SeekOrigin_0_b__71_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<Seek_15_long_SeekOrigin_0>b__71_0
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_Seek_15_long_SeekOrigin_1_b__73_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<Seek_15_long_SeekOrigin_1>b__73_0
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_Seek_15_long_SeekOrigin_2_b__75_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<Seek_15_long_SeekOrigin_2>b__75_0
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_WriteAsync_4_System_Byte_int_int_CancellationToken_0_b__18_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<WriteAsync_4_System_Byte_int_int_CancellationToken_0>b__18_0
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_WriteAsync_4_System_Byte_int_int_CancellationToken_1_b__20_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<WriteAsync_4_System_Byte_int_int_CancellationToken_1>b__20_0
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_WriteAsync_4_System_Byte_int_int_CancellationToken_2_b__22_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<WriteAsync_4_System_Byte_int_int_CancellationToken_2>b__22_0
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_WriteAsync_4_System_Byte_int_int_CancellationToken_3_b__24_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<WriteAsync_4_System_Byte_int_int_CancellationToken_3>b__24_0
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_WriteAsync_4_System_Byte_int_int_CancellationToken_4_b__26_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<WriteAsync_4_System_Byte_int_int_CancellationToken_4>b__26_0
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_WriteAsync_5_System_ReadOnlyMemorybyte_CancellationToken_0_b__28_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<WriteAsync_5_System_ReadOnlyMemorybyte_CancellationToken_0>b__28_0
 };
 
 // Accessor functions for verification_dispatch.generated.cpp
 extern "C" const HotpatchEntryV0* GetHotpatchEntries() noexcept { return s_hotpatch_entries; }
-extern "C" int32_t GetHotpatchEntryCount() noexcept { return 157; }
+extern "C" int32_t GetHotpatchEntryCount() noexcept { return 124; }
 
 // Module hotpatch bundle (extern linkage — referenced across page files)
 extern constexpr HotpatchModuleV0 s_hotpatch_module = {
 	"CombinedSubjects",
 	s_hotpatch_types,
-	9u,
+	4u,
 	s_hotpatch_methods,
-	157u,
+	124u,
 	s_hotpatch_slots,
-	157u,
+	124u,
 	s_hotpatch_entries,
-	157u,
+	124u,
 };
 
 // Expose hotpatch module to BootstrapRuntime
 extern "C" const HotpatchModuleV0* chaos_il2cpp_aot_hotpatch_module
 	= &s_hotpatch_module;
-// ── External Runtime Dispatch Table ──────────────────────────
-// Startup-time-resolved function pointers for cross-assembly calls.
+// --- External Runtime Dispatch Table (empty) ---
+extern "C" const char* kChaosExternalRuntimeSubjects[1] = { nullptr };
+extern "C" void* kChaosExternalRuntimeFnTable[1] = { nullptr };
+extern "C" int32_t kChaosExternalRuntimeCount = 0;
 
-extern "C" const char* kChaosExternalRuntimeSubjects[95] = {
-	"System.Private.CoreLib/System.Decimal::op_Inequality:System.Boolean(System.Decimal,System.Decimal)",
-	"System.Private.CoreLib/System.Object::Equals:System.Boolean(System.Object,System.Object)",
-	"System.Private.CoreLib/System.Object::ToString:System.String()",
-	"System.Private.CoreLib/System.String::op_Inequality:System.Boolean(System.String,System.String)",
-	"Chaos.TestFramework.Sdk/!!0",
-	"System.Private.CoreLib/System.String",
-	"System.Private.CoreLib/System.Collections.IEnumerable",
-	"System.Private.CoreLib/System.Collections.IEnumerable::GetEnumerator:System.Collections.IEnumerator()",
-	"System.Private.CoreLib/System.IDisposable",
-	"System.Private.CoreLib/System.Collections.IEnumerator::MoveNext:System.Boolean()",
-	"System.Private.CoreLib/System.Collections.Generic.EqualityComparer<System.Object>::get_Default:System.Collections.Generic.EqualityComparer<System.Object>()",
-	"System.Private.CoreLib/System.Collections.IEnumerator::get_Current:System.Object()",
-	"System.Private.CoreLib/System.Collections.Generic.EqualityComparer<System.Object>::Equals:System.Boolean(System.Object,System.Object)",
-	"System.Private.CoreLib/System.IDisposable::Dispose:System.Void()",
-	"System.Private.CoreLib/System.Collections.Generic.EqualityComparer<!!0>::get_Default:System.Collections.Generic.EqualityComparer<!!0>()",
-	"System.Private.CoreLib/System.Collections.Generic.EqualityComparer<!!0>::Equals:System.Boolean(!!0,!!0)",
-	"Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::s_exitCode",
-	"System.Console/System.Console::get_Error:System.IO.TextWriter()",
-	"System.Private.CoreLib/System.String::Concat:System.String(System.String,System.String)",
-	"System.Private.CoreLib/System.IO.TextWriter::WriteLine:System.Void(System.String)",
-	"System.Private.CoreLib/System.Action::Invoke:System.Void()",
-	"System.Private.CoreLib/System.Exception::.ctor:System.Void(System.String)",
-	"System.Private.CoreLib/System.Attribute::.ctor:System.Void()",
-	"System.Private.CoreLib/System.Object::.ctor:System.Void()",
-	"System.IO.Compression.Brotli/System.IO.Compression.BrotliDecoder",
-	"System.IO.Compression.Brotli/System.IO.Compression.BrotliDecoder::Dispose:System.Void()",
-	"System.IO.Compression.Brotli/System.IO.Compression.BrotliEncoder",
-	"System.IO.Compression.Brotli/System.IO.Compression.BrotliEncoder::Dispose:System.Void()",
-	"System.IO.Compression.Brotli/System.IO.Compression.BrotliEncoder::GetMaxCompressedLength:System.Int32(System.Int32)",
-	"CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<>9__45_0",
-	"CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<>9",
-	"System.Private.CoreLib/System.Action::.ctor:System.Void(System.Object,System.IntPtr)",
-	"CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<>9__47_0",
-	"CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<>9__49_0",
-	"CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<>9__51_0",
-	"CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<>9__53_0",
-	"CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<>9__7_0",
-	"CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<>9__9_0",
-	"CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<>9__11_0",
-	"CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<>9__13_0",
-	"CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<>9__15_0",
-	"System.Private.CoreLib/System.IO.Stream::BeginRead:System.IAsyncResult(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)",
-	"System.Private.CoreLib/System.Array::Empty<System.Byte>:System.Byte[]()",
-	"System.Private.CoreLib/System.Byte",
-	"System.Private.CoreLib/System.IO.Stream::BeginWrite:System.IAsyncResult(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)",
-	"System.Private.CoreLib/System.IO.Stream::DisposeAsync:System.Threading.Tasks.ValueTask()",
-	"System.Private.CoreLib/System.IO.Stream::EndRead:System.Int32(System.IAsyncResult)",
-	"System.Private.CoreLib/System.IO.Stream::EndWrite:System.Void(System.IAsyncResult)",
-	"System.Private.CoreLib/System.IO.Stream::Flush:System.Void()",
-	"System.Private.CoreLib/System.Threading.CancellationToken",
-	"System.Private.CoreLib/System.IO.Stream::FlushAsync:System.Threading.Tasks.Task(System.Threading.CancellationToken)",
-	"System.Private.CoreLib/System.IO.Stream::Read:System.Int32(System.Byte[],System.Int32,System.Int32)",
-	"System.Private.CoreLib/System.IO.Stream::ReadAsync:System.Threading.Tasks.Task<System.Int32>(System.Byte[],System.Int32,System.Int32,System.Threading.CancellationToken)",
-	"System.Private.CoreLib/System.Memory<System.Byte>",
-	"System.Private.CoreLib/System.IO.Stream::ReadAsync:System.Threading.Tasks.ValueTask<System.Int32>(System.Memory<System.Byte>,System.Threading.CancellationToken)",
-	"System.Private.CoreLib/System.IO.Stream::ReadByte:System.Int32()",
-	"System.Private.CoreLib/System.IO.Stream::Seek:System.Int64(System.Int64,System.IO.SeekOrigin)",
-	"System.Private.CoreLib/System.IO.Stream::SetLength:System.Void(System.Int64)",
-	"System.Private.CoreLib/System.IO.Stream::Write:System.Void(System.Byte[],System.Int32,System.Int32)",
-	"System.Private.CoreLib/System.IO.Stream::WriteAsync:System.Threading.Tasks.Task(System.Byte[],System.Int32,System.Int32,System.Threading.CancellationToken)",
-	"System.Private.CoreLib/System.ReadOnlyMemory<System.Byte>",
-	"System.Private.CoreLib/System.IO.Stream::WriteAsync:System.Threading.Tasks.ValueTask(System.ReadOnlyMemory<System.Byte>,System.Threading.CancellationToken)",
-	"System.Private.CoreLib/System.IO.Stream::WriteByte:System.Void(System.Byte)",
-	"CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<>9__69_0",
-	"CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<>9__55_0",
-	"CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<>9__31_0",
-	"CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<>9__33_0",
-	"CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<>9__35_0",
-	"CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<>9__37_0",
-	"CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<>9__39_0",
-	"CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<>9__41_0",
-	"CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<>9__57_0",
-	"CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<>9__59_0",
-	"CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<>9__61_0",
-	"CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<>9__63_0",
-	"CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<>9__65_0",
-	"CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<>9__67_0",
-	"CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<>9__43_0",
-	"CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<>9__71_0",
-	"CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<>9__73_0",
-	"CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<>9__75_0",
-	"CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<>9__18_0",
-	"CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<>9__20_0",
-	"CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<>9__22_0",
-	"CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<>9__24_0",
-	"CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<>9__26_0",
-	"CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<>9__28_0",
-	"System.Private.CoreLib/System.Threading.Tasks.ValueTask::GetAwaiter:System.Runtime.CompilerServices.ValueTaskAwaiter()",
-	"System.Private.CoreLib/System.Runtime.CompilerServices.ValueTaskAwaiter::GetResult:System.Void()",
-	"System.Private.CoreLib/System.Threading.Tasks.Task::GetAwaiter:System.Runtime.CompilerServices.TaskAwaiter()",
-	"System.Private.CoreLib/System.Runtime.CompilerServices.TaskAwaiter::GetResult:System.Void()",
-	"System.Private.CoreLib/System.Threading.Tasks.Task<System.Int32>::GetAwaiter:System.Runtime.CompilerServices.TaskAwaiter<System.Int32>()",
-	"System.Private.CoreLib/System.Runtime.CompilerServices.TaskAwaiter<System.Int32>::GetResult:System.Int32()",
-	"System.Private.CoreLib/System.Threading.Tasks.ValueTask<System.Int32>::GetAwaiter:System.Runtime.CompilerServices.ValueTaskAwaiter<System.Int32>()",
-	"System.Private.CoreLib/System.Runtime.CompilerServices.ValueTaskAwaiter<System.Int32>::GetResult:System.Int32()",
-};
-
-extern "C" void* kChaosExternalRuntimeFnTable[95] = {
-	nullptr,
-	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Object__Equals_System_Boolean_System_Object_System_Object_),
-	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Object__ToString_System_String__),
-	nullptr,
-	nullptr,
-	nullptr,
-	nullptr,
-	nullptr,
-	nullptr,
-	nullptr,
-	nullptr,
-	nullptr,
-	nullptr,
-	nullptr,
-	nullptr,
-	nullptr,
-	nullptr,
-	reinterpret_cast<void*>(&chaos_external_runtime_System_Console_System_Console__get_Error_System_IO_TextWriter__),
-	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_String__Concat_System_String_System_String_System_String_),
-	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_IO_TextWriter__WriteLine_System_Void_System_String_),
-	nullptr,
-	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Exception___ctor_System_Void_System_String_),
-	nullptr,
-	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Object___ctor_System_Void__),
-	nullptr,
-	nullptr,
-	nullptr,
-	nullptr,
-	nullptr,
-	nullptr,
-	nullptr,
-	nullptr,
-	nullptr,
-	nullptr,
-	nullptr,
-	nullptr,
-	nullptr,
-	nullptr,
-	nullptr,
-	nullptr,
-	nullptr,
-	nullptr,
-	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Array__Empty_System_Byte__System_Byte____),
-	nullptr,
-	nullptr,
-	nullptr,
-	nullptr,
-	nullptr,
-	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_IO_Stream__Flush_System_Void__),
-	nullptr,
-	nullptr,
-	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_IO_Stream__Read_System_Int32_System_Byte___System_Int32_System_Int32_),
-	nullptr,
-	nullptr,
-	nullptr,
-	nullptr,
-	nullptr,
-	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_IO_Stream__SetLength_System_Void_System_Int64_),
-	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_IO_Stream__Write_System_Void_System_Byte___System_Int32_System_Int32_),
-	nullptr,
-	nullptr,
-	nullptr,
-	nullptr,
-	nullptr,
-	nullptr,
-	nullptr,
-	nullptr,
-	nullptr,
-	nullptr,
-	nullptr,
-	nullptr,
-	nullptr,
-	nullptr,
-	nullptr,
-	nullptr,
-	nullptr,
-	nullptr,
-	nullptr,
-	nullptr,
-	nullptr,
-	nullptr,
-	nullptr,
-	nullptr,
-	nullptr,
-	nullptr,
-	nullptr,
-	nullptr,
-	nullptr,
-	nullptr,
-	nullptr,
-	nullptr,
-	nullptr,
-	nullptr,
-	nullptr,
-	nullptr,
-};
-
-extern "C" int32_t kChaosExternalRuntimeCount = 95;
 // (no method AOT entries for this module)
 // ── Method table (kMethodTable[]) ──────────────────────────────
 // const function pointer array for dispatch via slot index.
@@ -1944,41 +1996,7 @@ extern "C" int32_t kChaosExternalRuntimeCount = 95;
 // NOTE: Emitted in ALL modes (AOT + JIT). JIT mode verification dispatch
 // uses kDefaultArgThunks to bypass JIT precode trampoline (verification
 // tests AOT codegen, not JIT compilation).
-static void (*kMethodTable[158])() = {
-	reinterpret_cast<void(*)()>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Boolean_System_Boolean_System_String),
-	reinterpret_cast<void(*)()>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Byte_System_Byte_System_String),
-	reinterpret_cast<void(*)()>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Byte_array_System_Byte_array_System_String),
-	reinterpret_cast<void(*)()>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Char_System_Char_System_String),
-	reinterpret_cast<void(*)()>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Decimal_System_Decimal_System_String),
-	reinterpret_cast<void(*)()>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Double_System_Double_System_String),
-	reinterpret_cast<void(*)()>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Int16_System_Int16_System_String),
-	reinterpret_cast<void(*)()>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Int32_System_Int32_System_String),
-	reinterpret_cast<void(*)()>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Int64_System_Int64_System_String),
-	reinterpret_cast<void(*)()>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Object_System_Object_System_String),
-	reinterpret_cast<void(*)()>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_SByte_System_SByte_System_String),
-	reinterpret_cast<void(*)()>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Single_System_Single_System_String),
-	reinterpret_cast<void(*)()>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_String_System_String_System_String),
-	reinterpret_cast<void(*)()>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_UInt16_System_UInt16_System_String),
-	reinterpret_cast<void(*)()>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_UInt32_System_UInt32_System_String),
-	reinterpret_cast<void(*)()>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_UInt64_System_UInt64_System_String),
-	reinterpret_cast<void(*)()>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_0_0_System_String),
-	reinterpret_cast<void(*)()>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreNotEqual_0_0_System_String),
-	reinterpret_cast<void(*)()>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Complete),
-	reinterpret_cast<void(*)()>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Fail_System_String),
-	reinterpret_cast<void(*)()>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_get_ExitCode),
-	reinterpret_cast<void(*)()>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_IsFalse_System_Boolean_System_String),
-	reinterpret_cast<void(*)()>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_IsNotNull_System_Object_System_String),
-	reinterpret_cast<void(*)()>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_IsNull_System_Object_System_String),
-	reinterpret_cast<void(*)()>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_IsTrue_System_Boolean_System_String),
-	reinterpret_cast<void(*)()>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_RecordFailure),
-	reinterpret_cast<void(*)()>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Reset),
-	reinterpret_cast<void(*)()>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Throws_System_Action),
-	reinterpret_cast<void(*)()>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Throws_System_Action),
-	reinterpret_cast<void(*)()>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Throws_System_NullReferenceException_System_Action__generic),
-	reinterpret_cast<void(*)()>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_AssertionException__ctor_System_String),
-	reinterpret_cast<void(*)()>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_BenchmarkAttribute__ctor),
-	reinterpret_cast<void(*)()>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_FactAttribute__ctor),
-	reinterpret_cast<void(*)()>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_HotUpdateAttribute__ctor),
+static void (*kMethodTable[124])() = {
 	reinterpret_cast<void(*)()>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliDecoderTests__ctor),
 	reinterpret_cast<void(*)()>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliDecoderTests_Benchmark_Dispose_0__0),
 	reinterpret_cast<void(*)()>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliEncoderTests__ctor),
@@ -2110,60 +2128,60 @@ static void (*kMethodTable[158])() = {
 // String params receive a valid StringId; all others receive 0.
 // Instance methods receive a sentinel this-pointer so they don't crash on null.
 static CHAOS_IL2CPP_UINT8 __g_null_instance = 0;
-extern "C" void (*kDefaultArgThunks[158])() = {
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kMethodTable[0])(0,0,chaos_make_string_id_value(6601085983368743141ULL));},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kMethodTable[1])(0,0,chaos_make_string_id_value(6601085983368743141ULL));},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kMethodTable[2])(0,0,chaos_make_string_id_value(6601085983368743141ULL));},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kMethodTable[3])(0,0,chaos_make_string_id_value(6601085983368743141ULL));},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kMethodTable[4])(0,0,chaos_make_string_id_value(6601085983368743141ULL));},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kMethodTable[5])(0,0,chaos_make_string_id_value(6601085983368743141ULL));},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kMethodTable[6])(0,0,chaos_make_string_id_value(6601085983368743141ULL));},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kMethodTable[7])(0,0,chaos_make_string_id_value(6601085983368743141ULL));},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kMethodTable[8])(0,0,chaos_make_string_id_value(6601085983368743141ULL));},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kMethodTable[9])(0,0,chaos_make_string_id_value(6601085983368743141ULL));},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kMethodTable[10])(0,0,chaos_make_string_id_value(6601085983368743141ULL));},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kMethodTable[11])(0,0,chaos_make_string_id_value(6601085983368743141ULL));},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kMethodTable[12])(chaos_make_string_id_value(6601085983368743141ULL),chaos_make_string_id_value(6601085983368743141ULL),chaos_make_string_id_value(6601085983368743141ULL));},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kMethodTable[13])(0,0,chaos_make_string_id_value(6601085983368743141ULL));},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kMethodTable[14])(0,0,chaos_make_string_id_value(6601085983368743141ULL));},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kMethodTable[15])(0,0,chaos_make_string_id_value(6601085983368743141ULL));},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kMethodTable[16])(0,0,chaos_make_string_id_value(6601085983368743141ULL));},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kMethodTable[17])(0,0,chaos_make_string_id_value(6601085983368743141ULL));},
-	[]() {kMethodTable[18]();},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[19])(chaos_make_string_id_value(6601085983368743141ULL));},
+extern "C" void (*kDefaultArgThunks[124])() = {
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[0])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
+	[]() {kMethodTable[1]();},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[2])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
+	[]() {kMethodTable[3]();},
+	[]() {kMethodTable[4]();},
+	[]() {kMethodTable[5]();},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[6])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[7])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[8])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[9])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[10])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[11])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[12])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[13])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[14])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[15])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[16])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[17])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[18])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
+	[]() {kMethodTable[19]();},
 	[]() {kMethodTable[20]();},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kMethodTable[21])(0,chaos_make_string_id_value(6601085983368743141ULL));},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kMethodTable[22])(0,chaos_make_string_id_value(6601085983368743141ULL));},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kMethodTable[23])(0,chaos_make_string_id_value(6601085983368743141ULL));},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kMethodTable[24])(0,chaos_make_string_id_value(6601085983368743141ULL));},
+	[]() {kMethodTable[21]();},
+	[]() {kMethodTable[22]();},
+	[]() {kMethodTable[23]();},
+	[]() {kMethodTable[24]();},
 	[]() {kMethodTable[25]();},
 	[]() {kMethodTable[26]();},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[27])(0);},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[28])(0);},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[29])(0);},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kMethodTable[30])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance),chaos_make_string_id_value(6601085983368743141ULL));},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[31])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[32])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[33])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[34])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
+	[]() {kMethodTable[27]();},
+	[]() {kMethodTable[28]();},
+	[]() {kMethodTable[29]();},
+	[]() {kMethodTable[30]();},
+	[]() {kMethodTable[31]();},
+	[]() {kMethodTable[32]();},
+	[]() {kMethodTable[33]();},
+	[]() {kMethodTable[34]();},
 	[]() {kMethodTable[35]();},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[36])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
+	[]() {kMethodTable[36]();},
 	[]() {kMethodTable[37]();},
 	[]() {kMethodTable[38]();},
 	[]() {kMethodTable[39]();},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[40])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[41])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[42])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[43])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[44])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[45])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[46])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[47])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[48])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[49])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[50])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[51])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[52])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
+	[]() {kMethodTable[40]();},
+	[]() {kMethodTable[41]();},
+	[]() {kMethodTable[42]();},
+	[]() {kMethodTable[43]();},
+	[]() {kMethodTable[44]();},
+	[]() {kMethodTable[45]();},
+	[]() {kMethodTable[46]();},
+	[]() {kMethodTable[47]();},
+	[]() {kMethodTable[48]();},
+	[]() {kMethodTable[49]();},
+	[]() {kMethodTable[50]();},
+	[]() {kMethodTable[51]();},
+	[]() {kMethodTable[52]();},
 	[]() {kMethodTable[53]();},
 	[]() {kMethodTable[54]();},
 	[]() {kMethodTable[55]();},
@@ -2175,40 +2193,40 @@ extern "C" void (*kDefaultArgThunks[158])() = {
 	[]() {kMethodTable[61]();},
 	[]() {kMethodTable[62]();},
 	[]() {kMethodTable[63]();},
-	[]() {kMethodTable[64]();},
-	[]() {kMethodTable[65]();},
-	[]() {kMethodTable[66]();},
-	[]() {kMethodTable[67]();},
-	[]() {kMethodTable[68]();},
-	[]() {kMethodTable[69]();},
-	[]() {kMethodTable[70]();},
-	[]() {kMethodTable[71]();},
-	[]() {kMethodTable[72]();},
-	[]() {kMethodTable[73]();},
-	[]() {kMethodTable[74]();},
-	[]() {kMethodTable[75]();},
-	[]() {kMethodTable[76]();},
-	[]() {kMethodTable[77]();},
-	[]() {kMethodTable[78]();},
-	[]() {kMethodTable[79]();},
-	[]() {kMethodTable[80]();},
-	[]() {kMethodTable[81]();},
-	[]() {kMethodTable[82]();},
-	[]() {kMethodTable[83]();},
-	[]() {kMethodTable[84]();},
-	[]() {kMethodTable[85]();},
-	[]() {kMethodTable[86]();},
-	[]() {kMethodTable[87]();},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[64])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[65])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[66])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[67])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[68])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[69])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[70])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[71])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[72])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[73])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[74])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[75])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[76])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[77])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[78])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[79])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[80])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[81])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[82])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[83])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[84])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[85])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[86])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[87])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
 	[]() {kMethodTable[88]();},
-	[]() {kMethodTable[89]();},
-	[]() {kMethodTable[90]();},
-	[]() {kMethodTable[91]();},
-	[]() {kMethodTable[92]();},
-	[]() {kMethodTable[93]();},
-	[]() {kMethodTable[94]();},
-	[]() {kMethodTable[95]();},
-	[]() {kMethodTable[96]();},
-	[]() {kMethodTable[97]();},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[89])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[90])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[91])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[92])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[93])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[94])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[95])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[96])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[97])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
 	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[98])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
 	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[99])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
 	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[100])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
@@ -2233,42 +2251,8 @@ extern "C" void (*kDefaultArgThunks[158])() = {
 	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[119])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
 	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[120])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
 	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[121])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
-	[]() {kMethodTable[122]();},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[122])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
 	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[123])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[124])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[125])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[126])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[127])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[128])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[129])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[130])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[131])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[132])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[133])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[134])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[135])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[136])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[137])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[138])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[139])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[140])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[141])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[142])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[143])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[144])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[145])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[146])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[147])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[148])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[149])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[150])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[151])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[152])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[153])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[154])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[155])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[156])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[157])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
 };
 
 // ── Subject slot map (kSubjectSlotMap[]) ────────────────────────────
@@ -2278,40 +2262,40 @@ extern "C" void (*kDefaultArgThunks[158])() = {
 // that shift subject methods to non-contiguous indices.
 extern "C" const int kSubjectEntryCount = 34;
 extern "C" const int kSubjectSlotMap[34] = {
-	40,
-	41,
-	43,
-	44,
-	45,
-	46,
-	47,
-	48,
-	49,
-	50,
-	51,
-	52,
-	99,
-	100,
-	101,
-	102,
-	103,
-	104,
-	105,
-	106,
-	107,
-	108,
-	109,
-	110,
-	111,
-	113,
-	114,
-	115,
-	116,
-	117,
-	118,
-	119,
-	120,
-	121,
+	6,
+	7,
+	9,
+	10,
+	11,
+	12,
+	13,
+	14,
+	15,
+	16,
+	17,
+	18,
+	65,
+	66,
+	67,
+	68,
+	69,
+	70,
+	71,
+	72,
+	73,
+	74,
+	75,
+	76,
+	77,
+	79,
+	80,
+	81,
+	82,
+	83,
+	84,
+	85,
+	86,
+	87,
 };
 
 // ── Subject contract map (kSubjectContractMap[]) ───────────────────────
@@ -2368,79 +2352,79 @@ static const struct __attribute__((packed)) {
 static const struct {
 #endif
 
-	/* ── Entry 0: Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Boolean_System_Boolean_System_String ── */
+	/* ── Entry 0: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliDecoderTests__ctor ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[4];
+		CHAOS_IL2CPP_UINT32 slots[2];
 	} entry0;
-	/* ── Entry 1: Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Byte_System_Byte_System_String ── */
+	/* ── Entry 1: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliDecoderTests_Benchmark_Dispose_0__0 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[4];
+		CHAOS_IL2CPP_UINT32 slots[3];
 	} entry1;
-	/* ── Entry 2: Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Byte_array_System_Byte_array_System_String ── */
+	/* ── Entry 2: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliEncoderTests__ctor ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[12];
+		CHAOS_IL2CPP_UINT32 slots[2];
 	} entry2;
-	/* ── Entry 3: Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Char_System_Char_System_String ── */
+	/* ── Entry 3: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliEncoderTests_Benchmark_Dispose_0__0 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[4];
+		CHAOS_IL2CPP_UINT32 slots[3];
 	} entry3;
-	/* ── Entry 4: Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Decimal_System_Decimal_System_String ── */
+	/* ── Entry 4: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliEncoderTests_Benchmark_GetMaxCompressedLength_1_int_0 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[6];
+		CHAOS_IL2CPP_UINT32 slots[2];
 	} entry4;
-	/* ── Entry 5: Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Double_System_Double_System_String ── */
+	/* ── Entry 5: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliEncoderTests_Benchmark_GetMaxCompressedLength_1_int_1 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[4];
+		CHAOS_IL2CPP_UINT32 slots[2];
 	} entry5;
-	/* ── Entry 6: Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Int16_System_Int16_System_String ── */
+	/* ── Entry 6: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliEncoderTests_GetMaxCompressedLength_1_int_0 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[4];
+		CHAOS_IL2CPP_UINT32 slots[7];
 	} entry6;
-	/* ── Entry 7: Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Int32_System_Int32_System_String ── */
+	/* ── Entry 7: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliEncoderTests_GetMaxCompressedLength_1_int_1 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[4];
+		CHAOS_IL2CPP_UINT32 slots[7];
 	} entry7;
-	/* ── Entry 8: Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Int64_System_Int64_System_String ── */
+	/* ── Entry 8: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests__ctor ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[4];
+		CHAOS_IL2CPP_UINT32 slots[2];
 	} entry8;
-	/* ── Entry 9: Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Object_System_Object_System_String ── */
+	/* ── Entry 9: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_0 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
@@ -2448,159 +2432,159 @@ static const struct {
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
 		CHAOS_IL2CPP_UINT32 slots[8];
 	} entry9;
-	/* ── Entry 10: Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_SByte_System_SByte_System_String ── */
+	/* ── Entry 10: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_1 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[4];
+		CHAOS_IL2CPP_UINT32 slots[8];
 	} entry10;
-	/* ── Entry 11: Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Single_System_Single_System_String ── */
+	/* ── Entry 11: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_2 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[4];
+		CHAOS_IL2CPP_UINT32 slots[8];
 	} entry11;
-	/* ── Entry 12: Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_String_System_String_System_String ── */
+	/* ── Entry 12: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_3 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[6];
+		CHAOS_IL2CPP_UINT32 slots[8];
 	} entry12;
-	/* ── Entry 13: Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_UInt16_System_UInt16_System_String ── */
+	/* ── Entry 13: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_4 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[4];
+		CHAOS_IL2CPP_UINT32 slots[8];
 	} entry13;
-	/* ── Entry 14: Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_UInt32_System_UInt32_System_String ── */
+	/* ── Entry 14: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_0 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[4];
+		CHAOS_IL2CPP_UINT32 slots[8];
 	} entry14;
-	/* ── Entry 15: Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_UInt64_System_UInt64_System_String ── */
+	/* ── Entry 15: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_1 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[4];
+		CHAOS_IL2CPP_UINT32 slots[8];
 	} entry15;
-	/* ── Entry 16: Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_0_0_System_String ── */
+	/* ── Entry 16: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_2 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[23];
+		CHAOS_IL2CPP_UINT32 slots[8];
 	} entry16;
-	/* ── Entry 17: Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreNotEqual_0_0_System_String ── */
+	/* ── Entry 17: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_3 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[8];
+	} entry17;
+	/* ── Entry 18: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_4 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[8];
+	} entry18;
+	/* ── Entry 19: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_0 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
 		CHAOS_IL2CPP_UINT32 slots[7];
-	} entry17;
-	/* ── Entry 18: Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Complete ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[3];
-	} entry18;
-	/* ── Entry 19: Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Fail_System_String ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[4];
 	} entry19;
-	/* ── Entry 20: Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_get_ExitCode ── */
+	/* ── Entry 20: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_1 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[1];
+		CHAOS_IL2CPP_UINT32 slots[7];
 	} entry20;
-	/* ── Entry 21: Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_IsFalse_System_Boolean_System_String ── */
+	/* ── Entry 21: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_2 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[3];
+		CHAOS_IL2CPP_UINT32 slots[7];
 	} entry21;
-	/* ── Entry 22: Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_IsNotNull_System_Object_System_String ── */
+	/* ── Entry 22: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_3 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[5];
+		CHAOS_IL2CPP_UINT32 slots[7];
 	} entry22;
-	/* ── Entry 23: Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_IsNull_System_Object_System_String ── */
+	/* ── Entry 23: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_4 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[5];
+		CHAOS_IL2CPP_UINT32 slots[8];
 	} entry23;
-	/* ── Entry 24: Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_IsTrue_System_Boolean_System_String ── */
+	/* ── Entry 24: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_0 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[4];
+		CHAOS_IL2CPP_UINT32 slots[7];
 	} entry24;
-	/* ── Entry 25: Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_RecordFailure ── */
+	/* ── Entry 25: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_1 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[1];
+		CHAOS_IL2CPP_UINT32 slots[7];
 	} entry25;
-	/* ── Entry 26: Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Reset ── */
+	/* ── Entry 26: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_2 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[1];
+		CHAOS_IL2CPP_UINT32 slots[7];
 	} entry26;
-	/* ── Entry 27: Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Throws_System_Action ── */
+	/* ── Entry 27: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_3 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[2];
+		CHAOS_IL2CPP_UINT32 slots[7];
 	} entry27;
-	/* ── Entry 28: Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Throws_System_Action ── */
+	/* ── Entry 28: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_4 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[3];
+		CHAOS_IL2CPP_UINT32 slots[8];
 	} entry28;
-	/* ── Entry 29: Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Throws_System_NullReferenceException_System_Action__generic ── */
+	/* ── Entry 29: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_DisposeAsync_14__14 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
@@ -2608,135 +2592,135 @@ static const struct {
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
 		CHAOS_IL2CPP_UINT32 slots[2];
 	} entry29;
-	/* ── Entry 30: Chaos_TestFramework_Sdk_Chaos_TestFramework_AssertionException__ctor_System_String ── */
+	/* ── Entry 30: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_EndRead_11_System_IAsyncResult_0 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[4];
+		CHAOS_IL2CPP_UINT32 slots[3];
 	} entry30;
-	/* ── Entry 31: Chaos_TestFramework_Sdk_Chaos_TestFramework_BenchmarkAttribute__ctor ── */
+	/* ── Entry 31: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_EndWrite_3_System_IAsyncResult_0 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[2];
+		CHAOS_IL2CPP_UINT32 slots[3];
 	} entry31;
-	/* ── Entry 32: Chaos_TestFramework_Sdk_Chaos_TestFramework_FactAttribute__ctor ── */
+	/* ── Entry 32: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_Flush_6__6 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[2];
+		CHAOS_IL2CPP_UINT32 slots[1];
 	} entry32;
-	/* ── Entry 33: Chaos_TestFramework_Sdk_Chaos_TestFramework_HotUpdateAttribute__ctor ── */
+	/* ── Entry 33: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_FlushAsync_7_CancellationToken_0 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[2];
+		CHAOS_IL2CPP_UINT32 slots[4];
 	} entry33;
-	/* ── Entry 34: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliDecoderTests__ctor ── */
+	/* ── Entry 34: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_Read_8_System_Byte_int_int_0 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[2];
+		CHAOS_IL2CPP_UINT32 slots[4];
 	} entry34;
-	/* ── Entry 35: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliDecoderTests_Benchmark_Dispose_0__0 ── */
+	/* ── Entry 35: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_Read_8_System_Byte_int_int_1 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[3];
+		CHAOS_IL2CPP_UINT32 slots[4];
 	} entry35;
-	/* ── Entry 36: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliEncoderTests__ctor ── */
+	/* ── Entry 36: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_Read_8_System_Byte_int_int_2 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[2];
+		CHAOS_IL2CPP_UINT32 slots[4];
 	} entry36;
-	/* ── Entry 37: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliEncoderTests_Benchmark_Dispose_0__0 ── */
+	/* ── Entry 37: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_Read_8_System_Byte_int_int_3 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[3];
+		CHAOS_IL2CPP_UINT32 slots[4];
 	} entry37;
-	/* ── Entry 38: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliEncoderTests_Benchmark_GetMaxCompressedLength_1_int_0 ── */
+	/* ── Entry 38: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_Read_8_System_Byte_int_int_4 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[1];
+		CHAOS_IL2CPP_UINT32 slots[5];
 	} entry38;
-	/* ── Entry 39: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliEncoderTests_Benchmark_GetMaxCompressedLength_1_int_1 ── */
+	/* ── Entry 39: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_ReadAsync_12_System_Byte_int_int_CancellationToken_0 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[1];
+		CHAOS_IL2CPP_UINT32 slots[7];
 	} entry39;
-	/* ── Entry 40: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliEncoderTests_GetMaxCompressedLength_1_int_0 ── */
+	/* ── Entry 40: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_ReadAsync_12_System_Byte_int_int_CancellationToken_1 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[6];
+		CHAOS_IL2CPP_UINT32 slots[7];
 	} entry40;
-	/* ── Entry 41: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliEncoderTests_GetMaxCompressedLength_1_int_1 ── */
+	/* ── Entry 41: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_ReadAsync_12_System_Byte_int_int_CancellationToken_2 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[7];
+	} entry41;
+	/* ── Entry 42: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_ReadAsync_12_System_Byte_int_int_CancellationToken_3 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[7];
+	} entry42;
+	/* ── Entry 43: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_ReadAsync_12_System_Byte_int_int_CancellationToken_4 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[8];
+	} entry43;
+	/* ── Entry 44: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_ReadAsync_13_System_Memorybyte_CancellationToken_0 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
 		CHAOS_IL2CPP_UINT32 slots[6];
-	} entry41;
-	/* ── Entry 42: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests__ctor ── */
+	} entry44;
+	/* ── Entry 45: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_ReadByte_9__9 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
 		CHAOS_IL2CPP_UINT32 slots[2];
-	} entry42;
-	/* ── Entry 43: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_0 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[4];
-	} entry43;
-	/* ── Entry 44: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_1 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[4];
-	} entry44;
-	/* ── Entry 45: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_2 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[4];
 	} entry45;
-	/* ── Entry 46: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_3 ── */
+	/* ── Entry 46: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_Seek_15_long_SeekOrigin_0 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
@@ -2744,7 +2728,7 @@ static const struct {
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
 		CHAOS_IL2CPP_UINT32 slots[4];
 	} entry46;
-	/* ── Entry 47: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_4 ── */
+	/* ── Entry 47: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_Seek_15_long_SeekOrigin_1 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
@@ -2752,7 +2736,7 @@ static const struct {
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
 		CHAOS_IL2CPP_UINT32 slots[4];
 	} entry47;
-	/* ── Entry 48: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_0 ── */
+	/* ── Entry 48: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_Seek_15_long_SeekOrigin_2 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
@@ -2760,23 +2744,23 @@ static const struct {
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
 		CHAOS_IL2CPP_UINT32 slots[4];
 	} entry48;
-	/* ── Entry 49: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_1 ── */
+	/* ── Entry 49: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_SetLength_16_long_0 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[4];
+		CHAOS_IL2CPP_UINT32 slots[2];
 	} entry49;
-	/* ── Entry 50: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_2 ── */
+	/* ── Entry 50: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_SetLength_16_long_1 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[4];
+		CHAOS_IL2CPP_UINT32 slots[2];
 	} entry50;
-	/* ── Entry 51: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_3 ── */
+	/* ── Entry 51: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_Write_0_System_Byte_int_int_0 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
@@ -2784,7 +2768,7 @@ static const struct {
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
 		CHAOS_IL2CPP_UINT32 slots[4];
 	} entry51;
-	/* ── Entry 52: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_4 ── */
+	/* ── Entry 52: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_Write_0_System_Byte_int_int_1 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
@@ -2792,39 +2776,39 @@ static const struct {
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
 		CHAOS_IL2CPP_UINT32 slots[4];
 	} entry52;
-	/* ── Entry 53: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_0 ── */
+	/* ── Entry 53: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_Write_0_System_Byte_int_int_2 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[6];
+		CHAOS_IL2CPP_UINT32 slots[4];
 	} entry53;
-	/* ── Entry 54: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_1 ── */
+	/* ── Entry 54: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_Write_0_System_Byte_int_int_3 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[6];
+		CHAOS_IL2CPP_UINT32 slots[4];
 	} entry54;
-	/* ── Entry 55: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_2 ── */
+	/* ── Entry 55: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_Write_0_System_Byte_int_int_4 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[6];
+		CHAOS_IL2CPP_UINT32 slots[5];
 	} entry55;
-	/* ── Entry 56: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_3 ── */
+	/* ── Entry 56: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_WriteAsync_4_System_Byte_int_int_CancellationToken_0 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[6];
+		CHAOS_IL2CPP_UINT32 slots[7];
 	} entry56;
-	/* ── Entry 57: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_4 ── */
+	/* ── Entry 57: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_WriteAsync_4_System_Byte_int_int_CancellationToken_1 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
@@ -2832,31 +2816,31 @@ static const struct {
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
 		CHAOS_IL2CPP_UINT32 slots[7];
 	} entry57;
-	/* ── Entry 58: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_0 ── */
+	/* ── Entry 58: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_WriteAsync_4_System_Byte_int_int_CancellationToken_2 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[6];
+		CHAOS_IL2CPP_UINT32 slots[7];
 	} entry58;
-	/* ── Entry 59: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_1 ── */
+	/* ── Entry 59: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_WriteAsync_4_System_Byte_int_int_CancellationToken_3 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[6];
+		CHAOS_IL2CPP_UINT32 slots[7];
 	} entry59;
-	/* ── Entry 60: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_2 ── */
+	/* ── Entry 60: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_WriteAsync_4_System_Byte_int_int_CancellationToken_4 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[6];
+		CHAOS_IL2CPP_UINT32 slots[8];
 	} entry60;
-	/* ── Entry 61: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_3 ── */
+	/* ── Entry 61: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_WriteAsync_5_System_ReadOnlyMemorybyte_CancellationToken_0 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
@@ -2864,319 +2848,319 @@ static const struct {
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
 		CHAOS_IL2CPP_UINT32 slots[6];
 	} entry61;
-	/* ── Entry 62: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_4 ── */
+	/* ── Entry 62: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_WriteByte_1_byte_0 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[7];
+		CHAOS_IL2CPP_UINT32 slots[3];
 	} entry62;
-	/* ── Entry 63: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_DisposeAsync_14__14 ── */
+	/* ── Entry 63: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_WriteByte_1_byte_1 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[2];
+		CHAOS_IL2CPP_UINT32 slots[3];
 	} entry63;
-	/* ── Entry 64: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_EndRead_11_System_IAsyncResult_0 ── */
+	/* ── Entry 64: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_DisposeAsync_14__14 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[2];
+		CHAOS_IL2CPP_UINT32 slots[8];
 	} entry64;
-	/* ── Entry 65: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_EndWrite_3_System_IAsyncResult_0 ── */
+	/* ── Entry 65: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_EndRead_11_System_IAsyncResult_0 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[2];
+		CHAOS_IL2CPP_UINT32 slots[8];
 	} entry65;
-	/* ── Entry 66: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_Flush_6__6 ── */
+	/* ── Entry 66: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_FlushAsync_7_CancellationToken_0 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[8];
+	} entry66;
+	/* ── Entry 67: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Read_8_System_Byte_int_int_0 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[8];
+	} entry67;
+	/* ── Entry 68: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Read_8_System_Byte_int_int_1 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[8];
+	} entry68;
+	/* ── Entry 69: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Read_8_System_Byte_int_int_2 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[8];
+	} entry69;
+	/* ── Entry 70: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Read_8_System_Byte_int_int_3 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[8];
+	} entry70;
+	/* ── Entry 71: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Read_8_System_Byte_int_int_4 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[8];
+	} entry71;
+	/* ── Entry 72: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_ReadAsync_12_System_Byte_int_int_CancellationToken_0 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[8];
+	} entry72;
+	/* ── Entry 73: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_ReadAsync_12_System_Byte_int_int_CancellationToken_1 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[8];
+	} entry73;
+	/* ── Entry 74: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_ReadAsync_12_System_Byte_int_int_CancellationToken_2 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[8];
+	} entry74;
+	/* ── Entry 75: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_ReadAsync_12_System_Byte_int_int_CancellationToken_3 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[8];
+	} entry75;
+	/* ── Entry 76: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_ReadAsync_12_System_Byte_int_int_CancellationToken_4 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[8];
+	} entry76;
+	/* ── Entry 77: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_ReadAsync_13_System_Memorybyte_CancellationToken_0 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[8];
+	} entry77;
+	/* ── Entry 78: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_ReadByte_9__9 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[8];
+	} entry78;
+	/* ── Entry 79: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Seek_15_long_SeekOrigin_0 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[8];
+	} entry79;
+	/* ── Entry 80: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Seek_15_long_SeekOrigin_1 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[8];
+	} entry80;
+	/* ── Entry 81: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Seek_15_long_SeekOrigin_2 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[8];
+	} entry81;
+	/* ── Entry 82: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_WriteAsync_4_System_Byte_int_int_CancellationToken_0 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[8];
+	} entry82;
+	/* ── Entry 83: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_WriteAsync_4_System_Byte_int_int_CancellationToken_1 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[8];
+	} entry83;
+	/* ── Entry 84: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_WriteAsync_4_System_Byte_int_int_CancellationToken_2 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[8];
+	} entry84;
+	/* ── Entry 85: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_WriteAsync_4_System_Byte_int_int_CancellationToken_3 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[8];
+	} entry85;
+	/* ── Entry 86: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_WriteAsync_4_System_Byte_int_int_CancellationToken_4 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[8];
+	} entry86;
+	/* ── Entry 87: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_WriteAsync_5_System_ReadOnlyMemorybyte_CancellationToken_0 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[8];
+	} entry87;
+	/* ── Entry 88: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_cctor ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
 		CHAOS_IL2CPP_UINT32 slots[1];
-	} entry66;
-	/* ── Entry 67: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_FlushAsync_7_CancellationToken_0 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[3];
-	} entry67;
-	/* ── Entry 68: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_Read_8_System_Byte_int_int_0 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[4];
-	} entry68;
-	/* ── Entry 69: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_Read_8_System_Byte_int_int_1 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[4];
-	} entry69;
-	/* ── Entry 70: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_Read_8_System_Byte_int_int_2 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[4];
-	} entry70;
-	/* ── Entry 71: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_Read_8_System_Byte_int_int_3 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[4];
-	} entry71;
-	/* ── Entry 72: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_Read_8_System_Byte_int_int_4 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[5];
-	} entry72;
-	/* ── Entry 73: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_ReadAsync_12_System_Byte_int_int_CancellationToken_0 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[6];
-	} entry73;
-	/* ── Entry 74: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_ReadAsync_12_System_Byte_int_int_CancellationToken_1 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[6];
-	} entry74;
-	/* ── Entry 75: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_ReadAsync_12_System_Byte_int_int_CancellationToken_2 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[6];
-	} entry75;
-	/* ── Entry 76: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_ReadAsync_12_System_Byte_int_int_CancellationToken_3 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[6];
-	} entry76;
-	/* ── Entry 77: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_ReadAsync_12_System_Byte_int_int_CancellationToken_4 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[7];
-	} entry77;
-	/* ── Entry 78: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_ReadAsync_13_System_Memorybyte_CancellationToken_0 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[5];
-	} entry78;
-	/* ── Entry 79: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_ReadByte_9__9 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[2];
-	} entry79;
-	/* ── Entry 80: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_Seek_15_long_SeekOrigin_0 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[3];
-	} entry80;
-	/* ── Entry 81: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_Seek_15_long_SeekOrigin_1 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[3];
-	} entry81;
-	/* ── Entry 82: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_Seek_15_long_SeekOrigin_2 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[3];
-	} entry82;
-	/* ── Entry 83: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_SetLength_16_long_0 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[2];
-	} entry83;
-	/* ── Entry 84: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_SetLength_16_long_1 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[2];
-	} entry84;
-	/* ── Entry 85: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_Write_0_System_Byte_int_int_0 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[4];
-	} entry85;
-	/* ── Entry 86: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_Write_0_System_Byte_int_int_1 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[4];
-	} entry86;
-	/* ── Entry 87: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_Write_0_System_Byte_int_int_2 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[4];
-	} entry87;
-	/* ── Entry 88: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_Write_0_System_Byte_int_int_3 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[4];
 	} entry88;
-	/* ── Entry 89: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_Write_0_System_Byte_int_int_4 ── */
+	/* ── Entry 89: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c__ctor ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[5];
+		CHAOS_IL2CPP_UINT32 slots[2];
 	} entry89;
-	/* ── Entry 90: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_WriteAsync_4_System_Byte_int_int_CancellationToken_0 ── */
+	/* ── Entry 90: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_0_b__45_0 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[6];
+		CHAOS_IL2CPP_UINT32 slots[8];
 	} entry90;
-	/* ── Entry 91: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_WriteAsync_4_System_Byte_int_int_CancellationToken_1 ── */
+	/* ── Entry 91: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_1_b__47_0 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[6];
+		CHAOS_IL2CPP_UINT32 slots[8];
 	} entry91;
-	/* ── Entry 92: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_WriteAsync_4_System_Byte_int_int_CancellationToken_2 ── */
+	/* ── Entry 92: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_2_b__49_0 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[6];
+		CHAOS_IL2CPP_UINT32 slots[8];
 	} entry92;
-	/* ── Entry 93: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_WriteAsync_4_System_Byte_int_int_CancellationToken_3 ── */
+	/* ── Entry 93: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_3_b__51_0 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[6];
+		CHAOS_IL2CPP_UINT32 slots[8];
 	} entry93;
-	/* ── Entry 94: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_WriteAsync_4_System_Byte_int_int_CancellationToken_4 ── */
+	/* ── Entry 94: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_4_b__53_0 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[9];
+	} entry94;
+	/* ── Entry 95: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_0_b__7_0 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[8];
+	} entry95;
+	/* ── Entry 96: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_1_b__9_0 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[8];
+	} entry96;
+	/* ── Entry 97: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_2_b__11_0 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[8];
+	} entry97;
+	/* ── Entry 98: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_3_b__13_0 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[8];
+	} entry98;
+	/* ── Entry 99: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_4_b__15_0 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[9];
+	} entry99;
+	/* ── Entry 100: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_DisposeAsync_14__14_b__69_0 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
 		CHAOS_IL2CPP_UINT32 slots[7];
-	} entry94;
-	/* ── Entry 95: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_WriteAsync_5_System_ReadOnlyMemorybyte_CancellationToken_0 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[5];
-	} entry95;
-	/* ── Entry 96: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_WriteByte_1_byte_0 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[2];
-	} entry96;
-	/* ── Entry 97: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_WriteByte_1_byte_1 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[2];
-	} entry97;
-	/* ── Entry 98: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_DisposeAsync_14__14 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[4];
-	} entry98;
-	/* ── Entry 99: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_EndRead_11_System_IAsyncResult_0 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[4];
-	} entry99;
-	/* ── Entry 100: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_FlushAsync_7_CancellationToken_0 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[4];
 	} entry100;
-	/* ── Entry 101: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Read_8_System_Byte_int_int_0 ── */
+	/* ── Entry 101: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_EndRead_11_System_IAsyncResult_0_b__55_0 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
@@ -3184,2291 +3168,1185 @@ static const struct {
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
 		CHAOS_IL2CPP_UINT32 slots[4];
 	} entry101;
-	/* ── Entry 102: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Read_8_System_Byte_int_int_1 ── */
+	/* ── Entry 102: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_FlushAsync_7_CancellationToken_0_b__31_0 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[4];
+		CHAOS_IL2CPP_UINT32 slots[8];
 	} entry102;
-	/* ── Entry 103: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Read_8_System_Byte_int_int_2 ── */
+	/* ── Entry 103: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_Read_8_System_Byte_int_int_0_b__33_0 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[4];
+		CHAOS_IL2CPP_UINT32 slots[5];
 	} entry103;
-	/* ── Entry 104: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Read_8_System_Byte_int_int_3 ── */
+	/* ── Entry 104: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_Read_8_System_Byte_int_int_1_b__35_0 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[4];
+		CHAOS_IL2CPP_UINT32 slots[5];
 	} entry104;
-	/* ── Entry 105: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Read_8_System_Byte_int_int_4 ── */
+	/* ── Entry 105: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_Read_8_System_Byte_int_int_2_b__37_0 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[4];
+		CHAOS_IL2CPP_UINT32 slots[5];
 	} entry105;
-	/* ── Entry 106: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_ReadAsync_12_System_Byte_int_int_CancellationToken_0 ── */
+	/* ── Entry 106: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_Read_8_System_Byte_int_int_3_b__39_0 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[4];
+		CHAOS_IL2CPP_UINT32 slots[5];
 	} entry106;
-	/* ── Entry 107: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_ReadAsync_12_System_Byte_int_int_CancellationToken_1 ── */
+	/* ── Entry 107: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_Read_8_System_Byte_int_int_4_b__41_0 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[4];
+		CHAOS_IL2CPP_UINT32 slots[6];
 	} entry107;
-	/* ── Entry 108: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_ReadAsync_12_System_Byte_int_int_CancellationToken_2 ── */
+	/* ── Entry 108: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_ReadAsync_12_System_Byte_int_int_CancellationToken_0_b__57_0 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[4];
+		CHAOS_IL2CPP_UINT32 slots[11];
 	} entry108;
-	/* ── Entry 109: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_ReadAsync_12_System_Byte_int_int_CancellationToken_3 ── */
+	/* ── Entry 109: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_ReadAsync_12_System_Byte_int_int_CancellationToken_1_b__59_0 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[4];
+		CHAOS_IL2CPP_UINT32 slots[11];
 	} entry109;
-	/* ── Entry 110: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_ReadAsync_12_System_Byte_int_int_CancellationToken_4 ── */
+	/* ── Entry 110: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_ReadAsync_12_System_Byte_int_int_CancellationToken_2_b__61_0 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[4];
+		CHAOS_IL2CPP_UINT32 slots[11];
 	} entry110;
-	/* ── Entry 111: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_ReadAsync_13_System_Memorybyte_CancellationToken_0 ── */
+	/* ── Entry 111: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_ReadAsync_12_System_Byte_int_int_CancellationToken_3_b__63_0 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[4];
+		CHAOS_IL2CPP_UINT32 slots[11];
 	} entry111;
-	/* ── Entry 112: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_ReadByte_9__9 ── */
+	/* ── Entry 112: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_ReadAsync_12_System_Byte_int_int_CancellationToken_4_b__65_0 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[4];
+		CHAOS_IL2CPP_UINT32 slots[12];
 	} entry112;
-	/* ── Entry 113: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Seek_15_long_SeekOrigin_0 ── */
+	/* ── Entry 113: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_ReadAsync_13_System_Memorybyte_CancellationToken_0_b__67_0 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[4];
+		CHAOS_IL2CPP_UINT32 slots[11];
 	} entry113;
-	/* ── Entry 114: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Seek_15_long_SeekOrigin_1 ── */
+	/* ── Entry 114: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_ReadByte_9__9_b__43_0 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[4];
+		CHAOS_IL2CPP_UINT32 slots[3];
 	} entry114;
-	/* ── Entry 115: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Seek_15_long_SeekOrigin_2 ── */
+	/* ── Entry 115: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_Seek_15_long_SeekOrigin_0_b__71_0 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[4];
+		CHAOS_IL2CPP_UINT32 slots[5];
 	} entry115;
-	/* ── Entry 116: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_WriteAsync_4_System_Byte_int_int_CancellationToken_0 ── */
+	/* ── Entry 116: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_Seek_15_long_SeekOrigin_1_b__73_0 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[4];
+		CHAOS_IL2CPP_UINT32 slots[5];
 	} entry116;
-	/* ── Entry 117: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_WriteAsync_4_System_Byte_int_int_CancellationToken_1 ── */
+	/* ── Entry 117: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_Seek_15_long_SeekOrigin_2_b__75_0 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[4];
+		CHAOS_IL2CPP_UINT32 slots[5];
 	} entry117;
-	/* ── Entry 118: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_WriteAsync_4_System_Byte_int_int_CancellationToken_2 ── */
+	/* ── Entry 118: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_WriteAsync_4_System_Byte_int_int_CancellationToken_0_b__18_0 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[4];
+		CHAOS_IL2CPP_UINT32 slots[11];
 	} entry118;
-	/* ── Entry 119: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_WriteAsync_4_System_Byte_int_int_CancellationToken_3 ── */
+	/* ── Entry 119: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_WriteAsync_4_System_Byte_int_int_CancellationToken_1_b__20_0 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[4];
+		CHAOS_IL2CPP_UINT32 slots[11];
 	} entry119;
-	/* ── Entry 120: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_WriteAsync_4_System_Byte_int_int_CancellationToken_4 ── */
+	/* ── Entry 120: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_WriteAsync_4_System_Byte_int_int_CancellationToken_2_b__22_0 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[4];
+		CHAOS_IL2CPP_UINT32 slots[11];
 	} entry120;
-	/* ── Entry 121: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_WriteAsync_5_System_ReadOnlyMemorybyte_CancellationToken_0 ── */
+	/* ── Entry 121: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_WriteAsync_4_System_Byte_int_int_CancellationToken_3_b__24_0 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[4];
+		CHAOS_IL2CPP_UINT32 slots[11];
 	} entry121;
-	/* ── Entry 122: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_cctor ── */
+	/* ── Entry 122: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_WriteAsync_4_System_Byte_int_int_CancellationToken_4_b__26_0 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[1];
+		CHAOS_IL2CPP_UINT32 slots[12];
 	} entry122;
-	/* ── Entry 123: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c__ctor ── */
+	/* ── Entry 123: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_WriteAsync_5_System_ReadOnlyMemorybyte_CancellationToken_0_b__28_0 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[2];
+		CHAOS_IL2CPP_UINT32 slots[11];
 	} entry123;
-	/* ── Entry 124: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_0_b__45_0 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[7];
-	} entry124;
-	/* ── Entry 125: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_1_b__47_0 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[7];
-	} entry125;
-	/* ── Entry 126: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_2_b__49_0 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[7];
-	} entry126;
-	/* ── Entry 127: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_3_b__51_0 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[7];
-	} entry127;
-	/* ── Entry 128: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_4_b__53_0 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[8];
-	} entry128;
-	/* ── Entry 129: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_0_b__7_0 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[7];
-	} entry129;
-	/* ── Entry 130: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_1_b__9_0 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[7];
-	} entry130;
-	/* ── Entry 131: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_2_b__11_0 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[7];
-	} entry131;
-	/* ── Entry 132: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_3_b__13_0 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[7];
-	} entry132;
-	/* ── Entry 133: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_4_b__15_0 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[8];
-	} entry133;
-	/* ── Entry 134: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_DisposeAsync_14__14_b__69_0 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[6];
-	} entry134;
-	/* ── Entry 135: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_EndRead_11_System_IAsyncResult_0_b__55_0 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[3];
-	} entry135;
-	/* ── Entry 136: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_FlushAsync_7_CancellationToken_0_b__31_0 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[6];
-	} entry136;
-	/* ── Entry 137: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_Read_8_System_Byte_int_int_0_b__33_0 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[5];
-	} entry137;
-	/* ── Entry 138: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_Read_8_System_Byte_int_int_1_b__35_0 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[5];
-	} entry138;
-	/* ── Entry 139: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_Read_8_System_Byte_int_int_2_b__37_0 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[5];
-	} entry139;
-	/* ── Entry 140: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_Read_8_System_Byte_int_int_3_b__39_0 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[5];
-	} entry140;
-	/* ── Entry 141: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_Read_8_System_Byte_int_int_4_b__41_0 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[6];
-	} entry141;
-	/* ── Entry 142: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_ReadAsync_12_System_Byte_int_int_CancellationToken_0_b__57_0 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[8];
-	} entry142;
-	/* ── Entry 143: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_ReadAsync_12_System_Byte_int_int_CancellationToken_1_b__59_0 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[8];
-	} entry143;
-	/* ── Entry 144: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_ReadAsync_12_System_Byte_int_int_CancellationToken_2_b__61_0 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[8];
-	} entry144;
-	/* ── Entry 145: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_ReadAsync_12_System_Byte_int_int_CancellationToken_3_b__63_0 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[8];
-	} entry145;
-	/* ── Entry 146: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_ReadAsync_12_System_Byte_int_int_CancellationToken_4_b__65_0 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[9];
-	} entry146;
-	/* ── Entry 147: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_ReadAsync_13_System_Memorybyte_CancellationToken_0_b__67_0 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[9];
-	} entry147;
-	/* ── Entry 148: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_ReadByte_9__9_b__43_0 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[3];
-	} entry148;
-	/* ── Entry 149: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_Seek_15_long_SeekOrigin_0_b__71_0 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[4];
-	} entry149;
-	/* ── Entry 150: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_Seek_15_long_SeekOrigin_1_b__73_0 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[4];
-	} entry150;
-	/* ── Entry 151: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_Seek_15_long_SeekOrigin_2_b__75_0 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[4];
-	} entry151;
-	/* ── Entry 152: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_WriteAsync_4_System_Byte_int_int_CancellationToken_0_b__18_0 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[8];
-	} entry152;
-	/* ── Entry 153: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_WriteAsync_4_System_Byte_int_int_CancellationToken_1_b__20_0 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[8];
-	} entry153;
-	/* ── Entry 154: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_WriteAsync_4_System_Byte_int_int_CancellationToken_2_b__22_0 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[8];
-	} entry154;
-	/* ── Entry 155: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_WriteAsync_4_System_Byte_int_int_CancellationToken_3_b__24_0 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[8];
-	} entry155;
-	/* ── Entry 156: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_WriteAsync_4_System_Byte_int_int_CancellationToken_4_b__26_0 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[9];
-	} entry156;
-	/* ── Entry 157: CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_WriteAsync_5_System_ReadOnlyMemorybyte_CancellationToken_0_b__28_0 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[8];
-	} entry157;
 } kChaosGcSlotMapsSection = {
-	/* entry0 = Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Boolean_System_Boolean_System_String */
+	/* entry0 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliDecoderTests__ctor */
 	.entry0 = {
-		/* entry_total_size = 36 */ 36u,
-		/* code_address */ reinterpret_cast<const void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Boolean_System_Boolean_System_String),
-		/* frame_size = 48 */ 48u,
-		/* num_gc_slots = 4 */ 4u,
-		/* slots */ { 16u, 24u, 32u, 40u }
-	},
-	/* entry1 = Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Byte_System_Byte_System_String */
-	.entry1 = {
-		/* entry_total_size = 36 */ 36u,
-		/* code_address */ reinterpret_cast<const void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Byte_System_Byte_System_String),
-		/* frame_size = 48 */ 48u,
-		/* num_gc_slots = 4 */ 4u,
-		/* slots */ { 16u, 24u, 32u, 40u }
-	},
-	/* entry2 = Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Byte_array_System_Byte_array_System_String */
-	.entry2 = {
-		/* entry_total_size = 68 */ 68u,
-		/* code_address */ reinterpret_cast<const void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Byte_array_System_Byte_array_System_String),
-		/* frame_size = 96 */ 96u,
-		/* num_gc_slots = 12 */ 12u,
-		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u, 56u, 64u, 72u, 80u, 88u }
-	},
-	/* entry3 = Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Char_System_Char_System_String */
-	.entry3 = {
-		/* entry_total_size = 36 */ 36u,
-		/* code_address */ reinterpret_cast<const void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Char_System_Char_System_String),
-		/* frame_size = 48 */ 48u,
-		/* num_gc_slots = 4 */ 4u,
-		/* slots */ { 16u, 24u, 32u, 40u }
-	},
-	/* entry4 = Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Decimal_System_Decimal_System_String */
-	.entry4 = {
-		/* entry_total_size = 44 */ 44u,
-		/* code_address */ reinterpret_cast<const void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Decimal_System_Decimal_System_String),
-		/* frame_size = 48 */ 48u,
-		/* num_gc_slots = 6 */ 6u,
-		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u }
-	},
-	/* entry5 = Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Double_System_Double_System_String */
-	.entry5 = {
-		/* entry_total_size = 36 */ 36u,
-		/* code_address */ reinterpret_cast<const void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Double_System_Double_System_String),
-		/* frame_size = 48 */ 48u,
-		/* num_gc_slots = 4 */ 4u,
-		/* slots */ { 16u, 24u, 32u, 40u }
-	},
-	/* entry6 = Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Int16_System_Int16_System_String */
-	.entry6 = {
-		/* entry_total_size = 36 */ 36u,
-		/* code_address */ reinterpret_cast<const void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Int16_System_Int16_System_String),
-		/* frame_size = 48 */ 48u,
-		/* num_gc_slots = 4 */ 4u,
-		/* slots */ { 16u, 24u, 32u, 40u }
-	},
-	/* entry7 = Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Int32_System_Int32_System_String */
-	.entry7 = {
-		/* entry_total_size = 36 */ 36u,
-		/* code_address */ reinterpret_cast<const void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Int32_System_Int32_System_String),
-		/* frame_size = 48 */ 48u,
-		/* num_gc_slots = 4 */ 4u,
-		/* slots */ { 16u, 24u, 32u, 40u }
-	},
-	/* entry8 = Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Int64_System_Int64_System_String */
-	.entry8 = {
-		/* entry_total_size = 36 */ 36u,
-		/* code_address */ reinterpret_cast<const void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Int64_System_Int64_System_String),
-		/* frame_size = 48 */ 48u,
-		/* num_gc_slots = 4 */ 4u,
-		/* slots */ { 16u, 24u, 32u, 40u }
-	},
-	/* entry9 = Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Object_System_Object_System_String */
-	.entry9 = {
-		/* entry_total_size = 52 */ 52u,
-		/* code_address */ reinterpret_cast<const void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Object_System_Object_System_String),
-		/* frame_size = 64 */ 64u,
-		/* num_gc_slots = 8 */ 8u,
-		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u, 56u }
-	},
-	/* entry10 = Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_SByte_System_SByte_System_String */
-	.entry10 = {
-		/* entry_total_size = 36 */ 36u,
-		/* code_address */ reinterpret_cast<const void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_SByte_System_SByte_System_String),
-		/* frame_size = 48 */ 48u,
-		/* num_gc_slots = 4 */ 4u,
-		/* slots */ { 16u, 24u, 32u, 40u }
-	},
-	/* entry11 = Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Single_System_Single_System_String */
-	.entry11 = {
-		/* entry_total_size = 36 */ 36u,
-		/* code_address */ reinterpret_cast<const void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Single_System_Single_System_String),
-		/* frame_size = 48 */ 48u,
-		/* num_gc_slots = 4 */ 4u,
-		/* slots */ { 16u, 24u, 32u, 40u }
-	},
-	/* entry12 = Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_String_System_String_System_String */
-	.entry12 = {
-		/* entry_total_size = 44 */ 44u,
-		/* code_address */ reinterpret_cast<const void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_String_System_String_System_String),
-		/* frame_size = 48 */ 48u,
-		/* num_gc_slots = 6 */ 6u,
-		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u }
-	},
-	/* entry13 = Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_UInt16_System_UInt16_System_String */
-	.entry13 = {
-		/* entry_total_size = 36 */ 36u,
-		/* code_address */ reinterpret_cast<const void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_UInt16_System_UInt16_System_String),
-		/* frame_size = 48 */ 48u,
-		/* num_gc_slots = 4 */ 4u,
-		/* slots */ { 16u, 24u, 32u, 40u }
-	},
-	/* entry14 = Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_UInt32_System_UInt32_System_String */
-	.entry14 = {
-		/* entry_total_size = 36 */ 36u,
-		/* code_address */ reinterpret_cast<const void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_UInt32_System_UInt32_System_String),
-		/* frame_size = 48 */ 48u,
-		/* num_gc_slots = 4 */ 4u,
-		/* slots */ { 16u, 24u, 32u, 40u }
-	},
-	/* entry15 = Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_UInt64_System_UInt64_System_String */
-	.entry15 = {
-		/* entry_total_size = 36 */ 36u,
-		/* code_address */ reinterpret_cast<const void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_UInt64_System_UInt64_System_String),
-		/* frame_size = 48 */ 48u,
-		/* num_gc_slots = 4 */ 4u,
-		/* slots */ { 16u, 24u, 32u, 40u }
-	},
-	/* entry16 = Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_0_0_System_String */
-	.entry16 = {
-		/* entry_total_size = 112 */ 112u,
-		/* code_address */ reinterpret_cast<const void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_0_0_System_String),
-		/* frame_size = 184 */ 184u,
-		/* num_gc_slots = 23 */ 23u,
-		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u, 56u, 64u, 72u, 80u, 88u, 96u, 104u, 112u, 120u, 128u, 136u, 144u, 152u, 160u, 168u, 176u }
-	},
-	/* entry17 = Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreNotEqual_0_0_System_String */
-	.entry17 = {
-		/* entry_total_size = 48 */ 48u,
-		/* code_address */ reinterpret_cast<const void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreNotEqual_0_0_System_String),
-		/* frame_size = 56 */ 56u,
-		/* num_gc_slots = 7 */ 7u,
-		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u }
-	},
-	/* entry18 = Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Complete */
-	.entry18 = {
-		/* entry_total_size = 32 */ 32u,
-		/* code_address */ reinterpret_cast<const void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Complete),
-		/* frame_size = 24 */ 24u,
-		/* num_gc_slots = 3 */ 3u,
-		/* slots */ { 0u, 8u, 16u }
-	},
-	/* entry19 = Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Fail_System_String */
-	.entry19 = {
-		/* entry_total_size = 36 */ 36u,
-		/* code_address */ reinterpret_cast<const void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Fail_System_String),
-		/* frame_size = 32 */ 32u,
-		/* num_gc_slots = 4 */ 4u,
-		/* slots */ { 0u, 8u, 16u, 24u }
-	},
-	/* entry20 = Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_get_ExitCode */
-	.entry20 = {
-		/* entry_total_size = 24 */ 24u,
-		/* code_address */ reinterpret_cast<const void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_get_ExitCode),
-		/* frame_size = 8 */ 8u,
-		/* num_gc_slots = 1 */ 1u,
-		/* slots */ { 0u }
-	},
-	/* entry21 = Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_IsFalse_System_Boolean_System_String */
-	.entry21 = {
-		/* entry_total_size = 32 */ 32u,
-		/* code_address */ reinterpret_cast<const void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_IsFalse_System_Boolean_System_String),
-		/* frame_size = 32 */ 32u,
-		/* num_gc_slots = 3 */ 3u,
-		/* slots */ { 8u, 16u, 24u }
-	},
-	/* entry22 = Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_IsNotNull_System_Object_System_String */
-	.entry22 = {
-		/* entry_total_size = 40 */ 40u,
-		/* code_address */ reinterpret_cast<const void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_IsNotNull_System_Object_System_String),
-		/* frame_size = 40 */ 40u,
-		/* num_gc_slots = 5 */ 5u,
-		/* slots */ { 0u, 8u, 16u, 24u, 32u }
-	},
-	/* entry23 = Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_IsNull_System_Object_System_String */
-	.entry23 = {
-		/* entry_total_size = 40 */ 40u,
-		/* code_address */ reinterpret_cast<const void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_IsNull_System_Object_System_String),
-		/* frame_size = 40 */ 40u,
-		/* num_gc_slots = 5 */ 5u,
-		/* slots */ { 0u, 8u, 16u, 24u, 32u }
-	},
-	/* entry24 = Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_IsTrue_System_Boolean_System_String */
-	.entry24 = {
-		/* entry_total_size = 36 */ 36u,
-		/* code_address */ reinterpret_cast<const void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_IsTrue_System_Boolean_System_String),
-		/* frame_size = 40 */ 40u,
-		/* num_gc_slots = 4 */ 4u,
-		/* slots */ { 8u, 16u, 24u, 32u }
-	},
-	/* entry25 = Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_RecordFailure */
-	.entry25 = {
-		/* entry_total_size = 24 */ 24u,
-		/* code_address */ reinterpret_cast<const void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_RecordFailure),
-		/* frame_size = 8 */ 8u,
-		/* num_gc_slots = 1 */ 1u,
-		/* slots */ { 0u }
-	},
-	/* entry26 = Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Reset */
-	.entry26 = {
-		/* entry_total_size = 24 */ 24u,
-		/* code_address */ reinterpret_cast<const void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Reset),
-		/* frame_size = 8 */ 8u,
-		/* num_gc_slots = 1 */ 1u,
-		/* slots */ { 0u }
-	},
-	/* entry27 = Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Throws_System_Action */
-	.entry27 = {
-		/* entry_total_size = 28 */ 28u,
-		/* code_address */ reinterpret_cast<const void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Throws_System_Action),
-		/* frame_size = 16 */ 16u,
-		/* num_gc_slots = 2 */ 2u,
-		/* slots */ { 0u, 8u }
-	},
-	/* entry28 = Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Throws_System_Action */
-	.entry28 = {
-		/* entry_total_size = 32 */ 32u,
-		/* code_address */ reinterpret_cast<const void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Throws_System_Action),
-		/* frame_size = 24 */ 24u,
-		/* num_gc_slots = 3 */ 3u,
-		/* slots */ { 0u, 8u, 16u }
-	},
-	/* entry29 = Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Throws_System_NullReferenceException_System_Action__generic */
-	.entry29 = {
-		/* entry_total_size = 28 */ 28u,
-		/* code_address */ reinterpret_cast<const void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Throws_System_NullReferenceException_System_Action__generic),
-		/* frame_size = 16 */ 16u,
-		/* num_gc_slots = 2 */ 2u,
-		/* slots */ { 0u, 8u }
-	},
-	/* entry30 = Chaos_TestFramework_Sdk_Chaos_TestFramework_AssertionException__ctor_System_String */
-	.entry30 = {
-		/* entry_total_size = 36 */ 36u,
-		/* code_address */ reinterpret_cast<const void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_AssertionException__ctor_System_String),
-		/* frame_size = 32 */ 32u,
-		/* num_gc_slots = 4 */ 4u,
-		/* slots */ { 0u, 8u, 16u, 24u }
-	},
-	/* entry31 = Chaos_TestFramework_Sdk_Chaos_TestFramework_BenchmarkAttribute__ctor */
-	.entry31 = {
-		/* entry_total_size = 28 */ 28u,
-		/* code_address */ reinterpret_cast<const void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_BenchmarkAttribute__ctor),
-		/* frame_size = 16 */ 16u,
-		/* num_gc_slots = 2 */ 2u,
-		/* slots */ { 0u, 8u }
-	},
-	/* entry32 = Chaos_TestFramework_Sdk_Chaos_TestFramework_FactAttribute__ctor */
-	.entry32 = {
-		/* entry_total_size = 28 */ 28u,
-		/* code_address */ reinterpret_cast<const void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_FactAttribute__ctor),
-		/* frame_size = 16 */ 16u,
-		/* num_gc_slots = 2 */ 2u,
-		/* slots */ { 0u, 8u }
-	},
-	/* entry33 = Chaos_TestFramework_Sdk_Chaos_TestFramework_HotUpdateAttribute__ctor */
-	.entry33 = {
-		/* entry_total_size = 28 */ 28u,
-		/* code_address */ reinterpret_cast<const void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_HotUpdateAttribute__ctor),
-		/* frame_size = 16 */ 16u,
-		/* num_gc_slots = 2 */ 2u,
-		/* slots */ { 0u, 8u }
-	},
-	/* entry34 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliDecoderTests__ctor */
-	.entry34 = {
 		/* entry_total_size = 28 */ 28u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliDecoderTests__ctor),
 		/* frame_size = 16 */ 16u,
 		/* num_gc_slots = 2 */ 2u,
 		/* slots */ { 0u, 8u }
 	},
-	/* entry35 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliDecoderTests_Benchmark_Dispose_0__0 */
-	.entry35 = {
+	/* entry1 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliDecoderTests_Benchmark_Dispose_0__0 */
+	.entry1 = {
 		/* entry_total_size = 32 */ 32u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliDecoderTests_Benchmark_Dispose_0__0),
 		/* frame_size = 24 */ 24u,
 		/* num_gc_slots = 3 */ 3u,
 		/* slots */ { 0u, 8u, 16u }
 	},
-	/* entry36 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliEncoderTests__ctor */
-	.entry36 = {
+	/* entry2 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliEncoderTests__ctor */
+	.entry2 = {
 		/* entry_total_size = 28 */ 28u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliEncoderTests__ctor),
 		/* frame_size = 16 */ 16u,
 		/* num_gc_slots = 2 */ 2u,
 		/* slots */ { 0u, 8u }
 	},
-	/* entry37 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliEncoderTests_Benchmark_Dispose_0__0 */
-	.entry37 = {
+	/* entry3 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliEncoderTests_Benchmark_Dispose_0__0 */
+	.entry3 = {
 		/* entry_total_size = 32 */ 32u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliEncoderTests_Benchmark_Dispose_0__0),
 		/* frame_size = 24 */ 24u,
 		/* num_gc_slots = 3 */ 3u,
 		/* slots */ { 0u, 8u, 16u }
 	},
-	/* entry38 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliEncoderTests_Benchmark_GetMaxCompressedLength_1_int_0 */
-	.entry38 = {
-		/* entry_total_size = 24 */ 24u,
+	/* entry4 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliEncoderTests_Benchmark_GetMaxCompressedLength_1_int_0 */
+	.entry4 = {
+		/* entry_total_size = 28 */ 28u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliEncoderTests_Benchmark_GetMaxCompressedLength_1_int_0),
-		/* frame_size = 8 */ 8u,
-		/* num_gc_slots = 1 */ 1u,
-		/* slots */ { 0u }
+		/* frame_size = 16 */ 16u,
+		/* num_gc_slots = 2 */ 2u,
+		/* slots */ { 0u, 8u }
 	},
-	/* entry39 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliEncoderTests_Benchmark_GetMaxCompressedLength_1_int_1 */
-	.entry39 = {
-		/* entry_total_size = 24 */ 24u,
+	/* entry5 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliEncoderTests_Benchmark_GetMaxCompressedLength_1_int_1 */
+	.entry5 = {
+		/* entry_total_size = 28 */ 28u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliEncoderTests_Benchmark_GetMaxCompressedLength_1_int_1),
-		/* frame_size = 8 */ 8u,
-		/* num_gc_slots = 1 */ 1u,
-		/* slots */ { 0u }
+		/* frame_size = 16 */ 16u,
+		/* num_gc_slots = 2 */ 2u,
+		/* slots */ { 0u, 8u }
 	},
-	/* entry40 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliEncoderTests_GetMaxCompressedLength_1_int_0 */
-	.entry40 = {
-		/* entry_total_size = 44 */ 44u,
+	/* entry6 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliEncoderTests_GetMaxCompressedLength_1_int_0 */
+	.entry6 = {
+		/* entry_total_size = 48 */ 48u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliEncoderTests_GetMaxCompressedLength_1_int_0),
-		/* frame_size = 48 */ 48u,
-		/* num_gc_slots = 6 */ 6u,
-		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u }
+		/* frame_size = 56 */ 56u,
+		/* num_gc_slots = 7 */ 7u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u }
 	},
-	/* entry41 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliEncoderTests_GetMaxCompressedLength_1_int_1 */
-	.entry41 = {
-		/* entry_total_size = 44 */ 44u,
+	/* entry7 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliEncoderTests_GetMaxCompressedLength_1_int_1 */
+	.entry7 = {
+		/* entry_total_size = 48 */ 48u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliEncoderTests_GetMaxCompressedLength_1_int_1),
-		/* frame_size = 48 */ 48u,
-		/* num_gc_slots = 6 */ 6u,
-		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u }
+		/* frame_size = 56 */ 56u,
+		/* num_gc_slots = 7 */ 7u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u }
 	},
-	/* entry42 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests__ctor */
-	.entry42 = {
+	/* entry8 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests__ctor */
+	.entry8 = {
 		/* entry_total_size = 28 */ 28u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests__ctor),
 		/* frame_size = 16 */ 16u,
 		/* num_gc_slots = 2 */ 2u,
 		/* slots */ { 0u, 8u }
 	},
-	/* entry43 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_0 */
-	.entry43 = {
-		/* entry_total_size = 36 */ 36u,
+	/* entry9 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_0 */
+	.entry9 = {
+		/* entry_total_size = 52 */ 52u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_0),
-		/* frame_size = 32 */ 32u,
-		/* num_gc_slots = 4 */ 4u,
-		/* slots */ { 0u, 8u, 16u, 24u }
+		/* frame_size = 64 */ 64u,
+		/* num_gc_slots = 8 */ 8u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u, 56u }
 	},
-	/* entry44 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_1 */
-	.entry44 = {
-		/* entry_total_size = 36 */ 36u,
+	/* entry10 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_1 */
+	.entry10 = {
+		/* entry_total_size = 52 */ 52u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_1),
-		/* frame_size = 32 */ 32u,
-		/* num_gc_slots = 4 */ 4u,
-		/* slots */ { 0u, 8u, 16u, 24u }
+		/* frame_size = 64 */ 64u,
+		/* num_gc_slots = 8 */ 8u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u, 56u }
 	},
-	/* entry45 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_2 */
-	.entry45 = {
-		/* entry_total_size = 36 */ 36u,
+	/* entry11 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_2 */
+	.entry11 = {
+		/* entry_total_size = 52 */ 52u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_2),
-		/* frame_size = 32 */ 32u,
-		/* num_gc_slots = 4 */ 4u,
-		/* slots */ { 0u, 8u, 16u, 24u }
+		/* frame_size = 64 */ 64u,
+		/* num_gc_slots = 8 */ 8u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u, 56u }
 	},
-	/* entry46 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_3 */
-	.entry46 = {
-		/* entry_total_size = 36 */ 36u,
+	/* entry12 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_3 */
+	.entry12 = {
+		/* entry_total_size = 52 */ 52u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_3),
-		/* frame_size = 32 */ 32u,
-		/* num_gc_slots = 4 */ 4u,
-		/* slots */ { 0u, 8u, 16u, 24u }
+		/* frame_size = 64 */ 64u,
+		/* num_gc_slots = 8 */ 8u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u, 56u }
 	},
-	/* entry47 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_4 */
-	.entry47 = {
-		/* entry_total_size = 36 */ 36u,
+	/* entry13 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_4 */
+	.entry13 = {
+		/* entry_total_size = 52 */ 52u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_4),
-		/* frame_size = 32 */ 32u,
-		/* num_gc_slots = 4 */ 4u,
-		/* slots */ { 0u, 8u, 16u, 24u }
+		/* frame_size = 64 */ 64u,
+		/* num_gc_slots = 8 */ 8u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u, 56u }
 	},
-	/* entry48 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_0 */
-	.entry48 = {
-		/* entry_total_size = 36 */ 36u,
+	/* entry14 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_0 */
+	.entry14 = {
+		/* entry_total_size = 52 */ 52u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_0),
-		/* frame_size = 32 */ 32u,
-		/* num_gc_slots = 4 */ 4u,
-		/* slots */ { 0u, 8u, 16u, 24u }
+		/* frame_size = 64 */ 64u,
+		/* num_gc_slots = 8 */ 8u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u, 56u }
 	},
-	/* entry49 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_1 */
-	.entry49 = {
-		/* entry_total_size = 36 */ 36u,
+	/* entry15 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_1 */
+	.entry15 = {
+		/* entry_total_size = 52 */ 52u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_1),
-		/* frame_size = 32 */ 32u,
-		/* num_gc_slots = 4 */ 4u,
-		/* slots */ { 0u, 8u, 16u, 24u }
+		/* frame_size = 64 */ 64u,
+		/* num_gc_slots = 8 */ 8u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u, 56u }
 	},
-	/* entry50 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_2 */
-	.entry50 = {
-		/* entry_total_size = 36 */ 36u,
+	/* entry16 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_2 */
+	.entry16 = {
+		/* entry_total_size = 52 */ 52u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_2),
-		/* frame_size = 32 */ 32u,
-		/* num_gc_slots = 4 */ 4u,
-		/* slots */ { 0u, 8u, 16u, 24u }
+		/* frame_size = 64 */ 64u,
+		/* num_gc_slots = 8 */ 8u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u, 56u }
 	},
-	/* entry51 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_3 */
-	.entry51 = {
-		/* entry_total_size = 36 */ 36u,
+	/* entry17 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_3 */
+	.entry17 = {
+		/* entry_total_size = 52 */ 52u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_3),
-		/* frame_size = 32 */ 32u,
-		/* num_gc_slots = 4 */ 4u,
-		/* slots */ { 0u, 8u, 16u, 24u }
+		/* frame_size = 64 */ 64u,
+		/* num_gc_slots = 8 */ 8u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u, 56u }
 	},
-	/* entry52 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_4 */
-	.entry52 = {
-		/* entry_total_size = 36 */ 36u,
+	/* entry18 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_4 */
+	.entry18 = {
+		/* entry_total_size = 52 */ 52u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_4),
-		/* frame_size = 32 */ 32u,
-		/* num_gc_slots = 4 */ 4u,
-		/* slots */ { 0u, 8u, 16u, 24u }
+		/* frame_size = 64 */ 64u,
+		/* num_gc_slots = 8 */ 8u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u, 56u }
 	},
-	/* entry53 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_0 */
-	.entry53 = {
-		/* entry_total_size = 44 */ 44u,
+	/* entry19 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_0 */
+	.entry19 = {
+		/* entry_total_size = 48 */ 48u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_0),
-		/* frame_size = 48 */ 48u,
-		/* num_gc_slots = 6 */ 6u,
-		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u }
+		/* frame_size = 56 */ 56u,
+		/* num_gc_slots = 7 */ 7u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u }
 	},
-	/* entry54 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_1 */
-	.entry54 = {
-		/* entry_total_size = 44 */ 44u,
+	/* entry20 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_1 */
+	.entry20 = {
+		/* entry_total_size = 48 */ 48u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_1),
-		/* frame_size = 48 */ 48u,
-		/* num_gc_slots = 6 */ 6u,
-		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u }
+		/* frame_size = 56 */ 56u,
+		/* num_gc_slots = 7 */ 7u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u }
 	},
-	/* entry55 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_2 */
-	.entry55 = {
-		/* entry_total_size = 44 */ 44u,
+	/* entry21 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_2 */
+	.entry21 = {
+		/* entry_total_size = 48 */ 48u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_2),
-		/* frame_size = 48 */ 48u,
-		/* num_gc_slots = 6 */ 6u,
-		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u }
+		/* frame_size = 56 */ 56u,
+		/* num_gc_slots = 7 */ 7u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u }
 	},
-	/* entry56 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_3 */
-	.entry56 = {
-		/* entry_total_size = 44 */ 44u,
+	/* entry22 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_3 */
+	.entry22 = {
+		/* entry_total_size = 48 */ 48u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_3),
-		/* frame_size = 48 */ 48u,
-		/* num_gc_slots = 6 */ 6u,
-		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u }
+		/* frame_size = 56 */ 56u,
+		/* num_gc_slots = 7 */ 7u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u }
 	},
-	/* entry57 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_4 */
-	.entry57 = {
-		/* entry_total_size = 48 */ 48u,
+	/* entry23 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_4 */
+	.entry23 = {
+		/* entry_total_size = 52 */ 52u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_4),
-		/* frame_size = 56 */ 56u,
-		/* num_gc_slots = 7 */ 7u,
-		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u }
+		/* frame_size = 64 */ 64u,
+		/* num_gc_slots = 8 */ 8u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u, 56u }
 	},
-	/* entry58 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_0 */
-	.entry58 = {
-		/* entry_total_size = 44 */ 44u,
-		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_0),
-		/* frame_size = 48 */ 48u,
-		/* num_gc_slots = 6 */ 6u,
-		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u }
-	},
-	/* entry59 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_1 */
-	.entry59 = {
-		/* entry_total_size = 44 */ 44u,
-		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_1),
-		/* frame_size = 48 */ 48u,
-		/* num_gc_slots = 6 */ 6u,
-		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u }
-	},
-	/* entry60 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_2 */
-	.entry60 = {
-		/* entry_total_size = 44 */ 44u,
-		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_2),
-		/* frame_size = 48 */ 48u,
-		/* num_gc_slots = 6 */ 6u,
-		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u }
-	},
-	/* entry61 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_3 */
-	.entry61 = {
-		/* entry_total_size = 44 */ 44u,
-		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_3),
-		/* frame_size = 48 */ 48u,
-		/* num_gc_slots = 6 */ 6u,
-		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u }
-	},
-	/* entry62 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_4 */
-	.entry62 = {
+	/* entry24 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_0 */
+	.entry24 = {
 		/* entry_total_size = 48 */ 48u,
-		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_4),
+		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_0),
 		/* frame_size = 56 */ 56u,
 		/* num_gc_slots = 7 */ 7u,
 		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u }
 	},
-	/* entry63 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_DisposeAsync_14__14 */
-	.entry63 = {
+	/* entry25 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_1 */
+	.entry25 = {
+		/* entry_total_size = 48 */ 48u,
+		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_1),
+		/* frame_size = 56 */ 56u,
+		/* num_gc_slots = 7 */ 7u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u }
+	},
+	/* entry26 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_2 */
+	.entry26 = {
+		/* entry_total_size = 48 */ 48u,
+		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_2),
+		/* frame_size = 56 */ 56u,
+		/* num_gc_slots = 7 */ 7u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u }
+	},
+	/* entry27 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_3 */
+	.entry27 = {
+		/* entry_total_size = 48 */ 48u,
+		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_3),
+		/* frame_size = 56 */ 56u,
+		/* num_gc_slots = 7 */ 7u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u }
+	},
+	/* entry28 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_4 */
+	.entry28 = {
+		/* entry_total_size = 52 */ 52u,
+		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_4),
+		/* frame_size = 64 */ 64u,
+		/* num_gc_slots = 8 */ 8u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u, 56u }
+	},
+	/* entry29 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_DisposeAsync_14__14 */
+	.entry29 = {
 		/* entry_total_size = 28 */ 28u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_DisposeAsync_14__14),
 		/* frame_size = 16 */ 16u,
 		/* num_gc_slots = 2 */ 2u,
 		/* slots */ { 0u, 8u }
 	},
-	/* entry64 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_EndRead_11_System_IAsyncResult_0 */
-	.entry64 = {
-		/* entry_total_size = 28 */ 28u,
+	/* entry30 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_EndRead_11_System_IAsyncResult_0 */
+	.entry30 = {
+		/* entry_total_size = 32 */ 32u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_EndRead_11_System_IAsyncResult_0),
-		/* frame_size = 16 */ 16u,
-		/* num_gc_slots = 2 */ 2u,
-		/* slots */ { 0u, 8u }
+		/* frame_size = 24 */ 24u,
+		/* num_gc_slots = 3 */ 3u,
+		/* slots */ { 0u, 8u, 16u }
 	},
-	/* entry65 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_EndWrite_3_System_IAsyncResult_0 */
-	.entry65 = {
-		/* entry_total_size = 28 */ 28u,
+	/* entry31 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_EndWrite_3_System_IAsyncResult_0 */
+	.entry31 = {
+		/* entry_total_size = 32 */ 32u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_EndWrite_3_System_IAsyncResult_0),
-		/* frame_size = 16 */ 16u,
-		/* num_gc_slots = 2 */ 2u,
-		/* slots */ { 0u, 8u }
+		/* frame_size = 24 */ 24u,
+		/* num_gc_slots = 3 */ 3u,
+		/* slots */ { 0u, 8u, 16u }
 	},
-	/* entry66 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_Flush_6__6 */
-	.entry66 = {
+	/* entry32 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_Flush_6__6 */
+	.entry32 = {
 		/* entry_total_size = 24 */ 24u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_Flush_6__6),
 		/* frame_size = 8 */ 8u,
 		/* num_gc_slots = 1 */ 1u,
 		/* slots */ { 0u }
 	},
-	/* entry67 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_FlushAsync_7_CancellationToken_0 */
-	.entry67 = {
-		/* entry_total_size = 32 */ 32u,
+	/* entry33 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_FlushAsync_7_CancellationToken_0 */
+	.entry33 = {
+		/* entry_total_size = 36 */ 36u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_FlushAsync_7_CancellationToken_0),
-		/* frame_size = 24 */ 24u,
-		/* num_gc_slots = 3 */ 3u,
-		/* slots */ { 0u, 8u, 16u }
+		/* frame_size = 32 */ 32u,
+		/* num_gc_slots = 4 */ 4u,
+		/* slots */ { 0u, 8u, 16u, 24u }
 	},
-	/* entry68 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_Read_8_System_Byte_int_int_0 */
-	.entry68 = {
+	/* entry34 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_Read_8_System_Byte_int_int_0 */
+	.entry34 = {
 		/* entry_total_size = 36 */ 36u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_Read_8_System_Byte_int_int_0),
 		/* frame_size = 32 */ 32u,
 		/* num_gc_slots = 4 */ 4u,
 		/* slots */ { 0u, 8u, 16u, 24u }
 	},
-	/* entry69 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_Read_8_System_Byte_int_int_1 */
-	.entry69 = {
+	/* entry35 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_Read_8_System_Byte_int_int_1 */
+	.entry35 = {
 		/* entry_total_size = 36 */ 36u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_Read_8_System_Byte_int_int_1),
 		/* frame_size = 32 */ 32u,
 		/* num_gc_slots = 4 */ 4u,
 		/* slots */ { 0u, 8u, 16u, 24u }
 	},
-	/* entry70 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_Read_8_System_Byte_int_int_2 */
-	.entry70 = {
+	/* entry36 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_Read_8_System_Byte_int_int_2 */
+	.entry36 = {
 		/* entry_total_size = 36 */ 36u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_Read_8_System_Byte_int_int_2),
 		/* frame_size = 32 */ 32u,
 		/* num_gc_slots = 4 */ 4u,
 		/* slots */ { 0u, 8u, 16u, 24u }
 	},
-	/* entry71 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_Read_8_System_Byte_int_int_3 */
-	.entry71 = {
+	/* entry37 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_Read_8_System_Byte_int_int_3 */
+	.entry37 = {
 		/* entry_total_size = 36 */ 36u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_Read_8_System_Byte_int_int_3),
 		/* frame_size = 32 */ 32u,
 		/* num_gc_slots = 4 */ 4u,
 		/* slots */ { 0u, 8u, 16u, 24u }
 	},
-	/* entry72 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_Read_8_System_Byte_int_int_4 */
-	.entry72 = {
+	/* entry38 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_Read_8_System_Byte_int_int_4 */
+	.entry38 = {
 		/* entry_total_size = 40 */ 40u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_Read_8_System_Byte_int_int_4),
 		/* frame_size = 40 */ 40u,
 		/* num_gc_slots = 5 */ 5u,
 		/* slots */ { 0u, 8u, 16u, 24u, 32u }
 	},
-	/* entry73 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_ReadAsync_12_System_Byte_int_int_CancellationToken_0 */
-	.entry73 = {
-		/* entry_total_size = 44 */ 44u,
-		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_ReadAsync_12_System_Byte_int_int_CancellationToken_0),
-		/* frame_size = 48 */ 48u,
-		/* num_gc_slots = 6 */ 6u,
-		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u }
-	},
-	/* entry74 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_ReadAsync_12_System_Byte_int_int_CancellationToken_1 */
-	.entry74 = {
-		/* entry_total_size = 44 */ 44u,
-		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_ReadAsync_12_System_Byte_int_int_CancellationToken_1),
-		/* frame_size = 48 */ 48u,
-		/* num_gc_slots = 6 */ 6u,
-		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u }
-	},
-	/* entry75 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_ReadAsync_12_System_Byte_int_int_CancellationToken_2 */
-	.entry75 = {
-		/* entry_total_size = 44 */ 44u,
-		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_ReadAsync_12_System_Byte_int_int_CancellationToken_2),
-		/* frame_size = 48 */ 48u,
-		/* num_gc_slots = 6 */ 6u,
-		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u }
-	},
-	/* entry76 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_ReadAsync_12_System_Byte_int_int_CancellationToken_3 */
-	.entry76 = {
-		/* entry_total_size = 44 */ 44u,
-		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_ReadAsync_12_System_Byte_int_int_CancellationToken_3),
-		/* frame_size = 48 */ 48u,
-		/* num_gc_slots = 6 */ 6u,
-		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u }
-	},
-	/* entry77 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_ReadAsync_12_System_Byte_int_int_CancellationToken_4 */
-	.entry77 = {
+	/* entry39 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_ReadAsync_12_System_Byte_int_int_CancellationToken_0 */
+	.entry39 = {
 		/* entry_total_size = 48 */ 48u,
-		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_ReadAsync_12_System_Byte_int_int_CancellationToken_4),
+		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_ReadAsync_12_System_Byte_int_int_CancellationToken_0),
 		/* frame_size = 56 */ 56u,
 		/* num_gc_slots = 7 */ 7u,
 		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u }
 	},
-	/* entry78 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_ReadAsync_13_System_Memorybyte_CancellationToken_0 */
-	.entry78 = {
-		/* entry_total_size = 40 */ 40u,
-		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_ReadAsync_13_System_Memorybyte_CancellationToken_0),
-		/* frame_size = 40 */ 40u,
-		/* num_gc_slots = 5 */ 5u,
-		/* slots */ { 0u, 8u, 16u, 24u, 32u }
+	/* entry40 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_ReadAsync_12_System_Byte_int_int_CancellationToken_1 */
+	.entry40 = {
+		/* entry_total_size = 48 */ 48u,
+		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_ReadAsync_12_System_Byte_int_int_CancellationToken_1),
+		/* frame_size = 56 */ 56u,
+		/* num_gc_slots = 7 */ 7u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u }
 	},
-	/* entry79 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_ReadByte_9__9 */
-	.entry79 = {
+	/* entry41 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_ReadAsync_12_System_Byte_int_int_CancellationToken_2 */
+	.entry41 = {
+		/* entry_total_size = 48 */ 48u,
+		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_ReadAsync_12_System_Byte_int_int_CancellationToken_2),
+		/* frame_size = 56 */ 56u,
+		/* num_gc_slots = 7 */ 7u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u }
+	},
+	/* entry42 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_ReadAsync_12_System_Byte_int_int_CancellationToken_3 */
+	.entry42 = {
+		/* entry_total_size = 48 */ 48u,
+		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_ReadAsync_12_System_Byte_int_int_CancellationToken_3),
+		/* frame_size = 56 */ 56u,
+		/* num_gc_slots = 7 */ 7u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u }
+	},
+	/* entry43 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_ReadAsync_12_System_Byte_int_int_CancellationToken_4 */
+	.entry43 = {
+		/* entry_total_size = 52 */ 52u,
+		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_ReadAsync_12_System_Byte_int_int_CancellationToken_4),
+		/* frame_size = 64 */ 64u,
+		/* num_gc_slots = 8 */ 8u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u, 56u }
+	},
+	/* entry44 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_ReadAsync_13_System_Memorybyte_CancellationToken_0 */
+	.entry44 = {
+		/* entry_total_size = 44 */ 44u,
+		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_ReadAsync_13_System_Memorybyte_CancellationToken_0),
+		/* frame_size = 48 */ 48u,
+		/* num_gc_slots = 6 */ 6u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u }
+	},
+	/* entry45 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_ReadByte_9__9 */
+	.entry45 = {
 		/* entry_total_size = 28 */ 28u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_ReadByte_9__9),
 		/* frame_size = 16 */ 16u,
 		/* num_gc_slots = 2 */ 2u,
 		/* slots */ { 0u, 8u }
 	},
-	/* entry80 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_Seek_15_long_SeekOrigin_0 */
-	.entry80 = {
-		/* entry_total_size = 32 */ 32u,
+	/* entry46 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_Seek_15_long_SeekOrigin_0 */
+	.entry46 = {
+		/* entry_total_size = 36 */ 36u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_Seek_15_long_SeekOrigin_0),
-		/* frame_size = 24 */ 24u,
-		/* num_gc_slots = 3 */ 3u,
-		/* slots */ { 0u, 8u, 16u }
+		/* frame_size = 32 */ 32u,
+		/* num_gc_slots = 4 */ 4u,
+		/* slots */ { 0u, 8u, 16u, 24u }
 	},
-	/* entry81 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_Seek_15_long_SeekOrigin_1 */
-	.entry81 = {
-		/* entry_total_size = 32 */ 32u,
+	/* entry47 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_Seek_15_long_SeekOrigin_1 */
+	.entry47 = {
+		/* entry_total_size = 36 */ 36u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_Seek_15_long_SeekOrigin_1),
-		/* frame_size = 24 */ 24u,
-		/* num_gc_slots = 3 */ 3u,
-		/* slots */ { 0u, 8u, 16u }
+		/* frame_size = 32 */ 32u,
+		/* num_gc_slots = 4 */ 4u,
+		/* slots */ { 0u, 8u, 16u, 24u }
 	},
-	/* entry82 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_Seek_15_long_SeekOrigin_2 */
-	.entry82 = {
-		/* entry_total_size = 32 */ 32u,
+	/* entry48 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_Seek_15_long_SeekOrigin_2 */
+	.entry48 = {
+		/* entry_total_size = 36 */ 36u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_Seek_15_long_SeekOrigin_2),
-		/* frame_size = 24 */ 24u,
-		/* num_gc_slots = 3 */ 3u,
-		/* slots */ { 0u, 8u, 16u }
+		/* frame_size = 32 */ 32u,
+		/* num_gc_slots = 4 */ 4u,
+		/* slots */ { 0u, 8u, 16u, 24u }
 	},
-	/* entry83 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_SetLength_16_long_0 */
-	.entry83 = {
+	/* entry49 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_SetLength_16_long_0 */
+	.entry49 = {
 		/* entry_total_size = 28 */ 28u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_SetLength_16_long_0),
 		/* frame_size = 16 */ 16u,
 		/* num_gc_slots = 2 */ 2u,
 		/* slots */ { 0u, 8u }
 	},
-	/* entry84 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_SetLength_16_long_1 */
-	.entry84 = {
+	/* entry50 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_SetLength_16_long_1 */
+	.entry50 = {
 		/* entry_total_size = 28 */ 28u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_SetLength_16_long_1),
 		/* frame_size = 16 */ 16u,
 		/* num_gc_slots = 2 */ 2u,
 		/* slots */ { 0u, 8u }
 	},
-	/* entry85 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_Write_0_System_Byte_int_int_0 */
-	.entry85 = {
+	/* entry51 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_Write_0_System_Byte_int_int_0 */
+	.entry51 = {
 		/* entry_total_size = 36 */ 36u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_Write_0_System_Byte_int_int_0),
 		/* frame_size = 32 */ 32u,
 		/* num_gc_slots = 4 */ 4u,
 		/* slots */ { 0u, 8u, 16u, 24u }
 	},
-	/* entry86 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_Write_0_System_Byte_int_int_1 */
-	.entry86 = {
+	/* entry52 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_Write_0_System_Byte_int_int_1 */
+	.entry52 = {
 		/* entry_total_size = 36 */ 36u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_Write_0_System_Byte_int_int_1),
 		/* frame_size = 32 */ 32u,
 		/* num_gc_slots = 4 */ 4u,
 		/* slots */ { 0u, 8u, 16u, 24u }
 	},
-	/* entry87 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_Write_0_System_Byte_int_int_2 */
-	.entry87 = {
+	/* entry53 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_Write_0_System_Byte_int_int_2 */
+	.entry53 = {
 		/* entry_total_size = 36 */ 36u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_Write_0_System_Byte_int_int_2),
 		/* frame_size = 32 */ 32u,
 		/* num_gc_slots = 4 */ 4u,
 		/* slots */ { 0u, 8u, 16u, 24u }
 	},
-	/* entry88 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_Write_0_System_Byte_int_int_3 */
-	.entry88 = {
+	/* entry54 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_Write_0_System_Byte_int_int_3 */
+	.entry54 = {
 		/* entry_total_size = 36 */ 36u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_Write_0_System_Byte_int_int_3),
 		/* frame_size = 32 */ 32u,
 		/* num_gc_slots = 4 */ 4u,
 		/* slots */ { 0u, 8u, 16u, 24u }
 	},
-	/* entry89 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_Write_0_System_Byte_int_int_4 */
-	.entry89 = {
+	/* entry55 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_Write_0_System_Byte_int_int_4 */
+	.entry55 = {
 		/* entry_total_size = 40 */ 40u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_Write_0_System_Byte_int_int_4),
 		/* frame_size = 40 */ 40u,
 		/* num_gc_slots = 5 */ 5u,
 		/* slots */ { 0u, 8u, 16u, 24u, 32u }
 	},
-	/* entry90 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_WriteAsync_4_System_Byte_int_int_CancellationToken_0 */
-	.entry90 = {
-		/* entry_total_size = 44 */ 44u,
-		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_WriteAsync_4_System_Byte_int_int_CancellationToken_0),
-		/* frame_size = 48 */ 48u,
-		/* num_gc_slots = 6 */ 6u,
-		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u }
-	},
-	/* entry91 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_WriteAsync_4_System_Byte_int_int_CancellationToken_1 */
-	.entry91 = {
-		/* entry_total_size = 44 */ 44u,
-		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_WriteAsync_4_System_Byte_int_int_CancellationToken_1),
-		/* frame_size = 48 */ 48u,
-		/* num_gc_slots = 6 */ 6u,
-		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u }
-	},
-	/* entry92 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_WriteAsync_4_System_Byte_int_int_CancellationToken_2 */
-	.entry92 = {
-		/* entry_total_size = 44 */ 44u,
-		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_WriteAsync_4_System_Byte_int_int_CancellationToken_2),
-		/* frame_size = 48 */ 48u,
-		/* num_gc_slots = 6 */ 6u,
-		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u }
-	},
-	/* entry93 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_WriteAsync_4_System_Byte_int_int_CancellationToken_3 */
-	.entry93 = {
-		/* entry_total_size = 44 */ 44u,
-		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_WriteAsync_4_System_Byte_int_int_CancellationToken_3),
-		/* frame_size = 48 */ 48u,
-		/* num_gc_slots = 6 */ 6u,
-		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u }
-	},
-	/* entry94 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_WriteAsync_4_System_Byte_int_int_CancellationToken_4 */
-	.entry94 = {
+	/* entry56 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_WriteAsync_4_System_Byte_int_int_CancellationToken_0 */
+	.entry56 = {
 		/* entry_total_size = 48 */ 48u,
-		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_WriteAsync_4_System_Byte_int_int_CancellationToken_4),
+		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_WriteAsync_4_System_Byte_int_int_CancellationToken_0),
 		/* frame_size = 56 */ 56u,
 		/* num_gc_slots = 7 */ 7u,
 		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u }
 	},
-	/* entry95 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_WriteAsync_5_System_ReadOnlyMemorybyte_CancellationToken_0 */
-	.entry95 = {
-		/* entry_total_size = 40 */ 40u,
+	/* entry57 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_WriteAsync_4_System_Byte_int_int_CancellationToken_1 */
+	.entry57 = {
+		/* entry_total_size = 48 */ 48u,
+		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_WriteAsync_4_System_Byte_int_int_CancellationToken_1),
+		/* frame_size = 56 */ 56u,
+		/* num_gc_slots = 7 */ 7u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u }
+	},
+	/* entry58 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_WriteAsync_4_System_Byte_int_int_CancellationToken_2 */
+	.entry58 = {
+		/* entry_total_size = 48 */ 48u,
+		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_WriteAsync_4_System_Byte_int_int_CancellationToken_2),
+		/* frame_size = 56 */ 56u,
+		/* num_gc_slots = 7 */ 7u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u }
+	},
+	/* entry59 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_WriteAsync_4_System_Byte_int_int_CancellationToken_3 */
+	.entry59 = {
+		/* entry_total_size = 48 */ 48u,
+		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_WriteAsync_4_System_Byte_int_int_CancellationToken_3),
+		/* frame_size = 56 */ 56u,
+		/* num_gc_slots = 7 */ 7u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u }
+	},
+	/* entry60 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_WriteAsync_4_System_Byte_int_int_CancellationToken_4 */
+	.entry60 = {
+		/* entry_total_size = 52 */ 52u,
+		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_WriteAsync_4_System_Byte_int_int_CancellationToken_4),
+		/* frame_size = 64 */ 64u,
+		/* num_gc_slots = 8 */ 8u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u, 56u }
+	},
+	/* entry61 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_WriteAsync_5_System_ReadOnlyMemorybyte_CancellationToken_0 */
+	.entry61 = {
+		/* entry_total_size = 44 */ 44u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_WriteAsync_5_System_ReadOnlyMemorybyte_CancellationToken_0),
-		/* frame_size = 40 */ 40u,
-		/* num_gc_slots = 5 */ 5u,
-		/* slots */ { 0u, 8u, 16u, 24u, 32u }
+		/* frame_size = 48 */ 48u,
+		/* num_gc_slots = 6 */ 6u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u }
 	},
-	/* entry96 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_WriteByte_1_byte_0 */
-	.entry96 = {
-		/* entry_total_size = 28 */ 28u,
+	/* entry62 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_WriteByte_1_byte_0 */
+	.entry62 = {
+		/* entry_total_size = 32 */ 32u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_WriteByte_1_byte_0),
-		/* frame_size = 16 */ 16u,
-		/* num_gc_slots = 2 */ 2u,
-		/* slots */ { 0u, 8u }
+		/* frame_size = 24 */ 24u,
+		/* num_gc_slots = 3 */ 3u,
+		/* slots */ { 0u, 8u, 16u }
 	},
-	/* entry97 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_WriteByte_1_byte_1 */
-	.entry97 = {
-		/* entry_total_size = 28 */ 28u,
+	/* entry63 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_WriteByte_1_byte_1 */
+	.entry63 = {
+		/* entry_total_size = 32 */ 32u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_WriteByte_1_byte_1),
-		/* frame_size = 16 */ 16u,
-		/* num_gc_slots = 2 */ 2u,
-		/* slots */ { 0u, 8u }
+		/* frame_size = 24 */ 24u,
+		/* num_gc_slots = 3 */ 3u,
+		/* slots */ { 0u, 8u, 16u }
 	},
-	/* entry98 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_DisposeAsync_14__14 */
-	.entry98 = {
-		/* entry_total_size = 36 */ 36u,
+	/* entry64 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_DisposeAsync_14__14 */
+	.entry64 = {
+		/* entry_total_size = 52 */ 52u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_DisposeAsync_14__14),
-		/* frame_size = 32 */ 32u,
-		/* num_gc_slots = 4 */ 4u,
-		/* slots */ { 0u, 8u, 16u, 24u }
+		/* frame_size = 64 */ 64u,
+		/* num_gc_slots = 8 */ 8u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u, 56u }
 	},
-	/* entry99 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_EndRead_11_System_IAsyncResult_0 */
-	.entry99 = {
-		/* entry_total_size = 36 */ 36u,
+	/* entry65 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_EndRead_11_System_IAsyncResult_0 */
+	.entry65 = {
+		/* entry_total_size = 52 */ 52u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_EndRead_11_System_IAsyncResult_0),
-		/* frame_size = 32 */ 32u,
-		/* num_gc_slots = 4 */ 4u,
-		/* slots */ { 0u, 8u, 16u, 24u }
+		/* frame_size = 64 */ 64u,
+		/* num_gc_slots = 8 */ 8u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u, 56u }
 	},
-	/* entry100 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_FlushAsync_7_CancellationToken_0 */
-	.entry100 = {
-		/* entry_total_size = 36 */ 36u,
+	/* entry66 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_FlushAsync_7_CancellationToken_0 */
+	.entry66 = {
+		/* entry_total_size = 52 */ 52u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_FlushAsync_7_CancellationToken_0),
-		/* frame_size = 32 */ 32u,
-		/* num_gc_slots = 4 */ 4u,
-		/* slots */ { 0u, 8u, 16u, 24u }
+		/* frame_size = 64 */ 64u,
+		/* num_gc_slots = 8 */ 8u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u, 56u }
 	},
-	/* entry101 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Read_8_System_Byte_int_int_0 */
-	.entry101 = {
-		/* entry_total_size = 36 */ 36u,
+	/* entry67 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Read_8_System_Byte_int_int_0 */
+	.entry67 = {
+		/* entry_total_size = 52 */ 52u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Read_8_System_Byte_int_int_0),
-		/* frame_size = 32 */ 32u,
-		/* num_gc_slots = 4 */ 4u,
-		/* slots */ { 0u, 8u, 16u, 24u }
+		/* frame_size = 64 */ 64u,
+		/* num_gc_slots = 8 */ 8u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u, 56u }
 	},
-	/* entry102 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Read_8_System_Byte_int_int_1 */
-	.entry102 = {
-		/* entry_total_size = 36 */ 36u,
+	/* entry68 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Read_8_System_Byte_int_int_1 */
+	.entry68 = {
+		/* entry_total_size = 52 */ 52u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Read_8_System_Byte_int_int_1),
-		/* frame_size = 32 */ 32u,
-		/* num_gc_slots = 4 */ 4u,
-		/* slots */ { 0u, 8u, 16u, 24u }
+		/* frame_size = 64 */ 64u,
+		/* num_gc_slots = 8 */ 8u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u, 56u }
 	},
-	/* entry103 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Read_8_System_Byte_int_int_2 */
-	.entry103 = {
-		/* entry_total_size = 36 */ 36u,
+	/* entry69 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Read_8_System_Byte_int_int_2 */
+	.entry69 = {
+		/* entry_total_size = 52 */ 52u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Read_8_System_Byte_int_int_2),
-		/* frame_size = 32 */ 32u,
-		/* num_gc_slots = 4 */ 4u,
-		/* slots */ { 0u, 8u, 16u, 24u }
+		/* frame_size = 64 */ 64u,
+		/* num_gc_slots = 8 */ 8u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u, 56u }
 	},
-	/* entry104 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Read_8_System_Byte_int_int_3 */
-	.entry104 = {
-		/* entry_total_size = 36 */ 36u,
+	/* entry70 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Read_8_System_Byte_int_int_3 */
+	.entry70 = {
+		/* entry_total_size = 52 */ 52u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Read_8_System_Byte_int_int_3),
-		/* frame_size = 32 */ 32u,
-		/* num_gc_slots = 4 */ 4u,
-		/* slots */ { 0u, 8u, 16u, 24u }
+		/* frame_size = 64 */ 64u,
+		/* num_gc_slots = 8 */ 8u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u, 56u }
 	},
-	/* entry105 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Read_8_System_Byte_int_int_4 */
-	.entry105 = {
-		/* entry_total_size = 36 */ 36u,
+	/* entry71 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Read_8_System_Byte_int_int_4 */
+	.entry71 = {
+		/* entry_total_size = 52 */ 52u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Read_8_System_Byte_int_int_4),
-		/* frame_size = 32 */ 32u,
-		/* num_gc_slots = 4 */ 4u,
-		/* slots */ { 0u, 8u, 16u, 24u }
+		/* frame_size = 64 */ 64u,
+		/* num_gc_slots = 8 */ 8u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u, 56u }
 	},
-	/* entry106 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_ReadAsync_12_System_Byte_int_int_CancellationToken_0 */
-	.entry106 = {
-		/* entry_total_size = 36 */ 36u,
+	/* entry72 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_ReadAsync_12_System_Byte_int_int_CancellationToken_0 */
+	.entry72 = {
+		/* entry_total_size = 52 */ 52u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_ReadAsync_12_System_Byte_int_int_CancellationToken_0),
-		/* frame_size = 32 */ 32u,
-		/* num_gc_slots = 4 */ 4u,
-		/* slots */ { 0u, 8u, 16u, 24u }
+		/* frame_size = 64 */ 64u,
+		/* num_gc_slots = 8 */ 8u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u, 56u }
 	},
-	/* entry107 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_ReadAsync_12_System_Byte_int_int_CancellationToken_1 */
-	.entry107 = {
-		/* entry_total_size = 36 */ 36u,
+	/* entry73 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_ReadAsync_12_System_Byte_int_int_CancellationToken_1 */
+	.entry73 = {
+		/* entry_total_size = 52 */ 52u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_ReadAsync_12_System_Byte_int_int_CancellationToken_1),
-		/* frame_size = 32 */ 32u,
-		/* num_gc_slots = 4 */ 4u,
-		/* slots */ { 0u, 8u, 16u, 24u }
+		/* frame_size = 64 */ 64u,
+		/* num_gc_slots = 8 */ 8u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u, 56u }
 	},
-	/* entry108 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_ReadAsync_12_System_Byte_int_int_CancellationToken_2 */
-	.entry108 = {
-		/* entry_total_size = 36 */ 36u,
+	/* entry74 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_ReadAsync_12_System_Byte_int_int_CancellationToken_2 */
+	.entry74 = {
+		/* entry_total_size = 52 */ 52u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_ReadAsync_12_System_Byte_int_int_CancellationToken_2),
-		/* frame_size = 32 */ 32u,
-		/* num_gc_slots = 4 */ 4u,
-		/* slots */ { 0u, 8u, 16u, 24u }
+		/* frame_size = 64 */ 64u,
+		/* num_gc_slots = 8 */ 8u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u, 56u }
 	},
-	/* entry109 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_ReadAsync_12_System_Byte_int_int_CancellationToken_3 */
-	.entry109 = {
-		/* entry_total_size = 36 */ 36u,
+	/* entry75 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_ReadAsync_12_System_Byte_int_int_CancellationToken_3 */
+	.entry75 = {
+		/* entry_total_size = 52 */ 52u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_ReadAsync_12_System_Byte_int_int_CancellationToken_3),
-		/* frame_size = 32 */ 32u,
-		/* num_gc_slots = 4 */ 4u,
-		/* slots */ { 0u, 8u, 16u, 24u }
+		/* frame_size = 64 */ 64u,
+		/* num_gc_slots = 8 */ 8u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u, 56u }
 	},
-	/* entry110 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_ReadAsync_12_System_Byte_int_int_CancellationToken_4 */
-	.entry110 = {
-		/* entry_total_size = 36 */ 36u,
+	/* entry76 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_ReadAsync_12_System_Byte_int_int_CancellationToken_4 */
+	.entry76 = {
+		/* entry_total_size = 52 */ 52u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_ReadAsync_12_System_Byte_int_int_CancellationToken_4),
-		/* frame_size = 32 */ 32u,
-		/* num_gc_slots = 4 */ 4u,
-		/* slots */ { 0u, 8u, 16u, 24u }
+		/* frame_size = 64 */ 64u,
+		/* num_gc_slots = 8 */ 8u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u, 56u }
 	},
-	/* entry111 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_ReadAsync_13_System_Memorybyte_CancellationToken_0 */
-	.entry111 = {
-		/* entry_total_size = 36 */ 36u,
+	/* entry77 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_ReadAsync_13_System_Memorybyte_CancellationToken_0 */
+	.entry77 = {
+		/* entry_total_size = 52 */ 52u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_ReadAsync_13_System_Memorybyte_CancellationToken_0),
-		/* frame_size = 32 */ 32u,
-		/* num_gc_slots = 4 */ 4u,
-		/* slots */ { 0u, 8u, 16u, 24u }
+		/* frame_size = 64 */ 64u,
+		/* num_gc_slots = 8 */ 8u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u, 56u }
 	},
-	/* entry112 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_ReadByte_9__9 */
-	.entry112 = {
-		/* entry_total_size = 36 */ 36u,
+	/* entry78 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_ReadByte_9__9 */
+	.entry78 = {
+		/* entry_total_size = 52 */ 52u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_ReadByte_9__9),
-		/* frame_size = 32 */ 32u,
-		/* num_gc_slots = 4 */ 4u,
-		/* slots */ { 0u, 8u, 16u, 24u }
+		/* frame_size = 64 */ 64u,
+		/* num_gc_slots = 8 */ 8u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u, 56u }
 	},
-	/* entry113 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Seek_15_long_SeekOrigin_0 */
-	.entry113 = {
-		/* entry_total_size = 36 */ 36u,
+	/* entry79 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Seek_15_long_SeekOrigin_0 */
+	.entry79 = {
+		/* entry_total_size = 52 */ 52u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Seek_15_long_SeekOrigin_0),
-		/* frame_size = 32 */ 32u,
-		/* num_gc_slots = 4 */ 4u,
-		/* slots */ { 0u, 8u, 16u, 24u }
+		/* frame_size = 64 */ 64u,
+		/* num_gc_slots = 8 */ 8u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u, 56u }
 	},
-	/* entry114 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Seek_15_long_SeekOrigin_1 */
-	.entry114 = {
-		/* entry_total_size = 36 */ 36u,
+	/* entry80 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Seek_15_long_SeekOrigin_1 */
+	.entry80 = {
+		/* entry_total_size = 52 */ 52u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Seek_15_long_SeekOrigin_1),
-		/* frame_size = 32 */ 32u,
-		/* num_gc_slots = 4 */ 4u,
-		/* slots */ { 0u, 8u, 16u, 24u }
+		/* frame_size = 64 */ 64u,
+		/* num_gc_slots = 8 */ 8u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u, 56u }
 	},
-	/* entry115 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Seek_15_long_SeekOrigin_2 */
-	.entry115 = {
-		/* entry_total_size = 36 */ 36u,
+	/* entry81 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Seek_15_long_SeekOrigin_2 */
+	.entry81 = {
+		/* entry_total_size = 52 */ 52u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Seek_15_long_SeekOrigin_2),
-		/* frame_size = 32 */ 32u,
-		/* num_gc_slots = 4 */ 4u,
-		/* slots */ { 0u, 8u, 16u, 24u }
+		/* frame_size = 64 */ 64u,
+		/* num_gc_slots = 8 */ 8u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u, 56u }
 	},
-	/* entry116 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_WriteAsync_4_System_Byte_int_int_CancellationToken_0 */
-	.entry116 = {
-		/* entry_total_size = 36 */ 36u,
+	/* entry82 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_WriteAsync_4_System_Byte_int_int_CancellationToken_0 */
+	.entry82 = {
+		/* entry_total_size = 52 */ 52u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_WriteAsync_4_System_Byte_int_int_CancellationToken_0),
-		/* frame_size = 32 */ 32u,
-		/* num_gc_slots = 4 */ 4u,
-		/* slots */ { 0u, 8u, 16u, 24u }
+		/* frame_size = 64 */ 64u,
+		/* num_gc_slots = 8 */ 8u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u, 56u }
 	},
-	/* entry117 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_WriteAsync_4_System_Byte_int_int_CancellationToken_1 */
-	.entry117 = {
-		/* entry_total_size = 36 */ 36u,
+	/* entry83 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_WriteAsync_4_System_Byte_int_int_CancellationToken_1 */
+	.entry83 = {
+		/* entry_total_size = 52 */ 52u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_WriteAsync_4_System_Byte_int_int_CancellationToken_1),
-		/* frame_size = 32 */ 32u,
-		/* num_gc_slots = 4 */ 4u,
-		/* slots */ { 0u, 8u, 16u, 24u }
+		/* frame_size = 64 */ 64u,
+		/* num_gc_slots = 8 */ 8u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u, 56u }
 	},
-	/* entry118 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_WriteAsync_4_System_Byte_int_int_CancellationToken_2 */
-	.entry118 = {
-		/* entry_total_size = 36 */ 36u,
+	/* entry84 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_WriteAsync_4_System_Byte_int_int_CancellationToken_2 */
+	.entry84 = {
+		/* entry_total_size = 52 */ 52u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_WriteAsync_4_System_Byte_int_int_CancellationToken_2),
-		/* frame_size = 32 */ 32u,
-		/* num_gc_slots = 4 */ 4u,
-		/* slots */ { 0u, 8u, 16u, 24u }
+		/* frame_size = 64 */ 64u,
+		/* num_gc_slots = 8 */ 8u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u, 56u }
 	},
-	/* entry119 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_WriteAsync_4_System_Byte_int_int_CancellationToken_3 */
-	.entry119 = {
-		/* entry_total_size = 36 */ 36u,
+	/* entry85 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_WriteAsync_4_System_Byte_int_int_CancellationToken_3 */
+	.entry85 = {
+		/* entry_total_size = 52 */ 52u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_WriteAsync_4_System_Byte_int_int_CancellationToken_3),
-		/* frame_size = 32 */ 32u,
-		/* num_gc_slots = 4 */ 4u,
-		/* slots */ { 0u, 8u, 16u, 24u }
+		/* frame_size = 64 */ 64u,
+		/* num_gc_slots = 8 */ 8u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u, 56u }
 	},
-	/* entry120 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_WriteAsync_4_System_Byte_int_int_CancellationToken_4 */
-	.entry120 = {
-		/* entry_total_size = 36 */ 36u,
+	/* entry86 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_WriteAsync_4_System_Byte_int_int_CancellationToken_4 */
+	.entry86 = {
+		/* entry_total_size = 52 */ 52u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_WriteAsync_4_System_Byte_int_int_CancellationToken_4),
-		/* frame_size = 32 */ 32u,
-		/* num_gc_slots = 4 */ 4u,
-		/* slots */ { 0u, 8u, 16u, 24u }
+		/* frame_size = 64 */ 64u,
+		/* num_gc_slots = 8 */ 8u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u, 56u }
 	},
-	/* entry121 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_WriteAsync_5_System_ReadOnlyMemorybyte_CancellationToken_0 */
-	.entry121 = {
-		/* entry_total_size = 36 */ 36u,
+	/* entry87 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_WriteAsync_5_System_ReadOnlyMemorybyte_CancellationToken_0 */
+	.entry87 = {
+		/* entry_total_size = 52 */ 52u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_WriteAsync_5_System_ReadOnlyMemorybyte_CancellationToken_0),
-		/* frame_size = 32 */ 32u,
-		/* num_gc_slots = 4 */ 4u,
-		/* slots */ { 0u, 8u, 16u, 24u }
+		/* frame_size = 64 */ 64u,
+		/* num_gc_slots = 8 */ 8u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u, 56u }
 	},
-	/* entry122 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_cctor */
-	.entry122 = {
+	/* entry88 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_cctor */
+	.entry88 = {
 		/* entry_total_size = 24 */ 24u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_cctor),
 		/* frame_size = 8 */ 8u,
 		/* num_gc_slots = 1 */ 1u,
 		/* slots */ { 0u }
 	},
-	/* entry123 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c__ctor */
-	.entry123 = {
+	/* entry89 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c__ctor */
+	.entry89 = {
 		/* entry_total_size = 28 */ 28u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c__ctor),
 		/* frame_size = 16 */ 16u,
 		/* num_gc_slots = 2 */ 2u,
 		/* slots */ { 0u, 8u }
 	},
-	/* entry124 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_0_b__45_0 */
-	.entry124 = {
-		/* entry_total_size = 48 */ 48u,
+	/* entry90 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_0_b__45_0 */
+	.entry90 = {
+		/* entry_total_size = 52 */ 52u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_0_b__45_0),
-		/* frame_size = 56 */ 56u,
-		/* num_gc_slots = 7 */ 7u,
-		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u }
+		/* frame_size = 64 */ 64u,
+		/* num_gc_slots = 8 */ 8u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u, 56u }
 	},
-	/* entry125 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_1_b__47_0 */
-	.entry125 = {
-		/* entry_total_size = 48 */ 48u,
+	/* entry91 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_1_b__47_0 */
+	.entry91 = {
+		/* entry_total_size = 52 */ 52u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_1_b__47_0),
-		/* frame_size = 56 */ 56u,
-		/* num_gc_slots = 7 */ 7u,
-		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u }
+		/* frame_size = 64 */ 64u,
+		/* num_gc_slots = 8 */ 8u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u, 56u }
 	},
-	/* entry126 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_2_b__49_0 */
-	.entry126 = {
-		/* entry_total_size = 48 */ 48u,
+	/* entry92 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_2_b__49_0 */
+	.entry92 = {
+		/* entry_total_size = 52 */ 52u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_2_b__49_0),
-		/* frame_size = 56 */ 56u,
-		/* num_gc_slots = 7 */ 7u,
-		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u }
+		/* frame_size = 64 */ 64u,
+		/* num_gc_slots = 8 */ 8u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u, 56u }
 	},
-	/* entry127 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_3_b__51_0 */
-	.entry127 = {
-		/* entry_total_size = 48 */ 48u,
+	/* entry93 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_3_b__51_0 */
+	.entry93 = {
+		/* entry_total_size = 52 */ 52u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_3_b__51_0),
-		/* frame_size = 56 */ 56u,
-		/* num_gc_slots = 7 */ 7u,
-		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u }
+		/* frame_size = 64 */ 64u,
+		/* num_gc_slots = 8 */ 8u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u, 56u }
 	},
-	/* entry128 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_4_b__53_0 */
-	.entry128 = {
-		/* entry_total_size = 52 */ 52u,
+	/* entry94 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_4_b__53_0 */
+	.entry94 = {
+		/* entry_total_size = 56 */ 56u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_4_b__53_0),
-		/* frame_size = 64 */ 64u,
-		/* num_gc_slots = 8 */ 8u,
-		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u, 56u }
+		/* frame_size = 72 */ 72u,
+		/* num_gc_slots = 9 */ 9u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u, 56u, 64u }
 	},
-	/* entry129 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_0_b__7_0 */
-	.entry129 = {
-		/* entry_total_size = 48 */ 48u,
-		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_0_b__7_0),
-		/* frame_size = 56 */ 56u,
-		/* num_gc_slots = 7 */ 7u,
-		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u }
-	},
-	/* entry130 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_1_b__9_0 */
-	.entry130 = {
-		/* entry_total_size = 48 */ 48u,
-		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_1_b__9_0),
-		/* frame_size = 56 */ 56u,
-		/* num_gc_slots = 7 */ 7u,
-		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u }
-	},
-	/* entry131 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_2_b__11_0 */
-	.entry131 = {
-		/* entry_total_size = 48 */ 48u,
-		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_2_b__11_0),
-		/* frame_size = 56 */ 56u,
-		/* num_gc_slots = 7 */ 7u,
-		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u }
-	},
-	/* entry132 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_3_b__13_0 */
-	.entry132 = {
-		/* entry_total_size = 48 */ 48u,
-		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_3_b__13_0),
-		/* frame_size = 56 */ 56u,
-		/* num_gc_slots = 7 */ 7u,
-		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u }
-	},
-	/* entry133 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_4_b__15_0 */
-	.entry133 = {
+	/* entry95 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_0_b__7_0 */
+	.entry95 = {
 		/* entry_total_size = 52 */ 52u,
-		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_4_b__15_0),
+		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_0_b__7_0),
 		/* frame_size = 64 */ 64u,
 		/* num_gc_slots = 8 */ 8u,
 		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u, 56u }
 	},
-	/* entry134 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_DisposeAsync_14__14_b__69_0 */
-	.entry134 = {
-		/* entry_total_size = 44 */ 44u,
+	/* entry96 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_1_b__9_0 */
+	.entry96 = {
+		/* entry_total_size = 52 */ 52u,
+		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_1_b__9_0),
+		/* frame_size = 64 */ 64u,
+		/* num_gc_slots = 8 */ 8u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u, 56u }
+	},
+	/* entry97 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_2_b__11_0 */
+	.entry97 = {
+		/* entry_total_size = 52 */ 52u,
+		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_2_b__11_0),
+		/* frame_size = 64 */ 64u,
+		/* num_gc_slots = 8 */ 8u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u, 56u }
+	},
+	/* entry98 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_3_b__13_0 */
+	.entry98 = {
+		/* entry_total_size = 52 */ 52u,
+		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_3_b__13_0),
+		/* frame_size = 64 */ 64u,
+		/* num_gc_slots = 8 */ 8u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u, 56u }
+	},
+	/* entry99 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_4_b__15_0 */
+	.entry99 = {
+		/* entry_total_size = 56 */ 56u,
+		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_4_b__15_0),
+		/* frame_size = 72 */ 72u,
+		/* num_gc_slots = 9 */ 9u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u, 56u, 64u }
+	},
+	/* entry100 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_DisposeAsync_14__14_b__69_0 */
+	.entry100 = {
+		/* entry_total_size = 48 */ 48u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_DisposeAsync_14__14_b__69_0),
-		/* frame_size = 48 */ 48u,
-		/* num_gc_slots = 6 */ 6u,
-		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u }
+		/* frame_size = 56 */ 56u,
+		/* num_gc_slots = 7 */ 7u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u }
 	},
-	/* entry135 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_EndRead_11_System_IAsyncResult_0_b__55_0 */
-	.entry135 = {
-		/* entry_total_size = 32 */ 32u,
+	/* entry101 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_EndRead_11_System_IAsyncResult_0_b__55_0 */
+	.entry101 = {
+		/* entry_total_size = 36 */ 36u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_EndRead_11_System_IAsyncResult_0_b__55_0),
-		/* frame_size = 24 */ 24u,
-		/* num_gc_slots = 3 */ 3u,
-		/* slots */ { 0u, 8u, 16u }
+		/* frame_size = 32 */ 32u,
+		/* num_gc_slots = 4 */ 4u,
+		/* slots */ { 0u, 8u, 16u, 24u }
 	},
-	/* entry136 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_FlushAsync_7_CancellationToken_0_b__31_0 */
-	.entry136 = {
-		/* entry_total_size = 44 */ 44u,
+	/* entry102 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_FlushAsync_7_CancellationToken_0_b__31_0 */
+	.entry102 = {
+		/* entry_total_size = 52 */ 52u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_FlushAsync_7_CancellationToken_0_b__31_0),
-		/* frame_size = 48 */ 48u,
-		/* num_gc_slots = 6 */ 6u,
-		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u }
+		/* frame_size = 64 */ 64u,
+		/* num_gc_slots = 8 */ 8u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u, 56u }
 	},
-	/* entry137 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_Read_8_System_Byte_int_int_0_b__33_0 */
-	.entry137 = {
+	/* entry103 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_Read_8_System_Byte_int_int_0_b__33_0 */
+	.entry103 = {
 		/* entry_total_size = 40 */ 40u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_Read_8_System_Byte_int_int_0_b__33_0),
 		/* frame_size = 40 */ 40u,
 		/* num_gc_slots = 5 */ 5u,
 		/* slots */ { 0u, 8u, 16u, 24u, 32u }
 	},
-	/* entry138 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_Read_8_System_Byte_int_int_1_b__35_0 */
-	.entry138 = {
+	/* entry104 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_Read_8_System_Byte_int_int_1_b__35_0 */
+	.entry104 = {
 		/* entry_total_size = 40 */ 40u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_Read_8_System_Byte_int_int_1_b__35_0),
 		/* frame_size = 40 */ 40u,
 		/* num_gc_slots = 5 */ 5u,
 		/* slots */ { 0u, 8u, 16u, 24u, 32u }
 	},
-	/* entry139 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_Read_8_System_Byte_int_int_2_b__37_0 */
-	.entry139 = {
+	/* entry105 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_Read_8_System_Byte_int_int_2_b__37_0 */
+	.entry105 = {
 		/* entry_total_size = 40 */ 40u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_Read_8_System_Byte_int_int_2_b__37_0),
 		/* frame_size = 40 */ 40u,
 		/* num_gc_slots = 5 */ 5u,
 		/* slots */ { 0u, 8u, 16u, 24u, 32u }
 	},
-	/* entry140 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_Read_8_System_Byte_int_int_3_b__39_0 */
-	.entry140 = {
+	/* entry106 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_Read_8_System_Byte_int_int_3_b__39_0 */
+	.entry106 = {
 		/* entry_total_size = 40 */ 40u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_Read_8_System_Byte_int_int_3_b__39_0),
 		/* frame_size = 40 */ 40u,
 		/* num_gc_slots = 5 */ 5u,
 		/* slots */ { 0u, 8u, 16u, 24u, 32u }
 	},
-	/* entry141 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_Read_8_System_Byte_int_int_4_b__41_0 */
-	.entry141 = {
+	/* entry107 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_Read_8_System_Byte_int_int_4_b__41_0 */
+	.entry107 = {
 		/* entry_total_size = 44 */ 44u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_Read_8_System_Byte_int_int_4_b__41_0),
 		/* frame_size = 48 */ 48u,
 		/* num_gc_slots = 6 */ 6u,
 		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u }
 	},
-	/* entry142 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_ReadAsync_12_System_Byte_int_int_CancellationToken_0_b__57_0 */
-	.entry142 = {
-		/* entry_total_size = 52 */ 52u,
+	/* entry108 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_ReadAsync_12_System_Byte_int_int_CancellationToken_0_b__57_0 */
+	.entry108 = {
+		/* entry_total_size = 64 */ 64u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_ReadAsync_12_System_Byte_int_int_CancellationToken_0_b__57_0),
-		/* frame_size = 64 */ 64u,
-		/* num_gc_slots = 8 */ 8u,
-		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u, 56u }
+		/* frame_size = 88 */ 88u,
+		/* num_gc_slots = 11 */ 11u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u, 56u, 64u, 72u, 80u }
 	},
-	/* entry143 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_ReadAsync_12_System_Byte_int_int_CancellationToken_1_b__59_0 */
-	.entry143 = {
-		/* entry_total_size = 52 */ 52u,
+	/* entry109 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_ReadAsync_12_System_Byte_int_int_CancellationToken_1_b__59_0 */
+	.entry109 = {
+		/* entry_total_size = 64 */ 64u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_ReadAsync_12_System_Byte_int_int_CancellationToken_1_b__59_0),
-		/* frame_size = 64 */ 64u,
-		/* num_gc_slots = 8 */ 8u,
-		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u, 56u }
+		/* frame_size = 88 */ 88u,
+		/* num_gc_slots = 11 */ 11u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u, 56u, 64u, 72u, 80u }
 	},
-	/* entry144 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_ReadAsync_12_System_Byte_int_int_CancellationToken_2_b__61_0 */
-	.entry144 = {
-		/* entry_total_size = 52 */ 52u,
+	/* entry110 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_ReadAsync_12_System_Byte_int_int_CancellationToken_2_b__61_0 */
+	.entry110 = {
+		/* entry_total_size = 64 */ 64u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_ReadAsync_12_System_Byte_int_int_CancellationToken_2_b__61_0),
-		/* frame_size = 64 */ 64u,
-		/* num_gc_slots = 8 */ 8u,
-		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u, 56u }
+		/* frame_size = 88 */ 88u,
+		/* num_gc_slots = 11 */ 11u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u, 56u, 64u, 72u, 80u }
 	},
-	/* entry145 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_ReadAsync_12_System_Byte_int_int_CancellationToken_3_b__63_0 */
-	.entry145 = {
-		/* entry_total_size = 52 */ 52u,
+	/* entry111 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_ReadAsync_12_System_Byte_int_int_CancellationToken_3_b__63_0 */
+	.entry111 = {
+		/* entry_total_size = 64 */ 64u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_ReadAsync_12_System_Byte_int_int_CancellationToken_3_b__63_0),
-		/* frame_size = 64 */ 64u,
-		/* num_gc_slots = 8 */ 8u,
-		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u, 56u }
+		/* frame_size = 88 */ 88u,
+		/* num_gc_slots = 11 */ 11u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u, 56u, 64u, 72u, 80u }
 	},
-	/* entry146 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_ReadAsync_12_System_Byte_int_int_CancellationToken_4_b__65_0 */
-	.entry146 = {
-		/* entry_total_size = 56 */ 56u,
+	/* entry112 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_ReadAsync_12_System_Byte_int_int_CancellationToken_4_b__65_0 */
+	.entry112 = {
+		/* entry_total_size = 68 */ 68u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_ReadAsync_12_System_Byte_int_int_CancellationToken_4_b__65_0),
-		/* frame_size = 72 */ 72u,
-		/* num_gc_slots = 9 */ 9u,
-		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u, 56u, 64u }
+		/* frame_size = 96 */ 96u,
+		/* num_gc_slots = 12 */ 12u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u, 56u, 64u, 72u, 80u, 88u }
 	},
-	/* entry147 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_ReadAsync_13_System_Memorybyte_CancellationToken_0_b__67_0 */
-	.entry147 = {
-		/* entry_total_size = 56 */ 56u,
+	/* entry113 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_ReadAsync_13_System_Memorybyte_CancellationToken_0_b__67_0 */
+	.entry113 = {
+		/* entry_total_size = 64 */ 64u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_ReadAsync_13_System_Memorybyte_CancellationToken_0_b__67_0),
-		/* frame_size = 72 */ 72u,
-		/* num_gc_slots = 9 */ 9u,
-		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u, 56u, 64u }
+		/* frame_size = 88 */ 88u,
+		/* num_gc_slots = 11 */ 11u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u, 56u, 64u, 72u, 80u }
 	},
-	/* entry148 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_ReadByte_9__9_b__43_0 */
-	.entry148 = {
+	/* entry114 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_ReadByte_9__9_b__43_0 */
+	.entry114 = {
 		/* entry_total_size = 32 */ 32u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_ReadByte_9__9_b__43_0),
 		/* frame_size = 24 */ 24u,
 		/* num_gc_slots = 3 */ 3u,
 		/* slots */ { 0u, 8u, 16u }
 	},
-	/* entry149 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_Seek_15_long_SeekOrigin_0_b__71_0 */
-	.entry149 = {
-		/* entry_total_size = 36 */ 36u,
+	/* entry115 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_Seek_15_long_SeekOrigin_0_b__71_0 */
+	.entry115 = {
+		/* entry_total_size = 40 */ 40u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_Seek_15_long_SeekOrigin_0_b__71_0),
-		/* frame_size = 32 */ 32u,
-		/* num_gc_slots = 4 */ 4u,
-		/* slots */ { 0u, 8u, 16u, 24u }
+		/* frame_size = 40 */ 40u,
+		/* num_gc_slots = 5 */ 5u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u }
 	},
-	/* entry150 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_Seek_15_long_SeekOrigin_1_b__73_0 */
-	.entry150 = {
-		/* entry_total_size = 36 */ 36u,
+	/* entry116 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_Seek_15_long_SeekOrigin_1_b__73_0 */
+	.entry116 = {
+		/* entry_total_size = 40 */ 40u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_Seek_15_long_SeekOrigin_1_b__73_0),
-		/* frame_size = 32 */ 32u,
-		/* num_gc_slots = 4 */ 4u,
-		/* slots */ { 0u, 8u, 16u, 24u }
+		/* frame_size = 40 */ 40u,
+		/* num_gc_slots = 5 */ 5u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u }
 	},
-	/* entry151 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_Seek_15_long_SeekOrigin_2_b__75_0 */
-	.entry151 = {
-		/* entry_total_size = 36 */ 36u,
+	/* entry117 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_Seek_15_long_SeekOrigin_2_b__75_0 */
+	.entry117 = {
+		/* entry_total_size = 40 */ 40u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_Seek_15_long_SeekOrigin_2_b__75_0),
-		/* frame_size = 32 */ 32u,
-		/* num_gc_slots = 4 */ 4u,
-		/* slots */ { 0u, 8u, 16u, 24u }
+		/* frame_size = 40 */ 40u,
+		/* num_gc_slots = 5 */ 5u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u }
 	},
-	/* entry152 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_WriteAsync_4_System_Byte_int_int_CancellationToken_0_b__18_0 */
-	.entry152 = {
-		/* entry_total_size = 52 */ 52u,
+	/* entry118 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_WriteAsync_4_System_Byte_int_int_CancellationToken_0_b__18_0 */
+	.entry118 = {
+		/* entry_total_size = 64 */ 64u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_WriteAsync_4_System_Byte_int_int_CancellationToken_0_b__18_0),
-		/* frame_size = 64 */ 64u,
-		/* num_gc_slots = 8 */ 8u,
-		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u, 56u }
+		/* frame_size = 88 */ 88u,
+		/* num_gc_slots = 11 */ 11u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u, 56u, 64u, 72u, 80u }
 	},
-	/* entry153 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_WriteAsync_4_System_Byte_int_int_CancellationToken_1_b__20_0 */
-	.entry153 = {
-		/* entry_total_size = 52 */ 52u,
+	/* entry119 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_WriteAsync_4_System_Byte_int_int_CancellationToken_1_b__20_0 */
+	.entry119 = {
+		/* entry_total_size = 64 */ 64u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_WriteAsync_4_System_Byte_int_int_CancellationToken_1_b__20_0),
-		/* frame_size = 64 */ 64u,
-		/* num_gc_slots = 8 */ 8u,
-		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u, 56u }
+		/* frame_size = 88 */ 88u,
+		/* num_gc_slots = 11 */ 11u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u, 56u, 64u, 72u, 80u }
 	},
-	/* entry154 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_WriteAsync_4_System_Byte_int_int_CancellationToken_2_b__22_0 */
-	.entry154 = {
-		/* entry_total_size = 52 */ 52u,
+	/* entry120 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_WriteAsync_4_System_Byte_int_int_CancellationToken_2_b__22_0 */
+	.entry120 = {
+		/* entry_total_size = 64 */ 64u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_WriteAsync_4_System_Byte_int_int_CancellationToken_2_b__22_0),
-		/* frame_size = 64 */ 64u,
-		/* num_gc_slots = 8 */ 8u,
-		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u, 56u }
+		/* frame_size = 88 */ 88u,
+		/* num_gc_slots = 11 */ 11u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u, 56u, 64u, 72u, 80u }
 	},
-	/* entry155 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_WriteAsync_4_System_Byte_int_int_CancellationToken_3_b__24_0 */
-	.entry155 = {
-		/* entry_total_size = 52 */ 52u,
+	/* entry121 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_WriteAsync_4_System_Byte_int_int_CancellationToken_3_b__24_0 */
+	.entry121 = {
+		/* entry_total_size = 64 */ 64u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_WriteAsync_4_System_Byte_int_int_CancellationToken_3_b__24_0),
-		/* frame_size = 64 */ 64u,
-		/* num_gc_slots = 8 */ 8u,
-		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u, 56u }
+		/* frame_size = 88 */ 88u,
+		/* num_gc_slots = 11 */ 11u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u, 56u, 64u, 72u, 80u }
 	},
-	/* entry156 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_WriteAsync_4_System_Byte_int_int_CancellationToken_4_b__26_0 */
-	.entry156 = {
-		/* entry_total_size = 56 */ 56u,
+	/* entry122 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_WriteAsync_4_System_Byte_int_int_CancellationToken_4_b__26_0 */
+	.entry122 = {
+		/* entry_total_size = 68 */ 68u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_WriteAsync_4_System_Byte_int_int_CancellationToken_4_b__26_0),
-		/* frame_size = 72 */ 72u,
-		/* num_gc_slots = 9 */ 9u,
-		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u, 56u, 64u }
+		/* frame_size = 96 */ 96u,
+		/* num_gc_slots = 12 */ 12u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u, 56u, 64u, 72u, 80u, 88u }
 	},
-	/* entry157 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_WriteAsync_5_System_ReadOnlyMemorybyte_CancellationToken_0_b__28_0 */
-	.entry157 = {
-		/* entry_total_size = 52 */ 52u,
+	/* entry123 = CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_WriteAsync_5_System_ReadOnlyMemorybyte_CancellationToken_0_b__28_0 */
+	.entry123 = {
+		/* entry_total_size = 64 */ 64u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_WriteAsync_5_System_ReadOnlyMemorybyte_CancellationToken_0_b__28_0),
-		/* frame_size = 64 */ 64u,
-		/* num_gc_slots = 8 */ 8u,
-		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u, 56u }
+		/* frame_size = 88 */ 88u,
+		/* num_gc_slots = 11 */ 11u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u, 56u, 64u, 72u, 80u }
 	}
 };
 #if defined(_MSC_VER)
 #pragma pack(pop)
 #endif
 
-static const CHAOS_IL2CPP_UINT32 kChaosGcSlotMapsSize = 6164u;
-
-// ── Bridge/import thunks ──
-extern "C" void* kChaosExternalRuntimeFnTable[];
-
-// Bridge/import thunk for: System.Private.CoreLib/System.Decimal::op_Inequality:System.Boolean(System.Decimal,System.Decimal)
-extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[0])(chaos_fn_arg_0, chaos_fn_arg_1);
-	return result;
-}
-
-// Bridge/import thunk for: System.Private.CoreLib/System.String::op_Inequality:System.Boolean(System.String,System.String)
-extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_1(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[3])(chaos_fn_arg_0, chaos_fn_arg_1);
-	return result;
-}
-
-// Bridge/import thunk for: System.Private.CoreLib/System.Collections.Generic.EqualityComparer<System.Object>::Equals:System.Boolean(System.Object,System.Object)
-extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_10(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[12])(chaos_fn_arg_0, chaos_fn_arg_1);
-	return result;
-}
-
-// Bridge/import thunk for: System.Private.CoreLib/System.IDisposable::Dispose:System.Void()
-extern "C" void chaos_bridge_thunk_11(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[13])();
-}
-
-// Bridge/import thunk for: System.Private.CoreLib/System.Collections.Generic.EqualityComparer<!!0>::get_Default:System.Collections.Generic.EqualityComparer<!!0>()
-extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_12(void)
-{
-	auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)()>(kChaosExternalRuntimeFnTable[14])();
-	return result;
-}
-
-// Bridge/import thunk for: System.Private.CoreLib/System.Collections.Generic.EqualityComparer<!!0>::Equals:System.Boolean(!!0,!!0)
-extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_13(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[15])(chaos_fn_arg_0, chaos_fn_arg_1);
-	return result;
-}
-
-// Bridge/import thunk for: Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::s_exitCode
-extern "C" void chaos_bridge_thunk_14(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[16])();
-}
-
-// Bridge/import thunk for: System.Private.CoreLib/System.Action::Invoke:System.Void()
-extern "C" void chaos_bridge_thunk_15(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[20])();
-}
-
-// Bridge/import thunk for: System.Private.CoreLib/System.Attribute::.ctor:System.Void()
-extern "C" void chaos_bridge_thunk_16(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[22])();
-}
-
-// Bridge/import thunk for: System.IO.Compression.Brotli/System.IO.Compression.BrotliDecoder
-extern "C" void chaos_bridge_thunk_17(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[24])();
-}
-
-// Bridge/import thunk for: System.IO.Compression.Brotli/System.IO.Compression.BrotliDecoder::Dispose:System.Void()
-extern "C" void chaos_bridge_thunk_18(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[25])();
-}
-
-// Bridge/import thunk for: System.IO.Compression.Brotli/System.IO.Compression.BrotliEncoder
-extern "C" void chaos_bridge_thunk_19(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[26])();
-}
-
-// Bridge/import thunk for: Chaos.TestFramework.Sdk/!!0
-extern "C" void chaos_bridge_thunk_2(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[4])();
-}
-
-// Bridge/import thunk for: System.IO.Compression.Brotli/System.IO.Compression.BrotliEncoder::Dispose:System.Void()
-extern "C" void chaos_bridge_thunk_20(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[27])();
-}
-
-// Bridge/import thunk for: System.IO.Compression.Brotli/System.IO.Compression.BrotliEncoder::GetMaxCompressedLength:System.Int32(System.Int32)
-extern "C" CHAOS_IL2CPP_INT32 chaos_bridge_thunk_21(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	auto result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[28])(chaos_fn_arg_0);
-	return result;
-}
-
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<>9__45_0
-extern "C" void chaos_bridge_thunk_22(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[29])();
-}
-
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<>9
-extern "C" void chaos_bridge_thunk_23(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[30])();
-}
-
-// Bridge/import thunk for: System.Private.CoreLib/System.Action::.ctor:System.Void(System.Object,System.IntPtr)
-extern "C" void chaos_bridge_thunk_24(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[31])(chaos_fn_arg_0, chaos_fn_arg_1);
-}
-
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<>9__47_0
-extern "C" void chaos_bridge_thunk_25(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[32])();
-}
-
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<>9__49_0
-extern "C" void chaos_bridge_thunk_26(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[33])();
-}
-
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<>9__51_0
-extern "C" void chaos_bridge_thunk_27(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[34])();
-}
-
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<>9__53_0
-extern "C" void chaos_bridge_thunk_28(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[35])();
-}
-
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<>9__7_0
-extern "C" void chaos_bridge_thunk_29(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[36])();
-}
-
-// Bridge/import thunk for: System.Private.CoreLib/System.String
-extern "C" void chaos_bridge_thunk_3(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[5])();
-}
-
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<>9__9_0
-extern "C" void chaos_bridge_thunk_30(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[37])();
-}
-
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<>9__11_0
-extern "C" void chaos_bridge_thunk_31(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[38])();
-}
-
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<>9__13_0
-extern "C" void chaos_bridge_thunk_32(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[39])();
-}
-
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<>9__15_0
-extern "C" void chaos_bridge_thunk_33(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[40])();
-}
-
-// Bridge/import thunk for: System.Private.CoreLib/System.IO.Stream::BeginRead:System.IAsyncResult(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)
-extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_34(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2, CHAOS_IL2CPP_INTPTR chaos_fn_arg_3, CHAOS_IL2CPP_INTPTR chaos_fn_arg_4)
-{
-	auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[41])(chaos_fn_arg_0, chaos_fn_arg_1, chaos_fn_arg_2, chaos_fn_arg_3, chaos_fn_arg_4);
-	return result;
-}
-
-// Bridge/import thunk for: System.Private.CoreLib/System.Byte
-extern "C" void chaos_bridge_thunk_35(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[43])();
-}
-
-// Bridge/import thunk for: System.Private.CoreLib/System.IO.Stream::BeginWrite:System.IAsyncResult(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)
-extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_36(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2, CHAOS_IL2CPP_INTPTR chaos_fn_arg_3, CHAOS_IL2CPP_INTPTR chaos_fn_arg_4)
-{
-	auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[44])(chaos_fn_arg_0, chaos_fn_arg_1, chaos_fn_arg_2, chaos_fn_arg_3, chaos_fn_arg_4);
-	return result;
-}
-
-// Bridge/import thunk for: System.Private.CoreLib/System.IO.Stream::DisposeAsync:System.Threading.Tasks.ValueTask()
-extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_37(void)
-{
-	auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)()>(kChaosExternalRuntimeFnTable[45])();
-	return result;
-}
-
-// Bridge/import thunk for: System.Private.CoreLib/System.IO.Stream::EndRead:System.Int32(System.IAsyncResult)
-extern "C" CHAOS_IL2CPP_INT32 chaos_bridge_thunk_38(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	auto result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[46])(chaos_fn_arg_0);
-	return result;
-}
-
-// Bridge/import thunk for: System.Private.CoreLib/System.IO.Stream::EndWrite:System.Void(System.IAsyncResult)
-extern "C" void chaos_bridge_thunk_39(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[47])(chaos_fn_arg_0);
-}
-
-// Bridge/import thunk for: System.Private.CoreLib/System.Collections.IEnumerable
-extern "C" void chaos_bridge_thunk_4(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[6])();
-}
-
-// Bridge/import thunk for: System.Private.CoreLib/System.Threading.CancellationToken
-extern "C" void chaos_bridge_thunk_40(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[49])();
-}
-
-// Bridge/import thunk for: System.Private.CoreLib/System.IO.Stream::FlushAsync:System.Threading.Tasks.Task(System.Threading.CancellationToken)
-extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_41(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[50])(chaos_fn_arg_0);
-	return result;
-}
-
-// Bridge/import thunk for: System.Private.CoreLib/System.IO.Stream::ReadAsync:System.Threading.Tasks.Task<System.Int32>(System.Byte[],System.Int32,System.Int32,System.Threading.CancellationToken)
-extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_42(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2, CHAOS_IL2CPP_INTPTR chaos_fn_arg_3)
-{
-	auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[52])(chaos_fn_arg_0, chaos_fn_arg_1, chaos_fn_arg_2, chaos_fn_arg_3);
-	return result;
-}
-
-// Bridge/import thunk for: System.Private.CoreLib/System.Memory<System.Byte>
-extern "C" void chaos_bridge_thunk_43(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[53])();
-}
-
-// Bridge/import thunk for: System.Private.CoreLib/System.IO.Stream::ReadAsync:System.Threading.Tasks.ValueTask<System.Int32>(System.Memory<System.Byte>,System.Threading.CancellationToken)
-extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_44(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[54])(chaos_fn_arg_0, chaos_fn_arg_1);
-	return result;
-}
-
-// Bridge/import thunk for: System.Private.CoreLib/System.IO.Stream::ReadByte:System.Int32()
-extern "C" CHAOS_IL2CPP_INT32 chaos_bridge_thunk_45(void)
-{
-	auto result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)()>(kChaosExternalRuntimeFnTable[55])();
-	return result;
-}
-
-// Bridge/import thunk for: System.Private.CoreLib/System.IO.Stream::Seek:System.Int64(System.Int64,System.IO.SeekOrigin)
-extern "C" CHAOS_IL2CPP_INT64 chaos_bridge_thunk_46(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	auto result = reinterpret_cast<CHAOS_IL2CPP_INT64(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[56])(chaos_fn_arg_0, chaos_fn_arg_1);
-	return result;
-}
-
-// Bridge/import thunk for: System.Private.CoreLib/System.IO.Stream::WriteAsync:System.Threading.Tasks.Task(System.Byte[],System.Int32,System.Int32,System.Threading.CancellationToken)
-extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_47(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2, CHAOS_IL2CPP_INTPTR chaos_fn_arg_3)
-{
-	auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[59])(chaos_fn_arg_0, chaos_fn_arg_1, chaos_fn_arg_2, chaos_fn_arg_3);
-	return result;
-}
-
-// Bridge/import thunk for: System.Private.CoreLib/System.ReadOnlyMemory<System.Byte>
-extern "C" void chaos_bridge_thunk_48(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[60])();
-}
-
-// Bridge/import thunk for: System.Private.CoreLib/System.IO.Stream::WriteAsync:System.Threading.Tasks.ValueTask(System.ReadOnlyMemory<System.Byte>,System.Threading.CancellationToken)
-extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_49(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[61])(chaos_fn_arg_0, chaos_fn_arg_1);
-	return result;
-}
-
-// Bridge/import thunk for: System.Private.CoreLib/System.Collections.IEnumerable::GetEnumerator:System.Collections.IEnumerator()
-extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_5(void)
-{
-	auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)()>(kChaosExternalRuntimeFnTable[7])();
-	return result;
-}
-
-// Bridge/import thunk for: System.Private.CoreLib/System.IO.Stream::WriteByte:System.Void(System.Byte)
-extern "C" void chaos_bridge_thunk_50(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[62])(chaos_fn_arg_0);
-}
-
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<>9__69_0
-extern "C" void chaos_bridge_thunk_51(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[63])();
-}
-
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<>9__55_0
-extern "C" void chaos_bridge_thunk_52(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[64])();
-}
-
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<>9__31_0
-extern "C" void chaos_bridge_thunk_53(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[65])();
-}
-
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<>9__33_0
-extern "C" void chaos_bridge_thunk_54(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[66])();
-}
-
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<>9__35_0
-extern "C" void chaos_bridge_thunk_55(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[67])();
-}
-
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<>9__37_0
-extern "C" void chaos_bridge_thunk_56(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[68])();
-}
-
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<>9__39_0
-extern "C" void chaos_bridge_thunk_57(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[69])();
-}
-
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<>9__41_0
-extern "C" void chaos_bridge_thunk_58(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[70])();
-}
-
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<>9__57_0
-extern "C" void chaos_bridge_thunk_59(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[71])();
-}
-
-// Bridge/import thunk for: System.Private.CoreLib/System.IDisposable
-extern "C" void chaos_bridge_thunk_6(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[8])();
-}
-
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<>9__59_0
-extern "C" void chaos_bridge_thunk_60(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[72])();
-}
-
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<>9__61_0
-extern "C" void chaos_bridge_thunk_61(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[73])();
-}
-
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<>9__63_0
-extern "C" void chaos_bridge_thunk_62(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[74])();
-}
-
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<>9__65_0
-extern "C" void chaos_bridge_thunk_63(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[75])();
-}
-
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<>9__67_0
-extern "C" void chaos_bridge_thunk_64(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[76])();
-}
-
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<>9__43_0
-extern "C" void chaos_bridge_thunk_65(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[77])();
-}
-
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<>9__71_0
-extern "C" void chaos_bridge_thunk_66(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[78])();
-}
-
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<>9__73_0
-extern "C" void chaos_bridge_thunk_67(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[79])();
-}
-
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<>9__75_0
-extern "C" void chaos_bridge_thunk_68(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[80])();
-}
-
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<>9__18_0
-extern "C" void chaos_bridge_thunk_69(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[81])();
-}
-
-// Bridge/import thunk for: System.Private.CoreLib/System.Collections.IEnumerator::MoveNext:System.Boolean()
-extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_7(void)
-{
-	auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)()>(kChaosExternalRuntimeFnTable[9])();
-	return result;
-}
-
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<>9__20_0
-extern "C" void chaos_bridge_thunk_70(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[82])();
-}
-
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<>9__22_0
-extern "C" void chaos_bridge_thunk_71(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[83])();
-}
-
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<>9__24_0
-extern "C" void chaos_bridge_thunk_72(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[84])();
-}
-
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<>9__26_0
-extern "C" void chaos_bridge_thunk_73(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[85])();
-}
-
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<>9__28_0
-extern "C" void chaos_bridge_thunk_74(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[86])();
-}
-
-// Bridge/import thunk for: System.Private.CoreLib/System.Threading.Tasks.ValueTask::GetAwaiter:System.Runtime.CompilerServices.ValueTaskAwaiter()
-extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_75(void)
-{
-	auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)()>(kChaosExternalRuntimeFnTable[87])();
-	return result;
-}
-
-// Bridge/import thunk for: System.Private.CoreLib/System.Runtime.CompilerServices.ValueTaskAwaiter::GetResult:System.Void()
-extern "C" void chaos_bridge_thunk_76(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[88])();
-}
-
-// Bridge/import thunk for: System.Private.CoreLib/System.Threading.Tasks.Task::GetAwaiter:System.Runtime.CompilerServices.TaskAwaiter()
-extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_77(void)
-{
-	auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)()>(kChaosExternalRuntimeFnTable[89])();
-	return result;
-}
-
-// Bridge/import thunk for: System.Private.CoreLib/System.Runtime.CompilerServices.TaskAwaiter::GetResult:System.Void()
-extern "C" void chaos_bridge_thunk_78(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[90])();
-}
-
-// Bridge/import thunk for: System.Private.CoreLib/System.Threading.Tasks.Task<System.Int32>::GetAwaiter:System.Runtime.CompilerServices.TaskAwaiter<System.Int32>()
-extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_79(void)
-{
-	auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)()>(kChaosExternalRuntimeFnTable[91])();
-	return result;
-}
-
-// Bridge/import thunk for: System.Private.CoreLib/System.Collections.Generic.EqualityComparer<System.Object>::get_Default:System.Collections.Generic.EqualityComparer<System.Object>()
-extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_8(void)
-{
-	auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)()>(kChaosExternalRuntimeFnTable[10])();
-	return result;
-}
-
-// Bridge/import thunk for: System.Private.CoreLib/System.Runtime.CompilerServices.TaskAwaiter<System.Int32>::GetResult:System.Int32()
-extern "C" CHAOS_IL2CPP_INT32 chaos_bridge_thunk_80(void)
-{
-	auto result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)()>(kChaosExternalRuntimeFnTable[92])();
-	return result;
-}
-
-// Bridge/import thunk for: System.Private.CoreLib/System.Threading.Tasks.ValueTask<System.Int32>::GetAwaiter:System.Runtime.CompilerServices.ValueTaskAwaiter<System.Int32>()
-extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_81(void)
-{
-	auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)()>(kChaosExternalRuntimeFnTable[93])();
-	return result;
-}
-
-// Bridge/import thunk for: System.Private.CoreLib/System.Runtime.CompilerServices.ValueTaskAwaiter<System.Int32>::GetResult:System.Int32()
-extern "C" CHAOS_IL2CPP_INT32 chaos_bridge_thunk_82(void)
-{
-	auto result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)()>(kChaosExternalRuntimeFnTable[94])();
-	return result;
-}
-
-// Bridge/import thunk for: System.Private.CoreLib/System.Collections.IEnumerator::get_Current:System.Object()
-extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_9(void)
-{
-	auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)()>(kChaosExternalRuntimeFnTable[11])();
-	return result;
-}
+static const CHAOS_IL2CPP_UINT32 kChaosGcSlotMapsSize = 5756u;
 
 // ── CodeRegistrationV0 ─────────────────────────────────────────
 // method_pointers: flat array of all AOT function pointers.
-static void* const kMethodPointers[158] = {
-	reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Boolean_System_Boolean_System_String),
-	reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Byte_System_Byte_System_String),
-	reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Byte_array_System_Byte_array_System_String),
-	reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Char_System_Char_System_String),
-	reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Decimal_System_Decimal_System_String),
-	reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Double_System_Double_System_String),
-	reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Int16_System_Int16_System_String),
-	reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Int32_System_Int32_System_String),
-	reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Int64_System_Int64_System_String),
-	reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Object_System_Object_System_String),
-	reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_SByte_System_SByte_System_String),
-	reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Single_System_Single_System_String),
-	reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_String_System_String_System_String),
-	reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_UInt16_System_UInt16_System_String),
-	reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_UInt32_System_UInt32_System_String),
-	reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_UInt64_System_UInt64_System_String),
-	reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_0_0_System_String),
-	reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreNotEqual_0_0_System_String),
-	reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Complete),
-	reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Fail_System_String),
-	reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_get_ExitCode),
-	reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_IsFalse_System_Boolean_System_String),
-	reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_IsNotNull_System_Object_System_String),
-	reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_IsNull_System_Object_System_String),
-	reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_IsTrue_System_Boolean_System_String),
-	reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_RecordFailure),
-	reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Reset),
-	reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Throws_System_Action),
-	reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Throws_System_Action),
-	reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Throws_System_NullReferenceException_System_Action__generic),
-	reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_AssertionException__ctor_System_String),
-	reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_BenchmarkAttribute__ctor),
-	reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_FactAttribute__ctor),
-	reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_HotUpdateAttribute__ctor),
+static void* const kMethodPointers[124] = {
 	reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliDecoderTests__ctor),
 	reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliDecoderTests_Benchmark_Dispose_0__0),
 	reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliEncoderTests__ctor),
@@ -5599,26 +4477,13 @@ static void* const kMethodPointers[158] = {
 // ── VTable descriptors (for BootstrapRuntime TypeVTable registration) ──
 static const VTableDescriptorV0 kChaosVTableDescriptors[] = {
 	{
-		CHAOS_IL2CPP_UINT64_C(0x7C3B82F05F34BCA9),
-		0x00000003u,
-		0u,
-		1u,
-		reinterpret_cast<const void*>(kSlots_Chaos_TestFramework_Sdk_Chaos_TestFramework_AssertionException),
-		reinterpret_cast<const void**>(chaos_vtable_Chaos_TestFramework_Sdk_Chaos_TestFramework_AssertionException),
-		1u,
-		1,
-		{0, 0, 0},
-		nullptr,
-		0u,
-	},
-	{
 		CHAOS_IL2CPP_UINT64_C(0x099CAB2CBBF24365),
-		0x0000000Au,
+		0x00000004u,
 		0u,
-		36u,
+		35u,
 		reinterpret_cast<const void*>(kSlots_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c),
 		reinterpret_cast<const void**>(chaos_vtable_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c),
-		36u,
+		35u,
 		1,
 		{0, 0, 0},
 		nullptr,
@@ -5629,7 +4494,7 @@ extern "C" const CodeRegistrationV0 chaos_codegen_code_registration
 	= {
 	.struct_size               = sizeof(CodeRegistrationV0),
 	.method_pointers           = kMethodPointers,
-	.method_pointer_count      = 158u,
+	.method_pointer_count      = 124u,
 	.reverse_pinvoke_wrappers  = nullptr,
 	.reverse_pinvoke_wrapper_count = 0u,
 	.invoker_pointers          = nullptr,
@@ -5639,7 +4504,7 @@ extern "C" const CodeRegistrationV0 chaos_codegen_code_registration
 	.type_capabilities       = nullptr,
 	.type_capability_count   = 0u,
 	.vtable_descriptors = kChaosVTableDescriptors,
-	.vtable_descriptor_count = 2u,
+	.vtable_descriptor_count = 1u,
 	.slot_map_section_begin = reinterpret_cast<const void*>(&kChaosGcSlotMapsSection),
 	.slot_map_section_end   = reinterpret_cast<const void*>(
 		reinterpret_cast<CHAOS_IL2CPP_UINTPTR>(&kChaosGcSlotMapsSection) + kChaosGcSlotMapsSize),
@@ -5678,228 +4543,161 @@ extern "C" const CodegenRegistrationOptionsV0 chaos_codegen_options
 // Used by ResolveSubjectId to resolve call_target via subjectId
 // matching during IR lowering of patched methods.
 
-static constexpr ReflectionQueryFieldDescriptor kReflFields_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert[1] = {
-	{ 0x04000001u, "Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::s_exitCode", "s_exitCode", "System.Int32", 0LL, 2u },
-};
-static constexpr ReflectionQueryMethodDescriptor kReflMethods_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert[30] = {
-	{ 0x0000004Du, "Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::AreEqual:System.Void(System.Boolean,System.Boolean,System.String)", "AreEqual", "System.Void", 3, nullptr, 0u, nullptr, 0u },
-	{ 0x00000047u, "Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::AreEqual:System.Void(System.Byte,System.Byte,System.String)", "AreEqual", "System.Void", 3, nullptr, 0u, nullptr, 0u },
-	{ 0x00000067u, "Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::AreEqual:System.Void(System.Byte[],System.Byte[],System.String)", "AreEqual", "System.Void", 3, nullptr, 0u, nullptr, 0u },
-	{ 0x0000004Bu, "Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::AreEqual:System.Void(System.Char,System.Char,System.String)", "AreEqual", "System.Void", 3, nullptr, 0u, nullptr, 0u },
-	{ 0x00000053u, "Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::AreEqual:System.Void(System.Decimal,System.Decimal,System.String)", "AreEqual", "System.Void", 3, nullptr, 0u, nullptr, 0u },
-	{ 0x00000051u, "Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::AreEqual:System.Void(System.Double,System.Double,System.String)", "AreEqual", "System.Void", 3, nullptr, 0u, nullptr, 0u },
-	{ 0x00000043u, "Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::AreEqual:System.Void(System.Int16,System.Int16,System.String)", "AreEqual", "System.Void", 3, nullptr, 0u, nullptr, 0u },
-	{ 0x0000003Bu, "Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::AreEqual:System.Void(System.Int32,System.Int32,System.String)", "AreEqual", "System.Void", 3, nullptr, 0u, nullptr, 0u },
-	{ 0x0000003Fu, "Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::AreEqual:System.Void(System.Int64,System.Int64,System.String)", "AreEqual", "System.Void", 3, nullptr, 0u, nullptr, 0u },
-	{ 0x00000057u, "Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::AreEqual:System.Void(System.Object,System.Object,System.String)", "AreEqual", "System.Void", 3, nullptr, 0u, nullptr, 0u },
-	{ 0x00000049u, "Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::AreEqual:System.Void(System.SByte,System.SByte,System.String)", "AreEqual", "System.Void", 3, nullptr, 0u, nullptr, 0u },
-	{ 0x0000004Fu, "Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::AreEqual:System.Void(System.Single,System.Single,System.String)", "AreEqual", "System.Void", 3, nullptr, 0u, nullptr, 0u },
-	{ 0x00000055u, "Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::AreEqual:System.Void(System.String,System.String,System.String)", "AreEqual", "System.Void", 3, nullptr, 0u, nullptr, 0u },
-	{ 0x00000045u, "Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::AreEqual:System.Void(System.UInt16,System.UInt16,System.String)", "AreEqual", "System.Void", 3, nullptr, 0u, nullptr, 0u },
-	{ 0x0000003Du, "Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::AreEqual:System.Void(System.UInt32,System.UInt32,System.String)", "AreEqual", "System.Void", 3, nullptr, 0u, nullptr, 0u },
-	{ 0x00000041u, "Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::AreEqual:System.Void(System.UInt64,System.UInt64,System.String)", "AreEqual", "System.Void", 3, nullptr, 0u, nullptr, 0u },
-	{ 0x00000065u, "Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::AreEqual`1:System.Void(!!0,!!0,System.String)", "AreEqual`1", "System.Void", 3, nullptr, 0u, nullptr, 0u },
-	{ 0x00000069u, "Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::AreNotEqual`1:System.Void(!!0,!!0,System.String)", "AreNotEqual`1", "System.Void", 3, nullptr, 0u, nullptr, 0u },
-	{ 0x00000037u, "Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::Complete:System.Int32()", "Complete", "System.Int32", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x0000006Bu, "Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::Fail:System.Void(System.String)", "Fail", "System.Void", 1, nullptr, 0u, nullptr, 0u },
-	{ 0x00000039u, "Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::get_ExitCode:System.Int32()", "get_ExitCode", "System.Int32", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x0000005Fu, "Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::IsFalse:System.Void(System.Boolean,System.String)", "IsFalse", "System.Void", 2, nullptr, 0u, nullptr, 0u },
-	{ 0x0000005Bu, "Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::IsNotNull:System.Void(System.Object,System.String)", "IsNotNull", "System.Void", 2, nullptr, 0u, nullptr, 0u },
-	{ 0x00000059u, "Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::IsNull:System.Void(System.Object,System.String)", "IsNull", "System.Void", 2, nullptr, 0u, nullptr, 0u },
-	{ 0x0000005Du, "Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::IsTrue:System.Void(System.Boolean,System.String)", "IsTrue", "System.Void", 2, nullptr, 0u, nullptr, 0u },
-	{ 0x00000035u, "Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::RecordFailure:System.Void()", "RecordFailure", "System.Void", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x00000033u, "Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::Reset:System.Void()", "Reset", "System.Void", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x00000061u, "Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::Throws:System.Void(System.Action)", "Throws", "System.Void", 1, nullptr, 0u, nullptr, 0u },
-	{ 0x00000063u, "Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::Throws`1:System.Void(System.Action)", "Throws`1", "System.Void", 1, nullptr, 0u, nullptr, 0u },
-	{ 0x000000CDu, "Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::Throws<System.NullReferenceException>:System.Void(System.Action)", "Throws<System.NullReferenceException>", "System.Void", 1, nullptr, 0u, nullptr, 0u },
-};
-
-static constexpr ReflectionQueryMethodDescriptor kReflMethods_Chaos_TestFramework_Sdk_Chaos_TestFramework_AssertionException[1] = {
-	{ 0x00000031u, "Chaos.TestFramework.Sdk/Chaos.TestFramework.AssertionException::.ctor:System.Void(System.String)", ".ctor", "System.Void", 1, nullptr, 0u, nullptr, 0u },
-};
-
-static constexpr ReflectionQueryMethodDescriptor kReflMethods_Chaos_TestFramework_Sdk_Chaos_TestFramework_BenchmarkAttribute[1] = {
-	{ 0x0000006Du, "Chaos.TestFramework.Sdk/Chaos.TestFramework.BenchmarkAttribute::.ctor:System.Void()", ".ctor", "System.Void", 0, nullptr, 0u, nullptr, 0u },
-};
-
-static constexpr ReflectionQueryMethodDescriptor kReflMethods_Chaos_TestFramework_Sdk_Chaos_TestFramework_FactAttribute[1] = {
-	{ 0x0000006Fu, "Chaos.TestFramework.Sdk/Chaos.TestFramework.FactAttribute::.ctor:System.Void()", ".ctor", "System.Void", 0, nullptr, 0u, nullptr, 0u },
-};
-
-static constexpr ReflectionQueryMethodDescriptor kReflMethods_Chaos_TestFramework_Sdk_Chaos_TestFramework_HotUpdateAttribute[1] = {
-	{ 0x00000071u, "Chaos.TestFramework.Sdk/Chaos.TestFramework.HotUpdateAttribute::.ctor:System.Void()", ".ctor", "System.Void", 0, nullptr, 0u, nullptr, 0u },
-};
-
 static constexpr ReflectionQueryMethodDescriptor kReflMethods_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliDecoderTests[2] = {
-	{ 0x00000032u, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliDecoderTests::.ctor:System.Void()", ".ctor", "System.Void", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x00000030u, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliDecoderTests::Benchmark_Dispose_0__0:System.Void()", "Benchmark_Dispose_0__0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000029u, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliDecoderTests::.ctor:System.Void()", ".ctor", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000028u, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliDecoderTests::Benchmark_Dispose_0__0:System.Void()", "Benchmark_Dispose_0__0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
 };
 
 static constexpr ReflectionQueryMethodDescriptor kReflMethods_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliEncoderTests[6] = {
-	{ 0x0000003Eu, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliEncoderTests::.ctor:System.Void()", ".ctor", "System.Void", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x00000034u, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliEncoderTests::Benchmark_Dispose_0__0:System.Void()", "Benchmark_Dispose_0__0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x00000038u, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliEncoderTests::Benchmark_GetMaxCompressedLength_1_int_0:System.Void()", "Benchmark_GetMaxCompressedLength_1_int_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x0000003Cu, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliEncoderTests::Benchmark_GetMaxCompressedLength_1_int_1:System.Void()", "Benchmark_GetMaxCompressedLength_1_int_1", "System.Void", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x00000036u, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliEncoderTests::GetMaxCompressedLength_1_int_0:System.Int64()", "GetMaxCompressedLength_1_int_0", "System.Int64", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x0000003Au, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliEncoderTests::GetMaxCompressedLength_1_int_1:System.Int64()", "GetMaxCompressedLength_1_int_1", "System.Int64", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000002Fu, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliEncoderTests::.ctor:System.Void()", ".ctor", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000002Au, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliEncoderTests::Benchmark_Dispose_0__0:System.Void()", "Benchmark_Dispose_0__0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000002Cu, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliEncoderTests::Benchmark_GetMaxCompressedLength_1_int_0:System.Void()", "Benchmark_GetMaxCompressedLength_1_int_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000002Eu, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliEncoderTests::Benchmark_GetMaxCompressedLength_1_int_1:System.Void()", "Benchmark_GetMaxCompressedLength_1_int_1", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000002Bu, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliEncoderTests::GetMaxCompressedLength_1_int_0:System.Int64()", "GetMaxCompressedLength_1_int_0", "System.Int64", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000002Du, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliEncoderTests::GetMaxCompressedLength_1_int_1:System.Int64()", "GetMaxCompressedLength_1_int_1", "System.Int64", 0, nullptr, 0u, nullptr, 0u },
 };
 
 static constexpr ReflectionQueryMethodDescriptor kReflMethods_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests[80] = {
-	{ 0x000000A8u, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::.ctor:System.Void()", ".ctor", "System.Void", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x00000086u, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_0:System.Int64()", "BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_0", "System.Int64", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x00000088u, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_1:System.Int64()", "BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_1", "System.Int64", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x0000008Au, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_2:System.Int64()", "BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_2", "System.Int64", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x0000008Cu, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_3:System.Int64()", "BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_3", "System.Int64", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x0000008Eu, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_4:System.Int64()", "BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_4", "System.Int64", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x0000004Eu, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_0:System.Int64()", "BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_0", "System.Int64", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x00000052u, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_1:System.Int64()", "BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_1", "System.Int64", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x00000056u, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_2:System.Int64()", "BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_2", "System.Int64", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x0000005Au, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_3:System.Int64()", "BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_3", "System.Int64", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x0000005Eu, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_4:System.Int64()", "BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_4", "System.Int64", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x00000087u, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_0:System.Void()", "Benchmark_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x00000089u, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_1:System.Void()", "Benchmark_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_1", "System.Void", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x0000008Bu, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_2:System.Void()", "Benchmark_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_2", "System.Void", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x0000008Du, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_3:System.Void()", "Benchmark_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_3", "System.Void", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x0000008Fu, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_4:System.Void()", "Benchmark_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_4", "System.Void", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x00000050u, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_0:System.Void()", "Benchmark_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x00000054u, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_1:System.Void()", "Benchmark_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_1", "System.Void", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x00000058u, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_2:System.Void()", "Benchmark_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_2", "System.Void", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x0000005Cu, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_3:System.Void()", "Benchmark_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_3", "System.Void", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x00000060u, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_4:System.Void()", "Benchmark_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_4", "System.Void", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x0000009Fu, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_DisposeAsync_14__14:System.Void()", "Benchmark_DisposeAsync_14__14", "System.Void", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x00000091u, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_EndRead_11_System_IAsyncResult_0:System.Void()", "Benchmark_EndRead_11_System_IAsyncResult_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x00000062u, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_EndWrite_3_System_IAsyncResult_0:System.Void()", "Benchmark_EndWrite_3_System_IAsyncResult_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x00000077u, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_Flush_6__6:System.Void()", "Benchmark_Flush_6__6", "System.Void", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x00000079u, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_FlushAsync_7_CancellationToken_0:System.Void()", "Benchmark_FlushAsync_7_CancellationToken_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x0000007Bu, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_Read_8_System_Byte_int_int_0:System.Void()", "Benchmark_Read_8_System_Byte_int_int_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x0000007Du, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_Read_8_System_Byte_int_int_1:System.Void()", "Benchmark_Read_8_System_Byte_int_int_1", "System.Void", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x0000007Fu, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_Read_8_System_Byte_int_int_2:System.Void()", "Benchmark_Read_8_System_Byte_int_int_2", "System.Void", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x00000081u, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_Read_8_System_Byte_int_int_3:System.Void()", "Benchmark_Read_8_System_Byte_int_int_3", "System.Void", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x00000083u, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_Read_8_System_Byte_int_int_4:System.Void()", "Benchmark_Read_8_System_Byte_int_int_4", "System.Void", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x00000093u, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_ReadAsync_12_System_Byte_int_int_CancellationToken_0:System.Void()", "Benchmark_ReadAsync_12_System_Byte_int_int_CancellationToken_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x00000095u, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_ReadAsync_12_System_Byte_int_int_CancellationToken_1:System.Void()", "Benchmark_ReadAsync_12_System_Byte_int_int_CancellationToken_1", "System.Void", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x00000097u, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_ReadAsync_12_System_Byte_int_int_CancellationToken_2:System.Void()", "Benchmark_ReadAsync_12_System_Byte_int_int_CancellationToken_2", "System.Void", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x00000099u, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_ReadAsync_12_System_Byte_int_int_CancellationToken_3:System.Void()", "Benchmark_ReadAsync_12_System_Byte_int_int_CancellationToken_3", "System.Void", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x0000009Bu, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_ReadAsync_12_System_Byte_int_int_CancellationToken_4:System.Void()", "Benchmark_ReadAsync_12_System_Byte_int_int_CancellationToken_4", "System.Void", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x0000009Du, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_ReadAsync_13_System_Memorybyte_CancellationToken_0:System.Void()", "Benchmark_ReadAsync_13_System_Memorybyte_CancellationToken_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x00000085u, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_ReadByte_9__9:System.Void()", "Benchmark_ReadByte_9__9", "System.Void", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x000000A1u, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_Seek_15_long_SeekOrigin_0:System.Void()", "Benchmark_Seek_15_long_SeekOrigin_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x000000A3u, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_Seek_15_long_SeekOrigin_1:System.Void()", "Benchmark_Seek_15_long_SeekOrigin_1", "System.Void", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x000000A5u, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_Seek_15_long_SeekOrigin_2:System.Void()", "Benchmark_Seek_15_long_SeekOrigin_2", "System.Void", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x000000A6u, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_SetLength_16_long_0:System.Void()", "Benchmark_SetLength_16_long_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x000000A7u, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_SetLength_16_long_1:System.Void()", "Benchmark_SetLength_16_long_1", "System.Void", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x00000040u, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_Write_0_System_Byte_int_int_0:System.Void()", "Benchmark_Write_0_System_Byte_int_int_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x00000042u, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_Write_0_System_Byte_int_int_1:System.Void()", "Benchmark_Write_0_System_Byte_int_int_1", "System.Void", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x00000044u, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_Write_0_System_Byte_int_int_2:System.Void()", "Benchmark_Write_0_System_Byte_int_int_2", "System.Void", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x00000046u, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_Write_0_System_Byte_int_int_3:System.Void()", "Benchmark_Write_0_System_Byte_int_int_3", "System.Void", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x00000048u, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_Write_0_System_Byte_int_int_4:System.Void()", "Benchmark_Write_0_System_Byte_int_int_4", "System.Void", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x00000066u, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_WriteAsync_4_System_Byte_int_int_CancellationToken_0:System.Void()", "Benchmark_WriteAsync_4_System_Byte_int_int_CancellationToken_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x0000006Au, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_WriteAsync_4_System_Byte_int_int_CancellationToken_1:System.Void()", "Benchmark_WriteAsync_4_System_Byte_int_int_CancellationToken_1", "System.Void", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x0000006Eu, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_WriteAsync_4_System_Byte_int_int_CancellationToken_2:System.Void()", "Benchmark_WriteAsync_4_System_Byte_int_int_CancellationToken_2", "System.Void", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x00000072u, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_WriteAsync_4_System_Byte_int_int_CancellationToken_3:System.Void()", "Benchmark_WriteAsync_4_System_Byte_int_int_CancellationToken_3", "System.Void", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x00000074u, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_WriteAsync_4_System_Byte_int_int_CancellationToken_4:System.Void()", "Benchmark_WriteAsync_4_System_Byte_int_int_CancellationToken_4", "System.Void", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x00000076u, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_WriteAsync_5_System_ReadOnlyMemorybyte_CancellationToken_0:System.Void()", "Benchmark_WriteAsync_5_System_ReadOnlyMemorybyte_CancellationToken_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x0000004Au, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_WriteByte_1_byte_0:System.Void()", "Benchmark_WriteByte_1_byte_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x0000004Cu, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_WriteByte_1_byte_1:System.Void()", "Benchmark_WriteByte_1_byte_1", "System.Void", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x0000009Eu, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::DisposeAsync_14__14:System.Int64()", "DisposeAsync_14__14", "System.Int64", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x00000090u, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::EndRead_11_System_IAsyncResult_0:System.Int64()", "EndRead_11_System_IAsyncResult_0", "System.Int64", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x00000078u, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::FlushAsync_7_CancellationToken_0:System.Int64()", "FlushAsync_7_CancellationToken_0", "System.Int64", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x0000007Au, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Read_8_System_Byte_int_int_0:System.Int64()", "Read_8_System_Byte_int_int_0", "System.Int64", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x0000007Cu, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Read_8_System_Byte_int_int_1:System.Int64()", "Read_8_System_Byte_int_int_1", "System.Int64", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x0000007Eu, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Read_8_System_Byte_int_int_2:System.Int64()", "Read_8_System_Byte_int_int_2", "System.Int64", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x00000080u, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Read_8_System_Byte_int_int_3:System.Int64()", "Read_8_System_Byte_int_int_3", "System.Int64", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x00000082u, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Read_8_System_Byte_int_int_4:System.Int64()", "Read_8_System_Byte_int_int_4", "System.Int64", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x00000092u, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::ReadAsync_12_System_Byte_int_int_CancellationToken_0:System.Int64()", "ReadAsync_12_System_Byte_int_int_CancellationToken_0", "System.Int64", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x00000094u, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::ReadAsync_12_System_Byte_int_int_CancellationToken_1:System.Int64()", "ReadAsync_12_System_Byte_int_int_CancellationToken_1", "System.Int64", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x00000096u, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::ReadAsync_12_System_Byte_int_int_CancellationToken_2:System.Int64()", "ReadAsync_12_System_Byte_int_int_CancellationToken_2", "System.Int64", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x00000098u, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::ReadAsync_12_System_Byte_int_int_CancellationToken_3:System.Int64()", "ReadAsync_12_System_Byte_int_int_CancellationToken_3", "System.Int64", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x0000009Au, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::ReadAsync_12_System_Byte_int_int_CancellationToken_4:System.Int64()", "ReadAsync_12_System_Byte_int_int_CancellationToken_4", "System.Int64", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x0000009Cu, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::ReadAsync_13_System_Memorybyte_CancellationToken_0:System.Int64()", "ReadAsync_13_System_Memorybyte_CancellationToken_0", "System.Int64", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x00000084u, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::ReadByte_9__9:System.Int64()", "ReadByte_9__9", "System.Int64", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x000000A0u, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Seek_15_long_SeekOrigin_0:System.Int64()", "Seek_15_long_SeekOrigin_0", "System.Int64", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x000000A2u, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Seek_15_long_SeekOrigin_1:System.Int64()", "Seek_15_long_SeekOrigin_1", "System.Int64", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x000000A4u, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Seek_15_long_SeekOrigin_2:System.Int64()", "Seek_15_long_SeekOrigin_2", "System.Int64", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x00000064u, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::WriteAsync_4_System_Byte_int_int_CancellationToken_0:System.Int64()", "WriteAsync_4_System_Byte_int_int_CancellationToken_0", "System.Int64", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x00000068u, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::WriteAsync_4_System_Byte_int_int_CancellationToken_1:System.Int64()", "WriteAsync_4_System_Byte_int_int_CancellationToken_1", "System.Int64", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x0000006Cu, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::WriteAsync_4_System_Byte_int_int_CancellationToken_2:System.Int64()", "WriteAsync_4_System_Byte_int_int_CancellationToken_2", "System.Int64", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x00000070u, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::WriteAsync_4_System_Byte_int_int_CancellationToken_3:System.Int64()", "WriteAsync_4_System_Byte_int_int_CancellationToken_3", "System.Int64", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x00000073u, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::WriteAsync_4_System_Byte_int_int_CancellationToken_4:System.Int64()", "WriteAsync_4_System_Byte_int_int_CancellationToken_4", "System.Int64", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x00000075u, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::WriteAsync_5_System_ReadOnlyMemorybyte_CancellationToken_0:System.Int64()", "WriteAsync_5_System_ReadOnlyMemorybyte_CancellationToken_0", "System.Int64", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000007Fu, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::.ctor:System.Void()", ".ctor", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000005Du, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_0:System.Int64()", "BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_0", "System.Int64", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000005Fu, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_1:System.Int64()", "BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_1", "System.Int64", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000061u, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_2:System.Int64()", "BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_2", "System.Int64", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000063u, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_3:System.Int64()", "BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_3", "System.Int64", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000065u, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_4:System.Int64()", "BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_4", "System.Int64", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000037u, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_0:System.Int64()", "BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_0", "System.Int64", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000039u, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_1:System.Int64()", "BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_1", "System.Int64", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000003Bu, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_2:System.Int64()", "BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_2", "System.Int64", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000003Du, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_3:System.Int64()", "BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_3", "System.Int64", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000003Fu, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_4:System.Int64()", "BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_4", "System.Int64", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000005Eu, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_0:System.Void()", "Benchmark_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000060u, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_1:System.Void()", "Benchmark_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_1", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000062u, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_2:System.Void()", "Benchmark_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_2", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000064u, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_3:System.Void()", "Benchmark_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_3", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000066u, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_4:System.Void()", "Benchmark_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_4", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000038u, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_0:System.Void()", "Benchmark_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000003Au, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_1:System.Void()", "Benchmark_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_1", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000003Cu, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_2:System.Void()", "Benchmark_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_2", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000003Eu, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_3:System.Void()", "Benchmark_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_3", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000040u, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_4:System.Void()", "Benchmark_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_4", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000076u, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_DisposeAsync_14__14:System.Void()", "Benchmark_DisposeAsync_14__14", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000068u, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_EndRead_11_System_IAsyncResult_0:System.Void()", "Benchmark_EndRead_11_System_IAsyncResult_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000041u, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_EndWrite_3_System_IAsyncResult_0:System.Void()", "Benchmark_EndWrite_3_System_IAsyncResult_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000004Eu, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_Flush_6__6:System.Void()", "Benchmark_Flush_6__6", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000050u, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_FlushAsync_7_CancellationToken_0:System.Void()", "Benchmark_FlushAsync_7_CancellationToken_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000052u, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_Read_8_System_Byte_int_int_0:System.Void()", "Benchmark_Read_8_System_Byte_int_int_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000054u, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_Read_8_System_Byte_int_int_1:System.Void()", "Benchmark_Read_8_System_Byte_int_int_1", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000056u, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_Read_8_System_Byte_int_int_2:System.Void()", "Benchmark_Read_8_System_Byte_int_int_2", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000058u, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_Read_8_System_Byte_int_int_3:System.Void()", "Benchmark_Read_8_System_Byte_int_int_3", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000005Au, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_Read_8_System_Byte_int_int_4:System.Void()", "Benchmark_Read_8_System_Byte_int_int_4", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000006Au, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_ReadAsync_12_System_Byte_int_int_CancellationToken_0:System.Void()", "Benchmark_ReadAsync_12_System_Byte_int_int_CancellationToken_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000006Cu, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_ReadAsync_12_System_Byte_int_int_CancellationToken_1:System.Void()", "Benchmark_ReadAsync_12_System_Byte_int_int_CancellationToken_1", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000006Eu, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_ReadAsync_12_System_Byte_int_int_CancellationToken_2:System.Void()", "Benchmark_ReadAsync_12_System_Byte_int_int_CancellationToken_2", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000070u, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_ReadAsync_12_System_Byte_int_int_CancellationToken_3:System.Void()", "Benchmark_ReadAsync_12_System_Byte_int_int_CancellationToken_3", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000072u, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_ReadAsync_12_System_Byte_int_int_CancellationToken_4:System.Void()", "Benchmark_ReadAsync_12_System_Byte_int_int_CancellationToken_4", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000074u, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_ReadAsync_13_System_Memorybyte_CancellationToken_0:System.Void()", "Benchmark_ReadAsync_13_System_Memorybyte_CancellationToken_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000005Cu, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_ReadByte_9__9:System.Void()", "Benchmark_ReadByte_9__9", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000078u, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_Seek_15_long_SeekOrigin_0:System.Void()", "Benchmark_Seek_15_long_SeekOrigin_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000007Au, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_Seek_15_long_SeekOrigin_1:System.Void()", "Benchmark_Seek_15_long_SeekOrigin_1", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000007Cu, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_Seek_15_long_SeekOrigin_2:System.Void()", "Benchmark_Seek_15_long_SeekOrigin_2", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000007Du, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_SetLength_16_long_0:System.Void()", "Benchmark_SetLength_16_long_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000007Eu, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_SetLength_16_long_1:System.Void()", "Benchmark_SetLength_16_long_1", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000030u, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_Write_0_System_Byte_int_int_0:System.Void()", "Benchmark_Write_0_System_Byte_int_int_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000031u, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_Write_0_System_Byte_int_int_1:System.Void()", "Benchmark_Write_0_System_Byte_int_int_1", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000032u, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_Write_0_System_Byte_int_int_2:System.Void()", "Benchmark_Write_0_System_Byte_int_int_2", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000033u, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_Write_0_System_Byte_int_int_3:System.Void()", "Benchmark_Write_0_System_Byte_int_int_3", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000034u, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_Write_0_System_Byte_int_int_4:System.Void()", "Benchmark_Write_0_System_Byte_int_int_4", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000043u, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_WriteAsync_4_System_Byte_int_int_CancellationToken_0:System.Void()", "Benchmark_WriteAsync_4_System_Byte_int_int_CancellationToken_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000045u, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_WriteAsync_4_System_Byte_int_int_CancellationToken_1:System.Void()", "Benchmark_WriteAsync_4_System_Byte_int_int_CancellationToken_1", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000047u, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_WriteAsync_4_System_Byte_int_int_CancellationToken_2:System.Void()", "Benchmark_WriteAsync_4_System_Byte_int_int_CancellationToken_2", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000049u, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_WriteAsync_4_System_Byte_int_int_CancellationToken_3:System.Void()", "Benchmark_WriteAsync_4_System_Byte_int_int_CancellationToken_3", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000004Bu, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_WriteAsync_4_System_Byte_int_int_CancellationToken_4:System.Void()", "Benchmark_WriteAsync_4_System_Byte_int_int_CancellationToken_4", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000004Du, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_WriteAsync_5_System_ReadOnlyMemorybyte_CancellationToken_0:System.Void()", "Benchmark_WriteAsync_5_System_ReadOnlyMemorybyte_CancellationToken_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000035u, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_WriteByte_1_byte_0:System.Void()", "Benchmark_WriteByte_1_byte_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000036u, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_WriteByte_1_byte_1:System.Void()", "Benchmark_WriteByte_1_byte_1", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000075u, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::DisposeAsync_14__14:System.Int64()", "DisposeAsync_14__14", "System.Int64", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000067u, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::EndRead_11_System_IAsyncResult_0:System.Int64()", "EndRead_11_System_IAsyncResult_0", "System.Int64", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000004Fu, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::FlushAsync_7_CancellationToken_0:System.Int64()", "FlushAsync_7_CancellationToken_0", "System.Int64", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000051u, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Read_8_System_Byte_int_int_0:System.Int64()", "Read_8_System_Byte_int_int_0", "System.Int64", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000053u, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Read_8_System_Byte_int_int_1:System.Int64()", "Read_8_System_Byte_int_int_1", "System.Int64", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000055u, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Read_8_System_Byte_int_int_2:System.Int64()", "Read_8_System_Byte_int_int_2", "System.Int64", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000057u, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Read_8_System_Byte_int_int_3:System.Int64()", "Read_8_System_Byte_int_int_3", "System.Int64", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000059u, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Read_8_System_Byte_int_int_4:System.Int64()", "Read_8_System_Byte_int_int_4", "System.Int64", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000069u, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::ReadAsync_12_System_Byte_int_int_CancellationToken_0:System.Int64()", "ReadAsync_12_System_Byte_int_int_CancellationToken_0", "System.Int64", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000006Bu, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::ReadAsync_12_System_Byte_int_int_CancellationToken_1:System.Int64()", "ReadAsync_12_System_Byte_int_int_CancellationToken_1", "System.Int64", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000006Du, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::ReadAsync_12_System_Byte_int_int_CancellationToken_2:System.Int64()", "ReadAsync_12_System_Byte_int_int_CancellationToken_2", "System.Int64", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000006Fu, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::ReadAsync_12_System_Byte_int_int_CancellationToken_3:System.Int64()", "ReadAsync_12_System_Byte_int_int_CancellationToken_3", "System.Int64", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000071u, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::ReadAsync_12_System_Byte_int_int_CancellationToken_4:System.Int64()", "ReadAsync_12_System_Byte_int_int_CancellationToken_4", "System.Int64", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000073u, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::ReadAsync_13_System_Memorybyte_CancellationToken_0:System.Int64()", "ReadAsync_13_System_Memorybyte_CancellationToken_0", "System.Int64", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000005Bu, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::ReadByte_9__9:System.Int64()", "ReadByte_9__9", "System.Int64", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000077u, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Seek_15_long_SeekOrigin_0:System.Int64()", "Seek_15_long_SeekOrigin_0", "System.Int64", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000079u, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Seek_15_long_SeekOrigin_1:System.Int64()", "Seek_15_long_SeekOrigin_1", "System.Int64", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000007Bu, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Seek_15_long_SeekOrigin_2:System.Int64()", "Seek_15_long_SeekOrigin_2", "System.Int64", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000042u, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::WriteAsync_4_System_Byte_int_int_CancellationToken_0:System.Int64()", "WriteAsync_4_System_Byte_int_int_CancellationToken_0", "System.Int64", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000044u, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::WriteAsync_4_System_Byte_int_int_CancellationToken_1:System.Int64()", "WriteAsync_4_System_Byte_int_int_CancellationToken_1", "System.Int64", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000046u, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::WriteAsync_4_System_Byte_int_int_CancellationToken_2:System.Int64()", "WriteAsync_4_System_Byte_int_int_CancellationToken_2", "System.Int64", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000048u, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::WriteAsync_4_System_Byte_int_int_CancellationToken_3:System.Int64()", "WriteAsync_4_System_Byte_int_int_CancellationToken_3", "System.Int64", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000004Au, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::WriteAsync_4_System_Byte_int_int_CancellationToken_4:System.Int64()", "WriteAsync_4_System_Byte_int_int_CancellationToken_4", "System.Int64", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000004Cu, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::WriteAsync_5_System_ReadOnlyMemorybyte_CancellationToken_0:System.Int64()", "WriteAsync_5_System_ReadOnlyMemorybyte_CancellationToken_0", "System.Int64", 0, nullptr, 0u, nullptr, 0u },
 };
 
 static constexpr ReflectionQueryMethodDescriptor kReflMethods_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c[36] = {
-	{ 0x000000A9u, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::.cctor:System.Void()", ".cctor", "System.Void", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x000000AAu, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::.ctor:System.Void()", ".ctor", "System.Void", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x000000BDu, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_0>b__45_0:System.Void()", "<BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_0>b__45_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x000000BEu, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_1>b__47_0:System.Void()", "<BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_1>b__47_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x000000BFu, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_2>b__49_0:System.Void()", "<BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_2>b__49_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x000000C0u, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_3>b__51_0:System.Void()", "<BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_3>b__51_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x000000C1u, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_4>b__53_0:System.Void()", "<BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_4>b__53_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x000000ABu, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_0>b__7_0:System.Void()", "<BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_0>b__7_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x000000ACu, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_1>b__9_0:System.Void()", "<BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_1>b__9_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x000000ADu, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_2>b__11_0:System.Void()", "<BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_2>b__11_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x000000AEu, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_3>b__13_0:System.Void()", "<BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_3>b__13_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x000000AFu, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_4>b__15_0:System.Void()", "<BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_4>b__15_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x000000C9u, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<DisposeAsync_14__14>b__69_0:System.Void()", "<DisposeAsync_14__14>b__69_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x000000C2u, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<EndRead_11_System_IAsyncResult_0>b__55_0:System.Void()", "<EndRead_11_System_IAsyncResult_0>b__55_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x000000B6u, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<FlushAsync_7_CancellationToken_0>b__31_0:System.Void()", "<FlushAsync_7_CancellationToken_0>b__31_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x000000B7u, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<Read_8_System_Byte_int_int_0>b__33_0:System.Void()", "<Read_8_System_Byte_int_int_0>b__33_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x000000B8u, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<Read_8_System_Byte_int_int_1>b__35_0:System.Void()", "<Read_8_System_Byte_int_int_1>b__35_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x000000B9u, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<Read_8_System_Byte_int_int_2>b__37_0:System.Void()", "<Read_8_System_Byte_int_int_2>b__37_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x000000BAu, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<Read_8_System_Byte_int_int_3>b__39_0:System.Void()", "<Read_8_System_Byte_int_int_3>b__39_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x000000BBu, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<Read_8_System_Byte_int_int_4>b__41_0:System.Void()", "<Read_8_System_Byte_int_int_4>b__41_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x000000C3u, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<ReadAsync_12_System_Byte_int_int_CancellationToken_0>b__57_0:System.Void()", "<ReadAsync_12_System_Byte_int_int_CancellationToken_0>b__57_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x000000C4u, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<ReadAsync_12_System_Byte_int_int_CancellationToken_1>b__59_0:System.Void()", "<ReadAsync_12_System_Byte_int_int_CancellationToken_1>b__59_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x000000C5u, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<ReadAsync_12_System_Byte_int_int_CancellationToken_2>b__61_0:System.Void()", "<ReadAsync_12_System_Byte_int_int_CancellationToken_2>b__61_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x000000C6u, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<ReadAsync_12_System_Byte_int_int_CancellationToken_3>b__63_0:System.Void()", "<ReadAsync_12_System_Byte_int_int_CancellationToken_3>b__63_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x000000C7u, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<ReadAsync_12_System_Byte_int_int_CancellationToken_4>b__65_0:System.Void()", "<ReadAsync_12_System_Byte_int_int_CancellationToken_4>b__65_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x000000C8u, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<ReadAsync_13_System_Memorybyte_CancellationToken_0>b__67_0:System.Void()", "<ReadAsync_13_System_Memorybyte_CancellationToken_0>b__67_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x000000BCu, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<ReadByte_9__9>b__43_0:System.Void()", "<ReadByte_9__9>b__43_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x000000CAu, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<Seek_15_long_SeekOrigin_0>b__71_0:System.Void()", "<Seek_15_long_SeekOrigin_0>b__71_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x000000CBu, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<Seek_15_long_SeekOrigin_1>b__73_0:System.Void()", "<Seek_15_long_SeekOrigin_1>b__73_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x000000CCu, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<Seek_15_long_SeekOrigin_2>b__75_0:System.Void()", "<Seek_15_long_SeekOrigin_2>b__75_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x000000B0u, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<WriteAsync_4_System_Byte_int_int_CancellationToken_0>b__18_0:System.Void()", "<WriteAsync_4_System_Byte_int_int_CancellationToken_0>b__18_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x000000B1u, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<WriteAsync_4_System_Byte_int_int_CancellationToken_1>b__20_0:System.Void()", "<WriteAsync_4_System_Byte_int_int_CancellationToken_1>b__20_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x000000B2u, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<WriteAsync_4_System_Byte_int_int_CancellationToken_2>b__22_0:System.Void()", "<WriteAsync_4_System_Byte_int_int_CancellationToken_2>b__22_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x000000B3u, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<WriteAsync_4_System_Byte_int_int_CancellationToken_3>b__24_0:System.Void()", "<WriteAsync_4_System_Byte_int_int_CancellationToken_3>b__24_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x000000B4u, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<WriteAsync_4_System_Byte_int_int_CancellationToken_4>b__26_0:System.Void()", "<WriteAsync_4_System_Byte_int_int_CancellationToken_4>b__26_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x000000B5u, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<WriteAsync_5_System_ReadOnlyMemorybyte_CancellationToken_0>b__28_0:System.Void()", "<WriteAsync_5_System_ReadOnlyMemorybyte_CancellationToken_0>b__28_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000080u, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::.cctor:System.Void()", ".cctor", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000081u, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::.ctor:System.Void()", ".ctor", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000094u, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_0>b__45_0:System.Void()", "<BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_0>b__45_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000095u, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_1>b__47_0:System.Void()", "<BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_1>b__47_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000096u, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_2>b__49_0:System.Void()", "<BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_2>b__49_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000097u, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_3>b__51_0:System.Void()", "<BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_3>b__51_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000098u, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_4>b__53_0:System.Void()", "<BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_4>b__53_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000082u, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_0>b__7_0:System.Void()", "<BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_0>b__7_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000083u, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_1>b__9_0:System.Void()", "<BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_1>b__9_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000084u, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_2>b__11_0:System.Void()", "<BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_2>b__11_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000085u, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_3>b__13_0:System.Void()", "<BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_3>b__13_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000086u, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_4>b__15_0:System.Void()", "<BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_4>b__15_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x000000A0u, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<DisposeAsync_14__14>b__69_0:System.Void()", "<DisposeAsync_14__14>b__69_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000099u, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<EndRead_11_System_IAsyncResult_0>b__55_0:System.Void()", "<EndRead_11_System_IAsyncResult_0>b__55_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000008Du, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<FlushAsync_7_CancellationToken_0>b__31_0:System.Void()", "<FlushAsync_7_CancellationToken_0>b__31_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000008Eu, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<Read_8_System_Byte_int_int_0>b__33_0:System.Void()", "<Read_8_System_Byte_int_int_0>b__33_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000008Fu, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<Read_8_System_Byte_int_int_1>b__35_0:System.Void()", "<Read_8_System_Byte_int_int_1>b__35_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000090u, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<Read_8_System_Byte_int_int_2>b__37_0:System.Void()", "<Read_8_System_Byte_int_int_2>b__37_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000091u, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<Read_8_System_Byte_int_int_3>b__39_0:System.Void()", "<Read_8_System_Byte_int_int_3>b__39_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000092u, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<Read_8_System_Byte_int_int_4>b__41_0:System.Void()", "<Read_8_System_Byte_int_int_4>b__41_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000009Au, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<ReadAsync_12_System_Byte_int_int_CancellationToken_0>b__57_0:System.Void()", "<ReadAsync_12_System_Byte_int_int_CancellationToken_0>b__57_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000009Bu, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<ReadAsync_12_System_Byte_int_int_CancellationToken_1>b__59_0:System.Void()", "<ReadAsync_12_System_Byte_int_int_CancellationToken_1>b__59_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000009Cu, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<ReadAsync_12_System_Byte_int_int_CancellationToken_2>b__61_0:System.Void()", "<ReadAsync_12_System_Byte_int_int_CancellationToken_2>b__61_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000009Du, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<ReadAsync_12_System_Byte_int_int_CancellationToken_3>b__63_0:System.Void()", "<ReadAsync_12_System_Byte_int_int_CancellationToken_3>b__63_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000009Eu, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<ReadAsync_12_System_Byte_int_int_CancellationToken_4>b__65_0:System.Void()", "<ReadAsync_12_System_Byte_int_int_CancellationToken_4>b__65_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000009Fu, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<ReadAsync_13_System_Memorybyte_CancellationToken_0>b__67_0:System.Void()", "<ReadAsync_13_System_Memorybyte_CancellationToken_0>b__67_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000093u, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<ReadByte_9__9>b__43_0:System.Void()", "<ReadByte_9__9>b__43_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x000000A1u, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<Seek_15_long_SeekOrigin_0>b__71_0:System.Void()", "<Seek_15_long_SeekOrigin_0>b__71_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x000000A2u, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<Seek_15_long_SeekOrigin_1>b__73_0:System.Void()", "<Seek_15_long_SeekOrigin_1>b__73_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x000000A3u, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<Seek_15_long_SeekOrigin_2>b__75_0:System.Void()", "<Seek_15_long_SeekOrigin_2>b__75_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000087u, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<WriteAsync_4_System_Byte_int_int_CancellationToken_0>b__18_0:System.Void()", "<WriteAsync_4_System_Byte_int_int_CancellationToken_0>b__18_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000088u, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<WriteAsync_4_System_Byte_int_int_CancellationToken_1>b__20_0:System.Void()", "<WriteAsync_4_System_Byte_int_int_CancellationToken_1>b__20_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000089u, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<WriteAsync_4_System_Byte_int_int_CancellationToken_2>b__22_0:System.Void()", "<WriteAsync_4_System_Byte_int_int_CancellationToken_2>b__22_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000008Au, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<WriteAsync_4_System_Byte_int_int_CancellationToken_3>b__24_0:System.Void()", "<WriteAsync_4_System_Byte_int_int_CancellationToken_3>b__24_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000008Bu, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<WriteAsync_4_System_Byte_int_int_CancellationToken_4>b__26_0:System.Void()", "<WriteAsync_4_System_Byte_int_int_CancellationToken_4>b__26_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000008Cu, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<WriteAsync_5_System_ReadOnlyMemorybyte_CancellationToken_0>b__28_0:System.Void()", "<WriteAsync_5_System_ReadOnlyMemorybyte_CancellationToken_0>b__28_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
 };
 
-static const ReflectionQueryTypeDescriptor kReflTypes[9] = {
-	{ 0x00000004u, "Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert", "Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert", "Chaos.TestFramework", "Chaos.TestFramework.Assert", "Chaos.TestFramework.Assert", nullptr, kReflFields_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert, 1u, nullptr, 0u,
-nullptr, 0u,    kReflMethods_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert, 30u, nullptr, 0u, 0u },
-	{ 0x00000003u, "Chaos.TestFramework.Sdk/Chaos.TestFramework.AssertionException", "Chaos.TestFramework.Sdk/Chaos.TestFramework.AssertionException", "Chaos.TestFramework", "Chaos.TestFramework.AssertionException", "Chaos.TestFramework.AssertionException", nullptr, nullptr, 0u, nullptr, 0u,
-nullptr, 0u,    kReflMethods_Chaos_TestFramework_Sdk_Chaos_TestFramework_AssertionException, 1u, nullptr, 0u, 0u },
-	{ 0x00000007u, "Chaos.TestFramework.Sdk/Chaos.TestFramework.BenchmarkAttribute", "Chaos.TestFramework.Sdk/Chaos.TestFramework.BenchmarkAttribute", "Chaos.TestFramework", "Chaos.TestFramework.BenchmarkAttribute", "Chaos.TestFramework.BenchmarkAttribute", nullptr, nullptr, 0u, nullptr, 0u,
-nullptr, 0u,    kReflMethods_Chaos_TestFramework_Sdk_Chaos_TestFramework_BenchmarkAttribute, 1u, nullptr, 0u, 0u },
-	{ 0x00000008u, "Chaos.TestFramework.Sdk/Chaos.TestFramework.FactAttribute", "Chaos.TestFramework.Sdk/Chaos.TestFramework.FactAttribute", "Chaos.TestFramework", "Chaos.TestFramework.FactAttribute", "Chaos.TestFramework.FactAttribute", nullptr, nullptr, 0u, nullptr, 0u,
-nullptr, 0u,    kReflMethods_Chaos_TestFramework_Sdk_Chaos_TestFramework_FactAttribute, 1u, nullptr, 0u, 0u },
-	{ 0x00000009u, "Chaos.TestFramework.Sdk/Chaos.TestFramework.HotUpdateAttribute", "Chaos.TestFramework.Sdk/Chaos.TestFramework.HotUpdateAttribute", "Chaos.TestFramework", "Chaos.TestFramework.HotUpdateAttribute", "Chaos.TestFramework.HotUpdateAttribute", nullptr, nullptr, 0u, nullptr, 0u,
-nullptr, 0u,    kReflMethods_Chaos_TestFramework_Sdk_Chaos_TestFramework_HotUpdateAttribute, 1u, nullptr, 0u, 0u },
-	{ 0x00000002u, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliDecoderTests", "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliDecoderTests", "AutoGenerated.System_IO_Compression_Brotli", "AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliDecoderTests", "AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliDecoderTests", nullptr, nullptr, 0u, nullptr, 0u,
+static const ReflectionQueryTypeDescriptor kReflTypes[4] = {
+	{ 0x00000001u, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliDecoderTests", "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliDecoderTests", "AutoGenerated.System_IO_Compression_Brotli", "AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliDecoderTests", "AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliDecoderTests", nullptr, nullptr, 0u, nullptr, 0u,
 nullptr, 0u,    kReflMethods_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliDecoderTests, 2u, nullptr, 0u, 0u },
-	{ 0x00000005u, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliEncoderTests", "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliEncoderTests", "AutoGenerated.System_IO_Compression_Brotli", "AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliEncoderTests", "AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliEncoderTests", nullptr, nullptr, 0u, nullptr, 0u,
+	{ 0x00000002u, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliEncoderTests", "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliEncoderTests", "AutoGenerated.System_IO_Compression_Brotli", "AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliEncoderTests", "AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliEncoderTests", nullptr, nullptr, 0u, nullptr, 0u,
 nullptr, 0u,    kReflMethods_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliEncoderTests, 6u, nullptr, 0u, 0u },
-	{ 0x00000006u, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests", "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests", "AutoGenerated.System_IO_Compression_Brotli", "AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests", "AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests", nullptr, nullptr, 0u, nullptr, 0u,
+	{ 0x00000003u, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests", "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests", "AutoGenerated.System_IO_Compression_Brotli", "AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests", "AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests", nullptr, nullptr, 0u, nullptr, 0u,
 nullptr, 0u,    kReflMethods_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests, 80u, nullptr, 0u, 0u },
-	{ 0x0000000Au, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c", "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c", "AutoGenerated.System_IO_Compression_Brotli", "AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c", "AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c", nullptr, nullptr, 0u, nullptr, 0u,
+	{ 0x00000004u, "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c", "CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c", "AutoGenerated.System_IO_Compression_Brotli", "AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c", "AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c", nullptr, nullptr, 0u, nullptr, 0u,
 nullptr, 0u,    kReflMethods_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c, 36u, nullptr, 0u, 0u },
 };
 
-static const ReflectionQueryTypeDescriptor* kReflTypePtrs[9] = {
+static const ReflectionQueryTypeDescriptor* kReflTypePtrs[4] = {
 	&kReflTypes[0],
 	&kReflTypes[1],
 	&kReflTypes[2],
 	&kReflTypes[3],
-	&kReflTypes[4],
-	&kReflTypes[5],
-	&kReflTypes[6],
-	&kReflTypes[7],
-	&kReflTypes[8],
 };
 
-extern const ReflectionQueryImageDescriptor kReflImage = { "CombinedSubjects", kReflTypePtrs, 9u, 1, 0, 0, 0 };
+extern const ReflectionQueryImageDescriptor kReflImage = { "CombinedSubjects", kReflTypePtrs, 4u, 1, 0, 0, 0 };
 
 // Fake ImageHandle that ResolveSubjectId will decode back to kReflImage.
 // BootstrapRuntime's aot_image_handle fallback discovers this via
@@ -5945,27 +4743,4061 @@ struct ChaosGenericRegistrationInit {
 	}
 } g_chaos_reg_init;
 }
-// Managed method: Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::AreEqual(System.Boolean,System.Boolean,System.String)
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Boolean_System_Boolean_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2)
+// Managed method: CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliDecoderTests::.ctor()
+extern "C" void CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliDecoderTests__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 3) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-	chaos_args[2] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_2);
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
 	_s0 = chaos_args[0];
-	_s1 = chaos_args[1];
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
 	{
-		if (_s0 == 0)
-		{
-		}
-		return;
+		const auto chaos_arg_0 = _s0;
+		ChaosObjectCtor(chaos_arg_0);
 	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliDecoderTests::Benchmark_Dispose_0__0()
+extern "C" void CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliDecoderTests_Benchmark_Dispose_0__0(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[0]);
+	_s1 = _s0;
+	{
+		const auto chaos_address = _s1;
+		if ((chaos_address & chaos_managed_pointer_local_slot_tag) != 0)
+		{
+			auto* chaos_slot = reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(static_cast<CHAOS_IL2CPP_UINTPTR>(chaos_address & ~chaos_managed_pointer_local_slot_tag));
+			*chaos_slot = 0;
+		}
+		else
+		{
+			*reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(chaos_address) = 0;
+		}
+	}
+	{
+		const auto chaos_result = chaos_external_runtime_System_IO_Compression_Brotli_System_IO_Compression_BrotliDecoder__Dispose_System_Void__();
+		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliEncoderTests::.ctor()
+extern "C" void CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliEncoderTests__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = chaos_args[0];
+	{
+		const auto chaos_arg_0 = _s0;
+		ChaosObjectCtor(chaos_arg_0);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliEncoderTests::Benchmark_Dispose_0__0()
+extern "C" void CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliEncoderTests_Benchmark_Dispose_0__0(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[0]);
+	_s1 = _s0;
+	{
+		const auto chaos_address = _s1;
+		if ((chaos_address & chaos_managed_pointer_local_slot_tag) != 0)
+		{
+			auto* chaos_slot = reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(static_cast<CHAOS_IL2CPP_UINTPTR>(chaos_address & ~chaos_managed_pointer_local_slot_tag));
+			*chaos_slot = 0;
+		}
+		else
+		{
+			*reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(chaos_address) = 0;
+		}
+	}
+	{
+		const auto chaos_result = chaos_external_runtime_System_IO_Compression_Brotli_System_IO_Compression_BrotliEncoder__Dispose_System_Void__();
+		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliEncoderTests::Benchmark_GetMaxCompressedLength_1_int_0()
+extern "C" void CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliEncoderTests_Benchmark_GetMaxCompressedLength_1_int_0(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	{
+		const auto chaos_result = chaos_external_runtime_System_IO_Compression_Brotli_System_IO_Compression_BrotliEncoder__GetMaxCompressedLength_System_Int32_System_Int32_();
+		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliEncoderTests::Benchmark_GetMaxCompressedLength_1_int_1()
+extern "C" void CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliEncoderTests_Benchmark_GetMaxCompressedLength_1_int_1(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	{
+		const auto chaos_result = chaos_external_runtime_System_IO_Compression_Brotli_System_IO_Compression_BrotliEncoder__GetMaxCompressedLength_System_Int32_System_Int32_();
+		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliEncoderTests::GetMaxCompressedLength_1_int_0()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliEncoderTests_GetMaxCompressedLength_1_int_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INTPTR _s5;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	CHAOS_IL2CPP_INT64 _i3;
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	{
+		const auto chaos_result = chaos_external_runtime_System_IO_Compression_Brotli_System_IO_Compression_BrotliEncoder__GetMaxCompressedLength_System_Int32_System_Int32_();
+		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	chaos_locals[0] = _s1;
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+	_s2 = chaos_locals[0];
+	_s3 = 0;
+	{
+		[&]() -> void { if ((_s1) != (_s2)) { throw chaos_managed_exception{}; } }();
+	}
+	_s1 = chaos_locals[0];
+	_i1 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s1));
+	chaos_locals[1] = ChaosStoreInt64(_i1);
+	_i1 = ChaosLoadInt64(chaos_locals[1]);
+	return _i1;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliEncoderTests::GetMaxCompressedLength_1_int_1()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliEncoderTests_GetMaxCompressedLength_1_int_1(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INTPTR _s5;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	CHAOS_IL2CPP_INT64 _i3;
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	{
+		const auto chaos_result = chaos_external_runtime_System_IO_Compression_Brotli_System_IO_Compression_BrotliEncoder__GetMaxCompressedLength_System_Int32_System_Int32_();
+		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	chaos_locals[0] = _s1;
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+	_s2 = chaos_locals[0];
+	_s3 = 0;
+	{
+		[&]() -> void { if ((_s1) != (_s2)) { throw chaos_managed_exception{}; } }();
+	}
+	_s1 = chaos_locals[0];
+	_i1 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s1));
+	chaos_locals[1] = ChaosStoreInt64(_i1);
+	_i1 = ChaosLoadInt64(chaos_locals[1]);
+	return _i1;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::.ctor()
+extern "C" void CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = chaos_args[0];
+	{
+		const auto chaos_arg_0 = _s0;
+		ChaosObjectCtor(chaos_arg_0);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_0()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c____9__45_0;
+	_s1 = _s0;
+	{
+		if (_s1 == 0)
+		{
+			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c____9;
+			{
+				// Hotpatch-aware ldftn wrapper (slot 90)
+				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
+					auto& _d_entry = s_hotpatch_entries[90];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+					{
+						alignas(16) uint8_t _d_ab[8];
+						ArgBuffer _d_bw(_d_ab);
+						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d_entry.method_key, _d_ab, nullptr);
+						return;
+					}
+					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
+				};
+			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+			}
+			{
+				const auto chaos_method_ptr = _s1;
+				const auto chaos_target = _s0;
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
+				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
+				chaos_object->chaos_delegate_target = chaos_target;
+				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			_s1 = _s0;
+			{
+				auto chaos_value = _s1;
+				chaos_static_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c____9__45_0 = chaos_value;
+			}
+		}
+		{
+			// Assert.Throws: target method not found via IL lookahead
+			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
+		}
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
+		chaos_locals[0] = ChaosStoreInt64(_i0);
+		_i0 = ChaosLoadInt64(chaos_locals[0]);
+		return _i0;
+	}
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_1()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_1(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c____9__47_0;
+	_s1 = _s0;
+	{
+		if (_s1 == 0)
+		{
+			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c____9;
+			{
+				// Hotpatch-aware ldftn wrapper (slot 91)
+				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
+					auto& _d_entry = s_hotpatch_entries[91];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+					{
+						alignas(16) uint8_t _d_ab[8];
+						ArgBuffer _d_bw(_d_ab);
+						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d_entry.method_key, _d_ab, nullptr);
+						return;
+					}
+					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
+				};
+			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+			}
+			{
+				const auto chaos_method_ptr = _s1;
+				const auto chaos_target = _s0;
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
+				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
+				chaos_object->chaos_delegate_target = chaos_target;
+				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			_s1 = _s0;
+			{
+				auto chaos_value = _s1;
+				chaos_static_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c____9__47_0 = chaos_value;
+			}
+		}
+		{
+			// Assert.Throws: target method not found via IL lookahead
+			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
+		}
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
+		chaos_locals[0] = ChaosStoreInt64(_i0);
+		_i0 = ChaosLoadInt64(chaos_locals[0]);
+		return _i0;
+	}
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_2()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_2(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c____9__49_0;
+	_s1 = _s0;
+	{
+		if (_s1 == 0)
+		{
+			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c____9;
+			{
+				// Hotpatch-aware ldftn wrapper (slot 92)
+				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
+					auto& _d_entry = s_hotpatch_entries[92];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+					{
+						alignas(16) uint8_t _d_ab[8];
+						ArgBuffer _d_bw(_d_ab);
+						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d_entry.method_key, _d_ab, nullptr);
+						return;
+					}
+					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
+				};
+			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+			}
+			{
+				const auto chaos_method_ptr = _s1;
+				const auto chaos_target = _s0;
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
+				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
+				chaos_object->chaos_delegate_target = chaos_target;
+				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			_s1 = _s0;
+			{
+				auto chaos_value = _s1;
+				chaos_static_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c____9__49_0 = chaos_value;
+			}
+		}
+		{
+			// Assert.Throws: target method not found via IL lookahead
+			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
+		}
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
+		chaos_locals[0] = ChaosStoreInt64(_i0);
+		_i0 = ChaosLoadInt64(chaos_locals[0]);
+		return _i0;
+	}
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_3()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_3(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c____9__51_0;
+	_s1 = _s0;
+	{
+		if (_s1 == 0)
+		{
+			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c____9;
+			{
+				// Hotpatch-aware ldftn wrapper (slot 93)
+				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
+					auto& _d_entry = s_hotpatch_entries[93];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+					{
+						alignas(16) uint8_t _d_ab[8];
+						ArgBuffer _d_bw(_d_ab);
+						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d_entry.method_key, _d_ab, nullptr);
+						return;
+					}
+					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
+				};
+			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+			}
+			{
+				const auto chaos_method_ptr = _s1;
+				const auto chaos_target = _s0;
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
+				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
+				chaos_object->chaos_delegate_target = chaos_target;
+				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			_s1 = _s0;
+			{
+				auto chaos_value = _s1;
+				chaos_static_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c____9__51_0 = chaos_value;
+			}
+		}
+		{
+			// Assert.Throws: target method not found via IL lookahead
+			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
+		}
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
+		chaos_locals[0] = ChaosStoreInt64(_i0);
+		_i0 = ChaosLoadInt64(chaos_locals[0]);
+		return _i0;
+	}
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_4()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_4(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c____9__53_0;
+	_s1 = _s0;
+	{
+		if (_s1 == 0)
+		{
+			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c____9;
+			{
+				// Hotpatch-aware ldftn wrapper (slot 94)
+				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
+					auto& _d_entry = s_hotpatch_entries[94];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+					{
+						alignas(16) uint8_t _d_ab[8];
+						ArgBuffer _d_bw(_d_ab);
+						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d_entry.method_key, _d_ab, nullptr);
+						return;
+					}
+					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
+				};
+			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+			}
+			{
+				const auto chaos_method_ptr = _s1;
+				const auto chaos_target = _s0;
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
+				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
+				chaos_object->chaos_delegate_target = chaos_target;
+				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			_s1 = _s0;
+			{
+				auto chaos_value = _s1;
+				chaos_static_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c____9__53_0 = chaos_value;
+			}
+		}
+		{
+			// Assert.Throws: target method not found via IL lookahead
+			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
+		}
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
+		chaos_locals[0] = ChaosStoreInt64(_i0);
+		_i0 = ChaosLoadInt64(chaos_locals[0]);
+		return _i0;
+	}
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_0()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c____9__7_0;
+	_s1 = _s0;
+	{
+		if (_s1 == 0)
+		{
+			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c____9;
+			{
+				// Hotpatch-aware ldftn wrapper (slot 95)
+				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
+					auto& _d_entry = s_hotpatch_entries[95];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+					{
+						alignas(16) uint8_t _d_ab[8];
+						ArgBuffer _d_bw(_d_ab);
+						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d_entry.method_key, _d_ab, nullptr);
+						return;
+					}
+					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
+				};
+			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+			}
+			{
+				const auto chaos_method_ptr = _s1;
+				const auto chaos_target = _s0;
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
+				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
+				chaos_object->chaos_delegate_target = chaos_target;
+				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			_s1 = _s0;
+			{
+				auto chaos_value = _s1;
+				chaos_static_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c____9__7_0 = chaos_value;
+			}
+		}
+		{
+			// Assert.Throws: target method not found via IL lookahead
+			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
+		}
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
+		chaos_locals[0] = ChaosStoreInt64(_i0);
+		_i0 = ChaosLoadInt64(chaos_locals[0]);
+		return _i0;
+	}
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_1()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_1(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c____9__9_0;
+	_s1 = _s0;
+	{
+		if (_s1 == 0)
+		{
+			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c____9;
+			{
+				// Hotpatch-aware ldftn wrapper (slot 96)
+				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
+					auto& _d_entry = s_hotpatch_entries[96];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+					{
+						alignas(16) uint8_t _d_ab[8];
+						ArgBuffer _d_bw(_d_ab);
+						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d_entry.method_key, _d_ab, nullptr);
+						return;
+					}
+					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
+				};
+			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+			}
+			{
+				const auto chaos_method_ptr = _s1;
+				const auto chaos_target = _s0;
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
+				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
+				chaos_object->chaos_delegate_target = chaos_target;
+				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			_s1 = _s0;
+			{
+				auto chaos_value = _s1;
+				chaos_static_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c____9__9_0 = chaos_value;
+			}
+		}
+		{
+			// Assert.Throws: target method not found via IL lookahead
+			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
+		}
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
+		chaos_locals[0] = ChaosStoreInt64(_i0);
+		_i0 = ChaosLoadInt64(chaos_locals[0]);
+		return _i0;
+	}
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_2()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_2(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c____9__11_0;
+	_s1 = _s0;
+	{
+		if (_s1 == 0)
+		{
+			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c____9;
+			{
+				// Hotpatch-aware ldftn wrapper (slot 97)
+				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
+					auto& _d_entry = s_hotpatch_entries[97];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+					{
+						alignas(16) uint8_t _d_ab[8];
+						ArgBuffer _d_bw(_d_ab);
+						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d_entry.method_key, _d_ab, nullptr);
+						return;
+					}
+					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
+				};
+			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+			}
+			{
+				const auto chaos_method_ptr = _s1;
+				const auto chaos_target = _s0;
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
+				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
+				chaos_object->chaos_delegate_target = chaos_target;
+				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			_s1 = _s0;
+			{
+				auto chaos_value = _s1;
+				chaos_static_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c____9__11_0 = chaos_value;
+			}
+		}
+		{
+			// Assert.Throws: target method not found via IL lookahead
+			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
+		}
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
+		chaos_locals[0] = ChaosStoreInt64(_i0);
+		_i0 = ChaosLoadInt64(chaos_locals[0]);
+		return _i0;
+	}
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_3()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_3(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c____9__13_0;
+	_s1 = _s0;
+	{
+		if (_s1 == 0)
+		{
+			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c____9;
+			{
+				// Hotpatch-aware ldftn wrapper (slot 98)
+				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
+					auto& _d_entry = s_hotpatch_entries[98];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+					{
+						alignas(16) uint8_t _d_ab[8];
+						ArgBuffer _d_bw(_d_ab);
+						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d_entry.method_key, _d_ab, nullptr);
+						return;
+					}
+					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
+				};
+			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+			}
+			{
+				const auto chaos_method_ptr = _s1;
+				const auto chaos_target = _s0;
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
+				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
+				chaos_object->chaos_delegate_target = chaos_target;
+				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			_s1 = _s0;
+			{
+				auto chaos_value = _s1;
+				chaos_static_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c____9__13_0 = chaos_value;
+			}
+		}
+		{
+			// Assert.Throws: target method not found via IL lookahead
+			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
+		}
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
+		chaos_locals[0] = ChaosStoreInt64(_i0);
+		_i0 = ChaosLoadInt64(chaos_locals[0]);
+		return _i0;
+	}
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_4()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_4(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c____9__15_0;
+	_s1 = _s0;
+	{
+		if (_s1 == 0)
+		{
+			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c____9;
+			{
+				// Hotpatch-aware ldftn wrapper (slot 99)
+				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
+					auto& _d_entry = s_hotpatch_entries[99];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+					{
+						alignas(16) uint8_t _d_ab[8];
+						ArgBuffer _d_bw(_d_ab);
+						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d_entry.method_key, _d_ab, nullptr);
+						return;
+					}
+					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
+				};
+			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+			}
+			{
+				const auto chaos_method_ptr = _s1;
+				const auto chaos_target = _s0;
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
+				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
+				chaos_object->chaos_delegate_target = chaos_target;
+				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			_s1 = _s0;
+			{
+				auto chaos_value = _s1;
+				chaos_static_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c____9__15_0 = chaos_value;
+			}
+		}
+		{
+			// Assert.Throws: target method not found via IL lookahead
+			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
+		}
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
+		chaos_locals[0] = ChaosStoreInt64(_i0);
+		_i0 = ChaosLoadInt64(chaos_locals[0]);
+		return _i0;
+	}
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_0()
+extern "C" void CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_0(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INTPTR _s5;
+	CHAOS_IL2CPP_INTPTR _s6;
+	CHAOS_IL2CPP_INTPTR _s7;
+	CHAOS_IL2CPP_INTPTR _s8;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	_s1 = 0;
+	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	_s4 = 0;
+	_s5 = 0;
+	{
+		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_IO_Stream__BeginRead_System_IAsyncResult_System_Byte___System_Int32_System_Int32_System_AsyncCallback_System_Object_();
+		_s6 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_1()
+extern "C" void CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_1(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INTPTR _s5;
+	CHAOS_IL2CPP_INTPTR _s6;
+	CHAOS_IL2CPP_INTPTR _s7;
+	CHAOS_IL2CPP_INTPTR _s8;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	_s1 = 0;
+	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	_s4 = 0;
+	_s5 = 0;
+	{
+		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_IO_Stream__BeginRead_System_IAsyncResult_System_Byte___System_Int32_System_Int32_System_AsyncCallback_System_Object_();
+		_s6 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_2()
+extern "C" void CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_2(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INTPTR _s5;
+	CHAOS_IL2CPP_INTPTR _s6;
+	CHAOS_IL2CPP_INTPTR _s7;
+	CHAOS_IL2CPP_INTPTR _s8;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	_s1 = 0;
+	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	_s4 = 0;
+	_s5 = 0;
+	{
+		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_IO_Stream__BeginRead_System_IAsyncResult_System_Byte___System_Int32_System_Int32_System_AsyncCallback_System_Object_();
+		_s6 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_3()
+extern "C" void CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_3(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INTPTR _s5;
+	CHAOS_IL2CPP_INTPTR _s6;
+	CHAOS_IL2CPP_INTPTR _s7;
+	CHAOS_IL2CPP_INTPTR _s8;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	{
+		const auto chaos_result = ChaosArrayEmpty_Inline();
+		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	_s4 = 0;
+	_s5 = 0;
+	{
+		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_IO_Stream__BeginRead_System_IAsyncResult_System_Byte___System_Int32_System_Int32_System_AsyncCallback_System_Object_();
+		_s6 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_4()
+extern "C" void CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_4(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INTPTR _s5;
+	CHAOS_IL2CPP_INTPTR _s6;
+	CHAOS_IL2CPP_INTPTR _s7;
+	CHAOS_IL2CPP_INTPTR _s8;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(2);
+	_s1 = ChaosArrayNew1D_Inline(&chaos_type_info_managed_array.hot, chaos_mt_System_Private_CoreLib_System_Byte.AsTypeInfoHot(), 1, _s1);
+	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	_s4 = 0;
+	_s5 = 0;
+	{
+		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_IO_Stream__BeginRead_System_IAsyncResult_System_Byte___System_Int32_System_Int32_System_AsyncCallback_System_Object_();
+		_s6 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_0()
+extern "C" void CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_0(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INTPTR _s5;
+	CHAOS_IL2CPP_INTPTR _s6;
+	CHAOS_IL2CPP_INTPTR _s7;
+	CHAOS_IL2CPP_INTPTR _s8;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	_s1 = 0;
+	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	_s4 = 0;
+	_s5 = 0;
+	{
+		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_IO_Stream__BeginWrite_System_IAsyncResult_System_Byte___System_Int32_System_Int32_System_AsyncCallback_System_Object_();
+		_s6 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_1()
+extern "C" void CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_1(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INTPTR _s5;
+	CHAOS_IL2CPP_INTPTR _s6;
+	CHAOS_IL2CPP_INTPTR _s7;
+	CHAOS_IL2CPP_INTPTR _s8;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	_s1 = 0;
+	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	_s4 = 0;
+	_s5 = 0;
+	{
+		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_IO_Stream__BeginWrite_System_IAsyncResult_System_Byte___System_Int32_System_Int32_System_AsyncCallback_System_Object_();
+		_s6 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_2()
+extern "C" void CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_2(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INTPTR _s5;
+	CHAOS_IL2CPP_INTPTR _s6;
+	CHAOS_IL2CPP_INTPTR _s7;
+	CHAOS_IL2CPP_INTPTR _s8;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	_s1 = 0;
+	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	_s4 = 0;
+	_s5 = 0;
+	{
+		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_IO_Stream__BeginWrite_System_IAsyncResult_System_Byte___System_Int32_System_Int32_System_AsyncCallback_System_Object_();
+		_s6 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_3()
+extern "C" void CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_3(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INTPTR _s5;
+	CHAOS_IL2CPP_INTPTR _s6;
+	CHAOS_IL2CPP_INTPTR _s7;
+	CHAOS_IL2CPP_INTPTR _s8;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	{
+		const auto chaos_result = ChaosArrayEmpty_Inline();
+		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	_s4 = 0;
+	_s5 = 0;
+	{
+		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_IO_Stream__BeginWrite_System_IAsyncResult_System_Byte___System_Int32_System_Int32_System_AsyncCallback_System_Object_();
+		_s6 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_4()
+extern "C" void CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_4(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INTPTR _s5;
+	CHAOS_IL2CPP_INTPTR _s6;
+	CHAOS_IL2CPP_INTPTR _s7;
+	CHAOS_IL2CPP_INTPTR _s8;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(2);
+	_s1 = ChaosArrayNew1D_Inline(&chaos_type_info_managed_array.hot, chaos_mt_System_Private_CoreLib_System_Byte.AsTypeInfoHot(), 1, _s1);
+	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	_s4 = 0;
+	_s5 = 0;
+	{
+		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_IO_Stream__BeginWrite_System_IAsyncResult_System_Byte___System_Int32_System_Int32_System_AsyncCallback_System_Object_();
+		_s6 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_DisposeAsync_14__14()
+extern "C" void CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_DisposeAsync_14__14(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	{
+		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_IO_Stream__DisposeAsync_System_Threading_Tasks_ValueTask__();
+		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_EndRead_11_System_IAsyncResult_0()
+extern "C" void CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_EndRead_11_System_IAsyncResult_0(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	_s1 = 0;
+	{
+		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_IO_Stream__EndRead_System_Int32_System_IAsyncResult_();
+		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_EndWrite_3_System_IAsyncResult_0()
+extern "C" void CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_EndWrite_3_System_IAsyncResult_0(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	_s1 = 0;
+	{
+		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_IO_Stream__EndWrite_System_Void_System_IAsyncResult_();
+		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_Flush_6__6()
+extern "C" void CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_Flush_6__6(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	{
+		const auto chaos_arg_0 = _s0;
+		ChaosStreamFlush(chaos_arg_0);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_FlushAsync_7_CancellationToken_0()
+extern "C" void CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_FlushAsync_7_CancellationToken_0(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[0]);
+	{
+		const auto chaos_address = _s1;
+		if ((chaos_address & chaos_managed_pointer_local_slot_tag) != 0)
+		{
+			auto* chaos_slot = reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(static_cast<CHAOS_IL2CPP_UINTPTR>(chaos_address & ~chaos_managed_pointer_local_slot_tag));
+			*chaos_slot = 0;
+		}
+		else
+		{
+			*reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(chaos_address) = 0;
+		}
+	}
+	_s1 = chaos_locals[0];
+	{
+		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_IO_Stream__FlushAsync_System_Threading_Tasks_Task_System_Threading_CancellationToken_();
+		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_Read_8_System_Byte_int_int_0()
+extern "C" void CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_Read_8_System_Byte_int_int_0(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INTPTR _s5;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	_s1 = 0;
+	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	{
+		const auto chaos_arg_3 = _s3;
+		const auto chaos_arg_2 = _s2;
+		const auto chaos_arg_1 = _s1;
+		const auto chaos_arg_0 = _s0;
+		const auto chaos_result = ChaosStreamRead(chaos_arg_0, chaos_arg_1, static_cast<CHAOS_IL2CPP_INT32>(chaos_arg_2), static_cast<CHAOS_IL2CPP_INT32>(chaos_arg_3));
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_Read_8_System_Byte_int_int_1()
+extern "C" void CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_Read_8_System_Byte_int_int_1(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INTPTR _s5;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	_s1 = 0;
+	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	{
+		const auto chaos_arg_3 = _s3;
+		const auto chaos_arg_2 = _s2;
+		const auto chaos_arg_1 = _s1;
+		const auto chaos_arg_0 = _s0;
+		const auto chaos_result = ChaosStreamRead(chaos_arg_0, chaos_arg_1, static_cast<CHAOS_IL2CPP_INT32>(chaos_arg_2), static_cast<CHAOS_IL2CPP_INT32>(chaos_arg_3));
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_Read_8_System_Byte_int_int_2()
+extern "C" void CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_Read_8_System_Byte_int_int_2(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INTPTR _s5;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	_s1 = 0;
+	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	{
+		const auto chaos_arg_3 = _s3;
+		const auto chaos_arg_2 = _s2;
+		const auto chaos_arg_1 = _s1;
+		const auto chaos_arg_0 = _s0;
+		const auto chaos_result = ChaosStreamRead(chaos_arg_0, chaos_arg_1, static_cast<CHAOS_IL2CPP_INT32>(chaos_arg_2), static_cast<CHAOS_IL2CPP_INT32>(chaos_arg_3));
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_Read_8_System_Byte_int_int_3()
+extern "C" void CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_Read_8_System_Byte_int_int_3(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INTPTR _s5;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	{
+		const auto chaos_result = ChaosArrayEmpty_Inline();
+		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	{
+		const auto chaos_arg_3 = _s3;
+		const auto chaos_arg_2 = _s2;
+		const auto chaos_arg_1 = _s1;
+		const auto chaos_arg_0 = _s0;
+		const auto chaos_result = ChaosStreamRead(chaos_arg_0, chaos_arg_1, static_cast<CHAOS_IL2CPP_INT32>(chaos_arg_2), static_cast<CHAOS_IL2CPP_INT32>(chaos_arg_3));
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_Read_8_System_Byte_int_int_4()
+extern "C" void CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_Read_8_System_Byte_int_int_4(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INTPTR _s5;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(2);
+	_s1 = ChaosArrayNew1D_Inline(&chaos_type_info_managed_array.hot, chaos_mt_System_Private_CoreLib_System_Byte.AsTypeInfoHot(), 1, _s1);
+	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	{
+		const auto chaos_arg_3 = _s3;
+		const auto chaos_arg_2 = _s2;
+		const auto chaos_arg_1 = _s1;
+		const auto chaos_arg_0 = _s0;
+		const auto chaos_result = ChaosStreamRead(chaos_arg_0, chaos_arg_1, static_cast<CHAOS_IL2CPP_INT32>(chaos_arg_2), static_cast<CHAOS_IL2CPP_INT32>(chaos_arg_3));
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_ReadAsync_12_System_Byte_int_int_CancellationToken_0()
+extern "C" void CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_ReadAsync_12_System_Byte_int_int_CancellationToken_0(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INTPTR _s5;
+	CHAOS_IL2CPP_INTPTR _s6;
+	CHAOS_IL2CPP_INTPTR _s7;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	_s1 = 0;
+	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	_s4 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[0]);
+	{
+		const auto chaos_address = _s4;
+		if ((chaos_address & chaos_managed_pointer_local_slot_tag) != 0)
+		{
+			auto* chaos_slot = reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(static_cast<CHAOS_IL2CPP_UINTPTR>(chaos_address & ~chaos_managed_pointer_local_slot_tag));
+			*chaos_slot = 0;
+		}
+		else
+		{
+			*reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(chaos_address) = 0;
+		}
+	}
+	_s4 = chaos_locals[0];
+	{
+		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_IO_Stream__ReadAsync_System_Threading_Tasks_Task_System_Int32__System_Byte___System_Int32_System_Int32_System_Threading_CancellationToken_();
+		_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_ReadAsync_12_System_Byte_int_int_CancellationToken_1()
+extern "C" void CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_ReadAsync_12_System_Byte_int_int_CancellationToken_1(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INTPTR _s5;
+	CHAOS_IL2CPP_INTPTR _s6;
+	CHAOS_IL2CPP_INTPTR _s7;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	_s1 = 0;
+	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	_s4 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[0]);
+	{
+		const auto chaos_address = _s4;
+		if ((chaos_address & chaos_managed_pointer_local_slot_tag) != 0)
+		{
+			auto* chaos_slot = reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(static_cast<CHAOS_IL2CPP_UINTPTR>(chaos_address & ~chaos_managed_pointer_local_slot_tag));
+			*chaos_slot = 0;
+		}
+		else
+		{
+			*reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(chaos_address) = 0;
+		}
+	}
+	_s4 = chaos_locals[0];
+	{
+		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_IO_Stream__ReadAsync_System_Threading_Tasks_Task_System_Int32__System_Byte___System_Int32_System_Int32_System_Threading_CancellationToken_();
+		_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_ReadAsync_12_System_Byte_int_int_CancellationToken_2()
+extern "C" void CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_ReadAsync_12_System_Byte_int_int_CancellationToken_2(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INTPTR _s5;
+	CHAOS_IL2CPP_INTPTR _s6;
+	CHAOS_IL2CPP_INTPTR _s7;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	_s1 = 0;
+	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	_s4 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[0]);
+	{
+		const auto chaos_address = _s4;
+		if ((chaos_address & chaos_managed_pointer_local_slot_tag) != 0)
+		{
+			auto* chaos_slot = reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(static_cast<CHAOS_IL2CPP_UINTPTR>(chaos_address & ~chaos_managed_pointer_local_slot_tag));
+			*chaos_slot = 0;
+		}
+		else
+		{
+			*reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(chaos_address) = 0;
+		}
+	}
+	_s4 = chaos_locals[0];
+	{
+		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_IO_Stream__ReadAsync_System_Threading_Tasks_Task_System_Int32__System_Byte___System_Int32_System_Int32_System_Threading_CancellationToken_();
+		_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_ReadAsync_12_System_Byte_int_int_CancellationToken_3()
+extern "C" void CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_ReadAsync_12_System_Byte_int_int_CancellationToken_3(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INTPTR _s5;
+	CHAOS_IL2CPP_INTPTR _s6;
+	CHAOS_IL2CPP_INTPTR _s7;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	{
+		const auto chaos_result = ChaosArrayEmpty_Inline();
+		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	_s4 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[0]);
+	{
+		const auto chaos_address = _s4;
+		if ((chaos_address & chaos_managed_pointer_local_slot_tag) != 0)
+		{
+			auto* chaos_slot = reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(static_cast<CHAOS_IL2CPP_UINTPTR>(chaos_address & ~chaos_managed_pointer_local_slot_tag));
+			*chaos_slot = 0;
+		}
+		else
+		{
+			*reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(chaos_address) = 0;
+		}
+	}
+	_s4 = chaos_locals[0];
+	{
+		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_IO_Stream__ReadAsync_System_Threading_Tasks_Task_System_Int32__System_Byte___System_Int32_System_Int32_System_Threading_CancellationToken_();
+		_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_ReadAsync_12_System_Byte_int_int_CancellationToken_4()
+extern "C" void CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_ReadAsync_12_System_Byte_int_int_CancellationToken_4(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INTPTR _s5;
+	CHAOS_IL2CPP_INTPTR _s6;
+	CHAOS_IL2CPP_INTPTR _s7;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(2);
+	_s1 = ChaosArrayNew1D_Inline(&chaos_type_info_managed_array.hot, chaos_mt_System_Private_CoreLib_System_Byte.AsTypeInfoHot(), 1, _s1);
+	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	_s4 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[0]);
+	{
+		const auto chaos_address = _s4;
+		if ((chaos_address & chaos_managed_pointer_local_slot_tag) != 0)
+		{
+			auto* chaos_slot = reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(static_cast<CHAOS_IL2CPP_UINTPTR>(chaos_address & ~chaos_managed_pointer_local_slot_tag));
+			*chaos_slot = 0;
+		}
+		else
+		{
+			*reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(chaos_address) = 0;
+		}
+	}
+	_s4 = chaos_locals[0];
+	{
+		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_IO_Stream__ReadAsync_System_Threading_Tasks_Task_System_Int32__System_Byte___System_Int32_System_Int32_System_Threading_CancellationToken_();
+		_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_ReadAsync_13_System_Memorybyte_CancellationToken_0()
+extern "C" void CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_ReadAsync_13_System_Memorybyte_CancellationToken_0(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INTPTR _s5;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[0]);
+	{
+		const auto chaos_address = _s1;
+		if ((chaos_address & chaos_managed_pointer_local_slot_tag) != 0)
+		{
+			auto* chaos_slot = reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(static_cast<CHAOS_IL2CPP_UINTPTR>(chaos_address & ~chaos_managed_pointer_local_slot_tag));
+			*chaos_slot = 0;
+		}
+		else
+		{
+			*reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(chaos_address) = 0;
+		}
+	}
+	_s1 = chaos_locals[0];
+	_s2 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[1]);
+	{
+		const auto chaos_address = _s2;
+		if ((chaos_address & chaos_managed_pointer_local_slot_tag) != 0)
+		{
+			auto* chaos_slot = reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(static_cast<CHAOS_IL2CPP_UINTPTR>(chaos_address & ~chaos_managed_pointer_local_slot_tag));
+			*chaos_slot = 0;
+		}
+		else
+		{
+			*reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(chaos_address) = 0;
+		}
+	}
+	_s2 = chaos_locals[1];
+	{
+		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_IO_Stream__ReadAsync_System_Threading_Tasks_ValueTask_System_Int32__System_Memory_System_Byte__System_Threading_CancellationToken_();
+		_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_ReadByte_9__9()
+extern "C" void CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_ReadByte_9__9(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	{
+		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_IO_Stream__ReadByte_System_Int32__();
+		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_Seek_15_long_SeekOrigin_0()
+extern "C" void CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_Seek_15_long_SeekOrigin_0(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INTPTR _s5;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	CHAOS_IL2CPP_INT64 _i3;
+	_s0 = 0;
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	_i1 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s1));
+	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	{
+		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_IO_Stream__Seek_System_Int64_System_Int64_System_IO_SeekOrigin_();
+		_s3 = ChaosStoreInt64(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_Seek_15_long_SeekOrigin_1()
+extern "C" void CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_Seek_15_long_SeekOrigin_1(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INTPTR _s5;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	CHAOS_IL2CPP_INT64 _i3;
+	_s0 = 0;
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	_i1 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s1));
+	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	{
+		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_IO_Stream__Seek_System_Int64_System_Int64_System_IO_SeekOrigin_();
+		_s3 = ChaosStoreInt64(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_Seek_15_long_SeekOrigin_2()
+extern "C" void CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_Seek_15_long_SeekOrigin_2(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INTPTR _s5;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	CHAOS_IL2CPP_INT64 _i3;
+	_s0 = 0;
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	_i1 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s1));
+	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	{
+		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_IO_Stream__Seek_System_Int64_System_Int64_System_IO_SeekOrigin_();
+		_s3 = ChaosStoreInt64(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_SetLength_16_long_0()
+extern "C" void CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_SetLength_16_long_0(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	CHAOS_IL2CPP_INT64 _i3;
+	_s0 = 0;
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	_i1 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s1));
+	{
+		const auto chaos_arg_1 = _i1;
+		const auto chaos_arg_0 = _s0;
+		ChaosStreamSetLength(chaos_arg_0, ChaosLoadInt64(chaos_arg_1));
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_SetLength_16_long_1()
+extern "C" void CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_SetLength_16_long_1(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	CHAOS_IL2CPP_INT64 _i3;
+	_s0 = 0;
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	_i1 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s1));
+	{
+		const auto chaos_arg_1 = _i1;
+		const auto chaos_arg_0 = _s0;
+		ChaosStreamSetLength(chaos_arg_0, ChaosLoadInt64(chaos_arg_1));
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_Write_0_System_Byte_int_int_0()
+extern "C" void CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_Write_0_System_Byte_int_int_0(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INTPTR _s5;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	_s1 = 0;
+	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	{
+		const auto chaos_arg_3 = _s3;
+		const auto chaos_arg_2 = _s2;
+		const auto chaos_arg_1 = _s1;
+		const auto chaos_arg_0 = _s0;
+		ChaosStreamWrite(chaos_arg_0, chaos_arg_1, static_cast<CHAOS_IL2CPP_INT32>(chaos_arg_2), static_cast<CHAOS_IL2CPP_INT32>(chaos_arg_3));
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_Write_0_System_Byte_int_int_1()
+extern "C" void CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_Write_0_System_Byte_int_int_1(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INTPTR _s5;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	_s1 = 0;
+	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	{
+		const auto chaos_arg_3 = _s3;
+		const auto chaos_arg_2 = _s2;
+		const auto chaos_arg_1 = _s1;
+		const auto chaos_arg_0 = _s0;
+		ChaosStreamWrite(chaos_arg_0, chaos_arg_1, static_cast<CHAOS_IL2CPP_INT32>(chaos_arg_2), static_cast<CHAOS_IL2CPP_INT32>(chaos_arg_3));
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_Write_0_System_Byte_int_int_2()
+extern "C" void CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_Write_0_System_Byte_int_int_2(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INTPTR _s5;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	_s1 = 0;
+	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	{
+		const auto chaos_arg_3 = _s3;
+		const auto chaos_arg_2 = _s2;
+		const auto chaos_arg_1 = _s1;
+		const auto chaos_arg_0 = _s0;
+		ChaosStreamWrite(chaos_arg_0, chaos_arg_1, static_cast<CHAOS_IL2CPP_INT32>(chaos_arg_2), static_cast<CHAOS_IL2CPP_INT32>(chaos_arg_3));
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_Write_0_System_Byte_int_int_3()
+extern "C" void CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_Write_0_System_Byte_int_int_3(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INTPTR _s5;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	{
+		const auto chaos_result = ChaosArrayEmpty_Inline();
+		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	{
+		const auto chaos_arg_3 = _s3;
+		const auto chaos_arg_2 = _s2;
+		const auto chaos_arg_1 = _s1;
+		const auto chaos_arg_0 = _s0;
+		ChaosStreamWrite(chaos_arg_0, chaos_arg_1, static_cast<CHAOS_IL2CPP_INT32>(chaos_arg_2), static_cast<CHAOS_IL2CPP_INT32>(chaos_arg_3));
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_Write_0_System_Byte_int_int_4()
+extern "C" void CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_Write_0_System_Byte_int_int_4(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INTPTR _s5;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(2);
+	_s1 = ChaosArrayNew1D_Inline(&chaos_type_info_managed_array.hot, chaos_mt_System_Private_CoreLib_System_Byte.AsTypeInfoHot(), 1, _s1);
+	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	{
+		const auto chaos_arg_3 = _s3;
+		const auto chaos_arg_2 = _s2;
+		const auto chaos_arg_1 = _s1;
+		const auto chaos_arg_0 = _s0;
+		ChaosStreamWrite(chaos_arg_0, chaos_arg_1, static_cast<CHAOS_IL2CPP_INT32>(chaos_arg_2), static_cast<CHAOS_IL2CPP_INT32>(chaos_arg_3));
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_WriteAsync_4_System_Byte_int_int_CancellationToken_0()
+extern "C" void CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_WriteAsync_4_System_Byte_int_int_CancellationToken_0(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INTPTR _s5;
+	CHAOS_IL2CPP_INTPTR _s6;
+	CHAOS_IL2CPP_INTPTR _s7;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	_s1 = 0;
+	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	_s4 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[0]);
+	{
+		const auto chaos_address = _s4;
+		if ((chaos_address & chaos_managed_pointer_local_slot_tag) != 0)
+		{
+			auto* chaos_slot = reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(static_cast<CHAOS_IL2CPP_UINTPTR>(chaos_address & ~chaos_managed_pointer_local_slot_tag));
+			*chaos_slot = 0;
+		}
+		else
+		{
+			*reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(chaos_address) = 0;
+		}
+	}
+	_s4 = chaos_locals[0];
+	{
+		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_IO_Stream__WriteAsync_System_Threading_Tasks_Task_System_Byte___System_Int32_System_Int32_System_Threading_CancellationToken_();
+		_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_WriteAsync_4_System_Byte_int_int_CancellationToken_1()
+extern "C" void CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_WriteAsync_4_System_Byte_int_int_CancellationToken_1(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INTPTR _s5;
+	CHAOS_IL2CPP_INTPTR _s6;
+	CHAOS_IL2CPP_INTPTR _s7;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	_s1 = 0;
+	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	_s4 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[0]);
+	{
+		const auto chaos_address = _s4;
+		if ((chaos_address & chaos_managed_pointer_local_slot_tag) != 0)
+		{
+			auto* chaos_slot = reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(static_cast<CHAOS_IL2CPP_UINTPTR>(chaos_address & ~chaos_managed_pointer_local_slot_tag));
+			*chaos_slot = 0;
+		}
+		else
+		{
+			*reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(chaos_address) = 0;
+		}
+	}
+	_s4 = chaos_locals[0];
+	{
+		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_IO_Stream__WriteAsync_System_Threading_Tasks_Task_System_Byte___System_Int32_System_Int32_System_Threading_CancellationToken_();
+		_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_WriteAsync_4_System_Byte_int_int_CancellationToken_2()
+extern "C" void CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_WriteAsync_4_System_Byte_int_int_CancellationToken_2(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INTPTR _s5;
+	CHAOS_IL2CPP_INTPTR _s6;
+	CHAOS_IL2CPP_INTPTR _s7;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	_s1 = 0;
+	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	_s4 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[0]);
+	{
+		const auto chaos_address = _s4;
+		if ((chaos_address & chaos_managed_pointer_local_slot_tag) != 0)
+		{
+			auto* chaos_slot = reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(static_cast<CHAOS_IL2CPP_UINTPTR>(chaos_address & ~chaos_managed_pointer_local_slot_tag));
+			*chaos_slot = 0;
+		}
+		else
+		{
+			*reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(chaos_address) = 0;
+		}
+	}
+	_s4 = chaos_locals[0];
+	{
+		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_IO_Stream__WriteAsync_System_Threading_Tasks_Task_System_Byte___System_Int32_System_Int32_System_Threading_CancellationToken_();
+		_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_WriteAsync_4_System_Byte_int_int_CancellationToken_3()
+extern "C" void CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_WriteAsync_4_System_Byte_int_int_CancellationToken_3(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INTPTR _s5;
+	CHAOS_IL2CPP_INTPTR _s6;
+	CHAOS_IL2CPP_INTPTR _s7;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	{
+		const auto chaos_result = ChaosArrayEmpty_Inline();
+		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	_s4 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[0]);
+	{
+		const auto chaos_address = _s4;
+		if ((chaos_address & chaos_managed_pointer_local_slot_tag) != 0)
+		{
+			auto* chaos_slot = reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(static_cast<CHAOS_IL2CPP_UINTPTR>(chaos_address & ~chaos_managed_pointer_local_slot_tag));
+			*chaos_slot = 0;
+		}
+		else
+		{
+			*reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(chaos_address) = 0;
+		}
+	}
+	_s4 = chaos_locals[0];
+	{
+		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_IO_Stream__WriteAsync_System_Threading_Tasks_Task_System_Byte___System_Int32_System_Int32_System_Threading_CancellationToken_();
+		_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_WriteAsync_4_System_Byte_int_int_CancellationToken_4()
+extern "C" void CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_WriteAsync_4_System_Byte_int_int_CancellationToken_4(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INTPTR _s5;
+	CHAOS_IL2CPP_INTPTR _s6;
+	CHAOS_IL2CPP_INTPTR _s7;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(2);
+	_s1 = ChaosArrayNew1D_Inline(&chaos_type_info_managed_array.hot, chaos_mt_System_Private_CoreLib_System_Byte.AsTypeInfoHot(), 1, _s1);
+	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	_s4 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[0]);
+	{
+		const auto chaos_address = _s4;
+		if ((chaos_address & chaos_managed_pointer_local_slot_tag) != 0)
+		{
+			auto* chaos_slot = reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(static_cast<CHAOS_IL2CPP_UINTPTR>(chaos_address & ~chaos_managed_pointer_local_slot_tag));
+			*chaos_slot = 0;
+		}
+		else
+		{
+			*reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(chaos_address) = 0;
+		}
+	}
+	_s4 = chaos_locals[0];
+	{
+		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_IO_Stream__WriteAsync_System_Threading_Tasks_Task_System_Byte___System_Int32_System_Int32_System_Threading_CancellationToken_();
+		_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_WriteAsync_5_System_ReadOnlyMemorybyte_CancellationToken_0()
+extern "C" void CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_WriteAsync_5_System_ReadOnlyMemorybyte_CancellationToken_0(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INTPTR _s5;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[0]);
+	{
+		const auto chaos_address = _s1;
+		if ((chaos_address & chaos_managed_pointer_local_slot_tag) != 0)
+		{
+			auto* chaos_slot = reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(static_cast<CHAOS_IL2CPP_UINTPTR>(chaos_address & ~chaos_managed_pointer_local_slot_tag));
+			*chaos_slot = 0;
+		}
+		else
+		{
+			*reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(chaos_address) = 0;
+		}
+	}
+	_s1 = chaos_locals[0];
+	_s2 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[1]);
+	{
+		const auto chaos_address = _s2;
+		if ((chaos_address & chaos_managed_pointer_local_slot_tag) != 0)
+		{
+			auto* chaos_slot = reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(static_cast<CHAOS_IL2CPP_UINTPTR>(chaos_address & ~chaos_managed_pointer_local_slot_tag));
+			*chaos_slot = 0;
+		}
+		else
+		{
+			*reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(chaos_address) = 0;
+		}
+	}
+	_s2 = chaos_locals[1];
+	{
+		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_IO_Stream__WriteAsync_System_Threading_Tasks_ValueTask_System_ReadOnlyMemory_System_Byte__System_Threading_CancellationToken_();
+		_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_WriteByte_1_byte_0()
+extern "C" void CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_WriteByte_1_byte_0(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	{
+		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_IO_Stream__WriteByte_System_Void_System_Byte_();
+		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Benchmark_WriteByte_1_byte_1()
+extern "C" void CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_WriteByte_1_byte_1(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	{
+		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_IO_Stream__WriteByte_System_Void_System_Byte_();
+		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::DisposeAsync_14__14()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_DisposeAsync_14__14(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c____9__69_0;
+	_s1 = _s0;
+	{
+		if (_s1 == 0)
+		{
+			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c____9;
+			{
+				// Hotpatch-aware ldftn wrapper (slot 100)
+				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
+					auto& _d_entry = s_hotpatch_entries[100];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+					{
+						alignas(16) uint8_t _d_ab[8];
+						ArgBuffer _d_bw(_d_ab);
+						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d_entry.method_key, _d_ab, nullptr);
+						return;
+					}
+					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
+				};
+			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+			}
+			{
+				const auto chaos_method_ptr = _s1;
+				const auto chaos_target = _s0;
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
+				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
+				chaos_object->chaos_delegate_target = chaos_target;
+				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			_s1 = _s0;
+			{
+				auto chaos_value = _s1;
+				chaos_static_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c____9__69_0 = chaos_value;
+			}
+		}
+		{
+			// Assert.Throws: target method not found via IL lookahead
+			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
+		}
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
+		chaos_locals[0] = ChaosStoreInt64(_i0);
+		_i0 = ChaosLoadInt64(chaos_locals[0]);
+		return _i0;
+	}
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::EndRead_11_System_IAsyncResult_0()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_EndRead_11_System_IAsyncResult_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c____9__55_0;
+	_s1 = _s0;
+	{
+		if (_s1 == 0)
+		{
+			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c____9;
+			{
+				// Hotpatch-aware ldftn wrapper (slot 101)
+				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
+					auto& _d_entry = s_hotpatch_entries[101];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+					{
+						alignas(16) uint8_t _d_ab[8];
+						ArgBuffer _d_bw(_d_ab);
+						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d_entry.method_key, _d_ab, nullptr);
+						return;
+					}
+					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
+				};
+			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+			}
+			{
+				const auto chaos_method_ptr = _s1;
+				const auto chaos_target = _s0;
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
+				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
+				chaos_object->chaos_delegate_target = chaos_target;
+				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			_s1 = _s0;
+			{
+				auto chaos_value = _s1;
+				chaos_static_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c____9__55_0 = chaos_value;
+			}
+		}
+		{
+			// Assert.Throws: target method not found via IL lookahead
+			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
+		}
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
+		chaos_locals[0] = ChaosStoreInt64(_i0);
+		_i0 = ChaosLoadInt64(chaos_locals[0]);
+		return _i0;
+	}
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::FlushAsync_7_CancellationToken_0()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_FlushAsync_7_CancellationToken_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c____9__31_0;
+	_s1 = _s0;
+	{
+		if (_s1 == 0)
+		{
+			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c____9;
+			{
+				// Hotpatch-aware ldftn wrapper (slot 102)
+				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
+					auto& _d_entry = s_hotpatch_entries[102];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+					{
+						alignas(16) uint8_t _d_ab[8];
+						ArgBuffer _d_bw(_d_ab);
+						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d_entry.method_key, _d_ab, nullptr);
+						return;
+					}
+					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
+				};
+			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+			}
+			{
+				const auto chaos_method_ptr = _s1;
+				const auto chaos_target = _s0;
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
+				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
+				chaos_object->chaos_delegate_target = chaos_target;
+				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			_s1 = _s0;
+			{
+				auto chaos_value = _s1;
+				chaos_static_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c____9__31_0 = chaos_value;
+			}
+		}
+		{
+			// Assert.Throws: target method not found via IL lookahead
+			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
+		}
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
+		chaos_locals[0] = ChaosStoreInt64(_i0);
+		_i0 = ChaosLoadInt64(chaos_locals[0]);
+		return _i0;
+	}
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Read_8_System_Byte_int_int_0()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Read_8_System_Byte_int_int_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c____9__33_0;
+	_s1 = _s0;
+	{
+		if (_s1 == 0)
+		{
+			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c____9;
+			{
+				// Hotpatch-aware ldftn wrapper (slot 103)
+				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
+					auto& _d_entry = s_hotpatch_entries[103];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+					{
+						alignas(16) uint8_t _d_ab[8];
+						ArgBuffer _d_bw(_d_ab);
+						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d_entry.method_key, _d_ab, nullptr);
+						return;
+					}
+					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
+				};
+			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+			}
+			{
+				const auto chaos_method_ptr = _s1;
+				const auto chaos_target = _s0;
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
+				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
+				chaos_object->chaos_delegate_target = chaos_target;
+				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			_s1 = _s0;
+			{
+				auto chaos_value = _s1;
+				chaos_static_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c____9__33_0 = chaos_value;
+			}
+		}
+		{
+			// Assert.Throws: target method not found via IL lookahead
+			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
+		}
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
+		chaos_locals[0] = ChaosStoreInt64(_i0);
+		_i0 = ChaosLoadInt64(chaos_locals[0]);
+		return _i0;
+	}
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Read_8_System_Byte_int_int_1()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Read_8_System_Byte_int_int_1(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c____9__35_0;
+	_s1 = _s0;
+	{
+		if (_s1 == 0)
+		{
+			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c____9;
+			{
+				// Hotpatch-aware ldftn wrapper (slot 104)
+				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
+					auto& _d_entry = s_hotpatch_entries[104];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+					{
+						alignas(16) uint8_t _d_ab[8];
+						ArgBuffer _d_bw(_d_ab);
+						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d_entry.method_key, _d_ab, nullptr);
+						return;
+					}
+					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
+				};
+			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+			}
+			{
+				const auto chaos_method_ptr = _s1;
+				const auto chaos_target = _s0;
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
+				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
+				chaos_object->chaos_delegate_target = chaos_target;
+				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			_s1 = _s0;
+			{
+				auto chaos_value = _s1;
+				chaos_static_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c____9__35_0 = chaos_value;
+			}
+		}
+		{
+			// Assert.Throws: target method not found via IL lookahead
+			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
+		}
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
+		chaos_locals[0] = ChaosStoreInt64(_i0);
+		_i0 = ChaosLoadInt64(chaos_locals[0]);
+		return _i0;
+	}
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Read_8_System_Byte_int_int_2()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Read_8_System_Byte_int_int_2(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c____9__37_0;
+	_s1 = _s0;
+	{
+		if (_s1 == 0)
+		{
+			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c____9;
+			{
+				// Hotpatch-aware ldftn wrapper (slot 105)
+				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
+					auto& _d_entry = s_hotpatch_entries[105];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+					{
+						alignas(16) uint8_t _d_ab[8];
+						ArgBuffer _d_bw(_d_ab);
+						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d_entry.method_key, _d_ab, nullptr);
+						return;
+					}
+					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
+				};
+			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+			}
+			{
+				const auto chaos_method_ptr = _s1;
+				const auto chaos_target = _s0;
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
+				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
+				chaos_object->chaos_delegate_target = chaos_target;
+				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			_s1 = _s0;
+			{
+				auto chaos_value = _s1;
+				chaos_static_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c____9__37_0 = chaos_value;
+			}
+		}
+		{
+			// Assert.Throws: target method not found via IL lookahead
+			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
+		}
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
+		chaos_locals[0] = ChaosStoreInt64(_i0);
+		_i0 = ChaosLoadInt64(chaos_locals[0]);
+		return _i0;
+	}
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Read_8_System_Byte_int_int_3()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Read_8_System_Byte_int_int_3(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c____9__39_0;
+	_s1 = _s0;
+	{
+		if (_s1 == 0)
+		{
+			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c____9;
+			{
+				// Hotpatch-aware ldftn wrapper (slot 106)
+				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
+					auto& _d_entry = s_hotpatch_entries[106];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+					{
+						alignas(16) uint8_t _d_ab[8];
+						ArgBuffer _d_bw(_d_ab);
+						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d_entry.method_key, _d_ab, nullptr);
+						return;
+					}
+					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
+				};
+			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+			}
+			{
+				const auto chaos_method_ptr = _s1;
+				const auto chaos_target = _s0;
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
+				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
+				chaos_object->chaos_delegate_target = chaos_target;
+				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			_s1 = _s0;
+			{
+				auto chaos_value = _s1;
+				chaos_static_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c____9__39_0 = chaos_value;
+			}
+		}
+		{
+			// Assert.Throws: target method not found via IL lookahead
+			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
+		}
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
+		chaos_locals[0] = ChaosStoreInt64(_i0);
+		_i0 = ChaosLoadInt64(chaos_locals[0]);
+		return _i0;
+	}
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Read_8_System_Byte_int_int_4()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Read_8_System_Byte_int_int_4(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c____9__41_0;
+	_s1 = _s0;
+	{
+		if (_s1 == 0)
+		{
+			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c____9;
+			{
+				// Hotpatch-aware ldftn wrapper (slot 107)
+				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
+					auto& _d_entry = s_hotpatch_entries[107];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+					{
+						alignas(16) uint8_t _d_ab[8];
+						ArgBuffer _d_bw(_d_ab);
+						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d_entry.method_key, _d_ab, nullptr);
+						return;
+					}
+					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
+				};
+			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+			}
+			{
+				const auto chaos_method_ptr = _s1;
+				const auto chaos_target = _s0;
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
+				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
+				chaos_object->chaos_delegate_target = chaos_target;
+				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			_s1 = _s0;
+			{
+				auto chaos_value = _s1;
+				chaos_static_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c____9__41_0 = chaos_value;
+			}
+		}
+		{
+			// Assert.Throws: target method not found via IL lookahead
+			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
+		}
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
+		chaos_locals[0] = ChaosStoreInt64(_i0);
+		_i0 = ChaosLoadInt64(chaos_locals[0]);
+		return _i0;
+	}
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::ReadAsync_12_System_Byte_int_int_CancellationToken_0()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_ReadAsync_12_System_Byte_int_int_CancellationToken_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c____9__57_0;
+	_s1 = _s0;
+	{
+		if (_s1 == 0)
+		{
+			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c____9;
+			{
+				// Hotpatch-aware ldftn wrapper (slot 108)
+				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
+					auto& _d_entry = s_hotpatch_entries[108];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+					{
+						alignas(16) uint8_t _d_ab[8];
+						ArgBuffer _d_bw(_d_ab);
+						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d_entry.method_key, _d_ab, nullptr);
+						return;
+					}
+					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
+				};
+			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+			}
+			{
+				const auto chaos_method_ptr = _s1;
+				const auto chaos_target = _s0;
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
+				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
+				chaos_object->chaos_delegate_target = chaos_target;
+				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			_s1 = _s0;
+			{
+				auto chaos_value = _s1;
+				chaos_static_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c____9__57_0 = chaos_value;
+			}
+		}
+		{
+			// Assert.Throws: target method not found via IL lookahead
+			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
+		}
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
+		chaos_locals[0] = ChaosStoreInt64(_i0);
+		_i0 = ChaosLoadInt64(chaos_locals[0]);
+		return _i0;
+	}
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::ReadAsync_12_System_Byte_int_int_CancellationToken_1()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_ReadAsync_12_System_Byte_int_int_CancellationToken_1(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c____9__59_0;
+	_s1 = _s0;
+	{
+		if (_s1 == 0)
+		{
+			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c____9;
+			{
+				// Hotpatch-aware ldftn wrapper (slot 109)
+				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
+					auto& _d_entry = s_hotpatch_entries[109];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+					{
+						alignas(16) uint8_t _d_ab[8];
+						ArgBuffer _d_bw(_d_ab);
+						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d_entry.method_key, _d_ab, nullptr);
+						return;
+					}
+					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
+				};
+			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+			}
+			{
+				const auto chaos_method_ptr = _s1;
+				const auto chaos_target = _s0;
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
+				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
+				chaos_object->chaos_delegate_target = chaos_target;
+				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			_s1 = _s0;
+			{
+				auto chaos_value = _s1;
+				chaos_static_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c____9__59_0 = chaos_value;
+			}
+		}
+		{
+			// Assert.Throws: target method not found via IL lookahead
+			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
+		}
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
+		chaos_locals[0] = ChaosStoreInt64(_i0);
+		_i0 = ChaosLoadInt64(chaos_locals[0]);
+		return _i0;
+	}
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::ReadAsync_12_System_Byte_int_int_CancellationToken_2()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_ReadAsync_12_System_Byte_int_int_CancellationToken_2(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c____9__61_0;
+	_s1 = _s0;
+	{
+		if (_s1 == 0)
+		{
+			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c____9;
+			{
+				// Hotpatch-aware ldftn wrapper (slot 110)
+				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
+					auto& _d_entry = s_hotpatch_entries[110];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+					{
+						alignas(16) uint8_t _d_ab[8];
+						ArgBuffer _d_bw(_d_ab);
+						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d_entry.method_key, _d_ab, nullptr);
+						return;
+					}
+					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
+				};
+			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+			}
+			{
+				const auto chaos_method_ptr = _s1;
+				const auto chaos_target = _s0;
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
+				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
+				chaos_object->chaos_delegate_target = chaos_target;
+				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			_s1 = _s0;
+			{
+				auto chaos_value = _s1;
+				chaos_static_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c____9__61_0 = chaos_value;
+			}
+		}
+		{
+			// Assert.Throws: target method not found via IL lookahead
+			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
+		}
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
+		chaos_locals[0] = ChaosStoreInt64(_i0);
+		_i0 = ChaosLoadInt64(chaos_locals[0]);
+		return _i0;
+	}
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::ReadAsync_12_System_Byte_int_int_CancellationToken_3()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_ReadAsync_12_System_Byte_int_int_CancellationToken_3(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c____9__63_0;
+	_s1 = _s0;
+	{
+		if (_s1 == 0)
+		{
+			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c____9;
+			{
+				// Hotpatch-aware ldftn wrapper (slot 111)
+				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
+					auto& _d_entry = s_hotpatch_entries[111];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+					{
+						alignas(16) uint8_t _d_ab[8];
+						ArgBuffer _d_bw(_d_ab);
+						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d_entry.method_key, _d_ab, nullptr);
+						return;
+					}
+					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
+				};
+			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+			}
+			{
+				const auto chaos_method_ptr = _s1;
+				const auto chaos_target = _s0;
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
+				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
+				chaos_object->chaos_delegate_target = chaos_target;
+				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			_s1 = _s0;
+			{
+				auto chaos_value = _s1;
+				chaos_static_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c____9__63_0 = chaos_value;
+			}
+		}
+		{
+			// Assert.Throws: target method not found via IL lookahead
+			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
+		}
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
+		chaos_locals[0] = ChaosStoreInt64(_i0);
+		_i0 = ChaosLoadInt64(chaos_locals[0]);
+		return _i0;
+	}
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::ReadAsync_12_System_Byte_int_int_CancellationToken_4()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_ReadAsync_12_System_Byte_int_int_CancellationToken_4(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c____9__65_0;
+	_s1 = _s0;
+	{
+		if (_s1 == 0)
+		{
+			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c____9;
+			{
+				// Hotpatch-aware ldftn wrapper (slot 112)
+				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
+					auto& _d_entry = s_hotpatch_entries[112];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+					{
+						alignas(16) uint8_t _d_ab[8];
+						ArgBuffer _d_bw(_d_ab);
+						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d_entry.method_key, _d_ab, nullptr);
+						return;
+					}
+					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
+				};
+			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+			}
+			{
+				const auto chaos_method_ptr = _s1;
+				const auto chaos_target = _s0;
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
+				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
+				chaos_object->chaos_delegate_target = chaos_target;
+				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			_s1 = _s0;
+			{
+				auto chaos_value = _s1;
+				chaos_static_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c____9__65_0 = chaos_value;
+			}
+		}
+		{
+			// Assert.Throws: target method not found via IL lookahead
+			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
+		}
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
+		chaos_locals[0] = ChaosStoreInt64(_i0);
+		_i0 = ChaosLoadInt64(chaos_locals[0]);
+		return _i0;
+	}
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::ReadAsync_13_System_Memorybyte_CancellationToken_0()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_ReadAsync_13_System_Memorybyte_CancellationToken_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c____9__67_0;
+	_s1 = _s0;
+	{
+		if (_s1 == 0)
+		{
+			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c____9;
+			{
+				// Hotpatch-aware ldftn wrapper (slot 113)
+				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
+					auto& _d_entry = s_hotpatch_entries[113];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+					{
+						alignas(16) uint8_t _d_ab[8];
+						ArgBuffer _d_bw(_d_ab);
+						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d_entry.method_key, _d_ab, nullptr);
+						return;
+					}
+					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
+				};
+			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+			}
+			{
+				const auto chaos_method_ptr = _s1;
+				const auto chaos_target = _s0;
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
+				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
+				chaos_object->chaos_delegate_target = chaos_target;
+				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			_s1 = _s0;
+			{
+				auto chaos_value = _s1;
+				chaos_static_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c____9__67_0 = chaos_value;
+			}
+		}
+		{
+			// Assert.Throws: target method not found via IL lookahead
+			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
+		}
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
+		chaos_locals[0] = ChaosStoreInt64(_i0);
+		_i0 = ChaosLoadInt64(chaos_locals[0]);
+		return _i0;
+	}
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::ReadByte_9__9()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_ReadByte_9__9(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c____9__43_0;
+	_s1 = _s0;
+	{
+		if (_s1 == 0)
+		{
+			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c____9;
+			{
+				// Hotpatch-aware ldftn wrapper (slot 114)
+				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
+					auto& _d_entry = s_hotpatch_entries[114];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+					{
+						alignas(16) uint8_t _d_ab[8];
+						ArgBuffer _d_bw(_d_ab);
+						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d_entry.method_key, _d_ab, nullptr);
+						return;
+					}
+					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
+				};
+			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+			}
+			{
+				const auto chaos_method_ptr = _s1;
+				const auto chaos_target = _s0;
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
+				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
+				chaos_object->chaos_delegate_target = chaos_target;
+				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			_s1 = _s0;
+			{
+				auto chaos_value = _s1;
+				chaos_static_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c____9__43_0 = chaos_value;
+			}
+		}
+		{
+			// Assert.Throws: target method not found via IL lookahead
+			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
+		}
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
+		chaos_locals[0] = ChaosStoreInt64(_i0);
+		_i0 = ChaosLoadInt64(chaos_locals[0]);
+		return _i0;
+	}
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Seek_15_long_SeekOrigin_0()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Seek_15_long_SeekOrigin_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c____9__71_0;
+	_s1 = _s0;
+	{
+		if (_s1 == 0)
+		{
+			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c____9;
+			{
+				// Hotpatch-aware ldftn wrapper (slot 115)
+				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
+					auto& _d_entry = s_hotpatch_entries[115];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+					{
+						alignas(16) uint8_t _d_ab[8];
+						ArgBuffer _d_bw(_d_ab);
+						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d_entry.method_key, _d_ab, nullptr);
+						return;
+					}
+					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
+				};
+			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+			}
+			{
+				const auto chaos_method_ptr = _s1;
+				const auto chaos_target = _s0;
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
+				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
+				chaos_object->chaos_delegate_target = chaos_target;
+				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			_s1 = _s0;
+			{
+				auto chaos_value = _s1;
+				chaos_static_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c____9__71_0 = chaos_value;
+			}
+		}
+		{
+			// Assert.Throws: target method not found via IL lookahead
+			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
+		}
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
+		chaos_locals[0] = ChaosStoreInt64(_i0);
+		_i0 = ChaosLoadInt64(chaos_locals[0]);
+		return _i0;
+	}
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Seek_15_long_SeekOrigin_1()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Seek_15_long_SeekOrigin_1(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c____9__73_0;
+	_s1 = _s0;
+	{
+		if (_s1 == 0)
+		{
+			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c____9;
+			{
+				// Hotpatch-aware ldftn wrapper (slot 116)
+				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
+					auto& _d_entry = s_hotpatch_entries[116];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+					{
+						alignas(16) uint8_t _d_ab[8];
+						ArgBuffer _d_bw(_d_ab);
+						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d_entry.method_key, _d_ab, nullptr);
+						return;
+					}
+					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
+				};
+			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+			}
+			{
+				const auto chaos_method_ptr = _s1;
+				const auto chaos_target = _s0;
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
+				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
+				chaos_object->chaos_delegate_target = chaos_target;
+				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			_s1 = _s0;
+			{
+				auto chaos_value = _s1;
+				chaos_static_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c____9__73_0 = chaos_value;
+			}
+		}
+		{
+			// Assert.Throws: target method not found via IL lookahead
+			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
+		}
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
+		chaos_locals[0] = ChaosStoreInt64(_i0);
+		_i0 = ChaosLoadInt64(chaos_locals[0]);
+		return _i0;
+	}
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::Seek_15_long_SeekOrigin_2()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Seek_15_long_SeekOrigin_2(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c____9__75_0;
+	_s1 = _s0;
+	{
+		if (_s1 == 0)
+		{
+			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c____9;
+			{
+				// Hotpatch-aware ldftn wrapper (slot 117)
+				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
+					auto& _d_entry = s_hotpatch_entries[117];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+					{
+						alignas(16) uint8_t _d_ab[8];
+						ArgBuffer _d_bw(_d_ab);
+						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d_entry.method_key, _d_ab, nullptr);
+						return;
+					}
+					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
+				};
+			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+			}
+			{
+				const auto chaos_method_ptr = _s1;
+				const auto chaos_target = _s0;
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
+				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
+				chaos_object->chaos_delegate_target = chaos_target;
+				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			_s1 = _s0;
+			{
+				auto chaos_value = _s1;
+				chaos_static_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c____9__75_0 = chaos_value;
+			}
+		}
+		{
+			// Assert.Throws: target method not found via IL lookahead
+			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
+		}
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
+		chaos_locals[0] = ChaosStoreInt64(_i0);
+		_i0 = ChaosLoadInt64(chaos_locals[0]);
+		return _i0;
+	}
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::WriteAsync_4_System_Byte_int_int_CancellationToken_0()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_WriteAsync_4_System_Byte_int_int_CancellationToken_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c____9__18_0;
+	_s1 = _s0;
+	{
+		if (_s1 == 0)
+		{
+			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c____9;
+			{
+				// Hotpatch-aware ldftn wrapper (slot 118)
+				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
+					auto& _d_entry = s_hotpatch_entries[118];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+					{
+						alignas(16) uint8_t _d_ab[8];
+						ArgBuffer _d_bw(_d_ab);
+						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d_entry.method_key, _d_ab, nullptr);
+						return;
+					}
+					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
+				};
+			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+			}
+			{
+				const auto chaos_method_ptr = _s1;
+				const auto chaos_target = _s0;
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
+				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
+				chaos_object->chaos_delegate_target = chaos_target;
+				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			_s1 = _s0;
+			{
+				auto chaos_value = _s1;
+				chaos_static_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c____9__18_0 = chaos_value;
+			}
+		}
+		{
+			// Assert.Throws: target method not found via IL lookahead
+			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
+		}
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
+		chaos_locals[0] = ChaosStoreInt64(_i0);
+		_i0 = ChaosLoadInt64(chaos_locals[0]);
+		return _i0;
+	}
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::WriteAsync_4_System_Byte_int_int_CancellationToken_1()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_WriteAsync_4_System_Byte_int_int_CancellationToken_1(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c____9__20_0;
+	_s1 = _s0;
+	{
+		if (_s1 == 0)
+		{
+			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c____9;
+			{
+				// Hotpatch-aware ldftn wrapper (slot 119)
+				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
+					auto& _d_entry = s_hotpatch_entries[119];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+					{
+						alignas(16) uint8_t _d_ab[8];
+						ArgBuffer _d_bw(_d_ab);
+						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d_entry.method_key, _d_ab, nullptr);
+						return;
+					}
+					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
+				};
+			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+			}
+			{
+				const auto chaos_method_ptr = _s1;
+				const auto chaos_target = _s0;
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
+				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
+				chaos_object->chaos_delegate_target = chaos_target;
+				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			_s1 = _s0;
+			{
+				auto chaos_value = _s1;
+				chaos_static_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c____9__20_0 = chaos_value;
+			}
+		}
+		{
+			// Assert.Throws: target method not found via IL lookahead
+			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
+		}
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
+		chaos_locals[0] = ChaosStoreInt64(_i0);
+		_i0 = ChaosLoadInt64(chaos_locals[0]);
+		return _i0;
+	}
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::WriteAsync_4_System_Byte_int_int_CancellationToken_2()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_WriteAsync_4_System_Byte_int_int_CancellationToken_2(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c____9__22_0;
+	_s1 = _s0;
+	{
+		if (_s1 == 0)
+		{
+			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c____9;
+			{
+				// Hotpatch-aware ldftn wrapper (slot 120)
+				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
+					auto& _d_entry = s_hotpatch_entries[120];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+					{
+						alignas(16) uint8_t _d_ab[8];
+						ArgBuffer _d_bw(_d_ab);
+						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d_entry.method_key, _d_ab, nullptr);
+						return;
+					}
+					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
+				};
+			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+			}
+			{
+				const auto chaos_method_ptr = _s1;
+				const auto chaos_target = _s0;
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
+				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
+				chaos_object->chaos_delegate_target = chaos_target;
+				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			_s1 = _s0;
+			{
+				auto chaos_value = _s1;
+				chaos_static_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c____9__22_0 = chaos_value;
+			}
+		}
+		{
+			// Assert.Throws: target method not found via IL lookahead
+			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
+		}
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
+		chaos_locals[0] = ChaosStoreInt64(_i0);
+		_i0 = ChaosLoadInt64(chaos_locals[0]);
+		return _i0;
+	}
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::WriteAsync_4_System_Byte_int_int_CancellationToken_3()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_WriteAsync_4_System_Byte_int_int_CancellationToken_3(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c____9__24_0;
+	_s1 = _s0;
+	{
+		if (_s1 == 0)
+		{
+			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c____9;
+			{
+				// Hotpatch-aware ldftn wrapper (slot 121)
+				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
+					auto& _d_entry = s_hotpatch_entries[121];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+					{
+						alignas(16) uint8_t _d_ab[8];
+						ArgBuffer _d_bw(_d_ab);
+						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d_entry.method_key, _d_ab, nullptr);
+						return;
+					}
+					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
+				};
+			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+			}
+			{
+				const auto chaos_method_ptr = _s1;
+				const auto chaos_target = _s0;
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
+				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
+				chaos_object->chaos_delegate_target = chaos_target;
+				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			_s1 = _s0;
+			{
+				auto chaos_value = _s1;
+				chaos_static_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c____9__24_0 = chaos_value;
+			}
+		}
+		{
+			// Assert.Throws: target method not found via IL lookahead
+			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
+		}
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
+		chaos_locals[0] = ChaosStoreInt64(_i0);
+		_i0 = ChaosLoadInt64(chaos_locals[0]);
+		return _i0;
+	}
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::WriteAsync_4_System_Byte_int_int_CancellationToken_4()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_WriteAsync_4_System_Byte_int_int_CancellationToken_4(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c____9__26_0;
+	_s1 = _s0;
+	{
+		if (_s1 == 0)
+		{
+			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c____9;
+			{
+				// Hotpatch-aware ldftn wrapper (slot 122)
+				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
+					auto& _d_entry = s_hotpatch_entries[122];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+					{
+						alignas(16) uint8_t _d_ab[8];
+						ArgBuffer _d_bw(_d_ab);
+						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d_entry.method_key, _d_ab, nullptr);
+						return;
+					}
+					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
+				};
+			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+			}
+			{
+				const auto chaos_method_ptr = _s1;
+				const auto chaos_target = _s0;
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
+				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
+				chaos_object->chaos_delegate_target = chaos_target;
+				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			_s1 = _s0;
+			{
+				auto chaos_value = _s1;
+				chaos_static_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c____9__26_0 = chaos_value;
+			}
+		}
+		{
+			// Assert.Throws: target method not found via IL lookahead
+			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
+		}
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
+		chaos_locals[0] = ChaosStoreInt64(_i0);
+		_i0 = ChaosLoadInt64(chaos_locals[0]);
+		return _i0;
+	}
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests::WriteAsync_5_System_ReadOnlyMemorybyte_CancellationToken_0()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_WriteAsync_5_System_ReadOnlyMemorybyte_CancellationToken_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c____9__28_0;
+	_s1 = _s0;
+	{
+		if (_s1 == 0)
+		{
+			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c____9;
+			{
+				// Hotpatch-aware ldftn wrapper (slot 123)
+				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
+					auto& _d_entry = s_hotpatch_entries[123];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+					{
+						alignas(16) uint8_t _d_ab[8];
+						ArgBuffer _d_bw(_d_ab);
+						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d_entry.method_key, _d_ab, nullptr);
+						return;
+					}
+					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
+				};
+			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+			}
+			{
+				const auto chaos_method_ptr = _s1;
+				const auto chaos_target = _s0;
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
+				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
+				chaos_object->chaos_delegate_target = chaos_target;
+				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			_s1 = _s0;
+			{
+				auto chaos_value = _s1;
+				chaos_static_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c____9__28_0 = chaos_value;
+			}
+		}
+		{
+			// Assert.Throws: target method not found via IL lookahead
+			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
+		}
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
+		chaos_locals[0] = ChaosStoreInt64(_i0);
+		_i0 = ChaosLoadInt64(chaos_locals[0]);
+		return _i0;
+	}
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::.cctor:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_cctor(void)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::.ctor:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_0>b__45_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_0_b__45_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_1>b__47_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_1_b__47_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_2>b__49_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_2_b__49_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_3>b__51_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_3_b__51_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_4>b__53_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_4_b__53_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_0>b__7_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_0_b__7_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_1>b__9_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_1_b__9_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_2>b__11_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_2_b__11_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_3>b__13_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_3_b__13_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_4>b__15_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_4_b__15_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<DisposeAsync_14__14>b__69_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_DisposeAsync_14__14_b__69_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<EndRead_11_System_IAsyncResult_0>b__55_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_EndRead_11_System_IAsyncResult_0_b__55_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<FlushAsync_7_CancellationToken_0>b__31_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_FlushAsync_7_CancellationToken_0_b__31_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<Read_8_System_Byte_int_int_0>b__33_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_Read_8_System_Byte_int_int_0_b__33_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<Read_8_System_Byte_int_int_1>b__35_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_Read_8_System_Byte_int_int_1_b__35_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<Read_8_System_Byte_int_int_2>b__37_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_Read_8_System_Byte_int_int_2_b__37_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<Read_8_System_Byte_int_int_3>b__39_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_Read_8_System_Byte_int_int_3_b__39_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<Read_8_System_Byte_int_int_4>b__41_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_Read_8_System_Byte_int_int_4_b__41_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<ReadAsync_12_System_Byte_int_int_CancellationToken_0>b__57_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_ReadAsync_12_System_Byte_int_int_CancellationToken_0_b__57_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<ReadAsync_12_System_Byte_int_int_CancellationToken_1>b__59_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_ReadAsync_12_System_Byte_int_int_CancellationToken_1_b__59_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<ReadAsync_12_System_Byte_int_int_CancellationToken_2>b__61_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_ReadAsync_12_System_Byte_int_int_CancellationToken_2_b__61_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<ReadAsync_12_System_Byte_int_int_CancellationToken_3>b__63_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_ReadAsync_12_System_Byte_int_int_CancellationToken_3_b__63_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<ReadAsync_12_System_Byte_int_int_CancellationToken_4>b__65_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_ReadAsync_12_System_Byte_int_int_CancellationToken_4_b__65_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<ReadAsync_13_System_Memorybyte_CancellationToken_0>b__67_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_ReadAsync_13_System_Memorybyte_CancellationToken_0_b__67_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<ReadByte_9__9>b__43_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_ReadByte_9__9_b__43_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<Seek_15_long_SeekOrigin_0>b__71_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_Seek_15_long_SeekOrigin_0_b__71_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<Seek_15_long_SeekOrigin_1>b__73_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_Seek_15_long_SeekOrigin_1_b__73_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<Seek_15_long_SeekOrigin_2>b__75_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_Seek_15_long_SeekOrigin_2_b__75_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<WriteAsync_4_System_Byte_int_int_CancellationToken_0>b__18_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_WriteAsync_4_System_Byte_int_int_CancellationToken_0_b__18_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<WriteAsync_4_System_Byte_int_int_CancellationToken_1>b__20_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_WriteAsync_4_System_Byte_int_int_CancellationToken_1_b__20_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<WriteAsync_4_System_Byte_int_int_CancellationToken_2>b__22_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_WriteAsync_4_System_Byte_int_int_CancellationToken_2_b__22_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<WriteAsync_4_System_Byte_int_int_CancellationToken_3>b__24_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_WriteAsync_4_System_Byte_int_int_CancellationToken_3_b__24_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<WriteAsync_4_System_Byte_int_int_CancellationToken_4>b__26_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_WriteAsync_4_System_Byte_int_int_CancellationToken_4_b__26_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<WriteAsync_5_System_ReadOnlyMemorybyte_CancellationToken_0>b__28_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_WriteAsync_5_System_ReadOnlyMemorybyte_CancellationToken_0_b__28_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
 }
 
 
@@ -5974,6 +8806,6 @@ extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_Syst
 #pragma warning(pop)
 
 // extern "C" definition for link-time visibility from runtime-entry.cpp
-extern "C" const int kAotMethodCount = 158;
+extern "C" const int kAotMethodCount = 124;
 
 extern "C" void ChaosJitRegisterAll() {}

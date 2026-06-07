@@ -1850,12 +1850,15 @@ extern ""C"" CHAOS_IL2CPP_INT32 RunNativeAot(CHAOS_IL2CPP_INT32 entryIndex) {{
         // namespace to avoid LNK2019 from namespace-scoped vs global-scope mismatch.
         // Unused declarations are harmless — the linker only resolves referenced symbols.
 
-        // chaos_string_materialize: conditionally emitted when string IDs exist
-        if (_stringIdMapping is { Count: > 0 })
+        // chaos_string_materialize: always define (declaration + identity definition when
+        // no string IDs exist) to satisfy calls from generated code.  When string IDs
+        // are present, the definition is emitted in the string helper section.
+        sb.AppendLine("CHAOS_IL2CPP_INTPTR chaos_string_materialize(CHAOS_IL2CPP_INTPTR chaos_value) noexcept;");
+        if (_stringIdMapping is not { Count: > 0 })
         {
-            sb.AppendLine("CHAOS_IL2CPP_INTPTR chaos_string_materialize(CHAOS_IL2CPP_INTPTR chaos_value) noexcept;");
-            sb.AppendLine();
+            sb.AppendLine("CHAOS_IL2CPP_INTPTR chaos_string_materialize(CHAOS_IL2CPP_INTPTR chaos_value) noexcept { return chaos_value; }");
         }
+        sb.AppendLine();
 
         // chaos_is_array_store_compatible: always emitted in object model
         sb.AppendLine("bool chaos_is_array_store_compatible(const chaos_managed_array* chaos_array, CHAOS_IL2CPP_INTPTR chaos_value) noexcept;");

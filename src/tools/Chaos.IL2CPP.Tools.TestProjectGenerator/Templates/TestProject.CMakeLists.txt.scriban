@@ -41,7 +41,7 @@ if(CHAOS_IL2CPP_CONFIG_TIER STREQUAL "profile")
   add_compile_definitions(CHAOS_IL2CPP_CONFIG_TIER={{ defines.config_tier_value }})
   add_compile_definitions({{ defines.config_tier_macro }})
   add_compile_definitions(CHAOS_IL2CPP_LOG_LEVEL={{ defines.log_level }})
-  add_compile_definitions(CHAOS_IL2CPP_RUNTIME_CONFIG_FILE="runtime-config/mobile-release.h")
+  add_compile_definitions(CHAOS_IL2CPP_RUNTIME_CONFIG_FILE="runtime-config/desktop.h")
 elseif(CHAOS_IL2CPP_CONFIG_TIER STREQUAL "ship")
   add_compile_definitions(CHAOS_IL2CPP_CONFIG_TIER={{ defines.config_tier_value }})
   add_compile_definitions({{ defines.config_tier_macro }})
@@ -191,6 +191,7 @@ set(CHAOS_ENTRY_INCLUDES
     "${CHAOS_PROJECT_ROOT}/src/native/support"
     "${CHAOS_PROJECT_ROOT}/src/native/hot-update"
     "${CHAOS_PROJECT_ROOT}/third_party/unordered_dense/include"
+    "${CHAOS_PROJECT_ROOT}/cmake"
 {{ subject_cmake_include_dirs_code }}
     "${CMAKE_CURRENT_SOURCE_DIR}"
     # JIT headers needed by eager_compile.cpp (compiled for all builds

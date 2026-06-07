@@ -248,16 +248,26 @@ def _build_patch_dll(patch_output: Path, patch_dll: Path, target_dll: Path | Non
 
 
 def run_hotupdate_chunk(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
-    """HotUpdate stage: generate patch data, run entry.exe, verify semantic change."""
+    """HotUpdate stage: generate patch data, run entry.exe (+ entry-jit.exe), verify semantic change."""
     start = time.perf_counter()
 
-    exe_path = ctx.entry_exe_path
-    if not exe_path.exists():
+    # Collect available binaries
+    technologies: list[tuple[Path, str]] = []
+    aot_exe = ctx.entry_exe_path
+    if aot_exe.exists():
+        technologies.append((aot_exe, "aot"))
+    else:
         return StageResult(
             stage="hotupdate", status="skipped",
             summary=f"entry.exe not found, skipping hotupdate",
             duration_ms=int((time.perf_counter() - start) * 1000),
         )
+    jit_exe = ctx.entry_jit_exe_path
+    has_jit = jit_exe.exists()
+    if has_jit:
+        technologies.append((jit_exe, "jit"))
+    else:
+        print(f"  [hotupdate] entry-jit.exe not found, skipping chaos-jit hotupdate")
 
     metadata_path = ctx.subjects_metadata_path
     if not metadata_path.exists():

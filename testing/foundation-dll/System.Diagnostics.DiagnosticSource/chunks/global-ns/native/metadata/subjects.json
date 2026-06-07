@@ -1,0 +1,1589 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-06-07T12:35:44.1049965Z",
+  "generator": "Chaos.IL2CPP.Tools.TestProjectGenerator",
+  "entryExecutable": "entry",
+  "subjects": [
+    {
+      "index": 0,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Counter\u003CSystem.Int32\u003E::Add:System.Void(System.Int32)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Metrics.Counter\u003CSystem.Int32\u003E",
+      "methodName": "Add",
+      "isStatic": true
+    },
+    {
+      "index": 1,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Counter\u003CSystem.Int32\u003E::Add:System.Void(System.Int32)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Metrics.Counter\u003CSystem.Int32\u003E",
+      "methodName": "Add",
+      "isStatic": true
+    },
+    {
+      "index": 2,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Counter\u003CSystem.Int32\u003E::Add:System.Void(System.Int32,System.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Metrics.Counter\u003CSystem.Int32\u003E",
+      "methodName": "Add",
+      "isStatic": true
+    },
+    {
+      "index": 3,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Counter\u003CSystem.Int32\u003E::Add:System.Void(System.Int32,System.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Metrics.Counter\u003CSystem.Int32\u003E",
+      "methodName": "Add",
+      "isStatic": true
+    },
+    {
+      "index": 4,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Counter\u003CSystem.Int32\u003E::Add:System.Void(System.Int32,System.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E,System.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Metrics.Counter\u003CSystem.Int32\u003E",
+      "methodName": "Add",
+      "isStatic": true
+    },
+    {
+      "index": 5,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Counter\u003CSystem.Int32\u003E::Add:System.Void(System.Int32,System.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E,System.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Metrics.Counter\u003CSystem.Int32\u003E",
+      "methodName": "Add",
+      "isStatic": true
+    },
+    {
+      "index": 6,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Counter\u003CSystem.Int32\u003E::Add:System.Void(System.Int32,System.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E,System.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E,System.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Metrics.Counter\u003CSystem.Int32\u003E",
+      "methodName": "Add",
+      "isStatic": true
+    },
+    {
+      "index": 7,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Counter\u003CSystem.Int32\u003E::Add:System.Void(System.Int32,System.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E,System.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E,System.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Metrics.Counter\u003CSystem.Int32\u003E",
+      "methodName": "Add",
+      "isStatic": true
+    },
+    {
+      "index": 8,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Counter\u003CSystem.Int32\u003E::Add:System.Void(System.Int32,System.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E[])",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Metrics.Counter\u003CSystem.Int32\u003E",
+      "methodName": "Add",
+      "isStatic": true
+    },
+    {
+      "index": 9,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Counter\u003CSystem.Int32\u003E::Add:System.Void(System.Int32,System.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E[])",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Metrics.Counter\u003CSystem.Int32\u003E",
+      "methodName": "Add",
+      "isStatic": true
+    },
+    {
+      "index": 10,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Counter\u003CSystem.Int32\u003E::Add:System.Void(System.Int32,System.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E[])",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Metrics.Counter\u003CSystem.Int32\u003E",
+      "methodName": "Add",
+      "isStatic": true
+    },
+    {
+      "index": 11,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Counter\u003CSystem.Int32\u003E::Add:System.Void(System.Int32,System.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E[])",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Metrics.Counter\u003CSystem.Int32\u003E",
+      "methodName": "Add",
+      "isStatic": true
+    },
+    {
+      "index": 12,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Counter\u003CSystem.Int32\u003E::Add:System.Void(System.Int32,System.Diagnostics.TagList)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Metrics.Counter\u003CSystem.Int32\u003E",
+      "methodName": "Add",
+      "isStatic": true
+    },
+    {
+      "index": 13,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Counter\u003CSystem.Int32\u003E::Add:System.Void(System.Int32,System.Diagnostics.TagList)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Metrics.Counter\u003CSystem.Int32\u003E",
+      "methodName": "Add",
+      "isStatic": true
+    },
+    {
+      "index": 14,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Gauge\u003CSystem.Int32\u003E::Record:System.Void(System.Int32)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Metrics.Gauge\u003CSystem.Int32\u003E",
+      "methodName": "Record",
+      "isStatic": true
+    },
+    {
+      "index": 15,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Gauge\u003CSystem.Int32\u003E::Record:System.Void(System.Int32)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Metrics.Gauge\u003CSystem.Int32\u003E",
+      "methodName": "Record",
+      "isStatic": true
+    },
+    {
+      "index": 16,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Gauge\u003CSystem.Int32\u003E::Record:System.Void(System.Int32,System.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Metrics.Gauge\u003CSystem.Int32\u003E",
+      "methodName": "Record",
+      "isStatic": true
+    },
+    {
+      "index": 17,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Gauge\u003CSystem.Int32\u003E::Record:System.Void(System.Int32,System.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Metrics.Gauge\u003CSystem.Int32\u003E",
+      "methodName": "Record",
+      "isStatic": true
+    },
+    {
+      "index": 18,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Gauge\u003CSystem.Int32\u003E::Record:System.Void(System.Int32,System.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E,System.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Metrics.Gauge\u003CSystem.Int32\u003E",
+      "methodName": "Record",
+      "isStatic": true
+    },
+    {
+      "index": 19,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Gauge\u003CSystem.Int32\u003E::Record:System.Void(System.Int32,System.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E,System.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Metrics.Gauge\u003CSystem.Int32\u003E",
+      "methodName": "Record",
+      "isStatic": true
+    },
+    {
+      "index": 20,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Gauge\u003CSystem.Int32\u003E::Record:System.Void(System.Int32,System.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E,System.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E,System.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Metrics.Gauge\u003CSystem.Int32\u003E",
+      "methodName": "Record",
+      "isStatic": true
+    },
+    {
+      "index": 21,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Gauge\u003CSystem.Int32\u003E::Record:System.Void(System.Int32,System.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E,System.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E,System.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Metrics.Gauge\u003CSystem.Int32\u003E",
+      "methodName": "Record",
+      "isStatic": true
+    },
+    {
+      "index": 22,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Gauge\u003CSystem.Int32\u003E::Record:System.Void(System.Int32,System.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E[])",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Metrics.Gauge\u003CSystem.Int32\u003E",
+      "methodName": "Record",
+      "isStatic": true
+    },
+    {
+      "index": 23,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Gauge\u003CSystem.Int32\u003E::Record:System.Void(System.Int32,System.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E[])",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Metrics.Gauge\u003CSystem.Int32\u003E",
+      "methodName": "Record",
+      "isStatic": true
+    },
+    {
+      "index": 24,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Gauge\u003CSystem.Int32\u003E::Record:System.Void(System.Int32,System.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E[])",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Metrics.Gauge\u003CSystem.Int32\u003E",
+      "methodName": "Record",
+      "isStatic": true
+    },
+    {
+      "index": 25,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Gauge\u003CSystem.Int32\u003E::Record:System.Void(System.Int32,System.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E[])",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Metrics.Gauge\u003CSystem.Int32\u003E",
+      "methodName": "Record",
+      "isStatic": true
+    },
+    {
+      "index": 26,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Gauge\u003CSystem.Int32\u003E::Record:System.Void(System.Int32,System.Diagnostics.TagList)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Metrics.Gauge\u003CSystem.Int32\u003E",
+      "methodName": "Record",
+      "isStatic": true
+    },
+    {
+      "index": 27,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Gauge\u003CSystem.Int32\u003E::Record:System.Void(System.Int32,System.Diagnostics.TagList)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Metrics.Gauge\u003CSystem.Int32\u003E",
+      "methodName": "Record",
+      "isStatic": true
+    },
+    {
+      "index": 28,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Histogram\u003CSystem.Int32\u003E::Record:System.Void(System.Int32)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Metrics.Histogram\u003CSystem.Int32\u003E",
+      "methodName": "Record",
+      "isStatic": true
+    },
+    {
+      "index": 29,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Histogram\u003CSystem.Int32\u003E::Record:System.Void(System.Int32)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Metrics.Histogram\u003CSystem.Int32\u003E",
+      "methodName": "Record",
+      "isStatic": true
+    },
+    {
+      "index": 30,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Histogram\u003CSystem.Int32\u003E::Record:System.Void(System.Int32,System.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Metrics.Histogram\u003CSystem.Int32\u003E",
+      "methodName": "Record",
+      "isStatic": true
+    },
+    {
+      "index": 31,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Histogram\u003CSystem.Int32\u003E::Record:System.Void(System.Int32,System.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Metrics.Histogram\u003CSystem.Int32\u003E",
+      "methodName": "Record",
+      "isStatic": true
+    },
+    {
+      "index": 32,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Histogram\u003CSystem.Int32\u003E::Record:System.Void(System.Int32,System.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E,System.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Metrics.Histogram\u003CSystem.Int32\u003E",
+      "methodName": "Record",
+      "isStatic": true
+    },
+    {
+      "index": 33,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Histogram\u003CSystem.Int32\u003E::Record:System.Void(System.Int32,System.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E,System.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Metrics.Histogram\u003CSystem.Int32\u003E",
+      "methodName": "Record",
+      "isStatic": true
+    },
+    {
+      "index": 34,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Histogram\u003CSystem.Int32\u003E::Record:System.Void(System.Int32,System.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E,System.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E,System.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Metrics.Histogram\u003CSystem.Int32\u003E",
+      "methodName": "Record",
+      "isStatic": true
+    },
+    {
+      "index": 35,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Histogram\u003CSystem.Int32\u003E::Record:System.Void(System.Int32,System.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E,System.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E,System.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Metrics.Histogram\u003CSystem.Int32\u003E",
+      "methodName": "Record",
+      "isStatic": true
+    },
+    {
+      "index": 36,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Histogram\u003CSystem.Int32\u003E::Record:System.Void(System.Int32,System.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E[])",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Metrics.Histogram\u003CSystem.Int32\u003E",
+      "methodName": "Record",
+      "isStatic": true
+    },
+    {
+      "index": 37,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Histogram\u003CSystem.Int32\u003E::Record:System.Void(System.Int32,System.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E[])",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Metrics.Histogram\u003CSystem.Int32\u003E",
+      "methodName": "Record",
+      "isStatic": true
+    },
+    {
+      "index": 38,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Histogram\u003CSystem.Int32\u003E::Record:System.Void(System.Int32,System.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E[])",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Metrics.Histogram\u003CSystem.Int32\u003E",
+      "methodName": "Record",
+      "isStatic": true
+    },
+    {
+      "index": 39,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Histogram\u003CSystem.Int32\u003E::Record:System.Void(System.Int32,System.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E[])",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Metrics.Histogram\u003CSystem.Int32\u003E",
+      "methodName": "Record",
+      "isStatic": true
+    },
+    {
+      "index": 40,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Histogram\u003CSystem.Int32\u003E::Record:System.Void(System.Int32,System.Diagnostics.TagList)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Metrics.Histogram\u003CSystem.Int32\u003E",
+      "methodName": "Record",
+      "isStatic": true
+    },
+    {
+      "index": 41,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Histogram\u003CSystem.Int32\u003E::Record:System.Void(System.Int32,System.Diagnostics.TagList)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Metrics.Histogram\u003CSystem.Int32\u003E",
+      "methodName": "Record",
+      "isStatic": true
+    },
+    {
+      "index": 42,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateCounter:System.Diagnostics.Metrics.Counter\u003CSystem.Int32\u003E(System.String,System.String,System.String)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Metrics.Meter",
+      "methodName": "CreateCounter",
+      "isStatic": true
+    },
+    {
+      "index": 43,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateCounter:System.Diagnostics.Metrics.Counter\u003CSystem.Int32\u003E(System.String,System.String,System.String)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Metrics.Meter",
+      "methodName": "CreateCounter",
+      "isStatic": true
+    },
+    {
+      "index": 44,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateCounter:System.Diagnostics.Metrics.Counter\u003CSystem.Int32\u003E(System.String,System.String,System.String)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Metrics.Meter",
+      "methodName": "CreateCounter",
+      "isStatic": true
+    },
+    {
+      "index": 45,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateCounter:System.Diagnostics.Metrics.Counter\u003CSystem.Int32\u003E(System.String,System.String,System.String)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Metrics.Meter",
+      "methodName": "CreateCounter",
+      "isStatic": true
+    },
+    {
+      "index": 46,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateCounter:System.Diagnostics.Metrics.Counter\u003CSystem.Int32\u003E(System.String,System.String,System.String,System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Metrics.Meter",
+      "methodName": "CreateCounter",
+      "isStatic": true
+    },
+    {
+      "index": 47,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateCounter:System.Diagnostics.Metrics.Counter\u003CSystem.Int32\u003E(System.String,System.String,System.String,System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Metrics.Meter",
+      "methodName": "CreateCounter",
+      "isStatic": true
+    },
+    {
+      "index": 48,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateCounter:System.Diagnostics.Metrics.Counter\u003CSystem.Int32\u003E(System.String,System.String,System.String,System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Metrics.Meter",
+      "methodName": "CreateCounter",
+      "isStatic": true
+    },
+    {
+      "index": 49,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateCounter:System.Diagnostics.Metrics.Counter\u003CSystem.Int32\u003E(System.String,System.String,System.String,System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Metrics.Meter",
+      "methodName": "CreateCounter",
+      "isStatic": true
+    },
+    {
+      "index": 50,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateCounter:System.Diagnostics.Metrics.Counter\u003CSystem.Int32\u003E(System.String,System.String,System.String,System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Metrics.Meter",
+      "methodName": "CreateCounter",
+      "isStatic": true
+    },
+    {
+      "index": 51,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateGauge:System.Diagnostics.Metrics.Gauge\u003CSystem.Int32\u003E(System.String)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Metrics.Meter",
+      "methodName": "CreateGauge",
+      "isStatic": true
+    },
+    {
+      "index": 52,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateGauge:System.Diagnostics.Metrics.Gauge\u003CSystem.Int32\u003E(System.String)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Metrics.Meter",
+      "methodName": "CreateGauge",
+      "isStatic": true
+    },
+    {
+      "index": 53,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateGauge:System.Diagnostics.Metrics.Gauge\u003CSystem.Int32\u003E(System.String,System.String,System.String,System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Metrics.Meter",
+      "methodName": "CreateGauge",
+      "isStatic": true
+    },
+    {
+      "index": 54,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateGauge:System.Diagnostics.Metrics.Gauge\u003CSystem.Int32\u003E(System.String,System.String,System.String,System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Metrics.Meter",
+      "methodName": "CreateGauge",
+      "isStatic": true
+    },
+    {
+      "index": 55,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateGauge:System.Diagnostics.Metrics.Gauge\u003CSystem.Int32\u003E(System.String,System.String,System.String,System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Metrics.Meter",
+      "methodName": "CreateGauge",
+      "isStatic": true
+    },
+    {
+      "index": 56,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateGauge:System.Diagnostics.Metrics.Gauge\u003CSystem.Int32\u003E(System.String,System.String,System.String,System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Metrics.Meter",
+      "methodName": "CreateGauge",
+      "isStatic": true
+    },
+    {
+      "index": 57,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateGauge:System.Diagnostics.Metrics.Gauge\u003CSystem.Int32\u003E(System.String,System.String,System.String,System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Metrics.Meter",
+      "methodName": "CreateGauge",
+      "isStatic": true
+    },
+    {
+      "index": 58,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateHistogram:System.Diagnostics.Metrics.Histogram\u003CSystem.Int32\u003E(System.String)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Metrics.Meter",
+      "methodName": "CreateHistogram",
+      "isStatic": true
+    },
+    {
+      "index": 59,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateHistogram:System.Diagnostics.Metrics.Histogram\u003CSystem.Int32\u003E(System.String)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Metrics.Meter",
+      "methodName": "CreateHistogram",
+      "isStatic": true
+    },
+    {
+      "index": 60,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateHistogram:System.Diagnostics.Metrics.Histogram\u003CSystem.Int32\u003E(System.String,System.String,System.String)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Metrics.Meter",
+      "methodName": "CreateHistogram",
+      "isStatic": true
+    },
+    {
+      "index": 61,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateHistogram:System.Diagnostics.Metrics.Histogram\u003CSystem.Int32\u003E(System.String,System.String,System.String)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Metrics.Meter",
+      "methodName": "CreateHistogram",
+      "isStatic": true
+    },
+    {
+      "index": 62,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateHistogram:System.Diagnostics.Metrics.Histogram\u003CSystem.Int32\u003E(System.String,System.String,System.String)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Metrics.Meter",
+      "methodName": "CreateHistogram",
+      "isStatic": true
+    },
+    {
+      "index": 63,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateHistogram:System.Diagnostics.Metrics.Histogram\u003CSystem.Int32\u003E(System.String,System.String,System.String)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Metrics.Meter",
+      "methodName": "CreateHistogram",
+      "isStatic": true
+    },
+    {
+      "index": 64,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateHistogram:System.Diagnostics.Metrics.Histogram\u003CSystem.Int32\u003E(System.String,System.String,System.String,System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Metrics.Meter",
+      "methodName": "CreateHistogram",
+      "isStatic": true
+    },
+    {
+      "index": 65,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateHistogram:System.Diagnostics.Metrics.Histogram\u003CSystem.Int32\u003E(System.String,System.String,System.String,System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Metrics.Meter",
+      "methodName": "CreateHistogram",
+      "isStatic": true
+    },
+    {
+      "index": 66,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateHistogram:System.Diagnostics.Metrics.Histogram\u003CSystem.Int32\u003E(System.String,System.String,System.String,System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Metrics.Meter",
+      "methodName": "CreateHistogram",
+      "isStatic": true
+    },
+    {
+      "index": 67,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateHistogram:System.Diagnostics.Metrics.Histogram\u003CSystem.Int32\u003E(System.String,System.String,System.String,System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Metrics.Meter",
+      "methodName": "CreateHistogram",
+      "isStatic": true
+    },
+    {
+      "index": 68,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateHistogram:System.Diagnostics.Metrics.Histogram\u003CSystem.Int32\u003E(System.String,System.String,System.String,System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Metrics.Meter",
+      "methodName": "CreateHistogram",
+      "isStatic": true
+    },
+    {
+      "index": 69,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateHistogram:System.Diagnostics.Metrics.Histogram\u003CSystem.Int32\u003E(System.String,System.String,System.String,System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E,System.Diagnostics.Metrics.InstrumentAdvice\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Metrics.Meter",
+      "methodName": "CreateHistogram",
+      "isStatic": true
+    },
+    {
+      "index": 70,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateHistogram:System.Diagnostics.Metrics.Histogram\u003CSystem.Int32\u003E(System.String,System.String,System.String,System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E,System.Diagnostics.Metrics.InstrumentAdvice\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Metrics.Meter",
+      "methodName": "CreateHistogram",
+      "isStatic": true
+    },
+    {
+      "index": 71,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateHistogram:System.Diagnostics.Metrics.Histogram\u003CSystem.Int32\u003E(System.String,System.String,System.String,System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E,System.Diagnostics.Metrics.InstrumentAdvice\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Metrics.Meter",
+      "methodName": "CreateHistogram",
+      "isStatic": true
+    },
+    {
+      "index": 72,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateHistogram:System.Diagnostics.Metrics.Histogram\u003CSystem.Int32\u003E(System.String,System.String,System.String,System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E,System.Diagnostics.Metrics.InstrumentAdvice\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Metrics.Meter",
+      "methodName": "CreateHistogram",
+      "isStatic": true
+    },
+    {
+      "index": 73,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateHistogram:System.Diagnostics.Metrics.Histogram\u003CSystem.Int32\u003E(System.String,System.String,System.String,System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E,System.Diagnostics.Metrics.InstrumentAdvice\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Metrics.Meter",
+      "methodName": "CreateHistogram",
+      "isStatic": true
+    },
+    {
+      "index": 74,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateUpDownCounter:System.Diagnostics.Metrics.UpDownCounter\u003CSystem.Int32\u003E(System.String,System.String,System.String)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Metrics.Meter",
+      "methodName": "CreateUpDownCounter",
+      "isStatic": true
+    },
+    {
+      "index": 75,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateUpDownCounter:System.Diagnostics.Metrics.UpDownCounter\u003CSystem.Int32\u003E(System.String,System.String,System.String)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Metrics.Meter",
+      "methodName": "CreateUpDownCounter",
+      "isStatic": true
+    },
+    {
+      "index": 76,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateUpDownCounter:System.Diagnostics.Metrics.UpDownCounter\u003CSystem.Int32\u003E(System.String,System.String,System.String)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Metrics.Meter",
+      "methodName": "CreateUpDownCounter",
+      "isStatic": true
+    },
+    {
+      "index": 77,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateUpDownCounter:System.Diagnostics.Metrics.UpDownCounter\u003CSystem.Int32\u003E(System.String,System.String,System.String)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Metrics.Meter",
+      "methodName": "CreateUpDownCounter",
+      "isStatic": true
+    },
+    {
+      "index": 78,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateUpDownCounter:System.Diagnostics.Metrics.UpDownCounter\u003CSystem.Int32\u003E(System.String,System.String,System.String,System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Metrics.Meter",
+      "methodName": "CreateUpDownCounter",
+      "isStatic": true
+    },
+    {
+      "index": 79,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateUpDownCounter:System.Diagnostics.Metrics.UpDownCounter\u003CSystem.Int32\u003E(System.String,System.String,System.String,System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Metrics.Meter",
+      "methodName": "CreateUpDownCounter",
+      "isStatic": true
+    },
+    {
+      "index": 80,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateUpDownCounter:System.Diagnostics.Metrics.UpDownCounter\u003CSystem.Int32\u003E(System.String,System.String,System.String,System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Metrics.Meter",
+      "methodName": "CreateUpDownCounter",
+      "isStatic": true
+    },
+    {
+      "index": 81,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateUpDownCounter:System.Diagnostics.Metrics.UpDownCounter\u003CSystem.Int32\u003E(System.String,System.String,System.String,System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Metrics.Meter",
+      "methodName": "CreateUpDownCounter",
+      "isStatic": true
+    },
+    {
+      "index": 82,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateUpDownCounter:System.Diagnostics.Metrics.UpDownCounter\u003CSystem.Int32\u003E(System.String,System.String,System.String,System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Metrics.Meter",
+      "methodName": "CreateUpDownCounter",
+      "isStatic": true
+    },
+    {
+      "index": 83,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableUpDownCounter:System.Diagnostics.Metrics.ObservableUpDownCounter\u003CSystem.Int32\u003E(System.String,System.Func\u003CSystem.Int32\u003E,System.String,System.String)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Metrics.Meter",
+      "methodName": "CreateObservableUpDownCounter",
+      "isStatic": true
+    },
+    {
+      "index": 84,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableUpDownCounter:System.Diagnostics.Metrics.ObservableUpDownCounter\u003CSystem.Int32\u003E(System.String,System.Func\u003CSystem.Int32\u003E,System.String,System.String)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Metrics.Meter",
+      "methodName": "CreateObservableUpDownCounter",
+      "isStatic": true
+    },
+    {
+      "index": 85,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableUpDownCounter:System.Diagnostics.Metrics.ObservableUpDownCounter\u003CSystem.Int32\u003E(System.String,System.Func\u003CSystem.Int32\u003E,System.String,System.String)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Metrics.Meter",
+      "methodName": "CreateObservableUpDownCounter",
+      "isStatic": true
+    },
+    {
+      "index": 86,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableUpDownCounter:System.Diagnostics.Metrics.ObservableUpDownCounter\u003CSystem.Int32\u003E(System.String,System.Func\u003CSystem.Int32\u003E,System.String,System.String)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Metrics.Meter",
+      "methodName": "CreateObservableUpDownCounter",
+      "isStatic": true
+    },
+    {
+      "index": 87,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableUpDownCounter:System.Diagnostics.Metrics.ObservableUpDownCounter\u003CSystem.Int32\u003E(System.String,System.Func\u003CSystem.Int32\u003E,System.String,System.String,System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Metrics.Meter",
+      "methodName": "CreateObservableUpDownCounter",
+      "isStatic": true
+    },
+    {
+      "index": 88,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableUpDownCounter:System.Diagnostics.Metrics.ObservableUpDownCounter\u003CSystem.Int32\u003E(System.String,System.Func\u003CSystem.Int32\u003E,System.String,System.String,System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Metrics.Meter",
+      "methodName": "CreateObservableUpDownCounter",
+      "isStatic": true
+    },
+    {
+      "index": 89,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableUpDownCounter:System.Diagnostics.Metrics.ObservableUpDownCounter\u003CSystem.Int32\u003E(System.String,System.Func\u003CSystem.Int32\u003E,System.String,System.String,System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Metrics.Meter",
+      "methodName": "CreateObservableUpDownCounter",
+      "isStatic": true
+    },
+    {
+      "index": 90,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableUpDownCounter:System.Diagnostics.Metrics.ObservableUpDownCounter\u003CSystem.Int32\u003E(System.String,System.Func\u003CSystem.Int32\u003E,System.String,System.String,System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Metrics.Meter",
+      "methodName": "CreateObservableUpDownCounter",
+      "isStatic": true
+    },
+    {
+      "index": 91,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableUpDownCounter:System.Diagnostics.Metrics.ObservableUpDownCounter\u003CSystem.Int32\u003E(System.String,System.Func\u003CSystem.Diagnostics.Metrics.Measurement\u003CSystem.Int32\u003E\u003E,System.String,System.String)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Metrics.Meter",
+      "methodName": "CreateObservableUpDownCounter",
+      "isStatic": true
+    },
+    {
+      "index": 92,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableUpDownCounter:System.Diagnostics.Metrics.ObservableUpDownCounter\u003CSystem.Int32\u003E(System.String,System.Func\u003CSystem.Diagnostics.Metrics.Measurement\u003CSystem.Int32\u003E\u003E,System.String,System.String)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Metrics.Meter",
+      "methodName": "CreateObservableUpDownCounter",
+      "isStatic": true
+    },
+    {
+      "index": 93,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableUpDownCounter:System.Diagnostics.Metrics.ObservableUpDownCounter\u003CSystem.Int32\u003E(System.String,System.Func\u003CSystem.Diagnostics.Metrics.Measurement\u003CSystem.Int32\u003E\u003E,System.String,System.String)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Metrics.Meter",
+      "methodName": "CreateObservableUpDownCounter",
+      "isStatic": true
+    },
+    {
+      "index": 94,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableUpDownCounter:System.Diagnostics.Metrics.ObservableUpDownCounter\u003CSystem.Int32\u003E(System.String,System.Func\u003CSystem.Diagnostics.Metrics.Measurement\u003CSystem.Int32\u003E\u003E,System.String,System.String)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Metrics.Meter",
+      "methodName": "CreateObservableUpDownCounter",
+      "isStatic": true
+    },
+    {
+      "index": 95,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableUpDownCounter:System.Diagnostics.Metrics.ObservableUpDownCounter\u003CSystem.Int32\u003E(System.String,System.Func\u003CSystem.Diagnostics.Metrics.Measurement\u003CSystem.Int32\u003E\u003E,System.String,System.String,System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Metrics.Meter",
+      "methodName": "CreateObservableUpDownCounter",
+      "isStatic": true
+    },
+    {
+      "index": 96,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableUpDownCounter:System.Diagnostics.Metrics.ObservableUpDownCounter\u003CSystem.Int32\u003E(System.String,System.Func\u003CSystem.Diagnostics.Metrics.Measurement\u003CSystem.Int32\u003E\u003E,System.String,System.String,System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Metrics.Meter",
+      "methodName": "CreateObservableUpDownCounter",
+      "isStatic": true
+    },
+    {
+      "index": 97,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableUpDownCounter:System.Diagnostics.Metrics.ObservableUpDownCounter\u003CSystem.Int32\u003E(System.String,System.Func\u003CSystem.Diagnostics.Metrics.Measurement\u003CSystem.Int32\u003E\u003E,System.String,System.String,System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Metrics.Meter",
+      "methodName": "CreateObservableUpDownCounter",
+      "isStatic": true
+    },
+    {
+      "index": 98,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableUpDownCounter:System.Diagnostics.Metrics.ObservableUpDownCounter\u003CSystem.Int32\u003E(System.String,System.Func\u003CSystem.Diagnostics.Metrics.Measurement\u003CSystem.Int32\u003E\u003E,System.String,System.String,System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Metrics.Meter",
+      "methodName": "CreateObservableUpDownCounter",
+      "isStatic": true
+    },
+    {
+      "index": 99,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableUpDownCounter:System.Diagnostics.Metrics.ObservableUpDownCounter\u003CSystem.Int32\u003E(System.String,System.Func\u003CSystem.Collections.Generic.IEnumerable\u003CSystem.Diagnostics.Metrics.Measurement\u003CSystem.Int32\u003E\u003E\u003E,System.String,System.String)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Metrics.Meter",
+      "methodName": "CreateObservableUpDownCounter",
+      "isStatic": true
+    },
+    {
+      "index": 100,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableUpDownCounter:System.Diagnostics.Metrics.ObservableUpDownCounter\u003CSystem.Int32\u003E(System.String,System.Func\u003CSystem.Collections.Generic.IEnumerable\u003CSystem.Diagnostics.Metrics.Measurement\u003CSystem.Int32\u003E\u003E\u003E,System.String,System.String)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Metrics.Meter",
+      "methodName": "CreateObservableUpDownCounter",
+      "isStatic": true
+    },
+    {
+      "index": 101,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableUpDownCounter:System.Diagnostics.Metrics.ObservableUpDownCounter\u003CSystem.Int32\u003E(System.String,System.Func\u003CSystem.Collections.Generic.IEnumerable\u003CSystem.Diagnostics.Metrics.Measurement\u003CSystem.Int32\u003E\u003E\u003E,System.String,System.String)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Metrics.Meter",
+      "methodName": "CreateObservableUpDownCounter",
+      "isStatic": true
+    },
+    {
+      "index": 102,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableUpDownCounter:System.Diagnostics.Metrics.ObservableUpDownCounter\u003CSystem.Int32\u003E(System.String,System.Func\u003CSystem.Collections.Generic.IEnumerable\u003CSystem.Diagnostics.Metrics.Measurement\u003CSystem.Int32\u003E\u003E\u003E,System.String,System.String)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Metrics.Meter",
+      "methodName": "CreateObservableUpDownCounter",
+      "isStatic": true
+    },
+    {
+      "index": 103,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableUpDownCounter:System.Diagnostics.Metrics.ObservableUpDownCounter\u003CSystem.Int32\u003E(System.String,System.Func\u003CSystem.Collections.Generic.IEnumerable\u003CSystem.Diagnostics.Metrics.Measurement\u003CSystem.Int32\u003E\u003E\u003E,System.String,System.String,System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Metrics.Meter",
+      "methodName": "CreateObservableUpDownCounter",
+      "isStatic": true
+    },
+    {
+      "index": 104,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableUpDownCounter:System.Diagnostics.Metrics.ObservableUpDownCounter\u003CSystem.Int32\u003E(System.String,System.Func\u003CSystem.Collections.Generic.IEnumerable\u003CSystem.Diagnostics.Metrics.Measurement\u003CSystem.Int32\u003E\u003E\u003E,System.String,System.String,System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Metrics.Meter",
+      "methodName": "CreateObservableUpDownCounter",
+      "isStatic": true
+    },
+    {
+      "index": 105,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableUpDownCounter:System.Diagnostics.Metrics.ObservableUpDownCounter\u003CSystem.Int32\u003E(System.String,System.Func\u003CSystem.Collections.Generic.IEnumerable\u003CSystem.Diagnostics.Metrics.Measurement\u003CSystem.Int32\u003E\u003E\u003E,System.String,System.String,System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Metrics.Meter",
+      "methodName": "CreateObservableUpDownCounter",
+      "isStatic": true
+    },
+    {
+      "index": 106,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableUpDownCounter:System.Diagnostics.Metrics.ObservableUpDownCounter\u003CSystem.Int32\u003E(System.String,System.Func\u003CSystem.Collections.Generic.IEnumerable\u003CSystem.Diagnostics.Metrics.Measurement\u003CSystem.Int32\u003E\u003E\u003E,System.String,System.String,System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Metrics.Meter",
+      "methodName": "CreateObservableUpDownCounter",
+      "isStatic": true
+    },
+    {
+      "index": 107,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableCounter:System.Diagnostics.Metrics.ObservableCounter\u003CSystem.Int32\u003E(System.String,System.Func\u003CSystem.Int32\u003E,System.String,System.String)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Metrics.Meter",
+      "methodName": "CreateObservableCounter",
+      "isStatic": true
+    },
+    {
+      "index": 108,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableCounter:System.Diagnostics.Metrics.ObservableCounter\u003CSystem.Int32\u003E(System.String,System.Func\u003CSystem.Int32\u003E,System.String,System.String)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Metrics.Meter",
+      "methodName": "CreateObservableCounter",
+      "isStatic": true
+    },
+    {
+      "index": 109,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableCounter:System.Diagnostics.Metrics.ObservableCounter\u003CSystem.Int32\u003E(System.String,System.Func\u003CSystem.Int32\u003E,System.String,System.String)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Metrics.Meter",
+      "methodName": "CreateObservableCounter",
+      "isStatic": true
+    },
+    {
+      "index": 110,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableCounter:System.Diagnostics.Metrics.ObservableCounter\u003CSystem.Int32\u003E(System.String,System.Func\u003CSystem.Int32\u003E,System.String,System.String)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Metrics.Meter",
+      "methodName": "CreateObservableCounter",
+      "isStatic": true
+    },
+    {
+      "index": 111,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableCounter:System.Diagnostics.Metrics.ObservableCounter\u003CSystem.Int32\u003E(System.String,System.Func\u003CSystem.Int32\u003E,System.String,System.String,System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Metrics.Meter",
+      "methodName": "CreateObservableCounter",
+      "isStatic": true
+    },
+    {
+      "index": 112,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableCounter:System.Diagnostics.Metrics.ObservableCounter\u003CSystem.Int32\u003E(System.String,System.Func\u003CSystem.Int32\u003E,System.String,System.String,System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Metrics.Meter",
+      "methodName": "CreateObservableCounter",
+      "isStatic": true
+    },
+    {
+      "index": 113,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableCounter:System.Diagnostics.Metrics.ObservableCounter\u003CSystem.Int32\u003E(System.String,System.Func\u003CSystem.Int32\u003E,System.String,System.String,System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Metrics.Meter",
+      "methodName": "CreateObservableCounter",
+      "isStatic": true
+    },
+    {
+      "index": 114,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableCounter:System.Diagnostics.Metrics.ObservableCounter\u003CSystem.Int32\u003E(System.String,System.Func\u003CSystem.Int32\u003E,System.String,System.String,System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Metrics.Meter",
+      "methodName": "CreateObservableCounter",
+      "isStatic": true
+    },
+    {
+      "index": 115,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableCounter:System.Diagnostics.Metrics.ObservableCounter\u003CSystem.Int32\u003E(System.String,System.Func\u003CSystem.Diagnostics.Metrics.Measurement\u003CSystem.Int32\u003E\u003E,System.String,System.String)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Metrics.Meter",
+      "methodName": "CreateObservableCounter",
+      "isStatic": true
+    },
+    {
+      "index": 116,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableCounter:System.Diagnostics.Metrics.ObservableCounter\u003CSystem.Int32\u003E(System.String,System.Func\u003CSystem.Diagnostics.Metrics.Measurement\u003CSystem.Int32\u003E\u003E,System.String,System.String)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Metrics.Meter",
+      "methodName": "CreateObservableCounter",
+      "isStatic": true
+    },
+    {
+      "index": 117,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableCounter:System.Diagnostics.Metrics.ObservableCounter\u003CSystem.Int32\u003E(System.String,System.Func\u003CSystem.Diagnostics.Metrics.Measurement\u003CSystem.Int32\u003E\u003E,System.String,System.String)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Metrics.Meter",
+      "methodName": "CreateObservableCounter",
+      "isStatic": true
+    },
+    {
+      "index": 118,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableCounter:System.Diagnostics.Metrics.ObservableCounter\u003CSystem.Int32\u003E(System.String,System.Func\u003CSystem.Diagnostics.Metrics.Measurement\u003CSystem.Int32\u003E\u003E,System.String,System.String)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Metrics.Meter",
+      "methodName": "CreateObservableCounter",
+      "isStatic": true
+    },
+    {
+      "index": 119,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableCounter:System.Diagnostics.Metrics.ObservableCounter\u003CSystem.Int32\u003E(System.String,System.Func\u003CSystem.Diagnostics.Metrics.Measurement\u003CSystem.Int32\u003E\u003E,System.String,System.String,System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Metrics.Meter",
+      "methodName": "CreateObservableCounter",
+      "isStatic": true
+    },
+    {
+      "index": 120,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableCounter:System.Diagnostics.Metrics.ObservableCounter\u003CSystem.Int32\u003E(System.String,System.Func\u003CSystem.Diagnostics.Metrics.Measurement\u003CSystem.Int32\u003E\u003E,System.String,System.String,System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Metrics.Meter",
+      "methodName": "CreateObservableCounter",
+      "isStatic": true
+    },
+    {
+      "index": 121,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableCounter:System.Diagnostics.Metrics.ObservableCounter\u003CSystem.Int32\u003E(System.String,System.Func\u003CSystem.Diagnostics.Metrics.Measurement\u003CSystem.Int32\u003E\u003E,System.String,System.String,System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Metrics.Meter",
+      "methodName": "CreateObservableCounter",
+      "isStatic": true
+    },
+    {
+      "index": 122,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableCounter:System.Diagnostics.Metrics.ObservableCounter\u003CSystem.Int32\u003E(System.String,System.Func\u003CSystem.Diagnostics.Metrics.Measurement\u003CSystem.Int32\u003E\u003E,System.String,System.String,System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Metrics.Meter",
+      "methodName": "CreateObservableCounter",
+      "isStatic": true
+    },
+    {
+      "index": 123,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableCounter:System.Diagnostics.Metrics.ObservableCounter\u003CSystem.Int32\u003E(System.String,System.Func\u003CSystem.Collections.Generic.IEnumerable\u003CSystem.Diagnostics.Metrics.Measurement\u003CSystem.Int32\u003E\u003E\u003E,System.String,System.String)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Metrics.Meter",
+      "methodName": "CreateObservableCounter",
+      "isStatic": true
+    },
+    {
+      "index": 124,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableCounter:System.Diagnostics.Metrics.ObservableCounter\u003CSystem.Int32\u003E(System.String,System.Func\u003CSystem.Collections.Generic.IEnumerable\u003CSystem.Diagnostics.Metrics.Measurement\u003CSystem.Int32\u003E\u003E\u003E,System.String,System.String)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Metrics.Meter",
+      "methodName": "CreateObservableCounter",
+      "isStatic": true
+    },
+    {
+      "index": 125,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableCounter:System.Diagnostics.Metrics.ObservableCounter\u003CSystem.Int32\u003E(System.String,System.Func\u003CSystem.Collections.Generic.IEnumerable\u003CSystem.Diagnostics.Metrics.Measurement\u003CSystem.Int32\u003E\u003E\u003E,System.String,System.String)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Metrics.Meter",
+      "methodName": "CreateObservableCounter",
+      "isStatic": true
+    },
+    {
+      "index": 126,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableCounter:System.Diagnostics.Metrics.ObservableCounter\u003CSystem.Int32\u003E(System.String,System.Func\u003CSystem.Collections.Generic.IEnumerable\u003CSystem.Diagnostics.Metrics.Measurement\u003CSystem.Int32\u003E\u003E\u003E,System.String,System.String)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Metrics.Meter",
+      "methodName": "CreateObservableCounter",
+      "isStatic": true
+    },
+    {
+      "index": 127,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableCounter:System.Diagnostics.Metrics.ObservableCounter\u003CSystem.Int32\u003E(System.String,System.Func\u003CSystem.Collections.Generic.IEnumerable\u003CSystem.Diagnostics.Metrics.Measurement\u003CSystem.Int32\u003E\u003E\u003E,System.String,System.String,System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Metrics.Meter",
+      "methodName": "CreateObservableCounter",
+      "isStatic": true
+    },
+    {
+      "index": 128,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableCounter:System.Diagnostics.Metrics.ObservableCounter\u003CSystem.Int32\u003E(System.String,System.Func\u003CSystem.Collections.Generic.IEnumerable\u003CSystem.Diagnostics.Metrics.Measurement\u003CSystem.Int32\u003E\u003E\u003E,System.String,System.String,System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Metrics.Meter",
+      "methodName": "CreateObservableCounter",
+      "isStatic": true
+    },
+    {
+      "index": 129,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableCounter:System.Diagnostics.Metrics.ObservableCounter\u003CSystem.Int32\u003E(System.String,System.Func\u003CSystem.Collections.Generic.IEnumerable\u003CSystem.Diagnostics.Metrics.Measurement\u003CSystem.Int32\u003E\u003E\u003E,System.String,System.String,System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Metrics.Meter",
+      "methodName": "CreateObservableCounter",
+      "isStatic": true
+    },
+    {
+      "index": 130,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableCounter:System.Diagnostics.Metrics.ObservableCounter\u003CSystem.Int32\u003E(System.String,System.Func\u003CSystem.Collections.Generic.IEnumerable\u003CSystem.Diagnostics.Metrics.Measurement\u003CSystem.Int32\u003E\u003E\u003E,System.String,System.String,System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Metrics.Meter",
+      "methodName": "CreateObservableCounter",
+      "isStatic": true
+    },
+    {
+      "index": 131,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableGauge:System.Diagnostics.Metrics.ObservableGauge\u003CSystem.Int32\u003E(System.String,System.Func\u003CSystem.Int32\u003E,System.String,System.String)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Metrics.Meter",
+      "methodName": "CreateObservableGauge",
+      "isStatic": true
+    },
+    {
+      "index": 132,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableGauge:System.Diagnostics.Metrics.ObservableGauge\u003CSystem.Int32\u003E(System.String,System.Func\u003CSystem.Int32\u003E,System.String,System.String)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Metrics.Meter",
+      "methodName": "CreateObservableGauge",
+      "isStatic": true
+    },
+    {
+      "index": 133,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableGauge:System.Diagnostics.Metrics.ObservableGauge\u003CSystem.Int32\u003E(System.String,System.Func\u003CSystem.Int32\u003E,System.String,System.String)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Metrics.Meter",
+      "methodName": "CreateObservableGauge",
+      "isStatic": true
+    },
+    {
+      "index": 134,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableGauge:System.Diagnostics.Metrics.ObservableGauge\u003CSystem.Int32\u003E(System.String,System.Func\u003CSystem.Int32\u003E,System.String,System.String)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Metrics.Meter",
+      "methodName": "CreateObservableGauge",
+      "isStatic": true
+    },
+    {
+      "index": 135,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableGauge:System.Diagnostics.Metrics.ObservableGauge\u003CSystem.Int32\u003E(System.String,System.Func\u003CSystem.Int32\u003E,System.String,System.String,System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Metrics.Meter",
+      "methodName": "CreateObservableGauge",
+      "isStatic": true
+    },
+    {
+      "index": 136,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableGauge:System.Diagnostics.Metrics.ObservableGauge\u003CSystem.Int32\u003E(System.String,System.Func\u003CSystem.Int32\u003E,System.String,System.String,System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Metrics.Meter",
+      "methodName": "CreateObservableGauge",
+      "isStatic": true
+    },
+    {
+      "index": 137,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableGauge:System.Diagnostics.Metrics.ObservableGauge\u003CSystem.Int32\u003E(System.String,System.Func\u003CSystem.Int32\u003E,System.String,System.String,System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Metrics.Meter",
+      "methodName": "CreateObservableGauge",
+      "isStatic": true
+    },
+    {
+      "index": 138,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableGauge:System.Diagnostics.Metrics.ObservableGauge\u003CSystem.Int32\u003E(System.String,System.Func\u003CSystem.Int32\u003E,System.String,System.String,System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Metrics.Meter",
+      "methodName": "CreateObservableGauge",
+      "isStatic": true
+    },
+    {
+      "index": 139,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableGauge:System.Diagnostics.Metrics.ObservableGauge\u003CSystem.Int32\u003E(System.String,System.Func\u003CSystem.Diagnostics.Metrics.Measurement\u003CSystem.Int32\u003E\u003E,System.String,System.String)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Metrics.Meter",
+      "methodName": "CreateObservableGauge",
+      "isStatic": true
+    },
+    {
+      "index": 140,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableGauge:System.Diagnostics.Metrics.ObservableGauge\u003CSystem.Int32\u003E(System.String,System.Func\u003CSystem.Diagnostics.Metrics.Measurement\u003CSystem.Int32\u003E\u003E,System.String,System.String)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Metrics.Meter",
+      "methodName": "CreateObservableGauge",
+      "isStatic": true
+    },
+    {
+      "index": 141,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableGauge:System.Diagnostics.Metrics.ObservableGauge\u003CSystem.Int32\u003E(System.String,System.Func\u003CSystem.Diagnostics.Metrics.Measurement\u003CSystem.Int32\u003E\u003E,System.String,System.String)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Metrics.Meter",
+      "methodName": "CreateObservableGauge",
+      "isStatic": true
+    },
+    {
+      "index": 142,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableGauge:System.Diagnostics.Metrics.ObservableGauge\u003CSystem.Int32\u003E(System.String,System.Func\u003CSystem.Diagnostics.Metrics.Measurement\u003CSystem.Int32\u003E\u003E,System.String,System.String)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Metrics.Meter",
+      "methodName": "CreateObservableGauge",
+      "isStatic": true
+    },
+    {
+      "index": 143,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableGauge:System.Diagnostics.Metrics.ObservableGauge\u003CSystem.Int32\u003E(System.String,System.Func\u003CSystem.Diagnostics.Metrics.Measurement\u003CSystem.Int32\u003E\u003E,System.String,System.String,System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Metrics.Meter",
+      "methodName": "CreateObservableGauge",
+      "isStatic": true
+    },
+    {
+      "index": 144,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableGauge:System.Diagnostics.Metrics.ObservableGauge\u003CSystem.Int32\u003E(System.String,System.Func\u003CSystem.Diagnostics.Metrics.Measurement\u003CSystem.Int32\u003E\u003E,System.String,System.String,System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Metrics.Meter",
+      "methodName": "CreateObservableGauge",
+      "isStatic": true
+    },
+    {
+      "index": 145,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableGauge:System.Diagnostics.Metrics.ObservableGauge\u003CSystem.Int32\u003E(System.String,System.Func\u003CSystem.Diagnostics.Metrics.Measurement\u003CSystem.Int32\u003E\u003E,System.String,System.String,System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Metrics.Meter",
+      "methodName": "CreateObservableGauge",
+      "isStatic": true
+    },
+    {
+      "index": 146,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableGauge:System.Diagnostics.Metrics.ObservableGauge\u003CSystem.Int32\u003E(System.String,System.Func\u003CSystem.Diagnostics.Metrics.Measurement\u003CSystem.Int32\u003E\u003E,System.String,System.String,System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Metrics.Meter",
+      "methodName": "CreateObservableGauge",
+      "isStatic": true
+    },
+    {
+      "index": 147,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableGauge:System.Diagnostics.Metrics.ObservableGauge\u003CSystem.Int32\u003E(System.String,System.Func\u003CSystem.Collections.Generic.IEnumerable\u003CSystem.Diagnostics.Metrics.Measurement\u003CSystem.Int32\u003E\u003E\u003E,System.String,System.String)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Metrics.Meter",
+      "methodName": "CreateObservableGauge",
+      "isStatic": true
+    },
+    {
+      "index": 148,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableGauge:System.Diagnostics.Metrics.ObservableGauge\u003CSystem.Int32\u003E(System.String,System.Func\u003CSystem.Collections.Generic.IEnumerable\u003CSystem.Diagnostics.Metrics.Measurement\u003CSystem.Int32\u003E\u003E\u003E,System.String,System.String)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Metrics.Meter",
+      "methodName": "CreateObservableGauge",
+      "isStatic": true
+    },
+    {
+      "index": 149,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableGauge:System.Diagnostics.Metrics.ObservableGauge\u003CSystem.Int32\u003E(System.String,System.Func\u003CSystem.Collections.Generic.IEnumerable\u003CSystem.Diagnostics.Metrics.Measurement\u003CSystem.Int32\u003E\u003E\u003E,System.String,System.String)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Metrics.Meter",
+      "methodName": "CreateObservableGauge",
+      "isStatic": true
+    },
+    {
+      "index": 150,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableGauge:System.Diagnostics.Metrics.ObservableGauge\u003CSystem.Int32\u003E(System.String,System.Func\u003CSystem.Collections.Generic.IEnumerable\u003CSystem.Diagnostics.Metrics.Measurement\u003CSystem.Int32\u003E\u003E\u003E,System.String,System.String)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Metrics.Meter",
+      "methodName": "CreateObservableGauge",
+      "isStatic": true
+    },
+    {
+      "index": 151,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableGauge:System.Diagnostics.Metrics.ObservableGauge\u003CSystem.Int32\u003E(System.String,System.Func\u003CSystem.Collections.Generic.IEnumerable\u003CSystem.Diagnostics.Metrics.Measurement\u003CSystem.Int32\u003E\u003E\u003E,System.String,System.String,System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Metrics.Meter",
+      "methodName": "CreateObservableGauge",
+      "isStatic": true
+    },
+    {
+      "index": 152,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableGauge:System.Diagnostics.Metrics.ObservableGauge\u003CSystem.Int32\u003E(System.String,System.Func\u003CSystem.Collections.Generic.IEnumerable\u003CSystem.Diagnostics.Metrics.Measurement\u003CSystem.Int32\u003E\u003E\u003E,System.String,System.String,System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Metrics.Meter",
+      "methodName": "CreateObservableGauge",
+      "isStatic": true
+    },
+    {
+      "index": 153,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableGauge:System.Diagnostics.Metrics.ObservableGauge\u003CSystem.Int32\u003E(System.String,System.Func\u003CSystem.Collections.Generic.IEnumerable\u003CSystem.Diagnostics.Metrics.Measurement\u003CSystem.Int32\u003E\u003E\u003E,System.String,System.String,System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Metrics.Meter",
+      "methodName": "CreateObservableGauge",
+      "isStatic": true
+    },
+    {
+      "index": 154,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableGauge:System.Diagnostics.Metrics.ObservableGauge\u003CSystem.Int32\u003E(System.String,System.Func\u003CSystem.Collections.Generic.IEnumerable\u003CSystem.Diagnostics.Metrics.Measurement\u003CSystem.Int32\u003E\u003E\u003E,System.String,System.String,System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Metrics.Meter",
+      "methodName": "CreateObservableGauge",
+      "isStatic": true
+    },
+    {
+      "index": 155,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::Dispose:System.Void()",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Metrics.Meter",
+      "methodName": "Dispose",
+      "isStatic": true
+    },
+    {
+      "index": 156,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.MeterListener::EnableMeasurementEvents:System.Void(System.Diagnostics.Metrics.Instrument,System.Object)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Metrics.MeterListener",
+      "methodName": "EnableMeasurementEvents",
+      "isStatic": true
+    },
+    {
+      "index": 157,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.MeterListener::DisableMeasurementEvents:System.Object(System.Diagnostics.Metrics.Instrument)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Metrics.MeterListener",
+      "methodName": "DisableMeasurementEvents",
+      "isStatic": true
+    },
+    {
+      "index": 158,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.MeterListener::SetMeasurementEventCallback:System.Void(System.Diagnostics.Metrics.MeasurementCallback\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Metrics.MeterListener",
+      "methodName": "SetMeasurementEventCallback",
+      "isStatic": true
+    },
+    {
+      "index": 159,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.MeterListener::RecordObservableInstruments:System.Void()",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Metrics.MeterListener",
+      "methodName": "RecordObservableInstruments",
+      "isStatic": true
+    },
+    {
+      "index": 160,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.MeterListener::Dispose:System.Void()",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Metrics.MeterListener",
+      "methodName": "Dispose",
+      "isStatic": true
+    },
+    {
+      "index": 161,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.UpDownCounter\u003CSystem.Int32\u003E::Add:System.Void(System.Int32)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Metrics.UpDownCounter\u003CSystem.Int32\u003E",
+      "methodName": "Add",
+      "isStatic": true
+    },
+    {
+      "index": 162,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.UpDownCounter\u003CSystem.Int32\u003E::Add:System.Void(System.Int32)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Metrics.UpDownCounter\u003CSystem.Int32\u003E",
+      "methodName": "Add",
+      "isStatic": true
+    },
+    {
+      "index": 163,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.UpDownCounter\u003CSystem.Int32\u003E::Add:System.Void(System.Int32,System.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Metrics.UpDownCounter\u003CSystem.Int32\u003E",
+      "methodName": "Add",
+      "isStatic": true
+    },
+    {
+      "index": 164,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.UpDownCounter\u003CSystem.Int32\u003E::Add:System.Void(System.Int32,System.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Metrics.UpDownCounter\u003CSystem.Int32\u003E",
+      "methodName": "Add",
+      "isStatic": true
+    },
+    {
+      "index": 165,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.UpDownCounter\u003CSystem.Int32\u003E::Add:System.Void(System.Int32,System.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E,System.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Metrics.UpDownCounter\u003CSystem.Int32\u003E",
+      "methodName": "Add",
+      "isStatic": true
+    },
+    {
+      "index": 166,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.UpDownCounter\u003CSystem.Int32\u003E::Add:System.Void(System.Int32,System.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E,System.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Metrics.UpDownCounter\u003CSystem.Int32\u003E",
+      "methodName": "Add",
+      "isStatic": true
+    },
+    {
+      "index": 167,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.UpDownCounter\u003CSystem.Int32\u003E::Add:System.Void(System.Int32,System.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E,System.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E,System.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Metrics.UpDownCounter\u003CSystem.Int32\u003E",
+      "methodName": "Add",
+      "isStatic": true
+    },
+    {
+      "index": 168,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.UpDownCounter\u003CSystem.Int32\u003E::Add:System.Void(System.Int32,System.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E,System.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E,System.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Metrics.UpDownCounter\u003CSystem.Int32\u003E",
+      "methodName": "Add",
+      "isStatic": true
+    },
+    {
+      "index": 169,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.UpDownCounter\u003CSystem.Int32\u003E::Add:System.Void(System.Int32,System.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E[])",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Metrics.UpDownCounter\u003CSystem.Int32\u003E",
+      "methodName": "Add",
+      "isStatic": true
+    },
+    {
+      "index": 170,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.UpDownCounter\u003CSystem.Int32\u003E::Add:System.Void(System.Int32,System.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E[])",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Metrics.UpDownCounter\u003CSystem.Int32\u003E",
+      "methodName": "Add",
+      "isStatic": true
+    },
+    {
+      "index": 171,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.UpDownCounter\u003CSystem.Int32\u003E::Add:System.Void(System.Int32,System.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E[])",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Metrics.UpDownCounter\u003CSystem.Int32\u003E",
+      "methodName": "Add",
+      "isStatic": true
+    },
+    {
+      "index": 172,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.UpDownCounter\u003CSystem.Int32\u003E::Add:System.Void(System.Int32,System.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E[])",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Metrics.UpDownCounter\u003CSystem.Int32\u003E",
+      "methodName": "Add",
+      "isStatic": true
+    },
+    {
+      "index": 173,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.UpDownCounter\u003CSystem.Int32\u003E::Add:System.Void(System.Int32,System.Diagnostics.TagList)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Metrics.UpDownCounter\u003CSystem.Int32\u003E",
+      "methodName": "Add",
+      "isStatic": true
+    },
+    {
+      "index": 174,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.UpDownCounter\u003CSystem.Int32\u003E::Add:System.Void(System.Int32,System.Diagnostics.TagList)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Metrics.UpDownCounter\u003CSystem.Int32\u003E",
+      "methodName": "Add",
+      "isStatic": true
+    }
+  ],
+  "summary": {
+    "totalSubjects": 175,
+    "factCount": 0,
+    "benchmarkCount": 175,
+    "hotUpdateCount": 0
+  }
+}

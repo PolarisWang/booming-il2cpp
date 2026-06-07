@@ -287,12 +287,6 @@ public sealed record ManagedClosureResult
     public required NativeAotLoweringPlanArtifact NativeAotLoweringPlan { get; init; }
 
     public required ManagedClosureManifestArtifact ClosureManifest { get; init; }
-
-    /// <summary>
-    /// Bridge compilation redirect map: SubjectId → chaos_bridge_ symbol.
-    /// Populated by BridgeAotCompiler for the redirect table.
-    /// </summary>
-    public IReadOnlyDictionary<string, string>? BridgeRedirectMap { get; init; }
 }
 
 public sealed record NativeReferenceProofRequest(string ManagedClosureRootPath, string OutputRootPath);

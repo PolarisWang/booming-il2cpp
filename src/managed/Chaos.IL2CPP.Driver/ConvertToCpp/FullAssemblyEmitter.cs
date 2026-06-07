@@ -13,7 +13,6 @@ internal sealed class FullAssemblyEmitter
         string outputRoot,
         CodegenMode mode = CodegenMode.Aot,
         HashSet<string>? subjectMethods = null,
-        IReadOnlyDictionary<string, string>? bridgeRedirectMap = null,
         string? goldProfilePath = null)
     {
         ArgumentNullException.ThrowIfNull(closureResult);
@@ -44,13 +43,6 @@ internal sealed class FullAssemblyEmitter
             {
                 File.WriteAllText(targetPath, source.Contents, Encoding.UTF8);
             }
-        }
-
-        // Bridge methods are now integrated into the main AOT IR.
-        // No separate bridge-redirect.generated.cpp is needed.
-        if (bridgeRedirectMap is { Count: > 0 })
-        {
-            Console.Error.WriteLine($"[BRIDGE-AOT] {bridgeRedirectMap.Count} bridge methods integrated into AOT IR");
         }
 
         Console.WriteLine($"    emitted {emitResult.GeneratedSources.Count} files -> {outputRoot}");
