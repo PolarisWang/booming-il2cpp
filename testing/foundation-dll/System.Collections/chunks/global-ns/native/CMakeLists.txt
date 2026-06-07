@@ -158,6 +158,9 @@ endif()
 set(CHAOS_METHOD_REPLACEMENT
     "${CHAOS_PROJECT_ROOT}/src/native/hot-update/method_replacement.cpp"
 )
+set(CHAOS_PROFILE_STATS
+    "${CHAOS_PROJECT_ROOT}/src/native/runtime-core/profile_stats.cpp"
+)
 
 set(CHAOS_ENTRY_SOURCES
     "runtime-entry.cpp"
@@ -175,6 +178,7 @@ set(CHAOS_ENTRY_SOURCES
     ${CHAOS_HOTPATCH_TABLE}
     ${CHAOS_EAGER_COMPILE}
     ${CHAOS_METHOD_REPLACEMENT}
+    ${CHAOS_PROFILE_STATS}
     ${CHAOS_AOT_GENERATED_CPP}
 )
 

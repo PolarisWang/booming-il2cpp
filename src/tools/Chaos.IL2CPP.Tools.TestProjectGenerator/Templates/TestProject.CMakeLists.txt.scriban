@@ -157,6 +157,12 @@ set(CHAOS_EAGER_COMPILE
 set(CHAOS_METHOD_REPLACEMENT
     "${CHAOS_PROJECT_ROOT}/src/native/hot-update/method_replacement.cpp"
 )
+# profile_stats.cpp — the prebuilt chaos_runtime_core.lib may be stale,
+# missing GetThreadProfileData/FlushThreadProfileData/ProfileStore*
+# symbols added after the SDK was last rebuilt.  Compile locally.
+set(CHAOS_PROFILE_STATS
+    "${CHAOS_PROJECT_ROOT}/src/native/runtime-core/profile_stats.cpp"
+)
 
 set(CHAOS_ENTRY_SOURCES
     "runtime-entry.cpp"
@@ -174,6 +180,7 @@ set(CHAOS_ENTRY_SOURCES
     ${CHAOS_HOTPATCH_TABLE}
     ${CHAOS_EAGER_COMPILE}
     ${CHAOS_METHOD_REPLACEMENT}
+    ${CHAOS_PROFILE_STATS}
     ${CHAOS_AOT_GENERATED_CPP}
 )
 
