@@ -26,6 +26,7 @@ class StageResult:
     details: dict[str, Any] = field(default_factory=dict)
     errors: list[str] = field(default_factory=list)
     duration_ms: int = 0
+    value_suspicious: bool = False
 
     def to_dict(self) -> dict[str, Any]:
         return asdict(self)

@@ -193,6 +193,5 @@ def run_fact_chunk(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageRe
                if jit_result else {}),
         },
         duration_ms=int((time.perf_counter() - start) * 1000),
-        fact_results=aot_result["results"],
         value_suspicious=value_suspicious,
     )

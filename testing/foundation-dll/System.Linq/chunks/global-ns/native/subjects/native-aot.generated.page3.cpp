@@ -14,6 +14,7 @@
 #include <gc/gc_bgc_inline.h>
 #include <gc/gc_card_table.h>
 #include <ChaosGeneratedRuntimePrelude.h>
+#include "runtime_stubs/misc_stubs.h"
 #include "enum_stubs.h"
 #include "async_stubs.h"
 #include "exception_stubs.h"
@@ -35,46 +36,6 @@ namespace chaos::il2cpp::codegen::CombinedSubjects {
 using namespace chaos::il2cpp::runtime_core;
 using namespace chaos::il2cpp::jit;
 
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Boolean_System_Boolean_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Byte_System_Byte_System_String(CHAOS_IL2CPP_UINT8 chaos_fn_arg_0, CHAOS_IL2CPP_UINT8 chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Byte_array_System_Byte_array_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Char_System_Char_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Decimal_System_Decimal_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Double_System_Double_System_String(double chaos_fn_arg_0, double chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Int16_System_Int16_System_String(CHAOS_IL2CPP_INT16 chaos_fn_arg_0, CHAOS_IL2CPP_INT16 chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Int32_System_Int32_System_String(CHAOS_IL2CPP_INT32 chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Int64_System_Int64_System_String(CHAOS_IL2CPP_INT64 chaos_fn_arg_0, CHAOS_IL2CPP_INT64 chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Object_System_Object_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_SByte_System_SByte_System_String(CHAOS_IL2CPP_INT8 chaos_fn_arg_0, CHAOS_IL2CPP_INT8 chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Single_System_Single_System_String(float chaos_fn_arg_0, float chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_String_System_String_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_UInt16_System_UInt16_System_String(CHAOS_IL2CPP_UINT16 chaos_fn_arg_0, CHAOS_IL2CPP_UINT16 chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_UInt32_System_UInt32_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_UInt64_System_UInt64_System_String(CHAOS_IL2CPP_UINT64 chaos_fn_arg_0, CHAOS_IL2CPP_UINT64 chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_0_0_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreNotEqual_0_0_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
-extern "C" CHAOS_IL2CPP_INT32 Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Complete(void);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Fail_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
-extern "C" CHAOS_IL2CPP_INT32 Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_get_ExitCode(void);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_IsFalse_System_Boolean_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_IsNotNull_System_Object_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_IsNull_System_Object_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_IsTrue_System_Boolean_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_RecordFailure(void);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Reset(void);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Throws_System_Action(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Throws_System_ArgumentNullException_System_Action__generic(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_generic_context);
-extern "C" void chaos_stub_definition_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert__Throws_System_Void_System_Action__type____method__System_ArgumentNullException(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_generic_context);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Throws_System_ArgumentOutOfRangeException_System_Action__generic(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
-extern "C" void chaos_stub_definition_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert__Throws_System_Void_System_Action__type____method__System_ArgumentOutOfRangeException(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_generic_context);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Throws_System_InvalidOperationException_System_Action__generic(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
-extern "C" void chaos_stub_definition_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert__Throws_System_Void_System_Action__type____method__System_InvalidOperationException(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_generic_context);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Throws_System_NullReferenceException_System_Action__generic(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
-extern "C" void chaos_stub_definition_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert__Throws_System_Void_System_Action__type____method__System_NullReferenceException(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_generic_context);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_AssertionException__ctor_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_BenchmarkAttribute__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_FactAttribute__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_HotUpdateAttribute__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
 extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
 extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests_Aggregate_0_IEnumerableint_System_Funcintintint_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
 extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests_Aggregate_0_IEnumerableint_System_Funcintintint_1(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
@@ -1196,1876 +1157,6 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_LookupSys
 
 
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq.System_Linq_EnumerableTests::Average_9_IEnumerablelong_1()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests_Average_9_IEnumerablelong_1(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c____9__46_0;
-	_s1 = _s0;
-	{
-		if (_s1 == 0)
-		{
-			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c____9;
-			{
-				// Hotpatch-aware ldftn wrapper (slot 775)
-				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[775];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
-					{
-						alignas(16) uint8_t _d_ab[8];
-						ArgBuffer _d_bw(_d_ab);
-						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d_entry.method_key, _d_ab, nullptr);
-						return;
-					}
-					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
-				};
-			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
-			}
-			{
-				const auto chaos_method_ptr = _s1;
-				const auto chaos_target = _s0;
-				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
-				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
-				chaos_object->chaos_delegate_target = chaos_target;
-				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
-				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-			}
-			_s1 = _s0;
-			{
-				auto chaos_value = _s1;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c____9__46_0 = chaos_value;
-			}
-		}
-		{
-			// Assert.Throws: target method not found via IL lookahead
-			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
-		}
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-		chaos_locals[0] = ChaosStoreInt64(_i0);
-		_i0 = ChaosLoadInt64(chaos_locals[0]);
-		return _i0;
-	}
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq.System_Linq_EnumerableTests::Benchmark_Aggregate_0_IEnumerableint_System_Funcintintint_0()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests_Benchmark_Aggregate_0_IEnumerableint_System_Funcintintint_0(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	_s0 = 0;
-	_s1 = 0;
-	{
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (127 < 0 || 127 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 127 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[127] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 127 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[127])(chaos_arg_0, chaos_arg_1);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq.System_Linq_EnumerableTests::Benchmark_Aggregate_0_IEnumerableint_System_Funcintintint_1()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests_Benchmark_Aggregate_0_IEnumerableint_System_Funcintintint_1(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INTPTR _s2;
-	{
-		if (30 < 0 || 30 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 30 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[30] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 30 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[30])();
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s1 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c____9__3_0;
-	_s2 = _s1;
-	{
-		if (_s2 == 0)
-		{
-			_s1 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c____9;
-			{
-				// Hotpatch-aware ldftn wrapper (slot 776)
-				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INT32 chaos_fn_arg_2) -> CHAOS_IL2CPP_INT32 {
-					auto& _d_entry = s_hotpatch_entries[776];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
-					{
-						alignas(16) uint8_t _d_ab[16];
-						ArgBuffer _d_bw(_d_ab);
-						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
-						_d_bw.WriteI32(static_cast<CHAOS_IL2CPP_INT32>(chaos_fn_arg_1));
-						_d_bw.WriteI32(static_cast<CHAOS_IL2CPP_INT32>(chaos_fn_arg_2));
-						CHAOS_IL2CPP_INT32 _d_ret{};
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d_entry.method_key, _d_ab, &_d_ret);
-						return _d_ret;
-					}
-					return reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INT32, CHAOS_IL2CPP_INT32)>(_d_entry.direct_ptr)(chaos_fn_arg_0, chaos_fn_arg_1, chaos_fn_arg_2);
-				};
-			_s2 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
-			}
-			{
-				const auto chaos_method_ptr = _s2;
-				const auto chaos_target = _s1;
-				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Func_System_Int32_System_Int32_System_Int32_, {});
-				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Func_System_Int32_System_Int32_System_Int32_.AsTypeInfoHot();
-				chaos_object->chaos_delegate_target = chaos_target;
-				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
-				_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-			}
-			_s2 = _s1;
-			{
-				auto chaos_value = _s2;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c____9__3_0 = chaos_value;
-			}
-		}
-		{
-			const auto chaos_arg_1 = _s1;
-			const auto chaos_arg_0 = _s0;
-			if (127 < 0 || 127 >= kChaosExternalRuntimeCount) {
-				CHAOS_IL2CPP_FAIL(); // external runtime table index 127 out of range
-			}
-			if (kChaosExternalRuntimeFnTable[127] == nullptr) {
-				CHAOS_IL2CPP_FAIL(); // external runtime table entry 127 is null
-			}
-			const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[127])(chaos_arg_0, chaos_arg_1);
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-		}
-		return;
-	}
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq.System_Linq_EnumerableTests::Benchmark_Aggregate_1_IEnumerableint_int_System_Funcintintint_0()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests_Benchmark_Aggregate_1_IEnumerableint_int_System_Funcintintint_0(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INTPTR _s2;
-	_s0 = 0;
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s2 = 0;
-	{
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (33 < 0 || 33 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 33 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[33] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 33 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[33])(chaos_arg_0, chaos_arg_1, chaos_arg_2);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq.System_Linq_EnumerableTests::Benchmark_Aggregate_1_IEnumerableint_int_System_Funcintintint_1()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests_Benchmark_Aggregate_1_IEnumerableint_int_System_Funcintintint_1(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INTPTR _s2;
-	_s0 = 0;
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s2 = 0;
-	{
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (33 < 0 || 33 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 33 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[33] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 33 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[33])(chaos_arg_0, chaos_arg_1, chaos_arg_2);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq.System_Linq_EnumerableTests::Benchmark_Aggregate_1_IEnumerableint_int_System_Funcintintint_2()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests_Benchmark_Aggregate_1_IEnumerableint_int_System_Funcintintint_2(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INTPTR _s2;
-	CHAOS_IL2CPP_INTPTR _s3;
-	{
-		if (30 < 0 || 30 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 30 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[30] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 30 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[30])();
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s2 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c____9__9_0;
-	_s3 = _s2;
-	{
-		if (_s3 == 0)
-		{
-			_s2 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c____9;
-			{
-				// Hotpatch-aware ldftn wrapper (slot 777)
-				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INT32 chaos_fn_arg_2) -> CHAOS_IL2CPP_INT32 {
-					auto& _d_entry = s_hotpatch_entries[777];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
-					{
-						alignas(16) uint8_t _d_ab[16];
-						ArgBuffer _d_bw(_d_ab);
-						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
-						_d_bw.WriteI32(static_cast<CHAOS_IL2CPP_INT32>(chaos_fn_arg_1));
-						_d_bw.WriteI32(static_cast<CHAOS_IL2CPP_INT32>(chaos_fn_arg_2));
-						CHAOS_IL2CPP_INT32 _d_ret{};
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d_entry.method_key, _d_ab, &_d_ret);
-						return _d_ret;
-					}
-					return reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INT32, CHAOS_IL2CPP_INT32)>(_d_entry.direct_ptr)(chaos_fn_arg_0, chaos_fn_arg_1, chaos_fn_arg_2);
-				};
-			_s3 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
-			}
-			{
-				const auto chaos_method_ptr = _s3;
-				const auto chaos_target = _s2;
-				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Func_System_Int32_System_Int32_System_Int32_, {});
-				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Func_System_Int32_System_Int32_System_Int32_.AsTypeInfoHot();
-				chaos_object->chaos_delegate_target = chaos_target;
-				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
-				_s2 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-			}
-			_s3 = _s2;
-			{
-				auto chaos_value = _s3;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c____9__9_0 = chaos_value;
-			}
-		}
-		{
-			const auto chaos_arg_2 = _s2;
-			const auto chaos_arg_1 = _s1;
-			const auto chaos_arg_0 = _s0;
-			if (33 < 0 || 33 >= kChaosExternalRuntimeCount) {
-				CHAOS_IL2CPP_FAIL(); // external runtime table index 33 out of range
-			}
-			if (kChaosExternalRuntimeFnTable[33] == nullptr) {
-				CHAOS_IL2CPP_FAIL(); // external runtime table entry 33 is null
-			}
-			const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[33])(chaos_arg_0, chaos_arg_1, chaos_arg_2);
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-		}
-		return;
-	}
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq.System_Linq_EnumerableTests::Benchmark_Aggregate_2_IEnumerableint_int_System_Funcintintint_System_Funcintint_0()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests_Benchmark_Aggregate_2_IEnumerableint_int_System_Funcintintint_System_Funcintint_0(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INTPTR _s2;
-	CHAOS_IL2CPP_INTPTR _s3;
-	_s0 = 0;
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s2 = 0;
-	_s3 = 0;
-	{
-		const auto chaos_arg_3 = _s3;
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (39 < 0 || 39 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 39 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[39] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 39 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[39])(chaos_arg_0, chaos_arg_1, chaos_arg_2, chaos_arg_3);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq.System_Linq_EnumerableTests::Benchmark_Aggregate_2_IEnumerableint_int_System_Funcintintint_System_Funcintint_1()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests_Benchmark_Aggregate_2_IEnumerableint_int_System_Funcintintint_System_Funcintint_1(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INTPTR _s2;
-	CHAOS_IL2CPP_INTPTR _s3;
-	_s0 = 0;
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s2 = 0;
-	_s3 = 0;
-	{
-		const auto chaos_arg_3 = _s3;
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (39 < 0 || 39 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 39 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[39] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 39 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[39])(chaos_arg_0, chaos_arg_1, chaos_arg_2, chaos_arg_3);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq.System_Linq_EnumerableTests::Benchmark_Aggregate_2_IEnumerableint_int_System_Funcintintint_System_Funcintint_2()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests_Benchmark_Aggregate_2_IEnumerableint_int_System_Funcintintint_System_Funcintint_2(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INTPTR _s2;
-	CHAOS_IL2CPP_INTPTR _s3;
-	CHAOS_IL2CPP_INTPTR _s4;
-	{
-		if (30 < 0 || 30 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 30 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[30] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 30 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[30])();
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s2 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c____9__15_0;
-	_s3 = _s2;
-	{
-		if (_s3 == 0)
-		{
-			_s2 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c____9;
-			{
-				// Hotpatch-aware ldftn wrapper (slot 778)
-				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INT32 chaos_fn_arg_2) -> CHAOS_IL2CPP_INT32 {
-					auto& _d_entry = s_hotpatch_entries[778];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
-					{
-						alignas(16) uint8_t _d_ab[16];
-						ArgBuffer _d_bw(_d_ab);
-						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
-						_d_bw.WriteI32(static_cast<CHAOS_IL2CPP_INT32>(chaos_fn_arg_1));
-						_d_bw.WriteI32(static_cast<CHAOS_IL2CPP_INT32>(chaos_fn_arg_2));
-						CHAOS_IL2CPP_INT32 _d_ret{};
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d_entry.method_key, _d_ab, &_d_ret);
-						return _d_ret;
-					}
-					return reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INT32, CHAOS_IL2CPP_INT32)>(_d_entry.direct_ptr)(chaos_fn_arg_0, chaos_fn_arg_1, chaos_fn_arg_2);
-				};
-			_s3 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
-			}
-			{
-				const auto chaos_method_ptr = _s3;
-				const auto chaos_target = _s2;
-				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Func_System_Int32_System_Int32_System_Int32_, {});
-				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Func_System_Int32_System_Int32_System_Int32_.AsTypeInfoHot();
-				chaos_object->chaos_delegate_target = chaos_target;
-				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
-				_s2 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-			}
-			_s3 = _s2;
-			{
-				auto chaos_value = _s3;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c____9__15_0 = chaos_value;
-			}
-		}
-		_s3 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c____9__15_1;
-		_s4 = _s3;
-		{
-			if (_s4 == 0)
-			{
-				_s3 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c____9;
-				{
-					// Hotpatch-aware ldftn wrapper (slot 779)
-					static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1) -> CHAOS_IL2CPP_INT32 {
-						auto& _d_entry = s_hotpatch_entries[779];
-						if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
-							&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
-						{
-							alignas(16) uint8_t _d_ab[12];
-							ArgBuffer _d_bw(_d_ab);
-							_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
-							_d_bw.WriteI32(static_cast<CHAOS_IL2CPP_INT32>(chaos_fn_arg_1));
-							CHAOS_IL2CPP_INT32 _d_ret{};
-							::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-								_d_entry.method_key, _d_ab, &_d_ret);
-							return _d_ret;
-						}
-						return reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INT32)>(_d_entry.direct_ptr)(chaos_fn_arg_0, chaos_fn_arg_1);
-					};
-				_s4 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
-				}
-				{
-					const auto chaos_method_ptr = _s4;
-					const auto chaos_target = _s3;
-					auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Func_System_Int32_System_Int32_, {});
-					chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Func_System_Int32_System_Int32_.AsTypeInfoHot();
-					chaos_object->chaos_delegate_target = chaos_target;
-					chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
-					_s3 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-				}
-				_s4 = _s3;
-				{
-					auto chaos_value = _s4;
-					chaos_static_CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c____9__15_1 = chaos_value;
-				}
-			}
-			{
-				const auto chaos_arg_3 = _s3;
-				const auto chaos_arg_2 = _s2;
-				const auto chaos_arg_1 = _s1;
-				const auto chaos_arg_0 = _s0;
-				if (39 < 0 || 39 >= kChaosExternalRuntimeCount) {
-					CHAOS_IL2CPP_FAIL(); // external runtime table index 39 out of range
-				}
-				if (kChaosExternalRuntimeFnTable[39] == nullptr) {
-					CHAOS_IL2CPP_FAIL(); // external runtime table entry 39 is null
-				}
-				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[39])(chaos_arg_0, chaos_arg_1, chaos_arg_2, chaos_arg_3);
-				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-			}
-			return;
-		}
-	}
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq.System_Linq_EnumerableTests::Benchmark_AggregateBy_33_IEnumerableint_System_Funcintint_int_System_Funcintintint_IEqualityComparerint_0()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests_Benchmark_AggregateBy_33_IEnumerableint_System_Funcintint_int_System_Funcintintint_IEqualityComparerint_0(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INTPTR _s2;
-	CHAOS_IL2CPP_INTPTR _s3;
-	CHAOS_IL2CPP_INTPTR _s4;
-	_s0 = 0;
-	_s1 = 0;
-	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s3 = 0;
-	_s4 = 0;
-	{
-		const auto chaos_arg_4 = _s4;
-		const auto chaos_arg_3 = _s3;
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (45 < 0 || 45 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 45 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[45] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 45 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[45])(chaos_arg_0, chaos_arg_1, chaos_arg_2, chaos_arg_3, chaos_arg_4);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq.System_Linq_EnumerableTests::Benchmark_AggregateBy_33_IEnumerableint_System_Funcintint_int_System_Funcintintint_IEqualityComparerint_1()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests_Benchmark_AggregateBy_33_IEnumerableint_System_Funcintint_int_System_Funcintintint_IEqualityComparerint_1(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INTPTR _s2;
-	CHAOS_IL2CPP_INTPTR _s3;
-	CHAOS_IL2CPP_INTPTR _s4;
-	_s0 = 0;
-	_s1 = 0;
-	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s3 = 0;
-	_s4 = 0;
-	{
-		const auto chaos_arg_4 = _s4;
-		const auto chaos_arg_3 = _s3;
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (45 < 0 || 45 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 45 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[45] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 45 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[45])(chaos_arg_0, chaos_arg_1, chaos_arg_2, chaos_arg_3, chaos_arg_4);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq.System_Linq_EnumerableTests::Benchmark_AggregateBy_33_IEnumerableint_System_Funcintint_int_System_Funcintintint_IEqualityComparerint_2()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests_Benchmark_AggregateBy_33_IEnumerableint_System_Funcintint_int_System_Funcintintint_IEqualityComparerint_2(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INTPTR _s2;
-	CHAOS_IL2CPP_INTPTR _s3;
-	CHAOS_IL2CPP_INTPTR _s4;
-	{
-		if (30 < 0 || 30 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 30 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[30] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 30 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[30])();
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s1 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c____9__151_0;
-	_s2 = _s1;
-	{
-		if (_s2 == 0)
-		{
-			_s1 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c____9;
-			{
-				// Hotpatch-aware ldftn wrapper (slot 780)
-				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1) -> CHAOS_IL2CPP_INT32 {
-					auto& _d_entry = s_hotpatch_entries[780];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
-					{
-						alignas(16) uint8_t _d_ab[12];
-						ArgBuffer _d_bw(_d_ab);
-						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
-						_d_bw.WriteI32(static_cast<CHAOS_IL2CPP_INT32>(chaos_fn_arg_1));
-						CHAOS_IL2CPP_INT32 _d_ret{};
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d_entry.method_key, _d_ab, &_d_ret);
-						return _d_ret;
-					}
-					return reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INT32)>(_d_entry.direct_ptr)(chaos_fn_arg_0, chaos_fn_arg_1);
-				};
-			_s2 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
-			}
-			{
-				const auto chaos_method_ptr = _s2;
-				const auto chaos_target = _s1;
-				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Func_System_Int32_System_Int32_, {});
-				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Func_System_Int32_System_Int32_.AsTypeInfoHot();
-				chaos_object->chaos_delegate_target = chaos_target;
-				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
-				_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-			}
-			_s2 = _s1;
-			{
-				auto chaos_value = _s2;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c____9__151_0 = chaos_value;
-			}
-		}
-		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-		_s3 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c____9__151_1;
-		_s4 = _s3;
-		{
-			if (_s4 == 0)
-			{
-				_s3 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c____9;
-				{
-					// Hotpatch-aware ldftn wrapper (slot 781)
-					static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INT32 chaos_fn_arg_2) -> CHAOS_IL2CPP_INT32 {
-						auto& _d_entry = s_hotpatch_entries[781];
-						if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
-							&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
-						{
-							alignas(16) uint8_t _d_ab[16];
-							ArgBuffer _d_bw(_d_ab);
-							_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
-							_d_bw.WriteI32(static_cast<CHAOS_IL2CPP_INT32>(chaos_fn_arg_1));
-							_d_bw.WriteI32(static_cast<CHAOS_IL2CPP_INT32>(chaos_fn_arg_2));
-							CHAOS_IL2CPP_INT32 _d_ret{};
-							::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-								_d_entry.method_key, _d_ab, &_d_ret);
-							return _d_ret;
-						}
-						return reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INT32, CHAOS_IL2CPP_INT32)>(_d_entry.direct_ptr)(chaos_fn_arg_0, chaos_fn_arg_1, chaos_fn_arg_2);
-					};
-				_s4 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
-				}
-				{
-					const auto chaos_method_ptr = _s4;
-					const auto chaos_target = _s3;
-					auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Func_System_Int32_System_Int32_System_Int32_, {});
-					chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Func_System_Int32_System_Int32_System_Int32_.AsTypeInfoHot();
-					chaos_object->chaos_delegate_target = chaos_target;
-					chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
-					_s3 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-				}
-				_s4 = _s3;
-				{
-					auto chaos_value = _s4;
-					chaos_static_CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c____9__151_1 = chaos_value;
-				}
-			}
-			{
-				if (44 < 0 || 44 >= kChaosExternalRuntimeCount) {
-					CHAOS_IL2CPP_FAIL(); // external runtime table index 44 out of range
-				}
-				if (kChaosExternalRuntimeFnTable[44] == nullptr) {
-					CHAOS_IL2CPP_FAIL(); // external runtime table entry 44 is null
-				}
-				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[44])();
-				_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-			}
-			{
-				const auto chaos_arg_4 = _s4;
-				const auto chaos_arg_3 = _s3;
-				const auto chaos_arg_2 = _s2;
-				const auto chaos_arg_1 = _s1;
-				const auto chaos_arg_0 = _s0;
-				if (45 < 0 || 45 >= kChaosExternalRuntimeCount) {
-					CHAOS_IL2CPP_FAIL(); // external runtime table index 45 out of range
-				}
-				if (kChaosExternalRuntimeFnTable[45] == nullptr) {
-					CHAOS_IL2CPP_FAIL(); // external runtime table entry 45 is null
-				}
-				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[45])(chaos_arg_0, chaos_arg_1, chaos_arg_2, chaos_arg_3, chaos_arg_4);
-				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-			}
-			return;
-		}
-	}
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq.System_Linq_EnumerableTests::Benchmark_AggregateBy_34_IEnumerableint_System_Funcintint_System_Funcintint_System_Funcintintint_IEqualityComparerint_0()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests_Benchmark_AggregateBy_34_IEnumerableint_System_Funcintint_System_Funcintint_System_Funcintintint_IEqualityComparerint_0(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INTPTR _s2;
-	CHAOS_IL2CPP_INTPTR _s3;
-	CHAOS_IL2CPP_INTPTR _s4;
-	_s0 = 0;
-	_s1 = 0;
-	_s2 = 0;
-	_s3 = 0;
-	_s4 = 0;
-	{
-		const auto chaos_arg_4 = _s4;
-		const auto chaos_arg_3 = _s3;
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (51 < 0 || 51 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 51 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[51] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 51 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[51])(chaos_arg_0, chaos_arg_1, chaos_arg_2, chaos_arg_3, chaos_arg_4);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq.System_Linq_EnumerableTests::Benchmark_AggregateBy_34_IEnumerableint_System_Funcintint_System_Funcintint_System_Funcintintint_IEqualityComparerint_1:System.Void()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests_Benchmark_AggregateBy_34_IEnumerableint_System_Funcintint_System_Funcintint_System_Funcintintint_IEqualityComparerint_1(void)
-{
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq.System_Linq_EnumerableTests::Benchmark_All_5_IEnumerableint_System_Funcintbool_0()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests_Benchmark_All_5_IEnumerableint_System_Funcintbool_0(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	_s0 = 0;
-	_s1 = 0;
-	{
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (55 < 0 || 55 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 55 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[55] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 55 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[55])(chaos_arg_0, chaos_arg_1);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq.System_Linq_EnumerableTests::Benchmark_All_5_IEnumerableint_System_Funcintbool_1()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests_Benchmark_All_5_IEnumerableint_System_Funcintbool_1(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INTPTR _s2;
-	{
-		if (30 < 0 || 30 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 30 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[30] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 30 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[30])();
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s1 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c____9__27_0;
-	_s2 = _s1;
-	{
-		if (_s2 == 0)
-		{
-			_s1 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c____9;
-			{
-				// Hotpatch-aware ldftn wrapper (slot 785)
-				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1) -> CHAOS_IL2CPP_INTPTR {
-					auto& _d_entry = s_hotpatch_entries[785];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
-					{
-						alignas(16) uint8_t _d_ab[12];
-						ArgBuffer _d_bw(_d_ab);
-						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
-						_d_bw.WriteI32(static_cast<CHAOS_IL2CPP_INT32>(chaos_fn_arg_1));
-						CHAOS_IL2CPP_INTPTR _d_ret{};
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d_entry.method_key, _d_ab, &_d_ret);
-						return _d_ret;
-					}
-					return reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INT32)>(_d_entry.direct_ptr)(chaos_fn_arg_0, chaos_fn_arg_1);
-				};
-			_s2 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
-			}
-			{
-				const auto chaos_method_ptr = _s2;
-				const auto chaos_target = _s1;
-				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Func_System_Int32_System_Boolean_, {});
-				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Func_System_Int32_System_Boolean_.AsTypeInfoHot();
-				chaos_object->chaos_delegate_target = chaos_target;
-				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
-				_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-			}
-			_s2 = _s1;
-			{
-				auto chaos_value = _s2;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c____9__27_0 = chaos_value;
-			}
-		}
-		{
-			const auto chaos_arg_1 = _s1;
-			const auto chaos_arg_0 = _s0;
-			if (55 < 0 || 55 >= kChaosExternalRuntimeCount) {
-				CHAOS_IL2CPP_FAIL(); // external runtime table index 55 out of range
-			}
-			if (kChaosExternalRuntimeFnTable[55] == nullptr) {
-				CHAOS_IL2CPP_FAIL(); // external runtime table entry 55 is null
-			}
-			const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[55])(chaos_arg_0, chaos_arg_1);
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-		}
-		return;
-	}
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq.System_Linq_EnumerableTests::Benchmark_Any_3_IEnumerableint_0()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests_Benchmark_Any_3_IEnumerableint_0(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	_s0 = 0;
-	{
-		const auto chaos_arg_0 = _s0;
-		if (57 < 0 || 57 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 57 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[57] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 57 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[57])(chaos_arg_0);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq.System_Linq_EnumerableTests::Benchmark_Any_3_IEnumerableint_1()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests_Benchmark_Any_3_IEnumerableint_1(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	{
-		if (30 < 0 || 30 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 30 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[30] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 30 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[30])();
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	{
-		const auto chaos_arg_0 = _s0;
-		if (57 < 0 || 57 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 57 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[57] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 57 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[57])(chaos_arg_0);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq.System_Linq_EnumerableTests::Benchmark_Any_4_IEnumerableint_System_Funcintbool_0()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests_Benchmark_Any_4_IEnumerableint_System_Funcintbool_0(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	_s0 = 0;
-	_s1 = 0;
-	{
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (60 < 0 || 60 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 60 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[60] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 60 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[60])(chaos_arg_0, chaos_arg_1);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq.System_Linq_EnumerableTests::Benchmark_Any_4_IEnumerableint_System_Funcintbool_1()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests_Benchmark_Any_4_IEnumerableint_System_Funcintbool_1(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INTPTR _s2;
-	{
-		if (30 < 0 || 30 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 30 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[30] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 30 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[30])();
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s1 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c____9__23_0;
-	_s2 = _s1;
-	{
-		if (_s2 == 0)
-		{
-			_s1 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c____9;
-			{
-				// Hotpatch-aware ldftn wrapper (slot 786)
-				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1) -> CHAOS_IL2CPP_INTPTR {
-					auto& _d_entry = s_hotpatch_entries[786];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
-					{
-						alignas(16) uint8_t _d_ab[12];
-						ArgBuffer _d_bw(_d_ab);
-						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
-						_d_bw.WriteI32(static_cast<CHAOS_IL2CPP_INT32>(chaos_fn_arg_1));
-						CHAOS_IL2CPP_INTPTR _d_ret{};
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d_entry.method_key, _d_ab, &_d_ret);
-						return _d_ret;
-					}
-					return reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INT32)>(_d_entry.direct_ptr)(chaos_fn_arg_0, chaos_fn_arg_1);
-				};
-			_s2 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
-			}
-			{
-				const auto chaos_method_ptr = _s2;
-				const auto chaos_target = _s1;
-				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Func_System_Int32_System_Boolean_, {});
-				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Func_System_Int32_System_Boolean_.AsTypeInfoHot();
-				chaos_object->chaos_delegate_target = chaos_target;
-				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
-				_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-			}
-			_s2 = _s1;
-			{
-				auto chaos_value = _s2;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c____9__23_0 = chaos_value;
-			}
-		}
-		{
-			const auto chaos_arg_1 = _s1;
-			const auto chaos_arg_0 = _s0;
-			if (60 < 0 || 60 >= kChaosExternalRuntimeCount) {
-				CHAOS_IL2CPP_FAIL(); // external runtime table index 60 out of range
-			}
-			if (kChaosExternalRuntimeFnTable[60] == nullptr) {
-				CHAOS_IL2CPP_FAIL(); // external runtime table entry 60 is null
-			}
-			const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[60])(chaos_arg_0, chaos_arg_1);
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-		}
-		return;
-	}
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq.System_Linq_EnumerableTests::Benchmark_Append_6_IEnumerableint_int_0()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests_Benchmark_Append_6_IEnumerableint_int_0(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	_s0 = 0;
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	{
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (63 < 0 || 63 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 63 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[63] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 63 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[63])(chaos_arg_0, chaos_arg_1);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq.System_Linq_EnumerableTests::Benchmark_Append_6_IEnumerableint_int_1()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests_Benchmark_Append_6_IEnumerableint_int_1(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	_s0 = 0;
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	{
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (63 < 0 || 63 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 63 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[63] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 63 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[63])(chaos_arg_0, chaos_arg_1);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq.System_Linq_EnumerableTests::Benchmark_Append_6_IEnumerableint_int_2()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests_Benchmark_Append_6_IEnumerableint_int_2(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	{
-		if (30 < 0 || 30 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 30 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[30] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 30 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[30])();
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	{
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (63 < 0 || 63 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 63 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[63] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 63 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[63])(chaos_arg_0, chaos_arg_1);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq.System_Linq_EnumerableTests::Benchmark_AsEnumerable_51_IEnumerableint_0()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests_Benchmark_AsEnumerable_51_IEnumerableint_0(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	_s0 = 0;
-	{
-		const auto chaos_arg_0 = _s0;
-		if (64 < 0 || 64 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 64 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[64] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 64 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[64])(chaos_arg_0);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq.System_Linq_EnumerableTests::Benchmark_AsEnumerable_51_IEnumerableint_1()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests_Benchmark_AsEnumerable_51_IEnumerableint_1(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	{
-		if (30 < 0 || 30 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 30 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[30] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 30 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[30])();
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	{
-		const auto chaos_arg_0 = _s0;
-		if (64 < 0 || 64 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 64 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[64] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 64 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[64])(chaos_arg_0);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq.System_Linq_EnumerableTests::Benchmark_Average_10_IEnumerablefloat_0()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests_Benchmark_Average_10_IEnumerablefloat_0(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	_s0 = 0;
-	{
-		const auto chaos_arg_0 = _s0;
-		if (139 < 0 || 139 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 139 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[139] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 139 is null
-		}
-		const auto chaos_result = reinterpret_cast<float(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[139])(chaos_arg_0);
-		_s0 = ChaosStoreFloat32(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq.System_Linq_EnumerableTests::Benchmark_Average_10_IEnumerablefloat_1()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests_Benchmark_Average_10_IEnumerablefloat_1(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	{
-		if (140 < 0 || 140 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 140 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[140] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 140 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[140])();
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	{
-		const auto chaos_arg_0 = _s0;
-		if (139 < 0 || 139 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 139 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[139] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 139 is null
-		}
-		const auto chaos_result = reinterpret_cast<float(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[139])(chaos_arg_0);
-		_s0 = ChaosStoreFloat32(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq.System_Linq_EnumerableTests::Benchmark_Average_11_IEnumerabledouble_0()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests_Benchmark_Average_11_IEnumerabledouble_0(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	_s0 = 0;
-	{
-		const auto chaos_arg_0 = _s0;
-		if (141 < 0 || 141 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 141 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[141] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 141 is null
-		}
-		const auto chaos_result = reinterpret_cast<double(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[141])(chaos_arg_0);
-		_s0 = ChaosStoreFloat64(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq.System_Linq_EnumerableTests::Benchmark_Average_11_IEnumerabledouble_1()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests_Benchmark_Average_11_IEnumerabledouble_1(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	{
-		if (142 < 0 || 142 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 142 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[142] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 142 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[142])();
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	{
-		const auto chaos_arg_0 = _s0;
-		if (141 < 0 || 141 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 141 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[141] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 141 is null
-		}
-		const auto chaos_result = reinterpret_cast<double(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[141])(chaos_arg_0);
-		_s0 = ChaosStoreFloat64(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq.System_Linq_EnumerableTests::Benchmark_Average_12_IEnumerabledecimal_0()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests_Benchmark_Average_12_IEnumerabledecimal_0(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	_s0 = 0;
-	{
-		const auto chaos_arg_0 = _s0;
-		if (143 < 0 || 143 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 143 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[143] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 143 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[143])(chaos_arg_0);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq.System_Linq_EnumerableTests::Benchmark_Average_12_IEnumerabledecimal_1()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests_Benchmark_Average_12_IEnumerabledecimal_1(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	{
-		if (144 < 0 || 144 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 144 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[144] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 144 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[144])();
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	{
-		const auto chaos_arg_0 = _s0;
-		if (143 < 0 || 143 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 143 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[143] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 143 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[143])(chaos_arg_0);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq.System_Linq_EnumerableTests::Benchmark_Average_13_IEnumerableSystem_Nullableint_0()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests_Benchmark_Average_13_IEnumerableSystem_Nullableint_0(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	_s0 = 0;
-	{
-		const auto chaos_arg_0 = _s0;
-		if (74 < 0 || 74 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 74 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[74] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 74 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[74])(chaos_arg_0);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq.System_Linq_EnumerableTests::Benchmark_Average_13_IEnumerableSystem_Nullableint_1()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests_Benchmark_Average_13_IEnumerableSystem_Nullableint_1(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	{
-		if (73 < 0 || 73 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 73 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[73] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 73 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[73])();
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	{
-		const auto chaos_arg_0 = _s0;
-		if (74 < 0 || 74 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 74 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[74] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 74 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[74])(chaos_arg_0);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq.System_Linq_EnumerableTests::Benchmark_Average_14_IEnumerableSystem_Nullablelong_0()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests_Benchmark_Average_14_IEnumerableSystem_Nullablelong_0(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	_s0 = 0;
-	{
-		const auto chaos_arg_0 = _s0;
-		if (79 < 0 || 79 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 79 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[79] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 79 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[79])(chaos_arg_0);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq.System_Linq_EnumerableTests::Benchmark_Average_14_IEnumerableSystem_Nullablelong_1()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests_Benchmark_Average_14_IEnumerableSystem_Nullablelong_1(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	{
-		if (78 < 0 || 78 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 78 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[78] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 78 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[78])();
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	{
-		const auto chaos_arg_0 = _s0;
-		if (79 < 0 || 79 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 79 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[79] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 79 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[79])(chaos_arg_0);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq.System_Linq_EnumerableTests::Benchmark_Average_15_IEnumerableSystem_Nullablefloat_0()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests_Benchmark_Average_15_IEnumerableSystem_Nullablefloat_0(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	_s0 = 0;
-	{
-		const auto chaos_arg_0 = _s0;
-		if (82 < 0 || 82 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 82 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[82] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 82 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[82])(chaos_arg_0);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq.System_Linq_EnumerableTests::Benchmark_Average_15_IEnumerableSystem_Nullablefloat_1()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests_Benchmark_Average_15_IEnumerableSystem_Nullablefloat_1(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	{
-		if (81 < 0 || 81 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 81 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[81] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 81 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[81])();
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	{
-		const auto chaos_arg_0 = _s0;
-		if (82 < 0 || 82 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 82 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[82] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 82 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[82])(chaos_arg_0);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq.System_Linq_EnumerableTests::Benchmark_Average_16_IEnumerableSystem_Nullabledouble_0()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests_Benchmark_Average_16_IEnumerableSystem_Nullabledouble_0(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	_s0 = 0;
-	{
-		const auto chaos_arg_0 = _s0;
-		if (87 < 0 || 87 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 87 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[87] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 87 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[87])(chaos_arg_0);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq.System_Linq_EnumerableTests::Benchmark_Average_16_IEnumerableSystem_Nullabledouble_1()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests_Benchmark_Average_16_IEnumerableSystem_Nullabledouble_1(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	{
-		if (86 < 0 || 86 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 86 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[86] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 86 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[86])();
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	{
-		const auto chaos_arg_0 = _s0;
-		if (87 < 0 || 87 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 87 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[87] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 87 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[87])(chaos_arg_0);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq.System_Linq_EnumerableTests::Benchmark_Average_17_IEnumerableSystem_Nullabledecimal_0()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests_Benchmark_Average_17_IEnumerableSystem_Nullabledecimal_0(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	_s0 = 0;
-	{
-		const auto chaos_arg_0 = _s0;
-		if (90 < 0 || 90 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 90 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[90] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 90 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[90])(chaos_arg_0);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq.System_Linq_EnumerableTests::Benchmark_Average_17_IEnumerableSystem_Nullabledecimal_1()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests_Benchmark_Average_17_IEnumerableSystem_Nullabledecimal_1(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	{
-		if (89 < 0 || 89 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 89 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[89] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 89 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[89])();
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	{
-		const auto chaos_arg_0 = _s0;
-		if (90 < 0 || 90 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 90 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[90] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 90 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[90])(chaos_arg_0);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq.System_Linq_EnumerableTests::Benchmark_Average_18_IEnumerableint_System_Funcintint_0()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests_Benchmark_Average_18_IEnumerableint_System_Funcintint_0(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	_s0 = 0;
-	_s1 = 0;
-	{
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (145 < 0 || 145 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 145 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[145] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 145 is null
-		}
-		const auto chaos_result = reinterpret_cast<double(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[145])(chaos_arg_0, chaos_arg_1);
-		_s0 = ChaosStoreFloat64(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq.System_Linq_EnumerableTests::Benchmark_Average_18_IEnumerableint_System_Funcintint_1()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests_Benchmark_Average_18_IEnumerableint_System_Funcintint_1(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INTPTR _s2;
-	{
-		if (30 < 0 || 30 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 30 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[30] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 30 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[30])();
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s1 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c____9__83_0;
-	_s2 = _s1;
-	{
-		if (_s2 == 0)
-		{
-			_s1 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c____9;
-			{
-				// Hotpatch-aware ldftn wrapper (slot 787)
-				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1) -> CHAOS_IL2CPP_INT32 {
-					auto& _d_entry = s_hotpatch_entries[787];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
-					{
-						alignas(16) uint8_t _d_ab[12];
-						ArgBuffer _d_bw(_d_ab);
-						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
-						_d_bw.WriteI32(static_cast<CHAOS_IL2CPP_INT32>(chaos_fn_arg_1));
-						CHAOS_IL2CPP_INT32 _d_ret{};
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d_entry.method_key, _d_ab, &_d_ret);
-						return _d_ret;
-					}
-					return reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INT32)>(_d_entry.direct_ptr)(chaos_fn_arg_0, chaos_fn_arg_1);
-				};
-			_s2 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
-			}
-			{
-				const auto chaos_method_ptr = _s2;
-				const auto chaos_target = _s1;
-				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Func_System_Int32_System_Int32_, {});
-				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Func_System_Int32_System_Int32_.AsTypeInfoHot();
-				chaos_object->chaos_delegate_target = chaos_target;
-				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
-				_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-			}
-			_s2 = _s1;
-			{
-				auto chaos_value = _s2;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c____9__83_0 = chaos_value;
-			}
-		}
-		{
-			const auto chaos_arg_1 = _s1;
-			const auto chaos_arg_0 = _s0;
-			if (145 < 0 || 145 >= kChaosExternalRuntimeCount) {
-				CHAOS_IL2CPP_FAIL(); // external runtime table index 145 out of range
-			}
-			if (kChaosExternalRuntimeFnTable[145] == nullptr) {
-				CHAOS_IL2CPP_FAIL(); // external runtime table entry 145 is null
-			}
-			const auto chaos_result = reinterpret_cast<double(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[145])(chaos_arg_0, chaos_arg_1);
-			_s0 = ChaosStoreFloat64(chaos_result);
-		}
-		return;
-	}
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq.System_Linq_EnumerableTests::Benchmark_Average_19_IEnumerableint_System_Funcintlong_0()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests_Benchmark_Average_19_IEnumerableint_System_Funcintlong_0(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	_s0 = 0;
-	_s1 = 0;
-	{
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (147 < 0 || 147 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 147 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[147] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 147 is null
-		}
-		const auto chaos_result = reinterpret_cast<double(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[147])(chaos_arg_0, chaos_arg_1);
-		_s0 = ChaosStoreFloat64(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq.System_Linq_EnumerableTests::Benchmark_Average_19_IEnumerableint_System_Funcintlong_1()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests_Benchmark_Average_19_IEnumerableint_System_Funcintlong_1(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INTPTR _s2;
-	{
-		if (30 < 0 || 30 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 30 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[30] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 30 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[30])();
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s1 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c____9__87_0;
-	_s2 = _s1;
-	{
-		if (_s2 == 0)
-		{
-			_s1 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c____9;
-			{
-				// Hotpatch-aware ldftn wrapper (slot 788)
-				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1) -> CHAOS_IL2CPP_INT64 {
-					auto& _d_entry = s_hotpatch_entries[788];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
-					{
-						alignas(16) uint8_t _d_ab[12];
-						ArgBuffer _d_bw(_d_ab);
-						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
-						_d_bw.WriteI32(static_cast<CHAOS_IL2CPP_INT32>(chaos_fn_arg_1));
-						CHAOS_IL2CPP_INT64 _d_ret{};
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d_entry.method_key, _d_ab, &_d_ret);
-						return _d_ret;
-					}
-					return reinterpret_cast<CHAOS_IL2CPP_INT64(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INT32)>(_d_entry.direct_ptr)(chaos_fn_arg_0, chaos_fn_arg_1);
-				};
-			_s2 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
-			}
-			{
-				const auto chaos_method_ptr = _s2;
-				const auto chaos_target = _s1;
-				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Func_System_Int32_System_Int64_, {});
-				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Func_System_Int32_System_Int64_.AsTypeInfoHot();
-				chaos_object->chaos_delegate_target = chaos_target;
-				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
-				_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-			}
-			_s2 = _s1;
-			{
-				auto chaos_value = _s2;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c____9__87_0 = chaos_value;
-			}
-		}
-		{
-			const auto chaos_arg_1 = _s1;
-			const auto chaos_arg_0 = _s0;
-			if (147 < 0 || 147 >= kChaosExternalRuntimeCount) {
-				CHAOS_IL2CPP_FAIL(); // external runtime table index 147 out of range
-			}
-			if (kChaosExternalRuntimeFnTable[147] == nullptr) {
-				CHAOS_IL2CPP_FAIL(); // external runtime table entry 147 is null
-			}
-			const auto chaos_result = reinterpret_cast<double(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[147])(chaos_arg_0, chaos_arg_1);
-			_s0 = ChaosStoreFloat64(chaos_result);
-		}
-		return;
-	}
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq.System_Linq_EnumerableTests::Benchmark_Average_20_IEnumerableint_System_Funcintfloat_0()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests_Benchmark_Average_20_IEnumerableint_System_Funcintfloat_0(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	_s0 = 0;
-	_s1 = 0;
-	{
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (150 < 0 || 150 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 150 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[150] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 150 is null
-		}
-		const auto chaos_result = reinterpret_cast<float(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[150])(chaos_arg_0, chaos_arg_1);
-		_s0 = ChaosStoreFloat32(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq.System_Linq_EnumerableTests::Benchmark_Average_20_IEnumerableint_System_Funcintfloat_1()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests_Benchmark_Average_20_IEnumerableint_System_Funcintfloat_1(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INTPTR _s2;
-	{
-		if (30 < 0 || 30 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 30 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[30] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 30 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[30])();
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s1 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c____9__91_0;
-	_s2 = _s1;
-	{
-		if (_s2 == 0)
-		{
-			_s1 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c____9;
-			{
-				// Hotpatch-aware ldftn wrapper (slot 789)
-				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1) -> float {
-					auto& _d_entry = s_hotpatch_entries[789];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
-					{
-						alignas(16) uint8_t _d_ab[12];
-						ArgBuffer _d_bw(_d_ab);
-						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
-						_d_bw.WriteI32(static_cast<CHAOS_IL2CPP_INT32>(chaos_fn_arg_1));
-						float _d_ret{};
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d_entry.method_key, _d_ab, &_d_ret);
-						return _d_ret;
-					}
-					return reinterpret_cast<float(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INT32)>(_d_entry.direct_ptr)(chaos_fn_arg_0, chaos_fn_arg_1);
-				};
-			_s2 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
-			}
-			{
-				const auto chaos_method_ptr = _s2;
-				const auto chaos_target = _s1;
-				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Func_System_Int32_System_Single_, {});
-				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Func_System_Int32_System_Single_.AsTypeInfoHot();
-				chaos_object->chaos_delegate_target = chaos_target;
-				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
-				_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-			}
-			_s2 = _s1;
-			{
-				auto chaos_value = _s2;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c____9__91_0 = chaos_value;
-			}
-		}
-		{
-			const auto chaos_arg_1 = _s1;
-			const auto chaos_arg_0 = _s0;
-			if (150 < 0 || 150 >= kChaosExternalRuntimeCount) {
-				CHAOS_IL2CPP_FAIL(); // external runtime table index 150 out of range
-			}
-			if (kChaosExternalRuntimeFnTable[150] == nullptr) {
-				CHAOS_IL2CPP_FAIL(); // external runtime table entry 150 is null
-			}
-			const auto chaos_result = reinterpret_cast<float(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[150])(chaos_arg_0, chaos_arg_1);
-			_s0 = ChaosStoreFloat32(chaos_result);
-		}
-		return;
-	}
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq.System_Linq_EnumerableTests::Benchmark_Average_21_IEnumerableint_System_Funcintdouble_0()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests_Benchmark_Average_21_IEnumerableint_System_Funcintdouble_0(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	_s0 = 0;
-	_s1 = 0;
-	{
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (153 < 0 || 153 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 153 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[153] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 153 is null
-		}
-		const auto chaos_result = reinterpret_cast<double(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[153])(chaos_arg_0, chaos_arg_1);
-		_s0 = ChaosStoreFloat64(chaos_result);
-	}
-	return;
-}
-
 // Managed method: CombinedSubjects/AutoGenerated.System_Linq.System_Linq_EnumerableTests::Benchmark_Average_21_IEnumerableint_System_Funcintdouble_1()
 extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests_Benchmark_Average_21_IEnumerableint_System_Funcintdouble_1(void)
 {
@@ -3075,14 +1166,12 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_Enumerabl
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
 	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
 	{
-		if (30 < 0 || 30 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 30 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[30] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 30 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[30])();
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__Empty_System_Int32__System_Collections_Generic_IEnumerable_System_Int32___();
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	_s1 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c____9__95_0;
@@ -3092,9 +1181,9 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_Enumerabl
 		{
 			_s1 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c____9;
 			{
-				// Hotpatch-aware ldftn wrapper (slot 790)
+				// Hotpatch-aware ldftn wrapper (slot 754)
 				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1) -> double {
-					auto& _d_entry = s_hotpatch_entries[790];
+					auto& _d_entry = s_hotpatch_entries[754];
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
 						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
 					{
@@ -3127,16 +1216,8 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_Enumerabl
 			}
 		}
 		{
-			const auto chaos_arg_1 = _s1;
-			const auto chaos_arg_0 = _s0;
-			if (153 < 0 || 153 >= kChaosExternalRuntimeCount) {
-				CHAOS_IL2CPP_FAIL(); // external runtime table index 153 out of range
-			}
-			if (kChaosExternalRuntimeFnTable[153] == nullptr) {
-				CHAOS_IL2CPP_FAIL(); // external runtime table entry 153 is null
-			}
-			const auto chaos_result = reinterpret_cast<double(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[153])(chaos_arg_0, chaos_arg_1);
-			_s0 = ChaosStoreFloat64(chaos_result);
+			const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__Average_System_Int32__System_Double_System_Collections_Generic_IEnumerable_System_Int32__System_Func_System_Int32_System_Double__();
+			_s2 = ChaosStoreFloat64(chaos_result);
 		}
 		return;
 	}
@@ -3150,19 +1231,16 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_Enumerabl
 
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
 	_s0 = 0;
 	_s1 = 0;
 	{
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (156 < 0 || 156 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 156 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[156] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 156 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[156])(chaos_arg_0, chaos_arg_1);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__Average_System_Int32__System_Decimal_System_Collections_Generic_IEnumerable_System_Int32__System_Func_System_Int32_System_Decimal__();
+		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	return;
 }
@@ -3176,14 +1254,12 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_Enumerabl
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
 	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
 	{
-		if (30 < 0 || 30 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 30 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[30] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 30 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[30])();
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__Empty_System_Int32__System_Collections_Generic_IEnumerable_System_Int32___();
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	_s1 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c____9__99_0;
@@ -3193,9 +1269,9 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_Enumerabl
 		{
 			_s1 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c____9;
 			{
-				// Hotpatch-aware ldftn wrapper (slot 791)
+				// Hotpatch-aware ldftn wrapper (slot 755)
 				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1) -> CHAOS_IL2CPP_INTPTR {
-					auto& _d_entry = s_hotpatch_entries[791];
+					auto& _d_entry = s_hotpatch_entries[755];
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
 						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
 					{
@@ -3228,16 +1304,8 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_Enumerabl
 			}
 		}
 		{
-			const auto chaos_arg_1 = _s1;
-			const auto chaos_arg_0 = _s0;
-			if (156 < 0 || 156 >= kChaosExternalRuntimeCount) {
-				CHAOS_IL2CPP_FAIL(); // external runtime table index 156 out of range
-			}
-			if (kChaosExternalRuntimeFnTable[156] == nullptr) {
-				CHAOS_IL2CPP_FAIL(); // external runtime table entry 156 is null
-			}
-			const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[156])(chaos_arg_0, chaos_arg_1);
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__Average_System_Int32__System_Decimal_System_Collections_Generic_IEnumerable_System_Int32__System_Func_System_Int32_System_Decimal__();
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 		}
 		return;
 	}
@@ -3251,19 +1319,16 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_Enumerabl
 
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
 	_s0 = 0;
 	_s1 = 0;
 	{
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (106 < 0 || 106 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 106 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[106] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 106 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[106])(chaos_arg_0, chaos_arg_1);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__Average_System_Int32__System_Nullable_System_Double__System_Collections_Generic_IEnumerable_System_Int32__System_Func_System_Int32_System_Nullable_System_Int32___();
+		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	return;
 }
@@ -3277,14 +1342,12 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_Enumerabl
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
 	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
 	{
-		if (30 < 0 || 30 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 30 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[30] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 30 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[30])();
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__Empty_System_Int32__System_Collections_Generic_IEnumerable_System_Int32___();
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	_s1 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c____9__103_0;
@@ -3294,9 +1357,9 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_Enumerabl
 		{
 			_s1 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c____9;
 			{
-				// Hotpatch-aware ldftn wrapper (slot 792)
+				// Hotpatch-aware ldftn wrapper (slot 756)
 				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1) -> CHAOS_IL2CPP_INTPTR {
-					auto& _d_entry = s_hotpatch_entries[792];
+					auto& _d_entry = s_hotpatch_entries[756];
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
 						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
 					{
@@ -3329,16 +1392,8 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_Enumerabl
 			}
 		}
 		{
-			const auto chaos_arg_1 = _s1;
-			const auto chaos_arg_0 = _s0;
-			if (106 < 0 || 106 >= kChaosExternalRuntimeCount) {
-				CHAOS_IL2CPP_FAIL(); // external runtime table index 106 out of range
-			}
-			if (kChaosExternalRuntimeFnTable[106] == nullptr) {
-				CHAOS_IL2CPP_FAIL(); // external runtime table entry 106 is null
-			}
-			const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[106])(chaos_arg_0, chaos_arg_1);
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__Average_System_Int32__System_Nullable_System_Double__System_Collections_Generic_IEnumerable_System_Int32__System_Func_System_Int32_System_Nullable_System_Int32___();
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 		}
 		return;
 	}
@@ -3352,19 +1407,16 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_Enumerabl
 
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
 	_s0 = 0;
 	_s1 = 0;
 	{
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (110 < 0 || 110 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 110 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[110] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 110 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[110])(chaos_arg_0, chaos_arg_1);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__Average_System_Int32__System_Nullable_System_Double__System_Collections_Generic_IEnumerable_System_Int32__System_Func_System_Int32_System_Nullable_System_Int64___();
+		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	return;
 }
@@ -3378,14 +1430,12 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_Enumerabl
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
 	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
 	{
-		if (30 < 0 || 30 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 30 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[30] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 30 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[30])();
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__Empty_System_Int32__System_Collections_Generic_IEnumerable_System_Int32___();
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	_s1 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c____9__107_0;
@@ -3395,9 +1445,9 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_Enumerabl
 		{
 			_s1 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c____9;
 			{
-				// Hotpatch-aware ldftn wrapper (slot 793)
+				// Hotpatch-aware ldftn wrapper (slot 757)
 				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1) -> CHAOS_IL2CPP_INTPTR {
-					auto& _d_entry = s_hotpatch_entries[793];
+					auto& _d_entry = s_hotpatch_entries[757];
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
 						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
 					{
@@ -3430,16 +1480,8 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_Enumerabl
 			}
 		}
 		{
-			const auto chaos_arg_1 = _s1;
-			const auto chaos_arg_0 = _s0;
-			if (110 < 0 || 110 >= kChaosExternalRuntimeCount) {
-				CHAOS_IL2CPP_FAIL(); // external runtime table index 110 out of range
-			}
-			if (kChaosExternalRuntimeFnTable[110] == nullptr) {
-				CHAOS_IL2CPP_FAIL(); // external runtime table entry 110 is null
-			}
-			const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[110])(chaos_arg_0, chaos_arg_1);
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__Average_System_Int32__System_Nullable_System_Double__System_Collections_Generic_IEnumerable_System_Int32__System_Func_System_Int32_System_Nullable_System_Int64___();
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 		}
 		return;
 	}
@@ -3453,19 +1495,16 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_Enumerabl
 
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
 	_s0 = 0;
 	_s1 = 0;
 	{
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (114 < 0 || 114 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 114 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[114] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 114 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[114])(chaos_arg_0, chaos_arg_1);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__Average_System_Int32__System_Nullable_System_Single__System_Collections_Generic_IEnumerable_System_Int32__System_Func_System_Int32_System_Nullable_System_Single___();
+		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	return;
 }
@@ -3479,14 +1518,12 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_Enumerabl
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
 	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
 	{
-		if (30 < 0 || 30 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 30 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[30] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 30 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[30])();
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__Empty_System_Int32__System_Collections_Generic_IEnumerable_System_Int32___();
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	_s1 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c____9__111_0;
@@ -3496,9 +1533,9 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_Enumerabl
 		{
 			_s1 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c____9;
 			{
-				// Hotpatch-aware ldftn wrapper (slot 794)
+				// Hotpatch-aware ldftn wrapper (slot 758)
 				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1) -> CHAOS_IL2CPP_INTPTR {
-					auto& _d_entry = s_hotpatch_entries[794];
+					auto& _d_entry = s_hotpatch_entries[758];
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
 						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
 					{
@@ -3531,16 +1568,8 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_Enumerabl
 			}
 		}
 		{
-			const auto chaos_arg_1 = _s1;
-			const auto chaos_arg_0 = _s0;
-			if (114 < 0 || 114 >= kChaosExternalRuntimeCount) {
-				CHAOS_IL2CPP_FAIL(); // external runtime table index 114 out of range
-			}
-			if (kChaosExternalRuntimeFnTable[114] == nullptr) {
-				CHAOS_IL2CPP_FAIL(); // external runtime table entry 114 is null
-			}
-			const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[114])(chaos_arg_0, chaos_arg_1);
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__Average_System_Int32__System_Nullable_System_Single__System_Collections_Generic_IEnumerable_System_Int32__System_Func_System_Int32_System_Nullable_System_Single___();
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 		}
 		return;
 	}
@@ -3554,19 +1583,16 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_Enumerabl
 
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
 	_s0 = 0;
 	_s1 = 0;
 	{
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (118 < 0 || 118 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 118 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[118] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 118 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[118])(chaos_arg_0, chaos_arg_1);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__Average_System_Int32__System_Nullable_System_Double__System_Collections_Generic_IEnumerable_System_Int32__System_Func_System_Int32_System_Nullable_System_Double___();
+		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	return;
 }
@@ -3580,14 +1606,12 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_Enumerabl
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
 	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
 	{
-		if (30 < 0 || 30 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 30 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[30] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 30 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[30])();
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__Empty_System_Int32__System_Collections_Generic_IEnumerable_System_Int32___();
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	_s1 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c____9__115_0;
@@ -3597,9 +1621,9 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_Enumerabl
 		{
 			_s1 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c____9;
 			{
-				// Hotpatch-aware ldftn wrapper (slot 795)
+				// Hotpatch-aware ldftn wrapper (slot 759)
 				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1) -> CHAOS_IL2CPP_INTPTR {
-					auto& _d_entry = s_hotpatch_entries[795];
+					auto& _d_entry = s_hotpatch_entries[759];
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
 						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
 					{
@@ -3632,16 +1656,8 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_Enumerabl
 			}
 		}
 		{
-			const auto chaos_arg_1 = _s1;
-			const auto chaos_arg_0 = _s0;
-			if (118 < 0 || 118 >= kChaosExternalRuntimeCount) {
-				CHAOS_IL2CPP_FAIL(); // external runtime table index 118 out of range
-			}
-			if (kChaosExternalRuntimeFnTable[118] == nullptr) {
-				CHAOS_IL2CPP_FAIL(); // external runtime table entry 118 is null
-			}
-			const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[118])(chaos_arg_0, chaos_arg_1);
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__Average_System_Int32__System_Nullable_System_Double__System_Collections_Generic_IEnumerable_System_Int32__System_Func_System_Int32_System_Nullable_System_Double___();
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 		}
 		return;
 	}
@@ -3655,19 +1671,16 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_Enumerabl
 
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
 	_s0 = 0;
 	_s1 = 0;
 	{
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (122 < 0 || 122 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 122 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[122] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 122 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[122])(chaos_arg_0, chaos_arg_1);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__Average_System_Int32__System_Nullable_System_Decimal__System_Collections_Generic_IEnumerable_System_Int32__System_Func_System_Int32_System_Nullable_System_Decimal___();
+		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	return;
 }
@@ -3681,14 +1694,12 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_Enumerabl
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
 	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
 	{
-		if (30 < 0 || 30 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 30 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[30] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 30 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[30])();
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__Empty_System_Int32__System_Collections_Generic_IEnumerable_System_Int32___();
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	_s1 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c____9__119_0;
@@ -3698,9 +1709,9 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_Enumerabl
 		{
 			_s1 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c____9;
 			{
-				// Hotpatch-aware ldftn wrapper (slot 796)
+				// Hotpatch-aware ldftn wrapper (slot 760)
 				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1) -> CHAOS_IL2CPP_INTPTR {
-					auto& _d_entry = s_hotpatch_entries[796];
+					auto& _d_entry = s_hotpatch_entries[760];
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
 						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
 					{
@@ -3733,16 +1744,8 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_Enumerabl
 			}
 		}
 		{
-			const auto chaos_arg_1 = _s1;
-			const auto chaos_arg_0 = _s0;
-			if (122 < 0 || 122 >= kChaosExternalRuntimeCount) {
-				CHAOS_IL2CPP_FAIL(); // external runtime table index 122 out of range
-			}
-			if (kChaosExternalRuntimeFnTable[122] == nullptr) {
-				CHAOS_IL2CPP_FAIL(); // external runtime table entry 122 is null
-			}
-			const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[122])(chaos_arg_0, chaos_arg_1);
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__Average_System_Int32__System_Nullable_System_Decimal__System_Collections_Generic_IEnumerable_System_Int32__System_Func_System_Int32_System_Nullable_System_Decimal___();
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 		}
 		return;
 	}
@@ -3755,17 +1758,15 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_Enumerabl
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 
 	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
 	_s0 = 0;
 	{
-		const auto chaos_arg_0 = _s0;
-		if (164 < 0 || 164 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 164 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[164] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 164 is null
-		}
-		const auto chaos_result = reinterpret_cast<double(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[164])(chaos_arg_0);
-		_s0 = ChaosStoreFloat64(chaos_result);
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__Average_System_Double_System_Collections_Generic_IEnumerable_System_Int32__();
+		_s1 = ChaosStoreFloat64(chaos_result);
 	}
 	return;
 }
@@ -3777,26 +1778,18 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_Enumerabl
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 
 	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
 	{
-		if (30 < 0 || 30 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 30 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[30] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 30 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[30])();
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__Empty_System_Int32__System_Collections_Generic_IEnumerable_System_Int32___();
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	{
-		const auto chaos_arg_0 = _s0;
-		if (164 < 0 || 164 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 164 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[164] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 164 is null
-		}
-		const auto chaos_result = reinterpret_cast<double(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[164])(chaos_arg_0);
-		_s0 = ChaosStoreFloat64(chaos_result);
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__Average_System_Double_System_Collections_Generic_IEnumerable_System_Int32__();
+		_s1 = ChaosStoreFloat64(chaos_result);
 	}
 	return;
 }
@@ -3808,17 +1801,15 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_Enumerabl
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 
 	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
 	_s0 = 0;
 	{
-		const auto chaos_arg_0 = _s0;
-		if (165 < 0 || 165 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 165 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[165] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 165 is null
-		}
-		const auto chaos_result = reinterpret_cast<double(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[165])(chaos_arg_0);
-		_s0 = ChaosStoreFloat64(chaos_result);
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__Average_System_Double_System_Collections_Generic_IEnumerable_System_Int64__();
+		_s1 = ChaosStoreFloat64(chaos_result);
 	}
 	return;
 }
@@ -3830,26 +1821,18 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_Enumerabl
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 
 	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
 	{
-		if (166 < 0 || 166 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 166 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[166] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 166 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[166])();
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__Empty_System_Int64__System_Collections_Generic_IEnumerable_System_Int64___();
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	{
-		const auto chaos_arg_0 = _s0;
-		if (165 < 0 || 165 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 165 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[165] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 165 is null
-		}
-		const auto chaos_result = reinterpret_cast<double(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[165])(chaos_arg_0);
-		_s0 = ChaosStoreFloat64(chaos_result);
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__Average_System_Double_System_Collections_Generic_IEnumerable_System_Int64__();
+		_s1 = ChaosStoreFloat64(chaos_result);
 	}
 	return;
 }
@@ -3861,17 +1844,15 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_Enumerabl
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 
 	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
 	_s0 = 0;
 	{
-		const auto chaos_arg_0 = _s0;
-		if (167 < 0 || 167 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 167 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[167] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 167 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[167])(chaos_arg_0);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__Cast_System_Int32__System_Collections_Generic_IEnumerable_System_Int32__System_Collections_IEnumerable_();
+		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	return;
 }
@@ -3883,26 +1864,18 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_Enumerabl
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 
 	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
 	{
-		if (168 < 0 || 168 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 168 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[168] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 168 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[168])();
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__Empty_System_Object__System_Collections_Generic_IEnumerable_System_Object___();
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	{
-		const auto chaos_arg_0 = _s0;
-		if (167 < 0 || 167 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 167 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[167] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 167 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[167])(chaos_arg_0);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__Cast_System_Int32__System_Collections_Generic_IEnumerable_System_Int32__System_Collections_IEnumerable_();
+		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	return;
 }
@@ -3915,19 +1888,16 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_Enumerabl
 
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
 	_s0 = 0;
 	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
 	{
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (169 < 0 || 169 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 169 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[169] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 169 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[169])(chaos_arg_0, chaos_arg_1);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__Chunk_System_Int32__System_Collections_Generic_IEnumerable_System_Int32____System_Collections_Generic_IEnumerable_System_Int32__System_Int32_();
+		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	return;
 }
@@ -3940,19 +1910,16 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_Enumerabl
 
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
 	_s0 = 0;
 	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
 	{
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (169 < 0 || 169 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 169 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[169] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 169 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[169])(chaos_arg_0, chaos_arg_1);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__Chunk_System_Int32__System_Collections_Generic_IEnumerable_System_Int32____System_Collections_Generic_IEnumerable_System_Int32__System_Int32_();
+		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	return;
 }
@@ -3965,28 +1932,19 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_Enumerabl
 
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
 	{
-		if (30 < 0 || 30 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 30 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[30] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 30 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[30])();
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__Empty_System_Int32__System_Collections_Generic_IEnumerable_System_Int32___();
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
 	{
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (169 < 0 || 169 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 169 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[169] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 169 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[169])(chaos_arg_0, chaos_arg_1);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__Chunk_System_Int32__System_Collections_Generic_IEnumerable_System_Int32____System_Collections_Generic_IEnumerable_System_Int32__System_Int32_();
+		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	return;
 }
@@ -3999,19 +1957,16 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_Enumerabl
 
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
 	_s0 = 0;
 	_s1 = 0;
 	{
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (170 < 0 || 170 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 170 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[170] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 170 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[170])(chaos_arg_0, chaos_arg_1);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__Concat_System_Int32__System_Collections_Generic_IEnumerable_System_Int32__System_Collections_Generic_IEnumerable_System_Int32__System_Collections_Generic_IEnumerable_System_Int32__();
+		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	return;
 }
@@ -4024,37 +1979,22 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_Enumerabl
 
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
 	{
-		if (30 < 0 || 30 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 30 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[30] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 30 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[30])();
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__Empty_System_Int32__System_Collections_Generic_IEnumerable_System_Int32___();
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	{
-		if (30 < 0 || 30 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 30 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[30] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 30 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[30])();
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__Empty_System_Int32__System_Collections_Generic_IEnumerable_System_Int32___();
 		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	{
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (170 < 0 || 170 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 170 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[170] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 170 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[170])(chaos_arg_0, chaos_arg_1);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__Concat_System_Int32__System_Collections_Generic_IEnumerable_System_Int32__System_Collections_Generic_IEnumerable_System_Int32__System_Collections_Generic_IEnumerable_System_Int32__();
+		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	return;
 }
@@ -4067,19 +2007,16 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_Enumerabl
 
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
 	_s0 = 0;
 	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
 	{
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (171 < 0 || 171 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 171 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[171] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 171 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[171])(chaos_arg_0, chaos_arg_1);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__Contains_System_Int32__System_Boolean_System_Collections_Generic_IEnumerable_System_Int32__System_Int32_();
+		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	return;
 }
@@ -4092,19 +2029,16 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_Enumerabl
 
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
 	_s0 = 0;
 	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
 	{
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (171 < 0 || 171 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 171 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[171] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 171 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[171])(chaos_arg_0, chaos_arg_1);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__Contains_System_Int32__System_Boolean_System_Collections_Generic_IEnumerable_System_Int32__System_Int32_();
+		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	return;
 }
@@ -4117,28 +2051,19 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_Enumerabl
 
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
 	{
-		if (30 < 0 || 30 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 30 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[30] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 30 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[30])();
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__Empty_System_Int32__System_Collections_Generic_IEnumerable_System_Int32___();
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
 	{
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (171 < 0 || 171 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 171 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[171] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 171 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[171])(chaos_arg_0, chaos_arg_1);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__Contains_System_Int32__System_Boolean_System_Collections_Generic_IEnumerable_System_Int32__System_Int32_();
+		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	return;
 }
@@ -4152,21 +2077,17 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_Enumerabl
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
 	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INTPTR _s5;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
 	_s0 = 0;
 	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
 	_s2 = 0;
 	{
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (172 < 0 || 172 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 172 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[172] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 172 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[172])(chaos_arg_0, chaos_arg_1, chaos_arg_2);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__Contains_System_Int32__System_Boolean_System_Collections_Generic_IEnumerable_System_Int32__System_Int32_System_Collections_Generic_IEqualityComparer_System_Int32__();
+		_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	return;
 }
@@ -4180,21 +2101,17 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_Enumerabl
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
 	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INTPTR _s5;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
 	_s0 = 0;
 	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
 	_s2 = 0;
 	{
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (172 < 0 || 172 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 172 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[172] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 172 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[172])(chaos_arg_0, chaos_arg_1, chaos_arg_2);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__Contains_System_Int32__System_Boolean_System_Collections_Generic_IEnumerable_System_Int32__System_Int32_System_Collections_Generic_IEqualityComparer_System_Int32__();
+		_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	return;
 }
@@ -4208,39 +2125,23 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_Enumerabl
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
 	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INTPTR _s5;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
 	{
-		if (30 < 0 || 30 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 30 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[30] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 30 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[30])();
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__Empty_System_Int32__System_Collections_Generic_IEnumerable_System_Int32___();
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
 	{
-		if (44 < 0 || 44 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 44 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[44] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 44 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[44])();
+		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Collections_Generic_EqualityComparer_System_Int32___get_Default_System_Collections_Generic_EqualityComparer_System_Int32___();
 		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	{
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (172 < 0 || 172 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 172 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[172] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 172 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[172])(chaos_arg_0, chaos_arg_1, chaos_arg_2);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__Contains_System_Int32__System_Boolean_System_Collections_Generic_IEnumerable_System_Int32__System_Int32_System_Collections_Generic_IEqualityComparer_System_Int32__();
+		_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	return;
 }
@@ -4252,17 +2153,15 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_Enumerabl
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 
 	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
 	_s0 = 0;
 	{
-		const auto chaos_arg_0 = _s0;
-		if (173 < 0 || 173 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 173 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[173] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 173 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[173])(chaos_arg_0);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__Count_System_Int32__System_Int32_System_Collections_Generic_IEnumerable_System_Int32__();
+		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	return;
 }
@@ -4274,26 +2173,18 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_Enumerabl
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 
 	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
 	{
-		if (30 < 0 || 30 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 30 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[30] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 30 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[30])();
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__Empty_System_Int32__System_Collections_Generic_IEnumerable_System_Int32___();
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	{
-		const auto chaos_arg_0 = _s0;
-		if (173 < 0 || 173 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 173 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[173] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 173 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[173])(chaos_arg_0);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__Count_System_Int32__System_Int32_System_Collections_Generic_IEnumerable_System_Int32__();
+		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	return;
 }
@@ -4306,19 +2197,16 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_Enumerabl
 
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
 	_s0 = 0;
 	_s1 = 0;
 	{
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (174 < 0 || 174 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 174 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[174] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 174 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[174])(chaos_arg_0, chaos_arg_1);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__Count_System_Int32__System_Int32_System_Collections_Generic_IEnumerable_System_Int32__System_Func_System_Int32_System_Boolean__();
+		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	return;
 }
@@ -4332,14 +2220,12 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_Enumerabl
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
 	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
 	{
-		if (30 < 0 || 30 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 30 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[30] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 30 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[30])();
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__Empty_System_Int32__System_Collections_Generic_IEnumerable_System_Int32___();
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	_s1 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c____9__167_0;
@@ -4349,9 +2235,9 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_Enumerabl
 		{
 			_s1 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c____9;
 			{
-				// Hotpatch-aware ldftn wrapper (slot 797)
+				// Hotpatch-aware ldftn wrapper (slot 761)
 				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1) -> CHAOS_IL2CPP_INTPTR {
-					auto& _d_entry = s_hotpatch_entries[797];
+					auto& _d_entry = s_hotpatch_entries[761];
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
 						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
 					{
@@ -4384,16 +2270,8 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_Enumerabl
 			}
 		}
 		{
-			const auto chaos_arg_1 = _s1;
-			const auto chaos_arg_0 = _s0;
-			if (174 < 0 || 174 >= kChaosExternalRuntimeCount) {
-				CHAOS_IL2CPP_FAIL(); // external runtime table index 174 out of range
-			}
-			if (kChaosExternalRuntimeFnTable[174] == nullptr) {
-				CHAOS_IL2CPP_FAIL(); // external runtime table entry 174 is null
-			}
-			const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[174])(chaos_arg_0, chaos_arg_1);
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__Count_System_Int32__System_Int32_System_Collections_Generic_IEnumerable_System_Int32__System_Func_System_Int32_System_Boolean__();
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 		}
 		return;
 	}
@@ -4408,21 +2286,17 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_Enumerabl
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
 	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INTPTR _s5;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
 	_s0 = 0;
 	_s1 = 0;
 	_s2 = 0;
 	{
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (176 < 0 || 176 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 176 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[176] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 176 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[176])(chaos_arg_0, chaos_arg_1, chaos_arg_2);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__CountBy_System_Int32_System_Int32__System_Collections_Generic_IEnumerable_System_Collections_Generic_KeyValuePair_System_Int32_System_Int32___System_Collections_Generic_IEnumerable_System_Int32__System_Func_System_Int32_System_Int32__System_Collections_Generic_IEqualityComparer_System_Int32__();
+		_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	return;
 }
@@ -4436,14 +2310,13 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_Enumerabl
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
 	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INTPTR _s5;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
 	{
-		if (30 < 0 || 30 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 30 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[30] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 30 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[30])();
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__Empty_System_Int32__System_Collections_Generic_IEnumerable_System_Int32___();
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	_s1 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c____9__159_0;
@@ -4453,9 +2326,9 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_Enumerabl
 		{
 			_s1 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c____9;
 			{
-				// Hotpatch-aware ldftn wrapper (slot 798)
+				// Hotpatch-aware ldftn wrapper (slot 762)
 				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1) -> CHAOS_IL2CPP_INT32 {
-					auto& _d_entry = s_hotpatch_entries[798];
+					auto& _d_entry = s_hotpatch_entries[762];
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
 						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
 					{
@@ -4488,27 +2361,12 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_Enumerabl
 			}
 		}
 		{
-			if (44 < 0 || 44 >= kChaosExternalRuntimeCount) {
-				CHAOS_IL2CPP_FAIL(); // external runtime table index 44 out of range
-			}
-			if (kChaosExternalRuntimeFnTable[44] == nullptr) {
-				CHAOS_IL2CPP_FAIL(); // external runtime table entry 44 is null
-			}
-			const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[44])();
+			const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Collections_Generic_EqualityComparer_System_Int32___get_Default_System_Collections_Generic_EqualityComparer_System_Int32___();
 			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 		}
 		{
-			const auto chaos_arg_2 = _s2;
-			const auto chaos_arg_1 = _s1;
-			const auto chaos_arg_0 = _s0;
-			if (176 < 0 || 176 >= kChaosExternalRuntimeCount) {
-				CHAOS_IL2CPP_FAIL(); // external runtime table index 176 out of range
-			}
-			if (kChaosExternalRuntimeFnTable[176] == nullptr) {
-				CHAOS_IL2CPP_FAIL(); // external runtime table entry 176 is null
-			}
-			const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[176])(chaos_arg_0, chaos_arg_1, chaos_arg_2);
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__CountBy_System_Int32_System_Int32__System_Collections_Generic_IEnumerable_System_Collections_Generic_KeyValuePair_System_Int32_System_Int32___System_Collections_Generic_IEnumerable_System_Int32__System_Func_System_Int32_System_Int32__System_Collections_Generic_IEqualityComparer_System_Int32__();
+			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 		}
 		return;
 	}
@@ -4521,17 +2379,15 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_Enumerabl
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 
 	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
 	_s0 = 0;
 	{
-		const auto chaos_arg_0 = _s0;
-		if (178 < 0 || 178 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 178 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[178] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 178 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[178])(chaos_arg_0);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__DefaultIfEmpty_System_Int32__System_Collections_Generic_IEnumerable_System_Int32__System_Collections_Generic_IEnumerable_System_Int32__();
+		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	return;
 }
@@ -4543,26 +2399,18 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_Enumerabl
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 
 	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
 	{
-		if (30 < 0 || 30 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 30 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[30] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 30 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[30])();
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__Empty_System_Int32__System_Collections_Generic_IEnumerable_System_Int32___();
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	{
-		const auto chaos_arg_0 = _s0;
-		if (178 < 0 || 178 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 178 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[178] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 178 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[178])(chaos_arg_0);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__DefaultIfEmpty_System_Int32__System_Collections_Generic_IEnumerable_System_Int32__System_Collections_Generic_IEnumerable_System_Int32__();
+		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	return;
 }
@@ -4575,19 +2423,16 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_Enumerabl
 
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
 	_s0 = 0;
 	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
 	{
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (179 < 0 || 179 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 179 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[179] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 179 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[179])(chaos_arg_0, chaos_arg_1);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__DefaultIfEmpty_System_Int32__System_Collections_Generic_IEnumerable_System_Int32__System_Collections_Generic_IEnumerable_System_Int32__System_Int32_();
+		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	return;
 }
@@ -4600,19 +2445,16 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_Enumerabl
 
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
 	_s0 = 0;
 	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
 	{
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (179 < 0 || 179 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 179 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[179] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 179 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[179])(chaos_arg_0, chaos_arg_1);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__DefaultIfEmpty_System_Int32__System_Collections_Generic_IEnumerable_System_Int32__System_Collections_Generic_IEnumerable_System_Int32__System_Int32_();
+		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	return;
 }
@@ -4625,28 +2467,19 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_Enumerabl
 
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
 	{
-		if (30 < 0 || 30 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 30 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[30] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 30 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[30])();
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__Empty_System_Int32__System_Collections_Generic_IEnumerable_System_Int32___();
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
 	{
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (179 < 0 || 179 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 179 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[179] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 179 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[179])(chaos_arg_0, chaos_arg_1);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__DefaultIfEmpty_System_Int32__System_Collections_Generic_IEnumerable_System_Int32__System_Collections_Generic_IEnumerable_System_Int32__System_Int32_();
+		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	return;
 }
@@ -4658,17 +2491,15 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_Enumerabl
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 
 	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
 	_s0 = 0;
 	{
-		const auto chaos_arg_0 = _s0;
-		if (180 < 0 || 180 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 180 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[180] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 180 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[180])(chaos_arg_0);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__Distinct_System_Int32__System_Collections_Generic_IEnumerable_System_Int32__System_Collections_Generic_IEnumerable_System_Int32__();
+		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	return;
 }
@@ -4680,26 +2511,18 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_Enumerabl
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 
 	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
 	{
-		if (30 < 0 || 30 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 30 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[30] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 30 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[30])();
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__Empty_System_Int32__System_Collections_Generic_IEnumerable_System_Int32___();
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	{
-		const auto chaos_arg_0 = _s0;
-		if (180 < 0 || 180 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 180 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[180] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 180 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[180])(chaos_arg_0);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__Distinct_System_Int32__System_Collections_Generic_IEnumerable_System_Int32__System_Collections_Generic_IEnumerable_System_Int32__();
+		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	return;
 }
@@ -4712,19 +2535,16 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_Enumerabl
 
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
 	_s0 = 0;
 	_s1 = 0;
 	{
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (181 < 0 || 181 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 181 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[181] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 181 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[181])(chaos_arg_0, chaos_arg_1);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__Distinct_System_Int32__System_Collections_Generic_IEnumerable_System_Int32__System_Collections_Generic_IEnumerable_System_Int32__System_Collections_Generic_IEqualityComparer_System_Int32__();
+		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	return;
 }
@@ -4737,37 +2557,22 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_Enumerabl
 
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
 	{
-		if (30 < 0 || 30 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 30 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[30] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 30 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[30])();
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__Empty_System_Int32__System_Collections_Generic_IEnumerable_System_Int32___();
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	{
-		if (44 < 0 || 44 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 44 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[44] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 44 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[44])();
+		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Collections_Generic_EqualityComparer_System_Int32___get_Default_System_Collections_Generic_EqualityComparer_System_Int32___();
 		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	{
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (181 < 0 || 181 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 181 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[181] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 181 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[181])(chaos_arg_0, chaos_arg_1);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__Distinct_System_Int32__System_Collections_Generic_IEnumerable_System_Int32__System_Collections_Generic_IEnumerable_System_Int32__System_Collections_Generic_IEqualityComparer_System_Int32__();
+		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	return;
 }
@@ -4780,19 +2585,16 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_Enumerabl
 
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
 	_s0 = 0;
 	_s1 = 0;
 	{
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (182 < 0 || 182 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 182 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[182] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 182 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[182])(chaos_arg_0, chaos_arg_1);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__DistinctBy_System_Int32_System_Int32__System_Collections_Generic_IEnumerable_System_Int32__System_Collections_Generic_IEnumerable_System_Int32__System_Func_System_Int32_System_Int32__();
+		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	return;
 }
@@ -4806,14 +2608,12 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_Enumerabl
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
 	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
 	{
-		if (30 < 0 || 30 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 30 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[30] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 30 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[30])();
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__Empty_System_Int32__System_Collections_Generic_IEnumerable_System_Int32___();
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	_s1 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c____9__203_0;
@@ -4823,9 +2623,9 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_Enumerabl
 		{
 			_s1 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c____9;
 			{
-				// Hotpatch-aware ldftn wrapper (slot 799)
+				// Hotpatch-aware ldftn wrapper (slot 763)
 				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1) -> CHAOS_IL2CPP_INT32 {
-					auto& _d_entry = s_hotpatch_entries[799];
+					auto& _d_entry = s_hotpatch_entries[763];
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
 						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
 					{
@@ -4858,16 +2658,8 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_Enumerabl
 			}
 		}
 		{
-			const auto chaos_arg_1 = _s1;
-			const auto chaos_arg_0 = _s0;
-			if (182 < 0 || 182 >= kChaosExternalRuntimeCount) {
-				CHAOS_IL2CPP_FAIL(); // external runtime table index 182 out of range
-			}
-			if (kChaosExternalRuntimeFnTable[182] == nullptr) {
-				CHAOS_IL2CPP_FAIL(); // external runtime table entry 182 is null
-			}
-			const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[182])(chaos_arg_0, chaos_arg_1);
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__DistinctBy_System_Int32_System_Int32__System_Collections_Generic_IEnumerable_System_Int32__System_Collections_Generic_IEnumerable_System_Int32__System_Func_System_Int32_System_Int32__();
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 		}
 		return;
 	}
@@ -4882,21 +2674,17 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_Enumerabl
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
 	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INTPTR _s5;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
 	_s0 = 0;
 	_s1 = 0;
 	_s2 = 0;
 	{
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (184 < 0 || 184 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 184 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[184] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 184 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[184])(chaos_arg_0, chaos_arg_1, chaos_arg_2);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__DistinctBy_System_Int32_System_Int32__System_Collections_Generic_IEnumerable_System_Int32__System_Collections_Generic_IEnumerable_System_Int32__System_Func_System_Int32_System_Int32__System_Collections_Generic_IEqualityComparer_System_Int32__();
+		_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	return;
 }
@@ -4910,14 +2698,13 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_Enumerabl
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
 	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INTPTR _s5;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
 	{
-		if (30 < 0 || 30 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 30 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[30] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 30 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[30])();
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__Empty_System_Int32__System_Collections_Generic_IEnumerable_System_Int32___();
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	_s1 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c____9__207_0;
@@ -4927,9 +2714,9 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_Enumerabl
 		{
 			_s1 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c____9;
 			{
-				// Hotpatch-aware ldftn wrapper (slot 800)
+				// Hotpatch-aware ldftn wrapper (slot 764)
 				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1) -> CHAOS_IL2CPP_INT32 {
-					auto& _d_entry = s_hotpatch_entries[800];
+					auto& _d_entry = s_hotpatch_entries[764];
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
 						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
 					{
@@ -4962,27 +2749,12 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_Enumerabl
 			}
 		}
 		{
-			if (44 < 0 || 44 >= kChaosExternalRuntimeCount) {
-				CHAOS_IL2CPP_FAIL(); // external runtime table index 44 out of range
-			}
-			if (kChaosExternalRuntimeFnTable[44] == nullptr) {
-				CHAOS_IL2CPP_FAIL(); // external runtime table entry 44 is null
-			}
-			const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[44])();
+			const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Collections_Generic_EqualityComparer_System_Int32___get_Default_System_Collections_Generic_EqualityComparer_System_Int32___();
 			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 		}
 		{
-			const auto chaos_arg_2 = _s2;
-			const auto chaos_arg_1 = _s1;
-			const auto chaos_arg_0 = _s0;
-			if (184 < 0 || 184 >= kChaosExternalRuntimeCount) {
-				CHAOS_IL2CPP_FAIL(); // external runtime table index 184 out of range
-			}
-			if (kChaosExternalRuntimeFnTable[184] == nullptr) {
-				CHAOS_IL2CPP_FAIL(); // external runtime table entry 184 is null
-			}
-			const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[184])(chaos_arg_0, chaos_arg_1, chaos_arg_2);
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__DistinctBy_System_Int32_System_Int32__System_Collections_Generic_IEnumerable_System_Int32__System_Collections_Generic_IEnumerable_System_Int32__System_Func_System_Int32_System_Int32__System_Collections_Generic_IEqualityComparer_System_Int32__();
+			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 		}
 		return;
 	}
@@ -4996,19 +2768,16 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_Enumerabl
 
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
 	_s0 = 0;
 	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
 	{
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (186 < 0 || 186 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 186 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[186] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 186 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[186])(chaos_arg_0, chaos_arg_1);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__ElementAt_System_Int32__System_Int32_System_Collections_Generic_IEnumerable_System_Int32__System_Int32_();
+		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	return;
 }
@@ -5021,19 +2790,16 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_Enumerabl
 
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
 	_s0 = 0;
 	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
 	{
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (186 < 0 || 186 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 186 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[186] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 186 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[186])(chaos_arg_0, chaos_arg_1);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__ElementAt_System_Int32__System_Int32_System_Collections_Generic_IEnumerable_System_Int32__System_Int32_();
+		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	return;
 }
@@ -5046,28 +2812,19 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_Enumerabl
 
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
 	{
-		if (30 < 0 || 30 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 30 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[30] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 30 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[30])();
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__Empty_System_Int32__System_Collections_Generic_IEnumerable_System_Int32___();
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
 	{
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (186 < 0 || 186 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 186 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[186] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 186 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[186])(chaos_arg_0, chaos_arg_1);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__ElementAt_System_Int32__System_Int32_System_Collections_Generic_IEnumerable_System_Int32__System_Int32_();
+		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	return;
 }
@@ -5080,6 +2837,11 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_Enumerabl
 
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
 	_s0 = 0;
 	_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[0]);
 	{
@@ -5096,16 +2858,8 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_Enumerabl
 	}
 	_s1 = chaos_locals[0];
 	{
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (188 < 0 || 188 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 188 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[188] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 188 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[188])(chaos_arg_0, chaos_arg_1);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__ElementAt_System_Int32__System_Int32_System_Collections_Generic_IEnumerable_System_Int32__System_Index_();
+		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	return;
 }
@@ -5118,28 +2872,19 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_Enumerabl
 
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
 	_s0 = 0;
 	{
-		if (189 < 0 || 189 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 189 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[189] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 189 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[189])();
+		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Index__get_Start_System_Index__();
 		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	{
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (188 < 0 || 188 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 188 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[188] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 188 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[188])(chaos_arg_0, chaos_arg_1);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__ElementAt_System_Int32__System_Int32_System_Collections_Generic_IEnumerable_System_Int32__System_Index_();
+		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	return;
 }
@@ -5152,14 +2897,13 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_Enumerabl
 
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
 	{
-		if (30 < 0 || 30 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 30 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[30] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 30 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[30])();
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__Empty_System_Int32__System_Collections_Generic_IEnumerable_System_Int32___();
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[0]);
@@ -5177,16 +2921,8 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_Enumerabl
 	}
 	_s1 = chaos_locals[0];
 	{
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (188 < 0 || 188 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 188 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[188] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 188 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[188])(chaos_arg_0, chaos_arg_1);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__ElementAt_System_Int32__System_Int32_System_Collections_Generic_IEnumerable_System_Int32__System_Index_();
+		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	return;
 }
@@ -5199,19 +2935,16 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_Enumerabl
 
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
 	_s0 = 0;
 	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
 	{
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (190 < 0 || 190 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 190 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[190] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 190 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[190])(chaos_arg_0, chaos_arg_1);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__ElementAtOrDefault_System_Int32__System_Int32_System_Collections_Generic_IEnumerable_System_Int32__System_Int32_();
+		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	return;
 }
@@ -5224,19 +2957,16 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_Enumerabl
 
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
 	_s0 = 0;
 	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
 	{
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (190 < 0 || 190 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 190 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[190] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 190 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[190])(chaos_arg_0, chaos_arg_1);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__ElementAtOrDefault_System_Int32__System_Int32_System_Collections_Generic_IEnumerable_System_Int32__System_Int32_();
+		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	return;
 }
@@ -5249,28 +2979,19 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_Enumerabl
 
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
 	{
-		if (30 < 0 || 30 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 30 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[30] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 30 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[30])();
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__Empty_System_Int32__System_Collections_Generic_IEnumerable_System_Int32___();
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
 	{
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (190 < 0 || 190 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 190 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[190] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 190 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[190])(chaos_arg_0, chaos_arg_1);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__ElementAtOrDefault_System_Int32__System_Int32_System_Collections_Generic_IEnumerable_System_Int32__System_Int32_();
+		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	return;
 }
@@ -5283,6 +3004,11 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_Enumerabl
 
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
 	_s0 = 0;
 	_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[0]);
 	{
@@ -5299,16 +3025,8 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_Enumerabl
 	}
 	_s1 = chaos_locals[0];
 	{
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (191 < 0 || 191 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 191 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[191] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 191 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[191])(chaos_arg_0, chaos_arg_1);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__ElementAtOrDefault_System_Int32__System_Int32_System_Collections_Generic_IEnumerable_System_Int32__System_Index_();
+		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	return;
 }
@@ -5321,28 +3039,19 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_Enumerabl
 
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
 	_s0 = 0;
 	{
-		if (189 < 0 || 189 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 189 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[189] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 189 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[189])();
+		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Index__get_Start_System_Index__();
 		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	{
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (191 < 0 || 191 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 191 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[191] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 191 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[191])(chaos_arg_0, chaos_arg_1);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__ElementAtOrDefault_System_Int32__System_Int32_System_Collections_Generic_IEnumerable_System_Int32__System_Index_();
+		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	return;
 }
@@ -5355,14 +3064,13 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_Enumerabl
 
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
 	{
-		if (30 < 0 || 30 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 30 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[30] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 30 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[30])();
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__Empty_System_Int32__System_Collections_Generic_IEnumerable_System_Int32___();
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[0]);
@@ -5380,16 +3088,8 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_Enumerabl
 	}
 	_s1 = chaos_locals[0];
 	{
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (191 < 0 || 191 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 191 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[191] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 191 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[191])(chaos_arg_0, chaos_arg_1);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__ElementAtOrDefault_System_Int32__System_Int32_System_Collections_Generic_IEnumerable_System_Int32__System_Index_();
+		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	return;
 }
@@ -5401,14 +3101,12 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_Enumerabl
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 
 	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
 	{
-		if (30 < 0 || 30 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 30 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[30] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 30 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[30])();
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__Empty_System_Int32__System_Collections_Generic_IEnumerable_System_Int32___();
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	return;
@@ -5422,19 +3120,16 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_Enumerabl
 
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
 	_s0 = 0;
 	_s1 = 0;
 	{
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (192 < 0 || 192 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 192 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[192] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 192 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[192])(chaos_arg_0, chaos_arg_1);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__Except_System_Int32__System_Collections_Generic_IEnumerable_System_Int32__System_Collections_Generic_IEnumerable_System_Int32__System_Collections_Generic_IEnumerable_System_Int32__();
+		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	return;
 }
@@ -5447,37 +3142,22 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_Enumerabl
 
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
 	{
-		if (30 < 0 || 30 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 30 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[30] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 30 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[30])();
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__Empty_System_Int32__System_Collections_Generic_IEnumerable_System_Int32___();
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	{
-		if (30 < 0 || 30 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 30 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[30] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 30 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[30])();
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__Empty_System_Int32__System_Collections_Generic_IEnumerable_System_Int32___();
 		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	{
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (192 < 0 || 192 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 192 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[192] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 192 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[192])(chaos_arg_0, chaos_arg_1);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__Except_System_Int32__System_Collections_Generic_IEnumerable_System_Int32__System_Collections_Generic_IEnumerable_System_Int32__System_Collections_Generic_IEnumerable_System_Int32__();
+		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	return;
 }
@@ -5491,21 +3171,17 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_Enumerabl
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
 	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INTPTR _s5;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
 	_s0 = 0;
 	_s1 = 0;
 	_s2 = 0;
 	{
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (193 < 0 || 193 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 193 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[193] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 193 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[193])(chaos_arg_0, chaos_arg_1, chaos_arg_2);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__Except_System_Int32__System_Collections_Generic_IEnumerable_System_Int32__System_Collections_Generic_IEnumerable_System_Int32__System_Collections_Generic_IEnumerable_System_Int32__System_Collections_Generic_IEqualityComparer_System_Int32__();
+		_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	return;
 }
@@ -5519,48 +3195,26 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_Enumerabl
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
 	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INTPTR _s5;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
 	{
-		if (30 < 0 || 30 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 30 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[30] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 30 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[30])();
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__Empty_System_Int32__System_Collections_Generic_IEnumerable_System_Int32___();
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	{
-		if (30 < 0 || 30 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 30 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[30] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 30 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[30])();
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__Empty_System_Int32__System_Collections_Generic_IEnumerable_System_Int32___();
 		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	{
-		if (44 < 0 || 44 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 44 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[44] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 44 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[44])();
+		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Collections_Generic_EqualityComparer_System_Int32___get_Default_System_Collections_Generic_EqualityComparer_System_Int32___();
 		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	{
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (193 < 0 || 193 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 193 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[193] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 193 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[193])(chaos_arg_0, chaos_arg_1, chaos_arg_2);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__Except_System_Int32__System_Collections_Generic_IEnumerable_System_Int32__System_Collections_Generic_IEnumerable_System_Int32__System_Collections_Generic_IEnumerable_System_Int32__System_Collections_Generic_IEqualityComparer_System_Int32__();
+		_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	return;
 }
@@ -5574,21 +3228,17 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_Enumerabl
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
 	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INTPTR _s5;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
 	_s0 = 0;
 	_s1 = 0;
 	_s2 = 0;
 	{
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (194 < 0 || 194 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 194 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[194] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 194 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[194])(chaos_arg_0, chaos_arg_1, chaos_arg_2);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__ExceptBy_System_Int32_System_Int32__System_Collections_Generic_IEnumerable_System_Int32__System_Collections_Generic_IEnumerable_System_Int32__System_Collections_Generic_IEnumerable_System_Int32__System_Func_System_Int32_System_Int32__();
+		_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	return;
 }
@@ -5603,24 +3253,16 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_Enumerabl
 	CHAOS_IL2CPP_INTPTR _s1;
 	CHAOS_IL2CPP_INTPTR _s2;
 	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INTPTR _s5;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
 	{
-		if (30 < 0 || 30 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 30 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[30] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 30 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[30])();
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__Empty_System_Int32__System_Collections_Generic_IEnumerable_System_Int32___();
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	{
-		if (30 < 0 || 30 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 30 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[30] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 30 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[30])();
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__Empty_System_Int32__System_Collections_Generic_IEnumerable_System_Int32___();
 		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	_s2 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c____9__249_0;
@@ -5630,9 +3272,9 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_Enumerabl
 		{
 			_s2 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c____9;
 			{
-				// Hotpatch-aware ldftn wrapper (slot 801)
+				// Hotpatch-aware ldftn wrapper (slot 765)
 				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1) -> CHAOS_IL2CPP_INT32 {
-					auto& _d_entry = s_hotpatch_entries[801];
+					auto& _d_entry = s_hotpatch_entries[765];
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
 						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
 					{
@@ -5665,17 +3307,8 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_Enumerabl
 			}
 		}
 		{
-			const auto chaos_arg_2 = _s2;
-			const auto chaos_arg_1 = _s1;
-			const auto chaos_arg_0 = _s0;
-			if (194 < 0 || 194 >= kChaosExternalRuntimeCount) {
-				CHAOS_IL2CPP_FAIL(); // external runtime table index 194 out of range
-			}
-			if (kChaosExternalRuntimeFnTable[194] == nullptr) {
-				CHAOS_IL2CPP_FAIL(); // external runtime table entry 194 is null
-			}
-			const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[194])(chaos_arg_0, chaos_arg_1, chaos_arg_2);
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__ExceptBy_System_Int32_System_Int32__System_Collections_Generic_IEnumerable_System_Int32__System_Collections_Generic_IEnumerable_System_Int32__System_Collections_Generic_IEnumerable_System_Int32__System_Func_System_Int32_System_Int32__();
+			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 		}
 		return;
 	}
@@ -5691,23 +3324,18 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_Enumerabl
 	CHAOS_IL2CPP_INTPTR _s1;
 	CHAOS_IL2CPP_INTPTR _s2;
 	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INTPTR _s5;
+	CHAOS_IL2CPP_INTPTR _s6;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
 	_s0 = 0;
 	_s1 = 0;
 	_s2 = 0;
 	_s3 = 0;
 	{
-		const auto chaos_arg_3 = _s3;
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (196 < 0 || 196 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 196 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[196] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 196 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[196])(chaos_arg_0, chaos_arg_1, chaos_arg_2, chaos_arg_3);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__ExceptBy_System_Int32_System_Int32__System_Collections_Generic_IEnumerable_System_Int32__System_Collections_Generic_IEnumerable_System_Int32__System_Collections_Generic_IEnumerable_System_Int32__System_Func_System_Int32_System_Int32__System_Collections_Generic_IEqualityComparer_System_Int32__();
+		_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	return;
 }
@@ -5722,24 +3350,17 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_Enumerabl
 	CHAOS_IL2CPP_INTPTR _s1;
 	CHAOS_IL2CPP_INTPTR _s2;
 	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INTPTR _s5;
+	CHAOS_IL2CPP_INTPTR _s6;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
 	{
-		if (30 < 0 || 30 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 30 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[30] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 30 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[30])();
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__Empty_System_Int32__System_Collections_Generic_IEnumerable_System_Int32___();
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	{
-		if (30 < 0 || 30 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 30 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[30] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 30 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[30])();
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__Empty_System_Int32__System_Collections_Generic_IEnumerable_System_Int32___();
 		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	_s2 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c____9__253_0;
@@ -5749,9 +3370,9 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_Enumerabl
 		{
 			_s2 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c____9;
 			{
-				// Hotpatch-aware ldftn wrapper (slot 802)
+				// Hotpatch-aware ldftn wrapper (slot 766)
 				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1) -> CHAOS_IL2CPP_INT32 {
-					auto& _d_entry = s_hotpatch_entries[802];
+					auto& _d_entry = s_hotpatch_entries[766];
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
 						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
 					{
@@ -5784,28 +3405,12 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_Enumerabl
 			}
 		}
 		{
-			if (44 < 0 || 44 >= kChaosExternalRuntimeCount) {
-				CHAOS_IL2CPP_FAIL(); // external runtime table index 44 out of range
-			}
-			if (kChaosExternalRuntimeFnTable[44] == nullptr) {
-				CHAOS_IL2CPP_FAIL(); // external runtime table entry 44 is null
-			}
-			const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[44])();
+			const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Collections_Generic_EqualityComparer_System_Int32___get_Default_System_Collections_Generic_EqualityComparer_System_Int32___();
 			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 		}
 		{
-			const auto chaos_arg_3 = _s3;
-			const auto chaos_arg_2 = _s2;
-			const auto chaos_arg_1 = _s1;
-			const auto chaos_arg_0 = _s0;
-			if (196 < 0 || 196 >= kChaosExternalRuntimeCount) {
-				CHAOS_IL2CPP_FAIL(); // external runtime table index 196 out of range
-			}
-			if (kChaosExternalRuntimeFnTable[196] == nullptr) {
-				CHAOS_IL2CPP_FAIL(); // external runtime table entry 196 is null
-			}
-			const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[196])(chaos_arg_0, chaos_arg_1, chaos_arg_2, chaos_arg_3);
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__ExceptBy_System_Int32_System_Int32__System_Collections_Generic_IEnumerable_System_Int32__System_Collections_Generic_IEnumerable_System_Int32__System_Collections_Generic_IEnumerable_System_Int32__System_Func_System_Int32_System_Int32__System_Collections_Generic_IEqualityComparer_System_Int32__();
+			_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 		}
 		return;
 	}
@@ -5818,17 +3423,15 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_Enumerabl
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 
 	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
 	_s0 = 0;
 	{
-		const auto chaos_arg_0 = _s0;
-		if (198 < 0 || 198 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 198 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[198] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 198 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[198])(chaos_arg_0);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__First_System_Int32__System_Int32_System_Collections_Generic_IEnumerable_System_Int32__();
+		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	return;
 }
@@ -5840,26 +3443,18 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_Enumerabl
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 
 	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
 	{
-		if (30 < 0 || 30 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 30 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[30] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 30 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[30])();
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__Empty_System_Int32__System_Collections_Generic_IEnumerable_System_Int32___();
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	{
-		const auto chaos_arg_0 = _s0;
-		if (198 < 0 || 198 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 198 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[198] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 198 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[198])(chaos_arg_0);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__First_System_Int32__System_Int32_System_Collections_Generic_IEnumerable_System_Int32__();
+		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	return;
 }
@@ -5872,19 +3467,16 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_Enumerabl
 
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
 	_s0 = 0;
 	_s1 = 0;
 	{
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (199 < 0 || 199 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 199 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[199] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 199 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[199])(chaos_arg_0, chaos_arg_1);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__First_System_Int32__System_Int32_System_Collections_Generic_IEnumerable_System_Int32__System_Func_System_Int32_System_Boolean__();
+		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	return;
 }
@@ -5898,14 +3490,12 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_Enumerabl
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
 	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
 	{
-		if (30 < 0 || 30 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 30 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[30] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 30 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[30])();
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__Empty_System_Int32__System_Collections_Generic_IEnumerable_System_Int32___();
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	_s1 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c____9__261_0;
@@ -5915,9 +3505,9 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_Enumerabl
 		{
 			_s1 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c____9;
 			{
-				// Hotpatch-aware ldftn wrapper (slot 803)
+				// Hotpatch-aware ldftn wrapper (slot 767)
 				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1) -> CHAOS_IL2CPP_INTPTR {
-					auto& _d_entry = s_hotpatch_entries[803];
+					auto& _d_entry = s_hotpatch_entries[767];
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
 						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
 					{
@@ -5950,16 +3540,8 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_Enumerabl
 			}
 		}
 		{
-			const auto chaos_arg_1 = _s1;
-			const auto chaos_arg_0 = _s0;
-			if (199 < 0 || 199 >= kChaosExternalRuntimeCount) {
-				CHAOS_IL2CPP_FAIL(); // external runtime table index 199 out of range
-			}
-			if (kChaosExternalRuntimeFnTable[199] == nullptr) {
-				CHAOS_IL2CPP_FAIL(); // external runtime table entry 199 is null
-			}
-			const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[199])(chaos_arg_0, chaos_arg_1);
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__First_System_Int32__System_Int32_System_Collections_Generic_IEnumerable_System_Int32__System_Func_System_Int32_System_Boolean__();
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 		}
 		return;
 	}
@@ -5972,17 +3554,15 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_Enumerabl
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 
 	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
 	_s0 = 0;
 	{
-		const auto chaos_arg_0 = _s0;
-		if (201 < 0 || 201 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 201 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[201] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 201 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[201])(chaos_arg_0);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__FirstOrDefault_System_Int32__System_Int32_System_Collections_Generic_IEnumerable_System_Int32__();
+		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	return;
 }
@@ -5994,26 +3574,18 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_Enumerabl
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 
 	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
 	{
-		if (30 < 0 || 30 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 30 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[30] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 30 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[30])();
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__Empty_System_Int32__System_Collections_Generic_IEnumerable_System_Int32___();
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	{
-		const auto chaos_arg_0 = _s0;
-		if (201 < 0 || 201 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 201 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[201] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 201 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[201])(chaos_arg_0);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__FirstOrDefault_System_Int32__System_Int32_System_Collections_Generic_IEnumerable_System_Int32__();
+		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	return;
 }
@@ -6026,19 +3598,16 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_Enumerabl
 
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
 	_s0 = 0;
 	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
 	{
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (202 < 0 || 202 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 202 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[202] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 202 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[202])(chaos_arg_0, chaos_arg_1);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__FirstOrDefault_System_Int32__System_Int32_System_Collections_Generic_IEnumerable_System_Int32__System_Int32_();
+		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	return;
 }
@@ -6051,19 +3620,16 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_Enumerabl
 
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
 	_s0 = 0;
 	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
 	{
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (202 < 0 || 202 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 202 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[202] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 202 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[202])(chaos_arg_0, chaos_arg_1);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__FirstOrDefault_System_Int32__System_Int32_System_Collections_Generic_IEnumerable_System_Int32__System_Int32_();
+		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	return;
 }
@@ -6076,28 +3642,19 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_Enumerabl
 
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
 	{
-		if (30 < 0 || 30 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 30 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[30] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 30 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[30])();
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__Empty_System_Int32__System_Collections_Generic_IEnumerable_System_Int32___();
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
 	{
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (202 < 0 || 202 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 202 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[202] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 202 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[202])(chaos_arg_0, chaos_arg_1);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__FirstOrDefault_System_Int32__System_Int32_System_Collections_Generic_IEnumerable_System_Int32__System_Int32_();
+		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	return;
 }
@@ -6110,19 +3667,16 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_Enumerabl
 
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
 	_s0 = 0;
 	_s1 = 0;
 	{
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (203 < 0 || 203 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 203 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[203] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 203 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[203])(chaos_arg_0, chaos_arg_1);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__FirstOrDefault_System_Int32__System_Int32_System_Collections_Generic_IEnumerable_System_Int32__System_Func_System_Int32_System_Boolean__();
+		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	return;
 }
@@ -6136,14 +3690,12 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_Enumerabl
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
 	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
 	{
-		if (30 < 0 || 30 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 30 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[30] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 30 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[30])();
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__Empty_System_Int32__System_Collections_Generic_IEnumerable_System_Int32___();
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	_s1 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c____9__275_0;
@@ -6153,9 +3705,9 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_Enumerabl
 		{
 			_s1 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c____9;
 			{
-				// Hotpatch-aware ldftn wrapper (slot 804)
+				// Hotpatch-aware ldftn wrapper (slot 768)
 				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1) -> CHAOS_IL2CPP_INTPTR {
-					auto& _d_entry = s_hotpatch_entries[804];
+					auto& _d_entry = s_hotpatch_entries[768];
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
 						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
 					{
@@ -6188,16 +3740,8 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_Enumerabl
 			}
 		}
 		{
-			const auto chaos_arg_1 = _s1;
-			const auto chaos_arg_0 = _s0;
-			if (203 < 0 || 203 >= kChaosExternalRuntimeCount) {
-				CHAOS_IL2CPP_FAIL(); // external runtime table index 203 out of range
-			}
-			if (kChaosExternalRuntimeFnTable[203] == nullptr) {
-				CHAOS_IL2CPP_FAIL(); // external runtime table entry 203 is null
-			}
-			const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[203])(chaos_arg_0, chaos_arg_1);
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__FirstOrDefault_System_Int32__System_Int32_System_Collections_Generic_IEnumerable_System_Int32__System_Func_System_Int32_System_Boolean__();
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 		}
 		return;
 	}
@@ -6212,21 +3756,17 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_Enumerabl
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
 	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INTPTR _s5;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
 	_s0 = 0;
 	_s1 = 0;
 	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
 	{
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (205 < 0 || 205 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 205 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[205] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 205 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[205])(chaos_arg_0, chaos_arg_1, chaos_arg_2);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__FirstOrDefault_System_Int32__System_Int32_System_Collections_Generic_IEnumerable_System_Int32__System_Func_System_Int32_System_Boolean__System_Int32_();
+		_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	return;
 }
@@ -6240,21 +3780,17 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_Enumerabl
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
 	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INTPTR _s5;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
 	_s0 = 0;
 	_s1 = 0;
 	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
 	{
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (205 < 0 || 205 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 205 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[205] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 205 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[205])(chaos_arg_0, chaos_arg_1, chaos_arg_2);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__FirstOrDefault_System_Int32__System_Int32_System_Collections_Generic_IEnumerable_System_Int32__System_Func_System_Int32_System_Boolean__System_Int32_();
+		_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	return;
 }
@@ -6268,14 +3804,13 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_Enumerabl
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
 	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INTPTR _s5;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
 	{
-		if (30 < 0 || 30 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 30 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[30] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 30 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[30])();
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__Empty_System_Int32__System_Collections_Generic_IEnumerable_System_Int32___();
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	_s1 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c____9__281_0;
@@ -6285,9 +3820,9 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_Enumerabl
 		{
 			_s1 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c____9;
 			{
-				// Hotpatch-aware ldftn wrapper (slot 805)
+				// Hotpatch-aware ldftn wrapper (slot 769)
 				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1) -> CHAOS_IL2CPP_INTPTR {
-					auto& _d_entry = s_hotpatch_entries[805];
+					auto& _d_entry = s_hotpatch_entries[769];
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
 						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
 					{
@@ -6321,17 +3856,8 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_Enumerabl
 		}
 		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
 		{
-			const auto chaos_arg_2 = _s2;
-			const auto chaos_arg_1 = _s1;
-			const auto chaos_arg_0 = _s0;
-			if (205 < 0 || 205 >= kChaosExternalRuntimeCount) {
-				CHAOS_IL2CPP_FAIL(); // external runtime table index 205 out of range
-			}
-			if (kChaosExternalRuntimeFnTable[205] == nullptr) {
-				CHAOS_IL2CPP_FAIL(); // external runtime table entry 205 is null
-			}
-			const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[205])(chaos_arg_0, chaos_arg_1, chaos_arg_2);
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__FirstOrDefault_System_Int32__System_Int32_System_Collections_Generic_IEnumerable_System_Int32__System_Func_System_Int32_System_Boolean__System_Int32_();
+			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 		}
 		return;
 	}
@@ -6345,19 +3871,16 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_Enumerabl
 
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
 	_s0 = 0;
 	_s1 = 0;
 	{
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (207 < 0 || 207 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 207 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[207] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 207 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[207])(chaos_arg_0, chaos_arg_1);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__GroupBy_System_Int32_System_Int32__System_Collections_Generic_IEnumerable_IGrouping_System_Int32_System_Int32___System_Collections_Generic_IEnumerable_System_Int32__System_Func_System_Int32_System_Int32__();
+		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	return;
 }
@@ -6371,14 +3894,12 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_Enumerabl
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
 	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
 	{
-		if (30 < 0 || 30 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 30 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[30] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 30 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[30])();
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__Empty_System_Int32__System_Collections_Generic_IEnumerable_System_Int32___();
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	_s1 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c____9__285_0;
@@ -6388,9 +3909,9 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_Enumerabl
 		{
 			_s1 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c____9;
 			{
-				// Hotpatch-aware ldftn wrapper (slot 806)
+				// Hotpatch-aware ldftn wrapper (slot 770)
 				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1) -> CHAOS_IL2CPP_INT32 {
-					auto& _d_entry = s_hotpatch_entries[806];
+					auto& _d_entry = s_hotpatch_entries[770];
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
 						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
 					{
@@ -6423,16 +3944,8 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_Enumerabl
 			}
 		}
 		{
-			const auto chaos_arg_1 = _s1;
-			const auto chaos_arg_0 = _s0;
-			if (207 < 0 || 207 >= kChaosExternalRuntimeCount) {
-				CHAOS_IL2CPP_FAIL(); // external runtime table index 207 out of range
-			}
-			if (kChaosExternalRuntimeFnTable[207] == nullptr) {
-				CHAOS_IL2CPP_FAIL(); // external runtime table entry 207 is null
-			}
-			const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[207])(chaos_arg_0, chaos_arg_1);
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__GroupBy_System_Int32_System_Int32__System_Collections_Generic_IEnumerable_IGrouping_System_Int32_System_Int32___System_Collections_Generic_IEnumerable_System_Int32__System_Func_System_Int32_System_Int32__();
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 		}
 		return;
 	}
@@ -6447,21 +3960,17 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_Enumerabl
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
 	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INTPTR _s5;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
 	_s0 = 0;
 	_s1 = 0;
 	_s2 = 0;
 	{
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (209 < 0 || 209 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 209 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[209] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 209 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[209])(chaos_arg_0, chaos_arg_1, chaos_arg_2);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__GroupBy_System_Int32_System_Int32__System_Collections_Generic_IEnumerable_IGrouping_System_Int32_System_Int32___System_Collections_Generic_IEnumerable_System_Int32__System_Func_System_Int32_System_Int32__System_Collections_Generic_IEqualityComparer_System_Int32__();
+		_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	return;
 }
@@ -6475,14 +3984,13 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_Enumerabl
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
 	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INTPTR _s5;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
 	{
-		if (30 < 0 || 30 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 30 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[30] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 30 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[30])();
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__Empty_System_Int32__System_Collections_Generic_IEnumerable_System_Int32___();
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	_s1 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c____9__289_0;
@@ -6492,9 +4000,9 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_Enumerabl
 		{
 			_s1 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c____9;
 			{
-				// Hotpatch-aware ldftn wrapper (slot 807)
+				// Hotpatch-aware ldftn wrapper (slot 771)
 				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1) -> CHAOS_IL2CPP_INT32 {
-					auto& _d_entry = s_hotpatch_entries[807];
+					auto& _d_entry = s_hotpatch_entries[771];
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
 						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
 					{
@@ -6527,27 +4035,12 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_Enumerabl
 			}
 		}
 		{
-			if (44 < 0 || 44 >= kChaosExternalRuntimeCount) {
-				CHAOS_IL2CPP_FAIL(); // external runtime table index 44 out of range
-			}
-			if (kChaosExternalRuntimeFnTable[44] == nullptr) {
-				CHAOS_IL2CPP_FAIL(); // external runtime table entry 44 is null
-			}
-			const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[44])();
+			const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Collections_Generic_EqualityComparer_System_Int32___get_Default_System_Collections_Generic_EqualityComparer_System_Int32___();
 			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 		}
 		{
-			const auto chaos_arg_2 = _s2;
-			const auto chaos_arg_1 = _s1;
-			const auto chaos_arg_0 = _s0;
-			if (209 < 0 || 209 >= kChaosExternalRuntimeCount) {
-				CHAOS_IL2CPP_FAIL(); // external runtime table index 209 out of range
-			}
-			if (kChaosExternalRuntimeFnTable[209] == nullptr) {
-				CHAOS_IL2CPP_FAIL(); // external runtime table entry 209 is null
-			}
-			const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[209])(chaos_arg_0, chaos_arg_1, chaos_arg_2);
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__GroupBy_System_Int32_System_Int32__System_Collections_Generic_IEnumerable_IGrouping_System_Int32_System_Int32___System_Collections_Generic_IEnumerable_System_Int32__System_Func_System_Int32_System_Int32__System_Collections_Generic_IEqualityComparer_System_Int32__();
+			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 		}
 		return;
 	}
@@ -6562,21 +4055,17 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_Enumerabl
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
 	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INTPTR _s5;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
 	_s0 = 0;
 	_s1 = 0;
 	_s2 = 0;
 	{
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (211 < 0 || 211 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 211 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[211] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 211 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[211])(chaos_arg_0, chaos_arg_1, chaos_arg_2);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__GroupBy_System_Int32_System_Int32_System_Int32__System_Collections_Generic_IEnumerable_IGrouping_System_Int32_System_Int32___System_Collections_Generic_IEnumerable_System_Int32__System_Func_System_Int32_System_Int32__System_Func_System_Int32_System_Int32__();
+		_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	return;
 }
@@ -6591,14 +4080,12 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_Enumerabl
 	CHAOS_IL2CPP_INTPTR _s1;
 	CHAOS_IL2CPP_INTPTR _s2;
 	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INTPTR _s5;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
 	{
-		if (30 < 0 || 30 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 30 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[30] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 30 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[30])();
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__Empty_System_Int32__System_Collections_Generic_IEnumerable_System_Int32___();
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	_s1 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c____9__293_0;
@@ -6608,9 +4095,9 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_Enumerabl
 		{
 			_s1 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c____9;
 			{
-				// Hotpatch-aware ldftn wrapper (slot 808)
+				// Hotpatch-aware ldftn wrapper (slot 772)
 				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1) -> CHAOS_IL2CPP_INT32 {
-					auto& _d_entry = s_hotpatch_entries[808];
+					auto& _d_entry = s_hotpatch_entries[772];
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
 						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
 					{
@@ -6649,9 +4136,9 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_Enumerabl
 			{
 				_s2 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c____9;
 				{
-					// Hotpatch-aware ldftn wrapper (slot 809)
+					// Hotpatch-aware ldftn wrapper (slot 773)
 					static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1) -> CHAOS_IL2CPP_INT32 {
-						auto& _d_entry = s_hotpatch_entries[809];
+						auto& _d_entry = s_hotpatch_entries[773];
 						if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
 							&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
 						{
@@ -6684,17 +4171,8 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_Enumerabl
 				}
 			}
 			{
-				const auto chaos_arg_2 = _s2;
-				const auto chaos_arg_1 = _s1;
-				const auto chaos_arg_0 = _s0;
-				if (211 < 0 || 211 >= kChaosExternalRuntimeCount) {
-					CHAOS_IL2CPP_FAIL(); // external runtime table index 211 out of range
-				}
-				if (kChaosExternalRuntimeFnTable[211] == nullptr) {
-					CHAOS_IL2CPP_FAIL(); // external runtime table entry 211 is null
-				}
-				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[211])(chaos_arg_0, chaos_arg_1, chaos_arg_2);
-				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+				const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__GroupBy_System_Int32_System_Int32_System_Int32__System_Collections_Generic_IEnumerable_IGrouping_System_Int32_System_Int32___System_Collections_Generic_IEnumerable_System_Int32__System_Func_System_Int32_System_Int32__System_Func_System_Int32_System_Int32__();
+				_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
 			return;
 		}
@@ -6711,23 +4189,18 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_Enumerabl
 	CHAOS_IL2CPP_INTPTR _s1;
 	CHAOS_IL2CPP_INTPTR _s2;
 	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INTPTR _s5;
+	CHAOS_IL2CPP_INTPTR _s6;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
 	_s0 = 0;
 	_s1 = 0;
 	_s2 = 0;
 	_s3 = 0;
 	{
-		const auto chaos_arg_3 = _s3;
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (214 < 0 || 214 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 214 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[214] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 214 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[214])(chaos_arg_0, chaos_arg_1, chaos_arg_2, chaos_arg_3);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__GroupBy_System_Int32_System_Int32_System_Int32__System_Collections_Generic_IEnumerable_IGrouping_System_Int32_System_Int32___System_Collections_Generic_IEnumerable_System_Int32__System_Func_System_Int32_System_Int32__System_Func_System_Int32_System_Int32__System_Collections_Generic_IEqualityComparer_System_Int32__();
+		_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	return;
 }
@@ -6742,14 +4215,13 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_Enumerabl
 	CHAOS_IL2CPP_INTPTR _s1;
 	CHAOS_IL2CPP_INTPTR _s2;
 	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INTPTR _s5;
+	CHAOS_IL2CPP_INTPTR _s6;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
 	{
-		if (30 < 0 || 30 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 30 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[30] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 30 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[30])();
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__Empty_System_Int32__System_Collections_Generic_IEnumerable_System_Int32___();
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	_s1 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c____9__297_0;
@@ -6759,9 +4231,9 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_Enumerabl
 		{
 			_s1 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c____9;
 			{
-				// Hotpatch-aware ldftn wrapper (slot 810)
+				// Hotpatch-aware ldftn wrapper (slot 774)
 				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1) -> CHAOS_IL2CPP_INT32 {
-					auto& _d_entry = s_hotpatch_entries[810];
+					auto& _d_entry = s_hotpatch_entries[774];
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
 						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
 					{
@@ -6800,9 +4272,9 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_Enumerabl
 			{
 				_s2 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c____9;
 				{
-					// Hotpatch-aware ldftn wrapper (slot 811)
+					// Hotpatch-aware ldftn wrapper (slot 775)
 					static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1) -> CHAOS_IL2CPP_INT32 {
-						auto& _d_entry = s_hotpatch_entries[811];
+						auto& _d_entry = s_hotpatch_entries[775];
 						if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
 							&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
 						{
@@ -6835,28 +4307,12 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_Enumerabl
 				}
 			}
 			{
-				if (44 < 0 || 44 >= kChaosExternalRuntimeCount) {
-					CHAOS_IL2CPP_FAIL(); // external runtime table index 44 out of range
-				}
-				if (kChaosExternalRuntimeFnTable[44] == nullptr) {
-					CHAOS_IL2CPP_FAIL(); // external runtime table entry 44 is null
-				}
-				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[44])();
+				const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Collections_Generic_EqualityComparer_System_Int32___get_Default_System_Collections_Generic_EqualityComparer_System_Int32___();
 				_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
 			{
-				const auto chaos_arg_3 = _s3;
-				const auto chaos_arg_2 = _s2;
-				const auto chaos_arg_1 = _s1;
-				const auto chaos_arg_0 = _s0;
-				if (214 < 0 || 214 >= kChaosExternalRuntimeCount) {
-					CHAOS_IL2CPP_FAIL(); // external runtime table index 214 out of range
-				}
-				if (kChaosExternalRuntimeFnTable[214] == nullptr) {
-					CHAOS_IL2CPP_FAIL(); // external runtime table entry 214 is null
-				}
-				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[214])(chaos_arg_0, chaos_arg_1, chaos_arg_2, chaos_arg_3);
-				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+				const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__GroupBy_System_Int32_System_Int32_System_Int32__System_Collections_Generic_IEnumerable_IGrouping_System_Int32_System_Int32___System_Collections_Generic_IEnumerable_System_Int32__System_Func_System_Int32_System_Int32__System_Func_System_Int32_System_Int32__System_Collections_Generic_IEqualityComparer_System_Int32__();
+				_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
 			return;
 		}
@@ -6872,21 +4328,17 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_Enumerabl
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
 	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INTPTR _s5;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
 	_s0 = 0;
 	_s1 = 0;
 	_s2 = 0;
 	{
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (217 < 0 || 217 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 217 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[217] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 217 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[217])(chaos_arg_0, chaos_arg_1, chaos_arg_2);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__GroupBy_System_Int32_System_Int32_System_Int32__System_Collections_Generic_IEnumerable_System_Int32__System_Collections_Generic_IEnumerable_System_Int32__System_Func_System_Int32_System_Int32__System_Func_System_Int32_System_Collections_Generic_IEnumerable_System_Int32__System_Int32__();
+		_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	return;
 }
@@ -6901,14 +4353,12 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_Enumerabl
 	CHAOS_IL2CPP_INTPTR _s1;
 	CHAOS_IL2CPP_INTPTR _s2;
 	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INTPTR _s5;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
 	{
-		if (30 < 0 || 30 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 30 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[30] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 30 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[30])();
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__Empty_System_Int32__System_Collections_Generic_IEnumerable_System_Int32___();
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	_s1 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c____9__301_0;
@@ -6918,9 +4368,9 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_Enumerabl
 		{
 			_s1 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c____9;
 			{
-				// Hotpatch-aware ldftn wrapper (slot 812)
+				// Hotpatch-aware ldftn wrapper (slot 776)
 				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1) -> CHAOS_IL2CPP_INT32 {
-					auto& _d_entry = s_hotpatch_entries[812];
+					auto& _d_entry = s_hotpatch_entries[776];
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
 						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
 					{
@@ -6959,9 +4409,9 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_Enumerabl
 			{
 				_s2 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c____9;
 				{
-					// Hotpatch-aware ldftn wrapper (slot 813)
+					// Hotpatch-aware ldftn wrapper (slot 777)
 					static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2) -> CHAOS_IL2CPP_INT32 {
-						auto& _d_entry = s_hotpatch_entries[813];
+						auto& _d_entry = s_hotpatch_entries[777];
 						if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
 							&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
 						{
@@ -6995,17 +4445,8 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_Enumerabl
 				}
 			}
 			{
-				const auto chaos_arg_2 = _s2;
-				const auto chaos_arg_1 = _s1;
-				const auto chaos_arg_0 = _s0;
-				if (217 < 0 || 217 >= kChaosExternalRuntimeCount) {
-					CHAOS_IL2CPP_FAIL(); // external runtime table index 217 out of range
-				}
-				if (kChaosExternalRuntimeFnTable[217] == nullptr) {
-					CHAOS_IL2CPP_FAIL(); // external runtime table entry 217 is null
-				}
-				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[217])(chaos_arg_0, chaos_arg_1, chaos_arg_2);
-				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+				const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__GroupBy_System_Int32_System_Int32_System_Int32__System_Collections_Generic_IEnumerable_System_Int32__System_Collections_Generic_IEnumerable_System_Int32__System_Func_System_Int32_System_Int32__System_Func_System_Int32_System_Collections_Generic_IEnumerable_System_Int32__System_Int32__();
+				_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
 			return;
 		}
@@ -7022,23 +4463,18 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_Enumerabl
 	CHAOS_IL2CPP_INTPTR _s1;
 	CHAOS_IL2CPP_INTPTR _s2;
 	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INTPTR _s5;
+	CHAOS_IL2CPP_INTPTR _s6;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
 	_s0 = 0;
 	_s1 = 0;
 	_s2 = 0;
 	_s3 = 0;
 	{
-		const auto chaos_arg_3 = _s3;
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (221 < 0 || 221 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 221 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[221] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 221 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[221])(chaos_arg_0, chaos_arg_1, chaos_arg_2, chaos_arg_3);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__GroupBy_System_Int32_System_Int32_System_Int32__System_Collections_Generic_IEnumerable_System_Int32__System_Collections_Generic_IEnumerable_System_Int32__System_Func_System_Int32_System_Int32__System_Func_System_Int32_System_Collections_Generic_IEnumerable_System_Int32__System_Int32__System_Collections_Generic_IEqualityComparer_System_Int32__();
+		_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	return;
 }
@@ -7053,14 +4489,13 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_Enumerabl
 	CHAOS_IL2CPP_INTPTR _s1;
 	CHAOS_IL2CPP_INTPTR _s2;
 	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INTPTR _s5;
+	CHAOS_IL2CPP_INTPTR _s6;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
 	{
-		if (30 < 0 || 30 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 30 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[30] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 30 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[30])();
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__Empty_System_Int32__System_Collections_Generic_IEnumerable_System_Int32___();
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	_s1 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c____9__305_0;
@@ -7070,9 +4505,9 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_Enumerabl
 		{
 			_s1 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c____9;
 			{
-				// Hotpatch-aware ldftn wrapper (slot 814)
+				// Hotpatch-aware ldftn wrapper (slot 778)
 				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1) -> CHAOS_IL2CPP_INT32 {
-					auto& _d_entry = s_hotpatch_entries[814];
+					auto& _d_entry = s_hotpatch_entries[778];
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
 						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
 					{
@@ -7111,9 +4546,9 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_Enumerabl
 			{
 				_s2 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c____9;
 				{
-					// Hotpatch-aware ldftn wrapper (slot 815)
+					// Hotpatch-aware ldftn wrapper (slot 779)
 					static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2) -> CHAOS_IL2CPP_INT32 {
-						auto& _d_entry = s_hotpatch_entries[815];
+						auto& _d_entry = s_hotpatch_entries[779];
 						if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
 							&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
 						{
@@ -7147,28 +4582,12 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_Enumerabl
 				}
 			}
 			{
-				if (44 < 0 || 44 >= kChaosExternalRuntimeCount) {
-					CHAOS_IL2CPP_FAIL(); // external runtime table index 44 out of range
-				}
-				if (kChaosExternalRuntimeFnTable[44] == nullptr) {
-					CHAOS_IL2CPP_FAIL(); // external runtime table entry 44 is null
-				}
-				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[44])();
+				const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Collections_Generic_EqualityComparer_System_Int32___get_Default_System_Collections_Generic_EqualityComparer_System_Int32___();
 				_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
 			{
-				const auto chaos_arg_3 = _s3;
-				const auto chaos_arg_2 = _s2;
-				const auto chaos_arg_1 = _s1;
-				const auto chaos_arg_0 = _s0;
-				if (221 < 0 || 221 >= kChaosExternalRuntimeCount) {
-					CHAOS_IL2CPP_FAIL(); // external runtime table index 221 out of range
-				}
-				if (kChaosExternalRuntimeFnTable[221] == nullptr) {
-					CHAOS_IL2CPP_FAIL(); // external runtime table entry 221 is null
-				}
-				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[221])(chaos_arg_0, chaos_arg_1, chaos_arg_2, chaos_arg_3);
-				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+				const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__GroupBy_System_Int32_System_Int32_System_Int32__System_Collections_Generic_IEnumerable_System_Int32__System_Collections_Generic_IEnumerable_System_Int32__System_Func_System_Int32_System_Int32__System_Func_System_Int32_System_Collections_Generic_IEnumerable_System_Int32__System_Int32__System_Collections_Generic_IEqualityComparer_System_Int32__();
+				_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
 			return;
 		}
@@ -7185,30 +4604,172 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_Enumerabl
 	CHAOS_IL2CPP_INTPTR _s1;
 	CHAOS_IL2CPP_INTPTR _s2;
 	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INTPTR _s5;
+	CHAOS_IL2CPP_INTPTR _s6;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
 	_s0 = 0;
 	_s1 = 0;
 	_s2 = 0;
 	_s3 = 0;
 	{
-		const auto chaos_arg_3 = _s3;
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (224 < 0 || 224 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 224 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[224] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 224 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[224])(chaos_arg_0, chaos_arg_1, chaos_arg_2, chaos_arg_3);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__GroupBy_System_Int32_System_Int32_System_Int32_System_Int32__System_Collections_Generic_IEnumerable_System_Int32__System_Collections_Generic_IEnumerable_System_Int32__System_Func_System_Int32_System_Int32__System_Func_System_Int32_System_Int32__System_Func_System_Int32_System_Collections_Generic_IEnumerable_System_Int32__System_Int32__();
+		_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	return;
 }
 
-// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq.System_Linq_EnumerableTests::Benchmark_GroupBy_69_IEnumerableint_System_Funcintint_System_Funcintint_System_FuncintIEnumerableintint_1:System.Void()
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq.System_Linq_EnumerableTests::Benchmark_GroupBy_69_IEnumerableint_System_Funcintint_System_Funcintint_System_FuncintIEnumerableintint_1()
 extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests_Benchmark_GroupBy_69_IEnumerableint_System_Funcintint_System_Funcintint_System_FuncintIEnumerableintint_1(void)
 {
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INTPTR _s5;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	{
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__Empty_System_Int32__System_Collections_Generic_IEnumerable_System_Int32___();
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	_s1 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c____9__309_0;
+	_s2 = _s1;
+	{
+		if (_s2 == 0)
+		{
+			_s1 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c____9;
+			{
+				// Hotpatch-aware ldftn wrapper (slot 780)
+				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1) -> CHAOS_IL2CPP_INT32 {
+					auto& _d_entry = s_hotpatch_entries[780];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+					{
+						alignas(16) uint8_t _d_ab[12];
+						ArgBuffer _d_bw(_d_ab);
+						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+						_d_bw.WriteI32(static_cast<CHAOS_IL2CPP_INT32>(chaos_fn_arg_1));
+						CHAOS_IL2CPP_INT32 _d_ret{};
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d_entry.method_key, _d_ab, &_d_ret);
+						return _d_ret;
+					}
+					return reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INT32)>(_d_entry.direct_ptr)(chaos_fn_arg_0, chaos_fn_arg_1);
+				};
+			_s2 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+			}
+			{
+				const auto chaos_method_ptr = _s2;
+				const auto chaos_target = _s1;
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Func_System_Int32_System_Int32_, {});
+				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Func_System_Int32_System_Int32_.AsTypeInfoHot();
+				chaos_object->chaos_delegate_target = chaos_target;
+				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+				_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			_s2 = _s1;
+			{
+				auto chaos_value = _s2;
+				chaos_static_CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c____9__309_0 = chaos_value;
+			}
+		}
+		_s2 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c____9__309_1;
+		_s3 = _s2;
+		{
+			if (_s3 == 0)
+			{
+				_s2 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c____9;
+				{
+					// Hotpatch-aware ldftn wrapper (slot 781)
+					static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1) -> CHAOS_IL2CPP_INT32 {
+						auto& _d_entry = s_hotpatch_entries[781];
+						if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+							&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+						{
+							alignas(16) uint8_t _d_ab[12];
+							ArgBuffer _d_bw(_d_ab);
+							_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+							_d_bw.WriteI32(static_cast<CHAOS_IL2CPP_INT32>(chaos_fn_arg_1));
+							CHAOS_IL2CPP_INT32 _d_ret{};
+							::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+								_d_entry.method_key, _d_ab, &_d_ret);
+							return _d_ret;
+						}
+						return reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INT32)>(_d_entry.direct_ptr)(chaos_fn_arg_0, chaos_fn_arg_1);
+					};
+				_s3 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+				}
+				{
+					const auto chaos_method_ptr = _s3;
+					const auto chaos_target = _s2;
+					auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Func_System_Int32_System_Int32_, {});
+					chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Func_System_Int32_System_Int32_.AsTypeInfoHot();
+					chaos_object->chaos_delegate_target = chaos_target;
+					chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+					_s2 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+				}
+				_s3 = _s2;
+				{
+					auto chaos_value = _s3;
+					chaos_static_CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c____9__309_1 = chaos_value;
+				}
+			}
+			_s1 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c____9__309_2;
+			_s2 = _s1;
+			{
+				if (_s2 == 0)
+				{
+					_s1 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c____9;
+					{
+						// Hotpatch-aware ldftn wrapper (slot 782)
+						static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2) -> CHAOS_IL2CPP_INT32 {
+							auto& _d_entry = s_hotpatch_entries[782];
+							if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+								&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+							{
+								alignas(16) uint8_t _d_ab[20];
+								ArgBuffer _d_bw(_d_ab);
+								_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+								_d_bw.WriteI32(static_cast<CHAOS_IL2CPP_INT32>(chaos_fn_arg_1));
+								_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_2));
+								CHAOS_IL2CPP_INT32 _d_ret{};
+								::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+									_d_entry.method_key, _d_ab, &_d_ret);
+								return _d_ret;
+							}
+							return reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INT32, CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0, chaos_fn_arg_1, chaos_fn_arg_2);
+						};
+					_s2 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+					}
+					{
+						const auto chaos_method_ptr = _s2;
+						const auto chaos_target = _s1;
+						auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Func_System_Int32_System_Collections_Generic_IEnumerable_System_Int32__System_Int32_, {});
+						chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Func_System_Int32_System_Collections_Generic_IEnumerable_System_Int32__System_Int32_.AsTypeInfoHot();
+						chaos_object->chaos_delegate_target = chaos_target;
+						chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+						_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+					}
+					_s2 = _s1;
+					{
+						auto chaos_value = _s2;
+						chaos_static_CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c____9__309_2 = chaos_value;
+					}
+				}
+				{
+					const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__GroupBy_System_Int32_System_Int32_System_Int32_System_Int32__System_Collections_Generic_IEnumerable_System_Int32__System_Collections_Generic_IEnumerable_System_Int32__System_Func_System_Int32_System_Int32__System_Func_System_Int32_System_Int32__System_Func_System_Int32_System_Collections_Generic_IEnumerable_System_Int32__System_Int32__();
+					_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+				}
+				return;
+			}
+		}
+	}
 }
 
 // Managed method: CombinedSubjects/AutoGenerated.System_Linq.System_Linq_EnumerableTests::Benchmark_GroupBy_70_IEnumerableint_System_Funcintint_System_Funcintint_System_FuncintIEnumerableintint_IEqualityComparerint_0()
@@ -7222,32 +4783,177 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_Enumerabl
 	CHAOS_IL2CPP_INTPTR _s2;
 	CHAOS_IL2CPP_INTPTR _s3;
 	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INTPTR _s5;
+	CHAOS_IL2CPP_INTPTR _s6;
+	CHAOS_IL2CPP_INTPTR _s7;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
 	_s0 = 0;
 	_s1 = 0;
 	_s2 = 0;
 	_s3 = 0;
 	_s4 = 0;
 	{
-		const auto chaos_arg_4 = _s4;
-		const auto chaos_arg_3 = _s3;
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (228 < 0 || 228 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 228 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[228] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 228 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[228])(chaos_arg_0, chaos_arg_1, chaos_arg_2, chaos_arg_3, chaos_arg_4);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__GroupBy_System_Int32_System_Int32_System_Int32_System_Int32__System_Collections_Generic_IEnumerable_System_Int32__System_Collections_Generic_IEnumerable_System_Int32__System_Func_System_Int32_System_Int32__System_Func_System_Int32_System_Int32__System_Func_System_Int32_System_Collections_Generic_IEnumerable_System_Int32__System_Int32__System_Collections_Generic_IEqualityComparer_System_Int32__();
+		_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	return;
 }
 
-// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq.System_Linq_EnumerableTests::Benchmark_GroupBy_70_IEnumerableint_System_Funcintint_System_Funcintint_System_FuncintIEnumerableintint_IEqualityComparerint_1:System.Void()
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq.System_Linq_EnumerableTests::Benchmark_GroupBy_70_IEnumerableint_System_Funcintint_System_Funcintint_System_FuncintIEnumerableintint_IEqualityComparerint_1()
 extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests_Benchmark_GroupBy_70_IEnumerableint_System_Funcintint_System_Funcintint_System_FuncintIEnumerableintint_IEqualityComparerint_1(void)
 {
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INTPTR _s5;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	{
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__Empty_System_Int32__System_Collections_Generic_IEnumerable_System_Int32___();
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	_s1 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c____9__313_0;
+	_s2 = _s1;
+	{
+		if (_s2 == 0)
+		{
+			_s1 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c____9;
+			{
+				// Hotpatch-aware ldftn wrapper (slot 783)
+				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1) -> CHAOS_IL2CPP_INT32 {
+					auto& _d_entry = s_hotpatch_entries[783];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+					{
+						alignas(16) uint8_t _d_ab[12];
+						ArgBuffer _d_bw(_d_ab);
+						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+						_d_bw.WriteI32(static_cast<CHAOS_IL2CPP_INT32>(chaos_fn_arg_1));
+						CHAOS_IL2CPP_INT32 _d_ret{};
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d_entry.method_key, _d_ab, &_d_ret);
+						return _d_ret;
+					}
+					return reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INT32)>(_d_entry.direct_ptr)(chaos_fn_arg_0, chaos_fn_arg_1);
+				};
+			_s2 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+			}
+			{
+				const auto chaos_method_ptr = _s2;
+				const auto chaos_target = _s1;
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Func_System_Int32_System_Int32_, {});
+				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Func_System_Int32_System_Int32_.AsTypeInfoHot();
+				chaos_object->chaos_delegate_target = chaos_target;
+				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+				_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			_s2 = _s1;
+			{
+				auto chaos_value = _s2;
+				chaos_static_CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c____9__313_0 = chaos_value;
+			}
+		}
+		_s2 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c____9__313_1;
+		_s3 = _s2;
+		{
+			if (_s3 == 0)
+			{
+				_s2 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c____9;
+				{
+					// Hotpatch-aware ldftn wrapper (slot 784)
+					static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1) -> CHAOS_IL2CPP_INT32 {
+						auto& _d_entry = s_hotpatch_entries[784];
+						if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+							&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+						{
+							alignas(16) uint8_t _d_ab[12];
+							ArgBuffer _d_bw(_d_ab);
+							_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+							_d_bw.WriteI32(static_cast<CHAOS_IL2CPP_INT32>(chaos_fn_arg_1));
+							CHAOS_IL2CPP_INT32 _d_ret{};
+							::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+								_d_entry.method_key, _d_ab, &_d_ret);
+							return _d_ret;
+						}
+						return reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INT32)>(_d_entry.direct_ptr)(chaos_fn_arg_0, chaos_fn_arg_1);
+					};
+				_s3 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+				}
+				{
+					const auto chaos_method_ptr = _s3;
+					const auto chaos_target = _s2;
+					auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Func_System_Int32_System_Int32_, {});
+					chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Func_System_Int32_System_Int32_.AsTypeInfoHot();
+					chaos_object->chaos_delegate_target = chaos_target;
+					chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+					_s2 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+				}
+				_s3 = _s2;
+				{
+					auto chaos_value = _s3;
+					chaos_static_CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c____9__313_1 = chaos_value;
+				}
+			}
+			_s1 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c____9__313_2;
+			_s2 = _s1;
+			{
+				if (_s2 == 0)
+				{
+					_s1 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c____9;
+					{
+						// Hotpatch-aware ldftn wrapper (slot 785)
+						static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2) -> CHAOS_IL2CPP_INT32 {
+							auto& _d_entry = s_hotpatch_entries[785];
+							if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+								&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+							{
+								alignas(16) uint8_t _d_ab[20];
+								ArgBuffer _d_bw(_d_ab);
+								_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+								_d_bw.WriteI32(static_cast<CHAOS_IL2CPP_INT32>(chaos_fn_arg_1));
+								_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_2));
+								CHAOS_IL2CPP_INT32 _d_ret{};
+								::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+									_d_entry.method_key, _d_ab, &_d_ret);
+								return _d_ret;
+							}
+							return reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INT32, CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0, chaos_fn_arg_1, chaos_fn_arg_2);
+						};
+					_s2 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+					}
+					{
+						const auto chaos_method_ptr = _s2;
+						const auto chaos_target = _s1;
+						auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Func_System_Int32_System_Collections_Generic_IEnumerable_System_Int32__System_Int32_, {});
+						chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Func_System_Int32_System_Collections_Generic_IEnumerable_System_Int32__System_Int32_.AsTypeInfoHot();
+						chaos_object->chaos_delegate_target = chaos_target;
+						chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+						_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+					}
+					_s2 = _s1;
+					{
+						auto chaos_value = _s2;
+						chaos_static_CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c____9__313_2 = chaos_value;
+					}
+				}
+				{
+					const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Collections_Generic_EqualityComparer_System_Int32___get_Default_System_Collections_Generic_EqualityComparer_System_Int32___();
+					_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+				}
+				{
+					const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__GroupBy_System_Int32_System_Int32_System_Int32_System_Int32__System_Collections_Generic_IEnumerable_System_Int32__System_Collections_Generic_IEnumerable_System_Int32__System_Func_System_Int32_System_Int32__System_Func_System_Int32_System_Int32__System_Func_System_Int32_System_Collections_Generic_IEnumerable_System_Int32__System_Int32__System_Collections_Generic_IEqualityComparer_System_Int32__();
+					_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+				}
+				return;
+			}
+		}
+	}
 }
 
 // Managed method: CombinedSubjects/AutoGenerated.System_Linq.System_Linq_EnumerableTests::Benchmark_GroupJoin_71_IEnumerableint_IEnumerableint_System_Funcintint_System_Funcintint_System_FuncintIEnumerableintint_0()
@@ -7261,32 +4967,178 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_Enumerabl
 	CHAOS_IL2CPP_INTPTR _s2;
 	CHAOS_IL2CPP_INTPTR _s3;
 	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INTPTR _s5;
+	CHAOS_IL2CPP_INTPTR _s6;
+	CHAOS_IL2CPP_INTPTR _s7;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
 	_s0 = 0;
 	_s1 = 0;
 	_s2 = 0;
 	_s3 = 0;
 	_s4 = 0;
 	{
-		const auto chaos_arg_4 = _s4;
-		const auto chaos_arg_3 = _s3;
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (232 < 0 || 232 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 232 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[232] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 232 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[232])(chaos_arg_0, chaos_arg_1, chaos_arg_2, chaos_arg_3, chaos_arg_4);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__GroupJoin_System_Int32_System_Int32_System_Int32_System_Int32__System_Collections_Generic_IEnumerable_System_Int32__System_Collections_Generic_IEnumerable_System_Int32__System_Collections_Generic_IEnumerable_System_Int32__System_Func_System_Int32_System_Int32__System_Func_System_Int32_System_Int32__System_Func_System_Int32_System_Collections_Generic_IEnumerable_System_Int32__System_Int32__();
+		_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	return;
 }
 
-// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq.System_Linq_EnumerableTests::Benchmark_GroupJoin_71_IEnumerableint_IEnumerableint_System_Funcintint_System_Funcintint_System_FuncintIEnumerableintint_1:System.Void()
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq.System_Linq_EnumerableTests::Benchmark_GroupJoin_71_IEnumerableint_IEnumerableint_System_Funcintint_System_Funcintint_System_FuncintIEnumerableintint_1()
 extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests_Benchmark_GroupJoin_71_IEnumerableint_IEnumerableint_System_Funcintint_System_Funcintint_System_FuncintIEnumerableintint_1(void)
 {
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INTPTR _s5;
+	CHAOS_IL2CPP_INTPTR _s6;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	{
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__Empty_System_Int32__System_Collections_Generic_IEnumerable_System_Int32___();
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	{
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__Empty_System_Int32__System_Collections_Generic_IEnumerable_System_Int32___();
+		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	_s2 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c____9__317_0;
+	_s3 = _s2;
+	{
+		if (_s3 == 0)
+		{
+			_s2 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c____9;
+			{
+				// Hotpatch-aware ldftn wrapper (slot 786)
+				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1) -> CHAOS_IL2CPP_INT32 {
+					auto& _d_entry = s_hotpatch_entries[786];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+					{
+						alignas(16) uint8_t _d_ab[12];
+						ArgBuffer _d_bw(_d_ab);
+						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+						_d_bw.WriteI32(static_cast<CHAOS_IL2CPP_INT32>(chaos_fn_arg_1));
+						CHAOS_IL2CPP_INT32 _d_ret{};
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d_entry.method_key, _d_ab, &_d_ret);
+						return _d_ret;
+					}
+					return reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INT32)>(_d_entry.direct_ptr)(chaos_fn_arg_0, chaos_fn_arg_1);
+				};
+			_s3 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+			}
+			{
+				const auto chaos_method_ptr = _s3;
+				const auto chaos_target = _s2;
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Func_System_Int32_System_Int32_, {});
+				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Func_System_Int32_System_Int32_.AsTypeInfoHot();
+				chaos_object->chaos_delegate_target = chaos_target;
+				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+				_s2 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			_s3 = _s2;
+			{
+				auto chaos_value = _s3;
+				chaos_static_CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c____9__317_0 = chaos_value;
+			}
+		}
+		_s3 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c____9__317_1;
+		_s4 = _s3;
+		{
+			if (_s4 == 0)
+			{
+				_s3 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c____9;
+				{
+					// Hotpatch-aware ldftn wrapper (slot 787)
+					static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1) -> CHAOS_IL2CPP_INT32 {
+						auto& _d_entry = s_hotpatch_entries[787];
+						if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+							&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+						{
+							alignas(16) uint8_t _d_ab[12];
+							ArgBuffer _d_bw(_d_ab);
+							_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+							_d_bw.WriteI32(static_cast<CHAOS_IL2CPP_INT32>(chaos_fn_arg_1));
+							CHAOS_IL2CPP_INT32 _d_ret{};
+							::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+								_d_entry.method_key, _d_ab, &_d_ret);
+							return _d_ret;
+						}
+						return reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INT32)>(_d_entry.direct_ptr)(chaos_fn_arg_0, chaos_fn_arg_1);
+					};
+				_s4 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+				}
+				{
+					const auto chaos_method_ptr = _s4;
+					const auto chaos_target = _s3;
+					auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Func_System_Int32_System_Int32_, {});
+					chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Func_System_Int32_System_Int32_.AsTypeInfoHot();
+					chaos_object->chaos_delegate_target = chaos_target;
+					chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+					_s3 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+				}
+				_s4 = _s3;
+				{
+					auto chaos_value = _s4;
+					chaos_static_CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c____9__317_1 = chaos_value;
+				}
+			}
+			_s1 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c____9__317_2;
+			_s2 = _s1;
+			{
+				if (_s2 == 0)
+				{
+					_s1 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c____9;
+					{
+						// Hotpatch-aware ldftn wrapper (slot 788)
+						static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2) -> CHAOS_IL2CPP_INT32 {
+							auto& _d_entry = s_hotpatch_entries[788];
+							if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+								&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+							{
+								alignas(16) uint8_t _d_ab[20];
+								ArgBuffer _d_bw(_d_ab);
+								_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+								_d_bw.WriteI32(static_cast<CHAOS_IL2CPP_INT32>(chaos_fn_arg_1));
+								_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_2));
+								CHAOS_IL2CPP_INT32 _d_ret{};
+								::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+									_d_entry.method_key, _d_ab, &_d_ret);
+								return _d_ret;
+							}
+							return reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INT32, CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0, chaos_fn_arg_1, chaos_fn_arg_2);
+						};
+					_s2 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+					}
+					{
+						const auto chaos_method_ptr = _s2;
+						const auto chaos_target = _s1;
+						auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Func_System_Int32_System_Collections_Generic_IEnumerable_System_Int32__System_Int32_, {});
+						chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Func_System_Int32_System_Collections_Generic_IEnumerable_System_Int32__System_Int32_.AsTypeInfoHot();
+						chaos_object->chaos_delegate_target = chaos_target;
+						chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+						_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+					}
+					_s2 = _s1;
+					{
+						auto chaos_value = _s2;
+						chaos_static_CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c____9__317_2 = chaos_value;
+					}
+				}
+				{
+					const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__GroupJoin_System_Int32_System_Int32_System_Int32_System_Int32__System_Collections_Generic_IEnumerable_System_Int32__System_Collections_Generic_IEnumerable_System_Int32__System_Collections_Generic_IEnumerable_System_Int32__System_Func_System_Int32_System_Int32__System_Func_System_Int32_System_Int32__System_Func_System_Int32_System_Collections_Generic_IEnumerable_System_Int32__System_Int32__();
+					_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+				}
+				return;
+			}
+		}
+	}
 }
 
 // Managed method: CombinedSubjects/AutoGenerated.System_Linq.System_Linq_EnumerableTests::Benchmark_GroupJoin_72_IEnumerableint_IEnumerableint_System_Funcintint_System_Funcintint_System_FuncintIEnumerableintint_IEqualityComparerint_0()
@@ -7301,6 +5153,11 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_Enumerabl
 	CHAOS_IL2CPP_INTPTR _s3;
 	CHAOS_IL2CPP_INTPTR _s4;
 	CHAOS_IL2CPP_INTPTR _s5;
+	CHAOS_IL2CPP_INTPTR _s6;
+	CHAOS_IL2CPP_INTPTR _s7;
+	CHAOS_IL2CPP_INTPTR _s8;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
 	_s0 = 0;
 	_s1 = 0;
 	_s2 = 0;
@@ -7308,27 +5165,171 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_Enumerabl
 	_s4 = 0;
 	_s5 = 0;
 	{
-		const auto chaos_arg_5 = _s5;
-		const auto chaos_arg_4 = _s4;
-		const auto chaos_arg_3 = _s3;
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (236 < 0 || 236 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 236 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[236] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 236 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[236])(chaos_arg_0, chaos_arg_1, chaos_arg_2, chaos_arg_3, chaos_arg_4, chaos_arg_5);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__GroupJoin_System_Int32_System_Int32_System_Int32_System_Int32__System_Collections_Generic_IEnumerable_System_Int32__System_Collections_Generic_IEnumerable_System_Int32__System_Collections_Generic_IEnumerable_System_Int32__System_Func_System_Int32_System_Int32__System_Func_System_Int32_System_Int32__System_Func_System_Int32_System_Collections_Generic_IEnumerable_System_Int32__System_Int32__System_Collections_Generic_IEqualityComparer_System_Int32__();
+		_s6 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	return;
 }
 
-// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq.System_Linq_EnumerableTests::Benchmark_GroupJoin_72_IEnumerableint_IEnumerableint_System_Funcintint_System_Funcintint_System_FuncintIEnumerableintint_IEqualityComparerint_1:System.Void()
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq.System_Linq_EnumerableTests::Benchmark_GroupJoin_72_IEnumerableint_IEnumerableint_System_Funcintint_System_Funcintint_System_FuncintIEnumerableintint_IEqualityComparerint_1()
 extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests_Benchmark_GroupJoin_72_IEnumerableint_IEnumerableint_System_Funcintint_System_Funcintint_System_FuncintIEnumerableintint_IEqualityComparerint_1(void)
 {
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INTPTR _s5;
+	CHAOS_IL2CPP_INTPTR _s6;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	{
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__Empty_System_Int32__System_Collections_Generic_IEnumerable_System_Int32___();
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	{
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__Empty_System_Int32__System_Collections_Generic_IEnumerable_System_Int32___();
+		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	_s2 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c____9__321_0;
+	_s3 = _s2;
+	{
+		if (_s3 == 0)
+		{
+			_s2 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c____9;
+			{
+				// Hotpatch-aware ldftn wrapper (slot 789)
+				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1) -> CHAOS_IL2CPP_INT32 {
+					auto& _d_entry = s_hotpatch_entries[789];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+					{
+						alignas(16) uint8_t _d_ab[12];
+						ArgBuffer _d_bw(_d_ab);
+						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+						_d_bw.WriteI32(static_cast<CHAOS_IL2CPP_INT32>(chaos_fn_arg_1));
+						CHAOS_IL2CPP_INT32 _d_ret{};
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d_entry.method_key, _d_ab, &_d_ret);
+						return _d_ret;
+					}
+					return reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INT32)>(_d_entry.direct_ptr)(chaos_fn_arg_0, chaos_fn_arg_1);
+				};
+			_s3 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+			}
+			{
+				const auto chaos_method_ptr = _s3;
+				const auto chaos_target = _s2;
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Func_System_Int32_System_Int32_, {});
+				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Func_System_Int32_System_Int32_.AsTypeInfoHot();
+				chaos_object->chaos_delegate_target = chaos_target;
+				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+				_s2 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			_s3 = _s2;
+			{
+				auto chaos_value = _s3;
+				chaos_static_CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c____9__321_0 = chaos_value;
+			}
+		}
+		_s3 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c____9__321_1;
+		_s4 = _s3;
+		{
+			if (_s4 == 0)
+			{
+				_s3 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c____9;
+				{
+					// Hotpatch-aware ldftn wrapper (slot 790)
+					static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1) -> CHAOS_IL2CPP_INT32 {
+						auto& _d_entry = s_hotpatch_entries[790];
+						if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+							&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+						{
+							alignas(16) uint8_t _d_ab[12];
+							ArgBuffer _d_bw(_d_ab);
+							_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+							_d_bw.WriteI32(static_cast<CHAOS_IL2CPP_INT32>(chaos_fn_arg_1));
+							CHAOS_IL2CPP_INT32 _d_ret{};
+							::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+								_d_entry.method_key, _d_ab, &_d_ret);
+							return _d_ret;
+						}
+						return reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INT32)>(_d_entry.direct_ptr)(chaos_fn_arg_0, chaos_fn_arg_1);
+					};
+				_s4 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+				}
+				{
+					const auto chaos_method_ptr = _s4;
+					const auto chaos_target = _s3;
+					auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Func_System_Int32_System_Int32_, {});
+					chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Func_System_Int32_System_Int32_.AsTypeInfoHot();
+					chaos_object->chaos_delegate_target = chaos_target;
+					chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+					_s3 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+				}
+				_s4 = _s3;
+				{
+					auto chaos_value = _s4;
+					chaos_static_CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c____9__321_1 = chaos_value;
+				}
+			}
+			_s1 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c____9__321_2;
+			_s2 = _s1;
+			{
+				if (_s2 == 0)
+				{
+					_s1 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c____9;
+					{
+						// Hotpatch-aware ldftn wrapper (slot 791)
+						static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2) -> CHAOS_IL2CPP_INT32 {
+							auto& _d_entry = s_hotpatch_entries[791];
+							if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+								&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+							{
+								alignas(16) uint8_t _d_ab[20];
+								ArgBuffer _d_bw(_d_ab);
+								_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+								_d_bw.WriteI32(static_cast<CHAOS_IL2CPP_INT32>(chaos_fn_arg_1));
+								_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_2));
+								CHAOS_IL2CPP_INT32 _d_ret{};
+								::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+									_d_entry.method_key, _d_ab, &_d_ret);
+								return _d_ret;
+							}
+							return reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INT32, CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0, chaos_fn_arg_1, chaos_fn_arg_2);
+						};
+					_s2 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+					}
+					{
+						const auto chaos_method_ptr = _s2;
+						const auto chaos_target = _s1;
+						auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Func_System_Int32_System_Collections_Generic_IEnumerable_System_Int32__System_Int32_, {});
+						chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Func_System_Int32_System_Collections_Generic_IEnumerable_System_Int32__System_Int32_.AsTypeInfoHot();
+						chaos_object->chaos_delegate_target = chaos_target;
+						chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+						_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+					}
+					_s2 = _s1;
+					{
+						auto chaos_value = _s2;
+						chaos_static_CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c____9__321_2 = chaos_value;
+					}
+				}
+				{
+					const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Collections_Generic_EqualityComparer_System_Int32___get_Default_System_Collections_Generic_EqualityComparer_System_Int32___();
+					_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+				}
+				{
+					const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__GroupJoin_System_Int32_System_Int32_System_Int32_System_Int32__System_Collections_Generic_IEnumerable_System_Int32__System_Collections_Generic_IEnumerable_System_Int32__System_Collections_Generic_IEnumerable_System_Int32__System_Func_System_Int32_System_Int32__System_Func_System_Int32_System_Int32__System_Func_System_Int32_System_Collections_Generic_IEnumerable_System_Int32__System_Int32__System_Collections_Generic_IEqualityComparer_System_Int32__();
+					_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+				}
+				return;
+			}
+		}
+	}
 }
 
 // Managed method: CombinedSubjects/AutoGenerated.System_Linq.System_Linq_EnumerableTests::Benchmark_Index_73_IEnumerableint_0()
@@ -7338,17 +5339,1770 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_Enumerabl
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 
 	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
 	_s0 = 0;
 	{
-		const auto chaos_arg_0 = _s0;
-		if (240 < 0 || 240 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 240 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[240] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 240 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[240])(chaos_arg_0);
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__Index_System_Int32__System_Collections_Generic_IEnumerable_System_ValueTuple_System_Int32_System_Int32___System_Collections_Generic_IEnumerable_System_Int32__();
+		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq.System_Linq_EnumerableTests::Benchmark_Index_73_IEnumerableint_1()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests_Benchmark_Index_73_IEnumerableint_1(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	{
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__Empty_System_Int32__System_Collections_Generic_IEnumerable_System_Int32___();
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	{
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__Index_System_Int32__System_Collections_Generic_IEnumerable_System_ValueTuple_System_Int32_System_Int32___System_Collections_Generic_IEnumerable_System_Int32__();
+		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq.System_Linq_EnumerableTests::Benchmark_Intersect_74_IEnumerableint_IEnumerableint_0()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests_Benchmark_Intersect_74_IEnumerableint_IEnumerableint_0(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	_s1 = 0;
+	{
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__Intersect_System_Int32__System_Collections_Generic_IEnumerable_System_Int32__System_Collections_Generic_IEnumerable_System_Int32__System_Collections_Generic_IEnumerable_System_Int32__();
+		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq.System_Linq_EnumerableTests::Benchmark_Intersect_74_IEnumerableint_IEnumerableint_1()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests_Benchmark_Intersect_74_IEnumerableint_IEnumerableint_1(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	{
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__Empty_System_Int32__System_Collections_Generic_IEnumerable_System_Int32___();
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	{
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__Empty_System_Int32__System_Collections_Generic_IEnumerable_System_Int32___();
+		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	{
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__Intersect_System_Int32__System_Collections_Generic_IEnumerable_System_Int32__System_Collections_Generic_IEnumerable_System_Int32__System_Collections_Generic_IEnumerable_System_Int32__();
+		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq.System_Linq_EnumerableTests::Benchmark_Intersect_75_IEnumerableint_IEnumerableint_IEqualityComparerint_0()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests_Benchmark_Intersect_75_IEnumerableint_IEnumerableint_IEqualityComparerint_0(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INTPTR _s5;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	_s1 = 0;
+	_s2 = 0;
+	{
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__Intersect_System_Int32__System_Collections_Generic_IEnumerable_System_Int32__System_Collections_Generic_IEnumerable_System_Int32__System_Collections_Generic_IEnumerable_System_Int32__System_Collections_Generic_IEqualityComparer_System_Int32__();
+		_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq.System_Linq_EnumerableTests::Benchmark_Intersect_75_IEnumerableint_IEnumerableint_IEqualityComparerint_1()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests_Benchmark_Intersect_75_IEnumerableint_IEnumerableint_IEqualityComparerint_1(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INTPTR _s5;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	{
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__Empty_System_Int32__System_Collections_Generic_IEnumerable_System_Int32___();
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	{
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__Empty_System_Int32__System_Collections_Generic_IEnumerable_System_Int32___();
+		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	{
+		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Collections_Generic_EqualityComparer_System_Int32___get_Default_System_Collections_Generic_EqualityComparer_System_Int32___();
+		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	{
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__Intersect_System_Int32__System_Collections_Generic_IEnumerable_System_Int32__System_Collections_Generic_IEnumerable_System_Int32__System_Collections_Generic_IEnumerable_System_Int32__System_Collections_Generic_IEqualityComparer_System_Int32__();
+		_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq.System_Linq_EnumerableTests::Benchmark_IntersectBy_76_IEnumerableint_IEnumerableint_System_Funcintint_0()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests_Benchmark_IntersectBy_76_IEnumerableint_IEnumerableint_System_Funcintint_0(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INTPTR _s5;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	_s1 = 0;
+	_s2 = 0;
+	{
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__IntersectBy_System_Int32_System_Int32__System_Collections_Generic_IEnumerable_System_Int32__System_Collections_Generic_IEnumerable_System_Int32__System_Collections_Generic_IEnumerable_System_Int32__System_Func_System_Int32_System_Int32__();
+		_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq.System_Linq_EnumerableTests::Benchmark_IntersectBy_76_IEnumerableint_IEnumerableint_System_Funcintint_1()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests_Benchmark_IntersectBy_76_IEnumerableint_IEnumerableint_System_Funcintint_1(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INTPTR _s5;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	{
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__Empty_System_Int32__System_Collections_Generic_IEnumerable_System_Int32___();
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	{
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__Empty_System_Int32__System_Collections_Generic_IEnumerable_System_Int32___();
+		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	_s2 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c____9__337_0;
+	_s3 = _s2;
+	{
+		if (_s3 == 0)
+		{
+			_s2 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c____9;
+			{
+				// Hotpatch-aware ldftn wrapper (slot 792)
+				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1) -> CHAOS_IL2CPP_INT32 {
+					auto& _d_entry = s_hotpatch_entries[792];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+					{
+						alignas(16) uint8_t _d_ab[12];
+						ArgBuffer _d_bw(_d_ab);
+						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+						_d_bw.WriteI32(static_cast<CHAOS_IL2CPP_INT32>(chaos_fn_arg_1));
+						CHAOS_IL2CPP_INT32 _d_ret{};
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d_entry.method_key, _d_ab, &_d_ret);
+						return _d_ret;
+					}
+					return reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INT32)>(_d_entry.direct_ptr)(chaos_fn_arg_0, chaos_fn_arg_1);
+				};
+			_s3 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+			}
+			{
+				const auto chaos_method_ptr = _s3;
+				const auto chaos_target = _s2;
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Func_System_Int32_System_Int32_, {});
+				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Func_System_Int32_System_Int32_.AsTypeInfoHot();
+				chaos_object->chaos_delegate_target = chaos_target;
+				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+				_s2 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			_s3 = _s2;
+			{
+				auto chaos_value = _s3;
+				chaos_static_CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c____9__337_0 = chaos_value;
+			}
+		}
+		{
+			const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__IntersectBy_System_Int32_System_Int32__System_Collections_Generic_IEnumerable_System_Int32__System_Collections_Generic_IEnumerable_System_Int32__System_Collections_Generic_IEnumerable_System_Int32__System_Func_System_Int32_System_Int32__();
+			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+		}
+		return;
+	}
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq.System_Linq_EnumerableTests::Benchmark_IntersectBy_77_IEnumerableint_IEnumerableint_System_Funcintint_IEqualityComparerint_0()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests_Benchmark_IntersectBy_77_IEnumerableint_IEnumerableint_System_Funcintint_IEqualityComparerint_0(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INTPTR _s5;
+	CHAOS_IL2CPP_INTPTR _s6;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	_s1 = 0;
+	_s2 = 0;
+	_s3 = 0;
+	{
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__IntersectBy_System_Int32_System_Int32__System_Collections_Generic_IEnumerable_System_Int32__System_Collections_Generic_IEnumerable_System_Int32__System_Collections_Generic_IEnumerable_System_Int32__System_Func_System_Int32_System_Int32__System_Collections_Generic_IEqualityComparer_System_Int32__();
+		_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq.System_Linq_EnumerableTests::Benchmark_IntersectBy_77_IEnumerableint_IEnumerableint_System_Funcintint_IEqualityComparerint_1()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests_Benchmark_IntersectBy_77_IEnumerableint_IEnumerableint_System_Funcintint_IEqualityComparerint_1(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INTPTR _s5;
+	CHAOS_IL2CPP_INTPTR _s6;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	{
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__Empty_System_Int32__System_Collections_Generic_IEnumerable_System_Int32___();
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	{
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__Empty_System_Int32__System_Collections_Generic_IEnumerable_System_Int32___();
+		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	_s2 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c____9__341_0;
+	_s3 = _s2;
+	{
+		if (_s3 == 0)
+		{
+			_s2 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c____9;
+			{
+				// Hotpatch-aware ldftn wrapper (slot 793)
+				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1) -> CHAOS_IL2CPP_INT32 {
+					auto& _d_entry = s_hotpatch_entries[793];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+					{
+						alignas(16) uint8_t _d_ab[12];
+						ArgBuffer _d_bw(_d_ab);
+						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+						_d_bw.WriteI32(static_cast<CHAOS_IL2CPP_INT32>(chaos_fn_arg_1));
+						CHAOS_IL2CPP_INT32 _d_ret{};
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d_entry.method_key, _d_ab, &_d_ret);
+						return _d_ret;
+					}
+					return reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INT32)>(_d_entry.direct_ptr)(chaos_fn_arg_0, chaos_fn_arg_1);
+				};
+			_s3 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+			}
+			{
+				const auto chaos_method_ptr = _s3;
+				const auto chaos_target = _s2;
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Func_System_Int32_System_Int32_, {});
+				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Func_System_Int32_System_Int32_.AsTypeInfoHot();
+				chaos_object->chaos_delegate_target = chaos_target;
+				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+				_s2 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			_s3 = _s2;
+			{
+				auto chaos_value = _s3;
+				chaos_static_CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c____9__341_0 = chaos_value;
+			}
+		}
+		{
+			const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Collections_Generic_EqualityComparer_System_Int32___get_Default_System_Collections_Generic_EqualityComparer_System_Int32___();
+			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+		}
+		{
+			const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__IntersectBy_System_Int32_System_Int32__System_Collections_Generic_IEnumerable_System_Int32__System_Collections_Generic_IEnumerable_System_Int32__System_Collections_Generic_IEnumerable_System_Int32__System_Func_System_Int32_System_Int32__System_Collections_Generic_IEqualityComparer_System_Int32__();
+			_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+		}
+		return;
+	}
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq.System_Linq_EnumerableTests::Benchmark_Join_78_IEnumerableint_IEnumerableint_System_Funcintint_System_Funcintint_System_Funcintintint_0()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests_Benchmark_Join_78_IEnumerableint_IEnumerableint_System_Funcintint_System_Funcintint_System_Funcintintint_0(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INTPTR _s5;
+	CHAOS_IL2CPP_INTPTR _s6;
+	CHAOS_IL2CPP_INTPTR _s7;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	_s1 = 0;
+	_s2 = 0;
+	_s3 = 0;
+	_s4 = 0;
+	{
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__Join_System_Int32_System_Int32_System_Int32_System_Int32__System_Collections_Generic_IEnumerable_System_Int32__System_Collections_Generic_IEnumerable_System_Int32__System_Collections_Generic_IEnumerable_System_Int32__System_Func_System_Int32_System_Int32__System_Func_System_Int32_System_Int32__System_Func_System_Int32_System_Int32_System_Int32__();
+		_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq.System_Linq_EnumerableTests::Benchmark_Join_78_IEnumerableint_IEnumerableint_System_Funcintint_System_Funcintint_System_Funcintintint_1()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests_Benchmark_Join_78_IEnumerableint_IEnumerableint_System_Funcintint_System_Funcintint_System_Funcintintint_1(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INTPTR _s5;
+	CHAOS_IL2CPP_INTPTR _s6;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	{
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__Empty_System_Int32__System_Collections_Generic_IEnumerable_System_Int32___();
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	{
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__Empty_System_Int32__System_Collections_Generic_IEnumerable_System_Int32___();
+		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	_s2 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c____9__345_0;
+	_s3 = _s2;
+	{
+		if (_s3 == 0)
+		{
+			_s2 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c____9;
+			{
+				// Hotpatch-aware ldftn wrapper (slot 794)
+				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1) -> CHAOS_IL2CPP_INT32 {
+					auto& _d_entry = s_hotpatch_entries[794];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+					{
+						alignas(16) uint8_t _d_ab[12];
+						ArgBuffer _d_bw(_d_ab);
+						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+						_d_bw.WriteI32(static_cast<CHAOS_IL2CPP_INT32>(chaos_fn_arg_1));
+						CHAOS_IL2CPP_INT32 _d_ret{};
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d_entry.method_key, _d_ab, &_d_ret);
+						return _d_ret;
+					}
+					return reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INT32)>(_d_entry.direct_ptr)(chaos_fn_arg_0, chaos_fn_arg_1);
+				};
+			_s3 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+			}
+			{
+				const auto chaos_method_ptr = _s3;
+				const auto chaos_target = _s2;
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Func_System_Int32_System_Int32_, {});
+				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Func_System_Int32_System_Int32_.AsTypeInfoHot();
+				chaos_object->chaos_delegate_target = chaos_target;
+				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+				_s2 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			_s3 = _s2;
+			{
+				auto chaos_value = _s3;
+				chaos_static_CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c____9__345_0 = chaos_value;
+			}
+		}
+		_s3 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c____9__345_1;
+		_s4 = _s3;
+		{
+			if (_s4 == 0)
+			{
+				_s3 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c____9;
+				{
+					// Hotpatch-aware ldftn wrapper (slot 795)
+					static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1) -> CHAOS_IL2CPP_INT32 {
+						auto& _d_entry = s_hotpatch_entries[795];
+						if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+							&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+						{
+							alignas(16) uint8_t _d_ab[12];
+							ArgBuffer _d_bw(_d_ab);
+							_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+							_d_bw.WriteI32(static_cast<CHAOS_IL2CPP_INT32>(chaos_fn_arg_1));
+							CHAOS_IL2CPP_INT32 _d_ret{};
+							::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+								_d_entry.method_key, _d_ab, &_d_ret);
+							return _d_ret;
+						}
+						return reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INT32)>(_d_entry.direct_ptr)(chaos_fn_arg_0, chaos_fn_arg_1);
+					};
+				_s4 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+				}
+				{
+					const auto chaos_method_ptr = _s4;
+					const auto chaos_target = _s3;
+					auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Func_System_Int32_System_Int32_, {});
+					chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Func_System_Int32_System_Int32_.AsTypeInfoHot();
+					chaos_object->chaos_delegate_target = chaos_target;
+					chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+					_s3 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+				}
+				_s4 = _s3;
+				{
+					auto chaos_value = _s4;
+					chaos_static_CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c____9__345_1 = chaos_value;
+				}
+			}
+			_s1 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c____9__345_2;
+			_s2 = _s1;
+			{
+				if (_s2 == 0)
+				{
+					_s1 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c____9;
+					{
+						// Hotpatch-aware ldftn wrapper (slot 796)
+						static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INT32 chaos_fn_arg_2) -> CHAOS_IL2CPP_INT32 {
+							auto& _d_entry = s_hotpatch_entries[796];
+							if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+								&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+							{
+								alignas(16) uint8_t _d_ab[16];
+								ArgBuffer _d_bw(_d_ab);
+								_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+								_d_bw.WriteI32(static_cast<CHAOS_IL2CPP_INT32>(chaos_fn_arg_1));
+								_d_bw.WriteI32(static_cast<CHAOS_IL2CPP_INT32>(chaos_fn_arg_2));
+								CHAOS_IL2CPP_INT32 _d_ret{};
+								::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+									_d_entry.method_key, _d_ab, &_d_ret);
+								return _d_ret;
+							}
+							return reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INT32, CHAOS_IL2CPP_INT32)>(_d_entry.direct_ptr)(chaos_fn_arg_0, chaos_fn_arg_1, chaos_fn_arg_2);
+						};
+					_s2 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+					}
+					{
+						const auto chaos_method_ptr = _s2;
+						const auto chaos_target = _s1;
+						auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Func_System_Int32_System_Int32_System_Int32_, {});
+						chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Func_System_Int32_System_Int32_System_Int32_.AsTypeInfoHot();
+						chaos_object->chaos_delegate_target = chaos_target;
+						chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+						_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+					}
+					_s2 = _s1;
+					{
+						auto chaos_value = _s2;
+						chaos_static_CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c____9__345_2 = chaos_value;
+					}
+				}
+				{
+					const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__Join_System_Int32_System_Int32_System_Int32_System_Int32__System_Collections_Generic_IEnumerable_System_Int32__System_Collections_Generic_IEnumerable_System_Int32__System_Collections_Generic_IEnumerable_System_Int32__System_Func_System_Int32_System_Int32__System_Func_System_Int32_System_Int32__System_Func_System_Int32_System_Int32_System_Int32__();
+					_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+				}
+				return;
+			}
+		}
+	}
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq.System_Linq_EnumerableTests::Benchmark_Join_79_IEnumerableint_IEnumerableint_System_Funcintint_System_Funcintint_System_Funcintintint_IEqualityComparerint_0()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests_Benchmark_Join_79_IEnumerableint_IEnumerableint_System_Funcintint_System_Funcintint_System_Funcintintint_IEqualityComparerint_0(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INTPTR _s5;
+	CHAOS_IL2CPP_INTPTR _s6;
+	CHAOS_IL2CPP_INTPTR _s7;
+	CHAOS_IL2CPP_INTPTR _s8;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	_s1 = 0;
+	_s2 = 0;
+	_s3 = 0;
+	_s4 = 0;
+	_s5 = 0;
+	{
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__Join_System_Int32_System_Int32_System_Int32_System_Int32__System_Collections_Generic_IEnumerable_System_Int32__System_Collections_Generic_IEnumerable_System_Int32__System_Collections_Generic_IEnumerable_System_Int32__System_Func_System_Int32_System_Int32__System_Func_System_Int32_System_Int32__System_Func_System_Int32_System_Int32_System_Int32__System_Collections_Generic_IEqualityComparer_System_Int32__();
+		_s6 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq.System_Linq_EnumerableTests::Benchmark_Join_79_IEnumerableint_IEnumerableint_System_Funcintint_System_Funcintint_System_Funcintintint_IEqualityComparerint_1()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests_Benchmark_Join_79_IEnumerableint_IEnumerableint_System_Funcintint_System_Funcintint_System_Funcintintint_IEqualityComparerint_1(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INTPTR _s5;
+	CHAOS_IL2CPP_INTPTR _s6;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	{
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__Empty_System_Int32__System_Collections_Generic_IEnumerable_System_Int32___();
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	{
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__Empty_System_Int32__System_Collections_Generic_IEnumerable_System_Int32___();
+		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	_s2 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c____9__349_0;
+	_s3 = _s2;
+	{
+		if (_s3 == 0)
+		{
+			_s2 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c____9;
+			{
+				// Hotpatch-aware ldftn wrapper (slot 797)
+				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1) -> CHAOS_IL2CPP_INT32 {
+					auto& _d_entry = s_hotpatch_entries[797];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+					{
+						alignas(16) uint8_t _d_ab[12];
+						ArgBuffer _d_bw(_d_ab);
+						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+						_d_bw.WriteI32(static_cast<CHAOS_IL2CPP_INT32>(chaos_fn_arg_1));
+						CHAOS_IL2CPP_INT32 _d_ret{};
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d_entry.method_key, _d_ab, &_d_ret);
+						return _d_ret;
+					}
+					return reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INT32)>(_d_entry.direct_ptr)(chaos_fn_arg_0, chaos_fn_arg_1);
+				};
+			_s3 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+			}
+			{
+				const auto chaos_method_ptr = _s3;
+				const auto chaos_target = _s2;
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Func_System_Int32_System_Int32_, {});
+				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Func_System_Int32_System_Int32_.AsTypeInfoHot();
+				chaos_object->chaos_delegate_target = chaos_target;
+				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+				_s2 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			_s3 = _s2;
+			{
+				auto chaos_value = _s3;
+				chaos_static_CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c____9__349_0 = chaos_value;
+			}
+		}
+		_s3 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c____9__349_1;
+		_s4 = _s3;
+		{
+			if (_s4 == 0)
+			{
+				_s3 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c____9;
+				{
+					// Hotpatch-aware ldftn wrapper (slot 798)
+					static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1) -> CHAOS_IL2CPP_INT32 {
+						auto& _d_entry = s_hotpatch_entries[798];
+						if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+							&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+						{
+							alignas(16) uint8_t _d_ab[12];
+							ArgBuffer _d_bw(_d_ab);
+							_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+							_d_bw.WriteI32(static_cast<CHAOS_IL2CPP_INT32>(chaos_fn_arg_1));
+							CHAOS_IL2CPP_INT32 _d_ret{};
+							::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+								_d_entry.method_key, _d_ab, &_d_ret);
+							return _d_ret;
+						}
+						return reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INT32)>(_d_entry.direct_ptr)(chaos_fn_arg_0, chaos_fn_arg_1);
+					};
+				_s4 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+				}
+				{
+					const auto chaos_method_ptr = _s4;
+					const auto chaos_target = _s3;
+					auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Func_System_Int32_System_Int32_, {});
+					chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Func_System_Int32_System_Int32_.AsTypeInfoHot();
+					chaos_object->chaos_delegate_target = chaos_target;
+					chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+					_s3 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+				}
+				_s4 = _s3;
+				{
+					auto chaos_value = _s4;
+					chaos_static_CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c____9__349_1 = chaos_value;
+				}
+			}
+			_s1 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c____9__349_2;
+			_s2 = _s1;
+			{
+				if (_s2 == 0)
+				{
+					_s1 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c____9;
+					{
+						// Hotpatch-aware ldftn wrapper (slot 799)
+						static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INT32 chaos_fn_arg_2) -> CHAOS_IL2CPP_INT32 {
+							auto& _d_entry = s_hotpatch_entries[799];
+							if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+								&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+							{
+								alignas(16) uint8_t _d_ab[16];
+								ArgBuffer _d_bw(_d_ab);
+								_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+								_d_bw.WriteI32(static_cast<CHAOS_IL2CPP_INT32>(chaos_fn_arg_1));
+								_d_bw.WriteI32(static_cast<CHAOS_IL2CPP_INT32>(chaos_fn_arg_2));
+								CHAOS_IL2CPP_INT32 _d_ret{};
+								::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+									_d_entry.method_key, _d_ab, &_d_ret);
+								return _d_ret;
+							}
+							return reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INT32, CHAOS_IL2CPP_INT32)>(_d_entry.direct_ptr)(chaos_fn_arg_0, chaos_fn_arg_1, chaos_fn_arg_2);
+						};
+					_s2 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+					}
+					{
+						const auto chaos_method_ptr = _s2;
+						const auto chaos_target = _s1;
+						auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Func_System_Int32_System_Int32_System_Int32_, {});
+						chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Func_System_Int32_System_Int32_System_Int32_.AsTypeInfoHot();
+						chaos_object->chaos_delegate_target = chaos_target;
+						chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+						_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+					}
+					_s2 = _s1;
+					{
+						auto chaos_value = _s2;
+						chaos_static_CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c____9__349_2 = chaos_value;
+					}
+				}
+				{
+					const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Collections_Generic_EqualityComparer_System_Int32___get_Default_System_Collections_Generic_EqualityComparer_System_Int32___();
+					_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+				}
+				{
+					const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__Join_System_Int32_System_Int32_System_Int32_System_Int32__System_Collections_Generic_IEnumerable_System_Int32__System_Collections_Generic_IEnumerable_System_Int32__System_Collections_Generic_IEnumerable_System_Int32__System_Func_System_Int32_System_Int32__System_Func_System_Int32_System_Int32__System_Func_System_Int32_System_Int32_System_Int32__System_Collections_Generic_IEqualityComparer_System_Int32__();
+					_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+				}
+				return;
+			}
+		}
+	}
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq.System_Linq_EnumerableTests::Benchmark_Last_80_IEnumerableint_0()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests_Benchmark_Last_80_IEnumerableint_0(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	{
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__Last_System_Int32__System_Int32_System_Collections_Generic_IEnumerable_System_Int32__();
+		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq.System_Linq_EnumerableTests::Benchmark_Last_80_IEnumerableint_1()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests_Benchmark_Last_80_IEnumerableint_1(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	{
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__Empty_System_Int32__System_Collections_Generic_IEnumerable_System_Int32___();
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	{
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__Last_System_Int32__System_Int32_System_Collections_Generic_IEnumerable_System_Int32__();
+		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq.System_Linq_EnumerableTests::Benchmark_Last_81_IEnumerableint_System_Funcintbool_0()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests_Benchmark_Last_81_IEnumerableint_System_Funcintbool_0(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	_s1 = 0;
+	{
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__Last_System_Int32__System_Int32_System_Collections_Generic_IEnumerable_System_Int32__System_Func_System_Int32_System_Boolean__();
+		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq.System_Linq_EnumerableTests::Benchmark_Last_81_IEnumerableint_System_Funcintbool_1()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests_Benchmark_Last_81_IEnumerableint_System_Funcintbool_1(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	{
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__Empty_System_Int32__System_Collections_Generic_IEnumerable_System_Int32___();
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	_s1 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c____9__357_0;
+	_s2 = _s1;
+	{
+		if (_s2 == 0)
+		{
+			_s1 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c____9;
+			{
+				// Hotpatch-aware ldftn wrapper (slot 800)
+				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1) -> CHAOS_IL2CPP_INTPTR {
+					auto& _d_entry = s_hotpatch_entries[800];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+					{
+						alignas(16) uint8_t _d_ab[12];
+						ArgBuffer _d_bw(_d_ab);
+						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+						_d_bw.WriteI32(static_cast<CHAOS_IL2CPP_INT32>(chaos_fn_arg_1));
+						CHAOS_IL2CPP_INTPTR _d_ret{};
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d_entry.method_key, _d_ab, &_d_ret);
+						return _d_ret;
+					}
+					return reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INT32)>(_d_entry.direct_ptr)(chaos_fn_arg_0, chaos_fn_arg_1);
+				};
+			_s2 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+			}
+			{
+				const auto chaos_method_ptr = _s2;
+				const auto chaos_target = _s1;
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Func_System_Int32_System_Boolean_, {});
+				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Func_System_Int32_System_Boolean_.AsTypeInfoHot();
+				chaos_object->chaos_delegate_target = chaos_target;
+				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+				_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			_s2 = _s1;
+			{
+				auto chaos_value = _s2;
+				chaos_static_CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c____9__357_0 = chaos_value;
+			}
+		}
+		{
+			const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__Last_System_Int32__System_Int32_System_Collections_Generic_IEnumerable_System_Int32__System_Func_System_Int32_System_Boolean__();
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+		}
+		return;
+	}
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq.System_Linq_EnumerableTests::Benchmark_LastOrDefault_82_IEnumerableint_0()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests_Benchmark_LastOrDefault_82_IEnumerableint_0(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	{
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__LastOrDefault_System_Int32__System_Int32_System_Collections_Generic_IEnumerable_System_Int32__();
+		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq.System_Linq_EnumerableTests::Benchmark_LastOrDefault_82_IEnumerableint_1()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests_Benchmark_LastOrDefault_82_IEnumerableint_1(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	{
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__Empty_System_Int32__System_Collections_Generic_IEnumerable_System_Int32___();
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	{
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__LastOrDefault_System_Int32__System_Int32_System_Collections_Generic_IEnumerable_System_Int32__();
+		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq.System_Linq_EnumerableTests::Benchmark_LastOrDefault_83_IEnumerableint_int_0()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests_Benchmark_LastOrDefault_83_IEnumerableint_int_0(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	{
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__LastOrDefault_System_Int32__System_Int32_System_Collections_Generic_IEnumerable_System_Int32__System_Int32_();
+		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq.System_Linq_EnumerableTests::Benchmark_LastOrDefault_83_IEnumerableint_int_1()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests_Benchmark_LastOrDefault_83_IEnumerableint_int_1(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	{
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__LastOrDefault_System_Int32__System_Int32_System_Collections_Generic_IEnumerable_System_Int32__System_Int32_();
+		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq.System_Linq_EnumerableTests::Benchmark_LastOrDefault_83_IEnumerableint_int_2()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests_Benchmark_LastOrDefault_83_IEnumerableint_int_2(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	{
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__Empty_System_Int32__System_Collections_Generic_IEnumerable_System_Int32___();
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	{
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__LastOrDefault_System_Int32__System_Int32_System_Collections_Generic_IEnumerable_System_Int32__System_Int32_();
+		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq.System_Linq_EnumerableTests::Benchmark_LastOrDefault_84_IEnumerableint_System_Funcintbool_0()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests_Benchmark_LastOrDefault_84_IEnumerableint_System_Funcintbool_0(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	_s1 = 0;
+	{
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__LastOrDefault_System_Int32__System_Int32_System_Collections_Generic_IEnumerable_System_Int32__System_Func_System_Int32_System_Boolean__();
+		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq.System_Linq_EnumerableTests::Benchmark_LastOrDefault_84_IEnumerableint_System_Funcintbool_1()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests_Benchmark_LastOrDefault_84_IEnumerableint_System_Funcintbool_1(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	{
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__Empty_System_Int32__System_Collections_Generic_IEnumerable_System_Int32___();
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	_s1 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c____9__371_0;
+	_s2 = _s1;
+	{
+		if (_s2 == 0)
+		{
+			_s1 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c____9;
+			{
+				// Hotpatch-aware ldftn wrapper (slot 801)
+				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1) -> CHAOS_IL2CPP_INTPTR {
+					auto& _d_entry = s_hotpatch_entries[801];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+					{
+						alignas(16) uint8_t _d_ab[12];
+						ArgBuffer _d_bw(_d_ab);
+						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+						_d_bw.WriteI32(static_cast<CHAOS_IL2CPP_INT32>(chaos_fn_arg_1));
+						CHAOS_IL2CPP_INTPTR _d_ret{};
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d_entry.method_key, _d_ab, &_d_ret);
+						return _d_ret;
+					}
+					return reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INT32)>(_d_entry.direct_ptr)(chaos_fn_arg_0, chaos_fn_arg_1);
+				};
+			_s2 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+			}
+			{
+				const auto chaos_method_ptr = _s2;
+				const auto chaos_target = _s1;
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Func_System_Int32_System_Boolean_, {});
+				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Func_System_Int32_System_Boolean_.AsTypeInfoHot();
+				chaos_object->chaos_delegate_target = chaos_target;
+				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+				_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			_s2 = _s1;
+			{
+				auto chaos_value = _s2;
+				chaos_static_CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c____9__371_0 = chaos_value;
+			}
+		}
+		{
+			const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__LastOrDefault_System_Int32__System_Int32_System_Collections_Generic_IEnumerable_System_Int32__System_Func_System_Int32_System_Boolean__();
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+		}
+		return;
+	}
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq.System_Linq_EnumerableTests::Benchmark_LastOrDefault_85_IEnumerableint_System_Funcintbool_int_0()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests_Benchmark_LastOrDefault_85_IEnumerableint_System_Funcintbool_int_0(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INTPTR _s5;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	_s1 = 0;
+	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	{
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__LastOrDefault_System_Int32__System_Int32_System_Collections_Generic_IEnumerable_System_Int32__System_Func_System_Int32_System_Boolean__System_Int32_();
+		_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq.System_Linq_EnumerableTests::Benchmark_LastOrDefault_85_IEnumerableint_System_Funcintbool_int_1()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests_Benchmark_LastOrDefault_85_IEnumerableint_System_Funcintbool_int_1(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INTPTR _s5;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	_s1 = 0;
+	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	{
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__LastOrDefault_System_Int32__System_Int32_System_Collections_Generic_IEnumerable_System_Int32__System_Func_System_Int32_System_Boolean__System_Int32_();
+		_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq.System_Linq_EnumerableTests::Benchmark_LastOrDefault_85_IEnumerableint_System_Funcintbool_int_2()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests_Benchmark_LastOrDefault_85_IEnumerableint_System_Funcintbool_int_2(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INTPTR _s5;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	{
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__Empty_System_Int32__System_Collections_Generic_IEnumerable_System_Int32___();
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	_s1 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c____9__377_0;
+	_s2 = _s1;
+	{
+		if (_s2 == 0)
+		{
+			_s1 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c____9;
+			{
+				// Hotpatch-aware ldftn wrapper (slot 802)
+				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1) -> CHAOS_IL2CPP_INTPTR {
+					auto& _d_entry = s_hotpatch_entries[802];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+					{
+						alignas(16) uint8_t _d_ab[12];
+						ArgBuffer _d_bw(_d_ab);
+						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+						_d_bw.WriteI32(static_cast<CHAOS_IL2CPP_INT32>(chaos_fn_arg_1));
+						CHAOS_IL2CPP_INTPTR _d_ret{};
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d_entry.method_key, _d_ab, &_d_ret);
+						return _d_ret;
+					}
+					return reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INT32)>(_d_entry.direct_ptr)(chaos_fn_arg_0, chaos_fn_arg_1);
+				};
+			_s2 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+			}
+			{
+				const auto chaos_method_ptr = _s2;
+				const auto chaos_target = _s1;
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Func_System_Int32_System_Boolean_, {});
+				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Func_System_Int32_System_Boolean_.AsTypeInfoHot();
+				chaos_object->chaos_delegate_target = chaos_target;
+				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+				_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			_s2 = _s1;
+			{
+				auto chaos_value = _s2;
+				chaos_static_CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c____9__377_0 = chaos_value;
+			}
+		}
+		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+		{
+			const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__LastOrDefault_System_Int32__System_Int32_System_Collections_Generic_IEnumerable_System_Int32__System_Func_System_Int32_System_Boolean__System_Int32_();
+			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+		}
+		return;
+	}
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq.System_Linq_EnumerableTests::Benchmark_LongCount_39_IEnumerableint_0()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests_Benchmark_LongCount_39_IEnumerableint_0(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	{
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__LongCount_System_Int32__System_Int64_System_Collections_Generic_IEnumerable_System_Int32__();
+		_s1 = ChaosStoreInt64(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq.System_Linq_EnumerableTests::Benchmark_LongCount_39_IEnumerableint_1()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests_Benchmark_LongCount_39_IEnumerableint_1(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	{
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__Empty_System_Int32__System_Collections_Generic_IEnumerable_System_Int32___();
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	{
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__LongCount_System_Int32__System_Int64_System_Collections_Generic_IEnumerable_System_Int32__();
+		_s1 = ChaosStoreInt64(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq.System_Linq_EnumerableTests::Benchmark_LongCount_40_IEnumerableint_System_Funcintbool_0()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests_Benchmark_LongCount_40_IEnumerableint_System_Funcintbool_0(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	_s1 = 0;
+	{
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__LongCount_System_Int32__System_Int64_System_Collections_Generic_IEnumerable_System_Int32__System_Func_System_Int32_System_Boolean__();
+		_s2 = ChaosStoreInt64(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq.System_Linq_EnumerableTests::Benchmark_LongCount_40_IEnumerableint_System_Funcintbool_1()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests_Benchmark_LongCount_40_IEnumerableint_System_Funcintbool_1(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	{
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__Empty_System_Int32__System_Collections_Generic_IEnumerable_System_Int32___();
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	_s1 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c____9__181_0;
+	_s2 = _s1;
+	{
+		if (_s2 == 0)
+		{
+			_s1 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c____9;
+			{
+				// Hotpatch-aware ldftn wrapper (slot 803)
+				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1) -> CHAOS_IL2CPP_INTPTR {
+					auto& _d_entry = s_hotpatch_entries[803];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+					{
+						alignas(16) uint8_t _d_ab[12];
+						ArgBuffer _d_bw(_d_ab);
+						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+						_d_bw.WriteI32(static_cast<CHAOS_IL2CPP_INT32>(chaos_fn_arg_1));
+						CHAOS_IL2CPP_INTPTR _d_ret{};
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d_entry.method_key, _d_ab, &_d_ret);
+						return _d_ret;
+					}
+					return reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INT32)>(_d_entry.direct_ptr)(chaos_fn_arg_0, chaos_fn_arg_1);
+				};
+			_s2 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+			}
+			{
+				const auto chaos_method_ptr = _s2;
+				const auto chaos_target = _s1;
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Func_System_Int32_System_Boolean_, {});
+				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Func_System_Int32_System_Boolean_.AsTypeInfoHot();
+				chaos_object->chaos_delegate_target = chaos_target;
+				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+				_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			_s2 = _s1;
+			{
+				auto chaos_value = _s2;
+				chaos_static_CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c____9__181_0 = chaos_value;
+			}
+		}
+		{
+			const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__LongCount_System_Int32__System_Int64_System_Collections_Generic_IEnumerable_System_Int32__System_Func_System_Int32_System_Boolean__();
+			_s2 = ChaosStoreInt64(chaos_result);
+		}
+		return;
+	}
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq.System_Linq_EnumerableTests::Benchmark_MaxBy_90_IEnumerableint_System_Funcintint_0()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests_Benchmark_MaxBy_90_IEnumerableint_System_Funcintint_0(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	_s1 = 0;
+	{
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__MaxBy_System_Int32_System_Int32__System_Int32_System_Collections_Generic_IEnumerable_System_Int32__System_Func_System_Int32_System_Int32__();
+		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq.System_Linq_EnumerableTests::Benchmark_MaxBy_90_IEnumerableint_System_Funcintint_1()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests_Benchmark_MaxBy_90_IEnumerableint_System_Funcintint_1(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	{
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__Empty_System_Int32__System_Collections_Generic_IEnumerable_System_Int32___();
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	_s1 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c____9__397_0;
+	_s2 = _s1;
+	{
+		if (_s2 == 0)
+		{
+			_s1 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c____9;
+			{
+				// Hotpatch-aware ldftn wrapper (slot 804)
+				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1) -> CHAOS_IL2CPP_INT32 {
+					auto& _d_entry = s_hotpatch_entries[804];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+					{
+						alignas(16) uint8_t _d_ab[12];
+						ArgBuffer _d_bw(_d_ab);
+						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+						_d_bw.WriteI32(static_cast<CHAOS_IL2CPP_INT32>(chaos_fn_arg_1));
+						CHAOS_IL2CPP_INT32 _d_ret{};
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d_entry.method_key, _d_ab, &_d_ret);
+						return _d_ret;
+					}
+					return reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INT32)>(_d_entry.direct_ptr)(chaos_fn_arg_0, chaos_fn_arg_1);
+				};
+			_s2 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+			}
+			{
+				const auto chaos_method_ptr = _s2;
+				const auto chaos_target = _s1;
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Func_System_Int32_System_Int32_, {});
+				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Func_System_Int32_System_Int32_.AsTypeInfoHot();
+				chaos_object->chaos_delegate_target = chaos_target;
+				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+				_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			_s2 = _s1;
+			{
+				auto chaos_value = _s2;
+				chaos_static_CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c____9__397_0 = chaos_value;
+			}
+		}
+		{
+			const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__MaxBy_System_Int32_System_Int32__System_Int32_System_Collections_Generic_IEnumerable_System_Int32__System_Func_System_Int32_System_Int32__();
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+		}
+		return;
+	}
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq.System_Linq_EnumerableTests::Benchmark_MaxBy_91_IEnumerableint_System_Funcintint_IComparerint_0()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests_Benchmark_MaxBy_91_IEnumerableint_System_Funcintint_IComparerint_0(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INTPTR _s5;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	_s1 = 0;
+	_s2 = 0;
+	{
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__MaxBy_System_Int32_System_Int32__System_Int32_System_Collections_Generic_IEnumerable_System_Int32__System_Func_System_Int32_System_Int32__System_Collections_Generic_IComparer_System_Int32__();
+		_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq.System_Linq_EnumerableTests::Benchmark_MaxBy_91_IEnumerableint_System_Funcintint_IComparerint_1()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests_Benchmark_MaxBy_91_IEnumerableint_System_Funcintint_IComparerint_1(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INTPTR _s5;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	{
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__Empty_System_Int32__System_Collections_Generic_IEnumerable_System_Int32___();
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	_s1 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c____9__401_0;
+	_s2 = _s1;
+	{
+		if (_s2 == 0)
+		{
+			_s1 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c____9;
+			{
+				// Hotpatch-aware ldftn wrapper (slot 805)
+				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1) -> CHAOS_IL2CPP_INT32 {
+					auto& _d_entry = s_hotpatch_entries[805];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+					{
+						alignas(16) uint8_t _d_ab[12];
+						ArgBuffer _d_bw(_d_ab);
+						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+						_d_bw.WriteI32(static_cast<CHAOS_IL2CPP_INT32>(chaos_fn_arg_1));
+						CHAOS_IL2CPP_INT32 _d_ret{};
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d_entry.method_key, _d_ab, &_d_ret);
+						return _d_ret;
+					}
+					return reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INT32)>(_d_entry.direct_ptr)(chaos_fn_arg_0, chaos_fn_arg_1);
+				};
+			_s2 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+			}
+			{
+				const auto chaos_method_ptr = _s2;
+				const auto chaos_target = _s1;
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Func_System_Int32_System_Int32_, {});
+				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Func_System_Int32_System_Int32_.AsTypeInfoHot();
+				chaos_object->chaos_delegate_target = chaos_target;
+				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+				_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			_s2 = _s1;
+			{
+				auto chaos_value = _s2;
+				chaos_static_CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c____9__401_0 = chaos_value;
+			}
+		}
+		{
+			const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Collections_Generic_Comparer_System_Int32___get_Default_System_Collections_Generic_Comparer_System_Int32___();
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+		}
+		{
+			const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__MaxBy_System_Int32_System_Int32__System_Int32_System_Collections_Generic_IEnumerable_System_Int32__System_Func_System_Int32_System_Int32__System_Collections_Generic_IComparer_System_Int32__();
+			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+		}
+		return;
+	}
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq.System_Linq_EnumerableTests::Benchmark_MinBy_92_IEnumerableint_System_Funcintint_0()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests_Benchmark_MinBy_92_IEnumerableint_System_Funcintint_0(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	_s1 = 0;
+	{
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__MinBy_System_Int32_System_Int32__System_Int32_System_Collections_Generic_IEnumerable_System_Int32__System_Func_System_Int32_System_Int32__();
+		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq.System_Linq_EnumerableTests::Benchmark_MinBy_92_IEnumerableint_System_Funcintint_1()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests_Benchmark_MinBy_92_IEnumerableint_System_Funcintint_1(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	{
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__Empty_System_Int32__System_Collections_Generic_IEnumerable_System_Int32___();
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	_s1 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c____9__405_0;
+	_s2 = _s1;
+	{
+		if (_s2 == 0)
+		{
+			_s1 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c____9;
+			{
+				// Hotpatch-aware ldftn wrapper (slot 806)
+				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1) -> CHAOS_IL2CPP_INT32 {
+					auto& _d_entry = s_hotpatch_entries[806];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+					{
+						alignas(16) uint8_t _d_ab[12];
+						ArgBuffer _d_bw(_d_ab);
+						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+						_d_bw.WriteI32(static_cast<CHAOS_IL2CPP_INT32>(chaos_fn_arg_1));
+						CHAOS_IL2CPP_INT32 _d_ret{};
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d_entry.method_key, _d_ab, &_d_ret);
+						return _d_ret;
+					}
+					return reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INT32)>(_d_entry.direct_ptr)(chaos_fn_arg_0, chaos_fn_arg_1);
+				};
+			_s2 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+			}
+			{
+				const auto chaos_method_ptr = _s2;
+				const auto chaos_target = _s1;
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Func_System_Int32_System_Int32_, {});
+				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Func_System_Int32_System_Int32_.AsTypeInfoHot();
+				chaos_object->chaos_delegate_target = chaos_target;
+				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+				_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			_s2 = _s1;
+			{
+				auto chaos_value = _s2;
+				chaos_static_CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c____9__405_0 = chaos_value;
+			}
+		}
+		{
+			const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__MinBy_System_Int32_System_Int32__System_Int32_System_Collections_Generic_IEnumerable_System_Int32__System_Func_System_Int32_System_Int32__();
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+		}
+		return;
+	}
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq.System_Linq_EnumerableTests::Benchmark_MinBy_93_IEnumerableint_System_Funcintint_IComparerint_0()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests_Benchmark_MinBy_93_IEnumerableint_System_Funcintint_IComparerint_0(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INTPTR _s5;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	_s1 = 0;
+	_s2 = 0;
+	{
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__MinBy_System_Int32_System_Int32__System_Int32_System_Collections_Generic_IEnumerable_System_Int32__System_Func_System_Int32_System_Int32__System_Collections_Generic_IComparer_System_Int32__();
+		_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq.System_Linq_EnumerableTests::Benchmark_MinBy_93_IEnumerableint_System_Funcintint_IComparerint_1()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests_Benchmark_MinBy_93_IEnumerableint_System_Funcintint_IComparerint_1(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INTPTR _s5;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	{
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__Empty_System_Int32__System_Collections_Generic_IEnumerable_System_Int32___();
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	_s1 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c____9__409_0;
+	_s2 = _s1;
+	{
+		if (_s2 == 0)
+		{
+			_s1 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c____9;
+			{
+				// Hotpatch-aware ldftn wrapper (slot 807)
+				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1) -> CHAOS_IL2CPP_INT32 {
+					auto& _d_entry = s_hotpatch_entries[807];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+					{
+						alignas(16) uint8_t _d_ab[12];
+						ArgBuffer _d_bw(_d_ab);
+						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+						_d_bw.WriteI32(static_cast<CHAOS_IL2CPP_INT32>(chaos_fn_arg_1));
+						CHAOS_IL2CPP_INT32 _d_ret{};
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d_entry.method_key, _d_ab, &_d_ret);
+						return _d_ret;
+					}
+					return reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INT32)>(_d_entry.direct_ptr)(chaos_fn_arg_0, chaos_fn_arg_1);
+				};
+			_s2 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+			}
+			{
+				const auto chaos_method_ptr = _s2;
+				const auto chaos_target = _s1;
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Func_System_Int32_System_Int32_, {});
+				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Func_System_Int32_System_Int32_.AsTypeInfoHot();
+				chaos_object->chaos_delegate_target = chaos_target;
+				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+				_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			_s2 = _s1;
+			{
+				auto chaos_value = _s2;
+				chaos_static_CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests___c____9__409_0 = chaos_value;
+			}
+		}
+		{
+			const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Collections_Generic_Comparer_System_Int32___get_Default_System_Collections_Generic_Comparer_System_Int32___();
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+		}
+		{
+			const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__MinBy_System_Int32_System_Int32__System_Int32_System_Collections_Generic_IEnumerable_System_Int32__System_Func_System_Int32_System_Int32__System_Collections_Generic_IComparer_System_Int32__();
+			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+		}
+		return;
+	}
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq.System_Linq_EnumerableTests::Benchmark_OfType_94_IEnumerable_0()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests_Benchmark_OfType_94_IEnumerable_0(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	{
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__OfType_System_Int32__System_Collections_Generic_IEnumerable_System_Int32__System_Collections_IEnumerable_();
+		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq.System_Linq_EnumerableTests::Benchmark_OfType_94_IEnumerable_1()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests_Benchmark_OfType_94_IEnumerable_1(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	{
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__Empty_System_Object__System_Collections_Generic_IEnumerable_System_Object___();
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	{
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__OfType_System_Int32__System_Collections_Generic_IEnumerable_System_Int32__System_Collections_IEnumerable_();
+		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq.System_Linq_EnumerableTests::Benchmark_Order_95_IEnumerableint_0()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests_Benchmark_Order_95_IEnumerableint_0(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	{
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__Order_System_Int32__IOrderedEnumerable_System_Int32__System_Collections_Generic_IEnumerable_System_Int32__();
+		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq.System_Linq_EnumerableTests::Benchmark_Order_95_IEnumerableint_1()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests_Benchmark_Order_95_IEnumerableint_1(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	{
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__Empty_System_Int32__System_Collections_Generic_IEnumerable_System_Int32___();
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	{
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__Order_System_Int32__IOrderedEnumerable_System_Int32__System_Collections_Generic_IEnumerable_System_Int32__();
+		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq.System_Linq_EnumerableTests::Benchmark_Order_96_IEnumerableint_IComparerint_0()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_EnumerableTests_Benchmark_Order_96_IEnumerableint_IComparerint_0(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	_s1 = 0;
+	{
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__Order_System_Int32__IOrderedEnumerable_System_Int32__System_Collections_Generic_IEnumerable_System_Int32__System_Collections_Generic_IComparer_System_Int32__();
+		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	return;
 }
@@ -7359,8 +7113,6 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Linq_System_Linq_Enumerabl
 #pragma warning(pop)
 
 // extern "C" definition for link-time visibility from runtime-entry.cpp
-extern "C" const int kAotMethodCount = 1153;
-// Codegen stub count — pipeline checks this
-extern "C" const int kCodegenFailureCount = 25;
+extern "C" const int kAotMethodCount = 1116;
 
 extern "C" void ChaosJitRegisterAll() {}

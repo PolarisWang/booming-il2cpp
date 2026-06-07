@@ -1119,4 +1119,27 @@ inline TCarrier VectorFixedOneFromCapability(const RuntimeTypeCapabilityInfoV0& 
 
 }  // namespace chaos::il2cpp::vector_fixed
 
+
+// ©¤©¤ VectorFixedAnyLaneNonZero ©¤©¤
+template <typename TCarrier>
+inline bool VectorFixedAnyLaneNonZero(const TCarrier& value) {
+    CHAOS_IL2CPP_UINT8 accum = 0;
+    for (CHAOS_IL2CPP_SIZE i = 0; i < sizeof(TCarrier); ++i)
+        accum |= reinterpret_cast<const CHAOS_IL2CPP_UINT8*>(&value)[i];
+    return accum != 0;
+}
+
+// ©¤©¤ VectorFixedAllLanesNonZero ©¤©¤
+template <typename TScalar, typename TCarrier>
+inline bool VectorFixedAllLanesNonZero(const TCarrier& value) {
+    constexpr CHAOS_IL2CPP_SIZE lane_count = sizeof(TCarrier) / sizeof(TScalar);
+    for (CHAOS_IL2CPP_SIZE i = 0; i < lane_count; ++i) {
+        CHAOS_IL2CPP_UINT8 lane_accum = 0;
+        for (CHAOS_IL2CPP_SIZE j = 0; j < sizeof(TScalar); ++j)
+            lane_accum |= reinterpret_cast<const CHAOS_IL2CPP_UINT8*>(&value)[i * sizeof(TScalar) + j];
+        if (lane_accum == 0) return false;
+    }
+    return true;
+}
+
 #endif  // CHAOS_IL2CPP_VECTOR_FIXED_TEMPLATES_H_
