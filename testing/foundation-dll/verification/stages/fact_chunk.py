@@ -160,8 +160,8 @@ def run_fact_chunk(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageRe
         1 for r in fact_results
         if r.get("passed") and r.get("value", 0) < 0 and r.get("value", 0) != -1
     )
-    for r in fact_results:
-        r["exitCode"] = -1 if not r.get("passed") else (r.get("value", 0) if r.get("value", 0) >= -1 else 0)
+    for fr in fact_results:
+        fr["exitCode"] = -1 if not fr.get("passed") else (fr.get("value", 0) if fr.get("value", 0) >= -1 else 0)
     value_suspicious = value_warnings > 0
 
     # ── Build result ──

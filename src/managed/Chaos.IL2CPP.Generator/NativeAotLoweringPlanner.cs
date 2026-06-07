@@ -1260,6 +1260,26 @@ extern ""C"" CHAOS_IL2CPP_INT32 RunNativeAot(CHAOS_IL2CPP_INT32 entryIndex) {{
 ";
         }
 
+        // Ensure _externalRuntimeSubjects includes callees from ALL methods
+        // (not just methodsForLowering, which may exclude filtered methods).
+        // Missing entries cause C3861 in the generated header.
+        {
+            var _seen = new HashSet<string>(StringComparer.Ordinal);
+            int _nextIdx = _externalRuntimeSubjects.Count;
+            foreach (var _method in aotCoreIr.Methods)
+            {
+                foreach (var _inst in _method.Instructions ?? [])
+                {
+                    string? _callee = _inst.Callee ?? _inst.TargetReference?.SubjectId;
+                    if (string.IsNullOrEmpty(_callee)) continue;
+                    if (!_seen.Add(_callee)) continue;
+                    if (_externalRuntimeSubjects.ContainsKey(_callee)) continue;
+                    if (_methodsBySubjectId.ContainsKey(_callee)) continue;
+                    _externalRuntimeSubjects[_callee] = _nextIdx++;
+                }
+            }
+        }
+
         // Build A1 typed dispatch table header + A2 dispatch wiring source.
         // These are emitted as separate files (chaos_generated_module.h/.cpp) for
         // typed dispatch via ChaosRuntimeHost. Empty when methodsForLowering is empty.

@@ -105,8 +105,11 @@ public sealed partial class NativeAotLoweringPlanner
 		}
 		// Catch-all: generate CHAOS_IL2CPP_FAIL() stub for any unmatched callee.
 		// Prevents undefined-chaos_external_runtime_* C++ symbol errors.
+		// Use NativeInt return as safe default when InferReturnTypeFromSubjectId returns null.
 		var failReturnType = InferReturnTypeFromSubjectId(callee);
-		var failReturnAbi = CreateLegacyAbiSlot(failReturnType);
+		var failReturnAbi = !string.IsNullOrEmpty(failReturnType)
+			? CreateLegacyAbiSlot(failReturnType)
+			: CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ValueType);
 		var failSymbol = GetExternalRuntimeHelperSymbol(callee);
 		if (failReturnAbi.CarrierKindCode == AotCoreIrAbiCarrierKind.Void)
 		{
