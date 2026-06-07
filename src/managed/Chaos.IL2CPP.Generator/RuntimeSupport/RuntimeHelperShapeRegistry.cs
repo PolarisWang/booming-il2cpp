@@ -456,7 +456,7 @@ public sealed partial class NativeAotLoweringPlanner
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "System.Runtime.InteropServices.Marshal",
                 MethodName: "GetLastPInvokeError",
-                Resolver: static (planner, callee, typeArgs) =>
+                Resolver: (planner, callee, typeArgs) =>
                 {
                     var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
                     var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INT32", symbol, "", [
@@ -471,7 +471,7 @@ public sealed partial class NativeAotLoweringPlanner
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "System.Runtime.InteropServices.Marshal",
                 MethodName: "GetHRForLastWin32Error",
-                Resolver: static (planner, callee, typeArgs) =>
+                Resolver: (planner, callee, typeArgs) =>
                 {
                     var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
                     var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INT32", symbol, "", [
@@ -487,7 +487,7 @@ public sealed partial class NativeAotLoweringPlanner
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "System.Runtime.InteropServices.Marshal",
                 MethodName: "SetLastPInvokeError",
-                Resolver: static (planner, callee, typeArgs) =>
+                Resolver: (planner, callee, typeArgs) =>
                 {
                     var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
                     var src = RenderSimpleExternalRuntimeHelper("void", symbol,
@@ -503,7 +503,7 @@ public sealed partial class NativeAotLoweringPlanner
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "System.Runtime.InteropServices.Marshal",
                 MethodName: "GetExceptionCode",
-                Resolver: static (planner, callee, typeArgs) =>
+                Resolver: (planner, callee, typeArgs) =>
                 {
                     var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
                     var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INT32", symbol, "", [
@@ -518,7 +518,7 @@ public sealed partial class NativeAotLoweringPlanner
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "System.Runtime.InteropServices.Marshal",
                 MethodName: "GetExceptionPointers",
-                Resolver: static (planner, callee, typeArgs) =>
+                Resolver: (planner, callee, typeArgs) =>
                 {
                     var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
                     var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol, "", [
@@ -533,7 +533,7 @@ public sealed partial class NativeAotLoweringPlanner
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "System.Runtime.InteropServices.Marshal",
                 MethodName: "AreComObjectsAvailableForCleanup",
-                Resolver: static (planner, callee, typeArgs) =>
+                Resolver: (planner, callee, typeArgs) =>
                 {
                     var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
                     var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INT32", symbol, "", [
@@ -619,7 +619,7 @@ public sealed partial class NativeAotLoweringPlanner
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "System.Collections.Generic.Dictionary",
                 MethodName: "TryAdd",
-                Resolver: static (planner, callee, typeArgs) =>
+                Resolver: (planner, callee, typeArgs) =>
                 {
                     var paramTypes = GetMethodParameterTypesFromSubjectId(callee);
                     var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
@@ -645,7 +645,7 @@ public sealed partial class NativeAotLoweringPlanner
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "System.Array",
                 MethodName: "GetValue",
-                Resolver: static (planner, callee, typeArgs) =>
+                Resolver: (planner, callee, typeArgs) =>
                 {
                     var paramTypes = GetMethodParameterTypesFromSubjectId(callee);
                     var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
@@ -690,7 +690,7 @@ public sealed partial class NativeAotLoweringPlanner
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "Marshal",
                 MethodName: "GetLastPInvokeError",
-                Resolver: static (planner, callee, typeArgs) =>
+                Resolver: (planner, callee, typeArgs) =>
                 {
                     var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
                     var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INT32", symbol, "", [
@@ -705,7 +705,7 @@ public sealed partial class NativeAotLoweringPlanner
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "Marshal",
                 MethodName: "GetHRForLastWin32Error",
-                Resolver: static (planner, callee, typeArgs) =>
+                Resolver: (planner, callee, typeArgs) =>
                 {
                     var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
                     var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INT32", symbol, "", [
@@ -720,7 +720,7 @@ public sealed partial class NativeAotLoweringPlanner
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "Marshal",
                 MethodName: "SetLastPInvokeError",
-                Resolver: static (planner, callee, typeArgs) =>
+                Resolver: (planner, callee, typeArgs) =>
                 {
                     var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
                     var src = RenderSimpleExternalRuntimeHelper("void", symbol,
@@ -736,7 +736,7 @@ public sealed partial class NativeAotLoweringPlanner
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "Marshal",
                 MethodName: "GetExceptionCode",
-                Resolver: static (planner, callee, typeArgs) =>
+                Resolver: (planner, callee, typeArgs) =>
                 {
                     var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
                     var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INT32", symbol, "", [
@@ -751,7 +751,7 @@ public sealed partial class NativeAotLoweringPlanner
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "Marshal",
                 MethodName: "GetExceptionPointers",
-                Resolver: static (planner, callee, typeArgs) =>
+                Resolver: (planner, callee, typeArgs) =>
                 {
                     var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
                     var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol, "", [
@@ -766,7 +766,7 @@ public sealed partial class NativeAotLoweringPlanner
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "Marshal",
                 MethodName: "AreComObjectsAvailableForCleanup",
-                Resolver: static (planner, callee, typeArgs) =>
+                Resolver: (planner, callee, typeArgs) =>
                 {
                     var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
                     var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INT32", symbol, "", [
@@ -846,7 +846,7 @@ public sealed partial class NativeAotLoweringPlanner
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "System.String",
                 MethodName: "Concat",
-                Resolver: static (planner, callee, typeArgs) =>
+                Resolver: (planner, callee, typeArgs) =>
                 {
                     var paramTypes = GetMethodParameterTypesFromSubjectId(callee);
                     var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
@@ -962,7 +962,7 @@ public sealed partial class NativeAotLoweringPlanner
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "System.String",
                 MethodName: "op_Equality",
-                Resolver: static (planner, callee, typeArgs) =>
+                Resolver: (planner, callee, typeArgs) =>
                 {
                     var paramTypes = GetMethodParameterTypesFromSubjectId(callee);
                     if (paramTypes.Count != 2) return null;
@@ -987,7 +987,7 @@ public sealed partial class NativeAotLoweringPlanner
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "System.String",
                 MethodName: "get_Length",
-                Resolver: static (planner, callee, typeArgs) =>
+                Resolver: (planner, callee, typeArgs) =>
                 {
                     var paramTypes = GetMethodParameterTypesFromSubjectId(callee);
                     if (paramTypes.Count != 0) return null;
@@ -1021,7 +1021,7 @@ public sealed partial class NativeAotLoweringPlanner
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "System.String",
                 MethodName: "StartsWith",
-                Resolver: static (planner, callee, typeArgs) =>
+                Resolver: (planner, callee, typeArgs) =>
                 {
                     var paramTypes = GetMethodParameterTypesFromSubjectId(callee);
                     if (paramTypes.Count != 2) return null;
@@ -1085,7 +1085,7 @@ public sealed partial class NativeAotLoweringPlanner
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "System.String",
                 MethodName: "Contains",
-                Resolver: static (planner, callee, typeArgs) =>
+                Resolver: (planner, callee, typeArgs) =>
                 {
                     var paramTypes = GetMethodParameterTypesFromSubjectId(callee);
                     if (paramTypes.Count != 2) return null;
@@ -1310,7 +1310,7 @@ public sealed partial class NativeAotLoweringPlanner
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "System.GC",
                 MethodName: "TryStartNoGCRegion",
-                Resolver: static (planner, callee, typeArgs) =>
+                Resolver: (planner, callee, typeArgs) =>
                 {
                     var paramTypes = GetMethodParameterTypesFromSubjectId(callee);
                     if (paramTypes.Count != 1) return null;
@@ -1758,7 +1758,7 @@ public sealed partial class NativeAotLoweringPlanner
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "System.Array",
                 MethodName: "Empty",
-                Resolver: static (planner, callee, typeArgs) =>
+                Resolver: (planner, callee, typeArgs) =>
                 {
                     var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
                     var body = new[] { "    return ChaosArrayEmpty();" };
@@ -1775,7 +1775,7 @@ public sealed partial class NativeAotLoweringPlanner
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "System.Type",
                 MethodName: "GetMethod",
-                Resolver: static (planner, callee, typeArgs) =>
+                Resolver: (planner, callee, typeArgs) =>
                 {
                     var paramTypes = GetMethodParameterTypesFromSubjectId(callee);
                     var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
@@ -1818,7 +1818,7 @@ public sealed partial class NativeAotLoweringPlanner
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "System.ThrowHelper",
                 MethodName: "ThrowArgumentNullException",
-                Resolver: static (planner, callee, typeArgs) =>
+                Resolver: (planner, callee, typeArgs) =>
                 {
                     var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
                     var src = RenderSimpleExternalRuntimeHelper("void", symbol,
@@ -1833,7 +1833,7 @@ public sealed partial class NativeAotLoweringPlanner
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "System.Runtime.CompilerServices.Unsafe",
                 MethodName: "As",
-                Resolver: static (planner, callee, typeArgs) =>
+                Resolver: (planner, callee, typeArgs) =>
                 {
                     var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
                     var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol,
@@ -1846,7 +1846,7 @@ public sealed partial class NativeAotLoweringPlanner
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "System.Runtime.CompilerServices.Unsafe",
                 MethodName: "SkipInit",
-                Resolver: static (planner, callee, typeArgs) =>
+                Resolver: (planner, callee, typeArgs) =>
                 {
                     var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
                     var src = RenderSimpleExternalRuntimeHelper("void", symbol, "",
@@ -1858,7 +1858,7 @@ public sealed partial class NativeAotLoweringPlanner
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "System.ArgumentNullException",
                 MethodName: "ThrowIfNull",
-                Resolver: static (planner, callee, typeArgs) =>
+                Resolver: (planner, callee, typeArgs) =>
                 {
                     var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
                     var src = RenderSimpleExternalRuntimeHelper("void", symbol,
@@ -1888,7 +1888,7 @@ public sealed partial class NativeAotLoweringPlanner
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "System.Console",
                 MethodName: "WriteLine",
-                Resolver: static (planner, callee, typeArgs) =>
+                Resolver: (planner, callee, typeArgs) =>
                 {
                     var paramTypes = GetMethodParameterTypesFromSubjectId(callee);
                     var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
@@ -1921,7 +1921,7 @@ public sealed partial class NativeAotLoweringPlanner
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "System.OperatingSystem",
                 MethodName: "IsWindows",
-                Resolver: static (planner, callee, typeArgs) =>
+                Resolver: (planner, callee, typeArgs) =>
                 {
                     var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
                     var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol, "",
@@ -1940,7 +1940,7 @@ public sealed partial class NativeAotLoweringPlanner
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "System.OperatingSystem",
                 MethodName: "IsLinux",
-                Resolver: static (planner, callee, typeArgs) =>
+                Resolver: (planner, callee, typeArgs) =>
                 {
                     var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
                     var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol, "",
@@ -1959,7 +1959,7 @@ public sealed partial class NativeAotLoweringPlanner
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "System.OperatingSystem",
                 MethodName: "IsMacOS",
-                Resolver: static (planner, callee, typeArgs) =>
+                Resolver: (planner, callee, typeArgs) =>
                 {
                     var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
                     var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol, "",
@@ -1985,7 +1985,7 @@ public sealed partial class NativeAotLoweringPlanner
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "System.Int32",
                 MethodName: "ToString",
-                Resolver: static (planner, callee, typeArgs) =>
+                Resolver: (planner, callee, typeArgs) =>
                 {
                     if (typeArgs.Count != 0) return null;
                     var paramTypes = GetMethodParameterTypesFromSubjectId(callee);
@@ -2030,7 +2030,7 @@ public sealed partial class NativeAotLoweringPlanner
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "System.Single",
                 MethodName: "ToString",
-                Resolver: static (planner, callee, typeArgs) =>
+                Resolver: (planner, callee, typeArgs) =>
                 {
                     if (typeArgs.Count != 0) return null;
                     var paramTypes = GetMethodParameterTypesFromSubjectId(callee);
@@ -2068,7 +2068,7 @@ public sealed partial class NativeAotLoweringPlanner
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "System.Double",
                 MethodName: "ToString",
-                Resolver: static (planner, callee, typeArgs) =>
+                Resolver: (planner, callee, typeArgs) =>
                 {
                     if (typeArgs.Count != 0) return null;
                     var paramTypes = GetMethodParameterTypesFromSubjectId(callee);
@@ -2107,7 +2107,7 @@ public sealed partial class NativeAotLoweringPlanner
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "System.Runtime.InteropServices.Marshal",
                 MethodName: "AllocHGlobal",
-                Resolver: static (planner, callee, typeArgs) =>
+                Resolver: (planner, callee, typeArgs) =>
                 {
                     var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
                     var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol,
@@ -2132,7 +2132,7 @@ public sealed partial class NativeAotLoweringPlanner
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "System.Runtime.InteropServices.Marshal",
                 MethodName: "FreeHGlobal",
-                Resolver: static (planner, callee, typeArgs) =>
+                Resolver: (planner, callee, typeArgs) =>
                 {
                     var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
                     var src = RenderSimpleExternalRuntimeHelper("void", symbol,
@@ -2151,7 +2151,7 @@ public sealed partial class NativeAotLoweringPlanner
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "System.Runtime.InteropServices.Marshal",
                 MethodName: "FreeCoTaskMem",
-                Resolver: static (planner, callee, typeArgs) =>
+                Resolver: (planner, callee, typeArgs) =>
                 {
                     var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
                     var src = RenderSimpleExternalRuntimeHelper("void", symbol,
@@ -2171,7 +2171,7 @@ public sealed partial class NativeAotLoweringPlanner
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "System.Runtime.InteropServices.Marshal",
                 MethodName: "StringToHGlobalAnsi",
-                Resolver: static (planner, callee, typeArgs) =>
+                Resolver: (planner, callee, typeArgs) =>
                 {
                     var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
                     var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol,
@@ -2195,7 +2195,7 @@ public sealed partial class NativeAotLoweringPlanner
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "System.Runtime.InteropServices.Marshal",
                 MethodName: "StringToHGlobalUni",
-                Resolver: static (planner, callee, typeArgs) =>
+                Resolver: (planner, callee, typeArgs) =>
                 {
                     var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
                     var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol,
@@ -2219,7 +2219,7 @@ public sealed partial class NativeAotLoweringPlanner
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "System.Runtime.InteropServices.Marshal",
                 MethodName: "PtrToStringAnsi",
-                Resolver: static (planner, callee, typeArgs) =>
+                Resolver: (planner, callee, typeArgs) =>
                 {
                     var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
                     var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol,
@@ -2242,7 +2242,7 @@ public sealed partial class NativeAotLoweringPlanner
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "System.Runtime.InteropServices.Marshal",
                 MethodName: "UnsafeAddrOfPinnedArrayElement",
-                Resolver: static (planner, callee, typeArgs) =>
+                Resolver: (planner, callee, typeArgs) =>
                 {
                     var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
                     var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol,
@@ -2264,7 +2264,7 @@ public sealed partial class NativeAotLoweringPlanner
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "System.Runtime.InteropServices.Marshal",
                 MethodName: "StringToCoTaskMemUTF8",
-                Resolver: static (planner, callee, typeArgs) =>
+                Resolver: (planner, callee, typeArgs) =>
                 {
                     var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
                     var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol,
@@ -2292,7 +2292,7 @@ public sealed partial class NativeAotLoweringPlanner
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "System.Runtime.InteropServices.Marshal",
                 MethodName: "PtrToStringUTF8",
-                Resolver: static (planner, callee, typeArgs) =>
+                Resolver: (planner, callee, typeArgs) =>
                 {
                     var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
                     var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol,
@@ -2312,7 +2312,7 @@ public sealed partial class NativeAotLoweringPlanner
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "System.Runtime.InteropServices.Marshal",
                 MethodName: "SizeOf",
-                Resolver: static (planner, callee, typeArgs) =>
+                Resolver: (planner, callee, typeArgs) =>
                 {
                     if (typeArgs.Count == 0) return null;
                     var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
@@ -2333,7 +2333,7 @@ public sealed partial class NativeAotLoweringPlanner
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "System.Runtime.InteropServices.Marshal",
                 MethodName: "OffsetOf",
-                Resolver: static (planner, callee, typeArgs) =>
+                Resolver: (planner, callee, typeArgs) =>
                 {
                     if (typeArgs.Count == 0) return null;
                     var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
@@ -2358,7 +2358,7 @@ public sealed partial class NativeAotLoweringPlanner
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "System.Runtime.InteropServices.Marshal",
                 MethodName: "Copy",
-                Resolver: static (planner, callee, typeArgs) =>
+                Resolver: (planner, callee, typeArgs) =>
                 {
                     if (typeArgs.Count != 0) return null;
                     var paramTypes = GetMethodParameterTypesFromSubjectId(callee);
@@ -2435,7 +2435,7 @@ public sealed partial class NativeAotLoweringPlanner
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "System.Runtime.InteropServices.Marshal",
                 MethodName: "StructureToPtr",
-                Resolver: static (planner, callee, typeArgs) =>
+                Resolver: (planner, callee, typeArgs) =>
                 {
                     if (typeArgs.Count == 0) return null;
                     var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
@@ -2472,7 +2472,7 @@ public sealed partial class NativeAotLoweringPlanner
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "System.Runtime.InteropServices.Marshal",
                 MethodName: "PtrToStructure",
-                Resolver: static (planner, callee, typeArgs) =>
+                Resolver: (planner, callee, typeArgs) =>
                 {
                     if (typeArgs.Count == 0) return null;
                     var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
@@ -2506,7 +2506,7 @@ public sealed partial class NativeAotLoweringPlanner
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "System.Runtime.InteropServices.Marshal",
                 MethodName: "DestroyStructure",
-                Resolver: static (planner, callee, typeArgs) =>
+                Resolver: (planner, callee, typeArgs) =>
                 {
                     if (typeArgs.Count == 1)
                     {
@@ -2836,7 +2836,7 @@ public sealed partial class NativeAotLoweringPlanner
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "System.TimeSpan",
                 MethodName: "FromMilliseconds",
-                Resolver: static (planner, callee, typeArgs) =>
+                Resolver: (planner, callee, typeArgs) =>
                 {
                     var paramTypes = GetMethodParameterTypesFromSubjectId(callee);
                     if (paramTypes.Count != 1) return null;
@@ -2944,7 +2944,7 @@ public sealed partial class NativeAotLoweringPlanner
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "System.Reflection.MethodBase",
                 MethodName: "Invoke",
-                Resolver: static (planner, callee, typeArgs) =>
+                Resolver: (planner, callee, typeArgs) =>
                 {
                     var paramTypes = GetMethodParameterTypesFromSubjectId(callee);
                     var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
@@ -3017,7 +3017,7 @@ public sealed partial class NativeAotLoweringPlanner
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "System.Type",
                 MethodName: "GetField",
-                Resolver: static (planner, callee, typeArgs) =>
+                Resolver: (planner, callee, typeArgs) =>
                 {
                     var paramTypes = GetMethodParameterTypesFromSubjectId(callee);
                     var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
@@ -3041,7 +3041,7 @@ public sealed partial class NativeAotLoweringPlanner
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "System.Type",
                 MethodName: "GetEvent",
-                Resolver: static (planner, callee, typeArgs) =>
+                Resolver: (planner, callee, typeArgs) =>
                 {
                     var paramTypes = GetMethodParameterTypesFromSubjectId(callee);
                     var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
@@ -3065,7 +3065,7 @@ public sealed partial class NativeAotLoweringPlanner
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "System.Type",
                 MethodName: "GetProperty",
-                Resolver: static (planner, callee, typeArgs) =>
+                Resolver: (planner, callee, typeArgs) =>
                 {
                     var paramTypes = GetMethodParameterTypesFromSubjectId(callee);
                     var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
@@ -3202,7 +3202,7 @@ public sealed partial class NativeAotLoweringPlanner
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "System.Decimal",
                 MethodName: "op_Explicit",
-                Resolver: static (planner, callee, typeArgs) =>
+                Resolver: (planner, callee, typeArgs) =>
                 {
                     var paramTypes = GetMethodParameterTypesFromSubjectId(callee);
                     if (paramTypes.Count != 1) return null;
@@ -3223,7 +3223,7 @@ public sealed partial class NativeAotLoweringPlanner
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "System.Nullable`1",
                 MethodName: "get_HasValue",
-                Resolver: static (planner, callee, typeArgs) =>
+                Resolver: (planner, callee, typeArgs) =>
                 {
                     var paramTypes = GetMethodParameterTypesFromSubjectId(callee);
                     var symbol = GetExternalRuntimeHelperSymbol(callee);
@@ -3261,7 +3261,7 @@ public sealed partial class NativeAotLoweringPlanner
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "System.Nullable`1",
                 MethodName: "GetValueOrDefault",
-                Resolver: static (planner, callee, typeArgs) =>
+                Resolver: (planner, callee, typeArgs) =>
                 {
                     var paramTypes = GetMethodParameterTypesFromSubjectId(callee);
                     bool hasDefaultArg = paramTypes.Count > 0;
@@ -3312,7 +3312,7 @@ public sealed partial class NativeAotLoweringPlanner
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "System.Convert",
                 MethodName: "ToChar",
-                Resolver: static (planner, callee, typeArgs) =>
+                Resolver: (planner, callee, typeArgs) =>
                 {
                     var paramTypes = GetMethodParameterTypesFromSubjectId(callee);
                     var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
@@ -3493,7 +3493,7 @@ public sealed partial class NativeAotLoweringPlanner
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "System.Array",
                 MethodName: "Copy",
-                Resolver: static (planner, callee, typeArgs) =>
+                Resolver: (planner, callee, typeArgs) =>
                 {
                     var paramTypes = GetMethodParameterTypesFromSubjectId(callee);
                     var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
@@ -3586,7 +3586,7 @@ public sealed partial class NativeAotLoweringPlanner
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "System.Convert",
                 MethodName: "ChangeType",
-                Resolver: static (planner, callee, typeArgs) =>
+                Resolver: (planner, callee, typeArgs) =>
                 {
                     var paramTypes = GetMethodParameterTypesFromSubjectId(callee);
                     var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
@@ -4135,7 +4135,7 @@ public sealed partial class NativeAotLoweringPlanner
                 registry.RegisterGeneric(new GenericShapeDescriptor(
                     TypeDisplayNamePrefix: "System.Numerics.Vector",
                     MethodName: methodName,
-                    Resolver: static (planner, callee, typeArgs) =>
+                    Resolver: (planner, callee, typeArgs) =>
                     {
                         System.Console.Error.WriteLine($"[VECTOR_REDUCTION] callee={callee} typeArgs={typeArgs}");
                         var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
@@ -4277,7 +4277,7 @@ public sealed partial class NativeAotLoweringPlanner
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "System.Activator",
                 MethodName: "CreateInstance",
-                Resolver: static (planner, callee, typeArgs) =>
+                Resolver: (planner, callee, typeArgs) =>
                 {
                     var paramTypes = GetMethodParameterTypesFromSubjectId(callee);
                     var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
@@ -4403,7 +4403,7 @@ public sealed partial class NativeAotLoweringPlanner
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "System.String",
                 MethodName: "IndexOf",
-                Resolver: static (planner, callee, typeArgs) =>
+                Resolver: (planner, callee, typeArgs) =>
                 {
                     var paramTypes = GetMethodParameterTypesFromSubjectId(callee);
                     var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
@@ -4499,7 +4499,7 @@ public sealed partial class NativeAotLoweringPlanner
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "System.Random",
                 MethodName: "Next",
-                Resolver: static (planner, callee, typeArgs) =>
+                Resolver: (planner, callee, typeArgs) =>
                 {
                     var paramTypes = GetMethodParameterTypesFromSubjectId(callee);
                     var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
@@ -4624,7 +4624,7 @@ public sealed partial class NativeAotLoweringPlanner
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "System.String",
                 MethodName: "Substring",
-                Resolver: static (planner, callee, typeArgs) =>
+                Resolver: (planner, callee, typeArgs) =>
                 {
                     var paramTypes = GetMethodParameterTypesFromSubjectId(callee);
                     var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
@@ -4725,7 +4725,7 @@ public sealed partial class NativeAotLoweringPlanner
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "System.Collections.Generic.List",
                 MethodName: "Clear",
-                Resolver: static (planner, callee, typeArgs) =>
+                Resolver: (planner, callee, typeArgs) =>
                 {
                     var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
                     var src = RenderSimpleExternalRuntimeHelper("void", symbol,
@@ -4746,7 +4746,7 @@ public sealed partial class NativeAotLoweringPlanner
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "System.Collections.Generic.List",
                 MethodName: "Add",
-                Resolver: static (planner, callee, typeArgs) =>
+                Resolver: (planner, callee, typeArgs) =>
                 {
                     var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
                     var src = RenderSimpleExternalRuntimeHelper("void", symbol,
@@ -4788,7 +4788,7 @@ public sealed partial class NativeAotLoweringPlanner
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "System.Collections.Generic.List",
                 MethodName: "Contains",
-                Resolver: static (planner, callee, typeArgs) =>
+                Resolver: (planner, callee, typeArgs) =>
                 {
                     var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
                     var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INT32", symbol,
@@ -4817,7 +4817,7 @@ public sealed partial class NativeAotLoweringPlanner
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "System.Collections.Generic.List",
                 MethodName: "IndexOf",
-                Resolver: static (planner, callee, typeArgs) =>
+                Resolver: (planner, callee, typeArgs) =>
                 {
                     var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
                     var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INT32", symbol,
@@ -4846,7 +4846,7 @@ public sealed partial class NativeAotLoweringPlanner
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "System.Collections.Generic.List",
                 MethodName: "Remove",
-                Resolver: static (planner, callee, typeArgs) =>
+                Resolver: (planner, callee, typeArgs) =>
                 {
                     var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
                     var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INT32", symbol,
@@ -4881,7 +4881,7 @@ public sealed partial class NativeAotLoweringPlanner
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "System.Collections.Generic.List",
                 MethodName: "RemoveAt",
-                Resolver: static (planner, callee, typeArgs) =>
+                Resolver: (planner, callee, typeArgs) =>
                 {
                     var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
                     var src = RenderSimpleExternalRuntimeHelper("void", symbol,
@@ -4910,7 +4910,7 @@ public sealed partial class NativeAotLoweringPlanner
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "System.Span",
                 MethodName: "CopyTo",
-                Resolver: static (planner, callee, typeArgs) =>
+                Resolver: (planner, callee, typeArgs) =>
                 {
                     var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
                     var src = RenderSimpleExternalRuntimeHelper("void", symbol,
@@ -4933,7 +4933,7 @@ public sealed partial class NativeAotLoweringPlanner
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "System.Array",
                 MethodName: "Clear",
-                Resolver: static (planner, callee, typeArgs) =>
+                Resolver: (planner, callee, typeArgs) =>
                 {
                     var paramTypes = GetMethodParameterTypesFromSubjectId(callee);
                     if (paramTypes.Count != 3) return null;
@@ -5054,7 +5054,7 @@ public sealed partial class NativeAotLoweringPlanner
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "System.String",
                 MethodName: "Compare",
-                Resolver: static (planner, callee, typeArgs) =>
+                Resolver: (planner, callee, typeArgs) =>
                 {
                     var paramTypes = GetMethodParameterTypesFromSubjectId(callee);
                     var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
@@ -5129,7 +5129,7 @@ public sealed partial class NativeAotLoweringPlanner
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "System.Collections.Generic.List",
                 MethodName: "Sort",
-                Resolver: static (planner, callee, typeArgs) =>
+                Resolver: (planner, callee, typeArgs) =>
                 {
                     var paramTypes = GetMethodParameterTypesFromSubjectId(callee);
                     var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
@@ -5172,7 +5172,7 @@ public sealed partial class NativeAotLoweringPlanner
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "System.Span",
                 MethodName: "get_Empty",
-                Resolver: static (planner, callee, typeArgs) =>
+                Resolver: (planner, callee, typeArgs) =>
                 {
                     var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
                     var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol, "",
@@ -5318,7 +5318,7 @@ public sealed partial class NativeAotLoweringPlanner
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "System.Array",
                 MethodName: "BinarySearch",
-                Resolver: static (planner, callee, typeArgs) =>
+                Resolver: (planner, callee, typeArgs) =>
                 {
                     var paramTypes = GetMethodParameterTypesFromSubjectId(callee);
                     var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
@@ -5395,7 +5395,7 @@ public sealed partial class NativeAotLoweringPlanner
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "System.Collections.Generic.List",
                 MethodName: "ToArray",
-                Resolver: static (planner, callee, typeArgs) =>
+                Resolver: (planner, callee, typeArgs) =>
                 {
                     var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
                     var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol,
@@ -5414,7 +5414,7 @@ public sealed partial class NativeAotLoweringPlanner
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "System.ReadOnlySpan",
                 MethodName: "ToArray",
-                Resolver: static (planner, callee, typeArgs) =>
+                Resolver: (planner, callee, typeArgs) =>
                 {
                     var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
                     var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol, "",
@@ -5431,7 +5431,7 @@ public sealed partial class NativeAotLoweringPlanner
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "System.Array",
                 MethodName: "IndexOf",
-                Resolver: static (planner, callee, typeArgs) =>
+                Resolver: (planner, callee, typeArgs) =>
                 {
                     var paramTypes = GetMethodParameterTypesFromSubjectId(callee);
                     var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
@@ -5472,7 +5472,7 @@ public sealed partial class NativeAotLoweringPlanner
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "System.Array",
                 MethodName: "LastIndexOf",
-                Resolver: static (planner, callee, typeArgs) =>
+                Resolver: (planner, callee, typeArgs) =>
                 {
                     var paramTypes = GetMethodParameterTypesFromSubjectId(callee);
                     var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
@@ -5523,7 +5523,7 @@ public sealed partial class NativeAotLoweringPlanner
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "System.Collections.Generic.Dictionary",
                 MethodName: "get_Count",
-                Resolver: static (planner, callee, typeArgs) =>
+                Resolver: (planner, callee, typeArgs) =>
                 {
                     var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
                     var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INT32", symbol,
@@ -5542,7 +5542,7 @@ public sealed partial class NativeAotLoweringPlanner
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "System.Collections.Generic.Dictionary",
                 MethodName: "Add",
-                Resolver: static (planner, callee, typeArgs) =>
+                Resolver: (planner, callee, typeArgs) =>
                 {
                     var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
                     var src = RenderSimpleExternalRuntimeHelper("void", symbol,
@@ -5565,7 +5565,7 @@ public sealed partial class NativeAotLoweringPlanner
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "System.Collections.Generic.Dictionary",
                 MethodName: "TryGetValue",
-                Resolver: static (planner, callee, typeArgs) =>
+                Resolver: (planner, callee, typeArgs) =>
                 {
                     var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
                     var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INT32", symbol,
@@ -5588,7 +5588,7 @@ public sealed partial class NativeAotLoweringPlanner
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "System.Collections.Generic.Dictionary",
                 MethodName: "ContainsKey",
-                Resolver: static (planner, callee, typeArgs) =>
+                Resolver: (planner, callee, typeArgs) =>
                 {
                     var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
                     var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INT32", symbol,
@@ -5610,7 +5610,7 @@ public sealed partial class NativeAotLoweringPlanner
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "System.Collections.Generic.Dictionary",
                 MethodName: "Remove",
-                Resolver: static (planner, callee, typeArgs) =>
+                Resolver: (planner, callee, typeArgs) =>
                 {
                     var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
                     var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INT32", symbol,
@@ -5632,7 +5632,7 @@ public sealed partial class NativeAotLoweringPlanner
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "System.Collections.Generic.HashSet",
                 MethodName: "Add",
-                Resolver: static (planner, callee, typeArgs) =>
+                Resolver: (planner, callee, typeArgs) =>
                 {
                     var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
                     var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INT32", symbol,
@@ -5654,7 +5654,7 @@ public sealed partial class NativeAotLoweringPlanner
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "System.Collections.Generic.HashSet",
                 MethodName: "Contains",
-                Resolver: static (planner, callee, typeArgs) =>
+                Resolver: (planner, callee, typeArgs) =>
                 {
                     var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
                     var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INT32", symbol,
@@ -5676,7 +5676,7 @@ public sealed partial class NativeAotLoweringPlanner
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "System.Collections.Generic.HashSet",
                 MethodName: "Remove",
-                Resolver: static (planner, callee, typeArgs) =>
+                Resolver: (planner, callee, typeArgs) =>
                 {
                     var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
                     var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INT32", symbol,
@@ -5793,7 +5793,7 @@ public sealed partial class NativeAotLoweringPlanner
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "System.Memory",
                 MethodName: "get_Span",
-                Resolver: static (planner, callee, typeArgs) =>
+                Resolver: (planner, callee, typeArgs) =>
                 {
                     var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
                     var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol,
@@ -5813,7 +5813,7 @@ public sealed partial class NativeAotLoweringPlanner
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "System.String",
                 MethodName: "Format",
-                Resolver: static (planner, callee, typeArgs) =>
+                Resolver: (planner, callee, typeArgs) =>
                 {
                     var paramTypes = GetMethodParameterTypesFromSubjectId(callee);
                     var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
@@ -6034,7 +6034,7 @@ public sealed partial class NativeAotLoweringPlanner
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "System.Array",
                 MethodName: "Sort",
-                Resolver: static (planner, callee, typeArgs) =>
+                Resolver: (planner, callee, typeArgs) =>
                 {
                     var paramTypes = GetMethodParameterTypesFromSubjectId(callee);
                     var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
@@ -6088,7 +6088,7 @@ public sealed partial class NativeAotLoweringPlanner
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "System.Array",
                 MethodName: "Reverse",
-                Resolver: static (planner, callee, typeArgs) =>
+                Resolver: (planner, callee, typeArgs) =>
                 {
                     var paramTypes = GetMethodParameterTypesFromSubjectId(callee);
                     var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
@@ -6215,7 +6215,7 @@ public sealed partial class NativeAotLoweringPlanner
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "System.Memory",
                 MethodName: "ToArray",
-                Resolver: static (planner, callee, typeArgs) =>
+                Resolver: (planner, callee, typeArgs) =>
                 {
                     var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
                     var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol,
@@ -6316,7 +6316,7 @@ public sealed partial class NativeAotLoweringPlanner
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "System.HashCode",
                 MethodName: "ToHashCode",
-                Resolver: static (planner, callee, typeArgs) =>
+                Resolver: (planner, callee, typeArgs) =>
                 {
                     var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
                     var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INT32", symbol,
@@ -6384,7 +6384,7 @@ public sealed partial class NativeAotLoweringPlanner
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "System.Runtime.InteropServices.MemoryMarshal",
                 MethodName: "GetReference",
-                Resolver: static (planner, callee, typeArgs) =>
+                Resolver: (planner, callee, typeArgs) =>
                 {
                     var paramTypes = GetMethodParameterTypesFromSubjectId(callee);
                     var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
@@ -6471,7 +6471,7 @@ public sealed partial class NativeAotLoweringPlanner
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "System.Array",
                 MethodName: "GetValue",
-                Resolver: static (planner, callee, typeArgs) =>
+                Resolver: (planner, callee, typeArgs) =>
                 {
                     var paramTypes = GetMethodParameterTypesFromSubjectId(callee);
                     if (paramTypes.Count > 1)
@@ -6509,7 +6509,7 @@ public sealed partial class NativeAotLoweringPlanner
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "System.Collections.Generic.Dictionary",
                 MethodName: "TryAdd",
-                Resolver: static (planner, callee, typeArgs) =>
+                Resolver: (planner, callee, typeArgs) =>
                 {
                     var paramTypes = GetMethodParameterTypesFromSubjectId(callee);
                     var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
@@ -6535,7 +6535,7 @@ public sealed partial class NativeAotLoweringPlanner
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "System.String",
                 MethodName: "Replace",
-                Resolver: static (planner, callee, typeArgs) =>
+                Resolver: (planner, callee, typeArgs) =>
                 {
                     var paramTypes = GetMethodParameterTypesFromSubjectId(callee);
                     var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
@@ -6598,7 +6598,7 @@ public sealed partial class NativeAotLoweringPlanner
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "System.HashCode",
                 MethodName: "Combine",
-                Resolver: static (planner, callee, typeArgs) =>
+                Resolver: (planner, callee, typeArgs) =>
                 {
                     var paramTypes = GetMethodParameterTypesFromSubjectId(callee);
                     var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
@@ -6724,7 +6724,7 @@ public sealed partial class NativeAotLoweringPlanner
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "System.String",
                 MethodName: "Split",
-                Resolver: static (planner, callee, typeArgs) =>
+                Resolver: (planner, callee, typeArgs) =>
                 {
                     var paramTypes = GetMethodParameterTypesFromSubjectId(callee);
                     var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
@@ -6879,7 +6879,7 @@ public sealed partial class NativeAotLoweringPlanner
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "System.Type",
                 MethodName: "GetNestedType",
-                Resolver: static (planner, callee, typeArgs) =>
+                Resolver: (planner, callee, typeArgs) =>
                 {
                     var paramTypes = GetMethodParameterTypesFromSubjectId(callee);
                     var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
@@ -6920,7 +6920,7 @@ public sealed partial class NativeAotLoweringPlanner
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "System.Type",
                 MethodName: "GetMembers",
-                Resolver: static (planner, callee, typeArgs) =>
+                Resolver: (planner, callee, typeArgs) =>
                 {
                     var paramTypes = GetMethodParameterTypesFromSubjectId(callee);
                     var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
@@ -6961,7 +6961,7 @@ public sealed partial class NativeAotLoweringPlanner
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "System.Type",
                 MethodName: "GetProperties",
-                Resolver: static (planner, callee, typeArgs) =>
+                Resolver: (planner, callee, typeArgs) =>
                 {
                     var paramTypes = GetMethodParameterTypesFromSubjectId(callee);
                     var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
@@ -7038,7 +7038,7 @@ public sealed partial class NativeAotLoweringPlanner
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "System.Reflection.Assembly",
                 MethodName: "GetManifestResourceStream",
-                Resolver: static (planner, callee, typeArgs) =>
+                Resolver: (planner, callee, typeArgs) =>
                 {
                     var paramTypes = GetMethodParameterTypesFromSubjectId(callee);
                     var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
@@ -7079,7 +7079,7 @@ public sealed partial class NativeAotLoweringPlanner
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "System.Reflection.Assembly",
                 MethodName: "GetModule",
-                Resolver: static (planner, callee, typeArgs) =>
+                Resolver: (planner, callee, typeArgs) =>
                 {
                     var paramTypes = GetMethodParameterTypesFromSubjectId(callee);
                     var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
@@ -7380,7 +7380,7 @@ public sealed partial class NativeAotLoweringPlanner
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "System.BitConverter",
                 MethodName: "GetBytes",
-                Resolver: static (planner, callee, typeArgs) =>
+                Resolver: (planner, callee, typeArgs) =>
                 {
                     var paramTypes = GetMethodParameterTypesFromSubjectId(callee);
                     var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
@@ -7455,7 +7455,7 @@ public sealed partial class NativeAotLoweringPlanner
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "System.Runtime.InteropServices.Marshal",
                 MethodName: "GetFunctionPointerForDelegate",
-                Resolver: static (planner, callee, typeArgs) =>
+                Resolver: (planner, callee, typeArgs) =>
                 {
                     if (typeArgs.Count != 1) return null;
                     var delegateTypeId = typeArgs[0];
@@ -7480,7 +7480,7 @@ public sealed partial class NativeAotLoweringPlanner
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "System.Runtime.InteropServices.Marshal",
                 MethodName: "GetDelegateForFunctionPointer",
-                Resolver: static (planner, callee, typeArgs) =>
+                Resolver: (planner, callee, typeArgs) =>
                 {
                     if (typeArgs.Count != 1) return null;
                     var delegateTypeId = typeArgs[0];
@@ -7581,7 +7581,7 @@ public sealed partial class NativeAotLoweringPlanner
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "System.Guid",
                 MethodName: "NewGuid",
-                Resolver: static (planner, callee, typeArgs) =>
+                Resolver: (planner, callee, typeArgs) =>
                 {
                     var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
                     var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol, "",
@@ -7601,7 +7601,7 @@ public sealed partial class NativeAotLoweringPlanner
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "System.Guid",
                 MethodName: "GetHashCode",
-                Resolver: static (planner, callee, typeArgs) =>
+                Resolver: (planner, callee, typeArgs) =>
                 {
                     var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
                     var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INT32", symbol,
@@ -7623,7 +7623,7 @@ public sealed partial class NativeAotLoweringPlanner
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "System.Guid",
                 MethodName: "ToString",
-                Resolver: static (planner, callee, typeArgs) =>
+                Resolver: (planner, callee, typeArgs) =>
                 {
                     var paramTypes = GetMethodParameterTypesFromSubjectId(callee);
                     if (paramTypes.Count != 0) return null;
@@ -7647,7 +7647,7 @@ public sealed partial class NativeAotLoweringPlanner
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "System.Guid",
                 MethodName: ".ctor",
-                Resolver: static (planner, callee, typeArgs) =>
+                Resolver: (planner, callee, typeArgs) =>
                 {
                     var paramTypes = GetMethodParameterTypesFromSubjectId(callee);
                     var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
@@ -7687,7 +7687,7 @@ public sealed partial class NativeAotLoweringPlanner
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "System.Guid",
                 MethodName: "Parse",
-                Resolver: static (planner, callee, typeArgs) =>
+                Resolver: (planner, callee, typeArgs) =>
                 {
                     var paramTypes = GetMethodParameterTypesFromSubjectId(callee);
                     if (paramTypes.Count != 1) return null;
@@ -7719,7 +7719,7 @@ public sealed partial class NativeAotLoweringPlanner
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "System.Random",
                 MethodName: "Next",
-                Resolver: static (planner, callee, typeArgs) =>
+                Resolver: (planner, callee, typeArgs) =>
                 {
                     var paramTypes = GetMethodParameterTypesFromSubjectId(callee);
                     var symbol = GetExternalRuntimeHelperSymbol(callee);
@@ -7776,7 +7776,7 @@ public sealed partial class NativeAotLoweringPlanner
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "System.HashCode",
                 MethodName: "ToHashCode",
-                Resolver: static (planner, callee, typeArgs) =>
+                Resolver: (planner, callee, typeArgs) =>
                 {
                     var symbol = GetExternalRuntimeHelperSymbol(callee);
                     var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INT32", symbol,
@@ -7794,7 +7794,7 @@ public sealed partial class NativeAotLoweringPlanner
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "System.HashCode",
                 MethodName: "Combine",
-                Resolver: static (planner, callee, typeArgs) =>
+                Resolver: (planner, callee, typeArgs) =>
                 {
                     var paramTypes = GetMethodParameterTypesFromSubjectId(callee);
                     if (paramTypes.Count != 2) return null;
@@ -8217,7 +8217,7 @@ public sealed partial class NativeAotLoweringPlanner
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "System.Enum",
                 MethodName: "IsDefined",
-                Resolver: static (planner, callee, typeArgs) =>
+                Resolver: (planner, callee, typeArgs) =>
                 {
                     var paramTypes = GetMethodParameterTypesFromSubjectId(callee);
                     if (paramTypes.Count != 2) return null;
@@ -8238,7 +8238,7 @@ public sealed partial class NativeAotLoweringPlanner
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "System.Enum",
                 MethodName: "GetName",
-                Resolver: static (planner, callee, typeArgs) =>
+                Resolver: (planner, callee, typeArgs) =>
                 {
                     var paramTypes = GetMethodParameterTypesFromSubjectId(callee);
                     // Only handle GetName(Type, Object) — GetName(RuntimeType, UInt64)
@@ -8264,7 +8264,7 @@ public sealed partial class NativeAotLoweringPlanner
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "System.Enum",
                 MethodName: "GetNames",
-                Resolver: static (planner, callee, typeArgs) =>
+                Resolver: (planner, callee, typeArgs) =>
                 {
                     var paramTypes = GetMethodParameterTypesFromSubjectId(callee);
                     if (paramTypes.Count != 1) return null;
@@ -8283,7 +8283,7 @@ public sealed partial class NativeAotLoweringPlanner
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "System.Enum",
                 MethodName: "GetValues",
-                Resolver: static (planner, callee, typeArgs) =>
+                Resolver: (planner, callee, typeArgs) =>
                 {
                     var paramTypes = GetMethodParameterTypesFromSubjectId(callee);
                     if (paramTypes.Count != 1) return null;
@@ -8302,7 +8302,7 @@ public sealed partial class NativeAotLoweringPlanner
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "System.Enum",
                 MethodName: "Parse",
-                Resolver: static (planner, callee, typeArgs) =>
+                Resolver: (planner, callee, typeArgs) =>
                 {
                     var paramTypes = GetMethodParameterTypesFromSubjectId(callee);
                     var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
@@ -8343,7 +8343,7 @@ public sealed partial class NativeAotLoweringPlanner
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "System.Enum",
                 MethodName: "Format",
-                Resolver: static (planner, callee, typeArgs) =>
+                Resolver: (planner, callee, typeArgs) =>
                 {
                     var paramTypes = GetMethodParameterTypesFromSubjectId(callee);
                     if (paramTypes.Count != 3) return null;
@@ -8366,7 +8366,7 @@ public sealed partial class NativeAotLoweringPlanner
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "System.Enum",
                 MethodName: "ToString",
-                Resolver: static (planner, callee, typeArgs) =>
+                Resolver: (planner, callee, typeArgs) =>
                 {
                     var paramTypes = GetMethodParameterTypesFromSubjectId(callee);
                     var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
@@ -8403,7 +8403,7 @@ public sealed partial class NativeAotLoweringPlanner
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "System.Enum",
                 MethodName: "TryParse",
-                Resolver: static (planner, callee, typeArgs) =>
+                Resolver: (planner, callee, typeArgs) =>
                 {
                     var paramTypes = GetMethodParameterTypesFromSubjectId(callee);
                     var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
