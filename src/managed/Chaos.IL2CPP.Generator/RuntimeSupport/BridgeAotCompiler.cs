@@ -37,6 +37,9 @@ public sealed class BridgeAotCompiler
     public (AotCoreIrArtifact UpdatedIr, Dictionary<string, string> RedirectMap) CompileAndIntegrate(
         AotCoreIrArtifact aotCoreIr)
     {
+        // LCAC: BridgeAOT disabled
+        return (aotCoreIr, new Dictionary<string, string>());
+#pragma warning disable 0162
         var seen = new HashSet<string>(StringComparer.Ordinal);
         var redirectMap = new Dictionary<string, string>(StringComparer.Ordinal);
         var calleeToMethod = new Dictionary<string, AotCoreIrMethodArtifact>(StringComparer.Ordinal);
@@ -54,6 +57,7 @@ public sealed class BridgeAotCompiler
                 if (_existingSubjectIds.Contains(callee)) continue;
                 if (!seen.Add(callee)) continue;
                 if (callee.Contains("<>c__DisplayClass") || callee.Contains("<>9__")) continue;
+                if (callee.Contains("/<unknown>::", StringComparison.Ordinal) || callee.Contains("ThrowHelper::", StringComparison.Ordinal)) continue;
 
                 try
                 {
@@ -257,7 +261,6 @@ public sealed class BridgeAotCompiler
             return null;
         }
 
-        // Decode method signature to get parameter types
         var sig = md.DecodeSignature(new SigTypeProvider(meta, comp.AssemblyName), default);
         var parameters = new List<ManagedParameterModel>();
         for (int pi = 0; pi < sig.ParameterTypes.Length; pi++)
@@ -344,11 +347,25 @@ public sealed class BridgeAotCompiler
                 {
                     Op = i.Op,
                     Operand = i.Operand,
-                    Callee = i.Callee,
+                    // Filter unresolvable Callee values from IlBytecodeDecoder — SubjectIds
+                    // like '<22:0x...>' or 'Assembly/<unknown>::Method' would crash the
+                    // emitter downstream (GetMethodDeclaringTypeSubjectId, ExternalRuntime stubs).
+                    Callee = FilterCallee(i.Callee),
                     Reference = i.Reference,
                 }).ToList(),
             }).ToList(),
         };
+    }
+
+    private static string? FilterCallee(string? callee)
+    {
+        if (string.IsNullOrEmpty(callee))
+            return null;
+        if (callee.StartsWith("<", StringComparison.Ordinal))
+            return null;
+        if (callee.Contains("/<unknown>::", StringComparison.Ordinal))
+            return null;
+        return callee;
     }
 
     private static IReadOnlyDictionary<string, GenericInstantiationDemandModel> BuildGenericDemandLookup(

@@ -71,9 +71,7 @@ public sealed class CodeGenStage
             metadataWriterOutput.SupplementalMetadataTemplate);
 
         // Phase L2: Bridge method AOT compilation & integration.
-        var bridgeCompiler = new BridgeAotCompiler(linkedWorld, codeRegistration);
-        var (bridgeAotCoreIr, bridgeRedirectMap) = bridgeCompiler.CompileAndIntegrate(aotCoreIr);
-        aotCoreIr = bridgeAotCoreIr;
+        // DISABLED (LCAC Phase 1): Cross-assembly calls use Demeter Table.
         NativeReferenceLoweringPlanArtifact nativeReferenceLoweringPlan;
         if (linkedWorld.FullAssemblyClosure && string.IsNullOrWhiteSpace(linkedWorld.EntryPointSubjectId))
         {
@@ -147,7 +145,7 @@ public sealed class CodeGenStage
             NativeReferenceLoweringPlan = nativeReferenceLoweringPlan,
             NativeAotLoweringPlan = nativeAotLoweringPlan,
             ClosureManifest = closureManifest,
-            BridgeRedirectMap = bridgeRedirectMap.Count > 0 ? bridgeRedirectMap : null,
+            BridgeRedirectMap = null,
         });
         }
         catch (Exception ex)
