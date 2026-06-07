@@ -85,6 +85,7 @@ public sealed partial class NativeAotLoweringPlanner
 		Dictionary<string, string?> dictionary = new Dictionary<string, string?>(StringComparer.Ordinal);
 		foreach (AotCoreIrMethodArtifact method in aotCoreIr.Methods)
 		{
+			// Pass 1: Collect types from instruction target references
 			foreach (AotCoreIrInstructionArtifact instruction in method.Instructions)
 			{
 				AotCoreIrReferenceArtifact? targetReference = instruction.TargetReference;
@@ -98,6 +99,18 @@ public sealed partial class NativeAotLoweringPlanner
 					{
 						dictionary[targetReference.ArrayElementSubjectId] = targetReference.ArrayElementBaseTypeSubjectId;
 					}
+				}
+			}
+			// Pass 1b: Collect types from exception region catch clauses.
+			// Catch types reference exception types not visible to instruction scanning.
+			foreach (var region in method.ExceptionRegions)
+			{
+				if (!string.IsNullOrEmpty(region.CatchTypeSubjectId) && region.CatchTypeSubjectId.IndexOf("::") > 0)
+				{
+					var dc = region.CatchTypeSubjectId.IndexOf("::");
+					string typeSubjectId = region.CatchTypeSubjectId.Substring(0, dc);
+					if (!dictionary.ContainsKey(typeSubjectId))
+						dictionary[typeSubjectId] = null;
 				}
 			}
 		}

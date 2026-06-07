@@ -230,9 +230,6 @@ public sealed partial class NativeAotLoweringPlanner
                 if (!_seenCallees.Add(callee))
                     continue;
 
-                if (!_seenCallees.Add(callee))
-                    continue;
-
                 // Already in method dictionary → direct call, no dispatch table needed
                 if (_methodsBySubjectId.ContainsKey(callee))
                     continue;

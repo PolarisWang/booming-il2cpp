@@ -229,6 +229,13 @@ public sealed partial class NativeAotLoweringPlanner
     {
         if (ilBytes.Length == 0) return null;
 
+        // Skip closure types (<>c, <>c__DisplayClass, etc.) — they are compiler-generated
+        // and their static constructors reference closure-internal types. Generating
+        // chaos_ensure_type_initialized_* for these would produce C3861 errors when
+        // the function is referenced from one page but defined in another.
+        if (typeSubjectId.Contains("<>c"))
+            return null;
+
         // Skip all leading nops
         int offset = 0;
         while (offset < ilBytes.Length && ilBytes[offset] == 0x00) // nop
@@ -321,14 +328,15 @@ public sealed partial class NativeAotLoweringPlanner
         foreach (var action in actions)
         {
             // Skip malformed SubjectIds (closures, templates, etc.)
+            // Do NOT add to normalizedActions — these actions should not generate
+            // chaos_ensure_type_initialized_* function definitions.
             if (string.IsNullOrEmpty(action.ConstructorSubjectId) ||
                 action.ConstructorSubjectId.Contains("<>c__DisplayClass") ||
                 action.ConstructorSubjectId.Contains("<>9__") ||
                 action.ConstructorSubjectId.IndexOf("::", StringComparison.Ordinal) <= 0)
             {
                 requiredExternalRuntimeHelperSubjectIds.Add(action.ConstructorSubjectId);
-                normalizedActions.Add(action);
-                continue;
+                continue;  // Skip action entirely — no plan entry
             }
             if (TryCreateExternalRuntimeHelperDefinition(action.ConstructorSubjectId, out _))
             {

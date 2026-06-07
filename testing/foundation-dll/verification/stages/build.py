@@ -622,6 +622,17 @@ def run_build(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
 
     print(f"  [build] [hephaestus] CACHE MISS: performing full build")
 
+    # Clean stale bridge redirect files from subjects/ before TPG.
+    # These are no longer generated (LCAC disabled BridgeAOT), but old files
+    # persist from previous codegen runs and cause C1083 (missing chaos/chaos.h).
+    tpg_subjects_before = ctx.native_dir / "subjects"
+    if tpg_subjects_before.is_dir():
+        for stale in ("bridge-redirect.generated.cpp", "chaos_register_bridge_redirects.generated.cpp"):
+            p = tpg_subjects_before / stale
+            if p.exists():
+                p.unlink()
+                print(f"  [build] Cleaned stale: {p.name}")
+
     # -- 8. Run TPG generate-dll --
     if not _ensure_tool_built("Chaos.IL2CPP.Tools.TestProjectGenerator"):
         return StageResult(
@@ -651,6 +662,26 @@ def run_build(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
     for line in tpg_result.stdout.splitlines():
         print(f"      {line}")
 
+    # ── Post-TPG cleanup: remove duplicate headers from SDK include ──
+    # The SDK copies vector_fixed_templates.h to codegen/include/, but the same
+    # header is also in the source tree's include path.  MSVC treats these as
+    # different physical files despite the include guard, causing C2995 errors
+    # for template functions in the header.  Delete the SDK copy to force all
+    # inclusions to resolve to the source tree copy.
+    sdk_include_dir = ctx.native_dir / "codegen" / "include"
+    if sdk_include_dir.is_dir():
+        for stale_h in ("vector_fixed_templates.h",):
+            p = sdk_include_dir / stale_h
+            if p.exists():
+                p.unlink()
+                print(f"  [build] Removed stale SDK copy: {p.name}")
+    # Also clear cmake cache so file(GLOB ...) re-evaluates
+    tpg_build_dir = ctx.native_dir / "build"
+    if tpg_build_dir.exists():
+        cache_file = tpg_build_dir / "CMakeCache.txt"
+        if cache_file.exists():
+            cache_file.unlink()
+
     # ── Post-TPG: ensure codegen/generated/* are in subjects/ ──
     # The TPG's Emit() copy step may fail for flat layout.  After TPG completes,
     # copy all .cpp and .h files from codegen/generated/ to subjects/ so cmake
@@ -673,16 +704,15 @@ def run_build(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
             if p.exists(): p.unlink()
         # Reconfigure cmake to include newly copied subjects/ files
         tpg_build_dir = ctx.native_dir / "build"
-        if tpg_build_dir.exists():
-            subprocess.run(['cmake', str(ctx.native_dir), '-B', str(tpg_build_dir)],
-                capture_output=True, text=True, timeout=120)
-            build_result = subprocess.run(
-                ['cmake', '--build', str(tpg_build_dir), '--config', 'RelWithDebInfo'],
-                capture_output=True, text=True, timeout=300)
-            if build_result.returncode == 0 and ctx.entry_exe_path.exists():
-                print(f"  [build] entry.exe built after post-TPG copy ({ctx.entry_exe_path.stat().st_size} bytes)")
-                # If post-TPG build succeeded, don't fail
-                tpg_result = subprocess.CompletedProcess(args=[], returncode=0, stdout=b'', stderr=b'')
+        subprocess.run(['cmake', str(ctx.native_dir), '-B', str(tpg_build_dir)],
+            capture_output=True, text=True, timeout=120)
+        build_result = subprocess.run(
+            ['cmake', '--build', str(tpg_build_dir), '--config', 'RelWithDebInfo'],
+            capture_output=True, text=True, timeout=300)
+        if build_result.returncode == 0 and ctx.entry_exe_path.exists():
+            print(f"  [build] entry.exe built after post-TPG copy ({ctx.entry_exe_path.stat().st_size} bytes)")
+            # If post-TPG build succeeded, don't fail
+            tpg_result = subprocess.CompletedProcess(args=[], returncode=0, stdout=b'', stderr=b'')
 
     if tpg_result.returncode != 0:
         print(f"  [build] TPG generate-dll FAILED (rc={tpg_result.returncode})")
