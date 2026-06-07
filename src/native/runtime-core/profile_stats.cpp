@@ -204,7 +204,7 @@ bool ProfileStoreAdd(const ProfileSnapshot&) noexcept { return false; }
 int ProfileStoreFinalize() noexcept { return 0; }
 const ProfileSnapshot* ProfileStoreGet(int) noexcept { return nullptr; }
 int ProfileStoreCount() noexcept { return 0; }
-void ProfileEmitJson() noexcept {}
+void ProfileEmitJson() noexcept { printf("{\"profile\":[]}\n"); fflush(stdout); }
 
 }}} // namespace chaos::il2cpp::runtime_core
 
