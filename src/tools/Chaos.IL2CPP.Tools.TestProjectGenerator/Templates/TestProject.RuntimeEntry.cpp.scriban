@@ -107,12 +107,6 @@ extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Reset() {}
 extern "C" CHAOS_IL2CPP_INT32 Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Complete() { return 0; }
 #endif
 
-// BRIDGE-AOT external runtime helper declarations for intrinsics helpers
-// that aren't registered in the shape registry. These are used by
-// bridge-compiled BitOperations/Vector methods.
-// Generated symbol name: chaos_external_runtime_{SanitizeSubjectId}
-extern "C" CHAOS_IL2CPP_INT32 chaos_external_runtime_System_Private_CoreLib_System_Numerics_BitOperations__TrailingZeroCount_System_Int32_UInt32_(CHAOS_IL2CPP_INT32);
-
 // Interop stub declarations (defined in interop_stubs.cpp from SDK runtime_stubs)
 extern "C" int ChaosMarshalGetLastPInvokeError() noexcept;
 extern "C" int ChaosMarshalGetHRForLastWin32Error() noexcept;
@@ -123,6 +117,7 @@ extern "C" int ChaosMarshalAreComObjectsAvailableForCleanup() noexcept;
 // External runtime function table (populated by codegen, may have null entries)
 extern "C" void* kChaosExternalRuntimeFnTable[];
 extern "C" int32_t kChaosExternalRuntimeCount;
+extern "C" const char* kChaosExternalRuntimeSubjects[];
 
 // Per-method host arrays for ApplyPatchFromMemoryEx (defined in patch-host-arrays.cpp).
 // Sentinel values when no patch data is embedded; replaced by the hotupdate pipeline
@@ -1169,8 +1164,6 @@ int main(int argc, char* argv[]) {
         }
         // kChaosExternalRuntimeSubjects and kChaosExternalRuntimeCount
         // are declared in the generated native-aot.generated.cpp header.
-        extern "C" const char* kChaosExternalRuntimeSubjects[];
-        extern "C" int32_t kChaosExternalRuntimeCount;
 
         std::printf("{\n  \"hotMethods\": [\n");
         bool first = true;

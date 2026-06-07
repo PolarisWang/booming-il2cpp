@@ -58,3 +58,6 @@ BRIDGE-AOT 编译的方法引用 `chaos_external_runtime_*` 符号，但这些�
 
 - Layer 3（Extern 声明）：修复 `DummySigProvider` 命名一致性后补全 BRIDGE-AOT 注入符号的 extern 声明
 - Layer 4（Runtime stubs）：为 `ThrowHelper.ThrowForUnsupportedNumericsVectorBaseType` 等提供 CHAOS_IL2CPP_FAIL 实现
+
+## 相关文档
+- [Closure 精度架构](19-closure-precision-architecture.md) — assemblyDirs 配置、D5/D1 方案

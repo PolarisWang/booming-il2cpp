@@ -66,6 +66,9 @@ pipeline:
 | `chunk_pipeline.py` | 解析配置并注入 ChunkContext |
 | `pipeline-config.yaml` | 中心配置 |
 
+## 相关文档
+- [32-byte ABI 修复](20-32byte-abi-fix.md) — Vector<T> pass-by-reference 及 opcode 归一化
+
 ## 性能数据
 
 | 指标 | 修复前 | 修复后 (D5) |
