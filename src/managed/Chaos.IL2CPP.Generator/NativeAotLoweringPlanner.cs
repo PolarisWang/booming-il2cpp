@@ -1815,6 +1815,43 @@ extern ""C"" CHAOS_IL2CPP_INT32 RunNativeAot(CHAOS_IL2CPP_INT32 entryIndex) {{
             sb.AppendLine();
         }
 
+        // ── chaos_external_runtime_* fallback declarations ──
+        // For _externalRuntimeSubjects entries not covered by shape helpers,
+        // emit minimal extern declarations so referenced page files compile.
+        // The dispatch table at kChaosExternalRuntimeFnTable[idx] handles the
+        // actual resolution at runtime; these declarations satisfy the compiler.
+        if (_externalRuntimeSubjects is { Count: > 0 })
+        {
+            var helperIds = _externalRuntimeHelpers?
+                .Select(h => h.SubjectId)
+                .ToHashSet(StringComparer.Ordinal) ?? new HashSet<string>();
+            int fallbackCount = 0;
+            sb.Append("namespace chaos::il2cpp::codegen::");
+            sb.AppendLine(codegenNamespace);
+            sb.AppendLine("{");
+            foreach (var kvp in _externalRuntimeSubjects)
+            {
+                if (helperIds.Contains(kvp.Key))
+                    continue;
+                var symbol = GetExternalRuntimeHelperSymbol(kvp.Key);
+                sb.Append("extern \"C\" void ");
+                sb.Append(symbol);
+                sb.AppendLine("(void);");
+                fallbackCount++;
+            }
+            if (fallbackCount > 0)
+            {
+                sb.AppendLine();
+                sb.AppendLine("} // namespace");
+                sb.AppendLine();
+            }
+            else
+            {
+                // No fallbacks added — remove the empty namespace block
+                sb.Length -= ("namespace chaos::il2cpp::codegen::" + codegenNamespace + "\n{\n").Length;
+            }
+        }
+
         // ── ChaosReflectionSetExceptionMetadata_2params (global scope) ──
         // Called from ArgumentOutOfRangeException..ctor(string,string) in page
         // files.  Declared in exception_api.cpp in the runtime — at global scope.
@@ -3699,7 +3736,7 @@ extern ""C"" CHAOS_IL2CPP_INT32 RunNativeAot(CHAOS_IL2CPP_INT32 entryIndex) {{
         const string openGenericMethodPrefix =
             "System.Private.CoreLib/System.Reflection.CustomAttributeExtensions::GetCustomAttribute<";
 
-        if (string.IsNullOrEmpty(callee) ||
+        if (string.IsNullOrEmpty(callee) || callee.StartsWith("<", StringComparison.Ordinal) ||
             !string.Equals(GetMethodDeclaringTypeSubjectId(callee), declaringTypeSubjectId, StringComparison.Ordinal) ||
             !GetMethodName(callee).StartsWith("GetCustomAttribute<", StringComparison.Ordinal) ||
             !GetMethodParameterTypes(callee).SequenceEqual(["System.Reflection.MemberInfo"]) ||

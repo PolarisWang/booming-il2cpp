@@ -382,5 +382,10 @@ void chaos_gc_reregister_finalize(CHAOS_IL2CPP_INTPTR obj) noexcept {
     chaos::il2cpp::runtime_core::G_OldGen().ReRegisterFinalizer(reinterpret_cast<void*>(obj));
 }
 
+// ── Environment stub ───────────────────────────────────
+CHAOS_IL2CPP_INT32 chaos_current_managed_thread_id(void) noexcept {
+    return static_cast<CHAOS_IL2CPP_INT32>(chaos::il2cpp::pal::PalGetCurrentThreadId());
+}
+
 }  // extern "C"
 }  // namespace chaos::il2cpp::runtime_core
