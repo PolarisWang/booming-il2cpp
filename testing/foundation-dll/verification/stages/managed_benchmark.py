@@ -436,7 +436,6 @@ def run_managed_benchmark(ctx: ChunkContext, stages: dict[str, StageResult]) -> 
                     shutil.rmtree(build_dir)
                     break
                 except PermissionError:
-                    import time
                     time.sleep(2)
             else:
                 print(f"  [managed-benchmark] WARN: could not remove {build_dir} after 3 retries")

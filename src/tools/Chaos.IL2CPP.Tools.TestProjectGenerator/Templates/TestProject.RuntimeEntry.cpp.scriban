@@ -334,16 +334,24 @@ static int RunFactJsonMode() {
     // Complete() as a backstop for assertion failures that may not have
     // propagated as C++ exceptions (e.g. codegen-inlined assertion paths).
 #define CHAOS_FACT_RESET()   Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Reset()
+#ifndef _WIN32
+// Non-Windows: SEH (__try/__except) is not available, so try/catch is safe.
 #define CHAOS_FACT_CHECK()   do { \
     try { \
         if (Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Complete() != 0) { \
             std::fprintf(stderr, "[ASSERT] s_exitCode was non-zero after fact loop\n"); \
         } \
     } catch (...) { \
-        /* JIT mode: managed AssertionException may propagate; swallow gracefully */ \
         std::fprintf(stderr, "[ASSERT] JIT assertion check threw\n"); \
     } \
 } while(0)
+#else
+// Windows: the dispatch loop uses __try/__except (SEH).  MSVC does not
+// allow mixing C++ EH (try/catch) and SEH (__try) in the same function.
+// The CHAOS_FACT_CHECK is inside the worker thread lambda which also
+// contains __try/__except, so use a no-op stub on Windows.
+#define CHAOS_FACT_CHECK()   ((void)0)
+#endif
 
 #if defined(_WIN32)
     CHAOS_FACT_RESET();

@@ -2929,7 +2929,7 @@ private void EmitLinearInitObj(StringBuilder builder, AotCoreIrInstructionArtifa
 		}
 		else if (invocationTarget.ExternalRuntimeTableIndex >= 0 || invocationTarget.DirectNativeSymbol != null)
 		{
-			EmitExternalRuntimeTableDispatch(builder, invocationTarget, indentation);
+			EmitExternalRuntimeTableDispatch(builder, invocationTarget, indentation, enforceInstanceNullCheck);
 		}
 		else
 		{
@@ -4111,7 +4111,7 @@ private void EmitLinearInitObj(StringBuilder builder, AotCoreIrInstructionArtifa
 		stringBuilder6.AppendLine(ref handler);
 	}
 
-	private void EmitExternalRuntimeTableDispatch(StringBuilder builder, InvocationTarget invocationTarget, string indentation)
+	private void EmitExternalRuntimeTableDispatch(StringBuilder builder, InvocationTarget invocationTarget, string indentation, bool enforceInstanceNullCheck)
 	{
 		string returnType = MapAbiSlotReturnType(invocationTarget.ReturnAbi);
 		string paramTypes = FormatAbiSlotParameterTypes(invocationTarget.ParameterAbis);
@@ -4182,6 +4182,13 @@ private void EmitLinearInitObj(StringBuilder builder, AotCoreIrInstructionArtifa
 					builder.AppendLine($"{indentation}    const auto chaos_arg_{i} = {abiExpr};");
 				}
 			}
+		}
+		if (enforceInstanceNullCheck && invocationTarget.ParameterAbis.Count > 0)
+		{
+		    builder.AppendLine(indentation + "    if (chaos_arg_0 == 0)");
+		    builder.AppendLine(indentation + "    {");
+		    builder.AppendLine(indentation + "        ::chaos::il2cpp::runtime_core::RaiseNullReferenceException();");
+		    builder.AppendLine(indentation + "    }");
 		}
 		string args = FormatAbiInvocationArgumentList(invocationTarget.ParameterAbis);
 		// BS-5: Validate external runtime table index before dispatch.
