@@ -207,6 +207,10 @@ def _build_jit_entry(
     Returns True if JIT build succeeded, False otherwise.
     JIT build failure does not block the pipeline.
     """
+    # Remove stale JIT binary before rebuild to prevent stale-binary false positives
+    jit_target = native_dir / "entry-jit.exe"
+    if jit_target.exists():
+        jit_target.unlink()
     # ── Size check: skip JIT build for very large chunks ────────────
     # The Windows PE32+ format has a 2GB image size limit. JIT-compiled
     # code can be 10-20x larger than the generated C++ source. Chunks
@@ -659,6 +663,10 @@ def run_build(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
         for pat in ("*.cpp", "*.h"):
             for f in tpg_codegen_dir.glob(pat):
                 shutil.copy2(str(f), str(tpg_subjects_dir / f.name))
+        # Clean stale bridge redirect files (LCAC: BridgeAOT disabled)
+        for stale in ("bridge-redirect.generated.cpp", "chaos_register_bridge_redirects.generated.cpp"):
+            p = tpg_subjects_dir / stale
+            if p.exists(): p.unlink()
         # Clean stale bridge redirect files
         for stale in ("bridge-redirect.generated.cpp", "chaos_register_bridge_redirects.generated.cpp"):
             p = tpg_subjects_dir / stale

@@ -14,6 +14,7 @@
 #include <gc/gc_bgc_inline.h>
 #include <gc/gc_card_table.h>
 #include <ChaosGeneratedRuntimePrelude.h>
+#include "runtime_stubs/misc_stubs.h"
 #include "enum_stubs.h"
 #include "async_stubs.h"
 #include "exception_stubs.h"
@@ -35,50 +36,6 @@ namespace chaos::il2cpp::codegen::CombinedSubjects {
 using namespace chaos::il2cpp::runtime_core;
 using namespace chaos::il2cpp::jit;
 
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Boolean_System_Boolean_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Byte_System_Byte_System_String(CHAOS_IL2CPP_UINT8 chaos_fn_arg_0, CHAOS_IL2CPP_UINT8 chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Byte_array_System_Byte_array_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Char_System_Char_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Decimal_System_Decimal_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Double_System_Double_System_String(double chaos_fn_arg_0, double chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Int16_System_Int16_System_String(CHAOS_IL2CPP_INT16 chaos_fn_arg_0, CHAOS_IL2CPP_INT16 chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Int32_System_Int32_System_String(CHAOS_IL2CPP_INT32 chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Int64_System_Int64_System_String(CHAOS_IL2CPP_INT64 chaos_fn_arg_0, CHAOS_IL2CPP_INT64 chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Object_System_Object_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_SByte_System_SByte_System_String(CHAOS_IL2CPP_INT8 chaos_fn_arg_0, CHAOS_IL2CPP_INT8 chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Single_System_Single_System_String(float chaos_fn_arg_0, float chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_String_System_String_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_UInt16_System_UInt16_System_String(CHAOS_IL2CPP_UINT16 chaos_fn_arg_0, CHAOS_IL2CPP_UINT16 chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_UInt32_System_UInt32_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_UInt64_System_UInt64_System_String(CHAOS_IL2CPP_UINT64 chaos_fn_arg_0, CHAOS_IL2CPP_UINT64 chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_0_0_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreNotEqual_0_0_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
-extern "C" CHAOS_IL2CPP_INT32 Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Complete(void);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Fail_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
-extern "C" CHAOS_IL2CPP_INT32 Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_get_ExitCode(void);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_IsFalse_System_Boolean_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_IsNotNull_System_Object_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_IsNull_System_Object_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_IsTrue_System_Boolean_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_RecordFailure(void);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Reset(void);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Throws_System_Action(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Throws_System_ArgumentException_System_Action__generic(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_generic_context);
-extern "C" void chaos_stub_definition_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert__Throws_System_Void_System_Action__type____method__System_ArgumentException(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_generic_context);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Throws_System_ArgumentNullException_System_Action__generic(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
-extern "C" void chaos_stub_definition_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert__Throws_System_Void_System_Action__type____method__System_ArgumentNullException(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_generic_context);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Throws_System_ArgumentOutOfRangeException_System_Action__generic(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
-extern "C" void chaos_stub_definition_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert__Throws_System_Void_System_Action__type____method__System_ArgumentOutOfRangeException(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_generic_context);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Throws_System_NotSupportedException_System_Action__generic(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
-extern "C" void chaos_stub_definition_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert__Throws_System_Void_System_Action__type____method__System_NotSupportedException(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_generic_context);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Throws_System_NullReferenceException_System_Action__generic(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
-extern "C" void chaos_stub_definition_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert__Throws_System_Void_System_Action__type____method__System_NullReferenceException(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_generic_context);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Throws_System_PlatformNotSupportedException_System_Action__generic(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
-extern "C" void chaos_stub_definition_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert__Throws_System_Void_System_Action__type____method__System_PlatformNotSupportedException(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_generic_context);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_AssertionException__ctor_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_BenchmarkAttribute__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_FactAttribute__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_HotUpdateAttribute__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
 extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Dynamic_BinaryOperationBinderTests__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
 extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Dynamic_BinaryOperationBinderTests_Benchmark_Bind_2_DynamicMetaObject_DynamicMetaObject_0(void);
 extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Dynamic_BinaryOperationBinderTests_Benchmark_Bind_2_DynamicMetaObject_DynamicMetaObject_1(void);
@@ -2338,4036 +2295,20 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Ru
 
 
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::NotEqual_7_Expression_Expression_0()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_NotEqual_7_Expression_Expression_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::TryCatch_265_Expression_CatchBlock_1()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_TryCatch_265_Expression_CatchBlock_1(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
 	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__16_0;
-	_s1 = _s0;
-	{
-		if (_s1 == 0)
-		{
-			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9;
-			{
-				// Hotpatch-aware ldftn wrapper (slot 1860)
-				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[1860];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
-					{
-						alignas(16) uint8_t _d_ab[8];
-						ArgBuffer _d_bw(_d_ab);
-						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d_entry.method_key, _d_ab, nullptr);
-						return;
-					}
-					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
-				};
-			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
-			}
-			{
-				const auto chaos_method_ptr = _s1;
-				const auto chaos_target = _s0;
-				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
-				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
-				chaos_object->chaos_delegate_target = chaos_target;
-				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
-				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-			}
-			_s1 = _s0;
-			{
-				auto chaos_value = _s1;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__16_0 = chaos_value;
-			}
-		}
-		{
-			// Assert.Throws: target method not found via IL lookahead
-			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
-		}
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-		chaos_locals[0] = ChaosStoreInt64(_i0);
-		_i0 = ChaosLoadInt64(chaos_locals[0]);
-		return _i0;
-	}
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::NotEqual_8_Expression_Expression_bool_MethodInfo_0()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_NotEqual_8_Expression_Expression_bool_MethodInfo_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__18_0;
-	_s1 = _s0;
-	{
-		if (_s1 == 0)
-		{
-			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9;
-			{
-				// Hotpatch-aware ldftn wrapper (slot 1861)
-				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[1861];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
-					{
-						alignas(16) uint8_t _d_ab[8];
-						ArgBuffer _d_bw(_d_ab);
-						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d_entry.method_key, _d_ab, nullptr);
-						return;
-					}
-					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
-				};
-			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
-			}
-			{
-				const auto chaos_method_ptr = _s1;
-				const auto chaos_target = _s0;
-				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
-				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
-				chaos_object->chaos_delegate_target = chaos_target;
-				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
-				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-			}
-			_s1 = _s0;
-			{
-				auto chaos_value = _s1;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__18_0 = chaos_value;
-			}
-		}
-		{
-			// Assert.Throws: target method not found via IL lookahead
-			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
-		}
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-		chaos_locals[0] = ChaosStoreInt64(_i0);
-		_i0 = ChaosLoadInt64(chaos_locals[0]);
-		return _i0;
-	}
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::NotEqual_8_Expression_Expression_bool_MethodInfo_1()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_NotEqual_8_Expression_Expression_bool_MethodInfo_1(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__20_0;
-	_s1 = _s0;
-	{
-		if (_s1 == 0)
-		{
-			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9;
-			{
-				// Hotpatch-aware ldftn wrapper (slot 1862)
-				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[1862];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
-					{
-						alignas(16) uint8_t _d_ab[8];
-						ArgBuffer _d_bw(_d_ab);
-						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d_entry.method_key, _d_ab, nullptr);
-						return;
-					}
-					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
-				};
-			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
-			}
-			{
-				const auto chaos_method_ptr = _s1;
-				const auto chaos_target = _s0;
-				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
-				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
-				chaos_object->chaos_delegate_target = chaos_target;
-				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
-				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-			}
-			_s1 = _s0;
-			{
-				auto chaos_value = _s1;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__20_0 = chaos_value;
-			}
-		}
-		{
-			// Assert.Throws: target method not found via IL lookahead
-			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
-		}
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-		chaos_locals[0] = ChaosStoreInt64(_i0);
-		_i0 = ChaosLoadInt64(chaos_locals[0]);
-		return _i0;
-	}
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::OnesComplement_284_Expression_0()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_OnesComplement_284_Expression_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__912_0;
-	_s1 = _s0;
-	{
-		if (_s1 == 0)
-		{
-			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9;
-			{
-				// Hotpatch-aware ldftn wrapper (slot 1863)
-				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[1863];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
-					{
-						alignas(16) uint8_t _d_ab[8];
-						ArgBuffer _d_bw(_d_ab);
-						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d_entry.method_key, _d_ab, nullptr);
-						return;
-					}
-					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
-				};
-			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
-			}
-			{
-				const auto chaos_method_ptr = _s1;
-				const auto chaos_target = _s0;
-				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
-				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
-				chaos_object->chaos_delegate_target = chaos_target;
-				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
-				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-			}
-			_s1 = _s0;
-			{
-				auto chaos_value = _s1;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__912_0 = chaos_value;
-			}
-		}
-		{
-			// Assert.Throws: target method not found via IL lookahead
-			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
-		}
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-		chaos_locals[0] = ChaosStoreInt64(_i0);
-		_i0 = ChaosLoadInt64(chaos_locals[0]);
-		return _i0;
-	}
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::OnesComplement_285_Expression_MethodInfo_0()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_OnesComplement_285_Expression_MethodInfo_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__914_0;
-	_s1 = _s0;
-	{
-		if (_s1 == 0)
-		{
-			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9;
-			{
-				// Hotpatch-aware ldftn wrapper (slot 1864)
-				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[1864];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
-					{
-						alignas(16) uint8_t _d_ab[8];
-						ArgBuffer _d_bw(_d_ab);
-						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d_entry.method_key, _d_ab, nullptr);
-						return;
-					}
-					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
-				};
-			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
-			}
-			{
-				const auto chaos_method_ptr = _s1;
-				const auto chaos_target = _s0;
-				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
-				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
-				chaos_object->chaos_delegate_target = chaos_target;
-				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
-				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-			}
-			_s1 = _s0;
-			{
-				auto chaos_value = _s1;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__914_0 = chaos_value;
-			}
-		}
-		{
-			// Assert.Throws: target method not found via IL lookahead
-			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
-		}
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-		chaos_locals[0] = ChaosStoreInt64(_i0);
-		_i0 = ChaosLoadInt64(chaos_locals[0]);
-		return _i0;
-	}
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Or_79_Expression_Expression_0()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Or_79_Expression_Expression_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__170_0;
-	_s1 = _s0;
-	{
-		if (_s1 == 0)
-		{
-			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9;
-			{
-				// Hotpatch-aware ldftn wrapper (slot 1865)
-				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[1865];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
-					{
-						alignas(16) uint8_t _d_ab[8];
-						ArgBuffer _d_bw(_d_ab);
-						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d_entry.method_key, _d_ab, nullptr);
-						return;
-					}
-					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
-				};
-			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
-			}
-			{
-				const auto chaos_method_ptr = _s1;
-				const auto chaos_target = _s0;
-				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
-				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
-				chaos_object->chaos_delegate_target = chaos_target;
-				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
-				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-			}
-			_s1 = _s0;
-			{
-				auto chaos_value = _s1;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__170_0 = chaos_value;
-			}
-		}
-		{
-			// Assert.Throws: target method not found via IL lookahead
-			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
-		}
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-		chaos_locals[0] = ChaosStoreInt64(_i0);
-		_i0 = ChaosLoadInt64(chaos_locals[0]);
-		return _i0;
-	}
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Or_80_Expression_Expression_MethodInfo_0()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Or_80_Expression_Expression_MethodInfo_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__172_0;
-	_s1 = _s0;
-	{
-		if (_s1 == 0)
-		{
-			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9;
-			{
-				// Hotpatch-aware ldftn wrapper (slot 1866)
-				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[1866];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
-					{
-						alignas(16) uint8_t _d_ab[8];
-						ArgBuffer _d_bw(_d_ab);
-						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d_entry.method_key, _d_ab, nullptr);
-						return;
-					}
-					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
-				};
-			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
-			}
-			{
-				const auto chaos_method_ptr = _s1;
-				const auto chaos_target = _s0;
-				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
-				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
-				chaos_object->chaos_delegate_target = chaos_target;
-				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
-				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-			}
-			_s1 = _s0;
-			{
-				auto chaos_value = _s1;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__172_0 = chaos_value;
-			}
-		}
-		{
-			// Assert.Throws: target method not found via IL lookahead
-			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
-		}
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-		chaos_locals[0] = ChaosStoreInt64(_i0);
-		_i0 = ChaosLoadInt64(chaos_locals[0]);
-		return _i0;
-	}
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::OrAssign_81_Expression_Expression_0()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_OrAssign_81_Expression_Expression_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__174_0;
-	_s1 = _s0;
-	{
-		if (_s1 == 0)
-		{
-			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9;
-			{
-				// Hotpatch-aware ldftn wrapper (slot 1867)
-				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[1867];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
-					{
-						alignas(16) uint8_t _d_ab[8];
-						ArgBuffer _d_bw(_d_ab);
-						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d_entry.method_key, _d_ab, nullptr);
-						return;
-					}
-					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
-				};
-			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
-			}
-			{
-				const auto chaos_method_ptr = _s1;
-				const auto chaos_target = _s0;
-				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
-				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
-				chaos_object->chaos_delegate_target = chaos_target;
-				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
-				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-			}
-			_s1 = _s0;
-			{
-				auto chaos_value = _s1;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__174_0 = chaos_value;
-			}
-		}
-		{
-			// Assert.Throws: target method not found via IL lookahead
-			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
-		}
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-		chaos_locals[0] = ChaosStoreInt64(_i0);
-		_i0 = ChaosLoadInt64(chaos_locals[0]);
-		return _i0;
-	}
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::OrAssign_82_Expression_Expression_MethodInfo_0()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_OrAssign_82_Expression_Expression_MethodInfo_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__176_0;
-	_s1 = _s0;
-	{
-		if (_s1 == 0)
-		{
-			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9;
-			{
-				// Hotpatch-aware ldftn wrapper (slot 1868)
-				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[1868];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
-					{
-						alignas(16) uint8_t _d_ab[8];
-						ArgBuffer _d_bw(_d_ab);
-						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d_entry.method_key, _d_ab, nullptr);
-						return;
-					}
-					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
-				};
-			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
-			}
-			{
-				const auto chaos_method_ptr = _s1;
-				const auto chaos_target = _s0;
-				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
-				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
-				chaos_object->chaos_delegate_target = chaos_target;
-				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
-				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-			}
-			_s1 = _s0;
-			{
-				auto chaos_value = _s1;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__176_0 = chaos_value;
-			}
-		}
-		{
-			// Assert.Throws: target method not found via IL lookahead
-			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
-		}
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-		chaos_locals[0] = ChaosStoreInt64(_i0);
-		_i0 = ChaosLoadInt64(chaos_locals[0]);
-		return _i0;
-	}
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::OrAssign_83_Expression_Expression_MethodInfo_LambdaExpression_0()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_OrAssign_83_Expression_Expression_MethodInfo_LambdaExpression_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__178_0;
-	_s1 = _s0;
-	{
-		if (_s1 == 0)
-		{
-			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9;
-			{
-				// Hotpatch-aware ldftn wrapper (slot 1869)
-				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[1869];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
-					{
-						alignas(16) uint8_t _d_ab[8];
-						ArgBuffer _d_bw(_d_ab);
-						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d_entry.method_key, _d_ab, nullptr);
-						return;
-					}
-					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
-				};
-			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
-			}
-			{
-				const auto chaos_method_ptr = _s1;
-				const auto chaos_target = _s0;
-				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
-				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
-				chaos_object->chaos_delegate_target = chaos_target;
-				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
-				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-			}
-			_s1 = _s0;
-			{
-				auto chaos_value = _s1;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__178_0 = chaos_value;
-			}
-		}
-		{
-			// Assert.Throws: target method not found via IL lookahead
-			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
-		}
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-		chaos_locals[0] = ChaosStoreInt64(_i0);
-		_i0 = ChaosLoadInt64(chaos_locals[0]);
-		return _i0;
-	}
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::OrElse_20_Expression_Expression_0()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_OrElse_20_Expression_Expression_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__52_0;
-	_s1 = _s0;
-	{
-		if (_s1 == 0)
-		{
-			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9;
-			{
-				// Hotpatch-aware ldftn wrapper (slot 1870)
-				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[1870];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
-					{
-						alignas(16) uint8_t _d_ab[8];
-						ArgBuffer _d_bw(_d_ab);
-						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d_entry.method_key, _d_ab, nullptr);
-						return;
-					}
-					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
-				};
-			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
-			}
-			{
-				const auto chaos_method_ptr = _s1;
-				const auto chaos_target = _s0;
-				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
-				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
-				chaos_object->chaos_delegate_target = chaos_target;
-				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
-				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-			}
-			_s1 = _s0;
-			{
-				auto chaos_value = _s1;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__52_0 = chaos_value;
-			}
-		}
-		{
-			// Assert.Throws: target method not found via IL lookahead
-			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
-		}
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-		chaos_locals[0] = ChaosStoreInt64(_i0);
-		_i0 = ChaosLoadInt64(chaos_locals[0]);
-		return _i0;
-	}
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::OrElse_21_Expression_Expression_MethodInfo_0()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_OrElse_21_Expression_Expression_MethodInfo_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__54_0;
-	_s1 = _s0;
-	{
-		if (_s1 == 0)
-		{
-			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9;
-			{
-				// Hotpatch-aware ldftn wrapper (slot 1871)
-				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[1871];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
-					{
-						alignas(16) uint8_t _d_ab[8];
-						ArgBuffer _d_bw(_d_ab);
-						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d_entry.method_key, _d_ab, nullptr);
-						return;
-					}
-					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
-				};
-			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
-			}
-			{
-				const auto chaos_method_ptr = _s1;
-				const auto chaos_target = _s0;
-				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
-				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
-				chaos_object->chaos_delegate_target = chaos_target;
-				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
-				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-			}
-			_s1 = _s0;
-			{
-				auto chaos_value = _s1;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__54_0 = chaos_value;
-			}
-		}
-		{
-			// Assert.Throws: target method not found via IL lookahead
-			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
-		}
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-		chaos_locals[0] = ChaosStoreInt64(_i0);
-		_i0 = ChaosLoadInt64(chaos_locals[0]);
-		return _i0;
-	}
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Parameter_245_System_Type_0()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Parameter_245_System_Type_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__780_0;
-	_s1 = _s0;
-	{
-		if (_s1 == 0)
-		{
-			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9;
-			{
-				// Hotpatch-aware ldftn wrapper (slot 1872)
-				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[1872];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
-					{
-						alignas(16) uint8_t _d_ab[8];
-						ArgBuffer _d_bw(_d_ab);
-						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d_entry.method_key, _d_ab, nullptr);
-						return;
-					}
-					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
-				};
-			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
-			}
-			{
-				const auto chaos_method_ptr = _s1;
-				const auto chaos_target = _s0;
-				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
-				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
-				chaos_object->chaos_delegate_target = chaos_target;
-				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
-				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-			}
-			_s1 = _s0;
-			{
-				auto chaos_value = _s1;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__780_0 = chaos_value;
-			}
-		}
-		{
-			// Assert.Throws: target method not found via IL lookahead
-			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
-		}
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-		chaos_locals[0] = ChaosStoreInt64(_i0);
-		_i0 = ChaosLoadInt64(chaos_locals[0]);
-		return _i0;
-	}
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Parameter_247_System_Type_string_0()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Parameter_247_System_Type_string_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__784_0;
-	_s1 = _s0;
-	{
-		if (_s1 == 0)
-		{
-			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9;
-			{
-				// Hotpatch-aware ldftn wrapper (slot 1873)
-				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[1873];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
-					{
-						alignas(16) uint8_t _d_ab[8];
-						ArgBuffer _d_bw(_d_ab);
-						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d_entry.method_key, _d_ab, nullptr);
-						return;
-					}
-					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
-				};
-			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
-			}
-			{
-				const auto chaos_method_ptr = _s1;
-				const auto chaos_target = _s0;
-				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
-				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
-				chaos_object->chaos_delegate_target = chaos_target;
-				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
-				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-			}
-			_s1 = _s0;
-			{
-				auto chaos_value = _s1;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__784_0 = chaos_value;
-			}
-		}
-		{
-			// Assert.Throws: target method not found via IL lookahead
-			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
-		}
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-		chaos_locals[0] = ChaosStoreInt64(_i0);
-		_i0 = ChaosLoadInt64(chaos_locals[0]);
-		return _i0;
-	}
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Parameter_247_System_Type_string_1()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Parameter_247_System_Type_string_1(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__786_0;
-	_s1 = _s0;
-	{
-		if (_s1 == 0)
-		{
-			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9;
-			{
-				// Hotpatch-aware ldftn wrapper (slot 1874)
-				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[1874];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
-					{
-						alignas(16) uint8_t _d_ab[8];
-						ArgBuffer _d_bw(_d_ab);
-						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d_entry.method_key, _d_ab, nullptr);
-						return;
-					}
-					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
-				};
-			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
-			}
-			{
-				const auto chaos_method_ptr = _s1;
-				const auto chaos_target = _s0;
-				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
-				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
-				chaos_object->chaos_delegate_target = chaos_target;
-				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
-				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-			}
-			_s1 = _s0;
-			{
-				auto chaos_value = _s1;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__786_0 = chaos_value;
-			}
-		}
-		{
-			// Assert.Throws: target method not found via IL lookahead
-			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
-		}
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-		chaos_locals[0] = ChaosStoreInt64(_i0);
-		_i0 = ChaosLoadInt64(chaos_locals[0]);
-		return _i0;
-	}
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::PostDecrementAssign_308_Expression_0()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_PostDecrementAssign_308_Expression_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__960_0;
-	_s1 = _s0;
-	{
-		if (_s1 == 0)
-		{
-			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9;
-			{
-				// Hotpatch-aware ldftn wrapper (slot 1875)
-				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[1875];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
-					{
-						alignas(16) uint8_t _d_ab[8];
-						ArgBuffer _d_bw(_d_ab);
-						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d_entry.method_key, _d_ab, nullptr);
-						return;
-					}
-					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
-				};
-			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
-			}
-			{
-				const auto chaos_method_ptr = _s1;
-				const auto chaos_target = _s0;
-				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
-				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
-				chaos_object->chaos_delegate_target = chaos_target;
-				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
-				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-			}
-			_s1 = _s0;
-			{
-				auto chaos_value = _s1;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__960_0 = chaos_value;
-			}
-		}
-		{
-			// Assert.Throws: target method not found via IL lookahead
-			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
-		}
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-		chaos_locals[0] = ChaosStoreInt64(_i0);
-		_i0 = ChaosLoadInt64(chaos_locals[0]);
-		return _i0;
-	}
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::PostDecrementAssign_309_Expression_MethodInfo_0()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_PostDecrementAssign_309_Expression_MethodInfo_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__962_0;
-	_s1 = _s0;
-	{
-		if (_s1 == 0)
-		{
-			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9;
-			{
-				// Hotpatch-aware ldftn wrapper (slot 1876)
-				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[1876];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
-					{
-						alignas(16) uint8_t _d_ab[8];
-						ArgBuffer _d_bw(_d_ab);
-						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d_entry.method_key, _d_ab, nullptr);
-						return;
-					}
-					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
-				};
-			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
-			}
-			{
-				const auto chaos_method_ptr = _s1;
-				const auto chaos_target = _s0;
-				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
-				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
-				chaos_object->chaos_delegate_target = chaos_target;
-				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
-				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-			}
-			_s1 = _s0;
-			{
-				auto chaos_value = _s1;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__962_0 = chaos_value;
-			}
-		}
-		{
-			// Assert.Throws: target method not found via IL lookahead
-			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
-		}
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-		chaos_locals[0] = ChaosStoreInt64(_i0);
-		_i0 = ChaosLoadInt64(chaos_locals[0]);
-		return _i0;
-	}
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::PostIncrementAssign_306_Expression_0()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_PostIncrementAssign_306_Expression_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__956_0;
-	_s1 = _s0;
-	{
-		if (_s1 == 0)
-		{
-			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9;
-			{
-				// Hotpatch-aware ldftn wrapper (slot 1877)
-				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[1877];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
-					{
-						alignas(16) uint8_t _d_ab[8];
-						ArgBuffer _d_bw(_d_ab);
-						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d_entry.method_key, _d_ab, nullptr);
-						return;
-					}
-					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
-				};
-			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
-			}
-			{
-				const auto chaos_method_ptr = _s1;
-				const auto chaos_target = _s0;
-				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
-				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
-				chaos_object->chaos_delegate_target = chaos_target;
-				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
-				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-			}
-			_s1 = _s0;
-			{
-				auto chaos_value = _s1;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__956_0 = chaos_value;
-			}
-		}
-		{
-			// Assert.Throws: target method not found via IL lookahead
-			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
-		}
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-		chaos_locals[0] = ChaosStoreInt64(_i0);
-		_i0 = ChaosLoadInt64(chaos_locals[0]);
-		return _i0;
-	}
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::PostIncrementAssign_307_Expression_MethodInfo_0()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_PostIncrementAssign_307_Expression_MethodInfo_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__958_0;
-	_s1 = _s0;
-	{
-		if (_s1 == 0)
-		{
-			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9;
-			{
-				// Hotpatch-aware ldftn wrapper (slot 1878)
-				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[1878];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
-					{
-						alignas(16) uint8_t _d_ab[8];
-						ArgBuffer _d_bw(_d_ab);
-						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d_entry.method_key, _d_ab, nullptr);
-						return;
-					}
-					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
-				};
-			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
-			}
-			{
-				const auto chaos_method_ptr = _s1;
-				const auto chaos_target = _s0;
-				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
-				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
-				chaos_object->chaos_delegate_target = chaos_target;
-				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
-				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-			}
-			_s1 = _s0;
-			{
-				auto chaos_value = _s1;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__958_0 = chaos_value;
-			}
-		}
-		{
-			// Assert.Throws: target method not found via IL lookahead
-			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
-		}
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-		chaos_locals[0] = ChaosStoreInt64(_i0);
-		_i0 = ChaosLoadInt64(chaos_locals[0]);
-		return _i0;
-	}
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Power_89_Expression_Expression_0()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Power_89_Expression_Expression_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__190_0;
-	_s1 = _s0;
-	{
-		if (_s1 == 0)
-		{
-			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9;
-			{
-				// Hotpatch-aware ldftn wrapper (slot 1879)
-				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[1879];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
-					{
-						alignas(16) uint8_t _d_ab[8];
-						ArgBuffer _d_bw(_d_ab);
-						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d_entry.method_key, _d_ab, nullptr);
-						return;
-					}
-					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
-				};
-			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
-			}
-			{
-				const auto chaos_method_ptr = _s1;
-				const auto chaos_target = _s0;
-				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
-				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
-				chaos_object->chaos_delegate_target = chaos_target;
-				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
-				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-			}
-			_s1 = _s0;
-			{
-				auto chaos_value = _s1;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__190_0 = chaos_value;
-			}
-		}
-		{
-			// Assert.Throws: target method not found via IL lookahead
-			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
-		}
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-		chaos_locals[0] = ChaosStoreInt64(_i0);
-		_i0 = ChaosLoadInt64(chaos_locals[0]);
-		return _i0;
-	}
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Power_90_Expression_Expression_MethodInfo_0()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Power_90_Expression_Expression_MethodInfo_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__192_0;
-	_s1 = _s0;
-	{
-		if (_s1 == 0)
-		{
-			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9;
-			{
-				// Hotpatch-aware ldftn wrapper (slot 1880)
-				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[1880];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
-					{
-						alignas(16) uint8_t _d_ab[8];
-						ArgBuffer _d_bw(_d_ab);
-						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d_entry.method_key, _d_ab, nullptr);
-						return;
-					}
-					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
-				};
-			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
-			}
-			{
-				const auto chaos_method_ptr = _s1;
-				const auto chaos_target = _s0;
-				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
-				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
-				chaos_object->chaos_delegate_target = chaos_target;
-				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
-				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-			}
-			_s1 = _s0;
-			{
-				auto chaos_value = _s1;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__192_0 = chaos_value;
-			}
-		}
-		{
-			// Assert.Throws: target method not found via IL lookahead
-			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
-		}
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-		chaos_locals[0] = ChaosStoreInt64(_i0);
-		_i0 = ChaosLoadInt64(chaos_locals[0]);
-		return _i0;
-	}
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::PowerAssign_91_Expression_Expression_0()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_PowerAssign_91_Expression_Expression_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__194_0;
-	_s1 = _s0;
-	{
-		if (_s1 == 0)
-		{
-			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9;
-			{
-				// Hotpatch-aware ldftn wrapper (slot 1881)
-				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[1881];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
-					{
-						alignas(16) uint8_t _d_ab[8];
-						ArgBuffer _d_bw(_d_ab);
-						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d_entry.method_key, _d_ab, nullptr);
-						return;
-					}
-					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
-				};
-			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
-			}
-			{
-				const auto chaos_method_ptr = _s1;
-				const auto chaos_target = _s0;
-				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
-				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
-				chaos_object->chaos_delegate_target = chaos_target;
-				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
-				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-			}
-			_s1 = _s0;
-			{
-				auto chaos_value = _s1;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__194_0 = chaos_value;
-			}
-		}
-		{
-			// Assert.Throws: target method not found via IL lookahead
-			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
-		}
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-		chaos_locals[0] = ChaosStoreInt64(_i0);
-		_i0 = ChaosLoadInt64(chaos_locals[0]);
-		return _i0;
-	}
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::PowerAssign_92_Expression_Expression_MethodInfo_0()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_PowerAssign_92_Expression_Expression_MethodInfo_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__196_0;
-	_s1 = _s0;
-	{
-		if (_s1 == 0)
-		{
-			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9;
-			{
-				// Hotpatch-aware ldftn wrapper (slot 1882)
-				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[1882];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
-					{
-						alignas(16) uint8_t _d_ab[8];
-						ArgBuffer _d_bw(_d_ab);
-						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d_entry.method_key, _d_ab, nullptr);
-						return;
-					}
-					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
-				};
-			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
-			}
-			{
-				const auto chaos_method_ptr = _s1;
-				const auto chaos_target = _s0;
-				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
-				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
-				chaos_object->chaos_delegate_target = chaos_target;
-				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
-				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-			}
-			_s1 = _s0;
-			{
-				auto chaos_value = _s1;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__196_0 = chaos_value;
-			}
-		}
-		{
-			// Assert.Throws: target method not found via IL lookahead
-			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
-		}
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-		chaos_locals[0] = ChaosStoreInt64(_i0);
-		_i0 = ChaosLoadInt64(chaos_locals[0]);
-		return _i0;
-	}
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::PowerAssign_93_Expression_Expression_MethodInfo_LambdaExpression_0()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_PowerAssign_93_Expression_Expression_MethodInfo_LambdaExpression_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__198_0;
-	_s1 = _s0;
-	{
-		if (_s1 == 0)
-		{
-			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9;
-			{
-				// Hotpatch-aware ldftn wrapper (slot 1883)
-				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[1883];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
-					{
-						alignas(16) uint8_t _d_ab[8];
-						ArgBuffer _d_bw(_d_ab);
-						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d_entry.method_key, _d_ab, nullptr);
-						return;
-					}
-					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
-				};
-			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
-			}
-			{
-				const auto chaos_method_ptr = _s1;
-				const auto chaos_target = _s0;
-				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
-				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
-				chaos_object->chaos_delegate_target = chaos_target;
-				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
-				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-			}
-			_s1 = _s0;
-			{
-				auto chaos_value = _s1;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__198_0 = chaos_value;
-			}
-		}
-		{
-			// Assert.Throws: target method not found via IL lookahead
-			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
-		}
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-		chaos_locals[0] = ChaosStoreInt64(_i0);
-		_i0 = ChaosLoadInt64(chaos_locals[0]);
-		return _i0;
-	}
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::PreDecrementAssign_304_Expression_0()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_PreDecrementAssign_304_Expression_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__952_0;
-	_s1 = _s0;
-	{
-		if (_s1 == 0)
-		{
-			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9;
-			{
-				// Hotpatch-aware ldftn wrapper (slot 1884)
-				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[1884];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
-					{
-						alignas(16) uint8_t _d_ab[8];
-						ArgBuffer _d_bw(_d_ab);
-						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d_entry.method_key, _d_ab, nullptr);
-						return;
-					}
-					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
-				};
-			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
-			}
-			{
-				const auto chaos_method_ptr = _s1;
-				const auto chaos_target = _s0;
-				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
-				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
-				chaos_object->chaos_delegate_target = chaos_target;
-				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
-				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-			}
-			_s1 = _s0;
-			{
-				auto chaos_value = _s1;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__952_0 = chaos_value;
-			}
-		}
-		{
-			// Assert.Throws: target method not found via IL lookahead
-			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
-		}
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-		chaos_locals[0] = ChaosStoreInt64(_i0);
-		_i0 = ChaosLoadInt64(chaos_locals[0]);
-		return _i0;
-	}
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::PreDecrementAssign_305_Expression_MethodInfo_0()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_PreDecrementAssign_305_Expression_MethodInfo_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__954_0;
-	_s1 = _s0;
-	{
-		if (_s1 == 0)
-		{
-			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9;
-			{
-				// Hotpatch-aware ldftn wrapper (slot 1885)
-				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[1885];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
-					{
-						alignas(16) uint8_t _d_ab[8];
-						ArgBuffer _d_bw(_d_ab);
-						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d_entry.method_key, _d_ab, nullptr);
-						return;
-					}
-					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
-				};
-			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
-			}
-			{
-				const auto chaos_method_ptr = _s1;
-				const auto chaos_target = _s0;
-				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
-				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
-				chaos_object->chaos_delegate_target = chaos_target;
-				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
-				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-			}
-			_s1 = _s0;
-			{
-				auto chaos_value = _s1;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__954_0 = chaos_value;
-			}
-		}
-		{
-			// Assert.Throws: target method not found via IL lookahead
-			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
-		}
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-		chaos_locals[0] = ChaosStoreInt64(_i0);
-		_i0 = ChaosLoadInt64(chaos_locals[0]);
-		return _i0;
-	}
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::PreIncrementAssign_302_Expression_0()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_PreIncrementAssign_302_Expression_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__948_0;
-	_s1 = _s0;
-	{
-		if (_s1 == 0)
-		{
-			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9;
-			{
-				// Hotpatch-aware ldftn wrapper (slot 1886)
-				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[1886];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
-					{
-						alignas(16) uint8_t _d_ab[8];
-						ArgBuffer _d_bw(_d_ab);
-						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d_entry.method_key, _d_ab, nullptr);
-						return;
-					}
-					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
-				};
-			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
-			}
-			{
-				const auto chaos_method_ptr = _s1;
-				const auto chaos_target = _s0;
-				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
-				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
-				chaos_object->chaos_delegate_target = chaos_target;
-				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
-				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-			}
-			_s1 = _s0;
-			{
-				auto chaos_value = _s1;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__948_0 = chaos_value;
-			}
-		}
-		{
-			// Assert.Throws: target method not found via IL lookahead
-			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
-		}
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-		chaos_locals[0] = ChaosStoreInt64(_i0);
-		_i0 = ChaosLoadInt64(chaos_locals[0]);
-		return _i0;
-	}
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::PreIncrementAssign_303_Expression_MethodInfo_0()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_PreIncrementAssign_303_Expression_MethodInfo_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__950_0;
-	_s1 = _s0;
-	{
-		if (_s1 == 0)
-		{
-			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9;
-			{
-				// Hotpatch-aware ldftn wrapper (slot 1887)
-				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[1887];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
-					{
-						alignas(16) uint8_t _d_ab[8];
-						ArgBuffer _d_bw(_d_ab);
-						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d_entry.method_key, _d_ab, nullptr);
-						return;
-					}
-					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
-				};
-			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
-			}
-			{
-				const auto chaos_method_ptr = _s1;
-				const auto chaos_target = _s0;
-				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
-				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
-				chaos_object->chaos_delegate_target = chaos_target;
-				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
-				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-			}
-			_s1 = _s0;
-			{
-				auto chaos_value = _s1;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__950_0 = chaos_value;
-			}
-		}
-		{
-			// Assert.Throws: target method not found via IL lookahead
-			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
-		}
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-		chaos_locals[0] = ChaosStoreInt64(_i0);
-		_i0 = ChaosLoadInt64(chaos_locals[0]);
-		return _i0;
-	}
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Property_157_Expression_string_Expression_0()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Property_157_Expression_string_Expression_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__380_0;
-	_s1 = _s0;
-	{
-		if (_s1 == 0)
-		{
-			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9;
-			{
-				// Hotpatch-aware ldftn wrapper (slot 1888)
-				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[1888];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
-					{
-						alignas(16) uint8_t _d_ab[8];
-						ArgBuffer _d_bw(_d_ab);
-						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d_entry.method_key, _d_ab, nullptr);
-						return;
-					}
-					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
-				};
-			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
-			}
-			{
-				const auto chaos_method_ptr = _s1;
-				const auto chaos_target = _s0;
-				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
-				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
-				chaos_object->chaos_delegate_target = chaos_target;
-				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
-				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-			}
-			_s1 = _s0;
-			{
-				auto chaos_value = _s1;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__380_0 = chaos_value;
-			}
-		}
-		{
-			// Assert.Throws: target method not found via IL lookahead
-			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
-		}
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-		chaos_locals[0] = ChaosStoreInt64(_i0);
-		_i0 = ChaosLoadInt64(chaos_locals[0]);
-		return _i0;
-	}
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Property_157_Expression_string_Expression_1()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Property_157_Expression_string_Expression_1(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__382_0;
-	_s1 = _s0;
-	{
-		if (_s1 == 0)
-		{
-			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9;
-			{
-				// Hotpatch-aware ldftn wrapper (slot 1889)
-				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[1889];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
-					{
-						alignas(16) uint8_t _d_ab[8];
-						ArgBuffer _d_bw(_d_ab);
-						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d_entry.method_key, _d_ab, nullptr);
-						return;
-					}
-					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
-				};
-			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
-			}
-			{
-				const auto chaos_method_ptr = _s1;
-				const auto chaos_target = _s0;
-				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
-				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
-				chaos_object->chaos_delegate_target = chaos_target;
-				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
-				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-			}
-			_s1 = _s0;
-			{
-				auto chaos_value = _s1;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__382_0 = chaos_value;
-			}
-		}
-		{
-			// Assert.Throws: target method not found via IL lookahead
-			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
-		}
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-		chaos_locals[0] = ChaosStoreInt64(_i0);
-		_i0 = ChaosLoadInt64(chaos_locals[0]);
-		return _i0;
-	}
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Property_157_Expression_string_Expression_2()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Property_157_Expression_string_Expression_2(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__384_0;
-	_s1 = _s0;
-	{
-		if (_s1 == 0)
-		{
-			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9;
-			{
-				// Hotpatch-aware ldftn wrapper (slot 1890)
-				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[1890];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
-					{
-						alignas(16) uint8_t _d_ab[8];
-						ArgBuffer _d_bw(_d_ab);
-						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d_entry.method_key, _d_ab, nullptr);
-						return;
-					}
-					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
-				};
-			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
-			}
-			{
-				const auto chaos_method_ptr = _s1;
-				const auto chaos_target = _s0;
-				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
-				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
-				chaos_object->chaos_delegate_target = chaos_target;
-				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
-				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-			}
-			_s1 = _s0;
-			{
-				auto chaos_value = _s1;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__384_0 = chaos_value;
-			}
-		}
-		{
-			// Assert.Throws: target method not found via IL lookahead
-			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
-		}
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-		chaos_locals[0] = ChaosStoreInt64(_i0);
-		_i0 = ChaosLoadInt64(chaos_locals[0]);
-		return _i0;
-	}
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Property_157_Expression_string_Expression_3()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Property_157_Expression_string_Expression_3(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__386_0;
-	_s1 = _s0;
-	{
-		if (_s1 == 0)
-		{
-			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9;
-			{
-				// Hotpatch-aware ldftn wrapper (slot 1891)
-				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[1891];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
-					{
-						alignas(16) uint8_t _d_ab[8];
-						ArgBuffer _d_bw(_d_ab);
-						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d_entry.method_key, _d_ab, nullptr);
-						return;
-					}
-					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
-				};
-			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
-			}
-			{
-				const auto chaos_method_ptr = _s1;
-				const auto chaos_target = _s0;
-				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
-				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
-				chaos_object->chaos_delegate_target = chaos_target;
-				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
-				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-			}
-			_s1 = _s0;
-			{
-				auto chaos_value = _s1;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__386_0 = chaos_value;
-			}
-		}
-		{
-			// Assert.Throws: target method not found via IL lookahead
-			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
-		}
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-		chaos_locals[0] = ChaosStoreInt64(_i0);
-		_i0 = ChaosLoadInt64(chaos_locals[0]);
-		return _i0;
-	}
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Property_158_Expression_PropertyInfo_Expression_0()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Property_158_Expression_PropertyInfo_Expression_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__388_0;
-	_s1 = _s0;
-	{
-		if (_s1 == 0)
-		{
-			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9;
-			{
-				// Hotpatch-aware ldftn wrapper (slot 1892)
-				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[1892];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
-					{
-						alignas(16) uint8_t _d_ab[8];
-						ArgBuffer _d_bw(_d_ab);
-						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d_entry.method_key, _d_ab, nullptr);
-						return;
-					}
-					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
-				};
-			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
-			}
-			{
-				const auto chaos_method_ptr = _s1;
-				const auto chaos_target = _s0;
-				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
-				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
-				chaos_object->chaos_delegate_target = chaos_target;
-				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
-				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-			}
-			_s1 = _s0;
-			{
-				auto chaos_value = _s1;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__388_0 = chaos_value;
-			}
-		}
-		{
-			// Assert.Throws: target method not found via IL lookahead
-			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
-		}
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-		chaos_locals[0] = ChaosStoreInt64(_i0);
-		_i0 = ChaosLoadInt64(chaos_locals[0]);
-		return _i0;
-	}
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Property_158_Expression_PropertyInfo_Expression_1()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Property_158_Expression_PropertyInfo_Expression_1(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__390_0;
-	_s1 = _s0;
-	{
-		if (_s1 == 0)
-		{
-			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9;
-			{
-				// Hotpatch-aware ldftn wrapper (slot 1893)
-				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[1893];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
-					{
-						alignas(16) uint8_t _d_ab[8];
-						ArgBuffer _d_bw(_d_ab);
-						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d_entry.method_key, _d_ab, nullptr);
-						return;
-					}
-					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
-				};
-			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
-			}
-			{
-				const auto chaos_method_ptr = _s1;
-				const auto chaos_target = _s0;
-				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
-				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
-				chaos_object->chaos_delegate_target = chaos_target;
-				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
-				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-			}
-			_s1 = _s0;
-			{
-				auto chaos_value = _s1;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__390_0 = chaos_value;
-			}
-		}
-		{
-			// Assert.Throws: target method not found via IL lookahead
-			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
-		}
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-		chaos_locals[0] = ChaosStoreInt64(_i0);
-		_i0 = ChaosLoadInt64(chaos_locals[0]);
-		return _i0;
-	}
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Property_158_Expression_PropertyInfo_Expression_2()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Property_158_Expression_PropertyInfo_Expression_2(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__392_0;
-	_s1 = _s0;
-	{
-		if (_s1 == 0)
-		{
-			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9;
-			{
-				// Hotpatch-aware ldftn wrapper (slot 1894)
-				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[1894];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
-					{
-						alignas(16) uint8_t _d_ab[8];
-						ArgBuffer _d_bw(_d_ab);
-						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d_entry.method_key, _d_ab, nullptr);
-						return;
-					}
-					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
-				};
-			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
-			}
-			{
-				const auto chaos_method_ptr = _s1;
-				const auto chaos_target = _s0;
-				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
-				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
-				chaos_object->chaos_delegate_target = chaos_target;
-				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
-				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-			}
-			_s1 = _s0;
-			{
-				auto chaos_value = _s1;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__392_0 = chaos_value;
-			}
-		}
-		{
-			// Assert.Throws: target method not found via IL lookahead
-			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
-		}
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-		chaos_locals[0] = ChaosStoreInt64(_i0);
-		_i0 = ChaosLoadInt64(chaos_locals[0]);
-		return _i0;
-	}
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Property_159_Expression_PropertyInfo_IEnumerableExpression_0()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Property_159_Expression_PropertyInfo_IEnumerableExpression_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__394_0;
-	_s1 = _s0;
-	{
-		if (_s1 == 0)
-		{
-			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9;
-			{
-				// Hotpatch-aware ldftn wrapper (slot 1895)
-				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[1895];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
-					{
-						alignas(16) uint8_t _d_ab[8];
-						ArgBuffer _d_bw(_d_ab);
-						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d_entry.method_key, _d_ab, nullptr);
-						return;
-					}
-					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
-				};
-			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
-			}
-			{
-				const auto chaos_method_ptr = _s1;
-				const auto chaos_target = _s0;
-				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
-				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
-				chaos_object->chaos_delegate_target = chaos_target;
-				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
-				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-			}
-			_s1 = _s0;
-			{
-				auto chaos_value = _s1;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__394_0 = chaos_value;
-			}
-		}
-		{
-			// Assert.Throws: target method not found via IL lookahead
-			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
-		}
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-		chaos_locals[0] = ChaosStoreInt64(_i0);
-		_i0 = ChaosLoadInt64(chaos_locals[0]);
-		return _i0;
-	}
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Property_159_Expression_PropertyInfo_IEnumerableExpression_1()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Property_159_Expression_PropertyInfo_IEnumerableExpression_1(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__396_0;
-	_s1 = _s0;
-	{
-		if (_s1 == 0)
-		{
-			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9;
-			{
-				// Hotpatch-aware ldftn wrapper (slot 1896)
-				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[1896];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
-					{
-						alignas(16) uint8_t _d_ab[8];
-						ArgBuffer _d_bw(_d_ab);
-						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d_entry.method_key, _d_ab, nullptr);
-						return;
-					}
-					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
-				};
-			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
-			}
-			{
-				const auto chaos_method_ptr = _s1;
-				const auto chaos_target = _s0;
-				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
-				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
-				chaos_object->chaos_delegate_target = chaos_target;
-				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
-				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-			}
-			_s1 = _s0;
-			{
-				auto chaos_value = _s1;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__396_0 = chaos_value;
-			}
-		}
-		{
-			// Assert.Throws: target method not found via IL lookahead
-			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
-		}
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-		chaos_locals[0] = ChaosStoreInt64(_i0);
-		_i0 = ChaosLoadInt64(chaos_locals[0]);
-		return _i0;
-	}
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Property_203_Expression_string_0()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Property_203_Expression_string_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__606_0;
-	_s1 = _s0;
-	{
-		if (_s1 == 0)
-		{
-			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9;
-			{
-				// Hotpatch-aware ldftn wrapper (slot 1897)
-				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[1897];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
-					{
-						alignas(16) uint8_t _d_ab[8];
-						ArgBuffer _d_bw(_d_ab);
-						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d_entry.method_key, _d_ab, nullptr);
-						return;
-					}
-					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
-				};
-			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
-			}
-			{
-				const auto chaos_method_ptr = _s1;
-				const auto chaos_target = _s0;
-				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
-				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
-				chaos_object->chaos_delegate_target = chaos_target;
-				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
-				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-			}
-			_s1 = _s0;
-			{
-				auto chaos_value = _s1;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__606_0 = chaos_value;
-			}
-		}
-		{
-			// Assert.Throws: target method not found via IL lookahead
-			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
-		}
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-		chaos_locals[0] = ChaosStoreInt64(_i0);
-		_i0 = ChaosLoadInt64(chaos_locals[0]);
-		return _i0;
-	}
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Property_203_Expression_string_1()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Property_203_Expression_string_1(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__608_0;
-	_s1 = _s0;
-	{
-		if (_s1 == 0)
-		{
-			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9;
-			{
-				// Hotpatch-aware ldftn wrapper (slot 1898)
-				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[1898];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
-					{
-						alignas(16) uint8_t _d_ab[8];
-						ArgBuffer _d_bw(_d_ab);
-						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d_entry.method_key, _d_ab, nullptr);
-						return;
-					}
-					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
-				};
-			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
-			}
-			{
-				const auto chaos_method_ptr = _s1;
-				const auto chaos_target = _s0;
-				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
-				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
-				chaos_object->chaos_delegate_target = chaos_target;
-				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
-				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-			}
-			_s1 = _s0;
-			{
-				auto chaos_value = _s1;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__608_0 = chaos_value;
-			}
-		}
-		{
-			// Assert.Throws: target method not found via IL lookahead
-			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
-		}
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-		chaos_locals[0] = ChaosStoreInt64(_i0);
-		_i0 = ChaosLoadInt64(chaos_locals[0]);
-		return _i0;
-	}
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Property_204_Expression_System_Type_string_0()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Property_204_Expression_System_Type_string_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__610_0;
-	_s1 = _s0;
-	{
-		if (_s1 == 0)
-		{
-			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9;
-			{
-				// Hotpatch-aware ldftn wrapper (slot 1899)
-				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[1899];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
-					{
-						alignas(16) uint8_t _d_ab[8];
-						ArgBuffer _d_bw(_d_ab);
-						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d_entry.method_key, _d_ab, nullptr);
-						return;
-					}
-					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
-				};
-			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
-			}
-			{
-				const auto chaos_method_ptr = _s1;
-				const auto chaos_target = _s0;
-				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
-				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
-				chaos_object->chaos_delegate_target = chaos_target;
-				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
-				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-			}
-			_s1 = _s0;
-			{
-				auto chaos_value = _s1;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__610_0 = chaos_value;
-			}
-		}
-		{
-			// Assert.Throws: target method not found via IL lookahead
-			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
-		}
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-		chaos_locals[0] = ChaosStoreInt64(_i0);
-		_i0 = ChaosLoadInt64(chaos_locals[0]);
-		return _i0;
-	}
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Property_204_Expression_System_Type_string_1()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Property_204_Expression_System_Type_string_1(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__612_0;
-	_s1 = _s0;
-	{
-		if (_s1 == 0)
-		{
-			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9;
-			{
-				// Hotpatch-aware ldftn wrapper (slot 1900)
-				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[1900];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
-					{
-						alignas(16) uint8_t _d_ab[8];
-						ArgBuffer _d_bw(_d_ab);
-						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d_entry.method_key, _d_ab, nullptr);
-						return;
-					}
-					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
-				};
-			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
-			}
-			{
-				const auto chaos_method_ptr = _s1;
-				const auto chaos_target = _s0;
-				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
-				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
-				chaos_object->chaos_delegate_target = chaos_target;
-				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
-				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-			}
-			_s1 = _s0;
-			{
-				auto chaos_value = _s1;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__612_0 = chaos_value;
-			}
-		}
-		{
-			// Assert.Throws: target method not found via IL lookahead
-			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
-		}
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-		chaos_locals[0] = ChaosStoreInt64(_i0);
-		_i0 = ChaosLoadInt64(chaos_locals[0]);
-		return _i0;
-	}
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Property_205_Expression_PropertyInfo_0()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Property_205_Expression_PropertyInfo_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__614_0;
-	_s1 = _s0;
-	{
-		if (_s1 == 0)
-		{
-			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9;
-			{
-				// Hotpatch-aware ldftn wrapper (slot 1901)
-				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[1901];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
-					{
-						alignas(16) uint8_t _d_ab[8];
-						ArgBuffer _d_bw(_d_ab);
-						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d_entry.method_key, _d_ab, nullptr);
-						return;
-					}
-					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
-				};
-			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
-			}
-			{
-				const auto chaos_method_ptr = _s1;
-				const auto chaos_target = _s0;
-				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
-				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
-				chaos_object->chaos_delegate_target = chaos_target;
-				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
-				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-			}
-			_s1 = _s0;
-			{
-				auto chaos_value = _s1;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__614_0 = chaos_value;
-			}
-		}
-		{
-			// Assert.Throws: target method not found via IL lookahead
-			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
-		}
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-		chaos_locals[0] = ChaosStoreInt64(_i0);
-		_i0 = ChaosLoadInt64(chaos_locals[0]);
-		return _i0;
-	}
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Property_206_Expression_MethodInfo_0()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Property_206_Expression_MethodInfo_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__616_0;
-	_s1 = _s0;
-	{
-		if (_s1 == 0)
-		{
-			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9;
-			{
-				// Hotpatch-aware ldftn wrapper (slot 1902)
-				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[1902];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
-					{
-						alignas(16) uint8_t _d_ab[8];
-						ArgBuffer _d_bw(_d_ab);
-						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d_entry.method_key, _d_ab, nullptr);
-						return;
-					}
-					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
-				};
-			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
-			}
-			{
-				const auto chaos_method_ptr = _s1;
-				const auto chaos_target = _s0;
-				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
-				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
-				chaos_object->chaos_delegate_target = chaos_target;
-				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
-				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-			}
-			_s1 = _s0;
-			{
-				auto chaos_value = _s1;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__616_0 = chaos_value;
-			}
-		}
-		{
-			// Assert.Throws: target method not found via IL lookahead
-			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
-		}
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-		chaos_locals[0] = ChaosStoreInt64(_i0);
-		_i0 = ChaosLoadInt64(chaos_locals[0]);
-		return _i0;
-	}
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::PropertyOrField_207_Expression_string_0()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_PropertyOrField_207_Expression_string_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__618_0;
-	_s1 = _s0;
-	{
-		if (_s1 == 0)
-		{
-			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9;
-			{
-				// Hotpatch-aware ldftn wrapper (slot 1903)
-				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[1903];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
-					{
-						alignas(16) uint8_t _d_ab[8];
-						ArgBuffer _d_bw(_d_ab);
-						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d_entry.method_key, _d_ab, nullptr);
-						return;
-					}
-					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
-				};
-			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
-			}
-			{
-				const auto chaos_method_ptr = _s1;
-				const auto chaos_target = _s0;
-				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
-				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
-				chaos_object->chaos_delegate_target = chaos_target;
-				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
-				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-			}
-			_s1 = _s0;
-			{
-				auto chaos_value = _s1;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__618_0 = chaos_value;
-			}
-		}
-		{
-			// Assert.Throws: target method not found via IL lookahead
-			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
-		}
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-		chaos_locals[0] = ChaosStoreInt64(_i0);
-		_i0 = ChaosLoadInt64(chaos_locals[0]);
-		return _i0;
-	}
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::PropertyOrField_207_Expression_string_1()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_PropertyOrField_207_Expression_string_1(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__620_0;
-	_s1 = _s0;
-	{
-		if (_s1 == 0)
-		{
-			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9;
-			{
-				// Hotpatch-aware ldftn wrapper (slot 1904)
-				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[1904];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
-					{
-						alignas(16) uint8_t _d_ab[8];
-						ArgBuffer _d_bw(_d_ab);
-						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d_entry.method_key, _d_ab, nullptr);
-						return;
-					}
-					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
-				};
-			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
-			}
-			{
-				const auto chaos_method_ptr = _s1;
-				const auto chaos_target = _s0;
-				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
-				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
-				chaos_object->chaos_delegate_target = chaos_target;
-				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
-				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-			}
-			_s1 = _s0;
-			{
-				auto chaos_value = _s1;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__620_0 = chaos_value;
-			}
-		}
-		{
-			// Assert.Throws: target method not found via IL lookahead
-			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
-		}
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-		chaos_locals[0] = ChaosStoreInt64(_i0);
-		_i0 = ChaosLoadInt64(chaos_locals[0]);
-		return _i0;
-	}
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Quote_293_Expression_0()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Quote_293_Expression_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__930_0;
-	_s1 = _s0;
-	{
-		if (_s1 == 0)
-		{
-			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9;
-			{
-				// Hotpatch-aware ldftn wrapper (slot 1905)
-				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[1905];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
-					{
-						alignas(16) uint8_t _d_ab[8];
-						ArgBuffer _d_bw(_d_ab);
-						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d_entry.method_key, _d_ab, nullptr);
-						return;
-					}
-					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
-				};
-			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
-			}
-			{
-				const auto chaos_method_ptr = _s1;
-				const auto chaos_target = _s0;
-				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
-				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
-				chaos_object->chaos_delegate_target = chaos_target;
-				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
-				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-			}
-			_s1 = _s0;
-			{
-				auto chaos_value = _s1;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__930_0 = chaos_value;
-			}
-		}
-		{
-			// Assert.Throws: target method not found via IL lookahead
-			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
-		}
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-		chaos_locals[0] = ChaosStoreInt64(_i0);
-		_i0 = ChaosLoadInt64(chaos_locals[0]);
-		return _i0;
-	}
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Reduce_124__124()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Reduce_124__124(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__294_0;
-	_s1 = _s0;
-	{
-		if (_s1 == 0)
-		{
-			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9;
-			{
-				// Hotpatch-aware ldftn wrapper (slot 1906)
-				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[1906];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
-					{
-						alignas(16) uint8_t _d_ab[8];
-						ArgBuffer _d_bw(_d_ab);
-						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d_entry.method_key, _d_ab, nullptr);
-						return;
-					}
-					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
-				};
-			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
-			}
-			{
-				const auto chaos_method_ptr = _s1;
-				const auto chaos_target = _s0;
-				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
-				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
-				chaos_object->chaos_delegate_target = chaos_target;
-				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
-				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-			}
-			_s1 = _s0;
-			{
-				auto chaos_value = _s1;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__294_0 = chaos_value;
-			}
-		}
-		{
-			// Assert.Throws: target method not found via IL lookahead
-			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
-		}
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-		chaos_locals[0] = ChaosStoreInt64(_i0);
-		_i0 = ChaosLoadInt64(chaos_locals[0]);
-		return _i0;
-	}
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::ReduceAndCheck_125__125()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_ReduceAndCheck_125__125(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__296_0;
-	_s1 = _s0;
-	{
-		if (_s1 == 0)
-		{
-			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9;
-			{
-				// Hotpatch-aware ldftn wrapper (slot 1907)
-				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[1907];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
-					{
-						alignas(16) uint8_t _d_ab[8];
-						ArgBuffer _d_bw(_d_ab);
-						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d_entry.method_key, _d_ab, nullptr);
-						return;
-					}
-					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
-				};
-			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
-			}
-			{
-				const auto chaos_method_ptr = _s1;
-				const auto chaos_target = _s0;
-				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
-				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
-				chaos_object->chaos_delegate_target = chaos_target;
-				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
-				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-			}
-			_s1 = _s0;
-			{
-				auto chaos_value = _s1;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__296_0 = chaos_value;
-			}
-		}
-		{
-			// Assert.Throws: target method not found via IL lookahead
-			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
-		}
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-		chaos_locals[0] = ChaosStoreInt64(_i0);
-		_i0 = ChaosLoadInt64(chaos_locals[0]);
-		return _i0;
-	}
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::ReduceExtensions_126__126()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_ReduceExtensions_126__126(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__298_0;
-	_s1 = _s0;
-	{
-		if (_s1 == 0)
-		{
-			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9;
-			{
-				// Hotpatch-aware ldftn wrapper (slot 1908)
-				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[1908];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
-					{
-						alignas(16) uint8_t _d_ab[8];
-						ArgBuffer _d_bw(_d_ab);
-						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d_entry.method_key, _d_ab, nullptr);
-						return;
-					}
-					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
-				};
-			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
-			}
-			{
-				const auto chaos_method_ptr = _s1;
-				const auto chaos_target = _s0;
-				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
-				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
-				chaos_object->chaos_delegate_target = chaos_target;
-				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
-				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-			}
-			_s1 = _s0;
-			{
-				auto chaos_value = _s1;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__298_0 = chaos_value;
-			}
-		}
-		{
-			// Assert.Throws: target method not found via IL lookahead
-			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
-		}
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-		chaos_locals[0] = ChaosStoreInt64(_i0);
-		_i0 = ChaosLoadInt64(chaos_locals[0]);
-		return _i0;
-	}
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::ReferenceEqual_6_Expression_Expression_0()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_ReferenceEqual_6_Expression_Expression_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__14_0;
-	_s1 = _s0;
-	{
-		if (_s1 == 0)
-		{
-			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9;
-			{
-				// Hotpatch-aware ldftn wrapper (slot 1909)
-				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[1909];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
-					{
-						alignas(16) uint8_t _d_ab[8];
-						ArgBuffer _d_bw(_d_ab);
-						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d_entry.method_key, _d_ab, nullptr);
-						return;
-					}
-					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
-				};
-			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
-			}
-			{
-				const auto chaos_method_ptr = _s1;
-				const auto chaos_target = _s0;
-				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
-				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
-				chaos_object->chaos_delegate_target = chaos_target;
-				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
-				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-			}
-			_s1 = _s0;
-			{
-				auto chaos_value = _s1;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__14_0 = chaos_value;
-			}
-		}
-		{
-			// Assert.Throws: target method not found via IL lookahead
-			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
-		}
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-		chaos_locals[0] = ChaosStoreInt64(_i0);
-		_i0 = ChaosLoadInt64(chaos_locals[0]);
-		return _i0;
-	}
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::ReferenceNotEqual_9_Expression_Expression_0()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_ReferenceNotEqual_9_Expression_Expression_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__22_0;
-	_s1 = _s0;
-	{
-		if (_s1 == 0)
-		{
-			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9;
-			{
-				// Hotpatch-aware ldftn wrapper (slot 1910)
-				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[1910];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
-					{
-						alignas(16) uint8_t _d_ab[8];
-						ArgBuffer _d_bw(_d_ab);
-						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d_entry.method_key, _d_ab, nullptr);
-						return;
-					}
-					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
-				};
-			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
-			}
-			{
-				const auto chaos_method_ptr = _s1;
-				const auto chaos_target = _s0;
-				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
-				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
-				chaos_object->chaos_delegate_target = chaos_target;
-				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
-				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-			}
-			_s1 = _s0;
-			{
-				auto chaos_value = _s1;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__22_0 = chaos_value;
-			}
-		}
-		{
-			// Assert.Throws: target method not found via IL lookahead
-			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
-		}
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-		chaos_locals[0] = ChaosStoreInt64(_i0);
-		_i0 = ChaosLoadInt64(chaos_locals[0]);
-		return _i0;
-	}
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Rethrow_294__294()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Rethrow_294__294(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__932_0;
-	_s1 = _s0;
-	{
-		if (_s1 == 0)
-		{
-			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9;
-			{
-				// Hotpatch-aware ldftn wrapper (slot 1911)
-				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[1911];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
-					{
-						alignas(16) uint8_t _d_ab[8];
-						ArgBuffer _d_bw(_d_ab);
-						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d_entry.method_key, _d_ab, nullptr);
-						return;
-					}
-					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
-				};
-			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
-			}
-			{
-				const auto chaos_method_ptr = _s1;
-				const auto chaos_target = _s0;
-				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
-				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
-				chaos_object->chaos_delegate_target = chaos_target;
-				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
-				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-			}
-			_s1 = _s0;
-			{
-				auto chaos_value = _s1;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__932_0 = chaos_value;
-			}
-		}
-		{
-			// Assert.Throws: target method not found via IL lookahead
-			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
-		}
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-		chaos_locals[0] = ChaosStoreInt64(_i0);
-		_i0 = ChaosLoadInt64(chaos_locals[0]);
-		return _i0;
-	}
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Rethrow_295_System_Type_0()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Rethrow_295_System_Type_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__934_0;
-	_s1 = _s0;
-	{
-		if (_s1 == 0)
-		{
-			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9;
-			{
-				// Hotpatch-aware ldftn wrapper (slot 1912)
-				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[1912];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
-					{
-						alignas(16) uint8_t _d_ab[8];
-						ArgBuffer _d_bw(_d_ab);
-						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d_entry.method_key, _d_ab, nullptr);
-						return;
-					}
-					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
-				};
-			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
-			}
-			{
-				const auto chaos_method_ptr = _s1;
-				const auto chaos_target = _s0;
-				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
-				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
-				chaos_object->chaos_delegate_target = chaos_target;
-				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
-				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-			}
-			_s1 = _s0;
-			{
-				auto chaos_value = _s1;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__934_0 = chaos_value;
-			}
-		}
-		{
-			// Assert.Throws: target method not found via IL lookahead
-			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
-		}
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-		chaos_locals[0] = ChaosStoreInt64(_i0);
-		_i0 = ChaosLoadInt64(chaos_locals[0]);
-		return _i0;
-	}
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Return_145_LabelTarget_0()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Return_145_LabelTarget_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__348_0;
-	_s1 = _s0;
-	{
-		if (_s1 == 0)
-		{
-			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9;
-			{
-				// Hotpatch-aware ldftn wrapper (slot 1913)
-				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[1913];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
-					{
-						alignas(16) uint8_t _d_ab[8];
-						ArgBuffer _d_bw(_d_ab);
-						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d_entry.method_key, _d_ab, nullptr);
-						return;
-					}
-					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
-				};
-			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
-			}
-			{
-				const auto chaos_method_ptr = _s1;
-				const auto chaos_target = _s0;
-				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
-				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
-				chaos_object->chaos_delegate_target = chaos_target;
-				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
-				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-			}
-			_s1 = _s0;
-			{
-				auto chaos_value = _s1;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__348_0 = chaos_value;
-			}
-		}
-		{
-			// Assert.Throws: target method not found via IL lookahead
-			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
-		}
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-		chaos_locals[0] = ChaosStoreInt64(_i0);
-		_i0 = ChaosLoadInt64(chaos_locals[0]);
-		return _i0;
-	}
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Return_146_LabelTarget_System_Type_0()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Return_146_LabelTarget_System_Type_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__350_0;
-	_s1 = _s0;
-	{
-		if (_s1 == 0)
-		{
-			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9;
-			{
-				// Hotpatch-aware ldftn wrapper (slot 1914)
-				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[1914];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
-					{
-						alignas(16) uint8_t _d_ab[8];
-						ArgBuffer _d_bw(_d_ab);
-						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d_entry.method_key, _d_ab, nullptr);
-						return;
-					}
-					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
-				};
-			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
-			}
-			{
-				const auto chaos_method_ptr = _s1;
-				const auto chaos_target = _s0;
-				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
-				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
-				chaos_object->chaos_delegate_target = chaos_target;
-				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
-				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-			}
-			_s1 = _s0;
-			{
-				auto chaos_value = _s1;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__350_0 = chaos_value;
-			}
-		}
-		{
-			// Assert.Throws: target method not found via IL lookahead
-			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
-		}
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-		chaos_locals[0] = ChaosStoreInt64(_i0);
-		_i0 = ChaosLoadInt64(chaos_locals[0]);
-		return _i0;
-	}
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Return_147_LabelTarget_Expression_0()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Return_147_LabelTarget_Expression_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__352_0;
-	_s1 = _s0;
-	{
-		if (_s1 == 0)
-		{
-			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9;
-			{
-				// Hotpatch-aware ldftn wrapper (slot 1915)
-				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[1915];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
-					{
-						alignas(16) uint8_t _d_ab[8];
-						ArgBuffer _d_bw(_d_ab);
-						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d_entry.method_key, _d_ab, nullptr);
-						return;
-					}
-					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
-				};
-			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
-			}
-			{
-				const auto chaos_method_ptr = _s1;
-				const auto chaos_target = _s0;
-				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
-				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
-				chaos_object->chaos_delegate_target = chaos_target;
-				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
-				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-			}
-			_s1 = _s0;
-			{
-				auto chaos_value = _s1;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__352_0 = chaos_value;
-			}
-		}
-		{
-			// Assert.Throws: target method not found via IL lookahead
-			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
-		}
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-		chaos_locals[0] = ChaosStoreInt64(_i0);
-		_i0 = ChaosLoadInt64(chaos_locals[0]);
-		return _i0;
-	}
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Return_148_LabelTarget_Expression_System_Type_0()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Return_148_LabelTarget_Expression_System_Type_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__354_0;
-	_s1 = _s0;
-	{
-		if (_s1 == 0)
-		{
-			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9;
-			{
-				// Hotpatch-aware ldftn wrapper (slot 1916)
-				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[1916];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
-					{
-						alignas(16) uint8_t _d_ab[8];
-						ArgBuffer _d_bw(_d_ab);
-						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d_entry.method_key, _d_ab, nullptr);
-						return;
-					}
-					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
-				};
-			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
-			}
-			{
-				const auto chaos_method_ptr = _s1;
-				const auto chaos_target = _s0;
-				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
-				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
-				chaos_object->chaos_delegate_target = chaos_target;
-				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
-				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-			}
-			_s1 = _s0;
-			{
-				auto chaos_value = _s1;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__354_0 = chaos_value;
-			}
-		}
-		{
-			// Assert.Throws: target method not found via IL lookahead
-			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
-		}
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-		chaos_locals[0] = ChaosStoreInt64(_i0);
-		_i0 = ChaosLoadInt64(chaos_locals[0]);
-		return _i0;
-	}
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::RightShift_69_Expression_Expression_0()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_RightShift_69_Expression_Expression_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__150_0;
-	_s1 = _s0;
-	{
-		if (_s1 == 0)
-		{
-			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9;
-			{
-				// Hotpatch-aware ldftn wrapper (slot 1917)
-				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[1917];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
-					{
-						alignas(16) uint8_t _d_ab[8];
-						ArgBuffer _d_bw(_d_ab);
-						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d_entry.method_key, _d_ab, nullptr);
-						return;
-					}
-					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
-				};
-			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
-			}
-			{
-				const auto chaos_method_ptr = _s1;
-				const auto chaos_target = _s0;
-				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
-				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
-				chaos_object->chaos_delegate_target = chaos_target;
-				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
-				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-			}
-			_s1 = _s0;
-			{
-				auto chaos_value = _s1;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__150_0 = chaos_value;
-			}
-		}
-		{
-			// Assert.Throws: target method not found via IL lookahead
-			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
-		}
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-		chaos_locals[0] = ChaosStoreInt64(_i0);
-		_i0 = ChaosLoadInt64(chaos_locals[0]);
-		return _i0;
-	}
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::RightShift_70_Expression_Expression_MethodInfo_0()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_RightShift_70_Expression_Expression_MethodInfo_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__152_0;
-	_s1 = _s0;
-	{
-		if (_s1 == 0)
-		{
-			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9;
-			{
-				// Hotpatch-aware ldftn wrapper (slot 1918)
-				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[1918];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
-					{
-						alignas(16) uint8_t _d_ab[8];
-						ArgBuffer _d_bw(_d_ab);
-						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d_entry.method_key, _d_ab, nullptr);
-						return;
-					}
-					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
-				};
-			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
-			}
-			{
-				const auto chaos_method_ptr = _s1;
-				const auto chaos_target = _s0;
-				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
-				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
-				chaos_object->chaos_delegate_target = chaos_target;
-				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
-				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-			}
-			_s1 = _s0;
-			{
-				auto chaos_value = _s1;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__152_0 = chaos_value;
-			}
-		}
-		{
-			// Assert.Throws: target method not found via IL lookahead
-			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
-		}
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-		chaos_locals[0] = ChaosStoreInt64(_i0);
-		_i0 = ChaosLoadInt64(chaos_locals[0]);
-		return _i0;
-	}
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::RightShiftAssign_71_Expression_Expression_0()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_RightShiftAssign_71_Expression_Expression_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__154_0;
-	_s1 = _s0;
-	{
-		if (_s1 == 0)
-		{
-			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9;
-			{
-				// Hotpatch-aware ldftn wrapper (slot 1919)
-				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[1919];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
-					{
-						alignas(16) uint8_t _d_ab[8];
-						ArgBuffer _d_bw(_d_ab);
-						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d_entry.method_key, _d_ab, nullptr);
-						return;
-					}
-					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
-				};
-			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
-			}
-			{
-				const auto chaos_method_ptr = _s1;
-				const auto chaos_target = _s0;
-				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
-				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
-				chaos_object->chaos_delegate_target = chaos_target;
-				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
-				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-			}
-			_s1 = _s0;
-			{
-				auto chaos_value = _s1;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__154_0 = chaos_value;
-			}
-		}
-		{
-			// Assert.Throws: target method not found via IL lookahead
-			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
-		}
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-		chaos_locals[0] = ChaosStoreInt64(_i0);
-		_i0 = ChaosLoadInt64(chaos_locals[0]);
-		return _i0;
-	}
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::RightShiftAssign_72_Expression_Expression_MethodInfo_0()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_RightShiftAssign_72_Expression_Expression_MethodInfo_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__156_0;
-	_s1 = _s0;
-	{
-		if (_s1 == 0)
-		{
-			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9;
-			{
-				// Hotpatch-aware ldftn wrapper (slot 1920)
-				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[1920];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
-					{
-						alignas(16) uint8_t _d_ab[8];
-						ArgBuffer _d_bw(_d_ab);
-						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d_entry.method_key, _d_ab, nullptr);
-						return;
-					}
-					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
-				};
-			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
-			}
-			{
-				const auto chaos_method_ptr = _s1;
-				const auto chaos_target = _s0;
-				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
-				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
-				chaos_object->chaos_delegate_target = chaos_target;
-				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
-				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-			}
-			_s1 = _s0;
-			{
-				auto chaos_value = _s1;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__156_0 = chaos_value;
-			}
-		}
-		{
-			// Assert.Throws: target method not found via IL lookahead
-			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
-		}
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-		chaos_locals[0] = ChaosStoreInt64(_i0);
-		_i0 = ChaosLoadInt64(chaos_locals[0]);
-		return _i0;
-	}
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::RightShiftAssign_73_Expression_Expression_MethodInfo_LambdaExpression_0()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_RightShiftAssign_73_Expression_Expression_MethodInfo_LambdaExpression_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__158_0;
-	_s1 = _s0;
-	{
-		if (_s1 == 0)
-		{
-			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9;
-			{
-				// Hotpatch-aware ldftn wrapper (slot 1921)
-				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[1921];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
-					{
-						alignas(16) uint8_t _d_ab[8];
-						ArgBuffer _d_bw(_d_ab);
-						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d_entry.method_key, _d_ab, nullptr);
-						return;
-					}
-					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
-				};
-			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
-			}
-			{
-				const auto chaos_method_ptr = _s1;
-				const auto chaos_target = _s0;
-				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
-				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
-				chaos_object->chaos_delegate_target = chaos_target;
-				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
-				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-			}
-			_s1 = _s0;
-			{
-				auto chaos_value = _s1;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__158_0 = chaos_value;
-			}
-		}
-		{
-			// Assert.Throws: target method not found via IL lookahead
-			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
-		}
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-		chaos_locals[0] = ChaosStoreInt64(_i0);
-		_i0 = ChaosLoadInt64(chaos_locals[0]);
-		return _i0;
-	}
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::RuntimeVariables_249_ParameterExpression_0()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_RuntimeVariables_249_ParameterExpression_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__792_0;
-	_s1 = _s0;
-	{
-		if (_s1 == 0)
-		{
-			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9;
-			{
-				// Hotpatch-aware ldftn wrapper (slot 1922)
-				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[1922];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
-					{
-						alignas(16) uint8_t _d_ab[8];
-						ArgBuffer _d_bw(_d_ab);
-						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d_entry.method_key, _d_ab, nullptr);
-						return;
-					}
-					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
-				};
-			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
-			}
-			{
-				const auto chaos_method_ptr = _s1;
-				const auto chaos_target = _s0;
-				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
-				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
-				chaos_object->chaos_delegate_target = chaos_target;
-				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
-				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-			}
-			_s1 = _s0;
-			{
-				auto chaos_value = _s1;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__792_0 = chaos_value;
-			}
-		}
-		{
-			// Assert.Throws: target method not found via IL lookahead
-			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
-		}
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-		chaos_locals[0] = ChaosStoreInt64(_i0);
-		_i0 = ChaosLoadInt64(chaos_locals[0]);
-		return _i0;
-	}
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::RuntimeVariables_249_ParameterExpression_1()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_RuntimeVariables_249_ParameterExpression_1(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__794_0;
-	_s1 = _s0;
-	{
-		if (_s1 == 0)
-		{
-			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9;
-			{
-				// Hotpatch-aware ldftn wrapper (slot 1923)
-				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[1923];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
-					{
-						alignas(16) uint8_t _d_ab[8];
-						ArgBuffer _d_bw(_d_ab);
-						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d_entry.method_key, _d_ab, nullptr);
-						return;
-					}
-					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
-				};
-			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
-			}
-			{
-				const auto chaos_method_ptr = _s1;
-				const auto chaos_target = _s0;
-				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
-				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
-				chaos_object->chaos_delegate_target = chaos_target;
-				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
-				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-			}
-			_s1 = _s0;
-			{
-				auto chaos_value = _s1;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__794_0 = chaos_value;
-			}
-		}
-		{
-			// Assert.Throws: target method not found via IL lookahead
-			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
-		}
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-		chaos_locals[0] = ChaosStoreInt64(_i0);
-		_i0 = ChaosLoadInt64(chaos_locals[0]);
-		return _i0;
-	}
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::RuntimeVariables_249_ParameterExpression_2()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_RuntimeVariables_249_ParameterExpression_2(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__796_0;
-	_s1 = _s0;
-	{
-		if (_s1 == 0)
-		{
-			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9;
-			{
-				// Hotpatch-aware ldftn wrapper (slot 1924)
-				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[1924];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
-					{
-						alignas(16) uint8_t _d_ab[8];
-						ArgBuffer _d_bw(_d_ab);
-						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d_entry.method_key, _d_ab, nullptr);
-						return;
-					}
-					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
-				};
-			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
-			}
-			{
-				const auto chaos_method_ptr = _s1;
-				const auto chaos_target = _s0;
-				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
-				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
-				chaos_object->chaos_delegate_target = chaos_target;
-				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
-				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-			}
-			_s1 = _s0;
-			{
-				auto chaos_value = _s1;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__796_0 = chaos_value;
-			}
-		}
-		{
-			// Assert.Throws: target method not found via IL lookahead
-			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
-		}
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-		chaos_locals[0] = ChaosStoreInt64(_i0);
-		_i0 = ChaosLoadInt64(chaos_locals[0]);
-		return _i0;
-	}
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::RuntimeVariables_250_IEnumerableParameterExpression_0()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_RuntimeVariables_250_IEnumerableParameterExpression_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__798_0;
-	_s1 = _s0;
-	{
-		if (_s1 == 0)
-		{
-			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9;
-			{
-				// Hotpatch-aware ldftn wrapper (slot 1925)
-				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[1925];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
-					{
-						alignas(16) uint8_t _d_ab[8];
-						ArgBuffer _d_bw(_d_ab);
-						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d_entry.method_key, _d_ab, nullptr);
-						return;
-					}
-					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
-				};
-			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
-			}
-			{
-				const auto chaos_method_ptr = _s1;
-				const auto chaos_target = _s0;
-				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
-				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
-				chaos_object->chaos_delegate_target = chaos_target;
-				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
-				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-			}
-			_s1 = _s0;
-			{
-				auto chaos_value = _s1;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__798_0 = chaos_value;
-			}
-		}
-		{
-			// Assert.Throws: target method not found via IL lookahead
-			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
-		}
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-		chaos_locals[0] = ChaosStoreInt64(_i0);
-		_i0 = ChaosLoadInt64(chaos_locals[0]);
-		return _i0;
-	}
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::RuntimeVariables_250_IEnumerableParameterExpression_1()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_RuntimeVariables_250_IEnumerableParameterExpression_1(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__800_0;
-	_s1 = _s0;
-	{
-		if (_s1 == 0)
-		{
-			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9;
-			{
-				// Hotpatch-aware ldftn wrapper (slot 1926)
-				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[1926];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
-					{
-						alignas(16) uint8_t _d_ab[8];
-						ArgBuffer _d_bw(_d_ab);
-						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d_entry.method_key, _d_ab, nullptr);
-						return;
-					}
-					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
-				};
-			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
-			}
-			{
-				const auto chaos_method_ptr = _s1;
-				const auto chaos_target = _s0;
-				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
-				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
-				chaos_object->chaos_delegate_target = chaos_target;
-				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
-				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-			}
-			_s1 = _s0;
-			{
-				auto chaos_value = _s1;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__800_0 = chaos_value;
-			}
-		}
-		{
-			// Assert.Throws: target method not found via IL lookahead
-			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
-		}
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-		chaos_locals[0] = ChaosStoreInt64(_i0);
-		_i0 = ChaosLoadInt64(chaos_locals[0]);
-		return _i0;
-	}
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Subtract_34_Expression_Expression_0()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Subtract_34_Expression_Expression_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__80_0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__866_0;
 	_s1 = _s0;
 	{
 		if (_s1 == 0)
@@ -6403,7 +2344,7 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Express
 			_s1 = _s0;
 			{
 				auto chaos_value = _s1;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__80_0 = chaos_value;
+				chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__866_0 = chaos_value;
 			}
 		}
 		{
@@ -6418,16 +2359,20 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Express
 	}
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Subtract_35_Expression_Expression_MethodInfo_0()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Subtract_35_Expression_Expression_MethodInfo_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::TryCatch_265_Expression_CatchBlock_2()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_TryCatch_265_Expression_CatchBlock_2(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
 	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__82_0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__868_0;
 	_s1 = _s0;
 	{
 		if (_s1 == 0)
@@ -6463,7 +2408,7 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Express
 			_s1 = _s0;
 			{
 				auto chaos_value = _s1;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__82_0 = chaos_value;
+				chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__868_0 = chaos_value;
 			}
 		}
 		{
@@ -6478,16 +2423,20 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Express
 	}
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::SubtractAssign_36_Expression_Expression_0()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_SubtractAssign_36_Expression_Expression_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::TryCatchFinally_266_Expression_Expression_CatchBlock_0()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_TryCatchFinally_266_Expression_Expression_CatchBlock_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
 	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__84_0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__870_0;
 	_s1 = _s0;
 	{
 		if (_s1 == 0)
@@ -6523,7 +2472,7 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Express
 			_s1 = _s0;
 			{
 				auto chaos_value = _s1;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__84_0 = chaos_value;
+				chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__870_0 = chaos_value;
 			}
 		}
 		{
@@ -6538,16 +2487,20 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Express
 	}
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::SubtractAssign_37_Expression_Expression_MethodInfo_0()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_SubtractAssign_37_Expression_Expression_MethodInfo_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::TryCatchFinally_266_Expression_Expression_CatchBlock_1()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_TryCatchFinally_266_Expression_Expression_CatchBlock_1(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
 	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__86_0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__872_0;
 	_s1 = _s0;
 	{
 		if (_s1 == 0)
@@ -6583,7 +2536,7 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Express
 			_s1 = _s0;
 			{
 				auto chaos_value = _s1;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__86_0 = chaos_value;
+				chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__872_0 = chaos_value;
 			}
 		}
 		{
@@ -6598,16 +2551,20 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Express
 	}
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::SubtractAssign_38_Expression_Expression_MethodInfo_LambdaExpression_0()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_SubtractAssign_38_Expression_Expression_MethodInfo_LambdaExpression_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::TryCatchFinally_266_Expression_Expression_CatchBlock_2()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_TryCatchFinally_266_Expression_Expression_CatchBlock_2(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
 	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__88_0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__874_0;
 	_s1 = _s0;
 	{
 		if (_s1 == 0)
@@ -6643,7 +2600,7 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Express
 			_s1 = _s0;
 			{
 				auto chaos_value = _s1;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__88_0 = chaos_value;
+				chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__874_0 = chaos_value;
 			}
 		}
 		{
@@ -6658,16 +2615,20 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Express
 	}
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::SubtractAssignChecked_39_Expression_Expression_0()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_SubtractAssignChecked_39_Expression_Expression_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::TryFault_263_Expression_Expression_0()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_TryFault_263_Expression_Expression_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
 	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__90_0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__860_0;
 	_s1 = _s0;
 	{
 		if (_s1 == 0)
@@ -6703,7 +2664,7 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Express
 			_s1 = _s0;
 			{
 				auto chaos_value = _s1;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__90_0 = chaos_value;
+				chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__860_0 = chaos_value;
 			}
 		}
 		{
@@ -6718,16 +2679,20 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Express
 	}
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::SubtractAssignChecked_40_Expression_Expression_MethodInfo_0()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_SubtractAssignChecked_40_Expression_Expression_MethodInfo_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::TryFinally_264_Expression_Expression_0()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_TryFinally_264_Expression_Expression_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
 	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__92_0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__862_0;
 	_s1 = _s0;
 	{
 		if (_s1 == 0)
@@ -6763,7 +2728,7 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Express
 			_s1 = _s0;
 			{
 				auto chaos_value = _s1;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__92_0 = chaos_value;
+				chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__862_0 = chaos_value;
 			}
 		}
 		{
@@ -6778,16 +2743,346 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Express
 	}
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::SubtractAssignChecked_41_Expression_Expression_MethodInfo_LambdaExpression_0()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_SubtractAssignChecked_41_Expression_Expression_MethodInfo_LambdaExpression_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::TryGetActionType_187_System_Type_System_Type_0()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_TryGetActionType_187_System_Type_System_Type_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 3) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INTPTR _s5;
+	CHAOS_IL2CPP_INTPTR _s6;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	CHAOS_IL2CPP_INT64 _i3;
+	CHAOS_IL2CPP_INT64 _i4;
+	_s0 = 0;
+	chaos_locals[0] = _s0;
+	_s0 = 0;
+	_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[0]);
+	{
+		const auto chaos_result = chaos_external_runtime_System_Linq_Expressions_Expression__TryGetActionType_System_Boolean_System_Type___System_Type__();
+		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	chaos_locals[1] = _s2;
+	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	_s3 = chaos_locals[1];
+	_s4 = 0;
+	{
+		[&]() -> void { if ((_s2) != (_s3)) { throw chaos_managed_exception{}; } }();
+	}
+	_s2 = chaos_locals[1];
+	{
+		if (_s2 != 0)
+		{
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			_i2 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s2));
+		}
+		else
+		{
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_i2 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(ChaosLoadInt64(_s2)));
+		}
+		chaos_locals[2] = ChaosStoreInt64(_s1);
+		_i1 = ChaosLoadInt64(chaos_locals[2]);
+		return _i1;
+	}
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::TryGetActionType_187_System_Type_System_Type_1()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_TryGetActionType_187_System_Type_System_Type_1(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_locals[0];
+	_s1 = 0;
+	{
+		auto chaos_value = _s1;
+		auto* chaos_object = reinterpret_cast<chaos_type_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c__DisplayClass546_0*>(_s0);
+		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c__DisplayClass546_0____ref_187_1_0));
+		chaos_object->field_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c__DisplayClass546_0____ref_187_1_0 = chaos_value;
+		chaos_gc_dirty_card(chaos_object);
+	}
+	_s0 = chaos_locals[0];
+	{
+		// Hotpatch-aware ldftn wrapper (slot 1468)
+		static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
+			auto& _d_entry = s_hotpatch_entries[1468];
+			if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+				&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+			{
+				alignas(16) uint8_t _d_ab[8];
+				ArgBuffer _d_bw(_d_ab);
+				_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+				::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+					_d_entry.method_key, _d_ab, nullptr);
+				return;
+			}
+			reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
+		};
+	_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+	}
+	{
+		const auto chaos_method_ptr = _s1;
+		const auto chaos_target = _s0;
+		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
+		chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
+		chaos_object->chaos_delegate_target = chaos_target;
+		chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+	}
+	{
+		try {
+			auto* chaos_action = reinterpret_cast<chaos_type_System_Private_CoreLib_System_Action*>(_s0);
+			CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c__DisplayClass546_0_TryGetActionType_187_System_Type_System_Type_1_b__0(chaos_action->chaos_delegate_target);
+			throw chaos_managed_exception{};  // no exception — fail
+		} catch (chaos_managed_exception&) {
+			// expected exception was thrown — pass
+		}
+	}
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+	_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
+	chaos_locals[1] = ChaosStoreInt64(_i0);
+	_i0 = ChaosLoadInt64(chaos_locals[1]);
+	return _i0;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::TryGetActionType_187_System_Type_System_Type_2()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_TryGetActionType_187_System_Type_System_Type_2(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 3) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INTPTR _s5;
+	CHAOS_IL2CPP_INTPTR _s6;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	CHAOS_IL2CPP_INT64 _i3;
+	CHAOS_IL2CPP_INT64 _i4;
+	_s0 = 0;
+	chaos_locals[0] = _s0;
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(2);
+	_s0 = ChaosArrayNew1D_Inline(&chaos_type_info_managed_array.hot, chaos_mt_System_Private_CoreLib_System_Type.AsTypeInfoHot(), 1, _s0);
+	_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[0]);
+	{
+		const auto chaos_result = chaos_external_runtime_System_Linq_Expressions_Expression__TryGetActionType_System_Boolean_System_Type___System_Type__();
+		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	chaos_locals[1] = _s2;
+	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	_s3 = chaos_locals[1];
+	_s4 = 0;
+	{
+		[&]() -> void { if ((_s2) != (_s3)) { throw chaos_managed_exception{}; } }();
+	}
+	_s2 = chaos_locals[1];
+	{
+		if (_s2 != 0)
+		{
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			_i2 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s2));
+		}
+		else
+		{
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_i2 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(ChaosLoadInt64(_s2)));
+		}
+		chaos_locals[2] = ChaosStoreInt64(_s1);
+		_i1 = ChaosLoadInt64(chaos_locals[2]);
+		return _i1;
+	}
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::TryGetFuncType_185_System_Type_System_Type_0()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_TryGetFuncType_185_System_Type_System_Type_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 3) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INTPTR _s5;
+	CHAOS_IL2CPP_INTPTR _s6;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	CHAOS_IL2CPP_INT64 _i3;
+	CHAOS_IL2CPP_INT64 _i4;
+	_s0 = 0;
+	chaos_locals[0] = _s0;
+	_s0 = 0;
+	_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[0]);
+	{
+		const auto chaos_result = chaos_external_runtime_System_Linq_Expressions_Expression__TryGetFuncType_System_Boolean_System_Type___System_Type__();
+		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	chaos_locals[1] = _s2;
+	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	_s3 = chaos_locals[1];
+	_s4 = 0;
+	{
+		[&]() -> void { if ((_s2) != (_s3)) { throw chaos_managed_exception{}; } }();
+	}
+	_s2 = chaos_locals[1];
+	{
+		if (_s2 != 0)
+		{
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			_i2 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s2));
+		}
+		else
+		{
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_i2 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(ChaosLoadInt64(_s2)));
+		}
+		chaos_locals[2] = ChaosStoreInt64(_s1);
+		_i1 = ChaosLoadInt64(chaos_locals[2]);
+		return _i1;
+	}
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::TryGetFuncType_185_System_Type_System_Type_1()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_TryGetFuncType_185_System_Type_System_Type_1(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 3) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INTPTR _s5;
+	CHAOS_IL2CPP_INTPTR _s6;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	CHAOS_IL2CPP_INT64 _i3;
+	CHAOS_IL2CPP_INT64 _i4;
+	_s0 = 0;
+	chaos_locals[0] = _s0;
+	{
+		const auto chaos_result = ChaosArrayEmpty_Inline();
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[0]);
+	{
+		const auto chaos_result = chaos_external_runtime_System_Linq_Expressions_Expression__TryGetFuncType_System_Boolean_System_Type___System_Type__();
+		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	chaos_locals[1] = _s2;
+	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	_s3 = chaos_locals[1];
+	_s4 = 0;
+	{
+		[&]() -> void { if ((_s2) != (_s3)) { throw chaos_managed_exception{}; } }();
+	}
+	_s2 = chaos_locals[1];
+	{
+		if (_s2 != 0)
+		{
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			_i2 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s2));
+		}
+		else
+		{
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_i2 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(ChaosLoadInt64(_s2)));
+		}
+		chaos_locals[2] = ChaosStoreInt64(_s1);
+		_i1 = ChaosLoadInt64(chaos_locals[2]);
+		return _i1;
+	}
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::TryGetFuncType_185_System_Type_System_Type_2()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_TryGetFuncType_185_System_Type_System_Type_2(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 3) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INTPTR _s5;
+	CHAOS_IL2CPP_INTPTR _s6;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	CHAOS_IL2CPP_INT64 _i3;
+	CHAOS_IL2CPP_INT64 _i4;
+	_s0 = 0;
+	chaos_locals[0] = _s0;
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(2);
+	_s0 = ChaosArrayNew1D_Inline(&chaos_type_info_managed_array.hot, chaos_mt_System_Private_CoreLib_System_Type.AsTypeInfoHot(), 1, _s0);
+	_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[0]);
+	{
+		const auto chaos_result = chaos_external_runtime_System_Linq_Expressions_Expression__TryGetFuncType_System_Boolean_System_Type___System_Type__();
+		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	chaos_locals[1] = _s2;
+	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	_s3 = chaos_locals[1];
+	_s4 = 0;
+	{
+		[&]() -> void { if ((_s2) != (_s3)) { throw chaos_managed_exception{}; } }();
+	}
+	_s2 = chaos_locals[1];
+	{
+		if (_s2 != 0)
+		{
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			_i2 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s2));
+		}
+		else
+		{
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_i2 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(ChaosLoadInt64(_s2)));
+		}
+		chaos_locals[2] = ChaosStoreInt64(_s1);
+		_i1 = ChaosLoadInt64(chaos_locals[2]);
+		return _i1;
+	}
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::TypeAs_286_Expression_System_Type_0()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_TypeAs_286_Expression_System_Type_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
 	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__94_0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__916_0;
 	_s1 = _s0;
 	{
 		if (_s1 == 0)
@@ -6823,7 +3118,7 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Express
 			_s1 = _s0;
 			{
 				auto chaos_value = _s1;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__94_0 = chaos_value;
+				chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__916_0 = chaos_value;
 			}
 		}
 		{
@@ -6838,16 +3133,20 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Express
 	}
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::SubtractChecked_42_Expression_Expression_0()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_SubtractChecked_42_Expression_Expression_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::TypeEqual_269_Expression_System_Type_0()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_TypeEqual_269_Expression_System_Type_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
 	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__96_0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__882_0;
 	_s1 = _s0;
 	{
 		if (_s1 == 0)
@@ -6883,7 +3182,7 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Express
 			_s1 = _s0;
 			{
 				auto chaos_value = _s1;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__96_0 = chaos_value;
+				chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__882_0 = chaos_value;
 			}
 		}
 		{
@@ -6898,16 +3197,20 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Express
 	}
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::SubtractChecked_43_Expression_Expression_MethodInfo_0()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_SubtractChecked_43_Expression_Expression_MethodInfo_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::TypeIs_268_Expression_System_Type_0()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_TypeIs_268_Expression_System_Type_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
 	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__98_0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__880_0;
 	_s1 = _s0;
 	{
 		if (_s1 == 0)
@@ -6943,7 +3246,7 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Express
 			_s1 = _s0;
 			{
 				auto chaos_value = _s1;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__98_0 = chaos_value;
+				chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__880_0 = chaos_value;
 			}
 		}
 		{
@@ -6958,16 +3261,20 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Express
 	}
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Switch_253_Expression_SwitchCase_0()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Switch_253_Expression_SwitchCase_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::UnaryPlus_274_Expression_0()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_UnaryPlus_274_Expression_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
 	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__812_0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__892_0;
 	_s1 = _s0;
 	{
 		if (_s1 == 0)
@@ -7003,7 +3310,7 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Express
 			_s1 = _s0;
 			{
 				auto chaos_value = _s1;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__812_0 = chaos_value;
+				chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__892_0 = chaos_value;
 			}
 		}
 		{
@@ -7018,16 +3325,20 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Express
 	}
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Switch_253_Expression_SwitchCase_1()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Switch_253_Expression_SwitchCase_1(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::UnaryPlus_275_Expression_MethodInfo_0()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_UnaryPlus_275_Expression_MethodInfo_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
 	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__814_0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__894_0;
 	_s1 = _s0;
 	{
 		if (_s1 == 0)
@@ -7063,7 +3374,7 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Express
 			_s1 = _s0;
 			{
 				auto chaos_value = _s1;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__814_0 = chaos_value;
+				chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__894_0 = chaos_value;
 			}
 		}
 		{
@@ -7078,16 +3389,20 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Express
 	}
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Switch_253_Expression_SwitchCase_2()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Switch_253_Expression_SwitchCase_2(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Unbox_287_Expression_System_Type_0()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Unbox_287_Expression_System_Type_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
 	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__816_0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__918_0;
 	_s1 = _s0;
 	{
 		if (_s1 == 0)
@@ -7123,7 +3438,7 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Express
 			_s1 = _s0;
 			{
 				auto chaos_value = _s1;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__816_0 = chaos_value;
+				chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__918_0 = chaos_value;
 			}
 		}
 		{
@@ -7138,16 +3453,20 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Express
 	}
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Switch_254_Expression_Expression_SwitchCase_0()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Switch_254_Expression_Expression_SwitchCase_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Variable_246_System_Type_0()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Variable_246_System_Type_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
 	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__818_0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__782_0;
 	_s1 = _s0;
 	{
 		if (_s1 == 0)
@@ -7183,7 +3502,7 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Express
 			_s1 = _s0;
 			{
 				auto chaos_value = _s1;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__818_0 = chaos_value;
+				chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__782_0 = chaos_value;
 			}
 		}
 		{
@@ -7198,16 +3517,20 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Express
 	}
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Switch_254_Expression_Expression_SwitchCase_1()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Switch_254_Expression_Expression_SwitchCase_1(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Variable_248_System_Type_string_0()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Variable_248_System_Type_string_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
 	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__820_0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__788_0;
 	_s1 = _s0;
 	{
 		if (_s1 == 0)
@@ -7243,7 +3566,7 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Express
 			_s1 = _s0;
 			{
 				auto chaos_value = _s1;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__820_0 = chaos_value;
+				chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__788_0 = chaos_value;
 			}
 		}
 		{
@@ -7258,16 +3581,20 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Express
 	}
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Switch_254_Expression_Expression_SwitchCase_2()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Switch_254_Expression_Expression_SwitchCase_2(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Variable_248_System_Type_string_1()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Variable_248_System_Type_string_1(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
 	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__822_0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__790_0;
 	_s1 = _s0;
 	{
 		if (_s1 == 0)
@@ -7303,7 +3630,7 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Express
 			_s1 = _s0;
 			{
 				auto chaos_value = _s1;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__822_0 = chaos_value;
+				chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__790_0 = chaos_value;
 			}
 		}
 		{
@@ -7318,1007 +3645,2638 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Express
 	}
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Switch_255_Expression_Expression_MethodInfo_SwitchCase_0()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Switch_255_Expression_Expression_MethodInfo_SwitchCase_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c__DisplayClass546_0::.ctor()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c__DisplayClass546_0__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
 	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__824_0;
-	_s1 = _s0;
-	{
-		if (_s1 == 0)
-		{
-			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9;
-			{
-				// Hotpatch-aware ldftn wrapper (slot 1943)
-				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[1943];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
-					{
-						alignas(16) uint8_t _d_ab[8];
-						ArgBuffer _d_bw(_d_ab);
-						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d_entry.method_key, _d_ab, nullptr);
-						return;
-					}
-					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
-				};
-			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
-			}
-			{
-				const auto chaos_method_ptr = _s1;
-				const auto chaos_target = _s0;
-				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
-				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
-				chaos_object->chaos_delegate_target = chaos_target;
-				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
-				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-			}
-			_s1 = _s0;
-			{
-				auto chaos_value = _s1;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__824_0 = chaos_value;
-			}
-		}
-		{
-			// Assert.Throws: target method not found via IL lookahead
-			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
-		}
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-		chaos_locals[0] = ChaosStoreInt64(_i0);
-		_i0 = ChaosLoadInt64(chaos_locals[0]);
-		return _i0;
-	}
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Switch_255_Expression_Expression_MethodInfo_SwitchCase_1()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Switch_255_Expression_Expression_MethodInfo_SwitchCase_1(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__826_0;
-	_s1 = _s0;
-	{
-		if (_s1 == 0)
-		{
-			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9;
-			{
-				// Hotpatch-aware ldftn wrapper (slot 1944)
-				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[1944];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
-					{
-						alignas(16) uint8_t _d_ab[8];
-						ArgBuffer _d_bw(_d_ab);
-						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d_entry.method_key, _d_ab, nullptr);
-						return;
-					}
-					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
-				};
-			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
-			}
-			{
-				const auto chaos_method_ptr = _s1;
-				const auto chaos_target = _s0;
-				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
-				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
-				chaos_object->chaos_delegate_target = chaos_target;
-				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
-				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-			}
-			_s1 = _s0;
-			{
-				auto chaos_value = _s1;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__826_0 = chaos_value;
-			}
-		}
-		{
-			// Assert.Throws: target method not found via IL lookahead
-			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
-		}
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-		chaos_locals[0] = ChaosStoreInt64(_i0);
-		_i0 = ChaosLoadInt64(chaos_locals[0]);
-		return _i0;
-	}
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Switch_255_Expression_Expression_MethodInfo_SwitchCase_2()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Switch_255_Expression_Expression_MethodInfo_SwitchCase_2(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__828_0;
-	_s1 = _s0;
-	{
-		if (_s1 == 0)
-		{
-			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9;
-			{
-				// Hotpatch-aware ldftn wrapper (slot 1945)
-				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[1945];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
-					{
-						alignas(16) uint8_t _d_ab[8];
-						ArgBuffer _d_bw(_d_ab);
-						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d_entry.method_key, _d_ab, nullptr);
-						return;
-					}
-					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
-				};
-			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
-			}
-			{
-				const auto chaos_method_ptr = _s1;
-				const auto chaos_target = _s0;
-				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
-				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
-				chaos_object->chaos_delegate_target = chaos_target;
-				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
-				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-			}
-			_s1 = _s0;
-			{
-				auto chaos_value = _s1;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__828_0 = chaos_value;
-			}
-		}
-		{
-			// Assert.Throws: target method not found via IL lookahead
-			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
-		}
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-		chaos_locals[0] = ChaosStoreInt64(_i0);
-		_i0 = ChaosLoadInt64(chaos_locals[0]);
-		return _i0;
-	}
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Switch_256_System_Type_Expression_Expression_MethodInfo_SwitchCase_0()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Switch_256_System_Type_Expression_Expression_MethodInfo_SwitchCase_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__830_0;
-	_s1 = _s0;
-	{
-		if (_s1 == 0)
-		{
-			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9;
-			{
-				// Hotpatch-aware ldftn wrapper (slot 1946)
-				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[1946];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
-					{
-						alignas(16) uint8_t _d_ab[8];
-						ArgBuffer _d_bw(_d_ab);
-						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d_entry.method_key, _d_ab, nullptr);
-						return;
-					}
-					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
-				};
-			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
-			}
-			{
-				const auto chaos_method_ptr = _s1;
-				const auto chaos_target = _s0;
-				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
-				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
-				chaos_object->chaos_delegate_target = chaos_target;
-				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
-				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-			}
-			_s1 = _s0;
-			{
-				auto chaos_value = _s1;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__830_0 = chaos_value;
-			}
-		}
-		{
-			// Assert.Throws: target method not found via IL lookahead
-			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
-		}
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-		chaos_locals[0] = ChaosStoreInt64(_i0);
-		_i0 = ChaosLoadInt64(chaos_locals[0]);
-		return _i0;
-	}
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Switch_256_System_Type_Expression_Expression_MethodInfo_SwitchCase_1()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Switch_256_System_Type_Expression_Expression_MethodInfo_SwitchCase_1(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__832_0;
-	_s1 = _s0;
-	{
-		if (_s1 == 0)
-		{
-			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9;
-			{
-				// Hotpatch-aware ldftn wrapper (slot 1947)
-				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[1947];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
-					{
-						alignas(16) uint8_t _d_ab[8];
-						ArgBuffer _d_bw(_d_ab);
-						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d_entry.method_key, _d_ab, nullptr);
-						return;
-					}
-					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
-				};
-			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
-			}
-			{
-				const auto chaos_method_ptr = _s1;
-				const auto chaos_target = _s0;
-				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
-				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
-				chaos_object->chaos_delegate_target = chaos_target;
-				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
-				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-			}
-			_s1 = _s0;
-			{
-				auto chaos_value = _s1;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__832_0 = chaos_value;
-			}
-		}
-		{
-			// Assert.Throws: target method not found via IL lookahead
-			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
-		}
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-		chaos_locals[0] = ChaosStoreInt64(_i0);
-		_i0 = ChaosLoadInt64(chaos_locals[0]);
-		return _i0;
-	}
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Switch_256_System_Type_Expression_Expression_MethodInfo_SwitchCase_2()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Switch_256_System_Type_Expression_Expression_MethodInfo_SwitchCase_2(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__834_0;
-	_s1 = _s0;
-	{
-		if (_s1 == 0)
-		{
-			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9;
-			{
-				// Hotpatch-aware ldftn wrapper (slot 1948)
-				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[1948];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
-					{
-						alignas(16) uint8_t _d_ab[8];
-						ArgBuffer _d_bw(_d_ab);
-						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d_entry.method_key, _d_ab, nullptr);
-						return;
-					}
-					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
-				};
-			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
-			}
-			{
-				const auto chaos_method_ptr = _s1;
-				const auto chaos_target = _s0;
-				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
-				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
-				chaos_object->chaos_delegate_target = chaos_target;
-				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
-				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-			}
-			_s1 = _s0;
-			{
-				auto chaos_value = _s1;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__834_0 = chaos_value;
-			}
-		}
-		{
-			// Assert.Throws: target method not found via IL lookahead
-			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
-		}
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-		chaos_locals[0] = ChaosStoreInt64(_i0);
-		_i0 = ChaosLoadInt64(chaos_locals[0]);
-		return _i0;
-	}
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Switch_257_Expression_Expression_MethodInfo_IEnumerableSwitchCase_0()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Switch_257_Expression_Expression_MethodInfo_IEnumerableSwitchCase_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__836_0;
-	_s1 = _s0;
-	{
-		if (_s1 == 0)
-		{
-			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9;
-			{
-				// Hotpatch-aware ldftn wrapper (slot 1949)
-				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[1949];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
-					{
-						alignas(16) uint8_t _d_ab[8];
-						ArgBuffer _d_bw(_d_ab);
-						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d_entry.method_key, _d_ab, nullptr);
-						return;
-					}
-					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
-				};
-			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
-			}
-			{
-				const auto chaos_method_ptr = _s1;
-				const auto chaos_target = _s0;
-				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
-				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
-				chaos_object->chaos_delegate_target = chaos_target;
-				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
-				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-			}
-			_s1 = _s0;
-			{
-				auto chaos_value = _s1;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__836_0 = chaos_value;
-			}
-		}
-		{
-			// Assert.Throws: target method not found via IL lookahead
-			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
-		}
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-		chaos_locals[0] = ChaosStoreInt64(_i0);
-		_i0 = ChaosLoadInt64(chaos_locals[0]);
-		return _i0;
-	}
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Switch_257_Expression_Expression_MethodInfo_IEnumerableSwitchCase_1()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Switch_257_Expression_Expression_MethodInfo_IEnumerableSwitchCase_1(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__838_0;
-	_s1 = _s0;
-	{
-		if (_s1 == 0)
-		{
-			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9;
-			{
-				// Hotpatch-aware ldftn wrapper (slot 1950)
-				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[1950];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
-					{
-						alignas(16) uint8_t _d_ab[8];
-						ArgBuffer _d_bw(_d_ab);
-						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d_entry.method_key, _d_ab, nullptr);
-						return;
-					}
-					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
-				};
-			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
-			}
-			{
-				const auto chaos_method_ptr = _s1;
-				const auto chaos_target = _s0;
-				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
-				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
-				chaos_object->chaos_delegate_target = chaos_target;
-				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
-				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-			}
-			_s1 = _s0;
-			{
-				auto chaos_value = _s1;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__838_0 = chaos_value;
-			}
-		}
-		{
-			// Assert.Throws: target method not found via IL lookahead
-			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
-		}
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-		chaos_locals[0] = ChaosStoreInt64(_i0);
-		_i0 = ChaosLoadInt64(chaos_locals[0]);
-		return _i0;
-	}
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Switch_258_System_Type_Expression_Expression_MethodInfo_IEnumerableSwitchCase_0()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Switch_258_System_Type_Expression_Expression_MethodInfo_IEnumerableSwitchCase_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__840_0;
-	_s1 = _s0;
-	{
-		if (_s1 == 0)
-		{
-			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9;
-			{
-				// Hotpatch-aware ldftn wrapper (slot 1951)
-				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[1951];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
-					{
-						alignas(16) uint8_t _d_ab[8];
-						ArgBuffer _d_bw(_d_ab);
-						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d_entry.method_key, _d_ab, nullptr);
-						return;
-					}
-					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
-				};
-			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
-			}
-			{
-				const auto chaos_method_ptr = _s1;
-				const auto chaos_target = _s0;
-				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
-				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
-				chaos_object->chaos_delegate_target = chaos_target;
-				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
-				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-			}
-			_s1 = _s0;
-			{
-				auto chaos_value = _s1;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__840_0 = chaos_value;
-			}
-		}
-		{
-			// Assert.Throws: target method not found via IL lookahead
-			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
-		}
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-		chaos_locals[0] = ChaosStoreInt64(_i0);
-		_i0 = ChaosLoadInt64(chaos_locals[0]);
-		return _i0;
-	}
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Switch_258_System_Type_Expression_Expression_MethodInfo_IEnumerableSwitchCase_1()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Switch_258_System_Type_Expression_Expression_MethodInfo_IEnumerableSwitchCase_1(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__842_0;
-	_s1 = _s0;
-	{
-		if (_s1 == 0)
-		{
-			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9;
-			{
-				// Hotpatch-aware ldftn wrapper (slot 1952)
-				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[1952];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
-					{
-						alignas(16) uint8_t _d_ab[8];
-						ArgBuffer _d_bw(_d_ab);
-						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d_entry.method_key, _d_ab, nullptr);
-						return;
-					}
-					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
-				};
-			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
-			}
-			{
-				const auto chaos_method_ptr = _s1;
-				const auto chaos_target = _s0;
-				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
-				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
-				chaos_object->chaos_delegate_target = chaos_target;
-				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
-				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-			}
-			_s1 = _s0;
-			{
-				auto chaos_value = _s1;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__842_0 = chaos_value;
-			}
-		}
-		{
-			// Assert.Throws: target method not found via IL lookahead
-			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
-		}
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-		chaos_locals[0] = ChaosStoreInt64(_i0);
-		_i0 = ChaosLoadInt64(chaos_locals[0]);
-		return _i0;
-	}
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::SwitchCase_251_Expression_Expression_0()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_SwitchCase_251_Expression_Expression_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__802_0;
-	_s1 = _s0;
-	{
-		if (_s1 == 0)
-		{
-			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9;
-			{
-				// Hotpatch-aware ldftn wrapper (slot 1953)
-				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[1953];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
-					{
-						alignas(16) uint8_t _d_ab[8];
-						ArgBuffer _d_bw(_d_ab);
-						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d_entry.method_key, _d_ab, nullptr);
-						return;
-					}
-					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
-				};
-			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
-			}
-			{
-				const auto chaos_method_ptr = _s1;
-				const auto chaos_target = _s0;
-				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
-				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
-				chaos_object->chaos_delegate_target = chaos_target;
-				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
-				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-			}
-			_s1 = _s0;
-			{
-				auto chaos_value = _s1;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__802_0 = chaos_value;
-			}
-		}
-		{
-			// Assert.Throws: target method not found via IL lookahead
-			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
-		}
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-		chaos_locals[0] = ChaosStoreInt64(_i0);
-		_i0 = ChaosLoadInt64(chaos_locals[0]);
-		return _i0;
-	}
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::SwitchCase_251_Expression_Expression_1()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_SwitchCase_251_Expression_Expression_1(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__804_0;
-	_s1 = _s0;
-	{
-		if (_s1 == 0)
-		{
-			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9;
-			{
-				// Hotpatch-aware ldftn wrapper (slot 1954)
-				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[1954];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
-					{
-						alignas(16) uint8_t _d_ab[8];
-						ArgBuffer _d_bw(_d_ab);
-						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d_entry.method_key, _d_ab, nullptr);
-						return;
-					}
-					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
-				};
-			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
-			}
-			{
-				const auto chaos_method_ptr = _s1;
-				const auto chaos_target = _s0;
-				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
-				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
-				chaos_object->chaos_delegate_target = chaos_target;
-				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
-				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-			}
-			_s1 = _s0;
-			{
-				auto chaos_value = _s1;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__804_0 = chaos_value;
-			}
-		}
-		{
-			// Assert.Throws: target method not found via IL lookahead
-			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
-		}
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-		chaos_locals[0] = ChaosStoreInt64(_i0);
-		_i0 = ChaosLoadInt64(chaos_locals[0]);
-		return _i0;
-	}
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::SwitchCase_251_Expression_Expression_2()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_SwitchCase_251_Expression_Expression_2(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__806_0;
-	_s1 = _s0;
-	{
-		if (_s1 == 0)
-		{
-			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9;
-			{
-				// Hotpatch-aware ldftn wrapper (slot 1955)
-				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[1955];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
-					{
-						alignas(16) uint8_t _d_ab[8];
-						ArgBuffer _d_bw(_d_ab);
-						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d_entry.method_key, _d_ab, nullptr);
-						return;
-					}
-					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
-				};
-			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
-			}
-			{
-				const auto chaos_method_ptr = _s1;
-				const auto chaos_target = _s0;
-				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
-				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
-				chaos_object->chaos_delegate_target = chaos_target;
-				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
-				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-			}
-			_s1 = _s0;
-			{
-				auto chaos_value = _s1;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__806_0 = chaos_value;
-			}
-		}
-		{
-			// Assert.Throws: target method not found via IL lookahead
-			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
-		}
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-		chaos_locals[0] = ChaosStoreInt64(_i0);
-		_i0 = ChaosLoadInt64(chaos_locals[0]);
-		return _i0;
-	}
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::SwitchCase_252_Expression_IEnumerableExpression_0()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_SwitchCase_252_Expression_IEnumerableExpression_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__808_0;
-	_s1 = _s0;
-	{
-		if (_s1 == 0)
-		{
-			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9;
-			{
-				// Hotpatch-aware ldftn wrapper (slot 1956)
-				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[1956];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
-					{
-						alignas(16) uint8_t _d_ab[8];
-						ArgBuffer _d_bw(_d_ab);
-						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d_entry.method_key, _d_ab, nullptr);
-						return;
-					}
-					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
-				};
-			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
-			}
-			{
-				const auto chaos_method_ptr = _s1;
-				const auto chaos_target = _s0;
-				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
-				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
-				chaos_object->chaos_delegate_target = chaos_target;
-				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
-				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-			}
-			_s1 = _s0;
-			{
-				auto chaos_value = _s1;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__808_0 = chaos_value;
-			}
-		}
-		{
-			// Assert.Throws: target method not found via IL lookahead
-			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
-		}
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-		chaos_locals[0] = ChaosStoreInt64(_i0);
-		_i0 = ChaosLoadInt64(chaos_locals[0]);
-		return _i0;
-	}
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::SwitchCase_252_Expression_IEnumerableExpression_1()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_SwitchCase_252_Expression_IEnumerableExpression_1(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__810_0;
-	_s1 = _s0;
-	{
-		if (_s1 == 0)
-		{
-			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9;
-			{
-				// Hotpatch-aware ldftn wrapper (slot 1957)
-				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[1957];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
-					{
-						alignas(16) uint8_t _d_ab[8];
-						ArgBuffer _d_bw(_d_ab);
-						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d_entry.method_key, _d_ab, nullptr);
-						return;
-					}
-					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
-				};
-			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
-			}
-			{
-				const auto chaos_method_ptr = _s1;
-				const auto chaos_target = _s0;
-				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
-				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
-				chaos_object->chaos_delegate_target = chaos_target;
-				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
-				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-			}
-			_s1 = _s0;
-			{
-				auto chaos_value = _s1;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__810_0 = chaos_value;
-			}
-		}
-		{
-			// Assert.Throws: target method not found via IL lookahead
-			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
-		}
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-		chaos_locals[0] = ChaosStoreInt64(_i0);
-		_i0 = ChaosLoadInt64(chaos_locals[0]);
-		return _i0;
-	}
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::SymbolDocument_259_string_0()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_SymbolDocument_259_string_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__844_0;
-	_s1 = _s0;
-	{
-		if (_s1 == 0)
-		{
-			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9;
-			{
-				// Hotpatch-aware ldftn wrapper (slot 1958)
-				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[1958];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
-					{
-						alignas(16) uint8_t _d_ab[8];
-						ArgBuffer _d_bw(_d_ab);
-						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d_entry.method_key, _d_ab, nullptr);
-						return;
-					}
-					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
-				};
-			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
-			}
-			{
-				const auto chaos_method_ptr = _s1;
-				const auto chaos_target = _s0;
-				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
-				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
-				chaos_object->chaos_delegate_target = chaos_target;
-				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
-				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-			}
-			_s1 = _s0;
-			{
-				auto chaos_value = _s1;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__844_0 = chaos_value;
-			}
-		}
-		{
-			// Assert.Throws: target method not found via IL lookahead
-			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
-		}
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-		chaos_locals[0] = ChaosStoreInt64(_i0);
-		_i0 = ChaosLoadInt64(chaos_locals[0]);
-		return _i0;
-	}
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::SymbolDocument_259_string_1()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_SymbolDocument_259_string_1(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INT64 _i0;
-	{
-		auto* chaos_string = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_String);
-		chaos_string->header.type_info = chaos_mt_System_Private_CoreLib_System_String.AsTypeInfoHot();
-		chaos_string->length = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-		chaos_string->utf8_data = "";
-		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_string);
-	}
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = chaos_args[0];
 	{
 		const auto chaos_arg_0 = _s0;
-		if (525 < 0 || 525 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 525 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[525] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 525 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[525])(chaos_arg_0);
+		ChaosObjectCtor(chaos_arg_0);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c__DisplayClass546_0::<TryGetActionType_187_System_Type_System_Type_1>b__0()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c__DisplayClass546_0_TryGetActionType_187_System_Type_System_Type_1_b__0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	{
+		const auto chaos_result = ChaosArrayEmpty_Inline();
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
+	_s1 = chaos_args[0];
 	{
-		if (_s0 != 0)
-		{
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-		}
-		else
-		{
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-			_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(ChaosLoadInt64(_s0)));
-		}
-		chaos_locals[1] = ChaosStoreInt64(_i0);
-		_i0 = ChaosLoadInt64(chaos_locals[1]);
-		return _i0;
+		auto* chaos_object = reinterpret_cast<chaos_type_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c__DisplayClass546_0*>(_s1);
+		_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_object->field_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c__DisplayClass546_0____ref_187_1_0);
 	}
+	{
+		const auto chaos_result = chaos_external_runtime_System_Linq_Expressions_Expression__TryGetActionType_System_Boolean_System_Type___System_Type__();
+		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::.cctor:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_cctor(void)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::.ctor:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Add_24_Expression_Expression_0>b__60_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Add_24_Expression_Expression_0_b__60_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Add_25_Expression_Expression_MethodInfo_0>b__62_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Add_25_Expression_Expression_MethodInfo_0_b__62_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<AddAssign_26_Expression_Expression_0>b__64_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_AddAssign_26_Expression_Expression_0_b__64_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<AddAssign_27_Expression_Expression_MethodInfo_0>b__66_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_AddAssign_27_Expression_Expression_MethodInfo_0_b__66_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<AddAssign_28_Expression_Expression_MethodInfo_LambdaExpression_0>b__68_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_AddAssign_28_Expression_Expression_MethodInfo_LambdaExpression_0_b__68_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<AddAssignChecked_29_Expression_Expression_0>b__70_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_AddAssignChecked_29_Expression_Expression_0_b__70_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<AddAssignChecked_30_Expression_Expression_MethodInfo_0>b__72_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_AddAssignChecked_30_Expression_Expression_MethodInfo_0_b__72_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<AddAssignChecked_31_Expression_Expression_MethodInfo_LambdaExpression_0>b__74_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_AddAssignChecked_31_Expression_Expression_MethodInfo_LambdaExpression_0_b__74_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<AddChecked_32_Expression_Expression_0>b__76_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_AddChecked_32_Expression_Expression_0_b__76_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<AddChecked_33_Expression_Expression_MethodInfo_0>b__78_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_AddChecked_33_Expression_Expression_MethodInfo_0_b__78_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<And_74_Expression_Expression_0>b__160_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_And_74_Expression_Expression_0_b__160_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<And_75_Expression_Expression_MethodInfo_0>b__162_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_And_75_Expression_Expression_MethodInfo_0_b__162_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<AndAlso_18_Expression_Expression_0>b__48_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_AndAlso_18_Expression_Expression_0_b__48_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<AndAlso_19_Expression_Expression_MethodInfo_0>b__50_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_AndAlso_19_Expression_Expression_MethodInfo_0_b__50_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<AndAssign_76_Expression_Expression_0>b__164_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_AndAssign_76_Expression_Expression_0_b__164_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<AndAssign_77_Expression_Expression_MethodInfo_0>b__166_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_AndAssign_77_Expression_Expression_MethodInfo_0_b__166_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<AndAssign_78_Expression_Expression_MethodInfo_LambdaExpression_0>b__168_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_AndAssign_78_Expression_Expression_MethodInfo_LambdaExpression_0_b__168_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<ArrayAccess_155_Expression_Expression_0>b__370_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_ArrayAccess_155_Expression_Expression_0_b__370_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<ArrayAccess_155_Expression_Expression_1>b__372_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_ArrayAccess_155_Expression_Expression_1_b__372_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<ArrayAccess_155_Expression_Expression_2>b__374_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_ArrayAccess_155_Expression_Expression_2_b__374_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<ArrayAccess_156_Expression_IEnumerableExpression_0>b__376_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_ArrayAccess_156_Expression_IEnumerableExpression_0_b__376_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<ArrayAccess_156_Expression_IEnumerableExpression_1>b__378_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_ArrayAccess_156_Expression_IEnumerableExpression_1_b__378_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<ArrayIndex_233_Expression_Expression_0>b__726_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_ArrayIndex_233_Expression_Expression_0_b__726_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<ArrayIndex_233_Expression_Expression_1>b__728_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_ArrayIndex_233_Expression_Expression_1_b__728_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<ArrayIndex_233_Expression_Expression_2>b__730_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_ArrayIndex_233_Expression_Expression_2_b__730_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<ArrayIndex_234_Expression_IEnumerableExpression_0>b__732_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_ArrayIndex_234_Expression_IEnumerableExpression_0_b__732_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<ArrayIndex_234_Expression_IEnumerableExpression_1>b__734_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_ArrayIndex_234_Expression_IEnumerableExpression_1_b__734_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<ArrayIndex_94_Expression_Expression_0>b__200_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_ArrayIndex_94_Expression_Expression_0_b__200_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<ArrayLength_292_Expression_0>b__928_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_ArrayLength_292_Expression_0_b__928_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Assign_0_Expression_Expression_0>b__0_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Assign_0_Expression_Expression_0_b__0_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Bind_198_MemberInfo_Expression_0>b__592_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Bind_198_MemberInfo_Expression_0_b__592_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Bind_199_MethodInfo_Expression_0>b__594_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Bind_199_MethodInfo_Expression_0_b__594_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Block_100_IEnumerableExpression_0>b__216_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Block_100_IEnumerableExpression_0_b__216_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Block_100_IEnumerableExpression_1>b__218_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Block_100_IEnumerableExpression_1_b__218_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Block_101_System_Type_Expression_0>b__220_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Block_101_System_Type_Expression_0_b__220_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Block_101_System_Type_Expression_1>b__222_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Block_101_System_Type_Expression_1_b__222_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Block_101_System_Type_Expression_2>b__224_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Block_101_System_Type_Expression_2_b__224_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Block_102_System_Type_IEnumerableExpression_0>b__226_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Block_102_System_Type_IEnumerableExpression_0_b__226_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Block_102_System_Type_IEnumerableExpression_1>b__228_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Block_102_System_Type_IEnumerableExpression_1_b__228_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Block_103_IEnumerableParameterExpression_Expression_0>b__230_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Block_103_IEnumerableParameterExpression_Expression_0_b__230_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Block_103_IEnumerableParameterExpression_Expression_1>b__232_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Block_103_IEnumerableParameterExpression_Expression_1_b__232_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Block_103_IEnumerableParameterExpression_Expression_2>b__234_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Block_103_IEnumerableParameterExpression_Expression_2_b__234_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Block_104_System_Type_IEnumerableParameterExpression_Expression_0>b__236_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Block_104_System_Type_IEnumerableParameterExpression_Expression_0_b__236_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Block_104_System_Type_IEnumerableParameterExpression_Expression_1>b__238_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Block_104_System_Type_IEnumerableParameterExpression_Expression_1_b__238_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Block_104_System_Type_IEnumerableParameterExpression_Expression_2>b__240_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Block_104_System_Type_IEnumerableParameterExpression_Expression_2_b__240_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Block_105_IEnumerableParameterExpression_IEnumerableExpression_0>b__242_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Block_105_IEnumerableParameterExpression_IEnumerableExpression_0_b__242_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Block_105_IEnumerableParameterExpression_IEnumerableExpression_1>b__244_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Block_105_IEnumerableParameterExpression_IEnumerableExpression_1_b__244_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Block_106_System_Type_IEnumerableParameterExpression_IEnumerableExpression_0>b__246_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Block_106_System_Type_IEnumerableParameterExpression_IEnumerableExpression_0_b__246_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Block_106_System_Type_IEnumerableParameterExpression_IEnumerableExpression_1>b__248_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Block_106_System_Type_IEnumerableParameterExpression_IEnumerableExpression_1_b__248_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Block_95_Expression_Expression_0>b__202_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Block_95_Expression_Expression_0_b__202_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Block_96_Expression_Expression_Expression_0>b__204_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Block_96_Expression_Expression_Expression_0_b__204_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Block_97_Expression_Expression_Expression_Expression_0>b__206_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Block_97_Expression_Expression_Expression_Expression_0_b__206_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Block_98_Expression_Expression_Expression_Expression_Expression_0>b__208_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Block_98_Expression_Expression_Expression_Expression_Expression_0_b__208_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Block_99_Expression_0>b__210_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Block_99_Expression_0_b__210_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Block_99_Expression_1>b__212_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Block_99_Expression_1_b__212_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Block_99_Expression_2>b__214_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Block_99_Expression_2_b__214_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Break_139_LabelTarget_0>b__336_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Break_139_LabelTarget_0_b__336_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Break_140_LabelTarget_Expression_0>b__338_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Break_140_LabelTarget_Expression_0_b__338_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Break_141_LabelTarget_System_Type_0>b__340_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Break_141_LabelTarget_System_Type_0_b__340_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Break_142_LabelTarget_Expression_System_Type_0>b__342_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Break_142_LabelTarget_Expression_System_Type_0_b__342_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Call_219_MethodInfo_Expression_0>b__674_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Call_219_MethodInfo_Expression_0_b__674_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Call_220_MethodInfo_Expression_Expression_0>b__676_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Call_220_MethodInfo_Expression_Expression_0_b__676_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Call_221_MethodInfo_Expression_Expression_Expression_0>b__678_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Call_221_MethodInfo_Expression_Expression_Expression_0_b__678_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Call_222_MethodInfo_Expression_Expression_Expression_Expression_0>b__680_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Call_222_MethodInfo_Expression_Expression_Expression_Expression_0_b__680_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Call_223_MethodInfo_Expression_Expression_Expression_Expression_Expression_0>b__682_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Call_223_MethodInfo_Expression_Expression_Expression_Expression_Expression_0_b__682_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Call_224_MethodInfo_Expression_0>b__684_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Call_224_MethodInfo_Expression_0_b__684_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Call_224_MethodInfo_Expression_1>b__686_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Call_224_MethodInfo_Expression_1_b__686_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Call_224_MethodInfo_Expression_2>b__688_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Call_224_MethodInfo_Expression_2_b__688_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Call_225_MethodInfo_IEnumerableExpression_0>b__690_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Call_225_MethodInfo_IEnumerableExpression_0_b__690_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Call_225_MethodInfo_IEnumerableExpression_1>b__692_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Call_225_MethodInfo_IEnumerableExpression_1_b__692_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Call_226_Expression_MethodInfo_0>b__694_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Call_226_Expression_MethodInfo_0_b__694_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Call_227_Expression_MethodInfo_Expression_0>b__696_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Call_227_Expression_MethodInfo_Expression_0_b__696_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Call_227_Expression_MethodInfo_Expression_1>b__698_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Call_227_Expression_MethodInfo_Expression_1_b__698_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Call_227_Expression_MethodInfo_Expression_2>b__700_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Call_227_Expression_MethodInfo_Expression_2_b__700_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Call_228_Expression_MethodInfo_Expression_Expression_0>b__702_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Call_228_Expression_MethodInfo_Expression_Expression_0_b__702_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Call_229_Expression_MethodInfo_Expression_Expression_Expression_0>b__704_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Call_229_Expression_MethodInfo_Expression_Expression_Expression_0_b__704_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Call_230_Expression_string_System_Type_Expression_0>b__706_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Call_230_Expression_string_System_Type_Expression_0_b__706_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Call_230_Expression_string_System_Type_Expression_1>b__708_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Call_230_Expression_string_System_Type_Expression_1_b__708_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Call_230_Expression_string_System_Type_Expression_2>b__710_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Call_230_Expression_string_System_Type_Expression_2_b__710_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Call_230_Expression_string_System_Type_Expression_3>b__712_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Call_230_Expression_string_System_Type_Expression_3_b__712_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Call_231_System_Type_string_System_Type_Expression_0>b__714_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Call_231_System_Type_string_System_Type_Expression_0_b__714_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Call_231_System_Type_string_System_Type_Expression_1>b__716_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Call_231_System_Type_string_System_Type_Expression_1_b__716_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Call_231_System_Type_string_System_Type_Expression_2>b__718_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Call_231_System_Type_string_System_Type_Expression_2_b__718_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Call_231_System_Type_string_System_Type_Expression_3>b__720_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Call_231_System_Type_string_System_Type_Expression_3_b__720_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Call_232_Expression_MethodInfo_IEnumerableExpression_0>b__722_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Call_232_Expression_MethodInfo_IEnumerableExpression_0_b__722_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Call_232_Expression_MethodInfo_IEnumerableExpression_1>b__724_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Call_232_Expression_MethodInfo_IEnumerableExpression_1_b__724_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Catch_107_System_Type_Expression_0>b__250_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Catch_107_System_Type_Expression_0_b__250_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Catch_108_ParameterExpression_Expression_0>b__252_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Catch_108_ParameterExpression_Expression_0_b__252_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Catch_109_System_Type_Expression_Expression_0>b__254_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Catch_109_System_Type_Expression_Expression_0_b__254_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Catch_110_ParameterExpression_Expression_Expression_0>b__256_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Catch_110_ParameterExpression_Expression_Expression_0_b__256_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<ClearDebugInfo_119_SymbolDocumentInfo_0>b__278_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_ClearDebugInfo_119_SymbolDocumentInfo_0_b__278_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Coalesce_22_Expression_Expression_0>b__56_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Coalesce_22_Expression_Expression_0_b__56_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Coalesce_23_Expression_Expression_LambdaExpression_0>b__58_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Coalesce_23_Expression_Expression_LambdaExpression_0_b__58_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Condition_112_Expression_Expression_Expression_0>b__260_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Condition_112_Expression_Expression_Expression_0_b__260_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Condition_113_Expression_Expression_Expression_System_Type_0>b__262_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Condition_113_Expression_Expression_Expression_System_Type_0_b__262_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Constant_116_object_0>b__268_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Constant_116_object_0_b__268_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Constant_117_object_System_Type_0>b__270_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Constant_117_object_System_Type_0_b__270_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Continue_143_LabelTarget_0>b__344_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Continue_143_LabelTarget_0_b__344_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Continue_144_LabelTarget_System_Type_0>b__346_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Continue_144_LabelTarget_System_Type_0_b__346_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Convert_288_Expression_System_Type_0>b__920_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Convert_288_Expression_System_Type_0_b__920_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Convert_289_Expression_System_Type_MethodInfo_0>b__922_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Convert_289_Expression_System_Type_MethodInfo_0_b__922_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<ConvertChecked_290_Expression_System_Type_0>b__924_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_ConvertChecked_290_Expression_System_Type_0_b__924_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<ConvertChecked_291_Expression_System_Type_MethodInfo_0>b__926_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_ConvertChecked_291_Expression_System_Type_MethodInfo_0_b__926_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<DebugInfo_118_SymbolDocumentInfo_int_int_int_int_0>b__272_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_DebugInfo_118_SymbolDocumentInfo_int_int_int_int_0_b__272_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<DebugInfo_118_SymbolDocumentInfo_int_int_int_int_1>b__274_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_DebugInfo_118_SymbolDocumentInfo_int_int_int_int_1_b__274_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<DebugInfo_118_SymbolDocumentInfo_int_int_int_int_2>b__276_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_DebugInfo_118_SymbolDocumentInfo_int_int_int_int_2_b__276_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Decrement_300_Expression_0>b__944_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Decrement_300_Expression_0_b__944_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Decrement_301_Expression_MethodInfo_0>b__946_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Decrement_301_Expression_MethodInfo_0_b__946_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Default_121_System_Type_0>b__282_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Default_121_System_Type_0_b__282_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Divide_44_Expression_Expression_0>b__100_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Divide_44_Expression_Expression_0_b__100_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Divide_45_Expression_Expression_MethodInfo_0>b__102_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Divide_45_Expression_Expression_MethodInfo_0_b__102_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<DivideAssign_46_Expression_Expression_0>b__104_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_DivideAssign_46_Expression_Expression_0_b__104_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<DivideAssign_47_Expression_Expression_MethodInfo_0>b__106_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_DivideAssign_47_Expression_Expression_MethodInfo_0_b__106_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<DivideAssign_48_Expression_Expression_MethodInfo_LambdaExpression_0>b__108_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_DivideAssign_48_Expression_Expression_MethodInfo_LambdaExpression_0_b__108_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Dynamic_127_CallSiteBinder_System_Type_IEnumerableExpression_0>b__300_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Dynamic_127_CallSiteBinder_System_Type_IEnumerableExpression_0_b__300_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Dynamic_127_CallSiteBinder_System_Type_IEnumerableExpression_1>b__302_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Dynamic_127_CallSiteBinder_System_Type_IEnumerableExpression_1_b__302_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Dynamic_128_CallSiteBinder_System_Type_Expression_0>b__304_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Dynamic_128_CallSiteBinder_System_Type_Expression_0_b__304_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Dynamic_129_CallSiteBinder_System_Type_Expression_Expression_0>b__306_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Dynamic_129_CallSiteBinder_System_Type_Expression_Expression_0_b__306_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Dynamic_130_CallSiteBinder_System_Type_Expression_Expression_Expression_0>b__308_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Dynamic_130_CallSiteBinder_System_Type_Expression_Expression_Expression_0_b__308_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Dynamic_131_CallSiteBinder_System_Type_Expression_Expression_Expression_Expression_0>b__310_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Dynamic_131_CallSiteBinder_System_Type_Expression_Expression_Expression_Expression_0_b__310_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Dynamic_132_CallSiteBinder_System_Type_Expression_0>b__312_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Dynamic_132_CallSiteBinder_System_Type_Expression_0_b__312_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Dynamic_132_CallSiteBinder_System_Type_Expression_1>b__314_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Dynamic_132_CallSiteBinder_System_Type_Expression_1_b__314_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Dynamic_132_CallSiteBinder_System_Type_Expression_2>b__316_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Dynamic_132_CallSiteBinder_System_Type_Expression_2_b__316_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<ElementInit_122_MethodInfo_Expression_0>b__284_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_ElementInit_122_MethodInfo_Expression_0_b__284_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<ElementInit_122_MethodInfo_Expression_1>b__286_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_ElementInit_122_MethodInfo_Expression_1_b__286_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<ElementInit_122_MethodInfo_Expression_2>b__288_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_ElementInit_122_MethodInfo_Expression_2_b__288_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<ElementInit_123_MethodInfo_IEnumerableExpression_0>b__290_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_ElementInit_123_MethodInfo_IEnumerableExpression_0_b__290_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<ElementInit_123_MethodInfo_IEnumerableExpression_1>b__292_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_ElementInit_123_MethodInfo_IEnumerableExpression_1_b__292_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Empty_120__120>b__280_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Empty_120__120_b__280_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Equal_4_Expression_Expression_0>b__8_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Equal_4_Expression_Expression_0_b__8_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Equal_5_Expression_Expression_bool_MethodInfo_0>b__10_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Equal_5_Expression_Expression_bool_MethodInfo_0_b__10_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Equal_5_Expression_Expression_bool_MethodInfo_1>b__12_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Equal_5_Expression_Expression_bool_MethodInfo_1_b__12_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<ExclusiveOr_84_Expression_Expression_0>b__180_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_ExclusiveOr_84_Expression_Expression_0_b__180_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<ExclusiveOr_85_Expression_Expression_MethodInfo_0>b__182_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_ExclusiveOr_85_Expression_Expression_MethodInfo_0_b__182_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<ExclusiveOrAssign_86_Expression_Expression_0>b__184_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_ExclusiveOrAssign_86_Expression_Expression_0_b__184_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<ExclusiveOrAssign_87_Expression_Expression_MethodInfo_0>b__186_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_ExclusiveOrAssign_87_Expression_Expression_MethodInfo_0_b__186_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<ExclusiveOrAssign_88_Expression_Expression_MethodInfo_LambdaExpression_0>b__188_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_ExclusiveOrAssign_88_Expression_Expression_MethodInfo_LambdaExpression_0_b__188_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Field_200_Expression_FieldInfo_0>b__596_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Field_200_Expression_FieldInfo_0_b__596_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Field_201_Expression_string_0>b__598_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Field_201_Expression_string_0_b__598_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Field_201_Expression_string_1>b__600_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Field_201_Expression_string_1_b__600_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Field_202_Expression_System_Type_string_0>b__602_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Field_202_Expression_System_Type_string_0_b__602_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Field_202_Expression_System_Type_string_1>b__604_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Field_202_Expression_System_Type_string_1_b__604_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<GetActionType_186_System_Type_0>b__538_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_GetActionType_186_System_Type_0_b__538_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<GetActionType_186_System_Type_1>b__540_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_GetActionType_186_System_Type_1_b__540_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<GetActionType_186_System_Type_2>b__542_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_GetActionType_186_System_Type_2_b__542_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<GetDelegateType_188_System_Type_0>b__550_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_GetDelegateType_188_System_Type_0_b__550_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<GetDelegateType_188_System_Type_1>b__552_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_GetDelegateType_188_System_Type_1_b__552_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<GetDelegateType_188_System_Type_2>b__554_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_GetDelegateType_188_System_Type_2_b__554_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<GetFuncType_184_System_Type_0>b__526_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_GetFuncType_184_System_Type_0_b__526_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<GetFuncType_184_System_Type_1>b__528_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_GetFuncType_184_System_Type_1_b__528_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<GetFuncType_184_System_Type_2>b__530_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_GetFuncType_184_System_Type_2_b__530_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Goto_149_LabelTarget_0>b__356_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Goto_149_LabelTarget_0_b__356_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Goto_150_LabelTarget_System_Type_0>b__358_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Goto_150_LabelTarget_System_Type_0_b__358_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Goto_151_LabelTarget_Expression_0>b__360_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Goto_151_LabelTarget_Expression_0_b__360_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Goto_152_LabelTarget_Expression_System_Type_0>b__362_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Goto_152_LabelTarget_Expression_System_Type_0_b__362_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<GreaterThan_10_Expression_Expression_0>b__24_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_GreaterThan_10_Expression_Expression_0_b__24_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<GreaterThan_11_Expression_Expression_bool_MethodInfo_0>b__26_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_GreaterThan_11_Expression_Expression_bool_MethodInfo_0_b__26_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<GreaterThan_11_Expression_Expression_bool_MethodInfo_1>b__28_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_GreaterThan_11_Expression_Expression_bool_MethodInfo_1_b__28_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<GreaterThanOrEqual_14_Expression_Expression_0>b__36_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_GreaterThanOrEqual_14_Expression_Expression_0_b__36_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<GreaterThanOrEqual_15_Expression_Expression_bool_MethodInfo_0>b__38_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_GreaterThanOrEqual_15_Expression_Expression_bool_MethodInfo_0_b__38_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<GreaterThanOrEqual_15_Expression_Expression_bool_MethodInfo_1>b__40_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_GreaterThanOrEqual_15_Expression_Expression_bool_MethodInfo_1_b__40_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<IfThen_114_Expression_Expression_0>b__264_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_IfThen_114_Expression_Expression_0_b__264_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<IfThenElse_115_Expression_Expression_Expression_0>b__266_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_IfThenElse_115_Expression_Expression_Expression_0_b__266_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Increment_298_Expression_0>b__940_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Increment_298_Expression_0_b__940_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Increment_299_Expression_MethodInfo_0>b__942_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Increment_299_Expression_MethodInfo_0_b__942_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<IsFalse_280_Expression_0>b__904_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_IsFalse_280_Expression_0_b__904_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<IsFalse_281_Expression_MethodInfo_0>b__906_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_IsFalse_281_Expression_MethodInfo_0_b__906_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<IsTrue_282_Expression_0>b__908_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_IsTrue_282_Expression_0_b__908_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<IsTrue_283_Expression_MethodInfo_0>b__910_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_IsTrue_283_Expression_MethodInfo_0_b__910_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Label_160_LabelTarget_0>b__398_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Label_160_LabelTarget_0_b__398_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Label_161_LabelTarget_Expression_0>b__400_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Label_161_LabelTarget_Expression_0_b__400_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Label_162__162>b__402_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Label_162__162_b__402_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Label_163_string_0>b__404_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Label_163_string_0_b__404_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Label_163_string_1>b__406_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Label_163_string_1_b__406_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Label_164_System_Type_0>b__408_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Label_164_System_Type_0_b__408_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Label_165_System_Type_string_0>b__410_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Label_165_System_Type_string_0_b__410_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Label_165_System_Type_string_1>b__412_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Label_165_System_Type_string_1_b__412_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Lambda_166_Expression_ParameterExpression_0>b__414_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Lambda_166_Expression_ParameterExpression_0_b__414_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Lambda_166_Expression_ParameterExpression_1>b__416_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Lambda_166_Expression_ParameterExpression_1_b__416_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Lambda_166_Expression_ParameterExpression_2>b__418_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Lambda_166_Expression_ParameterExpression_2_b__418_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Lambda_167_Expression_bool_ParameterExpression_0>b__420_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Lambda_167_Expression_bool_ParameterExpression_0_b__420_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Lambda_167_Expression_bool_ParameterExpression_1>b__422_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Lambda_167_Expression_bool_ParameterExpression_1_b__422_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Lambda_167_Expression_bool_ParameterExpression_2>b__424_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Lambda_167_Expression_bool_ParameterExpression_2_b__424_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Lambda_167_Expression_bool_ParameterExpression_3>b__426_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Lambda_167_Expression_bool_ParameterExpression_3_b__426_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Lambda_168_Expression_IEnumerableParameterExpression_0>b__428_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Lambda_168_Expression_IEnumerableParameterExpression_0_b__428_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Lambda_168_Expression_IEnumerableParameterExpression_1>b__430_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Lambda_168_Expression_IEnumerableParameterExpression_1_b__430_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Lambda_169_Expression_bool_IEnumerableParameterExpression_0>b__432_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Lambda_169_Expression_bool_IEnumerableParameterExpression_0_b__432_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Lambda_169_Expression_bool_IEnumerableParameterExpression_1>b__434_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Lambda_169_Expression_bool_IEnumerableParameterExpression_1_b__434_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Lambda_169_Expression_bool_IEnumerableParameterExpression_2>b__436_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Lambda_169_Expression_bool_IEnumerableParameterExpression_2_b__436_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Lambda_170_Expression_string_IEnumerableParameterExpression_0>b__438_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Lambda_170_Expression_string_IEnumerableParameterExpression_0_b__438_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Lambda_170_Expression_string_IEnumerableParameterExpression_1>b__440_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Lambda_170_Expression_string_IEnumerableParameterExpression_1_b__440_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Lambda_170_Expression_string_IEnumerableParameterExpression_2>b__442_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Lambda_170_Expression_string_IEnumerableParameterExpression_2_b__442_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Lambda_171_Expression_string_bool_IEnumerableParameterExpression_0>b__444_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Lambda_171_Expression_string_bool_IEnumerableParameterExpression_0_b__444_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Lambda_171_Expression_string_bool_IEnumerableParameterExpression_1>b__446_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Lambda_171_Expression_string_bool_IEnumerableParameterExpression_1_b__446_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Lambda_171_Expression_string_bool_IEnumerableParameterExpression_2>b__448_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Lambda_171_Expression_string_bool_IEnumerableParameterExpression_2_b__448_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Lambda_171_Expression_string_bool_IEnumerableParameterExpression_3>b__450_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Lambda_171_Expression_string_bool_IEnumerableParameterExpression_3_b__450_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Lambda_172_Expression_ParameterExpression_0>b__452_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Lambda_172_Expression_ParameterExpression_0_b__452_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Lambda_172_Expression_ParameterExpression_1>b__454_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Lambda_172_Expression_ParameterExpression_1_b__454_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Lambda_172_Expression_ParameterExpression_2>b__456_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Lambda_172_Expression_ParameterExpression_2_b__456_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Lambda_173_Expression_bool_ParameterExpression_0>b__458_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Lambda_173_Expression_bool_ParameterExpression_0_b__458_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Lambda_173_Expression_bool_ParameterExpression_1>b__460_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Lambda_173_Expression_bool_ParameterExpression_1_b__460_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Lambda_173_Expression_bool_ParameterExpression_2>b__462_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Lambda_173_Expression_bool_ParameterExpression_2_b__462_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Lambda_173_Expression_bool_ParameterExpression_3>b__464_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Lambda_173_Expression_bool_ParameterExpression_3_b__464_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Lambda_174_Expression_IEnumerableParameterExpression_0>b__466_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Lambda_174_Expression_IEnumerableParameterExpression_0_b__466_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Lambda_174_Expression_IEnumerableParameterExpression_1>b__468_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Lambda_174_Expression_IEnumerableParameterExpression_1_b__468_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Lambda_175_Expression_bool_IEnumerableParameterExpression_0>b__470_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Lambda_175_Expression_bool_IEnumerableParameterExpression_0_b__470_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Lambda_175_Expression_bool_IEnumerableParameterExpression_1>b__472_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Lambda_175_Expression_bool_IEnumerableParameterExpression_1_b__472_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Lambda_175_Expression_bool_IEnumerableParameterExpression_2>b__474_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Lambda_175_Expression_bool_IEnumerableParameterExpression_2_b__474_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Lambda_176_System_Type_Expression_ParameterExpression_0>b__476_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Lambda_176_System_Type_Expression_ParameterExpression_0_b__476_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Lambda_176_System_Type_Expression_ParameterExpression_1>b__478_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Lambda_176_System_Type_Expression_ParameterExpression_1_b__478_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Lambda_176_System_Type_Expression_ParameterExpression_2>b__480_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Lambda_176_System_Type_Expression_ParameterExpression_2_b__480_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Lambda_177_System_Type_Expression_bool_ParameterExpression_0>b__482_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Lambda_177_System_Type_Expression_bool_ParameterExpression_0_b__482_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Lambda_177_System_Type_Expression_bool_ParameterExpression_1>b__484_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Lambda_177_System_Type_Expression_bool_ParameterExpression_1_b__484_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Lambda_177_System_Type_Expression_bool_ParameterExpression_2>b__486_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Lambda_177_System_Type_Expression_bool_ParameterExpression_2_b__486_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Lambda_177_System_Type_Expression_bool_ParameterExpression_3>b__488_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Lambda_177_System_Type_Expression_bool_ParameterExpression_3_b__488_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Lambda_178_System_Type_Expression_IEnumerableParameterExpression_0>b__490_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Lambda_178_System_Type_Expression_IEnumerableParameterExpression_0_b__490_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Lambda_178_System_Type_Expression_IEnumerableParameterExpression_1>b__492_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Lambda_178_System_Type_Expression_IEnumerableParameterExpression_1_b__492_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Lambda_179_System_Type_Expression_bool_IEnumerableParameterExpression_0>b__494_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Lambda_179_System_Type_Expression_bool_IEnumerableParameterExpression_0_b__494_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Lambda_179_System_Type_Expression_bool_IEnumerableParameterExpression_1>b__496_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Lambda_179_System_Type_Expression_bool_IEnumerableParameterExpression_1_b__496_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Lambda_179_System_Type_Expression_bool_IEnumerableParameterExpression_2>b__498_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Lambda_179_System_Type_Expression_bool_IEnumerableParameterExpression_2_b__498_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Lambda_180_Expression_string_IEnumerableParameterExpression_0>b__500_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Lambda_180_Expression_string_IEnumerableParameterExpression_0_b__500_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Lambda_180_Expression_string_IEnumerableParameterExpression_1>b__502_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Lambda_180_Expression_string_IEnumerableParameterExpression_1_b__502_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Lambda_180_Expression_string_IEnumerableParameterExpression_2>b__504_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Lambda_180_Expression_string_IEnumerableParameterExpression_2_b__504_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Lambda_181_Expression_string_bool_IEnumerableParameterExpression_0>b__506_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Lambda_181_Expression_string_bool_IEnumerableParameterExpression_0_b__506_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Lambda_181_Expression_string_bool_IEnumerableParameterExpression_1>b__508_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Lambda_181_Expression_string_bool_IEnumerableParameterExpression_1_b__508_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Lambda_181_Expression_string_bool_IEnumerableParameterExpression_2>b__510_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Lambda_181_Expression_string_bool_IEnumerableParameterExpression_2_b__510_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Lambda_181_Expression_string_bool_IEnumerableParameterExpression_3>b__512_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Lambda_181_Expression_string_bool_IEnumerableParameterExpression_3_b__512_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Lambda_182_System_Type_Expression_string_IEnumerableParameterExpression_0>b__514_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Lambda_182_System_Type_Expression_string_IEnumerableParameterExpression_0_b__514_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Lambda_182_System_Type_Expression_string_IEnumerableParameterExpression_1>b__516_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Lambda_182_System_Type_Expression_string_IEnumerableParameterExpression_1_b__516_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Lambda_182_System_Type_Expression_string_IEnumerableParameterExpression_2>b__518_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Lambda_182_System_Type_Expression_string_IEnumerableParameterExpression_2_b__518_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Lambda_183_System_Type_Expression_string_bool_IEnumerableParameterExpression_0>b__520_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Lambda_183_System_Type_Expression_string_bool_IEnumerableParameterExpression_0_b__520_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Lambda_183_System_Type_Expression_string_bool_IEnumerableParameterExpression_1>b__522_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Lambda_183_System_Type_Expression_string_bool_IEnumerableParameterExpression_1_b__522_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Lambda_183_System_Type_Expression_string_bool_IEnumerableParameterExpression_2>b__524_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Lambda_183_System_Type_Expression_string_bool_IEnumerableParameterExpression_2_b__524_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<LeftShift_64_Expression_Expression_0>b__140_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_LeftShift_64_Expression_Expression_0_b__140_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<LeftShift_65_Expression_Expression_MethodInfo_0>b__142_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_LeftShift_65_Expression_Expression_MethodInfo_0_b__142_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<LeftShiftAssign_66_Expression_Expression_0>b__144_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_LeftShiftAssign_66_Expression_Expression_0_b__144_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<LeftShiftAssign_67_Expression_Expression_MethodInfo_0>b__146_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_LeftShiftAssign_67_Expression_Expression_MethodInfo_0_b__146_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<LeftShiftAssign_68_Expression_Expression_MethodInfo_LambdaExpression_0>b__148_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_LeftShiftAssign_68_Expression_Expression_MethodInfo_LambdaExpression_0_b__148_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<LessThan_12_Expression_Expression_0>b__30_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_LessThan_12_Expression_Expression_0_b__30_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<LessThan_13_Expression_Expression_bool_MethodInfo_0>b__32_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_LessThan_13_Expression_Expression_bool_MethodInfo_0_b__32_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<LessThan_13_Expression_Expression_bool_MethodInfo_1>b__34_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_LessThan_13_Expression_Expression_bool_MethodInfo_1_b__34_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<LessThanOrEqual_16_Expression_Expression_0>b__42_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_LessThanOrEqual_16_Expression_Expression_0_b__42_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<LessThanOrEqual_17_Expression_Expression_bool_MethodInfo_0>b__44_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_LessThanOrEqual_17_Expression_Expression_bool_MethodInfo_0_b__44_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<LessThanOrEqual_17_Expression_Expression_bool_MethodInfo_1>b__46_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_LessThanOrEqual_17_Expression_Expression_bool_MethodInfo_1_b__46_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<ListBind_211_MemberInfo_ElementInit_0>b__634_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_ListBind_211_MemberInfo_ElementInit_0_b__634_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<ListBind_211_MemberInfo_ElementInit_1>b__636_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_ListBind_211_MemberInfo_ElementInit_1_b__636_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<ListBind_211_MemberInfo_ElementInit_2>b__638_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_ListBind_211_MemberInfo_ElementInit_2_b__638_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<ListBind_212_MemberInfo_IEnumerableElementInit_0>b__640_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_ListBind_212_MemberInfo_IEnumerableElementInit_0_b__640_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<ListBind_212_MemberInfo_IEnumerableElementInit_1>b__642_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_ListBind_212_MemberInfo_IEnumerableElementInit_1_b__642_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<ListBind_213_MethodInfo_ElementInit_0>b__644_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_ListBind_213_MethodInfo_ElementInit_0_b__644_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<ListBind_213_MethodInfo_ElementInit_1>b__646_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_ListBind_213_MethodInfo_ElementInit_1_b__646_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<ListBind_213_MethodInfo_ElementInit_2>b__648_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_ListBind_213_MethodInfo_ElementInit_2_b__648_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<ListBind_214_MethodInfo_IEnumerableElementInit_0>b__650_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_ListBind_214_MethodInfo_IEnumerableElementInit_0_b__650_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<ListBind_214_MethodInfo_IEnumerableElementInit_1>b__652_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_ListBind_214_MethodInfo_IEnumerableElementInit_1_b__652_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<ListInit_189_NewExpression_Expression_0>b__556_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_ListInit_189_NewExpression_Expression_0_b__556_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<ListInit_189_NewExpression_Expression_1>b__558_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_ListInit_189_NewExpression_Expression_1_b__558_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<ListInit_189_NewExpression_Expression_2>b__560_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_ListInit_189_NewExpression_Expression_2_b__560_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<ListInit_190_NewExpression_IEnumerableExpression_0>b__562_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_ListInit_190_NewExpression_IEnumerableExpression_0_b__562_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<ListInit_190_NewExpression_IEnumerableExpression_1>b__564_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_ListInit_190_NewExpression_IEnumerableExpression_1_b__564_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<ListInit_191_NewExpression_MethodInfo_Expression_0>b__566_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_ListInit_191_NewExpression_MethodInfo_Expression_0_b__566_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<ListInit_191_NewExpression_MethodInfo_Expression_1>b__568_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_ListInit_191_NewExpression_MethodInfo_Expression_1_b__568_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<ListInit_191_NewExpression_MethodInfo_Expression_2>b__570_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_ListInit_191_NewExpression_MethodInfo_Expression_2_b__570_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<ListInit_192_NewExpression_MethodInfo_IEnumerableExpression_0>b__572_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_ListInit_192_NewExpression_MethodInfo_IEnumerableExpression_0_b__572_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<ListInit_192_NewExpression_MethodInfo_IEnumerableExpression_1>b__574_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_ListInit_192_NewExpression_MethodInfo_IEnumerableExpression_1_b__574_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<ListInit_193_NewExpression_ElementInit_0>b__576_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_ListInit_193_NewExpression_ElementInit_0_b__576_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<ListInit_193_NewExpression_ElementInit_1>b__578_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_ListInit_193_NewExpression_ElementInit_1_b__578_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<ListInit_193_NewExpression_ElementInit_2>b__580_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_ListInit_193_NewExpression_ElementInit_2_b__580_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<ListInit_194_NewExpression_IEnumerableElementInit_0>b__582_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_ListInit_194_NewExpression_IEnumerableElementInit_0_b__582_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<ListInit_194_NewExpression_IEnumerableElementInit_1>b__584_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_ListInit_194_NewExpression_IEnumerableElementInit_1_b__584_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Loop_195_Expression_0>b__586_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Loop_195_Expression_0_b__586_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Loop_196_Expression_LabelTarget_0>b__588_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Loop_196_Expression_LabelTarget_0_b__588_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Loop_197_Expression_LabelTarget_LabelTarget_0>b__590_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Loop_197_Expression_LabelTarget_LabelTarget_0_b__590_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<MakeBinary_1_ExpressionType_Expression_Expression_0>b__2_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_MakeBinary_1_ExpressionType_Expression_Expression_0_b__2_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<MakeBinary_2_ExpressionType_Expression_Expression_bool_MethodInfo_0>b__4_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_MakeBinary_2_ExpressionType_Expression_Expression_bool_MethodInfo_0_b__4_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<MakeBinary_3_ExpressionType_Expression_Expression_bool_MethodInfo_LambdaExpression_0>b__6_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_MakeBinary_3_ExpressionType_Expression_Expression_bool_MethodInfo_LambdaExpression_0_b__6_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<MakeCatchBlock_111_System_Type_ParameterExpression_Expression_Expression_0>b__258_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_MakeCatchBlock_111_System_Type_ParameterExpression_Expression_Expression_0_b__258_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<MakeDynamic_133_System_Type_CallSiteBinder_IEnumerableExpression_0>b__318_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_MakeDynamic_133_System_Type_CallSiteBinder_IEnumerableExpression_0_b__318_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<MakeDynamic_133_System_Type_CallSiteBinder_IEnumerableExpression_1>b__320_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_MakeDynamic_133_System_Type_CallSiteBinder_IEnumerableExpression_1_b__320_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<MakeDynamic_134_System_Type_CallSiteBinder_Expression_0>b__322_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_MakeDynamic_134_System_Type_CallSiteBinder_Expression_0_b__322_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<MakeDynamic_135_System_Type_CallSiteBinder_Expression_Expression_0>b__324_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_MakeDynamic_135_System_Type_CallSiteBinder_Expression_Expression_0_b__324_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<MakeDynamic_136_System_Type_CallSiteBinder_Expression_Expression_Expression_0>b__326_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_MakeDynamic_136_System_Type_CallSiteBinder_Expression_Expression_Expression_0_b__326_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<MakeDynamic_137_System_Type_CallSiteBinder_Expression_Expression_Expression_Expression_0>b__328_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_MakeDynamic_137_System_Type_CallSiteBinder_Expression_Expression_Expression_Expression_0_b__328_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<MakeDynamic_138_System_Type_CallSiteBinder_Expression_0>b__330_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_MakeDynamic_138_System_Type_CallSiteBinder_Expression_0_b__330_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<MakeDynamic_138_System_Type_CallSiteBinder_Expression_1>b__332_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_MakeDynamic_138_System_Type_CallSiteBinder_Expression_1_b__332_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<MakeDynamic_138_System_Type_CallSiteBinder_Expression_2>b__334_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_MakeDynamic_138_System_Type_CallSiteBinder_Expression_2_b__334_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<MakeGoto_153_GotoExpressionKind_LabelTarget_Expression_System_Type_0>b__364_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_MakeGoto_153_GotoExpressionKind_LabelTarget_Expression_System_Type_0_b__364_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<MakeIndex_154_Expression_PropertyInfo_IEnumerableExpression_0>b__366_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_MakeIndex_154_Expression_PropertyInfo_IEnumerableExpression_0_b__366_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<MakeIndex_154_Expression_PropertyInfo_IEnumerableExpression_1>b__368_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_MakeIndex_154_Expression_PropertyInfo_IEnumerableExpression_1_b__368_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<MakeMemberAccess_208_Expression_MemberInfo_0>b__622_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_MakeMemberAccess_208_Expression_MemberInfo_0_b__622_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<MakeTry_267_System_Type_Expression_Expression_Expression_IEnumerableCatchBlock_0>b__876_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_MakeTry_267_System_Type_Expression_Expression_Expression_IEnumerableCatchBlock_0_b__876_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<MakeTry_267_System_Type_Expression_Expression_Expression_IEnumerableCatchBlock_1>b__878_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_MakeTry_267_System_Type_Expression_Expression_Expression_IEnumerableCatchBlock_1_b__878_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<MakeUnary_270_ExpressionType_Expression_System_Type_0>b__884_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_MakeUnary_270_ExpressionType_Expression_System_Type_0_b__884_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<MakeUnary_271_ExpressionType_Expression_System_Type_MethodInfo_0>b__886_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_MakeUnary_271_ExpressionType_Expression_System_Type_MethodInfo_0_b__886_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<MemberBind_215_MemberInfo_MemberBinding_0>b__654_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_MemberBind_215_MemberInfo_MemberBinding_0_b__654_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<MemberBind_215_MemberInfo_MemberBinding_1>b__656_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_MemberBind_215_MemberInfo_MemberBinding_1_b__656_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<MemberBind_215_MemberInfo_MemberBinding_2>b__658_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_MemberBind_215_MemberInfo_MemberBinding_2_b__658_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<MemberBind_216_MemberInfo_IEnumerableMemberBinding_0>b__660_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_MemberBind_216_MemberInfo_IEnumerableMemberBinding_0_b__660_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<MemberBind_216_MemberInfo_IEnumerableMemberBinding_1>b__662_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_MemberBind_216_MemberInfo_IEnumerableMemberBinding_1_b__662_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<MemberBind_217_MethodInfo_MemberBinding_0>b__664_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_MemberBind_217_MethodInfo_MemberBinding_0_b__664_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<MemberBind_217_MethodInfo_MemberBinding_1>b__666_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_MemberBind_217_MethodInfo_MemberBinding_1_b__666_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<MemberBind_217_MethodInfo_MemberBinding_2>b__668_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_MemberBind_217_MethodInfo_MemberBinding_2_b__668_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<MemberBind_218_MethodInfo_IEnumerableMemberBinding_0>b__670_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_MemberBind_218_MethodInfo_IEnumerableMemberBinding_0_b__670_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<MemberBind_218_MethodInfo_IEnumerableMemberBinding_1>b__672_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_MemberBind_218_MethodInfo_IEnumerableMemberBinding_1_b__672_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<MemberInit_209_NewExpression_MemberBinding_0>b__624_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_MemberInit_209_NewExpression_MemberBinding_0_b__624_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<MemberInit_209_NewExpression_MemberBinding_1>b__626_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_MemberInit_209_NewExpression_MemberBinding_1_b__626_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<MemberInit_209_NewExpression_MemberBinding_2>b__628_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_MemberInit_209_NewExpression_MemberBinding_2_b__628_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<MemberInit_210_NewExpression_IEnumerableMemberBinding_0>b__630_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_MemberInit_210_NewExpression_IEnumerableMemberBinding_0_b__630_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<MemberInit_210_NewExpression_IEnumerableMemberBinding_1>b__632_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_MemberInit_210_NewExpression_IEnumerableMemberBinding_1_b__632_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Modulo_49_Expression_Expression_0>b__110_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Modulo_49_Expression_Expression_0_b__110_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Modulo_50_Expression_Expression_MethodInfo_0>b__112_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Modulo_50_Expression_Expression_MethodInfo_0_b__112_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<ModuloAssign_51_Expression_Expression_0>b__114_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_ModuloAssign_51_Expression_Expression_0_b__114_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<ModuloAssign_52_Expression_Expression_MethodInfo_0>b__116_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_ModuloAssign_52_Expression_Expression_MethodInfo_0_b__116_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<ModuloAssign_53_Expression_Expression_MethodInfo_LambdaExpression_0>b__118_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_ModuloAssign_53_Expression_Expression_MethodInfo_LambdaExpression_0_b__118_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Multiply_54_Expression_Expression_0>b__120_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Multiply_54_Expression_Expression_0_b__120_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Multiply_55_Expression_Expression_MethodInfo_0>b__122_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Multiply_55_Expression_Expression_MethodInfo_0_b__122_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<MultiplyAssign_56_Expression_Expression_0>b__124_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_MultiplyAssign_56_Expression_Expression_0_b__124_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<MultiplyAssign_57_Expression_Expression_MethodInfo_0>b__126_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_MultiplyAssign_57_Expression_Expression_MethodInfo_0_b__126_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<MultiplyAssign_58_Expression_Expression_MethodInfo_LambdaExpression_0>b__128_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_MultiplyAssign_58_Expression_Expression_MethodInfo_LambdaExpression_0_b__128_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<MultiplyAssignChecked_59_Expression_Expression_0>b__130_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_MultiplyAssignChecked_59_Expression_Expression_0_b__130_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<MultiplyAssignChecked_60_Expression_Expression_MethodInfo_0>b__132_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_MultiplyAssignChecked_60_Expression_Expression_MethodInfo_0_b__132_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<MultiplyAssignChecked_61_Expression_Expression_MethodInfo_LambdaExpression_0>b__134_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_MultiplyAssignChecked_61_Expression_Expression_MethodInfo_LambdaExpression_0_b__134_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<MultiplyChecked_62_Expression_Expression_0>b__136_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_MultiplyChecked_62_Expression_Expression_0_b__136_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<MultiplyChecked_63_Expression_Expression_MethodInfo_0>b__138_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_MultiplyChecked_63_Expression_Expression_MethodInfo_0_b__138_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Negate_272_Expression_0>b__888_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Negate_272_Expression_0_b__888_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Negate_273_Expression_MethodInfo_0>b__890_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Negate_273_Expression_MethodInfo_0_b__890_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<NegateChecked_276_Expression_0>b__896_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_NegateChecked_276_Expression_0_b__896_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<NegateChecked_277_Expression_MethodInfo_0>b__898_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_NegateChecked_277_Expression_MethodInfo_0_b__898_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<New_239_ConstructorInfo_0>b__756_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_New_239_ConstructorInfo_0_b__756_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<New_240_ConstructorInfo_Expression_0>b__758_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_New_240_ConstructorInfo_Expression_0_b__758_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<New_240_ConstructorInfo_Expression_1>b__760_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_New_240_ConstructorInfo_Expression_1_b__760_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<New_240_ConstructorInfo_Expression_2>b__762_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_New_240_ConstructorInfo_Expression_2_b__762_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<New_241_ConstructorInfo_IEnumerableExpression_0>b__764_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_New_241_ConstructorInfo_IEnumerableExpression_0_b__764_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<New_241_ConstructorInfo_IEnumerableExpression_1>b__766_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_New_241_ConstructorInfo_IEnumerableExpression_1_b__766_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<New_242_ConstructorInfo_IEnumerableExpression_IEnumerableMemberInfo_0>b__768_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_New_242_ConstructorInfo_IEnumerableExpression_IEnumerableMemberInfo_0_b__768_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<New_242_ConstructorInfo_IEnumerableExpression_IEnumerableMemberInfo_1>b__770_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_New_242_ConstructorInfo_IEnumerableExpression_IEnumerableMemberInfo_1_b__770_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<New_243_ConstructorInfo_IEnumerableExpression_MemberInfo_0>b__772_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_New_243_ConstructorInfo_IEnumerableExpression_MemberInfo_0_b__772_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<New_243_ConstructorInfo_IEnumerableExpression_MemberInfo_1>b__774_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_New_243_ConstructorInfo_IEnumerableExpression_MemberInfo_1_b__774_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<New_243_ConstructorInfo_IEnumerableExpression_MemberInfo_2>b__776_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_New_243_ConstructorInfo_IEnumerableExpression_MemberInfo_2_b__776_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<New_244_System_Type_0>b__778_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_New_244_System_Type_0_b__778_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<NewArrayBounds_237_System_Type_Expression_0>b__746_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_NewArrayBounds_237_System_Type_Expression_0_b__746_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<NewArrayBounds_237_System_Type_Expression_1>b__748_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_NewArrayBounds_237_System_Type_Expression_1_b__748_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<NewArrayBounds_237_System_Type_Expression_2>b__750_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_NewArrayBounds_237_System_Type_Expression_2_b__750_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<NewArrayBounds_238_System_Type_IEnumerableExpression_0>b__752_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_NewArrayBounds_238_System_Type_IEnumerableExpression_0_b__752_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<NewArrayBounds_238_System_Type_IEnumerableExpression_1>b__754_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_NewArrayBounds_238_System_Type_IEnumerableExpression_1_b__754_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<NewArrayInit_235_System_Type_Expression_0>b__736_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_NewArrayInit_235_System_Type_Expression_0_b__736_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<NewArrayInit_235_System_Type_Expression_1>b__738_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_NewArrayInit_235_System_Type_Expression_1_b__738_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<NewArrayInit_235_System_Type_Expression_2>b__740_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_NewArrayInit_235_System_Type_Expression_2_b__740_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<NewArrayInit_236_System_Type_IEnumerableExpression_0>b__742_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_NewArrayInit_236_System_Type_IEnumerableExpression_0_b__742_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<NewArrayInit_236_System_Type_IEnumerableExpression_1>b__744_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_NewArrayInit_236_System_Type_IEnumerableExpression_1_b__744_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Not_278_Expression_0>b__900_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Not_278_Expression_0_b__900_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Not_279_Expression_MethodInfo_0>b__902_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Not_279_Expression_MethodInfo_0_b__902_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<NotEqual_7_Expression_Expression_0>b__16_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_NotEqual_7_Expression_Expression_0_b__16_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<NotEqual_8_Expression_Expression_bool_MethodInfo_0>b__18_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_NotEqual_8_Expression_Expression_bool_MethodInfo_0_b__18_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<NotEqual_8_Expression_Expression_bool_MethodInfo_1>b__20_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_NotEqual_8_Expression_Expression_bool_MethodInfo_1_b__20_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<OnesComplement_284_Expression_0>b__912_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_OnesComplement_284_Expression_0_b__912_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<OnesComplement_285_Expression_MethodInfo_0>b__914_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_OnesComplement_285_Expression_MethodInfo_0_b__914_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Or_79_Expression_Expression_0>b__170_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Or_79_Expression_Expression_0_b__170_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Or_80_Expression_Expression_MethodInfo_0>b__172_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Or_80_Expression_Expression_MethodInfo_0_b__172_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<OrAssign_81_Expression_Expression_0>b__174_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_OrAssign_81_Expression_Expression_0_b__174_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<OrAssign_82_Expression_Expression_MethodInfo_0>b__176_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_OrAssign_82_Expression_Expression_MethodInfo_0_b__176_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<OrAssign_83_Expression_Expression_MethodInfo_LambdaExpression_0>b__178_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_OrAssign_83_Expression_Expression_MethodInfo_LambdaExpression_0_b__178_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<OrElse_20_Expression_Expression_0>b__52_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_OrElse_20_Expression_Expression_0_b__52_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<OrElse_21_Expression_Expression_MethodInfo_0>b__54_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_OrElse_21_Expression_Expression_MethodInfo_0_b__54_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Parameter_245_System_Type_0>b__780_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Parameter_245_System_Type_0_b__780_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Parameter_247_System_Type_string_0>b__784_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Parameter_247_System_Type_string_0_b__784_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Parameter_247_System_Type_string_1>b__786_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Parameter_247_System_Type_string_1_b__786_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<PostDecrementAssign_308_Expression_0>b__960_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_PostDecrementAssign_308_Expression_0_b__960_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<PostDecrementAssign_309_Expression_MethodInfo_0>b__962_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_PostDecrementAssign_309_Expression_MethodInfo_0_b__962_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<PostIncrementAssign_306_Expression_0>b__956_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_PostIncrementAssign_306_Expression_0_b__956_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<PostIncrementAssign_307_Expression_MethodInfo_0>b__958_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_PostIncrementAssign_307_Expression_MethodInfo_0_b__958_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Power_89_Expression_Expression_0>b__190_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Power_89_Expression_Expression_0_b__190_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Power_90_Expression_Expression_MethodInfo_0>b__192_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Power_90_Expression_Expression_MethodInfo_0_b__192_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<PowerAssign_91_Expression_Expression_0>b__194_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_PowerAssign_91_Expression_Expression_0_b__194_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<PowerAssign_92_Expression_Expression_MethodInfo_0>b__196_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_PowerAssign_92_Expression_Expression_MethodInfo_0_b__196_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<PowerAssign_93_Expression_Expression_MethodInfo_LambdaExpression_0>b__198_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_PowerAssign_93_Expression_Expression_MethodInfo_LambdaExpression_0_b__198_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<PreDecrementAssign_304_Expression_0>b__952_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_PreDecrementAssign_304_Expression_0_b__952_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<PreDecrementAssign_305_Expression_MethodInfo_0>b__954_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_PreDecrementAssign_305_Expression_MethodInfo_0_b__954_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<PreIncrementAssign_302_Expression_0>b__948_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_PreIncrementAssign_302_Expression_0_b__948_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<PreIncrementAssign_303_Expression_MethodInfo_0>b__950_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_PreIncrementAssign_303_Expression_MethodInfo_0_b__950_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Property_157_Expression_string_Expression_0>b__380_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Property_157_Expression_string_Expression_0_b__380_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Property_157_Expression_string_Expression_1>b__382_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Property_157_Expression_string_Expression_1_b__382_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Property_157_Expression_string_Expression_2>b__384_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Property_157_Expression_string_Expression_2_b__384_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Property_157_Expression_string_Expression_3>b__386_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Property_157_Expression_string_Expression_3_b__386_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Property_158_Expression_PropertyInfo_Expression_0>b__388_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Property_158_Expression_PropertyInfo_Expression_0_b__388_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Property_158_Expression_PropertyInfo_Expression_1>b__390_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Property_158_Expression_PropertyInfo_Expression_1_b__390_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Property_158_Expression_PropertyInfo_Expression_2>b__392_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Property_158_Expression_PropertyInfo_Expression_2_b__392_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Property_159_Expression_PropertyInfo_IEnumerableExpression_0>b__394_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Property_159_Expression_PropertyInfo_IEnumerableExpression_0_b__394_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Property_159_Expression_PropertyInfo_IEnumerableExpression_1>b__396_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Property_159_Expression_PropertyInfo_IEnumerableExpression_1_b__396_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Property_203_Expression_string_0>b__606_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Property_203_Expression_string_0_b__606_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Property_203_Expression_string_1>b__608_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Property_203_Expression_string_1_b__608_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Property_204_Expression_System_Type_string_0>b__610_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Property_204_Expression_System_Type_string_0_b__610_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Property_204_Expression_System_Type_string_1>b__612_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Property_204_Expression_System_Type_string_1_b__612_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Property_205_Expression_PropertyInfo_0>b__614_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Property_205_Expression_PropertyInfo_0_b__614_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Property_206_Expression_MethodInfo_0>b__616_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Property_206_Expression_MethodInfo_0_b__616_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<PropertyOrField_207_Expression_string_0>b__618_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_PropertyOrField_207_Expression_string_0_b__618_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<PropertyOrField_207_Expression_string_1>b__620_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_PropertyOrField_207_Expression_string_1_b__620_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Quote_293_Expression_0>b__930_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Quote_293_Expression_0_b__930_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Reduce_124__124>b__294_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Reduce_124__124_b__294_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<ReduceAndCheck_125__125>b__296_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_ReduceAndCheck_125__125_b__296_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<ReduceExtensions_126__126>b__298_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_ReduceExtensions_126__126_b__298_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<ReferenceEqual_6_Expression_Expression_0>b__14_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_ReferenceEqual_6_Expression_Expression_0_b__14_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<ReferenceNotEqual_9_Expression_Expression_0>b__22_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_ReferenceNotEqual_9_Expression_Expression_0_b__22_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Rethrow_294__294>b__932_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Rethrow_294__294_b__932_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Rethrow_295_System_Type_0>b__934_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Rethrow_295_System_Type_0_b__934_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Return_145_LabelTarget_0>b__348_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Return_145_LabelTarget_0_b__348_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Return_146_LabelTarget_System_Type_0>b__350_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Return_146_LabelTarget_System_Type_0_b__350_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Return_147_LabelTarget_Expression_0>b__352_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Return_147_LabelTarget_Expression_0_b__352_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Return_148_LabelTarget_Expression_System_Type_0>b__354_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Return_148_LabelTarget_Expression_System_Type_0_b__354_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<RightShift_69_Expression_Expression_0>b__150_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_RightShift_69_Expression_Expression_0_b__150_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<RightShift_70_Expression_Expression_MethodInfo_0>b__152_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_RightShift_70_Expression_Expression_MethodInfo_0_b__152_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<RightShiftAssign_71_Expression_Expression_0>b__154_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_RightShiftAssign_71_Expression_Expression_0_b__154_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<RightShiftAssign_72_Expression_Expression_MethodInfo_0>b__156_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_RightShiftAssign_72_Expression_Expression_MethodInfo_0_b__156_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<RightShiftAssign_73_Expression_Expression_MethodInfo_LambdaExpression_0>b__158_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_RightShiftAssign_73_Expression_Expression_MethodInfo_LambdaExpression_0_b__158_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<RuntimeVariables_249_ParameterExpression_0>b__792_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_RuntimeVariables_249_ParameterExpression_0_b__792_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<RuntimeVariables_249_ParameterExpression_1>b__794_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_RuntimeVariables_249_ParameterExpression_1_b__794_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<RuntimeVariables_249_ParameterExpression_2>b__796_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_RuntimeVariables_249_ParameterExpression_2_b__796_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<RuntimeVariables_250_IEnumerableParameterExpression_0>b__798_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_RuntimeVariables_250_IEnumerableParameterExpression_0_b__798_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<RuntimeVariables_250_IEnumerableParameterExpression_1>b__800_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_RuntimeVariables_250_IEnumerableParameterExpression_1_b__800_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Subtract_34_Expression_Expression_0>b__80_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Subtract_34_Expression_Expression_0_b__80_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Subtract_35_Expression_Expression_MethodInfo_0>b__82_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Subtract_35_Expression_Expression_MethodInfo_0_b__82_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<SubtractAssign_36_Expression_Expression_0>b__84_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_SubtractAssign_36_Expression_Expression_0_b__84_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<SubtractAssign_37_Expression_Expression_MethodInfo_0>b__86_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_SubtractAssign_37_Expression_Expression_MethodInfo_0_b__86_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<SubtractAssign_38_Expression_Expression_MethodInfo_LambdaExpression_0>b__88_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_SubtractAssign_38_Expression_Expression_MethodInfo_LambdaExpression_0_b__88_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<SubtractAssignChecked_39_Expression_Expression_0>b__90_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_SubtractAssignChecked_39_Expression_Expression_0_b__90_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<SubtractAssignChecked_40_Expression_Expression_MethodInfo_0>b__92_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_SubtractAssignChecked_40_Expression_Expression_MethodInfo_0_b__92_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<SubtractAssignChecked_41_Expression_Expression_MethodInfo_LambdaExpression_0>b__94_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_SubtractAssignChecked_41_Expression_Expression_MethodInfo_LambdaExpression_0_b__94_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<SubtractChecked_42_Expression_Expression_0>b__96_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_SubtractChecked_42_Expression_Expression_0_b__96_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<SubtractChecked_43_Expression_Expression_MethodInfo_0>b__98_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_SubtractChecked_43_Expression_Expression_MethodInfo_0_b__98_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests+<>c::<Switch_253_Expression_SwitchCase_0>b__812_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c_Switch_253_Expression_SwitchCase_0_b__812_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
 }
 
 
@@ -8327,6 +6285,6 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Express
 #pragma warning(pop)
 
 // extern "C" definition for link-time visibility from runtime-entry.cpp
-extern "C" const int kAotMethodCount = 2293;
+extern "C" const int kAotMethodCount = 2254;
 
 extern "C" void ChaosJitRegisterAll() {}

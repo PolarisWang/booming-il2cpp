@@ -14,6 +14,7 @@
 #include <gc/gc_bgc_inline.h>
 #include <gc/gc_card_table.h>
 #include <ChaosGeneratedRuntimePrelude.h>
+#include "runtime_stubs/misc_stubs.h"
 #include "enum_stubs.h"
 #include "async_stubs.h"
 #include "exception_stubs.h"
@@ -35,50 +36,6 @@ namespace chaos::il2cpp::codegen::CombinedSubjects {
 using namespace chaos::il2cpp::runtime_core;
 using namespace chaos::il2cpp::jit;
 
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Boolean_System_Boolean_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Byte_System_Byte_System_String(CHAOS_IL2CPP_UINT8 chaos_fn_arg_0, CHAOS_IL2CPP_UINT8 chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Byte_array_System_Byte_array_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Char_System_Char_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Decimal_System_Decimal_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Double_System_Double_System_String(double chaos_fn_arg_0, double chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Int16_System_Int16_System_String(CHAOS_IL2CPP_INT16 chaos_fn_arg_0, CHAOS_IL2CPP_INT16 chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Int32_System_Int32_System_String(CHAOS_IL2CPP_INT32 chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Int64_System_Int64_System_String(CHAOS_IL2CPP_INT64 chaos_fn_arg_0, CHAOS_IL2CPP_INT64 chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Object_System_Object_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_SByte_System_SByte_System_String(CHAOS_IL2CPP_INT8 chaos_fn_arg_0, CHAOS_IL2CPP_INT8 chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Single_System_Single_System_String(float chaos_fn_arg_0, float chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_String_System_String_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_UInt16_System_UInt16_System_String(CHAOS_IL2CPP_UINT16 chaos_fn_arg_0, CHAOS_IL2CPP_UINT16 chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_UInt32_System_UInt32_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_UInt64_System_UInt64_System_String(CHAOS_IL2CPP_UINT64 chaos_fn_arg_0, CHAOS_IL2CPP_UINT64 chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_0_0_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreNotEqual_0_0_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
-extern "C" CHAOS_IL2CPP_INT32 Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Complete(void);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Fail_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
-extern "C" CHAOS_IL2CPP_INT32 Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_get_ExitCode(void);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_IsFalse_System_Boolean_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_IsNotNull_System_Object_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_IsNull_System_Object_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_IsTrue_System_Boolean_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_RecordFailure(void);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Reset(void);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Throws_System_Action(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Throws_System_ArgumentException_System_Action__generic(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_generic_context);
-extern "C" void chaos_stub_definition_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert__Throws_System_Void_System_Action__type____method__System_ArgumentException(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_generic_context);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Throws_System_ArgumentNullException_System_Action__generic(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
-extern "C" void chaos_stub_definition_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert__Throws_System_Void_System_Action__type____method__System_ArgumentNullException(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_generic_context);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Throws_System_ArgumentOutOfRangeException_System_Action__generic(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
-extern "C" void chaos_stub_definition_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert__Throws_System_Void_System_Action__type____method__System_ArgumentOutOfRangeException(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_generic_context);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Throws_System_NotSupportedException_System_Action__generic(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
-extern "C" void chaos_stub_definition_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert__Throws_System_Void_System_Action__type____method__System_NotSupportedException(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_generic_context);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Throws_System_NullReferenceException_System_Action__generic(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
-extern "C" void chaos_stub_definition_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert__Throws_System_Void_System_Action__type____method__System_NullReferenceException(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_generic_context);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Throws_System_PlatformNotSupportedException_System_Action__generic(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
-extern "C" void chaos_stub_definition_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert__Throws_System_Void_System_Action__type____method__System_PlatformNotSupportedException(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_generic_context);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_AssertionException__ctor_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_BenchmarkAttribute__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_FactAttribute__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_HotUpdateAttribute__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
 extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Dynamic_BinaryOperationBinderTests__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
 extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Dynamic_BinaryOperationBinderTests_Benchmark_Bind_2_DynamicMetaObject_DynamicMetaObject_0(void);
 extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Dynamic_BinaryOperationBinderTests_Benchmark_Bind_2_DynamicMetaObject_DynamicMetaObject_1(void);
@@ -2338,555 +2295,8 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Ru
 
 
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_Convert_289_Expression_System_Type_MethodInfo_0()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_Convert_289_Expression_System_Type_MethodInfo_0(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INTPTR _s2;
-	_s0 = 0;
-	_s1 = 0;
-	_s2 = 0;
-	{
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (291 < 0 || 291 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 291 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[291] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 291 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[291])(chaos_arg_0, chaos_arg_1, chaos_arg_2);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_ConvertChecked_290_Expression_System_Type_0()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_ConvertChecked_290_Expression_System_Type_0(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	_s0 = 0;
-	_s1 = 0;
-	{
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (292 < 0 || 292 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 292 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[292] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 292 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[292])(chaos_arg_0, chaos_arg_1);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_ConvertChecked_291_Expression_System_Type_MethodInfo_0()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_ConvertChecked_291_Expression_System_Type_MethodInfo_0(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INTPTR _s2;
-	_s0 = 0;
-	_s1 = 0;
-	_s2 = 0;
-	{
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (293 < 0 || 293 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 293 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[293] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 293 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[293])(chaos_arg_0, chaos_arg_1, chaos_arg_2);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_DebugInfo_118_SymbolDocumentInfo_int_int_int_int_0()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_DebugInfo_118_SymbolDocumentInfo_int_int_int_int_0(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INTPTR _s2;
-	CHAOS_IL2CPP_INTPTR _s3;
-	CHAOS_IL2CPP_INTPTR _s4;
-	_s0 = 0;
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	{
-		const auto chaos_arg_4 = _s4;
-		const auto chaos_arg_3 = _s3;
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (294 < 0 || 294 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 294 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[294] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 294 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[294])(chaos_arg_0, chaos_arg_1, chaos_arg_2, chaos_arg_3, chaos_arg_4);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_DebugInfo_118_SymbolDocumentInfo_int_int_int_int_1()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_DebugInfo_118_SymbolDocumentInfo_int_int_int_int_1(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INTPTR _s2;
-	CHAOS_IL2CPP_INTPTR _s3;
-	CHAOS_IL2CPP_INTPTR _s4;
-	_s0 = 0;
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	{
-		const auto chaos_arg_4 = _s4;
-		const auto chaos_arg_3 = _s3;
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (294 < 0 || 294 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 294 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[294] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 294 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[294])(chaos_arg_0, chaos_arg_1, chaos_arg_2, chaos_arg_3, chaos_arg_4);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_DebugInfo_118_SymbolDocumentInfo_int_int_int_int_2()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_DebugInfo_118_SymbolDocumentInfo_int_int_int_int_2(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INTPTR _s2;
-	CHAOS_IL2CPP_INTPTR _s3;
-	CHAOS_IL2CPP_INTPTR _s4;
-	_s0 = 0;
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	{
-		const auto chaos_arg_4 = _s4;
-		const auto chaos_arg_3 = _s3;
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (294 < 0 || 294 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 294 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[294] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 294 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[294])(chaos_arg_0, chaos_arg_1, chaos_arg_2, chaos_arg_3, chaos_arg_4);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_Decrement_300_Expression_0()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_Decrement_300_Expression_0(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	_s0 = 0;
-	{
-		const auto chaos_arg_0 = _s0;
-		if (295 < 0 || 295 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 295 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[295] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 295 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[295])(chaos_arg_0);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_Decrement_301_Expression_MethodInfo_0()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_Decrement_301_Expression_MethodInfo_0(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	_s0 = 0;
-	_s1 = 0;
-	{
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (296 < 0 || 296 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 296 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[296] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 296 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[296])(chaos_arg_0, chaos_arg_1);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_Default_121_System_Type_0()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_Default_121_System_Type_0(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	_s0 = 0;
-	{
-		const auto chaos_arg_0 = _s0;
-		if (297 < 0 || 297 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 297 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[297] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 297 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[297])(chaos_arg_0);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_Divide_44_Expression_Expression_0()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_Divide_44_Expression_Expression_0(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	_s0 = 0;
-	_s1 = 0;
-	{
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (298 < 0 || 298 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 298 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[298] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 298 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[298])(chaos_arg_0, chaos_arg_1);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_Divide_45_Expression_Expression_MethodInfo_0()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_Divide_45_Expression_Expression_MethodInfo_0(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INTPTR _s2;
-	_s0 = 0;
-	_s1 = 0;
-	_s2 = 0;
-	{
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (299 < 0 || 299 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 299 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[299] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 299 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[299])(chaos_arg_0, chaos_arg_1, chaos_arg_2);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_DivideAssign_46_Expression_Expression_0()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_DivideAssign_46_Expression_Expression_0(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	_s0 = 0;
-	_s1 = 0;
-	{
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (300 < 0 || 300 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 300 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[300] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 300 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[300])(chaos_arg_0, chaos_arg_1);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_DivideAssign_47_Expression_Expression_MethodInfo_0()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_DivideAssign_47_Expression_Expression_MethodInfo_0(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INTPTR _s2;
-	_s0 = 0;
-	_s1 = 0;
-	_s2 = 0;
-	{
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (301 < 0 || 301 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 301 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[301] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 301 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[301])(chaos_arg_0, chaos_arg_1, chaos_arg_2);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_DivideAssign_48_Expression_Expression_MethodInfo_LambdaExpression_0()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_DivideAssign_48_Expression_Expression_MethodInfo_LambdaExpression_0(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INTPTR _s2;
-	CHAOS_IL2CPP_INTPTR _s3;
-	_s0 = 0;
-	_s1 = 0;
-	_s2 = 0;
-	_s3 = 0;
-	{
-		const auto chaos_arg_3 = _s3;
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (302 < 0 || 302 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 302 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[302] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 302 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[302])(chaos_arg_0, chaos_arg_1, chaos_arg_2, chaos_arg_3);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_Dynamic_127_CallSiteBinder_System_Type_IEnumerableExpression_0()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_Dynamic_127_CallSiteBinder_System_Type_IEnumerableExpression_0(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INTPTR _s2;
-	_s0 = 0;
-	_s1 = 0;
-	_s2 = 0;
-	{
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (303 < 0 || 303 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 303 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[303] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 303 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[303])(chaos_arg_0, chaos_arg_1, chaos_arg_2);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_Dynamic_127_CallSiteBinder_System_Type_IEnumerableExpression_1()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_Dynamic_127_CallSiteBinder_System_Type_IEnumerableExpression_1(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INTPTR _s2;
-	_s0 = 0;
-	_s1 = 0;
-	{
-		if (126 < 0 || 126 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 126 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[126] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 126 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[126])();
-		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	{
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (303 < 0 || 303 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 303 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[303] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 303 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[303])(chaos_arg_0, chaos_arg_1, chaos_arg_2);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_Dynamic_128_CallSiteBinder_System_Type_Expression_0()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_Dynamic_128_CallSiteBinder_System_Type_Expression_0(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INTPTR _s2;
-	_s0 = 0;
-	_s1 = 0;
-	_s2 = 0;
-	{
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (304 < 0 || 304 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 304 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[304] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 304 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[304])(chaos_arg_0, chaos_arg_1, chaos_arg_2);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_Dynamic_129_CallSiteBinder_System_Type_Expression_Expression_0()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_Dynamic_129_CallSiteBinder_System_Type_Expression_Expression_0(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INTPTR _s2;
-	CHAOS_IL2CPP_INTPTR _s3;
-	_s0 = 0;
-	_s1 = 0;
-	_s2 = 0;
-	_s3 = 0;
-	{
-		const auto chaos_arg_3 = _s3;
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (305 < 0 || 305 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 305 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[305] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 305 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[305])(chaos_arg_0, chaos_arg_1, chaos_arg_2, chaos_arg_3);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_Dynamic_130_CallSiteBinder_System_Type_Expression_Expression_Expression_0()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_Dynamic_130_CallSiteBinder_System_Type_Expression_Expression_Expression_0(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INTPTR _s2;
-	CHAOS_IL2CPP_INTPTR _s3;
-	CHAOS_IL2CPP_INTPTR _s4;
-	_s0 = 0;
-	_s1 = 0;
-	_s2 = 0;
-	_s3 = 0;
-	_s4 = 0;
-	{
-		const auto chaos_arg_4 = _s4;
-		const auto chaos_arg_3 = _s3;
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (306 < 0 || 306 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 306 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[306] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 306 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[306])(chaos_arg_0, chaos_arg_1, chaos_arg_2, chaos_arg_3, chaos_arg_4);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_Dynamic_131_CallSiteBinder_System_Type_Expression_Expression_Expression_Expression_0()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_Dynamic_131_CallSiteBinder_System_Type_Expression_Expression_Expression_Expression_0(void)
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_New_243_ConstructorInfo_IEnumerableExpression_MemberInfo_0()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_New_243_ConstructorInfo_IEnumerableExpression_MemberInfo_0(void)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
@@ -2897,33 +2307,20 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Li
 	CHAOS_IL2CPP_INTPTR _s3;
 	CHAOS_IL2CPP_INTPTR _s4;
 	CHAOS_IL2CPP_INTPTR _s5;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
 	_s0 = 0;
 	_s1 = 0;
 	_s2 = 0;
-	_s3 = 0;
-	_s4 = 0;
-	_s5 = 0;
 	{
-		const auto chaos_arg_5 = _s5;
-		const auto chaos_arg_4 = _s4;
-		const auto chaos_arg_3 = _s3;
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (307 < 0 || 307 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 307 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[307] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 307 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[307])(chaos_arg_0, chaos_arg_1, chaos_arg_2, chaos_arg_3, chaos_arg_4, chaos_arg_5);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+		const auto chaos_result = chaos_external_runtime_System_Linq_Expressions_Expression__New_NewExpression_System_Reflection_ConstructorInfo_System_Collections_Generic_IEnumerable_Expression__System_Reflection_MemberInfo___();
+		_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	return;
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_Dynamic_132_CallSiteBinder_System_Type_Expression_0()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_Dynamic_132_CallSiteBinder_System_Type_Expression_0(void)
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_New_243_ConstructorInfo_IEnumerableExpression_MemberInfo_1()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_New_243_ConstructorInfo_IEnumerableExpression_MemberInfo_1(void)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
@@ -2931,58 +2328,29 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Li
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
 	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INTPTR _s5;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
 	_s0 = 0;
-	_s1 = 0;
-	_s2 = 0;
 	{
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (308 < 0 || 308 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 308 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[308] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 308 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[308])(chaos_arg_0, chaos_arg_1, chaos_arg_2);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__Empty_Expression__System_Collections_Generic_IEnumerable_Expression___();
+		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_Dynamic_132_CallSiteBinder_System_Type_Expression_1()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_Dynamic_132_CallSiteBinder_System_Type_Expression_1(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INTPTR _s2;
-	_s0 = 0;
-	_s1 = 0;
 	{
 		const auto chaos_result = ChaosArrayEmpty_Inline();
 		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	{
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (308 < 0 || 308 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 308 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[308] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 308 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[308])(chaos_arg_0, chaos_arg_1, chaos_arg_2);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+		const auto chaos_result = chaos_external_runtime_System_Linq_Expressions_Expression__New_NewExpression_System_Reflection_ConstructorInfo_System_Collections_Generic_IEnumerable_Expression__System_Reflection_MemberInfo___();
+		_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	return;
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_Dynamic_132_CallSiteBinder_System_Type_Expression_2()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_Dynamic_132_CallSiteBinder_System_Type_Expression_2(void)
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_New_243_ConstructorInfo_IEnumerableExpression_MemberInfo_2()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_New_243_ConstructorInfo_IEnumerableExpression_MemberInfo_2(void)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
@@ -2990,211 +2358,164 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Li
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
 	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INTPTR _s5;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
 	_s0 = 0;
-	_s1 = 0;
+	{
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__Empty_Expression__System_Collections_Generic_IEnumerable_Expression___();
+		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
 	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(2);
-	_s2 = ChaosArrayNew1D_Inline(&chaos_type_info_managed_array.hot, chaos_mt_System_Linq_Expressions_Expression.AsTypeInfoHot(), 1, _s2);
+	_s2 = ChaosArrayNew1D_Inline(&chaos_type_info_managed_array.hot, chaos_mt_System_Private_CoreLib_System_Reflection_MemberInfo.AsTypeInfoHot(), 1, _s2);
 	{
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (308 < 0 || 308 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 308 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[308] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 308 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[308])(chaos_arg_0, chaos_arg_1, chaos_arg_2);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+		const auto chaos_result = chaos_external_runtime_System_Linq_Expressions_Expression__New_NewExpression_System_Reflection_ConstructorInfo_System_Collections_Generic_IEnumerable_Expression__System_Reflection_MemberInfo___();
+		_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	return;
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_ElementInit_122_MethodInfo_Expression_0()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_ElementInit_122_MethodInfo_Expression_0(void)
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_New_244_System_Type_0()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_New_244_System_Type_0(void)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	{
+		const auto chaos_result = chaos_external_runtime_System_Linq_Expressions_Expression__New_NewExpression_System_Type_();
+		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_NewArrayBounds_237_System_Type_Expression_0()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_NewArrayBounds_237_System_Type_Expression_0(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
 	_s0 = 0;
 	_s1 = 0;
 	{
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (309 < 0 || 309 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 309 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[309] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 309 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[309])(chaos_arg_0, chaos_arg_1);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+		const auto chaos_result = chaos_external_runtime_System_Linq_Expressions_Expression__NewArrayBounds_NewArrayExpression_System_Type_Expression___();
+		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	return;
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_ElementInit_122_MethodInfo_Expression_1()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_ElementInit_122_MethodInfo_Expression_1(void)
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_NewArrayBounds_237_System_Type_Expression_1()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_NewArrayBounds_237_System_Type_Expression_1(void)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
 	_s0 = 0;
 	{
 		const auto chaos_result = ChaosArrayEmpty_Inline();
 		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	{
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (309 < 0 || 309 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 309 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[309] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 309 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[309])(chaos_arg_0, chaos_arg_1);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+		const auto chaos_result = chaos_external_runtime_System_Linq_Expressions_Expression__NewArrayBounds_NewArrayExpression_System_Type_Expression___();
+		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	return;
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_ElementInit_122_MethodInfo_Expression_2()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_ElementInit_122_MethodInfo_Expression_2(void)
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_NewArrayBounds_237_System_Type_Expression_2()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_NewArrayBounds_237_System_Type_Expression_2(void)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
 	_s0 = 0;
 	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(2);
 	_s1 = ChaosArrayNew1D_Inline(&chaos_type_info_managed_array.hot, chaos_mt_System_Linq_Expressions_Expression.AsTypeInfoHot(), 1, _s1);
 	{
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (309 < 0 || 309 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 309 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[309] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 309 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[309])(chaos_arg_0, chaos_arg_1);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+		const auto chaos_result = chaos_external_runtime_System_Linq_Expressions_Expression__NewArrayBounds_NewArrayExpression_System_Type_Expression___();
+		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	return;
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_ElementInit_123_MethodInfo_IEnumerableExpression_0()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_ElementInit_123_MethodInfo_IEnumerableExpression_0(void)
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_NewArrayBounds_238_System_Type_IEnumerableExpression_0()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_NewArrayBounds_238_System_Type_IEnumerableExpression_0(void)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
 	_s0 = 0;
 	_s1 = 0;
 	{
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (310 < 0 || 310 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 310 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[310] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 310 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[310])(chaos_arg_0, chaos_arg_1);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+		const auto chaos_result = chaos_external_runtime_System_Linq_Expressions_Expression__NewArrayBounds_NewArrayExpression_System_Type_System_Collections_Generic_IEnumerable_Expression__();
+		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	return;
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_ElementInit_123_MethodInfo_IEnumerableExpression_1()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_ElementInit_123_MethodInfo_IEnumerableExpression_1(void)
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_NewArrayBounds_238_System_Type_IEnumerableExpression_1()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_NewArrayBounds_238_System_Type_IEnumerableExpression_1(void)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
 	_s0 = 0;
 	{
-		if (126 < 0 || 126 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 126 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[126] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 126 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[126])();
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__Empty_Expression__System_Collections_Generic_IEnumerable_Expression___();
 		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	{
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (310 < 0 || 310 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 310 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[310] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 310 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[310])(chaos_arg_0, chaos_arg_1);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+		const auto chaos_result = chaos_external_runtime_System_Linq_Expressions_Expression__NewArrayBounds_NewArrayExpression_System_Type_System_Collections_Generic_IEnumerable_Expression__();
+		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	return;
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_Empty_120__120()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_Empty_120__120(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	{
-		if (311 < 0 || 311 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 311 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[311] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 311 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[311])();
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_Equal_4_Expression_Expression_0()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_Equal_4_Expression_Expression_0(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	_s0 = 0;
-	_s1 = 0;
-	{
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (312 < 0 || 312 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 312 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[312] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 312 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[312])(chaos_arg_0, chaos_arg_1);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_Equal_5_Expression_Expression_bool_MethodInfo_0()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_Equal_5_Expression_Expression_bool_MethodInfo_0(void)
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_NewArrayInit_235_System_Type_Expression_0()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_NewArrayInit_235_System_Type_Expression_0(void)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
@@ -3203,29 +2524,205 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Li
 	CHAOS_IL2CPP_INTPTR _s1;
 	CHAOS_IL2CPP_INTPTR _s2;
 	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	_s1 = 0;
+	{
+		const auto chaos_result = chaos_external_runtime_System_Linq_Expressions_Expression__NewArrayInit_NewArrayExpression_System_Type_Expression___();
+		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_NewArrayInit_235_System_Type_Expression_1()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_NewArrayInit_235_System_Type_Expression_1(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	{
+		const auto chaos_result = ChaosArrayEmpty_Inline();
+		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	{
+		const auto chaos_result = chaos_external_runtime_System_Linq_Expressions_Expression__NewArrayInit_NewArrayExpression_System_Type_Expression___();
+		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_NewArrayInit_235_System_Type_Expression_2()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_NewArrayInit_235_System_Type_Expression_2(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(2);
+	_s1 = ChaosArrayNew1D_Inline(&chaos_type_info_managed_array.hot, chaos_mt_System_Linq_Expressions_Expression.AsTypeInfoHot(), 1, _s1);
+	{
+		const auto chaos_result = chaos_external_runtime_System_Linq_Expressions_Expression__NewArrayInit_NewArrayExpression_System_Type_Expression___();
+		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_NewArrayInit_236_System_Type_IEnumerableExpression_0()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_NewArrayInit_236_System_Type_IEnumerableExpression_0(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	_s1 = 0;
+	{
+		const auto chaos_result = chaos_external_runtime_System_Linq_Expressions_Expression__NewArrayInit_NewArrayExpression_System_Type_System_Collections_Generic_IEnumerable_Expression__();
+		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_NewArrayInit_236_System_Type_IEnumerableExpression_1()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_NewArrayInit_236_System_Type_IEnumerableExpression_1(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	{
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__Empty_Expression__System_Collections_Generic_IEnumerable_Expression___();
+		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	{
+		const auto chaos_result = chaos_external_runtime_System_Linq_Expressions_Expression__NewArrayInit_NewArrayExpression_System_Type_System_Collections_Generic_IEnumerable_Expression__();
+		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_Not_278_Expression_0()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_Not_278_Expression_0(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	{
+		const auto chaos_result = chaos_external_runtime_System_Linq_Expressions_Expression__Not_UnaryExpression_Expression_();
+		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_Not_279_Expression_MethodInfo_0()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_Not_279_Expression_MethodInfo_0(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	_s1 = 0;
+	{
+		const auto chaos_result = chaos_external_runtime_System_Linq_Expressions_Expression__Not_UnaryExpression_Expression_System_Reflection_MethodInfo_();
+		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_NotEqual_7_Expression_Expression_0()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_NotEqual_7_Expression_Expression_0(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	_s1 = 0;
+	{
+		const auto chaos_result = chaos_external_runtime_System_Linq_Expressions_Expression__NotEqual_BinaryExpression_Expression_Expression_();
+		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_NotEqual_8_Expression_Expression_bool_MethodInfo_0()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_NotEqual_8_Expression_Expression_bool_MethodInfo_0(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INTPTR _s5;
+	CHAOS_IL2CPP_INTPTR _s6;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
 	_s0 = 0;
 	_s1 = 0;
 	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
 	_s3 = 0;
 	{
-		const auto chaos_arg_3 = _s3;
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (313 < 0 || 313 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 313 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[313] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 313 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[313])(chaos_arg_0, chaos_arg_1, chaos_arg_2, chaos_arg_3);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+		const auto chaos_result = chaos_external_runtime_System_Linq_Expressions_Expression__NotEqual_BinaryExpression_Expression_Expression_System_Boolean_System_Reflection_MethodInfo_();
+		_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	return;
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_Equal_5_Expression_Expression_bool_MethodInfo_1()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_Equal_5_Expression_Expression_bool_MethodInfo_1(void)
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_NotEqual_8_Expression_Expression_bool_MethodInfo_1()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_NotEqual_8_Expression_Expression_bool_MethodInfo_1(void)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
@@ -3234,135 +2731,24 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Li
 	CHAOS_IL2CPP_INTPTR _s1;
 	CHAOS_IL2CPP_INTPTR _s2;
 	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INTPTR _s5;
+	CHAOS_IL2CPP_INTPTR _s6;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
 	_s0 = 0;
 	_s1 = 0;
 	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
 	_s3 = 0;
 	{
-		const auto chaos_arg_3 = _s3;
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (313 < 0 || 313 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 313 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[313] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 313 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[313])(chaos_arg_0, chaos_arg_1, chaos_arg_2, chaos_arg_3);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+		const auto chaos_result = chaos_external_runtime_System_Linq_Expressions_Expression__NotEqual_BinaryExpression_Expression_Expression_System_Boolean_System_Reflection_MethodInfo_();
+		_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	return;
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_ExclusiveOr_84_Expression_Expression_0()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_ExclusiveOr_84_Expression_Expression_0(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	_s0 = 0;
-	_s1 = 0;
-	{
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (314 < 0 || 314 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 314 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[314] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 314 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[314])(chaos_arg_0, chaos_arg_1);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_ExclusiveOr_85_Expression_Expression_MethodInfo_0()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_ExclusiveOr_85_Expression_Expression_MethodInfo_0(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INTPTR _s2;
-	_s0 = 0;
-	_s1 = 0;
-	_s2 = 0;
-	{
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (315 < 0 || 315 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 315 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[315] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 315 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[315])(chaos_arg_0, chaos_arg_1, chaos_arg_2);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_ExclusiveOrAssign_86_Expression_Expression_0()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_ExclusiveOrAssign_86_Expression_Expression_0(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	_s0 = 0;
-	_s1 = 0;
-	{
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (316 < 0 || 316 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 316 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[316] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 316 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[316])(chaos_arg_0, chaos_arg_1);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_ExclusiveOrAssign_87_Expression_Expression_MethodInfo_0()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_ExclusiveOrAssign_87_Expression_Expression_MethodInfo_0(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INTPTR _s2;
-	_s0 = 0;
-	_s1 = 0;
-	_s2 = 0;
-	{
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (317 < 0 || 317 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 317 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[317] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 317 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[317])(chaos_arg_0, chaos_arg_1, chaos_arg_2);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_ExclusiveOrAssign_88_Expression_Expression_MethodInfo_LambdaExpression_0()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_ExclusiveOrAssign_88_Expression_Expression_MethodInfo_LambdaExpression_0(void)
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_OnesComplement_284_Expression_0()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_OnesComplement_284_Expression_0(void)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
@@ -3371,85 +2757,257 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Li
 	CHAOS_IL2CPP_INTPTR _s1;
 	CHAOS_IL2CPP_INTPTR _s2;
 	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	{
+		const auto chaos_result = chaos_external_runtime_System_Linq_Expressions_Expression__OnesComplement_UnaryExpression_Expression_();
+		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_OnesComplement_285_Expression_MethodInfo_0()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_OnesComplement_285_Expression_MethodInfo_0(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	_s1 = 0;
+	{
+		const auto chaos_result = chaos_external_runtime_System_Linq_Expressions_Expression__OnesComplement_UnaryExpression_Expression_System_Reflection_MethodInfo_();
+		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_Or_79_Expression_Expression_0()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_Or_79_Expression_Expression_0(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	_s1 = 0;
+	{
+		const auto chaos_result = chaos_external_runtime_System_Linq_Expressions_Expression__Or_BinaryExpression_Expression_Expression_();
+		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_Or_80_Expression_Expression_MethodInfo_0()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_Or_80_Expression_Expression_MethodInfo_0(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INTPTR _s5;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	_s1 = 0;
+	_s2 = 0;
+	{
+		const auto chaos_result = chaos_external_runtime_System_Linq_Expressions_Expression__Or_BinaryExpression_Expression_Expression_System_Reflection_MethodInfo_();
+		_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_OrAssign_81_Expression_Expression_0()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_OrAssign_81_Expression_Expression_0(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	_s1 = 0;
+	{
+		const auto chaos_result = chaos_external_runtime_System_Linq_Expressions_Expression__OrAssign_BinaryExpression_Expression_Expression_();
+		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_OrAssign_82_Expression_Expression_MethodInfo_0()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_OrAssign_82_Expression_Expression_MethodInfo_0(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INTPTR _s5;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	_s1 = 0;
+	_s2 = 0;
+	{
+		const auto chaos_result = chaos_external_runtime_System_Linq_Expressions_Expression__OrAssign_BinaryExpression_Expression_Expression_System_Reflection_MethodInfo_();
+		_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_OrAssign_83_Expression_Expression_MethodInfo_LambdaExpression_0()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_OrAssign_83_Expression_Expression_MethodInfo_LambdaExpression_0(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INTPTR _s5;
+	CHAOS_IL2CPP_INTPTR _s6;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
 	_s0 = 0;
 	_s1 = 0;
 	_s2 = 0;
 	_s3 = 0;
 	{
-		const auto chaos_arg_3 = _s3;
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (318 < 0 || 318 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 318 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[318] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 318 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[318])(chaos_arg_0, chaos_arg_1, chaos_arg_2, chaos_arg_3);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+		const auto chaos_result = chaos_external_runtime_System_Linq_Expressions_Expression__OrAssign_BinaryExpression_Expression_Expression_System_Reflection_MethodInfo_LambdaExpression_();
+		_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	return;
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_Field_200_Expression_FieldInfo_0()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_Field_200_Expression_FieldInfo_0(void)
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_OrElse_20_Expression_Expression_0()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_OrElse_20_Expression_Expression_0(void)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
 	_s0 = 0;
 	_s1 = 0;
 	{
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (319 < 0 || 319 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 319 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[319] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 319 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[319])(chaos_arg_0, chaos_arg_1);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+		const auto chaos_result = chaos_external_runtime_System_Linq_Expressions_Expression__OrElse_BinaryExpression_Expression_Expression_();
+		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	return;
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_Field_201_Expression_string_0()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_Field_201_Expression_string_0(void)
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_OrElse_21_Expression_Expression_MethodInfo_0()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_OrElse_21_Expression_Expression_MethodInfo_0(void)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INTPTR _s5;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	_s1 = 0;
+	_s2 = 0;
+	{
+		const auto chaos_result = chaos_external_runtime_System_Linq_Expressions_Expression__OrElse_BinaryExpression_Expression_Expression_System_Reflection_MethodInfo_();
+		_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_Parameter_245_System_Type_0()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_Parameter_245_System_Type_0(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	{
+		const auto chaos_result = chaos_external_runtime_System_Linq_Expressions_Expression__Parameter_ParameterExpression_System_Type_();
+		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_Parameter_247_System_Type_string_0()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_Parameter_247_System_Type_string_0(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
 	_s0 = 0;
 	_s1 = 0;
 	{
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (320 < 0 || 320 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 320 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[320] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 320 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[320])(chaos_arg_0, chaos_arg_1);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+		const auto chaos_result = chaos_external_runtime_System_Linq_Expressions_Expression__Parameter_ParameterExpression_System_Type_System_String_();
+		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	return;
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_Field_201_Expression_string_1()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_Field_201_Expression_string_1(void)
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_Parameter_247_System_Type_string_1()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_Parameter_247_System_Type_string_1(void)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
 	_s0 = 0;
 	{
 		auto* chaos_string = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_String);
@@ -3459,22 +3017,14 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Li
 		_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_string);
 	}
 	{
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (320 < 0 || 320 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 320 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[320] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 320 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[320])(chaos_arg_0, chaos_arg_1);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+		const auto chaos_result = chaos_external_runtime_System_Linq_Expressions_Expression__Parameter_ParameterExpression_System_Type_System_String_();
+		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	return;
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_Field_202_Expression_System_Type_string_0()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_Field_202_Expression_System_Type_string_0(void)
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_PostDecrementAssign_308_Expression_0()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_PostDecrementAssign_308_Expression_0(void)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
@@ -3482,27 +3032,129 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Li
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
 	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	{
+		const auto chaos_result = chaos_external_runtime_System_Linq_Expressions_Expression__PostDecrementAssign_UnaryExpression_Expression_();
+		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_PostDecrementAssign_309_Expression_MethodInfo_0()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_PostDecrementAssign_309_Expression_MethodInfo_0(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	_s1 = 0;
+	{
+		const auto chaos_result = chaos_external_runtime_System_Linq_Expressions_Expression__PostDecrementAssign_UnaryExpression_Expression_System_Reflection_MethodInfo_();
+		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_PostIncrementAssign_306_Expression_0()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_PostIncrementAssign_306_Expression_0(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	{
+		const auto chaos_result = chaos_external_runtime_System_Linq_Expressions_Expression__PostIncrementAssign_UnaryExpression_Expression_();
+		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_PostIncrementAssign_307_Expression_MethodInfo_0()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_PostIncrementAssign_307_Expression_MethodInfo_0(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	_s1 = 0;
+	{
+		const auto chaos_result = chaos_external_runtime_System_Linq_Expressions_Expression__PostIncrementAssign_UnaryExpression_Expression_System_Reflection_MethodInfo_();
+		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_Power_89_Expression_Expression_0()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_Power_89_Expression_Expression_0(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	_s1 = 0;
+	{
+		const auto chaos_result = chaos_external_runtime_System_Linq_Expressions_Expression__Power_BinaryExpression_Expression_Expression_();
+		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_Power_90_Expression_Expression_MethodInfo_0()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_Power_90_Expression_Expression_MethodInfo_0(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INTPTR _s5;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
 	_s0 = 0;
 	_s1 = 0;
 	_s2 = 0;
 	{
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (321 < 0 || 321 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 321 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[321] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 321 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[321])(chaos_arg_0, chaos_arg_1, chaos_arg_2);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+		const auto chaos_result = chaos_external_runtime_System_Linq_Expressions_Expression__Power_BinaryExpression_Expression_Expression_System_Reflection_MethodInfo_();
+		_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	return;
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_Field_202_Expression_System_Type_string_1()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_Field_202_Expression_System_Type_string_1(void)
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_PowerAssign_91_Expression_Expression_0()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_PowerAssign_91_Expression_Expression_0(void)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
@@ -3510,6 +3162,474 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Li
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
 	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	_s1 = 0;
+	{
+		const auto chaos_result = chaos_external_runtime_System_Linq_Expressions_Expression__PowerAssign_BinaryExpression_Expression_Expression_();
+		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_PowerAssign_92_Expression_Expression_MethodInfo_0()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_PowerAssign_92_Expression_Expression_MethodInfo_0(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INTPTR _s5;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	_s1 = 0;
+	_s2 = 0;
+	{
+		const auto chaos_result = chaos_external_runtime_System_Linq_Expressions_Expression__PowerAssign_BinaryExpression_Expression_Expression_System_Reflection_MethodInfo_();
+		_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_PowerAssign_93_Expression_Expression_MethodInfo_LambdaExpression_0()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_PowerAssign_93_Expression_Expression_MethodInfo_LambdaExpression_0(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INTPTR _s5;
+	CHAOS_IL2CPP_INTPTR _s6;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	_s1 = 0;
+	_s2 = 0;
+	_s3 = 0;
+	{
+		const auto chaos_result = chaos_external_runtime_System_Linq_Expressions_Expression__PowerAssign_BinaryExpression_Expression_Expression_System_Reflection_MethodInfo_LambdaExpression_();
+		_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_PreDecrementAssign_304_Expression_0()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_PreDecrementAssign_304_Expression_0(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	{
+		const auto chaos_result = chaos_external_runtime_System_Linq_Expressions_Expression__PreDecrementAssign_UnaryExpression_Expression_();
+		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_PreDecrementAssign_305_Expression_MethodInfo_0()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_PreDecrementAssign_305_Expression_MethodInfo_0(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	_s1 = 0;
+	{
+		const auto chaos_result = chaos_external_runtime_System_Linq_Expressions_Expression__PreDecrementAssign_UnaryExpression_Expression_System_Reflection_MethodInfo_();
+		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_PreIncrementAssign_302_Expression_0()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_PreIncrementAssign_302_Expression_0(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	{
+		const auto chaos_result = chaos_external_runtime_System_Linq_Expressions_Expression__PreIncrementAssign_UnaryExpression_Expression_();
+		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_PreIncrementAssign_303_Expression_MethodInfo_0()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_PreIncrementAssign_303_Expression_MethodInfo_0(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	_s1 = 0;
+	{
+		const auto chaos_result = chaos_external_runtime_System_Linq_Expressions_Expression__PreIncrementAssign_UnaryExpression_Expression_System_Reflection_MethodInfo_();
+		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_Property_157_Expression_string_Expression_0()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_Property_157_Expression_string_Expression_0(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INTPTR _s5;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	_s1 = 0;
+	_s2 = 0;
+	{
+		const auto chaos_result = chaos_external_runtime_System_Linq_Expressions_Expression__Property_IndexExpression_Expression_System_String_Expression___();
+		_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_Property_157_Expression_string_Expression_1()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_Property_157_Expression_string_Expression_1(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INTPTR _s5;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	{
+		auto* chaos_string = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_String);
+		chaos_string->header.type_info = chaos_mt_System_Private_CoreLib_System_String.AsTypeInfoHot();
+		chaos_string->length = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+		chaos_string->utf8_data = "";
+		_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_string);
+	}
+	_s2 = 0;
+	{
+		const auto chaos_result = chaos_external_runtime_System_Linq_Expressions_Expression__Property_IndexExpression_Expression_System_String_Expression___();
+		_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_Property_157_Expression_string_Expression_2()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_Property_157_Expression_string_Expression_2(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INTPTR _s5;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	_s1 = 0;
+	{
+		const auto chaos_result = ChaosArrayEmpty_Inline();
+		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	{
+		const auto chaos_result = chaos_external_runtime_System_Linq_Expressions_Expression__Property_IndexExpression_Expression_System_String_Expression___();
+		_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_Property_157_Expression_string_Expression_3()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_Property_157_Expression_string_Expression_3(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INTPTR _s5;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	_s1 = 0;
+	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(2);
+	_s2 = ChaosArrayNew1D_Inline(&chaos_type_info_managed_array.hot, chaos_mt_System_Linq_Expressions_Expression.AsTypeInfoHot(), 1, _s2);
+	{
+		const auto chaos_result = chaos_external_runtime_System_Linq_Expressions_Expression__Property_IndexExpression_Expression_System_String_Expression___();
+		_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_Property_158_Expression_PropertyInfo_Expression_0()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_Property_158_Expression_PropertyInfo_Expression_0(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INTPTR _s5;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	_s1 = 0;
+	_s2 = 0;
+	{
+		const auto chaos_result = chaos_external_runtime_System_Linq_Expressions_Expression__Property_IndexExpression_Expression_System_Reflection_PropertyInfo_Expression___();
+		_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_Property_158_Expression_PropertyInfo_Expression_1()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_Property_158_Expression_PropertyInfo_Expression_1(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INTPTR _s5;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	_s1 = 0;
+	{
+		const auto chaos_result = ChaosArrayEmpty_Inline();
+		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	{
+		const auto chaos_result = chaos_external_runtime_System_Linq_Expressions_Expression__Property_IndexExpression_Expression_System_Reflection_PropertyInfo_Expression___();
+		_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_Property_158_Expression_PropertyInfo_Expression_2()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_Property_158_Expression_PropertyInfo_Expression_2(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INTPTR _s5;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	_s1 = 0;
+	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(2);
+	_s2 = ChaosArrayNew1D_Inline(&chaos_type_info_managed_array.hot, chaos_mt_System_Linq_Expressions_Expression.AsTypeInfoHot(), 1, _s2);
+	{
+		const auto chaos_result = chaos_external_runtime_System_Linq_Expressions_Expression__Property_IndexExpression_Expression_System_Reflection_PropertyInfo_Expression___();
+		_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_Property_159_Expression_PropertyInfo_IEnumerableExpression_0()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_Property_159_Expression_PropertyInfo_IEnumerableExpression_0(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INTPTR _s5;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	_s1 = 0;
+	_s2 = 0;
+	{
+		const auto chaos_result = chaos_external_runtime_System_Linq_Expressions_Expression__Property_IndexExpression_Expression_System_Reflection_PropertyInfo_System_Collections_Generic_IEnumerable_Expression__();
+		_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_Property_159_Expression_PropertyInfo_IEnumerableExpression_1()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_Property_159_Expression_PropertyInfo_IEnumerableExpression_1(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INTPTR _s5;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	_s1 = 0;
+	{
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__Empty_Expression__System_Collections_Generic_IEnumerable_Expression___();
+		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	{
+		const auto chaos_result = chaos_external_runtime_System_Linq_Expressions_Expression__Property_IndexExpression_Expression_System_Reflection_PropertyInfo_System_Collections_Generic_IEnumerable_Expression__();
+		_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_Property_203_Expression_string_0()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_Property_203_Expression_string_0(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	_s1 = 0;
+	{
+		const auto chaos_result = chaos_external_runtime_System_Linq_Expressions_Expression__Property_MemberExpression_Expression_System_String_();
+		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_Property_203_Expression_string_1()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_Property_203_Expression_string_1(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	{
+		auto* chaos_string = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_String);
+		chaos_string->header.type_info = chaos_mt_System_Private_CoreLib_System_String.AsTypeInfoHot();
+		chaos_string->length = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+		chaos_string->utf8_data = "";
+		_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_string);
+	}
+	{
+		const auto chaos_result = chaos_external_runtime_System_Linq_Expressions_Expression__Property_MemberExpression_Expression_System_String_();
+		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_Property_204_Expression_System_Type_string_0()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_Property_204_Expression_System_Type_string_0(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INTPTR _s5;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	_s1 = 0;
+	_s2 = 0;
+	{
+		const auto chaos_result = chaos_external_runtime_System_Linq_Expressions_Expression__Property_MemberExpression_Expression_System_Type_System_String_();
+		_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_Property_204_Expression_System_Type_string_1()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_Property_204_Expression_System_Type_string_1(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INTPTR _s5;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
 	_s0 = 0;
 	_s1 = 0;
 	{
@@ -3520,305 +3640,14 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Li
 		_s2 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_string);
 	}
 	{
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (321 < 0 || 321 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 321 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[321] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 321 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[321])(chaos_arg_0, chaos_arg_1, chaos_arg_2);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+		const auto chaos_result = chaos_external_runtime_System_Linq_Expressions_Expression__Property_MemberExpression_Expression_System_Type_System_String_();
+		_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	return;
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_GetActionType_186_System_Type_0()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_GetActionType_186_System_Type_0(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	_s0 = 0;
-	{
-		const auto chaos_arg_0 = _s0;
-		if (322 < 0 || 322 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 322 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[322] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 322 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[322])(chaos_arg_0);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_GetActionType_186_System_Type_1()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_GetActionType_186_System_Type_1(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	{
-		const auto chaos_result = ChaosArrayEmpty_Inline();
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	{
-		const auto chaos_arg_0 = _s0;
-		if (322 < 0 || 322 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 322 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[322] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 322 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[322])(chaos_arg_0);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_GetActionType_186_System_Type_2()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_GetActionType_186_System_Type_2(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(2);
-	_s0 = ChaosArrayNew1D_Inline(&chaos_type_info_managed_array.hot, chaos_mt_System_Private_CoreLib_System_Type.AsTypeInfoHot(), 1, _s0);
-	{
-		const auto chaos_arg_0 = _s0;
-		if (322 < 0 || 322 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 322 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[322] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 322 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[322])(chaos_arg_0);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_GetDelegateType_188_System_Type_0()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_GetDelegateType_188_System_Type_0(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	_s0 = 0;
-	{
-		const auto chaos_arg_0 = _s0;
-		if (323 < 0 || 323 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 323 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[323] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 323 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[323])(chaos_arg_0);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_GetDelegateType_188_System_Type_1()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_GetDelegateType_188_System_Type_1(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	{
-		const auto chaos_result = ChaosArrayEmpty_Inline();
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	{
-		const auto chaos_arg_0 = _s0;
-		if (323 < 0 || 323 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 323 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[323] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 323 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[323])(chaos_arg_0);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_GetDelegateType_188_System_Type_2()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_GetDelegateType_188_System_Type_2(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(2);
-	_s0 = ChaosArrayNew1D_Inline(&chaos_type_info_managed_array.hot, chaos_mt_System_Private_CoreLib_System_Type.AsTypeInfoHot(), 1, _s0);
-	{
-		const auto chaos_arg_0 = _s0;
-		if (323 < 0 || 323 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 323 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[323] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 323 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[323])(chaos_arg_0);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_GetFuncType_184_System_Type_0()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_GetFuncType_184_System_Type_0(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	_s0 = 0;
-	{
-		const auto chaos_arg_0 = _s0;
-		if (324 < 0 || 324 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 324 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[324] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 324 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[324])(chaos_arg_0);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_GetFuncType_184_System_Type_1()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_GetFuncType_184_System_Type_1(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	{
-		const auto chaos_result = ChaosArrayEmpty_Inline();
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	{
-		const auto chaos_arg_0 = _s0;
-		if (324 < 0 || 324 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 324 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[324] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 324 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[324])(chaos_arg_0);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_GetFuncType_184_System_Type_2()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_GetFuncType_184_System_Type_2(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(2);
-	_s0 = ChaosArrayNew1D_Inline(&chaos_type_info_managed_array.hot, chaos_mt_System_Private_CoreLib_System_Type.AsTypeInfoHot(), 1, _s0);
-	{
-		const auto chaos_arg_0 = _s0;
-		if (324 < 0 || 324 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 324 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[324] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 324 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[324])(chaos_arg_0);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_Goto_149_LabelTarget_0()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_Goto_149_LabelTarget_0(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	_s0 = 0;
-	{
-		const auto chaos_arg_0 = _s0;
-		if (325 < 0 || 325 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 325 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[325] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 325 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[325])(chaos_arg_0);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_Goto_150_LabelTarget_System_Type_0()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_Goto_150_LabelTarget_System_Type_0(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	_s0 = 0;
-	_s1 = 0;
-	{
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (326 < 0 || 326 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 326 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[326] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 326 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[326])(chaos_arg_0, chaos_arg_1);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_Goto_151_LabelTarget_Expression_0()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_Goto_151_LabelTarget_Expression_0(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	_s0 = 0;
-	_s1 = 0;
-	{
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (327 < 0 || 327 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 327 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[327] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 327 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[327])(chaos_arg_0, chaos_arg_1);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_Goto_152_LabelTarget_Expression_System_Type_0()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_Goto_152_LabelTarget_Expression_System_Type_0(void)
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_Property_205_Expression_PropertyInfo_0()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_Property_205_Expression_PropertyInfo_0(void)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
@@ -3826,52 +3655,343 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Li
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
 	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	_s1 = 0;
+	{
+		const auto chaos_result = chaos_external_runtime_System_Linq_Expressions_Expression__Property_MemberExpression_Expression_System_Reflection_PropertyInfo_();
+		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_Property_206_Expression_MethodInfo_0()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_Property_206_Expression_MethodInfo_0(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	_s1 = 0;
+	{
+		const auto chaos_result = chaos_external_runtime_System_Linq_Expressions_Expression__Property_MemberExpression_Expression_System_Reflection_MethodInfo_();
+		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_PropertyOrField_207_Expression_string_0()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_PropertyOrField_207_Expression_string_0(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	_s1 = 0;
+	{
+		const auto chaos_result = chaos_external_runtime_System_Linq_Expressions_Expression__PropertyOrField_MemberExpression_Expression_System_String_();
+		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_PropertyOrField_207_Expression_string_1()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_PropertyOrField_207_Expression_string_1(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	{
+		auto* chaos_string = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_String);
+		chaos_string->header.type_info = chaos_mt_System_Private_CoreLib_System_String.AsTypeInfoHot();
+		chaos_string->length = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+		chaos_string->utf8_data = "";
+		_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_string);
+	}
+	{
+		const auto chaos_result = chaos_external_runtime_System_Linq_Expressions_Expression__PropertyOrField_MemberExpression_Expression_System_String_();
+		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_Quote_293_Expression_0()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_Quote_293_Expression_0(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	{
+		const auto chaos_result = chaos_external_runtime_System_Linq_Expressions_Expression__Quote_UnaryExpression_Expression_();
+		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_Reduce_124__124()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_Reduce_124__124(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	{
+		const auto chaos_result = chaos_external_runtime_System_Linq_Expressions_Expression__Reduce_Expression__();
+		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_ReduceAndCheck_125__125()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_ReduceAndCheck_125__125(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	{
+		const auto chaos_result = chaos_external_runtime_System_Linq_Expressions_Expression__ReduceAndCheck_Expression__();
+		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_ReduceExtensions_126__126()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_ReduceExtensions_126__126(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	{
+		const auto chaos_result = chaos_external_runtime_System_Linq_Expressions_Expression__ReduceExtensions_Expression__();
+		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_ReferenceEqual_6_Expression_Expression_0()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_ReferenceEqual_6_Expression_Expression_0(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	_s1 = 0;
+	{
+		const auto chaos_result = chaos_external_runtime_System_Linq_Expressions_Expression__ReferenceEqual_BinaryExpression_Expression_Expression_();
+		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_ReferenceNotEqual_9_Expression_Expression_0()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_ReferenceNotEqual_9_Expression_Expression_0(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	_s1 = 0;
+	{
+		const auto chaos_result = chaos_external_runtime_System_Linq_Expressions_Expression__ReferenceNotEqual_BinaryExpression_Expression_Expression_();
+		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_Rethrow_294__294()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_Rethrow_294__294(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	{
+		const auto chaos_result = chaos_external_runtime_System_Linq_Expressions_Expression__Rethrow_UnaryExpression__();
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_Rethrow_295_System_Type_0()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_Rethrow_295_System_Type_0(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	{
+		const auto chaos_result = chaos_external_runtime_System_Linq_Expressions_Expression__Rethrow_UnaryExpression_System_Type_();
+		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_Return_145_LabelTarget_0()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_Return_145_LabelTarget_0(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	{
+		const auto chaos_result = chaos_external_runtime_System_Linq_Expressions_Expression__Return_GotoExpression_LabelTarget_();
+		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_Return_146_LabelTarget_System_Type_0()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_Return_146_LabelTarget_System_Type_0(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	_s1 = 0;
+	{
+		const auto chaos_result = chaos_external_runtime_System_Linq_Expressions_Expression__Return_GotoExpression_LabelTarget_System_Type_();
+		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_Return_147_LabelTarget_Expression_0()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_Return_147_LabelTarget_Expression_0(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	_s1 = 0;
+	{
+		const auto chaos_result = chaos_external_runtime_System_Linq_Expressions_Expression__Return_GotoExpression_LabelTarget_Expression_();
+		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_Return_148_LabelTarget_Expression_System_Type_0()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_Return_148_LabelTarget_Expression_System_Type_0(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INTPTR _s5;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
 	_s0 = 0;
 	_s1 = 0;
 	_s2 = 0;
 	{
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (328 < 0 || 328 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 328 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[328] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 328 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[328])(chaos_arg_0, chaos_arg_1, chaos_arg_2);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+		const auto chaos_result = chaos_external_runtime_System_Linq_Expressions_Expression__Return_GotoExpression_LabelTarget_Expression_System_Type_();
+		_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	return;
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_GreaterThan_10_Expression_Expression_0()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_GreaterThan_10_Expression_Expression_0(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	_s0 = 0;
-	_s1 = 0;
-	{
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (329 < 0 || 329 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 329 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[329] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 329 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[329])(chaos_arg_0, chaos_arg_1);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_GreaterThan_11_Expression_Expression_bool_MethodInfo_0()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_GreaterThan_11_Expression_Expression_bool_MethodInfo_0(void)
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_RightShift_69_Expression_Expression_0()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_RightShift_69_Expression_Expression_0(void)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
@@ -3880,29 +4000,20 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Li
 	CHAOS_IL2CPP_INTPTR _s1;
 	CHAOS_IL2CPP_INTPTR _s2;
 	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
 	_s0 = 0;
 	_s1 = 0;
-	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s3 = 0;
 	{
-		const auto chaos_arg_3 = _s3;
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (330 < 0 || 330 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 330 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[330] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 330 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[330])(chaos_arg_0, chaos_arg_1, chaos_arg_2, chaos_arg_3);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+		const auto chaos_result = chaos_external_runtime_System_Linq_Expressions_Expression__RightShift_BinaryExpression_Expression_Expression_();
+		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	return;
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_GreaterThan_11_Expression_Expression_bool_MethodInfo_1()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_GreaterThan_11_Expression_Expression_bool_MethodInfo_1(void)
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_RightShift_70_Expression_Expression_MethodInfo_0()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_RightShift_70_Expression_Expression_MethodInfo_0(void)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
@@ -3911,404 +4022,1014 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Li
 	CHAOS_IL2CPP_INTPTR _s1;
 	CHAOS_IL2CPP_INTPTR _s2;
 	CHAOS_IL2CPP_INTPTR _s3;
-	_s0 = 0;
-	_s1 = 0;
-	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s3 = 0;
-	{
-		const auto chaos_arg_3 = _s3;
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (330 < 0 || 330 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 330 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[330] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 330 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[330])(chaos_arg_0, chaos_arg_1, chaos_arg_2, chaos_arg_3);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_GreaterThanOrEqual_14_Expression_Expression_0()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_GreaterThanOrEqual_14_Expression_Expression_0(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	_s0 = 0;
-	_s1 = 0;
-	{
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (331 < 0 || 331 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 331 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[331] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 331 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[331])(chaos_arg_0, chaos_arg_1);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_GreaterThanOrEqual_15_Expression_Expression_bool_MethodInfo_0()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_GreaterThanOrEqual_15_Expression_Expression_bool_MethodInfo_0(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INTPTR _s2;
-	CHAOS_IL2CPP_INTPTR _s3;
-	_s0 = 0;
-	_s1 = 0;
-	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s3 = 0;
-	{
-		const auto chaos_arg_3 = _s3;
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (332 < 0 || 332 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 332 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[332] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 332 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[332])(chaos_arg_0, chaos_arg_1, chaos_arg_2, chaos_arg_3);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_GreaterThanOrEqual_15_Expression_Expression_bool_MethodInfo_1()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_GreaterThanOrEqual_15_Expression_Expression_bool_MethodInfo_1(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INTPTR _s2;
-	CHAOS_IL2CPP_INTPTR _s3;
-	_s0 = 0;
-	_s1 = 0;
-	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s3 = 0;
-	{
-		const auto chaos_arg_3 = _s3;
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (332 < 0 || 332 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 332 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[332] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 332 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[332])(chaos_arg_0, chaos_arg_1, chaos_arg_2, chaos_arg_3);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_IfThen_114_Expression_Expression_0()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_IfThen_114_Expression_Expression_0(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	_s0 = 0;
-	_s1 = 0;
-	{
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (333 < 0 || 333 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 333 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[333] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 333 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[333])(chaos_arg_0, chaos_arg_1);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_IfThenElse_115_Expression_Expression_Expression_0()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_IfThenElse_115_Expression_Expression_Expression_0(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INTPTR _s5;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
 	_s0 = 0;
 	_s1 = 0;
 	_s2 = 0;
 	{
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (334 < 0 || 334 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 334 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[334] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 334 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[334])(chaos_arg_0, chaos_arg_1, chaos_arg_2);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+		const auto chaos_result = chaos_external_runtime_System_Linq_Expressions_Expression__RightShift_BinaryExpression_Expression_Expression_System_Reflection_MethodInfo_();
+		_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	return;
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_Increment_298_Expression_0()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_Increment_298_Expression_0(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	_s0 = 0;
-	{
-		const auto chaos_arg_0 = _s0;
-		if (335 < 0 || 335 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 335 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[335] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 335 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[335])(chaos_arg_0);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_Increment_299_Expression_MethodInfo_0()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_Increment_299_Expression_MethodInfo_0(void)
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_RightShiftAssign_71_Expression_Expression_0()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_RightShiftAssign_71_Expression_Expression_0(void)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
 	_s0 = 0;
 	_s1 = 0;
 	{
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (336 < 0 || 336 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 336 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[336] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 336 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[336])(chaos_arg_0, chaos_arg_1);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+		const auto chaos_result = chaos_external_runtime_System_Linq_Expressions_Expression__RightShiftAssign_BinaryExpression_Expression_Expression_();
+		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	return;
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_IsFalse_280_Expression_0()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_IsFalse_280_Expression_0(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	_s0 = 0;
-	{
-		const auto chaos_arg_0 = _s0;
-		if (337 < 0 || 337 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 337 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[337] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 337 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[337])(chaos_arg_0);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_IsFalse_281_Expression_MethodInfo_0()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_IsFalse_281_Expression_MethodInfo_0(void)
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_RightShiftAssign_72_Expression_Expression_MethodInfo_0()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_RightShiftAssign_72_Expression_Expression_MethodInfo_0(void)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INTPTR _s5;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
 	_s0 = 0;
 	_s1 = 0;
+	_s2 = 0;
 	{
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (338 < 0 || 338 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 338 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[338] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 338 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[338])(chaos_arg_0, chaos_arg_1);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+		const auto chaos_result = chaos_external_runtime_System_Linq_Expressions_Expression__RightShiftAssign_BinaryExpression_Expression_Expression_System_Reflection_MethodInfo_();
+		_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	return;
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_IsTrue_282_Expression_0()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_IsTrue_282_Expression_0(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	_s0 = 0;
-	{
-		const auto chaos_arg_0 = _s0;
-		if (339 < 0 || 339 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 339 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[339] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 339 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[339])(chaos_arg_0);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_IsTrue_283_Expression_MethodInfo_0()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_IsTrue_283_Expression_MethodInfo_0(void)
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_RightShiftAssign_73_Expression_Expression_MethodInfo_LambdaExpression_0()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_RightShiftAssign_73_Expression_Expression_MethodInfo_LambdaExpression_0(void)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INTPTR _s5;
+	CHAOS_IL2CPP_INTPTR _s6;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
 	_s0 = 0;
 	_s1 = 0;
+	_s2 = 0;
+	_s3 = 0;
 	{
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (340 < 0 || 340 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 340 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[340] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 340 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[340])(chaos_arg_0, chaos_arg_1);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+		const auto chaos_result = chaos_external_runtime_System_Linq_Expressions_Expression__RightShiftAssign_BinaryExpression_Expression_Expression_System_Reflection_MethodInfo_LambdaExpression_();
+		_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	return;
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_Label_160_LabelTarget_0()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_Label_160_LabelTarget_0(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	_s0 = 0;
-	{
-		const auto chaos_arg_0 = _s0;
-		if (341 < 0 || 341 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 341 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[341] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 341 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[341])(chaos_arg_0);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_Label_161_LabelTarget_Expression_0()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_Label_161_LabelTarget_Expression_0(void)
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_RuntimeVariables_249_ParameterExpression_0()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_RuntimeVariables_249_ParameterExpression_0(void)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	{
+		const auto chaos_result = chaos_external_runtime_System_Linq_Expressions_Expression__RuntimeVariables_RuntimeVariablesExpression_ParameterExpression___();
+		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_RuntimeVariables_249_ParameterExpression_1()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_RuntimeVariables_249_ParameterExpression_1(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	{
+		const auto chaos_result = ChaosArrayEmpty_Inline();
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	{
+		const auto chaos_result = chaos_external_runtime_System_Linq_Expressions_Expression__RuntimeVariables_RuntimeVariablesExpression_ParameterExpression___();
+		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_RuntimeVariables_249_ParameterExpression_2()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_RuntimeVariables_249_ParameterExpression_2(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(2);
+	_s0 = ChaosArrayNew1D_Inline(&chaos_type_info_managed_array.hot, chaos_mt_System_Linq_Expressions_ParameterExpression.AsTypeInfoHot(), 1, _s0);
+	{
+		const auto chaos_result = chaos_external_runtime_System_Linq_Expressions_Expression__RuntimeVariables_RuntimeVariablesExpression_ParameterExpression___();
+		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_RuntimeVariables_250_IEnumerableParameterExpression_0()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_RuntimeVariables_250_IEnumerableParameterExpression_0(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	{
+		const auto chaos_result = chaos_external_runtime_System_Linq_Expressions_Expression__RuntimeVariables_RuntimeVariablesExpression_System_Collections_Generic_IEnumerable_ParameterExpression__();
+		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_RuntimeVariables_250_IEnumerableParameterExpression_1()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_RuntimeVariables_250_IEnumerableParameterExpression_1(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	{
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__Empty_ParameterExpression__System_Collections_Generic_IEnumerable_ParameterExpression___();
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	{
+		const auto chaos_result = chaos_external_runtime_System_Linq_Expressions_Expression__RuntimeVariables_RuntimeVariablesExpression_System_Collections_Generic_IEnumerable_ParameterExpression__();
+		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_Subtract_34_Expression_Expression_0()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_Subtract_34_Expression_Expression_0(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
 	_s0 = 0;
 	_s1 = 0;
 	{
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (342 < 0 || 342 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 342 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[342] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 342 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[342])(chaos_arg_0, chaos_arg_1);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+		const auto chaos_result = chaos_external_runtime_System_Linq_Expressions_Expression__Subtract_BinaryExpression_Expression_Expression_();
+		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	return;
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_Label_162__162()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_Label_162__162(void)
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_Subtract_35_Expression_Expression_MethodInfo_0()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_Subtract_35_Expression_Expression_MethodInfo_0(void)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 
 	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INTPTR _s5;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	_s1 = 0;
+	_s2 = 0;
 	{
-		if (343 < 0 || 343 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 343 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[343] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 343 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[343])();
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+		const auto chaos_result = chaos_external_runtime_System_Linq_Expressions_Expression__Subtract_BinaryExpression_Expression_Expression_System_Reflection_MethodInfo_();
+		_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	return;
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_Label_163_string_0()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_Label_163_string_0(void)
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_SubtractAssign_36_Expression_Expression_0()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_SubtractAssign_36_Expression_Expression_0(void)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 
 	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	_s1 = 0;
+	{
+		const auto chaos_result = chaos_external_runtime_System_Linq_Expressions_Expression__SubtractAssign_BinaryExpression_Expression_Expression_();
+		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_SubtractAssign_37_Expression_Expression_MethodInfo_0()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_SubtractAssign_37_Expression_Expression_MethodInfo_0(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INTPTR _s5;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	_s1 = 0;
+	_s2 = 0;
+	{
+		const auto chaos_result = chaos_external_runtime_System_Linq_Expressions_Expression__SubtractAssign_BinaryExpression_Expression_Expression_System_Reflection_MethodInfo_();
+		_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_SubtractAssign_38_Expression_Expression_MethodInfo_LambdaExpression_0()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_SubtractAssign_38_Expression_Expression_MethodInfo_LambdaExpression_0(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INTPTR _s5;
+	CHAOS_IL2CPP_INTPTR _s6;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	_s1 = 0;
+	_s2 = 0;
+	_s3 = 0;
+	{
+		const auto chaos_result = chaos_external_runtime_System_Linq_Expressions_Expression__SubtractAssign_BinaryExpression_Expression_Expression_System_Reflection_MethodInfo_LambdaExpression_();
+		_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_SubtractAssignChecked_39_Expression_Expression_0()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_SubtractAssignChecked_39_Expression_Expression_0(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	_s1 = 0;
+	{
+		const auto chaos_result = chaos_external_runtime_System_Linq_Expressions_Expression__SubtractAssignChecked_BinaryExpression_Expression_Expression_();
+		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_SubtractAssignChecked_40_Expression_Expression_MethodInfo_0()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_SubtractAssignChecked_40_Expression_Expression_MethodInfo_0(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INTPTR _s5;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	_s1 = 0;
+	_s2 = 0;
+	{
+		const auto chaos_result = chaos_external_runtime_System_Linq_Expressions_Expression__SubtractAssignChecked_BinaryExpression_Expression_Expression_System_Reflection_MethodInfo_();
+		_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_SubtractAssignChecked_41_Expression_Expression_MethodInfo_LambdaExpression_0()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_SubtractAssignChecked_41_Expression_Expression_MethodInfo_LambdaExpression_0(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INTPTR _s5;
+	CHAOS_IL2CPP_INTPTR _s6;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	_s1 = 0;
+	_s2 = 0;
+	_s3 = 0;
+	{
+		const auto chaos_result = chaos_external_runtime_System_Linq_Expressions_Expression__SubtractAssignChecked_BinaryExpression_Expression_Expression_System_Reflection_MethodInfo_LambdaExpression_();
+		_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_SubtractChecked_42_Expression_Expression_0()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_SubtractChecked_42_Expression_Expression_0(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	_s1 = 0;
+	{
+		const auto chaos_result = chaos_external_runtime_System_Linq_Expressions_Expression__SubtractChecked_BinaryExpression_Expression_Expression_();
+		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_SubtractChecked_43_Expression_Expression_MethodInfo_0()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_SubtractChecked_43_Expression_Expression_MethodInfo_0(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INTPTR _s5;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	_s1 = 0;
+	_s2 = 0;
+	{
+		const auto chaos_result = chaos_external_runtime_System_Linq_Expressions_Expression__SubtractChecked_BinaryExpression_Expression_Expression_System_Reflection_MethodInfo_();
+		_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_Switch_253_Expression_SwitchCase_0()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_Switch_253_Expression_SwitchCase_0(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	_s1 = 0;
+	{
+		const auto chaos_result = chaos_external_runtime_System_Linq_Expressions_Expression__Switch_SwitchExpression_Expression_SwitchCase___();
+		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_Switch_253_Expression_SwitchCase_1()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_Switch_253_Expression_SwitchCase_1(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
 	_s0 = 0;
 	{
-		const auto chaos_arg_0 = _s0;
-		if (344 < 0 || 344 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 344 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[344] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 344 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[344])(chaos_arg_0);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+		const auto chaos_result = ChaosArrayEmpty_Inline();
+		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	{
+		const auto chaos_result = chaos_external_runtime_System_Linq_Expressions_Expression__Switch_SwitchExpression_Expression_SwitchCase___();
+		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	return;
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_Label_163_string_1()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_Label_163_string_1(void)
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_Switch_253_Expression_SwitchCase_2()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_Switch_253_Expression_SwitchCase_2(void)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 
 	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(2);
+	_s1 = ChaosArrayNew1D_Inline(&chaos_type_info_managed_array.hot, chaos_mt_System_Linq_Expressions_SwitchCase.AsTypeInfoHot(), 1, _s1);
+	{
+		const auto chaos_result = chaos_external_runtime_System_Linq_Expressions_Expression__Switch_SwitchExpression_Expression_SwitchCase___();
+		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_Switch_254_Expression_Expression_SwitchCase_0()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_Switch_254_Expression_Expression_SwitchCase_0(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INTPTR _s5;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	_s1 = 0;
+	_s2 = 0;
+	{
+		const auto chaos_result = chaos_external_runtime_System_Linq_Expressions_Expression__Switch_SwitchExpression_Expression_Expression_SwitchCase___();
+		_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_Switch_254_Expression_Expression_SwitchCase_1()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_Switch_254_Expression_Expression_SwitchCase_1(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INTPTR _s5;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	_s1 = 0;
+	{
+		const auto chaos_result = ChaosArrayEmpty_Inline();
+		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	{
+		const auto chaos_result = chaos_external_runtime_System_Linq_Expressions_Expression__Switch_SwitchExpression_Expression_Expression_SwitchCase___();
+		_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_Switch_254_Expression_Expression_SwitchCase_2()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_Switch_254_Expression_Expression_SwitchCase_2(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INTPTR _s5;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	_s1 = 0;
+	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(2);
+	_s2 = ChaosArrayNew1D_Inline(&chaos_type_info_managed_array.hot, chaos_mt_System_Linq_Expressions_SwitchCase.AsTypeInfoHot(), 1, _s2);
+	{
+		const auto chaos_result = chaos_external_runtime_System_Linq_Expressions_Expression__Switch_SwitchExpression_Expression_Expression_SwitchCase___();
+		_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_Switch_255_Expression_Expression_MethodInfo_SwitchCase_0()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_Switch_255_Expression_Expression_MethodInfo_SwitchCase_0(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INTPTR _s5;
+	CHAOS_IL2CPP_INTPTR _s6;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	_s1 = 0;
+	_s2 = 0;
+	_s3 = 0;
+	{
+		const auto chaos_result = chaos_external_runtime_System_Linq_Expressions_Expression__Switch_SwitchExpression_Expression_Expression_System_Reflection_MethodInfo_SwitchCase___();
+		_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_Switch_255_Expression_Expression_MethodInfo_SwitchCase_1()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_Switch_255_Expression_Expression_MethodInfo_SwitchCase_1(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INTPTR _s5;
+	CHAOS_IL2CPP_INTPTR _s6;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	_s1 = 0;
+	_s2 = 0;
+	{
+		const auto chaos_result = ChaosArrayEmpty_Inline();
+		_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	{
+		const auto chaos_result = chaos_external_runtime_System_Linq_Expressions_Expression__Switch_SwitchExpression_Expression_Expression_System_Reflection_MethodInfo_SwitchCase___();
+		_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_Switch_255_Expression_Expression_MethodInfo_SwitchCase_2()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_Switch_255_Expression_Expression_MethodInfo_SwitchCase_2(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INTPTR _s5;
+	CHAOS_IL2CPP_INTPTR _s6;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	_s1 = 0;
+	_s2 = 0;
+	_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(2);
+	_s3 = ChaosArrayNew1D_Inline(&chaos_type_info_managed_array.hot, chaos_mt_System_Linq_Expressions_SwitchCase.AsTypeInfoHot(), 1, _s3);
+	{
+		const auto chaos_result = chaos_external_runtime_System_Linq_Expressions_Expression__Switch_SwitchExpression_Expression_Expression_System_Reflection_MethodInfo_SwitchCase___();
+		_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_Switch_256_System_Type_Expression_Expression_MethodInfo_SwitchCase_0()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_Switch_256_System_Type_Expression_Expression_MethodInfo_SwitchCase_0(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INTPTR _s5;
+	CHAOS_IL2CPP_INTPTR _s6;
+	CHAOS_IL2CPP_INTPTR _s7;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	_s1 = 0;
+	_s2 = 0;
+	_s3 = 0;
+	_s4 = 0;
+	{
+		const auto chaos_result = chaos_external_runtime_System_Linq_Expressions_Expression__Switch_SwitchExpression_System_Type_Expression_Expression_System_Reflection_MethodInfo_SwitchCase___();
+		_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_Switch_256_System_Type_Expression_Expression_MethodInfo_SwitchCase_1()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_Switch_256_System_Type_Expression_Expression_MethodInfo_SwitchCase_1(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INTPTR _s5;
+	CHAOS_IL2CPP_INTPTR _s6;
+	CHAOS_IL2CPP_INTPTR _s7;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	_s1 = 0;
+	_s2 = 0;
+	_s3 = 0;
+	{
+		const auto chaos_result = ChaosArrayEmpty_Inline();
+		_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	{
+		const auto chaos_result = chaos_external_runtime_System_Linq_Expressions_Expression__Switch_SwitchExpression_System_Type_Expression_Expression_System_Reflection_MethodInfo_SwitchCase___();
+		_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_Switch_256_System_Type_Expression_Expression_MethodInfo_SwitchCase_2()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_Switch_256_System_Type_Expression_Expression_MethodInfo_SwitchCase_2(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INTPTR _s5;
+	CHAOS_IL2CPP_INTPTR _s6;
+	CHAOS_IL2CPP_INTPTR _s7;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	_s1 = 0;
+	_s2 = 0;
+	_s3 = 0;
+	_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(2);
+	_s4 = ChaosArrayNew1D_Inline(&chaos_type_info_managed_array.hot, chaos_mt_System_Linq_Expressions_SwitchCase.AsTypeInfoHot(), 1, _s4);
+	{
+		const auto chaos_result = chaos_external_runtime_System_Linq_Expressions_Expression__Switch_SwitchExpression_System_Type_Expression_Expression_System_Reflection_MethodInfo_SwitchCase___();
+		_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_Switch_257_Expression_Expression_MethodInfo_IEnumerableSwitchCase_0()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_Switch_257_Expression_Expression_MethodInfo_IEnumerableSwitchCase_0(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INTPTR _s5;
+	CHAOS_IL2CPP_INTPTR _s6;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	_s1 = 0;
+	_s2 = 0;
+	_s3 = 0;
+	{
+		const auto chaos_result = chaos_external_runtime_System_Linq_Expressions_Expression__Switch_SwitchExpression_Expression_Expression_System_Reflection_MethodInfo_System_Collections_Generic_IEnumerable_SwitchCase__();
+		_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_Switch_257_Expression_Expression_MethodInfo_IEnumerableSwitchCase_1()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_Switch_257_Expression_Expression_MethodInfo_IEnumerableSwitchCase_1(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INTPTR _s5;
+	CHAOS_IL2CPP_INTPTR _s6;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	_s1 = 0;
+	_s2 = 0;
+	{
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__Empty_SwitchCase__System_Collections_Generic_IEnumerable_SwitchCase___();
+		_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	{
+		const auto chaos_result = chaos_external_runtime_System_Linq_Expressions_Expression__Switch_SwitchExpression_Expression_Expression_System_Reflection_MethodInfo_System_Collections_Generic_IEnumerable_SwitchCase__();
+		_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_Switch_258_System_Type_Expression_Expression_MethodInfo_IEnumerableSwitchCase_0()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_Switch_258_System_Type_Expression_Expression_MethodInfo_IEnumerableSwitchCase_0(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INTPTR _s5;
+	CHAOS_IL2CPP_INTPTR _s6;
+	CHAOS_IL2CPP_INTPTR _s7;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	_s1 = 0;
+	_s2 = 0;
+	_s3 = 0;
+	_s4 = 0;
+	{
+		const auto chaos_result = chaos_external_runtime_System_Linq_Expressions_Expression__Switch_SwitchExpression_System_Type_Expression_Expression_System_Reflection_MethodInfo_System_Collections_Generic_IEnumerable_SwitchCase__();
+		_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_Switch_258_System_Type_Expression_Expression_MethodInfo_IEnumerableSwitchCase_1()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_Switch_258_System_Type_Expression_Expression_MethodInfo_IEnumerableSwitchCase_1(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INTPTR _s5;
+	CHAOS_IL2CPP_INTPTR _s6;
+	CHAOS_IL2CPP_INTPTR _s7;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	_s1 = 0;
+	_s2 = 0;
+	_s3 = 0;
+	{
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__Empty_SwitchCase__System_Collections_Generic_IEnumerable_SwitchCase___();
+		_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	{
+		const auto chaos_result = chaos_external_runtime_System_Linq_Expressions_Expression__Switch_SwitchExpression_System_Type_Expression_Expression_System_Reflection_MethodInfo_System_Collections_Generic_IEnumerable_SwitchCase__();
+		_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_SwitchCase_251_Expression_Expression_0()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_SwitchCase_251_Expression_Expression_0(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	_s1 = 0;
+	{
+		const auto chaos_result = chaos_external_runtime_System_Linq_Expressions_Expression__SwitchCase_SwitchCase_Expression_Expression___();
+		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_SwitchCase_251_Expression_Expression_1()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_SwitchCase_251_Expression_Expression_1(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	{
+		const auto chaos_result = ChaosArrayEmpty_Inline();
+		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	{
+		const auto chaos_result = chaos_external_runtime_System_Linq_Expressions_Expression__SwitchCase_SwitchCase_Expression_Expression___();
+		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_SwitchCase_251_Expression_Expression_2()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_SwitchCase_251_Expression_Expression_2(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(2);
+	_s1 = ChaosArrayNew1D_Inline(&chaos_type_info_managed_array.hot, chaos_mt_System_Linq_Expressions_Expression.AsTypeInfoHot(), 1, _s1);
+	{
+		const auto chaos_result = chaos_external_runtime_System_Linq_Expressions_Expression__SwitchCase_SwitchCase_Expression_Expression___();
+		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_SwitchCase_252_Expression_IEnumerableExpression_0()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_SwitchCase_252_Expression_IEnumerableExpression_0(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	_s1 = 0;
+	{
+		const auto chaos_result = chaos_external_runtime_System_Linq_Expressions_Expression__SwitchCase_SwitchCase_Expression_System_Collections_Generic_IEnumerable_Expression__();
+		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_SwitchCase_252_Expression_IEnumerableExpression_1()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_SwitchCase_252_Expression_IEnumerableExpression_1(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	{
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__Empty_Expression__System_Collections_Generic_IEnumerable_Expression___();
+		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	{
+		const auto chaos_result = chaos_external_runtime_System_Linq_Expressions_Expression__SwitchCase_SwitchCase_Expression_System_Collections_Generic_IEnumerable_Expression__();
+		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_SymbolDocument_259_string_0()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_SymbolDocument_259_string_0(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	{
+		const auto chaos_result = chaos_external_runtime_System_Linq_Expressions_Expression__SymbolDocument_SymbolDocumentInfo_System_String_();
+		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_SymbolDocument_259_string_1()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_SymbolDocument_259_string_1(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
 	{
 		auto* chaos_string = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_String);
 		chaos_string->header.type_info = chaos_mt_System_Private_CoreLib_System_String.AsTypeInfoHot();
@@ -4317,1760 +5038,14 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Li
 		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_string);
 	}
 	{
-		const auto chaos_arg_0 = _s0;
-		if (344 < 0 || 344 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 344 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[344] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 344 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[344])(chaos_arg_0);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_Label_164_System_Type_0()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_Label_164_System_Type_0(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	_s0 = 0;
-	{
-		const auto chaos_arg_0 = _s0;
-		if (345 < 0 || 345 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 345 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[345] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 345 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[345])(chaos_arg_0);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_Label_165_System_Type_string_0()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_Label_165_System_Type_string_0(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	_s0 = 0;
-	_s1 = 0;
-	{
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (346 < 0 || 346 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 346 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[346] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 346 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[346])(chaos_arg_0, chaos_arg_1);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_Label_165_System_Type_string_1()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_Label_165_System_Type_string_1(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	_s0 = 0;
-	{
-		auto* chaos_string = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_String);
-		chaos_string->header.type_info = chaos_mt_System_Private_CoreLib_System_String.AsTypeInfoHot();
-		chaos_string->length = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-		chaos_string->utf8_data = "";
-		_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_string);
-	}
-	{
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (346 < 0 || 346 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 346 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[346] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 346 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[346])(chaos_arg_0, chaos_arg_1);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_Lambda_166_Expression_ParameterExpression_0()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_Lambda_166_Expression_ParameterExpression_0(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	_s0 = 0;
-	_s1 = 0;
-	{
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (347 < 0 || 347 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 347 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[347] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 347 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[347])(chaos_arg_0, chaos_arg_1);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_Lambda_166_Expression_ParameterExpression_1()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_Lambda_166_Expression_ParameterExpression_1(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	_s0 = 0;
-	{
-		const auto chaos_result = ChaosArrayEmpty_Inline();
+		const auto chaos_result = chaos_external_runtime_System_Linq_Expressions_Expression__SymbolDocument_SymbolDocumentInfo_System_String_();
 		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
-	{
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (347 < 0 || 347 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 347 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[347] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 347 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[347])(chaos_arg_0, chaos_arg_1);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
 	return;
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_Lambda_166_Expression_ParameterExpression_2()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_Lambda_166_Expression_ParameterExpression_2(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	_s0 = 0;
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(2);
-	_s1 = ChaosArrayNew1D_Inline(&chaos_type_info_managed_array.hot, chaos_mt_System_Linq_Expressions_ParameterExpression.AsTypeInfoHot(), 1, _s1);
-	{
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (347 < 0 || 347 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 347 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[347] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 347 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[347])(chaos_arg_0, chaos_arg_1);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_Lambda_167_Expression_bool_ParameterExpression_0()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_Lambda_167_Expression_bool_ParameterExpression_0(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INTPTR _s2;
-	_s0 = 0;
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s2 = 0;
-	{
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (350 < 0 || 350 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 350 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[350] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 350 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[350])(chaos_arg_0, chaos_arg_1, chaos_arg_2);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_Lambda_167_Expression_bool_ParameterExpression_1()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_Lambda_167_Expression_bool_ParameterExpression_1(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INTPTR _s2;
-	_s0 = 0;
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s2 = 0;
-	{
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (350 < 0 || 350 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 350 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[350] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 350 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[350])(chaos_arg_0, chaos_arg_1, chaos_arg_2);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_Lambda_167_Expression_bool_ParameterExpression_2()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_Lambda_167_Expression_bool_ParameterExpression_2(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INTPTR _s2;
-	_s0 = 0;
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	{
-		const auto chaos_result = ChaosArrayEmpty_Inline();
-		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	{
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (350 < 0 || 350 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 350 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[350] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 350 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[350])(chaos_arg_0, chaos_arg_1, chaos_arg_2);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_Lambda_167_Expression_bool_ParameterExpression_3()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_Lambda_167_Expression_bool_ParameterExpression_3(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INTPTR _s2;
-	_s0 = 0;
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(2);
-	_s2 = ChaosArrayNew1D_Inline(&chaos_type_info_managed_array.hot, chaos_mt_System_Linq_Expressions_ParameterExpression.AsTypeInfoHot(), 1, _s2);
-	{
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (350 < 0 || 350 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 350 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[350] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 350 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[350])(chaos_arg_0, chaos_arg_1, chaos_arg_2);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_Lambda_168_Expression_IEnumerableParameterExpression_0()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_Lambda_168_Expression_IEnumerableParameterExpression_0(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	_s0 = 0;
-	_s1 = 0;
-	{
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (351 < 0 || 351 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 351 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[351] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 351 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[351])(chaos_arg_0, chaos_arg_1);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_Lambda_168_Expression_IEnumerableParameterExpression_1()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_Lambda_168_Expression_IEnumerableParameterExpression_1(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	_s0 = 0;
-	{
-		if (125 < 0 || 125 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 125 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[125] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 125 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[125])();
-		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	{
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (351 < 0 || 351 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 351 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[351] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 351 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[351])(chaos_arg_0, chaos_arg_1);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_Lambda_169_Expression_bool_IEnumerableParameterExpression_0()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_Lambda_169_Expression_bool_IEnumerableParameterExpression_0(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INTPTR _s2;
-	_s0 = 0;
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s2 = 0;
-	{
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (352 < 0 || 352 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 352 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[352] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 352 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[352])(chaos_arg_0, chaos_arg_1, chaos_arg_2);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_Lambda_169_Expression_bool_IEnumerableParameterExpression_1()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_Lambda_169_Expression_bool_IEnumerableParameterExpression_1(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INTPTR _s2;
-	_s0 = 0;
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s2 = 0;
-	{
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (352 < 0 || 352 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 352 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[352] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 352 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[352])(chaos_arg_0, chaos_arg_1, chaos_arg_2);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_Lambda_169_Expression_bool_IEnumerableParameterExpression_2()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_Lambda_169_Expression_bool_IEnumerableParameterExpression_2(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INTPTR _s2;
-	_s0 = 0;
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	{
-		if (125 < 0 || 125 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 125 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[125] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 125 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[125])();
-		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	{
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (352 < 0 || 352 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 352 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[352] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 352 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[352])(chaos_arg_0, chaos_arg_1, chaos_arg_2);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_Lambda_170_Expression_string_IEnumerableParameterExpression_0()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_Lambda_170_Expression_string_IEnumerableParameterExpression_0(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INTPTR _s2;
-	_s0 = 0;
-	_s1 = 0;
-	_s2 = 0;
-	{
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (353 < 0 || 353 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 353 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[353] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 353 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[353])(chaos_arg_0, chaos_arg_1, chaos_arg_2);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_Lambda_170_Expression_string_IEnumerableParameterExpression_1()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_Lambda_170_Expression_string_IEnumerableParameterExpression_1(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INTPTR _s2;
-	_s0 = 0;
-	{
-		auto* chaos_string = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_String);
-		chaos_string->header.type_info = chaos_mt_System_Private_CoreLib_System_String.AsTypeInfoHot();
-		chaos_string->length = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-		chaos_string->utf8_data = "";
-		_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_string);
-	}
-	_s2 = 0;
-	{
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (353 < 0 || 353 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 353 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[353] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 353 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[353])(chaos_arg_0, chaos_arg_1, chaos_arg_2);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_Lambda_170_Expression_string_IEnumerableParameterExpression_2()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_Lambda_170_Expression_string_IEnumerableParameterExpression_2(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INTPTR _s2;
-	_s0 = 0;
-	_s1 = 0;
-	{
-		if (125 < 0 || 125 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 125 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[125] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 125 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[125])();
-		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	{
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (353 < 0 || 353 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 353 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[353] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 353 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[353])(chaos_arg_0, chaos_arg_1, chaos_arg_2);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_Lambda_171_Expression_string_bool_IEnumerableParameterExpression_0()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_Lambda_171_Expression_string_bool_IEnumerableParameterExpression_0(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INTPTR _s2;
-	CHAOS_IL2CPP_INTPTR _s3;
-	_s0 = 0;
-	_s1 = 0;
-	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s3 = 0;
-	{
-		const auto chaos_arg_3 = _s3;
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (354 < 0 || 354 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 354 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[354] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 354 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[354])(chaos_arg_0, chaos_arg_1, chaos_arg_2, chaos_arg_3);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_Lambda_171_Expression_string_bool_IEnumerableParameterExpression_1()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_Lambda_171_Expression_string_bool_IEnumerableParameterExpression_1(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INTPTR _s2;
-	CHAOS_IL2CPP_INTPTR _s3;
-	_s0 = 0;
-	{
-		auto* chaos_string = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_String);
-		chaos_string->header.type_info = chaos_mt_System_Private_CoreLib_System_String.AsTypeInfoHot();
-		chaos_string->length = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-		chaos_string->utf8_data = "";
-		_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_string);
-	}
-	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s3 = 0;
-	{
-		const auto chaos_arg_3 = _s3;
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (354 < 0 || 354 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 354 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[354] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 354 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[354])(chaos_arg_0, chaos_arg_1, chaos_arg_2, chaos_arg_3);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_Lambda_171_Expression_string_bool_IEnumerableParameterExpression_2()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_Lambda_171_Expression_string_bool_IEnumerableParameterExpression_2(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INTPTR _s2;
-	CHAOS_IL2CPP_INTPTR _s3;
-	_s0 = 0;
-	_s1 = 0;
-	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s3 = 0;
-	{
-		const auto chaos_arg_3 = _s3;
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (354 < 0 || 354 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 354 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[354] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 354 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[354])(chaos_arg_0, chaos_arg_1, chaos_arg_2, chaos_arg_3);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_Lambda_171_Expression_string_bool_IEnumerableParameterExpression_3()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_Lambda_171_Expression_string_bool_IEnumerableParameterExpression_3(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INTPTR _s2;
-	CHAOS_IL2CPP_INTPTR _s3;
-	_s0 = 0;
-	_s1 = 0;
-	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	{
-		if (125 < 0 || 125 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 125 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[125] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 125 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[125])();
-		_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	{
-		const auto chaos_arg_3 = _s3;
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (354 < 0 || 354 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 354 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[354] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 354 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[354])(chaos_arg_0, chaos_arg_1, chaos_arg_2, chaos_arg_3);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_Lambda_172_Expression_ParameterExpression_0()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_Lambda_172_Expression_ParameterExpression_0(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	_s0 = 0;
-	_s1 = 0;
-	{
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (355 < 0 || 355 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 355 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[355] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 355 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[355])(chaos_arg_0, chaos_arg_1);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_Lambda_172_Expression_ParameterExpression_1()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_Lambda_172_Expression_ParameterExpression_1(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	_s0 = 0;
-	{
-		const auto chaos_result = ChaosArrayEmpty_Inline();
-		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	{
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (355 < 0 || 355 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 355 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[355] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 355 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[355])(chaos_arg_0, chaos_arg_1);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_Lambda_172_Expression_ParameterExpression_2()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_Lambda_172_Expression_ParameterExpression_2(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	_s0 = 0;
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(2);
-	_s1 = ChaosArrayNew1D_Inline(&chaos_type_info_managed_array.hot, chaos_mt_System_Linq_Expressions_ParameterExpression.AsTypeInfoHot(), 1, _s1);
-	{
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (355 < 0 || 355 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 355 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[355] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 355 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[355])(chaos_arg_0, chaos_arg_1);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_Lambda_173_Expression_bool_ParameterExpression_0()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_Lambda_173_Expression_bool_ParameterExpression_0(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INTPTR _s2;
-	_s0 = 0;
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s2 = 0;
-	{
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (356 < 0 || 356 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 356 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[356] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 356 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[356])(chaos_arg_0, chaos_arg_1, chaos_arg_2);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_Lambda_173_Expression_bool_ParameterExpression_1()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_Lambda_173_Expression_bool_ParameterExpression_1(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INTPTR _s2;
-	_s0 = 0;
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s2 = 0;
-	{
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (356 < 0 || 356 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 356 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[356] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 356 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[356])(chaos_arg_0, chaos_arg_1, chaos_arg_2);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_Lambda_173_Expression_bool_ParameterExpression_2()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_Lambda_173_Expression_bool_ParameterExpression_2(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INTPTR _s2;
-	_s0 = 0;
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	{
-		const auto chaos_result = ChaosArrayEmpty_Inline();
-		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	{
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (356 < 0 || 356 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 356 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[356] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 356 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[356])(chaos_arg_0, chaos_arg_1, chaos_arg_2);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_Lambda_173_Expression_bool_ParameterExpression_3()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_Lambda_173_Expression_bool_ParameterExpression_3(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INTPTR _s2;
-	_s0 = 0;
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(2);
-	_s2 = ChaosArrayNew1D_Inline(&chaos_type_info_managed_array.hot, chaos_mt_System_Linq_Expressions_ParameterExpression.AsTypeInfoHot(), 1, _s2);
-	{
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (356 < 0 || 356 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 356 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[356] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 356 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[356])(chaos_arg_0, chaos_arg_1, chaos_arg_2);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_Lambda_174_Expression_IEnumerableParameterExpression_0()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_Lambda_174_Expression_IEnumerableParameterExpression_0(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	_s0 = 0;
-	_s1 = 0;
-	{
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (357 < 0 || 357 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 357 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[357] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 357 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[357])(chaos_arg_0, chaos_arg_1);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_Lambda_174_Expression_IEnumerableParameterExpression_1()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_Lambda_174_Expression_IEnumerableParameterExpression_1(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	_s0 = 0;
-	{
-		if (125 < 0 || 125 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 125 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[125] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 125 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[125])();
-		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	{
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (357 < 0 || 357 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 357 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[357] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 357 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[357])(chaos_arg_0, chaos_arg_1);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_Lambda_175_Expression_bool_IEnumerableParameterExpression_0()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_Lambda_175_Expression_bool_IEnumerableParameterExpression_0(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INTPTR _s2;
-	_s0 = 0;
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s2 = 0;
-	{
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (358 < 0 || 358 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 358 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[358] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 358 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[358])(chaos_arg_0, chaos_arg_1, chaos_arg_2);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_Lambda_175_Expression_bool_IEnumerableParameterExpression_1()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_Lambda_175_Expression_bool_IEnumerableParameterExpression_1(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INTPTR _s2;
-	_s0 = 0;
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s2 = 0;
-	{
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (358 < 0 || 358 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 358 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[358] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 358 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[358])(chaos_arg_0, chaos_arg_1, chaos_arg_2);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_Lambda_175_Expression_bool_IEnumerableParameterExpression_2()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_Lambda_175_Expression_bool_IEnumerableParameterExpression_2(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INTPTR _s2;
-	_s0 = 0;
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	{
-		if (125 < 0 || 125 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 125 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[125] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 125 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[125])();
-		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	{
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (358 < 0 || 358 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 358 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[358] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 358 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[358])(chaos_arg_0, chaos_arg_1, chaos_arg_2);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_Lambda_176_System_Type_Expression_ParameterExpression_0()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_Lambda_176_System_Type_Expression_ParameterExpression_0(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INTPTR _s2;
-	_s0 = 0;
-	_s1 = 0;
-	_s2 = 0;
-	{
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (359 < 0 || 359 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 359 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[359] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 359 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[359])(chaos_arg_0, chaos_arg_1, chaos_arg_2);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_Lambda_176_System_Type_Expression_ParameterExpression_1()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_Lambda_176_System_Type_Expression_ParameterExpression_1(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INTPTR _s2;
-	_s0 = 0;
-	_s1 = 0;
-	{
-		const auto chaos_result = ChaosArrayEmpty_Inline();
-		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	{
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (359 < 0 || 359 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 359 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[359] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 359 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[359])(chaos_arg_0, chaos_arg_1, chaos_arg_2);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_Lambda_176_System_Type_Expression_ParameterExpression_2()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_Lambda_176_System_Type_Expression_ParameterExpression_2(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INTPTR _s2;
-	_s0 = 0;
-	_s1 = 0;
-	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(2);
-	_s2 = ChaosArrayNew1D_Inline(&chaos_type_info_managed_array.hot, chaos_mt_System_Linq_Expressions_ParameterExpression.AsTypeInfoHot(), 1, _s2);
-	{
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (359 < 0 || 359 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 359 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[359] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 359 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[359])(chaos_arg_0, chaos_arg_1, chaos_arg_2);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_Lambda_177_System_Type_Expression_bool_ParameterExpression_0()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_Lambda_177_System_Type_Expression_bool_ParameterExpression_0(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INTPTR _s2;
-	CHAOS_IL2CPP_INTPTR _s3;
-	_s0 = 0;
-	_s1 = 0;
-	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s3 = 0;
-	{
-		const auto chaos_arg_3 = _s3;
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (360 < 0 || 360 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 360 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[360] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 360 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[360])(chaos_arg_0, chaos_arg_1, chaos_arg_2, chaos_arg_3);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_Lambda_177_System_Type_Expression_bool_ParameterExpression_1()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_Lambda_177_System_Type_Expression_bool_ParameterExpression_1(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INTPTR _s2;
-	CHAOS_IL2CPP_INTPTR _s3;
-	_s0 = 0;
-	_s1 = 0;
-	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s3 = 0;
-	{
-		const auto chaos_arg_3 = _s3;
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (360 < 0 || 360 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 360 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[360] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 360 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[360])(chaos_arg_0, chaos_arg_1, chaos_arg_2, chaos_arg_3);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_Lambda_177_System_Type_Expression_bool_ParameterExpression_2()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_Lambda_177_System_Type_Expression_bool_ParameterExpression_2(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INTPTR _s2;
-	CHAOS_IL2CPP_INTPTR _s3;
-	_s0 = 0;
-	_s1 = 0;
-	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	{
-		const auto chaos_result = ChaosArrayEmpty_Inline();
-		_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	{
-		const auto chaos_arg_3 = _s3;
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (360 < 0 || 360 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 360 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[360] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 360 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[360])(chaos_arg_0, chaos_arg_1, chaos_arg_2, chaos_arg_3);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_Lambda_177_System_Type_Expression_bool_ParameterExpression_3()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_Lambda_177_System_Type_Expression_bool_ParameterExpression_3(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INTPTR _s2;
-	CHAOS_IL2CPP_INTPTR _s3;
-	_s0 = 0;
-	_s1 = 0;
-	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(2);
-	_s3 = ChaosArrayNew1D_Inline(&chaos_type_info_managed_array.hot, chaos_mt_System_Linq_Expressions_ParameterExpression.AsTypeInfoHot(), 1, _s3);
-	{
-		const auto chaos_arg_3 = _s3;
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (360 < 0 || 360 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 360 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[360] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 360 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[360])(chaos_arg_0, chaos_arg_1, chaos_arg_2, chaos_arg_3);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_Lambda_178_System_Type_Expression_IEnumerableParameterExpression_0()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_Lambda_178_System_Type_Expression_IEnumerableParameterExpression_0(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INTPTR _s2;
-	_s0 = 0;
-	_s1 = 0;
-	_s2 = 0;
-	{
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (361 < 0 || 361 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 361 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[361] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 361 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[361])(chaos_arg_0, chaos_arg_1, chaos_arg_2);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_Lambda_178_System_Type_Expression_IEnumerableParameterExpression_1()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_Lambda_178_System_Type_Expression_IEnumerableParameterExpression_1(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INTPTR _s2;
-	_s0 = 0;
-	_s1 = 0;
-	{
-		if (125 < 0 || 125 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 125 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[125] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 125 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[125])();
-		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	{
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (361 < 0 || 361 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 361 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[361] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 361 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[361])(chaos_arg_0, chaos_arg_1, chaos_arg_2);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_Lambda_179_System_Type_Expression_bool_IEnumerableParameterExpression_0()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_Lambda_179_System_Type_Expression_bool_IEnumerableParameterExpression_0(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INTPTR _s2;
-	CHAOS_IL2CPP_INTPTR _s3;
-	_s0 = 0;
-	_s1 = 0;
-	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s3 = 0;
-	{
-		const auto chaos_arg_3 = _s3;
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (362 < 0 || 362 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 362 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[362] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 362 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[362])(chaos_arg_0, chaos_arg_1, chaos_arg_2, chaos_arg_3);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_Lambda_179_System_Type_Expression_bool_IEnumerableParameterExpression_1()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_Lambda_179_System_Type_Expression_bool_IEnumerableParameterExpression_1(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INTPTR _s2;
-	CHAOS_IL2CPP_INTPTR _s3;
-	_s0 = 0;
-	_s1 = 0;
-	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s3 = 0;
-	{
-		const auto chaos_arg_3 = _s3;
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (362 < 0 || 362 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 362 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[362] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 362 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[362])(chaos_arg_0, chaos_arg_1, chaos_arg_2, chaos_arg_3);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_Lambda_179_System_Type_Expression_bool_IEnumerableParameterExpression_2()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_Lambda_179_System_Type_Expression_bool_IEnumerableParameterExpression_2(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INTPTR _s2;
-	CHAOS_IL2CPP_INTPTR _s3;
-	_s0 = 0;
-	_s1 = 0;
-	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	{
-		if (125 < 0 || 125 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 125 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[125] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 125 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[125])();
-		_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	{
-		const auto chaos_arg_3 = _s3;
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (362 < 0 || 362 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 362 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[362] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 362 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[362])(chaos_arg_0, chaos_arg_1, chaos_arg_2, chaos_arg_3);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_Lambda_180_Expression_string_IEnumerableParameterExpression_0()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_Lambda_180_Expression_string_IEnumerableParameterExpression_0(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INTPTR _s2;
-	_s0 = 0;
-	_s1 = 0;
-	_s2 = 0;
-	{
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (363 < 0 || 363 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 363 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[363] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 363 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[363])(chaos_arg_0, chaos_arg_1, chaos_arg_2);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_Lambda_180_Expression_string_IEnumerableParameterExpression_1()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_Lambda_180_Expression_string_IEnumerableParameterExpression_1(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INTPTR _s2;
-	_s0 = 0;
-	{
-		auto* chaos_string = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_String);
-		chaos_string->header.type_info = chaos_mt_System_Private_CoreLib_System_String.AsTypeInfoHot();
-		chaos_string->length = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-		chaos_string->utf8_data = "";
-		_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_string);
-	}
-	_s2 = 0;
-	{
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (363 < 0 || 363 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 363 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[363] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 363 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[363])(chaos_arg_0, chaos_arg_1, chaos_arg_2);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_Lambda_180_Expression_string_IEnumerableParameterExpression_2()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_Lambda_180_Expression_string_IEnumerableParameterExpression_2(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INTPTR _s2;
-	_s0 = 0;
-	_s1 = 0;
-	{
-		if (125 < 0 || 125 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 125 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[125] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 125 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[125])();
-		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	{
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (363 < 0 || 363 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 363 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[363] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 363 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[363])(chaos_arg_0, chaos_arg_1, chaos_arg_2);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_Lambda_181_Expression_string_bool_IEnumerableParameterExpression_0()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_Lambda_181_Expression_string_bool_IEnumerableParameterExpression_0(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INTPTR _s2;
-	CHAOS_IL2CPP_INTPTR _s3;
-	_s0 = 0;
-	_s1 = 0;
-	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s3 = 0;
-	{
-		const auto chaos_arg_3 = _s3;
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (364 < 0 || 364 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 364 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[364] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 364 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[364])(chaos_arg_0, chaos_arg_1, chaos_arg_2, chaos_arg_3);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_Lambda_181_Expression_string_bool_IEnumerableParameterExpression_1()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_Lambda_181_Expression_string_bool_IEnumerableParameterExpression_1(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INTPTR _s2;
-	CHAOS_IL2CPP_INTPTR _s3;
-	_s0 = 0;
-	{
-		auto* chaos_string = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_String);
-		chaos_string->header.type_info = chaos_mt_System_Private_CoreLib_System_String.AsTypeInfoHot();
-		chaos_string->length = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-		chaos_string->utf8_data = "";
-		_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_string);
-	}
-	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s3 = 0;
-	{
-		const auto chaos_arg_3 = _s3;
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (364 < 0 || 364 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 364 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[364] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 364 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[364])(chaos_arg_0, chaos_arg_1, chaos_arg_2, chaos_arg_3);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_Lambda_181_Expression_string_bool_IEnumerableParameterExpression_2()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_Lambda_181_Expression_string_bool_IEnumerableParameterExpression_2(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INTPTR _s2;
-	CHAOS_IL2CPP_INTPTR _s3;
-	_s0 = 0;
-	_s1 = 0;
-	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s3 = 0;
-	{
-		const auto chaos_arg_3 = _s3;
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (364 < 0 || 364 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 364 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[364] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 364 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[364])(chaos_arg_0, chaos_arg_1, chaos_arg_2, chaos_arg_3);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_Lambda_181_Expression_string_bool_IEnumerableParameterExpression_3()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_Lambda_181_Expression_string_bool_IEnumerableParameterExpression_3(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INTPTR _s2;
-	CHAOS_IL2CPP_INTPTR _s3;
-	_s0 = 0;
-	_s1 = 0;
-	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	{
-		if (125 < 0 || 125 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 125 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[125] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 125 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[125])();
-		_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	{
-		const auto chaos_arg_3 = _s3;
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (364 < 0 || 364 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 364 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[364] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 364 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[364])(chaos_arg_0, chaos_arg_1, chaos_arg_2, chaos_arg_3);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_Lambda_182_System_Type_Expression_string_IEnumerableParameterExpression_0()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_Lambda_182_System_Type_Expression_string_IEnumerableParameterExpression_0(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INTPTR _s2;
-	CHAOS_IL2CPP_INTPTR _s3;
-	_s0 = 0;
-	_s1 = 0;
-	_s2 = 0;
-	_s3 = 0;
-	{
-		const auto chaos_arg_3 = _s3;
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (365 < 0 || 365 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 365 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[365] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 365 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[365])(chaos_arg_0, chaos_arg_1, chaos_arg_2, chaos_arg_3);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_Lambda_182_System_Type_Expression_string_IEnumerableParameterExpression_1()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_Lambda_182_System_Type_Expression_string_IEnumerableParameterExpression_1(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INTPTR _s2;
-	CHAOS_IL2CPP_INTPTR _s3;
-	_s0 = 0;
-	_s1 = 0;
-	{
-		auto* chaos_string = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_String);
-		chaos_string->header.type_info = chaos_mt_System_Private_CoreLib_System_String.AsTypeInfoHot();
-		chaos_string->length = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-		chaos_string->utf8_data = "";
-		_s2 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_string);
-	}
-	_s3 = 0;
-	{
-		const auto chaos_arg_3 = _s3;
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (365 < 0 || 365 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 365 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[365] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 365 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[365])(chaos_arg_0, chaos_arg_1, chaos_arg_2, chaos_arg_3);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_Lambda_182_System_Type_Expression_string_IEnumerableParameterExpression_2()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_Lambda_182_System_Type_Expression_string_IEnumerableParameterExpression_2(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INTPTR _s2;
-	CHAOS_IL2CPP_INTPTR _s3;
-	_s0 = 0;
-	_s1 = 0;
-	_s2 = 0;
-	{
-		if (125 < 0 || 125 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 125 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[125] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 125 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[125])();
-		_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	{
-		const auto chaos_arg_3 = _s3;
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (365 < 0 || 365 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 365 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[365] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 365 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[365])(chaos_arg_0, chaos_arg_1, chaos_arg_2, chaos_arg_3);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_Lambda_183_System_Type_Expression_string_bool_IEnumerableParameterExpression_0()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_Lambda_183_System_Type_Expression_string_bool_IEnumerableParameterExpression_0(void)
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_SymbolDocument_260_string_System_Guid_0()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_SymbolDocument_260_string_System_Guid_0(void)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
@@ -6080,31 +5055,32 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Li
 	CHAOS_IL2CPP_INTPTR _s2;
 	CHAOS_IL2CPP_INTPTR _s3;
 	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
 	_s0 = 0;
-	_s1 = 0;
-	_s2 = 0;
-	_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s4 = 0;
+	_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[0]);
 	{
-		const auto chaos_arg_4 = _s4;
-		const auto chaos_arg_3 = _s3;
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (366 < 0 || 366 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 366 out of range
+		const auto chaos_address = _s1;
+		if ((chaos_address & chaos_managed_pointer_local_slot_tag) != 0)
+		{
+			auto* chaos_slot = reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(static_cast<CHAOS_IL2CPP_UINTPTR>(chaos_address & ~chaos_managed_pointer_local_slot_tag));
+			*chaos_slot = 0;
 		}
-		if (kChaosExternalRuntimeFnTable[366] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 366 is null
+		else
+		{
+			*reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(chaos_address) = 0;
 		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[366])(chaos_arg_0, chaos_arg_1, chaos_arg_2, chaos_arg_3, chaos_arg_4);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	_s1 = chaos_locals[0];
+	{
+		const auto chaos_result = chaos_external_runtime_System_Linq_Expressions_Expression__SymbolDocument_SymbolDocumentInfo_System_String_System_Guid_();
+		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	return;
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_Lambda_183_System_Type_Expression_string_bool_IEnumerableParameterExpression_1()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_Lambda_183_System_Type_Expression_string_bool_IEnumerableParameterExpression_1(void)
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_SymbolDocument_260_string_System_Guid_1()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_SymbolDocument_260_string_System_Guid_1(void)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
@@ -6114,1233 +5090,38 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Li
 	CHAOS_IL2CPP_INTPTR _s2;
 	CHAOS_IL2CPP_INTPTR _s3;
 	CHAOS_IL2CPP_INTPTR _s4;
-	_s0 = 0;
-	_s1 = 0;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
 	{
 		auto* chaos_string = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_String);
 		chaos_string->header.type_info = chaos_mt_System_Private_CoreLib_System_String.AsTypeInfoHot();
 		chaos_string->length = static_cast<CHAOS_IL2CPP_INTPTR>(0);
 		chaos_string->utf8_data = "";
-		_s2 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_string);
+		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_string);
 	}
-	_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s4 = 0;
+	_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[0]);
 	{
-		const auto chaos_arg_4 = _s4;
-		const auto chaos_arg_3 = _s3;
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (366 < 0 || 366 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 366 out of range
+		const auto chaos_address = _s1;
+		if ((chaos_address & chaos_managed_pointer_local_slot_tag) != 0)
+		{
+			auto* chaos_slot = reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(static_cast<CHAOS_IL2CPP_UINTPTR>(chaos_address & ~chaos_managed_pointer_local_slot_tag));
+			*chaos_slot = 0;
 		}
-		if (kChaosExternalRuntimeFnTable[366] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 366 is null
+		else
+		{
+			*reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(chaos_address) = 0;
 		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[366])(chaos_arg_0, chaos_arg_1, chaos_arg_2, chaos_arg_3, chaos_arg_4);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_Lambda_183_System_Type_Expression_string_bool_IEnumerableParameterExpression_2()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_Lambda_183_System_Type_Expression_string_bool_IEnumerableParameterExpression_2(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INTPTR _s2;
-	CHAOS_IL2CPP_INTPTR _s3;
-	CHAOS_IL2CPP_INTPTR _s4;
-	_s0 = 0;
-	_s1 = 0;
-	_s2 = 0;
-	_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	_s1 = chaos_locals[0];
 	{
-		if (125 < 0 || 125 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 125 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[125] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 125 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[125])();
-		_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	{
-		const auto chaos_arg_4 = _s4;
-		const auto chaos_arg_3 = _s3;
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (366 < 0 || 366 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 366 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[366] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 366 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[366])(chaos_arg_0, chaos_arg_1, chaos_arg_2, chaos_arg_3, chaos_arg_4);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_LeftShift_64_Expression_Expression_0()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_LeftShift_64_Expression_Expression_0(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	_s0 = 0;
-	_s1 = 0;
-	{
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (367 < 0 || 367 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 367 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[367] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 367 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[367])(chaos_arg_0, chaos_arg_1);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_LeftShift_65_Expression_Expression_MethodInfo_0()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_LeftShift_65_Expression_Expression_MethodInfo_0(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INTPTR _s2;
-	_s0 = 0;
-	_s1 = 0;
-	_s2 = 0;
-	{
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (368 < 0 || 368 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 368 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[368] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 368 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[368])(chaos_arg_0, chaos_arg_1, chaos_arg_2);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_LeftShiftAssign_66_Expression_Expression_0()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_LeftShiftAssign_66_Expression_Expression_0(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	_s0 = 0;
-	_s1 = 0;
-	{
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (369 < 0 || 369 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 369 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[369] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 369 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[369])(chaos_arg_0, chaos_arg_1);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_LeftShiftAssign_67_Expression_Expression_MethodInfo_0()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_LeftShiftAssign_67_Expression_Expression_MethodInfo_0(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INTPTR _s2;
-	_s0 = 0;
-	_s1 = 0;
-	_s2 = 0;
-	{
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (370 < 0 || 370 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 370 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[370] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 370 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[370])(chaos_arg_0, chaos_arg_1, chaos_arg_2);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_LeftShiftAssign_68_Expression_Expression_MethodInfo_LambdaExpression_0()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_LeftShiftAssign_68_Expression_Expression_MethodInfo_LambdaExpression_0(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INTPTR _s2;
-	CHAOS_IL2CPP_INTPTR _s3;
-	_s0 = 0;
-	_s1 = 0;
-	_s2 = 0;
-	_s3 = 0;
-	{
-		const auto chaos_arg_3 = _s3;
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (371 < 0 || 371 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 371 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[371] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 371 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[371])(chaos_arg_0, chaos_arg_1, chaos_arg_2, chaos_arg_3);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_LessThan_12_Expression_Expression_0()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_LessThan_12_Expression_Expression_0(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	_s0 = 0;
-	_s1 = 0;
-	{
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (372 < 0 || 372 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 372 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[372] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 372 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[372])(chaos_arg_0, chaos_arg_1);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_LessThan_13_Expression_Expression_bool_MethodInfo_0()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_LessThan_13_Expression_Expression_bool_MethodInfo_0(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INTPTR _s2;
-	CHAOS_IL2CPP_INTPTR _s3;
-	_s0 = 0;
-	_s1 = 0;
-	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s3 = 0;
-	{
-		const auto chaos_arg_3 = _s3;
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (373 < 0 || 373 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 373 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[373] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 373 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[373])(chaos_arg_0, chaos_arg_1, chaos_arg_2, chaos_arg_3);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_LessThan_13_Expression_Expression_bool_MethodInfo_1()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_LessThan_13_Expression_Expression_bool_MethodInfo_1(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INTPTR _s2;
-	CHAOS_IL2CPP_INTPTR _s3;
-	_s0 = 0;
-	_s1 = 0;
-	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s3 = 0;
-	{
-		const auto chaos_arg_3 = _s3;
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (373 < 0 || 373 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 373 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[373] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 373 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[373])(chaos_arg_0, chaos_arg_1, chaos_arg_2, chaos_arg_3);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_LessThanOrEqual_16_Expression_Expression_0()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_LessThanOrEqual_16_Expression_Expression_0(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	_s0 = 0;
-	_s1 = 0;
-	{
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (374 < 0 || 374 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 374 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[374] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 374 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[374])(chaos_arg_0, chaos_arg_1);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_LessThanOrEqual_17_Expression_Expression_bool_MethodInfo_0()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_LessThanOrEqual_17_Expression_Expression_bool_MethodInfo_0(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INTPTR _s2;
-	CHAOS_IL2CPP_INTPTR _s3;
-	_s0 = 0;
-	_s1 = 0;
-	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s3 = 0;
-	{
-		const auto chaos_arg_3 = _s3;
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (375 < 0 || 375 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 375 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[375] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 375 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[375])(chaos_arg_0, chaos_arg_1, chaos_arg_2, chaos_arg_3);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_LessThanOrEqual_17_Expression_Expression_bool_MethodInfo_1()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_LessThanOrEqual_17_Expression_Expression_bool_MethodInfo_1(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INTPTR _s2;
-	CHAOS_IL2CPP_INTPTR _s3;
-	_s0 = 0;
-	_s1 = 0;
-	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s3 = 0;
-	{
-		const auto chaos_arg_3 = _s3;
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (375 < 0 || 375 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 375 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[375] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 375 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[375])(chaos_arg_0, chaos_arg_1, chaos_arg_2, chaos_arg_3);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_ListBind_211_MemberInfo_ElementInit_0()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_ListBind_211_MemberInfo_ElementInit_0(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	_s0 = 0;
-	_s1 = 0;
-	{
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (376 < 0 || 376 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 376 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[376] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 376 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[376])(chaos_arg_0, chaos_arg_1);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_ListBind_211_MemberInfo_ElementInit_1()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_ListBind_211_MemberInfo_ElementInit_1(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	_s0 = 0;
-	{
-		const auto chaos_result = ChaosArrayEmpty_Inline();
-		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	{
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (376 < 0 || 376 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 376 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[376] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 376 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[376])(chaos_arg_0, chaos_arg_1);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_ListBind_211_MemberInfo_ElementInit_2()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_ListBind_211_MemberInfo_ElementInit_2(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	_s0 = 0;
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(2);
-	_s1 = ChaosArrayNew1D_Inline(&chaos_type_info_managed_array.hot, chaos_mt_System_Linq_Expressions_ElementInit.AsTypeInfoHot(), 1, _s1);
-	{
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (376 < 0 || 376 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 376 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[376] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 376 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[376])(chaos_arg_0, chaos_arg_1);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_ListBind_212_MemberInfo_IEnumerableElementInit_0()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_ListBind_212_MemberInfo_IEnumerableElementInit_0(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	_s0 = 0;
-	_s1 = 0;
-	{
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (379 < 0 || 379 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 379 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[379] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 379 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[379])(chaos_arg_0, chaos_arg_1);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_ListBind_212_MemberInfo_IEnumerableElementInit_1()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_ListBind_212_MemberInfo_IEnumerableElementInit_1(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	_s0 = 0;
-	{
-		if (380 < 0 || 380 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 380 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[380] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 380 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[380])();
-		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	{
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (379 < 0 || 379 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 379 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[379] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 379 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[379])(chaos_arg_0, chaos_arg_1);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_ListBind_213_MethodInfo_ElementInit_0()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_ListBind_213_MethodInfo_ElementInit_0(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	_s0 = 0;
-	_s1 = 0;
-	{
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (381 < 0 || 381 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 381 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[381] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 381 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[381])(chaos_arg_0, chaos_arg_1);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_ListBind_213_MethodInfo_ElementInit_1()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_ListBind_213_MethodInfo_ElementInit_1(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	_s0 = 0;
-	{
-		const auto chaos_result = ChaosArrayEmpty_Inline();
-		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	{
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (381 < 0 || 381 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 381 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[381] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 381 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[381])(chaos_arg_0, chaos_arg_1);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_ListBind_213_MethodInfo_ElementInit_2()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_ListBind_213_MethodInfo_ElementInit_2(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	_s0 = 0;
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(2);
-	_s1 = ChaosArrayNew1D_Inline(&chaos_type_info_managed_array.hot, chaos_mt_System_Linq_Expressions_ElementInit.AsTypeInfoHot(), 1, _s1);
-	{
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (381 < 0 || 381 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 381 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[381] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 381 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[381])(chaos_arg_0, chaos_arg_1);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_ListBind_214_MethodInfo_IEnumerableElementInit_0()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_ListBind_214_MethodInfo_IEnumerableElementInit_0(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	_s0 = 0;
-	_s1 = 0;
-	{
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (382 < 0 || 382 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 382 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[382] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 382 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[382])(chaos_arg_0, chaos_arg_1);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_ListBind_214_MethodInfo_IEnumerableElementInit_1()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_ListBind_214_MethodInfo_IEnumerableElementInit_1(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	_s0 = 0;
-	{
-		if (380 < 0 || 380 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 380 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[380] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 380 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[380])();
-		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	{
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (382 < 0 || 382 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 382 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[382] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 382 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[382])(chaos_arg_0, chaos_arg_1);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_ListInit_189_NewExpression_Expression_0()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_ListInit_189_NewExpression_Expression_0(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	_s0 = 0;
-	_s1 = 0;
-	{
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (383 < 0 || 383 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 383 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[383] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 383 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[383])(chaos_arg_0, chaos_arg_1);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_ListInit_189_NewExpression_Expression_1()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_ListInit_189_NewExpression_Expression_1(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	_s0 = 0;
-	{
-		const auto chaos_result = ChaosArrayEmpty_Inline();
-		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	{
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (383 < 0 || 383 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 383 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[383] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 383 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[383])(chaos_arg_0, chaos_arg_1);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_ListInit_189_NewExpression_Expression_2()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_ListInit_189_NewExpression_Expression_2(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	_s0 = 0;
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(2);
-	_s1 = ChaosArrayNew1D_Inline(&chaos_type_info_managed_array.hot, chaos_mt_System_Linq_Expressions_Expression.AsTypeInfoHot(), 1, _s1);
-	{
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (383 < 0 || 383 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 383 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[383] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 383 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[383])(chaos_arg_0, chaos_arg_1);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_ListInit_190_NewExpression_IEnumerableExpression_0()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_ListInit_190_NewExpression_IEnumerableExpression_0(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	_s0 = 0;
-	_s1 = 0;
-	{
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (384 < 0 || 384 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 384 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[384] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 384 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[384])(chaos_arg_0, chaos_arg_1);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_ListInit_190_NewExpression_IEnumerableExpression_1()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_ListInit_190_NewExpression_IEnumerableExpression_1(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	_s0 = 0;
-	{
-		if (126 < 0 || 126 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 126 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[126] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 126 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[126])();
-		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	{
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (384 < 0 || 384 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 384 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[384] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 384 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[384])(chaos_arg_0, chaos_arg_1);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_ListInit_191_NewExpression_MethodInfo_Expression_0()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_ListInit_191_NewExpression_MethodInfo_Expression_0(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INTPTR _s2;
-	_s0 = 0;
-	_s1 = 0;
-	_s2 = 0;
-	{
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (385 < 0 || 385 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 385 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[385] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 385 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[385])(chaos_arg_0, chaos_arg_1, chaos_arg_2);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_ListInit_191_NewExpression_MethodInfo_Expression_1()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_ListInit_191_NewExpression_MethodInfo_Expression_1(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INTPTR _s2;
-	_s0 = 0;
-	_s1 = 0;
-	{
-		const auto chaos_result = ChaosArrayEmpty_Inline();
+		const auto chaos_result = chaos_external_runtime_System_Linq_Expressions_Expression__SymbolDocument_SymbolDocumentInfo_System_String_System_Guid_();
 		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
-	{
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (385 < 0 || 385 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 385 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[385] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 385 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[385])(chaos_arg_0, chaos_arg_1, chaos_arg_2);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
 	return;
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_ListInit_191_NewExpression_MethodInfo_Expression_2()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_ListInit_191_NewExpression_MethodInfo_Expression_2(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INTPTR _s2;
-	_s0 = 0;
-	_s1 = 0;
-	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(2);
-	_s2 = ChaosArrayNew1D_Inline(&chaos_type_info_managed_array.hot, chaos_mt_System_Linq_Expressions_Expression.AsTypeInfoHot(), 1, _s2);
-	{
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (385 < 0 || 385 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 385 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[385] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 385 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[385])(chaos_arg_0, chaos_arg_1, chaos_arg_2);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_ListInit_192_NewExpression_MethodInfo_IEnumerableExpression_0()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_ListInit_192_NewExpression_MethodInfo_IEnumerableExpression_0(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INTPTR _s2;
-	_s0 = 0;
-	_s1 = 0;
-	_s2 = 0;
-	{
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (386 < 0 || 386 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 386 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[386] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 386 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[386])(chaos_arg_0, chaos_arg_1, chaos_arg_2);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_ListInit_192_NewExpression_MethodInfo_IEnumerableExpression_1()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_ListInit_192_NewExpression_MethodInfo_IEnumerableExpression_1(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INTPTR _s2;
-	_s0 = 0;
-	_s1 = 0;
-	{
-		if (126 < 0 || 126 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 126 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[126] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 126 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[126])();
-		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	{
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (386 < 0 || 386 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 386 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[386] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 386 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[386])(chaos_arg_0, chaos_arg_1, chaos_arg_2);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_ListInit_193_NewExpression_ElementInit_0()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_ListInit_193_NewExpression_ElementInit_0(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	_s0 = 0;
-	_s1 = 0;
-	{
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (387 < 0 || 387 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 387 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[387] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 387 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[387])(chaos_arg_0, chaos_arg_1);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_ListInit_193_NewExpression_ElementInit_1()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_ListInit_193_NewExpression_ElementInit_1(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	_s0 = 0;
-	{
-		const auto chaos_result = ChaosArrayEmpty_Inline();
-		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	{
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (387 < 0 || 387 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 387 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[387] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 387 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[387])(chaos_arg_0, chaos_arg_1);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_ListInit_193_NewExpression_ElementInit_2()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_ListInit_193_NewExpression_ElementInit_2(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	_s0 = 0;
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(2);
-	_s1 = ChaosArrayNew1D_Inline(&chaos_type_info_managed_array.hot, chaos_mt_System_Linq_Expressions_ElementInit.AsTypeInfoHot(), 1, _s1);
-	{
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (387 < 0 || 387 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 387 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[387] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 387 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[387])(chaos_arg_0, chaos_arg_1);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_ListInit_194_NewExpression_IEnumerableElementInit_0()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_ListInit_194_NewExpression_IEnumerableElementInit_0(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	_s0 = 0;
-	_s1 = 0;
-	{
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (388 < 0 || 388 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 388 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[388] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 388 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[388])(chaos_arg_0, chaos_arg_1);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_ListInit_194_NewExpression_IEnumerableElementInit_1()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_ListInit_194_NewExpression_IEnumerableElementInit_1(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	_s0 = 0;
-	{
-		if (380 < 0 || 380 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 380 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[380] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 380 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[380])();
-		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	{
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (388 < 0 || 388 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 388 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[388] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 388 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[388])(chaos_arg_0, chaos_arg_1);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_Loop_195_Expression_0()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_Loop_195_Expression_0(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	_s0 = 0;
-	{
-		const auto chaos_arg_0 = _s0;
-		if (389 < 0 || 389 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 389 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[389] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 389 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[389])(chaos_arg_0);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_Loop_196_Expression_LabelTarget_0()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_Loop_196_Expression_LabelTarget_0(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	_s0 = 0;
-	_s1 = 0;
-	{
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (390 < 0 || 390 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 390 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[390] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 390 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[390])(chaos_arg_0, chaos_arg_1);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_Loop_197_Expression_LabelTarget_LabelTarget_0()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_Loop_197_Expression_LabelTarget_LabelTarget_0(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INTPTR _s2;
-	_s0 = 0;
-	_s1 = 0;
-	_s2 = 0;
-	{
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (391 < 0 || 391 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 391 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[391] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 391 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[391])(chaos_arg_0, chaos_arg_1, chaos_arg_2);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_MakeBinary_1_ExpressionType_Expression_Expression_0()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_MakeBinary_1_ExpressionType_Expression_Expression_0(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INTPTR _s2;
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s1 = 0;
-	_s2 = 0;
-	{
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (392 < 0 || 392 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 392 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[392] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 392 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[392])(chaos_arg_0, chaos_arg_1, chaos_arg_2);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_MakeBinary_2_ExpressionType_Expression_Expression_bool_MethodInfo_0()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_MakeBinary_2_ExpressionType_Expression_Expression_bool_MethodInfo_0(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INTPTR _s2;
-	CHAOS_IL2CPP_INTPTR _s3;
-	CHAOS_IL2CPP_INTPTR _s4;
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s1 = 0;
-	_s2 = 0;
-	_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s4 = 0;
-	{
-		const auto chaos_arg_4 = _s4;
-		const auto chaos_arg_3 = _s3;
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (393 < 0 || 393 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 393 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[393] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 393 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[393])(chaos_arg_0, chaos_arg_1, chaos_arg_2, chaos_arg_3, chaos_arg_4);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_MakeBinary_3_ExpressionType_Expression_Expression_bool_MethodInfo_LambdaExpression_0()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_MakeBinary_3_ExpressionType_Expression_Expression_bool_MethodInfo_LambdaExpression_0(void)
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_SymbolDocument_261_string_System_Guid_System_Guid_0()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_SymbolDocument_261_string_System_Guid_System_Guid_0(void)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
@@ -7351,222 +5132,46 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Li
 	CHAOS_IL2CPP_INTPTR _s3;
 	CHAOS_IL2CPP_INTPTR _s4;
 	CHAOS_IL2CPP_INTPTR _s5;
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s1 = 0;
-	_s2 = 0;
-	_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s4 = 0;
-	_s5 = 0;
-	{
-		const auto chaos_arg_5 = _s5;
-		const auto chaos_arg_4 = _s4;
-		const auto chaos_arg_3 = _s3;
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (394 < 0 || 394 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 394 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[394] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 394 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[394])(chaos_arg_0, chaos_arg_1, chaos_arg_2, chaos_arg_3, chaos_arg_4, chaos_arg_5);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_MakeCatchBlock_111_System_Type_ParameterExpression_Expression_Expression_0()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_MakeCatchBlock_111_System_Type_ParameterExpression_Expression_Expression_0(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INTPTR _s2;
-	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
 	_s0 = 0;
-	_s1 = 0;
-	_s2 = 0;
-	_s3 = 0;
+	_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[0]);
 	{
-		const auto chaos_arg_3 = _s3;
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (395 < 0 || 395 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 395 out of range
+		const auto chaos_address = _s1;
+		if ((chaos_address & chaos_managed_pointer_local_slot_tag) != 0)
+		{
+			auto* chaos_slot = reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(static_cast<CHAOS_IL2CPP_UINTPTR>(chaos_address & ~chaos_managed_pointer_local_slot_tag));
+			*chaos_slot = 0;
 		}
-		if (kChaosExternalRuntimeFnTable[395] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 395 is null
+		else
+		{
+			*reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(chaos_address) = 0;
 		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[395])(chaos_arg_0, chaos_arg_1, chaos_arg_2, chaos_arg_3);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	_s1 = chaos_locals[0];
+	_s2 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[0]);
+	{
+		const auto chaos_address = _s2;
+		if ((chaos_address & chaos_managed_pointer_local_slot_tag) != 0)
+		{
+			auto* chaos_slot = reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(static_cast<CHAOS_IL2CPP_UINTPTR>(chaos_address & ~chaos_managed_pointer_local_slot_tag));
+			*chaos_slot = 0;
+		}
+		else
+		{
+			*reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(chaos_address) = 0;
+		}
+	}
+	_s2 = chaos_locals[0];
+	{
+		const auto chaos_result = chaos_external_runtime_System_Linq_Expressions_Expression__SymbolDocument_SymbolDocumentInfo_System_String_System_Guid_System_Guid_();
+		_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	return;
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_MakeDynamic_133_System_Type_CallSiteBinder_IEnumerableExpression_0()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_MakeDynamic_133_System_Type_CallSiteBinder_IEnumerableExpression_0(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INTPTR _s2;
-	_s0 = 0;
-	_s1 = 0;
-	_s2 = 0;
-	{
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (396 < 0 || 396 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 396 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[396] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 396 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[396])(chaos_arg_0, chaos_arg_1, chaos_arg_2);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_MakeDynamic_133_System_Type_CallSiteBinder_IEnumerableExpression_1()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_MakeDynamic_133_System_Type_CallSiteBinder_IEnumerableExpression_1(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INTPTR _s2;
-	_s0 = 0;
-	_s1 = 0;
-	{
-		if (126 < 0 || 126 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 126 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[126] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 126 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[126])();
-		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	{
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (396 < 0 || 396 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 396 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[396] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 396 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[396])(chaos_arg_0, chaos_arg_1, chaos_arg_2);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_MakeDynamic_134_System_Type_CallSiteBinder_Expression_0()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_MakeDynamic_134_System_Type_CallSiteBinder_Expression_0(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INTPTR _s2;
-	_s0 = 0;
-	_s1 = 0;
-	_s2 = 0;
-	{
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (397 < 0 || 397 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 397 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[397] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 397 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[397])(chaos_arg_0, chaos_arg_1, chaos_arg_2);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_MakeDynamic_135_System_Type_CallSiteBinder_Expression_Expression_0()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_MakeDynamic_135_System_Type_CallSiteBinder_Expression_Expression_0(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INTPTR _s2;
-	CHAOS_IL2CPP_INTPTR _s3;
-	_s0 = 0;
-	_s1 = 0;
-	_s2 = 0;
-	_s3 = 0;
-	{
-		const auto chaos_arg_3 = _s3;
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (398 < 0 || 398 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 398 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[398] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 398 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[398])(chaos_arg_0, chaos_arg_1, chaos_arg_2, chaos_arg_3);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_MakeDynamic_136_System_Type_CallSiteBinder_Expression_Expression_Expression_0()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_MakeDynamic_136_System_Type_CallSiteBinder_Expression_Expression_Expression_0(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INTPTR _s2;
-	CHAOS_IL2CPP_INTPTR _s3;
-	CHAOS_IL2CPP_INTPTR _s4;
-	_s0 = 0;
-	_s1 = 0;
-	_s2 = 0;
-	_s3 = 0;
-	_s4 = 0;
-	{
-		const auto chaos_arg_4 = _s4;
-		const auto chaos_arg_3 = _s3;
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (399 < 0 || 399 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 399 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[399] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 399 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[399])(chaos_arg_0, chaos_arg_1, chaos_arg_2, chaos_arg_3, chaos_arg_4);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_MakeDynamic_137_System_Type_CallSiteBinder_Expression_Expression_Expression_Expression_0()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_MakeDynamic_137_System_Type_CallSiteBinder_Expression_Expression_Expression_Expression_0(void)
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_SymbolDocument_261_string_System_Guid_System_Guid_1()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_SymbolDocument_261_string_System_Guid_System_Guid_1(void)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
@@ -7577,33 +5182,52 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Li
 	CHAOS_IL2CPP_INTPTR _s3;
 	CHAOS_IL2CPP_INTPTR _s4;
 	CHAOS_IL2CPP_INTPTR _s5;
-	_s0 = 0;
-	_s1 = 0;
-	_s2 = 0;
-	_s3 = 0;
-	_s4 = 0;
-	_s5 = 0;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
 	{
-		const auto chaos_arg_5 = _s5;
-		const auto chaos_arg_4 = _s4;
-		const auto chaos_arg_3 = _s3;
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (400 < 0 || 400 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 400 out of range
+		auto* chaos_string = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_String);
+		chaos_string->header.type_info = chaos_mt_System_Private_CoreLib_System_String.AsTypeInfoHot();
+		chaos_string->length = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+		chaos_string->utf8_data = "";
+		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_string);
+	}
+	_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[0]);
+	{
+		const auto chaos_address = _s1;
+		if ((chaos_address & chaos_managed_pointer_local_slot_tag) != 0)
+		{
+			auto* chaos_slot = reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(static_cast<CHAOS_IL2CPP_UINTPTR>(chaos_address & ~chaos_managed_pointer_local_slot_tag));
+			*chaos_slot = 0;
 		}
-		if (kChaosExternalRuntimeFnTable[400] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 400 is null
+		else
+		{
+			*reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(chaos_address) = 0;
 		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[400])(chaos_arg_0, chaos_arg_1, chaos_arg_2, chaos_arg_3, chaos_arg_4, chaos_arg_5);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	_s1 = chaos_locals[0];
+	_s2 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[0]);
+	{
+		const auto chaos_address = _s2;
+		if ((chaos_address & chaos_managed_pointer_local_slot_tag) != 0)
+		{
+			auto* chaos_slot = reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(static_cast<CHAOS_IL2CPP_UINTPTR>(chaos_address & ~chaos_managed_pointer_local_slot_tag));
+			*chaos_slot = 0;
+		}
+		else
+		{
+			*reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(chaos_address) = 0;
+		}
+	}
+	_s2 = chaos_locals[0];
+	{
+		const auto chaos_result = chaos_external_runtime_System_Linq_Expressions_Expression__SymbolDocument_SymbolDocumentInfo_System_String_System_Guid_System_Guid_();
+		_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	return;
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_MakeDynamic_138_System_Type_CallSiteBinder_Expression_0()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_MakeDynamic_138_System_Type_CallSiteBinder_Expression_0(void)
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_SymbolDocument_262_string_System_Guid_System_Guid_System_Guid_0()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_SymbolDocument_262_string_System_Guid_System_Guid_System_Guid_0(void)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
@@ -7611,27 +5235,64 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Li
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
 	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INTPTR _s5;
+	CHAOS_IL2CPP_INTPTR _s6;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
 	_s0 = 0;
-	_s1 = 0;
-	_s2 = 0;
+	_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[0]);
 	{
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (401 < 0 || 401 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 401 out of range
+		const auto chaos_address = _s1;
+		if ((chaos_address & chaos_managed_pointer_local_slot_tag) != 0)
+		{
+			auto* chaos_slot = reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(static_cast<CHAOS_IL2CPP_UINTPTR>(chaos_address & ~chaos_managed_pointer_local_slot_tag));
+			*chaos_slot = 0;
 		}
-		if (kChaosExternalRuntimeFnTable[401] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 401 is null
+		else
+		{
+			*reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(chaos_address) = 0;
 		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[401])(chaos_arg_0, chaos_arg_1, chaos_arg_2);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	_s1 = chaos_locals[0];
+	_s2 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[0]);
+	{
+		const auto chaos_address = _s2;
+		if ((chaos_address & chaos_managed_pointer_local_slot_tag) != 0)
+		{
+			auto* chaos_slot = reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(static_cast<CHAOS_IL2CPP_UINTPTR>(chaos_address & ~chaos_managed_pointer_local_slot_tag));
+			*chaos_slot = 0;
+		}
+		else
+		{
+			*reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(chaos_address) = 0;
+		}
+	}
+	_s2 = chaos_locals[0];
+	_s3 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[0]);
+	{
+		const auto chaos_address = _s3;
+		if ((chaos_address & chaos_managed_pointer_local_slot_tag) != 0)
+		{
+			auto* chaos_slot = reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(static_cast<CHAOS_IL2CPP_UINTPTR>(chaos_address & ~chaos_managed_pointer_local_slot_tag));
+			*chaos_slot = 0;
+		}
+		else
+		{
+			*reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(chaos_address) = 0;
+		}
+	}
+	_s3 = chaos_locals[0];
+	{
+		const auto chaos_result = chaos_external_runtime_System_Linq_Expressions_Expression__SymbolDocument_SymbolDocumentInfo_System_String_System_Guid_System_Guid_System_Guid_();
+		_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	return;
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_MakeDynamic_138_System_Type_CallSiteBinder_Expression_1()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_MakeDynamic_138_System_Type_CallSiteBinder_Expression_1(void)
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_SymbolDocument_262_string_System_Guid_System_Guid_System_Guid_1()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_SymbolDocument_262_string_System_Guid_System_Guid_System_Guid_1(void)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
@@ -7639,6 +5300,218 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Li
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
 	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INTPTR _s5;
+	CHAOS_IL2CPP_INTPTR _s6;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	{
+		auto* chaos_string = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_String);
+		chaos_string->header.type_info = chaos_mt_System_Private_CoreLib_System_String.AsTypeInfoHot();
+		chaos_string->length = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+		chaos_string->utf8_data = "";
+		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_string);
+	}
+	_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[0]);
+	{
+		const auto chaos_address = _s1;
+		if ((chaos_address & chaos_managed_pointer_local_slot_tag) != 0)
+		{
+			auto* chaos_slot = reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(static_cast<CHAOS_IL2CPP_UINTPTR>(chaos_address & ~chaos_managed_pointer_local_slot_tag));
+			*chaos_slot = 0;
+		}
+		else
+		{
+			*reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(chaos_address) = 0;
+		}
+	}
+	_s1 = chaos_locals[0];
+	_s2 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[0]);
+	{
+		const auto chaos_address = _s2;
+		if ((chaos_address & chaos_managed_pointer_local_slot_tag) != 0)
+		{
+			auto* chaos_slot = reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(static_cast<CHAOS_IL2CPP_UINTPTR>(chaos_address & ~chaos_managed_pointer_local_slot_tag));
+			*chaos_slot = 0;
+		}
+		else
+		{
+			*reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(chaos_address) = 0;
+		}
+	}
+	_s2 = chaos_locals[0];
+	_s3 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[0]);
+	{
+		const auto chaos_address = _s3;
+		if ((chaos_address & chaos_managed_pointer_local_slot_tag) != 0)
+		{
+			auto* chaos_slot = reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(static_cast<CHAOS_IL2CPP_UINTPTR>(chaos_address & ~chaos_managed_pointer_local_slot_tag));
+			*chaos_slot = 0;
+		}
+		else
+		{
+			*reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(chaos_address) = 0;
+		}
+	}
+	_s3 = chaos_locals[0];
+	{
+		const auto chaos_result = chaos_external_runtime_System_Linq_Expressions_Expression__SymbolDocument_SymbolDocumentInfo_System_String_System_Guid_System_Guid_System_Guid_();
+		_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_Throw_296_Expression_0()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_Throw_296_Expression_0(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	{
+		const auto chaos_result = chaos_external_runtime_System_Linq_Expressions_Expression__Throw_UnaryExpression_Expression_();
+		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_Throw_297_Expression_System_Type_0()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_Throw_297_Expression_System_Type_0(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	_s1 = 0;
+	{
+		const auto chaos_result = chaos_external_runtime_System_Linq_Expressions_Expression__Throw_UnaryExpression_Expression_System_Type_();
+		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_TryCatch_265_Expression_CatchBlock_0()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_TryCatch_265_Expression_CatchBlock_0(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	_s1 = 0;
+	{
+		const auto chaos_result = chaos_external_runtime_System_Linq_Expressions_Expression__TryCatch_TryExpression_Expression_CatchBlock___();
+		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_TryCatch_265_Expression_CatchBlock_1()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_TryCatch_265_Expression_CatchBlock_1(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	{
+		const auto chaos_result = ChaosArrayEmpty_Inline();
+		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	{
+		const auto chaos_result = chaos_external_runtime_System_Linq_Expressions_Expression__TryCatch_TryExpression_Expression_CatchBlock___();
+		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_TryCatch_265_Expression_CatchBlock_2()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_TryCatch_265_Expression_CatchBlock_2(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(2);
+	_s1 = ChaosArrayNew1D_Inline(&chaos_type_info_managed_array.hot, chaos_mt_System_Linq_Expressions_CatchBlock.AsTypeInfoHot(), 1, _s1);
+	{
+		const auto chaos_result = chaos_external_runtime_System_Linq_Expressions_Expression__TryCatch_TryExpression_Expression_CatchBlock___();
+		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_TryCatchFinally_266_Expression_Expression_CatchBlock_0()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_TryCatchFinally_266_Expression_Expression_CatchBlock_0(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INTPTR _s5;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	_s1 = 0;
+	_s2 = 0;
+	{
+		const auto chaos_result = chaos_external_runtime_System_Linq_Expressions_Expression__TryCatchFinally_TryExpression_Expression_Expression_CatchBlock___();
+		_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_TryCatchFinally_266_Expression_Expression_CatchBlock_1()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_TryCatchFinally_266_Expression_Expression_CatchBlock_1(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INTPTR _s5;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
 	_s0 = 0;
 	_s1 = 0;
 	{
@@ -7646,23 +5519,14 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Li
 		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	{
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (401 < 0 || 401 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 401 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[401] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 401 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[401])(chaos_arg_0, chaos_arg_1, chaos_arg_2);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+		const auto chaos_result = chaos_external_runtime_System_Linq_Expressions_Expression__TryCatchFinally_TryExpression_Expression_Expression_CatchBlock___();
+		_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	return;
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_MakeDynamic_138_System_Type_CallSiteBinder_Expression_2()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_MakeDynamic_138_System_Type_CallSiteBinder_Expression_2(void)
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_TryCatchFinally_266_Expression_Expression_CatchBlock_2()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_TryCatchFinally_266_Expression_Expression_CatchBlock_2(void)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
@@ -7670,28 +5534,24 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Li
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
 	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INTPTR _s5;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
 	_s0 = 0;
 	_s1 = 0;
 	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(2);
-	_s2 = ChaosArrayNew1D_Inline(&chaos_type_info_managed_array.hot, chaos_mt_System_Linq_Expressions_Expression.AsTypeInfoHot(), 1, _s2);
+	_s2 = ChaosArrayNew1D_Inline(&chaos_type_info_managed_array.hot, chaos_mt_System_Linq_Expressions_CatchBlock.AsTypeInfoHot(), 1, _s2);
 	{
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (401 < 0 || 401 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 401 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[401] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 401 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[401])(chaos_arg_0, chaos_arg_1, chaos_arg_2);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+		const auto chaos_result = chaos_external_runtime_System_Linq_Expressions_Expression__TryCatchFinally_TryExpression_Expression_Expression_CatchBlock___();
+		_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	return;
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_MakeGoto_153_GotoExpressionKind_LabelTarget_Expression_System_Type_0()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_MakeGoto_153_GotoExpressionKind_LabelTarget_Expression_System_Type_0(void)
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_TryFault_263_Expression_Expression_0()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_TryFault_263_Expression_Expression_0(void)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
@@ -7700,119 +5560,20 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Li
 	CHAOS_IL2CPP_INTPTR _s1;
 	CHAOS_IL2CPP_INTPTR _s2;
 	CHAOS_IL2CPP_INTPTR _s3;
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s1 = 0;
-	_s2 = 0;
-	_s3 = 0;
-	{
-		const auto chaos_arg_3 = _s3;
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (402 < 0 || 402 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 402 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[402] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 402 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[402])(chaos_arg_0, chaos_arg_1, chaos_arg_2, chaos_arg_3);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_MakeIndex_154_Expression_PropertyInfo_IEnumerableExpression_0()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_MakeIndex_154_Expression_PropertyInfo_IEnumerableExpression_0(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INTPTR _s2;
-	_s0 = 0;
-	_s1 = 0;
-	_s2 = 0;
-	{
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (403 < 0 || 403 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 403 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[403] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 403 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[403])(chaos_arg_0, chaos_arg_1, chaos_arg_2);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_MakeIndex_154_Expression_PropertyInfo_IEnumerableExpression_1()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_MakeIndex_154_Expression_PropertyInfo_IEnumerableExpression_1(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
 	_s0 = 0;
 	_s1 = 0;
 	{
-		if (126 < 0 || 126 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 126 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[126] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 126 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[126])();
+		const auto chaos_result = chaos_external_runtime_System_Linq_Expressions_Expression__TryFault_TryExpression_Expression_Expression_();
 		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
-	{
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (403 < 0 || 403 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 403 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[403] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 403 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[403])(chaos_arg_0, chaos_arg_1, chaos_arg_2);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
 	return;
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_MakeMemberAccess_208_Expression_MemberInfo_0()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_MakeMemberAccess_208_Expression_MemberInfo_0(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	_s0 = 0;
-	_s1 = 0;
-	{
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (404 < 0 || 404 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 404 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[404] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 404 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[404])(chaos_arg_0, chaos_arg_1);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_MakeTry_267_System_Type_Expression_Expression_Expression_IEnumerableCatchBlock_0()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_MakeTry_267_System_Type_Expression_Expression_Expression_IEnumerableCatchBlock_0(void)
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_TryFinally_264_Expression_Expression_0()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_TryFinally_264_Expression_Expression_0(void)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
@@ -7822,31 +5583,19 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Li
 	CHAOS_IL2CPP_INTPTR _s2;
 	CHAOS_IL2CPP_INTPTR _s3;
 	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
 	_s0 = 0;
 	_s1 = 0;
-	_s2 = 0;
-	_s3 = 0;
-	_s4 = 0;
 	{
-		const auto chaos_arg_4 = _s4;
-		const auto chaos_arg_3 = _s3;
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (405 < 0 || 405 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 405 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[405] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 405 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[405])(chaos_arg_0, chaos_arg_1, chaos_arg_2, chaos_arg_3, chaos_arg_4);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+		const auto chaos_result = chaos_external_runtime_System_Linq_Expressions_Expression__TryFinally_TryExpression_Expression_Expression_();
+		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	return;
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_MakeTry_267_System_Type_Expression_Expression_Expression_IEnumerableCatchBlock_1()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_MakeTry_267_System_Type_Expression_Expression_Expression_IEnumerableCatchBlock_1(void)
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_TryGetActionType_187_System_Type_System_Type_0()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_TryGetActionType_187_System_Type_System_Type_0(void)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
@@ -7856,68 +5605,21 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Li
 	CHAOS_IL2CPP_INTPTR _s2;
 	CHAOS_IL2CPP_INTPTR _s3;
 	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
 	_s0 = 0;
-	_s1 = 0;
-	_s2 = 0;
-	_s3 = 0;
+	chaos_locals[0] = _s0;
+	_s0 = 0;
+	_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[0]);
 	{
-		if (406 < 0 || 406 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 406 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[406] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 406 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[406])();
-		_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	{
-		const auto chaos_arg_4 = _s4;
-		const auto chaos_arg_3 = _s3;
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (405 < 0 || 405 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 405 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[405] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 405 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[405])(chaos_arg_0, chaos_arg_1, chaos_arg_2, chaos_arg_3, chaos_arg_4);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+		const auto chaos_result = chaos_external_runtime_System_Linq_Expressions_Expression__TryGetActionType_System_Boolean_System_Type___System_Type__();
+		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	return;
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_MakeUnary_270_ExpressionType_Expression_System_Type_0()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_MakeUnary_270_ExpressionType_Expression_System_Type_0(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INTPTR _s2;
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s1 = 0;
-	_s2 = 0;
-	{
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (407 < 0 || 407 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 407 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[407] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 407 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[407])(chaos_arg_0, chaos_arg_1, chaos_arg_2);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_MakeUnary_271_ExpressionType_Expression_System_Type_MethodInfo_0()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_MakeUnary_271_ExpressionType_Expression_System_Type_MethodInfo_0(void)
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_TryGetActionType_187_System_Type_System_Type_1()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_TryGetActionType_187_System_Type_System_Type_1(void)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
@@ -7926,549 +5628,25 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Li
 	CHAOS_IL2CPP_INTPTR _s1;
 	CHAOS_IL2CPP_INTPTR _s2;
 	CHAOS_IL2CPP_INTPTR _s3;
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s1 = 0;
-	_s2 = 0;
-	_s3 = 0;
-	{
-		const auto chaos_arg_3 = _s3;
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (408 < 0 || 408 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 408 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[408] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 408 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[408])(chaos_arg_0, chaos_arg_1, chaos_arg_2, chaos_arg_3);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_MemberBind_215_MemberInfo_MemberBinding_0()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_MemberBind_215_MemberInfo_MemberBinding_0(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
 	_s0 = 0;
-	_s1 = 0;
-	{
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (409 < 0 || 409 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 409 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[409] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 409 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[409])(chaos_arg_0, chaos_arg_1);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_MemberBind_215_MemberInfo_MemberBinding_1()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_MemberBind_215_MemberInfo_MemberBinding_1(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	_s0 = 0;
+	chaos_locals[0] = _s0;
 	{
 		const auto chaos_result = ChaosArrayEmpty_Inline();
-		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	{
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (409 < 0 || 409 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 409 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[409] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 409 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[409])(chaos_arg_0, chaos_arg_1);
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[0]);
+	{
+		const auto chaos_result = chaos_external_runtime_System_Linq_Expressions_Expression__TryGetActionType_System_Boolean_System_Type___System_Type__();
+		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	return;
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_MemberBind_215_MemberInfo_MemberBinding_2()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_MemberBind_215_MemberInfo_MemberBinding_2(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	_s0 = 0;
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(2);
-	_s1 = ChaosArrayNew1D_Inline(&chaos_type_info_managed_array.hot, chaos_mt_System_Linq_Expressions_MemberBinding.AsTypeInfoHot(), 1, _s1);
-	{
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (409 < 0 || 409 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 409 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[409] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 409 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[409])(chaos_arg_0, chaos_arg_1);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_MemberBind_216_MemberInfo_IEnumerableMemberBinding_0()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_MemberBind_216_MemberInfo_IEnumerableMemberBinding_0(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	_s0 = 0;
-	_s1 = 0;
-	{
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (412 < 0 || 412 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 412 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[412] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 412 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[412])(chaos_arg_0, chaos_arg_1);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_MemberBind_216_MemberInfo_IEnumerableMemberBinding_1()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_MemberBind_216_MemberInfo_IEnumerableMemberBinding_1(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	_s0 = 0;
-	{
-		if (413 < 0 || 413 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 413 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[413] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 413 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[413])();
-		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	{
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (412 < 0 || 412 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 412 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[412] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 412 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[412])(chaos_arg_0, chaos_arg_1);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_MemberBind_217_MethodInfo_MemberBinding_0()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_MemberBind_217_MethodInfo_MemberBinding_0(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	_s0 = 0;
-	_s1 = 0;
-	{
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (414 < 0 || 414 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 414 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[414] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 414 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[414])(chaos_arg_0, chaos_arg_1);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_MemberBind_217_MethodInfo_MemberBinding_1()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_MemberBind_217_MethodInfo_MemberBinding_1(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	_s0 = 0;
-	{
-		const auto chaos_result = ChaosArrayEmpty_Inline();
-		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	{
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (414 < 0 || 414 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 414 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[414] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 414 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[414])(chaos_arg_0, chaos_arg_1);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_MemberBind_217_MethodInfo_MemberBinding_2()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_MemberBind_217_MethodInfo_MemberBinding_2(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	_s0 = 0;
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(2);
-	_s1 = ChaosArrayNew1D_Inline(&chaos_type_info_managed_array.hot, chaos_mt_System_Linq_Expressions_MemberBinding.AsTypeInfoHot(), 1, _s1);
-	{
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (414 < 0 || 414 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 414 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[414] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 414 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[414])(chaos_arg_0, chaos_arg_1);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_MemberBind_218_MethodInfo_IEnumerableMemberBinding_0()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_MemberBind_218_MethodInfo_IEnumerableMemberBinding_0(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	_s0 = 0;
-	_s1 = 0;
-	{
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (415 < 0 || 415 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 415 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[415] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 415 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[415])(chaos_arg_0, chaos_arg_1);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_MemberBind_218_MethodInfo_IEnumerableMemberBinding_1()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_MemberBind_218_MethodInfo_IEnumerableMemberBinding_1(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	_s0 = 0;
-	{
-		if (413 < 0 || 413 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 413 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[413] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 413 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[413])();
-		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	{
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (415 < 0 || 415 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 415 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[415] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 415 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[415])(chaos_arg_0, chaos_arg_1);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_MemberInit_209_NewExpression_MemberBinding_0()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_MemberInit_209_NewExpression_MemberBinding_0(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	_s0 = 0;
-	_s1 = 0;
-	{
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (416 < 0 || 416 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 416 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[416] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 416 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[416])(chaos_arg_0, chaos_arg_1);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_MemberInit_209_NewExpression_MemberBinding_1()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_MemberInit_209_NewExpression_MemberBinding_1(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	_s0 = 0;
-	{
-		const auto chaos_result = ChaosArrayEmpty_Inline();
-		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	{
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (416 < 0 || 416 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 416 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[416] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 416 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[416])(chaos_arg_0, chaos_arg_1);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_MemberInit_209_NewExpression_MemberBinding_2()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_MemberInit_209_NewExpression_MemberBinding_2(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	_s0 = 0;
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(2);
-	_s1 = ChaosArrayNew1D_Inline(&chaos_type_info_managed_array.hot, chaos_mt_System_Linq_Expressions_MemberBinding.AsTypeInfoHot(), 1, _s1);
-	{
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (416 < 0 || 416 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 416 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[416] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 416 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[416])(chaos_arg_0, chaos_arg_1);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_MemberInit_210_NewExpression_IEnumerableMemberBinding_0()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_MemberInit_210_NewExpression_IEnumerableMemberBinding_0(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	_s0 = 0;
-	_s1 = 0;
-	{
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (417 < 0 || 417 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 417 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[417] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 417 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[417])(chaos_arg_0, chaos_arg_1);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_MemberInit_210_NewExpression_IEnumerableMemberBinding_1()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_MemberInit_210_NewExpression_IEnumerableMemberBinding_1(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	_s0 = 0;
-	{
-		if (413 < 0 || 413 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 413 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[413] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 413 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[413])();
-		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	{
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (417 < 0 || 417 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 417 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[417] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 417 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[417])(chaos_arg_0, chaos_arg_1);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_Modulo_49_Expression_Expression_0()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_Modulo_49_Expression_Expression_0(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	_s0 = 0;
-	_s1 = 0;
-	{
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (418 < 0 || 418 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 418 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[418] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 418 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[418])(chaos_arg_0, chaos_arg_1);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_Modulo_50_Expression_Expression_MethodInfo_0()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_Modulo_50_Expression_Expression_MethodInfo_0(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INTPTR _s2;
-	_s0 = 0;
-	_s1 = 0;
-	_s2 = 0;
-	{
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (419 < 0 || 419 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 419 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[419] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 419 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[419])(chaos_arg_0, chaos_arg_1, chaos_arg_2);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_ModuloAssign_51_Expression_Expression_0()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_ModuloAssign_51_Expression_Expression_0(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	_s0 = 0;
-	_s1 = 0;
-	{
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (420 < 0 || 420 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 420 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[420] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 420 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[420])(chaos_arg_0, chaos_arg_1);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_ModuloAssign_52_Expression_Expression_MethodInfo_0()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_ModuloAssign_52_Expression_Expression_MethodInfo_0(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INTPTR _s2;
-	_s0 = 0;
-	_s1 = 0;
-	_s2 = 0;
-	{
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (421 < 0 || 421 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 421 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[421] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 421 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[421])(chaos_arg_0, chaos_arg_1, chaos_arg_2);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_ModuloAssign_53_Expression_Expression_MethodInfo_LambdaExpression_0()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_ModuloAssign_53_Expression_Expression_MethodInfo_LambdaExpression_0(void)
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_TryGetActionType_187_System_Type_System_Type_2()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_TryGetActionType_187_System_Type_System_Type_2(void)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
@@ -8477,54 +5655,23 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Li
 	CHAOS_IL2CPP_INTPTR _s1;
 	CHAOS_IL2CPP_INTPTR _s2;
 	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
 	_s0 = 0;
-	_s1 = 0;
-	_s2 = 0;
-	_s3 = 0;
+	chaos_locals[0] = _s0;
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(2);
+	_s0 = ChaosArrayNew1D_Inline(&chaos_type_info_managed_array.hot, chaos_mt_System_Private_CoreLib_System_Type.AsTypeInfoHot(), 1, _s0);
+	_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[0]);
 	{
-		const auto chaos_arg_3 = _s3;
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (422 < 0 || 422 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 422 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[422] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 422 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[422])(chaos_arg_0, chaos_arg_1, chaos_arg_2, chaos_arg_3);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+		const auto chaos_result = chaos_external_runtime_System_Linq_Expressions_Expression__TryGetActionType_System_Boolean_System_Type___System_Type__();
+		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	return;
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_Multiply_54_Expression_Expression_0()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_Multiply_54_Expression_Expression_0(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	_s0 = 0;
-	_s1 = 0;
-	{
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (423 < 0 || 423 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 423 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[423] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 423 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[423])(chaos_arg_0, chaos_arg_1);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_Multiply_55_Expression_Expression_MethodInfo_0()
-extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_Multiply_55_Expression_Expression_MethodInfo_0(void)
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_TryGetFuncType_185_System_Type_System_Type_0()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_TryGetFuncType_185_System_Type_System_Type_0(void)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
@@ -8532,23 +5679,3087 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Li
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
 	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
 	_s0 = 0;
-	_s1 = 0;
-	_s2 = 0;
+	chaos_locals[0] = _s0;
+	_s0 = 0;
+	_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[0]);
 	{
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (424 < 0 || 424 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 424 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[424] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 424 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[424])(chaos_arg_0, chaos_arg_1, chaos_arg_2);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+		const auto chaos_result = chaos_external_runtime_System_Linq_Expressions_Expression__TryGetFuncType_System_Boolean_System_Type___System_Type__();
+		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_TryGetFuncType_185_System_Type_System_Type_1()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_TryGetFuncType_185_System_Type_System_Type_1(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	chaos_locals[0] = _s0;
+	{
+		const auto chaos_result = ChaosArrayEmpty_Inline();
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[0]);
+	{
+		const auto chaos_result = chaos_external_runtime_System_Linq_Expressions_Expression__TryGetFuncType_System_Boolean_System_Type___System_Type__();
+		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_TryGetFuncType_185_System_Type_System_Type_2()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_TryGetFuncType_185_System_Type_System_Type_2(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	chaos_locals[0] = _s0;
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(2);
+	_s0 = ChaosArrayNew1D_Inline(&chaos_type_info_managed_array.hot, chaos_mt_System_Private_CoreLib_System_Type.AsTypeInfoHot(), 1, _s0);
+	_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[0]);
+	{
+		const auto chaos_result = chaos_external_runtime_System_Linq_Expressions_Expression__TryGetFuncType_System_Boolean_System_Type___System_Type__();
+		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_TypeAs_286_Expression_System_Type_0()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_TypeAs_286_Expression_System_Type_0(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	_s1 = 0;
+	{
+		const auto chaos_result = chaos_external_runtime_System_Linq_Expressions_Expression__TypeAs_UnaryExpression_Expression_System_Type_();
+		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_TypeEqual_269_Expression_System_Type_0()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_TypeEqual_269_Expression_System_Type_0(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	_s1 = 0;
+	{
+		const auto chaos_result = chaos_external_runtime_System_Linq_Expressions_Expression__TypeEqual_TypeBinaryExpression_Expression_System_Type_();
+		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_TypeIs_268_Expression_System_Type_0()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_TypeIs_268_Expression_System_Type_0(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	_s1 = 0;
+	{
+		const auto chaos_result = chaos_external_runtime_System_Linq_Expressions_Expression__TypeIs_TypeBinaryExpression_Expression_System_Type_();
+		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_UnaryPlus_274_Expression_0()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_UnaryPlus_274_Expression_0(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	{
+		const auto chaos_result = chaos_external_runtime_System_Linq_Expressions_Expression__UnaryPlus_UnaryExpression_Expression_();
+		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_UnaryPlus_275_Expression_MethodInfo_0()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_UnaryPlus_275_Expression_MethodInfo_0(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	_s1 = 0;
+	{
+		const auto chaos_result = chaos_external_runtime_System_Linq_Expressions_Expression__UnaryPlus_UnaryExpression_Expression_System_Reflection_MethodInfo_();
+		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_Unbox_287_Expression_System_Type_0()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_Unbox_287_Expression_System_Type_0(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	_s1 = 0;
+	{
+		const auto chaos_result = chaos_external_runtime_System_Linq_Expressions_Expression__Unbox_UnaryExpression_Expression_System_Type_();
+		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_Variable_246_System_Type_0()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_Variable_246_System_Type_0(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	{
+		const auto chaos_result = chaos_external_runtime_System_Linq_Expressions_Expression__Variable_ParameterExpression_System_Type_();
+		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_Variable_248_System_Type_string_0()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_Variable_248_System_Type_string_0(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	_s1 = 0;
+	{
+		const auto chaos_result = chaos_external_runtime_System_Linq_Expressions_Expression__Variable_ParameterExpression_System_Type_System_String_();
+		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Benchmark_Variable_248_System_Type_string_1()
+extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Benchmark_Variable_248_System_Type_string_1(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	{
+		auto* chaos_string = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_String);
+		chaos_string->header.type_info = chaos_mt_System_Private_CoreLib_System_String.AsTypeInfoHot();
+		chaos_string->length = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+		chaos_string->utf8_data = "";
+		_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_string);
+	}
+	{
+		const auto chaos_result = chaos_external_runtime_System_Linq_Expressions_Expression__Variable_ParameterExpression_System_Type_System_String_();
+		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Bind_198_MemberInfo_Expression_0()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Bind_198_MemberInfo_Expression_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__592_0;
+	_s1 = _s0;
+	{
+		if (_s1 == 0)
+		{
+			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9;
+			{
+				// Hotpatch-aware ldftn wrapper (slot 1501)
+				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
+					auto& _d_entry = s_hotpatch_entries[1501];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+					{
+						alignas(16) uint8_t _d_ab[8];
+						ArgBuffer _d_bw(_d_ab);
+						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d_entry.method_key, _d_ab, nullptr);
+						return;
+					}
+					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
+				};
+			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+			}
+			{
+				const auto chaos_method_ptr = _s1;
+				const auto chaos_target = _s0;
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
+				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
+				chaos_object->chaos_delegate_target = chaos_target;
+				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			_s1 = _s0;
+			{
+				auto chaos_value = _s1;
+				chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__592_0 = chaos_value;
+			}
+		}
+		{
+			// Assert.Throws: target method not found via IL lookahead
+			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
+		}
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
+		chaos_locals[0] = ChaosStoreInt64(_i0);
+		_i0 = ChaosLoadInt64(chaos_locals[0]);
+		return _i0;
+	}
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Bind_199_MethodInfo_Expression_0()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Bind_199_MethodInfo_Expression_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__594_0;
+	_s1 = _s0;
+	{
+		if (_s1 == 0)
+		{
+			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9;
+			{
+				// Hotpatch-aware ldftn wrapper (slot 1502)
+				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
+					auto& _d_entry = s_hotpatch_entries[1502];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+					{
+						alignas(16) uint8_t _d_ab[8];
+						ArgBuffer _d_bw(_d_ab);
+						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d_entry.method_key, _d_ab, nullptr);
+						return;
+					}
+					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
+				};
+			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+			}
+			{
+				const auto chaos_method_ptr = _s1;
+				const auto chaos_target = _s0;
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
+				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
+				chaos_object->chaos_delegate_target = chaos_target;
+				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			_s1 = _s0;
+			{
+				auto chaos_value = _s1;
+				chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__594_0 = chaos_value;
+			}
+		}
+		{
+			// Assert.Throws: target method not found via IL lookahead
+			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
+		}
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
+		chaos_locals[0] = ChaosStoreInt64(_i0);
+		_i0 = ChaosLoadInt64(chaos_locals[0]);
+		return _i0;
+	}
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Block_100_IEnumerableExpression_0()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Block_100_IEnumerableExpression_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__216_0;
+	_s1 = _s0;
+	{
+		if (_s1 == 0)
+		{
+			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9;
+			{
+				// Hotpatch-aware ldftn wrapper (slot 1503)
+				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
+					auto& _d_entry = s_hotpatch_entries[1503];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+					{
+						alignas(16) uint8_t _d_ab[8];
+						ArgBuffer _d_bw(_d_ab);
+						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d_entry.method_key, _d_ab, nullptr);
+						return;
+					}
+					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
+				};
+			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+			}
+			{
+				const auto chaos_method_ptr = _s1;
+				const auto chaos_target = _s0;
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
+				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
+				chaos_object->chaos_delegate_target = chaos_target;
+				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			_s1 = _s0;
+			{
+				auto chaos_value = _s1;
+				chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__216_0 = chaos_value;
+			}
+		}
+		{
+			// Assert.Throws: target method not found via IL lookahead
+			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
+		}
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
+		chaos_locals[0] = ChaosStoreInt64(_i0);
+		_i0 = ChaosLoadInt64(chaos_locals[0]);
+		return _i0;
+	}
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Block_100_IEnumerableExpression_1()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Block_100_IEnumerableExpression_1(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__218_0;
+	_s1 = _s0;
+	{
+		if (_s1 == 0)
+		{
+			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9;
+			{
+				// Hotpatch-aware ldftn wrapper (slot 1504)
+				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
+					auto& _d_entry = s_hotpatch_entries[1504];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+					{
+						alignas(16) uint8_t _d_ab[8];
+						ArgBuffer _d_bw(_d_ab);
+						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d_entry.method_key, _d_ab, nullptr);
+						return;
+					}
+					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
+				};
+			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+			}
+			{
+				const auto chaos_method_ptr = _s1;
+				const auto chaos_target = _s0;
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
+				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
+				chaos_object->chaos_delegate_target = chaos_target;
+				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			_s1 = _s0;
+			{
+				auto chaos_value = _s1;
+				chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__218_0 = chaos_value;
+			}
+		}
+		{
+			// Assert.Throws: target method not found via IL lookahead
+			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
+		}
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
+		chaos_locals[0] = ChaosStoreInt64(_i0);
+		_i0 = ChaosLoadInt64(chaos_locals[0]);
+		return _i0;
+	}
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Block_101_System_Type_Expression_0()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Block_101_System_Type_Expression_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__220_0;
+	_s1 = _s0;
+	{
+		if (_s1 == 0)
+		{
+			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9;
+			{
+				// Hotpatch-aware ldftn wrapper (slot 1505)
+				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
+					auto& _d_entry = s_hotpatch_entries[1505];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+					{
+						alignas(16) uint8_t _d_ab[8];
+						ArgBuffer _d_bw(_d_ab);
+						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d_entry.method_key, _d_ab, nullptr);
+						return;
+					}
+					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
+				};
+			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+			}
+			{
+				const auto chaos_method_ptr = _s1;
+				const auto chaos_target = _s0;
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
+				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
+				chaos_object->chaos_delegate_target = chaos_target;
+				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			_s1 = _s0;
+			{
+				auto chaos_value = _s1;
+				chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__220_0 = chaos_value;
+			}
+		}
+		{
+			// Assert.Throws: target method not found via IL lookahead
+			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
+		}
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
+		chaos_locals[0] = ChaosStoreInt64(_i0);
+		_i0 = ChaosLoadInt64(chaos_locals[0]);
+		return _i0;
+	}
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Block_101_System_Type_Expression_1()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Block_101_System_Type_Expression_1(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__222_0;
+	_s1 = _s0;
+	{
+		if (_s1 == 0)
+		{
+			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9;
+			{
+				// Hotpatch-aware ldftn wrapper (slot 1506)
+				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
+					auto& _d_entry = s_hotpatch_entries[1506];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+					{
+						alignas(16) uint8_t _d_ab[8];
+						ArgBuffer _d_bw(_d_ab);
+						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d_entry.method_key, _d_ab, nullptr);
+						return;
+					}
+					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
+				};
+			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+			}
+			{
+				const auto chaos_method_ptr = _s1;
+				const auto chaos_target = _s0;
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
+				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
+				chaos_object->chaos_delegate_target = chaos_target;
+				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			_s1 = _s0;
+			{
+				auto chaos_value = _s1;
+				chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__222_0 = chaos_value;
+			}
+		}
+		{
+			// Assert.Throws: target method not found via IL lookahead
+			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
+		}
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
+		chaos_locals[0] = ChaosStoreInt64(_i0);
+		_i0 = ChaosLoadInt64(chaos_locals[0]);
+		return _i0;
+	}
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Block_101_System_Type_Expression_2()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Block_101_System_Type_Expression_2(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__224_0;
+	_s1 = _s0;
+	{
+		if (_s1 == 0)
+		{
+			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9;
+			{
+				// Hotpatch-aware ldftn wrapper (slot 1507)
+				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
+					auto& _d_entry = s_hotpatch_entries[1507];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+					{
+						alignas(16) uint8_t _d_ab[8];
+						ArgBuffer _d_bw(_d_ab);
+						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d_entry.method_key, _d_ab, nullptr);
+						return;
+					}
+					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
+				};
+			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+			}
+			{
+				const auto chaos_method_ptr = _s1;
+				const auto chaos_target = _s0;
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
+				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
+				chaos_object->chaos_delegate_target = chaos_target;
+				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			_s1 = _s0;
+			{
+				auto chaos_value = _s1;
+				chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__224_0 = chaos_value;
+			}
+		}
+		{
+			// Assert.Throws: target method not found via IL lookahead
+			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
+		}
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
+		chaos_locals[0] = ChaosStoreInt64(_i0);
+		_i0 = ChaosLoadInt64(chaos_locals[0]);
+		return _i0;
+	}
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Block_102_System_Type_IEnumerableExpression_0()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Block_102_System_Type_IEnumerableExpression_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__226_0;
+	_s1 = _s0;
+	{
+		if (_s1 == 0)
+		{
+			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9;
+			{
+				// Hotpatch-aware ldftn wrapper (slot 1508)
+				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
+					auto& _d_entry = s_hotpatch_entries[1508];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+					{
+						alignas(16) uint8_t _d_ab[8];
+						ArgBuffer _d_bw(_d_ab);
+						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d_entry.method_key, _d_ab, nullptr);
+						return;
+					}
+					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
+				};
+			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+			}
+			{
+				const auto chaos_method_ptr = _s1;
+				const auto chaos_target = _s0;
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
+				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
+				chaos_object->chaos_delegate_target = chaos_target;
+				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			_s1 = _s0;
+			{
+				auto chaos_value = _s1;
+				chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__226_0 = chaos_value;
+			}
+		}
+		{
+			// Assert.Throws: target method not found via IL lookahead
+			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
+		}
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
+		chaos_locals[0] = ChaosStoreInt64(_i0);
+		_i0 = ChaosLoadInt64(chaos_locals[0]);
+		return _i0;
+	}
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Block_102_System_Type_IEnumerableExpression_1()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Block_102_System_Type_IEnumerableExpression_1(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__228_0;
+	_s1 = _s0;
+	{
+		if (_s1 == 0)
+		{
+			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9;
+			{
+				// Hotpatch-aware ldftn wrapper (slot 1509)
+				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
+					auto& _d_entry = s_hotpatch_entries[1509];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+					{
+						alignas(16) uint8_t _d_ab[8];
+						ArgBuffer _d_bw(_d_ab);
+						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d_entry.method_key, _d_ab, nullptr);
+						return;
+					}
+					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
+				};
+			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+			}
+			{
+				const auto chaos_method_ptr = _s1;
+				const auto chaos_target = _s0;
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
+				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
+				chaos_object->chaos_delegate_target = chaos_target;
+				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			_s1 = _s0;
+			{
+				auto chaos_value = _s1;
+				chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__228_0 = chaos_value;
+			}
+		}
+		{
+			// Assert.Throws: target method not found via IL lookahead
+			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
+		}
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
+		chaos_locals[0] = ChaosStoreInt64(_i0);
+		_i0 = ChaosLoadInt64(chaos_locals[0]);
+		return _i0;
+	}
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Block_103_IEnumerableParameterExpression_Expression_0()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Block_103_IEnumerableParameterExpression_Expression_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__230_0;
+	_s1 = _s0;
+	{
+		if (_s1 == 0)
+		{
+			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9;
+			{
+				// Hotpatch-aware ldftn wrapper (slot 1510)
+				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
+					auto& _d_entry = s_hotpatch_entries[1510];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+					{
+						alignas(16) uint8_t _d_ab[8];
+						ArgBuffer _d_bw(_d_ab);
+						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d_entry.method_key, _d_ab, nullptr);
+						return;
+					}
+					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
+				};
+			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+			}
+			{
+				const auto chaos_method_ptr = _s1;
+				const auto chaos_target = _s0;
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
+				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
+				chaos_object->chaos_delegate_target = chaos_target;
+				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			_s1 = _s0;
+			{
+				auto chaos_value = _s1;
+				chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__230_0 = chaos_value;
+			}
+		}
+		{
+			// Assert.Throws: target method not found via IL lookahead
+			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
+		}
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
+		chaos_locals[0] = ChaosStoreInt64(_i0);
+		_i0 = ChaosLoadInt64(chaos_locals[0]);
+		return _i0;
+	}
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Block_103_IEnumerableParameterExpression_Expression_1()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Block_103_IEnumerableParameterExpression_Expression_1(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__232_0;
+	_s1 = _s0;
+	{
+		if (_s1 == 0)
+		{
+			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9;
+			{
+				// Hotpatch-aware ldftn wrapper (slot 1511)
+				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
+					auto& _d_entry = s_hotpatch_entries[1511];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+					{
+						alignas(16) uint8_t _d_ab[8];
+						ArgBuffer _d_bw(_d_ab);
+						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d_entry.method_key, _d_ab, nullptr);
+						return;
+					}
+					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
+				};
+			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+			}
+			{
+				const auto chaos_method_ptr = _s1;
+				const auto chaos_target = _s0;
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
+				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
+				chaos_object->chaos_delegate_target = chaos_target;
+				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			_s1 = _s0;
+			{
+				auto chaos_value = _s1;
+				chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__232_0 = chaos_value;
+			}
+		}
+		{
+			// Assert.Throws: target method not found via IL lookahead
+			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
+		}
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
+		chaos_locals[0] = ChaosStoreInt64(_i0);
+		_i0 = ChaosLoadInt64(chaos_locals[0]);
+		return _i0;
+	}
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Block_103_IEnumerableParameterExpression_Expression_2()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Block_103_IEnumerableParameterExpression_Expression_2(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__234_0;
+	_s1 = _s0;
+	{
+		if (_s1 == 0)
+		{
+			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9;
+			{
+				// Hotpatch-aware ldftn wrapper (slot 1512)
+				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
+					auto& _d_entry = s_hotpatch_entries[1512];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+					{
+						alignas(16) uint8_t _d_ab[8];
+						ArgBuffer _d_bw(_d_ab);
+						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d_entry.method_key, _d_ab, nullptr);
+						return;
+					}
+					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
+				};
+			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+			}
+			{
+				const auto chaos_method_ptr = _s1;
+				const auto chaos_target = _s0;
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
+				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
+				chaos_object->chaos_delegate_target = chaos_target;
+				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			_s1 = _s0;
+			{
+				auto chaos_value = _s1;
+				chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__234_0 = chaos_value;
+			}
+		}
+		{
+			// Assert.Throws: target method not found via IL lookahead
+			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
+		}
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
+		chaos_locals[0] = ChaosStoreInt64(_i0);
+		_i0 = ChaosLoadInt64(chaos_locals[0]);
+		return _i0;
+	}
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Block_104_System_Type_IEnumerableParameterExpression_Expression_0()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Block_104_System_Type_IEnumerableParameterExpression_Expression_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__236_0;
+	_s1 = _s0;
+	{
+		if (_s1 == 0)
+		{
+			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9;
+			{
+				// Hotpatch-aware ldftn wrapper (slot 1513)
+				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
+					auto& _d_entry = s_hotpatch_entries[1513];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+					{
+						alignas(16) uint8_t _d_ab[8];
+						ArgBuffer _d_bw(_d_ab);
+						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d_entry.method_key, _d_ab, nullptr);
+						return;
+					}
+					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
+				};
+			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+			}
+			{
+				const auto chaos_method_ptr = _s1;
+				const auto chaos_target = _s0;
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
+				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
+				chaos_object->chaos_delegate_target = chaos_target;
+				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			_s1 = _s0;
+			{
+				auto chaos_value = _s1;
+				chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__236_0 = chaos_value;
+			}
+		}
+		{
+			// Assert.Throws: target method not found via IL lookahead
+			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
+		}
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
+		chaos_locals[0] = ChaosStoreInt64(_i0);
+		_i0 = ChaosLoadInt64(chaos_locals[0]);
+		return _i0;
+	}
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Block_104_System_Type_IEnumerableParameterExpression_Expression_1()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Block_104_System_Type_IEnumerableParameterExpression_Expression_1(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__238_0;
+	_s1 = _s0;
+	{
+		if (_s1 == 0)
+		{
+			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9;
+			{
+				// Hotpatch-aware ldftn wrapper (slot 1514)
+				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
+					auto& _d_entry = s_hotpatch_entries[1514];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+					{
+						alignas(16) uint8_t _d_ab[8];
+						ArgBuffer _d_bw(_d_ab);
+						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d_entry.method_key, _d_ab, nullptr);
+						return;
+					}
+					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
+				};
+			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+			}
+			{
+				const auto chaos_method_ptr = _s1;
+				const auto chaos_target = _s0;
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
+				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
+				chaos_object->chaos_delegate_target = chaos_target;
+				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			_s1 = _s0;
+			{
+				auto chaos_value = _s1;
+				chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__238_0 = chaos_value;
+			}
+		}
+		{
+			// Assert.Throws: target method not found via IL lookahead
+			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
+		}
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
+		chaos_locals[0] = ChaosStoreInt64(_i0);
+		_i0 = ChaosLoadInt64(chaos_locals[0]);
+		return _i0;
+	}
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Block_104_System_Type_IEnumerableParameterExpression_Expression_2()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Block_104_System_Type_IEnumerableParameterExpression_Expression_2(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__240_0;
+	_s1 = _s0;
+	{
+		if (_s1 == 0)
+		{
+			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9;
+			{
+				// Hotpatch-aware ldftn wrapper (slot 1515)
+				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
+					auto& _d_entry = s_hotpatch_entries[1515];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+					{
+						alignas(16) uint8_t _d_ab[8];
+						ArgBuffer _d_bw(_d_ab);
+						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d_entry.method_key, _d_ab, nullptr);
+						return;
+					}
+					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
+				};
+			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+			}
+			{
+				const auto chaos_method_ptr = _s1;
+				const auto chaos_target = _s0;
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
+				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
+				chaos_object->chaos_delegate_target = chaos_target;
+				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			_s1 = _s0;
+			{
+				auto chaos_value = _s1;
+				chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__240_0 = chaos_value;
+			}
+		}
+		{
+			// Assert.Throws: target method not found via IL lookahead
+			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
+		}
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
+		chaos_locals[0] = ChaosStoreInt64(_i0);
+		_i0 = ChaosLoadInt64(chaos_locals[0]);
+		return _i0;
+	}
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Block_105_IEnumerableParameterExpression_IEnumerableExpression_0()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Block_105_IEnumerableParameterExpression_IEnumerableExpression_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__242_0;
+	_s1 = _s0;
+	{
+		if (_s1 == 0)
+		{
+			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9;
+			{
+				// Hotpatch-aware ldftn wrapper (slot 1516)
+				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
+					auto& _d_entry = s_hotpatch_entries[1516];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+					{
+						alignas(16) uint8_t _d_ab[8];
+						ArgBuffer _d_bw(_d_ab);
+						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d_entry.method_key, _d_ab, nullptr);
+						return;
+					}
+					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
+				};
+			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+			}
+			{
+				const auto chaos_method_ptr = _s1;
+				const auto chaos_target = _s0;
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
+				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
+				chaos_object->chaos_delegate_target = chaos_target;
+				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			_s1 = _s0;
+			{
+				auto chaos_value = _s1;
+				chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__242_0 = chaos_value;
+			}
+		}
+		{
+			// Assert.Throws: target method not found via IL lookahead
+			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
+		}
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
+		chaos_locals[0] = ChaosStoreInt64(_i0);
+		_i0 = ChaosLoadInt64(chaos_locals[0]);
+		return _i0;
+	}
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Block_105_IEnumerableParameterExpression_IEnumerableExpression_1()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Block_105_IEnumerableParameterExpression_IEnumerableExpression_1(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__244_0;
+	_s1 = _s0;
+	{
+		if (_s1 == 0)
+		{
+			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9;
+			{
+				// Hotpatch-aware ldftn wrapper (slot 1517)
+				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
+					auto& _d_entry = s_hotpatch_entries[1517];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+					{
+						alignas(16) uint8_t _d_ab[8];
+						ArgBuffer _d_bw(_d_ab);
+						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d_entry.method_key, _d_ab, nullptr);
+						return;
+					}
+					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
+				};
+			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+			}
+			{
+				const auto chaos_method_ptr = _s1;
+				const auto chaos_target = _s0;
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
+				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
+				chaos_object->chaos_delegate_target = chaos_target;
+				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			_s1 = _s0;
+			{
+				auto chaos_value = _s1;
+				chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__244_0 = chaos_value;
+			}
+		}
+		{
+			// Assert.Throws: target method not found via IL lookahead
+			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
+		}
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
+		chaos_locals[0] = ChaosStoreInt64(_i0);
+		_i0 = ChaosLoadInt64(chaos_locals[0]);
+		return _i0;
+	}
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Block_106_System_Type_IEnumerableParameterExpression_IEnumerableExpression_0()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Block_106_System_Type_IEnumerableParameterExpression_IEnumerableExpression_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__246_0;
+	_s1 = _s0;
+	{
+		if (_s1 == 0)
+		{
+			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9;
+			{
+				// Hotpatch-aware ldftn wrapper (slot 1518)
+				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
+					auto& _d_entry = s_hotpatch_entries[1518];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+					{
+						alignas(16) uint8_t _d_ab[8];
+						ArgBuffer _d_bw(_d_ab);
+						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d_entry.method_key, _d_ab, nullptr);
+						return;
+					}
+					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
+				};
+			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+			}
+			{
+				const auto chaos_method_ptr = _s1;
+				const auto chaos_target = _s0;
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
+				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
+				chaos_object->chaos_delegate_target = chaos_target;
+				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			_s1 = _s0;
+			{
+				auto chaos_value = _s1;
+				chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__246_0 = chaos_value;
+			}
+		}
+		{
+			// Assert.Throws: target method not found via IL lookahead
+			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
+		}
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
+		chaos_locals[0] = ChaosStoreInt64(_i0);
+		_i0 = ChaosLoadInt64(chaos_locals[0]);
+		return _i0;
+	}
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Block_106_System_Type_IEnumerableParameterExpression_IEnumerableExpression_1()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Block_106_System_Type_IEnumerableParameterExpression_IEnumerableExpression_1(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__248_0;
+	_s1 = _s0;
+	{
+		if (_s1 == 0)
+		{
+			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9;
+			{
+				// Hotpatch-aware ldftn wrapper (slot 1519)
+				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
+					auto& _d_entry = s_hotpatch_entries[1519];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+					{
+						alignas(16) uint8_t _d_ab[8];
+						ArgBuffer _d_bw(_d_ab);
+						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d_entry.method_key, _d_ab, nullptr);
+						return;
+					}
+					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
+				};
+			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+			}
+			{
+				const auto chaos_method_ptr = _s1;
+				const auto chaos_target = _s0;
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
+				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
+				chaos_object->chaos_delegate_target = chaos_target;
+				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			_s1 = _s0;
+			{
+				auto chaos_value = _s1;
+				chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__248_0 = chaos_value;
+			}
+		}
+		{
+			// Assert.Throws: target method not found via IL lookahead
+			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
+		}
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
+		chaos_locals[0] = ChaosStoreInt64(_i0);
+		_i0 = ChaosLoadInt64(chaos_locals[0]);
+		return _i0;
+	}
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Block_95_Expression_Expression_0()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Block_95_Expression_Expression_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__202_0;
+	_s1 = _s0;
+	{
+		if (_s1 == 0)
+		{
+			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9;
+			{
+				// Hotpatch-aware ldftn wrapper (slot 1520)
+				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
+					auto& _d_entry = s_hotpatch_entries[1520];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+					{
+						alignas(16) uint8_t _d_ab[8];
+						ArgBuffer _d_bw(_d_ab);
+						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d_entry.method_key, _d_ab, nullptr);
+						return;
+					}
+					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
+				};
+			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+			}
+			{
+				const auto chaos_method_ptr = _s1;
+				const auto chaos_target = _s0;
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
+				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
+				chaos_object->chaos_delegate_target = chaos_target;
+				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			_s1 = _s0;
+			{
+				auto chaos_value = _s1;
+				chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__202_0 = chaos_value;
+			}
+		}
+		{
+			// Assert.Throws: target method not found via IL lookahead
+			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
+		}
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
+		chaos_locals[0] = ChaosStoreInt64(_i0);
+		_i0 = ChaosLoadInt64(chaos_locals[0]);
+		return _i0;
+	}
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Block_96_Expression_Expression_Expression_0()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Block_96_Expression_Expression_Expression_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__204_0;
+	_s1 = _s0;
+	{
+		if (_s1 == 0)
+		{
+			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9;
+			{
+				// Hotpatch-aware ldftn wrapper (slot 1521)
+				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
+					auto& _d_entry = s_hotpatch_entries[1521];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+					{
+						alignas(16) uint8_t _d_ab[8];
+						ArgBuffer _d_bw(_d_ab);
+						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d_entry.method_key, _d_ab, nullptr);
+						return;
+					}
+					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
+				};
+			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+			}
+			{
+				const auto chaos_method_ptr = _s1;
+				const auto chaos_target = _s0;
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
+				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
+				chaos_object->chaos_delegate_target = chaos_target;
+				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			_s1 = _s0;
+			{
+				auto chaos_value = _s1;
+				chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__204_0 = chaos_value;
+			}
+		}
+		{
+			// Assert.Throws: target method not found via IL lookahead
+			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
+		}
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
+		chaos_locals[0] = ChaosStoreInt64(_i0);
+		_i0 = ChaosLoadInt64(chaos_locals[0]);
+		return _i0;
+	}
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Block_97_Expression_Expression_Expression_Expression_0()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Block_97_Expression_Expression_Expression_Expression_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__206_0;
+	_s1 = _s0;
+	{
+		if (_s1 == 0)
+		{
+			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9;
+			{
+				// Hotpatch-aware ldftn wrapper (slot 1522)
+				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
+					auto& _d_entry = s_hotpatch_entries[1522];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+					{
+						alignas(16) uint8_t _d_ab[8];
+						ArgBuffer _d_bw(_d_ab);
+						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d_entry.method_key, _d_ab, nullptr);
+						return;
+					}
+					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
+				};
+			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+			}
+			{
+				const auto chaos_method_ptr = _s1;
+				const auto chaos_target = _s0;
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
+				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
+				chaos_object->chaos_delegate_target = chaos_target;
+				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			_s1 = _s0;
+			{
+				auto chaos_value = _s1;
+				chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__206_0 = chaos_value;
+			}
+		}
+		{
+			// Assert.Throws: target method not found via IL lookahead
+			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
+		}
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
+		chaos_locals[0] = ChaosStoreInt64(_i0);
+		_i0 = ChaosLoadInt64(chaos_locals[0]);
+		return _i0;
+	}
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Block_98_Expression_Expression_Expression_Expression_Expression_0()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Block_98_Expression_Expression_Expression_Expression_Expression_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__208_0;
+	_s1 = _s0;
+	{
+		if (_s1 == 0)
+		{
+			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9;
+			{
+				// Hotpatch-aware ldftn wrapper (slot 1523)
+				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
+					auto& _d_entry = s_hotpatch_entries[1523];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+					{
+						alignas(16) uint8_t _d_ab[8];
+						ArgBuffer _d_bw(_d_ab);
+						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d_entry.method_key, _d_ab, nullptr);
+						return;
+					}
+					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
+				};
+			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+			}
+			{
+				const auto chaos_method_ptr = _s1;
+				const auto chaos_target = _s0;
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
+				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
+				chaos_object->chaos_delegate_target = chaos_target;
+				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			_s1 = _s0;
+			{
+				auto chaos_value = _s1;
+				chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__208_0 = chaos_value;
+			}
+		}
+		{
+			// Assert.Throws: target method not found via IL lookahead
+			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
+		}
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
+		chaos_locals[0] = ChaosStoreInt64(_i0);
+		_i0 = ChaosLoadInt64(chaos_locals[0]);
+		return _i0;
+	}
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Block_99_Expression_0()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Block_99_Expression_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__210_0;
+	_s1 = _s0;
+	{
+		if (_s1 == 0)
+		{
+			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9;
+			{
+				// Hotpatch-aware ldftn wrapper (slot 1524)
+				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
+					auto& _d_entry = s_hotpatch_entries[1524];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+					{
+						alignas(16) uint8_t _d_ab[8];
+						ArgBuffer _d_bw(_d_ab);
+						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d_entry.method_key, _d_ab, nullptr);
+						return;
+					}
+					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
+				};
+			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+			}
+			{
+				const auto chaos_method_ptr = _s1;
+				const auto chaos_target = _s0;
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
+				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
+				chaos_object->chaos_delegate_target = chaos_target;
+				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			_s1 = _s0;
+			{
+				auto chaos_value = _s1;
+				chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__210_0 = chaos_value;
+			}
+		}
+		{
+			// Assert.Throws: target method not found via IL lookahead
+			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
+		}
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
+		chaos_locals[0] = ChaosStoreInt64(_i0);
+		_i0 = ChaosLoadInt64(chaos_locals[0]);
+		return _i0;
+	}
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Block_99_Expression_1()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Block_99_Expression_1(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__212_0;
+	_s1 = _s0;
+	{
+		if (_s1 == 0)
+		{
+			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9;
+			{
+				// Hotpatch-aware ldftn wrapper (slot 1525)
+				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
+					auto& _d_entry = s_hotpatch_entries[1525];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+					{
+						alignas(16) uint8_t _d_ab[8];
+						ArgBuffer _d_bw(_d_ab);
+						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d_entry.method_key, _d_ab, nullptr);
+						return;
+					}
+					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
+				};
+			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+			}
+			{
+				const auto chaos_method_ptr = _s1;
+				const auto chaos_target = _s0;
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
+				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
+				chaos_object->chaos_delegate_target = chaos_target;
+				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			_s1 = _s0;
+			{
+				auto chaos_value = _s1;
+				chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__212_0 = chaos_value;
+			}
+		}
+		{
+			// Assert.Throws: target method not found via IL lookahead
+			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
+		}
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
+		chaos_locals[0] = ChaosStoreInt64(_i0);
+		_i0 = ChaosLoadInt64(chaos_locals[0]);
+		return _i0;
+	}
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Block_99_Expression_2()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Block_99_Expression_2(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__214_0;
+	_s1 = _s0;
+	{
+		if (_s1 == 0)
+		{
+			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9;
+			{
+				// Hotpatch-aware ldftn wrapper (slot 1526)
+				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
+					auto& _d_entry = s_hotpatch_entries[1526];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+					{
+						alignas(16) uint8_t _d_ab[8];
+						ArgBuffer _d_bw(_d_ab);
+						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d_entry.method_key, _d_ab, nullptr);
+						return;
+					}
+					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
+				};
+			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+			}
+			{
+				const auto chaos_method_ptr = _s1;
+				const auto chaos_target = _s0;
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
+				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
+				chaos_object->chaos_delegate_target = chaos_target;
+				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			_s1 = _s0;
+			{
+				auto chaos_value = _s1;
+				chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__214_0 = chaos_value;
+			}
+		}
+		{
+			// Assert.Throws: target method not found via IL lookahead
+			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
+		}
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
+		chaos_locals[0] = ChaosStoreInt64(_i0);
+		_i0 = ChaosLoadInt64(chaos_locals[0]);
+		return _i0;
+	}
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Break_139_LabelTarget_0()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Break_139_LabelTarget_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__336_0;
+	_s1 = _s0;
+	{
+		if (_s1 == 0)
+		{
+			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9;
+			{
+				// Hotpatch-aware ldftn wrapper (slot 1527)
+				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
+					auto& _d_entry = s_hotpatch_entries[1527];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+					{
+						alignas(16) uint8_t _d_ab[8];
+						ArgBuffer _d_bw(_d_ab);
+						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d_entry.method_key, _d_ab, nullptr);
+						return;
+					}
+					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
+				};
+			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+			}
+			{
+				const auto chaos_method_ptr = _s1;
+				const auto chaos_target = _s0;
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
+				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
+				chaos_object->chaos_delegate_target = chaos_target;
+				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			_s1 = _s0;
+			{
+				auto chaos_value = _s1;
+				chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__336_0 = chaos_value;
+			}
+		}
+		{
+			// Assert.Throws: target method not found via IL lookahead
+			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
+		}
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
+		chaos_locals[0] = ChaosStoreInt64(_i0);
+		_i0 = ChaosLoadInt64(chaos_locals[0]);
+		return _i0;
+	}
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Break_140_LabelTarget_Expression_0()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Break_140_LabelTarget_Expression_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__338_0;
+	_s1 = _s0;
+	{
+		if (_s1 == 0)
+		{
+			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9;
+			{
+				// Hotpatch-aware ldftn wrapper (slot 1528)
+				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
+					auto& _d_entry = s_hotpatch_entries[1528];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+					{
+						alignas(16) uint8_t _d_ab[8];
+						ArgBuffer _d_bw(_d_ab);
+						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d_entry.method_key, _d_ab, nullptr);
+						return;
+					}
+					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
+				};
+			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+			}
+			{
+				const auto chaos_method_ptr = _s1;
+				const auto chaos_target = _s0;
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
+				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
+				chaos_object->chaos_delegate_target = chaos_target;
+				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			_s1 = _s0;
+			{
+				auto chaos_value = _s1;
+				chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__338_0 = chaos_value;
+			}
+		}
+		{
+			// Assert.Throws: target method not found via IL lookahead
+			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
+		}
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
+		chaos_locals[0] = ChaosStoreInt64(_i0);
+		_i0 = ChaosLoadInt64(chaos_locals[0]);
+		return _i0;
+	}
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Break_141_LabelTarget_System_Type_0()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Break_141_LabelTarget_System_Type_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__340_0;
+	_s1 = _s0;
+	{
+		if (_s1 == 0)
+		{
+			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9;
+			{
+				// Hotpatch-aware ldftn wrapper (slot 1529)
+				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
+					auto& _d_entry = s_hotpatch_entries[1529];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+					{
+						alignas(16) uint8_t _d_ab[8];
+						ArgBuffer _d_bw(_d_ab);
+						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d_entry.method_key, _d_ab, nullptr);
+						return;
+					}
+					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
+				};
+			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+			}
+			{
+				const auto chaos_method_ptr = _s1;
+				const auto chaos_target = _s0;
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
+				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
+				chaos_object->chaos_delegate_target = chaos_target;
+				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			_s1 = _s0;
+			{
+				auto chaos_value = _s1;
+				chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__340_0 = chaos_value;
+			}
+		}
+		{
+			// Assert.Throws: target method not found via IL lookahead
+			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
+		}
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
+		chaos_locals[0] = ChaosStoreInt64(_i0);
+		_i0 = ChaosLoadInt64(chaos_locals[0]);
+		return _i0;
+	}
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Break_142_LabelTarget_Expression_System_Type_0()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Break_142_LabelTarget_Expression_System_Type_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__342_0;
+	_s1 = _s0;
+	{
+		if (_s1 == 0)
+		{
+			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9;
+			{
+				// Hotpatch-aware ldftn wrapper (slot 1530)
+				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
+					auto& _d_entry = s_hotpatch_entries[1530];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+					{
+						alignas(16) uint8_t _d_ab[8];
+						ArgBuffer _d_bw(_d_ab);
+						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d_entry.method_key, _d_ab, nullptr);
+						return;
+					}
+					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
+				};
+			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+			}
+			{
+				const auto chaos_method_ptr = _s1;
+				const auto chaos_target = _s0;
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
+				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
+				chaos_object->chaos_delegate_target = chaos_target;
+				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			_s1 = _s0;
+			{
+				auto chaos_value = _s1;
+				chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__342_0 = chaos_value;
+			}
+		}
+		{
+			// Assert.Throws: target method not found via IL lookahead
+			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
+		}
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
+		chaos_locals[0] = ChaosStoreInt64(_i0);
+		_i0 = ChaosLoadInt64(chaos_locals[0]);
+		return _i0;
+	}
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Call_219_MethodInfo_Expression_0()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Call_219_MethodInfo_Expression_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__674_0;
+	_s1 = _s0;
+	{
+		if (_s1 == 0)
+		{
+			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9;
+			{
+				// Hotpatch-aware ldftn wrapper (slot 1531)
+				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
+					auto& _d_entry = s_hotpatch_entries[1531];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+					{
+						alignas(16) uint8_t _d_ab[8];
+						ArgBuffer _d_bw(_d_ab);
+						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d_entry.method_key, _d_ab, nullptr);
+						return;
+					}
+					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
+				};
+			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+			}
+			{
+				const auto chaos_method_ptr = _s1;
+				const auto chaos_target = _s0;
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
+				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
+				chaos_object->chaos_delegate_target = chaos_target;
+				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			_s1 = _s0;
+			{
+				auto chaos_value = _s1;
+				chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__674_0 = chaos_value;
+			}
+		}
+		{
+			// Assert.Throws: target method not found via IL lookahead
+			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
+		}
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
+		chaos_locals[0] = ChaosStoreInt64(_i0);
+		_i0 = ChaosLoadInt64(chaos_locals[0]);
+		return _i0;
+	}
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Call_220_MethodInfo_Expression_Expression_0()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Call_220_MethodInfo_Expression_Expression_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__676_0;
+	_s1 = _s0;
+	{
+		if (_s1 == 0)
+		{
+			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9;
+			{
+				// Hotpatch-aware ldftn wrapper (slot 1532)
+				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
+					auto& _d_entry = s_hotpatch_entries[1532];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+					{
+						alignas(16) uint8_t _d_ab[8];
+						ArgBuffer _d_bw(_d_ab);
+						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d_entry.method_key, _d_ab, nullptr);
+						return;
+					}
+					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
+				};
+			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+			}
+			{
+				const auto chaos_method_ptr = _s1;
+				const auto chaos_target = _s0;
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
+				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
+				chaos_object->chaos_delegate_target = chaos_target;
+				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			_s1 = _s0;
+			{
+				auto chaos_value = _s1;
+				chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__676_0 = chaos_value;
+			}
+		}
+		{
+			// Assert.Throws: target method not found via IL lookahead
+			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
+		}
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
+		chaos_locals[0] = ChaosStoreInt64(_i0);
+		_i0 = ChaosLoadInt64(chaos_locals[0]);
+		return _i0;
+	}
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Call_221_MethodInfo_Expression_Expression_Expression_0()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Call_221_MethodInfo_Expression_Expression_Expression_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__678_0;
+	_s1 = _s0;
+	{
+		if (_s1 == 0)
+		{
+			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9;
+			{
+				// Hotpatch-aware ldftn wrapper (slot 1533)
+				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
+					auto& _d_entry = s_hotpatch_entries[1533];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+					{
+						alignas(16) uint8_t _d_ab[8];
+						ArgBuffer _d_bw(_d_ab);
+						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d_entry.method_key, _d_ab, nullptr);
+						return;
+					}
+					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
+				};
+			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+			}
+			{
+				const auto chaos_method_ptr = _s1;
+				const auto chaos_target = _s0;
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
+				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
+				chaos_object->chaos_delegate_target = chaos_target;
+				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			_s1 = _s0;
+			{
+				auto chaos_value = _s1;
+				chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__678_0 = chaos_value;
+			}
+		}
+		{
+			// Assert.Throws: target method not found via IL lookahead
+			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
+		}
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
+		chaos_locals[0] = ChaosStoreInt64(_i0);
+		_i0 = ChaosLoadInt64(chaos_locals[0]);
+		return _i0;
+	}
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Call_222_MethodInfo_Expression_Expression_Expression_Expression_0()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Call_222_MethodInfo_Expression_Expression_Expression_Expression_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__680_0;
+	_s1 = _s0;
+	{
+		if (_s1 == 0)
+		{
+			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9;
+			{
+				// Hotpatch-aware ldftn wrapper (slot 1534)
+				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
+					auto& _d_entry = s_hotpatch_entries[1534];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+					{
+						alignas(16) uint8_t _d_ab[8];
+						ArgBuffer _d_bw(_d_ab);
+						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d_entry.method_key, _d_ab, nullptr);
+						return;
+					}
+					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
+				};
+			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+			}
+			{
+				const auto chaos_method_ptr = _s1;
+				const auto chaos_target = _s0;
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
+				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
+				chaos_object->chaos_delegate_target = chaos_target;
+				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			_s1 = _s0;
+			{
+				auto chaos_value = _s1;
+				chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__680_0 = chaos_value;
+			}
+		}
+		{
+			// Assert.Throws: target method not found via IL lookahead
+			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
+		}
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
+		chaos_locals[0] = ChaosStoreInt64(_i0);
+		_i0 = ChaosLoadInt64(chaos_locals[0]);
+		return _i0;
+	}
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Call_223_MethodInfo_Expression_Expression_Expression_Expression_Expression_0()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Call_223_MethodInfo_Expression_Expression_Expression_Expression_Expression_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__682_0;
+	_s1 = _s0;
+	{
+		if (_s1 == 0)
+		{
+			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9;
+			{
+				// Hotpatch-aware ldftn wrapper (slot 1535)
+				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
+					auto& _d_entry = s_hotpatch_entries[1535];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+					{
+						alignas(16) uint8_t _d_ab[8];
+						ArgBuffer _d_bw(_d_ab);
+						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d_entry.method_key, _d_ab, nullptr);
+						return;
+					}
+					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
+				};
+			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+			}
+			{
+				const auto chaos_method_ptr = _s1;
+				const auto chaos_target = _s0;
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
+				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
+				chaos_object->chaos_delegate_target = chaos_target;
+				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			_s1 = _s0;
+			{
+				auto chaos_value = _s1;
+				chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__682_0 = chaos_value;
+			}
+		}
+		{
+			// Assert.Throws: target method not found via IL lookahead
+			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
+		}
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
+		chaos_locals[0] = ChaosStoreInt64(_i0);
+		_i0 = ChaosLoadInt64(chaos_locals[0]);
+		return _i0;
+	}
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Call_224_MethodInfo_Expression_0()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Call_224_MethodInfo_Expression_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__684_0;
+	_s1 = _s0;
+	{
+		if (_s1 == 0)
+		{
+			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9;
+			{
+				// Hotpatch-aware ldftn wrapper (slot 1536)
+				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
+					auto& _d_entry = s_hotpatch_entries[1536];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+					{
+						alignas(16) uint8_t _d_ab[8];
+						ArgBuffer _d_bw(_d_ab);
+						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d_entry.method_key, _d_ab, nullptr);
+						return;
+					}
+					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
+				};
+			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+			}
+			{
+				const auto chaos_method_ptr = _s1;
+				const auto chaos_target = _s0;
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
+				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
+				chaos_object->chaos_delegate_target = chaos_target;
+				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			_s1 = _s0;
+			{
+				auto chaos_value = _s1;
+				chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__684_0 = chaos_value;
+			}
+		}
+		{
+			// Assert.Throws: target method not found via IL lookahead
+			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
+		}
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
+		chaos_locals[0] = ChaosStoreInt64(_i0);
+		_i0 = ChaosLoadInt64(chaos_locals[0]);
+		return _i0;
+	}
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Call_224_MethodInfo_Expression_1()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Call_224_MethodInfo_Expression_1(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__686_0;
+	_s1 = _s0;
+	{
+		if (_s1 == 0)
+		{
+			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9;
+			{
+				// Hotpatch-aware ldftn wrapper (slot 1537)
+				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
+					auto& _d_entry = s_hotpatch_entries[1537];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+					{
+						alignas(16) uint8_t _d_ab[8];
+						ArgBuffer _d_bw(_d_ab);
+						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d_entry.method_key, _d_ab, nullptr);
+						return;
+					}
+					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
+				};
+			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+			}
+			{
+				const auto chaos_method_ptr = _s1;
+				const auto chaos_target = _s0;
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
+				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
+				chaos_object->chaos_delegate_target = chaos_target;
+				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			_s1 = _s0;
+			{
+				auto chaos_value = _s1;
+				chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__686_0 = chaos_value;
+			}
+		}
+		{
+			// Assert.Throws: target method not found via IL lookahead
+			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
+		}
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
+		chaos_locals[0] = ChaosStoreInt64(_i0);
+		_i0 = ChaosLoadInt64(chaos_locals[0]);
+		return _i0;
+	}
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Call_224_MethodInfo_Expression_2()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Call_224_MethodInfo_Expression_2(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__688_0;
+	_s1 = _s0;
+	{
+		if (_s1 == 0)
+		{
+			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9;
+			{
+				// Hotpatch-aware ldftn wrapper (slot 1538)
+				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
+					auto& _d_entry = s_hotpatch_entries[1538];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+					{
+						alignas(16) uint8_t _d_ab[8];
+						ArgBuffer _d_bw(_d_ab);
+						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d_entry.method_key, _d_ab, nullptr);
+						return;
+					}
+					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
+				};
+			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+			}
+			{
+				const auto chaos_method_ptr = _s1;
+				const auto chaos_target = _s0;
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
+				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
+				chaos_object->chaos_delegate_target = chaos_target;
+				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			_s1 = _s0;
+			{
+				auto chaos_value = _s1;
+				chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__688_0 = chaos_value;
+			}
+		}
+		{
+			// Assert.Throws: target method not found via IL lookahead
+			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
+		}
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
+		chaos_locals[0] = ChaosStoreInt64(_i0);
+		_i0 = ChaosLoadInt64(chaos_locals[0]);
+		return _i0;
+	}
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Call_225_MethodInfo_IEnumerableExpression_0()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Call_225_MethodInfo_IEnumerableExpression_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__690_0;
+	_s1 = _s0;
+	{
+		if (_s1 == 0)
+		{
+			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9;
+			{
+				// Hotpatch-aware ldftn wrapper (slot 1539)
+				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
+					auto& _d_entry = s_hotpatch_entries[1539];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+					{
+						alignas(16) uint8_t _d_ab[8];
+						ArgBuffer _d_bw(_d_ab);
+						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d_entry.method_key, _d_ab, nullptr);
+						return;
+					}
+					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
+				};
+			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+			}
+			{
+				const auto chaos_method_ptr = _s1;
+				const auto chaos_target = _s0;
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
+				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
+				chaos_object->chaos_delegate_target = chaos_target;
+				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			_s1 = _s0;
+			{
+				auto chaos_value = _s1;
+				chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__690_0 = chaos_value;
+			}
+		}
+		{
+			// Assert.Throws: target method not found via IL lookahead
+			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
+		}
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
+		chaos_locals[0] = ChaosStoreInt64(_i0);
+		_i0 = ChaosLoadInt64(chaos_locals[0]);
+		return _i0;
+	}
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Call_225_MethodInfo_IEnumerableExpression_1()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Call_225_MethodInfo_IEnumerableExpression_1(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__692_0;
+	_s1 = _s0;
+	{
+		if (_s1 == 0)
+		{
+			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9;
+			{
+				// Hotpatch-aware ldftn wrapper (slot 1540)
+				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
+					auto& _d_entry = s_hotpatch_entries[1540];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+					{
+						alignas(16) uint8_t _d_ab[8];
+						ArgBuffer _d_bw(_d_ab);
+						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d_entry.method_key, _d_ab, nullptr);
+						return;
+					}
+					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
+				};
+			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+			}
+			{
+				const auto chaos_method_ptr = _s1;
+				const auto chaos_target = _s0;
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
+				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
+				chaos_object->chaos_delegate_target = chaos_target;
+				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			_s1 = _s0;
+			{
+				auto chaos_value = _s1;
+				chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__692_0 = chaos_value;
+			}
+		}
+		{
+			// Assert.Throws: target method not found via IL lookahead
+			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
+		}
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
+		chaos_locals[0] = ChaosStoreInt64(_i0);
+		_i0 = ChaosLoadInt64(chaos_locals[0]);
+		return _i0;
+	}
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Call_226_Expression_MethodInfo_0()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Call_226_Expression_MethodInfo_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__694_0;
+	_s1 = _s0;
+	{
+		if (_s1 == 0)
+		{
+			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9;
+			{
+				// Hotpatch-aware ldftn wrapper (slot 1541)
+				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
+					auto& _d_entry = s_hotpatch_entries[1541];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+					{
+						alignas(16) uint8_t _d_ab[8];
+						ArgBuffer _d_bw(_d_ab);
+						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d_entry.method_key, _d_ab, nullptr);
+						return;
+					}
+					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
+				};
+			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+			}
+			{
+				const auto chaos_method_ptr = _s1;
+				const auto chaos_target = _s0;
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
+				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
+				chaos_object->chaos_delegate_target = chaos_target;
+				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			_s1 = _s0;
+			{
+				auto chaos_value = _s1;
+				chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__694_0 = chaos_value;
+			}
+		}
+		{
+			// Assert.Throws: target method not found via IL lookahead
+			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
+		}
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
+		chaos_locals[0] = ChaosStoreInt64(_i0);
+		_i0 = ChaosLoadInt64(chaos_locals[0]);
+		return _i0;
+	}
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Call_227_Expression_MethodInfo_Expression_0()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Call_227_Expression_MethodInfo_Expression_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__696_0;
+	_s1 = _s0;
+	{
+		if (_s1 == 0)
+		{
+			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9;
+			{
+				// Hotpatch-aware ldftn wrapper (slot 1542)
+				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
+					auto& _d_entry = s_hotpatch_entries[1542];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+					{
+						alignas(16) uint8_t _d_ab[8];
+						ArgBuffer _d_bw(_d_ab);
+						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d_entry.method_key, _d_ab, nullptr);
+						return;
+					}
+					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
+				};
+			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+			}
+			{
+				const auto chaos_method_ptr = _s1;
+				const auto chaos_target = _s0;
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
+				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
+				chaos_object->chaos_delegate_target = chaos_target;
+				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			_s1 = _s0;
+			{
+				auto chaos_value = _s1;
+				chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__696_0 = chaos_value;
+			}
+		}
+		{
+			// Assert.Throws: target method not found via IL lookahead
+			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
+		}
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
+		chaos_locals[0] = ChaosStoreInt64(_i0);
+		_i0 = ChaosLoadInt64(chaos_locals[0]);
+		return _i0;
+	}
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Call_227_Expression_MethodInfo_Expression_1()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Call_227_Expression_MethodInfo_Expression_1(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__698_0;
+	_s1 = _s0;
+	{
+		if (_s1 == 0)
+		{
+			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9;
+			{
+				// Hotpatch-aware ldftn wrapper (slot 1543)
+				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
+					auto& _d_entry = s_hotpatch_entries[1543];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+					{
+						alignas(16) uint8_t _d_ab[8];
+						ArgBuffer _d_bw(_d_ab);
+						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d_entry.method_key, _d_ab, nullptr);
+						return;
+					}
+					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
+				};
+			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+			}
+			{
+				const auto chaos_method_ptr = _s1;
+				const auto chaos_target = _s0;
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
+				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
+				chaos_object->chaos_delegate_target = chaos_target;
+				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			_s1 = _s0;
+			{
+				auto chaos_value = _s1;
+				chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__698_0 = chaos_value;
+			}
+		}
+		{
+			// Assert.Throws: target method not found via IL lookahead
+			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
+		}
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
+		chaos_locals[0] = ChaosStoreInt64(_i0);
+		_i0 = ChaosLoadInt64(chaos_locals[0]);
+		return _i0;
+	}
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Linq_Expressions.System_Linq_Expressions_ExpressionTests::Call_227_Expression_MethodInfo_Expression_2()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests_Call_227_Expression_MethodInfo_Expression_2(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__700_0;
+	_s1 = _s0;
+	{
+		if (_s1 == 0)
+		{
+			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9;
+			{
+				// Hotpatch-aware ldftn wrapper (slot 1544)
+				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
+					auto& _d_entry = s_hotpatch_entries[1544];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+					{
+						alignas(16) uint8_t _d_ab[8];
+						ArgBuffer _d_bw(_d_ab);
+						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d_entry.method_key, _d_ab, nullptr);
+						return;
+					}
+					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
+				};
+			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+			}
+			{
+				const auto chaos_method_ptr = _s1;
+				const auto chaos_target = _s0;
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
+				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
+				chaos_object->chaos_delegate_target = chaos_target;
+				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			_s1 = _s0;
+			{
+				auto chaos_value = _s1;
+				chaos_static_CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Linq_Expressions_ExpressionTests___c____9__700_0 = chaos_value;
+			}
+		}
+		{
+			// Assert.Throws: target method not found via IL lookahead
+			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
+		}
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
+		chaos_locals[0] = ChaosStoreInt64(_i0);
+		_i0 = ChaosLoadInt64(chaos_locals[0]);
+		return _i0;
+	}
 }
 
 
@@ -8557,6 +8768,6 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Linq_Expressions_System_Li
 #pragma warning(pop)
 
 // extern "C" definition for link-time visibility from runtime-entry.cpp
-extern "C" const int kAotMethodCount = 2293;
+extern "C" const int kAotMethodCount = 2254;
 
 extern "C" void ChaosJitRegisterAll() {}

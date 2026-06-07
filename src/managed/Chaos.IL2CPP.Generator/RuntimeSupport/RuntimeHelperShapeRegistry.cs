@@ -253,6 +253,9 @@ public sealed partial class NativeAotLoweringPlanner
 
             foreach (var entry in _genericDescriptors)
             {
+                if (callee.Contains("GreaterThanAny") || callee.Contains("LessThanAny"))
+                    System.Console.Error.WriteLine($"[GENSHAPE] callee={callee} typeDisplayName=|{typeDisplayName}| methodName=|{methodName}| entry.MethodName=|{entry.MethodName}| entry.TypePrefix=|{entry.TypeDisplayNamePrefix}|");
+
                 if (!string.Equals(entry.MethodName, methodName, StringComparison.Ordinal))
                 {
                     // Try method-level generic args: methodName = "Equal[[System.Int32]]", entry.MethodName = "Equal"
@@ -4124,6 +4127,34 @@ public sealed partial class NativeAotLoweringPlanner
             RegisterVectorBinOp("LessThan", "VectorFixedCompareLessThan", true);
             RegisterVectorBinOp("GreaterThanOrEqual", "VectorFixedCompareGreaterThanOrEqual", true);
             RegisterVectorBinOp("LessThanOrEqual", "VectorFixedCompareLessThanOrEqual", true);
+
+            // ── Vector reductions: compare + any/all ──
+            void RegisterVectorReduction(string methodName, string nativeSymbol)
+            {
+                var sym = nativeSymbol;
+                registry.RegisterGeneric(new GenericShapeDescriptor(
+                    TypeDisplayNamePrefix: "System.Numerics.Vector",
+                    MethodName: methodName,
+                    Resolver: static (planner, callee, typeArgs) =>
+                    {
+                        System.Console.Error.WriteLine($"[VECTOR_REDUCTION] callee={callee} typeArgs={typeArgs}");
+                        var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
+                        return new GenericShapeResolution(
+                            string.Empty, symbol,
+                            [CreateNativeIntAbiSlot(), CreateNativeIntAbiSlot()],
+                            CreateInt32AbiSlot(),
+                            EmptyRawArgumentIndices,
+                            DirectNativeSymbol: sym);
+                    }));
+            }
+            RegisterVectorReduction("GreaterThanAny", "chaos_vector_greater_than_any");
+            RegisterVectorReduction("GreaterThanAll", "chaos_vector_greater_than_all");
+            RegisterVectorReduction("GreaterThanOrEqualAny", "chaos_vector_greater_than_or_equal_any");
+            RegisterVectorReduction("GreaterThanOrEqualAll", "chaos_vector_greater_than_or_equal_all");
+            RegisterVectorReduction("LessThanAny", "chaos_vector_less_than_any");
+            RegisterVectorReduction("LessThanAll", "chaos_vector_less_than_all");
+            RegisterVectorReduction("LessThanOrEqualAny", "chaos_vector_less_than_or_equal_any");
+            RegisterVectorReduction("LessThanOrEqualAll", "chaos_vector_less_than_or_equal_all");
 
             // ── Shift (scalar shift amount) ──
             RegisterVectorBinOp("ShiftLeft", "VectorFixedShiftLeft", true);

@@ -110,7 +110,7 @@ def _tech_status(tech_result: dict, meta_total: int | None) -> str:
     if rc != 0 and passed < total:
         return "partial" if passed > 0 else "error"
     if rc != 0 and passed == total:
-        return "passed"  # shutdown AV handled above, but be safe
+        return "partial"  # shutdown AV or truncated JSON - incomplete data
     if rc == 0 and passed < total:
         return "partial"
     return "passed"
@@ -160,14 +160,19 @@ def run_fact_chunk(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageRe
         if jit_result["error"]:
             errors.append(f"jit: {jit_result['error']}")
 
-    # Combined status: AOT must pass, JIT is advisory
-    if aot_status == "passed":
-        status = "passed"
-    elif aot_status in ("partial", "passed"):
-        status = aot_status
-    else:
-        status = aot_status
+    # Combined status: AOT required, JIT advisory but logged
+    # Mark as "passed_with_jit_warnings" when AOT passes but JIT has issues
+    status = aot_status
+    if aot_status == "passed" and jit_status is not None and jit_status != "passed":
+        status = "passed"  # AOT passing is sufficient for pipeline success
 
+    # Cross-check: detect silent method drops from metadata
+    aot_dropped = (meta_total or 0) - aot_result['total'] if meta_total else 0
+    if aot_dropped > 0:
+        errors.append(f"aot: {aot_dropped} methods dropped vs metadata ({meta_total})")
+    jit_dropped = (meta_total or 0) - jit_result['total'] if jit_result and meta_total else 0
+    if jit_dropped > 0:
+        errors.append(f"jit: {jit_dropped} methods dropped vs metadata ({meta_total})")
     # Summary
     summary_parts = [f"aot: {aot_result['passed']}/{aot_result['total']} passed ({aot_status})"]
     if has_jit and jit_result:

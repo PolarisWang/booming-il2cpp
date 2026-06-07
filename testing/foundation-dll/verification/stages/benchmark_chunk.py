@@ -153,6 +153,7 @@ def _parse_benchmark_lines(stdout: str) -> tuple[list[dict], dict]:
         try:
             obj = json.loads(line)
         except json.JSONDecodeError:
+            _dropped_count += 1
             continue
         if 'summary' in obj:
             summary = obj['summary']
@@ -436,6 +437,7 @@ def _run_single_benchmark(
     max_rounds = 10
     min_rounds = 3
     all_rounds: list[list[dict]] = []
+    _dropped_count = 0
 
     for s in range(max_rounds):
         print(f"  [benchmark] [{technology}] sampling round {s + 1}/{max_rounds}...")
@@ -475,6 +477,9 @@ def _run_single_benchmark(
         return None
 
     # Phase 2: Per-method statistical computation
+    # Warn if JSON lines were dropped (truncated/malformed output)
+    if _dropped_count > 0:
+        print(f"  [benchmark] WARNING: {_dropped_count} malformed JSON lines dropped from output")
     method_count = len(all_rounds[0])
     per_method_stats: list[dict] = []
 
