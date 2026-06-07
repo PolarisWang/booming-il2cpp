@@ -156,6 +156,20 @@ public sealed partial class NativeAotLoweringPlanner
 			return;
 		}
 
+		// Skip compiler-generated display class constructors (<>c::.cctor/<>c::.ctor)
+		// — their newobj instructions cannot be lowered properly by the structured IR
+		// emitter, producing malformed C++ (auto chaos_value = return).
+		if (method.SubjectId is not null && method.SubjectId.Contains("<>c::", StringComparison.Ordinal))
+		{
+			builder.AppendLine("// AOT-unreachable stub: " + method.SubjectId);
+			var _fnDecl = FormatMethodDeclaration(method, _sharedContextSymbols);
+			builder.AppendLine(_fnDecl.Length > 0 && _fnDecl[^1] == ";"[0] ? _fnDecl[..^1] : _fnDecl);
+			builder.AppendLine("{");
+			builder.AppendLine("    CHAOS_IL2CPP_FAIL();");
+			builder.AppendLine("}");
+			return;
+		}
+
 		IReadOnlyList<AotCoreIrInstructionArtifact> instructions = method.Instructions;
 
 		// Handle 0-instruction subject methods: emit simple return instead of throwing.

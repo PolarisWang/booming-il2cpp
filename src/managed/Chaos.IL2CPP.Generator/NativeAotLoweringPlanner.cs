@@ -1328,6 +1328,8 @@ extern ""C"" CHAOS_IL2CPP_INT32 RunNativeAot(CHAOS_IL2CPP_INT32 entryIndex) {{
         // Ensure _externalRuntimeSubjects includes callees from ALL methods
         // (not just methodsForLowering, which may exclude filtered methods).
         // Missing entries cause C3861 in the generated header.
+        // Also collect static field declarations from all methods
+        // for chaos_static_* extern declarations.
         {
             var _seen = new HashSet<string>(StringComparer.Ordinal);
             int _nextIdx = _externalRuntimeSubjects.Count;
@@ -1335,12 +1337,24 @@ extern ""C"" CHAOS_IL2CPP_INT32 RunNativeAot(CHAOS_IL2CPP_INT32 entryIndex) {{
             {
                 foreach (var _inst in _method.Instructions ?? [])
                 {
+                    // ExternalRuntime callees
                     string? _callee = _inst.Callee ?? _inst.TargetReference?.SubjectId;
-                    if (string.IsNullOrEmpty(_callee)) continue;
-                    if (!_seen.Add(_callee)) continue;
-                    if (_externalRuntimeSubjects.ContainsKey(_callee)) continue;
-                    if (_methodsBySubjectId.ContainsKey(_callee)) continue;
-                    _externalRuntimeSubjects[_callee] = _nextIdx++;
+                    if (!string.IsNullOrEmpty(_callee) && _seen.Add(_callee))
+                    {
+                        if (!_externalRuntimeSubjects.ContainsKey(_callee) &&
+                            !_methodsBySubjectId.ContainsKey(_callee))
+                        {
+                            _externalRuntimeSubjects[_callee] = _nextIdx++;
+                        }
+                    }
+                    // Static field references (for chaos_static_* declarations)
+                    if (_inst?.TargetReference is { } _tr &&
+                        _tr.FieldTypeSubjectId is { Length: > 0 } _ft &&
+                        !string.IsNullOrEmpty(_tr.SubjectId))
+                    {
+                        _staticFieldDeclarations ??= new Dictionary<string, string?>(StringComparer.Ordinal);
+                        _staticFieldDeclarations.TryAdd(_tr.SubjectId, _ft);
+                    }
                 }
             }
         }
@@ -1379,6 +1393,9 @@ extern ""C"" CHAOS_IL2CPP_INT32 RunNativeAot(CHAOS_IL2CPP_INT32 entryIndex) {{
             // Common generated runtime prelude (shared header, ~200 lines
             // of helper functions previously emitted inline in every file).
             "<ChaosGeneratedRuntimePrelude.h>",
+            // Runtime stubs for Environment, Console, Culture, GC and delegate helpers
+            // (chaos_current_managed_thread_id, ChaosEnvironmentGetStackTrace, etc.)
+            "\"runtime_stubs/misc_stubs.h\"",
         };
         // com_ccw.h — only needed when COM interface vtable data is present.
         if (_comInterfaceVtableData is { Count: > 0 })
