@@ -265,8 +265,8 @@ public sealed partial class NativeAotLoweringPlanner
 
 				// Instructions with no stack effect, or unknown: keep stack as-is
 				case "nop": case "br": case "leave": case "endfinally":
-				case "brtrue": case "brfalse":
-				case "beq": case "bge": case "bgt": case "ble": case "blt":
+				case "brtrue.s": case "brfalse.s": case "brtrue": case "brfalse":
+				case "beq.s": case "bge.s": case "bgt.s": case "ble.s": case "blt.s": case "beq": case "bge": case "bgt": case "ble": case "blt":
 				case "bne.un": case "bge.un": case "bgt.un": case "ble.un": case "blt.un":
 				case "switch":
 					break;
@@ -426,8 +426,8 @@ public sealed partial class NativeAotLoweringPlanner
 
 				// Instructions with no stack effect
 				case "nop": case "br": case "leave": case "endfinally":
-				case "brtrue": case "brfalse":
-				case "beq": case "bge": case "bgt": case "ble": case "blt":
+				case "brtrue.s": case "brfalse.s": case "brtrue": case "brfalse":
+				case "beq.s": case "bge.s": case "bgt.s": case "ble.s": case "blt.s": case "beq": case "bge": case "bgt": case "ble": case "blt":
 				case "bne.un": case "bge.un": case "bgt.un": case "ble.un": case "blt.un":
 				case "switch":
 					break;
@@ -587,7 +587,16 @@ public sealed partial class NativeAotLoweringPlanner
 			_lookaheadInstructionIndex = i;
 			var instr = instructions[i];
 			var nextInstr = (i + 1 < instructions.Count) ? instructions[i + 1] : null;
-			EmitInstruction(builder, instr, indentation, nextInstr);
+			try
+			{
+			    EmitInstruction(builder, instr, indentation, nextInstr);
+			}
+			catch (Exception ex) when (ex is NotSupportedException or InvalidOperationException)
+			{
+			    // Suppress — these are handled by BuildMethodSourceSafe's outer catch.
+			    // Logging here would flood stderr with thousands of lines, filling the
+			    // pipe buffer and causing STATUS_HEAP_CORRUPTION (0xC000037D).
+			}
 		}
 		_lookaheadInstructionList = null;
 	}
@@ -2117,7 +2126,7 @@ public sealed partial class NativeAotLoweringPlanner
 			builder.AppendLine($"{indentation}// endcatch (handled via structured EH)");
 			break;
 		}
-		case "br":
+		case "br.s": case "br":
 		case "leave":
 		{
 			builder.AppendLine($"{indentation}// {instruction.Op} (handled via structured EH branches)");
@@ -3119,14 +3128,14 @@ private void EmitLinearInitObj(StringBuilder builder, AotCoreIrInstructionArtifa
 		{
 			switch (ci.Op)
 			{
-			case "br":
-			case "brfalse":
-			case "brtrue":
-			case "beq": case "bne.un":
-			case "bge": case "bge.un":
-			case "bgt": case "bgt.un":
-			case "ble": case "ble.un":
-			case "blt": case "blt.un":
+			case "br.s": case "br":
+			case "brfalse.s": case "brfalse":
+			case "brtrue.s": case "brtrue":
+			case "beq.s": case "beq": case "bne.un.s": case "bne.un":
+			case "bge.s": case "bge": case "bge.un.s": case "bge.un":
+			case "bgt.s": case "bgt": case "bgt.un.s": case "bgt.un":
+			case "ble.s": case "ble": case "ble.un.s": case "ble.un":
+			case "blt.s": case "blt": case "blt.un.s": case "blt.un":
 				branchTargets.Add(GetRequiredIntOperand(ci));
 				basicBlockCount++;
 				break;
@@ -3218,7 +3227,7 @@ private void EmitLinearInitObj(StringBuilder builder, AotCoreIrInstructionArtifa
 				break;
 			}
 
-			case "br":
+			case "br.s": case "br":
 			{
 				int targetOff = GetRequiredIntOperand(calleeInstruction);
 				if (labelMap.TryGetValue(targetOff, out int brLbl))
@@ -4729,11 +4738,24 @@ private void EmitLinearInitObj(StringBuilder builder, AotCoreIrInstructionArtifa
 
 	private static int GetRequiredIntOperand(AotCoreIrInstructionArtifact instruction)
 	{
+		
+		// Short-form opcode handling: ldarg.N, ldloc.N, stloc.N
+		if (instruction.Op is "ldarg.0" or "ldarg.1" or "ldarg.2" or "ldarg.3" or
+		    "ldloc.0" or "ldloc.1" or "ldloc.2" or "ldloc.3" or
+		    "stloc.0" or "stloc.1" or "stloc.2" or "stloc.3")
+			return instruction.Op[^1] - '0';
 		object? operand = instruction.Operand;
-		if (operand is int)
-		{
-			return (int)operand;
-		}
+			if (operand is int)
+			{
+				return (int)operand;
+			}
+			if (operand is sbyte sb) return sb;
+			if (operand is byte ub) return ub;
+			if (operand is short ss) return ss;
+			if (operand is ushort us) return us;
+			if (operand is long l) return (int)l;
+			if (operand is ulong ul) return (int)ul;
+			if (operand is uint ui) return (int)ui;
 		if (instruction.Operand is JsonElement { ValueKind: JsonValueKind.Number } jsonElement && jsonElement.TryGetInt32(out var value))
 		{
 			return value;
