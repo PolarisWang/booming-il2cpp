@@ -21,6 +21,22 @@ endif()
 if(NOT DEFINED CHAOS_IL2CPP_CONFIG_TIER)
   set(CHAOS_IL2CPP_CONFIG_TIER "{{ config_tier }}")
 endif()
+
+# ── Hephaestus Lib: pre-compiled framework cache ──
+# When CHAOS_HEPHAESTUS_DIR is set, link against pre-compiled static libraries
+# from previously-cached builds.  This avoids recompiling the IL2CPP codegen
+# output for core assemblies (System.Private.CoreLib, System.Runtime, etc.)
+# across chunks.
+# The cache is managed by the HephaestusCache in the Python verification pipeline.
+# If the variable is not set, the build proceeds as normal.
+if(DEFINED CHAOS_HEPHAESTUS_DIR AND EXISTS "${CHAOS_HEPHAESTUS_DIR}")
+  message(STATUS "Hephaestus Lib: ${CHAOS_HEPHAESTUS_DIR}")
+  file(GLOB CHAOS_HEPHAESTUS_LIBS "${CHAOS_HEPHAESTUS_DIR}/*.lib" "${CHAOS_HEPHAESTUS_DIR}/*.a")
+  if(CHAOS_HEPHAESTUS_LIBS)
+    list(APPEND CHAOS_ENTRY_SOURCES ${CHAOS_HEPHAESTUS_LIBS})
+    message(STATUS "Hephaestus Lib: ${CHAOS_HEPHAESTUS_LIBS}")
+  endif()
+endif()
 if(CHAOS_IL2CPP_CONFIG_TIER STREQUAL "profile")
   add_compile_definitions(CHAOS_IL2CPP_CONFIG_TIER={{ defines.config_tier_value }})
   add_compile_definitions({{ defines.config_tier_macro }})

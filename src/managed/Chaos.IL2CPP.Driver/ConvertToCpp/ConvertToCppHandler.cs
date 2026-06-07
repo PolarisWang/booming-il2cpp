@@ -130,7 +130,7 @@ internal static class ConvertToCppHandler
             NativeAotResult emitResult;
             try
             {
-                emitResult = emitter.Emit(result, outputRoot, config.Mode, subjectMethods, result.BridgeRedirectMap);
+                emitResult = emitter.Emit(result, outputRoot, config.Mode, subjectMethods, result.BridgeRedirectMap, goldProfilePath: config.GoldProfilePath);
             }
             catch (OutOfMemoryException oom)
             {

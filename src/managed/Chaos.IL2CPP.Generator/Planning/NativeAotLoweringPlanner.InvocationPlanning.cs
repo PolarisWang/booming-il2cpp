@@ -963,6 +963,16 @@ if (!TryCreateExternalRuntimeHelperDefinition(targetSubjectId, out var helperDef
             extReturnAbi = helperDef.ReturnAbi;
             extRawIndices = helperDef.RawArgumentIndices;
             extDirectNativeSymbol = helperDef.DirectNativeSymbol;
+
+            // Gold Direct Link (A3): Override DirectNativeSymbol for hot methods
+            // identified by PGO profiling. Use the method's actual C++ function
+            // symbol to enable direct call emission instead of Demeter Table dispatch.
+            if (extDirectNativeSymbol == null &&
+                _goldDirectCallCache.Contains(calleeOrTarget) &&
+                _methodsBySubjectId.TryGetValue(calleeOrTarget, out var goldMethod))
+            {
+                extDirectNativeSymbol = ResolveCallTargetNativeSymbol(goldMethod);
+            }
         }
         else if (TryGetInstantiationStubSymbol(instruction.TargetReference?.InstantiationStubId) is { } stubSymbol)
         {
@@ -1067,6 +1077,25 @@ if (!TryCreateExternalRuntimeHelperDefinition(targetSubjectId, out var helperDef
         // Priority 2: External runtime helper (GenericShapeDescriptor or SimpleForward)
         if (TryCreateExternalRuntimeHelperDefinition(callee, out var helperDefinition))
         {
+            // Gold Direct Link (A3): For hot methods identified by PGO profiling,
+            // emit a direct C++ call using the method's native symbol instead of
+            // going through kChaosExternalRuntimeFnTable indirect dispatch.
+            // This enables C++ compiler inlining and eliminates function pointer
+            // dereference overhead (~0.75ns per call).
+            if (_goldDirectCallCache.Contains(callee) &&
+                _methodsBySubjectId.TryGetValue(callee, out var goldMethod))
+            {
+                var goldSymbol = ResolveCallTargetNativeSymbol(goldMethod);
+                Console.Error.WriteLine(
+                    $"[GoldDirectLink] Direct call: {callee} -> {goldSymbol}");
+                return new InvocationTarget(
+                    helperDefinition!.TargetSymbol,
+                    helperDefinition.ParameterAbis,
+                    helperDefinition.ReturnAbi,
+                    helperDefinition.RawArgumentIndices,
+                    DirectNativeSymbol: goldSymbol);
+            }
+
             return new InvocationTarget(
                 helperDefinition!.TargetSymbol,
                 helperDefinition.ParameterAbis,

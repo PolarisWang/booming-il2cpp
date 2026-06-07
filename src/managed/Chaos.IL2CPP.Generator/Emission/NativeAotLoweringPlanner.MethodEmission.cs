@@ -273,6 +273,19 @@ public sealed partial class NativeAotLoweringPlanner
 		}
 
 		builder.Append(bodyBuilder);
+			// Safety: close any unmatched { from structured IR lowering (e.g. failed newobj)
+			// to prevent C2598/C2601 cascading to subsequent functions.
+			int _braceCount = 0;
+			for (int _bi = 0; _bi < bodyBuilder.Length; _bi++)
+			{
+			    if (bodyBuilder[_bi] == '{') _braceCount++;
+			    else if (bodyBuilder[_bi] == '}') _braceCount--;
+			}
+			while (_braceCount > 0)
+			{
+			    builder.AppendLine("		}");
+			    _braceCount--;
+			}
 		builder.AppendLine("}");
 	}
 

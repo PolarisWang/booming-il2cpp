@@ -56,7 +56,7 @@ public sealed class BridgeAotCompiler
                 if (string.IsNullOrEmpty(callee)) continue;
                 if (_existingSubjectIds.Contains(callee)) continue;
                 if (!seen.Add(callee)) continue;
-                if (callee.Contains("<>c__DisplayClass") || callee.Contains("<>9__")) continue;
+                if (callee.Contains("<>c__DisplayClass") || callee.Contains("<>9__") || callee.Contains("<>c::", StringComparison.Ordinal)) continue;
                 if (callee.Contains("/<unknown>::", StringComparison.Ordinal) || callee.Contains("ThrowHelper::", StringComparison.Ordinal)) continue;
 
                 try
@@ -145,8 +145,16 @@ public sealed class BridgeAotCompiler
 
     private AotCoreIrMethodArtifact? CompileSingleMethod(string subjectId)
     {
+        // Skip compiler-generated types (<>c, <>c__DisplayClass, <>9__) - their
+        // constructors have parameterized newobj instructions that the structured IR
+        // lowering cannot emit properly (partial body emission before throw).
+        if (subjectId.Contains("<>", StringComparison.Ordinal))
+        {
+            Console.Error.WriteLine($"[BRIDGE-AOT] SKIP: {subjectId} -- compiler-generated type");
+            return null;
+        }
         var asmName = ExtractAssemblyName(subjectId);
-        if (asmName == null) { Console.Error.WriteLine($"[BRIDGE-AOT] NULL: {subjectId} — ExtractAssemblyName failed"); return null; }
+        if (asmName == null) { Console.Error.WriteLine($"[BRIDGE-AOT] NULL: {subjectId} - ExtractAssemblyName failed"); return null; }
         var dllPath = ResolveAssemblyPath(asmName);
         if (dllPath == null) { Console.Error.WriteLine($"[BRIDGE-AOT] NULL: {subjectId} — DLL not found for assembly '{asmName}'"); return null; }
 

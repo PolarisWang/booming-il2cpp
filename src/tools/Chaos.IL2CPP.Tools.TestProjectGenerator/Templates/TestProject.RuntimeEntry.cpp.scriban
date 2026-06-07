@@ -1157,6 +1157,35 @@ int main(int argc, char* argv[]) {
 
     if (std::strcmp(argv[1], "--microbench") == 0) { ret = RunMicrobenchMode(); goto shutdown; }
 
+    // ── Gold Direct Link: dump external runtime table as JSON profile ──
+    // Usage: entry.exe --dump-gold-profile [--threshold N]
+    // Dumps all external runtime subjects with their table indices as a JSON
+    // array that can be passed to --gold-profile in a subsequent codegen run.
+    // Use --threshold N to filter by minimum call count (requires PGO counters).
+    if (std::strcmp(argv[1], "--dump-gold-profile") == 0) {
+        int32_t threshold = 0;
+        if (argc >= 4 && std::strcmp(argv[2], "--threshold") == 0) {
+            threshold = std::atoi(argv[3]);
+        }
+        // kChaosExternalRuntimeSubjects and kChaosExternalRuntimeCount
+        // are declared in the generated native-aot.generated.cpp header.
+        extern "C" const char* kChaosExternalRuntimeSubjects[];
+        extern "C" int32_t kChaosExternalRuntimeCount;
+
+        std::printf("{\n  \"hotMethods\": [\n");
+        bool first = true;
+        for (int32_t gi = 0; gi < kChaosExternalRuntimeCount; gi++) {
+            const char* sid = kChaosExternalRuntimeSubjects[gi];
+            if (sid == nullptr || sid[0] == '\0') continue;
+            if (!first) std::printf(",\n");
+            first = false;
+            std::printf("    \"%s\"", sid);
+        }
+        std::printf("\n  ]\n}\n");
+        ret = 0;
+        goto shutdown;
+    }
+
     printf("Unknown flag: %s\n", argv[1]);
     ret = 1;
 

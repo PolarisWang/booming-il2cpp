@@ -118,7 +118,79 @@ def main():
     parser.add_argument("--skip-probe", action="store_true",
                         help="Skip probe phase in AutoTestGenerator")
 
+    # ── Hephaestus cache management subcommand ──
+    subparsers = parser.add_subparsers(dest="hephaestus_cmd",
+                                       help="Hephaestus cache management")
+    hep_parser = subparsers.add_parser("hephaestus",
+        help="Hephaestus Lib cache management commands")
+    hep_sub = hep_parser.add_subparsers(dest="hep_action", required=True)
+
+    hep_stats = hep_sub.add_parser("stats", help="Show cache statistics")
+    hep_stats.add_argument("--assembly", default=None,
+                           help="Filter by assembly name")
+
+    hep_clear = hep_sub.add_parser("clear", help="Clear all cache entries")
+
+    hep_inv = hep_sub.add_parser("invalidate",
+                                 help="Invalidate entries for an assembly")
+    hep_inv.add_argument("assembly", help="Assembly name to invalidate")
+
+    hep_prune = hep_sub.add_parser("prune", help="Prune stale or excess entries")
+    hep_prune.add_argument("--max-entries", type=int, default=50,
+                           help="Maximum entries to keep")
+
     args = parser.parse_args()
+
+    # ── Hephaestus cache management ──
+    if args.hephaestus_cmd:
+        from verification.stages.hephaestus_cache import HephaestusCache
+        cache = HephaestusCache(_FOUNDATION_DLL, verbose=args.verbose)
+
+        if args.hep_action == "stats":
+            stats = cache.get_stats()
+            print(f"Hephaestus Cache Statistics:")
+            print(f"  Cache dir:      {stats['cache_dir']}")
+            print(f"  Total entries:  {stats['total_entries']}")
+            print(f"  Valid entries:  {stats['valid_entries']}")
+            print(f"  Stale entries:  {stats['stale_entries']}")
+            print(f"  Cache size:     {stats['total_size_bytes'] / (1024*1024):.1f} MB")
+            print(f"  Max entries:    {stats['max_entries']}")
+            if args.assembly:
+                assembly_stats = [
+                    e for e in cache._manifest.entries
+                    if e.assembly == args.assembly
+                ]
+                print(f"  Assembly '{args.assembly}': {len(assembly_stats)} entries")
+                for e in assembly_stats:
+                    print(f"    {e.cache_key[:48]}... [{e.status}] {e.duration_ms}ms")
+            return 0
+
+        elif args.hep_action == "clear":
+            import shutil
+            cache_dir = cache._cache_dir
+            if cache_dir.is_dir():
+                shutil.rmtree(cache_dir)
+                print(f"Cleared cache: {cache_dir}")
+            else:
+                print("Cache is already empty")
+            return 0
+
+        elif args.hep_action == "invalidate":
+            count = cache.invalidate_assembly(args.assembly)
+            print(f"Invalidated {count} entries for {args.assembly}")
+            return 0
+
+        elif args.hep_action == "prune":
+            from verification.stages.hephaestus_cache import DEFAULT_MAX_ENTRIES
+            cache._max_entries = args.max_entries
+            cache._prune_old_entries()
+            cache._save_manifest()
+            print(f"Pruned cache to max {args.max_entries} entries")
+            stats = cache.get_stats()
+            print(f"  Valid entries: {stats['valid_entries']}")
+            print(f"  Cache size:    {stats['total_size_bytes'] / (1024*1024):.1f} MB")
+            return 0
+
     assembly = args.assembly
     foundation_dir = _FOUNDATION_DLL / assembly
 

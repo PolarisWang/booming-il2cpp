@@ -25,6 +25,8 @@ from typing import Any
 
 from verification.orchestration.context import ChunkContext, StageResult
 
+from verification.stages.hephaestus_cache import HephaestusCache, compute_input_hash
+
 _REPO_ROOT = Path(__file__).resolve().parents[4]
 
 
@@ -579,7 +581,44 @@ def run_build(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
 
     print(f"  [build] Subjects DLL: {subjects_dll} ({subjects_dll.stat().st_size} bytes)")
 
-    # -- 7. Run TPG generate-dll --
+    # -- 7. Hephaestus cache lookup: skip TPG if unchanged input --
+    cache = HephaestusCache(ctx.foundation_dir, verbose=True)
+    input_hash = compute_input_hash(
+        subjects_dll, metadata_path, ctx.assembly,
+        additional_dlls=[target_dll] if target_dll else None,
+    )
+    cache_key = cache.compute_key(input_hash, ctx.assembly, ctx.slug)
+    cache_hit = cache.is_cache_hit(cache_key)
+
+    if cache_hit:
+        print(f"  [build] [hephaestus] CACHE HIT: {cache_key[:48]}...")
+        if cache.restore_to(cache_key, ctx.native_dir):
+            # Verify the restored entry.exe exists
+            if ctx.entry_exe_path.exists():
+                exe_size = ctx.entry_exe_path.stat().st_size
+                print(f"  [build] [hephaestus] Restored entry.exe ({exe_size} bytes)")
+                duration_ms = int((time.perf_counter() - start) * 1000)
+                return StageResult(
+                    stage="build", status="passed",
+                    summary=f"[CACHE HIT] {total_subjects} subjects -> entry.exe ({duration_ms}ms)",
+                    details={
+                        "chunkSlug": ctx.slug,
+                        "totalSubjects": total_subjects,
+                        "tfm": tfm,
+                        "durationMs": duration_ms,
+                        "hephaestus": "cache_hit",
+                        "cacheKey": cache_key,
+                    },
+                    duration_ms=duration_ms)
+            else:
+                print(f"  [build] [hephaestus] Cached entry.exe missing, falling through to full build")
+                cache.invalidate_assembly(ctx.assembly)
+        else:
+            print(f"  [build] [hephaestus] Cache restore failed, falling through to full build")
+
+    print(f"  [build] [hephaestus] CACHE MISS: performing full build")
+
+    # -- 8. Run TPG generate-dll --
     if not _ensure_tool_built("Chaos.IL2CPP.Tools.TestProjectGenerator"):
         return StageResult(
             stage="build", status="error",
@@ -752,7 +791,15 @@ def run_build(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
     duration_ms = int((time.perf_counter() - start) * 1000)
     print(f"  [build] entry.exe: {entry_exe}")
 
-    # -- 8. Build JIT entry (non-blocking) --
+    # -- Store in Hephaestus cache --
+    cache.store(
+        cache_key, ctx.native_dir,
+        assembly=ctx.assembly, chunk_slug=ctx.slug,
+        input_hash=input_hash, duration_ms=duration_ms,
+    )
+    print(f"  [build] [hephaestus] Cached build output ({cache_key[:48]}...)")
+
+    # -- 9. Build JIT entry (non-blocking) --
     _build_jit_entry(tpg_dll, subjects_dll, metadata_path, ctx.native_dir, ctx.native_config)
 
     print(f"  [build] Done ({duration_ms}ms)")
@@ -765,5 +812,7 @@ def run_build(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
             "totalSubjects": total_subjects,
             "tfm": tfm,
             "durationMs": duration_ms,
+            "hephaestus": "cache_miss",
+            "cacheKey": cache_key,
         },
         duration_ms=duration_ms)

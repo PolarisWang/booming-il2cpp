@@ -70,11 +70,21 @@ public sealed partial class NativeAotLoweringPlanner
         InvocationTarget? invocationTarget = null;
         if (!action.ElideConstructorCall)
         {
-            invocationTarget = TryResolveDirectInvocationTarget(action.ConstructorSubjectId);
+            try
+            {
+                invocationTarget = TryResolveDirectInvocationTarget(action.ConstructorSubjectId);
+            }
+            catch
+            {
+                // Constructor can't be resolved — emit CHAOS_IL2CPP_FAIL() and return.
+                EmitStaticInitFailStub(builder, indentation);
+                return;
+            }
             if (invocationTarget is null)
             {
-                throw new NotSupportedException(
-                    $"native-aot static initializer does not support unresolved constructor '{action.ConstructorSubjectId}'.");
+                // Constructor can't be resolved — emit CHAOS_IL2CPP_FAIL() and return.
+                EmitStaticInitFailStub(builder, indentation);
+                return;
             }
 
             var resolvedInvocationTarget = invocationTarget.Value;
@@ -144,5 +154,10 @@ public sealed partial class NativeAotLoweringPlanner
             ScribanTemplateRenderer.RenderTemplate(
                 NativeAotTemplateCatalog.GetStaticInitializationCallTemplate(),
                 model).TrimEnd());
+    }
+
+    private static void EmitStaticInitFailStub(StringBuilder builder, string indentation)
+    {
+        builder.Append(indentation).AppendLine("    CHAOS_IL2CPP_FAIL();");
     }
 }

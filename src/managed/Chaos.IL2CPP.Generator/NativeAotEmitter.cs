@@ -42,13 +42,21 @@ public sealed class NativeAotEmitter
         SupplementalMetadataTemplateArtifact supplementalMetadataTemplate,
         string outputRootPath,
         CodegenMode mode = CodegenMode.Aot,
-        HashSet<string>? subjectMethods = null)
+        HashSet<string>? subjectMethods = null,
+        string? goldProfilePath = null)
     {
         ValidateLoweringPlan(loweringPlan, closureManifest);
         var entryMethod = LoadEntryMethod(aotCoreIr, loweringPlan.EntrySubjectId);
 
         bool isFullAssembly = string.Equals(loweringPlan.PlanKind, "full-assembly-entry", StringComparison.Ordinal);
         var planner = new NativeAotLoweringPlanner();
+
+        // Gold Direct Link: load PGO profile for hot method direct calls
+        if (!string.IsNullOrEmpty(goldProfilePath))
+        {
+            planner.LoadGoldDirectCallProfile(goldProfilePath);
+        }
+
         var templateModel = planner.Create(
             loweringPlan,
             aotCoreIr,

@@ -13,7 +13,8 @@ internal sealed class FullAssemblyEmitter
         string outputRoot,
         CodegenMode mode = CodegenMode.Aot,
         HashSet<string>? subjectMethods = null,
-        IReadOnlyDictionary<string, string>? bridgeRedirectMap = null)
+        IReadOnlyDictionary<string, string>? bridgeRedirectMap = null,
+        string? goldProfilePath = null)
     {
         ArgumentNullException.ThrowIfNull(closureResult);
 
@@ -26,7 +27,8 @@ internal sealed class FullAssemblyEmitter
             closureResult.SupplementalMetadataTemplate,
             outputRoot,
             mode,
-            subjectMethods);
+            subjectMethods,
+            goldProfilePath: goldProfilePath);
 
         foreach (var source in emitResult.GeneratedSources)
         {
