@@ -44,6 +44,13 @@ internal static class BenchmarkRunner
         GC.WaitForPendingFinalizers();
         GC.Collect();
 
+        // ── Record GC stats before benchmark ──
+        long allocBefore = GC.GetAllocatedBytesForCurrentThread();
+        long heapBefore = GC.GetTotalMemory(false);
+        int gcCount0Before = GC.CollectionCount(0);
+        int gcCount1Before = GC.CollectionCount(1);
+        int gcCount2Before = GC.CollectionCount(2);
+
         bool threw = false;
         long bestTicks = long.MaxValue;
 
@@ -65,6 +72,13 @@ internal static class BenchmarkRunner
                 bestTicks = elapsed;
         }
 
+        // ── Record GC stats after benchmark ──
+        long allocAfter = GC.GetAllocatedBytesForCurrentThread();
+        long heapAfter = GC.GetTotalMemory(false);
+        int gcCount0After = GC.CollectionCount(0);
+        int gcCount1After = GC.CollectionCount(1);
+        int gcCount2After = GC.CollectionCount(2);
+
         double ms = bestTicks / 10000.0;
         // Clamp zero elapsed to avoid division-by-zero producing Infinity
         double safeMs = ms > 0 ? ms : 0.001;
@@ -76,7 +90,17 @@ internal static class BenchmarkRunner
             elapsedMs = Math.Round(ms, 3),
             opsPerSecond = Math.Round(opsPerSec, 0),
             iterations,
-            threw
+            threw,
+            gcInfo = new
+            {
+                totalAllocatedBytes = allocAfter - allocBefore,
+                heapBefore,
+                heapAfter,
+                heapDelta = heapAfter - heapBefore,
+                collectionCount0 = gcCount0After - gcCount0Before,
+                collectionCount1 = gcCount1After - gcCount1Before,
+                collectionCount2 = gcCount2After - gcCount2Before,
+            }
         };
     }
 }

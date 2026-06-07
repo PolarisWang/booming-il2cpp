@@ -375,6 +375,7 @@ def _write_perf_records(
                     "elapsedMilliseconds": metrics_elapsed,
                     "opsPerSecond": metrics_ops,
                 },
+                "gcInfo": record.get("gcInfo", {}),
                 "iterations": record.get("iterations", _ITERATIONS),
                 "status": "completed" if not is_error else "error",
             }

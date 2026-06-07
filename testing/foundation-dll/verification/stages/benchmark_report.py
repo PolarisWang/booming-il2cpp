@@ -160,6 +160,30 @@ def _build_method_comparison(
             pct_net10 = method_entry.get("net10VsNet8Pct")
             if pct_net10 is not None:
                 all_net10_pcts.append(pct_net10)
+
+            # ── GC comparison: net8 gcInfo vs chaos-aot profile ──
+            net8_gi = _get_gcinfo(net8_rec)
+            chaos_profile = _find_profile(profile_data, msid) if profile_data else None
+            if net8_gi and _has_gcinfo(net8_rec):
+                gc_comp: dict[str, Any] = {
+                    "net8AllocBytes": net8_gi.get("totalAllocatedBytes"),
+                    "net8CollectionCount0": net8_gi.get("collectionCount0"),
+                    "net8HeapDelta": net8_gi.get("heapDelta"),
+                }
+                if chaos_profile:
+                    gc_comp["chaosAotGcPauseNs"] = chaos_profile.get("gcPauseNs", 0)
+                    gc_comp["chaosAotAllocBytes"] = chaos_profile.get("nurseryAllocBytes", 0)
+                    gc_comp["chaosAotFastPathRate"] = _fast_path_rate(chaos_profile)
+                    # Cross-tech alloc comparison
+                    alloc_pct = _compare_alloc(
+                        net8_gi.get("totalAllocatedBytes"),
+                        chaos_profile.get("nurseryAllocBytes"),
+                    )
+                    if alloc_pct is not None:
+                        gc_comp["aotAllocVsNet8Pct"] = alloc_pct
+                        all_alloc_ratios.append(alloc_pct)
+                        methods_with_alloc_data += 1
+                method_entry["gcComparison"] = gc_comp
         else:
             method_entry.update({
                 "net10VsNet8Pct": None,
@@ -186,6 +210,17 @@ def _build_method_comparison(
     if all_net10_pcts:
         aggregate["net10VsNet8Pct"] = _compute_aggregate_stats(all_net10_pcts)
 
+    # GC comparison aggregate
+    if all_alloc_ratios:
+        aggregate["gcAllocComparison"] = {
+            "aotVsNet8Ratio": _compute_aggregate_stats(all_alloc_ratios),
+            "methodsWithAllocData": methods_with_alloc_data,
+        }
+    if all_gc_pause_deltas:
+        aggregate["gcPauseComparison"] = {
+            "aotVsNet8GcPauseDelta": _compute_aggregate_stats(all_gc_pause_deltas),
+        }
+
     return methods_list, aggregate
 
 
@@ -200,11 +235,76 @@ def _get_elapsed(rec: dict | None) -> float | None:
     return float(val)
 
 
+def _get_gcinfo(rec: dict | None) -> dict | None:
+    """Extract gcInfo from a record."""
+    if rec is None:
+        return None
+    return rec.get("gcInfo")
+
+
+def _has_gcinfo(rec: dict | None) -> bool:
+    """Check if a record has non-empty gcInfo."""
+    gi = _get_gcinfo(rec)
+    if gi is None:
+        return False
+    return gi.get("totalAllocatedBytes", 0) > 0 or bool(gi.get("collectionCount0"))
+
+
+def _compare_alloc(net8_bytes: int | None, tech_bytes: int | None) -> float | None:
+    """Compute (tech_bytes - net8_bytes) / net8_bytes * 100. Positive = more alloc than net8."""
+    if net8_bytes is None or net8_bytes <= 0 or tech_bytes is None or tech_bytes < 0:
+        return None
+    return round((tech_bytes - net8_bytes) / net8_bytes * 100, 2)
+
+
+def _build_method_comparison(
+    tech_map: dict[str, dict[str, Any]],
+    slug: str,
+    profile_data: list[dict] | None = None,
+) -> tuple[list[dict], dict[str, Any]]:
+    """Build per-method comparison records and chunk-level aggregate stats.
+
+    When profile_data is provided (from profile.json), adds gcComparison
+    between chaos-aot (from profile) and net8-jit (from benchmark-history.jsonl).
+
+    Returns (methods_list, aggregate_dict).
+    """
+    methods_list: list[dict] = []
+    all_chaos_aot_pcts: list[float] = []
+    all_chaos_jit_pcts: list[float] = []
+    all_net10_pcts: list[float] = []
+    total_better_than_net8 = 0
+    total_with_net8 = 0
+
+    # GC comparison accumulators
+    all_alloc_ratios: list[float] = []
+    all_gc_pause_deltas: list[float] = []
+    methods_with_alloc_data = 0
+
+
 def _is_high_variance(rec: dict | None) -> bool:
     """Check if the record has high variance (CV > 20%)."""
     if rec is None:
         return False
     return rec.get("highVariance", False)
+
+
+def _find_profile(profile_data: list[dict] | None, msid: str) -> dict | None:
+    """Find a profile entry by methodSubjectId. Falls back to index matching."""
+    if profile_data is None:
+        return None
+    for p in profile_data:
+        if p.get("methodSubjectId", "") == msid:
+            return p
+    return None
+
+
+def _fast_path_rate(profile: dict) -> float:
+    """Compute fast path rate from profile entry."""
+    fast = profile.get("fastPathCount", 0)
+    slow = profile.get("slowPathCount", 0)
+    total = fast + slow
+    return round(fast / total, 4) if total > 0 else 1.0
 
 
 def run_benchmark_report(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
@@ -247,7 +347,26 @@ def run_benchmark_report(ctx: ChunkContext, stages: dict[str, StageResult]) -> S
             print(f"  [benchmark-report] {slug}: no benchmark data (JSONL not found or empty)")
             continue
 
-        methods_list, aggregate = _build_method_comparison(tech_map, slug)
+        # Load AOT profile data for GC comparison (optional)
+        profile_data = None
+        profile_path = chunk_dir / "results" / "profile.json"
+        if profile_path.exists():
+            try:
+                prof = json.loads(profile_path.read_text(encoding="utf-8"))
+                pd = prof.get("profileData", [])
+                # Build methodSubjectId map from metadata
+                meta_path = chunk_dir / "managed" / "subjects" / "subjects.metadata.json"
+                if meta_path.exists() and pd:
+                    meta = json.loads(meta_path.read_text(encoding="utf-8"))
+                    meta_methods = meta.get("methods", [])
+                    for i, m in enumerate(pd):
+                        if i < len(meta_methods):
+                            m["methodSubjectId"] = meta_methods[i].get("methodSubjectId", f"method-{i}")
+                    profile_data = pd
+            except (json.JSONDecodeError, OSError):
+                pass
+
+        methods_list, aggregate = _build_method_comparison(tech_map, slug, profile_data)
         if not methods_list:
             continue
 
@@ -345,6 +464,14 @@ def run_benchmark_report(ctx: ChunkContext, stages: dict[str, StageResult]) -> S
           f"{total_with_net8} with net8 baseline")
     print(f"  [benchmark-report] Chaos AOT vs .NET 8: mean {chaos_mean}% faster")
     print(f"  [benchmark-report] .NET 10 vs .NET 8:   mean {net10_mean}% faster")
+
+    # Print GC comparison summary
+    gc_agg = cross_chunk_aggregate.get("gcAllocComparison", {})
+    if gc_agg:
+        gc_mean = gc_agg.get("aotVsNet8Ratio", {}).get("mean", "N/A")
+        gc_methods = gc_agg.get("methodsWithAllocData", 0)
+        print(f"  [benchmark-report] GC alloc: AOT vs .NET 8 mean {gc_mean}% ({gc_methods} methods)")
+
     print(f"  [benchmark-report] Reports written to {latest_dir}")
     print(f"  [benchmark-report] Done ({duration_ms}ms)")
 
