@@ -431,7 +431,15 @@ def run_managed_benchmark(ctx: ChunkContext, stages: dict[str, StageResult]) -> 
         # Build CombinedSubjects for this TFM
         build_dir = ctx.chunk_dir / "managed" / f"subjects_{tfm.replace('.', '_')}"
         if build_dir.exists():
-            shutil.rmtree(build_dir)
+            for _retry in range(3):
+                try:
+                    shutil.rmtree(build_dir)
+                    break
+                except PermissionError:
+                    import time
+                    time.sleep(2)
+            else:
+                print(f"  [managed-benchmark] WARN: could not remove {build_dir} after 3 retries")
 
         ok = _build_combined_for_tfm(combined_csproj, tfm, build_dir)
         if not ok:

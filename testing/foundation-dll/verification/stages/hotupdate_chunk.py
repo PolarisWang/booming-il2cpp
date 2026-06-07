@@ -372,6 +372,14 @@ def run_hotupdate_chunk(ctx: ChunkContext, stages: dict[str, StageResult]) -> St
                     patch_data_path = None
             else:
                 print(f"  [hotupdate] Patch DLL build failed, falling back to no-patch mode")
+                # Show ATG output diagnostics
+                if patch_output.exists():
+                        import glob as _glob
+                        cs_files = sorted(p for p in patch_output.rglob("*.cs") if p.suffix == ".cs" and "obj" not in p.parts)
+                        total_lines = sum(len(p.read_text(encoding="utf-8", errors="replace").splitlines()) for p in cs_files)
+                        print(f"  [hotupdate]   ATG generated {len(cs_files)} .cs files ({total_lines} lines)")
+                        for pf in cs_files[:5]:
+                            print(f"  [hotupdate]   ATG output: {pf.relative_to(patch_output)}")
         else:
             print(f"  [hotupdate] ATG --patch-mode failed, falling back to no-patch mode")
             for line in (atg_result.stderr.splitlines() + atg_result.stdout.splitlines())[-10:]:
@@ -396,7 +404,7 @@ def run_hotupdate_chunk(ctx: ChunkContext, stages: dict[str, StageResult]) -> St
             patch_data_path = None
 
     # ── Step 3: Run entry.exe --hotupdate [--patch-data ...] [--benchmark-iterations N] ──
-    hotupdate_args = [str(exe_path), "--hotupdate"]
+    hotupdate_args = [str(ctx.entry_exe_path), "--hotupdate"]
     if patch_data_path:
         hotupdate_args.extend(["--patch-data", str(patch_data_path)])
         print(f"  [hotupdate] Running with --patch-data {patch_data_path.name}...")

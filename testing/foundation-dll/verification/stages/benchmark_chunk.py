@@ -220,7 +220,7 @@ def _run_entry_once(exe_path: Path, iterations: int, timeout: int,
     try:
         return subprocess.run(
             cmd,
-            stdout=subprocess.PIPE, stderr=subprocess.DEVNULL, text=True, timeout=timeout,
+            stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True, timeout=timeout,
             env=env, errors="replace",
         )
     except subprocess.TimeoutExpired as e:
@@ -448,6 +448,12 @@ def _run_single_benchmark(
                 break
             return None
 
+        # JIT diagnostic: capture stderr when output is empty
+        if technology == "chaos-jit" and not (result.stdout or "").strip():
+            stderr_out = (result.stderr or "")[:500]
+            if stderr_out:
+                print(f"  [benchmark] [jit-diag] stderr: {stderr_out}")
+        
         parsed, _ = _parse_benchmark_lines(result.stdout or "")
         round_results: list[dict] = [dict(r) if isinstance(r, dict) else {} for r in parsed]
         all_rounds.append(round_results)
