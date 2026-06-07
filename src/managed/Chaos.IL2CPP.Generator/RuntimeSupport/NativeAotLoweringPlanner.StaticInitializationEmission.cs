@@ -78,6 +78,16 @@ public sealed partial class NativeAotLoweringPlanner
             }
 
             var resolvedInvocationTarget = invocationTarget.Value;
+            // Skip closure constructors (<>c::.ctor) — they're not parameterless
+            // and should be handled as external runtime helpers.
+            if (action.ConstructorSubjectId is not null &&
+                (action.ConstructorSubjectId.Contains("<>c__DisplayClass") ||
+                 action.ConstructorSubjectId.Contains("<>9__") ||
+                 action.ConstructorSubjectId.Contains("<>c::") ||
+                 action.ConstructorSubjectId.Contains("::.ctor")))
+            {
+                return;
+            }
             if (resolvedInvocationTarget.ParameterAbis.Count != 1)
             {
                 throw new NotSupportedException(

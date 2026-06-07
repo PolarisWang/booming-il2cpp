@@ -320,6 +320,16 @@ public sealed partial class NativeAotLoweringPlanner
 
         foreach (var action in actions)
         {
+            // Skip malformed SubjectIds (closures, templates, etc.)
+            if (string.IsNullOrEmpty(action.ConstructorSubjectId) ||
+                action.ConstructorSubjectId.Contains("<>c__DisplayClass") ||
+                action.ConstructorSubjectId.Contains("<>9__") ||
+                action.ConstructorSubjectId.IndexOf("::", StringComparison.Ordinal) <= 0)
+            {
+                requiredExternalRuntimeHelperSubjectIds.Add(action.ConstructorSubjectId);
+                normalizedActions.Add(action);
+                continue;
+            }
             if (TryCreateExternalRuntimeHelperDefinition(action.ConstructorSubjectId, out _))
             {
                 requiredExternalRuntimeHelperSubjectIds.Add(action.ConstructorSubjectId);
