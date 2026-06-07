@@ -7,6 +7,7 @@
 #include <runtime_abi.h>
 #include "runtime_capability.h"
 #include "numerics_carriers.h"
+#include <runtime_core.h>  // GetCurrentRuntimeState, GetRuntimeAbiV0
 
 namespace chaos::il2cpp::vector_fixed {
 
@@ -1122,7 +1123,7 @@ inline TCarrier VectorFixedOneFromCapability(const RuntimeTypeCapabilityInfoV0& 
 
 
 
-// ©¤©¤ VectorFixedAnyLaneNonZero ©¤©¤
+// ï¿½ï¿½ï¿½ï¿½ VectorFixedAnyLaneNonZero ï¿½ï¿½ï¿½ï¿½
 template <typename TCarrier>
 inline bool VectorFixedAnyLaneNonZero(const TCarrier& value) {
     CHAOS_IL2CPP_UINT8 accum = 0;
@@ -1131,7 +1132,7 @@ inline bool VectorFixedAnyLaneNonZero(const TCarrier& value) {
     return accum != 0;
 }
 
-// ©¤©¤ VectorFixedAllLanesNonZero ©¤©¤
+// ï¿½ï¿½ï¿½ï¿½ VectorFixedAllLanesNonZero ï¿½ï¿½ï¿½ï¿½
 template <typename TScalar, typename TCarrier>
 inline bool VectorFixedAllLanesNonZero(const TCarrier& value) {
     constexpr CHAOS_IL2CPP_SIZE lane_count = sizeof(TCarrier) / sizeof(TScalar);
