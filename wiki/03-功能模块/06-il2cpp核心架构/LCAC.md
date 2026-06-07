@@ -79,6 +79,11 @@ reinterpret_cast<FnType>(kChaosExternalRuntimeFnTable[idx])(args);
 | Phase 4 | Gold Direct Link 热点编译 | ✅ 已完成 |
 | Phase 5 | Wiki 文档更新 | ✅ 已完成 |
 
+## 相关文档
+
+- [Closure 精度架构](01-翻译管线/19-closure-precision-architecture.md) — D5/D1 assemblyDirs 配置
+- [32-byte ABI 修复](01-翻译管线/20-32byte-abi-fix.md) — Vector<T> pass-by-reference 及 opcode 归一化
+
 ## Phase 3: Hephaestus Lib 实现
 
 ### hot_cache.py
