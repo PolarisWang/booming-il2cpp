@@ -105,7 +105,8 @@ public sealed class BridgeAotCompiler
             var patchedInstrs = compiled.Instructions
                 .Select(instr =>
                 {
-                    if (string.IsNullOrEmpty(instr.Callee)) return instr;
+                    if (string.IsNullOrEmpty(instr.Callee))
+                        return instr with { TargetReference = null };
                     if (redirectMap.TryGetValue(instr.Callee, out var targetSymbol))
                         return instr with { DispatchKindCode = HybridDispatchKind.Direct, TargetSymbol = targetSymbol };
                     return instr with { DispatchKindCode = HybridDispatchKind.ExternalRuntime };

@@ -41,6 +41,14 @@ public sealed class CodegenOrchestrator
                 args.Add(Path.GetFullPath(dll));
             }
 
+            // NOTE: We do NOT add runtime assemblies as --assembly here. The Loader
+            // uses --full-closure to resolve cross-assembly type references, which
+            // works correctly with only the subjects DLL loaded via --assembly.
+            // Adding runtime assemblies directly causes closure validation errors
+            // (missing entry methods). BRIDGE-AOT independently resolves callee
+            // assemblies via the runtime directory for cross-assembly compilation.
+            // See closure-precision-roadmap D5 for details.
+
             // Pass explicitly-configured assembly directories (from pipeline-config.yaml).
             // These are used by --full-closure to find cross-assembly type definitions.
             // By default (assemblyDirs null/empty), only the subjects DLL is loaded —

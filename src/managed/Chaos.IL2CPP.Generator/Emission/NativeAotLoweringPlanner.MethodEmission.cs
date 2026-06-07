@@ -243,6 +243,15 @@ public sealed partial class NativeAotLoweringPlanner
 					builder.AppendLine($"	{varType} chaos_float_local_{slot}{{}};");
 				}
 			}
+			// chaos_eval_stack is needed for EH (finally) condition tracking in ExceptionEmission.cs,
+			// even for structured IR methods. It tracks the finally condition state via:
+			//   chaos_eval_stack[--chaos_stack_top] = 1;  // finally entry
+			//   if (chaos_eval_stack[--chaos_stack_top])   // finally exit condition check
+			if (method.ExceptionRegionCount > 0)
+			{
+				builder.AppendLine("\tCHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 16) chaos_eval_stack{};");
+				builder.AppendLine("\tCHAOS_IL2CPP_SIZE chaos_stack_top = 0;");
+			}
 		}
 		else if (!usesStructuredSlots && evalStackSize > 0)
 		{

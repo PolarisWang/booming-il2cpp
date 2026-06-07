@@ -4031,15 +4031,6 @@ private void EmitLinearInitObj(StringBuilder builder, AotCoreIrInstructionArtifa
 
 	private void EmitLinearResolvedInvocation(StringBuilder builder, string targetSymbol, IReadOnlyList<AotCoreIrAbiSlotArtifact> parameterAbis, AotCoreIrAbiSlotArtifact returnAbi, IReadOnlySet<int> rawArgumentIndices, string indentation, bool enforceInstanceNullCheck)
 	{
-			// Auto-declare chaos_external_runtime_ symbols at point of use
-			// to avoid C3861 errors when the generated header misses a declaration.
-			if (targetSymbol.StartsWith("chaos_external_runtime_", StringComparison.Ordinal))
-			{
-				string _declSig = MapAbiSlotReturnType(returnAbi);
-				string _declParams = FormatAbiSlotParameterTypes(parameterAbis);
-				string _declParamsClean = _declParams == "void" ? "" : _declParams;
-				builder.AppendLine($"extern \"C\" {_declSig} {targetSymbol}({_declParamsClean});");
-			}
 		string a = MapAbiSlotReturnType(returnAbi);
 		StringBuilder stringBuilder = builder;
 		StringBuilder stringBuilder2 = stringBuilder;

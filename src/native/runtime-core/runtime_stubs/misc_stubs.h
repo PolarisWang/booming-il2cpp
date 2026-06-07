@@ -88,6 +88,7 @@ CHAOS_IL2CPP_INT32  ChaosGcGetMaxGeneration(void) noexcept;
 
 // Environment / Console
 CHAOS_IL2CPP_INTPTR ChaosEnvironmentGetStackTrace(void) noexcept;
+CHAOS_IL2CPP_INT32 chaos_current_managed_thread_id(void) noexcept;
 CHAOS_IL2CPP_INTPTR ChaosConsoleGetError(void) noexcept;
 void    ChaosConsoleWriteLine(CHAOS_IL2CPP_INTPTR value) noexcept;
 

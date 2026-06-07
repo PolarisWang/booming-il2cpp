@@ -107,6 +107,12 @@ extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Reset() {}
 extern "C" CHAOS_IL2CPP_INT32 Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Complete() { return 0; }
 #endif
 
+// BRIDGE-AOT external runtime helper declarations for intrinsics helpers
+// that aren't registered in the shape registry. These are used by
+// bridge-compiled BitOperations/Vector methods.
+// Generated symbol name: chaos_external_runtime_{SanitizeSubjectId}
+extern "C" CHAOS_IL2CPP_INT32 chaos_external_runtime_System_Private_CoreLib_System_Numerics_BitOperations__TrailingZeroCount_System_Int32_UInt32_(CHAOS_IL2CPP_INT32);
+
 // Interop stub declarations (defined in interop_stubs.cpp from SDK runtime_stubs)
 extern "C" int ChaosMarshalGetLastPInvokeError() noexcept;
 extern "C" int ChaosMarshalGetHRForLastWin32Error() noexcept;

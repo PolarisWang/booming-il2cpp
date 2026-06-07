@@ -13,6 +13,7 @@
 #include "gc_heap.h"
 #include "gc/gc_old_gen.h"
 #include "gc/gc_region.h"
+#include <chaos/pal/pal_thread.h>
 #include "gc/gc_scheduler.h"
 #include "gc/gc_young_collector.h"
 #include "gc/gc_loh.h"

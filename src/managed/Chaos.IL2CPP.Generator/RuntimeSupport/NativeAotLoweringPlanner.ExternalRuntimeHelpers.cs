@@ -103,8 +103,28 @@ public sealed partial class NativeAotLoweringPlanner
 								_externalRuntimeHelperCache[callee] = helperDefinition;
 					return true;
 		}
-					_externalRuntimeHelperCache[callee] = null;
-			return false;
+		// Catch-all: generate CHAOS_IL2CPP_FAIL() stub for any unmatched callee.
+		// Prevents undefined-chaos_external_runtime_* C++ symbol errors.
+		var failReturnType = InferReturnTypeFromSubjectId(callee);
+		var failReturnAbi = CreateLegacyAbiSlot(failReturnType);
+		var failSymbol = GetExternalRuntimeHelperSymbol(callee);
+		if (failReturnAbi.CarrierKindCode == AotCoreIrAbiCarrierKind.Void)
+		{
+			var src = RenderSimpleExternalRuntimeHelper("void", failSymbol, "",
+				["    CHAOS_IL2CPP_FAIL();"]);
+			helperDefinition = new ExternalRuntimeHelperDefinition(callee, failSymbol, src,
+				Array.Empty<AotCoreIrAbiSlotArtifact>(), failReturnAbi, EmptyRawArgumentIndices);
+		}
+		else
+		{
+			var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", failSymbol, "",
+				["    CHAOS_IL2CPP_FAIL();", "    return 0;"]);
+			helperDefinition = new ExternalRuntimeHelperDefinition(callee, failSymbol, src,
+				Array.Empty<AotCoreIrAbiSlotArtifact>(), failReturnAbi, EmptyRawArgumentIndices);
+		}
+		_externalRuntimeHelperCache[callee] = helperDefinition;
+		return true;
+
 	}
 
 	private ExternalRuntimeHelperDefinition CreateDefinitionFromShapeEntry(

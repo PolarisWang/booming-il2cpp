@@ -14,28 +14,29 @@ public sealed class AotCoreIrLowering
         ["dup"] = new() { Op = "dup", IlOffset = 0 },
         ["pop"] = new() { Op = "pop", IlOffset = 0 },
         ["ret"] = new() { Op = "ret", IlOffset = 0  },
-        ["ldarg.0"] = new() { Op = "ldarg.0", OpCode = InstructionOpCode.LdArg, IlOffset = 0 },
-        ["ldarg.1"] = new() { Op = "ldarg.1", OpCode = InstructionOpCode.LdArg, IlOffset = 0 },
-        ["ldarg.2"] = new() { Op = "ldarg.2", OpCode = InstructionOpCode.LdArg, IlOffset = 0 },
-        ["ldarg.3"] = new() { Op = "ldarg.3", OpCode = InstructionOpCode.LdArg, IlOffset = 0 },
-        ["ldloc.0"] = new() { Op = "ldloc.0", OpCode = InstructionOpCode.LdLoc, IlOffset = 0 },
-        ["ldloc.1"] = new() { Op = "ldloc.1", OpCode = InstructionOpCode.LdLoc, IlOffset = 0 },
-        ["ldloc.2"] = new() { Op = "ldloc.2", OpCode = InstructionOpCode.LdLoc, IlOffset = 0 },
-        ["ldloc.3"] = new() { Op = "ldloc.3", OpCode = InstructionOpCode.LdLoc, IlOffset = 0 },
-        ["stloc.0"] = new() { Op = "stloc.0", OpCode = InstructionOpCode.StLoc, IlOffset = 0 },
-        ["stloc.1"] = new() { Op = "stloc.1", OpCode = InstructionOpCode.StLoc, IlOffset = 0 },
-        ["stloc.2"] = new() { Op = "stloc.2", OpCode = InstructionOpCode.StLoc, IlOffset = 0 },
-        ["stloc.3"] = new() { Op = "stloc.3", OpCode = InstructionOpCode.StLoc, IlOffset = 0 },
-        ["ldc.i4.m1"] = new() { Op = "ldc.i4.m1", OpCode = InstructionOpCode.LdcI4, IlOffset = 0 },
-        ["ldc.i4.0"] = new() { Op = "ldc.i4.0", OpCode = InstructionOpCode.LdcI4, IlOffset = 0 },
-        ["ldc.i4.1"] = new() { Op = "ldc.i4.1", OpCode = InstructionOpCode.LdcI4, IlOffset = 0 },
-        ["ldc.i4.2"] = new() { Op = "ldc.i4.2", OpCode = InstructionOpCode.LdcI4, IlOffset = 0 },
-        ["ldc.i4.3"] = new() { Op = "ldc.i4.3", OpCode = InstructionOpCode.LdcI4, IlOffset = 0 },
-        ["ldc.i4.4"] = new() { Op = "ldc.i4.4", OpCode = InstructionOpCode.LdcI4, IlOffset = 0 },
-        ["ldc.i4.5"] = new() { Op = "ldc.i4.5", OpCode = InstructionOpCode.LdcI4, IlOffset = 0 },
-        ["ldc.i4.6"] = new() { Op = "ldc.i4.6", OpCode = InstructionOpCode.LdcI4, IlOffset = 0 },
-        ["ldc.i4.7"] = new() { Op = "ldc.i4.7", OpCode = InstructionOpCode.LdcI4, IlOffset = 0 },
-        ["ldc.i4.8"] = new() { Op = "ldc.i4.8", OpCode = InstructionOpCode.LdcI4, IlOffset = 0 },
+        ["ldarg.0"] = new() { Op = "ldarg", Operand = 0, OpCode = InstructionOpCode.LdArg, IlOffset = 0 },
+        ["ldarg.1"] = new() { Op = "ldarg", Operand = 1, OpCode = InstructionOpCode.LdArg, IlOffset = 0 },
+        ["ldarg.2"] = new() { Op = "ldarg", Operand = 2, OpCode = InstructionOpCode.LdArg, IlOffset = 0 },
+        ["ldarg.3"] = new() { Op = "ldarg", Operand = 3, OpCode = InstructionOpCode.LdArg, IlOffset = 0 },
+        ["ldloc.0"] = new() { Op = "ldloc", Operand = 0, OpCode = InstructionOpCode.LdLoc, IlOffset = 0 },
+        ["ldloc.1"] = new() { Op = "ldloc", Operand = 1, OpCode = InstructionOpCode.LdLoc, IlOffset = 0 },
+        ["ldloc.2"] = new() { Op = "ldloc", Operand = 2, OpCode = InstructionOpCode.LdLoc, IlOffset = 0 },
+        ["ldloc.3"] = new() { Op = "ldloc", Operand = 3, OpCode = InstructionOpCode.LdLoc, IlOffset = 0 },
+        ["stloc.0"] = new() { Op = "stloc", Operand = 0, OpCode = InstructionOpCode.StLoc, IlOffset = 0 },
+        ["stloc.1"] = new() { Op = "stloc", Operand = 1, OpCode = InstructionOpCode.StLoc, IlOffset = 0 },
+        ["stloc.2"] = new() { Op = "stloc", Operand = 2, OpCode = InstructionOpCode.StLoc, IlOffset = 0 },
+        ["stloc.3"] = new() { Op = "stloc", Operand = 3, OpCode = InstructionOpCode.StLoc, IlOffset = 0 },
+        ["ldc.i4.m1"] = new() { Op = "ldc.i4", Operand = -1, OpCode = InstructionOpCode.LdcI4, IlOffset = 0 },
+        ["ldc.i4.0"] = new() { Op = "ldc.i4", Operand = 0, OpCode = InstructionOpCode.LdcI4, IlOffset = 0 },
+        ["ldc.i4.1"] = new() { Op = "ldc.i4", Operand = 1, OpCode = InstructionOpCode.LdcI4, IlOffset = 0 },
+        ["ldc.i4.2"] = new() { Op = "ldc.i4", Operand = 2, OpCode = InstructionOpCode.LdcI4, IlOffset = 0 },
+        ["ldc.i4.3"] = new() { Op = "ldc.i4", Operand = 3, OpCode = InstructionOpCode.LdcI4, IlOffset = 0 },
+        ["ldc.i4.4"] = new() { Op = "ldc.i4", Operand = 4, OpCode = InstructionOpCode.LdcI4, IlOffset = 0 },
+        ["ldc.i4.5"] = new() { Op = "ldc.i4", Operand = 5, OpCode = InstructionOpCode.LdcI4, IlOffset = 0 },
+        ["ldc.i4.6"] = new() { Op = "ldc.i4", Operand = 6, OpCode = InstructionOpCode.LdcI4, IlOffset = 0 },
+        ["ldc.i4.7"] = new() { Op = "ldc.i4", Operand = 7, OpCode = InstructionOpCode.LdcI4, IlOffset = 0 },
+        ["ldc.i4.8"] = new() { Op = "ldc.i4", Operand = 8, OpCode = InstructionOpCode.LdcI4, IlOffset = 0 },
+        ["ldc.i4.9"] = new() { Op = "ldc.i4", Operand = 9, OpCode = InstructionOpCode.LdcI4, IlOffset = 0 },
     };
     public AotCoreIrArtifact Create(
         LinkedWorldModel linkedWorld,
@@ -149,6 +150,21 @@ public sealed class AotCoreIrLowering
                 {
                     instructions.Add(cachedSimple with { IlOffset = ilOffset });
                     continue;
+                }
+
+                // Normalize .s branch opcodes to their base form (br.s → br).
+                // The emitter switch only handles the base forms.
+                var normalizedOp = typedInstruction.Op;
+                if (normalizedOp.EndsWith(".s", StringComparison.Ordinal) &&
+                    (normalizedOp.StartsWith("br", StringComparison.Ordinal) ||
+                     normalizedOp.StartsWith("beq", StringComparison.Ordinal) ||
+                     normalizedOp.StartsWith("bge", StringComparison.Ordinal) ||
+                     normalizedOp.StartsWith("bgt", StringComparison.Ordinal) ||
+                     normalizedOp.StartsWith("ble", StringComparison.Ordinal) ||
+                     normalizedOp.StartsWith("blt", StringComparison.Ordinal) ||
+                     normalizedOp.StartsWith("bne", StringComparison.Ordinal)))
+                {
+                    typedInstruction = typedInstruction with { Op = normalizedOp[..^2] };
                 }
 
                 var directCallTarget = ResolveDirectCallTarget(typedInstruction, managedMethods, targetSymbols);
