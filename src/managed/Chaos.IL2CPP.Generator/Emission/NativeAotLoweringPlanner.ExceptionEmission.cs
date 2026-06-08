@@ -2751,7 +2751,7 @@ private void EmitLinearInitObj(StringBuilder builder, AotCoreIrInstructionArtifa
 		if (RequiresStructuredValueTypePayload(requiredTargetReference))
 		{
 			builder.AppendLine($"{indentation}    auto* chaos_value = chaos_resolve_managed_value_pointer<{GetNativeValueTypeSymbol(requiredTargetReference.SubjectId)}>({ConsumeEvalStackValueExpression()});");
-			builder.AppendLine($"{indentation}    *chaos_value = {GetNativeValueTypeSymbol(requiredTargetReference.SubjectId)}{{}};");
+			builder.AppendLine($"{indentation}    std::memset(chaos_value, 0, sizeof(*chaos_value));");
 		}
 		else
 		{
@@ -3603,7 +3603,7 @@ private void EmitLinearInitObj(StringBuilder builder, AotCoreIrInstructionArtifa
 						EmitAbiReturnPush(builder, comRetAbi, "chaos_hr", $"{indentation}    ");
 					}
 				}
-				chaos_dt_end_{instruction.IlOffset}: ;
+                builder.AppendLine($"{indentation}chaos_dt_end_{instruction.IlOffset}: ;");
 				builder.AppendLine($"{indentation}}}");
 				return;
 			}

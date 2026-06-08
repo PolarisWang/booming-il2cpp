@@ -244,5 +244,108 @@ CHAOS_IL2CPP_INT32 ChaosMarshalGetHRForException(CHAOS_IL2CPP_INTPTR exceptionOb
     return MarshalGetHRForException(rs, ts, reinterpret_cast<void*>(exceptionObj));
 }
 
+// ═══════════════════════════════════════════════════════════════
+// NativeMemory stubs — wrappers around malloc/free/realloc
+// ═══════════════════════════════════════════════════════════════
+
+CHAOS_IL2CPP_INTPTR ChaosNativeMemoryAlloc(CHAOS_IL2CPP_INTPTR byteCount) noexcept
+{
+    if (byteCount <= 0) return 0;
+    auto* ptr = std::malloc(static_cast<CHAOS_IL2CPP_SIZE>(byteCount));
+    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(ptr);
+}
+
+void ChaosNativeMemoryFree(CHAOS_IL2CPP_INTPTR ptr) noexcept
+{
+    if (ptr != 0) std::free(reinterpret_cast<void*>(ptr));
+}
+
+CHAOS_IL2CPP_INTPTR ChaosNativeMemoryRealloc(CHAOS_IL2CPP_INTPTR ptr, CHAOS_IL2CPP_INTPTR byteCount) noexcept
+{
+    if (byteCount <= 0) { ChaosNativeMemoryFree(ptr); return 0; }
+    auto* newPtr = std::realloc(reinterpret_cast<void*>(ptr), static_cast<CHAOS_IL2CPP_SIZE>(byteCount));
+    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(newPtr);
+}
+
+CHAOS_IL2CPP_INTPTR ChaosNativeMemoryAlignedAlloc(CHAOS_IL2CPP_INTPTR byteCount, CHAOS_IL2CPP_INTPTR alignment) noexcept
+{
+    if (byteCount <= 0 || alignment <= 0) return 0;
+#if defined(_WIN32)
+    auto* ptr = _aligned_malloc(static_cast<CHAOS_IL2CPP_SIZE>(byteCount), static_cast<CHAOS_IL2CPP_SIZE>(alignment));
+#else
+    auto* ptr = nullptr;
+    if (posix_memalign(&ptr, static_cast<CHAOS_IL2CPP_SIZE>(alignment), static_cast<CHAOS_IL2CPP_SIZE>(byteCount)) != 0)
+        ptr = nullptr;
+#endif
+    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(ptr);
+}
+
+void ChaosNativeMemoryAlignedFree(CHAOS_IL2CPP_INTPTR ptr) noexcept
+{
+    if (ptr == 0) return;
+#if defined(_WIN32)
+    _aligned_free(reinterpret_cast<void*>(ptr));
+#else
+    std::free(reinterpret_cast<void*>(ptr));
+#endif
+}
+
+CHAOS_IL2CPP_INTPTR ChaosNativeMemoryAlignedRealloc(CHAOS_IL2CPP_INTPTR ptr, CHAOS_IL2CPP_INTPTR byteCount, CHAOS_IL2CPP_INTPTR alignment) noexcept
+{
+    if (byteCount <= 0) { ChaosNativeMemoryAlignedFree(ptr); return 0; }
+    if (alignment <= 0) return 0;
+#if defined(_WIN32)
+    auto* newPtr = _aligned_realloc(reinterpret_cast<void*>(ptr), static_cast<CHAOS_IL2CPP_SIZE>(byteCount), static_cast<CHAOS_IL2CPP_SIZE>(alignment));
+#else
+    // No portable aligned_realloc — fall back to alloc+copy+free.
+    auto* oldPtr = reinterpret_cast<void*>(ptr);
+    auto* newPtr = nullptr;
+    if (posix_memalign(&newPtr, static_cast<CHAOS_IL2CPP_SIZE>(alignment), static_cast<CHAOS_IL2CPP_SIZE>(byteCount)) == 0)
+    {
+        if (oldPtr != nullptr)
+        {
+            std::memcpy(newPtr, oldPtr, static_cast<CHAOS_IL2CPP_SIZE>(byteCount));
+            std::free(oldPtr);
+        }
+    }
+#endif
+    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(newPtr);
+}
+
+// ═══════════════════════════════════════════════════════════════
+// SafeBuffer stubs — access raw pointer + length from SafeBuffer
+// ═══════════════════════════════════════════════════════════════
+
+CHAOS_IL2CPP_INT32 ChaosSafeBufferGetByteLength(CHAOS_IL2CPP_INTPTR safeBuffer) noexcept
+{
+    if (safeBuffer == 0) return 0;
+    // SafeBuffer has a `_byteLength` Int64 field at a known offset.
+    // Read via raw memory access since the object header is opaque.
+    auto* obj = reinterpret_cast<CHAOS_IL2CPP_UINT8*>(safeBuffer);
+    // Skip object header (2 pointer-sized fields: syncblk + methodtable)
+    constexpr CHAOS_IL2CPP_SIZE headerSize = 2 * sizeof(CHAOS_IL2CPP_INTPTR);
+    CHAOS_IL2CPP_INT64 length = 0;
+    std::memcpy(&length, obj + headerSize, sizeof(length));
+    return static_cast<CHAOS_IL2CPP_INT32>(length);
+}
+
+CHAOS_IL2CPP_UINT8 ChaosSafeBufferReadByte(CHAOS_IL2CPP_INTPTR safeBuffer, CHAOS_IL2CPP_INTPTR position) noexcept
+{
+    if (safeBuffer == 0 || position < 0) return 0;
+    // SafeBuffer._pointer field is after _byteLength (at header + 8).
+    // Use MarshalSafeHandleGetHandle or read raw pointer from known offset.
+    auto* handlePtr = reinterpret_cast<void*>(MarshalSafeHandleGetHandle(nullptr, nullptr, reinterpret_cast<void*>(safeBuffer)));
+    if (handlePtr == nullptr) return 0;
+    return static_cast<CHAOS_IL2CPP_UINT8*>(handlePtr)[position];
+}
+
+void ChaosSafeBufferWriteByte(CHAOS_IL2CPP_INTPTR safeBuffer, CHAOS_IL2CPP_INTPTR position, CHAOS_IL2CPP_UINT8 value) noexcept
+{
+    if (safeBuffer == 0 || position < 0) return;
+    auto* handlePtr = reinterpret_cast<void*>(MarshalSafeHandleGetHandle(nullptr, nullptr, reinterpret_cast<void*>(safeBuffer)));
+    if (handlePtr == nullptr) return;
+    static_cast<CHAOS_IL2CPP_UINT8*>(handlePtr)[position] = value;
+}
+
 }  // extern "C"
 }  // namespace chaos::il2cpp::runtime_core

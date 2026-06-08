@@ -61,3 +61,18 @@ CHAOS_IL2CPP_INTPTR ChaosGCHandleGetTarget(CHAOS_IL2CPP_INTPTR handle) noexcept;
 CHAOS_IL2CPP_INTPTR ChaosMarshalGetExceptionForHR(CHAOS_IL2CPP_INT32 errorCode) noexcept;
 void   ChaosMarshalThrowExceptionForHR(CHAOS_IL2CPP_INT32 errorCode) noexcept;
 CHAOS_IL2CPP_INT32 ChaosMarshalGetHRForException(CHAOS_IL2CPP_INTPTR exceptionObj) noexcept;
+
+// ── NativeMemory stubs ──────────────────────────────────────
+// DirectNativeSymbol stubs for NativeMemory.Alloc/Free/Realloc/AlignedAlloc.
+CHAOS_IL2CPP_INTPTR ChaosNativeMemoryAlloc(CHAOS_IL2CPP_INTPTR byteCount) noexcept;
+void   ChaosNativeMemoryFree(CHAOS_IL2CPP_INTPTR ptr) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosNativeMemoryRealloc(CHAOS_IL2CPP_INTPTR ptr, CHAOS_IL2CPP_INTPTR byteCount) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosNativeMemoryAlignedAlloc(CHAOS_IL2CPP_INTPTR byteCount, CHAOS_IL2CPP_INTPTR alignment) noexcept;
+void   ChaosNativeMemoryAlignedFree(CHAOS_IL2CPP_INTPTR ptr) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosNativeMemoryAlignedRealloc(CHAOS_IL2CPP_INTPTR ptr, CHAOS_IL2CPP_INTPTR byteCount, CHAOS_IL2CPP_INTPTR alignment) noexcept;
+
+// ── SafeBuffer stubs ────────────────────────────────────────
+// DirectNativeSymbol stubs for SafeBuffer.GetByteLength/ReadByte/WriteByte.
+CHAOS_IL2CPP_INT32 ChaosSafeBufferGetByteLength(CHAOS_IL2CPP_INTPTR safeBuffer) noexcept;
+CHAOS_IL2CPP_UINT8 ChaosSafeBufferReadByte(CHAOS_IL2CPP_INTPTR safeBuffer, CHAOS_IL2CPP_INTPTR position) noexcept;
+void   ChaosSafeBufferWriteByte(CHAOS_IL2CPP_INTPTR safeBuffer, CHAOS_IL2CPP_INTPTR position, CHAOS_IL2CPP_UINT8 value) noexcept;
