@@ -1035,6 +1035,19 @@ private static IReadOnlyList<ManagedClosureResolvedAssemblyRef> BuildResolvedAss
             internalAssemblyNames.Add(assembly.Name);
         }
 
+        // Also include assembly names from methods — methods may be loaded from
+        // additional assemblies (via AdditionalAssemblyPaths) even when those
+        // assemblies are not tracked in linkedWorld.Assemblies.
+        // Without this, calls to methods from these assemblies get
+        // HybridDispatchKind.ExternalRuntime instead of Direct dispatch,
+        // routing through chaos_external_runtime_* stubs that call
+        // CHAOS_IL2CPP_FAIL().
+        foreach (var method in linkedWorld.Methods)
+        {
+            if (!string.IsNullOrEmpty(method.AssemblyName))
+                internalAssemblyNames.Add(method.AssemblyName);
+        }
+
         return new StageLookups(methodShapes, methodCapabilities, internalAssemblyNames, methodsBySubjectId);
     }
 
