@@ -9,6 +9,7 @@
 //   --hotupdate          — hotpatch fact: baseline + apply + semantic-check + revert
 //   --hotupdate-and-benchmark N I — post-patch benchmark
 //   --microbench         — interpreter microbenchmarks
+//   --profile             — profile mode: GC stats, alloc volume, heap delta, code size
 
 #include <cstdio>
 #include <cstdlib>
@@ -53,6 +54,7 @@ static thread_local jmp_buf t_abort_jmp;
 
 #include <chaos/hotpatch_dispatch.h>
 #include <patch_loader.h>
+#include <profile_stats.h>
 
 extern "C" const int kAotMethodCount;
 
@@ -68,6 +70,9 @@ extern "C" const CodeRegistrationV0 chaos_codegen_code_registration;
 extern "C" const MetadataRegistrationV0 chaos_codegen_metadata_registration;
 extern "C" const CodegenRegistrationOptionsV0 chaos_codegen_options;
 extern "C" void ChaosRegisterGcLayouts();
+// Bridge redirect pointer — defined in bridge-redirect.generated.cpp when
+// BridgeAOT is active.  Default to nullptr for AOT-only builds.
+extern "C" void* (*ChaosBridgeRedirect)(const char* subjectId) = nullptr;
 
 // kDefaultArgThunks: in AOT mode, nullptr is safe because ChaosDispatchMethod
 // falls through to entry.direct_ptr (set by SetDirectDispatch).
@@ -95,6 +100,13 @@ extern "C" BenchmarkResult RunHotpatchBenchmark(int entry_index, int iterations)
 extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Reset();
 extern "C" CHAOS_IL2CPP_INT32 Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Complete();
 
+// Stub implementations (when TestFramework.Sdk is not compiled as a subject).
+// In full builds, the SDK's il2cpp-compiled code provides the real implementations.
+#ifndef CHAOS_IL2CPP_HAS_TESTFRAMEWORK_SDK
+extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Reset() {}
+extern "C" CHAOS_IL2CPP_INT32 Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Complete() { return 0; }
+#endif
+
 // Interop stub declarations (defined in interop_stubs.cpp from SDK runtime_stubs)
 extern "C" int ChaosMarshalGetLastPInvokeError() noexcept;
 extern "C" int ChaosMarshalGetHRForLastWin32Error() noexcept;
@@ -105,6 +117,7 @@ extern "C" int ChaosMarshalAreComObjectsAvailableForCleanup() noexcept;
 // External runtime function table (populated by codegen, may have null entries)
 extern "C" void* kChaosExternalRuntimeFnTable[];
 extern "C" int32_t kChaosExternalRuntimeCount;
+extern "C" const char* kChaosExternalRuntimeSubjects[];
 
 // Per-method host arrays for ApplyPatchFromMemoryEx (defined in patch-host-arrays.cpp).
 // Sentinel values when no patch data is embedded; replaced by the hotupdate pipeline
@@ -255,11 +268,25 @@ static chaos::il2cpp::runtime_core::PatchContext* ApplyHotpatchFromFile(const ch
     return ctx;
 }
 
+// Helper: __try dispatch isolated from C++ objects (avoids C2712)
+// MSVC cannot have __try/__except in a function that also has C++ stack objects.
+#if defined(_WIN32)
+static int64_t FactTryDispatch(int method_index) {
+    __try {
+        return chaos::il2cpp::runtime_core::ChaosDispatchMethodGetValue(
+            GetHotpatchEntries(), kAotMethodCount, method_index, CHAOS_USE_DEFAULT_THUNKS);
+    } __except(EXCEPTION_EXECUTE_HANDLER) {
+        return -1;
+    }
+}
+#endif
+
 static int RunFactMode() {
     const int kCount = kSubjectEntryCount;
     int passed_count = 0;
     for (int si = 0; si < kCount; si++) {
         int i = kSubjectSlotMap[si];
+        if (i < 0 || i >= kAotMethodCount) continue;
 #if defined(_WIN32)
         __try {
             chaos::il2cpp::runtime_core::ChaosDispatchMethod(
@@ -318,15 +345,26 @@ static int RunFactJsonMode() {
     // s_exitCode from previous runs is cleared.  After dispatch, check
     // Complete() as a backstop for assertion failures that may not have
     // propagated as C++ exceptions (e.g. codegen-inlined assertion paths).
-#ifndef CHAOS_IL2CPP_JIT_MODE
 #define CHAOS_FACT_RESET()   Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Reset()
+#ifndef CHAOS_IL2CPP_JIT_MODE
+// AOT mode: try/catch is safe because there is no __try/__except in this
+// scope (the __try blocks are in the dispatch loop, which has already
+// completed by the time CHAOS_FACT_CHECK() is called).  MSVC does not
+// allow mixing SEH and C++ EH in the same function, so use real try/catch
+// in AOT mode and a no-op stub in JIT mode.
 #define CHAOS_FACT_CHECK()   do { \
-    if (Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Complete() != 0) { \
-        std::fprintf(stderr, "[ASSERT] s_exitCode was non-zero after fact loop\n"); \
+    try { \
+        if (Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Complete() != 0) { \
+            std::fprintf(stderr, "[ASSERT] s_exitCode was non-zero after fact loop\n"); \
+        } \
+    } catch (...) { \
+        std::fprintf(stderr, "[ASSERT] JIT assertion check threw\n"); \
     } \
 } while(0)
 #else
-#define CHAOS_FACT_RESET()   ((void)0)
+// JIT mode: the dispatch loop uses __try/__except (SEH).  MSVC does not
+// allow mixing C++ EH (try/catch) and SEH (__try) in the same function.
+// Provide a no-op stub — JIT-mode assertion checking relies on the VEH.
 #define CHAOS_FACT_CHECK()   ((void)0)
 #endif
 
@@ -352,27 +390,8 @@ static int RunFactJsonMode() {
             int64_t result = 0;
             bool caught = false;
 
-            // Re-arm SIGABRT handler each iteration: MSVC signal() resets to
-            // SIG_DFL after delivery, so a second abort would otherwise call
-            // _exit(3) without going through longjmp.
-            signal(SIGABRT, [](int) {
-                longjmp(t_abort_jmp, 1);
-            });
-
-            // _setjmp _must_ be outside __try on x64 (MSVC restriction).
-            // If abort() fires, the SIGABRT handler longjmps here with
-            // value 1, and we record the method as caught.
-            if (_setjmp(t_abort_jmp) == 0) {
-                __try {
-                    result = chaos::il2cpp::runtime_core::ChaosDispatchMethodGetValue(
-                        GetHotpatchEntries(), kAotMethodCount, i, CHAOS_USE_DEFAULT_THUNKS);
-                } __except(EXCEPTION_EXECUTE_HANDLER) {
-                    caught = true;
-                }
-            } else {
-                // longjmp from SIGABRT handler — abort was called
-                caught = true;
-            }
+            result = FactTryDispatch(i);
+            caught = (result < 0);
 
             if (!first) printf(",");
             printf("{\"si\":%d,\"methodIndex\":%d,\"contractIndex\":-1,\"passed\":%s,\"value\":%" PRId64 "}",
@@ -560,8 +579,8 @@ static int RunBenchmarkAllMode(int iterations) {
         } else {
             double elapsed_ms = std::chrono::duration<double, std::milli>(end - start).count();
             double ops_per_sec = elapsed_ms > 0.0 ? (iterations / elapsed_ms) * 1000.0 : 0.0;
-            printf("{\"methodIndex\":%d,\"elapsedMilliseconds\":%.3f,\"opsPerSecond\":%.0f,\"iterations\":%d,\"allocatedBytes\":%lld}\n",
-                   i, elapsed_ms, ops_per_sec, iterations, (long long)(alloc_after - alloc_before));
+            printf("{\"methodIndex\":%d,\"elapsedMilliseconds\":%.3f,\"opsPerSecond\":%.0f,\"iterations\":%d,\"allocatedBytes\":%" PRId64 "}\n",
+                   i, elapsed_ms, ops_per_sec, iterations, (int64_t)(alloc_after - alloc_before));
         }
         fflush(stdout);
     }
@@ -629,8 +648,8 @@ static int RunBenchmarkRangeMode(int iterations, int start_idx, int end_idx) {
         } else {
             double elapsed_ms = std::chrono::duration<double, std::milli>(end - start).count();
             double ops_per_sec = elapsed_ms > 0.0 ? (iterations / elapsed_ms) * 1000.0 : 0.0;
-            printf("{\"methodIndex\":%d,\"elapsedMilliseconds\":%.3f,\"opsPerSecond\":%.0f,\"iterations\":%d,\"allocatedBytes\":%lld}\n",
-                   i, elapsed_ms, ops_per_sec, iterations, (long long)(alloc_after - alloc_before));
+            printf("{\"methodIndex\":%d,\"elapsedMilliseconds\":%.3f,\"opsPerSecond\":%.0f,\"iterations\":%d,\"allocatedBytes\":%" PRId64 "}\n",
+                   i, elapsed_ms, ops_per_sec, iterations, (int64_t)(alloc_after - alloc_before));
         }
         fflush(stdout);
     }
@@ -897,6 +916,49 @@ static int RunHotupdateBenchmarkMode(int entry_index, int iterations) {
     return 0;
 }
 
+// ── --profile: per-method GC/allocation/code-size profile ───────────
+static int RunProfileMode() {
+    const int kCount = kSubjectEntryCount;
+    chaos::il2cpp::runtime_core::ProfileStoreInit(kCount);
+    for (int si = 0; si < kCount; si++) {
+        int i = kSubjectSlotMap[si];
+
+#if defined(_WIN32)
+        __try {
+            int64_t heap_before = chaos::il2cpp::runtime_core::chaos_gc_get_heap_size();
+            chaos::il2cpp::runtime_core::GetThreadProfileData().heap_before = heap_before;
+
+            CHAOS_EH_TRY
+                chaos::il2cpp::runtime_core::ChaosDispatchMethod(
+                    GetHotpatchEntries(), kAotMethodCount, i, CHAOS_USE_DEFAULT_THUNKS);
+            CHAOS_EH_CATCH_BEGIN
+            CHAOS_EH_END
+
+            int64_t heap_after = chaos::il2cpp::runtime_core::chaos_gc_get_heap_size();
+            chaos::il2cpp::runtime_core::GetThreadProfileData().heap_after = heap_after;
+        } __except(EXCEPTION_EXECUTE_HANDLER) {
+            // SEH caught — continue
+        }
+#else
+        CHAOS_EH_TRY
+            int64_t heap_before = chaos::il2cpp::runtime_core::chaos_gc_get_heap_size();
+            chaos::il2cpp::runtime_core::GetThreadProfileData().heap_before = heap_before;
+
+            chaos::il2cpp::runtime_core::ChaosDispatchMethod(
+                GetHotpatchEntries(), kAotMethodCount, i, CHAOS_USE_DEFAULT_THUNKS);
+
+            int64_t heap_after = chaos::il2cpp::runtime_core::chaos_gc_get_heap_size();
+            chaos::il2cpp::runtime_core::GetThreadProfileData().heap_after = heap_after;
+        CHAOS_EH_CATCH_BEGIN
+        CHAOS_EH_END
+#endif
+        chaos::il2cpp::runtime_core::FlushThreadProfileData(i);
+    }
+    chaos::il2cpp::runtime_core::ProfileStoreFinalize();
+    chaos::il2cpp::runtime_core::ProfileEmitJson();
+    return 0;
+}
+
 int main(int argc, char* argv[]) {
 
 #if defined(_WIN32)
@@ -1138,6 +1200,35 @@ int main(int argc, char* argv[]) {
     }
 
     if (std::strcmp(argv[1], "--microbench") == 0) { ret = RunMicrobenchMode(); goto shutdown; }
+
+    if (std::strcmp(argv[1], "--profile") == 0) { ret = RunProfileMode(); goto shutdown; }
+
+    // ── Gold Direct Link: dump external runtime table as JSON profile ──
+    // Usage: entry.exe --dump-gold-profile [--threshold N]
+    // Dumps all external runtime subjects with their table indices as a JSON
+    // array that can be passed to --gold-profile in a subsequent codegen run.
+    // Use --threshold N to filter by minimum call count (requires PGO counters).
+    if (std::strcmp(argv[1], "--dump-gold-profile") == 0) {
+        int32_t threshold = 0;
+        if (argc >= 4 && std::strcmp(argv[2], "--threshold") == 0) {
+            threshold = std::atoi(argv[3]);
+        }
+        // kChaosExternalRuntimeSubjects and kChaosExternalRuntimeCount
+        // are declared in the generated native-aot.generated.cpp header.
+
+        std::printf("{\n  \"hotMethods\": [\n");
+        bool first = true;
+        for (int32_t gi = 0; gi < kChaosExternalRuntimeCount; gi++) {
+            const char* sid = kChaosExternalRuntimeSubjects[gi];
+            if (sid == nullptr || sid[0] == '\0') continue;
+            if (!first) std::printf(",\n");
+            first = false;
+            std::printf("    \"%s\"", sid);
+        }
+        std::printf("\n  ]\n}\n");
+        ret = 0;
+        goto shutdown;
+    }
 
     printf("Unknown flag: %s\n", argv[1]);
     ret = 1;

@@ -3,6 +3,18 @@
   "max_entries": 50,
   "entries": [
     {
+      "cache_key": "System.Collections.Immutable/global-ns/29dd6e95748e147b",
+      "assembly": "System.Collections.Immutable",
+      "chunk_slug": "global-ns",
+      "input_hash": "29dd6e95748e147b9fe953957a45c946ff23b952adb6eba95fd2f6fcd050befb",
+      "cached_at": "2026-06-07T15:36:25Z",
+      "duration_ms": 39271,
+      "commit_hash": "4f3a5f68a",
+      "entry_exe_size": 3687936,
+      "entry_count": 345,
+      "status": "valid"
+    },
+    {
       "cache_key": "System.Collections.Immutable/global-ns/0162d34e19319cc7",
       "assembly": "System.Collections.Immutable",
       "chunk_slug": "global-ns",

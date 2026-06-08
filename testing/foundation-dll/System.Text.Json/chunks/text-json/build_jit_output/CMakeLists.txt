@@ -41,7 +41,7 @@ if(CHAOS_IL2CPP_CONFIG_TIER STREQUAL "profile")
   add_compile_definitions(CHAOS_IL2CPP_CONFIG_TIER=CHAOS_IL2CPP_CONFIG_TIER_CHECK)
   add_compile_definitions(CHAOS_IL2CPP_CONFIG_CHECK)
   add_compile_definitions(CHAOS_IL2CPP_LOG_LEVEL=3)
-  add_compile_definitions(CHAOS_IL2CPP_RUNTIME_CONFIG_FILE="runtime-config/mobile-release.h")
+  add_compile_definitions(CHAOS_IL2CPP_RUNTIME_CONFIG_FILE="runtime-config/desktop.h")
 elseif(CHAOS_IL2CPP_CONFIG_TIER STREQUAL "ship")
   add_compile_definitions(CHAOS_IL2CPP_CONFIG_TIER=CHAOS_IL2CPP_CONFIG_TIER_CHECK)
   add_compile_definitions(CHAOS_IL2CPP_CONFIG_CHECK)
@@ -157,6 +157,12 @@ set(CHAOS_EAGER_COMPILE
 set(CHAOS_METHOD_REPLACEMENT
     "${CHAOS_PROJECT_ROOT}/src/native/hot-update/method_replacement.cpp"
 )
+# profile_stats.cpp — the prebuilt chaos_runtime_core.lib may be stale,
+# missing GetThreadProfileData/FlushThreadProfileData/ProfileStore*
+# symbols added after the SDK was last rebuilt.  Compile locally.
+set(CHAOS_PROFILE_STATS
+    "${CHAOS_PROJECT_ROOT}/src/native/runtime-core/profile_stats.cpp"
+)
 
 set(CHAOS_ENTRY_SOURCES
     "runtime-entry.cpp"
@@ -174,6 +180,7 @@ set(CHAOS_ENTRY_SOURCES
     ${CHAOS_HOTPATCH_TABLE}
     ${CHAOS_EAGER_COMPILE}
     ${CHAOS_METHOD_REPLACEMENT}
+    ${CHAOS_PROFILE_STATS}
     ${CHAOS_AOT_GENERATED_CPP}
 )
 
@@ -191,6 +198,7 @@ set(CHAOS_ENTRY_INCLUDES
     "${CHAOS_PROJECT_ROOT}/src/native/support"
     "${CHAOS_PROJECT_ROOT}/src/native/hot-update"
     "${CHAOS_PROJECT_ROOT}/third_party/unordered_dense/include"
+    "${CHAOS_PROJECT_ROOT}/cmake"
     "${CHAOS_CODEGEN_DIR}/codegen/generated"
 
     "${CMAKE_CURRENT_SOURCE_DIR}"

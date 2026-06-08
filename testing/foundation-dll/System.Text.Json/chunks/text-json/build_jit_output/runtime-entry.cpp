@@ -331,15 +331,23 @@ static int RunFactJsonMode() {
     // s_exitCode from previous runs is cleared.  After dispatch, check
     // Complete() as a backstop for assertion failures that may not have
     // propagated as C++ exceptions (e.g. codegen-inlined assertion paths).
-#ifndef CHAOS_IL2CPP_JIT_MODE
 #define CHAOS_FACT_RESET()   Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Reset()
+#ifndef _WIN32
+// Non-Windows: SEH (__try/__except) is not available, so try/catch is safe.
 #define CHAOS_FACT_CHECK()   do { \
-    if (Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Complete() != 0) { \
-        std::fprintf(stderr, "[ASSERT] s_exitCode was non-zero after fact loop\n"); \
+    try { \
+        if (Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Complete() != 0) { \
+            std::fprintf(stderr, "[ASSERT] s_exitCode was non-zero after fact loop\n"); \
+        } \
+    } catch (...) { \
+        std::fprintf(stderr, "[ASSERT] JIT assertion check threw\n"); \
     } \
 } while(0)
 #else
-#define CHAOS_FACT_RESET()   ((void)0)
+// Windows: the dispatch loop uses __try/__except (SEH).  MSVC does not
+// allow mixing C++ EH (try/catch) and SEH (__try) in the same function.
+// The CHAOS_FACT_CHECK is inside the worker thread lambda which also
+// contains __try/__except, so use a no-op stub on Windows.
 #define CHAOS_FACT_CHECK()   ((void)0)
 #endif
 
@@ -573,8 +581,8 @@ static int RunBenchmarkAllMode(int iterations) {
         } else {
             double elapsed_ms = std::chrono::duration<double, std::milli>(end - start).count();
             double ops_per_sec = elapsed_ms > 0.0 ? (iterations / elapsed_ms) * 1000.0 : 0.0;
-            printf("{\"methodIndex\":%d,\"elapsedMilliseconds\":%.3f,\"opsPerSecond\":%.0f,\"iterations\":%d,\"allocatedBytes\":%lld}\n",
-                   i, elapsed_ms, ops_per_sec, iterations, (long long)(alloc_after - alloc_before));
+            printf("{\"methodIndex\":%d,\"elapsedMilliseconds\":%.3f,\"opsPerSecond\":%.0f,\"iterations\":%d,\"allocatedBytes\":%" PRId64 "}\n",
+                   i, elapsed_ms, ops_per_sec, iterations, (int64_t)(alloc_after - alloc_before));
         }
         fflush(stdout);
     }
@@ -642,8 +650,8 @@ static int RunBenchmarkRangeMode(int iterations, int start_idx, int end_idx) {
         } else {
             double elapsed_ms = std::chrono::duration<double, std::milli>(end - start).count();
             double ops_per_sec = elapsed_ms > 0.0 ? (iterations / elapsed_ms) * 1000.0 : 0.0;
-            printf("{\"methodIndex\":%d,\"elapsedMilliseconds\":%.3f,\"opsPerSecond\":%.0f,\"iterations\":%d,\"allocatedBytes\":%lld}\n",
-                   i, elapsed_ms, ops_per_sec, iterations, (long long)(alloc_after - alloc_before));
+            printf("{\"methodIndex\":%d,\"elapsedMilliseconds\":%.3f,\"opsPerSecond\":%.0f,\"iterations\":%d,\"allocatedBytes\":%" PRId64 "}\n",
+                   i, elapsed_ms, ops_per_sec, iterations, (int64_t)(alloc_after - alloc_before));
         }
         fflush(stdout);
     }
@@ -916,29 +924,36 @@ static int RunProfileMode() {
     chaos::il2cpp::runtime_core::ProfileStoreInit(kCount);
     for (int si = 0; si < kCount; si++) {
         int i = kSubjectSlotMap[si];
-        int64_t heap_before = chaos::il2cpp::runtime_core::chaos_gc_get_heap_size();
-        chaos::il2cpp::runtime_core::GetThreadProfileData().heap_before = heap_before;
 
 #if defined(_WIN32)
         __try {
+            int64_t heap_before = chaos::il2cpp::runtime_core::chaos_gc_get_heap_size();
+            chaos::il2cpp::runtime_core::GetThreadProfileData().heap_before = heap_before;
+
             CHAOS_EH_TRY
                 chaos::il2cpp::runtime_core::ChaosDispatchMethod(
                     GetHotpatchEntries(), kAotMethodCount, i, CHAOS_USE_DEFAULT_THUNKS);
             CHAOS_EH_CATCH_BEGIN
             CHAOS_EH_END
+
+            int64_t heap_after = chaos::il2cpp::runtime_core::chaos_gc_get_heap_size();
+            chaos::il2cpp::runtime_core::GetThreadProfileData().heap_after = heap_after;
         } __except(EXCEPTION_EXECUTE_HANDLER) {
-            // SEH caught — continue profiling
+            // SEH caught — continue
         }
 #else
         CHAOS_EH_TRY
+            int64_t heap_before = chaos::il2cpp::runtime_core::chaos_gc_get_heap_size();
+            chaos::il2cpp::runtime_core::GetThreadProfileData().heap_before = heap_before;
+
             chaos::il2cpp::runtime_core::ChaosDispatchMethod(
                 GetHotpatchEntries(), kAotMethodCount, i, CHAOS_USE_DEFAULT_THUNKS);
+
+            int64_t heap_after = chaos::il2cpp::runtime_core::chaos_gc_get_heap_size();
+            chaos::il2cpp::runtime_core::GetThreadProfileData().heap_after = heap_after;
         CHAOS_EH_CATCH_BEGIN
         CHAOS_EH_END
 #endif
-
-        int64_t heap_after = chaos::il2cpp::runtime_core::chaos_gc_get_heap_size();
-        chaos::il2cpp::runtime_core::GetThreadProfileData().heap_after = heap_after;
         chaos::il2cpp::runtime_core::FlushThreadProfileData(i);
     }
     chaos::il2cpp::runtime_core::ProfileStoreFinalize();

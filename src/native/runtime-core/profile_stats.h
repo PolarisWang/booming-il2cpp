@@ -5,8 +5,6 @@
 #include <cstdio>
 #include <cinttypes>
 
-#include <chaos/config.h>
-
 namespace chaos { namespace il2cpp { namespace runtime_core {
 
 // ── Per-method profile data collected during --profile mode ──────────

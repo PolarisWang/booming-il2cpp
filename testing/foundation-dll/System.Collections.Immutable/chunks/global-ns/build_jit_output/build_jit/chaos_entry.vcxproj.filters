@@ -58,13 +58,10 @@
     <ClCompile Include="D:\agent\booming-il2cpp\src\native\hot-update\method_replacement.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="D:\agent\booming-il2cpp\testing\foundation-dll\System.Collections.Immutable\chunks\global-ns\build_jit_output\subjects\bridge-redirect.generated.cpp">
+    <ClCompile Include="D:\agent\booming-il2cpp\src\native\runtime-core\profile_stats.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="D:\agent\booming-il2cpp\testing\foundation-dll\System.Collections.Immutable\chunks\global-ns\build_jit_output\subjects\chaos_generated_module.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="D:\agent\booming-il2cpp\testing\foundation-dll\System.Collections.Immutable\chunks\global-ns\build_jit_output\subjects\chaos_register_bridge_redirects.generated.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="D:\agent\booming-il2cpp\testing\foundation-dll\System.Collections.Immutable\chunks\global-ns\build_jit_output\subjects\native-aot.generated.cpp">

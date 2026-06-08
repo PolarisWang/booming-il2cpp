@@ -147,16 +147,19 @@ set(CHAOS_HOTPATCH_TABLE
 # eager_compile.cpp — required by patch_loader.obj in chaos_runtime_core.lib
 # but defined in the interpreter project.  Compile locally since the prebuilt
 # chaos_interpreter.lib may be stale (EagerCompilePatchMethods).
-# Skipped in profile build (JIT header dependency chain).
-if(NOT CHAOS_IL2CPP_CONFIG_TIER STREQUAL "profile")
-  set(CHAOS_EAGER_COMPILE
-      "${CHAOS_PROJECT_ROOT}/src/native/interpreter/interp_entry/eager_compile.cpp"
-  )
-endif()
+set(CHAOS_EAGER_COMPILE
+    "${CHAOS_PROJECT_ROOT}/src/native/interpreter/interp_entry/eager_compile.cpp"
+)
 # method_replacement.cpp — the prebuilt chaos_hot_update.lib may be stale
 # (SetPatchedBySlot signature changed — domain_id parameter added).
 set(CHAOS_METHOD_REPLACEMENT
     "${CHAOS_PROJECT_ROOT}/src/native/hot-update/method_replacement.cpp"
+)
+# profile_stats.cpp — the prebuilt chaos_runtime_core.lib may be stale,
+# missing GetThreadProfileData/FlushThreadProfileData/ProfileStore*
+# symbols added after the SDK was last rebuilt.  Compile locally.
+set(CHAOS_PROFILE_STATS
+    "${CHAOS_PROJECT_ROOT}/src/native/runtime-core/profile_stats.cpp"
 )
 
 set(CHAOS_ENTRY_SOURCES
@@ -175,6 +178,7 @@ set(CHAOS_ENTRY_SOURCES
     ${CHAOS_HOTPATCH_TABLE}
     ${CHAOS_EAGER_COMPILE}
     ${CHAOS_METHOD_REPLACEMENT}
+    ${CHAOS_PROFILE_STATS}
     ${CHAOS_AOT_GENERATED_CPP}
 )
 
@@ -199,7 +203,6 @@ set(CHAOS_ENTRY_INCLUDES
     # JIT headers needed by eager_compile.cpp (compiled for all builds
     # since the prebuilt chaos_interpreter.lib may be stale).
     "${CHAOS_PROJECT_ROOT}/src/native/jit"
-    "${CHAOS_PROJECT_ROOT}/contracts/native/v0"
     # codegen/generated — needed for enum_metadata.generated.h and other
     # generated headers that aren't copied to subjects/ by TPG's flat layout.
     "${CHAOS_CODEGEN_DIR}/generated"

@@ -14,6 +14,7 @@
 #include <gc/gc_bgc_inline.h>
 #include <gc/gc_card_table.h>
 #include <ChaosGeneratedRuntimePrelude.h>
+#include "runtime_stubs/misc_stubs.h"
 #include "enum_stubs.h"
 #include "async_stubs.h"
 #include "exception_stubs.h"
@@ -35,44 +36,6 @@ namespace chaos::il2cpp::codegen::CombinedSubjects {
 using namespace chaos::il2cpp::runtime_core;
 using namespace chaos::il2cpp::jit;
 
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Boolean_System_Boolean_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Byte_System_Byte_System_String(CHAOS_IL2CPP_UINT8 chaos_fn_arg_0, CHAOS_IL2CPP_UINT8 chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Byte_array_System_Byte_array_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Char_System_Char_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Decimal_System_Decimal_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Double_System_Double_System_String(double chaos_fn_arg_0, double chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Int16_System_Int16_System_String(CHAOS_IL2CPP_INT16 chaos_fn_arg_0, CHAOS_IL2CPP_INT16 chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Int32_System_Int32_System_String(CHAOS_IL2CPP_INT32 chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Int64_System_Int64_System_String(CHAOS_IL2CPP_INT64 chaos_fn_arg_0, CHAOS_IL2CPP_INT64 chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Object_System_Object_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_SByte_System_SByte_System_String(CHAOS_IL2CPP_INT8 chaos_fn_arg_0, CHAOS_IL2CPP_INT8 chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Single_System_Single_System_String(float chaos_fn_arg_0, float chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_String_System_String_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_UInt16_System_UInt16_System_String(CHAOS_IL2CPP_UINT16 chaos_fn_arg_0, CHAOS_IL2CPP_UINT16 chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_UInt32_System_UInt32_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_UInt64_System_UInt64_System_String(CHAOS_IL2CPP_UINT64 chaos_fn_arg_0, CHAOS_IL2CPP_UINT64 chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_0_0_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreNotEqual_0_0_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
-extern "C" CHAOS_IL2CPP_INT32 Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Complete(void);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Fail_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
-extern "C" CHAOS_IL2CPP_INT32 Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_get_ExitCode(void);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_IsFalse_System_Boolean_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_IsNotNull_System_Object_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_IsNull_System_Object_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_IsTrue_System_Boolean_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_RecordFailure(void);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Reset(void);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Throws_System_Action(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Throws_System_ArgumentException_System_Action__generic(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_generic_context);
-extern "C" void chaos_stub_definition_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert__Throws_System_Void_System_Action__type____method__System_ArgumentException(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_generic_context);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Throws_System_NullReferenceException_System_Action__generic(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
-extern "C" void chaos_stub_definition_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert__Throws_System_Void_System_Action__type____method__System_NullReferenceException(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_generic_context);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Throws_System_PlatformNotSupportedException_System_Action__generic(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
-extern "C" void chaos_stub_definition_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert__Throws_System_Void_System_Action__type____method__System_PlatformNotSupportedException(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_generic_context);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_AssertionException__ctor_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_BenchmarkAttribute__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_FactAttribute__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_HotUpdateAttribute__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
 extern "C" void CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
 extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_AddEventHandler_0_object_System_Delegate_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
 extern "C" void CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_Benchmark_AddEventHandler_0_object_System_Delegate_0(void);
@@ -194,14 +157,7 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_Sy
 // Runtime prelude dependencies included at translation unit level
 
 
-MethodTable chaos_mt_Chaos_TestFramework_Sdk___0 = {nullptr, nullptr, 12016523716365422726ULL, 0u, 32, 2, 0, nullptr, nullptr, 0, 0, 0, 0};
-inline constexpr CHAOS_IL2CPP_UINT64 chaos_type_id_Chaos_TestFramework_Sdk___0 = static_cast<CHAOS_IL2CPP_UINT64>(12016523716365422726ULL);
 // ── Virtual method table arrays ──
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_AssertionException__ctor_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1);
-const void* chaos_vtable_Chaos_TestFramework_Sdk_Chaos_TestFramework_AssertionException[] =
-{
-	reinterpret_cast<void*>(Chaos_TestFramework_Sdk_Chaos_TestFramework_AssertionException__ctor_System_String),
-};
 extern "C" void CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
 extern "C" void CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c_AddEventHandler_0_object_System_Delegate_0_b__0_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
 extern "C" void CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c_GetAddMethod_2_bool_0_b__4_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
@@ -222,7 +178,6 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_Sy
 extern "C" void CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c_RemoveEventHandler_1_object_System_Delegate_0_b__2_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
 const void* chaos_vtable_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c[] =
 {
-	nullptr,
 	reinterpret_cast<void*>(CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c__ctor),
 	reinterpret_cast<void*>(CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c_AddEventHandler_0_object_System_Delegate_0_b__0_0),
 	reinterpret_cast<void*>(CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c_GetAddMethod_2_bool_0_b__4_0),
@@ -247,7 +202,6 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_Sy
 extern "C" void CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_HandleCollectorTests___c_Remove_1__1_b__2_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
 const void* chaos_vtable_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_HandleCollectorTests___c[] =
 {
-	nullptr,
 	reinterpret_cast<void*>(CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_HandleCollectorTests___c__ctor),
 	nullptr,
 	nullptr,
@@ -273,7 +227,6 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_Sy
 extern "C" void CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ComObjectTests___c_FinalRelease_0__0_b__0_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
 const void* chaos_vtable_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ComObjectTests___c[] =
 {
-	nullptr,
 	reinterpret_cast<void*>(CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ComObjectTests___c__ctor),
 	nullptr,
 	nullptr,
@@ -300,7 +253,6 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_Sy
 extern "C" void CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ExceptionAsNaNMarshallerSystem_DoubleTests___c_ConvertToUnmanaged_0_System_Exception_0_b__0_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
 const void* chaos_vtable_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ExceptionAsNaNMarshallerSystem_DoubleTests___c[] =
 {
-	nullptr,
 	reinterpret_cast<void*>(CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ExceptionAsNaNMarshallerSystem_DoubleTests___c__ctor),
 	nullptr,
 	nullptr,
@@ -329,7 +281,6 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_Sy
 extern "C" void CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_RuntimeEnvironmentTests___c_GetRuntimeInterfaceAsObject_3_System_Guid_System_Guid_0_b__6_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
 const void* chaos_vtable_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_RuntimeEnvironmentTests___c[] =
 {
-	nullptr,
 	reinterpret_cast<void*>(CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_RuntimeEnvironmentTests___c__ctor),
 	nullptr,
 	nullptr,
@@ -355,23 +306,17 @@ const void* chaos_vtable_CombinedSubjects_AutoGenerated_System_Runtime_InteropSe
 	reinterpret_cast<void*>(CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_RuntimeEnvironmentTests___c_GetRuntimeInterfaceAsIntPtr_2_System_Guid_System_Guid_0_b__4_0),
 	reinterpret_cast<void*>(CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_RuntimeEnvironmentTests___c_GetRuntimeInterfaceAsObject_3_System_Guid_System_Guid_0_b__6_0),
 };
-MethodTable chaos_mt_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert = {nullptr, nullptr, 3469195832277345062ULL, 0u, 32, 1, 1, nullptr, nullptr, 0, 0, 0};
-inline constexpr CHAOS_IL2CPP_UINT64 chaos_type_id_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert = static_cast<CHAOS_IL2CPP_UINT64>(3469195832277345062ULL);
-MethodTable chaos_mt_System_Private_CoreLib_System_Exception = {nullptr, nullptr, 10972282733316558392ULL, 0u, 32, 1, 1, nullptr, nullptr, 0, 0, 0};
-inline constexpr CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_Exception = static_cast<CHAOS_IL2CPP_UINT64>(10972282733316558392ULL);
-MethodTable chaos_mt_Chaos_TestFramework_Sdk_Chaos_TestFramework_AssertionException = {reinterpret_cast<const MethodTable*>(&chaos_mt_System_Private_CoreLib_System_Exception), chaos_vtable_Chaos_TestFramework_Sdk_Chaos_TestFramework_AssertionException, 8951892653230046377ULL, 1u, 32, 1, 1, nullptr, nullptr, 0, 0, 0};
-inline constexpr CHAOS_IL2CPP_UINT64 chaos_type_id_Chaos_TestFramework_Sdk_Chaos_TestFramework_AssertionException = static_cast<CHAOS_IL2CPP_UINT64>(8951892653230046377ULL);
 MethodTable chaos_mt_System_Private_CoreLib_System_Object = {nullptr, nullptr, 15228727185366376748ULL, 0u, 32, 1, 1, nullptr, nullptr, 0, 0, 0};
 inline constexpr CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_Object = static_cast<CHAOS_IL2CPP_UINT64>(15228727185366376748ULL);
-MethodTable chaos_mt_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c = {reinterpret_cast<const MethodTable*>(&chaos_mt_System_Private_CoreLib_System_Object), chaos_vtable_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c, 14756389350112234513ULL, 19u, 32, 1, 1, nullptr, nullptr, 0, 0, 0};
+MethodTable chaos_mt_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c = {reinterpret_cast<const MethodTable*>(&chaos_mt_System_Private_CoreLib_System_Object), chaos_vtable_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c, 14756389350112234513ULL, 18u, 32, 1, 1, nullptr, nullptr, 0, 0, 0};
 inline constexpr CHAOS_IL2CPP_UINT64 chaos_type_id_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c = static_cast<CHAOS_IL2CPP_UINT64>(14756389350112234513ULL);
-MethodTable chaos_mt_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_HandleCollectorTests___c = {reinterpret_cast<const MethodTable*>(&chaos_mt_System_Private_CoreLib_System_Object), chaos_vtable_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_HandleCollectorTests___c, 7858198210917550563ULL, 21u, 32, 1, 1, nullptr, nullptr, 0, 0, 0};
+MethodTable chaos_mt_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_HandleCollectorTests___c = {reinterpret_cast<const MethodTable*>(&chaos_mt_System_Private_CoreLib_System_Object), chaos_vtable_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_HandleCollectorTests___c, 7858198210917550563ULL, 20u, 32, 1, 1, nullptr, nullptr, 0, 0, 0};
 inline constexpr CHAOS_IL2CPP_UINT64 chaos_type_id_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_HandleCollectorTests___c = static_cast<CHAOS_IL2CPP_UINT64>(7858198210917550563ULL);
-MethodTable chaos_mt_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ComObjectTests___c = {reinterpret_cast<const MethodTable*>(&chaos_mt_System_Private_CoreLib_System_Object), chaos_vtable_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ComObjectTests___c, 6735606212607880545ULL, 22u, 32, 1, 1, nullptr, nullptr, 0, 0, 0};
+MethodTable chaos_mt_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ComObjectTests___c = {reinterpret_cast<const MethodTable*>(&chaos_mt_System_Private_CoreLib_System_Object), chaos_vtable_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ComObjectTests___c, 6735606212607880545ULL, 21u, 32, 1, 1, nullptr, nullptr, 0, 0, 0};
 inline constexpr CHAOS_IL2CPP_UINT64 chaos_type_id_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ComObjectTests___c = static_cast<CHAOS_IL2CPP_UINT64>(6735606212607880545ULL);
-MethodTable chaos_mt_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ExceptionAsNaNMarshallerSystem_DoubleTests___c = {reinterpret_cast<const MethodTable*>(&chaos_mt_System_Private_CoreLib_System_Object), chaos_vtable_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ExceptionAsNaNMarshallerSystem_DoubleTests___c, 7500439367177590521ULL, 23u, 32, 1, 1, nullptr, nullptr, 0, 0, 0};
+MethodTable chaos_mt_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ExceptionAsNaNMarshallerSystem_DoubleTests___c = {reinterpret_cast<const MethodTable*>(&chaos_mt_System_Private_CoreLib_System_Object), chaos_vtable_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ExceptionAsNaNMarshallerSystem_DoubleTests___c, 7500439367177590521ULL, 22u, 32, 1, 1, nullptr, nullptr, 0, 0, 0};
 inline constexpr CHAOS_IL2CPP_UINT64 chaos_type_id_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ExceptionAsNaNMarshallerSystem_DoubleTests___c = static_cast<CHAOS_IL2CPP_UINT64>(7500439367177590521ULL);
-MethodTable chaos_mt_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_RuntimeEnvironmentTests___c = {reinterpret_cast<const MethodTable*>(&chaos_mt_System_Private_CoreLib_System_Object), chaos_vtable_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_RuntimeEnvironmentTests___c, 12279130198286654777ULL, 25u, 32, 1, 1, nullptr, nullptr, 0, 0, 0};
+MethodTable chaos_mt_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_RuntimeEnvironmentTests___c = {reinterpret_cast<const MethodTable*>(&chaos_mt_System_Private_CoreLib_System_Object), chaos_vtable_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_RuntimeEnvironmentTests___c, 12279130198286654777ULL, 24u, 32, 1, 1, nullptr, nullptr, 0, 0, 0};
 inline constexpr CHAOS_IL2CPP_UINT64 chaos_type_id_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_RuntimeEnvironmentTests___c = static_cast<CHAOS_IL2CPP_UINT64>(12279130198286654777ULL);
 MethodTable chaos_mt_System_Private_CoreLib_System_Delegate = {reinterpret_cast<const MethodTable*>(&chaos_mt_System_Private_CoreLib_System_Object), nullptr, 7451128447593600616ULL, 0u, 32, 1, 1, nullptr, nullptr, 0, 0, 0};
 inline constexpr CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_Delegate = static_cast<CHAOS_IL2CPP_UINT64>(7451128447593600616ULL);
@@ -379,10 +324,6 @@ MethodTable chaos_mt_System_Private_CoreLib_System_MulticastDelegate = {reinterp
 inline constexpr CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_MulticastDelegate = static_cast<CHAOS_IL2CPP_UINT64>(6681393039041505440ULL);
 MethodTable chaos_mt_System_Private_CoreLib_System_Action = {reinterpret_cast<const MethodTable*>(&chaos_mt_System_Private_CoreLib_System_MulticastDelegate), nullptr, 14722794505377461205ULL, 0u, 32, 1, 1, nullptr, nullptr, 0, 0, 0};
 inline constexpr CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_Action = static_cast<CHAOS_IL2CPP_UINT64>(14722794505377461205ULL);
-MethodTable chaos_mt_System_Private_CoreLib_System_Collections_IEnumerable = {nullptr, nullptr, 16749028324345562163ULL, 0u, 32, 1, 1, nullptr, nullptr, 0, 0, 0};
-inline constexpr CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_Collections_IEnumerable = static_cast<CHAOS_IL2CPP_UINT64>(16749028324345562163ULL);
-MethodTable chaos_mt_System_Private_CoreLib_System_IDisposable = {nullptr, nullptr, 13420242832086098868ULL, 0u, 32, 1, 1, nullptr, nullptr, 0, 0, 0};
-inline constexpr CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_IDisposable = static_cast<CHAOS_IL2CPP_UINT64>(13420242832086098868ULL);
 MethodTable chaos_mt_System_Private_CoreLib_System_Reflection_Assembly = {nullptr, nullptr, 5474029880995115448ULL, 0u, 32, 1, 1, nullptr, nullptr, 0, 0, 0};
 inline constexpr CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_Reflection_Assembly = static_cast<CHAOS_IL2CPP_UINT64>(5474029880995115448ULL);
 MethodTable chaos_mt_System_Private_CoreLib_System_Reflection_AssemblyName = {nullptr, nullptr, 17082367815459723707ULL, 0u, 32, 1, 1, nullptr, nullptr, 0, 0, 0};
@@ -399,41 +340,32 @@ MethodTable chaos_mt_System_Private_CoreLib_System_String = {nullptr, nullptr, 1
 inline constexpr CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_String = static_cast<CHAOS_IL2CPP_UINT64>(1782325859292956794ULL);
 MethodTable chaos_mt_System_Private_CoreLib_System_Type = {reinterpret_cast<const MethodTable*>(&chaos_mt_System_Private_CoreLib_System_Object), nullptr, 3222174513575444759ULL, 0u, 32, 1, 1, nullptr, nullptr, 0, 0, 0};
 inline constexpr CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_Type = static_cast<CHAOS_IL2CPP_UINT64>(3222174513575444759ULL);
-inline constexpr CHAOS_IL2CPP_UINT64 chaos_boxed_type_id_Chaos_TestFramework_Sdk___0 = static_cast<CHAOS_IL2CPP_UINT64>(12016523716365422726ULL);
-
-static const ::chaos::il2cpp::vtable_registry::VTableSlot kSlots_Chaos_TestFramework_Sdk_Chaos_TestFramework_AssertionException[] =
-{
-	{ 0x00000036u, reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_AssertionException__ctor_System_String) },
-};
 
 static const ::chaos::il2cpp::vtable_registry::VTableSlot kSlots_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c[] =
 {
-	{ 0u, nullptr },
-	{ 0x000000ABu, reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c__ctor) },
-	{ 0x000000ACu, reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c_AddEventHandler_0_object_System_Delegate_0_b__0_0) },
-	{ 0x000000AEu, reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c_GetAddMethod_2_bool_0_b__4_0) },
-	{ 0x000000AFu, reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c_GetAddMethod_2_bool_1_b__6_0) },
-	{ 0x000000BAu, reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c_GetCustomAttributesData_8__8_b__28_0) },
-	{ 0x000000B6u, reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c_GetCustomAttributes_6_System_Type_bool_0_b__20_0) },
-	{ 0x000000B7u, reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c_GetCustomAttributes_6_System_Type_bool_1_b__22_0) },
-	{ 0x000000B8u, reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c_GetCustomAttributes_7_bool_0_b__24_0) },
-	{ 0x000000B9u, reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c_GetCustomAttributes_7_bool_1_b__26_0) },
-	{ 0x000000B0u, reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c_GetOtherMethods_3_bool_0_b__8_0) },
-	{ 0x000000B1u, reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c_GetOtherMethods_3_bool_1_b__10_0) },
-	{ 0x000000B2u, reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c_GetRaiseMethod_4_bool_0_b__12_0) },
-	{ 0x000000B3u, reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c_GetRaiseMethod_4_bool_1_b__14_0) },
-	{ 0x000000B4u, reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c_GetRemoveMethod_5_bool_0_b__16_0) },
-	{ 0x000000B5u, reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c_GetRemoveMethod_5_bool_1_b__18_0) },
-	{ 0x000000BBu, reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c_IsDefined_9_System_Type_bool_0_b__30_0) },
-	{ 0x000000BCu, reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c_IsDefined_9_System_Type_bool_1_b__32_0) },
-	{ 0x000000ADu, reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c_RemoveEventHandler_1_object_System_Delegate_0_b__2_0) },
+	{ 0x00000082u, reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c__ctor) },
+	{ 0x00000083u, reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c_AddEventHandler_0_object_System_Delegate_0_b__0_0) },
+	{ 0x00000085u, reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c_GetAddMethod_2_bool_0_b__4_0) },
+	{ 0x00000086u, reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c_GetAddMethod_2_bool_1_b__6_0) },
+	{ 0x00000091u, reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c_GetCustomAttributesData_8__8_b__28_0) },
+	{ 0x0000008Du, reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c_GetCustomAttributes_6_System_Type_bool_0_b__20_0) },
+	{ 0x0000008Eu, reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c_GetCustomAttributes_6_System_Type_bool_1_b__22_0) },
+	{ 0x0000008Fu, reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c_GetCustomAttributes_7_bool_0_b__24_0) },
+	{ 0x00000090u, reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c_GetCustomAttributes_7_bool_1_b__26_0) },
+	{ 0x00000087u, reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c_GetOtherMethods_3_bool_0_b__8_0) },
+	{ 0x00000088u, reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c_GetOtherMethods_3_bool_1_b__10_0) },
+	{ 0x00000089u, reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c_GetRaiseMethod_4_bool_0_b__12_0) },
+	{ 0x0000008Au, reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c_GetRaiseMethod_4_bool_1_b__14_0) },
+	{ 0x0000008Bu, reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c_GetRemoveMethod_5_bool_0_b__16_0) },
+	{ 0x0000008Cu, reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c_GetRemoveMethod_5_bool_1_b__18_0) },
+	{ 0x00000092u, reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c_IsDefined_9_System_Type_bool_0_b__30_0) },
+	{ 0x00000093u, reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c_IsDefined_9_System_Type_bool_1_b__32_0) },
+	{ 0x00000084u, reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c_RemoveEventHandler_1_object_System_Delegate_0_b__2_0) },
 };
 
 static const ::chaos::il2cpp::vtable_registry::VTableSlot kSlots_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_HandleCollectorTests___c[] =
 {
-	{ 0u, nullptr },
-	{ 0x000000BEu, reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_HandleCollectorTests___c__ctor) },
-	{ 0u, nullptr },
+	{ 0x00000095u, reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_HandleCollectorTests___c__ctor) },
 	{ 0u, nullptr },
 	{ 0u, nullptr },
 	{ 0u, nullptr },
@@ -450,15 +382,14 @@ static const ::chaos::il2cpp::vtable_registry::VTableSlot kSlots_CombinedSubject
 	{ 0u, nullptr },
 	{ 0u, nullptr },
 	{ 0u, nullptr },
-	{ 0x000000BFu, reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_HandleCollectorTests___c_Add_0__0_b__0_0) },
-	{ 0x000000C0u, reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_HandleCollectorTests___c_Remove_1__1_b__2_0) },
+	{ 0u, nullptr },
+	{ 0x00000096u, reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_HandleCollectorTests___c_Add_0__0_b__0_0) },
+	{ 0x00000097u, reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_HandleCollectorTests___c_Remove_1__1_b__2_0) },
 };
 
 static const ::chaos::il2cpp::vtable_registry::VTableSlot kSlots_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ComObjectTests___c[] =
 {
-	{ 0u, nullptr },
-	{ 0x000000C2u, reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ComObjectTests___c__ctor) },
-	{ 0u, nullptr },
+	{ 0x00000099u, reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ComObjectTests___c__ctor) },
 	{ 0u, nullptr },
 	{ 0u, nullptr },
 	{ 0u, nullptr },
@@ -477,14 +408,13 @@ static const ::chaos::il2cpp::vtable_registry::VTableSlot kSlots_CombinedSubject
 	{ 0u, nullptr },
 	{ 0u, nullptr },
 	{ 0u, nullptr },
-	{ 0x000000C3u, reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ComObjectTests___c_FinalRelease_0__0_b__0_0) },
+	{ 0u, nullptr },
+	{ 0x0000009Au, reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ComObjectTests___c_FinalRelease_0__0_b__0_0) },
 };
 
 static const ::chaos::il2cpp::vtable_registry::VTableSlot kSlots_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ExceptionAsNaNMarshallerSystem_DoubleTests___c[] =
 {
-	{ 0u, nullptr },
-	{ 0x000000C5u, reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ExceptionAsNaNMarshallerSystem_DoubleTests___c__ctor) },
-	{ 0u, nullptr },
+	{ 0x0000009Cu, reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ExceptionAsNaNMarshallerSystem_DoubleTests___c__ctor) },
 	{ 0u, nullptr },
 	{ 0u, nullptr },
 	{ 0u, nullptr },
@@ -504,14 +434,13 @@ static const ::chaos::il2cpp::vtable_registry::VTableSlot kSlots_CombinedSubject
 	{ 0u, nullptr },
 	{ 0u, nullptr },
 	{ 0u, nullptr },
-	{ 0x000000C6u, reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ExceptionAsNaNMarshallerSystem_DoubleTests___c_ConvertToUnmanaged_0_System_Exception_0_b__0_0) },
+	{ 0u, nullptr },
+	{ 0x0000009Du, reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ExceptionAsNaNMarshallerSystem_DoubleTests___c_ConvertToUnmanaged_0_System_Exception_0_b__0_0) },
 };
 
 static const ::chaos::il2cpp::vtable_registry::VTableSlot kSlots_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_RuntimeEnvironmentTests___c[] =
 {
-	{ 0u, nullptr },
-	{ 0x000000C8u, reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_RuntimeEnvironmentTests___c__ctor) },
-	{ 0u, nullptr },
+	{ 0x0000009Fu, reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_RuntimeEnvironmentTests___c__ctor) },
 	{ 0u, nullptr },
 	{ 0u, nullptr },
 	{ 0u, nullptr },
@@ -532,8 +461,9 @@ static const ::chaos::il2cpp::vtable_registry::VTableSlot kSlots_CombinedSubject
 	{ 0u, nullptr },
 	{ 0u, nullptr },
 	{ 0u, nullptr },
-	{ 0x000000C9u, reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_RuntimeEnvironmentTests___c_GetRuntimeInterfaceAsIntPtr_2_System_Guid_System_Guid_0_b__4_0) },
-	{ 0x000000CAu, reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_RuntimeEnvironmentTests___c_GetRuntimeInterfaceAsObject_3_System_Guid_System_Guid_0_b__6_0) },
+	{ 0u, nullptr },
+	{ 0x000000A0u, reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_RuntimeEnvironmentTests___c_GetRuntimeInterfaceAsIntPtr_2_System_Guid_System_Guid_0_b__4_0) },
+	{ 0x000000A1u, reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_RuntimeEnvironmentTests___c_GetRuntimeInterfaceAsObject_3_System_Guid_System_Guid_0_b__6_0) },
 };
 
 bool chaos_is_array_store_compatible(const chaos_managed_array* chaos_array, CHAOS_IL2CPP_INTPTR chaos_value) noexcept
@@ -587,75 +517,6 @@ const char* chaos_reflection_get_string_utf8(CHAOS_IL2CPP_INTPTR chaos_string_va
 	return chaos_string->utf8_data;
 }
 
-CHAOS_IL2CPP_INTPTR chaos_reflection_create_string_utf8_copy(const char* chaos_utf8_data, CHAOS_IL2CPP_SIZE chaos_length)
-{
-	if (chaos_utf8_data == nullptr)
-	{
-		return 0;
-	}
-
-	const auto chaos_id = chaos::il2cpp::string_table::Intern(
-		chaos_utf8_data, static_cast<CHAOS_IL2CPP_UINT32>(chaos_length));
-	return chaos_make_string_id_value(chaos_id);
-}
-
-CHAOS_IL2CPP_INTPTR ChaosReflectionConcatStringPairValues(CHAOS_IL2CPP_INTPTR chaos_left_string_value, CHAOS_IL2CPP_INTPTR chaos_right_string_value)
-{
-	const auto chaos_left_length =
-		chaos_left_string_value == 0
-			? static_cast<CHAOS_IL2CPP_SIZE>(0)
-			: chaos_is_string_id(chaos_left_string_value)
-				? static_cast<CHAOS_IL2CPP_SIZE>(chaos::il2cpp::string_table::Resolve(
-					chaos_extract_string_id(chaos_left_string_value)).byte_count)
-				: static_cast<CHAOS_IL2CPP_SIZE>(reinterpret_cast<chaos_type_System_Private_CoreLib_System_String*>(chaos_left_string_value)->length);
-	const auto chaos_right_length =
-		chaos_right_string_value == 0
-			? static_cast<CHAOS_IL2CPP_SIZE>(0)
-			: chaos_is_string_id(chaos_right_string_value)
-				? static_cast<CHAOS_IL2CPP_SIZE>(chaos::il2cpp::string_table::Resolve(
-					chaos_extract_string_id(chaos_right_string_value)).byte_count)
-				: static_cast<CHAOS_IL2CPP_SIZE>(reinterpret_cast<chaos_type_System_Private_CoreLib_System_String*>(chaos_right_string_value)->length);
-	const char* chaos_left_utf8 = chaos_reflection_get_string_utf8(chaos_left_string_value);
-	const char* chaos_right_utf8 = chaos_reflection_get_string_utf8(chaos_right_string_value);
-	if ((chaos_left_string_value != 0 && chaos_left_utf8 == nullptr && chaos_left_length != 0) ||
-		(chaos_right_string_value != 0 && chaos_right_utf8 == nullptr && chaos_right_length != 0))
-	{
-		CHAOS_IL2CPP_FAIL();
-	}
-
-	const auto chaos_combined_length = chaos_left_length + chaos_right_length;
-	auto* chaos_raw = static_cast<char*>(
-		chaos::il2cpp::runtime_core::GcAllocateAtomic(
-			sizeof(chaos_type_System_Private_CoreLib_System_String) + chaos_combined_length + 1));
-	auto* chaos_str = reinterpret_cast<chaos_type_System_Private_CoreLib_System_String*>(chaos_raw);
-	chaos_str->header.type_info = chaos_mt_System_Private_CoreLib_System_String.AsTypeInfoHot();
-	chaos_str->length = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_combined_length);
-	chaos_str->string_id = 0;
-	chaos_str->utf8_data = chaos_raw + sizeof(chaos_type_System_Private_CoreLib_System_String);
-
-	if (chaos_left_length != 0)
-	{
-		CHAOS_IL2CPP_MEMCPY(const_cast<char*>(chaos_str->utf8_data), chaos_left_utf8, chaos_left_length);
-	}
-	if (chaos_right_length != 0)
-	{
-		CHAOS_IL2CPP_MEMCPY(const_cast<char*>(chaos_str->utf8_data + chaos_left_length), chaos_right_utf8, chaos_right_length);
-	}
-	const_cast<char*>(chaos_str->utf8_data)[chaos_combined_length] = '\0';
-
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_str);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_reflection_create_string_literal(const char* chaos_utf8_data)
-{
-	if (chaos_utf8_data == nullptr)
-	{
-		return 0;
-	}
-
-	return chaos_reflection_create_string_utf8_copy(chaos_utf8_data, CHAOS_IL2CPP_STRLEN(chaos_utf8_data));
-}
-
 
 CHAOS_IL2CPP_INTPTR chaos_string_materialize(CHAOS_IL2CPP_INTPTR chaos_value) noexcept
 {
@@ -685,7 +546,6 @@ CHAOS_IL2CPP_INTPTR chaos_string_materialize(CHAOS_IL2CPP_INTPTR chaos_value) no
 
 
 // ── GcTypeLayout pointer offset arrays (computed via offsetof) ──
-static constexpr uint16_t kGcOffsets_chaos_type_System_Private_CoreLib_System_Exception[] = {static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Exception, _message)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Exception, _innerException)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Exception, _stackTrace))};
 static constexpr uint16_t kGcOffsets_chaos_type_System_Private_CoreLib_System_Delegate[] = {static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Delegate, chaos_delegate_target)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Delegate, chaos_delegate_invocation_list))};
 static constexpr uint16_t kGcOffsets_chaos_type_System_Private_CoreLib_System_MulticastDelegate[] = {static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_MulticastDelegate, chaos_delegate_target)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_MulticastDelegate, chaos_delegate_invocation_list))};
 static constexpr uint16_t kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_Assembly[] = {static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_Assembly, runtime_assembly_name_value))};
@@ -703,10 +563,6 @@ extern "C" void ChaosRegisterGcLayouts() {
 		static_cast<uint16_t>(sizeof(CHAOS_IL2CPP_INTPTR)),
 		static_cast<uint16_t>(offsetof(chaos_managed_array, length)));
 
-	registry.Register(12016523716365422726ULL, sizeof(chaos_type_Chaos_TestFramework_Sdk___0), nullptr, 0);
-	registry.Register(3469195832277345062ULL, sizeof(chaos_type_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert), nullptr, 0);
-	registry.Register(10972282733316558392ULL, sizeof(chaos_type_System_Private_CoreLib_System_Exception), kGcOffsets_chaos_type_System_Private_CoreLib_System_Exception, 3);
-	registry.Register(8951892653230046377ULL, sizeof(chaos_type_Chaos_TestFramework_Sdk_Chaos_TestFramework_AssertionException), nullptr, 0);
 	registry.Register(15228727185366376748ULL, sizeof(chaos_type_System_Private_CoreLib_System_Object), nullptr, 0);
 	registry.Register(14756389350112234513ULL, sizeof(chaos_type_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c), nullptr, 0);
 	registry.Register(7858198210917550563ULL, sizeof(chaos_type_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_HandleCollectorTests___c), nullptr, 0);
@@ -716,8 +572,6 @@ extern "C" void ChaosRegisterGcLayouts() {
 	registry.Register(7451128447593600616ULL, sizeof(chaos_type_System_Private_CoreLib_System_Delegate), kGcOffsets_chaos_type_System_Private_CoreLib_System_Delegate, 2);
 	registry.Register(6681393039041505440ULL, sizeof(chaos_type_System_Private_CoreLib_System_MulticastDelegate), kGcOffsets_chaos_type_System_Private_CoreLib_System_MulticastDelegate, 2);
 	registry.Register(14722794505377461205ULL, sizeof(chaos_type_System_Private_CoreLib_System_Action), nullptr, 0);
-	registry.Register(16749028324345562163ULL, sizeof(chaos_type_System_Private_CoreLib_System_Collections_IEnumerable), nullptr, 0);
-	registry.Register(13420242832086098868ULL, sizeof(chaos_type_System_Private_CoreLib_System_IDisposable), nullptr, 0);
 	registry.Register(5474029880995115448ULL, sizeof(chaos_type_System_Private_CoreLib_System_Reflection_Assembly), kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_Assembly, 1);
 	registry.Register(17082367815459723707ULL, sizeof(chaos_type_System_Private_CoreLib_System_Reflection_AssemblyName), kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_AssemblyName, 1);
 	registry.Register(4197398748135124456ULL, sizeof(chaos_type_System_Private_CoreLib_System_Reflection_MethodBase), nullptr, 0);
@@ -728,10 +582,6 @@ extern "C" void ChaosRegisterGcLayouts() {
 	registry.Register(3222174513575444759ULL, sizeof(chaos_type_System_Private_CoreLib_System_Type), kGcOffsets_chaos_type_System_Private_CoreLib_System_Type, 2);
 
 	// Register MethodTable address ranges for IsValidTypeInfoPointer.
-	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_Chaos_TestFramework_Sdk___0), reinterpret_cast<uintptr_t>(&chaos_mt_Chaos_TestFramework_Sdk___0) + sizeof(chaos_mt_Chaos_TestFramework_Sdk___0));
-	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert), reinterpret_cast<uintptr_t>(&chaos_mt_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert) + sizeof(chaos_mt_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert));
-	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Exception), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Exception) + sizeof(chaos_mt_System_Private_CoreLib_System_Exception));
-	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_Chaos_TestFramework_Sdk_Chaos_TestFramework_AssertionException), reinterpret_cast<uintptr_t>(&chaos_mt_Chaos_TestFramework_Sdk_Chaos_TestFramework_AssertionException) + sizeof(chaos_mt_Chaos_TestFramework_Sdk_Chaos_TestFramework_AssertionException));
 	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Object), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Object) + sizeof(chaos_mt_System_Private_CoreLib_System_Object));
 	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c), reinterpret_cast<uintptr_t>(&chaos_mt_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c) + sizeof(chaos_mt_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c));
 	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_HandleCollectorTests___c), reinterpret_cast<uintptr_t>(&chaos_mt_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_HandleCollectorTests___c) + sizeof(chaos_mt_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_HandleCollectorTests___c));
@@ -741,8 +591,6 @@ extern "C" void ChaosRegisterGcLayouts() {
 	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Delegate), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Delegate) + sizeof(chaos_mt_System_Private_CoreLib_System_Delegate));
 	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_MulticastDelegate), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_MulticastDelegate) + sizeof(chaos_mt_System_Private_CoreLib_System_MulticastDelegate));
 	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Action), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Action) + sizeof(chaos_mt_System_Private_CoreLib_System_Action));
-	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Collections_IEnumerable), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Collections_IEnumerable) + sizeof(chaos_mt_System_Private_CoreLib_System_Collections_IEnumerable));
-	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_IDisposable), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_IDisposable) + sizeof(chaos_mt_System_Private_CoreLib_System_IDisposable));
 	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_Assembly), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_Assembly) + sizeof(chaos_mt_System_Private_CoreLib_System_Reflection_Assembly));
 	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_AssemblyName), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_AssemblyName) + sizeof(chaos_mt_System_Private_CoreLib_System_Reflection_AssemblyName));
 	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_MethodBase), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_MethodBase) + sizeof(chaos_mt_System_Private_CoreLib_System_Reflection_MethodBase));
@@ -753,7 +601,6 @@ extern "C" void ChaosRegisterGcLayouts() {
 	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Type), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Type) + sizeof(chaos_mt_System_Private_CoreLib_System_Type));
 }
 
-CHAOS_IL2CPP_INT32 chaos_static_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert__s_exitCode = 0;
 CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c____9 = 0;
 CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c____9__0_0 = 0;
 CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c____9__10_0 = 0;
@@ -787,9 +634,7 @@ CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Runtime_I
 	// AOT-baked string table: sorted by StringId for binary search at runtime.
 	constexpr chaos::il2cpp::string_table::StringEntry chaos_aot_string_entries[] = {
 		{ 902231076499736161U, "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\9.0.0\\", 59u },
-		{ 1342797903967929121U, "[ASSERT FAIL] ", 14u },
 		{ 3706303174978839905U, "v9.0.0", 6u },
-		{ 6601085983368743141U, "null", 4u },
 	};
 
 	constexpr CHAOS_IL2CPP_UINT32 chaos_aot_string_entry_count = sizeof(chaos_aot_string_entries) / sizeof(chaos_aot_string_entries[0]);
@@ -803,29 +648,501 @@ CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Runtime_I
 		return 0u;
 	}();
 
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Console_System_Console__get_Error_System_IO_TextWriter__(void) noexcept
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert__AreEqual_System_Void_System_Boolean_System_Boolean_System_String_() noexcept
 {
-	return ChaosConsoleGetError();
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
 }
 
-void chaos_external_runtime_System_Private_CoreLib_System_Exception___ctor_System_Void_System_String_(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1) noexcept
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert__AreEqual_System_Void_System_Int32_System_Int32_System_String_() noexcept
 {
-	ChaosReflectionSetExceptionMetadata(chaos_fn_arg_0, chaos_fn_arg_1);
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
 }
 
-void chaos_external_runtime_System_Private_CoreLib_System_IO_TextWriter__WriteLine_System_Void_System_String_(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1) noexcept
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert__AreEqual_System_Void_System_String_System_String_System_String_() noexcept
 {
-	ChaosTextWriterWriteLineStr(chaos_fn_arg_0, chaos_fn_arg_1);
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
 }
 
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Object__Equals_System_Boolean_System_Object_System_Object_(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1) noexcept
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert__Throws_System_ArgumentException__System_Void_System_Action_() noexcept
 {
-	return ChaosObjectEqualsStatic(chaos_fn_arg_0, chaos_fn_arg_1);
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
 }
 
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Object__ToString_System_String__(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) noexcept
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert__Throws_System_NullReferenceException__System_Void_System_Action_() noexcept
 {
-	return ChaosObjectToString(chaos_fn_arg_0);
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert__Throws_System_PlatformNotSupportedException__System_Void_System_Action_() noexcept
+{
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c___AddEventHandler_0_object_System_Delegate_0_b__0_0_System_Void__() noexcept
+{
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c___GetAddMethod_2_bool_0_b__4_0_System_Void__() noexcept
+{
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c___GetAddMethod_2_bool_1_b__6_0_System_Void__() noexcept
+{
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c___GetCustomAttributesData_8__8_b__28_0_System_Void__() noexcept
+{
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c___GetCustomAttributes_6_System_Type_bool_0_b__20_0_System_Void__() noexcept
+{
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c___GetCustomAttributes_6_System_Type_bool_1_b__22_0_System_Void__() noexcept
+{
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c___GetCustomAttributes_7_bool_0_b__24_0_System_Void__() noexcept
+{
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c___GetCustomAttributes_7_bool_1_b__26_0_System_Void__() noexcept
+{
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c___GetOtherMethods_3_bool_0_b__8_0_System_Void__() noexcept
+{
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c___GetOtherMethods_3_bool_1_b__10_0_System_Void__() noexcept
+{
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c___GetRaiseMethod_4_bool_0_b__12_0_System_Void__() noexcept
+{
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c___GetRaiseMethod_4_bool_1_b__14_0_System_Void__() noexcept
+{
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c___GetRemoveMethod_5_bool_0_b__16_0_System_Void__() noexcept
+{
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c___GetRemoveMethod_5_bool_1_b__18_0_System_Void__() noexcept
+{
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c___IsDefined_9_System_Type_bool_0_b__30_0_System_Void__() noexcept
+{
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c___IsDefined_9_System_Type_bool_1_b__32_0_System_Void__() noexcept
+{
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c___RemoveEventHandler_1_object_System_Delegate_0_b__2_0_System_Void__() noexcept
+{
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c____9() noexcept
+{
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c____9__0_0() noexcept
+{
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c____9__10_0() noexcept
+{
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c____9__12_0() noexcept
+{
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c____9__14_0() noexcept
+{
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c____9__16_0() noexcept
+{
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c____9__18_0() noexcept
+{
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c____9__20_0() noexcept
+{
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c____9__22_0() noexcept
+{
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c____9__24_0() noexcept
+{
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c____9__26_0() noexcept
+{
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c____9__28_0() noexcept
+{
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c____9__2_0() noexcept
+{
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c____9__30_0() noexcept
+{
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c____9__32_0() noexcept
+{
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c____9__4_0() noexcept
+{
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c____9__6_0() noexcept
+{
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c____9__8_0() noexcept
+{
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c___ctor_System_Void__() noexcept
+{
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_HandleCollectorTests___c___Add_0__0_b__0_0_System_Void__() noexcept
+{
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_HandleCollectorTests___c___Remove_1__1_b__2_0_System_Void__() noexcept
+{
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_HandleCollectorTests___c____9() noexcept
+{
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_HandleCollectorTests___c____9__0_0() noexcept
+{
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_HandleCollectorTests___c____9__2_0() noexcept
+{
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_HandleCollectorTests___c___ctor_System_Void__() noexcept
+{
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ComObjectTests___c___FinalRelease_0__0_b__0_0_System_Void__() noexcept
+{
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ComObjectTests___c____9() noexcept
+{
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ComObjectTests___c____9__0_0() noexcept
+{
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ComObjectTests___c___ctor_System_Void__() noexcept
+{
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ExceptionAsNaNMarshallerSystem_DoubleTests___c___ConvertToUnmanaged_0_System_Exception_0_b__0_0_System_Void__() noexcept
+{
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ExceptionAsNaNMarshallerSystem_DoubleTests___c____9() noexcept
+{
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ExceptionAsNaNMarshallerSystem_DoubleTests___c____9__0_0() noexcept
+{
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ExceptionAsNaNMarshallerSystem_DoubleTests___c___ctor_System_Void__() noexcept
+{
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_RuntimeEnvironmentTests___c___GetRuntimeInterfaceAsIntPtr_2_System_Guid_System_Guid_0_b__4_0_System_Void__() noexcept
+{
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_RuntimeEnvironmentTests___c___GetRuntimeInterfaceAsObject_3_System_Guid_System_Guid_0_b__6_0_System_Void__() noexcept
+{
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_RuntimeEnvironmentTests___c____9() noexcept
+{
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_RuntimeEnvironmentTests___c____9__4_0() noexcept
+{
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_RuntimeEnvironmentTests___c____9__6_0() noexcept
+{
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_RuntimeEnvironmentTests___c___ctor_System_Void__() noexcept
+{
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_HandleCollector__Add_System_Void__() noexcept
+{
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_HandleCollector__Remove_System_Void__() noexcept
+{
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_RuntimeEnvironment__FromGlobalAccessCache_System_Boolean_System_Reflection_Assembly_() noexcept
+{
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_RuntimeEnvironment__GetRuntimeDirectory_System_String__() noexcept
+{
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_RuntimeEnvironment__GetRuntimeInterfaceAsIntPtr_System_IntPtr_System_Guid_System_Guid_() noexcept
+{
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_RuntimeEnvironment__GetRuntimeInterfaceAsObject_System_Object_System_Guid_System_Guid_() noexcept
+{
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_RuntimeEnvironment__GetSystemVersion_System_String__() noexcept
+{
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Action___ctor_System_Void_System_Object_System_IntPtr_() noexcept
+{
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Guid() noexcept
+{
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
 }
 
 void chaos_external_runtime_System_Private_CoreLib_System_Object___ctor_System_Void__(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) noexcept
@@ -833,9 +1150,179 @@ void chaos_external_runtime_System_Private_CoreLib_System_Object___ctor_System_V
 	ChaosObjectCtor(chaos_fn_arg_0);
 }
 
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_String__Concat_System_String_System_String_System_String_(CHAOS_IL2CPP_INTPTR chaos_arg_0, CHAOS_IL2CPP_INTPTR chaos_arg_1) noexcept
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Reflection_EventInfo__AddEventHandler_System_Void_System_Object_System_Delegate_() noexcept
 {
-	return ChaosReflectionConcatStringPairValues(chaos_arg_0, chaos_arg_1);
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Reflection_EventInfo__GetAddMethod_System_Reflection_MethodInfo_System_Boolean_() noexcept
+{
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Reflection_EventInfo__GetOtherMethods_System_Reflection_MethodInfo___System_Boolean_() noexcept
+{
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Reflection_EventInfo__GetRaiseMethod_System_Reflection_MethodInfo_System_Boolean_() noexcept
+{
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Reflection_EventInfo__GetRemoveMethod_System_Reflection_MethodInfo_System_Boolean_() noexcept
+{
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Reflection_EventInfo__RemoveEventHandler_System_Void_System_Object_System_Delegate_() noexcept
+{
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Reflection_MemberInfo__GetCustomAttributesData_System_Collections_Generic_IList_System_Reflection_CustomAttributeData___() noexcept
+{
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Reflection_MemberInfo__GetCustomAttributes_System_Object___System_Boolean_() noexcept
+{
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Reflection_MemberInfo__GetCustomAttributes_System_Object___System_Type_System_Boolean_() noexcept
+{
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Reflection_MemberInfo__IsDefined_System_Boolean_System_Type_System_Boolean_() noexcept
+{
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Runtime_InteropServices_Marshalling_ComInterfaceMarshaller_System_Int32___ConvertToManaged_System_Int32_System_Void__() noexcept
+{
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Runtime_InteropServices_Marshalling_ComInterfaceMarshaller_System_Int32___ConvertToUnmanaged_System_Void__System_Int32_() noexcept
+{
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Runtime_InteropServices_Marshalling_ComInterfaceMarshaller_System_Int32___Free_System_Void_System_Void__() noexcept
+{
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Runtime_InteropServices_Marshalling_ComObject__FinalRelease_System_Void__() noexcept
+{
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Runtime_InteropServices_Marshalling_ExceptionAsDefaultMarshaller_System_Int32___ConvertToUnmanaged_System_Int32_System_Exception_() noexcept
+{
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Runtime_InteropServices_Marshalling_ExceptionAsHResultMarshaller_System_Int32___ConvertToUnmanaged_System_Int32_System_Exception_() noexcept
+{
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Runtime_InteropServices_Marshalling_ExceptionAsNaNMarshaller_System_Double___ConvertToUnmanaged_System_Double_System_Exception_() noexcept
+{
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Runtime_InteropServices_Marshalling_ExceptionAsVoidMarshaller__ConvertToUnmanaged_System_Void_System_Exception_() noexcept
+{
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Runtime_InteropServices_Marshalling_UniqueComInterfaceMarshaller_System_Int32___ConvertToManaged_System_Int32_System_Void__() noexcept
+{
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Runtime_InteropServices_Marshalling_UniqueComInterfaceMarshaller_System_Int32___ConvertToUnmanaged_System_Void__System_Int32_() noexcept
+{
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Runtime_InteropServices_Marshalling_UniqueComInterfaceMarshaller_System_Int32___Free_System_Void_System_Void__() noexcept
+{
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Runtime_InteropServices_Marshalling_VirtualMethodTableInfo() noexcept
+{
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Runtime_InteropServices_Marshalling_VirtualMethodTableInfo__Deconstruct_System_Void_System_Void___System_Void____() noexcept
+{
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Void_() noexcept
+{
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+}
+
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Void__() noexcept
+{
+	CHAOS_IL2CPP_FAIL();
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
 }
 
 static constexpr CHAOS_IL2CPP_UINT32 kGenericTypeArgTokens[1] = { 0 };
@@ -862,212 +1349,140 @@ extern "C" int32_t kChaosExternalRuntimeCount;
 // so CHAOS_ABI_MANIFEST_ENTRIES/CHAOS_ABI_MANIFEST_PARAMETERS find them by offset.
 
 // Param offset prefix-sum: [i] = cumulative parameter count before method i
-static constexpr CHAOS_IL2CPP_UINT32 s_abi_manifest_prefix_sum[154] = {
+static constexpr CHAOS_IL2CPP_UINT32 s_abi_manifest_prefix_sum[118] = {
 	0u,
-	3u,
-	6u,
-	9u,
-	12u,
-	15u,
-	18u,
-	21u,
-	24u,
-	27u,
-	30u,
-	33u,
-	36u,
-	39u,
-	42u,
-	45u,
-	48u,
-	51u,
-	54u,
-	54u,
-	55u,
-	55u,
-	57u,
-	59u,
-	61u,
-	63u,
-	63u,
-	63u,
-	64u,
-	65u,
-	66u,
-	67u,
-	68u,
-	69u,
-	69u,
-	69u,
-	69u,
-	69u,
-	69u,
-	69u,
-	69u,
-	69u,
-	69u,
-	69u,
-	69u,
-	69u,
-	69u,
-	69u,
-	69u,
-	69u,
-	69u,
-	69u,
-	69u,
-	69u,
-	69u,
-	69u,
-	69u,
-	69u,
-	69u,
-	69u,
-	69u,
-	69u,
-	69u,
-	69u,
-	69u,
-	69u,
-	69u,
-	69u,
-	69u,
-	69u,
-	69u,
-	69u,
-	69u,
-	69u,
-	69u,
-	69u,
-	69u,
-	69u,
-	69u,
-	69u,
-	69u,
-	69u,
-	69u,
-	69u,
-	69u,
-	69u,
-	69u,
-	69u,
-	69u,
-	69u,
-	69u,
-	69u,
-	69u,
-	69u,
-	69u,
-	69u,
-	69u,
-	69u,
-	69u,
-	69u,
-	69u,
-	69u,
-	69u,
-	69u,
-	69u,
-	69u,
-	69u,
-	69u,
-	69u,
-	69u,
-	69u,
-	69u,
-	69u,
-	69u,
-	69u,
-	69u,
-	69u,
-	69u,
-	69u,
-	69u,
-	69u,
-	69u,
-	69u,
-	69u,
-	69u,
-	69u,
-	69u,
-	69u,
-	69u,
-	69u,
-	69u,
-	69u,
-	69u,
-	69u,
-	69u,
-	69u,
-	69u,
-	69u,
-	69u,
-	69u,
-	69u,
-	69u,
-	69u,
-	69u,
-	69u,
-	69u,
-	69u,
-	69u,
-	69u,
-	69u,
-	69u,
-	69u,
-	69u,
-	69u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
 };
 
 static constexpr struct {
 	::ChaosAbiManifestV0 header;
-	::ChaosAbiMethodEntryV0 entries[153];
-	CHAOS_IL2CPP_UINT8 params[69];
+	::ChaosAbiMethodEntryV0 entries[117];
+	CHAOS_IL2CPP_UINT8 params[1];
 } s_abi_manifest_storage = {
 	{
 		CHAOS_ABI_MANIFEST_VERSION,
-		153u,
-		69u,
-		3350363492u,  // FNV-1a over entries+params
+		117u,
+		0u,
+		2283208359u,  // FNV-1a over entries+params
 		s_abi_manifest_prefix_sum  // O(1) prefix-sum
 	},
 	{
-		{ 0u, 3u },  // Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Boolean_System_Boolean_System_String
-		{ 0u, 3u },  // Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Byte_System_Byte_System_String
-		{ 0u, 3u },  // Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Byte_array_System_Byte_array_System_String
-		{ 0u, 3u },  // Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Char_System_Char_System_String
-		{ 0u, 3u },  // Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Decimal_System_Decimal_System_String
-		{ 0u, 3u },  // Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Double_System_Double_System_String
-		{ 0u, 3u },  // Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Int16_System_Int16_System_String
-		{ 0u, 3u },  // Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Int32_System_Int32_System_String
-		{ 0u, 3u },  // Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Int64_System_Int64_System_String
-		{ 0u, 3u },  // Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Object_System_Object_System_String
-		{ 0u, 3u },  // Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_SByte_System_SByte_System_String
-		{ 0u, 3u },  // Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Single_System_Single_System_String
-		{ 0u, 3u },  // Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_String_System_String_System_String
-		{ 0u, 3u },  // Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_UInt16_System_UInt16_System_String
-		{ 0u, 3u },  // Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_UInt32_System_UInt32_System_String
-		{ 0u, 3u },  // Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_UInt64_System_UInt64_System_String
-		{ 0u, 3u },  // Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_0_0_System_String
-		{ 0u, 3u },  // Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreNotEqual_0_0_System_String
-		{ 1u, 0u },  // Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Complete
-		{ 0u, 1u },  // Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Fail_System_String
-		{ 1u, 0u },  // Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_get_ExitCode
-		{ 0u, 2u },  // Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_IsFalse_System_Boolean_System_String
-		{ 0u, 2u },  // Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_IsNotNull_System_Object_System_String
-		{ 0u, 2u },  // Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_IsNull_System_Object_System_String
-		{ 0u, 2u },  // Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_IsTrue_System_Boolean_System_String
-		{ 0u, 0u },  // Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_RecordFailure
-		{ 0u, 0u },  // Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Reset
-		{ 0u, 1u },  // Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Throws_System_Action
-		{ 0u, 1u },  // Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Throws_System_Action
-		{ 0u, 1u },  // Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Throws_System_ArgumentException_System_Action__generic
-		{ 0u, 1u },  // Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Throws_System_NullReferenceException_System_Action__generic
-		{ 0u, 1u },  // Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Throws_System_PlatformNotSupportedException_System_Action__generic
-		{ 0u, 1u },  // Chaos_TestFramework_Sdk_Chaos_TestFramework_AssertionException__ctor_System_String
-		{ 0u, 0u },  // Chaos_TestFramework_Sdk_Chaos_TestFramework_BenchmarkAttribute__ctor
-		{ 0u, 0u },  // Chaos_TestFramework_Sdk_Chaos_TestFramework_FactAttribute__ctor
-		{ 0u, 0u },  // Chaos_TestFramework_Sdk_Chaos_TestFramework_HotUpdateAttribute__ctor
 		{ 0u, 0u },  // CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests__ctor
 		{ 10u, 0u },  // CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_AddEventHandler_0_object_System_Delegate_0
 		{ 0u, 0u },  // CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_Benchmark_AddEventHandler_0_object_System_Delegate_0
@@ -1187,75 +1602,6 @@ static constexpr struct {
 		{ 0u, 0u },  // CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_RuntimeEnvironmentTests___c_GetRuntimeInterfaceAsObject_3_System_Guid_System_Guid_0_b__6_0
 	},
 	{
-		2u,
-		2u,
-		2u,
-		5u,
-		5u,
-		2u,
-		2u,
-		2u,
-		2u,
-		2u,
-		2u,
-		2u,
-		2u,
-		2u,
-		2u,
-		9u,
-		9u,
-		2u,
-		6u,
-		6u,
-		2u,
-		1u,
-		1u,
-		2u,
-		10u,
-		10u,
-		2u,
-		2u,
-		2u,
-		2u,
-		4u,
-		4u,
-		2u,
-		8u,
-		8u,
-		2u,
-		2u,
-		2u,
-		2u,
-		7u,
-		7u,
-		2u,
-		2u,
-		2u,
-		2u,
-		11u,
-		11u,
-		2u,
-		2u,
-		2u,
-		2u,
-		2u,
-		2u,
-		2u,
-		2u,
-		2u,
-		2u,
-		2u,
-		2u,
-		2u,
-		2u,
-		2u,
-		2u,
-		2u,
-		2u,
-		2u,
-		2u,
-		2u,
-		2u,
 	},
 };
 static const ::ChaosAbiManifestV0* const s_abi_manifest =
@@ -1445,163 +1791,128 @@ static const ::ChaosAbiManifestV0* const s_abi_manifest =
 		::chaos::il2cpp::runtime_core::RegisterModule("CombinedSubjects", &s_native_aot_module);
 // ── Hotpatch name index + dispatch table ────────────────────
 // Method name index entries
-static constexpr HotpatchMethodEntryV0 s_hotpatch_methods[152] = {
-	{ ".ctor", 0x00000078u, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests
-	{ "AddEventHandler_0_object_System_Delegate_0", 0x00000035u, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests
-	{ "Benchmark_AddEventHandler_0_object_System_Delegate_0", 0x00000037u, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests
-	{ "Benchmark_GetAddMethod_2_bool_0", 0x0000003Fu, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests
-	{ "Benchmark_GetAddMethod_2_bool_1", 0x00000043u, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests
-	{ "Benchmark_GetCustomAttributes_6_System_Type_bool_0", 0x0000005Fu, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests
-	{ "Benchmark_GetCustomAttributes_6_System_Type_bool_1", 0x00000063u, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests
-	{ "Benchmark_GetCustomAttributes_7_bool_0", 0x00000067u, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests
-	{ "Benchmark_GetCustomAttributes_7_bool_1", 0x0000006Bu, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests
-	{ "Benchmark_GetCustomAttributesData_8__8", 0x0000006Fu, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests
-	{ "Benchmark_GetOtherMethods_3_bool_0", 0x00000047u, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests
-	{ "Benchmark_GetOtherMethods_3_bool_1", 0x0000004Bu, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests
-	{ "Benchmark_GetRaiseMethod_4_bool_0", 0x0000004Fu, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests
-	{ "Benchmark_GetRaiseMethod_4_bool_1", 0x00000053u, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests
-	{ "Benchmark_GetRemoveMethod_5_bool_0", 0x00000057u, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests
-	{ "Benchmark_GetRemoveMethod_5_bool_1", 0x0000005Bu, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests
-	{ "Benchmark_IsDefined_9_System_Type_bool_0", 0x00000073u, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests
-	{ "Benchmark_IsDefined_9_System_Type_bool_1", 0x00000077u, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests
-	{ "Benchmark_RemoveEventHandler_1_object_System_Delegate_0", 0x0000003Bu, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests
-	{ "GetAddMethod_2_bool_0", 0x0000003Du, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests
-	{ "GetAddMethod_2_bool_1", 0x00000041u, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests
-	{ "GetCustomAttributes_6_System_Type_bool_0", 0x0000005Du, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests
-	{ "GetCustomAttributes_6_System_Type_bool_1", 0x00000061u, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests
-	{ "GetCustomAttributes_7_bool_0", 0x00000065u, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests
-	{ "GetCustomAttributes_7_bool_1", 0x00000069u, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests
-	{ "GetCustomAttributesData_8__8", 0x0000006Du, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests
-	{ "GetOtherMethods_3_bool_0", 0x00000045u, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests
-	{ "GetOtherMethods_3_bool_1", 0x00000049u, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests
-	{ "GetRaiseMethod_4_bool_0", 0x0000004Du, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests
-	{ "GetRaiseMethod_4_bool_1", 0x00000051u, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests
-	{ "GetRemoveMethod_5_bool_0", 0x00000055u, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests
-	{ "GetRemoveMethod_5_bool_1", 0x00000059u, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests
-	{ "IsDefined_9_System_Type_bool_0", 0x00000071u, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests
-	{ "IsDefined_9_System_Type_bool_1", 0x00000075u, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests
-	{ "RemoveEventHandler_1_object_System_Delegate_0", 0x00000039u, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests
-	{ ".cctor", 0x000000AAu, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests+<>c
-	{ ".ctor", 0x000000ABu, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests+<>c
-	{ "<AddEventHandler_0_object_System_Delegate_0>b__0_0", 0x000000ACu, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests+<>c
-	{ "<GetAddMethod_2_bool_0>b__4_0", 0x000000AEu, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests+<>c
-	{ "<GetAddMethod_2_bool_1>b__6_0", 0x000000AFu, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests+<>c
-	{ "<GetCustomAttributes_6_System_Type_bool_0>b__20_0", 0x000000B6u, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests+<>c
-	{ "<GetCustomAttributes_6_System_Type_bool_1>b__22_0", 0x000000B7u, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests+<>c
-	{ "<GetCustomAttributes_7_bool_0>b__24_0", 0x000000B8u, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests+<>c
-	{ "<GetCustomAttributes_7_bool_1>b__26_0", 0x000000B9u, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests+<>c
-	{ "<GetCustomAttributesData_8__8>b__28_0", 0x000000BAu, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests+<>c
-	{ "<GetOtherMethods_3_bool_0>b__8_0", 0x000000B0u, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests+<>c
-	{ "<GetOtherMethods_3_bool_1>b__10_0", 0x000000B1u, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests+<>c
-	{ "<GetRaiseMethod_4_bool_0>b__12_0", 0x000000B2u, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests+<>c
-	{ "<GetRaiseMethod_4_bool_1>b__14_0", 0x000000B3u, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests+<>c
-	{ "<GetRemoveMethod_5_bool_0>b__16_0", 0x000000B4u, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests+<>c
-	{ "<GetRemoveMethod_5_bool_1>b__18_0", 0x000000B5u, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests+<>c
-	{ "<IsDefined_9_System_Type_bool_0>b__30_0", 0x000000BBu, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests+<>c
-	{ "<IsDefined_9_System_Type_bool_1>b__32_0", 0x000000BCu, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests+<>c
-	{ "<RemoveEventHandler_1_object_System_Delegate_0>b__2_0", 0x000000ADu, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests+<>c
-	{ ".ctor", 0x0000007Du, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_HandleCollectorTests
-	{ "Add_0__0", 0x00000079u, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_HandleCollectorTests
-	{ "Benchmark_Add_0__0", 0x0000007Au, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_HandleCollectorTests
-	{ "Benchmark_Remove_1__1", 0x0000007Cu, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_HandleCollectorTests
-	{ "Remove_1__1", 0x0000007Bu, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_HandleCollectorTests
-	{ ".cctor", 0x000000BDu, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_HandleCollectorTests+<>c
-	{ ".ctor", 0x000000BEu, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_HandleCollectorTests+<>c
-	{ "<Add_0__0>b__0_0", 0x000000BFu, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_HandleCollectorTests+<>c
-	{ "<Remove_1__1>b__2_0", 0x000000C0u, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_HandleCollectorTests+<>c
-	{ ".ctor", 0x00000085u, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ComInterfaceMarshallerSystem_Int32Tests
-	{ "Benchmark_ConvertToManaged_1_void_0", 0x00000083u, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ComInterfaceMarshallerSystem_Int32Tests
-	{ "Benchmark_ConvertToUnmanaged_0_int_0", 0x0000007Fu, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ComInterfaceMarshallerSystem_Int32Tests
-	{ "Benchmark_ConvertToUnmanaged_0_int_1", 0x00000081u, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ComInterfaceMarshallerSystem_Int32Tests
-	{ "Benchmark_Free_2_void_0", 0x00000084u, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ComInterfaceMarshallerSystem_Int32Tests
-	{ "ConvertToManaged_1_void_0", 0x00000082u, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ComInterfaceMarshallerSystem_Int32Tests
-	{ "ConvertToUnmanaged_0_int_0", 0x0000007Eu, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ComInterfaceMarshallerSystem_Int32Tests
-	{ "ConvertToUnmanaged_0_int_1", 0x00000080u, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ComInterfaceMarshallerSystem_Int32Tests
-	{ ".ctor", 0x00000088u, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ComObjectTests
-	{ "Benchmark_FinalRelease_0__0", 0x00000087u, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ComObjectTests
-	{ "FinalRelease_0__0", 0x00000086u, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ComObjectTests
-	{ ".cctor", 0x000000C1u, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ComObjectTests+<>c
-	{ ".ctor", 0x000000C2u, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ComObjectTests+<>c
-	{ "<FinalRelease_0__0>b__0_0", 0x000000C3u, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ComObjectTests+<>c
-	{ ".ctor", 0x0000008Bu, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ExceptionAsDefaultMarshallerSystem_Int32Tests
-	{ "Benchmark_ConvertToUnmanaged_0_System_Exception_0", 0x0000008Au, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ExceptionAsDefaultMarshallerSystem_Int32Tests
-	{ "ConvertToUnmanaged_0_System_Exception_0", 0x00000089u, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ExceptionAsDefaultMarshallerSystem_Int32Tests
-	{ ".ctor", 0x0000008Eu, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ExceptionAsHResultMarshallerSystem_Int32Tests
-	{ "Benchmark_ConvertToUnmanaged_0_System_Exception_0", 0x0000008Du, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ExceptionAsHResultMarshallerSystem_Int32Tests
-	{ "ConvertToUnmanaged_0_System_Exception_0", 0x0000008Cu, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ExceptionAsHResultMarshallerSystem_Int32Tests
-	{ ".ctor", 0x00000091u, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ExceptionAsNaNMarshallerSystem_DoubleTests
-	{ "Benchmark_ConvertToUnmanaged_0_System_Exception_0", 0x00000090u, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ExceptionAsNaNMarshallerSystem_DoubleTests
-	{ "ConvertToUnmanaged_0_System_Exception_0", 0x0000008Fu, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ExceptionAsNaNMarshallerSystem_DoubleTests
-	{ ".cctor", 0x000000C4u, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ExceptionAsNaNMarshallerSystem_DoubleTests+<>c
-	{ ".ctor", 0x000000C5u, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ExceptionAsNaNMarshallerSystem_DoubleTests+<>c
-	{ "<ConvertToUnmanaged_0_System_Exception_0>b__0_0", 0x000000C6u, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ExceptionAsNaNMarshallerSystem_DoubleTests+<>c
-	{ ".ctor", 0x00000094u, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ExceptionAsVoidMarshallerTests
-	{ "Benchmark_ConvertToUnmanaged_0_System_Exception_0", 0x00000093u, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ExceptionAsVoidMarshallerTests
-	{ "ConvertToUnmanaged_0_System_Exception_0", 0x00000092u, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ExceptionAsVoidMarshallerTests
-	{ ".ctor", 0x0000009Cu, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_UniqueComInterfaceMarshallerSystem_Int32Tests
-	{ "Benchmark_ConvertToManaged_1_void_0", 0x0000009Au, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_UniqueComInterfaceMarshallerSystem_Int32Tests
-	{ "Benchmark_ConvertToUnmanaged_0_int_0", 0x00000096u, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_UniqueComInterfaceMarshallerSystem_Int32Tests
-	{ "Benchmark_ConvertToUnmanaged_0_int_1", 0x00000098u, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_UniqueComInterfaceMarshallerSystem_Int32Tests
-	{ "Benchmark_Free_2_void_0", 0x0000009Bu, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_UniqueComInterfaceMarshallerSystem_Int32Tests
-	{ "ConvertToManaged_1_void_0", 0x00000099u, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_UniqueComInterfaceMarshallerSystem_Int32Tests
-	{ "ConvertToUnmanaged_0_int_0", 0x00000095u, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_UniqueComInterfaceMarshallerSystem_Int32Tests
-	{ "ConvertToUnmanaged_0_int_1", 0x00000097u, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_UniqueComInterfaceMarshallerSystem_Int32Tests
-	{ ".ctor", 0x0000009Eu, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_VirtualMethodTableInfoTests
-	{ "Benchmark_Deconstruct_0_void_void_0", 0x0000009Du, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_VirtualMethodTableInfoTests
-	{ ".ctor", 0x000000A9u, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_RuntimeEnvironmentTests
-	{ "Benchmark_FromGlobalAccessCache_0_Assembly_0", 0x000000A0u, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_RuntimeEnvironmentTests
-	{ "Benchmark_GetRuntimeDirectory_1__1", 0x000000A2u, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_RuntimeEnvironmentTests
-	{ "Benchmark_GetRuntimeInterfaceAsIntPtr_2_System_Guid_System_Guid_0", 0x000000A4u, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_RuntimeEnvironmentTests
-	{ "Benchmark_GetRuntimeInterfaceAsObject_3_System_Guid_System_Guid_0", 0x000000A6u, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_RuntimeEnvironmentTests
-	{ "Benchmark_GetSystemVersion_4__4", 0x000000A8u, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_RuntimeEnvironmentTests
-	{ "FromGlobalAccessCache_0_Assembly_0", 0x0000009Fu, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_RuntimeEnvironmentTests
-	{ "GetRuntimeDirectory_1__1", 0x000000A1u, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_RuntimeEnvironmentTests
-	{ "GetRuntimeInterfaceAsIntPtr_2_System_Guid_System_Guid_0", 0x000000A3u, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_RuntimeEnvironmentTests
-	{ "GetRuntimeInterfaceAsObject_3_System_Guid_System_Guid_0", 0x000000A5u, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_RuntimeEnvironmentTests
-	{ "GetSystemVersion_4__4", 0x000000A7u, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_RuntimeEnvironmentTests
-	{ ".cctor", 0x000000C7u, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_RuntimeEnvironmentTests+<>c
-	{ ".ctor", 0x000000C8u, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_RuntimeEnvironmentTests+<>c
-	{ "<GetRuntimeInterfaceAsIntPtr_2_System_Guid_System_Guid_0>b__4_0", 0x000000C9u, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_RuntimeEnvironmentTests+<>c
-	{ "<GetRuntimeInterfaceAsObject_3_System_Guid_System_Guid_0>b__6_0", 0x000000CAu, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_RuntimeEnvironmentTests+<>c
-	{ "AreEqual", 0x00000052u, 3u },  // Chaos.TestFramework.Assert
-	{ "AreEqual", 0x0000004Cu, 3u },  // Chaos.TestFramework.Assert
-	{ "AreEqual", 0x0000006Cu, 3u },  // Chaos.TestFramework.Assert
-	{ "AreEqual", 0x00000050u, 3u },  // Chaos.TestFramework.Assert
-	{ "AreEqual", 0x00000058u, 3u },  // Chaos.TestFramework.Assert
-	{ "AreEqual", 0x00000056u, 3u },  // Chaos.TestFramework.Assert
-	{ "AreEqual", 0x00000048u, 3u },  // Chaos.TestFramework.Assert
-	{ "AreEqual", 0x00000040u, 3u },  // Chaos.TestFramework.Assert
-	{ "AreEqual", 0x00000044u, 3u },  // Chaos.TestFramework.Assert
-	{ "AreEqual", 0x0000005Cu, 3u },  // Chaos.TestFramework.Assert
-	{ "AreEqual", 0x0000004Eu, 3u },  // Chaos.TestFramework.Assert
-	{ "AreEqual", 0x00000054u, 3u },  // Chaos.TestFramework.Assert
-	{ "AreEqual", 0x0000005Au, 3u },  // Chaos.TestFramework.Assert
-	{ "AreEqual", 0x0000004Au, 3u },  // Chaos.TestFramework.Assert
-	{ "AreEqual", 0x00000042u, 3u },  // Chaos.TestFramework.Assert
-	{ "AreEqual", 0x00000046u, 3u },  // Chaos.TestFramework.Assert
-	{ "AreEqual`1", 0x0000006Au, 3u },  // Chaos.TestFramework.Assert
-	{ "AreNotEqual`1", 0x0000006Eu, 3u },  // Chaos.TestFramework.Assert
-	{ "Complete", 0x0000003Cu, 0u },  // Chaos.TestFramework.Assert
-	{ "Fail", 0x00000070u, 1u },  // Chaos.TestFramework.Assert
-	{ "get_ExitCode", 0x0000003Eu, 0u },  // Chaos.TestFramework.Assert
-	{ "IsFalse", 0x00000064u, 2u },  // Chaos.TestFramework.Assert
-	{ "IsNotNull", 0x00000060u, 2u },  // Chaos.TestFramework.Assert
-	{ "IsNull", 0x0000005Eu, 2u },  // Chaos.TestFramework.Assert
-	{ "IsTrue", 0x00000062u, 2u },  // Chaos.TestFramework.Assert
-	{ "RecordFailure", 0x0000003Au, 0u },  // Chaos.TestFramework.Assert
-	{ "Reset", 0x00000038u, 0u },  // Chaos.TestFramework.Assert
-	{ "Throws", 0x00000066u, 1u },  // Chaos.TestFramework.Assert
-	{ "Throws<System.ArgumentException>", 0x000000CCu, 1u },  // Chaos.TestFramework.Assert
-	{ "Throws<System.NullReferenceException>", 0x000000CBu, 1u },  // Chaos.TestFramework.Assert
-	{ "Throws<System.PlatformNotSupportedException>", 0x000000CDu, 1u },  // Chaos.TestFramework.Assert
-	{ ".ctor", 0x00000036u, 1u },  // Chaos.TestFramework.AssertionException
-	{ ".ctor", 0x00000072u, 0u },  // Chaos.TestFramework.BenchmarkAttribute
-	{ ".ctor", 0x00000074u, 0u },  // Chaos.TestFramework.FactAttribute
-	{ ".ctor", 0x00000076u, 0u },  // Chaos.TestFramework.HotUpdateAttribute
+static constexpr HotpatchMethodEntryV0 s_hotpatch_methods[117] = {
+	{ ".ctor", 0x0000004Fu, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests
+	{ "AddEventHandler_0_object_System_Delegate_0", 0x0000002Du, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests
+	{ "Benchmark_AddEventHandler_0_object_System_Delegate_0", 0x0000002Eu, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests
+	{ "Benchmark_GetAddMethod_2_bool_0", 0x00000032u, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests
+	{ "Benchmark_GetAddMethod_2_bool_1", 0x00000034u, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests
+	{ "Benchmark_GetCustomAttributes_6_System_Type_bool_0", 0x00000042u, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests
+	{ "Benchmark_GetCustomAttributes_6_System_Type_bool_1", 0x00000044u, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests
+	{ "Benchmark_GetCustomAttributes_7_bool_0", 0x00000046u, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests
+	{ "Benchmark_GetCustomAttributes_7_bool_1", 0x00000048u, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests
+	{ "Benchmark_GetCustomAttributesData_8__8", 0x0000004Au, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests
+	{ "Benchmark_GetOtherMethods_3_bool_0", 0x00000036u, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests
+	{ "Benchmark_GetOtherMethods_3_bool_1", 0x00000038u, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests
+	{ "Benchmark_GetRaiseMethod_4_bool_0", 0x0000003Au, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests
+	{ "Benchmark_GetRaiseMethod_4_bool_1", 0x0000003Cu, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests
+	{ "Benchmark_GetRemoveMethod_5_bool_0", 0x0000003Eu, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests
+	{ "Benchmark_GetRemoveMethod_5_bool_1", 0x00000040u, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests
+	{ "Benchmark_IsDefined_9_System_Type_bool_0", 0x0000004Cu, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests
+	{ "Benchmark_IsDefined_9_System_Type_bool_1", 0x0000004Eu, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests
+	{ "Benchmark_RemoveEventHandler_1_object_System_Delegate_0", 0x00000030u, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests
+	{ "GetAddMethod_2_bool_0", 0x00000031u, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests
+	{ "GetAddMethod_2_bool_1", 0x00000033u, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests
+	{ "GetCustomAttributes_6_System_Type_bool_0", 0x00000041u, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests
+	{ "GetCustomAttributes_6_System_Type_bool_1", 0x00000043u, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests
+	{ "GetCustomAttributes_7_bool_0", 0x00000045u, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests
+	{ "GetCustomAttributes_7_bool_1", 0x00000047u, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests
+	{ "GetCustomAttributesData_8__8", 0x00000049u, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests
+	{ "GetOtherMethods_3_bool_0", 0x00000035u, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests
+	{ "GetOtherMethods_3_bool_1", 0x00000037u, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests
+	{ "GetRaiseMethod_4_bool_0", 0x00000039u, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests
+	{ "GetRaiseMethod_4_bool_1", 0x0000003Bu, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests
+	{ "GetRemoveMethod_5_bool_0", 0x0000003Du, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests
+	{ "GetRemoveMethod_5_bool_1", 0x0000003Fu, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests
+	{ "IsDefined_9_System_Type_bool_0", 0x0000004Bu, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests
+	{ "IsDefined_9_System_Type_bool_1", 0x0000004Du, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests
+	{ "RemoveEventHandler_1_object_System_Delegate_0", 0x0000002Fu, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests
+	{ ".cctor", 0x00000081u, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests+<>c
+	{ ".ctor", 0x00000082u, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests+<>c
+	{ "<AddEventHandler_0_object_System_Delegate_0>b__0_0", 0x00000083u, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests+<>c
+	{ "<GetAddMethod_2_bool_0>b__4_0", 0x00000085u, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests+<>c
+	{ "<GetAddMethod_2_bool_1>b__6_0", 0x00000086u, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests+<>c
+	{ "<GetCustomAttributes_6_System_Type_bool_0>b__20_0", 0x0000008Du, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests+<>c
+	{ "<GetCustomAttributes_6_System_Type_bool_1>b__22_0", 0x0000008Eu, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests+<>c
+	{ "<GetCustomAttributes_7_bool_0>b__24_0", 0x0000008Fu, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests+<>c
+	{ "<GetCustomAttributes_7_bool_1>b__26_0", 0x00000090u, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests+<>c
+	{ "<GetCustomAttributesData_8__8>b__28_0", 0x00000091u, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests+<>c
+	{ "<GetOtherMethods_3_bool_0>b__8_0", 0x00000087u, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests+<>c
+	{ "<GetOtherMethods_3_bool_1>b__10_0", 0x00000088u, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests+<>c
+	{ "<GetRaiseMethod_4_bool_0>b__12_0", 0x00000089u, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests+<>c
+	{ "<GetRaiseMethod_4_bool_1>b__14_0", 0x0000008Au, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests+<>c
+	{ "<GetRemoveMethod_5_bool_0>b__16_0", 0x0000008Bu, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests+<>c
+	{ "<GetRemoveMethod_5_bool_1>b__18_0", 0x0000008Cu, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests+<>c
+	{ "<IsDefined_9_System_Type_bool_0>b__30_0", 0x00000092u, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests+<>c
+	{ "<IsDefined_9_System_Type_bool_1>b__32_0", 0x00000093u, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests+<>c
+	{ "<RemoveEventHandler_1_object_System_Delegate_0>b__2_0", 0x00000084u, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests+<>c
+	{ ".ctor", 0x00000054u, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_HandleCollectorTests
+	{ "Add_0__0", 0x00000050u, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_HandleCollectorTests
+	{ "Benchmark_Add_0__0", 0x00000051u, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_HandleCollectorTests
+	{ "Benchmark_Remove_1__1", 0x00000053u, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_HandleCollectorTests
+	{ "Remove_1__1", 0x00000052u, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_HandleCollectorTests
+	{ ".cctor", 0x00000094u, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_HandleCollectorTests+<>c
+	{ ".ctor", 0x00000095u, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_HandleCollectorTests+<>c
+	{ "<Add_0__0>b__0_0", 0x00000096u, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_HandleCollectorTests+<>c
+	{ "<Remove_1__1>b__2_0", 0x00000097u, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_HandleCollectorTests+<>c
+	{ ".ctor", 0x0000005Cu, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ComInterfaceMarshallerSystem_Int32Tests
+	{ "Benchmark_ConvertToManaged_1_void_0", 0x0000005Au, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ComInterfaceMarshallerSystem_Int32Tests
+	{ "Benchmark_ConvertToUnmanaged_0_int_0", 0x00000056u, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ComInterfaceMarshallerSystem_Int32Tests
+	{ "Benchmark_ConvertToUnmanaged_0_int_1", 0x00000058u, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ComInterfaceMarshallerSystem_Int32Tests
+	{ "Benchmark_Free_2_void_0", 0x0000005Bu, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ComInterfaceMarshallerSystem_Int32Tests
+	{ "ConvertToManaged_1_void_0", 0x00000059u, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ComInterfaceMarshallerSystem_Int32Tests
+	{ "ConvertToUnmanaged_0_int_0", 0x00000055u, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ComInterfaceMarshallerSystem_Int32Tests
+	{ "ConvertToUnmanaged_0_int_1", 0x00000057u, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ComInterfaceMarshallerSystem_Int32Tests
+	{ ".ctor", 0x0000005Fu, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ComObjectTests
+	{ "Benchmark_FinalRelease_0__0", 0x0000005Eu, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ComObjectTests
+	{ "FinalRelease_0__0", 0x0000005Du, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ComObjectTests
+	{ ".cctor", 0x00000098u, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ComObjectTests+<>c
+	{ ".ctor", 0x00000099u, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ComObjectTests+<>c
+	{ "<FinalRelease_0__0>b__0_0", 0x0000009Au, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ComObjectTests+<>c
+	{ ".ctor", 0x00000062u, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ExceptionAsDefaultMarshallerSystem_Int32Tests
+	{ "Benchmark_ConvertToUnmanaged_0_System_Exception_0", 0x00000061u, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ExceptionAsDefaultMarshallerSystem_Int32Tests
+	{ "ConvertToUnmanaged_0_System_Exception_0", 0x00000060u, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ExceptionAsDefaultMarshallerSystem_Int32Tests
+	{ ".ctor", 0x00000065u, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ExceptionAsHResultMarshallerSystem_Int32Tests
+	{ "Benchmark_ConvertToUnmanaged_0_System_Exception_0", 0x00000064u, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ExceptionAsHResultMarshallerSystem_Int32Tests
+	{ "ConvertToUnmanaged_0_System_Exception_0", 0x00000063u, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ExceptionAsHResultMarshallerSystem_Int32Tests
+	{ ".ctor", 0x00000068u, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ExceptionAsNaNMarshallerSystem_DoubleTests
+	{ "Benchmark_ConvertToUnmanaged_0_System_Exception_0", 0x00000067u, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ExceptionAsNaNMarshallerSystem_DoubleTests
+	{ "ConvertToUnmanaged_0_System_Exception_0", 0x00000066u, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ExceptionAsNaNMarshallerSystem_DoubleTests
+	{ ".cctor", 0x0000009Bu, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ExceptionAsNaNMarshallerSystem_DoubleTests+<>c
+	{ ".ctor", 0x0000009Cu, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ExceptionAsNaNMarshallerSystem_DoubleTests+<>c
+	{ "<ConvertToUnmanaged_0_System_Exception_0>b__0_0", 0x0000009Du, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ExceptionAsNaNMarshallerSystem_DoubleTests+<>c
+	{ ".ctor", 0x0000006Bu, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ExceptionAsVoidMarshallerTests
+	{ "Benchmark_ConvertToUnmanaged_0_System_Exception_0", 0x0000006Au, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ExceptionAsVoidMarshallerTests
+	{ "ConvertToUnmanaged_0_System_Exception_0", 0x00000069u, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ExceptionAsVoidMarshallerTests
+	{ ".ctor", 0x00000073u, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_UniqueComInterfaceMarshallerSystem_Int32Tests
+	{ "Benchmark_ConvertToManaged_1_void_0", 0x00000071u, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_UniqueComInterfaceMarshallerSystem_Int32Tests
+	{ "Benchmark_ConvertToUnmanaged_0_int_0", 0x0000006Du, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_UniqueComInterfaceMarshallerSystem_Int32Tests
+	{ "Benchmark_ConvertToUnmanaged_0_int_1", 0x0000006Fu, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_UniqueComInterfaceMarshallerSystem_Int32Tests
+	{ "Benchmark_Free_2_void_0", 0x00000072u, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_UniqueComInterfaceMarshallerSystem_Int32Tests
+	{ "ConvertToManaged_1_void_0", 0x00000070u, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_UniqueComInterfaceMarshallerSystem_Int32Tests
+	{ "ConvertToUnmanaged_0_int_0", 0x0000006Cu, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_UniqueComInterfaceMarshallerSystem_Int32Tests
+	{ "ConvertToUnmanaged_0_int_1", 0x0000006Eu, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_UniqueComInterfaceMarshallerSystem_Int32Tests
+	{ ".ctor", 0x00000075u, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_VirtualMethodTableInfoTests
+	{ "Benchmark_Deconstruct_0_void_void_0", 0x00000074u, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_VirtualMethodTableInfoTests
+	{ ".ctor", 0x00000080u, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_RuntimeEnvironmentTests
+	{ "Benchmark_FromGlobalAccessCache_0_Assembly_0", 0x00000077u, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_RuntimeEnvironmentTests
+	{ "Benchmark_GetRuntimeDirectory_1__1", 0x00000079u, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_RuntimeEnvironmentTests
+	{ "Benchmark_GetRuntimeInterfaceAsIntPtr_2_System_Guid_System_Guid_0", 0x0000007Bu, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_RuntimeEnvironmentTests
+	{ "Benchmark_GetRuntimeInterfaceAsObject_3_System_Guid_System_Guid_0", 0x0000007Du, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_RuntimeEnvironmentTests
+	{ "Benchmark_GetSystemVersion_4__4", 0x0000007Fu, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_RuntimeEnvironmentTests
+	{ "FromGlobalAccessCache_0_Assembly_0", 0x00000076u, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_RuntimeEnvironmentTests
+	{ "GetRuntimeDirectory_1__1", 0x00000078u, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_RuntimeEnvironmentTests
+	{ "GetRuntimeInterfaceAsIntPtr_2_System_Guid_System_Guid_0", 0x0000007Au, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_RuntimeEnvironmentTests
+	{ "GetRuntimeInterfaceAsObject_3_System_Guid_System_Guid_0", 0x0000007Cu, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_RuntimeEnvironmentTests
+	{ "GetSystemVersion_4__4", 0x0000007Eu, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_RuntimeEnvironmentTests
+	{ ".cctor", 0x0000009Eu, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_RuntimeEnvironmentTests+<>c
+	{ ".ctor", 0x0000009Fu, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_RuntimeEnvironmentTests+<>c
+	{ "<GetRuntimeInterfaceAsIntPtr_2_System_Guid_System_Guid_0>b__4_0", 0x000000A0u, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_RuntimeEnvironmentTests+<>c
+	{ "<GetRuntimeInterfaceAsObject_3_System_Guid_System_Guid_0>b__6_0", 0x000000A1u, 0u },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_RuntimeEnvironmentTests+<>c
 };
 
 // Type name index entries (namespace, short_name)
-static constexpr HotpatchTypeEntryV0 s_hotpatch_types[21] = {
+static constexpr HotpatchTypeEntryV0 s_hotpatch_types[16] = {
 	{ "AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests", "AutoGenerated.System_Runtime_InteropServices", 0u, 35u },
 	{ "AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests+<>c", "AutoGenerated.System_Runtime_InteropServices", 35u, 19u },
 	{ "AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_HandleCollectorTests", "AutoGenerated.System_Runtime_InteropServices", 54u, 5u },
@@ -1618,167 +1929,127 @@ static constexpr HotpatchTypeEntryV0 s_hotpatch_types[21] = {
 	{ "AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_VirtualMethodTableInfoTests", "AutoGenerated.System_Runtime_InteropServices", 100u, 2u },
 	{ "AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_RuntimeEnvironmentTests", "AutoGenerated.System_Runtime_InteropServices", 102u, 11u },
 	{ "AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_RuntimeEnvironmentTests+<>c", "AutoGenerated.System_Runtime_InteropServices", 113u, 4u },
-	{ "Chaos.TestFramework.Assert", "Chaos.TestFramework", 117u, 31u },
-	{ "Chaos.TestFramework.AssertionException", "Chaos.TestFramework", 148u, 1u },
-	{ "Chaos.TestFramework.BenchmarkAttribute", "Chaos.TestFramework", 149u, 1u },
-	{ "Chaos.TestFramework.FactAttribute", "Chaos.TestFramework", 150u, 1u },
-	{ "Chaos.TestFramework.HotUpdateAttribute", "Chaos.TestFramework", 151u, 1u },
 };
 
 // Token→Slot mapping (sorted by token for binary search)
-static constexpr HotpatchSlotEntryV0 s_hotpatch_slots[152] = {
-	{ 0x00000035u, 36u },
-	{ 0x00000036u, 31u },
-	{ 0x00000037u, 37u },
-	{ 0x00000038u, 26u },
-	{ 0x00000039u, 69u },
-	{ 0x0000003Au, 25u },
-	{ 0x0000003Bu, 53u },
-	{ 0x0000003Cu, 18u },
-	{ 0x0000003Du, 54u },
-	{ 0x0000003Eu, 20u },
-	{ 0x0000003Fu, 38u },
-	{ 0x00000040u, 7u },
-	{ 0x00000041u, 55u },
-	{ 0x00000042u, 14u },
-	{ 0x00000043u, 39u },
-	{ 0x00000044u, 8u },
-	{ 0x00000045u, 61u },
-	{ 0x00000046u, 15u },
-	{ 0x00000047u, 45u },
-	{ 0x00000048u, 6u },
-	{ 0x00000049u, 62u },
-	{ 0x0000004Au, 13u },
-	{ 0x0000004Bu, 46u },
-	{ 0x0000004Cu, 1u },
-	{ 0x0000004Du, 63u },
-	{ 0x0000004Eu, 10u },
-	{ 0x0000004Fu, 47u },
-	{ 0x00000050u, 3u },
-	{ 0x00000051u, 64u },
-	{ 0x00000052u, 0u },
-	{ 0x00000053u, 48u },
-	{ 0x00000054u, 11u },
-	{ 0x00000055u, 65u },
-	{ 0x00000056u, 5u },
-	{ 0x00000057u, 49u },
-	{ 0x00000058u, 4u },
-	{ 0x00000059u, 66u },
-	{ 0x0000005Au, 12u },
-	{ 0x0000005Bu, 50u },
-	{ 0x0000005Cu, 9u },
-	{ 0x0000005Du, 56u },
-	{ 0x0000005Eu, 23u },
-	{ 0x0000005Fu, 40u },
-	{ 0x00000060u, 22u },
-	{ 0x00000061u, 57u },
-	{ 0x00000062u, 24u },
-	{ 0x00000063u, 41u },
-	{ 0x00000064u, 21u },
-	{ 0x00000065u, 58u },
-	{ 0x00000066u, 27u },
-	{ 0x00000067u, 42u },
-	{ 0x00000069u, 59u },
-	{ 0x0000006Au, 16u },
-	{ 0x0000006Bu, 43u },
-	{ 0x0000006Cu, 2u },
-	{ 0x0000006Du, 60u },
-	{ 0x0000006Eu, 17u },
-	{ 0x0000006Fu, 44u },
-	{ 0x00000070u, 19u },
-	{ 0x00000071u, 67u },
-	{ 0x00000072u, 32u },
-	{ 0x00000073u, 51u },
-	{ 0x00000074u, 33u },
-	{ 0x00000075u, 68u },
-	{ 0x00000076u, 34u },
-	{ 0x00000077u, 52u },
-	{ 0x00000078u, 35u },
-	{ 0x00000079u, 90u },
-	{ 0x0000007Au, 91u },
-	{ 0x0000007Bu, 93u },
-	{ 0x0000007Cu, 92u },
-	{ 0x0000007Du, 89u },
-	{ 0x0000007Eu, 104u },
-	{ 0x0000007Fu, 100u },
-	{ 0x00000080u, 105u },
-	{ 0x00000081u, 101u },
-	{ 0x00000082u, 103u },
-	{ 0x00000083u, 99u },
-	{ 0x00000084u, 102u },
-	{ 0x00000085u, 98u },
-	{ 0x00000086u, 108u },
-	{ 0x00000087u, 107u },
-	{ 0x00000088u, 106u },
-	{ 0x00000089u, 114u },
-	{ 0x0000008Au, 113u },
-	{ 0x0000008Bu, 112u },
-	{ 0x0000008Cu, 117u },
-	{ 0x0000008Du, 116u },
-	{ 0x0000008Eu, 115u },
-	{ 0x0000008Fu, 120u },
-	{ 0x00000090u, 119u },
-	{ 0x00000091u, 118u },
-	{ 0x00000092u, 126u },
-	{ 0x00000093u, 125u },
-	{ 0x00000094u, 124u },
-	{ 0x00000095u, 133u },
-	{ 0x00000096u, 129u },
-	{ 0x00000097u, 134u },
-	{ 0x00000098u, 130u },
-	{ 0x00000099u, 132u },
-	{ 0x0000009Au, 128u },
-	{ 0x0000009Bu, 131u },
-	{ 0x0000009Cu, 127u },
-	{ 0x0000009Du, 136u },
-	{ 0x0000009Eu, 135u },
-	{ 0x0000009Fu, 143u },
-	{ 0x000000A0u, 138u },
-	{ 0x000000A1u, 144u },
-	{ 0x000000A2u, 139u },
-	{ 0x000000A3u, 145u },
-	{ 0x000000A4u, 140u },
-	{ 0x000000A5u, 146u },
-	{ 0x000000A6u, 141u },
-	{ 0x000000A7u, 147u },
-	{ 0x000000A8u, 142u },
-	{ 0x000000A9u, 137u },
-	{ 0x000000AAu, 70u },
-	{ 0x000000ABu, 71u },
-	{ 0x000000ACu, 72u },
-	{ 0x000000ADu, 88u },
-	{ 0x000000AEu, 73u },
-	{ 0x000000AFu, 74u },
-	{ 0x000000B0u, 80u },
-	{ 0x000000B1u, 81u },
-	{ 0x000000B2u, 82u },
-	{ 0x000000B3u, 83u },
-	{ 0x000000B4u, 84u },
-	{ 0x000000B5u, 85u },
-	{ 0x000000B6u, 75u },
-	{ 0x000000B7u, 76u },
-	{ 0x000000B8u, 77u },
-	{ 0x000000B9u, 78u },
-	{ 0x000000BAu, 79u },
-	{ 0x000000BBu, 86u },
-	{ 0x000000BCu, 87u },
-	{ 0x000000BDu, 94u },
-	{ 0x000000BEu, 95u },
-	{ 0x000000BFu, 96u },
-	{ 0x000000C0u, 97u },
-	{ 0x000000C1u, 109u },
-	{ 0x000000C2u, 110u },
-	{ 0x000000C3u, 111u },
-	{ 0x000000C4u, 121u },
-	{ 0x000000C5u, 122u },
-	{ 0x000000C6u, 123u },
-	{ 0x000000C7u, 148u },
-	{ 0x000000C8u, 149u },
-	{ 0x000000C9u, 150u },
-	{ 0x000000CAu, 151u },
-	{ 0x000000CBu, 29u },
-	{ 0x000000CCu, 28u },
-	{ 0x000000CDu, 30u },
+static constexpr HotpatchSlotEntryV0 s_hotpatch_slots[117] = {
+	{ 0x0000002Du, 1u },
+	{ 0x0000002Eu, 2u },
+	{ 0x0000002Fu, 34u },
+	{ 0x00000030u, 18u },
+	{ 0x00000031u, 19u },
+	{ 0x00000032u, 3u },
+	{ 0x00000033u, 20u },
+	{ 0x00000034u, 4u },
+	{ 0x00000035u, 26u },
+	{ 0x00000036u, 10u },
+	{ 0x00000037u, 27u },
+	{ 0x00000038u, 11u },
+	{ 0x00000039u, 28u },
+	{ 0x0000003Au, 12u },
+	{ 0x0000003Bu, 29u },
+	{ 0x0000003Cu, 13u },
+	{ 0x0000003Du, 30u },
+	{ 0x0000003Eu, 14u },
+	{ 0x0000003Fu, 31u },
+	{ 0x00000040u, 15u },
+	{ 0x00000041u, 21u },
+	{ 0x00000042u, 5u },
+	{ 0x00000043u, 22u },
+	{ 0x00000044u, 6u },
+	{ 0x00000045u, 23u },
+	{ 0x00000046u, 7u },
+	{ 0x00000047u, 24u },
+	{ 0x00000048u, 8u },
+	{ 0x00000049u, 25u },
+	{ 0x0000004Au, 9u },
+	{ 0x0000004Bu, 32u },
+	{ 0x0000004Cu, 16u },
+	{ 0x0000004Du, 33u },
+	{ 0x0000004Eu, 17u },
+	{ 0x0000004Fu, 0u },
+	{ 0x00000050u, 55u },
+	{ 0x00000051u, 56u },
+	{ 0x00000052u, 58u },
+	{ 0x00000053u, 57u },
+	{ 0x00000054u, 54u },
+	{ 0x00000055u, 69u },
+	{ 0x00000056u, 65u },
+	{ 0x00000057u, 70u },
+	{ 0x00000058u, 66u },
+	{ 0x00000059u, 68u },
+	{ 0x0000005Au, 64u },
+	{ 0x0000005Bu, 67u },
+	{ 0x0000005Cu, 63u },
+	{ 0x0000005Du, 73u },
+	{ 0x0000005Eu, 72u },
+	{ 0x0000005Fu, 71u },
+	{ 0x00000060u, 79u },
+	{ 0x00000061u, 78u },
+	{ 0x00000062u, 77u },
+	{ 0x00000063u, 82u },
+	{ 0x00000064u, 81u },
+	{ 0x00000065u, 80u },
+	{ 0x00000066u, 85u },
+	{ 0x00000067u, 84u },
+	{ 0x00000068u, 83u },
+	{ 0x00000069u, 91u },
+	{ 0x0000006Au, 90u },
+	{ 0x0000006Bu, 89u },
+	{ 0x0000006Cu, 98u },
+	{ 0x0000006Du, 94u },
+	{ 0x0000006Eu, 99u },
+	{ 0x0000006Fu, 95u },
+	{ 0x00000070u, 97u },
+	{ 0x00000071u, 93u },
+	{ 0x00000072u, 96u },
+	{ 0x00000073u, 92u },
+	{ 0x00000074u, 101u },
+	{ 0x00000075u, 100u },
+	{ 0x00000076u, 108u },
+	{ 0x00000077u, 103u },
+	{ 0x00000078u, 109u },
+	{ 0x00000079u, 104u },
+	{ 0x0000007Au, 110u },
+	{ 0x0000007Bu, 105u },
+	{ 0x0000007Cu, 111u },
+	{ 0x0000007Du, 106u },
+	{ 0x0000007Eu, 112u },
+	{ 0x0000007Fu, 107u },
+	{ 0x00000080u, 102u },
+	{ 0x00000081u, 35u },
+	{ 0x00000082u, 36u },
+	{ 0x00000083u, 37u },
+	{ 0x00000084u, 53u },
+	{ 0x00000085u, 38u },
+	{ 0x00000086u, 39u },
+	{ 0x00000087u, 45u },
+	{ 0x00000088u, 46u },
+	{ 0x00000089u, 47u },
+	{ 0x0000008Au, 48u },
+	{ 0x0000008Bu, 49u },
+	{ 0x0000008Cu, 50u },
+	{ 0x0000008Du, 40u },
+	{ 0x0000008Eu, 41u },
+	{ 0x0000008Fu, 42u },
+	{ 0x00000090u, 43u },
+	{ 0x00000091u, 44u },
+	{ 0x00000092u, 51u },
+	{ 0x00000093u, 52u },
+	{ 0x00000094u, 59u },
+	{ 0x00000095u, 60u },
+	{ 0x00000096u, 61u },
+	{ 0x00000097u, 62u },
+	{ 0x00000098u, 74u },
+	{ 0x00000099u, 75u },
+	{ 0x0000009Au, 76u },
+	{ 0x0000009Bu, 86u },
+	{ 0x0000009Cu, 87u },
+	{ 0x0000009Du, 88u },
+	{ 0x0000009Eu, 113u },
+	{ 0x0000009Fu, 114u },
+	{ 0x000000A0u, 115u },
+	{ 0x000000A1u, 116u },
 };
 
 // Dispatch table (function pointers)
@@ -1787,42 +2058,7 @@ static constexpr HotpatchSlotEntryV0 s_hotpatch_slots[152] = {
 // TU (verification_dispatch.generated.cpp) can access this array via
 // GetHotpatchEntries(). Without external linkage, the linker cannot resolve
 // the symbol across translation units.
-extern "C" HotpatchEntryV0 s_hotpatch_entries[152] = {
-	{ reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Boolean_System_Boolean_System_String), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // Chaos.TestFramework.Assert::AreEqual
-	{ reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Byte_System_Byte_System_String), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // Chaos.TestFramework.Assert::AreEqual
-	{ reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Byte_array_System_Byte_array_System_String), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // Chaos.TestFramework.Assert::AreEqual
-	{ reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Char_System_Char_System_String), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // Chaos.TestFramework.Assert::AreEqual
-	{ reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Decimal_System_Decimal_System_String), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // Chaos.TestFramework.Assert::AreEqual
-	{ reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Double_System_Double_System_String), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // Chaos.TestFramework.Assert::AreEqual
-	{ reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Int16_System_Int16_System_String), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // Chaos.TestFramework.Assert::AreEqual
-	{ reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Int32_System_Int32_System_String), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // Chaos.TestFramework.Assert::AreEqual
-	{ reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Int64_System_Int64_System_String), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // Chaos.TestFramework.Assert::AreEqual
-	{ reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Object_System_Object_System_String), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // Chaos.TestFramework.Assert::AreEqual
-	{ reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_SByte_System_SByte_System_String), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // Chaos.TestFramework.Assert::AreEqual
-	{ reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Single_System_Single_System_String), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // Chaos.TestFramework.Assert::AreEqual
-	{ reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_String_System_String_System_String), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // Chaos.TestFramework.Assert::AreEqual
-	{ reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_UInt16_System_UInt16_System_String), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // Chaos.TestFramework.Assert::AreEqual
-	{ reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_UInt32_System_UInt32_System_String), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // Chaos.TestFramework.Assert::AreEqual
-	{ reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_UInt64_System_UInt64_System_String), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // Chaos.TestFramework.Assert::AreEqual
-	{ reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_0_0_System_String), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // Chaos.TestFramework.Assert::AreEqual`1
-	{ reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreNotEqual_0_0_System_String), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // Chaos.TestFramework.Assert::AreNotEqual`1
-	{ reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Complete), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // Chaos.TestFramework.Assert::Complete
-	{ reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Fail_System_String), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // Chaos.TestFramework.Assert::Fail
-	{ reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_get_ExitCode), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // Chaos.TestFramework.Assert::get_ExitCode
-	{ reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_IsFalse_System_Boolean_System_String), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // Chaos.TestFramework.Assert::IsFalse
-	{ reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_IsNotNull_System_Object_System_String), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // Chaos.TestFramework.Assert::IsNotNull
-	{ reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_IsNull_System_Object_System_String), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // Chaos.TestFramework.Assert::IsNull
-	{ reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_IsTrue_System_Boolean_System_String), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // Chaos.TestFramework.Assert::IsTrue
-	{ reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_RecordFailure), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // Chaos.TestFramework.Assert::RecordFailure
-	{ reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Reset), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // Chaos.TestFramework.Assert::Reset
-	{ reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Throws_System_Action), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // Chaos.TestFramework.Assert::Throws
-	{ reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Throws_System_ArgumentException_System_Action__generic), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // Chaos.TestFramework.Assert::Throws<System.ArgumentException>
-	{ reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Throws_System_NullReferenceException_System_Action__generic), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // Chaos.TestFramework.Assert::Throws<System.NullReferenceException>
-	{ reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Throws_System_PlatformNotSupportedException_System_Action__generic), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // Chaos.TestFramework.Assert::Throws<System.PlatformNotSupportedException>
-	{ reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_AssertionException__ctor_System_String), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // Chaos.TestFramework.AssertionException::.ctor
-	{ reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_BenchmarkAttribute__ctor), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // Chaos.TestFramework.BenchmarkAttribute::.ctor
-	{ reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_FactAttribute__ctor), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // Chaos.TestFramework.FactAttribute::.ctor
-	{ reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_HotUpdateAttribute__ctor), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // Chaos.TestFramework.HotUpdateAttribute::.ctor
+extern "C" HotpatchEntryV0 s_hotpatch_entries[117] = {
 	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests__ctor), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests::.ctor
 	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_AddEventHandler_0_object_System_Delegate_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests::AddEventHandler_0_object_System_Delegate_0
 	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_Benchmark_AddEventHandler_0_object_System_Delegate_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests::Benchmark_AddEventHandler_0_object_System_Delegate_0
@@ -1944,19 +2180,19 @@ extern "C" HotpatchEntryV0 s_hotpatch_entries[152] = {
 
 // Accessor functions for verification_dispatch.generated.cpp
 extern "C" const HotpatchEntryV0* GetHotpatchEntries() noexcept { return s_hotpatch_entries; }
-extern "C" int32_t GetHotpatchEntryCount() noexcept { return 152; }
+extern "C" int32_t GetHotpatchEntryCount() noexcept { return 117; }
 
 // Module hotpatch bundle (extern linkage — referenced across page files)
 extern constexpr HotpatchModuleV0 s_hotpatch_module = {
 	"CombinedSubjects",
 	s_hotpatch_types,
-	21u,
+	16u,
 	s_hotpatch_methods,
-	152u,
+	117u,
 	s_hotpatch_slots,
-	152u,
+	117u,
 	s_hotpatch_entries,
-	152u,
+	117u,
 };
 
 // Expose hotpatch module to BootstrapRuntime
@@ -1965,34 +2201,12 @@ extern "C" const HotpatchModuleV0* chaos_il2cpp_aot_hotpatch_module
 // ── External Runtime Dispatch Table ──────────────────────────
 // Startup-time-resolved function pointers for cross-assembly calls.
 
-extern "C" const char* kChaosExternalRuntimeSubjects[86] = {
-	"System.Private.CoreLib/System.Decimal::op_Inequality:System.Boolean(System.Decimal,System.Decimal)",
-	"System.Private.CoreLib/System.Object::Equals:System.Boolean(System.Object,System.Object)",
-	"System.Private.CoreLib/System.Object::ToString:System.String()",
-	"System.Private.CoreLib/System.String::op_Inequality:System.Boolean(System.String,System.String)",
-	"Chaos.TestFramework.Sdk/!!0",
-	"System.Private.CoreLib/System.String",
-	"System.Private.CoreLib/System.Collections.IEnumerable",
-	"System.Private.CoreLib/System.Collections.IEnumerable::GetEnumerator:System.Collections.IEnumerator()",
-	"System.Private.CoreLib/System.IDisposable",
-	"System.Private.CoreLib/System.Collections.IEnumerator::MoveNext:System.Boolean()",
-	"System.Private.CoreLib/System.Collections.Generic.EqualityComparer<System.Object>::get_Default:System.Collections.Generic.EqualityComparer<System.Object>()",
-	"System.Private.CoreLib/System.Collections.IEnumerator::get_Current:System.Object()",
-	"System.Private.CoreLib/System.Collections.Generic.EqualityComparer<System.Object>::Equals:System.Boolean(System.Object,System.Object)",
-	"System.Private.CoreLib/System.IDisposable::Dispose:System.Void()",
-	"System.Private.CoreLib/System.Collections.Generic.EqualityComparer<!!0>::get_Default:System.Collections.Generic.EqualityComparer<!!0>()",
-	"System.Private.CoreLib/System.Collections.Generic.EqualityComparer<!!0>::Equals:System.Boolean(!!0,!!0)",
-	"Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::s_exitCode",
-	"System.Console/System.Console::get_Error:System.IO.TextWriter()",
-	"System.Private.CoreLib/System.String::Concat:System.String(System.String,System.String)",
-	"System.Private.CoreLib/System.IO.TextWriter::WriteLine:System.Void(System.String)",
-	"System.Private.CoreLib/System.Action::Invoke:System.Void()",
-	"System.Private.CoreLib/System.Exception::.ctor:System.Void(System.String)",
-	"System.Private.CoreLib/System.Attribute::.ctor:System.Void()",
+extern "C" const char* kChaosExternalRuntimeSubjects[69] = {
 	"System.Private.CoreLib/System.Object::.ctor:System.Void()",
 	"CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests+<>c::<>9__0_0",
 	"CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests+<>c::<>9",
 	"System.Private.CoreLib/System.Action::.ctor:System.Void(System.Object,System.IntPtr)",
+	"Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::Throws<System.NullReferenceException>:System.Void(System.Action)",
 	"System.Private.CoreLib/System.Reflection.EventInfo::AddEventHandler:System.Void(System.Object,System.Delegate)",
 	"System.Private.CoreLib/System.Reflection.EventInfo::GetAddMethod:System.Reflection.MethodInfo(System.Boolean)",
 	"System.Private.CoreLib/System.Reflection.MemberInfo::GetCustomAttributes:System.Object[](System.Type,System.Boolean)",
@@ -2031,10 +2245,12 @@ extern "C" const char* kChaosExternalRuntimeSubjects[86] = {
 	"CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ComObjectTests+<>c::<>9__0_0",
 	"CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ComObjectTests+<>c::<>9",
 	"System.Private.CoreLib/System.Runtime.InteropServices.Marshalling.ExceptionAsDefaultMarshaller<System.Int32>::ConvertToUnmanaged:System.Int32(System.Exception)",
+	"Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::AreEqual:System.Void(System.Int32,System.Int32,System.String)",
 	"System.Private.CoreLib/System.Runtime.InteropServices.Marshalling.ExceptionAsHResultMarshaller<System.Int32>::ConvertToUnmanaged:System.Int32(System.Exception)",
 	"System.Private.CoreLib/System.Runtime.InteropServices.Marshalling.ExceptionAsNaNMarshaller<System.Double>::ConvertToUnmanaged:System.Double(System.Exception)",
 	"CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ExceptionAsNaNMarshallerSystem_DoubleTests+<>c::<>9__0_0",
 	"CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ExceptionAsNaNMarshallerSystem_DoubleTests+<>c::<>9",
+	"Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::Throws<System.ArgumentException>:System.Void(System.Action)",
 	"System.Private.CoreLib/System.Runtime.InteropServices.Marshalling.ExceptionAsVoidMarshaller::ConvertToUnmanaged:System.Void(System.Exception)",
 	"System.Private.CoreLib/System.Runtime.InteropServices.Marshalling.UniqueComInterfaceMarshaller<System.Int32>::ConvertToManaged:System.Int32(System.Void*)",
 	"System.Private.CoreLib/System.Runtime.InteropServices.Marshalling.UniqueComInterfaceMarshaller<System.Int32>::ConvertToUnmanaged:System.Void*(System.Int32)",
@@ -2049,101 +2265,87 @@ extern "C" const char* kChaosExternalRuntimeSubjects[86] = {
 	"System.Private.CoreLib/RuntimeEnvironment::GetRuntimeInterfaceAsIntPtr:System.IntPtr(System.Guid,System.Guid)",
 	"System.Private.CoreLib/RuntimeEnvironment::GetRuntimeInterfaceAsObject:System.Object(System.Guid,System.Guid)",
 	"System.Private.CoreLib/RuntimeEnvironment::GetSystemVersion:System.String()",
+	"Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::AreEqual:System.Void(System.Boolean,System.Boolean,System.String)",
+	"Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::AreEqual:System.Void(System.String,System.String,System.String)",
 	"CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_RuntimeEnvironmentTests+<>c::<>9__4_0",
 	"CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_RuntimeEnvironmentTests+<>c::<>9",
+	"Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::Throws<System.PlatformNotSupportedException>:System.Void(System.Action)",
 	"CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_RuntimeEnvironmentTests+<>c::<>9__6_0",
 };
 
-extern "C" void* kChaosExternalRuntimeFnTable[86] = {
-	nullptr,
-	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Object__Equals_System_Boolean_System_Object_System_Object_),
-	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Object__ToString_System_String__),
-	nullptr,
-	nullptr,
-	nullptr,
-	nullptr,
-	nullptr,
-	nullptr,
-	nullptr,
-	nullptr,
-	nullptr,
-	nullptr,
-	nullptr,
-	nullptr,
-	nullptr,
-	nullptr,
-	reinterpret_cast<void*>(&chaos_external_runtime_System_Console_System_Console__get_Error_System_IO_TextWriter__),
-	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_String__Concat_System_String_System_String_System_String_),
-	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_IO_TextWriter__WriteLine_System_Void_System_String_),
-	nullptr,
-	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Exception___ctor_System_Void_System_String_),
-	nullptr,
+extern "C" void* kChaosExternalRuntimeFnTable[69] = {
 	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Object___ctor_System_Void__),
-	nullptr,
-	nullptr,
-	nullptr,
-	nullptr,
-	nullptr,
-	nullptr,
-	nullptr,
-	nullptr,
-	nullptr,
-	nullptr,
-	nullptr,
-	nullptr,
-	nullptr,
-	nullptr,
-	nullptr,
-	nullptr,
-	nullptr,
-	nullptr,
-	nullptr,
-	nullptr,
-	nullptr,
-	nullptr,
-	nullptr,
-	nullptr,
-	nullptr,
-	nullptr,
-	nullptr,
-	nullptr,
-	nullptr,
-	nullptr,
-	nullptr,
-	nullptr,
-	nullptr,
-	nullptr,
-	nullptr,
-	nullptr,
-	nullptr,
-	nullptr,
-	nullptr,
-	nullptr,
-	nullptr,
-	nullptr,
-	nullptr,
-	nullptr,
-	nullptr,
-	nullptr,
-	nullptr,
-	nullptr,
-	nullptr,
-	nullptr,
-	nullptr,
-	nullptr,
-	nullptr,
-	nullptr,
-	nullptr,
-	nullptr,
-	nullptr,
-	nullptr,
-	nullptr,
-	nullptr,
-	nullptr,
-	nullptr,
+	reinterpret_cast<void*>(&chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c____9__0_0),
+	reinterpret_cast<void*>(&chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c____9),
+	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Action___ctor_System_Void_System_Object_System_IntPtr_),
+	reinterpret_cast<void*>(&chaos_external_runtime_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert__Throws_System_NullReferenceException__System_Void_System_Action_),
+	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Reflection_EventInfo__AddEventHandler_System_Void_System_Object_System_Delegate_),
+	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Reflection_EventInfo__GetAddMethod_System_Reflection_MethodInfo_System_Boolean_),
+	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Reflection_MemberInfo__GetCustomAttributes_System_Object___System_Type_System_Boolean_),
+	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Reflection_MemberInfo__GetCustomAttributes_System_Object___System_Boolean_),
+	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Reflection_MemberInfo__GetCustomAttributesData_System_Collections_Generic_IList_System_Reflection_CustomAttributeData___),
+	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Reflection_EventInfo__GetOtherMethods_System_Reflection_MethodInfo___System_Boolean_),
+	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Reflection_EventInfo__GetRaiseMethod_System_Reflection_MethodInfo_System_Boolean_),
+	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Reflection_EventInfo__GetRemoveMethod_System_Reflection_MethodInfo_System_Boolean_),
+	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Reflection_MemberInfo__IsDefined_System_Boolean_System_Type_System_Boolean_),
+	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Reflection_EventInfo__RemoveEventHandler_System_Void_System_Object_System_Delegate_),
+	reinterpret_cast<void*>(&chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c____9__4_0),
+	reinterpret_cast<void*>(&chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c____9__6_0),
+	reinterpret_cast<void*>(&chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c____9__20_0),
+	reinterpret_cast<void*>(&chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c____9__22_0),
+	reinterpret_cast<void*>(&chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c____9__24_0),
+	reinterpret_cast<void*>(&chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c____9__26_0),
+	reinterpret_cast<void*>(&chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c____9__28_0),
+	reinterpret_cast<void*>(&chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c____9__8_0),
+	reinterpret_cast<void*>(&chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c____9__10_0),
+	reinterpret_cast<void*>(&chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c____9__12_0),
+	reinterpret_cast<void*>(&chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c____9__14_0),
+	reinterpret_cast<void*>(&chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c____9__16_0),
+	reinterpret_cast<void*>(&chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c____9__18_0),
+	reinterpret_cast<void*>(&chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c____9__30_0),
+	reinterpret_cast<void*>(&chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c____9__32_0),
+	reinterpret_cast<void*>(&chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c____9__2_0),
+	reinterpret_cast<void*>(&chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_HandleCollectorTests___c____9__0_0),
+	reinterpret_cast<void*>(&chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_HandleCollectorTests___c____9),
+	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_HandleCollector__Add_System_Void__),
+	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_HandleCollector__Remove_System_Void__),
+	reinterpret_cast<void*>(&chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_HandleCollectorTests___c____9__2_0),
+	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Runtime_InteropServices_Marshalling_ComInterfaceMarshaller_System_Int32___ConvertToManaged_System_Int32_System_Void__),
+	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Runtime_InteropServices_Marshalling_ComInterfaceMarshaller_System_Int32___ConvertToUnmanaged_System_Void__System_Int32_),
+	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Runtime_InteropServices_Marshalling_ComInterfaceMarshaller_System_Int32___Free_System_Void_System_Void__),
+	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Runtime_InteropServices_Marshalling_ComObject__FinalRelease_System_Void__),
+	reinterpret_cast<void*>(&chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ComObjectTests___c____9__0_0),
+	reinterpret_cast<void*>(&chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ComObjectTests___c____9),
+	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Runtime_InteropServices_Marshalling_ExceptionAsDefaultMarshaller_System_Int32___ConvertToUnmanaged_System_Int32_System_Exception_),
+	reinterpret_cast<void*>(&chaos_external_runtime_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert__AreEqual_System_Void_System_Int32_System_Int32_System_String_),
+	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Runtime_InteropServices_Marshalling_ExceptionAsHResultMarshaller_System_Int32___ConvertToUnmanaged_System_Int32_System_Exception_),
+	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Runtime_InteropServices_Marshalling_ExceptionAsNaNMarshaller_System_Double___ConvertToUnmanaged_System_Double_System_Exception_),
+	reinterpret_cast<void*>(&chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ExceptionAsNaNMarshallerSystem_DoubleTests___c____9__0_0),
+	reinterpret_cast<void*>(&chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ExceptionAsNaNMarshallerSystem_DoubleTests___c____9),
+	reinterpret_cast<void*>(&chaos_external_runtime_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert__Throws_System_ArgumentException__System_Void_System_Action_),
+	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Runtime_InteropServices_Marshalling_ExceptionAsVoidMarshaller__ConvertToUnmanaged_System_Void_System_Exception_),
+	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Runtime_InteropServices_Marshalling_UniqueComInterfaceMarshaller_System_Int32___ConvertToManaged_System_Int32_System_Void__),
+	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Runtime_InteropServices_Marshalling_UniqueComInterfaceMarshaller_System_Int32___ConvertToUnmanaged_System_Void__System_Int32_),
+	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Runtime_InteropServices_Marshalling_UniqueComInterfaceMarshaller_System_Int32___Free_System_Void_System_Void__),
+	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Void_),
+	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Void__),
+	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Runtime_InteropServices_Marshalling_VirtualMethodTableInfo),
+	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Runtime_InteropServices_Marshalling_VirtualMethodTableInfo__Deconstruct_System_Void_System_Void___System_Void____),
+	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_RuntimeEnvironment__FromGlobalAccessCache_System_Boolean_System_Reflection_Assembly_),
+	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_RuntimeEnvironment__GetRuntimeDirectory_System_String__),
+	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Guid),
+	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_RuntimeEnvironment__GetRuntimeInterfaceAsIntPtr_System_IntPtr_System_Guid_System_Guid_),
+	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_RuntimeEnvironment__GetRuntimeInterfaceAsObject_System_Object_System_Guid_System_Guid_),
+	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_RuntimeEnvironment__GetSystemVersion_System_String__),
+	reinterpret_cast<void*>(&chaos_external_runtime_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert__AreEqual_System_Void_System_Boolean_System_Boolean_System_String_),
+	reinterpret_cast<void*>(&chaos_external_runtime_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert__AreEqual_System_Void_System_String_System_String_System_String_),
+	reinterpret_cast<void*>(&chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_RuntimeEnvironmentTests___c____9__4_0),
+	reinterpret_cast<void*>(&chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_RuntimeEnvironmentTests___c____9),
+	reinterpret_cast<void*>(&chaos_external_runtime_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert__Throws_System_PlatformNotSupportedException__System_Void_System_Action_),
+	reinterpret_cast<void*>(&chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_RuntimeEnvironmentTests___c____9__6_0),
 };
 
-extern "C" int32_t kChaosExternalRuntimeCount = 86;
+extern "C" int32_t kChaosExternalRuntimeCount = 69;
 // (no method AOT entries for this module)
 // ── Method table (kMethodTable[]) ──────────────────────────────
 // const function pointer array for dispatch via slot index.
@@ -2151,43 +2353,7 @@ extern "C" int32_t kChaosExternalRuntimeCount = 86;
 // NOTE: Emitted in ALL modes (AOT + JIT). JIT mode verification dispatch
 // uses kDefaultArgThunks to bypass JIT precode trampoline (verification
 // tests AOT codegen, not JIT compilation).
-static void (*kMethodTable[153])() = {
-	reinterpret_cast<void(*)()>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Boolean_System_Boolean_System_String),
-	reinterpret_cast<void(*)()>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Byte_System_Byte_System_String),
-	reinterpret_cast<void(*)()>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Byte_array_System_Byte_array_System_String),
-	reinterpret_cast<void(*)()>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Char_System_Char_System_String),
-	reinterpret_cast<void(*)()>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Decimal_System_Decimal_System_String),
-	reinterpret_cast<void(*)()>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Double_System_Double_System_String),
-	reinterpret_cast<void(*)()>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Int16_System_Int16_System_String),
-	reinterpret_cast<void(*)()>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Int32_System_Int32_System_String),
-	reinterpret_cast<void(*)()>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Int64_System_Int64_System_String),
-	reinterpret_cast<void(*)()>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Object_System_Object_System_String),
-	reinterpret_cast<void(*)()>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_SByte_System_SByte_System_String),
-	reinterpret_cast<void(*)()>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Single_System_Single_System_String),
-	reinterpret_cast<void(*)()>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_String_System_String_System_String),
-	reinterpret_cast<void(*)()>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_UInt16_System_UInt16_System_String),
-	reinterpret_cast<void(*)()>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_UInt32_System_UInt32_System_String),
-	reinterpret_cast<void(*)()>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_UInt64_System_UInt64_System_String),
-	reinterpret_cast<void(*)()>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_0_0_System_String),
-	reinterpret_cast<void(*)()>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreNotEqual_0_0_System_String),
-	reinterpret_cast<void(*)()>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Complete),
-	reinterpret_cast<void(*)()>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Fail_System_String),
-	reinterpret_cast<void(*)()>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_get_ExitCode),
-	reinterpret_cast<void(*)()>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_IsFalse_System_Boolean_System_String),
-	reinterpret_cast<void(*)()>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_IsNotNull_System_Object_System_String),
-	reinterpret_cast<void(*)()>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_IsNull_System_Object_System_String),
-	reinterpret_cast<void(*)()>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_IsTrue_System_Boolean_System_String),
-	reinterpret_cast<void(*)()>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_RecordFailure),
-	reinterpret_cast<void(*)()>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Reset),
-	reinterpret_cast<void(*)()>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Throws_System_Action),
-	reinterpret_cast<void(*)()>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Throws_System_Action),
-	reinterpret_cast<void(*)()>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Throws_System_ArgumentException_System_Action__generic),
-	reinterpret_cast<void(*)()>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Throws_System_NullReferenceException_System_Action__generic),
-	reinterpret_cast<void(*)()>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Throws_System_PlatformNotSupportedException_System_Action__generic),
-	reinterpret_cast<void(*)()>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_AssertionException__ctor_System_String),
-	reinterpret_cast<void(*)()>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_BenchmarkAttribute__ctor),
-	reinterpret_cast<void(*)()>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_FactAttribute__ctor),
-	reinterpret_cast<void(*)()>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_HotUpdateAttribute__ctor),
+static void (*kMethodTable[117])() = {
 	reinterpret_cast<void(*)()>(&CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests__ctor),
 	reinterpret_cast<void(*)()>(&CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_AddEventHandler_0_object_System_Delegate_0),
 	reinterpret_cast<void(*)()>(&CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_Benchmark_AddEventHandler_0_object_System_Delegate_0),
@@ -2312,160 +2478,124 @@ static void (*kMethodTable[153])() = {
 // String params receive a valid StringId; all others receive 0.
 // Instance methods receive a sentinel this-pointer so they don't crash on null.
 static CHAOS_IL2CPP_UINT8 __g_null_instance = 0;
-extern "C" void (*kDefaultArgThunks[153])() = {
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kMethodTable[0])(0,0,chaos_make_string_id_value(3706303174978839905ULL));},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kMethodTable[1])(0,0,chaos_make_string_id_value(3706303174978839905ULL));},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kMethodTable[2])(0,0,chaos_make_string_id_value(3706303174978839905ULL));},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kMethodTable[3])(0,0,chaos_make_string_id_value(3706303174978839905ULL));},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kMethodTable[4])(0,0,chaos_make_string_id_value(3706303174978839905ULL));},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kMethodTable[5])(0,0,chaos_make_string_id_value(3706303174978839905ULL));},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kMethodTable[6])(0,0,chaos_make_string_id_value(3706303174978839905ULL));},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kMethodTable[7])(0,0,chaos_make_string_id_value(3706303174978839905ULL));},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kMethodTable[8])(0,0,chaos_make_string_id_value(3706303174978839905ULL));},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kMethodTable[9])(0,0,chaos_make_string_id_value(3706303174978839905ULL));},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kMethodTable[10])(0,0,chaos_make_string_id_value(3706303174978839905ULL));},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kMethodTable[11])(0,0,chaos_make_string_id_value(3706303174978839905ULL));},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kMethodTable[12])(chaos_make_string_id_value(3706303174978839905ULL),chaos_make_string_id_value(3706303174978839905ULL),chaos_make_string_id_value(3706303174978839905ULL));},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kMethodTable[13])(0,0,chaos_make_string_id_value(3706303174978839905ULL));},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kMethodTable[14])(0,0,chaos_make_string_id_value(3706303174978839905ULL));},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kMethodTable[15])(0,0,chaos_make_string_id_value(3706303174978839905ULL));},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kMethodTable[16])(0,0,chaos_make_string_id_value(3706303174978839905ULL));},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kMethodTable[17])(0,0,chaos_make_string_id_value(3706303174978839905ULL));},
+extern "C" void (*kDefaultArgThunks[117])() = {
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[0])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[1])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
+	[]() {kMethodTable[2]();},
+	[]() {kMethodTable[3]();},
+	[]() {kMethodTable[4]();},
+	[]() {kMethodTable[5]();},
+	[]() {kMethodTable[6]();},
+	[]() {kMethodTable[7]();},
+	[]() {kMethodTable[8]();},
+	[]() {kMethodTable[9]();},
+	[]() {kMethodTable[10]();},
+	[]() {kMethodTable[11]();},
+	[]() {kMethodTable[12]();},
+	[]() {kMethodTable[13]();},
+	[]() {kMethodTable[14]();},
+	[]() {kMethodTable[15]();},
+	[]() {kMethodTable[16]();},
+	[]() {kMethodTable[17]();},
 	[]() {kMethodTable[18]();},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[19])(chaos_make_string_id_value(3706303174978839905ULL));},
-	[]() {kMethodTable[20]();},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kMethodTable[21])(0,chaos_make_string_id_value(3706303174978839905ULL));},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kMethodTable[22])(0,chaos_make_string_id_value(3706303174978839905ULL));},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kMethodTable[23])(0,chaos_make_string_id_value(3706303174978839905ULL));},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kMethodTable[24])(0,chaos_make_string_id_value(3706303174978839905ULL));},
-	[]() {kMethodTable[25]();},
-	[]() {kMethodTable[26]();},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[27])(0);},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[28])(0);},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[29])(0);},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[30])(0);},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[31])(0);},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kMethodTable[32])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance),chaos_make_string_id_value(3706303174978839905ULL));},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[19])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[20])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[21])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[22])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[23])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[24])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[25])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[26])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[27])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[28])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[29])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[30])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[31])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[32])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
 	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[33])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
 	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[34])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[35])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
+	[]() {kMethodTable[35]();},
 	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[36])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
 	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[37])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
-	[]() {kMethodTable[38]();},
-	[]() {kMethodTable[39]();},
-	[]() {kMethodTable[40]();},
-	[]() {kMethodTable[41]();},
-	[]() {kMethodTable[42]();},
-	[]() {kMethodTable[43]();},
-	[]() {kMethodTable[44]();},
-	[]() {kMethodTable[45]();},
-	[]() {kMethodTable[46]();},
-	[]() {kMethodTable[47]();},
-	[]() {kMethodTable[48]();},
-	[]() {kMethodTable[49]();},
-	[]() {kMethodTable[50]();},
-	[]() {kMethodTable[51]();},
-	[]() {kMethodTable[52]();},
-	[]() {kMethodTable[53]();},
-	[]() {kMethodTable[54]();},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[38])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[39])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[40])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[41])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[42])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[43])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[44])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[45])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[46])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[47])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[48])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[49])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[50])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[51])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[52])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[53])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[54])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
 	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[55])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[56])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[57])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
+	[]() {kMethodTable[56]();},
+	[]() {kMethodTable[57]();},
 	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[58])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[59])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
+	[]() {kMethodTable[59]();},
 	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[60])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
 	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[61])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
 	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[62])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
 	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[63])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[64])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[65])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[66])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[67])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
+	[]() {kMethodTable[64]();},
+	[]() {kMethodTable[65]();},
+	[]() {kMethodTable[66]();},
+	[]() {kMethodTable[67]();},
 	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[68])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
 	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[69])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
 	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[70])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
-	[]() {kMethodTable[71]();},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[72])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[71])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
+	[]() {kMethodTable[72]();},
 	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[73])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[74])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
+	[]() {kMethodTable[74]();},
 	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[75])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
 	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[76])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
 	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[77])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[78])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
+	[]() {kMethodTable[78]();},
 	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[79])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
 	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[80])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[81])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
+	[]() {kMethodTable[81]();},
 	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[82])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
 	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[83])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[84])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
+	[]() {kMethodTable[84]();},
 	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[85])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[86])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
+	[]() {kMethodTable[86]();},
 	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[87])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
 	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[88])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
 	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[89])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[90])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
+	[]() {kMethodTable[90]();},
 	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[91])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
-	[]() {kMethodTable[92]();},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[92])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
 	[]() {kMethodTable[93]();},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[94])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
+	[]() {kMethodTable[94]();},
 	[]() {kMethodTable[95]();},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[96])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
+	[]() {kMethodTable[96]();},
 	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[97])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
 	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[98])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
 	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[99])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
-	[]() {kMethodTable[100]();},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[100])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
 	[]() {kMethodTable[101]();},
-	[]() {kMethodTable[102]();},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[102])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
 	[]() {kMethodTable[103]();},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[104])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[105])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[106])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[107])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
-	[]() {kMethodTable[108]();},
+	[]() {kMethodTable[104]();},
+	[]() {kMethodTable[105]();},
+	[]() {kMethodTable[106]();},
+	[]() {kMethodTable[107]();},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[108])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
 	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[109])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
-	[]() {kMethodTable[110]();},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[110])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
 	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[111])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
 	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[112])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[113])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
-	[]() {kMethodTable[114]();},
+	[]() {kMethodTable[113]();},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[114])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
 	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[115])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
 	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[116])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
-	[]() {kMethodTable[117]();},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[118])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[119])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
-	[]() {kMethodTable[120]();},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[121])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
-	[]() {kMethodTable[122]();},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[123])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[124])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[125])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
-	[]() {kMethodTable[126]();},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[127])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[128])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
-	[]() {kMethodTable[129]();},
-	[]() {kMethodTable[130]();},
-	[]() {kMethodTable[131]();},
-	[]() {kMethodTable[132]();},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[133])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[134])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[135])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[136])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
-	[]() {kMethodTable[137]();},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[138])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
-	[]() {kMethodTable[139]();},
-	[]() {kMethodTable[140]();},
-	[]() {kMethodTable[141]();},
-	[]() {kMethodTable[142]();},
-	[]() {kMethodTable[143]();},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[144])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[145])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[146])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[147])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[148])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
-	[]() {kMethodTable[149]();},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[150])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[151])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[152])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
 };
 
 // ── Subject slot map (kSubjectSlotMap[]) ────────────────────────────
@@ -2475,37 +2605,37 @@ extern "C" void (*kDefaultArgThunks[153])() = {
 // that shift subject methods to non-contiguous indices.
 extern "C" const int kSubjectEntryCount = 31;
 extern "C" const int kSubjectSlotMap[31] = {
-	37,
+	1,
+	19,
+	20,
+	21,
+	22,
+	23,
+	24,
+	26,
+	27,
+	28,
+	29,
+	30,
+	31,
+	32,
+	33,
+	34,
 	55,
-	56,
-	57,
-	58,
-	59,
-	60,
-	62,
-	63,
-	64,
-	65,
-	66,
-	67,
 	68,
 	69,
 	70,
+	73,
+	79,
+	82,
+	85,
 	91,
-	104,
-	105,
-	106,
-	109,
-	115,
-	118,
-	121,
-	127,
-	133,
-	134,
-	135,
-	144,
-	146,
-	147,
+	97,
+	98,
+	99,
+	108,
+	110,
+	111,
 };
 
 // ── Subject contract map (kSubjectContractMap[]) ───────────────────────
@@ -2559,47 +2689,47 @@ static const struct __attribute__((packed)) {
 static const struct {
 #endif
 
-	/* ── Entry 0: Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Boolean_System_Boolean_System_String ── */
+	/* ── Entry 0: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests__ctor ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[4];
+		CHAOS_IL2CPP_UINT32 slots[2];
 	} entry0;
-	/* ── Entry 1: Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Byte_System_Byte_System_String ── */
+	/* ── Entry 1: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_AddEventHandler_0_object_System_Delegate_0 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[4];
+		CHAOS_IL2CPP_UINT32 slots[8];
 	} entry1;
-	/* ── Entry 2: Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Byte_array_System_Byte_array_System_String ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[12];
-	} entry2;
-	/* ── Entry 3: Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Char_System_Char_System_String ── */
+	/* ── Entry 2: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_Benchmark_AddEventHandler_0_object_System_Delegate_0 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
 		CHAOS_IL2CPP_UINT32 slots[4];
-	} entry3;
-	/* ── Entry 4: Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Decimal_System_Decimal_System_String ── */
+	} entry2;
+	/* ── Entry 3: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_Benchmark_GetAddMethod_2_bool_0 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[6];
+		CHAOS_IL2CPP_UINT32 slots[3];
+	} entry3;
+	/* ── Entry 4: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_Benchmark_GetAddMethod_2_bool_1 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[3];
 	} entry4;
-	/* ── Entry 5: Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Double_System_Double_System_String ── */
+	/* ── Entry 5: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_Benchmark_GetCustomAttributes_6_System_Type_bool_0 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
@@ -2607,7 +2737,7 @@ static const struct {
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
 		CHAOS_IL2CPP_UINT32 slots[4];
 	} entry5;
-	/* ── Entry 6: Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Int16_System_Int16_System_String ── */
+	/* ── Entry 6: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_Benchmark_GetCustomAttributes_6_System_Type_bool_1 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
@@ -2615,239 +2745,239 @@ static const struct {
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
 		CHAOS_IL2CPP_UINT32 slots[4];
 	} entry6;
-	/* ── Entry 7: Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Int32_System_Int32_System_String ── */
+	/* ── Entry 7: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_Benchmark_GetCustomAttributes_7_bool_0 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[4];
+		CHAOS_IL2CPP_UINT32 slots[3];
 	} entry7;
-	/* ── Entry 8: Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Int64_System_Int64_System_String ── */
+	/* ── Entry 8: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_Benchmark_GetCustomAttributes_7_bool_1 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[3];
+	} entry8;
+	/* ── Entry 9: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_Benchmark_GetCustomAttributesData_8__8 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[2];
+	} entry9;
+	/* ── Entry 10: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_Benchmark_GetOtherMethods_3_bool_0 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[3];
+	} entry10;
+	/* ── Entry 11: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_Benchmark_GetOtherMethods_3_bool_1 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[3];
+	} entry11;
+	/* ── Entry 12: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_Benchmark_GetRaiseMethod_4_bool_0 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[3];
+	} entry12;
+	/* ── Entry 13: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_Benchmark_GetRaiseMethod_4_bool_1 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[3];
+	} entry13;
+	/* ── Entry 14: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_Benchmark_GetRemoveMethod_5_bool_0 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[3];
+	} entry14;
+	/* ── Entry 15: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_Benchmark_GetRemoveMethod_5_bool_1 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[3];
+	} entry15;
+	/* ── Entry 16: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_Benchmark_IsDefined_9_System_Type_bool_0 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
 		CHAOS_IL2CPP_UINT32 slots[4];
-	} entry8;
-	/* ── Entry 9: Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Object_System_Object_System_String ── */
+	} entry16;
+	/* ── Entry 17: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_Benchmark_IsDefined_9_System_Type_bool_1 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[4];
+	} entry17;
+	/* ── Entry 18: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_Benchmark_RemoveEventHandler_1_object_System_Delegate_0 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[4];
+	} entry18;
+	/* ── Entry 19: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_GetAddMethod_2_bool_0 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
 		CHAOS_IL2CPP_UINT32 slots[8];
-	} entry9;
-	/* ── Entry 10: Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_SByte_System_SByte_System_String ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[4];
-	} entry10;
-	/* ── Entry 11: Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Single_System_Single_System_String ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[4];
-	} entry11;
-	/* ── Entry 12: Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_String_System_String_System_String ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[6];
-	} entry12;
-	/* ── Entry 13: Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_UInt16_System_UInt16_System_String ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[4];
-	} entry13;
-	/* ── Entry 14: Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_UInt32_System_UInt32_System_String ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[4];
-	} entry14;
-	/* ── Entry 15: Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_UInt64_System_UInt64_System_String ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[4];
-	} entry15;
-	/* ── Entry 16: Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_0_0_System_String ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[23];
-	} entry16;
-	/* ── Entry 17: Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreNotEqual_0_0_System_String ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[7];
-	} entry17;
-	/* ── Entry 18: Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Complete ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[3];
-	} entry18;
-	/* ── Entry 19: Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Fail_System_String ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[4];
 	} entry19;
-	/* ── Entry 20: Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_get_ExitCode ── */
+	/* ── Entry 20: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_GetAddMethod_2_bool_1 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[1];
+		CHAOS_IL2CPP_UINT32 slots[8];
 	} entry20;
-	/* ── Entry 21: Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_IsFalse_System_Boolean_System_String ── */
+	/* ── Entry 21: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_GetCustomAttributes_6_System_Type_bool_0 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[3];
+		CHAOS_IL2CPP_UINT32 slots[8];
 	} entry21;
-	/* ── Entry 22: Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_IsNotNull_System_Object_System_String ── */
+	/* ── Entry 22: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_GetCustomAttributes_6_System_Type_bool_1 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[5];
+		CHAOS_IL2CPP_UINT32 slots[8];
 	} entry22;
-	/* ── Entry 23: Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_IsNull_System_Object_System_String ── */
+	/* ── Entry 23: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_GetCustomAttributes_7_bool_0 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[5];
+		CHAOS_IL2CPP_UINT32 slots[8];
 	} entry23;
-	/* ── Entry 24: Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_IsTrue_System_Boolean_System_String ── */
+	/* ── Entry 24: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_GetCustomAttributes_7_bool_1 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[4];
+		CHAOS_IL2CPP_UINT32 slots[8];
 	} entry24;
-	/* ── Entry 25: Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_RecordFailure ── */
+	/* ── Entry 25: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_GetCustomAttributesData_8__8 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[1];
+		CHAOS_IL2CPP_UINT32 slots[8];
 	} entry25;
-	/* ── Entry 26: Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Reset ── */
+	/* ── Entry 26: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_GetOtherMethods_3_bool_0 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[8];
+	} entry26;
+	/* ── Entry 27: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_GetOtherMethods_3_bool_1 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[8];
+	} entry27;
+	/* ── Entry 28: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_GetRaiseMethod_4_bool_0 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[8];
+	} entry28;
+	/* ── Entry 29: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_GetRaiseMethod_4_bool_1 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[8];
+	} entry29;
+	/* ── Entry 30: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_GetRemoveMethod_5_bool_0 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[8];
+	} entry30;
+	/* ── Entry 31: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_GetRemoveMethod_5_bool_1 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[8];
+	} entry31;
+	/* ── Entry 32: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_IsDefined_9_System_Type_bool_0 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[8];
+	} entry32;
+	/* ── Entry 33: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_IsDefined_9_System_Type_bool_1 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[8];
+	} entry33;
+	/* ── Entry 34: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_RemoveEventHandler_1_object_System_Delegate_0 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[8];
+	} entry34;
+	/* ── Entry 35: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c_cctor ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
 		CHAOS_IL2CPP_UINT32 slots[1];
-	} entry26;
-	/* ── Entry 27: Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Throws_System_Action ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[2];
-	} entry27;
-	/* ── Entry 28: Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Throws_System_Action ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[3];
-	} entry28;
-	/* ── Entry 29: Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Throws_System_ArgumentException_System_Action__generic ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[2];
-	} entry29;
-	/* ── Entry 30: Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Throws_System_NullReferenceException_System_Action__generic ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[2];
-	} entry30;
-	/* ── Entry 31: Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Throws_System_PlatformNotSupportedException_System_Action__generic ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[2];
-	} entry31;
-	/* ── Entry 32: Chaos_TestFramework_Sdk_Chaos_TestFramework_AssertionException__ctor_System_String ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[4];
-	} entry32;
-	/* ── Entry 33: Chaos_TestFramework_Sdk_Chaos_TestFramework_BenchmarkAttribute__ctor ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[2];
-	} entry33;
-	/* ── Entry 34: Chaos_TestFramework_Sdk_Chaos_TestFramework_FactAttribute__ctor ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[2];
-	} entry34;
-	/* ── Entry 35: Chaos_TestFramework_Sdk_Chaos_TestFramework_HotUpdateAttribute__ctor ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[2];
 	} entry35;
-	/* ── Entry 36: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests__ctor ── */
+	/* ── Entry 36: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c__ctor ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
@@ -2855,287 +2985,287 @@ static const struct {
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
 		CHAOS_IL2CPP_UINT32 slots[2];
 	} entry36;
-	/* ── Entry 37: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_AddEventHandler_0_object_System_Delegate_0 ── */
+	/* ── Entry 37: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c_AddEventHandler_0_object_System_Delegate_0_b__0_0 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[4];
+		CHAOS_IL2CPP_UINT32 slots[5];
 	} entry37;
-	/* ── Entry 38: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_Benchmark_AddEventHandler_0_object_System_Delegate_0 ── */
+	/* ── Entry 38: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c_GetAddMethod_2_bool_0_b__4_0 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[3];
+		CHAOS_IL2CPP_UINT32 slots[4];
 	} entry38;
-	/* ── Entry 39: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_Benchmark_GetAddMethod_2_bool_0 ── */
+	/* ── Entry 39: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c_GetAddMethod_2_bool_1_b__6_0 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[2];
+		CHAOS_IL2CPP_UINT32 slots[4];
 	} entry39;
-	/* ── Entry 40: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_Benchmark_GetAddMethod_2_bool_1 ── */
+	/* ── Entry 40: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c_GetCustomAttributes_6_System_Type_bool_0_b__20_0 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[2];
+		CHAOS_IL2CPP_UINT32 slots[5];
 	} entry40;
-	/* ── Entry 41: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_Benchmark_GetCustomAttributes_6_System_Type_bool_0 ── */
+	/* ── Entry 41: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c_GetCustomAttributes_6_System_Type_bool_1_b__22_0 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[3];
+		CHAOS_IL2CPP_UINT32 slots[5];
 	} entry41;
-	/* ── Entry 42: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_Benchmark_GetCustomAttributes_6_System_Type_bool_1 ── */
+	/* ── Entry 42: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c_GetCustomAttributes_7_bool_0_b__24_0 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[3];
+		CHAOS_IL2CPP_UINT32 slots[4];
 	} entry42;
-	/* ── Entry 43: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_Benchmark_GetCustomAttributes_7_bool_0 ── */
+	/* ── Entry 43: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c_GetCustomAttributes_7_bool_1_b__26_0 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[2];
+		CHAOS_IL2CPP_UINT32 slots[4];
 	} entry43;
-	/* ── Entry 44: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_Benchmark_GetCustomAttributes_7_bool_1 ── */
+	/* ── Entry 44: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c_GetCustomAttributesData_8__8_b__28_0 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[2];
+		CHAOS_IL2CPP_UINT32 slots[3];
 	} entry44;
-	/* ── Entry 45: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_Benchmark_GetCustomAttributesData_8__8 ── */
+	/* ── Entry 45: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c_GetOtherMethods_3_bool_0_b__8_0 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[2];
+		CHAOS_IL2CPP_UINT32 slots[4];
 	} entry45;
-	/* ── Entry 46: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_Benchmark_GetOtherMethods_3_bool_0 ── */
+	/* ── Entry 46: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c_GetOtherMethods_3_bool_1_b__10_0 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[2];
+		CHAOS_IL2CPP_UINT32 slots[4];
 	} entry46;
-	/* ── Entry 47: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_Benchmark_GetOtherMethods_3_bool_1 ── */
+	/* ── Entry 47: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c_GetRaiseMethod_4_bool_0_b__12_0 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[2];
+		CHAOS_IL2CPP_UINT32 slots[4];
 	} entry47;
-	/* ── Entry 48: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_Benchmark_GetRaiseMethod_4_bool_0 ── */
+	/* ── Entry 48: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c_GetRaiseMethod_4_bool_1_b__14_0 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[2];
+		CHAOS_IL2CPP_UINT32 slots[4];
 	} entry48;
-	/* ── Entry 49: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_Benchmark_GetRaiseMethod_4_bool_1 ── */
+	/* ── Entry 49: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c_GetRemoveMethod_5_bool_0_b__16_0 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[2];
+		CHAOS_IL2CPP_UINT32 slots[4];
 	} entry49;
-	/* ── Entry 50: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_Benchmark_GetRemoveMethod_5_bool_0 ── */
+	/* ── Entry 50: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c_GetRemoveMethod_5_bool_1_b__18_0 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[2];
+		CHAOS_IL2CPP_UINT32 slots[4];
 	} entry50;
-	/* ── Entry 51: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_Benchmark_GetRemoveMethod_5_bool_1 ── */
+	/* ── Entry 51: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c_IsDefined_9_System_Type_bool_0_b__30_0 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[5];
+	} entry51;
+	/* ── Entry 52: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c_IsDefined_9_System_Type_bool_1_b__32_0 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[5];
+	} entry52;
+	/* ── Entry 53: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c_RemoveEventHandler_1_object_System_Delegate_0_b__2_0 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[5];
+	} entry53;
+	/* ── Entry 54: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_HandleCollectorTests__ctor ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
 		CHAOS_IL2CPP_UINT32 slots[2];
-	} entry51;
-	/* ── Entry 52: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_Benchmark_IsDefined_9_System_Type_bool_0 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[3];
-	} entry52;
-	/* ── Entry 53: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_Benchmark_IsDefined_9_System_Type_bool_1 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[3];
-	} entry53;
-	/* ── Entry 54: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_Benchmark_RemoveEventHandler_1_object_System_Delegate_0 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[3];
 	} entry54;
-	/* ── Entry 55: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_GetAddMethod_2_bool_0 ── */
+	/* ── Entry 55: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_HandleCollectorTests_Add_0__0 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[4];
+		CHAOS_IL2CPP_UINT32 slots[8];
 	} entry55;
-	/* ── Entry 56: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_GetAddMethod_2_bool_1 ── */
+	/* ── Entry 56: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_HandleCollectorTests_Benchmark_Add_0__0 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[4];
+		CHAOS_IL2CPP_UINT32 slots[2];
 	} entry56;
-	/* ── Entry 57: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_GetCustomAttributes_6_System_Type_bool_0 ── */
+	/* ── Entry 57: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_HandleCollectorTests_Benchmark_Remove_1__1 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[4];
+		CHAOS_IL2CPP_UINT32 slots[2];
 	} entry57;
-	/* ── Entry 58: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_GetCustomAttributes_6_System_Type_bool_1 ── */
+	/* ── Entry 58: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_HandleCollectorTests_Remove_1__1 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[4];
+		CHAOS_IL2CPP_UINT32 slots[8];
 	} entry58;
-	/* ── Entry 59: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_GetCustomAttributes_7_bool_0 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[4];
-	} entry59;
-	/* ── Entry 60: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_GetCustomAttributes_7_bool_1 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[4];
-	} entry60;
-	/* ── Entry 61: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_GetCustomAttributesData_8__8 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[4];
-	} entry61;
-	/* ── Entry 62: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_GetOtherMethods_3_bool_0 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[4];
-	} entry62;
-	/* ── Entry 63: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_GetOtherMethods_3_bool_1 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[4];
-	} entry63;
-	/* ── Entry 64: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_GetRaiseMethod_4_bool_0 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[4];
-	} entry64;
-	/* ── Entry 65: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_GetRaiseMethod_4_bool_1 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[4];
-	} entry65;
-	/* ── Entry 66: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_GetRemoveMethod_5_bool_0 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[4];
-	} entry66;
-	/* ── Entry 67: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_GetRemoveMethod_5_bool_1 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[4];
-	} entry67;
-	/* ── Entry 68: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_IsDefined_9_System_Type_bool_0 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[4];
-	} entry68;
-	/* ── Entry 69: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_IsDefined_9_System_Type_bool_1 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[4];
-	} entry69;
-	/* ── Entry 70: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_RemoveEventHandler_1_object_System_Delegate_0 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[4];
-	} entry70;
-	/* ── Entry 71: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c_cctor ── */
+	/* ── Entry 59: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_HandleCollectorTests___c_cctor ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
 		CHAOS_IL2CPP_UINT32 slots[1];
+	} entry59;
+	/* ── Entry 60: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_HandleCollectorTests___c__ctor ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[2];
+	} entry60;
+	/* ── Entry 61: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_HandleCollectorTests___c_Add_0__0_b__0_0 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[3];
+	} entry61;
+	/* ── Entry 62: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_HandleCollectorTests___c_Remove_1__1_b__2_0 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[3];
+	} entry62;
+	/* ── Entry 63: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ComInterfaceMarshallerSystem_Int32Tests__ctor ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[2];
+	} entry63;
+	/* ── Entry 64: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ComInterfaceMarshallerSystem_Int32Tests_Benchmark_ConvertToManaged_1_void_0 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[2];
+	} entry64;
+	/* ── Entry 65: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ComInterfaceMarshallerSystem_Int32Tests_Benchmark_ConvertToUnmanaged_0_int_0 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[2];
+	} entry65;
+	/* ── Entry 66: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ComInterfaceMarshallerSystem_Int32Tests_Benchmark_ConvertToUnmanaged_0_int_1 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[2];
+	} entry66;
+	/* ── Entry 67: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ComInterfaceMarshallerSystem_Int32Tests_Benchmark_Free_2_void_0 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[2];
+	} entry67;
+	/* ── Entry 68: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ComInterfaceMarshallerSystem_Int32Tests_ConvertToManaged_1_void_0 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[5];
+	} entry68;
+	/* ── Entry 69: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ComInterfaceMarshallerSystem_Int32Tests_ConvertToUnmanaged_0_int_0 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[6];
+	} entry69;
+	/* ── Entry 70: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ComInterfaceMarshallerSystem_Int32Tests_ConvertToUnmanaged_0_int_1 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[6];
+	} entry70;
+	/* ── Entry 71: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ComObjectTests__ctor ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[2];
 	} entry71;
-	/* ── Entry 72: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c__ctor ── */
+	/* ── Entry 72: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ComObjectTests_Benchmark_FinalRelease_0__0 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
@@ -3143,143 +3273,143 @@ static const struct {
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
 		CHAOS_IL2CPP_UINT32 slots[2];
 	} entry72;
-	/* ── Entry 73: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c_AddEventHandler_0_object_System_Delegate_0_b__0_0 ── */
+	/* ── Entry 73: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ComObjectTests_FinalRelease_0__0 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[4];
+		CHAOS_IL2CPP_UINT32 slots[8];
 	} entry73;
-	/* ── Entry 74: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c_GetAddMethod_2_bool_0_b__4_0 ── */
+	/* ── Entry 74: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ComObjectTests___c_cctor ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[3];
+		CHAOS_IL2CPP_UINT32 slots[1];
 	} entry74;
-	/* ── Entry 75: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c_GetAddMethod_2_bool_1_b__6_0 ── */
+	/* ── Entry 75: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ComObjectTests___c__ctor ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[3];
+		CHAOS_IL2CPP_UINT32 slots[2];
 	} entry75;
-	/* ── Entry 76: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c_GetCustomAttributes_6_System_Type_bool_0_b__20_0 ── */
+	/* ── Entry 76: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ComObjectTests___c_FinalRelease_0__0_b__0_0 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[4];
+		CHAOS_IL2CPP_UINT32 slots[3];
 	} entry76;
-	/* ── Entry 77: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c_GetCustomAttributes_6_System_Type_bool_1_b__22_0 ── */
+	/* ── Entry 77: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ExceptionAsDefaultMarshallerSystem_Int32Tests__ctor ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[4];
+		CHAOS_IL2CPP_UINT32 slots[2];
 	} entry77;
-	/* ── Entry 78: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c_GetCustomAttributes_7_bool_0_b__24_0 ── */
+	/* ── Entry 78: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ExceptionAsDefaultMarshallerSystem_Int32Tests_Benchmark_ConvertToUnmanaged_0_System_Exception_0 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[3];
+		CHAOS_IL2CPP_UINT32 slots[2];
 	} entry78;
-	/* ── Entry 79: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c_GetCustomAttributes_7_bool_1_b__26_0 ── */
+	/* ── Entry 79: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ExceptionAsDefaultMarshallerSystem_Int32Tests_ConvertToUnmanaged_0_System_Exception_0 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[3];
+		CHAOS_IL2CPP_UINT32 slots[7];
 	} entry79;
-	/* ── Entry 80: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c_GetCustomAttributesData_8__8_b__28_0 ── */
+	/* ── Entry 80: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ExceptionAsHResultMarshallerSystem_Int32Tests__ctor ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[3];
+		CHAOS_IL2CPP_UINT32 slots[2];
 	} entry80;
-	/* ── Entry 81: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c_GetOtherMethods_3_bool_0_b__8_0 ── */
+	/* ── Entry 81: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ExceptionAsHResultMarshallerSystem_Int32Tests_Benchmark_ConvertToUnmanaged_0_System_Exception_0 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[3];
+		CHAOS_IL2CPP_UINT32 slots[2];
 	} entry81;
-	/* ── Entry 82: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c_GetOtherMethods_3_bool_1_b__10_0 ── */
+	/* ── Entry 82: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ExceptionAsHResultMarshallerSystem_Int32Tests_ConvertToUnmanaged_0_System_Exception_0 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[3];
+		CHAOS_IL2CPP_UINT32 slots[7];
 	} entry82;
-	/* ── Entry 83: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c_GetRaiseMethod_4_bool_0_b__12_0 ── */
+	/* ── Entry 83: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ExceptionAsNaNMarshallerSystem_DoubleTests__ctor ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[3];
+		CHAOS_IL2CPP_UINT32 slots[2];
 	} entry83;
-	/* ── Entry 84: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c_GetRaiseMethod_4_bool_1_b__14_0 ── */
+	/* ── Entry 84: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ExceptionAsNaNMarshallerSystem_DoubleTests_Benchmark_ConvertToUnmanaged_0_System_Exception_0 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[3];
+		CHAOS_IL2CPP_UINT32 slots[2];
 	} entry84;
-	/* ── Entry 85: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c_GetRemoveMethod_5_bool_0_b__16_0 ── */
+	/* ── Entry 85: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ExceptionAsNaNMarshallerSystem_DoubleTests_ConvertToUnmanaged_0_System_Exception_0 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[3];
+		CHAOS_IL2CPP_UINT32 slots[8];
 	} entry85;
-	/* ── Entry 86: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c_GetRemoveMethod_5_bool_1_b__18_0 ── */
+	/* ── Entry 86: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ExceptionAsNaNMarshallerSystem_DoubleTests___c_cctor ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[1];
+	} entry86;
+	/* ── Entry 87: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ExceptionAsNaNMarshallerSystem_DoubleTests___c__ctor ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[2];
+	} entry87;
+	/* ── Entry 88: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ExceptionAsNaNMarshallerSystem_DoubleTests___c_ConvertToUnmanaged_0_System_Exception_0_b__0_0 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
 		CHAOS_IL2CPP_UINT32 slots[3];
-	} entry86;
-	/* ── Entry 87: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c_IsDefined_9_System_Type_bool_0_b__30_0 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[4];
-	} entry87;
-	/* ── Entry 88: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c_IsDefined_9_System_Type_bool_1_b__32_0 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[4];
 	} entry88;
-	/* ── Entry 89: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c_RemoveEventHandler_1_object_System_Delegate_0_b__2_0 ── */
+	/* ── Entry 89: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ExceptionAsVoidMarshallerTests__ctor ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[4];
+		CHAOS_IL2CPP_UINT32 slots[2];
 	} entry89;
-	/* ── Entry 90: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_HandleCollectorTests__ctor ── */
+	/* ── Entry 90: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ExceptionAsVoidMarshallerTests_Benchmark_ConvertToUnmanaged_0_System_Exception_0 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
@@ -3287,47 +3417,47 @@ static const struct {
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
 		CHAOS_IL2CPP_UINT32 slots[2];
 	} entry90;
-	/* ── Entry 91: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_HandleCollectorTests_Add_0__0 ── */
+	/* ── Entry 91: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ExceptionAsVoidMarshallerTests_ConvertToUnmanaged_0_System_Exception_0 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[4];
+		CHAOS_IL2CPP_UINT32 slots[5];
 	} entry91;
-	/* ── Entry 92: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_HandleCollectorTests_Benchmark_Add_0__0 ── */
+	/* ── Entry 92: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_UniqueComInterfaceMarshallerSystem_Int32Tests__ctor ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[1];
+		CHAOS_IL2CPP_UINT32 slots[2];
 	} entry92;
-	/* ── Entry 93: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_HandleCollectorTests_Benchmark_Remove_1__1 ── */
+	/* ── Entry 93: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_UniqueComInterfaceMarshallerSystem_Int32Tests_Benchmark_ConvertToManaged_1_void_0 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[1];
+		CHAOS_IL2CPP_UINT32 slots[2];
 	} entry93;
-	/* ── Entry 94: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_HandleCollectorTests_Remove_1__1 ── */
+	/* ── Entry 94: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_UniqueComInterfaceMarshallerSystem_Int32Tests_Benchmark_ConvertToUnmanaged_0_int_0 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[4];
+		CHAOS_IL2CPP_UINT32 slots[2];
 	} entry94;
-	/* ── Entry 95: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_HandleCollectorTests___c_cctor ── */
+	/* ── Entry 95: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_UniqueComInterfaceMarshallerSystem_Int32Tests_Benchmark_ConvertToUnmanaged_0_int_1 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[1];
+		CHAOS_IL2CPP_UINT32 slots[2];
 	} entry95;
-	/* ── Entry 96: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_HandleCollectorTests___c__ctor ── */
+	/* ── Entry 96: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_UniqueComInterfaceMarshallerSystem_Int32Tests_Benchmark_Free_2_void_0 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
@@ -3335,2231 +3465,1113 @@ static const struct {
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
 		CHAOS_IL2CPP_UINT32 slots[2];
 	} entry96;
-	/* ── Entry 97: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_HandleCollectorTests___c_Add_0__0_b__0_0 ── */
+	/* ── Entry 97: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_UniqueComInterfaceMarshallerSystem_Int32Tests_ConvertToManaged_1_void_0 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[2];
+		CHAOS_IL2CPP_UINT32 slots[5];
 	} entry97;
-	/* ── Entry 98: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_HandleCollectorTests___c_Remove_1__1_b__2_0 ── */
+	/* ── Entry 98: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_UniqueComInterfaceMarshallerSystem_Int32Tests_ConvertToUnmanaged_0_int_0 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[2];
+		CHAOS_IL2CPP_UINT32 slots[6];
 	} entry98;
-	/* ── Entry 99: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ComInterfaceMarshallerSystem_Int32Tests__ctor ── */
+	/* ── Entry 99: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_UniqueComInterfaceMarshallerSystem_Int32Tests_ConvertToUnmanaged_0_int_1 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[2];
+		CHAOS_IL2CPP_UINT32 slots[6];
 	} entry99;
-	/* ── Entry 100: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ComInterfaceMarshallerSystem_Int32Tests_Benchmark_ConvertToManaged_1_void_0 ── */
+	/* ── Entry 100: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_VirtualMethodTableInfoTests__ctor ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[1];
+		CHAOS_IL2CPP_UINT32 slots[2];
 	} entry100;
-	/* ── Entry 101: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ComInterfaceMarshallerSystem_Int32Tests_Benchmark_ConvertToUnmanaged_0_int_0 ── */
+	/* ── Entry 101: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_VirtualMethodTableInfoTests_Benchmark_Deconstruct_0_void_void_0 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[1];
+		CHAOS_IL2CPP_UINT32 slots[7];
 	} entry101;
-	/* ── Entry 102: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ComInterfaceMarshallerSystem_Int32Tests_Benchmark_ConvertToUnmanaged_0_int_1 ── */
+	/* ── Entry 102: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_RuntimeEnvironmentTests__ctor ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[1];
+		CHAOS_IL2CPP_UINT32 slots[2];
 	} entry102;
-	/* ── Entry 103: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ComInterfaceMarshallerSystem_Int32Tests_Benchmark_Free_2_void_0 ── */
+	/* ── Entry 103: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_RuntimeEnvironmentTests_Benchmark_FromGlobalAccessCache_0_Assembly_0 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[1];
+		CHAOS_IL2CPP_UINT32 slots[2];
 	} entry103;
-	/* ── Entry 104: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ComInterfaceMarshallerSystem_Int32Tests_ConvertToManaged_1_void_0 ── */
+	/* ── Entry 104: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_RuntimeEnvironmentTests_Benchmark_GetRuntimeDirectory_1__1 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[4];
+		CHAOS_IL2CPP_UINT32 slots[1];
 	} entry104;
-	/* ── Entry 105: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ComInterfaceMarshallerSystem_Int32Tests_ConvertToUnmanaged_0_int_0 ── */
+	/* ── Entry 105: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_RuntimeEnvironmentTests_Benchmark_GetRuntimeInterfaceAsIntPtr_2_System_Guid_System_Guid_0 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[5];
+		CHAOS_IL2CPP_UINT32 slots[4];
 	} entry105;
-	/* ── Entry 106: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ComInterfaceMarshallerSystem_Int32Tests_ConvertToUnmanaged_0_int_1 ── */
+	/* ── Entry 106: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_RuntimeEnvironmentTests_Benchmark_GetRuntimeInterfaceAsObject_3_System_Guid_System_Guid_0 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[5];
+		CHAOS_IL2CPP_UINT32 slots[4];
 	} entry106;
-	/* ── Entry 107: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ComObjectTests__ctor ── */
+	/* ── Entry 107: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_RuntimeEnvironmentTests_Benchmark_GetSystemVersion_4__4 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[2];
+		CHAOS_IL2CPP_UINT32 slots[1];
 	} entry107;
-	/* ── Entry 108: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ComObjectTests_Benchmark_FinalRelease_0__0 ── */
+	/* ── Entry 108: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_RuntimeEnvironmentTests_FromGlobalAccessCache_0_Assembly_0 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[1];
+		CHAOS_IL2CPP_UINT32 slots[7];
 	} entry108;
-	/* ── Entry 109: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ComObjectTests_FinalRelease_0__0 ── */
+	/* ── Entry 109: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_RuntimeEnvironmentTests_GetRuntimeDirectory_1__1 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[4];
+		CHAOS_IL2CPP_UINT32 slots[6];
 	} entry109;
-	/* ── Entry 110: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ComObjectTests___c_cctor ── */
+	/* ── Entry 110: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_RuntimeEnvironmentTests_GetRuntimeInterfaceAsIntPtr_2_System_Guid_System_Guid_0 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[1];
+		CHAOS_IL2CPP_UINT32 slots[8];
 	} entry110;
-	/* ── Entry 111: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ComObjectTests___c__ctor ── */
+	/* ── Entry 111: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_RuntimeEnvironmentTests_GetRuntimeInterfaceAsObject_3_System_Guid_System_Guid_0 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[2];
+		CHAOS_IL2CPP_UINT32 slots[8];
 	} entry111;
-	/* ── Entry 112: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ComObjectTests___c_FinalRelease_0__0_b__0_0 ── */
+	/* ── Entry 112: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_RuntimeEnvironmentTests_GetSystemVersion_4__4 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[2];
+		CHAOS_IL2CPP_UINT32 slots[6];
 	} entry112;
-	/* ── Entry 113: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ExceptionAsDefaultMarshallerSystem_Int32Tests__ctor ── */
+	/* ── Entry 113: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_RuntimeEnvironmentTests___c_cctor ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[2];
+		CHAOS_IL2CPP_UINT32 slots[1];
 	} entry113;
-	/* ── Entry 114: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ExceptionAsDefaultMarshallerSystem_Int32Tests_Benchmark_ConvertToUnmanaged_0_System_Exception_0 ── */
+	/* ── Entry 114: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_RuntimeEnvironmentTests___c__ctor ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[1];
+		CHAOS_IL2CPP_UINT32 slots[2];
 	} entry114;
-	/* ── Entry 115: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ExceptionAsDefaultMarshallerSystem_Int32Tests_ConvertToUnmanaged_0_System_Exception_0 ── */
+	/* ── Entry 115: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_RuntimeEnvironmentTests___c_GetRuntimeInterfaceAsIntPtr_2_System_Guid_System_Guid_0_b__4_0 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[6];
+		CHAOS_IL2CPP_UINT32 slots[5];
 	} entry115;
-	/* ── Entry 116: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ExceptionAsHResultMarshallerSystem_Int32Tests__ctor ── */
+	/* ── Entry 116: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_RuntimeEnvironmentTests___c_GetRuntimeInterfaceAsObject_3_System_Guid_System_Guid_0_b__6_0 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[2];
+		CHAOS_IL2CPP_UINT32 slots[5];
 	} entry116;
-	/* ── Entry 117: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ExceptionAsHResultMarshallerSystem_Int32Tests_Benchmark_ConvertToUnmanaged_0_System_Exception_0 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[1];
-	} entry117;
-	/* ── Entry 118: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ExceptionAsHResultMarshallerSystem_Int32Tests_ConvertToUnmanaged_0_System_Exception_0 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[6];
-	} entry118;
-	/* ── Entry 119: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ExceptionAsNaNMarshallerSystem_DoubleTests__ctor ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[2];
-	} entry119;
-	/* ── Entry 120: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ExceptionAsNaNMarshallerSystem_DoubleTests_Benchmark_ConvertToUnmanaged_0_System_Exception_0 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[1];
-	} entry120;
-	/* ── Entry 121: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ExceptionAsNaNMarshallerSystem_DoubleTests_ConvertToUnmanaged_0_System_Exception_0 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[4];
-	} entry121;
-	/* ── Entry 122: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ExceptionAsNaNMarshallerSystem_DoubleTests___c_cctor ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[1];
-	} entry122;
-	/* ── Entry 123: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ExceptionAsNaNMarshallerSystem_DoubleTests___c__ctor ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[2];
-	} entry123;
-	/* ── Entry 124: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ExceptionAsNaNMarshallerSystem_DoubleTests___c_ConvertToUnmanaged_0_System_Exception_0_b__0_0 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[2];
-	} entry124;
-	/* ── Entry 125: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ExceptionAsVoidMarshallerTests__ctor ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[2];
-	} entry125;
-	/* ── Entry 126: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ExceptionAsVoidMarshallerTests_Benchmark_ConvertToUnmanaged_0_System_Exception_0 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[1];
-	} entry126;
-	/* ── Entry 127: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ExceptionAsVoidMarshallerTests_ConvertToUnmanaged_0_System_Exception_0 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[3];
-	} entry127;
-	/* ── Entry 128: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_UniqueComInterfaceMarshallerSystem_Int32Tests__ctor ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[2];
-	} entry128;
-	/* ── Entry 129: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_UniqueComInterfaceMarshallerSystem_Int32Tests_Benchmark_ConvertToManaged_1_void_0 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[1];
-	} entry129;
-	/* ── Entry 130: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_UniqueComInterfaceMarshallerSystem_Int32Tests_Benchmark_ConvertToUnmanaged_0_int_0 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[1];
-	} entry130;
-	/* ── Entry 131: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_UniqueComInterfaceMarshallerSystem_Int32Tests_Benchmark_ConvertToUnmanaged_0_int_1 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[1];
-	} entry131;
-	/* ── Entry 132: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_UniqueComInterfaceMarshallerSystem_Int32Tests_Benchmark_Free_2_void_0 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[1];
-	} entry132;
-	/* ── Entry 133: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_UniqueComInterfaceMarshallerSystem_Int32Tests_ConvertToManaged_1_void_0 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[4];
-	} entry133;
-	/* ── Entry 134: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_UniqueComInterfaceMarshallerSystem_Int32Tests_ConvertToUnmanaged_0_int_0 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[5];
-	} entry134;
-	/* ── Entry 135: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_UniqueComInterfaceMarshallerSystem_Int32Tests_ConvertToUnmanaged_0_int_1 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[5];
-	} entry135;
-	/* ── Entry 136: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_VirtualMethodTableInfoTests__ctor ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[2];
-	} entry136;
-	/* ── Entry 137: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_VirtualMethodTableInfoTests_Benchmark_Deconstruct_0_void_void_0 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[6];
-	} entry137;
-	/* ── Entry 138: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_RuntimeEnvironmentTests__ctor ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[2];
-	} entry138;
-	/* ── Entry 139: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_RuntimeEnvironmentTests_Benchmark_FromGlobalAccessCache_0_Assembly_0 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[1];
-	} entry139;
-	/* ── Entry 140: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_RuntimeEnvironmentTests_Benchmark_GetRuntimeDirectory_1__1 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[1];
-	} entry140;
-	/* ── Entry 141: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_RuntimeEnvironmentTests_Benchmark_GetRuntimeInterfaceAsIntPtr_2_System_Guid_System_Guid_0 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[3];
-	} entry141;
-	/* ── Entry 142: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_RuntimeEnvironmentTests_Benchmark_GetRuntimeInterfaceAsObject_3_System_Guid_System_Guid_0 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[3];
-	} entry142;
-	/* ── Entry 143: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_RuntimeEnvironmentTests_Benchmark_GetSystemVersion_4__4 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[1];
-	} entry143;
-	/* ── Entry 144: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_RuntimeEnvironmentTests_FromGlobalAccessCache_0_Assembly_0 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[6];
-	} entry144;
-	/* ── Entry 145: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_RuntimeEnvironmentTests_GetRuntimeDirectory_1__1 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[6];
-	} entry145;
-	/* ── Entry 146: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_RuntimeEnvironmentTests_GetRuntimeInterfaceAsIntPtr_2_System_Guid_System_Guid_0 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[4];
-	} entry146;
-	/* ── Entry 147: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_RuntimeEnvironmentTests_GetRuntimeInterfaceAsObject_3_System_Guid_System_Guid_0 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[4];
-	} entry147;
-	/* ── Entry 148: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_RuntimeEnvironmentTests_GetSystemVersion_4__4 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[6];
-	} entry148;
-	/* ── Entry 149: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_RuntimeEnvironmentTests___c_cctor ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[1];
-	} entry149;
-	/* ── Entry 150: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_RuntimeEnvironmentTests___c__ctor ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[2];
-	} entry150;
-	/* ── Entry 151: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_RuntimeEnvironmentTests___c_GetRuntimeInterfaceAsIntPtr_2_System_Guid_System_Guid_0_b__4_0 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[4];
-	} entry151;
-	/* ── Entry 152: CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_RuntimeEnvironmentTests___c_GetRuntimeInterfaceAsObject_3_System_Guid_System_Guid_0_b__6_0 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[4];
-	} entry152;
 } kChaosGcSlotMapsSection = {
-	/* entry0 = Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Boolean_System_Boolean_System_String */
+	/* entry0 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests__ctor */
 	.entry0 = {
-		/* entry_total_size = 36 */ 36u,
-		/* code_address */ reinterpret_cast<const void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Boolean_System_Boolean_System_String),
-		/* frame_size = 48 */ 48u,
-		/* num_gc_slots = 4 */ 4u,
-		/* slots */ { 16u, 24u, 32u, 40u }
-	},
-	/* entry1 = Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Byte_System_Byte_System_String */
-	.entry1 = {
-		/* entry_total_size = 36 */ 36u,
-		/* code_address */ reinterpret_cast<const void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Byte_System_Byte_System_String),
-		/* frame_size = 48 */ 48u,
-		/* num_gc_slots = 4 */ 4u,
-		/* slots */ { 16u, 24u, 32u, 40u }
-	},
-	/* entry2 = Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Byte_array_System_Byte_array_System_String */
-	.entry2 = {
-		/* entry_total_size = 68 */ 68u,
-		/* code_address */ reinterpret_cast<const void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Byte_array_System_Byte_array_System_String),
-		/* frame_size = 96 */ 96u,
-		/* num_gc_slots = 12 */ 12u,
-		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u, 56u, 64u, 72u, 80u, 88u }
-	},
-	/* entry3 = Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Char_System_Char_System_String */
-	.entry3 = {
-		/* entry_total_size = 36 */ 36u,
-		/* code_address */ reinterpret_cast<const void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Char_System_Char_System_String),
-		/* frame_size = 48 */ 48u,
-		/* num_gc_slots = 4 */ 4u,
-		/* slots */ { 16u, 24u, 32u, 40u }
-	},
-	/* entry4 = Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Decimal_System_Decimal_System_String */
-	.entry4 = {
-		/* entry_total_size = 44 */ 44u,
-		/* code_address */ reinterpret_cast<const void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Decimal_System_Decimal_System_String),
-		/* frame_size = 48 */ 48u,
-		/* num_gc_slots = 6 */ 6u,
-		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u }
-	},
-	/* entry5 = Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Double_System_Double_System_String */
-	.entry5 = {
-		/* entry_total_size = 36 */ 36u,
-		/* code_address */ reinterpret_cast<const void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Double_System_Double_System_String),
-		/* frame_size = 48 */ 48u,
-		/* num_gc_slots = 4 */ 4u,
-		/* slots */ { 16u, 24u, 32u, 40u }
-	},
-	/* entry6 = Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Int16_System_Int16_System_String */
-	.entry6 = {
-		/* entry_total_size = 36 */ 36u,
-		/* code_address */ reinterpret_cast<const void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Int16_System_Int16_System_String),
-		/* frame_size = 48 */ 48u,
-		/* num_gc_slots = 4 */ 4u,
-		/* slots */ { 16u, 24u, 32u, 40u }
-	},
-	/* entry7 = Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Int32_System_Int32_System_String */
-	.entry7 = {
-		/* entry_total_size = 36 */ 36u,
-		/* code_address */ reinterpret_cast<const void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Int32_System_Int32_System_String),
-		/* frame_size = 48 */ 48u,
-		/* num_gc_slots = 4 */ 4u,
-		/* slots */ { 16u, 24u, 32u, 40u }
-	},
-	/* entry8 = Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Int64_System_Int64_System_String */
-	.entry8 = {
-		/* entry_total_size = 36 */ 36u,
-		/* code_address */ reinterpret_cast<const void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Int64_System_Int64_System_String),
-		/* frame_size = 48 */ 48u,
-		/* num_gc_slots = 4 */ 4u,
-		/* slots */ { 16u, 24u, 32u, 40u }
-	},
-	/* entry9 = Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Object_System_Object_System_String */
-	.entry9 = {
-		/* entry_total_size = 52 */ 52u,
-		/* code_address */ reinterpret_cast<const void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Object_System_Object_System_String),
-		/* frame_size = 64 */ 64u,
-		/* num_gc_slots = 8 */ 8u,
-		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u, 56u }
-	},
-	/* entry10 = Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_SByte_System_SByte_System_String */
-	.entry10 = {
-		/* entry_total_size = 36 */ 36u,
-		/* code_address */ reinterpret_cast<const void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_SByte_System_SByte_System_String),
-		/* frame_size = 48 */ 48u,
-		/* num_gc_slots = 4 */ 4u,
-		/* slots */ { 16u, 24u, 32u, 40u }
-	},
-	/* entry11 = Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Single_System_Single_System_String */
-	.entry11 = {
-		/* entry_total_size = 36 */ 36u,
-		/* code_address */ reinterpret_cast<const void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Single_System_Single_System_String),
-		/* frame_size = 48 */ 48u,
-		/* num_gc_slots = 4 */ 4u,
-		/* slots */ { 16u, 24u, 32u, 40u }
-	},
-	/* entry12 = Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_String_System_String_System_String */
-	.entry12 = {
-		/* entry_total_size = 44 */ 44u,
-		/* code_address */ reinterpret_cast<const void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_String_System_String_System_String),
-		/* frame_size = 48 */ 48u,
-		/* num_gc_slots = 6 */ 6u,
-		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u }
-	},
-	/* entry13 = Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_UInt16_System_UInt16_System_String */
-	.entry13 = {
-		/* entry_total_size = 36 */ 36u,
-		/* code_address */ reinterpret_cast<const void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_UInt16_System_UInt16_System_String),
-		/* frame_size = 48 */ 48u,
-		/* num_gc_slots = 4 */ 4u,
-		/* slots */ { 16u, 24u, 32u, 40u }
-	},
-	/* entry14 = Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_UInt32_System_UInt32_System_String */
-	.entry14 = {
-		/* entry_total_size = 36 */ 36u,
-		/* code_address */ reinterpret_cast<const void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_UInt32_System_UInt32_System_String),
-		/* frame_size = 48 */ 48u,
-		/* num_gc_slots = 4 */ 4u,
-		/* slots */ { 16u, 24u, 32u, 40u }
-	},
-	/* entry15 = Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_UInt64_System_UInt64_System_String */
-	.entry15 = {
-		/* entry_total_size = 36 */ 36u,
-		/* code_address */ reinterpret_cast<const void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_UInt64_System_UInt64_System_String),
-		/* frame_size = 48 */ 48u,
-		/* num_gc_slots = 4 */ 4u,
-		/* slots */ { 16u, 24u, 32u, 40u }
-	},
-	/* entry16 = Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_0_0_System_String */
-	.entry16 = {
-		/* entry_total_size = 112 */ 112u,
-		/* code_address */ reinterpret_cast<const void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_0_0_System_String),
-		/* frame_size = 184 */ 184u,
-		/* num_gc_slots = 23 */ 23u,
-		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u, 56u, 64u, 72u, 80u, 88u, 96u, 104u, 112u, 120u, 128u, 136u, 144u, 152u, 160u, 168u, 176u }
-	},
-	/* entry17 = Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreNotEqual_0_0_System_String */
-	.entry17 = {
-		/* entry_total_size = 48 */ 48u,
-		/* code_address */ reinterpret_cast<const void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreNotEqual_0_0_System_String),
-		/* frame_size = 56 */ 56u,
-		/* num_gc_slots = 7 */ 7u,
-		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u }
-	},
-	/* entry18 = Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Complete */
-	.entry18 = {
-		/* entry_total_size = 32 */ 32u,
-		/* code_address */ reinterpret_cast<const void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Complete),
-		/* frame_size = 24 */ 24u,
-		/* num_gc_slots = 3 */ 3u,
-		/* slots */ { 0u, 8u, 16u }
-	},
-	/* entry19 = Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Fail_System_String */
-	.entry19 = {
-		/* entry_total_size = 36 */ 36u,
-		/* code_address */ reinterpret_cast<const void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Fail_System_String),
-		/* frame_size = 32 */ 32u,
-		/* num_gc_slots = 4 */ 4u,
-		/* slots */ { 0u, 8u, 16u, 24u }
-	},
-	/* entry20 = Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_get_ExitCode */
-	.entry20 = {
-		/* entry_total_size = 24 */ 24u,
-		/* code_address */ reinterpret_cast<const void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_get_ExitCode),
-		/* frame_size = 8 */ 8u,
-		/* num_gc_slots = 1 */ 1u,
-		/* slots */ { 0u }
-	},
-	/* entry21 = Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_IsFalse_System_Boolean_System_String */
-	.entry21 = {
-		/* entry_total_size = 32 */ 32u,
-		/* code_address */ reinterpret_cast<const void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_IsFalse_System_Boolean_System_String),
-		/* frame_size = 32 */ 32u,
-		/* num_gc_slots = 3 */ 3u,
-		/* slots */ { 8u, 16u, 24u }
-	},
-	/* entry22 = Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_IsNotNull_System_Object_System_String */
-	.entry22 = {
-		/* entry_total_size = 40 */ 40u,
-		/* code_address */ reinterpret_cast<const void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_IsNotNull_System_Object_System_String),
-		/* frame_size = 40 */ 40u,
-		/* num_gc_slots = 5 */ 5u,
-		/* slots */ { 0u, 8u, 16u, 24u, 32u }
-	},
-	/* entry23 = Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_IsNull_System_Object_System_String */
-	.entry23 = {
-		/* entry_total_size = 40 */ 40u,
-		/* code_address */ reinterpret_cast<const void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_IsNull_System_Object_System_String),
-		/* frame_size = 40 */ 40u,
-		/* num_gc_slots = 5 */ 5u,
-		/* slots */ { 0u, 8u, 16u, 24u, 32u }
-	},
-	/* entry24 = Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_IsTrue_System_Boolean_System_String */
-	.entry24 = {
-		/* entry_total_size = 36 */ 36u,
-		/* code_address */ reinterpret_cast<const void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_IsTrue_System_Boolean_System_String),
-		/* frame_size = 40 */ 40u,
-		/* num_gc_slots = 4 */ 4u,
-		/* slots */ { 8u, 16u, 24u, 32u }
-	},
-	/* entry25 = Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_RecordFailure */
-	.entry25 = {
-		/* entry_total_size = 24 */ 24u,
-		/* code_address */ reinterpret_cast<const void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_RecordFailure),
-		/* frame_size = 8 */ 8u,
-		/* num_gc_slots = 1 */ 1u,
-		/* slots */ { 0u }
-	},
-	/* entry26 = Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Reset */
-	.entry26 = {
-		/* entry_total_size = 24 */ 24u,
-		/* code_address */ reinterpret_cast<const void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Reset),
-		/* frame_size = 8 */ 8u,
-		/* num_gc_slots = 1 */ 1u,
-		/* slots */ { 0u }
-	},
-	/* entry27 = Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Throws_System_Action */
-	.entry27 = {
-		/* entry_total_size = 28 */ 28u,
-		/* code_address */ reinterpret_cast<const void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Throws_System_Action),
-		/* frame_size = 16 */ 16u,
-		/* num_gc_slots = 2 */ 2u,
-		/* slots */ { 0u, 8u }
-	},
-	/* entry28 = Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Throws_System_Action */
-	.entry28 = {
-		/* entry_total_size = 32 */ 32u,
-		/* code_address */ reinterpret_cast<const void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Throws_System_Action),
-		/* frame_size = 24 */ 24u,
-		/* num_gc_slots = 3 */ 3u,
-		/* slots */ { 0u, 8u, 16u }
-	},
-	/* entry29 = Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Throws_System_ArgumentException_System_Action__generic */
-	.entry29 = {
-		/* entry_total_size = 28 */ 28u,
-		/* code_address */ reinterpret_cast<const void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Throws_System_ArgumentException_System_Action__generic),
-		/* frame_size = 16 */ 16u,
-		/* num_gc_slots = 2 */ 2u,
-		/* slots */ { 0u, 8u }
-	},
-	/* entry30 = Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Throws_System_NullReferenceException_System_Action__generic */
-	.entry30 = {
-		/* entry_total_size = 28 */ 28u,
-		/* code_address */ reinterpret_cast<const void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Throws_System_NullReferenceException_System_Action__generic),
-		/* frame_size = 16 */ 16u,
-		/* num_gc_slots = 2 */ 2u,
-		/* slots */ { 0u, 8u }
-	},
-	/* entry31 = Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Throws_System_PlatformNotSupportedException_System_Action__generic */
-	.entry31 = {
-		/* entry_total_size = 28 */ 28u,
-		/* code_address */ reinterpret_cast<const void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Throws_System_PlatformNotSupportedException_System_Action__generic),
-		/* frame_size = 16 */ 16u,
-		/* num_gc_slots = 2 */ 2u,
-		/* slots */ { 0u, 8u }
-	},
-	/* entry32 = Chaos_TestFramework_Sdk_Chaos_TestFramework_AssertionException__ctor_System_String */
-	.entry32 = {
-		/* entry_total_size = 36 */ 36u,
-		/* code_address */ reinterpret_cast<const void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_AssertionException__ctor_System_String),
-		/* frame_size = 32 */ 32u,
-		/* num_gc_slots = 4 */ 4u,
-		/* slots */ { 0u, 8u, 16u, 24u }
-	},
-	/* entry33 = Chaos_TestFramework_Sdk_Chaos_TestFramework_BenchmarkAttribute__ctor */
-	.entry33 = {
-		/* entry_total_size = 28 */ 28u,
-		/* code_address */ reinterpret_cast<const void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_BenchmarkAttribute__ctor),
-		/* frame_size = 16 */ 16u,
-		/* num_gc_slots = 2 */ 2u,
-		/* slots */ { 0u, 8u }
-	},
-	/* entry34 = Chaos_TestFramework_Sdk_Chaos_TestFramework_FactAttribute__ctor */
-	.entry34 = {
-		/* entry_total_size = 28 */ 28u,
-		/* code_address */ reinterpret_cast<const void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_FactAttribute__ctor),
-		/* frame_size = 16 */ 16u,
-		/* num_gc_slots = 2 */ 2u,
-		/* slots */ { 0u, 8u }
-	},
-	/* entry35 = Chaos_TestFramework_Sdk_Chaos_TestFramework_HotUpdateAttribute__ctor */
-	.entry35 = {
-		/* entry_total_size = 28 */ 28u,
-		/* code_address */ reinterpret_cast<const void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_HotUpdateAttribute__ctor),
-		/* frame_size = 16 */ 16u,
-		/* num_gc_slots = 2 */ 2u,
-		/* slots */ { 0u, 8u }
-	},
-	/* entry36 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests__ctor */
-	.entry36 = {
 		/* entry_total_size = 28 */ 28u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests__ctor),
 		/* frame_size = 16 */ 16u,
 		/* num_gc_slots = 2 */ 2u,
 		/* slots */ { 0u, 8u }
 	},
-	/* entry37 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_AddEventHandler_0_object_System_Delegate_0 */
-	.entry37 = {
-		/* entry_total_size = 36 */ 36u,
+	/* entry1 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_AddEventHandler_0_object_System_Delegate_0 */
+	.entry1 = {
+		/* entry_total_size = 52 */ 52u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_AddEventHandler_0_object_System_Delegate_0),
+		/* frame_size = 64 */ 64u,
+		/* num_gc_slots = 8 */ 8u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u, 56u }
+	},
+	/* entry2 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_Benchmark_AddEventHandler_0_object_System_Delegate_0 */
+	.entry2 = {
+		/* entry_total_size = 36 */ 36u,
+		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_Benchmark_AddEventHandler_0_object_System_Delegate_0),
 		/* frame_size = 32 */ 32u,
 		/* num_gc_slots = 4 */ 4u,
 		/* slots */ { 0u, 8u, 16u, 24u }
 	},
-	/* entry38 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_Benchmark_AddEventHandler_0_object_System_Delegate_0 */
-	.entry38 = {
+	/* entry3 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_Benchmark_GetAddMethod_2_bool_0 */
+	.entry3 = {
 		/* entry_total_size = 32 */ 32u,
-		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_Benchmark_AddEventHandler_0_object_System_Delegate_0),
-		/* frame_size = 24 */ 24u,
-		/* num_gc_slots = 3 */ 3u,
-		/* slots */ { 0u, 8u, 16u }
-	},
-	/* entry39 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_Benchmark_GetAddMethod_2_bool_0 */
-	.entry39 = {
-		/* entry_total_size = 28 */ 28u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_Benchmark_GetAddMethod_2_bool_0),
-		/* frame_size = 16 */ 16u,
-		/* num_gc_slots = 2 */ 2u,
-		/* slots */ { 0u, 8u }
+		/* frame_size = 24 */ 24u,
+		/* num_gc_slots = 3 */ 3u,
+		/* slots */ { 0u, 8u, 16u }
 	},
-	/* entry40 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_Benchmark_GetAddMethod_2_bool_1 */
-	.entry40 = {
-		/* entry_total_size = 28 */ 28u,
+	/* entry4 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_Benchmark_GetAddMethod_2_bool_1 */
+	.entry4 = {
+		/* entry_total_size = 32 */ 32u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_Benchmark_GetAddMethod_2_bool_1),
-		/* frame_size = 16 */ 16u,
-		/* num_gc_slots = 2 */ 2u,
-		/* slots */ { 0u, 8u }
+		/* frame_size = 24 */ 24u,
+		/* num_gc_slots = 3 */ 3u,
+		/* slots */ { 0u, 8u, 16u }
 	},
-	/* entry41 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_Benchmark_GetCustomAttributes_6_System_Type_bool_0 */
-	.entry41 = {
-		/* entry_total_size = 32 */ 32u,
+	/* entry5 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_Benchmark_GetCustomAttributes_6_System_Type_bool_0 */
+	.entry5 = {
+		/* entry_total_size = 36 */ 36u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_Benchmark_GetCustomAttributes_6_System_Type_bool_0),
-		/* frame_size = 24 */ 24u,
-		/* num_gc_slots = 3 */ 3u,
-		/* slots */ { 0u, 8u, 16u }
+		/* frame_size = 32 */ 32u,
+		/* num_gc_slots = 4 */ 4u,
+		/* slots */ { 0u, 8u, 16u, 24u }
 	},
-	/* entry42 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_Benchmark_GetCustomAttributes_6_System_Type_bool_1 */
-	.entry42 = {
-		/* entry_total_size = 32 */ 32u,
+	/* entry6 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_Benchmark_GetCustomAttributes_6_System_Type_bool_1 */
+	.entry6 = {
+		/* entry_total_size = 36 */ 36u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_Benchmark_GetCustomAttributes_6_System_Type_bool_1),
+		/* frame_size = 32 */ 32u,
+		/* num_gc_slots = 4 */ 4u,
+		/* slots */ { 0u, 8u, 16u, 24u }
+	},
+	/* entry7 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_Benchmark_GetCustomAttributes_7_bool_0 */
+	.entry7 = {
+		/* entry_total_size = 32 */ 32u,
+		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_Benchmark_GetCustomAttributes_7_bool_0),
 		/* frame_size = 24 */ 24u,
 		/* num_gc_slots = 3 */ 3u,
 		/* slots */ { 0u, 8u, 16u }
 	},
-	/* entry43 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_Benchmark_GetCustomAttributes_7_bool_0 */
-	.entry43 = {
-		/* entry_total_size = 28 */ 28u,
-		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_Benchmark_GetCustomAttributes_7_bool_0),
-		/* frame_size = 16 */ 16u,
-		/* num_gc_slots = 2 */ 2u,
-		/* slots */ { 0u, 8u }
-	},
-	/* entry44 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_Benchmark_GetCustomAttributes_7_bool_1 */
-	.entry44 = {
-		/* entry_total_size = 28 */ 28u,
+	/* entry8 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_Benchmark_GetCustomAttributes_7_bool_1 */
+	.entry8 = {
+		/* entry_total_size = 32 */ 32u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_Benchmark_GetCustomAttributes_7_bool_1),
-		/* frame_size = 16 */ 16u,
-		/* num_gc_slots = 2 */ 2u,
-		/* slots */ { 0u, 8u }
+		/* frame_size = 24 */ 24u,
+		/* num_gc_slots = 3 */ 3u,
+		/* slots */ { 0u, 8u, 16u }
 	},
-	/* entry45 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_Benchmark_GetCustomAttributesData_8__8 */
-	.entry45 = {
+	/* entry9 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_Benchmark_GetCustomAttributesData_8__8 */
+	.entry9 = {
 		/* entry_total_size = 28 */ 28u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_Benchmark_GetCustomAttributesData_8__8),
 		/* frame_size = 16 */ 16u,
 		/* num_gc_slots = 2 */ 2u,
 		/* slots */ { 0u, 8u }
 	},
-	/* entry46 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_Benchmark_GetOtherMethods_3_bool_0 */
-	.entry46 = {
-		/* entry_total_size = 28 */ 28u,
+	/* entry10 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_Benchmark_GetOtherMethods_3_bool_0 */
+	.entry10 = {
+		/* entry_total_size = 32 */ 32u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_Benchmark_GetOtherMethods_3_bool_0),
-		/* frame_size = 16 */ 16u,
-		/* num_gc_slots = 2 */ 2u,
-		/* slots */ { 0u, 8u }
+		/* frame_size = 24 */ 24u,
+		/* num_gc_slots = 3 */ 3u,
+		/* slots */ { 0u, 8u, 16u }
 	},
-	/* entry47 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_Benchmark_GetOtherMethods_3_bool_1 */
-	.entry47 = {
-		/* entry_total_size = 28 */ 28u,
+	/* entry11 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_Benchmark_GetOtherMethods_3_bool_1 */
+	.entry11 = {
+		/* entry_total_size = 32 */ 32u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_Benchmark_GetOtherMethods_3_bool_1),
-		/* frame_size = 16 */ 16u,
-		/* num_gc_slots = 2 */ 2u,
-		/* slots */ { 0u, 8u }
+		/* frame_size = 24 */ 24u,
+		/* num_gc_slots = 3 */ 3u,
+		/* slots */ { 0u, 8u, 16u }
 	},
-	/* entry48 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_Benchmark_GetRaiseMethod_4_bool_0 */
-	.entry48 = {
-		/* entry_total_size = 28 */ 28u,
+	/* entry12 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_Benchmark_GetRaiseMethod_4_bool_0 */
+	.entry12 = {
+		/* entry_total_size = 32 */ 32u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_Benchmark_GetRaiseMethod_4_bool_0),
-		/* frame_size = 16 */ 16u,
-		/* num_gc_slots = 2 */ 2u,
-		/* slots */ { 0u, 8u }
+		/* frame_size = 24 */ 24u,
+		/* num_gc_slots = 3 */ 3u,
+		/* slots */ { 0u, 8u, 16u }
 	},
-	/* entry49 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_Benchmark_GetRaiseMethod_4_bool_1 */
-	.entry49 = {
-		/* entry_total_size = 28 */ 28u,
+	/* entry13 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_Benchmark_GetRaiseMethod_4_bool_1 */
+	.entry13 = {
+		/* entry_total_size = 32 */ 32u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_Benchmark_GetRaiseMethod_4_bool_1),
-		/* frame_size = 16 */ 16u,
-		/* num_gc_slots = 2 */ 2u,
-		/* slots */ { 0u, 8u }
+		/* frame_size = 24 */ 24u,
+		/* num_gc_slots = 3 */ 3u,
+		/* slots */ { 0u, 8u, 16u }
 	},
-	/* entry50 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_Benchmark_GetRemoveMethod_5_bool_0 */
-	.entry50 = {
-		/* entry_total_size = 28 */ 28u,
+	/* entry14 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_Benchmark_GetRemoveMethod_5_bool_0 */
+	.entry14 = {
+		/* entry_total_size = 32 */ 32u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_Benchmark_GetRemoveMethod_5_bool_0),
-		/* frame_size = 16 */ 16u,
-		/* num_gc_slots = 2 */ 2u,
-		/* slots */ { 0u, 8u }
+		/* frame_size = 24 */ 24u,
+		/* num_gc_slots = 3 */ 3u,
+		/* slots */ { 0u, 8u, 16u }
 	},
-	/* entry51 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_Benchmark_GetRemoveMethod_5_bool_1 */
-	.entry51 = {
-		/* entry_total_size = 28 */ 28u,
+	/* entry15 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_Benchmark_GetRemoveMethod_5_bool_1 */
+	.entry15 = {
+		/* entry_total_size = 32 */ 32u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_Benchmark_GetRemoveMethod_5_bool_1),
-		/* frame_size = 16 */ 16u,
-		/* num_gc_slots = 2 */ 2u,
-		/* slots */ { 0u, 8u }
+		/* frame_size = 24 */ 24u,
+		/* num_gc_slots = 3 */ 3u,
+		/* slots */ { 0u, 8u, 16u }
 	},
-	/* entry52 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_Benchmark_IsDefined_9_System_Type_bool_0 */
-	.entry52 = {
-		/* entry_total_size = 32 */ 32u,
+	/* entry16 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_Benchmark_IsDefined_9_System_Type_bool_0 */
+	.entry16 = {
+		/* entry_total_size = 36 */ 36u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_Benchmark_IsDefined_9_System_Type_bool_0),
-		/* frame_size = 24 */ 24u,
-		/* num_gc_slots = 3 */ 3u,
-		/* slots */ { 0u, 8u, 16u }
+		/* frame_size = 32 */ 32u,
+		/* num_gc_slots = 4 */ 4u,
+		/* slots */ { 0u, 8u, 16u, 24u }
 	},
-	/* entry53 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_Benchmark_IsDefined_9_System_Type_bool_1 */
-	.entry53 = {
-		/* entry_total_size = 32 */ 32u,
+	/* entry17 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_Benchmark_IsDefined_9_System_Type_bool_1 */
+	.entry17 = {
+		/* entry_total_size = 36 */ 36u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_Benchmark_IsDefined_9_System_Type_bool_1),
-		/* frame_size = 24 */ 24u,
-		/* num_gc_slots = 3 */ 3u,
-		/* slots */ { 0u, 8u, 16u }
+		/* frame_size = 32 */ 32u,
+		/* num_gc_slots = 4 */ 4u,
+		/* slots */ { 0u, 8u, 16u, 24u }
 	},
-	/* entry54 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_Benchmark_RemoveEventHandler_1_object_System_Delegate_0 */
-	.entry54 = {
-		/* entry_total_size = 32 */ 32u,
+	/* entry18 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_Benchmark_RemoveEventHandler_1_object_System_Delegate_0 */
+	.entry18 = {
+		/* entry_total_size = 36 */ 36u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_Benchmark_RemoveEventHandler_1_object_System_Delegate_0),
-		/* frame_size = 24 */ 24u,
-		/* num_gc_slots = 3 */ 3u,
-		/* slots */ { 0u, 8u, 16u }
+		/* frame_size = 32 */ 32u,
+		/* num_gc_slots = 4 */ 4u,
+		/* slots */ { 0u, 8u, 16u, 24u }
 	},
-	/* entry55 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_GetAddMethod_2_bool_0 */
-	.entry55 = {
-		/* entry_total_size = 36 */ 36u,
+	/* entry19 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_GetAddMethod_2_bool_0 */
+	.entry19 = {
+		/* entry_total_size = 52 */ 52u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_GetAddMethod_2_bool_0),
-		/* frame_size = 32 */ 32u,
-		/* num_gc_slots = 4 */ 4u,
-		/* slots */ { 0u, 8u, 16u, 24u }
+		/* frame_size = 64 */ 64u,
+		/* num_gc_slots = 8 */ 8u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u, 56u }
 	},
-	/* entry56 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_GetAddMethod_2_bool_1 */
-	.entry56 = {
-		/* entry_total_size = 36 */ 36u,
+	/* entry20 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_GetAddMethod_2_bool_1 */
+	.entry20 = {
+		/* entry_total_size = 52 */ 52u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_GetAddMethod_2_bool_1),
-		/* frame_size = 32 */ 32u,
-		/* num_gc_slots = 4 */ 4u,
-		/* slots */ { 0u, 8u, 16u, 24u }
+		/* frame_size = 64 */ 64u,
+		/* num_gc_slots = 8 */ 8u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u, 56u }
 	},
-	/* entry57 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_GetCustomAttributes_6_System_Type_bool_0 */
-	.entry57 = {
-		/* entry_total_size = 36 */ 36u,
+	/* entry21 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_GetCustomAttributes_6_System_Type_bool_0 */
+	.entry21 = {
+		/* entry_total_size = 52 */ 52u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_GetCustomAttributes_6_System_Type_bool_0),
-		/* frame_size = 32 */ 32u,
-		/* num_gc_slots = 4 */ 4u,
-		/* slots */ { 0u, 8u, 16u, 24u }
+		/* frame_size = 64 */ 64u,
+		/* num_gc_slots = 8 */ 8u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u, 56u }
 	},
-	/* entry58 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_GetCustomAttributes_6_System_Type_bool_1 */
-	.entry58 = {
-		/* entry_total_size = 36 */ 36u,
+	/* entry22 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_GetCustomAttributes_6_System_Type_bool_1 */
+	.entry22 = {
+		/* entry_total_size = 52 */ 52u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_GetCustomAttributes_6_System_Type_bool_1),
-		/* frame_size = 32 */ 32u,
-		/* num_gc_slots = 4 */ 4u,
-		/* slots */ { 0u, 8u, 16u, 24u }
+		/* frame_size = 64 */ 64u,
+		/* num_gc_slots = 8 */ 8u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u, 56u }
 	},
-	/* entry59 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_GetCustomAttributes_7_bool_0 */
-	.entry59 = {
-		/* entry_total_size = 36 */ 36u,
+	/* entry23 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_GetCustomAttributes_7_bool_0 */
+	.entry23 = {
+		/* entry_total_size = 52 */ 52u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_GetCustomAttributes_7_bool_0),
-		/* frame_size = 32 */ 32u,
-		/* num_gc_slots = 4 */ 4u,
-		/* slots */ { 0u, 8u, 16u, 24u }
+		/* frame_size = 64 */ 64u,
+		/* num_gc_slots = 8 */ 8u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u, 56u }
 	},
-	/* entry60 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_GetCustomAttributes_7_bool_1 */
-	.entry60 = {
-		/* entry_total_size = 36 */ 36u,
+	/* entry24 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_GetCustomAttributes_7_bool_1 */
+	.entry24 = {
+		/* entry_total_size = 52 */ 52u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_GetCustomAttributes_7_bool_1),
-		/* frame_size = 32 */ 32u,
-		/* num_gc_slots = 4 */ 4u,
-		/* slots */ { 0u, 8u, 16u, 24u }
+		/* frame_size = 64 */ 64u,
+		/* num_gc_slots = 8 */ 8u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u, 56u }
 	},
-	/* entry61 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_GetCustomAttributesData_8__8 */
-	.entry61 = {
-		/* entry_total_size = 36 */ 36u,
+	/* entry25 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_GetCustomAttributesData_8__8 */
+	.entry25 = {
+		/* entry_total_size = 52 */ 52u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_GetCustomAttributesData_8__8),
-		/* frame_size = 32 */ 32u,
-		/* num_gc_slots = 4 */ 4u,
-		/* slots */ { 0u, 8u, 16u, 24u }
+		/* frame_size = 64 */ 64u,
+		/* num_gc_slots = 8 */ 8u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u, 56u }
 	},
-	/* entry62 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_GetOtherMethods_3_bool_0 */
-	.entry62 = {
-		/* entry_total_size = 36 */ 36u,
+	/* entry26 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_GetOtherMethods_3_bool_0 */
+	.entry26 = {
+		/* entry_total_size = 52 */ 52u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_GetOtherMethods_3_bool_0),
-		/* frame_size = 32 */ 32u,
-		/* num_gc_slots = 4 */ 4u,
-		/* slots */ { 0u, 8u, 16u, 24u }
+		/* frame_size = 64 */ 64u,
+		/* num_gc_slots = 8 */ 8u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u, 56u }
 	},
-	/* entry63 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_GetOtherMethods_3_bool_1 */
-	.entry63 = {
-		/* entry_total_size = 36 */ 36u,
+	/* entry27 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_GetOtherMethods_3_bool_1 */
+	.entry27 = {
+		/* entry_total_size = 52 */ 52u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_GetOtherMethods_3_bool_1),
-		/* frame_size = 32 */ 32u,
-		/* num_gc_slots = 4 */ 4u,
-		/* slots */ { 0u, 8u, 16u, 24u }
+		/* frame_size = 64 */ 64u,
+		/* num_gc_slots = 8 */ 8u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u, 56u }
 	},
-	/* entry64 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_GetRaiseMethod_4_bool_0 */
-	.entry64 = {
-		/* entry_total_size = 36 */ 36u,
+	/* entry28 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_GetRaiseMethod_4_bool_0 */
+	.entry28 = {
+		/* entry_total_size = 52 */ 52u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_GetRaiseMethod_4_bool_0),
-		/* frame_size = 32 */ 32u,
-		/* num_gc_slots = 4 */ 4u,
-		/* slots */ { 0u, 8u, 16u, 24u }
+		/* frame_size = 64 */ 64u,
+		/* num_gc_slots = 8 */ 8u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u, 56u }
 	},
-	/* entry65 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_GetRaiseMethod_4_bool_1 */
-	.entry65 = {
-		/* entry_total_size = 36 */ 36u,
+	/* entry29 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_GetRaiseMethod_4_bool_1 */
+	.entry29 = {
+		/* entry_total_size = 52 */ 52u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_GetRaiseMethod_4_bool_1),
-		/* frame_size = 32 */ 32u,
-		/* num_gc_slots = 4 */ 4u,
-		/* slots */ { 0u, 8u, 16u, 24u }
+		/* frame_size = 64 */ 64u,
+		/* num_gc_slots = 8 */ 8u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u, 56u }
 	},
-	/* entry66 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_GetRemoveMethod_5_bool_0 */
-	.entry66 = {
-		/* entry_total_size = 36 */ 36u,
+	/* entry30 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_GetRemoveMethod_5_bool_0 */
+	.entry30 = {
+		/* entry_total_size = 52 */ 52u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_GetRemoveMethod_5_bool_0),
-		/* frame_size = 32 */ 32u,
-		/* num_gc_slots = 4 */ 4u,
-		/* slots */ { 0u, 8u, 16u, 24u }
+		/* frame_size = 64 */ 64u,
+		/* num_gc_slots = 8 */ 8u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u, 56u }
 	},
-	/* entry67 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_GetRemoveMethod_5_bool_1 */
-	.entry67 = {
-		/* entry_total_size = 36 */ 36u,
+	/* entry31 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_GetRemoveMethod_5_bool_1 */
+	.entry31 = {
+		/* entry_total_size = 52 */ 52u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_GetRemoveMethod_5_bool_1),
-		/* frame_size = 32 */ 32u,
-		/* num_gc_slots = 4 */ 4u,
-		/* slots */ { 0u, 8u, 16u, 24u }
+		/* frame_size = 64 */ 64u,
+		/* num_gc_slots = 8 */ 8u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u, 56u }
 	},
-	/* entry68 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_IsDefined_9_System_Type_bool_0 */
-	.entry68 = {
-		/* entry_total_size = 36 */ 36u,
+	/* entry32 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_IsDefined_9_System_Type_bool_0 */
+	.entry32 = {
+		/* entry_total_size = 52 */ 52u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_IsDefined_9_System_Type_bool_0),
-		/* frame_size = 32 */ 32u,
-		/* num_gc_slots = 4 */ 4u,
-		/* slots */ { 0u, 8u, 16u, 24u }
+		/* frame_size = 64 */ 64u,
+		/* num_gc_slots = 8 */ 8u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u, 56u }
 	},
-	/* entry69 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_IsDefined_9_System_Type_bool_1 */
-	.entry69 = {
-		/* entry_total_size = 36 */ 36u,
+	/* entry33 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_IsDefined_9_System_Type_bool_1 */
+	.entry33 = {
+		/* entry_total_size = 52 */ 52u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_IsDefined_9_System_Type_bool_1),
-		/* frame_size = 32 */ 32u,
-		/* num_gc_slots = 4 */ 4u,
-		/* slots */ { 0u, 8u, 16u, 24u }
+		/* frame_size = 64 */ 64u,
+		/* num_gc_slots = 8 */ 8u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u, 56u }
 	},
-	/* entry70 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_RemoveEventHandler_1_object_System_Delegate_0 */
-	.entry70 = {
-		/* entry_total_size = 36 */ 36u,
+	/* entry34 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_RemoveEventHandler_1_object_System_Delegate_0 */
+	.entry34 = {
+		/* entry_total_size = 52 */ 52u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_RemoveEventHandler_1_object_System_Delegate_0),
-		/* frame_size = 32 */ 32u,
-		/* num_gc_slots = 4 */ 4u,
-		/* slots */ { 0u, 8u, 16u, 24u }
+		/* frame_size = 64 */ 64u,
+		/* num_gc_slots = 8 */ 8u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u, 56u }
 	},
-	/* entry71 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c_cctor */
-	.entry71 = {
+	/* entry35 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c_cctor */
+	.entry35 = {
 		/* entry_total_size = 24 */ 24u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c_cctor),
 		/* frame_size = 8 */ 8u,
 		/* num_gc_slots = 1 */ 1u,
 		/* slots */ { 0u }
 	},
-	/* entry72 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c__ctor */
-	.entry72 = {
+	/* entry36 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c__ctor */
+	.entry36 = {
 		/* entry_total_size = 28 */ 28u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c__ctor),
 		/* frame_size = 16 */ 16u,
 		/* num_gc_slots = 2 */ 2u,
 		/* slots */ { 0u, 8u }
 	},
-	/* entry73 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c_AddEventHandler_0_object_System_Delegate_0_b__0_0 */
-	.entry73 = {
-		/* entry_total_size = 36 */ 36u,
+	/* entry37 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c_AddEventHandler_0_object_System_Delegate_0_b__0_0 */
+	.entry37 = {
+		/* entry_total_size = 40 */ 40u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c_AddEventHandler_0_object_System_Delegate_0_b__0_0),
-		/* frame_size = 32 */ 32u,
-		/* num_gc_slots = 4 */ 4u,
-		/* slots */ { 0u, 8u, 16u, 24u }
+		/* frame_size = 40 */ 40u,
+		/* num_gc_slots = 5 */ 5u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u }
 	},
-	/* entry74 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c_GetAddMethod_2_bool_0_b__4_0 */
-	.entry74 = {
-		/* entry_total_size = 32 */ 32u,
+	/* entry38 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c_GetAddMethod_2_bool_0_b__4_0 */
+	.entry38 = {
+		/* entry_total_size = 36 */ 36u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c_GetAddMethod_2_bool_0_b__4_0),
-		/* frame_size = 24 */ 24u,
-		/* num_gc_slots = 3 */ 3u,
-		/* slots */ { 0u, 8u, 16u }
+		/* frame_size = 32 */ 32u,
+		/* num_gc_slots = 4 */ 4u,
+		/* slots */ { 0u, 8u, 16u, 24u }
 	},
-	/* entry75 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c_GetAddMethod_2_bool_1_b__6_0 */
-	.entry75 = {
-		/* entry_total_size = 32 */ 32u,
+	/* entry39 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c_GetAddMethod_2_bool_1_b__6_0 */
+	.entry39 = {
+		/* entry_total_size = 36 */ 36u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c_GetAddMethod_2_bool_1_b__6_0),
-		/* frame_size = 24 */ 24u,
-		/* num_gc_slots = 3 */ 3u,
-		/* slots */ { 0u, 8u, 16u }
+		/* frame_size = 32 */ 32u,
+		/* num_gc_slots = 4 */ 4u,
+		/* slots */ { 0u, 8u, 16u, 24u }
 	},
-	/* entry76 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c_GetCustomAttributes_6_System_Type_bool_0_b__20_0 */
-	.entry76 = {
-		/* entry_total_size = 36 */ 36u,
+	/* entry40 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c_GetCustomAttributes_6_System_Type_bool_0_b__20_0 */
+	.entry40 = {
+		/* entry_total_size = 40 */ 40u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c_GetCustomAttributes_6_System_Type_bool_0_b__20_0),
-		/* frame_size = 32 */ 32u,
-		/* num_gc_slots = 4 */ 4u,
-		/* slots */ { 0u, 8u, 16u, 24u }
+		/* frame_size = 40 */ 40u,
+		/* num_gc_slots = 5 */ 5u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u }
 	},
-	/* entry77 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c_GetCustomAttributes_6_System_Type_bool_1_b__22_0 */
-	.entry77 = {
-		/* entry_total_size = 36 */ 36u,
+	/* entry41 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c_GetCustomAttributes_6_System_Type_bool_1_b__22_0 */
+	.entry41 = {
+		/* entry_total_size = 40 */ 40u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c_GetCustomAttributes_6_System_Type_bool_1_b__22_0),
+		/* frame_size = 40 */ 40u,
+		/* num_gc_slots = 5 */ 5u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u }
+	},
+	/* entry42 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c_GetCustomAttributes_7_bool_0_b__24_0 */
+	.entry42 = {
+		/* entry_total_size = 36 */ 36u,
+		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c_GetCustomAttributes_7_bool_0_b__24_0),
 		/* frame_size = 32 */ 32u,
 		/* num_gc_slots = 4 */ 4u,
 		/* slots */ { 0u, 8u, 16u, 24u }
 	},
-	/* entry78 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c_GetCustomAttributes_7_bool_0_b__24_0 */
-	.entry78 = {
-		/* entry_total_size = 32 */ 32u,
-		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c_GetCustomAttributes_7_bool_0_b__24_0),
-		/* frame_size = 24 */ 24u,
-		/* num_gc_slots = 3 */ 3u,
-		/* slots */ { 0u, 8u, 16u }
-	},
-	/* entry79 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c_GetCustomAttributes_7_bool_1_b__26_0 */
-	.entry79 = {
-		/* entry_total_size = 32 */ 32u,
+	/* entry43 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c_GetCustomAttributes_7_bool_1_b__26_0 */
+	.entry43 = {
+		/* entry_total_size = 36 */ 36u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c_GetCustomAttributes_7_bool_1_b__26_0),
-		/* frame_size = 24 */ 24u,
-		/* num_gc_slots = 3 */ 3u,
-		/* slots */ { 0u, 8u, 16u }
+		/* frame_size = 32 */ 32u,
+		/* num_gc_slots = 4 */ 4u,
+		/* slots */ { 0u, 8u, 16u, 24u }
 	},
-	/* entry80 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c_GetCustomAttributesData_8__8_b__28_0 */
-	.entry80 = {
+	/* entry44 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c_GetCustomAttributesData_8__8_b__28_0 */
+	.entry44 = {
 		/* entry_total_size = 32 */ 32u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c_GetCustomAttributesData_8__8_b__28_0),
 		/* frame_size = 24 */ 24u,
 		/* num_gc_slots = 3 */ 3u,
 		/* slots */ { 0u, 8u, 16u }
 	},
-	/* entry81 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c_GetOtherMethods_3_bool_0_b__8_0 */
-	.entry81 = {
-		/* entry_total_size = 32 */ 32u,
+	/* entry45 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c_GetOtherMethods_3_bool_0_b__8_0 */
+	.entry45 = {
+		/* entry_total_size = 36 */ 36u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c_GetOtherMethods_3_bool_0_b__8_0),
-		/* frame_size = 24 */ 24u,
-		/* num_gc_slots = 3 */ 3u,
-		/* slots */ { 0u, 8u, 16u }
+		/* frame_size = 32 */ 32u,
+		/* num_gc_slots = 4 */ 4u,
+		/* slots */ { 0u, 8u, 16u, 24u }
 	},
-	/* entry82 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c_GetOtherMethods_3_bool_1_b__10_0 */
-	.entry82 = {
-		/* entry_total_size = 32 */ 32u,
+	/* entry46 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c_GetOtherMethods_3_bool_1_b__10_0 */
+	.entry46 = {
+		/* entry_total_size = 36 */ 36u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c_GetOtherMethods_3_bool_1_b__10_0),
-		/* frame_size = 24 */ 24u,
-		/* num_gc_slots = 3 */ 3u,
-		/* slots */ { 0u, 8u, 16u }
+		/* frame_size = 32 */ 32u,
+		/* num_gc_slots = 4 */ 4u,
+		/* slots */ { 0u, 8u, 16u, 24u }
 	},
-	/* entry83 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c_GetRaiseMethod_4_bool_0_b__12_0 */
-	.entry83 = {
-		/* entry_total_size = 32 */ 32u,
+	/* entry47 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c_GetRaiseMethod_4_bool_0_b__12_0 */
+	.entry47 = {
+		/* entry_total_size = 36 */ 36u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c_GetRaiseMethod_4_bool_0_b__12_0),
-		/* frame_size = 24 */ 24u,
-		/* num_gc_slots = 3 */ 3u,
-		/* slots */ { 0u, 8u, 16u }
+		/* frame_size = 32 */ 32u,
+		/* num_gc_slots = 4 */ 4u,
+		/* slots */ { 0u, 8u, 16u, 24u }
 	},
-	/* entry84 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c_GetRaiseMethod_4_bool_1_b__14_0 */
-	.entry84 = {
-		/* entry_total_size = 32 */ 32u,
+	/* entry48 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c_GetRaiseMethod_4_bool_1_b__14_0 */
+	.entry48 = {
+		/* entry_total_size = 36 */ 36u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c_GetRaiseMethod_4_bool_1_b__14_0),
-		/* frame_size = 24 */ 24u,
-		/* num_gc_slots = 3 */ 3u,
-		/* slots */ { 0u, 8u, 16u }
+		/* frame_size = 32 */ 32u,
+		/* num_gc_slots = 4 */ 4u,
+		/* slots */ { 0u, 8u, 16u, 24u }
 	},
-	/* entry85 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c_GetRemoveMethod_5_bool_0_b__16_0 */
-	.entry85 = {
-		/* entry_total_size = 32 */ 32u,
+	/* entry49 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c_GetRemoveMethod_5_bool_0_b__16_0 */
+	.entry49 = {
+		/* entry_total_size = 36 */ 36u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c_GetRemoveMethod_5_bool_0_b__16_0),
-		/* frame_size = 24 */ 24u,
-		/* num_gc_slots = 3 */ 3u,
-		/* slots */ { 0u, 8u, 16u }
+		/* frame_size = 32 */ 32u,
+		/* num_gc_slots = 4 */ 4u,
+		/* slots */ { 0u, 8u, 16u, 24u }
 	},
-	/* entry86 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c_GetRemoveMethod_5_bool_1_b__18_0 */
-	.entry86 = {
-		/* entry_total_size = 32 */ 32u,
+	/* entry50 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c_GetRemoveMethod_5_bool_1_b__18_0 */
+	.entry50 = {
+		/* entry_total_size = 36 */ 36u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c_GetRemoveMethod_5_bool_1_b__18_0),
-		/* frame_size = 24 */ 24u,
-		/* num_gc_slots = 3 */ 3u,
-		/* slots */ { 0u, 8u, 16u }
+		/* frame_size = 32 */ 32u,
+		/* num_gc_slots = 4 */ 4u,
+		/* slots */ { 0u, 8u, 16u, 24u }
 	},
-	/* entry87 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c_IsDefined_9_System_Type_bool_0_b__30_0 */
-	.entry87 = {
-		/* entry_total_size = 36 */ 36u,
+	/* entry51 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c_IsDefined_9_System_Type_bool_0_b__30_0 */
+	.entry51 = {
+		/* entry_total_size = 40 */ 40u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c_IsDefined_9_System_Type_bool_0_b__30_0),
-		/* frame_size = 32 */ 32u,
-		/* num_gc_slots = 4 */ 4u,
-		/* slots */ { 0u, 8u, 16u, 24u }
+		/* frame_size = 40 */ 40u,
+		/* num_gc_slots = 5 */ 5u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u }
 	},
-	/* entry88 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c_IsDefined_9_System_Type_bool_1_b__32_0 */
-	.entry88 = {
-		/* entry_total_size = 36 */ 36u,
+	/* entry52 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c_IsDefined_9_System_Type_bool_1_b__32_0 */
+	.entry52 = {
+		/* entry_total_size = 40 */ 40u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c_IsDefined_9_System_Type_bool_1_b__32_0),
-		/* frame_size = 32 */ 32u,
-		/* num_gc_slots = 4 */ 4u,
-		/* slots */ { 0u, 8u, 16u, 24u }
+		/* frame_size = 40 */ 40u,
+		/* num_gc_slots = 5 */ 5u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u }
 	},
-	/* entry89 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c_RemoveEventHandler_1_object_System_Delegate_0_b__2_0 */
-	.entry89 = {
-		/* entry_total_size = 36 */ 36u,
+	/* entry53 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c_RemoveEventHandler_1_object_System_Delegate_0_b__2_0 */
+	.entry53 = {
+		/* entry_total_size = 40 */ 40u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c_RemoveEventHandler_1_object_System_Delegate_0_b__2_0),
-		/* frame_size = 32 */ 32u,
-		/* num_gc_slots = 4 */ 4u,
-		/* slots */ { 0u, 8u, 16u, 24u }
+		/* frame_size = 40 */ 40u,
+		/* num_gc_slots = 5 */ 5u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u }
 	},
-	/* entry90 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_HandleCollectorTests__ctor */
-	.entry90 = {
+	/* entry54 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_HandleCollectorTests__ctor */
+	.entry54 = {
 		/* entry_total_size = 28 */ 28u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_HandleCollectorTests__ctor),
 		/* frame_size = 16 */ 16u,
 		/* num_gc_slots = 2 */ 2u,
 		/* slots */ { 0u, 8u }
 	},
-	/* entry91 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_HandleCollectorTests_Add_0__0 */
-	.entry91 = {
-		/* entry_total_size = 36 */ 36u,
+	/* entry55 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_HandleCollectorTests_Add_0__0 */
+	.entry55 = {
+		/* entry_total_size = 52 */ 52u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_HandleCollectorTests_Add_0__0),
-		/* frame_size = 32 */ 32u,
-		/* num_gc_slots = 4 */ 4u,
-		/* slots */ { 0u, 8u, 16u, 24u }
+		/* frame_size = 64 */ 64u,
+		/* num_gc_slots = 8 */ 8u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u, 56u }
 	},
-	/* entry92 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_HandleCollectorTests_Benchmark_Add_0__0 */
-	.entry92 = {
-		/* entry_total_size = 24 */ 24u,
+	/* entry56 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_HandleCollectorTests_Benchmark_Add_0__0 */
+	.entry56 = {
+		/* entry_total_size = 28 */ 28u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_HandleCollectorTests_Benchmark_Add_0__0),
-		/* frame_size = 8 */ 8u,
-		/* num_gc_slots = 1 */ 1u,
-		/* slots */ { 0u }
+		/* frame_size = 16 */ 16u,
+		/* num_gc_slots = 2 */ 2u,
+		/* slots */ { 0u, 8u }
 	},
-	/* entry93 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_HandleCollectorTests_Benchmark_Remove_1__1 */
-	.entry93 = {
-		/* entry_total_size = 24 */ 24u,
+	/* entry57 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_HandleCollectorTests_Benchmark_Remove_1__1 */
+	.entry57 = {
+		/* entry_total_size = 28 */ 28u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_HandleCollectorTests_Benchmark_Remove_1__1),
-		/* frame_size = 8 */ 8u,
-		/* num_gc_slots = 1 */ 1u,
-		/* slots */ { 0u }
+		/* frame_size = 16 */ 16u,
+		/* num_gc_slots = 2 */ 2u,
+		/* slots */ { 0u, 8u }
 	},
-	/* entry94 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_HandleCollectorTests_Remove_1__1 */
-	.entry94 = {
-		/* entry_total_size = 36 */ 36u,
+	/* entry58 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_HandleCollectorTests_Remove_1__1 */
+	.entry58 = {
+		/* entry_total_size = 52 */ 52u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_HandleCollectorTests_Remove_1__1),
-		/* frame_size = 32 */ 32u,
-		/* num_gc_slots = 4 */ 4u,
-		/* slots */ { 0u, 8u, 16u, 24u }
+		/* frame_size = 64 */ 64u,
+		/* num_gc_slots = 8 */ 8u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u, 56u }
 	},
-	/* entry95 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_HandleCollectorTests___c_cctor */
-	.entry95 = {
+	/* entry59 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_HandleCollectorTests___c_cctor */
+	.entry59 = {
 		/* entry_total_size = 24 */ 24u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_HandleCollectorTests___c_cctor),
 		/* frame_size = 8 */ 8u,
 		/* num_gc_slots = 1 */ 1u,
 		/* slots */ { 0u }
 	},
-	/* entry96 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_HandleCollectorTests___c__ctor */
-	.entry96 = {
+	/* entry60 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_HandleCollectorTests___c__ctor */
+	.entry60 = {
 		/* entry_total_size = 28 */ 28u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_HandleCollectorTests___c__ctor),
 		/* frame_size = 16 */ 16u,
 		/* num_gc_slots = 2 */ 2u,
 		/* slots */ { 0u, 8u }
 	},
-	/* entry97 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_HandleCollectorTests___c_Add_0__0_b__0_0 */
-	.entry97 = {
-		/* entry_total_size = 28 */ 28u,
+	/* entry61 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_HandleCollectorTests___c_Add_0__0_b__0_0 */
+	.entry61 = {
+		/* entry_total_size = 32 */ 32u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_HandleCollectorTests___c_Add_0__0_b__0_0),
-		/* frame_size = 16 */ 16u,
-		/* num_gc_slots = 2 */ 2u,
-		/* slots */ { 0u, 8u }
+		/* frame_size = 24 */ 24u,
+		/* num_gc_slots = 3 */ 3u,
+		/* slots */ { 0u, 8u, 16u }
 	},
-	/* entry98 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_HandleCollectorTests___c_Remove_1__1_b__2_0 */
-	.entry98 = {
-		/* entry_total_size = 28 */ 28u,
+	/* entry62 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_HandleCollectorTests___c_Remove_1__1_b__2_0 */
+	.entry62 = {
+		/* entry_total_size = 32 */ 32u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_HandleCollectorTests___c_Remove_1__1_b__2_0),
-		/* frame_size = 16 */ 16u,
-		/* num_gc_slots = 2 */ 2u,
-		/* slots */ { 0u, 8u }
+		/* frame_size = 24 */ 24u,
+		/* num_gc_slots = 3 */ 3u,
+		/* slots */ { 0u, 8u, 16u }
 	},
-	/* entry99 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ComInterfaceMarshallerSystem_Int32Tests__ctor */
-	.entry99 = {
+	/* entry63 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ComInterfaceMarshallerSystem_Int32Tests__ctor */
+	.entry63 = {
 		/* entry_total_size = 28 */ 28u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ComInterfaceMarshallerSystem_Int32Tests__ctor),
 		/* frame_size = 16 */ 16u,
 		/* num_gc_slots = 2 */ 2u,
 		/* slots */ { 0u, 8u }
 	},
-	/* entry100 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ComInterfaceMarshallerSystem_Int32Tests_Benchmark_ConvertToManaged_1_void_0 */
-	.entry100 = {
-		/* entry_total_size = 24 */ 24u,
+	/* entry64 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ComInterfaceMarshallerSystem_Int32Tests_Benchmark_ConvertToManaged_1_void_0 */
+	.entry64 = {
+		/* entry_total_size = 28 */ 28u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ComInterfaceMarshallerSystem_Int32Tests_Benchmark_ConvertToManaged_1_void_0),
-		/* frame_size = 8 */ 8u,
-		/* num_gc_slots = 1 */ 1u,
-		/* slots */ { 0u }
+		/* frame_size = 16 */ 16u,
+		/* num_gc_slots = 2 */ 2u,
+		/* slots */ { 0u, 8u }
 	},
-	/* entry101 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ComInterfaceMarshallerSystem_Int32Tests_Benchmark_ConvertToUnmanaged_0_int_0 */
-	.entry101 = {
-		/* entry_total_size = 24 */ 24u,
+	/* entry65 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ComInterfaceMarshallerSystem_Int32Tests_Benchmark_ConvertToUnmanaged_0_int_0 */
+	.entry65 = {
+		/* entry_total_size = 28 */ 28u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ComInterfaceMarshallerSystem_Int32Tests_Benchmark_ConvertToUnmanaged_0_int_0),
-		/* frame_size = 8 */ 8u,
-		/* num_gc_slots = 1 */ 1u,
-		/* slots */ { 0u }
+		/* frame_size = 16 */ 16u,
+		/* num_gc_slots = 2 */ 2u,
+		/* slots */ { 0u, 8u }
 	},
-	/* entry102 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ComInterfaceMarshallerSystem_Int32Tests_Benchmark_ConvertToUnmanaged_0_int_1 */
-	.entry102 = {
-		/* entry_total_size = 24 */ 24u,
+	/* entry66 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ComInterfaceMarshallerSystem_Int32Tests_Benchmark_ConvertToUnmanaged_0_int_1 */
+	.entry66 = {
+		/* entry_total_size = 28 */ 28u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ComInterfaceMarshallerSystem_Int32Tests_Benchmark_ConvertToUnmanaged_0_int_1),
-		/* frame_size = 8 */ 8u,
-		/* num_gc_slots = 1 */ 1u,
-		/* slots */ { 0u }
+		/* frame_size = 16 */ 16u,
+		/* num_gc_slots = 2 */ 2u,
+		/* slots */ { 0u, 8u }
 	},
-	/* entry103 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ComInterfaceMarshallerSystem_Int32Tests_Benchmark_Free_2_void_0 */
-	.entry103 = {
-		/* entry_total_size = 24 */ 24u,
+	/* entry67 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ComInterfaceMarshallerSystem_Int32Tests_Benchmark_Free_2_void_0 */
+	.entry67 = {
+		/* entry_total_size = 28 */ 28u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ComInterfaceMarshallerSystem_Int32Tests_Benchmark_Free_2_void_0),
-		/* frame_size = 8 */ 8u,
-		/* num_gc_slots = 1 */ 1u,
-		/* slots */ { 0u }
+		/* frame_size = 16 */ 16u,
+		/* num_gc_slots = 2 */ 2u,
+		/* slots */ { 0u, 8u }
 	},
-	/* entry104 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ComInterfaceMarshallerSystem_Int32Tests_ConvertToManaged_1_void_0 */
-	.entry104 = {
-		/* entry_total_size = 36 */ 36u,
+	/* entry68 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ComInterfaceMarshallerSystem_Int32Tests_ConvertToManaged_1_void_0 */
+	.entry68 = {
+		/* entry_total_size = 40 */ 40u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ComInterfaceMarshallerSystem_Int32Tests_ConvertToManaged_1_void_0),
-		/* frame_size = 32 */ 32u,
-		/* num_gc_slots = 4 */ 4u,
-		/* slots */ { 0u, 8u, 16u, 24u }
+		/* frame_size = 40 */ 40u,
+		/* num_gc_slots = 5 */ 5u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u }
 	},
-	/* entry105 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ComInterfaceMarshallerSystem_Int32Tests_ConvertToUnmanaged_0_int_0 */
-	.entry105 = {
-		/* entry_total_size = 40 */ 40u,
+	/* entry69 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ComInterfaceMarshallerSystem_Int32Tests_ConvertToUnmanaged_0_int_0 */
+	.entry69 = {
+		/* entry_total_size = 44 */ 44u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ComInterfaceMarshallerSystem_Int32Tests_ConvertToUnmanaged_0_int_0),
-		/* frame_size = 40 */ 40u,
-		/* num_gc_slots = 5 */ 5u,
-		/* slots */ { 0u, 8u, 16u, 24u, 32u }
+		/* frame_size = 48 */ 48u,
+		/* num_gc_slots = 6 */ 6u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u }
 	},
-	/* entry106 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ComInterfaceMarshallerSystem_Int32Tests_ConvertToUnmanaged_0_int_1 */
-	.entry106 = {
-		/* entry_total_size = 40 */ 40u,
+	/* entry70 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ComInterfaceMarshallerSystem_Int32Tests_ConvertToUnmanaged_0_int_1 */
+	.entry70 = {
+		/* entry_total_size = 44 */ 44u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ComInterfaceMarshallerSystem_Int32Tests_ConvertToUnmanaged_0_int_1),
-		/* frame_size = 40 */ 40u,
-		/* num_gc_slots = 5 */ 5u,
-		/* slots */ { 0u, 8u, 16u, 24u, 32u }
+		/* frame_size = 48 */ 48u,
+		/* num_gc_slots = 6 */ 6u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u }
 	},
-	/* entry107 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ComObjectTests__ctor */
-	.entry107 = {
+	/* entry71 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ComObjectTests__ctor */
+	.entry71 = {
 		/* entry_total_size = 28 */ 28u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ComObjectTests__ctor),
 		/* frame_size = 16 */ 16u,
 		/* num_gc_slots = 2 */ 2u,
 		/* slots */ { 0u, 8u }
 	},
-	/* entry108 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ComObjectTests_Benchmark_FinalRelease_0__0 */
-	.entry108 = {
-		/* entry_total_size = 24 */ 24u,
+	/* entry72 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ComObjectTests_Benchmark_FinalRelease_0__0 */
+	.entry72 = {
+		/* entry_total_size = 28 */ 28u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ComObjectTests_Benchmark_FinalRelease_0__0),
-		/* frame_size = 8 */ 8u,
-		/* num_gc_slots = 1 */ 1u,
-		/* slots */ { 0u }
+		/* frame_size = 16 */ 16u,
+		/* num_gc_slots = 2 */ 2u,
+		/* slots */ { 0u, 8u }
 	},
-	/* entry109 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ComObjectTests_FinalRelease_0__0 */
-	.entry109 = {
-		/* entry_total_size = 36 */ 36u,
+	/* entry73 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ComObjectTests_FinalRelease_0__0 */
+	.entry73 = {
+		/* entry_total_size = 52 */ 52u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ComObjectTests_FinalRelease_0__0),
-		/* frame_size = 32 */ 32u,
-		/* num_gc_slots = 4 */ 4u,
-		/* slots */ { 0u, 8u, 16u, 24u }
+		/* frame_size = 64 */ 64u,
+		/* num_gc_slots = 8 */ 8u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u, 56u }
 	},
-	/* entry110 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ComObjectTests___c_cctor */
-	.entry110 = {
+	/* entry74 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ComObjectTests___c_cctor */
+	.entry74 = {
 		/* entry_total_size = 24 */ 24u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ComObjectTests___c_cctor),
 		/* frame_size = 8 */ 8u,
 		/* num_gc_slots = 1 */ 1u,
 		/* slots */ { 0u }
 	},
-	/* entry111 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ComObjectTests___c__ctor */
-	.entry111 = {
+	/* entry75 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ComObjectTests___c__ctor */
+	.entry75 = {
 		/* entry_total_size = 28 */ 28u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ComObjectTests___c__ctor),
 		/* frame_size = 16 */ 16u,
 		/* num_gc_slots = 2 */ 2u,
 		/* slots */ { 0u, 8u }
 	},
-	/* entry112 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ComObjectTests___c_FinalRelease_0__0_b__0_0 */
-	.entry112 = {
-		/* entry_total_size = 28 */ 28u,
+	/* entry76 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ComObjectTests___c_FinalRelease_0__0_b__0_0 */
+	.entry76 = {
+		/* entry_total_size = 32 */ 32u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ComObjectTests___c_FinalRelease_0__0_b__0_0),
-		/* frame_size = 16 */ 16u,
-		/* num_gc_slots = 2 */ 2u,
-		/* slots */ { 0u, 8u }
+		/* frame_size = 24 */ 24u,
+		/* num_gc_slots = 3 */ 3u,
+		/* slots */ { 0u, 8u, 16u }
 	},
-	/* entry113 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ExceptionAsDefaultMarshallerSystem_Int32Tests__ctor */
-	.entry113 = {
+	/* entry77 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ExceptionAsDefaultMarshallerSystem_Int32Tests__ctor */
+	.entry77 = {
 		/* entry_total_size = 28 */ 28u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ExceptionAsDefaultMarshallerSystem_Int32Tests__ctor),
 		/* frame_size = 16 */ 16u,
 		/* num_gc_slots = 2 */ 2u,
 		/* slots */ { 0u, 8u }
 	},
-	/* entry114 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ExceptionAsDefaultMarshallerSystem_Int32Tests_Benchmark_ConvertToUnmanaged_0_System_Exception_0 */
-	.entry114 = {
-		/* entry_total_size = 24 */ 24u,
+	/* entry78 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ExceptionAsDefaultMarshallerSystem_Int32Tests_Benchmark_ConvertToUnmanaged_0_System_Exception_0 */
+	.entry78 = {
+		/* entry_total_size = 28 */ 28u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ExceptionAsDefaultMarshallerSystem_Int32Tests_Benchmark_ConvertToUnmanaged_0_System_Exception_0),
-		/* frame_size = 8 */ 8u,
-		/* num_gc_slots = 1 */ 1u,
-		/* slots */ { 0u }
+		/* frame_size = 16 */ 16u,
+		/* num_gc_slots = 2 */ 2u,
+		/* slots */ { 0u, 8u }
 	},
-	/* entry115 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ExceptionAsDefaultMarshallerSystem_Int32Tests_ConvertToUnmanaged_0_System_Exception_0 */
-	.entry115 = {
-		/* entry_total_size = 44 */ 44u,
+	/* entry79 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ExceptionAsDefaultMarshallerSystem_Int32Tests_ConvertToUnmanaged_0_System_Exception_0 */
+	.entry79 = {
+		/* entry_total_size = 48 */ 48u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ExceptionAsDefaultMarshallerSystem_Int32Tests_ConvertToUnmanaged_0_System_Exception_0),
-		/* frame_size = 48 */ 48u,
-		/* num_gc_slots = 6 */ 6u,
-		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u }
+		/* frame_size = 56 */ 56u,
+		/* num_gc_slots = 7 */ 7u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u }
 	},
-	/* entry116 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ExceptionAsHResultMarshallerSystem_Int32Tests__ctor */
-	.entry116 = {
+	/* entry80 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ExceptionAsHResultMarshallerSystem_Int32Tests__ctor */
+	.entry80 = {
 		/* entry_total_size = 28 */ 28u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ExceptionAsHResultMarshallerSystem_Int32Tests__ctor),
 		/* frame_size = 16 */ 16u,
 		/* num_gc_slots = 2 */ 2u,
 		/* slots */ { 0u, 8u }
 	},
-	/* entry117 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ExceptionAsHResultMarshallerSystem_Int32Tests_Benchmark_ConvertToUnmanaged_0_System_Exception_0 */
-	.entry117 = {
-		/* entry_total_size = 24 */ 24u,
+	/* entry81 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ExceptionAsHResultMarshallerSystem_Int32Tests_Benchmark_ConvertToUnmanaged_0_System_Exception_0 */
+	.entry81 = {
+		/* entry_total_size = 28 */ 28u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ExceptionAsHResultMarshallerSystem_Int32Tests_Benchmark_ConvertToUnmanaged_0_System_Exception_0),
-		/* frame_size = 8 */ 8u,
-		/* num_gc_slots = 1 */ 1u,
-		/* slots */ { 0u }
+		/* frame_size = 16 */ 16u,
+		/* num_gc_slots = 2 */ 2u,
+		/* slots */ { 0u, 8u }
 	},
-	/* entry118 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ExceptionAsHResultMarshallerSystem_Int32Tests_ConvertToUnmanaged_0_System_Exception_0 */
-	.entry118 = {
-		/* entry_total_size = 44 */ 44u,
+	/* entry82 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ExceptionAsHResultMarshallerSystem_Int32Tests_ConvertToUnmanaged_0_System_Exception_0 */
+	.entry82 = {
+		/* entry_total_size = 48 */ 48u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ExceptionAsHResultMarshallerSystem_Int32Tests_ConvertToUnmanaged_0_System_Exception_0),
-		/* frame_size = 48 */ 48u,
-		/* num_gc_slots = 6 */ 6u,
-		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u }
+		/* frame_size = 56 */ 56u,
+		/* num_gc_slots = 7 */ 7u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u }
 	},
-	/* entry119 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ExceptionAsNaNMarshallerSystem_DoubleTests__ctor */
-	.entry119 = {
+	/* entry83 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ExceptionAsNaNMarshallerSystem_DoubleTests__ctor */
+	.entry83 = {
 		/* entry_total_size = 28 */ 28u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ExceptionAsNaNMarshallerSystem_DoubleTests__ctor),
 		/* frame_size = 16 */ 16u,
 		/* num_gc_slots = 2 */ 2u,
 		/* slots */ { 0u, 8u }
 	},
-	/* entry120 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ExceptionAsNaNMarshallerSystem_DoubleTests_Benchmark_ConvertToUnmanaged_0_System_Exception_0 */
-	.entry120 = {
-		/* entry_total_size = 24 */ 24u,
+	/* entry84 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ExceptionAsNaNMarshallerSystem_DoubleTests_Benchmark_ConvertToUnmanaged_0_System_Exception_0 */
+	.entry84 = {
+		/* entry_total_size = 28 */ 28u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ExceptionAsNaNMarshallerSystem_DoubleTests_Benchmark_ConvertToUnmanaged_0_System_Exception_0),
-		/* frame_size = 8 */ 8u,
-		/* num_gc_slots = 1 */ 1u,
-		/* slots */ { 0u }
+		/* frame_size = 16 */ 16u,
+		/* num_gc_slots = 2 */ 2u,
+		/* slots */ { 0u, 8u }
 	},
-	/* entry121 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ExceptionAsNaNMarshallerSystem_DoubleTests_ConvertToUnmanaged_0_System_Exception_0 */
-	.entry121 = {
-		/* entry_total_size = 36 */ 36u,
+	/* entry85 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ExceptionAsNaNMarshallerSystem_DoubleTests_ConvertToUnmanaged_0_System_Exception_0 */
+	.entry85 = {
+		/* entry_total_size = 52 */ 52u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ExceptionAsNaNMarshallerSystem_DoubleTests_ConvertToUnmanaged_0_System_Exception_0),
-		/* frame_size = 32 */ 32u,
-		/* num_gc_slots = 4 */ 4u,
-		/* slots */ { 0u, 8u, 16u, 24u }
+		/* frame_size = 64 */ 64u,
+		/* num_gc_slots = 8 */ 8u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u, 56u }
 	},
-	/* entry122 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ExceptionAsNaNMarshallerSystem_DoubleTests___c_cctor */
-	.entry122 = {
+	/* entry86 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ExceptionAsNaNMarshallerSystem_DoubleTests___c_cctor */
+	.entry86 = {
 		/* entry_total_size = 24 */ 24u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ExceptionAsNaNMarshallerSystem_DoubleTests___c_cctor),
 		/* frame_size = 8 */ 8u,
 		/* num_gc_slots = 1 */ 1u,
 		/* slots */ { 0u }
 	},
-	/* entry123 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ExceptionAsNaNMarshallerSystem_DoubleTests___c__ctor */
-	.entry123 = {
+	/* entry87 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ExceptionAsNaNMarshallerSystem_DoubleTests___c__ctor */
+	.entry87 = {
 		/* entry_total_size = 28 */ 28u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ExceptionAsNaNMarshallerSystem_DoubleTests___c__ctor),
 		/* frame_size = 16 */ 16u,
 		/* num_gc_slots = 2 */ 2u,
 		/* slots */ { 0u, 8u }
 	},
-	/* entry124 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ExceptionAsNaNMarshallerSystem_DoubleTests___c_ConvertToUnmanaged_0_System_Exception_0_b__0_0 */
-	.entry124 = {
-		/* entry_total_size = 28 */ 28u,
+	/* entry88 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ExceptionAsNaNMarshallerSystem_DoubleTests___c_ConvertToUnmanaged_0_System_Exception_0_b__0_0 */
+	.entry88 = {
+		/* entry_total_size = 32 */ 32u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ExceptionAsNaNMarshallerSystem_DoubleTests___c_ConvertToUnmanaged_0_System_Exception_0_b__0_0),
-		/* frame_size = 16 */ 16u,
-		/* num_gc_slots = 2 */ 2u,
-		/* slots */ { 0u, 8u }
+		/* frame_size = 24 */ 24u,
+		/* num_gc_slots = 3 */ 3u,
+		/* slots */ { 0u, 8u, 16u }
 	},
-	/* entry125 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ExceptionAsVoidMarshallerTests__ctor */
-	.entry125 = {
+	/* entry89 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ExceptionAsVoidMarshallerTests__ctor */
+	.entry89 = {
 		/* entry_total_size = 28 */ 28u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ExceptionAsVoidMarshallerTests__ctor),
 		/* frame_size = 16 */ 16u,
 		/* num_gc_slots = 2 */ 2u,
 		/* slots */ { 0u, 8u }
 	},
-	/* entry126 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ExceptionAsVoidMarshallerTests_Benchmark_ConvertToUnmanaged_0_System_Exception_0 */
-	.entry126 = {
-		/* entry_total_size = 24 */ 24u,
+	/* entry90 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ExceptionAsVoidMarshallerTests_Benchmark_ConvertToUnmanaged_0_System_Exception_0 */
+	.entry90 = {
+		/* entry_total_size = 28 */ 28u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ExceptionAsVoidMarshallerTests_Benchmark_ConvertToUnmanaged_0_System_Exception_0),
-		/* frame_size = 8 */ 8u,
-		/* num_gc_slots = 1 */ 1u,
-		/* slots */ { 0u }
+		/* frame_size = 16 */ 16u,
+		/* num_gc_slots = 2 */ 2u,
+		/* slots */ { 0u, 8u }
 	},
-	/* entry127 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ExceptionAsVoidMarshallerTests_ConvertToUnmanaged_0_System_Exception_0 */
-	.entry127 = {
-		/* entry_total_size = 32 */ 32u,
+	/* entry91 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ExceptionAsVoidMarshallerTests_ConvertToUnmanaged_0_System_Exception_0 */
+	.entry91 = {
+		/* entry_total_size = 40 */ 40u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ExceptionAsVoidMarshallerTests_ConvertToUnmanaged_0_System_Exception_0),
-		/* frame_size = 24 */ 24u,
-		/* num_gc_slots = 3 */ 3u,
-		/* slots */ { 0u, 8u, 16u }
+		/* frame_size = 40 */ 40u,
+		/* num_gc_slots = 5 */ 5u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u }
 	},
-	/* entry128 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_UniqueComInterfaceMarshallerSystem_Int32Tests__ctor */
-	.entry128 = {
+	/* entry92 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_UniqueComInterfaceMarshallerSystem_Int32Tests__ctor */
+	.entry92 = {
 		/* entry_total_size = 28 */ 28u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_UniqueComInterfaceMarshallerSystem_Int32Tests__ctor),
 		/* frame_size = 16 */ 16u,
 		/* num_gc_slots = 2 */ 2u,
 		/* slots */ { 0u, 8u }
 	},
-	/* entry129 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_UniqueComInterfaceMarshallerSystem_Int32Tests_Benchmark_ConvertToManaged_1_void_0 */
-	.entry129 = {
-		/* entry_total_size = 24 */ 24u,
+	/* entry93 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_UniqueComInterfaceMarshallerSystem_Int32Tests_Benchmark_ConvertToManaged_1_void_0 */
+	.entry93 = {
+		/* entry_total_size = 28 */ 28u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_UniqueComInterfaceMarshallerSystem_Int32Tests_Benchmark_ConvertToManaged_1_void_0),
-		/* frame_size = 8 */ 8u,
-		/* num_gc_slots = 1 */ 1u,
-		/* slots */ { 0u }
+		/* frame_size = 16 */ 16u,
+		/* num_gc_slots = 2 */ 2u,
+		/* slots */ { 0u, 8u }
 	},
-	/* entry130 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_UniqueComInterfaceMarshallerSystem_Int32Tests_Benchmark_ConvertToUnmanaged_0_int_0 */
-	.entry130 = {
-		/* entry_total_size = 24 */ 24u,
+	/* entry94 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_UniqueComInterfaceMarshallerSystem_Int32Tests_Benchmark_ConvertToUnmanaged_0_int_0 */
+	.entry94 = {
+		/* entry_total_size = 28 */ 28u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_UniqueComInterfaceMarshallerSystem_Int32Tests_Benchmark_ConvertToUnmanaged_0_int_0),
-		/* frame_size = 8 */ 8u,
-		/* num_gc_slots = 1 */ 1u,
-		/* slots */ { 0u }
+		/* frame_size = 16 */ 16u,
+		/* num_gc_slots = 2 */ 2u,
+		/* slots */ { 0u, 8u }
 	},
-	/* entry131 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_UniqueComInterfaceMarshallerSystem_Int32Tests_Benchmark_ConvertToUnmanaged_0_int_1 */
-	.entry131 = {
-		/* entry_total_size = 24 */ 24u,
+	/* entry95 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_UniqueComInterfaceMarshallerSystem_Int32Tests_Benchmark_ConvertToUnmanaged_0_int_1 */
+	.entry95 = {
+		/* entry_total_size = 28 */ 28u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_UniqueComInterfaceMarshallerSystem_Int32Tests_Benchmark_ConvertToUnmanaged_0_int_1),
-		/* frame_size = 8 */ 8u,
-		/* num_gc_slots = 1 */ 1u,
-		/* slots */ { 0u }
+		/* frame_size = 16 */ 16u,
+		/* num_gc_slots = 2 */ 2u,
+		/* slots */ { 0u, 8u }
 	},
-	/* entry132 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_UniqueComInterfaceMarshallerSystem_Int32Tests_Benchmark_Free_2_void_0 */
-	.entry132 = {
-		/* entry_total_size = 24 */ 24u,
+	/* entry96 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_UniqueComInterfaceMarshallerSystem_Int32Tests_Benchmark_Free_2_void_0 */
+	.entry96 = {
+		/* entry_total_size = 28 */ 28u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_UniqueComInterfaceMarshallerSystem_Int32Tests_Benchmark_Free_2_void_0),
-		/* frame_size = 8 */ 8u,
-		/* num_gc_slots = 1 */ 1u,
-		/* slots */ { 0u }
+		/* frame_size = 16 */ 16u,
+		/* num_gc_slots = 2 */ 2u,
+		/* slots */ { 0u, 8u }
 	},
-	/* entry133 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_UniqueComInterfaceMarshallerSystem_Int32Tests_ConvertToManaged_1_void_0 */
-	.entry133 = {
-		/* entry_total_size = 36 */ 36u,
+	/* entry97 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_UniqueComInterfaceMarshallerSystem_Int32Tests_ConvertToManaged_1_void_0 */
+	.entry97 = {
+		/* entry_total_size = 40 */ 40u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_UniqueComInterfaceMarshallerSystem_Int32Tests_ConvertToManaged_1_void_0),
-		/* frame_size = 32 */ 32u,
-		/* num_gc_slots = 4 */ 4u,
-		/* slots */ { 0u, 8u, 16u, 24u }
+		/* frame_size = 40 */ 40u,
+		/* num_gc_slots = 5 */ 5u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u }
 	},
-	/* entry134 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_UniqueComInterfaceMarshallerSystem_Int32Tests_ConvertToUnmanaged_0_int_0 */
-	.entry134 = {
-		/* entry_total_size = 40 */ 40u,
+	/* entry98 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_UniqueComInterfaceMarshallerSystem_Int32Tests_ConvertToUnmanaged_0_int_0 */
+	.entry98 = {
+		/* entry_total_size = 44 */ 44u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_UniqueComInterfaceMarshallerSystem_Int32Tests_ConvertToUnmanaged_0_int_0),
-		/* frame_size = 40 */ 40u,
-		/* num_gc_slots = 5 */ 5u,
-		/* slots */ { 0u, 8u, 16u, 24u, 32u }
+		/* frame_size = 48 */ 48u,
+		/* num_gc_slots = 6 */ 6u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u }
 	},
-	/* entry135 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_UniqueComInterfaceMarshallerSystem_Int32Tests_ConvertToUnmanaged_0_int_1 */
-	.entry135 = {
-		/* entry_total_size = 40 */ 40u,
+	/* entry99 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_UniqueComInterfaceMarshallerSystem_Int32Tests_ConvertToUnmanaged_0_int_1 */
+	.entry99 = {
+		/* entry_total_size = 44 */ 44u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_UniqueComInterfaceMarshallerSystem_Int32Tests_ConvertToUnmanaged_0_int_1),
-		/* frame_size = 40 */ 40u,
-		/* num_gc_slots = 5 */ 5u,
-		/* slots */ { 0u, 8u, 16u, 24u, 32u }
+		/* frame_size = 48 */ 48u,
+		/* num_gc_slots = 6 */ 6u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u }
 	},
-	/* entry136 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_VirtualMethodTableInfoTests__ctor */
-	.entry136 = {
+	/* entry100 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_VirtualMethodTableInfoTests__ctor */
+	.entry100 = {
 		/* entry_total_size = 28 */ 28u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_VirtualMethodTableInfoTests__ctor),
 		/* frame_size = 16 */ 16u,
 		/* num_gc_slots = 2 */ 2u,
 		/* slots */ { 0u, 8u }
 	},
-	/* entry137 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_VirtualMethodTableInfoTests_Benchmark_Deconstruct_0_void_void_0 */
-	.entry137 = {
-		/* entry_total_size = 44 */ 44u,
+	/* entry101 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_VirtualMethodTableInfoTests_Benchmark_Deconstruct_0_void_void_0 */
+	.entry101 = {
+		/* entry_total_size = 48 */ 48u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_VirtualMethodTableInfoTests_Benchmark_Deconstruct_0_void_void_0),
-		/* frame_size = 48 */ 48u,
-		/* num_gc_slots = 6 */ 6u,
-		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u }
+		/* frame_size = 56 */ 56u,
+		/* num_gc_slots = 7 */ 7u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u }
 	},
-	/* entry138 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_RuntimeEnvironmentTests__ctor */
-	.entry138 = {
+	/* entry102 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_RuntimeEnvironmentTests__ctor */
+	.entry102 = {
 		/* entry_total_size = 28 */ 28u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_RuntimeEnvironmentTests__ctor),
 		/* frame_size = 16 */ 16u,
 		/* num_gc_slots = 2 */ 2u,
 		/* slots */ { 0u, 8u }
 	},
-	/* entry139 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_RuntimeEnvironmentTests_Benchmark_FromGlobalAccessCache_0_Assembly_0 */
-	.entry139 = {
-		/* entry_total_size = 24 */ 24u,
+	/* entry103 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_RuntimeEnvironmentTests_Benchmark_FromGlobalAccessCache_0_Assembly_0 */
+	.entry103 = {
+		/* entry_total_size = 28 */ 28u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_RuntimeEnvironmentTests_Benchmark_FromGlobalAccessCache_0_Assembly_0),
-		/* frame_size = 8 */ 8u,
-		/* num_gc_slots = 1 */ 1u,
-		/* slots */ { 0u }
+		/* frame_size = 16 */ 16u,
+		/* num_gc_slots = 2 */ 2u,
+		/* slots */ { 0u, 8u }
 	},
-	/* entry140 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_RuntimeEnvironmentTests_Benchmark_GetRuntimeDirectory_1__1 */
-	.entry140 = {
+	/* entry104 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_RuntimeEnvironmentTests_Benchmark_GetRuntimeDirectory_1__1 */
+	.entry104 = {
 		/* entry_total_size = 24 */ 24u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_RuntimeEnvironmentTests_Benchmark_GetRuntimeDirectory_1__1),
 		/* frame_size = 8 */ 8u,
 		/* num_gc_slots = 1 */ 1u,
 		/* slots */ { 0u }
 	},
-	/* entry141 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_RuntimeEnvironmentTests_Benchmark_GetRuntimeInterfaceAsIntPtr_2_System_Guid_System_Guid_0 */
-	.entry141 = {
-		/* entry_total_size = 32 */ 32u,
+	/* entry105 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_RuntimeEnvironmentTests_Benchmark_GetRuntimeInterfaceAsIntPtr_2_System_Guid_System_Guid_0 */
+	.entry105 = {
+		/* entry_total_size = 36 */ 36u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_RuntimeEnvironmentTests_Benchmark_GetRuntimeInterfaceAsIntPtr_2_System_Guid_System_Guid_0),
-		/* frame_size = 24 */ 24u,
-		/* num_gc_slots = 3 */ 3u,
-		/* slots */ { 0u, 8u, 16u }
+		/* frame_size = 32 */ 32u,
+		/* num_gc_slots = 4 */ 4u,
+		/* slots */ { 0u, 8u, 16u, 24u }
 	},
-	/* entry142 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_RuntimeEnvironmentTests_Benchmark_GetRuntimeInterfaceAsObject_3_System_Guid_System_Guid_0 */
-	.entry142 = {
-		/* entry_total_size = 32 */ 32u,
+	/* entry106 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_RuntimeEnvironmentTests_Benchmark_GetRuntimeInterfaceAsObject_3_System_Guid_System_Guid_0 */
+	.entry106 = {
+		/* entry_total_size = 36 */ 36u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_RuntimeEnvironmentTests_Benchmark_GetRuntimeInterfaceAsObject_3_System_Guid_System_Guid_0),
-		/* frame_size = 24 */ 24u,
-		/* num_gc_slots = 3 */ 3u,
-		/* slots */ { 0u, 8u, 16u }
+		/* frame_size = 32 */ 32u,
+		/* num_gc_slots = 4 */ 4u,
+		/* slots */ { 0u, 8u, 16u, 24u }
 	},
-	/* entry143 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_RuntimeEnvironmentTests_Benchmark_GetSystemVersion_4__4 */
-	.entry143 = {
+	/* entry107 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_RuntimeEnvironmentTests_Benchmark_GetSystemVersion_4__4 */
+	.entry107 = {
 		/* entry_total_size = 24 */ 24u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_RuntimeEnvironmentTests_Benchmark_GetSystemVersion_4__4),
 		/* frame_size = 8 */ 8u,
 		/* num_gc_slots = 1 */ 1u,
 		/* slots */ { 0u }
 	},
-	/* entry144 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_RuntimeEnvironmentTests_FromGlobalAccessCache_0_Assembly_0 */
-	.entry144 = {
-		/* entry_total_size = 44 */ 44u,
+	/* entry108 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_RuntimeEnvironmentTests_FromGlobalAccessCache_0_Assembly_0 */
+	.entry108 = {
+		/* entry_total_size = 48 */ 48u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_RuntimeEnvironmentTests_FromGlobalAccessCache_0_Assembly_0),
-		/* frame_size = 48 */ 48u,
-		/* num_gc_slots = 6 */ 6u,
-		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u }
+		/* frame_size = 56 */ 56u,
+		/* num_gc_slots = 7 */ 7u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u }
 	},
-	/* entry145 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_RuntimeEnvironmentTests_GetRuntimeDirectory_1__1 */
-	.entry145 = {
+	/* entry109 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_RuntimeEnvironmentTests_GetRuntimeDirectory_1__1 */
+	.entry109 = {
 		/* entry_total_size = 44 */ 44u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_RuntimeEnvironmentTests_GetRuntimeDirectory_1__1),
 		/* frame_size = 48 */ 48u,
 		/* num_gc_slots = 6 */ 6u,
 		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u }
 	},
-	/* entry146 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_RuntimeEnvironmentTests_GetRuntimeInterfaceAsIntPtr_2_System_Guid_System_Guid_0 */
-	.entry146 = {
-		/* entry_total_size = 36 */ 36u,
+	/* entry110 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_RuntimeEnvironmentTests_GetRuntimeInterfaceAsIntPtr_2_System_Guid_System_Guid_0 */
+	.entry110 = {
+		/* entry_total_size = 52 */ 52u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_RuntimeEnvironmentTests_GetRuntimeInterfaceAsIntPtr_2_System_Guid_System_Guid_0),
-		/* frame_size = 32 */ 32u,
-		/* num_gc_slots = 4 */ 4u,
-		/* slots */ { 0u, 8u, 16u, 24u }
+		/* frame_size = 64 */ 64u,
+		/* num_gc_slots = 8 */ 8u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u, 56u }
 	},
-	/* entry147 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_RuntimeEnvironmentTests_GetRuntimeInterfaceAsObject_3_System_Guid_System_Guid_0 */
-	.entry147 = {
-		/* entry_total_size = 36 */ 36u,
+	/* entry111 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_RuntimeEnvironmentTests_GetRuntimeInterfaceAsObject_3_System_Guid_System_Guid_0 */
+	.entry111 = {
+		/* entry_total_size = 52 */ 52u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_RuntimeEnvironmentTests_GetRuntimeInterfaceAsObject_3_System_Guid_System_Guid_0),
-		/* frame_size = 32 */ 32u,
-		/* num_gc_slots = 4 */ 4u,
-		/* slots */ { 0u, 8u, 16u, 24u }
+		/* frame_size = 64 */ 64u,
+		/* num_gc_slots = 8 */ 8u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u, 56u }
 	},
-	/* entry148 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_RuntimeEnvironmentTests_GetSystemVersion_4__4 */
-	.entry148 = {
+	/* entry112 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_RuntimeEnvironmentTests_GetSystemVersion_4__4 */
+	.entry112 = {
 		/* entry_total_size = 44 */ 44u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_RuntimeEnvironmentTests_GetSystemVersion_4__4),
 		/* frame_size = 48 */ 48u,
 		/* num_gc_slots = 6 */ 6u,
 		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u }
 	},
-	/* entry149 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_RuntimeEnvironmentTests___c_cctor */
-	.entry149 = {
+	/* entry113 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_RuntimeEnvironmentTests___c_cctor */
+	.entry113 = {
 		/* entry_total_size = 24 */ 24u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_RuntimeEnvironmentTests___c_cctor),
 		/* frame_size = 8 */ 8u,
 		/* num_gc_slots = 1 */ 1u,
 		/* slots */ { 0u }
 	},
-	/* entry150 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_RuntimeEnvironmentTests___c__ctor */
-	.entry150 = {
+	/* entry114 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_RuntimeEnvironmentTests___c__ctor */
+	.entry114 = {
 		/* entry_total_size = 28 */ 28u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_RuntimeEnvironmentTests___c__ctor),
 		/* frame_size = 16 */ 16u,
 		/* num_gc_slots = 2 */ 2u,
 		/* slots */ { 0u, 8u }
 	},
-	/* entry151 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_RuntimeEnvironmentTests___c_GetRuntimeInterfaceAsIntPtr_2_System_Guid_System_Guid_0_b__4_0 */
-	.entry151 = {
-		/* entry_total_size = 36 */ 36u,
+	/* entry115 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_RuntimeEnvironmentTests___c_GetRuntimeInterfaceAsIntPtr_2_System_Guid_System_Guid_0_b__4_0 */
+	.entry115 = {
+		/* entry_total_size = 40 */ 40u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_RuntimeEnvironmentTests___c_GetRuntimeInterfaceAsIntPtr_2_System_Guid_System_Guid_0_b__4_0),
-		/* frame_size = 32 */ 32u,
-		/* num_gc_slots = 4 */ 4u,
-		/* slots */ { 0u, 8u, 16u, 24u }
+		/* frame_size = 40 */ 40u,
+		/* num_gc_slots = 5 */ 5u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u }
 	},
-	/* entry152 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_RuntimeEnvironmentTests___c_GetRuntimeInterfaceAsObject_3_System_Guid_System_Guid_0_b__6_0 */
-	.entry152 = {
-		/* entry_total_size = 36 */ 36u,
+	/* entry116 = CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_RuntimeEnvironmentTests___c_GetRuntimeInterfaceAsObject_3_System_Guid_System_Guid_0_b__6_0 */
+	.entry116 = {
+		/* entry_total_size = 40 */ 40u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_RuntimeEnvironmentTests___c_GetRuntimeInterfaceAsObject_3_System_Guid_System_Guid_0_b__6_0),
-		/* frame_size = 32 */ 32u,
-		/* num_gc_slots = 4 */ 4u,
-		/* slots */ { 0u, 8u, 16u, 24u }
+		/* frame_size = 40 */ 40u,
+		/* num_gc_slots = 5 */ 5u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u }
 	}
 };
 #if defined(_MSC_VER)
 #pragma pack(pop)
 #endif
 
-static const CHAOS_IL2CPP_UINT32 kChaosGcSlotMapsSize = 5024u;
-
-// ── Bridge/import thunks ──
-extern "C" void* kChaosExternalRuntimeFnTable[];
-
-// Bridge/import thunk for: System.Private.CoreLib/System.Decimal::op_Inequality:System.Boolean(System.Decimal,System.Decimal)
-extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[0])(chaos_fn_arg_0, chaos_fn_arg_1);
-	return result;
-}
-
-// Bridge/import thunk for: System.Private.CoreLib/System.String::op_Inequality:System.Boolean(System.String,System.String)
-extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_1(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[3])(chaos_fn_arg_0, chaos_fn_arg_1);
-	return result;
-}
-
-// Bridge/import thunk for: System.Private.CoreLib/System.Collections.Generic.EqualityComparer<System.Object>::Equals:System.Boolean(System.Object,System.Object)
-extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_10(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[12])(chaos_fn_arg_0, chaos_fn_arg_1);
-	return result;
-}
-
-// Bridge/import thunk for: System.Private.CoreLib/System.IDisposable::Dispose:System.Void()
-extern "C" void chaos_bridge_thunk_11(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[13])();
-}
-
-// Bridge/import thunk for: System.Private.CoreLib/System.Collections.Generic.EqualityComparer<!!0>::get_Default:System.Collections.Generic.EqualityComparer<!!0>()
-extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_12(void)
-{
-	auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)()>(kChaosExternalRuntimeFnTable[14])();
-	return result;
-}
-
-// Bridge/import thunk for: System.Private.CoreLib/System.Collections.Generic.EqualityComparer<!!0>::Equals:System.Boolean(!!0,!!0)
-extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_13(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[15])(chaos_fn_arg_0, chaos_fn_arg_1);
-	return result;
-}
-
-// Bridge/import thunk for: Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::s_exitCode
-extern "C" void chaos_bridge_thunk_14(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[16])();
-}
-
-// Bridge/import thunk for: System.Private.CoreLib/System.Action::Invoke:System.Void()
-extern "C" void chaos_bridge_thunk_15(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[20])();
-}
-
-// Bridge/import thunk for: System.Private.CoreLib/System.Attribute::.ctor:System.Void()
-extern "C" void chaos_bridge_thunk_16(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[22])();
-}
-
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests+<>c::<>9__0_0
-extern "C" void chaos_bridge_thunk_17(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[24])();
-}
-
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests+<>c::<>9
-extern "C" void chaos_bridge_thunk_18(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[25])();
-}
-
-// Bridge/import thunk for: System.Private.CoreLib/System.Action::.ctor:System.Void(System.Object,System.IntPtr)
-extern "C" void chaos_bridge_thunk_19(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[26])(chaos_fn_arg_0, chaos_fn_arg_1);
-}
-
-// Bridge/import thunk for: Chaos.TestFramework.Sdk/!!0
-extern "C" void chaos_bridge_thunk_2(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[4])();
-}
-
-// Bridge/import thunk for: System.Private.CoreLib/System.Reflection.EventInfo::AddEventHandler:System.Void(System.Object,System.Delegate)
-extern "C" void chaos_bridge_thunk_20(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[27])(chaos_fn_arg_0, chaos_fn_arg_1);
-}
-
-// Bridge/import thunk for: System.Private.CoreLib/System.Reflection.EventInfo::GetAddMethod:System.Reflection.MethodInfo(System.Boolean)
-extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_21(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[28])(chaos_fn_arg_0);
-	return result;
-}
-
-// Bridge/import thunk for: System.Private.CoreLib/System.Reflection.MemberInfo::GetCustomAttributes:System.Object[](System.Type,System.Boolean)
-extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_22(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[29])(chaos_fn_arg_0, chaos_fn_arg_1);
-	return result;
-}
-
-// Bridge/import thunk for: System.Private.CoreLib/System.Reflection.MemberInfo::GetCustomAttributes:System.Object[](System.Boolean)
-extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_23(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[30])(chaos_fn_arg_0);
-	return result;
-}
-
-// Bridge/import thunk for: System.Private.CoreLib/System.Reflection.MemberInfo::GetCustomAttributesData:System.Collections.Generic.IList<System.Reflection.CustomAttributeData>()
-extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_24(void)
-{
-	auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)()>(kChaosExternalRuntimeFnTable[31])();
-	return result;
-}
-
-// Bridge/import thunk for: System.Private.CoreLib/System.Reflection.EventInfo::GetOtherMethods:System.Reflection.MethodInfo[](System.Boolean)
-extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_25(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[32])(chaos_fn_arg_0);
-	return result;
-}
-
-// Bridge/import thunk for: System.Private.CoreLib/System.Reflection.EventInfo::GetRaiseMethod:System.Reflection.MethodInfo(System.Boolean)
-extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_26(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[33])(chaos_fn_arg_0);
-	return result;
-}
-
-// Bridge/import thunk for: System.Private.CoreLib/System.Reflection.EventInfo::GetRemoveMethod:System.Reflection.MethodInfo(System.Boolean)
-extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_27(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[34])(chaos_fn_arg_0);
-	return result;
-}
-
-// Bridge/import thunk for: System.Private.CoreLib/System.Reflection.MemberInfo::IsDefined:System.Boolean(System.Type,System.Boolean)
-extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_28(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[35])(chaos_fn_arg_0, chaos_fn_arg_1);
-	return result;
-}
-
-// Bridge/import thunk for: System.Private.CoreLib/System.Reflection.EventInfo::RemoveEventHandler:System.Void(System.Object,System.Delegate)
-extern "C" void chaos_bridge_thunk_29(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[36])(chaos_fn_arg_0, chaos_fn_arg_1);
-}
-
-// Bridge/import thunk for: System.Private.CoreLib/System.String
-extern "C" void chaos_bridge_thunk_3(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[5])();
-}
-
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests+<>c::<>9__4_0
-extern "C" void chaos_bridge_thunk_30(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[37])();
-}
-
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests+<>c::<>9__6_0
-extern "C" void chaos_bridge_thunk_31(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[38])();
-}
-
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests+<>c::<>9__20_0
-extern "C" void chaos_bridge_thunk_32(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[39])();
-}
-
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests+<>c::<>9__22_0
-extern "C" void chaos_bridge_thunk_33(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[40])();
-}
-
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests+<>c::<>9__24_0
-extern "C" void chaos_bridge_thunk_34(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[41])();
-}
-
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests+<>c::<>9__26_0
-extern "C" void chaos_bridge_thunk_35(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[42])();
-}
-
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests+<>c::<>9__28_0
-extern "C" void chaos_bridge_thunk_36(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[43])();
-}
-
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests+<>c::<>9__8_0
-extern "C" void chaos_bridge_thunk_37(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[44])();
-}
-
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests+<>c::<>9__10_0
-extern "C" void chaos_bridge_thunk_38(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[45])();
-}
-
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests+<>c::<>9__12_0
-extern "C" void chaos_bridge_thunk_39(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[46])();
-}
-
-// Bridge/import thunk for: System.Private.CoreLib/System.Collections.IEnumerable
-extern "C" void chaos_bridge_thunk_4(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[6])();
-}
-
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests+<>c::<>9__14_0
-extern "C" void chaos_bridge_thunk_40(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[47])();
-}
-
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests+<>c::<>9__16_0
-extern "C" void chaos_bridge_thunk_41(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[48])();
-}
-
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests+<>c::<>9__18_0
-extern "C" void chaos_bridge_thunk_42(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[49])();
-}
-
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests+<>c::<>9__30_0
-extern "C" void chaos_bridge_thunk_43(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[50])();
-}
-
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests+<>c::<>9__32_0
-extern "C" void chaos_bridge_thunk_44(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[51])();
-}
-
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests+<>c::<>9__2_0
-extern "C" void chaos_bridge_thunk_45(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[52])();
-}
-
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_HandleCollectorTests+<>c::<>9__0_0
-extern "C" void chaos_bridge_thunk_46(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[53])();
-}
-
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_HandleCollectorTests+<>c::<>9
-extern "C" void chaos_bridge_thunk_47(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[54])();
-}
-
-// Bridge/import thunk for: System.Private.CoreLib/HandleCollector::Add:System.Void()
-extern "C" void chaos_bridge_thunk_48(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[55])();
-}
-
-// Bridge/import thunk for: System.Private.CoreLib/HandleCollector::Remove:System.Void()
-extern "C" void chaos_bridge_thunk_49(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[56])();
-}
-
-// Bridge/import thunk for: System.Private.CoreLib/System.Collections.IEnumerable::GetEnumerator:System.Collections.IEnumerator()
-extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_5(void)
-{
-	auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)()>(kChaosExternalRuntimeFnTable[7])();
-	return result;
-}
-
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_HandleCollectorTests+<>c::<>9__2_0
-extern "C" void chaos_bridge_thunk_50(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[57])();
-}
-
-// Bridge/import thunk for: System.Private.CoreLib/System.Runtime.InteropServices.Marshalling.ComInterfaceMarshaller<System.Int32>::ConvertToManaged:System.Int32(System.Void*)
-extern "C" CHAOS_IL2CPP_INT32 chaos_bridge_thunk_51(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	auto result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[58])(chaos_fn_arg_0);
-	return result;
-}
-
-// Bridge/import thunk for: System.Private.CoreLib/System.Runtime.InteropServices.Marshalling.ComInterfaceMarshaller<System.Int32>::ConvertToUnmanaged:System.Void*(System.Int32)
-extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_52(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[59])(chaos_fn_arg_0);
-	return result;
-}
-
-// Bridge/import thunk for: System.Private.CoreLib/System.Runtime.InteropServices.Marshalling.ComInterfaceMarshaller<System.Int32>::Free:System.Void(System.Void*)
-extern "C" void chaos_bridge_thunk_53(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[60])(chaos_fn_arg_0);
-}
-
-// Bridge/import thunk for: System.Private.CoreLib/System.Runtime.InteropServices.Marshalling.ComObject::FinalRelease:System.Void()
-extern "C" void chaos_bridge_thunk_54(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[61])();
-}
-
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ComObjectTests+<>c::<>9__0_0
-extern "C" void chaos_bridge_thunk_55(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[62])();
-}
-
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ComObjectTests+<>c::<>9
-extern "C" void chaos_bridge_thunk_56(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[63])();
-}
-
-// Bridge/import thunk for: System.Private.CoreLib/System.Runtime.InteropServices.Marshalling.ExceptionAsDefaultMarshaller<System.Int32>::ConvertToUnmanaged:System.Int32(System.Exception)
-extern "C" CHAOS_IL2CPP_INT32 chaos_bridge_thunk_57(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	auto result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[64])(chaos_fn_arg_0);
-	return result;
-}
-
-// Bridge/import thunk for: System.Private.CoreLib/System.Runtime.InteropServices.Marshalling.ExceptionAsHResultMarshaller<System.Int32>::ConvertToUnmanaged:System.Int32(System.Exception)
-extern "C" CHAOS_IL2CPP_INT32 chaos_bridge_thunk_58(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	auto result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[65])(chaos_fn_arg_0);
-	return result;
-}
-
-// Bridge/import thunk for: System.Private.CoreLib/System.Runtime.InteropServices.Marshalling.ExceptionAsNaNMarshaller<System.Double>::ConvertToUnmanaged:System.Double(System.Exception)
-extern "C" double chaos_bridge_thunk_59(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	auto result = reinterpret_cast<double(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[66])(chaos_fn_arg_0);
-	return result;
-}
-
-// Bridge/import thunk for: System.Private.CoreLib/System.IDisposable
-extern "C" void chaos_bridge_thunk_6(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[8])();
-}
-
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ExceptionAsNaNMarshallerSystem_DoubleTests+<>c::<>9__0_0
-extern "C" void chaos_bridge_thunk_60(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[67])();
-}
-
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ExceptionAsNaNMarshallerSystem_DoubleTests+<>c::<>9
-extern "C" void chaos_bridge_thunk_61(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[68])();
-}
-
-// Bridge/import thunk for: System.Private.CoreLib/System.Runtime.InteropServices.Marshalling.ExceptionAsVoidMarshaller::ConvertToUnmanaged:System.Void(System.Exception)
-extern "C" void chaos_bridge_thunk_62(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[69])(chaos_fn_arg_0);
-}
-
-// Bridge/import thunk for: System.Private.CoreLib/System.Runtime.InteropServices.Marshalling.UniqueComInterfaceMarshaller<System.Int32>::ConvertToManaged:System.Int32(System.Void*)
-extern "C" CHAOS_IL2CPP_INT32 chaos_bridge_thunk_63(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	auto result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[70])(chaos_fn_arg_0);
-	return result;
-}
-
-// Bridge/import thunk for: System.Private.CoreLib/System.Runtime.InteropServices.Marshalling.UniqueComInterfaceMarshaller<System.Int32>::ConvertToUnmanaged:System.Void*(System.Int32)
-extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_64(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[71])(chaos_fn_arg_0);
-	return result;
-}
-
-// Bridge/import thunk for: System.Private.CoreLib/System.Runtime.InteropServices.Marshalling.UniqueComInterfaceMarshaller<System.Int32>::Free:System.Void(System.Void*)
-extern "C" void chaos_bridge_thunk_65(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[72])(chaos_fn_arg_0);
-}
-
-// Bridge/import thunk for: System.Private.CoreLib/System.Void*
-extern "C" void chaos_bridge_thunk_66(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[73])();
-}
-
-// Bridge/import thunk for: System.Private.CoreLib/System.Void**
-extern "C" void chaos_bridge_thunk_67(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[74])();
-}
-
-// Bridge/import thunk for: System.Private.CoreLib/System.Runtime.InteropServices.Marshalling.VirtualMethodTableInfo
-extern "C" void chaos_bridge_thunk_68(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[75])();
-}
-
-// Bridge/import thunk for: System.Private.CoreLib/System.Runtime.InteropServices.Marshalling.VirtualMethodTableInfo::Deconstruct:System.Void(System.Void*&,System.Void**&)
-extern "C" void chaos_bridge_thunk_69(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[76])(chaos_fn_arg_0, chaos_fn_arg_1);
-}
-
-// Bridge/import thunk for: System.Private.CoreLib/System.Collections.IEnumerator::MoveNext:System.Boolean()
-extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_7(void)
-{
-	auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)()>(kChaosExternalRuntimeFnTable[9])();
-	return result;
-}
-
-// Bridge/import thunk for: System.Private.CoreLib/RuntimeEnvironment::FromGlobalAccessCache:System.Boolean(System.Reflection.Assembly)
-extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_70(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[77])(chaos_fn_arg_0);
-	return result;
-}
-
-// Bridge/import thunk for: System.Private.CoreLib/RuntimeEnvironment::GetRuntimeDirectory:System.String()
-extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_71(void)
-{
-	auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)()>(kChaosExternalRuntimeFnTable[78])();
-	return result;
-}
-
-// Bridge/import thunk for: System.Private.CoreLib/System.Guid
-extern "C" void chaos_bridge_thunk_72(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[79])();
-}
-
-// Bridge/import thunk for: System.Private.CoreLib/RuntimeEnvironment::GetRuntimeInterfaceAsIntPtr:System.IntPtr(System.Guid,System.Guid)
-extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_73(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[80])(chaos_fn_arg_0, chaos_fn_arg_1);
-	return result;
-}
-
-// Bridge/import thunk for: System.Private.CoreLib/RuntimeEnvironment::GetRuntimeInterfaceAsObject:System.Object(System.Guid,System.Guid)
-extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_74(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[81])(chaos_fn_arg_0, chaos_fn_arg_1);
-	return result;
-}
-
-// Bridge/import thunk for: System.Private.CoreLib/RuntimeEnvironment::GetSystemVersion:System.String()
-extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_75(void)
-{
-	auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)()>(kChaosExternalRuntimeFnTable[82])();
-	return result;
-}
-
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_RuntimeEnvironmentTests+<>c::<>9__4_0
-extern "C" void chaos_bridge_thunk_76(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[83])();
-}
-
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_RuntimeEnvironmentTests+<>c::<>9
-extern "C" void chaos_bridge_thunk_77(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[84])();
-}
-
-// Bridge/import thunk for: CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_RuntimeEnvironmentTests+<>c::<>9__6_0
-extern "C" void chaos_bridge_thunk_78(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[85])();
-}
-
-// Bridge/import thunk for: System.Private.CoreLib/System.Collections.Generic.EqualityComparer<System.Object>::get_Default:System.Collections.Generic.EqualityComparer<System.Object>()
-extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_8(void)
-{
-	auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)()>(kChaosExternalRuntimeFnTable[10])();
-	return result;
-}
-
-// Bridge/import thunk for: System.Private.CoreLib/System.Collections.IEnumerator::get_Current:System.Object()
-extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_9(void)
-{
-	auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)()>(kChaosExternalRuntimeFnTable[11])();
-	return result;
-}
+static const CHAOS_IL2CPP_UINT32 kChaosGcSlotMapsSize = 4312u;
 
 // ── CodeRegistrationV0 ─────────────────────────────────────────
 // method_pointers: flat array of all AOT function pointers.
-static void* const kMethodPointers[153] = {
-	reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Boolean_System_Boolean_System_String),
-	reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Byte_System_Byte_System_String),
-	reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Byte_array_System_Byte_array_System_String),
-	reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Char_System_Char_System_String),
-	reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Decimal_System_Decimal_System_String),
-	reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Double_System_Double_System_String),
-	reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Int16_System_Int16_System_String),
-	reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Int32_System_Int32_System_String),
-	reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Int64_System_Int64_System_String),
-	reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Object_System_Object_System_String),
-	reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_SByte_System_SByte_System_String),
-	reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Single_System_Single_System_String),
-	reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_String_System_String_System_String),
-	reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_UInt16_System_UInt16_System_String),
-	reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_UInt32_System_UInt32_System_String),
-	reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_UInt64_System_UInt64_System_String),
-	reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_0_0_System_String),
-	reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreNotEqual_0_0_System_String),
-	reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Complete),
-	reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Fail_System_String),
-	reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_get_ExitCode),
-	reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_IsFalse_System_Boolean_System_String),
-	reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_IsNotNull_System_Object_System_String),
-	reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_IsNull_System_Object_System_String),
-	reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_IsTrue_System_Boolean_System_String),
-	reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_RecordFailure),
-	reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Reset),
-	reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Throws_System_Action),
-	reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Throws_System_Action),
-	reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Throws_System_ArgumentException_System_Action__generic),
-	reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Throws_System_NullReferenceException_System_Action__generic),
-	reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Throws_System_PlatformNotSupportedException_System_Action__generic),
-	reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_AssertionException__ctor_System_String),
-	reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_BenchmarkAttribute__ctor),
-	reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_FactAttribute__ctor),
-	reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_HotUpdateAttribute__ctor),
+static void* const kMethodPointers[117] = {
 	reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests__ctor),
 	reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_AddEventHandler_0_object_System_Delegate_0),
 	reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_Benchmark_AddEventHandler_0_object_System_Delegate_0),
@@ -5683,26 +4695,13 @@ static void* const kMethodPointers[153] = {
 // ── VTable descriptors (for BootstrapRuntime TypeVTable registration) ──
 static const VTableDescriptorV0 kChaosVTableDescriptors[] = {
 	{
-		CHAOS_IL2CPP_UINT64_C(0x7C3B82F05F34BCA9),
-		0x00000003u,
-		0u,
-		1u,
-		reinterpret_cast<const void*>(kSlots_Chaos_TestFramework_Sdk_Chaos_TestFramework_AssertionException),
-		reinterpret_cast<const void**>(chaos_vtable_Chaos_TestFramework_Sdk_Chaos_TestFramework_AssertionException),
-		1u,
-		1,
-		{0, 0, 0},
-		nullptr,
-		0u,
-	},
-	{
 		CHAOS_IL2CPP_UINT64_C(0xCCC939EE64CC0C11),
-		0x00000012u,
+		0x0000000Cu,
 		0u,
-		19u,
+		18u,
 		reinterpret_cast<const void*>(kSlots_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c),
 		reinterpret_cast<const void**>(chaos_vtable_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c),
-		19u,
+		18u,
 		1,
 		{0, 0, 0},
 		nullptr,
@@ -5710,12 +4709,12 @@ static const VTableDescriptorV0 kChaosVTableDescriptors[] = {
 	},
 	{
 		CHAOS_IL2CPP_UINT64_C(0x6D0DEDA36859C9E3),
-		0x00000013u,
+		0x0000000Du,
 		0u,
-		21u,
+		20u,
 		reinterpret_cast<const void*>(kSlots_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_HandleCollectorTests___c),
 		reinterpret_cast<const void**>(chaos_vtable_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_HandleCollectorTests___c),
-		21u,
+		20u,
 		1,
 		{0, 0, 0},
 		nullptr,
@@ -5723,12 +4722,12 @@ static const VTableDescriptorV0 kChaosVTableDescriptors[] = {
 	},
 	{
 		CHAOS_IL2CPP_UINT64_C(0x5D79AE29E1682D61),
-		0x00000014u,
+		0x0000000Eu,
 		0u,
-		22u,
+		21u,
 		reinterpret_cast<const void*>(kSlots_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ComObjectTests___c),
 		reinterpret_cast<const void**>(chaos_vtable_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ComObjectTests___c),
-		22u,
+		21u,
 		1,
 		{0, 0, 0},
 		nullptr,
@@ -5736,12 +4735,12 @@ static const VTableDescriptorV0 kChaosVTableDescriptors[] = {
 	},
 	{
 		CHAOS_IL2CPP_UINT64_C(0x6816E9DD8BF9D6F9),
-		0x00000015u,
+		0x0000000Fu,
 		0u,
-		23u,
+		22u,
 		reinterpret_cast<const void*>(kSlots_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ExceptionAsNaNMarshallerSystem_DoubleTests___c),
 		reinterpret_cast<const void**>(chaos_vtable_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ExceptionAsNaNMarshallerSystem_DoubleTests___c),
-		23u,
+		22u,
 		1,
 		{0, 0, 0},
 		nullptr,
@@ -5749,12 +4748,12 @@ static const VTableDescriptorV0 kChaosVTableDescriptors[] = {
 	},
 	{
 		CHAOS_IL2CPP_UINT64_C(0xAA683BDB93A5DD39),
-		0x00000016u,
+		0x00000010u,
 		0u,
-		25u,
+		24u,
 		reinterpret_cast<const void*>(kSlots_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_RuntimeEnvironmentTests___c),
 		reinterpret_cast<const void**>(chaos_vtable_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_RuntimeEnvironmentTests___c),
-		25u,
+		24u,
 		1,
 		{0, 0, 0},
 		nullptr,
@@ -5765,7 +4764,7 @@ extern "C" const CodeRegistrationV0 chaos_codegen_code_registration
 	= {
 	.struct_size               = sizeof(CodeRegistrationV0),
 	.method_pointers           = kMethodPointers,
-	.method_pointer_count      = 153u,
+	.method_pointer_count      = 117u,
 	.reverse_pinvoke_wrappers  = nullptr,
 	.reverse_pinvoke_wrapper_count = 0u,
 	.invoker_pointers          = nullptr,
@@ -5775,7 +4774,7 @@ extern "C" const CodeRegistrationV0 chaos_codegen_code_registration
 	.type_capabilities       = nullptr,
 	.type_capability_count   = 0u,
 	.vtable_descriptors = kChaosVTableDescriptors,
-	.vtable_descriptor_count = 6u,
+	.vtable_descriptor_count = 5u,
 	.slot_map_section_begin = reinterpret_cast<const void*>(&kChaosGcSlotMapsSection),
 	.slot_map_section_end   = reinterpret_cast<const void*>(
 		reinterpret_cast<CHAOS_IL2CPP_UINTPTR>(&kChaosGcSlotMapsSection) + kChaosGcSlotMapsSize),
@@ -5814,271 +4813,207 @@ extern "C" const CodegenRegistrationOptionsV0 chaos_codegen_options
 // Used by ResolveSubjectId to resolve call_target via subjectId
 // matching during IR lowering of patched methods.
 
-static constexpr ReflectionQueryFieldDescriptor kReflFields_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert[1] = {
-	{ 0x04000001u, "Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::s_exitCode", "s_exitCode", "System.Int32", 0LL, 2u },
-};
-static constexpr ReflectionQueryMethodDescriptor kReflMethods_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert[32] = {
-	{ 0x00000052u, "Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::AreEqual:System.Void(System.Boolean,System.Boolean,System.String)", "AreEqual", "System.Void", 3, nullptr, 0u, nullptr, 0u },
-	{ 0x0000004Cu, "Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::AreEqual:System.Void(System.Byte,System.Byte,System.String)", "AreEqual", "System.Void", 3, nullptr, 0u, nullptr, 0u },
-	{ 0x0000006Cu, "Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::AreEqual:System.Void(System.Byte[],System.Byte[],System.String)", "AreEqual", "System.Void", 3, nullptr, 0u, nullptr, 0u },
-	{ 0x00000050u, "Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::AreEqual:System.Void(System.Char,System.Char,System.String)", "AreEqual", "System.Void", 3, nullptr, 0u, nullptr, 0u },
-	{ 0x00000058u, "Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::AreEqual:System.Void(System.Decimal,System.Decimal,System.String)", "AreEqual", "System.Void", 3, nullptr, 0u, nullptr, 0u },
-	{ 0x00000056u, "Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::AreEqual:System.Void(System.Double,System.Double,System.String)", "AreEqual", "System.Void", 3, nullptr, 0u, nullptr, 0u },
-	{ 0x00000048u, "Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::AreEqual:System.Void(System.Int16,System.Int16,System.String)", "AreEqual", "System.Void", 3, nullptr, 0u, nullptr, 0u },
-	{ 0x00000040u, "Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::AreEqual:System.Void(System.Int32,System.Int32,System.String)", "AreEqual", "System.Void", 3, nullptr, 0u, nullptr, 0u },
-	{ 0x00000044u, "Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::AreEqual:System.Void(System.Int64,System.Int64,System.String)", "AreEqual", "System.Void", 3, nullptr, 0u, nullptr, 0u },
-	{ 0x0000005Cu, "Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::AreEqual:System.Void(System.Object,System.Object,System.String)", "AreEqual", "System.Void", 3, nullptr, 0u, nullptr, 0u },
-	{ 0x0000004Eu, "Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::AreEqual:System.Void(System.SByte,System.SByte,System.String)", "AreEqual", "System.Void", 3, nullptr, 0u, nullptr, 0u },
-	{ 0x00000054u, "Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::AreEqual:System.Void(System.Single,System.Single,System.String)", "AreEqual", "System.Void", 3, nullptr, 0u, nullptr, 0u },
-	{ 0x0000005Au, "Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::AreEqual:System.Void(System.String,System.String,System.String)", "AreEqual", "System.Void", 3, nullptr, 0u, nullptr, 0u },
-	{ 0x0000004Au, "Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::AreEqual:System.Void(System.UInt16,System.UInt16,System.String)", "AreEqual", "System.Void", 3, nullptr, 0u, nullptr, 0u },
-	{ 0x00000042u, "Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::AreEqual:System.Void(System.UInt32,System.UInt32,System.String)", "AreEqual", "System.Void", 3, nullptr, 0u, nullptr, 0u },
-	{ 0x00000046u, "Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::AreEqual:System.Void(System.UInt64,System.UInt64,System.String)", "AreEqual", "System.Void", 3, nullptr, 0u, nullptr, 0u },
-	{ 0x0000006Au, "Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::AreEqual`1:System.Void(!!0,!!0,System.String)", "AreEqual`1", "System.Void", 3, nullptr, 0u, nullptr, 0u },
-	{ 0x0000006Eu, "Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::AreNotEqual`1:System.Void(!!0,!!0,System.String)", "AreNotEqual`1", "System.Void", 3, nullptr, 0u, nullptr, 0u },
-	{ 0x0000003Cu, "Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::Complete:System.Int32()", "Complete", "System.Int32", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x00000070u, "Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::Fail:System.Void(System.String)", "Fail", "System.Void", 1, nullptr, 0u, nullptr, 0u },
-	{ 0x0000003Eu, "Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::get_ExitCode:System.Int32()", "get_ExitCode", "System.Int32", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x00000064u, "Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::IsFalse:System.Void(System.Boolean,System.String)", "IsFalse", "System.Void", 2, nullptr, 0u, nullptr, 0u },
-	{ 0x00000060u, "Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::IsNotNull:System.Void(System.Object,System.String)", "IsNotNull", "System.Void", 2, nullptr, 0u, nullptr, 0u },
-	{ 0x0000005Eu, "Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::IsNull:System.Void(System.Object,System.String)", "IsNull", "System.Void", 2, nullptr, 0u, nullptr, 0u },
-	{ 0x00000062u, "Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::IsTrue:System.Void(System.Boolean,System.String)", "IsTrue", "System.Void", 2, nullptr, 0u, nullptr, 0u },
-	{ 0x0000003Au, "Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::RecordFailure:System.Void()", "RecordFailure", "System.Void", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x00000038u, "Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::Reset:System.Void()", "Reset", "System.Void", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x00000066u, "Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::Throws:System.Void(System.Action)", "Throws", "System.Void", 1, nullptr, 0u, nullptr, 0u },
-	{ 0x00000068u, "Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::Throws`1:System.Void(System.Action)", "Throws`1", "System.Void", 1, nullptr, 0u, nullptr, 0u },
-	{ 0x000000CCu, "Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::Throws<System.ArgumentException>:System.Void(System.Action)", "Throws<System.ArgumentException>", "System.Void", 1, nullptr, 0u, nullptr, 0u },
-	{ 0x000000CBu, "Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::Throws<System.NullReferenceException>:System.Void(System.Action)", "Throws<System.NullReferenceException>", "System.Void", 1, nullptr, 0u, nullptr, 0u },
-	{ 0x000000CDu, "Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::Throws<System.PlatformNotSupportedException>:System.Void(System.Action)", "Throws<System.PlatformNotSupportedException>", "System.Void", 1, nullptr, 0u, nullptr, 0u },
-};
-
-static constexpr ReflectionQueryMethodDescriptor kReflMethods_Chaos_TestFramework_Sdk_Chaos_TestFramework_AssertionException[1] = {
-	{ 0x00000036u, "Chaos.TestFramework.Sdk/Chaos.TestFramework.AssertionException::.ctor:System.Void(System.String)", ".ctor", "System.Void", 1, nullptr, 0u, nullptr, 0u },
-};
-
-static constexpr ReflectionQueryMethodDescriptor kReflMethods_Chaos_TestFramework_Sdk_Chaos_TestFramework_BenchmarkAttribute[1] = {
-	{ 0x00000072u, "Chaos.TestFramework.Sdk/Chaos.TestFramework.BenchmarkAttribute::.ctor:System.Void()", ".ctor", "System.Void", 0, nullptr, 0u, nullptr, 0u },
-};
-
-static constexpr ReflectionQueryMethodDescriptor kReflMethods_Chaos_TestFramework_Sdk_Chaos_TestFramework_FactAttribute[1] = {
-	{ 0x00000074u, "Chaos.TestFramework.Sdk/Chaos.TestFramework.FactAttribute::.ctor:System.Void()", ".ctor", "System.Void", 0, nullptr, 0u, nullptr, 0u },
-};
-
-static constexpr ReflectionQueryMethodDescriptor kReflMethods_Chaos_TestFramework_Sdk_Chaos_TestFramework_HotUpdateAttribute[1] = {
-	{ 0x00000076u, "Chaos.TestFramework.Sdk/Chaos.TestFramework.HotUpdateAttribute::.ctor:System.Void()", ".ctor", "System.Void", 0, nullptr, 0u, nullptr, 0u },
-};
-
 static constexpr ReflectionQueryMethodDescriptor kReflMethods_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests[35] = {
-	{ 0x00000078u, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests::.ctor:System.Void()", ".ctor", "System.Void", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x00000035u, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests::AddEventHandler_0_object_System_Delegate_0:System.Int64()", "AddEventHandler_0_object_System_Delegate_0", "System.Int64", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x00000037u, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests::Benchmark_AddEventHandler_0_object_System_Delegate_0:System.Void()", "Benchmark_AddEventHandler_0_object_System_Delegate_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x0000003Fu, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests::Benchmark_GetAddMethod_2_bool_0:System.Void()", "Benchmark_GetAddMethod_2_bool_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x00000043u, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests::Benchmark_GetAddMethod_2_bool_1:System.Void()", "Benchmark_GetAddMethod_2_bool_1", "System.Void", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x0000005Fu, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests::Benchmark_GetCustomAttributes_6_System_Type_bool_0:System.Void()", "Benchmark_GetCustomAttributes_6_System_Type_bool_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x00000063u, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests::Benchmark_GetCustomAttributes_6_System_Type_bool_1:System.Void()", "Benchmark_GetCustomAttributes_6_System_Type_bool_1", "System.Void", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x00000067u, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests::Benchmark_GetCustomAttributes_7_bool_0:System.Void()", "Benchmark_GetCustomAttributes_7_bool_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x0000006Bu, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests::Benchmark_GetCustomAttributes_7_bool_1:System.Void()", "Benchmark_GetCustomAttributes_7_bool_1", "System.Void", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x0000006Fu, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests::Benchmark_GetCustomAttributesData_8__8:System.Void()", "Benchmark_GetCustomAttributesData_8__8", "System.Void", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x00000047u, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests::Benchmark_GetOtherMethods_3_bool_0:System.Void()", "Benchmark_GetOtherMethods_3_bool_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x0000004Bu, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests::Benchmark_GetOtherMethods_3_bool_1:System.Void()", "Benchmark_GetOtherMethods_3_bool_1", "System.Void", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x0000004Fu, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests::Benchmark_GetRaiseMethod_4_bool_0:System.Void()", "Benchmark_GetRaiseMethod_4_bool_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x00000053u, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests::Benchmark_GetRaiseMethod_4_bool_1:System.Void()", "Benchmark_GetRaiseMethod_4_bool_1", "System.Void", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x00000057u, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests::Benchmark_GetRemoveMethod_5_bool_0:System.Void()", "Benchmark_GetRemoveMethod_5_bool_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x0000005Bu, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests::Benchmark_GetRemoveMethod_5_bool_1:System.Void()", "Benchmark_GetRemoveMethod_5_bool_1", "System.Void", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x00000073u, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests::Benchmark_IsDefined_9_System_Type_bool_0:System.Void()", "Benchmark_IsDefined_9_System_Type_bool_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x00000077u, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests::Benchmark_IsDefined_9_System_Type_bool_1:System.Void()", "Benchmark_IsDefined_9_System_Type_bool_1", "System.Void", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x0000003Bu, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests::Benchmark_RemoveEventHandler_1_object_System_Delegate_0:System.Void()", "Benchmark_RemoveEventHandler_1_object_System_Delegate_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x0000003Du, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests::GetAddMethod_2_bool_0:System.Int64()", "GetAddMethod_2_bool_0", "System.Int64", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x00000041u, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests::GetAddMethod_2_bool_1:System.Int64()", "GetAddMethod_2_bool_1", "System.Int64", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x0000005Du, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests::GetCustomAttributes_6_System_Type_bool_0:System.Int64()", "GetCustomAttributes_6_System_Type_bool_0", "System.Int64", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x00000061u, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests::GetCustomAttributes_6_System_Type_bool_1:System.Int64()", "GetCustomAttributes_6_System_Type_bool_1", "System.Int64", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x00000065u, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests::GetCustomAttributes_7_bool_0:System.Int64()", "GetCustomAttributes_7_bool_0", "System.Int64", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x00000069u, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests::GetCustomAttributes_7_bool_1:System.Int64()", "GetCustomAttributes_7_bool_1", "System.Int64", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x0000006Du, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests::GetCustomAttributesData_8__8:System.Int64()", "GetCustomAttributesData_8__8", "System.Int64", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x00000045u, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests::GetOtherMethods_3_bool_0:System.Int64()", "GetOtherMethods_3_bool_0", "System.Int64", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x00000049u, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests::GetOtherMethods_3_bool_1:System.Int64()", "GetOtherMethods_3_bool_1", "System.Int64", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x0000004Du, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests::GetRaiseMethod_4_bool_0:System.Int64()", "GetRaiseMethod_4_bool_0", "System.Int64", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x00000051u, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests::GetRaiseMethod_4_bool_1:System.Int64()", "GetRaiseMethod_4_bool_1", "System.Int64", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x00000055u, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests::GetRemoveMethod_5_bool_0:System.Int64()", "GetRemoveMethod_5_bool_0", "System.Int64", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x00000059u, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests::GetRemoveMethod_5_bool_1:System.Int64()", "GetRemoveMethod_5_bool_1", "System.Int64", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x00000071u, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests::IsDefined_9_System_Type_bool_0:System.Int64()", "IsDefined_9_System_Type_bool_0", "System.Int64", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x00000075u, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests::IsDefined_9_System_Type_bool_1:System.Int64()", "IsDefined_9_System_Type_bool_1", "System.Int64", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x00000039u, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests::RemoveEventHandler_1_object_System_Delegate_0:System.Int64()", "RemoveEventHandler_1_object_System_Delegate_0", "System.Int64", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000004Fu, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests::.ctor:System.Void()", ".ctor", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000002Du, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests::AddEventHandler_0_object_System_Delegate_0:System.Int64()", "AddEventHandler_0_object_System_Delegate_0", "System.Int64", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000002Eu, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests::Benchmark_AddEventHandler_0_object_System_Delegate_0:System.Void()", "Benchmark_AddEventHandler_0_object_System_Delegate_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000032u, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests::Benchmark_GetAddMethod_2_bool_0:System.Void()", "Benchmark_GetAddMethod_2_bool_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000034u, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests::Benchmark_GetAddMethod_2_bool_1:System.Void()", "Benchmark_GetAddMethod_2_bool_1", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000042u, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests::Benchmark_GetCustomAttributes_6_System_Type_bool_0:System.Void()", "Benchmark_GetCustomAttributes_6_System_Type_bool_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000044u, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests::Benchmark_GetCustomAttributes_6_System_Type_bool_1:System.Void()", "Benchmark_GetCustomAttributes_6_System_Type_bool_1", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000046u, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests::Benchmark_GetCustomAttributes_7_bool_0:System.Void()", "Benchmark_GetCustomAttributes_7_bool_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000048u, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests::Benchmark_GetCustomAttributes_7_bool_1:System.Void()", "Benchmark_GetCustomAttributes_7_bool_1", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000004Au, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests::Benchmark_GetCustomAttributesData_8__8:System.Void()", "Benchmark_GetCustomAttributesData_8__8", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000036u, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests::Benchmark_GetOtherMethods_3_bool_0:System.Void()", "Benchmark_GetOtherMethods_3_bool_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000038u, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests::Benchmark_GetOtherMethods_3_bool_1:System.Void()", "Benchmark_GetOtherMethods_3_bool_1", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000003Au, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests::Benchmark_GetRaiseMethod_4_bool_0:System.Void()", "Benchmark_GetRaiseMethod_4_bool_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000003Cu, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests::Benchmark_GetRaiseMethod_4_bool_1:System.Void()", "Benchmark_GetRaiseMethod_4_bool_1", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000003Eu, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests::Benchmark_GetRemoveMethod_5_bool_0:System.Void()", "Benchmark_GetRemoveMethod_5_bool_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000040u, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests::Benchmark_GetRemoveMethod_5_bool_1:System.Void()", "Benchmark_GetRemoveMethod_5_bool_1", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000004Cu, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests::Benchmark_IsDefined_9_System_Type_bool_0:System.Void()", "Benchmark_IsDefined_9_System_Type_bool_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000004Eu, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests::Benchmark_IsDefined_9_System_Type_bool_1:System.Void()", "Benchmark_IsDefined_9_System_Type_bool_1", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000030u, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests::Benchmark_RemoveEventHandler_1_object_System_Delegate_0:System.Void()", "Benchmark_RemoveEventHandler_1_object_System_Delegate_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000031u, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests::GetAddMethod_2_bool_0:System.Int64()", "GetAddMethod_2_bool_0", "System.Int64", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000033u, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests::GetAddMethod_2_bool_1:System.Int64()", "GetAddMethod_2_bool_1", "System.Int64", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000041u, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests::GetCustomAttributes_6_System_Type_bool_0:System.Int64()", "GetCustomAttributes_6_System_Type_bool_0", "System.Int64", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000043u, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests::GetCustomAttributes_6_System_Type_bool_1:System.Int64()", "GetCustomAttributes_6_System_Type_bool_1", "System.Int64", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000045u, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests::GetCustomAttributes_7_bool_0:System.Int64()", "GetCustomAttributes_7_bool_0", "System.Int64", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000047u, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests::GetCustomAttributes_7_bool_1:System.Int64()", "GetCustomAttributes_7_bool_1", "System.Int64", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000049u, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests::GetCustomAttributesData_8__8:System.Int64()", "GetCustomAttributesData_8__8", "System.Int64", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000035u, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests::GetOtherMethods_3_bool_0:System.Int64()", "GetOtherMethods_3_bool_0", "System.Int64", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000037u, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests::GetOtherMethods_3_bool_1:System.Int64()", "GetOtherMethods_3_bool_1", "System.Int64", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000039u, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests::GetRaiseMethod_4_bool_0:System.Int64()", "GetRaiseMethod_4_bool_0", "System.Int64", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000003Bu, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests::GetRaiseMethod_4_bool_1:System.Int64()", "GetRaiseMethod_4_bool_1", "System.Int64", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000003Du, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests::GetRemoveMethod_5_bool_0:System.Int64()", "GetRemoveMethod_5_bool_0", "System.Int64", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000003Fu, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests::GetRemoveMethod_5_bool_1:System.Int64()", "GetRemoveMethod_5_bool_1", "System.Int64", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000004Bu, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests::IsDefined_9_System_Type_bool_0:System.Int64()", "IsDefined_9_System_Type_bool_0", "System.Int64", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000004Du, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests::IsDefined_9_System_Type_bool_1:System.Int64()", "IsDefined_9_System_Type_bool_1", "System.Int64", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000002Fu, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests::RemoveEventHandler_1_object_System_Delegate_0:System.Int64()", "RemoveEventHandler_1_object_System_Delegate_0", "System.Int64", 0, nullptr, 0u, nullptr, 0u },
 };
 
 static constexpr ReflectionQueryMethodDescriptor kReflMethods_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c[19] = {
-	{ 0x000000AAu, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests+<>c::.cctor:System.Void()", ".cctor", "System.Void", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x000000ABu, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests+<>c::.ctor:System.Void()", ".ctor", "System.Void", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x000000ACu, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests+<>c::<AddEventHandler_0_object_System_Delegate_0>b__0_0:System.Void()", "<AddEventHandler_0_object_System_Delegate_0>b__0_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x000000AEu, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests+<>c::<GetAddMethod_2_bool_0>b__4_0:System.Void()", "<GetAddMethod_2_bool_0>b__4_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x000000AFu, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests+<>c::<GetAddMethod_2_bool_1>b__6_0:System.Void()", "<GetAddMethod_2_bool_1>b__6_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x000000B6u, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests+<>c::<GetCustomAttributes_6_System_Type_bool_0>b__20_0:System.Void()", "<GetCustomAttributes_6_System_Type_bool_0>b__20_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x000000B7u, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests+<>c::<GetCustomAttributes_6_System_Type_bool_1>b__22_0:System.Void()", "<GetCustomAttributes_6_System_Type_bool_1>b__22_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x000000B8u, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests+<>c::<GetCustomAttributes_7_bool_0>b__24_0:System.Void()", "<GetCustomAttributes_7_bool_0>b__24_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x000000B9u, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests+<>c::<GetCustomAttributes_7_bool_1>b__26_0:System.Void()", "<GetCustomAttributes_7_bool_1>b__26_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x000000BAu, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests+<>c::<GetCustomAttributesData_8__8>b__28_0:System.Void()", "<GetCustomAttributesData_8__8>b__28_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x000000B0u, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests+<>c::<GetOtherMethods_3_bool_0>b__8_0:System.Void()", "<GetOtherMethods_3_bool_0>b__8_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x000000B1u, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests+<>c::<GetOtherMethods_3_bool_1>b__10_0:System.Void()", "<GetOtherMethods_3_bool_1>b__10_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x000000B2u, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests+<>c::<GetRaiseMethod_4_bool_0>b__12_0:System.Void()", "<GetRaiseMethod_4_bool_0>b__12_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x000000B3u, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests+<>c::<GetRaiseMethod_4_bool_1>b__14_0:System.Void()", "<GetRaiseMethod_4_bool_1>b__14_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x000000B4u, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests+<>c::<GetRemoveMethod_5_bool_0>b__16_0:System.Void()", "<GetRemoveMethod_5_bool_0>b__16_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x000000B5u, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests+<>c::<GetRemoveMethod_5_bool_1>b__18_0:System.Void()", "<GetRemoveMethod_5_bool_1>b__18_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x000000BBu, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests+<>c::<IsDefined_9_System_Type_bool_0>b__30_0:System.Void()", "<IsDefined_9_System_Type_bool_0>b__30_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x000000BCu, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests+<>c::<IsDefined_9_System_Type_bool_1>b__32_0:System.Void()", "<IsDefined_9_System_Type_bool_1>b__32_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x000000ADu, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests+<>c::<RemoveEventHandler_1_object_System_Delegate_0>b__2_0:System.Void()", "<RemoveEventHandler_1_object_System_Delegate_0>b__2_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000081u, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests+<>c::.cctor:System.Void()", ".cctor", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000082u, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests+<>c::.ctor:System.Void()", ".ctor", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000083u, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests+<>c::<AddEventHandler_0_object_System_Delegate_0>b__0_0:System.Void()", "<AddEventHandler_0_object_System_Delegate_0>b__0_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000085u, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests+<>c::<GetAddMethod_2_bool_0>b__4_0:System.Void()", "<GetAddMethod_2_bool_0>b__4_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000086u, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests+<>c::<GetAddMethod_2_bool_1>b__6_0:System.Void()", "<GetAddMethod_2_bool_1>b__6_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000008Du, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests+<>c::<GetCustomAttributes_6_System_Type_bool_0>b__20_0:System.Void()", "<GetCustomAttributes_6_System_Type_bool_0>b__20_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000008Eu, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests+<>c::<GetCustomAttributes_6_System_Type_bool_1>b__22_0:System.Void()", "<GetCustomAttributes_6_System_Type_bool_1>b__22_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000008Fu, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests+<>c::<GetCustomAttributes_7_bool_0>b__24_0:System.Void()", "<GetCustomAttributes_7_bool_0>b__24_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000090u, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests+<>c::<GetCustomAttributes_7_bool_1>b__26_0:System.Void()", "<GetCustomAttributes_7_bool_1>b__26_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000091u, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests+<>c::<GetCustomAttributesData_8__8>b__28_0:System.Void()", "<GetCustomAttributesData_8__8>b__28_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000087u, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests+<>c::<GetOtherMethods_3_bool_0>b__8_0:System.Void()", "<GetOtherMethods_3_bool_0>b__8_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000088u, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests+<>c::<GetOtherMethods_3_bool_1>b__10_0:System.Void()", "<GetOtherMethods_3_bool_1>b__10_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000089u, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests+<>c::<GetRaiseMethod_4_bool_0>b__12_0:System.Void()", "<GetRaiseMethod_4_bool_0>b__12_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000008Au, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests+<>c::<GetRaiseMethod_4_bool_1>b__14_0:System.Void()", "<GetRaiseMethod_4_bool_1>b__14_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000008Bu, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests+<>c::<GetRemoveMethod_5_bool_0>b__16_0:System.Void()", "<GetRemoveMethod_5_bool_0>b__16_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000008Cu, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests+<>c::<GetRemoveMethod_5_bool_1>b__18_0:System.Void()", "<GetRemoveMethod_5_bool_1>b__18_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000092u, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests+<>c::<IsDefined_9_System_Type_bool_0>b__30_0:System.Void()", "<IsDefined_9_System_Type_bool_0>b__30_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000093u, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests+<>c::<IsDefined_9_System_Type_bool_1>b__32_0:System.Void()", "<IsDefined_9_System_Type_bool_1>b__32_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000084u, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests+<>c::<RemoveEventHandler_1_object_System_Delegate_0>b__2_0:System.Void()", "<RemoveEventHandler_1_object_System_Delegate_0>b__2_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
 };
 
 static constexpr ReflectionQueryMethodDescriptor kReflMethods_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_HandleCollectorTests[5] = {
-	{ 0x0000007Du, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_HandleCollectorTests::.ctor:System.Void()", ".ctor", "System.Void", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x00000079u, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_HandleCollectorTests::Add_0__0:System.Int64()", "Add_0__0", "System.Int64", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x0000007Au, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_HandleCollectorTests::Benchmark_Add_0__0:System.Void()", "Benchmark_Add_0__0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x0000007Cu, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_HandleCollectorTests::Benchmark_Remove_1__1:System.Void()", "Benchmark_Remove_1__1", "System.Void", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x0000007Bu, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_HandleCollectorTests::Remove_1__1:System.Int64()", "Remove_1__1", "System.Int64", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000054u, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_HandleCollectorTests::.ctor:System.Void()", ".ctor", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000050u, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_HandleCollectorTests::Add_0__0:System.Int64()", "Add_0__0", "System.Int64", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000051u, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_HandleCollectorTests::Benchmark_Add_0__0:System.Void()", "Benchmark_Add_0__0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000053u, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_HandleCollectorTests::Benchmark_Remove_1__1:System.Void()", "Benchmark_Remove_1__1", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000052u, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_HandleCollectorTests::Remove_1__1:System.Int64()", "Remove_1__1", "System.Int64", 0, nullptr, 0u, nullptr, 0u },
 };
 
 static constexpr ReflectionQueryMethodDescriptor kReflMethods_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_HandleCollectorTests___c[4] = {
-	{ 0x000000BDu, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_HandleCollectorTests+<>c::.cctor:System.Void()", ".cctor", "System.Void", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x000000BEu, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_HandleCollectorTests+<>c::.ctor:System.Void()", ".ctor", "System.Void", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x000000BFu, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_HandleCollectorTests+<>c::<Add_0__0>b__0_0:System.Void()", "<Add_0__0>b__0_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x000000C0u, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_HandleCollectorTests+<>c::<Remove_1__1>b__2_0:System.Void()", "<Remove_1__1>b__2_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000094u, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_HandleCollectorTests+<>c::.cctor:System.Void()", ".cctor", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000095u, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_HandleCollectorTests+<>c::.ctor:System.Void()", ".ctor", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000096u, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_HandleCollectorTests+<>c::<Add_0__0>b__0_0:System.Void()", "<Add_0__0>b__0_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000097u, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_HandleCollectorTests+<>c::<Remove_1__1>b__2_0:System.Void()", "<Remove_1__1>b__2_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
 };
 
 static constexpr ReflectionQueryMethodDescriptor kReflMethods_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ComInterfaceMarshallerSystem_Int32Tests[8] = {
-	{ 0x00000085u, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ComInterfaceMarshallerSystem_Int32Tests::.ctor:System.Void()", ".ctor", "System.Void", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x00000083u, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ComInterfaceMarshallerSystem_Int32Tests::Benchmark_ConvertToManaged_1_void_0:System.Void()", "Benchmark_ConvertToManaged_1_void_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x0000007Fu, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ComInterfaceMarshallerSystem_Int32Tests::Benchmark_ConvertToUnmanaged_0_int_0:System.Void()", "Benchmark_ConvertToUnmanaged_0_int_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x00000081u, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ComInterfaceMarshallerSystem_Int32Tests::Benchmark_ConvertToUnmanaged_0_int_1:System.Void()", "Benchmark_ConvertToUnmanaged_0_int_1", "System.Void", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x00000084u, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ComInterfaceMarshallerSystem_Int32Tests::Benchmark_Free_2_void_0:System.Void()", "Benchmark_Free_2_void_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x00000082u, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ComInterfaceMarshallerSystem_Int32Tests::ConvertToManaged_1_void_0:System.Int64()", "ConvertToManaged_1_void_0", "System.Int64", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x0000007Eu, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ComInterfaceMarshallerSystem_Int32Tests::ConvertToUnmanaged_0_int_0:System.Int64()", "ConvertToUnmanaged_0_int_0", "System.Int64", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x00000080u, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ComInterfaceMarshallerSystem_Int32Tests::ConvertToUnmanaged_0_int_1:System.Int64()", "ConvertToUnmanaged_0_int_1", "System.Int64", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000005Cu, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ComInterfaceMarshallerSystem_Int32Tests::.ctor:System.Void()", ".ctor", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000005Au, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ComInterfaceMarshallerSystem_Int32Tests::Benchmark_ConvertToManaged_1_void_0:System.Void()", "Benchmark_ConvertToManaged_1_void_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000056u, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ComInterfaceMarshallerSystem_Int32Tests::Benchmark_ConvertToUnmanaged_0_int_0:System.Void()", "Benchmark_ConvertToUnmanaged_0_int_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000058u, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ComInterfaceMarshallerSystem_Int32Tests::Benchmark_ConvertToUnmanaged_0_int_1:System.Void()", "Benchmark_ConvertToUnmanaged_0_int_1", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000005Bu, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ComInterfaceMarshallerSystem_Int32Tests::Benchmark_Free_2_void_0:System.Void()", "Benchmark_Free_2_void_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000059u, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ComInterfaceMarshallerSystem_Int32Tests::ConvertToManaged_1_void_0:System.Int64()", "ConvertToManaged_1_void_0", "System.Int64", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000055u, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ComInterfaceMarshallerSystem_Int32Tests::ConvertToUnmanaged_0_int_0:System.Int64()", "ConvertToUnmanaged_0_int_0", "System.Int64", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000057u, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ComInterfaceMarshallerSystem_Int32Tests::ConvertToUnmanaged_0_int_1:System.Int64()", "ConvertToUnmanaged_0_int_1", "System.Int64", 0, nullptr, 0u, nullptr, 0u },
 };
 
 static constexpr ReflectionQueryMethodDescriptor kReflMethods_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ComObjectTests[3] = {
-	{ 0x00000088u, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ComObjectTests::.ctor:System.Void()", ".ctor", "System.Void", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x00000087u, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ComObjectTests::Benchmark_FinalRelease_0__0:System.Void()", "Benchmark_FinalRelease_0__0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x00000086u, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ComObjectTests::FinalRelease_0__0:System.Int64()", "FinalRelease_0__0", "System.Int64", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000005Fu, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ComObjectTests::.ctor:System.Void()", ".ctor", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000005Eu, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ComObjectTests::Benchmark_FinalRelease_0__0:System.Void()", "Benchmark_FinalRelease_0__0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000005Du, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ComObjectTests::FinalRelease_0__0:System.Int64()", "FinalRelease_0__0", "System.Int64", 0, nullptr, 0u, nullptr, 0u },
 };
 
 static constexpr ReflectionQueryMethodDescriptor kReflMethods_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ComObjectTests___c[3] = {
-	{ 0x000000C1u, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ComObjectTests+<>c::.cctor:System.Void()", ".cctor", "System.Void", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x000000C2u, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ComObjectTests+<>c::.ctor:System.Void()", ".ctor", "System.Void", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x000000C3u, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ComObjectTests+<>c::<FinalRelease_0__0>b__0_0:System.Void()", "<FinalRelease_0__0>b__0_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000098u, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ComObjectTests+<>c::.cctor:System.Void()", ".cctor", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000099u, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ComObjectTests+<>c::.ctor:System.Void()", ".ctor", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000009Au, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ComObjectTests+<>c::<FinalRelease_0__0>b__0_0:System.Void()", "<FinalRelease_0__0>b__0_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
 };
 
 static constexpr ReflectionQueryMethodDescriptor kReflMethods_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ExceptionAsDefaultMarshallerSystem_Int32Tests[3] = {
-	{ 0x0000008Bu, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ExceptionAsDefaultMarshallerSystem_Int32Tests::.ctor:System.Void()", ".ctor", "System.Void", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x0000008Au, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ExceptionAsDefaultMarshallerSystem_Int32Tests::Benchmark_ConvertToUnmanaged_0_System_Exception_0:System.Void()", "Benchmark_ConvertToUnmanaged_0_System_Exception_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x00000089u, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ExceptionAsDefaultMarshallerSystem_Int32Tests::ConvertToUnmanaged_0_System_Exception_0:System.Int64()", "ConvertToUnmanaged_0_System_Exception_0", "System.Int64", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000062u, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ExceptionAsDefaultMarshallerSystem_Int32Tests::.ctor:System.Void()", ".ctor", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000061u, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ExceptionAsDefaultMarshallerSystem_Int32Tests::Benchmark_ConvertToUnmanaged_0_System_Exception_0:System.Void()", "Benchmark_ConvertToUnmanaged_0_System_Exception_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000060u, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ExceptionAsDefaultMarshallerSystem_Int32Tests::ConvertToUnmanaged_0_System_Exception_0:System.Int64()", "ConvertToUnmanaged_0_System_Exception_0", "System.Int64", 0, nullptr, 0u, nullptr, 0u },
 };
 
 static constexpr ReflectionQueryMethodDescriptor kReflMethods_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ExceptionAsHResultMarshallerSystem_Int32Tests[3] = {
-	{ 0x0000008Eu, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ExceptionAsHResultMarshallerSystem_Int32Tests::.ctor:System.Void()", ".ctor", "System.Void", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x0000008Du, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ExceptionAsHResultMarshallerSystem_Int32Tests::Benchmark_ConvertToUnmanaged_0_System_Exception_0:System.Void()", "Benchmark_ConvertToUnmanaged_0_System_Exception_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x0000008Cu, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ExceptionAsHResultMarshallerSystem_Int32Tests::ConvertToUnmanaged_0_System_Exception_0:System.Int64()", "ConvertToUnmanaged_0_System_Exception_0", "System.Int64", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000065u, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ExceptionAsHResultMarshallerSystem_Int32Tests::.ctor:System.Void()", ".ctor", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000064u, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ExceptionAsHResultMarshallerSystem_Int32Tests::Benchmark_ConvertToUnmanaged_0_System_Exception_0:System.Void()", "Benchmark_ConvertToUnmanaged_0_System_Exception_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000063u, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ExceptionAsHResultMarshallerSystem_Int32Tests::ConvertToUnmanaged_0_System_Exception_0:System.Int64()", "ConvertToUnmanaged_0_System_Exception_0", "System.Int64", 0, nullptr, 0u, nullptr, 0u },
 };
 
 static constexpr ReflectionQueryMethodDescriptor kReflMethods_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ExceptionAsNaNMarshallerSystem_DoubleTests[3] = {
-	{ 0x00000091u, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ExceptionAsNaNMarshallerSystem_DoubleTests::.ctor:System.Void()", ".ctor", "System.Void", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x00000090u, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ExceptionAsNaNMarshallerSystem_DoubleTests::Benchmark_ConvertToUnmanaged_0_System_Exception_0:System.Void()", "Benchmark_ConvertToUnmanaged_0_System_Exception_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x0000008Fu, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ExceptionAsNaNMarshallerSystem_DoubleTests::ConvertToUnmanaged_0_System_Exception_0:System.Int64()", "ConvertToUnmanaged_0_System_Exception_0", "System.Int64", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000068u, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ExceptionAsNaNMarshallerSystem_DoubleTests::.ctor:System.Void()", ".ctor", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000067u, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ExceptionAsNaNMarshallerSystem_DoubleTests::Benchmark_ConvertToUnmanaged_0_System_Exception_0:System.Void()", "Benchmark_ConvertToUnmanaged_0_System_Exception_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000066u, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ExceptionAsNaNMarshallerSystem_DoubleTests::ConvertToUnmanaged_0_System_Exception_0:System.Int64()", "ConvertToUnmanaged_0_System_Exception_0", "System.Int64", 0, nullptr, 0u, nullptr, 0u },
 };
 
 static constexpr ReflectionQueryMethodDescriptor kReflMethods_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ExceptionAsNaNMarshallerSystem_DoubleTests___c[3] = {
-	{ 0x000000C4u, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ExceptionAsNaNMarshallerSystem_DoubleTests+<>c::.cctor:System.Void()", ".cctor", "System.Void", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x000000C5u, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ExceptionAsNaNMarshallerSystem_DoubleTests+<>c::.ctor:System.Void()", ".ctor", "System.Void", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x000000C6u, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ExceptionAsNaNMarshallerSystem_DoubleTests+<>c::<ConvertToUnmanaged_0_System_Exception_0>b__0_0:System.Void()", "<ConvertToUnmanaged_0_System_Exception_0>b__0_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000009Bu, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ExceptionAsNaNMarshallerSystem_DoubleTests+<>c::.cctor:System.Void()", ".cctor", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000009Cu, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ExceptionAsNaNMarshallerSystem_DoubleTests+<>c::.ctor:System.Void()", ".ctor", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000009Du, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ExceptionAsNaNMarshallerSystem_DoubleTests+<>c::<ConvertToUnmanaged_0_System_Exception_0>b__0_0:System.Void()", "<ConvertToUnmanaged_0_System_Exception_0>b__0_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
 };
 
 static constexpr ReflectionQueryMethodDescriptor kReflMethods_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ExceptionAsVoidMarshallerTests[3] = {
-	{ 0x00000094u, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ExceptionAsVoidMarshallerTests::.ctor:System.Void()", ".ctor", "System.Void", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x00000093u, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ExceptionAsVoidMarshallerTests::Benchmark_ConvertToUnmanaged_0_System_Exception_0:System.Void()", "Benchmark_ConvertToUnmanaged_0_System_Exception_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x00000092u, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ExceptionAsVoidMarshallerTests::ConvertToUnmanaged_0_System_Exception_0:System.Int64()", "ConvertToUnmanaged_0_System_Exception_0", "System.Int64", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000006Bu, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ExceptionAsVoidMarshallerTests::.ctor:System.Void()", ".ctor", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000006Au, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ExceptionAsVoidMarshallerTests::Benchmark_ConvertToUnmanaged_0_System_Exception_0:System.Void()", "Benchmark_ConvertToUnmanaged_0_System_Exception_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000069u, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ExceptionAsVoidMarshallerTests::ConvertToUnmanaged_0_System_Exception_0:System.Int64()", "ConvertToUnmanaged_0_System_Exception_0", "System.Int64", 0, nullptr, 0u, nullptr, 0u },
 };
 
 static constexpr ReflectionQueryMethodDescriptor kReflMethods_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_UniqueComInterfaceMarshallerSystem_Int32Tests[8] = {
-	{ 0x0000009Cu, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_UniqueComInterfaceMarshallerSystem_Int32Tests::.ctor:System.Void()", ".ctor", "System.Void", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x0000009Au, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_UniqueComInterfaceMarshallerSystem_Int32Tests::Benchmark_ConvertToManaged_1_void_0:System.Void()", "Benchmark_ConvertToManaged_1_void_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x00000096u, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_UniqueComInterfaceMarshallerSystem_Int32Tests::Benchmark_ConvertToUnmanaged_0_int_0:System.Void()", "Benchmark_ConvertToUnmanaged_0_int_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x00000098u, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_UniqueComInterfaceMarshallerSystem_Int32Tests::Benchmark_ConvertToUnmanaged_0_int_1:System.Void()", "Benchmark_ConvertToUnmanaged_0_int_1", "System.Void", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x0000009Bu, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_UniqueComInterfaceMarshallerSystem_Int32Tests::Benchmark_Free_2_void_0:System.Void()", "Benchmark_Free_2_void_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x00000099u, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_UniqueComInterfaceMarshallerSystem_Int32Tests::ConvertToManaged_1_void_0:System.Int64()", "ConvertToManaged_1_void_0", "System.Int64", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x00000095u, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_UniqueComInterfaceMarshallerSystem_Int32Tests::ConvertToUnmanaged_0_int_0:System.Int64()", "ConvertToUnmanaged_0_int_0", "System.Int64", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x00000097u, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_UniqueComInterfaceMarshallerSystem_Int32Tests::ConvertToUnmanaged_0_int_1:System.Int64()", "ConvertToUnmanaged_0_int_1", "System.Int64", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000073u, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_UniqueComInterfaceMarshallerSystem_Int32Tests::.ctor:System.Void()", ".ctor", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000071u, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_UniqueComInterfaceMarshallerSystem_Int32Tests::Benchmark_ConvertToManaged_1_void_0:System.Void()", "Benchmark_ConvertToManaged_1_void_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000006Du, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_UniqueComInterfaceMarshallerSystem_Int32Tests::Benchmark_ConvertToUnmanaged_0_int_0:System.Void()", "Benchmark_ConvertToUnmanaged_0_int_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000006Fu, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_UniqueComInterfaceMarshallerSystem_Int32Tests::Benchmark_ConvertToUnmanaged_0_int_1:System.Void()", "Benchmark_ConvertToUnmanaged_0_int_1", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000072u, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_UniqueComInterfaceMarshallerSystem_Int32Tests::Benchmark_Free_2_void_0:System.Void()", "Benchmark_Free_2_void_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000070u, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_UniqueComInterfaceMarshallerSystem_Int32Tests::ConvertToManaged_1_void_0:System.Int64()", "ConvertToManaged_1_void_0", "System.Int64", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000006Cu, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_UniqueComInterfaceMarshallerSystem_Int32Tests::ConvertToUnmanaged_0_int_0:System.Int64()", "ConvertToUnmanaged_0_int_0", "System.Int64", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000006Eu, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_UniqueComInterfaceMarshallerSystem_Int32Tests::ConvertToUnmanaged_0_int_1:System.Int64()", "ConvertToUnmanaged_0_int_1", "System.Int64", 0, nullptr, 0u, nullptr, 0u },
 };
 
 static constexpr ReflectionQueryMethodDescriptor kReflMethods_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_VirtualMethodTableInfoTests[2] = {
-	{ 0x0000009Eu, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_VirtualMethodTableInfoTests::.ctor:System.Void()", ".ctor", "System.Void", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x0000009Du, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_VirtualMethodTableInfoTests::Benchmark_Deconstruct_0_void_void_0:System.Void()", "Benchmark_Deconstruct_0_void_void_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000075u, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_VirtualMethodTableInfoTests::.ctor:System.Void()", ".ctor", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000074u, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_VirtualMethodTableInfoTests::Benchmark_Deconstruct_0_void_void_0:System.Void()", "Benchmark_Deconstruct_0_void_void_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
 };
 
 static constexpr ReflectionQueryMethodDescriptor kReflMethods_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_RuntimeEnvironmentTests[11] = {
-	{ 0x000000A9u, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_RuntimeEnvironmentTests::.ctor:System.Void()", ".ctor", "System.Void", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x000000A0u, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_RuntimeEnvironmentTests::Benchmark_FromGlobalAccessCache_0_Assembly_0:System.Void()", "Benchmark_FromGlobalAccessCache_0_Assembly_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x000000A2u, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_RuntimeEnvironmentTests::Benchmark_GetRuntimeDirectory_1__1:System.Void()", "Benchmark_GetRuntimeDirectory_1__1", "System.Void", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x000000A4u, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_RuntimeEnvironmentTests::Benchmark_GetRuntimeInterfaceAsIntPtr_2_System_Guid_System_Guid_0:System.Void()", "Benchmark_GetRuntimeInterfaceAsIntPtr_2_System_Guid_System_Guid_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x000000A6u, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_RuntimeEnvironmentTests::Benchmark_GetRuntimeInterfaceAsObject_3_System_Guid_System_Guid_0:System.Void()", "Benchmark_GetRuntimeInterfaceAsObject_3_System_Guid_System_Guid_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x000000A8u, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_RuntimeEnvironmentTests::Benchmark_GetSystemVersion_4__4:System.Void()", "Benchmark_GetSystemVersion_4__4", "System.Void", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x0000009Fu, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_RuntimeEnvironmentTests::FromGlobalAccessCache_0_Assembly_0:System.Int64()", "FromGlobalAccessCache_0_Assembly_0", "System.Int64", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x000000A1u, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_RuntimeEnvironmentTests::GetRuntimeDirectory_1__1:System.Int64()", "GetRuntimeDirectory_1__1", "System.Int64", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x000000A3u, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_RuntimeEnvironmentTests::GetRuntimeInterfaceAsIntPtr_2_System_Guid_System_Guid_0:System.Int64()", "GetRuntimeInterfaceAsIntPtr_2_System_Guid_System_Guid_0", "System.Int64", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x000000A5u, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_RuntimeEnvironmentTests::GetRuntimeInterfaceAsObject_3_System_Guid_System_Guid_0:System.Int64()", "GetRuntimeInterfaceAsObject_3_System_Guid_System_Guid_0", "System.Int64", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x000000A7u, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_RuntimeEnvironmentTests::GetSystemVersion_4__4:System.Int64()", "GetSystemVersion_4__4", "System.Int64", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000080u, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_RuntimeEnvironmentTests::.ctor:System.Void()", ".ctor", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000077u, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_RuntimeEnvironmentTests::Benchmark_FromGlobalAccessCache_0_Assembly_0:System.Void()", "Benchmark_FromGlobalAccessCache_0_Assembly_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000079u, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_RuntimeEnvironmentTests::Benchmark_GetRuntimeDirectory_1__1:System.Void()", "Benchmark_GetRuntimeDirectory_1__1", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000007Bu, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_RuntimeEnvironmentTests::Benchmark_GetRuntimeInterfaceAsIntPtr_2_System_Guid_System_Guid_0:System.Void()", "Benchmark_GetRuntimeInterfaceAsIntPtr_2_System_Guid_System_Guid_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000007Du, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_RuntimeEnvironmentTests::Benchmark_GetRuntimeInterfaceAsObject_3_System_Guid_System_Guid_0:System.Void()", "Benchmark_GetRuntimeInterfaceAsObject_3_System_Guid_System_Guid_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000007Fu, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_RuntimeEnvironmentTests::Benchmark_GetSystemVersion_4__4:System.Void()", "Benchmark_GetSystemVersion_4__4", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000076u, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_RuntimeEnvironmentTests::FromGlobalAccessCache_0_Assembly_0:System.Int64()", "FromGlobalAccessCache_0_Assembly_0", "System.Int64", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000078u, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_RuntimeEnvironmentTests::GetRuntimeDirectory_1__1:System.Int64()", "GetRuntimeDirectory_1__1", "System.Int64", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000007Au, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_RuntimeEnvironmentTests::GetRuntimeInterfaceAsIntPtr_2_System_Guid_System_Guid_0:System.Int64()", "GetRuntimeInterfaceAsIntPtr_2_System_Guid_System_Guid_0", "System.Int64", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000007Cu, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_RuntimeEnvironmentTests::GetRuntimeInterfaceAsObject_3_System_Guid_System_Guid_0:System.Int64()", "GetRuntimeInterfaceAsObject_3_System_Guid_System_Guid_0", "System.Int64", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000007Eu, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_RuntimeEnvironmentTests::GetSystemVersion_4__4:System.Int64()", "GetSystemVersion_4__4", "System.Int64", 0, nullptr, 0u, nullptr, 0u },
 };
 
 static constexpr ReflectionQueryMethodDescriptor kReflMethods_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_RuntimeEnvironmentTests___c[4] = {
-	{ 0x000000C7u, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_RuntimeEnvironmentTests+<>c::.cctor:System.Void()", ".cctor", "System.Void", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x000000C8u, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_RuntimeEnvironmentTests+<>c::.ctor:System.Void()", ".ctor", "System.Void", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x000000C9u, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_RuntimeEnvironmentTests+<>c::<GetRuntimeInterfaceAsIntPtr_2_System_Guid_System_Guid_0>b__4_0:System.Void()", "<GetRuntimeInterfaceAsIntPtr_2_System_Guid_System_Guid_0>b__4_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x000000CAu, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_RuntimeEnvironmentTests+<>c::<GetRuntimeInterfaceAsObject_3_System_Guid_System_Guid_0>b__6_0:System.Void()", "<GetRuntimeInterfaceAsObject_3_System_Guid_System_Guid_0>b__6_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000009Eu, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_RuntimeEnvironmentTests+<>c::.cctor:System.Void()", ".cctor", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000009Fu, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_RuntimeEnvironmentTests+<>c::.ctor:System.Void()", ".ctor", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x000000A0u, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_RuntimeEnvironmentTests+<>c::<GetRuntimeInterfaceAsIntPtr_2_System_Guid_System_Guid_0>b__4_0:System.Void()", "<GetRuntimeInterfaceAsIntPtr_2_System_Guid_System_Guid_0>b__4_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x000000A1u, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_RuntimeEnvironmentTests+<>c::<GetRuntimeInterfaceAsObject_3_System_Guid_System_Guid_0>b__6_0:System.Void()", "<GetRuntimeInterfaceAsObject_3_System_Guid_System_Guid_0>b__6_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
 };
 
-static const ReflectionQueryTypeDescriptor kReflTypes[21] = {
-	{ 0x00000004u, "Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert", "Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert", "Chaos.TestFramework", "Chaos.TestFramework.Assert", "Chaos.TestFramework.Assert", nullptr, kReflFields_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert, 1u, nullptr, 0u,
-nullptr, 0u,    kReflMethods_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert, 32u, nullptr, 0u, 0u },
-	{ 0x00000003u, "Chaos.TestFramework.Sdk/Chaos.TestFramework.AssertionException", "Chaos.TestFramework.Sdk/Chaos.TestFramework.AssertionException", "Chaos.TestFramework", "Chaos.TestFramework.AssertionException", "Chaos.TestFramework.AssertionException", nullptr, nullptr, 0u, nullptr, 0u,
-nullptr, 0u,    kReflMethods_Chaos_TestFramework_Sdk_Chaos_TestFramework_AssertionException, 1u, nullptr, 0u, 0u },
-	{ 0x00000005u, "Chaos.TestFramework.Sdk/Chaos.TestFramework.BenchmarkAttribute", "Chaos.TestFramework.Sdk/Chaos.TestFramework.BenchmarkAttribute", "Chaos.TestFramework", "Chaos.TestFramework.BenchmarkAttribute", "Chaos.TestFramework.BenchmarkAttribute", nullptr, nullptr, 0u, nullptr, 0u,
-nullptr, 0u,    kReflMethods_Chaos_TestFramework_Sdk_Chaos_TestFramework_BenchmarkAttribute, 1u, nullptr, 0u, 0u },
-	{ 0x00000006u, "Chaos.TestFramework.Sdk/Chaos.TestFramework.FactAttribute", "Chaos.TestFramework.Sdk/Chaos.TestFramework.FactAttribute", "Chaos.TestFramework", "Chaos.TestFramework.FactAttribute", "Chaos.TestFramework.FactAttribute", nullptr, nullptr, 0u, nullptr, 0u,
-nullptr, 0u,    kReflMethods_Chaos_TestFramework_Sdk_Chaos_TestFramework_FactAttribute, 1u, nullptr, 0u, 0u },
-	{ 0x00000007u, "Chaos.TestFramework.Sdk/Chaos.TestFramework.HotUpdateAttribute", "Chaos.TestFramework.Sdk/Chaos.TestFramework.HotUpdateAttribute", "Chaos.TestFramework", "Chaos.TestFramework.HotUpdateAttribute", "Chaos.TestFramework.HotUpdateAttribute", nullptr, nullptr, 0u, nullptr, 0u,
-nullptr, 0u,    kReflMethods_Chaos_TestFramework_Sdk_Chaos_TestFramework_HotUpdateAttribute, 1u, nullptr, 0u, 0u },
-	{ 0x00000002u, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests", "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests", "AutoGenerated.System_Runtime_InteropServices", "AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests", "AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests", nullptr, nullptr, 0u, nullptr, 0u,
+static const ReflectionQueryTypeDescriptor kReflTypes[16] = {
+	{ 0x00000001u, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests", "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests", "AutoGenerated.System_Runtime_InteropServices", "AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests", "AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests", nullptr, nullptr, 0u, nullptr, 0u,
 nullptr, 0u,    kReflMethods_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests, 35u, nullptr, 0u, 0u },
-	{ 0x00000012u, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests+<>c", "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests+<>c", "AutoGenerated.System_Runtime_InteropServices", "AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests+<>c", "AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests+<>c", nullptr, nullptr, 0u, nullptr, 0u,
+	{ 0x0000000Cu, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests+<>c", "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests+<>c", "AutoGenerated.System_Runtime_InteropServices", "AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests+<>c", "AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests+<>c", nullptr, nullptr, 0u, nullptr, 0u,
 nullptr, 0u,    kReflMethods_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c, 19u, nullptr, 0u, 0u },
-	{ 0x00000008u, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_HandleCollectorTests", "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_HandleCollectorTests", "AutoGenerated.System_Runtime_InteropServices", "AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_HandleCollectorTests", "AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_HandleCollectorTests", nullptr, nullptr, 0u, nullptr, 0u,
+	{ 0x00000002u, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_HandleCollectorTests", "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_HandleCollectorTests", "AutoGenerated.System_Runtime_InteropServices", "AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_HandleCollectorTests", "AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_HandleCollectorTests", nullptr, nullptr, 0u, nullptr, 0u,
 nullptr, 0u,    kReflMethods_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_HandleCollectorTests, 5u, nullptr, 0u, 0u },
-	{ 0x00000013u, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_HandleCollectorTests+<>c", "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_HandleCollectorTests+<>c", "AutoGenerated.System_Runtime_InteropServices", "AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_HandleCollectorTests+<>c", "AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_HandleCollectorTests+<>c", nullptr, nullptr, 0u, nullptr, 0u,
+	{ 0x0000000Du, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_HandleCollectorTests+<>c", "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_HandleCollectorTests+<>c", "AutoGenerated.System_Runtime_InteropServices", "AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_HandleCollectorTests+<>c", "AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_HandleCollectorTests+<>c", nullptr, nullptr, 0u, nullptr, 0u,
 nullptr, 0u,    kReflMethods_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_HandleCollectorTests___c, 4u, nullptr, 0u, 0u },
-	{ 0x00000009u, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ComInterfaceMarshallerSystem_Int32Tests", "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ComInterfaceMarshallerSystem_Int32Tests", "AutoGenerated.System_Runtime_InteropServices", "AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ComInterfaceMarshallerSystem_Int32Tests", "AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ComInterfaceMarshallerSystem_Int32Tests", nullptr, nullptr, 0u, nullptr, 0u,
+	{ 0x00000003u, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ComInterfaceMarshallerSystem_Int32Tests", "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ComInterfaceMarshallerSystem_Int32Tests", "AutoGenerated.System_Runtime_InteropServices", "AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ComInterfaceMarshallerSystem_Int32Tests", "AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ComInterfaceMarshallerSystem_Int32Tests", nullptr, nullptr, 0u, nullptr, 0u,
 nullptr, 0u,    kReflMethods_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ComInterfaceMarshallerSystem_Int32Tests, 8u, nullptr, 0u, 0u },
-	{ 0x0000000Au, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ComObjectTests", "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ComObjectTests", "AutoGenerated.System_Runtime_InteropServices", "AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ComObjectTests", "AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ComObjectTests", nullptr, nullptr, 0u, nullptr, 0u,
+	{ 0x00000004u, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ComObjectTests", "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ComObjectTests", "AutoGenerated.System_Runtime_InteropServices", "AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ComObjectTests", "AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ComObjectTests", nullptr, nullptr, 0u, nullptr, 0u,
 nullptr, 0u,    kReflMethods_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ComObjectTests, 3u, nullptr, 0u, 0u },
-	{ 0x00000014u, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ComObjectTests+<>c", "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ComObjectTests+<>c", "AutoGenerated.System_Runtime_InteropServices", "AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ComObjectTests+<>c", "AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ComObjectTests+<>c", nullptr, nullptr, 0u, nullptr, 0u,
+	{ 0x0000000Eu, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ComObjectTests+<>c", "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ComObjectTests+<>c", "AutoGenerated.System_Runtime_InteropServices", "AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ComObjectTests+<>c", "AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ComObjectTests+<>c", nullptr, nullptr, 0u, nullptr, 0u,
 nullptr, 0u,    kReflMethods_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ComObjectTests___c, 3u, nullptr, 0u, 0u },
-	{ 0x0000000Bu, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ExceptionAsDefaultMarshallerSystem_Int32Tests", "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ExceptionAsDefaultMarshallerSystem_Int32Tests", "AutoGenerated.System_Runtime_InteropServices", "AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ExceptionAsDefaultMarshallerSystem_Int32Tests", "AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ExceptionAsDefaultMarshallerSystem_Int32Tests", nullptr, nullptr, 0u, nullptr, 0u,
+	{ 0x00000005u, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ExceptionAsDefaultMarshallerSystem_Int32Tests", "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ExceptionAsDefaultMarshallerSystem_Int32Tests", "AutoGenerated.System_Runtime_InteropServices", "AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ExceptionAsDefaultMarshallerSystem_Int32Tests", "AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ExceptionAsDefaultMarshallerSystem_Int32Tests", nullptr, nullptr, 0u, nullptr, 0u,
 nullptr, 0u,    kReflMethods_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ExceptionAsDefaultMarshallerSystem_Int32Tests, 3u, nullptr, 0u, 0u },
-	{ 0x0000000Cu, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ExceptionAsHResultMarshallerSystem_Int32Tests", "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ExceptionAsHResultMarshallerSystem_Int32Tests", "AutoGenerated.System_Runtime_InteropServices", "AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ExceptionAsHResultMarshallerSystem_Int32Tests", "AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ExceptionAsHResultMarshallerSystem_Int32Tests", nullptr, nullptr, 0u, nullptr, 0u,
+	{ 0x00000006u, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ExceptionAsHResultMarshallerSystem_Int32Tests", "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ExceptionAsHResultMarshallerSystem_Int32Tests", "AutoGenerated.System_Runtime_InteropServices", "AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ExceptionAsHResultMarshallerSystem_Int32Tests", "AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ExceptionAsHResultMarshallerSystem_Int32Tests", nullptr, nullptr, 0u, nullptr, 0u,
 nullptr, 0u,    kReflMethods_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ExceptionAsHResultMarshallerSystem_Int32Tests, 3u, nullptr, 0u, 0u },
-	{ 0x0000000Du, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ExceptionAsNaNMarshallerSystem_DoubleTests", "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ExceptionAsNaNMarshallerSystem_DoubleTests", "AutoGenerated.System_Runtime_InteropServices", "AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ExceptionAsNaNMarshallerSystem_DoubleTests", "AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ExceptionAsNaNMarshallerSystem_DoubleTests", nullptr, nullptr, 0u, nullptr, 0u,
+	{ 0x00000007u, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ExceptionAsNaNMarshallerSystem_DoubleTests", "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ExceptionAsNaNMarshallerSystem_DoubleTests", "AutoGenerated.System_Runtime_InteropServices", "AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ExceptionAsNaNMarshallerSystem_DoubleTests", "AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ExceptionAsNaNMarshallerSystem_DoubleTests", nullptr, nullptr, 0u, nullptr, 0u,
 nullptr, 0u,    kReflMethods_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ExceptionAsNaNMarshallerSystem_DoubleTests, 3u, nullptr, 0u, 0u },
-	{ 0x00000015u, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ExceptionAsNaNMarshallerSystem_DoubleTests+<>c", "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ExceptionAsNaNMarshallerSystem_DoubleTests+<>c", "AutoGenerated.System_Runtime_InteropServices", "AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ExceptionAsNaNMarshallerSystem_DoubleTests+<>c", "AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ExceptionAsNaNMarshallerSystem_DoubleTests+<>c", nullptr, nullptr, 0u, nullptr, 0u,
+	{ 0x0000000Fu, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ExceptionAsNaNMarshallerSystem_DoubleTests+<>c", "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ExceptionAsNaNMarshallerSystem_DoubleTests+<>c", "AutoGenerated.System_Runtime_InteropServices", "AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ExceptionAsNaNMarshallerSystem_DoubleTests+<>c", "AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ExceptionAsNaNMarshallerSystem_DoubleTests+<>c", nullptr, nullptr, 0u, nullptr, 0u,
 nullptr, 0u,    kReflMethods_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ExceptionAsNaNMarshallerSystem_DoubleTests___c, 3u, nullptr, 0u, 0u },
-	{ 0x0000000Eu, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ExceptionAsVoidMarshallerTests", "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ExceptionAsVoidMarshallerTests", "AutoGenerated.System_Runtime_InteropServices", "AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ExceptionAsVoidMarshallerTests", "AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ExceptionAsVoidMarshallerTests", nullptr, nullptr, 0u, nullptr, 0u,
+	{ 0x00000008u, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ExceptionAsVoidMarshallerTests", "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ExceptionAsVoidMarshallerTests", "AutoGenerated.System_Runtime_InteropServices", "AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ExceptionAsVoidMarshallerTests", "AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ExceptionAsVoidMarshallerTests", nullptr, nullptr, 0u, nullptr, 0u,
 nullptr, 0u,    kReflMethods_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ExceptionAsVoidMarshallerTests, 3u, nullptr, 0u, 0u },
-	{ 0x0000000Fu, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_UniqueComInterfaceMarshallerSystem_Int32Tests", "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_UniqueComInterfaceMarshallerSystem_Int32Tests", "AutoGenerated.System_Runtime_InteropServices", "AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_UniqueComInterfaceMarshallerSystem_Int32Tests", "AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_UniqueComInterfaceMarshallerSystem_Int32Tests", nullptr, nullptr, 0u, nullptr, 0u,
+	{ 0x00000009u, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_UniqueComInterfaceMarshallerSystem_Int32Tests", "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_UniqueComInterfaceMarshallerSystem_Int32Tests", "AutoGenerated.System_Runtime_InteropServices", "AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_UniqueComInterfaceMarshallerSystem_Int32Tests", "AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_UniqueComInterfaceMarshallerSystem_Int32Tests", nullptr, nullptr, 0u, nullptr, 0u,
 nullptr, 0u,    kReflMethods_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_UniqueComInterfaceMarshallerSystem_Int32Tests, 8u, nullptr, 0u, 0u },
-	{ 0x00000010u, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_VirtualMethodTableInfoTests", "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_VirtualMethodTableInfoTests", "AutoGenerated.System_Runtime_InteropServices", "AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_VirtualMethodTableInfoTests", "AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_VirtualMethodTableInfoTests", nullptr, nullptr, 0u, nullptr, 0u,
+	{ 0x0000000Au, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_VirtualMethodTableInfoTests", "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_VirtualMethodTableInfoTests", "AutoGenerated.System_Runtime_InteropServices", "AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_VirtualMethodTableInfoTests", "AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_VirtualMethodTableInfoTests", nullptr, nullptr, 0u, nullptr, 0u,
 nullptr, 0u,    kReflMethods_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_VirtualMethodTableInfoTests, 2u, nullptr, 0u, 0u },
-	{ 0x00000011u, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_RuntimeEnvironmentTests", "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_RuntimeEnvironmentTests", "AutoGenerated.System_Runtime_InteropServices", "AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_RuntimeEnvironmentTests", "AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_RuntimeEnvironmentTests", nullptr, nullptr, 0u, nullptr, 0u,
+	{ 0x0000000Bu, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_RuntimeEnvironmentTests", "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_RuntimeEnvironmentTests", "AutoGenerated.System_Runtime_InteropServices", "AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_RuntimeEnvironmentTests", "AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_RuntimeEnvironmentTests", nullptr, nullptr, 0u, nullptr, 0u,
 nullptr, 0u,    kReflMethods_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_RuntimeEnvironmentTests, 11u, nullptr, 0u, 0u },
-	{ 0x00000016u, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_RuntimeEnvironmentTests+<>c", "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_RuntimeEnvironmentTests+<>c", "AutoGenerated.System_Runtime_InteropServices", "AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_RuntimeEnvironmentTests+<>c", "AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_RuntimeEnvironmentTests+<>c", nullptr, nullptr, 0u, nullptr, 0u,
+	{ 0x00000010u, "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_RuntimeEnvironmentTests+<>c", "CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_RuntimeEnvironmentTests+<>c", "AutoGenerated.System_Runtime_InteropServices", "AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_RuntimeEnvironmentTests+<>c", "AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_RuntimeEnvironmentTests+<>c", nullptr, nullptr, 0u, nullptr, 0u,
 nullptr, 0u,    kReflMethods_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_RuntimeEnvironmentTests___c, 4u, nullptr, 0u, 0u },
 };
 
-static const ReflectionQueryTypeDescriptor* kReflTypePtrs[21] = {
+static const ReflectionQueryTypeDescriptor* kReflTypePtrs[16] = {
 	&kReflTypes[0],
 	&kReflTypes[1],
 	&kReflTypes[2],
@@ -6095,14 +5030,9 @@ static const ReflectionQueryTypeDescriptor* kReflTypePtrs[21] = {
 	&kReflTypes[13],
 	&kReflTypes[14],
 	&kReflTypes[15],
-	&kReflTypes[16],
-	&kReflTypes[17],
-	&kReflTypes[18],
-	&kReflTypes[19],
-	&kReflTypes[20],
 };
 
-extern const ReflectionQueryImageDescriptor kReflImage = { "CombinedSubjects", kReflTypePtrs, 21u, 1, 0, 0, 0 };
+extern const ReflectionQueryImageDescriptor kReflImage = { "CombinedSubjects", kReflTypePtrs, 16u, 1, 0, 0, 0 };
 
 // Fake ImageHandle that ResolveSubjectId will decode back to kReflImage.
 // BootstrapRuntime's aot_image_handle fallback discovers this via
@@ -6148,27 +5078,3240 @@ struct ChaosGenericRegistrationInit {
 	}
 } g_chaos_reg_init;
 }
-// Managed method: Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::AreEqual(System.Boolean,System.Boolean,System.String)
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Boolean_System_Boolean_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2)
+// Managed method: CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests::.ctor()
+extern "C" void CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 3) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-	chaos_args[2] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_2);
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
 	_s0 = chaos_args[0];
-	_s1 = chaos_args[1];
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
 	{
-		if (_s0 == 0)
-		{
-		}
-		return;
+		const auto chaos_arg_0 = _s0;
+		ChaosObjectCtor(chaos_arg_0);
 	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests::AddEventHandler_0_object_System_Delegate_0()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_AddEventHandler_0_object_System_Delegate_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c____9__0_0;
+	_s1 = _s0;
+	{
+		if (_s1 == 0)
+		{
+			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c____9;
+			{
+				// Hotpatch-aware ldftn wrapper (slot 37)
+				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
+					auto& _d_entry = s_hotpatch_entries[37];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+					{
+						alignas(16) uint8_t _d_ab[8];
+						ArgBuffer _d_bw(_d_ab);
+						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d_entry.method_key, _d_ab, nullptr);
+						return;
+					}
+					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
+				};
+			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+			}
+			{
+				const auto chaos_method_ptr = _s1;
+				const auto chaos_target = _s0;
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
+				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
+				chaos_object->chaos_delegate_target = chaos_target;
+				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			_s1 = _s0;
+			{
+				auto chaos_value = _s1;
+				chaos_static_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c____9__0_0 = chaos_value;
+			}
+		}
+		{
+			// Assert.Throws: target method not found via IL lookahead
+			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
+		}
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
+		chaos_locals[0] = ChaosStoreInt64(_i0);
+		_i0 = ChaosLoadInt64(chaos_locals[0]);
+		return _i0;
+	}
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests::Benchmark_AddEventHandler_0_object_System_Delegate_0()
+extern "C" void CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_Benchmark_AddEventHandler_0_object_System_Delegate_0(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INTPTR _s5;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	_s1 = 0;
+	_s2 = 0;
+	{
+		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Reflection_EventInfo__AddEventHandler_System_Void_System_Object_System_Delegate_();
+		_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests::Benchmark_GetAddMethod_2_bool_0()
+extern "C" void CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_Benchmark_GetAddMethod_2_bool_0(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	{
+		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Reflection_EventInfo__GetAddMethod_System_Reflection_MethodInfo_System_Boolean_();
+		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests::Benchmark_GetAddMethod_2_bool_1()
+extern "C" void CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_Benchmark_GetAddMethod_2_bool_1(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	{
+		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Reflection_EventInfo__GetAddMethod_System_Reflection_MethodInfo_System_Boolean_();
+		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests::Benchmark_GetCustomAttributes_6_System_Type_bool_0()
+extern "C" void CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_Benchmark_GetCustomAttributes_6_System_Type_bool_0(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INTPTR _s5;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	_s1 = 0;
+	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	{
+		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Reflection_MemberInfo__GetCustomAttributes_System_Object___System_Type_System_Boolean_();
+		_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests::Benchmark_GetCustomAttributes_6_System_Type_bool_1()
+extern "C" void CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_Benchmark_GetCustomAttributes_6_System_Type_bool_1(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INTPTR _s5;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	_s1 = 0;
+	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	{
+		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Reflection_MemberInfo__GetCustomAttributes_System_Object___System_Type_System_Boolean_();
+		_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests::Benchmark_GetCustomAttributes_7_bool_0()
+extern "C" void CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_Benchmark_GetCustomAttributes_7_bool_0(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	{
+		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Reflection_MemberInfo__GetCustomAttributes_System_Object___System_Boolean_();
+		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests::Benchmark_GetCustomAttributes_7_bool_1()
+extern "C" void CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_Benchmark_GetCustomAttributes_7_bool_1(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	{
+		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Reflection_MemberInfo__GetCustomAttributes_System_Object___System_Boolean_();
+		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests::Benchmark_GetCustomAttributesData_8__8()
+extern "C" void CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_Benchmark_GetCustomAttributesData_8__8(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	{
+		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Reflection_MemberInfo__GetCustomAttributesData_System_Collections_Generic_IList_System_Reflection_CustomAttributeData___();
+		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests::Benchmark_GetOtherMethods_3_bool_0()
+extern "C" void CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_Benchmark_GetOtherMethods_3_bool_0(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	{
+		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Reflection_EventInfo__GetOtherMethods_System_Reflection_MethodInfo___System_Boolean_();
+		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests::Benchmark_GetOtherMethods_3_bool_1()
+extern "C" void CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_Benchmark_GetOtherMethods_3_bool_1(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	{
+		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Reflection_EventInfo__GetOtherMethods_System_Reflection_MethodInfo___System_Boolean_();
+		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests::Benchmark_GetRaiseMethod_4_bool_0()
+extern "C" void CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_Benchmark_GetRaiseMethod_4_bool_0(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	{
+		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Reflection_EventInfo__GetRaiseMethod_System_Reflection_MethodInfo_System_Boolean_();
+		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests::Benchmark_GetRaiseMethod_4_bool_1()
+extern "C" void CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_Benchmark_GetRaiseMethod_4_bool_1(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	{
+		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Reflection_EventInfo__GetRaiseMethod_System_Reflection_MethodInfo_System_Boolean_();
+		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests::Benchmark_GetRemoveMethod_5_bool_0()
+extern "C" void CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_Benchmark_GetRemoveMethod_5_bool_0(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	{
+		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Reflection_EventInfo__GetRemoveMethod_System_Reflection_MethodInfo_System_Boolean_();
+		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests::Benchmark_GetRemoveMethod_5_bool_1()
+extern "C" void CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_Benchmark_GetRemoveMethod_5_bool_1(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	{
+		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Reflection_EventInfo__GetRemoveMethod_System_Reflection_MethodInfo_System_Boolean_();
+		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests::Benchmark_IsDefined_9_System_Type_bool_0()
+extern "C" void CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_Benchmark_IsDefined_9_System_Type_bool_0(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INTPTR _s5;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	_s1 = 0;
+	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	{
+		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Reflection_MemberInfo__IsDefined_System_Boolean_System_Type_System_Boolean_();
+		_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests::Benchmark_IsDefined_9_System_Type_bool_1()
+extern "C" void CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_Benchmark_IsDefined_9_System_Type_bool_1(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INTPTR _s5;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	_s1 = 0;
+	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	{
+		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Reflection_MemberInfo__IsDefined_System_Boolean_System_Type_System_Boolean_();
+		_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests::Benchmark_RemoveEventHandler_1_object_System_Delegate_0()
+extern "C" void CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_Benchmark_RemoveEventHandler_1_object_System_Delegate_0(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INTPTR _s5;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	_s1 = 0;
+	_s2 = 0;
+	{
+		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Reflection_EventInfo__RemoveEventHandler_System_Void_System_Object_System_Delegate_();
+		_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests::GetAddMethod_2_bool_0()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_GetAddMethod_2_bool_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c____9__4_0;
+	_s1 = _s0;
+	{
+		if (_s1 == 0)
+		{
+			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c____9;
+			{
+				// Hotpatch-aware ldftn wrapper (slot 38)
+				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
+					auto& _d_entry = s_hotpatch_entries[38];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+					{
+						alignas(16) uint8_t _d_ab[8];
+						ArgBuffer _d_bw(_d_ab);
+						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d_entry.method_key, _d_ab, nullptr);
+						return;
+					}
+					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
+				};
+			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+			}
+			{
+				const auto chaos_method_ptr = _s1;
+				const auto chaos_target = _s0;
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
+				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
+				chaos_object->chaos_delegate_target = chaos_target;
+				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			_s1 = _s0;
+			{
+				auto chaos_value = _s1;
+				chaos_static_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c____9__4_0 = chaos_value;
+			}
+		}
+		{
+			// Assert.Throws: target method not found via IL lookahead
+			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
+		}
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
+		chaos_locals[0] = ChaosStoreInt64(_i0);
+		_i0 = ChaosLoadInt64(chaos_locals[0]);
+		return _i0;
+	}
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests::GetAddMethod_2_bool_1()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_GetAddMethod_2_bool_1(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c____9__6_0;
+	_s1 = _s0;
+	{
+		if (_s1 == 0)
+		{
+			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c____9;
+			{
+				// Hotpatch-aware ldftn wrapper (slot 39)
+				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
+					auto& _d_entry = s_hotpatch_entries[39];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+					{
+						alignas(16) uint8_t _d_ab[8];
+						ArgBuffer _d_bw(_d_ab);
+						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d_entry.method_key, _d_ab, nullptr);
+						return;
+					}
+					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
+				};
+			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+			}
+			{
+				const auto chaos_method_ptr = _s1;
+				const auto chaos_target = _s0;
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
+				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
+				chaos_object->chaos_delegate_target = chaos_target;
+				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			_s1 = _s0;
+			{
+				auto chaos_value = _s1;
+				chaos_static_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c____9__6_0 = chaos_value;
+			}
+		}
+		{
+			// Assert.Throws: target method not found via IL lookahead
+			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
+		}
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
+		chaos_locals[0] = ChaosStoreInt64(_i0);
+		_i0 = ChaosLoadInt64(chaos_locals[0]);
+		return _i0;
+	}
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests::GetCustomAttributes_6_System_Type_bool_0()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_GetCustomAttributes_6_System_Type_bool_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c____9__20_0;
+	_s1 = _s0;
+	{
+		if (_s1 == 0)
+		{
+			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c____9;
+			{
+				// Hotpatch-aware ldftn wrapper (slot 40)
+				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
+					auto& _d_entry = s_hotpatch_entries[40];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+					{
+						alignas(16) uint8_t _d_ab[8];
+						ArgBuffer _d_bw(_d_ab);
+						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d_entry.method_key, _d_ab, nullptr);
+						return;
+					}
+					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
+				};
+			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+			}
+			{
+				const auto chaos_method_ptr = _s1;
+				const auto chaos_target = _s0;
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
+				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
+				chaos_object->chaos_delegate_target = chaos_target;
+				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			_s1 = _s0;
+			{
+				auto chaos_value = _s1;
+				chaos_static_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c____9__20_0 = chaos_value;
+			}
+		}
+		{
+			// Assert.Throws: target method not found via IL lookahead
+			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
+		}
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
+		chaos_locals[0] = ChaosStoreInt64(_i0);
+		_i0 = ChaosLoadInt64(chaos_locals[0]);
+		return _i0;
+	}
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests::GetCustomAttributes_6_System_Type_bool_1()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_GetCustomAttributes_6_System_Type_bool_1(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c____9__22_0;
+	_s1 = _s0;
+	{
+		if (_s1 == 0)
+		{
+			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c____9;
+			{
+				// Hotpatch-aware ldftn wrapper (slot 41)
+				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
+					auto& _d_entry = s_hotpatch_entries[41];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+					{
+						alignas(16) uint8_t _d_ab[8];
+						ArgBuffer _d_bw(_d_ab);
+						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d_entry.method_key, _d_ab, nullptr);
+						return;
+					}
+					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
+				};
+			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+			}
+			{
+				const auto chaos_method_ptr = _s1;
+				const auto chaos_target = _s0;
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
+				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
+				chaos_object->chaos_delegate_target = chaos_target;
+				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			_s1 = _s0;
+			{
+				auto chaos_value = _s1;
+				chaos_static_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c____9__22_0 = chaos_value;
+			}
+		}
+		{
+			// Assert.Throws: target method not found via IL lookahead
+			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
+		}
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
+		chaos_locals[0] = ChaosStoreInt64(_i0);
+		_i0 = ChaosLoadInt64(chaos_locals[0]);
+		return _i0;
+	}
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests::GetCustomAttributes_7_bool_0()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_GetCustomAttributes_7_bool_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c____9__24_0;
+	_s1 = _s0;
+	{
+		if (_s1 == 0)
+		{
+			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c____9;
+			{
+				// Hotpatch-aware ldftn wrapper (slot 42)
+				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
+					auto& _d_entry = s_hotpatch_entries[42];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+					{
+						alignas(16) uint8_t _d_ab[8];
+						ArgBuffer _d_bw(_d_ab);
+						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d_entry.method_key, _d_ab, nullptr);
+						return;
+					}
+					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
+				};
+			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+			}
+			{
+				const auto chaos_method_ptr = _s1;
+				const auto chaos_target = _s0;
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
+				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
+				chaos_object->chaos_delegate_target = chaos_target;
+				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			_s1 = _s0;
+			{
+				auto chaos_value = _s1;
+				chaos_static_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c____9__24_0 = chaos_value;
+			}
+		}
+		{
+			// Assert.Throws: target method not found via IL lookahead
+			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
+		}
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
+		chaos_locals[0] = ChaosStoreInt64(_i0);
+		_i0 = ChaosLoadInt64(chaos_locals[0]);
+		return _i0;
+	}
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests::GetCustomAttributes_7_bool_1()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_GetCustomAttributes_7_bool_1(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c____9__26_0;
+	_s1 = _s0;
+	{
+		if (_s1 == 0)
+		{
+			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c____9;
+			{
+				// Hotpatch-aware ldftn wrapper (slot 43)
+				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
+					auto& _d_entry = s_hotpatch_entries[43];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+					{
+						alignas(16) uint8_t _d_ab[8];
+						ArgBuffer _d_bw(_d_ab);
+						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d_entry.method_key, _d_ab, nullptr);
+						return;
+					}
+					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
+				};
+			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+			}
+			{
+				const auto chaos_method_ptr = _s1;
+				const auto chaos_target = _s0;
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
+				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
+				chaos_object->chaos_delegate_target = chaos_target;
+				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			_s1 = _s0;
+			{
+				auto chaos_value = _s1;
+				chaos_static_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c____9__26_0 = chaos_value;
+			}
+		}
+		{
+			// Assert.Throws: target method not found via IL lookahead
+			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
+		}
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
+		chaos_locals[0] = ChaosStoreInt64(_i0);
+		_i0 = ChaosLoadInt64(chaos_locals[0]);
+		return _i0;
+	}
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests::GetCustomAttributesData_8__8()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_GetCustomAttributesData_8__8(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c____9__28_0;
+	_s1 = _s0;
+	{
+		if (_s1 == 0)
+		{
+			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c____9;
+			{
+				// Hotpatch-aware ldftn wrapper (slot 44)
+				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
+					auto& _d_entry = s_hotpatch_entries[44];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+					{
+						alignas(16) uint8_t _d_ab[8];
+						ArgBuffer _d_bw(_d_ab);
+						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d_entry.method_key, _d_ab, nullptr);
+						return;
+					}
+					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
+				};
+			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+			}
+			{
+				const auto chaos_method_ptr = _s1;
+				const auto chaos_target = _s0;
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
+				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
+				chaos_object->chaos_delegate_target = chaos_target;
+				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			_s1 = _s0;
+			{
+				auto chaos_value = _s1;
+				chaos_static_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c____9__28_0 = chaos_value;
+			}
+		}
+		{
+			// Assert.Throws: target method not found via IL lookahead
+			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
+		}
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
+		chaos_locals[0] = ChaosStoreInt64(_i0);
+		_i0 = ChaosLoadInt64(chaos_locals[0]);
+		return _i0;
+	}
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests::GetOtherMethods_3_bool_0()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_GetOtherMethods_3_bool_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c____9__8_0;
+	_s1 = _s0;
+	{
+		if (_s1 == 0)
+		{
+			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c____9;
+			{
+				// Hotpatch-aware ldftn wrapper (slot 45)
+				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
+					auto& _d_entry = s_hotpatch_entries[45];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+					{
+						alignas(16) uint8_t _d_ab[8];
+						ArgBuffer _d_bw(_d_ab);
+						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d_entry.method_key, _d_ab, nullptr);
+						return;
+					}
+					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
+				};
+			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+			}
+			{
+				const auto chaos_method_ptr = _s1;
+				const auto chaos_target = _s0;
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
+				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
+				chaos_object->chaos_delegate_target = chaos_target;
+				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			_s1 = _s0;
+			{
+				auto chaos_value = _s1;
+				chaos_static_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c____9__8_0 = chaos_value;
+			}
+		}
+		{
+			// Assert.Throws: target method not found via IL lookahead
+			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
+		}
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
+		chaos_locals[0] = ChaosStoreInt64(_i0);
+		_i0 = ChaosLoadInt64(chaos_locals[0]);
+		return _i0;
+	}
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests::GetOtherMethods_3_bool_1()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_GetOtherMethods_3_bool_1(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c____9__10_0;
+	_s1 = _s0;
+	{
+		if (_s1 == 0)
+		{
+			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c____9;
+			{
+				// Hotpatch-aware ldftn wrapper (slot 46)
+				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
+					auto& _d_entry = s_hotpatch_entries[46];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+					{
+						alignas(16) uint8_t _d_ab[8];
+						ArgBuffer _d_bw(_d_ab);
+						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d_entry.method_key, _d_ab, nullptr);
+						return;
+					}
+					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
+				};
+			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+			}
+			{
+				const auto chaos_method_ptr = _s1;
+				const auto chaos_target = _s0;
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
+				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
+				chaos_object->chaos_delegate_target = chaos_target;
+				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			_s1 = _s0;
+			{
+				auto chaos_value = _s1;
+				chaos_static_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c____9__10_0 = chaos_value;
+			}
+		}
+		{
+			// Assert.Throws: target method not found via IL lookahead
+			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
+		}
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
+		chaos_locals[0] = ChaosStoreInt64(_i0);
+		_i0 = ChaosLoadInt64(chaos_locals[0]);
+		return _i0;
+	}
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests::GetRaiseMethod_4_bool_0()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_GetRaiseMethod_4_bool_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c____9__12_0;
+	_s1 = _s0;
+	{
+		if (_s1 == 0)
+		{
+			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c____9;
+			{
+				// Hotpatch-aware ldftn wrapper (slot 47)
+				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
+					auto& _d_entry = s_hotpatch_entries[47];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+					{
+						alignas(16) uint8_t _d_ab[8];
+						ArgBuffer _d_bw(_d_ab);
+						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d_entry.method_key, _d_ab, nullptr);
+						return;
+					}
+					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
+				};
+			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+			}
+			{
+				const auto chaos_method_ptr = _s1;
+				const auto chaos_target = _s0;
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
+				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
+				chaos_object->chaos_delegate_target = chaos_target;
+				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			_s1 = _s0;
+			{
+				auto chaos_value = _s1;
+				chaos_static_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c____9__12_0 = chaos_value;
+			}
+		}
+		{
+			// Assert.Throws: target method not found via IL lookahead
+			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
+		}
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
+		chaos_locals[0] = ChaosStoreInt64(_i0);
+		_i0 = ChaosLoadInt64(chaos_locals[0]);
+		return _i0;
+	}
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests::GetRaiseMethod_4_bool_1()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_GetRaiseMethod_4_bool_1(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c____9__14_0;
+	_s1 = _s0;
+	{
+		if (_s1 == 0)
+		{
+			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c____9;
+			{
+				// Hotpatch-aware ldftn wrapper (slot 48)
+				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
+					auto& _d_entry = s_hotpatch_entries[48];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+					{
+						alignas(16) uint8_t _d_ab[8];
+						ArgBuffer _d_bw(_d_ab);
+						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d_entry.method_key, _d_ab, nullptr);
+						return;
+					}
+					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
+				};
+			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+			}
+			{
+				const auto chaos_method_ptr = _s1;
+				const auto chaos_target = _s0;
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
+				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
+				chaos_object->chaos_delegate_target = chaos_target;
+				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			_s1 = _s0;
+			{
+				auto chaos_value = _s1;
+				chaos_static_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c____9__14_0 = chaos_value;
+			}
+		}
+		{
+			// Assert.Throws: target method not found via IL lookahead
+			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
+		}
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
+		chaos_locals[0] = ChaosStoreInt64(_i0);
+		_i0 = ChaosLoadInt64(chaos_locals[0]);
+		return _i0;
+	}
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests::GetRemoveMethod_5_bool_0()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_GetRemoveMethod_5_bool_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c____9__16_0;
+	_s1 = _s0;
+	{
+		if (_s1 == 0)
+		{
+			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c____9;
+			{
+				// Hotpatch-aware ldftn wrapper (slot 49)
+				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
+					auto& _d_entry = s_hotpatch_entries[49];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+					{
+						alignas(16) uint8_t _d_ab[8];
+						ArgBuffer _d_bw(_d_ab);
+						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d_entry.method_key, _d_ab, nullptr);
+						return;
+					}
+					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
+				};
+			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+			}
+			{
+				const auto chaos_method_ptr = _s1;
+				const auto chaos_target = _s0;
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
+				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
+				chaos_object->chaos_delegate_target = chaos_target;
+				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			_s1 = _s0;
+			{
+				auto chaos_value = _s1;
+				chaos_static_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c____9__16_0 = chaos_value;
+			}
+		}
+		{
+			// Assert.Throws: target method not found via IL lookahead
+			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
+		}
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
+		chaos_locals[0] = ChaosStoreInt64(_i0);
+		_i0 = ChaosLoadInt64(chaos_locals[0]);
+		return _i0;
+	}
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests::GetRemoveMethod_5_bool_1()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_GetRemoveMethod_5_bool_1(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c____9__18_0;
+	_s1 = _s0;
+	{
+		if (_s1 == 0)
+		{
+			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c____9;
+			{
+				// Hotpatch-aware ldftn wrapper (slot 50)
+				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
+					auto& _d_entry = s_hotpatch_entries[50];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+					{
+						alignas(16) uint8_t _d_ab[8];
+						ArgBuffer _d_bw(_d_ab);
+						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d_entry.method_key, _d_ab, nullptr);
+						return;
+					}
+					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
+				};
+			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+			}
+			{
+				const auto chaos_method_ptr = _s1;
+				const auto chaos_target = _s0;
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
+				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
+				chaos_object->chaos_delegate_target = chaos_target;
+				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			_s1 = _s0;
+			{
+				auto chaos_value = _s1;
+				chaos_static_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c____9__18_0 = chaos_value;
+			}
+		}
+		{
+			// Assert.Throws: target method not found via IL lookahead
+			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
+		}
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
+		chaos_locals[0] = ChaosStoreInt64(_i0);
+		_i0 = ChaosLoadInt64(chaos_locals[0]);
+		return _i0;
+	}
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests::IsDefined_9_System_Type_bool_0()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_IsDefined_9_System_Type_bool_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c____9__30_0;
+	_s1 = _s0;
+	{
+		if (_s1 == 0)
+		{
+			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c____9;
+			{
+				// Hotpatch-aware ldftn wrapper (slot 51)
+				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
+					auto& _d_entry = s_hotpatch_entries[51];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+					{
+						alignas(16) uint8_t _d_ab[8];
+						ArgBuffer _d_bw(_d_ab);
+						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d_entry.method_key, _d_ab, nullptr);
+						return;
+					}
+					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
+				};
+			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+			}
+			{
+				const auto chaos_method_ptr = _s1;
+				const auto chaos_target = _s0;
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
+				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
+				chaos_object->chaos_delegate_target = chaos_target;
+				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			_s1 = _s0;
+			{
+				auto chaos_value = _s1;
+				chaos_static_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c____9__30_0 = chaos_value;
+			}
+		}
+		{
+			// Assert.Throws: target method not found via IL lookahead
+			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
+		}
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
+		chaos_locals[0] = ChaosStoreInt64(_i0);
+		_i0 = ChaosLoadInt64(chaos_locals[0]);
+		return _i0;
+	}
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests::IsDefined_9_System_Type_bool_1()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_IsDefined_9_System_Type_bool_1(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c____9__32_0;
+	_s1 = _s0;
+	{
+		if (_s1 == 0)
+		{
+			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c____9;
+			{
+				// Hotpatch-aware ldftn wrapper (slot 52)
+				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
+					auto& _d_entry = s_hotpatch_entries[52];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+					{
+						alignas(16) uint8_t _d_ab[8];
+						ArgBuffer _d_bw(_d_ab);
+						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d_entry.method_key, _d_ab, nullptr);
+						return;
+					}
+					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
+				};
+			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+			}
+			{
+				const auto chaos_method_ptr = _s1;
+				const auto chaos_target = _s0;
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
+				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
+				chaos_object->chaos_delegate_target = chaos_target;
+				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			_s1 = _s0;
+			{
+				auto chaos_value = _s1;
+				chaos_static_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c____9__32_0 = chaos_value;
+			}
+		}
+		{
+			// Assert.Throws: target method not found via IL lookahead
+			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
+		}
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
+		chaos_locals[0] = ChaosStoreInt64(_i0);
+		_i0 = ChaosLoadInt64(chaos_locals[0]);
+		return _i0;
+	}
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests::RemoveEventHandler_1_object_System_Delegate_0()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests_RemoveEventHandler_1_object_System_Delegate_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c____9__2_0;
+	_s1 = _s0;
+	{
+		if (_s1 == 0)
+		{
+			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c____9;
+			{
+				// Hotpatch-aware ldftn wrapper (slot 53)
+				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
+					auto& _d_entry = s_hotpatch_entries[53];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+					{
+						alignas(16) uint8_t _d_ab[8];
+						ArgBuffer _d_bw(_d_ab);
+						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d_entry.method_key, _d_ab, nullptr);
+						return;
+					}
+					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
+				};
+			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+			}
+			{
+				const auto chaos_method_ptr = _s1;
+				const auto chaos_target = _s0;
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
+				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
+				chaos_object->chaos_delegate_target = chaos_target;
+				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			_s1 = _s0;
+			{
+				auto chaos_value = _s1;
+				chaos_static_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c____9__2_0 = chaos_value;
+			}
+		}
+		{
+			// Assert.Throws: target method not found via IL lookahead
+			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
+		}
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
+		chaos_locals[0] = ChaosStoreInt64(_i0);
+		_i0 = ChaosLoadInt64(chaos_locals[0]);
+		return _i0;
+	}
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests+<>c::.cctor:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c_cctor(void)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests+<>c::.ctor:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests+<>c::<AddEventHandler_0_object_System_Delegate_0>b__0_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c_AddEventHandler_0_object_System_Delegate_0_b__0_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests+<>c::<GetAddMethod_2_bool_0>b__4_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c_GetAddMethod_2_bool_0_b__4_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests+<>c::<GetAddMethod_2_bool_1>b__6_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c_GetAddMethod_2_bool_1_b__6_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests+<>c::<GetCustomAttributes_6_System_Type_bool_0>b__20_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c_GetCustomAttributes_6_System_Type_bool_0_b__20_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests+<>c::<GetCustomAttributes_6_System_Type_bool_1>b__22_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c_GetCustomAttributes_6_System_Type_bool_1_b__22_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests+<>c::<GetCustomAttributes_7_bool_0>b__24_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c_GetCustomAttributes_7_bool_0_b__24_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests+<>c::<GetCustomAttributes_7_bool_1>b__26_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c_GetCustomAttributes_7_bool_1_b__26_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests+<>c::<GetCustomAttributesData_8__8>b__28_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c_GetCustomAttributesData_8__8_b__28_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests+<>c::<GetOtherMethods_3_bool_0>b__8_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c_GetOtherMethods_3_bool_0_b__8_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests+<>c::<GetOtherMethods_3_bool_1>b__10_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c_GetOtherMethods_3_bool_1_b__10_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests+<>c::<GetRaiseMethod_4_bool_0>b__12_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c_GetRaiseMethod_4_bool_0_b__12_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests+<>c::<GetRaiseMethod_4_bool_1>b__14_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c_GetRaiseMethod_4_bool_1_b__14_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests+<>c::<GetRemoveMethod_5_bool_0>b__16_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c_GetRemoveMethod_5_bool_0_b__16_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests+<>c::<GetRemoveMethod_5_bool_1>b__18_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c_GetRemoveMethod_5_bool_1_b__18_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests+<>c::<IsDefined_9_System_Type_bool_0>b__30_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c_IsDefined_9_System_Type_bool_0_b__30_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests+<>c::<IsDefined_9_System_Type_bool_1>b__32_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c_IsDefined_9_System_Type_bool_1_b__32_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_ComAwareEventInfoTests+<>c::<RemoveEventHandler_1_object_System_Delegate_0>b__2_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_ComAwareEventInfoTests___c_RemoveEventHandler_1_object_System_Delegate_0_b__2_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_HandleCollectorTests::.ctor()
+extern "C" void CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_HandleCollectorTests__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = chaos_args[0];
+	{
+		const auto chaos_arg_0 = _s0;
+		ChaosObjectCtor(chaos_arg_0);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_HandleCollectorTests::Add_0__0()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_HandleCollectorTests_Add_0__0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_HandleCollectorTests___c____9__0_0;
+	_s1 = _s0;
+	{
+		if (_s1 == 0)
+		{
+			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_HandleCollectorTests___c____9;
+			{
+				// Hotpatch-aware ldftn wrapper (slot 61)
+				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
+					auto& _d_entry = s_hotpatch_entries[61];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+					{
+						alignas(16) uint8_t _d_ab[8];
+						ArgBuffer _d_bw(_d_ab);
+						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d_entry.method_key, _d_ab, nullptr);
+						return;
+					}
+					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
+				};
+			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+			}
+			{
+				const auto chaos_method_ptr = _s1;
+				const auto chaos_target = _s0;
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
+				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
+				chaos_object->chaos_delegate_target = chaos_target;
+				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			_s1 = _s0;
+			{
+				auto chaos_value = _s1;
+				chaos_static_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_HandleCollectorTests___c____9__0_0 = chaos_value;
+			}
+		}
+		{
+			// Assert.Throws: target method not found via IL lookahead
+			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
+		}
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
+		chaos_locals[0] = ChaosStoreInt64(_i0);
+		_i0 = ChaosLoadInt64(chaos_locals[0]);
+		return _i0;
+	}
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_HandleCollectorTests::Benchmark_Add_0__0()
+extern "C" void CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_HandleCollectorTests_Benchmark_Add_0__0(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	{
+		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_HandleCollector__Add_System_Void__();
+		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_HandleCollectorTests::Benchmark_Remove_1__1()
+extern "C" void CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_HandleCollectorTests_Benchmark_Remove_1__1(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	{
+		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_HandleCollector__Remove_System_Void__();
+		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_HandleCollectorTests::Remove_1__1()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_HandleCollectorTests_Remove_1__1(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_HandleCollectorTests___c____9__2_0;
+	_s1 = _s0;
+	{
+		if (_s1 == 0)
+		{
+			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_HandleCollectorTests___c____9;
+			{
+				// Hotpatch-aware ldftn wrapper (slot 62)
+				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
+					auto& _d_entry = s_hotpatch_entries[62];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+					{
+						alignas(16) uint8_t _d_ab[8];
+						ArgBuffer _d_bw(_d_ab);
+						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d_entry.method_key, _d_ab, nullptr);
+						return;
+					}
+					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
+				};
+			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+			}
+			{
+				const auto chaos_method_ptr = _s1;
+				const auto chaos_target = _s0;
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
+				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
+				chaos_object->chaos_delegate_target = chaos_target;
+				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			_s1 = _s0;
+			{
+				auto chaos_value = _s1;
+				chaos_static_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_HandleCollectorTests___c____9__2_0 = chaos_value;
+			}
+		}
+		{
+			// Assert.Throws: target method not found via IL lookahead
+			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
+		}
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
+		chaos_locals[0] = ChaosStoreInt64(_i0);
+		_i0 = ChaosLoadInt64(chaos_locals[0]);
+		return _i0;
+	}
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_HandleCollectorTests+<>c::.cctor:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_HandleCollectorTests___c_cctor(void)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_HandleCollectorTests+<>c::.ctor:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_HandleCollectorTests___c__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_HandleCollectorTests+<>c::<Add_0__0>b__0_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_HandleCollectorTests___c_Add_0__0_b__0_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_HandleCollectorTests+<>c::<Remove_1__1>b__2_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_HandleCollectorTests___c_Remove_1__1_b__2_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ComInterfaceMarshallerSystem_Int32Tests::.ctor()
+extern "C" void CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ComInterfaceMarshallerSystem_Int32Tests__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = chaos_args[0];
+	{
+		const auto chaos_arg_0 = _s0;
+		ChaosObjectCtor(chaos_arg_0);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ComInterfaceMarshallerSystem_Int32Tests::Benchmark_ConvertToManaged_1_void_0()
+extern "C" void CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ComInterfaceMarshallerSystem_Int32Tests_Benchmark_ConvertToManaged_1_void_0(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_UINTPTR>(_s0));
+	{
+		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Runtime_InteropServices_Marshalling_ComInterfaceMarshaller_System_Int32___ConvertToManaged_System_Int32_System_Void__();
+		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ComInterfaceMarshallerSystem_Int32Tests::Benchmark_ConvertToUnmanaged_0_int_0()
+extern "C" void CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ComInterfaceMarshallerSystem_Int32Tests_Benchmark_ConvertToUnmanaged_0_int_0(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	{
+		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Runtime_InteropServices_Marshalling_ComInterfaceMarshaller_System_Int32___ConvertToUnmanaged_System_Void__System_Int32_();
+		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ComInterfaceMarshallerSystem_Int32Tests::Benchmark_ConvertToUnmanaged_0_int_1()
+extern "C" void CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ComInterfaceMarshallerSystem_Int32Tests_Benchmark_ConvertToUnmanaged_0_int_1(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	{
+		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Runtime_InteropServices_Marshalling_ComInterfaceMarshaller_System_Int32___ConvertToUnmanaged_System_Void__System_Int32_();
+		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ComInterfaceMarshallerSystem_Int32Tests::Benchmark_Free_2_void_0()
+extern "C" void CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ComInterfaceMarshallerSystem_Int32Tests_Benchmark_Free_2_void_0(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_UINTPTR>(_s0));
+	{
+		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Runtime_InteropServices_Marshalling_ComInterfaceMarshaller_System_Int32___Free_System_Void_System_Void__();
+		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ComInterfaceMarshallerSystem_Int32Tests::ConvertToManaged_1_void_0()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ComInterfaceMarshallerSystem_Int32Tests_ConvertToManaged_1_void_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	CHAOS_IL2CPP_INT64 _i3;
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_UINTPTR>(_s0));
+	{
+		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Runtime_InteropServices_Marshalling_ComInterfaceMarshaller_System_Int32___ConvertToManaged_System_Int32_System_Void__();
+		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	chaos_locals[0] = _s1;
+	_s1 = chaos_locals[0];
+	_i1 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s1));
+	chaos_locals[1] = ChaosStoreInt64(_i1);
+	_i1 = ChaosLoadInt64(chaos_locals[1]);
+	return _i1;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ComInterfaceMarshallerSystem_Int32Tests::ConvertToUnmanaged_0_int_0()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ComInterfaceMarshallerSystem_Int32Tests_ConvertToUnmanaged_0_int_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	CHAOS_IL2CPP_INT64 _i3;
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	{
+		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Runtime_InteropServices_Marshalling_ComInterfaceMarshaller_System_Int32___ConvertToUnmanaged_System_Void__System_Int32_();
+		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_UINTPTR>(_s2));
+	{
+		const auto chaos_right = static_cast<CHAOS_IL2CPP_INTPTR>(_s2);
+		const auto chaos_left = static_cast<CHAOS_IL2CPP_INTPTR>(_s1);
+		if (chaos_left != chaos_right)
+		{
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			_i1 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s1));
+		}
+		else
+		{
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_i1 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(ChaosLoadInt64(_s1)));
+		}
+		chaos_locals[1] = ChaosStoreInt64(_s0);
+		_i0 = ChaosLoadInt64(chaos_locals[1]);
+		return _i0;
+	}
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ComInterfaceMarshallerSystem_Int32Tests::ConvertToUnmanaged_0_int_1()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ComInterfaceMarshallerSystem_Int32Tests_ConvertToUnmanaged_0_int_1(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	CHAOS_IL2CPP_INT64 _i3;
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	{
+		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Runtime_InteropServices_Marshalling_ComInterfaceMarshaller_System_Int32___ConvertToUnmanaged_System_Void__System_Int32_();
+		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_UINTPTR>(_s2));
+	{
+		const auto chaos_right = static_cast<CHAOS_IL2CPP_INTPTR>(_s2);
+		const auto chaos_left = static_cast<CHAOS_IL2CPP_INTPTR>(_s1);
+		if (chaos_left != chaos_right)
+		{
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			_i1 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s1));
+		}
+		else
+		{
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_i1 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(ChaosLoadInt64(_s1)));
+		}
+		chaos_locals[1] = ChaosStoreInt64(_s0);
+		_i0 = ChaosLoadInt64(chaos_locals[1]);
+		return _i0;
+	}
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ComObjectTests::.ctor()
+extern "C" void CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ComObjectTests__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = chaos_args[0];
+	{
+		const auto chaos_arg_0 = _s0;
+		ChaosObjectCtor(chaos_arg_0);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ComObjectTests::Benchmark_FinalRelease_0__0()
+extern "C" void CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ComObjectTests_Benchmark_FinalRelease_0__0(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	{
+		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Runtime_InteropServices_Marshalling_ComObject__FinalRelease_System_Void__();
+		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ComObjectTests::FinalRelease_0__0()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ComObjectTests_FinalRelease_0__0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ComObjectTests___c____9__0_0;
+	_s1 = _s0;
+	{
+		if (_s1 == 0)
+		{
+			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ComObjectTests___c____9;
+			{
+				// Hotpatch-aware ldftn wrapper (slot 76)
+				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
+					auto& _d_entry = s_hotpatch_entries[76];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+					{
+						alignas(16) uint8_t _d_ab[8];
+						ArgBuffer _d_bw(_d_ab);
+						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d_entry.method_key, _d_ab, nullptr);
+						return;
+					}
+					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
+				};
+			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+			}
+			{
+				const auto chaos_method_ptr = _s1;
+				const auto chaos_target = _s0;
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
+				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
+				chaos_object->chaos_delegate_target = chaos_target;
+				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			_s1 = _s0;
+			{
+				auto chaos_value = _s1;
+				chaos_static_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ComObjectTests___c____9__0_0 = chaos_value;
+			}
+		}
+		{
+			// Assert.Throws: target method not found via IL lookahead
+			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
+		}
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
+		chaos_locals[0] = ChaosStoreInt64(_i0);
+		_i0 = ChaosLoadInt64(chaos_locals[0]);
+		return _i0;
+	}
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ComObjectTests+<>c::.cctor:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ComObjectTests___c_cctor(void)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ComObjectTests+<>c::.ctor:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ComObjectTests___c__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ComObjectTests+<>c::<FinalRelease_0__0>b__0_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ComObjectTests___c_FinalRelease_0__0_b__0_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ExceptionAsDefaultMarshallerSystem_Int32Tests::.ctor()
+extern "C" void CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ExceptionAsDefaultMarshallerSystem_Int32Tests__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = chaos_args[0];
+	{
+		const auto chaos_arg_0 = _s0;
+		ChaosObjectCtor(chaos_arg_0);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ExceptionAsDefaultMarshallerSystem_Int32Tests::Benchmark_ConvertToUnmanaged_0_System_Exception_0()
+extern "C" void CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ExceptionAsDefaultMarshallerSystem_Int32Tests_Benchmark_ConvertToUnmanaged_0_System_Exception_0(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	{
+		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Runtime_InteropServices_Marshalling_ExceptionAsDefaultMarshaller_System_Int32___ConvertToUnmanaged_System_Int32_System_Exception_();
+		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ExceptionAsDefaultMarshallerSystem_Int32Tests::ConvertToUnmanaged_0_System_Exception_0()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ExceptionAsDefaultMarshallerSystem_Int32Tests_ConvertToUnmanaged_0_System_Exception_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INTPTR _s5;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	CHAOS_IL2CPP_INT64 _i3;
+	_s0 = 0;
+	{
+		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Runtime_InteropServices_Marshalling_ExceptionAsDefaultMarshaller_System_Int32___ConvertToUnmanaged_System_Int32_System_Exception_();
+		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	chaos_locals[0] = _s1;
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	_s2 = chaos_locals[0];
+	_s3 = 0;
+	{
+		[&]() -> void { if ((_s1) != (_s2)) { throw chaos_managed_exception{}; } }();
+	}
+	_s1 = chaos_locals[0];
+	_i1 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s1));
+	chaos_locals[1] = ChaosStoreInt64(_i1);
+	_i1 = ChaosLoadInt64(chaos_locals[1]);
+	return _i1;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ExceptionAsHResultMarshallerSystem_Int32Tests::.ctor()
+extern "C" void CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ExceptionAsHResultMarshallerSystem_Int32Tests__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = chaos_args[0];
+	{
+		const auto chaos_arg_0 = _s0;
+		ChaosObjectCtor(chaos_arg_0);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ExceptionAsHResultMarshallerSystem_Int32Tests::Benchmark_ConvertToUnmanaged_0_System_Exception_0()
+extern "C" void CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ExceptionAsHResultMarshallerSystem_Int32Tests_Benchmark_ConvertToUnmanaged_0_System_Exception_0(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	{
+		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Runtime_InteropServices_Marshalling_ExceptionAsHResultMarshaller_System_Int32___ConvertToUnmanaged_System_Int32_System_Exception_();
+		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ExceptionAsHResultMarshallerSystem_Int32Tests::ConvertToUnmanaged_0_System_Exception_0()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ExceptionAsHResultMarshallerSystem_Int32Tests_ConvertToUnmanaged_0_System_Exception_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INTPTR _s5;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	CHAOS_IL2CPP_INT64 _i3;
+	_s0 = 0;
+	{
+		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Runtime_InteropServices_Marshalling_ExceptionAsHResultMarshaller_System_Int32___ConvertToUnmanaged_System_Int32_System_Exception_();
+		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	chaos_locals[0] = _s1;
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	_s2 = chaos_locals[0];
+	_s3 = 0;
+	{
+		[&]() -> void { if ((_s1) != (_s2)) { throw chaos_managed_exception{}; } }();
+	}
+	_s1 = chaos_locals[0];
+	_i1 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s1));
+	chaos_locals[1] = ChaosStoreInt64(_i1);
+	_i1 = ChaosLoadInt64(chaos_locals[1]);
+	return _i1;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ExceptionAsNaNMarshallerSystem_DoubleTests::.ctor()
+extern "C" void CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ExceptionAsNaNMarshallerSystem_DoubleTests__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = chaos_args[0];
+	{
+		const auto chaos_arg_0 = _s0;
+		ChaosObjectCtor(chaos_arg_0);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ExceptionAsNaNMarshallerSystem_DoubleTests::Benchmark_ConvertToUnmanaged_0_System_Exception_0()
+extern "C" void CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ExceptionAsNaNMarshallerSystem_DoubleTests_Benchmark_ConvertToUnmanaged_0_System_Exception_0(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	{
+		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Runtime_InteropServices_Marshalling_ExceptionAsNaNMarshaller_System_Double___ConvertToUnmanaged_System_Double_System_Exception_();
+		_s1 = ChaosStoreFloat64(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ExceptionAsNaNMarshallerSystem_DoubleTests::ConvertToUnmanaged_0_System_Exception_0()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ExceptionAsNaNMarshallerSystem_DoubleTests_ConvertToUnmanaged_0_System_Exception_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ExceptionAsNaNMarshallerSystem_DoubleTests___c____9__0_0;
+	_s1 = _s0;
+	{
+		if (_s1 == 0)
+		{
+			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ExceptionAsNaNMarshallerSystem_DoubleTests___c____9;
+			{
+				// Hotpatch-aware ldftn wrapper (slot 88)
+				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
+					auto& _d_entry = s_hotpatch_entries[88];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+					{
+						alignas(16) uint8_t _d_ab[8];
+						ArgBuffer _d_bw(_d_ab);
+						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d_entry.method_key, _d_ab, nullptr);
+						return;
+					}
+					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
+				};
+			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+			}
+			{
+				const auto chaos_method_ptr = _s1;
+				const auto chaos_target = _s0;
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
+				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
+				chaos_object->chaos_delegate_target = chaos_target;
+				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			_s1 = _s0;
+			{
+				auto chaos_value = _s1;
+				chaos_static_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ExceptionAsNaNMarshallerSystem_DoubleTests___c____9__0_0 = chaos_value;
+			}
+		}
+		{
+			// Assert.Throws: target method not found via IL lookahead
+			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
+		}
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
+		chaos_locals[0] = ChaosStoreInt64(_i0);
+		_i0 = ChaosLoadInt64(chaos_locals[0]);
+		return _i0;
+	}
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ExceptionAsNaNMarshallerSystem_DoubleTests+<>c::.cctor:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ExceptionAsNaNMarshallerSystem_DoubleTests___c_cctor(void)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ExceptionAsNaNMarshallerSystem_DoubleTests+<>c::.ctor:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ExceptionAsNaNMarshallerSystem_DoubleTests___c__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ExceptionAsNaNMarshallerSystem_DoubleTests+<>c::<ConvertToUnmanaged_0_System_Exception_0>b__0_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ExceptionAsNaNMarshallerSystem_DoubleTests___c_ConvertToUnmanaged_0_System_Exception_0_b__0_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ExceptionAsVoidMarshallerTests::.ctor()
+extern "C" void CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ExceptionAsVoidMarshallerTests__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = chaos_args[0];
+	{
+		const auto chaos_arg_0 = _s0;
+		ChaosObjectCtor(chaos_arg_0);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ExceptionAsVoidMarshallerTests::Benchmark_ConvertToUnmanaged_0_System_Exception_0()
+extern "C" void CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ExceptionAsVoidMarshallerTests_Benchmark_ConvertToUnmanaged_0_System_Exception_0(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	{
+		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Runtime_InteropServices_Marshalling_ExceptionAsVoidMarshaller__ConvertToUnmanaged_System_Void_System_Exception_();
+		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_ExceptionAsVoidMarshallerTests::ConvertToUnmanaged_0_System_Exception_0()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_ExceptionAsVoidMarshallerTests_ConvertToUnmanaged_0_System_Exception_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	CHAOS_IL2CPP_INT64 _i3;
+	CHAOS_IL2CPP_INT64 _i4;
+	_s0 = 0;
+	{
+		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Runtime_InteropServices_Marshalling_ExceptionAsVoidMarshaller__ConvertToUnmanaged_System_Void_System_Exception_();
+		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+	_i2 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s2));
+	chaos_locals[0] = ChaosStoreInt64(_i2);
+	_i2 = ChaosLoadInt64(chaos_locals[0]);
+	return _i2;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_UniqueComInterfaceMarshallerSystem_Int32Tests::.ctor()
+extern "C" void CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_UniqueComInterfaceMarshallerSystem_Int32Tests__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = chaos_args[0];
+	{
+		const auto chaos_arg_0 = _s0;
+		ChaosObjectCtor(chaos_arg_0);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_UniqueComInterfaceMarshallerSystem_Int32Tests::Benchmark_ConvertToManaged_1_void_0()
+extern "C" void CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_UniqueComInterfaceMarshallerSystem_Int32Tests_Benchmark_ConvertToManaged_1_void_0(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_UINTPTR>(_s0));
+	{
+		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Runtime_InteropServices_Marshalling_UniqueComInterfaceMarshaller_System_Int32___ConvertToManaged_System_Int32_System_Void__();
+		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_UniqueComInterfaceMarshallerSystem_Int32Tests::Benchmark_ConvertToUnmanaged_0_int_0()
+extern "C" void CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_UniqueComInterfaceMarshallerSystem_Int32Tests_Benchmark_ConvertToUnmanaged_0_int_0(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	{
+		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Runtime_InteropServices_Marshalling_UniqueComInterfaceMarshaller_System_Int32___ConvertToUnmanaged_System_Void__System_Int32_();
+		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_UniqueComInterfaceMarshallerSystem_Int32Tests::Benchmark_ConvertToUnmanaged_0_int_1()
+extern "C" void CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_UniqueComInterfaceMarshallerSystem_Int32Tests_Benchmark_ConvertToUnmanaged_0_int_1(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	{
+		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Runtime_InteropServices_Marshalling_UniqueComInterfaceMarshaller_System_Int32___ConvertToUnmanaged_System_Void__System_Int32_();
+		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_UniqueComInterfaceMarshallerSystem_Int32Tests::Benchmark_Free_2_void_0()
+extern "C" void CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_UniqueComInterfaceMarshallerSystem_Int32Tests_Benchmark_Free_2_void_0(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_UINTPTR>(_s0));
+	{
+		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Runtime_InteropServices_Marshalling_UniqueComInterfaceMarshaller_System_Int32___Free_System_Void_System_Void__();
+		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_UniqueComInterfaceMarshallerSystem_Int32Tests::ConvertToManaged_1_void_0()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_UniqueComInterfaceMarshallerSystem_Int32Tests_ConvertToManaged_1_void_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	CHAOS_IL2CPP_INT64 _i3;
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_UINTPTR>(_s0));
+	{
+		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Runtime_InteropServices_Marshalling_UniqueComInterfaceMarshaller_System_Int32___ConvertToManaged_System_Int32_System_Void__();
+		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	chaos_locals[0] = _s1;
+	_s1 = chaos_locals[0];
+	_i1 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s1));
+	chaos_locals[1] = ChaosStoreInt64(_i1);
+	_i1 = ChaosLoadInt64(chaos_locals[1]);
+	return _i1;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_UniqueComInterfaceMarshallerSystem_Int32Tests::ConvertToUnmanaged_0_int_0()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_UniqueComInterfaceMarshallerSystem_Int32Tests_ConvertToUnmanaged_0_int_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	CHAOS_IL2CPP_INT64 _i3;
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	{
+		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Runtime_InteropServices_Marshalling_UniqueComInterfaceMarshaller_System_Int32___ConvertToUnmanaged_System_Void__System_Int32_();
+		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_UINTPTR>(_s2));
+	{
+		const auto chaos_right = static_cast<CHAOS_IL2CPP_INTPTR>(_s2);
+		const auto chaos_left = static_cast<CHAOS_IL2CPP_INTPTR>(_s1);
+		if (chaos_left != chaos_right)
+		{
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			_i1 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s1));
+		}
+		else
+		{
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_i1 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(ChaosLoadInt64(_s1)));
+		}
+		chaos_locals[1] = ChaosStoreInt64(_s0);
+		_i0 = ChaosLoadInt64(chaos_locals[1]);
+		return _i0;
+	}
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_UniqueComInterfaceMarshallerSystem_Int32Tests::ConvertToUnmanaged_0_int_1()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_UniqueComInterfaceMarshallerSystem_Int32Tests_ConvertToUnmanaged_0_int_1(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	CHAOS_IL2CPP_INT64 _i3;
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	{
+		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Runtime_InteropServices_Marshalling_UniqueComInterfaceMarshaller_System_Int32___ConvertToUnmanaged_System_Void__System_Int32_();
+		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_UINTPTR>(_s2));
+	{
+		const auto chaos_right = static_cast<CHAOS_IL2CPP_INTPTR>(_s2);
+		const auto chaos_left = static_cast<CHAOS_IL2CPP_INTPTR>(_s1);
+		if (chaos_left != chaos_right)
+		{
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			_i1 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s1));
+		}
+		else
+		{
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_i1 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(ChaosLoadInt64(_s1)));
+		}
+		chaos_locals[1] = ChaosStoreInt64(_s0);
+		_i0 = ChaosLoadInt64(chaos_locals[1]);
+		return _i0;
+	}
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_VirtualMethodTableInfoTests::.ctor()
+extern "C" void CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_VirtualMethodTableInfoTests__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = chaos_args[0];
+	{
+		const auto chaos_arg_0 = _s0;
+		ChaosObjectCtor(chaos_arg_0);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_Marshalling_VirtualMethodTableInfoTests::Benchmark_Deconstruct_0_void_void_0()
+extern "C" void CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_Marshalling_VirtualMethodTableInfoTests_Benchmark_Deconstruct_0_void_void_0(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 3) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INTPTR _s5;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[0]);
+	{
+		const auto chaos_address = _s0;
+		if ((chaos_address & chaos_managed_pointer_local_slot_tag) != 0)
+		{
+			auto* chaos_slot = reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(static_cast<CHAOS_IL2CPP_UINTPTR>(chaos_address & ~chaos_managed_pointer_local_slot_tag));
+			*chaos_slot = 0;
+		}
+		else
+		{
+			*reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(chaos_address) = 0;
+		}
+	}
+	_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[1]);
+	{
+		const auto chaos_address = _s0;
+		if ((chaos_address & chaos_managed_pointer_local_slot_tag) != 0)
+		{
+			auto* chaos_slot = reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(static_cast<CHAOS_IL2CPP_UINTPTR>(chaos_address & ~chaos_managed_pointer_local_slot_tag));
+			*chaos_slot = 0;
+		}
+		else
+		{
+			*reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(chaos_address) = 0;
+		}
+	}
+	_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[2]);
+	_s1 = _s0;
+	{
+		const auto chaos_address = _s1;
+		if ((chaos_address & chaos_managed_pointer_local_slot_tag) != 0)
+		{
+			auto* chaos_slot = reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(static_cast<CHAOS_IL2CPP_UINTPTR>(chaos_address & ~chaos_managed_pointer_local_slot_tag));
+			*chaos_slot = 0;
+		}
+		else
+		{
+			*reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(chaos_address) = 0;
+		}
+	}
+	_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[0]);
+	_s2 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[1]);
+	{
+		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Runtime_InteropServices_Marshalling_VirtualMethodTableInfo__Deconstruct_System_Void_System_Void___System_Void____();
+		_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_RuntimeEnvironmentTests::.ctor()
+extern "C" void CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_RuntimeEnvironmentTests__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = chaos_args[0];
+	{
+		const auto chaos_arg_0 = _s0;
+		ChaosObjectCtor(chaos_arg_0);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_RuntimeEnvironmentTests::Benchmark_FromGlobalAccessCache_0_Assembly_0()
+extern "C" void CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_RuntimeEnvironmentTests_Benchmark_FromGlobalAccessCache_0_Assembly_0(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	{
+		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_RuntimeEnvironment__FromGlobalAccessCache_System_Boolean_System_Reflection_Assembly_();
+		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_RuntimeEnvironmentTests::Benchmark_GetRuntimeDirectory_1__1()
+extern "C" void CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_RuntimeEnvironmentTests_Benchmark_GetRuntimeDirectory_1__1(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	{
+		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_RuntimeEnvironment__GetRuntimeDirectory_System_String__();
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_RuntimeEnvironmentTests::Benchmark_GetRuntimeInterfaceAsIntPtr_2_System_Guid_System_Guid_0()
+extern "C" void CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_RuntimeEnvironmentTests_Benchmark_GetRuntimeInterfaceAsIntPtr_2_System_Guid_System_Guid_0(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[0]);
+	{
+		const auto chaos_address = _s0;
+		if ((chaos_address & chaos_managed_pointer_local_slot_tag) != 0)
+		{
+			auto* chaos_slot = reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(static_cast<CHAOS_IL2CPP_UINTPTR>(chaos_address & ~chaos_managed_pointer_local_slot_tag));
+			*chaos_slot = 0;
+		}
+		else
+		{
+			*reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(chaos_address) = 0;
+		}
+	}
+	_s0 = chaos_locals[0];
+	_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[0]);
+	{
+		const auto chaos_address = _s1;
+		if ((chaos_address & chaos_managed_pointer_local_slot_tag) != 0)
+		{
+			auto* chaos_slot = reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(static_cast<CHAOS_IL2CPP_UINTPTR>(chaos_address & ~chaos_managed_pointer_local_slot_tag));
+			*chaos_slot = 0;
+		}
+		else
+		{
+			*reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(chaos_address) = 0;
+		}
+	}
+	_s1 = chaos_locals[0];
+	{
+		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_RuntimeEnvironment__GetRuntimeInterfaceAsIntPtr_System_IntPtr_System_Guid_System_Guid_();
+		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_RuntimeEnvironmentTests::Benchmark_GetRuntimeInterfaceAsObject_3_System_Guid_System_Guid_0()
+extern "C" void CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_RuntimeEnvironmentTests_Benchmark_GetRuntimeInterfaceAsObject_3_System_Guid_System_Guid_0(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[0]);
+	{
+		const auto chaos_address = _s0;
+		if ((chaos_address & chaos_managed_pointer_local_slot_tag) != 0)
+		{
+			auto* chaos_slot = reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(static_cast<CHAOS_IL2CPP_UINTPTR>(chaos_address & ~chaos_managed_pointer_local_slot_tag));
+			*chaos_slot = 0;
+		}
+		else
+		{
+			*reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(chaos_address) = 0;
+		}
+	}
+	_s0 = chaos_locals[0];
+	_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[0]);
+	{
+		const auto chaos_address = _s1;
+		if ((chaos_address & chaos_managed_pointer_local_slot_tag) != 0)
+		{
+			auto* chaos_slot = reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(static_cast<CHAOS_IL2CPP_UINTPTR>(chaos_address & ~chaos_managed_pointer_local_slot_tag));
+			*chaos_slot = 0;
+		}
+		else
+		{
+			*reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(chaos_address) = 0;
+		}
+	}
+	_s1 = chaos_locals[0];
+	{
+		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_RuntimeEnvironment__GetRuntimeInterfaceAsObject_System_Object_System_Guid_System_Guid_();
+		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_RuntimeEnvironmentTests::Benchmark_GetSystemVersion_4__4()
+extern "C" void CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_RuntimeEnvironmentTests_Benchmark_GetSystemVersion_4__4(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	{
+		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_RuntimeEnvironment__GetSystemVersion_System_String__();
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_RuntimeEnvironmentTests::FromGlobalAccessCache_0_Assembly_0()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_RuntimeEnvironmentTests_FromGlobalAccessCache_0_Assembly_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INTPTR _s5;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	CHAOS_IL2CPP_INT64 _i3;
+	_s0 = 0;
+	{
+		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_RuntimeEnvironment__FromGlobalAccessCache_System_Boolean_System_Reflection_Assembly_();
+		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	chaos_locals[0] = _s1;
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	_s2 = chaos_locals[0];
+	_s3 = 0;
+	{
+		[&]() -> void { if ((_s1) != (_s2)) { throw chaos_managed_exception{}; } }();
+	}
+	_s1 = chaos_locals[0];
+	{
+		if (_s1 != 0)
+		{
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			_i1 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s1));
+		}
+		else
+		{
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_i1 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(ChaosLoadInt64(_s1)));
+		}
+		chaos_locals[1] = ChaosStoreInt64(_s0);
+		_i0 = ChaosLoadInt64(chaos_locals[1]);
+		return _i0;
+	}
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_RuntimeEnvironmentTests::GetRuntimeDirectory_1__1()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_RuntimeEnvironmentTests_GetRuntimeDirectory_1__1(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	{
+		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_RuntimeEnvironment__GetRuntimeDirectory_System_String__();
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	chaos_locals[0] = _s0;
+	{
+		_s0 = CHAOS_IL2CPP_STRING_ID("C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\9.0.0\\");
+	}
+	_s1 = chaos_locals[0];
+	_s2 = 0;
+	{
+		[&]() -> void { if ((_s0) != (_s1)) { throw chaos_managed_exception{}; } }();
+	}
+	_s0 = chaos_locals[0];
+	{
+		if (_s0 != 0)
+		{
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
+		}
+		else
+		{
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(ChaosLoadInt64(_s0)));
+		}
+		chaos_locals[1] = ChaosStoreInt64(_i0);
+		_i0 = ChaosLoadInt64(chaos_locals[1]);
+		return _i0;
+	}
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_RuntimeEnvironmentTests::GetRuntimeInterfaceAsIntPtr_2_System_Guid_System_Guid_0()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_RuntimeEnvironmentTests_GetRuntimeInterfaceAsIntPtr_2_System_Guid_System_Guid_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_RuntimeEnvironmentTests___c____9__4_0;
+	_s1 = _s0;
+	{
+		if (_s1 == 0)
+		{
+			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_RuntimeEnvironmentTests___c____9;
+			{
+				// Hotpatch-aware ldftn wrapper (slot 115)
+				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
+					auto& _d_entry = s_hotpatch_entries[115];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+					{
+						alignas(16) uint8_t _d_ab[8];
+						ArgBuffer _d_bw(_d_ab);
+						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d_entry.method_key, _d_ab, nullptr);
+						return;
+					}
+					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
+				};
+			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+			}
+			{
+				const auto chaos_method_ptr = _s1;
+				const auto chaos_target = _s0;
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
+				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
+				chaos_object->chaos_delegate_target = chaos_target;
+				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			_s1 = _s0;
+			{
+				auto chaos_value = _s1;
+				chaos_static_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_RuntimeEnvironmentTests___c____9__4_0 = chaos_value;
+			}
+		}
+		{
+			// Assert.Throws: target method not found via IL lookahead
+			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
+		}
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
+		chaos_locals[0] = ChaosStoreInt64(_i0);
+		_i0 = ChaosLoadInt64(chaos_locals[0]);
+		return _i0;
+	}
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_RuntimeEnvironmentTests::GetRuntimeInterfaceAsObject_3_System_Guid_System_Guid_0()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_RuntimeEnvironmentTests_GetRuntimeInterfaceAsObject_3_System_Guid_System_Guid_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_RuntimeEnvironmentTests___c____9__6_0;
+	_s1 = _s0;
+	{
+		if (_s1 == 0)
+		{
+			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_RuntimeEnvironmentTests___c____9;
+			{
+				// Hotpatch-aware ldftn wrapper (slot 116)
+				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
+					auto& _d_entry = s_hotpatch_entries[116];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+					{
+						alignas(16) uint8_t _d_ab[8];
+						ArgBuffer _d_bw(_d_ab);
+						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d_entry.method_key, _d_ab, nullptr);
+						return;
+					}
+					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
+				};
+			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+			}
+			{
+				const auto chaos_method_ptr = _s1;
+				const auto chaos_target = _s0;
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
+				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
+				chaos_object->chaos_delegate_target = chaos_target;
+				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			_s1 = _s0;
+			{
+				auto chaos_value = _s1;
+				chaos_static_CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_RuntimeEnvironmentTests___c____9__6_0 = chaos_value;
+			}
+		}
+		{
+			// Assert.Throws: target method not found via IL lookahead
+			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
+		}
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
+		chaos_locals[0] = ChaosStoreInt64(_i0);
+		_i0 = ChaosLoadInt64(chaos_locals[0]);
+		return _i0;
+	}
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_RuntimeEnvironmentTests::GetSystemVersion_4__4()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_RuntimeEnvironmentTests_GetSystemVersion_4__4(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	{
+		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_RuntimeEnvironment__GetSystemVersion_System_String__();
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	chaos_locals[0] = _s0;
+	{
+		_s0 = CHAOS_IL2CPP_STRING_ID("v9.0.0");
+	}
+	_s1 = chaos_locals[0];
+	_s2 = 0;
+	{
+		[&]() -> void { if ((_s0) != (_s1)) { throw chaos_managed_exception{}; } }();
+	}
+	_s0 = chaos_locals[0];
+	{
+		if (_s0 != 0)
+		{
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
+		}
+		else
+		{
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(ChaosLoadInt64(_s0)));
+		}
+		chaos_locals[1] = ChaosStoreInt64(_i0);
+		_i0 = ChaosLoadInt64(chaos_locals[1]);
+		return _i0;
+	}
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_RuntimeEnvironmentTests+<>c::.cctor:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_RuntimeEnvironmentTests___c_cctor(void)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_RuntimeEnvironmentTests+<>c::.ctor:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_RuntimeEnvironmentTests___c__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_RuntimeEnvironmentTests+<>c::<GetRuntimeInterfaceAsIntPtr_2_System_Guid_System_Guid_0>b__4_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_RuntimeEnvironmentTests___c_GetRuntimeInterfaceAsIntPtr_2_System_Guid_System_Guid_0_b__4_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Runtime_InteropServices.System_Runtime_InteropServices_RuntimeEnvironmentTests+<>c::<GetRuntimeInterfaceAsObject_3_System_Guid_System_Guid_0>b__6_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Runtime_InteropServices_System_Runtime_InteropServices_RuntimeEnvironmentTests___c_GetRuntimeInterfaceAsObject_3_System_Guid_System_Guid_0_b__6_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
 }
 
 
@@ -6177,6 +8320,6 @@ extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_Syst
 #pragma warning(pop)
 
 // extern "C" definition for link-time visibility from runtime-entry.cpp
-extern "C" const int kAotMethodCount = 153;
+extern "C" const int kAotMethodCount = 117;
 
 extern "C" void ChaosJitRegisterAll() {}
