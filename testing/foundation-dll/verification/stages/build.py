@@ -24,6 +24,7 @@ from pathlib import Path
 from typing import Any
 
 from verification.orchestration.context import ChunkContext, StageResult
+from verification.stages.runtime_entry_patcher import patch_runtime_entry
 
 from verification.stages.hephaestus_cache import HephaestusCache, compute_input_hash
 
@@ -820,6 +821,11 @@ def run_build(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
             if patched:
                 rcpp.write_text(content, encoding="utf-8")
                 print(f"  [build] Patched runtime-entry.cpp with interop stub registrations")
+            # Apply runtime entry patches
+            content, rp_patched = patch_runtime_entry(content)
+            if rp_patched:
+                patched = True
+                rcpp.write_text(content, encoding="utf-8")
 
         return StageResult(
             stage="build", status="error",
