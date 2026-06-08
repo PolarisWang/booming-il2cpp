@@ -90,14 +90,26 @@ def compare_profile_data(
     total_compared = 0
 
     # Resolve by methodSubjectId from metadata
+    # AOT profile data uses methodIndex; metadata maps index→methodSubjectId
     if metadata_methods:
+        # Build index→msid mapping from metadata
+        index_to_msid = {m.get("index"): m.get("methodSubjectId", "") for m in metadata_methods if m.get("index") is not None}
+
         for meta in metadata_methods:
             msid = meta.get("methodSubjectId", "")
             if not msid:
                 continue
             profile = profile_map.get(msid)
             managed_gi = managed_map.get(msid)
-            if not profile or not managed_gi:
+            if not managed_gi:
+                continue
+
+            # If AOT profile not found by subjectId, try by methodIndex
+            if not profile:
+                aot_idx = meta.get("index")
+                if aot_idx is not None:
+                    profile = profile_map.get(f"_index_{aot_idx}")
+            if not profile:
                 continue
 
             total_compared += 1
