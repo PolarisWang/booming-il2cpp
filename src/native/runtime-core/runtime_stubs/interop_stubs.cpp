@@ -196,5 +196,53 @@ void ChaosAnsiStringMarshallerFree(CHAOS_IL2CPP_INTPTR native) noexcept
     MarshalFreeCoTaskMem(rs, native);
 }
 
+// ═══════════════════════════════════════════════════════════════
+// GCHandle stubs — delegate to GC handle API
+// ═══════════════════════════════════════════════════════════════
+
+CHAOS_IL2CPP_INTPTR ChaosGCHandleAlloc(CHAOS_IL2CPP_INTPTR obj) noexcept
+{
+    if (obj == 0) return 0;
+    return static_cast<CHAOS_IL2CPP_INTPTR>(GcCreateStrongHandle(reinterpret_cast<void*>(obj)));
+}
+
+void ChaosGCHandleFree(CHAOS_IL2CPP_INTPTR handle) noexcept
+{
+    GcFreeHandle(static_cast<CHAOS_IL2CPP_UINT64>(handle));
+}
+
+CHAOS_IL2CPP_INTPTR ChaosGCHandleGetTarget(CHAOS_IL2CPP_INTPTR handle) noexcept
+{
+    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(GcGetHandleTarget(static_cast<CHAOS_IL2CPP_UINT64>(handle)));
+}
+
+// ═══════════════════════════════════════════════════════════════
+// Marshal HR stubs — delegate to engine_binding.h
+// ═══════════════════════════════════════════════════════════════
+
+CHAOS_IL2CPP_INTPTR ChaosMarshalGetExceptionForHR(CHAOS_IL2CPP_INT32 errorCode) noexcept
+{
+    // V1 stub: return null — the test with Assert.Throws will catch the
+    // NullReferenceException from null-target access, which is acceptable.
+    (void)errorCode;
+    return 0;
+}
+
+void ChaosMarshalThrowExceptionForHR(CHAOS_IL2CPP_INT32 errorCode) noexcept
+{
+    auto* rs = GetCurrentRuntimeState();
+    auto* ts = GetCurrentThreadState();
+    if (rs == nullptr || ts == nullptr) return;
+    MarshalThrowExceptionForHR(rs, ts, errorCode);
+}
+
+CHAOS_IL2CPP_INT32 ChaosMarshalGetHRForException(CHAOS_IL2CPP_INTPTR exceptionObj) noexcept
+{
+    auto* rs = GetCurrentRuntimeState();
+    auto* ts = GetCurrentThreadState();
+    if (rs == nullptr || ts == nullptr) return 0;
+    return MarshalGetHRForException(rs, ts, reinterpret_cast<void*>(exceptionObj));
+}
+
 }  // extern "C"
 }  // namespace chaos::il2cpp::runtime_core

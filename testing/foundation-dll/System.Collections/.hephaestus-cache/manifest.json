@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "max_entries": 50,
+  "entries": [
+    {
+      "cache_key": "System.Collections/global-ns/9116126b50684e95",
+      "assembly": "System.Collections",
+      "chunk_slug": "global-ns",
+      "input_hash": "9116126b50684e95e909bdbff4ca132f82f62115823fd871211346f974b351e3",
+      "cached_at": "2026-06-07T13:40:42Z",
+      "duration_ms": 13454,
+      "commit_hash": "1964a52a2",
+      "entry_exe_size": 3435520,
+      "entry_count": 528,
+      "status": "valid"
+    }
+  ]
+}

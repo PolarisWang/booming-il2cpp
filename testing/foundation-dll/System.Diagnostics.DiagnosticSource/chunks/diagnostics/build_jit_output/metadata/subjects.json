@@ -1,0 +1,1310 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-06-07T14:19:03.0303718Z",
+  "generator": "Chaos.IL2CPP.Tools.TestProjectGenerator",
+  "entryExecutable": "entry",
+  "subjects": [
+    {
+      "index": 0,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Activity::SetStatus:System.Diagnostics.Activity(System.Diagnostics.ActivityStatusCode,System.String)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Activity",
+      "methodName": "SetStatus",
+      "isStatic": true
+    },
+    {
+      "index": 1,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Activity::SetStatus:System.Diagnostics.Activity(System.Diagnostics.ActivityStatusCode,System.String)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Activity",
+      "methodName": "SetStatus",
+      "isStatic": true
+    },
+    {
+      "index": 2,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Activity::GetBaggageItem:System.String(System.String)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Activity",
+      "methodName": "GetBaggageItem",
+      "isStatic": true
+    },
+    {
+      "index": 3,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Activity::GetBaggageItem:System.String(System.String)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Activity",
+      "methodName": "GetBaggageItem",
+      "isStatic": true
+    },
+    {
+      "index": 4,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Activity::GetTagItem:System.Object(System.String)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Activity",
+      "methodName": "GetTagItem",
+      "isStatic": true
+    },
+    {
+      "index": 5,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Activity::GetTagItem:System.Object(System.String)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Activity",
+      "methodName": "GetTagItem",
+      "isStatic": true
+    },
+    {
+      "index": 6,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Activity::AddTag:System.Diagnostics.Activity(System.String,System.String)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Activity",
+      "methodName": "AddTag",
+      "isStatic": true
+    },
+    {
+      "index": 7,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Activity::AddTag:System.Diagnostics.Activity(System.String,System.String)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Activity",
+      "methodName": "AddTag",
+      "isStatic": true
+    },
+    {
+      "index": 8,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Activity::AddTag:System.Diagnostics.Activity(System.String,System.String)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Activity",
+      "methodName": "AddTag",
+      "isStatic": true
+    },
+    {
+      "index": 9,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Activity::AddTag:System.Diagnostics.Activity(System.String,System.Object)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Activity",
+      "methodName": "AddTag",
+      "isStatic": true
+    },
+    {
+      "index": 10,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Activity::AddTag:System.Diagnostics.Activity(System.String,System.Object)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Activity",
+      "methodName": "AddTag",
+      "isStatic": true
+    },
+    {
+      "index": 11,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Activity::SetTag:System.Diagnostics.Activity(System.String,System.Object)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Activity",
+      "methodName": "SetTag",
+      "isStatic": true
+    },
+    {
+      "index": 12,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Activity::SetTag:System.Diagnostics.Activity(System.String,System.Object)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Activity",
+      "methodName": "SetTag",
+      "isStatic": true
+    },
+    {
+      "index": 13,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Activity::AddEvent:System.Diagnostics.Activity(System.Diagnostics.ActivityEvent)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Activity",
+      "methodName": "AddEvent",
+      "isStatic": true
+    },
+    {
+      "index": 14,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Activity::AddException:System.Diagnostics.Activity(System.Exception,System.Diagnostics.TagList,System.DateTimeOffset)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Activity",
+      "methodName": "AddException",
+      "isStatic": true
+    },
+    {
+      "index": 15,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Activity::AddLink:System.Diagnostics.Activity(System.Diagnostics.ActivityLink)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Activity",
+      "methodName": "AddLink",
+      "isStatic": true
+    },
+    {
+      "index": 16,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Activity::AddBaggage:System.Diagnostics.Activity(System.String,System.String)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Activity",
+      "methodName": "AddBaggage",
+      "isStatic": true
+    },
+    {
+      "index": 17,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Activity::AddBaggage:System.Diagnostics.Activity(System.String,System.String)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Activity",
+      "methodName": "AddBaggage",
+      "isStatic": true
+    },
+    {
+      "index": 18,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Activity::AddBaggage:System.Diagnostics.Activity(System.String,System.String)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Activity",
+      "methodName": "AddBaggage",
+      "isStatic": true
+    },
+    {
+      "index": 19,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Activity::SetBaggage:System.Diagnostics.Activity(System.String,System.String)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Activity",
+      "methodName": "SetBaggage",
+      "isStatic": true
+    },
+    {
+      "index": 20,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Activity::SetBaggage:System.Diagnostics.Activity(System.String,System.String)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Activity",
+      "methodName": "SetBaggage",
+      "isStatic": true
+    },
+    {
+      "index": 21,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Activity::SetBaggage:System.Diagnostics.Activity(System.String,System.String)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Activity",
+      "methodName": "SetBaggage",
+      "isStatic": true
+    },
+    {
+      "index": 22,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Activity::SetParentId:System.Diagnostics.Activity(System.String)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Activity",
+      "methodName": "SetParentId",
+      "isStatic": true
+    },
+    {
+      "index": 23,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Activity::SetParentId:System.Diagnostics.Activity(System.String)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Activity",
+      "methodName": "SetParentId",
+      "isStatic": true
+    },
+    {
+      "index": 24,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Activity::SetParentId:System.Diagnostics.Activity(System.Diagnostics.ActivityTraceId,System.Diagnostics.ActivitySpanId,System.Diagnostics.ActivityTraceFlags)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Activity",
+      "methodName": "SetParentId",
+      "isStatic": true
+    },
+    {
+      "index": 25,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Activity::SetStartTime:System.Diagnostics.Activity(System.DateTime)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Activity",
+      "methodName": "SetStartTime",
+      "isStatic": true
+    },
+    {
+      "index": 26,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Activity::SetEndTime:System.Diagnostics.Activity(System.DateTime)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Activity",
+      "methodName": "SetEndTime",
+      "isStatic": true
+    },
+    {
+      "index": 27,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Activity::Stop:System.Void()",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Activity",
+      "methodName": "Stop",
+      "isStatic": true
+    },
+    {
+      "index": 28,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Activity::SetIdFormat:System.Diagnostics.Activity(System.Diagnostics.ActivityIdFormat)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Activity",
+      "methodName": "SetIdFormat",
+      "isStatic": true
+    },
+    {
+      "index": 29,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Activity::SetCustomProperty:System.Void(System.String,System.Object)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Activity",
+      "methodName": "SetCustomProperty",
+      "isStatic": true
+    },
+    {
+      "index": 30,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Activity::SetCustomProperty:System.Void(System.String,System.Object)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Activity",
+      "methodName": "SetCustomProperty",
+      "isStatic": true
+    },
+    {
+      "index": 31,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Activity::GetCustomProperty:System.Object(System.String)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Activity",
+      "methodName": "GetCustomProperty",
+      "isStatic": true
+    },
+    {
+      "index": 32,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Activity::GetCustomProperty:System.Object(System.String)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Activity",
+      "methodName": "GetCustomProperty",
+      "isStatic": true
+    },
+    {
+      "index": 33,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivityContext::TryParse:System.Boolean(System.String,System.String,System.Boolean,System.Diagnostics.ActivityContext)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.ActivityContext",
+      "methodName": "TryParse",
+      "isStatic": true
+    },
+    {
+      "index": 34,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivityContext::TryParse:System.Boolean(System.String,System.String,System.Boolean,System.Diagnostics.ActivityContext)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.ActivityContext",
+      "methodName": "TryParse",
+      "isStatic": true
+    },
+    {
+      "index": 35,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivityContext::TryParse:System.Boolean(System.String,System.String,System.Boolean,System.Diagnostics.ActivityContext)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.ActivityContext",
+      "methodName": "TryParse",
+      "isStatic": true
+    },
+    {
+      "index": 36,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivityContext::TryParse:System.Boolean(System.String,System.String,System.Boolean,System.Diagnostics.ActivityContext)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.ActivityContext",
+      "methodName": "TryParse",
+      "isStatic": true
+    },
+    {
+      "index": 37,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivityContext::TryParse:System.Boolean(System.String,System.String,System.Diagnostics.ActivityContext)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.ActivityContext",
+      "methodName": "TryParse",
+      "isStatic": true
+    },
+    {
+      "index": 38,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivityContext::TryParse:System.Boolean(System.String,System.String,System.Diagnostics.ActivityContext)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.ActivityContext",
+      "methodName": "TryParse",
+      "isStatic": true
+    },
+    {
+      "index": 39,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivityContext::TryParse:System.Boolean(System.String,System.String,System.Diagnostics.ActivityContext)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.ActivityContext",
+      "methodName": "TryParse",
+      "isStatic": true
+    },
+    {
+      "index": 40,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivityContext::Parse:System.Diagnostics.ActivityContext(System.String,System.String)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.ActivityContext",
+      "methodName": "Parse",
+      "isStatic": true
+    },
+    {
+      "index": 41,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivityContext::Parse:System.Diagnostics.ActivityContext(System.String,System.String)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.ActivityContext",
+      "methodName": "Parse",
+      "isStatic": true
+    },
+    {
+      "index": 42,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivityContext::Parse:System.Diagnostics.ActivityContext(System.String,System.String)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.ActivityContext",
+      "methodName": "Parse",
+      "isStatic": true
+    },
+    {
+      "index": 43,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivityListener::Dispose:System.Void()",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.ActivityListener",
+      "methodName": "Dispose",
+      "isStatic": true
+    },
+    {
+      "index": 44,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivitySource::HasListeners:System.Boolean()",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.ActivitySource",
+      "methodName": "HasListeners",
+      "isStatic": true
+    },
+    {
+      "index": 45,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivitySource::CreateActivity:System.Diagnostics.Activity(System.String,System.Diagnostics.ActivityKind)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.ActivitySource",
+      "methodName": "CreateActivity",
+      "isStatic": true
+    },
+    {
+      "index": 46,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivitySource::CreateActivity:System.Diagnostics.Activity(System.String,System.Diagnostics.ActivityKind)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.ActivitySource",
+      "methodName": "CreateActivity",
+      "isStatic": true
+    },
+    {
+      "index": 47,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivitySource::CreateActivity:System.Diagnostics.Activity(System.String,System.Diagnostics.ActivityKind,System.Diagnostics.ActivityContext,System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E,System.Collections.Generic.IEnumerable\u003CSystem.Diagnostics.ActivityLink\u003E,System.Diagnostics.ActivityIdFormat)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.ActivitySource",
+      "methodName": "CreateActivity",
+      "isStatic": true
+    },
+    {
+      "index": 48,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivitySource::CreateActivity:System.Diagnostics.Activity(System.String,System.Diagnostics.ActivityKind,System.Diagnostics.ActivityContext,System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E,System.Collections.Generic.IEnumerable\u003CSystem.Diagnostics.ActivityLink\u003E,System.Diagnostics.ActivityIdFormat)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.ActivitySource",
+      "methodName": "CreateActivity",
+      "isStatic": true
+    },
+    {
+      "index": 49,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivitySource::CreateActivity:System.Diagnostics.Activity(System.String,System.Diagnostics.ActivityKind,System.Diagnostics.ActivityContext,System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E,System.Collections.Generic.IEnumerable\u003CSystem.Diagnostics.ActivityLink\u003E,System.Diagnostics.ActivityIdFormat)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.ActivitySource",
+      "methodName": "CreateActivity",
+      "isStatic": true
+    },
+    {
+      "index": 50,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivitySource::CreateActivity:System.Diagnostics.Activity(System.String,System.Diagnostics.ActivityKind,System.String,System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E,System.Collections.Generic.IEnumerable\u003CSystem.Diagnostics.ActivityLink\u003E,System.Diagnostics.ActivityIdFormat)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.ActivitySource",
+      "methodName": "CreateActivity",
+      "isStatic": true
+    },
+    {
+      "index": 51,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivitySource::CreateActivity:System.Diagnostics.Activity(System.String,System.Diagnostics.ActivityKind,System.String,System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E,System.Collections.Generic.IEnumerable\u003CSystem.Diagnostics.ActivityLink\u003E,System.Diagnostics.ActivityIdFormat)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.ActivitySource",
+      "methodName": "CreateActivity",
+      "isStatic": true
+    },
+    {
+      "index": 52,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivitySource::CreateActivity:System.Diagnostics.Activity(System.String,System.Diagnostics.ActivityKind,System.String,System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E,System.Collections.Generic.IEnumerable\u003CSystem.Diagnostics.ActivityLink\u003E,System.Diagnostics.ActivityIdFormat)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.ActivitySource",
+      "methodName": "CreateActivity",
+      "isStatic": true
+    },
+    {
+      "index": 53,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivitySource::CreateActivity:System.Diagnostics.Activity(System.String,System.Diagnostics.ActivityKind,System.String,System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E,System.Collections.Generic.IEnumerable\u003CSystem.Diagnostics.ActivityLink\u003E,System.Diagnostics.ActivityIdFormat)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.ActivitySource",
+      "methodName": "CreateActivity",
+      "isStatic": true
+    },
+    {
+      "index": 54,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivitySource::StartActivity:System.Diagnostics.Activity(System.String,System.Diagnostics.ActivityKind)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.ActivitySource",
+      "methodName": "StartActivity",
+      "isStatic": true
+    },
+    {
+      "index": 55,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivitySource::StartActivity:System.Diagnostics.Activity(System.String,System.Diagnostics.ActivityKind)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.ActivitySource",
+      "methodName": "StartActivity",
+      "isStatic": true
+    },
+    {
+      "index": 56,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivitySource::StartActivity:System.Diagnostics.Activity(System.String,System.Diagnostics.ActivityKind,System.Diagnostics.ActivityContext,System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E,System.Collections.Generic.IEnumerable\u003CSystem.Diagnostics.ActivityLink\u003E,System.DateTimeOffset)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.ActivitySource",
+      "methodName": "StartActivity",
+      "isStatic": true
+    },
+    {
+      "index": 57,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivitySource::StartActivity:System.Diagnostics.Activity(System.String,System.Diagnostics.ActivityKind,System.Diagnostics.ActivityContext,System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E,System.Collections.Generic.IEnumerable\u003CSystem.Diagnostics.ActivityLink\u003E,System.DateTimeOffset)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.ActivitySource",
+      "methodName": "StartActivity",
+      "isStatic": true
+    },
+    {
+      "index": 58,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivitySource::StartActivity:System.Diagnostics.Activity(System.String,System.Diagnostics.ActivityKind,System.Diagnostics.ActivityContext,System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E,System.Collections.Generic.IEnumerable\u003CSystem.Diagnostics.ActivityLink\u003E,System.DateTimeOffset)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.ActivitySource",
+      "methodName": "StartActivity",
+      "isStatic": true
+    },
+    {
+      "index": 59,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivitySource::StartActivity:System.Diagnostics.Activity(System.String,System.Diagnostics.ActivityKind,System.String,System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E,System.Collections.Generic.IEnumerable\u003CSystem.Diagnostics.ActivityLink\u003E,System.DateTimeOffset)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.ActivitySource",
+      "methodName": "StartActivity",
+      "isStatic": true
+    },
+    {
+      "index": 60,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivitySource::StartActivity:System.Diagnostics.Activity(System.String,System.Diagnostics.ActivityKind,System.String,System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E,System.Collections.Generic.IEnumerable\u003CSystem.Diagnostics.ActivityLink\u003E,System.DateTimeOffset)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.ActivitySource",
+      "methodName": "StartActivity",
+      "isStatic": true
+    },
+    {
+      "index": 61,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivitySource::StartActivity:System.Diagnostics.Activity(System.String,System.Diagnostics.ActivityKind,System.String,System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E,System.Collections.Generic.IEnumerable\u003CSystem.Diagnostics.ActivityLink\u003E,System.DateTimeOffset)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.ActivitySource",
+      "methodName": "StartActivity",
+      "isStatic": true
+    },
+    {
+      "index": 62,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivitySource::StartActivity:System.Diagnostics.Activity(System.String,System.Diagnostics.ActivityKind,System.String,System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E,System.Collections.Generic.IEnumerable\u003CSystem.Diagnostics.ActivityLink\u003E,System.DateTimeOffset)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.ActivitySource",
+      "methodName": "StartActivity",
+      "isStatic": true
+    },
+    {
+      "index": 63,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivitySource::StartActivity:System.Diagnostics.Activity(System.Diagnostics.ActivityKind,System.Diagnostics.ActivityContext,System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E,System.Collections.Generic.IEnumerable\u003CSystem.Diagnostics.ActivityLink\u003E,System.DateTimeOffset,System.String)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.ActivitySource",
+      "methodName": "StartActivity",
+      "isStatic": true
+    },
+    {
+      "index": 64,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivitySource::StartActivity:System.Diagnostics.Activity(System.Diagnostics.ActivityKind,System.Diagnostics.ActivityContext,System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E,System.Collections.Generic.IEnumerable\u003CSystem.Diagnostics.ActivityLink\u003E,System.DateTimeOffset,System.String)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.ActivitySource",
+      "methodName": "StartActivity",
+      "isStatic": true
+    },
+    {
+      "index": 65,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivitySource::Dispose:System.Void()",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.ActivitySource",
+      "methodName": "Dispose",
+      "isStatic": true
+    },
+    {
+      "index": 66,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivitySource::AddActivityListener:System.Void(System.Diagnostics.ActivityListener)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.ActivitySource",
+      "methodName": "AddActivityListener",
+      "isStatic": true
+    },
+    {
+      "index": 67,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivitySpanId::CreateRandom:System.Diagnostics.ActivitySpanId()",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.ActivitySpanId",
+      "methodName": "CreateRandom",
+      "isStatic": true
+    },
+    {
+      "index": 68,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivitySpanId::ToHexString:System.String()",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.ActivitySpanId",
+      "methodName": "ToHexString",
+      "isStatic": true
+    },
+    {
+      "index": 69,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivityTagsCollection::Add:System.Void(System.String,System.Object)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.ActivityTagsCollection",
+      "methodName": "Add",
+      "isStatic": true
+    },
+    {
+      "index": 70,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivityTagsCollection::Add:System.Void(System.String,System.Object)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.ActivityTagsCollection",
+      "methodName": "Add",
+      "isStatic": true
+    },
+    {
+      "index": 71,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivityTagsCollection::Add:System.Void(System.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.ActivityTagsCollection",
+      "methodName": "Add",
+      "isStatic": true
+    },
+    {
+      "index": 72,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivityTagsCollection::Clear:System.Void()",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.ActivityTagsCollection",
+      "methodName": "Clear",
+      "isStatic": true
+    },
+    {
+      "index": 73,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivityTagsCollection::Contains:System.Boolean(System.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.ActivityTagsCollection",
+      "methodName": "Contains",
+      "isStatic": true
+    },
+    {
+      "index": 74,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivityTagsCollection::ContainsKey:System.Boolean(System.String)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.ActivityTagsCollection",
+      "methodName": "ContainsKey",
+      "isStatic": true
+    },
+    {
+      "index": 75,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivityTagsCollection::ContainsKey:System.Boolean(System.String)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.ActivityTagsCollection",
+      "methodName": "ContainsKey",
+      "isStatic": true
+    },
+    {
+      "index": 76,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivityTagsCollection::CopyTo:System.Void(System.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E[],System.Int32)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.ActivityTagsCollection",
+      "methodName": "CopyTo",
+      "isStatic": true
+    },
+    {
+      "index": 77,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivityTagsCollection::CopyTo:System.Void(System.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E[],System.Int32)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.ActivityTagsCollection",
+      "methodName": "CopyTo",
+      "isStatic": true
+    },
+    {
+      "index": 78,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivityTagsCollection::CopyTo:System.Void(System.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E[],System.Int32)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.ActivityTagsCollection",
+      "methodName": "CopyTo",
+      "isStatic": true
+    },
+    {
+      "index": 79,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivityTagsCollection::CopyTo:System.Void(System.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E[],System.Int32)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.ActivityTagsCollection",
+      "methodName": "CopyTo",
+      "isStatic": true
+    },
+    {
+      "index": 80,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivityTagsCollection::Remove:System.Boolean(System.String)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.ActivityTagsCollection",
+      "methodName": "Remove",
+      "isStatic": true
+    },
+    {
+      "index": 81,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivityTagsCollection::Remove:System.Boolean(System.String)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.ActivityTagsCollection",
+      "methodName": "Remove",
+      "isStatic": true
+    },
+    {
+      "index": 82,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivityTagsCollection::Remove:System.Boolean(System.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.ActivityTagsCollection",
+      "methodName": "Remove",
+      "isStatic": true
+    },
+    {
+      "index": 83,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivityTagsCollection::TryGetValue:System.Boolean(System.String,System.Object)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.ActivityTagsCollection",
+      "methodName": "TryGetValue",
+      "isStatic": true
+    },
+    {
+      "index": 84,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivityTagsCollection::TryGetValue:System.Boolean(System.String,System.Object)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.ActivityTagsCollection",
+      "methodName": "TryGetValue",
+      "isStatic": true
+    },
+    {
+      "index": 85,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivityTraceId::CreateRandom:System.Diagnostics.ActivityTraceId()",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.ActivityTraceId",
+      "methodName": "CreateRandom",
+      "isStatic": true
+    },
+    {
+      "index": 86,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivityTraceId::ToHexString:System.String()",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.ActivityTraceId",
+      "methodName": "ToHexString",
+      "isStatic": true
+    },
+    {
+      "index": 87,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.DiagnosticListener::OnActivityImport:System.Void(System.Diagnostics.Activity,System.Object)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.DiagnosticListener",
+      "methodName": "OnActivityImport",
+      "isStatic": true
+    },
+    {
+      "index": 88,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.DiagnosticListener::OnActivityExport:System.Void(System.Diagnostics.Activity,System.Object)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.DiagnosticListener",
+      "methodName": "OnActivityExport",
+      "isStatic": true
+    },
+    {
+      "index": 89,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.DiagnosticListener::Subscribe:System.IDisposable(System.IObserver\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E,System.Func\u003CSystem.String,System.Object,System.Object,System.Boolean\u003E,System.Action\u003CSystem.Diagnostics.Activity,System.Object\u003E,System.Action\u003CSystem.Diagnostics.Activity,System.Object\u003E)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.DiagnosticListener",
+      "methodName": "Subscribe",
+      "isStatic": true
+    },
+    {
+      "index": 90,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.DiagnosticListener::Subscribe:System.IDisposable(System.IObserver\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E,System.Func\u003CSystem.String,System.Object,System.Object,System.Boolean\u003E,System.Action\u003CSystem.Diagnostics.Activity,System.Object\u003E,System.Action\u003CSystem.Diagnostics.Activity,System.Object\u003E)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.DiagnosticListener",
+      "methodName": "Subscribe",
+      "isStatic": true
+    },
+    {
+      "index": 91,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.DiagnosticListener::Subscribe:System.IDisposable(System.IObserver\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E,System.Predicate\u003CSystem.String\u003E)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.DiagnosticListener",
+      "methodName": "Subscribe",
+      "isStatic": true
+    },
+    {
+      "index": 92,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.DiagnosticListener::Subscribe:System.IDisposable(System.IObserver\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E,System.Predicate\u003CSystem.String\u003E)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.DiagnosticListener",
+      "methodName": "Subscribe",
+      "isStatic": true
+    },
+    {
+      "index": 93,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.DiagnosticListener::Subscribe:System.IDisposable(System.IObserver\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E,System.Func\u003CSystem.String,System.Object,System.Object,System.Boolean\u003E)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.DiagnosticListener",
+      "methodName": "Subscribe",
+      "isStatic": true
+    },
+    {
+      "index": 94,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.DiagnosticListener::Subscribe:System.IDisposable(System.IObserver\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E,System.Func\u003CSystem.String,System.Object,System.Object,System.Boolean\u003E)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.DiagnosticListener",
+      "methodName": "Subscribe",
+      "isStatic": true
+    },
+    {
+      "index": 95,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.DiagnosticListener::Subscribe:System.IDisposable(System.IObserver\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.DiagnosticListener",
+      "methodName": "Subscribe",
+      "isStatic": true
+    },
+    {
+      "index": 96,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.DiagnosticListener::Dispose:System.Void()",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.DiagnosticListener",
+      "methodName": "Dispose",
+      "isStatic": true
+    },
+    {
+      "index": 97,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.DiagnosticListener::IsEnabled:System.Boolean()",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.DiagnosticListener",
+      "methodName": "IsEnabled",
+      "isStatic": true
+    },
+    {
+      "index": 98,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.DiagnosticListener::IsEnabled:System.Boolean(System.String)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.DiagnosticListener",
+      "methodName": "IsEnabled",
+      "isStatic": true
+    },
+    {
+      "index": 99,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.DiagnosticListener::IsEnabled:System.Boolean(System.String)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.DiagnosticListener",
+      "methodName": "IsEnabled",
+      "isStatic": true
+    },
+    {
+      "index": 100,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.DiagnosticListener::IsEnabled:System.Boolean(System.String,System.Object,System.Object)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.DiagnosticListener",
+      "methodName": "IsEnabled",
+      "isStatic": true
+    },
+    {
+      "index": 101,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.DiagnosticListener::IsEnabled:System.Boolean(System.String,System.Object,System.Object)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.DiagnosticListener",
+      "methodName": "IsEnabled",
+      "isStatic": true
+    },
+    {
+      "index": 102,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.DiagnosticListener::Write:System.Void(System.String,System.Object)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.DiagnosticListener",
+      "methodName": "Write",
+      "isStatic": true
+    },
+    {
+      "index": 103,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.DiagnosticListener::Write:System.Void(System.String,System.Object)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.DiagnosticListener",
+      "methodName": "Write",
+      "isStatic": true
+    },
+    {
+      "index": 104,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.DiagnosticSource::Write:System.Void(System.String,System.Object)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.DiagnosticSource",
+      "methodName": "Write",
+      "isStatic": true
+    },
+    {
+      "index": 105,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.DiagnosticSource::Write:System.Void(System.String,System.Object)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.DiagnosticSource",
+      "methodName": "Write",
+      "isStatic": true
+    },
+    {
+      "index": 106,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.DiagnosticSource::Write:System.Void(System.String,System.Int32)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.DiagnosticSource",
+      "methodName": "Write",
+      "isStatic": true
+    },
+    {
+      "index": 107,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.DiagnosticSource::Write:System.Void(System.String,System.Int32)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.DiagnosticSource",
+      "methodName": "Write",
+      "isStatic": true
+    },
+    {
+      "index": 108,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.DiagnosticSource::Write:System.Void(System.String,System.Int32)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.DiagnosticSource",
+      "methodName": "Write",
+      "isStatic": true
+    },
+    {
+      "index": 109,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.DiagnosticSource::IsEnabled:System.Boolean(System.String)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.DiagnosticSource",
+      "methodName": "IsEnabled",
+      "isStatic": true
+    },
+    {
+      "index": 110,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.DiagnosticSource::IsEnabled:System.Boolean(System.String)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.DiagnosticSource",
+      "methodName": "IsEnabled",
+      "isStatic": true
+    },
+    {
+      "index": 111,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.DiagnosticSource::IsEnabled:System.Boolean(System.String,System.Object,System.Object)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.DiagnosticSource",
+      "methodName": "IsEnabled",
+      "isStatic": true
+    },
+    {
+      "index": 112,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.DiagnosticSource::IsEnabled:System.Boolean(System.String,System.Object,System.Object)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.DiagnosticSource",
+      "methodName": "IsEnabled",
+      "isStatic": true
+    },
+    {
+      "index": 113,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.DiagnosticSource::StartActivity:System.Diagnostics.Activity(System.Diagnostics.Activity,System.Object)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.DiagnosticSource",
+      "methodName": "StartActivity",
+      "isStatic": true
+    },
+    {
+      "index": 114,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.DiagnosticSource::StartActivity:System.Diagnostics.Activity(System.Diagnostics.Activity,System.Int32)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.DiagnosticSource",
+      "methodName": "StartActivity",
+      "isStatic": true
+    },
+    {
+      "index": 115,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.DiagnosticSource::StartActivity:System.Diagnostics.Activity(System.Diagnostics.Activity,System.Int32)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.DiagnosticSource",
+      "methodName": "StartActivity",
+      "isStatic": true
+    },
+    {
+      "index": 116,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.DiagnosticSource::StopActivity:System.Void(System.Diagnostics.Activity,System.Object)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.DiagnosticSource",
+      "methodName": "StopActivity",
+      "isStatic": true
+    },
+    {
+      "index": 117,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.DiagnosticSource::StopActivity:System.Void(System.Diagnostics.Activity,System.Int32)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.DiagnosticSource",
+      "methodName": "StopActivity",
+      "isStatic": true
+    },
+    {
+      "index": 118,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.DiagnosticSource::StopActivity:System.Void(System.Diagnostics.Activity,System.Int32)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.DiagnosticSource",
+      "methodName": "StopActivity",
+      "isStatic": true
+    },
+    {
+      "index": 119,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.DiagnosticSource::OnActivityImport:System.Void(System.Diagnostics.Activity,System.Object)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.DiagnosticSource",
+      "methodName": "OnActivityImport",
+      "isStatic": true
+    },
+    {
+      "index": 120,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.DiagnosticSource::OnActivityExport:System.Void(System.Diagnostics.Activity,System.Object)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.DiagnosticSource",
+      "methodName": "OnActivityExport",
+      "isStatic": true
+    },
+    {
+      "index": 121,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.DistributedContextPropagator::Inject:System.Void(System.Diagnostics.Activity,System.Object,DistributedContextPropagator.PropagatorSetterCallback)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.DistributedContextPropagator",
+      "methodName": "Inject",
+      "isStatic": true
+    },
+    {
+      "index": 122,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.DistributedContextPropagator::ExtractTraceIdAndState:System.Void(System.Object,DistributedContextPropagator.PropagatorGetterCallback,System.String,System.String)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.DistributedContextPropagator",
+      "methodName": "ExtractTraceIdAndState",
+      "isStatic": true
+    },
+    {
+      "index": 123,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.DistributedContextPropagator::ExtractTraceIdAndState:System.Void(System.Object,DistributedContextPropagator.PropagatorGetterCallback,System.String,System.String)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.DistributedContextPropagator",
+      "methodName": "ExtractTraceIdAndState",
+      "isStatic": true
+    },
+    {
+      "index": 124,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.DistributedContextPropagator::ExtractBaggage:System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.String\u003E\u003E(System.Object,DistributedContextPropagator.PropagatorGetterCallback)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.DistributedContextPropagator",
+      "methodName": "ExtractBaggage",
+      "isStatic": true
+    },
+    {
+      "index": 125,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.DistributedContextPropagator::CreateDefaultPropagator:System.Diagnostics.DistributedContextPropagator()",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.DistributedContextPropagator",
+      "methodName": "CreateDefaultPropagator",
+      "isStatic": true
+    },
+    {
+      "index": 126,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.DistributedContextPropagator::CreatePassThroughPropagator:System.Diagnostics.DistributedContextPropagator()",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.DistributedContextPropagator",
+      "methodName": "CreatePassThroughPropagator",
+      "isStatic": true
+    },
+    {
+      "index": 127,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.DistributedContextPropagator::CreateNoOutputPropagator:System.Diagnostics.DistributedContextPropagator()",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.DistributedContextPropagator",
+      "methodName": "CreateNoOutputPropagator",
+      "isStatic": true
+    },
+    {
+      "index": 128,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.TagList::Add:System.Void(System.String,System.Object)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.TagList",
+      "methodName": "Add",
+      "isStatic": true
+    },
+    {
+      "index": 129,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.TagList::Add:System.Void(System.String,System.Object)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.TagList",
+      "methodName": "Add",
+      "isStatic": true
+    },
+    {
+      "index": 130,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.TagList::Add:System.Void(System.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.TagList",
+      "methodName": "Add",
+      "isStatic": true
+    },
+    {
+      "index": 131,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.TagList::CopyTo:System.Void(System.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E[],System.Int32)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.TagList",
+      "methodName": "CopyTo",
+      "isStatic": true
+    },
+    {
+      "index": 132,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.TagList::CopyTo:System.Void(System.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E[],System.Int32)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.TagList",
+      "methodName": "CopyTo",
+      "isStatic": true
+    },
+    {
+      "index": 133,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.TagList::CopyTo:System.Void(System.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E[],System.Int32)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.TagList",
+      "methodName": "CopyTo",
+      "isStatic": true
+    },
+    {
+      "index": 134,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.TagList::CopyTo:System.Void(System.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E[],System.Int32)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.TagList",
+      "methodName": "CopyTo",
+      "isStatic": true
+    },
+    {
+      "index": 135,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.TagList::Insert:System.Void(System.Int32,System.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.TagList",
+      "methodName": "Insert",
+      "isStatic": true
+    },
+    {
+      "index": 136,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.TagList::Insert:System.Void(System.Int32,System.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.TagList",
+      "methodName": "Insert",
+      "isStatic": true
+    },
+    {
+      "index": 137,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.TagList::RemoveAt:System.Void(System.Int32)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.TagList",
+      "methodName": "RemoveAt",
+      "isStatic": true
+    },
+    {
+      "index": 138,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.TagList::RemoveAt:System.Void(System.Int32)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.TagList",
+      "methodName": "RemoveAt",
+      "isStatic": true
+    },
+    {
+      "index": 139,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.TagList::Clear:System.Void()",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.TagList",
+      "methodName": "Clear",
+      "isStatic": true
+    },
+    {
+      "index": 140,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.TagList::Contains:System.Boolean(System.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.TagList",
+      "methodName": "Contains",
+      "isStatic": true
+    },
+    {
+      "index": 141,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.TagList::Remove:System.Boolean(System.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.TagList",
+      "methodName": "Remove",
+      "isStatic": true
+    },
+    {
+      "index": 142,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.TagList::GetEnumerator:System.Collections.Generic.IEnumerator\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E()",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.TagList",
+      "methodName": "GetEnumerator",
+      "isStatic": true
+    },
+    {
+      "index": 143,
+      "kind": "benchmark",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.TagList::IndexOf:System.Int32(System.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.TagList",
+      "methodName": "IndexOf",
+      "isStatic": true
+    }
+  ],
+  "summary": {
+    "totalSubjects": 144,
+    "factCount": 0,
+    "benchmarkCount": 144,
+    "hotUpdateCount": 0
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "max_entries": 50,
+  "entries": [
+    {
+      "cache_key": "System.Diagnostics.DiagnosticSource/diagnostics/7eadcc4a971d7341",
+      "assembly": "System.Diagnostics.DiagnosticSource",
+      "chunk_slug": "diagnostics",
+      "input_hash": "7eadcc4a971d73413716b2452419e7cd17adecaaedcf7311605de33b8c200cdf",
+      "cached_at": "2026-06-07T14:18:59Z",
+      "duration_ms": 33376,
+      "commit_hash": "668ae88cc",
+      "entry_exe_size": 6518784,
+      "entry_count": 538,
+      "status": "valid"
+    }
+  ]
+}

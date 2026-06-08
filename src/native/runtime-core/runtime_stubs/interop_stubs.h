@@ -46,3 +46,18 @@ CHAOS_IL2CPP_INT32 ChaosJsonDeserializeBool(CHAOS_IL2CPP_INTPTR jsonStr) noexcep
 CHAOS_IL2CPP_INTPTR ChaosAnsiStringMarshallerConvertToUnmanaged(CHAOS_IL2CPP_INTPTR str) noexcept;
 CHAOS_IL2CPP_INTPTR ChaosAnsiStringMarshallerConvertToManaged(CHAOS_IL2CPP_INTPTR native) noexcept;
 void ChaosAnsiStringMarshallerFree(CHAOS_IL2CPP_INTPTR native) noexcept;
+
+// ── GCHandle stubs ───────────────────────────────────────────
+// DirectNativeSymbol stubs for GCHandle.Alloc/Free/GetTarget.
+// Implementations delegate to the GC handle API (GcCreateStrongHandle, etc.).
+CHAOS_IL2CPP_INTPTR ChaosGCHandleAlloc(CHAOS_IL2CPP_INTPTR obj) noexcept;
+void   ChaosGCHandleFree(CHAOS_IL2CPP_INTPTR handle) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosGCHandleGetTarget(CHAOS_IL2CPP_INTPTR handle) noexcept;
+
+// ── Marshal HR stub declarations ─────────────────────────────
+// DirectNativeSymbol stubs for Marshal.GetExceptionForHR,
+// ThrowExceptionForHR, GetHRForException.  Implementations
+// delegate to engine_binding.h functions.
+CHAOS_IL2CPP_INTPTR ChaosMarshalGetExceptionForHR(CHAOS_IL2CPP_INT32 errorCode) noexcept;
+void   ChaosMarshalThrowExceptionForHR(CHAOS_IL2CPP_INT32 errorCode) noexcept;
+CHAOS_IL2CPP_INT32 ChaosMarshalGetHRForException(CHAOS_IL2CPP_INTPTR exceptionObj) noexcept;

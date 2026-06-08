@@ -1,0 +1,90 @@
+{
+  "version": 1,
+  "max_entries": 50,
+  "entries": [
+    {
+      "cache_key": "System.ComponentModel.TypeConverter/system-componentmodel-design/751b8c82832dc262",
+      "assembly": "System.ComponentModel.TypeConverter",
+      "chunk_slug": "system-componentmodel-design",
+      "input_hash": "751b8c82832dc262b83da525bfabe7d05ed5f6cd1bf429deabcd3ace9957aa8d",
+      "cached_at": "2026-06-07T15:09:17Z",
+      "duration_ms": 21331,
+      "commit_hash": "4f3a5f68a",
+      "entry_exe_size": 3531776,
+      "entry_count": 346,
+      "status": "valid"
+    },
+    {
+      "cache_key": "System.ComponentModel.TypeConverter/component-model/2b8006a335650e70",
+      "assembly": "System.ComponentModel.TypeConverter",
+      "chunk_slug": "component-model",
+      "input_hash": "2b8006a335650e708ac046c06fd949422454b9df62c5aedbd9274ac32d91ec83",
+      "cached_at": "2026-06-07T15:07:33Z",
+      "duration_ms": 75594,
+      "commit_hash": "4f3a5f68a",
+      "entry_exe_size": 13127168,
+      "entry_count": 381,
+      "status": "valid"
+    },
+    {
+      "cache_key": "System.ComponentModel.TypeConverter/global-ns/bfffceae751a45c3",
+      "assembly": "System.ComponentModel.TypeConverter",
+      "chunk_slug": "global-ns",
+      "input_hash": "bfffceae751a45c37d365330ff822e951d1dab67c511025e0f7ddbeea79fe5bd",
+      "cached_at": "2026-06-07T15:05:26Z",
+      "duration_ms": 37518,
+      "commit_hash": "882a05184",
+      "entry_exe_size": 5611008,
+      "entry_count": 354,
+      "status": "valid"
+    },
+    {
+      "cache_key": "System.ComponentModel.TypeConverter/system-componentmodel-design/ec7abdeb18779828",
+      "assembly": "System.ComponentModel.TypeConverter",
+      "chunk_slug": "system-componentmodel-design",
+      "input_hash": "ec7abdeb1877982849265cce62b8f48d8e603141abafd5172a9814241dc4e602",
+      "cached_at": "2026-06-07T15:04:13Z",
+      "duration_ms": 24980,
+      "commit_hash": "882a05184",
+      "entry_exe_size": 3531776,
+      "entry_count": 345,
+      "status": "valid"
+    },
+    {
+      "cache_key": "System.ComponentModel.TypeConverter/global-ns/74e6805a0fd7b321",
+      "assembly": "System.ComponentModel.TypeConverter",
+      "chunk_slug": "global-ns",
+      "input_hash": "74e6805a0fd7b32110d1160246413978215d369c622f579cf68b8894b0f6d823",
+      "cached_at": "2026-06-07T13:46:36Z",
+      "duration_ms": 5278,
+      "commit_hash": "1964a52a2",
+      "entry_exe_size": 5033472,
+      "entry_count": 443,
+      "status": "valid"
+    },
+    {
+      "cache_key": "System.ComponentModel.TypeConverter/system-componentmodel-design/980d644408c45f63",
+      "assembly": "System.ComponentModel.TypeConverter",
+      "chunk_slug": "system-componentmodel-design",
+      "input_hash": "980d644408c45f6393568e51213ab02c8afdbb0bd5aaed8eb0e100179e11486c",
+      "cached_at": "2026-06-07T13:45:38Z",
+      "duration_ms": 5513,
+      "commit_hash": "1964a52a2",
+      "entry_exe_size": 3553792,
+      "entry_count": 437,
+      "status": "valid"
+    },
+    {
+      "cache_key": "System.ComponentModel.TypeConverter/component-model/07e7d9dccf9d7712",
+      "assembly": "System.ComponentModel.TypeConverter",
+      "chunk_slug": "component-model",
+      "input_hash": "07e7d9dccf9d77121606dd6988dca801b3b956db7d0f6aa98ec5f3c009a373e6",
+      "cached_at": "2026-06-07T13:43:52Z",
+      "duration_ms": 7597,
+      "commit_hash": "1964a52a2",
+      "entry_exe_size": 13457408,
+      "entry_count": 461,
+      "status": "valid"
+    }
+  ]
+}

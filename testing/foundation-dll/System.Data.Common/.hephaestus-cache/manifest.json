@@ -1,0 +1,54 @@
+{
+  "version": 1,
+  "max_entries": 50,
+  "entries": [
+    {
+      "cache_key": "System.Data.Common/global-ns/7933ef1b0e799708",
+      "assembly": "System.Data.Common",
+      "chunk_slug": "global-ns",
+      "input_hash": "7933ef1b0e79970802c3d5a22b103ec83469f80b7554d6c2d384f16145b0f998",
+      "cached_at": "2026-06-07T13:52:08Z",
+      "duration_ms": 5420,
+      "commit_hash": "627feacad",
+      "entry_exe_size": 3594240,
+      "entry_count": 437,
+      "status": "valid"
+    },
+    {
+      "cache_key": "System.Data.Common/system-data-sqltypes/0b1d5275cf9761b9",
+      "assembly": "System.Data.Common",
+      "chunk_slug": "system-data-sqltypes",
+      "input_hash": "0b1d5275cf9761b98e704d592966b12ac394db168b53d8dea3da479d2b558627",
+      "cached_at": "2026-06-07T13:50:53Z",
+      "duration_ms": 8302,
+      "commit_hash": "627feacad",
+      "entry_exe_size": 10440704,
+      "entry_count": 451,
+      "status": "valid"
+    },
+    {
+      "cache_key": "System.Data.Common/system-data-common/ab176865354300d9",
+      "assembly": "System.Data.Common",
+      "chunk_slug": "system-data-common",
+      "input_hash": "ab176865354300d942bce3b1ae6da0a4136c25779659c383bf3d7c11a22564d9",
+      "cached_at": "2026-06-07T13:49:28Z",
+      "duration_ms": 7273,
+      "commit_hash": "1964a52a2",
+      "entry_exe_size": 10613248,
+      "entry_count": 453,
+      "status": "valid"
+    },
+    {
+      "cache_key": "System.Data.Common/system-data/fae622e5f7524d37",
+      "assembly": "System.Data.Common",
+      "chunk_slug": "system-data",
+      "input_hash": "fae622e5f7524d375e5b490fb634eef657dce1f2463e208593ed3047a4b4fa67",
+      "cached_at": "2026-06-07T13:47:43Z",
+      "duration_ms": 7873,
+      "commit_hash": "1964a52a2",
+      "entry_exe_size": 15226368,
+      "entry_count": 463,
+      "status": "valid"
+    }
+  ]
+}

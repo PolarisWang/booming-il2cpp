@@ -1159,7 +1159,7 @@ int main(int argc, char* argv[]) {
 
 {{ if is_jit }}
 #if defined(_WIN32)
-    // AddVectoredExceptionHandler(1, JitVehHandler);  // disabled by build.py
+    AddVectoredExceptionHandler(1, JitVehHandler);  // logs crash, falls through to __except
 #endif
     if (chaos_il2cpp_aot_hotpatch_module != nullptr) {
         chaos::il2cpp::runtime_core::RegisterHotpatchModule(chaos_il2cpp_aot_hotpatch_module);

@@ -171,6 +171,8 @@ def _build_method_comparison(
                 all_net10_pcts.append(pct_net10)
 
             # ── GC comparison: net8 gcInfo vs chaos-aot profile ──
+            # Moved outside the timing comparison block so throwing methods
+            # still get gcComparison data (with null/0 values).
             net8_gi = _get_gcinfo(net8_rec)
             chaos_profile = _find_profile(profile_data, msid) if profile_data else None
             if net8_gi:

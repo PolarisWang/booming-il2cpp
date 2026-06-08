@@ -1,0 +1,1040 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-06-07T14:21:13.3268494Z",
+  "generator": "Chaos.IL2CPP.Tools.TestProjectGenerator",
+  "entryExecutable": "entry",
+  "subjects": [
+    {
+      "index": 0,
+      "kind": "benchmark",
+      "subjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For:System.Threading.Tasks.ParallelLoopResult(System.Int32,System.Int32,System.Action\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Threading.Tasks.Parallel",
+      "typeName": "System.Threading.Tasks.Parallel",
+      "methodName": "For",
+      "isStatic": true
+    },
+    {
+      "index": 1,
+      "kind": "benchmark",
+      "subjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For:System.Threading.Tasks.ParallelLoopResult(System.Int32,System.Int32,System.Action\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Threading.Tasks.Parallel",
+      "typeName": "System.Threading.Tasks.Parallel",
+      "methodName": "For",
+      "isStatic": true
+    },
+    {
+      "index": 2,
+      "kind": "benchmark",
+      "subjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For:System.Threading.Tasks.ParallelLoopResult(System.Int32,System.Int32,System.Action\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Threading.Tasks.Parallel",
+      "typeName": "System.Threading.Tasks.Parallel",
+      "methodName": "For",
+      "isStatic": true
+    },
+    {
+      "index": 3,
+      "kind": "benchmark",
+      "subjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For:System.Threading.Tasks.ParallelLoopResult(System.Int32,System.Int32,System.Action\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Threading.Tasks.Parallel",
+      "typeName": "System.Threading.Tasks.Parallel",
+      "methodName": "For",
+      "isStatic": true
+    },
+    {
+      "index": 4,
+      "kind": "benchmark",
+      "subjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For:System.Threading.Tasks.ParallelLoopResult(System.Int64,System.Int64,System.Action\u003CSystem.Int64\u003E)",
+      "assemblyName": "System.Threading.Tasks.Parallel",
+      "typeName": "System.Threading.Tasks.Parallel",
+      "methodName": "For",
+      "isStatic": true
+    },
+    {
+      "index": 5,
+      "kind": "benchmark",
+      "subjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For:System.Threading.Tasks.ParallelLoopResult(System.Int64,System.Int64,System.Action\u003CSystem.Int64\u003E)",
+      "assemblyName": "System.Threading.Tasks.Parallel",
+      "typeName": "System.Threading.Tasks.Parallel",
+      "methodName": "For",
+      "isStatic": true
+    },
+    {
+      "index": 6,
+      "kind": "benchmark",
+      "subjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For:System.Threading.Tasks.ParallelLoopResult(System.Int64,System.Int64,System.Action\u003CSystem.Int64\u003E)",
+      "assemblyName": "System.Threading.Tasks.Parallel",
+      "typeName": "System.Threading.Tasks.Parallel",
+      "methodName": "For",
+      "isStatic": true
+    },
+    {
+      "index": 7,
+      "kind": "benchmark",
+      "subjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For:System.Threading.Tasks.ParallelLoopResult(System.Int64,System.Int64,System.Action\u003CSystem.Int64\u003E)",
+      "assemblyName": "System.Threading.Tasks.Parallel",
+      "typeName": "System.Threading.Tasks.Parallel",
+      "methodName": "For",
+      "isStatic": true
+    },
+    {
+      "index": 8,
+      "kind": "benchmark",
+      "subjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For:System.Threading.Tasks.ParallelLoopResult(System.Int32,System.Int32,System.Threading.Tasks.ParallelOptions,System.Action\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Threading.Tasks.Parallel",
+      "typeName": "System.Threading.Tasks.Parallel",
+      "methodName": "For",
+      "isStatic": true
+    },
+    {
+      "index": 9,
+      "kind": "benchmark",
+      "subjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For:System.Threading.Tasks.ParallelLoopResult(System.Int32,System.Int32,System.Threading.Tasks.ParallelOptions,System.Action\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Threading.Tasks.Parallel",
+      "typeName": "System.Threading.Tasks.Parallel",
+      "methodName": "For",
+      "isStatic": true
+    },
+    {
+      "index": 10,
+      "kind": "benchmark",
+      "subjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For:System.Threading.Tasks.ParallelLoopResult(System.Int32,System.Int32,System.Threading.Tasks.ParallelOptions,System.Action\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Threading.Tasks.Parallel",
+      "typeName": "System.Threading.Tasks.Parallel",
+      "methodName": "For",
+      "isStatic": true
+    },
+    {
+      "index": 11,
+      "kind": "benchmark",
+      "subjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For:System.Threading.Tasks.ParallelLoopResult(System.Int32,System.Int32,System.Threading.Tasks.ParallelOptions,System.Action\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Threading.Tasks.Parallel",
+      "typeName": "System.Threading.Tasks.Parallel",
+      "methodName": "For",
+      "isStatic": true
+    },
+    {
+      "index": 12,
+      "kind": "benchmark",
+      "subjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For:System.Threading.Tasks.ParallelLoopResult(System.Int64,System.Int64,System.Threading.Tasks.ParallelOptions,System.Action\u003CSystem.Int64\u003E)",
+      "assemblyName": "System.Threading.Tasks.Parallel",
+      "typeName": "System.Threading.Tasks.Parallel",
+      "methodName": "For",
+      "isStatic": true
+    },
+    {
+      "index": 13,
+      "kind": "benchmark",
+      "subjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For:System.Threading.Tasks.ParallelLoopResult(System.Int64,System.Int64,System.Threading.Tasks.ParallelOptions,System.Action\u003CSystem.Int64\u003E)",
+      "assemblyName": "System.Threading.Tasks.Parallel",
+      "typeName": "System.Threading.Tasks.Parallel",
+      "methodName": "For",
+      "isStatic": true
+    },
+    {
+      "index": 14,
+      "kind": "benchmark",
+      "subjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For:System.Threading.Tasks.ParallelLoopResult(System.Int64,System.Int64,System.Threading.Tasks.ParallelOptions,System.Action\u003CSystem.Int64\u003E)",
+      "assemblyName": "System.Threading.Tasks.Parallel",
+      "typeName": "System.Threading.Tasks.Parallel",
+      "methodName": "For",
+      "isStatic": true
+    },
+    {
+      "index": 15,
+      "kind": "benchmark",
+      "subjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For:System.Threading.Tasks.ParallelLoopResult(System.Int64,System.Int64,System.Threading.Tasks.ParallelOptions,System.Action\u003CSystem.Int64\u003E)",
+      "assemblyName": "System.Threading.Tasks.Parallel",
+      "typeName": "System.Threading.Tasks.Parallel",
+      "methodName": "For",
+      "isStatic": true
+    },
+    {
+      "index": 16,
+      "kind": "benchmark",
+      "subjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For:System.Threading.Tasks.ParallelLoopResult(System.Int32,System.Int32,System.Action\u003CSystem.Int32,System.Threading.Tasks.ParallelLoopState\u003E)",
+      "assemblyName": "System.Threading.Tasks.Parallel",
+      "typeName": "System.Threading.Tasks.Parallel",
+      "methodName": "For",
+      "isStatic": true
+    },
+    {
+      "index": 17,
+      "kind": "benchmark",
+      "subjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For:System.Threading.Tasks.ParallelLoopResult(System.Int32,System.Int32,System.Action\u003CSystem.Int32,System.Threading.Tasks.ParallelLoopState\u003E)",
+      "assemblyName": "System.Threading.Tasks.Parallel",
+      "typeName": "System.Threading.Tasks.Parallel",
+      "methodName": "For",
+      "isStatic": true
+    },
+    {
+      "index": 18,
+      "kind": "benchmark",
+      "subjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For:System.Threading.Tasks.ParallelLoopResult(System.Int32,System.Int32,System.Action\u003CSystem.Int32,System.Threading.Tasks.ParallelLoopState\u003E)",
+      "assemblyName": "System.Threading.Tasks.Parallel",
+      "typeName": "System.Threading.Tasks.Parallel",
+      "methodName": "For",
+      "isStatic": true
+    },
+    {
+      "index": 19,
+      "kind": "benchmark",
+      "subjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For:System.Threading.Tasks.ParallelLoopResult(System.Int32,System.Int32,System.Action\u003CSystem.Int32,System.Threading.Tasks.ParallelLoopState\u003E)",
+      "assemblyName": "System.Threading.Tasks.Parallel",
+      "typeName": "System.Threading.Tasks.Parallel",
+      "methodName": "For",
+      "isStatic": true
+    },
+    {
+      "index": 20,
+      "kind": "benchmark",
+      "subjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For:System.Threading.Tasks.ParallelLoopResult(System.Int64,System.Int64,System.Action\u003CSystem.Int64,System.Threading.Tasks.ParallelLoopState\u003E)",
+      "assemblyName": "System.Threading.Tasks.Parallel",
+      "typeName": "System.Threading.Tasks.Parallel",
+      "methodName": "For",
+      "isStatic": true
+    },
+    {
+      "index": 21,
+      "kind": "benchmark",
+      "subjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For:System.Threading.Tasks.ParallelLoopResult(System.Int64,System.Int64,System.Action\u003CSystem.Int64,System.Threading.Tasks.ParallelLoopState\u003E)",
+      "assemblyName": "System.Threading.Tasks.Parallel",
+      "typeName": "System.Threading.Tasks.Parallel",
+      "methodName": "For",
+      "isStatic": true
+    },
+    {
+      "index": 22,
+      "kind": "benchmark",
+      "subjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For:System.Threading.Tasks.ParallelLoopResult(System.Int64,System.Int64,System.Action\u003CSystem.Int64,System.Threading.Tasks.ParallelLoopState\u003E)",
+      "assemblyName": "System.Threading.Tasks.Parallel",
+      "typeName": "System.Threading.Tasks.Parallel",
+      "methodName": "For",
+      "isStatic": true
+    },
+    {
+      "index": 23,
+      "kind": "benchmark",
+      "subjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For:System.Threading.Tasks.ParallelLoopResult(System.Int64,System.Int64,System.Action\u003CSystem.Int64,System.Threading.Tasks.ParallelLoopState\u003E)",
+      "assemblyName": "System.Threading.Tasks.Parallel",
+      "typeName": "System.Threading.Tasks.Parallel",
+      "methodName": "For",
+      "isStatic": true
+    },
+    {
+      "index": 24,
+      "kind": "benchmark",
+      "subjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For:System.Threading.Tasks.ParallelLoopResult(System.Int32,System.Int32,System.Threading.Tasks.ParallelOptions,System.Action\u003CSystem.Int32,System.Threading.Tasks.ParallelLoopState\u003E)",
+      "assemblyName": "System.Threading.Tasks.Parallel",
+      "typeName": "System.Threading.Tasks.Parallel",
+      "methodName": "For",
+      "isStatic": true
+    },
+    {
+      "index": 25,
+      "kind": "benchmark",
+      "subjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For:System.Threading.Tasks.ParallelLoopResult(System.Int32,System.Int32,System.Threading.Tasks.ParallelOptions,System.Action\u003CSystem.Int32,System.Threading.Tasks.ParallelLoopState\u003E)",
+      "assemblyName": "System.Threading.Tasks.Parallel",
+      "typeName": "System.Threading.Tasks.Parallel",
+      "methodName": "For",
+      "isStatic": true
+    },
+    {
+      "index": 26,
+      "kind": "benchmark",
+      "subjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For:System.Threading.Tasks.ParallelLoopResult(System.Int32,System.Int32,System.Threading.Tasks.ParallelOptions,System.Action\u003CSystem.Int32,System.Threading.Tasks.ParallelLoopState\u003E)",
+      "assemblyName": "System.Threading.Tasks.Parallel",
+      "typeName": "System.Threading.Tasks.Parallel",
+      "methodName": "For",
+      "isStatic": true
+    },
+    {
+      "index": 27,
+      "kind": "benchmark",
+      "subjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For:System.Threading.Tasks.ParallelLoopResult(System.Int32,System.Int32,System.Threading.Tasks.ParallelOptions,System.Action\u003CSystem.Int32,System.Threading.Tasks.ParallelLoopState\u003E)",
+      "assemblyName": "System.Threading.Tasks.Parallel",
+      "typeName": "System.Threading.Tasks.Parallel",
+      "methodName": "For",
+      "isStatic": true
+    },
+    {
+      "index": 28,
+      "kind": "benchmark",
+      "subjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For:System.Threading.Tasks.ParallelLoopResult(System.Int64,System.Int64,System.Threading.Tasks.ParallelOptions,System.Action\u003CSystem.Int64,System.Threading.Tasks.ParallelLoopState\u003E)",
+      "assemblyName": "System.Threading.Tasks.Parallel",
+      "typeName": "System.Threading.Tasks.Parallel",
+      "methodName": "For",
+      "isStatic": true
+    },
+    {
+      "index": 29,
+      "kind": "benchmark",
+      "subjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For:System.Threading.Tasks.ParallelLoopResult(System.Int64,System.Int64,System.Threading.Tasks.ParallelOptions,System.Action\u003CSystem.Int64,System.Threading.Tasks.ParallelLoopState\u003E)",
+      "assemblyName": "System.Threading.Tasks.Parallel",
+      "typeName": "System.Threading.Tasks.Parallel",
+      "methodName": "For",
+      "isStatic": true
+    },
+    {
+      "index": 30,
+      "kind": "benchmark",
+      "subjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For:System.Threading.Tasks.ParallelLoopResult(System.Int64,System.Int64,System.Threading.Tasks.ParallelOptions,System.Action\u003CSystem.Int64,System.Threading.Tasks.ParallelLoopState\u003E)",
+      "assemblyName": "System.Threading.Tasks.Parallel",
+      "typeName": "System.Threading.Tasks.Parallel",
+      "methodName": "For",
+      "isStatic": true
+    },
+    {
+      "index": 31,
+      "kind": "benchmark",
+      "subjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For:System.Threading.Tasks.ParallelLoopResult(System.Int64,System.Int64,System.Threading.Tasks.ParallelOptions,System.Action\u003CSystem.Int64,System.Threading.Tasks.ParallelLoopState\u003E)",
+      "assemblyName": "System.Threading.Tasks.Parallel",
+      "typeName": "System.Threading.Tasks.Parallel",
+      "methodName": "For",
+      "isStatic": true
+    },
+    {
+      "index": 32,
+      "kind": "benchmark",
+      "subjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For:System.Threading.Tasks.ParallelLoopResult(System.Int32,System.Int32,System.Func\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Threading.Tasks.ParallelLoopState,System.Int32,System.Int32\u003E,System.Action\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Threading.Tasks.Parallel",
+      "typeName": "System.Threading.Tasks.Parallel",
+      "methodName": "For",
+      "isStatic": true
+    },
+    {
+      "index": 33,
+      "kind": "benchmark",
+      "subjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For:System.Threading.Tasks.ParallelLoopResult(System.Int32,System.Int32,System.Func\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Threading.Tasks.ParallelLoopState,System.Int32,System.Int32\u003E,System.Action\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Threading.Tasks.Parallel",
+      "typeName": "System.Threading.Tasks.Parallel",
+      "methodName": "For",
+      "isStatic": true
+    },
+    {
+      "index": 34,
+      "kind": "benchmark",
+      "subjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For:System.Threading.Tasks.ParallelLoopResult(System.Int32,System.Int32,System.Func\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Threading.Tasks.ParallelLoopState,System.Int32,System.Int32\u003E,System.Action\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Threading.Tasks.Parallel",
+      "typeName": "System.Threading.Tasks.Parallel",
+      "methodName": "For",
+      "isStatic": true
+    },
+    {
+      "index": 35,
+      "kind": "benchmark",
+      "subjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For:System.Threading.Tasks.ParallelLoopResult(System.Int32,System.Int32,System.Func\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Threading.Tasks.ParallelLoopState,System.Int32,System.Int32\u003E,System.Action\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Threading.Tasks.Parallel",
+      "typeName": "System.Threading.Tasks.Parallel",
+      "methodName": "For",
+      "isStatic": true
+    },
+    {
+      "index": 36,
+      "kind": "benchmark",
+      "subjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For:System.Threading.Tasks.ParallelLoopResult(System.Int64,System.Int64,System.Func\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int64,System.Threading.Tasks.ParallelLoopState,System.Int32,System.Int32\u003E,System.Action\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Threading.Tasks.Parallel",
+      "typeName": "System.Threading.Tasks.Parallel",
+      "methodName": "For",
+      "isStatic": true
+    },
+    {
+      "index": 37,
+      "kind": "benchmark",
+      "subjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For:System.Threading.Tasks.ParallelLoopResult(System.Int64,System.Int64,System.Func\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int64,System.Threading.Tasks.ParallelLoopState,System.Int32,System.Int32\u003E,System.Action\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Threading.Tasks.Parallel",
+      "typeName": "System.Threading.Tasks.Parallel",
+      "methodName": "For",
+      "isStatic": true
+    },
+    {
+      "index": 38,
+      "kind": "benchmark",
+      "subjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For:System.Threading.Tasks.ParallelLoopResult(System.Int64,System.Int64,System.Func\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int64,System.Threading.Tasks.ParallelLoopState,System.Int32,System.Int32\u003E,System.Action\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Threading.Tasks.Parallel",
+      "typeName": "System.Threading.Tasks.Parallel",
+      "methodName": "For",
+      "isStatic": true
+    },
+    {
+      "index": 39,
+      "kind": "benchmark",
+      "subjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For:System.Threading.Tasks.ParallelLoopResult(System.Int64,System.Int64,System.Func\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int64,System.Threading.Tasks.ParallelLoopState,System.Int32,System.Int32\u003E,System.Action\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Threading.Tasks.Parallel",
+      "typeName": "System.Threading.Tasks.Parallel",
+      "methodName": "For",
+      "isStatic": true
+    },
+    {
+      "index": 40,
+      "kind": "benchmark",
+      "subjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For:System.Threading.Tasks.ParallelLoopResult(System.Int32,System.Int32,System.Threading.Tasks.ParallelOptions,System.Func\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Threading.Tasks.ParallelLoopState,System.Int32,System.Int32\u003E,System.Action\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Threading.Tasks.Parallel",
+      "typeName": "System.Threading.Tasks.Parallel",
+      "methodName": "For",
+      "isStatic": true
+    },
+    {
+      "index": 41,
+      "kind": "benchmark",
+      "subjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For:System.Threading.Tasks.ParallelLoopResult(System.Int32,System.Int32,System.Threading.Tasks.ParallelOptions,System.Func\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Threading.Tasks.ParallelLoopState,System.Int32,System.Int32\u003E,System.Action\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Threading.Tasks.Parallel",
+      "typeName": "System.Threading.Tasks.Parallel",
+      "methodName": "For",
+      "isStatic": true
+    },
+    {
+      "index": 42,
+      "kind": "benchmark",
+      "subjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For:System.Threading.Tasks.ParallelLoopResult(System.Int32,System.Int32,System.Threading.Tasks.ParallelOptions,System.Func\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Threading.Tasks.ParallelLoopState,System.Int32,System.Int32\u003E,System.Action\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Threading.Tasks.Parallel",
+      "typeName": "System.Threading.Tasks.Parallel",
+      "methodName": "For",
+      "isStatic": true
+    },
+    {
+      "index": 43,
+      "kind": "benchmark",
+      "subjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For:System.Threading.Tasks.ParallelLoopResult(System.Int32,System.Int32,System.Threading.Tasks.ParallelOptions,System.Func\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Threading.Tasks.ParallelLoopState,System.Int32,System.Int32\u003E,System.Action\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Threading.Tasks.Parallel",
+      "typeName": "System.Threading.Tasks.Parallel",
+      "methodName": "For",
+      "isStatic": true
+    },
+    {
+      "index": 44,
+      "kind": "benchmark",
+      "subjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For:System.Threading.Tasks.ParallelLoopResult(System.Int64,System.Int64,System.Threading.Tasks.ParallelOptions,System.Func\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int64,System.Threading.Tasks.ParallelLoopState,System.Int32,System.Int32\u003E,System.Action\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Threading.Tasks.Parallel",
+      "typeName": "System.Threading.Tasks.Parallel",
+      "methodName": "For",
+      "isStatic": true
+    },
+    {
+      "index": 45,
+      "kind": "benchmark",
+      "subjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For:System.Threading.Tasks.ParallelLoopResult(System.Int64,System.Int64,System.Threading.Tasks.ParallelOptions,System.Func\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int64,System.Threading.Tasks.ParallelLoopState,System.Int32,System.Int32\u003E,System.Action\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Threading.Tasks.Parallel",
+      "typeName": "System.Threading.Tasks.Parallel",
+      "methodName": "For",
+      "isStatic": true
+    },
+    {
+      "index": 46,
+      "kind": "benchmark",
+      "subjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For:System.Threading.Tasks.ParallelLoopResult(System.Int64,System.Int64,System.Threading.Tasks.ParallelOptions,System.Func\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int64,System.Threading.Tasks.ParallelLoopState,System.Int32,System.Int32\u003E,System.Action\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Threading.Tasks.Parallel",
+      "typeName": "System.Threading.Tasks.Parallel",
+      "methodName": "For",
+      "isStatic": true
+    },
+    {
+      "index": 47,
+      "kind": "benchmark",
+      "subjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For:System.Threading.Tasks.ParallelLoopResult(System.Int64,System.Int64,System.Threading.Tasks.ParallelOptions,System.Func\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int64,System.Threading.Tasks.ParallelLoopState,System.Int32,System.Int32\u003E,System.Action\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Threading.Tasks.Parallel",
+      "typeName": "System.Threading.Tasks.Parallel",
+      "methodName": "For",
+      "isStatic": true
+    },
+    {
+      "index": 48,
+      "kind": "benchmark",
+      "subjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach:System.Threading.Tasks.ParallelLoopResult(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Action\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Threading.Tasks.Parallel",
+      "typeName": "System.Threading.Tasks.Parallel",
+      "methodName": "ForEach",
+      "isStatic": true
+    },
+    {
+      "index": 49,
+      "kind": "benchmark",
+      "subjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach:System.Threading.Tasks.ParallelLoopResult(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Action\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Threading.Tasks.Parallel",
+      "typeName": "System.Threading.Tasks.Parallel",
+      "methodName": "ForEach",
+      "isStatic": true
+    },
+    {
+      "index": 50,
+      "kind": "benchmark",
+      "subjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach:System.Threading.Tasks.ParallelLoopResult(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Threading.Tasks.ParallelOptions,System.Action\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Threading.Tasks.Parallel",
+      "typeName": "System.Threading.Tasks.Parallel",
+      "methodName": "ForEach",
+      "isStatic": true
+    },
+    {
+      "index": 51,
+      "kind": "benchmark",
+      "subjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach:System.Threading.Tasks.ParallelLoopResult(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Threading.Tasks.ParallelOptions,System.Action\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Threading.Tasks.Parallel",
+      "typeName": "System.Threading.Tasks.Parallel",
+      "methodName": "ForEach",
+      "isStatic": true
+    },
+    {
+      "index": 52,
+      "kind": "benchmark",
+      "subjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach:System.Threading.Tasks.ParallelLoopResult(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Action\u003CSystem.Int32,System.Threading.Tasks.ParallelLoopState\u003E)",
+      "assemblyName": "System.Threading.Tasks.Parallel",
+      "typeName": "System.Threading.Tasks.Parallel",
+      "methodName": "ForEach",
+      "isStatic": true
+    },
+    {
+      "index": 53,
+      "kind": "benchmark",
+      "subjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach:System.Threading.Tasks.ParallelLoopResult(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Action\u003CSystem.Int32,System.Threading.Tasks.ParallelLoopState\u003E)",
+      "assemblyName": "System.Threading.Tasks.Parallel",
+      "typeName": "System.Threading.Tasks.Parallel",
+      "methodName": "ForEach",
+      "isStatic": true
+    },
+    {
+      "index": 54,
+      "kind": "benchmark",
+      "subjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach:System.Threading.Tasks.ParallelLoopResult(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Threading.Tasks.ParallelOptions,System.Action\u003CSystem.Int32,System.Threading.Tasks.ParallelLoopState\u003E)",
+      "assemblyName": "System.Threading.Tasks.Parallel",
+      "typeName": "System.Threading.Tasks.Parallel",
+      "methodName": "ForEach",
+      "isStatic": true
+    },
+    {
+      "index": 55,
+      "kind": "benchmark",
+      "subjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach:System.Threading.Tasks.ParallelLoopResult(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Threading.Tasks.ParallelOptions,System.Action\u003CSystem.Int32,System.Threading.Tasks.ParallelLoopState\u003E)",
+      "assemblyName": "System.Threading.Tasks.Parallel",
+      "typeName": "System.Threading.Tasks.Parallel",
+      "methodName": "ForEach",
+      "isStatic": true
+    },
+    {
+      "index": 56,
+      "kind": "benchmark",
+      "subjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach:System.Threading.Tasks.ParallelLoopResult(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Action\u003CSystem.Int32,System.Threading.Tasks.ParallelLoopState,System.Int64\u003E)",
+      "assemblyName": "System.Threading.Tasks.Parallel",
+      "typeName": "System.Threading.Tasks.Parallel",
+      "methodName": "ForEach",
+      "isStatic": true
+    },
+    {
+      "index": 57,
+      "kind": "benchmark",
+      "subjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach:System.Threading.Tasks.ParallelLoopResult(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Action\u003CSystem.Int32,System.Threading.Tasks.ParallelLoopState,System.Int64\u003E)",
+      "assemblyName": "System.Threading.Tasks.Parallel",
+      "typeName": "System.Threading.Tasks.Parallel",
+      "methodName": "ForEach",
+      "isStatic": true
+    },
+    {
+      "index": 58,
+      "kind": "benchmark",
+      "subjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach:System.Threading.Tasks.ParallelLoopResult(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Threading.Tasks.ParallelOptions,System.Action\u003CSystem.Int32,System.Threading.Tasks.ParallelLoopState,System.Int64\u003E)",
+      "assemblyName": "System.Threading.Tasks.Parallel",
+      "typeName": "System.Threading.Tasks.Parallel",
+      "methodName": "ForEach",
+      "isStatic": true
+    },
+    {
+      "index": 59,
+      "kind": "benchmark",
+      "subjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach:System.Threading.Tasks.ParallelLoopResult(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Threading.Tasks.ParallelOptions,System.Action\u003CSystem.Int32,System.Threading.Tasks.ParallelLoopState,System.Int64\u003E)",
+      "assemblyName": "System.Threading.Tasks.Parallel",
+      "typeName": "System.Threading.Tasks.Parallel",
+      "methodName": "ForEach",
+      "isStatic": true
+    },
+    {
+      "index": 60,
+      "kind": "benchmark",
+      "subjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach:System.Threading.Tasks.ParallelLoopResult(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Threading.Tasks.ParallelLoopState,System.Int32,System.Int32\u003E,System.Action\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Threading.Tasks.Parallel",
+      "typeName": "System.Threading.Tasks.Parallel",
+      "methodName": "ForEach",
+      "isStatic": true
+    },
+    {
+      "index": 61,
+      "kind": "benchmark",
+      "subjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach:System.Threading.Tasks.ParallelLoopResult(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Threading.Tasks.ParallelLoopState,System.Int32,System.Int32\u003E,System.Action\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Threading.Tasks.Parallel",
+      "typeName": "System.Threading.Tasks.Parallel",
+      "methodName": "ForEach",
+      "isStatic": true
+    },
+    {
+      "index": 62,
+      "kind": "benchmark",
+      "subjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach:System.Threading.Tasks.ParallelLoopResult(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Threading.Tasks.ParallelOptions,System.Func\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Threading.Tasks.ParallelLoopState,System.Int32,System.Int32\u003E,System.Action\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Threading.Tasks.Parallel",
+      "typeName": "System.Threading.Tasks.Parallel",
+      "methodName": "ForEach",
+      "isStatic": true
+    },
+    {
+      "index": 63,
+      "kind": "benchmark",
+      "subjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach:System.Threading.Tasks.ParallelLoopResult(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Threading.Tasks.ParallelOptions,System.Func\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Threading.Tasks.ParallelLoopState,System.Int32,System.Int32\u003E,System.Action\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Threading.Tasks.Parallel",
+      "typeName": "System.Threading.Tasks.Parallel",
+      "methodName": "ForEach",
+      "isStatic": true
+    },
+    {
+      "index": 64,
+      "kind": "benchmark",
+      "subjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach:System.Threading.Tasks.ParallelLoopResult(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Threading.Tasks.ParallelLoopState,System.Int64,System.Int32,System.Int32\u003E,System.Action\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Threading.Tasks.Parallel",
+      "typeName": "System.Threading.Tasks.Parallel",
+      "methodName": "ForEach",
+      "isStatic": true
+    },
+    {
+      "index": 65,
+      "kind": "benchmark",
+      "subjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach:System.Threading.Tasks.ParallelLoopResult(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Threading.Tasks.ParallelLoopState,System.Int64,System.Int32,System.Int32\u003E,System.Action\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Threading.Tasks.Parallel",
+      "typeName": "System.Threading.Tasks.Parallel",
+      "methodName": "ForEach",
+      "isStatic": true
+    },
+    {
+      "index": 66,
+      "kind": "benchmark",
+      "subjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach:System.Threading.Tasks.ParallelLoopResult(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Threading.Tasks.ParallelOptions,System.Func\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Threading.Tasks.ParallelLoopState,System.Int64,System.Int32,System.Int32\u003E,System.Action\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Threading.Tasks.Parallel",
+      "typeName": "System.Threading.Tasks.Parallel",
+      "methodName": "ForEach",
+      "isStatic": true
+    },
+    {
+      "index": 67,
+      "kind": "benchmark",
+      "subjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach:System.Threading.Tasks.ParallelLoopResult(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Threading.Tasks.ParallelOptions,System.Func\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Threading.Tasks.ParallelLoopState,System.Int64,System.Int32,System.Int32\u003E,System.Action\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Threading.Tasks.Parallel",
+      "typeName": "System.Threading.Tasks.Parallel",
+      "methodName": "ForEach",
+      "isStatic": true
+    },
+    {
+      "index": 68,
+      "kind": "benchmark",
+      "subjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach:System.Threading.Tasks.ParallelLoopResult(System.Collections.Concurrent.Partitioner\u003CSystem.Int32\u003E,System.Action\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Threading.Tasks.Parallel",
+      "typeName": "System.Threading.Tasks.Parallel",
+      "methodName": "ForEach",
+      "isStatic": true
+    },
+    {
+      "index": 69,
+      "kind": "benchmark",
+      "subjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach:System.Threading.Tasks.ParallelLoopResult(System.Collections.Concurrent.Partitioner\u003CSystem.Int32\u003E,System.Action\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Threading.Tasks.Parallel",
+      "typeName": "System.Threading.Tasks.Parallel",
+      "methodName": "ForEach",
+      "isStatic": true
+    },
+    {
+      "index": 70,
+      "kind": "benchmark",
+      "subjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach:System.Threading.Tasks.ParallelLoopResult(System.Collections.Concurrent.Partitioner\u003CSystem.Int32\u003E,System.Action\u003CSystem.Int32,System.Threading.Tasks.ParallelLoopState\u003E)",
+      "assemblyName": "System.Threading.Tasks.Parallel",
+      "typeName": "System.Threading.Tasks.Parallel",
+      "methodName": "ForEach",
+      "isStatic": true
+    },
+    {
+      "index": 71,
+      "kind": "benchmark",
+      "subjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach:System.Threading.Tasks.ParallelLoopResult(System.Collections.Concurrent.Partitioner\u003CSystem.Int32\u003E,System.Action\u003CSystem.Int32,System.Threading.Tasks.ParallelLoopState\u003E)",
+      "assemblyName": "System.Threading.Tasks.Parallel",
+      "typeName": "System.Threading.Tasks.Parallel",
+      "methodName": "ForEach",
+      "isStatic": true
+    },
+    {
+      "index": 72,
+      "kind": "benchmark",
+      "subjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach:System.Threading.Tasks.ParallelLoopResult(System.Collections.Concurrent.OrderablePartitioner\u003CSystem.Int32\u003E,System.Action\u003CSystem.Int32,System.Threading.Tasks.ParallelLoopState,System.Int64\u003E)",
+      "assemblyName": "System.Threading.Tasks.Parallel",
+      "typeName": "System.Threading.Tasks.Parallel",
+      "methodName": "ForEach",
+      "isStatic": true
+    },
+    {
+      "index": 73,
+      "kind": "benchmark",
+      "subjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach:System.Threading.Tasks.ParallelLoopResult(System.Collections.Concurrent.OrderablePartitioner\u003CSystem.Int32\u003E,System.Action\u003CSystem.Int32,System.Threading.Tasks.ParallelLoopState,System.Int64\u003E)",
+      "assemblyName": "System.Threading.Tasks.Parallel",
+      "typeName": "System.Threading.Tasks.Parallel",
+      "methodName": "ForEach",
+      "isStatic": true
+    },
+    {
+      "index": 74,
+      "kind": "benchmark",
+      "subjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach:System.Threading.Tasks.ParallelLoopResult(System.Collections.Concurrent.Partitioner\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Threading.Tasks.ParallelLoopState,System.Int32,System.Int32\u003E,System.Action\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Threading.Tasks.Parallel",
+      "typeName": "System.Threading.Tasks.Parallel",
+      "methodName": "ForEach",
+      "isStatic": true
+    },
+    {
+      "index": 75,
+      "kind": "benchmark",
+      "subjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach:System.Threading.Tasks.ParallelLoopResult(System.Collections.Concurrent.Partitioner\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Threading.Tasks.ParallelLoopState,System.Int32,System.Int32\u003E,System.Action\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Threading.Tasks.Parallel",
+      "typeName": "System.Threading.Tasks.Parallel",
+      "methodName": "ForEach",
+      "isStatic": true
+    },
+    {
+      "index": 76,
+      "kind": "benchmark",
+      "subjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach:System.Threading.Tasks.ParallelLoopResult(System.Collections.Concurrent.OrderablePartitioner\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Threading.Tasks.ParallelLoopState,System.Int64,System.Int32,System.Int32\u003E,System.Action\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Threading.Tasks.Parallel",
+      "typeName": "System.Threading.Tasks.Parallel",
+      "methodName": "ForEach",
+      "isStatic": true
+    },
+    {
+      "index": 77,
+      "kind": "benchmark",
+      "subjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach:System.Threading.Tasks.ParallelLoopResult(System.Collections.Concurrent.OrderablePartitioner\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Threading.Tasks.ParallelLoopState,System.Int64,System.Int32,System.Int32\u003E,System.Action\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Threading.Tasks.Parallel",
+      "typeName": "System.Threading.Tasks.Parallel",
+      "methodName": "ForEach",
+      "isStatic": true
+    },
+    {
+      "index": 78,
+      "kind": "benchmark",
+      "subjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach:System.Threading.Tasks.ParallelLoopResult(System.Collections.Concurrent.Partitioner\u003CSystem.Int32\u003E,System.Threading.Tasks.ParallelOptions,System.Action\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Threading.Tasks.Parallel",
+      "typeName": "System.Threading.Tasks.Parallel",
+      "methodName": "ForEach",
+      "isStatic": true
+    },
+    {
+      "index": 79,
+      "kind": "benchmark",
+      "subjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach:System.Threading.Tasks.ParallelLoopResult(System.Collections.Concurrent.Partitioner\u003CSystem.Int32\u003E,System.Threading.Tasks.ParallelOptions,System.Action\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Threading.Tasks.Parallel",
+      "typeName": "System.Threading.Tasks.Parallel",
+      "methodName": "ForEach",
+      "isStatic": true
+    },
+    {
+      "index": 80,
+      "kind": "benchmark",
+      "subjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach:System.Threading.Tasks.ParallelLoopResult(System.Collections.Concurrent.Partitioner\u003CSystem.Int32\u003E,System.Threading.Tasks.ParallelOptions,System.Action\u003CSystem.Int32,System.Threading.Tasks.ParallelLoopState\u003E)",
+      "assemblyName": "System.Threading.Tasks.Parallel",
+      "typeName": "System.Threading.Tasks.Parallel",
+      "methodName": "ForEach",
+      "isStatic": true
+    },
+    {
+      "index": 81,
+      "kind": "benchmark",
+      "subjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach:System.Threading.Tasks.ParallelLoopResult(System.Collections.Concurrent.Partitioner\u003CSystem.Int32\u003E,System.Threading.Tasks.ParallelOptions,System.Action\u003CSystem.Int32,System.Threading.Tasks.ParallelLoopState\u003E)",
+      "assemblyName": "System.Threading.Tasks.Parallel",
+      "typeName": "System.Threading.Tasks.Parallel",
+      "methodName": "ForEach",
+      "isStatic": true
+    },
+    {
+      "index": 82,
+      "kind": "benchmark",
+      "subjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach:System.Threading.Tasks.ParallelLoopResult(System.Collections.Concurrent.OrderablePartitioner\u003CSystem.Int32\u003E,System.Threading.Tasks.ParallelOptions,System.Action\u003CSystem.Int32,System.Threading.Tasks.ParallelLoopState,System.Int64\u003E)",
+      "assemblyName": "System.Threading.Tasks.Parallel",
+      "typeName": "System.Threading.Tasks.Parallel",
+      "methodName": "ForEach",
+      "isStatic": true
+    },
+    {
+      "index": 83,
+      "kind": "benchmark",
+      "subjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach:System.Threading.Tasks.ParallelLoopResult(System.Collections.Concurrent.OrderablePartitioner\u003CSystem.Int32\u003E,System.Threading.Tasks.ParallelOptions,System.Action\u003CSystem.Int32,System.Threading.Tasks.ParallelLoopState,System.Int64\u003E)",
+      "assemblyName": "System.Threading.Tasks.Parallel",
+      "typeName": "System.Threading.Tasks.Parallel",
+      "methodName": "ForEach",
+      "isStatic": true
+    },
+    {
+      "index": 84,
+      "kind": "benchmark",
+      "subjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach:System.Threading.Tasks.ParallelLoopResult(System.Collections.Concurrent.Partitioner\u003CSystem.Int32\u003E,System.Threading.Tasks.ParallelOptions,System.Func\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Threading.Tasks.ParallelLoopState,System.Int32,System.Int32\u003E,System.Action\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Threading.Tasks.Parallel",
+      "typeName": "System.Threading.Tasks.Parallel",
+      "methodName": "ForEach",
+      "isStatic": true
+    },
+    {
+      "index": 85,
+      "kind": "benchmark",
+      "subjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach:System.Threading.Tasks.ParallelLoopResult(System.Collections.Concurrent.Partitioner\u003CSystem.Int32\u003E,System.Threading.Tasks.ParallelOptions,System.Func\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Threading.Tasks.ParallelLoopState,System.Int32,System.Int32\u003E,System.Action\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Threading.Tasks.Parallel",
+      "typeName": "System.Threading.Tasks.Parallel",
+      "methodName": "ForEach",
+      "isStatic": true
+    },
+    {
+      "index": 86,
+      "kind": "benchmark",
+      "subjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach:System.Threading.Tasks.ParallelLoopResult(System.Collections.Concurrent.OrderablePartitioner\u003CSystem.Int32\u003E,System.Threading.Tasks.ParallelOptions,System.Func\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Threading.Tasks.ParallelLoopState,System.Int64,System.Int32,System.Int32\u003E,System.Action\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Threading.Tasks.Parallel",
+      "typeName": "System.Threading.Tasks.Parallel",
+      "methodName": "ForEach",
+      "isStatic": true
+    },
+    {
+      "index": 87,
+      "kind": "benchmark",
+      "subjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach:System.Threading.Tasks.ParallelLoopResult(System.Collections.Concurrent.OrderablePartitioner\u003CSystem.Int32\u003E,System.Threading.Tasks.ParallelOptions,System.Func\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Threading.Tasks.ParallelLoopState,System.Int64,System.Int32,System.Int32\u003E,System.Action\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Threading.Tasks.Parallel",
+      "typeName": "System.Threading.Tasks.Parallel",
+      "methodName": "ForEach",
+      "isStatic": true
+    },
+    {
+      "index": 88,
+      "kind": "benchmark",
+      "subjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForAsync:System.Threading.Tasks.Task(System.Int64,System.Int64,System.Func\u003CSystem.Int64,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask\u003E)",
+      "assemblyName": "System.Threading.Tasks.Parallel",
+      "typeName": "System.Threading.Tasks.Parallel",
+      "methodName": "ForAsync",
+      "isStatic": true
+    },
+    {
+      "index": 89,
+      "kind": "benchmark",
+      "subjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForAsync:System.Threading.Tasks.Task(System.Int64,System.Int64,System.Func\u003CSystem.Int64,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask\u003E)",
+      "assemblyName": "System.Threading.Tasks.Parallel",
+      "typeName": "System.Threading.Tasks.Parallel",
+      "methodName": "ForAsync",
+      "isStatic": true
+    },
+    {
+      "index": 90,
+      "kind": "benchmark",
+      "subjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForAsync:System.Threading.Tasks.Task(System.Int64,System.Int64,System.Func\u003CSystem.Int64,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask\u003E)",
+      "assemblyName": "System.Threading.Tasks.Parallel",
+      "typeName": "System.Threading.Tasks.Parallel",
+      "methodName": "ForAsync",
+      "isStatic": true
+    },
+    {
+      "index": 91,
+      "kind": "benchmark",
+      "subjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForAsync:System.Threading.Tasks.Task(System.Int64,System.Int64,System.Func\u003CSystem.Int64,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask\u003E)",
+      "assemblyName": "System.Threading.Tasks.Parallel",
+      "typeName": "System.Threading.Tasks.Parallel",
+      "methodName": "ForAsync",
+      "isStatic": true
+    },
+    {
+      "index": 92,
+      "kind": "benchmark",
+      "subjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForAsync:System.Threading.Tasks.Task(System.Int64,System.Int64,System.Threading.CancellationToken,System.Func\u003CSystem.Int64,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask\u003E)",
+      "assemblyName": "System.Threading.Tasks.Parallel",
+      "typeName": "System.Threading.Tasks.Parallel",
+      "methodName": "ForAsync",
+      "isStatic": true
+    },
+    {
+      "index": 93,
+      "kind": "benchmark",
+      "subjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForAsync:System.Threading.Tasks.Task(System.Int64,System.Int64,System.Threading.CancellationToken,System.Func\u003CSystem.Int64,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask\u003E)",
+      "assemblyName": "System.Threading.Tasks.Parallel",
+      "typeName": "System.Threading.Tasks.Parallel",
+      "methodName": "ForAsync",
+      "isStatic": true
+    },
+    {
+      "index": 94,
+      "kind": "benchmark",
+      "subjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForAsync:System.Threading.Tasks.Task(System.Int64,System.Int64,System.Threading.CancellationToken,System.Func\u003CSystem.Int64,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask\u003E)",
+      "assemblyName": "System.Threading.Tasks.Parallel",
+      "typeName": "System.Threading.Tasks.Parallel",
+      "methodName": "ForAsync",
+      "isStatic": true
+    },
+    {
+      "index": 95,
+      "kind": "benchmark",
+      "subjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForAsync:System.Threading.Tasks.Task(System.Int64,System.Int64,System.Threading.CancellationToken,System.Func\u003CSystem.Int64,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask\u003E)",
+      "assemblyName": "System.Threading.Tasks.Parallel",
+      "typeName": "System.Threading.Tasks.Parallel",
+      "methodName": "ForAsync",
+      "isStatic": true
+    },
+    {
+      "index": 96,
+      "kind": "benchmark",
+      "subjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForAsync:System.Threading.Tasks.Task(System.Int64,System.Int64,System.Threading.Tasks.ParallelOptions,System.Func\u003CSystem.Int64,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask\u003E)",
+      "assemblyName": "System.Threading.Tasks.Parallel",
+      "typeName": "System.Threading.Tasks.Parallel",
+      "methodName": "ForAsync",
+      "isStatic": true
+    },
+    {
+      "index": 97,
+      "kind": "benchmark",
+      "subjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForAsync:System.Threading.Tasks.Task(System.Int64,System.Int64,System.Threading.Tasks.ParallelOptions,System.Func\u003CSystem.Int64,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask\u003E)",
+      "assemblyName": "System.Threading.Tasks.Parallel",
+      "typeName": "System.Threading.Tasks.Parallel",
+      "methodName": "ForAsync",
+      "isStatic": true
+    },
+    {
+      "index": 98,
+      "kind": "benchmark",
+      "subjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForAsync:System.Threading.Tasks.Task(System.Int64,System.Int64,System.Threading.Tasks.ParallelOptions,System.Func\u003CSystem.Int64,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask\u003E)",
+      "assemblyName": "System.Threading.Tasks.Parallel",
+      "typeName": "System.Threading.Tasks.Parallel",
+      "methodName": "ForAsync",
+      "isStatic": true
+    },
+    {
+      "index": 99,
+      "kind": "benchmark",
+      "subjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForAsync:System.Threading.Tasks.Task(System.Int64,System.Int64,System.Threading.Tasks.ParallelOptions,System.Func\u003CSystem.Int64,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask\u003E)",
+      "assemblyName": "System.Threading.Tasks.Parallel",
+      "typeName": "System.Threading.Tasks.Parallel",
+      "methodName": "ForAsync",
+      "isStatic": true
+    },
+    {
+      "index": 100,
+      "kind": "benchmark",
+      "subjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEachAsync:System.Threading.Tasks.Task(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask\u003E)",
+      "assemblyName": "System.Threading.Tasks.Parallel",
+      "typeName": "System.Threading.Tasks.Parallel",
+      "methodName": "ForEachAsync",
+      "isStatic": true
+    },
+    {
+      "index": 101,
+      "kind": "benchmark",
+      "subjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEachAsync:System.Threading.Tasks.Task(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask\u003E)",
+      "assemblyName": "System.Threading.Tasks.Parallel",
+      "typeName": "System.Threading.Tasks.Parallel",
+      "methodName": "ForEachAsync",
+      "isStatic": true
+    },
+    {
+      "index": 102,
+      "kind": "benchmark",
+      "subjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEachAsync:System.Threading.Tasks.Task(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Threading.CancellationToken,System.Func\u003CSystem.Int32,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask\u003E)",
+      "assemblyName": "System.Threading.Tasks.Parallel",
+      "typeName": "System.Threading.Tasks.Parallel",
+      "methodName": "ForEachAsync",
+      "isStatic": true
+    },
+    {
+      "index": 103,
+      "kind": "benchmark",
+      "subjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEachAsync:System.Threading.Tasks.Task(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Threading.CancellationToken,System.Func\u003CSystem.Int32,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask\u003E)",
+      "assemblyName": "System.Threading.Tasks.Parallel",
+      "typeName": "System.Threading.Tasks.Parallel",
+      "methodName": "ForEachAsync",
+      "isStatic": true
+    },
+    {
+      "index": 104,
+      "kind": "benchmark",
+      "subjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEachAsync:System.Threading.Tasks.Task(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Threading.Tasks.ParallelOptions,System.Func\u003CSystem.Int32,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask\u003E)",
+      "assemblyName": "System.Threading.Tasks.Parallel",
+      "typeName": "System.Threading.Tasks.Parallel",
+      "methodName": "ForEachAsync",
+      "isStatic": true
+    },
+    {
+      "index": 105,
+      "kind": "benchmark",
+      "subjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEachAsync:System.Threading.Tasks.Task(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Threading.Tasks.ParallelOptions,System.Func\u003CSystem.Int32,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask\u003E)",
+      "assemblyName": "System.Threading.Tasks.Parallel",
+      "typeName": "System.Threading.Tasks.Parallel",
+      "methodName": "ForEachAsync",
+      "isStatic": true
+    },
+    {
+      "index": 106,
+      "kind": "benchmark",
+      "subjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEachAsync:System.Threading.Tasks.Task(System.Collections.Generic.IAsyncEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask\u003E)",
+      "assemblyName": "System.Threading.Tasks.Parallel",
+      "typeName": "System.Threading.Tasks.Parallel",
+      "methodName": "ForEachAsync",
+      "isStatic": true
+    },
+    {
+      "index": 107,
+      "kind": "benchmark",
+      "subjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEachAsync:System.Threading.Tasks.Task(System.Collections.Generic.IAsyncEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask\u003E)",
+      "assemblyName": "System.Threading.Tasks.Parallel",
+      "typeName": "System.Threading.Tasks.Parallel",
+      "methodName": "ForEachAsync",
+      "isStatic": true
+    },
+    {
+      "index": 108,
+      "kind": "benchmark",
+      "subjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEachAsync:System.Threading.Tasks.Task(System.Collections.Generic.IAsyncEnumerable\u003CSystem.Int32\u003E,System.Threading.CancellationToken,System.Func\u003CSystem.Int32,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask\u003E)",
+      "assemblyName": "System.Threading.Tasks.Parallel",
+      "typeName": "System.Threading.Tasks.Parallel",
+      "methodName": "ForEachAsync",
+      "isStatic": true
+    },
+    {
+      "index": 109,
+      "kind": "benchmark",
+      "subjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEachAsync:System.Threading.Tasks.Task(System.Collections.Generic.IAsyncEnumerable\u003CSystem.Int32\u003E,System.Threading.CancellationToken,System.Func\u003CSystem.Int32,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask\u003E)",
+      "assemblyName": "System.Threading.Tasks.Parallel",
+      "typeName": "System.Threading.Tasks.Parallel",
+      "methodName": "ForEachAsync",
+      "isStatic": true
+    },
+    {
+      "index": 110,
+      "kind": "benchmark",
+      "subjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEachAsync:System.Threading.Tasks.Task(System.Collections.Generic.IAsyncEnumerable\u003CSystem.Int32\u003E,System.Threading.Tasks.ParallelOptions,System.Func\u003CSystem.Int32,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask\u003E)",
+      "assemblyName": "System.Threading.Tasks.Parallel",
+      "typeName": "System.Threading.Tasks.Parallel",
+      "methodName": "ForEachAsync",
+      "isStatic": true
+    },
+    {
+      "index": 111,
+      "kind": "benchmark",
+      "subjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEachAsync:System.Threading.Tasks.Task(System.Collections.Generic.IAsyncEnumerable\u003CSystem.Int32\u003E,System.Threading.Tasks.ParallelOptions,System.Func\u003CSystem.Int32,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask\u003E)",
+      "assemblyName": "System.Threading.Tasks.Parallel",
+      "typeName": "System.Threading.Tasks.Parallel",
+      "methodName": "ForEachAsync",
+      "isStatic": true
+    },
+    {
+      "index": 112,
+      "kind": "benchmark",
+      "subjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelLoopState::Stop:System.Void()",
+      "assemblyName": "System.Threading.Tasks.Parallel",
+      "typeName": "System.Threading.Tasks.ParallelLoopState",
+      "methodName": "Stop",
+      "isStatic": true
+    },
+    {
+      "index": 113,
+      "kind": "benchmark",
+      "subjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelLoopState::Break:System.Void()",
+      "assemblyName": "System.Threading.Tasks.Parallel",
+      "typeName": "System.Threading.Tasks.ParallelLoopState",
+      "methodName": "Break",
+      "isStatic": true
+    }
+  ],
+  "summary": {
+    "totalSubjects": 114,
+    "factCount": 0,
+    "benchmarkCount": 114,
+    "hotUpdateCount": 0
+  }
+}

@@ -3418,10 +3418,18 @@ private void EmitLinearInitObj(StringBuilder builder, AotCoreIrInstructionArtifa
 			}
 			if (devirtParams.Count > 0)
 			{
-				builder.AppendLine($"{indentation}    if (chaos_arg_0 == 0)");
-				builder.AppendLine($"{indentation}    {{");
-				builder.AppendLine($"{indentation}        ::chaos::il2cpp::runtime_core::RaiseNullReferenceException();");
-				builder.AppendLine($"{indentation}    }}");
+			    // Null check guard: immediately exit the devirtualization scope
+			    // when this is null.  RaiseNullReferenceException is [[noreturn]]
+			    // but the type-guard code below (chaos_object_get_type_info)
+			    // would null-dereference if execution somehow falls through.
+			    // Explicit goto prevents any fallthrough even if the [[noreturn]]
+			    // function does not actually terminate execution (e.g. when
+			    // g_chaos_fail_hook uses longjmp in verification mode).
+			    builder.AppendLine($"{indentation}    if (chaos_arg_0 == 0)");
+			    builder.AppendLine($"{indentation}    {{");
+			    builder.AppendLine($"{indentation}        ::chaos::il2cpp::runtime_core::RaiseNullReferenceException();");
+			    builder.AppendLine($"{indentation}        goto chaos_dt_end_{instruction.IlOffset};");
+			    builder.AppendLine($"{indentation}    }}");
 			}
 			if (devirtHint.GuardTypeSubjectId != null)
 			{
@@ -3595,6 +3603,7 @@ private void EmitLinearInitObj(StringBuilder builder, AotCoreIrInstructionArtifa
 						EmitAbiReturnPush(builder, comRetAbi, "chaos_hr", $"{indentation}    ");
 					}
 				}
+				chaos_dt_end_{instruction.IlOffset}: ;
 				builder.AppendLine($"{indentation}}}");
 				return;
 			}

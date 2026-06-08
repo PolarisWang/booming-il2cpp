@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "max_entries": 50,
+  "entries": [
+    {
+      "cache_key": "System.Runtime.Serialization.Formatters/global-ns/5b8ab19ec4ddc6b2",
+      "assembly": "System.Runtime.Serialization.Formatters",
+      "chunk_slug": "global-ns",
+      "input_hash": "5b8ab19ec4ddc6b2e929f8e00fd0858dde14d3285d6f201d8dca2c8df676be1a",
+      "cached_at": "2026-06-07T15:39:16Z",
+      "duration_ms": 38535,
+      "commit_hash": "49e15e221",
+      "entry_exe_size": 4243456,
+      "entry_count": 350,
+      "status": "valid"
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "max_entries": 50,
+  "entries": [
+    {
+      "cache_key": "System.Linq/global-ns/c12eee016e0249b1",
+      "assembly": "System.Linq",
+      "chunk_slug": "global-ns",
+      "input_hash": "c12eee016e0249b12eb19b50b72548cd0ecddd9694b9a21c5167e86e415511e4",
+      "cached_at": "2026-06-07T15:04:03Z",
+      "duration_ms": 70755,
+      "commit_hash": "882a05184",
+      "entry_exe_size": 9014784,
+      "entry_count": 366,
+      "status": "valid"
+    }
+  ]
+}

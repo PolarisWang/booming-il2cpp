@@ -1,0 +1,54 @@
+{
+  "version": 1,
+  "max_entries": 50,
+  "entries": [
+    {
+      "cache_key": "System.Text.Json/global-ns/e026d1d430acb6c2",
+      "assembly": "System.Text.Json",
+      "chunk_slug": "global-ns",
+      "input_hash": "e026d1d430acb6c2c086cc15d50e1e0874d41d6c19fa1416be6df2faa21a6ee5",
+      "cached_at": "2026-06-07T15:47:16Z",
+      "duration_ms": 38048,
+      "commit_hash": "49e15e221",
+      "entry_exe_size": 4273152,
+      "entry_count": 348,
+      "status": "valid"
+    },
+    {
+      "cache_key": "System.Text.Json/system-text-json-serialization-converters/616a65c74b61d2ec",
+      "assembly": "System.Text.Json",
+      "chunk_slug": "system-text-json-serialization-converters",
+      "input_hash": "616a65c74b61d2ecc61a1abe357406d0278d90dee0f27f16e80718c7c3554fea",
+      "cached_at": "2026-06-07T15:46:01Z",
+      "duration_ms": 41449,
+      "commit_hash": "49e15e221",
+      "entry_exe_size": 5044224,
+      "entry_count": 351,
+      "status": "valid"
+    },
+    {
+      "cache_key": "System.Text.Json/text-json/e9a7500e4bd2b3b9",
+      "assembly": "System.Text.Json",
+      "chunk_slug": "text-json",
+      "input_hash": "e9a7500e4bd2b3b9c6520d6ef8375cd29be159255b52f3d217cfc7e40f32ffc8",
+      "cached_at": "2026-06-07T15:44:18Z",
+      "duration_ms": 59121,
+      "commit_hash": "49e15e221",
+      "entry_exe_size": 9340416,
+      "entry_count": 367,
+      "status": "valid"
+    },
+    {
+      "cache_key": "System.Text.Json/global-ns/f4e2f0e37315a8de",
+      "assembly": "System.Text.Json",
+      "chunk_slug": "global-ns",
+      "input_hash": "f4e2f0e37315a8de1e7d7cf42b58012be5ed754ba43dc24c8e1ee2aff33326c2",
+      "cached_at": "2026-06-07T14:24:58Z",
+      "duration_ms": 10912,
+      "commit_hash": "8f001edbc",
+      "entry_exe_size": 4242432,
+      "entry_count": 475,
+      "status": "valid"
+    }
+  ]
+}
