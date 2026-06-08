@@ -309,14 +309,19 @@ def _read_benchmark_metadata(metadata_path: Path) -> list[dict]:
     """Read subjects.metadata.json and return benchmark method entries in index order.
 
     Returns a list of dicts with keys: index, methodSubjectId.
+    When benchmarkMethodIndices is missing or empty, falls back to ALL methods
+    (some ATG versions don't populate benchmarkMethodIndices for CoreLib).
     """
     metadata = json.loads(metadata_path.read_text(encoding="utf-8"))
     methods = metadata.get("methods", [])
     benchmark_indices = set(metadata.get("benchmarkMethodIndices") or [])
-    return [
-        m for m in sorted(methods, key=lambda x: x["index"])
-        if m["index"] in benchmark_indices
-    ]
+    if benchmark_indices:
+        return [
+            m for m in sorted(methods, key=lambda x: x["index"])
+            if m["index"] in benchmark_indices
+        ]
+    # Fallback: no benchmark indices — use all methods
+    return sorted(methods, key=lambda x: x["index"])
 
 
 def _parse_runner_output(stdout: str) -> list[dict]:
