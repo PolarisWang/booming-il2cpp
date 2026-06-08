@@ -16,6 +16,12 @@ entry.exe --profile (profile build)
     → analysis/perf_baseline.py (基线)
     → analysis/perf_compare.py (对比)
     → analysis/regression_report.py (聚合报告)
+    
+.NET Runner --kind benchmark
+  → BenchmarkRunner.cs (gcInfo 采集: GC.GetAllocatedBytesForCurrentThread)
+  → managed_benchmark.py → benchmark-history.jsonl
+  → benchmark_report.py → comparison.json (gcComparison 节)
+  → analysis/profile_compare.py (AOT vs JIT 逐方法对比)
 ```
 
 ## 前置条件
@@ -199,3 +205,46 @@ python -m verification.analysis.regression_report System.Private.CoreLib --slug 
 1. 依赖 cmake --preset profile 构建；check 构建下运行 --profile 输出空数据
 2. .map 文件解析只有 MSVC link.exe 格式；llvm-lld 需要单独适配
 3. 多线程 dispatch 下 thread_local 数据在 Flush 时自动合并
+
+## 跨技术栈 GC 对比
+
+### managed_benchmark + benchmark_report
+
+```bash
+# 运行 managed benchmark（自动采集 gcInfo）
+cd testing/foundation-dll
+python -m verification.chunk_pipeline \
+  --assembly System.Private.CoreLib \
+  --chunk buffers \
+  --stages managed_benchmark,benchmark_report
+
+# 验证 gcComparison 输出
+python -c "
+import json
+d = json.load(open('System.Private.CoreLib/chunks/buffers/results/comparison.json'))
+with_gc = [m for m in d['methods'] if m.get('gcComparison')]
+print(f'gcComparison: {len(with_gc)}/{len(d[\"methods\"])} methods')
+for m in with_gc[:5]:
+    gc = m['gcComparison']
+    print(f'  {gc[\"net8AllocBytes\"]}B col0={gc[\"net8CollectionCount0\"]}')
+"
+```
+
+### profile_compare.py
+
+```bash
+python -m verification.analysis.profile_compare \
+  --aot-profile chunks/buffers/results/profile.json \
+  --managed-jsonl results/foundation-dll/System.Private.CoreLib/buffers/perf/benchmark-history.jsonl \
+  --metadata chunks/buffers/managed/subjects/subjects.metadata.json \
+  --output chunks/buffers/results/profile-comparison.json \
+  --threshold 2.0
+```
+
+标记 AOT 分配 > JIT 2x 的方法。
+
+## 已知限制
+
+1. `entry.exe --profile` 在 check build 下不产生真实数据（stubs 输出空 `{"profile":[]}`）。需使用 `--native-config profile`。
+2. AOT profile 数据目前只采集 allocation count 和 bytes，GC pause 信息需要 TLAB/GC 压力测试场景。
+3. 部分 chunk（numerics、system）因 codegen 问题无法编译，限制统计覆盖范围。
