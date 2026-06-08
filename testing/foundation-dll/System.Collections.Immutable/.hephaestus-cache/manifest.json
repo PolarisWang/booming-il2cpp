@@ -3,39 +3,15 @@
   "max_entries": 50,
   "entries": [
     {
-      "cache_key": "System.Collections.Immutable/global-ns/29dd6e95748e147b",
+      "cache_key": "System.Collections.Immutable/global-ns/e192f68bd3d1b7fc",
       "assembly": "System.Collections.Immutable",
       "chunk_slug": "global-ns",
-      "input_hash": "29dd6e95748e147b9fe953957a45c946ff23b952adb6eba95fd2f6fcd050befb",
-      "cached_at": "2026-06-07T15:36:25Z",
-      "duration_ms": 39271,
-      "commit_hash": "4f3a5f68a",
-      "entry_exe_size": 3687936,
+      "input_hash": "e192f68bd3d1b7fc765f9505dab049fb181c0482524db2a278573dd0963cdc57",
+      "cached_at": "2026-06-08T02:12:23Z",
+      "duration_ms": 34726,
+      "commit_hash": "314eb9c5d",
+      "entry_exe_size": 3617280,
       "entry_count": 345,
-      "status": "valid"
-    },
-    {
-      "cache_key": "System.Collections.Immutable/global-ns/0162d34e19319cc7",
-      "assembly": "System.Collections.Immutable",
-      "chunk_slug": "global-ns",
-      "input_hash": "0162d34e19319cc79ef0c36175a1a5a0e7d507cfabd86d092053521cac36bacf",
-      "cached_at": "2026-06-07T13:00:11Z",
-      "duration_ms": 41373,
-      "commit_hash": "7b66d9432",
-      "entry_exe_size": 3676672,
-      "entry_count": 343,
-      "status": "valid"
-    },
-    {
-      "cache_key": "System.Collections.Immutable/global-ns/3aa53ac496c54168",
-      "assembly": "System.Collections.Immutable",
-      "chunk_slug": "global-ns",
-      "input_hash": "3aa53ac496c5416892448f000fc11b531b29da3576af3d417b502ffd5e56e727",
-      "cached_at": "2026-06-07T12:41:33Z",
-      "duration_ms": 35521,
-      "commit_hash": "a215b56ac",
-      "entry_exe_size": 3676672,
-      "entry_count": 342,
       "status": "valid"
     }
   ]
