@@ -4131,7 +4131,6 @@ public sealed partial class NativeAotLoweringPlanner
             // ── Vector reductions: compare + any/all ──
             void RegisterVectorReduction(string methodName, string nativeSymbol)
             {
-                var sym = nativeSymbol;
                 registry.RegisterGeneric(new GenericShapeDescriptor(
                     TypeDisplayNamePrefix: "System.Numerics.Vector",
                     MethodName: methodName,
@@ -4144,7 +4143,7 @@ public sealed partial class NativeAotLoweringPlanner
                             [CreateNativeIntAbiSlot(), CreateNativeIntAbiSlot()],
                             CreateInt32AbiSlot(),
                             EmptyRawArgumentIndices,
-                            DirectNativeSymbol: sym);
+                            DirectNativeSymbol: nativeSymbol);
                     }));
             }
             RegisterVectorReduction("GreaterThanAny", "chaos_vector_greater_than_any");
