@@ -65,6 +65,11 @@ CHAOS_IL2CPP_FORCEINLINE void* GcAllocateAtomicFast(CHAOS_IL2CPP_SIZE size) {
     if (ptr) {
         tls_alloc_fast_count++;
         tls_alloc_fast_bytes += size;
+#if CHAOS_IL2CPP_PROFILE_ENABLED
+        ProfileRecordNurseryAlloc(static_cast<int64_t>(size));
+        ProfileRecordAllocCount();
+        ProfileRecordFastPath();
+#endif
     }
     return ptr;
 }
@@ -82,6 +87,11 @@ CHAOS_IL2CPP_FORCEINLINE void* GcAllocateFastNoZero(CHAOS_IL2CPP_SIZE size) {
     if (ptr) {
         tls_alloc_fast_count++;
         tls_alloc_fast_bytes += size;
+#if CHAOS_IL2CPP_PROFILE_ENABLED
+        ProfileRecordNurseryAlloc(static_cast<int64_t>(size));
+        ProfileRecordAllocCount();
+        ProfileRecordFastPath();
+#endif
     }
     return ptr;
 }
