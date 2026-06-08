@@ -78,6 +78,38 @@ reinterpret_cast<FnType>(kChaosExternalRuntimeFnTable[idx])(args);
 | Phase 3 | Hephaestus Lib 缓存库 | ✅ 已完成 |
 | Phase 4 | Gold Direct Link 热点编译 | ✅ 已完成 |
 | Phase 5 | Wiki 文档更新 | ✅ 已完成 |
+| Phase 6 | Cryptography Runtime Stubs | 🔄 进行中 (BCrypt stubs 基础设施就绪, ABI 注册待完善) |
+
+
+## Phase 6: Cryptography Runtime Stubs
+
+### 目标
+
+为 System.Security.Cryptography 提供 native C++ 实现，使用 Windows CNG (BCrypt) API，
+消除 145 个 crypto test failures。
+
+### 已实现
+
+| Stub | API | 状态 |
+|------|-----|------|
+| RandomNumberGenerator.Fill | BCryptGenRandom | ✅ 完全实现 |
+| SHA1.HashData | BCrypt SHA1 | 🔄 需 managed byte[] 分配 |
+| SHA256.HashData | BCrypt SHA256 | 🔄 需 managed byte[] 分配 |
+| SHA384.HashData | BCrypt SHA384 | 🔄 需 managed byte[] 分配 |
+| SHA512.HashData | BCrypt SHA512 | 🔄 需 managed byte[] 分配 |
+| HMACSHA256.HashData | BCrypt HMAC | 🔄 需 managed byte[] 分配 |
+
+### 剩余工作
+
+1. **Managed byte[] 分配**: 从 native 侧分配 managed byte[] 需要 GC 互操作，当前返回 0 (null)
+2. **ABI 注册**: RuntimeHelperShapeRegistry.cs 中注册每个 crypto 方法的 ABI slot
+3. **高级操作**: RSA sign/verify, ECDsa, DSA, AES-GCM 需要多层 BCrypt 操作
+
+### 文件
+
+-  — BCrypt 实现
+-  — extern 声明
+-  — 加入 CHAOS_CRYPTO_STUBS 编译
 
 ## 相关文档
 
