@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "max_entries": 50,
+  "entries": [
+    {
+      "cache_key": "System.Security.Cryptography/security-cryptography/15a7a5ec0bac659a",
+      "assembly": "System.Security.Cryptography",
+      "chunk_slug": "security-cryptography",
+      "input_hash": "15a7a5ec0bac659a9a7d42979e6aa2a9ed1d17011fb152f0ada574df88253b3b",
+      "cached_at": "2026-06-08T06:22:22Z",
+      "duration_ms": 173169,
+      "commit_hash": "d148b8dac",
+      "entry_exe_size": 31076864,
+      "entry_count": 427,
+      "status": "valid"
+    }
+  ]
+}
