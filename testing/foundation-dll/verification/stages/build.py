@@ -383,7 +383,7 @@ def run_build(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
         # SseFormatter.WriteAsync is an async Task-returning method; its state
         # machine IL cannot be translated by the AOT codegen.  Exclude these
         # subjects to avoid fact failures from CHAOS_IL2CPP_FAIL() stubs.
-        if ctx.assembly_name == "System.Net.ServerSentEvents":
+        if ctx.assembly == "System.Net.ServerSentEvents":
             subjects = metadata.get("methods", metadata.get("subjects", []))
             filtered = [s for s in subjects
                         if "SseFormatter" not in s.get("methodSubjectId", s.get("subjectId", ""))]
