@@ -932,41 +932,49 @@ static int RunHotupdateBenchmarkMode(int entry_index, int iterations) {
 
 // ── --profile: per-method GC/allocation/code-size profile ───────────
 static int RunProfileMode() {
-    const int kCount = kSubjectEntryCount;
-    chaos::il2cpp::runtime_core::ProfileStoreInit(kCount);
-    for (int si = 0; si < kCount; si++) {
+    chaos::il2cpp::runtime_core::ProfileStoreInit(kSubjectEntryCount);
+    for (int si = 0; si < kSubjectEntryCount; si++) {
         int i = kSubjectSlotMap[si];
-
 #if defined(_WIN32)
-        __try {
-            int64_t heap_before = chaos::il2cpp::runtime_core::chaos_gc_get_heap_size();
-            chaos::il2cpp::runtime_core::GetThreadProfileData().heap_before = heap_before;
-
-            CHAOS_EH_TRY
-                chaos::il2cpp::runtime_core::ChaosDispatchMethod(
-                    GetHotpatchEntries(), kAotMethodCount, i, CHAOS_USE_DEFAULT_THUNKS);
-            CHAOS_EH_CATCH_BEGIN
-            CHAOS_EH_END
-
-            int64_t heap_after = chaos::il2cpp::runtime_core::chaos_gc_get_heap_size();
-            chaos::il2cpp::runtime_core::GetThreadProfileData().heap_after = heap_after;
-        } __except(EXCEPTION_EXECUTE_HANDLER) {
-            // SEH caught — continue
+        // _setjmp must be outside __try on x64.  Catches longjmp from
+        // CHAOS_IL2CPP_FAIL when entry.direct_ptr is null (e.g. unresolved
+        // external runtime thunks for methods not in the AOT compilation set).
+        bool dispatch_ok = false;
+        if (_setjmp(t_abort_jmp) == 0) {
+            __try {
+                int64_t heap_before = chaos::il2cpp::runtime_core::chaos_gc_get_heap_size();
+                chaos::il2cpp::runtime_core::GetThreadProfileData().heap_before = heap_before;
+                CHAOS_EH_TRY
+                    chaos::il2cpp::runtime_core::ChaosDispatchMethod(
+                        GetHotpatchEntries(), kAotMethodCount, i, CHAOS_USE_DEFAULT_THUNKS);
+                CHAOS_EH_CATCH_BEGIN
+                CHAOS_EH_END
+                int64_t heap_after = chaos::il2cpp::runtime_core::chaos_gc_get_heap_size();
+                chaos::il2cpp::runtime_core::GetThreadProfileData().heap_after = heap_after;
+                dispatch_ok = true;
+            } __except(EXCEPTION_EXECUTE_HANDLER) {
+                // SEH caught — continue
+            }
         }
+        if (!dispatch_ok) {
+            // longjmp from CHAOS_IL2CPP_FAIL or SEH caught
+            // Record empty profile data so the loop continues
+            chaos::il2cpp::runtime_core::GetThreadProfileData().heap_after =
+                chaos::il2cpp::runtime_core::chaos_gc_get_heap_size();
+        }
+        chaos::il2cpp::runtime_core::FlushThreadProfileData(i);
 #else
         CHAOS_EH_TRY
             int64_t heap_before = chaos::il2cpp::runtime_core::chaos_gc_get_heap_size();
             chaos::il2cpp::runtime_core::GetThreadProfileData().heap_before = heap_before;
-
             chaos::il2cpp::runtime_core::ChaosDispatchMethod(
                 GetHotpatchEntries(), kAotMethodCount, i, CHAOS_USE_DEFAULT_THUNKS);
-
             int64_t heap_after = chaos::il2cpp::runtime_core::chaos_gc_get_heap_size();
             chaos::il2cpp::runtime_core::GetThreadProfileData().heap_after = heap_after;
+            chaos::il2cpp::runtime_core::FlushThreadProfileData(i);
         CHAOS_EH_CATCH_BEGIN
         CHAOS_EH_END
 #endif
-        chaos::il2cpp::runtime_core::FlushThreadProfileData(i);
     }
     chaos::il2cpp::runtime_core::ProfileStoreFinalize();
     chaos::il2cpp::runtime_core::ProfileEmitJson();
