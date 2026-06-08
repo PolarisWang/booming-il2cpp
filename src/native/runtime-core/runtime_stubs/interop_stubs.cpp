@@ -347,5 +347,69 @@ void ChaosSafeBufferWriteByte(CHAOS_IL2CPP_INTPTR safeBuffer, CHAOS_IL2CPP_INTPT
     static_cast<CHAOS_IL2CPP_UINT8*>(handlePtr)[position] = value;
 }
 
+// ═══════════════════════════════════════════════════════════════
+// ComWrappers stubs — return 0 (COM not available in AOT mode)
+// ═══════════════════════════════════════════════════════════════
+
+CHAOS_IL2CPP_INTPTR ChaosComWrappersRegisterForMarshalling(CHAOS_IL2CPP_INTPTR wrapperObj) noexcept
+{
+    (void)wrapperObj;
+    return 0;
+}
+
+CHAOS_IL2CPP_INTPTR ChaosComWrappersGetOrCreateComInterfaceForObject(CHAOS_IL2CPP_INTPTR obj, CHAOS_IL2CPP_INT32 flags, CHAOS_IL2CPP_INTPTR wrapperObj) noexcept
+{
+    (void)obj; (void)flags; (void)wrapperObj;
+    return 0;
+}
+
+CHAOS_IL2CPP_INTPTR ChaosComWrappersGetOrCreateObjectForComInstance(CHAOS_IL2CPP_INTPTR comPtr, CHAOS_IL2CPP_INT32 flags, CHAOS_IL2CPP_INTPTR wrapperObj) noexcept
+{
+    (void)comPtr; (void)flags; (void)wrapperObj;
+    return 0;
+}
+
+CHAOS_IL2CPP_INT32 ChaosComWrappersTryGetComInstance(CHAOS_IL2CPP_INTPTR obj, CHAOS_IL2CPP_INTPTR wrapperObj) noexcept
+{
+    (void)obj; (void)wrapperObj;
+    return 0;
+}
+
+CHAOS_IL2CPP_INT32 ChaosComWrappersTryGetObject(CHAOS_IL2CPP_INTPTR comPtr, CHAOS_IL2CPP_INTPTR wrapperObj) noexcept
+{
+    (void)comPtr; (void)wrapperObj;
+    return 0;
+}
+
+// ═══════════════════════════════════════════════════════════════
+// NativeLibrary stubs — delegate to engine_binding.h
+// ═══════════════════════════════════════════════════════════════
+
+CHAOS_IL2CPP_INTPTR ChaosNativeLibraryLoad(CHAOS_IL2CPP_INTPTR nameObj) noexcept
+{
+    if (nameObj == 0) return 0;
+    const char* name = stub_string_data(reinterpret_cast<void*>(nameObj));
+    if (name == nullptr) return 0;
+    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(NativeLibraryLoad(name));
+}
+
+CHAOS_IL2CPP_INT32 ChaosNativeLibraryFree(CHAOS_IL2CPP_INTPTR handle) noexcept
+{
+    return NativeLibraryFree(reinterpret_cast<void*>(handle)) ? 1 : 0;
+}
+
+CHAOS_IL2CPP_INTPTR ChaosNativeLibraryGetExport(CHAOS_IL2CPP_INTPTR handle, CHAOS_IL2CPP_INTPTR nameObj) noexcept
+{
+    if (handle == 0 || nameObj == 0) return 0;
+    const char* name = stub_string_data(reinterpret_cast<void*>(nameObj));
+    if (name == nullptr) return 0;
+    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(NativeLibraryGetProcAddress(reinterpret_cast<void*>(handle), name));
+}
+
+CHAOS_IL2CPP_INTPTR ChaosNativeLibraryGetMainProgramHandle(void) noexcept
+{
+    return 0;  // Not supported in AOT mode
+}
+
 }  // extern "C"
 }  // namespace chaos::il2cpp::runtime_core

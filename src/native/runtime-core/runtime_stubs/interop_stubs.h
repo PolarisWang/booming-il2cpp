@@ -76,3 +76,18 @@ CHAOS_IL2CPP_INTPTR ChaosNativeMemoryAlignedRealloc(CHAOS_IL2CPP_INTPTR ptr, CHA
 CHAOS_IL2CPP_INT32 ChaosSafeBufferGetByteLength(CHAOS_IL2CPP_INTPTR safeBuffer) noexcept;
 CHAOS_IL2CPP_UINT8 ChaosSafeBufferReadByte(CHAOS_IL2CPP_INTPTR safeBuffer, CHAOS_IL2CPP_INTPTR position) noexcept;
 void   ChaosSafeBufferWriteByte(CHAOS_IL2CPP_INTPTR safeBuffer, CHAOS_IL2CPP_INTPTR position, CHAOS_IL2CPP_UINT8 value) noexcept;
+
+// ── ComWrappers stubs ────────────────────────────────────────
+// Stubs for ComWrappers static methods (AOT — COM not available).
+CHAOS_IL2CPP_INTPTR ChaosComWrappersRegisterForMarshalling(CHAOS_IL2CPP_INTPTR wrapperObj) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosComWrappersGetOrCreateComInterfaceForObject(CHAOS_IL2CPP_INTPTR obj, CHAOS_IL2CPP_INT32 flags, CHAOS_IL2CPP_INTPTR wrapperObj) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosComWrappersGetOrCreateObjectForComInstance(CHAOS_IL2CPP_INTPTR comPtr, CHAOS_IL2CPP_INT32 flags, CHAOS_IL2CPP_INTPTR wrapperObj) noexcept;
+CHAOS_IL2CPP_INT32 ChaosComWrappersTryGetComInstance(CHAOS_IL2CPP_INTPTR obj, CHAOS_IL2CPP_INTPTR wrapperObj) noexcept;
+CHAOS_IL2CPP_INT32 ChaosComWrappersTryGetObject(CHAOS_IL2CPP_INTPTR comPtr, CHAOS_IL2CPP_INTPTR wrapperObj) noexcept;
+
+// ── NativeLibrary stubs ─────────────────────────────────────
+// DirectNativeSymbol stubs for NativeLibrary.Load/Free/GetExport.
+CHAOS_IL2CPP_INTPTR ChaosNativeLibraryLoad(CHAOS_IL2CPP_INTPTR nameObj) noexcept;
+CHAOS_IL2CPP_INT32 ChaosNativeLibraryFree(CHAOS_IL2CPP_INTPTR handle) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosNativeLibraryGetExport(CHAOS_IL2CPP_INTPTR handle, CHAOS_IL2CPP_INTPTR nameObj) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosNativeLibraryGetMainProgramHandle(void) noexcept;

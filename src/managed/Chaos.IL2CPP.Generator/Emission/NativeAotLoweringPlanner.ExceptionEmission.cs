@@ -3371,7 +3371,11 @@ private void EmitLinearInitObj(StringBuilder builder, AotCoreIrInstructionArtifa
 	}
 	private void EmitLinearCall(StringBuilder builder, AotCoreIrInstructionArtifact instruction, string indentation)
 	{
-		EmitLinearCallTarget(builder, instruction, indentation, enforceInstanceNullCheck: false);
+		EmitLinearCallTarget(builder, instruction, indentation, enforceInstanceNullCheck: true);
+        // Enable instance null check for  on instance methods.
+        // While the CLR spec allows  on null  (unlike callvirt),
+        // our AOT-generated C++ code will AV when the method body accesses
+        // instance fields through a null pointer.
 	}
 
 	private void EmitLinearCallVirt(StringBuilder builder, AotCoreIrInstructionArtifact instruction, string indentation)

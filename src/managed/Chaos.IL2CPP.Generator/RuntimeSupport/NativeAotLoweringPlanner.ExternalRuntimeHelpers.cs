@@ -61,6 +61,13 @@ public sealed partial class NativeAotLoweringPlanner
 		// Canonicalize assembly prefix so matching is assembly-agnostic
 		callee = ManagedNaming.NormalizeSubjectIdAssembly(callee);
 
+		// If method compiled in AOT IR, use its real ParameterAbis, not catch-all stub
+		if (_methodsBySubjectId.ContainsKey(callee))
+		{
+			helperDefinition = null;
+			_externalRuntimeHelperCache[callee] = null;
+			return false;
+		}
 		// Check cache first (P0)
 		if (_externalRuntimeHelperCache.TryGetValue(callee, out var cached))
 		{
