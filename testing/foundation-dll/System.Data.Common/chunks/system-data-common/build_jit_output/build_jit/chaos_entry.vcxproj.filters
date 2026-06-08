@@ -46,9 +46,6 @@
     <ClCompile Include="D:\agent\booming-il2cpp\testing\foundation-dll\System.Data.Common\chunks\system-data-common\build_jit_output\codegen\runtime_stubs\interop_stubs.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="D:\agent\booming-il2cpp\src\native\runtime-core\runtime_stubs\vector_stubs.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="D:\agent\booming-il2cpp\testing\foundation-dll\System.Data.Common\chunks\system-data-common\build_jit_output\codegen\runtime_stubs\exception_stubs.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -59,6 +56,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="D:\agent\booming-il2cpp\src\native\hot-update\method_replacement.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\agent\booming-il2cpp\src\native\runtime-core\profile_stats.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="D:\agent\booming-il2cpp\testing\foundation-dll\System.Data.Common\chunks\system-data-common\build_jit_output\subjects\chaos_generated_module.cpp">

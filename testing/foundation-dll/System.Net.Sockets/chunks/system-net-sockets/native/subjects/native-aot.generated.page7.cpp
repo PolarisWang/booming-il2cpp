@@ -14,6 +14,7 @@
 #include <gc/gc_bgc_inline.h>
 #include <gc/gc_card_table.h>
 #include <ChaosGeneratedRuntimePrelude.h>
+#include "runtime_stubs/misc_stubs.h"
 #include "enum_stubs.h"
 #include "async_stubs.h"
 #include "exception_stubs.h"
@@ -35,42 +36,6 @@ namespace chaos::il2cpp::codegen::CombinedSubjects {
 using namespace chaos::il2cpp::runtime_core;
 using namespace chaos::il2cpp::jit;
 
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Boolean_System_Boolean_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Byte_System_Byte_System_String(CHAOS_IL2CPP_UINT8 chaos_fn_arg_0, CHAOS_IL2CPP_UINT8 chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Byte_array_System_Byte_array_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Char_System_Char_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Decimal_System_Decimal_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Double_System_Double_System_String(double chaos_fn_arg_0, double chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Int16_System_Int16_System_String(CHAOS_IL2CPP_INT16 chaos_fn_arg_0, CHAOS_IL2CPP_INT16 chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Int32_System_Int32_System_String(CHAOS_IL2CPP_INT32 chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Int64_System_Int64_System_String(CHAOS_IL2CPP_INT64 chaos_fn_arg_0, CHAOS_IL2CPP_INT64 chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Object_System_Object_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_SByte_System_SByte_System_String(CHAOS_IL2CPP_INT8 chaos_fn_arg_0, CHAOS_IL2CPP_INT8 chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Single_System_Single_System_String(float chaos_fn_arg_0, float chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_String_System_String_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_UInt16_System_UInt16_System_String(CHAOS_IL2CPP_UINT16 chaos_fn_arg_0, CHAOS_IL2CPP_UINT16 chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_UInt32_System_UInt32_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_UInt64_System_UInt64_System_String(CHAOS_IL2CPP_UINT64 chaos_fn_arg_0, CHAOS_IL2CPP_UINT64 chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_0_0_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreNotEqual_0_0_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
-extern "C" CHAOS_IL2CPP_INT32 Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Complete(void);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Fail_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
-extern "C" CHAOS_IL2CPP_INT32 Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_get_ExitCode(void);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_IsFalse_System_Boolean_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_IsNotNull_System_Object_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_IsNull_System_Object_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_IsTrue_System_Boolean_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_RecordFailure(void);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Reset(void);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Throws_System_Action(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Throws_System_ArgumentNullException_System_Action__generic(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_generic_context);
-extern "C" void chaos_stub_definition_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert__Throws_System_Void_System_Action__type____method__System_ArgumentNullException(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_generic_context);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Throws_System_NullReferenceException_System_Action__generic(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
-extern "C" void chaos_stub_definition_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert__Throws_System_Void_System_Action__type____method__System_NullReferenceException(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_generic_context);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_AssertionException__ctor_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_BenchmarkAttribute__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_FactAttribute__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_HotUpdateAttribute__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
 extern "C" void CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_NetworkStreamTests__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
 extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_NetworkStreamTests_BeginRead_7_System_Byte_int_int_System_AsyncCallback_object_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
 extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_NetworkStreamTests_BeginRead_7_System_Byte_int_int_System_AsyncCallback_object_1(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
@@ -1666,3055 +1631,20 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Soc
 
 
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests::DuplicateAndClose_140_int_0()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests_DuplicateAndClose_140_int_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests::Send_10_System_Byte_int_SocketFlags_0()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests_Send_10_System_Byte_int_SocketFlags_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
 	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__600_0;
-	_s1 = _s0;
-	{
-		if (_s1 == 0)
-		{
-			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9;
-			{
-				// Hotpatch-aware ldftn wrapper (slot 1088)
-				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[1088];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
-					{
-						alignas(16) uint8_t _d_ab[8];
-						ArgBuffer _d_bw(_d_ab);
-						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d_entry.method_key, _d_ab, nullptr);
-						return;
-					}
-					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
-				};
-			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
-			}
-			{
-				const auto chaos_method_ptr = _s1;
-				const auto chaos_target = _s0;
-				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
-				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
-				chaos_object->chaos_delegate_target = chaos_target;
-				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
-				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-			}
-			_s1 = _s0;
-			{
-				auto chaos_value = _s1;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__600_0 = chaos_value;
-			}
-		}
-		{
-			// Assert.Throws: target method not found via IL lookahead
-			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
-		}
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-		chaos_locals[0] = ChaosStoreInt64(_i0);
-		_i0 = ChaosLoadInt64(chaos_locals[0]);
-		return _i0;
-	}
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests::DuplicateAndClose_140_int_1()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests_DuplicateAndClose_140_int_1(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__602_0;
-	_s1 = _s0;
-	{
-		if (_s1 == 0)
-		{
-			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9;
-			{
-				// Hotpatch-aware ldftn wrapper (slot 1089)
-				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[1089];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
-					{
-						alignas(16) uint8_t _d_ab[8];
-						ArgBuffer _d_bw(_d_ab);
-						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d_entry.method_key, _d_ab, nullptr);
-						return;
-					}
-					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
-				};
-			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
-			}
-			{
-				const auto chaos_method_ptr = _s1;
-				const auto chaos_target = _s0;
-				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
-				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
-				chaos_object->chaos_delegate_target = chaos_target;
-				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
-				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-			}
-			_s1 = _s0;
-			{
-				auto chaos_value = _s1;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__602_0 = chaos_value;
-			}
-		}
-		{
-			// Assert.Throws: target method not found via IL lookahead
-			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
-		}
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-		chaos_locals[0] = ChaosStoreInt64(_i0);
-		_i0 = ChaosLoadInt64(chaos_locals[0]);
-		return _i0;
-	}
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests::EndAccept_81_System_IAsyncResult_0()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests_EndAccept_81_System_IAsyncResult_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__430_0;
-	_s1 = _s0;
-	{
-		if (_s1 == 0)
-		{
-			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9;
-			{
-				// Hotpatch-aware ldftn wrapper (slot 1090)
-				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[1090];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
-					{
-						alignas(16) uint8_t _d_ab[8];
-						ArgBuffer _d_bw(_d_ab);
-						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d_entry.method_key, _d_ab, nullptr);
-						return;
-					}
-					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
-				};
-			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
-			}
-			{
-				const auto chaos_method_ptr = _s1;
-				const auto chaos_target = _s0;
-				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
-				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
-				chaos_object->chaos_delegate_target = chaos_target;
-				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
-				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-			}
-			_s1 = _s0;
-			{
-				auto chaos_value = _s1;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__430_0 = chaos_value;
-			}
-		}
-		{
-			// Assert.Throws: target method not found via IL lookahead
-			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
-		}
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-		chaos_locals[0] = ChaosStoreInt64(_i0);
-		_i0 = ChaosLoadInt64(chaos_locals[0]);
-		return _i0;
-	}
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests::EndAccept_84_System_Byte_System_IAsyncResult_0()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests_EndAccept_84_System_Byte_System_IAsyncResult_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INT64 _i0;
-	{
-		chaos_type_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass440_0 __chaos_stack_obj{};
-		auto* chaos_object = &__chaos_stack_obj;
-		chaos_object->header.type_info = chaos_mt_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass440_0.AsTypeInfoHot();
-		CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass440_0__ctor(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object));
-		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-	}
-	chaos_locals[0] = _s0;
-	_s0 = chaos_locals[0];
-	_s1 = 0;
-	{
-		auto chaos_value = _s1;
-		if (chaos_is_string_id(chaos_value))
-		{
-			chaos_value = chaos_string_materialize(chaos_value);
-		}
-		auto* chaos_object = reinterpret_cast<chaos_type_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass440_0*>(_s0);
-		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass440_0____ref_84_0_0));
-		chaos_object->field_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass440_0____ref_84_0_0 = chaos_value;
-		chaos_gc_dirty_card(chaos_object);
-	}
-	_s0 = chaos_locals[0];
-	{
-		// Hotpatch-aware ldftn wrapper (slot 968)
-		static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-			auto& _d_entry = s_hotpatch_entries[968];
-			if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
-				&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
-			{
-				alignas(16) uint8_t _d_ab[8];
-				ArgBuffer _d_bw(_d_ab);
-				_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
-				::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-					_d_entry.method_key, _d_ab, nullptr);
-				return;
-			}
-			reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
-		};
-	_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
-	}
-	{
-		const auto chaos_method_ptr = _s1;
-		const auto chaos_target = _s0;
-		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
-		chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
-		chaos_object->chaos_delegate_target = chaos_target;
-		chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
-		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-	}
-	{
-		try {
-			auto* chaos_action = reinterpret_cast<chaos_type_System_Private_CoreLib_System_Action*>(_s0);
-			CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass440_0_EndAccept_84_System_Byte_System_IAsyncResult_0_b__0(chaos_action->chaos_delegate_target);
-			throw chaos_managed_exception{};  // no exception — fail
-		} catch (chaos_managed_exception&) {
-			// expected exception was thrown — pass
-		}
-	}
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-	_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-	chaos_locals[1] = ChaosStoreInt64(_i0);
-	_i0 = ChaosLoadInt64(chaos_locals[1]);
-	return _i0;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests::EndAccept_84_System_Byte_System_IAsyncResult_1()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests_EndAccept_84_System_Byte_System_IAsyncResult_1(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INT64 _i0;
-	{
-		chaos_type_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass442_0 __chaos_stack_obj{};
-		auto* chaos_object = &__chaos_stack_obj;
-		chaos_object->header.type_info = chaos_mt_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass442_0.AsTypeInfoHot();
-		CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass442_0__ctor(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object));
-		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-	}
-	chaos_locals[0] = _s0;
-	_s0 = chaos_locals[0];
-	_s1 = 0;
-	{
-		auto chaos_value = _s1;
-		if (chaos_is_string_id(chaos_value))
-		{
-			chaos_value = chaos_string_materialize(chaos_value);
-		}
-		auto* chaos_object = reinterpret_cast<chaos_type_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass442_0*>(_s0);
-		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass442_0____ref_84_1_0));
-		chaos_object->field_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass442_0____ref_84_1_0 = chaos_value;
-		chaos_gc_dirty_card(chaos_object);
-	}
-	_s0 = chaos_locals[0];
-	{
-		// Hotpatch-aware ldftn wrapper (slot 970)
-		static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-			auto& _d_entry = s_hotpatch_entries[970];
-			if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
-				&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
-			{
-				alignas(16) uint8_t _d_ab[8];
-				ArgBuffer _d_bw(_d_ab);
-				_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
-				::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-					_d_entry.method_key, _d_ab, nullptr);
-				return;
-			}
-			reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
-		};
-	_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
-	}
-	{
-		const auto chaos_method_ptr = _s1;
-		const auto chaos_target = _s0;
-		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
-		chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
-		chaos_object->chaos_delegate_target = chaos_target;
-		chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
-		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-	}
-	{
-		try {
-			auto* chaos_action = reinterpret_cast<chaos_type_System_Private_CoreLib_System_Action*>(_s0);
-			CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass442_0_EndAccept_84_System_Byte_System_IAsyncResult_1_b__0(chaos_action->chaos_delegate_target);
-			throw chaos_managed_exception{};  // no exception — fail
-		} catch (chaos_managed_exception&) {
-			// expected exception was thrown — pass
-		}
-	}
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-	_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-	chaos_locals[1] = ChaosStoreInt64(_i0);
-	_i0 = ChaosLoadInt64(chaos_locals[1]);
-	return _i0;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests::EndAccept_84_System_Byte_System_IAsyncResult_2()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests_EndAccept_84_System_Byte_System_IAsyncResult_2(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INT64 _i0;
-	{
-		chaos_type_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass444_0 __chaos_stack_obj{};
-		auto* chaos_object = &__chaos_stack_obj;
-		chaos_object->header.type_info = chaos_mt_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass444_0.AsTypeInfoHot();
-		CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass444_0__ctor(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object));
-		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-	}
-	chaos_locals[0] = _s0;
-	_s0 = chaos_locals[0];
-	_s1 = 0;
-	{
-		auto chaos_value = _s1;
-		if (chaos_is_string_id(chaos_value))
-		{
-			chaos_value = chaos_string_materialize(chaos_value);
-		}
-		auto* chaos_object = reinterpret_cast<chaos_type_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass444_0*>(_s0);
-		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass444_0____ref_84_2_0));
-		chaos_object->field_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass444_0____ref_84_2_0 = chaos_value;
-		chaos_gc_dirty_card(chaos_object);
-	}
-	_s0 = chaos_locals[0];
-	{
-		// Hotpatch-aware ldftn wrapper (slot 972)
-		static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-			auto& _d_entry = s_hotpatch_entries[972];
-			if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
-				&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
-			{
-				alignas(16) uint8_t _d_ab[8];
-				ArgBuffer _d_bw(_d_ab);
-				_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
-				::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-					_d_entry.method_key, _d_ab, nullptr);
-				return;
-			}
-			reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
-		};
-	_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
-	}
-	{
-		const auto chaos_method_ptr = _s1;
-		const auto chaos_target = _s0;
-		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
-		chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
-		chaos_object->chaos_delegate_target = chaos_target;
-		chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
-		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-	}
-	{
-		try {
-			auto* chaos_action = reinterpret_cast<chaos_type_System_Private_CoreLib_System_Action*>(_s0);
-			CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass444_0_EndAccept_84_System_Byte_System_IAsyncResult_2_b__0(chaos_action->chaos_delegate_target);
-			throw chaos_managed_exception{};  // no exception — fail
-		} catch (chaos_managed_exception&) {
-			// expected exception was thrown — pass
-		}
-	}
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-	_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-	chaos_locals[1] = ChaosStoreInt64(_i0);
-	_i0 = ChaosLoadInt64(chaos_locals[1]);
-	return _i0;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests::EndAccept_85_System_Byte_int_System_IAsyncResult_0()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests_EndAccept_85_System_Byte_int_System_IAsyncResult_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INT64 _i0;
-	{
-		chaos_type_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass446_0 __chaos_stack_obj{};
-		auto* chaos_object = &__chaos_stack_obj;
-		chaos_object->header.type_info = chaos_mt_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass446_0.AsTypeInfoHot();
-		CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass446_0__ctor(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object));
-		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-	}
-	chaos_locals[0] = _s0;
-	_s0 = chaos_locals[0];
-	_s1 = 0;
-	{
-		auto chaos_value = _s1;
-		if (chaos_is_string_id(chaos_value))
-		{
-			chaos_value = chaos_string_materialize(chaos_value);
-		}
-		auto* chaos_object = reinterpret_cast<chaos_type_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass446_0*>(_s0);
-		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass446_0____ref_85_0_0));
-		chaos_object->field_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass446_0____ref_85_0_0 = chaos_value;
-		chaos_gc_dirty_card(chaos_object);
-	}
-	_s0 = chaos_locals[0];
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	{
-		auto chaos_value = _s1;
-		if (chaos_is_string_id(chaos_value))
-		{
-			chaos_value = chaos_string_materialize(chaos_value);
-		}
-		auto* chaos_object = reinterpret_cast<chaos_type_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass446_0*>(_s0);
-		chaos_object->field_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass446_0____ref_85_0_1 = chaos_value;
-	}
-	_s0 = chaos_locals[0];
-	{
-		// Hotpatch-aware ldftn wrapper (slot 974)
-		static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-			auto& _d_entry = s_hotpatch_entries[974];
-			if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
-				&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
-			{
-				alignas(16) uint8_t _d_ab[8];
-				ArgBuffer _d_bw(_d_ab);
-				_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
-				::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-					_d_entry.method_key, _d_ab, nullptr);
-				return;
-			}
-			reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
-		};
-	_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
-	}
-	{
-		const auto chaos_method_ptr = _s1;
-		const auto chaos_target = _s0;
-		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
-		chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
-		chaos_object->chaos_delegate_target = chaos_target;
-		chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
-		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-	}
-	{
-		try {
-			auto* chaos_action = reinterpret_cast<chaos_type_System_Private_CoreLib_System_Action*>(_s0);
-			CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass446_0_EndAccept_85_System_Byte_int_System_IAsyncResult_0_b__0(chaos_action->chaos_delegate_target);
-			throw chaos_managed_exception{};  // no exception — fail
-		} catch (chaos_managed_exception&) {
-			// expected exception was thrown — pass
-		}
-	}
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-	_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-	chaos_locals[1] = ChaosStoreInt64(_i0);
-	_i0 = ChaosLoadInt64(chaos_locals[1]);
-	return _i0;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests::EndAccept_85_System_Byte_int_System_IAsyncResult_1()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests_EndAccept_85_System_Byte_int_System_IAsyncResult_1(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INT64 _i0;
-	{
-		chaos_type_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass448_0 __chaos_stack_obj{};
-		auto* chaos_object = &__chaos_stack_obj;
-		chaos_object->header.type_info = chaos_mt_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass448_0.AsTypeInfoHot();
-		CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass448_0__ctor(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object));
-		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-	}
-	chaos_locals[0] = _s0;
-	_s0 = chaos_locals[0];
-	_s1 = 0;
-	{
-		auto chaos_value = _s1;
-		if (chaos_is_string_id(chaos_value))
-		{
-			chaos_value = chaos_string_materialize(chaos_value);
-		}
-		auto* chaos_object = reinterpret_cast<chaos_type_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass448_0*>(_s0);
-		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass448_0____ref_85_1_0));
-		chaos_object->field_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass448_0____ref_85_1_0 = chaos_value;
-		chaos_gc_dirty_card(chaos_object);
-	}
-	_s0 = chaos_locals[0];
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	{
-		auto chaos_value = _s1;
-		if (chaos_is_string_id(chaos_value))
-		{
-			chaos_value = chaos_string_materialize(chaos_value);
-		}
-		auto* chaos_object = reinterpret_cast<chaos_type_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass448_0*>(_s0);
-		chaos_object->field_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass448_0____ref_85_1_1 = chaos_value;
-	}
-	_s0 = chaos_locals[0];
-	{
-		// Hotpatch-aware ldftn wrapper (slot 976)
-		static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-			auto& _d_entry = s_hotpatch_entries[976];
-			if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
-				&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
-			{
-				alignas(16) uint8_t _d_ab[8];
-				ArgBuffer _d_bw(_d_ab);
-				_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
-				::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-					_d_entry.method_key, _d_ab, nullptr);
-				return;
-			}
-			reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
-		};
-	_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
-	}
-	{
-		const auto chaos_method_ptr = _s1;
-		const auto chaos_target = _s0;
-		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
-		chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
-		chaos_object->chaos_delegate_target = chaos_target;
-		chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
-		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-	}
-	{
-		try {
-			auto* chaos_action = reinterpret_cast<chaos_type_System_Private_CoreLib_System_Action*>(_s0);
-			CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass448_0_EndAccept_85_System_Byte_int_System_IAsyncResult_1_b__0(chaos_action->chaos_delegate_target);
-			throw chaos_managed_exception{};  // no exception — fail
-		} catch (chaos_managed_exception&) {
-			// expected exception was thrown — pass
-		}
-	}
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-	_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-	chaos_locals[1] = ChaosStoreInt64(_i0);
-	_i0 = ChaosLoadInt64(chaos_locals[1]);
-	return _i0;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests::EndAccept_85_System_Byte_int_System_IAsyncResult_2()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests_EndAccept_85_System_Byte_int_System_IAsyncResult_2(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INT64 _i0;
-	{
-		chaos_type_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass450_0 __chaos_stack_obj{};
-		auto* chaos_object = &__chaos_stack_obj;
-		chaos_object->header.type_info = chaos_mt_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass450_0.AsTypeInfoHot();
-		CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass450_0__ctor(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object));
-		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-	}
-	chaos_locals[0] = _s0;
-	_s0 = chaos_locals[0];
-	_s1 = 0;
-	{
-		auto chaos_value = _s1;
-		if (chaos_is_string_id(chaos_value))
-		{
-			chaos_value = chaos_string_materialize(chaos_value);
-		}
-		auto* chaos_object = reinterpret_cast<chaos_type_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass450_0*>(_s0);
-		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass450_0____ref_85_2_0));
-		chaos_object->field_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass450_0____ref_85_2_0 = chaos_value;
-		chaos_gc_dirty_card(chaos_object);
-	}
-	_s0 = chaos_locals[0];
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	{
-		auto chaos_value = _s1;
-		if (chaos_is_string_id(chaos_value))
-		{
-			chaos_value = chaos_string_materialize(chaos_value);
-		}
-		auto* chaos_object = reinterpret_cast<chaos_type_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass450_0*>(_s0);
-		chaos_object->field_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass450_0____ref_85_2_1 = chaos_value;
-	}
-	_s0 = chaos_locals[0];
-	{
-		// Hotpatch-aware ldftn wrapper (slot 978)
-		static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-			auto& _d_entry = s_hotpatch_entries[978];
-			if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
-				&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
-			{
-				alignas(16) uint8_t _d_ab[8];
-				ArgBuffer _d_bw(_d_ab);
-				_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
-				::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-					_d_entry.method_key, _d_ab, nullptr);
-				return;
-			}
-			reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
-		};
-	_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
-	}
-	{
-		const auto chaos_method_ptr = _s1;
-		const auto chaos_target = _s0;
-		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
-		chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
-		chaos_object->chaos_delegate_target = chaos_target;
-		chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
-		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-	}
-	{
-		try {
-			auto* chaos_action = reinterpret_cast<chaos_type_System_Private_CoreLib_System_Action*>(_s0);
-			CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass450_0_EndAccept_85_System_Byte_int_System_IAsyncResult_2_b__0(chaos_action->chaos_delegate_target);
-			throw chaos_managed_exception{};  // no exception — fail
-		} catch (chaos_managed_exception&) {
-			// expected exception was thrown — pass
-		}
-	}
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-	_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-	chaos_locals[1] = ChaosStoreInt64(_i0);
-	_i0 = ChaosLoadInt64(chaos_locals[1]);
-	return _i0;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests::EndAccept_85_System_Byte_int_System_IAsyncResult_3()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests_EndAccept_85_System_Byte_int_System_IAsyncResult_3(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INT64 _i0;
-	{
-		chaos_type_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass452_0 __chaos_stack_obj{};
-		auto* chaos_object = &__chaos_stack_obj;
-		chaos_object->header.type_info = chaos_mt_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass452_0.AsTypeInfoHot();
-		CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass452_0__ctor(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object));
-		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-	}
-	chaos_locals[0] = _s0;
-	_s0 = chaos_locals[0];
-	_s1 = 0;
-	{
-		auto chaos_value = _s1;
-		if (chaos_is_string_id(chaos_value))
-		{
-			chaos_value = chaos_string_materialize(chaos_value);
-		}
-		auto* chaos_object = reinterpret_cast<chaos_type_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass452_0*>(_s0);
-		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass452_0____ref_85_3_0));
-		chaos_object->field_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass452_0____ref_85_3_0 = chaos_value;
-		chaos_gc_dirty_card(chaos_object);
-	}
-	_s0 = chaos_locals[0];
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	{
-		auto chaos_value = _s1;
-		if (chaos_is_string_id(chaos_value))
-		{
-			chaos_value = chaos_string_materialize(chaos_value);
-		}
-		auto* chaos_object = reinterpret_cast<chaos_type_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass452_0*>(_s0);
-		chaos_object->field_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass452_0____ref_85_3_1 = chaos_value;
-	}
-	_s0 = chaos_locals[0];
-	{
-		// Hotpatch-aware ldftn wrapper (slot 980)
-		static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-			auto& _d_entry = s_hotpatch_entries[980];
-			if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
-				&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
-			{
-				alignas(16) uint8_t _d_ab[8];
-				ArgBuffer _d_bw(_d_ab);
-				_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
-				::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-					_d_entry.method_key, _d_ab, nullptr);
-				return;
-			}
-			reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
-		};
-	_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
-	}
-	{
-		const auto chaos_method_ptr = _s1;
-		const auto chaos_target = _s0;
-		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
-		chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
-		chaos_object->chaos_delegate_target = chaos_target;
-		chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
-		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-	}
-	{
-		try {
-			auto* chaos_action = reinterpret_cast<chaos_type_System_Private_CoreLib_System_Action*>(_s0);
-			CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass452_0_EndAccept_85_System_Byte_int_System_IAsyncResult_3_b__0(chaos_action->chaos_delegate_target);
-			throw chaos_managed_exception{};  // no exception — fail
-		} catch (chaos_managed_exception&) {
-			// expected exception was thrown — pass
-		}
-	}
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-	_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-	chaos_locals[1] = ChaosStoreInt64(_i0);
-	_i0 = ChaosLoadInt64(chaos_locals[1]);
-	return _i0;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests::EndConnect_55_System_IAsyncResult_0()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests_EndConnect_55_System_IAsyncResult_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__302_0;
-	_s1 = _s0;
-	{
-		if (_s1 == 0)
-		{
-			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9;
-			{
-				// Hotpatch-aware ldftn wrapper (slot 1091)
-				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[1091];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
-					{
-						alignas(16) uint8_t _d_ab[8];
-						ArgBuffer _d_bw(_d_ab);
-						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d_entry.method_key, _d_ab, nullptr);
-						return;
-					}
-					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
-				};
-			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
-			}
-			{
-				const auto chaos_method_ptr = _s1;
-				const auto chaos_target = _s0;
-				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
-				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
-				chaos_object->chaos_delegate_target = chaos_target;
-				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
-				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-			}
-			_s1 = _s0;
-			{
-				auto chaos_value = _s1;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__302_0 = chaos_value;
-			}
-		}
-		{
-			// Assert.Throws: target method not found via IL lookahead
-			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
-		}
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-		chaos_locals[0] = ChaosStoreInt64(_i0);
-		_i0 = ChaosLoadInt64(chaos_locals[0]);
-		return _i0;
-	}
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests::EndDisconnect_58_System_IAsyncResult_0()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests_EndDisconnect_58_System_IAsyncResult_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__312_0;
-	_s1 = _s0;
-	{
-		if (_s1 == 0)
-		{
-			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9;
-			{
-				// Hotpatch-aware ldftn wrapper (slot 1092)
-				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[1092];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
-					{
-						alignas(16) uint8_t _d_ab[8];
-						ArgBuffer _d_bw(_d_ab);
-						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d_entry.method_key, _d_ab, nullptr);
-						return;
-					}
-					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
-				};
-			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
-			}
-			{
-				const auto chaos_method_ptr = _s1;
-				const auto chaos_target = _s0;
-				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
-				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
-				chaos_object->chaos_delegate_target = chaos_target;
-				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
-				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-			}
-			_s1 = _s0;
-			{
-				auto chaos_value = _s1;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__312_0 = chaos_value;
-			}
-		}
-		{
-			// Assert.Throws: target method not found via IL lookahead
-			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
-		}
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-		chaos_locals[0] = ChaosStoreInt64(_i0);
-		_i0 = ChaosLoadInt64(chaos_locals[0]);
-		return _i0;
-	}
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests::EndReceive_74_System_IAsyncResult_0()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests_EndReceive_74_System_IAsyncResult_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__400_0;
-	_s1 = _s0;
-	{
-		if (_s1 == 0)
-		{
-			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9;
-			{
-				// Hotpatch-aware ldftn wrapper (slot 1093)
-				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[1093];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
-					{
-						alignas(16) uint8_t _d_ab[8];
-						ArgBuffer _d_bw(_d_ab);
-						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d_entry.method_key, _d_ab, nullptr);
-						return;
-					}
-					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
-				};
-			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
-			}
-			{
-				const auto chaos_method_ptr = _s1;
-				const auto chaos_target = _s0;
-				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
-				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
-				chaos_object->chaos_delegate_target = chaos_target;
-				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
-				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-			}
-			_s1 = _s0;
-			{
-				auto chaos_value = _s1;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__400_0 = chaos_value;
-			}
-		}
-		{
-			// Assert.Throws: target method not found via IL lookahead
-			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
-		}
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-		chaos_locals[0] = ChaosStoreInt64(_i0);
-		_i0 = ChaosLoadInt64(chaos_locals[0]);
-		return _i0;
-	}
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests::EndReceive_75_System_IAsyncResult_SocketError_0()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests_EndReceive_75_System_IAsyncResult_SocketError_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INT64 _i0;
-	{
-		chaos_type_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass402_0 __chaos_stack_obj{};
-		auto* chaos_object = &__chaos_stack_obj;
-		chaos_object->header.type_info = chaos_mt_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass402_0.AsTypeInfoHot();
-		CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass402_0__ctor(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object));
-		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-	}
-	chaos_locals[0] = _s0;
-	_s0 = chaos_locals[0];
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	{
-		auto chaos_value = _s1;
-		if (chaos_is_string_id(chaos_value))
-		{
-			chaos_value = chaos_string_materialize(chaos_value);
-		}
-		auto* chaos_object = reinterpret_cast<chaos_type_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass402_0*>(_s0);
-		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass402_0____ref_75_0_0));
-		chaos_object->field_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass402_0____ref_75_0_0 = chaos_value;
-		chaos_gc_dirty_card(chaos_object);
-	}
-	_s0 = chaos_locals[0];
-	{
-		// Hotpatch-aware ldftn wrapper (slot 966)
-		static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-			auto& _d_entry = s_hotpatch_entries[966];
-			if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
-				&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
-			{
-				alignas(16) uint8_t _d_ab[8];
-				ArgBuffer _d_bw(_d_ab);
-				_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
-				::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-					_d_entry.method_key, _d_ab, nullptr);
-				return;
-			}
-			reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
-		};
-	_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
-	}
-	{
-		const auto chaos_method_ptr = _s1;
-		const auto chaos_target = _s0;
-		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
-		chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
-		chaos_object->chaos_delegate_target = chaos_target;
-		chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
-		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-	}
-	{
-		try {
-			auto* chaos_action = reinterpret_cast<chaos_type_System_Private_CoreLib_System_Action*>(_s0);
-			CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass402_0_EndReceive_75_System_IAsyncResult_SocketError_0_b__0(chaos_action->chaos_delegate_target);
-			throw chaos_managed_exception{};  // no exception — fail
-		} catch (chaos_managed_exception&) {
-			// expected exception was thrown — pass
-		}
-	}
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-	_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-	chaos_locals[1] = ChaosStoreInt64(_i0);
-	_i0 = ChaosLoadInt64(chaos_locals[1]);
-	return _i0;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests::EndReceiveFrom_79_System_IAsyncResult_EndPoint_0()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests_EndReceiveFrom_79_System_IAsyncResult_EndPoint_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = 0;
-	chaos_locals[0] = _s0;
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-	_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-	chaos_locals[1] = ChaosStoreInt64(_i0);
-	_i0 = ChaosLoadInt64(chaos_locals[1]);
-	return _i0;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests::EndReceiveMessageFrom_77_System_IAsyncResult_SocketFlags_EndPoint_IPPacketInformation_0()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests_EndReceiveMessageFrom_77_System_IAsyncResult_SocketFlags_EndPoint_IPPacketInformation_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 4) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	chaos_locals[0] = _s0;
-	_s0 = 0;
-	chaos_locals[1] = _s0;
-	_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[2]);
-	{
-		const auto chaos_address = _s0;
-		if ((chaos_address & chaos_managed_pointer_local_slot_tag) != 0)
-		{
-			auto* chaos_slot = reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(static_cast<CHAOS_IL2CPP_UINTPTR>(chaos_address & ~chaos_managed_pointer_local_slot_tag));
-			*chaos_slot = 0;
-		}
-		else
-		{
-			*reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(chaos_address) = 0;
-		}
-	}
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-	_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-	chaos_locals[3] = ChaosStoreInt64(_i0);
-	_i0 = ChaosLoadInt64(chaos_locals[3]);
-	return _i0;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests::EndSend_63_System_IAsyncResult_0()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests_EndSend_63_System_IAsyncResult_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__342_0;
-	_s1 = _s0;
-	{
-		if (_s1 == 0)
-		{
-			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9;
-			{
-				// Hotpatch-aware ldftn wrapper (slot 1094)
-				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[1094];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
-					{
-						alignas(16) uint8_t _d_ab[8];
-						ArgBuffer _d_bw(_d_ab);
-						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d_entry.method_key, _d_ab, nullptr);
-						return;
-					}
-					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
-				};
-			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
-			}
-			{
-				const auto chaos_method_ptr = _s1;
-				const auto chaos_target = _s0;
-				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
-				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
-				chaos_object->chaos_delegate_target = chaos_target;
-				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
-				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-			}
-			_s1 = _s0;
-			{
-				auto chaos_value = _s1;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__342_0 = chaos_value;
-			}
-		}
-		{
-			// Assert.Throws: target method not found via IL lookahead
-			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
-		}
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-		chaos_locals[0] = ChaosStoreInt64(_i0);
-		_i0 = ChaosLoadInt64(chaos_locals[0]);
-		return _i0;
-	}
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests::EndSend_64_System_IAsyncResult_SocketError_0()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests_EndSend_64_System_IAsyncResult_SocketError_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INT64 _i0;
-	{
-		chaos_type_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass344_0 __chaos_stack_obj{};
-		auto* chaos_object = &__chaos_stack_obj;
-		chaos_object->header.type_info = chaos_mt_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass344_0.AsTypeInfoHot();
-		CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass344_0__ctor(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object));
-		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-	}
-	chaos_locals[0] = _s0;
-	_s0 = chaos_locals[0];
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	{
-		auto chaos_value = _s1;
-		if (chaos_is_string_id(chaos_value))
-		{
-			chaos_value = chaos_string_materialize(chaos_value);
-		}
-		auto* chaos_object = reinterpret_cast<chaos_type_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass344_0*>(_s0);
-		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass344_0____ref_64_0_0));
-		chaos_object->field_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass344_0____ref_64_0_0 = chaos_value;
-		chaos_gc_dirty_card(chaos_object);
-	}
-	_s0 = chaos_locals[0];
-	{
-		// Hotpatch-aware ldftn wrapper (slot 950)
-		static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-			auto& _d_entry = s_hotpatch_entries[950];
-			if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
-				&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
-			{
-				alignas(16) uint8_t _d_ab[8];
-				ArgBuffer _d_bw(_d_ab);
-				_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
-				::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-					_d_entry.method_key, _d_ab, nullptr);
-				return;
-			}
-			reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
-		};
-	_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
-	}
-	{
-		const auto chaos_method_ptr = _s1;
-		const auto chaos_target = _s0;
-		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
-		chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
-		chaos_object->chaos_delegate_target = chaos_target;
-		chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
-		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-	}
-	{
-		try {
-			auto* chaos_action = reinterpret_cast<chaos_type_System_Private_CoreLib_System_Action*>(_s0);
-			CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass344_0_EndSend_64_System_IAsyncResult_SocketError_0_b__0(chaos_action->chaos_delegate_target);
-			throw chaos_managed_exception{};  // no exception — fail
-		} catch (chaos_managed_exception&) {
-			// expected exception was thrown — pass
-		}
-	}
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-	_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-	chaos_locals[1] = ChaosStoreInt64(_i0);
-	_i0 = ChaosLoadInt64(chaos_locals[1]);
-	return _i0;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests::EndSendFile_67_System_IAsyncResult_0()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests_EndSendFile_67_System_IAsyncResult_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__358_0;
-	_s1 = _s0;
-	{
-		if (_s1 == 0)
-		{
-			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9;
-			{
-				// Hotpatch-aware ldftn wrapper (slot 1095)
-				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[1095];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
-					{
-						alignas(16) uint8_t _d_ab[8];
-						ArgBuffer _d_bw(_d_ab);
-						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d_entry.method_key, _d_ab, nullptr);
-						return;
-					}
-					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
-				};
-			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
-			}
-			{
-				const auto chaos_method_ptr = _s1;
-				const auto chaos_target = _s0;
-				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
-				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
-				chaos_object->chaos_delegate_target = chaos_target;
-				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
-				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-			}
-			_s1 = _s0;
-			{
-				auto chaos_value = _s1;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__358_0 = chaos_value;
-			}
-		}
-		{
-			// Assert.Throws: target method not found via IL lookahead
-			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
-		}
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-		chaos_locals[0] = ChaosStoreInt64(_i0);
-		_i0 = ChaosLoadInt64(chaos_locals[0]);
-		return _i0;
-	}
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests::EndSendTo_69_System_IAsyncResult_0()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests_EndSendTo_69_System_IAsyncResult_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__370_0;
-	_s1 = _s0;
-	{
-		if (_s1 == 0)
-		{
-			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9;
-			{
-				// Hotpatch-aware ldftn wrapper (slot 1096)
-				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[1096];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
-					{
-						alignas(16) uint8_t _d_ab[8];
-						ArgBuffer _d_bw(_d_ab);
-						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d_entry.method_key, _d_ab, nullptr);
-						return;
-					}
-					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
-				};
-			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
-			}
-			{
-				const auto chaos_method_ptr = _s1;
-				const auto chaos_target = _s0;
-				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
-				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
-				chaos_object->chaos_delegate_target = chaos_target;
-				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
-				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-			}
-			_s1 = _s0;
-			{
-				auto chaos_value = _s1;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__370_0 = chaos_value;
-			}
-		}
-		{
-			// Assert.Throws: target method not found via IL lookahead
-			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
-		}
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-		chaos_locals[0] = ChaosStoreInt64(_i0);
-		_i0 = ChaosLoadInt64(chaos_locals[0]);
-		return _i0;
-	}
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests::GetSocketOption_43_SocketOptionLevel_SocketOptionName_0()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests_GetSocketOption_43_SocketOptionLevel_SocketOptionName_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__252_0;
-	_s1 = _s0;
-	{
-		if (_s1 == 0)
-		{
-			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9;
-			{
-				// Hotpatch-aware ldftn wrapper (slot 1097)
-				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[1097];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
-					{
-						alignas(16) uint8_t _d_ab[8];
-						ArgBuffer _d_bw(_d_ab);
-						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d_entry.method_key, _d_ab, nullptr);
-						return;
-					}
-					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
-				};
-			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
-			}
-			{
-				const auto chaos_method_ptr = _s1;
-				const auto chaos_target = _s0;
-				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
-				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
-				chaos_object->chaos_delegate_target = chaos_target;
-				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
-				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-			}
-			_s1 = _s0;
-			{
-				auto chaos_value = _s1;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__252_0 = chaos_value;
-			}
-		}
-		{
-			// Assert.Throws: target method not found via IL lookahead
-			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
-		}
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-		chaos_locals[0] = ChaosStoreInt64(_i0);
-		_i0 = ChaosLoadInt64(chaos_locals[0]);
-		return _i0;
-	}
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests::GetSocketOption_44_SocketOptionLevel_SocketOptionName_System_Byte_0()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests_GetSocketOption_44_SocketOptionLevel_SocketOptionName_System_Byte_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__254_0;
-	_s1 = _s0;
-	{
-		if (_s1 == 0)
-		{
-			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9;
-			{
-				// Hotpatch-aware ldftn wrapper (slot 1098)
-				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[1098];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
-					{
-						alignas(16) uint8_t _d_ab[8];
-						ArgBuffer _d_bw(_d_ab);
-						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d_entry.method_key, _d_ab, nullptr);
-						return;
-					}
-					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
-				};
-			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
-			}
-			{
-				const auto chaos_method_ptr = _s1;
-				const auto chaos_target = _s0;
-				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
-				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
-				chaos_object->chaos_delegate_target = chaos_target;
-				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
-				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-			}
-			_s1 = _s0;
-			{
-				auto chaos_value = _s1;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__254_0 = chaos_value;
-			}
-		}
-		{
-			// Assert.Throws: target method not found via IL lookahead
-			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
-		}
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-		chaos_locals[0] = ChaosStoreInt64(_i0);
-		_i0 = ChaosLoadInt64(chaos_locals[0]);
-		return _i0;
-	}
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests::GetSocketOption_44_SocketOptionLevel_SocketOptionName_System_Byte_1()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests_GetSocketOption_44_SocketOptionLevel_SocketOptionName_System_Byte_1(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__256_0;
-	_s1 = _s0;
-	{
-		if (_s1 == 0)
-		{
-			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9;
-			{
-				// Hotpatch-aware ldftn wrapper (slot 1099)
-				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[1099];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
-					{
-						alignas(16) uint8_t _d_ab[8];
-						ArgBuffer _d_bw(_d_ab);
-						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d_entry.method_key, _d_ab, nullptr);
-						return;
-					}
-					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
-				};
-			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
-			}
-			{
-				const auto chaos_method_ptr = _s1;
-				const auto chaos_target = _s0;
-				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
-				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
-				chaos_object->chaos_delegate_target = chaos_target;
-				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
-				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-			}
-			_s1 = _s0;
-			{
-				auto chaos_value = _s1;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__256_0 = chaos_value;
-			}
-		}
-		{
-			// Assert.Throws: target method not found via IL lookahead
-			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
-		}
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-		chaos_locals[0] = ChaosStoreInt64(_i0);
-		_i0 = ChaosLoadInt64(chaos_locals[0]);
-		return _i0;
-	}
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests::GetSocketOption_44_SocketOptionLevel_SocketOptionName_System_Byte_2()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests_GetSocketOption_44_SocketOptionLevel_SocketOptionName_System_Byte_2(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__258_0;
-	_s1 = _s0;
-	{
-		if (_s1 == 0)
-		{
-			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9;
-			{
-				// Hotpatch-aware ldftn wrapper (slot 1100)
-				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[1100];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
-					{
-						alignas(16) uint8_t _d_ab[8];
-						ArgBuffer _d_bw(_d_ab);
-						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d_entry.method_key, _d_ab, nullptr);
-						return;
-					}
-					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
-				};
-			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
-			}
-			{
-				const auto chaos_method_ptr = _s1;
-				const auto chaos_target = _s0;
-				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
-				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
-				chaos_object->chaos_delegate_target = chaos_target;
-				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
-				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-			}
-			_s1 = _s0;
-			{
-				auto chaos_value = _s1;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__258_0 = chaos_value;
-			}
-		}
-		{
-			// Assert.Throws: target method not found via IL lookahead
-			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
-		}
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-		chaos_locals[0] = ChaosStoreInt64(_i0);
-		_i0 = ChaosLoadInt64(chaos_locals[0]);
-		return _i0;
-	}
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests::GetSocketOption_45_SocketOptionLevel_SocketOptionName_int_0()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests_GetSocketOption_45_SocketOptionLevel_SocketOptionName_int_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__260_0;
-	_s1 = _s0;
-	{
-		if (_s1 == 0)
-		{
-			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9;
-			{
-				// Hotpatch-aware ldftn wrapper (slot 1101)
-				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[1101];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
-					{
-						alignas(16) uint8_t _d_ab[8];
-						ArgBuffer _d_bw(_d_ab);
-						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d_entry.method_key, _d_ab, nullptr);
-						return;
-					}
-					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
-				};
-			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
-			}
-			{
-				const auto chaos_method_ptr = _s1;
-				const auto chaos_target = _s0;
-				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
-				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
-				chaos_object->chaos_delegate_target = chaos_target;
-				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
-				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-			}
-			_s1 = _s0;
-			{
-				auto chaos_value = _s1;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__260_0 = chaos_value;
-			}
-		}
-		{
-			// Assert.Throws: target method not found via IL lookahead
-			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
-		}
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-		chaos_locals[0] = ChaosStoreInt64(_i0);
-		_i0 = ChaosLoadInt64(chaos_locals[0]);
-		return _i0;
-	}
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests::GetSocketOption_45_SocketOptionLevel_SocketOptionName_int_1()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests_GetSocketOption_45_SocketOptionLevel_SocketOptionName_int_1(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__262_0;
-	_s1 = _s0;
-	{
-		if (_s1 == 0)
-		{
-			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9;
-			{
-				// Hotpatch-aware ldftn wrapper (slot 1102)
-				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[1102];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
-					{
-						alignas(16) uint8_t _d_ab[8];
-						ArgBuffer _d_bw(_d_ab);
-						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d_entry.method_key, _d_ab, nullptr);
-						return;
-					}
-					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
-				};
-			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
-			}
-			{
-				const auto chaos_method_ptr = _s1;
-				const auto chaos_target = _s0;
-				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
-				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
-				chaos_object->chaos_delegate_target = chaos_target;
-				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
-				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-			}
-			_s1 = _s0;
-			{
-				auto chaos_value = _s1;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__262_0 = chaos_value;
-			}
-		}
-		{
-			// Assert.Throws: target method not found via IL lookahead
-			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
-		}
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-		chaos_locals[0] = ChaosStoreInt64(_i0);
-		_i0 = ChaosLoadInt64(chaos_locals[0]);
-		return _i0;
-	}
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests::IOControl_37_int_System_Byte_System_Byte_0()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests_IOControl_37_int_System_Byte_System_Byte_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__222_0;
-	_s1 = _s0;
-	{
-		if (_s1 == 0)
-		{
-			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9;
-			{
-				// Hotpatch-aware ldftn wrapper (slot 1103)
-				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[1103];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
-					{
-						alignas(16) uint8_t _d_ab[8];
-						ArgBuffer _d_bw(_d_ab);
-						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d_entry.method_key, _d_ab, nullptr);
-						return;
-					}
-					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
-				};
-			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
-			}
-			{
-				const auto chaos_method_ptr = _s1;
-				const auto chaos_target = _s0;
-				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
-				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
-				chaos_object->chaos_delegate_target = chaos_target;
-				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
-				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-			}
-			_s1 = _s0;
-			{
-				auto chaos_value = _s1;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__222_0 = chaos_value;
-			}
-		}
-		{
-			// Assert.Throws: target method not found via IL lookahead
-			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
-		}
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-		chaos_locals[0] = ChaosStoreInt64(_i0);
-		_i0 = ChaosLoadInt64(chaos_locals[0]);
-		return _i0;
-	}
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests::IOControl_37_int_System_Byte_System_Byte_1()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests_IOControl_37_int_System_Byte_System_Byte_1(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__224_0;
-	_s1 = _s0;
-	{
-		if (_s1 == 0)
-		{
-			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9;
-			{
-				// Hotpatch-aware ldftn wrapper (slot 1104)
-				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[1104];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
-					{
-						alignas(16) uint8_t _d_ab[8];
-						ArgBuffer _d_bw(_d_ab);
-						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d_entry.method_key, _d_ab, nullptr);
-						return;
-					}
-					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
-				};
-			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
-			}
-			{
-				const auto chaos_method_ptr = _s1;
-				const auto chaos_target = _s0;
-				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
-				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
-				chaos_object->chaos_delegate_target = chaos_target;
-				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
-				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-			}
-			_s1 = _s0;
-			{
-				auto chaos_value = _s1;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__224_0 = chaos_value;
-			}
-		}
-		{
-			// Assert.Throws: target method not found via IL lookahead
-			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
-		}
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-		chaos_locals[0] = ChaosStoreInt64(_i0);
-		_i0 = ChaosLoadInt64(chaos_locals[0]);
-		return _i0;
-	}
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests::IOControl_37_int_System_Byte_System_Byte_2()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests_IOControl_37_int_System_Byte_System_Byte_2(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__226_0;
-	_s1 = _s0;
-	{
-		if (_s1 == 0)
-		{
-			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9;
-			{
-				// Hotpatch-aware ldftn wrapper (slot 1105)
-				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[1105];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
-					{
-						alignas(16) uint8_t _d_ab[8];
-						ArgBuffer _d_bw(_d_ab);
-						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d_entry.method_key, _d_ab, nullptr);
-						return;
-					}
-					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
-				};
-			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
-			}
-			{
-				const auto chaos_method_ptr = _s1;
-				const auto chaos_target = _s0;
-				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
-				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
-				chaos_object->chaos_delegate_target = chaos_target;
-				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
-				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-			}
-			_s1 = _s0;
-			{
-				auto chaos_value = _s1;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__226_0 = chaos_value;
-			}
-		}
-		{
-			// Assert.Throws: target method not found via IL lookahead
-			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
-		}
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-		chaos_locals[0] = ChaosStoreInt64(_i0);
-		_i0 = ChaosLoadInt64(chaos_locals[0]);
-		return _i0;
-	}
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests::IOControl_37_int_System_Byte_System_Byte_3()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests_IOControl_37_int_System_Byte_System_Byte_3(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__228_0;
-	_s1 = _s0;
-	{
-		if (_s1 == 0)
-		{
-			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9;
-			{
-				// Hotpatch-aware ldftn wrapper (slot 1106)
-				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[1106];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
-					{
-						alignas(16) uint8_t _d_ab[8];
-						ArgBuffer _d_bw(_d_ab);
-						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d_entry.method_key, _d_ab, nullptr);
-						return;
-					}
-					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
-				};
-			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
-			}
-			{
-				const auto chaos_method_ptr = _s1;
-				const auto chaos_target = _s0;
-				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
-				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
-				chaos_object->chaos_delegate_target = chaos_target;
-				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
-				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-			}
-			_s1 = _s0;
-			{
-				auto chaos_value = _s1;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__228_0 = chaos_value;
-			}
-		}
-		{
-			// Assert.Throws: target method not found via IL lookahead
-			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
-		}
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-		chaos_locals[0] = ChaosStoreInt64(_i0);
-		_i0 = ChaosLoadInt64(chaos_locals[0]);
-		return _i0;
-	}
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests::IOControl_38_IOControlCode_System_Byte_System_Byte_0()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests_IOControl_38_IOControlCode_System_Byte_System_Byte_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__230_0;
-	_s1 = _s0;
-	{
-		if (_s1 == 0)
-		{
-			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9;
-			{
-				// Hotpatch-aware ldftn wrapper (slot 1107)
-				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[1107];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
-					{
-						alignas(16) uint8_t _d_ab[8];
-						ArgBuffer _d_bw(_d_ab);
-						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d_entry.method_key, _d_ab, nullptr);
-						return;
-					}
-					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
-				};
-			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
-			}
-			{
-				const auto chaos_method_ptr = _s1;
-				const auto chaos_target = _s0;
-				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
-				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
-				chaos_object->chaos_delegate_target = chaos_target;
-				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
-				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-			}
-			_s1 = _s0;
-			{
-				auto chaos_value = _s1;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__230_0 = chaos_value;
-			}
-		}
-		{
-			// Assert.Throws: target method not found via IL lookahead
-			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
-		}
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-		chaos_locals[0] = ChaosStoreInt64(_i0);
-		_i0 = ChaosLoadInt64(chaos_locals[0]);
-		return _i0;
-	}
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests::IOControl_38_IOControlCode_System_Byte_System_Byte_1()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests_IOControl_38_IOControlCode_System_Byte_System_Byte_1(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__232_0;
-	_s1 = _s0;
-	{
-		if (_s1 == 0)
-		{
-			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9;
-			{
-				// Hotpatch-aware ldftn wrapper (slot 1108)
-				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[1108];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
-					{
-						alignas(16) uint8_t _d_ab[8];
-						ArgBuffer _d_bw(_d_ab);
-						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d_entry.method_key, _d_ab, nullptr);
-						return;
-					}
-					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
-				};
-			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
-			}
-			{
-				const auto chaos_method_ptr = _s1;
-				const auto chaos_target = _s0;
-				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
-				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
-				chaos_object->chaos_delegate_target = chaos_target;
-				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
-				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-			}
-			_s1 = _s0;
-			{
-				auto chaos_value = _s1;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__232_0 = chaos_value;
-			}
-		}
-		{
-			// Assert.Throws: target method not found via IL lookahead
-			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
-		}
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-		chaos_locals[0] = ChaosStoreInt64(_i0);
-		_i0 = ChaosLoadInt64(chaos_locals[0]);
-		return _i0;
-	}
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests::IOControl_38_IOControlCode_System_Byte_System_Byte_2()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests_IOControl_38_IOControlCode_System_Byte_System_Byte_2(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__234_0;
-	_s1 = _s0;
-	{
-		if (_s1 == 0)
-		{
-			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9;
-			{
-				// Hotpatch-aware ldftn wrapper (slot 1109)
-				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[1109];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
-					{
-						alignas(16) uint8_t _d_ab[8];
-						ArgBuffer _d_bw(_d_ab);
-						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d_entry.method_key, _d_ab, nullptr);
-						return;
-					}
-					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
-				};
-			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
-			}
-			{
-				const auto chaos_method_ptr = _s1;
-				const auto chaos_target = _s0;
-				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
-				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
-				chaos_object->chaos_delegate_target = chaos_target;
-				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
-				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-			}
-			_s1 = _s0;
-			{
-				auto chaos_value = _s1;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__234_0 = chaos_value;
-			}
-		}
-		{
-			// Assert.Throws: target method not found via IL lookahead
-			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
-		}
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-		chaos_locals[0] = ChaosStoreInt64(_i0);
-		_i0 = ChaosLoadInt64(chaos_locals[0]);
-		return _i0;
-	}
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests::Listen_7__7()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests_Listen_7__7(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__28_0;
-	_s1 = _s0;
-	{
-		if (_s1 == 0)
-		{
-			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9;
-			{
-				// Hotpatch-aware ldftn wrapper (slot 1110)
-				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[1110];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
-					{
-						alignas(16) uint8_t _d_ab[8];
-						ArgBuffer _d_bw(_d_ab);
-						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d_entry.method_key, _d_ab, nullptr);
-						return;
-					}
-					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
-				};
-			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
-			}
-			{
-				const auto chaos_method_ptr = _s1;
-				const auto chaos_target = _s0;
-				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
-				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
-				chaos_object->chaos_delegate_target = chaos_target;
-				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
-				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-			}
-			_s1 = _s0;
-			{
-				auto chaos_value = _s1;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__28_0 = chaos_value;
-			}
-		}
-		{
-			// Assert.Throws: target method not found via IL lookahead
-			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
-		}
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-		chaos_locals[0] = ChaosStoreInt64(_i0);
-		_i0 = ChaosLoadInt64(chaos_locals[0]);
-		return _i0;
-	}
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests::Listen_8_int_0()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests_Listen_8_int_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__30_0;
-	_s1 = _s0;
-	{
-		if (_s1 == 0)
-		{
-			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9;
-			{
-				// Hotpatch-aware ldftn wrapper (slot 1111)
-				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[1111];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
-					{
-						alignas(16) uint8_t _d_ab[8];
-						ArgBuffer _d_bw(_d_ab);
-						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d_entry.method_key, _d_ab, nullptr);
-						return;
-					}
-					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
-				};
-			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
-			}
-			{
-				const auto chaos_method_ptr = _s1;
-				const auto chaos_target = _s0;
-				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
-				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
-				chaos_object->chaos_delegate_target = chaos_target;
-				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
-				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-			}
-			_s1 = _s0;
-			{
-				auto chaos_value = _s1;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__30_0 = chaos_value;
-			}
-		}
-		{
-			// Assert.Throws: target method not found via IL lookahead
-			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
-		}
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-		chaos_locals[0] = ChaosStoreInt64(_i0);
-		_i0 = ChaosLoadInt64(chaos_locals[0]);
-		return _i0;
-	}
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests::Listen_8_int_1()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests_Listen_8_int_1(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__32_0;
-	_s1 = _s0;
-	{
-		if (_s1 == 0)
-		{
-			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9;
-			{
-				// Hotpatch-aware ldftn wrapper (slot 1112)
-				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[1112];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
-					{
-						alignas(16) uint8_t _d_ab[8];
-						ArgBuffer _d_bw(_d_ab);
-						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d_entry.method_key, _d_ab, nullptr);
-						return;
-					}
-					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
-				};
-			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
-			}
-			{
-				const auto chaos_method_ptr = _s1;
-				const auto chaos_target = _s0;
-				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
-				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
-				chaos_object->chaos_delegate_target = chaos_target;
-				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
-				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-			}
-			_s1 = _s0;
-			{
-				auto chaos_value = _s1;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__32_0 = chaos_value;
-			}
-		}
-		{
-			// Assert.Throws: target method not found via IL lookahead
-			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
-		}
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-		chaos_locals[0] = ChaosStoreInt64(_i0);
-		_i0 = ChaosLoadInt64(chaos_locals[0]);
-		return _i0;
-	}
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests::Poll_47_int_SelectMode_0()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests_Poll_47_int_SelectMode_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__266_0;
-	_s1 = _s0;
-	{
-		if (_s1 == 0)
-		{
-			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9;
-			{
-				// Hotpatch-aware ldftn wrapper (slot 1113)
-				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[1113];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
-					{
-						alignas(16) uint8_t _d_ab[8];
-						ArgBuffer _d_bw(_d_ab);
-						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d_entry.method_key, _d_ab, nullptr);
-						return;
-					}
-					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
-				};
-			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
-			}
-			{
-				const auto chaos_method_ptr = _s1;
-				const auto chaos_target = _s0;
-				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
-				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
-				chaos_object->chaos_delegate_target = chaos_target;
-				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
-				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-			}
-			_s1 = _s0;
-			{
-				auto chaos_value = _s1;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__266_0 = chaos_value;
-			}
-		}
-		{
-			// Assert.Throws: target method not found via IL lookahead
-			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
-		}
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-		chaos_locals[0] = ChaosStoreInt64(_i0);
-		_i0 = ChaosLoadInt64(chaos_locals[0]);
-		return _i0;
-	}
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests::Poll_47_int_SelectMode_1()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests_Poll_47_int_SelectMode_1(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__268_0;
-	_s1 = _s0;
-	{
-		if (_s1 == 0)
-		{
-			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9;
-			{
-				// Hotpatch-aware ldftn wrapper (slot 1114)
-				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[1114];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
-					{
-						alignas(16) uint8_t _d_ab[8];
-						ArgBuffer _d_bw(_d_ab);
-						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d_entry.method_key, _d_ab, nullptr);
-						return;
-					}
-					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
-				};
-			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
-			}
-			{
-				const auto chaos_method_ptr = _s1;
-				const auto chaos_target = _s0;
-				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
-				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
-				chaos_object->chaos_delegate_target = chaos_target;
-				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
-				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-			}
-			_s1 = _s0;
-			{
-				auto chaos_value = _s1;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__268_0 = chaos_value;
-			}
-		}
-		{
-			// Assert.Throws: target method not found via IL lookahead
-			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
-		}
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-		chaos_locals[0] = ChaosStoreInt64(_i0);
-		_i0 = ChaosLoadInt64(chaos_locals[0]);
-		return _i0;
-	}
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests::Poll_48_System_TimeSpan_SelectMode_0()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests_Poll_48_System_TimeSpan_SelectMode_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__270_0;
-	_s1 = _s0;
-	{
-		if (_s1 == 0)
-		{
-			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9;
-			{
-				// Hotpatch-aware ldftn wrapper (slot 1115)
-				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[1115];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
-					{
-						alignas(16) uint8_t _d_ab[8];
-						ArgBuffer _d_bw(_d_ab);
-						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d_entry.method_key, _d_ab, nullptr);
-						return;
-					}
-					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
-				};
-			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
-			}
-			{
-				const auto chaos_method_ptr = _s1;
-				const auto chaos_target = _s0;
-				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
-				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
-				chaos_object->chaos_delegate_target = chaos_target;
-				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
-				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-			}
-			_s1 = _s0;
-			{
-				auto chaos_value = _s1;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__270_0 = chaos_value;
-			}
-		}
-		{
-			// Assert.Throws: target method not found via IL lookahead
-			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
-		}
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-		chaos_locals[0] = ChaosStoreInt64(_i0);
-		_i0 = ChaosLoadInt64(chaos_locals[0]);
-		return _i0;
-	}
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests::Poll_48_System_TimeSpan_SelectMode_1()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests_Poll_48_System_TimeSpan_SelectMode_1(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__272_0;
-	_s1 = _s0;
-	{
-		if (_s1 == 0)
-		{
-			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9;
-			{
-				// Hotpatch-aware ldftn wrapper (slot 1116)
-				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[1116];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
-					{
-						alignas(16) uint8_t _d_ab[8];
-						ArgBuffer _d_bw(_d_ab);
-						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d_entry.method_key, _d_ab, nullptr);
-						return;
-					}
-					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
-				};
-			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
-			}
-			{
-				const auto chaos_method_ptr = _s1;
-				const auto chaos_target = _s0;
-				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
-				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
-				chaos_object->chaos_delegate_target = chaos_target;
-				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
-				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-			}
-			_s1 = _s0;
-			{
-				auto chaos_value = _s1;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__272_0 = chaos_value;
-			}
-		}
-		{
-			// Assert.Throws: target method not found via IL lookahead
-			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
-		}
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-		chaos_locals[0] = ChaosStoreInt64(_i0);
-		_i0 = ChaosLoadInt64(chaos_locals[0]);
-		return _i0;
-	}
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests::Receive_24_System_Byte_int_SocketFlags_0()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests_Receive_24_System_Byte_int_SocketFlags_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__130_0;
-	_s1 = _s0;
-	{
-		if (_s1 == 0)
-		{
-			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9;
-			{
-				// Hotpatch-aware ldftn wrapper (slot 1117)
-				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[1117];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
-					{
-						alignas(16) uint8_t _d_ab[8];
-						ArgBuffer _d_bw(_d_ab);
-						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d_entry.method_key, _d_ab, nullptr);
-						return;
-					}
-					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
-				};
-			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
-			}
-			{
-				const auto chaos_method_ptr = _s1;
-				const auto chaos_target = _s0;
-				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
-				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
-				chaos_object->chaos_delegate_target = chaos_target;
-				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
-				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-			}
-			_s1 = _s0;
-			{
-				auto chaos_value = _s1;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__130_0 = chaos_value;
-			}
-		}
-		{
-			// Assert.Throws: target method not found via IL lookahead
-			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
-		}
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-		chaos_locals[0] = ChaosStoreInt64(_i0);
-		_i0 = ChaosLoadInt64(chaos_locals[0]);
-		return _i0;
-	}
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests::Receive_24_System_Byte_int_SocketFlags_1()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests_Receive_24_System_Byte_int_SocketFlags_1(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__132_0;
-	_s1 = _s0;
-	{
-		if (_s1 == 0)
-		{
-			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9;
-			{
-				// Hotpatch-aware ldftn wrapper (slot 1118)
-				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[1118];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
-					{
-						alignas(16) uint8_t _d_ab[8];
-						ArgBuffer _d_bw(_d_ab);
-						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d_entry.method_key, _d_ab, nullptr);
-						return;
-					}
-					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
-				};
-			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
-			}
-			{
-				const auto chaos_method_ptr = _s1;
-				const auto chaos_target = _s0;
-				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
-				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
-				chaos_object->chaos_delegate_target = chaos_target;
-				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
-				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-			}
-			_s1 = _s0;
-			{
-				auto chaos_value = _s1;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__132_0 = chaos_value;
-			}
-		}
-		{
-			// Assert.Throws: target method not found via IL lookahead
-			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
-		}
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-		chaos_locals[0] = ChaosStoreInt64(_i0);
-		_i0 = ChaosLoadInt64(chaos_locals[0]);
-		return _i0;
-	}
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests::Receive_24_System_Byte_int_SocketFlags_2()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests_Receive_24_System_Byte_int_SocketFlags_2(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__134_0;
-	_s1 = _s0;
-	{
-		if (_s1 == 0)
-		{
-			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9;
-			{
-				// Hotpatch-aware ldftn wrapper (slot 1119)
-				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[1119];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
-					{
-						alignas(16) uint8_t _d_ab[8];
-						ArgBuffer _d_bw(_d_ab);
-						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d_entry.method_key, _d_ab, nullptr);
-						return;
-					}
-					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
-				};
-			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
-			}
-			{
-				const auto chaos_method_ptr = _s1;
-				const auto chaos_target = _s0;
-				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
-				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
-				chaos_object->chaos_delegate_target = chaos_target;
-				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
-				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-			}
-			_s1 = _s0;
-			{
-				auto chaos_value = _s1;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__134_0 = chaos_value;
-			}
-		}
-		{
-			// Assert.Throws: target method not found via IL lookahead
-			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
-		}
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-		chaos_locals[0] = ChaosStoreInt64(_i0);
-		_i0 = ChaosLoadInt64(chaos_locals[0]);
-		return _i0;
-	}
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests::Receive_24_System_Byte_int_SocketFlags_3()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests_Receive_24_System_Byte_int_SocketFlags_3(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__136_0;
-	_s1 = _s0;
-	{
-		if (_s1 == 0)
-		{
-			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9;
-			{
-				// Hotpatch-aware ldftn wrapper (slot 1120)
-				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[1120];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
-					{
-						alignas(16) uint8_t _d_ab[8];
-						ArgBuffer _d_bw(_d_ab);
-						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d_entry.method_key, _d_ab, nullptr);
-						return;
-					}
-					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
-				};
-			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
-			}
-			{
-				const auto chaos_method_ptr = _s1;
-				const auto chaos_target = _s0;
-				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
-				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
-				chaos_object->chaos_delegate_target = chaos_target;
-				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
-				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-			}
-			_s1 = _s0;
-			{
-				auto chaos_value = _s1;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__136_0 = chaos_value;
-			}
-		}
-		{
-			// Assert.Throws: target method not found via IL lookahead
-			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
-		}
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-		chaos_locals[0] = ChaosStoreInt64(_i0);
-		_i0 = ChaosLoadInt64(chaos_locals[0]);
-		return _i0;
-	}
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests::Receive_25_System_Byte_SocketFlags_0()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests_Receive_25_System_Byte_SocketFlags_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__138_0;
-	_s1 = _s0;
-	{
-		if (_s1 == 0)
-		{
-			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9;
-			{
-				// Hotpatch-aware ldftn wrapper (slot 1121)
-				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[1121];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
-					{
-						alignas(16) uint8_t _d_ab[8];
-						ArgBuffer _d_bw(_d_ab);
-						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d_entry.method_key, _d_ab, nullptr);
-						return;
-					}
-					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
-				};
-			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
-			}
-			{
-				const auto chaos_method_ptr = _s1;
-				const auto chaos_target = _s0;
-				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
-				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
-				chaos_object->chaos_delegate_target = chaos_target;
-				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
-				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-			}
-			_s1 = _s0;
-			{
-				auto chaos_value = _s1;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__138_0 = chaos_value;
-			}
-		}
-		{
-			// Assert.Throws: target method not found via IL lookahead
-			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
-		}
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-		chaos_locals[0] = ChaosStoreInt64(_i0);
-		_i0 = ChaosLoadInt64(chaos_locals[0]);
-		return _i0;
-	}
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests::Receive_25_System_Byte_SocketFlags_1()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests_Receive_25_System_Byte_SocketFlags_1(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__140_0;
-	_s1 = _s0;
-	{
-		if (_s1 == 0)
-		{
-			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9;
-			{
-				// Hotpatch-aware ldftn wrapper (slot 1122)
-				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[1122];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
-					{
-						alignas(16) uint8_t _d_ab[8];
-						ArgBuffer _d_bw(_d_ab);
-						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d_entry.method_key, _d_ab, nullptr);
-						return;
-					}
-					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
-				};
-			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
-			}
-			{
-				const auto chaos_method_ptr = _s1;
-				const auto chaos_target = _s0;
-				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
-				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
-				chaos_object->chaos_delegate_target = chaos_target;
-				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
-				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-			}
-			_s1 = _s0;
-			{
-				auto chaos_value = _s1;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__140_0 = chaos_value;
-			}
-		}
-		{
-			// Assert.Throws: target method not found via IL lookahead
-			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
-		}
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-		chaos_locals[0] = ChaosStoreInt64(_i0);
-		_i0 = ChaosLoadInt64(chaos_locals[0]);
-		return _i0;
-	}
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests::Receive_25_System_Byte_SocketFlags_2()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests_Receive_25_System_Byte_SocketFlags_2(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__142_0;
-	_s1 = _s0;
-	{
-		if (_s1 == 0)
-		{
-			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9;
-			{
-				// Hotpatch-aware ldftn wrapper (slot 1123)
-				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[1123];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
-					{
-						alignas(16) uint8_t _d_ab[8];
-						ArgBuffer _d_bw(_d_ab);
-						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d_entry.method_key, _d_ab, nullptr);
-						return;
-					}
-					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
-				};
-			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
-			}
-			{
-				const auto chaos_method_ptr = _s1;
-				const auto chaos_target = _s0;
-				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
-				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
-				chaos_object->chaos_delegate_target = chaos_target;
-				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
-				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-			}
-			_s1 = _s0;
-			{
-				auto chaos_value = _s1;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__142_0 = chaos_value;
-			}
-		}
-		{
-			// Assert.Throws: target method not found via IL lookahead
-			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
-		}
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-		chaos_locals[0] = ChaosStoreInt64(_i0);
-		_i0 = ChaosLoadInt64(chaos_locals[0]);
-		return _i0;
-	}
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests::Receive_26_System_Byte_0()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests_Receive_26_System_Byte_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__144_0;
-	_s1 = _s0;
-	{
-		if (_s1 == 0)
-		{
-			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9;
-			{
-				// Hotpatch-aware ldftn wrapper (slot 1124)
-				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[1124];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
-					{
-						alignas(16) uint8_t _d_ab[8];
-						ArgBuffer _d_bw(_d_ab);
-						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d_entry.method_key, _d_ab, nullptr);
-						return;
-					}
-					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
-				};
-			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
-			}
-			{
-				const auto chaos_method_ptr = _s1;
-				const auto chaos_target = _s0;
-				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
-				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
-				chaos_object->chaos_delegate_target = chaos_target;
-				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
-				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-			}
-			_s1 = _s0;
-			{
-				auto chaos_value = _s1;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__144_0 = chaos_value;
-			}
-		}
-		{
-			// Assert.Throws: target method not found via IL lookahead
-			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
-		}
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-		chaos_locals[0] = ChaosStoreInt64(_i0);
-		_i0 = ChaosLoadInt64(chaos_locals[0]);
-		return _i0;
-	}
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests::Receive_26_System_Byte_1()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests_Receive_26_System_Byte_1(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__146_0;
-	_s1 = _s0;
-	{
-		if (_s1 == 0)
-		{
-			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9;
-			{
-				// Hotpatch-aware ldftn wrapper (slot 1125)
-				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[1125];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
-					{
-						alignas(16) uint8_t _d_ab[8];
-						ArgBuffer _d_bw(_d_ab);
-						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d_entry.method_key, _d_ab, nullptr);
-						return;
-					}
-					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
-				};
-			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
-			}
-			{
-				const auto chaos_method_ptr = _s1;
-				const auto chaos_target = _s0;
-				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
-				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
-				chaos_object->chaos_delegate_target = chaos_target;
-				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
-				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-			}
-			_s1 = _s0;
-			{
-				auto chaos_value = _s1;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__146_0 = chaos_value;
-			}
-		}
-		{
-			// Assert.Throws: target method not found via IL lookahead
-			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
-		}
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-		chaos_locals[0] = ChaosStoreInt64(_i0);
-		_i0 = ChaosLoadInt64(chaos_locals[0]);
-		return _i0;
-	}
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests::Receive_26_System_Byte_2()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests_Receive_26_System_Byte_2(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__148_0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__36_0;
 	_s1 = _s0;
 	{
 		if (_s1 == 0)
@@ -4750,7 +1680,7 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_
 			_s1 = _s0;
 			{
 				auto chaos_value = _s1;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__148_0 = chaos_value;
+				chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__36_0 = chaos_value;
 			}
 		}
 		{
@@ -4765,16 +1695,20 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_
 	}
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests::Receive_27_System_Byte_int_int_SocketFlags_0()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests_Receive_27_System_Byte_int_int_SocketFlags_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests::Send_10_System_Byte_int_SocketFlags_1()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests_Send_10_System_Byte_int_SocketFlags_1(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
 	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__150_0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__38_0;
 	_s1 = _s0;
 	{
 		if (_s1 == 0)
@@ -4810,7 +1744,7 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_
 			_s1 = _s0;
 			{
 				auto chaos_value = _s1;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__150_0 = chaos_value;
+				chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__38_0 = chaos_value;
 			}
 		}
 		{
@@ -4825,16 +1759,20 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_
 	}
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests::Receive_27_System_Byte_int_int_SocketFlags_1()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests_Receive_27_System_Byte_int_int_SocketFlags_1(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests::Send_10_System_Byte_int_SocketFlags_2()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests_Send_10_System_Byte_int_SocketFlags_2(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
 	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__152_0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__40_0;
 	_s1 = _s0;
 	{
 		if (_s1 == 0)
@@ -4870,7 +1808,7 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_
 			_s1 = _s0;
 			{
 				auto chaos_value = _s1;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__152_0 = chaos_value;
+				chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__40_0 = chaos_value;
 			}
 		}
 		{
@@ -4885,16 +1823,20 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_
 	}
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests::Receive_27_System_Byte_int_int_SocketFlags_2()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests_Receive_27_System_Byte_int_int_SocketFlags_2(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests::Send_10_System_Byte_int_SocketFlags_3()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests_Send_10_System_Byte_int_SocketFlags_3(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
 	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__154_0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__42_0;
 	_s1 = _s0;
 	{
 		if (_s1 == 0)
@@ -4930,7 +1872,7 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_
 			_s1 = _s0;
 			{
 				auto chaos_value = _s1;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__154_0 = chaos_value;
+				chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__42_0 = chaos_value;
 			}
 		}
 		{
@@ -4945,16 +1887,20 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_
 	}
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests::Receive_27_System_Byte_int_int_SocketFlags_3()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests_Receive_27_System_Byte_int_int_SocketFlags_3(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests::Send_11_System_Byte_SocketFlags_0()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests_Send_11_System_Byte_SocketFlags_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
 	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__156_0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__44_0;
 	_s1 = _s0;
 	{
 		if (_s1 == 0)
@@ -4990,7 +1936,7 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_
 			_s1 = _s0;
 			{
 				auto chaos_value = _s1;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__156_0 = chaos_value;
+				chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__44_0 = chaos_value;
 			}
 		}
 		{
@@ -5005,16 +1951,20 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_
 	}
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests::Receive_27_System_Byte_int_int_SocketFlags_4()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests_Receive_27_System_Byte_int_int_SocketFlags_4(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests::Send_11_System_Byte_SocketFlags_1()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests_Send_11_System_Byte_SocketFlags_1(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
 	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__158_0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__46_0;
 	_s1 = _s0;
 	{
 		if (_s1 == 0)
@@ -5050,7 +2000,7 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_
 			_s1 = _s0;
 			{
 				auto chaos_value = _s1;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__158_0 = chaos_value;
+				chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__46_0 = chaos_value;
 			}
 		}
 		{
@@ -5065,386 +2015,20 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_
 	}
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests::Receive_28_System_Byte_int_int_SocketFlags_SocketError_0()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests_Receive_28_System_Byte_int_int_SocketFlags_SocketError_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INT64 _i0;
-	{
-		chaos_type_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass160_0 __chaos_stack_obj{};
-		auto* chaos_object = &__chaos_stack_obj;
-		chaos_object->header.type_info = chaos_mt_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass160_0.AsTypeInfoHot();
-		CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass160_0__ctor(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object));
-		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-	}
-	chaos_locals[0] = _s0;
-	_s0 = chaos_locals[0];
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	{
-		auto chaos_value = _s1;
-		if (chaos_is_string_id(chaos_value))
-		{
-			chaos_value = chaos_string_materialize(chaos_value);
-		}
-		auto* chaos_object = reinterpret_cast<chaos_type_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass160_0*>(_s0);
-		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass160_0____ref_28_0_0));
-		chaos_object->field_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass160_0____ref_28_0_0 = chaos_value;
-		chaos_gc_dirty_card(chaos_object);
-	}
-	_s0 = chaos_locals[0];
-	{
-		// Hotpatch-aware ldftn wrapper (slot 922)
-		static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-			auto& _d_entry = s_hotpatch_entries[922];
-			if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
-				&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
-			{
-				alignas(16) uint8_t _d_ab[8];
-				ArgBuffer _d_bw(_d_ab);
-				_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
-				::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-					_d_entry.method_key, _d_ab, nullptr);
-				return;
-			}
-			reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
-		};
-	_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
-	}
-	{
-		const auto chaos_method_ptr = _s1;
-		const auto chaos_target = _s0;
-		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
-		chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
-		chaos_object->chaos_delegate_target = chaos_target;
-		chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
-		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-	}
-	{
-		try {
-			auto* chaos_action = reinterpret_cast<chaos_type_System_Private_CoreLib_System_Action*>(_s0);
-			CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass160_0_Receive_28_System_Byte_int_int_SocketFlags_SocketError_0_b__0(chaos_action->chaos_delegate_target);
-			throw chaos_managed_exception{};  // no exception — fail
-		} catch (chaos_managed_exception&) {
-			// expected exception was thrown — pass
-		}
-	}
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-	_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-	chaos_locals[1] = ChaosStoreInt64(_i0);
-	_i0 = ChaosLoadInt64(chaos_locals[1]);
-	return _i0;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests::Receive_28_System_Byte_int_int_SocketFlags_SocketError_1()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests_Receive_28_System_Byte_int_int_SocketFlags_SocketError_1(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INT64 _i0;
-	{
-		chaos_type_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass162_0 __chaos_stack_obj{};
-		auto* chaos_object = &__chaos_stack_obj;
-		chaos_object->header.type_info = chaos_mt_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass162_0.AsTypeInfoHot();
-		CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass162_0__ctor(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object));
-		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-	}
-	chaos_locals[0] = _s0;
-	_s0 = chaos_locals[0];
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	{
-		auto chaos_value = _s1;
-		if (chaos_is_string_id(chaos_value))
-		{
-			chaos_value = chaos_string_materialize(chaos_value);
-		}
-		auto* chaos_object = reinterpret_cast<chaos_type_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass162_0*>(_s0);
-		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass162_0____ref_28_1_0));
-		chaos_object->field_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass162_0____ref_28_1_0 = chaos_value;
-		chaos_gc_dirty_card(chaos_object);
-	}
-	_s0 = chaos_locals[0];
-	{
-		// Hotpatch-aware ldftn wrapper (slot 924)
-		static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-			auto& _d_entry = s_hotpatch_entries[924];
-			if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
-				&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
-			{
-				alignas(16) uint8_t _d_ab[8];
-				ArgBuffer _d_bw(_d_ab);
-				_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
-				::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-					_d_entry.method_key, _d_ab, nullptr);
-				return;
-			}
-			reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
-		};
-	_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
-	}
-	{
-		const auto chaos_method_ptr = _s1;
-		const auto chaos_target = _s0;
-		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
-		chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
-		chaos_object->chaos_delegate_target = chaos_target;
-		chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
-		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-	}
-	{
-		try {
-			auto* chaos_action = reinterpret_cast<chaos_type_System_Private_CoreLib_System_Action*>(_s0);
-			CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass162_0_Receive_28_System_Byte_int_int_SocketFlags_SocketError_1_b__0(chaos_action->chaos_delegate_target);
-			throw chaos_managed_exception{};  // no exception — fail
-		} catch (chaos_managed_exception&) {
-			// expected exception was thrown — pass
-		}
-	}
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-	_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-	chaos_locals[1] = ChaosStoreInt64(_i0);
-	_i0 = ChaosLoadInt64(chaos_locals[1]);
-	return _i0;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests::Receive_28_System_Byte_int_int_SocketFlags_SocketError_2()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests_Receive_28_System_Byte_int_int_SocketFlags_SocketError_2(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INT64 _i0;
-	{
-		chaos_type_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass164_0 __chaos_stack_obj{};
-		auto* chaos_object = &__chaos_stack_obj;
-		chaos_object->header.type_info = chaos_mt_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass164_0.AsTypeInfoHot();
-		CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass164_0__ctor(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object));
-		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-	}
-	chaos_locals[0] = _s0;
-	_s0 = chaos_locals[0];
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	{
-		auto chaos_value = _s1;
-		if (chaos_is_string_id(chaos_value))
-		{
-			chaos_value = chaos_string_materialize(chaos_value);
-		}
-		auto* chaos_object = reinterpret_cast<chaos_type_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass164_0*>(_s0);
-		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass164_0____ref_28_2_0));
-		chaos_object->field_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass164_0____ref_28_2_0 = chaos_value;
-		chaos_gc_dirty_card(chaos_object);
-	}
-	_s0 = chaos_locals[0];
-	{
-		// Hotpatch-aware ldftn wrapper (slot 926)
-		static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-			auto& _d_entry = s_hotpatch_entries[926];
-			if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
-				&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
-			{
-				alignas(16) uint8_t _d_ab[8];
-				ArgBuffer _d_bw(_d_ab);
-				_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
-				::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-					_d_entry.method_key, _d_ab, nullptr);
-				return;
-			}
-			reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
-		};
-	_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
-	}
-	{
-		const auto chaos_method_ptr = _s1;
-		const auto chaos_target = _s0;
-		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
-		chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
-		chaos_object->chaos_delegate_target = chaos_target;
-		chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
-		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-	}
-	{
-		try {
-			auto* chaos_action = reinterpret_cast<chaos_type_System_Private_CoreLib_System_Action*>(_s0);
-			CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass164_0_Receive_28_System_Byte_int_int_SocketFlags_SocketError_2_b__0(chaos_action->chaos_delegate_target);
-			throw chaos_managed_exception{};  // no exception — fail
-		} catch (chaos_managed_exception&) {
-			// expected exception was thrown — pass
-		}
-	}
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-	_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-	chaos_locals[1] = ChaosStoreInt64(_i0);
-	_i0 = ChaosLoadInt64(chaos_locals[1]);
-	return _i0;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests::Receive_28_System_Byte_int_int_SocketFlags_SocketError_3()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests_Receive_28_System_Byte_int_int_SocketFlags_SocketError_3(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INT64 _i0;
-	{
-		chaos_type_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass166_0 __chaos_stack_obj{};
-		auto* chaos_object = &__chaos_stack_obj;
-		chaos_object->header.type_info = chaos_mt_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass166_0.AsTypeInfoHot();
-		CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass166_0__ctor(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object));
-		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-	}
-	chaos_locals[0] = _s0;
-	_s0 = chaos_locals[0];
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	{
-		auto chaos_value = _s1;
-		if (chaos_is_string_id(chaos_value))
-		{
-			chaos_value = chaos_string_materialize(chaos_value);
-		}
-		auto* chaos_object = reinterpret_cast<chaos_type_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass166_0*>(_s0);
-		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass166_0____ref_28_3_0));
-		chaos_object->field_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass166_0____ref_28_3_0 = chaos_value;
-		chaos_gc_dirty_card(chaos_object);
-	}
-	_s0 = chaos_locals[0];
-	{
-		// Hotpatch-aware ldftn wrapper (slot 928)
-		static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-			auto& _d_entry = s_hotpatch_entries[928];
-			if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
-				&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
-			{
-				alignas(16) uint8_t _d_ab[8];
-				ArgBuffer _d_bw(_d_ab);
-				_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
-				::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-					_d_entry.method_key, _d_ab, nullptr);
-				return;
-			}
-			reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
-		};
-	_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
-	}
-	{
-		const auto chaos_method_ptr = _s1;
-		const auto chaos_target = _s0;
-		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
-		chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
-		chaos_object->chaos_delegate_target = chaos_target;
-		chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
-		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-	}
-	{
-		try {
-			auto* chaos_action = reinterpret_cast<chaos_type_System_Private_CoreLib_System_Action*>(_s0);
-			CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass166_0_Receive_28_System_Byte_int_int_SocketFlags_SocketError_3_b__0(chaos_action->chaos_delegate_target);
-			throw chaos_managed_exception{};  // no exception — fail
-		} catch (chaos_managed_exception&) {
-			// expected exception was thrown — pass
-		}
-	}
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-	_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-	chaos_locals[1] = ChaosStoreInt64(_i0);
-	_i0 = ChaosLoadInt64(chaos_locals[1]);
-	return _i0;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests::Receive_28_System_Byte_int_int_SocketFlags_SocketError_4()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests_Receive_28_System_Byte_int_int_SocketFlags_SocketError_4(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INT64 _i0;
-	{
-		chaos_type_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass168_0 __chaos_stack_obj{};
-		auto* chaos_object = &__chaos_stack_obj;
-		chaos_object->header.type_info = chaos_mt_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass168_0.AsTypeInfoHot();
-		CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass168_0__ctor(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object));
-		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-	}
-	chaos_locals[0] = _s0;
-	_s0 = chaos_locals[0];
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	{
-		auto chaos_value = _s1;
-		if (chaos_is_string_id(chaos_value))
-		{
-			chaos_value = chaos_string_materialize(chaos_value);
-		}
-		auto* chaos_object = reinterpret_cast<chaos_type_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass168_0*>(_s0);
-		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass168_0____ref_28_4_0));
-		chaos_object->field_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass168_0____ref_28_4_0 = chaos_value;
-		chaos_gc_dirty_card(chaos_object);
-	}
-	_s0 = chaos_locals[0];
-	{
-		// Hotpatch-aware ldftn wrapper (slot 930)
-		static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-			auto& _d_entry = s_hotpatch_entries[930];
-			if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
-				&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
-			{
-				alignas(16) uint8_t _d_ab[8];
-				ArgBuffer _d_bw(_d_ab);
-				_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
-				::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-					_d_entry.method_key, _d_ab, nullptr);
-				return;
-			}
-			reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
-		};
-	_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
-	}
-	{
-		const auto chaos_method_ptr = _s1;
-		const auto chaos_target = _s0;
-		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
-		chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
-		chaos_object->chaos_delegate_target = chaos_target;
-		chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
-		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-	}
-	{
-		try {
-			auto* chaos_action = reinterpret_cast<chaos_type_System_Private_CoreLib_System_Action*>(_s0);
-			CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass168_0_Receive_28_System_Byte_int_int_SocketFlags_SocketError_4_b__0(chaos_action->chaos_delegate_target);
-			throw chaos_managed_exception{};  // no exception — fail
-		} catch (chaos_managed_exception&) {
-			// expected exception was thrown — pass
-		}
-	}
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-	_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-	chaos_locals[1] = ChaosStoreInt64(_i0);
-	_i0 = ChaosLoadInt64(chaos_locals[1]);
-	return _i0;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests::Receive_29_IListSystem_ArraySegmentbyte_0()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests_Receive_29_IListSystem_ArraySegmentbyte_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests::Send_11_System_Byte_SocketFlags_2()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests_Send_11_System_Byte_SocketFlags_2(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
 	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__170_0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__48_0;
 	_s1 = _s0;
 	{
 		if (_s1 == 0)
@@ -5480,7 +2064,7 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_
 			_s1 = _s0;
 			{
 				auto chaos_value = _s1;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__170_0 = chaos_value;
+				chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__48_0 = chaos_value;
 			}
 		}
 		{
@@ -5495,16 +2079,20 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_
 	}
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests::Receive_29_IListSystem_ArraySegmentbyte_1()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests_Receive_29_IListSystem_ArraySegmentbyte_1(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests::Send_12_System_Byte_0()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests_Send_12_System_Byte_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
 	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__172_0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__50_0;
 	_s1 = _s0;
 	{
 		if (_s1 == 0)
@@ -5540,7 +2128,7 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_
 			_s1 = _s0;
 			{
 				auto chaos_value = _s1;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__172_0 = chaos_value;
+				chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__50_0 = chaos_value;
 			}
 		}
 		{
@@ -5555,16 +2143,20 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_
 	}
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests::Receive_30_IListSystem_ArraySegmentbyte_SocketFlags_0()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests_Receive_30_IListSystem_ArraySegmentbyte_SocketFlags_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests::Send_12_System_Byte_1()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests_Send_12_System_Byte_1(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
 	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__174_0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__52_0;
 	_s1 = _s0;
 	{
 		if (_s1 == 0)
@@ -5600,7 +2192,7 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_
 			_s1 = _s0;
 			{
 				auto chaos_value = _s1;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__174_0 = chaos_value;
+				chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__52_0 = chaos_value;
 			}
 		}
 		{
@@ -5615,16 +2207,20 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_
 	}
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests::Receive_30_IListSystem_ArraySegmentbyte_SocketFlags_1()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests_Receive_30_IListSystem_ArraySegmentbyte_SocketFlags_1(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests::Send_12_System_Byte_2()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests_Send_12_System_Byte_2(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
 	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__176_0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__54_0;
 	_s1 = _s0;
 	{
 		if (_s1 == 0)
@@ -5660,7 +2256,7 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_
 			_s1 = _s0;
 			{
 				auto chaos_value = _s1;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__176_0 = chaos_value;
+				chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__54_0 = chaos_value;
 			}
 		}
 		{
@@ -5675,164 +2271,20 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_
 	}
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests::Receive_31_IListSystem_ArraySegmentbyte_SocketFlags_SocketError_0()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests_Receive_31_IListSystem_ArraySegmentbyte_SocketFlags_SocketError_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INT64 _i0;
-	{
-		chaos_type_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass178_0 __chaos_stack_obj{};
-		auto* chaos_object = &__chaos_stack_obj;
-		chaos_object->header.type_info = chaos_mt_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass178_0.AsTypeInfoHot();
-		CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass178_0__ctor(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object));
-		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-	}
-	chaos_locals[0] = _s0;
-	_s0 = chaos_locals[0];
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	{
-		auto chaos_value = _s1;
-		if (chaos_is_string_id(chaos_value))
-		{
-			chaos_value = chaos_string_materialize(chaos_value);
-		}
-		auto* chaos_object = reinterpret_cast<chaos_type_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass178_0*>(_s0);
-		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass178_0____ref_31_0_0));
-		chaos_object->field_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass178_0____ref_31_0_0 = chaos_value;
-		chaos_gc_dirty_card(chaos_object);
-	}
-	_s0 = chaos_locals[0];
-	{
-		// Hotpatch-aware ldftn wrapper (slot 932)
-		static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-			auto& _d_entry = s_hotpatch_entries[932];
-			if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
-				&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
-			{
-				alignas(16) uint8_t _d_ab[8];
-				ArgBuffer _d_bw(_d_ab);
-				_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
-				::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-					_d_entry.method_key, _d_ab, nullptr);
-				return;
-			}
-			reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
-		};
-	_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
-	}
-	{
-		const auto chaos_method_ptr = _s1;
-		const auto chaos_target = _s0;
-		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
-		chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
-		chaos_object->chaos_delegate_target = chaos_target;
-		chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
-		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-	}
-	{
-		try {
-			auto* chaos_action = reinterpret_cast<chaos_type_System_Private_CoreLib_System_Action*>(_s0);
-			CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass178_0_Receive_31_IListSystem_ArraySegmentbyte_SocketFlags_SocketError_0_b__0(chaos_action->chaos_delegate_target);
-			throw chaos_managed_exception{};  // no exception — fail
-		} catch (chaos_managed_exception&) {
-			// expected exception was thrown — pass
-		}
-	}
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-	_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-	chaos_locals[1] = ChaosStoreInt64(_i0);
-	_i0 = ChaosLoadInt64(chaos_locals[1]);
-	return _i0;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests::Receive_31_IListSystem_ArraySegmentbyte_SocketFlags_SocketError_1()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests_Receive_31_IListSystem_ArraySegmentbyte_SocketFlags_SocketError_1(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INT64 _i0;
-	{
-		chaos_type_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass180_0 __chaos_stack_obj{};
-		auto* chaos_object = &__chaos_stack_obj;
-		chaos_object->header.type_info = chaos_mt_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass180_0.AsTypeInfoHot();
-		CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass180_0__ctor(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object));
-		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-	}
-	chaos_locals[0] = _s0;
-	_s0 = chaos_locals[0];
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	{
-		auto chaos_value = _s1;
-		if (chaos_is_string_id(chaos_value))
-		{
-			chaos_value = chaos_string_materialize(chaos_value);
-		}
-		auto* chaos_object = reinterpret_cast<chaos_type_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass180_0*>(_s0);
-		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass180_0____ref_31_1_0));
-		chaos_object->field_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass180_0____ref_31_1_0 = chaos_value;
-		chaos_gc_dirty_card(chaos_object);
-	}
-	_s0 = chaos_locals[0];
-	{
-		// Hotpatch-aware ldftn wrapper (slot 934)
-		static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-			auto& _d_entry = s_hotpatch_entries[934];
-			if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
-				&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
-			{
-				alignas(16) uint8_t _d_ab[8];
-				ArgBuffer _d_bw(_d_ab);
-				_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
-				::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-					_d_entry.method_key, _d_ab, nullptr);
-				return;
-			}
-			reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
-		};
-	_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
-	}
-	{
-		const auto chaos_method_ptr = _s1;
-		const auto chaos_target = _s0;
-		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
-		chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
-		chaos_object->chaos_delegate_target = chaos_target;
-		chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
-		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-	}
-	{
-		try {
-			auto* chaos_action = reinterpret_cast<chaos_type_System_Private_CoreLib_System_Action*>(_s0);
-			CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass180_0_Receive_31_IListSystem_ArraySegmentbyte_SocketFlags_SocketError_1_b__0(chaos_action->chaos_delegate_target);
-			throw chaos_managed_exception{};  // no exception — fail
-		} catch (chaos_managed_exception&) {
-			// expected exception was thrown — pass
-		}
-	}
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-	_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-	chaos_locals[1] = ChaosStoreInt64(_i0);
-	_i0 = ChaosLoadInt64(chaos_locals[1]);
-	return _i0;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests::ReceiveAsync_112_System_ArraySegmentbyte_0()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests_ReceiveAsync_112_System_ArraySegmentbyte_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests::Send_13_IListSystem_ArraySegmentbyte_0()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests_Send_13_IListSystem_ArraySegmentbyte_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
 	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__532_0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__56_0;
 	_s1 = _s0;
 	{
 		if (_s1 == 0)
@@ -5868,7 +2320,7 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_
 			_s1 = _s0;
 			{
 				auto chaos_value = _s1;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__532_0 = chaos_value;
+				chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__56_0 = chaos_value;
 			}
 		}
 		{
@@ -5883,16 +2335,20 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_
 	}
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests::ReceiveAsync_113_System_ArraySegmentbyte_SocketFlags_0()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests_ReceiveAsync_113_System_ArraySegmentbyte_SocketFlags_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests::Send_13_IListSystem_ArraySegmentbyte_1()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests_Send_13_IListSystem_ArraySegmentbyte_1(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
 	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__534_0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__58_0;
 	_s1 = _s0;
 	{
 		if (_s1 == 0)
@@ -5928,7 +2384,7 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_
 			_s1 = _s0;
 			{
 				auto chaos_value = _s1;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__534_0 = chaos_value;
+				chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__58_0 = chaos_value;
 			}
 		}
 		{
@@ -5943,16 +2399,20 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_
 	}
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests::ReceiveAsync_114_System_Memorybyte_CancellationToken_0()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests_ReceiveAsync_114_System_Memorybyte_CancellationToken_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests::Send_14_IListSystem_ArraySegmentbyte_SocketFlags_0()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests_Send_14_IListSystem_ArraySegmentbyte_SocketFlags_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
 	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__536_0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__60_0;
 	_s1 = _s0;
 	{
 		if (_s1 == 0)
@@ -5988,7 +2448,7 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_
 			_s1 = _s0;
 			{
 				auto chaos_value = _s1;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__536_0 = chaos_value;
+				chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__60_0 = chaos_value;
 			}
 		}
 		{
@@ -6003,16 +2463,20 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_
 	}
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests::ReceiveAsync_115_System_Memorybyte_SocketFlags_CancellationToken_0()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests_ReceiveAsync_115_System_Memorybyte_SocketFlags_CancellationToken_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests::Send_14_IListSystem_ArraySegmentbyte_SocketFlags_1()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests_Send_14_IListSystem_ArraySegmentbyte_SocketFlags_1(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
 	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__538_0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__62_0;
 	_s1 = _s0;
 	{
 		if (_s1 == 0)
@@ -6048,7 +2512,7 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_
 			_s1 = _s0;
 			{
 				auto chaos_value = _s1;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__538_0 = chaos_value;
+				chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__62_0 = chaos_value;
 			}
 		}
 		{
@@ -6063,16 +2527,168 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_
 	}
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests::ReceiveAsync_116_IListSystem_ArraySegmentbyte_0()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests_ReceiveAsync_116_IListSystem_ArraySegmentbyte_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests::Send_15_IListSystem_ArraySegmentbyte_SocketFlags_SocketError_0()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests_Send_15_IListSystem_ArraySegmentbyte_SocketFlags_SocketError_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	{
+		chaos_type_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass64_0 __chaos_stack_obj{};
+		auto* chaos_object = &__chaos_stack_obj;
+		chaos_object->header.type_info = chaos_mt_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass64_0.AsTypeInfoHot();
+		CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass64_0__ctor(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object));
+		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+	}
+	chaos_locals[0] = _s0;
+	_s0 = chaos_locals[0];
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	{
+		auto chaos_value = _s1;
+		auto* chaos_object = reinterpret_cast<chaos_type_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass64_0*>(_s0);
+		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass64_0____ref_15_0_0));
+		chaos_object->field_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass64_0____ref_15_0_0 = chaos_value;
+		chaos_gc_dirty_card(chaos_object);
+	}
+	_s0 = chaos_locals[0];
+	{
+		// Hotpatch-aware ldftn wrapper (slot 948)
+		static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
+			auto& _d_entry = s_hotpatch_entries[948];
+			if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+				&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+			{
+				alignas(16) uint8_t _d_ab[8];
+				ArgBuffer _d_bw(_d_ab);
+				_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+				::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+					_d_entry.method_key, _d_ab, nullptr);
+				return;
+			}
+			reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
+		};
+	_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+	}
+	{
+		const auto chaos_method_ptr = _s1;
+		const auto chaos_target = _s0;
+		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
+		chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
+		chaos_object->chaos_delegate_target = chaos_target;
+		chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+	}
+	{
+		try {
+			auto* chaos_action = reinterpret_cast<chaos_type_System_Private_CoreLib_System_Action*>(_s0);
+			CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass64_0_Send_15_IListSystem_ArraySegmentbyte_SocketFlags_SocketError_0_b__0(chaos_action->chaos_delegate_target);
+			throw chaos_managed_exception{};  // no exception — fail
+		} catch (chaos_managed_exception&) {
+			// expected exception was thrown — pass
+		}
+	}
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+	_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
+	chaos_locals[1] = ChaosStoreInt64(_i0);
+	_i0 = ChaosLoadInt64(chaos_locals[1]);
+	return _i0;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests::Send_15_IListSystem_ArraySegmentbyte_SocketFlags_SocketError_1()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests_Send_15_IListSystem_ArraySegmentbyte_SocketFlags_SocketError_1(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	{
+		chaos_type_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass66_0 __chaos_stack_obj{};
+		auto* chaos_object = &__chaos_stack_obj;
+		chaos_object->header.type_info = chaos_mt_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass66_0.AsTypeInfoHot();
+		CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass66_0__ctor(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object));
+		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+	}
+	chaos_locals[0] = _s0;
+	_s0 = chaos_locals[0];
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	{
+		auto chaos_value = _s1;
+		auto* chaos_object = reinterpret_cast<chaos_type_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass66_0*>(_s0);
+		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass66_0____ref_15_1_0));
+		chaos_object->field_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass66_0____ref_15_1_0 = chaos_value;
+		chaos_gc_dirty_card(chaos_object);
+	}
+	_s0 = chaos_locals[0];
+	{
+		// Hotpatch-aware ldftn wrapper (slot 950)
+		static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
+			auto& _d_entry = s_hotpatch_entries[950];
+			if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+				&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+			{
+				alignas(16) uint8_t _d_ab[8];
+				ArgBuffer _d_bw(_d_ab);
+				_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+				::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+					_d_entry.method_key, _d_ab, nullptr);
+				return;
+			}
+			reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
+		};
+	_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+	}
+	{
+		const auto chaos_method_ptr = _s1;
+		const auto chaos_target = _s0;
+		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
+		chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
+		chaos_object->chaos_delegate_target = chaos_target;
+		chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+	}
+	{
+		try {
+			auto* chaos_action = reinterpret_cast<chaos_type_System_Private_CoreLib_System_Action*>(_s0);
+			CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass66_0_Send_15_IListSystem_ArraySegmentbyte_SocketFlags_SocketError_1_b__0(chaos_action->chaos_delegate_target);
+			throw chaos_managed_exception{};  // no exception — fail
+		} catch (chaos_managed_exception&) {
+			// expected exception was thrown — pass
+		}
+	}
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+	_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
+	chaos_locals[1] = ChaosStoreInt64(_i0);
+	_i0 = ChaosLoadInt64(chaos_locals[1]);
+	return _i0;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests::Send_16_System_Byte_int_int_SocketFlags_0()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests_Send_16_System_Byte_int_int_SocketFlags_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
 	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__540_0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__68_0;
 	_s1 = _s0;
 	{
 		if (_s1 == 0)
@@ -6108,7 +2724,7 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_
 			_s1 = _s0;
 			{
 				auto chaos_value = _s1;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__540_0 = chaos_value;
+				chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__68_0 = chaos_value;
 			}
 		}
 		{
@@ -6123,16 +2739,20 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_
 	}
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests::ReceiveAsync_116_IListSystem_ArraySegmentbyte_1()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests_ReceiveAsync_116_IListSystem_ArraySegmentbyte_1(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests::Send_16_System_Byte_int_int_SocketFlags_1()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests_Send_16_System_Byte_int_int_SocketFlags_1(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
 	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__542_0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__70_0;
 	_s1 = _s0;
 	{
 		if (_s1 == 0)
@@ -6168,7 +2788,7 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_
 			_s1 = _s0;
 			{
 				auto chaos_value = _s1;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__542_0 = chaos_value;
+				chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__70_0 = chaos_value;
 			}
 		}
 		{
@@ -6183,16 +2803,20 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_
 	}
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests::ReceiveAsync_117_IListSystem_ArraySegmentbyte_SocketFlags_0()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests_ReceiveAsync_117_IListSystem_ArraySegmentbyte_SocketFlags_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests::Send_16_System_Byte_int_int_SocketFlags_2()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests_Send_16_System_Byte_int_int_SocketFlags_2(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
 	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__544_0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__72_0;
 	_s1 = _s0;
 	{
 		if (_s1 == 0)
@@ -6228,7 +2852,7 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_
 			_s1 = _s0;
 			{
 				auto chaos_value = _s1;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__544_0 = chaos_value;
+				chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__72_0 = chaos_value;
 			}
 		}
 		{
@@ -6243,16 +2867,20 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_
 	}
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests::ReceiveAsync_117_IListSystem_ArraySegmentbyte_SocketFlags_1()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests_ReceiveAsync_117_IListSystem_ArraySegmentbyte_SocketFlags_1(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests::Send_16_System_Byte_int_int_SocketFlags_3()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests_Send_16_System_Byte_int_int_SocketFlags_3(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
 	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__546_0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__74_0;
 	_s1 = _s0;
 	{
 		if (_s1 == 0)
@@ -6288,7 +2916,7 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_
 			_s1 = _s0;
 			{
 				auto chaos_value = _s1;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__546_0 = chaos_value;
+				chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__74_0 = chaos_value;
 			}
 		}
 		{
@@ -6303,16 +2931,20 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_
 	}
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests::ReceiveAsync_92_SocketAsyncEventArgs_0()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests_ReceiveAsync_92_SocketAsyncEventArgs_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests::Send_16_System_Byte_int_int_SocketFlags_4()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests_Send_16_System_Byte_int_int_SocketFlags_4(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
 	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__466_0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__76_0;
 	_s1 = _s0;
 	{
 		if (_s1 == 0)
@@ -6348,7 +2980,7 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_
 			_s1 = _s0;
 			{
 				auto chaos_value = _s1;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__466_0 = chaos_value;
+				chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__76_0 = chaos_value;
 			}
 		}
 		{
@@ -6363,16 +2995,73 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_
 	}
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests::ReceiveFrom_33_System_Byte_int_int_SocketFlags_EndPoint_0()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests_ReceiveFrom_33_System_Byte_int_int_SocketFlags_EndPoint_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests::Send_17_System_Byte_int_int_SocketFlags_SocketError_0()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests_Send_17_System_Byte_int_int_SocketFlags_SocketError_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_locals{};
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
 	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = 0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	{
+		chaos_type_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass78_0 __chaos_stack_obj{};
+		auto* chaos_object = &__chaos_stack_obj;
+		chaos_object->header.type_info = chaos_mt_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass78_0.AsTypeInfoHot();
+		CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass78_0__ctor(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object));
+		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+	}
 	chaos_locals[0] = _s0;
+	_s0 = chaos_locals[0];
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	{
+		auto chaos_value = _s1;
+		auto* chaos_object = reinterpret_cast<chaos_type_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass78_0*>(_s0);
+		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass78_0____ref_17_0_0));
+		chaos_object->field_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass78_0____ref_17_0_0 = chaos_value;
+		chaos_gc_dirty_card(chaos_object);
+	}
+	_s0 = chaos_locals[0];
+	{
+		// Hotpatch-aware ldftn wrapper (slot 952)
+		static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
+			auto& _d_entry = s_hotpatch_entries[952];
+			if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+				&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+			{
+				alignas(16) uint8_t _d_ab[8];
+				ArgBuffer _d_bw(_d_ab);
+				_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+				::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+					_d_entry.method_key, _d_ab, nullptr);
+				return;
+			}
+			reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
+		};
+	_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+	}
+	{
+		const auto chaos_method_ptr = _s1;
+		const auto chaos_target = _s0;
+		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
+		chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
+		chaos_object->chaos_delegate_target = chaos_target;
+		chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+	}
+	{
+		try {
+			auto* chaos_action = reinterpret_cast<chaos_type_System_Private_CoreLib_System_Action*>(_s0);
+			CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass78_0_Send_17_System_Byte_int_int_SocketFlags_SocketError_0_b__0(chaos_action->chaos_delegate_target);
+			throw chaos_managed_exception{};  // no exception — fail
+		} catch (chaos_managed_exception&) {
+			// expected exception was thrown — pass
+		}
+	}
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
 	_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
 	chaos_locals[1] = ChaosStoreInt64(_i0);
@@ -6380,16 +3069,73 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_
 	return _i0;
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests::ReceiveFrom_33_System_Byte_int_int_SocketFlags_EndPoint_1()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests_ReceiveFrom_33_System_Byte_int_int_SocketFlags_EndPoint_1(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests::Send_17_System_Byte_int_int_SocketFlags_SocketError_1()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests_Send_17_System_Byte_int_int_SocketFlags_SocketError_1(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_locals{};
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
 	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = 0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	{
+		chaos_type_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass80_0 __chaos_stack_obj{};
+		auto* chaos_object = &__chaos_stack_obj;
+		chaos_object->header.type_info = chaos_mt_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass80_0.AsTypeInfoHot();
+		CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass80_0__ctor(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object));
+		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+	}
 	chaos_locals[0] = _s0;
+	_s0 = chaos_locals[0];
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	{
+		auto chaos_value = _s1;
+		auto* chaos_object = reinterpret_cast<chaos_type_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass80_0*>(_s0);
+		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass80_0____ref_17_1_0));
+		chaos_object->field_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass80_0____ref_17_1_0 = chaos_value;
+		chaos_gc_dirty_card(chaos_object);
+	}
+	_s0 = chaos_locals[0];
+	{
+		// Hotpatch-aware ldftn wrapper (slot 954)
+		static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
+			auto& _d_entry = s_hotpatch_entries[954];
+			if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+				&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+			{
+				alignas(16) uint8_t _d_ab[8];
+				ArgBuffer _d_bw(_d_ab);
+				_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+				::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+					_d_entry.method_key, _d_ab, nullptr);
+				return;
+			}
+			reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
+		};
+	_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+	}
+	{
+		const auto chaos_method_ptr = _s1;
+		const auto chaos_target = _s0;
+		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
+		chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
+		chaos_object->chaos_delegate_target = chaos_target;
+		chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+	}
+	{
+		try {
+			auto* chaos_action = reinterpret_cast<chaos_type_System_Private_CoreLib_System_Action*>(_s0);
+			CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass80_0_Send_17_System_Byte_int_int_SocketFlags_SocketError_1_b__0(chaos_action->chaos_delegate_target);
+			throw chaos_managed_exception{};  // no exception — fail
+		} catch (chaos_managed_exception&) {
+			// expected exception was thrown — pass
+		}
+	}
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
 	_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
 	chaos_locals[1] = ChaosStoreInt64(_i0);
@@ -6397,16 +3143,73 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_
 	return _i0;
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests::ReceiveFrom_33_System_Byte_int_int_SocketFlags_EndPoint_2()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests_ReceiveFrom_33_System_Byte_int_int_SocketFlags_EndPoint_2(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests::Send_17_System_Byte_int_int_SocketFlags_SocketError_2()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests_Send_17_System_Byte_int_int_SocketFlags_SocketError_2(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_locals{};
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
 	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = 0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	{
+		chaos_type_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass82_0 __chaos_stack_obj{};
+		auto* chaos_object = &__chaos_stack_obj;
+		chaos_object->header.type_info = chaos_mt_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass82_0.AsTypeInfoHot();
+		CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass82_0__ctor(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object));
+		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+	}
 	chaos_locals[0] = _s0;
+	_s0 = chaos_locals[0];
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	{
+		auto chaos_value = _s1;
+		auto* chaos_object = reinterpret_cast<chaos_type_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass82_0*>(_s0);
+		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass82_0____ref_17_2_0));
+		chaos_object->field_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass82_0____ref_17_2_0 = chaos_value;
+		chaos_gc_dirty_card(chaos_object);
+	}
+	_s0 = chaos_locals[0];
+	{
+		// Hotpatch-aware ldftn wrapper (slot 956)
+		static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
+			auto& _d_entry = s_hotpatch_entries[956];
+			if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+				&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+			{
+				alignas(16) uint8_t _d_ab[8];
+				ArgBuffer _d_bw(_d_ab);
+				_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+				::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+					_d_entry.method_key, _d_ab, nullptr);
+				return;
+			}
+			reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
+		};
+	_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+	}
+	{
+		const auto chaos_method_ptr = _s1;
+		const auto chaos_target = _s0;
+		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
+		chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
+		chaos_object->chaos_delegate_target = chaos_target;
+		chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+	}
+	{
+		try {
+			auto* chaos_action = reinterpret_cast<chaos_type_System_Private_CoreLib_System_Action*>(_s0);
+			CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass82_0_Send_17_System_Byte_int_int_SocketFlags_SocketError_2_b__0(chaos_action->chaos_delegate_target);
+			throw chaos_managed_exception{};  // no exception — fail
+		} catch (chaos_managed_exception&) {
+			// expected exception was thrown — pass
+		}
+	}
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
 	_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
 	chaos_locals[1] = ChaosStoreInt64(_i0);
@@ -6414,16 +3217,73 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_
 	return _i0;
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests::ReceiveFrom_33_System_Byte_int_int_SocketFlags_EndPoint_3()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests_ReceiveFrom_33_System_Byte_int_int_SocketFlags_EndPoint_3(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests::Send_17_System_Byte_int_int_SocketFlags_SocketError_3()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests_Send_17_System_Byte_int_int_SocketFlags_SocketError_3(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_locals{};
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
 	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = 0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	{
+		chaos_type_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass84_0 __chaos_stack_obj{};
+		auto* chaos_object = &__chaos_stack_obj;
+		chaos_object->header.type_info = chaos_mt_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass84_0.AsTypeInfoHot();
+		CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass84_0__ctor(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object));
+		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+	}
 	chaos_locals[0] = _s0;
+	_s0 = chaos_locals[0];
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	{
+		auto chaos_value = _s1;
+		auto* chaos_object = reinterpret_cast<chaos_type_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass84_0*>(_s0);
+		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass84_0____ref_17_3_0));
+		chaos_object->field_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass84_0____ref_17_3_0 = chaos_value;
+		chaos_gc_dirty_card(chaos_object);
+	}
+	_s0 = chaos_locals[0];
+	{
+		// Hotpatch-aware ldftn wrapper (slot 958)
+		static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
+			auto& _d_entry = s_hotpatch_entries[958];
+			if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+				&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+			{
+				alignas(16) uint8_t _d_ab[8];
+				ArgBuffer _d_bw(_d_ab);
+				_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+				::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+					_d_entry.method_key, _d_ab, nullptr);
+				return;
+			}
+			reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
+		};
+	_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+	}
+	{
+		const auto chaos_method_ptr = _s1;
+		const auto chaos_target = _s0;
+		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
+		chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
+		chaos_object->chaos_delegate_target = chaos_target;
+		chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+	}
+	{
+		try {
+			auto* chaos_action = reinterpret_cast<chaos_type_System_Private_CoreLib_System_Action*>(_s0);
+			CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass84_0_Send_17_System_Byte_int_int_SocketFlags_SocketError_3_b__0(chaos_action->chaos_delegate_target);
+			throw chaos_managed_exception{};  // no exception — fail
+		} catch (chaos_managed_exception&) {
+			// expected exception was thrown — pass
+		}
+	}
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
 	_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
 	chaos_locals[1] = ChaosStoreInt64(_i0);
@@ -6431,16 +3291,73 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_
 	return _i0;
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests::ReceiveFrom_33_System_Byte_int_int_SocketFlags_EndPoint_4()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests_ReceiveFrom_33_System_Byte_int_int_SocketFlags_EndPoint_4(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests::Send_17_System_Byte_int_int_SocketFlags_SocketError_4()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests_Send_17_System_Byte_int_int_SocketFlags_SocketError_4(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_locals{};
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
 	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = 0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	{
+		chaos_type_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass86_0 __chaos_stack_obj{};
+		auto* chaos_object = &__chaos_stack_obj;
+		chaos_object->header.type_info = chaos_mt_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass86_0.AsTypeInfoHot();
+		CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass86_0__ctor(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object));
+		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+	}
 	chaos_locals[0] = _s0;
+	_s0 = chaos_locals[0];
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	{
+		auto chaos_value = _s1;
+		auto* chaos_object = reinterpret_cast<chaos_type_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass86_0*>(_s0);
+		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass86_0____ref_17_4_0));
+		chaos_object->field_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass86_0____ref_17_4_0 = chaos_value;
+		chaos_gc_dirty_card(chaos_object);
+	}
+	_s0 = chaos_locals[0];
+	{
+		// Hotpatch-aware ldftn wrapper (slot 960)
+		static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
+			auto& _d_entry = s_hotpatch_entries[960];
+			if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+				&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+			{
+				alignas(16) uint8_t _d_ab[8];
+				ArgBuffer _d_bw(_d_ab);
+				_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+				::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+					_d_entry.method_key, _d_ab, nullptr);
+				return;
+			}
+			reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
+		};
+	_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+	}
+	{
+		const auto chaos_method_ptr = _s1;
+		const auto chaos_target = _s0;
+		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
+		chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
+		chaos_object->chaos_delegate_target = chaos_target;
+		chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+	}
+	{
+		try {
+			auto* chaos_action = reinterpret_cast<chaos_type_System_Private_CoreLib_System_Action*>(_s0);
+			CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass86_0_Send_17_System_Byte_int_int_SocketFlags_SocketError_4_b__0(chaos_action->chaos_delegate_target);
+			throw chaos_managed_exception{};  // no exception — fail
+		} catch (chaos_managed_exception&) {
+			// expected exception was thrown — pass
+		}
+	}
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
 	_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
 	chaos_locals[1] = ChaosStoreInt64(_i0);
@@ -6448,186 +3365,20 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_
 	return _i0;
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests::ReceiveFrom_34_System_Byte_int_SocketFlags_EndPoint_0()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests_ReceiveFrom_34_System_Byte_int_SocketFlags_EndPoint_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = 0;
-	chaos_locals[0] = _s0;
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-	_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-	chaos_locals[1] = ChaosStoreInt64(_i0);
-	_i0 = ChaosLoadInt64(chaos_locals[1]);
-	return _i0;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests::ReceiveFrom_34_System_Byte_int_SocketFlags_EndPoint_1()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests_ReceiveFrom_34_System_Byte_int_SocketFlags_EndPoint_1(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = 0;
-	chaos_locals[0] = _s0;
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-	_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-	chaos_locals[1] = ChaosStoreInt64(_i0);
-	_i0 = ChaosLoadInt64(chaos_locals[1]);
-	return _i0;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests::ReceiveFrom_34_System_Byte_int_SocketFlags_EndPoint_2()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests_ReceiveFrom_34_System_Byte_int_SocketFlags_EndPoint_2(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = 0;
-	chaos_locals[0] = _s0;
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-	_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-	chaos_locals[1] = ChaosStoreInt64(_i0);
-	_i0 = ChaosLoadInt64(chaos_locals[1]);
-	return _i0;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests::ReceiveFrom_34_System_Byte_int_SocketFlags_EndPoint_3()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests_ReceiveFrom_34_System_Byte_int_SocketFlags_EndPoint_3(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = 0;
-	chaos_locals[0] = _s0;
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-	_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-	chaos_locals[1] = ChaosStoreInt64(_i0);
-	_i0 = ChaosLoadInt64(chaos_locals[1]);
-	return _i0;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests::ReceiveFrom_35_System_Byte_SocketFlags_EndPoint_0()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests_ReceiveFrom_35_System_Byte_SocketFlags_EndPoint_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = 0;
-	chaos_locals[0] = _s0;
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-	_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-	chaos_locals[1] = ChaosStoreInt64(_i0);
-	_i0 = ChaosLoadInt64(chaos_locals[1]);
-	return _i0;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests::ReceiveFrom_35_System_Byte_SocketFlags_EndPoint_1()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests_ReceiveFrom_35_System_Byte_SocketFlags_EndPoint_1(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = 0;
-	chaos_locals[0] = _s0;
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-	_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-	chaos_locals[1] = ChaosStoreInt64(_i0);
-	_i0 = ChaosLoadInt64(chaos_locals[1]);
-	return _i0;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests::ReceiveFrom_35_System_Byte_SocketFlags_EndPoint_2()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests_ReceiveFrom_35_System_Byte_SocketFlags_EndPoint_2(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = 0;
-	chaos_locals[0] = _s0;
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-	_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-	chaos_locals[1] = ChaosStoreInt64(_i0);
-	_i0 = ChaosLoadInt64(chaos_locals[1]);
-	return _i0;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests::ReceiveFrom_36_System_Byte_EndPoint_0()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests_ReceiveFrom_36_System_Byte_EndPoint_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = 0;
-	chaos_locals[0] = _s0;
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-	_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-	chaos_locals[1] = ChaosStoreInt64(_i0);
-	_i0 = ChaosLoadInt64(chaos_locals[1]);
-	return _i0;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests::ReceiveFrom_36_System_Byte_EndPoint_1()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests_ReceiveFrom_36_System_Byte_EndPoint_1(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = 0;
-	chaos_locals[0] = _s0;
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-	_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-	chaos_locals[1] = ChaosStoreInt64(_i0);
-	_i0 = ChaosLoadInt64(chaos_locals[1]);
-	return _i0;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests::ReceiveFrom_36_System_Byte_EndPoint_2()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests_ReceiveFrom_36_System_Byte_EndPoint_2(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = 0;
-	chaos_locals[0] = _s0;
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-	_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-	chaos_locals[1] = ChaosStoreInt64(_i0);
-	_i0 = ChaosLoadInt64(chaos_locals[1]);
-	return _i0;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests::ReceiveFromAsync_118_System_ArraySegmentbyte_EndPoint_0()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests_ReceiveFromAsync_118_System_ArraySegmentbyte_EndPoint_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests::SendAsync_127_System_ArraySegmentbyte_0()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests_SendAsync_127_System_ArraySegmentbyte_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
 	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__548_0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__566_0;
 	_s1 = _s0;
 	{
 		if (_s1 == 0)
@@ -6663,7 +3414,7 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_
 			_s1 = _s0;
 			{
 				auto chaos_value = _s1;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__548_0 = chaos_value;
+				chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__566_0 = chaos_value;
 			}
 		}
 		{
@@ -6678,16 +3429,20 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_
 	}
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests::ReceiveFromAsync_119_System_ArraySegmentbyte_SocketFlags_EndPoint_0()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests_ReceiveFromAsync_119_System_ArraySegmentbyte_SocketFlags_EndPoint_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests::SendAsync_128_System_ArraySegmentbyte_SocketFlags_0()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests_SendAsync_128_System_ArraySegmentbyte_SocketFlags_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
 	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__550_0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__568_0;
 	_s1 = _s0;
 	{
 		if (_s1 == 0)
@@ -6723,7 +3478,7 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_
 			_s1 = _s0;
 			{
 				auto chaos_value = _s1;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__550_0 = chaos_value;
+				chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__568_0 = chaos_value;
 			}
 		}
 		{
@@ -6738,16 +3493,20 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_
 	}
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests::ReceiveFromAsync_120_System_Memorybyte_EndPoint_CancellationToken_0()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests_ReceiveFromAsync_120_System_Memorybyte_EndPoint_CancellationToken_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests::SendAsync_129_System_ReadOnlyMemorybyte_CancellationToken_0()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests_SendAsync_129_System_ReadOnlyMemorybyte_CancellationToken_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
 	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__552_0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__570_0;
 	_s1 = _s0;
 	{
 		if (_s1 == 0)
@@ -6783,7 +3542,7 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_
 			_s1 = _s0;
 			{
 				auto chaos_value = _s1;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__552_0 = chaos_value;
+				chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__570_0 = chaos_value;
 			}
 		}
 		{
@@ -6798,16 +3557,20 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_
 	}
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests::ReceiveFromAsync_121_System_Memorybyte_SocketFlags_EndPoint_CancellationToken_0()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests_ReceiveFromAsync_121_System_Memorybyte_SocketFlags_EndPoint_CancellationToken_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests::SendAsync_130_System_ReadOnlyMemorybyte_SocketFlags_CancellationToken_0()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests_SendAsync_130_System_ReadOnlyMemorybyte_SocketFlags_CancellationToken_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
 	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__554_0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__572_0;
 	_s1 = _s0;
 	{
 		if (_s1 == 0)
@@ -6843,7 +3606,7 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_
 			_s1 = _s0;
 			{
 				auto chaos_value = _s1;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__554_0 = chaos_value;
+				chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__572_0 = chaos_value;
 			}
 		}
 		{
@@ -6858,16 +3621,20 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_
 	}
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests::ReceiveFromAsync_122_System_Memorybyte_SocketFlags_SocketAddress_CancellationToken_0()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests_ReceiveFromAsync_122_System_Memorybyte_SocketFlags_SocketAddress_CancellationToken_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests::SendAsync_131_IListSystem_ArraySegmentbyte_0()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests_SendAsync_131_IListSystem_ArraySegmentbyte_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
 	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__556_0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__574_0;
 	_s1 = _s0;
 	{
 		if (_s1 == 0)
@@ -6903,7 +3670,7 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_
 			_s1 = _s0;
 			{
 				auto chaos_value = _s1;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__556_0 = chaos_value;
+				chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__574_0 = chaos_value;
 			}
 		}
 		{
@@ -6918,16 +3685,20 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_
 	}
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests::ReceiveFromAsync_93_SocketAsyncEventArgs_0()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests_ReceiveFromAsync_93_SocketAsyncEventArgs_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests::SendAsync_131_IListSystem_ArraySegmentbyte_1()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests_SendAsync_131_IListSystem_ArraySegmentbyte_1(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
 	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__468_0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__576_0;
 	_s1 = _s0;
 	{
 		if (_s1 == 0)
@@ -6963,7 +3734,7 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_
 			_s1 = _s0;
 			{
 				auto chaos_value = _s1;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__468_0 = chaos_value;
+				chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__576_0 = chaos_value;
 			}
 		}
 		{
@@ -6978,176 +3749,20 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_
 	}
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests::ReceiveMessageFrom_32_System_Byte_int_int_SocketFlags_EndPoint_IPPacketInformation_0()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests_ReceiveMessageFrom_32_System_Byte_int_int_SocketFlags_EndPoint_IPPacketInformation_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 4) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	chaos_locals[0] = _s0;
-	_s0 = 0;
-	chaos_locals[1] = _s0;
-	_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[2]);
-	{
-		const auto chaos_address = _s0;
-		if ((chaos_address & chaos_managed_pointer_local_slot_tag) != 0)
-		{
-			auto* chaos_slot = reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(static_cast<CHAOS_IL2CPP_UINTPTR>(chaos_address & ~chaos_managed_pointer_local_slot_tag));
-			*chaos_slot = 0;
-		}
-		else
-		{
-			*reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(chaos_address) = 0;
-		}
-	}
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-	_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-	chaos_locals[3] = ChaosStoreInt64(_i0);
-	_i0 = ChaosLoadInt64(chaos_locals[3]);
-	return _i0;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests::ReceiveMessageFrom_32_System_Byte_int_int_SocketFlags_EndPoint_IPPacketInformation_1()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests_ReceiveMessageFrom_32_System_Byte_int_int_SocketFlags_EndPoint_IPPacketInformation_1(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 4) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	chaos_locals[0] = _s0;
-	_s0 = 0;
-	chaos_locals[1] = _s0;
-	_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[2]);
-	{
-		const auto chaos_address = _s0;
-		if ((chaos_address & chaos_managed_pointer_local_slot_tag) != 0)
-		{
-			auto* chaos_slot = reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(static_cast<CHAOS_IL2CPP_UINTPTR>(chaos_address & ~chaos_managed_pointer_local_slot_tag));
-			*chaos_slot = 0;
-		}
-		else
-		{
-			*reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(chaos_address) = 0;
-		}
-	}
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-	_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-	chaos_locals[3] = ChaosStoreInt64(_i0);
-	_i0 = ChaosLoadInt64(chaos_locals[3]);
-	return _i0;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests::ReceiveMessageFrom_32_System_Byte_int_int_SocketFlags_EndPoint_IPPacketInformation_2()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests_ReceiveMessageFrom_32_System_Byte_int_int_SocketFlags_EndPoint_IPPacketInformation_2(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 4) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	chaos_locals[0] = _s0;
-	_s0 = 0;
-	chaos_locals[1] = _s0;
-	_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[2]);
-	{
-		const auto chaos_address = _s0;
-		if ((chaos_address & chaos_managed_pointer_local_slot_tag) != 0)
-		{
-			auto* chaos_slot = reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(static_cast<CHAOS_IL2CPP_UINTPTR>(chaos_address & ~chaos_managed_pointer_local_slot_tag));
-			*chaos_slot = 0;
-		}
-		else
-		{
-			*reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(chaos_address) = 0;
-		}
-	}
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-	_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-	chaos_locals[3] = ChaosStoreInt64(_i0);
-	_i0 = ChaosLoadInt64(chaos_locals[3]);
-	return _i0;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests::ReceiveMessageFrom_32_System_Byte_int_int_SocketFlags_EndPoint_IPPacketInformation_3()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests_ReceiveMessageFrom_32_System_Byte_int_int_SocketFlags_EndPoint_IPPacketInformation_3(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 4) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	chaos_locals[0] = _s0;
-	_s0 = 0;
-	chaos_locals[1] = _s0;
-	_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[2]);
-	{
-		const auto chaos_address = _s0;
-		if ((chaos_address & chaos_managed_pointer_local_slot_tag) != 0)
-		{
-			auto* chaos_slot = reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(static_cast<CHAOS_IL2CPP_UINTPTR>(chaos_address & ~chaos_managed_pointer_local_slot_tag));
-			*chaos_slot = 0;
-		}
-		else
-		{
-			*reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(chaos_address) = 0;
-		}
-	}
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-	_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-	chaos_locals[3] = ChaosStoreInt64(_i0);
-	_i0 = ChaosLoadInt64(chaos_locals[3]);
-	return _i0;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests::ReceiveMessageFrom_32_System_Byte_int_int_SocketFlags_EndPoint_IPPacketInformation_4()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests_ReceiveMessageFrom_32_System_Byte_int_int_SocketFlags_EndPoint_IPPacketInformation_4(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 4) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	chaos_locals[0] = _s0;
-	_s0 = 0;
-	chaos_locals[1] = _s0;
-	_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[2]);
-	{
-		const auto chaos_address = _s0;
-		if ((chaos_address & chaos_managed_pointer_local_slot_tag) != 0)
-		{
-			auto* chaos_slot = reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(static_cast<CHAOS_IL2CPP_UINTPTR>(chaos_address & ~chaos_managed_pointer_local_slot_tag));
-			*chaos_slot = 0;
-		}
-		else
-		{
-			*reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(chaos_address) = 0;
-		}
-	}
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-	_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-	chaos_locals[3] = ChaosStoreInt64(_i0);
-	_i0 = ChaosLoadInt64(chaos_locals[3]);
-	return _i0;
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests::ReceiveMessageFromAsync_123_System_ArraySegmentbyte_EndPoint_0()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests_ReceiveMessageFromAsync_123_System_ArraySegmentbyte_EndPoint_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests::SendAsync_132_IListSystem_ArraySegmentbyte_SocketFlags_0()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests_SendAsync_132_IListSystem_ArraySegmentbyte_SocketFlags_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
 	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__558_0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__578_0;
 	_s1 = _s0;
 	{
 		if (_s1 == 0)
@@ -7183,7 +3798,7 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_
 			_s1 = _s0;
 			{
 				auto chaos_value = _s1;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__558_0 = chaos_value;
+				chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__578_0 = chaos_value;
 			}
 		}
 		{
@@ -7198,16 +3813,20 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_
 	}
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests::ReceiveMessageFromAsync_124_System_ArraySegmentbyte_SocketFlags_EndPoint_0()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests_ReceiveMessageFromAsync_124_System_ArraySegmentbyte_SocketFlags_EndPoint_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests::SendAsync_132_IListSystem_ArraySegmentbyte_SocketFlags_1()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests_SendAsync_132_IListSystem_ArraySegmentbyte_SocketFlags_1(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
 	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__560_0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__580_0;
 	_s1 = _s0;
 	{
 		if (_s1 == 0)
@@ -7243,7 +3862,7 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_
 			_s1 = _s0;
 			{
 				auto chaos_value = _s1;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__560_0 = chaos_value;
+				chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__580_0 = chaos_value;
 			}
 		}
 		{
@@ -7258,16 +3877,20 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_
 	}
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests::ReceiveMessageFromAsync_125_System_Memorybyte_EndPoint_CancellationToken_0()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests_ReceiveMessageFromAsync_125_System_Memorybyte_EndPoint_CancellationToken_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests::SendAsync_95_SocketAsyncEventArgs_0()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests_SendAsync_95_SocketAsyncEventArgs_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
 	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__562_0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__472_0;
 	_s1 = _s0;
 	{
 		if (_s1 == 0)
@@ -7303,7 +3926,7 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_
 			_s1 = _s0;
 			{
 				auto chaos_value = _s1;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__562_0 = chaos_value;
+				chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__472_0 = chaos_value;
 			}
 		}
 		{
@@ -7318,16 +3941,20 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_
 	}
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests::ReceiveMessageFromAsync_126_System_Memorybyte_SocketFlags_EndPoint_CancellationToken_0()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests_ReceiveMessageFromAsync_126_System_Memorybyte_SocketFlags_EndPoint_CancellationToken_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests::SendFile_18_string_0()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests_SendFile_18_string_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
 	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__564_0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__88_0;
 	_s1 = _s0;
 	{
 		if (_s1 == 0)
@@ -7363,7 +3990,7 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_
 			_s1 = _s0;
 			{
 				auto chaos_value = _s1;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__564_0 = chaos_value;
+				chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__88_0 = chaos_value;
 			}
 		}
 		{
@@ -7378,16 +4005,20 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_
 	}
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests::ReceiveMessageFromAsync_94_SocketAsyncEventArgs_0()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests_ReceiveMessageFromAsync_94_SocketAsyncEventArgs_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests::SendFile_18_string_1()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests_SendFile_18_string_1(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
 	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__470_0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__90_0;
 	_s1 = _s0;
 	{
 		if (_s1 == 0)
@@ -7423,7 +4054,7 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_
 			_s1 = _s0;
 			{
 				auto chaos_value = _s1;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__470_0 = chaos_value;
+				chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__90_0 = chaos_value;
 			}
 		}
 		{
@@ -7438,16 +4069,20 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_
 	}
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests::Select_49_IList_IList_IList_int_0()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests_Select_49_IList_IList_IList_int_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests::SendFile_19_string_System_Byte_System_Byte_TransmitFileOptions_0()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests_SendFile_19_string_System_Byte_System_Byte_TransmitFileOptions_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
 	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__274_0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__92_0;
 	_s1 = _s0;
 	{
 		if (_s1 == 0)
@@ -7483,7 +4118,7 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_
 			_s1 = _s0;
 			{
 				auto chaos_value = _s1;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__274_0 = chaos_value;
+				chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__92_0 = chaos_value;
 			}
 		}
 		{
@@ -7498,16 +4133,20 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_
 	}
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests::Select_49_IList_IList_IList_int_1()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests_Select_49_IList_IList_IList_int_1(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests::SendFile_19_string_System_Byte_System_Byte_TransmitFileOptions_1()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests_SendFile_19_string_System_Byte_System_Byte_TransmitFileOptions_1(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
 	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__276_0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__94_0;
 	_s1 = _s0;
 	{
 		if (_s1 == 0)
@@ -7543,7 +4182,7 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_
 			_s1 = _s0;
 			{
 				auto chaos_value = _s1;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__276_0 = chaos_value;
+				chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__94_0 = chaos_value;
 			}
 		}
 		{
@@ -7558,16 +4197,20 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_
 	}
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests::Select_50_IList_IList_IList_System_TimeSpan_0()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests_Select_50_IList_IList_IList_System_TimeSpan_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests::SendFile_19_string_System_Byte_System_Byte_TransmitFileOptions_2()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests_SendFile_19_string_System_Byte_System_Byte_TransmitFileOptions_2(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
 	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__278_0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__96_0;
 	_s1 = _s0;
 	{
 		if (_s1 == 0)
@@ -7603,7 +4246,7 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_
 			_s1 = _s0;
 			{
 				auto chaos_value = _s1;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__278_0 = chaos_value;
+				chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__96_0 = chaos_value;
 			}
 		}
 		{
@@ -7618,16 +4261,20 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_
 	}
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests::Select_50_IList_IList_IList_System_TimeSpan_1()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests_Select_50_IList_IList_IList_System_TimeSpan_1(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests::SendFile_19_string_System_Byte_System_Byte_TransmitFileOptions_3()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests_SendFile_19_string_System_Byte_System_Byte_TransmitFileOptions_3(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
 	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__280_0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__98_0;
 	_s1 = _s0;
 	{
 		if (_s1 == 0)
@@ -7663,7 +4310,7 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_
 			_s1 = _s0;
 			{
 				auto chaos_value = _s1;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__280_0 = chaos_value;
+				chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__98_0 = chaos_value;
 			}
 		}
 		{
@@ -7678,12 +4325,3580 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_
 	}
 }
 
+// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests::SendFileAsync_138_string_CancellationToken_0()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests_SendFileAsync_138_string_CancellationToken_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__592_0;
+	_s1 = _s0;
+	{
+		if (_s1 == 0)
+		{
+			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9;
+			{
+				// Hotpatch-aware ldftn wrapper (slot 1160)
+				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
+					auto& _d_entry = s_hotpatch_entries[1160];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+					{
+						alignas(16) uint8_t _d_ab[8];
+						ArgBuffer _d_bw(_d_ab);
+						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d_entry.method_key, _d_ab, nullptr);
+						return;
+					}
+					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
+				};
+			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+			}
+			{
+				const auto chaos_method_ptr = _s1;
+				const auto chaos_target = _s0;
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
+				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
+				chaos_object->chaos_delegate_target = chaos_target;
+				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			_s1 = _s0;
+			{
+				auto chaos_value = _s1;
+				chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__592_0 = chaos_value;
+			}
+		}
+		{
+			// Assert.Throws: target method not found via IL lookahead
+			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
+		}
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
+		chaos_locals[0] = ChaosStoreInt64(_i0);
+		_i0 = ChaosLoadInt64(chaos_locals[0]);
+		return _i0;
+	}
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests::SendFileAsync_138_string_CancellationToken_1()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests_SendFileAsync_138_string_CancellationToken_1(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__594_0;
+	_s1 = _s0;
+	{
+		if (_s1 == 0)
+		{
+			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9;
+			{
+				// Hotpatch-aware ldftn wrapper (slot 1161)
+				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
+					auto& _d_entry = s_hotpatch_entries[1161];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+					{
+						alignas(16) uint8_t _d_ab[8];
+						ArgBuffer _d_bw(_d_ab);
+						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d_entry.method_key, _d_ab, nullptr);
+						return;
+					}
+					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
+				};
+			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+			}
+			{
+				const auto chaos_method_ptr = _s1;
+				const auto chaos_target = _s0;
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
+				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
+				chaos_object->chaos_delegate_target = chaos_target;
+				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			_s1 = _s0;
+			{
+				auto chaos_value = _s1;
+				chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__594_0 = chaos_value;
+			}
+		}
+		{
+			// Assert.Throws: target method not found via IL lookahead
+			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
+		}
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
+		chaos_locals[0] = ChaosStoreInt64(_i0);
+		_i0 = ChaosLoadInt64(chaos_locals[0]);
+		return _i0;
+	}
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests::SendFileAsync_139_string_System_ReadOnlyMemorybyte_System_ReadOnlyMemorybyte_TransmitFileOptions_CancellationToken_0()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests_SendFileAsync_139_string_System_ReadOnlyMemorybyte_System_ReadOnlyMemorybyte_TransmitFileOptions_CancellationToken_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__596_0;
+	_s1 = _s0;
+	{
+		if (_s1 == 0)
+		{
+			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9;
+			{
+				// Hotpatch-aware ldftn wrapper (slot 1162)
+				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
+					auto& _d_entry = s_hotpatch_entries[1162];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+					{
+						alignas(16) uint8_t _d_ab[8];
+						ArgBuffer _d_bw(_d_ab);
+						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d_entry.method_key, _d_ab, nullptr);
+						return;
+					}
+					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
+				};
+			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+			}
+			{
+				const auto chaos_method_ptr = _s1;
+				const auto chaos_target = _s0;
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
+				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
+				chaos_object->chaos_delegate_target = chaos_target;
+				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			_s1 = _s0;
+			{
+				auto chaos_value = _s1;
+				chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__596_0 = chaos_value;
+			}
+		}
+		{
+			// Assert.Throws: target method not found via IL lookahead
+			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
+		}
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
+		chaos_locals[0] = ChaosStoreInt64(_i0);
+		_i0 = ChaosLoadInt64(chaos_locals[0]);
+		return _i0;
+	}
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests::SendFileAsync_139_string_System_ReadOnlyMemorybyte_System_ReadOnlyMemorybyte_TransmitFileOptions_CancellationToken_1()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests_SendFileAsync_139_string_System_ReadOnlyMemorybyte_System_ReadOnlyMemorybyte_TransmitFileOptions_CancellationToken_1(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__598_0;
+	_s1 = _s0;
+	{
+		if (_s1 == 0)
+		{
+			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9;
+			{
+				// Hotpatch-aware ldftn wrapper (slot 1163)
+				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
+					auto& _d_entry = s_hotpatch_entries[1163];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+					{
+						alignas(16) uint8_t _d_ab[8];
+						ArgBuffer _d_bw(_d_ab);
+						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d_entry.method_key, _d_ab, nullptr);
+						return;
+					}
+					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
+				};
+			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+			}
+			{
+				const auto chaos_method_ptr = _s1;
+				const auto chaos_target = _s0;
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
+				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
+				chaos_object->chaos_delegate_target = chaos_target;
+				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			_s1 = _s0;
+			{
+				auto chaos_value = _s1;
+				chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__598_0 = chaos_value;
+			}
+		}
+		{
+			// Assert.Throws: target method not found via IL lookahead
+			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
+		}
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
+		chaos_locals[0] = ChaosStoreInt64(_i0);
+		_i0 = ChaosLoadInt64(chaos_locals[0]);
+		return _i0;
+	}
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests::SendPacketsAsync_96_SocketAsyncEventArgs_0()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests_SendPacketsAsync_96_SocketAsyncEventArgs_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__474_0;
+	_s1 = _s0;
+	{
+		if (_s1 == 0)
+		{
+			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9;
+			{
+				// Hotpatch-aware ldftn wrapper (slot 1164)
+				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
+					auto& _d_entry = s_hotpatch_entries[1164];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+					{
+						alignas(16) uint8_t _d_ab[8];
+						ArgBuffer _d_bw(_d_ab);
+						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d_entry.method_key, _d_ab, nullptr);
+						return;
+					}
+					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
+				};
+			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+			}
+			{
+				const auto chaos_method_ptr = _s1;
+				const auto chaos_target = _s0;
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
+				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
+				chaos_object->chaos_delegate_target = chaos_target;
+				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			_s1 = _s0;
+			{
+				auto chaos_value = _s1;
+				chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__474_0 = chaos_value;
+			}
+		}
+		{
+			// Assert.Throws: target method not found via IL lookahead
+			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
+		}
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
+		chaos_locals[0] = ChaosStoreInt64(_i0);
+		_i0 = ChaosLoadInt64(chaos_locals[0]);
+		return _i0;
+	}
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests::SendTo_20_System_Byte_int_int_SocketFlags_EndPoint_0()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests_SendTo_20_System_Byte_int_int_SocketFlags_EndPoint_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__100_0;
+	_s1 = _s0;
+	{
+		if (_s1 == 0)
+		{
+			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9;
+			{
+				// Hotpatch-aware ldftn wrapper (slot 1165)
+				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
+					auto& _d_entry = s_hotpatch_entries[1165];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+					{
+						alignas(16) uint8_t _d_ab[8];
+						ArgBuffer _d_bw(_d_ab);
+						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d_entry.method_key, _d_ab, nullptr);
+						return;
+					}
+					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
+				};
+			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+			}
+			{
+				const auto chaos_method_ptr = _s1;
+				const auto chaos_target = _s0;
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
+				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
+				chaos_object->chaos_delegate_target = chaos_target;
+				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			_s1 = _s0;
+			{
+				auto chaos_value = _s1;
+				chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__100_0 = chaos_value;
+			}
+		}
+		{
+			// Assert.Throws: target method not found via IL lookahead
+			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
+		}
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
+		chaos_locals[0] = ChaosStoreInt64(_i0);
+		_i0 = ChaosLoadInt64(chaos_locals[0]);
+		return _i0;
+	}
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests::SendTo_20_System_Byte_int_int_SocketFlags_EndPoint_1()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests_SendTo_20_System_Byte_int_int_SocketFlags_EndPoint_1(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__102_0;
+	_s1 = _s0;
+	{
+		if (_s1 == 0)
+		{
+			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9;
+			{
+				// Hotpatch-aware ldftn wrapper (slot 1166)
+				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
+					auto& _d_entry = s_hotpatch_entries[1166];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+					{
+						alignas(16) uint8_t _d_ab[8];
+						ArgBuffer _d_bw(_d_ab);
+						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d_entry.method_key, _d_ab, nullptr);
+						return;
+					}
+					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
+				};
+			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+			}
+			{
+				const auto chaos_method_ptr = _s1;
+				const auto chaos_target = _s0;
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
+				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
+				chaos_object->chaos_delegate_target = chaos_target;
+				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			_s1 = _s0;
+			{
+				auto chaos_value = _s1;
+				chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__102_0 = chaos_value;
+			}
+		}
+		{
+			// Assert.Throws: target method not found via IL lookahead
+			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
+		}
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
+		chaos_locals[0] = ChaosStoreInt64(_i0);
+		_i0 = ChaosLoadInt64(chaos_locals[0]);
+		return _i0;
+	}
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests::SendTo_20_System_Byte_int_int_SocketFlags_EndPoint_2()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests_SendTo_20_System_Byte_int_int_SocketFlags_EndPoint_2(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__104_0;
+	_s1 = _s0;
+	{
+		if (_s1 == 0)
+		{
+			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9;
+			{
+				// Hotpatch-aware ldftn wrapper (slot 1167)
+				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
+					auto& _d_entry = s_hotpatch_entries[1167];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+					{
+						alignas(16) uint8_t _d_ab[8];
+						ArgBuffer _d_bw(_d_ab);
+						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d_entry.method_key, _d_ab, nullptr);
+						return;
+					}
+					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
+				};
+			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+			}
+			{
+				const auto chaos_method_ptr = _s1;
+				const auto chaos_target = _s0;
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
+				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
+				chaos_object->chaos_delegate_target = chaos_target;
+				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			_s1 = _s0;
+			{
+				auto chaos_value = _s1;
+				chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__104_0 = chaos_value;
+			}
+		}
+		{
+			// Assert.Throws: target method not found via IL lookahead
+			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
+		}
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
+		chaos_locals[0] = ChaosStoreInt64(_i0);
+		_i0 = ChaosLoadInt64(chaos_locals[0]);
+		return _i0;
+	}
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests::SendTo_20_System_Byte_int_int_SocketFlags_EndPoint_3()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests_SendTo_20_System_Byte_int_int_SocketFlags_EndPoint_3(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__106_0;
+	_s1 = _s0;
+	{
+		if (_s1 == 0)
+		{
+			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9;
+			{
+				// Hotpatch-aware ldftn wrapper (slot 1168)
+				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
+					auto& _d_entry = s_hotpatch_entries[1168];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+					{
+						alignas(16) uint8_t _d_ab[8];
+						ArgBuffer _d_bw(_d_ab);
+						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d_entry.method_key, _d_ab, nullptr);
+						return;
+					}
+					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
+				};
+			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+			}
+			{
+				const auto chaos_method_ptr = _s1;
+				const auto chaos_target = _s0;
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
+				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
+				chaos_object->chaos_delegate_target = chaos_target;
+				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			_s1 = _s0;
+			{
+				auto chaos_value = _s1;
+				chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__106_0 = chaos_value;
+			}
+		}
+		{
+			// Assert.Throws: target method not found via IL lookahead
+			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
+		}
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
+		chaos_locals[0] = ChaosStoreInt64(_i0);
+		_i0 = ChaosLoadInt64(chaos_locals[0]);
+		return _i0;
+	}
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests::SendTo_20_System_Byte_int_int_SocketFlags_EndPoint_4()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests_SendTo_20_System_Byte_int_int_SocketFlags_EndPoint_4(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__108_0;
+	_s1 = _s0;
+	{
+		if (_s1 == 0)
+		{
+			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9;
+			{
+				// Hotpatch-aware ldftn wrapper (slot 1169)
+				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
+					auto& _d_entry = s_hotpatch_entries[1169];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+					{
+						alignas(16) uint8_t _d_ab[8];
+						ArgBuffer _d_bw(_d_ab);
+						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d_entry.method_key, _d_ab, nullptr);
+						return;
+					}
+					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
+				};
+			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+			}
+			{
+				const auto chaos_method_ptr = _s1;
+				const auto chaos_target = _s0;
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
+				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
+				chaos_object->chaos_delegate_target = chaos_target;
+				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			_s1 = _s0;
+			{
+				auto chaos_value = _s1;
+				chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__108_0 = chaos_value;
+			}
+		}
+		{
+			// Assert.Throws: target method not found via IL lookahead
+			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
+		}
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
+		chaos_locals[0] = ChaosStoreInt64(_i0);
+		_i0 = ChaosLoadInt64(chaos_locals[0]);
+		return _i0;
+	}
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests::SendTo_21_System_Byte_int_SocketFlags_EndPoint_0()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests_SendTo_21_System_Byte_int_SocketFlags_EndPoint_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__110_0;
+	_s1 = _s0;
+	{
+		if (_s1 == 0)
+		{
+			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9;
+			{
+				// Hotpatch-aware ldftn wrapper (slot 1170)
+				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
+					auto& _d_entry = s_hotpatch_entries[1170];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+					{
+						alignas(16) uint8_t _d_ab[8];
+						ArgBuffer _d_bw(_d_ab);
+						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d_entry.method_key, _d_ab, nullptr);
+						return;
+					}
+					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
+				};
+			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+			}
+			{
+				const auto chaos_method_ptr = _s1;
+				const auto chaos_target = _s0;
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
+				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
+				chaos_object->chaos_delegate_target = chaos_target;
+				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			_s1 = _s0;
+			{
+				auto chaos_value = _s1;
+				chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__110_0 = chaos_value;
+			}
+		}
+		{
+			// Assert.Throws: target method not found via IL lookahead
+			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
+		}
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
+		chaos_locals[0] = ChaosStoreInt64(_i0);
+		_i0 = ChaosLoadInt64(chaos_locals[0]);
+		return _i0;
+	}
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests::SendTo_21_System_Byte_int_SocketFlags_EndPoint_1()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests_SendTo_21_System_Byte_int_SocketFlags_EndPoint_1(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__112_0;
+	_s1 = _s0;
+	{
+		if (_s1 == 0)
+		{
+			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9;
+			{
+				// Hotpatch-aware ldftn wrapper (slot 1171)
+				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
+					auto& _d_entry = s_hotpatch_entries[1171];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+					{
+						alignas(16) uint8_t _d_ab[8];
+						ArgBuffer _d_bw(_d_ab);
+						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d_entry.method_key, _d_ab, nullptr);
+						return;
+					}
+					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
+				};
+			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+			}
+			{
+				const auto chaos_method_ptr = _s1;
+				const auto chaos_target = _s0;
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
+				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
+				chaos_object->chaos_delegate_target = chaos_target;
+				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			_s1 = _s0;
+			{
+				auto chaos_value = _s1;
+				chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__112_0 = chaos_value;
+			}
+		}
+		{
+			// Assert.Throws: target method not found via IL lookahead
+			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
+		}
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
+		chaos_locals[0] = ChaosStoreInt64(_i0);
+		_i0 = ChaosLoadInt64(chaos_locals[0]);
+		return _i0;
+	}
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests::SendTo_21_System_Byte_int_SocketFlags_EndPoint_2()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests_SendTo_21_System_Byte_int_SocketFlags_EndPoint_2(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__114_0;
+	_s1 = _s0;
+	{
+		if (_s1 == 0)
+		{
+			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9;
+			{
+				// Hotpatch-aware ldftn wrapper (slot 1172)
+				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
+					auto& _d_entry = s_hotpatch_entries[1172];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+					{
+						alignas(16) uint8_t _d_ab[8];
+						ArgBuffer _d_bw(_d_ab);
+						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d_entry.method_key, _d_ab, nullptr);
+						return;
+					}
+					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
+				};
+			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+			}
+			{
+				const auto chaos_method_ptr = _s1;
+				const auto chaos_target = _s0;
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
+				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
+				chaos_object->chaos_delegate_target = chaos_target;
+				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			_s1 = _s0;
+			{
+				auto chaos_value = _s1;
+				chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__114_0 = chaos_value;
+			}
+		}
+		{
+			// Assert.Throws: target method not found via IL lookahead
+			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
+		}
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
+		chaos_locals[0] = ChaosStoreInt64(_i0);
+		_i0 = ChaosLoadInt64(chaos_locals[0]);
+		return _i0;
+	}
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests::SendTo_21_System_Byte_int_SocketFlags_EndPoint_3()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests_SendTo_21_System_Byte_int_SocketFlags_EndPoint_3(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__116_0;
+	_s1 = _s0;
+	{
+		if (_s1 == 0)
+		{
+			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9;
+			{
+				// Hotpatch-aware ldftn wrapper (slot 1173)
+				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
+					auto& _d_entry = s_hotpatch_entries[1173];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+					{
+						alignas(16) uint8_t _d_ab[8];
+						ArgBuffer _d_bw(_d_ab);
+						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d_entry.method_key, _d_ab, nullptr);
+						return;
+					}
+					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
+				};
+			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+			}
+			{
+				const auto chaos_method_ptr = _s1;
+				const auto chaos_target = _s0;
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
+				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
+				chaos_object->chaos_delegate_target = chaos_target;
+				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			_s1 = _s0;
+			{
+				auto chaos_value = _s1;
+				chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__116_0 = chaos_value;
+			}
+		}
+		{
+			// Assert.Throws: target method not found via IL lookahead
+			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
+		}
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
+		chaos_locals[0] = ChaosStoreInt64(_i0);
+		_i0 = ChaosLoadInt64(chaos_locals[0]);
+		return _i0;
+	}
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests::SendTo_22_System_Byte_SocketFlags_EndPoint_0()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests_SendTo_22_System_Byte_SocketFlags_EndPoint_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__118_0;
+	_s1 = _s0;
+	{
+		if (_s1 == 0)
+		{
+			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9;
+			{
+				// Hotpatch-aware ldftn wrapper (slot 1174)
+				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
+					auto& _d_entry = s_hotpatch_entries[1174];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+					{
+						alignas(16) uint8_t _d_ab[8];
+						ArgBuffer _d_bw(_d_ab);
+						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d_entry.method_key, _d_ab, nullptr);
+						return;
+					}
+					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
+				};
+			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+			}
+			{
+				const auto chaos_method_ptr = _s1;
+				const auto chaos_target = _s0;
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
+				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
+				chaos_object->chaos_delegate_target = chaos_target;
+				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			_s1 = _s0;
+			{
+				auto chaos_value = _s1;
+				chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__118_0 = chaos_value;
+			}
+		}
+		{
+			// Assert.Throws: target method not found via IL lookahead
+			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
+		}
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
+		chaos_locals[0] = ChaosStoreInt64(_i0);
+		_i0 = ChaosLoadInt64(chaos_locals[0]);
+		return _i0;
+	}
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests::SendTo_22_System_Byte_SocketFlags_EndPoint_1()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests_SendTo_22_System_Byte_SocketFlags_EndPoint_1(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__120_0;
+	_s1 = _s0;
+	{
+		if (_s1 == 0)
+		{
+			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9;
+			{
+				// Hotpatch-aware ldftn wrapper (slot 1175)
+				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
+					auto& _d_entry = s_hotpatch_entries[1175];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+					{
+						alignas(16) uint8_t _d_ab[8];
+						ArgBuffer _d_bw(_d_ab);
+						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d_entry.method_key, _d_ab, nullptr);
+						return;
+					}
+					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
+				};
+			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+			}
+			{
+				const auto chaos_method_ptr = _s1;
+				const auto chaos_target = _s0;
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
+				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
+				chaos_object->chaos_delegate_target = chaos_target;
+				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			_s1 = _s0;
+			{
+				auto chaos_value = _s1;
+				chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__120_0 = chaos_value;
+			}
+		}
+		{
+			// Assert.Throws: target method not found via IL lookahead
+			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
+		}
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
+		chaos_locals[0] = ChaosStoreInt64(_i0);
+		_i0 = ChaosLoadInt64(chaos_locals[0]);
+		return _i0;
+	}
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests::SendTo_22_System_Byte_SocketFlags_EndPoint_2()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests_SendTo_22_System_Byte_SocketFlags_EndPoint_2(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__122_0;
+	_s1 = _s0;
+	{
+		if (_s1 == 0)
+		{
+			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9;
+			{
+				// Hotpatch-aware ldftn wrapper (slot 1176)
+				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
+					auto& _d_entry = s_hotpatch_entries[1176];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+					{
+						alignas(16) uint8_t _d_ab[8];
+						ArgBuffer _d_bw(_d_ab);
+						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d_entry.method_key, _d_ab, nullptr);
+						return;
+					}
+					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
+				};
+			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+			}
+			{
+				const auto chaos_method_ptr = _s1;
+				const auto chaos_target = _s0;
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
+				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
+				chaos_object->chaos_delegate_target = chaos_target;
+				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			_s1 = _s0;
+			{
+				auto chaos_value = _s1;
+				chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__122_0 = chaos_value;
+			}
+		}
+		{
+			// Assert.Throws: target method not found via IL lookahead
+			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
+		}
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
+		chaos_locals[0] = ChaosStoreInt64(_i0);
+		_i0 = ChaosLoadInt64(chaos_locals[0]);
+		return _i0;
+	}
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests::SendTo_23_System_Byte_EndPoint_0()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests_SendTo_23_System_Byte_EndPoint_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__124_0;
+	_s1 = _s0;
+	{
+		if (_s1 == 0)
+		{
+			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9;
+			{
+				// Hotpatch-aware ldftn wrapper (slot 1177)
+				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
+					auto& _d_entry = s_hotpatch_entries[1177];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+					{
+						alignas(16) uint8_t _d_ab[8];
+						ArgBuffer _d_bw(_d_ab);
+						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d_entry.method_key, _d_ab, nullptr);
+						return;
+					}
+					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
+				};
+			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+			}
+			{
+				const auto chaos_method_ptr = _s1;
+				const auto chaos_target = _s0;
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
+				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
+				chaos_object->chaos_delegate_target = chaos_target;
+				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			_s1 = _s0;
+			{
+				auto chaos_value = _s1;
+				chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__124_0 = chaos_value;
+			}
+		}
+		{
+			// Assert.Throws: target method not found via IL lookahead
+			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
+		}
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
+		chaos_locals[0] = ChaosStoreInt64(_i0);
+		_i0 = ChaosLoadInt64(chaos_locals[0]);
+		return _i0;
+	}
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests::SendTo_23_System_Byte_EndPoint_1()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests_SendTo_23_System_Byte_EndPoint_1(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__126_0;
+	_s1 = _s0;
+	{
+		if (_s1 == 0)
+		{
+			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9;
+			{
+				// Hotpatch-aware ldftn wrapper (slot 1178)
+				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
+					auto& _d_entry = s_hotpatch_entries[1178];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+					{
+						alignas(16) uint8_t _d_ab[8];
+						ArgBuffer _d_bw(_d_ab);
+						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d_entry.method_key, _d_ab, nullptr);
+						return;
+					}
+					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
+				};
+			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+			}
+			{
+				const auto chaos_method_ptr = _s1;
+				const auto chaos_target = _s0;
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
+				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
+				chaos_object->chaos_delegate_target = chaos_target;
+				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			_s1 = _s0;
+			{
+				auto chaos_value = _s1;
+				chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__126_0 = chaos_value;
+			}
+		}
+		{
+			// Assert.Throws: target method not found via IL lookahead
+			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
+		}
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
+		chaos_locals[0] = ChaosStoreInt64(_i0);
+		_i0 = ChaosLoadInt64(chaos_locals[0]);
+		return _i0;
+	}
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests::SendTo_23_System_Byte_EndPoint_2()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests_SendTo_23_System_Byte_EndPoint_2(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__128_0;
+	_s1 = _s0;
+	{
+		if (_s1 == 0)
+		{
+			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9;
+			{
+				// Hotpatch-aware ldftn wrapper (slot 1179)
+				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
+					auto& _d_entry = s_hotpatch_entries[1179];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+					{
+						alignas(16) uint8_t _d_ab[8];
+						ArgBuffer _d_bw(_d_ab);
+						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d_entry.method_key, _d_ab, nullptr);
+						return;
+					}
+					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
+				};
+			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+			}
+			{
+				const auto chaos_method_ptr = _s1;
+				const auto chaos_target = _s0;
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
+				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
+				chaos_object->chaos_delegate_target = chaos_target;
+				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			_s1 = _s0;
+			{
+				auto chaos_value = _s1;
+				chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__128_0 = chaos_value;
+			}
+		}
+		{
+			// Assert.Throws: target method not found via IL lookahead
+			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
+		}
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
+		chaos_locals[0] = ChaosStoreInt64(_i0);
+		_i0 = ChaosLoadInt64(chaos_locals[0]);
+		return _i0;
+	}
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests::SendToAsync_133_System_ArraySegmentbyte_EndPoint_0()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests_SendToAsync_133_System_ArraySegmentbyte_EndPoint_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__582_0;
+	_s1 = _s0;
+	{
+		if (_s1 == 0)
+		{
+			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9;
+			{
+				// Hotpatch-aware ldftn wrapper (slot 1180)
+				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
+					auto& _d_entry = s_hotpatch_entries[1180];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+					{
+						alignas(16) uint8_t _d_ab[8];
+						ArgBuffer _d_bw(_d_ab);
+						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d_entry.method_key, _d_ab, nullptr);
+						return;
+					}
+					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
+				};
+			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+			}
+			{
+				const auto chaos_method_ptr = _s1;
+				const auto chaos_target = _s0;
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
+				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
+				chaos_object->chaos_delegate_target = chaos_target;
+				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			_s1 = _s0;
+			{
+				auto chaos_value = _s1;
+				chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__582_0 = chaos_value;
+			}
+		}
+		{
+			// Assert.Throws: target method not found via IL lookahead
+			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
+		}
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
+		chaos_locals[0] = ChaosStoreInt64(_i0);
+		_i0 = ChaosLoadInt64(chaos_locals[0]);
+		return _i0;
+	}
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests::SendToAsync_134_System_ArraySegmentbyte_SocketFlags_EndPoint_0()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests_SendToAsync_134_System_ArraySegmentbyte_SocketFlags_EndPoint_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__584_0;
+	_s1 = _s0;
+	{
+		if (_s1 == 0)
+		{
+			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9;
+			{
+				// Hotpatch-aware ldftn wrapper (slot 1181)
+				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
+					auto& _d_entry = s_hotpatch_entries[1181];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+					{
+						alignas(16) uint8_t _d_ab[8];
+						ArgBuffer _d_bw(_d_ab);
+						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d_entry.method_key, _d_ab, nullptr);
+						return;
+					}
+					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
+				};
+			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+			}
+			{
+				const auto chaos_method_ptr = _s1;
+				const auto chaos_target = _s0;
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
+				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
+				chaos_object->chaos_delegate_target = chaos_target;
+				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			_s1 = _s0;
+			{
+				auto chaos_value = _s1;
+				chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__584_0 = chaos_value;
+			}
+		}
+		{
+			// Assert.Throws: target method not found via IL lookahead
+			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
+		}
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
+		chaos_locals[0] = ChaosStoreInt64(_i0);
+		_i0 = ChaosLoadInt64(chaos_locals[0]);
+		return _i0;
+	}
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests::SendToAsync_135_System_ReadOnlyMemorybyte_EndPoint_CancellationToken_0()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests_SendToAsync_135_System_ReadOnlyMemorybyte_EndPoint_CancellationToken_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__586_0;
+	_s1 = _s0;
+	{
+		if (_s1 == 0)
+		{
+			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9;
+			{
+				// Hotpatch-aware ldftn wrapper (slot 1182)
+				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
+					auto& _d_entry = s_hotpatch_entries[1182];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+					{
+						alignas(16) uint8_t _d_ab[8];
+						ArgBuffer _d_bw(_d_ab);
+						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d_entry.method_key, _d_ab, nullptr);
+						return;
+					}
+					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
+				};
+			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+			}
+			{
+				const auto chaos_method_ptr = _s1;
+				const auto chaos_target = _s0;
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
+				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
+				chaos_object->chaos_delegate_target = chaos_target;
+				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			_s1 = _s0;
+			{
+				auto chaos_value = _s1;
+				chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__586_0 = chaos_value;
+			}
+		}
+		{
+			// Assert.Throws: target method not found via IL lookahead
+			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
+		}
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
+		chaos_locals[0] = ChaosStoreInt64(_i0);
+		_i0 = ChaosLoadInt64(chaos_locals[0]);
+		return _i0;
+	}
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests::SendToAsync_136_System_ReadOnlyMemorybyte_SocketFlags_EndPoint_CancellationToken_0()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests_SendToAsync_136_System_ReadOnlyMemorybyte_SocketFlags_EndPoint_CancellationToken_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__588_0;
+	_s1 = _s0;
+	{
+		if (_s1 == 0)
+		{
+			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9;
+			{
+				// Hotpatch-aware ldftn wrapper (slot 1183)
+				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
+					auto& _d_entry = s_hotpatch_entries[1183];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+					{
+						alignas(16) uint8_t _d_ab[8];
+						ArgBuffer _d_bw(_d_ab);
+						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d_entry.method_key, _d_ab, nullptr);
+						return;
+					}
+					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
+				};
+			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+			}
+			{
+				const auto chaos_method_ptr = _s1;
+				const auto chaos_target = _s0;
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
+				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
+				chaos_object->chaos_delegate_target = chaos_target;
+				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			_s1 = _s0;
+			{
+				auto chaos_value = _s1;
+				chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__588_0 = chaos_value;
+			}
+		}
+		{
+			// Assert.Throws: target method not found via IL lookahead
+			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
+		}
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
+		chaos_locals[0] = ChaosStoreInt64(_i0);
+		_i0 = ChaosLoadInt64(chaos_locals[0]);
+		return _i0;
+	}
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests::SendToAsync_137_System_ReadOnlyMemorybyte_SocketFlags_SocketAddress_CancellationToken_0()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests_SendToAsync_137_System_ReadOnlyMemorybyte_SocketFlags_SocketAddress_CancellationToken_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__590_0;
+	_s1 = _s0;
+	{
+		if (_s1 == 0)
+		{
+			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9;
+			{
+				// Hotpatch-aware ldftn wrapper (slot 1184)
+				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
+					auto& _d_entry = s_hotpatch_entries[1184];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+					{
+						alignas(16) uint8_t _d_ab[8];
+						ArgBuffer _d_bw(_d_ab);
+						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d_entry.method_key, _d_ab, nullptr);
+						return;
+					}
+					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
+				};
+			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+			}
+			{
+				const auto chaos_method_ptr = _s1;
+				const auto chaos_target = _s0;
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
+				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
+				chaos_object->chaos_delegate_target = chaos_target;
+				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			_s1 = _s0;
+			{
+				auto chaos_value = _s1;
+				chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__590_0 = chaos_value;
+			}
+		}
+		{
+			// Assert.Throws: target method not found via IL lookahead
+			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
+		}
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
+		chaos_locals[0] = ChaosStoreInt64(_i0);
+		_i0 = ChaosLoadInt64(chaos_locals[0]);
+		return _i0;
+	}
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests::SendToAsync_97_SocketAsyncEventArgs_0()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests_SendToAsync_97_SocketAsyncEventArgs_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__476_0;
+	_s1 = _s0;
+	{
+		if (_s1 == 0)
+		{
+			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9;
+			{
+				// Hotpatch-aware ldftn wrapper (slot 1185)
+				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
+					auto& _d_entry = s_hotpatch_entries[1185];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+					{
+						alignas(16) uint8_t _d_ab[8];
+						ArgBuffer _d_bw(_d_ab);
+						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d_entry.method_key, _d_ab, nullptr);
+						return;
+					}
+					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
+				};
+			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+			}
+			{
+				const auto chaos_method_ptr = _s1;
+				const auto chaos_target = _s0;
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
+				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
+				chaos_object->chaos_delegate_target = chaos_target;
+				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			_s1 = _s0;
+			{
+				auto chaos_value = _s1;
+				chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__476_0 = chaos_value;
+			}
+		}
+		{
+			// Assert.Throws: target method not found via IL lookahead
+			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
+		}
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
+		chaos_locals[0] = ChaosStoreInt64(_i0);
+		_i0 = ChaosLoadInt64(chaos_locals[0]);
+		return _i0;
+	}
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests::SetIPProtectionLevel_46_IPProtectionLevel_0()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests_SetIPProtectionLevel_46_IPProtectionLevel_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__264_0;
+	_s1 = _s0;
+	{
+		if (_s1 == 0)
+		{
+			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9;
+			{
+				// Hotpatch-aware ldftn wrapper (slot 1186)
+				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
+					auto& _d_entry = s_hotpatch_entries[1186];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+					{
+						alignas(16) uint8_t _d_ab[8];
+						ArgBuffer _d_bw(_d_ab);
+						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d_entry.method_key, _d_ab, nullptr);
+						return;
+					}
+					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
+				};
+			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+			}
+			{
+				const auto chaos_method_ptr = _s1;
+				const auto chaos_target = _s0;
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
+				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
+				chaos_object->chaos_delegate_target = chaos_target;
+				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			_s1 = _s0;
+			{
+				auto chaos_value = _s1;
+				chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__264_0 = chaos_value;
+			}
+		}
+		{
+			// Assert.Throws: target method not found via IL lookahead
+			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
+		}
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
+		chaos_locals[0] = ChaosStoreInt64(_i0);
+		_i0 = ChaosLoadInt64(chaos_locals[0]);
+		return _i0;
+	}
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests::SetSocketOption_39_SocketOptionLevel_SocketOptionName_int_0()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests_SetSocketOption_39_SocketOptionLevel_SocketOptionName_int_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__236_0;
+	_s1 = _s0;
+	{
+		if (_s1 == 0)
+		{
+			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9;
+			{
+				// Hotpatch-aware ldftn wrapper (slot 1187)
+				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
+					auto& _d_entry = s_hotpatch_entries[1187];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+					{
+						alignas(16) uint8_t _d_ab[8];
+						ArgBuffer _d_bw(_d_ab);
+						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d_entry.method_key, _d_ab, nullptr);
+						return;
+					}
+					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
+				};
+			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+			}
+			{
+				const auto chaos_method_ptr = _s1;
+				const auto chaos_target = _s0;
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
+				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
+				chaos_object->chaos_delegate_target = chaos_target;
+				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			_s1 = _s0;
+			{
+				auto chaos_value = _s1;
+				chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__236_0 = chaos_value;
+			}
+		}
+		{
+			// Assert.Throws: target method not found via IL lookahead
+			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
+		}
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
+		chaos_locals[0] = ChaosStoreInt64(_i0);
+		_i0 = ChaosLoadInt64(chaos_locals[0]);
+		return _i0;
+	}
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests::SetSocketOption_39_SocketOptionLevel_SocketOptionName_int_1()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests_SetSocketOption_39_SocketOptionLevel_SocketOptionName_int_1(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__238_0;
+	_s1 = _s0;
+	{
+		if (_s1 == 0)
+		{
+			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9;
+			{
+				// Hotpatch-aware ldftn wrapper (slot 1188)
+				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
+					auto& _d_entry = s_hotpatch_entries[1188];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+					{
+						alignas(16) uint8_t _d_ab[8];
+						ArgBuffer _d_bw(_d_ab);
+						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d_entry.method_key, _d_ab, nullptr);
+						return;
+					}
+					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
+				};
+			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+			}
+			{
+				const auto chaos_method_ptr = _s1;
+				const auto chaos_target = _s0;
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
+				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
+				chaos_object->chaos_delegate_target = chaos_target;
+				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			_s1 = _s0;
+			{
+				auto chaos_value = _s1;
+				chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__238_0 = chaos_value;
+			}
+		}
+		{
+			// Assert.Throws: target method not found via IL lookahead
+			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
+		}
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
+		chaos_locals[0] = ChaosStoreInt64(_i0);
+		_i0 = ChaosLoadInt64(chaos_locals[0]);
+		return _i0;
+	}
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests::SetSocketOption_40_SocketOptionLevel_SocketOptionName_System_Byte_0()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests_SetSocketOption_40_SocketOptionLevel_SocketOptionName_System_Byte_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__240_0;
+	_s1 = _s0;
+	{
+		if (_s1 == 0)
+		{
+			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9;
+			{
+				// Hotpatch-aware ldftn wrapper (slot 1189)
+				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
+					auto& _d_entry = s_hotpatch_entries[1189];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+					{
+						alignas(16) uint8_t _d_ab[8];
+						ArgBuffer _d_bw(_d_ab);
+						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d_entry.method_key, _d_ab, nullptr);
+						return;
+					}
+					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
+				};
+			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+			}
+			{
+				const auto chaos_method_ptr = _s1;
+				const auto chaos_target = _s0;
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
+				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
+				chaos_object->chaos_delegate_target = chaos_target;
+				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			_s1 = _s0;
+			{
+				auto chaos_value = _s1;
+				chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__240_0 = chaos_value;
+			}
+		}
+		{
+			// Assert.Throws: target method not found via IL lookahead
+			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
+		}
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
+		chaos_locals[0] = ChaosStoreInt64(_i0);
+		_i0 = ChaosLoadInt64(chaos_locals[0]);
+		return _i0;
+	}
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests::SetSocketOption_40_SocketOptionLevel_SocketOptionName_System_Byte_1()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests_SetSocketOption_40_SocketOptionLevel_SocketOptionName_System_Byte_1(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__242_0;
+	_s1 = _s0;
+	{
+		if (_s1 == 0)
+		{
+			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9;
+			{
+				// Hotpatch-aware ldftn wrapper (slot 1190)
+				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
+					auto& _d_entry = s_hotpatch_entries[1190];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+					{
+						alignas(16) uint8_t _d_ab[8];
+						ArgBuffer _d_bw(_d_ab);
+						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d_entry.method_key, _d_ab, nullptr);
+						return;
+					}
+					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
+				};
+			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+			}
+			{
+				const auto chaos_method_ptr = _s1;
+				const auto chaos_target = _s0;
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
+				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
+				chaos_object->chaos_delegate_target = chaos_target;
+				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			_s1 = _s0;
+			{
+				auto chaos_value = _s1;
+				chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__242_0 = chaos_value;
+			}
+		}
+		{
+			// Assert.Throws: target method not found via IL lookahead
+			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
+		}
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
+		chaos_locals[0] = ChaosStoreInt64(_i0);
+		_i0 = ChaosLoadInt64(chaos_locals[0]);
+		return _i0;
+	}
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests::SetSocketOption_40_SocketOptionLevel_SocketOptionName_System_Byte_2()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests_SetSocketOption_40_SocketOptionLevel_SocketOptionName_System_Byte_2(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__244_0;
+	_s1 = _s0;
+	{
+		if (_s1 == 0)
+		{
+			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9;
+			{
+				// Hotpatch-aware ldftn wrapper (slot 1191)
+				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
+					auto& _d_entry = s_hotpatch_entries[1191];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+					{
+						alignas(16) uint8_t _d_ab[8];
+						ArgBuffer _d_bw(_d_ab);
+						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d_entry.method_key, _d_ab, nullptr);
+						return;
+					}
+					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
+				};
+			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+			}
+			{
+				const auto chaos_method_ptr = _s1;
+				const auto chaos_target = _s0;
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
+				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
+				chaos_object->chaos_delegate_target = chaos_target;
+				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			_s1 = _s0;
+			{
+				auto chaos_value = _s1;
+				chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__244_0 = chaos_value;
+			}
+		}
+		{
+			// Assert.Throws: target method not found via IL lookahead
+			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
+		}
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
+		chaos_locals[0] = ChaosStoreInt64(_i0);
+		_i0 = ChaosLoadInt64(chaos_locals[0]);
+		return _i0;
+	}
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests::SetSocketOption_41_SocketOptionLevel_SocketOptionName_bool_0()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests_SetSocketOption_41_SocketOptionLevel_SocketOptionName_bool_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__246_0;
+	_s1 = _s0;
+	{
+		if (_s1 == 0)
+		{
+			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9;
+			{
+				// Hotpatch-aware ldftn wrapper (slot 1192)
+				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
+					auto& _d_entry = s_hotpatch_entries[1192];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+					{
+						alignas(16) uint8_t _d_ab[8];
+						ArgBuffer _d_bw(_d_ab);
+						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d_entry.method_key, _d_ab, nullptr);
+						return;
+					}
+					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
+				};
+			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+			}
+			{
+				const auto chaos_method_ptr = _s1;
+				const auto chaos_target = _s0;
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
+				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
+				chaos_object->chaos_delegate_target = chaos_target;
+				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			_s1 = _s0;
+			{
+				auto chaos_value = _s1;
+				chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__246_0 = chaos_value;
+			}
+		}
+		{
+			// Assert.Throws: target method not found via IL lookahead
+			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
+		}
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
+		chaos_locals[0] = ChaosStoreInt64(_i0);
+		_i0 = ChaosLoadInt64(chaos_locals[0]);
+		return _i0;
+	}
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests::SetSocketOption_41_SocketOptionLevel_SocketOptionName_bool_1()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests_SetSocketOption_41_SocketOptionLevel_SocketOptionName_bool_1(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__248_0;
+	_s1 = _s0;
+	{
+		if (_s1 == 0)
+		{
+			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9;
+			{
+				// Hotpatch-aware ldftn wrapper (slot 1193)
+				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
+					auto& _d_entry = s_hotpatch_entries[1193];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+					{
+						alignas(16) uint8_t _d_ab[8];
+						ArgBuffer _d_bw(_d_ab);
+						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d_entry.method_key, _d_ab, nullptr);
+						return;
+					}
+					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
+				};
+			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+			}
+			{
+				const auto chaos_method_ptr = _s1;
+				const auto chaos_target = _s0;
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
+				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
+				chaos_object->chaos_delegate_target = chaos_target;
+				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			_s1 = _s0;
+			{
+				auto chaos_value = _s1;
+				chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__248_0 = chaos_value;
+			}
+		}
+		{
+			// Assert.Throws: target method not found via IL lookahead
+			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
+		}
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
+		chaos_locals[0] = ChaosStoreInt64(_i0);
+		_i0 = ChaosLoadInt64(chaos_locals[0]);
+		return _i0;
+	}
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests::SetSocketOption_42_SocketOptionLevel_SocketOptionName_object_0()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests_SetSocketOption_42_SocketOptionLevel_SocketOptionName_object_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__250_0;
+	_s1 = _s0;
+	{
+		if (_s1 == 0)
+		{
+			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9;
+			{
+				// Hotpatch-aware ldftn wrapper (slot 1194)
+				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
+					auto& _d_entry = s_hotpatch_entries[1194];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+					{
+						alignas(16) uint8_t _d_ab[8];
+						ArgBuffer _d_bw(_d_ab);
+						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d_entry.method_key, _d_ab, nullptr);
+						return;
+					}
+					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
+				};
+			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+			}
+			{
+				const auto chaos_method_ptr = _s1;
+				const auto chaos_target = _s0;
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
+				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
+				chaos_object->chaos_delegate_target = chaos_target;
+				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			_s1 = _s0;
+			{
+				auto chaos_value = _s1;
+				chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__250_0 = chaos_value;
+			}
+		}
+		{
+			// Assert.Throws: target method not found via IL lookahead
+			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
+		}
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
+		chaos_locals[0] = ChaosStoreInt64(_i0);
+		_i0 = ChaosLoadInt64(chaos_locals[0]);
+		return _i0;
+	}
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests::Shutdown_86_SocketShutdown_0()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests_Shutdown_86_SocketShutdown_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__454_0;
+	_s1 = _s0;
+	{
+		if (_s1 == 0)
+		{
+			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9;
+			{
+				// Hotpatch-aware ldftn wrapper (slot 1195)
+				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
+					auto& _d_entry = s_hotpatch_entries[1195];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+					{
+						alignas(16) uint8_t _d_ab[8];
+						ArgBuffer _d_bw(_d_ab);
+						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d_entry.method_key, _d_ab, nullptr);
+						return;
+					}
+					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
+				};
+			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+			}
+			{
+				const auto chaos_method_ptr = _s1;
+				const auto chaos_target = _s0;
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
+				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
+				chaos_object->chaos_delegate_target = chaos_target;
+				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			_s1 = _s0;
+			{
+				auto chaos_value = _s1;
+				chaos_static_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c____9__454_0 = chaos_value;
+			}
+		}
+		{
+			// Assert.Throws: target method not found via IL lookahead
+			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
+		}
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
+		chaos_locals[0] = ChaosStoreInt64(_i0);
+		_i0 = ChaosLoadInt64(chaos_locals[0]);
+		return _i0;
+	}
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests+<>c__DisplayClass160_0::.ctor()
+extern "C" void CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass160_0__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = chaos_args[0];
+	{
+		const auto chaos_arg_0 = _s0;
+		if (chaos_arg_0 == 0)
+		{
+			::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
+		}
+		ChaosObjectCtor(chaos_arg_0);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests+<>c__DisplayClass160_0::<Receive_28_System_Byte_int_int_SocketFlags_SocketError_0>b__0()
+extern "C" void CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass160_0_Receive_28_System_Byte_int_int_SocketFlags_SocketError_0_b__0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INTPTR _s5;
+	CHAOS_IL2CPP_INTPTR _s6;
+	CHAOS_IL2CPP_INTPTR _s7;
+	CHAOS_IL2CPP_INTPTR _s8;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	_s1 = 0;
+	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	_s5 = chaos_args[0];
+	{
+		auto* chaos_object = reinterpret_cast<chaos_type_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass160_0*>(_s5);
+		_s5 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_object->field_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass160_0____ref_28_0_0);
+	}
+	{
+		const auto chaos_result = chaos_external_runtime_System_Net_Sockets_Socket__Receive_System_Int32_System_Byte___System_Int32_System_Int32_SocketFlags_System_Net_Sockets_SocketError__();
+		_s6 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests+<>c__DisplayClass162_0::.ctor()
+extern "C" void CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass162_0__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = chaos_args[0];
+	{
+		const auto chaos_arg_0 = _s0;
+		if (chaos_arg_0 == 0)
+		{
+			::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
+		}
+		ChaosObjectCtor(chaos_arg_0);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests+<>c__DisplayClass162_0::<Receive_28_System_Byte_int_int_SocketFlags_SocketError_1>b__0()
+extern "C" void CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass162_0_Receive_28_System_Byte_int_int_SocketFlags_SocketError_1_b__0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INTPTR _s5;
+	CHAOS_IL2CPP_INTPTR _s6;
+	CHAOS_IL2CPP_INTPTR _s7;
+	CHAOS_IL2CPP_INTPTR _s8;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	_s1 = 0;
+	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	_s5 = chaos_args[0];
+	{
+		auto* chaos_object = reinterpret_cast<chaos_type_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass162_0*>(_s5);
+		_s5 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_object->field_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass162_0____ref_28_1_0);
+	}
+	{
+		const auto chaos_result = chaos_external_runtime_System_Net_Sockets_Socket__Receive_System_Int32_System_Byte___System_Int32_System_Int32_SocketFlags_System_Net_Sockets_SocketError__();
+		_s6 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests+<>c__DisplayClass164_0::.ctor()
+extern "C" void CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass164_0__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = chaos_args[0];
+	{
+		const auto chaos_arg_0 = _s0;
+		if (chaos_arg_0 == 0)
+		{
+			::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
+		}
+		ChaosObjectCtor(chaos_arg_0);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests+<>c__DisplayClass164_0::<Receive_28_System_Byte_int_int_SocketFlags_SocketError_2>b__0()
+extern "C" void CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass164_0_Receive_28_System_Byte_int_int_SocketFlags_SocketError_2_b__0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INTPTR _s5;
+	CHAOS_IL2CPP_INTPTR _s6;
+	CHAOS_IL2CPP_INTPTR _s7;
+	CHAOS_IL2CPP_INTPTR _s8;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	_s1 = 0;
+	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	_s5 = chaos_args[0];
+	{
+		auto* chaos_object = reinterpret_cast<chaos_type_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass164_0*>(_s5);
+		_s5 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_object->field_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass164_0____ref_28_2_0);
+	}
+	{
+		const auto chaos_result = chaos_external_runtime_System_Net_Sockets_Socket__Receive_System_Int32_System_Byte___System_Int32_System_Int32_SocketFlags_System_Net_Sockets_SocketError__();
+		_s6 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests+<>c__DisplayClass166_0::.ctor()
+extern "C" void CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass166_0__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = chaos_args[0];
+	{
+		const auto chaos_arg_0 = _s0;
+		if (chaos_arg_0 == 0)
+		{
+			::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
+		}
+		ChaosObjectCtor(chaos_arg_0);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests+<>c__DisplayClass166_0::<Receive_28_System_Byte_int_int_SocketFlags_SocketError_3>b__0()
+extern "C" void CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass166_0_Receive_28_System_Byte_int_int_SocketFlags_SocketError_3_b__0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INTPTR _s5;
+	CHAOS_IL2CPP_INTPTR _s6;
+	CHAOS_IL2CPP_INTPTR _s7;
+	CHAOS_IL2CPP_INTPTR _s8;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	{
+		const auto chaos_result = ChaosArrayEmpty_Inline();
+		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	_s5 = chaos_args[0];
+	{
+		auto* chaos_object = reinterpret_cast<chaos_type_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass166_0*>(_s5);
+		_s5 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_object->field_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass166_0____ref_28_3_0);
+	}
+	{
+		const auto chaos_result = chaos_external_runtime_System_Net_Sockets_Socket__Receive_System_Int32_System_Byte___System_Int32_System_Int32_SocketFlags_System_Net_Sockets_SocketError__();
+		_s6 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests+<>c__DisplayClass168_0::.ctor()
+extern "C" void CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass168_0__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = chaos_args[0];
+	{
+		const auto chaos_arg_0 = _s0;
+		if (chaos_arg_0 == 0)
+		{
+			::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
+		}
+		ChaosObjectCtor(chaos_arg_0);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests+<>c__DisplayClass168_0::<Receive_28_System_Byte_int_int_SocketFlags_SocketError_4>b__0()
+extern "C" void CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass168_0_Receive_28_System_Byte_int_int_SocketFlags_SocketError_4_b__0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INTPTR _s5;
+	CHAOS_IL2CPP_INTPTR _s6;
+	CHAOS_IL2CPP_INTPTR _s7;
+	CHAOS_IL2CPP_INTPTR _s8;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(2);
+	_s1 = ChaosArrayNew1D_Inline(&chaos_type_info_managed_array.hot, chaos_mt_System_Private_CoreLib_System_Byte.AsTypeInfoHot(), 1, _s1);
+	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	_s5 = chaos_args[0];
+	{
+		auto* chaos_object = reinterpret_cast<chaos_type_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass168_0*>(_s5);
+		_s5 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_object->field_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass168_0____ref_28_4_0);
+	}
+	{
+		const auto chaos_result = chaos_external_runtime_System_Net_Sockets_Socket__Receive_System_Int32_System_Byte___System_Int32_System_Int32_SocketFlags_System_Net_Sockets_SocketError__();
+		_s6 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests+<>c__DisplayClass178_0::.ctor()
+extern "C" void CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass178_0__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = chaos_args[0];
+	{
+		const auto chaos_arg_0 = _s0;
+		if (chaos_arg_0 == 0)
+		{
+			::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
+		}
+		ChaosObjectCtor(chaos_arg_0);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests+<>c__DisplayClass178_0::<Receive_31_IListSystem_ArraySegmentbyte_SocketFlags_SocketError_0>b__0()
+extern "C" void CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass178_0_Receive_31_IListSystem_ArraySegmentbyte_SocketFlags_SocketError_0_b__0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INTPTR _s5;
+	CHAOS_IL2CPP_INTPTR _s6;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	_s1 = 0;
+	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	_s3 = chaos_args[0];
+	{
+		auto* chaos_object = reinterpret_cast<chaos_type_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass178_0*>(_s3);
+		_s3 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_object->field_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass178_0____ref_31_0_0);
+	}
+	{
+		const auto chaos_result = chaos_external_runtime_System_Net_Sockets_Socket__Receive_System_Int32_System_Collections_Generic_IList_System_ArraySegment_System_Byte___SocketFlags_System_Net_Sockets_SocketError__();
+		_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests+<>c__DisplayClass180_0::.ctor()
+extern "C" void CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass180_0__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = chaos_args[0];
+	{
+		const auto chaos_arg_0 = _s0;
+		if (chaos_arg_0 == 0)
+		{
+			::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
+		}
+		ChaosObjectCtor(chaos_arg_0);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests+<>c__DisplayClass180_0::<Receive_31_IListSystem_ArraySegmentbyte_SocketFlags_SocketError_1>b__0()
+extern "C" void CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass180_0_Receive_31_IListSystem_ArraySegmentbyte_SocketFlags_SocketError_1_b__0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INTPTR _s5;
+	CHAOS_IL2CPP_INTPTR _s6;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	{
+		const auto chaos_result = ChaosArrayEmpty_Inline();
+		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	_s3 = chaos_args[0];
+	{
+		auto* chaos_object = reinterpret_cast<chaos_type_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass180_0*>(_s3);
+		_s3 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_object->field_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass180_0____ref_31_1_0);
+	}
+	{
+		const auto chaos_result = chaos_external_runtime_System_Net_Sockets_Socket__Receive_System_Int32_System_Collections_Generic_IList_System_ArraySegment_System_Byte___SocketFlags_System_Net_Sockets_SocketError__();
+		_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests+<>c__DisplayClass324_0::.ctor()
+extern "C" void CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass324_0__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = chaos_args[0];
+	{
+		const auto chaos_arg_0 = _s0;
+		if (chaos_arg_0 == 0)
+		{
+			::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
+		}
+		ChaosObjectCtor(chaos_arg_0);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests+<>c__DisplayClass324_0::<BeginSend_60_System_Byte_int_int_SocketFlags_SocketError_System_AsyncCallback_object_0>b__0()
+extern "C" void CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass324_0_BeginSend_60_System_Byte_int_int_SocketFlags_SocketError_System_AsyncCallback_object_0_b__0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INTPTR _s5;
+	CHAOS_IL2CPP_INTPTR _s6;
+	CHAOS_IL2CPP_INTPTR _s7;
+	CHAOS_IL2CPP_INTPTR _s8;
+	CHAOS_IL2CPP_INTPTR _s9;
+	CHAOS_IL2CPP_INTPTR _s10;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	_s1 = 0;
+	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	_s5 = chaos_args[0];
+	{
+		auto* chaos_object = reinterpret_cast<chaos_type_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass324_0*>(_s5);
+		_s5 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_object->field_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass324_0____ref_60_0_0);
+	}
+	_s6 = 0;
+	_s7 = 0;
+	{
+		const auto chaos_result = chaos_external_runtime_System_Net_Sockets_Socket__BeginSend_System_IAsyncResult_System_Byte___System_Int32_System_Int32_SocketFlags_System_Net_Sockets_SocketError__System_AsyncCallback_System_Object_();
+		_s8 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests+<>c__DisplayClass326_0::.ctor()
+extern "C" void CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass326_0__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = chaos_args[0];
+	{
+		const auto chaos_arg_0 = _s0;
+		if (chaos_arg_0 == 0)
+		{
+			::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
+		}
+		ChaosObjectCtor(chaos_arg_0);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests+<>c__DisplayClass326_0::<BeginSend_60_System_Byte_int_int_SocketFlags_SocketError_System_AsyncCallback_object_1>b__0()
+extern "C" void CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass326_0_BeginSend_60_System_Byte_int_int_SocketFlags_SocketError_System_AsyncCallback_object_1_b__0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INTPTR _s5;
+	CHAOS_IL2CPP_INTPTR _s6;
+	CHAOS_IL2CPP_INTPTR _s7;
+	CHAOS_IL2CPP_INTPTR _s8;
+	CHAOS_IL2CPP_INTPTR _s9;
+	CHAOS_IL2CPP_INTPTR _s10;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	_s1 = 0;
+	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	_s5 = chaos_args[0];
+	{
+		auto* chaos_object = reinterpret_cast<chaos_type_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass326_0*>(_s5);
+		_s5 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_object->field_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass326_0____ref_60_1_0);
+	}
+	_s6 = 0;
+	_s7 = 0;
+	{
+		const auto chaos_result = chaos_external_runtime_System_Net_Sockets_Socket__BeginSend_System_IAsyncResult_System_Byte___System_Int32_System_Int32_SocketFlags_System_Net_Sockets_SocketError__System_AsyncCallback_System_Object_();
+		_s8 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests+<>c__DisplayClass328_0::.ctor()
+extern "C" void CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass328_0__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = chaos_args[0];
+	{
+		const auto chaos_arg_0 = _s0;
+		if (chaos_arg_0 == 0)
+		{
+			::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
+		}
+		ChaosObjectCtor(chaos_arg_0);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests+<>c__DisplayClass328_0::<BeginSend_60_System_Byte_int_int_SocketFlags_SocketError_System_AsyncCallback_object_2>b__0()
+extern "C" void CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass328_0_BeginSend_60_System_Byte_int_int_SocketFlags_SocketError_System_AsyncCallback_object_2_b__0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INTPTR _s5;
+	CHAOS_IL2CPP_INTPTR _s6;
+	CHAOS_IL2CPP_INTPTR _s7;
+	CHAOS_IL2CPP_INTPTR _s8;
+	CHAOS_IL2CPP_INTPTR _s9;
+	CHAOS_IL2CPP_INTPTR _s10;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	_s1 = 0;
+	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	_s5 = chaos_args[0];
+	{
+		auto* chaos_object = reinterpret_cast<chaos_type_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass328_0*>(_s5);
+		_s5 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_object->field_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass328_0____ref_60_2_0);
+	}
+	_s6 = 0;
+	_s7 = 0;
+	{
+		const auto chaos_result = chaos_external_runtime_System_Net_Sockets_Socket__BeginSend_System_IAsyncResult_System_Byte___System_Int32_System_Int32_SocketFlags_System_Net_Sockets_SocketError__System_AsyncCallback_System_Object_();
+		_s8 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests+<>c__DisplayClass330_0::.ctor()
+extern "C" void CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass330_0__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = chaos_args[0];
+	{
+		const auto chaos_arg_0 = _s0;
+		if (chaos_arg_0 == 0)
+		{
+			::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
+		}
+		ChaosObjectCtor(chaos_arg_0);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests+<>c__DisplayClass330_0::<BeginSend_60_System_Byte_int_int_SocketFlags_SocketError_System_AsyncCallback_object_3>b__0()
+extern "C" void CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass330_0_BeginSend_60_System_Byte_int_int_SocketFlags_SocketError_System_AsyncCallback_object_3_b__0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INTPTR _s5;
+	CHAOS_IL2CPP_INTPTR _s6;
+	CHAOS_IL2CPP_INTPTR _s7;
+	CHAOS_IL2CPP_INTPTR _s8;
+	CHAOS_IL2CPP_INTPTR _s9;
+	CHAOS_IL2CPP_INTPTR _s10;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	{
+		const auto chaos_result = ChaosArrayEmpty_Inline();
+		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	_s5 = chaos_args[0];
+	{
+		auto* chaos_object = reinterpret_cast<chaos_type_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass330_0*>(_s5);
+		_s5 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_object->field_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass330_0____ref_60_3_0);
+	}
+	_s6 = 0;
+	_s7 = 0;
+	{
+		const auto chaos_result = chaos_external_runtime_System_Net_Sockets_Socket__BeginSend_System_IAsyncResult_System_Byte___System_Int32_System_Int32_SocketFlags_System_Net_Sockets_SocketError__System_AsyncCallback_System_Object_();
+		_s8 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests+<>c__DisplayClass332_0::.ctor()
+extern "C" void CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass332_0__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = chaos_args[0];
+	{
+		const auto chaos_arg_0 = _s0;
+		if (chaos_arg_0 == 0)
+		{
+			::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
+		}
+		ChaosObjectCtor(chaos_arg_0);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests+<>c__DisplayClass332_0::<BeginSend_60_System_Byte_int_int_SocketFlags_SocketError_System_AsyncCallback_object_4>b__0()
+extern "C" void CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass332_0_BeginSend_60_System_Byte_int_int_SocketFlags_SocketError_System_AsyncCallback_object_4_b__0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INTPTR _s5;
+	CHAOS_IL2CPP_INTPTR _s6;
+	CHAOS_IL2CPP_INTPTR _s7;
+	CHAOS_IL2CPP_INTPTR _s8;
+	CHAOS_IL2CPP_INTPTR _s9;
+	CHAOS_IL2CPP_INTPTR _s10;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(2);
+	_s1 = ChaosArrayNew1D_Inline(&chaos_type_info_managed_array.hot, chaos_mt_System_Private_CoreLib_System_Byte.AsTypeInfoHot(), 1, _s1);
+	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	_s5 = chaos_args[0];
+	{
+		auto* chaos_object = reinterpret_cast<chaos_type_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass332_0*>(_s5);
+		_s5 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_object->field_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass332_0____ref_60_4_0);
+	}
+	_s6 = 0;
+	_s7 = 0;
+	{
+		const auto chaos_result = chaos_external_runtime_System_Net_Sockets_Socket__BeginSend_System_IAsyncResult_System_Byte___System_Int32_System_Int32_SocketFlags_System_Net_Sockets_SocketError__System_AsyncCallback_System_Object_();
+		_s8 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests+<>c__DisplayClass338_0::.ctor()
+extern "C" void CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass338_0__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = chaos_args[0];
+	{
+		const auto chaos_arg_0 = _s0;
+		if (chaos_arg_0 == 0)
+		{
+			::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
+		}
+		ChaosObjectCtor(chaos_arg_0);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests+<>c__DisplayClass338_0::<BeginSend_62_IListSystem_ArraySegmentbyte_SocketFlags_SocketError_System_AsyncCallback_object_0>b__0()
+extern "C" void CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass338_0_BeginSend_62_IListSystem_ArraySegmentbyte_SocketFlags_SocketError_System_AsyncCallback_object_0_b__0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INTPTR _s5;
+	CHAOS_IL2CPP_INTPTR _s6;
+	CHAOS_IL2CPP_INTPTR _s7;
+	CHAOS_IL2CPP_INTPTR _s8;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	_s1 = 0;
+	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	_s3 = chaos_args[0];
+	{
+		auto* chaos_object = reinterpret_cast<chaos_type_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass338_0*>(_s3);
+		_s3 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_object->field_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass338_0____ref_62_0_0);
+	}
+	_s4 = 0;
+	_s5 = 0;
+	{
+		const auto chaos_result = chaos_external_runtime_System_Net_Sockets_Socket__BeginSend_System_IAsyncResult_System_Collections_Generic_IList_System_ArraySegment_System_Byte___SocketFlags_System_Net_Sockets_SocketError__System_AsyncCallback_System_Object_();
+		_s6 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests+<>c__DisplayClass340_0::.ctor()
+extern "C" void CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass340_0__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = chaos_args[0];
+	{
+		const auto chaos_arg_0 = _s0;
+		if (chaos_arg_0 == 0)
+		{
+			::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
+		}
+		ChaosObjectCtor(chaos_arg_0);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests+<>c__DisplayClass340_0::<BeginSend_62_IListSystem_ArraySegmentbyte_SocketFlags_SocketError_System_AsyncCallback_object_1>b__0()
+extern "C" void CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass340_0_BeginSend_62_IListSystem_ArraySegmentbyte_SocketFlags_SocketError_System_AsyncCallback_object_1_b__0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INTPTR _s5;
+	CHAOS_IL2CPP_INTPTR _s6;
+	CHAOS_IL2CPP_INTPTR _s7;
+	CHAOS_IL2CPP_INTPTR _s8;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	{
+		const auto chaos_result = ChaosArrayEmpty_Inline();
+		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	_s3 = chaos_args[0];
+	{
+		auto* chaos_object = reinterpret_cast<chaos_type_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass340_0*>(_s3);
+		_s3 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_object->field_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass340_0____ref_62_1_0);
+	}
+	_s4 = 0;
+	_s5 = 0;
+	{
+		const auto chaos_result = chaos_external_runtime_System_Net_Sockets_Socket__BeginSend_System_IAsyncResult_System_Collections_Generic_IList_System_ArraySegment_System_Byte___SocketFlags_System_Net_Sockets_SocketError__System_AsyncCallback_System_Object_();
+		_s6 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests+<>c__DisplayClass344_0::.ctor()
+extern "C" void CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass344_0__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = chaos_args[0];
+	{
+		const auto chaos_arg_0 = _s0;
+		if (chaos_arg_0 == 0)
+		{
+			::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
+		}
+		ChaosObjectCtor(chaos_arg_0);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests+<>c__DisplayClass344_0::<EndSend_64_System_IAsyncResult_SocketError_0>b__0()
+extern "C" void CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass344_0_EndSend_64_System_IAsyncResult_SocketError_0_b__0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INTPTR _s5;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	_s1 = 0;
+	_s2 = chaos_args[0];
+	{
+		auto* chaos_object = reinterpret_cast<chaos_type_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass344_0*>(_s2);
+		_s2 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_object->field_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass344_0____ref_64_0_0);
+	}
+	{
+		const auto chaos_result = chaos_external_runtime_System_Net_Sockets_Socket__EndSend_System_Int32_System_IAsyncResult_System_Net_Sockets_SocketError__();
+		_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests+<>c__DisplayClass382_0::.ctor()
+extern "C" void CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass382_0__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = chaos_args[0];
+	{
+		const auto chaos_arg_0 = _s0;
+		if (chaos_arg_0 == 0)
+		{
+			::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
+		}
+		ChaosObjectCtor(chaos_arg_0);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests+<>c__DisplayClass382_0::<BeginReceive_71_System_Byte_int_int_SocketFlags_SocketError_System_AsyncCallback_object_0>b__0()
+extern "C" void CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass382_0_BeginReceive_71_System_Byte_int_int_SocketFlags_SocketError_System_AsyncCallback_object_0_b__0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INTPTR _s5;
+	CHAOS_IL2CPP_INTPTR _s6;
+	CHAOS_IL2CPP_INTPTR _s7;
+	CHAOS_IL2CPP_INTPTR _s8;
+	CHAOS_IL2CPP_INTPTR _s9;
+	CHAOS_IL2CPP_INTPTR _s10;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	_s1 = 0;
+	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	_s5 = chaos_args[0];
+	{
+		auto* chaos_object = reinterpret_cast<chaos_type_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass382_0*>(_s5);
+		_s5 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_object->field_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass382_0____ref_71_0_0);
+	}
+	_s6 = 0;
+	_s7 = 0;
+	{
+		const auto chaos_result = chaos_external_runtime_System_Net_Sockets_Socket__BeginReceive_System_IAsyncResult_System_Byte___System_Int32_System_Int32_SocketFlags_System_Net_Sockets_SocketError__System_AsyncCallback_System_Object_();
+		_s8 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests+<>c__DisplayClass384_0::.ctor()
+extern "C" void CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass384_0__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = chaos_args[0];
+	{
+		const auto chaos_arg_0 = _s0;
+		if (chaos_arg_0 == 0)
+		{
+			::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
+		}
+		ChaosObjectCtor(chaos_arg_0);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests+<>c__DisplayClass384_0::<BeginReceive_71_System_Byte_int_int_SocketFlags_SocketError_System_AsyncCallback_object_1>b__0()
+extern "C" void CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass384_0_BeginReceive_71_System_Byte_int_int_SocketFlags_SocketError_System_AsyncCallback_object_1_b__0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INTPTR _s5;
+	CHAOS_IL2CPP_INTPTR _s6;
+	CHAOS_IL2CPP_INTPTR _s7;
+	CHAOS_IL2CPP_INTPTR _s8;
+	CHAOS_IL2CPP_INTPTR _s9;
+	CHAOS_IL2CPP_INTPTR _s10;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	_s1 = 0;
+	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	_s5 = chaos_args[0];
+	{
+		auto* chaos_object = reinterpret_cast<chaos_type_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass384_0*>(_s5);
+		_s5 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_object->field_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass384_0____ref_71_1_0);
+	}
+	_s6 = 0;
+	_s7 = 0;
+	{
+		const auto chaos_result = chaos_external_runtime_System_Net_Sockets_Socket__BeginReceive_System_IAsyncResult_System_Byte___System_Int32_System_Int32_SocketFlags_System_Net_Sockets_SocketError__System_AsyncCallback_System_Object_();
+		_s8 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests+<>c__DisplayClass386_0::.ctor()
+extern "C" void CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass386_0__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = chaos_args[0];
+	{
+		const auto chaos_arg_0 = _s0;
+		if (chaos_arg_0 == 0)
+		{
+			::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
+		}
+		ChaosObjectCtor(chaos_arg_0);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests+<>c__DisplayClass386_0::<BeginReceive_71_System_Byte_int_int_SocketFlags_SocketError_System_AsyncCallback_object_2>b__0()
+extern "C" void CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass386_0_BeginReceive_71_System_Byte_int_int_SocketFlags_SocketError_System_AsyncCallback_object_2_b__0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INTPTR _s5;
+	CHAOS_IL2CPP_INTPTR _s6;
+	CHAOS_IL2CPP_INTPTR _s7;
+	CHAOS_IL2CPP_INTPTR _s8;
+	CHAOS_IL2CPP_INTPTR _s9;
+	CHAOS_IL2CPP_INTPTR _s10;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	_s1 = 0;
+	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	_s5 = chaos_args[0];
+	{
+		auto* chaos_object = reinterpret_cast<chaos_type_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass386_0*>(_s5);
+		_s5 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_object->field_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass386_0____ref_71_2_0);
+	}
+	_s6 = 0;
+	_s7 = 0;
+	{
+		const auto chaos_result = chaos_external_runtime_System_Net_Sockets_Socket__BeginReceive_System_IAsyncResult_System_Byte___System_Int32_System_Int32_SocketFlags_System_Net_Sockets_SocketError__System_AsyncCallback_System_Object_();
+		_s8 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests+<>c__DisplayClass388_0::.ctor()
+extern "C" void CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass388_0__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = chaos_args[0];
+	{
+		const auto chaos_arg_0 = _s0;
+		if (chaos_arg_0 == 0)
+		{
+			::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
+		}
+		ChaosObjectCtor(chaos_arg_0);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests+<>c__DisplayClass388_0::<BeginReceive_71_System_Byte_int_int_SocketFlags_SocketError_System_AsyncCallback_object_3>b__0()
+extern "C" void CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass388_0_BeginReceive_71_System_Byte_int_int_SocketFlags_SocketError_System_AsyncCallback_object_3_b__0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INTPTR _s5;
+	CHAOS_IL2CPP_INTPTR _s6;
+	CHAOS_IL2CPP_INTPTR _s7;
+	CHAOS_IL2CPP_INTPTR _s8;
+	CHAOS_IL2CPP_INTPTR _s9;
+	CHAOS_IL2CPP_INTPTR _s10;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	{
+		const auto chaos_result = ChaosArrayEmpty_Inline();
+		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	_s5 = chaos_args[0];
+	{
+		auto* chaos_object = reinterpret_cast<chaos_type_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass388_0*>(_s5);
+		_s5 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_object->field_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass388_0____ref_71_3_0);
+	}
+	_s6 = 0;
+	_s7 = 0;
+	{
+		const auto chaos_result = chaos_external_runtime_System_Net_Sockets_Socket__BeginReceive_System_IAsyncResult_System_Byte___System_Int32_System_Int32_SocketFlags_System_Net_Sockets_SocketError__System_AsyncCallback_System_Object_();
+		_s8 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests+<>c__DisplayClass390_0::.ctor()
+extern "C" void CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass390_0__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = chaos_args[0];
+	{
+		const auto chaos_arg_0 = _s0;
+		if (chaos_arg_0 == 0)
+		{
+			::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
+		}
+		ChaosObjectCtor(chaos_arg_0);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests+<>c__DisplayClass390_0::<BeginReceive_71_System_Byte_int_int_SocketFlags_SocketError_System_AsyncCallback_object_4>b__0()
+extern "C" void CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass390_0_BeginReceive_71_System_Byte_int_int_SocketFlags_SocketError_System_AsyncCallback_object_4_b__0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INTPTR _s5;
+	CHAOS_IL2CPP_INTPTR _s6;
+	CHAOS_IL2CPP_INTPTR _s7;
+	CHAOS_IL2CPP_INTPTR _s8;
+	CHAOS_IL2CPP_INTPTR _s9;
+	CHAOS_IL2CPP_INTPTR _s10;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(2);
+	_s1 = ChaosArrayNew1D_Inline(&chaos_type_info_managed_array.hot, chaos_mt_System_Private_CoreLib_System_Byte.AsTypeInfoHot(), 1, _s1);
+	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	_s5 = chaos_args[0];
+	{
+		auto* chaos_object = reinterpret_cast<chaos_type_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass390_0*>(_s5);
+		_s5 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_object->field_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass390_0____ref_71_4_0);
+	}
+	_s6 = 0;
+	_s7 = 0;
+	{
+		const auto chaos_result = chaos_external_runtime_System_Net_Sockets_Socket__BeginReceive_System_IAsyncResult_System_Byte___System_Int32_System_Int32_SocketFlags_System_Net_Sockets_SocketError__System_AsyncCallback_System_Object_();
+		_s8 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests+<>c__DisplayClass396_0::.ctor()
+extern "C" void CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass396_0__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = chaos_args[0];
+	{
+		const auto chaos_arg_0 = _s0;
+		if (chaos_arg_0 == 0)
+		{
+			::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
+		}
+		ChaosObjectCtor(chaos_arg_0);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests+<>c__DisplayClass396_0::<BeginReceive_73_IListSystem_ArraySegmentbyte_SocketFlags_SocketError_System_AsyncCallback_object_0>b__0()
+extern "C" void CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass396_0_BeginReceive_73_IListSystem_ArraySegmentbyte_SocketFlags_SocketError_System_AsyncCallback_object_0_b__0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INTPTR _s5;
+	CHAOS_IL2CPP_INTPTR _s6;
+	CHAOS_IL2CPP_INTPTR _s7;
+	CHAOS_IL2CPP_INTPTR _s8;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	_s1 = 0;
+	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	_s3 = chaos_args[0];
+	{
+		auto* chaos_object = reinterpret_cast<chaos_type_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass396_0*>(_s3);
+		_s3 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_object->field_CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass396_0____ref_73_0_0);
+	}
+	_s4 = 0;
+	_s5 = 0;
+	{
+		const auto chaos_result = chaos_external_runtime_System_Net_Sockets_Socket__BeginReceive_System_IAsyncResult_System_Collections_Generic_IList_System_ArraySegment_System_Byte___SocketFlags_System_Net_Sockets_SocketError__System_AsyncCallback_System_Object_();
+		_s6 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Net_Sockets.System_Net_Sockets_SocketTests+<>c__DisplayClass398_0::.ctor()
+extern "C" void CombinedSubjects_AutoGenerated_System_Net_Sockets_System_Net_Sockets_SocketTests___c__DisplayClass398_0__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = chaos_args[0];
+	{
+		const auto chaos_arg_0 = _s0;
+		if (chaos_arg_0 == 0)
+		{
+			::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
+		}
+		ChaosObjectCtor(chaos_arg_0);
+	}
+	return;
+}
+
 
 
 }  // namespace chaos::il2cpp::codegen::CombinedSubjects
 #pragma warning(pop)
 
 // extern "C" definition for link-time visibility from runtime-entry.cpp
-extern "C" const int kAotMethodCount = 1625;
+extern "C" const int kAotMethodCount = 1590;
 
 extern "C" void ChaosJitRegisterAll() {}

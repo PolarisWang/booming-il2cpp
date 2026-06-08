@@ -9119,6 +9119,11 @@ public sealed partial class NativeAotLoweringPlanner
 	                CreateNativeIntAbiSlot("System.Globalization.CompareInfo", AotCoreIrTypeShapeKind.ReferenceType),
 	                new HashSet<int> { 0 });
 
+	            // ── Cryptography stubs (DirectNativeSymbol for crypto_stubs.cpp) ──
+	            // These use Windows CNG (BCrypt) APIs for native crypto operations.
+	            // Registered as SimpleForward so the codegen emits direct C++ calls.
+	            RegisterCryptoStubs(registry);
+
 	            // ── Chaos.TestFramework.Assert inline shapes ──────────────────────
 	            // These inline expansions replace Assert.AreEqual/IsTrue/IsNull etc.
 	            // calls with C++ code that checks the condition and throws a managed
@@ -9395,6 +9400,21 @@ public sealed partial class NativeAotLoweringPlanner
                         return $"(chaos::il2cpp::runtime_core::chaos_raise_exception(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(nullptr)), static_cast<{cppCastType}>(0))";
                     }
                     return null;
+
+\tprivate static void RegisterCryptoStubs(RuntimeHelperShapeRegistry registry)
+\t{
+\t    var voidReturn = CreateVoidAbiSlot();
+\t    var int32Abi = CreateInt32AbiSlot();
+\t    var int8PtrAbi = CreateNativeIntAbiSlot();
+\t
+\t    // SHA256: HashData(byte[]) -> int (byte count or -1)
+\t    registry.Register(System.String.Empty, System.String.Empty,
+\t        System.Array.Empty<string>(),
+\t        ShapeKind.SimpleForward, "ChaosSha256Hash",
+\t        System.Array.Empty<AotCoreIrAbiSlotArtifact>(),
+\t        voidReturn, EmptyRawArgumentIndices,
+\t        DirectNativeSymbol: "ChaosSha256Hash");
+\t}
                 }));
         }
     }

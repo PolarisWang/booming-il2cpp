@@ -3,6 +3,18 @@
   "max_entries": 50,
   "entries": [
     {
+      "cache_key": "System.Diagnostics.DiagnosticSource/diagnostics/8207f6608d4c4be5",
+      "assembly": "System.Diagnostics.DiagnosticSource",
+      "chunk_slug": "diagnostics",
+      "input_hash": "8207f6608d4c4be58ab6028842ca987cce6686756b066ccad5a6e6a8b437cb33",
+      "cached_at": "2026-06-08T09:05:16Z",
+      "duration_ms": 61327,
+      "commit_hash": "cc4319ace",
+      "entry_exe_size": 6374400,
+      "entry_count": 359,
+      "status": "valid"
+    },
+    {
       "cache_key": "System.Diagnostics.DiagnosticSource/diagnostics/7eadcc4a971d7341",
       "assembly": "System.Diagnostics.DiagnosticSource",
       "chunk_slug": "diagnostics",

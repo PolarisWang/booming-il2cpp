@@ -3,15 +3,15 @@
   "max_entries": 50,
   "entries": [
     {
-      "cache_key": "System.Runtime.Serialization.Formatters/global-ns/cc1eea1d4a372c6f",
+      "cache_key": "System.Runtime.Serialization.Formatters/global-ns/f94ca7bea18e0545",
       "assembly": "System.Runtime.Serialization.Formatters",
       "chunk_slug": "global-ns",
-      "input_hash": "cc1eea1d4a372c6ffd817a6d6cc1f5efe78e8c52d5c439ecdd12fb6fdd57800b",
-      "cached_at": "2026-06-08T06:23:59Z",
-      "duration_ms": 26278,
-      "commit_hash": "d148b8dac",
+      "input_hash": "f94ca7bea18e054520ab9db2878d295b8609b1e32f150b63d374fe4d88e9cde3",
+      "cached_at": "2026-06-08T09:01:13Z",
+      "duration_ms": 46795,
+      "commit_hash": "0560b1f8f",
       "entry_exe_size": 4324352,
-      "entry_count": 349,
+      "entry_count": 350,
       "status": "valid"
     }
   ]

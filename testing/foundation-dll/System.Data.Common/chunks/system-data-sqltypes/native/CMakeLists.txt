@@ -42,6 +42,7 @@ if(CHAOS_IL2CPP_CONFIG_TIER STREQUAL "profile")
   add_compile_definitions(CHAOS_IL2CPP_CONFIG_CHECK)
   add_compile_definitions(CHAOS_IL2CPP_LOG_LEVEL=3)
   add_compile_definitions(CHAOS_IL2CPP_RUNTIME_CONFIG_FILE="runtime-config/desktop.h")
+  add_compile_definitions(CHAOS_IL2CPP_PROFILE_ENABLED=1)
 elseif(CHAOS_IL2CPP_CONFIG_TIER STREQUAL "ship")
   add_compile_definitions(CHAOS_IL2CPP_CONFIG_TIER=CHAOS_IL2CPP_CONFIG_TIER_CHECK)
   add_compile_definitions(CHAOS_IL2CPP_CONFIG_CHECK)
@@ -136,9 +137,6 @@ set(CHAOS_MISC_STUBS
 set(CHAOS_INTEROP_STUBS
     "${CHAOS_SDK_DIR}/runtime_stubs/interop_stubs.cpp"
 )
-set(CHAOS_VECTOR_STUBS
-    "${CHAOS_SDK_DIR}/runtime_stubs/vector_stubs.cpp"
-)
 set(CHAOS_EXCEPTION_STUBS
     "${CHAOS_SDK_DIR}/runtime_stubs/exception_stubs.cpp"
 )
@@ -161,6 +159,12 @@ endif()
 set(CHAOS_METHOD_REPLACEMENT
     "${CHAOS_PROJECT_ROOT}/src/native/hot-update/method_replacement.cpp"
 )
+# profile_stats.cpp — the prebuilt chaos_runtime_core.lib may be stale,
+# missing GetThreadProfileData/FlushThreadProfileData/ProfileStore*
+# symbols added after the SDK was last rebuilt.  Compile locally.
+set(CHAOS_PROFILE_STATS
+    "${CHAOS_PROJECT_ROOT}/src/native/runtime-core/profile_stats.cpp"
+)
 
 set(CHAOS_ENTRY_SOURCES
     "runtime-entry.cpp"
@@ -174,11 +178,11 @@ set(CHAOS_ENTRY_SOURCES
     ${CHAOS_CHAR_STUBS}
     ${CHAOS_MISC_STUBS}
     ${CHAOS_INTEROP_STUBS}
-    ${CHAOS_VECTOR_STUBS}
     ${CHAOS_EXCEPTION_STUBS}
     ${CHAOS_HOTPATCH_TABLE}
     ${CHAOS_EAGER_COMPILE}
     ${CHAOS_METHOD_REPLACEMENT}
+    ${CHAOS_PROFILE_STATS}
     ${CHAOS_AOT_GENERATED_CPP}
 )
 
@@ -196,13 +200,13 @@ set(CHAOS_ENTRY_INCLUDES
     "${CHAOS_PROJECT_ROOT}/src/native/support"
     "${CHAOS_PROJECT_ROOT}/src/native/hot-update"
     "${CHAOS_PROJECT_ROOT}/third_party/unordered_dense/include"
+    "${CHAOS_PROJECT_ROOT}/cmake"
     "${CHAOS_CODEGEN_DIR}/codegen/generated"
 
     "${CMAKE_CURRENT_SOURCE_DIR}"
     # JIT headers needed by eager_compile.cpp (compiled for all builds
     # since the prebuilt chaos_interpreter.lib may be stale).
     "${CHAOS_PROJECT_ROOT}/src/native/jit"
-    "${CHAOS_PROJECT_ROOT}/contracts/native/v0"
     # codegen/generated — needed for enum_metadata.generated.h and other
     # generated headers that aren't copied to subjects/ by TPG's flat layout.
     "${CHAOS_CODEGEN_DIR}/generated"

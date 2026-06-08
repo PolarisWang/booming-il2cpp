@@ -3,6 +3,30 @@
   "max_entries": 50,
   "entries": [
     {
+      "cache_key": "System.Data.Common/system-data-sqltypes/9512375145a5bcf5",
+      "assembly": "System.Data.Common",
+      "chunk_slug": "system-data-sqltypes",
+      "input_hash": "9512375145a5bcf57827b002f0699fe76d3fa96108d44898e1d3c72be72f33ba",
+      "cached_at": "2026-06-08T09:05:33Z",
+      "duration_ms": 78912,
+      "commit_hash": "cc4319ace",
+      "entry_exe_size": 9457664,
+      "entry_count": 368,
+      "status": "valid"
+    },
+    {
+      "cache_key": "System.Data.Common/global-ns/e608015324948952",
+      "assembly": "System.Data.Common",
+      "chunk_slug": "global-ns",
+      "input_hash": "e6080153249489525cdc8e93a77c8e9e989ce246e07c3b14ade592e7c90a4c90",
+      "cached_at": "2026-06-08T09:03:05Z",
+      "duration_ms": 47741,
+      "commit_hash": "637f367e7",
+      "entry_exe_size": 3572224,
+      "entry_count": 347,
+      "status": "valid"
+    },
+    {
       "cache_key": "System.Data.Common/global-ns/7933ef1b0e799708",
       "assembly": "System.Data.Common",
       "chunk_slug": "global-ns",

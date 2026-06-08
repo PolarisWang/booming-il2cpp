@@ -268,7 +268,18 @@ static chaos::il2cpp::runtime_core::PatchContext* ApplyHotpatchFromFile(const ch
     return ctx;
 }
 
+// Forward declaration for FactAbortHandler (defined below).
+// Used by RunFactMode and the JIT dispatch worker thread.
+static void FactAbortHandler(int);
+
+// Forward declaration for SIGABRT handler (used by RunFactMode, RunHotupdateMode)
+static void FactAbortHandler(int);
+
 static int RunFactMode() {
+#if defined(_WIN32)
+    signal(SIGABRT, FactAbortHandler);
+    if (_setjmp(t_abort_jmp)) { /* longjmp from SIGABRT */ }
+#endif
     const int kCount = kSubjectEntryCount;
     int passed_count = 0;
     for (int si = 0; si < kCount; si++) {
@@ -346,9 +357,7 @@ void* g_fact_veh = AddVectoredExceptionHandler(1, FactVehHandler);
             // Re-arm SIGABRT handler each iteration: MSVC signal() resets to
             // SIG_DFL after delivery, so a second abort would otherwise call
             // _exit(3) without going through longjmp.
-            signal(SIGABRT, [](int) {
-                longjmp(t_abort_jmp, 1);
-            });
+            signal(SIGABRT, FactAbortHandler);
 
             // _setjmp _must_ be outside __try on x64 (MSVC restriction).
             // If abort() fires, the SIGABRT handler longjmps here with
@@ -673,6 +682,14 @@ static int RunBenchmarkRangeMode(int iterations, int start_idx, int end_idx) {
 }
 
 static int RunHotupdateMode(const char* patchDataPath = nullptr) {
+#if defined(_WIN32)
+    // SIGABRT recovery for CHAOS_IL2CPP_FAIL in hotupdate dispatch.
+    // _setjmp must be before any __try/__except blocks to avoid C2712.
+    signal(SIGABRT, FactAbortHandler);
+    if (_setjmp(t_abort_jmp)) {
+        // longjmp from SIGABRT — continue with next method
+    }
+#endif
     const int kCount = kSubjectEntryCount;
     // Pre-patch: capture per-method pass/fail AND return value via
     // ChaosDispatchMethodGetValue.  The pre-patch value for void-returning
@@ -932,41 +949,49 @@ static int RunHotupdateBenchmarkMode(int entry_index, int iterations) {
 
 // ── --profile: per-method GC/allocation/code-size profile ───────────
 static int RunProfileMode() {
-    const int kCount = kSubjectEntryCount;
-    chaos::il2cpp::runtime_core::ProfileStoreInit(kCount);
-    for (int si = 0; si < kCount; si++) {
+    chaos::il2cpp::runtime_core::ProfileStoreInit(kSubjectEntryCount);
+    for (int si = 0; si < kSubjectEntryCount; si++) {
         int i = kSubjectSlotMap[si];
-
 #if defined(_WIN32)
-        __try {
-            int64_t heap_before = chaos::il2cpp::runtime_core::chaos_gc_get_heap_size();
-            chaos::il2cpp::runtime_core::GetThreadProfileData().heap_before = heap_before;
-
-            CHAOS_EH_TRY
-                chaos::il2cpp::runtime_core::ChaosDispatchMethod(
-                    GetHotpatchEntries(), kAotMethodCount, i, CHAOS_USE_DEFAULT_THUNKS);
-            CHAOS_EH_CATCH_BEGIN
-            CHAOS_EH_END
-
-            int64_t heap_after = chaos::il2cpp::runtime_core::chaos_gc_get_heap_size();
-            chaos::il2cpp::runtime_core::GetThreadProfileData().heap_after = heap_after;
-        } __except(EXCEPTION_EXECUTE_HANDLER) {
-            // SEH caught — continue
+        // _setjmp must be outside __try on x64.  Catches longjmp from
+        // CHAOS_IL2CPP_FAIL when entry.direct_ptr is null (e.g. unresolved
+        // external runtime thunks for methods not in the AOT compilation set).
+        bool dispatch_ok = false;
+        if (_setjmp(t_abort_jmp) == 0) {
+            __try {
+                int64_t heap_before = chaos::il2cpp::runtime_core::chaos_gc_get_heap_size();
+                chaos::il2cpp::runtime_core::GetThreadProfileData().heap_before = heap_before;
+                CHAOS_EH_TRY
+                    chaos::il2cpp::runtime_core::ChaosDispatchMethod(
+                        GetHotpatchEntries(), kAotMethodCount, i, CHAOS_USE_DEFAULT_THUNKS);
+                CHAOS_EH_CATCH_BEGIN
+                CHAOS_EH_END
+                int64_t heap_after = chaos::il2cpp::runtime_core::chaos_gc_get_heap_size();
+                chaos::il2cpp::runtime_core::GetThreadProfileData().heap_after = heap_after;
+                dispatch_ok = true;
+            } __except(EXCEPTION_EXECUTE_HANDLER) {
+                // SEH caught — continue
+            }
         }
+        if (!dispatch_ok) {
+            // longjmp from CHAOS_IL2CPP_FAIL or SEH caught
+            // Record empty profile data so the loop continues
+            chaos::il2cpp::runtime_core::GetThreadProfileData().heap_after =
+                chaos::il2cpp::runtime_core::chaos_gc_get_heap_size();
+        }
+        chaos::il2cpp::runtime_core::FlushThreadProfileData(i);
 #else
         CHAOS_EH_TRY
             int64_t heap_before = chaos::il2cpp::runtime_core::chaos_gc_get_heap_size();
             chaos::il2cpp::runtime_core::GetThreadProfileData().heap_before = heap_before;
-
             chaos::il2cpp::runtime_core::ChaosDispatchMethod(
                 GetHotpatchEntries(), kAotMethodCount, i, CHAOS_USE_DEFAULT_THUNKS);
-
             int64_t heap_after = chaos::il2cpp::runtime_core::chaos_gc_get_heap_size();
             chaos::il2cpp::runtime_core::GetThreadProfileData().heap_after = heap_after;
+            chaos::il2cpp::runtime_core::FlushThreadProfileData(i);
         CHAOS_EH_CATCH_BEGIN
         CHAOS_EH_END
 #endif
-        chaos::il2cpp::runtime_core::FlushThreadProfileData(i);
     }
     chaos::il2cpp::runtime_core::ProfileStoreFinalize();
     chaos::il2cpp::runtime_core::ProfileEmitJson();
@@ -990,14 +1015,10 @@ int main(int argc, char* argv[]) {
     _CrtSetReportMode(_CRT_ERROR, 0);
     // Convert SIGABRT to longjmp so the fact-json worker thread can recover
     // and continue to the next subject method instead of dying with _exit(3).
-    signal(SIGABRT, [](int) {
-        longjmp(t_abort_jmp, 1);
-    });
+    signal(SIGABRT, FactAbortHandler);
     // Route CHAOS_IL2CPP_FAIL() through longjmp so the dispatch loop catches
     // codegen-emitted fail stubs and runtime assertions gracefully.
-    ::chaos::il2cpp::common::g_chaos_fail_hook = []() {
-        longjmp(t_abort_jmp, 1);
-    };
+    ::chaos::il2cpp::common::g_chaos_fail_hook = []() { longjmp(t_abort_jmp, 1); };
 #endif
 
     // Redirect diagnostic log output to stderr so that machine-consumed
@@ -1155,7 +1176,7 @@ int main(int argc, char* argv[]) {
 
 
 #if defined(_WIN32)
-    // AddVectoredExceptionHandler(1, JitVehHandler);  // disabled by build.py
+    AddVectoredExceptionHandler(1, JitVehHandler);  // logs crash, falls through to __except
 #endif
     if (chaos_il2cpp_aot_hotpatch_module != nullptr) {
         chaos::il2cpp::runtime_core::RegisterHotpatchModule(chaos_il2cpp_aot_hotpatch_module);
