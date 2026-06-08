@@ -172,9 +172,9 @@ def _calibrate_iterations(exe_path: Path, timeout: int, entry_count: int = 0,
     For large chunks (>5000 entries), caps iterations at 10000 instead of 50000
     to keep total benchmark time reasonable.
     """
-    result = _run_entry_once(exe_path, 10, timeout, start_idx=start_idx, end_idx=end_idx)
+    result = _run_entry_once(exe_path, 10, min(timeout, 30), start_idx=start_idx, end_idx=end_idx)
     if result is None or not result.stdout:
-        return 1000  # fallback
+        return 0  # calibration failed, skip benchmark
 
     data, _ = _parse_benchmark_lines(result.stdout or "")
     if not data:
@@ -225,14 +225,12 @@ def _run_entry_once(exe_path: Path, iterations: int, timeout: int,
         )
     except subprocess.TimeoutExpired as e:
         partial = e.stdout  # partial stdout captured before timeout
-        if partial and partial.strip():
-            # Return a fake CompletedProcess with partial stdout so the caller
-            # can attempt to salvage whatever benchmark data exists.
-            return subprocess.CompletedProcess(
-                args=e.cmd, returncode=-1,
-                stdout=partial, stderr="",
-            )
-        return None
+        # Always return a CompletedProcess, even with empty stdout, so the
+        # benchmark can continue past hanging methods (e.g. WaitHandle.WaitOne).
+        return subprocess.CompletedProcess(
+            args=e.cmd, returncode=-1,
+            stdout=partial or "", stderr=e.stderr or "",
+        )
 
 
 def _write_records_jsonl(
@@ -432,6 +430,9 @@ def _run_single_benchmark(
     iterations = _calibrate_iterations(exe_path, timeout, entry_count,
                                        start_idx=benchmark_start_idx, end_idx=benchmark_end_idx)
     print(f"  [benchmark] [{technology}] calibrated iterations={iterations}, entries={entry_count}")
+    if iterations <= 0:
+        print(f"  [benchmark] [{technology}] calibration failed, skipping")
+        return None
 
     # Phase 1: Adaptive sampling rounds (3-10, early stop on CV < 5%)
     max_rounds = 10
