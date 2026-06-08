@@ -100,4 +100,15 @@ def patch_runtime_entry(content: str) -> tuple[str, bool]:
         content = content.replace(old_rip3_line, '        // ctx->Rip += 3;  // disabled - causes cascading crashes', 1)
         patched = True
 
+    # Fix 4: Forward declare FactAbortHandler before RunFactMode
+    old_missing_fwd = 'static int RunFactMode() {'
+    new_with_fwd = '// Forward declaration for FactAbortHandler (defined below).\n'
+    new_with_fwd += '// Used by RunFactMode and the JIT dispatch worker thread.\n'
+    new_with_fwd += 'static void FactAbortHandler(int);\n\n'
+    new_with_fwd += 'static int RunFactMode() {'
+    if old_missing_fwd in content and 'Forward declaration for FactAbortHandler' not in content:
+        content = content.replace(old_missing_fwd, new_with_fwd, 1)
+        patched = True
+        print("  [build] Patched FactAbortHandler forward declaration")
+
     return content, patched

@@ -20,6 +20,7 @@
 #include "gc/gc_region.h"
 #include "gc/gc_stats.h"
 #include "gc/gc_stress.h"
+#include "profile_stats.h"
 
 namespace chaos::il2cpp::runtime_core {
 
@@ -43,6 +44,11 @@ CHAOS_IL2CPP_FORCEINLINE void* GcAllocateFast(CHAOS_IL2CPP_SIZE size) {
     if (ptr) {
         tls_alloc_fast_count++;
         tls_alloc_fast_bytes += size;
+#if CHAOS_IL2CPP_PROFILE_ENABLED
+        ProfileRecordNurseryAlloc(static_cast<int64_t>(size));
+        ProfileRecordAllocCount();
+        ProfileRecordFastPath();
+#endif
     }
     return ptr;
 }

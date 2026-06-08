@@ -260,7 +260,15 @@ static chaos::il2cpp::runtime_core::PatchContext* ApplyHotpatchFromFile(const ch
     return ctx;
 }
 
+// Forward declaration for FactAbortHandler (defined below).
+// Used by RunFactMode and the JIT dispatch worker thread.
+static void FactAbortHandler(int);
+
 static int RunFactMode() {
+#if defined(_WIN32)
+    signal(SIGABRT, FactAbortHandler);
+    if (_setjmp(t_abort_jmp)) { /* longjmp from SIGABRT */ }
+#endif
     const int kCount = kSubjectEntryCount;
     int passed_count = 0;
     for (int si = 0; si < kCount; si++) {
@@ -663,6 +671,14 @@ static int RunBenchmarkRangeMode(int iterations, int start_idx, int end_idx) {
 }
 
 static int RunHotupdateMode(const char* patchDataPath = nullptr) {
+#if defined(_WIN32)
+    // SIGABRT recovery for CHAOS_IL2CPP_FAIL in hotupdate dispatch.
+    // _setjmp must be before any __try/__except blocks to avoid C2712.
+    signal(SIGABRT, FactAbortHandler);
+    if (_setjmp(t_abort_jmp)) {
+        // longjmp from SIGABRT — continue with next method
+    }
+#endif
     const int kCount = kSubjectEntryCount;
     // Pre-patch: capture per-method pass/fail AND return value via
     // ChaosDispatchMethodGetValue.  The pre-patch value for void-returning
