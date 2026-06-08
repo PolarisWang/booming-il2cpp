@@ -83,10 +83,59 @@ reinterpret_cast<FnType>(kChaosExternalRuntimeFnTable[idx])(args);
 
 - [Closure 精度架构](01-翻译管线/19-closure-precision-architecture.md) — D5/D1 assemblyDirs 配置
 - [32-byte ABI 修复](01-翻译管线/20-32byte-abi-fix.md) — Vector<T> pass-by-reference 及 opcode 归一化
+- [Bridge 架构审查](讨论/discuss/bridge-architecture-review-2026-06-06.md) — 方案分析全记录
+- [Bridge 重构计划](讨论/discuss/bridge-refactor-plan-2026-06-07.md) — 实施规划
+
+## Phase 1: 禁用 BridgeAOT + Demeter Table 补全
+
+### 动机
+
+BridgeAOT 在跨 DLL 编译时解码 IL 字节码，导致:
+- IL 解码异常 → 堆损坏 (STATUS_HEAP_CORRUPTION)
+- 不支持增量编译
+- 200+ DLL 场景无法线性扩展
+
+### 实现
+
+```csharp
+// BridgeAotCompiler.cs - CompileAndIntegrate returns empty
+public (AotCoreIrArtifact UpdatedIr, Dictionary<string, string> RedirectMap) CompileAndIntegrate(...)
+{
+    return (aotCoreIr, new Dictionary<string, string>());
+}
+```
+
+### 补全工作
+
+- StaticInitializationPlanning: 过滤 malformed SubjectId (closures, templates)
+- StaticInitializationEmission: 跳过 closure constructor
+- ExternalRuntimeHelpers: catch-all CHAOS_IL2CPP_FAIL stub 生成
+- ObjectModelUtilities.GetMethodName: 返回 empty 替代 throw
+
+## Phase 2: 清理 bridge 残留代码
+
+### 删除的文件
+
+| 文件 | 原因 |
+|------|------|
+| `BridgeAotCompiler.cs` | BridgeAOT 禁用后完全死代码 |
+| `IlBytecodeDecoder.cs` | 仅被 BridgeAOT 使用的 IL 解码器 |
+
+### 移除的字段
+
+- `ManagedClosureResult.BridgeRedirectMap` — 不再需要
+- `CodeGenStage` BridgeRedirectMap = null — 移除
+- `FullAssemblyEmitter.bridgeRedirectMap` 参数 — 移除
+- `ConvertToCppHandler` bridgeRedirectMap 传递 — 移除
+
+### 构建管线清理
+
+`build.py` 在 TPG 前自动清理残留 `bridge-redirect.generated.cpp`，
+防止 C1083 (missing chaos/chaos.h) 错误。
 
 ## Phase 3: Hephaestus Lib 实现
 
-### hot_cache.py
+### hephaestus_cache.py
 
 `verification/stages/hephaestus_cache.py` 提供基于输入哈希的构建缓存：
 
@@ -179,3 +228,23 @@ Gold Direct Link 将相同的直接调用机制扩展到 **任意跨 DLL 方法*
 - 输出 `kChaosExternalRuntimeSubjects[]` 中每个 SubjectId
 - 可作为 `--gold-profile` 的输入（手动筛选热点方法后）
 - 未来：添加调用计数跟踪（`kChaosExternalRuntimeCallCount[]`）支持阈值过滤
+
+## 已知限制
+
+| 限制 | 根因 | 影响 | 缓解措施 |
+|------|------|------|---------|
+| 401/500 方法无 AOT body | BridgeAOT 禁用后，跨 DLL 方法走 Demeter Table stub | 仅 99 个主题方法有 C++ 编译体 | 预期行为，stub 在运行时通过 Demeter Table 解析 |
+| `entry.exe` 默认模式 segfault | `CHAOS_FACT_RESET()` 通过外部运行时表调用，未解析条目为 nullptr | 直接运行 `entry.exe` 崩溃 | 管线始终使用 `--fact-json`，绕过默认模式 |
+| MSVC C2712 | JIT pipeline commit 引入 `__try/__except` + C++ lambda 混合 | AOT 构建失败 | 提取 `FactDispatchWorker` + `FactAbortHandler` 已修复 |
+| Hotupdate 0 passed | `RunHotpatchAll` dispatch 正确但 post-processing 解析有问题 | hotupdate 基线显示 0/?? | Dispatch 已修复为 per-method `__try/__except`，管线解析待修复 |
+| 4 个 fact 失败 (methodIndex 164-167) | `AppDomain.CreateInstanceFromAndUnwrap` 反射 stub 限制 | 95/99 通过 | 预存限制，非 LCAC 引入 |
+| `AssertionException` 类型不在 closure 中 | `catch` 类型不在 instruction-level 引用中 | 部分 Catch type 的 MethodTable 缺失 | 已增加 ExceptionRegion catch type 收集 |
+
+## 回退方案
+
+如需临时恢复 BridgeAOT:
+1. 恢复 `BridgeAotCompiler.cs` 和 `IlBytecodeDecoder.cs` (git checkout)
+2. 将 `CodeGenStage.cs` 的 `BridgeRedirectMap = null` 改回 BridgeAOT 调用
+3. 还原 `ExternalRuntimeHelpers.cs` 的 catch-all stub 生成
+4. 移除 TPG 模板中的 Hephaestus Lib 段落
+5. 恢复 `ManagedClosureResult.BridgeRedirectMap`
