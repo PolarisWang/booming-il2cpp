@@ -3,6 +3,18 @@
   "max_entries": 50,
   "entries": [
     {
+      "cache_key": "System.Text.Json/text-json/483f2a91dcdcba42",
+      "assembly": "System.Text.Json",
+      "chunk_slug": "text-json",
+      "input_hash": "483f2a91dcdcba424240f1ff3c9c26c323506d68b590875334abb14d61a9b8a0",
+      "cached_at": "2026-06-08T05:47:26Z",
+      "duration_ms": 63453,
+      "commit_hash": "255e36fb0",
+      "entry_exe_size": 9309184,
+      "entry_count": 367,
+      "status": "valid"
+    },
+    {
       "cache_key": "System.Text.Json/global-ns/e026d1d430acb6c2",
       "assembly": "System.Text.Json",
       "chunk_slug": "global-ns",

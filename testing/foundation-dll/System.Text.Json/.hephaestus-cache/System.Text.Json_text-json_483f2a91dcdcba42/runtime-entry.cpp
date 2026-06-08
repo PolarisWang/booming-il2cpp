@@ -79,12 +79,9 @@ extern "C" void* (*ChaosBridgeRedirect)(const char* subjectId) = nullptr;
 // In JIT mode, direct_ptr is REPLACED by RegisterJitEntryMethods() with
 // JIT precode trampoline → JIT compilation → hang. Use kDefaultArgThunks
 // to call AOT function body directly (verification tests AOT codegen).
-{{ if is_jit }}
-extern "C" void (*kDefaultArgThunks[])() noexcept;
-#define CHAOS_USE_DEFAULT_THUNKS kDefaultArgThunks
-{{ else }}
+
 #define CHAOS_USE_DEFAULT_THUNKS nullptr
-{{ end }}
+
 
 // Benchmark result struct (must match verification_dispatch.generated.cpp)
 struct BenchmarkResult {
@@ -138,83 +135,7 @@ extern "C" void RunMicrobench();
 // Hotupdate benchmark iteration count (set by --benchmark-iterations in main)
 static int g_benchmark_iterations = 0;
 
-{{ if is_jit }}
-extern "C" void ChaosJitRegisterAll();
-extern "C" const HotpatchModuleV0* chaos_il2cpp_aot_hotpatch_module;
 
-#if defined(_WIN32)
-#include <windows.h>
-//
-// VEH: log + skip crashes in JIT-code pages (MEM_PRIVATE VirtualAlloc).
-// This prevents chaos_codegen.dll's internal __except from catching the
-// crash (which itself crashes, burning ~10KB stack per event).  By handling
-// in the VEH, frame-based handlers (including chaos_codegen.dll's) never
-// fire, eliminating cumulative stack exhaustion from repeated null-deref
-// benchmark iterations.
-//
-static LONG CALLBACK JitVehHandler(PEXCEPTION_POINTERS ExceptionInfo) noexcept {
-    auto* ctx = ExceptionInfo->ContextRecord;
-    auto* er = ExceptionInfo->ExceptionRecord;
-
-    // Throttle: if the same RIP crashes repeatedly, the skip isn't working.
-    // Stop trying after N consecutive crashes at the same RIP to avoid
-    // infinite crash → skip → crash loops.
-    static void* s_last_rip = nullptr;
-    static int s_same_rip_count = 0;
-    if (s_last_rip == reinterpret_cast<void*>(ctx->Rip)) {
-        s_same_rip_count++;
-    } else {
-        s_last_rip = reinterpret_cast<void*>(ctx->Rip);
-        s_same_rip_count = 0;
-    }
-    if (s_same_rip_count >= 3) {
-        std::fprintf(stderr, "JIT ABORT: crash at RIP=%p repeated %d times — giving up\n",
-                     reinterpret_cast<void*>(ctx->Rip), s_same_rip_count);
-        std::fflush(stderr);
-        return EXCEPTION_CONTINUE_SEARCH;
-    }
-
-    // Log
-    // For ACCESS_VIOLATION in JIT code, fall through to __try/__except
-    // so benchmark loop skips the crashing method and continues.
-    if (er->ExceptionCode == STATUS_ACCESS_VIOLATION) {
-        return EXCEPTION_CONTINUE_SEARCH;
-    }
-
-    std::fprintf(stderr,
-        "JIT CRASH: Code=0x%08lX RIP=0x%p RSP=0x%p"
-        " RAX=0x%p RBX=0x%p RCX=0x%p RDX=0x%p RSI=0x%p RDI=0x%p"
-        " R8=0x%p R9=0x%p R10=0x%p R11=0x%p R12=0x%p R13=0x%p R14=0x%p R15=0x%p"
-        " nprm=%lu\n",
-        er->ExceptionCode,
-        (void*)ctx->Rip, (void*)ctx->Rsp,
-        (void*)ctx->Rax, (void*)ctx->Rbx,
-        (void*)ctx->Rcx, (void*)ctx->Rdx,
-        (void*)ctx->Rsi, (void*)ctx->Rdi,
-        (void*)ctx->Rbp,
-        (void*)ctx->R8, (void*)ctx->R9,
-        (void*)ctx->R10, (void*)ctx->R11,
-        (void*)ctx->R12, (void*)ctx->R13,
-        (void*)ctx->R14, (void*)ctx->R15,
-        er->NumberParameters);
-    for (uint16_t i = 0; i < er->NumberParameters && i < 15; ++i) {
-        std::fprintf(stderr, "  param[%u]=0x%p\n", i, (void*)er->ExceptionInformation[i]);
-    }
-    std::fflush(stderr);
-
-    // If RIP is in a MEM_PRIVATE page (JIT-code VirtualAlloc), skip the
-    // faulting instruction and continue execution.  This bypasses all
-    // frame-based handlers (including chaos_codegen.dll's crashing __except).
-    MEMORY_BASIC_INFORMATION mbi;
-    if (VirtualQuery(reinterpret_cast<LPCVOID>(ctx->Rip), &mbi, sizeof(mbi)) &&
-        mbi.State == MEM_COMMIT && mbi.Type == MEM_PRIVATE) {
-        ctx->Rip += 3;
-        return EXCEPTION_CONTINUE_EXECUTION;
-    }
-    return EXCEPTION_CONTINUE_SEARCH;
-}
-#endif
-{{ end }}
 
 static chaos::il2cpp::runtime_core::PatchContext* ApplyHotpatchIfAvailable() {
     if (kPatchDataSize > 0u) {
@@ -384,9 +305,7 @@ void* g_fact_veh = AddVectoredExceptionHandler(1, FactVehHandler);
         printf("]}\n");
         std::fflush(stdout);
         ((void)0);
-{{ if is_jit }}
-        RemoveVectoredExceptionHandler(g_fact_veh);
-{{ end }}
+
         return 0;
     return 0;
 }
@@ -420,13 +339,7 @@ static int RunFactJsonMode() {
 
 #if defined(_WIN32)
     CHAOS_FACT_RESET();
-{{ if is_jit }}
-{{ if is_jit }}
-{{ if is_jit }}
-    void* g_fact_veh = AddVectoredExceptionHandler(1, FactVehHandler);
-{{ end }}
-{{ end }}
-{{ end }}
+
     // Use a worker thread with 300s timeout so a hanging dispatch (infinite
     // loop, deadlock) doesn't block the process forever.  On timeout the
     // process is killed; whatever was flushed to stdout is the partial result.
@@ -1176,15 +1089,7 @@ int main(int argc, char* argv[]) {
         }
     }
 
-{{ if is_jit }}
-#if defined(_WIN32)
-    AddVectoredExceptionHandler(1, JitVehHandler);  // logs crash, falls through to __except
-#endif
-    if (chaos_il2cpp_aot_hotpatch_module != nullptr) {
-        chaos::il2cpp::runtime_core::RegisterHotpatchModule(chaos_il2cpp_aot_hotpatch_module);
-    }
-    ChaosJitRegisterAll();
-{{ end }}
+
 
     int ret = 0;
     if (argc < 2) { ret = RunFactMode(); goto shutdown; }

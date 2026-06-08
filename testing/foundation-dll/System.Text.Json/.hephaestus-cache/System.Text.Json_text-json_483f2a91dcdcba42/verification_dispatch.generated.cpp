@@ -25,22 +25,21 @@ extern "C" int32_t GetHotpatchEntryCount() noexcept;
 // JIT mode: use kDefaultArgThunks to bypass JIT precode trampoline.
 // AOT mode: nullptr falls through to entry.direct_ptr (hotpatch-aware).
 
-extern "C" void (*kDefaultArgThunks[])() noexcept;
-#define CHAOS_DISPATCH_THUNKS kDefaultArgThunks
+#define CHAOS_DISPATCH_THUNKS nullptr
 
 
 // ── RunFactAll: dispatch ALL methods across ALL registered modules ────
 extern "C" CHAOS_IL2CPP_INT32 RunFactAll() {
     chaos_gc_enter_no_gc_region();
 
-    // JIT mode: use subject-slot iteration to skip intrinsic stubs
+    // AOT mode: per-method dispatch with __try/__except (skip missing AOT bodies)
     auto* entries = GetHotpatchEntries();
     CHAOS_IL2CPP_INT32 failures = 0;
     for (int32_t si = 0; si < kSubjectEntryCount; si++) {
         int32_t i = kSubjectSlotMap[si];
-        try {
+        __try {
             ChaosDispatchMethod(entries, kAotMethodCount, i, CHAOS_DISPATCH_THUNKS);
-        } catch(...) {
+        } __except(EXCEPTION_EXECUTE_HANDLER) {
             ++failures;
         }
     }
@@ -101,9 +100,9 @@ extern "C" CHAOS_IL2CPP_INT32 RunHotpatchAll() {
     CHAOS_IL2CPP_INT32 failures = 0;
     for (int32_t si = 0; si < kSubjectEntryCount; si++) {
         int32_t i = kSubjectSlotMap[si];
-        try {
+        __try {
             ChaosDispatchMethod(entries, kAotMethodCount, i, CHAOS_DISPATCH_THUNKS);
-        } catch(...) {
+        } __except(EXCEPTION_EXECUTE_HANDLER) {
             ++failures;
         }
     }

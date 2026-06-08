@@ -195,6 +195,9 @@ static chaos::il2cpp::runtime_core::PatchContext* ApplyHotpatchFromFile(const ch
 // Used by RunFactMode and the JIT dispatch worker thread.
 static void FactAbortHandler(int);
 
+// Forward declaration for SIGABRT handler (used by RunFactMode, RunHotupdateMode)
+static void FactAbortHandler(int);
+
 static int RunFactMode() {
 #if defined(_WIN32)
     signal(SIGABRT, FactAbortHandler);

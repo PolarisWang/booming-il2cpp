@@ -393,7 +393,7 @@ if (allTypes)
             TotalMethods: globalIdx,
             FactMethodCount: uniqueFactSubjectIds,
             CustomEntryIndices: customEntryIndices.Count > 0 ? customEntryIndices : null,
-            BenchmarkMethodIndices: benchmarkMethodIndices.Count > 0 ? benchmarkMethodIndices : null,
+            BenchmarkMethodIndices: benchmarkMethodIndices,
             HotupdateMethodIndices: hotupdateMethodIndices.Count > 0 ? hotupdateMethodIndices : null,
             Methods: methodEntries);
 

@@ -2929,7 +2929,7 @@ private void EmitLinearInitObj(StringBuilder builder, AotCoreIrInstructionArtifa
 		}
 		else if (invocationTarget.ExternalRuntimeTableIndex >= 0 || invocationTarget.DirectNativeSymbol != null)
 		{
-			EmitExternalRuntimeTableDispatch(builder, invocationTarget, indentation, enforceInstanceNullCheck);
+			EmitExternalRuntimeTableDispatch(builder, invocationTarget, indentation, enforceInstanceNullCheck, instruction);
 		}
 		else
 		{
@@ -4124,7 +4124,7 @@ private void EmitLinearInitObj(StringBuilder builder, AotCoreIrInstructionArtifa
 		stringBuilder6.AppendLine(ref handler);
 	}
 
-	private void EmitExternalRuntimeTableDispatch(StringBuilder builder, InvocationTarget invocationTarget, string indentation, bool enforceInstanceNullCheck)
+	private void EmitExternalRuntimeTableDispatch(StringBuilder builder, InvocationTarget invocationTarget, string indentation, bool enforceInstanceNullCheck, AotCoreIrInstructionArtifact? instruction = null)
 	{
 		string returnType = MapAbiSlotReturnType(invocationTarget.ReturnAbi);
 		string paramTypes = FormatAbiSlotParameterTypes(invocationTarget.ParameterAbis);
@@ -4146,7 +4146,14 @@ private void EmitLinearInitObj(StringBuilder builder, AotCoreIrInstructionArtifa
 					? $"{indentation}    const auto chaos_arg_{i} = {rawExpr};"
 					: $"{indentation}    const auto chaos_arg_{i} = {FormatInboundAbiArgumentExpression(invocationTarget.ParameterAbis[i], $"chaos_raw_arg_{i}")};");
 			}
-			string directNativeArgs = FormatAbiInvocationArgumentList(invocationTarget.ParameterAbis);
+							if (enforceInstanceNullCheck && invocationTarget.ParameterAbis.Count > 0)
+				{
+				    builder.AppendLine(indentation + "    if (chaos_arg_0 == 0)");
+				    builder.AppendLine(indentation + "    {");
+				    builder.AppendLine(indentation + "        ::chaos::il2cpp::runtime_core::RaiseNullReferenceException();");
+				    builder.AppendLine(indentation + "    }");
+				}
+				string directNativeArgs = FormatAbiInvocationArgumentList(invocationTarget.ParameterAbis);
 			string nativeCtxArg = "";
 			if (_sharedContextSymbols.Contains(nativeSymbol))
 			{
@@ -4202,6 +4209,16 @@ private void EmitLinearInitObj(StringBuilder builder, AotCoreIrInstructionArtifa
 		    builder.AppendLine(indentation + "    {");
 		    builder.AppendLine(indentation + "        ::chaos::il2cpp::runtime_core::RaiseNullReferenceException();");
 		    builder.AppendLine(indentation + "    }");
+		}
+		else if (enforceInstanceNullCheck && instruction?.Op is "callvirt" or "call")
+		{
+		    // External runtime dispatch with no DirectNativeSymbol: the stub takes
+		    // void() args so ParameterAbis is empty.  Pop 'this' from eval stack
+		    // and check for null before calling the sentinel stub.
+		    var nullThisExpr = ConsumeEvalStackValueExpression();
+		    builder.AppendLine($"{{indentation}}    if (auto chaos_null_this = {nullThisExpr})");
+		    builder.AppendLine($"{{indentation}}    {{");
+
 		}
 		string args = FormatAbiInvocationArgumentList(invocationTarget.ParameterAbis);
 		// BS-5: Validate external runtime table index before dispatch.

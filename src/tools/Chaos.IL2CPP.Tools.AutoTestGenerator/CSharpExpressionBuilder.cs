@@ -128,6 +128,15 @@ public sealed class CSharpExpressionBuilder
         ["System.Globalization.ChineseLunisolarCalendar"] = "new System.Globalization.ChineseLunisolarCalendar()",
     };
 
+    // Types with a static `Shared` property that returns a valid instance.
+    // Using Shared instead of default(Type)! avoids NullReferenceException
+    // when calling instance methods (e.g. ArrayPool<Int32>.Shared.Rent(0)).
+    // The key is matched as a prefix (before `<` for generic types).
+    private static readonly Dictionary<string, string> SharedInstanceTypes = new(StringComparer.Ordinal)
+    {
+        ["System.Buffers.ArrayPool"] = ".Shared",
+    };
+
     /// <summary>
     /// Describes how to construct an instance of a known type.
     /// </summary>
@@ -186,11 +195,20 @@ public sealed class CSharpExpressionBuilder
         if (factoryResult is not null)
             return factoryResult;
 
-        // For types with namespace qualification (dots in the assembly-stripped name),
-        // use global:: prefix to guarantee resolution regardless of namespace context.
+        // For types with namespace qualification, use global:: prefix.
         var qualified = CSharpSerializer.StripAssemblyQualification(typeFullName);
         if (qualified.Contains('.'))
+        {
+            // Check SharedInstanceTypes before falling back to default.
+            // Include generic type arguments so e.g. ArrayPool<System.Int32>.Shared works.
+            var baseName = qualified.Contains('<') ? qualified[..qualified.IndexOf('<')] : qualified;
+            if (SharedInstanceTypes.TryGetValue(baseName, out var sharedSuffix))
+            {
+                var gaPart = qualified.Contains('<') ? qualified[qualified.IndexOf('<')..] : "";
+                return $"global::{baseName}{gaPart}{sharedSuffix}";
+            }
             return $"default(global::{qualified.Replace('+', '.')})!";
+        }
 
         // Try to find a parameterless constructor via runtime reflection
         try
