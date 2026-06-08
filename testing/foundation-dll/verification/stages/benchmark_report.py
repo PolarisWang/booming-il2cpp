@@ -170,32 +170,38 @@ def _build_method_comparison(
             if pct_net10 is not None:
                 all_net10_pcts.append(pct_net10)
 
-            # ── GC comparison: net8 gcInfo vs chaos-aot profile ──
-            # Moved outside the timing comparison block so throwing methods
-            # still get gcComparison data (with null/0 values).
-            net8_gi = _get_gcinfo(net8_rec)
-            chaos_profile = _find_profile(profile_data, msid) if profile_data else None
-            if net8_gi:
-                gc_comp: dict[str, Any] = {
-                    "net8AllocBytes": net8_gi.get("totalAllocatedBytes"),
-                    "net8CollectionCount0": net8_gi.get("collectionCount0"),
-                    "net8HeapDelta": net8_gi.get("heapDelta"),
-                }
-                if chaos_profile:
-                    gc_comp["chaosAotGcPauseNs"] = chaos_profile.get("gcPauseNs", 0)
-                    gc_comp["chaosAotAllocBytes"] = chaos_profile.get("nurseryAllocBytes", 0)
-                    gc_comp["chaosAotFastPathRate"] = _fast_path_rate(chaos_profile)
-                    alloc_pct = _compare_alloc(
-                        net8_gi.get("totalAllocatedBytes"),
-                        chaos_profile.get("nurseryAllocBytes"),
-                    )
-                    if alloc_pct is not None:
-                        gc_comp["aotAllocVsNet8Pct"] = alloc_pct
-                        all_alloc_ratios.append(alloc_pct)
-                        methods_with_alloc_data += 1
-                method_entry["gcComparison"] = gc_comp
-
         else:
+            method_entry.update({
+                "net10VsNet8Pct": None,
+                "chaosAotVsNet8Pct": None,
+                "chaosJitVsNet8Pct": None,
+                "status": "missing_net8" if net8_rec is None else "net8_error",
+            })
+
+        # ── GC comparison: net8 gcInfo vs chaos-aot profile ──
+        # Runs for ALL methods (including errors) so throwing
+        # methods still get gcComparison with pre-throw gcInfo.
+        net8_gi = _get_gcinfo(net8_rec)
+        chaos_profile = _find_profile(profile_data, msid) if profile_data else None
+        if net8_gi:
+            gc_comp = {
+                "net8AllocBytes": net8_gi.get("totalAllocatedBytes"),
+                "net8CollectionCount0": net8_gi.get("collectionCount0"),
+                "net8HeapDelta": net8_gi.get("heapDelta"),
+            }
+            if chaos_profile:
+                gc_comp["chaosAotGcPauseNs"] = chaos_profile.get("gcPauseNs", 0)
+                gc_comp["chaosAotAllocBytes"] = chaos_profile.get("nurseryAllocBytes", 0)
+                gc_comp["chaosAotFastPathRate"] = _fast_path_rate(chaos_profile)
+                alloc_pct = _compare_alloc(
+                    net8_gi.get("totalAllocatedBytes"),
+                    chaos_profile.get("nurseryAllocBytes"),
+                )
+                if alloc_pct is not None:
+                    gc_comp["aotAllocVsNet8Pct"] = alloc_pct
+                    all_alloc_ratios.append(alloc_pct)
+                    methods_with_alloc_data += 1
+            method_entry["gcComparison"] = gc_comp
             method_entry.update({
                 "net10VsNet8Pct": None,
                 "chaosAotVsNet8Pct": None,
