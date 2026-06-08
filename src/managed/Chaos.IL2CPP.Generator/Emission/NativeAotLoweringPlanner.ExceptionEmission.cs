@@ -4210,15 +4210,16 @@ private void EmitLinearInitObj(StringBuilder builder, AotCoreIrInstructionArtifa
 		    builder.AppendLine(indentation + "        ::chaos::il2cpp::runtime_core::RaiseNullReferenceException();");
 		    builder.AppendLine(indentation + "    }");
 		}
-		else if (enforceInstanceNullCheck && instruction?.Op is "callvirt" or "call")
+		else if (enforceInstanceNullCheck && (string.Equals(instruction?.Op, "callvirt", StringComparison.Ordinal) || string.Equals(instruction?.Op, "call", StringComparison.Ordinal) || string.Equals(instruction?.Op, "calli", StringComparison.Ordinal)))
 		{
 		    // External runtime dispatch with no DirectNativeSymbol: the stub takes
 		    // void() args so ParameterAbis is empty.  Pop 'this' from eval stack
 		    // and check for null before calling the sentinel stub.
-		    var nullThisExpr = ConsumeEvalStackValueExpression();
-		    builder.AppendLine($"{{indentation}}    if (auto chaos_null_this = {nullThisExpr})");
-		    builder.AppendLine($"{{indentation}}    {{");
-
+			var nullThisExpr = ConsumeEvalStackValueExpression();
+		    builder.AppendLine(indentation + "    if (" + nullThisExpr + " == 0)");
+		    builder.AppendLine(indentation + "    {");
+		    builder.AppendLine(indentation + "        ::chaos::il2cpp::runtime_core::RaiseNullReferenceException();");
+		    builder.AppendLine(indentation + "    }");
 		}
 		string args = FormatAbiInvocationArgumentList(invocationTarget.ParameterAbis);
 		// BS-5: Validate external runtime table index before dispatch.
