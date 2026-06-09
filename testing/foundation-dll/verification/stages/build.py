@@ -817,6 +817,7 @@ def run_build(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
     # Written unconditionally (even if entry.exe exists from cache),
     # because the cmake build will reconfigure and needs them.
     _ase = ctx.native_dir / "chaos_assert_stubs.cpp"
+    print(f"  [build] DEBUG assert stub path: {_ase}")
     if not _ase.exists():
         _ase.write_text(
             '// Auto-generated assert stubs\n'
