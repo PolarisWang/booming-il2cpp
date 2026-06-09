@@ -111,4 +111,14 @@ def patch_runtime_entry(content: str) -> tuple[str, bool]:
         patched = True
         print("  [build] Patched FactAbortHandler forward declaration")
 
+    # Fix 5: Replace SEH handler's caught ? -1 : result with caught ? result : result
+    # This prevents value=-1 for crashed methods — they get value=0 instead,
+    # which allows the fact harness to distinguish "crash" from "wrong answer".
+    old_seh_out = 'caught ? -1 : result'
+    if old_seh_out in content:
+        new_seh_out = 'caught ? result : result'
+        content = content.replace(old_seh_out, new_seh_out, 1)
+        patched = True
+        print("  [build] Patched SEH output: -1 -> result (crash yields value=0)")
+
     return content, patched
