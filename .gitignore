@@ -386,3 +386,25 @@ tests/managed/Chaos.IL2CPP.CodeGen.Tests/coverage*.cobertura.*
 # CMake-generated project files (unordered_dense build)
 build/native-runtime/unordered_dense_build/*.vcxproj
 build/native-runtime/unordered_dense_build/*.vcxproj.filters
+
+# Generated test subjects DLLs (rebuilt every pipeline run)
+testing/foundation-dll/**/managed/subjects*/*.dll
+testing/foundation-dll/**/managed/subjects*/*.exe
+
+# Generated codegen page files (regenerated every codegen run)
+testing/foundation-dll/**/native/subjects/native-aot.generated.page*.cpp
+testing/foundation-dll/**/native/subjects/native-aot.page-*.cpp
+
+# Hephaestus build cache
+testing/foundation-dll/**/.hephaestus-cache/
+
+# JIT build output
+testing/foundation-dll/**/build_jit_output/
+
+# Temp debug scripts and logs
+testing/foundation-dll/fix_*.py
+testing/foundation-dll/D:*_stderr.txt
+testing/foundation-dll/D:*_stdout.txt
+
+# Root-level native build artifacts
+native-build/
