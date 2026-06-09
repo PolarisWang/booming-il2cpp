@@ -1068,7 +1068,7 @@ public sealed partial class NativeAotLoweringPlanner
             var ilSb = new System.Text.StringBuilder(65536);
             ilSb.AppendLine();
             ilSb.AppendLine("// ── Embedded IL Data for Interpreter Fallback ────────────────");
-            ilSb.AppendLine("extern "C" int32_t kChaosExternalRuntimeIlCount;;");  // forward decl
+            ilSb.AppendLine("extern \"C\" int32_t kChaosExternalRuntimeIlCount;");  // forward decl
 
             for (int i = 0; i < entriesByIndex.Length; i++)
             {
@@ -1086,12 +1086,12 @@ public sealed partial class NativeAotLoweringPlanner
             }
 
             ilSb.AppendLine();
-            ilSb.AppendLine("extern "C" ChaosIlDataEntry kChaosExternalRuntimeIlData[] = {");
+            ilSb.AppendLine("extern \"C\" ChaosIlDataEntry kChaosExternalRuntimeIlData[] = {");
             for (int i = 0; i < entriesByIndex.Length; i++)
             {
                 if (ilBytes[i] == null) continue;
                 string sid = entriesByIndex[i].Key;
-                ilSb.AppendLine("    { "" + Chaos.IL2CPP.Generator.ManagedNaming.EscapeCppStringLiteral(sid) + "", s_il_" + i + ", sizeof(s_il_" + i + "), nullptr, nullptr },");
+                ilSb.AppendLine($"    {{ \"{EscapeCppStringLiteral(sid)}\", s_il_{i}, sizeof(s_il_{i}), nullptr, nullptr }},");
             }
             ilSb.AppendLine("    { nullptr, nullptr, 0, nullptr, nullptr }");
             ilSb.AppendLine("};");
