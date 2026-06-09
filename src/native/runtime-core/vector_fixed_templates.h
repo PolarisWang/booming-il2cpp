@@ -9,6 +9,14 @@
 #include "numerics_carriers.h"
 #include <runtime_core.h>  // GetCurrentRuntimeState, GetRuntimeAbiV0
 
+// windows.h max/min macros conflict with std::numeric_limits::max/min
+#ifdef max
+#undef max
+#endif
+#ifdef min
+#undef min
+#endif
+
 namespace chaos::il2cpp::vector_fixed {
 
 // Bring carrier types into scope for MSVC two-phase lookup inside templates.

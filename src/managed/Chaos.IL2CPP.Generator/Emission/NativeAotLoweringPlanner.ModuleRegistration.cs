@@ -995,8 +995,112 @@ public sealed partial class NativeAotLoweringPlanner
             ["entries"] = entryModels,
         };
 
-        return ScribanTemplateRenderer.RenderTemplate(
+        var tableResult = ScribanTemplateRenderer.RenderTemplate(
             NativeAotTemplateCatalog.GetExternalRuntimeDispatchTableTemplate(), model);
+
+        // Append IL data table for interpreter fallback (Phase 3)
+        var hasIlData = false;
+        var ilBytes = new byte[entriesByIndex.Length][];
+        for (int i = 0; i < entriesByIndex.Length; i++)
+        {
+            string sid = entriesByIndex[i].Key;
+            try
+            {
+                int slashIdx = sid.IndexOf('/');
+                if (slashIdx > 0)
+                {
+                    string assemblyName = sid.Substring(0, slashIdx);
+                    string? rtDir = System.IO.Path.GetDirectoryName(typeof(object).Assembly.Location);
+                    if (rtDir != null)
+                    {
+                        string dllPath = System.IO.Path.Combine(rtDir, assemblyName + ".dll");
+                        if (System.IO.File.Exists(dllPath))
+                        {
+                            using var peReader = new System.Reflection.PortableExecutable.PEReader(
+                                System.IO.File.OpenRead(dllPath));
+                            if (peReader.HasMetadata)
+                            {
+                                var md = peReader.GetMetadataReader();
+                                // Find type+method matching SubjectId
+                                int methodSep = sid.IndexOf("::");
+                                if (methodSep > 0)
+                                {
+                                    string typePart = sid.Substring(slashIdx + 1, methodSep - slashIdx - 1);
+                                    string methodNameOnly = sid.Substring(methodSep + 2);
+                                    int colon = methodNameOnly.IndexOf(':');
+                                    if (colon > 0) methodNameOnly = methodNameOnly.Substring(0, colon);
+                                    int paren = methodNameOnly.IndexOf('(');
+                                    if (paren > 0) methodNameOnly = methodNameOnly.Substring(0, paren);
+
+                                    foreach (var td in md.TypeDefinitions)
+                                    {
+                                        var tdef = md.GetTypeDefinition(td);
+                                        if (md.GetString(tdef.Name) == "<Module>") continue;
+                                        string ns = tdef.Namespace.IsNil ? "" : md.GetString(tdef.Namespace);
+                                        string tn = md.GetString(tdef.Name);
+                                        string fullName = string.IsNullOrEmpty(ns) ? tn : ns + "." + tn;
+                                        if (fullName != typePart) continue;
+
+                                        foreach (var mh in tdef.GetMethods())
+                                        {
+                                            var mdef = md.GetMethodDefinition(mh);
+                                            string mn = md.GetString(mdef.Name);
+                                            if (mn != methodNameOnly || mdef.RelativeVirtualAddress == 0) continue;
+                                            var bodyBlock = peReader.GetMethodBody(mdef.RelativeVirtualAddress);
+                                            var ilReader = bodyBlock.GetILReader();
+                                            ilBytes[i] = ilReader.ReadBytes(ilReader.RemainingBytes);
+                                            hasIlData = true;
+                                            break;
+                                        }
+                                        break;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            catch { }
+        }
+
+        if (hasIlData)
+        {
+            var ilSb = new System.Text.StringBuilder(65536);
+            ilSb.AppendLine();
+            ilSb.AppendLine("// ── Embedded IL Data for Interpreter Fallback ────────────────");
+            ilSb.AppendLine("extern "C" int32_t kChaosExternalRuntimeIlCount;;");  // forward decl
+
+            for (int i = 0; i < entriesByIndex.Length; i++)
+            {
+                if (ilBytes[i] == null) continue;
+                var hex = System.Convert.ToHexString(ilBytes[i]);
+                ilSb.AppendLine("static const uint8_t s_il_" + i + "[] = {");
+                for (int j = 0; j < hex.Length; j += 2)
+                {
+                    if (j % 48 == 0) ilSb.Append("    ");
+                    ilSb.Append("0x" + hex.Substring(j, 2) + ", ");
+                    if (j % 48 == 46) ilSb.AppendLine();
+                }
+                ilSb.AppendLine();
+                ilSb.AppendLine("};");
+            }
+
+            ilSb.AppendLine();
+            ilSb.AppendLine("extern "C" ChaosIlDataEntry kChaosExternalRuntimeIlData[] = {");
+            for (int i = 0; i < entriesByIndex.Length; i++)
+            {
+                if (ilBytes[i] == null) continue;
+                string sid = entriesByIndex[i].Key;
+                ilSb.AppendLine("    { "" + Chaos.IL2CPP.Generator.ManagedNaming.EscapeCppStringLiteral(sid) + "", s_il_" + i + ", sizeof(s_il_" + i + "), nullptr, nullptr },");
+            }
+            ilSb.AppendLine("    { nullptr, nullptr, 0, nullptr, nullptr }");
+            ilSb.AppendLine("};");
+            ilSb.AppendLine();
+
+            tableResult += ilSb.ToString();
+        }
+
+        return tableResult;
     }
 
     private static uint ComputeAbiManifestChecksum(IReadOnlyList<AotCoreIrMethodArtifact> reachableMethods)

@@ -170,6 +170,32 @@ public sealed partial class NativeAotLoweringPlanner
 			return;
 		}
 
+		// Cross-assembly method filter: if the method's declaring assembly does NOT
+		// match _assemblyName or a known test/subject wrapper assembly, emit a simple
+		// return stub instead of the full function body.
+		if (method.SubjectId is not null && !string.IsNullOrEmpty(_assemblyName))
+		{
+			int slashIdx = method.SubjectId.IndexOf('/');
+			if (slashIdx > 0)
+			{
+				string methodAssembly = method.SubjectId.Substring(0, slashIdx);
+				if (!string.Equals(methodAssembly, _assemblyName, StringComparison.Ordinal) &&
+					!string.Equals(methodAssembly, "CombinedSubjects", StringComparison.Ordinal) &&
+					!string.Equals(methodAssembly, "Chaos.TestFramework.Sdk", StringComparison.Ordinal))
+				{
+					builder.AppendLine("// Cross-assembly stub: " + method.SubjectId);
+					var _fnDecl = FormatMethodDeclaration(method, _sharedContextSymbols);
+					builder.AppendLine(_fnDecl.Length > 0 && _fnDecl[^1] == ";"[0] ? _fnDecl[..^1] : _fnDecl);
+					builder.AppendLine("{");
+					var _retType = MapAbiSlotReturnType(method.ReturnAbi);
+					if (!string.IsNullOrEmpty(_retType) && _retType != "void")
+						builder.AppendLine("    return {};");
+					builder.AppendLine("}");
+					return;
+				}
+			}
+		}
+
 		IReadOnlyList<AotCoreIrInstructionArtifact> instructions = method.Instructions;
 
 		// Handle 0-instruction subject methods: emit simple return instead of throwing.

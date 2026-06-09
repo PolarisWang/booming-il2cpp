@@ -15,6 +15,7 @@
 #include "runtime_stubs/stub_common.h"
 #include "runtime_stubs/crypto_stubs.h"
 #include "runtime_core.h"
+#include <chaos/pal/pal_random.h>
 
 #pragma comment(lib, "bcrypt.lib")
 
@@ -43,7 +44,7 @@ void ChaosCngFillRandom(CHAOS_IL2CPP_INTPTR buffer, CHAOS_IL2CPP_INT32 offset, C
                                       BCRYPT_USE_SYSTEM_PREFERRED_RNG);
     if (!ChaosCngOk(status)) {
         // Fallback: PAL random
-        chaos::il2cpp::pal::PalRandomFill(data + offset, static_cast<size_t>(count));
+        chaos::il2cpp::pal::PalRandomBytes(data + offset, static_cast<size_t>(count));
     }
 }
 
