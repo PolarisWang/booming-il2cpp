@@ -81,7 +81,7 @@ static CHAOS_IL2CPP_INTPTR ChaosCngHash(
     BCRYPT_HASH_HANDLE hHash = nullptr;
     status = BCryptCreateHash(hAlg, &hHash, hashObj.get(), hashObjSize, nullptr, 0, 0);
     if (ChaosCngOk(status)) {
-        status = BCryptHashData(hHash, const_cast<PUCHAR>(inData),
+        status = BCryptHashData(hHash, (PUCHAR)(inData),
             static_cast<ULONG>(inArr->length * sizeof(CHAOS_IL2CPP_INTPTR)), 0);
         if (ChaosCngOk(status)) {
             status = BCryptFinishHash(hHash, hashBuf.get(), hashLen, 0);
@@ -147,8 +147,8 @@ CHAOS_IL2CPP_INTPTR ChaosHmacSha256(
 
     auto buf = std::make_unique<UCHAR[]>(hashLen);
     status = BCryptHash(hAlg,
-        const_cast<PUCHAR>(keyData), static_cast<ULONG>(keyArr->length * sizeof(CHAOS_IL2CPP_INTPTR)),
-        const_cast<PUCHAR>(dataBuf), static_cast<ULONG>(dataArr->length * sizeof(CHAOS_IL2CPP_INTPTR)),
+        (PUCHAR)(keyData), static_cast<ULONG>(keyArr->length * sizeof(CHAOS_IL2CPP_INTPTR)),
+        (PUCHAR)(dataBuf), static_cast<ULONG>(dataArr->length * sizeof(CHAOS_IL2CPP_INTPTR)),
         buf.get(), hashLen);
 
     BCryptCloseAlgorithmProvider(hAlg, 0);
