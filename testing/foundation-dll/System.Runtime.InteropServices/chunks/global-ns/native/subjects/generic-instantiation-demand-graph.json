@@ -1,0 +1,244 @@
+{
+  "demands": [
+    {
+      "requestingAssemblyName": "Chaos.TestFramework.Sdk",
+      "owningAssemblyName": "System.Collections",
+      "subjectKind": "method",
+      "subjectId": "System.Collections/System.Collections.Generic.EqualityComparer\u003C!!0\u003E::Equals:System.Boolean(!!0,!!0)",
+      "definitionSubjectId": "System.Collections/System.Collections.Generic.EqualityComparer\u00601::Equals:System.Boolean(!0,!0)",
+      "demandSourceKind": "memberReference",
+      "instantiationKey": {
+        "contextKind": 1,
+        "definitionSubjectId": "System.Collections/System.Collections.Generic.EqualityComparer\u00601::Equals:System.Boolean(!0,!0)",
+        "typeArguments": [
+          "!!0"
+        ],
+        "methodArguments": []
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 2,
+      "familyKindCode": 2,
+      "isCrossAssembly": true
+    },
+    {
+      "requestingAssemblyName": "Chaos.TestFramework.Sdk",
+      "owningAssemblyName": "System.Collections",
+      "subjectKind": "method",
+      "subjectId": "System.Collections/System.Collections.Generic.EqualityComparer\u003C!!0\u003E::get_Default:System.Collections.Generic.EqualityComparer\u003C!!0\u003E()",
+      "definitionSubjectId": "System.Collections/System.Collections.Generic.EqualityComparer\u00601::get_Default:System.Collections.Generic.EqualityComparer\u003C!0\u003E()",
+      "demandSourceKind": "memberReference",
+      "instantiationKey": {
+        "contextKind": 1,
+        "definitionSubjectId": "System.Collections/System.Collections.Generic.EqualityComparer\u00601::get_Default:System.Collections.Generic.EqualityComparer\u003C!0\u003E()",
+        "typeArguments": [
+          "!!0"
+        ],
+        "methodArguments": []
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 2,
+      "familyKindCode": 2,
+      "isCrossAssembly": true
+    },
+    {
+      "requestingAssemblyName": "Chaos.TestFramework.Sdk",
+      "owningAssemblyName": "System.Collections",
+      "subjectKind": "method",
+      "subjectId": "System.Collections/System.Collections.Generic.EqualityComparer\u003CSystem.Object\u003E::Equals:System.Boolean(System.Object,System.Object)",
+      "definitionSubjectId": "System.Collections/System.Collections.Generic.EqualityComparer\u00601::Equals:System.Boolean(!0,!0)",
+      "demandSourceKind": "memberReference",
+      "instantiationKey": {
+        "contextKind": 1,
+        "definitionSubjectId": "System.Collections/System.Collections.Generic.EqualityComparer\u00601::Equals:System.Boolean(!0,!0)",
+        "typeArguments": [
+          "System.Object"
+        ],
+        "methodArguments": []
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 1,
+      "familyKindCode": 2,
+      "isCrossAssembly": true
+    },
+    {
+      "requestingAssemblyName": "Chaos.TestFramework.Sdk",
+      "owningAssemblyName": "System.Collections",
+      "subjectKind": "method",
+      "subjectId": "System.Collections/System.Collections.Generic.EqualityComparer\u003CSystem.Object\u003E::get_Default:System.Collections.Generic.EqualityComparer\u003CSystem.Object\u003E()",
+      "definitionSubjectId": "System.Collections/System.Collections.Generic.EqualityComparer\u00601::get_Default:System.Collections.Generic.EqualityComparer\u003C!0\u003E()",
+      "demandSourceKind": "memberReference",
+      "instantiationKey": {
+        "contextKind": 1,
+        "definitionSubjectId": "System.Collections/System.Collections.Generic.EqualityComparer\u00601::get_Default:System.Collections.Generic.EqualityComparer\u003C!0\u003E()",
+        "typeArguments": [
+          "System.Object"
+        ],
+        "methodArguments": []
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 1,
+      "familyKindCode": 2,
+      "isCrossAssembly": true
+    },
+    {
+      "requestingAssemblyName": "CombinedSubjects",
+      "owningAssemblyName": "System.Runtime.InteropServices",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshalling.ComInterfaceMarshaller\u003CSystem.Int32\u003E::ConvertToManaged:System.Int32(System.Void*)",
+      "definitionSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshalling.ComInterfaceMarshaller\u00601::ConvertToManaged:!0(System.Void*)",
+      "demandSourceKind": "memberReference",
+      "instantiationKey": {
+        "contextKind": 1,
+        "definitionSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshalling.ComInterfaceMarshaller\u00601::ConvertToManaged:!0(System.Void*)",
+        "typeArguments": [
+          "System.Int32"
+        ],
+        "methodArguments": []
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 1,
+      "familyKindCode": 2,
+      "isCrossAssembly": true
+    },
+    {
+      "requestingAssemblyName": "CombinedSubjects",
+      "owningAssemblyName": "System.Runtime.InteropServices",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshalling.ComInterfaceMarshaller\u003CSystem.Int32\u003E::ConvertToUnmanaged:System.Void*(System.Int32)",
+      "definitionSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshalling.ComInterfaceMarshaller\u00601::ConvertToUnmanaged:System.Void*(!0)",
+      "demandSourceKind": "memberReference",
+      "instantiationKey": {
+        "contextKind": 1,
+        "definitionSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshalling.ComInterfaceMarshaller\u00601::ConvertToUnmanaged:System.Void*(!0)",
+        "typeArguments": [
+          "System.Int32"
+        ],
+        "methodArguments": []
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 1,
+      "familyKindCode": 2,
+      "isCrossAssembly": true
+    },
+    {
+      "requestingAssemblyName": "CombinedSubjects",
+      "owningAssemblyName": "System.Runtime.InteropServices",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshalling.ComInterfaceMarshaller\u003CSystem.Int32\u003E::Free:System.Void(System.Void*)",
+      "definitionSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshalling.ComInterfaceMarshaller\u00601::Free:System.Void(System.Void*)",
+      "demandSourceKind": "memberReference",
+      "instantiationKey": {
+        "contextKind": 1,
+        "definitionSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshalling.ComInterfaceMarshaller\u00601::Free:System.Void(System.Void*)",
+        "typeArguments": [
+          "System.Int32"
+        ],
+        "methodArguments": []
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 1,
+      "familyKindCode": 2,
+      "isCrossAssembly": true
+    },
+    {
+      "requestingAssemblyName": "CombinedSubjects",
+      "owningAssemblyName": "System.Runtime.InteropServices",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshalling.ExceptionAsDefaultMarshaller\u003CSystem.Int32\u003E::ConvertToUnmanaged:System.Int32(System.Exception)",
+      "definitionSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshalling.ExceptionAsDefaultMarshaller\u00601::ConvertToUnmanaged:!0(System.Exception)",
+      "demandSourceKind": "memberReference",
+      "instantiationKey": {
+        "contextKind": 1,
+        "definitionSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshalling.ExceptionAsDefaultMarshaller\u00601::ConvertToUnmanaged:!0(System.Exception)",
+        "typeArguments": [
+          "System.Int32"
+        ],
+        "methodArguments": []
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 1,
+      "familyKindCode": 2,
+      "isCrossAssembly": true
+    },
+    {
+      "requestingAssemblyName": "CombinedSubjects",
+      "owningAssemblyName": "System.Runtime.InteropServices",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshalling.ExceptionAsHResultMarshaller\u003CSystem.Int32\u003E::ConvertToUnmanaged:System.Int32(System.Exception)",
+      "definitionSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshalling.ExceptionAsHResultMarshaller\u00601::ConvertToUnmanaged:!0(System.Exception)",
+      "demandSourceKind": "memberReference",
+      "instantiationKey": {
+        "contextKind": 1,
+        "definitionSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshalling.ExceptionAsHResultMarshaller\u00601::ConvertToUnmanaged:!0(System.Exception)",
+        "typeArguments": [
+          "System.Int32"
+        ],
+        "methodArguments": []
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 1,
+      "familyKindCode": 2,
+      "isCrossAssembly": true
+    },
+    {
+      "requestingAssemblyName": "CombinedSubjects",
+      "owningAssemblyName": "System.Runtime.InteropServices",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshalling.UniqueComInterfaceMarshaller\u003CSystem.Int32\u003E::ConvertToManaged:System.Int32(System.Void*)",
+      "definitionSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshalling.UniqueComInterfaceMarshaller\u00601::ConvertToManaged:!0(System.Void*)",
+      "demandSourceKind": "memberReference",
+      "instantiationKey": {
+        "contextKind": 1,
+        "definitionSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshalling.UniqueComInterfaceMarshaller\u00601::ConvertToManaged:!0(System.Void*)",
+        "typeArguments": [
+          "System.Int32"
+        ],
+        "methodArguments": []
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 1,
+      "familyKindCode": 2,
+      "isCrossAssembly": true
+    },
+    {
+      "requestingAssemblyName": "CombinedSubjects",
+      "owningAssemblyName": "System.Runtime.InteropServices",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshalling.UniqueComInterfaceMarshaller\u003CSystem.Int32\u003E::ConvertToUnmanaged:System.Void*(System.Int32)",
+      "definitionSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshalling.UniqueComInterfaceMarshaller\u00601::ConvertToUnmanaged:System.Void*(!0)",
+      "demandSourceKind": "memberReference",
+      "instantiationKey": {
+        "contextKind": 1,
+        "definitionSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshalling.UniqueComInterfaceMarshaller\u00601::ConvertToUnmanaged:System.Void*(!0)",
+        "typeArguments": [
+          "System.Int32"
+        ],
+        "methodArguments": []
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 1,
+      "familyKindCode": 2,
+      "isCrossAssembly": true
+    },
+    {
+      "requestingAssemblyName": "CombinedSubjects",
+      "owningAssemblyName": "System.Runtime.InteropServices",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshalling.UniqueComInterfaceMarshaller\u003CSystem.Int32\u003E::Free:System.Void(System.Void*)",
+      "definitionSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshalling.UniqueComInterfaceMarshaller\u00601::Free:System.Void(System.Void*)",
+      "demandSourceKind": "memberReference",
+      "instantiationKey": {
+        "contextKind": 1,
+        "definitionSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshalling.UniqueComInterfaceMarshaller\u00601::Free:System.Void(System.Void*)",
+        "typeArguments": [
+          "System.Int32"
+        ],
+        "methodArguments": []
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 1,
+      "familyKindCode": 2,
+      "isCrossAssembly": true
+    }
+  ]
+}

@@ -14,7 +14,7 @@ if(MSVC)
 else()
   add_compile_options(-Wall -Wextra -Wno-unused-parameter)
   set(CHAOS_EHA_FLAG -fexceptions)
-  set(CHAOS_FORCE_MULTIPLE "")
+  set(CHAOS_FORCE_MULTIPLE "-Wl,--allow-multiple-definition")
 endif()
 
 # ── Config tier ──
@@ -68,9 +68,9 @@ endif()
 add_compile_definitions(CHAOS_IL2CPP_VERIFICATION_ENABLED=${CHAOS_IL2CPP_VERIFICATION_ENABLED})
 
 # ── Paths ──
-set(CHAOS_SDK_DIR "D:/agent/booming-il2cpp/testing/foundation-dll/System.Runtime.Serialization.Formatters/chunks/global-ns/native/codegen")
-set(CHAOS_PROJECT_ROOT "D:/agent/booming-il2cpp")
-set(CHAOS_CODEGEN_DIR "D:/agent/booming-il2cpp/testing/foundation-dll/System.Runtime.Serialization.Formatters/chunks/global-ns/native/codegen")
+set(CHAOS_SDK_DIR "/home/debian/agent/booming-il2cpp/testing/foundation-dll/System.Runtime.Serialization.Formatters/chunks/global-ns/native/codegen")
+set(CHAOS_PROJECT_ROOT "/home/debian/agent/booming-il2cpp")
+set(CHAOS_CODEGEN_DIR "/home/debian/agent/booming-il2cpp/testing/foundation-dll/System.Runtime.Serialization.Formatters/chunks/global-ns/native/codegen")
 
 # Find chaos SDK — provides chaos::runtime (prebuilt libs + flags)
 find_package(chaos REQUIRED PATHS "${CHAOS_SDK_DIR}")

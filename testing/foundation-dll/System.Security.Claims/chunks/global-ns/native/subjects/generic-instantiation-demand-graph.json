@@ -1,0 +1,84 @@
+{
+  "demands": [
+    {
+      "requestingAssemblyName": "Chaos.TestFramework.Sdk",
+      "owningAssemblyName": "System.Collections",
+      "subjectKind": "method",
+      "subjectId": "System.Collections/System.Collections.Generic.EqualityComparer\u003C!!0\u003E::Equals:System.Boolean(!!0,!!0)",
+      "definitionSubjectId": "System.Collections/System.Collections.Generic.EqualityComparer\u00601::Equals:System.Boolean(!0,!0)",
+      "demandSourceKind": "memberReference",
+      "instantiationKey": {
+        "contextKind": 1,
+        "definitionSubjectId": "System.Collections/System.Collections.Generic.EqualityComparer\u00601::Equals:System.Boolean(!0,!0)",
+        "typeArguments": [
+          "!!0"
+        ],
+        "methodArguments": []
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 2,
+      "familyKindCode": 2,
+      "isCrossAssembly": true
+    },
+    {
+      "requestingAssemblyName": "Chaos.TestFramework.Sdk",
+      "owningAssemblyName": "System.Collections",
+      "subjectKind": "method",
+      "subjectId": "System.Collections/System.Collections.Generic.EqualityComparer\u003C!!0\u003E::get_Default:System.Collections.Generic.EqualityComparer\u003C!!0\u003E()",
+      "definitionSubjectId": "System.Collections/System.Collections.Generic.EqualityComparer\u00601::get_Default:System.Collections.Generic.EqualityComparer\u003C!0\u003E()",
+      "demandSourceKind": "memberReference",
+      "instantiationKey": {
+        "contextKind": 1,
+        "definitionSubjectId": "System.Collections/System.Collections.Generic.EqualityComparer\u00601::get_Default:System.Collections.Generic.EqualityComparer\u003C!0\u003E()",
+        "typeArguments": [
+          "!!0"
+        ],
+        "methodArguments": []
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 2,
+      "familyKindCode": 2,
+      "isCrossAssembly": true
+    },
+    {
+      "requestingAssemblyName": "Chaos.TestFramework.Sdk",
+      "owningAssemblyName": "System.Collections",
+      "subjectKind": "method",
+      "subjectId": "System.Collections/System.Collections.Generic.EqualityComparer\u003CSystem.Object\u003E::Equals:System.Boolean(System.Object,System.Object)",
+      "definitionSubjectId": "System.Collections/System.Collections.Generic.EqualityComparer\u00601::Equals:System.Boolean(!0,!0)",
+      "demandSourceKind": "memberReference",
+      "instantiationKey": {
+        "contextKind": 1,
+        "definitionSubjectId": "System.Collections/System.Collections.Generic.EqualityComparer\u00601::Equals:System.Boolean(!0,!0)",
+        "typeArguments": [
+          "System.Object"
+        ],
+        "methodArguments": []
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 1,
+      "familyKindCode": 2,
+      "isCrossAssembly": true
+    },
+    {
+      "requestingAssemblyName": "Chaos.TestFramework.Sdk",
+      "owningAssemblyName": "System.Collections",
+      "subjectKind": "method",
+      "subjectId": "System.Collections/System.Collections.Generic.EqualityComparer\u003CSystem.Object\u003E::get_Default:System.Collections.Generic.EqualityComparer\u003CSystem.Object\u003E()",
+      "definitionSubjectId": "System.Collections/System.Collections.Generic.EqualityComparer\u00601::get_Default:System.Collections.Generic.EqualityComparer\u003C!0\u003E()",
+      "demandSourceKind": "memberReference",
+      "instantiationKey": {
+        "contextKind": 1,
+        "definitionSubjectId": "System.Collections/System.Collections.Generic.EqualityComparer\u00601::get_Default:System.Collections.Generic.EqualityComparer\u003C!0\u003E()",
+        "typeArguments": [
+          "System.Object"
+        ],
+        "methodArguments": []
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 1,
+      "familyKindCode": 2,
+      "isCrossAssembly": true
+    }
+  ]
+}

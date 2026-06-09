@@ -34,8 +34,8 @@ extern "C" void (*kDefaultArgThunks[])() noexcept;
 // ── RunFactAll: dispatch ALL methods across ALL registered modules ────
 extern "C" CHAOS_IL2CPP_INT32 RunFactAll() {
     chaos_gc_enter_no_gc_region();
-{{ if is_jit }}
-    // JIT mode: use subject-slot iteration to skip intrinsic stubs
+{{ if is_jit || !is_windows }}
+    // JIT mode (or Linux AOT): use try/catch for POSIX EH compatibility
     auto* entries = GetHotpatchEntries();
     CHAOS_IL2CPP_INT32 failures = 0;
     for (int32_t si = 0; si < kSubjectEntryCount; si++) {
@@ -49,7 +49,7 @@ extern "C" CHAOS_IL2CPP_INT32 RunFactAll() {
     chaos_gc_leave_no_gc_region();
     return failures;
 {{ else }}
-    // AOT mode: per-method dispatch with __try/__except (skip missing AOT bodies)
+    // Windows AOT mode: per-method dispatch with __try/__except (skip missing AOT bodies)
     auto* entries = GetHotpatchEntries();
     CHAOS_IL2CPP_INT32 failures = 0;
     for (int32_t si = 0; si < kSubjectEntryCount; si++) {
@@ -112,7 +112,7 @@ extern "C" BenchmarkResult RunBenchmark(int entry_index, int iterations) {
 // ── RunHotpatchAll: dispatch ALL methods across ALL modules (post-patch) ──
 extern "C" CHAOS_IL2CPP_INT32 RunHotpatchAll() {
     chaos_gc_enter_no_gc_region();
-{{ if is_jit }}
+{{ if is_jit || !is_windows }}
     auto* entries = GetHotpatchEntries();
     CHAOS_IL2CPP_INT32 failures = 0;
     for (int32_t si = 0; si < kSubjectEntryCount; si++) {

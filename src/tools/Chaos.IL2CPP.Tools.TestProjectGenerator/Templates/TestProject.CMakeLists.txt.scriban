@@ -241,4 +241,10 @@ if(MSVC)
   target_link_options({{ project_name }} PRIVATE /STACK:8388608)
 {{ end }}
 endif()
+# OpenSSL: needed by crypto_stubs.cpp on Linux (SHA/HMAC via libcrypto).
+if(NOT MSVC)
+  find_package(OpenSSL REQUIRED)
+  target_include_directories({{ project_name }} PRIVATE ${OPENSSL_INCLUDE_DIR})
+  target_link_libraries({{ project_name }} PRIVATE OpenSSL::Crypto OpenSSL::SSL)
+endif()
 target_link_options({{ project_name }} PRIVATE ${CHAOS_FORCE_MULTIPLE})

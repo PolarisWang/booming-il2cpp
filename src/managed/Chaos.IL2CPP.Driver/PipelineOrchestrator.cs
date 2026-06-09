@@ -94,7 +94,7 @@ public sealed class PipelineOrchestrator
         {
             var targetPath = Path.Combine(result.OutputRootPath, generatedSource.RelativePath.Replace('/', Path.DirectorySeparatorChar));
             Directory.CreateDirectory(Path.GetDirectoryName(targetPath)!);
-            File.WriteAllText(targetPath, generatedSource.Contents);
+            File.WriteAllText(targetPath, generatedSource.ContentsBuilder?.ToString() ?? generatedSource.Contents);
         }
 
         WriteJson(Path.Combine(result.OutputRootPath, NativeAotArtifactNames.LoweringPlan), result.LoweringPlan);

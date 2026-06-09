@@ -307,6 +307,7 @@ enum ShapeId : CHAOS_IL2CPP_UINT32 {
     SHAPE_SYSTEM_RUNTIME_INTEROPSERVICES_MARSHAL_GETRCWUNKNOWN_SYSTEM_INTPTR = 0x5E278808u,
     SHAPE_SYSTEM_RUNTIME_INTEROPSERVICES_MARSHAL_RCWQUERYINTERFACE_SYSTEM_INTPTR_SYSTEM_INTPTR = 0x75E9F4DBu,
     SHAPE_SYSTEM_RUNTIME_INTEROPSERVICES_MARSHAL_RELEASERCW_SYSTEM_INTPTR = 0xA53F92ADu,
+    SHAPE_SYSTEM_SECURITY_CRYPTOGRAPHY_SHA256_HASHDATA_SYSTEM_BYTE__ = 0x8D5DA7A9u,
     SHAPE_SYSTEM_STRING_CONCAT_SYSTEM_STRING_SYSTEM_STRING = 0xF6869876u,
     SHAPE_SYSTEM_STRING_CONCAT_SYSTEM_STRING_SYSTEM_STRING_SYSTEM_STRING = 0x08CB997Au,
     SHAPE_SYSTEM_STRING_CONCAT_SYSTEM_STRING_SYSTEM_STRING_SYSTEM_STRING_SYSTEM_STRING = 0xEC14DB7Eu,
@@ -396,7 +397,7 @@ enum ShapeId : CHAOS_IL2CPP_UINT32 {
     SHAPE_VOLATILE_READ_SYSTEM_INT32_ = 0x779CC9A5u,
     SHAPE_VOLATILE_WRITE_SYSTEM_INT32__SYSTEM_INT32 = 0x6556008Du,
 
-    SHAPE_COUNT = 382u,
+    SHAPE_COUNT = 383u,
 };
 
 // ---- Compile-time dispatch: NativeInt-returning shapes ----
@@ -1057,6 +1058,10 @@ CHAOS_IL2CPP_INTPTR DispatchNativeInt(Args... args) {
     else if constexpr (S == SHAPE_SYSTEM_RUNTIME_INTEROPSERVICES_MARSHAL_RCWQUERYINTERFACE_SYSTEM_INTPTR_SYSTEM_INTPTR) {
         return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
             MarshalRcwQueryInterface(args...));
+    }
+    else if constexpr (S == SHAPE_SYSTEM_SECURITY_CRYPTOGRAPHY_SHA256_HASHDATA_SYSTEM_BYTE__) {
+        return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+            ChaosSha256Hash(args...));
     }
     else if constexpr (S == SHAPE_SYSTEM_STRING_CONCAT_SYSTEM_STRING_SYSTEM_STRING) {
         return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
@@ -1891,7 +1896,7 @@ extern ShapeRuntimeEntry g_runtime_shape_entries[kMaxRuntimeShapeEntries];
 extern CHAOS_IL2CPP_UINT32 g_runtime_shape_count;
 
 // ---- Compile-time completeness verification ----
-static_assert(SHAPE_COUNT == 382u,
+static_assert(SHAPE_COUNT == 383u,
     "Number of registered shapes changed. Regenerate this header from RuntimeHelperShapeRegistry.");
 
 #pragma pack(pop)

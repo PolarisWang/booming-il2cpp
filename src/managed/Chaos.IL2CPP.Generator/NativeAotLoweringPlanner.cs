@@ -1369,6 +1369,9 @@ extern ""C"" CHAOS_IL2CPP_INT32 RunNativeAot(CHAOS_IL2CPP_INT32 entryIndex) {{
             // Runtime stubs for Environment, Console, Culture, GC and delegate helpers
             // (chaos_current_managed_thread_id, ChaosEnvironmentGetStackTrace, etc.)
             "\"runtime_stubs/misc_stubs.h\"",
+            // Cryptography stubs (ChaosSha256Hash, ChaosHmacSha256, etc.) for
+            // System.Security.Cryptography SimpleForward external runtime helpers.
+            "\"runtime_stubs/crypto_stubs.h\"",
         };
         // com_ccw.h — only needed when COM interface vtable data is present.
         if (_comInterfaceVtableData is { Count: > 0 })

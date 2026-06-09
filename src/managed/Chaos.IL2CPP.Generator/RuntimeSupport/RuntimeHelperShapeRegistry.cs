@@ -8900,13 +8900,42 @@ public sealed partial class NativeAotLoweringPlanner
 	            // test code simply does not invoke Assert methods in non-verification
 	            // builds, so the assertion code is dead-stripped by the C++ linker.
 
-	            // Assert.AreEqual(expected, actual) — all primitive-type overloads
+	            // Assert.AreEqual(expected, actual) — all overloads
+	            // For byte[] arrays, uses element-by-element memcmp instead of pointer
+	            // comparison, since different array allocations are never pointer-equal.
 	            registry.RegisterInline(new InlineShapeDescriptor(
 	                TypeDisplayNamePrefix: "Chaos.TestFramework.Assert",
 	                MethodName: "AreEqual",
 	                Resolver: static (callee, paramTypes) =>
 	                {
 	                    if (paramTypes.Count < 2) return null;
+
+	                    // byte[]: structural comparison via memcmp
+	                    if (paramTypes[0] == "System.Byte[]" && paramTypes[1] == "System.Byte[]")
+	                    {
+	                        return """
+	                            [&]() -> void {
+	                                bool _cae_eq;
+	                                if (({0}) == ({1})) _cae_eq = true;
+	                                else if (({0}) == 0 || ({1}) == 0) _cae_eq = false;
+	                                else {
+	                                    auto _cae_l0 = *reinterpret_cast<const CHAOS_IL2CPP_INTPTR*>(
+	                                        reinterpret_cast<const uint8_t*>({0}) + 24);
+	                                    auto _cae_l1 = *reinterpret_cast<const CHAOS_IL2CPP_INTPTR*>(
+	                                        reinterpret_cast<const uint8_t*>({1}) + 24);
+	                                    if (_cae_l0 != _cae_l1) _cae_eq = false;
+	                                    else {
+	                                        _cae_eq = std::memcmp(
+	                                            reinterpret_cast<const void*>(reinterpret_cast<const uint8_t*>({0}) + 32),
+	                                            reinterpret_cast<const void*>(reinterpret_cast<const uint8_t*>({1}) + 32),
+	                                            static_cast<size_t>(_cae_l0)) == 0;
+	                                    }
+	                                }
+	                                if (!_cae_eq) throw chaos_managed_exception{};
+	                            }()
+	                            """.Replace("\r\n", "\n").Trim();
+	                    }
+
 	                    return """
 	                        [&]() -> void { if (({0}) != ({1})) { throw chaos_managed_exception{}; } }()
 	                        """.Replace("\r\n", "\n").Trim();
@@ -9166,7 +9195,95 @@ public sealed partial class NativeAotLoweringPlanner
                         return $"(chaos::il2cpp::runtime_core::chaos_raise_exception(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(nullptr)), static_cast<{cppCastType}>(0))";
                     }
                     return null;
-                }));
+                }
+            ));
+        }
+
+        private static void RegisterCryptoStubs(RuntimeHelperShapeRegistry registry)
+        {
+            // ── SHA family: HashData(byte[]) -> byte[] ────────────────
+            RegisterShaStub(registry, "SHA1", "ChaosSha1Hash");
+            RegisterShaStub(registry, "SHA256", "ChaosSha256Hash");
+            RegisterShaStub(registry, "SHA384", "ChaosSha384Hash");
+            RegisterShaStub(registry, "SHA512", "ChaosSha512Hash");
+            RegisterShaStub(registry, "SHA3_256", "ChaosSha3_256Hash");
+            RegisterShaStub(registry, "SHA3_384", "ChaosSha3_384Hash");
+            RegisterShaStub(registry, "SHA3_512", "ChaosSha3_512Hash");
+
+            // ── HMAC family: HashData(byte[], byte[]) -> byte[] ───────
+            RegisterHmacStub(registry, "HMACSHA1", "ChaosHmacSha1");
+            RegisterHmacStub(registry, "HMACSHA256", "ChaosHmacSha256");
+            RegisterHmacStub(registry, "HMACSHA384", "ChaosHmacSha384");
+            RegisterHmacStub(registry, "HMACSHA512", "ChaosHmacSha512");
+            RegisterHmacStub(registry, "HMACSHA3_256", "ChaosHmacSha3_256");
+            RegisterHmacStub(registry, "HMACSHA3_384", "ChaosHmacSha3_384");
+            RegisterHmacStub(registry, "HMACSHA3_512", "ChaosHmacSha3_512");
+
+            // ── MD5 family: HashData(byte[]) -> byte[] ────────────────
+            RegisterShaStub(registry, "MD5", "ChaosMd5Hash");
+
+            // ── HMACMD5 family: HashData(byte[], byte[]) -> byte[] ────
+            RegisterHmacStub(registry, "HMACMD5", "ChaosHmacMd5");
+
+            // ── RNG: GetBytes(int) -> byte[] ──────────────────────────
+            registry.Register(
+                "RandomNumberGenerator",
+                "GetBytes",
+                new[] { "System.Int32" },
+                ShapeKind.SimpleForward, "ChaosCngGetBytes",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    new AotCoreIrAbiSlotArtifact
+                    {
+                        CarrierKindCode = AotCoreIrAbiCarrierKind.Int32,
+                        TypeShape = AotCoreIrTypeShapeKind.ValueType
+                    }),
+                CreateNativeIntAbiSlot("System.Private.CoreLib/System.Byte[]", AotCoreIrTypeShapeKind.ReferenceType),
+                EmptyRawArgumentIndices);
+
+            // ── RNG: Fill(byte[]) ─────────────────────────────────────
+            registry.Register(
+                "RandomNumberGenerator",
+                "Fill",
+                new[] { "System.Byte[]" },
+                ShapeKind.SimpleForward, "ChaosCngFill",
+                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[1]
+                {
+                    CreateNativeIntAbiSlot("System.Private.CoreLib/System.Byte[]", AotCoreIrTypeShapeKind.ReferenceType),
+                }),
+                CreateVoidAbiSlot(),
+                new HashSet<int> { 0 });
+        }
+
+        private static void RegisterShaStub(RuntimeHelperShapeRegistry registry, string algoName, string nativeFn)
+        {
+            registry.Register(
+                algoName,
+                "HashData",
+                new[] { "System.Byte[]" },
+                ShapeKind.SimpleForward, nativeFn,
+                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[1]
+                {
+                    CreateNativeIntAbiSlot("System.Private.CoreLib/System.Byte[]", AotCoreIrTypeShapeKind.ReferenceType),
+                }),
+                CreateNativeIntAbiSlot("System.Private.CoreLib/System.Byte[]", AotCoreIrTypeShapeKind.ReferenceType),
+                new HashSet<int> { 0 });
+        }
+
+        private static void RegisterHmacStub(RuntimeHelperShapeRegistry registry, string algoName, string nativeFn)
+        {
+            registry.Register(
+                algoName,
+                "HashData",
+                new[] { "System.Byte[]", "System.Byte[]" },
+                ShapeKind.SimpleForward, nativeFn,
+                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
+                {
+                    CreateNativeIntAbiSlot("System.Private.CoreLib/System.Byte[]", AotCoreIrTypeShapeKind.ReferenceType),
+                    CreateNativeIntAbiSlot("System.Private.CoreLib/System.Byte[]", AotCoreIrTypeShapeKind.ReferenceType),
+                }),
+                CreateNativeIntAbiSlot("System.Private.CoreLib/System.Byte[]", AotCoreIrTypeShapeKind.ReferenceType),
+                new HashSet<int> { 0, 1 });
+
         }
     }
 }

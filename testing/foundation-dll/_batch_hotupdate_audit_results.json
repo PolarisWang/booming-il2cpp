@@ -1,0 +1,47 @@
+{
+  "hotupdate": [
+    {
+      "family": "System.ComponentModel.TypeConverter",
+      "chunk": "component-model",
+      "stage": "hotupdate",
+      "status": "unknown",
+      "detail": "unknown:  (3s)"
+    },
+    {
+      "family": "System.Private.CoreLib",
+      "chunk": "enum-parsing",
+      "stage": "hotupdate",
+      "status": "unknown",
+      "detail": "unknown:  (0s)"
+    },
+    {
+      "family": "System.Private.Xml",
+      "chunk": "system-xml-schema",
+      "stage": "hotupdate",
+      "status": "unknown",
+      "detail": "unknown:  (3s)"
+    },
+    {
+      "family": "System.Runtime.InteropServices",
+      "chunk": "global-ns",
+      "stage": "hotupdate",
+      "status": "unknown",
+      "detail": "unknown:  (4s)"
+    },
+    {
+      "family": "System.Runtime.Serialization.Formatters",
+      "chunk": "global-ns",
+      "stage": "hotupdate",
+      "status": "unknown",
+      "detail": "unknown:  (3s)"
+    },
+    {
+      "family": "System.Security.Claims",
+      "chunk": "global-ns",
+      "stage": "hotupdate",
+      "status": "unknown",
+      "detail": "unknown:  (6s)"
+    }
+  ],
+  "elapsed_s": 19.425070311059244
+}

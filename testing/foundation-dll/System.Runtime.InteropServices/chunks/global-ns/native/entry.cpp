@@ -39,6 +39,7 @@ bool g_log_use_stderr = false;
 #include <chaos/hotpatch_dispatch.h>
 #include <patch_loader.h>
 #include <profile_stats.h>
+#include <profile_stats.h>
 
 extern "C" const int kAotMethodCount;
 extern "C" const int kSubjectEntryCount;
@@ -490,6 +491,55 @@ static int RunProfileMode() {
     return 0;
 }
 
+
+// ── --profile: per-method GC/allocation/code-size profile ───────────
+static int RunProfileMode() {
+    const int kCount = kSubjectEntryCount;
+    chaos::il2cpp::runtime_core::ProfileStoreInit(kCount);
+    for (int si = 0; si < kCount; si++) {
+        int i = kSubjectSlotMap[si];
+{% if is_jit %}
+        try {
+            int64_t heap_before = chaos::il2cpp::runtime_core::chaos_gc_get_heap_size();
+            chaos::il2cpp::runtime_core::GetThreadProfileData().heap_before = heap_before;
+            chaos::il2cpp::runtime_core::ChaosDispatchMethod(
+                GetHotpatchEntries(), kAotMethodCount, i, CHAOS_USE_DEFAULT_THUNKS);
+            int64_t heap_after = chaos::il2cpp::runtime_core::chaos_gc_get_heap_size();
+            chaos::il2cpp::runtime_core::GetThreadProfileData().heap_after = heap_after;
+            chaos::il2cpp::runtime_core::FlushThreadProfileData(i);
+        } catch(...) { }
+{% else %}
+#if defined(_WIN32)
+        __try {
+            int64_t heap_before = chaos::il2cpp::runtime_core::chaos_gc_get_heap_size();
+            chaos::il2cpp::runtime_core::GetThreadProfileData().heap_before = heap_before;
+            chaos::il2cpp::runtime_core::ChaosDispatchMethod(
+                GetHotpatchEntries(), kAotMethodCount, i, CHAOS_USE_DEFAULT_THUNKS);
+            int64_t heap_after = chaos::il2cpp::runtime_core::chaos_gc_get_heap_size();
+            chaos::il2cpp::runtime_core::GetThreadProfileData().heap_after = heap_after;
+            chaos::il2cpp::runtime_core::FlushThreadProfileData(i);
+        } __except(EXCEPTION_EXECUTE_HANDLER) {
+            // SEH caught — continue profiling
+        }
+#else
+        CHAOS_EH_TRY
+            int64_t heap_before = chaos::il2cpp::runtime_core::chaos_gc_get_heap_size();
+            chaos::il2cpp::runtime_core::GetThreadProfileData().heap_before = heap_before;
+            chaos::il2cpp::runtime_core::ChaosDispatchMethod(
+                GetHotpatchEntries(), kAotMethodCount, i, CHAOS_USE_DEFAULT_THUNKS);
+            int64_t heap_after = chaos::il2cpp::runtime_core::chaos_gc_get_heap_size();
+            chaos::il2cpp::runtime_core::GetThreadProfileData().heap_after = heap_after;
+            chaos::il2cpp::runtime_core::FlushThreadProfileData(i);
+        CHAOS_EH_CATCH_BEGIN
+        CHAOS_EH_END
+#endif
+{% endif %}
+    }
+    chaos::il2cpp::runtime_core::ProfileStoreFinalize();
+    chaos::il2cpp::runtime_core::ProfileEmitJson();
+    return 0;
+}
+
 int main(int argc, char* argv[]) {
     chaos::il2cpp::common::log_internal::g_log_use_stderr = true;
     chaos::il2cpp::runtime_core::g_bgc_enabled = false;
@@ -549,6 +599,8 @@ int main(int argc, char* argv[]) {
     }
 
     if (std::strcmp(argv[1], "--microbench") == 0) { ret = RunMicrobenchMode(); goto shutdown; }
+
+    if (std::strcmp(argv[1], "--profile") == 0) { ret = RunProfileMode(); goto shutdown; }
 
     if (std::strcmp(argv[1], "--profile") == 0) { ret = RunProfileMode(); goto shutdown; }
 

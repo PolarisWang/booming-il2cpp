@@ -10,6 +10,7 @@
 #include <chaos/profile.h>
 
 using chaos::il2cpp::runtime_core::ChaosDispatchMethod;
+using chaos::il2cpp::runtime_core::ChaosDispatchMethodAllModules;
 using chaos::il2cpp::runtime_core::ChaosDispatchMethodBenchDirect;
 using chaos::il2cpp::runtime_core::chaos_gc_get_allocated_bytes_for_current_thread;
 using chaos::il2cpp::runtime_core::chaos_gc_enter_no_gc_region;

@@ -872,7 +872,7 @@ public static class Program
         string? contractPath = null;
         bool isJit = false;
         var configTier = "check";
-        var isWindows = true;
+        var isWindows = OperatingSystem.IsWindows();
         string? projectRoot = null;
         var sourceOnly = false;
         var skipCodegen = false;
