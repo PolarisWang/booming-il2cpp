@@ -69,7 +69,6 @@ V128 ChaosSimd_V128_Shl_I32(ChaosSimdV128 a, CHAOS_IL2CPP_INT32 b) noexcept {
     _mm_storeu_si128(reinterpret_cast<__m128i*>(&result), vr);
     return result;
 }
-}
 
 // ════════════════════════════════════════════════════════════
 // Vector128 float
