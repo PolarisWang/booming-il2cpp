@@ -146,6 +146,7 @@ def _parse_benchmark_lines(stdout: str) -> tuple[list[dict], dict]:
     lines = stdout.strip().split('\n')
     results = []
     summary = {}
+    _dropped_count_local = 0
     for line in lines:
         line = line.strip()
         if not line:
@@ -153,7 +154,7 @@ def _parse_benchmark_lines(stdout: str) -> tuple[list[dict], dict]:
         try:
             obj = json.loads(line)
         except json.JSONDecodeError:
-            _dropped_count += 1
+            _dropped_count_local += 1
             continue
         if 'summary' in obj:
             summary = obj['summary']
