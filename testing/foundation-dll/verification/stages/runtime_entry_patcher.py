@@ -117,7 +117,7 @@ def patch_runtime_entry(content: str) -> tuple[str, bool]:
     old_seh_out = 'caught ? -1 : result'
     if old_seh_out in content:
         new_seh_out = 'caught ? result : result'
-        content = content.replace(old_seh_out, new_seh_out, 1)
+        content = content.replace(old_seh_out, new_seh_out)
         patched = True
         print("  [build] Patched SEH output: -1 -> result (crash yields value=0)")
 
