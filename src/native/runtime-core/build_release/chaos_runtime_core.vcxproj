@@ -292,7 +292,12 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClCompile Include="D:\agent\booming-il2cpp\src\native\runtime-core\type_registry.cpp" />
     <ClInclude Include="D:\agent\booming-il2cpp\src\native\runtime-core\eeclass.h" />
     <ClCompile Include="D:\agent\booming-il2cpp\src\native\runtime-core\eeclass.cpp" />
-    <ClCompile Include="D:\agent\booming-il2cpp\src\native\runtime-core\runtime_stubs\math_stubs.cpp" />
+    <ClCompile Include="D:\agent\booming-il2cpp\src\native\runtime-core\runtime_stubs\math_stubs.cpp">
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">%(AdditionalOptions) -msse4.2</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(AdditionalOptions) -msse4.2</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">%(AdditionalOptions) -msse4.2</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">%(AdditionalOptions) -msse4.2</AdditionalOptions>
+    </ClCompile>
     <ClCompile Include="D:\agent\booming-il2cpp\src\native\runtime-core\runtime_stubs\array_stubs.cpp" />
     <ClCompile Include="D:\agent\booming-il2cpp\src\native\runtime-core\runtime_stubs\datetime_stubs.cpp" />
     <ClCompile Include="D:\agent\booming-il2cpp\src\native\runtime-core\runtime_stubs\char_stubs.cpp" />
@@ -315,7 +320,9 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClCompile Include="D:\agent\booming-il2cpp\src\native\runtime-core\runtime_stubs\mutex_stubs.cpp" />
     <ClCompile Include="D:\agent\booming-il2cpp\src\native\runtime-core\runtime_stubs\threadpool_events.cpp" />
     <ClCompile Include="D:\agent\booming-il2cpp\src\native\runtime-core\runtime_stubs\convert_stubs.cpp" />
+    <ClCompile Include="D:\agent\booming-il2cpp\src\native\runtime-core\runtime_stubs\interop_stubs.cpp" />
     <ClCompile Include="D:\agent\booming-il2cpp\src\native\runtime-core\runtime_stubs\collection_stubs.cpp" />
+    <ClCompile Include="D:\agent\booming-il2cpp\src\native\runtime-core\runtime_stubs\vector_stubs.cpp" />
     <ClCompile Include="D:\agent\booming-il2cpp\src\native\runtime-core\runtime_stubs\misc_stubs.cpp" />
     <ClCompile Include="D:\agent\booming-il2cpp\src\native\runtime-core\runtime_stubs\interpreter_entry_direct.cpp" />
     <ClCompile Include="D:\agent\booming-il2cpp\src\native\runtime-core\runtime_stubs\registration_globals.cpp" />
@@ -440,6 +447,8 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClCompile Include="D:\agent\booming-il2cpp\src\native\runtime-core\exception_helpers.cpp" />
     <ClInclude Include="D:\agent\booming-il2cpp\src\native\runtime-core\tier_manager.h" />
     <ClCompile Include="D:\agent\booming-il2cpp\src\native\runtime-core\tier_manager.cpp" />
+    <ClInclude Include="D:\agent\booming-il2cpp\src\native\runtime-core\profile_stats.h" />
+    <ClCompile Include="D:\agent\booming-il2cpp\src\native\runtime-core\profile_stats.cpp" />
     <ClCompile Include="D:\agent\booming-il2cpp\src\native\runtime-core\gc\gc_numa_win.cpp" />
     <ClCompile Include="D:\agent\booming-il2cpp\src\native\runtime-core\runtime_stubs\mutex_stubs_win32.cpp" />
   </ItemGroup>

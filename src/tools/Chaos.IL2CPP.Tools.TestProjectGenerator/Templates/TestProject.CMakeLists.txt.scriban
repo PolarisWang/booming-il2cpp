@@ -138,6 +138,9 @@ set(CHAOS_SIMD_STUBS
 set(CHAOS_CHAR_STUBS
     "${CHAOS_SDK_DIR}/runtime_stubs/char_stubs.cpp"
 )
+set(CHAOS_VECTOR_STUBS
+    "${CHAOS_SDK_DIR}/runtime_stubs/vector_stubs.cpp"
+)
 set(CHAOS_MISC_STUBS
     "${CHAOS_SDK_DIR}/runtime_stubs/misc_stubs.cpp"
 )
@@ -186,6 +189,7 @@ set(CHAOS_ENTRY_SOURCES
     ${CHAOS_MATH_STUBS}
     ${CHAOS_SIMD_STUBS}
     ${CHAOS_CHAR_STUBS}
+    ${CHAOS_VECTOR_STUBS}
     ${CHAOS_MISC_STUBS}
     ${CHAOS_INTEROP_STUBS}
     ${CHAOS_EXCEPTION_STUBS}

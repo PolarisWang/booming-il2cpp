@@ -1372,6 +1372,8 @@ extern ""C"" CHAOS_IL2CPP_INT32 RunNativeAot(CHAOS_IL2CPP_INT32 entryIndex) {{
             // Cryptography stubs (ChaosSha256Hash, ChaosHmacSha256, etc.) for
             // System.Security.Cryptography SimpleForward external runtime helpers.
             "\"runtime_stubs/crypto_stubs.h\"",
+            // Vector<T> comparison stubs (chaos_vector_greater_than_any, etc.)
+            "\"runtime_stubs/vector_stubs.h\"",
         };
         // com_ccw.h — only needed when COM interface vtable data is present.
         if (_comInterfaceVtableData is { Count: > 0 })
@@ -1912,21 +1914,28 @@ extern ""C"" CHAOS_IL2CPP_INT32 RunNativeAot(CHAOS_IL2CPP_INT32 entryIndex) {{
             sb.AppendLine();
         }
 
-        // ── chaos_external_runtime_* fallback declarations ──
-        // For _externalRuntimeSubjects entries not covered by shape helpers,
-        // emit minimal extern declarations so referenced page files compile.
-        // The dispatch table at kChaosExternalRuntimeFnTable[idx] handles the
-        // actual resolution at runtime; these declarations satisfy the compiler.
+        // ── chaos_external_runtime_* fallback declarations (global scope) ──
+        // For _externalRuntimeSubjects entries that lack a namespace-scoped extern
+        // declaration from ExternalRuntimeHelpers (e.g., DirectNativeSymbol-only
+        // entries with empty Source), emit minimal extern "C" declarations at global
+        // scope so the dispatch table's &chaos_external_runtime_* references compile.
+        //
+        // We build a set of SubjectIds that already have namespace-scoped declarations
+        // from _externalRuntimeHelpers (non-empty Source => real signature emitted).
+        // Entries with helpers that have empty source (DirectNativeSymbol-only) also
+        // need a fallback declaration.
         if (_externalRuntimeSubjects is { Count: > 0 })
         {
-            var helperIds = _externalRuntimeHelpers?
+            // Build set of SubjectIds that already have namespace-scoped extern declarations
+            var helpersWithSource = _externalRuntimeHelpers?
+                .Where(h => !string.IsNullOrEmpty(h.Source))
                 .Select(h => h.SubjectId)
                 .ToHashSet(StringComparer.Ordinal) ?? new HashSet<string>();
             var fallbackSb = new System.Text.StringBuilder(1024);
             int fallbackCount = 0;
             foreach (var kvp in _externalRuntimeSubjects)
             {
-                if (helperIds.Contains(kvp.Key))
+                if (helpersWithSource.Contains(kvp.Key))
                     continue;
                 var symbol = GetExternalRuntimeHelperSymbol(kvp.Key);
                 fallbackSb.Append("extern \"C\" void ");
@@ -1936,12 +1945,7 @@ extern ""C"" CHAOS_IL2CPP_INT32 RunNativeAot(CHAOS_IL2CPP_INT32 entryIndex) {{
             }
             if (fallbackCount > 0)
             {
-                sb.Append("namespace chaos::il2cpp::codegen::");
-                sb.AppendLine(codegenNamespace);
-                sb.AppendLine("{");
                 sb.Append(fallbackSb.ToString());
-                sb.AppendLine();
-                sb.AppendLine("} // namespace");
                 sb.AppendLine();
             }
         }

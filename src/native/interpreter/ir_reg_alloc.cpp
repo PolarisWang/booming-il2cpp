@@ -2502,11 +2502,12 @@ bool RegisterExecute(RegisterFrame& frame,
     uint32_t loop_counter = 0;
     uint32_t prev_pc = 0;
 
+    CHAOS_IL2CPP_PROFILE_SCOPE("RegisterExecute");
+
     goto dispatch_loop;
 
     // ── Dispatch loop top ────────────────────────────────────────────────
 dispatch_loop:
-    CHAOS_IL2CPP_PROFILE_SCOPE("RegisterExecute");
     if (frame.pc >= instr_count) goto done;
     prev_pc = frame.pc;
     {
@@ -2591,10 +2592,10 @@ done:
 
 #else   // MSVC — function-pointer dispatch
     // ── MSVC fallback: original function-pointer dispatch ──────────────
+    CHAOS_IL2CPP_PROFILE_SCOPE("RegisterExecute");
     uint32_t loop_counter = 0;
 
     while (frame.pc < instr_count) {
-        CHAOS_IL2CPP_PROFILE_SCOPE("RegisterExecute");
         uint32_t op_val = static_cast<uint32_t>(instrs[frame.pc].op_code());
         if (op_val > 99) {
             frame.threw_exception = true;

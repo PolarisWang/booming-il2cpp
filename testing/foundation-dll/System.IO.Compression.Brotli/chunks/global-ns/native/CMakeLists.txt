@@ -42,6 +42,7 @@ if(CHAOS_IL2CPP_CONFIG_TIER STREQUAL "profile")
   add_compile_definitions(CHAOS_IL2CPP_CONFIG_CHECK)
   add_compile_definitions(CHAOS_IL2CPP_LOG_LEVEL=3)
   add_compile_definitions(CHAOS_IL2CPP_RUNTIME_CONFIG_FILE="runtime-config/desktop.h")
+  add_compile_definitions(CHAOS_IL2CPP_PROFILE_ENABLED=1)
 elseif(CHAOS_IL2CPP_CONFIG_TIER STREQUAL "ship")
   add_compile_definitions(CHAOS_IL2CPP_CONFIG_TIER=CHAOS_IL2CPP_CONFIG_TIER_CHECK)
   add_compile_definitions(CHAOS_IL2CPP_CONFIG_CHECK)
@@ -139,6 +140,9 @@ set(CHAOS_INTEROP_STUBS
 set(CHAOS_EXCEPTION_STUBS
     "${CHAOS_SDK_DIR}/runtime_stubs/exception_stubs.cpp"
 )
+set(CHAOS_CRYPTO_STUBS
+    "${CHAOS_PROJECT_ROOT}/src/native/runtime-core/runtime_stubs/crypto_stubs.cpp"
+)
 # hotpatch_table.cpp — compiled locally so the entry has the latest
 # SetPatchedBySlot (the prebuilt chaos_runtime_core.lib may be stale).
 set(CHAOS_HOTPATCH_TABLE
@@ -147,9 +151,12 @@ set(CHAOS_HOTPATCH_TABLE
 # eager_compile.cpp — required by patch_loader.obj in chaos_runtime_core.lib
 # but defined in the interpreter project.  Compile locally since the prebuilt
 # chaos_interpreter.lib may be stale (EagerCompilePatchMethods).
-set(CHAOS_EAGER_COMPILE
-    "${CHAOS_PROJECT_ROOT}/src/native/interpreter/interp_entry/eager_compile.cpp"
-)
+# Skipped in profile build (JIT header dependency chain).
+if(NOT CHAOS_IL2CPP_CONFIG_TIER STREQUAL "profile")
+  set(CHAOS_EAGER_COMPILE
+      "${CHAOS_PROJECT_ROOT}/src/native/interpreter/interp_entry/eager_compile.cpp"
+  )
+endif()
 # method_replacement.cpp — the prebuilt chaos_hot_update.lib may be stale
 # (SetPatchedBySlot signature changed — domain_id parameter added).
 set(CHAOS_METHOD_REPLACEMENT
@@ -175,6 +182,7 @@ set(CHAOS_ENTRY_SOURCES
     ${CHAOS_MISC_STUBS}
     ${CHAOS_INTEROP_STUBS}
     ${CHAOS_EXCEPTION_STUBS}
+    ${CHAOS_CRYPTO_STUBS}
     ${CHAOS_HOTPATCH_TABLE}
     ${CHAOS_EAGER_COMPILE}
     ${CHAOS_METHOD_REPLACEMENT}

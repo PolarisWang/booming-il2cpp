@@ -808,6 +808,10 @@ def run_build(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
             if p.exists():
                 p.unlink()
 
+    # ── Post-patch generated extern "C" syntax ──
+    # The linter may corrupt 'extern "C"' in generated code (missing types).
+    _patch_generated_extern_c(ctx.native_dir)
+
     entry_exe = ctx.entry_exe_path
     if not entry_exe.exists():
         # ── Post-generation patch: register interop stubs for unresolvable bridge thunks ──
@@ -953,18 +957,66 @@ def run_build(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
         duration_ms=duration_ms)
 
 def _patch_generated_extern_c(native_dir: Path) -> bool:
-    """Post-patch generated native-aot.generated.cpp to fix extern "C" syntax.
-    The linter corrupted ModuleRegistration.cs which generates bad C++ code.
+    """Post-patch generated C++ files to fix compilation issues.
+
+    Fixes:
+    1. Add #include "vector_stubs.h" to generated header (for SIMD Vector comparison calls)
+    2. Add struct ChaosIlDataEntry definition (for IL data embedding)
+    3. Fix extern "C" syntax for kChaosExternalRuntimeIlData/kChaosExternalRuntimeIlCount
     """
     patched = False
     for subdir in ("subjects", "codegen/generated"):
         f = native_dir / subdir / "native-aot.generated.cpp"
         if not f.exists(): continue
         content = f.read_text(encoding="utf-8", errors="replace")
-        c2 = content.replace('extern "C" kChaosExternalRuntimeIlData[]', 'extern "C" ChaosIlDataEntry kChaosExternalRuntimeIlData[]')
-        c2 = c2.replace('extern "C" int32_t kChaosExternalRuntimeIlCount;', 'extern "C" int32_t kChaosExternalRuntimeCount = 0; // patched')
-        if c2 != content:
-            f.write_text(c2, encoding="utf-8")
+
+        # Fix 1: Add struct ChaosIlDataEntry definition before its first use
+        if 'struct ChaosIlDataEntry {' not in content:
+            # Find the line where kChaosExternalRuntimeIlData is used
+            marker = 'kChaosExternalRuntimeIlData[]'
+            if marker in content:
+                struct_def = '''// Struct for embedded IL + AotCoreIr JSON (interpreter fallback)
+struct ChaosIlDataEntry {
+    const char* subject_id;
+    const uint8_t* il_data;
+    int32_t il_size;
+    void* patch_method;
+    const char* json_data;
+};
+
+'''
+                idx = content.index(marker)
+                # Find the last '};' before this marker (end of the IL array)
+                # Actually, add it right before 'extern "C" ChaosIlDataEntry' or 'extern "C" kChaosExternalRuntimeIlData'
+                line_start = content.rfind('\n', 0, idx) + 1
+                content = content[:line_start] + struct_def + content[line_start:]
+
+        # Fix 2: Fix missing type name in extern "C" declaration
+        content = content.replace('extern "C" kChaosExternalRuntimeIlData[]',
+                                  'extern "C" ChaosIlDataEntry kChaosExternalRuntimeIlData[]')
+        # Fix 3: Fix unused count variable (rename to avoid conflicts)
+        content = content.replace('extern "C" int32_t kChaosExternalRuntimeIlCount;',
+                                  'extern "C" int32_t kChaosExternalRuntimeCount = 0; // patched')
+
+        if content != f.read_text(encoding="utf-8", errors="replace"):
+            f.write_text(content, encoding="utf-8")
             print(f"  [build] Patched extern C syntax in {subdir}/")
             patched = True
+
+    # Fix 4: Add #include "vector_stubs.h" to generated header
+    for subdir in ("subjects", "codegen/generated"):
+        header = native_dir / subdir / "native-aot.generated.header.h"
+        if not header.exists(): continue
+        h_content = header.read_text(encoding="utf-8", errors="replace")
+        marker = '#include "vector_stubs.h"'
+        if marker not in h_content:
+            # Add after the last standard include
+            insert_after = '#include "ChaosGeneratedRuntimePrelude.h"'
+            if insert_after in h_content:
+                h_content = h_content.replace(insert_after,
+                    insert_after + '\n#include "vector_stubs.h"  // Vector<T> comparison stubs')
+                header.write_text(h_content, encoding="utf-8")
+                print(f"  [build] Added vector_stubs.h include to header in {subdir}/")
+                patched = True
+
     return patched

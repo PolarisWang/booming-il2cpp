@@ -977,6 +977,23 @@ public sealed partial class NativeAotLoweringPlanner
             string subjectId = entriesByIndex[i].Key;
             string? resolvedHelper = null;
             bool hasHelper = helperSymbolBySubjectId?.TryGetValue(subjectId, out resolvedHelper) == true;
+
+            // If the helper has a DirectNativeSymbol, the chaos_external_runtime_*
+            // function doesn't actually exist — only the DirectNativeSymbol stub does.
+            // Use nullptr in the dispatch table to avoid unresolved linker symbols.
+            if (hasHelper && _externalRuntimeHelpers is { } helpers)
+            {
+                foreach (var h in helpers)
+                {
+                    if (h.SubjectId == subjectId && h.DirectNativeSymbol != null)
+                    {
+                        hasHelper = false;
+                        resolvedHelper = null;
+                        break;
+                    }
+                }
+            }
+
             var entryModel = new ScriptObject
             {
                 ["subject_literal"] = EscapeCppStringLiteral(subjectId),
@@ -1068,6 +1085,15 @@ public sealed partial class NativeAotLoweringPlanner
             var ilSb = new System.Text.StringBuilder(65536);
             ilSb.AppendLine();
             ilSb.AppendLine("// ── Embedded IL Data for Interpreter Fallback ────────────────");
+            ilSb.AppendLine("// ABI export: extern \"C\" for C-language linkage from managed/NativeAot code");
+            ilSb.AppendLine("// ABI export: C-language struct to hold embedded IL + AotCoreIr JSON for interpreter fallback");
+            ilSb.AppendLine("struct ChaosIlDataEntry {");
+            ilSb.AppendLine("    const char* subject_id;");
+            ilSb.AppendLine("    const uint8_t* il_data;");
+            ilSb.AppendLine("    int32_t il_size;");
+            ilSb.AppendLine("    void* patch_method;");
+            ilSb.AppendLine("    const char* json_data;");
+            ilSb.AppendLine("};");
             ilSb.AppendLine("extern \"C\" int32_t kChaosExternalRuntimeIlCount;");  // forward decl
 
             for (int i = 0; i < entriesByIndex.Length; i++)

@@ -235,8 +235,19 @@ void TierManager::StopBackgroundThread() noexcept {
 // ── Background thread ─────────────────────────────────────────────────────
 
 void TierManager::ThreadProc(void* arg) noexcept {
+#if defined(_MSC_VER)
+    __try {
+#endif
     auto* self = static_cast<TierManager*>(arg);
     self->BackgroundLoop();
+#if defined(_MSC_VER)
+    } __except(EXCEPTION_EXECUTE_HANDLER) {
+        CHAOS_IL2CPP_LOG_ERROR_M("Tier",
+            "background thread crashed (SEH 0x%x), restarting",
+            GetExceptionCode());
+        // Continue running — the background thread is not critical.
+    }
+#endif
 }
 
 void TierManager::BackgroundLoop() noexcept {
@@ -254,7 +265,19 @@ void TierManager::BackgroundLoop() noexcept {
                 CHAOS_IL2CPP_LOG_DEBUG_M("tier",
                     "background JIT Tier0->Tier1 for precode=%p", static_cast<void*>(je.precode));
 
+#if defined(_MSC_VER)
+                __try {
+#endif
                 void* new_code = jit::JitRecompileToTier1(je.precode);
+#if defined(_MSC_VER)
+                } __except(EXCEPTION_EXECUTE_HANDLER) {
+                    CHAOS_IL2CPP_LOG_WARN_M("tier",
+                        "JIT recompilation crashed (SEH 0x%x), keeping Tier 0 code",
+                        GetExceptionCode());
+                    lock.lock();
+                    continue;
+                }
+#endif
 
                 lock.lock();
                 if (new_code != nullptr) {
@@ -318,7 +341,22 @@ void TierManager::BackgroundLoop() noexcept {
             "background T2->T3 for token={}", entry.method->token);
 
         // Run T3 promotion via callback.
+#if defined(_MSC_VER)
+        __try {
+#endif
         fn(entry.method);
+#if defined(_MSC_VER)
+        } __except(EXCEPTION_EXECUTE_HANDLER) {
+            CHAOS_IL2CPP_LOG_WARN_M("Tier",
+                "T3 promotion crashed (SEH 0x%x), skipping token=%u",
+                GetExceptionCode(), entry.method->token);
+            // Mark as promoted to T3 to prevent retry.
+            uint32_t expected = PatchMethod::kOptimizeLowering;
+            entry.method->tier_state.compare_exchange_strong(
+                expected, PatchMethod::kOptimizedRegister, std::memory_order_release);
+            continue;
+        }
+#endif
 
         // Set T3 ready (only if still kOptimizeLowering — someone may have unloaded).
         uint32_t expected = PatchMethod::kOptimizeLowering;

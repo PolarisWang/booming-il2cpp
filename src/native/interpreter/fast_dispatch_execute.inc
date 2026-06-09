@@ -136,11 +136,13 @@ static bool TryFastOsrPromotion(FastFrame& frame) noexcept {
     return false;
 }
 
-// Opcode frequency histogram (thread-local, zero-cost when unread).
-// Dump with DumpFastExecuteOpcodeHistogram().
+// Opcode frequency histogram — only in PROFILE builds.
+#if CHAOS_IL2CPP_PROFILE_ENABLED
 static thread_local uint64_t g_fast_op_freq[128] = {};
+#endif
 
 void DumpFastExecuteOpcodeHistogram() noexcept {
+#if CHAOS_IL2CPP_PROFILE_ENABLED
     printf("=== FastExecute opcode frequency ===\n");
     for (int i = 0; i < 128; ++i) {
         if (g_fast_op_freq[i] > 0) {
@@ -148,11 +150,15 @@ void DumpFastExecuteOpcodeHistogram() noexcept {
                    static_cast<unsigned long long>(g_fast_op_freq[i]));
         }
     }
+#else
+    printf("FastExecute opcode histogram disabled (CHAOS_IL2CPP_PROFILE_ENABLED=0)\n");
+#endif
 }
 
 bool FastExecute(FastFrame& frame,
                  const interpreter::IRInstruction* instrs,
                  uint32_t instr_count) noexcept {
+    CHAOS_IL2CPP_PROFILE_SCOPE("FastExecute");
     frame.pc = 0;
 
     // REMOVED: branch_profiles lazy allocation — fields removed from PatchMethod.
@@ -168,13 +174,14 @@ bool FastExecute(FastFrame& frame,
     static constexpr uint32_t kCheckMask = 63;
 
     while (frame.pc < instr_count) {
-        CHAOS_IL2CPP_PROFILE_SCOPE("FastExecute");
         uint32_t op_val = static_cast<uint32_t>(instrs[frame.pc].op_code);
         if (op_val > 127) {
             frame.threw_exception = true;
             return false;
         }
-        ++g_fast_op_freq[op_val];  // opcode histogram (thread-local, ~1 cycle)
+#if CHAOS_IL2CPP_PROFILE_ENABLED
+        ++g_fast_op_freq[op_val];  // opcode histogram (only in PROFILE builds)
+#endif
 
         uint32_t prev_pc = frame.pc;
 

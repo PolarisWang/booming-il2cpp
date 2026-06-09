@@ -16,6 +16,12 @@
 #include <chaos/runtime/execution_config.h>
 #include "interpreter_entry.h" // PatchMethod forward declaration
 
+// Full type definitions needed when JIT is enabled (eager_compile body is active).
+// PatchMethod (tier_state, dispatch_entry, cached_native_method) and
+// HotpatchEntryV0 are defined in these runtime-core headers.
+#include "patch_loader.h"
+#include "codegen_bridge.h"
+
 namespace chaos::il2cpp::runtime_core {
 
 void EagerCompilePatchMethods(PatchMethod* methods, uint32_t method_count) noexcept {

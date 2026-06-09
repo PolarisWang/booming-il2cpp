@@ -681,12 +681,17 @@ void InterpreterEntryDirect(
     // Single call_count fetch + tier promotion check, done once per invocation
     // before the Step B/C branch, eliminating duplicated checks.
     //
-    // Issue #2 optimization: skip the atomic fetch_add entirely when the
-    // method is already at or beyond the final tier (kJitted).  At T4+ no
-    // tier promotion is possible, so the RMW is pure cache-coherency cost
-    // on the hot path.  Deopt-demoted methods (kJitSkip) also skip here
-    // since they won't re-enter the tier promotion flow.
-    if (patch_method->tier_state.load(std::memory_order_acquire) < PatchMethod::kJitted) {
+    // Skip when no further promotion is possible:
+    //   - JIT enabled:  terminal tier = kJitted (state 7)
+    //   - JIT disabled: terminal tier = kOptimizedRegister (state 4, T3)
+    //     since T4 (kCompileToNative) requires JIT.
+    // Deopt-demoted methods (kJitSkip) and QuickJIT-native methods also skip.
+#if CHAOS_IL2CPP_ENABLE_JIT
+    constexpr uint32_t kTerminalTier = PatchMethod::kJitted;
+#else
+    constexpr uint32_t kTerminalTier = PatchMethod::kOptimizedRegister;
+#endif
+    if (patch_method->tier_state.load(std::memory_order_acquire) < kTerminalTier) {
         auto tier_call_count = patch_method->call_count.fetch_add(1, std::memory_order_relaxed) + 1;
         auto* rs = GetCurrentRuntimeState();
         auto* ts = GetCurrentThreadState();
