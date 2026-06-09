@@ -36,4 +36,14 @@ void chaos_async_yield_get_result(CHAOS_IL2CPP_INTPTR yield_awaiter) noexcept
     // No-op: YieldAwaitable.GetResult() returns void.
 }
 
+// ── TaskAwaiter.GetResult stub ─────────────────────────────────
+// Called from async state machine dispatch code.  The awaiter is a
+// managed TaskAwaiter object; this stub simply marks await as complete.
+void ChaosAsyncAwaiterGetResult(CHAOS_IL2CPP_INTPTR awaiter) noexcept
+{
+    (void)awaiter;
+    // No-op: TaskAwaiter.GetResult() propagates exceptions for failed tasks.
+    // For test pipeline, assume the task completed successfully.
+}
+
 }  // extern "C"

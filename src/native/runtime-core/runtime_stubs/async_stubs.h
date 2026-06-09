@@ -13,4 +13,8 @@ CHAOS_IL2CPP_INTPTR chaos_async_yield_get_awaiter(CHAOS_IL2CPP_INTPTR yield_awai
 CHAOS_IL2CPP_INT32 chaos_async_yield_get_is_completed(CHAOS_IL2CPP_INTPTR yield_awaiter) noexcept;
 void chaos_async_yield_get_result(CHAOS_IL2CPP_INTPTR yield_awaiter) noexcept;
 
+// TaskAwaiter stubs (DirectNativeSymbol for async state machine dispatch).
+// Generated code calls these when lowering async Task.GetResult() patterns.
+void ChaosAsyncAwaiterGetResult(CHAOS_IL2CPP_INTPTR awaiter) noexcept;
+
 }  // extern "C"

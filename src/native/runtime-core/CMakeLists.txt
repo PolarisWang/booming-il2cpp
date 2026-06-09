@@ -50,6 +50,7 @@ add_library(chaos_runtime_core STATIC
     runtime_stubs/interop_stubs.cpp
     runtime_stubs/collection_stubs.cpp
     runtime_stubs/vector_stubs.cpp
+    runtime_stubs/async_stubs.cpp
     runtime_stubs/misc_stubs.cpp
     runtime_stubs/interpreter_entry_direct.cpp
     runtime_stubs/registration_globals.cpp
