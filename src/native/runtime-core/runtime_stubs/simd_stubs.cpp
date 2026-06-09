@@ -214,16 +214,13 @@ V256 ChaosSimd_V256_CmpEq_I32(V256 a, V256 b) noexcept {
     return result;
 }
 
-V256 ChaosSimd_V256_Shl_I32(V256 a, V256 b) noexcept {
+V256 ChaosSimd_V256_Shl_I32(ChaosSimdV256 a, CHAOS_IL2CPP_INT32 b) noexcept {
     __m256i va = _mm256_loadu_si256(reinterpret_cast<const __m256i*>(&a));
-    // Extract the shift count from carrier lane 0
-    int32_t shiftCount;
-    __m128i vb128 = _mm_loadu_si128(reinterpret_cast<const __m128i*>(&b));
-    _mm_storeu_si128(reinterpret_cast<__m128i*>(&shiftCount), vb128);
-    __m256i vr = _mm256_slli_epi32(va, shiftCount);
+    __m256i vr = _mm256_slli_epi32(va, b);
     V256 result;
     _mm256_storeu_si256(reinterpret_cast<__m256i*>(&result), vr);
     return result;
+}
 }
 
 // ════════════════════════════════════════════════════════════

@@ -32,7 +32,7 @@ ChaosSimdV128 ChaosSimd_V128_CmpEq_I32(ChaosSimdV128 a, ChaosSimdV128 b) noexcep
 ChaosSimdV128 ChaosSimd_V128_CmpEq_F32(ChaosSimdV128 a, ChaosSimdV128 b) noexcept;
 
 // ── Vector128 shift ──
-ChaosSimdV128 ChaosSimd_V128_Shl_I32(ChaosSimdV128 a, ChaosSimdV128 b) noexcept;
+ChaosSimdV128 ChaosSimd_V128_Shl_I32(ChaosSimdV128 a, CHAOS_IL2CPP_INT32 b) noexcept;
 
 // ── Vector256 arithmetic ──
 ChaosSimdV256 ChaosSimd_V256_Add_I32(ChaosSimdV256 a, ChaosSimdV256 b) noexcept;
@@ -55,6 +55,6 @@ ChaosSimdV256 ChaosSimd_V256_CmpEq_I32(ChaosSimdV256 a, ChaosSimdV256 b) noexcep
 ChaosSimdV256 ChaosSimd_V256_CmpEq_F32(ChaosSimdV256 a, ChaosSimdV256 b) noexcept;
 
 // ── Vector256 shift ──
-ChaosSimdV256 ChaosSimd_V256_Shl_I32(ChaosSimdV256 a, ChaosSimdV256 b) noexcept;
+V256 ChaosSimd_V256_Shl_I32(V256 a, V256 b) noexcept;
 
 }  // extern "C"
