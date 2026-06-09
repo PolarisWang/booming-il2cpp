@@ -23,9 +23,12 @@ def patch_runtime_entry(content: str) -> tuple[str, bool]:
         'extern "C" int Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Complete() noexcept { return 0; }\n'
     )
     if _assert_stubs not in content:
-        # Insert after includes, before first function
-        first_fn = content.find('\nstatic ')
-        if first_fn > 0:
+        # Insert after includes, before first function.
+        # Handle both LF and CRLF line endings.
+        for sep in ('\nstatic ', '\r\nstatic '):
+            first_fn = content.find(sep)
+            if first_fn > 0:
+                break
             content = content[:first_fn] + _assert_stubs + content[first_fn:]
             patched = True
     old_macro = (
@@ -54,7 +57,7 @@ def patch_runtime_entry(content: str) -> tuple[str, bool]:
 
     # Fix 2: Fix JitVehHandler: REPLACE the entire RIP+=3 throttle logic with
     # a simple CONTINUE_SEARCH (let __try/__except handle the crash properly).
-    # The old code does RIP+=3 which causes cascading crashes (1482x loop → stack overflow).
+    # Handle both LF and CRLF line endings in the template output.
     old_rip3 = (
         '    // Throttle: if the same RIP crashes repeatedly, the skip isn\'t working.\n'
         '    // Stop trying after N consecutive crashes at the same RIP to avoid\n'
